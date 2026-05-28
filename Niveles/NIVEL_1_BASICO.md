@@ -329,7 +329,7 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
    - Template: Title, Subtitle, Body
    - Title: `ThisItem.Título`
    - Subtitle: `ThisItem.Categoría`
-   - Body: `Text(ThisItem.'Fecha Solicitud', "dd/mm/yyyy")`
+   - Body: `Text(ThisItem.'Fecha Solicitud', "dd/MM/yyyy")`
 
 2. Agregar Search Box arriba de Gallery
    - Fórmula Items del Gallery:
@@ -888,7 +888,9 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
    - Table: Solicitudes TI
    - Filter rows: 
    ```
-   cr123_estado eq 'Nueva' or cr123_estado eq 'En Proceso'
+   cr123_estado eq 1 or cr123_estado eq 2
+   // Nota: los Choice (OptionSet) se filtran por valor entero, no por label.
+   // Para encontrar los valores: Power Apps > Tables > Solicitud TI > Columns > Estado > editar opciones — cada opción tiene un "Value" numérico.
    ```
    - Order by: `cr123_prioridad desc, cr123_fechasolicitud desc`
 
@@ -1329,9 +1331,13 @@ DIVIDE(
 Vencidas SLA = 
 CALCULATE(
     COUNTROWS(Solicitudes),
-    Solicitudes[Días Abierta] > Solicitudes[SLA Horas] / 24,
-    Solicitudes[Estado] <> "Cerrada"
+    FILTER(
+        Solicitudes,
+        Solicitudes[Días Abierta] > Solicitudes[SLA Horas] / 24 &&
+        Solicitudes[Estado] <> "Cerrada"
+    )
 )
+// FILTER es necesario cuando se comparan dos columnas de la misma tabla dentro de CALCULATE
 ```
 
 3. **Promedio Días Resolución**
@@ -1634,7 +1640,7 @@ Concatenate(
     "Solicitud #", Text(GallerySolicitudes.Selected.ID, "000000"),
     " - ", Upper(Left(GallerySolicitudes.Selected.Categoría.Value, 1)),
     Lower(Mid(GallerySolicitudes.Selected.Categoría.Value, 2)),
-    " (", Text(GallerySolicitudes.Selected.'Fecha Solicitud', "dd/mm/yyyy"), ")"
+    " (", Text(GallerySolicitudes.Selected.'Fecha Solicitud', "dd/MM/yyyy"), ")"
 )
 ```
 
@@ -2038,7 +2044,8 @@ ClearCollect(
     ColMisSolicitudes,
     Filter(
         Solicitudes,
-        Solicitante.ID = User().email && Estado.Value <> "Completada"
+        Solicitante.'Email Address' = User().Email && Estado.Value <> "Completada"
+        // Compara el email del Contact (Solicitante) con el usuario actual; no usar Solicitante.ID (es GUID, no email)
     )
 );
 
@@ -2095,7 +2102,8 @@ Patch(
         Solicitud: {ID: RegistroActual.ID},
         Comentario: TextInputComentario.Text,
         Tipo: {Value: "Información"},
-        Usuario: {ID: User().Email}
+        Usuario: LookUp(Users, 'Primary Email' = User().Email)
+        // LookUp a la tabla Users de Dataverse — {ID: User().Email} es incorrecto porque ID debe ser GUID, no email
     }
 );
 Reset(TextInputComentario);

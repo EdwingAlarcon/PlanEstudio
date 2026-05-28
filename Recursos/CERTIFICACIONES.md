@@ -10,7 +10,7 @@ PL-900                PL-200                PL-400                PL-600
 Fundamentals    →   Functional         →   Developer        →   Architect
                     Consultant
                     
-Nivel 1 (4-6m)     Nivel 2 (6-8m)        Nivel 3 (8-10m)      Nivel 4 (8-12m)
+Nivel 1 (4-6m)     Nivel 2 (4-6m)        Nivel 3 (6-8m)       Nivel 4 (6-12m)
 Sin prereq          No requerido*          No requerido*         Requiere PL-200 o PL-400
 $165 USD            $165 USD              $165 USD             $165 USD
 40-60 preguntas    40-60 preguntas       40-60 preguntas     Caso de estudio largo
@@ -61,12 +61,14 @@ Certificación introductoria. Valida comprensión de los componentes de Power Pl
 ### Cuándo estudiar: integración con el plan de estudio
 **No estudies PL-900 después de terminar el Nivel 1 — estúdialo en paralelo:**
 
-| Semana del Nivel 1 | Acción PL-900 |
-|--------------------|---------------|
-| Semanas 1–4 (Módulos 1–3) | Lee el learning path oficial "Microsoft Power Platform Fundamentals" en Microsoft Learn (8–12 h) |
-| Semanas 5–8 (Módulos 4–6) | Haz el Practice Assessment oficial gratuito en learn.microsoft.com — identifica tus gaps |
-| Semanas 9–12 (Módulos 7–8) | Refuerza los gaps detectados, haz el practice assessment de nuevo hasta >85% |
-| Al finalizar Módulo 8 | Rinde PL-900 — ya tienes conocimiento práctico que va muy por encima del examen |
+| Hito del Nivel 1 | Acción PL-900 |
+|------------------|---------------|
+| Al terminar Módulo 3 | Lee el learning path "Microsoft Power Platform Fundamentals" en Microsoft Learn (8–12 h) — ya tienes contexto práctico para entender cada concepto |
+| Al terminar Módulo 6 | Haz el Practice Assessment oficial gratuito en learn.microsoft.com — identifica tus gaps |
+| Al terminar Módulo 7 | Refuerza los gaps detectados, haz el practice assessment de nuevo hasta >85% |
+| Al terminar Módulo 8 | Rinde PL-900 — ya tienes conocimiento práctico que va muy por encima del examen |
+
+> **Nota:** La tabla usa módulos como hitos (no semanas) porque el ritmo varía: a 10 hrs/semana cada módulo toma 2-4 semanas; a 15 hrs/semana puede ser 1-2 semanas. Lo importante es completar cada módulo antes de avanzar al siguiente hito de estudio.
 
 Ventaja: el 80% del contenido PL-900 ya lo practicaste en los módulos. El examen valida lo que aprendiste, no requiere estudio adicional intensivo.
 
