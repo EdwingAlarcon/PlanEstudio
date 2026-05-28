@@ -1,0 +1,101 @@
+site_name: "Power Platform & D365 — Plan de Estudio"
+site_description: "Plan de aprendizaje progresivo: de fundamentos a Arquitecto Senior"
+docs_dir: docs
+site_dir: site
+exclude_docs: |
+  superpowers/**
+
+theme:
+  name: material
+  language: es
+  palette:
+    - scheme: default
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Cambiar a modo oscuro
+    - scheme: slate
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Cambiar a modo claro
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.suggest
+    - search.share
+    - content.code.copy
+    - content.tabs.link
+    - toc.follow
+  icon:
+    logo: material/school
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+nav:
+  - Inicio: index.md
+  - "🟢 Nivel 1 — Básico":
+      - Contenido: Niveles/NIVEL_1_BASICO.md
+  - "🔵 Nivel 2 — Intermedio":
+      - Contenido: Niveles/NIVEL_2_INTERMEDIO.md
+  - "🟠 Nivel 3 — Avanzado":
+      - Contenido: Niveles/NIVEL_3_AVANZADO.md
+  - "🔴 Nivel 4 — Arquitecto":
+      - Contenido: Niveles/NIVEL_4_ARQUITECTO.md
+  - Anexos:
+      - Lenguajes de Programación: Anexos/LENGUAJES_PROGRAMACION.md
+      - Copilot Studio Completo: Anexos/COPILOT_STUDIO_COMPLETO.md
+      - ALM y DevOps: Anexos/ALM_DEVOPS_ESTRATEGIAS.md
+      - Arquitectura Empresarial: Anexos/ARQUITECTURA_EMPRESARIAL.md
+      - Casos Reales de Negocio: Anexos/CASOS_REALES_NEGOCIO.md
+  - Recursos:
+      - "✅ Checklist de Progreso": Recursos/CHECKLIST_PROGRESO.md
+      - "📖 Glosario": Recursos/GLOSARIO_TERMINOS.md
+      - "🏆 Certificaciones": Recursos/CERTIFICACIONES.md
+
+plugins:
+  - search:
+      lang: es
+      separator: '[\s\-\.]+'
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+      clickable_checkbox: false
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      title: Contenido
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  generator: false

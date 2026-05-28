@@ -4,27 +4,42 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Repository Is
 
-A structured, progressive learning plan for Microsoft Power Platform and Dynamics 365 — from beginner to Solution Architect. All content is Markdown documentation; there are no build steps, tests, or dependencies.
+A structured, progressive learning plan for Microsoft Power Platform and Dynamics 365 — from beginner to Solution Architect. All content is Markdown documentation served as a static e-learning site via MkDocs Material.
 
 ## Repository Structure
 
 ```
-PLAN_MAESTRO.md          # Master index and overview (start here)
-Niveles/
-  NIVEL_1_BASICO.md      # Level 1: Fundamentals (4–6 months)
-  NIVEL_2_INTERMEDIO.md  # Level 2: Intermediate (planned)
-  NIVEL_3_AVANZADO.md    # Level 3: Advanced (planned)
-  NIVEL_4_ARQUITECTO.md  # Level 4: Architect Master (planned)
-Anexos/
-  LENGUAJES_PROGRAMACION.md
-  COPILOT_STUDIO_COMPLETO.md
-  ALM_DEVOPS_ESTRATEGIAS.md
-  ARQUITECTURA_EMPRESARIAL.md
-  CASOS_REALES_NEGOCIO.md
-Recursos/
-  CHECKLIST_PROGRESO.md
-  GLOSARIO_TERMINOS.md
-  CERTIFICACIONES.md
+mkdocs.yml               # MkDocs configuration (site_name, nav, theme, plugins)
+requirements.txt         # Python deps: mkdocs-material
+.gitignore               # Excludes site/ (generated output)
+docs/                    # MkDocs source — all editable content lives here
+  index.md               # Master index and overview (start here; was PLAN_MAESTRO.md)
+  Niveles/
+    NIVEL_1_BASICO.md    # Level 1: Fundamentals (4–6 months)
+    NIVEL_2_INTERMEDIO.md  # Level 2: Intermediate (planned)
+    NIVEL_3_AVANZADO.md    # Level 3: Advanced (planned)
+    NIVEL_4_ARQUITECTO.md  # Level 4: Architect Master (planned)
+  Anexos/
+    LENGUAJES_PROGRAMACION.md
+    COPILOT_STUDIO_COMPLETO.md
+    ALM_DEVOPS_ESTRATEGIAS.md
+    ARQUITECTURA_EMPRESARIAL.md
+    CASOS_REALES_NEGOCIO.md
+  Recursos/
+    CHECKLIST_PROGRESO.md
+    GLOSARIO_TERMINOS.md
+    CERTIFICACIONES.md
+  stylesheets/
+    extra.css            # Custom CSS: level colors, badges, visual enhancements
+site/                    # Generated output (git-ignored — do not edit)
+```
+
+## Running the Site Locally
+
+```powershell
+pip install -r requirements.txt
+& "C:\Users\bdp_u\AppData\Roaming\Python\Python314\Scripts\mkdocs.exe" serve --dev-addr=127.0.0.1:8001
+# Open http://127.0.0.1:8001
 ```
 
 ## Document Conventions

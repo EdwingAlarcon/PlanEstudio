@@ -1743,4 +1743,4 @@ Has llegado al final de un recorrido de 20-32 meses que te convierte en uno de l
 
 ---
 
-*[← NIVEL_3_AVANZADO.md](NIVEL_3_AVANZADO.md) | [PLAN_MAESTRO.md →](../PLAN_MAESTRO.md)*
+*[← NIVEL_3_AVANZADO.md](NIVEL_3_AVANZADO.md) | [Plan Maestro →](../index.md)*
