@@ -8,25 +8,25 @@
 
 En este nivel dejas de ser desarrollador técnico para convertirte en **Solution Architect**. Tomas decisiones de diseño que afectan a toda la organización, líderas equipos técnicos, defines estrategias de gobernanza, diseñas integraciones enterprise con Azure, y puedes hablar con el C-suite sobre ROI y transformación digital. Al completar este nivel estás listo para la certificación PL-600 y para liderar proyectos de transformación digital de gran escala.
 
-**Módulos de este nivel:** 11 módulos (Módulos 30–40)
+**Módulos de este nivel:** 11 módulos (Módulos 31–41)
 
 | Módulo | Tema | Semanas |
 |--------|------|---------|
-| 30 | Enterprise Architecture y Gobernanza | 4–5 |
-| 31 | CoE Starter Kit y Administración a Escala | 3–4 |
-| 32 | Multi-tenant, Multi-geo y Estrategia de Ambientes | 3–4 |
-| 33 | Azure Integration Services Avanzado | 4–5 |
-| 34 | Arquitectura de Datos: Fabric, Synapse y Medallion | 4–5 |
-| 35 | Seguridad y Cumplimiento Enterprise | 3–4 |
-| 36 | AI Builder y Azure AI integrado en Power Platform | 3–4 |
-| 37 | Liderazgo Técnico y Gestión de Proyectos | 3–4 |
-| 38 | Casos de Transformación Digital | 3–4 |
-| 39 | Preparación PL-600 | 4–5 |
-| 40 | Proyecto Capstone — Arquitectura Enterprise | 8–10 |
+| 31 | Enterprise Architecture y Gobernanza | 4–5 |
+| 32 | CoE Starter Kit y Administración a Escala | 3–4 |
+| 33 | Multi-tenant, Multi-geo y Estrategia de Ambientes | 3–4 |
+| 34 | Azure Integration Services Avanzado | 4–5 |
+| 35 | Arquitectura de Datos: Fabric, Synapse y Medallion | 4–5 |
+| 36 | Seguridad y Cumplimiento Enterprise | 3–4 |
+| 37 | AI Builder y Azure AI integrado en Power Platform | 3–4 |
+| 38 | Liderazgo Técnico y Gestión de Proyectos | 3–4 |
+| 39 | Casos de Transformación Digital | 3–4 |
+| 40 | Preparación PL-600 | 4–5 |
+| 41 | Proyecto Capstone — Arquitectura Enterprise | 8–10 |
 
 ---
 
-## MÓDULO 30: Enterprise Architecture y Gobernanza
+## MÓDULO 31: Enterprise Architecture y Gobernanza
 
 ### 🎯 Objetivo
 Diseñar y comunicar la arquitectura enterprise de Power Platform para organizaciones de 1,000+ usuarios: estrategia de gobernanza, políticas de adopción, marcos de decisión arquitectónica, y alineación con estándares como TOGAF y el Well-Architected Framework de Microsoft.
@@ -216,7 +216,7 @@ Write-Host "Siguiente paso: configurar pipeline CI/CD con esta URL"
 
 ---
 
-## MÓDULO 31: CoE Starter Kit y Administración a Escala
+## MÓDULO 32: CoE Starter Kit y Administración a Escala
 
 ### 🎯 Objetivo
 Implementar y operar el Center of Excellence Starter Kit de Microsoft para obtener visibilidad completa del tenant, gestionar el inventario de apps y flujos, aplicar políticas de cumplimiento automáticamente, y habilitar al equipo de gobernanza para tomar decisiones basadas en datos.
@@ -354,7 +354,7 @@ Crear formulario para que makers soliciten ambientes:
 
 ---
 
-## MÓDULO 32: Multi-tenant, Multi-geo y Estrategia de Ambientes
+## MÓDULO 33: Multi-tenant, Multi-geo y Estrategia de Ambientes
 
 ### 🎯 Objetivo
 Diseñar estrategias de implementación para organizaciones multinacionales con múltiples tenants, requisitos de residencia de datos (GDPR, LGPD, Ley 1581), y modelos de gobierno distribuido donde subsidiarias tienen autonomía pero se alinean con políticas corporativas.
@@ -472,7 +472,7 @@ Alternativa a Azure DevOps para organizaciones sin DevOps avanzado:
 
 ---
 
-## MÓDULO 33: Azure Integration Services Avanzado
+## MÓDULO 34: Azure Integration Services Avanzado
 
 ### 🎯 Objetivo
 Diseñar e implementar arquitecturas de integración enterprise usando el stack completo de Azure Integration Services: Logic Apps, API Management, Service Bus, Event Grid, Azure Functions y Azure Data Factory, orquestados para crear sistemas de integración robustos con Power Platform en el centro.
@@ -684,7 +684,7 @@ public static async Task<string> NotificarCliente(
 
 ---
 
-## MÓDULO 34: Arquitectura de Datos — Fabric, Synapse y Medallion
+## MÓDULO 35: Arquitectura de Datos — Fabric, Synapse y Medallion
 
 ### 🎯 Objetivo
 Diseñar arquitecturas de datos modernas usando Microsoft Fabric y Azure Synapse Analytics conectados con Dataverse y Power BI, implementando el patrón Medallion (Bronze→Silver→Gold) para crear una fuente única de verdad analítica para la organización.
@@ -847,7 +847,7 @@ DIVIDE(
 
 ---
 
-## MÓDULO 35: Seguridad y Cumplimiento Enterprise
+## MÓDULO 36: Seguridad y Cumplimiento Enterprise
 
 ### 🎯 Objetivo
 Implementar una postura de seguridad Zero Trust para Power Platform: clasificación de datos con Microsoft Purview, Customer-Managed Keys, Privileged Identity Management para administradores, auditoría avanzada con Microsoft Sentinel, y cumplimiento regulatorio documentado.
@@ -974,7 +974,7 @@ Implementar una postura de seguridad Zero Trust para Power Platform: clasificaci
 
 ---
 
-## MÓDULO 36: AI Builder y Azure AI integrado
+## MÓDULO 37: AI Builder y Azure AI integrado
 
 ### 🎯 Objetivo
 Integrar capacidades de Inteligencia Artificial en soluciones Power Platform usando AI Builder nativo y Azure AI Services: modelos de clasificación de documentos, extracción de información de facturas, análisis de sentimiento, y orquestación de agentes con Azure OpenAI y Semantic Kernel.
@@ -1127,7 +1127,7 @@ Set column sit_categoriaai = first(body('HTTP_OpenAI')?['choices'])?['message']?
 
 ---
 
-## MÓDULO 37: Liderazgo Técnico y Gestión de Proyectos
+## MÓDULO 38: Liderazgo Técnico y Gestión de Proyectos
 
 ### 🎯 Objetivo
 Desarrollar las competencias de liderazgo técnico necesarias para el rol de Solution Architect: conducir workshops de descubrimiento, estimar proyectos con precisión, gestionar riesgos, comunicar decisiones técnicas al C-suite, y liderar equipos de Fusion Development.
@@ -1269,7 +1269,7 @@ Buen ejemplo: "En 7 meses tendrán un sistema donde los vendedores ven en tiempo
 
 ---
 
-## MÓDULO 38: Casos de Transformación Digital
+## MÓDULO 39: Casos de Transformación Digital
 
 ### 🎯 Objetivo
 Analizar y diseñar soluciones para los patrones más comunes de transformación digital con Power Platform: modernización de sistemas legacy, digitalización de procesos manuales, portales de autoservicio, y automatización de operaciones.
@@ -1396,7 +1396,7 @@ Resultado esperado:
 
 ---
 
-## MÓDULO 39: Preparación PL-600
+## MÓDULO 40: Preparación PL-600
 
 ### 🎯 Objetivo
 Dominar los dominios del examen PL-600 (Power Platform Solution Architect Expert), practicar con casos de estudio de arquitectura, y desarrollar la mentalidad del arquitecto que el examen evalúa.
@@ -1542,7 +1542,7 @@ Semana 8: Simulacro y descanso
 
 ---
 
-## MÓDULO 40: Proyecto Capstone — Arquitectura Enterprise
+## MÓDULO 41: Proyecto Capstone — Arquitectura Enterprise
 
 ### 🎯 Objetivo
 Diseñar e implementar una solución enterprise completa de inicio a fin, aplicando todos los conceptos del Nivel 4: gobernanza, multi-ambiente, integraciones Azure, AI, datos con Fabric, seguridad Zero Trust, y comunicando la arquitectura a stakeholders ejecutivos como lo haría un Solution Architect certificado.

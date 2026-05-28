@@ -92,7 +92,8 @@ Este plan te llevará desde fundamentos hasta arquitectura empresarial en **Micr
 9. Patrones de diseño empresariales
 10. Performance tuning y optimización
 11. TypeScript y PCF avanzado
-12. Proyecto arquitectura multicapa
+12. Code Apps con React y TypeScript
+13. Proyecto arquitectura multicapa
 
 </div>
 

@@ -6,9 +6,9 @@
 
 ## Resumen del Nivel
 
-En este nivel pasas de desarrollador funcional a **desarrollador técnico especializado**. Dominarás C# Plugins, PCF avanzado, integraciones con Azure, Dynamics 365 CE, Power Pages, ALM con CI/CD automatizado, y patrones de arquitectura de soluciones. Al completar este nivel podrás diseñar e implementar soluciones de alta complejidad y prepararte para la certificación PL-400.
+En este nivel pasas de desarrollador funcional a **desarrollador técnico especializado**. Dominarás C# Plugins, PCF avanzado, Code Apps con React/TypeScript, integraciones con Azure, Dynamics 365 CE, Power Pages, ALM con CI/CD automatizado, y patrones de arquitectura de soluciones. Al completar este nivel podrás diseñar e implementar soluciones de alta complejidad y prepararte para la certificación PL-400.
 
-**Módulos de este nivel:** 12 módulos (Módulos 18–29)
+**Módulos de este nivel:** 13 módulos (Módulos 18–30)
 
 | Módulo | Tema | Semanas |
 |--------|------|---------|
@@ -22,8 +22,9 @@ En este nivel pasas de desarrollador funcional a **desarrollador técnico especi
 | 25 | Patrones de Diseño Avanzados | 3–4 |
 | 26 | Performance y Optimización | 3–4 |
 | 27 | PCF Avanzado con TypeScript y React | 4–5 |
-| 28 | Power Pages Avanzado y Azure AD B2C | 3–4 |
-| 29 | Proyecto Multicapa Nivel 3 | 6–8 |
+| **28** | **Code Apps con React y TypeScript** | **4–5** |
+| 29 | Power Pages Avanzado y Azure AD B2C | 3–4 |
+| 30 | Proyecto Multicapa Nivel 3 | 6–8 |
 
 ---
 
@@ -1972,7 +1973,245 @@ pac pcf push --publisher-prefix sit
 
 ---
 
-## MÓDULO 28: Power Pages Avanzado y Azure AD B2C
+## MÓDULO 28: Code Apps con React y TypeScript
+
+### 🎯 Objetivo
+Construir aplicaciones web completas (React + TypeScript + Vite) que corren dentro de Power Platform, con acceso nativo y tipado a conectores y Dataverse, control total del UI, y despliegue como soluciones administradas mediante el pipeline de ALM.
+
+### 📖 Conceptos Clave
+- **Code Apps vs Canvas Apps vs PCF**: Code Apps son apps standalone con React/TS; Canvas Apps son low-code con Power Fx; PCF son componentes embebidos — no apps completas
+- **`@microsoft/power-apps` SDK**: librería cliente que provee conexión a conectores, autenticación Entra ID y gestión del ciclo de vida sin código de auth manual
+- **Vite + React 18 + TypeScript 5**: stack base de una Code App — mismo toolchain que cualquier app web moderna
+- **Data sources tipados**: `pac code add-data-source` genera modelos TypeScript y servicios CRUD desde tablas Dataverse o conectores — directamente usables en componentes
+- **`/generated/` folder**: servicios y modelos generados automáticamente por el CLI — nunca se editan manualmente
+- **Connection References**: permiten remapear conexiones entre ambientes (DEV→TEST→PROD) como cualquier otra solución de Power Platform
+- **Managed Platform benefits**: DLP, Conditional Access, sharing limits, auditoría — heredados automáticamente por ser parte de Power Platform
+- **Limitaciones actuales**: no soporta Power Apps Mobile, SharePoint forms integration, Power Platform Git integration, ni Power BI data integration
+
+### 👨‍💻 Actividades Prácticas Paso a Paso
+
+#### Actividad 28.1: Scaffolding y primera Code App
+
+1. Verificar prerequisitos instalados:
+
+    ```bash
+    node -v          # LTS v20+
+    pac --version    # PAC CLI actualizado
+    ```
+
+2. Habilitar Code Apps en el entorno:
+    - Power Platform Admin Center → Manage → Environments → seleccionar entorno
+    - Settings → Product → Features → activar toggle **"Enable code apps"** → Save
+
+3. Crear scaffolding con template oficial:
+
+    ```bash
+    npx degit github:microsoft/PowerAppsCodeApps/templates/vite mi-primera-code-app
+    cd mi-primera-code-app
+    npm install
+    ```
+
+4. Revisar estructura del proyecto generado:
+
+    ```
+    mi-primera-code-app/
+    ├── src/
+    │   ├── App.tsx          # Componente raíz
+    │   ├── main.tsx         # Entry point
+    │   └── generated/       # Servicios auto-generados — NO editar
+    ├── index.html
+    ├── vite.config.ts
+    ├── tsconfig.json
+    └── package.json
+    ```
+
+5. Ejecutar en modo desarrollo local:
+
+    ```bash
+    npm run dev
+    # Abre http://localhost:5173
+    ```
+
+#### Actividad 28.2: Conectar a Dataverse
+
+1. Autenticar PAC CLI con el entorno de desarrollo:
+
+    ```bash
+    pac auth create --environment https://tuorg.crm.dynamics.com
+    ```
+
+2. Agregar tabla Dataverse como data source:
+
+    ```bash
+    pac code add-data-source -a dataverse -t sit_solicitudti
+    ```
+
+    El CLI genera automáticamente:
+
+    ```
+    src/generated/
+    ├── services/
+    │   └── SitSolicitudtiService.ts   # CRUD tipado completo
+    └── models/
+        └── SitSolicitudtiModel.ts     # Interfaz TypeScript de la tabla
+    ```
+
+3. Consumir el servicio en un componente React:
+
+    ```tsx
+    import { SitSolicitudtiService } from './generated/services/SitSolicitudtiService';
+    import { SitSolicitudti } from './generated/models/SitSolicitudtiModel';
+
+    const App: React.FC = () => {
+      const [solicitudes, setSolicitudes] = React.useState<SitSolicitudti[]>([]);
+
+      React.useEffect(() => {
+        SitSolicitudtiService.getAll().then(setSolicitudes);
+      }, []);
+
+      return (
+        <ul>
+          {solicitudes.map(s => (
+            <li key={s.sit_solicitudtiid}>{s.sit_titulo}</li>
+          ))}
+        </ul>
+      );
+    };
+    ```
+
+#### Actividad 28.3: CRUD completo con Fluent UI
+
+1. Instalar Fluent UI React Components:
+
+    ```bash
+    npm install @fluentui/react-components
+    ```
+
+2. Construir un DataGrid con acciones de edición y eliminación:
+
+    ```tsx
+    import {
+      DataGrid, DataGridBody, DataGridRow, DataGridCell,
+      DataGridHeader, DataGridHeaderCell, Button, createTableColumn
+    } from '@fluentui/react-components';
+
+    const columns = [
+      createTableColumn<SitSolicitudti>({
+        columnId: 'titulo',
+        renderHeaderCell: () => 'Título',
+        renderCell: (item) => item.sit_titulo,
+      }),
+      createTableColumn<SitSolicitudti>({
+        columnId: 'estado',
+        renderHeaderCell: () => 'Estado',
+        renderCell: (item) => item.sit_estado_label ?? '—',
+      }),
+      createTableColumn<SitSolicitudti>({
+        columnId: 'acciones',
+        renderHeaderCell: () => '',
+        renderCell: (item) => (
+          <Button appearance="subtle"
+            onClick={() => SitSolicitudtiService.delete(item.sit_solicitudtiid!)}>
+            Eliminar
+          </Button>
+        ),
+      }),
+    ];
+    ```
+
+3. Implementar formulario de creación con validación:
+
+    ```tsx
+    const handleCreate = async (data: Partial<SitSolicitudti>) => {
+      await SitSolicitudtiService.create({
+        sit_titulo: data.sit_titulo!,
+        sit_descripcion: data.sit_descripcion,
+        sit_categoria: data.sit_categoria ?? 1,
+        sit_prioridad: data.sit_prioridad ?? 2,
+      });
+      SitSolicitudtiService.getAll().then(setSolicitudes);
+    };
+    ```
+
+#### Actividad 28.4: Despliegue y ALM
+
+1. Publicar la Code App al entorno DEV:
+
+    ```bash
+    pac code push
+    ```
+
+    La app aparece en make.powerapps.com → Apps.
+
+2. Agregar a una solución para ALM:
+
+    ```bash
+    pac solution add-reference --path .
+    pac solution pack --folder SolutionSrc --zipfile SolicitudesTI_v1.0.zip --packagetype Managed
+    ```
+
+3. Importar en entorno TEST y validar Connection References:
+    - Al importar, el asistente pedirá mapear la conexión de Dataverse al entorno TEST
+    - Confirmar que los datos cargados corresponden al entorno correcto
+
+4. Verificar comportamiento de permisos (DLP):
+    - En Admin Center, crear una DLP policy que bloquee el conector de Dataverse en el entorno TEST
+    - Comprobar que la app lanza el mensaje de DLP sin necesitar código adicional
+
+### 💼 Caso Real de Negocio
+
+**Empresa**: Firma de consultoría con 200 consultores distribuidos
+
+**Problema**: El portal de gestión de proyectos en Canvas App no soporta los patrones de UI requeridos — tablero Kanban con drag-and-drop, gráficos de utilización interactivos y tabla de timesheet con edición masiva inline. Construir cada uno como PCF Component separado tomaría 3 meses; una Code App resuelve todo en 3 semanas.
+
+**Solución implementada**:
+
+- Code App React conectada a Dataverse (tablas: `sit_proyecto`, `sit_consultor`, `sit_timesheet`)
+- Kanban de proyectos con `react-beautiful-dnd` — drag-and-drop actualiza el estado en Dataverse
+- Gráficos de utilización con `recharts` conectados a datos reales en tiempo real
+- Tabla de timesheet con edición inline masiva usando Fluent UI DataGrid
+- Autenticación Entra ID gestionada por la plataforma — cero código de auth
+- Desplegada como solución Managed en producción con pipeline CI/CD Azure DevOps
+
+**Resultado**:
+
+- 40% menos tiempo de desarrollo vs PCF Components individuales
+- Control total de layout y CSS — imposible con Canvas Apps
+- Acceso al ecosistema npm completo (D3, recharts, react-table, etc.)
+- Misma gobernanza que Canvas Apps: DLP, Conditional Access, auditoría
+
+### ✅ Buenas Prácticas
+- Nunca editar archivos en `/generated/` — son regenerados con cada `pac code add-data-source` y los cambios se perderían
+- Usar Fluent UI React Components (`@fluentui/react-components`) para mantener coherencia visual con el ecosistema Microsoft 365
+- Separar la lógica de negocio en servicios propios que importan desde `/generated/` — no poner lógica directamente en componentes React
+- Agregar data sources siempre con `pac code add-data-source` en lugar de llamadas directas a la WebAPI — los servicios generados ya gestionan auth y tipado
+- Incluir la Code App en una Solución desde el primer día — facilita el ALM y evita migraciones manuales posteriores
+- Probar localmente con `npm run dev` antes de cada `pac code push` para reducir el ciclo de feedback
+
+### ⚠️ Errores Comunes
+- **Error**: Editar manualmente `src/generated/` — archivos sobreescritos en el siguiente `pac code add-data-source`
+  - **Solución**: Crear wrappers propios que importen desde `/generated/` sin modificarlos
+- **Error**: Esperar que la Code App funcione en Power Apps Mobile
+  - **Solución**: Code Apps no soportan mobile; para usuarios móviles usar Canvas App con los mismos datos Dataverse
+- **Error**: Usar `fetch`/`axios` para llamar a Dataverse WebAPI directamente
+  - **Solución**: Usar los servicios generados por el CLI — ya gestionan autenticación, tipado y rate limits
+- **Error**: Olvidar habilitar Code Apps en el entorno antes de `pac code push`
+  - **Solución**: Verificar Admin Center → Settings → Features → Enable code apps
+- **Error**: Importar la app suelta entre ambientes sin empaquetar en solución
+  - **Solución**: Siempre usar `pac solution pack` con `--packagetype Managed` para ALM correcto
+
+### 🧪 Criterios de Validación
+- [ ] Code App creada con template oficial, ejecuta en local con `npm run dev` sin errores
+- [ ] Al menos una tabla Dataverse conectada via `pac code add-data-source` con servicios generados tipados
+- [ ] CRUD completo (listar, crear, editar, eliminar) implementado usando los servicios de `/generated/`
+- [ ] UI construida con Fluent UI React — al menos DataGrid y formulario de creación funcionales
+- [ ] App publicada en entorno DEV con `pac code push` y visible en make.powerapps.com
+- [ ] App empaquetada en Solución Managed e importada en entorno TEST con Connection References correctas
+- [ ] Puedes explicar con ejemplos concretos cuándo elegir Code App vs Canvas App vs PCF Component
+
+---
+
+## MÓDULO 29: Power Pages Avanzado y Azure AD B2C
 
 ### 🎯 Objetivo
 Implementar portales externos con autenticación multitenant usando Azure AD B2C para clientes externos, flujos de registro personalizado, integración con APIs externas vía Web API del portal, y optimización de SEO y rendimiento.
@@ -2086,7 +2325,7 @@ Implementar portales externos con autenticación multitenant usando Azure AD B2C
 
 ---
 
-## MÓDULO 29: Proyecto Multicapa Nivel 3
+## MÓDULO 30: Proyecto Multicapa Nivel 3
 
 ### 🎯 Objetivo
 Construir una solución enterprise completa integrando todos los conceptos del Nivel 3: arquitectura multi-solución, CI/CD automatizado, D365 Customer Service, Portal para clientes, Copilot Studio con SSO, Plugin C# para lógica de negocio, integración con Azure Service Bus, y PCF Dataset avanzado.

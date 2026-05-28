@@ -578,6 +578,21 @@
 
 ---
 
+### Módulo 27: Code Apps con React y TypeScript
+
+- [ ] **Conocimiento**: Explico la diferencia entre Code App, Canvas App y PCF Component con ejemplos de cuándo usar cada uno | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Describo el stack de una Code App (Vite + React + TypeScript + `@microsoft/power-apps` SDK) | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo una Code App desde el template oficial con `npx degit` y la ejecuto localmente con `npm run dev` | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Conecto una tabla Dataverse con `pac code add-data-source` y uso los servicios tipados generados en `/generated/` | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento CRUD completo (listar, crear, editar, eliminar) usando los servicios auto-generados | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Construyo una UI con Fluent UI React Components (DataGrid + formulario) | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Publico la app con `pac code push` y la verifico en make.powerapps.com | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Empaqueto la Code App en una Solución Managed e importo en entorno TEST con Connection References correctas | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 27:** ___/8 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
 ### 🏆 Hitos de Nivel 3
 
 - [ ] Todos los módulos del Nivel 3 completados con 80%+ de checkboxes marcados | Fecha: ___
@@ -593,7 +608,7 @@
 
 ## 🔴 NIVEL 4: ARQUITECTO
 
-### Módulo 27: Arquitectura de Soluciones Enterprise
+### Módulo 28: Arquitectura de Soluciones Enterprise
 
 - [ ] **Conocimiento**: Explico el Power Platform Well-Architected Framework y sus 5 pilares | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Realizo un assessment de una solución existente usando el Well-Architected Framework | Dominio: ___/5 | Fecha: ___
@@ -608,11 +623,11 @@
 - [ ] **Práctica**: Diseño la estrategia de governance para un tenant enterprise | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Creo un documento de Architectural Decision Record (ADR) para una decisión técnica clave | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 27:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 28:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 28: Center of Excellence (CoE)
+### Módulo 29: Center of Excellence (CoE)
 
 - [ ] **Práctica**: Instalo el CoE Starter Kit en un environment dedicado | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Configuro el componente Core del CoE para inventariar todos los recursos | Dominio: ___/5 | Fecha: ___
@@ -627,11 +642,11 @@
 - [ ] **Conocimiento**: Explico cómo medir el ROI de Power Platform en una organización | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Documento el playbook de governance para el CoE | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 28:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 29:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 29: Diseño de Soluciones para Escenarios Complejos
+### Módulo 30: Diseño de Soluciones para Escenarios Complejos
 
 - [ ] **Conocimiento**: Explico los anti-patrones más comunes en Power Platform y cómo evitarlos | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Diseño una solución que maneja 1M+ registros en Dataverse con rendimiento óptimo | Dominio: ___/5 | Fecha: ___
@@ -646,11 +661,11 @@
 - [ ] **Conocimiento**: Explico cómo abordar performance testing para una solución de Power Platform | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Mentoreo a un developer junior en la resolución de un problema técnico | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 29:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 30:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 30: Proyecto Capstone - Arquitecto
+### Módulo 31: Proyecto Capstone - Arquitecto
 
 *Proyecto Final: Solución Enterprise End-to-End*
 
@@ -665,7 +680,7 @@
 - [ ] **Entrega**: Plan de mantenimiento y evolución de la solución | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: Post-mortem de decisiones: qué haría diferente y por qué | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 30:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 31:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 

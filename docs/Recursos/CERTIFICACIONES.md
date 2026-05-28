@@ -354,7 +354,7 @@ El PL-600 pregunta **qué** decidirías implementar, **por qué**, y **cuáles s
 
 - Estudiar todos los escenarios de Fit-Gap Analysis
 - Practicar con casos de estudio del blog de Power Platform
-- Revisar los módulos del Nivel 4 de este plan: Módulos 30, 37, 38
+- Revisar los módulos del Nivel 4 de este plan: Módulos 31, 38, 39
 
 **Semanas 5–6: Diseño de solución**
 
