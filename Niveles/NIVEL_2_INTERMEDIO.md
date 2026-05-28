@@ -636,20 +636,27 @@ RETURN DIVIDE(MesActual - MesAnterior, MesAnterior, BLANK())
 
 #### Actividad 12.4: Iteradores (AVERAGEX, SUMX)
 ```dax
-// Tiempo promedio de resolución (en días) — solo registros con fecha de cierre
-Tiempo Medio Resolución Días = 
+// Ticket promedio por venta (patrón AVERAGEX sobre una tabla)
+Ticket Promedio = 
 AVERAGEX(
-    FILTER(Solicitudes, NOT(ISBLANK(Solicitudes[Fecha Resolución]))),
-    DATEDIFF(Solicitudes[Fecha Solicitud], Solicitudes[Fecha Resolución], DAY)
+    Ventas,
+    Ventas[Monto]
 )
 
-// Ingreso promedio ponderado por unidades vendidas
-Precio Promedio Ponderado = 
-SUMX(Ventas, Ventas[Cantidad] * Ventas[PrecioUnit]) / SUM(Ventas[Cantidad])
-```
-> **Nota:** AVERAGEX y SUMX iteran fila por fila (contexto de fila). Son más flexibles que AVERAGE/SUM pero más costosos en performance con tablas grandes. Úsalos cuando necesites calcular algo por fila antes de agregar.
+// Días promedio transcurridos desde inicio del año hasta cada venta
+Antigüedad Promedio Días = 
+AVERAGEX(
+    Ventas,
+    DATEDIFF(DATE(YEAR(Ventas[FechaVenta]), 1, 1), Ventas[FechaVenta], DAY)
+)
 
-#### Actividad 12.4: RANKX y Top N dinámico
+// Total recalculado fila a fila (patrón SUMX — útil cuando el total depende de cálculo por fila)
+Total Ventas SUMX = 
+SUMX(Ventas, Ventas[Monto])
+```
+> **Nota:** AVERAGEX y SUMX iteran fila por fila (contexto de fila). Son más flexibles que AVERAGE/SUM pero más costosos en performance con tablas grandes. Úsalos cuando el cálculo por fila es distinto al valor almacenado (ej: precio × cantidad cuando el total no está pre-calculado en la tabla).
+
+#### Actividad 12.5: RANKX y Top N dinámico
 ```dax
 // Ranking de clientes por ventas
 Ranking Cliente = 
