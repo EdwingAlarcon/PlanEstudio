@@ -33,6 +33,9 @@ Este plan te llevará desde fundamentos hasta arquitectura empresarial en **Micr
 **Objetivo:** Dominar fundamentos y crear tus primeras soluciones funcionales
 
 **Módulos:**
+
+<div class="module-list nivel-1" markdown>
+
 1. Introducción al ecosistema Power Platform
 2. Dataverse: Fundamentos y modelado básico
 3. Power Apps Canvas: Primeras aplicaciones
@@ -42,6 +45,8 @@ Este plan te llevará desde fundamentos hasta arquitectura empresarial en **Micr
 7. Fundamentos de Power Fx y expresiones
 8. Primer proyecto integrado
 
+</div>
+
 **Duración estimada:** 4-6 meses (10-15 hrs/semana)
 
 ---
@@ -50,15 +55,20 @@ Este plan te llevará desde fundamentos hasta arquitectura empresarial en **Micr
 **Objetivo:** Desarrollar soluciones complejas y dominar integraciones
 
 **Módulos:**
-9. Dataverse avanzado: Relaciones y business rules
-10. Power Apps avanzado: Componentes y patrones
-11. Power Automate: Flujos complejos y error handling
-12. Power BI: Modelado de datos y DAX
-13. JavaScript para PCF Components
-14. Conectores personalizados y APIs
-15. Introducción a Copilot Studio
-16. Seguridad y compartición de soluciones
-17. Proyecto integrado nivel intermedio
+
+<div class="module-list nivel-2" markdown>
+
+1. Dataverse avanzado: Relaciones y business rules
+2. Power Apps avanzado: Componentes y patrones
+3. Power Automate: Flujos complejos y error handling
+4. Power BI: Modelado de datos y DAX
+5. JavaScript para PCF Components
+6. Conectores personalizados y APIs
+7. Introducción a Copilot Studio
+8. Seguridad y compartición de soluciones
+9. Proyecto integrado nivel intermedio
+
+</div>
 
 **Duración estimada:** 4-6 meses (12-18 hrs/semana)
 
@@ -68,18 +78,23 @@ Este plan te llevará desde fundamentos hasta arquitectura empresarial en **Micr
 **Objetivo:** Dominar arquitectura de soluciones, ALM y gobernanza
 
 **Módulos:**
-18. Arquitectura de soluciones empresariales
-19. ALM: Estrategias y pipelines
-20. DevOps para Power Platform (Azure DevOps/GitHub)
-21. Dynamics 365 Customer Engagement avanzado
-22. Power Pages: Portales y sitios web
-23. Copilot Studio avanzado e integraciones IA
-24. C# y plugins para Dataverse
-25. Integraciones complejas (ERP, sistemas legados)
-26. Patrones de diseño empresariales
-27. Performance tuning y optimización
-28. TypeScript y PCF avanzado
-29. Proyecto arquitectura multicapa
+
+<div class="module-list nivel-3" markdown>
+
+1. Arquitectura de soluciones empresariales
+2. ALM: Estrategias y pipelines
+3. DevOps para Power Platform (Azure DevOps/GitHub)
+4. Dynamics 365 Customer Engagement avanzado
+5. Power Pages: Portales y sitios web
+6. Copilot Studio avanzado e integraciones IA
+7. C# y plugins para Dataverse
+8. Integraciones complejas (ERP, sistemas legados)
+9. Patrones de diseño empresariales
+10. Performance tuning y optimización
+11. TypeScript y PCF avanzado
+12. Proyecto arquitectura multicapa
+
+</div>
 
 **Duración estimada:** 6-8 meses (15-20 hrs/semana)
 
@@ -89,17 +104,22 @@ Este plan te llevará desde fundamentos hasta arquitectura empresarial en **Micr
 **Objetivo:** Liderar transformaciones digitales y diseñar arquitecturas empresariales
 
 **Módulos:**
-30. Diseño de arquitecturas empresariales
-31. Gobernanza a nivel organizacional
-32. Centro de Excelencia (CoE) Starter Kit
-33. Estrategias multi-tenant y multi-cloud
-34. Azure Integration Services + Power Platform
-35. Arquitectura de datos empresarial
-36. Seguridad empresarial y compliance
-37. IA y Azure AI Services con Power Platform
-38. Liderazgo técnico y mentoría
-39. Casos de transformación digital
-40. Proyecto capstone: Arquitectura empresarial completa
+
+<div class="module-list nivel-4" markdown>
+
+1. Diseño de arquitecturas empresariales
+2. Gobernanza a nivel organizacional
+3. Centro de Excelencia (CoE) Starter Kit
+4. Estrategias multi-tenant y multi-cloud
+5. Azure Integration Services + Power Platform
+6. Arquitectura de datos empresarial
+7. Seguridad empresarial y compliance
+8. IA y Azure AI Services con Power Platform
+9. Liderazgo técnico y mentoría
+10. Casos de transformación digital
+11. Proyecto capstone: Arquitectura empresarial completa
+
+</div>
 
 **Duración estimada:** 6-12 meses (15-25 hrs/semana)
 
