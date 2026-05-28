@@ -1,6 +1,12 @@
 # MkDocs site generado
 site/
 
+# Screenshots y artefactos temporales
+*.png
+*.jpeg
+*.jpg
+.playwright-mcp/
+
 # Python
 __pycache__/
 *.pyc
