@@ -61,6 +61,46 @@
   max-width: 1280px;
 }
 
+/* ─── Espaciado general de listas — evita el efecto "pegado" ─── */
+.md-typeset ul li,
+.md-typeset ol li {
+  margin-bottom: 4px;
+}
+.md-typeset ul li ul,
+.md-typeset ol li ol,
+.md-typeset ol li ul {
+  margin-top: 4px;
+}
+
+/* ─── Headers h3 de módulo (### Módulo X) ─── */
+.md-typeset h3 {
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  padding-bottom: 0.3em;
+  margin-top: 2em;
+}
+
+/* ─── Headers h4 de sección (🎯 Objetivo, 📖 Conceptos, etc.) ─── */
+.md-typeset h4 {
+  background: var(--md-code-bg-color);
+  border-left: 3px solid var(--md-accent-fg-color);
+  border-radius: 0 4px 4px 0;
+  padding: 5px 10px;
+  margin-top: 1.4em;
+  margin-bottom: 0.6em;
+  font-size: 0.9rem;
+}
+
+/* ─── Párrafos **Práctica X.X:** (bold solo) como sub-encabezados ─── */
+.md-typeset p > strong:only-child {
+  display: block;
+  background: var(--md-code-bg-color);
+  border-left: 3px solid var(--md-default-fg-color--light);
+  border-radius: 0 4px 4px 0;
+  padding: 4px 10px;
+  margin-bottom: 2px;
+  font-size: 0.875rem;
+}
+
 /* ─── Lista de módulos — items diferenciados por nivel ─── */
 .module-list ol {
   list-style: none;

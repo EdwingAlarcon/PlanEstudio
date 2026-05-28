@@ -239,13 +239,13 @@ Implementar y operar el Center of Excellence Starter Kit de Microsoft para obten
 1. Descargar el CoE Starter Kit desde aka.ms/CoEStarterKit
 2. Crear ambiente dedicado para el CoE: `TENANT-COE` (Producción, acceso solo a admins)
 3. Importar en orden:
-   - Core Components (primero — es dependencia de todos)
-   - Governance Components
-   - Nurture Components
-   - Innovation Backlog (opcional)
+    - Core Components (primero — es dependencia de todos)
+    - Governance Components
+    - Nurture Components
+    - Innovation Backlog (opcional)
 4. Configurar el flujo `CLEANUP - Admin | Sync Template v4`:
-   - Connectors: Power Apps Admin, Power Automate Admin, Microsoft Dataverse
-   - Frecuencia: 1 vez por día (carga inicial puede tardar horas)
+    - Connectors: Power Apps Admin, Power Automate Admin, Microsoft Dataverse
+    - Frecuencia: 1 vez por día (carga inicial puede tardar horas)
 5. Esperar la primera sincronización completa (24–48h para tenants grandes)
 
 #### Actividad 31.2: Power BI CoE Dashboard
@@ -423,11 +423,11 @@ Documentación requerida:
 #### Actividad 32.3: Managed Environments
 1. Admin Center → seleccionar ambiente → habilitar Managed Environments
 2. Funcionalidades que se habilitan:
-   - **Sharing limits:** limitar a cuántas personas se puede compartir una app (ej: máx 20, o solo dentro del tenant)
-   - **Solution checker enforcement:** forzar que todas las importaciones pasen el checker
-   - **IP firewall:** restricción de acceso por IP/red corporativa
-   - **Customer-managed keys (CMK):** cifrado con claves propias del cliente
-   - **Weekly digest:** email semanal al admin con el estado del ambiente
+    - **Sharing limits:** limitar a cuántas personas se puede compartir una app (ej: máx 20, o solo dentro del tenant)
+    - **Solution checker enforcement:** forzar que todas las importaciones pasen el checker
+    - **IP firewall:** restricción de acceso por IP/red corporativa
+    - **Customer-managed keys (CMK):** cifrado con claves propias del cliente
+    - **Weekly digest:** email semanal al admin con el estado del ambiente
 3. Configurar para PROD:
    ```
    Sharing limits: Solo grupos de seguridad de AAD
@@ -440,7 +440,7 @@ Documentación requerida:
 Alternativa a Azure DevOps para organizaciones sin DevOps avanzado:
 1. Admin Center → Pipelines → Nuevo pipeline
 2. Configurar etapas:
-   - DEV → TEST → PROD
+    - DEV → TEST → PROD
 3. Desde make.powerapps.com → Solución → Pipelines → Deploy
 4. El despliegue pasa por las etapas con aprobaciones configuradas
 5. Ventaja: no requiere Azure DevOps ni conocimiento de YAML
@@ -580,9 +580,9 @@ Diseñar e implementar arquitecturas de integración enterprise usando el stack 
 #### Actividad 33.3: APIM — Portal de APIs para integradores
 1. Crear API en APIM desde spec OpenAPI de Dataverse
 2. Configurar productos:
-   - **Producto Interno:** acceso sin límite para apps internas
-   - **Producto Partners:** 1,000 req/hora, API Key requerida
-   - **Producto Freemium:** 100 req/hora, sin soporte
+    - **Producto Interno:** acceso sin límite para apps internas
+    - **Producto Partners:** 1,000 req/hora, API Key requerida
+    - **Producto Freemium:** 100 req/hora, sin soporte
 3. Políticas de transformación:
    ```xml
    <!-- Transformar errores de Dataverse a formato estándar de la empresa -->
@@ -601,9 +601,9 @@ Diseñar e implementar arquitecturas de integración enterprise usando el stack 
    </on-error>
    ```
 4. Habilitar Developer Portal:
-   - Personalizar con el branding de la empresa
-   - Configurar proceso de suscripción (automático vs aprobación manual)
-   - Publicar documentación de cada API
+    - Personalizar con el branding de la empresa
+    - Configurar proceso de suscripción (automático vs aprobación manual)
+    - Publicar documentación de cada API
 
 #### Actividad 33.4: Azure Durable Functions — Fan-out/Fan-in
 ```csharp
@@ -650,10 +650,10 @@ public static async Task<string> NotificarCliente(
 3. Evento: `Microsoft.PowerApps.Dataverse.RecordCreated`
 4. Tabla: `sit_solicitud`
 5. Endpoints suscriptores:
-   - Azure Function (procesamiento inmediato)
-   - Service Bus Topic (mensajería async)
-   - Logic App (integración con SAP)
-   - Azure Event Hubs (streaming hacia Power BI en tiempo real)
+    - Azure Function (procesamiento inmediato)
+    - Service Bus Topic (mensajería async)
+    - Logic App (integración con SAP)
+    - Azure Event Hubs (streaming hacia Power BI en tiempo real)
 
 ### 💼 Caso Real de Negocio
 **Empresa:** Grupo industrial con SAP, Salesforce, un WMS propio y Power Platform  
@@ -861,13 +861,13 @@ Implementar una postura de seguridad Zero Trust para Power Platform: clasificaci
 1. Microsoft Purview → Data Catalog → Register source → Dynamics 365
 2. Scan: escanear automáticamente tablas de Dataverse y clasificar datos sensibles
 3. Clasificaciones detectadas:
-   - `Credit Card Number` en columna sit_tarjetacredito
-   - `Personal Email` en emailaddress1 de Contact
-   - `National ID Number` en sit_numerodocumento
+    - `Credit Card Number` en columna sit_tarjetacredito
+    - `Personal Email` en emailaddress1 de Contact
+    - `National ID Number` en sit_numerodocumento
 4. Crear Sensitivity Labels:
-   - `Confidencial - Datos Personales`: aplica cifrado + protección de copia
-   - `Interno - Solo empleados`: previene compartir externamente
-   - `Público`: sin restricciones
+    - `Confidencial - Datos Personales`: aplica cifrado + protección de copia
+    - `Interno - Solo empleados`: previene compartir externamente
+    - `Público`: sin restricciones
 5. Política de auto-etiquetado: cuando Purview detecta dato personal → aplicar label `Confidencial - Datos Personales`
 
 #### Actividad 35.2: Customer-Managed Keys
@@ -882,22 +882,22 @@ Implementar una postura de seguridad Zero Trust para Power Platform: clasificaci
 1. Azure AD → Privileged Identity Management → Roles de Azure AD
 2. Configurar rol `Power Platform Administrator` como "Elegible" (no permanente)
 3. Configuración del rol:
-   - Duración máxima de activación: 8 horas
-   - Requiere: justificación de negocio + aprobación de manager
-   - MFA obligatorio para activar
-   - Notificación al Security team
+    - Duración máxima de activación: 8 horas
+    - Requiere: justificación de negocio + aprobación de manager
+    - MFA obligatorio para activar
+    - Notificación al Security team
 4. Proceso cuando admin necesita acceder:
-   - PIM → Activar rol → ingresar justificación
-   - Manager recibe email de aprobación → aprueba
-   - Admin tiene acceso por máx 8 horas
-   - Todas las acciones quedan en el log de auditoría
+    - PIM → Activar rol → ingresar justificación
+    - Manager recibe email de aprobación → aprueba
+    - Admin tiene acceso por máx 8 horas
+    - Todas las acciones quedan en el log de auditoría
 
 #### Actividad 35.4: Exportar logs a Microsoft Sentinel
 1. Admin Center → Diagnostic settings → Add diagnostic setting
 2. Logs a exportar:
-   - PowerApps Activity
-   - Power Automate Activity  
-   - Dataverse Audit Logs
+    - PowerApps Activity
+    - Power Automate Activity  
+    - Dataverse Audit Logs
 3. Destino: Azure Log Analytics Workspace (conectado a Sentinel)
 4. En Sentinel → KQL queries para detectar anomalías:
    ```kql
@@ -923,8 +923,8 @@ Implementar una postura de seguridad Zero Trust para Power Platform: clasificaci
    ```
 
 5. Crear Alert Rules en Sentinel:
-   - "Descarga masiva de datos > 10,000 registros en 5 min" → Severidad Alta
-   - "Acceso a PROD fuera de horario desde IP externa" → Severidad Media
+    - "Descarga masiva de datos > 10,000 registros en 5 min" → Severidad Alta
+    - "Acceso a PROD fuera de horario desde IP externa" → Severidad Media
 
 #### Actividad 35.5: Conditional Access para Power Platform
 1. Azure AD → Conditional Access → Nueva política
@@ -932,12 +932,12 @@ Implementar una postura de seguridad Zero Trust para Power Platform: clasificaci
 3. Usuarios: todos, excepto cuentas de break-glass
 4. Apps de nube: `Power Apps`, `Power Automate`, `Microsoft Flow`
 5. Condiciones:
-   - Plataformas de dispositivos: Any (para capturar todos)
-   - Ubicaciones: fuera de IPs corporativas
+    - Plataformas de dispositivos: Any (para capturar todos)
+    - Ubicaciones: fuera de IPs corporativas
 6. Controles de acceso:
-   - Requerir MFA
-   - Requerir dispositivo marcado como cumplimiento (Intune)
-   - Requerir app cliente aprobada
+    - Requerir MFA
+    - Requerir dispositivo marcado como cumplimiento (Intune)
+    - Requerir app cliente aprobada
 7. Modo: Reporte (audit first) → cambiar a Enforced después de 2 semanas
 
 ### 💼 Caso Real de Negocio
@@ -983,11 +983,11 @@ Integrar capacidades de Inteligencia Artificial en soluciones Power Platform usa
 2. Tipo: Documentos estructurados (facturas tienen formato consistente)
 3. Cargar 5+ facturas de ejemplo como training data
 4. Definir campos a extraer:
-   - Número de factura
-   - Fecha
-   - NIT/RFC del proveedor
-   - Total
-   - Lista de líneas (producto, cantidad, precio)
+    - Número de factura
+    - Fecha
+    - NIT/RFC del proveedor
+    - Total
+    - Lista de líneas (producto, cantidad, precio)
 5. Entrenar el modelo (puede tomar 30–60 minutos)
 6. Probar con una factura nueva → verificar exactitud de extracción
 7. Publicar el modelo
@@ -1055,9 +1055,9 @@ Set column sit_categoriaai = first(body('HTTP_OpenAI')?['choices'])?['message']?
 2. Tabla: Oportunidades de Dataverse
 3. Columna a predecir: `sit_ganada` (SI/NO — si la oportunidad se cerró ganada)
 4. Columnas de entrada (features):
-   - sit_monto_estimado, sit_probabilidad, sit_etapa
-   - sit_origen, sit_sector_cliente, sit_tipo_contacto
-   - Días desde creación hasta el momento actual
+    - sit_monto_estimado, sit_probabilidad, sit_etapa
+    - sit_origen, sit_sector_cliente, sit_tipo_contacto
+    - Días desde creación hasta el momento actual
 5. Entrenar con historial de 2+ años de oportunidades
 6. Publicar y usar en Canvas App:
    ```js

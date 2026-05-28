@@ -45,34 +45,34 @@ Diseñar modelos de datos empresariales complejos en Dataverse: relaciones polim
 
 #### Actividad 9.1: Modelo de datos para sistema de proyectos
 1. Crear tabla `Proyecto` con columnas:
-   - `sit_nombre` (Texto, requerido)
-   - `sit_estado` (Elección: Planificación/En Curso/Completado/Cancelado)
-   - `sit_fechainicio` (Fecha y hora)
-   - `sit_fechafin` (Fecha y hora)
-   - `sit_presupuesto` (Moneda)
-   - `sit_costoreal` (Rollup — Sum de `sit_costo` de tabla Tarea)
-   - `sit_porcentajeavance` (Decimal, calculada)
-   - `sit_responsable` (Lookup a SystemUser)
+    - `sit_nombre` (Texto, requerido)
+    - `sit_estado` (Elección: Planificación/En Curso/Completado/Cancelado)
+    - `sit_fechainicio` (Fecha y hora)
+    - `sit_fechafin` (Fecha y hora)
+    - `sit_presupuesto` (Moneda)
+    - `sit_costoreal` (Rollup — Sum de `sit_costo` de tabla Tarea)
+    - `sit_porcentajeavance` (Decimal, calculada)
+    - `sit_responsable` (Lookup a SystemUser)
 
 2. Crear tabla `Tarea`:
-   - `sit_titulo` (Texto, requerido)
-   - `sit_proyecto` (Lookup a Proyecto — relación 1:N)
-   - `sit_asignado` (Lookup a SystemUser)
-   - `sit_estado` (Elección: Pendiente/En Progreso/Bloqueada/Completada)
-   - `sit_horas_estimadas` (Número entero)
-   - `sit_horas_reales` (Número entero)
-   - `sit_costo` (Moneda, calculada: `sit_horas_reales * sit_tarifa_hora`)
+    - `sit_titulo` (Texto, requerido)
+    - `sit_proyecto` (Lookup a Proyecto — relación 1:N)
+    - `sit_asignado` (Lookup a SystemUser)
+    - `sit_estado` (Elección: Pendiente/En Progreso/Bloqueada/Completada)
+    - `sit_horas_estimadas` (Número entero)
+    - `sit_horas_reales` (Número entero)
+    - `sit_costo` (Moneda, calculada: `sit_horas_reales * sit_tarifa_hora`)
 
 3. Configurar columna Rollup `sit_costoreal` en Proyecto:
-   - Función de agregación: Sum
-   - Tabla relacionada: Tarea (vía sit_proyecto)
-   - Campo a agregar: sit_costo
-   - Filtro: Estado = Completada
+    - Función de agregación: Sum
+    - Tabla relacionada: Tarea (vía sit_proyecto)
+    - Campo a agregar: sit_costo
+    - Filtro: Estado = Completada
 
 4. Crear tabla `Etiqueta` y relación N:N con `Proyecto` (nativa):
-   - En diseñador de tablas → Relaciones → Agregar relación → Muchos a muchos
-   - Tabla relacionada: Etiqueta
-   - Esto crea tabla de intersección automáticamente
+    - En diseñador de tablas → Relaciones → Agregar relación → Muchos a muchos
+    - Tabla relacionada: Etiqueta
+    - Esto crea tabla de intersección automáticamente
 
 #### Actividad 9.2: Reglas de negocio avanzadas
 1. Abrir tabla `Proyecto` → Reglas de negocio → Nueva regla
@@ -112,16 +112,16 @@ Diseñar modelos de datos empresariales complejos en Dataverse: relaciones polim
 2. Nombre: `Ciclo de Vida del Proyecto`
 3. Tabla: Proyecto
 4. Etapas:
-   - **Etapa 1: Definición**
+    - **Etapa 1: Definición**
      - Paso: Nombre del proyecto (obligatorio)
      - Paso: Presupuesto (obligatorio)
      - Paso: Responsable
-   - **Etapa 2: Planificación**
+    - **Etapa 2: Planificación**
      - Paso: Fecha inicio
      - Paso: Fecha fin
-   - **Etapa 3: Ejecución**
+    - **Etapa 3: Ejecución**
      - Paso: Estado = En Curso (acción)
-   - **Etapa 4: Cierre**
+    - **Etapa 4: Cierre**
      - Paso: Costo real validado
 5. Activar y probar en formulario Model-Driven
 
@@ -192,10 +192,10 @@ Construir una biblioteca de componentes reutilizables en Canvas Apps que elimine
 1. En la biblioteca → Nuevo componente → Nombre: `cmpHeader`
 2. Dimensiones: Width=App.Width, Height=60
 3. Agregar propiedades de entrada:
-   - `TituloApp` (Texto, default: "Mi Aplicación")
-   - `ColorFondo` (Color, default: RGBA(0,120,212,1))
-   - `ColorTexto` (Color, default: RGBA(255,255,255,1))
-   - `MostrarBtnVolver` (Boolean, default: false)
+    - `TituloApp` (Texto, default: "Mi Aplicación")
+    - `ColorFondo` (Color, default: RGBA(0,120,212,1))
+    - `ColorTexto` (Color, default: RGBA(255,255,255,1))
+    - `MostrarBtnVolver` (Boolean, default: false)
 4. Insertar Rectangle:
    ```
    Rectangle1.Fill: cmpHeader.ColorFondo
@@ -221,10 +221,10 @@ Construir una biblioteca de componentes reutilizables en Canvas Apps que elimine
 1. Nuevo componente → `cmpStatCard`
 2. Dimensiones: Width=200, Height=100
 3. Propiedades de entrada:
-   - `Titulo` (Texto, default: "Métrica")
-   - `Valor` (Número, default: 0)
-   - `Icono` (Texto, default: "calendar") — nombre del ícono de Fluent
-   - `ColorAcento` (Color, default: RGBA(0,120,212,1))
+    - `Titulo` (Texto, default: "Métrica")
+    - `Valor` (Número, default: 0)
+    - `Icono` (Texto, default: "calendar") — nombre del ícono de Fluent
+    - `ColorAcento` (Color, default: RGBA(0,120,212,1))
 4. Diseño del componente:
    ```
    // Rectangle de fondo con sombra simulada
@@ -252,9 +252,9 @@ Construir una biblioteca de componentes reutilizables en Canvas Apps que elimine
 #### Actividad 10.4: Componente de Búsqueda con Debounce
 1. Nuevo componente → `cmpSearchBox`
 2. Propiedades de entrada:
-   - `Placeholder` (Texto, default: "Buscar...")
+    - `Placeholder` (Texto, default: "Buscar...")
 3. Propiedades de salida (custom):
-   - `TextoBusqueda` (Texto)
+    - `TextoBusqueda` (Texto)
 4. Agregar Timer para debounce:
    ```
    // Timer que dispara 500ms después de que el usuario deja de escribir
@@ -364,13 +364,13 @@ Construir flujos empresariales robustos con manejo de errores, ramas paralelas, 
 1. Nuevo flujo → Disparado desde Power Apps (instantáneo)
 2. Agregar acción: **Scope** → Renombrar: `Try`
 3. Dentro del Scope Try, agregar acciones de negocio:
-   - Get Item de SharePoint (puede fallar)
-   - Parsear JSON
-   - Crear registro en Dataverse
+    - Get Item de SharePoint (puede fallar)
+    - Parsear JSON
+    - Crear registro en Dataverse
 4. Agregar segundo **Scope** → Renombrar: `Catch`
 5. Configurar Run After del Scope Catch:
-   - Clic en "..." del Scope Catch → "Configure run after"
-   - Desmarcar "succeeded" → Marcar "failed" y "timed out"
+    - Clic en "..." del Scope Catch → "Configure run after"
+    - Desmarcar "succeeded" → Marcar "failed" y "timed out"
 6. Dentro del Scope Catch:
    ```
    Acción: Compose
@@ -392,9 +392,9 @@ Construir flujos empresariales robustos con manejo de errores, ramas paralelas, 
 #### Actividad 11.2: Flujo Hijo Reutilizable
 1. Crear nuevo flujo → disparador: **"When a Power Automate flow is run"** (Child flow)
 2. Definir inputs:
-   - `solicitudId` (String)
-   - `aprobadorEmail` (String)
-   - `presupuesto` (Float)
+    - `solicitudId` (String)
+    - `aprobadorEmail` (String)
+    - `presupuesto` (Float)
 3. Lógica del flujo hijo: calcular nivel de aprobación:
    ```
    Condition: presupuesto < 5000
@@ -454,16 +454,16 @@ Construir flujos empresariales robustos con manejo de errores, ramas paralelas, 
 2. Inicializar variable: `nextLink` = (vacío)
 3. Inicializar variable: `totalRegistros` = 0
 4. **Do Until:** `nextLink` = "DONE"
-   - Acción HTTP con OData:
+    - Acción HTTP con OData:
      ```
      URI: if(empty(variables('nextLink')), 
               'https://org.crm.dynamics.com/api/data/v9.2/sit_solicituds?$top=250',
               variables('nextLink'))
      ```
-   - Parse JSON de la respuesta
-   - Apply to each sobre `value` → procesar cada registro
-   - Increment variable `totalRegistros`
-   - Set Variable `nextLink`:
+    - Parse JSON de la respuesta
+    - Apply to each sobre `value` → procesar cada registro
+    - Increment variable `totalRegistros`
+    - Set Variable `nextLink`:
      ```
      if(contains(body('Parse_JSON'), '@odata.nextLink'),
         body('Parse_JSON')?['@odata.nextLink'],
@@ -838,17 +838,17 @@ SolicitudFormHandler._configurarVisibilidad = function(formContext) {
 ```
 
 2. Subir Web Resource:
-   - make.powerapps.com → Solución → Nuevo → Web Resource
-   - Tipo: Script (JScript)
-   - Nombre: `sit_/js/SolicitudFormHandler.js`
-   - Subir el archivo JS
+    - make.powerapps.com → Solución → Nuevo → Web Resource
+    - Tipo: Script (JScript)
+    - Nombre: `sit_/js/SolicitudFormHandler.js`
+    - Subir el archivo JS
    
 3. Registrar en formulario:
-   - Formulario de Solicitud → Propiedades → Eventos
-   - OnLoad → Agregar librería → seleccionar el Web Resource
-   - Función: `SolicitudFormHandler.onLoad`
-   - Pasar contexto de ejecución: ✅
-   - OnSave → Misma librería → Función: `SolicitudFormHandler.onSave`
+    - Formulario de Solicitud → Propiedades → Eventos
+    - OnLoad → Agregar librería → seleccionar el Web Resource
+    - Función: `SolicitudFormHandler.onLoad`
+    - Pasar contexto de ejecución: ✅
+    - OnSave → Misma librería → Función: `SolicitudFormHandler.onSave`
 
 #### Actividad 13.2: Leer datos relacionados con WebApi desde JS
 ```javascript
@@ -988,8 +988,8 @@ SolicitudFormHandler.cargarHistorialCliente = function(executionContext) {
    ```
 
 6. Agregar el control al formulario:
-   - Formulario → campo `sit_estado` → Componentes → Agregar componente → `StatusBadge`
-   - Configurar propiedad: statusValue → Campo: sit_estado
+    - Formulario → campo `sit_estado` → Componentes → Agregar componente → `StatusBadge`
+    - Configurar propiedad: statusValue → Campo: sit_estado
 
 ### 💼 Caso Real de Negocio
 **Empresa:** Aseguradora con formularios complejos de siniestros  
@@ -1109,33 +1109,33 @@ Crear y certificar conectores personalizados para APIs REST, integrar autenticac
    ```
 
 3. Importar en Power Platform:
-   - make.powerapps.com → Conectores personalizados → Nuevo → Importar desde archivo OpenAPI
-   - Subir el YAML
+    - make.powerapps.com → Conectores personalizados → Nuevo → Importar desde archivo OpenAPI
+    - Subir el YAML
 
 #### Actividad 14.2: Configurar autenticación OAuth 2.0
 1. En la sección "Seguridad" del conector:
-   - Tipo de autenticación: OAuth 2.0
-   - Proveedor de identidad: Azure Active Directory
-   - ID de cliente: (App Registration ID en Azure AD)
-   - Secreto de cliente: (secreto de la App Registration)
-   - URL de autorización: `https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize`
-   - URL de token: `https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token`
-   - Actualizar URL: (igual que URL de token)
-   - Ámbito: `https://api.facturacion.ejemplo.com/.default`
+    - Tipo de autenticación: OAuth 2.0
+    - Proveedor de identidad: Azure Active Directory
+    - ID de cliente: (App Registration ID en Azure AD)
+    - Secreto de cliente: (secreto de la App Registration)
+    - URL de autorización: `https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize`
+    - URL de token: `https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token`
+    - Actualizar URL: (igual que URL de token)
+    - Ámbito: `https://api.facturacion.ejemplo.com/.default`
 
 2. Para API Key simple:
-   - Tipo: Clave de API
-   - Nombre del parámetro: `X-API-Key`
-   - Ubicación: Header
+    - Tipo: Clave de API
+    - Nombre del parámetro: `X-API-Key`
+    - Ubicación: Header
 
 #### Actividad 14.3: Policy Templates
 1. En la acción `EmitirFactura` → "..." → Editar
 2. Agregar política: "Set Header"
-   - Header: `X-Tenant-ID`
-   - Valor: `@connectionParameters('tenant_id')`
+    - Header: `X-Tenant-ID`
+    - Valor: `@connectionParameters('tenant_id')`
 3. Agregar política: "Set Query Parameter"
-   - Nombre: `version`
-   - Valor: `v1`
+    - Nombre: `version`
+    - Valor: `v1`
 4. Política "Route Request": redirigir llamadas de TEST a sandbox:
    ```
    Backend service URL: 
@@ -1208,26 +1208,26 @@ Crear un agente conversacional funcional en Copilot Studio que resuelve consulta
 #### Actividad 15.1: Crear el agente base
 1. copilotstudio.microsoft.com → Crear → Nuevo agente
 2. Configuración inicial:
-   - Nombre: `Asistente IT SIT`
-   - Descripción: "Ayudo con solicitudes de soporte técnico, consultas de estado y escalamiento"
-   - Instrucciones: "Eres un asistente amigable de soporte IT. Respondes en español. Si no puedes resolver la consulta, ofreces escalar a un humano. No inventes información."
+    - Nombre: `Asistente IT SIT`
+    - Descripción: "Ayudo con solicitudes de soporte técnico, consultas de estado y escalamiento"
+    - Instrucciones: "Eres un asistente amigable de soporte IT. Respondes en español. Si no puedes resolver la consulta, ofreces escalar a un humano. No inventes información."
 3. Conectar Knowledge Source:
-   - Agregar → SharePoint → URL del sitio de documentación técnica
-   - Esto habilita Respuestas Generativas automáticas
+    - Agregar → SharePoint → URL del sitio de documentación técnica
+    - Esto habilita Respuestas Generativas automáticas
 
 #### Actividad 15.2: Topic — Consultar estado de solicitud
 1. Topics → Nuevo topic → En blanco
 2. Nombre: `Consultar Estado Solicitud`
 3. Trigger phrases (mínimo 8):
    ```
-   - ¿Cuál es el estado de mi solicitud?
-   - quiero saber mi solicitud
-   - cómo va mi ticket
-   - estado de mi caso
-   - revisar mi solicitud número
-   - buscar mi ticket
-   - mi solicitud está lista
-   - ¿ya resolvieron mi caso?
+    - ¿Cuál es el estado de mi solicitud?
+    - quiero saber mi solicitud
+    - cómo va mi ticket
+    - estado de mi caso
+    - revisar mi solicitud número
+    - buscar mi ticket
+    - mi solicitud está lista
+    - ¿ya resolvieron mi caso?
    ```
 
 4. Nodo: **Mensaje**
@@ -1236,19 +1236,19 @@ Crear un agente conversacional funcional en Copilot Studio que resuelve consulta
    ```
 
 5. Nodo: **Pregunta** — Variable: `varNumeroSolicitud`
-   - Tipo de entidad: Número (o crear entidad personalizada con patrón regex `SOL-\d{5}`)
-   - Texto: "¿Cuál es el número de tu solicitud? (Ejemplo: SOL-00123)"
-   - Variable se guardará como: `Topic.NumeroSolicitud`
+    - Tipo de entidad: Número (o crear entidad personalizada con patrón regex `SOL-\d{5}`)
+    - Texto: "¿Cuál es el número de tu solicitud? (Ejemplo: SOL-00123)"
+    - Variable se guardará como: `Topic.NumeroSolicitud`
 
 6. Nodo: **Acción** → Power Automate → seleccionar flujo `ObtenerEstadoSolicitud`
-   - Input al flujo: `numeroSolicitud` = `Topic.NumeroSolicitud`
-   - Output del flujo: `Topic.EstadoSolicitud`, `Topic.FechaUltimaActualizacion`
+    - Input al flujo: `numeroSolicitud` = `Topic.NumeroSolicitud`
+    - Output del flujo: `Topic.EstadoSolicitud`, `Topic.FechaUltimaActualizacion`
 
 7. Nodo: **Condición**
-   - Si `Topic.EstadoSolicitud` está vacío:
+    - Si `Topic.EstadoSolicitud` está vacío:
      - **Mensaje:** "No encontré una solicitud con ese número. ¿Podrías verificar el número?"
      - → Redireccionar a este mismo topic (nodo de pregunta)
-   - De lo contrario:
+    - De lo contrario:
      - **Mensaje con variables:**
        ```
        Tu solicitud **{Topic.NumeroSolicitud}** está en estado: **{Topic.EstadoSolicitud}**
@@ -1258,9 +1258,9 @@ Crear un agente conversacional funcional en Copilot Studio que resuelve consulta
        ```
 
 8. Nodo: **Opciones rápidas:**
-   - "Escalar al equipo" → redirigir a topic `Escalar Solicitud`
-   - "Cancelar solicitud" → redirigir a topic `Cancelar Solicitud`
-   - "No, gracias" → nodo fin de conversación
+    - "Escalar al equipo" → redirigir a topic `Escalar Solicitud`
+    - "Cancelar solicitud" → redirigir a topic `Cancelar Solicitud`
+    - "No, gracias" → nodo fin de conversación
 
 #### Actividad 15.3: Entidad personalizada — Categorías IT
 1. Entidades → Nueva entidad → Lista cerrada
@@ -1290,8 +1290,8 @@ Crear un agente conversacional funcional en Copilot Studio que resuelve consulta
    Top: 1
    ```
 4. Condition: `length(outputs('List_rows')?['body/value'])` mayor que 0
-   - True: Set variable con datos del primer resultado
-   - False: Set variable estado = "" (vacío)
+    - True: Set variable con datos del primer resultado
+    - False: Set variable estado = "" (vacío)
 5. Return values: 
    ```
    estado: if(empty(variables('varRegistro')), '', variables('varRegistro')?['sit_estado@OData.Community.Display.V1.FormattedValue'])
@@ -1304,10 +1304,10 @@ Crear un agente conversacional funcional en Copilot Studio que resuelve consulta
 3. Desplegar para: solo yo (prueba) → luego toda la organización
 4. En Teams: buscar el bot por nombre y probarlo
 5. Probar con frases del trigger y verificar que el bot:
-   - Responde a variaciones de las trigger phrases
-   - Pide el número de solicitud si no se proporcionó
-   - Consulta Dataverse vía Power Automate
-   - Muestra el estado correctamente
+    - Responde a variaciones de las trigger phrases
+    - Pide el número de solicitud si no se proporcionó
+    - Consulta Dataverse vía Power Automate
+    - Muestra el estado correctamente
 
 ### 💼 Caso Real de Negocio
 **Empresa:** Empresa de 800 empleados con mesa de ayuda IT sobrecargada  
@@ -1364,43 +1364,43 @@ Implementar una estrategia de ambientes múltiples (DEV → TEST → UAT → PRO
 
 #### Actividad 16.1: Estrategia de ambientes
 1. Admin Center → Ambientes → Nuevo ambiente por cada capa:
-   - `SIT-DEV`: Sandbox, región US o Latam, 1GB
-   - `SIT-TEST`: Sandbox, misma región
-   - `SIT-UAT`: Sandbox
-   - `SIT-PROD`: Producción
+    - `SIT-DEV`: Sandbox, región US o Latam, 1GB
+    - `SIT-TEST`: Sandbox, misma región
+    - `SIT-UAT`: Sandbox
+    - `SIT-PROD`: Producción
 
 2. Configurar cada ambiente:
-   - Nombre de publisher: `SIT Consulting`
-   - Prefijo: `sit`
-   - Versión inicial de la solución: `1.0.0.0`
+    - Nombre de publisher: `SIT Consulting`
+    - Prefijo: `sit`
+    - Versión inicial de la solución: `1.0.0.0`
 
 3. Crear la solución base en DEV:
-   - make.powerapps.com (en entorno DEV) → Soluciones → Nueva
-   - Nombre: `SIT Gestión de Proyectos`
-   - Publisher: SIT Consulting (prefijo: sit)
-   - Versión: `1.0.0.0`
+    - make.powerapps.com (en entorno DEV) → Soluciones → Nueva
+    - Nombre: `SIT Gestión de Proyectos`
+    - Publisher: SIT Consulting (prefijo: sit)
+    - Versión: `1.0.0.0`
 
 #### Actividad 16.2: Connection References y Environment Variables
 1. **Connection Reference** para Dataverse:
-   - En la solución → Agregar existente → Referencia de conexión
-   - Nombre: `CR_SIT_Dataverse_Principal`
-   - Conector: Microsoft Dataverse
+    - En la solución → Agregar existente → Referencia de conexión
+    - Nombre: `CR_SIT_Dataverse_Principal`
+    - Conector: Microsoft Dataverse
    
 2. **Environment Variables:**
-   - En la solución → Nuevo → Variable de entorno
-   - `sit_EmailNotificaciones`: tipo Texto, valor DEV: `dev-notif@empresa.com`
-   - `sit_UrlPortalEmpleados`: tipo Texto, valor: `https://dev-portal.empresa.com`
-   - `sit_MaximoAprobacionAutomatica`: tipo Número decimal, valor: `5000`
-   - `sit_ModoDebug`: tipo Boolean, valor: `true`
+    - En la solución → Nuevo → Variable de entorno
+    - `sit_EmailNotificaciones`: tipo Texto, valor DEV: `dev-notif@empresa.com`
+    - `sit_UrlPortalEmpleados`: tipo Texto, valor: `https://dev-portal.empresa.com`
+    - `sit_MaximoAprobacionAutomatica`: tipo Número decimal, valor: `5000`
+    - `sit_ModoDebug`: tipo Boolean, valor: `true`
 
 3. Usar Environment Variables en flujos:
-   - En Power Automate → Acción → Obtener valor de variable de entorno
-   - Seleccionar `sit_EmailNotificaciones`
-   - Usar el valor en el campo "To" del correo
+    - En Power Automate → Acción → Obtener valor de variable de entorno
+    - Seleccionar `sit_EmailNotificaciones`
+    - Usar el valor en el campo "To" del correo
 
 4. Al importar en TEST/PROD: las variables de entorno deben tener valores propios:
-   - Importar solución → paso de "Connection References" → configurar cada conexión
-   - Paso de "Environment Variables" → ingresar valores de TEST/PROD
+    - Importar solución → paso de "Connection References" → configurar cada conexión
+    - Paso de "Environment Variables" → ingresar valores de TEST/PROD
 
 #### Actividad 16.3: Security Roles personalizados
 1. make.powerapps.com → Configuración → Seguridad → Roles de seguridad → Nuevo
@@ -1432,34 +1432,34 @@ Implementar una estrategia de ambientes múltiples (DEV → TEST → UAT → PRO
    ```
 
 4. Asignar rol a usuario:
-   - Configuración → Seguridad → Usuarios → seleccionar usuario → Administrar roles
+    - Configuración → Seguridad → Usuarios → seleccionar usuario → Administrar roles
 
 #### Actividad 16.4: DLP Policy
 1. Admin Center → Políticas → Directivas de datos → Nueva directiva
 2. Nombre: `Política Producción SIT`
 3. Ambientes: seleccionar `SIT-PROD` (y UAT)
 4. Clasificar conectores:
-   - **Business (Negocio):** Microsoft Dataverse, SharePoint, Office 365, Teams, Outlook
-   - **Non-Business:** Twitter, Facebook, Gmail, Dropbox
-   - **Blocked:** HTTP (genérico), RSS, todos los conectores de redes sociales externas
+    - **Business (Negocio):** Microsoft Dataverse, SharePoint, Office 365, Teams, Outlook
+    - **Non-Business:** Twitter, Facebook, Gmail, Dropbox
+    - **Blocked:** HTTP (genérico), RSS, todos los conectores de redes sociales externas
 5. Guardar → la política se aplica en minutos
 6. Verificar: intentar crear flujo con conector de Gmail en PROD → debe ser bloqueado
 
 #### Actividad 16.5: Exportar e importar solución
 1. En DEV → Solución → Exportar:
-   - Versión: `1.0.1.0`
-   - Tipo: **Administrada** (para TEST/PROD)
-   - Descargar el .zip
+    - Versión: `1.0.1.0`
+    - Tipo: **Administrada** (para TEST/PROD)
+    - Descargar el .zip
 
 2. En TEST → Importar:
-   - Importar archivo .zip
-   - Seguir wizard: configurar Connection References, Environment Variables
-   - Elegir: "Actualizar" si ya existe, "Crear" si es primera vez
+    - Importar archivo .zip
+    - Seguir wizard: configurar Connection References, Environment Variables
+    - Elegir: "Actualizar" si ya existe, "Crear" si es primera vez
 
 3. Verificar en TEST:
-   - La app aparece como Managed (ícono de candado — no editable)
-   - Los flujos usan las Connection References del ambiente TEST
-   - Las Environment Variables tienen los valores de TEST
+    - La app aparece como Managed (ícono de candado — no editable)
+    - Los flujos usan las Connection References del ambiente TEST
+    - Las Environment Variables tienen los valores de TEST
 
 ### 💼 Caso Real de Negocio
 **Empresa:** Firma de consultoría que vende soluciones Power Platform a clientes  
@@ -1554,11 +1554,11 @@ Business Rules para Oportunidad:
 #### Actividad 17.2: Canvas App — Gestión de Oportunidades
 1. Importar componentes de la SIT Component Library (Módulo 10)
 2. Pantallas de la app:
-   - **Home:** KPIs con `cmpStatCard` (Total pipeline, Oportunidades esta semana, Tasa de cierre)
-   - **Lista Oportunidades:** Gallery con `cmpSearchBox` para filtrado, filtro por etapa
-   - **Detalle Oportunidad:** formulario de edición con secciones colapsables
-   - **Nueva Oportunidad:** wizard de 3 pasos
-   - **Pipeline Kanban:** Gallery horizontal con columnas por etapa
+    - **Home:** KPIs con `cmpStatCard` (Total pipeline, Oportunidades esta semana, Tasa de cierre)
+    - **Lista Oportunidades:** Gallery con `cmpSearchBox` para filtrado, filtro por etapa
+    - **Detalle Oportunidad:** formulario de edición con secciones colapsables
+    - **Nueva Oportunidad:** wizard de 3 pasos
+    - **Pipeline Kanban:** Gallery horizontal con columnas por etapa
 
 3. Implementar Kanban simple:
    ```js
@@ -1606,16 +1606,16 @@ Output: emailAprobador (String)
 1. Trigger: When a row is added/modified (Propuesta, sit_estado = "En Revisión")
 2. Llamar Child Flow con monto y tipo de cliente
 3. Scope Try:
-   - Enviar Approval (Start and wait)
-   - Parallel: notificar Teams al vendedor que "está en revisión"
+    - Enviar Approval (Start and wait)
+    - Parallel: notificar Teams al vendedor que "está en revisión"
 4. If Approved:
-   - Patch Propuesta: sit_estado = "Aprobada"
-   - Parallel Branch 1: Email al cliente con resumen
-   - Parallel Branch 2: Crear tarea de seguimiento en Dataverse
-   - Parallel Branch 3: Notificación Teams al vendedor
+    - Patch Propuesta: sit_estado = "Aprobada"
+    - Parallel Branch 1: Email al cliente con resumen
+    - Parallel Branch 2: Crear tarea de seguimiento en Dataverse
+    - Parallel Branch 3: Notificación Teams al vendedor
 5. If Rejected:
-   - Patch: sit_estado = "Rechazada", guardar comments
-   - Email al vendedor con retroalimentación
+    - Patch: sit_estado = "Rechazada", guardar comments
+    - Email al vendedor con retroalimentación
 6. Scope Catch: log de error en SharePoint
 
 #### Actividad 17.4: Power BI — Dashboard Pipeline Comercial
@@ -1677,13 +1677,13 @@ Mensaje:
 
 #### Actividad 17.6: ALM — Empaquetar y desplegar
 1. Agregar todos los componentes a la solución `SIT CRM Lite`:
-   - Tablas Dataverse (Oportunidad, Propuesta, Competidor)
-   - Canvas App
-   - Model-Driven App
-   - Flujos (principal + child flow)
-   - Connection References
-   - Environment Variables
-   - Custom Connector (si aplica)
+    - Tablas Dataverse (Oportunidad, Propuesta, Competidor)
+    - Canvas App
+    - Model-Driven App
+    - Flujos (principal + child flow)
+    - Connection References
+    - Environment Variables
+    - Custom Connector (si aplica)
 2. Verificar dependencias: Solución → Comprobación de solución
 3. Exportar versión `1.0.0.0` como Managed
 4. Importar en TEST → configurar Connection References y Environment Variables

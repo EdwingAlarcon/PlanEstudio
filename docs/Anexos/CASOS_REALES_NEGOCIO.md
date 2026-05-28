@@ -20,19 +20,19 @@
 Stack: Power Pages + Dataverse + Power Automate + AI Builder + Plugin C#
 
 1. Portal Power Pages para solicitud digital del socio
-   - Formulario con validación automática de datos
-   - Upload de documentos (comprobante de ingresos, ID)
-   - AI Builder extrae ingresos automáticamente del documento
+    - Formulario con validación automática de datos
+    - Upload de documentos (comprobante de ingresos, ID)
+    - AI Builder extrae ingresos automáticamente del documento
 
 2. Plugin C# Pre-Create valida:
-   - Historial del socio en Dataverse (pagos anteriores)
-   - Score calculado por modelo de predicción AI Builder
-   - Reglas automáticas: si score > 750 → auto-aprobación
+    - Historial del socio en Dataverse (pagos anteriores)
+    - Score calculado por modelo de predicción AI Builder
+    - Reglas automáticas: si score > 750 → auto-aprobación
 
 3. Power Automate con flujo de aprobación escalado:
-   - Auto-aprobación: < 5 minutos (70% de casos)
-   - Aprobación analista: analista recibe toda la info preparada
-   - Aprobación gerencia: solo si monto > $50,000
+    - Auto-aprobación: < 5 minutos (70% de casos)
+    - Aprobación analista: analista recibe toda la info preparada
+    - Aprobación gerencia: solo si monto > $50,000
 
 4. Notificaciones automáticas en cada cambio de estado
 5. Dashboard Power BI para monitoreo en tiempo real
@@ -58,11 +58,11 @@ Event-driven con Azure Event Grid + AI Builder + D365 Customer Service
 
 1. Cada transacción dispara evento a Event Grid
 2. Azure Function evalúa el patrón con modelo AI Builder:
-   - Patrones anómalos: transacción en país diferente, monto inusual, hora inusual
+    - Patrones anómalos: transacción en país diferente, monto inusual, hora inusual
 3. Si score de fraude > 0.85:
-   - Bloquear tarjeta vía API del core bancario
-   - Crear caso en D365 Customer Service (prioridad urgente)
-   - Push notification al cliente via Copilot Studio (Teams/WhatsApp)
+    - Bloquear tarjeta vía API del core bancario
+    - Crear caso en D365 Customer Service (prioridad urgente)
+    - Push notification al cliente via Copilot Studio (Teams/WhatsApp)
 4. Power BI en tiempo real para el equipo de fraude
 ```
 
@@ -84,18 +84,18 @@ Event-driven con Azure Event Grid + AI Builder + D365 Customer Service
 Power Automate Desktop (RPA) + Power Automate Cloud + Dataverse
 
 1. RPA extrae los movimientos del portal bancario (sin API)
-   - Power Automate Desktop automatiza el login, descarga del CSV
-   - Programado cada noche a las 11PM
+    - Power Automate Desktop automatiza el login, descarga del CSV
+    - Programado cada noche a las 11PM
 
 2. Power Automate Cloud procesa el CSV:
-   - Parse del archivo → identificar cada transacción
-   - Buscar la factura correspondiente en Dataverse
-   - Marcar como conciliada si el monto y referencia coinciden
-   - Crear "Excepción" si no hay match
+    - Parse del archivo → identificar cada transacción
+    - Buscar la factura correspondiente en Dataverse
+    - Marcar como conciliada si el monto y referencia coinciden
+    - Crear "Excepción" si no hay match
 
 3. Al día siguiente el contador solo revisa las excepciones:
-   - Dashboard Power BI: movimientos conciliados vs excepciones
-   - Canvas App para gestionar las excepciones manualmente
+    - Dashboard Power BI: movimientos conciliados vs excepciones
+    - Canvas App para gestionar las excepciones manualmente
 
 ```
 
@@ -119,18 +119,18 @@ Power Automate Desktop (RPA) + Power Automate Cloud + Dataverse
 Canvas App (offline) + AI Builder Object Detection + D365 Field Service
 
 1. Operarios registran defectos en Canvas App (tablet en la línea):
-   - Funciona offline (sin WiFi en el piso de planta)
-   - Fotos de defectos → AI Builder Object Detection clasifica tipo de defecto
-   - Se sincroniza automáticamente cuando hay conexión
+    - Funciona offline (sin WiFi en el piso de planta)
+    - Fotos de defectos → AI Builder Object Detection clasifica tipo de defecto
+    - Se sincroniza automáticamente cuando hay conexión
 
 2. Plugin C# Pre-Create analiza si es defecto crítico:
-   - Si es crítico → envía alerta inmediata al supervisor vía Teams
-   - Crea orden de mantenimiento en D365 Field Service automáticamente
+    - Si es crítico → envía alerta inmediata al supervisor vía Teams
+    - Crea orden de mantenimiento en D365 Field Service automáticamente
 
 3. Power BI en tiempo real para gerencia:
-   - Defectos por línea, turno, tipo
-   - Pareto de causas raíz
-   - Tendencia vs objetivo de calidad
+    - Defectos por línea, turno, tipo
+    - Pareto de causas raíz
+    - Tendencia vs objetivo de calidad
 
 4. Power Automate genera reporte automático de turno
 ```
@@ -153,20 +153,20 @@ Canvas App (offline) + AI Builder Object Detection + D365 Field Service
 IoT Hub + Dataverse + D365 Field Service + AI Builder Prediction
 
 1. Sensores IoT envían telemetría a Azure IoT Hub
-   - Temperatura, vibración, presión, RPM, horas de operación
+    - Temperatura, vibración, presión, RPM, horas de operación
 
 2. Azure Stream Analytics detecta anomalías en tiempo real:
-   - Temperatura > umbral → alerta inmediata
-   - Patrón de vibración anormal → predicción de falla
+    - Temperatura > umbral → alerta inmediata
+    - Patrón de vibración anormal → predicción de falla
 
 3. Azure Function crea Order de Trabajo en D365 Field Service:
-   - Mantenimiento preventivo programado con 72h de anticipación
-   - Asigna al técnico disponible con la skill correcta
-   - Reserva las piezas de repuesto en el inventario
+    - Mantenimiento preventivo programado con 72h de anticipación
+    - Asigna al técnico disponible con la skill correcta
+    - Reserva las piezas de repuesto en el inventario
 
 4. AI Builder Prediction (entrenado con historial de 3 años):
-   - Predice probabilidad de falla en los próximos 30 días
-   - Score > 70% → genera automáticamente solicitud de mantenimiento
+    - Predice probabilidad de falla en los próximos 30 días
+    - Score > 70% → genera automáticamente solicitud de mantenimiento
 
 5. Power BI muestra salud de activos en tiempo real
 ```
@@ -189,23 +189,23 @@ IoT Hub + Dataverse + D365 Field Service + AI Builder Prediction
 Canvas App offline-capable + Dataverse + Power BI
 
 1. Canvas App para bodegueros:
-   - Escaneo de código de barras con la cámara del celular
-   - Registro de entradas, salidas, traslados
-   - Funciona offline → sincroniza cuando hay conexión WiFi
+    - Escaneo de código de barras con la cámara del celular
+    - Registro de entradas, salidas, traslados
+    - Funciona offline → sincroniza cuando hay conexión WiFi
 
 2. Dataverse como sistema de inventario:
-   - Stock en tiempo real por bodega
-   - Historial completo de movimientos
-   - Reglas de negocio: stock mínimo → alerta automática de reorden
+    - Stock en tiempo real por bodega
+    - Historial completo de movimientos
+    - Reglas de negocio: stock mínimo → alerta automática de reorden
 
 3. Power Automate:
-   - Si stock < mínimo → crear orden de compra borrador automáticamente
-   - Notificar al jefe de bodega via Teams
+    - Si stock < mínimo → crear orden de compra borrador automáticamente
+    - Notificar al jefe de bodega via Teams
 
 4. Power BI:
-   - Rotación de inventario por SKU
-   - Valor de inventario en tiempo real
-   - Productos sin movimiento en 60+ días
+    - Rotación de inventario por SKU
+    - Valor de inventario en tiempo real
+    - Productos sin movimiento en 60+ días
 ```
 
 **Resultados:**
@@ -231,22 +231,22 @@ D365 Project Operations (o tablas personalizadas) + Canvas App + Power BI + Powe
    Proyecto → Fase → Tarea → Asignación → Timesheet → Factura
 
 2. Canvas App para consultores (mobile-first):
-   - Registro de horas por proyecto/tarea (< 2 min por día)
-   - Modo offline para consultores en sitio del cliente
-   - Recordatorio automático si no ingresó horas (Power Automate, viernes 4PM)
+    - Registro de horas por proyecto/tarea (< 2 min por día)
+    - Modo offline para consultores en sitio del cliente
+    - Recordatorio automático si no ingresó horas (Power Automate, viernes 4PM)
 
 3. Model-Driven App para Project Managers:
-   - Vista completa del proyecto: avance, costos, horas reales vs estimadas
-   - BPF: Propuesta → Kick-off → Ejecución → Cierre
+    - Vista completa del proyecto: avance, costos, horas reales vs estimadas
+    - BPF: Propuesta → Kick-off → Ejecución → Cierre
 
 4. Power Automate:
-   - Flujo de aprobación de timesheets (manager aprueba semanalmente)
-   - Generación automática de pre-factura al cerrar semana
+    - Flujo de aprobación de timesheets (manager aprueba semanalmente)
+    - Generación automática de pre-factura al cerrar semana
 
 5. Power BI para Dirección:
-   - Utilización de consultores por proyecto
-   - Margen por proyecto en tiempo real
-   - Pipeline de proyectos próximos
+    - Utilización de consultores por proyecto
+    - Margen por proyecto en tiempo real
+    - Pipeline de proyectos próximos
 ```
 
 **Resultados:**
@@ -270,20 +270,20 @@ Power Pages + Dataverse + Azure AD B2C + Azure Blob Storage
    Caso (Dataverse) → Documento (referencia a Azure Blob) → Actualización (timeline)
 
 2. Portal Power Pages (Azure AD B2C para clientes):
-   - El cliente ve el estado de sus casos en tiempo real
-   - Descarga documentos (contratos, escrituras) de forma segura (SAS tokens de Azure Blob)
-   - Sube documentos requeridos directamente al expediente
-   - Timeline de actualizaciones del caso
+    - El cliente ve el estado de sus casos en tiempo real
+    - Descarga documentos (contratos, escrituras) de forma segura (SAS tokens de Azure Blob)
+    - Sube documentos requeridos directamente al expediente
+    - Timeline de actualizaciones del caso
 
 3. Model-Driven App para abogados:
-   - Vista completa del expediente
-   - Actualizar estado → portal del cliente se actualiza automáticamente
-   - Facturas y honorarios en el mismo sistema
+    - Vista completa del expediente
+    - Actualizar estado → portal del cliente se actualiza automáticamente
+    - Facturas y honorarios en el mismo sistema
 
 4. Power Automate:
-   - Cuando el abogado actualiza el estado → email automático al cliente
-   - Recordatorio de documentos pendientes cada 7 días
-   - Alerta de fechas de audiencia (2 días antes)
+    - Cuando el abogado actualiza el estado → email automático al cliente
+    - Recordatorio de documentos pendientes cada 7 días
+    - Alerta de fechas de audiencia (2 días antes)
 ```
 
 **Resultados:**
@@ -304,21 +304,21 @@ Power Pages + Dataverse + Azure AD B2C + Azure Blob Storage
 Dataverse + Power Automate + Azure OpenAI + Power Pages (extranet)
 
 1. Repositorio de propuestas en Dataverse:
-   - Biblioteca de secciones reutilizables por industria y tipo de proyecto
-   - Precios actualizados centralmente (una fuente de verdad)
+    - Biblioteca de secciones reutilizables por industria y tipo de proyecto
+    - Precios actualizados centralmente (una fuente de verdad)
 
 2. Canvas App "Generador de Propuestas":
-   - Seleccionar cliente, tipo de proyecto, servicios incluidos
-   - Azure OpenAI personaliza el texto según el perfil del cliente
-   - Vista previa de la propuesta en tiempo real
+    - Seleccionar cliente, tipo de proyecto, servicios incluidos
+    - Azure OpenAI personaliza el texto según el perfil del cliente
+    - Vista previa de la propuesta en tiempo real
 
 3. Power Automate genera el documento Word/PDF:
-   - Usando plantilla con marcadores de posición
-   - Datos del cliente, precios, alcance insertados automáticamente
+    - Usando plantilla con marcadores de posición
+    - Datos del cliente, precios, alcance insertados automáticamente
 
 4. Power Pages extranet:
-   - El cliente recibe un link seguro para ver y aprobar la propuesta online
-   - Firma digital integrada (DocuSign o Adobe Sign vía conector)
+    - El cliente recibe un link seguro para ver y aprobar la propuesta online
+    - Firma digital integrada (DocuSign o Adobe Sign vía conector)
 
 5. Si el cliente aprueba → Power Automate crea oportunidad en D365 Sales
 ```
@@ -343,26 +343,26 @@ Dataverse + Power Automate + Azure OpenAI + Power Pages (extranet)
 D365 Customer Service + Canvas App + Dataverse + Copilot Studio + Power BI
 
 1. Perfil 360° del cliente en Dataverse:
-   - Historial de compras online + físicas unificado
-   - Preferencias y tallas guardadas
-   - Puntos de fidelidad calculados automáticamente
+    - Historial de compras online + físicas unificado
+    - Preferencias y tallas guardadas
+    - Puntos de fidelidad calculados automáticamente
 
 2. Canvas App para vendedores en tienda:
-   - Buscar cliente por nombre/email → ver perfil completo
-   - Consultar stock en tiempo real (integración ERP)
-   - Solicitar traslado desde otra tienda si no hay stock
+    - Buscar cliente por nombre/email → ver perfil completo
+    - Consultar stock en tiempo real (integración ERP)
+    - Solicitar traslado desde otra tienda si no hay stock
 
 3. D365 Customer Service para soporte omnichannel:
-   - Email, chat web, WhatsApp → todos en un solo panel
-   - El agente ve el historial completo antes de responder
+    - Email, chat web, WhatsApp → todos en un solo panel
+    - El agente ve el historial completo antes de responder
 
 4. Copilot Studio:
-   - Bot en WhatsApp: consulta de estado de pedido, guía de tallas
-   - Bot en el sitio web: preguntas frecuentes + escalamiento a agente
+    - Bot en WhatsApp: consulta de estado de pedido, guía de tallas
+    - Bot en el sitio web: preguntas frecuentes + escalamiento a agente
 
 5. Power BI:
-   - Dashboard de ventas por canal, tienda, vendedor
-   - Análisis de conversión online vs física
+    - Dashboard de ventas por canal, tienda, vendedor
+    - Análisis de conversión online vs física
 ```
 
 **Resultados:**
@@ -383,25 +383,25 @@ D365 Customer Service + Canvas App + Dataverse + Copilot Studio + Power BI
 Canvas App offline + Dataverse + Power Automate + Power BI
 
 1. Canvas App mobile-first para promotores:
-   - Check-in con GPS (registro de ubicación y tiempo de visita)
-   - Fotografiar exhibición del producto
-   - Registrar precios de competencia
-   - Reportar stock faltante o dañado
-   - Funciona sin internet → sincroniza al salir de la tienda
+    - Check-in con GPS (registro de ubicación y tiempo de visita)
+    - Fotografiar exhibición del producto
+    - Registrar precios de competencia
+    - Reportar stock faltante o dañado
+    - Funciona sin internet → sincroniza al salir de la tienda
 
 2. AI Builder Object Detection:
-   - Analiza la foto de la exhibición
-   - Detecta si todos los SKUs están presentes
-   - Detecta espacio de anaquel correcto
+    - Analiza la foto de la exhibición
+    - Detecta si todos los SKUs están presentes
+    - Detecta espacio de anaquel correcto
 
 3. Power BI tiempo real para supervisores:
-   - Mapa de cobertura de visitas del día
-   - Alertas de tiendas no visitadas según ruta planificada
-   - Comparativo de precios vs competencia
+    - Mapa de cobertura de visitas del día
+    - Alertas de tiendas no visitadas según ruta planificada
+    - Comparativo de precios vs competencia
 
 4. Power Automate:
-   - Si se detecta producto agotado → notificar al distribuidor de zona
-   - Reporte automático diario por supervisor
+    - Si se detecta producto agotado → notificar al distribuidor de zona
+    - Reporte automático diario por supervisor
 ```
 
 **Resultados:**
@@ -424,30 +424,30 @@ Canvas App offline + Dataverse + Power Automate + Power BI
 D365 Customer Service + Power Pages + Dataverse + Canvas App + Copilot Studio
 
 1. Perfil único del paciente en Dataverse:
-   - Historia clínica básica unificada entre sedes
-   - Historial de citas, diagnósticos, recetas (no reemplaza sistema clínico, lo complementa)
-   - Alergias y medicamentos actuales
+    - Historia clínica básica unificada entre sedes
+    - Historial de citas, diagnósticos, recetas (no reemplaza sistema clínico, lo complementa)
+    - Alergias y medicamentos actuales
 
 2. Power Pages para pacientes:
-   - Azure AD B2C para registro y login
-   - Agendar cita sin llamar (24/7)
-   - Ver resultados de exámenes
-   - Solicitar reposición de medicamentos crónicos
+    - Azure AD B2C para registro y login
+    - Agendar cita sin llamar (24/7)
+    - Ver resultados de exámenes
+    - Solicitar reposición de medicamentos crónicos
 
 3. Copilot Studio (WhatsApp):
-   - "Quiero una cita con cardiología para la próxima semana"
-   - El bot consulta disponibilidad en tiempo real y agenda
-   - Recordatorio automático 24h antes
+    - "Quiero una cita con cardiología para la próxima semana"
+    - El bot consulta disponibilidad en tiempo real y agenda
+    - Recordatorio automático 24h antes
 
 4. Canvas App para recepcionistas:
-   - Check-in digital del paciente (escaneo de ID)
-   - Vista de citas del día por médico
-   - Registro de llegada y tiempo de espera
+    - Check-in digital del paciente (escaneo de ID)
+    - Vista de citas del día por médico
+    - Registro de llegada y tiempo de espera
 
 5. Power BI para dirección médica:
-   - Ocupación por especialidad y sede
-   - Tiempo de espera promedio
-   - No-shows y cancelaciones
+    - Ocupación por especialidad y sede
+    - Tiempo de espera promedio
+    - No-shows y cancelaciones
 ```
 
 **Resultados:**
@@ -470,27 +470,27 @@ Dataverse (CMK) + Canvas App + Power Automate + Power BI con RLS
 NOTA: Los datos de pacientes son extremadamente sensibles (HIPAA + regulación local)
 
 1. Dataverse con CMK (Customer-Managed Keys):
-   - Todos los datos del ensayo cifrados con clave del cliente
-   - Auditoría completa de cada acceso y cambio
+    - Todos los datos del ensayo cifrados con clave del cliente
+    - Auditoría completa de cada acceso y cambio
 
 2. Canvas App para investigadores en sitio:
-   - e-CRF (electronic Case Report Form) digital
-   - Validaciones inmediatas (lógica de skip patterns)
-   - Solo campos autorizados por protocolo visibles por rol
+    - e-CRF (electronic Case Report Form) digital
+    - Validaciones inmediatas (lógica de skip patterns)
+    - Solo campos autorizados por protocolo visibles por rol
 
 3. Model-Driven App para sponsors y monitores:
-   - Vista de queries (preguntas sobre inconsistencias de datos)
-   - Proceso de resolución de queries
+    - Vista de queries (preguntas sobre inconsistencias de datos)
+    - Proceso de resolución de queries
 
 4. Power BI con RLS:
-   - Sponsor ve solo sus estudios
-   - Investigador de sitio solo ve sus pacientes
-   - Monitor ve el sitio que supervisa
-   - Regulador (FDA/INVIMA) ve solo el resumen de seguridad
+    - Sponsor ve solo sus estudios
+    - Investigador de sitio solo ve sus pacientes
+    - Monitor ve el sitio que supervisa
+    - Regulador (FDA/INVIMA) ve solo el resumen de seguridad
 
 5. Power Automate:
-   - Alerta de evento adverso serio → notificación en < 24h (requerimiento regulatorio)
-   - Vencimiento de documentos → recordatorio 30 días antes
+    - Alerta de evento adverso serio → notificación en < 24h (requerimiento regulatorio)
+    - Vencimiento de documentos → recordatorio 30 días antes
 ```
 
 **Resultados:**
@@ -513,26 +513,26 @@ NOTA: Los datos de pacientes son extremadamente sensibles (HIPAA + regulación l
 Power Pages + D365 Customer Service + Dataverse + Power Automate + Power BI
 
 1. Portal ciudadano (Power Pages, sin autenticación):
-   - Radicación online 24/7
-   - Adjuntar documentos
-   - Número de radicado inmediato
-   - Consulta del estado por número de radicado
+    - Radicación online 24/7
+    - Adjuntar documentos
+    - Número de radicado inmediato
+    - Consulta del estado por número de radicado
 
 2. D365 Customer Service para funcionarios:
-   - Bandeja de trabajo con SLAs configurados (15 días hábiles)
-   - Routing a la dependencia correcta según tipo de PQRS
-   - Templates de respuesta
+    - Bandeja de trabajo con SLAs configurados (15 días hábiles)
+    - Routing a la dependencia correcta según tipo de PQRS
+    - Templates de respuesta
 
 3. Power Automate:
-   - Alerta 3 días antes de vencer el plazo legal
-   - Si vence → escalamiento automático al supervisor
-   - Respuesta oficial enviada por email al ciudadano
-   - Si requiere firma → integración con firma digital oficial
+    - Alerta 3 días antes de vencer el plazo legal
+    - Si vence → escalamiento automático al supervisor
+    - Respuesta oficial enviada por email al ciudadano
+    - Si requiere firma → integración con firma digital oficial
 
 4. Power BI para control interno:
-   - PQRS por tipo, dependencia, estado
-   - Indicadores de cumplimiento de plazos
-   - Temas más recurrentes (insumo para mejoras de servicio)
+    - PQRS por tipo, dependencia, estado
+    - Indicadores de cumplimiento de plazos
+    - Temas más recurrentes (insumo para mejoras de servicio)
 ```
 
 **Resultados:**
@@ -556,20 +556,20 @@ Dataverse + Model-Driven App + Power Automate + Power BI
    Contrato → Póliza → Acta → Pago → Modificación
 
 2. Model-Driven App para supervisores de contrato:
-   - Vista de todos los contratos con semáforo (vigente/por vencer/vencido)
-   - Registro de actas de interventoría con firma digital
-   - Historial completo de modificaciones (adiciones, prórrogas)
+    - Vista de todos los contratos con semáforo (vigente/por vencer/vencido)
+    - Registro de actas de interventoría con firma digital
+    - Historial completo de modificaciones (adiciones, prórrogas)
 
 3. Power Automate:
-   - 60 días antes de vencer contrato → alerta al supervisor
-   - 30 días antes → alerta a Director
-   - 15 días antes → alerta al Director Jurídico y Representante Legal
-   - Póliza por vencer → notificación a contratista
+    - 60 días antes de vencer contrato → alerta al supervisor
+    - 30 días antes → alerta a Director
+    - 15 días antes → alerta al Director Jurídico y Representante Legal
+    - Póliza por vencer → notificación a contratista
 
 4. Power BI:
-   - Estado de ejecución presupuestal vs contratos
-   - Alertas de contratos con ejecución < 50% faltando < 30% del plazo
-   - Mapa de riesgo contractual
+    - Estado de ejecución presupuestal vs contratos
+    - Alertas de contratos con ejecución < 50% faltando < 30% del plazo
+    - Mapa de riesgo contractual
 ```
 
 **Resultados:**
@@ -592,29 +592,29 @@ Dataverse + Model-Driven App + Power Automate + Power BI
 Power Pages + Dataverse + Power Automate + AI Builder + Canvas App
 
 1. Portal de admisiones (Power Pages + Azure AD B2C):
-   - Formulario online completo con carga de documentos
-   - Pago de derechos de admisión integrado (pasarela de pagos)
-   - Seguimiento del estado en tiempo real
-   - Descarga de carta de admisión/rechazo
+    - Formulario online completo con carga de documentos
+    - Pago de derechos de admisión integrado (pasarela de pagos)
+    - Seguimiento del estado en tiempo real
+    - Descarga de carta de admisión/rechazo
 
 2. AI Builder Document Processing:
-   - Extrae datos del diploma de bachillerato automáticamente
-   - Verifica que el promedio cumple el mínimo requerido
-   - Valida que los documentos son legibles
+    - Extrae datos del diploma de bachillerato automáticamente
+    - Verifica que el promedio cumple el mínimo requerido
+    - Valida que los documentos son legibles
 
 3. Proceso automatizado de evaluación:
-   - Checklist automático de documentos completos
-   - Cálculo automático de puntaje con fórmula definida
-   - Si puntaje > mínimo → carta de admisión condicional automática
+    - Checklist automático de documentos completos
+    - Cálculo automático de puntaje con fórmula definida
+    - Si puntaje > mínimo → carta de admisión condicional automática
 
 4. Canvas App para comité de admisiones:
-   - Casos que requieren evaluación manual
-   - Votación digital del comité con registro de decisión
+    - Casos que requieren evaluación manual
+    - Votación digital del comité con registro de decisión
 
 5. Power Automate:
-   - Notificaciones de estado al aspirante
-   - Recordatorio de documentos faltantes
-   - Generación automática de carta oficial (Word + firma digital)
+    - Notificaciones de estado al aspirante
+    - Recordatorio de documentos faltantes
+    - Generación automática de carta oficial (Word + firma digital)
 ```
 
 **Resultados:**
@@ -637,24 +637,24 @@ Power Pages + Dataverse + Power Automate + AI Builder + Canvas App
 D365 Field Service + Canvas App offline + Azure Maps + Power BI
 
 1. Migrar activos al Dataverse de D365 Field Service:
-   - 450,000 activos georreferenciados con coordenadas GPS
-   - Historial completo de mantenimientos por activo
+    - 450,000 activos georreferenciados con coordenadas GPS
+    - Historial completo de mantenimientos por activo
 
 2. Canvas App para técnicos en campo:
-   - Ver activos cercanos en mapa (Azure Maps)
-   - Escanear QR del activo → ver historial completo
-   - Registrar trabajo realizado con fotos
-   - Funciona sin internet (zonas rurales sin cobertura)
+    - Ver activos cercanos en mapa (Azure Maps)
+    - Escanear QR del activo → ver historial completo
+    - Registrar trabajo realizado con fotos
+    - Funciona sin internet (zonas rurales sin cobertura)
 
 3. D365 Field Service:
-   - Órdenes de trabajo generadas automáticamente desde el SCADA
-   - Programación optimizada de técnicos con routing automático
-   - SLAs por tipo de avería (crítica: 4h, normal: 24h, planificada: 72h)
+    - Órdenes de trabajo generadas automáticamente desde el SCADA
+    - Programación optimizada de técnicos con routing automático
+    - SLAs por tipo de avería (crítica: 4h, normal: 24h, planificada: 72h)
 
 4. Power BI geoespacial:
-   - Mapa de calor de averías por zona
-   - Tiempo de restauración promedio por brigada
-   - Activos con más de X mantenimientos en el año → candidatos a reemplazo
+    - Mapa de calor de averías por zona
+    - Tiempo de restauración promedio por brigada
+    - Activos con más de X mantenimientos en el año → candidatos a reemplazo
 ```
 
 **Resultados:**

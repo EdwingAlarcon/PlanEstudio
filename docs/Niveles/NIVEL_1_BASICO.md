@@ -61,32 +61,35 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 #### 👨‍💻 Actividades Prácticas
 
 **Práctica 1.1: Configurar Entorno de Desarrollo**
+
 1. Crear cuenta Microsoft 365 Developer (gratuita)
-   - Acceder a https://developer.microsoft.com/microsoft-365/dev-program
-   - Suscripción gratuita por 90 días renovables
+    - Acceder a https://developer.microsoft.com/microsoft-365/dev-program
+    - Suscripción gratuita por 90 días renovables
 2. Activar trial de Dynamics 365
-   - Desde Power Platform Admin Center
-   - Seleccionar Dynamics 365 Customer Service trial
+    - Desde Power Platform Admin Center
+    - Seleccionar Dynamics 365 Customer Service trial
 3. Explorar Power Platform Admin Center
-   - Crear ambiente tipo "Developer"
-   - Configurar región (según ubicación)
-   - Habilitar Dynamics 365 apps
+    - Crear ambiente tipo "Developer"
+    - Configurar región (según ubicación)
+    - Habilitar Dynamics 365 apps
 
 **Práctica 1.2: Exploración de Componentes**
+
 1. Acceder a https://make.powerapps.com
 2. Navegar cada sección del menú lateral:
-   - Home, Create, Learn, Apps, Tables, Flows, Chatbots, AI Hub
+    - Home, Create, Learn, Apps, Tables, Flows, Chatbots, AI Hub
 3. Identificar conectores disponibles (Connectors > Premium vs Standard)
 4. Revisar plantillas predefinidas (Templates)
 
 **Práctica 1.3: Primera Exploración de Dataverse**
+
 1. Ir a "Tables" en el menú
 2. Explorar tablas estándar: Account, Contact, Email, Task
 3. Abrir tabla "Account" y revisar:
-   - Columns (columnas/campos)
-   - Relationships (relaciones)
-   - Business rules
-   - Views (vistas)
+    - Columns (columnas/campos)
+    - Relationships (relaciones)
+    - Business rules
+    - Views (vistas)
 4. Crear datos de prueba manualmente (5 registros de Account)
 
 #### 💼 Caso Real de Negocio
@@ -147,40 +150,40 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 *Caso: Sistema de Gestión de Solicitudes de TI*
 
 1. **Crear tabla "Solicitud TI"**
-   - Navegar a Tables > New table
-   - Display name: `Solicitud TI`
-   - Plural name: `Solicitudes TI`
-   - Primary column: `Título de Solicitud` (Text)
-   - Enable attachments: Sí
-   - Ownership: User or team
+    - Navegar a Tables > New table
+    - Display name: `Solicitud TI`
+    - Plural name: `Solicitudes TI`
+    - Primary column: `Título de Solicitud` (Text)
+    - Enable attachments: Sí
+    - Ownership: User or team
 
 2. **Agregar columnas personalizadas**:
    ```
-   - Descripción (Multiline text)
-   - Categoría (Choice): Hardware, Software, Red, Accesos, Otro
-   - Prioridad (Choice): Baja, Media, Alta, Crítica
-   - Estado (Choice): Nueva, En Proceso, Resuelta, Cerrada
-   - Fecha Solicitud (Date and Time)
-   - Fecha Resolución (Date Only)
-   - Solicitante (Lookup → Contact)
-   - Asignado a (Lookup → User)
+    - Descripción (Multiline text)
+    - Categoría (Choice): Hardware, Software, Red, Accesos, Otro
+    - Prioridad (Choice): Baja, Media, Alta, Crítica
+    - Estado (Choice): Nueva, En Proceso, Resuelta, Cerrada
+    - Fecha Solicitud (Date and Time)
+    - Fecha Resolución (Date Only)
+    - Solicitante (Lookup → Contact)
+    - Asignado a (Lookup → User)
    ```
 
 3. **Configurar columnas**:
-   - Marcar "Categoría" y "Estado" como Required (requeridas)
-   - Configurar valor por defecto Estado = "Nueva"
-   - Configurar valor por defecto Prioridad = "Media"
+    - Marcar "Categoría" y "Estado" como Required (requeridas)
+    - Configurar valor por defecto Estado = "Nueva"
+    - Configurar valor por defecto Prioridad = "Media"
 
 **Práctica 2.2: Establecer Relaciones**
 
 1. **Relación One-to-Many**: Contact → Solicitudes TI
-   - Una persona puede tener múltiples solicitudes
-   - Ya creada al definir columna Lookup "Solicitante"
-   - Revisar en tabla Contact > Relationships
+    - Una persona puede tener múltiples solicitudes
+    - Ya creada al definir columna Lookup "Solicitante"
+    - Revisar en tabla Contact > Relationships
 
 2. **Crear tabla "Categoría Detallada"**
-   - Columnas: Nombre, Descripción, SLA (Choice: 24h, 48h, 72h)
-   - Relación: Categoría Detallada → Solicitudes TI (One-to-Many)
+    - Columnas: Nombre, Descripción, SLA (Choice: 24h, 48h, 72h)
+    - Relación: Categoría Detallada → Solicitudes TI (One-to-Many)
 
 **Práctica 2.3: Implementar Business Rules**
 
@@ -200,14 +203,14 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 **Práctica 2.4: Crear Vistas Personalizadas**
 
 1. **Vista: "Mis Solicitudes Abiertas"**
-   - Filtro: Estado ≠ Cerrada AND Solicitante = Current User
-   - Columnas: Título, Categoría, Prioridad, Estado, Fecha Solicitud
-   - Orden: Prioridad DESC, Fecha Solicitud DESC
+    - Filtro: Estado ≠ Cerrada AND Solicitante = Current User
+    - Columnas: Título, Categoría, Prioridad, Estado, Fecha Solicitud
+    - Orden: Prioridad DESC, Fecha Solicitud DESC
 
 2. **Vista: "Solicitudes Pendientes Atención"**
-   - Filtro: Estado = Nueva OR Estado = En Proceso
-   - Columnas: Título, Solicitante, Categoría, Prioridad, Asignado a
-   - Orden: Prioridad DESC
+    - Filtro: Estado = Nueva OR Estado = En Proceso
+    - Columnas: Título, Solicitante, Categoría, Prioridad, Asignado a
+    - Orden: Prioridad DESC
 
 **Práctica 2.5: Insertar Datos de Prueba**
 
@@ -269,19 +272,19 @@ Relaciones:
 #### ⚠️ Errores Comunes
 
 1. **Error**: Crear columnas redundantes (ej: Full Name cuando existe First + Last Name)
-   - **Solución**: Usar Calculated Columns o concatenar en Power Apps
+    - **Solución**: Usar Calculated Columns o concatenar en Power Apps
 
 2. **Error**: No definir Publisher antes de crear tablas
-   - **Solución**: Crear Solution con Publisher personalizado primero
+    - **Solución**: Crear Solution con Publisher personalizado primero
 
 3. **Error**: Usar Text simple para listas desplegables
-   - **Solución**: Siempre usar Choice (mejora integridad datos)
+    - **Solución**: Siempre usar Choice (mejora integridad datos)
 
 4. **Error**: Eliminar tablas estándar o modificar columnas del sistema
-   - **Solución**: Extender con nuevas columnas, nunca modificar standard
+    - **Solución**: Extender con nuevas columnas, nunca modificar standard
 
 5. **Error**: Relaciones circulares o mal diseñadas
-   - **Solución**: Diagramar modelo antes de implementar, validar cardinalidad
+    - **Solución**: Diagramar modelo antes de implementar, validar cardinalidad
 
 #### 🧪 Criterios de Validación
 - [ ] Tabla "Solicitud TI" con mínimo 7 columnas personalizadas creada
@@ -325,14 +328,14 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 
 **Paso 2: Pantalla de Listado**
 1. Insertar Gallery (Vertical)
-   - Datasource: Solicitudes TI
-   - Template: Title, Subtitle, Body
-   - Title: `ThisItem.Título`
-   - Subtitle: `ThisItem.Categoría`
-   - Body: `Text(ThisItem.'Fecha Solicitud', "dd/MM/yyyy")`
+    - Datasource: Solicitudes TI
+    - Template: Title, Subtitle, Body
+    - Title: `ThisItem.Título`
+    - Subtitle: `ThisItem.Categoría`
+    - Body: `Text(ThisItem.'Fecha Solicitud', "dd/MM/yyyy")`
 
 2. Agregar Search Box arriba de Gallery
-   - Fórmula Items del Gallery:
+    - Fórmula Items del Gallery:
    ```javascript
    Search(
        'Solicitudes TI',
@@ -342,22 +345,22 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
    ```
 
 3. Agregar Button "Nueva Solicitud"
-   - OnSelect: `Navigate(ScreenNueva, ScreenTransition.Cover)`
+    - OnSelect: `Navigate(ScreenNueva, ScreenTransition.Cover)`
 
 **Paso 3: Pantalla de Creación**
 1. New Screen > Form
 2. Insertar Edit Form control
-   - DataSource: Solicitudes TI
-   - Item: `Defaults('Solicitudes TI')`
-   - Fields: Seleccionar Título, Descripción, Categoría, Prioridad
+    - DataSource: Solicitudes TI
+    - Item: `Defaults('Solicitudes TI')`
+    - Fields: Seleccionar Título, Descripción, Categoría, Prioridad
 
 3. Configurar botones:
-   - **Guardar Button**:
+    - **Guardar Button**:
    ```javascript
    SubmitForm(Form1);
    Navigate(ScreenInicio, ScreenTransition.UnCover)
    ```
-   - **Cancelar Button**:
+    - **Cancelar Button**:
    ```javascript
    ResetForm(Form1);
    Navigate(ScreenInicio, ScreenTransition.UnCover)
@@ -366,12 +369,12 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 **Paso 4: Pantalla de Detalles**
 1. Duplicate Screen de creación
 2. Modificar Form:
-   - Mode: `FormMode.View`
-   - Item: `GallerySolicitudes.Selected`
+    - Mode: `FormMode.View`
+    - Item: `GallerySolicitudes.Selected`
 3. Agregar Button "Editar"
-   - OnSelect: `EditForm(Form2)`
+    - OnSelect: `EditForm(Form2)`
 4. Agregar navegación desde Gallery:
-   - OnSelect de Gallery: `Navigate(ScreenDetalle, ScreenTransition.Cover)`
+    - OnSelect de Gallery: `Navigate(ScreenDetalle, ScreenTransition.Cover)`
 
 **Práctica 3.2: Interactividad y Variables**
 
@@ -390,8 +393,8 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
    ```
 
 2. **Contador de solicitudes**
-   - Insertar Label
-   - Text: `"Total: " & CountRows(GallerySolicitudes.AllItems)`
+    - Insertar Label
+    - Text: `"Total: " & CountRows(GallerySolicitudes.AllItems)`
 
 3. **Variable para modo oscuro**
    ```javascript
@@ -420,8 +423,8 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
    ```
 
 2. **Gallery editable con input boxes**
-   - Text Input para Cantidad
-   - OnChange de Input:
+    - Text Input para Cantidad
+    - OnChange de Input:
    ```javascript
    UpdateIf(
        ColPresupuestoItems,
@@ -442,9 +445,9 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 
 1. Usar contenedores (Insert > Container)
 2. Configurar propiedades de layout:
-   - LayoutDirection: Vertical / Horizontal
-   - LayoutAlignItems: Start, Center, End
-   - LayoutGap: 10
+    - LayoutDirection: Vertical / Horizontal
+    - LayoutAlignItems: Start, Center, End
+    - LayoutGap: 10
 3. Usar formulas con Screen.Width:
    ```javascript
    // Gallery Width responsive
@@ -457,18 +460,18 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 
 **Funcionalidades**:
 1. **Screen Bienvenida**:
-   - Input: Nombre visitante, Empresa, Persona a visitar (Lookup empleados)
-   - Button: Registrar entrada (guarda en Dataverse con timestamp)
-   - Cámara: Capturar foto (guardar en attachment)
+    - Input: Nombre visitante, Empresa, Persona a visitar (Lookup empleados)
+    - Button: Registrar entrada (guarda en Dataverse con timestamp)
+    - Cámara: Capturar foto (guardar en attachment)
 
 2. **Screen Panel de Control**:
-   - Gallery: Visitas activas (sin hora salida)
-   - Button por registro: Marcar salida
-   - Estadísticas: Total hoy, promedio duración visitas
+    - Gallery: Visitas activas (sin hora salida)
+    - Button por registro: Marcar salida
+    - Estadísticas: Total hoy, promedio duración visitas
 
 3. **Screen Histórico**:
-   - Gallery filtrable por fecha, visitante, empleado
-   - Exportar a Excel (Export() function)
+    - Gallery filtrable por fecha, visitante, empleado
+    - Exportar a Excel (Export() function)
 
 **Componentes técnicos**:
 - Conexión: Dataverse tabla "Visitas"
@@ -504,29 +507,29 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 #### ⚠️ Errores Comunes
 
 1. **Error**: Gallery no muestra datos o solo 500 registros
-   - **Causa**: Función no delegable o limit implícito
-   - **Solución**: Usar Filter() con operadores delegables (=, <>, >, <, And, Or)
-   - **Check**: Línea azul de delegación warning en formula bar
+    - **Causa**: Función no delegable o limit implícito
+    - **Solución**: Usar Filter() con operadores delegables (=, <>, >, <, And, Or)
+    - **Check**: Línea azul de delegación warning en formula bar
 
 2. **Error**: "Name conflict" al referenciar columnas
-   - **Causa**: Columna tiene nombre reservado (ej: Name, Value)
-   - **Solución**: Usar comillas simples: `ThisItem.'Name'`
+    - **Causa**: Columna tiene nombre reservado (ej: Name, Value)
+    - **Solución**: Usar comillas simples: `ThisItem.'Name'`
 
 3. **Error**: Form no guarda cambios
-   - **Causa**: SubmitForm() sin capturar resultado
-   - **Solución**: 
+    - **Causa**: SubmitForm() sin capturar resultado
+    - **Solución**: 
    ```javascript
    SubmitForm(Form1);
    If(Form1.Error = Blank(), Navigate(Screen2), Notify("Error: " & Form1.Error))
    ```
 
 4. **Error**: Pérdida de datos en variables al cambiar screen
-   - **Causa**: Usar UpdateContext (local) en lugar de Set (global)
-   - **Solución**: Evaluar scope necesario, usar Set para datos persistentes
+    - **Causa**: Usar UpdateContext (local) en lugar de Set (global)
+    - **Solución**: Evaluar scope necesario, usar Set para datos persistentes
 
 5. **Error**: App lenta en carga inicial
-   - **Causa**: Queries pesadas en OnStart o OnVisible sin caché
-   - **Solución**: Cargar datos críticos en OnStart, lazy load el resto
+    - **Causa**: Queries pesadas en OnStart o OnVisible sin caché
+    - **Solución**: Cargar datos críticos en OnStart, lazy load el resto
 
 #### 🧪 Criterios de Validación
 - [ ] App con mínimo 3 screens conectadas con navegación funcional
@@ -562,8 +565,8 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 
 **Paso 1: Crear app desde solución**
 1. Power Apps > Solutions > New solution
-   - Name: `Sistema Solicitudes TI`
-   - Publisher: Crear nuevo con prefix `sit`
+    - Name: `Sistema Solicitudes TI`
+    - Publisher: Crear nuevo con prefix `sit`
 2. Dentro de solución > New > App > Model-driven app
 3. Name: `Gestión Solicitudes TI`
 
@@ -588,8 +591,8 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 **Paso 3: Personalizar Forms**
 
 1. **Main Form de Solicitud TI**
-   - Abrir tabla > Forms > Information (Main)
-   - Estructura en tabs:
+    - Abrir tabla > Forms > Information (Main)
+    - Estructura en tabs:
      ```
      Tab: General
         Section: Información Básica
@@ -612,40 +615,40 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
      ```
 
 2. **Configurar Business Rules en el form**
-   - Mostrar Tab "Resolución" solo si Estado = Resuelta o Cerrada
-   - Hacer Required "Fecha Resolución" cuando Estado = Resuelta
+    - Mostrar Tab "Resolución" solo si Estado = Resuelta o Cerrada
+    - Hacer Required "Fecha Resolución" cuando Estado = Resuelta
 
 3. **Quick Create Form**
-   - Crear nuevo form tipo Quick Create
-   - Solo campos esenciales: Título, Categoría, Prioridad, Descripción
-   - Esto permite crear registros rápidos desde cualquier vista
+    - Crear nuevo form tipo Quick Create
+    - Solo campos esenciales: Título, Categoría, Prioridad, Descripción
+    - Esto permite crear registros rápidos desde cualquier vista
 
 **Paso 4: Personalizar Views**
 
 1. **Vista "Solicitudes Activas"** (personal)
-   - Filtro: Estado ≠ Cerrada
-   - Columnas: Título, Solicitante, Prioridad, Estado, Fecha Solicitud
-   - Orden: Prioridad (mayor a menor), Fecha Solicitud (más reciente)
+    - Filtro: Estado ≠ Cerrada
+    - Columnas: Título, Solicitante, Prioridad, Estado, Fecha Solicitud
+    - Orden: Prioridad (mayor a menor), Fecha Solicitud (más reciente)
 
 2. **Vista "Mis Asignaciones"**
-   - Filtro: Asignado a = Current User AND Estado ≠ Cerrada
-   - Columnas: Título, Categoría, Prioridad, Fecha Solicitud
-   - Orden: Fecha Solicitud (más antiguo primero)
+    - Filtro: Asignado a = Current User AND Estado ≠ Cerrada
+    - Columnas: Título, Categoría, Prioridad, Fecha Solicitud
+    - Orden: Fecha Solicitud (más antiguo primero)
 
 3. **Vista Chart**: Solicitudes por Categoría
-   - Insertar chart en vista
-   - Tipo: Bar chart
-   - Eje Y: Count of records
-   - Eje X: Categoría
+    - Insertar chart en vista
+    - Tipo: Bar chart
+    - Eje Y: Count of records
+    - Eje X: Categoría
 
 **Paso 5: Crear Dashboard**
 
 1. New > Dashboard > 2-Column Regular Dashboard
 2. Nombre: `Dashboard Solicitudes TI`
 3. Componentes:
-   - **Panel superior izquierda**: Chart "Solicitudes por Estado" (Donut)
-   - **Panel superior derecha**: Chart "Solicitudes por Prioridad" (Column)
-   - **Panel inferior**: List de "Solicitudes Pendientes" (View)
+    - **Panel superior izquierda**: Chart "Solicitudes por Estado" (Donut)
+    - **Panel superior derecha**: Chart "Solicitudes por Prioridad" (Column)
+    - **Panel inferior**: List de "Solicitudes Pendientes" (View)
 
 **Práctica 4.2: Business Process Flow**
 
@@ -679,8 +682,8 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
    ```
 
 5. Configurar transiciones automáticas:
-   - Al cambiar Estado a "En Proceso" → avanzar a Stage 2
-   - Al cambiar Estado a "Resuelta" → avanzar a Stage 3
+    - Al cambiar Estado a "En Proceso" → avanzar a Stage 2
+    - Al cambiar Estado a "Resuelta" → avanzar a Stage 3
 
 6. Guardar, activar y asignar a Security Role
 
@@ -689,28 +692,28 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 1. **Crear Security Roles**:
 
    **Role: Solicitante**
-   - Solicitud TI: Create (Own), Read (Business Unit), Write (Own)
-   - Contact: Read (Organization)
-   - Categorías: Read (Organization)
+    - Solicitud TI: Create (Own), Read (Business Unit), Write (Own)
+    - Contact: Read (Organization)
+    - Categorías: Read (Organization)
 
    **Role: Técnico TI**
-   - Solicitud TI: Create, Read, Write, Delete (Organization)
-   - Contact: Read (Organization)
-   - Todas las tablas del sistema: Read
+    - Solicitud TI: Create, Read, Write, Delete (Organization)
+    - Contact: Read (Organization)
+    - Todas las tablas del sistema: Read
 
    **Role: Administrador TI**
-   - Solicitud TI: Todos los permisos (Organization)
-   - Todas las tablas: Admin completo
+    - Solicitud TI: Todos los permisos (Organization)
+    - Todas las tablas: Admin completo
 
 2. **Asignar roles a usuarios de prueba**:
-   - Settings > Security > Users
-   - Seleccionar usuario > Manage Roles
-   - Asignar role creado
+    - Settings > Security > Users
+    - Seleccionar usuario > Manage Roles
+    - Asignar role creado
 
 3. **Probar con cada role**:
-   - Login como cada usuario
-   - Validar que solo ven datos según permisos
-   - Verificar botones habilitados/deshabilitados
+    - Login como cada usuario
+    - Validar que solo ven datos según permisos
+    - Verificar botones habilitados/deshabilitados
 
 #### 💼 Caso Real de Negocio
 
@@ -769,24 +772,24 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 #### ⚠️ Errores Comunes
 
 1. **Error**: Usuarios no ven la app o datos
-   - **Causa**: Falta Security Role asignado
-   - **Solución**: Settings > Security > Users > Manage Roles + compartir app
+    - **Causa**: Falta Security Role asignado
+    - **Solución**: Settings > Security > Users > Manage Roles + compartir app
 
 2. **Error**: Business Process Flow no aparece en form
-   - **Causa**: No está activado o no asignado a Security Role
-   - **Solución**: Process > Activate + Security Roles tab en BPF
+    - **Causa**: No está activado o no asignado a Security Role
+    - **Solución**: Process > Activate + Security Roles tab en BPF
 
 3. **Error**: Cambios en form no se reflejan
-   - **Causa**: No se publicó customizations
-   - **Solución**: Siempre Publish All Customizations después de cambios
+    - **Causa**: No se publicó customizations
+    - **Solución**: Siempre Publish All Customizations después de cambios
 
 4. **Error**: Dashboard no muestra datos actualizados
-   - **Causa**: Cache del navegador o permisos en vistas subyacentes
-   - **Solución**: Refresh browser, verificar security role en charts/views
+    - **Causa**: Cache del navegador o permisos en vistas subyacentes
+    - **Solución**: Refresh browser, verificar security role en charts/views
 
 5. **Error**: Site map no guarda o no aparece en app
-   - **Causa**: Estructura inválida (subarea sin group, etc.)
-   - **Solución**: Validar jerarquía: Area > Group > Subarea
+    - **Causa**: Estructura inválida (subarea sin group, etc.)
+    - **Solución**: Validar jerarquía: Area > Group > Subarea
 
 #### 🧪 Criterios de Validación
 - [ ] Model-Driven App publicada con site map de 2+ áreas
@@ -828,20 +831,20 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 1. Power Automate > Create > Automated cloud flow
 2. Nombre: `Notificar Nueva Solicitud TI`
 3. Trigger: "When a row is added, modified or deleted" (Dataverse)
-   - Change type: Added
-   - Table name: Solicitudes TI
-   - Scope: Organization
+    - Change type: Added
+    - Table name: Solicitudes TI
+    - Scope: Organization
 
 **Paso 2: Obtener datos del solicitante**
 1. Action: "Get a row by ID" (Dataverse)
-   - Table: Contacts
-   - Row ID: `Solicitante (Value)` del trigger (Dynamic content)
+    - Table: Contacts
+    - Row ID: `Solicitante (Value)` del trigger (Dynamic content)
 
 **Paso 3: Enviar email de confirmación**
 1. Action: "Send an email (V2)" (Office 365 Outlook)
-   - To: `Email` del Contact (paso anterior)
-   - Subject: `Nueva solicitud registrada: {Título}`
-   - Body (HTML):
+    - To: `Email` del Contact (paso anterior)
+    - Subject: `Nueva solicitud registrada: {Título}`
+    - Body (HTML):
    ```html
    <p>Estimado/a {nombre completo del Contact},</p>
    <p>Tu solicitud ha sido registrada exitosamente:</p>
@@ -856,12 +859,12 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 
 **Paso 4: Notificar a equipo TI**
 1. Condition: Si Prioridad = "Crítica"
-   - **Yes branch**: 
+    - **Yes branch**: 
      - Action: "Post message in a chat or channel" (Teams)
      - Team: TI Team
      - Channel: Solicitudes Urgentes
      - Message: `🚨 SOLICITUD CRÍTICA: {Título} - {Descripción}`
-   - **No branch**:
+    - **No branch**:
      - Action: Send email a grupo TI (listadistribucion@empresa.com)
 
 **Paso 5: Probar flujo**
@@ -878,27 +881,27 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 1. Create > Scheduled cloud flow
 2. Nombre: `Reporte Diario Solicitudes`
 3. Trigger: Recurrence
-   - Interval: 1
-   - Frequency: Day
-   - At: 08:00 AM
-   - Time zone: (Tu zona horaria)
+    - Interval: 1
+    - Frequency: Day
+    - At: 08:00 AM
+    - Time zone: (Tu zona horaria)
 
 **Paso 2: Consultar solicitudes pendientes**
 1. Action: "List rows" (Dataverse)
-   - Table: Solicitudes TI
-   - Filter rows: 
+    - Table: Solicitudes TI
+    - Filter rows: 
    ```
    cr123_estado eq 1 or cr123_estado eq 2
    // Nota: los Choice (OptionSet) se filtran por valor entero, no por label.
    // Para encontrar los valores: Power Apps > Tables > Solicitud TI > Columns > Estado > editar opciones — cada opción tiene un "Value" numérico.
    ```
-   - Order by: `cr123_prioridad desc, cr123_fechasolicitud desc`
+    - Order by: `cr123_prioridad desc, cr123_fechasolicitud desc`
 
 **Paso 3: Construir tabla HTML con resultados**
 1. Action: "Initialize variable"
-   - Name: `htmlTable`
-   - Type: String
-   - Value: 
+    - Name: `htmlTable`
+    - Type: String
+    - Value: 
    ```html
    <table border="1">
      <tr>
@@ -911,8 +914,8 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
    ```
 
 2. Action: "Apply to each" (loop)
-   - Select output from previous step: `value` de List rows
-   - Dentro del loop:
+    - Select output from previous step: `value` de List rows
+    - Dentro del loop:
      - Action: "Append to string variable"
      - Name: `htmlTable`
      - Value:
@@ -927,14 +930,14 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
      ```
 
 3. Fuera del loop:
-   - Action: "Append to string variable"
-   - Value: `</table>`
+    - Action: "Append to string variable"
+    - Value: `</table>`
 
 **Paso 4: Enviar email con reporte**
 1. Action: "Send an email (V2)"
-   - To: gerente-ti@empresa.com
-   - Subject: `Reporte Diario Solicitudes - {utcNow()}`
-   - Body: 
+    - To: gerente-ti@empresa.com
+    - Subject: `Reporte Diario Solicitudes - {utcNow()}`
+    - Body: 
    ```html
    <h2>Solicitudes Pendientes de Atención</h2>
    <p>Total: {length(outputs('List_rows')?['body/value'])} solicitudes</p>
@@ -943,9 +946,9 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 
 **Paso 5: Configurar condición de no envío si está vacío**
 1. Antes del email, agregar Condition
-   - Expression: `empty(outputs('List_rows')?['body/value'])`
-   - Yes: Terminate (Success) con mensaje "No hay solicitudes"
-   - No: Enviar email
+    - Expression: `empty(outputs('List_rows')?['body/value'])`
+    - Yes: Terminate (Success) con mensaje "No hay solicitudes"
+    - No: Enviar email
 
 **Práctica 5.3: Flujo Instant - Aprobación de Cambios**
 
@@ -956,21 +959,21 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 2. Nombre: `Aprobar Cambio Prioridad`
 3. Trigger: "Manually trigger a flow"
 4. Agregar inputs:
-   - Solicitud ID (text)
-   - Nueva Prioridad (text)
-   - Justificación (text)
+    - Solicitud ID (text)
+    - Nueva Prioridad (text)
+    - Justificación (text)
 
 **Paso 2: Obtener registro actual**
 1. Action: "Get a row by ID" (Dataverse)
-   - Table: Solicitudes TI
-   - Row ID: `{Solicitud ID input}`
+    - Table: Solicitudes TI
+    - Row ID: `{Solicitud ID input}`
 
 **Paso 3: Enviar aprobación**
 1. Action: "Start and wait for an approval"
-   - Approval type: Approve/Reject - First to respond
-   - Title: `Cambio de Prioridad Solicitud: {título}`
-   - Assigned to: gerente-ti@empresa.com
-   - Details:
+    - Approval type: Approve/Reject - First to respond
+    - Title: `Cambio de Prioridad Solicitud: {título}`
+    - Assigned to: gerente-ti@empresa.com
+    - Details:
    ```
    Prioridad actual: {prioridad actual}
    Nueva prioridad: {Nueva Prioridad input}
@@ -979,13 +982,13 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 
 **Paso 4: Procesar respuesta**
 1. Condition: Si `Outcome = Approve`
-   - **Yes**:
+    - **Yes**:
      - Action: "Update a row" (Dataverse)
        - Table: Solicitudes TI
        - Row ID: `{Solicitud ID}`
        - Prioridad: `{Nueva Prioridad input}`
      - Action: Send email de confirmación al solicitante
-   - **No**:
+    - **No**:
      - Action: Send email de rechazo con comentarios del aprobador
 
 **Paso 5: Integrar con Power Apps**
@@ -1011,15 +1014,15 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 
 **Paso 2: Configurar reintentos**
 1. Settings de cada acción HTTP o externa:
-   - Retry Policy: Fixed interval
-   - Count: 3
-   - Interval: PT10S (10 segundos)
+    - Retry Policy: Fixed interval
+    - Count: 3
+    - Interval: PT10S (10 segundos)
 
 **Paso 3: Agregar Scope de error handling**
 1. Nuevo Scope fuera del anterior: `Error Handler`
 2. Configure run after del anterior: `has failed`, `has timed out`
 3. Dentro:
-   - Action: "Compose" con detalles del error:
+    - Action: "Compose" con detalles del error:
    ```json
    {
      "errorMessage": "@{result('Main_Process')?['error']?['message']}",
@@ -1027,8 +1030,8 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
      "flowRunId": "@{workflow()['run']['name']}"
    }
    ```
-   - Action: "Send an email" a admin con detalles del error
-   - Action: "Create a row" (Dataverse) en tabla de logs de errores
+    - Action: "Send an email" a admin con detalles del error
+    - Action: "Create a row" (Dataverse) en tabla de logs de errores
 
 **Paso 4: Agregar notificación de éxito**
 1. Nuevo Scope: `Success Handler`
@@ -1051,19 +1054,19 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 
 **Paso 3: Acciones**
 1. Action: "Launch Excel"
-   - Excel instance: ExcelInstance
-   - Document path: `C:\Datos\Solicitudes.xlsx`
+    - Excel instance: ExcelInstance
+    - Document path: `C:\Datos\Solicitudes.xlsx`
 
 2. Action: "Read from Excel worksheet"
-   - Retrieve: All values from worksheet
-   - Store to: ExcelData (datatable)
+    - Retrieve: All values from worksheet
+    - Store to: ExcelData (datatable)
 
 3. Action: "For each" (loop)
-   - Iterate through: %ExcelData%
-   - Current item: CurrentRow
+    - Iterate through: %ExcelData%
+    - Current item: CurrentRow
 
 4. Dentro del loop:
-   - Action: "HTTP request" (POST a Dataverse API)
+    - Action: "HTTP request" (POST a Dataverse API)
      - URL: `https://org.api.crm.dynamics.com/api/data/v9.2/cr123_solicitudesti`
      - Method: POST
      - Headers: 
@@ -1083,8 +1086,8 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 **Paso 4: Integrar con Cloud Flow**
 1. Crear Scheduled Cloud Flow
 2. Action: "Run a flow built with Power Automate for desktop"
-   - Desktop flow: Importar Solicitudes desde Excel
-   - Run mode: Attended / Unattended (con VM)
+    - Desktop flow: Importar Solicitudes desde Excel
+    - Run mode: Attended / Unattended (con VM)
 
 #### 💼 Caso Real de Negocio
 
@@ -1093,8 +1096,8 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 **Flujos implementados**:
 
 1. **Flujo: Nuevo Empleado Registrado**
-   - Trigger: Crear registro en tabla "Empleado" (Dataverse)
-   - Acciones:
+    - Trigger: Crear registro en tabla "Empleado" (Dataverse)
+    - Acciones:
      - Crear cuenta Azure AD (HTTP a Graph API)
      - Asignar licencias Microsoft 365
      - Crear buzón Exchange
@@ -1103,16 +1106,16 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
      - Enviar email bienvenida con credenciales temporales
 
 2. **Flujo: Proceso de Aprobación de Equipamiento**
-   - Trigger: Instant (llamado desde Model-Driven App)
-   - Aprobar solicitud de laptop según presupuesto
-   - Si aprobado: Crear orden de compra en ERP (SAP)
-   - Notificar a compras y manager
+    - Trigger: Instant (llamado desde Model-Driven App)
+    - Aprobar solicitud de laptop según presupuesto
+    - Si aprobado: Crear orden de compra en ERP (SAP)
+    - Notificar a compras y manager
 
 3. **Flujo: Checklist de Onboarding**
-   - Trigger: Scheduled (diario)
-   - Consultar empleados con onboarding incompleto
-   - Enviar recordatorios a RRHH y managers
-   - Escalar si > 7 días sin completar
+    - Trigger: Scheduled (diario)
+    - Consultar empleados con onboarding incompleto
+    - Enviar recordatorios a RRHH y managers
+    - Escalar si > 7 días sin completar
 
 **Beneficios medibles**:
 - Reducción 80% tiempo onboarding (de 5 días a 1 día)
@@ -1154,28 +1157,28 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 #### ⚠️ Errores Comunes
 
 1. **Error**: Flujo falla con "Item not found"
-   - **Causa**: Race condition o registro eliminado entre trigger y acción
-   - **Solución**: Agregar verificación de existencia + error handling
+    - **Causa**: Race condition o registro eliminado entre trigger y acción
+    - **Solución**: Agregar verificación de existencia + error handling
 
 2. **Error**: "Dynamic content not available"
-   - **Causa**: Referencia a acción dentro de scope/loop diferente
-   - **Solución**: Usar outputs() expression o reestructurar
+    - **Causa**: Referencia a acción dentro de scope/loop diferente
+    - **Solución**: Usar outputs() expression o reestructurar
 
 3. **Error**: Loops infinitos o exceso de ejecuciones
-   - **Causa**: Trigger "When modified" que actualiza el mismo registro
-   - **Solución**: Agregar condición para evitar auto-trigger o usar columnas de control
+    - **Causa**: Trigger "When modified" que actualiza el mismo registro
+    - **Solución**: Agregar condición para evitar auto-trigger o usar columnas de control
 
 4. **Error**: "Connection not valid" en ejecuciones automáticas
-   - **Causa**: Conexión con credenciales de usuario que cambió contraseña
-   - **Solución**: Usar Service Account o renovar conexión
+    - **Causa**: Conexión con credenciales de usuario que cambió contraseña
+    - **Solución**: Usar Service Account o renovar conexión
 
 5. **Error**: Timeout en "Apply to each" con muchos registros
-   - **Causa**: Procesamiento serial de miles de items
-   - **Solución**: Pagination + múltiples flujos o usar Concurrency control
+    - **Causa**: Procesamiento serial de miles de items
+    - **Solución**: Pagination + múltiples flujos o usar Concurrency control
 
 6. **Error**: Expresiones con sintaxis incorrecta
-   - **Causa**: Quotes incorrectas o funciones no existentes
-   - **Solución**: Validar en Expression editor, consultar documentación
+    - **Causa**: Quotes incorrectas o funciones no existentes
+    - **Solución**: Validar en Expression editor, consultar documentación
 
 #### 🧪 Criterios de Validación
 - [ ] 3+ flujos cloud funcionales (automated, scheduled, instant)
@@ -1220,23 +1223,23 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 2. Environment URL: https://tuorg.crm.dynamics.com
 3. Autenticar con cuenta organizacional
 4. Seleccionar tablas:
-   - Solicitudes TI
-   - Contacts
-   - Categorías
+    - Solicitudes TI
+    - Contacts
+    - Categorías
 5. Transform Data
 
 **Paso 3: Transformaciones en Power Query**
 1. Tabla Solicitudes TI:
-   - Remover columnas innecesarias (audit fields, metadata)
-   - Renombrar columnas: `cr123_titulo` → `Título`
-   - Cambiar tipos de datos si es necesario
-   - Crear columna calculada: `Días Abierta`:
+    - Remover columnas innecesarias (audit fields, metadata)
+    - Renombrar columnas: `cr123_titulo` → `Título`
+    - Cambiar tipos de datos si es necesario
+    - Crear columna calculada: `Días Abierta`:
    ```m
    = Duration.Days(DateTime.LocalNow() - [Fecha Solicitud])
    ```
 
 2. Tabla Contacts:
-   - Mantener solo ID, Nombre Completo, Email, Departamento
+    - Mantener solo ID, Nombre Completo, Email, Departamento
    
 3. Close & Apply
 
@@ -1251,16 +1254,16 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 **Página 1: Overview General**
 
 1. **KPI Cards**:
-   - Card: Total Solicitudes
+    - Card: Total Solicitudes
      - Visual: Card
      - Field: Count of Solicitudes[ID]
    
-   - Card: Solicitudes Abiertas
+    - Card: Solicitudes Abiertas
      - Visual: Card
      - Field: Count of Solicitudes[ID]
      - Filter: Estado ≠ "Cerrada"
    
-   - Card: Tiempo Promedio Resolución
+    - Card: Tiempo Promedio Resolución
      - Visual: Card
      - Measure (crear con DAX):
      ```dax
@@ -1269,48 +1272,48 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
      ```
 
 2. **Chart: Solicitudes por Estado**
-   - Visual: Donut chart
-   - Legend: Estado
-   - Values: Count of ID
-   - Data colors: personalizar (Verde=Resuelta, Rojo=Nueva, etc.)
+    - Visual: Donut chart
+    - Legend: Estado
+    - Values: Count of ID
+    - Data colors: personalizar (Verde=Resuelta, Rojo=Nueva, etc.)
 
 3. **Chart: Solicitudes por Categoría**
-   - Visual: Bar chart (horizontal)
-   - Axis: Categoría
-   - Values: Count of ID
-   - Sort: Descendente por valores
+    - Visual: Bar chart (horizontal)
+    - Axis: Categoría
+    - Values: Count of ID
+    - Sort: Descendente por valores
 
 4. **Trend: Solicitudes por Mes**
-   - Visual: Line chart
-   - Axis: Fecha Solicitud (jerarquía Month)
-   - Values: Count of ID
-   - Habilitar drill-down a día
+    - Visual: Line chart
+    - Axis: Fecha Solicitud (jerarquía Month)
+    - Values: Count of ID
+    - Habilitar drill-down a día
 
 5. **Tabla: Top Solicitantes**
-   - Visual: Table
-   - Columns: 
+    - Visual: Table
+    - Columns: 
      - Contacts[Nombre Completo]
      - Count of Solicitudes
-   - Top N filter: Top 10
+    - Top N filter: Top 10
 
 **Página 2: Análisis por Prioridad**
 
 1. **Slicer: Filtro de Fecha**
-   - Visual: Slicer
-   - Field: Fecha Solicitud
-   - Style: Between (range)
+    - Visual: Slicer
+    - Field: Fecha Solicitud
+    - Style: Between (range)
 
 2. **Matrix: Prioridad vs Categoría**
-   - Visual: Matrix
-   - Rows: Prioridad
-   - Columns: Categoría
-   - Values: Count of Solicitudes
-   - Conditional formatting: Data bars en celdas
+    - Visual: Matrix
+    - Rows: Prioridad
+    - Columns: Categoría
+    - Values: Count of Solicitudes
+    - Conditional formatting: Data bars en celdas
 
 3. **Chart: Distribución Días Abierta por Prioridad**
-   - Visual: Box plot (custom visual - importar)
-   - Category: Prioridad
-   - Values: Días Abierta
+    - Visual: Box plot (custom visual - importar)
+    - Category: Prioridad
+    - Values: Días Abierta
 
 **Práctica 6.3: DAX Measures Básicas**
 
@@ -1360,25 +1363,25 @@ CALCULATE(
 **Práctica 6.4: Interactividad y Drill-Through**
 
 1. **Configurar Cross-Filtering**
-   - Seleccionar visual de Donut (Estado)
-   - Format > Edit interactions
-   - Configurar otros visuals: Highlight (no filter)
+    - Seleccionar visual de Donut (Estado)
+    - Format > Edit interactions
+    - Configurar otros visuals: Highlight (no filter)
 
 2. **Crear Drill-Through Page**
-   - Nueva página: "Detalle Solicitud"
-   - Drag field ID a Drill-through well
-   - Visualizaciones:
+    - Nueva página: "Detalle Solicitud"
+    - Drag field ID a Drill-through well
+    - Visualizaciones:
      - Card con Título, Categoría, Prioridad
      - Multiline text con Descripción
      - Timeline de cambios (si hay auditoria)
-   - Botón "Back" automático creado
+    - Botón "Back" automático creado
 
 3. **Tooltips Personalizados**
-   - Nueva página: "Tooltip Solicitante"
-   - Configurar como Tooltip page (Page settings)
-   - Reducir tamaño de página
-   - Agregar Card con email, departamento del contact
-   - En página principal, configurar visual para usar este tooltip
+    - Nueva página: "Tooltip Solicitante"
+    - Configurar como Tooltip page (Page settings)
+    - Reducir tamaño de página
+    - Agregar Card con email, departamento del contact
+    - En página principal, configurar visual para usar este tooltip
 
 **Práctica 6.5: Publicar y Compartir**
 
@@ -1391,8 +1394,8 @@ CALCULATE(
 1. En Power BI Service, ir a workspace
 2. Dataset settings (ícono configuración)
 3. Scheduled refresh:
-   - Frequency: Daily, 8:00 AM
-   - Credentials: Configurar OAuth para Dataverse
+    - Frequency: Daily, 8:00 AM
+    - Credentials: Configurar OAuth para Dataverse
 
 **Paso 3: Crear Dashboard**
 1. Desde el reporte publicado, pin visuales clave a nuevo Dashboard
@@ -1401,15 +1404,15 @@ CALCULATE(
 
 **Paso 4: Compartir con usuarios**
 1. Opción A: Compartir dashboard directamente
-   - Share button > agregar emails
-   - Permisos: Can view / Can reshare
+    - Share button > agregar emails
+    - Permisos: Can view / Can reshare
    
 2. Opción B: Crear App
-   - Workspace > Create app
-   - Incluir dashboard y reporte
-   - Configurar navegación
-   - Publish app
-   - Compartir link de app
+    - Workspace > Create app
+    - Incluir dashboard y reporte
+    - Configurar navegación
+    - Publish app
+    - Compartir link de app
 
 **Paso 5: Configurar Row-Level Security (RLS)**
 1. En Power BI Desktop, Modeling > Manage roles
@@ -1491,28 +1494,28 @@ CALCULATE(
 #### ⚠️ Errores Comunes
 
 1. **Error**: Relaciones no funcionan (visuals no filtran)
-   - **Causa**: Cardinalidad incorrecta o ambigüedad
-   - **Solución**: Verificar Model view, eliminar relaciones inactivas
+    - **Causa**: Cardinalidad incorrecta o ambigüedad
+    - **Solución**: Verificar Model view, eliminar relaciones inactivas
 
 2. **Error**: Measures devuelven valores incorrectos con filtros
-   - **Causa**: Contexto de filtro no manejado (no usar CALCULATE)
-   - **Solución**: Usar CALCULATE con filtros explícitos o ALL/REMOVEFILTERS
+    - **Causa**: Contexto de filtro no manejado (no usar CALCULATE)
+    - **Solución**: Usar CALCULATE con filtros explícitos o ALL/REMOVEFILTERS
 
 3. **Error**: "Cannot display visual" por exceso de datos
-   - **Causa**: Visual tiene >30k puntos de datos
-   - **Solución**: Agregar filtros, usar Top N, o cambiar visual type
+    - **Causa**: Visual tiene >30k puntos de datos
+    - **Solución**: Agregar filtros, usar Top N, o cambiar visual type
 
 4. **Error**: Refresh falla en Service con "Credentials not configured"
-   - **Causa**: No se configuró OAuth o gateway para on-premise
-   - **Solución**: Dataset settings > Credentials > Update
+    - **Causa**: No se configuró OAuth o gateway para on-premise
+    - **Solución**: Dataset settings > Credentials > Update
 
 5. **Error**: Columnas de fecha no permiten time intelligence
-   - **Causa**: Columna es text, no date type
-   - **Solución**: Power Query > Transform > Data type > Date
+    - **Causa**: Columna es text, no date type
+    - **Solución**: Power Query > Transform > Data type > Date
 
 6. **Error**: Usuarios no ven datos tras aplicar RLS
-   - **Causa**: Rol mal configurado o usuario no asignado
-   - **Solución**: Validar con "View as role" en Desktop antes de publicar
+    - **Causa**: Rol mal configurado o usuario no asignado
+    - **Solución**: Validar con "View as role" en Desktop antes de publicar
 
 #### 🧪 Criterios de Validación
 - [ ] Reporte con 2+ páginas y mínimo 8 visualizaciones
@@ -1863,28 +1866,28 @@ Filter(ColInventarioAnalizado, StockCrítico || NecesitaOrden)
 #### ⚠️ Errores Comunes
 
 1. **Error**: Fórmula devuelve Blank inesperadamente
-   - **Causa**: Lookup no encuentra registro o división por 0
-   - **Solución**: Usar `??` (null coalescing) o If(IsBlank(...))
+    - **Causa**: Lookup no encuentra registro o división por 0
+    - **Solución**: Usar `??` (null coalescing) o If(IsBlank(...))
 
 2. **Error**: "Incompatible type" en Patch
-   - **Causa**: Tipo de dato no coincide (text vs number, Choice vs string)
-   - **Solución**: Convertir con Value(), Text(), o usar {Value: "..."} para Choices
+    - **Causa**: Tipo de dato no coincide (text vs number, Choice vs string)
+    - **Solución**: Convertir con Value(), Text(), o usar {Value: "..."} para Choices
 
 3. **Error**: Collection no actualiza Gallery
-   - **Causa**: Usar Set en lugar de Collect/Patch/Remove
-   - **Solución**: Collections son observables, variables no. Usar ClearCollect o UpdateIf
+    - **Causa**: Usar Set en lugar de Collect/Patch/Remove
+    - **Solución**: Collections son observables, variables no. Usar ClearCollect o UpdateIf
 
 4. **Error**: ForAll no guarda cambios
-   - **Causa**: ForAll es funcional, no ejecuta side-effects en orden
-   - **Solución**: Validar con Patch individual o usar Concurrent para operaciones independientes
+    - **Causa**: ForAll es funcional, no ejecuta side-effects en orden
+    - **Solución**: Validar con Patch individual o usar Concurrent para operaciones independientes
 
 5. **Error**: Filter devuelve registros incorrectos
-   - **Causa**: Operador lógico mal usado (And vs &&, Or vs ||)
-   - **Solución**: Power Fx usa And/Or, no &&/|| (aunque también soportados)
+    - **Causa**: Operador lógico mal usado (And vs &&, Or vs ||)
+    - **Solución**: Power Fx usa And/Or, no &&/|| (aunque también soportados)
 
 6. **Error**: "Delegation warning" ignorado
-   - **Causa**: Asumir que funciona con >500 registros
-   - **Solución**: NUNCA ignorar warnings de delegación; refactorizar o usar Collections
+    - **Causa**: Asumir que funciona con >500 registros
+    - **Solución**: NUNCA ignorar warnings de delegación; refactorizar o usar Collections
 
 #### 🧪 Criterios de Validación
 - [ ] 10+ fórmulas complejas implementadas en Canvas App
@@ -1944,56 +1947,56 @@ Version: 1.0.0.0
 **Paso 3: Crear tablas en Dataverse**
 
 1. **Tabla: Solicitud** (principal)
-   - Título (text, 100 chars, required)
-   - Descripción (multiline, 2000 chars)
-   - Tipo (Choice): TI, Mantenimiento, RRHH, Compras
-   - Prioridad (Choice): Baja, Media, Alta, Crítica
-   - Estado (Choice): Nueva, Pendiente Aprobación, Aprobada, En Proceso, Completada, Rechazada
-   - Fecha Solicitud (DateTime, default Now())
-   - Fecha Requerida (Date Only)
-   - Solicitante (Lookup → Contact, required)
-   - Aprobador (Lookup → User)
-   - Asignado a (Lookup → User)
-   - Fecha Aprobación (DateTime)
-   - Fecha Completada (DateTime)
-   - Costo Estimado (Currency)
-   - Costo Real (Currency)
-   - Comentarios Aprobador (multiline)
-   - Comentarios Cierre (multiline)
-   - Adjuntos (enable notes & attachments)
+    - Título (text, 100 chars, required)
+    - Descripción (multiline, 2000 chars)
+    - Tipo (Choice): TI, Mantenimiento, RRHH, Compras
+    - Prioridad (Choice): Baja, Media, Alta, Crítica
+    - Estado (Choice): Nueva, Pendiente Aprobación, Aprobada, En Proceso, Completada, Rechazada
+    - Fecha Solicitud (DateTime, default Now())
+    - Fecha Requerida (Date Only)
+    - Solicitante (Lookup → Contact, required)
+    - Aprobador (Lookup → User)
+    - Asignado a (Lookup → User)
+    - Fecha Aprobación (DateTime)
+    - Fecha Completada (DateTime)
+    - Costo Estimado (Currency)
+    - Costo Real (Currency)
+    - Comentarios Aprobador (multiline)
+    - Comentarios Cierre (multiline)
+    - Adjuntos (enable notes & attachments)
 
 2. **Tabla: Categoría Solicitud**
-   - Nombre (text, 50 chars, required)
-   - Tipo Solicitud (Choice): TI, Mantenimiento, RRHH, Compras
-   - Descripción (multiline)
-   - SLA Horas (Whole number)
-   - Requiere Aprobación (Yes/No)
-   - Aprobador Default (Lookup → User)
-   - Activo (Yes/No, default Yes)
+    - Nombre (text, 50 chars, required)
+    - Tipo Solicitud (Choice): TI, Mantenimiento, RRHH, Compras
+    - Descripción (multiline)
+    - SLA Horas (Whole number)
+    - Requiere Aprobación (Yes/No)
+    - Aprobador Default (Lookup → User)
+    - Activo (Yes/No, default Yes)
 
 3. **Tabla: Comentario**
-   - Solicitud (Lookup → Solicitud, required)
-   - Comentario (multiline, 1000 chars, required)
-   - Fecha (DateTime, default Now())
-   - Usuario (Lookup → User, default Current User)
-   - Tipo (Choice): Información, Pregunta, Actualización, Resolución
-   - Interno (Yes/No) // Solo visible para equipo ejecutor
+    - Solicitud (Lookup → Solicitud, required)
+    - Comentario (multiline, 1000 chars, required)
+    - Fecha (DateTime, default Now())
+    - Usuario (Lookup → User, default Current User)
+    - Tipo (Choice): Información, Pregunta, Actualización, Resolución
+    - Interno (Yes/No) // Solo visible para equipo ejecutor
 
 4. **Tabla: Aprobación**
-   - Solicitud (Lookup → Solicitud, required)
-   - Aprobador (Lookup → User, required)
-   - Decisión (Choice): Pendiente, Aprobada, Rechazada
-   - Fecha Decisión (DateTime)
-   - Comentarios (multiline)
-   - Nivel (Whole number) // Para aprobaciones multi-nivel
+    - Solicitud (Lookup → Solicitud, required)
+    - Aprobador (Lookup → User, required)
+    - Decisión (Choice): Pendiente, Aprobada, Rechazada
+    - Fecha Decisión (DateTime)
+    - Comentarios (multiline)
+    - Nivel (Whole number) // Para aprobaciones multi-nivel
 
 5. **Tabla: Métrica Solicitud** (para reporting)
-   - Solicitud (Lookup → Solicitud)
-   - Tiempo Respuesta Horas (Decimal) // Hasta asignación
-   - Tiempo Resolución Horas (Decimal) // Hasta completada
-   - Cumplió SLA (Yes/No)
-   - Fecha Cálculo (DateTime)
-   - Rating Solicitante (Choice): 1-5 estrellas
+    - Solicitud (Lookup → Solicitud)
+    - Tiempo Respuesta Horas (Decimal) // Hasta asignación
+    - Tiempo Resolución Horas (Decimal) // Hasta completada
+    - Cumplió SLA (Yes/No)
+    - Fecha Cálculo (DateTime)
+    - Rating Solicitante (Choice): 1-5 estrellas
 
 **Paso 4: Configurar relaciones**
 - Solicitud 1:N Comentarios
@@ -2003,14 +2006,14 @@ Version: 1.0.0.0
 
 **Paso 5: Business Rules**
 1. **Validación de fechas**:
-   - Si Estado = "Completada", Fecha Completada is required
-   - Fecha Requerida >= Fecha Solicitud
+    - Si Estado = "Completada", Fecha Completada is required
+    - Fecha Requerida >= Fecha Solicitud
 
 2. **Auto-población**:
-   - Si Categoría selected, set Aprobador = Categoría.Aprobador Default
+    - Si Categoría selected, set Aprobador = Categoría.Aprobador Default
 
 3. **Visibilidad condicional**:
-   - Show "Comentarios Aprobador" only if Estado = Aprobada OR Rechazada
+    - Show "Comentarios Aprobador" only if Estado = Aprobada OR Rechazada
 
 **FASE 2: Canvas App para Solicitantes (Días 4-7)**
 

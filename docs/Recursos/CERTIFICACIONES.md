@@ -420,8 +420,8 @@ PREGUNTAS:
 1. Ir a learn.microsoft.com → Certificaciones → buscar el examen
 2. Registrarse en Pearson VUE o Certiport
 3. Opciones de modalidad:
-   - **Online (en casa):** requiere cámara, cuarto sin interrupciones, ID oficial
-   - **Presencial (centro de pruebas):** reservar con anticipación, más control del ambiente
+    - **Online (en casa):** requiere cámara, cuarto sin interrupciones, ID oficial
+    - **Presencial (centro de pruebas):** reservar con anticipación, más control del ambiente
 4. Reagendar: sin costo si se hace con más de 6 días de anticipación
 
 ### Si repruebas

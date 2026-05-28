@@ -358,13 +358,13 @@ Para usar ese token en Power Automate:
 ```
 1. Publish → Microsoft Teams → Add to Teams
 2. Configurar:
-   - Nombre del bot en Teams
-   - Descripción corta (visible en el directorio)
-   - Icono (PNG 192x192 o SVG)
+    - Nombre del bot en Teams
+    - Descripción corta (visible en el directorio)
+    - Icono (PNG 192x192 o SVG)
 3. Opciones de disponibilidad:
-   - Solo yo (prueba)
-   - Tu organización (deployment para toda la empresa)
-   - Aprobación requerida del admin de Teams
+    - Solo yo (prueba)
+    - Tu organización (deployment para toda la empresa)
+    - Aprobación requerida del admin de Teams
 4. Una vez aprobado, aparece como app en Teams
 ```
 
@@ -586,8 +586,8 @@ Si hay topics con 0 activaciones → revisar trigger phrases o eliminar el topic
 3. Bot: seleccionar el agente de Copilot Studio como "primer respondedor"
 4. Si el bot escala → Regla de enrutamiento hacia Cola_Soporte_General
 5. En Copilot Studio, configurar el tema de escalamiento:
-   - Nodo: Escalar a agente humano
-   - Transferir con contexto:
+    - Nodo: Escalar a agente humano
+    - Transferir con contexto:
      Topic.ResumenConversacion → campo "Transcript" del agente
      System.User.DisplayName → nombre del usuario
      Topic.TipoProblema → categoría detectada

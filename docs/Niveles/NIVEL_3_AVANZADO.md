@@ -194,9 +194,9 @@ Implementar pipelines completos de CI/CD para Power Platform usando Azure DevOps
 1. Azure DevOps → Configuración del proyecto → Service connections → Nueva
 2. Tipo: Power Platform
 3. Configurar para cada ambiente:
-   - URL: `https://tuorg-dev.crm.dynamics.com`
-   - Método: Service Principal (App Registration)
-   - Tenant ID, Client ID, Client Secret del App Registration
+    - URL: `https://tuorg-dev.crm.dynamics.com`
+    - Método: Service Principal (App Registration)
+    - Tenant ID, Client ID, Client Secret del App Registration
 4. Crear 4 service connections: DEV, TEST, UAT, PROD
 
 #### Actividad 19.2: Pipeline de CI — Export y Verificación
@@ -528,16 +528,16 @@ Configurar y personalizar Dynamics 365 Sales y Customer Service: sales process c
 2. Nombre: `Proceso Venta Consultiva`
 3. Tabla: Oportunidad
 4. Etapas:
-   - **Descubrimiento** (Probabilidad: 10%)
+    - **Descubrimiento** (Probabilidad: 10%)
      - Paso: Presupuesto del cliente (obligatorio)
      - Paso: Tomador de decisión identificado
      - Paso: Fecha de decisión estimada
-   - **Propuesta** (Probabilidad: 30%)
+    - **Propuesta** (Probabilidad: 30%)
      - Paso: Propuesta enviada (obligatorio)
      - Paso: Demo realizada
-   - **Negociación** (Probabilidad: 60%)
+    - **Negociación** (Probabilidad: 60%)
      - Paso: Contrato en revisión legal
-   - **Cierre** (Probabilidad: 90%)
+    - **Cierre** (Probabilidad: 90%)
      - Acción: Generar orden de compra
      - Acción: Notificar a proyectos
 5. Activar el BPF y asignarlo al equipo de ventas
@@ -546,11 +546,11 @@ Configurar y personalizar Dynamics 365 Sales y Customer Service: sales process c
 1. D365 Customer Service → Configuración → Canales → Email
 2. Crear mailbox: `soporte@empresa.com` → sincronizar con Exchange
 3. Configurar regla de conversión automática:
-   - Configuración → Reglas de creación y actualización de registros
-   - Tipo de actividad: Email
-   - Condición: Para = `soporte@empresa.com`
-   - Acción: Crear caso
-   - Mapeos:
+    - Configuración → Reglas de creación y actualización de registros
+    - Tipo de actividad: Email
+    - Condición: Para = `soporte@empresa.com`
+    - Acción: Crear caso
+    - Mapeos:
      ```
      Caso.Asunto ← Email.Asunto
      Caso.Descripción ← Email.Cuerpo
@@ -563,17 +563,17 @@ Configurar y personalizar Dynamics 365 Sales y Customer Service: sales process c
 2. Nombre: `SLA Soporte Estándar`
 3. Tabla: Caso
 4. **KPI 1: Primera respuesta**
-   - Advertencia: 2 horas
-   - Fallo: 4 horas
-   - Aplicable cuando: Prioridad = Normal
-   - Acción en fallo: Enviar email a supervisor + cambiar prioridad a Alta
+    - Advertencia: 2 horas
+    - Fallo: 4 horas
+    - Aplicable cuando: Prioridad = Normal
+    - Acción en fallo: Enviar email a supervisor + cambiar prioridad a Alta
 5. **KPI 2: Resolución**
-   - Advertencia: 20 horas (días hábiles)
-   - Fallo: 24 horas (días hábiles)
-   - Acción en fallo: Escalar a Nivel 2 + notificar gerente
+    - Advertencia: 20 horas (días hábiles)
+    - Fallo: 24 horas (días hábiles)
+    - Acción en fallo: Escalar a Nivel 2 + notificar gerente
 6. Configurar horario de atención:
-   - Configuración → Calendarios de servicio al cliente
-   - Lunes–Viernes 8am–6pm, zona horaria Bogotá
+    - Configuración → Calendarios de servicio al cliente
+    - Lunes–Viernes 8am–6pm, zona horaria Bogotá
 7. Asociar el SLA al tipo de caso y activar
 
 #### Actividad 20.4: Enrutamiento con Unified Routing
@@ -583,8 +583,8 @@ Configurar y personalizar Dynamics 365 Sales y Customer Service: sales process c
 4. Definir skills: `SQL_Server`, `SAP`, `Power_BI`, `Hardware`
 5. Asignar skills a agentes con nivel de competencia (1-5)
 6. Workstream: `WS_Email_Soporte`
-   - Canal: Email
-   - Modo de distribución: Push (asignación automática)
+    - Canal: Email
+    - Modo de distribución: Push (asignación automática)
 7. Regla de enrutamiento:
    ```
    Si Asunto contiene "factura" OR "cobro" OR "pago"
@@ -600,8 +600,8 @@ Configurar y personalizar Dynamics 365 Sales y Customer Service: sales process c
 #### Actividad 20.5: Knowledge Base integrada
 1. Customer Service Hub → Base de conocimientos → Nuevo artículo
 2. Crear 5 artículos de soluciones frecuentes con:
-   - Título, contenido HTML, palabras clave, categoría
-   - Publicar artículos (flujo de aprobación opcional)
+    - Título, contenido HTML, palabras clave, categoría
+    - Publicar artículos (flujo de aprobación opcional)
 3. En formulario de Caso: panel "KB" → buscar artículos relacionados
 4. Configurar sugerencia automática de KB en Copilot Studio (Módulo 22)
 
@@ -662,24 +662,24 @@ Construir portales web externos con Power Pages que permiten a clientes y provee
 #### Actividad 21.2: Configurar autenticación
 1. Set up → Identity providers
 2. Configurar Azure AD (para empleados del cliente):
-   - App Registration en Azure AD con redirect URI: `https://clientes-sit.powerappsportals.com/signin-oidc`
-   - En Portal: Identity Provider → Azure AD → Client ID, Client Secret, Authority
+    - App Registration en Azure AD con redirect URI: `https://clientes-sit.powerappsportals.com/signin-oidc`
+    - En Portal: Identity Provider → Azure AD → Client ID, Client Secret, Authority
 3. Configurar Local Authentication (para usuarios externos sin Azure AD):
-   - Allow users to register with email
-   - Configurar email de confirmación con plantilla personalizada
+    - Allow users to register with email
+    - Configurar email de confirmación con plantilla personalizada
 
 #### Actividad 21.3: Table Permissions para Oportunidades
 1. Security → Table Permissions → New
 2. **Permiso: Ver mis oportunidades**
-   - Tabla: Oportunidad
-   - Tipo de acceso: Contact (el usuario ve solo sus oportunidades)
-   - Relación: Oportunidad.sit_contacto → Contact
-   - Privilegios: Leer, Crear
+    - Tabla: Oportunidad
+    - Tipo de acceso: Contact (el usuario ve solo sus oportunidades)
+    - Relación: Oportunidad.sit_contacto → Contact
+    - Privilegios: Leer, Crear
 3. **Permiso: Ver estados de casos (solo lectura)**
-   - Tabla: Caso
-   - Tipo de acceso: Contact
-   - Relación: Caso.customerid → Contact
-   - Privilegios: Leer
+    - Tabla: Caso
+    - Tipo de acceso: Contact
+    - Relación: Caso.customerid → Contact
+    - Privilegios: Leer
 4. Asignar permisos al Web Role `Clientes Autenticados`
 
 #### Actividad 21.4: Página con Liquid template personalizado
@@ -824,9 +824,9 @@ Implementar agentes conversacionales de producción con SSO integrado a Azure AD
 #### Actividad 22.1: Configurar SSO con Azure AD
 1. En Azure AD → App Registrations → Nueva (para el bot)
 2. Configurar:
-   - Redirect URI: `https://token.botframework.com/.auth/web/redirect`
-   - API permissions: `User.Read`, `Mail.Send`, `offline_access`, `openid`
-   - Crear client secret
+    - Redirect URI: `https://token.botframework.com/.auth/web/redirect`
+    - API permissions: `User.Read`, `Mail.Send`, `offline_access`, `openid`
+    - Crear client secret
 3. En Copilot Studio → Configuración → Seguridad → Autenticación
 4. Seleccionar: Azure Active Directory v2
 5. Ingresar: Client ID, Client Secret, Tenant ID
@@ -904,18 +904,18 @@ Implementar agentes conversacionales de producción con SSO integrado a Azure AD
 2. Trigger phrases: "hablar con persona", "agente humano", "quiero hablar con alguien"
 3. Nodo de mensaje: "Entiendo que deseas hablar con uno de nuestros agentes. Te conectaré en un momento."
 4. Nodo: Escalar a agente humano (nodo nativo de Copilot Studio)
-   - Contexto de escalamiento: resumen de la conversación
+    - Contexto de escalamiento: resumen de la conversación
 5. Configurar integración con Omnichannel for Customer Service:
-   - Admin Center → Canales → Bot → Configurar escalamiento
-   - Queue de escalamiento: `Cola_Chat_General`
+    - Admin Center → Canales → Bot → Configurar escalamiento
+    - Queue de escalamiento: `Cola_Chat_General`
 
 #### Actividad 22.6: Analytics y mejora continua
 1. Copilot Studio → Analytics → Resumen
 2. Revisar métricas clave:
-   - **Tasa de resolución:** % de conversaciones que el bot resolvió sin escalar (objetivo ≥ 70%)
-   - **Tasa de abandono:** % que se fue sin obtener respuesta (objetivo ≤ 15%)
-   - **Topics más activos:** identificar cuáles topics necesitan más trigger phrases
-   - **Sesiones con escalamiento:** identificar patterns para crear nuevos topics
+    - **Tasa de resolución:** % de conversaciones que el bot resolvió sin escalar (objetivo ≥ 70%)
+    - **Tasa de abandono:** % que se fue sin obtener respuesta (objetivo ≤ 15%)
+    - **Topics más activos:** identificar cuáles topics necesitan más trigger phrases
+    - **Sesiones con escalamiento:** identificar patterns para crear nuevos topics
 3. Con base en Analytics → mejorar trigger phrases de los 3 topics con menor tasa de activación
 
 ### 💼 Caso Real de Negocio
@@ -1130,9 +1130,9 @@ public class SolicitudPostUpdatePlugin : IPlugin
 1. Descargar PRT: NuGet → Microsoft.CrmSdk.XrmTooling.PluginRegistrationTool
 2. Conectar al entorno DEV
 3. Registrar assembly:
-   - Register → Register New Assembly
-   - Subir el DLL compilado (modo Release)
-   - Isolation Mode: Sandbox
+    - Register → Register New Assembly
+    - Subir el DLL compilado (modo Release)
+    - Isolation Mode: Sandbox
 4. Registrar Step para SolicitudPreCreatePlugin:
    ```
    Message: Create
@@ -1270,17 +1270,17 @@ Integrar Power Platform con Azure Service Bus, Azure Functions, Azure API Manage
 #### Actividad 24.1: Service Endpoint — Dataverse a Azure Service Bus
 1. Plugin Registration Tool → Register → Register New Service Endpoint
 2. Configurar:
-   - Designación: Queue
-   - Solución: SIT_Integraciones
-   - Namespace URL: `sb://sit-integration.servicebus.windows.net/`
-   - Queue Name: `solicitudes-nuevas`
-   - SAS Key Name: `RootManageSharedAccessKey`
-   - SAS Key: (de Azure Portal → Service Bus → Shared access policies)
+    - Designación: Queue
+    - Solución: SIT_Integraciones
+    - Namespace URL: `sb://sit-integration.servicebus.windows.net/`
+    - Queue Name: `solicitudes-nuevas`
+    - SAS Key Name: `RootManageSharedAccessKey`
+    - SAS Key: (de Azure Portal → Service Bus → Shared access policies)
 3. Registrar Step que envía a Service Bus:
-   - Message: Create
-   - Entity: sit_solicitud
-   - Stage: Post-operation async
-   - Execution Mode: Asynchronous
+    - Message: Create
+    - Entity: sit_solicitud
+    - Stage: Post-operation async
+    - Execution Mode: Asynchronous
 4. Probar: crear solicitud → verificar mensaje en Service Bus Explorer
 
 #### Actividad 24.2: Azure Function que procesa el Service Bus
@@ -1354,7 +1354,7 @@ public class SolicitudProcessor
 3. Display Name: `Dataverse Proxy API`
 4. Base URL: `/dataverse`
 5. Agregar operación POST `/solicitudes`:
-   - Backend: Forward a `https://tuorg.crm.dynamics.com/api/data/v9.2/sit_solicituds`
+    - Backend: Forward a `https://tuorg.crm.dynamics.com/api/data/v9.2/sit_solicituds`
 6. Política de inbound (transformación y autenticación):
    ```xml
    <policies>
@@ -1969,21 +1969,21 @@ Implementar portales externos con autenticación multitenant usando Azure AD B2C
 1. Azure Portal → Crear recurso → Azure AD B2C
 2. Crear nuevo tenant B2C: `sitconsultingb2c.onmicrosoft.com`
 3. User Flows → Nuevo flujo → Sign up and sign in
-   - Método: Email
-   - Atributos a recopilar: Nombre, Apellido, País
-   - Claims a retornar: Email, Nombre completo, ObjectId
+    - Método: Email
+    - Atributos a recopilar: Nombre, Apellido, País
+    - Claims a retornar: Email, Nombre completo, ObjectId
 4. App Registrations en B2C:
-   - Nombre: `Power Pages Portal`
-   - Redirect URI: `https://clientes-sit.powerappsportals.com/signin-oidc`
-   - Permisos: `openid`, `offline_access`
+    - Nombre: `Power Pages Portal`
+    - Redirect URI: `https://clientes-sit.powerappsportals.com/signin-oidc`
+    - Permisos: `openid`, `offline_access`
 
 #### Actividad 28.2: Conectar B2C con Power Pages
 1. Power Pages Studio → Set up → Identity providers → Azure AD B2C
 2. Configurar:
-   - Authority: `https://sitconsultingb2c.b2clogin.com/sitconsultingb2c.onmicrosoft.com/B2C_1_SignUpSignIn`
-   - Client ID: (de App Registration en B2C)
-   - Client Secret
-   - Redirect URI: confirmar que coincide
+    - Authority: `https://sitconsultingb2c.b2clogin.com/sitconsultingb2c.onmicrosoft.com/B2C_1_SignUpSignIn`
+    - Client ID: (de App Registration en B2C)
+    - Client Secret
+    - Redirect URI: confirmar que coincide
 
 3. Personalizar la experiencia de registro con Liquid en la página de perfil:
    ```liquid
