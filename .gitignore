@@ -1,0 +1,17 @@
+# Editor / Claude Code
+.claude/
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Temp
+*.tmp
+*.bak
