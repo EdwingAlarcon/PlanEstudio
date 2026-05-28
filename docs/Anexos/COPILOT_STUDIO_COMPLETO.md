@@ -49,6 +49,7 @@ Copilot Studio (antes Power Virtual Agents) es la plataforma de Microsoft para c
      Si no tienes la información, ofreces escalar a un agente humano.
      No inventes datos ni procedimientos que no estén en la Knowledge Base.
    ```
+
 4. Idioma: Español
 5. Crear
 
@@ -155,6 +156,7 @@ Variables de sistema útiles:
 ### Entidades — tipos de datos que el bot entiende
 
 **Entidades de sistema (pre-construidas):**
+
 - `Número` — detecta números en el texto ("ciento cincuenta" → 150)
 - `Fecha y hora` — "mañana", "el lunes", "15 de marzo"
 - `Email` — formato de email
@@ -309,16 +311,19 @@ Con Generative Orchestration:
 ### Modos de autenticación
 
 **Sin autenticación (público):**
+
 - Cualquier persona puede usar el bot
 - No conoce la identidad del usuario
 - Apropiado para bots en sitios web públicos
 
 **Solo Microsoft (empleados):**
+
 - Integrado con Azure AD del tenant
 - SSO automático en Teams — el bot conoce la identidad sin pedir login
 - Variables de sistema disponibles: System.User.PrincipalName, System.User.DisplayName
 
 **Autenticación manual (OAuth 2.0):**
+
 - Configurar con cualquier identity provider
 - El bot puede usar el token para llamar APIs en nombre del usuario
 

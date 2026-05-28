@@ -695,6 +695,7 @@ $response.value | ForEach-Object {
 
 ### Dashboard de salud en Power BI
 Métricas clave a monitorear:
+
 - Flujos fallidos en las últimas 24h / 7 días
 - Tiempo promedio de ejecución por flujo
 - Flujos con tasa de error > 1%

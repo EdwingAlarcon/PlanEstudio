@@ -25,6 +25,7 @@
 ## Task 1: Dependencias Python
 
 **Files:**
+
 - Create: `requirements.txt`
 
 - [ ] **Step 1: Crear requirements.txt**
@@ -54,6 +55,7 @@ Salida esperada: `mkdocs, version 1.6.x from ...`
 ## Task 2: Configuración principal MkDocs
 
 **Files:**
+
 - Create: `mkdocs.yml`
 
 - [ ] **Step 1: Crear mkdocs.yml**
@@ -181,6 +183,7 @@ Si hay error `exclude_docs not supported`, eliminar esa key y crear un `.mkdocsi
 ## Task 3: CSS personalizado para niveles y e-learning
 
 **Files:**
+
 - Create: `stylesheets/extra.css`
 
 - [ ] **Step 1: Crear directorio y archivo CSS**
@@ -263,6 +266,7 @@ mkdocs serve
 ```
 
 Abrir `http://127.0.0.1:8000` y verificar:
+
 - Pestañas con color por nivel
 - Checkboxes visibles en CHECKLIST_PROGRESO.md
 - Código con botón "Copy"
@@ -273,6 +277,7 @@ Abrir `http://127.0.0.1:8000` y verificar:
 ## Task 4: .gitignore
 
 **Files:**
+
 - Modify: `.gitignore` (crear si no existe)
 
 - [ ] **Step 1: Crear/actualizar .gitignore**
@@ -313,6 +318,7 @@ Debe existir `site/index.html`, `site/Niveles/`, `site/Recursos/`, etc.
 - [ ] **Step 3: Confirmar navegación completa**
 
 Con `mkdocs serve` abierto, navegar manualmente:
+
 - [ ] Inicio carga PLAN_MAESTRO.md
 - [ ] Nivel 1 muestra módulos con checkboxes
 - [ ] Búsqueda "Power Fx" retorna resultados

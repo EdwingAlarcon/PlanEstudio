@@ -243,9 +243,11 @@ Implementar y operar el Center of Excellence Starter Kit de Microsoft para obten
     - Governance Components
     - Nurture Components
     - Innovation Backlog (opcional)
+
 4. Configurar el flujo `CLEANUP - Admin | Sync Template v4`:
     - Connectors: Power Apps Admin, Power Automate Admin, Microsoft Dataverse
     - Frecuencia: 1 vez por día (carga inicial puede tardar horas)
+
 5. Esperar la primera sincronización completa (24–48h para tenants grandes)
 
 #### Actividad 31.2: Power BI CoE Dashboard
@@ -299,6 +301,7 @@ Trigger: Recurrente (cada 30 días)
 
 #### Actividad 31.4: Environment Request Process
 Crear formulario para que makers soliciten ambientes:
+
 1. Canvas App: `Solicitud de Ambiente`
 2. Campos: Nombre del proyecto, Justificación de negocio, Tipo requerido (Dev/Test/Prod), Owner del proyecto, Fecha requerida, Conectores necesarios
 3. Flujo de aprobación:
@@ -320,6 +323,7 @@ Crear formulario para que makers soliciten ambientes:
    Nivel 3: Completó PL-200 → Badge "Functional Consultant"
    Nivel 4: App con 50+ usuarios → Badge "Power User"
    ```
+
 4. Flujo que registra automáticamente cuando un maker publica su primera app
 
 ### 💼 Caso Real de Negocio
@@ -428,6 +432,7 @@ Documentación requerida:
     - **IP firewall:** restricción de acceso por IP/red corporativa
     - **Customer-managed keys (CMK):** cifrado con claves propias del cliente
     - **Weekly digest:** email semanal al admin con el estado del ambiente
+
 3. Configurar para PROD:
    ```
    Sharing limits: Solo grupos de seguridad de AAD
@@ -438,9 +443,11 @@ Documentación requerida:
 
 #### Actividad 32.4: Pipelines for Power Platform (nativo)
 Alternativa a Azure DevOps para organizaciones sin DevOps avanzado:
+
 1. Admin Center → Pipelines → Nuevo pipeline
 2. Configurar etapas:
     - DEV → TEST → PROD
+
 3. Desde make.powerapps.com → Solución → Pipelines → Deploy
 4. El despliegue pasa por las etapas con aprobaciones configuradas
 5. Ventaja: no requiere Azure DevOps ni conocimiento de YAML
@@ -583,6 +590,7 @@ Diseñar e implementar arquitecturas de integración enterprise usando el stack 
     - **Producto Interno:** acceso sin límite para apps internas
     - **Producto Partners:** 1,000 req/hora, API Key requerida
     - **Producto Freemium:** 100 req/hora, sin soporte
+
 3. Políticas de transformación:
    ```xml
    <!-- Transformar errores de Dataverse a formato estándar de la empresa -->
@@ -600,6 +608,7 @@ Diseñar e implementar arquitecturas de integración enterprise usando el stack 
      </set-header>
    </on-error>
    ```
+
 4. Habilitar Developer Portal:
     - Personalizar con el branding de la empresa
     - Configurar proceso de suscripción (automático vs aprobación manual)
@@ -864,10 +873,12 @@ Implementar una postura de seguridad Zero Trust para Power Platform: clasificaci
     - `Credit Card Number` en columna sit_tarjetacredito
     - `Personal Email` en emailaddress1 de Contact
     - `National ID Number` en sit_numerodocumento
+
 4. Crear Sensitivity Labels:
     - `Confidencial - Datos Personales`: aplica cifrado + protección de copia
     - `Interno - Solo empleados`: previene compartir externamente
     - `Público`: sin restricciones
+
 5. Política de auto-etiquetado: cuando Purview detecta dato personal → aplicar label `Confidencial - Datos Personales`
 
 #### Actividad 35.2: Customer-Managed Keys
@@ -886,6 +897,7 @@ Implementar una postura de seguridad Zero Trust para Power Platform: clasificaci
     - Requiere: justificación de negocio + aprobación de manager
     - MFA obligatorio para activar
     - Notificación al Security team
+
 4. Proceso cuando admin necesita acceder:
     - PIM → Activar rol → ingresar justificación
     - Manager recibe email de aprobación → aprueba
@@ -898,6 +910,7 @@ Implementar una postura de seguridad Zero Trust para Power Platform: clasificaci
     - PowerApps Activity
     - Power Automate Activity  
     - Dataverse Audit Logs
+
 3. Destino: Azure Log Analytics Workspace (conectado a Sentinel)
 4. En Sentinel → KQL queries para detectar anomalías:
    ```kql
@@ -934,10 +947,12 @@ Implementar una postura de seguridad Zero Trust para Power Platform: clasificaci
 5. Condiciones:
     - Plataformas de dispositivos: Any (para capturar todos)
     - Ubicaciones: fuera de IPs corporativas
+
 6. Controles de acceso:
     - Requerir MFA
     - Requerir dispositivo marcado como cumplimiento (Intune)
     - Requerir app cliente aprobada
+
 7. Modo: Reporte (audit first) → cambiar a Enforced después de 2 semanas
 
 ### 💼 Caso Real de Negocio
@@ -988,6 +1003,7 @@ Integrar capacidades de Inteligencia Artificial en soluciones Power Platform usa
     - NIT/RFC del proveedor
     - Total
     - Lista de líneas (producto, cantidad, precio)
+
 5. Entrenar el modelo (puede tomar 30–60 minutos)
 6. Probar con una factura nueva → verificar exactitud de extracción
 7. Publicar el modelo
@@ -1058,6 +1074,7 @@ Set column sit_categoriaai = first(body('HTTP_OpenAI')?['choices'])?['message']?
     - sit_monto_estimado, sit_probabilidad, sit_etapa
     - sit_origen, sit_sector_cliente, sit_tipo_contacto
     - Días desde creación hasta el momento actual
+
 5. Entrenar con historial de 2+ años de oportunidades
 6. Publicar y usar en Canvas App:
    ```js
@@ -1387,12 +1404,14 @@ Dominar los dominios del examen PL-600 (Power Platform Solution Architect Expert
 ### 📖 Conceptos Clave del Examen PL-600
 
 **Dominio 1: Realizar análisis de solución (35-40%)**
+
 - Análisis de requerimientos y soluciones existentes
 - Evaluación de plataforma vs customización
 - Análisis de riesgo y viabilidad
 - Estrategia de migración de datos
 
 **Dominio 2: Diseñar una solución (40-45%)**
+
 - Arquitectura de aplicaciones
 - Estrategia de datos y seguridad
 - Integración con otros sistemas
@@ -1400,6 +1419,7 @@ Dominar los dominios del examen PL-600 (Power Platform Solution Architect Expert
 - Estrategia de inteligencia artificial
 
 **Dominio 3: Implementar la solución (15-20%)**
+
 - Guiar al equipo de desarrollo
 - Validar que la implementación sigue la arquitectura
 - Gestión de calidad
@@ -1458,19 +1478,23 @@ es para usuarios externos. Model-Driven tiene soporte offline pero es más limit
 Practicar con las siguientes áreas donde el examen tiende a ser más difícil:
 
 **Área 1: Elegir entre Canvas y Model-Driven**
+
 - Canvas: UX personalizada, mobile-first, offline, múltiples fuentes de datos
 - Model-Driven: datos relacionales complejos, BPF, vistas y formularios rápidos de configurar
 
 **Área 2: Cuándo escalar a código vs configuración**
+
 - Configuración: Business Rules, Power Automate, reglas de Dataverse
 - Código C#: validaciones que deben ser imposibles de eludir, lógica de integración síncrona compleja, performance crítica
 
 **Área 3: Strategy de ALM**
+
 - Siempre managed solution a PROD
 - Connection References + Environment Variables obligatorias
 - Solution Checker antes de cualquier importación
 
 **Área 4: Integración**
+
 - Power Automate para integraciones simples sin requisitos de SLA estrictos
 - Logic Apps para integraciones enterprise con EDI, B2B, transformaciones complejas
 - Azure Functions para lógica de integración custom que requiere código
@@ -1663,6 +1687,7 @@ Práctica: presentar ante colegas/mentores y recibir feedback de un "CFO simulad
 
 ### Métricas de éxito del Capstone
 Al completar el proyecto, debería poder demostrar:
+
 - Tiempo promedio de aprobación de crédito: de X horas a Y horas (mejora medible)
 - % de solicitudes procesadas automáticamente (sin intervención humana): objetivo ≥ 60%
 - Score del Solution Checker: 0 errores críticos
@@ -1710,6 +1735,7 @@ Para considerarse Solution Architect Master de Power Platform, debes cumplir:
 
 ### Auto-evaluación Final
 Califica cada área del 1 al 5:
+
 - Enterprise Architecture y Gobernanza: ___/5
 - CoE y Administración a escala: ___/5
 - Multi-tenant y cumplimiento regulatorio: ___/5
@@ -1729,11 +1755,13 @@ Califica cada área del 1 al 5:
 Has llegado al final de un recorrido de 20-32 meses que te convierte en uno de los perfiles más demandados del ecosistema Microsoft. El Solution Architect de Power Platform es el puente entre los problemas de negocio y la tecnología — habla el idioma del CFO y del desarrollador al mismo tiempo.
 
 **Lo que te diferenció:**
+
 - No solo aprendiste herramientas — aprendiste a tomar decisiones arquitectónicas justificadas
 - No solo codificaste — aprendiste a liderar equipos y comunicar con el C-suite
 - No solo configuraste — aprendiste a gobernar una plataforma a escala
 
 **El camino continúa:**
+
 - Mantener las certificaciones actualizadas (Microsoft renueva los exámenes anualmente)
 - Participar en la comunidad (Power Platform Community, eventos MVP)
 - Considerar la certificación Azure Solutions Architect Expert (AZ-305) como complemento

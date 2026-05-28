@@ -129,6 +129,7 @@ Este plan te llevará desde fundamentos hasta arquitectura empresarial en **Micr
 
 ### 📋 [Lenguajes de Programación](Anexos/LENGUAJES_PROGRAMACION.md)
 Guía completa de qué lenguajes aprender, cuándo, por qué y cómo:
+
 - Power Fx (básico → avanzado)
 - JavaScript/TypeScript (componentes y extensiones)
 - C# (plugins y extensiones backend)
@@ -138,6 +139,7 @@ Guía completa de qué lenguajes aprender, cuándo, por qué y cómo:
 
 ### 🤖 [Copilot Studio Completo](Anexos/COPILOT_STUDIO_COMPLETO.md)
 Módulo especializado desde cero hasta experto:
+
 - Fundamentos y conceptos
 - Diseño de copilots empresariales
 - Integraciones con Dataverse y Dynamics 365
@@ -147,6 +149,7 @@ Módulo especializado desde cero hasta experto:
 
 ### 🔄 [ALM y DevOps](Anexos/ALM_DEVOPS_ESTRATEGIAS.md)
 Estrategias profesionales de Application Lifecycle Management:
+
 - Soluciones administradas vs no administradas
 - Pipelines de CI/CD
 - Branching strategies
@@ -155,6 +158,7 @@ Estrategias profesionales de Application Lifecycle Management:
 
 ### 🏛️ [Arquitectura Empresarial](Anexos/ARQUITECTURA_EMPRESARIAL.md)
 Patrones y prácticas de arquitectura:
+
 - Patrones de diseño para Power Platform
 - Arquitecturas de referencia
 - Diseño para escalabilidad
@@ -163,6 +167,7 @@ Patrones y prácticas de arquitectura:
 
 ### 💼 [Casos Reales de Negocio](Anexos/CASOS_REALES_NEGOCIO.md)
 20+ casos prácticos detallados:
+
 - Automatización operativa
 - Gestión de solicitudes internas
 - Integración con ERP/CRM
@@ -444,6 +449,7 @@ NIVEL 4 (ARQUITECTO)
 ```
 
 **Certificaciones Complementarias:**
+
 - MB-230: Dynamics 365 Customer Service
 - MB-910: Dynamics 365 Fundamentals (CRM)
 - AZ-104: Azure Administrator (para integraciones)
@@ -566,6 +572,7 @@ Un Arquitecto moderno de Power Platform no es solo un experto técnico, es:
    - Ve a: https://developer.microsoft.com/microsoft-365/dev-program
    - Regístrate gratis (incluye entorno E5 completo)
    - Espera 5-10 minutos a que se aprovisione
+
 4. ✅ Abre [NIVEL_1_BASICO.md](Niveles/NIVEL_1_BASICO.md)
 5. ✅ Comienza con el Módulo 1
 
@@ -594,6 +601,7 @@ Cada nivel culmina con un proyecto que integra todos los conocimientos:
 
 ### 🟢 Proyecto Nivel 1: Sistema de Gestión de Solicitudes
 Aplicación completa para gestionar solicitudes internas de una organización:
+
 - App Canvas para usuarios finales
 - App Model-Driven para administradores
 - Flujos de aprobación automatizados
@@ -602,6 +610,7 @@ Aplicación completa para gestionar solicitudes internas de una organización:
 
 ### 🔵 Proyecto Nivel 2: Portal de Autoservicio Empresarial
 Solución empresarial con múltiples integraciones:
+
 - Portal público con Power Pages
 - Copilot para consultas automatizadas
 - Integración con API externa (REST)
@@ -610,6 +619,7 @@ Solución empresarial con múltiples integraciones:
 
 ### 🟠 Proyecto Nivel 3: Solución Empresarial Multi-Módulo
 Arquitectura completa con ALM:
+
 - Integración con Dynamics 365
 - Plugins personalizados en C#
 - Pipeline de CI/CD completo
@@ -619,6 +629,7 @@ Arquitectura completa con ALM:
 
 ### 🔴 Proyecto Nivel 4: Transformación Digital Organizacional
 Diseño arquitectónico empresarial:
+
 - Arquitectura de referencia completa
 - Centro de Excelencia (CoE)
 - Gobernanza organizacional
@@ -643,12 +654,14 @@ Al final de cada módulo, pregúntate:
 ### Indicadores de Dominio por Nivel
 
 **Nivel 1 - Básico:**
+
 - Creas apps Canvas funcionales para casos simples
 - Automatizas procesos lineales con Power Automate
 - Modelabas datos básicos en Dataverse
 - Generas reportes descriptivos en Power BI
 
 **Nivel 2 - Intermedio:**
+
 - Diseñas aplicaciones con componentización
 - Implementas lógica de negocio compleja
 - Integras APIs y servicios externos
@@ -656,6 +669,7 @@ Al final de cada módulo, pregúntate:
 - Escribes JavaScript para extensiones
 
 **Nivel 3 - Avanzado:**
+
 - Arquitectas soluciones multi-capa
 - Implementas ALM con pipelines automatizados
 - Desarrollas plugins en C#
@@ -663,6 +677,7 @@ Al final de cada módulo, pregúntate:
 - Optimizas rendimiento de soluciones
 
 **Nivel 4 - Arquitecto:**
+
 - Diseñas arquitecturas empresariales
 - Defines estrategias de gobernanza
 - Lideras transformaciones digitales
@@ -777,11 +792,13 @@ PowerShell (como administrador):
 ### Semana Típica de Estudio
 
 **Nivel 1-2 (Fundamentos):**
+
 - 40% Tutoriales y videos
 - 50% Práctica hands-on
 - 10% Lectura de documentación
 
 **Nivel 3-4 (Arquitectura):**
+
 - 20% Documentación técnica
 - 60% Proyectos y diseño
 - 20% Investigación y troubleshooting
@@ -806,6 +823,7 @@ Confianza
 ```
 
 **Fases esperadas:**
+
 1. **Meses 1-3:** Frustración inicial (normal, persiste)
 2. **Meses 4-6:** Primeros logros, momentum aumenta
 3. **Meses 7-12:** Competencia creciente, soluciones funcionales
@@ -898,6 +916,7 @@ Tu rol será **orquestar este ecosistema completo**, diseñando soluciones que a
 ### El Camino es Largo pero Vale la Pena
 
 **Ventajas de Microsoft Power Platform:**
+
 - 🚀 Demanda laboral creciente (escasez de arquitectos calificados)
 - 💰 Salarios competitivos (arquitectos certificados son muy valorados)
 - 🌍 Aplicable a múltiples industrias
@@ -907,6 +926,7 @@ Tu rol será **orquestar este ecosistema completo**, diseñando soluciones que a
 
 ### Tu Ventaja Competitiva
 Como ingeniero de sistemas con mentalidad práctica y uso de IA:
+
 - Entiendes arquitectura de sistemas
 - Piensas en procesos y optimización
 - Usas tecnología moderna (IA) como acelerador

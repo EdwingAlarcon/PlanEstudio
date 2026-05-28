@@ -115,6 +115,7 @@ Valida la capacidad de implementar y configurar soluciones de Power Platform par
 
 ### Temas clave
 **Dataverse:**
+
 - Tablas, columnas, relaciones (1:N, N:N)
 - Business Rules (alcance: formulario vs entidad)
 - Business Process Flows
@@ -123,12 +124,14 @@ Valida la capacidad de implementar y configurar soluciones de Power Platform par
 - Auditoría
 
 **Power Apps:**
+
 - Canvas Apps: formContext, CRUD con Patch, delegación, colecciones
 - Model-Driven Apps: formularios, vistas, dashboards, BPF
 - Gestión de soluciones (managed vs unmanaged)
 - Connection References y Environment Variables
 
 **Power Automate:**
+
 - Tipos de disparadores (automatizado, instantáneo, programado)
 - Approval workflows
 - Try/Catch con Scope
@@ -136,11 +139,13 @@ Valida la capacidad de implementar y configurar soluciones de Power Platform par
 - Child Flows
 
 **Copilot Studio:**
+
 - Topics, Entities, Variables
 - Integración con Power Automate
 - Publicación en Teams y otros canales
 
 **Power BI:**
+
 - DAX básico (SUM, CALCULATE, FILTER)
 - Row Level Security (RLS)
 - Publicar y compartir reportes en Service
@@ -201,6 +206,7 @@ Certificación técnica avanzada para desarrolladores. Valida capacidad de exten
 
 ### Temas clave
 **Plugins C#:**
+
 - IPlugin, IPluginExecutionContext, IOrganizationService
 - Pre-operation vs Post-operation, Synchronous vs Asynchronous
 - Pre/Post Entity Images
@@ -209,6 +215,7 @@ Certificación técnica avanzada para desarrolladores. Valida capacidad de exten
 - Unit testing con Moq
 
 **PCF Controls:**
+
 - ComponentFramework.StandardControl vs ReactControl
 - Manifest XML, IInputs/IOutputs
 - context.webAPI para CRUD desde el control
@@ -216,12 +223,14 @@ Certificación técnica avanzada para desarrolladores. Valida capacidad de exten
 - pac pcf init, push, build
 
 **ALM y DevOps:**
+
 - Soluciones: managed, unmanaged, patch, clone
 - Solution Checker API
 - Azure DevOps pipelines con Power Platform Build Tools
 - Connection References y Environment Variables en pipelines
 
 **Integraciones:**
+
 - Dataverse Web API (OData v4)
 - Custom Connectors (OpenAPI spec)
 - Azure Service Bus como Service Endpoint
@@ -229,6 +238,7 @@ Certificación técnica avanzada para desarrolladores. Valida capacidad de exten
 - Azure Functions como receptor de eventos
 
 **Seguridad:**
+
 - OAuth 2.0 para autenticación con Dataverse
 - Service Principals (App Registration) para integraciones
 - MSAL para obtener tokens en aplicaciones cliente
@@ -247,6 +257,7 @@ Certificación técnica avanzada para desarrolladores. Valida capacidad de exten
   - Cuándo usar Plugin vs Power Automate
   - Cuándo usar PCF vs Web Resource JavaScript
   - Pre-operation vs Post-operation en plugins
+
 - Estudiar el OData query syntax ($filter, $select, $expand, $top)
 
 ### Ejemplo de preguntas
@@ -298,6 +309,7 @@ El PL-600 pregunta **qué** decidirías implementar, **por qué**, y **cuáles s
 
 ### Temas clave
 **Análisis de solución:**
+
 - Requirements gathering y análisis de viabilidad
 - Análisis de sistemas existentes (AS-IS) y definición de solución futura (TO-BE)
 - Fit-Gap Analysis
@@ -306,6 +318,7 @@ El PL-600 pregunta **qué** decidirías implementar, **por qué**, y **cuáles s
 - Definición de alcance y criterios de éxito
 
 **Diseño de solución:**
+
 - Arquitectura de aplicaciones (Canvas vs Model-Driven vs Pages)
 - Estrategia de datos (Dataverse vs Azure SQL vs SharePoint)
 - Modelo de seguridad (Roles, Field Security, Row-level, Network)
@@ -316,6 +329,7 @@ El PL-600 pregunta **qué** decidirías implementar, **por qué**, y **cuáles s
 - Capacidad y rendimiento (licencias, storage, API limits)
 
 **Implementación:**
+
 - Liderar y guiar al equipo de desarrollo
 - Verificar que la implementación sigue la arquitectura diseñada
 - Gestión de calidad y testing strategy
@@ -331,26 +345,31 @@ El PL-600 pregunta **qué** decidirías implementar, **por qué**, y **cuáles s
 ### Estrategia de preparación (plan de 8 semanas)
 
 **Semanas 1–2: Diagnóstico**
+
 - Completar el practice assessment de Microsoft (gratuito)
 - Identificar dominios débiles
 - Leer el "Exam Study Guide" oficial completo
 
 **Semanas 3–4: Análisis de solución**
+
 - Estudiar todos los escenarios de Fit-Gap Analysis
 - Practicar con casos de estudio del blog de Power Platform
 - Revisar los módulos del Nivel 4 de este plan: Módulos 30, 37, 38
 
 **Semanas 5–6: Diseño de solución**
+
 - Revisar cada componente y sus criterios de selección
 - Practicar decisiones: "¿Canvas o Model-Driven? ¿Power Automate o Logic Apps?"
 - Revisar los módulos: 18, 19, 32, 33, 34, 35
 
 **Semana 7: Practice tests**
+
 - MeasureUp PL-600 official practice test
 - Score objetivo: ≥ 70% antes de agendar el examen real
 - Revisar cada respuesta incorrecta a fondo
 
 **Semana 8: Repaso final y mental**
+
 - Repasar los ADRs del proyecto capstone (Módulo 40)
 - Hacer el practice assessment de Microsoft una vez más
 - Descansar el día anterior — la fatiga mental afecta el pensamiento arquitectónico
@@ -422,6 +441,7 @@ PREGUNTAS:
 3. Opciones de modalidad:
     - **Online (en casa):** requiere cámara, cuarto sin interrupciones, ID oficial
     - **Presencial (centro de pruebas):** reservar con anticipación, más control del ambiente
+
 4. Reagendar: sin costo si se hace con más de 6 días de anticipación
 
 ### Si repruebas

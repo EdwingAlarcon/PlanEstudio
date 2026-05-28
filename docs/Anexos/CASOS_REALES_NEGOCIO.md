@@ -10,6 +10,7 @@
 **Contexto:** Los analistas de crédito revisaban manualmente cada solicitud, consultaban el historial en papel, llamaban al buró por teléfono y tardaban 3-5 días por solicitud.
 
 **Problema medido:**
+
 - Tiempo de aprobación: 3-5 días hábiles
 - Costo por solicitud (tiempo analista): $45 USD
 - Tasa de error en digitación: 4%
@@ -39,6 +40,7 @@ Stack: Power Pages + Dataverse + Power Automate + AI Builder + Plugin C#
 ```
 
 **Resultados:**
+
 - Tiempo de aprobación: de 3-5 días a 4 horas promedio (casos que requieren analista)
 - 70% de solicitudes aprobadas automáticamente en < 5 minutos
 - Costo por solicitud: de $45 a $12 USD (-73%)
@@ -67,6 +69,7 @@ Event-driven con Azure Event Grid + AI Builder + D365 Customer Service
 ```
 
 **Resultados:**
+
 - Tiempo de detección: de 72 horas a 45 segundos promedio
 - Fraudes bloqueados a tiempo: de 15% a 89%
 - Falsos positivos: 2.3% (el modelo mejora con retroalimentación mensual)
@@ -100,6 +103,7 @@ Power Automate Desktop (RPA) + Power Automate Cloud + Dataverse
 ```
 
 **Resultados:**
+
 - Horas mensuales de conciliación: de 40 a 3 (solo excepciones)
 - Tasa de conciliación automática: 94%
 - Errores de conciliación detectados: 100% (antes se pasaban por alto)
@@ -136,6 +140,7 @@ Canvas App (offline) + AI Builder Object Detection + D365 Field Service
 ```
 
 **Resultados:**
+
 - Tiempo de detección de defecto crítico: de 48 horas a 3 minutos
 - Piezas defectuosas por incidente: de 200+ a < 15 (paro inmediato)
 - Costo de scrap mensual: reducido 65%
@@ -172,6 +177,7 @@ IoT Hub + Dataverse + D365 Field Service + AI Builder Prediction
 ```
 
 **Resultados:**
+
 - Paradas no planificadas: reducidas 78%
 - Ahorro anual (paradas evitadas): $2.1M USD
 - Costo de mantenimiento: reducido 30% (preventivo vs reactivo es más barato)
@@ -209,6 +215,7 @@ Canvas App offline-capable + Dataverse + Power BI
 ```
 
 **Resultados:**
+
 - Discrepancias de inventario: de 8% a 0.4%
 - Tiempo de conteo físico: de 2 semanas a 4 horas (inventario cíclico)
 - Reorden automático: 85% de las órdenes generadas sin intervención humana
@@ -250,6 +257,7 @@ D365 Project Operations (o tablas personalizadas) + Canvas App + Power BI + Powe
 ```
 
 **Resultados:**
+
 - Retraso en facturación: de 2 semanas a 2 días
 - Visibilidad del avance de proyectos: en tiempo real (antes mensual)
 - Utilización de consultores: aumentó de 68% a 79% (visibilidad de disponibilidad)
@@ -287,6 +295,7 @@ Power Pages + Dataverse + Azure AD B2C + Azure Blob Storage
 ```
 
 **Resultados:**
+
 - Llamadas de estado: reducidas 70%
 - Satisfacción del cliente (NPS): de 35 a 72
 - Tiempo perdido en recepciones: de 3h/día a 30 min/día
@@ -324,6 +333,7 @@ Dataverse + Power Automate + Azure OpenAI + Power Pages (extranet)
 ```
 
 **Resultados:**
+
 - Tiempo de preparación de propuesta: de 3-5 días a 4 horas
 - Propuestas enviadas por mes: aumentó de 8 a 22
 - Consistencia de precios: 100% (antes había descuentos no autorizados)
@@ -366,6 +376,7 @@ D365 Customer Service + Canvas App + Dataverse + Copilot Studio + Power BI
 ```
 
 **Resultados:**
+
 - Venta cruzada (cross-sell) en tienda: +23% (vendedores ven historial del cliente)
 - Tiempo de resolución de quejas: de 48h a 4h (datos unificados)
 - NPS: de 41 a 68
@@ -405,6 +416,7 @@ Canvas App offline + Dataverse + Power Automate + Power BI
 ```
 
 **Resultados:**
+
 - Tiempo de reporte: de 3 días a tiempo real
 - Cobertura de visitas: de 78% a 94% (visibilidad de GPS presiona el cumplimiento)
 - Fraude de visitas (promotores que no iban): detectado y eliminado (GPS)
@@ -451,6 +463,7 @@ D365 Customer Service + Power Pages + Dataverse + Canvas App + Copilot Studio
 ```
 
 **Resultados:**
+
 - Citas agendadas por portal/bot: 45% del total (antes 0%)
 - Llamadas de agendamiento: reducidas 45%
 - No-shows: de 22% a 14% (recordatorios automáticos)
@@ -494,6 +507,7 @@ NOTA: Los datos de pacientes son extremadamente sensibles (HIPAA + regulación l
 ```
 
 **Resultados:**
+
 - Tiempo de captura de datos: de semanas a horas
 - Data quality (queries): reducidas 60% (validaciones en tiempo real)
 - Cumplimiento regulatorio: 100% en auditoría de la FDA
@@ -536,6 +550,7 @@ Power Pages + D365 Customer Service + Dataverse + Power Automate + Power BI
 ```
 
 **Resultados:**
+
 - Respuesta en término legal: de 62% a 97%
 - Multas por incumplimiento: de 8 al año a 0
 - Ciudadanos que consultan en persona: reducidos 40% (portal de consulta online)
@@ -573,6 +588,7 @@ Dataverse + Model-Driven App + Power Automate + Power BI
 ```
 
 **Resultados:**
+
 - Pólizas vencidas sin renovar: de 12 al año a 0
 - Actas de interventoría en término: de 70% a 98%
 - Procesos disciplinarios por negligencia contractual: 0 en 2 años
@@ -618,6 +634,7 @@ Power Pages + Dataverse + Power Automate + AI Builder + Canvas App
 ```
 
 **Resultados:**
+
 - Tiempo de respuesta: de 3-6 semanas a 5-7 días hábiles
 - Casos que requieren evaluación humana: 30% (70% automáticos)
 - Satisfacción de aspirantes: NPS de 12 a 58
@@ -658,6 +675,7 @@ D365 Field Service + Canvas App offline + Azure Maps + Power BI
 ```
 
 **Resultados:**
+
 - Tiempo de restauración de servicio: reducido 32%
 - Extravío de órdenes de trabajo: 0
 - Activos sin información de mantenimiento: de 40% a 3%

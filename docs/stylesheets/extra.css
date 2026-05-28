@@ -90,15 +90,18 @@
   font-size: 0.9rem;
 }
 
-/* ─── Párrafos **Práctica X.X:** (bold solo) como sub-encabezados ─── */
-.md-typeset p > strong:only-child {
-  display: block;
+/* ─── Sub-encabezados h5 (##### Práctica X.X:) ─── */
+.md-typeset h5 {
   background: var(--md-code-bg-color);
   border-left: 3px solid var(--md-default-fg-color--light);
   border-radius: 0 4px 4px 0;
-  padding: 4px 10px;
-  margin-bottom: 2px;
+  padding: 5px 10px;
+  margin: 1.2em 0 0.5em;
   font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--md-default-fg-color);
 }
 
 /* ─── Lista de módulos — items diferenciados por nivel ─── */

@@ -197,6 +197,7 @@ Implementar pipelines completos de CI/CD para Power Platform usando Azure DevOps
     - URL: `https://tuorg-dev.crm.dynamics.com`
     - Método: Service Principal (App Registration)
     - Tenant ID, Client ID, Client Secret del App Registration
+
 4. Crear 4 service connections: DEV, TEST, UAT, PROD
 
 #### Actividad 19.2: Pipeline de CI — Export y Verificación
@@ -540,6 +541,7 @@ Configurar y personalizar Dynamics 365 Sales y Customer Service: sales process c
     - **Cierre** (Probabilidad: 90%)
      - Acción: Generar orden de compra
      - Acción: Notificar a proyectos
+
 5. Activar el BPF y asignarlo al equipo de ventas
 
 #### Actividad 20.2: Email-to-Case automation
@@ -567,13 +569,16 @@ Configurar y personalizar Dynamics 365 Sales y Customer Service: sales process c
     - Fallo: 4 horas
     - Aplicable cuando: Prioridad = Normal
     - Acción en fallo: Enviar email a supervisor + cambiar prioridad a Alta
+
 5. **KPI 2: Resolución**
     - Advertencia: 20 horas (días hábiles)
     - Fallo: 24 horas (días hábiles)
     - Acción en fallo: Escalar a Nivel 2 + notificar gerente
+
 6. Configurar horario de atención:
     - Configuración → Calendarios de servicio al cliente
     - Lunes–Viernes 8am–6pm, zona horaria Bogotá
+
 7. Asociar el SLA al tipo de caso y activar
 
 #### Actividad 20.4: Enrutamiento con Unified Routing
@@ -585,6 +590,7 @@ Configurar y personalizar Dynamics 365 Sales y Customer Service: sales process c
 6. Workstream: `WS_Email_Soporte`
     - Canal: Email
     - Modo de distribución: Push (asignación automática)
+
 7. Regla de enrutamiento:
    ```
    Si Asunto contiene "factura" OR "cobro" OR "pago"
@@ -602,6 +608,7 @@ Configurar y personalizar Dynamics 365 Sales y Customer Service: sales process c
 2. Crear 5 artículos de soluciones frecuentes con:
     - Título, contenido HTML, palabras clave, categoría
     - Publicar artículos (flujo de aprobación opcional)
+
 3. En formulario de Caso: panel "KB" → buscar artículos relacionados
 4. Configurar sugerencia automática de KB en Copilot Studio (Módulo 22)
 
@@ -664,6 +671,7 @@ Construir portales web externos con Power Pages que permiten a clientes y provee
 2. Configurar Azure AD (para empleados del cliente):
     - App Registration en Azure AD con redirect URI: `https://clientes-sit.powerappsportals.com/signin-oidc`
     - En Portal: Identity Provider → Azure AD → Client ID, Client Secret, Authority
+
 3. Configurar Local Authentication (para usuarios externos sin Azure AD):
     - Allow users to register with email
     - Configurar email de confirmación con plantilla personalizada
@@ -675,11 +683,13 @@ Construir portales web externos con Power Pages que permiten a clientes y provee
     - Tipo de acceso: Contact (el usuario ve solo sus oportunidades)
     - Relación: Oportunidad.sit_contacto → Contact
     - Privilegios: Leer, Crear
+
 3. **Permiso: Ver estados de casos (solo lectura)**
     - Tabla: Caso
     - Tipo de acceso: Contact
     - Relación: Caso.customerid → Contact
     - Privilegios: Leer
+
 4. Asignar permisos al Web Role `Clientes Autenticados`
 
 #### Actividad 21.4: Página con Liquid template personalizado
@@ -827,6 +837,7 @@ Implementar agentes conversacionales de producción con SSO integrado a Azure AD
     - Redirect URI: `https://token.botframework.com/.auth/web/redirect`
     - API permissions: `User.Read`, `Mail.Send`, `offline_access`, `openid`
     - Crear client secret
+
 3. En Copilot Studio → Configuración → Seguridad → Autenticación
 4. Seleccionar: Azure Active Directory v2
 5. Ingresar: Client ID, Client Secret, Tenant ID
@@ -842,6 +853,7 @@ Implementar agentes conversacionales de producción con SSO integrado a Azure AD
    List rows (Dataverse)
    Filter: sit_responsable/internalemailaddress eq '@{triggerBody()?['text']}'
    ```
+
 4. Retornar datos personalizados al bot
 
 #### Actividad 22.3: Adaptive Cards en Teams
@@ -882,6 +894,7 @@ Implementar agentes conversacionales de producción con SSO integrado a Azure AD
      ]
    }
    ```
+
 3. El bot renderiza la tarjeta en Teams con los datos y botones accionables
 
 #### Actividad 22.4: Generative Answers con Knowledge Sources
@@ -896,6 +909,7 @@ Implementar agentes conversacionales de producción con SSO integrado a Azure AD
    Responde siempre en español.
    Sé conciso — máximo 3 párrafos.
    ```
+
 4. Probar con preguntas de los documentos y verificar que cita la fuente
 5. Probar con preguntas fuera del scope y verificar que responde apropiadamente
 
@@ -905,6 +919,7 @@ Implementar agentes conversacionales de producción con SSO integrado a Azure AD
 3. Nodo de mensaje: "Entiendo que deseas hablar con uno de nuestros agentes. Te conectaré en un momento."
 4. Nodo: Escalar a agente humano (nodo nativo de Copilot Studio)
     - Contexto de escalamiento: resumen de la conversación
+
 5. Configurar integración con Omnichannel for Customer Service:
     - Admin Center → Canales → Bot → Configurar escalamiento
     - Queue de escalamiento: `Cola_Chat_General`
@@ -916,6 +931,7 @@ Implementar agentes conversacionales de producción con SSO integrado a Azure AD
     - **Tasa de abandono:** % que se fue sin obtener respuesta (objetivo ≤ 15%)
     - **Topics más activos:** identificar cuáles topics necesitan más trigger phrases
     - **Sesiones con escalamiento:** identificar patterns para crear nuevos topics
+
 3. Con base en Analytics → mejorar trigger phrases de los 3 topics con menor tasa de activación
 
 ### 💼 Caso Real de Negocio
@@ -975,11 +991,13 @@ Desarrollar plugins C# robustos para ejecutar lógica de negocio compleja en el 
    Nombre: SIT.Plugins
    Framework: .NET Framework 4.6.2 (requerido para sandbox de Dataverse)
    ```
+
 2. NuGet packages:
    ```xml
    <PackageReference Include="Microsoft.CrmSdk.CoreAssemblies" Version="9.0.2.*" />
    <PackageReference Include="Microsoft.CrmSdk.Workflow" Version="9.0.2.*" />
    ```
+
 3. Generar Early-Bound entities con CrmSvcUtil o Power Platform CLI:
    ```bash
    pac modelbuilder build --settingsTemplateFile modelbuilder-settings.json
@@ -1133,6 +1151,7 @@ public class SolicitudPostUpdatePlugin : IPlugin
     - Register → Register New Assembly
     - Subir el DLL compilado (modo Release)
     - Isolation Mode: Sandbox
+
 4. Registrar Step para SolicitudPreCreatePlugin:
    ```
    Message: Create
@@ -1140,6 +1159,7 @@ public class SolicitudPostUpdatePlugin : IPlugin
    Stage: Pre-operation (20)
    Execution Mode: Synchronous
    ```
+
 5. Registrar Step para SolicitudPostUpdatePlugin:
    ```
    Message: Update
@@ -1276,11 +1296,13 @@ Integrar Power Platform con Azure Service Bus, Azure Functions, Azure API Manage
     - Queue Name: `solicitudes-nuevas`
     - SAS Key Name: `RootManageSharedAccessKey`
     - SAS Key: (de Azure Portal → Service Bus → Shared access policies)
+
 3. Registrar Step que envía a Service Bus:
     - Message: Create
     - Entity: sit_solicitud
     - Stage: Post-operation async
     - Execution Mode: Asynchronous
+
 4. Probar: crear solicitud → verificar mensaje en Service Bus Explorer
 
 #### Actividad 24.2: Azure Function que procesa el Service Bus
@@ -1355,6 +1377,7 @@ public class SolicitudProcessor
 4. Base URL: `/dataverse`
 5. Agregar operación POST `/solicitudes`:
     - Backend: Forward a `https://tuorg.crm.dynamics.com/api/data/v9.2/sit_solicituds`
+
 6. Política de inbound (transformación y autenticación):
    ```xml
    <policies>
@@ -1663,6 +1686,7 @@ Diagnosticar y resolver problemas de rendimiento en Canvas Apps, Power Automate,
    // ✅ Delegable
    Filter(Solicitudes, FechaCreacion >= DateAdd(Today(), -30, Days))
    ```
+
 3. Para búsquedas de texto completo sin delegación, usar Search() solo en el campo visible y cargar datos paginados
 
 #### Actividad 26.2: Optimizar App.OnStart con carga paralela
@@ -1972,6 +1996,7 @@ Implementar portales externos con autenticación multitenant usando Azure AD B2C
     - Método: Email
     - Atributos a recopilar: Nombre, Apellido, País
     - Claims a retornar: Email, Nombre completo, ObjectId
+
 4. App Registrations en B2C:
     - Nombre: `Power Pages Portal`
     - Redirect URI: `https://clientes-sit.powerappsportals.com/signin-oidc`
@@ -2193,6 +2218,7 @@ Para avanzar al Nivel 4, debes cumplir **todos** los siguientes criterios:
 
 ### Auto-evaluación de Dominio
 Califica cada tema del 1 al 5:
+
 - Arquitectura multi-solución: ___/5
 - ALM y CI/CD: ___/5
 - D365 CE (Customer Service): ___/5

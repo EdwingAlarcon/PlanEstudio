@@ -10,6 +10,7 @@
 ## 🎯 Objetivos del Nivel
 
 Al completar este nivel serás capaz de:
+
 - ✅ Comprender el ecosistema completo de Power Platform
 - ✅ Modelar datos en Dataverse (tablas, columnas, relaciones básicas)
 - ✅ Crear aplicaciones Canvas Apps funcionales
@@ -60,28 +61,31 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 
 #### 👨‍💻 Actividades Prácticas
 
-**Práctica 1.1: Configurar Entorno de Desarrollo**
+##### Práctica 1.1: Configurar Entorno de Desarrollo
 
 1. Crear cuenta Microsoft 365 Developer (gratuita)
     - Acceder a https://developer.microsoft.com/microsoft-365/dev-program
     - Suscripción gratuita por 90 días renovables
+
 2. Activar trial de Dynamics 365
     - Desde Power Platform Admin Center
     - Seleccionar Dynamics 365 Customer Service trial
+
 3. Explorar Power Platform Admin Center
     - Crear ambiente tipo "Developer"
     - Configurar región (según ubicación)
     - Habilitar Dynamics 365 apps
 
-**Práctica 1.2: Exploración de Componentes**
+##### Práctica 1.2: Exploración de Componentes
 
 1. Acceder a https://make.powerapps.com
 2. Navegar cada sección del menú lateral:
     - Home, Create, Learn, Apps, Tables, Flows, Chatbots, AI Hub
+
 3. Identificar conectores disponibles (Connectors > Premium vs Standard)
 4. Revisar plantillas predefinidas (Templates)
 
-**Práctica 1.3: Primera Exploración de Dataverse**
+##### Práctica 1.3: Primera Exploración de Dataverse
 
 1. Ir a "Tables" en el menú
 2. Explorar tablas estándar: Account, Contact, Email, Task
@@ -90,12 +94,14 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
     - Relationships (relaciones)
     - Business rules
     - Views (vistas)
+
 4. Crear datos de prueba manualmente (5 registros de Account)
 
 #### 💼 Caso Real de Negocio
 **Escenario**: Departamento de TI necesita gestionar solicitudes internas.
 
 **Análisis de solución**:
+
 - **Dataverse**: Almacenar solicitudes, usuarios, categorías
 - **Power Apps**: Interfaz para crear y consultar solicitudes
 - **Power Automate**: Notificaciones automáticas por email
@@ -112,8 +118,10 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 #### ⚠️ Errores Comunes
 - **Error**: Trabajar sin ambiente dedicado, modificar ambiente default
   - **Solución**: Siempre crear ambiente específico para aprendizaje
+
 - **Error**: Confundir Dataverse con SharePoint
   - **Solución**: Dataverse es base de datos relacional, SharePoint es almacenamiento documental
+
 - **Error**: No comprender límites de licencias trial
   - **Solución**: Revisar documentación de límites (usuarios, API calls, almacenamiento)
 
@@ -145,7 +153,7 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 
 #### 👨‍💻 Actividades Prácticas
 
-**Práctica 2.1: Crear Tablas Personalizadas**
+##### Práctica 2.1: Crear Tablas Personalizadas
 
 *Caso: Sistema de Gestión de Solicitudes de TI*
 
@@ -174,7 +182,7 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
     - Configurar valor por defecto Estado = "Nueva"
     - Configurar valor por defecto Prioridad = "Media"
 
-**Práctica 2.2: Establecer Relaciones**
+##### Práctica 2.2: Establecer Relaciones
 
 1. **Relación One-to-Many**: Contact → Solicitudes TI
     - Una persona puede tener múltiples solicitudes
@@ -185,9 +193,10 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
     - Columnas: Nombre, Descripción, SLA (Choice: 24h, 48h, 72h)
     - Relación: Categoría Detallada → Solicitudes TI (One-to-Many)
 
-**Práctica 2.3: Implementar Business Rules**
+##### Práctica 2.3: Implementar Business Rules
 
 *Regla 1: Auto-asignación de SLA según prioridad*
+
 1. Abrir tabla "Solicitud TI" > Business rules > New
 2. Condición: Si Prioridad = "Crítica"
 3. Acción: Set Field Value → Campo personalizado "SLA Horas" = 4
@@ -195,12 +204,13 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 5. Scope: All Forms
 
 *Regla 2: Validación de fechas*
+
 1. Nueva Business Rule
 2. Condición: Si Estado = "Resuelta" y Fecha Resolución está vacía
 3. Acción: Show Error Message → "Debe ingresar fecha de resolución"
 4. Scope: All Forms
 
-**Práctica 2.4: Crear Vistas Personalizadas**
+##### Práctica 2.4: Crear Vistas Personalizadas
 
 1. **Vista: "Mis Solicitudes Abiertas"**
     - Filtro: Estado ≠ Cerrada AND Solicitante = Current User
@@ -212,9 +222,10 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
     - Columnas: Título, Solicitante, Categoría, Prioridad, Asignado a
     - Orden: Prioridad DESC
 
-**Práctica 2.5: Insertar Datos de Prueba**
+##### Práctica 2.5: Insertar Datos de Prueba
 
 Crear manualmente 10 registros de Solicitudes con variedad de:
+
 - Categorías diferentes
 - Prioridades mixtas
 - Estados variados
@@ -243,6 +254,7 @@ Relaciones:
 ```
 
 **Reglas de negocio**:
+
 - Activo solo puede estar asignado a un empleado a la vez
 - Al devolver, auto-cambiar estado Activo a "Disponible"
 - Alertas si asignación > 3 años (renovación)
@@ -250,22 +262,26 @@ Relaciones:
 #### ✅ Buenas Prácticas
 
 **Nomenclatura**:
+
 - Nombres en español/inglés consistentes (elegir uno)
 - Evitar espacios; usar guiones bajos: `Solicitud_TI`
 - Publisher prefix: usar personalizado, no default `new_`
 
 **Modelado**:
+
 - Mantener tablas normalizadas (evitar redundancia)
 - Usar Choices en lugar de strings para valores fijos
 - Definir Required solo en campos críticos (mejor UX)
 - Siempre establecer ownership correcta (impacta seguridad)
 
 **Performance**:
+
 - Limitar columnas en vistas (máx 8-10 visibles)
 - Usar índices en columnas de filtrado frecuente
 - Evitar Multiline text en primary column
 
 **Documentación**:
+
 - Agregar Description a cada tabla y columna personalizada
 - Documentar propósito de Business Rules en Comments
 
@@ -316,17 +332,19 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 
 #### 👨‍💻 Actividades Prácticas
 
-**Práctica 3.1: Primera Canvas App - Lista de Tareas**
+##### Práctica 3.1: Primera Canvas App - Lista de Tareas
 
 *Objetivo: App de To-Do List con Dataverse*
 
 **Paso 1: Configuración inicial**
+
 1. Power Apps > Create > Canvas app from blank
 2. Nombre: `Mi Lista Tareas`
 3. Formato: Tablet (landscape)
 4. Conectar a Dataverse (agregar tabla "Solicitud TI" del Módulo 2)
 
 **Paso 2: Pantalla de Listado**
+
 1. Insertar Gallery (Vertical)
     - Datasource: Solicitudes TI
     - Template: Title, Subtitle, Body
@@ -348,6 +366,7 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
     - OnSelect: `Navigate(ScreenNueva, ScreenTransition.Cover)`
 
 **Paso 3: Pantalla de Creación**
+
 1. New Screen > Form
 2. Insertar Edit Form control
     - DataSource: Solicitudes TI
@@ -367,16 +386,19 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
    ```
 
 **Paso 4: Pantalla de Detalles**
+
 1. Duplicate Screen de creación
 2. Modificar Form:
     - Mode: `FormMode.View`
     - Item: `GallerySolicitudes.Selected`
+
 3. Agregar Button "Editar"
     - OnSelect: `EditForm(Form2)`
+
 4. Agregar navegación desde Gallery:
     - OnSelect de Gallery: `Navigate(ScreenDetalle, ScreenTransition.Cover)`
 
-**Práctica 3.2: Interactividad y Variables**
+##### Práctica 3.2: Interactividad y Variables
 
 *Agregar filtros dinámicos*
 
@@ -408,7 +430,7 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
    If(IsDarkMode, Color.White, Color.Black)
    ```
 
-**Práctica 3.3: Collections y Datos Locales**
+##### Práctica 3.3: Collections y Datos Locales
 
 *Crear app de calculadora de presupuestos*
 
@@ -441,13 +463,14 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
    "Total: $" & Text(Sum(ColPresupuestoItems, Total), "$#,##0.00")
    ```
 
-**Práctica 3.4: Responsive Design**
+##### Práctica 3.4: Responsive Design
 
 1. Usar contenedores (Insert > Container)
 2. Configurar propiedades de layout:
     - LayoutDirection: Vertical / Horizontal
     - LayoutAlignItems: Start, Center, End
     - LayoutGap: 10
+
 3. Usar formulas con Screen.Width:
    ```javascript
    // Gallery Width responsive
@@ -459,6 +482,7 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 **Escenario**: App de Registro de Visitas para Recepción
 
 **Funcionalidades**:
+
 1. **Screen Bienvenida**:
     - Input: Nombre visitante, Empresa, Persona a visitar (Lookup empleados)
     - Button: Registrar entrada (guarda en Dataverse con timestamp)
@@ -474,6 +498,7 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
     - Exportar a Excel (Export() function)
 
 **Componentes técnicos**:
+
 - Conexión: Dataverse tabla "Visitas"
 - Camera control para fotos
 - Timer para reloj en pantalla
@@ -482,24 +507,28 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 #### ✅ Buenas Prácticas
 
 **Desarrollo**:
+
 - Nombrar controles descriptivamente: `btnGuardar`, `galSolicitudes`, `txtBusqueda`
 - Usar variables contextuales (UpdateContext) para estados locales de screen
 - Usar variables globales (Set) para configuraciones transversales
 - Documentar fórmulas complejas con comentarios `//`
 
 **Performance**:
+
 - Entender delegación: usar Filter(), Sort(), Search() delegables
 - Evitar Addcolumns(), ForAll() en datasources grandes (> 500 registros)
 - Usar Collections para datos pequeños o temporales
 - Cargar datos una vez, reutilizar (no llamar Dataverse en cada control)
 
 **UX**:
+
 - Mostrar indicadores de carga (Spinner) en operaciones largas
 - Validar inputs antes de SubmitForm
 - Mensajes de error claros con Notify()
 - Confirmar acciones destructivas (Pop-up modal)
 
 **Seguridad**:
+
 - No exponer datos sensibles en variables globales
 - Filtrar datos según User() actual
 - Usar roles de Dataverse, no lógica en app
@@ -561,16 +590,19 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 
 #### 👨‍💻 Actividades Prácticas
 
-**Práctica 4.1: Crear Primera Model-Driven App**
+##### Práctica 4.1: Crear Primera Model-Driven App
 
 **Paso 1: Crear app desde solución**
+
 1. Power Apps > Solutions > New solution
     - Name: `Sistema Solicitudes TI`
     - Publisher: Crear nuevo con prefix `sit`
+
 2. Dentro de solución > New > App > Model-driven app
 3. Name: `Gestión Solicitudes TI`
 
 **Paso 2: Configurar Site Map**
+
 1. Click en "Edit site map"
 2. Estructura:
    ```
@@ -650,7 +682,7 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
     - **Panel superior derecha**: Chart "Solicitudes por Prioridad" (Column)
     - **Panel inferior**: List de "Solicitudes Pendientes" (View)
 
-**Práctica 4.2: Business Process Flow**
+##### Práctica 4.2: Business Process Flow
 
 *Crear flujo para ciclo de vida de solicitud*
 
@@ -687,7 +719,7 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 
 6. Guardar, activar y asignar a Security Role
 
-**Práctica 4.3: Configurar Seguridad**
+##### Práctica 4.3: Configurar Seguridad
 
 1. **Crear Security Roles**:
 
@@ -720,6 +752,7 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 **Escenario**: Sistema CRM de Gestión de Clientes para PyME
 
 **Modelo de datos**:
+
 - Account (Clientes)
 - Contact (Personas de contacto)
 - Opportunity (Oportunidades de venta)
@@ -729,16 +762,19 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 **Business Process Flow**: Lead → Opportunity → Quote → Won/Lost
 
 **Dashboards**:
+
 - Embudo de ventas por etapa
 - Top 10 clientes por revenue
 - Actividades pendientes por vendedor
 
 **Security**:
+
 - Vendedores: Solo su cartera (Business Unit)
 - Gerentes: Toda la región (Organization, read-only others)
 - Dirección: Full access
 
 **Automatización** (Power Automate):
+
 - Lead asignado → Email bienvenida
 - Opportunity en "Proposal" > 30 días → Alerta gerente
 - Quote aceptada → Crear Deal en sistema ERP externo
@@ -746,24 +782,28 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 #### ✅ Buenas Prácticas
 
 **Diseño de Forms**:
+
 - Máximo 3 tabs por form (evitar sobrecarga)
 - Agrupar campos relacionados en sections
 - Ocultar tabs/sections innecesarias según contexto con Business Rules
 - Usar Quick View Forms para mostrar datos relacionados inline
 
 **Performance**:
+
 - Limitar columnas en vistas (8-10 máximo)
 - No cargar todos los campos en forms (lazy load tabs)
 - Usar vistas personales para filtros frecuentes
 - Deshabilitar auto-save si no es necesario
 
 **Usabilidad**:
+
 - Nombres de vistas descriptivos y orientados a acción: "Revisar Hoy", no "Vista 1"
 - Site map organizado por flujo de trabajo, no por entidades
 - Dashboards con máximo 6 componentes (evitar saturación)
 - Business Process Flow solo para procesos realmente estructurados
 
 **Gobernanza**:
+
 - Trabajar siempre dentro de Solutions (nunca en default)
 - Publisher con prefix único por organización
 - Documentar cada componente (description field)
@@ -823,11 +863,12 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 
 #### 👨‍💻 Actividades Prácticas
 
-**Práctica 5.1: Flujo Automated - Notificación de Solicitudes**
+##### Práctica 5.1: Flujo Automated - Notificación de Solicitudes
 
 *Trigger: Cuando se crea una Solicitud TI en Dataverse*
 
 **Paso 1: Crear flujo**
+
 1. Power Automate > Create > Automated cloud flow
 2. Nombre: `Notificar Nueva Solicitud TI`
 3. Trigger: "When a row is added, modified or deleted" (Dataverse)
@@ -836,11 +877,13 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
     - Scope: Organization
 
 **Paso 2: Obtener datos del solicitante**
+
 1. Action: "Get a row by ID" (Dataverse)
     - Table: Contacts
     - Row ID: `Solicitante (Value)` del trigger (Dynamic content)
 
 **Paso 3: Enviar email de confirmación**
+
 1. Action: "Send an email (V2)" (Office 365 Outlook)
     - To: `Email` del Contact (paso anterior)
     - Subject: `Nueva solicitud registrada: {Título}`
@@ -858,6 +901,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
    ```
 
 **Paso 4: Notificar a equipo TI**
+
 1. Condition: Si Prioridad = "Crítica"
     - **Yes branch**: 
      - Action: "Post message in a chat or channel" (Teams)
@@ -868,16 +912,18 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
      - Action: Send email a grupo TI (listadistribucion@empresa.com)
 
 **Paso 5: Probar flujo**
+
 1. Guardar flujo
 2. Crear nueva Solicitud TI desde Power Apps
 3. Verificar en "Run history" del flujo
 4. Validar emails y notificación Teams recibidos
 
-**Práctica 5.2: Flujo Scheduled - Reporte Diario**
+##### Práctica 5.2: Flujo Scheduled - Reporte Diario
 
 *Objetivo: Enviar resumen diario de solicitudes pendientes*
 
 **Paso 1: Trigger recurrente**
+
 1. Create > Scheduled cloud flow
 2. Nombre: `Reporte Diario Solicitudes`
 3. Trigger: Recurrence
@@ -887,6 +933,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
     - Time zone: (Tu zona horaria)
 
 **Paso 2: Consultar solicitudes pendientes**
+
 1. Action: "List rows" (Dataverse)
     - Table: Solicitudes TI
     - Filter rows: 
@@ -898,6 +945,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
     - Order by: `cr123_prioridad desc, cr123_fechasolicitud desc`
 
 **Paso 3: Construir tabla HTML con resultados**
+
 1. Action: "Initialize variable"
     - Name: `htmlTable`
     - Type: String
@@ -934,6 +982,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
     - Value: `</table>`
 
 **Paso 4: Enviar email con reporte**
+
 1. Action: "Send an email (V2)"
     - To: gerente-ti@empresa.com
     - Subject: `Reporte Diario Solicitudes - {utcNow()}`
@@ -945,16 +994,18 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
    ```
 
 **Paso 5: Configurar condición de no envío si está vacío**
+
 1. Antes del email, agregar Condition
     - Expression: `empty(outputs('List_rows')?['body/value'])`
     - Yes: Terminate (Success) con mensaje "No hay solicitudes"
     - No: Enviar email
 
-**Práctica 5.3: Flujo Instant - Aprobación de Cambios**
+##### Práctica 5.3: Flujo Instant - Aprobación de Cambios
 
 *Objetivo: Proceso de aprobación para cambios de prioridad*
 
 **Paso 1: Trigger manual**
+
 1. Create > Instant cloud flow
 2. Nombre: `Aprobar Cambio Prioridad`
 3. Trigger: "Manually trigger a flow"
@@ -964,11 +1015,13 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
     - Justificación (text)
 
 **Paso 2: Obtener registro actual**
+
 1. Action: "Get a row by ID" (Dataverse)
     - Table: Solicitudes TI
     - Row ID: `{Solicitud ID input}`
 
 **Paso 3: Enviar aprobación**
+
 1. Action: "Start and wait for an approval"
     - Approval type: Approve/Reject - First to respond
     - Title: `Cambio de Prioridad Solicitud: {título}`
@@ -981,6 +1034,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
    ```
 
 **Paso 4: Procesar respuesta**
+
 1. Condition: Si `Outcome = Approve`
     - **Yes**:
      - Action: "Update a row" (Dataverse)
@@ -992,6 +1046,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
      - Action: Send email de rechazo con comentarios del aprobador
 
 **Paso 5: Integrar con Power Apps**
+
 1. En Canvas App, agregar Button "Cambiar Prioridad"
 2. OnSelect:
    ```javascript
@@ -1003,22 +1058,25 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
    Notify("Solicitud de cambio enviada", NotificationType.Success)
    ```
 
-**Práctica 5.4: Error Handling y Reintentos**
+##### Práctica 5.4: Error Handling y Reintentos
 
 *Mejorar flujo con manejo robusto de errores*
 
 **Paso 1: Agregar Scope para acciones críticas**
+
 1. En flujo existente, insertar "Scope" action
 2. Mover acciones principales dentro del scope
 3. Nombrar scope: `Main Process`
 
 **Paso 2: Configurar reintentos**
+
 1. Settings de cada acción HTTP o externa:
     - Retry Policy: Fixed interval
     - Count: 3
     - Interval: PT10S (10 segundos)
 
 **Paso 3: Agregar Scope de error handling**
+
 1. Nuevo Scope fuera del anterior: `Error Handler`
 2. Configure run after del anterior: `has failed`, `has timed out`
 3. Dentro:
@@ -1034,25 +1092,29 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
     - Action: "Create a row" (Dataverse) en tabla de logs de errores
 
 **Paso 4: Agregar notificación de éxito**
+
 1. Nuevo Scope: `Success Handler`
 2. Configure run after Main Process: `is successful`
 3. Action: Log de éxito o métricas
 
-**Práctica 5.5: Power Automate Desktop (RPA)**
+##### Práctica 5.5: Power Automate Desktop (RPA)
 
 *Automatizar tarea repetitiva en aplicación legacy*
 
 **Escenario**: Extraer datos de Excel y cargar a Dataverse
 
 **Paso 1: Instalar Power Automate Desktop**
+
 1. Descargar desde power automate portal
 2. Instalar y conectar con cuenta corporativa
 
 **Paso 2: Crear flujo desktop**
+
 1. New Desktop flow
 2. Nombre: `Importar Solicitudes desde Excel`
 
 **Paso 3: Acciones**
+
 1. Action: "Launch Excel"
     - Excel instance: ExcelInstance
     - Document path: `C:\Datos\Solicitudes.xlsx`
@@ -1084,6 +1146,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 5. Action: "Close Excel"
 
 **Paso 4: Integrar con Cloud Flow**
+
 1. Crear Scheduled Cloud Flow
 2. Action: "Run a flow built with Power Automate for desktop"
     - Desktop flow: Importar Solicitudes desde Excel
@@ -1118,6 +1181,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
     - Escalar si > 7 días sin completar
 
 **Beneficios medibles**:
+
 - Reducción 80% tiempo onboarding (de 5 días a 1 día)
 - Eliminación errores manuales en creación cuentas
 - Visibilidad completa del proceso para RRHH
@@ -1125,30 +1189,35 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 #### ✅ Buenas Prácticas
 
 **Diseño de flujos**:
+
 - Un flujo = una responsabilidad clara (no mega-flujos)
 - Usar nombres descriptivos de acciones (no "Get a row", sino "Obtener Solicitante")
 - Documentar con comments acciones complejas
 - Usar Scopes para agrupar lógica relacionada
 
 **Performance**:
+
 - Evitar loops anidados (complejidad exponencial)
 - Usar "Select" para transformar arrays en lugar de loops con Append
 - Batch operations en Dataverse (bulk create/update)
 - Paralelizar acciones independientes con "Scope" + "Configure run after"
 
 **Seguridad**:
+
 - Usar Service Accounts para conexiones de flujos críticos (no cuentas personales)
 - Secretos en Azure Key Vault, no hardcoded
 - Auditar flujos con acceso a datos sensibles
 - Deshabilitar flujos no utilizados
 
 **Mantenibilidad**:
+
 - Versionar flujos antes de cambios mayores (Save As)
 - Probar en ambiente DEV antes de producción
 - Monitorear Run History y Analytics
 - Documentar dependencias (flujos que llaman a otros)
 
 **Error Handling**:
+
 - Siempre configurar "Configure run after" en acciones críticas
 - Logs de errores a tabla Dataverse o Application Insights
 - Notificaciones proactivas de fallos
@@ -1213,12 +1282,14 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 
 #### 👨‍💻 Actividades Prácticas
 
-**Práctica 6.1: Conectar a Dataverse y Modelar**
+##### Práctica 6.1: Conectar a Dataverse y Modelar
 
 **Paso 1: Descargar e instalar Power BI Desktop**
+
 1. Desde Microsoft Store o https://powerbi.microsoft.com
 
 **Paso 2: Conectar a Dataverse**
+
 1. Get Data > Power Platform > Dataverse
 2. Environment URL: https://tuorg.crm.dynamics.com
 3. Autenticar con cuenta organizacional
@@ -1226,9 +1297,11 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
     - Solicitudes TI
     - Contacts
     - Categorías
+
 5. Transform Data
 
 **Paso 3: Transformaciones en Power Query**
+
 1. Tabla Solicitudes TI:
     - Remover columnas innecesarias (audit fields, metadata)
     - Renombrar columnas: `cr123_titulo` → `Título`
@@ -1244,12 +1317,13 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 3. Close & Apply
 
 **Paso 4: Configurar relaciones**
+
 1. Model view (ícono lateral)
 2. Validar relación auto-creada: Solicitudes[Solicitante] → Contacts[ID]
 3. Configurar cardinalidad: Many to One (*)
 4. Cross filter direction: Single (desde Solicitudes hacia Contacts)
 
-**Práctica 6.2: Crear Visualizaciones Básicas**
+##### Práctica 6.2: Crear Visualizaciones Básicas
 
 **Página 1: Overview General**
 
@@ -1315,7 +1389,7 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
     - Category: Prioridad
     - Values: Días Abierta
 
-**Práctica 6.3: DAX Measures Básicas**
+##### Práctica 6.3: DAX Measures Básicas
 
 Crear measures en tabla "Medidas" (nueva tabla calculada vacía):
 
@@ -1360,7 +1434,7 @@ CALCULATE(
 
 > **Nota:** Las funciones AVERAGEX con FILTER y el cálculo MoM con DATEADD son DAX avanzado — las verás en detalle en el **Módulo 12 (Nivel 2)** con el contexto correcto de inteligencia de tiempo.
 
-**Práctica 6.4: Interactividad y Drill-Through**
+##### Práctica 6.4: Interactividad y Drill-Through
 
 1. **Configurar Cross-Filtering**
     - Seleccionar visual de Donut (Estado)
@@ -1383,14 +1457,16 @@ CALCULATE(
     - Agregar Card con email, departamento del contact
     - En página principal, configurar visual para usar este tooltip
 
-**Práctica 6.5: Publicar y Compartir**
+##### Práctica 6.5: Publicar y Compartir
 
 **Paso 1: Publicar a Power BI Service**
+
 1. File > Publish > Select workspace
 2. Elegir workspace (crear nuevo "Reportes TI" si no existe)
 3. Esperar carga
 
 **Paso 2: Configurar actualización de datos**
+
 1. En Power BI Service, ir a workspace
 2. Dataset settings (ícono configuración)
 3. Scheduled refresh:
@@ -1398,11 +1474,13 @@ CALCULATE(
     - Credentials: Configurar OAuth para Dataverse
 
 **Paso 3: Crear Dashboard**
+
 1. Desde el reporte publicado, pin visuales clave a nuevo Dashboard
 2. Dashboard: "Gestión Solicitudes TI - Executive"
 3. Organizar tiles, redimensionar
 
 **Paso 4: Compartir con usuarios**
+
 1. Opción A: Compartir dashboard directamente
     - Share button > agregar emails
     - Permisos: Can view / Can reshare
@@ -1415,15 +1493,18 @@ CALCULATE(
     - Compartir link de app
 
 **Paso 5: Configurar Row-Level Security (RLS)**
+
 1. En Power BI Desktop, Modeling > Manage roles
 2. Crear role "Solicitante":
    ```dax
    [Solicitante Email] = USERPRINCIPALNAME()
    ```
+
 3. Crear role "Departamento":
    ```dax
    [Solicitante Departamento] = USERNAME()
    ```
+
 4. Publicar
 5. En Service, Dataset security > agregar usuarios a roles
 
@@ -1432,11 +1513,13 @@ CALCULATE(
 **Escenario**: Dashboard Ejecutivo de Ventas para Gerencia
 
 **Fuentes de datos**:
+
 - Dynamics 365 Sales (Opportunities, Accounts)
 - SQL Server (histórico transaccional)
 - Excel (targets mensuales)
 
 **KPIs principales**:
+
 - Revenue actual vs target (con semáforo)
 - Win rate por vendedor y producto
 - Pipeline value por etapa
@@ -1444,48 +1527,56 @@ CALCULATE(
 - Average deal size
 
 **Visualizaciones clave**:
+
 - Mapa de calor geográfico de ventas
 - Waterfall chart de evolución revenue mensual
 - Funnel chart de pipeline por stage
 - Scatter plot: deal size vs días en pipeline (identificar outliers)
 
 **Interactividad**:
+
 - Slicers: Año, Trimestre, Vendedor, Región
 - Drill-down: Región > País > Ciudad > Cliente
 - Tooltips: Detalle de oportunidad al hover
 - Drill-through: Página de análisis por vendedor individual
 
 **Actualización**:
+
 - Incremental refresh (últimos 3 meses diarios, histórico mensual)
 - Alerts en Service si revenue < 80% target
 
 #### ✅ Buenas Prácticas
 
 **Modelado de datos**:
+
 - Star schema: Tablas de hechos (Solicitudes) y dimensiones (Contacts, Categorías)
 - Relaciones claras y unidireccionales cuando sea posible
 - Columnas calculadas para atributos; measures para agregaciones
 - Tablas de fechas (Calendar table) para time intelligence
 
 **Performance**:
+
 - Limitar registros importados (filtrar en Power Query)
 - Usar Import mode para datasets pequeños, DirectQuery para grandes
 - Indexar columnas de filtro en origen de datos
 - Evitar columnas calculadas complejas; preferir measures
 
 **Diseño visual**:
+
 - Máximo 6-8 visuales por página (evitar saturación)
 - Paleta de colores corporativa consistente
 - Títulos descriptivos y contextuales
 - Mostrar solo datos accionables
 
 **DAX**:
+
 - Formatear measures: usar Blank() en lugar de 0 cuando no hay datos
 - Variables (VAR) para legibilidad y performance
 - Comentarios en measures complejas
 - Probar con diferentes filtros/slicers
 
 **Gobernanza**:
+
 - Workspaces por departamento/proyecto
 - Naming conventions: [Área]-[Tema]-[Versión]
 - Documentación de sources y transformaciones
@@ -1553,7 +1644,7 @@ Dominar el lenguaje de fórmulas Power Fx para lógica avanzada en Canvas Apps.
 
 #### 👨‍💻 Actividades Prácticas
 
-**Práctica 7.1: Funciones de Tablas y Filtrado**
+##### Práctica 7.1: Funciones de Tablas y Filtrado
 
 **Ejercicio 1: Multi-Filter Gallery**
 ```javascript
@@ -1591,7 +1682,7 @@ ClearCollect(
 )
 ```
 
-**Práctica 7.2: Lógica Condicional y Validaciones**
+##### Práctica 7.2: Lógica Condicional y Validaciones
 
 **Ejercicio 1: Validación de Form Completo**
 ```javascript
@@ -1634,7 +1725,7 @@ If(
 )
 ```
 
-**Práctica 7.3: Manipulación de Texto y Fechas**
+##### Práctica 7.3: Manipulación de Texto y Fechas
 
 **Ejercicio 1: Formateo de Texto**
 ```javascript
@@ -1672,7 +1763,7 @@ Last(Split(LookUp(Contacts, ID = Solicitante.ID, Email), "@")).Result
 Split("Hardware,Software,Red,Accesos", ",")
 ```
 
-**Práctica 7.4: Collections y Contexto**
+##### Práctica 7.4: Collections y Contexto
 
 **Ejercicio 1: Carrito de Compras (Pattern)**
 ```javascript
@@ -1729,7 +1820,7 @@ With(
 )
 ```
 
-**Práctica 7.5: Delegación y Performance**
+##### Práctica 7.5: Delegación y Performance
 
 **Ejercicio 1: Identificar Fórmulas No Delegables**
 
@@ -1791,6 +1882,7 @@ Filter(
 **Escenario**: App de Gestión de Inventario con Lógica Compleja
 
 **Requerimientos**:
+
 1. Cálculo de stock crítico (< 20% del ideal)
 2. Proyección de agotamiento basado en consumo promedio
 3. Sugerencias de orden de compra automáticas
@@ -1841,24 +1933,28 @@ Filter(ColInventarioAnalizado, StockCrítico || NecesitaOrden)
 #### ✅ Buenas Prácticas
 
 **Sintaxis y Legibilidad**:
+
 - Indentar fórmulas complejas con Alt+Shift+F
 - Usar With para evitar repetir subcálculos
 - Comentarios con `//` en fórmulas de >3 líneas
 - Nombres descriptivos de variables: `colCarrito` no `col1`
 
 **Performance**:
+
 - Entender y respetar delegación (límite 500/2000)
 - Cargar datos una vez, operar local con Collections
 - Evitar Addcolumns dentro de loops (ForAll)
 - Usar Concurrent para operaciones independientes paralelas
 
 **Mantenibilidad**:
+
 - Centralizar cálculos complejos en una Collection
 - Usar Component + Output properties para reutilizar lógica
 - Documentar fórmulas no obvias
 - Named formulas (variables globales con Set en OnStart)
 
 **Debugging**:
+
 - Usar Label temporal para ver valores: `Text(Variable, JSON)`
 - Monitor para ver network calls y performance
 - App formulas > Variables para inspeccionar contexto
@@ -1913,6 +2009,7 @@ Aplicar todos los conocimientos del Nivel 1 en un proyecto end-to-end real.
 **Sistema Completo de Gestión de Solicitudes Internas**
 
 Desarrollar una solución empresarial integral que incluya:
+
 - Modelo de datos en Dataverse
 - Canvas App para usuarios finales
 - Model-Driven App para administradores
@@ -1922,6 +2019,7 @@ Desarrollar una solución empresarial integral que incluya:
 #### 🏗️ Arquitectura de la Solución
 
 **Componentes:**
+
 1. **Dataverse**: 5 tablas personalizadas
 2. **Power Apps Canvas**: App móvil para crear solicitudes
 3. **Power Apps Model-Driven**: App escritorio para gestión
@@ -1933,6 +2031,7 @@ Desarrollar una solución empresarial integral que incluya:
 **FASE 1: Diseño y Modelado de Datos (Días 1-3)**
 
 **Paso 1: Documentar requerimientos**
+
 - Tipos de solicitudes: TI, Mantenimiento, RRHH, Compras
 - Roles: Solicitante, Aprobador, Ejecutor, Administrador
 - Flujo: Creación → Aprobación → Asignación → Ejecución → Cierre
@@ -1999,12 +2098,14 @@ Version: 1.0.0.0
     - Rating Solicitante (Choice): 1-5 estrellas
 
 **Paso 4: Configurar relaciones**
+
 - Solicitud 1:N Comentarios
 - Solicitud 1:N Aprobaciones
 - Solicitud 1:1 Métrica Solicitud
 - Categoría 1:N Solicitudes
 
 **Paso 5: Business Rules**
+
 1. **Validación de fechas**:
     - Si Estado = "Completada", Fecha Completada is required
     - Fecha Requerida >= Fecha Solicitud
@@ -2388,6 +2489,7 @@ Configuración de solución
 | Ver dashboard | Manager accede a Power BI | Solo ve solicitudes de su departamento (RLS) |
 
 **Paso 3: Testing multi-role**
+
 - Crear 3 usuarios de prueba: Solicitante, Aprobador, Ejecutor
 - Ejecutar cada escenario completo
 - Validar permisos (usuario no debe ver datos fuera de su scope)
@@ -2419,12 +2521,14 @@ Configuración de solución
 ```
 
 **Paso 2: Manual de usuario**
+
 - Guía Canvas App (con screenshots)
 - Guía Model-Driven App
 - Interpretación del Dashboard
 - FAQs
 
 **Paso 3: Despliegue a producción**
+
 1. Exportar solution como Managed
 2. Importar en ambiente Production
 3. Configurar conexiones de flujos
@@ -2436,6 +2540,7 @@ Configuración de solución
 #### ✅ Criterios de Validación Final
 
 **Funcional:**
+
 - [ ] 5 tablas en Dataverse con relaciones correctas
 - [ ] Canvas App con 4+ pantallas funcionales
 - [ ] Model-Driven App con sitemap, forms, vistas configurados
@@ -2445,6 +2550,7 @@ Configuración de solución
 - [ ] Seguridad: 4 roles configurados y probados
 
 **Técnico:**
+
 - [ ] Solution versionada y exportable
 - [ ] Código Power Fx sin warnings de delegación críticos
 - [ ] Flujos con error handling completo
@@ -2452,6 +2558,7 @@ Configuración de solución
 - [ ] Dashboard refresh automático configurado
 
 **Calidad:**
+
 - [ ] Testeado con 3+ roles diferentes
 - [ ] 10+ registros de prueba de cada tipo
 - [ ] Documentación técnica completa
@@ -2459,6 +2566,7 @@ Configuración de solución
 - [ ] Sin errores en consola o logs
 
 **Negocio:**
+
 - [ ] Demostración exitosa a stakeholder simulado
 - [ ] Casos de uso reales validados
 - [ ] Métricas del dashboard útiles y accionables
@@ -2473,29 +2581,34 @@ Configuración de solución
 Has completado el **Nivel 1: Básico** del Plan Maestro. Ahora puedes:
 
 ✅ **Dataverse**:
+
 - Modelar datos empresariales con tablas, relaciones y business rules
 - Implementar lógica sin código
 - Gestionar seguridad granular
 
 ✅ **Power Apps Canvas**:
+
 - Crear aplicaciones móviles y web desde cero
 - Implementar navegación multi-screen
 - Escribir fórmulas Power Fx complejas
 - Manejar collections y contexto
 
 ✅ **Power Apps Model-Driven**:
+
 - Construir apps metadata-driven
 - Configurar forms, views, dashboards
 - Implementar Business Process Flows
 - Configurar security roles
 
 ✅ **Power Automate**:
+
 - Automatizar procesos cloud y escritorio
 - Implementar aprobaciones
 - Manejar errores robustamente
 - Integrar con múltiples sistemas
 
 ✅ **Power BI**:
+
 - Conectar a múltiples fuentes de datos
 - Crear modelos de datos relacionales
 - Escribir measures DAX
@@ -2503,11 +2616,13 @@ Has completado el **Nivel 1: Básico** del Plan Maestro. Ahora puedes:
 - Implementar Row-Level Security
 
 ✅ **Power Fx**:
+
 - Dominar sintaxis y funciones clave
 - Optimizar para delegación
 - Debuggear fórmulas complejas
 
 ✅ **Integración**:
+
 - Arquitectar soluciones multi-componente
 - Implementar proyecto end-to-end
 - Documentar y desplegar soluciones
@@ -2525,15 +2640,18 @@ Has completado el **Nivel 1: Básico** del Plan Maestro. Ahora puedes:
 ### 🎯 Próximos Pasos
 
 **Opción A: Certificarte**
+
 - Preparar y rendir **PL-900: Microsoft Power Platform Fundamentals**
 - Recursos: Microsoft Learn, Practice tests
 
 **Opción B: Profundizar con Proyectos**
+
 - Implementar 2-3 proyectos adicionales similares
 - Explorar conectores específicos de tu industria
 - Participar en comunidad (Power Platform Community, Forums)
 
 **Opción C: Avanzar al Nivel 2**
+
 - Prerrequisitos: Sentirte confortable con todos los módulos del Nivel 1
 - Auto-evaluación: ¿Puedo explicar cada concepto sin consultar documentación?
 - Si aún tienes dudas en algún módulo, repítelo antes de avanzar
@@ -2541,22 +2659,26 @@ Has completado el **Nivel 1: Básico** del Plan Maestro. Ahora puedes:
 ### 📚 Recursos Complementarios
 
 **Documentación Oficial**:
+
 - [Power Platform Documentation](https://docs.microsoft.com/power-platform/)
 - [Power Apps Formula Reference](https://docs.microsoft.com/powerapps/maker/canvas-apps/formula-reference)
 - [DAX Function Reference](https://dax.guide/)
 
 **Comunidades**:
+
 - [Power Platform Community](https://powerusers.microsoft.com/)
 - [Power Apps Community Forums](https://powerusers.microsoft.com/t5/Power-Apps-Community/ct-p/PowerApps1)
 - Reddit: r/PowerApps, r/PowerBI
 
 **Canales YouTube**:
+
 - Microsoft Power Platform (oficial)
 - Shane Young (PowerApps911)
 - Reza Dorrani
 - Guy in a Cube (Power BI)
 
 **Blogs**:
+
 - Power Apps Blog (oficial)
 - Matthew Devaney
 - Sancho Harker

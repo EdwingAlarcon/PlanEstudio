@@ -123,6 +123,7 @@ Diseñar modelos de datos empresariales complejos en Dataverse: relaciones polim
      - Paso: Estado = En Curso (acción)
     - **Etapa 4: Cierre**
      - Paso: Costo real validado
+
 5. Activar y probar en formulario Model-Driven
 
 #### Actividad 9.5: Auditoría de Dataverse
@@ -196,12 +197,14 @@ Construir una biblioteca de componentes reutilizables en Canvas Apps que elimine
     - `ColorFondo` (Color, default: RGBA(0,120,212,1))
     - `ColorTexto` (Color, default: RGBA(255,255,255,1))
     - `MostrarBtnVolver` (Boolean, default: false)
+
 4. Insertar Rectangle:
    ```
    Rectangle1.Fill: cmpHeader.ColorFondo
    Rectangle1.Width: Parent.Width
    Rectangle1.Height: Parent.Height
    ```
+
 5. Insertar Label para el título:
    ```
    lblTitulo.Text: cmpHeader.TituloApp
@@ -210,6 +213,7 @@ Construir una biblioteca de componentes reutilizables en Canvas Apps que elimine
    lblTitulo.FontWeight: FontWeight.Bold
    lblTitulo.X: If(cmpHeader.MostrarBtnVolver, 60, 20)
    ```
+
 6. Insertar Icon chevronLeft (visible condicionalmente):
    ```
    icoVolver.Visible: cmpHeader.MostrarBtnVolver
@@ -225,6 +229,7 @@ Construir una biblioteca de componentes reutilizables en Canvas Apps que elimine
     - `Valor` (Número, default: 0)
     - `Icono` (Texto, default: "calendar") — nombre del ícono de Fluent
     - `ColorAcento` (Color, default: RGBA(0,120,212,1))
+
 4. Diseño del componente:
    ```
    // Rectangle de fondo con sombra simulada
@@ -253,8 +258,10 @@ Construir una biblioteca de componentes reutilizables en Canvas Apps que elimine
 1. Nuevo componente → `cmpSearchBox`
 2. Propiedades de entrada:
     - `Placeholder` (Texto, default: "Buscar...")
+
 3. Propiedades de salida (custom):
     - `TextoBusqueda` (Texto)
+
 4. Agregar Timer para debounce:
    ```
    // Timer que dispara 500ms después de que el usuario deja de escribir
@@ -285,6 +292,7 @@ Construir una biblioteca de componentes reutilizables en Canvas Apps que elimine
    cmpHeader_2.TituloApp: "Detalle de Solicitud"
    cmpHeader_2.MostrarBtnVolver: true
    ```
+
 6. Usar `cmpStatCard` para KPIs:
    ```
    // 4 tarjetas en horizontal con Gallery horizontal
@@ -304,6 +312,7 @@ Construir una biblioteca de componentes reutilizables en Canvas Apps que elimine
    );
    UsuarioActual = User().FullName;
    ```
+
 2. Usar en las tarjetas de estadística:
    ```
    cmpStatCard_Pendientes.Valor: SolicitudesPendientes
@@ -367,10 +376,12 @@ Construir flujos empresariales robustos con manejo de errores, ramas paralelas, 
     - Get Item de SharePoint (puede fallar)
     - Parsear JSON
     - Crear registro en Dataverse
+
 4. Agregar segundo **Scope** → Renombrar: `Catch`
 5. Configurar Run After del Scope Catch:
     - Clic en "..." del Scope Catch → "Configure run after"
     - Desmarcar "succeeded" → Marcar "failed" y "timed out"
+
 6. Dentro del Scope Catch:
    ```
    Acción: Compose
@@ -395,6 +406,7 @@ Construir flujos empresariales robustos con manejo de errores, ramas paralelas, 
     - `solicitudId` (String)
     - `aprobadorEmail` (String)
     - `presupuesto` (Float)
+
 3. Lógica del flujo hijo: calcular nivel de aprobación:
    ```
    Condition: presupuesto < 5000
@@ -405,6 +417,7 @@ Construir flujos empresariales robustos con manejo de errores, ramas paralelas, 
    
    Default → Response: nivel = "Director"
    ```
+
 4. Acción final: **Respond to a Power Automate flow** con output `nivel`
 5. Guardar y agregar a la solución (importante para Child Flow)
 6. En el flujo padre, agregar: **Run a Child Flow** → seleccionar el flujo creado
@@ -423,6 +436,7 @@ Construir flujos empresariales robustos con manejo de errores, ramas paralelas, 
    Headers:
      Accept: application/json
    ```
+
 3. Agregar **Parse JSON** con el schema de respuesta:
    ```json
    {
@@ -440,6 +454,7 @@ Construir flujos empresariales robustos con manejo de errores, ramas paralelas, 
      }
    }
    ```
+
 4. Guardar tasas en Dataverse:
    ```
    // Apply to each - iterar sobre monedas de interés
@@ -469,6 +484,7 @@ Construir flujos empresariales robustos con manejo de errores, ramas paralelas, 
         body('Parse_JSON')?['@odata.nextLink'],
         'DONE')
      ```
+
 5. Compose resultado final: `Total procesados: @{variables('totalRegistros')}`
 
 #### Actividad 11.5: Ramas paralelas para notificaciones
@@ -549,6 +565,7 @@ Dominar DAX avanzado: CALCULATE con múltiples filtros, contexto de filtro vs fi
        "Año Trimestre", FORMAT([Date], "YYYY") & " Q" & QUARTER([Date])
    )
    ```
+
 2. Marcar tabla como "Tabla de fechas" → columna Date
 3. Crear relación: `Calendar[Date]` → `Ventas[FechaVenta]`
 
@@ -693,11 +710,13 @@ DIVIDE(
    // En tabla Vendedores, filtrar por email del usuario actual
    [Email] = USERPRINCIPALNAME()
    ```
+
 3. Crear rol `Gerente Regional`:
    ```dax
    // En tabla Regiones, filtrar por regiones que gestiona el gerente
    [GerencEmail] = USERPRINCIPALNAME()
    ```
+
 4. Verificar: Modelado → Ver como → seleccionar rol → ingresar email de prueba
 5. Al publicar en Power BI Service → Dataset → Seguridad → Asignar usuarios a roles
 
@@ -1133,9 +1152,11 @@ Crear y certificar conectores personalizados para APIs REST, integrar autenticac
 2. Agregar política: "Set Header"
     - Header: `X-Tenant-ID`
     - Valor: `@connectionParameters('tenant_id')`
+
 3. Agregar política: "Set Query Parameter"
     - Nombre: `version`
     - Valor: `v1`
+
 4. Política "Route Request": redirigir llamadas de TEST a sandbox:
    ```
    Backend service URL: 
@@ -1153,6 +1174,7 @@ Crear y certificar conectores personalizados para APIs REST, integrar autenticac
    nit_emisor: @{parameters('nit_empresa')}
    total: @{triggerOutputs()?['body/sit_total']}
    ```
+
 4. Parsear respuesta y actualizar registro Dataverse con el CUFE generado
 
 ### 💼 Caso Real de Negocio
@@ -1211,6 +1233,7 @@ Crear un agente conversacional funcional en Copilot Studio que resuelve consulta
     - Nombre: `Asistente IT SIT`
     - Descripción: "Ayudo con solicitudes de soporte técnico, consultas de estado y escalamiento"
     - Instrucciones: "Eres un asistente amigable de soporte IT. Respondes en español. Si no puedes resolver la consulta, ofreces escalar a un humano. No inventes información."
+
 3. Conectar Knowledge Source:
     - Agregar → SharePoint → URL del sitio de documentación técnica
     - Esto habilita Respuestas Generativas automáticas
@@ -1273,6 +1296,7 @@ Crear un agente conversacional funcional en Copilot Studio que resuelve consulta
    Accesos        (sinónimos: contraseña, password, usuario, cuenta, login)
    Telefonía      (sinónimos: celular, teléfono, extensión)
    ```
+
 4. Usar la entidad en topic `Crear Nueva Solicitud`:
    ```
    Pregunta: "¿Cuál es la categoría del problema?"
@@ -1289,9 +1313,11 @@ Crear un agente conversacional funcional en Copilot Studio que resuelve consulta
    Select: sit_estado,sit_nombre,modifiedon
    Top: 1
    ```
+
 4. Condition: `length(outputs('List_rows')?['body/value'])` mayor que 0
     - True: Set variable con datos del primer resultado
     - False: Set variable estado = "" (vacío)
+
 5. Return values: 
    ```
    estado: if(empty(variables('varRegistro')), '', variables('varRegistro')?['sit_estado@OData.Community.Display.V1.FormattedValue'])
@@ -1442,6 +1468,7 @@ Implementar una estrategia de ambientes múltiples (DEV → TEST → UAT → PRO
     - **Business (Negocio):** Microsoft Dataverse, SharePoint, Office 365, Teams, Outlook
     - **Non-Business:** Twitter, Facebook, Gmail, Dropbox
     - **Blocked:** HTTP (genérico), RSS, todos los conectores de redes sociales externas
+
 5. Guardar → la política se aplica en minutos
 6. Verificar: intentar crear flujo con conector de Gmail en PROD → debe ser bloqueado
 
@@ -1502,6 +1529,7 @@ Construir un sistema CRM-lite completo para gestión de clientes y oportunidades
 Este módulo no introduce conceptos nuevos — aplica y consolida todos los del Nivel 2 en un proyecto cohesivo.
 
 **Stack del proyecto:**
+
 - Dataverse: modelo de datos con 6 tablas relacionadas
 - Canvas App: gestión de oportunidades con Component Library
 - Model-Driven App: vista 360° del cliente para el equipo comercial
@@ -1528,6 +1556,7 @@ Tablas a crear con prefijo `sit_`:
    sit_responsable (Lookup a SystemUser)
    sit_origen (Elección: Web/Referido/Campaña/Outbound)
    ```
+
 3. **`Actividad Comercial`:** (extiende la tabla nativa Task o crea personalizada)
 4. **`Propuesta`:**
    ```
@@ -1537,6 +1566,7 @@ Tablas a crear con prefijo `sit_`:
    sit_estado (Elección: Borrador/En Revisión/Aprobada/Rechazada)
    sit_archivo_url (URL — enlace al documento en SharePoint)
    ```
+
 5. **`Contacto`:** usar tabla nativa Contact, con relación a Account
 6. **`Competidor`:**
    ```
@@ -1547,6 +1577,7 @@ Tablas a crear con prefijo `sit_`:
    ```
 
 Business Rules para Oportunidad:
+
 - Si etapa = "Cierre" → sit_fechacierre es obligatoria
 - Si probabilidad > 80 → mostrar alerta "Oportunidad caliente"
 - Rollup: contar número de propuestas por oportunidad
@@ -1603,19 +1634,23 @@ Output: emailAprobador (String)
 ```
 
 **Flujo Principal:**
+
 1. Trigger: When a row is added/modified (Propuesta, sit_estado = "En Revisión")
 2. Llamar Child Flow con monto y tipo de cliente
 3. Scope Try:
     - Enviar Approval (Start and wait)
     - Parallel: notificar Teams al vendedor que "está en revisión"
+
 4. If Approved:
     - Patch Propuesta: sit_estado = "Aprobada"
     - Parallel Branch 1: Email al cliente con resumen
     - Parallel Branch 2: Crear tarea de seguimiento en Dataverse
     - Parallel Branch 3: Notificación Teams al vendedor
+
 5. If Rejected:
     - Patch: sit_estado = "Rechazada", guardar comments
     - Email al vendedor con retroalimentación
+
 6. Scope Catch: log de error en SharePoint
 
 #### Actividad 17.4: Power BI — Dashboard Pipeline Comercial
@@ -1652,6 +1687,7 @@ AVERAGEX(
 RLS: Vendedor solo ve sus oportunidades, Gerente ve su región, Director todo.
 
 Visualizaciones:
+
 - Funnel chart por etapa (pipeline waterfall)
 - Scatter plot: probabilidad vs monto (bubble = tamaño del deal)
 - Heatmap de actividad por día de la semana
@@ -1684,6 +1720,7 @@ Mensaje:
     - Connection References
     - Environment Variables
     - Custom Connector (si aplica)
+
 2. Verificar dependencias: Solución → Comprobación de solución
 3. Exportar versión `1.0.0.0` como Managed
 4. Importar en TEST → configurar Connection References y Environment Variables
@@ -1742,6 +1779,7 @@ Para avanzar al Nivel 3, debes cumplir **todos** los siguientes criterios:
 
 ### Auto-evaluación de Dominio
 Califica cada tema del 1 al 5:
+
 - Dataverse relaciones y seguridad: ___/5
 - Canvas Component Library: ___/5  
 - Power Automate avanzado: ___/5
