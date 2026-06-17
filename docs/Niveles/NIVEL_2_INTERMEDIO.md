@@ -32,9 +32,9 @@ Diseñar modelos de datos empresariales complejos en Dataverse: relaciones polim
 ### 📖 Conceptos Clave
 - **Tipos de relaciones:** Dataverse soporta cuatro patrones: 1:N (padre-hijo, ej. Proyecto → Tareas), N:N nativa (tabla de intersección gestionada automáticamente por la plataforma), N:N manual (tabla de intersección propia con columnas adicionales, ej. `sit_oportunidad_etiqueta` con campo `sit_relevancia`), y Polimórfica (un Lookup que puede apuntar a múltiples tablas, como el campo `sit_referencia` que acepta Cuenta o Contacto). Las relaciones definen el comportamiento en cascada (Cascade) para operaciones de Asignar, Compartir, Eliminar y Desactivar.
 
-- **Columnas calculadas:** campo de solo lectura en Dataverse cuyo valor se recalcula en el servidor cada vez que se solicita el registro (no se almacena en la base de datos). Utiliza sintaxis clásica de expresiones (no Power Fx). Son filtrables y buscables en FetchXML. Ejemplo: `sit_costo` en tabla Tarea calculado como `sit_horas_reales * sit_tarifa_hora`. Diferencia clave vs Rollup: solo pueden referenciar campos del mismo registro o de registros padre mediante RELATED.
+- **Columnas calculadas:** campo de solo lectura en Dataverse cuyo valor se calcula en el servidor y se **almacena en la base de datos** cuando el registro se guarda o sus dependencias cambian. Utiliza sintaxis clásica de expresiones (no Power Fx). Son filtrables y buscables en FetchXML precisamente porque persisten su valor. Ejemplo: `sit_costo` en tabla Tarea calculado como `sit_horas_reales * sit_tarifa_hora`. Diferencia clave vs Formula columns (Power Fx): las Formula columns se calculan on-the-fly sin persistencia y no son filtrables directamente en OData. Diferencia clave vs Rollup: las Calculadas solo referencian campos del mismo registro o padre mediante RELATED.
 
-- **Columnas Rollup:** campo de solo lectura en Dataverse que agrega automáticamente valores desde registros hijos relacionados (Sum, Count, Min, Max, Avg). Se recalculan en segundo plano cada 12 horas por un system job, o de forma inmediata al abrir el registro padre. Diferencia clave vs Columnas Calculadas: Rollup atraviesa relaciones 1:N, mientras que Calculadas solo usan campos del mismo registro. Soportan filtros sobre los registros hijos (ej. solo sumar tareas con estado=Completada). Ejemplo: `sit_costoreal` en tabla Proyecto suma el `sit_costo` de todas las Tareas relacionadas con estado=Completada.
+- **Columnas Rollup:** campo de solo lectura en Dataverse que agrega automáticamente valores desde registros hijos relacionados (Sum, Count, Min, Max, Avg). Se recalculan mediante dos system jobs: el job incremental recurrente corre **cada 1 hora** para mantener los valores al día; el job de recálculo masivo (Mass Calculate) corre una sola vez ~12 horas después de crear o modificar la definición de la columna. También se puede forzar el recálculo de forma inmediata al abrir el registro padre. Diferencia clave vs Columnas Calculadas: Rollup atraviesa relaciones 1:N, mientras que Calculadas solo usan campos del mismo registro. Soportan filtros sobre los registros hijos (ej. solo sumar tareas con estado=Completada). Ejemplo: `sit_costoreal` en tabla Proyecto suma el `sit_costo` de todas las Tareas relacionadas con estado=Completada.
 
 - **Reglas de negocio:** lógica declarativa sin código que se configura visualmente en el diseñador de tablas y se ejecuta automáticamente en el formulario (cliente) y/o al guardar (servidor). Soportan acciones como: mostrar/ocultar campos, requerir/no requerir campos, bloquear campos, establecer valores, y mostrar mensajes de error. Tienen dos alcances: "Solo formulario" (solo en la UI) y "Entidad" (también en API y flujos). Ejemplo: regla que bloquea edición de `sit_presupuesto` cuando `sit_estado` = "Cancelado".
 
@@ -349,7 +349,7 @@ Construir una biblioteca de componentes reutilizables en Canvas Apps que elimine
 - Documentar cada propiedad de input con el campo "Descripción" del editor de componentes
 - Versionar las bibliotecas con comentarios de cambio antes de publicar
 - Nunca modificar el componente directamente en la app — hacerlo en la librería y actualizarlo
-- Named Formulas son preferibles a variables globales en App.OnStart para mejor rendimiento
+- Named Formulas (declaradas en `App.Formulas`, no en `App.OnStart`) son preferibles a variables globales para mejor rendimiento: se evalúan de forma lazy y reactiva en lugar de calcularse de forma imperativa al iniciar la app
 
 ### ⚠️ Errores Comunes
 | Error | Causa | Solución |
@@ -365,7 +365,7 @@ Construir una biblioteca de componentes reutilizables en Canvas Apps que elimine
 - [ ] Componente `cmpStatCard` muestra valor numérico formateado con acento de color
 - [ ] `cmpSearchBox` implementa debounce de 500ms y expone `TextoBusqueda` como output
 - [ ] App de prueba importa y usa los 3 componentes correctamente
-- [ ] Named Formulas reducen las llamadas a CountRows en App.OnStart
+- [ ] Named Formulas declaradas en `App.Formulas` eliminan variables globales de `App.OnStart` para cálculos derivados
 
 ---
 
@@ -1110,7 +1110,7 @@ Crear y certificar conectores personalizados para APIs REST, integrar autenticac
 
 - **Connector Certification:** proceso oficial de Microsoft para publicar un conector personalizado en el marketplace público de Power Platform, haciéndolo disponible para todos los usuarios de Power Platform globalmente. Requiere: spec OpenAPI válida, autenticación robusta, documentación completa, código de contribuidor registrado, y revisión de Microsoft. Existen dos niveles: `Independent Publisher` (cualquier desarrollador puede publicar) y `Certified Connector` (requiere asociación con el ISV o vendor de la API). Proceso completo tarda 4-8 semanas.
 
-- **Connection Reference:** componente de soluciones ALM que actúa como abstracción de una conexión específica. En lugar de hardcodear la conexión directamente en un flujo o app, el componente referencia una Connection Reference nombrada (ej. `CR_SIT_Dataverse_Principal`). Al importar la solución en otro ambiente, el usuario debe configurar qué conexión real apunta esa referencia en el nuevo ambiente. Esto desacopla el componente de las credenciales del ambiente de desarrollo. Crítico para flujos en soluciones — sin Connection References, el flujo falla al importar.
+- **Connection Reference:** abstracción de conexión usada en soluciones ALM para desacoplar un flujo o app de credenciales específicas de un ambiente. Ver definición completa en el Módulo 16 (Seguridad y ALM), donde este concepto se explica en profundidad junto al resto de los mecanismos de ALM.
 
 - **Throttling:** límites de llamadas por minuto/hora/día que una API impone para protegerse de sobrecarga. Los conectores de Power Platform tienen throttling definido en sus propias políticas y heredan los límites de la API destino. Al exceder el límite, la API retorna HTTP 429 (Too Many Requests). Estrategias para manejar throttling: agregar `Delay` entre llamadas en loops, activar el retry automático del conector (configurable en Settings), diseñar flujos con batch operations en lugar de N llamadas individuales, y escalonar ejecuciones en tiempo.
 

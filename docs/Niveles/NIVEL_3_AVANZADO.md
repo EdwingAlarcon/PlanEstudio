@@ -178,15 +178,24 @@ Documentar la arquitectura con un diagrama textual (para Visio o draw.io):
 Implementar pipelines completos de CI/CD para Power Platform usando Azure DevOps y GitHub Actions, automatizando export/import de soluciones, comprobación de calidad con Solution Checker, y despliegue multi-ambiente con aprobaciones.
 
 ### 📖 Conceptos Clave
-- **pac CLI (Power Platform CLI):** herramienta de línea de comandos multiplataforma para automatizar todas las operaciones de Power Platform: autenticar con entornos, exportar/importar/empaquetar soluciones, gestionar datos con `pac data export/import`, crear PCF con `pac pcf init`, y construir modelos con `pac modelbuilder`. Ejemplo: `pac solution export --name SIT_CRM --path ./output/SIT_CRM.zip --managed false` exporta la solución unmanaged del entorno autenticado actualmente.
+- **pac CLI (Power Platform CLI):** herramienta de línea de comandos multiplataforma para automatizar todas las operaciones de Power Platform: autenticar con entornos, exportar/importar/empaquetar soluciones, gestionar datos con `pac data export/import`, crear PCF con `pac pcf init`, y construir modelos con `pac modelbuilder`. Ejemplo: `pac solution export --name SIT_CRM --path ./output/SIT_CRM.zip` exporta la solución unmanaged del entorno autenticado actualmente (omitir `--managed` equivale a unmanaged; usar `--managed` sin valor exporta como managed).
+
 - **Power Platform Build Tools:** extensión de Azure DevOps que provee tasks especializadas para CI/CD de Power Platform: `PowerPlatformExportSolution`, `PowerPlatformImportSolution`, `PowerPlatformPackSolution`, `PowerPlatformUnpackSolution`, `PowerPlatformChecker`, `PowerPlatformSetConnectionVariables`. Cada task se conecta al entorno mediante una Service Connection y abstrae las llamadas al pac CLI.
+
 - **microsoft/powerplatform-actions:** equivalente de los Power Platform Build Tools pero para GitHub Actions. Las acciones del repositorio `microsoft/powerplatform-actions` como `export-solution@v1`, `import-solution@v1`, `check-solution@v1` permiten construir pipelines CI/CD completos en GitHub sin instalar el pac CLI manualmente.
+
 - **Solution Checker (Solution Analysis):** herramienta de análisis estático que examina la solución exportada contra un conjunto de reglas de calidad, seguridad y compatibilidad. Detecta patrones problemáticos como plugins sin check de Depth, uso de APIs obsoletas, referencias hardcodeadas a GUIDs, y falta de manejo de errores. En pipelines se configura con `FailOnPowerAppsCheckerAnalysisError: true` para que errores críticos bloqueen el despliegue.
+
 - **Managed Identity:** método de autenticación de Azure que permite que un servicio (Azure DevOps agent, Azure Function) se autentique en otros servicios de Azure sin almacenar secretos. En pipelines de Power Platform, se usa en lugar de service principals con client secrets para eliminar la rotación manual de credenciales. Configurado en Azure DevOps como `authenticationType: ManagedServiceIdentity` en las tasks.
+
 - **Service Connection:** configuración en Azure DevOps que almacena las credenciales para conectarse a un entorno de Power Platform (URL, Client ID, Client Secret, Tenant ID). Se crea una Service Connection por cada entorno del ALM (DEV, TEST, UAT, PROD). Las tasks del pipeline referencian la Service Connection por nombre en lugar de exponer credenciales en el YAML.
+
 - **Artifact:** el archivo `.zip` de la solución empaquetada como Managed, generado por el stage de Build del pipeline CI. Se publica con `PublishBuildArtifacts` y es consumido por los stages de deploy CD — garantizando que todos los ambientes reciben exactamente el mismo binario de solución, no una exportación nueva de cada entorno.
+
 - **Branching strategy:** estrategia de ramas para trabajo en equipo. GitFlow: rama `main` (producción), `develop` (integración), `feature/nombre` (trabajo individual) y `release/version` (preparación de release). Trunk-Based: todos los desarrolladores hacen commits a `main` (o `develop`) frecuentemente con feature flags. Para Power Platform se recomienda GitFlow simplificado: `main` → `develop` → `feature/*`.
+
 - **Environment Approvals:** configuración en Azure DevOps Environments que requiere una o más aprobaciones humanas antes de que el pipeline de deployment pueda continuar. Se configura en el Environment de UAT (aprobación del cliente) y PROD (aprobación del líder técnico y QA). El pipeline queda en pausa hasta recibir la aprobación o que expire el timeout configurado.
+
 - **YAML Pipeline:** definición del pipeline de CI/CD como código YAML versionado en el repositorio de git. Permite que el pipeline mismo esté bajo control de versiones, sea revisado en PRs, y sea idéntico entre ramas. Estructura: `trigger`, `variables`, `stages` → `jobs` → `steps` → `tasks`.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
@@ -460,7 +469,6 @@ pac auth create --url $DevEnvironmentUrl --kind SPN `
 pac solution export `
     --name $SolutionName `
     --path "$OutputPath/$SolutionName.zip" `
-    --managed false `
     --async
 
 # Desempaquetar para source control (XML legible por git)
