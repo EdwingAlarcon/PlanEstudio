@@ -30,16 +30,25 @@ En este nivel pasas de usuario avanzado a **desarrollador funcional**. Aprender�
 Diseñar modelos de datos empresariales complejos en Dataverse: relaciones polimórficas, columnas calculadas y rollup, reglas de negocio avanzadas, seguridad a nivel de campo, y auditoría completa de datos.
 
 ### 📖 Conceptos Clave
-- **Tipos de relaciones:** 1:N, N:N nativa, N:N manual (tabla de intersección), Polimórfica (Lookup a múltiples tablas)
-- **Columnas calculadas:** valores derivados computados en el servidor (no en cliente)
-- **Columnas Rollup:** agregaciones automáticas desde registros hijos (Sum, Count, Min, Max, Avg)
-- **Reglas de negocio:** lógica sin código que se ejecuta en cliente y/o servidor
-- **Business Process Flow (BPF):** guía visual de procesos de múltiples etapas
-- **Seguridad a nivel de campo (Field Security Profile):** restricción de lectura/escritura por columna
-- **Auditoría de Dataverse:** registro de quién cambió qué y cuándo
-- **Búsqueda de Dataverse (Relevance Search):** índice full-text con Azure Cognitive Search
-- **Calculated vs Formula columns:** Formula usa Power Fx, Calculated usa sintaxis clásica
-- **Duplicate Detection Rules:** reglas para detectar duplicados antes de guardar
+- **Tipos de relaciones:** Dataverse soporta cuatro patrones: 1:N (padre-hijo, ej. Proyecto → Tareas), N:N nativa (tabla de intersección gestionada automáticamente por la plataforma), N:N manual (tabla de intersección propia con columnas adicionales, ej. `sit_oportunidad_etiqueta` con campo `sit_relevancia`), y Polimórfica (un Lookup que puede apuntar a múltiples tablas, como el campo `sit_referencia` que acepta Cuenta o Contacto). Las relaciones definen el comportamiento en cascada (Cascade) para operaciones de Asignar, Compartir, Eliminar y Desactivar.
+
+- **Columnas calculadas:** campo de solo lectura en Dataverse cuyo valor se recalcula en el servidor cada vez que se solicita el registro (no se almacena en la base de datos). Utiliza sintaxis clásica de expresiones (no Power Fx). Son filtrables y buscables en FetchXML. Ejemplo: `sit_costo` en tabla Tarea calculado como `sit_horas_reales * sit_tarifa_hora`. Diferencia clave vs Rollup: solo pueden referenciar campos del mismo registro o de registros padre mediante RELATED.
+
+- **Columnas Rollup:** campo de solo lectura en Dataverse que agrega automáticamente valores desde registros hijos relacionados (Sum, Count, Min, Max, Avg). Se recalculan en segundo plano cada 12 horas por un system job, o de forma inmediata al abrir el registro padre. Diferencia clave vs Columnas Calculadas: Rollup atraviesa relaciones 1:N, mientras que Calculadas solo usan campos del mismo registro. Soportan filtros sobre los registros hijos (ej. solo sumar tareas con estado=Completada). Ejemplo: `sit_costoreal` en tabla Proyecto suma el `sit_costo` de todas las Tareas relacionadas con estado=Completada.
+
+- **Reglas de negocio:** lógica declarativa sin código que se configura visualmente en el diseñador de tablas y se ejecuta automáticamente en el formulario (cliente) y/o al guardar (servidor). Soportan acciones como: mostrar/ocultar campos, requerir/no requerir campos, bloquear campos, establecer valores, y mostrar mensajes de error. Tienen dos alcances: "Solo formulario" (solo en la UI) y "Entidad" (también en API y flujos). Ejemplo: regla que bloquea edición de `sit_presupuesto` cuando `sit_estado` = "Cancelado".
+
+- **Business Process Flow (BPF):** flujo visual de etapas que guía al usuario a través de un proceso de negocio multi-paso en un formulario Model-Driven. Cada etapa tiene pasos (campos obligatorios o recomendados) y puede incluir acciones (cambiar estado, llamar flujo). Se almacena como un registro en una tabla específica del BPF. Puede abarcar múltiples tablas (ej. Prospecto → Oportunidad → Pedido). Soporta hasta 30 etapas y puede tener ramas condicionales.
+
+- **Seguridad a nivel de campo (Field Security Profile):** mecanismo que restringe la visibilidad y edición de columnas específicas independientemente del Security Role de la tabla. Se configura en tres niveles: lectura, creación y actualización. Los perfiles son aditivos: si un usuario tiene dos perfiles y uno permite lectura, puede leer. Se asignan a usuarios individuales o a equipos (Teams). Ejemplo: perfil `Perfil Financiero Proyecto` que permite lectura pero prohíbe escritura en `sit_presupuesto` para el rol Jefe de Proyecto.
+
+- **Auditoría de Dataverse:** sistema de registro automático que captura quién cambió qué campo, cuándo y desde qué valor a qué valor. Se activa por ambiente y luego por tabla y columna. Los registros de auditoría se almacenan en la tabla `Audit` del sistema y son accesibles desde el formulario (historial de auditoría) y desde el Admin Center. Indispensable para trazabilidad en tablas financieras, RR.HH. y cumplimiento regulatorio. Considerar el impacto en almacenamiento: los logs de auditoría consumen capacidad.
+
+- **Búsqueda de Dataverse (Relevance Search):** motor de búsqueda full-text basado en Azure Cognitive Search que indexa el contenido de múltiples tablas y permite búsquedas cross-tabla desde la barra de búsqueda global. Diferencia vs búsqueda rápida: Relevance Search busca en todos los campos indexados de múltiples tablas simultáneamente, es más rápida y soporta búsqueda difusa y por relevancia. Requiere configuración de qué columnas indexar por tabla. Puede tardar hasta 15 minutos en indexar nuevos datos.
+
+- **Calculated vs Formula columns:** ambas producen valores derivados de solo lectura, pero difieren en la sintaxis y capacidades. Las Columnas Calculadas usan la sintaxis clásica de Dataverse (campo de fórmula en el diseñador) y son filtrables en FetchXML avanzado. Las Columnas de Fórmula (Formula columns) usan Power Fx (la misma sintaxis de Canvas Apps) y son más expresivas (soportan lógica condicional compleja, funciones de texto avanzadas), pero no son filtrables en consultas OData directas. Elegir Formula columns para lógica compleja; Calculated para columnas que necesitan ser criterio de filtro en vistas y flujos.
+
+- **Duplicate Detection Rules:** reglas configurables que comparan campos de un registro nuevo o editado contra registros existentes para detectar posibles duplicados antes de guardar. Se definen mediante criterios de coincidencia (exacta, primeros N caracteres, mismos valores) sobre campos seleccionados. Se pueden activar en creación, actualización o importación masiva. El usuario recibe una advertencia y puede ignorarla o cancelar la operación. Ejemplo: regla que detecta duplicados de Cuenta cuando `sit_nit` es igual o cuando `sit_nombre` coincide en los primeros 10 caracteres.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
@@ -172,15 +181,25 @@ Diseñar modelos de datos empresariales complejos en Dataverse: relaciones polim
 Construir una biblioteca de componentes reutilizables en Canvas Apps que elimine la duplicación de código, garantice consistencia visual y reduzca el tiempo de desarrollo en nuevas aplicaciones del 40% o más.
 
 ### 📖 Conceptos Clave
-- **Component Library:** colección de componentes publicables y actualizables independientemente
-- **Custom Component:** control Canvas con propiedades de entrada/salida definidas por el desarrollador
-- **Input Properties:** datos que el componente recibe (equivalente a parámetros de función)
-- **Output Properties / Custom Properties:** valores que el componente expone al padre
-- **OnReset behavior:** lógica del componente cuando el padre llama `Reset(componente)`
-- **Component Lifecycle:** creación, actualización de dependencias, publicación de librería
-- **Named Formulas:** variables calculadas globales declaradas en App.OnStart con `=` (Power Fx)
-- **With():** función para agrupar lógica compleja y mejorar legibilidad
-- **Lazy Loading:** técnica para reducir tiempo de carga inicial de la app
+- **Component Library:** contenedor especial en Power Apps que almacena componentes Canvas reutilizables de forma independiente de cualquier aplicación. Se publica por separado y puede ser importada por múltiples apps. Cuando se actualiza la librería y se publica, todas las apps que la usan pueden aceptar la actualización con un solo clic (sin necesidad de editar cada app). Una librería puede contener N componentes. Permite estandarizar UI a nivel organizacional. Ejemplo: librería `SIT Component Library` con componentes `cmpHeader`, `cmpStatCard`, `cmpSearchBox` usados en 15 aplicaciones del banco.
+
+- **Custom Component:** control Canvas que encapsula un conjunto de controles, lógica y propiedades en una unidad reutilizable con una interfaz definida (inputs/outputs). Se comporta como una caja negra: el desarrollador de la app solo interactúa con sus propiedades, sin ver la implementación interna. Soportan propiedades de Behavior (funciones que el padre puede llamar). Ejemplo: `cmpHeader` que expone `TituloApp`, `ColorFondo`, `MostrarBtnVolver` como propiedades de entrada.
+
+- **Input Properties:** propiedades de entrada del componente que actúan como parámetros de configuración que recibe desde la app padre. Se definen con un tipo (Texto, Número, Color, Boolean, Registro, Tabla) y un valor por defecto. El componente las lee pero no las puede modificar directamente (son de solo lectura dentro del componente). Ejemplo: `cmpStatCard.Titulo = "Total Solicitudes"` configura el texto visible de la tarjeta desde la app padre.
+
+- **Output Properties / Custom Properties:** propiedades que el componente expone hacia afuera para que la app padre pueda leer valores calculados o resultados del componente. Son de tipo solo salida (el componente las establece, el padre las lee). Cruciales para componentes de entrada de usuario como buscadores o formularios embebidos. Ejemplo: `cmpSearchBox.TextoBusqueda` expone el texto actual del buscador para que la gallery en la app padre filtre sus items.
+
+- **OnReset behavior:** propiedad de comportamiento especial de los componentes que define qué ocurre cuando el padre ejecuta `Reset(nombreComponente)`. Permite que el componente reinicie su estado interno (variables locales, TextInputs) sin necesidad de que el padre conozca los detalles internos. Útil para formularios reutilizables que deben limpiarse después de guardar.
+
+- **Component Lifecycle:** ciclo que va desde la creación del componente en la librería, la publicación de la librería, la importación en las apps consumidoras, y la gestión de actualizaciones. Al publicar una nueva versión de la librería, las apps no se actualizan automáticamente — el desarrollador de cada app debe aceptar la actualización manualmente. Esto previene cambios disruptivos no deseados en apps en producción. Importante: siempre documentar breaking changes antes de publicar.
+
+- **Named Formulas:** expresiones Power Fx declaradas en la propiedad `App.Formulas` (no en `App.OnStart`) que se evalúan de forma lazy (solo cuando se usan) y se recalculan automáticamente cuando sus dependencias cambian. A diferencia de variables en `OnStart` que se calculan una vez al inicio, las Named Formulas son reactivas. Permiten definir cálculos globales sin código imperativo. Ejemplo: `TotalSolicitudes = CountRows(colSolicitudes)` se recalcula automáticamente cada vez que `colSolicitudes` cambia.
+
+- **With():** función Power Fx que crea un scope local con variables nombradas para evitar repetir expresiones complejas y mejorar la legibilidad. Funciona como un "let" local: `With({precioConIVA: precio * 1.19, descuento: precio * 0.05}, precioConIVA - descuento)`. Diferencia vs variables de contexto: With es una expresión (retorna un valor), no una instrucción imperativa. Ideal para cálculos intermedios dentro de una fórmula.
+
+- **Delegation (Delegación):** mecanismo por el cual Power Apps transfiere el procesamiento de una consulta al origen de datos (Dataverse, SharePoint) en lugar de traer todos los registros al cliente. Una operación es "delegable" cuando el conector soporta ejecutarla en el servidor. Si no es delegable, Power Apps trae hasta 500 (o 2000) registros y aplica el filtro localmente, perdiendo datos. Ejemplo delegable: `Filter(Proyectos, sit_estado = "En Curso")` en Dataverse. No delegable en Sharepoint: `Filter(lista, StartsWith(Nombre, txtBusqueda.Text))`. Siempre revisar las advertencias de delegación (triángulo amarillo) en el editor de fórmulas.
+
+- **Lazy Loading:** técnica de arquitectura en Canvas Apps para reducir el tiempo de carga inicial cargando datos solo cuando la pantalla que los necesita es navegada. Se implementa cargando colecciones en el evento `OnVisible` de cada pantalla en lugar de todas en `App.OnStart`. Combinar con Named Formulas para cálculos derivados. Impacto típico: reducción del tiempo de carga inicial de 8-15 segundos a 2-3 segundos en apps con múltiples fuentes de datos.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
@@ -356,16 +375,25 @@ Construir una biblioteca de componentes reutilizables en Canvas Apps que elimine
 Construir flujos empresariales robustos con manejo de errores, ramas paralelas, flujos hijos reutilizables, llamadas HTTP a APIs externas, y procesamiento de alto volumen con batches y paginación.
 
 ### 📖 Conceptos Clave
-- **Scope:** contenedor de acciones con manejo de errores (try/catch pattern)
-- **Run After:** configurar qué estado previo activa la siguiente acción (success/failure/skipped/timeout)
-- **Parallel Branch:** ramas que se ejecutan simultáneamente para optimizar tiempo
-- **Child Flow:** flujo reutilizable llamado desde otros flujos (solution-aware)
-- **HTTP action:** llamar cualquier API REST externa desde Power Automate
-- **Pagination:** manejar resultados de más de 256 ítems con `@odata.nextLink`
-- **Do Until / Apply to Each:** bucles con control de iteración y timeout
-- **Variables de entorno:** separar configuración del flujo (URL, claves) por ambiente
-- **Batch Processing:** agrupar operaciones para reducir llamadas a API
-- **Compensation pattern:** deshacer acciones si un paso posterior falla
+- **Scope:** contenedor de acciones en Power Automate que agrupa un conjunto de pasos lógicamente relacionados y permite aplicar manejo de errores colectivo (patrón try/catch). Si cualquier acción dentro del Scope falla, el Scope completo se marca como fallido, lo que permite al siguiente Scope (Catch) detectar el error. También mejora la legibilidad al organizar flujos complejos. Ejemplo: Scope `Try` contiene el proceso de negocio; Scope `Catch` contiene el registro del error y la notificación al admin.
+
+- **Run After:** configuración por acción que define en qué estado(s) de la acción previa debe ejecutarse la acción actual. Los cuatro estados posibles son: `succeeded`, `failed`, `skipped` y `timedOut`. Por defecto todas las acciones tienen Run After = succeeded. Para implementar un Catch, configurar el Scope de Catch con Run After = failed + timedOut (desmarcando succeeded). Esto es lo que convierte un Scope en un bloque catch.
+
+- **Parallel Branch:** rama de ejecución simultánea en Power Automate que permite que múltiples acciones se ejecuten al mismo tiempo en lugar de secuencialmente. Se agrega desde el botón "+" en el diseñador. El flujo espera a que TODAS las ramas terminen antes de continuar. Útil cuando acciones son independientes entre sí (ej. enviar Teams + enviar email + actualizar Dataverse). Reducción típica de tiempo: si cada acción toma 10s, 3 acciones secuenciales = 30s vs paralelas = ~12s.
+
+- **Child Flow:** flujo de Power Automate diseñado para ser invocado desde otros flujos como una función reutilizable. Usa el disparador "When called from a Power Automate flow" y puede recibir parámetros de entrada y retornar valores de salida. Debe estar en la misma solución que el flujo padre. Ventajas: encapsula lógica de negocio reutilizable, facilita el mantenimiento (un solo punto de cambio), y reduce duplicación. Ejemplo: `DeterminarNivelAprobacion` llamado desde flujos de órdenes de compra, contratos y viáticos.
+
+- **HTTP action:** acción de Power Automate que permite llamar cualquier API REST externa mediante los métodos GET, POST, PUT, PATCH, DELETE. Soporta configuración de headers, body, y autenticación (básica, OAuth, certificado). Es un conector Premium. La respuesta se parsea con la acción Parse JSON. Fundamental para integrar con sistemas externos que no tienen conector nativo en Power Platform. Ejemplo: llamar a `api.exchangerate-api.com` para obtener tasas de cambio en tiempo real.
+
+- **Pagination (Paginación):** mecanismo para obtener más de 256 registros (límite por defecto de las acciones de lista) desde una fuente de datos. En acciones de Dataverse/SharePoint se activa en la configuración de la acción (Settings → Pagination → On, límite personalizado). Para APIs externas vía HTTP, se implementa manualmente siguiendo el token `@odata.nextLink` en la respuesta mientras exista. Ignorar la paginación lleva a pérdida silenciosa de datos en flujos que procesan listas grandes.
+
+- **Do Until / Apply to Each:** dos patrones de iteración en Power Automate. `Do Until` repite un bloque de acciones hasta que una condición se cumpla (máx 60 iteraciones o 60 minutos por defecto, configurable). `Apply to Each` itera sobre cada elemento de un array/colección ejecutando el bloque interno. Apply to Each es secuencial por defecto pero soporta concurrencia (hasta 50 elementos en paralelo). Usar `Apply to Each` con Concurrency activado para grandes volúmenes reduce tiempos dramáticamente.
+
+- **Variables de entorno (en flujos):** diferente a las Environment Variables de soluciones (que son de plataforma), las variables en flujos son de tipo Initialize Variable + Set Variable + Append. Tipos disponibles: String, Integer, Float, Boolean, Array, Object. El alcance es el flujo completo (no son locales a un Scope o Apply to Each). Para valores de configuración que cambian por ambiente, usar las Environment Variables de la solución, no variables de flujo.
+
+- **Batch Processing:** técnica para agrupar múltiples operaciones en una sola llamada API en lugar de llamar N veces en un loop. La API de Dataverse soporta `$batch` que procesa hasta 1000 operaciones en una sola solicitud HTTP. En Power Automate se implementa con la acción HTTP hacia el endpoint `$batch` de la OData API. Reduce drásticamente el consumo de API calls (importantes para límites de licencia) y mejora el rendimiento en cargas masivas.
+
+- **Compensation pattern:** patrón de diseño para deshacer operaciones ya completadas cuando un paso posterior falla, dado que Power Automate no tiene transacciones nativas. Se implementa con Scope + Run After (failed): si el flujo falla después de crear un registro, el Scope Catch ejecuta las acciones de compensación (eliminar el registro creado, notificar al usuario, registrar el error). Ejemplo: si falla la creación de la factura después de descontar el inventario, la compensación restaura el stock.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
@@ -532,17 +560,27 @@ Construir flujos empresariales robustos con manejo de errores, ramas paralelas, 
 Dominar DAX avanzado: CALCULATE con múltiples filtros, contexto de filtro vs fila, funciones de inteligencia de tiempo, Row Level Security, y métricas de negocio complejas como cohortes y métricas móviles.
 
 ### 📖 Conceptos Clave
-- **Contexto de filtro (Filter Context):** conjunto de filtros activos que afectan el cálculo de una medida
-- **Contexto de fila (Row Context):** la fila actual durante iteración (SUMX, AVERAGEX, etc.)
-- **Transición de contexto:** CALCULATE convierte contexto de fila en contexto de filtro
-- **CALCULATE:** función central de DAX, modifica el contexto de filtro
-- **ALL / ALLEXCEPT / ALLSELECTED:** eliminan filtros para cálculos de totales y porcentajes
-- **FILTER:** itera tabla y retorna subconjunto — usar con cuidado (no siempre delegable)
-- **RELATED / RELATEDTABLE:** navegar relaciones en contextos de fila y filtro
-- **Funciones de tiempo:** DATEADD, TOTALYTD, SAMEPERIODLASTYEAR, DATESBETWEEN
-- **RANKX:** ranking dinámico de elementos
-- **Row Level Security (RLS):** filtrar datos según el usuario que visualiza el reporte
-- **Tablas de calendario:** tabla de fechas requerida para inteligencia de tiempo
+- **Contexto de filtro (Filter Context):** conjunto de todos los filtros activos en un momento dado que determinan qué filas participan en el cálculo de una medida. Proviene de tres fuentes: slicers del reporte, filtros de la página/visual, y filtros definidos en el modelo de datos (relaciones). Comprender el contexto de filtro es la clave para entender por qué una medida DAX retorna un valor específico en una celda particular. Ejemplo: en una tabla con filas por mes y columnas por región, cada celda tiene un contexto de filtro diferente (mes=Enero, región=Norte).
+
+- **Contexto de fila (Row Context):** contexto creado durante la iteración fila por fila sobre una tabla, presente en columnas calculadas y en funciones iteradoras (SUMX, AVERAGEX, MAXX, FILTER). En el contexto de fila puedes referenciar cualquier columna de la tabla iterada directamente. No está presente en medidas simples (solo existe en iteradores). Ejemplo: en `SUMX(Ventas, Ventas[Cantidad] * Ventas[Precio])`, el contexto de fila permite multiplicar Cantidad × Precio de cada fila específica.
+
+- **Transición de contexto:** comportamiento de CALCULATE que convierte automáticamente el contexto de fila actual en un contexto de filtro equivalente. Ocurre cuando CALCULATE se llama dentro de un iterador (SUMX, AVERAGEX, etc.) o en una columna calculada. Es uno de los conceptos más avanzados de DAX: permite que las medidas calculadas dentro de un iterador "filtren" la tabla por la fila actual. Comprenderlo es esencial para patrones como SUMX sobre medidas.
+
+- **CALCULATE:** función central de DAX que evalúa una expresión en un contexto de filtro modificado. Acepta la expresión a calcular y N modificadores de filtro. Es la única función que puede modificar el contexto de filtro. Soporta dos tipos de argumentos: expresiones de tabla (que reemplazan el filtro de esa tabla) y funciones especiales como ALL, ALLEXCEPT, USERELATIONSHIP. Ejemplo: `CALCULATE([Total Ventas], Productos[Categoria] = "Electrónica")` calcula Total Ventas solo para productos de electrónica, independientemente del filtro de categoría actual.
+
+- **ALL / ALLEXCEPT / ALLSELECTED:** modificadores de filtro para CALCULATE que controlan qué filtros se eliminan. `ALL(tabla)` elimina todos los filtros de la tabla (útil para porcentajes del total). `ALLEXCEPT(tabla, col1, col2)` elimina todos los filtros EXCEPTO los de las columnas especificadas (útil para cálculos dentro de grupos). `ALLSELECTED(tabla)` elimina los filtros internos del visual pero mantiene los slicers externos (% del total del subconjunto visible).
+
+- **FILTER:** función DAX que itera una tabla y retorna las filas que cumplen una condición. Retorna una tabla, por lo que se usa dentro de CALCULATE u otras funciones de tabla. A diferencia de los modificadores directos en CALCULATE (más eficientes), FILTER crea un contexto de fila sobre la tabla completa antes de aplicar el filtro, lo que puede ser lento en tablas grandes. Usar modificadores directos cuando sea posible: `CALCULATE([M], Tabla[Col]="X")` es más rápido que `CALCULATE([M], FILTER(Tabla, Tabla[Col]="X"))`.
+
+- **RELATED / RELATEDTABLE:** funciones para navegar relaciones en DAX. `RELATED(Tabla[Columna])` trae un valor de una tabla relacionada hacia el lado "muchos" (en un contexto de fila de la tabla hijo, obtiene el valor del padre). `RELATEDTABLE(Tabla)` retorna todas las filas de la tabla relacionada (desde el lado "uno" hacia el "muchos"). Ejemplo: en una columna calculada de tabla Ventas, `RELATED(Productos[Categoria])` obtiene la categoría del producto de esa venta.
+
+- **Funciones de tiempo (Time Intelligence):** familia de funciones DAX que manipulan períodos de tiempo basándose en la tabla de calendario. Requieren una tabla de fechas marcada como "Tabla de fechas". Las principales: `DATEADD` (desplaza N períodos: -1 mes, +1 año), `TOTALYTD` / `TOTALMTD` / `TOTALQTD` (acumulados año/mes/trimestre hasta la fecha), `SAMEPERIODLASTYEAR` (mismo período del año anterior), `DATESINPERIOD` (rango de fechas desde un punto por N períodos), `DATESBETWEEN` (rango absoluto entre dos fechas). Ejemplo: `TOTALYTD([Total Ventas], 'Calendar'[Date])` retorna la venta acumulada del año hasta la fecha del filtro actual.
+
+- **RANKX:** función DAX que calcula el ranking dinámico de una expresión sobre una tabla. Sintaxis: `RANKX(tabla, expresión, valor, orden, vínculos)`. El parámetro de vínculos acepta DENSE (sin saltos en el ranking) o SKIP (salta posiciones cuando hay empates). Funciona con el contexto de filtro actual, por lo que si hay un filtro de región, el ranking es dentro de esa región. Ejemplo: `RANKX(ALL(Clientes), [Total Ventas],, DESC, DENSE)` rankea todos los clientes por ventas, ignorando filtros, de mayor a menor.
+
+- **Row Level Security (RLS):** mecanismo de Power BI que filtra los datos que un usuario puede ver basándose en su identidad (USERPRINCIPALNAME()). Se define en Power BI Desktop creando roles con expresiones DAX en tablas del modelo. Al publicar en Power BI Service, se asignan usuarios o grupos de Azure AD a cada rol. Los filtros de RLS se propagan por las relaciones del modelo (si filtras Vendedores, automáticamente se filtran Ventas, Productos vendidos, etc.). Los administradores del workspace ven todos los datos salvo que sean añadidos explícitamente a un rol.
+
+- **Tablas de calendario:** tabla de fechas que contiene una fila por cada día del período de análisis y columnas adicionales para análisis temporal (Año, Mes, Trimestre, Semana, día de semana, etc.). Es requerida para que funcionen las funciones de Time Intelligence. Debe ser marcada como "Tabla de fechas" en el modelo y tener una columna de tipo Date sin huecos. Puede crearse con DAX (`CALENDAR()` + `ADDCOLUMNS()`), con Power Query, o importarse desde una fuente externa. Recomendación: siempre crear una tabla de fechas personalizada y desactivar el AutoDate/Time de Power BI.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
@@ -790,16 +828,25 @@ COUNTROWS(
 Implementar lógica de cliente con JavaScript en formularios Model-Driven y crear tu primer Power Apps Component Framework (PCF) control con TypeScript que extiende las capacidades nativas de Dataverse.
 
 ### 📖 Conceptos Clave
-- **Web Resources JavaScript:** scripts cargados en formularios Model-Driven, ejecutados en el cliente
-- **Xrm.Page (legacy) vs formContext:** API moderna para manipular formularios (formContext obligatorio)
-- **Execution Context:** parámetro que se pasa a los event handlers, da acceso a formContext
-- **PCF (Power Apps Component Framework):** framework para crear controles personalizados con TypeScript/React
-- **IInputs / IOutputs:** interfaces TypeScript que definen los campos de entrada y salida del PCF
-- **ComponentFramework.WebApi:** acceso a Dataverse desde el PCF
-- **pac pcf init / pac pcf push:** comandos CLI para inicializar y desplegar PCF
-- **Virtual vs Standard PCF:** Virtual usa React del sistema (recomendado); Standard renderiza su propio DOM
-- **Field vs Dataset PCF:** Field reemplaza un control de columna; Dataset reemplaza una subgrid/gallery
-- **Manifest.xml:** describe el PCF, sus propiedades y tipo de control
+- **Web Resources JavaScript:** archivos JavaScript (.js) subidos a Dataverse como recursos web y registrados en eventos de formularios Model-Driven (OnLoad, OnSave, OnChange de campo). Se ejecutan en el navegador del cliente cuando el usuario interactúa con el formulario. Son el mecanismo principal para agregar comportamiento dinámico en formularios: mostrar/ocultar secciones, validaciones complejas, notificaciones, y llamadas a la Web API de Dataverse. Se nombran con ruta jerárquica: `sit_/js/NombreHandler.js`.
+
+- **Xrm.Page (legacy) vs formContext:** `Xrm.Page` es la API antigua (deprecated desde 2019) para acceder al formulario desde JavaScript. `formContext` es la API moderna y obligatoria que se obtiene desde el parámetro `executionContext.getFormContext()`. Diferencias clave: formContext es el contexto del formulario específico (soporta múltiples formularios abiertos), Xrm.Page era global y causaba problemas en el unificado (UCI). Nunca usar `Xrm.Page` en código nuevo — Microsoft puede eliminarlo sin aviso.
+
+- **Execution Context:** objeto que se pasa automáticamente a los event handlers de formulario cuando se marca "Pasar contexto de ejecución como primer parámetro" al registrar el handler. Provee acceso a `formContext` (el formulario), `getEventSource()` (el control que disparó el evento) y `getEventArgs()` (para eventos cancelables como OnSave). Sin este objeto no se puede acceder al formulario de forma moderna. La ausencia de este parámetro es la causa más común de `formContext is null`.
+
+- **PCF (Power Apps Component Framework):** framework oficial de Microsoft para crear controles personalizados en formularios Model-Driven Apps y Canvas Apps usando TypeScript (y opcionalmente React). Un control PCF reemplaza o extiende la visualización de un campo (Field PCF) o una subgrid (Dataset PCF). Los controles se empaquetan como soluciones y se despliegan en Dataverse. La herramienta `pac` (Power Platform CLI) es el punto de entrada para inicializar, probar localmente (harness), y desplegar los controles.
+
+- **IInputs / IOutputs:** interfaces TypeScript generadas automáticamente por el toolchain de PCF a partir del `ControlManifest.Input.xml`. `IInputs` define las propiedades que el formulario entrega al control (valores de campos, metadata). `IOutputs` define los valores que el control puede escribir de vuelta al formulario (para controles de campo editable). El método `updateView(context: Context<IInputs>)` recibe el contexto con los valores actuales. El método `getOutputs(): IOutputs` retorna los valores que el control quiere escribir.
+
+- **ComponentFramework.WebApi:** API disponible dentro de un PCF para interactuar con Dataverse (leer, crear, actualizar, eliminar registros) sin depender de Xrm. Se accede via `context.webAPI` en el método `updateView` o `init`. Soporta `retrieveRecord`, `retrieveMultipleRecords`, `createRecord`, `updateRecord`, `deleteRecord`. Ejecuta llamadas asíncronas con promesas. El control no necesita gestionar autenticación — la hereda del contexto de la plataforma.
+
+- **pac pcf init / pac pcf push:** comandos del Power Platform CLI para trabajar con PCF. `pac pcf init --namespace X --name Y --template field --framework react` crea la estructura del proyecto. `npm start` levanta el test harness local para probar el control en el navegador sin desplegarlo. `npm run build` compila TypeScript a JavaScript optimizado. `pac pcf push --publisher-prefix sit` empaqueta el control en una solución temporal y la importa directamente al entorno de desarrollo. Para producción, usar `pac solution build` + importar manualmente.
+
+- **Virtual vs Standard PCF:** dos modos de renderizado para controles PCF. `Standard` renderiza su propio árbol DOM de forma independiente (control total sobre el HTML/CSS). `Virtual` (recomendado cuando se usa React) comparte el runtime de React que ya tiene la plataforma, reduciendo el tamaño del bundle. Con `--framework react` y `control-type="virtual"` en el manifest, el control retorna un `React.ReactElement` desde `updateView()` en lugar de manipular el DOM directamente. Elegir Virtual siempre que sea posible para mejor rendimiento.
+
+- **Field vs Dataset PCF:** dos tipos de controles según lo que reemplazan. `Field` (template: field) reemplaza la visualización de una sola columna/campo en el formulario o vista. Recibe el valor del campo como input y puede modificarlo como output. `Dataset` (template: dataset) reemplaza una subgrid o galería, recibiendo colecciones de registros con sus columnas. Dataset PCF es más complejo pero permite crear visualizaciones completamente personalizadas de listas (ej. calendar view, kanban view, timeline).
+
+- **Manifest.xml (`ControlManifest.Input.xml`):** archivo XML que es el "contrato" del control PCF — describe su identidad (namespace, name, versión), las propiedades de entrada/salida (`<property>`), los recursos incluidos (`<resources>`), y si usa servicios externos. La herramienta de build genera las interfaces TypeScript `IInputs`/`IOutputs` automáticamente a partir de este archivo. Cada `<property>` tiene un `of-type` (SingleLine.Text, OptionSet, Whole.Number, etc.) y un `usage` (bound para lectura/escritura, input para solo lectura).
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
@@ -1051,15 +1098,23 @@ SolicitudFormHandler.cargarHistorialCliente = function(executionContext) {
 Crear y certificar conectores personalizados para APIs REST, integrar autenticación OAuth2 y API Key, y hacer que los conectores estén disponibles para Power Apps y Power Automate en toda la organización.
 
 ### 📖 Conceptos Clave
-- **Custom Connector:** wrapper que permite usar cualquier API REST en Power Platform sin código
-- **OpenAPI (Swagger) spec:** estándar para describir APIs REST que los conectores usan como base
-- **Authentication types:** No auth, API Key, Basic, OAuth 2.0, Windows Auth
-- **Triggers vs Actions:** los conectores pueden tener ambos (triggers basados en webhooks o polling)
-- **Policy Templates:** transformaciones de request/response sin código (Set Header, Route Request, etc.)
-- **Connector Certification:** proceso para publicar en el marketplace de Microsoft
-- **Connection Reference:** referencia abstracta a una conexión en soluciones ALM
-- **Throttling:** límites de llamadas por minuto/hora que el conector debe respetar
-- **Dynamic Schema / Dynamic Values:** acciones que cargan opciones dinámicamente de la API
+- **Custom Connector:** componente de Power Platform que actúa como wrapper sobre una API REST externa, exponiendo sus operaciones como acciones y triggers consumibles en Power Automate, Power Apps y Copilot Studio sin escribir código de integración. Se basa en una definición OpenAPI, agrega configuración de autenticación, y transforma la API en una interfaz visual con campos descriptivos. Una vez creado, se puede compartir con toda la organización o certificar para el marketplace de Microsoft. Ejemplo: conector `Facturación Electrónica` que expone las operaciones `EmitirFactura` y `ConsultarEstado`.
+
+- **OpenAPI (Swagger) spec:** estándar JSON/YAML para describir APIs REST de forma legible por máquinas. Especifica endpoints, métodos HTTP, parámetros, bodies de request/response, y esquemas de datos. Power Platform importa specs OpenAPI 2.0 (Swagger) y 3.0 para crear la base del conector. Herramienta recomendada para validar: `editor.swagger.io`. Consideraciones al crear specs para Power Platform: los `operationId` deben ser únicos y descriptivos (son los nombres de las acciones), los schemas deben estar completamente definidos (evitar `additionalProperties: true`).
+
+- **Authentication types:** los conectores soportan cinco tipos de autenticación. `No auth`: API pública sin credenciales. `API Key`: clave estática en header o query parameter (ej. `X-API-Key`). `Basic`: usuario + contraseña en Base64. `OAuth 2.0`: flujo de autorización delegada con Azure AD u otro proveedor de identidad (más seguro, recomendado para APIs corporativas). `Windows Auth`: para APIs en redes internas con autenticación integrada de Windows. La autenticación se configura una vez en el conector y cada usuario crea su propia conexión.
+
+- **Triggers vs Actions:** los conectores pueden exponer ambos tipos de operaciones. Las `Actions` son operaciones imperativas iniciadas por el flujo (GET, POST, PUT, DELETE). Los `Triggers` son operaciones que inician el flujo cuando ocurre algo en la API externa. Existen dos tipos de triggers: `Polling` (el conector llama periódicamente a la API para detectar cambios nuevos) y `Webhook` (la API llama al conector cuando ocurre un evento, más eficiente). Los triggers de webhook requieren que la API externa soporte registro y desregistro de webhooks.
+
+- **Policy Templates:** transformaciones configurables que se aplican al request antes de enviarlo a la API o al response antes de entregarlo al flujo, sin escribir código. Templates disponibles: `Set Header` (agregar headers de autenticación o configuración), `Set Query Parameter` (agregar parámetros fijos), `Route Request` (redirigir a URL diferente según condición), `Convert Array to Object`, `Set Property`. Se configuran por acción en el editor del conector. Ejemplo: agregar automáticamente el header `X-Tenant-ID` con el valor del parámetro de conexión `tenant_id` a cada llamada.
+
+- **Connector Certification:** proceso oficial de Microsoft para publicar un conector personalizado en el marketplace público de Power Platform, haciéndolo disponible para todos los usuarios de Power Platform globalmente. Requiere: spec OpenAPI válida, autenticación robusta, documentación completa, código de contribuidor registrado, y revisión de Microsoft. Existen dos niveles: `Independent Publisher` (cualquier desarrollador puede publicar) y `Certified Connector` (requiere asociación con el ISV o vendor de la API). Proceso completo tarda 4-8 semanas.
+
+- **Connection Reference:** componente de soluciones ALM que actúa como abstracción de una conexión específica. En lugar de hardcodear la conexión directamente en un flujo o app, el componente referencia una Connection Reference nombrada (ej. `CR_SIT_Dataverse_Principal`). Al importar la solución en otro ambiente, el usuario debe configurar qué conexión real apunta esa referencia en el nuevo ambiente. Esto desacopla el componente de las credenciales del ambiente de desarrollo. Crítico para flujos en soluciones — sin Connection References, el flujo falla al importar.
+
+- **Throttling:** límites de llamadas por minuto/hora/día que una API impone para protegerse de sobrecarga. Los conectores de Power Platform tienen throttling definido en sus propias políticas y heredan los límites de la API destino. Al exceder el límite, la API retorna HTTP 429 (Too Many Requests). Estrategias para manejar throttling: agregar `Delay` entre llamadas en loops, activar el retry automático del conector (configurable en Settings), diseñar flujos con batch operations en lugar de N llamadas individuales, y escalonar ejecuciones en tiempo.
+
+- **Dynamic Schema / Dynamic Values:** capacidades avanzadas de conectores que permiten que las opciones o esquemas de una acción se carguen dinámicamente desde la API en tiempo de diseño. `Dynamic Values` (x-ms-dynamic-values): el campo muestra un dropdown con opciones obtenidas de la API (ej. lista de proyectos). `Dynamic Schema` (x-ms-dynamic-schema): el schema de los campos de respuesta se determina llamando a la API (útil cuando la API retorna estructuras variables según parámetros). Se configuran con extensiones OpenAPI específicas de Microsoft.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
@@ -1216,17 +1271,27 @@ Crear y certificar conectores personalizados para APIs REST, integrar autenticac
 Crear un agente conversacional funcional en Copilot Studio que resuelve consultas de usuarios, escala a Power Automate para acciones sobre datos, y se integra en Teams y páginas web como canal de soporte automatizado.
 
 ### 📖 Conceptos Clave
-- **Topic:** unidad de conversación — define cuándo se activa y qué responde el agente
-- **Trigger Phrases:** frases de ejemplo que activan un topic (mínimo 5 variaciones)
-- **Entities:** tipos de datos que el agente extrae de la conversación (Sistema: Fecha, Número, Email; Custom)
-- **Slot Filling:** el agente pregunta automáticamente por variables de una entidad no proporcionadas
-- **Variables:** datos almacenados durante la conversación (Global, Topic, System)
-- **Condición (Condition):** bifurcación del flujo según el valor de una variable
-- **Acción (Action):** llamada a Power Automate, conector, o Knowledge Source desde el topic
-- **Respuestas Generativas (Generative Answers):** responde preguntas desde documentos/URLs sin topics explícitos
-- **Escalamiento a Agente Humano:** transferir la conversación a un agente live (Omnichannel)
-- **Canal:** donde se despliega el agente (Teams, Web, WhatsApp, etc.)
-- **Knowledge Sources:** SharePoint, sitios web, o documentos que el agente consulta para respuestas
+- **Topic:** unidad básica de conversación en Copilot Studio que define cuándo se activa (trigger phrases), qué preguntas hace, qué lógica ejecuta, y qué responde el agente. Es similar a una función en programación: tiene un punto de entrada (triggers), lógica interna (nodos), y puede llamar a otras funciones (redirigir a otros topics). Los topics del sistema (Fallback, Welcome, End of Conversation) son predefinidos y personalizables. Una buena práctica es tener topics pequeños y enfocados en una sola intención del usuario.
+
+- **Trigger Phrases:** frases de ejemplo que el motor de NLU (Natural Language Understanding) del agente usa para aprender a reconocer la intención del usuario y activar el topic correcto. No son coincidencias exactas — el modelo NLU detecta variaciones semánticas. Mínimo 5-8 frases por topic, con variaciones en vocabulario, longitud y estilo (formal/informal, con/sin acentos, con errores tipográficos comunes). Cuantas más y más variadas sean las frases, mejor es la precisión. Ejemplo: para el topic "Consultar Estado": "¿cómo va mi solicitud?", "quiero ver mi ticket", "estado de mi caso", "revisar SOL-00123".
+
+- **Entities:** tipos de datos estructurados que el agente identifica y extrae automáticamente del texto del usuario. Entidades del sistema: Fecha, Hora, Número, Email, URL, Porcentaje, Moneda, Nombre de Persona, Ciudad. Entidades personalizadas: listas cerradas (ej. categorías de IT con sinónimos) o expresiones regulares (ej. patrón `SOL-\d{5}` para números de solicitud). El agente usa las entidades detectadas para poblar variables sin necesidad de preguntar explícitamente al usuario.
+
+- **Slot Filling:** comportamiento automático del agente por el cual, si una variable requerida (asociada a una entidad) no fue proporcionada en el mensaje del usuario, el agente pregunta por ella de forma inteligente. Si el usuario proporciona el valor antes de que se le pregunte (en el mismo mensaje del trigger), el slot filling lo detecta y no hace la pregunta. Ejemplo: si el topic necesita el número de solicitud y el usuario dice "quiero ver el estado de SOL-00123", el agente extrae el número automáticamente; si dice solo "quiero ver el estado de mi solicitud", el agente pregunta por el número.
+
+- **Variables:** mecanismo de almacenamiento de datos durante una conversación. Tres alcances: `Topic.X` (local al topic, se pierde al salir), `Global.X` (persiste durante toda la conversación entre todos los topics), `System.X` (variables del sistema como `System.User.PrincipalName`, `System.Activity.Text`). Las variables de topic se crean automáticamente cuando se configura una pregunta. Las variables globales se crean en la sección de Variables del editor. Ejemplo: `Topic.NumeroSolicitud` guarda el número ingresado por el usuario en el topic de consulta.
+
+- **Condición (Condition):** nodo de bifurcación en el flujo del topic que evalúa una expresión sobre el valor de una variable y redirige a diferentes ramas según el resultado. Soporta operadores: es igual a, no es igual a, contiene, está en blanco, es mayor/menor que. Las condiciones se encadenan con AND/OR. Se usa para personalizar respuestas según el estado obtenido, manejar casos de "no encontrado", o implementar lógica de escalamiento diferenciada.
+
+- **Acción (Action):** nodo en un topic que ejecuta una operación externa: llamar a un flujo de Power Automate (el método más común para acceder a datos), llamar a un conector, ejecutar código (para escenarios avanzados), o usar un Knowledge Source para respuesta generativa. Al llamar un flujo de Power Automate, se mapean las variables del topic como inputs y los outputs del flujo se almacenan en variables del topic. Los flujos para Copilot Studio deben usar el trigger "When called from a Copilot Studio agent".
+
+- **Respuestas Generativas (Generative Answers):** capacidad que permite al agente responder preguntas abiertas consultando automáticamente Knowledge Sources (documentos SharePoint, sitios web, archivos PDF) usando IA generativa, sin necesidad de crear topics específicos para cada pregunta posible. Cuando ningún topic coincide con la consulta del usuario, el Fallback topic puede invocar Generative Answers. La calidad depende de la calidad del contenido de los Knowledge Sources. Incluir instrucciones claras en el System Prompt para evitar alucinaciones ("no inventes información, responde solo con lo que encuentres en los documentos").
+
+- **Escalamiento a Agente Humano:** nodo especial en Copilot Studio que transfiere la conversación y su historial a un agente humano live a través de Dynamics 365 Omnichannel for Customer Service u otras plataformas de contact center compatibles. Se activa cuando el bot no puede resolver la consulta o cuando el usuario lo solicita explícitamente. El agente humano recibe el transcript de la conversación para contexto. Configurar siempre un fallback de escalamiento — nunca dejar al usuario atascado en un loop sin salida.
+
+- **Canal:** plataforma donde se despliega y accede el agente conversacional. Canales nativos disponibles: Microsoft Teams (el más común en entornos corporativos), sitio web personalizado (Web Chat con iframe embeddable), Power Pages, SharePoint. Canales externos via Azure Bot Service: WhatsApp, Facebook Messenger, Telegram, Slack, Twilio. Cada canal tiene sus propias capacidades de formato de mensaje (Teams soporta Adaptive Cards y formato rico; Web básico soporta markdown; WhatsApp solo texto e imágenes).
+
+- **Knowledge Sources:** fuentes de contenido que el agente puede consultar para generar respuestas generativas. Tipos soportados: sitios de SharePoint (OneDrive incluido), URLs de sitios web públicos (el motor indexa las páginas), archivos subidos directamente (PDF, Word, PowerPoint), y Dataverse (en versiones avanzadas). El contenido se indexa y vectoriza para búsqueda semántica. Actualizar los Knowledge Sources cuando el contenido cambia — el agente no detecta cambios automáticamente.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
@@ -1376,18 +1441,29 @@ Crear un agente conversacional funcional en Copilot Studio que resuelve consulta
 Implementar una estrategia de ambientes múltiples (DEV → TEST → UAT → PROD), empaquetar soluciones correctamente con Connection References y Environment Variables, y establecer controles de seguridad de acceso basados en roles a nivel de la plataforma.
 
 ### 📖 Conceptos Clave
-- **Solución administrada (Managed):** solución de solo lectura en destino — los usuarios no pueden modificarla directamente
-- **Solución no administrada (Unmanaged):** solución editable — usada en DEV
-- **Connection Reference:** abstracción de conexión en soluciones ALM (evita hardcodear conexiones)
-- **Environment Variables:** pares clave-valor que varían entre ambientes (URL, email, configuraciones)
-- **Solution Layers:** superposición de soluciones — la que se importó después puede sobreescribir
-- **Managed Properties:** control de qué puede modificar el cliente en componentes de tu solución
-- **Dependency tracking:** Dataverse rastrea qué componentes dependen de otros
-- **Seguridad de ambiente:** Admin Center → políticas DLP, acceso de ambiente, restricciones
-- **DLP Policy (Data Loss Prevention):** clasifica conectores en Business/Non-Business/Blocked
-- **Security Roles:** conjuntos de permisos CRUD sobre tablas/entidades de Dataverse
-- **Teams (Dataverse):** grupos de usuarios que comparten Security Roles
-- **Principio de mínimo privilegio:** dar solo los permisos estrictamente necesarios
+- **Solución administrada (Managed):** paquete de solución importado en modo de solo lectura en el ambiente destino — los usuarios no pueden modificar directamente sus componentes (tablas, flujos, apps). Cualquier cambio debe realizarse en el ambiente fuente (DEV), re-exportar como Managed, y volver a importar. Esto protege la integridad del trabajo del implementador y facilita las actualizaciones controladas. Para personalizar componentes de una solución managed de un tercero, se usan "unmanaged layers" encima. Siempre exportar como Managed para TEST/UAT/PROD.
+
+- **Solución no administrada (Unmanaged):** solución editable donde los componentes pueden modificarse directamente en el ambiente donde está importada. Es el formato de trabajo en el ambiente de desarrollo (DEV). Al exportar en modo Unmanaged, se puede compartir el trabajo entre desarrolladores. Peligro: si se importa Unmanaged en PROD, los usuarios pueden modificar componentes, creando divergencia entre ambientes. Nunca importar soluciones Unmanaged en ambientes de producción.
+
+- **Connection Reference:** componente de solución que actúa como abstracción de una conexión específica en Power Platform. En lugar de vincular un flujo directamente a una conexión (que depende del usuario y ambiente), el flujo referencia una Connection Reference nombrada. Al importar la solución en otro ambiente, el administrador configura qué conexión real mapea cada Connection Reference. Esto desacopla el componente de las credenciales del desarrollador y habilita un verdadero ALM. Ejemplo: `CR_SIT_Dataverse_Principal` apunta a la conexión de Dataverse del ambiente destino.
+
+- **Environment Variables:** pares nombre-valor definidos en la solución que permiten que la misma solución funcione en múltiples ambientes con configuraciones diferentes. Cada variable tiene un valor "por defecto" (definido en la solución) y un valor "actual" (configurado por ambiente, fuera de la solución). Tipos: Texto, Número decimal, Boolean, JSON, Secreto (almacenado en Azure Key Vault). Se acceden en flujos y código. Ejemplo: `sit_EmailNotificaciones` tiene valor `dev-notif@empresa.com` en DEV y `prod-notif@empresa.com` en PROD, sin cambiar el flujo.
+
+- **Solution Layers:** sistema de superposición de soluciones en Dataverse que permite que múltiples soluciones modifiquen el mismo componente (tabla, formulario, flujo) en diferentes capas. La solución importada más recientemente prevalece sobre las anteriores. Visible en: Soluciones → seleccionar componente → "Ver capas de solución". Importantísimo al personalizar soluciones de terceros (como Dynamics 365): las personalizaciones van en una solución propia encima, no modificando la solución base.
+
+- **Managed Properties:** configuraciones en los componentes de una solución managed que controlan qué puede modificar el importador. Se configuran antes de exportar. Opciones por componente: ¿puede personalizarse? (sí/no), ¿puede eliminarse?, ¿puede renombrarse?. Útil para ISVs que quieren proteger su IP intelectual: marcar formularios como no personalizables impide que el cliente los modifique directamente. Para soluciones internas, generalmente se deja todo personalizable para dar flexibilidad al implementador de campo.
+
+- **Dependency tracking:** Dataverse registra automáticamente las dependencias entre componentes de una solución (qué flujos usan qué tablas, qué apps usan qué componentes, etc.). Si intentas eliminar un componente del que depende otro, Dataverse bloquea la operación y muestra las dependencias. Al construir soluciones, la herramienta "Solution Checker" detecta dependencias faltantes que causarían fallos al importar. Importante verificar dependencias antes de exportar: Solución → botón "Comprobación de solución".
+
+- **Seguridad de ambiente (Power Platform Admin Center):** conjunto de controles administrativos para cada ambiente en el Admin Center. Incluye: quién puede crear aplicaciones y flujos (Configuración → Funciones de entorno), qué conectores están permitidos (DLP Policies), gestión de capacidad y almacenamiento, habilitación de características de Managed Environments, y auditoría de actividad. El administrador del ambiente puede ver todos los flujos y apps (incluso los no compartidos), lo que facilita la gobernanza.
+
+- **DLP Policy (Data Loss Prevention):** política configurada en el Power Platform Admin Center que clasifica los conectores disponibles en tres grupos: `Business` (datos corporativos, pueden combinarse entre sí), `Non-Business` (datos personales/externos, pueden combinarse entre sí pero no con Business), y `Blocked` (no pueden usarse en ningún flujo en los ambientes cubiertos). La política previene que datos corporativos (Dataverse, SharePoint) se combinen con conectores externos no controlados (Twitter, Gmail). Se aplica por ambiente o a nivel de tenant. Ejemplo: política que pone HTTP genérico en Blocked en PROD para prevenir exfiltración de datos.
+
+- **Security Roles:** conjuntos de permisos granulares sobre tablas de Dataverse que controlan qué operaciones puede realizar un usuario (Crear, Leer, Escribir, Eliminar, Agregar, Adjuntar, Asignar, Compartir) y en qué scope (Usuario, Unidad de Negocio, Organización, Padre:Hijo). Los roles se asignan a usuarios o equipos (Teams). Un usuario puede tener múltiples roles y los permisos son aditivos (el más permisivo gana). Los roles también controlan acceso a características de la plataforma (ver Analytics, exportar a Excel, personalizar el sistema).
+
+- **Teams (Dataverse):** grupos de usuarios en Dataverse que permiten asignar Security Roles a un conjunto de personas en lugar de individualmente. Tipos: Owner Teams (tienen propietario, pueden poseer registros), Access Teams (no poseen registros, acceso puntual compartido), Azure AD Group Teams (sincronizados con grupos de Microsoft Entra ID, el más recomendado para entornos grandes). Usar AD Group Teams permite gestionar miembros desde Microsoft Entra sin tocar Power Platform.
+
+- **Principio de mínimo privilegio:** práctica de diseño de seguridad que establece que cada usuario, rol o proceso debe tener solo los permisos estrictamente necesarios para realizar su función, nada más. En Dataverse implica: no asignar el rol "System Administrator" a usuarios finales, crear roles específicos por función (Jefe de Proyecto, Consultor, Auditor), usar Field Security Profiles para columnas sensibles, y revisar periódicamente los permisos asignados. Una violación de datos causada por exceso de permisos es un riesgo regulatorio y reputacional.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
