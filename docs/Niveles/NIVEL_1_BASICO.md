@@ -584,8 +584,8 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 - **Site Map**: Navegación y estructura de áreas
 - **Security Roles**: Permisos granulares por tabla/operación
 - **Forms**: Main, Quick Create, Quick View
-- **Command Bar**: Botones personalizados (Ribbon Workbench)
-- **Client Scripts**: JavaScript para validaciones avanzadas
+- **Quick View Forms**: mostrar datos de registros relacionados directamente en el formulario principal sin cambiar de pantalla
+- **Subgrids**: mostrar y gestionar registros relacionados (1:N o N:N) embebidos dentro de un formulario Model-Driven
 - **UCI (Unified Client Interface)**: Experiencia moderna
 
 #### 👨‍💻 Actividades Prácticas

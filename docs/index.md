@@ -1,3 +1,14 @@
+<div class="hero-banner">
+  <div class="hero-title">⚡ Power Platform &amp; Dynamics 365</div>
+  <div class="hero-subtitle">De Básico a Arquitecto Master — Ruta progresiva con 40+ módulos prácticos y casos reales de negocio</div>
+  <div class="hero-meta">
+    <span>🟢 Nivel 1 — Básico</span>
+    <span>🔵 Nivel 2 — Intermedio</span>
+    <span>🟠 Nivel 3 — Avanzado</span>
+    <span>🔴 Nivel 4 — Arquitecto</span>
+  </div>
+</div>
+
 # 🎯 PLAN MAESTRO: De Básico a Arquitecto en Microsoft Power Platform y Dynamics 365
 
 > **Plan de Aprendizaje Completo y Progresivo**  
@@ -6,6 +17,33 @@
 > **Perfil objetivo:** Ingeniero de Sistemas → Arquitecto de Soluciones Empresariales
 
 ---
+
+<div class="stat-grid">
+  <div class="stat-card stat-teal">
+    <span class="stat-number">41</span>
+    <span class="stat-label">Módulos prácticos</span>
+  </div>
+  <div class="stat-card stat-blue">
+    <span class="stat-number">4</span>
+    <span class="stat-label">Niveles de aprendizaje</span>
+  </div>
+  <div class="stat-card stat-green">
+    <span class="stat-number">4</span>
+    <span class="stat-label">Certificaciones Microsoft</span>
+  </div>
+  <div class="stat-card stat-orange">
+    <span class="stat-number">32</span>
+    <span class="stat-label">Meses máx de formación</span>
+  </div>
+  <div class="stat-card stat-red">
+    <span class="stat-number">2.632</span>
+    <span class="stat-label">Horas de práctica</span>
+  </div>
+  <div class="stat-card stat-purple">
+    <span class="stat-number">20+</span>
+    <span class="stat-label">Casos reales de negocio</span>
+  </div>
+</div>
 
 ## 📌 Resumen Ejecutivo
 
@@ -29,10 +67,51 @@ Este plan te llevará desde fundamentos hasta arquitectura empresarial en **Micr
 
 ## 📚 Estructura del Plan
 
-### 🟢 [NIVEL 1: BÁSICO](Niveles/NIVEL_1_BASICO.md) (4-6 meses)
-**Objetivo:** Dominar fundamentos y crear tus primeras soluciones funcionales
+<div class="progress-path">
+  <div class="path-step path-step-1">
+    <div class="step-node">1</div>
+    <div class="step-cert">PL-900</div>
+    <div class="step-title">Básico</div>
+    <div class="step-duration">4-6 meses</div>
+  </div>
+  <div class="path-connector"></div>
+  <div class="path-step path-step-2">
+    <div class="step-node">2</div>
+    <div class="step-cert">PL-200</div>
+    <div class="step-title">Intermedio</div>
+    <div class="step-duration">4-6 meses</div>
+  </div>
+  <div class="path-connector"></div>
+  <div class="path-step path-step-3">
+    <div class="step-node">3</div>
+    <div class="step-cert">PL-400</div>
+    <div class="step-title">Avanzado</div>
+    <div class="step-duration">6-8 meses</div>
+  </div>
+  <div class="path-connector"></div>
+  <div class="path-step path-step-4">
+    <div class="step-node">4</div>
+    <div class="step-cert">PL-600</div>
+    <div class="step-title">Arquitecto</div>
+    <div class="step-duration">6-12 meses</div>
+  </div>
+</div>
 
-**Módulos:**
+<div class="level-card nivel-1" markdown>
+
+<div class="lc-topbar">
+  <div class="lc-icon nivel-1-bg">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" fill="currentColor"/></svg>
+  </div>
+  <div class="lc-badges">
+    <span class="lc-cert">PL-900</span>
+    <span class="lc-mcount">8 módulos · 4-6 meses · 10-15 hrs/sem</span>
+  </div>
+</div>
+
+### 🟢 [NIVEL 1: BÁSICO](Niveles/NIVEL_1_BASICO.md)
+
+Dominar fundamentos y crear tus primeras soluciones funcionales en Power Platform.
 
 <div class="module-list nivel-1" markdown>
 
@@ -47,14 +126,27 @@ Este plan te llevará desde fundamentos hasta arquitectura empresarial en **Micr
 
 </div>
 
-**Duración estimada:** 4-6 meses (10-15 hrs/semana)
+[→ Comenzar Nivel 1](Niveles/NIVEL_1_BASICO.md){ .md-button .md-button--primary }
+
+</div>
 
 ---
 
-### 🔵 [NIVEL 2: INTERMEDIO](Niveles/NIVEL_2_INTERMEDIO.md) (4-6 meses)
-**Objetivo:** Desarrollar soluciones complejas y dominar integraciones
+<div class="level-card nivel-2" markdown>
 
-**Módulos:**
+<div class="lc-topbar">
+  <div class="lc-icon nivel-2-bg">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" fill="currentColor"/></svg>
+  </div>
+  <div class="lc-badges">
+    <span class="lc-cert">PL-200</span>
+    <span class="lc-mcount">9 módulos · 4-6 meses · 12-18 hrs/sem</span>
+  </div>
+</div>
+
+### 🔵 [NIVEL 2: INTERMEDIO](Niveles/NIVEL_2_INTERMEDIO.md)
+
+Desarrollar soluciones complejas, integraciones con APIs y primeros lenguajes de programación.
 
 <div class="module-list nivel-2" markdown>
 
@@ -70,14 +162,27 @@ Este plan te llevará desde fundamentos hasta arquitectura empresarial en **Micr
 
 </div>
 
-**Duración estimada:** 4-6 meses (12-18 hrs/semana)
+[→ Comenzar Nivel 2](Niveles/NIVEL_2_INTERMEDIO.md){ .md-button .md-button--primary }
+
+</div>
 
 ---
 
-### 🟠 [NIVEL 3: AVANZADO](Niveles/NIVEL_3_AVANZADO.md) (6-8 meses)
-**Objetivo:** Dominar arquitectura de soluciones, ALM y gobernanza
+<div class="level-card nivel-3" markdown>
 
-**Módulos:**
+<div class="lc-topbar">
+  <div class="lc-icon nivel-3-bg">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" fill="currentColor"/></svg>
+  </div>
+  <div class="lc-badges">
+    <span class="lc-cert">PL-400</span>
+    <span class="lc-mcount">13 módulos · 6-8 meses · 15-20 hrs/sem</span>
+  </div>
+</div>
+
+### 🟠 [NIVEL 3: AVANZADO](Niveles/NIVEL_3_AVANZADO.md)
+
+Dominar arquitectura de soluciones, ALM, Dynamics 365, C#, TypeScript y gobernanza empresarial.
 
 <div class="module-list nivel-3" markdown>
 
@@ -97,14 +202,27 @@ Este plan te llevará desde fundamentos hasta arquitectura empresarial en **Micr
 
 </div>
 
-**Duración estimada:** 6-8 meses (15-20 hrs/semana)
+[→ Comenzar Nivel 3](Niveles/NIVEL_3_AVANZADO.md){ .md-button .md-button--primary }
+
+</div>
 
 ---
 
-### 🔴 [NIVEL 4: ARQUITECTO MASTER](Niveles/NIVEL_4_ARQUITECTO.md) (6-12 meses)
-**Objetivo:** Liderar transformaciones digitales y diseñar arquitecturas empresariales
+<div class="level-card nivel-4" markdown>
 
-**Módulos:**
+<div class="lc-topbar">
+  <div class="lc-icon nivel-4-bg">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="currentColor"/></svg>
+  </div>
+  <div class="lc-badges">
+    <span class="lc-cert">PL-600</span>
+    <span class="lc-mcount">11 módulos · 6-12 meses · 15-25 hrs/sem</span>
+  </div>
+</div>
+
+### 🔴 [NIVEL 4: ARQUITECTO MASTER](Niveles/NIVEL_4_ARQUITECTO.md)
+
+Liderar transformaciones digitales, diseñar arquitecturas empresariales y establecer Centros de Excelencia.
 
 <div class="module-list nivel-4" markdown>
 
@@ -122,7 +240,9 @@ Este plan te llevará desde fundamentos hasta arquitectura empresarial en **Micr
 
 </div>
 
-**Duración estimada:** 6-12 meses (15-25 hrs/semana)
+[→ Comenzar Nivel 4](Niveles/NIVEL_4_ARQUITECTO.md){ .md-button .md-button--primary }
+
+</div>
 
 ---
 

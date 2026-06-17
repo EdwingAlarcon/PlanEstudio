@@ -32,7 +32,7 @@ En este nivel dejas de ser desarrollador técnico para convertirte en **Solution
 Diseñar y comunicar la arquitectura enterprise de Power Platform para organizaciones de 1,000+ usuarios: estrategia de gobernanza, políticas de adopción, marcos de decisión arquitectónica, y alineación con estándares como TOGAF y el Well-Architected Framework de Microsoft.
 
 ### 📖 Conceptos Clave
-- **TOGAF (The Open Group Architecture Framework):** marco para arquitectura enterprise — fases ADM (Architecture Development Method)
+- **TOGAF (referencia contextual)**: framework de arquitectura empresarial — en Power Platform se aplica principalmente la fase *Architecture Vision* del ADM; para el día a día usar el **Microsoft Well-Architected Framework** que tiene aplicación directa al examen PL-600
 - **Well-Architected Framework (Power Platform):** 5 pilares: Fiabilidad, Seguridad, Excelencia operacional, Eficiencia de rendimiento, Optimización de costos
 - **Governance Framework:** conjunto de políticas, procesos y controles para uso responsable de la plataforma
 - **Fusion Teams:** equipos mixtos de desarrolladores ciudadanos + desarrolladores pro + IT + negocio
@@ -482,7 +482,7 @@ Diseñar e implementar arquitecturas de integración enterprise usando el stack 
 - **Azure API Management (APIM):** gateway de APIs con portal de desarrolladores, versioning, analytics
 - **Azure Service Bus:** mensajería empresarial — colas, topics, subscriptions, sessions
 - **Azure Event Grid:** enrutamiento de eventos cloud-native a múltiples suscriptores
-- **Azure Data Factory (ADF):** ETL/ELT y movimiento de datos a escala
+- **Azure Data Factory (ADF)**: servicio ETL/ELT de Azure para orquestación de pipelines de datos a gran escala *(para proyectos nuevos, evaluar Microsoft Fabric Pipelines — ver Módulo 35 — como alternativa moderna; ADF sigue siendo relevante en entornos enterprise con inversión existente)*
 - **Azure Functions Durable:** orquestación de flujos complejos (Fan-out/Fan-in, Human interaction)
 - **Integration Account:** repositorio de schemas XML, mapas XSLT, socios EDI para Logic Apps
 - **APIM Developer Portal:** portal self-service para que desarrolladores descubran y usen las APIs
@@ -696,7 +696,7 @@ Diseñar arquitecturas de datos modernas usando Microsoft Fabric y Azure Synapse
 - **Medallion Architecture:** Bronze (raw), Silver (curated), Gold (business-ready)
 - **Dataverse Link to Fabric:** exportar tablas de Dataverse a Fabric automáticamente (sin pipelines)
 - **DirectLake:** modo de Power BI que lee directamente del Lakehouse sin importar ni DirectQuery
-- **Azure Synapse Analytics:** alternativa enterprise a Fabric — SQL Pools, Spark Pools, Pipelines
+- **Azure Synapse Analytics → Microsoft Fabric**: Synapse es la plataforma legacy de análisis enterprise; Fabric es su evolución unificada (GA 2023). Para proyectos nuevos usar Fabric; para entornos con Synapse existente, usar conectores de compatibilidad y Fabric Pipelines como reemplazo de Synapse Pipelines
 - **Delta Lake format:** formato de tabla con soporte ACID sobre Parquet en el Lakehouse
 - **Semantic Model (Power BI):** capa semántica con medidas DAX sobre el Gold layer
 - **Data Activator:** alertas automáticas sobre datos en tiempo real (nuevo en Fabric)
@@ -986,7 +986,7 @@ Integrar capacidades de Inteligencia Artificial en soluciones Power Platform usa
 - **Text Classification:** clasifica texto en categorías (positivo/negativo, urgente/normal)
 - **Prediction Model:** predice resultados basado en datos históricos de Dataverse
 - **Azure OpenAI Service:** modelos GPT-4 en infraestructura Azure (con contratos de privacidad enterprise)
-- **Semantic Kernel:** SDK de Microsoft para orquestar LLMs con plugins y memoria
+- **Semantic Kernel** *(referencia avanzada — sin actividad práctica en este módulo)*: SDK de Microsoft para orquestar LLMs con plugins, memoria y planners en C# o Python — requiere conocimiento del Módulo 23; framework recomendado para agentes de IA enterprise en 2025+
 - **Prompt Engineering:** diseñar prompts efectivos para modelos de lenguaje
 - **Grounding:** anclar respuestas del LLM a documentos corporativos específicos
 - **Azure AI Document Intelligence:** versión enterprise de Form Recognizer con modelos pre-trained
@@ -1278,8 +1278,9 @@ Analizar y diseñar soluciones para los patrones más comunes de transformación
 - **Transformación digital:** no es solo tecnología — es rediseñar procesos, cultura y modelo de negocio habilitados por tecnología
 - **Legacy Modernization:** migrar aplicaciones antiguas (Access, Excel, sistemas custom) a Power Platform
 - **Process Mining:** analizar logs de sistemas para descubrir cómo realmente se ejecutan los procesos (vs cómo se supone que deben ejecutarse)
+- **Process Mining con Process Advisor**: técnica que usa logs de eventos reales para descubrir, monitorear y mejorar procesos — implementado nativamente con **Process Advisor** en Power Automate o conectando con Minit/Celonis vía conectores
 - **Hyperautomation:** combinar RPA (Robotic Process Automation), AI y Power Automate para automatizar todo lo automatizable
-- **Digital Twin:** réplica digital de un proceso físico para simulación y optimización
+- **Process Advisor (Power Automate)**: herramienta de process mining integrada en Power Platform — graba y analiza cómo se ejecutan realmente los procesos, genera mapas de proceso automáticamente y recomienda oportunidades de automatización
 - **Change Management:** el 70% de las transformaciones fallidas se deben a resistencia al cambio, no a tecnología
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
@@ -1375,6 +1376,22 @@ Resultado esperado:
     → Fabric Lakehouse: datos de Dataverse + interacciones del portal
     → Power BI: KPIs de autoservicio (% resueltos por bot vs humano)
 ```
+
+##### Práctica 39.X: Process Advisor — Mapear el proceso real de solicitudes
+
+**Objetivo:** Usar Process Advisor para descubrir cómo se ejecuta realmente el proceso de solicitudes del proyecto capstone y compararlo con el diseño original.
+
+**Pasos:**
+1. En Power Automate, abre **Process Advisor** (menú lateral izquierdo)
+2. Crea un nuevo proceso: "Análisis de Solicitudes — [tu nombre]"
+3. Configura la grabación del proceso: selecciona el flujo de aprobación del proyecto capstone como fuente de eventos
+4. Ejecuta al menos 5 instancias con variaciones (aprobación directa, rechazo, reasignación)
+5. En Process Advisor, visualiza el **Process Map** generado automáticamente
+6. Identifica las variantes: happy path vs variantes con rework
+7. Revisa las métricas: duración promedio, frecuencia por variante, cuellos de botella
+8. Exporta el análisis como PDF y documenta 3 oportunidades de automatización identificadas
+
+**Criterio de validación:** El Process Map muestra al menos 2 variantes del proceso y el reporte identifica al menos un cuello de botella con tiempo promedio cuantificado.
 
 ### 💼 Caso Real de Negocio
 **Empresa:** Aseguradora con proceso de renovación de pólizas 100% manual  

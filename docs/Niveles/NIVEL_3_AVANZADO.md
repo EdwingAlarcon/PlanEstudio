@@ -967,6 +967,9 @@ Implementar agentes conversacionales de producción con SSO integrado a Azure AD
 
 ## MÓDULO 23: C# Plugins para Dataverse
 
+!!! tip "Prerequisito de Lenguaje"
+    Este módulo requiere conocimientos básicos de **C# y .NET**: clases, interfaces, herencia, NuGet y async/await. Si es tu primer contacto con C#, dedica al menos 2 semanas al [Anexo de Lenguajes de Programación](../Anexos/LENGUAJES_PROGRAMACION.md) — sección C# — antes de continuar.
+
 ### 🎯 Objetivo
 Desarrollar plugins C# robustos para ejecutar lógica de negocio compleja en el servidor de Dataverse: validaciones, cálculos, integraciones síncronas con APIs externas, y patrones de plugin avanzados como Early-Bound entities y Shared Variables.
 
@@ -1483,7 +1486,7 @@ Aplicar patrones de diseño reconocidos en implementaciones de Power Platform: R
 - **Command Pattern:** encapsular operaciones de negocio como objetos — facilita logging y validación
 - **Observer Pattern:** plugins que reaccionan a eventos de Dataverse (ya implícito, pero requiere diseño cuidadoso)
 - **Saga Pattern:** transacción distribuida coordinada por compensaciones — para operaciones multi-sistema
-- **CQRS:** separar CommandService (escrituras) de QueryService (lecturas) para optimizar cada uno
+- **CQRS (Command Query Responsibility Segregation)**: separar modelo de lectura del modelo de escritura *(patrón de referencia arquitectónico — en Power Platform: Plugins para escrituras, FetchXML optimizado para lecturas)*
 - **Outbox Pattern:** garantía de entrega at-least-once en integraciones
 - **Circuit Breaker:** dejar de llamar a un servicio externo si falla repetidamente, con auto-recovery
 - **Retry Pattern:** reintentar con backoff exponencial y jitter
@@ -1793,6 +1796,9 @@ in
 ---
 
 ## MÓDULO 27: PCF Avanzado con TypeScript y React
+
+!!! tip "Prerequisito de Lenguaje"
+    Este módulo requiere conocimientos sólidos de **TypeScript**: tipos, interfaces, genéricos, clases, módulos ES6, async/await y JSX/TSX básico. Consulta el [Anexo de Lenguajes de Programación](../Anexos/LENGUAJES_PROGRAMACION.md) — sección TypeScript — antes de continuar.
 
 ### 🎯 Objetivo
 Desarrollar controles PCF avanzados: Dataset controls que reemplazan subgrids, controles con Web API para operaciones CRUD, uso de Fluent UI para consistencia visual, y publicación de PCF en soluciones managed.
@@ -2225,6 +2231,10 @@ Implementar portales externos con autenticación multitenant usando Azure AD B2C
 - **Power Pages Web Templates:** layouts reutilizables con Liquid
 - **Sitemap:** estructura de navegación del portal (Páginas, Web Links, Shortcuts)
 - **Web File:** archivos estáticos (JS, CSS, imágenes) del portal
+- **User Flows vs Custom Policies (IEF)**: User Flows = flujos configurables por GUI para escenarios estándar (registro, login, reset); Custom Policies = XML del Identity Experience Framework para escenarios complejos (federation, claims transformation, MFA condicional)
+- **Claims Mapping B2C → Contact**: mapeo de claims del token JWT de B2C (email, displayName, objectId) al registro Contact de Dataverse mediante el atributo `externalidentity`
+- **Portal Web API con CSRF**: API JavaScript del portal para operaciones CRUD sobre Dataverse desde el cliente — requiere token `__RequestVerificationToken` en cada petición de escritura
+- **SEO en Power Pages con Liquid**: configuración de meta-tags (title, description, og:image), sitemap.xml automático y URLs amigables mediante Page Settings y Liquid templates
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
