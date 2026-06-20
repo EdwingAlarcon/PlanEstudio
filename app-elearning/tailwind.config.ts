@@ -10,13 +10,51 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Paleta base de la app: blue/indigo matching extra.css tokens
-        nivel: {
-          basico: "#22c55e",    // green-500
-          intermedio: "#3b82f6", // blue-500
-          avanzado: "#f97316",   // orange-500
-          arquitecto: "#ef4444", // red-500
+        // shadcn/ui CSS-variable tokens — required for stroke-*, bg-*, text-* utilities
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        nivel: {
+          basico: "#22c55e",
+          intermedio: "#3b82f6",
+          avanzado: "#f97316",
+          arquitecto: "#ef4444",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
@@ -24,7 +62,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/typography"),
+  ],
 };
 
 export default config;
