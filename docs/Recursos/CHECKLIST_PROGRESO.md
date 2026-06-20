@@ -1,4 +1,4 @@
-# ✅ Checklist de Progreso
+﻿# ✅ Checklist de Progreso
 ## Sistema de Seguimiento de Tu Avance en Power Platform
 
 **Cómo usar:**
@@ -407,197 +407,232 @@
 
 ## 🟠 NIVEL 3: AVANZADO
 
-### Módulo 18: Plugins en C# para Dataverse
+### Módulo 18: Arquitectura de Soluciones Power Platform
+
+- [ ] **Conocimiento**: Explico los 5 pilares del Power Platform Well-Architected Framework | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Describo el árbol de decisiones: Canvas vs Model-Driven vs Power Pages vs Power BI | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Documento una Reference Architecture con diagrama Mermaid para un caso de negocio real | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico el patrón de soluciones múltiples (Core + Módulos funcionales + Integraciones) | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo un Architecture Decision Record (ADR) para una decisión técnica clave del proyecto | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Diferencio Dataverse vs Azure SQL vs SharePoint para diferentes volúmenes y patrones | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño la estrategia de soluciones para un proyecto con 3+ módulos funcionales independientes | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico trade-offs entre configuración vs código en decisiones de arquitectura real | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Realizo un Well-Architected Review de una solución existente e identifico al menos 5 mejoras | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico el patrón God Table y por qué es un anti-patrón en Dataverse | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 18:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 19: ALM y CI/CD con Azure DevOps
+
+- [ ] **Conocimiento**: Explico el flujo ALM completo: DEV → Sandbox → TEST → UAT → PROD | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Uso `pac solution export` y `pac solution import` desde CLI en el pipeline | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo un pipeline de CI en Azure DevOps que exporta, desempaqueta y versiona la solución en Git | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo un pipeline de CD que importa la solución Managed en el ambiente TEST | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro `pac solution check` como gate: el pipeline falla si hay errores críticos | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Connection References y Environment Variables por ambiente en el pipeline | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento un gate de aprobación manual antes del despliegue a PROD | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico la diferencia entre Azure DevOps, GitHub Actions y Power Platform Pipelines | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento una estrategia de rollback: reimportar la versión Managed anterior | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Uso `pac solution unpack` y `pac solution pack` para versionado en control de fuentes | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico el patrón de branching: main/release/develop para soluciones Power Platform | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 19:** ___/11 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 20: Dynamics 365 CE — Sales y Customer Service
+
+- [ ] **Conocimiento**: Explico los módulos de Dynamics 365 CE: Sales, Customer Service, Field Service | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro el módulo de Ventas (Sales): tablas Lead, Oportunidad, Cotización, Pedido | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo un Business Process Flow de 5 etapas para el ciclo de ventas | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Views, Dashboards y Gráficos en la Model-Driven App de Ventas | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro el módulo de Customer Service: tablas Caso, Cola, Knowledge Base | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro SLA (Service Level Agreements) con KPIs de tiempo de respuesta | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Routing Rules para asignar casos automáticamente a colas | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico la diferencia entre personalizar D365 CE vs construir desde cero en Dataverse | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo una solución que extiende D365 CE con tablas y lógica personalizada | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico las consideraciones de licenciamiento entre D365 y Power Platform | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 20:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 21: Power Pages — Portales Externos
+
+- [ ] **Conocimiento**: Explico la arquitectura de Power Pages: Content snippets, Web Templates, Liquid | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo un portal con autenticación de usuarios externos via Azure AD B2C | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Web Roles y Table Permissions con Access Type Account y Self | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo páginas dinámicas con Entity Lists y Entity Forms conectadas a Dataverse | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Uso Liquid templates para personalizar la presentación de datos del portal | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro el portal web API para operaciones CRUD desde JavaScript del cliente | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento un flujo de registro de usuarios externo con aprobación | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico las consideraciones de SEO, performance y seguridad en portales públicos | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Custom Domain y SSL en un portal de Power Pages | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Integro Power Automate desde el portal para enviar solicitudes y recibir confirmaciones | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 21:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 22: Copilot Studio Avanzado
+
+- [ ] **Conocimiento**: Explico la arquitectura de Copilot Studio: Topics, Actions, Entities, Variables | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Knowledge Sources (SharePoint, sitios web, archivos) para Generative Answers | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo una Action que llama a un Power Automate Cloud Flow para datos en Dataverse | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro el escalamiento a agente humano con transferencia del contexto completo | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo entidades personalizadas para reconocer valores de dominio específico del negocio | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Publico el agente en Microsoft Teams y valido que los permisos sean correctos | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Analytics para identificar topics con baja resolución y mejorarlos | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico las diferencias entre Generative Answers, Actions y Topics estáticos | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño un agente de RRHH con acceso a políticas y Dataverse | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico las consideraciones de gobernanza de IA para agentes empresariales | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 22:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 23: C# Plugins para Dataverse
 
 - [ ] **Conocimiento**: Explico la arquitectura de plugins: pipeline de ejecución, stages, modes | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro el entorno de desarrollo para plugins: Visual Studio, NuGet, Plugin Registration Tool | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo un plugin básico implementando la interfaz IPlugin y el método Execute() | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Registro un plugin en el Pipeline Registration Tool (Pre-Validation, Pre-Operation, Post-Operation) | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Accedo y modifico Entity attributes dentro del plugin context | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso IOrganizationService para hacer operaciones CRUD desde el plugin | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Implemento validación en Pre-Validation que arroja InvalidPluginExecutionException | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso ITracingService para loggear información de depuración en el plugin | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Implemento un plugin que se dispara en Post-Operation y crea registros relacionados | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Depuro un plugin usando el Plugin Profiler | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico la diferencia entre early-bound y late-bound y cuándo usar cada approach | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Genero clases early-bound usando CrmSvcUtil y las uso en un plugin | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro el entorno de desarrollo: Visual Studio, NuGet (Microsoft.CrmSdk), Plugin Registration Tool | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo un plugin implementando IPlugin.Execute() con acceso a IOrganizationService | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Registro un plugin en PreOperation para modificar atributos antes de persistir | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento lanzamiento de InvalidPluginExecutionException para cancelar la operación | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Uso ITracingService para logging diagnóstico en el Plugin Profiler | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento un plugin PostOperation asíncrono para lógica secundaria no bloqueante | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico anti-patrones: bucles de update, llamadas HTTP síncronas externas, código no idempotente | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Incluyo el assembly en una solución y lo despliego a un ambiente de prueba | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Genero clases early-bound con CrmSvcUtil y las uso en el plugin | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Depuro el plugin en sandbox aislado con el Plugin Profiler | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 18:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
-
----
-
-### Módulo 19: Custom APIs y Azure Functions
-
-- [ ] **Conocimiento**: Explico la diferencia entre Custom APIs y Actions clásicas en Dataverse | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo una Custom API con request parameters y response properties en Dataverse | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Registro un plugin que implementa la lógica de la Custom API | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Llamo la Custom API desde Power Automate usando el conector de Dataverse | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Llamo la Custom API desde una Canvas App usando Power Automate | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo una Azure Function con HTTP trigger en C# | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: La Azure Function lee datos de Dataverse usando Client Credentials (Service Principal) | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Integro la Azure Function con Power Automate via HTTP connector | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Manejo errores en Azure Function y devuelvo códigos HTTP apropiados | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Despliega la Azure Function y la configuro con Application Insights | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico cuándo usar Plugin vs Custom API vs Azure Function | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro un Service Principal (App Registration) en Azure AD para acceso a Dataverse | Dominio: ___/5 | Fecha: ___
-
-**Subtotal Módulo 19:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 23:** ___/11 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 20: ALM y DevOps para Power Platform
+### Módulo 24: Integraciones con Azure Services
 
-- [ ] **Conocimiento**: Explico el flujo ALM completo: Development → Test → Production | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso pac CLI para exportar una solution desde la línea de comandos | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso pac CLI para importar una solution a un environment diferente | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo un pipeline en Azure DevOps para exportar, unpack y commitar una solution | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo un pipeline de release que importa la solution en Test/Production | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso los Power Platform Build Tools en Azure DevOps | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro GitHub Actions para CI/CD de una solution de Power Platform | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico el patrón de repository para soluciones: unpack en control de versiones | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso `pac solution unpack` para desempaquetar y `pac solution pack` para reempaquetar | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro connection references y environment variables en el pipeline de deploy | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Ejecuto Solution Checker automaticamente en el pipeline de CI | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico las diferencias entre Azure DevOps, GitHub Actions y Power Platform Pipelines | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico el patrón Event-Driven vs Request-Response para integraciones | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro un Service Endpoint de Dataverse hacia Azure Service Bus | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo una Azure Function que consume mensajes del Service Bus y procesa eventos | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Azure API Management como proxy entre Power Platform y APIs externas | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento un Custom Connector que apunta a APIM con autenticación OAuth 2.0 | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento sincronización bidireccional Dataverse ↔ sistema externo con idempotencia | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro el On-Premises Data Gateway para acceder a sistemas locales desde la nube | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico cómo almacenar secretos en Azure Key Vault y referenciarlos desde Power Platform | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Application Insights para monitoreo de Azure Functions integradas con Dataverse | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico el Dead Letter Queue (DLQ) y cómo manejar mensajes fallidos en Service Bus | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 20:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 24:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 21: Integración con Azure y Servicios Externos
+### Módulo 25: Patrones de Diseño Avanzados
 
-- [ ] **Práctica**: Configuro Azure Service Bus y lo conecto con Power Automate | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso Azure Event Grid para reaccionar a eventos de Dataverse | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro un Webhook desde Dataverse hacia un endpoint externo | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso Azure Key Vault desde Power Automate para obtener secretos de forma segura | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Integro Power Platform con Azure Logic Apps para casos que requieren mayor capacidad | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso el patrón hub-and-spoke para integración: Azure API Management como hub | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Implemento el patrón SAGA para transacciones distribuidas entre Dataverse y sistemas externos | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro Azure AD B2C para autenticación en Power Pages | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico cuándo usar Azure Integration Services vs Power Automate | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso Managed Identity para conectar Azure Functions a Dataverse sin secretos hardcodeados | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro Application Insights para monitoreo de flows y plugins | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico los límites de API de Dataverse y las estrategias de throttling | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico el patrón Strangler Fig para migrar sistemas legacy a Power Platform | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento Child Flows reutilizables para lógica compartida entre flujos padre | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento el patrón Try/Catch/Finally con Scope en Power Automate | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico el patrón Saga para transacciones distribuidas en múltiples sistemas | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño un flujo de aprobación multinivel con escalamiento automático por timeout | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento logging centralizado en tabla Dataverse con Flow Run ID para trazabilidad | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico cuándo usar Environment Variables vs Connection References vs configuración en tabla | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño una solución con Circuit Breaker: desactivar integración si el backend falla N veces | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico el patrón CQRS (Command Query Responsibility Segregation) en Power Platform | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Documento un catálogo de patrones de mi proyecto con pros, contras y cuándo aplicar cada uno | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 21:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 25:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 22: Power Pages (Portales)
+### Módulo 26: Performance y Optimización
 
-- [ ] **Práctica**: Creo un portal básico en Power Pages conectado a Dataverse | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro autenticación de usuarios externos con Azure AD | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo páginas que muestran datos de Dataverse usando Basic Forms | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo Advanced Forms (múltiples pasos) para captura de datos compleja | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso Liquid templates para personalizar el contenido del portal dinámicamente | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro Web Roles y permisos de tabla en el portal | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Customizo el diseño del portal con CSS y JavaScript | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro búsqueda facetada en el portal | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Integro un flow de Power Automate con el portal para procesar envíos de formularios | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro el dominio personalizado del portal | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico las diferencias entre Power Pages (nuevo) y el antiguo portal de D365 | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro el CDN y la caché para optimizar el rendimiento del portal | Dominio: ___/5 | Fecha: ___
-
-**Subtotal Módulo 22:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
-
----
-
-### Módulo 23: Dynamics 365 Customer Service
-
-- [ ] **Conocimiento**: Explico la arquitectura de D365 Customer Service: casos, colas, enrutamiento | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro Unified Routing para enrutar casos por skills y capacity | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro SLA (Service Level Agreements) con KPI de primera respuesta y resolución | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo y configuro entitlement (derechos de servicio) para un cliente | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro Knowledge Base y la integro en el proceso de resolución de casos | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro el Customer Service Hub con los views y dashboards necesarios | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Integro Copilot Studio con Omnichannel para atención omnicanal | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro el canal de email en Omnichannel para Customer Service | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico qué es el Agent Copilot en Customer Service y cómo ayuda a los agentes | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo reportes de Customer Service con métricas de KPI | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro Voice channel básico en Omnichannel | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico las diferencias entre Customer Service y Field Service | Dominio: ___/5 | Fecha: ___
-
-**Subtotal Módulo 23:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
-
----
-
-### Módulo 24: AI Builder y Generative AI
-
-- [ ] **Conocimiento**: Identifico todos los modelos de AI Builder disponibles y sus casos de uso | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Entreno un modelo de clasificación de texto con datos de ejemplo | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso el modelo de procesamiento de documentos (form processing) para extraer datos de PDFs | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Integro un modelo de AI Builder en un Power Automate flow | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso AI Builder en una Canvas App para análisis de sentimiento | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso el conector de Azure AI Document Intelligence desde Power Automate | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro Copilot en una Canvas App (AI features) | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso Azure OpenAI desde Power Automate para generación de contenido | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo un Generative Answers topic en Copilot Studio con búsqueda en Knowledge Base | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico la diferencia entre AI Builder, Azure AI Services y Azure OpenAI | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Implemento un flujo de revisión humana para resultados de AI (Human-in-the-loop) | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico las consideraciones de responsabilidad de IA (Responsible AI) en Power Platform | Dominio: ___/5 | Fecha: ___
-
-**Subtotal Módulo 24:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
-
----
-
-### Módulo 25: Desktop Flows y RPA (Robotic Process Automation)
-
-- [ ] **Práctica**: Instalo y configuro Power Automate Desktop | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo un desktop flow que automatiza una tarea en una aplicación Windows | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso el recorder de UI para capturar acciones de usuario automáticamente | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso desktop flow para automatizar entrada de datos en una aplicación web (sin API) | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro una máquina (machine) para ejecutar desktop flows desde cloud | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro un machine group para ejecución en paralelo y balanceo de carga | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Invoco un desktop flow desde un cloud flow pasando variables de entrada | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Implemento manejo de errores en un desktop flow con bloques de excepciones | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso acciones de Excel dentro de un desktop flow para procesar datos | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico los conceptos de attended vs. unattended RPA y cuándo usar cada uno | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico las consideraciones de seguridad para cuentas de servicio en RPA | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Reviso el run history de un desktop flow y depuro errores | Dominio: ___/5 | Fecha: ___
-
-**Subtotal Módulo 25:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
-
----
-
-### Módulo 26: Proyecto Integrado Nivel 3
-
-*Proyecto: Plataforma de Ventas y Servicio Integrada*
-
-- [ ] **Entrega**: Plugins C# implementando lógica de negocio compleja (cálculo de precios, validaciones) | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Custom API expuesta para integración con sistema ERP externo | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Azure Function procesando eventos desde Dataverse via Service Bus | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Pipeline de CI/CD en Azure DevOps para deployment automático | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Power Pages portal para clientes externos con autenticación Azure AD | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Desktop Flow automatizando proceso legacy que no tiene API | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: AI Builder integrado para clasificación automática de solicitudes | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: D365 Customer Service configurado para el equipo de soporte | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Arquitectura documentada con diagramas de componentes e integraciones | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Solution Checker, pruebas y documentación completa | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Uso el Power Apps Monitor para identificar llamadas lentas en una Canvas App | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico el concepto de delegación en Canvas Apps y cuáles operaciones se delegan a Dataverse | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Reemplazo ClearCollect sin delegación por Filter delegable para mejorar rendimiento | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Uso Concurrent() en App.OnStart para cargar múltiples colecciones en paralelo | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Habilito Delayed Load y Named Formulas para reducir el tiempo de inicio de la app | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico los índices de Dataverse: Quick Find, Custom Index y cuándo crearlos | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico el impacto de los plugins síncronos en el tiempo de respuesta del pipeline | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Optimizo un plugin que tardaba >1s: muevo lógica a PostOperation asíncrono | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Power Automate con concurrencia (apply to each) para procesar lotes en paralelo | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Uso Application Insights para medir tiempos de respuesta y encontrar cuellos de botella | Dominio: ___/5 | Fecha: ___
 
 **Subtotal Módulo 26:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 27: Code Apps con React y TypeScript
+### Módulo 27: PCF Avanzado con TypeScript y React
 
-- [ ] **Conocimiento**: Explico la diferencia entre Code App, Canvas App y PCF Component con ejemplos de cuándo usar cada uno | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Describo el stack de una Code App (Vite + React + TypeScript + `@microsoft/power-apps` SDK) | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo una Code App desde el template oficial con `npx degit` y la ejecuto localmente con `npm run dev` | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Conecto una tabla Dataverse con `pac code add-data-source` y uso los servicios tipados generados en `/generated/` | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Implemento CRUD completo (listar, crear, editar, eliminar) usando los servicios auto-generados | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Construyo una UI con Fluent UI React Components (DataGrid + formulario) | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico el ciclo de vida PCF: init(), updateView(), getOutputs(), destroy() | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo un control PCF de tipo Field con propiedad bound a un campo de Dataverse | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento notifyOutputChanged() + getOutputs() para comunicar el valor al formulario | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Uso Fluent UI React Components dentro del control PCF | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro el modo Virtual (ReactControl) para aprovechar el runtime compartido de React | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo un control PCF de tipo Dataset (subgrid) con filtros y acciones personalizadas | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Empaqueto el PCF en una solución, ejecuto Solution Checker y despliego en TEST | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Accedo a la Dataverse WebAPI desde el PCF usando context.webAPI | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico las diferencias entre PCF Standard (Field), PCF Virtual y PCF Dataset | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Publico el control en una Component Library para reutilización en múltiples apps | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 27:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 28: Code Apps con React y TypeScript
+
+- [ ] **Conocimiento**: Explico la diferencia entre Code App, Canvas App y PCF con ejemplos de cuándo usar cada uno | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Describo el stack de una Code App (Vite + React + TypeScript + @microsoft/power-apps SDK) | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo una Code App desde el template oficial con `pac code init` y la ejecuto localmente | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Conecto una tabla Dataverse con `pac code add-data-source` y uso los servicios tipados generados | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento CRUD completo (listar, crear, editar, eliminar) con los servicios auto-generados | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Construyo una UI con Fluent UI React Components (DataGrid + formulario de edición) | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Publico la app con `pac code push` y la verifico en make.powerapps.com | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Empaqueto la Code App en una Solución Managed e importo en entorno TEST con Connection References correctas | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Empaqueto la Code App en una Solución Managed y despliego en TEST | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico cuándo preferir una Code App sobre una Canvas App en términos de complejidad UI | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 27:** ___/8 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 28:** ___/9 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 29: Power Pages Avanzado y Azure AD B2C
+
+- [ ] **Práctica**: Configuro Azure AD B2C como Identity Provider externo en un portal Power Pages | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento flujo de registro de usuarios con invitación por email y activación de cuenta | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Table Permissions con Access Type Parent-Child para datos jerárquicos | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento la Web API del portal con JavaScript para operaciones CRUD sin recargar la página | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico las consideraciones de seguridad del portal: CSRF, SQL Injection via FetchXML, XSS | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Custom Domain + SSL + sitemap.xml y robots.txt para SEO básico | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento Web Templates con Liquid para páginas dinámicas con lógica condicional | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro el portal para soportar múltiples idiomas (multilenguaje) | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Integro Power Automate Cloud Flows desde el portal via Portals Web API | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico cómo medir el rendimiento del portal y optimizar Page Load Time | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 29:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 30: Proyecto Multicapa Nivel 3
+
+- [ ] **Práctica**: Entrego un proyecto con Plugin C# + PCF + Azure Integration + Canvas App + Power Automate | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: El proyecto usa CI/CD completo en Azure DevOps con 3 ambientes (DEV/TEST/PROD) | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Todos los flujos tienen Scope Try/Catch con logging en Dataverse | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: El proyecto pasa Solution Checker con 0 errores críticos | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: El código del plugin incluye cobertura de pruebas con FakeXrmEasy o equivalente | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: La integración Azure usa Connection References y Environment Variables (sin secretos hardcodeados) | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Presento el proyecto a un par técnico y defiendo las decisiones arquitectónicas | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Entrego documentación técnica: diagrama de arquitectura, ADRs, runbook de operaciones | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Autoevaluación ≥ 3.5/5 en todos los módulos 18-29 | Promedio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 30:** ___/9 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
 ### 🏆 Hitos de Nivel 3
 
-- [ ] Todos los módulos del Nivel 3 completados con 80%+ de checkboxes marcados | Fecha: ___
-- [ ] Proyecto Plataforma de Ventas deployado con CI/CD funcional | Fecha: ___
-- [ ] Autoevaluación promedio ≥ 3.5/5 | Promedio: ___/5
+- [ ] Todos los módulos 18-30 completados con 80%+ de checkboxes marcados | Fecha: ___
+- [ ] Proyecto Multicapa Nivel 3 desplegado con CI/CD funcional en 3 ambientes | Fecha: ___
+- [ ] Autoevaluación promedio ≥ 3.5/5 en todos los módulos del nivel | Promedio: ___/5
 - [ ] Completé el Microsoft Learn path: "Power Platform Developer" | Fecha: ___
 - [ ] PL-400 aprobado | Fecha: ___ | Puntaje: ___/1000
 
@@ -608,106 +643,209 @@
 
 ## 🔴 NIVEL 4: ARQUITECTO
 
-### Módulo 28: Arquitectura de Soluciones Enterprise
+### Módulo 31: Enterprise Architecture y Gobernanza
 
-- [ ] **Conocimiento**: Explico el Power Platform Well-Architected Framework y sus 5 pilares | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Realizo un assessment de una solución existente usando el Well-Architected Framework | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico cuándo usar Dataverse vs SharePoint vs SQL vs Azure SQL | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico cuándo usar Canvas App vs Model-Driven App vs Power Pages vs Teams Tab | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico cuándo usar Power Automate vs Azure Logic Apps vs Azure Functions | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Diseño una arquitectura multi-tenant para un ISV con sus consideraciones | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Diseño un plan de disaster recovery y backup para una solución crítica | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico las estrategias de escalabilidad en Power Platform y Dataverse | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Documento una arquitectura de referencia con diagramas C4 (Context, Container, Component) | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico cómo abordar el master data management (MDM) en Dataverse | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Diseño la estrategia de governance para un tenant enterprise | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo un documento de Architectural Decision Record (ADR) para una decisión técnica clave | Dominio: ___/5 | Fecha: ___
-
-**Subtotal Módulo 28:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
-
----
-
-### Módulo 29: Center of Excellence (CoE)
-
-- [ ] **Práctica**: Instalo el CoE Starter Kit en un environment dedicado | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro el componente Core del CoE para inventariar todos los recursos | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro el componente de Governance del CoE | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Uso el Power BI dashboard del CoE para analizar el uso del tenant | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro el flujo de nurture: proceso de aprobación para nuevos makers | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro alertas para apps y flows en entornos no-development sin DLP | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico la estrategia de Adoption Hub para escalar Power Platform en la organización | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo una política de naming convention para soluciones, apps y flows | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Defino el proceso de environment lifecycle management | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo un plan de capacitación y comunidad interna de práctica (CoP) | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico cómo medir el ROI de Power Platform en una organización | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Documento el playbook de governance para el CoE | Dominio: ___/5 | Fecha: ___
-
-**Subtotal Módulo 29:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
-
----
-
-### Módulo 30: Diseño de Soluciones para Escenarios Complejos
-
-- [ ] **Conocimiento**: Explico los anti-patrones más comunes en Power Platform y cómo evitarlos | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Diseño una solución que maneja 1M+ registros en Dataverse con rendimiento óptimo | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Diseño una arquitectura de integración con SAP usando Azure Integration Services | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Evalúo y presento trade-offs de una decisión arquitectónica a un stakeholder no técnico | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Diseño una estrategia de migración de una solución legacy a Power Platform | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Diseño la seguridad para una solución multi-tenant con datos de múltiples clientes | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Estimo el costo total de ownership (TCO) de una solución propuesta | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Lidero un workshop de discovery con stakeholders para capturar requirements | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo un Solution Blueprint documentando la solución completa propuesta | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Realizo un Code Review de una solución Power Platform desarrollada por otro equipo | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico cómo abordar performance testing para una solución de Power Platform | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Mentoreo a un developer junior en la resolución de un problema técnico | Dominio: ___/5 | Fecha: ___
-
-**Subtotal Módulo 30:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
-
----
-
-### Módulo 31: Proyecto Capstone - Arquitecto
-
-*Proyecto Final: Solución Enterprise End-to-End*
-
-- [ ] **Entrega**: Solution Blueprint completo con diagramas de arquitectura | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Architectural Decision Records (ADRs) documentados | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Implementación funcional con todos los componentes integrados | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: CoE configurado en el tenant de la solución | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Pipeline CI/CD completo con múltiples environments | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Plan de governance y manual de operaciones | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Presentación ejecutiva de la solución (no técnica, orientada a negocio) | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Presentación técnica para el equipo de desarrollo | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Plan de mantenimiento y evolución de la solución | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Post-mortem de decisiones: qué haría diferente y por qué | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico los 5 pilares del Well-Architected Framework con criterios de evaluación por pilar | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Realizo un Well-Architected Assessment de una solución existente y genero un reporte de mejoras | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico los principios del Solution Architect: configuración antes que código, mínimo privilegio, fallo ruidoso | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño la estrategia de soluciones para una suite ERP de 6 módulos con dependencias declaradas | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Documento un Architecture Decision Record (ADR) con alternativas, decisión y consecuencias | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico cómo evaluar build vs buy vs customize para cada componente de Power Platform | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Facilito un Architecture Review Board para una solución empresarial real | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico los patrones de versionado semántico para soluciones: major.minor.patch | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño el modelo de gobernanza técnica: quién puede importar en PROD, quién aprueba el ADR | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico cómo alinear la arquitectura técnica con los objetivos estratégicos del negocio | Dominio: ___/5 | Fecha: ___
 
 **Subtotal Módulo 31:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
+### Módulo 32: CoE Starter Kit y Administración a Escala
+
+- [ ] **Práctica**: Instalo el CoE Starter Kit en un ambiente dedicado con su configuración completa | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro el inventario de apps, flows y conectores del tenant con el CoE Core | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro el componente Governance: proceso de aprobación para nuevos makers en PROD | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Uso el dashboard de Power BI del CoE para analizar el uso y riesgo del tenant | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro alertas: apps sin dueño, flows con conexiones personales, conectores bloqueados usados | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño el proceso de onboarding/offboarding de makers (capacitación + aprobación + reasignación) | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro DLP Policies por ambiente con niveles de restricción crecientes (DEV < TEST < PROD) | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico la estrategia de Adoption Hub: champions, capacitación continua, comunidad interna | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño el proceso de environment lifecycle: creación, uso, limpieza y eliminación | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro el CoE Innovation Backlog para gestionar solicitudes de nuevas apps | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 32:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 33: Multi-tenant, Multi-geo y Estrategia de Ambientes
+
+- [ ] **Conocimiento**: Explico los escenarios multi-tenant: ISV, empresa multinacional, fusiones y adquisiciones | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño la estrategia de ambientes para una empresa con presencia en 5 países con regulaciones locales | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico las implicaciones de residencia de datos (Data Residency) por geography | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro un ambiente en una Geography específica (ej. EU) para cumplimiento de GDPR | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico el modelo ISV (Independent Software Vendor): distribución de soluciones managed a clientes | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño la estrategia de soluciones para un ISV con un core compartido y módulos por cliente | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico las opciones de Customer-Managed Keys (CMK) para cifrado de datos en Dataverse | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño el plan de governance multi-tenant con DLP coordinadas entre tenants | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico las limitaciones de cross-tenant data access y las soluciones (Azure AD B2B, APIs) | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 33:** ___/9 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 34: Azure Integration Services Avanzado
+
+- [ ] **Práctica**: Configuro Azure Integration Services completo: APIM + Service Bus + Azure Functions + Event Grid | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño la integración entre Dataverse y 3 sistemas externos simultáneos con hub de integración | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento el patrón de idempotencia: campo external_id único en Dataverse para upserts | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro DLQ (Dead Letter Queue) con alertas Azure Monitor cuando DLQ > 0 | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico cuándo usar Logic Apps vs Power Automate vs Azure Functions para integración | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Azure API Management con OAuth 2.0, throttling y logging de todas las llamadas | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento sincronización bidireccional con reconciliación de conflictos usando timestamps | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro el On-Premises Data Gateway en modo HA (High Availability) con dos nodos | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño y ejecuto un plan de carga de datos masivo (1M+ registros) con Azure Data Factory | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico el patrón Outbox Pattern para garantizar at-least-once delivery en integraciones | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 34:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 35: Arquitectura de Datos — Fabric, Synapse y Medallion
+
+- [ ] **Conocimiento**: Explico la arquitectura Medallion (Bronze/Silver/Gold) y su aplicabilidad con Power Platform | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro el enlace Dataverse → Microsoft Fabric (Azure Synapse Link) para analítica avanzada | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo un Lake Database en Fabric con datos de Dataverse y construyo un modelo semántico | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico cuándo usar Dataverse + Power BI vs Synapse Analytics + Power BI según volumen | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Microsoft Purview para escanear y clasificar automáticamente datos en Dataverse | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño la estrategia MDM (Master Data Management) con Golden Record en Dataverse | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico Data Lineage: cómo rastrear el origen de un dato desde Dataverse hasta el reporte en Power BI | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Dataverse Elastic Tables para datos de alta escritura (IoT, logs, telemetría) | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico las opciones de retención de datos: políticas de retención en Dataverse y Azure | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 35:** ___/9 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 36: Seguridad y Cumplimiento Enterprise
+
+- [ ] **Práctica**: Diseño la arquitectura de seguridad completa para un sistema de salud (datos de pacientes) | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Hierarchy Security (Manager model) para que managers vean datos de sus subordinados | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Implemento el proceso de Right to Erasure (GDPR Art. 17): anonimizar datos de un registro | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro auditoría en tablas con datos sensibles con retención de 5 años | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Activo Customer Lockbox para controlar el acceso de soporte de Microsoft a datos del tenant | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico el modelo de responsabilidad compartida de seguridad (Microsoft vs cliente) | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Conditional Access en Azure AD: solo dispositivos corporativos pueden acceder a Power Apps | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño el Security Review para una solución previo al go-live en un entorno regulado | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico las certificaciones de cumplimiento de Microsoft (ISO 27001, SOC 2, HIPAA, GDPR) | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Realizo una evaluación de riesgo (DPIA) para una solución que procesa datos personales | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 36:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 37: AI Builder y Azure AI integrado
+
+- [ ] **Conocimiento**: Explico los modelos disponibles en AI Builder: formularios, clasificación, predicción, objetos | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Entreno un modelo de extracción de documentos (AI Builder) con 5+ documentos de muestra | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Integro el modelo AI Builder con Power Automate para procesar facturas automáticamente | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Azure OpenAI Service y lo invoco desde Power Automate via HTTP Action | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Construyo un Copilot Studio con Generative Answers + Action de Azure OpenAI personalizada | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico las consideraciones éticas y de gobernanza de IA en Power Platform y Azure | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño la estrategia de adopción de IA para una empresa: casos de uso, piloto, roll-out | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Content Moderation para el Copilot empresarial con políticas de uso aceptable | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico la diferencia entre modelos preentrenados, fine-tuned y RAG (Retrieval Augmented Generation) | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 37:** ___/9 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 38: Liderazgo Técnico y Gestión de Proyectos
+
+- [ ] **Práctica**: Facilito un Design Thinking Workshop de 2 días para definir requisitos con stakeholders | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico las diferencias entre rol de Arquitecto, Tech Lead, Senior Dev y Consultor Funcional | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Presento trade-offs técnicos complejos en lenguaje de negocio a un comité ejecutivo | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo y defiendo un Business Case con ROI estimado para una inversión en Power Platform | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño el plan de gestión del cambio para la migración de un sistema legacy con 100+ usuarios | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Conduzco un Code Review de arquitectura e identifico al menos 5 mejoras con justificación | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico cómo estimar esfuerzo en proyectos Power Platform: T-shirt sizing, planning poker | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Gestiono un conflicto técnico entre dos approaches del equipo y documento la decisión en un ADR | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Elaboro la hoja de ruta técnica (roadmap) de 12 meses para una plataforma Power Platform empresarial | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico cómo medir el éxito de una implementación: KPIs técnicos y de negocio | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 38:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 39: Casos de Transformación Digital
+
+- [ ] **Práctica**: Analizo y presento un caso de transformación digital real de Power Platform en una industria | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño la arquitectura extremo a extremo para una empresa manufacturera con ERP + Power Platform | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño la arquitectura para un banco con requisitos de cumplimiento (auditoría, residencia de datos) | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño la arquitectura para una empresa de salud con datos de pacientes y HIPAA | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Presento un análisis de TCO (Total Cost of Ownership) de Power Platform vs desarrollo custom | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Documento el patrón de migración Strangler Fig aplicado a un sistema legado específico | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico las lecciones aprendidas de al menos 3 implementaciones fallidas conocidas y sus causas | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Facilito una sesión de Lessons Learned con el equipo al finalizar un proyecto real | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 39:** ___/8 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 40: Preparación PL-600
+
+- [ ] **Conocimiento**: Explico el formato del examen PL-600: caso de estudio largo, secciones técnicas y de diseño | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Completo los módulos de Microsoft Learn para PL-600 y verifico mi cobertura de temario | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Resuelvo el Practice Assessment oficial de PL-600 en learn.microsoft.com | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Simulo el examen con un caso de estudio de 4h: analizo, propongo arquitectura y defiendo decisiones | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Revisito todos los ADRs del proyecto capstone y aseguro coherencia con los temas del PL-600 | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Identifico mis 3 áreas de debilidad en el temario PL-600 y las refuerzo | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Completo el banco de preguntas del Módulo 40 del simulador con 70%+ de aciertos | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Estudio los Microsoft Reference Architectures de Power Platform disponibles en la documentación oficial | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 40:** ___/8 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 41: Proyecto Capstone — Arquitectura Enterprise
+
+- [ ] **Práctica**: Entrego una plataforma empresarial completa con 5+ componentes Power Platform integrados | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: La solución tiene Plugin C# + PCF + Azure Integration + Canvas + Model-Driven + Power Automate + Power BI | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: El despliegue usa CI/CD en Azure DevOps con 3 ambientes (DEV/TEST/PROD) con gates de aprobación | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: La solución pasa Solution Checker con 0 errores críticos en todos los componentes | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Entrego documentación completa: ADRs, diagrama de arquitectura C4, runbook, manual de usuario | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Presento la arquitectura ante un panel de revisión técnico y defiendo cada decisión | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: El proyecto tiene plan de DR documentado con RTO y RPO definidos y probados | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: La seguridad fue revisada: Field Security, Hierarchy, Audit, DLP, Customer Lockbox | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: El Well-Architected Assessment del capstone tiene score ≥ 4/5 en los 5 pilares | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: PL-600 aprobado | Fecha: ___ | Puntaje: ___/1000
+
+**Subtotal Módulo 41:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
 ### 🏆 Hitos de Nivel 4
 
-- [ ] Todos los módulos del Nivel 4 completados con 80%+ de checkboxes marcados | Fecha: ___
-- [ ] CoE implementado y funcionando en tenant de prueba | Fecha: ___
-- [ ] Proyecto Capstone presentado y aprobado | Fecha: ___
-- [ ] Autoevaluación promedio ≥ 4.0/5 | Promedio: ___/5
+- [ ] Todos los módulos 31-41 completados con 80%+ de checkboxes marcados | Fecha: ___
+- [ ] Proyecto Capstone desplegado con CI/CD y documentación completa | Fecha: ___
+- [ ] Autoevaluación promedio ≥ 4.0/5 en todos los módulos del nivel | Promedio: ___/5
+- [ ] Completé los Microsoft Learn paths para PL-600 | Fecha: ___
 - [ ] PL-600 aprobado | Fecha: ___ | Puntaje: ___/1000
+- [ ] He liderado al menos 1 proyecto enterprise completo de Power Platform como Arquitecto | Proyecto: ___
 
 **Fecha de inicio Nivel 4:** ___ | **Fecha de completación:** ___
 
 ---
 ---
 
-## 📊 TRACKER GLOBAL DE PROGRESO
+## 📊 Resumen Total de Progreso
 
-### Resumen por Nivel
-
-| Nivel | Módulos | Checkboxes Totales | Completados | % | Promedio Dominio | Fecha Fin |
-|-------|---------|-------------------|-------------|---|-----------------|-----------|
+| Nivel | Módulos | Checkboxes est. | Completados | % | Promedio Dominio | Fecha Fin |
+|-------|---------|-----------------|-------------|---|-----------------|-----------|
 | 🟢 Nivel 1 - Básico | 8 | 113 | ___ | ___% | ___/5 | ___ |
 | 🔵 Nivel 2 - Intermedio | 9 | 118 | ___ | ___% | ___/5 | ___ |
-| 🟠 Nivel 3 - Avanzado | 9 | 106 | ___ | ___% | ___/5 | ___ |
-| 🔴 Nivel 4 - Arquitecto | 4 | 46 | ___ | ___% | ___/5 | ___ |
-| **TOTAL** | **30** | **383** | ___ | ___% | ___/5 | ___ |
+| 🟠 Nivel 3 - Avanzado | 13 | 129 | ___ | ___% | ___/5 | ___ |
+| 🔴 Nivel 4 - Arquitecto | 11 | 105 | ___ | ___% | ___/5 | ___ |
+| **TOTAL** | **41** | **465** | ___ | ___% | ___/5 | ___ |
 
 ### Resumen por Módulo
 
@@ -730,19 +868,30 @@
 | 15 | Copilot Studio Intro | ___/12 | ___% | ___/5 |
 | 16 | Seguridad y Soluciones | ___/12 | ___% | ___/5 |
 | 17 | Proyecto Nivel 2 | ___/10 | ___% | ___/5 |
-| 18 | Plugins C# | ___/12 | ___% | ___/5 |
-| 19 | Custom APIs y Azure Functions | ___/12 | ___% | ___/5 |
-| 20 | ALM y DevOps | ___/12 | ___% | ___/5 |
-| 21 | Integración con Azure | ___/12 | ___% | ___/5 |
-| 22 | Power Pages | ___/12 | ___% | ___/5 |
-| 23 | D365 Customer Service | ___/12 | ___% | ___/5 |
-| 24 | AI Builder y Generative AI | ___/12 | ___% | ___/5 |
-| 25 | Desktop Flows y RPA | ___/12 | ___% | ___/5 |
-| 26 | Proyecto Nivel 3 | ___/10 | ___% | ___/5 |
-| 27 | Arquitectura Enterprise | ___/12 | ___% | ___/5 |
-| 28 | Center of Excellence | ___/12 | ___% | ___/5 |
-| 29 | Diseño de Soluciones Complejas | ___/12 | ___% | ___/5 |
-| 30 | Proyecto Capstone | ___/10 | ___% | ___/5 |
+| 18 | Arquitectura de Soluciones | ___/10 | ___% | ___/5 |
+| 19 | ALM y CI/CD con Azure DevOps | ___/11 | ___% | ___/5 |
+| 20 | Dynamics 365 CE | ___/10 | ___% | ___/5 |
+| 21 | Power Pages — Portales Externos | ___/10 | ___% | ___/5 |
+| 22 | Copilot Studio Avanzado | ___/10 | ___% | ___/5 |
+| 23 | C# Plugins para Dataverse | ___/11 | ___% | ___/5 |
+| 24 | Integraciones con Azure Services | ___/10 | ___% | ___/5 |
+| 25 | Patrones de Diseño Avanzados | ___/10 | ___% | ___/5 |
+| 26 | Performance y Optimización | ___/10 | ___% | ___/5 |
+| 27 | PCF Avanzado con React | ___/10 | ___% | ___/5 |
+| 28 | Code Apps con React y TypeScript | ___/9 | ___% | ___/5 |
+| 29 | Power Pages Avanzado + B2C | ___/10 | ___% | ___/5 |
+| 30 | Proyecto Multicapa Nivel 3 | ___/9 | ___% | ___/5 |
+| 31 | Enterprise Architecture y Gobernanza | ___/10 | ___% | ___/5 |
+| 32 | CoE Starter Kit a Escala | ___/10 | ___% | ___/5 |
+| 33 | Multi-tenant y Multi-geo | ___/9 | ___% | ___/5 |
+| 34 | Azure Integration Services Avanzado | ___/10 | ___% | ___/5 |
+| 35 | Fabric, Synapse y Medallion | ___/9 | ___% | ___/5 |
+| 36 | Seguridad y Cumplimiento Enterprise | ___/10 | ___% | ___/5 |
+| 37 | AI Builder y Azure AI | ___/9 | ___% | ___/5 |
+| 38 | Liderazgo Técnico | ___/10 | ___% | ___/5 |
+| 39 | Casos de Transformación Digital | ___/8 | ___% | ___/5 |
+| 40 | Preparación PL-600 | ___/8 | ___% | ___/5 |
+| 41 | Proyecto Capstone | ___/10 | ___% | ___/5 |
 
 ### Timeline Visual de Progreso
 
