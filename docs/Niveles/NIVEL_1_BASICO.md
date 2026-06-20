@@ -98,16 +98,23 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 4. Crear datos de prueba manualmente (5 registros de Account)
 
 #### 💼 Caso Real de Negocio
-**Escenario**: Departamento de TI necesita gestionar solicitudes internas.
 
-**Análisis de solución**:
+**Empresa:** Laboratorio Farmacéutico NovaBio — 280 empleados, 2 plantas de producción  
+**Problema:** El área de Calidad gestionaba no-conformidades (productos fuera de especificación) por email y hojas Excel. Los formularios llegaban incompletos, las aprobaciones tardaban semanas y era imposible auditar el proceso para la certificación ISO 9001.  
+**Consecuencia:** Auditoría externa detectó que el 34% de los registros de no-conformidades estaban incompletos o sin respuesta en los tiempos requeridos.
 
-- **Dataverse**: Almacenar solicitudes, usuarios, categorías
-- **Power Apps**: Interfaz para crear y consultar solicitudes
-- **Power Automate**: Notificaciones automáticas por email
-- **Power BI**: Dashboard de métricas (tiempo respuesta, volumen)
+**Solución con Power Platform:**
+- **Dataverse:** tabla central de no-conformidades con estados, responsables, fechas límite y adjuntos de evidencia
+- **Power Apps Canvas:** formulario digital que valida campos obligatorios antes de permitir el envío — eliminó registros incompletos desde el primer día
+- **Power Automate:** flujo automático notifica al responsable al crear la no-conformidad; escala al supervisor si no hay respuesta en 48h
+- **Power BI:** dashboard para el Jefe de Calidad con indicadores de tiempo de cierre por tipo, área y responsable
 
-**Beneficios**: Reemplaza emails desordenados, centraliza información, mejora trazabilidad.
+**Resultados a 6 meses:**
+- 100% de registros completos (vs 66% previo)
+- Tiempo de cierre promedio reducido de 18 días a 6 días
+- Superó la siguiente auditoría ISO 9001 sin observaciones en el proceso de no-conformidades
+
+**Por qué Power Platform:** Ningún componente requirió código. El equipo de Calidad configuró el sistema en 3 semanas sin soporte externo.
 
 #### ✅ Buenas Prácticas
 - Usar ambientes Developer/Sandbox para pruebas, nunca directamente en Production
@@ -233,31 +240,21 @@ Crear manualmente 10 registros de Solicitudes con variedad de:
 
 #### 💼 Caso Real de Negocio
 
-**Escenario Completo**: Sistema de Gestión de Activos de TI
+**Empresa:** Empresa de Logística TransCargo — 120 vehículos, flota propia  
+**Problema:** Los activos de la empresa (vehículos, equipos de bodega, herramientas especializadas) se registraban en Excel. Asignaciones duplicadas, equipos prestados sin registro de devolución, sin historial de mantenimiento por activo. Al momento de una auditoría interna no podían demostrar quién tenía qué equipo ni en qué estado.  
+**Consecuencia:** 3 camiones con seguros vencidos operando activos, costos de mantenimiento no atribuibles por unidad de negocio.
 
-**Modelo de datos**:
-```
-Tablas:
-1. Activo (Asset)
-   - Nombre, Tipo (Desktop/Laptop/Monitor/etc), Serial, Estado
-   
-2. Usuario Empleado (extends Contact)
-   - Departamento, Ubicación, Manager
-   
-3. Asignación de Activo
-   - Activo (Lookup), Empleado (Lookup)
-   - Fecha Asignación, Fecha Devolución, Estado
+**Solución con Dataverse:**
+- Tabla `sit_activo` con tipo, serial, estado (Disponible/Asignado/En Mantenimiento/Dado de Baja), fecha vencimiento seguro, valor
+- Tabla `sit_asignacion` con Lookup a Activo y a Empleado, fechas de inicio y devolución, estado
+- Tabla `sit_mantenimiento` con historial de intervenciones por activo
+- Business Rule: bloquea asignación si el activo está en estado "En Mantenimiento" o "Dado de Baja"
+- Vista "Seguros próximos a vencer" filtra activos con vencimiento en los próximos 30 días
 
-Relaciones:
-- Activo 1:N Asignaciones (histórico)
-- Empleado 1:N Asignaciones
-```
-
-**Reglas de negocio**:
-
-- Activo solo puede estar asignado a un empleado a la vez
-- Al devolver, auto-cambiar estado Activo a "Disponible"
-- Alertas si asignación > 3 años (renovación)
+**Resultados:**
+- Control total de 120 vehículos y 340 equipos adicionales — trazabilidad completa en tiempo real
+- Costo de mantenimiento atribuible por unidad: ahorro del 22% al identificar equipos con mantenimiento excesivo
+- Cero activos en operación con documentación vencida desde la implementación
 
 #### ✅ Buenas Prácticas
 
@@ -479,30 +476,23 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 
 #### 💼 Caso Real de Negocio
 
-**Escenario**: App de Registro de Visitas para Recepción
+**Empresa:** Hotel Boutique Terramar — 5 sedes en Colombia, 90 empleados operativos  
+**Problema:** El control de visitas a oficinas administrativas era un cuaderno manual. Sin trazabilidad de quién ingresó, a qué hora salió, ni a quién visitó. En una auditoría de seguridad, detectaron que personas no autorizadas habían accedido a zonas restringidas sin registro.  
+**Consecuencia:** Brecha de seguridad física, riesgo para datos confidenciales de huéspedes, no cumplían política de seguridad corporativa.
 
-**Funcionalidades**:
+**Solución con Canvas App:**
+- App en tablet en recepción: el visitante ingresa nombre, empresa, persona a visitar y foto (cámara integrada)
+- Al registrar entrada: notificación automática al empleado visitado (Teams/email) para confirmar autorización
+- Registro en Dataverse con timestamp de entrada y salida
+- Galería de visitas activas visible para el recepcionista
+- Botón de "marcar salida" que calcula duración de visita
+- Restricción: si el empleado no confirma en 5 minutos, el flujo escala al jefe de seguridad
 
-1. **Screen Bienvenida**:
-    - Input: Nombre visitante, Empresa, Persona a visitar (Lookup empleados)
-    - Button: Registrar entrada (guarda en Dataverse con timestamp)
-    - Cámara: Capturar foto (guardar en attachment)
-
-2. **Screen Panel de Control**:
-    - Gallery: Visitas activas (sin hora salida)
-    - Button por registro: Marcar salida
-    - Estadísticas: Total hoy, promedio duración visitas
-
-3. **Screen Histórico**:
-    - Gallery filtrable por fecha, visitante, empleado
-    - Exportar a Excel (Export() function)
-
-**Componentes técnicos**:
-
-- Conexión: Dataverse tabla "Visitas"
-- Camera control para fotos
-- Timer para reloj en pantalla
-- Collections para cache local de visitas del día
+**Resultados:**
+- Control de acceso en tiempo real desde el primer día de implementación
+- Registro digital de 100% de las visitas con foto y hora exacta
+- Tiempo de implementación: 2 semanas (1 desarrollador junior Power Platform)
+- Costo: $0 adicional — incluido en licencias Microsoft 365 ya existentes
 
 #### ✅ Buenas Prácticas
 
@@ -1879,56 +1869,21 @@ Filter(
 
 #### 💼 Caso Real de Negocio
 
-**Escenario**: App de Gestión de Inventario con Lógica Compleja
+**Empresa:** Distribuidora Farmacéutica MediSupply — 8,000 SKUs, 3 bodegas  
+**Problema:** Los analistas de inventario calculaban manualmente en Excel cuándo pedir cada producto: promedio de consumo, días de stock restante, cantidad mínima de pedido. El proceso tomaba 4 horas diarias para 8,000 SKUs. Errores frecuentes generaban quiebres de stock en productos críticos y sobrestock en productos de baja rotación.
 
-**Requerimientos**:
+**Solución con Power Fx:**
+- Canvas App conectada a Dataverse con tabla de productos, movimientos y parámetros
+- Fórmulas Power Fx calculan en tiempo real: consumo promedio diario (últimos 30 días), días de stock restante, cantidad sugerida de pedido
+- Gallery filtrada automáticamente muestra solo productos que requieren acción hoy (stock < 15 días o stock crítico < 20% del ideal)
+- Botón "Generar Orden" crea automáticamente la solicitud de compra en Dataverse y notifica al proveedor via Power Automate
+- Colores semáforo (verde/amarillo/rojo) según nivel de urgencia calculado por Power Fx
 
-1. Cálculo de stock crítico (< 20% del ideal)
-2. Proyección de agotamiento basado en consumo promedio
-3. Sugerencias de orden de compra automáticas
-4. Alertas de productos próximos a vencer (FEFO)
-
-**Implementación Power Fx**:
-
-```javascript
-// Collection calculada en OnVisible
-ClearCollect(
-    ColInventarioAnalizado,
-    AddColumns(
-        Filter(Productos, Activo = true),
-        
-        // Columnas calculadas
-        "Stock Crítico", StockActual < (StockIdeal * 0.2),
-        
-        "Consumo Promedio Diario", 
-        With(
-            {Movimientos30Dias: Filter(MovimientosInventario, 
-                                       ProductoID = ThisRecord.ID && 
-                                       Fecha >= DateAdd(Today(), -30, Days))},
-            Sum(Movimientos30Dias, Cantidad) / 30
-        ),
-        
-        "Días Hasta Agotamiento",
-        If(
-            StockActual > 0 && ConsumoPromedioDiario > 0,
-            Round(StockActual / ConsumoPromedioDiario, 0),
-            9999  // Sin riesgo
-        ),
-        
-        "Necesita Orden", DiasHastaAgotamiento < 15,
-        
-        "Cantidad Sugerida Orden",
-        If(
-            NecesitaOrden,
-            Max(StockIdeal - StockActual, ConsumoPromedioDiario * 30),  // Min 30 días
-            0
-        )
-    )
-);
-
-// Gallery filtrado por alertas
-Filter(ColInventarioAnalizado, StockCrítico || NecesitaOrden)
-```
+**Resultados:**
+- 4 horas de análisis manual reemplazadas por revisión de 20 minutos sobre la app
+- Quiebres de stock en productos críticos: reducción del 71% en el primer trimestre
+- Sobrestock: reducción del 38% (mejor planificación de cantidades de pedido)
+- Impacto económico: ahorro estimado de $180,000 USD anuales en costos de urgencia y pérdidas por vencimiento
 
 #### ✅ Buenas Prácticas
 
@@ -2536,6 +2491,62 @@ Configuración de solución
 5. Compartir Canvas App con usuarios
 6. Compartir Model-Driven App con gestores
 7. Publicar Dashboard Power BI y compartir
+
+#### 📖 Conceptos Clave
+
+Este módulo es la síntesis aplicada de los conceptos fundamentales del Nivel 1. Asegúrate de dominarlos antes de comenzar:
+
+- **Integración de soluciones Power Platform:** capacidad de combinar Dataverse, Canvas Apps, Model-Driven Apps, Power Automate y Power BI en una arquitectura cohesionada donde cada componente tiene un rol claro. La integración no es solo conectar herramientas — es diseñar la interacción entre ellas para resolver un problema de negocio completo.
+- **Solución como unidad de ALM:** todos los componentes (tablas, apps, flujos, reportes) deben vivir dentro de una única solución con prefijo de publisher consistente (`sse_`). La solución es el artefacto que se mueve entre ambientes (DEV→TEST→PROD), no los componentes individuales.
+- **Diseño data-first:** el modelo de datos en Dataverse es el núcleo. Las aplicaciones y flujos son consumidores del dato — si el modelo es incorrecto, las capas superiores heredan sus problemas. Antes de crear la primera pantalla, el modelo debe estar validado.
+- **Separación de capas por audiencia:** Canvas App para usuarios operativos (móvil, simplicidad, velocidad); Model-Driven App para gestores y administradores (formularios complejos, vistas, BPF, auditoría); Power BI para tomadores de decisiones (analítica, tendencias, KPIs).
+- **Business Process Flow (BPF):** orquestador visual de etapas que guía al gestor a través del proceso de aprobación y ejecución. El BPF es la fuente de verdad del estado del proceso — no un campo de elección aislado.
+- **Security Roles y Row-Level Security:** el principio de mínimo privilegio aplica desde el inicio. Un usuario que crea solicitudes no debe poder aprobarlas. El modelo de seguridad debe diseñarse en paralelo con el modelo de datos, no al final.
+- **Power Automate como orquestador de procesos:** los flujos automatizan notificaciones, escalaciones, actualizaciones de estado y registros de auditoría — liberando a las apps de lógica que no pertenece a la UI. Un flujo bien diseñado tiene manejo de errores explícito (Scope Try/Catch).
+- **RLS en Power BI:** Row-Level Security garantiza que cada área solo vea sus propias métricas. En un dashboard empresarial, los KPIs sin RLS son un riesgo de confidencialidad.
+- **Connection References y Environment Variables:** los componentes configurables (conexiones a servicios, URLs, parámetros de ambiente) deben parametrizarse desde el inicio para que la solución sea desplegable en múltiples ambientes sin edición manual.
+
+#### 💼 Caso Real de Negocio
+
+**Empresa:** Constructora Andina S.A. — 450 empleados, 3 sedes (Bogotá, Medellín, Cali)  
+**Problema:** El proceso de solicitudes internas (materiales, soporte TI, mantenimiento, RRHH) se gestionaba por WhatsApp y correos. Sin trazabilidad, sin métricas de tiempo de respuesta, sin control de costos por área.  
+**Resultado sin sistema:** pérdida de solicitudes, retrasos en aprobaciones (promedio 5 días), imposible auditar gastos por proyecto.
+
+**Solución implementada con este proyecto:**
+- **Dataverse:** modelo centralizado con trazabilidad completa (quién solicitó, quién aprobó, tiempos, costos)
+- **Canvas App:** empleados crean solicitudes desde el celular en < 2 minutos
+- **Model-Driven App:** gestores aprueban, asignan y cierran solicitudes con visibilidad completa del proceso
+- **Power Automate:** notificaciones automáticas, escalación si no hay respuesta en 24h, actualización de estado en tiempo real
+- **Power BI:** dashboard ejecutivo con tiempo promedio de respuesta por tipo, costo real vs estimado por área, volumen por sede
+
+**Resultados a 3 meses:**
+- Tiempo de aprobación reducido de 5 días a 4 horas promedio
+- 100% de solicitudes trazables (0 perdidas vs 8% previo)
+- Ahorro del 18% en costos de mantenimiento por mejor planificación
+
+**Lección clave:** Una solución integrada de Power Platform puede reemplazar herramientas desconectadas y generar ROI medible en el primer trimestre de operación.
+
+#### ✅ Buenas Prácticas
+
+- **Diseñar el modelo de datos primero, nunca al revés.** El tiempo invertido en revisar el modelo antes de crear la primera pantalla siempre se recupera. Un cambio de relación a mitad del proyecto puede requerir recrear flujos y formularios completos.
+- **Usar un único publisher prefix en todos los componentes.** `sse_` en todos los campos, `sse_` en nombres de solución. Nunca mezclar prefijos dentro del mismo proyecto.
+- **Nombrar controles en Canvas App desde el inicio.** `btnEnviar`, `galSolicitudes`, `txtBusqueda`. Cambiar nombres a mitad del proyecto rompe las fórmulas Power Fx que los referencian.
+- **Crear el security model en paralelo con el data model.** Los Security Roles deben crearse antes de asignar a usuarios de prueba — no al final del proyecto.
+- **Parametrizar todo lo configurable.** Usar Environment Variables para URLs, correos de notificación, y flags de configuración. Nunca hardcodear valores que puedan cambiar entre ambientes.
+- **Versionar la solución en cada entregable.** `1.0.0.0` para la primera versión funcional, `1.1.0.0` para mejoras menores. El número de versión en la solución es el historial de cambios.
+- **Probar con datos reales desde el sprint 1.** Cargar datos representativos temprano revela problemas de performance y delegación antes de que sean costosos de resolver.
+- **Documentar decisiones arquitectónicas mientras las tomas.** Al final del proyecto, nadie recuerda por qué se eligió un tipo de relación específico o por qué un flujo tiene cierta estructura.
+
+#### ⚠️ Errores Comunes
+
+- **Crear tablas sin prefijo o con `new_`.** Genera conflictos al importar la solución en ambientes con otras soluciones instaladas. **Fix:** eliminar columnas `new_` y recrearlas con el prefijo correcto antes de comenzar a poblar datos.
+- **Olvidar activar auditoría antes de los primeros datos.** La auditoría de Dataverse no aplica retroactivamente — los registros creados antes de activarla no tienen historial. **Fix:** activar auditoría como paso 2, inmediatamente después de crear las tablas.
+- **Canvas App con 200+ fórmulas en OnStart.** Carga lenta, difícil de mantener, errores de delegación silenciosos. **Fix:** distribuir inicialización en OnVisible de cada pantalla y usar variables de colección solo cuando sean necesarias.
+- **Flujos de Power Automate sin manejo de errores.** Un flujo que falla silenciosamente es peor que uno que no existe. **Fix:** envolver toda la lógica principal en un Scope y agregar Scope de catch con registro del error y notificación al administrador.
+- **Security Roles demasiado permisivos ("por ahora").** "Por ahora" se convierte en permanente. **Fix:** comenzar con el mínimo privilegio y agregar permisos según se identifican necesidades, no al revés.
+- **Dashboard Power BI sin RLS desde el inicio.** Agregar RLS después de que el informe está en producción requiere rediseñar el modelo. **Fix:** configurar los roles de RLS antes de publicar el informe por primera vez.
+- **No usar Connection References en los flujos.** La solución queda atada a conexiones del ambiente de desarrollo y falla al importar. **Fix:** siempre crear Connection References para cada conector usado en flujos y configurarlas como parte del despliegue.
+- **Exportar como Unmanaged a producción.** Permite edición directa en PROD, generando desvíos entre ambientes. **Fix:** exportar siempre como Managed para producción — las personalizaciones solo van por el pipeline.
 
 #### ✅ Criterios de Validación Final
 

@@ -45,7 +45,7 @@ Diseñar y comunicar la arquitectura enterprise de Power Platform para organizac
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
-#### Actividad 30.1: Well-Architected Review para Power Platform
+#### Actividad 31.1: Well-Architected Review para Power Platform
 Completar el cuestionario oficial de Microsoft y documentar los hallazgos:
 
 **Pilar 1: Fiabilidad**
@@ -89,7 +89,7 @@ Preguntas clave:
 - ¿Proceso de change management definido?
 ```
 
-#### Actividad 30.2: Governance Framework Document
+#### Actividad 31.2: Governance Framework Document
 Crear `GOVERNANCE_FRAMEWORK.md` para el cliente:
 ```markdown
 # Power Platform Governance Framework — [Empresa]
@@ -131,7 +131,7 @@ Si un proyecto necesita una excepción a las políticas:
 - Apps sin owner identificado: 0
 ```
 
-#### Actividad 30.3: Capability Map
+#### Actividad 31.3: Capability Map
 Mapear las capacidades de negocio vs la cobertura de Power Platform:
 ```
 Dominio: Ventas y CRM
@@ -151,7 +151,7 @@ Dominio: RRHH
   Solicitudes de vacaciones  → Power Automate (✅)
 ```
 
-#### Actividad 30.4: Landing Zone como código
+#### Actividad 31.4: Landing Zone como código
 ```powershell
 # Script de aprovisionamiento de Landing Zone para nuevo proyecto
 # Crea el ambiente + DLP + grupos + roles base
@@ -235,7 +235,7 @@ Implementar y operar el Center of Excellence Starter Kit de Microsoft para obten
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
-#### Actividad 31.1: Instalar CoE Starter Kit
+#### Actividad 32.1: Instalar CoE Starter Kit
 1. Descargar el CoE Starter Kit desde aka.ms/CoEStarterKit
 2. Crear ambiente dedicado para el CoE: `TENANT-COE` (Producción, acceso solo a admins)
 3. Importar en orden:
@@ -250,7 +250,7 @@ Implementar y operar el Center of Excellence Starter Kit de Microsoft para obten
 
 5. Esperar la primera sincronización completa (24–48h para tenants grandes)
 
-#### Actividad 31.2: Power BI CoE Dashboard
+#### Actividad 32.2: Power BI CoE Dashboard
 1. Descargar el archivo .pbit del CoE Starter Kit
 2. Conectar a: el ambiente CoE Dataverse + M365 (opcional)
 3. Páginas del dashboard y qué muestran:
@@ -284,7 +284,7 @@ Heatmap: Connector × Environment
 Identificar: ¿Alguien usa un connector que debería estar bloqueado?
 ```
 
-#### Actividad 31.3: Compliance Process Automation
+#### Actividad 32.3: Compliance Process Automation
 El CoE incluye un flujo que contacta automáticamente a los owners:
 ```
 Trigger: Recurrente (cada 30 días)
@@ -299,7 +299,7 @@ Trigger: Recurrente (cada 30 días)
 4. Si responde "Transferir" → formulario para nuevo owner
 ```
 
-#### Actividad 31.4: Environment Request Process
+#### Actividad 32.4: Environment Request Process
 Crear formulario para que makers soliciten ambientes:
 
 1. Canvas App: `Solicitud de Ambiente`
@@ -313,7 +313,7 @@ Crear formulario para que makers soliciten ambientes:
      → Registrar en CoE inventory
    ```
 
-#### Actividad 31.5: Maker Nurture — Comunidad interna
+#### Actividad 32.5: Maker Nurture — Comunidad interna
 1. Teams Channel: `Power Platform Community`
 2. Canal mensual "App of the Month" — destacar el mejor proyecto de un citizen developer
 3. Training path en SharePoint con badges (usando Power Apps + Dataverse):
@@ -373,7 +373,7 @@ Diseñar estrategias de implementación para organizaciones multinacionales con 
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
-#### Actividad 32.1: Modelo Hub-and-Spoke
+#### Actividad 33.1: Modelo Hub-and-Spoke
 ```
 Tenant Corporativo (Hub)
 ├── Ambiente: CORP-DEV
@@ -400,7 +400,7 @@ Integración Hub ↔ Spoke:
 - No se usan conectores directos de Dataverse cross-tenant (limitación de plataforma)
 ```
 
-#### Actividad 32.2: Estrategia de residencia de datos GDPR
+#### Actividad 33.2: Estrategia de residencia de datos GDPR
 ```
 Escenario: empresa con clientes europeos y operaciones en Colombia
 
@@ -424,7 +424,7 @@ Documentación requerida:
 - Mapa de flujos de datos cross-border documentado
 ```
 
-#### Actividad 32.3: Managed Environments
+#### Actividad 33.3: Managed Environments
 1. Admin Center → seleccionar ambiente → habilitar Managed Environments
 2. Funcionalidades que se habilitan:
     - **Sharing limits:** limitar a cuántas personas se puede compartir una app (ej: máx 20, o solo dentro del tenant)
@@ -441,7 +441,7 @@ Documentación requerida:
    Weekly Digest: Activado para admin y arquitecto
    ```
 
-#### Actividad 32.4: Pipelines for Power Platform (nativo)
+#### Actividad 33.4: Pipelines for Power Platform (nativo)
 Alternativa a Azure DevOps para organizaciones sin DevOps avanzado:
 
 1. Admin Center → Pipelines → Nuevo pipeline
@@ -500,7 +500,7 @@ Diseñar e implementar arquitecturas de integración enterprise usando el stack 
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
-#### Actividad 33.1: Arquitectura Integration Hub
+#### Actividad 34.1: Arquitectura Integration Hub
 ```
                     [Power Platform]
                          |
@@ -514,7 +514,7 @@ Diseñar e implementar arquitecturas de integración enterprise usando el stack 
                                   SAP, Salesforce, ERP
 ```
 
-#### Actividad 33.2: Logic App para integración SAP
+#### Actividad 34.2: Logic App para integración SAP
 ```json
 {
   "definition": {
@@ -592,7 +592,7 @@ Diseñar e implementar arquitecturas de integración enterprise usando el stack 
 }
 ```
 
-#### Actividad 33.3: APIM — Portal de APIs para integradores
+#### Actividad 34.3: APIM — Portal de APIs para integradores
 1. Crear API en APIM desde spec OpenAPI de Dataverse
 2. Configurar productos:
     - **Producto Interno:** acceso sin límite para apps internas
@@ -622,7 +622,7 @@ Diseñar e implementar arquitecturas de integración enterprise usando el stack 
     - Configurar proceso de suscripción (automático vs aprobación manual)
     - Publicar documentación de cada API
 
-#### Actividad 33.4: Azure Durable Functions — Fan-out/Fan-in
+#### Actividad 34.4: Azure Durable Functions — Fan-out/Fan-in
 ```csharp
 // Orquestador: procesar 1000 clientes en paralelo (fan-out) y consolidar resultado (fan-in)
 [FunctionName("ProcesarClientesBatch")]
@@ -661,7 +661,7 @@ public static async Task<string> NotificarCliente(
 }
 ```
 
-#### Actividad 33.5: Event Grid para eventos de Dataverse
+#### Actividad 34.5: Event Grid para eventos de Dataverse
 1. Azure Portal → Event Grid → Suscripciones → Nueva
 2. Tipo de origen: Microsoft Dataverse
 3. Evento: `Microsoft.PowerApps.Dataverse.RecordCreated`
@@ -719,7 +719,7 @@ Diseñar arquitecturas de datos modernas usando Microsoft Fabric y Azure Synapse
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
-#### Actividad 34.1: Conectar Dataverse con Microsoft Fabric
+#### Actividad 35.1: Conectar Dataverse con Microsoft Fabric
 1. make.powerapps.com → Dataverse → Azure Synapse Link → Agregar enlace
 2. Seleccionar tablas: Account, Contact, sit_solicitud, sit_proyecto, sit_tarea
 3. Seleccionar: Microsoft Fabric (opción nueva vs Azure Synapse)
@@ -727,7 +727,7 @@ Diseñar arquitecturas de datos modernas usando Microsoft Fabric y Azure Synapse
 5. Las tablas se exportan como Delta Tables en el Lakehouse automáticamente
 6. Verificar en Fabric: Lakehouse → Tables → las tablas de Dataverse aparecen
 
-#### Actividad 34.2: Medallion Architecture en Fabric
+#### Actividad 35.2: Medallion Architecture en Fabric
 ```python
 # Notebook de PySpark — Bronze to Silver (limpieza y estandarización)
 # Bronze: datos crudos de Dataverse (tal como llegaron)
@@ -809,7 +809,7 @@ df_gold_solicitudes = (df_silver_sol
 df_gold_solicitudes.write.format("delta").mode("overwrite").save(".../gold_solicitudes_resumen")
 ```
 
-#### Actividad 34.3: Power BI con DirectLake
+#### Actividad 35.3: Power BI con DirectLake
 1. En Fabric → Power BI → Nuevo Dataset
 2. Seleccionar: DirectLake mode (lee del Gold layer del Lakehouse directamente)
 3. Seleccionar tablas Gold: `gold_solicitudes_resumen`, `gold_clientes`, `dim_calendar`
@@ -827,7 +827,7 @@ DIVIDE(
 )
 ```
 
-#### Actividad 34.4: Data Activator — alertas automáticas
+#### Actividad 35.4: Data Activator — alertas automáticas
 1. En Fabric → Real-Time Analytics → Data Activator
 2. Conectar al stream de Dataverse (vía Event Hubs)
 3. Crear regla de alerta:
@@ -890,7 +890,7 @@ Implementar una postura de seguridad Zero Trust para Power Platform: clasificaci
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
-#### Actividad 35.1: Clasificación de datos con Purview
+#### Actividad 36.1: Clasificación de datos con Purview
 1. Microsoft Purview → Data Catalog → Register source → Dynamics 365
 2. Scan: escanear automáticamente tablas de Dataverse y clasificar datos sensibles
 3. Clasificaciones detectadas:
@@ -905,7 +905,7 @@ Implementar una postura de seguridad Zero Trust para Power Platform: clasificaci
 
 5. Política de auto-etiquetado: cuando Purview detecta dato personal → aplicar label `Confidencial - Datos Personales`
 
-#### Actividad 35.2: Customer-Managed Keys
+#### Actividad 36.2: Customer-Managed Keys
 1. Azure Key Vault → Crear clave RSA-2048: `DataverseCMK`
 2. Configurar Key Rotation automática cada 12 meses
 3. Admin Center → Ambientes → Configuración → Encryption → Customer-managed key
@@ -913,7 +913,7 @@ Implementar una postura de seguridad Zero Trust para Power Platform: clasificaci
 5. La activación puede tardar horas — todos los datos del ambiente se re-cifran
 6. Implicación: si se revoca la clave, el ambiente queda completamente inaccesible
 
-#### Actividad 35.3: PIM para administradores de Power Platform
+#### Actividad 36.3: PIM para administradores de Power Platform
 1. Azure AD → Privileged Identity Management → Roles de Azure AD
 2. Configurar rol `Power Platform Administrator` como "Elegible" (no permanente)
 3. Configuración del rol:
@@ -928,7 +928,7 @@ Implementar una postura de seguridad Zero Trust para Power Platform: clasificaci
     - Admin tiene acceso por máx 8 horas
     - Todas las acciones quedan en el log de auditoría
 
-#### Actividad 35.4: Exportar logs a Microsoft Sentinel
+#### Actividad 36.4: Exportar logs a Microsoft Sentinel
 1. Admin Center → Diagnostic settings → Add diagnostic setting
 2. Logs a exportar:
     - PowerApps Activity
@@ -963,7 +963,7 @@ Implementar una postura de seguridad Zero Trust para Power Platform: clasificaci
     - "Descarga masiva de datos > 10,000 registros en 5 min" → Severidad Alta
     - "Acceso a PROD fuera de horario desde IP externa" → Severidad Media
 
-#### Actividad 35.5: Conditional Access para Power Platform
+#### Actividad 36.5: Conditional Access para Power Platform
 1. Azure AD → Conditional Access → Nueva política
 2. Nombre: `PP-Producción-MFA-Dispositivo-Cumplimiento`
 3. Usuarios: todos, excepto cuentas de break-glass
@@ -1025,7 +1025,7 @@ Integrar capacidades de Inteligencia Artificial en soluciones Power Platform usa
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
-#### Actividad 36.1: AI Builder — Document Processing para facturas
+#### Actividad 37.1: AI Builder — Document Processing para facturas
 1. make.powerapps.com → AI Builder → Construir → Procesamiento de documentos
 2. Tipo: Documentos estructurados (facturas tienen formato consistente)
 3. Cargar 5+ facturas de ejemplo como training data
@@ -1040,7 +1040,7 @@ Integrar capacidades de Inteligencia Artificial en soluciones Power Platform usa
 6. Probar con una factura nueva → verificar exactitud de extracción
 7. Publicar el modelo
 
-#### Actividad 36.2: Usar AI Builder en Power Automate
+#### Actividad 37.2: Usar AI Builder en Power Automate
 ```
 Flujo: Procesar facturas de email automáticamente
 
@@ -1066,7 +1066,7 @@ Condición: Confidence score >= 0.85 (alta confianza)
     Acción: Reply "Factura requiere revisión manual. Un agente la procesará."
 ```
 
-#### Actividad 36.3: Azure OpenAI en Power Automate
+#### Actividad 37.3: Azure OpenAI en Power Automate
 1. Crear recurso Azure OpenAI en Azure Portal
 2. Deploy model: `gpt-4` (para análisis complejo) o `gpt-4o-mini` (para respuestas rápidas)
 3. En Power Automate → Acción HTTP para llamar a Azure OpenAI:
@@ -1098,7 +1098,7 @@ Body:
 Set column sit_categoriaai = first(body('HTTP_OpenAI')?['choices'])?['message']?['content']
 ```
 
-#### Actividad 36.4: Prediction Model con AI Builder
+#### Actividad 37.4: Prediction Model con AI Builder
 1. AI Builder → Predicción → Nuevo modelo
 2. Tabla: Oportunidades de Dataverse
 3. Columna a predecir: `sit_ganada` (SI/NO — si la oportunidad se cerró ganada)
@@ -1121,7 +1121,7 @@ Set column sit_categoriaai = first(body('HTTP_OpenAI')?['choices'])?['message']?
    // varPrediccionGana.Probability → muestra "85% probabilidad de ganar"
    ```
 
-#### Actividad 36.5: Copilot Studio con Azure OpenAI Generative Answers
+#### Actividad 37.5: Copilot Studio con Azure OpenAI Generative Answers
 1. Copilot Studio → Configuración → Generative AI → Azure OpenAI
 2. Conectar con el recurso Azure OpenAI propio (no el servicio compartido de Microsoft)
 3. Ventaja: los datos de conversación NO se usan para entrenar el modelo de Microsoft
@@ -1186,7 +1186,7 @@ Desarrollar las competencias de liderazgo técnico necesarias para el rol de Sol
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
-#### Actividad 37.1: Plantilla de Discovery Workshop
+#### Actividad 38.1: Plantilla de Discovery Workshop
 ```markdown
 # Discovery Workshop Agenda — [Cliente] / [Proyecto]
 **Duración:** 2 días (8h c/u) | **Asistentes:** C-suite + IT + usuarios clave
@@ -1226,7 +1226,7 @@ Desarrollar las competencias de liderazgo técnico necesarias para el rol de Sol
 - Fecha de kick-off y entregables de la siguiente fase
 ```
 
-#### Actividad 37.2: Fit-Gap Analysis Document
+#### Actividad 38.2: Fit-Gap Analysis Document
 ```markdown
 # Fit-Gap Analysis — Sistema CRM
 
@@ -1246,7 +1246,7 @@ Desarrollar las competencias de liderazgo técnico necesarias para el rol de Sol
 - Won't Have: 1 (14%) — excluidos del scope
 ```
 
-#### Actividad 37.3: Plantilla de estimación
+#### Actividad 38.3: Plantilla de estimación
 ```markdown
 # Estimación — Proyecto CRM SIT (v1.2)
 
@@ -1283,7 +1283,7 @@ El item de integración SAP tiene la mayor incertidumbre (±50%).
 Si el API de SAP no tiene documentación actualizada, podría requerir +2 semanas adicionales.
 ```
 
-#### Actividad 37.4: Comunicar arquitectura al C-suite
+#### Actividad 38.4: Comunicar arquitectura al C-suite
 Regla de oro: **La audiencia ejecutiva no quiere detalles técnicos — quiere resultados de negocio**
 
 Mal ejemplo: "Implementaremos Dataverse con 12 tablas personalizadas, un plugin C# pre-operation para validación de SLA, PCF controls basados en React, y pipelines CI/CD en Azure DevOps con YAML."
@@ -1333,7 +1333,7 @@ Analizar y diseñar soluciones para los patrones más comunes de transformación
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
-#### Actividad 38.1: Caso — Modernización de sistema Access/Excel
+#### Actividad 39.1: Caso — Modernización de sistema Access/Excel
 ```markdown
 ## Escenario: Gestión de inventario en Excel con 15 años de historia
 
@@ -1366,7 +1366,7 @@ ROI:
 - Payback: ~2 años
 ```
 
-#### Actividad 38.2: Caso — RPA + Power Automate Hyperautomation
+#### Actividad 39.2: Caso — RPA + Power Automate Hyperautomation
 ```markdown
 ## Escenario: Procesamiento de solicitudes de crédito
 
@@ -1401,7 +1401,7 @@ Resultado esperado:
 - Tiempo analista por caso revisado: de 45 min a 10 min
 ```
 
-#### Actividad 38.3: Arquitectura de referencia — Portal de Autoservicio B2C
+#### Actividad 39.3: Arquitectura de referencia — Portal de Autoservicio B2C
 ```
 [Cliente externo]
     → Registro con Azure AD B2C
@@ -1497,7 +1497,7 @@ Dominar los dominios del examen PL-600 (Power Platform Solution Architect Expert
 - **Validar que la implementación sigue la arquitectura:** incluye: revisión de código (Solution Checker + revisión manual de plugins y flujos), revisión de seguridad (¿los Security Roles tienen mínimo privilegio?), y revisión de performance (¿las consultas usan filtros delegables? ¿los plugins son async cuando es posible?). El arquitecto firma que la implementación es conforme a la arquitectura antes de aprobar el despliegue a PROD.
 - **Gestión de calidad:** métricas de calidad para Power Platform: Solution Checker score (0 errores críticos), cobertura de unit tests para plugins C# (mínimo 80%), time-to-load de Canvas Apps (< 3 segundos en el happy path), y tasa de flujos fallidos (< 0.5% en 7 días). El examen puede preguntar qué herramienta usar para monitorear la salud del sistema post go-live.
 
-### 👨‍💻 Práctica con Casos de Estudio
+### 👨‍💻 Actividades Prácticas Paso a Paso
 
 #### Caso de estudio 1 — Pregunta típica PL-600
 ```
@@ -1547,7 +1547,7 @@ Offline Profile feature. SharePoint no tiene modo offline robusto. Power Pages
 es para usuarios externos. Model-Driven tiene soporte offline pero es más limitado.
 ```
 
-#### Actividad 39.1: Banco de preguntas por dominio
+#### Actividad 40.1: Banco de preguntas por dominio
 Practicar con las siguientes áreas donde el examen tiende a ser más difícil:
 
 **Área 1: Elegir entre Canvas y Model-Driven**
@@ -1572,7 +1572,7 @@ Practicar con las siguientes áreas donde el examen tiende a ser más difícil:
 - Logic Apps para integraciones enterprise con EDI, B2B, transformaciones complejas
 - Azure Functions para lógica de integración custom que requiere código
 
-#### Actividad 39.2: Recursos de preparación
+#### Actividad 40.2: Recursos de preparación
 ```markdown
 ## Plan de estudio PL-600 (8 semanas antes del examen)
 
@@ -1646,7 +1646,7 @@ Este módulo es puramente aplicado — no introduce conceptos nuevos. Demuestra 
 **Escenario del proyecto:**
 Empresa de servicios financieros con 1,500 empleados en Colombia y España. Necesita modernizar su sistema de gestión de créditos: desde la solicitud del cliente hasta el desembolso y seguimiento del crédito, con cumplimiento GDPR (España) y Ley 1581 (Colombia).
 
-### 👨‍💻 Plan de Entregables
+### 👨‍💻 Actividades Prácticas Paso a Paso
 
 #### Entregable 1: Architecture Blueprint (Semanas 1-2)
 ```markdown

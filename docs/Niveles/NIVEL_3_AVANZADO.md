@@ -2269,7 +2269,7 @@ Implementar portales externos con autenticación multitenant usando Azure AD B2C
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
-#### Actividad 28.1: Configurar Azure AD B2C
+#### Actividad 29.1: Configurar Azure AD B2C
 1. Azure Portal → Crear recurso → Azure AD B2C
 2. Crear nuevo tenant B2C: `sitconsultingb2c.onmicrosoft.com`
 3. User Flows → Nuevo flujo → Sign up and sign in
@@ -2282,7 +2282,7 @@ Implementar portales externos con autenticación multitenant usando Azure AD B2C
     - Redirect URI: `https://clientes-sit.powerappsportals.com/signin-oidc`
     - Permisos: `openid`, `offline_access`
 
-#### Actividad 28.2: Conectar B2C con Power Pages
+#### Actividad 29.2: Conectar B2C con Power Pages
 1. Power Pages Studio → Set up → Identity providers → Azure AD B2C
 2. Configurar:
     - Authority: `https://sitconsultingb2c.b2clogin.com/sitconsultingb2c.onmicrosoft.com/B2C_1_SignUpSignIn`
@@ -2307,7 +2307,7 @@ Implementar portales externos con autenticación multitenant usando Azure AD B2C
    {% endif %}
    ```
 
-#### Actividad 28.3: Web Template reutilizable
+#### Actividad 29.3: Web Template reutilizable
 1. Portal Management → Web Templates → Nuevo
 2. Nombre: `Layout Base Portal`
 3. Contenido:
@@ -2396,7 +2396,7 @@ Este módulo aplica y consolida todo el Nivel 3 en un proyecto cohesivo. Los con
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
-#### Actividad 29.1: Arquitectura del proyecto
+#### Actividad 30.1: Arquitectura del proyecto
 ```
 SIT_Foundation (base)
   ├── Catálogos comunes
@@ -2433,7 +2433,7 @@ SIT_Reports (Power BI)
   └── Dashboard KPIs soporte con RLS por región
 ```
 
-#### Actividad 29.2: Plugin — CasoPreCreate
+#### Actividad 30.2: Plugin — CasoPreCreate
 ```csharp
 // Valida que casos urgentes tengan descripción detallada (> 100 chars)
 // Auto-asigna número: TKT-YYYY-XXXXX
@@ -2453,7 +2453,7 @@ public class CasoPreCreatePlugin : IPlugin
 }
 ```
 
-#### Actividad 29.3: Pipeline CI/CD completo
+#### Actividad 30.3: Pipeline CI/CD completo
 1. Azure DevOps con 4 service connections (DEV/TEST/UAT/PROD)
 2. Pipeline CI: export → Solution Checker → pack managed → publish artifact
 3. Pipeline CD: deploy TEST (auto) → deploy UAT (aprobación) → deploy PROD (2 aprobadores)
@@ -2464,7 +2464,7 @@ public class CasoPreCreatePlugin : IPlugin
    feature/xxx → PRs hacia develop
    ```
 
-#### Actividad 29.4: Test end-to-end
+#### Actividad 30.4: Test end-to-end
 1. Cliente se registra en Power Pages (B2C)
 2. Crea caso desde el portal → Plugin asigna TKT-2026-00001
 3. Caso entra a queue correcta por Unified Routing
