@@ -79,3 +79,30 @@ All content is written in **Spanish**. When adding or editing documentation, mai
 ## Power Fx / Code Snippets Style
 
 Code blocks use JavaScript syntax highlighting (`js`) for Power Fx, `dax` for DAX measures, and `m` for Power Query M. Examples from NIVEL_1_BASICO.md demonstrate the expected format — annotate non-obvious lines with `//` comments inline.
+
+
+## Repository Purpose
+
+This repository contains a professional learning path for Microsoft Power Platform and Dynamics 365.
+
+The goal is to guide learners from beginner level to Solution Architect level through a structured and progressive curriculum aligned with Microsoft certifications and enterprise best practices.
+
+## Content Quality Standards
+
+When generating or modifying content:
+
+- Prioritize real-world business scenarios.
+- Prefer enterprise-grade practices over demo-only approaches.
+- Avoid duplicate content.
+- Maintain consistency with previous and future levels.
+- Ensure content remains aligned with Microsoft recommendations.
+
+## Before Making Changes
+
+Always:
+
+1. Review related modules.
+2. Check learning progression.
+3. Verify navigation consistency.
+4. Preserve module structure.
+5. Avoid introducing advanced topics prematurely.

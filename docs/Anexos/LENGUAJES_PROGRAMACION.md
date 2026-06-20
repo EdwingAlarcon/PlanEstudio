@@ -6,11 +6,11 @@
 ## Índice
 
 1. [Power Fx](#power-fx) — Canvas Apps y Model-Driven
-2. [JavaScript / TypeScript](#javascript--typescript) — Web Resources y PCF
+2. [JavaScript / TypeScript](#javascript-typescript) — Web Resources y PCF
 3. [C#](#c) — Plugins, Custom Workflow Activities
 4. [DAX](#dax) — Power BI
 5. [Power Query M](#power-query-m) — ETL en Power BI y Dataflows
-6. [T-SQL / FetchXML](#t-sql--fetchxml) — Consultas a Dataverse
+6. [T-SQL / FetchXML](#t-sql-fetchxml) — Consultas a Dataverse
 7. [Liquid](#liquid) — Power Pages
 8. [YAML](#yaml) — Pipelines CI/CD
 9. [JSON](#json) — Configuraciones y APIs
