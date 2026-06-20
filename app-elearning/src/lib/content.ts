@@ -103,8 +103,9 @@ function extractModulesFromContent(
   const [moduleStart, moduleEnd] = LEVEL_MODULE_RANGE[levelId];
   const modules: ModuleInfo[] = [];
 
-  // Match `### **Módulo N: Title**` or `### Módulo N: Title`
-  const modulePattern = /^###\s+\*?\*?Módulo\s+(\d+)[:\s]+(.+?)\*?\*?$/gm;
+  // Match Nivel 1 format: `### **Módulo N: Title**`
+  // Match Niveles 2-4 format: `## MÓDULO N: Title`
+  const modulePattern = /^#{2,3}\s+\*?\*?módulo\s+(\d+)[:\s]+(.+?)\*?\*?$/gim;
   // Filter to in-range matches BEFORE computing boundaries so that out-of-range
   // headings (e.g. Módulo 18 appearing inside a basico file) don't truncate the
   // preceding valid module's content.
