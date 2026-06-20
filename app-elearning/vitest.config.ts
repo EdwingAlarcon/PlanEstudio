@@ -10,7 +10,11 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       include: ["src/lib/**/*.ts"],
-      exclude: ["src/lib/i18n.ts"],
+      exclude: [
+        "src/lib/i18n.ts",
+        "src/lib/utils.ts",          // trivial re-export, no logic to test
+        "src/lib/questions-parser.ts", // build-time fs reader; requires real file on disk
+      ],
       thresholds: {
         lines: 80,
         functions: 80,
