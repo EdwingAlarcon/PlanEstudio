@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/layout/theme-provider";
-import { Sidebar } from "@/components/layout/sidebar";
-import { Topbar } from "@/components/layout/topbar";
+import { AppShell } from "@/components/layout/app-shell";
 import { ReadingProgress } from "@/components/layout/reading-progress";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -37,20 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </a>
 
           <ReadingProgress />
-
-          <div className="flex h-screen overflow-hidden">
-            <Sidebar />
-            <div className="flex flex-1 flex-col overflow-hidden">
-              <Topbar />
-              <main
-                id="main-content"
-                tabIndex={-1}
-                className="flex-1 overflow-y-auto p-4 lg:p-8 focus:outline-none"
-              >
-                {children}
-              </main>
-            </div>
-          </div>
+          <AppShell>{children}</AppShell>
         </ThemeProvider>
       </body>
     </html>

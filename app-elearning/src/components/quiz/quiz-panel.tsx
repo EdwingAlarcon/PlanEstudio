@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import type { Question } from "@/lib/quiz-engine";
 import {
   createSession,
@@ -15,21 +15,39 @@ import { useProgressStore } from "@/lib/progress";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle2, XCircle, RotateCcw } from "lucide-react";
+import { CheckCircle2, XCircle, RotateCcw, Clock } from "lucide-react";
 import { UI } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 interface QuizPanelProps {
   questions: Question[];
-  moduleId: number;
+  moduleId: string | number;
+  /** Seconds for timed mode (simulator). Omit for untimed module quizzes. */
+  timeLimit?: number;
+  /** Called when the session ends (time up or last question answered). */
+  onComplete?: (result: ReturnType<typeof calculateResult>) => void;
+  /** Whether to persist the score to ProgressStore. Default: true. */
+  saveScore?: boolean;
 }
 
 type PanelState = "idle" | "question" | "feedback" | "result";
 
-export function QuizPanel({ questions, moduleId }: QuizPanelProps) {
+function formatTime(seconds: number): string {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m}:${s.toString().padStart(2, "0")}`;
+}
+
+export function QuizPanel({
+  questions,
+  moduleId,
+  timeLimit,
+  onComplete,
+  saveScore = true,
+}: QuizPanelProps) {
   const [panelState, setPanelState] = useState<PanelState>("idle");
   const [session, setSession] = useState(() =>
-    createSession(questions, { moduleId, shuffle: false })
+    createSession(questions, { moduleId: String(moduleId), shuffle: false })
   );
   const [selected, setSelected] = useState<number[]>([]);
   const [lastAttempt, setLastAttempt] = useState<{
@@ -37,17 +55,52 @@ export function QuizPanel({ questions, moduleId }: QuizPanelProps) {
     selected: number[];
     isCorrect: boolean;
   } | null>(null);
+  const [secondsLeft, setSecondsLeft] = useState<number | null>(
+    timeLimit != null ? timeLimit : null
+  );
 
   const saveQuizScore = useProgressStore((s) => s.saveQuizScore);
+
+  // Refs so the timer effect always sees the current session/callbacks without
+  // needing them in the dep array (avoids stale closure issues).
+  const sessionRef = useRef(session);
+  sessionRef.current = session;
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
 
   const currentQuestion = getCurrentQuestion(session);
   const answeredCount = getAnsweredCount(session);
   const progressPct = Math.round((answeredCount / session.questions.length) * 100);
+  const isTimedMode = timeLimit != null;
+
+  // ── Countdown timer ──────────────────────────────────────────────────────────
+  useEffect(() => {
+    if (secondsLeft === null) return;
+    if (panelState === "result" || panelState === "idle") return;
+
+    if (secondsLeft <= 0) {
+      // Time's up — finish the session immediately
+      const finished = finishSession(sessionRef.current);
+      setSession(finished);
+      const result = calculateResult(finished);
+      if (saveScore) saveQuizScore(String(moduleId), result.percentage);
+      onCompleteRef.current?.(result);
+      setPanelState("result");
+      return;
+    }
+
+    const id = setTimeout(
+      () => setSecondsLeft((s) => (s !== null ? s - 1 : s)),
+      1000
+    );
+    return () => clearTimeout(id);
+  }, [secondsLeft, panelState]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const startQuiz = () => {
-    setSession(createSession(questions, { moduleId, shuffle: true }));
+    setSession(createSession(questions, { moduleId: String(moduleId), shuffle: true }));
     setSelected([]);
     setLastAttempt(null);
+    setSecondsLeft(timeLimit != null ? timeLimit : null);
     setPanelState("question");
   };
 
@@ -79,14 +132,18 @@ export function QuizPanel({ questions, moduleId }: QuizPanelProps) {
       const finished = finishSession(session);
       setSession(finished);
       const result = calculateResult(finished);
-      saveQuizScore(String(moduleId), result.percentage);
-      setPanelState("result");
+      if (saveScore) saveQuizScore(String(moduleId), result.percentage);
+      onCompleteRef.current?.(result);
+      // Only show built-in result screen when there's no external handler
+      if (!onCompleteRef.current) {
+        setPanelState("result");
+      }
     } else {
       setSelected([]);
       setLastAttempt(null);
       setPanelState("question");
     }
-  }, [session, moduleId, saveQuizScore]);
+  }, [session, moduleId, saveScore, saveQuizScore]);
 
   if (panelState === "idle") {
     return (
@@ -112,18 +169,34 @@ export function QuizPanel({ questions, moduleId }: QuizPanelProps) {
   if (!currentQuestion) return null;
 
   const isMulti = currentQuestion.type === "multi";
+  const timeIsLow = secondsLeft !== null && secondsLeft < 300; // < 5 min
 
   return (
     <div className="rounded-lg border space-y-0 overflow-hidden">
-      {/* Progress header */}
+      {/* Progress + timer header */}
       <div className="p-4 border-b bg-muted/30 space-y-2">
         <div className="flex justify-between text-xs text-muted-foreground">
           <span>{UI.quiz.questionOf(answeredCount + 1, session.questions.length)}</span>
-          {isMulti && (
-            <Badge variant="secondary" className="text-[10px]">
-              {UI.quiz.selectMultiple}
-            </Badge>
-          )}
+          <div className="flex items-center gap-2">
+            {isMulti && (
+              <Badge variant="secondary" className="text-[10px]">
+                {UI.quiz.selectMultiple}
+              </Badge>
+            )}
+            {secondsLeft !== null && (
+              <span
+                className={cn(
+                  "flex items-center gap-1 font-mono font-medium tabular-nums",
+                  timeIsLow ? "text-red-600 dark:text-red-400" : "text-muted-foreground"
+                )}
+                aria-live="polite"
+                aria-label={`Tiempo restante: ${formatTime(secondsLeft)}`}
+              >
+                <Clock className="h-3 w-3" aria-hidden />
+                {formatTime(secondsLeft)}
+              </span>
+            )}
+          </div>
         </div>
         <Progress value={progressPct} className="h-1.5" />
       </div>
@@ -217,12 +290,14 @@ export function QuizPanel({ questions, moduleId }: QuizPanelProps) {
 
 // ─── Result screen ────────────────────────────────────────────────────────────
 
-function QuizResult({
+export function QuizResult({
   result,
   onRetry,
+  extraActions,
 }: {
   result: ReturnType<typeof calculateResult>;
   onRetry: () => void;
+  extraActions?: React.ReactNode;
 }) {
   return (
     <div className="rounded-lg border p-6 text-center space-y-4">
@@ -238,10 +313,13 @@ function QuizResult({
         </p>
       </div>
       <p className="text-xs text-muted-foreground">{UI.quiz.passingScore}</p>
-      <Button variant="outline" onClick={onRetry}>
-        <RotateCcw className="h-4 w-4 mr-1.5" aria-hidden />
-        {UI.quiz.retry}
-      </Button>
+      <div className="flex justify-center gap-2 flex-wrap">
+        <Button variant="outline" onClick={onRetry}>
+          <RotateCcw className="h-4 w-4 mr-1.5" aria-hidden />
+          {UI.quiz.retry}
+        </Button>
+        {extraActions}
+      </div>
     </div>
   );
 }

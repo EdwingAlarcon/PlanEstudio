@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import type { Question } from "@/lib/quiz-engine";
-import { createSession, pickSimulatorQuestions } from "@/lib/quiz-engine";
+import { createSession, pickSimulatorQuestions, calculateResult } from "@/lib/quiz-engine";
 import { Button } from "@/components/ui/button";
-import { QuizPanel } from "./quiz-panel";
-import { PlayCircle } from "lucide-react";
+import { QuizPanel, QuizResult } from "./quiz-panel";
+import { PlayCircle, ArrowLeft } from "lucide-react";
 import { UI } from "@/lib/i18n";
 
 const SIMULATOR_QUESTIONS = 40;
@@ -23,6 +23,7 @@ export function SimulatorClient({ allQuestions }: SimulatorClientProps) {
   const [session, setSession] = useState(() =>
     createSession([], { timeLimit: SIMULATOR_TIME_SECONDS })
   );
+  const [simulatorResult, setSimulatorResult] = useState<ReturnType<typeof calculateResult> | null>(null);
 
   const startSimulator = () => {
     const filtered = selectedLevel === "all"
@@ -40,7 +41,18 @@ export function SimulatorClient({ allQuestions }: SimulatorClientProps) {
       shuffle: true,
     });
     setSession(newSession);
+    setSimulatorResult(null);
     setState("running");
+  };
+
+  const handleComplete = (result: ReturnType<typeof calculateResult>) => {
+    setSimulatorResult(result);
+    setState("finished");
+  };
+
+  const resetSimulator = () => {
+    setState("idle");
+    setSimulatorResult(null);
   };
 
   if (state === "idle") {
@@ -82,7 +94,26 @@ export function SimulatorClient({ allQuestions }: SimulatorClientProps) {
     return (
       <QuizPanel
         questions={session.questions}
-        moduleId={0}
+        moduleId="simulator"
+        timeLimit={SIMULATOR_TIME_SECONDS}
+        onComplete={handleComplete}
+        saveScore={false}
+      />
+    );
+  }
+
+  // state === "finished"
+  if (simulatorResult) {
+    return (
+      <QuizResult
+        result={simulatorResult}
+        onRetry={startSimulator}
+        extraActions={
+          <Button variant="ghost" onClick={resetSimulator}>
+            <ArrowLeft className="h-4 w-4 mr-1.5" aria-hidden />
+            Cambiar configuración
+          </Button>
+        }
       />
     );
   }

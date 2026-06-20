@@ -25,13 +25,34 @@ const RESOURCE_LINKS = [
   { href: "/recursos/banco-preguntas", label: UI.nav.questionBank, icon: FileText },
 ];
 
-export function Sidebar() {
+interface SidebarProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
   const pathname = usePathname();
   const getLevelProgress = useProgressStore((s) => s.getLevelProgress);
 
   return (
+    <>
+      {/* Mobile backdrop */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          onClick={onClose}
+          aria-hidden
+        />
+      )}
     <aside
-      className="hidden lg:flex flex-col w-64 border-r bg-background h-screen sticky top-0"
+      className={cn(
+        "flex flex-col w-64 border-r bg-background h-screen",
+        // Desktop: static in normal flow
+        "lg:static lg:translate-x-0 lg:z-auto",
+        // Mobile: fixed overlay, slide in/out
+        "fixed inset-y-0 left-0 z-50 transition-transform duration-200 lg:transition-none",
+        isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+      )}
       aria-label="Navegación principal"
     >
       {/* Logo */}
@@ -112,6 +133,7 @@ export function Sidebar() {
         ))}
       </ScrollArea>
     </aside>
+    </>
   );
 }
 

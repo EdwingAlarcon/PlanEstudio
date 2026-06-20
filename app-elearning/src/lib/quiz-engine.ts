@@ -20,7 +20,7 @@ export interface QuizAttempt {
 }
 
 export interface QuizSession {
-  moduleId: number | null; // null = simulator (mixed)
+  moduleId: string | number | null; // null = simulator (mixed), "simulator" = timed mixed
   questions: Question[];
   attempts: QuizAttempt[];
   startedAt: number;
@@ -71,7 +71,7 @@ export function evaluateAnswer(question: Question, selected: number[]): boolean 
 
 export function createSession(
   questions: Question[],
-  options: { moduleId?: number; timeLimit?: number; shuffle?: boolean } = {}
+  options: { moduleId?: string | number; timeLimit?: number; shuffle?: boolean } = {}
 ): QuizSession {
   const { moduleId = null, timeLimit = null, shuffle = true } = options;
   return {
