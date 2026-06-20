@@ -48,7 +48,7 @@ export default async function LevelPage({ params }: PageProps) {
       </div>
 
       {/* Level progress client component */}
-      <LevelProgressBanner levelId={levelData.id} totalModules={levelData.modules.length} />
+      <LevelProgressBanner levelId={levelData.id} />
 
       {/* Module list */}
       <section aria-labelledby="modules-heading">
@@ -99,6 +99,6 @@ export default async function LevelPage({ params }: PageProps) {
 
 import { LevelProgressBannerClient } from "@/components/modules/level-progress-banner";
 
-function LevelProgressBanner({ levelId, totalModules }: { levelId: LevelId; totalModules: number }) {
-  return <LevelProgressBannerClient levelId={levelId} totalModules={totalModules} />;
+function LevelProgressBanner({ levelId }: { levelId: LevelId }) {
+  return <LevelProgressBannerClient levelId={levelId} />;
 }

@@ -81,9 +81,11 @@ export const useProgressStore = create<ProgressState & ProgressActions>()(
       getLevelProgress: (levelId) => {
         const [start, end] = LEVEL_MODULE_RANGE[levelId];
         const total = getTotalModulesForLevel(levelId);
+        // Match by level prefix AND numeric range to prevent cross-level counting.
+        const prefix = `${levelId}-`;
         const completed = get().completedModules.filter((id) => {
-          // id format: "basico-1", "intermedio-9", etc.
-          const moduleNum = parseInt(id.split("-").pop() ?? "0", 10);
+          if (!id.startsWith(prefix)) return false;
+          const moduleNum = parseInt(id.slice(prefix.length), 10);
           return moduleNum >= start && moduleNum <= end;
         }).length;
         const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
@@ -91,9 +93,12 @@ export const useProgressStore = create<ProgressState & ProgressActions>()(
       },
 
       getOverallProgress: () => {
-        const total = 41;
+        const total = (Object.keys(LEVEL_MODULE_RANGE) as LevelId[]).reduce(
+          (sum, levelId) => sum + getTotalModulesForLevel(levelId),
+          0
+        );
         const completed = get().completedModules.length;
-        const percentage = Math.round((completed / total) * 100);
+        const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
         return { completed, total, percentage };
       },
 

@@ -12,6 +12,51 @@ interface RawQuestion {
   explanation: string;
 }
 
+// ─── String-aware brace extractor ────────────────────────────────────────────
+// Tracks single/double/template-literal quotes so that `{` and `}` inside
+// strings are not counted toward brace depth.
+
+function extractObjectLiteral(source: string, startMarker: string): string | null {
+  const startIdx = source.indexOf(startMarker);
+  if (startIdx === -1) return null;
+
+  // startMarker ends with `{`, so this index points at the opening brace.
+  const openBraceIdx = startIdx + startMarker.length - 1;
+  let depth = 0;
+  let inString: '"' | "'" | "`" | null = null;
+
+  for (let i = openBraceIdx; i < source.length; i++) {
+    const ch = source[i];
+
+    if (inString !== null) {
+      if (ch === "\\") {
+        i++; // skip escaped character
+        continue;
+      }
+      if (ch === inString) {
+        inString = null;
+      }
+      continue;
+    }
+
+    if (ch === '"' || ch === "'" || ch === "`") {
+      inString = ch;
+      continue;
+    }
+
+    if (ch === "{") {
+      depth++;
+    } else if (ch === "}") {
+      depth--;
+      if (depth === 0) {
+        return source.slice(openBraceIdx, i + 1);
+      }
+    }
+  }
+
+  return null; // unbalanced braces — never reached with valid JS
+}
+
 // ─── Parse MODULE_QUESTIONS from the IIFE JS at build time ───────────────────
 
 let _cache: Question[] | null = null;
@@ -24,35 +69,32 @@ export function getAllQuestions(): Question[] {
     "../docs/javascripts/evaluaciones-simulador.js"
   );
 
-  const source = fs.readFileSync(jsPath, "utf-8");
-
-  // Extract the MODULE_QUESTIONS literal by isolating it from the IIFE
-  // Pattern: `const MODULE_QUESTIONS = {` ... closing `};` before the simulator UI logic
-  const startMarker = "const MODULE_QUESTIONS = {";
-  const startIdx = source.indexOf(startMarker);
-  if (startIdx === -1) throw new Error("MODULE_QUESTIONS not found in evaluaciones-simulador.js");
-
-  // Find the closing brace at depth 0 after the opening
-  let depth = 0;
-  let endIdx = startIdx + startMarker.length - 1; // position of the first `{`
-  for (let i = endIdx; i < source.length; i++) {
-    if (source[i] === "{") depth++;
-    else if (source[i] === "}") {
-      depth--;
-      if (depth === 0) {
-        endIdx = i;
-        break;
-      }
-    }
+  let source: string;
+  try {
+    source = fs.readFileSync(jsPath, "utf-8");
+  } catch {
+    console.warn("[questions-parser] evaluaciones-simulador.js not found — quiz questions unavailable");
+    _cache = [];
+    return _cache;
   }
 
-  // Wrap in parentheses so we can JSON.parse-compatible evaluation via Function
-  const objectLiteral = source.slice(startIdx + "const MODULE_QUESTIONS = ".length, endIdx + 1);
+  const startMarker = "const MODULE_QUESTIONS = {";
+  const objectLiteral = extractObjectLiteral(source, startMarker);
+  if (!objectLiteral) {
+    console.warn("[questions-parser] MODULE_QUESTIONS not found in evaluaciones-simulador.js");
+    _cache = [];
+    return _cache;
+  }
 
-  // Use Function constructor to safely evaluate the JS object literal (no DOM access, no side effects)
-  const moduleQuestions: Record<number, RawQuestion[]> = new Function(
-    `"use strict"; return (${objectLiteral});`
-  )() as Record<number, RawQuestion[]>;
+  let moduleQuestions: Record<number, RawQuestion[]>;
+  try {
+    // eslint-disable-next-line no-new-func
+    moduleQuestions = new Function(`"use strict"; return (${objectLiteral});`)() as Record<number, RawQuestion[]>;
+  } catch (err) {
+    console.warn("[questions-parser] Failed to evaluate MODULE_QUESTIONS:", err);
+    _cache = [];
+    return _cache;
+  }
 
   const questions: Question[] = [];
 

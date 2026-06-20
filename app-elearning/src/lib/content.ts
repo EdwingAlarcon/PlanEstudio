@@ -105,15 +105,20 @@ function extractModulesFromContent(
 
   // Match `### **Módulo N: Title**` or `### Módulo N: Title`
   const modulePattern = /^###\s+\*?\*?Módulo\s+(\d+)[:\s]+(.+?)\*?\*?$/gm;
-  const matches = [...content.matchAll(modulePattern)];
+  // Filter to in-range matches BEFORE computing boundaries so that out-of-range
+  // headings (e.g. Módulo 18 appearing inside a basico file) don't truncate the
+  // preceding valid module's content.
+  const validMatches = [...content.matchAll(modulePattern)].filter((m) => {
+    const id = parseInt(m[1] ?? "0", 10);
+    return id >= moduleStart && id <= moduleEnd;
+  });
 
-  matches.forEach((match, idx) => {
+  validMatches.forEach((match, idx) => {
     const moduleId = parseInt(match[1] ?? "0", 10);
-    if (moduleId < moduleStart || moduleId > moduleEnd) return;
 
     const rawTitle = (match[2] ?? "").replace(/\*+/g, "").trim();
     const startPos = match.index ?? 0;
-    const endPos = idx + 1 < matches.length ? (matches[idx + 1]!.index ?? content.length) : content.length;
+    const endPos = idx + 1 < validMatches.length ? (validMatches[idx + 1]!.index ?? content.length) : content.length;
     const sectionContent = content.slice(startPos, endPos).trim();
 
     modules.push({
