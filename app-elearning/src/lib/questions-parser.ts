@@ -88,8 +88,7 @@ export function getAllQuestions(): Question[] {
 
   let moduleQuestions: Record<number, RawQuestion[]>;
   try {
-    // eslint-disable-next-line no-new-func
-    moduleQuestions = new Function(`"use strict"; return (${objectLiteral});`)() as Record<number, RawQuestion[]>;
+    moduleQuestions = new Function(`"use strict"; return (${objectLiteral});`)() as Record<number, RawQuestion[]>; // nosemgrep: javascript.lang.security.dangerous-use-of-new-function
   } catch (err) {
     console.warn("[questions-parser] Failed to evaluate MODULE_QUESTIONS:", err);
     _cache = [];

@@ -71,7 +71,6 @@ export function QuizPanel({
   const currentQuestion = getCurrentQuestion(session);
   const answeredCount = getAnsweredCount(session);
   const progressPct = Math.round((answeredCount / session.questions.length) * 100);
-  const isTimedMode = timeLimit != null;
 
   // ── Countdown timer ──────────────────────────────────────────────────────────
   useEffect(() => {
