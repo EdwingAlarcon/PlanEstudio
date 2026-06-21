@@ -224,6 +224,7 @@ export interface SearchDocument {
   title: string;
   levelId: string;
   moduleId: number;
+  slug: string;
   content: string;
 }
 
@@ -233,6 +234,7 @@ export function getSearchDocuments(): SearchDocument[] {
     title: m.title,
     levelId: m.levelId,
     moduleId: m.moduleId,
+    slug: m.slug,
     content: m.rawContent.replace(/^#{1,6}\s+/gm, "").slice(0, 2000),
   }));
 }

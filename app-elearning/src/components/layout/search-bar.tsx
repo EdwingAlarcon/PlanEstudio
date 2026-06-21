@@ -19,6 +19,7 @@ interface SearchHit {
   title: string;
   levelId: string;
   moduleId: number;
+  slug: string;
   snippet: string;
 }
 
@@ -80,6 +81,7 @@ export function SearchBar({ documents }: SearchBarProps) {
           title: doc.title,
           levelId: doc.levelId,
           moduleId: doc.moduleId,
+          slug: doc.slug,
           snippet,
         });
       }
@@ -112,7 +114,7 @@ export function SearchBar({ documents }: SearchBarProps) {
   const navigate = useCallback(
     (hit: SearchHit) => {
       setOpen(false);
-      router.push(`/nivel/${hit.levelId}/modulo/${hit.moduleId}`);
+      router.push(`/nivel/${hit.levelId}/modulo/${hit.slug}`);
     },
     [router]
   );

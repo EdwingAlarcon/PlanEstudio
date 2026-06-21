@@ -683,10 +683,13 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 - **Quick View Forms**: mostrar datos de registros relacionados directamente en el formulario principal sin cambiar de pantalla
 - **Subgrids**: mostrar y gestionar registros relacionados (1:N o N:N) embebidos dentro de un formulario Model-Driven
 - **UCI (Unified Client Interface)**: Experiencia moderna
+- **Modern App Designer** (2023+): nuevo diseñador visual unificado que reemplaza al editor clásico. Permite configurar páginas, tablas, formularios, vistas y navegación desde una sola interfaz. Es el editor predeterminado en todos los ambientes actuales — si las instrucciones mencionan el "diseñador clásico", selecciona **Switch to classic** en la barra superior si necesitas reproducir pasos del tutorial
 
 #### 👨‍💻 Actividades Prácticas
 
 ##### Práctica 4.1: Crear Primera Model-Driven App
+
+> **Nota de versión:** Las capturas y pasos a continuación describen el flujo general; la apariencia exacta puede variar según si tu ambiente usa el **Modern App Designer** (predeterminado desde 2023) o el diseñador clásico. La funcionalidad es equivalente en ambos.
 
 **Paso 1: Crear app desde solución**
 
@@ -699,7 +702,7 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 
 **Paso 2: Configurar Site Map**
 
-1. Click en "Edit site map"
+1. Click en "Edit site map" (diseñador clásico) o "Navigation" (Modern App Designer)
 2. Estructura:
    ```
    Área: Solicitudes
