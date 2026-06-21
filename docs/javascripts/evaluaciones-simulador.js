@@ -118,6 +118,126 @@
       ],
       answer: [0],
       explanation: "Per-app suele ser conveniente cuando un grupo acotado consume una o pocas aplicaciones premium concretas; per-user encaja mejor si la misma persona utilizará varias apps o flujos premium. El tipo de ambiente no determina por sí solo el modelo de licenciamiento, y la licencia no reemplaza un buen diseño."
+    },
+    {
+      type: "single",
+      prompt: "Una empresa logística recibe cientos de albaranes en papel al día. El equipo quiere automatizar la extracción de datos sin entrenar un modelo propio. ¿Qué capacidad de AI Builder resuelve este caso directamente?",
+      options: [
+        "Modelo personalizado de clasificación de texto entrenado con datos propios",
+        "Modelo prebuilt de Document Processing (extracción de formularios estructurados)",
+        "Modelo de detección de objetos entrenado con imágenes de albaranes",
+        "Business Card Reader aplicado a documentos PDF"
+      ],
+      answer: [1],
+      explanation: "Document Processing (Form Processing) es el modelo prebuilt diseñado para extraer campos de formularios estructurados y repetibles como facturas, albaranes y contratos. No requiere entrenamiento propio cuando el layout es consistente. Business Card Reader extrae datos de tarjetas de presentación, no de documentos de negocio; y el modelo de detección de objetos trabaja con imágenes visuales, no con campos de texto en documentos."
+    },
+    {
+      type: "single",
+      prompt: "Un analista quiere agregar IA a un flujo de Power Automate para clasificar automáticamente los correos entrantes de soporte en categorías como 'Facturación', 'Técnico' y 'Ventas'. ¿Qué modelo de AI Builder es el más indicado?",
+      options: [
+        "Object Detection, porque analiza el contenido visual del correo",
+        "Sentiment Analysis, porque determina si el cliente está satisfecho",
+        "Text Classification, porque asigna el texto libre a categorías definidas por el negocio",
+        "Language Detection, porque identifica el idioma del correo antes de clasificarlo"
+      ],
+      answer: [2],
+      explanation: "Text Classification es el modelo de AI Builder diseñado para categorizar texto libre en etiquetas predefinidas del negocio, exactamente el caso de clasificar correos por tema. Sentiment Analysis devuelve positivo/negativo/neutral, no categorías de negocio. Object Detection trabaja con imágenes. Language Detection identifica el idioma pero no clasifica el contenido temáticamente."
+    },
+    {
+      type: "multi",
+      prompt: "Un equipo quiere usar AI Builder en producción para procesar documentos. ¿Qué DOS afirmaciones sobre los modelos prebuilt de AI Builder son correctas?",
+      options: [
+        "Los modelos prebuilt están listos para usar sin datos de entrenamiento propios",
+        "Los modelos prebuilt consumen AI Builder Credits cada vez que procesan una inferencia",
+        "Los modelos prebuilt son gratuitos e ilimitados en todos los planes de Microsoft 365",
+        "Para Document Processing prebuilt se necesita siempre un conjunto de datos etiquetados por el usuario"
+      ],
+      answer: [0, 1],
+      explanation: "Los modelos prebuilt de AI Builder no requieren entrenamiento propio — están listos desde el catálogo — y sí consumen AI Builder Credits con cada inferencia. Los créditos no son gratuitos ni ilimitados: se incluyen en ciertas licencias Premium o se adquieren por separado. Los modelos custom (no prebuilt) son los que sí requieren datos etiquetados del usuario para entrenamiento."
+    },
+    {
+      type: "single",
+      prompt: "El equipo de RR.HH. quiere que su Canvas App pueda leer tarjetas de presentación físicas que los candidatos entregan. ¿Qué componente de AI Builder deben agregar a la app?",
+      options: [
+        "Acción 'AI Builder — Analyze sentiment' en un flujo de Power Automate",
+        "Control 'Business card reader' nativo de AI Builder en el lienzo de Canvas Apps",
+        "Conector premium de Azure Cognitive Services configurado manualmente",
+        "Modelo custom de extracción de entidades entrenado con 200 imágenes de tarjetas"
+      ],
+      answer: [1],
+      explanation: "AI Builder ofrece un control nativo 'Business card reader' que se inserta directamente en una Canvas App sin código y sin configuración manual de Azure. Usar Azure Cognitive Services directamente requiere configuración extra y no es la ruta de bajo código. Un modelo custom es innecesario cuando existe el modelo prebuilt específico para tarjetas de presentación."
+    },
+    {
+      type: "single",
+      prompt: "Un responsable de IT pregunta dónde monitorear cuántos AI Builder Credits quedan disponibles en el tenant. ¿Cuál es el lugar correcto?",
+      options: [
+        "Power Apps Studio, en la sección de configuración de la app activa",
+        "Power Platform Admin Center, en la sección de capacidad o licencias del tenant",
+        "Azure Portal, en la sección de facturación de Cognitive Services",
+        "Power Automate, en el historial de ejecuciones del flujo"
+      ],
+      answer: [1],
+      explanation: "El consumo y saldo de AI Builder Credits se administra desde Power Platform Admin Center en la sección de capacidad del tenant. No se gestiona desde Azure Portal (los créditos de AI Builder son independientes de Azure Cognitive Services facturado directamente) ni desde la interfaz de una app o flujo individual."
+    },
+    {
+      type: "single",
+      prompt: "Un cliente quiere crear un portal web donde ciudadanos externos puedan registrar solicitudes de permisos municipales, consultar el estado de su trámite y adjuntar documentos, sin tener que ir en persona. ¿Qué herramienta de Power Platform es la más adecuada?",
+      options: [
+        "Canvas App compartida públicamente con acceso anónimo",
+        "Model-Driven App accesible desde internet sin autenticación",
+        "Power Pages, diseñado para experiencias web de usuarios externos sobre Dataverse",
+        "Power BI Embedded en un sitio web público"
+      ],
+      answer: [2],
+      explanation: "Power Pages es la herramienta de Power Platform diseñada específicamente para crear sitios web externos con usuarios fuera de la organización. Permite registro y login de ciudadanos (Azure AD B2C, redes sociales o cuenta local), formularios sobre Dataverse y vistas de estado del trámite. Canvas Apps no está diseñada para portales web públicos, Model-Driven requiere licencias internas, y Power BI no es una plataforma transaccional."
+    },
+    {
+      type: "single",
+      prompt: "Un administrador crea un portal de Power Pages y lo publica, pero los usuarios externos reportan que no pueden ver ni enviar ningún formulario — reciben error 403. ¿Cuál es la causa más probable?",
+      options: [
+        "El sitio está en modo de mantenimiento porque no se ha asignado un dominio personalizado",
+        "No se han configurado Table Permissions para las tablas de Dataverse que usa el portal",
+        "El portal necesita una licencia Azure AD B2C adicional para mostrar formularios",
+        "El archivo CSS del tema tiene errores que bloquean el renderizado"
+      ],
+      answer: [1],
+      explanation: "En Power Pages, por defecto todo el acceso a tablas de Dataverse está bloqueado. Es obligatorio configurar Table Permissions y asignarlas a los Web Roles correspondientes (como Anonymous User o Authenticated User). Sin Table Permissions, los formularios y vistas devuelven 403. El dominio personalizado no afecta los permisos de datos, y el CSS tampoco genera errores 403."
+    },
+    {
+      type: "multi",
+      prompt: "Un arquitecto define los criterios de diseño para un nuevo portal de Power Pages. ¿Qué DOS afirmaciones sobre Power Pages son correctas?",
+      options: [
+        "Power Pages permite autenticación con proveedores externos como Azure AD B2C, Google y Facebook",
+        "Power Pages reemplaza a Canvas Apps para usuarios internos de la organización",
+        "Los datos del portal provienen de tablas de Dataverse, configuradas mediante Table Permissions y Web Roles",
+        "Cada ambiente de Power Platform puede tener un número ilimitado de portales de producción sin costo adicional"
+      ],
+      answer: [0, 2],
+      explanation: "Power Pages soporta proveedores de identidad externos (Azure AD B2C, Google, Facebook, LinkedIn y cuenta local) y sus datos provienen de Dataverse controlados mediante Table Permissions y Web Roles. Power Pages no reemplaza a Canvas Apps para usuarios internos — son herramientas complementarias con audiencias distintas. Además, los portales de producción tienen costos y límites de capacidad por ambiente."
+    },
+    {
+      type: "single",
+      prompt: "Un desarrollador necesita implementar lógica condicional dentro de una página de Power Pages para mostrar un bloque de HTML solo si el usuario tiene el rol 'Proveedor Aprobado'. ¿Qué tecnología nativa de Power Pages usa para esto?",
+      options: [
+        "Power Fx directamente en la plantilla de la página web",
+        "Liquid templates, que permiten condicionales y bucles dentro de páginas del portal",
+        "JavaScript inline ejecutado en el servidor de Power Pages",
+        "Un plug-in de Dataverse que modifica el HTML antes de enviarlo al navegador"
+      ],
+      answer: [1],
+      explanation: "Liquid es el lenguaje de plantillas nativo de Power Pages para lógica de presentación en el servidor: condicionales ({% if %}), bucles ({% for %}) y acceso a datos del usuario o del portal. Power Fx no está disponible en páginas del portal, el JavaScript en Power Pages se ejecuta en el cliente (no en el servidor), y los plug-ins de Dataverse no manipulan HTML del portal."
+    },
+    {
+      type: "single",
+      prompt: "¿Cuál es la diferencia principal entre Power Pages y una Canvas App al evaluar qué usar para clientes externos?",
+      options: [
+        "Power Pages requiere licencia de Microsoft 365 para cada usuario externo; Canvas App no",
+        "Power Pages está diseñado para usuarios externos sin licencia de Microsoft; Canvas Apps está diseñado para usuarios internos con licencia",
+        "Canvas Apps soporta más tablas de Dataverse simultáneamente que Power Pages",
+        "Power Pages solo funciona en dispositivos móviles; Canvas Apps funciona en web y móvil"
+      ],
+      answer: [1],
+      explanation: "La diferencia fundamental de audiencia: Power Pages atiende a usuarios externos (ciudadanos, clientes, socios) que no tienen ni necesitan licencia de Microsoft 365, autenticándose con cuentas externas. Canvas Apps está pensada para usuarios internos que tienen licencia de Power Platform. Esta distinción determina cuál herramienta elegir según quién consume la experiencia."
     }
   ],
   2: [
