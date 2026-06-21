@@ -341,9 +341,10 @@ stages:
                     PublishWorkflows: true
                     OverwriteUnmanagedCustomizations: false
 
-          postRouteHook:
-            steps:
-              - script: echo "Deployment to PROD completed successfully at $(date)"
+          on:
+            success:
+              steps:
+                - script: echo "Deployment to PROD completed successfully at $(date)"
 ```
 
 ---
@@ -566,8 +567,10 @@ pac auth create --url $EnvironmentUrl --kind SPN `
     --clientSecret $env:CLIENT_SECRET
 
 # Actualizar Connection Reference via API
+# Obtener token: az account get-access-token --resource https://$EnvironmentUrl
+$token = (az account get-access-token --resource "https://$EnvironmentUrl" | ConvertFrom-Json).accessToken
 $headers = @{
-    "Authorization" = "Bearer $(pac auth token)"
+    "Authorization" = "Bearer $token"
     "Content-Type" = "application/json"
 }
 

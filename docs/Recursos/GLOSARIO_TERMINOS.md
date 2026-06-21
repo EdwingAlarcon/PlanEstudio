@@ -11,9 +11,11 @@
 
 **APIM (Azure API Management)** — Gateway de APIs de Azure. Centraliza la exposición de APIs REST con autenticación, rate limiting, transformación de request/response y portal de desarrolladores.
 
-**App Registration** — Registro de una aplicación en Azure Active Directory que le otorga una identidad (Client ID + Secret) para autenticarse con servicios de Microsoft. Usado para Service Principals en pipelines CI/CD.
+**App Registration** — Registro de una aplicación en Microsoft Entra ID (antes Azure Active Directory) que le otorga una identidad (Client ID + Secret) para autenticarse con servicios de Microsoft. Usado para Service Principals en pipelines CI/CD.
 
-**Azure AD (Active Directory)** — Servicio de identidad y acceso en la nube de Microsoft. Gestiona usuarios, grupos, permisos y autenticación para todos los servicios de Microsoft 365 y Azure.
+**Azure AD (Active Directory)** — Nombre anterior de Microsoft Entra ID. Servicio de identidad y acceso en la nube de Microsoft. Gestiona usuarios, grupos, permisos y autenticación para todos los servicios de Microsoft 365 y Azure. Renombrado a Microsoft Entra ID en julio de 2023.
+
+**Microsoft Entra ID** — Nombre actual (desde julio 2023) del servicio de identidad de Microsoft, antes conocido como Azure Active Directory (Azure AD). Ver **Azure AD**.
 
 **Azure AD B2C** — Variante de Azure AD orientada a consumidores externos. Permite registro y login de usuarios que no tienen cuentas en el directorio corporativo.
 
@@ -25,7 +27,7 @@
 
 ## B
 
-**BPF (Business Process Flow)** — Fluía de proceso de negocio visual en Dynamics 365 y Power Apps. Guía al usuario a través de etapas secuenciales en un formulario Model-Driven.
+**BPF (Business Process Flow)** — Flujo de proceso de negocio visual en Dynamics 365 y Power Apps. Guía al usuario a través de etapas secuenciales en un formulario Model-Driven.
 
 **Business Rule** — Regla de negocio sin código configurable en Dataverse. Se ejecuta en el cliente (formulario) y/o en el servidor, permitiendo validaciones y cambios de valor automáticos.
 
@@ -36,6 +38,8 @@
 ## C
 
 **Canvas App** — Tipo de aplicación Power Apps con diseño libre (lienzo). El desarrollador controla completamente la posición y aspecto de cada elemento. Ideal para experiencias muy personalizadas o móviles.
+
+**Copilot Studio** — Plataforma de Microsoft para crear agentes conversacionales e IA generativa empresarial, sin necesidad de código. Antes conocido como Power Virtual Agents (PVA). Permite diseñar topics, integrar Knowledge Sources y conectar con sistemas externos vía Power Automate o llamadas HTTP. El desarrollador controla completamente la posición y aspecto de cada elemento. Ideal para experiencias muy personalizadas o móviles.
 
 **CASB (Cloud Access Security Broker)** — Microsoft Defender for Cloud Apps. Proporciona visibilidad sobre el uso de aplicaciones en la nube, detecta shadow IT y aplica políticas de seguridad.
 

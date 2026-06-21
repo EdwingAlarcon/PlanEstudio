@@ -944,12 +944,12 @@
       prompt: "Un tema del bot debe capturar la prioridad del incidente con valores válidos Alta, Media o Baja y validar opciones cerradas. ¿Qué tipo de entidad se ajusta mejor?",
       options: [
         "Pattern entity",
-        "Enum entity",
+        "Closed list entity (Lista cerrada)",
         "Custom table en Dataverse obligatoria",
         "Variable $number"
       ],
       answer: [1],
-      explanation: "Una Enum entity es apropiada cuando el usuario debe elegir entre un conjunto finito de valores reconocibles. Pattern se usa más para formatos, y una variable numérica o una tabla no resuelven por sí mismas la validación conversacional."
+      explanation: "Una Closed list entity (Lista cerrada) es la opción correcta cuando el usuario debe elegir entre un conjunto finito de valores definidos (Alta, Media, Baja). Es el término oficial en Copilot Studio. Pattern entity se usa para formatos como fechas o códigos, y las otras opciones no ofrecen validación conversacional integrada."
     },
     {
       type: "single",

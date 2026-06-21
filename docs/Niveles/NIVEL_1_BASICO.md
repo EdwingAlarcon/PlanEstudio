@@ -80,7 +80,7 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 
 1. Acceder a https://make.powerapps.com
 2. Navegar cada sección del menú lateral:
-    - Home, Create, Learn, Apps, Tables, Flows, Chatbots, AI Hub
+    - Home, Create, Learn, Apps, Tables, Flows, Copilots (Copilot Studio), AI Hub
 
 3. Identificar conectores disponibles (Connectors > Premium vs Standard)
 4. Revisar plantillas predefinidas (Templates)
@@ -1492,7 +1492,7 @@ CALCULATE(
 
 3. Crear role "Departamento":
    ```dax
-   [Solicitante Departamento] = USERNAME()
+   [Solicitante Departamento] = USERPRINCIPALNAME()
    ```
 
 4. Publicar
@@ -1906,7 +1906,7 @@ Filter(
 - Centralizar cálculos complejos en una Collection
 - Usar Component + Output properties para reutilizar lógica
 - Documentar fórmulas no obvias
-- Named formulas (variables globales con Set en OnStart)
+- Named Formulas (declaradas en `App.Formulas`, **no** en `App.OnStart`): son reactivas, lazy y se recalculan automáticamente — a diferencia de variables globales con `Set()` en `OnStart` que son imperativas y se calculan una sola vez al iniciar
 
 **Debugging**:
 

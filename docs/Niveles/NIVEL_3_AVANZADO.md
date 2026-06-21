@@ -768,7 +768,7 @@ function crearCasoPortal(asunto, descripcion) {
     "title": asunto,
     "description": descripcion,
     "caseorigincode": 3,  // Web
-    "customerid_contact@odata.bind": "/contacts(" + _spPageContextInfo.userId + ")"
+    "customerid_contact@odata.bind": "/contacts(" + _loggedInUserId + ")"
   });
   
   fetch('/api/data/v9.1/incidents', {
@@ -831,7 +831,7 @@ Implementar agentes conversacionales de producción con SSO integrado a Azure AD
 - **Knowledge Sources:** fuentes de conocimiento que el agente consulta para generar respuestas con Generative Answers. Tipos soportados: sitios SharePoint (con sus documentos y páginas), URLs de sitios web públicos (el bot las indexa automáticamente), archivos subidos directamente, y la Knowledge Base de D365 Customer Service. Cada fuente puede tener instrucciones de uso específicas y un nivel de confianza mínimo para mostrar la respuesta.
 - **Grounding:** proceso de anclar las respuestas generativas del LLM a fuentes de información específicas y verificables en lugar de responder desde el conocimiento general del modelo. Un agente "anclado" cita la fuente de su respuesta y rechaza responder sobre temas no cubiertos en sus Knowledge Sources. Evita alucinaciones — el riesgo de que el modelo invente procedimientos, nombres o datos de contacto inexistentes.
 - **SSO (Single Sign-On):** integración de Copilot Studio con Azure AD para que el bot reconozca al usuario autenticado en el canal (Teams, portal) sin pedirle credenciales adicionales. El bot recibe el token del usuario y puede usarlo para llamar APIs en su nombre (On-Behalf-Of). Resultado: el bot saluda al usuario por nombre y consulta sus datos específicos desde el primer mensaje.
-- **Azure AD Authentication en Copilot Studio:** configuración de OAuth 2.0 con Azure AD para que el agente pueda hacer llamadas autenticadas a APIs que requieren identidad del usuario. El flujo OBO (On-Behalf-Of) permite que el bot, con el token del usuario, llame a APIs de Dataverse o Microsoft Graph como si fuera el usuario mismo. Se configura en Copilot Studio → Configuración → Seguridad → Autenticación → Azure Active Directory v2.
+- **Microsoft Entra ID Authentication en Copilot Studio:** configuración de OAuth 2.0 con Microsoft Entra ID (antes Azure Active Directory) para que el agente pueda hacer llamadas autenticadas a APIs que requieren identidad del usuario. El flujo OBO (On-Behalf-Of) permite que el bot, con el token del usuario, llame a APIs de Dataverse o Microsoft Graph como si fuera el usuario mismo. Se configura en Copilot Studio → Configuración → Seguridad → Autenticación → Microsoft Entra ID.
 - **Adaptive Cards:** formato de tarjetas interactivas de Microsoft Teams y otros canales que permite mostrar información estructurada con imágenes, tablas, FactSets y botones accionables. En Copilot Studio se insertan en los nodos de mensaje con el editor visual o importando JSON. Las variables del topic se referencian con la sintaxis `${Topic.NombreVariable}`. Los botones pueden ejecutar acciones (Submit, OpenUrl) que el topic puede manejar.
 - **Multi-turn conversations:** capacidad del agente de mantener contexto a lo largo de múltiples intercambios en la misma sesión. Las variables declaradas en un topic persisten durante toda la conversación mientras el topic esté activo. Permite implementar wizards de múltiples preguntas donde cada respuesta del usuario enriquece el contexto para la siguiente acción — por ejemplo, recopilar tipo de solicitud, prioridad y descripción antes de crearla en Dataverse.
 - **Escalamiento a Omnichannel:** acción nativa de Copilot Studio que transfiere la conversación activa a un agente humano en D365 Customer Service Omnichannel, incluyendo el historial completo de la conversación como contexto. El agente humano recibe la transcripción y puede continuar desde donde el bot dejó. Se configura en Omnichannel Admin Center → Canales → Bot → seleccionar el agente de Copilot Studio.
@@ -848,7 +848,7 @@ Implementar agentes conversacionales de producción con SSO integrado a Azure AD
     - Crear client secret
 
 3. En Copilot Studio → Configuración → Seguridad → Autenticación
-4. Seleccionar: Azure Active Directory v2
+4. Seleccionar: Microsoft Entra ID (opción "Azure Active Directory v2" en versiones anteriores de la UI)
 5. Ingresar: Client ID, Client Secret, Tenant ID
 6. Alcances: `profile openid`
 7. Guardar y probar: el bot debe salud al usuario por nombre sin pedirle que se loguee
@@ -1347,13 +1347,15 @@ public class SolicitudProcessor
         {
             // El mensaje de Dataverse Service Bus contiene el RemoteExecutionContext
             var body = message.Body.ToString();
-            var executionContext = JsonSerializer.Deserialize<DataverseExecutionContext>(body);
+            // El SDK de Dataverse usa RemoteExecutionContext para mensajes de Service Bus
+            var executionContext = JsonSerializer.Deserialize<RemoteExecutionContext>(body);
 
             var solicitudId = executionContext?.PrimaryEntityId;
-            var solicitudName = executionContext?.InputParameters?
-                .FirstOrDefault(p => p.Key == "Target").Value?
-                .Attributes?
-                .FirstOrDefault(a => a.Key == "sit_nombre").Value?.ToString();
+            var solicitudName = executionContext?.InputParameters
+                .Contains("Target") == true
+                ? ((Entity)executionContext.InputParameters["Target"])
+                    .GetAttributeValue<string>("sit_nombre")
+                : null;
 
             _logger.LogInformation("Solicitud recibida: {Id} - {Name}", solicitudId, solicitudName);
 
@@ -1577,20 +1579,26 @@ public class MiPlugin : IPlugin
 ```csharp
 public class ExternalApiService
 {
+    // Thread-safe: los plugins de Dataverse ejecutan en instancias concurrentes del sandbox.
+    // Usar Interlocked para el contador y lock para la fecha evita race conditions.
     private static int _failureCount = 0;
     private static DateTime _lastFailureTime = DateTime.MinValue;
+    private static readonly object _lock = new object();
     private const int FailureThreshold = 3;
     private static readonly TimeSpan RecoveryTime = TimeSpan.FromMinutes(5);
 
     public string CallExternalApi(string url, ITracingService tracer)
     {
         // Circuit Breaker: si hay muchos fallos recientes, no intentar
-        if (_failureCount >= FailureThreshold && 
-            DateTime.UtcNow - _lastFailureTime < RecoveryTime)
+        lock (_lock)
         {
-            tracer.Trace("Circuit breaker OPEN. Skipping external call.");
-            throw new InvalidPluginExecutionException(
-                "El servicio externo está temporalmente no disponible. Intente nuevamente en 5 minutos.");
+            if (_failureCount >= FailureThreshold &&
+                DateTime.UtcNow - _lastFailureTime < RecoveryTime)
+            {
+                tracer.Trace("Circuit breaker OPEN. Skipping external call.");
+                throw new InvalidPluginExecutionException(
+                    "El servicio externo está temporalmente no disponible. Intente nuevamente en 5 minutos.");
+            }
         }
 
         try
@@ -1598,15 +1606,21 @@ public class ExternalApiService
             using var client = new System.Net.Http.HttpClient();
             client.Timeout = TimeSpan.FromSeconds(10);
             var result = client.GetStringAsync(url).Result;
-            
-            // Éxito — resetear contador
-            _failureCount = 0;
+
+            // Éxito — resetear contador de forma thread-safe
+            lock (_lock)
+            {
+                _failureCount = 0;
+            }
             return result;
         }
         catch (Exception ex)
         {
-            _failureCount++;
-            _lastFailureTime = DateTime.UtcNow;
+            lock (_lock)
+            {
+                _failureCount++;
+                _lastFailureTime = DateTime.UtcNow;
+            }
             tracer.Trace("External API failure #{0}: {1}", _failureCount, ex.Message);
             throw;
         }

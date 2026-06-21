@@ -336,7 +336,7 @@ Con Generative Orchestration:
    Crear Client Secret
 
 2. Copilot Studio → Settings → Security → Authentication
-   Mode: Azure Active Directory v2 (Manual)
+   Mode: Microsoft Entra ID (Azure Active Directory v2 — nombre actual: Entra ID)
    Client ID: [ID de la App Registration]
    Client Secret: [secreto creado]
    Tenant ID: [ID del tenant Azure AD]
@@ -377,7 +377,7 @@ Para usar ese token en Power Automate:
 ```html
 <!-- Copilot Studio genera este snippet para incrustar en cualquier web -->
 <iframe
-  src="https://web.powerva.microsoft.com/environments/ENV_ID/bots/BOT_ID/webchat"
+  src="https://web.copilotstudio.microsoft.com/environments/ENV_ID/bots/BOT_ID/webchat"
   style="width: 400px; height: 600px; border: none;"
   allow="microphone;">
 </iframe>
@@ -386,7 +386,7 @@ Para usar ese token en Power Automate:
 <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
 <div id="webchat" role="main"></div>
 <script>
-  fetch('https://powerva.microsoft.com/api/botmanagement/v1/directline/directlinetoken?botId=BOT_ID')
+  fetch('https://api.copilotstudio.microsoft.com/api/botmanagement/v1/directline/directlinetoken?botId=BOT_ID')
     .then(r => r.json())
     .then(({ token }) => {
       window.WebChat.renderWebChat(

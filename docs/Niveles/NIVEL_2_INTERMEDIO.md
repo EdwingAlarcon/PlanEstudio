@@ -955,7 +955,7 @@ SolicitudFormHandler.cargarHistorialCliente = function(executionContext) {
 
 1. Instalar herramientas:
    ```bash
-   npm install -g microsoft-powerapps-cli
+   npm install -g @microsoft/powerplatform-cli
    # Verificar
    pac --version
    ```
@@ -1192,7 +1192,7 @@ Crear y certificar conectores personalizados para APIs REST, integrar autenticac
 #### Actividad 14.2: Configurar autenticación OAuth 2.0
 1. En la sección "Seguridad" del conector:
     - Tipo de autenticación: OAuth 2.0
-    - Proveedor de identidad: Azure Active Directory
+    - Proveedor de identidad: Microsoft Entra ID (anteriormente Azure Active Directory)
     - ID de cliente: (App Registration ID en Azure AD)
     - Secreto de cliente: (secreto de la App Registration)
     - URL de autorización: `https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize`
