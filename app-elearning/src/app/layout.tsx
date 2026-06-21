@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import { AppShell } from "@/components/layout/app-shell";
 import { ReadingProgress } from "@/components/layout/reading-progress";
+import { getSearchDocuments } from "@/lib/content";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
@@ -18,6 +19,8 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const searchDocuments = getSearchDocuments();
+
   return (
     <html lang="es" suppressHydrationWarning>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
@@ -36,7 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </a>
 
           <ReadingProgress />
-          <AppShell>{children}</AppShell>
+          <AppShell searchDocuments={searchDocuments}>{children}</AppShell>
         </ThemeProvider>
       </body>
     </html>

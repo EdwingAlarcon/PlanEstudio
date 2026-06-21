@@ -85,6 +85,7 @@ export const UI = {
     selectMultiple: "Selección múltiple",
     selectMultipleHint: "Selecciona todas las respuestas correctas",
     noQuestions: "No hay preguntas disponibles para este módulo.",
+    reviewErrors: (n: number) => `Revisar ${n} pregunta${n !== 1 ? "s" : ""} incorrecta${n !== 1 ? "s" : ""}`,
   },
 
   // Progreso

@@ -3,8 +3,14 @@
 import { useState, useCallback } from "react";
 import { Sidebar } from "./sidebar";
 import { Topbar } from "./topbar";
+import type { SearchDocument } from "@/lib/content";
 
-export function AppShell({ children }: { children: React.ReactNode }) {
+interface AppShellProps {
+  children: React.ReactNode;
+  searchDocuments?: SearchDocument[];
+}
+
+export function AppShell({ children, searchDocuments = [] }: AppShellProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const openMenu = useCallback(() => setMobileOpen(true), []);
   const closeMenu = useCallback(() => setMobileOpen(false), []);
@@ -13,7 +19,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <div className="flex h-screen overflow-hidden">
       <Sidebar isOpen={mobileOpen} onClose={closeMenu} />
       <div className="flex flex-1 flex-col overflow-hidden min-w-0">
-        <Topbar onMenuClick={openMenu} />
+        <Topbar onMenuClick={openMenu} searchDocuments={searchDocuments} />
         <main
           id="main-content"
           tabIndex={-1}

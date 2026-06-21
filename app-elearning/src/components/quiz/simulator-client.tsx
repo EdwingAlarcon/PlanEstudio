@@ -107,6 +107,7 @@ export function SimulatorClient({ allQuestions }: SimulatorClientProps) {
     return (
       <QuizResult
         result={simulatorResult}
+        questions={session.questions}
         onRetry={startSimulator}
         extraActions={
           <Button variant="ghost" onClick={resetSimulator}>

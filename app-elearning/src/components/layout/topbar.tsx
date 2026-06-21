@@ -3,8 +3,15 @@
 import { GraduationCap, Menu } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "@/components/ui/button";
+import { SearchBar } from "./search-bar";
+import type { SearchDocument } from "@/lib/content";
 
-export function Topbar({ onMenuClick }: { onMenuClick?: () => void }) {
+interface TopbarProps {
+  onMenuClick?: () => void;
+  searchDocuments?: SearchDocument[];
+}
+
+export function Topbar({ onMenuClick, searchDocuments = [] }: TopbarProps) {
   return (
     <header className="sticky top-0 z-40 flex h-14 items-center gap-4 border-b bg-background px-4 lg:px-6">
       {/* Mobile menu trigger */}
@@ -25,6 +32,11 @@ export function Topbar({ onMenuClick }: { onMenuClick?: () => void }) {
       </div>
 
       <div className="flex-1" />
+
+      {searchDocuments.length > 0 && (
+        <SearchBar documents={searchDocuments} />
+      )}
+
       <ThemeToggle />
     </header>
   );
