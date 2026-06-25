@@ -111,11 +111,11 @@ const COMPONENTS: Components = {
     );
   },
 
-  // ── Links ───────────────────────────────────────────────────────────────────
+  // ── Links — MS blue with hover underline ────────────────────────────────────
   a: ({ href, children }) => (
     <a
       href={href}
-      className="font-medium text-primary underline-offset-4 hover:underline"
+      className="font-medium text-[#0078D4] dark:text-[#4DB8FF] underline-offset-4 hover:underline hover:text-[#106EBE] dark:hover:text-[#74CAFF] transition-colors"
       target={href?.startsWith("http") ? "_blank" : undefined}
       rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
     >
@@ -157,28 +157,28 @@ const COMPONENTS: Components = {
 };
 
 // ─── Prose wrapper classes ────────────────────────────────────────────────────
-// Split into logical groups for readability. Applied to the <article> wrapper.
-// Custom components above handle table/blockquote/code/a/hr with not-prose.
+// Microsoft-inspired prose styling. Custom components handle tables,
+// blockquotes, code blocks, links and checkboxes (all use not-prose).
 
 const PROSE_CLASSES = [
-  // Plugin base — enables all prose-* modifier classes below
+  // Plugin base
   "prose prose-slate dark:prose-invert max-w-none",
 
   // ── Headings ──────────────────────────────────────────────────────────────
-  "prose-headings:scroll-mt-24 prose-headings:font-bold prose-headings:tracking-tight",
-  // h2: major section — wide top margin + bottom border
+  "prose-headings:scroll-mt-24 prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground",
+  // h2: section headers with bottom border (matches MS Learn sections)
   "prose-h2:text-[1.25rem] prose-h2:leading-snug",
   "prose-h2:mt-12 prose-h2:mb-5 prose-h2:pb-3",
   "prose-h2:border-b prose-h2:border-border",
-  // h3: subsection / exercise
+  // h3: exercise / subsection
   "prose-h3:text-[1.1rem] prose-h3:leading-snug",
   "prose-h3:mt-8 prose-h3:mb-3",
-  // h4: step / sub-exercise
+  // h4: step-level
   "prose-h4:text-base prose-h4:leading-snug",
   "prose-h4:mt-6 prose-h4:mb-2",
 
   // ── Paragraphs ─────────────────────────────────────────────────────────────
-  "prose-p:my-4 prose-p:leading-[1.85] prose-p:text-foreground/90",
+  "prose-p:my-4 prose-p:leading-[1.85]",
 
   // ── Lists ──────────────────────────────────────────────────────────────────
   "prose-ul:my-5 prose-ol:my-5",
@@ -187,18 +187,18 @@ const PROSE_CLASSES = [
   // ── Strong / em ───────────────────────────────────────────────────────────
   "prose-strong:font-semibold prose-strong:text-foreground",
 
-  // ── Inline code — neutralise the Typography backtick quotes, custom
-  //    component handles actual styling
+  // ── Inline code — remove backtick quotes added by prose, custom component
+  //    handles the actual visual styling
   "prose-code:before:content-none prose-code:after:content-none",
   "prose-code:font-mono",
 
-  // ── Pre — neutralise so custom <pre> component has full control
+  // ── Pre — fully neutralised; custom <pre> handles the container
   "prose-pre:bg-transparent prose-pre:p-0 prose-pre:shadow-none prose-pre:border-0",
 
   // ── HR ─────────────────────────────────────────────────────────────────────
   "prose-hr:border-border",
 
-  // ── Lead paragraph ─────────────────────────────────────────────────────────
+  // ── Lead / muted ─────────────────────────────────────────────────────────
   "prose-lead:text-muted-foreground",
 ].join(" ");
 

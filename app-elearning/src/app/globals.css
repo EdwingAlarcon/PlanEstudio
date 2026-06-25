@@ -2,56 +2,100 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Microsoft-inspired design tokens ───────────────────────────────────────
+   All surfaces, text and border values are routed through CSS vars so both
+   Tailwind utilities (hsl(var(--xxx))) and plain CSS rules share one source.
+   ─────────────────────────────────────────────────────────────────────────── */
+
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --primary: 221.2 83.2% 53.3%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 221.2 83.2% 53.3%;
-  --radius: 0.5rem;
+  /* shadcn/ui base tokens — light mode */
+  --background:        0 0% 100%;
+  --foreground:        220 14% 14%;        /* #1F2328  close to MS #242424   */
+  --card:              0 0% 100%;
+  --card-foreground:   220 14% 14%;
+  --popover:           0 0% 100%;
+  --popover-foreground:220 14% 14%;
+
+  /* Microsoft Blue as primary */
+  --primary:           206 100% 41.6%;    /* #0078D4  */
+  --primary-foreground:0 0% 100%;
+
+  --secondary:         210 20% 96%;       /* #F3F5F7 */
+  --secondary-foreground:220 14% 14%;
+
+  --muted:             210 20% 96%;
+  --muted-foreground:  220 9% 38%;        /* #616161 */
+
+  --accent:            204 83% 96%;       /* #EFF6FC MS soft blue */
+  --accent-foreground: 206 100% 30%;
+
+  --destructive:       358 64% 50%;       /* #D13438 */
+  --destructive-foreground: 0 0% 100%;
+
+  --border:            20 5% 88%;         /* #E1DFDD */
+  --input:             20 5% 88%;
+  --ring:              206 100% 41.6%;
+  --radius:            0.5rem;
 
   /* Nivel colors */
-  --nivel-basico: 142.1 76.2% 36.3%;
-  --nivel-intermedio: 221.2 83.2% 53.3%;
-  --nivel-avanzado: 24.6 95% 53.1%;
-  --nivel-arquitecto: 0 72.2% 50.6%;
+  --nivel-basico:      142.1 76.2% 36.3%;
+  --nivel-intermedio:  206 100% 41.6%;    /* use MS blue for intermedio */
+  --nivel-avanzado:    24.6 95% 53.1%;
+  --nivel-arquitecto:  358 64% 50%;
+
+  /* ── Microsoft semantic tokens (also usable in plain CSS) ── */
+  --ms-blue:           #0078D4;
+  --ms-blue-hover:     #106EBE;
+  --ms-blue-light:     #EFF6FC;
+  --ms-success:        #107C10;
+  --ms-warning:        #FFB900;
+  --ms-danger:         #D13438;
+  --surface-main:      #FFFFFF;
+  --surface-muted:     #F8F9FA;
+  --surface-soft-blue: #EFF6FC;
+  --text-primary:      #242424;
+  --text-secondary:    #616161;
+  --border-subtle:     #E1DFDD;
 }
 
 .dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
-  --popover: 222.2 84% 4.9%;
-  --popover-foreground: 210 40% 98%;
-  --primary: 217.2 91.2% 59.8%;
-  --primary-foreground: 222.2 47.4% 11.2%;
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
-  --destructive: 0 62.8% 30.6%;
+  --background:        222 47% 8%;        /* #0B1020 — rich dark navy */
+  --foreground:        210 40% 96%;
+  --card:              222 47% 10%;       /* #0F1628 */
+  --card-foreground:   210 40% 96%;
+  --popover:           222 47% 10%;
+  --popover-foreground:210 40% 96%;
+
+  /* Lighter MS blue for dark mode readability */
+  --primary:           207 89% 58%;       /* #2196F3-ish  */
+  --primary-foreground:222 47% 8%;
+
+  --secondary:         217 32% 17%;
+  --secondary-foreground:210 40% 96%;
+
+  --muted:             217 32% 17%;
+  --muted-foreground:  215 20% 65%;
+
+  --accent:            217 32% 17%;
+  --accent-foreground: 210 40% 96%;
+
+  --destructive:       358 62% 42%;
   --destructive-foreground: 210 40% 98%;
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 224.3 76.3% 48%;
+
+  --border:            217 30% 22%;       /* #1E2D42 */
+  --input:             217 30% 22%;
+  --ring:              207 89% 58%;
+
+  /* MS semantic tokens — dark mode overrides */
+  --surface-main:      #0B1020;
+  --surface-muted:     #111827;
+  --surface-soft-blue: rgba(33, 150, 243, 0.12);
+  --text-primary:      #F0F4F8;
+  --text-secondary:    #94A3B8;
+  --border-subtle:     #1E2D42;
 }
+
+/* ─── Base resets ──────────────────────────────────────────────────────────── */
 
 * {
   border-color: hsl(var(--border));
@@ -60,18 +104,19 @@
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "Segoe UI", -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Prose / content rendering ───────────────────────────────────────────── */
+/* ─── Prose / content rendering ───────────────────────────────────────────── */
 
-/* Monospace font for all code elements */
 .prose code,
 .prose pre {
-  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+  font-family: "JetBrains Mono", "Cascadia Code", "Fira Code", "Consolas", monospace;
 }
 
-/* Task list items: flex so the custom checkbox aligns with the text */
+/* Task-list items: flex row so the custom SVG checkbox aligns with text */
 .prose ul.contains-task-list {
   padding-left: 0;
   list-style: none;
@@ -85,49 +130,111 @@ body {
   list-style: none;
 }
 
-/* Remove the default list marker added by prose for task list items */
 .prose li.task-list-item::before,
 .prose li.task-list-item::marker {
   content: none;
   display: none;
 }
 
-/* Scrollbar styling for code blocks (webkit) */
-.prose pre::-webkit-scrollbar {
-  height: 6px;
+/* Code block scrollbar */
+.prose pre::-webkit-scrollbar        { height: 5px; }
+.prose pre::-webkit-scrollbar-track  { background: transparent; }
+.prose pre::-webkit-scrollbar-thumb  { background: #475569; border-radius: 3px; }
+
+/* Table scroll area */
+.prose .overflow-x-auto::-webkit-scrollbar        { height: 5px; }
+.prose .overflow-x-auto::-webkit-scrollbar-thumb  { background: hsl(var(--border)); border-radius: 3px; }
+
+/* ─── Learning content — plain-CSS fallback (used when prose not applied) ──── */
+/* Scoped to .learning-content so it never bleeds into other areas */
+
+.learning-content {
+  max-width: 980px;
+  margin: 0 auto;
+  line-height: 1.75;
+  color: var(--text-primary);
 }
 
-.prose pre::-webkit-scrollbar-track {
-  background: transparent;
+.learning-content h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  margin-bottom: 2rem;
 }
 
-.prose pre::-webkit-scrollbar-thumb {
-  background: #475569;
-  border-radius: 3px;
+.learning-content h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
-/* Table horizontal scroll (webkit) */
-.prose .overflow-x-auto::-webkit-scrollbar {
-  height: 6px;
+.learning-content h3 {
+  font-size: 1.15rem;
+  font-weight: 650;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
 }
 
-.prose .overflow-x-auto::-webkit-scrollbar-thumb {
-  background: hsl(var(--border));
-  border-radius: 3px;
+.learning-content p   { margin: 1rem 0; line-height: 1.8; }
+
+.learning-content ul,
+.learning-content ol  { margin: 1rem 0 1.5rem 1.5rem; }
+
+.learning-content li  { margin: 0.5rem 0; }
+
+.learning-content table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.5rem 0 2rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.75rem;
+  overflow: hidden;
 }
 
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
+.learning-content th,
+.learning-content td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: left;
+  vertical-align: top;
 }
 
-/* Focus visible */
+.learning-content th {
+  font-weight: 700;
+  background: var(--surface-muted);
+}
+
+.learning-content blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--ms-blue);
+  background: var(--surface-soft-blue);
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.learning-content code {
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.375rem;
+  background: var(--surface-muted);
+  font-size: 0.9em;
+  font-family: "JetBrains Mono", "Cascadia Code", monospace;
+}
+
+/* ─── Smooth scroll & focus ───────────────────────────────────────────────── */
+
+html { scroll-behavior: smooth; }
+
 :focus-visible {
   outline: 2px solid hsl(var(--ring));
   outline-offset: 2px;
 }
 
-/* Reading progress bar */
+/* ─── Reading progress bar ───────────────────────────────────────────────── */
+
 #reading-progress {
   position: fixed;
   top: 0;
@@ -136,4 +243,17 @@ html {
   background: hsl(var(--primary));
   z-index: 9999;
   transition: width 0.1s ease;
+}
+
+/* ─── Sidebar active item indicator ─────────────────────────────────────── */
+
+.nav-active-indicator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  border-radius: 0 2px 2px 0;
+  background: hsl(var(--primary));
 }
