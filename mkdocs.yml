@@ -59,6 +59,16 @@ nav:
       - ALM y DevOps: Anexos/ALM_DEVOPS_ESTRATEGIAS.md
       - Arquitectura Empresarial: Anexos/ARQUITECTURA_EMPRESARIAL.md
       - Casos Reales de Negocio: Anexos/CASOS_REALES_NEGOCIO.md
+  - "🧪 Laboratorios":
+      - "Lab 02 — Dataverse: Modelo de Datos": Labs/LAB02_DATAVERSE_MODELO_DATOS.md
+      - "Lab 03 — Canvas App: Primera Aplicación": Labs/LAB03_CANVAS_PRIMERA_APP.md
+      - "Lab 04 — Model-Driven App: Gestión Completa": Labs/LAB04_MODEL_DRIVEN_APP.md
+      - "Lab 05 — Power Automate: Notificación y Aprobación": Labs/LAB05_AUTOMATE_APROBACION.md
+      - "Lab 09 — Dataverse Avanzado: BPF y Field Security": Labs/LAB09_DATAVERSE_AVANZADO.md
+      - "Lab 19 — ALM y CI/CD: Azure DevOps Pipeline": Labs/LAB19_CICD_AZURE_DEVOPS.md
+      - "Lab 22 — Copilot Studio: SSO y Knowledge Sources": Labs/LAB22_COPILOT_STUDIO.md
+      - "Lab 23 — Plugin C#: Validación Server-Side": Labs/LAB23_PLUGIN_CSHARP.md
+      - "Lab 32 — CoE Starter Kit: Gobernanza del Tenant": Labs/LAB32_COE_STARTER_KIT.md
   - Recursos:
       - "✅ Checklist de Progreso": Recursos/CHECKLIST_PROGRESO.md
       - "📖 Glosario": Recursos/GLOSARIO_TERMINOS.md
