@@ -2,7 +2,7 @@
 id: lab-23
 title: "Plugin C# — Validación Server-Side y Auditoría Personalizada"
 level: "N3"
-duration: "120 min"
+duration: 120
 product: ["Dataverse SDK", "C#", "Plugin Registration Tool"]
 certifications: ["PL-400"]
 role: ["Developer"]

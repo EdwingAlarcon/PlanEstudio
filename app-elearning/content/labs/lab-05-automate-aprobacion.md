@@ -2,7 +2,7 @@
 id: lab-05
 title: "Power Automate — Notificación y Aprobación de Solicitudes"
 level: "N1"
-duration: "80 min"
+duration: 80
 product: ["Power Automate Cloud", "Dataverse", "Outlook", "Teams"]
 certifications: ["PL-900"]
 role: ["Maker"]

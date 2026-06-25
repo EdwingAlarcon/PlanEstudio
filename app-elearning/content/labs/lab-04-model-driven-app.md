@@ -2,7 +2,7 @@
 id: lab-04
 title: "Model-Driven App — Sistema de Gestión de Solicitudes Completo"
 level: "N1"
-duration: "90 min"
+duration: 90
 product: ["Power Apps Model-Driven", "Dataverse"]
 certifications: ["PL-900"]
 role: ["Maker", "Developer"]

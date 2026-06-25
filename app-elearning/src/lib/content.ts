@@ -66,11 +66,12 @@ const LEVEL_FILES: Record<LevelId, string> = {
 };
 
 const RESOURCE_FILES: Record<string, string> = {
-  checklist: "Recursos/CHECKLIST_PROGRESO.md",
-  glosario: "Recursos/GLOSARIO_TERMINOS.md",
-  certificaciones: "Recursos/CERTIFICACIONES.md",
-  "banco-preguntas": "Recursos/EVALUACIONES_MODULOS_CERTIFICACION.md",
-  simulador: "Recursos/SIMULADOR_EVALUACIONES.md",
+  checklist:               "Recursos/CHECKLIST_PROGRESO.md",
+  glosario:                "Recursos/GLOSARIO_TERMINOS.md",
+  certificaciones:         "Recursos/CERTIFICACIONES.md",
+  "banco-preguntas":       "Recursos/EVALUACIONES_MODULOS_CERTIFICACION.md",
+  simulador:               "Recursos/SIMULADOR_EVALUACIONES.md",
+  "lenguajes-programacion":"Anexos/LENGUAJES_PROGRAMACION.md",
 };
 
 const LEVEL_META: Record<LevelId, { title: string; description: string; certification: string }> = {

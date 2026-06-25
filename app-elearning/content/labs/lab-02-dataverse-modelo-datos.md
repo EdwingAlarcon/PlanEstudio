@@ -2,7 +2,7 @@
 id: lab-02
 title: "Dataverse — Modelado de Datos para un Sistema de Solicitudes"
 level: "N1"
-duration: "90 min"
+duration: 90
 product: ["Dataverse", "Power Apps"]
 certifications: ["PL-900"]
 role: ["Maker", "Developer"]

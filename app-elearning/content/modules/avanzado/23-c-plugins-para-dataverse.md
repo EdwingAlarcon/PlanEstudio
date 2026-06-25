@@ -7,7 +7,7 @@ estimatedMinutes: 11
 slug: "c-plugins-para-dataverse"
 ---
 !!! tip "Prerequisito de Lenguaje"
-    Este módulo requiere conocimientos básicos de **C# y .NET**: clases, interfaces, herencia, NuGet y async/await. Si es tu primer contacto con C#, dedica al menos 2 semanas al Anexo de Lenguajes de Programación — sección C# — antes de continuar.
+    Este módulo requiere conocimientos básicos de **C# y .NET**: clases, interfaces, herencia, NuGet y async/await. Si es tu primer contacto con C#, dedica al menos 2 semanas al [Anexo de Lenguajes de Programación](/recursos/lenguajes-programacion) — sección C# — antes de continuar.
 
 ### 🎯 Objetivo
 Desarrollar plugins C# robustos para ejecutar lógica de negocio compleja en el servidor de Dataverse: validaciones, cálculos, integraciones síncronas con APIs externas, y patrones de plugin avanzados como Early-Bound entities y Shared Variables.

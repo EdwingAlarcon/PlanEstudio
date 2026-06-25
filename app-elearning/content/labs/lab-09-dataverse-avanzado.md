@@ -2,7 +2,7 @@
 id: lab-09
 title: "Dataverse Avanzado — BPF, Rollup y Field Security"
 level: "N2"
-duration: "100 min"
+duration: 100
 product: ["Dataverse", "Power Apps Model-Driven"]
 certifications: ["PL-200"]
 role: ["Developer", "Maker"]

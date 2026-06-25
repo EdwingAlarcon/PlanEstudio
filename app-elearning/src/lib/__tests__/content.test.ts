@@ -42,6 +42,7 @@ Modelar datos en Dataverse.
       if (filePath.includes("CERTIFICACIONES")) return "# 🏆 Certificaciones\nContenido certificaciones.";
       if (filePath.includes("EVALUACIONES")) return "# 📝 Banco de Preguntas\nContenido banco.";
       if (filePath.includes("SIMULADOR")) return "# 🎯 Simulador\nContenido simulador.";
+      if (filePath.includes("LENGUAJES_PROGRAMACION")) return "# Lenguajes de Programación\nContenido lenguajes.";
       return "# Sin contenido";
     }),
   },
@@ -52,7 +53,7 @@ beforeEach(() => {
   vi.resetModules();
 });
 
-import { getAllLevels, getLevelById, getModuleBySlug, getAllResourcePages, getAllLabs, parseDuration } from "../content";
+import { getAllLevels, getLevelById, getModuleBySlug, getAllResourcePages, getAllLabs, getSearchDocuments, parseDuration } from "../content";
 
 // ─── getAllLevels ─────────────────────────────────────────────────────────────
 
@@ -145,17 +146,18 @@ describe("getModuleBySlug", () => {
 // ─── getAllResourcePages ───────────────────────────────────────────────────────
 
 describe("getAllResourcePages", () => {
-  it("returns 5 resource pages", () => {
+  it("returns 6 resource pages (incluyendo lenguajes-programacion)", () => {
     const pages = getAllResourcePages();
-    expect(pages).toHaveLength(5);
+    expect(pages).toHaveLength(6);
   });
 
-  it("includes checklist, glosario, certificaciones", () => {
+  it("includes checklist, glosario, certificaciones y lenguajes-programacion", () => {
     const pages = getAllResourcePages();
     const slugs = pages.map((p) => p.slug);
     expect(slugs).toContain("checklist");
     expect(slugs).toContain("glosario");
     expect(slugs).toContain("certificaciones");
+    expect(slugs).toContain("lenguajes-programacion");
   });
 
   it("each page has a slug, title, and rawContent", () => {
@@ -163,6 +165,38 @@ describe("getAllResourcePages", () => {
       expect(page.slug).toBeTruthy();
       expect(page.title).toBeTruthy();
       expect(page.rawContent).toBeTruthy();
+    });
+  });
+});
+
+// ─── getSearchDocuments ───────────────────────────────────────────────────────
+
+describe("getSearchDocuments", () => {
+  it("returns at least one document per level", () => {
+    const docs = getSearchDocuments();
+    expect(docs.length).toBeGreaterThanOrEqual(4);
+  });
+
+  it("every document has required fields", () => {
+    getSearchDocuments().forEach((doc) => {
+      expect(doc.id).toBeTruthy();
+      expect(doc.title).toBeTruthy();
+      expect(doc.href).toBeTruthy();
+      expect(["module", "lab", "resource"]).toContain(doc.type);
+    });
+  });
+
+  it("module documents have href matching /nivel/X/modulo/Y pattern", () => {
+    const moduleDocs = getSearchDocuments().filter((d) => d.type === "module");
+    expect(moduleDocs.length).toBeGreaterThan(0);
+    moduleDocs.forEach((doc) => {
+      expect(doc.href).toMatch(/^\/nivel\/.+\/modulo\/.+$/);
+    });
+  });
+
+  it("content field is truncated to max 2000 chars", () => {
+    getSearchDocuments().forEach((doc) => {
+      expect(doc.content.length).toBeLessThanOrEqual(2000);
     });
   });
 });

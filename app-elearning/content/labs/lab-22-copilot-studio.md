@@ -2,7 +2,7 @@
 id: lab-22
 title: "Copilot Studio Avanzado — Agente con SSO, Knowledge Sources y Adaptive Cards"
 level: "N3"
-duration: "110 min"
+duration: 110
 product: ["Copilot Studio", "Microsoft Teams", "Dataverse", "Microsoft Entra ID"]
 certifications: ["PL-400"]
 role: ["Developer", "Functional Consultant"]

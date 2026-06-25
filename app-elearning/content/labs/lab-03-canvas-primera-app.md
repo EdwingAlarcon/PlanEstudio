@@ -2,7 +2,7 @@
 id: lab-03
 title: "Canvas App — Primera Aplicación de Gestión de Solicitudes"
 level: "N1"
-duration: "90 min"
+duration: 90
 product: ["Power Apps Canvas", "Dataverse"]
 certifications: ["PL-900"]
 role: ["Maker"]

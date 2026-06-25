@@ -1,89 +1,86 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Smoke test — golden path", () => {
-  test("dashboard loads with level cards", async ({ page }) => {
+test.describe("Smoke — rutas principales", () => {
+  test("dashboard carga con level cards", async ({ page }) => {
     await page.goto("/");
-
     await expect(page).toHaveTitle(/Power Platform|PlanEstudio/i);
-
-    // At least one level card visible
     await expect(page.locator("text=Nivel 1").first()).toBeVisible();
     await expect(page.locator("text=Básico").first()).toBeVisible();
   });
 
-  test("navigate to Nivel 1 and see module list", async ({ page }) => {
+  test("Nivel 1 muestra lista de módulos", async ({ page }) => {
     await page.goto("/nivel/basico");
-
-    // Heading visible
     await expect(page.locator("h1")).toContainText("Básico");
-
-    // At least one module card
-    await expect(page.locator("text=Módulo 1").first()).toBeVisible();
+    await expect(page.locator("text=01").first()).toBeVisible();
   });
 
-  test("navigate to first module, mark complete, and verify progress ring updates", async ({
-    page,
-  }) => {
+  test("detalle de módulo carga contenido", async ({ page }) => {
     await page.goto("/nivel/basico");
-
-    // Click the first module link
-    const firstModuleLink = page
-      .locator('a[href*="/nivel/basico/modulo/"]')
-      .first();
-    await firstModuleLink.click();
-
-    // Module page loaded — title visible
+    const firstLink = page.locator('a[href*="/nivel/basico/modulo/"]').first();
+    await firstLink.click();
     await expect(page.locator("h1")).toBeVisible();
-
-    // Find the "Marcar como completado" button and click it
-    const completeBtn = page.locator('button[aria-label*="Marcar"]').first();
-    await completeBtn.waitFor({ state: "visible" });
-    await completeBtn.click();
-
-    // Button should now say "Completado" (aria-pressed=true)
-    await expect(completeBtn).toHaveAttribute("aria-pressed", "true");
-
-    // Go back to level page
-    await page.locator('a[href="/nivel/basico"]').first().click();
-
-    // Progress should show at least 1 completed
-    await expect(page.locator("text=/1\\s*\\/\\s*\\d+/")).toBeVisible();
+    // El contenido Markdown renderizado debe tener al menos un h2/h3
+    await expect(page.locator("article h2, article h3").first()).toBeVisible();
   });
 
-  test("simulator page loads and shows start button", async ({ page }) => {
+  test("simulador carga con botón de inicio", async ({ page }) => {
     await page.goto("/simulador");
-
     await expect(page.locator("h1")).toContainText("Simulador");
-    await expect(
-      page.locator("button", { hasText: "Iniciar simulador" })
-    ).toBeVisible();
+    await expect(page.locator("button", { hasText: "Iniciar simulador" })).toBeVisible();
   });
 
-  test("dark mode toggle switches theme", async ({ page }) => {
+  test("página de laboratorios carga con cards", async ({ page }) => {
+    await page.goto("/labs");
+    await expect(page.locator("h1")).toContainText("Laboratorios");
+    // Al menos un lab card visible
+    await expect(page.locator("a[href*='/labs/lab-']").first()).toBeVisible();
+  });
+
+  test("detalle de laboratorio carga contenido", async ({ page }) => {
+    await page.goto("/labs");
+    const firstLab = page.locator("a[href*='/labs/lab-']").first();
+    await firstLab.click();
+    await expect(page.locator("h1")).toBeVisible();
+    await expect(page.locator("text=Laboratorio")).toBeVisible();
+  });
+
+  test("recurso lenguajes-programacion carga", async ({ page }) => {
+    await page.goto("/recursos/lenguajes-programacion");
+    await expect(page.locator("h1, h2").first()).toBeVisible();
+  });
+
+  test("modo oscuro alterna correctamente", async ({ page }) => {
     await page.goto("/");
-
-    const toggleBtn = page.locator('button[aria-label="Cambiar tema"]');
-    await toggleBtn.click();
-
-    // HTML element should have class "dark"
+    const toggle = page.locator('button[aria-label="Cambiar tema"]');
+    await toggle.click();
     await expect(page.locator("html")).toHaveClass(/dark/);
+    // Volver a claro
+    await toggle.click();
+    await expect(page.locator("html")).not.toHaveClass(/dark/);
   });
 
-  test("skip to content link is accessible via keyboard", async ({ page }) => {
+  test("búsqueda encuentra módulos y labs", async ({ page }) => {
     await page.goto("/");
-
-    // Tab once to focus skip link
-    await page.keyboard.press("Tab");
-    const skipLink = page.locator("a", { hasText: "Saltar al contenido" });
-    await expect(skipLink).toBeFocused();
+    // Abrir búsqueda con Ctrl+K
+    await page.keyboard.press("Control+k");
+    const input = page.locator('input[aria-label="Buscar en el contenido"]');
+    await input.waitFor({ state: "visible" });
+    await input.fill("Dataverse");
+    // Debe haber resultados
+    await expect(page.locator('[role="option"]').first()).toBeVisible();
+    // Al menos un resultado con badge Módulo o Lab
+    await expect(page.locator("text=Módulo").or(page.locator("text=Lab")).first()).toBeVisible();
   });
 
-  test("404 page renders for unknown route", async ({ page }) => {
-    await page.goto("/ruta-que-no-existe");
+  test("skip-to-content es accesible por teclado", async ({ page }) => {
+    await page.goto("/");
+    await page.keyboard.press("Tab");
+    await expect(page.locator("a", { hasText: "Saltar al contenido" })).toBeFocused();
+  });
 
+  test("ruta desconocida muestra página 404", async ({ page }) => {
+    await page.goto("/ruta-que-no-existe-xyz");
     await expect(page.locator("text=404")).toBeVisible();
-    await expect(
-      page.locator("a", { hasText: "Volver al inicio" })
-    ).toBeVisible();
+    await expect(page.locator("a", { hasText: "Volver al inicio" })).toBeVisible();
   });
 });

@@ -2,7 +2,7 @@
 id: lab-19
 title: "ALM y CI/CD — Pipeline de Azure DevOps para Power Platform"
 level: "N3"
-duration: "120 min"
+duration: 120
 product: ["Azure DevOps", "Power Platform CLI", "Dataverse"]
 certifications: ["PL-400"]
 role: ["Developer", "DevOps Engineer"]

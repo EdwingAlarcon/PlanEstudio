@@ -2,7 +2,7 @@
 id: lab-32
 title: "CoE Starter Kit — Gobernanza a Escala del Tenant de Power Platform"
 level: "N4"
-duration: "130 min"
+duration: 130
 product: ["CoE Starter Kit", "Power BI", "Power Automate", "Power Apps", "Dataverse"]
 certifications: ["PL-600"]
 role: ["Solution Architect", "Admin", "CoE Lead"]

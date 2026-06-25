@@ -7,7 +7,7 @@ estimatedMinutes: 8
 slug: "pcf-avanzado-con-typescript-y-react"
 ---
 !!! tip "Prerequisito de Lenguaje"
-    Este módulo requiere conocimientos sólidos de **TypeScript**: tipos, interfaces, genéricos, clases, módulos ES6, async/await y JSX/TSX básico. Consulta el Anexo de Lenguajes de Programación — sección TypeScript — antes de continuar.
+    Este módulo requiere conocimientos sólidos de **TypeScript**: tipos, interfaces, genéricos, clases, módulos ES6, async/await y JSX/TSX básico. Consulta el [Anexo de Lenguajes de Programación](/recursos/lenguajes-programacion) — sección TypeScript — antes de continuar.
 
 ### 🎯 Objetivo
 Desarrollar controles PCF avanzados: Dataset controls que reemplazan subgrids, controles con Web API para operaciones CRUD, uso de Fluent UI para consistencia visual, y publicación de PCF en soluciones managed.

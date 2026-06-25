@@ -7,7 +7,7 @@ estimatedMinutes: 10
 slug: "javascript-y-pcf-basico"
 ---
 !!! tip "Prerequisito de Lenguaje"
-    Este módulo requiere conocimientos básicos de **JavaScript**: funciones, callbacks, promesas, módulos ES6 y manipulación del DOM. Si es tu primer contacto con JavaScript, consulta el Anexo de Lenguajes de Programación — sección JavaScript — antes de continuar.
+    Este módulo requiere conocimientos básicos de **JavaScript**: funciones, callbacks, promesas, módulos ES6 y manipulación del DOM. Si es tu primer contacto con JavaScript, consulta el [Anexo de Lenguajes de Programación](/recursos/lenguajes-programacion) — sección JavaScript — antes de continuar.
 
 ### 🎯 Objetivo
 Implementar lógica de cliente con JavaScript en formularios Model-Driven y crear tu primer Power Apps Component Framework (PCF) control con TypeScript que extiende las capacidades nativas de Dataverse.
