@@ -277,4 +277,4 @@ Califica cada tema del 1 al 5:
 
 ---
 
-*Siguiente nivel: [NIVEL_3_AVANZADO.md](NIVEL_3_AVANZADO.md) — Arquitectura, Plugins C#, PCF avanzado, D365 CE, Integraciones Azure*
+*Siguiente nivel: [Nivel 3 — Avanzado](/nivel/avanzado) — Arquitectura, Plugins C#, PCF avanzado, D365 CE, Integraciones Azure*

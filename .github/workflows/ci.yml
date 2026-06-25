@@ -78,6 +78,8 @@ jobs:
 
       - name: Build static export
         run: npm run build
+        env:
+          GITHUB_PAGES: "true"
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
@@ -85,10 +87,13 @@ jobs:
           name: nextjs-out
           path: app-elearning/out/
 
-  # ─── MkDocs Build (strict) ──────────────────────────────────────────────────
+  # ─── MkDocs Build (reference/legacy — non-blocking) ────────────────────────
+  # MkDocs is kept as reference documentation only. Failures here do NOT
+  # block the Next.js deploy. The authoritative app is app-elearning/.
   mkdocs:
-    name: MkDocs Build
+    name: MkDocs Build (legacy, non-blocking)
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 

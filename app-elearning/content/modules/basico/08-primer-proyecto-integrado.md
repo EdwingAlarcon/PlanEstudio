@@ -754,7 +754,7 @@ Has completado exitosamente el **Nivel 1: Básico** del Plan Maestro.
 
 Estás listo para construir soluciones funcionales de Power Platform que aporten valor real a organizaciones.
 
-**Próximo hito**: [Nivel 2: Intermedio](NIVEL_2_INTERMEDIO.md)
+**Próximo hito**: [Nivel 2: Intermedio](/nivel/intermedio)
 
 ---
 

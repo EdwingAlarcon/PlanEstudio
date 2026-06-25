@@ -2,13 +2,13 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { Search, FileText } from "lucide-react";
+import { Search, FileText, FlaskConical } from "lucide-react";
 import FlexSearch from "flexsearch";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { UI } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
-import type { SearchDocument } from "@/lib/content";
+import type { SearchDocument, SearchDocumentType } from "@/lib/content";
 
 interface SearchBarProps {
   documents: SearchDocument[];
@@ -20,6 +20,8 @@ interface SearchHit {
   levelId: string;
   moduleId: number;
   slug: string;
+  href: string;
+  type: SearchDocumentType;
   snippet: string;
 }
 
@@ -28,6 +30,13 @@ const LEVEL_LABELS: Record<string, string> = {
   intermedio: "Nivel 2",
   avanzado: "Nivel 3",
   arquitecto: "Nivel 4",
+  N1: "Nivel 1", N2: "Nivel 2", N3: "Nivel 3", N4: "Nivel 4",
+};
+
+const TYPE_CONFIG: Record<SearchDocumentType, { label: string; color: string }> = {
+  module:   { label: "Módulo",      color: "bg-[#EFF6FC] text-[#0078D4] dark:bg-[rgba(33,150,243,0.15)] dark:text-[#4DB8FF]" },
+  lab:      { label: "Lab",         color: "bg-[#EFF8EE] text-[#107C10] dark:bg-[rgba(16,124,16,0.15)] dark:text-[#2DB52D]" },
+  resource: { label: "Recurso",     color: "bg-muted text-muted-foreground" },
 };
 
 export function SearchBar({ documents }: SearchBarProps) {
@@ -71,7 +80,6 @@ export function SearchBar({ documents }: SearchBarProps) {
         if (seen.has(result.id)) continue;
         seen.add(result.id);
         const doc = result.doc;
-        // Build a short snippet around the query
         const matchIdx = doc.content.toLowerCase().indexOf(query.toLowerCase());
         const start = Math.max(0, matchIdx - 40);
         const end = Math.min(doc.content.length, matchIdx + 120);
@@ -82,6 +90,8 @@ export function SearchBar({ documents }: SearchBarProps) {
           levelId: doc.levelId,
           moduleId: doc.moduleId,
           slug: doc.slug,
+          href: doc.href,
+          type: doc.type,
           snippet,
         });
       }
@@ -114,7 +124,7 @@ export function SearchBar({ documents }: SearchBarProps) {
   const navigate = useCallback(
     (hit: SearchHit) => {
       setOpen(false);
-      router.push(`/nivel/${hit.levelId}/modulo/${hit.slug}`);
+      router.push(hit.href);
     },
     [router]
   );
@@ -197,39 +207,48 @@ export function SearchBar({ documents }: SearchBarProps) {
             </div>
           )}
 
-          {results.map((hit, i) => (
-            <button
-              key={hit.id}
-              id={`search-hit-${i}`}
-              role="option"
-              aria-selected={i === activeIdx}
-              className={cn(
-                "w-full text-left px-4 py-3 flex gap-3 border-b last:border-0 transition-colors",
-                i === activeIdx ? "bg-accent" : "hover:bg-accent/50"
-              )}
-              onMouseEnter={() => setActiveIdx(i)}
-              onClick={() => navigate(hit)}
-            >
-              <FileText className="h-4 w-4 mt-0.5 shrink-0 text-muted-foreground" aria-hidden />
-              <div className="min-w-0">
-                <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-sm font-medium truncate">{hit.title}</span>
-                  <span className="shrink-0 text-[10px] font-medium text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
-                    {LEVEL_LABELS[hit.levelId] ?? hit.levelId}
-                  </span>
-                </div>
-                {hit.snippet && (
-                  <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
-                    {hit.snippet}
-                  </p>
+          {results.map((hit, i) => {
+            const typeCfg = TYPE_CONFIG[hit.type] ?? TYPE_CONFIG.module;
+            const Icon = hit.type === "lab" ? FlaskConical : FileText;
+            return (
+              <button
+                key={hit.id}
+                id={`search-hit-${i}`}
+                role="option"
+                aria-selected={i === activeIdx}
+                className={cn(
+                  "w-full text-left px-4 py-3 flex gap-3 border-b last:border-0 transition-colors",
+                  i === activeIdx ? "bg-accent" : "hover:bg-accent/50"
                 )}
-              </div>
-            </button>
-          ))}
+                onMouseEnter={() => setActiveIdx(i)}
+                onClick={() => navigate(hit)}
+              >
+                <Icon className="h-4 w-4 mt-0.5 shrink-0 text-muted-foreground" aria-hidden />
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2 mb-0.5 flex-wrap">
+                    <span className="text-sm font-medium truncate">{hit.title}</span>
+                    <span className={cn("shrink-0 text-[10px] font-medium px-1.5 py-0.5 rounded", typeCfg.color)}>
+                      {typeCfg.label}
+                    </span>
+                    {hit.levelId && (
+                      <span className="shrink-0 text-[10px] font-medium text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
+                        {LEVEL_LABELS[hit.levelId] ?? hit.levelId}
+                      </span>
+                    )}
+                  </div>
+                  {hit.snippet && (
+                    <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                      {hit.snippet}
+                    </p>
+                  )}
+                </div>
+              </button>
+            );
+          })}
 
           {!query && (
             <div className="px-4 py-8 text-center text-sm text-muted-foreground">
-              Escribe para buscar en los 41 módulos
+              Escribe para buscar en 41 módulos y 9 laboratorios
             </div>
           )}
         </div>

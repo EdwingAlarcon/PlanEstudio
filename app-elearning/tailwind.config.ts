@@ -67,8 +67,11 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["Inter", "Segoe UI", "-apple-system", "sans-serif"],
-        mono: ["JetBrains Mono", "Cascadia Code", "Fira Code", "Consolas", "monospace"],
+        // System fonts — no remote download, matches Fluent UI / MS Learn
+        sans: ["Segoe UI", "system-ui", "-apple-system", "BlinkMacSystemFont",
+               "Helvetica Neue", "Arial", "sans-serif"],
+        mono: ["Cascadia Code", "Cascadia Mono", "SF Mono", "Fira Code",
+               "Fira Mono", "Consolas", "Liberation Mono", "monospace"],
       },
       boxShadow: {
         // Fluent UI-style subtle elevation levels

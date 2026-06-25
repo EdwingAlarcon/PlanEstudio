@@ -104,7 +104,9 @@
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: "Inter", "Segoe UI", -apple-system, sans-serif;
+  /* System font stack — no remote downloads, matches Fluent UI / MS Learn */
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont,
+    "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -113,7 +115,9 @@ body {
 
 .prose code,
 .prose pre {
-  font-family: "JetBrains Mono", "Cascadia Code", "Fira Code", "Consolas", monospace;
+  /* Monospace stack — Cascadia Code (Windows), SF Mono (macOS), Consolas fallback */
+  font-family: "Cascadia Code", "Cascadia Mono", "SF Mono", "Fira Code",
+    "Fira Mono", "Consolas", "Liberation Mono", monospace;
 }
 
 /* Task-list items: flex row so the custom SVG checkbox aligns with text */

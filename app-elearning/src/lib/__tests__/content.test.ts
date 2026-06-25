@@ -52,7 +52,7 @@ beforeEach(() => {
   vi.resetModules();
 });
 
-import { getAllLevels, getLevelById, getModuleBySlug, getAllResourcePages, getAllLabs } from "../content";
+import { getAllLevels, getLevelById, getModuleBySlug, getAllResourcePages, getAllLabs, parseDuration } from "../content";
 
 // ─── getAllLevels ─────────────────────────────────────────────────────────────
 
@@ -178,5 +178,40 @@ describe("getAllLabs", () => {
 
   it("does not throw when labs directory is missing", () => {
     expect(() => getAllLabs()).not.toThrow();
+  });
+});
+
+// ─── parseDuration ────────────────────────────────────────────────────────────
+
+describe("parseDuration", () => {
+  it("returns number as-is when given an integer", () => {
+    expect(parseDuration(90)).toBe(90);
+    expect(parseDuration(0)).toBe(0);
+    expect(parseDuration(130)).toBe(130);
+  });
+
+  it("parses a string with 'min' suffix", () => {
+    expect(parseDuration("90 min")).toBe(90);
+    expect(parseDuration("120 min")).toBe(120);
+  });
+
+  it("parses a string with 'minutos' suffix", () => {
+    expect(parseDuration("60 minutos")).toBe(60);
+  });
+
+  it("parses a bare numeric string", () => {
+    expect(parseDuration("45")).toBe(45);
+  });
+
+  it("returns 0 for empty or invalid values", () => {
+    expect(parseDuration("")).toBe(0);
+    expect(parseDuration(null)).toBe(0);
+    expect(parseDuration(undefined)).toBe(0);
+    expect(parseDuration("no hay número")).toBe(0);
+  });
+
+  it("returns 0 for non-finite numbers", () => {
+    expect(parseDuration(NaN)).toBe(0);
+    expect(parseDuration(Infinity)).toBe(0);
   });
 });

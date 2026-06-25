@@ -104,6 +104,16 @@ function estimateReadingMinutes(text: string): number {
   return Math.max(5, Math.ceil(wordCount / wordsPerMinute));
 }
 
+// Parses duration from frontmatter — handles both `90` (number) and `"90 min"` (string)
+export function parseDuration(value: unknown): number {
+  if (typeof value === "number" && Number.isFinite(value) && value >= 0) return value;
+  if (typeof value === "string") {
+    const match = value.match(/\d+/);
+    return match ? Number(match[0]) : 0;
+  }
+  return 0;
+}
+
 function toSlug(title: string): string {
   return title
     .toLowerCase()
@@ -320,7 +330,7 @@ export function getAllLabs(): LabInfo[] {
         slug,
         title: String(data["title"] ?? slug),
         level: String(data["level"] ?? ""),
-        duration: Number(data["duration"]) || 0,
+        duration: parseDuration(data["duration"]),
         products: Array.isArray(data["product"]) ? (data["product"] as string[]) : [],
         certifications: Array.isArray(data["certifications"]) ? (data["certifications"] as string[]) : [],
         role: Array.isArray(data["role"]) ? (data["role"] as string[]) : [],
@@ -342,22 +352,44 @@ export function getLabBySlug(slug: string): LabInfo | undefined {
 
 // ─── Search index ─────────────────────────────────────────────────────────────
 
+export type SearchDocumentType = "module" | "lab" | "resource";
+
 export interface SearchDocument {
   id: string;
   title: string;
+  // Module-specific
   levelId: string;
   moduleId: number;
   slug: string;
+  // Discriminator
+  type: SearchDocumentType;
+  // Used to build href
+  href: string;
   content: string;
 }
 
 export function getSearchDocuments(): SearchDocument[] {
-  return getAllModules().map((m) => ({
-    id: m.id,
+  const moduleDocs: SearchDocument[] = getAllModules().map((m) => ({
+    id: `module-${m.id}`,
     title: m.title,
     levelId: m.levelId,
     moduleId: m.moduleId,
     slug: m.slug,
+    type: "module" as const,
+    href: `/nivel/${m.levelId}/modulo/${m.slug}`,
     content: m.rawContent.replace(/^#{1,6}\s+/gm, "").slice(0, 2000),
   }));
+
+  const labDocs: SearchDocument[] = getAllLabs().map((lab) => ({
+    id: `lab-${lab.id}`,
+    title: lab.title,
+    levelId: lab.level,
+    moduleId: 0,
+    slug: lab.slug,
+    type: "lab" as const,
+    href: `/labs/${lab.slug}`,
+    content: lab.rawContent.replace(/^#{1,6}\s+/gm, "").slice(0, 2000),
+  }));
+
+  return [...moduleDocs, ...labDocs];
 }

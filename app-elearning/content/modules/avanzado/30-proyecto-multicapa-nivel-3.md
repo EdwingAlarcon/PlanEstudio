@@ -170,4 +170,4 @@ Califica cada tema del 1 al 5:
 
 ---
 
-*Siguiente nivel: [NIVEL_4_ARQUITECTO.md](NIVEL_4_ARQUITECTO.md) — Enterprise Architecture, CoE, Multi-tenant, Azure AI, Gobernanza*
+*Siguiente nivel: [Nivel 4 — Arquitecto](/nivel/arquitecto) — Enterprise Architecture, CoE, Multi-tenant, Azure AI, Gobernanza*

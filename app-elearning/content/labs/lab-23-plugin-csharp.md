@@ -12,10 +12,6 @@ prerequisites:
   - "NuGet package manager disponible"
   - "Plugin Registration Tool descargado (pac tool install --tool prt)"
   - "Módulo 23 estudiado: C# Plugins para Dataverse"
-files:
-  - "SIT.Plugins.csproj"
-  - "SolicitudPreCreatePlugin.cs"
-  - "SolicitudPostUpdatePlugin.cs"
 ---
 
 # Lab 23 — Plugin C#: Validación Server-Side y Auditoría Personalizada (SIT)
