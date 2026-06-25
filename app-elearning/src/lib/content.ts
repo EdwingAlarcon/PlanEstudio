@@ -33,7 +33,11 @@ export interface ResourcePage {
 
 // ─── Paths ────────────────────────────────────────────────────────────────────
 
-const DOCS_DIR = path.resolve(process.cwd(), "../docs");
+// CONTENT_DIR can be overridden at build time via environment variable.
+// Default assumes `next build` is run from app-elearning/ (standard usage).
+const DOCS_DIR = process.env.CONTENT_DIR
+  ? path.resolve(process.env.CONTENT_DIR)
+  : path.resolve(process.cwd(), "../docs");
 
 const LEVEL_FILES: Record<LevelId, string> = {
   basico: "Niveles/NIVEL_1_BASICO.md",

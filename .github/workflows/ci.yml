@@ -85,6 +85,25 @@ jobs:
           name: nextjs-out
           path: app-elearning/out/
 
+  # ─── MkDocs Build (strict) ──────────────────────────────────────────────────
+  mkdocs:
+    name: MkDocs Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install MkDocs dependencies
+        run: pip install -r requirements.txt
+        working-directory: .
+
+      - name: MkDocs build (strict)
+        run: mkdocs build --strict
+        working-directory: .
+
   # ─── Deploy to GitHub Pages ─────────────────────────────────────────────────
   deploy:
     name: Deploy to GitHub Pages
