@@ -78,14 +78,7 @@ export default async function ModulePage({ params }: PageProps) {
       </div>
 
       {/* Markdown Content */}
-      <MarkdownRenderer
-        content={mod.rawContent}
-        className="prose prose-slate dark:prose-invert max-w-none
-          prose-headings:scroll-mt-16
-          prose-code:font-mono
-          prose-pre:bg-muted
-          prose-a:text-primary hover:prose-a:underline"
-      />
+      <MarkdownRenderer content={mod.rawContent} />
 
       {/* Quiz panel */}
       {questions.length > 0 && (

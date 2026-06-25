@@ -63,9 +63,57 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-/* Prose styles for MDX content */
-.prose code {
-  font-family: "JetBrains Mono", monospace;
+/* ── Prose / content rendering ───────────────────────────────────────────── */
+
+/* Monospace font for all code elements */
+.prose code,
+.prose pre {
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+}
+
+/* Task list items: flex so the custom checkbox aligns with the text */
+.prose ul.contains-task-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.prose li.task-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+/* Remove the default list marker added by prose for task list items */
+.prose li.task-list-item::before,
+.prose li.task-list-item::marker {
+  content: none;
+  display: none;
+}
+
+/* Scrollbar styling for code blocks (webkit) */
+.prose pre::-webkit-scrollbar {
+  height: 6px;
+}
+
+.prose pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.prose pre::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 3px;
+}
+
+/* Table horizontal scroll (webkit) */
+.prose .overflow-x-auto::-webkit-scrollbar {
+  height: 6px;
+}
+
+.prose .overflow-x-auto::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
 }
 
 /* Smooth scroll */
