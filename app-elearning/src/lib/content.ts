@@ -1,18 +1,19 @@
 import fs from "fs";
 import path from "path";
+import matter from "gray-matter";
 import type { LevelId } from "./i18n";
 import { LEVEL_MODULE_RANGE } from "./i18n";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export interface ModuleInfo {
-  id: string;           // "basico-1", "intermedio-9", etc.
+  id: string;           // "basico-1"
   moduleId: number;     // 1–41
   levelId: LevelId;
   title: string;
-  slug: string;         // URL-safe identifier
+  slug: string;
   estimatedMinutes: number;
-  rawContent: string;   // full markdown of the module section
+  rawContent: string;
 }
 
 export interface LevelInfo {
@@ -21,7 +22,7 @@ export interface LevelInfo {
   description: string;
   certification: string;
   modules: ModuleInfo[];
-  rawContent: string;   // full level file content
+  rawContent: string;
 }
 
 export interface ResourcePage {
@@ -31,10 +32,28 @@ export interface ResourcePage {
   rawContent: string;
 }
 
+export interface LabInfo {
+  id: string;        // "lab-02"
+  slug: string;      // filename without .md
+  title: string;
+  level: string;     // "N1" | "N2" | "N3" | "N4"
+  duration: number;  // minutes
+  products: string[];
+  certifications: string[];
+  role: string[];
+  prerequisites: string[];
+  rawContent: string;
+}
+
 // ─── Paths ────────────────────────────────────────────────────────────────────
 
-// CONTENT_DIR can be overridden at build time via environment variable.
-// Default assumes `next build` is run from app-elearning/ (standard usage).
+// app-elearning/content/ is the new authoritative content directory.
+// Falls back to ../docs for modules not yet migrated to individual files.
+const APP_CONTENT_DIR = path.resolve(process.cwd(), "content");
+const MODULES_DIR = path.join(APP_CONTENT_DIR, "modules");
+const LABS_DIR = path.join(APP_CONTENT_DIR, "labs");
+
+// Legacy docs dir (fallback for non-migrated modules and resources)
 const DOCS_DIR = process.env.CONTENT_DIR
   ? path.resolve(process.env.CONTENT_DIR)
   : path.resolve(process.cwd(), "../docs");
@@ -98,21 +117,49 @@ function toSlug(title: string): string {
     .replace(/^-|-$/g, "");
 }
 
-// ─── Module extraction ────────────────────────────────────────────────────────
+// ─── New: individual module files with frontmatter ────────────────────────────
 
-function extractModulesFromContent(
-  content: string,
-  levelId: LevelId
-): ModuleInfo[] {
+function loadModulesFromDir(levelId: LevelId): Map<number, ModuleInfo> {
+  const dir = path.join(MODULES_DIR, levelId);
+  const result = new Map<number, ModuleInfo>();
+
+  if (!fs.existsSync(dir)) return result;
+
+  const files = fs.readdirSync(dir)
+    .filter((f) => f.endsWith(".md"))
+    .sort();
+
+  for (const file of files) {
+    try {
+      const raw = fs.readFileSync(path.join(dir, file), "utf-8");
+      const { data, content } = matter(raw);
+      const moduleId = Number(data["moduleId"]);
+      if (!moduleId) continue;
+
+      result.set(moduleId, {
+        id: `${levelId}-${moduleId}`,
+        moduleId,
+        levelId,
+        title: String(data["title"] ?? ""),
+        slug: String(data["slug"] ?? toSlug(String(data["title"] ?? ""))),
+        estimatedMinutes: Number(data["estimatedMinutes"]) || estimateReadingMinutes(content),
+        rawContent: content,
+      });
+    } catch {
+      // Skip malformed files silently
+    }
+  }
+
+  return result;
+}
+
+// ─── Legacy: regex extraction from monolithic NIVEL files ────────────────────
+
+function extractModulesFromContent(content: string, levelId: LevelId): ModuleInfo[] {
   const [moduleStart, moduleEnd] = LEVEL_MODULE_RANGE[levelId];
   const modules: ModuleInfo[] = [];
-
-  // Match Nivel 1 format: `### **Módulo N: Title**`
-  // Match Niveles 2-4 format: `## MÓDULO N: Title`
   const modulePattern = /^#{2,3}\s+\*?\*?módulo\s+(\d+)[:\s]+(.+?)\*?\*?$/gim;
-  // Filter to in-range matches BEFORE computing boundaries so that out-of-range
-  // headings (e.g. Módulo 18 appearing inside a basico file) don't truncate the
-  // preceding valid module's content.
+
   const validMatches = [...content.matchAll(modulePattern)].filter((m) => {
     const id = parseInt(m[1] ?? "0", 10);
     return id >= moduleStart && id <= moduleEnd;
@@ -120,10 +167,12 @@ function extractModulesFromContent(
 
   validMatches.forEach((match, idx) => {
     const moduleId = parseInt(match[1] ?? "0", 10);
-
     const rawTitle = (match[2] ?? "").replace(/\*+/g, "").trim();
     const startPos = match.index ?? 0;
-    const endPos = idx + 1 < validMatches.length ? (validMatches[idx + 1]!.index ?? content.length) : content.length;
+    const endPos =
+      idx + 1 < validMatches.length
+        ? (validMatches[idx + 1]!.index ?? content.length)
+        : content.length;
     const sectionContent = content.slice(startPos, endPos).trim();
 
     modules.push({
@@ -140,12 +189,34 @@ function extractModulesFromContent(
   return modules;
 }
 
+// ─── Merged module loading (new files take precedence) ───────────────────────
+
+function loadModulesForLevel(levelId: LevelId, rawLevelContent: string): ModuleInfo[] {
+  // 1. Load migrated individual files
+  const fromFiles = loadModulesFromDir(levelId);
+
+  // 2. Load legacy modules from monolithic file
+  const fromLegacy = extractModulesFromContent(rawLevelContent, levelId);
+
+  // 3. Merge: individual file wins over legacy for same moduleId
+  const merged = new Map<number, ModuleInfo>();
+  for (const mod of fromLegacy) {
+    merged.set(mod.moduleId, mod);
+  }
+  for (const [moduleId, mod] of fromFiles) {
+    merged.set(moduleId, mod); // override legacy
+  }
+
+  return [...merged.values()].sort((a, b) => a.moduleId - b.moduleId);
+}
+
 // ─── Cache ────────────────────────────────────────────────────────────────────
 
 let _levelsCache: LevelInfo[] | null = null;
 let _resourcesCache: ResourcePage[] | null = null;
+let _labsCache: LabInfo[] | null = null;
 
-// ─── Public API ───────────────────────────────────────────────────────────────
+// ─── Public API — Levels & Modules ───────────────────────────────────────────
 
 export function getAllLevels(): LevelInfo[] {
   if (_levelsCache) return _levelsCache;
@@ -157,12 +228,11 @@ export function getAllLevels(): LevelInfo[] {
     try {
       rawContent = fs.readFileSync(filePath, "utf-8");
     } catch {
-      // File may not exist yet (Niveles 2-4 placeholders)
       rawContent = `# ${LEVEL_META[levelId].title}\n\nContenido en desarrollo.`;
     }
 
     const meta = LEVEL_META[levelId];
-    const modules = extractModulesFromContent(rawContent, levelId);
+    const modules = loadModulesForLevel(levelId, rawContent);
 
     return {
       id: levelId,
@@ -194,6 +264,8 @@ export function getAllModules(): ModuleInfo[] {
   return getAllLevels().flatMap((l) => l.modules);
 }
 
+// ─── Public API — Resources ───────────────────────────────────────────────────
+
 export function getAllResourcePages(): ResourcePage[] {
   if (_resourcesCache) return _resourcesCache;
 
@@ -219,6 +291,53 @@ export function getAllResourcePages(): ResourcePage[] {
 
 export function getResourceBySlug(slug: string): ResourcePage | undefined {
   return getAllResourcePages().find((r) => r.slug === slug);
+}
+
+// ─── Public API — Labs ────────────────────────────────────────────────────────
+
+export function getAllLabs(): LabInfo[] {
+  if (_labsCache) return _labsCache;
+
+  if (!fs.existsSync(LABS_DIR)) {
+    _labsCache = [];
+    return _labsCache;
+  }
+
+  const files = fs.readdirSync(LABS_DIR)
+    .filter((f) => f.endsWith(".md"))
+    .sort();
+
+  const labs: LabInfo[] = [];
+
+  for (const file of files) {
+    try {
+      const raw = fs.readFileSync(path.join(LABS_DIR, file), "utf-8");
+      const { data, content } = matter(raw);
+      const slug = file.replace(/\.md$/, "");
+
+      labs.push({
+        id: String(data["id"] ?? slug),
+        slug,
+        title: String(data["title"] ?? slug),
+        level: String(data["level"] ?? ""),
+        duration: Number(data["duration"]) || 0,
+        products: Array.isArray(data["product"]) ? (data["product"] as string[]) : [],
+        certifications: Array.isArray(data["certifications"]) ? (data["certifications"] as string[]) : [],
+        role: Array.isArray(data["role"]) ? (data["role"] as string[]) : [],
+        prerequisites: Array.isArray(data["prerequisites"]) ? (data["prerequisites"] as string[]) : [],
+        rawContent: content,
+      });
+    } catch {
+      // Skip malformed lab files
+    }
+  }
+
+  _labsCache = labs;
+  return labs;
+}
+
+export function getLabBySlug(slug: string): LabInfo | undefined {
+  return getAllLabs().find((l) => l.slug === slug);
 }
 
 // ─── Search index ─────────────────────────────────────────────────────────────

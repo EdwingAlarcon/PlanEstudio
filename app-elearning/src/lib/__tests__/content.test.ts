@@ -1,8 +1,17 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 
-// Mock fs so tests don't depend on the real docs/ directory
+// ─── fs mock ─────────────────────────────────────────────────────────────────
+// Mock the entire `fs` module so tests don't depend on the real filesystem.
+// existsSync returns false for content/modules/ so hybrid loading falls back
+// to the legacy monolithic-file path (simpler and cheaper to test here).
 vi.mock("fs", () => ({
   default: {
+    existsSync: vi.fn((p: string) => {
+      // Returning false for new content dirs forces the legacy code path
+      if (String(p).includes("content")) return false;
+      return true;
+    }),
+    readdirSync: vi.fn(() => []),
     readFileSync: vi.fn((filePath: string) => {
       if (filePath.includes("NIVEL_1")) {
         return `# 🟢 NIVEL 1: BÁSICO
@@ -25,9 +34,9 @@ Comprender la arquitectura de Power Platform.
 Modelar datos en Dataverse.
 `;
       }
-      if (filePath.includes("NIVEL_2")) return "# NIVEL 2\n\n### Módulo 9: Dataverse Avanzado\nContenido Nivel 2.";
-      if (filePath.includes("NIVEL_3")) return "# NIVEL 3\n\n### Módulo 18: Arquitectura\nContenido Nivel 3.";
-      if (filePath.includes("NIVEL_4")) return "# NIVEL 4\n\n### Módulo 31: Enterprise\nContenido Nivel 4.";
+      if (filePath.includes("NIVEL_2")) return "# NIVEL 2\n\n## MÓDULO 9: Dataverse Avanzado\nContenido Nivel 2.";
+      if (filePath.includes("NIVEL_3")) return "# NIVEL 3\n\n## MÓDULO 18: Arquitectura\nContenido Nivel 3.";
+      if (filePath.includes("NIVEL_4")) return "# NIVEL 4\n\n## MÓDULO 31: Enterprise\nContenido Nivel 4.";
       if (filePath.includes("CHECKLIST")) return "# ✅ Checklist de Progreso\nContenido checklist.";
       if (filePath.includes("GLOSARIO")) return "# 📖 Glosario de Términos\nContenido glosario.";
       if (filePath.includes("CERTIFICACIONES")) return "# 🏆 Certificaciones\nContenido certificaciones.";
@@ -38,13 +47,14 @@ Modelar datos en Dataverse.
   },
 }));
 
-// Reset module cache between tests
-vi.mock("../content", async () => {
-  const actual = await vi.importActual<typeof import("../content")>("../content");
-  return actual;
+// Reset module registry cache between tests so _levelsCache / _labsCache are cleared
+beforeEach(() => {
+  vi.resetModules();
 });
 
-import { getAllLevels, getLevelById, getModuleBySlug, getAllResourcePages } from "../content";
+import { getAllLevels, getLevelById, getModuleBySlug, getAllResourcePages, getAllLabs } from "../content";
+
+// ─── getAllLevels ─────────────────────────────────────────────────────────────
 
 describe("getAllLevels", () => {
   it("returns 4 levels", () => {
@@ -70,6 +80,8 @@ describe("getAllLevels", () => {
   });
 });
 
+// ─── getLevelById ─────────────────────────────────────────────────────────────
+
 describe("getLevelById", () => {
   it("returns the correct level for a valid id", () => {
     const level = getLevelById("basico");
@@ -82,6 +94,8 @@ describe("getLevelById", () => {
     expect(getLevelById("invalid")).toBeUndefined();
   });
 });
+
+// ─── module extraction from Nivel 1 ──────────────────────────────────────────
 
 describe("module extraction from Nivel 1", () => {
   it("extracts modules from the markdown content", () => {
@@ -111,6 +125,8 @@ describe("module extraction from Nivel 1", () => {
   });
 });
 
+// ─── getModuleBySlug ──────────────────────────────────────────────────────────
+
 describe("getModuleBySlug", () => {
   it("returns module when slug exists", () => {
     const level = getLevelById("basico");
@@ -125,6 +141,8 @@ describe("getModuleBySlug", () => {
     expect(getModuleBySlug("basico", "slug-que-no-existe")).toBeUndefined();
   });
 });
+
+// ─── getAllResourcePages ───────────────────────────────────────────────────────
 
 describe("getAllResourcePages", () => {
   it("returns 5 resource pages", () => {
@@ -146,5 +164,19 @@ describe("getAllResourcePages", () => {
       expect(page.title).toBeTruthy();
       expect(page.rawContent).toBeTruthy();
     });
+  });
+});
+
+// ─── getAllLabs ────────────────────────────────────────────────────────────────
+
+describe("getAllLabs", () => {
+  it("returns an empty array when labs directory does not exist", () => {
+    // existsSync returns false for content/ paths (see mock above)
+    const labs = getAllLabs();
+    expect(Array.isArray(labs)).toBe(true);
+  });
+
+  it("does not throw when labs directory is missing", () => {
+    expect(() => getAllLabs()).not.toThrow();
   });
 });

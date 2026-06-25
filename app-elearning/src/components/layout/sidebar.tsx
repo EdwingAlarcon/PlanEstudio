@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, CheckSquare, GraduationCap, FileText, Trophy, Home, PlayCircle } from "lucide-react";
+import { BookOpen, CheckSquare, GraduationCap, FileText, Trophy, Home, PlayCircle, FlaskConical } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -114,6 +114,16 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
             </div>
           );
         })}
+
+        <Separator className="my-3" />
+
+        {/* Labs */}
+        <NavLink
+          href="/labs"
+          icon={FlaskConical}
+          label="Laboratorios"
+          active={pathname.startsWith("/labs")}
+        />
 
         <Separator className="my-3" />
 
