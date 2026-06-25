@@ -10,6 +10,7 @@ import { LEVEL_MODULE_RANGE } from "./i18n";
 export interface ProgressState {
   completedModules: string[];          // module ids like "basico-1"
   quizScores: Record<string, number>;  // moduleId string → percentage (0-100)
+  completedLabs: string[];             // lab slugs like "lab-02-dataverse-modelo-datos"
   lastVisited: string | null;          // last module id visited
 }
 
@@ -23,12 +24,18 @@ export interface ProgressActions {
   setLastVisited: (moduleId: string) => void;
   getLevelProgress: (levelId: LevelId) => { completed: number; total: number; percentage: number };
   getOverallProgress: () => { completed: number; total: number; percentage: number };
+  // Labs
+  markLabComplete: (slug: string) => void;
+  markLabIncomplete: (slug: string) => void;
+  toggleLabComplete: (slug: string) => void;
+  isLabComplete: (slug: string) => boolean;
   resetProgress: () => void;
 }
 
 const INITIAL_STATE: ProgressState = {
   completedModules: [],
   quizScores: {},
+  completedLabs: [],
   lastVisited: null,
 };
 
@@ -81,7 +88,6 @@ export const useProgressStore = create<ProgressState & ProgressActions>()(
       getLevelProgress: (levelId) => {
         const [start, end] = LEVEL_MODULE_RANGE[levelId];
         const total = getTotalModulesForLevel(levelId);
-        // Match by level prefix AND numeric range to prevent cross-level counting.
         const prefix = `${levelId}-`;
         const completed = get().completedModules.filter((id) => {
           if (!id.startsWith(prefix)) return false;
@@ -101,6 +107,31 @@ export const useProgressStore = create<ProgressState & ProgressActions>()(
         const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
         return { completed, total, percentage };
       },
+
+      // ── Labs ────────────────────────────────────────────────────────────────
+
+      markLabComplete: (slug) =>
+        set((state) => ({
+          completedLabs: state.completedLabs.includes(slug)
+            ? state.completedLabs
+            : [...state.completedLabs, slug],
+        })),
+
+      markLabIncomplete: (slug) =>
+        set((state) => ({
+          completedLabs: state.completedLabs.filter((s) => s !== slug),
+        })),
+
+      toggleLabComplete: (slug) => {
+        const { completedLabs } = get();
+        if (completedLabs.includes(slug)) {
+          get().markLabIncomplete(slug);
+        } else {
+          get().markLabComplete(slug);
+        }
+      },
+
+      isLabComplete: (slug) => get().completedLabs.includes(slug),
 
       resetProgress: () => set(INITIAL_STATE),
     }),

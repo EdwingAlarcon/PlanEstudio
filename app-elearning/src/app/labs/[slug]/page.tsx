@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Clock, ChevronLeft, Award, Users, BookOpen, AlertCircle } from "lucide-react";
 import { getAllLabs, getLabBySlug } from "@/lib/content";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
+import { LabCompleteButton } from "@/components/labs/lab-complete-button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
@@ -127,7 +128,7 @@ export default async function LabDetailPage({ params }: Props) {
 
       {/* Footer navigation */}
       <Separator className="mt-10 mb-6" />
-      <div className="flex justify-between items-center">
+      <div className="flex flex-wrap justify-between items-center gap-3">
         <Link
           href="/labs"
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -135,10 +136,15 @@ export default async function LabDetailPage({ params }: Props) {
           <ChevronLeft className="h-4 w-4" />
           Todos los laboratorios
         </Link>
-        <span className="text-xs text-muted-foreground flex items-center gap-1">
-          <Users className="h-3 w-3" />
-          {lab.role.join(", ")}
-        </span>
+        <div className="flex items-center gap-3">
+          {lab.role.length > 0 && (
+            <span className="text-xs text-muted-foreground flex items-center gap-1">
+              <Users className="h-3 w-3" />
+              {lab.role.join(", ")}
+            </span>
+          )}
+          <LabCompleteButton slug={lab.slug} />
+        </div>
       </div>
     </main>
   );

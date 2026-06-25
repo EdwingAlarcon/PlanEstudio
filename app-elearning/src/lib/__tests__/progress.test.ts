@@ -20,6 +20,7 @@ describe("useProgressStore", () => {
     useProgressStore.setState({
       completedModules: [],
       quizScores: {},
+      completedLabs: [],
       lastVisited: null,
     });
     localStorageMock.clear();
@@ -145,15 +146,47 @@ describe("useProgressStore", () => {
   });
 
   describe("resetProgress", () => {
-    it("clears all progress", () => {
+    it("clears all progress including labs", () => {
       useProgressStore.getState().markModuleComplete("basico-1");
       useProgressStore.getState().saveQuizScore("1", 80);
+      useProgressStore.getState().markLabComplete("lab-02-dataverse-modelo-datos");
       useProgressStore.getState().resetProgress();
 
       const state = useProgressStore.getState();
       expect(state.completedModules).toHaveLength(0);
       expect(Object.keys(state.quizScores)).toHaveLength(0);
+      expect(state.completedLabs).toHaveLength(0);
       expect(state.lastVisited).toBeNull();
+    });
+  });
+
+  describe("lab progress", () => {
+    it("marks a lab as complete", () => {
+      useProgressStore.getState().markLabComplete("lab-02-dataverse-modelo-datos");
+      expect(useProgressStore.getState().isLabComplete("lab-02-dataverse-modelo-datos")).toBe(true);
+    });
+
+    it("does not duplicate completed labs", () => {
+      useProgressStore.getState().markLabComplete("lab-02-dataverse-modelo-datos");
+      useProgressStore.getState().markLabComplete("lab-02-dataverse-modelo-datos");
+      expect(useProgressStore.getState().completedLabs).toHaveLength(1);
+    });
+
+    it("marks a lab as incomplete", () => {
+      useProgressStore.getState().markLabComplete("lab-02-dataverse-modelo-datos");
+      useProgressStore.getState().markLabIncomplete("lab-02-dataverse-modelo-datos");
+      expect(useProgressStore.getState().isLabComplete("lab-02-dataverse-modelo-datos")).toBe(false);
+    });
+
+    it("toggles lab completion state", () => {
+      useProgressStore.getState().toggleLabComplete("lab-03-canvas-primera-app");
+      expect(useProgressStore.getState().isLabComplete("lab-03-canvas-primera-app")).toBe(true);
+      useProgressStore.getState().toggleLabComplete("lab-03-canvas-primera-app");
+      expect(useProgressStore.getState().isLabComplete("lab-03-canvas-primera-app")).toBe(false);
+    });
+
+    it("returns false for a lab never completed", () => {
+      expect(useProgressStore.getState().isLabComplete("lab-99-inexistente")).toBe(false);
     });
   });
 });

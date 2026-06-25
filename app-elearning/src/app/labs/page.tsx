@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Clock, BookOpen, Award, ChevronRight, FlaskConical } from "lucide-react";
 import { getAllLabs } from "@/lib/content";
+import { LabCardStatus } from "@/components/labs/lab-card-status";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -88,7 +89,10 @@ export default function LabsPage() {
                         <CardTitle className="text-sm font-semibold leading-snug group-hover:text-primary transition-colors">
                           {lab.title}
                         </CardTitle>
-                        <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary transition-colors mt-0.5" />
+                        <div className="flex items-center gap-1 mt-0.5">
+                          <LabCardStatus slug={lab.slug} />
+                          <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary transition-colors" />
+                        </div>
                       </div>
                     </CardHeader>
 
