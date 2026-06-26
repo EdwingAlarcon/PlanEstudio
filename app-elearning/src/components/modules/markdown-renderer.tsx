@@ -202,6 +202,30 @@ const PROSE_CLASSES = [
   "prose-lead:text-muted-foreground",
 ].join(" ");
 
+// ─── Task-list space fix ──────────────────────────────────────────────────────
+// remark-gfm v4 strips whitespace from text nodes adjacent to inline elements
+// (strong, links) inside task-list items. Replacing those spaces with U+00A0
+// (non-breaking space) before remark sees the string prevents the stripping,
+// since U+00A0 is not classified as ASCII whitespace.
+
+const TASK_LIST_LINE = /^\s*[-*+]\s+\[[ xX]\]/;
+
+function preprocessTaskListSpaces(content: string): string {
+  return content
+    .split("\n")
+    .map((line) => {
+      if (!TASK_LIST_LINE.test(line)) return line;
+      return (
+        line
+          .replace(/(\S) (\*\*)/g, "$1 $2")   // space before **bold** → NBSP
+          .replace(/(\*\*) (\S)/g, "$1 $2")   // space after **bold** → NBSP
+          .replace(/(\S) (\[)/g, "$1 $2")     // space before [link] → NBSP
+          .replace(/(\)) (\S)/g, "$1 $2")     // space after link) → NBSP
+      );
+    })
+    .join("\n");
+}
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 interface MarkdownRendererProps {
@@ -211,10 +235,11 @@ interface MarkdownRendererProps {
 }
 
 export function MarkdownRenderer({ content, className }: MarkdownRendererProps) {
+  const processedContent = preprocessTaskListSpaces(content);
   return (
     <article className={cn(PROSE_CLASSES, className)}>
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={COMPONENTS}>
-        {content}
+        {processedContent}
       </ReactMarkdown>
     </article>
   );
