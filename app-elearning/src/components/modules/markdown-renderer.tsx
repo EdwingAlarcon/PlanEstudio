@@ -17,9 +17,38 @@ function extractLanguage(className?: string): string | null {
 // ─── Custom components ────────────────────────────────────────────────────────
 
 const COMPONENTS: Components = {
+  // ── Lists ────────────────────────────────────────────────────────────────────
+  // Explicit overrides guarantee bullets/numbers are always visible regardless
+  // of @tailwindcss/typography resets or CSS cascade conflicts.
+  // remark-gfm adds class="contains-task-list" to ul elements that contain
+  // checkboxes — those get list-none; regular lists get list-disc.
+  ul: ({ className, children }) => {
+    if (className?.includes("contains-task-list")) {
+      return (
+        <ul className="my-5 list-none pl-0 space-y-2">{children}</ul>
+      );
+    }
+    return (
+      <ul className="my-5 list-disc pl-6 space-y-0.5">{children}</ul>
+    );
+  },
+
+  ol: ({ children }) => (
+    <ol className="my-5 list-decimal pl-6 space-y-0.5">{children}</ol>
+  ),
+
+  li: ({ className, children }) => {
+    if (className?.includes("task-list-item")) {
+      return (
+        <li className="flex items-start gap-0 list-none leading-[1.75] my-0.5">
+          {children}
+        </li>
+      );
+    }
+    return <li className="leading-[1.75] my-0.5">{children}</li>;
+  },
+
   // ── Tables ──────────────────────────────────────────────────────────────────
-  // Wrap in overflow div for mobile scroll; use not-prose to escape Typography's
-  // descendant selectors and apply precise utility classes instead.
   table: ({ children }) => (
     <div className="not-prose my-8 w-full overflow-x-auto rounded-lg border border-border shadow-sm">
       <table className="w-full min-w-full border-collapse text-sm">
@@ -55,7 +84,6 @@ const COMPONENTS: Components = {
   ),
 
   // ── Blockquotes ─────────────────────────────────────────────────────────────
-  // Styled as callout/info cards — not-prose for full control.
   blockquote: ({ children }) => (
     <div className="not-prose my-6 rounded-r-lg border-l-4 border-primary bg-primary/5 dark:bg-primary/10 px-5 py-4 text-sm leading-relaxed text-foreground [&_p]:my-1 [&_strong]:font-semibold [&_code]:rounded [&_code]:bg-muted [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-xs [&_code]:border [&_code]:border-border">
       {children}
@@ -63,9 +91,7 @@ const COMPONENTS: Components = {
   ),
 
   // ── Code blocks ─────────────────────────────────────────────────────────────
-  // not-prose so prose doesn't override background/padding.
   pre: ({ children }) => {
-    // Extract language from the nested <code className="language-xxx"> child.
     let lang: string | null = null;
     React.Children.forEach(children, (child) => {
       if (React.isValidElement(child)) {
@@ -92,18 +118,14 @@ const COMPONENTS: Components = {
     );
   },
 
-  // Inline code: check for language-* className → block code inside a <pre>,
-  // otherwise → inline code with highlight background.
   code: ({ className, children }) => {
     if (extractLanguage(className) !== null) {
-      // Inside a pre block — minimal styling, pre handles the container.
       return (
         <code className={cn("font-mono text-sm text-slate-100 leading-relaxed", className)}>
           {children}
         </code>
       );
     }
-    // Inline code
     return (
       <code className="rounded-md border border-border bg-muted px-1.5 py-0.5 font-mono text-[0.875em] text-foreground">
         {children}
@@ -111,7 +133,7 @@ const COMPONENTS: Components = {
     );
   },
 
-  // ── Links — MS blue with hover underline ────────────────────────────────────
+  // ── Links ───────────────────────────────────────────────────────────────────
   a: ({ href, children }) => (
     <a
       href={href}
@@ -157,89 +179,58 @@ const COMPONENTS: Components = {
 };
 
 // ─── Prose wrapper classes ────────────────────────────────────────────────────
-// Microsoft-inspired prose styling. Custom components handle tables,
-// blockquotes, code blocks, links and checkboxes (all use not-prose).
 
 const PROSE_CLASSES = [
-  // Plugin base
   "prose prose-slate dark:prose-invert max-w-none",
 
-  // ── Headings ──────────────────────────────────────────────────────────────
+  // Headings — generous vertical spacing matches MS Learn section rhythm
   "prose-headings:scroll-mt-24 prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground",
-  // h2: section headers with bottom border (matches MS Learn sections)
   "prose-h2:text-[1.25rem] prose-h2:leading-snug",
-  "prose-h2:mt-12 prose-h2:mb-5 prose-h2:pb-3",
+  "prose-h2:mt-14 prose-h2:mb-6 prose-h2:pb-3",
   "prose-h2:border-b prose-h2:border-border",
-  // h3: exercise / subsection
   "prose-h3:text-[1.1rem] prose-h3:leading-snug",
-  "prose-h3:mt-8 prose-h3:mb-3",
-  // h4: step-level
+  "prose-h3:mt-10 prose-h3:mb-4",
   "prose-h4:text-base prose-h4:leading-snug",
-  "prose-h4:mt-6 prose-h4:mb-2",
+  "prose-h4:mt-6 prose-h4:mb-3",
 
-  // ── Paragraphs ─────────────────────────────────────────────────────────────
-  "prose-p:my-4 prose-p:leading-[1.85]",
+  // Paragraphs
+  "prose-p:my-5 prose-p:leading-[1.85]",
 
-  // ── Lists ──────────────────────────────────────────────────────────────────
+  // Lists — only margin; list-style handled by component overrides above
   "prose-ul:my-5 prose-ol:my-5",
-  "prose-li:my-2 prose-li:leading-relaxed",
 
-  // ── Strong / em ───────────────────────────────────────────────────────────
+  // Paragraphs inside list items (loose lists) shouldn't add giant margins
+  "[&_li>p]:my-2",
+
+  // Strong / em
   "prose-strong:font-semibold prose-strong:text-foreground",
 
-  // ── Inline code — remove backtick quotes added by prose, custom component
-  //    handles the actual visual styling
+  // Inline code
   "prose-code:before:content-none prose-code:after:content-none",
   "prose-code:font-mono",
 
-  // ── Pre — fully neutralised; custom <pre> handles the container
+  // Pre — neutralised; custom <pre> handles the container
   "prose-pre:bg-transparent prose-pre:p-0 prose-pre:shadow-none prose-pre:border-0",
 
-  // ── HR ─────────────────────────────────────────────────────────────────────
+  // HR
   "prose-hr:border-border",
 
-  // ── Lead / muted ─────────────────────────────────────────────────────────
+  // Lead
   "prose-lead:text-muted-foreground",
 ].join(" ");
-
-// ─── Task-list space fix ──────────────────────────────────────────────────────
-// remark-gfm v4 strips whitespace from text nodes adjacent to inline elements
-// (strong, links) inside task-list items. Replacing those spaces with U+00A0
-// (non-breaking space) before remark sees the string prevents the stripping,
-// since U+00A0 is not classified as ASCII whitespace.
-
-const TASK_LIST_LINE = /^\s*[-*+]\s+\[[ xX]\]/;
-
-function preprocessTaskListSpaces(content: string): string {
-  return content
-    .split("\n")
-    .map((line) => {
-      if (!TASK_LIST_LINE.test(line)) return line;
-      return (
-        line
-          .replace(/(\S) (\*\*)/g, "$1 $2")   // space before **bold** → NBSP
-          .replace(/(\*\*) (\S)/g, "$1 $2")   // space after **bold** → NBSP
-          .replace(/(\S) (\[)/g, "$1 $2")     // space before [link] → NBSP
-          .replace(/(\)) (\S)/g, "$1 $2")     // space after link) → NBSP
-      );
-    })
-    .join("\n");
-}
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
 interface MarkdownRendererProps {
   content: string;
-  /** Extra classes merged onto the <article> wrapper */
   className?: string;
 }
 
 export function MarkdownRenderer({ content, className }: MarkdownRendererProps) {
-  const processedContent = preprocessTaskListSpaces(content);
   return (
     <article className={cn(PROSE_CLASSES, className)}>
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={COMPONENTS}>
-        {processedContent}
+        {content}
       </ReactMarkdown>
     </article>
   );
