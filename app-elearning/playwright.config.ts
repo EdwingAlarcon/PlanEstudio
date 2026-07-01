@@ -1,10 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 
-/**
- * E2E config — siempre apunta a localhost:3000 sin basePath.
- * El deploy a GitHub Pages usa basePath=/PlanEstudio (GITHUB_PAGES=true),
- * pero los tests E2E corren localmente con GITHUB_PAGES no definido (basePath="").
- */
+// E2E apunta a localhost:3000 sin basePath; basePath=/PlanEstudio solo cuando GITHUB_PAGES=true en CI.
 export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,

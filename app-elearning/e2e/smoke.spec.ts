@@ -11,7 +11,7 @@ test.describe("Smoke — rutas principales", () => {
   test("Nivel 1 muestra lista de módulos", async ({ page }) => {
     await page.goto("/nivel/basico");
     await expect(page.locator("h1")).toContainText("Básico");
-    await expect(page.locator("text=01").first()).toBeVisible();
+    await expect(page.locator('a[href*="/nivel/basico/modulo/"]').first()).toBeVisible();
   });
 
   test("detalle de módulo carga contenido", async ({ page }) => {
@@ -21,6 +21,18 @@ test.describe("Smoke — rutas principales", () => {
     await expect(page.locator("h1")).toBeVisible();
     // El contenido Markdown renderizado debe tener al menos un h2/h3
     await expect(page.locator("article h2, article h3").first()).toBeVisible();
+  });
+
+  test("marcar módulo como completado actualiza el progreso", async ({ page }) => {
+    await page.goto("/nivel/basico");
+    const firstLink = page.locator('a[href*="/nivel/basico/modulo/"]').first();
+    await firstLink.click();
+    const completeBtn = page.locator('button[aria-label*="Marcar"]').first();
+    await completeBtn.waitFor({ state: "visible" });
+    await completeBtn.click();
+    await expect(completeBtn).toHaveAttribute("aria-pressed", "true");
+    await page.locator('a[href="/nivel/basico"]').first().click();
+    await expect(page.locator("text=/1\\s*\\/\\s*\\d+/")).toBeVisible();
   });
 
   test("simulador carga con botón de inicio", async ({ page }) => {

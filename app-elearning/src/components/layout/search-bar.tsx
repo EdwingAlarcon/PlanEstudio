@@ -34,9 +34,8 @@ const LEVEL_LABELS: Record<string, string> = {
 };
 
 const TYPE_CONFIG: Record<SearchDocumentType, { label: string; color: string }> = {
-  module:   { label: "Módulo",      color: "bg-[#EFF6FC] text-[#0078D4] dark:bg-[rgba(33,150,243,0.15)] dark:text-[#4DB8FF]" },
-  lab:      { label: "Lab",         color: "bg-[#EFF8EE] text-[#107C10] dark:bg-[rgba(16,124,16,0.15)] dark:text-[#2DB52D]" },
-  resource: { label: "Recurso",     color: "bg-muted text-muted-foreground" },
+  module: { label: "Módulo", color: "bg-[#EFF6FC] text-[#0078D4] dark:bg-[rgba(33,150,243,0.15)] dark:text-[#4DB8FF]" },
+  lab:    { label: "Lab",    color: "bg-[#EFF8EE] text-[#107C10] dark:bg-[rgba(16,124,16,0.15)] dark:text-[#2DB52D]" },
 };
 
 export function SearchBar({ documents }: SearchBarProps) {

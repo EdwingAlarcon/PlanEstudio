@@ -353,7 +353,7 @@ export function getLabBySlug(slug: string): LabInfo | undefined {
 
 // ─── Search index ─────────────────────────────────────────────────────────────
 
-export type SearchDocumentType = "module" | "lab" | "resource";
+export type SearchDocumentType = "module" | "lab";
 
 export interface SearchDocument {
   id: string;
@@ -382,7 +382,7 @@ export function getSearchDocuments(): SearchDocument[] {
   }));
 
   const labDocs: SearchDocument[] = getAllLabs().map((lab) => ({
-    id: `lab-${lab.id}`,
+    id: lab.slug,
     title: lab.title,
     levelId: lab.level,
     moduleId: 0,

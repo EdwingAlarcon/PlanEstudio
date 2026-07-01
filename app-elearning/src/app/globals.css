@@ -120,9 +120,7 @@ body {
     "Fira Mono", "Consolas", "Liberation Mono", monospace;
 }
 
-/* Task-list items: flex row so the custom SVG checkbox aligns with text.
-   Only the li.task-list-item gets list-none — NOT the parent ul — so that
-   regular li siblings inside the same ul (rare but possible) keep their bullets. */
+/* li.task-list-item gets list-none (not the parent ul) so sibling bullets are preserved */
 .prose li.task-list-item {
   display: flex;
   align-items: flex-start;
@@ -135,9 +133,7 @@ body {
   display: none;
 }
 
-/* Nested list bullet-type progression.
-   Specificity (.prose + element × 2/3) beats the Tailwind .list-disc utility
-   (class × 1) so these rules win without !important. */
+/* Specificity (.prose + 2-3 elements) beats Tailwind .list-disc (1 class) — no !important needed */
 .prose ul ul   { list-style-type: circle; }
 .prose ul ul ul { list-style-type: square; }
 .prose ol ol   { list-style-type: lower-alpha; }
