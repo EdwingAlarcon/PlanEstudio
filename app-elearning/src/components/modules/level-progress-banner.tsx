@@ -1,13 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useProgressStore } from "@/lib/progress";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Trophy } from "lucide-react";
+import { ArrowRight, Trophy, Award } from "lucide-react";
 import { UI, LEVEL_ORDER, type LevelId } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { CertificateNameDialog } from "@/components/modules/certificate-name-dialog";
 
 const LEVEL_COLORS: Record<LevelId, string> = {
   basico:     "from-green-50  to-emerald-50  border-green-200  dark:from-green-950  dark:to-emerald-950  dark:border-green-800",
@@ -50,6 +53,26 @@ function LevelCompleteBanner({ levelId, total }: { levelId: LevelId; total: numb
   const nextLevelId = currentIdx < LEVEL_ORDER.length - 1 ? LEVEL_ORDER[currentIdx + 1] : null;
   const isFinal = nextLevelId === null;
 
+  const router = useRouter();
+  const userName = useProgressStore((s) => s.userName);
+  const setUserName = useProgressStore((s) => s.setUserName);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const goToCertificate = () => router.push(`/certificado/${levelId}`);
+
+  const handleGenerateCertificate = () => {
+    if (userName) {
+      goToCertificate();
+    } else {
+      setDialogOpen(true);
+    }
+  };
+
+  const handleConfirmName = (name: string) => {
+    setUserName(name);
+    goToCertificate();
+  };
+
   return (
     <div
       className={cn(
@@ -89,6 +112,11 @@ function LevelCompleteBanner({ levelId, total }: { levelId: LevelId; total: numb
           {UI.levels.cert[levelId]} — Listo para el examen
         </Badge>
 
+        <Button size="sm" variant="outline" onClick={handleGenerateCertificate}>
+          <Award className="h-3.5 w-3.5 mr-1.5" aria-hidden />
+          Generar certificado
+        </Button>
+
         {nextLevelId && (
           <Button asChild size="sm">
             <Link href={`/nivel/${nextLevelId}`}>
@@ -98,6 +126,13 @@ function LevelCompleteBanner({ levelId, total }: { levelId: LevelId; total: numb
           </Button>
         )}
       </div>
+
+      <CertificateNameDialog
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        initialName={userName ?? ""}
+        onConfirm={handleConfirmName}
+      />
     </div>
   );
 }
