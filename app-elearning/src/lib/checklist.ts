@@ -1,4 +1,4 @@
-import type { LevelId } from "./i18n";
+import { LEVEL_MODULE_RANGE, LEVEL_ORDER, type LevelId } from "./i18n";
 
 export interface ChecklistItem {
   id: string;
@@ -49,6 +49,7 @@ const LEVEL_BY_NUMBER: Record<number, LevelId> = {
 const LEVEL_HEADING = /^##\s+.*?NIVEL\s+(\d+)[:\s]+(.+)$/i;
 const MODULE_HEADING = /^###\s+Módulo\s+(\d+)[:\s]+(.+)$/i;
 const CHECKLIST_ITEM = /^-\s+\[[ xX]\]\s+\*\*(.+?)\*\*:\s+(.+?)(?:\s+\|\s+Dominio:.*)?$/;
+const ALLOWED_CATEGORIES = new Set(["Conocimiento", "Práctica", "Entrega"]);
 
 function cleanTitle(value: string): string {
   return value.replace(/\*+/g, "").trim();
@@ -142,4 +143,57 @@ export function summarizeChecklistProgress(
         ? Math.round((masteryValues.reduce((sum, value) => sum + value, 0) / masteryValues.length) * 10) / 10
         : null,
   };
+}
+
+export function validateChecklistData(checklist: ChecklistData): void {
+  const levelIds = checklist.levels.map((level) => level.levelId);
+  const missingLevels = LEVEL_ORDER.filter((levelId) => !levelIds.includes(levelId));
+  if (missingLevels.length > 0) {
+    throw new Error(`Faltan niveles del checklist: ${missingLevels.join(", ")}`);
+  }
+
+  const expectedModuleIds = Object.values(LEVEL_MODULE_RANGE).flatMap(([min, max]) => {
+    const ids: number[] = [];
+    for (let id = min; id <= max; id += 1) ids.push(id);
+    return ids;
+  });
+  const modules = checklist.levels.flatMap((level) =>
+    level.modules.map((mod) => ({ ...mod, levelId: level.levelId })),
+  );
+  const moduleIds = modules.map((mod) => mod.moduleId);
+  const missingModules = expectedModuleIds.filter((moduleId) => !moduleIds.includes(moduleId));
+  if (missingModules.length > 0) {
+    throw new Error(`Faltan módulos del checklist: ${missingModules.join(", ")}`);
+  }
+
+  const duplicateModuleIds = moduleIds.filter((moduleId, index) => moduleIds.indexOf(moduleId) !== index);
+  if (duplicateModuleIds.length > 0) {
+    throw new Error(`Módulos duplicados en checklist: ${Array.from(new Set(duplicateModuleIds)).join(", ")}`);
+  }
+
+  for (const mod of modules) {
+    const [min, max] = LEVEL_MODULE_RANGE[mod.levelId];
+    if (mod.moduleId < min || mod.moduleId > max) {
+      throw new Error(`Módulo ${mod.moduleId} fuera del rango esperado para ${mod.levelId}`);
+    }
+    if (mod.items.length === 0) {
+      throw new Error(`Módulo ${mod.moduleId} del checklist no tiene criterios`);
+    }
+  }
+
+  const itemIds = modules.flatMap((mod) => mod.items.map((item) => item.id));
+  const duplicateItemIds = itemIds.filter((itemId, index) => itemIds.indexOf(itemId) !== index);
+  if (duplicateItemIds.length > 0) {
+    throw new Error(`Criterios duplicados en checklist: ${Array.from(new Set(duplicateItemIds)).join(", ")}`);
+  }
+
+  for (const mod of modules) {
+    for (const item of mod.items) {
+      if (!ALLOWED_CATEGORIES.has(item.category)) {
+        throw new Error(
+          `Categoría de checklist inválida en módulo ${mod.moduleId}: ${item.category}`,
+        );
+      }
+    }
+  }
 }

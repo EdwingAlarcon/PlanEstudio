@@ -63,10 +63,22 @@ test.describe("Smoke — rutas principales", () => {
     const firstCriterion = page.locator('input[type="checkbox"]').first();
     await firstCriterion.check();
     await page.locator("select").first().selectOption("4");
+    await page.getByRole("button", { name: "Completados" }).click();
+    await expect(page.locator('input[type="checkbox"]').first()).toBeChecked();
+    await page.getByRole("button", { name: "Pendientes" }).click();
+    await expect(page.locator('input[type="checkbox"]').first()).not.toBeChecked();
+    await page.getByRole("button", { name: "Siguiente pendiente" }).click();
+    await expect(page.getByRole("button", { name: "Pendientes" })).toBeVisible();
 
     await page.reload();
+    await page.getByRole("button", { name: "Completados" }).click();
     await expect(page.locator('input[type="checkbox"]').first()).toBeChecked();
     await expect(page.locator("select").first()).toHaveValue("4");
+
+    await page.getByRole("button", { name: "Limpiar checklist" }).click();
+    await page.getByRole("button", { name: "Todos" }).click();
+    await expect(page.locator('input[type="checkbox"]').first()).not.toBeChecked();
+    await expect(page.locator("select").first()).toHaveValue("");
   });
 
   test("modo oscuro alterna correctamente", async ({ page }) => {

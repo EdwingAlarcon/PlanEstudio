@@ -2,11 +2,14 @@
 
 import { useMemo, useState } from "react";
 import {
+  ArrowRight,
   BarChart3,
   CalendarDays,
   CheckCircle2,
   ClipboardCheck,
+  Filter,
   ListChecks,
+  RotateCcw,
   Target,
 } from "lucide-react";
 import type {
@@ -40,6 +43,14 @@ const CATEGORY_STYLE: Record<string, string> = {
   Conocimiento: "border-[#0078D4]/30 bg-[#EFF6FC] text-[#005A9E] dark:bg-[rgba(0,120,212,0.14)] dark:text-[#74CAFF]",
   Práctica: "border-[#107C10]/30 bg-[#F1F8F1] text-[#0B5C0B] dark:bg-[rgba(16,124,16,0.14)] dark:text-green-300",
   Entrega: "border-orange-500/30 bg-orange-50 text-orange-700 dark:bg-orange-500/10 dark:text-orange-300",
+};
+
+type ChecklistFilter = "all" | "pending" | "completed";
+
+const FILTER_LABEL: Record<ChecklistFilter, string> = {
+  all: "Todos",
+  pending: "Pendientes",
+  completed: "Completados",
 };
 
 function today(): string {
@@ -80,10 +91,12 @@ interface ChecklistClientProps {
 export function ChecklistClient({ checklist }: ChecklistClientProps) {
   const checklistItems = useProgressStore((state) => state.checklistItems);
   const setChecklistItem = useProgressStore((state) => state.setChecklistItem);
+  const resetChecklistProgress = useProgressStore((state) => state.resetChecklistProgress);
   const completedModules = useProgressStore((state) => state.completedModules);
   const completedLabs = useProgressStore((state) => state.completedLabs);
 
   const [activeLevelId, setActiveLevelId] = useState<LevelId>("basico");
+  const [filter, setFilter] = useState<ChecklistFilter>("all");
   const activeLevel = getLevelById(checklist, activeLevelId);
   const [activeModuleId, setActiveModuleId] = useState(() => findInitialModule(activeLevel, checklistItems));
 
@@ -94,6 +107,12 @@ export function ChecklistClient({ checklist }: ChecklistClientProps) {
   );
   const moduleSummary = summarizeItems(activeModule.items, checklistItems);
   const levelSummary = summarizeLevel(activeLevel, checklistItems);
+  const visibleItems = activeModule.items.filter((item) => {
+    const completed = checklistItems[item.id]?.completed ?? false;
+    if (filter === "pending") return !completed;
+    if (filter === "completed") return completed;
+    return true;
+  });
 
   const updateItem = (itemId: string, patch: Partial<ChecklistItemProgress>) => {
     setChecklistItem(itemId, patch);
@@ -112,6 +131,16 @@ export function ChecklistClient({ checklist }: ChecklistClientProps) {
     const nextLevel = getLevelById(checklist, levelId);
     setActiveLevelId(levelId);
     setActiveModuleId(findInitialModule(nextLevel, checklistItems));
+  };
+
+  const goToNextPending = () => {
+    const nextModule = activeLevel.modules.find((mod) =>
+      mod.items.some((item) => !checklistItems[item.id]?.completed),
+    );
+    if (nextModule) {
+      setActiveModuleId(nextModule.moduleId);
+      setFilter("pending");
+    }
   };
 
   return (
@@ -139,6 +168,9 @@ export function ChecklistClient({ checklist }: ChecklistClientProps) {
           </div>
         </div>
         <Progress value={overall.percentage} className="mt-5 h-2 [&>div]:bg-[#0078D4]" />
+        <p className="mt-2 text-xs text-muted-foreground">
+          El dominio promedio considera solo criterios completados.
+        </p>
       </header>
 
       <section aria-label="Resumen del aprendizaje" className="grid gap-3 md:grid-cols-3">
@@ -257,10 +289,43 @@ export function ChecklistClient({ checklist }: ChecklistClientProps) {
                 <Progress value={moduleSummary.percentage} className="mt-1.5 h-2 [&>div]:bg-[#0078D4]" />
               </div>
             </div>
+            <div className="mt-4 flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+              <div className="flex flex-wrap items-center gap-2" aria-label="Filtrar criterios">
+                <Filter className="h-4 w-4 text-muted-foreground" aria-hidden />
+                {(Object.keys(FILTER_LABEL) as ChecklistFilter[]).map((option) => (
+                  <Button
+                    key={option}
+                    type="button"
+                    size="sm"
+                    variant={filter === option ? "default" : "outline"}
+                    onClick={() => setFilter(option)}
+                    className={cn(
+                      filter === option ? "bg-[#0078D4] text-white hover:bg-[#106EBE]" : "bg-background",
+                    )}
+                  >
+                    {FILTER_LABEL[option]}
+                  </Button>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <Button type="button" size="sm" variant="outline" onClick={goToNextPending}>
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                  Siguiente pendiente
+                </Button>
+                <Button type="button" size="sm" variant="outline" onClick={resetChecklistProgress}>
+                  <RotateCcw className="h-4 w-4" aria-hidden />
+                  Limpiar checklist
+                </Button>
+              </div>
+            </div>
           </div>
 
           <div className="divide-y divide-border">
-            {activeModule.items.map((item) => {
+            {visibleItems.length === 0 ? (
+              <div className="px-5 py-8 text-sm text-muted-foreground">
+                No hay criterios para este filtro.
+              </div>
+            ) : visibleItems.map((item) => {
               const state = checklistItems[item.id] ?? getEmptyChecklistItemProgress();
               return (
                 <ChecklistRow

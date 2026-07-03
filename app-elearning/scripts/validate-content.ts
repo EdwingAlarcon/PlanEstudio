@@ -7,14 +7,21 @@
  * inválidos) y agrega el chequeo que faltaba: que los 41 módulos tengan
  * al menos una pregunta.
  */
-import { ContentValidationError, getAllLevels, getAllLabs } from "../src/lib/content";
+import { ContentValidationError, getAllLevels, getAllLabs, getResourceBySlug } from "../src/lib/content";
 import { getAllQuestions } from "../src/lib/questions-parser";
+import { parseChecklistMarkdown, validateChecklistData } from "../src/lib/checklist";
 import { LEVEL_MODULE_RANGE } from "../src/lib/i18n";
 
 function main(): void {
   const levels = getAllLevels();
   const labs = getAllLabs();
   const questions = getAllQuestions();
+  const checklistPage = getResourceBySlug("checklist");
+  if (!checklistPage) {
+    throw new ContentValidationError("No se encontró el recurso checklist");
+  }
+  const checklist = parseChecklistMarkdown(checklistPage.rawContent);
+  validateChecklistData(checklist);
 
   const allModuleIds = levels.flatMap((level) => level.modules.map((mod) => mod.moduleId));
   const expectedModuleIds = Object.values(LEVEL_MODULE_RANGE).flatMap(([min, max]) => {
@@ -43,12 +50,13 @@ function main(): void {
   console.log(`✓ ${allModuleIds.length} módulos válidos (moduleId único, slug único, rango por nivel)`);
   console.log(`✓ ${labs.length} labs válidos (id único, slug único)`);
   console.log(`✓ ${questions.length} preguntas válidas cubriendo los ${expectedModuleIds.length} módulos`);
+  console.log(`✓ Checklist válido (${checklist.totalModules} módulos, ${checklist.totalItems} criterios)`);
 }
 
 try {
   main();
 } catch (error) {
-  if (error instanceof ContentValidationError) {
+  if (error instanceof ContentValidationError || error instanceof Error) {
     console.error(`✗ Validación de contenido falló: ${error.message}`);
   } else {
     console.error("✗ Validación de contenido falló con error inesperado:", error);

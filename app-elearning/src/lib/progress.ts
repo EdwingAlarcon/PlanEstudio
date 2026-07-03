@@ -36,6 +36,7 @@ export interface ProgressActions {
   isLabComplete: (slug: string) => boolean;
   setChecklistItem: (itemId: string, patch: Partial<ChecklistItemProgress>) => void;
   getChecklistItem: (itemId: string) => ChecklistItemProgress;
+  resetChecklistProgress: () => void;
   resetProgress: () => void;
 }
 
@@ -161,6 +162,8 @@ export const useProgressStore = create<ProgressState & ProgressActions>()(
         }),
 
       getChecklistItem: (itemId) => get().checklistItems[itemId] ?? getEmptyChecklistItemProgress(),
+
+      resetChecklistProgress: () => set({ checklistItems: {} }),
 
       resetProgress: () => set(INITIAL_STATE),
     }),

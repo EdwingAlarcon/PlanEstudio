@@ -222,6 +222,27 @@ describe("useProgressStore", () => {
         completedAt: null,
       });
     });
+
+    it("clears only checklist items when resetting checklist progress", () => {
+      useProgressStore.getState().markModuleComplete("basico-1");
+      useProgressStore.getState().saveQuizScore("1", 90);
+      useProgressStore.getState().markLabComplete("lab-02-dataverse-modelo-datos");
+      useProgressStore.getState().setUserName("Ada Lovelace");
+      useProgressStore.getState().setChecklistItem("module-1-1", {
+        completed: true,
+        mastery: 4,
+        completedAt: "2026-07-03",
+      });
+
+      useProgressStore.getState().resetChecklistProgress();
+
+      const state = useProgressStore.getState();
+      expect(state.checklistItems).toEqual({});
+      expect(state.completedModules).toContain("basico-1");
+      expect(state.quizScores["1"]).toBe(90);
+      expect(state.completedLabs).toContain("lab-02-dataverse-modelo-datos");
+      expect(state.userName).toBe("Ada Lovelace");
+    });
   });
 
   describe("lab progress", () => {

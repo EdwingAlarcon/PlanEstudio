@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { parseChecklistMarkdown, summarizeChecklistProgress } from "../checklist";
+import {
+  parseChecklistMarkdown,
+  summarizeChecklistProgress,
+  validateChecklistData,
+} from "../checklist";
 
 const SAMPLE = `# Checklist
 
@@ -58,5 +62,88 @@ describe("summarizeChecklistProgress", () => {
     expect(summary.completed).toBe(2);
     expect(summary.percentage).toBe(50);
     expect(summary.averageMastery).toBe(3);
+  });
+});
+
+describe("validateChecklistData", () => {
+  it("accepts a checklist with all expected modules and valid categories", () => {
+    const modules = Array.from({ length: 41 }, (_, index) => {
+      const moduleId = index + 1;
+      return `### Módulo ${moduleId}: Módulo ${moduleId}
+
+- [ ] **Conocimiento**: Criterio ${moduleId}
+`;
+    });
+    const markdown = `## NIVEL 1: BÁSICO
+
+${modules.slice(0, 8).join("\n")}
+## NIVEL 2: INTERMEDIO
+
+${modules.slice(8, 17).join("\n")}
+## NIVEL 3: AVANZADO
+
+${modules.slice(17, 30).join("\n")}
+## NIVEL 4: ARQUITECTO
+
+${modules.slice(30).join("\n")}`;
+
+    expect(() => validateChecklistData(parseChecklistMarkdown(markdown))).not.toThrow();
+  });
+
+  it("throws a clear error when checklist modules are missing", () => {
+    const markdown = `## NIVEL 1: BÁSICO
+
+### Módulo 1: Introducción
+
+- [ ] **Conocimiento**: Criterio
+
+## NIVEL 2: INTERMEDIO
+
+### Módulo 9: Intermedio
+
+- [ ] **Conocimiento**: Criterio
+
+## NIVEL 3: AVANZADO
+
+### Módulo 18: Avanzado
+
+- [ ] **Conocimiento**: Criterio
+
+## NIVEL 4: ARQUITECTO
+
+### Módulo 31: Arquitecto
+
+- [ ] **Conocimiento**: Criterio
+`;
+    const checklist = parseChecklistMarkdown(markdown);
+
+    expect(() => validateChecklistData(checklist)).toThrow(/Faltan módulos del checklist/i);
+  });
+
+  it("throws a clear error when a criterion category is invalid", () => {
+    const modules = Array.from({ length: 41 }, (_, index) => {
+      const moduleId = index + 1;
+      const category = moduleId === 1 ? "Otro" : "Conocimiento";
+      return `### Módulo ${moduleId}: Módulo ${moduleId}
+
+- [ ] **${category}**: Criterio ${moduleId}
+`;
+    });
+    const markdown = `## NIVEL 1: BÁSICO
+
+${modules.slice(0, 8).join("\n")}
+## NIVEL 2: INTERMEDIO
+
+${modules.slice(8, 17).join("\n")}
+## NIVEL 3: AVANZADO
+
+${modules.slice(17, 30).join("\n")}
+## NIVEL 4: ARQUITECTO
+
+${modules.slice(30).join("\n")}`;
+
+    expect(() => validateChecklistData(parseChecklistMarkdown(markdown))).toThrow(
+      /Categoría de checklist inválida/i,
+    );
   });
 });
