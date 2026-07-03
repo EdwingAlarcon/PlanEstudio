@@ -4,6 +4,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { cn } from "@/lib/utils";
+import { MermaidDiagram } from "@/components/modules/mermaid-diagram";
 import type { Components } from "react-markdown";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -12,6 +13,16 @@ function extractLanguage(className?: string): string | null {
   if (!className) return null;
   const m = /language-(\w+)/.exec(className);
   return m?.[1] ?? null;
+}
+
+function extractText(node: React.ReactNode): string {
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(extractText).join("");
+  if (React.isValidElement(node)) {
+    const props = node.props as { children?: React.ReactNode };
+    return extractText(props.children);
+  }
+  return "";
 }
 
 // ─── Custom components ────────────────────────────────────────────────────────
@@ -29,12 +40,12 @@ const COMPONENTS: Components = {
       );
     }
     return (
-      <ul className="my-5 list-disc pl-6 space-y-0.5">{children}</ul>
+      <ul className="my-5 list-disc pl-6 space-y-3">{children}</ul>
     );
   },
 
   ol: ({ children }) => (
-    <ol className="my-5 list-decimal pl-6 space-y-0.5">{children}</ol>
+    <ol className="my-5 list-decimal pl-6 space-y-3">{children}</ol>
   ),
 
   li: ({ className, children }) => {
@@ -93,14 +104,20 @@ const COMPONENTS: Components = {
   // ── Code blocks ─────────────────────────────────────────────────────────────
   pre: ({ children }) => {
     let lang: string | null = null;
+    let codeNode: React.ReactNode = null;
     React.Children.forEach(children, (child) => {
       if (React.isValidElement(child)) {
         const p = child.props as Record<string, unknown>;
         if (typeof p.className === "string") {
           lang = extractLanguage(p.className);
         }
+        codeNode = (p as { children?: React.ReactNode }).children;
       }
     });
+
+    if (lang === "mermaid") {
+      return <MermaidDiagram code={extractText(codeNode)} />;
+    }
 
     return (
       <div className="not-prose my-6 overflow-hidden rounded-lg border border-slate-700 dark:border-slate-800 shadow-md">
