@@ -99,10 +99,109 @@ const LEVEL_META: Record<LevelId, { title: string; description: string; certific
 
 // ─── Utilities ────────────────────────────────────────────────────────────────
 
+export class ContentValidationError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "ContentValidationError";
+  }
+}
+
+function failContent(filePath: string, message: string): never {
+  throw new ContentValidationError(`${filePath}: ${message}`);
+}
+
 function estimateReadingMinutes(text: string): number {
   const wordsPerMinute = 200;
   const wordCount = text.trim().split(/\s+/).length;
   return Math.max(5, Math.ceil(wordCount / wordsPerMinute));
+}
+
+function readRequiredFile(filePath: string): string {
+  if (!fs.existsSync(filePath)) {
+    failContent(filePath, "archivo requerido no encontrado");
+  }
+
+  try {
+    return fs.readFileSync(filePath, "utf-8");
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    failContent(filePath, `no se pudo leer el archivo: ${message}`);
+  }
+}
+
+function requireString(data: Record<string, unknown>, key: string, filePath: string): string {
+  const value = data[key];
+  if (typeof value !== "string" || value.trim().length === 0) {
+    failContent(filePath, `frontmatter '${key}' debe ser un texto no vacío`);
+  }
+  return value.trim();
+}
+
+function requireStringArray(data: Record<string, unknown>, key: string, filePath: string): string[] {
+  const value = data[key];
+  if (!Array.isArray(value) || value.some((item) => typeof item !== "string" || item.trim().length === 0)) {
+    failContent(filePath, `frontmatter '${key}' debe ser una lista de textos no vacíos`);
+  }
+  return value.map((item) => String(item).trim());
+}
+
+function validateModuleFrontmatter(
+  data: Record<string, unknown>,
+  levelId: LevelId,
+  filePath: string,
+): Omit<ModuleInfo, "id" | "rawContent"> {
+  const moduleId = Number(data["moduleId"]);
+  const [minModuleId, maxModuleId] = LEVEL_MODULE_RANGE[levelId];
+  if (!Number.isInteger(moduleId) || moduleId < minModuleId || moduleId > maxModuleId) {
+    failContent(filePath, `frontmatter 'moduleId' debe ser un entero entre ${minModuleId} y ${maxModuleId}`);
+  }
+
+  const declaredLevel = requireString(data, "level", filePath);
+  if (declaredLevel !== levelId) {
+    failContent(filePath, `frontmatter 'level' debe ser '${levelId}', recibido '${declaredLevel}'`);
+  }
+
+  const title = requireString(data, "title", filePath);
+  const slug = requireString(data, "slug", filePath);
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+    failContent(filePath, `frontmatter 'slug' debe usar kebab-case ASCII, recibido '${slug}'`);
+  }
+
+  const estimatedMinutes = Number(data["estimatedMinutes"]);
+  if (!Number.isFinite(estimatedMinutes) || estimatedMinutes <= 0) {
+    failContent(filePath, "frontmatter 'estimatedMinutes' debe ser un número positivo");
+  }
+
+  return { moduleId, levelId, title, slug, estimatedMinutes };
+}
+
+function validateLabFrontmatter(data: Record<string, unknown>, filePath: string): Omit<LabInfo, "slug" | "rawContent"> {
+  const id = requireString(data, "id", filePath);
+  if (!/^lab-\d{2}$/.test(id)) {
+    failContent(filePath, `frontmatter 'id' debe usar el formato lab-NN, recibido '${id}'`);
+  }
+
+  const title = requireString(data, "title", filePath);
+  const level = requireString(data, "level", filePath);
+  if (!["N1", "N2", "N3", "N4"].includes(level)) {
+    failContent(filePath, `frontmatter 'level' debe ser N1, N2, N3 o N4, recibido '${level}'`);
+  }
+
+  const duration = parseDuration(data["duration"]);
+  if (duration <= 0) {
+    failContent(filePath, "frontmatter 'duration' debe ser un número positivo o texto con minutos");
+  }
+
+  return {
+    id,
+    title,
+    level,
+    duration,
+    products: requireStringArray(data, "product", filePath),
+    certifications: requireStringArray(data, "certifications", filePath),
+    role: requireStringArray(data, "role", filePath),
+    prerequisites: requireStringArray(data, "prerequisites", filePath),
+  };
 }
 
 // Parses duration from frontmatter — handles both `90` (number) and `"90 min"` (string)
@@ -141,24 +240,20 @@ function loadModulesFromDir(levelId: LevelId): Map<number, ModuleInfo> {
     .sort();
 
   for (const file of files) {
-    try {
-      const raw = fs.readFileSync(path.join(dir, file), "utf-8");
-      const { data, content } = matter(raw);
-      const moduleId = Number(data["moduleId"]);
-      if (!moduleId) continue;
+    const filePath = path.join(dir, file);
+    const raw = readRequiredFile(filePath);
+    const { data, content } = matter(raw);
+    const meta = validateModuleFrontmatter(data, levelId, filePath);
 
-      result.set(moduleId, {
-        id: `${levelId}-${moduleId}`,
-        moduleId,
-        levelId,
-        title: String(data["title"] ?? ""),
-        slug: String(data["slug"] ?? toSlug(String(data["title"] ?? ""))),
-        estimatedMinutes: Number(data["estimatedMinutes"]) || estimateReadingMinutes(content),
-        rawContent: content,
-      });
-    } catch {
-      // Skip malformed files silently
+    if (result.has(meta.moduleId)) {
+      failContent(filePath, `moduleId duplicado en el nivel '${levelId}': ${meta.moduleId}`);
     }
+
+    result.set(meta.moduleId, {
+      id: `${levelId}-${meta.moduleId}`,
+      ...meta,
+      rawContent: content,
+    });
   }
 
   return result;
@@ -218,7 +313,67 @@ function loadModulesForLevel(levelId: LevelId, rawLevelContent: string): ModuleI
     merged.set(moduleId, mod); // override legacy
   }
 
-  return [...merged.values()].sort((a, b) => a.moduleId - b.moduleId);
+  const modules = [...merged.values()].sort((a, b) => a.moduleId - b.moduleId);
+  validateUniqueModules(modules, levelId);
+  return modules;
+}
+
+function validateUniqueModules(modules: ModuleInfo[], levelId: LevelId): void {
+  const seenIds = new Set<number>();
+  const seenSlugs = new Set<string>();
+
+  for (const mod of modules) {
+    if (seenIds.has(mod.moduleId)) {
+      failContent(`modules/${levelId}`, `moduleId duplicado: ${mod.moduleId}`);
+    }
+    if (seenSlugs.has(mod.slug)) {
+      failContent(`modules/${levelId}`, `slug duplicado: ${mod.slug}`);
+    }
+    seenIds.add(mod.moduleId);
+    seenSlugs.add(mod.slug);
+  }
+}
+
+function validateAllModules(levels: LevelInfo[]): void {
+  const seenIds = new Map<number, string>();
+  const seenSlugs = new Map<string, string>();
+
+  for (const level of levels) {
+    const [minModuleId, maxModuleId] = LEVEL_MODULE_RANGE[level.id];
+    for (const mod of level.modules) {
+      if (mod.moduleId < minModuleId || mod.moduleId > maxModuleId) {
+        failContent(`modules/${level.id}`, `moduleId ${mod.moduleId} fuera del rango ${minModuleId}-${maxModuleId}`);
+      }
+
+      const previousId = seenIds.get(mod.moduleId);
+      if (previousId) {
+        failContent(`modules/${level.id}`, `moduleId global duplicado ${mod.moduleId}; ya existe en ${previousId}`);
+      }
+      seenIds.set(mod.moduleId, mod.id);
+
+      const previousSlug = seenSlugs.get(mod.slug);
+      if (previousSlug) {
+        failContent(`modules/${level.id}`, `slug global duplicado '${mod.slug}'; ya existe en ${previousSlug}`);
+      }
+      seenSlugs.set(mod.slug, mod.id);
+    }
+  }
+}
+
+function validateLabs(labs: LabInfo[]): void {
+  const seenIds = new Map<string, string>();
+  const seenSlugs = new Set<string>();
+
+  for (const lab of labs) {
+    if (seenIds.has(lab.id)) {
+      failContent(`labs/${lab.slug}`, `id duplicado '${lab.id}'; ya existe en ${seenIds.get(lab.id)}`);
+    }
+    if (seenSlugs.has(lab.slug)) {
+      failContent(`labs/${lab.slug}`, `slug duplicado '${lab.slug}'`);
+    }
+    seenIds.set(lab.id, lab.slug);
+    seenSlugs.add(lab.slug);
+  }
 }
 
 // ─── Cache ────────────────────────────────────────────────────────────────────
@@ -234,13 +389,7 @@ export function getAllLevels(): LevelInfo[] {
 
   const levels: LevelInfo[] = (Object.keys(LEVEL_FILES) as LevelId[]).map((levelId) => {
     const filePath = path.join(DOCS_DIR, LEVEL_FILES[levelId]);
-    let rawContent = "";
-
-    try {
-      rawContent = fs.readFileSync(filePath, "utf-8");
-    } catch {
-      rawContent = `# ${LEVEL_META[levelId].title}\n\nContenido en desarrollo.`;
-    }
+    const rawContent = readRequiredFile(filePath);
 
     const meta = LEVEL_META[levelId];
     const modules = loadModulesForLevel(levelId, rawContent);
@@ -253,6 +402,7 @@ export function getAllLevels(): LevelInfo[] {
     };
   });
 
+  validateAllModules(levels);
   _levelsCache = levels;
   return levels;
 }
@@ -285,13 +435,9 @@ export function getAllResourcePages(): ResourcePage[] {
     let rawContent = "";
     let title = slug;
 
-    try {
-      rawContent = fs.readFileSync(fullPath, "utf-8");
-      const titleMatch = rawContent.match(/^#\s+(.+)$/m);
-      if (titleMatch?.[1]) title = titleMatch[1].replace(/[🎯📝✅📖🏆]/gu, "").trim();
-    } catch {
-      rawContent = "# Contenido no disponible";
-    }
+    rawContent = readRequiredFile(fullPath);
+    const titleMatch = rawContent.match(/^#\s+(.+)$/m);
+    if (titleMatch?.[1]) title = titleMatch[1].replace(/[🎯📝✅📖🏆]/gu, "").trim();
 
     return { id: slug, slug, title, rawContent };
   });
@@ -310,8 +456,7 @@ export function getAllLabs(): LabInfo[] {
   if (_labsCache) return _labsCache;
 
   if (!fs.existsSync(LABS_DIR)) {
-    _labsCache = [];
-    return _labsCache;
+    failContent(LABS_DIR, "directorio requerido de laboratorios no encontrado");
   }
 
   const files = fs.readdirSync(LABS_DIR)
@@ -321,28 +466,20 @@ export function getAllLabs(): LabInfo[] {
   const labs: LabInfo[] = [];
 
   for (const file of files) {
-    try {
-      const raw = fs.readFileSync(path.join(LABS_DIR, file), "utf-8");
-      const { data, content } = matter(raw);
-      const slug = file.replace(/\.md$/, "");
+    const filePath = path.join(LABS_DIR, file);
+    const raw = readRequiredFile(filePath);
+    const { data, content } = matter(raw);
+    const slug = file.replace(/\.md$/, "");
+    const meta = validateLabFrontmatter(data, filePath);
 
-      labs.push({
-        id: String(data["id"] ?? slug),
-        slug,
-        title: String(data["title"] ?? slug),
-        level: String(data["level"] ?? ""),
-        duration: parseDuration(data["duration"]),
-        products: Array.isArray(data["product"]) ? (data["product"] as string[]) : [],
-        certifications: Array.isArray(data["certifications"]) ? (data["certifications"] as string[]) : [],
-        role: Array.isArray(data["role"]) ? (data["role"] as string[]) : [],
-        prerequisites: Array.isArray(data["prerequisites"]) ? (data["prerequisites"] as string[]) : [],
-        rawContent: content,
-      });
-    } catch {
-      // Skip malformed lab files
-    }
+    labs.push({
+      ...meta,
+      slug,
+      rawContent: content,
+    });
   }
 
+  validateLabs(labs);
   _labsCache = labs;
   return labs;
 }

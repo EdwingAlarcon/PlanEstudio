@@ -1,6 +1,7 @@
 import type { Question, QuestionType } from "./quiz-engine";
 import { LEVEL_MODULE_RANGE } from "./i18n";
 import MODULE_QUESTIONS from "../data/questions";
+import { ContentValidationError, getAllModules } from "./content";
 
 // ─── Cache ────────────────────────────────────────────────────────────────────
 
@@ -10,12 +11,28 @@ export function getAllQuestions(): Question[] {
   if (_cache) return _cache;
 
   const questions: Question[] = [];
+  const validModuleIds = new Set(getAllModules().map((mod) => mod.moduleId));
 
   for (const [moduleIdStr, rawQuestions] of Object.entries(MODULE_QUESTIONS)) {
     const moduleId = Number(moduleIdStr);
+    if (!validModuleIds.has(moduleId)) {
+      throw new ContentValidationError(`questions: moduleId ${moduleId} no existe en el contenido de módulos`);
+    }
+
     rawQuestions.forEach((raw, idx) => {
+      const id = `module-${moduleId}-${idx}`;
+      if (!["single", "multi"].includes(raw.type)) {
+        throw new ContentValidationError(`${id}: tipo de pregunta inválido '${raw.type}'`);
+      }
+      if (!raw.prompt.trim()) {
+        throw new ContentValidationError(`${id}: prompt vacío`);
+      }
+      if (raw.answer.some((answer) => answer < 0 || answer >= raw.options.length)) {
+        throw new ContentValidationError(`${id}: respuesta fuera del rango de opciones`);
+      }
+
       questions.push({
-        id: `module-${moduleId}-${idx}`,
+        id,
         moduleId,
         type: raw.type as QuestionType,
         prompt: raw.prompt,

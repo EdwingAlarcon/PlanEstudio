@@ -15,16 +15,17 @@ PlanEstudio/
 │   │   ├── app/            ← Rutas (dashboard, niveles, módulos, simulador)
 │   │   ├── components/     ← UI (layout, quiz, módulos)
 │   │   └── lib/            ← Lógica: content.ts, quiz-engine.ts, progress.ts
+│   ├── content/            ← FUENTE OFICIAL de módulos y labs para la app
 │   ├── next.config.ts      ← output: 'export', basePath: '/PlanEstudio'
-│   └── vitest.config.ts    ← 72 tests unitarios
+│   └── vitest.config.ts    ← Vitest + coverage
 │
-├── docs/                   ← FUENTE EDITORIAL (Markdown)
-│   ├── Niveles/            ← Contenido de los 41 módulos (4 archivos)
-│   ├── Labs/               ← 9 laboratorios formales tipo Microsoft App in a Day
+├── docs/                   ← MkDocs legacy/referencia + recursos compartidos
+│   ├── Niveles/            ← Contenido legacy MkDocs (4 archivos)
+│   ├── Labs/               ← Labs legacy MkDocs
 │   ├── Anexos/             ← Copilot Studio, ALM/DevOps, Arquitectura
 │   ├── Recursos/           ← Checklist, Glosario, Certificaciones
 │   └── javascripts/
-│       └── evaluaciones-simulador.js  ← Banco de 215 preguntas (fuente actual)
+│       └── evaluaciones-simulador.js  ← Banco de 314 preguntas (fuente actual)
 │
 ├── .github/workflows/ci.yml  ← CI/CD: lint → test → build → deploy + MkDocs
 ├── mkdocs.yml              ← Configuración del sitio MkDocs (referencia/legacy)
@@ -33,14 +34,15 @@ PlanEstudio/
 
 ### Relación entre las dos superficies
 
-La app Next.js **lee los archivos de `docs/` en build-time** mediante `fs.readFileSync`. No hay base de datos ni API — es un sitio completamente estático.
+La app Next.js **lee `app-elearning/content/` en build-time** para módulos y laboratorios mediante `fs.readFileSync`. No hay backend, base de datos ni API: es un sitio completamente estático.
 
 ```
-docs/Niveles/*.md  ──build-time──▶  app-elearning/src/lib/content.ts  ──▶  páginas HTML estáticas
+app-elearning/content/modules/*.md  ──build-time──▶  content.ts  ──▶  páginas HTML estáticas
+app-elearning/content/labs/*.md     ──build-time──▶  content.ts  ──▶  páginas HTML estáticas
 docs/javascripts/evaluaciones-simulador.js  ──build-time──▶  questions-parser.ts  ──▶  quizzes
 ```
 
-`docs/` es la fuente editorial — ahí se edita el contenido. La app Next.js es la experiencia de usuario final que consume ese contenido.
+`app-elearning/content/` es la fuente oficial para la app principal. `docs/` se conserva para MkDocs legacy/referencia y para recursos compartidos como el banco de preguntas.
 
 ---
 
@@ -63,7 +65,7 @@ docs/javascripts/evaluaciones-simulador.js  ──build-time──▶  questions
 cd app-elearning
 npm install
 npm run dev
-# Abrir http://localhost:3000/PlanEstudio
+# Abrir http://localhost:3000
 ```
 
 ### MkDocs (referencia/legacy)
@@ -83,10 +85,13 @@ cd app-elearning
 
 npm run dev           # Servidor de desarrollo con Turbopack
 npm run build         # Build estático → out/
+npm run build:pages   # Build estático para GitHub Pages con basePath /PlanEstudio
 npm run lint          # ESLint
-npx tsc --noEmit      # TypeScript check
-npm run test          # Vitest (72 tests)
+npm run typecheck     # TypeScript check
+npm run test          # Vitest
 npm run test:coverage # Cobertura (umbral 80%)
+npm run e2e           # Playwright smoke tests
+npm run verify        # lint + typecheck + coverage + build:pages
 ```
 
 ---
@@ -97,31 +102,36 @@ GitHub Actions ejecuta en cada push a `master`:
 
 | Job | Qué valida |
 |-----|------------|
-| `lint` | ESLint + TypeScript (`tsc --noEmit`) |
-| `test` | 72 tests Vitest con cobertura (umbral 80%) |
-| `build` | `next build` → export estático en `out/` |
+| `lint` | ESLint CLI + TypeScript (`tsc --noEmit`) |
+| `test` | Vitest con cobertura (umbral 80%; 127 tests al último diagnóstico local) |
+| `e2e` | Playwright smoke: home, niveles, módulo, labs, simulador, búsqueda, dark mode, 404 |
+| `build` | `GITHUB_PAGES=true next build` vía `npm run build:pages` → export estático en `out/` |
 | `mkdocs` | `mkdocs build --strict` (valida nav, links internos) |
 | `deploy` | Despliega `out/` a GitHub Pages (solo `master`) |
 
-El job `deploy` depende de `build`. El job `mkdocs` corre en paralelo y falla el CI si hay errores en la navegación o links rotos de MkDocs.
+El job `deploy` depende de `build` y `mkdocs`; si falla lint, typecheck, tests, smoke E2E, build o MkDocs strict, no se despliega.
 
 ---
 
 ## Agregar nuevos módulos
 
-1. Edita el archivo correspondiente en `docs/Niveles/`:
-   - `NIVEL_1_BASICO.md` → módulos 1-8 (PL-900)
-   - `NIVEL_2_INTERMEDIO.md` → módulos 9-17 (PL-200)
-   - `NIVEL_3_AVANZADO.md` → módulos 18-30 (PL-400)
-   - `NIVEL_4_ARQUITECTO.md` → módulos 31-41 (PL-600)
+1. Edita el archivo individual correspondiente en `app-elearning/content/modules/<nivel>/`.
 
-2. Usa el heading exacto que espera el parser:
-   - Nivel 1: `### **Módulo N: Título del módulo**`
-   - Niveles 2-4: `## MÓDULO N: TÍTULO DEL MÓDULO`
+2. Mantén frontmatter válido:
+   ```yaml
+   ---
+   moduleId: 9
+   title: "Dataverse Avanzado"
+   level: "intermedio"
+   certification: "PL-200"
+   estimatedMinutes: 9
+   slug: "dataverse-avanzado"
+   ---
+   ```
 
 3. Sigue la estructura de 7 secciones: Objetivo → Conceptos Clave → Actividades → Casos Reales → Buenas Prácticas → Errores Comunes → Criterios de Validación.
 
-4. Actualiza `i18n.ts` si cambias el conteo de módulos por nivel:
+4. Actualiza `i18n.ts` si cambias el conteo/rango de módulos por nivel:
    ```ts
    // app-elearning/src/lib/i18n.ts
    LEVEL_MODULE_RANGE = { basico: [1, 8], ... }
@@ -153,13 +163,13 @@ Para agregar preguntas:
 2. Agrega el objeto de pregunta siguiendo el esquema exacto.
 3. Verifica que el JS sigue siendo válido: `node -e "const MODULE_QUESTIONS = require('./docs/javascripts/evaluaciones-simulador.js')"` — o abre la consola del navegador y pega el objeto.
 
-> El parser (`questions-parser.ts`) extrae el objeto en build-time. Si el archivo tiene un error de sintaxis JS, el build completará pero los quizzes quedarán sin preguntas.
+> El script `scripts/extract-questions.mjs` valida y genera `app-elearning/src/data/questions.ts` antes del build. Si el archivo tiene sintaxis o estructura inválida, el build falla con error explícito.
 
 ---
 
 ## Laboratorios
 
-Los laboratorios formales están en `docs/Labs/` y se sirven tanto desde MkDocs (sección "🧪 Laboratorios") como contenido de referencia.
+Los laboratorios oficiales para la app están en `app-elearning/content/labs/` con frontmatter validado. `docs/Labs/` queda como copia legacy/referencia para MkDocs.
 
 | Lab | Nivel | Cert |
 |-----|-------|------|
@@ -186,4 +196,4 @@ Los laboratorios formales están en `docs/Labs/` y se sirven tanto desde MkDocs 
 | Markdown | react-markdown + remark-gfm + rehype-highlight |
 | Tests | Vitest v3, jsdom, @testing-library/react |
 | CI/CD | GitHub Actions → GitHub Pages |
-| Contenido | Markdown en `docs/` (leído en build-time) |
+| Contenido | Markdown en `app-elearning/content/` para la app; `docs/` para MkDocs legacy y preguntas |

@@ -8,6 +8,7 @@ vi.mock("fs", () => ({
   default: {
     existsSync: vi.fn((p: string) => {
       // Returning false for new content dirs forces the legacy code path
+      if (String(p).endsWith("labs") || String(p).includes("labs")) return true;
       if (String(p).includes("content")) return false;
       return true;
     }),
@@ -204,13 +205,13 @@ describe("getSearchDocuments", () => {
 // ─── getAllLabs ────────────────────────────────────────────────────────────────
 
 describe("getAllLabs", () => {
-  it("returns an empty array when labs directory does not exist", () => {
-    // existsSync returns false for content/ paths (see mock above)
+  it("returns an empty array when labs directory exists without markdown files", () => {
     const labs = getAllLabs();
     expect(Array.isArray(labs)).toBe(true);
+    expect(labs).toHaveLength(0);
   });
 
-  it("does not throw when labs directory is missing", () => {
+  it("does not throw when labs directory is empty", () => {
     expect(() => getAllLabs()).not.toThrow();
   });
 });

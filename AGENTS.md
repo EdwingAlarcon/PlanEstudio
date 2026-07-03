@@ -6,8 +6,10 @@ This file provides guidance to Codex (Codex.ai/code) when working with code in t
 
 A structured, progressive learning plan for Microsoft Power Platform and Dynamics 365 — from beginner to Solution Architect. The repo has two parallel surfaces:
 
-1. **MkDocs site** — Markdown documentation served via MkDocs Material (legacy/reference site)
-2. **Next.js app** (`app-elearning/`) — interactive e-learning app deployed to GitHub Pages at `https://edwingalarcon.github.io/PlanEstudio/`
+1. **Next.js app** (`app-elearning/`) — primary interactive e-learning app deployed to GitHub Pages at `https://edwingalarcon.github.io/PlanEstudio/`
+2. **MkDocs site** — Markdown documentation served via MkDocs Material (legacy/reference site)
+
+`app-elearning/content/` is the authoritative source for modules and labs rendered by the Next.js app. `docs/` remains for MkDocs legacy/reference content and shared resources such as the question bank.
 
 ## Repository Structure
 
@@ -17,7 +19,7 @@ requirements.txt         # Python deps: mkdocs-material
 .github/
   workflows/
     ci.yml               # CI/CD: lint → test → build → deploy to GitHub Pages (on push to master)
-docs/                    # Source content — shared by MkDocs AND parsed by the Next.js app
+docs/                    # MkDocs legacy/reference content + shared question bank
   index.md               # Master index and overview
   Niveles/
     NIVEL_1_BASICO.md    # Level 1: Fundamentals — 8 modules + Suplementos 1A (AI Builder) y 1B (Power Pages)
@@ -35,10 +37,11 @@ docs/                    # Source content — shared by MkDocs AND parsed by the
     GLOSARIO_TERMINOS.md
     CERTIFICACIONES.md
   javascripts/
-    evaluaciones-simulador.js   # Banco de 215 preguntas A/B/C/D en MODULE_QUESTIONS (módulos 1-41)
+    evaluaciones-simulador.js   # Banco de 314 preguntas A/B/C/D en MODULE_QUESTIONS (módulos 1-41)
   stylesheets/
     extra.css            # Custom CSS for MkDocs site
 app-elearning/           # Next.js 15 interactive app (THE primary surface)
+  content/               # Official app content: 41 modules + 9 labs with frontmatter
   next.config.ts         # output: 'export', basePath: '/PlanEstudio'
   src/
     app/                 # App Router pages
@@ -65,9 +68,9 @@ app-elearning/           # Next.js 15 interactive app (THE primary surface)
         simulator-client.tsx  # Timed simulator wrapper
       ui/                     # shadcn/ui components (button, badge, card, dialog, progress…)
     lib/
-      content.ts          # Build-time: reads docs/*.md, extracts ModuleInfo + SearchDocument
+      content.ts          # Build-time: reads app-elearning/content and validates frontmatter
       quiz-engine.ts      # Pure TS engine: createSession, recordAttempt, calculateResult
-      questions-parser.ts # Parses MODULE_QUESTIONS from evaluaciones-simulador.js at build time
+      questions-parser.ts # Reads generated src/data/questions.ts and validates module association
       progress.ts         # Zustand store (persist → localStorage): completedModules, quizScores
       i18n.ts             # UI strings, LevelId, LEVEL_ORDER, LEVEL_MODULE_RANGE
       utils.ts            # cn() helper
@@ -81,11 +84,13 @@ site/                    # MkDocs generated output (git-ignored)
 cd app-elearning
 npm install
 npm run dev          # http://localhost:3000
-npm test             # Vitest unit tests (72 tests)
+npm test             # Vitest unit tests
 npm run test:coverage
 npm run lint
-npx tsc --noEmit
-npm run build        # Static export → app-elearning/out/
+npm run typecheck
+npm run build:pages  # Static export for GitHub Pages → app-elearning/out/
+npm run e2e          # Playwright smoke tests
+npm run verify       # lint + typecheck + coverage + build:pages
 ```
 
 ### MkDocs (reference/legacy)
@@ -99,14 +104,31 @@ pip install -r requirements.txt
 Push to `master` → GitHub Actions (`ci.yml`):
 1. **Lint & Type Check** — ESLint + `tsc --noEmit`
 2. **Unit Tests** — Vitest with coverage (80% threshold)
-3. **Build** — `next build` → static export in `app-elearning/out/`
-4. **Deploy** — `actions/deploy-pages` → `https://edwingalarcon.github.io/PlanEstudio/`
+3. **E2E Smoke** — Playwright checks home, levels, module detail, labs, simulator, search, dark mode, navigation, 404
+4. **Build** — `npm run build:pages` → static export in `app-elearning/out/`
+5. **MkDocs strict** — validates legacy/reference site
+6. **Deploy** — `actions/deploy-pages` → `https://edwingalarcon.github.io/PlanEstudio/`
 
 **If CI fails:** check ESLint errors first (most common cause). Run `npm run lint` locally before pushing.
 
 ## Content: Module Format
 
-Each module in the Nivel files follows this fixed 7-section structure:
+Each app module in `app-elearning/content/modules/<levelId>/NN-slug.md` uses YAML frontmatter:
+
+```yaml
+---
+moduleId: 9
+title: "Dataverse Avanzado"
+level: "intermedio"
+certification: "PL-200"
+estimatedMinutes: 9
+slug: "dataverse-avanzado"
+---
+```
+
+The build validates required frontmatter, unique `moduleId`, unique `slug`, valid level ranges, lab metadata, and question/module association.
+
+Each module follows this fixed 7-section structure:
 
 1. **🎯 Objetivo** — what the learner can do upon completion
 2. **📖 Conceptos Clave** — theoretical knowledge list
@@ -118,9 +140,9 @@ Each module in the Nivel files follows this fixed 7-section structure:
 
 Maintain this structure strictly when adding or editing modules.
 
-## Content: Heading Formats (critical for parser)
+## Content: Heading Formats (legacy MkDocs only)
 
-The Next.js app parses modules from the Markdown files using this regex:
+The legacy `docs/Niveles/*.md` files still use monolithic headings. They are for MkDocs/reference; the Next.js app uses `app-elearning/content/modules/`. The fallback parser still uses this regex:
 ```
 /^#{2,3}\s+\*?\*?módulo\s+(\d+)[:\s]+(.+?)\*?\*?$/gim
 ```
@@ -128,7 +150,7 @@ The Next.js app parses modules from the Markdown files using this regex:
 - **Nivel 1** uses: `### **Módulo N: Title**` (H3, bold)
 - **Niveles 2-4** use: `## MÓDULO N: Title` (H2, uppercase)
 
-Do NOT change these heading formats — the parser depends on them to extract module content.
+Do NOT change these heading formats in `docs/Niveles/*.md` unless you intentionally update the MkDocs/reference structure.
 
 ## Content: Question Bank
 
@@ -144,10 +166,10 @@ Do NOT change these heading formats — the parser depends on them to extract mo
 }
 ```
 
-- 215 total questions across 41 modules
+- 314 total questions across 41 modules
 - Module 1 has 15 questions (includes AI Builder and Power Pages topics for PL-900)
-- After editing, validate with Node.js that the object parses correctly
-- The parser in `questions-parser.ts` uses `new Function()` to evaluate it at build time
+- After editing, run `node ../scripts/extract-questions.mjs` from `app-elearning` or run `npm run build:pages`
+- `scripts/extract-questions.mjs` generates `app-elearning/src/data/questions.ts`; `questions-parser.ts` validates associations at build/test time
 
 ## Naming and Prefix Conventions
 
@@ -188,8 +210,8 @@ All content is written in **Spanish**. Technical terms (Power Fx, DAX, Canvas, M
 
 Always:
 
-1. Read the relevant module file before editing.
-2. Run `npm run lint` and `npx tsc --noEmit` locally before pushing.
+1. Read the relevant module/lab file in `app-elearning/content/` before editing app content.
+2. Run `npm run lint`, `npm run typecheck`, `npm run test:coverage`, and `npm run build:pages` locally before pushing.
 3. Verify navigation consistency (module slugs, level IDs).
 4. Preserve module 7-section structure.
 5. Avoid introducing advanced topics prematurely (respect level progression).

@@ -18,9 +18,9 @@ test.describe("Smoke — rutas principales", () => {
     await page.goto("/nivel/basico");
     const firstLink = page.locator('a[href*="/nivel/basico/modulo/"]').first();
     await firstLink.click();
-    await expect(page.locator("h1")).toBeVisible();
-    // El contenido Markdown renderizado debe tener al menos un h2/h3
-    await expect(page.locator("article h2, article h3").first()).toBeVisible();
+    await expect(page).toHaveURL(/\/nivel\/basico\/modulo\//);
+    await expect(page.locator("h1").first()).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Objetivo/i }).first()).toBeVisible();
   });
 
   test("marcar módulo como completado actualiza el progreso", async ({ page }) => {
@@ -52,8 +52,9 @@ test.describe("Smoke — rutas principales", () => {
     await page.goto("/labs");
     const firstLab = page.locator("a[href*='/labs/lab-']").first();
     await firstLab.click();
-    await expect(page.locator("h1")).toBeVisible();
-    await expect(page.locator("text=Laboratorio")).toBeVisible();
+    await expect(page).toHaveURL(/\/labs\/lab-/);
+    await expect(page.locator("h1").first()).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Objetivo/i }).first()).toBeVisible();
   });
 
   test("recurso lenguajes-programacion carga", async ({ page }) => {
