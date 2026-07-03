@@ -272,6 +272,9 @@ html { scroll-behavior: smooth; }
 /* ─── Certificado: impresión limpia ──────────────────────────────────────── */
 
 @media print {
+  @page {
+    size: landscape;
+  }
   body * {
     visibility: hidden;
   }
@@ -280,7 +283,13 @@ html { scroll-behavior: smooth; }
     visibility: visible;
   }
   .certificate-print-area {
+    /* Only top/left are set (not right/bottom) so the browser doesn't stretch-fit
+       the box to the page and override the aspect-[1.414/1] ratio from the component. */
     position: absolute;
-    inset: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
   }
 }

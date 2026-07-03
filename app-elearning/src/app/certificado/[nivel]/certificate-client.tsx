@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Printer, Pencil } from "lucide-react";
@@ -18,10 +18,15 @@ export function CertificateClient({ levelId }: { levelId: LevelId }) {
   const { percentage } = getLevelProgress(levelId);
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  if (percentage < 100 || !userName) {
-    if (typeof window !== "undefined") {
+  const shouldRedirect = percentage < 100 || !userName;
+
+  useEffect(() => {
+    if (shouldRedirect) {
       router.replace(`/nivel/${levelId}`);
     }
+  }, [shouldRedirect, levelId, router]);
+
+  if (shouldRedirect) {
     return null;
   }
 

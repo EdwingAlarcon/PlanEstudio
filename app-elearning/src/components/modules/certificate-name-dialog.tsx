@@ -33,7 +33,7 @@ export function CertificateNameDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="p-6 space-y-4">
+      <DialogContent className="p-6 space-y-4" aria-describedby={undefined}>
         <DialogTitle>¿Cómo quieres que aparezca tu nombre en el certificado?</DialogTitle>
         <Input
           autoFocus
