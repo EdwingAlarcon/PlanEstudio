@@ -88,6 +88,7 @@ npm test             # Vitest unit tests
 npm run test:coverage
 npm run lint
 npm run typecheck
+npm run validate:content  # Frontmatter, unique moduleId/slug, level ranges, question coverage
 npm run build:pages  # Static export for GitHub Pages → app-elearning/out/
 npm run e2e          # Playwright smoke tests
 npm run verify       # lint + typecheck + coverage + build:pages
@@ -96,7 +97,7 @@ npm run verify       # lint + typecheck + coverage + build:pages
 ### MkDocs (reference/legacy)
 ```powershell
 pip install -r requirements.txt
-& "C:\Users\bdp_u\AppData\Roaming\Python\Python314\Scripts\mkdocs.exe" serve --dev-addr=127.0.0.1:8001
+mkdocs serve --dev-addr=127.0.0.1:8001
 ```
 
 ## CI/CD

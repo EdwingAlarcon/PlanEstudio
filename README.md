@@ -86,12 +86,13 @@ cd app-elearning
 npm run dev           # Servidor de desarrollo con Turbopack
 npm run build         # Build estático → out/
 npm run build:pages   # Build estático para GitHub Pages con basePath /PlanEstudio
-npm run lint          # ESLint
-npm run typecheck     # TypeScript check
-npm run test          # Vitest
-npm run test:coverage # Cobertura (umbral 80%)
-npm run e2e           # Playwright smoke tests
-npm run verify        # lint + typecheck + coverage + build:pages
+npm run lint             # ESLint
+npm run typecheck        # TypeScript check
+npm run validate:content # Frontmatter, moduleId/slug únicos, rangos por nivel, cobertura de preguntas
+npm run test             # Vitest
+npm run test:coverage    # Cobertura (umbral 80%)
+npm run e2e              # Playwright smoke tests
+npm run verify           # lint + typecheck + validate:content + coverage + build:pages
 ```
 
 ---
@@ -102,7 +103,7 @@ GitHub Actions ejecuta en cada push a `master`:
 
 | Job | Qué valida |
 |-----|------------|
-| `lint` | ESLint CLI + TypeScript (`tsc --noEmit`) |
+| `lint` | ESLint CLI + TypeScript (`tsc --noEmit`) + validación de contenido (`validate:content`) |
 | `test` | Vitest con cobertura (umbral 80%; 127 tests al último diagnóstico local) |
 | `e2e` | Playwright smoke: home, niveles, módulo, labs, simulador, búsqueda, dark mode, 404 |
 | `build` | `GITHUB_PAGES=true next build` vía `npm run build:pages` → export estático en `out/` |

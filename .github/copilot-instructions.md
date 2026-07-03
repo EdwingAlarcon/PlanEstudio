@@ -9,6 +9,7 @@ cd app-elearning
 npm ci
 npm run lint
 npm run typecheck
+npm run validate:content
 npm run test:coverage
 npm run build:pages
 npm run e2e
@@ -50,7 +51,7 @@ GitHub Actions should:
 
 - use Node from `app-elearning/.nvmrc`;
 - install with `npm ci`;
-- run lint, typecheck, coverage, Playwright smoke, static export build, and MkDocs strict;
+- run lint, typecheck, content validation, coverage, Playwright smoke, static export build, and MkDocs strict;
 - deploy to GitHub Pages only after required checks pass.
 
 ## Key conventions

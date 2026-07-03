@@ -95,13 +95,14 @@ npm test             # Vitest unit tests (127 tests)
 npm run test:coverage
 npm run lint
 npx tsc --noEmit
+npm run validate:content  # Frontmatter, unique moduleId/slug, level ranges, question coverage
 npm run build        # Static export → app-elearning/out/
 ```
 
 ### MkDocs (reference/legacy)
 ```powershell
 pip install -r requirements.txt
-& "C:\Users\bdp_u\AppData\Roaming\Python\Python314\Scripts\mkdocs.exe" serve --dev-addr=127.0.0.1:8001
+mkdocs serve --dev-addr=127.0.0.1:8001
 ```
 
 ## CI/CD
@@ -173,7 +174,7 @@ Don't change these if editing `docs/Niveles/*.md` for MkDocs.
 - 314 total questions across 41 modules (8 per module in Niveles 2-4, 15 in Módulo 1)
 - Module 1 has 15 questions (includes AI Builder and Power Pages topics for PL-900)
 - After editing, validate with Node.js that the object parses correctly
-- The parser in `questions-parser.ts` uses `new Function()` to evaluate it at build time
+- `scripts/extract-questions.mjs` parses `evaluaciones-simulador.js` via `vm.runInContext` at `prebuild` time and generates `app-elearning/src/data/questions.ts`, which `questions-parser.ts` imports statically (no runtime `eval`/`new Function`)
 
 ## Naming and Prefix Conventions
 
