@@ -268,3 +268,19 @@ html { scroll-behavior: smooth; }
   border-radius: 0 2px 2px 0;
   background: hsl(var(--primary));
 }
+
+/* ─── Certificado: impresión limpia ──────────────────────────────────────── */
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .certificate-print-area,
+  .certificate-print-area * {
+    visibility: visible;
+  }
+  .certificate-print-area {
+    position: absolute;
+    inset: 0;
+  }
+}
