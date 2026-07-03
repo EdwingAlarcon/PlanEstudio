@@ -19,6 +19,17 @@ Este módulo aplica y consolida todo el Nivel 3 en un proyecto cohesivo. Los con
 - **Rollback plan:** plan documentado y probado para revertir un despliegue fallido en PROD. Para soluciones de Power Platform: mantener el artifact de la versión anterior en el pipeline, documentar los pasos manuales adicionales (restaurar datos modificados por plugins, revertir configuraciones de D365), y tener un checklist de verificación post-rollback. El rollback debe poder ejecutarse en menos de 30 minutos para minimizar el impacto en usuarios.
 - **Monitoreo y observabilidad en producción:** instrumentación del sistema para detectar problemas antes de que los usuarios los reporten. Incluye: alertas en Azure Monitor sobre Dead Letter Queue de Service Bus con mensajes no procesados, alertas sobre fallos de la Azure Function (tasa de error > 1%), Plugin Trace Log con "Exception Only" habilitado y revisión periódica, Analytics de Copilot Studio con revisión semanal de tasa de resolución, y Power BI con métricas de SLA para el equipo de management.
 
+**Diagrama: flujo end-to-end del sistema de soporte técnico**
+
+```mermaid
+graph LR
+  A["Power Pages: cliente crea ticket"] --> B["Plugin C#: valida y enriquece"]
+  B --> C["Azure Service Bus"]
+  C --> D["Azure Function: procesa"]
+  D --> E["Copilot Studio: refleja nuevo estado"]
+  B --> F["Dataverse: SIT_Foundation + SIT_CustomerService"]
+```
+
 **Escenario:** Sistema de soporte técnico enterprise con autoservicio
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso

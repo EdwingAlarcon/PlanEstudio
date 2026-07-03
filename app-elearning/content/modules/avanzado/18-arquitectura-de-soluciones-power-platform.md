@@ -21,6 +21,15 @@ Diseñar arquitecturas de soluciones escalables, definir estrategias de datos mu
 - **Capacity planning:** proceso de dimensionar la solución antes de comprometerse con la arquitectura: calcular licencias necesarias por tipo de usuario, estimar el consumo de API calls de Dataverse (límite diario por licencia), proyectar el almacenamiento de Dataverse (1GB incluido + 0.5GB por seat), y verificar que los conectores usados estén en el plan de licencias del cliente.
 - **Integration patterns:** patrones para conectar sistemas. Push vs Pull: el sistema origen envía datos activamente (Push) vs el destino los solicita periódicamente (Pull). Sync vs Async: la llamada espera la respuesta (Sync, bloquea) vs el sistema envía y continúa sin esperar (Async, Service Bus). Point-to-Point vs Hub-and-Spoke: conexiones directas entre cada par de sistemas (difícil de mantener con N sistemas) vs todos los sistemas hablan con un middleware central (APIM, Service Bus) que enruta los mensajes.
 
+**Diagrama: arquitectura de capas**
+
+```mermaid
+graph TD
+  A["Presentación: Canvas Apps, Model-Driven Apps, Power Pages"] --> B["Lógica de negocio: Plugins C#, Power Automate, Business Rules"]
+  B --> C["Datos: Dataverse, Azure SQL, SharePoint"]
+  B --> D["Integración: Service Bus, Azure Functions, Conectores Premium"]
+```
+
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
 #### Actividad 18.1: Árbol de decisión — Tipo de aplicación

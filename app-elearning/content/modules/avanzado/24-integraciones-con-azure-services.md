@@ -21,6 +21,17 @@ Integrar Power Platform con Azure Service Bus, Azure Functions, Azure API Manage
 - **Retry Policy:** configuración en Azure Service Bus y Azure Functions que define cuántas veces reintentar el procesamiento de un mensaje antes de moverlo a la DLQ, y con qué intervalo entre reintentos. Azure Functions con Service Bus trigger soporta `maxDeliveryCount` en Service Bus y `retryPolicy` en host.json con backoff exponencial. Una estrategia común: 3 reintentos con intervalos de 30s, 2min, 10min antes de enviar a DLQ.
 - **Outbox Pattern:** patrón de garantía de entrega en integraciones. En lugar de llamar directamente a la API externa desde el plugin, el plugin crea un registro de "mensaje pendiente" en Dataverse (la "outbox"). Un proceso separado (Power Automate o Azure Function programada) lee y procesa estos mensajes pendientes, marcándolos como enviados o reintentando los fallidos. Garantiza que si el sistema externo está caído, los mensajes no se pierden — están en Dataverse esperando ser enviados.
 
+**Diagrama: integración event-driven Dataverse → Azure**
+
+```mermaid
+graph LR
+  A["Dataverse: Create/Update/Delete"] --> B["Service Endpoint"]
+  B --> C["Azure Service Bus Queue/Topic"]
+  C --> D["Azure Function"]
+  D -->|"éxito"| E["Sistema externo"]
+  D -->|"fallo tras retries"| F["Dead Letter Queue"]
+```
+
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
 #### Actividad 24.1: Service Endpoint — Dataverse a Azure Service Bus

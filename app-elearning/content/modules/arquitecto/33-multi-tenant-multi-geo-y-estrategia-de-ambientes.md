@@ -21,6 +21,18 @@ Diseñar estrategias de implementación para organizaciones multinacionales con 
 - **Pipelines for Power Platform:** funcionalidad nativa de despliegue de soluciones entre ambientes (DEV→TEST→PROD) sin requerir Azure DevOps ni conocimiento de YAML. Se configura desde el Admin Center, soporta aprobaciones en cada etapa, y es accesible directamente desde make.powerapps.com. Es la opción recomendada para organizaciones con poco o nulo equipo DevOps; para organizaciones con DevOps maduro, Azure DevOps + pac CLI ofrece más control y personalización.
 - **Satellite Makers:** ciudadanos desarrolladores ubicados en subsidiarias o regiones que tienen autonomía para crear soluciones locales bajo el marco de gobernanza corporativo. Se les otorga acceso a ambientes dedicados (no al Default Environment), reciben training del CoE Nurture Components, y sus apps siguen el Compliance Process. El modelo Satellite Maker escala la adopción de Power Platform sin necesidad de que el equipo central construya todas las soluciones.
 
+**Diagrama: modelo Hub-and-Spoke entre tenants**
+
+```mermaid
+graph TD
+  H["Tenant Hub: CoE, DLP corporativas, pipelines base"] --> S1["Tenant Spoke: subsidiaria Europa (Geo: Europe)"]
+  H --> S2["Tenant Spoke: subsidiaria Brasil (Geo: Brazil)"]
+  H --> S3["Tenant Spoke: subsidiaria Colombia (Geo: Brazil/US)"]
+  S1 -. "Azure AD B2B + APIM" .-> H
+  S2 -. "Azure AD B2B + APIM" .-> H
+  S3 -. "Azure AD B2B + APIM" .-> H
+```
+
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
 #### Actividad 33.1: Modelo Hub-and-Spoke

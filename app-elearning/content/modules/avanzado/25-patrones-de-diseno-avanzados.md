@@ -19,6 +19,17 @@ Aplicar patrones de diseño reconocidos en implementaciones de Power Platform: R
 - **Circuit Breaker:** patrón que protege un sistema cuando llama a un servicio externo que falla repetidamente. El Circuit Breaker tiene tres estados: Closed (operación normal), Open (después de N fallos en T segundos, deja de intentar — falla rápido con un mensaje claro al usuario), Half-Open (después de M minutos de recuperación, intenta una llamada de prueba — si tiene éxito, vuelve a Closed). Evita que el plugin agote su timeout de 2 minutos esperando una API caída, lo que bloquearía la interfaz de D365.
 - **Retry Pattern:** patrón de reintento con backoff exponencial y jitter (variación aleatoria en el tiempo de espera). En lugar de reintentar inmediatamente al fallar (que causaría una avalancha de requests al sistema externo), se espera un tiempo creciente: intento 1 después de 1s, intento 2 después de 2s, intento 3 después de 4s, con jitter ±20% para evitar que múltiples instancias del plugin reintenten exactamente al mismo tiempo. En Azure Functions se configura con `retryPolicy` en `host.json` o con `[FixedDelayRetry]`/`[ExponentialBackoffRetry]` en el atributo del trigger.
 
+**Diagrama: estados del Circuit Breaker**
+
+```mermaid
+stateDiagram-v2
+  [*] --> Closed
+  Closed --> Open: N fallos en T segundos
+  Open --> HalfOpen: pasan M minutos
+  HalfOpen --> Closed: llamada de prueba exitosa
+  HalfOpen --> Open: llamada de prueba falla
+```
+
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
 #### Actividad 25.1: Repository Pattern en Plugins C#

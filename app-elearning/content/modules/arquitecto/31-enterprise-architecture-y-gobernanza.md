@@ -21,6 +21,17 @@ Diseñar y comunicar la arquitectura enterprise de Power Platform para organizac
 - **Capability Map:** mapa visual que cruza capacidades de negocio (filas) contra el nivel de cobertura actual de la plataforma (columnas: no implementado / en progreso / implementado). Permite identificar gaps de alto impacto que se convierten en propuestas de proyectos. Ejemplo: una empresa de logística puede tener "Seguimiento de carga en tiempo real" como capacidad no cubierta, lo que se traduce en un proyecto de Canvas App + Azure IoT Hub.
 - **Reference Architecture:** plantilla de arquitectura validada y documentada para un caso de uso recurrente, que incluye decisiones de diseño justificadas (ADRs), configuraciones de seguridad mínimas, y código de ejemplo reutilizable. Microsoft publica Reference Architectures en aka.ms/powerplatformguidance; las organizaciones maduras crean las suyas propias para sus patrones específicos (portal de clientes, gestión de aprobaciones, integración con ERP).
 
+**Diagrama: los 5 pilares del Well-Architected Framework**
+
+```mermaid
+graph TD
+  A["Well-Architected Framework"] --> B["Fiabilidad"]
+  A --> C["Seguridad"]
+  A --> D["Excelencia Operacional"]
+  A --> E["Eficiencia de Rendimiento"]
+  A --> F["Optimización de Costos"]
+```
+
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
 #### Actividad 31.1: Well-Architected Review para Power Platform

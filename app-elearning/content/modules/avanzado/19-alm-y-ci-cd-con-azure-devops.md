@@ -24,6 +24,17 @@ Implementar pipelines completos de CI/CD para Power Platform usando Azure DevOps
 
 - **Artifact:** el archivo `.zip` de la solución empaquetada como Managed, generado por el stage de Build del pipeline CI. Se publica con `PublishBuildArtifacts` y es consumido por los stages de deploy CD — garantizando que todos los ambientes reciben exactamente el mismo binario de solución, no una exportación nueva de cada entorno.
 
+**Diagrama: pipeline CI/CD multi-ambiente**
+
+```mermaid
+graph LR
+  A["DEV: export solution (pac CLI)"] --> B["Build: pack + Solution Checker"]
+  B --> C["Artifact: .zip Managed"]
+  C --> D["Deploy TEST (Service Connection)"]
+  D --> E["Deploy UAT (aprobación manual)"]
+  E --> F["Deploy PROD (aprobación manual)"]
+```
+
 - **Branching strategy:** estrategia de ramas para trabajo en equipo. GitFlow: rama `main` (producción), `develop` (integración), `feature/nombre` (trabajo individual) y `release/version` (preparación de release). Trunk-Based: todos los desarrolladores hacen commits a `main` (o `develop`) frecuentemente con feature flags. Para Power Platform se recomienda GitFlow simplificado: `main` → `develop` → `feature/*`.
 
 - **Environment Approvals:** configuración en Azure DevOps Environments que requiere una o más aprobaciones humanas antes de que el pipeline de deployment pueda continuar. Se configura en el Environment de UAT (aprobación del cliente) y PROD (aprobación del líder técnico y QA). El pipeline queda en pausa hasta recibir la aprobación o que expire el timeout configurado.

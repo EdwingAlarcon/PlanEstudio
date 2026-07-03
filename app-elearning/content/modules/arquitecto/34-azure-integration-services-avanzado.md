@@ -22,6 +22,20 @@ Diseñar e implementar arquitecturas de integración enterprise usando el stack 
 - **Message Session:** funcionalidad de Azure Service Bus que garantiza el procesamiento ordenado (FIFO) de un grupo de mensajes relacionados identificados por una clave de sesión (`SessionId`). Útil cuando el orden importa, por ejemplo: eventos de un mismo pedido (creado, actualizado, cancelado) deben procesarse en secuencia por el mismo consumidor. Sin sessions, Service Bus distribuye mensajes a consumidores concurrentes sin garantía de orden.
 - **WebSub / WebHooks:** mecanismo donde un sistema externo notifica proactivamente a Power Platform (o a un endpoint de Logic Apps / Azure Functions) cuando ocurre un evento, eliminando la necesidad de polling periódico. El receptor registra una URL de callback; cuando el evento ocurre, el emisor hace un HTTP POST a esa URL. Ejemplo: un sistema de pagos notifica a Logic Apps cuando se procesa un pago, en lugar de Power Automate consultar el sistema cada N minutos.
 
+**Diagrama: stack de Azure Integration Services con Power Platform en el centro**
+
+```mermaid
+graph TD
+  P["Power Platform / Dataverse"] --> APIM["Azure API Management"]
+  APIM --> LA["Logic Apps"]
+  APIM --> SB["Azure Service Bus"]
+  SB --> AF["Azure Functions Durable"]
+  P --> EG["Azure Event Grid"]
+  EG --> AF
+  LA --> IA["Integration Account: EDI/B2B"]
+  P --> ADF["Azure Data Factory"]
+```
+
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
 #### Actividad 34.1: Arquitectura Integration Hub

@@ -21,6 +21,16 @@ Diseñar arquitecturas de datos modernas usando Microsoft Fabric y Azure Synapse
 - **Semantic Model (Power BI):** capa semántica centralizada que define medidas DAX, jerarquías, relaciones y descripciones de negocio sobre las tablas del Gold layer, reutilizable por múltiples reportes. Con DirectLake, el Semantic Model lee directamente del Lakehouse. Un Semantic Model bien diseñado encapsula la lógica de negocio (¿qué significa "cliente activo"? ¿cómo se calcula la morosidad?) para que los reporteros no tengan que replicarla en cada reporte. La certificación del Semantic Model en Power BI Service indica a los usuarios que es la fuente oficial de verdad.
 - **Data Activator:** servicio de Fabric (anteriormente llamado Reflex) que permite definir reglas de alerta sobre datos en tiempo real y disparar acciones automáticas sin escribir código. Se conecta a streams de Event Hubs, datos de Power BI, o tablas de Lakehouse; cuando una condición se cumple, puede enviar Teams/email notification, ejecutar un Power Automate flow, o llamar un webhook. Ejemplo: alertar al gerente de operaciones cuando el tiempo de resolución promedio de tickets supera las 4 horas, con el detalle de cuáles tickets están pendientes.
 
+**Diagrama: Medallion Architecture (Bronze → Silver → Gold)**
+
+```mermaid
+graph LR
+  D["Dataverse (Synapse Link)"] --> B["Bronze: datos crudos, inmutables"]
+  B --> S["Silver: datos limpios y estandarizados"]
+  S --> G["Gold: métricas de negocio, desnormalizadas"]
+  G --> PBI["Power BI (DirectLake / Semantic Model)"]
+```
+
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
 #### Actividad 35.1: Conectar Dataverse con Microsoft Fabric
