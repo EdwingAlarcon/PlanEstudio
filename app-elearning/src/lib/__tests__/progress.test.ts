@@ -21,6 +21,7 @@ describe("useProgressStore", () => {
       completedModules: [],
       quizScores: {},
       completedLabs: [],
+      checklistItems: {},
       lastVisited: null,
       userName: null,
     });
@@ -164,17 +165,62 @@ describe("useProgressStore", () => {
   });
 
   describe("resetProgress", () => {
-    it("clears all progress including labs", () => {
+    it("clears all progress including labs and checklist items", () => {
       useProgressStore.getState().markModuleComplete("basico-1");
       useProgressStore.getState().saveQuizScore("1", 80);
       useProgressStore.getState().markLabComplete("lab-02-dataverse-modelo-datos");
+      useProgressStore.getState().setChecklistItem("module-1-1", {
+        completed: true,
+        mastery: 4,
+        completedAt: "2026-07-03",
+      });
       useProgressStore.getState().resetProgress();
 
       const state = useProgressStore.getState();
       expect(state.completedModules).toHaveLength(0);
       expect(Object.keys(state.quizScores)).toHaveLength(0);
       expect(state.completedLabs).toHaveLength(0);
+      expect(Object.keys(state.checklistItems)).toHaveLength(0);
       expect(state.lastVisited).toBeNull();
+    });
+  });
+
+  describe("checklist progress", () => {
+    it("saves and retrieves checklist item state", () => {
+      useProgressStore.getState().setChecklistItem("module-1-1", {
+        completed: true,
+        mastery: 5,
+        completedAt: "2026-07-03",
+      });
+
+      expect(useProgressStore.getState().getChecklistItem("module-1-1")).toEqual({
+        completed: true,
+        mastery: 5,
+        completedAt: "2026-07-03",
+      });
+    });
+
+    it("updates a checklist item without losing existing fields", () => {
+      useProgressStore.getState().setChecklistItem("module-1-1", {
+        completed: true,
+        mastery: 3,
+        completedAt: "2026-07-03",
+      });
+      useProgressStore.getState().setChecklistItem("module-1-1", { mastery: 4 });
+
+      expect(useProgressStore.getState().getChecklistItem("module-1-1")).toEqual({
+        completed: true,
+        mastery: 4,
+        completedAt: "2026-07-03",
+      });
+    });
+
+    it("returns a default empty state for unknown checklist items", () => {
+      expect(useProgressStore.getState().getChecklistItem("module-99-1")).toEqual({
+        completed: false,
+        mastery: null,
+        completedAt: null,
+      });
     });
   });
 

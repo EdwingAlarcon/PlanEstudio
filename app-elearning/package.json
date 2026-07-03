@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:e2e": "next dev",
     "prebuild": "node ../scripts/extract-questions.mjs",
     "build": "next build",
     "build:pages": "cross-env GITHUB_PAGES=true next build",

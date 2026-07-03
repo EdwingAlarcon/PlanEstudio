@@ -15,24 +15,20 @@ test.describe("Smoke — rutas principales", () => {
   });
 
   test("detalle de módulo carga contenido", async ({ page }) => {
-    await page.goto("/nivel/basico");
-    const firstLink = page.locator('a[href*="/nivel/basico/modulo/"]').first();
-    await firstLink.click();
+    await page.goto("/nivel/basico/modulo/introduccion-al-ecosistema-power-platform");
     await expect(page).toHaveURL(/\/nivel\/basico\/modulo\//);
     await expect(page.locator("h1").first()).toBeVisible();
     await expect(page.getByRole("heading", { name: /Objetivo/i }).first()).toBeVisible();
   });
 
   test("marcar módulo como completado actualiza el progreso", async ({ page }) => {
-    await page.goto("/nivel/basico");
-    const firstLink = page.locator('a[href*="/nivel/basico/modulo/"]').first();
-    await firstLink.click();
+    await page.goto("/nivel/basico/modulo/introduccion-al-ecosistema-power-platform");
     const completeBtn = page.locator('button[aria-label*="Marcar"]').first();
     await completeBtn.waitFor({ state: "visible" });
     await completeBtn.click();
     await expect(completeBtn).toHaveAttribute("aria-pressed", "true");
-    await page.locator('a[href="/nivel/basico"]').first().click();
-    await expect(page.locator("text=/1\\s*\\/\\s*\\d+/")).toBeVisible();
+    await page.goto("/nivel/basico");
+    await expect(page.getByText(/1\s*\/\s*8 módulos/)).toBeVisible();
   });
 
   test("simulador carga con botón de inicio", async ({ page }) => {
@@ -49,9 +45,7 @@ test.describe("Smoke — rutas principales", () => {
   });
 
   test("detalle de laboratorio carga contenido", async ({ page }) => {
-    await page.goto("/labs");
-    const firstLab = page.locator("a[href*='/labs/lab-']").first();
-    await firstLab.click();
+    await page.goto("/labs/lab-02-dataverse-modelo-datos");
     await expect(page).toHaveURL(/\/labs\/lab-/);
     await expect(page.locator("h1").first()).toBeVisible();
     await expect(page.getByRole("heading", { name: /Objetivo/i }).first()).toBeVisible();
@@ -60,6 +54,19 @@ test.describe("Smoke — rutas principales", () => {
   test("recurso lenguajes-programacion carga", async ({ page }) => {
     await page.goto("/recursos/lenguajes-programacion");
     await expect(page.locator("h1, h2").first()).toBeVisible();
+  });
+
+  test("checklist permite marcar criterios y conserva estado local", async ({ page }) => {
+    await page.goto("/recursos/checklist");
+    await expect(page.getByRole("heading", { name: "Checklist de Progreso" })).toBeVisible();
+
+    const firstCriterion = page.locator('input[type="checkbox"]').first();
+    await firstCriterion.check();
+    await page.locator("select").first().selectOption("4");
+
+    await page.reload();
+    await expect(page.locator('input[type="checkbox"]').first()).toBeChecked();
+    await expect(page.locator("select").first()).toHaveValue("4");
   });
 
   test("modo oscuro alterna correctamente", async ({ page }) => {

@@ -4,6 +4,8 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import type { LevelId } from "./i18n";
 import { LEVEL_MODULE_RANGE } from "./i18n";
+import type { ChecklistItemProgress, ChecklistProgressMap } from "./checklist";
+import { getEmptyChecklistItemProgress } from "./checklist";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -11,6 +13,7 @@ export interface ProgressState {
   completedModules: string[];          // module ids like "basico-1"
   quizScores: Record<string, number>;  // moduleId string → percentage (0-100)
   completedLabs: string[];             // lab slugs like "lab-02-dataverse-modelo-datos"
+  checklistItems: ChecklistProgressMap; // checklist criterion id → state
   lastVisited: string | null;          // last module id visited
   userName: string | null;             // user name for certificate
 }
@@ -31,6 +34,8 @@ export interface ProgressActions {
   markLabIncomplete: (slug: string) => void;
   toggleLabComplete: (slug: string) => void;
   isLabComplete: (slug: string) => boolean;
+  setChecklistItem: (itemId: string, patch: Partial<ChecklistItemProgress>) => void;
+  getChecklistItem: (itemId: string) => ChecklistItemProgress;
   resetProgress: () => void;
 }
 
@@ -38,6 +43,7 @@ const INITIAL_STATE: ProgressState = {
   completedModules: [],
   quizScores: {},
   completedLabs: [],
+  checklistItems: {},
   lastVisited: null,
   userName: null,
 };
@@ -137,6 +143,24 @@ export const useProgressStore = create<ProgressState & ProgressActions>()(
       },
 
       isLabComplete: (slug) => get().completedLabs.includes(slug),
+
+      // ── Checklist ───────────────────────────────────────────────────────────
+
+      setChecklistItem: (itemId, patch) =>
+        set((state) => {
+          const previous = state.checklistItems[itemId] ?? getEmptyChecklistItemProgress();
+          return {
+            checklistItems: {
+              ...state.checklistItems,
+              [itemId]: {
+                ...previous,
+                ...patch,
+              },
+            },
+          };
+        }),
+
+      getChecklistItem: (itemId) => get().checklistItems[itemId] ?? getEmptyChecklistItemProgress(),
 
       resetProgress: () => set(INITIAL_STATE),
     }),

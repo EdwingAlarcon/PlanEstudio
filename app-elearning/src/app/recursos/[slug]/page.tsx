@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getAllResourcePages, getResourceBySlug } from "@/lib/content";
+import { parseChecklistMarkdown } from "@/lib/checklist";
+import { ChecklistClient } from "@/components/checklist/checklist-client";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
 
 interface PageProps {
@@ -23,6 +25,10 @@ export default async function ResourcePage({ params }: PageProps) {
   const { slug } = await params;
   const page = getResourceBySlug(slug);
   if (!page) notFound();
+
+  if (slug === "checklist") {
+    return <ChecklistClient checklist={parseChecklistMarkdown(page.rawContent)} />;
+  }
 
   return (
     <div className="max-w-4xl mx-auto">
