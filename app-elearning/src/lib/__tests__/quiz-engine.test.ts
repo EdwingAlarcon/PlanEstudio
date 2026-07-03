@@ -314,6 +314,19 @@ describe("timing helpers", () => {
     expect(getRemainingSeconds(session)).toBeNull();
   });
 
+  it("getRemainingSeconds counts down from timeLimit while the session is running", () => {
+    const session = createSession(questions, { timeLimit: 600 });
+    const remaining = getRemainingSeconds(session);
+    expect(remaining).not.toBeNull();
+    expect(remaining).toBeLessThanOrEqual(600);
+    expect(remaining).toBeGreaterThanOrEqual(0);
+  });
+
+  it("getRemainingSeconds never goes below zero once time is up", () => {
+    const session = { ...createSession(questions, { timeLimit: 10 }), startedAt: Date.now() - 60_000 };
+    expect(getRemainingSeconds(session)).toBe(0);
+  });
+
   it("getElapsedSeconds returns a non-negative number", () => {
     const session = createSession(questions);
     expect(getElapsedSeconds(session)).toBeGreaterThanOrEqual(0);

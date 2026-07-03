@@ -54,7 +54,7 @@ beforeEach(() => {
   vi.resetModules();
 });
 
-import { getAllLevels, getLevelById, getModuleBySlug, getAllResourcePages, getAllLabs, getSearchDocuments, parseDuration } from "../content";
+import { getAllLevels, getLevelById, getModuleById, getModuleBySlug, getAllResourcePages, getResourceBySlug, getAllLabs, getSearchDocuments, parseDuration } from "../content";
 
 // ─── getAllLevels ─────────────────────────────────────────────────────────────
 
@@ -141,6 +141,31 @@ describe("getModuleBySlug", () => {
 
   it("returns undefined for nonexistent slug", () => {
     expect(getModuleBySlug("basico", "slug-que-no-existe")).toBeUndefined();
+  });
+});
+
+// ─── getModuleById ────────────────────────────────────────────────────────────
+
+describe("getModuleById", () => {
+  it("returns module when moduleId exists in the level", () => {
+    const found = getModuleById("basico", 1);
+    expect(found?.moduleId).toBe(1);
+  });
+
+  it("returns undefined for a moduleId not present in the level", () => {
+    expect(getModuleById("basico", 999)).toBeUndefined();
+  });
+});
+
+// ─── getResourceBySlug ────────────────────────────────────────────────────────
+
+describe("getResourceBySlug", () => {
+  it("returns the resource page when the slug exists", () => {
+    expect(getResourceBySlug("checklist")?.slug).toBe("checklist");
+  });
+
+  it("returns undefined for a nonexistent slug", () => {
+    expect(getResourceBySlug("slug-que-no-existe")).toBeUndefined();
   });
 });
 
