@@ -12,6 +12,7 @@ export interface ProgressState {
   quizScores: Record<string, number>;  // moduleId string → percentage (0-100)
   completedLabs: string[];             // lab slugs like "lab-02-dataverse-modelo-datos"
   lastVisited: string | null;          // last module id visited
+  userName: string | null;             // user name for certificate
 }
 
 export interface ProgressActions {
@@ -22,6 +23,7 @@ export interface ProgressActions {
   saveQuizScore: (moduleId: string, percentage: number) => void;
   getQuizScore: (moduleId: string) => number | null;
   setLastVisited: (moduleId: string) => void;
+  setUserName: (name: string) => void;
   getLevelProgress: (levelId: LevelId) => { completed: number; total: number; percentage: number };
   getOverallProgress: () => { completed: number; total: number; percentage: number };
   // Labs
@@ -37,6 +39,7 @@ const INITIAL_STATE: ProgressState = {
   quizScores: {},
   completedLabs: [],
   lastVisited: null,
+  userName: null,
 };
 
 // ─── Module counts per level ──────────────────────────────────────────────────
@@ -84,6 +87,8 @@ export const useProgressStore = create<ProgressState & ProgressActions>()(
       getQuizScore: (moduleId) => get().quizScores[moduleId] ?? null,
 
       setLastVisited: (moduleId) => set({ lastVisited: moduleId }),
+
+      setUserName: (name) => set({ userName: name }),
 
       getLevelProgress: (levelId) => {
         const [start, end] = LEVEL_MODULE_RANGE[levelId];

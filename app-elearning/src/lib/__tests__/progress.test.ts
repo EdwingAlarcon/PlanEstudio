@@ -22,6 +22,7 @@ describe("useProgressStore", () => {
       quizScores: {},
       completedLabs: [],
       lastVisited: null,
+      userName: null,
     });
     localStorageMock.clear();
   });
@@ -100,6 +101,23 @@ describe("useProgressStore", () => {
     it("updates lastVisited", () => {
       useProgressStore.getState().setLastVisited("basico-3");
       expect(useProgressStore.getState().lastVisited).toBe("basico-3");
+    });
+  });
+
+  describe("setUserName", () => {
+    it("starts as null", () => {
+      expect(useProgressStore.getState().userName).toBeNull();
+    });
+
+    it("stores the provided name", () => {
+      useProgressStore.getState().setUserName("Ada Lovelace");
+      expect(useProgressStore.getState().userName).toBe("Ada Lovelace");
+    });
+
+    it("overwrites a previously stored name", () => {
+      useProgressStore.getState().setUserName("Ada Lovelace");
+      useProgressStore.getState().setUserName("Grace Hopper");
+      expect(useProgressStore.getState().userName).toBe("Grace Hopper");
     });
   });
 
