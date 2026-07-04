@@ -951,10 +951,58 @@
 
 ---
 
+### Módulo 52: Power Platform CLI y Conexión Segura al Tenant
+
+- [ ] **Práctica**: Instalé Power Platform CLI y confirmé la versión con `pac --version` | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creé un perfil de autenticación contra un entorno Developer/Sandbox con `pac auth create` | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Verifiqué la organización activa con `pac org who` antes de operar | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico la diferencia entre tenant, environment y organización | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 52 completado — CLI y conexión segura al tenant | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 52:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 53: Dataverse Web API, Dynamics 365 y Autenticación
+
+- [ ] **Conocimiento**: Explico la diferencia entre app registration, service principal y Application User | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Distingo cuándo usar client secret vs. certificado para una integración | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diagnostico correctamente un error 401 vs. un error 403 | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño un Security Role de mínimo privilegio para un Application User | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 54 completado — conexión conceptual de app externa a Dataverse Web API | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 53:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 54: ALM de Soluciones Power Platform con Apoyo de IA
+
+- [ ] **Práctica**: Exporté una solución unmanaged y la desempaqueté con `pac solution unpack` | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Identifiqué connection references y variables de entorno de una solución de práctica | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico por qué Dev debe ser unmanaged y Test/Prod deben ser managed | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Diseñé los pasos mínimos de un pipeline de GitHub Actions para export/unpack/pack/import | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 53 completado — exportar, desempaquetar y revisar una solución con IA | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 54:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 55: IA para Análisis de Soluciones, Arquitectura y Consultoría Funcional D365
+
+- [ ] **Práctica**: Uso IA para identificar dependencias entre tablas y verifico manualmente el resultado | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Convierto un requerimiento de negocio en user story y evalúo alternativa estándar vs. personalizada | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Genero una matriz de seguridad básica respetando el mínimo privilegio | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Identifico un caso de sobrepersonalización propuesto por la IA y lo corrijo | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 55 completado — UAT/checklist de go-live y auditoría de prompts | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 55:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
 ### 🏆 Hitos de Nivel IA
 
-- [ ] Todos los módulos 42-51 completados con 80%+ de checkboxes marcados | Fecha: ___
-- [ ] Lab 45 y Lab 51 completados | Fecha: ___
+- [ ] Todos los módulos 42-55 completados con 80%+ de checkboxes marcados | Fecha: ___
+- [ ] Labs 45, 51, 52, 53, 54 y 55 completados | Fecha: ___
 - [ ] Autoevaluación promedio ≥ 4.0/5 en todos los módulos del nivel | Promedio: ___/5
 - [ ] Certificado del Nivel IA generado | Fecha: ___
 
@@ -971,8 +1019,8 @@
 | 🔵 Nivel 2 - Intermedio | 9 | 118 | ___ | ___% | ___/5 | ___ |
 | 🟠 Nivel 3 - Avanzado | 13 | 129 | ___ | ___% | ___/5 | ___ |
 | 🔴 Nivel 4 - Arquitecto | 11 | 105 | ___ | ___% | ___/5 | ___ |
-| 🟣 Nivel IA - Desarrollo Asistido | 10 | 41 | ___ | ___% | ___/5 | ___ |
-| **TOTAL** | **51** | **506** | ___ | ___% | ___/5 | ___ |
+| 🟣 Nivel IA - Desarrollo Asistido | 14 | 61 | ___ | ___% | ___/5 | ___ |
+| **TOTAL** | **55** | **526** | ___ | ___% | ___/5 | ___ |
 
 ### Resumen por Módulo
 
@@ -1029,6 +1077,10 @@
 | 49 | Seguridad, Secretos y Compliance | ___/4 | ___% | ___/5 |
 | 50 | Tests, CI/CD y Guardrails | ___/4 | ___% | ___/5 |
 | 51 | Flujo Recomendado (Capstone) | ___/5 | ___% | ___/5 |
+| 52 | Power Platform CLI y Conexión al Tenant | ___/5 | ___% | ___/5 |
+| 53 | Dataverse Web API, D365 y Autenticación | ___/5 | ___% | ___/5 |
+| 54 | ALM de Soluciones con Apoyo de IA | ___/5 | ___% | ___/5 |
+| 55 | Análisis, Arquitectura y Consultoría Funcional D365 | ___/5 | ___% | ___/5 |
 
 ### Timeline Visual de Progreso
 
