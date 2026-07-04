@@ -41,8 +41,9 @@ export default async function DashboardPage() {
               Plan de Estudio Progresivo
             </h1>
             <p className="text-muted-foreground text-base leading-relaxed max-w-xl">
-              De cero a Solution Architect. 41 módulos, 9 laboratorios y simuladores
-              de certificación — PL-900 · PL-200 · PL-400 · PL-600.
+              De cero a Solution Architect. 51 módulos, 11 laboratorios y simuladores
+              de certificación — PL-900 · PL-200 · PL-400 · PL-600, más una capa
+              transversal de Desarrollo Asistido por IA.
             </p>
           </div>
         </div>
