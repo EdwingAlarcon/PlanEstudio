@@ -59,9 +59,9 @@ import { getAllLevels, getLevelById, getModuleById, getModuleBySlug, getAllResou
 // ─── getAllLevels ─────────────────────────────────────────────────────────────
 
 describe("getAllLevels", () => {
-  it("returns 4 levels", () => {
+  it("returns 5 levels", () => {
     const levels = getAllLevels();
-    expect(levels).toHaveLength(4);
+    expect(levels).toHaveLength(5);
   });
 
   it("returns levels in correct order", () => {
