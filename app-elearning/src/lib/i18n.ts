@@ -41,14 +41,14 @@ export const UI = {
       intermedio: "Canvas Apps, Model-Driven, Power Automate y Power BI avanzados",
       avanzado: "Arquitectura, ALM, D365, Copilot Studio y extensibilidad",
       arquitecto: "Gobernanza enterprise, multi-tenant, Azure integrations y liderazgo",
-      ia: "Copilot, GitHub Copilot, Claude Code y Codex aplicados de forma segura y auditable al desarrollo en Power Platform y D365",
+      ia: "Copilot, GitHub Copilot, Claude Code y Codex aplicados de forma segura y auditable al desarrollo, conexión al tenant, Dataverse, ALM y consultoría funcional en Power Platform y D365",
     },
     modules: {
       basico: 8,
       intermedio: 9,
       avanzado: 13,
       arquitecto: 11,
-      ia: 10,
+      ia: 14,
     },
   },
 
@@ -130,5 +130,5 @@ export const LEVEL_MODULE_RANGE: Record<LevelId, [number, number]> = {
   intermedio: [9, 17],
   avanzado: [18, 30],
   arquitecto: [31, 41],
-  ia: [42, 51],
+  ia: [42, 55],
 };
