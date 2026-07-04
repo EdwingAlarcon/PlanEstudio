@@ -2,7 +2,7 @@
 // Source: docs/javascripts/evaluaciones-simulador.js
 // Regenerate: node scripts/extract-questions.mjs  (or: cd app-elearning && npm run build)
 //
-// 51 modules, 394 questions total.
+// 55 modules, 426 questions total.
 
 export type QuestionType = "single" | "multi";
 
@@ -4843,6 +4843,398 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       ],
       answer: [0],
       explanation: "La actividad práctica pide documentar explícitamente en qué etapa (si alguna) se tuvo que retroceder y por qué, como parte del aprendizaje del ciclo completo.",
+    },
+  ],
+  52: [
+    {
+      type: "single",
+      prompt: "¿Qué es un 'tenant' en el contexto de Power Platform?",
+      options: [
+      "El directorio de Microsoft Entra ID que agrupa todos los entornos, usuarios y licencias de una organización",
+      "Un tipo específico de tabla de Dataverse",
+      "El nombre técnico de una Canvas App publicada",
+      "Un sinónimo exacto de 'solución' en Power Platform"
+      ],
+      answer: [0],
+      explanation: "El tenant es el directorio de Microsoft Entra ID que agrupa todos los entornos, usuarios y licencias de una organización; un tenant puede contener muchos entornos distintos.",
+    },
+    {
+      type: "single",
+      prompt: "¿Cuál es la diferencia principal entre un entorno Developer y un entorno Production?",
+      options: [
+      "El Developer es gratuito, ligado a un solo usuario y pensado para practicar sin riesgo; Production contiene datos y usuarios reales",
+      "No hay ninguna diferencia funcional entre ambos",
+      "El entorno Developer no permite instalar Dataverse",
+      "Production siempre es más rápido que Developer en rendimiento"
+      ],
+      answer: [0],
+      explanation: "Un entorno Developer es gratuito y aislado para un solo usuario, ideal para practicar; Production contiene los datos y usuarios reales del negocio y nunca debe usarse para pruebas.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué comando de Power Platform CLI se usa para crear un nuevo perfil de autenticación contra un entorno?",
+      options: [
+      "pac auth create --environment \"<URL_DEL_ENTORNO>\"",
+      "pac org connect",
+      "pac solution export",
+      "pac auth login --force"
+      ],
+      answer: [0],
+      explanation: "`pac auth create --environment` crea un nuevo perfil de autenticación guardado localmente contra el entorno indicado, abriendo un login interactivo.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué comando debe ejecutarse SIEMPRE antes de cualquier operación que exporte, importe o modifique algo, según las buenas prácticas de este módulo?",
+      options: [
+      "pac org who",
+      "pac help",
+      "pac --version",
+      "pac auth clear"
+      ],
+      answer: [0],
+      explanation: "`pac org who` muestra la organización y usuario activos; verificarlo antes de cualquier operación destructiva evita operar contra el entorno equivocado.",
+    },
+    {
+      type: "multi",
+      prompt: "¿Cuáles DOS acciones ayudan a evitar operar por error contra el entorno equivocado cuando se manejan múltiples clientes/tenants?",
+      options: [
+      "Nombrar los perfiles de autenticación de forma explícita por cliente/entorno",
+      "Ejecutar `pac org who` antes de operaciones destructivas",
+      "Usar siempre el mismo nombre de perfil para todos los entornos",
+      "Evitar revisar la organización activa para ahorrar tiempo"
+      ],
+      answer: [0, 1],
+      explanation: "Nombrar los perfiles claramente y verificar la organización activa con `pac org who` son las dos prácticas concretas que previenen operar contra el entorno equivocado.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué comando lista todos los perfiles de autenticación guardados localmente?",
+      options: [
+      "pac auth list",
+      "pac org list",
+      "pac solution list",
+      "pac profile show"
+      ],
+      answer: [0],
+      explanation: "`pac auth list` muestra todos los perfiles de autenticación guardados localmente, permitiendo identificar cuál está activo y seleccionar otro si es necesario.",
+    },
+    {
+      type: "single",
+      prompt: "Un entorno 'Default' compartido por todo el tenant, ¿es recomendable para desarrollo serio de una solución?",
+      options: [
+      "No; se recomienda un entorno Developer o Sandbox dedicado para evitar interferir con otros equipos",
+      "Sí, siempre es la mejor opción por ser el más rápido de acceder",
+      "Sí, porque no requiere ningún tipo de coordinación con otros equipos",
+      "Es irrelevante qué entorno se use para desarrollo"
+      ],
+      answer: [0],
+      explanation: "El entorno Default es compartido por todo el tenant y no aislado; para desarrollo serio se recomienda un entorno Developer o Sandbox dedicado.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué representa la 'organización' (Dataverse organization) de un entorno?",
+      options: [
+      "La instancia de Dataverse con su propia URL única, creada cuando el entorno tiene Dataverse habilitado",
+      "El nombre comercial de la empresa dueña del tenant",
+      "Un sinónimo de 'tenant', intercambiable en cualquier contexto",
+      "Una carpeta de archivos dentro del repositorio del proyecto"
+      ],
+      answer: [0],
+      explanation: "Cuando un entorno tiene Dataverse habilitado, se crea una organización con una URL única (ej. `https://<org>.crm.dynamics.com`), que es el punto de conexión real para Web API y otras herramientas.",
+    },
+  ],
+  53: [
+    {
+      type: "single",
+      prompt: "¿Qué protocolo de autenticación usa la Dataverse Web API para validar cada petición?",
+      options: [
+      "OAuth 2.0, mediante un token emitido por Microsoft Entra ID",
+      "Autenticación básica con usuario y contraseña en texto plano",
+      "Un certificado SSL exclusivo sin relación con Entra ID",
+      "No requiere ningún tipo de autenticación para peticiones de lectura"
+      ],
+      answer: [0],
+      explanation: "La Web API exige un token OAuth 2.0 emitido por Microsoft Entra ID en el header Authorization de cada petición; sin un token válido del tenant correcto, la petición es rechazada.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué es una 'app registration' en Microsoft Entra ID?",
+      options: [
+      "El registro que da una identidad propia a una aplicación para solicitar tokens, independiente de cualquier usuario humano",
+      "Un tipo de tabla de Dataverse para registrar aplicaciones externas",
+      "Un archivo de configuración local que no se relaciona con Entra ID",
+      "El proceso de publicar una Canvas App en el catálogo de la organización"
+      ],
+      answer: [0],
+      explanation: "La app registration crea una identidad propia (Application ID) en Entra ID para que una aplicación pueda autenticarse y solicitar tokens sin depender de un usuario humano.",
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué una app registration por sí sola no es suficiente para que una integración pueda leer/escribir datos en Dataverse?",
+      options: [
+      "Porque necesita un Application User vinculado en Dataverse con un Security Role que le otorgue permisos concretos",
+      "Porque las app registrations nunca pueden usarse para integraciones automatizadas",
+      "Porque Dataverse ignora completamente los tokens emitidos por Entra ID",
+      "Porque toda integración requiere obligatoriamente un usuario humano real"
+      ],
+      answer: [0],
+      explanation: "La app registration puede autenticarse contra Entra ID, pero Dataverse rechaza la petición si no existe un Application User vinculado con un Security Role que otorgue los permisos necesarios.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué diferencia principal hay entre usar un client secret y un certificado como credencial de un service principal?",
+      options: [
+      "El client secret es una contraseña con expiración que requiere rotación; el certificado es más seguro y no requiere rotación frecuente de un valor en texto plano",
+      "No hay ninguna diferencia de seguridad entre ambos métodos",
+      "El certificado solo puede usarse en entornos Developer",
+      "El client secret nunca expira una vez generado"
+      ],
+      answer: [0],
+      explanation: "Un client secret expira y debe rotarse; un certificado ofrece mayor seguridad criptográfica y no depende de un valor en texto plano con rotación frecuente, por lo que es preferible en integraciones de largo plazo.",
+    },
+    {
+      type: "single",
+      prompt: "Un desarrollador recibe un error `401 Unauthorized` al llamar a la Dataverse Web API. ¿Cuál es la causa más probable?",
+      options: [
+      "El token no se generó, expiró, o se solicitó contra el tenant/audience incorrecto",
+      "El Application User no tiene Security Role asignado",
+      "La tabla consultada no existe en el entorno",
+      "El servidor de Dataverse está temporalmente caído"
+      ],
+      answer: [0],
+      explanation: "Un error 401 indica un problema de autenticación: el token es inválido, expiró, o se generó contra el tenant/audience equivocado — no un problema de permisos sobre la tabla.",
+    },
+    {
+      type: "single",
+      prompt: "Un desarrollador recibe un error `403 Forbidden`, y confirma que el token se generó correctamente. ¿Cuál es la causa más probable?",
+      options: [
+      "El Application User no tiene el Security Role o los privilegios necesarios sobre la tabla/operación solicitada",
+      "El tenant ID usado para generar el token es incorrecto",
+      "El error 403 siempre indica que el servicio está fuera de línea",
+      "El error 403 nunca está relacionado con permisos"
+      ],
+      answer: [0],
+      explanation: "Un error 403 con un token válido indica un problema de autorización: el Application User no tiene el Security Role o privilegio correspondiente sobre la tabla u operación.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué Security Role se recomienda asignar a un Application User usado por una integración automatizada?",
+      options: [
+      "El más restrictivo posible que cumpla el caso de uso, nunca System Administrator por defecto",
+      "Siempre System Administrator, para evitar depurar permisos",
+      "No es necesario asignar ningún Security Role a un Application User",
+      "El mismo rol que tiene el usuario que creó la app registration"
+      ],
+      answer: [0],
+      explanation: "El principio de permisos mínimos exige asignar el Security Role más restrictivo que cumpla el caso de uso; usar System Administrator por comodidad expone el entorno a riesgos innecesarios.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué se debe hacer SIEMPRE al pedirle a un asistente de IA ayuda sobre un flujo de autenticación OAuth?",
+      options: [
+      "Usar placeholders (ej. {{CLIENT_ID}}, {{TENANT_ID}}) en vez de valores reales",
+      "Pegar el client secret real para que la IA entienda mejor el contexto",
+      "Compartir el token de acceso completo generado en producción",
+      "Omitir cualquier mención a la autenticación para simplificar el prompt"
+      ],
+      answer: [0],
+      explanation: "Nunca se deben pegar credenciales ni tokens reales en un prompt; usar placeholders permite obtener ayuda sobre la estructura sin exponer información sensible.",
+    },
+  ],
+  54: [
+    {
+      type: "single",
+      prompt: "¿Cuál es la diferencia principal entre una solución unmanaged y una managed?",
+      options: [
+      "La unmanaged es editable (se usa en Dev); la managed es de solo lectura una vez importada (se usa en Test/Prod)",
+      "No hay ninguna diferencia funcional entre ambas",
+      "La managed siempre contiene menos componentes que la unmanaged",
+      "La unmanaged solo puede usarse en Dynamics 365, no en Power Apps"
+      ],
+      answer: [0],
+      explanation: "Una solución unmanaged es editable y se usa en el entorno de desarrollo; una managed es de solo lectura una vez importada, y se usa en Test/Production para evitar personalizaciones huérfanas.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué hace el comando `pac solution unpack`?",
+      options: [
+      "Descompone el .zip de la solución en archivos XML/JSON individuales, aptos para control de versiones y diffs legibles",
+      "Publica la solución directamente en el entorno de producción",
+      "Elimina componentes no usados de la solución automáticamente",
+      "Convierte una solución managed en unmanaged sin necesidad de reimportarla"
+      ],
+      answer: [0],
+      explanation: "`pac solution unpack` descompone el `.zip` en archivos individuales por componente, lo que permite versionar la solución en Git con diffs legibles por componente.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué problema resuelven las 'variables de entorno' (environment variables) en una solución Power Platform?",
+      options: [
+      "Permiten que valores como URLs o IDs cambien entre Dev/Test/Prod sin modificar el componente que los usa",
+      "Sirven exclusivamente para almacenar contraseñas de usuarios finales",
+      "Reemplazan por completo la necesidad de Security Roles",
+      "Solo pueden usarse en soluciones managed, nunca en unmanaged"
+      ],
+      answer: [0],
+      explanation: "Las variables de entorno externalizan valores que cambian entre entornos (URLs, IDs, flags), evitando hardcodear un valor específico de un entorno dentro de un componente.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué representa una 'connection reference' en una solución?",
+      options: [
+      "Un componente que representa una conexión a un conector, sin fijar qué cuenta o credencial usa, resuelto por entorno al importar",
+      "Un archivo de log de todas las conexiones realizadas a Dataverse",
+      "Una tabla especial que almacena credenciales de usuarios",
+      "Un tipo de plugin que solo funciona en modo síncrono"
+      ],
+      answer: [0],
+      explanation: "Una connection reference representa una conexión a un conector sin fijar la cuenta/credencial específica, evitando que un flujo quede atado a la cuenta personal de quien lo desarrolló.",
+    },
+    {
+      type: "single",
+      prompt: "¿Para qué sirve un archivo de 'deployment settings' al importar una solución?",
+      options: [
+      "Mapea los valores de variables de entorno y connection references específicos del entorno destino, automatizando ese mapeo",
+      "Reemplaza la necesidad de tener un archivo Solution.xml",
+      "Define los permisos de Security Roles de todos los usuarios del entorno",
+      "Solo se usa quando la solución no tiene ninguna connection reference"
+      ],
+      answer: [0],
+      explanation: "El archivo de deployment settings mapea los valores correctos de variables de entorno y connection references para el entorno destino, evitando configuración manual repetitiva en cada importación.",
+    },
+    {
+      type: "single",
+      prompt: "Según las buenas prácticas de ALM de este módulo, ¿en qué entorno debe vivir siempre una solución como unmanaged?",
+      options: [
+      "En el entorno de desarrollo (Dev)",
+      "En el entorno de producción (Prod)",
+      "En el entorno de Test únicamente",
+      "En todos los entornos por igual, sin distinción"
+      ],
+      answer: [0],
+      explanation: "Dev debe mantenerse siempre unmanaged y editable; Test y Prod deben recibir la solución como managed (solo lectura) para evitar personalizaciones huérfanas fuera de control de versiones.",
+    },
+    {
+      type: "multi",
+      prompt: "¿Cuáles DOS pasos mínimos ejecuta típicamente un pipeline de GitHub Actions para Power Platform en el flujo Dev → Test?",
+      options: [
+      "pac solution unpack tras exportar desde Dev",
+      "pac solution pack + pac solution import hacia el entorno destino",
+      "Eliminar todas las variables de entorno antes de importar",
+      "Convertir automáticamente el entorno de Test en Production"
+      ],
+      answer: [0, 1],
+      explanation: "El flujo típico incluye desempaquetar (unpack) tras exportar desde Dev para versionar, y empaquetar + importar (pack + import) hacia el entorno destino durante el despliegue.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué rol cumple la IA en el proceso de ALM descrito en este módulo?",
+      options: [
+      "Apoya revisando diffs, riesgos y documentación, pero la aprobación final del pipeline sigue siendo humana",
+      "Reemplaza por completo la necesidad de revisión humana antes de importar a producción",
+      "Ejecuta automáticamente pac solution import sin supervisión",
+      "Solo puede usarse para tareas no relacionadas con soluciones de Power Platform"
+      ],
+      answer: [0],
+      explanation: "La IA puede acelerar la revisión de diffs y riesgos de una solución, pero la decisión de aprobar el pipeline hacia Test/Prod sigue siendo responsabilidad humana, igual que en el resto del nivel IA.",
+    },
+  ],
+  55: [
+    {
+      type: "single",
+      prompt: "¿Qué es la 'sobrepersonalización' (over-customization) en un proyecto Power Platform/D365?",
+      options: [
+      "Resolver con desarrollo a medida algo que la plataforma ya ofrece de forma estándar, aumentando el costo de mantenimiento",
+      "Usar demasiadas Canvas Apps en un mismo proyecto",
+      "Tener más de 10 tablas personalizadas en una solución",
+      "Un sinónimo de 'solución managed' sin relación con el diseño"
+      ],
+      answer: [0],
+      explanation: "La sobrepersonalización ocurre cuando se construye una solución a medida para algo que la plataforma ya resuelve de forma estándar, incrementando el costo de mantenimiento y complicando actualizaciones futuras.",
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué un asistente de IA tiende a proponer una solución personalizada en vez de una alternativa estándar de D365, si no se le indica lo contrario?",
+      options: [
+      "Porque el patrón de proponer desarrollo a medida es común en sus datos de entrenamiento si no se le pide explícitamente evaluar alternativas estándar",
+      "Porque la IA no puede generar ningún tipo de configuración estándar",
+      "Porque las alternativas estándar de D365 no existen realmente",
+      "Porque toda propuesta de IA es automáticamente la mejor opción técnica"
+      ],
+      answer: [0],
+      explanation: "Si no se le pide explícitamente evaluar alternativas estándar primero, la IA tiende a proponer directamente desarrollo a medida, por lo que hay que solicitarlo de forma explícita en el prompt.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué es un ADR (Architecture Decision Record)?",
+      options: [
+      "Un documento que registra el contexto, la decisión, alternativas consideradas y consecuencias de una decisión de arquitectura",
+      "Un tipo de tabla de Dataverse para almacenar decisiones de negocio",
+      "Un reporte automático generado únicamente por Power BI",
+      "Un sinónimo de 'Security Role' usado en consultoría funcional"
+      ],
+      answer: [0],
+      explanation: "Un ADR documenta el contexto, la decisión tomada, las alternativas consideradas y las consecuencias, dejando un registro trazable de decisiones de arquitectura importantes.",
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué es importante dar contexto explícito de las políticas DLP y Managed Environments del tenant real antes de pedir una propuesta de arquitectura a la IA?",
+      options: [
+      "Porque la IA no conoce automáticamente las restricciones de gobierno configuradas en un tenant específico",
+      "Porque las políticas DLP no afectan ninguna decisión de arquitectura",
+      "Porque Managed Environments es un concepto exclusivo de Dynamics 365, no de Power Platform",
+      "Porque sin ese contexto la IA se niega a responder cualquier pregunta de arquitectura"
+      ],
+      answer: [0],
+      explanation: "La IA no tiene visibilidad automática de las políticas DLP ni la configuración de Managed Environments de un tenant específico; hay que proporcionarlas explícitamente como contexto para que la propuesta sea realista.",
+    },
+    {
+      type: "single",
+      prompt: "Un requerimiento pide 'registrar visitas de vendedores a clientes'. ¿Qué debería evaluarse ANTES de proponer una tabla personalizada?",
+      options: [
+      "Si la entidad estándar de actividades/citas de Dynamics 365 Sales ya cubre el caso de uso",
+      "Directamente crear la tabla personalizada, ya que siempre es más flexible",
+      "Consultar únicamente el precio de licenciamiento antes de decidir",
+      "Ignorar las tablas estándar porque nunca son suficientes para casos reales"
+      ],
+      answer: [0],
+      explanation: "Antes de proponer desarrollo a medida, se debe evaluar si una capacidad estándar de la plataforma (como actividades/citas) ya cubre el requerimiento, para evitar sobrepersonalización innecesaria.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué elementos debería incluir como mínimo una matriz de seguridad generada para 2 roles sobre una tabla?",
+      options: [
+      "Tabla, rol y los permisos de crear/leer/escribir/eliminar para cada rol",
+      "Solo el nombre de los usuarios que tienen acceso a la tabla",
+      "Únicamente la fecha de creación de la tabla",
+      "El precio de la licencia de cada usuario"
+      ],
+      answer: [0],
+      explanation: "Una matriz de seguridad básica cruza tabla × rol × permisos (crear/leer/escribir/eliminar), permitiendo verificar visualmente si se respeta el principio de mínimo privilegio.",
+    },
+    {
+      type: "single",
+      prompt: "Al usar IA para generar el esqueleto de un Custom API de Dataverse, ¿qué se debe hacer antes de aceptar el resultado?",
+      options: [
+      "Revisarlo con la checklist de alcance/efectos secundarios/seguridad/tests del Módulo 48",
+      "Aceptarlo directamente si compila sin errores de sintaxis",
+      "Ejecutarlo inmediatamente en el entorno de producción",
+      "Ninguna revisión adicional es necesaria si lo generó un asistente de IA"
+      ],
+      answer: [0],
+      explanation: "Todo código generado por IA, incluyendo un Custom API, debe revisarse con la misma checklist de revisión de diffs (alcance, efectos secundarios, seguridad, tests) antes de aceptarlo.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué rol cumple el humano frente a una propuesta de arquitectura generada con apoyo de IA, según este módulo?",
+      options: [
+      "Sigue siendo el responsable final de la decisión, sin importar cuán completa parezca la propuesta de la IA",
+      "Ya no es necesario, la IA puede aprobar sus propias propuestas de arquitectura",
+      "Solo debe revisar la ortografía del documento generado",
+      "Su única función es ejecutar los comandos que la IA le indique"
+      ],
+      answer: [0],
+      explanation: "Sin importar cuán completa parezca una propuesta de arquitectura generada con apoyo de IA, la decisión final y la responsabilidad ante el cliente siguen siendo del arquitecto humano.",
     },
   ],
 };

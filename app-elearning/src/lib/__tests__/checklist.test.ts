@@ -75,7 +75,7 @@ describe("summarizeChecklistProgress", () => {
 
 describe("validateChecklistData", () => {
   it("accepts a checklist with all expected modules and valid categories", () => {
-    const modules = Array.from({ length: 51 }, (_, index) => {
+    const modules = Array.from({ length: 55 }, (_, index) => {
       const moduleId = index + 1;
       return `### Módulo ${moduleId}: Módulo ${moduleId}
 
@@ -138,7 +138,7 @@ ${modules.slice(41).join("\n")}`;
   });
 
   it("throws a clear error when a criterion category is invalid", () => {
-    const modules = Array.from({ length: 51 }, (_, index) => {
+    const modules = Array.from({ length: 55 }, (_, index) => {
       const moduleId = index + 1;
       const category = moduleId === 1 ? "Otro" : "Conocimiento";
       return `### Módulo ${moduleId}: Módulo ${moduleId}
@@ -194,7 +194,7 @@ ${modules.slice(22).join("\n")}`;
   // per module) so individual violation tests can tweak a single module
   // without also tripping the "missing levels/modules" checks first.
   function buildFullChecklistMarkdown(): string[] {
-    return Array.from({ length: 51 }, (_, index) => {
+    return Array.from({ length: 55 }, (_, index) => {
       const moduleId = index + 1;
       return `### Módulo ${moduleId}: Módulo ${moduleId}
 

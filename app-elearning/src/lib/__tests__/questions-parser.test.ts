@@ -75,10 +75,10 @@ describe("getAllQuestions — bank integrity", () => {
     });
   });
 
-  it("moduleId values are between 1 and 51", () => {
+  it("moduleId values are between 1 and 55", () => {
     all.forEach((q) => {
       expect(q.moduleId, `${q.id}: moduleId out of range`).toBeGreaterThanOrEqual(1);
-      expect(q.moduleId, `${q.id}: moduleId out of range`).toBeLessThanOrEqual(51);
+      expect(q.moduleId, `${q.id}: moduleId out of range`).toBeLessThanOrEqual(55);
     });
   });
 
