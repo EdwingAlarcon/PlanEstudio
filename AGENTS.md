@@ -36,12 +36,13 @@ docs/                    # MkDocs legacy/reference content + shared question ban
     CHECKLIST_PROGRESO.md
     GLOSARIO_TERMINOS.md
     CERTIFICACIONES.md
+    PROMPTS_REUTILIZABLES_IA.md
   javascripts/
-    evaluaciones-simulador.js   # Banco de 394 preguntas A/B/C/D en MODULE_QUESTIONS (módulos 1-51, incluye Nivel IA transversal)
+    evaluaciones-simulador.js   # Banco de 426 preguntas A/B/C/D en MODULE_QUESTIONS (módulos 1-55, incluye Nivel IA transversal)
   stylesheets/
     extra.css            # Custom CSS for MkDocs site
 app-elearning/           # Next.js 15 interactive app (THE primary surface)
-  content/               # Official app content: 51 modules + 11 labs with frontmatter (incl. transversal Nivel IA: modules 42-51, lab-45, lab-51)
+  content/               # Official app content: 55 modules + 15 labs with frontmatter (incl. transversal Nivel IA: modules 42-55, labs 45/51/52/53/54/55)
   next.config.ts         # output: 'export', basePath: '/PlanEstudio'
   src/
     app/                 # App Router pages
@@ -167,7 +168,7 @@ Do NOT change these heading formats in `docs/Niveles/*.md` unless you intentiona
 }
 ```
 
-- 394 total questions across 51 modules
+- 426 total questions across 55 modules
 - Module 1 has 15 questions (includes AI Builder and Power Pages topics for PL-900)
 - After editing, run `node ../scripts/extract-questions.mjs` from `app-elearning` or run `npm run build:pages`
 - `scripts/extract-questions.mjs` generates `app-elearning/src/data/questions.ts`; `questions-parser.ts` validates associations at build/test time
