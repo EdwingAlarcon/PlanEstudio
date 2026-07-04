@@ -57,7 +57,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
 
       <aside
         className={cn(
-          "flex flex-col w-64 border-r bg-background h-screen overflow-hidden",
+          "flex flex-col w-72 border-r bg-background h-screen overflow-hidden",
           "lg:static lg:translate-x-0 lg:z-auto",
           "fixed inset-y-0 left-0 z-50 transition-transform duration-200 lg:transition-none",
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
@@ -98,7 +98,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
                 <Link
                   href={`/nivel/${levelId}`}
                   className={cn(
-                    "relative flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors",
+                    "relative flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors overflow-hidden",
                     "hover:bg-accent hover:text-accent-foreground",
                     isActive
                       ? "bg-[#EFF6FC] dark:bg-[rgba(33,150,243,0.12)] font-medium"
@@ -110,10 +110,14 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
                     <span className="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] w-0.5 rounded-r bg-[#0078D4]" aria-hidden />
                   )}
                   <span className={cn("h-2 w-2 rounded-full shrink-0", cfg.dot)} aria-hidden />
-                  <span className={cn("flex-1 truncate", isActive ? cfg.label : "")}>
+                  <span className={cn("flex-1 min-w-0 truncate", isActive ? cfg.label : "")}>
                     {UI.levels[levelId]}
                   </span>
-                  <Badge variant={cfg.badgeVariant} className="text-[9px] px-1.5 py-0 h-4">
+                  <Badge
+                    variant={cfg.badgeVariant}
+                    className="text-[9px] px-1.5 py-0 h-4 shrink-0 max-w-[100px] truncate"
+                    title={UI.levels.cert[levelId]}
+                  >
                     {UI.levels.cert[levelId]}
                   </Badge>
                 </Link>
