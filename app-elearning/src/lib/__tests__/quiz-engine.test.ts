@@ -269,9 +269,13 @@ describe("certForModule", () => {
     expect(certForModule(18)).toBe("PL-400");
     expect(certForModule(30)).toBe("PL-400");
   });
-  it("returns PL-600 for modules 31+", () => {
+  it("returns PL-600 for modules 31-41", () => {
     expect(certForModule(31)).toBe("PL-600");
     expect(certForModule(41)).toBe("PL-600");
+  });
+  it("returns Buenas Prácticas for modules 42-51 (nivel IA)", () => {
+    expect(certForModule(42)).toBe("Buenas Prácticas");
+    expect(certForModule(51)).toBe("Buenas Prácticas");
   });
 });
 
@@ -287,6 +291,8 @@ describe("levelForModule", () => {
     expect(levelForModule(30)).toBe("avanzado");
     expect(levelForModule(31)).toBe("arquitecto");
     expect(levelForModule(41)).toBe("arquitecto");
+    expect(levelForModule(42)).toBe("ia");
+    expect(levelForModule(51)).toBe("ia");
   });
 });
 
