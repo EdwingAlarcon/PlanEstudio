@@ -60,15 +60,28 @@ export function CertificateDiploma({ levelId, userName, date }: CertificateDiplo
       <p className="font-serif text-4xl font-semibold">{userName}</p>
 
       <p className="text-base leading-relaxed max-w-lg">
-        por haber completado exitosamente el{" "}
-        <span className={cn("font-semibold", ACCENT_TEXT_COLORS[levelId])}>
-          {UI.levels.badge[levelId]}
-        </span>
-        , quedando preparado para rendir la certificación{" "}
-        <span className={cn("font-semibold", ACCENT_TEXT_COLORS[levelId])}>
-          {UI.levels.cert[levelId]}
-        </span>
-        .
+        {levelId === "ia" ? (
+          <>
+            por haber completado exitosamente el{" "}
+            <span className={cn("font-semibold", ACCENT_TEXT_COLORS[levelId])}>
+              {UI.levels.badge[levelId]}
+            </span>
+            , aplicando de forma consistente las buenas prácticas de desarrollo asistido
+            por IA en proyectos de Power Platform y Dynamics 365.
+          </>
+        ) : (
+          <>
+            por haber completado exitosamente el{" "}
+            <span className={cn("font-semibold", ACCENT_TEXT_COLORS[levelId])}>
+              {UI.levels.badge[levelId]}
+            </span>
+            , quedando preparado para rendir la certificación{" "}
+            <span className={cn("font-semibold", ACCENT_TEXT_COLORS[levelId])}>
+              {UI.levels.cert[levelId]}
+            </span>
+            .
+          </>
+        )}
       </p>
 
       <p className="text-sm text-muted-foreground">{formatDate(date)}</p>
