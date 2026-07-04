@@ -6,7 +6,6 @@ import {
   BookOpen, CheckSquare, GraduationCap, FileText, Trophy,
   Home, PlayCircle, FlaskConical,
 } from "lucide-react";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -75,7 +74,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
           </div>
         </div>
 
-        <ScrollArea className="flex-1 min-h-0 px-2 py-3">
+        <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden px-2 py-3">
           {/* Primary actions */}
           <NavLink href="/"          icon={Home}        label={UI.nav.home}      active={pathname === "/"} />
           <NavLink href="/simulador" icon={PlayCircle}  label={UI.nav.simulator} active={pathname === "/simulador"} />
@@ -150,7 +149,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
               active={pathname === link.href}
             />
           ))}
-        </ScrollArea>
+        </div>
 
         {/* Footer version tag */}
         <div className="px-4 py-3 border-t shrink-0">
