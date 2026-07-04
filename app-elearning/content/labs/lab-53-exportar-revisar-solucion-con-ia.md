@@ -114,6 +114,11 @@ Con los hallazgos del Ejercicio 3, escribe:
 - Módulo 48 — Revisión de Diffs y Pull Requests
 - Módulo 55 — IA para Análisis de Soluciones, Arquitectura y Consultoría Funcional D365
 
+## Referencia adicional
+
+Un ejemplo completo y ejecutable del pipeline de export/unpack/pack/import (para copiar a un
+proyecto real) está disponible en `docs/Anexos/EJEMPLO_PIPELINE_POWER_PLATFORM_ALM.md`.
+
 ## Competencias Desarrolladas
 
 - Ciclo completo de export/unpack de una solución Power Platform

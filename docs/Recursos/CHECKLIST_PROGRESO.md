@@ -958,8 +958,9 @@
 - [ ] **Práctica**: Verifiqué la organización activa con `pac org who` antes de operar | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico la diferencia entre tenant, environment y organización | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: Lab 52 completado — CLI y conexión segura al tenant | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 56 completado — cambiar entre entornos Dev/Test/Prod de forma segura | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 52:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 52:** ___/6 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
@@ -994,15 +995,16 @@
 - [ ] **Práctica**: Genero una matriz de seguridad básica respetando el mínimo privilegio | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Identifico un caso de sobrepersonalización propuesto por la IA y lo corrijo | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: Lab 55 completado — UAT/checklist de go-live y auditoría de prompts | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 57 completado — diseño de una solución completa de D365 Sales con IA | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 55:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 55:** ___/6 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
 ### 🏆 Hitos de Nivel IA
 
 - [ ] Todos los módulos 42-55 completados con 80%+ de checkboxes marcados | Fecha: ___
-- [ ] Labs 45, 51, 52, 53, 54 y 55 completados | Fecha: ___
+- [ ] Labs 45, 51, 52, 53, 54, 55, 56 y 57 completados | Fecha: ___
 - [ ] Autoevaluación promedio ≥ 4.0/5 en todos los módulos del nivel | Promedio: ___/5
 - [ ] Certificado del Nivel IA generado | Fecha: ___
 
@@ -1019,8 +1021,8 @@
 | 🔵 Nivel 2 - Intermedio | 9 | 118 | ___ | ___% | ___/5 | ___ |
 | 🟠 Nivel 3 - Avanzado | 13 | 129 | ___ | ___% | ___/5 | ___ |
 | 🔴 Nivel 4 - Arquitecto | 11 | 105 | ___ | ___% | ___/5 | ___ |
-| 🟣 Nivel IA - Desarrollo Asistido | 14 | 61 | ___ | ___% | ___/5 | ___ |
-| **TOTAL** | **55** | **526** | ___ | ___% | ___/5 | ___ |
+| 🟣 Nivel IA - Desarrollo Asistido | 14 | 63 | ___ | ___% | ___/5 | ___ |
+| **TOTAL** | **55** | **530** | ___ | ___% | ___/5 | ___ |
 
 ### Resumen por Módulo
 
@@ -1077,10 +1079,10 @@
 | 49 | Seguridad, Secretos y Compliance | ___/4 | ___% | ___/5 |
 | 50 | Tests, CI/CD y Guardrails | ___/4 | ___% | ___/5 |
 | 51 | Flujo Recomendado (Capstone) | ___/5 | ___% | ___/5 |
-| 52 | Power Platform CLI y Conexión al Tenant | ___/5 | ___% | ___/5 |
+| 52 | Power Platform CLI y Conexión al Tenant | ___/6 | ___% | ___/5 |
 | 53 | Dataverse Web API, D365 y Autenticación | ___/5 | ___% | ___/5 |
 | 54 | ALM de Soluciones con Apoyo de IA | ___/5 | ___% | ___/5 |
-| 55 | Análisis, Arquitectura y Consultoría Funcional D365 | ___/5 | ___% | ___/5 |
+| 55 | Análisis, Arquitectura y Consultoría Funcional D365 | ___/6 | ___% | ___/5 |
 
 ### Timeline Visual de Progreso
 

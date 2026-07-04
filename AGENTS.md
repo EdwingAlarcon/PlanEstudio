@@ -42,7 +42,7 @@ docs/                    # MkDocs legacy/reference content + shared question ban
   stylesheets/
     extra.css            # Custom CSS for MkDocs site
 app-elearning/           # Next.js 15 interactive app (THE primary surface)
-  content/               # Official app content: 55 modules + 15 labs with frontmatter (incl. transversal Nivel IA: modules 42-55, labs 45/51/52/53/54/55)
+  content/               # Official app content: 55 modules + 17 labs with frontmatter (incl. transversal Nivel IA: modules 42-55, labs 45/51/52/53/54/55/56/57)
   next.config.ts         # output: 'export', basePath: '/PlanEstudio'
   src/
     app/                 # App Router pages
