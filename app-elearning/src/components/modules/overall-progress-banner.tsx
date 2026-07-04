@@ -1,12 +1,12 @@
 "use client";
 
-import { useProgressStore } from "@/lib/progress";
+import { useProgressStore, calculateOverallProgress } from "@/lib/progress";
 import { Progress } from "@/components/ui/progress";
 import { UI } from "@/lib/i18n";
 
 export function OverallProgressBannerClient() {
-  const getOverallProgress = useProgressStore((s) => s.getOverallProgress);
-  const { completed, total, percentage } = getOverallProgress();
+  const completedModules = useProgressStore((s) => s.completedModules);
+  const { completed, total, percentage } = calculateOverallProgress(completedModules);
 
   return (
     <div className="rounded-lg border bg-muted/30 p-4 space-y-2">

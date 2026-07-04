@@ -10,7 +10,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { useProgressStore } from "@/lib/progress";
+import { useProgressStore, calculateLevelProgress } from "@/lib/progress";
 import { UI, LEVEL_ORDER, type LevelId } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
@@ -40,7 +40,7 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
   const pathname = usePathname();
-  const getLevelProgress = useProgressStore((s) => s.getLevelProgress);
+  const completedModules = useProgressStore((s) => s.completedModules);
 
   return (
     <>
@@ -88,7 +88,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
 
           {LEVEL_ORDER.map((levelId) => {
             const cfg = LEVEL_CONFIG[levelId];
-            const { completed, total, percentage } = getLevelProgress(levelId);
+            const { completed, total, percentage } = calculateLevelProgress(levelId, completedModules);
             const isActive = pathname.startsWith(`/nivel/${levelId}`);
 
             return (

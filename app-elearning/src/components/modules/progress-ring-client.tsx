@@ -1,6 +1,6 @@
 "use client";
 
-import { useProgressStore } from "@/lib/progress";
+import { useProgressStore, calculateLevelProgress } from "@/lib/progress";
 import { ProgressRing } from "./progress-ring";
 import type { LevelId } from "@/lib/i18n";
 
@@ -11,8 +11,8 @@ export function ProgressRingClient({
   levelId: LevelId;
   colorClass?: string;
 }) {
-  const getLevelProgress = useProgressStore((s) => s.getLevelProgress);
-  const { percentage } = getLevelProgress(levelId);
+  const completedModules = useProgressStore((s) => s.completedModules);
+  const { percentage } = calculateLevelProgress(levelId, completedModules);
 
   return <ProgressRing percentage={percentage} colorClass={colorClass} />;
 }

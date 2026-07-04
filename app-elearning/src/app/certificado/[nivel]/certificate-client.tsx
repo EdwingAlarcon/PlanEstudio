@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Printer, Pencil } from "lucide-react";
-import { useProgressStore } from "@/lib/progress";
+import { useProgressStore, calculateLevelProgress } from "@/lib/progress";
 import { Button } from "@/components/ui/button";
 import { CertificateDiploma } from "@/components/modules/certificate-diploma";
 import { CertificateNameDialog } from "@/components/modules/certificate-name-dialog";
@@ -14,8 +14,8 @@ export function CertificateClient({ levelId }: { levelId: LevelId }) {
   const router = useRouter();
   const userName = useProgressStore((s) => s.userName);
   const setUserName = useProgressStore((s) => s.setUserName);
-  const getLevelProgress = useProgressStore((s) => s.getLevelProgress);
-  const { percentage } = getLevelProgress(levelId);
+  const completedModules = useProgressStore((s) => s.completedModules);
+  const { percentage } = calculateLevelProgress(levelId, completedModules);
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const shouldRedirect = percentage < 100 || !userName;

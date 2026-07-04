@@ -56,6 +56,40 @@ function getTotalModulesForLevel(levelId: LevelId): number {
   return end - start + 1;
 }
 
+// ─── Pure progress calculations ───────────────────────────────────────────────
+// Exported so components can derive progress directly from a selected
+// `completedModules` array (which changes reference on every mutation).
+// Selecting a store *method* instead (e.g. `s.getLevelProgress`) would not
+// trigger a re-render on its own, since that function reference never changes.
+
+export function calculateLevelProgress(
+  levelId: LevelId,
+  completedModules: string[]
+): { completed: number; total: number; percentage: number } {
+  const [start, end] = LEVEL_MODULE_RANGE[levelId];
+  const total = getTotalModulesForLevel(levelId);
+  const prefix = `${levelId}-`;
+  const completed = completedModules.filter((id) => {
+    if (!id.startsWith(prefix)) return false;
+    const moduleNum = parseInt(id.slice(prefix.length), 10);
+    return moduleNum >= start && moduleNum <= end;
+  }).length;
+  const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+  return { completed, total, percentage };
+}
+
+export function calculateOverallProgress(
+  completedModules: string[]
+): { completed: number; total: number; percentage: number } {
+  const total = (Object.keys(LEVEL_MODULE_RANGE) as LevelId[]).reduce(
+    (sum, levelId) => sum + getTotalModulesForLevel(levelId),
+    0
+  );
+  const completed = completedModules.length;
+  const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+  return { completed, total, percentage };
+}
+
 // ─── Store ────────────────────────────────────────────────────────────────────
 
 export const useProgressStore = create<ProgressState & ProgressActions>()(
@@ -97,28 +131,9 @@ export const useProgressStore = create<ProgressState & ProgressActions>()(
 
       setUserName: (name) => set({ userName: name }),
 
-      getLevelProgress: (levelId) => {
-        const [start, end] = LEVEL_MODULE_RANGE[levelId];
-        const total = getTotalModulesForLevel(levelId);
-        const prefix = `${levelId}-`;
-        const completed = get().completedModules.filter((id) => {
-          if (!id.startsWith(prefix)) return false;
-          const moduleNum = parseInt(id.slice(prefix.length), 10);
-          return moduleNum >= start && moduleNum <= end;
-        }).length;
-        const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
-        return { completed, total, percentage };
-      },
+      getLevelProgress: (levelId) => calculateLevelProgress(levelId, get().completedModules),
 
-      getOverallProgress: () => {
-        const total = (Object.keys(LEVEL_MODULE_RANGE) as LevelId[]).reduce(
-          (sum, levelId) => sum + getTotalModulesForLevel(levelId),
-          0
-        );
-        const completed = get().completedModules.length;
-        const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
-        return { completed, total, percentage };
-      },
+      getOverallProgress: () => calculateOverallProgress(get().completedModules),
 
       // ── Labs ────────────────────────────────────────────────────────────────
 

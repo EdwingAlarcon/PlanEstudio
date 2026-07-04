@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useProgressStore } from "@/lib/progress";
+import { useProgressStore, calculateLevelProgress } from "@/lib/progress";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -27,8 +27,8 @@ const TROPHY_COLORS: Record<LevelId, string> = {
 };
 
 export function LevelProgressBannerClient({ levelId }: { levelId: LevelId }) {
-  const getLevelProgress = useProgressStore((s) => s.getLevelProgress);
-  const { completed, total, percentage } = getLevelProgress(levelId);
+  const completedModules = useProgressStore((s) => s.completedModules);
+  const { completed, total, percentage } = calculateLevelProgress(levelId, completedModules);
 
   if (percentage === 100) {
     return <LevelCompleteBanner levelId={levelId} total={total} />;
