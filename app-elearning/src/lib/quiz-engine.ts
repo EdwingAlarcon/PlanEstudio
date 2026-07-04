@@ -1,5 +1,7 @@
 // Pure TypeScript quiz engine — ported from evaluaciones-simulador.js
 
+import { LEVEL_ORDER, LEVEL_MODULE_RANGE, UI, type LevelId } from "./i18n";
+
 export type QuestionType = "single" | "multi";
 
 export interface Question {
@@ -151,18 +153,16 @@ export function getRemainingSeconds(session: QuizSession): number | null {
 
 // ─── Module-level helpers ─────────────────────────────────────────────────────
 
-export function certForModule(moduleId: number): string {
-  if (moduleId <= 8) return "PL-900";
-  if (moduleId <= 17) return "PL-200";
-  if (moduleId <= 30) return "PL-400";
-  return "PL-600";
+export function levelForModule(moduleId: number): LevelId {
+  for (const levelId of LEVEL_ORDER) {
+    const [min, max] = LEVEL_MODULE_RANGE[levelId];
+    if (moduleId >= min && moduleId <= max) return levelId;
+  }
+  return LEVEL_ORDER[LEVEL_ORDER.length - 1]!;
 }
 
-export function levelForModule(moduleId: number): string {
-  if (moduleId <= 8) return "basico";
-  if (moduleId <= 17) return "intermedio";
-  if (moduleId <= 30) return "avanzado";
-  return "arquitecto";
+export function certForModule(moduleId: number): string {
+  return UI.levels.cert[levelForModule(moduleId)];
 }
 
 export function getAnsweredCount(session: QuizSession): number {

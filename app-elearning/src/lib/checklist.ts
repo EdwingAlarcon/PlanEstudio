@@ -44,6 +44,7 @@ const LEVEL_BY_NUMBER: Record<number, LevelId> = {
   2: "intermedio",
   3: "avanzado",
   4: "arquitecto",
+  5: "ia",
 };
 
 const LEVEL_HEADING = /^##\s+.*?NIVEL\s+(\d+)[:\s]+(.+)$/i;

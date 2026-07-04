@@ -21,29 +21,34 @@ export const UI = {
     intermedio: "Intermedio",
     avanzado: "Avanzado",
     arquitecto: "Arquitecto",
+    ia: "Desarrollo Asistido por IA",
     badge: {
       basico: "🟢 Nivel 1",
       intermedio: "🔵 Nivel 2",
       avanzado: "🟠 Nivel 3",
       arquitecto: "🔴 Nivel 4",
+      ia: "🟣 IA",
     },
     cert: {
       basico: "PL-900",
       intermedio: "PL-200",
       avanzado: "PL-400",
       arquitecto: "PL-600",
+      ia: "Buenas Prácticas",
     },
     description: {
       basico: "Fundamentos de Power Platform y Dataverse",
       intermedio: "Canvas Apps, Model-Driven, Power Automate y Power BI avanzados",
       avanzado: "Arquitectura, ALM, D365, Copilot Studio y extensibilidad",
       arquitecto: "Gobernanza enterprise, multi-tenant, Azure integrations y liderazgo",
+      ia: "Copilot, GitHub Copilot, Claude Code y Codex aplicados de forma segura y auditable al desarrollo en Power Platform y D365",
     },
     modules: {
       basico: 8,
       intermedio: 9,
       avanzado: 13,
       arquitecto: 11,
+      ia: 10,
     },
   },
 
@@ -116,13 +121,14 @@ export const UI = {
 } as const;
 
 // Tipos de nivel para narrowing
-export type LevelId = "basico" | "intermedio" | "avanzado" | "arquitecto";
+export type LevelId = "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia";
 
-export const LEVEL_ORDER: LevelId[] = ["basico", "intermedio", "avanzado", "arquitecto"];
+export const LEVEL_ORDER: LevelId[] = ["basico", "intermedio", "avanzado", "arquitecto", "ia"];
 
 export const LEVEL_MODULE_RANGE: Record<LevelId, [number, number]> = {
   basico: [1, 8],
   intermedio: [9, 17],
   avanzado: [18, 30],
   arquitecto: [31, 41],
+  ia: [42, 51],
 };
