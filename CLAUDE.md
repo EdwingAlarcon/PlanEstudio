@@ -47,8 +47,9 @@ app-elearning/           # Next.js 15 interactive app (THE primary surface)
       intermedio/09-*.md … 17-*.md
       avanzado/18-*.md … 30-*.md
       arquitecto/31-*.md … 41-*.md
+      ia/42-*.md … 51-*.md              # transversal level — no prerequisites, doesn't gate/get gated by the 4 levels above
     labs/
-      lab-02-*.md, lab-03-*.md, …       # one file per lab, same frontmatter pattern
+      lab-02-*.md, lab-03-*.md, …       # one file per lab, same frontmatter pattern (11 total, including lab-45 and lab-51 for the ia level)
   next.config.ts         # output: 'export', basePath: '/PlanEstudio'
   src/
     app/                 # App Router pages
@@ -171,7 +172,7 @@ Don't change these if editing `docs/Niveles/*.md` for MkDocs.
 }
 ```
 
-- 314 total questions across 41 modules (8 per module in Niveles 2-4, 15 in Módulo 1)
+- 394 total questions across 51 modules (8 per module in Niveles 2-4 and Nivel IA, 15 in Módulo 1)
 - Module 1 has 15 questions (includes AI Builder and Power Pages topics for PL-900)
 - After editing, validate with Node.js that the object parses correctly
 - `scripts/extract-questions.mjs` parses `evaluaciones-simulador.js` via `vm.runInContext` at `prebuild` time and generates `app-elearning/src/data/questions.ts`, which `questions-parser.ts` imports statically (no runtime `eval`/`new Function`)
@@ -184,11 +185,16 @@ Don't change these if editing `docs/Niveles/*.md` for MkDocs.
 
 ## Progression Dependencies
 
-**Do not skip levels.** Each level builds on the previous:
+**Do not skip levels.** Each of the 4 certification levels builds on the previous:
 
 ```
 NIVEL 1 (PL-900) → NIVEL 2 (PL-200) → NIVEL 3 (PL-400) → NIVEL 4 (PL-600)
 ```
+
+**Nivel IA (Desarrollo Asistido por IA) is transversal, not part of this chain.** It has no
+prerequisites, doesn't gate or get gated by any of the 4 levels above, and can be studied
+at any point. Completing Nivel 4 (Arquitecto) does not auto-suggest starting Nivel IA —
+see `LevelCompleteBanner` in `level-progress-banner.tsx`.
 
 ## Language
 
