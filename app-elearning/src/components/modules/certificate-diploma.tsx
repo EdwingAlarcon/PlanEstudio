@@ -12,6 +12,7 @@ const BORDER_COLORS: Record<LevelId, string> = {
   intermedio: "border-blue-600    dark:border-blue-400",
   avanzado:   "border-orange-600  dark:border-orange-400",
   arquitecto: "border-red-600     dark:border-red-400",
+  ia:         "border-purple-600  dark:border-purple-400",
 };
 
 const ACCENT_TEXT_COLORS: Record<LevelId, string> = {
@@ -19,6 +20,7 @@ const ACCENT_TEXT_COLORS: Record<LevelId, string> = {
   intermedio: "text-blue-700    dark:text-blue-400",
   avanzado:   "text-orange-700  dark:text-orange-400",
   arquitecto: "text-red-700     dark:text-red-400",
+  ia:         "text-purple-700  dark:text-purple-400",
 };
 
 function formatDate(date: Date): string {

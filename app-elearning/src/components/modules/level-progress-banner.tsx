@@ -17,6 +17,7 @@ const LEVEL_COLORS: Record<LevelId, string> = {
   intermedio: "from-blue-50   to-sky-50      border-blue-200   dark:from-blue-950   dark:to-sky-950      dark:border-blue-800",
   avanzado:   "from-orange-50 to-amber-50    border-orange-200 dark:from-orange-950 dark:to-amber-950    dark:border-orange-800",
   arquitecto: "from-red-50    to-rose-50     border-red-200    dark:from-red-950    dark:to-rose-950     dark:border-red-800",
+  ia:         "from-purple-50 to-violet-50   border-purple-200 dark:from-purple-950 dark:to-violet-950   dark:border-purple-800",
 };
 
 const TROPHY_COLORS: Record<LevelId, string> = {
@@ -24,6 +25,7 @@ const TROPHY_COLORS: Record<LevelId, string> = {
   intermedio: "text-blue-600   dark:text-blue-400",
   avanzado:   "text-orange-600 dark:text-orange-400",
   arquitecto: "text-red-600    dark:text-red-400",
+  ia:         "text-purple-600 dark:text-purple-400",
 };
 
 export function LevelProgressBannerClient({ levelId }: { levelId: LevelId }) {
