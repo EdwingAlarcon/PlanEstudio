@@ -73,6 +73,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "banco-preguntas":       "Recursos/EVALUACIONES_MODULOS_CERTIFICACION.md",
   simulador:               "Recursos/SIMULADOR_EVALUACIONES.md",
   "lenguajes-programacion":"Anexos/LENGUAJES_PROGRAMACION.md",
+  "prompts-ia":             "Recursos/PROMPTS_REUTILIZABLES_IA.md",
 };
 
 const LEVEL_META: Record<LevelId, { title: string; description: string; certification: string }> = {

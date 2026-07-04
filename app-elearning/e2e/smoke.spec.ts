@@ -116,7 +116,7 @@ test.describe("Smoke — rutas principales", () => {
     await expect(page.locator("a", { hasText: "Volver al inicio" })).toBeVisible();
   });
 
-  test("nivel IA carga desde el sidebar y muestra sus 10 módulos", async ({ page }) => {
+  test("nivel IA carga desde el sidebar y muestra sus 14 módulos", async ({ page }) => {
     await page.goto("/");
     await page.locator('a[href="/nivel/ia"]').first().click();
     await expect(page).toHaveURL(/\/nivel\/ia$/);
@@ -136,7 +136,7 @@ test.describe("Smoke — rutas principales", () => {
     // Sembrar el store de progreso directamente en localStorage: los 10 módulos
     // de IA completados + nombre de usuario, para no depender de 10 clics manuales.
     await page.evaluate(() => {
-      const completedModules = Array.from({ length: 10 }, (_, i) => `ia-${i + 42}`);
+      const completedModules = Array.from({ length: 14 }, (_, i) => `ia-${i + 42}`);
       const state = {
         state: {
           completedModules,

@@ -9,6 +9,7 @@ export const UI = {
     certifications: "Certificaciones",
     checklist: "Checklist de Progreso",
     questionBank: "Banco de Preguntas",
+    promptsIA: "Prompts Reutilizables IA",
     skipToContent: "Saltar al contenido",
     toggleTheme: "Cambiar tema",
     search: "Buscar...",

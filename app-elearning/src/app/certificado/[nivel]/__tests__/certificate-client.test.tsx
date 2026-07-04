@@ -57,7 +57,7 @@ describe("CertificateClient", () => {
   });
 
   it("shows IA-specific phrasing (no PL-xxx exam language) when the level is 'ia'", () => {
-    for (let i = 42; i <= 51; i++) {
+    for (let i = 42; i <= 55; i++) {
       useProgressStore.getState().markModuleComplete(`ia-${i}`);
     }
     useProgressStore.getState().setUserName("Ada Lovelace");

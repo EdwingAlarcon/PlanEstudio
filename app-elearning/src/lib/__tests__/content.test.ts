@@ -172,18 +172,19 @@ describe("getResourceBySlug", () => {
 // ─── getAllResourcePages ───────────────────────────────────────────────────────
 
 describe("getAllResourcePages", () => {
-  it("returns 6 resource pages (incluyendo lenguajes-programacion)", () => {
+  it("returns 7 resource pages (incluyendo lenguajes-programacion y prompts-ia)", () => {
     const pages = getAllResourcePages();
-    expect(pages).toHaveLength(6);
+    expect(pages).toHaveLength(7);
   });
 
-  it("includes checklist, glosario, certificaciones y lenguajes-programacion", () => {
+  it("includes checklist, glosario, certificaciones, lenguajes-programacion y prompts-ia", () => {
     const pages = getAllResourcePages();
     const slugs = pages.map((p) => p.slug);
     expect(slugs).toContain("checklist");
     expect(slugs).toContain("glosario");
     expect(slugs).toContain("certificaciones");
     expect(slugs).toContain("lenguajes-programacion");
+    expect(slugs).toContain("prompts-ia");
   });
 
   it("each page has a slug, title, and rawContent", () => {

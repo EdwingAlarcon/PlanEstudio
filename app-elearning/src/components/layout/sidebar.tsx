@@ -32,6 +32,7 @@ const RESOURCE_LINKS = [
   { href: "/recursos/glosario",     label: UI.nav.glossary,      icon: BookOpen    },
   { href: "/recursos/certificaciones", label: UI.nav.certifications, icon: Trophy  },
   { href: "/recursos/banco-preguntas", label: UI.nav.questionBank,   icon: FileText },
+  { href: "/recursos/prompts-ia",    label: UI.nav.promptsIA,     icon: FileText },
 ];
 
 interface SidebarProps {
