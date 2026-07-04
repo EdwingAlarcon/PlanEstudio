@@ -50,7 +50,7 @@ app-elearning/           # Next.js 15 interactive app (THE primary surface)
       arquitecto/31-*.md … 41-*.md
       ia/42-*.md … 55-*.md              # transversal level (14 modules) — no prerequisites, doesn't gate/get gated by the 4 levels above
     labs/
-      lab-02-*.md, lab-03-*.md, …       # one file per lab, same frontmatter pattern (15 total, including lab-45, lab-51, lab-52, lab-53, lab-54, lab-55 for the ia level)
+      lab-02-*.md, lab-03-*.md, …       # one file per lab, same frontmatter pattern (17 total, including labs 45/51/52/53/54/55/56/57 for the ia level)
   next.config.ts         # output: 'export', basePath: '/PlanEstudio'
   src/
     app/                 # App Router pages
