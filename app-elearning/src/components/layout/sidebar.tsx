@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   BookOpen, CheckSquare, GraduationCap, FileText, Trophy,
-  Home, PlayCircle, FlaskConical, Route, HelpCircle,
+  Home, PlayCircle, FlaskConical, Route, HelpCircle, Briefcase,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -34,6 +34,7 @@ const RESOURCE_LINKS = [
   { href: "/recursos/prompts-ia",    label: UI.nav.promptsIA,     icon: FileText },
   { href: "/recursos/rubricas-plantillas", label: UI.nav.rubricsTemplates, icon: CheckSquare },
   { href: "/recursos/matriz-competencias", label: UI.nav.competencyMatrix, icon: FileText },
+  { href: "/recursos/portafolio-profesional", label: UI.nav.portfolioGuide, icon: FileText },
 ];
 
 interface SidebarProps {
@@ -83,6 +84,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
           <NavLink href="/rutas"     icon={Route}       label={UI.nav.routes}    active={pathname.startsWith("/rutas")} />
           <NavLink href="/simulador" icon={PlayCircle}  label={UI.nav.simulator} active={pathname === "/simulador"} />
           <NavLink href="/labs"      icon={FlaskConical} label="Laboratorios"    active={pathname.startsWith("/labs")} />
+          <NavLink href="/portafolio" icon={Briefcase}   label={UI.nav.portfolio} active={pathname === "/portafolio"} />
 
           <Separator className="my-3" />
 

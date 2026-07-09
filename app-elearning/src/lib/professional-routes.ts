@@ -25,6 +25,8 @@ export interface ProfessionalRoute {
   capstoneLabSlug?: string;
   /** moduleId del módulo que funciona como proyecto final cuando el capstone no es un lab (p. ej. el módulo 41 de arquitectura). */
   capstoneModuleId?: number;
+  /** Entregables concretos del capstone que deberían reunirse como evidencia de portafolio. */
+  portfolioEvidence: string[];
 }
 
 const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
@@ -47,6 +49,12 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     competencies: ["Canvas Apps", "Model-Driven Apps", "Dataverse básico", "Power Automate", "Power Fx"],
     status: "Disponible",
     capstoneLabSlug: "lab-61-capstone-maker-sistema-solicitudes",
+    portfolioEvidence: [
+      "Captura de la Canvas App funcionando (pantallas principales)",
+      "Captura o log de una ejecución exitosa del flujo de aprobación",
+      "Captura de acceso restringido probado con un segundo usuario",
+      "Manual de usuario de 1-2 páginas",
+    ],
     nextRouteSlug: "consultor-funcional",
   },
   {
@@ -69,6 +77,13 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     status: "Parcial",
     gapNote: "Cubre bien Power Platform genérico (requerimientos, fit-gap, seguridad, UAT), pero todavía no tiene módulos dedicados de consultoría funcional específicos de Dynamics 365 CE/F&O (procesos estándar por industria, catálogos de producto, configuración de áreas funcionales). Complementa esta ruta con Dynamics 365 Customer Engagement o Finance & Operations según el dominio del cliente.",
     capstoneLabSlug: "lab-62-capstone-consultor-funcional-proyecto-completo",
+    portfolioEvidence: [
+      "Acta de discovery con preguntas reales, no genéricas",
+      "Backlog de historias de usuario con criterios de aceptación",
+      "Matriz Fit-Gap y matriz de trazabilidad",
+      "8 casos UAT con resultado",
+      "Presentación funcional de 6-8 láminas",
+    ],
     nextRouteSlug: "dynamics-365-customer-engagement",
   },
   {
@@ -91,6 +106,12 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     competencies: ["Plugins C#", "PCF", "Dataverse Web API", "Custom Connectors", "ALM", "CI/CD"],
     status: "Disponible",
     capstoneLabSlug: "lab-63-capstone-developer-solucion-tecnica-avanzada",
+    portfolioEvidence: [
+      "Repositorio con el código del plugin/PCF/connector",
+      "Resultado de la ejecución de los unit tests",
+      "Solución exportada (.zip) o captura del pipeline ejecutado",
+      "Documento técnico con decisiones no obvias",
+    ],
     nextRouteSlug: "solution-architect",
   },
   {
@@ -112,6 +133,12 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     competencies: ["Gobernanza", "Seguridad", "ALM enterprise", "Integraciones", "Arquitectura de datos", "ADRs"],
     status: "Disponible",
     capstoneModuleId: 41,
+    portfolioEvidence: [
+      "Architecture Blueprint con ADRs y diagrama aprobado por mentor",
+      "Solución desplegada en ambientes DEV/TEST",
+      "Well-Architected Review con plan de remediación",
+      "Presentación ejecutiva de 10 láminas",
+    ],
     nextRouteSlug: "ai-copilot",
   },
   {
@@ -135,6 +162,12 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     status: "Parcial",
     gapNote: "Se apoya en el Módulo 20 (compartido) y en los labs 58/59 para Customer Insights y Field Service, pero aún no existen módulos dedicados a esas dos áreas ni a Omnichannel avanzado. Es una base sólida para Sales y Customer Service estándar; para Customer Insights o Field Service profundo, complementa con documentación oficial de Microsoft Learn.",
     capstoneLabSlug: "lab-60-proyecto-integrador-servicio-postventa",
+    portfolioEvidence: [
+      "Documento de diseño de 3-5 páginas (TO-BE, Fit-Gap)",
+      "Matriz de trazabilidad y 8 casos UAT",
+      "Diseño de Customer Insights (segmento y journey) y de Field Service",
+      "Checklist de go-live y resumen ejecutivo de 1 página",
+    ],
     nextRouteSlug: "solution-architect",
   },
   {
@@ -156,6 +189,12 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     status: "Cobertura en expansión",
     gapNote: "Todavía no hay módulos dedicados a Finance & Operations (procesos financieros, cadena de suministro, Data Management Framework, dual-write real). Esta ruta agrupa los fundamentos transferibles de arquitectura, integración y gobierno que aplican también a F&O, mientras se desarrollan módulos específicos del producto.",
     capstoneLabSlug: "lab-64-capstone-fo-awareness-arquitectura-erp-crm",
+    portfolioEvidence: [
+      "Tabla de clasificación de procesos ERP vs. CRM",
+      "Mapa de integración con dirección del dual-write",
+      "Matriz de riesgos de la integración",
+      "Documento ejecutivo de 1-2 páginas",
+    ],
     nextRouteSlug: "solution-architect",
   },
   {
@@ -177,6 +216,12 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     competencies: ["Copilot Studio", "AI Builder", "Prompting técnico", "Revisión de diffs", "Seguridad IA", "Guardrails"],
     status: "Disponible",
     capstoneLabSlug: "lab-65-capstone-ai-copilot-agente-gobernado",
+    portfolioEvidence: [
+      "Documento de diseño del agente (alcance, temas, fuentes)",
+      "Matriz de riesgos de IA y política de escalamiento humano",
+      "Transcripts de 3 conversaciones de prueba",
+      "Plan de monitoreo con métrica y frecuencia",
+    ],
     nextRouteSlug: "developer",
   },
 ];

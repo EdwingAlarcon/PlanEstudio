@@ -79,4 +79,13 @@ describe("professional routes", () => {
       }
     }
   });
+
+  it("lists at least three portfolio evidence items per route", () => {
+    for (const route of getAllProfessionalRoutes()) {
+      expect(
+        route.portfolioEvidence.length,
+        `${route.slug} should list at least 3 portfolio evidence items`
+      ).toBeGreaterThanOrEqual(3);
+    }
+  });
 });

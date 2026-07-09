@@ -76,6 +76,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "prompts-ia":             "Recursos/PROMPTS_REUTILIZABLES_IA.md",
   "rubricas-plantillas":    "Recursos/RUBRICAS_PLANTILLAS_EVALUACION.md",
   "matriz-competencias":    "Recursos/MATRIZ_COMPETENCIAS.md",
+  "portafolio-profesional": "Recursos/PORTAFOLIO_PROFESIONAL.md",
 };
 
 const LEVEL_META: Record<LevelId, { title: string; description: string; certification: string }> = {

@@ -14,6 +14,8 @@ export const UI = {
     promptsIA: "Prompts Reutilizables IA",
     rubricsTemplates: "Rúbricas y Plantillas",
     competencyMatrix: "Matriz de Competencias",
+    portfolio: "Portafolio",
+    portfolioGuide: "Guía de Portafolio",
     skipToContent: "Saltar al contenido",
     toggleTheme: "Cambiar tema",
     search: "Buscar...",
