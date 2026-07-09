@@ -15,10 +15,12 @@ const LEVEL_CONFIG: Record<string, { label: string; bar: string; accent: string 
   N2: { label: "Nivel 2 — Intermedio",  bar: "bg-[#0078D4]",  accent: "#0078D4" },
   N3: { label: "Nivel 3 — Avanzado",    bar: "bg-orange-500", accent: "#EA580C" },
   N4: { label: "Nivel 4 — Arquitecto",  bar: "bg-[#D13438]",  accent: "#D13438" },
+  N5: { label: "Nivel IA — Desarrollo Asistido", bar: "bg-purple-600", accent: "#9333EA" },
 };
 
-const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "default"> = {
+const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "default"> = {
   "PL-900": "basico", "PL-200": "intermedio", "PL-400": "avanzado", "PL-600": "arquitecto",
+  "Buenas Prácticas": "ia",
 };
 
 export default function LabsPage() {
@@ -31,7 +33,7 @@ export default function LabsPage() {
     return acc;
   }, {});
 
-  const levelOrder = ["N1", "N2", "N3", "N4"];
+  const levelOrder = ["N1", "N2", "N3", "N4", "N5"];
 
   return (
     <main id="main-content" className="max-w-4xl mx-auto px-4 py-8 animate-fade-in">

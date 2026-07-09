@@ -75,10 +75,10 @@ describe("getAllQuestions — bank integrity", () => {
     });
   });
 
-  it("moduleId values are between 1 and 41", () => {
+  it("moduleId values are between 1 and 55", () => {
     all.forEach((q) => {
       expect(q.moduleId, `${q.id}: moduleId out of range`).toBeGreaterThanOrEqual(1);
-      expect(q.moduleId, `${q.id}: moduleId out of range`).toBeLessThanOrEqual(41);
+      expect(q.moduleId, `${q.id}: moduleId out of range`).toBeLessThanOrEqual(55);
     });
   });
 
@@ -125,8 +125,8 @@ describe("getQuestionsForLevel", () => {
     });
   });
 
-  it("returns questions for all 4 levels", () => {
-    (["basico", "intermedio", "avanzado", "arquitecto"] as const).forEach((level) => {
+  it("returns questions for all 5 levels", () => {
+    (["basico", "intermedio", "avanzado", "arquitecto", "ia"] as const).forEach((level) => {
       const qs = getQuestionsForLevel(level);
       expect(qs.length, `No questions for level: ${level}`).toBeGreaterThan(0);
     });
@@ -141,11 +141,13 @@ describe("getQuestionsForLevel", () => {
     const intermedio = getQuestionsForLevel("intermedio").map((q) => q.moduleId);
     const avanzado = getQuestionsForLevel("avanzado").map((q) => q.moduleId);
     const arquitecto = getQuestionsForLevel("arquitecto").map((q) => q.moduleId);
+    const ia = getQuestionsForLevel("ia").map((q) => q.moduleId);
 
     const basicoSet = new Set(basico);
     intermedio.forEach((id) => expect(basicoSet.has(id)).toBe(false));
     avanzado.forEach((id) => expect(basicoSet.has(id)).toBe(false));
     arquitecto.forEach((id) => expect(basicoSet.has(id)).toBe(false));
+    ia.forEach((id) => expect(basicoSet.has(id)).toBe(false));
   });
 
   it("union of all levels equals full question bank", () => {
@@ -154,7 +156,8 @@ describe("getQuestionsForLevel", () => {
       getQuestionsForLevel("basico").length +
       getQuestionsForLevel("intermedio").length +
       getQuestionsForLevel("avanzado").length +
-      getQuestionsForLevel("arquitecto").length;
+      getQuestionsForLevel("arquitecto").length +
+      getQuestionsForLevel("ia").length;
     expect(sum).toBe(all);
   });
 });

@@ -17,6 +17,7 @@ const LEVEL_COLORS: Record<LevelId, string> = {
   intermedio: "from-blue-50   to-sky-50      border-blue-200   dark:from-blue-950   dark:to-sky-950      dark:border-blue-800",
   avanzado:   "from-orange-50 to-amber-50    border-orange-200 dark:from-orange-950 dark:to-amber-950    dark:border-orange-800",
   arquitecto: "from-red-50    to-rose-50     border-red-200    dark:from-red-950    dark:to-rose-950     dark:border-red-800",
+  ia:         "from-purple-50 to-violet-50   border-purple-200 dark:from-purple-950 dark:to-violet-950   dark:border-purple-800",
 };
 
 const TROPHY_COLORS: Record<LevelId, string> = {
@@ -24,6 +25,7 @@ const TROPHY_COLORS: Record<LevelId, string> = {
   intermedio: "text-blue-600   dark:text-blue-400",
   avanzado:   "text-orange-600 dark:text-orange-400",
   arquitecto: "text-red-600    dark:text-red-400",
+  ia:         "text-purple-600 dark:text-purple-400",
 };
 
 export function LevelProgressBannerClient({ levelId }: { levelId: LevelId }) {
@@ -50,7 +52,10 @@ export function LevelProgressBannerClient({ levelId }: { levelId: LevelId }) {
 
 function LevelCompleteBanner({ levelId, total }: { levelId: LevelId; total: number }) {
   const currentIdx = LEVEL_ORDER.indexOf(levelId);
-  const nextLevelId = currentIdx < LEVEL_ORDER.length - 1 ? LEVEL_ORDER[currentIdx + 1] : null;
+  const rawNextLevelId = currentIdx < LEVEL_ORDER.length - 1 ? LEVEL_ORDER[currentIdx + 1] : null;
+  // El nivel "ia" es transversal: no se sugiere como "siguiente nivel" tras Arquitecto,
+  // así que se excluye del cómputo de nextLevelId/isFinal.
+  const nextLevelId = rawNextLevelId === "ia" ? null : rawNextLevelId;
   const isFinal = nextLevelId === null;
 
   const router = useRouter();
@@ -89,7 +94,11 @@ function LevelCompleteBanner({ levelId, total }: { levelId: LevelId; total: numb
         </div>
         <div>
           <h2 className="font-bold text-lg leading-tight">
-            {isFinal ? "¡Plan de Estudio Completado!" : `¡${UI.levels.badge[levelId]} Completado!`}
+            {levelId === "ia"
+              ? "¡Nivel de Desarrollo Asistido por IA Completado!"
+              : isFinal
+              ? "¡Plan de Estudio Completado!"
+              : `¡${UI.levels.badge[levelId]} Completado!`}
           </h2>
           <p className="text-sm text-muted-foreground">
             {total} módulos · Certificación objetivo:{" "}
@@ -100,7 +109,9 @@ function LevelCompleteBanner({ levelId, total }: { levelId: LevelId; total: numb
 
       {/* Message */}
       <p className="text-sm leading-relaxed">
-        {isFinal
+        {levelId === "ia"
+          ? "Has completado los 10 módulos de desarrollo asistido por IA. Sigue aplicando el flujo humano diseña → IA implementa → CI valida → humano aprueba en tus proyectos reales de Power Platform y Dynamics 365."
+          : isFinal
           ? "Has completado los cuatro niveles del plan. Estás preparado para rendir el examen PL-600 y ejercer como Power Platform Solution Architect."
           : `Has dominado los contenidos de este nivel. El siguiente paso es el ${UI.levels.badge[nextLevelId!]}, donde profundizarás hacia la certificación ${UI.levels.cert[nextLevelId!]}: ${UI.levels.description[nextLevelId!]}.`
         }
@@ -109,7 +120,7 @@ function LevelCompleteBanner({ levelId, total }: { levelId: LevelId; total: numb
       {/* Action */}
       <div className="flex flex-wrap items-center gap-3">
         <Badge variant={levelId} className="text-xs">
-          {UI.levels.cert[levelId]} — Listo para el examen
+          {levelId === "ia" ? UI.levels.cert[levelId] : `${UI.levels.cert[levelId]} — Listo para el examen`}
         </Badge>
 
         <Button size="sm" variant="outline" onClick={handleGenerateCertificate}>

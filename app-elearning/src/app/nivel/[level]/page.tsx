@@ -27,11 +27,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-const LEVEL_ACCENT: Record<LevelId, { badge: "basico" | "intermedio" | "avanzado" | "arquitecto"; bar: string }> = {
+const LEVEL_ACCENT: Record<LevelId, { badge: "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia"; bar: string }> = {
   basico:     { badge: "basico",     bar: "bg-[#107C10]" },
   intermedio: { badge: "intermedio", bar: "bg-[#0078D4]" },
   avanzado:   { badge: "avanzado",   bar: "bg-orange-500" },
   arquitecto: { badge: "arquitecto", bar: "bg-[#D13438]" },
+  ia:         { badge: "ia",         bar: "bg-purple-600" },
 };
 
 export default async function LevelPage({ params }: PageProps) {

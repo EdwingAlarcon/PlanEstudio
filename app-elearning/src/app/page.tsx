@@ -12,12 +12,13 @@ const LEVEL_CONFIG: Record<LevelId, {
   accent: string;
   accentDark: string;
   border: string;
-  badge: "basico" | "intermedio" | "avanzado" | "arquitecto";
+  badge: "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia";
 }> = {
   basico:     { ring: "stroke-[#107C10]", accent: "#107C10", accentDark: "#2DB52D", border: "border-[#107C10]/20 dark:border-[#2DB52D]/20", badge: "basico"     },
   intermedio: { ring: "stroke-[#0078D4]", accent: "#0078D4", accentDark: "#4DB8FF", border: "border-[#0078D4]/20 dark:border-[#4DB8FF]/20",  badge: "intermedio" },
   avanzado:   { ring: "stroke-orange-500", accent: "#EA580C", accentDark: "#F97316", border: "border-orange-500/20",                           badge: "avanzado"   },
   arquitecto: { ring: "stroke-[#D13438]", accent: "#D13438", accentDark: "#E85555", border: "border-[#D13438]/20 dark:border-[#E85555]/20",   badge: "arquitecto" },
+  ia:         { ring: "stroke-purple-600", accent: "#9333EA", accentDark: "#C084FC", border: "border-purple-600/20 dark:border-purple-400/20", badge: "ia"         },
 };
 
 export default async function DashboardPage() {
@@ -40,8 +41,9 @@ export default async function DashboardPage() {
               Plan de Estudio Progresivo
             </h1>
             <p className="text-muted-foreground text-base leading-relaxed max-w-xl">
-              De cero a Solution Architect. 41 módulos, 9 laboratorios y simuladores
-              de certificación — PL-900 · PL-200 · PL-400 · PL-600.
+              De cero a Solution Architect. 51 módulos, 11 laboratorios y simuladores
+              de certificación — PL-900 · PL-200 · PL-400 · PL-600, más una capa
+              transversal de Desarrollo Asistido por IA.
             </p>
           </div>
         </div>

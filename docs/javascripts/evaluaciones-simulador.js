@@ -3907,6 +3907,1378 @@
       answer: [0, 1],
       explanation: "El Runbook de Operaciones documenta cómo monitorear y responder a incidentes, mientras el Stakeholder Communication Plan define el contenido, formato y frecuencia de comunicación para cada stakeholder, incluyendo al CFO. Un ADR documenta decisiones arquitectónicas, no reemplaza estos dos artefactos, y el Risk Register gestiona riesgos, no operación ni comunicación."
     }
+  ],
+  42: [
+    {
+      type: "single",
+      prompt: "¿Cuál de las siguientes opciones describe mejor a un 'agente' de código frente a un simple chat de IA?",
+      options: [
+        "Un agente puede usar herramientas (leer archivos, ejecutar comandos, editar código) encadenando pasos; un chat solo responde texto",
+        "Un agente y un chat son exactamente lo mismo, solo cambia el nombre comercial",
+        "Un chat siempre es más preciso que un agente porque no ejecuta nada",
+        "Un agente solo funciona sin conexión a internet"
+      ],
+      answer: [0],
+      explanation: "Un agente de código puede usar herramientas para leer, buscar y editar archivos o ejecutar comandos de forma encadenada, mientras que un chat sin herramientas solo devuelve texto que el humano debe aplicar manualmente."
+    },
+    {
+      type: "single",
+      prompt: "Un modelo de IA genera código que llama a una función de una tabla de Dataverse que en realidad no existe en tu entorno. ¿Cómo se llama este fenómeno y qué se debe hacer?",
+      options: [
+        "Es una alucinación; siempre verificar contra el esquema real antes de aceptar el código",
+        "Es un bug del editor de código, no del modelo",
+        "Es normal y no requiere verificación porque el modelo siempre tiene el esquema actualizado",
+        "Solo ocurre con modelos antiguos y ya no sucede con los más recientes"
+      ],
+      answer: [0],
+      explanation: "Las alucinaciones son una consecuencia esperada de cómo funcionan los LLM, no un bug puntual; el código generado siempre debe verificarse contra el esquema o la documentación real antes de aceptarlo."
+    },
+    {
+      type: "multi",
+      prompt: "¿Cuáles DOS elementos mejoran la precisión de una respuesta de IA al generar código para Power Fx?",
+      options: [
+        "Especificar explícitamente el lenguaje y la plataforma (Power Fx, Canvas Apps)",
+        "Dar contexto adicional relevante (ej. el control específico donde se usará la fórmula)",
+        "Omitir cualquier detalle para que el modelo 'adivine' mejor",
+        "Pedir la respuesta en el idioma menos usado posible"
+      ],
+      answer: [0, 1],
+      explanation: "Especificar lenguaje/plataforma y dar contexto relevante reducen la ambigüedad y mejoran la precisión de la respuesta; omitir detalles produce respuestas más genéricas y propensas a error."
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué la misma pregunta a un modelo de IA puede producir respuestas distintas en ejecuciones diferentes?",
+      options: [
+        "Por la naturaleza no determinista relativa del modelo, lo cual exige siempre revisión humana antes de aceptar cambios en producción",
+        "Porque el modelo cambia de versión cada vez que se le pregunta algo",
+        "Porque hay un error de red que corrompe la respuesta",
+        "Esto nunca ocurre; los modelos son 100% deterministas"
+      ],
+      answer: [0],
+      explanation: "Los LLM tienen un componente no determinista relativo; la misma pregunta puede variar de respuesta entre ejecuciones, por lo que la revisión humana es indispensable antes de aceptar cualquier cambio en código de producción."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué caracteriza al autocompletado (como GitHub Copilot inline) frente a un chat o un agente?",
+      options: [
+        "Sugiere la continuación del código mientras se escribe, basado en el archivo actual y archivos abiertos relacionados",
+        "Ejecuta comandos de terminal de forma autónoma sin intervención humana",
+        "Solo funciona para lenguajes de programación compilados",
+        "Reemplaza completamente la necesidad de revisar el código generado"
+      ],
+      answer: [0],
+      explanation: "El autocompletado sugiere la siguiente línea o bloque mientras se escribe, usando como contexto el archivo actual y archivos relacionados abiertos, a diferencia del chat (responde preguntas) o el agente (ejecuta herramientas)."
+    },
+    {
+      type: "single",
+      prompt: "Un desarrollador acepta un plugin C# generado por IA sin revisar que llama a la API de Dataverse en modo síncrono dentro de un bucle. ¿Qué principio de este módulo se violó?",
+      options: [
+        "Tratar todo código generado como un borrador que requiere verificación contra buenas prácticas conocidas, no como resultado final",
+        "El principio de nunca usar IA para generar plugins C#",
+        "El principio de que la IA siempre debe usarse en modo offline",
+        "No se violó ningún principio; el Solution Checker ya garantiza que el código es correcto"
+      ],
+      answer: [0],
+      explanation: "El Solution Checker valida ciertos aspectos, pero no sustituye la revisión humana de patrones de rendimiento conocidos; todo código generado por IA debe tratarse como un borrador a verificar."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué es la 'ventana de contexto' de un modelo de lenguaje aplicado a código?",
+      options: [
+        "El límite de tokens (texto) que el modelo puede recibir y considerar al generar una respuesta",
+        "La cantidad de archivos que un editor puede tener abiertos simultáneamente",
+        "El tiempo máximo que puede tardar una respuesta antes de expirar",
+        "El número de líneas de código que el modelo puede escribir por respuesta"
+      ],
+      answer: [0],
+      explanation: "La ventana de contexto es el límite de tokens que el modelo puede procesar como entrada; en repositorios grandes hay que decidir qué contexto relevante mostrarle dentro de ese límite."
+    },
+    {
+      type: "single",
+      prompt: "¿Cuál es el riesgo principal de tratar la primera respuesta de un modelo de IA como definitiva?",
+      options: [
+        "Puede no ser la mejor opción disponible dado el componente no determinista del modelo; conviene iterar y comparar antes de decidir",
+        "Ninguno; la primera respuesta siempre es la más precisa",
+        "Que consume más tokens que las respuestas posteriores",
+        "Que el modelo se bloquea si se le pide una segunda respuesta"
+      ],
+      answer: [0],
+      explanation: "Dada la naturaleza no determinista relativa de los modelos, conviene iterar el prompt y comparar 2-3 respuestas antes de asumir que la primera es la mejor opción."
+    }
+  ],
+  43: [
+    {
+      type: "single",
+      prompt: "¿Qué hace 'Crear con Copilot' en Power Apps Studio?",
+      options: [
+        "Genera una app Canvas a partir de una descripción en lenguaje natural, como punto de partida a ajustar",
+        "Publica automáticamente la app a producción sin revisión",
+        "Solo funciona para Model-Driven Apps, no para Canvas",
+        "Reemplaza por completo la necesidad de un maker en el proyecto"
+      ],
+      answer: [0],
+      explanation: "Copilot en Power Apps genera un boceto funcional de app Canvas a partir de una descripción, que casi siempre requiere ajustes de UX, manejo de errores y performance antes de publicarse."
+    },
+    {
+      type: "single",
+      prompt: "Un Power Platform Admin quiere habilitar Copilot en Power Apps para todo el tenant. ¿Qué debería revisar primero según las buenas prácticas de este módulo?",
+      options: [
+        "La política DLP y la clasificación de datos de cada entorno, habilitando Copilot entorno por entorno",
+        "Nada; Copilot siempre es seguro habilitarlo para todo el tenant de inmediato",
+        "Solo el número de licencias disponibles",
+        "El idioma predeterminado del tenant"
+      ],
+      answer: [0],
+      explanation: "Habilitar Copilot sin revisar la política DLP y la clasificación de datos de cada entorno puede exponer información sensible en sugerencias generadas; la recomendación es revisar y habilitar entorno por entorno."
+    },
+    {
+      type: "multi",
+      prompt: "¿Cuáles DOS afirmaciones distinguen correctamente a Copilot Studio de Copilot en Power Apps/Automate?",
+      options: [
+        "Copilot Studio construye agentes conversacionales que el usuario final interactúa directamente",
+        "Copilot en Power Apps/Automate asiste al maker durante la construcción, no al usuario final",
+        "Copilot Studio y Copilot en Power Apps son exactamente la misma herramienta con otro nombre",
+        "Copilot en Power Automate solo puede explicar flujos, nunca generarlos"
+      ],
+      answer: [0, 1],
+      explanation: "Copilot Studio construye agentes que interactúan con el usuario final, mientras que Copilot en Power Apps/Automate asiste al maker durante la construcción de la solución; son roles distintos dentro del ecosistema."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué debe hacerse siempre antes de publicar en producción una app o flujo generado por Copilot?",
+      options: [
+        "Revisar manejo de errores, seguridad y rendimiento, tratándolo como un primer borrador",
+        "Nada adicional; el resultado de Copilot ya está listo para producción",
+        "Solo verificar que compile sin errores de sintaxis",
+        "Esperar 24 horas antes de publicar, sin revisión adicional"
+      ],
+      answer: [0],
+      explanation: "Cualquier app o flujo generado por Copilot debe tratarse como un primer borrador funcional, revisando manejo de errores, seguridad y rendimiento antes de publicarlo."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué usa 'generative answers' en Copilot Studio para responder preguntas del usuario final?",
+      options: [
+        "Fuentes de conocimiento configuradas (SharePoint, sitios web, Dataverse) ya validadas y con control de acceso correcto",
+        "Únicamente el conocimiento general del modelo sin ninguna fuente configurada",
+        "Los flujos de Power Automate del entorno, sin relación con fuentes de conocimiento",
+        "Un archivo de configuración que el usuario final edita directamente"
+      ],
+      answer: [0],
+      explanation: "Generative answers en Copilot Studio responde usando fuentes de conocimiento configuradas por el equipo, que deben estar validadas y con el control de acceso correcto para evitar exponer información indebida."
+    },
+    {
+      type: "single",
+      prompt: "¿Dónde se configura la gobernanza de Copilot a nivel de entorno en Power Platform?",
+      options: [
+        "En el Power Platform Admin Center",
+        "Únicamente dentro del editor de Power Apps Studio",
+        "En el archivo de configuración local de cada desarrollador",
+        "No existe forma de configurar esto; Copilot está siempre activo igual en todos los entornos"
+      ],
+      answer: [0],
+      explanation: "El Power Platform Admin Center permite configurar la gobernanza de Copilot y las políticas DLP por entorno, controlando qué datos y conectores están disponibles para las funciones de IA generativa."
+    },
+    {
+      type: "single",
+      prompt: "Un maker pide a Copilot en Power Automate 'cuando se cree un registro en una tabla, enviar un correo al responsable'. ¿Qué se espera que haga Copilot?",
+      options: [
+        "Proponer un flujo con el trigger y las acciones correspondientes, como borrador a revisar",
+        "Ejecutar el envío de correos inmediatamente sin crear ningún flujo",
+        "Rechazar la solicitud porque requiere código personalizado",
+        "Crear automáticamente un plugin C# en lugar de un flujo"
+      ],
+      answer: [0],
+      explanation: "Copilot en Power Automate propone un flujo (trigger + acciones) a partir de la descripción en lenguaje natural, que el maker debe revisar y ajustar antes de publicarlo."
+    },
+    {
+      type: "single",
+      prompt: "¿Cuál es el riesgo principal de que una fórmula generada por Copilot en el editor de Power Apps incluya nombres reales de columnas de una tabla confidencial?",
+      options: [
+        "Esos nombres pueden quedar expuestos si la fórmula se comparte (ej. en una captura de pantalla) sin que el maker lo note",
+        "Ningún riesgo; los nombres de columnas nunca son información sensible",
+        "Solo afecta el rendimiento de la app, no la seguridad de los datos",
+        "Este riesgo solo existe en Model-Driven Apps, no en Canvas"
+      ],
+      answer: [0],
+      explanation: "Los nombres de columnas reales sugeridos por Copilot pueden exponer estructura de datos confidenciales si se comparten externamente sin revisión, por lo que la gobernanza de datos por entorno es clave antes de habilitar Copilot ampliamente."
+    }
+  ],
+  44: [
+    {
+      type: "single",
+      prompt: "¿Qué diferencia principal hay entre el autocompletado inline de GitHub Copilot y Copilot Edits (Agent Mode)?",
+      options: [
+        "Copilot Edits puede proponer y aplicar cambios a través de múltiples archivos, mostrando el diff antes de aceptarlo; el autocompletado solo sugiere la línea actual",
+        "No hay ninguna diferencia real entre ambos",
+        "El autocompletado solo funciona en archivos Python",
+        "Copilot Edits nunca muestra un diff, aplica los cambios directamente sin revisión"
+      ],
+      answer: [0],
+      explanation: "El autocompletado sugiere la continuación de una línea mientras se escribe; Copilot Edits/Agent Mode puede proponer cambios en múltiples archivos y muestra el diff para revisión antes de aplicarlo."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué función cumple el archivo `.github/copilot-instructions.md` en un proyecto?",
+      options: [
+        "Fija convenciones del proyecto (ej. prefijos de Dataverse, patrón de logging) que Copilot lee automáticamente como contexto",
+        "Configura las credenciales de GitHub del equipo",
+        "Reemplaza el archivo `package.json` del proyecto",
+        "Solo tiene efecto si se ejecuta manualmente como script"
+      ],
+      answer: [0],
+      explanation: "`.github/copilot-instructions.md` centraliza convenciones propias del repositorio que Copilot usa como contexto automáticamente, evitando repetir esas instrucciones en cada prompt."
+    },
+    {
+      type: "multi",
+      prompt: "¿Cuáles DOS factores mejoran la precisión de una sugerencia de Copilot sobre un componente PCF específico?",
+      options: [
+        "Tener abierto el archivo real del componente como contexto",
+        "Documentar convenciones del proyecto en `.github/copilot-instructions.md`",
+        "Cerrar todos los archivos del proyecto antes de pedir la sugerencia",
+        "Pedir la sugerencia en un archivo completamente vacío sin relación al componente"
+      ],
+      answer: [0, 1],
+      explanation: "Tener el archivo real abierto y documentar convenciones del proyecto le dan a Copilot el contexto necesario para generar sugerencias más precisas y consistentes con el patrón del repositorio."
+    },
+    {
+      type: "single",
+      prompt: "Un plugin C# generado con Copilot Chat usó `Console.WriteLine` para logging en lugar de `ITracingService`. ¿Cuál fue la causa raíz según el caso de este módulo?",
+      options: [
+        "No se le dio a Copilot el contexto del patrón de logging ya establecido en el proyecto",
+        "`Console.WriteLine` es la forma correcta de hacer logging en plugins de Dataverse",
+        "Copilot Chat no puede generar código C# válido",
+        "El error fue causado por una falla del Solution Checker"
+      ],
+      answer: [0],
+      explanation: "Sin el contexto del patrón de logging ya establecido (ej. un archivo de referencia o `.github/copilot-instructions.md`), Copilot generó una alternativa sintácticamente válida pero incorrecta para el contexto de un plugin de Dataverse."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué se debe hacer siempre antes de aplicar un cambio propuesto por Copilot Edits que afecta varios archivos?",
+      options: [
+        "Revisar el diff de cada archivo modificado antes de aceptar",
+        "Aceptar directamente si el resumen general suena razonable",
+        "Aplicar solo el primer archivo del diff y descartar el resto",
+        "No es necesario revisar nada si el proyecto tiene buena cobertura de tests"
+      ],
+      answer: [0],
+      explanation: "Nunca se deben aceptar cambios multi-archivo a ciegas; revisar el diff completo de cada archivo modificado es indispensable antes de aplicar cambios de Copilot Edits."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué usa Copilot como contexto de workspace al generar sugerencias en VS Code?",
+      options: [
+        "Los archivos abiertos, el árbol del proyecto y, según configuración, el repositorio completo",
+        "Únicamente el nombre del proyecto, sin acceso a ningún archivo",
+        "Solo el archivo activo, ignorando cualquier otro archivo abierto",
+        "Una copia local descargada de todo GitHub"
+      ],
+      answer: [0],
+      explanation: "El contexto de workspace incluye archivos abiertos, la estructura del proyecto y, según configuración, el repositorio — mientras más específico y relevante el contexto abierto, más preciso el resultado."
+    },
+    {
+      type: "single",
+      prompt: "¿Cuál es el propósito de Copilot Chat frente al autocompletado inline?",
+      options: [
+        "Permite hacer preguntas sobre el código abierto o pedir explicaciones/generación de bloques específicos sin tocar directamente el archivo",
+        "Ejecuta pruebas unitarias automáticamente sin intervención",
+        "Reemplaza la necesidad de tener el editor abierto",
+        "Solo puede usarse para traducir comentarios de código"
+      ],
+      answer: [0],
+      explanation: "Copilot Chat es un panel de conversación para preguntas y generación de bloques específicos, distinto del autocompletado que sugiere directamente dentro del flujo de escritura del código."
+    },
+    {
+      type: "single",
+      prompt: "Después de crear un `.github/copilot-instructions.md` con las convenciones del proyecto, ¿qué se espera al repetir una petición de generación de código similar?",
+      options: [
+        "Una mejora en la precisión y consistencia de la sugerencia respecto al patrón del proyecto",
+        "Ningún cambio; el archivo de instrucciones no afecta las sugerencias de Copilot",
+        "Que Copilot deje de funcionar hasta borrar el archivo",
+        "Que las sugerencias empeoren porque el archivo consume la ventana de contexto por completo"
+      ],
+      answer: [0],
+      explanation: "El archivo de instrucciones del repositorio se usa como contexto automático, mejorando la consistencia de las sugerencias con las convenciones ya establecidas del proyecto."
+    }
+  ],
+  45: [
+    {
+      type: "single",
+      prompt: "¿Qué distingue a un agente de código (Claude Code, Codex) de un simple chat con IA?",
+      options: [
+        "Puede usar herramientas (leer archivos, buscar en el repo, ejecutar comandos) encadenando pasos sin copiar/pegar manual",
+        "Solo puede responder preguntas de una línea",
+        "Nunca puede modificar archivos directamente",
+        "Requiere que el humano ejecute cada comando manualmente después de cada respuesta"
+      ],
+      answer: [0],
+      explanation: "Un agente de código usa herramientas para leer, buscar, ejecutar y editar de forma encadenada, a diferencia de un chat que solo devuelve texto que el humano debe aplicar manualmente."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué tipo de tarea rinde mejor al delegarla a un agente de código, según este módulo?",
+      options: [
+        "Una tarea acotada y verificable, con un objetivo y criterio de éxito claros",
+        "Una instrucción vaga como 'mejora el proyecto'",
+        "Una tarea sin ningún criterio de éxito definido",
+        "Cualquier tarea, sin importar el nivel de detalle de la instrucción"
+      ],
+      answer: [0],
+      explanation: "Los agentes rinden mejor con tareas acotadas y verificables; instrucciones vagas producen resultados extensos, difíciles de revisar y potencialmente fuera de alcance."
+    },
+    {
+      type: "multi",
+      prompt: "¿Cuáles DOS acciones ayudan a delegar una tarea de forma segura a un agente de código?",
+      options: [
+        "Definir el archivo/función objetivo y el criterio de éxito antes de delegar",
+        "Pedir que el agente ejecute la verificación disponible (tests, lint) como parte de la tarea",
+        "Evitar cualquier verificación para no 'perder tiempo'",
+        "Dar la instrucción más general posible para que el agente decida todo"
+      ],
+      answer: [0, 1],
+      explanation: "Definir el alcance/criterio de éxito y exigir verificación automática como parte de la tarea son las dos prácticas que reducen el riesgo de un resultado inmanejable o incorrecto."
+    },
+    {
+      type: "single",
+      prompt: "Un arquitecto le pidió a un agente 'optimiza el proyecto' sin más contexto, y recibió un PR de 40 archivos imposible de revisar. ¿Cuál fue la causa raíz?",
+      options: [
+        "Falta de alcance explícito y criterio de éxito verificable en la instrucción",
+        "Un error del agente que no tiene solución posible",
+        "El agente no tenía permisos suficientes",
+        "El repositorio era demasiado pequeño para el agente"
+      ],
+      answer: [0],
+      explanation: "Una instrucción vaga sin alcance ni criterio de éxito lleva a cambios extensos e inmanejables; delegar tareas acotadas y verificables evita este problema."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué ventaja tiene pedirle a un agente que busque 'todos los archivos donde se recorre `LEVEL_ORDER`' frente a hacer esa búsqueda manualmente?",
+      options: [
+        "El agente puede explorar la estructura completa del repo y encadenar la búsqueda con análisis adicional sin copiar/pegar manual entre pasos",
+        "No hay ninguna ventaja real, ambos métodos son idénticos",
+        "Una búsqueda manual siempre es más precisa que la de un agente",
+        "El agente no puede realizar búsquedas de texto en archivos"
+      ],
+      answer: [0],
+      explanation: "Un agente puede explorar el repositorio y encadenar pasos (buscar, analizar, proponer cambios) de forma autónoma, algo que una búsqueda manual sin herramientas automatizadas no logra en un solo flujo."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué se recomienda pedirle a un agente después de aplicar un cambio, antes de darlo por terminado?",
+      options: [
+        "Que ejecute la verificación disponible (por ejemplo `npm run lint`) y muestre el resultado, no solo el código",
+        "Nada adicional; el código generado siempre es correcto",
+        "Que elimine todos los tests existentes del proyecto",
+        "Que genere documentación extensa sin relación con el cambio"
+      ],
+      answer: [0],
+      explanation: "Pedir la ejecución explícita de la verificación disponible (tests, lint) como parte de la tarea da más confianza que un agente que solo entrega código sin ejecutar nada."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué patrón general comparten Claude Code y Codex como agentes de código, según este módulo?",
+      options: [
+        "Un modelo de plan → ejecución → verificación, requiriendo que el humano defina el alcance y revise el resultado final",
+        "Ambos operan exclusivamente sin ningún tipo de supervisión humana posible",
+        "Ambos solo pueden trabajar con un archivo a la vez",
+        "Ninguno de los dos puede ejecutar comandos de terminal"
+      ],
+      answer: [0],
+      explanation: "Ambos agentes siguen un patrón de plan, ejecución y verificación, pero requieren que el humano defina el alcance de la tarea y revise el resultado final antes de aceptarlo."
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué un repositorio grande (monorepo) se beneficia especialmente de un agente con herramientas frente a un chat sin ellas?",
+      options: [
+        "Porque el agente puede explorar la estructura y encontrar patrones repetidos en múltiples archivos antes de proponer un cambio coherente",
+        "Porque un chat sin herramientas es siempre más rápido en repos grandes",
+        "Porque los repos grandes no pueden usarse con IA de ningún tipo",
+        "Porque el tamaño del repo no afecta en nada la calidad de las respuestas"
+      ],
+      answer: [0],
+      explanation: "En un monorepo, un agente con herramientas puede explorar y correlacionar múltiples archivos (ej. cada `Record<LevelId, ...>`) antes de proponer un cambio, algo que un chat sin herramientas no puede hacer por sí mismo."
+    }
+  ],
+  46: [
+    {
+      type: "single",
+      prompt: "¿Qué es 'vibe coding' según este módulo?",
+      options: [
+        "Dejar que un modelo genere una implementación completa a partir de una descripción de alto nivel, iterando sobre el resultado",
+        "Un método formal de certificación de código generado por IA",
+        "Escribir código exclusivamente a mano sin ninguna ayuda de IA",
+        "Un tipo de test automatizado específico de Power Platform"
+      ],
+      answer: [0],
+      explanation: "Vibe coding es dejar que el modelo genere una implementación completa a partir de una descripción de alto nivel, ajustando el resultado de forma iterativa en lugar de especificar cada detalle por adelantado."
+    },
+    {
+      type: "multi",
+      prompt: "¿En cuáles DOS escenarios es aceptable usar vibe coding sin controles adicionales estrictos, según este módulo?",
+      options: [
+        "Un prototipo descartable para explorar una idea",
+        "Un script de un solo uso sin impacto en producción",
+        "Una validación de seguridad en un plugin que corre en producción",
+        "Lógica de negocio con impacto financiero directo"
+      ],
+      answer: [0, 1],
+      explanation: "Prototipos descartables y scripts de un solo uso son escenarios de bajo riesgo aptos para vibe coding; validaciones de seguridad y lógica financiera requieren controles estrictos (tests, revisión humana) antes de aceptarse."
+    },
+    {
+      type: "single",
+      prompt: "¿Cuáles son los controles mínimos que hacen seguro el vibe coding, según este módulo?",
+      options: [
+        "Alcance acotado, tests que validen el comportamiento esperado, y revisión humana antes de fusionar",
+        "Ningún control es necesario si el resultado 'se ve bien'",
+        "Solo que el código compile sin errores de sintaxis",
+        "Que el prompt haya sido largo y detallado"
+      ],
+      answer: [0],
+      explanation: "Alcance acotado, tests de comportamiento y revisión humana obligatoria son los mismos controles que ya exige este plan de estudio para cualquier cambio, y se vuelven más críticos en vibe coding."
+    },
+    {
+      type: "single",
+      prompt: "Un maker publicó a producción un flujo de aprobación de gastos generado con vibe coding sin revisión detallada, causando pagos duplicados por una condición de carrera. ¿Qué regla adoptó el equipo después?",
+      options: [
+        "Todo flujo generado sin revisión detallada pasa primero por un ambiente de pruebas y una revisión de un segundo maker",
+        "Prohibir el uso de Power Automate en todo el tenant",
+        "Ninguna regla nueva; el incidente fue un caso aislado sin solución",
+        "Solo revisar visualmente el flujo, sin pruebas adicionales"
+      ],
+      answer: [0],
+      explanation: "La regla adoptada fue exigir ambiente de pruebas con datos simulados y revisión de un segundo maker antes de publicar cualquier flujo generado sin revisión detallada."
+    },
+    {
+      type: "single",
+      prompt: "¿Vibe coding elimina la necesidad de tests y revisión humana?",
+      options: [
+        "No; los vuelve más críticos porque el humano invirtió menos tiempo revisando cada línea mientras se escribía",
+        "Sí, siempre que el modelo usado sea reciente",
+        "Sí, porque el objetivo de vibe coding es evitar cualquier revisión",
+        "Depende únicamente del lenguaje de programación usado"
+      ],
+      answer: [0],
+      explanation: "Vibe coding no elimina la necesidad de tests y revisión humana; al contrario, los vuelve más críticos porque hubo menos revisión línea por línea durante la generación."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué distingue el vibe coding del 'desarrollo asistido por IA normal', según este módulo?",
+      options: [
+        "El nivel de especificación previa: vibe coding parte de una descripción de alto nivel en lugar de detallar cada paso",
+        "Vibe coding nunca usa modelos de lenguaje",
+        "El desarrollo asistido normal no permite ningún tipo de revisión",
+        "No existe ninguna diferencia real entre ambos términos"
+      ],
+      answer: [0],
+      explanation: "La diferencia está en el nivel de especificación previa: vibe coding parte de una descripción de alto nivel e itera sobre el resultado, en lugar de especificar cada detalle desde el inicio."
+    },
+    {
+      type: "single",
+      prompt: "¿Cuál de las siguientes tareas es la MENOS apta para vibe coding sin controles estrictos?",
+      options: [
+        "Una validación de seguridad en un plugin C# que corre en producción",
+        "Un script de reformateo de un CSV de prueba",
+        "Un prototipo descartable de una idea de UI",
+        "Un componente de exploración sin lógica de negocio sensible"
+      ],
+      answer: [0],
+      explanation: "Cualquier cambio que toque seguridad, datos de producción o lógica de negocio sensible requiere controles estrictos (tests, revisión humana) antes de aceptarse, a diferencia de prototipos o scripts descartables."
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué se recomienda tener una regla de equipo explícita sobre cuándo se permite vibe coding, en lugar de decidirlo caso por caso?",
+      options: [
+        "Para evitar decisiones informales inconsistentes y asegurar que los controles mínimos se apliquen siempre en los casos de riesgo",
+        "Porque las reglas escritas hacen que el código generado sea automáticamente más rápido",
+        "Porque sin una regla escrita, la IA no puede usarse en absoluto",
+        "No hay ninguna razón real para documentar esta regla"
+      ],
+      answer: [0],
+      explanation: "Documentar la regla como estándar de equipo evita que la decisión dependa del criterio individual de cada persona en cada momento, asegurando consistencia en la aplicación de controles."
+    }
+  ],
+  47: [
+    {
+      type: "single",
+      prompt: "¿Qué es una plantilla de prompt reutilizable?",
+      options: [
+        "Una instrucción parametrizable que fija contexto, formato de salida y restricciones, dejando solo los datos específicos como variables",
+        "Un archivo de configuración que reemplaza al código fuente",
+        "Una función de Power Fx predefinida por Microsoft",
+        "Un historial de chat guardado sin ninguna estructura"
+      ],
+      answer: [0],
+      explanation: "Una plantilla de prompt fija contexto, restricciones y formato de salida, parametrizando solo lo que cambia entre usos, para producir resultados consistentes en tareas recurrentes."
+    },
+    {
+      type: "multi",
+      prompt: "¿Cuáles DOS elementos debe incluir una buena plantilla de prompt según este módulo?",
+      options: [
+        "Restricciones explícitas (qué NO hacer, qué patrón seguir)",
+        "El formato de salida esperado (código, diff, lista de pasos)",
+        "La mayor cantidad de texto posible sin estructura",
+        "Ninguna referencia al contexto o convenciones del proyecto"
+      ],
+      answer: [0, 1],
+      explanation: "Restricciones explícitas y formato de salida esperado son componentes clave de una plantilla efectiva, junto con el rol/contexto y la tarea concreta."
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué conviene versionar las plantillas de prompt en el repositorio con git, en lugar de dejarlas solo en el historial de un chat?",
+      options: [
+        "Porque permiten historial de cambios y evitan perder ajustes útiles cuando dejan de funcionar bien",
+        "Porque git ejecuta automáticamente los prompts guardados",
+        "Porque el historial de chat siempre se borra automáticamente cada semana",
+        "No hay ninguna ventaja real en versionarlas"
+      ],
+      answer: [0],
+      explanation: "Versionar las plantillas en el repositorio permite historial de cambios con git, igual que con el código, en lugar de depender de un historial de chat que se puede perder."
+    },
+    {
+      type: "single",
+      prompt: "En SIT, cada desarrollador pedía 'genera un flujo de aprobación' con una instrucción distinta, produciendo flujos inconsistentes. ¿Qué solucionó el problema?",
+      options: [
+        "Introducir una plantilla común con convención de nombres, patrón de dos aprobadores y manejo de rechazo ya especificados",
+        "Prohibir el uso de Power Automate para flujos de aprobación",
+        "Pedir a cada desarrollador que memorice el mismo prompt de memoria",
+        "Ninguna solución fue posible sin cambiar de plataforma"
+      ],
+      answer: [0],
+      explanation: "Una plantilla común con las convenciones ya especificadas mejoró la consistencia y redujo el tiempo de creación de flujos nuevos entre distintos desarrolladores."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué riesgo tiene una plantilla de prompt demasiado rígida?",
+      options: [
+        "Puede fallar en casos particulares al sobre-especificar cada detalle sin dejar espacio de ajuste",
+        "Ninguno; entre más rígida, mejor funciona siempre",
+        "Que consuma menos tokens de los necesarios",
+        "Que deje de ser compatible con cualquier modelo de IA"
+      ],
+      answer: [0],
+      explanation: "Una plantilla demasiado rígida cubre mal los casos particulares; el balance recomendado es cubrir el caso común como plantilla y dejar el resto para ajuste manual explícito."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué parte de una plantilla de prompt se marca típicamente como variable (ej. `{{tabla}}`)?",
+      options: [
+        "Los datos específicos de cada uso, como el nombre de la tabla o los campos involucrados",
+        "Las restricciones generales que nunca cambian entre usos",
+        "El formato de salida esperado",
+        "El nombre del modelo de IA que se va a usar"
+      ],
+      answer: [0],
+      explanation: "Las variables de una plantilla son los datos específicos de cada tarea (nombre de entidad, campos, condición), mientras que el contexto y las restricciones generales permanecen fijos."
+    },
+    {
+      type: "single",
+      prompt: "¿Cuál es el equilibrio recomendado al diseñar una plantilla de prompt?",
+      options: [
+        "Cubrir el 80% del caso común como plantilla, dejando el 20% restante para ajuste manual",
+        "Especificar el 100% de los casos posibles sin dejar ningún ajuste manual",
+        "No especificar nada y dejarlo completamente abierto siempre",
+        "Cambiar la plantilla completa cada vez que se usa"
+      ],
+      answer: [0],
+      explanation: "Una plantilla útil cubre el caso común (evitando reescribir todo cada vez) sin ser tan rígida que falle en variaciones razonables del caso, dejando ese margen para ajuste manual."
+    },
+    {
+      type: "single",
+      prompt: "¿Cuándo se debe actualizar una plantilla de prompt ya guardada en el repositorio?",
+      options: [
+        "Cuando deja de producir buenos resultados, de forma similar a cuando se refactoriza código",
+        "Nunca; una plantilla de prompt es inmutable una vez creada",
+        "Solo cuando cambia el proveedor de IA usado, sin importar la calidad del resultado",
+        "Cada vez que se usa, sin importar si sigue funcionando bien"
+      ],
+      answer: [0],
+      explanation: "Las plantillas se revisan y actualizan cuando dejan de dar buenos resultados, aplicando el mismo criterio de mantenimiento que se usa para refactorizar código."
+    }
+  ],
+  48: [
+    {
+      type: "single",
+      prompt: "Al revisar un diff generado por IA, ¿qué es lo primero que se debe verificar según este módulo?",
+      options: [
+        "Si el diff toca solo lo que la tarea pedía, o incluye cambios fuera de alcance",
+        "Si el código usa la sintaxis más moderna disponible",
+        "Si el número de líneas del diff es menor a 50",
+        "Si el diff fue generado por un modelo de pago o gratuito"
+      ],
+      answer: [0],
+      explanation: "Verificar el alcance del diff es el primer paso: un cambio que toca archivos no relacionados con la tarea pedida es una señal de alarma, generado por IA o no."
+    },
+    {
+      type: "multi",
+      prompt: "¿Cuáles DOS aspectos de seguridad se deben revisar con atención especial en un diff generado por IA?",
+      options: [
+        "Credenciales o secretos hardcodeados",
+        "Cambios en Security Roles o permisos de Dataverse",
+        "El color de los botones de la interfaz",
+        "El número de comentarios en el código"
+      ],
+      answer: [0, 1],
+      explanation: "Secretos hardcodeados y cambios de permisos/Security Roles son riesgos de seguridad concretos que deben revisarse explícitamente en cualquier diff, generado por IA o no."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué rol cumple un revisor automático de PRs (como Copilot code review) según este módulo?",
+      options: [
+        "Es un apoyo que acelera dónde mirar, pero no reemplaza el juicio humano final",
+        "Reemplaza por completo la necesidad de revisión humana",
+        "Solo sirve para revisar la ortografía de los comentarios",
+        "Aprueba automáticamente cualquier PR sin intervención humana"
+      ],
+      answer: [0],
+      explanation: "Los revisores automáticos aceleran encontrar dónde mirar con más atención, pero la aprobación final sigue dependiendo del juicio humano."
+    },
+    {
+      type: "single",
+      prompt: "En un caso de SIT, un PR resolvía el bug reportado pero también eliminaba una validación de rango no documentada. ¿Qué regla se adoptó tras ese incidente?",
+      options: [
+        "Revisar cada línea cambiada contra su propia justificación, no solo contra si el síntoma reportado se resolvió",
+        "Dejar de usar IA para generar cualquier PR en el futuro",
+        "Aprobar automáticamente cualquier PR que resuelva el bug reportado",
+        "Eliminar la revisión de código para acelerar los releases"
+      ],
+      answer: [0],
+      explanation: "La regla adoptada fue revisar el diff completo línea por línea contra su justificación, no solo verificar si el síntoma reportado quedó resuelto."
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué se recomienda tener una checklist corta y consistente para revisar diffs, en lugar de revisar 'a ojo'?",
+      options: [
+        "Para que la calidad de la revisión no dependa del tiempo disponible o el estado de ánimo del revisor ese día",
+        "Porque una checklist siempre reduce el número de líneas del diff",
+        "Porque sin checklist, git no permite hacer merge del PR",
+        "No hay ninguna razón real, es solo una preferencia estética"
+      ],
+      answer: [0],
+      explanation: "Una checklist consistente (alcance, efectos secundarios, seguridad, tests) asegura que la revisión no varíe según el tiempo o disposición del revisor en un momento dado."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué se entiende por 'efecto secundario' de un diff generado por IA?",
+      options: [
+        "Que el cambio resuelva el síntoma pedido pero introduzca un problema distinto (ej. quitar una validación en lugar de corregir la causa)",
+        "Que el código tarde más de lo esperado en compilar",
+        "Que el diff tenga más de una línea de código",
+        "Que el desarrollador tarde más de una hora en escribir el prompt"
+      ],
+      answer: [0],
+      explanation: "Un efecto secundario es un problema distinto introducido al resolver el síntoma pedido, como eliminar una validación existente en lugar de corregir la causa real del bug."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué checklist mínima se recomienda aplicar a cualquier diff, generado por IA o no?",
+      options: [
+        "Alcance, efectos secundarios, seguridad y presencia de tests",
+        "Solo el número de archivos modificados",
+        "Únicamente el estilo de indentación del código",
+        "Solo si el PR tiene más de 100 líneas"
+      ],
+      answer: [0],
+      explanation: "La checklist recomendada cubre alcance, efectos secundarios, seguridad y tests — los cuatro aspectos que este módulo identifica como críticos en cualquier revisión de diff."
+    },
+    {
+      type: "single",
+      prompt: "¿Es aceptable aprobar un PR basándose únicamente en el resumen generado por un revisor automático de IA?",
+      options: [
+        "No; el revisor automático es un apoyo, la aprobación final requiere revisión humana del diff",
+        "Sí, siempre que el resumen no mencione errores",
+        "Sí, si el PR tiene menos de 10 líneas",
+        "Depende únicamente de qué modelo generó el resumen"
+      ],
+      answer: [0],
+      explanation: "El revisor automático acelera encontrar dónde mirar, pero no sustituye el juicio humano final antes de aprobar un PR."
+    }
+  ],
+  49: [
+    {
+      type: "single",
+      prompt: "¿Por qué nunca se debe pegar una credencial real (ej. connection string) en un prompt?",
+      options: [
+        "Porque puede quedar almacenada en el historial de la herramienta o en logs del proveedor según su política de retención",
+        "Porque los prompts tienen un límite de caracteres que impide pegar credenciales",
+        "Porque las credenciales siempre se cifran automáticamente al pegarse en un prompt",
+        "No hay ningún riesgo real en hacerlo si el prompt se borra después"
+      ],
+      answer: [0],
+      explanation: "Un secreto pegado en un prompt puede persistir en el historial de la herramienta o en logs del proveedor, exponiendo la credencial más allá de la sesión donde se usó."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué se debe usar en lugar de datos reales de clientes al construir un ejemplo para compartir con una herramienta de IA?",
+      options: [
+        "Datos ficticios o anonimizados que preserven la estructura pero no el contenido real",
+        "Los mismos datos reales, pero acortados",
+        "Datos reales de un cliente distinto al del proyecto actual",
+        "No es necesario cambiar nada si el chat es privado"
+      ],
+      answer: [0],
+      explanation: "Usar datos ficticios o anonimizados que preserven la estructura evita exponer información real de clientes al compartir ejemplos con una herramienta de IA."
+    },
+    {
+      type: "multi",
+      prompt: "¿Cuáles DOS aspectos se deben verificar respecto a la residencia y retención de datos antes de usar una herramienta de IA con datos reales de un tenant con requisitos de compliance?",
+      options: [
+        "En qué región procesa las solicitudes el proveedor del modelo",
+        "La política de retención de logs/historial del proveedor",
+        "El color del logo de la herramienta",
+        "La cantidad de usuarios que tiene licencia en el tenant"
+      ],
+      answer: [0, 1],
+      explanation: "La región de procesamiento y la política de retención de datos del proveedor son los dos aspectos clave a verificar antes de usar IA con datos reales bajo requisitos de residencia o GDPR."
+    },
+    {
+      type: "single",
+      prompt: "En el caso de SIT, un desarrollador pegó una cadena de conexión completa con credenciales reales en un prompt. ¿Qué regla adoptó el equipo después del incidente?",
+      options: [
+        "Ningún secreto real se pega en un prompt; siempre se usan placeholders y los valores reales viven en Environment Variables/Key Vault",
+        "Prohibir el uso de cualquier herramienta de IA en el equipo de forma permanente",
+        "Cambiar la contraseña cada semana sin ninguna otra medida",
+        "Ninguna regla nueva, el incidente no tuvo consecuencias"
+      ],
+      answer: [0],
+      explanation: "La regla adoptada fue usar siempre placeholders en los prompts y mantener los valores reales exclusivamente en Environment Variables o Key Vault, nunca en texto plano en una conversación con IA."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué permite configurar el Power Platform Admin Center respecto a IA generativa y conectores por entorno?",
+      options: [
+        "Políticas DLP que restringen qué conectores e IA generativa están disponibles en cada entorno",
+        "Solo el idioma de la interfaz de Power Apps",
+        "El número máximo de usuarios que pueden iniciar sesión",
+        "No existe ninguna configuración relacionada con IA en el Admin Center"
+      ],
+      answer: [0],
+      explanation: "Las políticas DLP del Admin Center permiten restringir qué conectores e IA generativa están disponibles por entorno, aplicando la misma lógica de gobernanza de datos que a otros conectores."
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué los logs de una herramienta de IA son relevantes para la seguridad de secretos?",
+      options: [
+        "Porque si se pegó un secreto en un prompt, ese secreto persiste también en los logs de auditoría de la herramienta",
+        "Porque los logs siempre se eliminan automáticamente cada hora",
+        "Porque los logs solo registran el nombre del usuario, nunca el contenido del prompt",
+        "Los logs no tienen ninguna relación con la seguridad de secretos"
+      ],
+      answer: [0],
+      explanation: "Si una herramienta registra qué se le pidió, cualquier secreto pegado en un prompt persiste también en esos logs, ampliando la superficie de exposición."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué se debe hacer inmediatamente si se detecta que una credencial real fue pegada por error en un prompt?",
+      options: [
+        "Rotar la credencial de inmediato",
+        "Ignorarlo si el chat es privado",
+        "Esperar a la próxima auditoría programada para actuar",
+        "Solo notificar sin tomar ninguna acción sobre la credencial"
+      ],
+      answer: [0],
+      explanation: "Ante la exposición de una credencial real, la acción inmediata correcta es rotarla, sin importar si el canal donde se expuso parece privado."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué principio de gobernanza de datos aplica igual a conectores tradicionales y a herramientas de IA generativa en Power Platform?",
+      options: [
+        "El control por política DLP y clasificación de datos de cada entorno",
+        "Ninguno; la IA generativa está exenta de cualquier política de gobernanza",
+        "Solo aplica a conectores premium, no a IA generativa",
+        "Solo aplica en entornos de producción, nunca en desarrollo"
+      ],
+      answer: [0],
+      explanation: "La misma lógica de gobernanza de datos (políticas DLP, clasificación de datos por entorno) aplicada a conectores tradicionales debe aplicarse también a las herramientas de IA generativa."
+    }
+  ],
+  50: [
+    {
+      type: "single",
+      prompt: "¿Por qué un test que valida comportamiento es más confiable que solo verificar que el código 'compile', para código generado por IA?",
+      options: [
+        "Porque confirma objetivamente que el cambio hace lo que se pidió, incluso si el revisor humano no detectó un problema a simple vista",
+        "Porque compilar y pasar tests son exactamente la misma verificación",
+        "Porque un test siempre es más rápido de escribir que revisar el código",
+        "Los tests no aportan ninguna garantía adicional sobre el código generado por IA"
+      ],
+      answer: [0],
+      explanation: "Un test de comportamiento verifica objetivamente el resultado esperado, cubriendo casos que una revisión visual humana podría pasar por alto, especialmente en código generado por IA."
+    },
+    {
+      type: "single",
+      prompt: "Según el pipeline de este proyecto (`ci.yml`), ¿cuáles son los gates obligatorios antes de un deploy?",
+      options: [
+        "Lint & Type Check → Unit Tests → Playwright Smoke → Build → Deploy",
+        "Solo un build manual sin ninguna verificación automatizada",
+        "Únicamente una revisión visual del sitio en producción",
+        "Solo la ejecución de `npm install`"
+      ],
+      answer: [0],
+      explanation: "El pipeline de CI de este proyecto encadena lint/typecheck, tests unitarios, smoke tests E2E, build y despliegue, actuando como red de seguridad para cualquier cambio, generado por IA o no."
+    },
+    {
+      type: "multi",
+      prompt: "¿Cuáles DOS beneficios aportan un feature flag o un despliegue progresivo para un cambio de alto riesgo generado con IA?",
+      options: [
+        "Permite revertir el cambio sin un despliegue de emergencia si se detecta un problema",
+        "Limita el impacto inicial del cambio antes de un rollout completo",
+        "Elimina por completo la necesidad de tests para ese cambio",
+        "Garantiza que el cambio nunca tendrá errores"
+      ],
+      answer: [0, 1],
+      explanation: "Un feature flag o despliegue progresivo permite reversión rápida y limita el impacto inicial, pero no elimina la necesidad de tests ni de revisión — son complementarios, no sustitutos."
+    },
+    {
+      type: "single",
+      prompt: "Un equipo de SIT fusionó un cambio generado por IA saltándose el pipeline de CI 'para ir rápido', causando una regresión en un cálculo de descuentos. ¿Qué política se adoptó después?",
+      options: [
+        "Ningún cambio, generado por IA o no, se fusiona sin pasar por el pipeline de CI completo, sin excepciones por urgencia",
+        "Prohibir el uso de IA para generar cualquier cambio en el futuro",
+        "Permitir saltarse el pipeline solo en viernes por la tarde",
+        "Ninguna política nueva; el incidente se consideró normal"
+      ],
+      answer: [0],
+      explanation: "La política adoptada fue no fusionar nunca un cambio sin pasar por el pipeline de CI completo, sin excepciones por presión de tiempo."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué señal de alerta representa que un cambio generado por IA reduzca la cobertura de tests existente del proyecto?",
+      options: [
+        "Es una señal de alerta que debe revisarse, generado por IA o no, respecto al umbral de cobertura configurado (80% en este proyecto)",
+        "Ninguna; reducir la cobertura siempre es aceptable si el cambio es pequeño",
+        "Solo es relevante si la reducción supera el 50%",
+        "La cobertura de tests no tiene relación con cambios generados por IA"
+      ],
+      answer: [0],
+      explanation: "Cualquier reducción de cobertura respecto al umbral configurado es una señal de alerta a revisar, sin excepción por el origen del cambio (IA o humano)."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué detectan ESLint y `tsc --noEmit` en un cambio generado por IA, sin necesidad de revisión manual línea por línea?",
+      options: [
+        "Patrones inseguros o incorrectos como variables sin usar o tipos incorrectos",
+        "Errores de lógica de negocio específicos del dominio",
+        "Si el cambio resuelve correctamente el problema reportado",
+        "El nivel de satisfacción del cliente con el cambio"
+      ],
+      answer: [0],
+      explanation: "Los linters y type-checkers detectan patrones estructurales inseguros o incorrectos automáticamente, complementando pero no reemplazando la revisión de lógica de negocio."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué se recomienda hacer con un cambio de alto riesgo generado con asistencia de IA en un flujo de aprobación real?",
+      options: [
+        "Diseñar su despliegue detrás de un feature flag o en un entorno de pruebas antes de producción",
+        "Desplegarlo directamente a producción sin pruebas adicionales por ser 'solo un ajuste menor'",
+        "Omitir los tests si el cambio fue generado por un agente confiable",
+        "Aplicarlo simultáneamente a todos los entornos sin distinción de riesgo"
+      ],
+      answer: [0],
+      explanation: "Para cambios de alto riesgo, se recomienda un despliegue detrás de un feature flag o en un entorno de pruebas primero, permitiendo reversión rápida si se detecta un problema."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué gate del pipeline de CI de este proyecto atraparía un error de tipos introducido por un cambio generado con IA?",
+      options: [
+        "Lint & Type Check (incluye `tsc --noEmit`)",
+        "Únicamente el paso de Deploy",
+        "Solo Playwright Smoke",
+        "Ningún gate del pipeline detecta errores de tipos"
+      ],
+      answer: [0],
+      explanation: "El job 'Lint & Type Check' del pipeline ejecuta `tsc --noEmit`, que detecta errores de tipos antes de que el cambio llegue a los siguientes gates."
+    }
+  ],
+  51: [
+    {
+      type: "single",
+      prompt: "¿Cuál es la primera etapa del flujo recomendado 'humano diseña, IA implementa, CI valida, humano aprueba'?",
+      options: [
+        "Humano diseña: definir el problema, el alcance y el criterio de éxito antes de involucrar a la IA",
+        "IA implementa, sin ninguna definición previa de alcance",
+        "CI valida, antes de que exista ningún cambio",
+        "Humano aprueba, como primer paso del ciclo"
+      ],
+      answer: [0],
+      explanation: "La etapa de diseño humano —definir problema, alcance y criterio de éxito— siempre precede a la implementación asistida por IA, y no se delega."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué ocurre si la etapa 'CI valida' falla dentro de este flujo?",
+      options: [
+        "Se ajusta la implementación y se vuelve a validar; nunca se salta esta etapa para avanzar más rápido",
+        "Se fusiona igual el cambio y se corrige después en producción",
+        "Se elimina el pipeline de CI para ese cambio específico",
+        "Se repite exactamente la misma implementación sin cambios"
+      ],
+      answer: [0],
+      explanation: "Ante un fallo de CI, se corrige la implementación y se revalida; el flujo nunca se acorta saltando esta etapa, sin importar la presión de tiempo."
+    },
+    {
+      type: "multi",
+      prompt: "¿Cuáles DOS acciones corresponden a la etapa 'humano aprueba' del flujo recomendado?",
+      options: [
+        "Revisar el diff completo contra el criterio de éxito original",
+        "Verificar alcance, efectos secundarios y seguridad antes de fusionar",
+        "Delegar la aprobación final a un revisor automático sin lectura humana",
+        "Omitir la aprobación si el cambio pasó CI exitosamente"
+      ],
+      answer: [0, 1],
+      explanation: "La aprobación humana revisa el diff completo contra el criterio de éxito original, verificando alcance, efectos secundarios y seguridad — pasar CI no reemplaza esta revisión."
+    },
+    {
+      type: "single",
+      prompt: "El equipo de plataforma de SIT adoptó este flujo de 4 etapas después de dos incidentes previos. ¿Qué resultado midieron en los primeros 3 meses?",
+      options: [
+        "Una baja medible en regresiones detectadas en producción, con tiempo total por cambio comparable al proceso anterior",
+        "Un aumento significativo en el tiempo total de cada cambio sin ninguna mejora en calidad",
+        "Ninguna diferencia medible respecto al proceso anterior",
+        "Una eliminación completa de la necesidad de revisión humana"
+      ],
+      answer: [0],
+      explanation: "El equipo midió una baja medible en regresiones en producción, con un tiempo total por cambio comparable al proceso anterior — la ganancia estuvo en reducir el tiempo de implementación, no en saltarse etapas."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué se debe hacer si el criterio de éxito de una tarea cambia a mitad de la implementación?",
+      options: [
+        "Volver formalmente a la etapa de diseño antes de continuar, en lugar de re-especificar sobre la marcha sin documentarlo",
+        "Continuar la implementación ajustando el criterio informalmente sin volver a ninguna etapa",
+        "Ignorar el cambio de criterio y entregar el resultado original de todas formas",
+        "Saltar directamente a la etapa de aprobación humana sin pasar por CI"
+      ],
+      answer: [0],
+      explanation: "Un cambio de criterio de éxito exige volver formalmente a la etapa de diseño, documentando el nuevo alcance, en lugar de ajustar el rumbo sobre la marcha sin dejarlo explícito."
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué la etapa 'IA implementa' se beneficia de las plantillas de prompt del Módulo 47 y las tareas acotadas del Módulo 45?",
+      options: [
+        "Porque un alcance claro y un formato de instrucción reutilizable reducen la probabilidad de un resultado fuera de alcance o inconsistente",
+        "Porque las plantillas de prompt eliminan la necesidad de la etapa de diseño",
+        "Porque las tareas acotadas hacen innecesaria la validación de CI",
+        "No existe relación real entre estas prácticas y la etapa de implementación"
+      ],
+      answer: [0],
+      explanation: "Las plantillas de prompt y las tareas acotadas y verificables reducen el riesgo de resultados fuera de alcance o inconsistentes durante la etapa de implementación asistida por IA."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué principio general resume el flujo 'humano diseña, IA implementa, CI valida, humano aprueba'?",
+      options: [
+        "Cada etapa es un gate independiente: un cambio no avanza a la siguiente hasta que la etapa anterior se cumple satisfactoriamente",
+        "La IA reemplaza completamente al humano en todas las etapas excepto la primera",
+        "El pipeline de CI es opcional si el humano ya aprobó el cambio visualmente",
+        "Todas las etapas pueden ejecutarse en paralelo sin ningún orden específico"
+      ],
+      answer: [0],
+      explanation: "El flujo trata cada etapa como un gate independiente y secuencial: diseño, implementación, validación y aprobación, sin saltar ni paralelizar etapas que dependen de la anterior."
+    },
+    {
+      type: "single",
+      prompt: "Al completar un cambio real en el repositorio siguiendo este flujo de 4 etapas, ¿qué se espera documentar al final, según la actividad práctica de este módulo?",
+      options: [
+        "En qué etapa (si alguna) fue necesario devolverse a un paso anterior y por qué",
+        "Únicamente el tiempo total que tomó escribir el prompt inicial",
+        "El nombre del modelo de IA usado, sin ningún otro detalle",
+        "No es necesario documentar nada si el cambio pasó CI"
+      ],
+      answer: [0],
+      explanation: "La actividad práctica pide documentar explícitamente en qué etapa (si alguna) se tuvo que retroceder y por qué, como parte del aprendizaje del ciclo completo."
+    }
+  ],
+  52: [
+    {
+      type: "single",
+      prompt: "¿Qué es un 'tenant' en el contexto de Power Platform?",
+      options: [
+        "El directorio de Microsoft Entra ID que agrupa todos los entornos, usuarios y licencias de una organización",
+        "Un tipo específico de tabla de Dataverse",
+        "El nombre técnico de una Canvas App publicada",
+        "Un sinónimo exacto de 'solución' en Power Platform"
+      ],
+      answer: [0],
+      explanation: "El tenant es el directorio de Microsoft Entra ID que agrupa todos los entornos, usuarios y licencias de una organización; un tenant puede contener muchos entornos distintos."
+    },
+    {
+      type: "single",
+      prompt: "¿Cuál es la diferencia principal entre un entorno Developer y un entorno Production?",
+      options: [
+        "El Developer es gratuito, ligado a un solo usuario y pensado para practicar sin riesgo; Production contiene datos y usuarios reales",
+        "No hay ninguna diferencia funcional entre ambos",
+        "El entorno Developer no permite instalar Dataverse",
+        "Production siempre es más rápido que Developer en rendimiento"
+      ],
+      answer: [0],
+      explanation: "Un entorno Developer es gratuito y aislado para un solo usuario, ideal para practicar; Production contiene los datos y usuarios reales del negocio y nunca debe usarse para pruebas."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué comando de Power Platform CLI se usa para crear un nuevo perfil de autenticación contra un entorno?",
+      options: [
+        "pac auth create --environment \"<URL_DEL_ENTORNO>\"",
+        "pac org connect",
+        "pac solution export",
+        "pac auth login --force"
+      ],
+      answer: [0],
+      explanation: "`pac auth create --environment` crea un nuevo perfil de autenticación guardado localmente contra el entorno indicado, abriendo un login interactivo."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué comando debe ejecutarse SIEMPRE antes de cualquier operación que exporte, importe o modifique algo, según las buenas prácticas de este módulo?",
+      options: [
+        "pac org who",
+        "pac help",
+        "pac --version",
+        "pac auth clear"
+      ],
+      answer: [0],
+      explanation: "`pac org who` muestra la organización y usuario activos; verificarlo antes de cualquier operación destructiva evita operar contra el entorno equivocado."
+    },
+    {
+      type: "multi",
+      prompt: "¿Cuáles DOS acciones ayudan a evitar operar por error contra el entorno equivocado cuando se manejan múltiples clientes/tenants?",
+      options: [
+        "Nombrar los perfiles de autenticación de forma explícita por cliente/entorno",
+        "Ejecutar `pac org who` antes de operaciones destructivas",
+        "Usar siempre el mismo nombre de perfil para todos los entornos",
+        "Evitar revisar la organización activa para ahorrar tiempo"
+      ],
+      answer: [0, 1],
+      explanation: "Nombrar los perfiles claramente y verificar la organización activa con `pac org who` son las dos prácticas concretas que previenen operar contra el entorno equivocado."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué comando lista todos los perfiles de autenticación guardados localmente?",
+      options: [
+        "pac auth list",
+        "pac org list",
+        "pac solution list",
+        "pac profile show"
+      ],
+      answer: [0],
+      explanation: "`pac auth list` muestra todos los perfiles de autenticación guardados localmente, permitiendo identificar cuál está activo y seleccionar otro si es necesario."
+    },
+    {
+      type: "single",
+      prompt: "Un entorno 'Default' compartido por todo el tenant, ¿es recomendable para desarrollo serio de una solución?",
+      options: [
+        "No; se recomienda un entorno Developer o Sandbox dedicado para evitar interferir con otros equipos",
+        "Sí, siempre es la mejor opción por ser el más rápido de acceder",
+        "Sí, porque no requiere ningún tipo de coordinación con otros equipos",
+        "Es irrelevante qué entorno se use para desarrollo"
+      ],
+      answer: [0],
+      explanation: "El entorno Default es compartido por todo el tenant y no aislado; para desarrollo serio se recomienda un entorno Developer o Sandbox dedicado."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué representa la 'organización' (Dataverse organization) de un entorno?",
+      options: [
+        "La instancia de Dataverse con su propia URL única, creada cuando el entorno tiene Dataverse habilitado",
+        "El nombre comercial de la empresa dueña del tenant",
+        "Un sinónimo de 'tenant', intercambiable en cualquier contexto",
+        "Una carpeta de archivos dentro del repositorio del proyecto"
+      ],
+      answer: [0],
+      explanation: "Cuando un entorno tiene Dataverse habilitado, se crea una organización con una URL única (ej. `https://<org>.crm.dynamics.com`), que es el punto de conexión real para Web API y otras herramientas."
+    }
+  ],
+  53: [
+    {
+      type: "single",
+      prompt: "¿Qué protocolo de autenticación usa la Dataverse Web API para validar cada petición?",
+      options: [
+        "OAuth 2.0, mediante un token emitido por Microsoft Entra ID",
+        "Autenticación básica con usuario y contraseña en texto plano",
+        "Un certificado SSL exclusivo sin relación con Entra ID",
+        "No requiere ningún tipo de autenticación para peticiones de lectura"
+      ],
+      answer: [0],
+      explanation: "La Web API exige un token OAuth 2.0 emitido por Microsoft Entra ID en el header Authorization de cada petición; sin un token válido del tenant correcto, la petición es rechazada."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué es una 'app registration' en Microsoft Entra ID?",
+      options: [
+        "El registro que da una identidad propia a una aplicación para solicitar tokens, independiente de cualquier usuario humano",
+        "Un tipo de tabla de Dataverse para registrar aplicaciones externas",
+        "Un archivo de configuración local que no se relaciona con Entra ID",
+        "El proceso de publicar una Canvas App en el catálogo de la organización"
+      ],
+      answer: [0],
+      explanation: "La app registration crea una identidad propia (Application ID) en Entra ID para que una aplicación pueda autenticarse y solicitar tokens sin depender de un usuario humano."
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué una app registration por sí sola no es suficiente para que una integración pueda leer/escribir datos en Dataverse?",
+      options: [
+        "Porque necesita un Application User vinculado en Dataverse con un Security Role que le otorgue permisos concretos",
+        "Porque las app registrations nunca pueden usarse para integraciones automatizadas",
+        "Porque Dataverse ignora completamente los tokens emitidos por Entra ID",
+        "Porque toda integración requiere obligatoriamente un usuario humano real"
+      ],
+      answer: [0],
+      explanation: "La app registration puede autenticarse contra Entra ID, pero Dataverse rechaza la petición si no existe un Application User vinculado con un Security Role que otorgue los permisos necesarios."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué diferencia principal hay entre usar un client secret y un certificado como credencial de un service principal?",
+      options: [
+        "El client secret es una contraseña con expiración que requiere rotación; el certificado es más seguro y no requiere rotación frecuente de un valor en texto plano",
+        "No hay ninguna diferencia de seguridad entre ambos métodos",
+        "El certificado solo puede usarse en entornos Developer",
+        "El client secret nunca expira una vez generado"
+      ],
+      answer: [0],
+      explanation: "Un client secret expira y debe rotarse; un certificado ofrece mayor seguridad criptográfica y no depende de un valor en texto plano con rotación frecuente, por lo que es preferible en integraciones de largo plazo."
+    },
+    {
+      type: "single",
+      prompt: "Un desarrollador recibe un error `401 Unauthorized` al llamar a la Dataverse Web API. ¿Cuál es la causa más probable?",
+      options: [
+        "El token no se generó, expiró, o se solicitó contra el tenant/audience incorrecto",
+        "El Application User no tiene Security Role asignado",
+        "La tabla consultada no existe en el entorno",
+        "El servidor de Dataverse está temporalmente caído"
+      ],
+      answer: [0],
+      explanation: "Un error 401 indica un problema de autenticación: el token es inválido, expiró, o se generó contra el tenant/audience equivocado — no un problema de permisos sobre la tabla."
+    },
+    {
+      type: "single",
+      prompt: "Un desarrollador recibe un error `403 Forbidden`, y confirma que el token se generó correctamente. ¿Cuál es la causa más probable?",
+      options: [
+        "El Application User no tiene el Security Role o los privilegios necesarios sobre la tabla/operación solicitada",
+        "El tenant ID usado para generar el token es incorrecto",
+        "El error 403 siempre indica que el servicio está fuera de línea",
+        "El error 403 nunca está relacionado con permisos"
+      ],
+      answer: [0],
+      explanation: "Un error 403 con un token válido indica un problema de autorización: el Application User no tiene el Security Role o privilegio correspondiente sobre la tabla u operación."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué Security Role se recomienda asignar a un Application User usado por una integración automatizada?",
+      options: [
+        "El más restrictivo posible que cumpla el caso de uso, nunca System Administrator por defecto",
+        "Siempre System Administrator, para evitar depurar permisos",
+        "No es necesario asignar ningún Security Role a un Application User",
+        "El mismo rol que tiene el usuario que creó la app registration"
+      ],
+      answer: [0],
+      explanation: "El principio de permisos mínimos exige asignar el Security Role más restrictivo que cumpla el caso de uso; usar System Administrator por comodidad expone el entorno a riesgos innecesarios."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué se debe hacer SIEMPRE al pedirle a un asistente de IA ayuda sobre un flujo de autenticación OAuth?",
+      options: [
+        "Usar placeholders (ej. {{CLIENT_ID}}, {{TENANT_ID}}) en vez de valores reales",
+        "Pegar el client secret real para que la IA entienda mejor el contexto",
+        "Compartir el token de acceso completo generado en producción",
+        "Omitir cualquier mención a la autenticación para simplificar el prompt"
+      ],
+      answer: [0],
+      explanation: "Nunca se deben pegar credenciales ni tokens reales en un prompt; usar placeholders permite obtener ayuda sobre la estructura sin exponer información sensible."
+    }
+  ],
+  54: [
+    {
+      type: "single",
+      prompt: "¿Cuál es la diferencia principal entre una solución unmanaged y una managed?",
+      options: [
+        "La unmanaged es editable (se usa en Dev); la managed es de solo lectura una vez importada (se usa en Test/Prod)",
+        "No hay ninguna diferencia funcional entre ambas",
+        "La managed siempre contiene menos componentes que la unmanaged",
+        "La unmanaged solo puede usarse en Dynamics 365, no en Power Apps"
+      ],
+      answer: [0],
+      explanation: "Una solución unmanaged es editable y se usa en el entorno de desarrollo; una managed es de solo lectura una vez importada, y se usa en Test/Production para evitar personalizaciones huérfanas."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué hace el comando `pac solution unpack`?",
+      options: [
+        "Descompone el .zip de la solución en archivos XML/JSON individuales, aptos para control de versiones y diffs legibles",
+        "Publica la solución directamente en el entorno de producción",
+        "Elimina componentes no usados de la solución automáticamente",
+        "Convierte una solución managed en unmanaged sin necesidad de reimportarla"
+      ],
+      answer: [0],
+      explanation: "`pac solution unpack` descompone el `.zip` en archivos individuales por componente, lo que permite versionar la solución en Git con diffs legibles por componente."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué problema resuelven las 'variables de entorno' (environment variables) en una solución Power Platform?",
+      options: [
+        "Permiten que valores como URLs o IDs cambien entre Dev/Test/Prod sin modificar el componente que los usa",
+        "Sirven exclusivamente para almacenar contraseñas de usuarios finales",
+        "Reemplazan por completo la necesidad de Security Roles",
+        "Solo pueden usarse en soluciones managed, nunca en unmanaged"
+      ],
+      answer: [0],
+      explanation: "Las variables de entorno externalizan valores que cambian entre entornos (URLs, IDs, flags), evitando hardcodear un valor específico de un entorno dentro de un componente."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué representa una 'connection reference' en una solución?",
+      options: [
+        "Un componente que representa una conexión a un conector, sin fijar qué cuenta o credencial usa, resuelto por entorno al importar",
+        "Un archivo de log de todas las conexiones realizadas a Dataverse",
+        "Una tabla especial que almacena credenciales de usuarios",
+        "Un tipo de plugin que solo funciona en modo síncrono"
+      ],
+      answer: [0],
+      explanation: "Una connection reference representa una conexión a un conector sin fijar la cuenta/credencial específica, evitando que un flujo quede atado a la cuenta personal de quien lo desarrolló."
+    },
+    {
+      type: "single",
+      prompt: "¿Para qué sirve un archivo de 'deployment settings' al importar una solución?",
+      options: [
+        "Mapea los valores de variables de entorno y connection references específicos del entorno destino, automatizando ese mapeo",
+        "Reemplaza la necesidad de tener un archivo Solution.xml",
+        "Define los permisos de Security Roles de todos los usuarios del entorno",
+        "Solo se usa quando la solución no tiene ninguna connection reference"
+      ],
+      answer: [0],
+      explanation: "El archivo de deployment settings mapea los valores correctos de variables de entorno y connection references para el entorno destino, evitando configuración manual repetitiva en cada importación."
+    },
+    {
+      type: "single",
+      prompt: "Según las buenas prácticas de ALM de este módulo, ¿en qué entorno debe vivir siempre una solución como unmanaged?",
+      options: [
+        "En el entorno de desarrollo (Dev)",
+        "En el entorno de producción (Prod)",
+        "En el entorno de Test únicamente",
+        "En todos los entornos por igual, sin distinción"
+      ],
+      answer: [0],
+      explanation: "Dev debe mantenerse siempre unmanaged y editable; Test y Prod deben recibir la solución como managed (solo lectura) para evitar personalizaciones huérfanas fuera de control de versiones."
+    },
+    {
+      type: "multi",
+      prompt: "¿Cuáles DOS pasos mínimos ejecuta típicamente un pipeline de GitHub Actions para Power Platform en el flujo Dev → Test?",
+      options: [
+        "pac solution unpack tras exportar desde Dev",
+        "pac solution pack + pac solution import hacia el entorno destino",
+        "Eliminar todas las variables de entorno antes de importar",
+        "Convertir automáticamente el entorno de Test en Production"
+      ],
+      answer: [0, 1],
+      explanation: "El flujo típico incluye desempaquetar (unpack) tras exportar desde Dev para versionar, y empaquetar + importar (pack + import) hacia el entorno destino durante el despliegue."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué rol cumple la IA en el proceso de ALM descrito en este módulo?",
+      options: [
+        "Apoya revisando diffs, riesgos y documentación, pero la aprobación final del pipeline sigue siendo humana",
+        "Reemplaza por completo la necesidad de revisión humana antes de importar a producción",
+        "Ejecuta automáticamente pac solution import sin supervisión",
+        "Solo puede usarse para tareas no relacionadas con soluciones de Power Platform"
+      ],
+      answer: [0],
+      explanation: "La IA puede acelerar la revisión de diffs y riesgos de una solución, pero la decisión de aprobar el pipeline hacia Test/Prod sigue siendo responsabilidad humana, igual que en el resto del nivel IA."
+    }
+  ],
+  55: [
+    {
+      type: "single",
+      prompt: "¿Qué es la 'sobrepersonalización' (over-customization) en un proyecto Power Platform/D365?",
+      options: [
+        "Resolver con desarrollo a medida algo que la plataforma ya ofrece de forma estándar, aumentando el costo de mantenimiento",
+        "Usar demasiadas Canvas Apps en un mismo proyecto",
+        "Tener más de 10 tablas personalizadas en una solución",
+        "Un sinónimo de 'solución managed' sin relación con el diseño"
+      ],
+      answer: [0],
+      explanation: "La sobrepersonalización ocurre cuando se construye una solución a medida para algo que la plataforma ya resuelve de forma estándar, incrementando el costo de mantenimiento y complicando actualizaciones futuras."
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué un asistente de IA tiende a proponer una solución personalizada en vez de una alternativa estándar de D365, si no se le indica lo contrario?",
+      options: [
+        "Porque el patrón de proponer desarrollo a medida es común en sus datos de entrenamiento si no se le pide explícitamente evaluar alternativas estándar",
+        "Porque la IA no puede generar ningún tipo de configuración estándar",
+        "Porque las alternativas estándar de D365 no existen realmente",
+        "Porque toda propuesta de IA es automáticamente la mejor opción técnica"
+      ],
+      answer: [0],
+      explanation: "Si no se le pide explícitamente evaluar alternativas estándar primero, la IA tiende a proponer directamente desarrollo a medida, por lo que hay que solicitarlo de forma explícita en el prompt."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué es un ADR (Architecture Decision Record)?",
+      options: [
+        "Un documento que registra el contexto, la decisión, alternativas consideradas y consecuencias de una decisión de arquitectura",
+        "Un tipo de tabla de Dataverse para almacenar decisiones de negocio",
+        "Un reporte automático generado únicamente por Power BI",
+        "Un sinónimo de 'Security Role' usado en consultoría funcional"
+      ],
+      answer: [0],
+      explanation: "Un ADR documenta el contexto, la decisión tomada, las alternativas consideradas y las consecuencias, dejando un registro trazable de decisiones de arquitectura importantes."
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué es importante dar contexto explícito de las políticas DLP y Managed Environments del tenant real antes de pedir una propuesta de arquitectura a la IA?",
+      options: [
+        "Porque la IA no conoce automáticamente las restricciones de gobierno configuradas en un tenant específico",
+        "Porque las políticas DLP no afectan ninguna decisión de arquitectura",
+        "Porque Managed Environments es un concepto exclusivo de Dynamics 365, no de Power Platform",
+        "Porque sin ese contexto la IA se niega a responder cualquier pregunta de arquitectura"
+      ],
+      answer: [0],
+      explanation: "La IA no tiene visibilidad automática de las políticas DLP ni la configuración de Managed Environments de un tenant específico; hay que proporcionarlas explícitamente como contexto para que la propuesta sea realista."
+    },
+    {
+      type: "single",
+      prompt: "Un requerimiento pide 'registrar visitas de vendedores a clientes'. ¿Qué debería evaluarse ANTES de proponer una tabla personalizada?",
+      options: [
+        "Si la entidad estándar de actividades/citas de Dynamics 365 Sales ya cubre el caso de uso",
+        "Directamente crear la tabla personalizada, ya que siempre es más flexible",
+        "Consultar únicamente el precio de licenciamiento antes de decidir",
+        "Ignorar las tablas estándar porque nunca son suficientes para casos reales"
+      ],
+      answer: [0],
+      explanation: "Antes de proponer desarrollo a medida, se debe evaluar si una capacidad estándar de la plataforma (como actividades/citas) ya cubre el requerimiento, para evitar sobrepersonalización innecesaria."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué elementos debería incluir como mínimo una matriz de seguridad generada para 2 roles sobre una tabla?",
+      options: [
+        "Tabla, rol y los permisos de crear/leer/escribir/eliminar para cada rol",
+        "Solo el nombre de los usuarios que tienen acceso a la tabla",
+        "Únicamente la fecha de creación de la tabla",
+        "El precio de la licencia de cada usuario"
+      ],
+      answer: [0],
+      explanation: "Una matriz de seguridad básica cruza tabla × rol × permisos (crear/leer/escribir/eliminar), permitiendo verificar visualmente si se respeta el principio de mínimo privilegio."
+    },
+    {
+      type: "single",
+      prompt: "Al usar IA para generar el esqueleto de un Custom API de Dataverse, ¿qué se debe hacer antes de aceptar el resultado?",
+      options: [
+        "Revisarlo con la checklist de alcance/efectos secundarios/seguridad/tests del Módulo 48",
+        "Aceptarlo directamente si compila sin errores de sintaxis",
+        "Ejecutarlo inmediatamente en el entorno de producción",
+        "Ninguna revisión adicional es necesaria si lo generó un asistente de IA"
+      ],
+      answer: [0],
+      explanation: "Todo código generado por IA, incluyendo un Custom API, debe revisarse con la misma checklist de revisión de diffs (alcance, efectos secundarios, seguridad, tests) antes de aceptarlo."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué rol cumple el humano frente a una propuesta de arquitectura generada con apoyo de IA, según este módulo?",
+      options: [
+        "Sigue siendo el responsable final de la decisión, sin importar cuán completa parezca la propuesta de la IA",
+        "Ya no es necesario, la IA puede aprobar sus propias propuestas de arquitectura",
+        "Solo debe revisar la ortografía del documento generado",
+        "Su única función es ejecutar los comandos que la IA le indique"
+      ],
+      answer: [0],
+      explanation: "Sin importar cuán completa parezca una propuesta de arquitectura generada con apoyo de IA, la decisión final y la responsabilidad ante el cliente siguen siendo del arquitecto humano."
+    }
   ]
 };
 

@@ -835,6 +835,182 @@
 **Fecha de inicio Nivel 4:** ___ | **Fecha de completación:** ___
 
 ---
+
+## 🟣 NIVEL 5: DESARROLLO ASISTIDO POR IA
+
+> Nivel transversal — no es prerequisito de los niveles PL-900 → PL-600 ni depende de ellos.
+
+### Módulo 42: Fundamentos de IA para Desarrollo
+
+- [ ] **Conocimiento**: Explico qué es un LLM aplicado a código y distingo autocompletado, chat y agente | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Identifico una alucinación de código provocada intencionalmente en un ejercicio propio | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico por qué el mismo prompt puede dar respuestas distintas entre ejecuciones | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Documento 2 riesgos de aceptar código generado sin verificación | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 42:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 43: Copilot en Power Platform
+
+- [ ] **Práctica**: Genero una app Canvas con Copilot y documento los ajustes manuales que necesitó | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Genero un flujo con "Describe it to design it" en Power Automate y explico cada acción propuesta | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Distingo el rol de Copilot Studio (agentes para usuarios finales) del de Copilot en Power Apps/Automate (asistente de makers) | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Ubico y documento la configuración de gobernanza de Copilot en el Power Platform Admin Center | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 43:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 44: GitHub Copilot en VS Code
+
+- [ ] **Práctica**: Genero código en un componente PCF real usando autocompletado y documento qué contexto ayudó a la precisión | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Uso Copilot Chat para explicar un archivo existente y verifico la explicación contra mi propio conocimiento | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Aplico un cambio con Copilot Edits revisando el diff completo antes de aceptarlo | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Creo un `.github/copilot-instructions.md` con al menos 2 convenciones del proyecto | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 44:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 45: Claude Code y Codex
+
+- [ ] **Práctica**: Uso un agente para localizar todas las ocurrencias de un patrón en el repo y confirmo el resultado manualmente | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Delego una tarea acotada con criterio de éxito verificable y confirmo que el agente la cumplió | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Comparo el resultado de una tarea vaga vs. una acotada y documento la diferencia de calidad | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 45 completado — implementación guiada con Copilot/Claude Code | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 45:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 46: Vibe Coding Controlado
+
+- [ ] **Conocimiento**: Distingo con un ejemplo propio una tarea apta para vibe coding de una que no lo es | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Escribo una regla de equipo de una frase sobre cuándo se permite vibe coding | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Agrego al menos un test de validación a un resultado generado con vibe coding | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico por qué vibe coding exige más control, no menos, en tareas de riesgo | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 46:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 47: Prompts Técnicos Reutilizables
+
+- [ ] **Práctica**: Construyo una plantilla parametrizable a partir de una tarea que repito seguido | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Pruebo la plantilla con dos casos distintos y confirmo consistencia de resultado | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Guardo la plantilla como archivo versionado en el repositorio | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico los 4 componentes de una buena plantilla de prompt | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 47:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 48: Revisión de Diffs y Pull Requests
+
+- [ ] **Práctica**: Reviso un diff real usando la checklist de alcance/efectos secundarios/seguridad/tests | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Identifico un cambio fuera de alcance en un diff generado intencionalmente con ese defecto | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Documento mi propia checklist de revisión de PRs | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico la diferencia entre un revisor automático de PRs y la aprobación humana final | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 48:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 49: Seguridad, Secretos y Compliance en IA
+
+- [ ] **Práctica**: Identifico y corrijo un dato sensible en un prompt propio de un módulo anterior | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Documento la política de retención/residencia de datos de al menos una herramienta de IA que uso | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Reviso la configuración DLP de un entorno respecto a conectores/IA generativa | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico por qué nunca se debe pegar un secreto real en un prompt | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 49:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 50: Tests, CI/CD y Guardrails para Código Generado por IA
+
+- [ ] **Práctica**: Agrego un test de validación a un cambio generado por IA de un módulo anterior | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Confirmo que un cambio pasa lint, typecheck y test:coverage antes de darlo por terminado | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico qué gate del pipeline de CI atraparía un error específico introducido por IA | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Diseño (en texto) cómo desplegaría detrás de un feature flag un cambio de alto riesgo generado con IA | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 50:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 51: Flujo Recomendado — Humano Diseña, IA Implementa, CI Valida, Humano Aprueba
+
+- [ ] **Práctica**: Completo el ciclo de las 4 etapas sobre un cambio real en este repositorio | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Documento en qué etapa (si alguna) tuve que devolverme a un paso anterior y por qué | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: El cambio final pasa lint, typecheck y tests antes de considerarse aprobado | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Escribo el resumen de una página del ciclo completo aplicado | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Lab 51 completado — flujo completo humano→IA→CI→aprobación sobre un caso real | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 51:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 52: Power Platform CLI y Conexión Segura al Tenant
+
+- [ ] **Práctica**: Instalé Power Platform CLI y confirmé la versión con `pac --version` | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creé un perfil de autenticación contra un entorno Developer/Sandbox con `pac auth create` | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Verifiqué la organización activa con `pac org who` antes de operar | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico la diferencia entre tenant, environment y organización | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 52 completado — CLI y conexión segura al tenant | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 56 completado — cambiar entre entornos Dev/Test/Prod de forma segura | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 52:** ___/6 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 53: Dataverse Web API, Dynamics 365 y Autenticación
+
+- [ ] **Conocimiento**: Explico la diferencia entre app registration, service principal y Application User | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Distingo cuándo usar client secret vs. certificado para una integración | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diagnostico correctamente un error 401 vs. un error 403 | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño un Security Role de mínimo privilegio para un Application User | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 54 completado — conexión conceptual de app externa a Dataverse Web API | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 53:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 54: ALM de Soluciones Power Platform con Apoyo de IA
+
+- [ ] **Práctica**: Exporté una solución unmanaged y la desempaqueté con `pac solution unpack` | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Identifiqué connection references y variables de entorno de una solución de práctica | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico por qué Dev debe ser unmanaged y Test/Prod deben ser managed | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Diseñé los pasos mínimos de un pipeline de GitHub Actions para export/unpack/pack/import | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 53 completado — exportar, desempaquetar y revisar una solución con IA | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 54:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 55: IA para Análisis de Soluciones, Arquitectura y Consultoría Funcional D365
+
+- [ ] **Práctica**: Uso IA para identificar dependencias entre tablas y verifico manualmente el resultado | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Convierto un requerimiento de negocio en user story y evalúo alternativa estándar vs. personalizada | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Genero una matriz de seguridad básica respetando el mínimo privilegio | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Identifico un caso de sobrepersonalización propuesto por la IA y lo corrijo | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 55 completado — UAT/checklist de go-live y auditoría de prompts | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 57 completado — diseño de una solución completa de D365 Sales con IA | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 55:** ___/6 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### 🏆 Hitos de Nivel IA
+
+- [ ] Todos los módulos 42-55 completados con 80%+ de checkboxes marcados | Fecha: ___
+- [ ] Labs 45, 51, 52, 53, 54, 55, 56 y 57 completados | Fecha: ___
+- [ ] Autoevaluación promedio ≥ 4.0/5 en todos los módulos del nivel | Promedio: ___/5
+- [ ] Certificado del Nivel IA generado | Fecha: ___
+
+**Fecha de inicio Nivel IA:** ___ | **Fecha de completación:** ___
+
+---
 ---
 
 ## 📊 Resumen Total de Progreso
@@ -845,7 +1021,8 @@
 | 🔵 Nivel 2 - Intermedio | 9 | 118 | ___ | ___% | ___/5 | ___ |
 | 🟠 Nivel 3 - Avanzado | 13 | 129 | ___ | ___% | ___/5 | ___ |
 | 🔴 Nivel 4 - Arquitecto | 11 | 105 | ___ | ___% | ___/5 | ___ |
-| **TOTAL** | **41** | **465** | ___ | ___% | ___/5 | ___ |
+| 🟣 Nivel IA - Desarrollo Asistido | 14 | 63 | ___ | ___% | ___/5 | ___ |
+| **TOTAL** | **55** | **530** | ___ | ___% | ___/5 | ___ |
 
 ### Resumen por Módulo
 
@@ -892,6 +1069,20 @@
 | 39 | Casos de Transformación Digital | ___/8 | ___% | ___/5 |
 | 40 | Preparación PL-600 | ___/8 | ___% | ___/5 |
 | 41 | Proyecto Capstone | ___/10 | ___% | ___/5 |
+| 42 | Fundamentos de IA para Desarrollo | ___/4 | ___% | ___/5 |
+| 43 | Copilot en Power Platform | ___/4 | ___% | ___/5 |
+| 44 | GitHub Copilot en VS Code | ___/4 | ___% | ___/5 |
+| 45 | Claude Code y Codex | ___/4 | ___% | ___/5 |
+| 46 | Vibe Coding Controlado | ___/4 | ___% | ___/5 |
+| 47 | Prompts Técnicos Reutilizables | ___/4 | ___% | ___/5 |
+| 48 | Revisión de Diffs y PRs | ___/4 | ___% | ___/5 |
+| 49 | Seguridad, Secretos y Compliance | ___/4 | ___% | ___/5 |
+| 50 | Tests, CI/CD y Guardrails | ___/4 | ___% | ___/5 |
+| 51 | Flujo Recomendado (Capstone) | ___/5 | ___% | ___/5 |
+| 52 | Power Platform CLI y Conexión al Tenant | ___/6 | ___% | ___/5 |
+| 53 | Dataverse Web API, D365 y Autenticación | ___/5 | ___% | ___/5 |
+| 54 | ALM de Soluciones con Apoyo de IA | ___/5 | ___% | ___/5 |
+| 55 | Análisis, Arquitectura y Consultoría Funcional D365 | ___/6 | ___% | ___/5 |
 
 ### Timeline Visual de Progreso
 
@@ -900,6 +1091,7 @@ NIVEL 1 [====================] ___% completado
 NIVEL 2 [                    ] ___% completado
 NIVEL 3 [                    ] ___% completado
 NIVEL 4 [                    ] ___% completado
+NIVEL IA [                    ] ___% completado
 TOTAL   [                    ] ___% completado
 ```
 

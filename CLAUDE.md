@@ -36,8 +36,9 @@ docs/                    # MkDocs source content — legacy/reference site only 
     CHECKLIST_PROGRESO.md
     GLOSARIO_TERMINOS.md
     CERTIFICACIONES.md
+    PROMPTS_REUTILIZABLES_IA.md  # 16 reusable prompts for AI-assisted Power Platform/D365 work (Nivel IA, /recursos/prompts-ia)
   javascripts/
-    evaluaciones-simulador.js   # Banco de preguntas A/B/C/D en MODULE_QUESTIONS (módulos 1-41) — shared by BOTH surfaces, not migrated
+    evaluaciones-simulador.js   # Banco de preguntas A/B/C/D en MODULE_QUESTIONS (módulos 1-55) — shared by BOTH surfaces, not migrated
   stylesheets/
     extra.css            # Custom CSS for MkDocs site
 app-elearning/           # Next.js 15 interactive app (THE primary surface)
@@ -47,8 +48,9 @@ app-elearning/           # Next.js 15 interactive app (THE primary surface)
       intermedio/09-*.md … 17-*.md
       avanzado/18-*.md … 30-*.md
       arquitecto/31-*.md … 41-*.md
+      ia/42-*.md … 55-*.md              # transversal level (14 modules) — no prerequisites, doesn't gate/get gated by the 4 levels above
     labs/
-      lab-02-*.md, lab-03-*.md, …       # one file per lab, same frontmatter pattern
+      lab-02-*.md, lab-03-*.md, …       # one file per lab, same frontmatter pattern (17 total, including labs 45/51/52/53/54/55/56/57 for the ia level)
   next.config.ts         # output: 'export', basePath: '/PlanEstudio'
   src/
     app/                 # App Router pages
@@ -171,7 +173,7 @@ Don't change these if editing `docs/Niveles/*.md` for MkDocs.
 }
 ```
 
-- 314 total questions across 41 modules (8 per module in Niveles 2-4, 15 in Módulo 1)
+- 426 total questions across 55 modules (8 per module in Niveles 2-4 and Nivel IA, 15 in Módulo 1)
 - Module 1 has 15 questions (includes AI Builder and Power Pages topics for PL-900)
 - After editing, validate with Node.js that the object parses correctly
 - `scripts/extract-questions.mjs` parses `evaluaciones-simulador.js` via `vm.runInContext` at `prebuild` time and generates `app-elearning/src/data/questions.ts`, which `questions-parser.ts` imports statically (no runtime `eval`/`new Function`)
@@ -184,11 +186,16 @@ Don't change these if editing `docs/Niveles/*.md` for MkDocs.
 
 ## Progression Dependencies
 
-**Do not skip levels.** Each level builds on the previous:
+**Do not skip levels.** Each of the 4 certification levels builds on the previous:
 
 ```
 NIVEL 1 (PL-900) → NIVEL 2 (PL-200) → NIVEL 3 (PL-400) → NIVEL 4 (PL-600)
 ```
+
+**Nivel IA (Desarrollo Asistido por IA) is transversal, not part of this chain.** It has no
+prerequisites, doesn't gate or get gated by any of the 4 levels above, and can be studied
+at any point. Completing Nivel 4 (Arquitecto) does not auto-suggest starting Nivel IA —
+see `LevelCompleteBanner` in `level-progress-banner.tsx`.
 
 ## Language
 

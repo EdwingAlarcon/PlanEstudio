@@ -55,4 +55,15 @@ describe("CertificateClient", () => {
     expect(replaceMock).not.toHaveBeenCalled();
     expect(getByText("Ada Lovelace")).toBeInTheDocument();
   });
+
+  it("shows IA-specific phrasing (no PL-xxx exam language) when the level is 'ia'", () => {
+    for (let i = 42; i <= 55; i++) {
+      useProgressStore.getState().markModuleComplete(`ia-${i}`);
+    }
+    useProgressStore.getState().setUserName("Ada Lovelace");
+    const { getByText, queryByText } = render(<CertificateClient levelId="ia" />);
+    expect(replaceMock).not.toHaveBeenCalled();
+    expect(getByText(/buenas prácticas de desarrollo asistido por IA/i)).toBeInTheDocument();
+    expect(queryByText(/rendir la certificación/i)).not.toBeInTheDocument();
+  });
 });
