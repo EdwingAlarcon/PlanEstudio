@@ -11,6 +11,7 @@ export interface PortfolioRouteData {
   title: string;
   accent: string;
   capstoneTitle: string;
+  capstoneDisplayId?: string;
   capstoneHref: string;
   capstoneLabSlug?: string;
   capstoneModuleFullId?: string;
@@ -82,7 +83,7 @@ export function PortfolioClient({ routes }: { routes: PortfolioRouteData[] }) {
                     href={route.capstoneHref}
                     className="group flex items-center gap-2 text-sm font-medium text-[#0078D4] hover:underline dark:text-[#4DB8FF]"
                   >
-                    {route.capstoneTitle}
+                    {route.capstoneDisplayId ? `${route.capstoneDisplayId} · ` : ""}{route.capstoneTitle}
                     <ArrowRight className="h-3.5 w-3.5 shrink-0 transition-transform group-hover:translate-x-0.5" aria-hidden />
                   </Link>
 

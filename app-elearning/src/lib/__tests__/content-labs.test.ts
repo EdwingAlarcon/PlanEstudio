@@ -122,6 +122,7 @@ describe("getAllLabs — con datos", () => {
   it("cada lab tiene id, slug, title, level y rawContent", () => {
     getAllLabs().forEach((lab) => {
       expect(lab.id).toBeTruthy();
+      expect(lab.displayId).toMatch(/^LAB-\d{3}$/);
       expect(lab.slug).toBeTruthy();
       expect(lab.title).toBeTruthy();
       expect(lab.level).toBeTruthy();
@@ -134,6 +135,11 @@ describe("getAllLabs — con datos", () => {
     expect(slugs).toContain("lab-02-dataverse");
     expect(slugs).toContain("lab-03-canvas");
     expect(slugs).toContain("lab-05-automate");
+  });
+
+  it("genera un identificador visual estable LAB-### desde el id interno", () => {
+    const lab = getAllLabs().find((l) => l.id === "lab-02");
+    expect(lab?.displayId).toBe("LAB-002");
   });
 
   it("parsea arrays de products, certifications, role y prerequisites", () => {
@@ -202,5 +208,13 @@ describe("getSearchDocuments — incluye labs", () => {
     const types = new Set(docs.map((d) => d.type));
     expect(types.has("module")).toBe(true);
     expect(types.has("lab")).toBe(true);
+  });
+
+  it("permite buscar labs por identificador visual e interno", () => {
+    const labDoc = getSearchDocuments().find((doc) => doc.type === "lab" && doc.slug === "lab-02-dataverse");
+
+    expect(labDoc?.title).toContain("LAB-002");
+    expect(labDoc?.content).toContain("LAB-002");
+    expect(labDoc?.content).toContain("lab-02");
   });
 });

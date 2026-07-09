@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Clock, ChevronLeft, Award, Users, BookOpen, AlertTriangle, FlaskConical } from "lucide-react";
 import { getAllLabs, getLabBySlug } from "@/lib/content";
+import { getLabPresentationMeta } from "@/lib/lab-metadata";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
 import { LabCompleteButton } from "@/components/labs/lab-complete-button";
 import { Badge } from "@/components/ui/badge";
@@ -23,22 +24,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const lab = getLabBySlug(slug);
   if (!lab) return { title: "Lab no encontrado" };
   return {
-    title: lab.title,
-    description: `Laboratorio práctico: ${lab.title}. Duración: ${lab.duration} min. Certificación: ${lab.certifications.join(", ")}.`,
+    title: `${lab.displayId} · ${lab.title}`,
+    description: `${lab.displayId}. Laboratorio práctico: ${lab.title}. Duración: ${lab.duration} min. Certificación: ${lab.certifications.join(", ")}.`,
   };
 }
 
 const LEVEL_BAR: Record<string, string> = {
   N1: "bg-[#107C10]", N2: "bg-[#0078D4]", N3: "bg-orange-500", N4: "bg-[#D13438]",
+  N5: "bg-purple-600", N6: "bg-teal-600",
 };
 
-const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "default"> = {
+const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365" | "default"> = {
   "PL-900": "basico",
   "PL-200": "intermedio",
   "PL-200 (retira 31 ago 2026)": "intermedio",
   "PL-400": "avanzado",
   "Arquitectura Power Platform": "arquitecto",
   "Buenas Prácticas": "ia",
+  "Especialista Dynamics 365 CE": "d365",
 };
 
 export default async function LabDetailPage({ params }: Props) {
@@ -47,6 +50,7 @@ export default async function LabDetailPage({ params }: Props) {
   if (!lab) notFound();
 
   const bar = LEVEL_BAR[lab.level] ?? "bg-[#0078D4]";
+  const meta = getLabPresentationMeta(lab);
 
   return (
     <main id="main-content" className="max-w-4xl mx-auto space-y-6 animate-fade-in">
@@ -71,8 +75,15 @@ export default async function LabDetailPage({ params }: Props) {
                 <FlaskConical className="h-5 w-5 text-[#0078D4] dark:text-[#4DB8FF]" aria-hidden />
               </div>
               <div>
+                <div className="mb-2 flex flex-wrap items-center gap-1.5">
+                  <Badge variant="secondary" className="font-mono">{lab.displayId}</Badge>
+                  <Badge variant={meta.kind === "Capstone" ? "arquitecto" : "outline"}>{meta.kind}</Badge>
+                  <Badge variant="outline">{meta.difficulty}</Badge>
+                </div>
                 <h1 className="text-xl font-bold leading-snug text-foreground">{lab.title}</h1>
-                <p className="text-xs text-muted-foreground mt-0.5">Nivel {lab.level} · Laboratorio práctico</p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  {meta.recommendedLevel} · {meta.routes.join(" / ")}
+                </p>
               </div>
             </div>
 
@@ -91,6 +102,10 @@ export default async function LabDetailPage({ params }: Props) {
 
             {/* Meta row */}
             <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
+              <span className="flex items-center gap-1.5">
+                <FlaskConical className="h-3.5 w-3.5" aria-hidden />
+                {meta.kind}
+              </span>
               {lab.duration > 0 && (
                 <span className="flex items-center gap-1.5">
                   <Clock className="h-3.5 w-3.5" aria-hidden />
@@ -115,6 +130,23 @@ export default async function LabDetailPage({ params }: Props) {
                   {lab.prerequisites.length} prerrequisito{lab.prerequisites.length !== 1 ? "s" : ""}
                 </span>
               )}
+            </div>
+
+            <div className="grid gap-3 rounded-lg border border-border bg-muted/30 p-3 text-xs sm:grid-cols-2">
+              <div>
+                <p className="mb-1 font-semibold text-foreground">Competencias que valida</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {meta.competencies.map((competency) => (
+                    <Badge key={competency} variant="outline" className="text-[10px]">
+                      {competency}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="mb-1 font-semibold text-foreground">Evidencia esperada</p>
+                <p className="leading-relaxed text-muted-foreground">{meta.evidenceSummary}</p>
+              </div>
             </div>
           </div>
         </div>

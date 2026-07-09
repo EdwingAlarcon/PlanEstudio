@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 export interface LevelReadinessData {
   levelId: LevelId;
   modules: { moduleId: number; title: string }[];
-  labs: { slug: string; title: string }[];
+  labs: { slug: string; displayId?: string; title: string }[];
 }
 
 const LEVEL_ACCENT: Record<LevelId, string> = {

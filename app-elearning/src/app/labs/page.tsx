@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Clock, BookOpen, Award, ChevronRight, FlaskConical, ClipboardCheck, FileCheck2 } from "lucide-react";
 import { getAllLabs } from "@/lib/content";
+import { getLabPresentationMeta } from "@/lib/lab-metadata";
 import { LabCardStatus } from "@/components/labs/lab-card-status";
 import { Badge } from "@/components/ui/badge";
 
@@ -79,7 +80,7 @@ export default function LabsPage() {
           </div>
           <div>
             <h1 className="text-xl font-bold text-foreground">Laboratorios Prácticos</h1>
-            <p className="text-xs text-muted-foreground">{labs.length} labs · Escenario SIT unificado</p>
+            <p className="text-xs text-muted-foreground">{labs.length} labs · Códigos LAB-### buscables</p>
           </div>
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed mt-2">
@@ -153,16 +154,38 @@ export default function LabsPage() {
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2">
-              {levelLabs.map((lab) => (
+              {levelLabs.map((lab) => {
+                const meta = getLabPresentationMeta(lab);
+                const primaryRoute = meta.routes[0] ?? "Ruta general";
+
+                return (
                 <Link key={lab.slug} href={`/labs/${lab.slug}`} className="group">
                   <div className="relative h-full rounded-xl border border-border bg-card px-4 py-4 shadow-fluent-1 group-hover:shadow-fluent-4 group-hover:border-[#0078D4]/30 dark:group-hover:border-[#4DB8FF]/30 transition-all duration-200">
-                    {LAB_MARKERS[lab.slug] && (
-                      <div className="mb-2">
-                        <Badge variant="secondary" className="text-[10px]">
-                          {LAB_MARKERS[lab.slug]}
-                        </Badge>
+                    <div className="mb-3 flex flex-wrap items-center gap-1.5">
+                      <Badge
+                        variant={meta.kind === "Capstone" ? "default" : "secondary"}
+                        className="font-mono text-[10px]"
+                      >
+                        {lab.displayId}
+                      </Badge>
+                      <Badge variant={meta.kind === "Capstone" ? "arquitecto" : "outline"} className="text-[10px]">
+                        {LAB_MARKERS[lab.slug] ?? meta.kind}
+                      </Badge>
+                      <Badge variant="outline" className="text-[10px]">
+                        {meta.difficulty}
+                      </Badge>
+                    </div>
+
+                    <div className="mb-2 grid gap-1 text-[11px] text-muted-foreground">
+                      <div className="flex items-center gap-1.5">
+                        <BookOpen className="h-3 w-3 shrink-0" aria-hidden />
+                        <span className="truncate">{primaryRoute}</span>
                       </div>
-                    )}
+                      <div className="flex items-center gap-1.5">
+                        <Award className="h-3 w-3 shrink-0" aria-hidden />
+                        <span>{meta.recommendedLevel}</span>
+                      </div>
+                    </div>
 
                     {/* Title row */}
                     <div className="flex items-start justify-between gap-2 mb-3">
@@ -189,6 +212,10 @@ export default function LabsPage() {
                       ))}
                     </div>
 
+                    <p className="mb-3 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                      <span className="font-medium text-foreground">Evidencia:</span> {meta.evidenceSummary}
+                    </p>
+
                     {/* Meta row */}
                     <div className="flex items-center gap-3 text-xs text-muted-foreground">
                       {lab.duration > 0 && (
@@ -212,7 +239,8 @@ export default function LabsPage() {
                     </div>
                   </div>
                 </Link>
-              ))}
+                );
+              })}
             </div>
           </section>
         );

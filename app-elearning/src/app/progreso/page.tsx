@@ -12,7 +12,11 @@ export default function ProgressDashboardPage() {
   const levels: LevelReadinessData[] = LEVEL_ORDER.map((levelId) => {
     const level = getLevelById(levelId);
     const modules = (level?.modules ?? []).map((m) => ({ moduleId: m.moduleId, title: m.title }));
-    const labs = getLabsForLevel(levelId).map((lab) => ({ slug: lab.slug, title: lab.title }));
+    const labs = getLabsForLevel(levelId).map((lab) => ({
+      slug: lab.slug,
+      displayId: lab.displayId,
+      title: lab.title,
+    }));
 
     return { levelId, modules, labs };
   });

@@ -17,6 +17,35 @@ prerequisites: []
 Contenido.
 `;
 
+const LAB_MISSING_ID = `---
+title: "Lab sin id explicito"
+level: "N1"
+duration: 90
+product: ["Dataverse"]
+certifications: ["PL-900"]
+role: ["Developer"]
+prerequisites: []
+---
+
+# Lab derivado
+Contenido.
+`;
+
+const LAB_MISMATCHED_ID = `---
+id: lab-03
+title: "Lab con id inconsistente"
+level: "N1"
+duration: 90
+product: ["Dataverse"]
+certifications: ["PL-900"]
+role: ["Developer"]
+prerequisites: []
+---
+
+# Lab inconsistente
+Contenido.
+`;
+
 const LAB_BAD_LEVEL = `---
 id: lab-02
 title: "Nivel inválido"
@@ -153,6 +182,24 @@ describe("validateLabFrontmatter — casos inválidos", () => {
     const { getAllLabs } = await import("../content");
 
     expect(() => getAllLabs()).toThrow(/id duplicado/i);
+  });
+
+  it("deriva el id desde el slug cuando el frontmatter no lo declara", async () => {
+    labFiles = ["lab-07-derived.md"];
+    labFixtures = { "lab-07-derived.md": LAB_MISSING_ID };
+    const { getAllLabs } = await import("../content");
+
+    const [lab] = getAllLabs();
+    expect(lab?.id).toBe("lab-07");
+    expect(lab?.displayId).toBe("LAB-007");
+  });
+
+  it("rechaza un id que no coincide con el identificador del archivo", async () => {
+    labFiles = ["lab-02-mismatch.md"];
+    labFixtures = { "lab-02-mismatch.md": LAB_MISMATCHED_ID };
+    const { getAllLabs } = await import("../content");
+
+    expect(() => getAllLabs()).toThrow(/debe coincidir/i);
   });
 
   it("lanza un error claro cuando el directorio de labs no existe", async () => {

@@ -5,6 +5,7 @@ import { AlertTriangle, ArrowLeft, ArrowRight, BookOpen, CheckCircle2, FlaskConi
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getAllLabs, getAllModules } from "@/lib/content";
+import { getLabPresentationMeta } from "@/lib/lab-metadata";
 import { getAllProfessionalRoutes, getProfessionalRouteBySlug } from "@/lib/professional-routes";
 
 interface PageProps {
@@ -169,20 +170,30 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
-            {labs.map((lab) => lab && (
+            {labs.map((lab) => {
+              if (!lab) return null;
+              const meta = getLabPresentationMeta(lab);
+              return (
               <Link
                 key={lab.slug}
                 href={`/labs/${lab.slug}`}
                 className="group rounded-xl border border-border bg-card p-4 shadow-fluent-1 transition-all duration-150 hover:border-[#107C10]/30 hover:shadow-fluent-2"
               >
+                <div className="mb-2 flex flex-wrap gap-1.5">
+                  <Badge variant="secondary" className="font-mono text-[10px]">{lab.displayId}</Badge>
+                  <Badge variant={meta.kind === "Capstone" ? "arquitecto" : "outline"} className="text-[10px]">
+                    {meta.kind}
+                  </Badge>
+                </div>
                 <p className="line-clamp-2 text-sm font-semibold text-foreground group-hover:text-[#107C10]">
                   {lab.title}
                 </p>
                 <p className="mt-2 text-xs text-muted-foreground">
-                  {lab.level} · {lab.duration} min
+                  {meta.recommendedLevel} · {meta.difficulty} · {lab.duration} min
                 </p>
               </Link>
-            ))}
+              );
+            })}
           </div>
         </section>
       )}

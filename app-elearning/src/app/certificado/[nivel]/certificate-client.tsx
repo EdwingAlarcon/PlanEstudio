@@ -18,7 +18,7 @@ import { type LevelId } from "@/lib/i18n";
 interface CertificateClientProps {
   levelId: LevelId;
   modules?: { moduleId: number; title: string }[];
-  labs?: { slug: string; title: string }[];
+  labs?: { slug: string; displayId?: string; title: string }[];
 }
 
 export function CertificateClient({ levelId, modules = [], labs = [] }: CertificateClientProps) {
@@ -89,7 +89,9 @@ export function CertificateClient({ levelId, modules = [], labs = [] }: Certific
             </p>
             <ul className="text-sm text-muted-foreground space-y-1">
               {pendingLabs.map((lab) => (
-                <li key={lab.slug}>{lab.title}</li>
+                <li key={lab.slug}>
+                  {lab.displayId ? `${lab.displayId} · ` : ""}{lab.title}
+                </li>
               ))}
             </ul>
           </div>

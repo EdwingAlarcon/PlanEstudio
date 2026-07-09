@@ -21,6 +21,7 @@ export default function PortfolioPage() {
       title: route.title,
       accent: route.accent,
       capstoneTitle: capstoneLab?.title ?? capstoneModule?.title ?? "Capstone pendiente",
+      capstoneDisplayId: capstoneLab?.displayId,
       capstoneHref: capstoneLab
         ? `/labs/${capstoneLab.slug}`
         : capstoneModule

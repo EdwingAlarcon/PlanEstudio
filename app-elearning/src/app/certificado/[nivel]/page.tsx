@@ -27,7 +27,11 @@ export default async function CertificatePage({ params }: PageProps) {
     moduleId: m.moduleId,
     title: m.title,
   }));
-  const labs = getLabsForLevel(levelId).map((lab) => ({ slug: lab.slug, title: lab.title }));
+  const labs = getLabsForLevel(levelId).map((lab) => ({
+    slug: lab.slug,
+    displayId: lab.displayId,
+    title: lab.title,
+  }));
 
   return <CertificateClient levelId={levelId} modules={modules} labs={labs} />;
 }

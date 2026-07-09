@@ -8,7 +8,7 @@ import { LEVEL_MODULE_RANGE, LEVEL_ORDER } from "./i18n";
 
 export interface ModuleInfo {
   id: string;           // "basico-1"
-  moduleId: number;     // 1-55
+  moduleId: number;     // 1-59
   levelId: LevelId;
   title: string;
   slug: string;
@@ -34,6 +34,7 @@ export interface ResourcePage {
 
 export interface LabInfo {
   id: string;        // "lab-02"
+  displayId: string; // "LAB-002"
   slug: string;      // filename without .md
   title: string;
   level: string;     // "N1" | "N2" | "N3" | "N4" | "N5"
@@ -191,10 +192,37 @@ function validateModuleFrontmatter(
   return { moduleId, levelId, title, slug, estimatedMinutes };
 }
 
-function validateLabFrontmatter(data: Record<string, unknown>, filePath: string): Omit<LabInfo, "slug" | "rawContent"> {
-  const id = requireString(data, "id", filePath);
-  if (!/^lab-\d{2}$/.test(id)) {
+export function formatLabDisplayId(idOrSlug: string): string {
+  const match = idOrSlug.match(/^lab-(\d{2,3})(?:-|$)/);
+  if (!match?.[1]) return idOrSlug.toUpperCase();
+  return `LAB-${match[1].padStart(3, "0")}`;
+}
+
+function deriveLabIdFromSlug(slug: string, filePath: string): string {
+  const match = slug.match(/^lab-(\d{2,3})(?:-|$)/);
+  if (!match?.[1]) {
+    failContent(filePath, `slug de lab debe iniciar con lab-NN, recibido '${slug}'`);
+  }
+  return `lab-${match[1].padStart(2, "0")}`;
+}
+
+function validateLabFrontmatter(
+  data: Record<string, unknown>,
+  filePath: string,
+  slug: string,
+): Omit<LabInfo, "slug" | "rawContent"> {
+  const rawId = data["id"];
+  const id = typeof rawId === "string" && rawId.trim().length > 0
+    ? rawId.trim()
+    : deriveLabIdFromSlug(slug, filePath);
+
+  if (!/^lab-\d{2,3}$/.test(id)) {
     failContent(filePath, `frontmatter 'id' debe usar el formato lab-NN, recibido '${id}'`);
+  }
+
+  const slugId = deriveLabIdFromSlug(slug, filePath);
+  if (id !== slugId) {
+    failContent(filePath, `frontmatter 'id' (${id}) debe coincidir con el identificador del archivo (${slugId})`);
   }
 
   const title = requireString(data, "title", filePath);
@@ -210,6 +238,7 @@ function validateLabFrontmatter(data: Record<string, unknown>, filePath: string)
 
   return {
     id,
+    displayId: formatLabDisplayId(id),
     title,
     level,
     duration,
@@ -486,7 +515,7 @@ export function getAllLabs(): LabInfo[] {
     const raw = readRequiredFile(filePath);
     const { data, content } = matter(raw);
     const slug = file.replace(/\.md$/, "");
-    const meta = validateLabFrontmatter(data, filePath);
+    const meta = validateLabFrontmatter(data, filePath, slug);
 
     labs.push({
       ...meta,
@@ -542,13 +571,13 @@ export function getSearchDocuments(): SearchDocument[] {
 
   const labDocs: SearchDocument[] = getAllLabs().map((lab) => ({
     id: lab.slug,
-    title: lab.title,
+    title: `${lab.displayId} · ${lab.title}`,
     levelId: lab.level,
     moduleId: 0,
     slug: lab.slug,
     type: "lab" as const,
     href: `/labs/${lab.slug}`,
-    content: lab.rawContent.replace(/^#{1,6}\s+/gm, "").slice(0, 2000),
+    content: `${lab.displayId} ${lab.id} ${lab.slug} ${lab.title}\n${lab.rawContent.replace(/^#{1,6}\s+/gm, "")}`.slice(0, 2000),
   }));
 
   return [...moduleDocs, ...labDocs];
