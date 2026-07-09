@@ -39,6 +39,8 @@ const TYPE_CONFIG: Record<SearchDocumentType, { label: string; color: string }> 
 };
 
 export function SearchBar({ documents }: SearchBarProps) {
+  const moduleCount = documents.filter((doc) => doc.type === "module").length;
+  const labCount = documents.filter((doc) => doc.type === "lab").length;
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchHit[]>([]);
@@ -247,7 +249,7 @@ export function SearchBar({ documents }: SearchBarProps) {
 
           {!query && (
             <div className="px-4 py-8 text-center text-sm text-muted-foreground">
-              Escribe para buscar en 41 módulos y 9 laboratorios
+              Escribe para buscar en {moduleCount} módulos y {labCount} laboratorios
             </div>
           )}
         </div>

@@ -19,6 +19,7 @@ export interface ProfessionalRoute {
   labs: string[];
   competencies: string[];
   status: "Disponible" | "Parcial" | "Cobertura en expansión";
+  gapNote?: string;
   nextRouteSlug?: ProfessionalRouteSlug;
 }
 
@@ -59,6 +60,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     ],
     competencies: ["Discovery", "Requerimientos", "Fit-Gap", "Seguridad funcional", "UAT", "Capacitación"],
     status: "Parcial",
+    gapNote: "Cubre bien Power Platform genérico (requerimientos, fit-gap, seguridad, UAT), pero todavía no tiene módulos dedicados de consultoría funcional específicos de Dynamics 365 CE/F&O (procesos estándar por industria, catálogos de producto, configuración de áreas funcionales). Complementa esta ruta con Dynamics 365 Customer Engagement o Finance & Operations según el dominio del cliente.",
     nextRouteSlug: "dynamics-365-customer-engagement",
   },
   {
@@ -116,6 +118,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     ],
     competencies: ["Sales", "Customer Service", "Dataverse estándar", "Omnichannel", "Copilot para servicio", "Fit-Gap D365"],
     status: "Parcial",
+    gapNote: "Se apoya en el Módulo 20 (compartido) y en los labs 58/59 para Customer Insights y Field Service, pero aún no existen módulos dedicados a esas dos áreas ni a Omnichannel avanzado. Es una base sólida para Sales y Customer Service estándar; para Customer Insights o Field Service profundo, complementa con documentación oficial de Microsoft Learn.",
     nextRouteSlug: "solution-architect",
   },
   {
@@ -134,6 +137,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     ],
     competencies: ["ERP vs CRM", "Dual-write conceptual", "Data Management", "Integración", "Gobernanza", "Seguridad"],
     status: "Cobertura en expansión",
+    gapNote: "Todavía no hay módulos dedicados a Finance & Operations (procesos financieros, cadena de suministro, Data Management Framework, dual-write real). Esta ruta agrupa los fundamentos transferibles de arquitectura, integración y gobierno que aplican también a F&O, mientras se desarrollan módulos específicos del producto.",
     nextRouteSlug: "solution-architect",
   },
   {

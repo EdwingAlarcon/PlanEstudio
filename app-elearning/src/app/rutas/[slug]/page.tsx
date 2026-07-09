@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, FlaskConical, Target } from "lucide-react";
+import { AlertTriangle, ArrowLeft, ArrowRight, BookOpen, CheckCircle2, FlaskConical, Target } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getAllLabs, getAllModules } from "@/lib/content";
@@ -66,6 +66,13 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
             <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">{route.summary}</p>
           </div>
         </div>
+
+        {route.gapNote && (
+          <div className="mt-4 flex items-start gap-3 rounded-lg border border-amber-500/30 bg-amber-50 px-4 py-3 dark:border-amber-400/20 dark:bg-amber-500/10">
+            <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
+            <p className="text-sm leading-relaxed text-amber-900 dark:text-amber-200">{route.gapNote}</p>
+          </div>
+        )}
       </div>
 
       <section className="grid gap-4 md:grid-cols-[1fr_1.2fr]" aria-label="Resultado y competencias">
