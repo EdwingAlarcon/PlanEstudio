@@ -16,6 +16,7 @@ import {
   getElapsedSeconds,
 } from "../quiz-engine";
 import type { Question } from "../quiz-engine";
+import { UI } from "../i18n";
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
@@ -342,5 +343,16 @@ describe("timing helpers", () => {
     const session = createSession(questions);
     const finished = finishSession(session);
     expect(finished.finishedAt).not.toBeNull();
+  });
+});
+
+// ─── navigation certification labels ─────────────────────────────────────────
+
+describe("navigation certification labels", () => {
+  it("uses short labels for sidebar badges while preserving full certification copy", () => {
+    expect(UI.levels.navCert.intermedio).toBe("PL-200");
+    expect(UI.levels.cert.intermedio).toContain("retira");
+    expect(UI.levels.navCert.arquitecto).toBe("Arquitectura");
+    expect(UI.levels.navCert.ia).toBe("IA");
   });
 });

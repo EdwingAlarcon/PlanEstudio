@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   BookOpen, CheckSquare, GraduationCap, FileText, Trophy,
-  Home, PlayCircle, FlaskConical, Route,
+  Home, PlayCircle, FlaskConical, Route, HelpCircle,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -78,6 +78,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
         <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden px-2 py-3">
           {/* Primary actions */}
           <NavLink href="/"          icon={Home}        label={UI.nav.home}      active={pathname === "/"} />
+          <NavLink href="/como-usar" icon={HelpCircle}  label={UI.nav.howToUse} active={pathname === "/como-usar"} />
           <NavLink href="/rutas"     icon={Route}       label={UI.nav.routes}    active={pathname.startsWith("/rutas")} />
           <NavLink href="/simulador" icon={PlayCircle}  label={UI.nav.simulator} active={pathname === "/simulador"} />
           <NavLink href="/labs"      icon={FlaskConical} label="Laboratorios"    active={pathname.startsWith("/labs")} />
@@ -119,7 +120,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
                     className="text-[9px] px-1.5 py-0 h-4 shrink-0 max-w-[100px] truncate"
                     title={UI.levels.cert[levelId]}
                   >
-                    {UI.levels.cert[levelId]}
+                    {UI.levels.navCert[levelId]}
                   </Badge>
                 </Link>
 

@@ -18,7 +18,8 @@ export interface ProfessionalRoute {
   modules: number[];
   labs: string[];
   competencies: string[];
-  status: "Disponible" | "Parcial" | "Brecha prioritaria";
+  status: "Disponible" | "Parcial" | "Cobertura en expansión";
+  nextRouteSlug?: ProfessionalRouteSlug;
 }
 
 const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
@@ -39,6 +40,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     ],
     competencies: ["Canvas Apps", "Model-Driven Apps", "Dataverse básico", "Power Automate", "Power Fx"],
     status: "Disponible",
+    nextRouteSlug: "consultor-funcional",
   },
   {
     slug: "consultor-funcional",
@@ -57,6 +59,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     ],
     competencies: ["Discovery", "Requerimientos", "Fit-Gap", "Seguridad funcional", "UAT", "Capacitación"],
     status: "Parcial",
+    nextRouteSlug: "dynamics-365-customer-engagement",
   },
   {
     slug: "developer",
@@ -76,6 +79,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     ],
     competencies: ["Plugins C#", "PCF", "Dataverse Web API", "Custom Connectors", "ALM", "CI/CD"],
     status: "Disponible",
+    nextRouteSlug: "solution-architect",
   },
   {
     slug: "solution-architect",
@@ -94,6 +98,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     ],
     competencies: ["Gobernanza", "Seguridad", "ALM enterprise", "Integraciones", "Arquitectura de datos", "ADRs"],
     status: "Disponible",
+    nextRouteSlug: "ai-copilot",
   },
   {
     slug: "dynamics-365-customer-engagement",
@@ -111,6 +116,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     ],
     competencies: ["Sales", "Customer Service", "Dataverse estándar", "Omnichannel", "Copilot para servicio", "Fit-Gap D365"],
     status: "Parcial",
+    nextRouteSlug: "solution-architect",
   },
   {
     slug: "finance-operations",
@@ -127,7 +133,8 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-56-cambiar-entornos-dev-test-prod",
     ],
     competencies: ["ERP vs CRM", "Dual-write conceptual", "Data Management", "Integración", "Gobernanza", "Seguridad"],
-    status: "Brecha prioritaria",
+    status: "Cobertura en expansión",
+    nextRouteSlug: "solution-architect",
   },
   {
     slug: "ai-copilot",
@@ -146,6 +153,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     ],
     competencies: ["Copilot Studio", "AI Builder", "Prompting técnico", "Revisión de diffs", "Seguridad IA", "Guardrails"],
     status: "Disponible",
+    nextRouteSlug: "developer",
   },
 ];
 
