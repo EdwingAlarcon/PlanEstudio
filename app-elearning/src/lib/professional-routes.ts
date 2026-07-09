@@ -21,6 +21,10 @@ export interface ProfessionalRoute {
   status: "Disponible" | "Parcial" | "Cobertura en expansión";
   gapNote?: string;
   nextRouteSlug?: ProfessionalRouteSlug;
+  /** Slug del lab que funciona como proyecto final evaluable de la ruta. */
+  capstoneLabSlug?: string;
+  /** moduleId del módulo que funciona como proyecto final cuando el capstone no es un lab (p. ej. el módulo 41 de arquitectura). */
+  capstoneModuleId?: number;
 }
 
 const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
@@ -38,9 +42,11 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-03-canvas-primera-app",
       "lab-04-model-driven-app",
       "lab-05-automate-aprobacion",
+      "lab-61-capstone-maker-sistema-solicitudes",
     ],
     competencies: ["Canvas Apps", "Model-Driven Apps", "Dataverse básico", "Power Automate", "Power Fx"],
     status: "Disponible",
+    capstoneLabSlug: "lab-61-capstone-maker-sistema-solicitudes",
     nextRouteSlug: "consultor-funcional",
   },
   {
@@ -57,10 +63,12 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-09-dataverse-avanzado",
       "lab-55-uat-gonolive-y-auditoria-prompts",
       "lab-57-diseno-solucion-d365-sales-con-ia",
+      "lab-62-capstone-consultor-funcional-proyecto-completo",
     ],
     competencies: ["Discovery", "Requerimientos", "Fit-Gap", "Seguridad funcional", "UAT", "Capacitación"],
     status: "Parcial",
     gapNote: "Cubre bien Power Platform genérico (requerimientos, fit-gap, seguridad, UAT), pero todavía no tiene módulos dedicados de consultoría funcional específicos de Dynamics 365 CE/F&O (procesos estándar por industria, catálogos de producto, configuración de áreas funcionales). Complementa esta ruta con Dynamics 365 Customer Engagement o Finance & Operations según el dominio del cliente.",
+    capstoneLabSlug: "lab-62-capstone-consultor-funcional-proyecto-completo",
     nextRouteSlug: "dynamics-365-customer-engagement",
   },
   {
@@ -78,9 +86,11 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-52-cli-conexion-tenant",
       "lab-53-exportar-revisar-solucion-con-ia",
       "lab-54-conectar-app-externa-dataverse",
+      "lab-63-capstone-developer-solucion-tecnica-avanzada",
     ],
     competencies: ["Plugins C#", "PCF", "Dataverse Web API", "Custom Connectors", "ALM", "CI/CD"],
     status: "Disponible",
+    capstoneLabSlug: "lab-63-capstone-developer-solucion-tecnica-avanzada",
     nextRouteSlug: "solution-architect",
   },
   {
@@ -101,6 +111,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     ],
     competencies: ["Gobernanza", "Seguridad", "ALM enterprise", "Integraciones", "Arquitectura de datos", "ADRs"],
     status: "Disponible",
+    capstoneModuleId: 41,
     nextRouteSlug: "ai-copilot",
   },
   {
@@ -123,6 +134,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     competencies: ["Sales", "Customer Service", "Dataverse estándar", "Omnichannel", "Copilot para servicio", "Fit-Gap D365"],
     status: "Parcial",
     gapNote: "Se apoya en el Módulo 20 (compartido) y en los labs 58/59 para Customer Insights y Field Service, pero aún no existen módulos dedicados a esas dos áreas ni a Omnichannel avanzado. Es una base sólida para Sales y Customer Service estándar; para Customer Insights o Field Service profundo, complementa con documentación oficial de Microsoft Learn.",
+    capstoneLabSlug: "lab-60-proyecto-integrador-servicio-postventa",
     nextRouteSlug: "solution-architect",
   },
   {
@@ -138,10 +150,12 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-19-cicd-azure-devops",
       "lab-54-conectar-app-externa-dataverse",
       "lab-56-cambiar-entornos-dev-test-prod",
+      "lab-64-capstone-fo-awareness-arquitectura-erp-crm",
     ],
     competencies: ["ERP vs CRM", "Dual-write conceptual", "Data Management", "Integración", "Gobernanza", "Seguridad"],
     status: "Cobertura en expansión",
     gapNote: "Todavía no hay módulos dedicados a Finance & Operations (procesos financieros, cadena de suministro, Data Management Framework, dual-write real). Esta ruta agrupa los fundamentos transferibles de arquitectura, integración y gobierno que aplican también a F&O, mientras se desarrollan módulos específicos del producto.",
+    capstoneLabSlug: "lab-64-capstone-fo-awareness-arquitectura-erp-crm",
     nextRouteSlug: "solution-architect",
   },
   {
@@ -158,9 +172,11 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-45-copilot-implementacion-guiada",
       "lab-51-flujo-completo-humano-ia-ci",
       "lab-55-uat-gonolive-y-auditoria-prompts",
+      "lab-65-capstone-ai-copilot-agente-gobernado",
     ],
     competencies: ["Copilot Studio", "AI Builder", "Prompting técnico", "Revisión de diffs", "Seguridad IA", "Guardrails"],
     status: "Disponible",
+    capstoneLabSlug: "lab-65-capstone-ai-copilot-agente-gobernado",
     nextRouteSlug: "developer",
   },
 ];

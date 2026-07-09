@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AlertTriangle, ArrowLeft, ArrowRight, BookOpen, CheckCircle2, FlaskConical, Target } from "lucide-react";
+import { AlertTriangle, ArrowLeft, ArrowRight, BookOpen, CheckCircle2, FlaskConical, Target, Trophy } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getAllLabs, getAllModules } from "@/lib/content";
@@ -41,6 +41,14 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
   const modules = route.modules.map((moduleId) => modulesById.get(moduleId)).filter(Boolean);
   const labs = route.labs.map((labSlug) => labsBySlug.get(labSlug)).filter(Boolean);
   const nextRoute = route.nextRouteSlug ? getProfessionalRouteBySlug(route.nextRouteSlug) : undefined;
+  const capstoneLab = route.capstoneLabSlug ? labsBySlug.get(route.capstoneLabSlug) : undefined;
+  const capstoneModule = route.capstoneModuleId ? modulesById.get(route.capstoneModuleId) : undefined;
+  const capstoneHref = capstoneLab
+    ? `/labs/${capstoneLab.slug}`
+    : capstoneModule
+    ? `/nivel/${capstoneModule.levelId}/modulo/${capstoneModule.slug}`
+    : undefined;
+  const capstoneTitle = capstoneLab?.title ?? capstoneModule?.title;
 
   return (
     <main id="main-content" className="max-w-5xl mx-auto px-4 py-8 space-y-8 animate-fade-in">
@@ -98,6 +106,26 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
           </div>
         </div>
       </section>
+
+      {capstoneHref && capstoneTitle && (
+        <section aria-labelledby="route-capstone-heading">
+          <Link
+            href={capstoneHref}
+            className="group flex items-center gap-4 rounded-xl border-2 border-amber-500/40 bg-amber-50/60 px-5 py-4 shadow-fluent-1 transition-all duration-150 hover:border-amber-500 hover:shadow-fluent-2 dark:bg-amber-500/10"
+          >
+            <Trophy className="h-6 w-6 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
+            <div className="min-w-0 flex-1">
+              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 dark:text-amber-400">
+                Proyecto final de la ruta
+              </p>
+              <h2 id="route-capstone-heading" className="truncate text-sm font-semibold text-foreground">
+                {capstoneTitle}
+              </h2>
+            </div>
+            <ArrowRight className="h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
+          </Link>
+        </section>
+      )}
 
       <section aria-labelledby="route-modules-heading">
         <div className="mb-4 flex items-center gap-2">

@@ -58,4 +58,25 @@ describe("professional routes", () => {
       }
     }
   });
+
+  it("declares a capstone (lab or module) for every route, referencing existing content", () => {
+    const moduleIds = new Set(getAllModules().map((module) => module.moduleId));
+    const labSlugs = new Set(getAllLabs().map((lab) => lab.slug));
+
+    for (const route of getAllProfessionalRoutes()) {
+      expect(
+        route.capstoneLabSlug || route.capstoneModuleId,
+        `${route.slug} should declare a capstoneLabSlug or capstoneModuleId`
+      ).toBeTruthy();
+
+      if (route.capstoneLabSlug) {
+        expect(labSlugs.has(route.capstoneLabSlug), `${route.slug} capstone lab is missing`).toBe(true);
+        expect(route.labs).toContain(route.capstoneLabSlug);
+      }
+      if (route.capstoneModuleId) {
+        expect(moduleIds.has(route.capstoneModuleId), `${route.slug} capstone module is missing`).toBe(true);
+        expect(route.modules).toContain(route.capstoneModuleId);
+      }
+    }
+  });
 });
