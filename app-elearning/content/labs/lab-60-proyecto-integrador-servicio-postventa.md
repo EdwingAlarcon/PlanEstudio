@@ -45,6 +45,23 @@ Fuera de alcance:
 - Migración masiva de datos.
 - Integraciones técnicas detalladas con ERP.
 
+## Restricciones del proyecto
+
+Diseña considerando que SIT no tiene un ambiente ideal para implementar esto de inmediato — deja
+explícito en tu diseño cómo cada restricción condiciona una decisión, no las trates como
+obstáculos a ignorar:
+
+- **Política DLP activa:** el conector de correo masivo usado para journeys no puede combinarse
+  en el mismo flujo con conectores no aprobados por TI (por ejemplo, HTTP genérico hacia servicios
+  externos no auditados).
+- **Integración con sistema legado:** el billing/ERP que informa fechas de renovación es un
+  sistema legado sin API moderna — solo exporta un archivo plano diario.
+- **Múltiples áreas de negocio con prioridades distintas:** Marketing quiere maximizar
+  renovaciones, Servicio quiere minimizar tiempo de resolución, y Legal exige trazabilidad de
+  consentimiento — el diseño debe balancear los tres, no optimizar solo uno.
+- **Ambientes Dev/Test/Prod:** el diseño debe indicar qué se prueba en Test antes de tocar
+  Prod, especialmente las reglas de exclusión de casos críticos.
+
 ## Prerrequisitos
 
 - Conocer entidades estándar de Dynamics 365 CE: `Account`, `Contact`, `Opportunity`, `Case`.

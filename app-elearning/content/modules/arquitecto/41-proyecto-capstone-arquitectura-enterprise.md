@@ -159,6 +159,18 @@ Práctica: presentar ante colegas/mentores y recibir feedback de un "CFO simulad
 **Solución implementada (análoga al proyecto capstone):** Arquitectura multi-tenant (Colombia en Brazil South, Ecuador+Perú en East US), Power Pages para solicitudes de socios, Canvas App mobile para asesores, Model-Driven + BPF para analistas, Logic Apps para integración con 2 burós de crédito, AI Builder para extracción de documentos de ingresos, Fabric Lakehouse con DirectLake para reporting consolidado multi-país, Zero Trust con PIM y Sentinel, CoE con compliance process para 3 tenants sincronizados.
 **Resultado:** Tiempo de aprobación reducido de 5 días a 4 horas para el 70% de solicitudes. 30% restante sigue en revisión humana pero con toda la información preparada automáticamente. Cumplimiento regulatorio documentado y auditado. Costo del sistema 60% menor que la solución legacy que cotizaban antes de conocer Power Platform.
 
+### Restricciones adicionales a incorporar en tu Blueprint
+
+Más allá del multi-país y el legacy AS/400 ya descritos, tu Architecture Blueprint debe declarar
+explícitamente cómo maneja:
+
+- **Políticas DLP:** al menos una regla que separe conectores de uso empresarial (Dataverse,
+  SharePoint) de conectores no aprobados (HTTP genérico, servicios de terceros no auditados).
+- **Soporte post go-live:** quién atiende incidentes en Prod en cada país, con qué SLA, y qué
+  pasa fuera de horario laboral en las 3 zonas horarias del proyecto.
+- **Reglas de aprobación de cambios:** qué cambios pueden desplegarse directo a Test y cuáles
+  requieren aprobación de un comité de cambios antes de llegar a Prod.
+
 ### ✅ Buenas Prácticas
 - Empezar el capstone con el Architecture Blueprint antes de escribir una sola línea de código — las decisiones arquitectónicas tempranas son las más baratas de cambiar
 - Versionar todos los ADRs en git; cuando una decisión cambia, el historial del ADR explica por qué — invaluable para nuevos miembros del equipo

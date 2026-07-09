@@ -35,6 +35,20 @@ descubres que hay al menos 3 tipos de descuento con reglas de aprobación distin
 El caso es deliberadamente incompleto: parte de tu trabajo es identificar qué falta preguntar
 antes de diseñar la solución.
 
+## Restricciones del proyecto
+
+Un proyecto de consultoría real casi nunca tiene condiciones ideales. Diseña tu solución
+considerando estas restricciones — indica explícitamente en tus entregables cómo cada una afecta
+tu diseño, no las ignores:
+
+- **Presupuesto limitado:** DAIM aprobó licencias Power Apps por usuario, no premium para todos
+  los vendedores. Tu diseño debe funcionar dentro de ese límite de licenciamiento.
+- **Baja adopción tecnológica:** el equipo comercial de las sedes regionales usa hoy solo correo
+  y Excel; varios vendedores tienen más de 15 años en la empresa y son reacios al cambio.
+- **Múltiples áreas de negocio con intereses distintos:** Comercial quiere aprobar rápido,
+  Finanzas quiere visibilidad y control, y Legal exige que los descuentos queden auditables.
+- **Cambio de alcance a mitad de proyecto:** ver el ejercicio de manejo de objeciones más abajo.
+
 ## Alcance del proyecto
 
 Producir los entregables funcionales de un proyecto real, sin necesidad de configurar el
@@ -128,12 +142,13 @@ presentación.
 | Criterio | Peso | Aprobado mínimo |
 |---|---:|---|
 | Discovery | 15% | Preguntas identifican ambigüedades reales, no solo confirman lo ya dicho |
-| Historias de usuario | 20% | ≥8 historias con criterios de aceptación verificables |
-| Fit-Gap | 15% | 100% de requerimientos clasificados, brechas con propuesta |
-| Trazabilidad | 15% | Cada requerimiento crítico conectado a UAT y evidencia |
+| Historias de usuario | 15% | ≥8 historias con criterios de aceptación verificables |
+| Fit-Gap | 15% | 100% de requerimientos clasificados, brechas con propuesta, considerando las restricciones del proyecto |
+| Trazabilidad | 10% | Cada requerimiento crítico conectado a UAT y evidencia |
 | UAT | 15% | Cubre happy path, excepción, permisos y datos incompletos |
 | Documentación funcional | 10% | Comprensible para un no-técnico sin preguntas de seguimiento básicas |
 | Presentación | 10% | Defendible ante preguntas del propio material (comité simulado) |
+| Manejo de objeciones y cambio de alcance | 10% | Cada respuesta propone una alternativa concreta y reconoce el costo de la decisión |
 
 Aprobación: mínimo 70/100 y ningún criterio en nivel 0. Nivel profesional/excelencia: ≥90/100.
 
@@ -157,12 +172,30 @@ Aprobación: mínimo 70/100 y ningún criterio en nivel 0. Nivel profesional/exc
 | Fit-Gap superficial ("todo es Gap" o "todo es Fit") | No se revisan las capacidades estándar de Dataverse/D365 antes de clasificar | Revisar el módulo de fit-gap y las entidades estándar antes de completar la matriz |
 | Presentación con jerga técnica | El consultor está más cómodo hablando de configuración que de negocio | Practicar la presentación con alguien no técnico; si no entiende, reescribir |
 
+## Ejercicio: manejo de objeciones y cambio de alcance
+
+Un consultor funcional real pasa tanto tiempo negociando el alcance como documentándolo. Responde
+por escrito a cada una de estas 3 situaciones — en 3-5 líneas cada una, como si fuera un correo o
+mensaje real al stakeholder, no una nota técnica interna:
+
+1. **Cambio de alcance:** después de cerrar el Fit-Gap, el gerente comercial pide agregar un
+   cuarto tipo de descuento con reglas distintas. ¿Cómo respondes? Debe quedar claro el impacto en
+   tiempo, si requiere un nuevo ciclo de UAT, y qué pasa con lo ya aprobado.
+2. **Objeción de adopción:** un vendedor senior dice "esto es más lento que mandar un correo, no
+   lo voy a usar". ¿Qué le respondes sin minimizar su objeción ni ceder el diseño solo por
+   presión?
+3. **Conflicto entre áreas:** Finanzas exige que ningún descuento se apruebe sin su revisión
+   previa, pero Comercial dice que eso duplicaría el tiempo de respuesta al cliente. ¿Cómo
+   planteas una alternativa que no sea simplemente "decida el gerente"?
+
+**Criterio de aprobación del ejercicio:** cada respuesta debe proponer una alternativa concreta
+(no solo "lo escalo" o "lo evaluamos"), y debe reconocer explícitamente el costo de la decisión
+(tiempo, riesgo o alcance) en vez de prometer que "no hay problema".
+
 ## Reto adicional
 
-Simula un cambio de alcance a mitad de proyecto: el cliente pide agregar un cuarto tipo de
-descuento con reglas distintas después de que ya definiste el Fit-Gap. Documenta cómo lo
-comunicarías (impacto en tiempo, riesgo, y si requiere un nuevo ciclo de UAT) en menos de media
-página.
+Documenta cómo cambiaría tu recomendación si el presupuesto se redujera a la mitad después de
+completar el Fit-Gap: ¿qué requerimientos degradarías primero y por qué?
 
 ## Módulos relacionados
 
