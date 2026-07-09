@@ -25,7 +25,7 @@ PlanEstudio/
 │   ├── Anexos/             ← Copilot Studio, ALM/DevOps, Arquitectura
 │   ├── Recursos/           ← Checklist, Glosario, Certificaciones, Prompts Reutilizables IA
 │   └── javascripts/
-│       └── evaluaciones-simulador.js  ← Banco de 426 preguntas (fuente actual, incluye Nivel IA)
+│       └── evaluaciones-simulador.js  ← Banco de 458 preguntas (fuente actual, incluye Nivel IA y Nivel D365)
 │
 ├── .github/workflows/ci.yml  ← CI/CD: lint → test → build → deploy + MkDocs
 ├── mkdocs.yml              ← Configuración del sitio MkDocs (referencia/legacy)

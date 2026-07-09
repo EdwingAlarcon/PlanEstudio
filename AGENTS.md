@@ -38,11 +38,11 @@ docs/                    # MkDocs legacy/reference content + shared question ban
     CERTIFICACIONES.md
     PROMPTS_REUTILIZABLES_IA.md
   javascripts/
-    evaluaciones-simulador.js   # Banco de 426 preguntas A/B/C/D en MODULE_QUESTIONS (módulos 1-55, incluye Nivel IA transversal)
+    evaluaciones-simulador.js   # Banco de 458 preguntas A/B/C/D en MODULE_QUESTIONS (módulos 1-59, incluye Nivel IA y Nivel D365 transversales)
   stylesheets/
     extra.css            # Custom CSS for MkDocs site
 app-elearning/           # Next.js 15 interactive app (THE primary surface)
-  content/               # Official app content: 55 modules + 25 labs with frontmatter (incl. Nivel IA labs 45/51/52/53/54/55/56/57 and route capstones 60-65)
+  content/               # Official app content: 59 modules + 27 labs with frontmatter across 6 levels (incl. Nivel IA labs 45/51/52/53/54/55/56/57, Nivel D365 modules 56-59, and route capstones 60-67)
   next.config.ts         # output: 'export', basePath: '/PlanEstudio'
   src/
     app/                 # App Router pages
@@ -186,6 +186,10 @@ Do NOT change these heading formats in `docs/Niveles/*.md` unless you intentiona
 ```
 NIVEL 1 (PL-900) → NIVEL 2 (PL-200) → NIVEL 3 (PL-400) → NIVEL 4 (PL-600)
 ```
+
+**Nivel IA and Nivel D365 are transversal, not part of this chain.** Neither has prerequisites,
+neither gates or is gated by the 4 levels above or by each other, and both can be studied at any
+point.
 
 ## Language
 

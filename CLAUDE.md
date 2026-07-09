@@ -9,7 +9,7 @@ A structured, progressive learning plan for Microsoft Power Platform and Dynamic
 1. **MkDocs site** — Markdown documentation served via MkDocs Material (legacy/reference site, reads from `docs/`)
 2. **Next.js app** (`app-elearning/`) — interactive e-learning app deployed to GitHub Pages at `https://edwingalarcon.github.io/PlanEstudio/` (reads modules and labs from `app-elearning/content/`, NOT from `docs/`)
 
-**Important — module content is NOT shared between the two surfaces anymore.** Since commit `8b0433c8` (2026-06-25, "migración completa — 41 módulos a archivos individuales con frontmatter"), app modules and labs live as individual files with frontmatter in `app-elearning/content/modules/<levelId>/` and `app-elearning/content/labs/`. The current app surface contains **55 modules and 25 labs**. `docs/Niveles/*.md` still exists and still feeds MkDocs, but for the Next.js app it is now dead legacy fallback code (`extractModulesFromContent` in `content.ts`) that never fires because every module already has an individual file. **When editing module content for the app, edit `app-elearning/content/modules/`, not `docs/Niveles/`.** The question bank (`docs/javascripts/evaluaciones-simulador.js`) was NOT part of this migration and remains the single source for both surfaces (see Content: Question Bank below).
+**Important — module content is NOT shared between the two surfaces anymore.** Since commit `8b0433c8` (2026-06-25, "migración completa — 41 módulos a archivos individuales con frontmatter"), app modules and labs live as individual files with frontmatter in `app-elearning/content/modules/<levelId>/` and `app-elearning/content/labs/`. The current app surface contains **59 modules and 27 labs across 6 levels** (5 certification/specialization levels + the transversal `d365` level added 2026-07-10, mirroring how `ia` was added). `docs/Niveles/*.md` still exists and still feeds MkDocs, but for the Next.js app it is now dead legacy fallback code (`extractModulesFromContent` in `content.ts`) that never fires because every module already has an individual file. **When editing module content for the app, edit `app-elearning/content/modules/`, not `docs/Niveles/`.** The question bank (`docs/javascripts/evaluaciones-simulador.js`) was NOT part of this migration and remains the single source for both surfaces (see Content: Question Bank below).
 
 ## Repository Structure
 
@@ -38,7 +38,7 @@ docs/                    # MkDocs source content — legacy/reference site only 
     CERTIFICACIONES.md
     PROMPTS_REUTILIZABLES_IA.md  # 16 reusable prompts for AI-assisted Power Platform/D365 work (Nivel IA, /recursos/prompts-ia)
   javascripts/
-    evaluaciones-simulador.js   # Banco de preguntas A/B/C/D en MODULE_QUESTIONS (módulos 1-55) — shared by BOTH surfaces, not migrated
+    evaluaciones-simulador.js   # Banco de preguntas A/B/C/D en MODULE_QUESTIONS (módulos 1-59) — shared by BOTH surfaces, not migrated
   stylesheets/
     extra.css            # Custom CSS for MkDocs site
 app-elearning/           # Next.js 15 interactive app (THE primary surface)
@@ -49,8 +49,9 @@ app-elearning/           # Next.js 15 interactive app (THE primary surface)
       avanzado/18-*.md … 30-*.md
       arquitecto/31-*.md … 41-*.md
       ia/42-*.md … 55-*.md              # transversal level (14 modules) — no prerequisites, doesn't gate/get gated by the 4 levels above
+      d365/56-*.md … 59-*.md            # transversal level (4 modules, added 2026-07-10) — Dynamics 365 CE/F&O vocabulary and architecture; same non-gating pattern as ia
     labs/
-      lab-02-*.md, lab-03-*.md, …       # one file per lab, same frontmatter pattern (17 total, including labs 45/51/52/53/54/55/56/57 for the ia level)
+      lab-02-*.md, lab-03-*.md, …       # one file per lab, same frontmatter pattern (27 total; includes labs 45/51/52/53/54/55/56/57 for ia and 61-67 for capstones/D365 depth)
   next.config.ts         # output: 'export', basePath: '/PlanEstudio'
   src/
     app/                 # App Router pages
@@ -161,7 +162,7 @@ Don't change these if editing `docs/Niveles/*.md` for MkDocs.
 
 ## Content: Question Bank
 
-`docs/javascripts/evaluaciones-simulador.js` contains `MODULE_QUESTIONS` — a JS object with keys 1-41, each an array of question objects:
+`docs/javascripts/evaluaciones-simulador.js` contains `MODULE_QUESTIONS` — a JS object with keys 1-59, each an array of question objects:
 
 ```js
 {
@@ -173,7 +174,7 @@ Don't change these if editing `docs/Niveles/*.md` for MkDocs.
 }
 ```
 
-- 426 total questions across 55 modules (8 per module in Niveles 2-4 and Nivel IA, 15 in Módulo 1)
+- 458 total questions across 59 modules (8 per module in Niveles 2-4, Nivel IA and Nivel D365, 15 in Módulo 1)
 - Module 1 has 15 questions (includes AI Builder and Power Pages topics for PL-900)
 - After editing, validate with Node.js that the object parses correctly
 - `scripts/extract-questions.mjs` parses `evaluaciones-simulador.js` via `vm.runInContext` at `prebuild` time and generates `app-elearning/src/data/questions.ts`, which `questions-parser.ts` imports statically (no runtime `eval`/`new Function`)
@@ -192,10 +193,14 @@ Don't change these if editing `docs/Niveles/*.md` for MkDocs.
 NIVEL 1 (PL-900) → NIVEL 2 (PL-200) → NIVEL 3 (PL-400) → NIVEL 4 (PL-600)
 ```
 
-**Nivel IA (Desarrollo Asistido por IA) is transversal, not part of this chain.** It has no
-prerequisites, doesn't gate or get gated by any of the 4 levels above, and can be studied
-at any point. Completing Nivel 4 (Arquitecto) does not auto-suggest starting Nivel IA —
-see `LevelCompleteBanner` in `level-progress-banner.tsx`.
+**Nivel IA (Desarrollo Asistido por IA) and Nivel D365 (Dynamics 365 Avanzado) are transversal,
+not part of this chain.** Neither has prerequisites, neither gates or is gated by the 4 levels
+above or by each other, and both can be studied at any point. Completing Nivel 4 (Arquitecto)
+does not auto-suggest starting Nivel IA or Nivel D365 — see `LevelCompleteBanner` in
+`level-progress-banner.tsx`. Nivel D365 (Módulos 56-59) covers Dynamics 365 CE/F&O vocabulary and
+architecture; its hands-on practice lives in the professional-route capstones it feeds (Lab 66
+Sales, Lab 67 Customer Insights - Data, Lab 60 Microsoft Business Applications capstone, Lab 64
+F&O Awareness), not in a dedicated level-closing project of its own.
 
 ## Language
 

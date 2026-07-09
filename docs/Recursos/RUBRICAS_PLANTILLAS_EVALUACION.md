@@ -341,6 +341,16 @@ módulos 8, 17, 30 y 41. El Capstone AI & Copilot (Lab 65, ver [Matriz de
 Competencias](MATRIZ_COMPETENCIAS.md)) sigue siendo distinto y complementario: cierra la ruta
 profesional transversal AI & Copilot, no el nivel IA completo.
 
+**Nota sobre el Nivel Dynamics 365 Avanzado:** a diferencia de los 5 niveles anteriores, este
+nivel transversal (Módulos 56-59) no tiene un único proyecto de cierre propio — sus módulos son
+de vocabulario y arquitectura (Customer Engagement como ecosistema, Customer Insights - Data,
+Field Service avanzado, Finance & Operations), y la práctica evaluable vive en los capstones de
+las rutas profesionales que ese vocabulario alimenta: Lab 66 (Sales, ruta Dynamics 365 CE), Lab 67
+(Customer Insights - Data, misma ruta), Lab 60 (capstone Microsoft Business Applications, rutas
+Dynamics 365 CE y Solution Architect) y Lab 64 (F&O Awareness, ruta Finance & Operations). Esto es
+intencional, no una brecha: el nivel D365 existe para dar profundidad conceptual transversal, y
+son las rutas profesionales las que exigen la evidencia práctica correspondiente.
+
 ## Uso recomendado por rol
 
 | Rol | Qué debe entregar |
