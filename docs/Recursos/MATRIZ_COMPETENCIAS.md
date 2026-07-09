@@ -84,18 +84,19 @@ corresponde a cada ruta.
 ## Finance & Operations Consultant / Architect Awareness
 
 *ERP conceptual, integración.* Ruta: Consultor Funcional → Finance & Operations → Solution Architect.
-Estado de la ruta: **especialización en construcción** — el Módulo 59 ya cubre vocabulario de
-procesos ERP estándar y virtual tables; sigue faltando profundidad de configuración real de
-producto (Finance, SCM, Commerce, Project Operations) para dejar de ser una ruta conceptual
+Estado de la ruta: **especialización en construcción** — el Módulo 59 ya cubre vocabulario y mapas
+paso a paso de los 5 procesos ERP estándar, y los Labs 69/70 aplican ese vocabulario a un
+escenario concreto con diseño técnico de integración; sigue faltando profundidad de configuración
+real de producto (Finance, SCM, Commerce, Project Operations) para dejar de ser una ruta conceptual
 inicial.
 
 | Competencia | Nivel | Evidencia esperada | Lab / proyecto | Criterio de aprobación |
 |---|---|---|---|---|
 | Diferenciación CE vs. F&O (cuándo aplica cada uno) | Conceptual | Tabla de decisión por escenario de negocio | Módulo 20 (compartido) | Justifica la elección para 3 escenarios sin genéricos ("depende") |
-| Vocabulario de procesos ERP estándar (O2C, P2P, R2R, I2D) | Conceptual | Cada proceso nombrado con su nombre estándar, no descrito en palabras propias | Módulo 59, Lab 64 | Nombra correctamente el proceso ERP exacto para ≥3 procesos del escenario |
-| Dual-write vs. DMF vs. virtual tables | Conceptual-Avanzado | Aplicación del criterio de decisión a un caso concreto | Módulo 59, Lab 64 | Justifica por qué las otras 2 opciones no aplican al caso |
+| Mapeo de procesos ERP estándar (O2C, P2P, R2R, I2D, Project-to-Profit) | Conceptual-Avanzado | Mapa de proceso paso a paso con actores y sistema responsable | Módulo 59, Lab 69 | Documenta los 5 procesos con pasos reales, no solo el nombre del proceso |
+| Dual-write vs. DMF vs. virtual tables (diseño técnico) | Avanzado | Matriz de ownership de datos y diagrama Mermaid de integración | Módulo 59, Lab 70 | Justifica el patrón técnico por entidad y resuelve conflictos de sincronización |
 | Data Management Framework conceptual | Conceptual | Explicación de un escenario de importación masiva con manejo de errores | Lab 64 (Capstone F&O Awareness) | Propone estrategia de reintentos y validación previa a carga |
-| Mapa de integración ERP + CRM | Conceptual-Avanzado | Diagrama de arquitectura con puntos de fallo señalados | Lab 64 (Capstone F&O Awareness) | Señala ≥2 puntos de fallo y su mitigación |
+| Mapa de integración ERP + CRM | Conceptual-Avanzado | Diagrama de arquitectura con puntos de fallo señalados | Lab 70, Lab 64 (Capstone F&O Awareness) | Señala ≥2 puntos de fallo y su mitigación |
 | Límites de Power Platform frente a ERP | Conceptual | Lista de "esto no lo resuelve Power Platform solo" con justificación | Módulo 18/34 | Identifica correctamente ≥3 límites reales (no genéricos) |
 
 ## Solution Architect

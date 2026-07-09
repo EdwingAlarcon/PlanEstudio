@@ -308,6 +308,18 @@ Criterios de aprobación:
 | Mantenibilidad | Nombres de componentes y variables consistentes con la convención del proyecto |
 | Documentación técnica | Explica decisiones no obvias (por qué síncrono/asíncrono, por qué esa integración) |
 
+## Rúbrica específica: Finance & Operations — Procesos ERP e Integración
+
+| Criterio | Aprobado profesional |
+|---|---|
+| Mapas de proceso ERP | Los 5 procesos (O2C, P2P, R2R, I2D, Project-to-Profit) tienen pasos reales, no solo el nombre |
+| Frontera CE vs. F&O | El evento disparador del cruce entre Sales/Dataverse y F&O está nombrado explícitamente |
+| Ownership de datos | Fuente de verdad y dirección de sincronización documentadas por entidad, no genéricas |
+| Patrón de integración | Dual-write, DMF o virtual table justificado por el criterio de decisión, no por familiaridad |
+| Resolución de conflictos | Regla explícita de qué sistema gana ante un conflicto bidireccional |
+| Riesgos técnicos | ≥5 riesgos con probabilidad, impacto y mitigación específica |
+| Comunicación ejecutiva | Un comité no técnico entiende la recomendación final sin jerga de F&O |
+
 ## Rúbrica específica: Arquitectura Empresarial
 
 | Criterio | Peso | Aprobado profesional |
@@ -359,8 +371,10 @@ nivel transversal (Módulos 56-59) no tiene un único proyecto de cierre propio 
 de vocabulario y arquitectura (Customer Engagement como ecosistema, Customer Insights - Data,
 Field Service avanzado, Finance & Operations), y la práctica evaluable vive en los capstones de
 las rutas profesionales que ese vocabulario alimenta: Lab 66 (Sales, ruta Dynamics 365 CE), Lab 67
-(Customer Insights - Data, misma ruta), Lab 60 (capstone Microsoft Business Applications, rutas
-Dynamics 365 CE y Solution Architect) y Lab 64 (F&O Awareness, ruta Finance & Operations). Esto es
+(Customer Insights - Data, misma ruta), Lab 68 (Customer Service case-to-resolution, misma ruta),
+Lab 60 (capstone Microsoft Business Applications, rutas Dynamics 365 CE y Solution Architect) y
+Lab 69/Lab 70/Lab 64 (mapeo de procesos, integración técnica y capstone F&O Awareness, ruta
+Finance & Operations). Esto es
 intencional, no una brecha: el nivel D365 existe para dar profundidad conceptual transversal, y
 son las rutas profesionales las que exigen la evidencia práctica correspondiente.
 
@@ -371,8 +385,8 @@ son las rutas profesionales las que exigen la evidencia práctica correspondient
 | Maker | Evidencia de app/flujo funcionando y checklist básico |
 | Consultor Funcional | FDD, historias, UAT, trazabilidad y sign-off |
 | Developer | Diseño técnico, pruebas, ALM y evidencia de build |
-| Dynamics 365 Customer Engagement | Segmento/journey, Work Order/SLA, matriz de trazabilidad y UAT del Lab 60 |
-| Finance & Operations Awareness | Mapa de integración ERP+CRM, dual-write conceptual y matriz de riesgos |
+| Dynamics 365 Customer Engagement | Segmento/journey, Work Order/SLA, ciclo case-to-resolution (Lab 68), matriz de trazabilidad y UAT del Lab 60 |
+| Finance & Operations Awareness | Mapas de proceso ERP (Lab 69), diseño técnico de integración (Lab 70), matriz de integración ERP+CRM, dual-write conceptual y matriz de riesgos (Lab 64) |
 | Solution Architect | Blueprint, riesgos, decisiones, seguridad, go-live y operación |
 | AI/Copilot | Prompts sanitizados, revisión humana y trazabilidad de decisiones |
 

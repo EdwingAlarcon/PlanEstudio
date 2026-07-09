@@ -1056,9 +1056,11 @@
 - [ ] **Conocimiento**: Nombro y explico en una frase cada uno de los procesos ERP estándar (O2C, P2P, R2R, I2D) | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Identifiqué el evento donde el proceso pasa de lead-to-cash (Sales) a order-to-cash (F&O) | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Apliqué el criterio de decisión dual-write vs. DMF vs. virtual tables a un caso concreto | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 69 completado — mapas de proceso ERP end-to-end (O2C/P2P/R2R/I2D/Project-to-Profit) | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 70 completado — arquitectura técnica de integración CE+F&O con diagrama Mermaid y ownership de datos | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: Lab 64 completado con el vocabulario de procesos ERP y la decisión de integración | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 59:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 59:** ___/6 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
