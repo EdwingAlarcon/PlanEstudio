@@ -86,3 +86,13 @@ La [Matriz de Competencias](MATRIZ_COMPETENCIAS.md) lista qué evidencia corresp
 competencia de tu ruta. Tu portafolio no necesita cubrir las 7 rutas — necesita cubrir bien la
 tuya. Si tu ruta es Developer, un portafolio con 3 proyectos técnicos sólidos vale más que uno con
 7 proyectos superficiales de todas las rutas.
+
+## Especializaciones que todavía no forman parte del portafolio
+
+Si buscas evidencia de Contact Center avanzado, Sales Operations (territorios, forecasting, Sales
+Insights) o configuración real de Finance & Operations, no la vas a encontrar en `/portafolio`
+todavía — esas áreas no tienen capstone ni lab implementado. El
+[Roadmap de Especialización Avanzada Dynamics 365](ROADMAP_ESPECIALIZACION_AVANZADA.md) explica,
+tema por tema, qué existe hoy (awareness o diseño avanzado) y qué falta para que se convierta en
+evidencia de portafolio real. Preséntalo así ante un entrevistador si te preguntan: como roadmap
+declarado, no como brecha oculta.

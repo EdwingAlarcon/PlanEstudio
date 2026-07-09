@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Briefcase, CheckCircle2, Circle } from "lucide-react";
+import { ArrowRight, Briefcase, CheckCircle2, Circle, Route } from "lucide-react";
 import { useProgressStore } from "@/lib/progress";
 import type { ProfessionalRouteSlug } from "@/lib/professional-routes";
 import { cn } from "@/lib/utils";
@@ -106,6 +106,28 @@ export function PortfolioClient({ routes }: { routes: PortfolioRouteData[] }) {
           );
         })}
       </div>
+
+      <section className="rounded-xl border border-dashed border-border bg-muted/30 p-5">
+        <div className="flex items-start gap-3">
+          <Route className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground" aria-hidden />
+          <div className="space-y-1.5">
+            <h2 className="text-sm font-semibold text-foreground">
+              ¿Buscas Contact Center, Sales Operations o F&amp;O real?
+            </h2>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              Esas especializaciones todavía no tienen capstone ni evidencia aquí — están
+              declaradas como plan, no como brecha oculta.
+            </p>
+            <Link
+              href="/recursos/roadmap-especializacion-avanzada"
+              className="inline-flex items-center gap-1 text-sm font-medium text-[#0078D4] hover:underline dark:text-[#4DB8FF]"
+            >
+              Ver Roadmap de Especialización Avanzada
+              <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

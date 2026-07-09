@@ -144,3 +144,24 @@ tarjeta destacada "Proyecto final de la ruta":
 | AI & Copilot | Lab 65 — Agente Empresarial Gobernado | IA y Agentes Gobernados |
 
 Con esto, las 7 rutas quedan con evidencia de cierre verificable — no solo lectura de módulos.
+
+---
+
+## Especializaciones futuras / en expansión
+
+Las filas "Customer Service" y "Finance & Operations Consultant / Architect Awareness" de esta
+matriz representan lo máximo que se puede demostrar **hoy**. Cuatro áreas de especialización
+avanzada todavía no tienen fila propia porque no tienen módulo, lab ni rúbrica implementados:
+
+| Especialización futura | Estado | Detalle tema por tema |
+|---|---|---|
+| Expert Customer Service / Contact Center | ⚪ En expansión (base 🔵 Avanzado ya cubierta: Módulo 20, Lab 68) | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#1-ruta-expert-customer-service--contact-center) |
+| Expert Sales Operations | ⚪ En expansión (base 🔵 Avanzado ya cubierta: Módulo 20, Lab 66) | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#2-ruta-expert-sales-operations) |
+| F&O Practitioner / Architect Track | ⚪ En expansión (mayor brecha: solo awareness/diseño, sin configuración de producto) | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#3-ruta-fo-practitioner--architect-track) |
+| Business Applications Architect Enterprise | ⚪ En expansión (base 🔵 Avanzado ya cubierta: Lab 70, Módulo 41) | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#4-ruta-business-applications-architect-enterprise) |
+
+Ninguna de estas cuatro aparece como ruta profesional en `/rutas` ni tiene evidencia listada en
+`/portafolio` — hacerlo antes de tener lab, evidencia y rúbrica reales sería prometer una
+experticia que la plataforma todavía no puede respaldar. El roadmap enlazado detalla, tema por
+tema, qué está en 🔵 Avanzado, qué en 🟡 Awareness y qué en ⚪ En expansión, y qué se necesita para
+que cada tema pase a 🟢 Cubierto.
