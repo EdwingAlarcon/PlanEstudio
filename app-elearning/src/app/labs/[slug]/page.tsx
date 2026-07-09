@@ -32,8 +32,13 @@ const LEVEL_BAR: Record<string, string> = {
   N1: "bg-[#107C10]", N2: "bg-[#0078D4]", N3: "bg-orange-500", N4: "bg-[#D13438]",
 };
 
-const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "default"> = {
-  "PL-900": "basico", "PL-200": "intermedio", "PL-400": "avanzado", "PL-600": "arquitecto",
+const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "default"> = {
+  "PL-900": "basico",
+  "PL-200": "intermedio",
+  "PL-200 (retira 31 ago 2026)": "intermedio",
+  "PL-400": "avanzado",
+  "Arquitectura Power Platform": "arquitecto",
+  "Buenas Prácticas": "ia",
 };
 
 export default async function LabDetailPage({ params }: Props) {

@@ -2,7 +2,7 @@
 moduleId: 34
 title: "Azure Integration Services Avanzado"
 level: "arquitecto"
-certification: "PL-600"
+certification: "Arquitectura Power Platform"
 estimatedMinutes: 10
 slug: "azure-integration-services-avanzado"
 ---

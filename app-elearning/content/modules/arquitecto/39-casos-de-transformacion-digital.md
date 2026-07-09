@@ -2,7 +2,7 @@
 moduleId: 39
 title: "Casos de Transformación Digital"
 level: "arquitecto"
-certification: "PL-600"
+certification: "Arquitectura Power Platform"
 estimatedMinutes: 10
 slug: "casos-de-transformacion-digital"
 ---

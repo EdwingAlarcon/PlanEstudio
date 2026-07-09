@@ -1,9 +1,9 @@
 (function () {
   function certForModule(moduleId) {
     if (moduleId <= 8) return "PL-900";
-    if (moduleId <= 17) return "PL-200";
+    if (moduleId <= 17) return "PL-200 (retira 31 ago 2026)";
     if (moduleId <= 30) return "PL-400";
-    return "PL-600";
+    return "Arquitectura Power Platform";
   }
 
   function levelForModule(moduleId) {
@@ -53,7 +53,7 @@
     "AI Builder y Azure AI integrado",
     "Liderazgo Técnico y Gestión de Proyectos",
     "Casos de Transformación Digital",
-    "Preparación PL-600",
+    "Arquitectura Power Platform — Casos de Estudio",
     "Proyecto Capstone — Arquitectura Enterprise"
   ];
 
@@ -3715,7 +3715,7 @@
   40: [
     {
       type: "single",
-      prompt: "Estás planificando tu estudio de PL-600 y debes priorizar el dominio con mayor peso relativo. ¿Cuál merece mayor foco inicial?",
+      prompt: "Estás planificando tu preparación como Solution Architect y debes priorizar el dominio de mayor impacto profesional. ¿Cuál merece mayor foco inicial?",
       options: [
       "Solution Design",
       "Analytics",
@@ -3723,11 +3723,11 @@
       "Dataverse Search tuning solamente"
       ],
       answer: [0],
-      explanation: "Solution Design concentra el mayor porcentaje del examen y atraviesa muchos casos de estudio. Analytics también importa, pero con menor peso relativo en el blueprint."
+      explanation: "Solution Design concentra buena parte del trabajo real del arquitecto y atraviesa muchos casos de estudio. Analytics también importa, pero no reemplaza el criterio de diseño integral."
     },
     {
       type: "single",
-      prompt: "Durante un case study de PL-600, ¿cuál es la mejor táctica inicial antes de responder preguntas?",
+      prompt: "Durante un caso de estudio de arquitectura, ¿cuál es la mejor táctica inicial antes de proponer una solución?",
       options: [
       "Leer requisitos, restricciones y problemas actuales para identificar trade-offs",
       "Ir directo a las preguntas sin revisar el escenario",
@@ -3739,7 +3739,7 @@
     },
     {
       type: "multi",
-      prompt: "¿Qué DOS prácticas ayudan a eliminar distractores en preguntas de PL-600?",
+      prompt: "¿Qué DOS prácticas ayudan a eliminar malas alternativas en decisiones de arquitectura?",
       options: [
       "Descartar opciones que violan un requisito explícito del escenario",
       "Comparar alternativas según seguridad, ALM, escalabilidad y gobernanza",
@@ -3747,35 +3747,35 @@
       "Asumir que la respuesta correcta evita cualquier compromiso arquitectónico"
       ],
       answer: [0, 1],
-      explanation: "Los distractores suelen fallar porque ignoran restricciones o sacrifican pilares clave del diseño. Más servicios no implica mejor respuesta, y en PL-600 casi siempre existen trade-offs reales."
+      explanation: "Las malas alternativas suelen fallar porque ignoran restricciones o sacrifican pilares clave del diseño. Más servicios no implica mejor respuesta, y en arquitectura casi siempre existen trade-offs reales."
     },
     {
       type: "single",
-      prompt: "Con 45 preguntas y case studies en 120 minutos, ¿qué estrategia de tiempo es más razonable?",
+      prompt: "En un taller de arquitectura con varios casos y tiempo limitado, ¿qué estrategia de trabajo es más razonable?",
       options: [
-      "Consumir la mitad del examen en la primera pregunta difícil",
+      "Consumir la mitad de la sesión en la primera decisión difícil",
       "Mantener un ritmo controlado, marcar dudas y reservar tiempo para revisar",
-      "Responder al azar las primeras 20 para ganar velocidad",
-      "Leer solo las opciones, no el enunciado"
+      "Resolver al azar los primeros temas para ganar velocidad",
+      "Leer solo las soluciones propuestas, no el escenario"
       ],
       answer: [1],
-      explanation: "Gestionar el tiempo implica avanzar, marcar preguntas complejas y volver con margen al final. Quedarse atascado o responder sin leer destruye precisión y reduce cobertura del examen."
+      explanation: "Gestionar el tiempo implica avanzar, marcar decisiones complejas y volver con margen al final. Quedarse atascado o decidir sin leer destruye precisión y reduce cobertura del análisis."
     },
     {
       type: "single",
-      prompt: "Un candidato con experiencia PL-400 pregunta qué cambia realmente al preparar PL-600. ¿Cuál respuesta es la más precisa?",
+      prompt: "Un developer con experiencia PL-400 pregunta qué cambia realmente al crecer hacia Solution Architect. ¿Cuál respuesta es la más precisa?",
       options: [
-      "PL-600 profundiza más en diseño integral, trade-offs y gobierno que en implementación puntual",
-      "PL-600 es solo una versión con más preguntas de sintaxis de plugins",
-      "PL-600 elimina por completo seguridad y ALM",
-      "PL-600 se responde memorizando comandos sin escenarios"
+      "Arquitectura profundiza más en diseño integral, trade-offs y gobierno que en implementación puntual",
+      "Arquitectura es solo una versión con más preguntas de sintaxis de plugins",
+      "Arquitectura elimina por completo seguridad y ALM",
+      "Arquitectura se domina memorizando comandos sin escenarios"
       ],
       answer: [0],
-      explanation: "PL-400 se centra más en implementación técnica detallada, mientras PL-600 exige visión de Solution Architect. La diferencia está en el nivel de decisión, gobierno y análisis de escenario."
+      explanation: "PL-400 se centra más en implementación técnica detallada, mientras el rol de Solution Architect exige visión integral. La diferencia está en el nivel de decisión, gobierno y análisis de escenario."
     },
     {
       type: "single",
-      prompt: "Un caso de estudio del PL-600 presenta un proyecto con datos históricos de 10 años que deben migrarse desde 3 sistemas fuente distintos, respetando relaciones padre-hijo y validando integridad después de la carga. ¿Qué área del Dominio 1 evalúa esta capacidad?",
+      prompt: "Un caso de arquitectura presenta un proyecto con datos históricos de 10 años que deben migrarse desde 3 sistemas fuente distintos, respetando relaciones padre-hijo y validando integridad después de la carga. ¿Qué capacidad profesional evalúa este escenario?",
       options: [
       "Estrategia de migración de datos",
       "Evaluación de plataforma vs customización",
@@ -3783,23 +3783,23 @@
       "Gestión de calidad"
       ],
       answer: [0],
-      explanation: "La estrategia de migración de datos es un área donde muchos candidatos fallan por subestimarla; evalúa cuándo usar cada herramienta de migración, el orden de migración de relaciones padre-hijo, y la validación de integridad tras la carga. Evaluación de plataforma vs customización pertenece a otra sub-área del Dominio 1, y las otras dos opciones corresponden a los Dominios 2 y 3 respectivamente."
+      explanation: "La estrategia de migración de datos es un área donde muchos equipos fallan por subestimarla; evalúa cuándo usar cada herramienta de migración, el orden de migración de relaciones padre-hijo, y la validación de integridad tras la carga."
     },
     {
       type: "single",
-      prompt: "Tras el go-live, el arquitecto debe firmar que la implementación es conforme al diseño antes de aprobar el despliegue a producción, revisando Solution Checker, seguridad y performance. ¿A qué dominio del examen PL-600 corresponde principalmente esta responsabilidad?",
+      prompt: "Tras el go-live, el arquitecto debe firmar que la implementación es conforme al diseño antes de aprobar el despliegue a producción, revisando Solution Checker, seguridad y performance. ¿Qué responsabilidad profesional describe mejor esta actividad?",
       options: [
-      "Dominio 3: Implementar la solución",
-      "Dominio 1: Realizar análisis de solución",
-      "Dominio 2: Diseñar una solución",
+      "Validar la implementación contra la arquitectura aprobada",
+      "Realizar únicamente análisis inicial de solución",
+      "Diseñar una solución sin participar en la entrega",
       "Ninguno, es responsabilidad exclusiva del Project Manager"
       ],
       answer: [0],
-      explanation: "El Dominio 3 (15-20% del examen) evalúa la validación de que la implementación sigue la arquitectura diseñada, incluyendo revisión de Solution Checker, seguridad y performance antes de aprobar el paso a producción. Los Dominios 1 y 2 cubren análisis y diseño respectivamente, y esta responsabilidad de validación técnica es del arquitecto, no solo del PM."
+      explanation: "El arquitecto debe validar que la implementación sigue la arquitectura diseñada, incluyendo revisión de Solution Checker, seguridad y performance antes de aprobar el paso a producción. Esta responsabilidad de validación técnica no recae solo en el PM."
     },
     {
       type: "multi",
-      prompt: "Un candidato prepara el Dominio 2 del PL-600 sobre integración con otros sistemas. ¿Qué DOS reglas mnemónicas reflejan correctamente las guías del examen para elegir entre servicios de integración?",
+      prompt: "Un arquitecto evalúa la integración con otros sistemas. ¿Qué DOS reglas mnemónicas reflejan correctamente buenas decisiones entre servicios de integración?",
       options: [
       "Power Automate para makers, latencia tolerada y costos bajos; Logic Apps para IT, SLA estricto y escenarios EDI/B2B",
       "Azure Functions para código personalizado que requiere alta performance y no puede resolverse con configuración",
@@ -3807,7 +3807,7 @@
       "El costo de Azure Functions siempre es menor que Power Automate en cualquier escenario"
       ],
       answer: [0, 1],
-      explanation: "El examen espera que el candidato distinga Power Automate (makers, SLA tolerante) de Logic Apps (IT, SLA estricto, EDI/B2B) y sepa cuándo Azure Functions es necesario para código de alta performance. Elegir un servicio por 'branding' o asumir costos sin analizar el escenario no refleja pensamiento arquitectónico."
+      explanation: "El arquitecto debe distinguir Power Automate (makers, SLA tolerante) de Logic Apps (IT, SLA estricto, EDI/B2B) y saber cuándo Azure Functions es necesario para código de alta performance. Elegir un servicio por 'branding' o asumir costos sin analizar el escenario no refleja pensamiento arquitectónico."
     }
   ],
   41: [

@@ -32,9 +32,9 @@ export const UI = {
     },
     cert: {
       basico: "PL-900",
-      intermedio: "PL-200",
+      intermedio: "PL-200 (retira 31 ago 2026)",
       avanzado: "PL-400",
-      arquitecto: "PL-600",
+      arquitecto: "Arquitectura Power Platform",
       ia: "Buenas Prácticas",
     },
     description: {

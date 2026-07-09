@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { getAllLevels } from "@/lib/content";
+import { getAllLabs, getAllLevels } from "@/lib/content";
+import { getAllQuestions } from "@/lib/questions-parser";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProgressRingClient } from "@/components/modules/progress-ring-client";
@@ -23,6 +24,9 @@ const LEVEL_CONFIG: Record<LevelId, {
 
 export default async function DashboardPage() {
   const levels = getAllLevels();
+  const moduleCount = levels.reduce((total, level) => total + level.modules.length, 0);
+  const labCount = getAllLabs().length;
+  const questionCount = getAllQuestions().length;
 
   return (
     <div className="max-w-5xl mx-auto space-y-10 animate-fade-in">
@@ -41,9 +45,9 @@ export default async function DashboardPage() {
               Plan de Estudio Progresivo
             </h1>
             <p className="text-muted-foreground text-base leading-relaxed max-w-xl">
-              De cero a Solution Architect. 51 módulos, 11 laboratorios y simuladores
-              de certificación — PL-900 · PL-200 · PL-400 · PL-600, más una capa
-              transversal de Desarrollo Asistido por IA.
+              De cero a Solution Architect. {moduleCount} módulos, {labCount} laboratorios
+              y {questionCount} preguntas de evaluación — con certificaciones vigentes,
+              competencias profesionales y una capa transversal de Desarrollo Asistido por IA.
             </p>
           </div>
         </div>
@@ -123,7 +127,7 @@ export default async function DashboardPage() {
             href="/labs"
             icon={<FlaskConical className="h-5 w-5 text-[#107C10]" />}
             title="Laboratorios"
-            description="9 guías prácticas con escenario SIT"
+            description={`${labCount} guías prácticas con escenario SIT`}
             accent="#107C10"
           />
           <QuickActionCard

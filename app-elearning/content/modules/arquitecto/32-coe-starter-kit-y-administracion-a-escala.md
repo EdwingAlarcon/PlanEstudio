@@ -2,7 +2,7 @@
 moduleId: 32
 title: "CoE Starter Kit y Administración a Escala"
 level: "arquitecto"
-certification: "PL-600"
+certification: "Arquitectura Power Platform"
 estimatedMinutes: 9
 slug: "coe-starter-kit-y-administracion-a-escala"
 ---

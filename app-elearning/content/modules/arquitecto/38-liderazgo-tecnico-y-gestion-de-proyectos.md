@@ -2,7 +2,7 @@
 moduleId: 38
 title: "Liderazgo Técnico y Gestión de Proyectos"
 level: "arquitecto"
-certification: "PL-600"
+certification: "Arquitectura Power Platform"
 estimatedMinutes: 11
 slug: "liderazgo-tecnico-y-gestion-de-proyectos"
 ---

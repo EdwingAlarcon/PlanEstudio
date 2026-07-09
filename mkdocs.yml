@@ -53,6 +53,8 @@ nav:
       - Contenido: Niveles/NIVEL_3_AVANZADO.md
   - "🔴 Nivel 4 — Arquitecto":
       - Contenido: Niveles/NIVEL_4_ARQUITECTO.md
+  - "🟣 Nivel IA — Desarrollo Asistido":
+      - Contenido: Niveles/NIVEL_5_IA.md
   - Anexos:
       - Lenguajes de Programación: Anexos/LENGUAJES_PROGRAMACION.md
       - Copilot Studio Completo: Anexos/COPILOT_STUDIO_COMPLETO.md

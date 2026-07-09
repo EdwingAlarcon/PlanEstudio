@@ -2,7 +2,7 @@
 moduleId: 41
 title: "Proyecto Capstone — Arquitectura Enterprise"
 level: "arquitecto"
-certification: "PL-600"
+certification: "Arquitectura Power Platform"
 estimatedMinutes: 13
 slug: "proyecto-capstone-arquitectura-enterprise"
 ---
@@ -220,7 +220,7 @@ Para considerarse Solution Architect Master de Power Platform, debes cumplir:
 - [ ] PL-900 obtenida (debería estar completada desde Nivel 1)
 - [ ] PL-200 obtenida (Nivel 2)
 - [ ] PL-400 obtenida (Nivel 3)
-- [ ] **PL-600 agendada y aprobada** ← meta final
+- [ ] **Portafolio de arquitectura revisado y aprobado** ← meta final
 
 ### Auto-evaluación Final
 Califica cada área del 1 al 5:
