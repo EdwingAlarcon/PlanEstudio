@@ -149,7 +149,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     outcome: "Diseñar procesos de ventas y servicio sobre Dynamics 365 CE con entidades estándar antes de personalizar.",
     level: "Especialización",
     accent: "#4F6BED",
-    modules: [1, 4, 9, 15, 20, 22, 30, 39, 53, 55],
+    modules: [1, 4, 9, 15, 20, 22, 30, 39, 53, 55, 56],
     labs: [
       "lab-22-copilot-studio",
       "lab-55-uat-gonolive-y-auditoria-prompts",
@@ -157,6 +157,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-58-customer-insights-segmento-journey",
       "lab-59-field-service-work-order-uat",
       "lab-60-proyecto-integrador-servicio-postventa",
+      "lab-66-sales-lead-to-cash",
     ],
     competencies: ["Sales", "Customer Service", "Dataverse estándar", "Omnichannel", "Copilot para servicio", "Fit-Gap D365"],
     status: "Parcial",

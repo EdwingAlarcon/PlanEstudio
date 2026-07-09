@@ -73,7 +73,7 @@ corresponde a cada ruta.
 
 | Competencia | Nivel | Evidencia esperada | Lab / proyecto | Criterio de aprobación |
 |---|---|---|---|---|
-| Procesos comerciales (lead-to-cash) | Intermedio-Avanzado | BPF configurado con campos requeridos por etapa | Módulo 15 | La oportunidad no avanza de etapa sin campos obligatorios |
+| Procesos comerciales (lead-to-cash) | Intermedio-Avanzado | BPF configurado con campos requeridos por etapa, Quote→Order con Price List Item | Módulo 20, Lab 66 | La oportunidad no avanza de etapa sin campos obligatorios; el monto de Quote y Order coincide |
 | Casos de servicio y colas | Intermedio-Avanzado | Cola configurada + regla de enrutamiento probada | Lab 59 (adaptable) | El caso llega a la cola correcta según el criterio definido |
 | Customer Insights (segmentación, journeys) | Avanzado | Segmento + journey documentado con trigger y salida | Lab 58 | Segmento filtra correctamente, sin envíos duplicados en el journey |
 | Field Service (work orders, SLAs) | Avanzado | Work order de principio a fin + SLA con escalamiento | Lab 59 | El SLA se dispara y escala cuando se incumple el tiempo |

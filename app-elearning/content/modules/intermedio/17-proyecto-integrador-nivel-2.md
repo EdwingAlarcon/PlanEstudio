@@ -52,13 +52,13 @@ Tablas a crear con prefijo `sit_`:
    ```
 
 5. **`Contacto`:** usar tabla nativa Contact, con relación a Account
-6. **`Competidor`:**
-   ```
-   sit_nombre (Texto)
-   sit_oportunidad (Lookup a Oportunidad)  
-   sit_ventaja (Texto multilínea)
-   sit_desventaja (Texto multilínea)
-   ```
+6. **Competidores:** usar la tabla nativa **Competitor** de Dataverse (no crear `sit_Competidor`
+   personalizada — es una tabla estándar disponible en cualquier entorno, con nombre, sitio web y
+   fortalezas/debilidades ya modeladas). Crea una relación N:N entre `Oportunidad` y `Competitor`
+   para registrar qué competidores participan en cada oportunidad, y agrega en `Oportunidad` una
+   columna `sit_estrategia_competitiva` (texto multilínea) para la estrategia frente a esos
+   competidores — así el dato competitivo vive en la tabla estándar, y solo lo específico del
+   proyecto (la estrategia) es personalizado.
 
 Business Rules para Oportunidad:
 
@@ -197,7 +197,7 @@ Mensaje:
 
 #### Actividad 17.6: ALM — Empaquetar y desplegar
 1. Agregar todos los componentes a la solución `SIT CRM Lite`:
-    - Tablas Dataverse (Oportunidad, Propuesta, Competidor)
+    - Tablas Dataverse (Oportunidad, Propuesta, relación N:N con Competitor estándar)
     - Canvas App
     - Model-Driven App
     - Flujos (principal + child flow)

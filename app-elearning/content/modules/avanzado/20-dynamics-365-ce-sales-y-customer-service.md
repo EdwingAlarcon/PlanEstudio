@@ -73,6 +73,32 @@ Regla: una tabla custom solo se aprueba si no existe entidad estándar razonable
 
 5. Activar el BPF y asignarlo al equipo de ventas
 
+#### Actividad 20.1b: Cotizar, convertir a Order y forecast
+1. **Crear la lista de precios y productos:**
+   ```
+   Price List: "Lista Estándar 2026"
+   Producto: "Licencia Power Platform Premium" — Unidad: "Por usuario/mes"
+   Price List Item:
+     Método de cálculo de monto: Monto fijo
+     Monto: $38.00 USD
+     Cantidad mínima: 10
+   ```
+2. **Crear la Opportunity** con el producto agregado (10 licencias × $38 = $380/mes) y una probabilidad de 60% (etapa Negociación del BPF).
+3. **Generar la Quote** desde la Opportunity: revisar que la línea de producto tome el precio de la Price List Item automáticamente (no capturarlo a mano) y agregar un descuento de línea del 10% para negociar.
+4. **Activar y enviar la Quote** al cliente (estado `Active` → `Presented`).
+5. **Convertir la Quote a Order** cuando el cliente acepta (`Won` → botón "Create Order"): verificar que las líneas de producto y el monto total pasan intactos de Quote a Order.
+6. **Frontera con ERP/F&O:** en este ejercicio, el Order queda en Dynamics 365 Sales como registro de la venta cerrada — la factura real, el cálculo de impuestos y el descuento de inventario NO se generan aquí (ver Módulo 34 para dónde vive esa responsabilidad en una arquitectura con F&O).
+7. **Forecast:** con 3-4 oportunidades de ejemplo en distintas etapas (usa las probabilidades del BPF del paso anterior), calcula a mano el forecast ponderado:
+
+   | Oportunidad | Monto | Etapa (probabilidad) | Monto ponderado |
+   |---|---:|---|---:|
+   | Renovación Contoso | $12,000 | Negociación (60%) | $7,200 |
+   | Nueva cuenta Fabrikam | $8,000 | Propuesta (30%) | $2,400 |
+   | Ampliación Litware | $20,000 | Cierre (90%) | $18,000 |
+   | **Total ponderado** | | | **$27,600** |
+
+   Configura el mismo cálculo en el módulo de Forecasting de Sales Hub (Configuración → Forecasting → Nuevo forecast, periodicidad mensual) y verifica que el sistema calcule el mismo total ponderado que la tabla manual — si no coincide, revisa que las probabilidades del BPF estén bien asignadas por etapa.
+
 #### Actividad 20.2: Email-to-Case automation
 1. D365 Customer Service → Configuración → Canales → Email
 2. Crear mailbox: `soporte@empresa.com` → sincronizar con Exchange
@@ -175,74 +201,21 @@ Regla: una tabla custom solo se aprueba si no existe entidad estándar razonable
    - datos sensibles no se copian en prompts externos,
    - cada artículo KB tiene owner y fecha de revisión.
 
-#### Actividad 20.8: Customer Insights — segmento y journey en tiempo real
+#### Actividad 20.8: Customer Insights — diseño mínimo de segmento y journey
 Escenario: el área comercial quiere contactar clientes con contrato próximo a vencer, pero solo si tienen consentimiento válido y no tienen un caso crítico abierto.
 
-1. Diseñar el perfil unificado:
+1. Identificar, sin diseñarlo aún en detalle, qué 3-4 fuentes alimentarían el perfil unificado (Sales, Customer Service, billing/ERP, registros de consentimiento) y qué aporta cada una.
+2. Enunciar en una frase la regla del segmento (ej. "renovación en 60 días, con consentimiento, sin caso crítico abierto") y el evento que dispara el journey.
 
-| Fuente | Datos usados | Motivo |
-|---|---|---|
-| Dynamics 365 Sales | Account, Contact, Opportunity | Relación comercial |
-| Customer Service | Cases, SLA status | Evitar campañas a clientes con incidentes críticos |
-| ERP/F&O o billing | Fecha de renovación, plan, saldo | Disparar journey de renovación |
-| Consent records | Propósito y canal permitido | Cumplimiento |
+El diseño completo —segmento con datos de prueba, journey etapa por etapa, métricas y validación de exclusiones— se ejercita a fondo en **Lab 58 (Customer Insights — Segmento y Journey)**: resuélvelo ahí en vez de repetirlo en prosa aquí.
 
-2. Crear segmento conceptual:
-   - Contactos con renovación en los próximos 60 días.
-   - Consentimiento válido para email.
-   - Sin caso crítico abierto.
-   - Monto anual mayor a un umbral definido por negocio.
-
-3. Diseñar journey:
-   - Trigger: cliente entra al segmento.
-   - Email 1: recordatorio personalizado con fecha de renovación.
-   - Esperar 5 días.
-   - Si hace clic: crear tarea para vendedor.
-   - Si no interactúa: enviar segundo mensaje con caso de éxito.
-   - Si abre caso crítico: salir del journey y notificar a Customer Service.
-
-4. Validar controles:
-   - propósito de consentimiento correcto,
-   - contenido aprobado por Legal/Marketing,
-   - exclusión de clientes con incidencias críticas,
-   - métricas de interacción documentadas.
-
-#### Actividad 20.9: Field Service — ciclo caso a orden de trabajo
+#### Actividad 20.9: Field Service — diseño mínimo del ciclo caso a orden de trabajo
 Escenario: un cliente reporta falla de un equipo en garantía y requiere visita técnica.
 
-1. Modelar el flujo:
+1. Identificar, sin configurarlo aún, la secuencia mínima: Case (Customer Service) → validación de Entitlement → Work Order (Field Service) → Booking → ejecución móvil → cierre.
+2. Enunciar qué dato de garantía o SLA decide si el Work Order se crea o se rechaza.
 
-| Paso | Tabla/app recomendada | Resultado |
-|---|---|---|
-| Cliente reporta falla | Customer Service Case | Solicitud registrada |
-| Agente valida garantía | Case + Entitlement | Derecho de servicio confirmado |
-| Se requiere visita | Field Service Work Order | Trabajo técnico creado |
-| Dispatcher agenda visita | Booking + Schedule Board | Técnico asignado |
-| Técnico ejecuta trabajo | Field Service Mobile | Evidencias, inspección y materiales |
-| Cierre y facturación | Work Order completed/posted + ERP | Servicio cerrado y costos reportados |
-
-2. Definir datos mínimos de Work Order:
-   - service account,
-   - customer asset,
-   - incident type,
-   - prioridad,
-   - ubicación,
-   - productos/servicios requeridos,
-   - ventana de atención.
-
-3. Definir criterios de scheduling:
-   - skill requerida,
-   - disponibilidad,
-   - distancia,
-   - SLA,
-   - inventario o herramienta necesaria.
-
-4. Definir evidencia móvil:
-   - checklist de inspección,
-   - fotos antes/después,
-   - firma del cliente,
-   - notas del técnico,
-   - materiales usados.
+El diseño completo —datos mínimos de Work Order, criterios de scheduling, evidencia móvil y 5 casos UAT— se ejercita a fondo en **Lab 59 (Field Service — Work Order y UAT)**: resuélvelo ahí en vez de repetirlo en prosa aquí.
 
 ### 💼 Caso Real de Negocio
 **Empresa:** Empresa de software con 5,000 clientes y mesa de ayuda de 30 agentes  
@@ -280,15 +253,15 @@ Escenario: un cliente reporta falla de un equipo en garantía y requiere visita 
 ### 🧪 Criterios de Validación
 - [ ] Matriz fit-gap contra entidades estándar creada antes de personalizar
 - [ ] BPF de venta consultiva con 4 etapas funciona en formulario de Oportunidad
+- [ ] Quote convertida a Order conserva el precio de la Price List Item y el descuento de línea
+- [ ] Forecast ponderado calculado a mano coincide con el forecast configurado en Sales Hub
 - [ ] Email a `soporte@empresa.com` crea caso automáticamente con mapeo correcto
 - [ ] SLA escalada al supervisor cuando el caso excede 4 horas sin primera respuesta
 - [ ] Unified Routing dirige casos de facturación a la cola correcta
 - [ ] 5 artículos KB publicados y visibles en el panel del caso
 - [ ] Outlook/Teams tienen reglas claras de adopción y trazabilidad
 - [ ] Copilot para agentes tiene controles humanos y KB gobernada
-- [ ] Segmento Customer Insights diseñado con perfil unificado, consentimiento y exclusiones
-- [ ] Journey de renovación documentado con trigger, ramas, salida por caso crítico y métricas
-- [ ] Flujo Case → Work Order → Booking → Mobile execution validado para Field Service
-- [ ] Datos mínimos de Work Order, criterios de scheduling y evidencias móviles definidos
+- [ ] Fuentes y regla mínima del segmento de Customer Insights identificadas (detalle completo en Lab 58)
+- [ ] Secuencia mínima Case→Entitlement→Work Order→Booking identificada (detalle completo en Lab 59)
 
 ---
