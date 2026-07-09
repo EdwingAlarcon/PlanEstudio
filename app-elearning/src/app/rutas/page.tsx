@@ -17,6 +17,15 @@ const STATUS_VARIANT: Record<string, "default" | "secondary" | "outline"> = {
   "Awareness avanzado — práctica en roadmap": "outline",
 };
 
+// Badge real estate is tight at narrow viewports (single-column cards from 360px).
+// The full status string carries the honest detail and stays in gapNote/docs;
+// the badge only needs a short label that won't wrap awkwardly next to the title.
+const STATUS_SHORT_LABEL: Record<string, string> = {
+  "Especialización en construcción": "En construcción",
+  "Avanzado — especializaciones en expansión": "Avanzado — en expansión",
+  "Awareness avanzado — práctica en roadmap": "Awareness avanzado",
+};
+
 export default function ProfessionalRoutesPage() {
   const routes = getAllProfessionalRoutes();
 
@@ -60,8 +69,12 @@ export default function ProfessionalRoutesPage() {
                     <p className="text-xs text-muted-foreground">{route.level}</p>
                   </div>
                 </div>
-                <Badge variant={STATUS_VARIANT[route.status] ?? "default"} className="shrink-0 text-[10px]">
-                  {route.status}
+                <Badge
+                  variant={STATUS_VARIANT[route.status] ?? "default"}
+                  className="shrink-0 whitespace-nowrap text-[10px]"
+                  title={route.status}
+                >
+                  {STATUS_SHORT_LABEL[route.status] ?? route.status}
                 </Badge>
               </div>
 

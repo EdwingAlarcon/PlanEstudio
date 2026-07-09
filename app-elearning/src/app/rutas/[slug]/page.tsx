@@ -34,6 +34,14 @@ const STATUS_VARIANT: Record<string, "default" | "secondary" | "outline"> = {
   "Awareness avanzado — práctica en roadmap": "outline",
 };
 
+// Short label for the badge; the full status string still carries the detail
+// via gapNote and the resource docs — see rutas/page.tsx for the same map.
+const STATUS_SHORT_LABEL: Record<string, string> = {
+  "Especialización en construcción": "En construcción",
+  "Avanzado — especializaciones en expansión": "Avanzado — en expansión",
+  "Awareness avanzado — práctica en roadmap": "Awareness avanzado",
+};
+
 export default async function ProfessionalRouteDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const route = getProfessionalRouteBySlug(slug);
@@ -67,7 +75,9 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
           <span className="mt-1 h-14 w-1.5 rounded-full" style={{ backgroundColor: route.accent }} aria-hidden />
           <div className="min-w-0 flex-1 space-y-3">
             <div className="flex flex-wrap items-center gap-2">
-              <Badge variant={STATUS_VARIANT[route.status] ?? "default"}>{route.status}</Badge>
+              <Badge variant={STATUS_VARIANT[route.status] ?? "default"} title={route.status}>
+                {STATUS_SHORT_LABEL[route.status] ?? route.status}
+              </Badge>
               <Badge variant="outline">{route.level}</Badge>
             </div>
             <div>
