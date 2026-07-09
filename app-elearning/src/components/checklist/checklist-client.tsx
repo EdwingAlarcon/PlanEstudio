@@ -29,7 +29,7 @@ import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 
 const LEVEL_STYLE: Record<LevelId, {
-  badge: "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia";
+  badge: "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365";
   progress: string;
   accent: string;
 }> = {
@@ -38,6 +38,7 @@ const LEVEL_STYLE: Record<LevelId, {
   avanzado: { badge: "avanzado", progress: "[&>div]:bg-orange-500", accent: "text-orange-600 dark:text-orange-400" },
   arquitecto: { badge: "arquitecto", progress: "[&>div]:bg-[#D13438]", accent: "text-[#D13438] dark:text-red-400" },
   ia: { badge: "ia", progress: "[&>div]:bg-purple-600", accent: "text-purple-600 dark:text-purple-400" },
+  d365: { badge: "d365", progress: "[&>div]:bg-teal-600", accent: "text-teal-600 dark:text-teal-400" },
 };
 
 const CATEGORY_STYLE: Record<string, string> = {

@@ -5279,6 +5279,104 @@
       answer: [0],
       explanation: "Sin importar cuán completa parezca una propuesta de arquitectura generada con apoyo de IA, la decisión final y la responsabilidad ante el cliente siguen siendo del arquitecto humano."
     }
+  ],
+  56: [
+    {
+      type: "single",
+      prompt: "¿Por qué un Contact con un caso abierto en Customer Service aparece con el mismo historial en Sales, sin ningún proceso de sincronización?",
+      options: [
+        "Porque Sales y Customer Service son aplicaciones distintas construidas sobre el mismo Dataverse, no bases de datos separadas",
+        "Porque existe un flujo de Power Automate que copia el registro cada noche entre ambas aplicaciones",
+        "Porque Customer Service exporta el registro a un archivo que Sales importa periódicamente",
+        "Porque Dataverse duplica automáticamente cada registro en dos bases separadas para redundancia"
+      ],
+      answer: [0],
+      explanation: "Account y Contact son las mismas tablas de Dataverse vistas desde cualquier aplicación (Sales, Customer Service, Field Service); no hay sincronización porque no hay duplicación de datos."
+    },
+    {
+      type: "single",
+      prompt: "Un equipo quiere personalizar 'clientes de Servicio' con una tabla separada de los Account/Contact que ya usa Sales. ¿Cuál es el riesgo principal?",
+      options: [
+        "Duplicidad de datos y pérdida de la vista unificada del cliente entre Sales y Customer Service",
+        "Ningún riesgo real, ya que cada aplicación debería tener sus propias tablas",
+        "Que el Solution Checker rechace automáticamente cualquier tabla nueva",
+        "Que Copilot deje de funcionar en Customer Service"
+      ],
+      answer: [0],
+      explanation: "Crear tablas paralelas a Account/Contact es la causa más común de duplicidad de datos y rompe la vista unificada del cliente entre aplicaciones D365 CE."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué evento típico dispara el paso de 'Servicio' a 'Campo' en el ciclo de negocio de Customer Engagement?",
+      options: [
+        "Un caso de Customer Service que requiere una visita física genera un Work Order en Field Service",
+        "La creación de una nueva Opportunity en Sales",
+        "El cierre de un journey en Customer Insights",
+        "La publicación de un nuevo Knowledge Article"
+      ],
+      answer: [0],
+      explanation: "Cuando un caso de servicio requiere presencia física, Customer Service crea un Work Order que Field Service programa, ejecuta y cierra con evidencia — ese es el puente entre Servicio y Campo."
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué el ALM (pipelines, Solution Checker, Connection References) de una solución Dynamics 365 CE es el mismo que el de cualquier solución de Power Platform?",
+      options: [
+        "Porque Sales, Customer Service y Field Service son aplicaciones sobre Dataverse, que usa el mismo mecanismo de soluciones que el resto de Power Platform",
+        "Porque Microsoft ofrece un pipeline de CI/CD exclusivo y distinto para D365 CE",
+        "Porque D365 CE no soporta ALM y debe desplegarse siempre manualmente",
+        "Porque las soluciones de D365 CE no pueden exportarse como managed"
+      ],
+      answer: [0],
+      explanation: "No existe un ALM 'distinto' para D365 CE: al ser aplicaciones sobre Dataverse, comparten el mismo mecanismo de soluciones, Solution Checker y Connection References que cualquier solución de Power Platform."
+    },
+    {
+      type: "single",
+      prompt: "Una organización configuró modelos de seguridad incompatibles para Sales (Business Units por región) y Customer Service (equipos por producto) en proyectos separados. ¿Cuál fue el origen del problema?",
+      options: [
+        "Tratar Sales y Customer Service como proyectos independientes en vez de diseñar un modelo de seguridad único desde el inicio",
+        "Que Customer Service no admite Business Units",
+        "Que Sales no puede compartir roles de seguridad con otras aplicaciones",
+        "Un error de licenciamiento que impidió unificar los modelos"
+      ],
+      answer: [0],
+      explanation: "Sales y Customer Service comparten Dataverse desde el día uno; diseñarlos como proyectos independientes, sin un modelo de seguridad conjunto, produce modelos incompatibles que luego cuestan caro de unificar."
+    },
+    {
+      type: "multi",
+      prompt: "¿Cuáles de las siguientes son capacidades de Copilot que aplican de forma transversal a varias aplicaciones D365 CE (no exclusivas de una sola)? (Selecciona 2)",
+      options: [
+        "Resumen de casos o registros",
+        "Redacción asistida de emails o respuestas",
+        "Creación de tablas personalizadas sin revisión humana",
+        "Eliminación automática de roles de seguridad"
+      ],
+      answer: [0, 1],
+      explanation: "Resumir registros y redactar comunicaciones son capacidades de Copilot disponibles de forma transversal en Sales, Customer Service y Field Service, porque leen el mismo Dataverse con el mismo modelo de gobierno."
+    },
+    {
+      type: "single",
+      prompt: "En el ciclo de negocio de marketing a fidelización, ¿qué alimenta típicamente de vuelta a Customer Insights - Data para detectar riesgo de abandono o proponer una renovación?",
+      options: [
+        "El historial de casos de servicio y visitas de campo del cliente",
+        "Únicamente el monto de la última factura",
+        "El número de licencias de Power Apps asignadas al cliente",
+        "La cantidad de Canvas Apps publicadas en el entorno"
+      ],
+      answer: [0],
+      explanation: "El historial de casos y visitas de campo retroalimenta el perfil unificado del cliente en Customer Insights - Data (Customer 360), que puede activar un journey de renovación o detectar riesgo de abandono."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué rol suele encargarse específicamente de diseñar la arquitectura común que conecta Sales, Customer Service, Customer Insights y Field Service en un mismo proyecto?",
+      options: [
+        "Solution Architect",
+        "Únicamente el Consultor Funcional de Sales",
+        "Cualquier usuario final con acceso de lectura",
+        "Solo el proveedor de licenciamiento"
+      ],
+      answer: [0],
+      explanation: "El Solution Architect es quien diseña la arquitectura común (seguridad, ALM, integración) que conecta las distintas aplicaciones D365 CE dentro de un mismo proyecto Customer Engagement."
+    }
   ]
 };
 

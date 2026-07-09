@@ -131,12 +131,12 @@ describe("validateLabFrontmatter — casos inválidos", () => {
     expect(() => getAllLabs()).toThrow(/formato lab-NN/i);
   });
 
-  it("rechaza un level fuera de N1-N5", async () => {
+  it("rechaza un level fuera de N1-N6", async () => {
     labFiles = ["lab-02-bad-level.md"];
     labFixtures = { "lab-02-bad-level.md": LAB_BAD_LEVEL };
     const { getAllLabs } = await import("../content");
 
-    expect(() => getAllLabs()).toThrow(/N1, N2, N3, N4 o N5/i);
+    expect(() => getAllLabs()).toThrow(/N1, N2, N3, N4, N5 o N6/i);
   });
 
   it("rechaza una duration que no contiene ningún número", async () => {

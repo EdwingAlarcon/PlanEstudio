@@ -64,6 +64,7 @@ const LEVEL_FILES: Record<LevelId, string> = {
   avanzado: "Niveles/NIVEL_3_AVANZADO.md",
   arquitecto: "Niveles/NIVEL_4_ARQUITECTO.md",
   ia: "Niveles/NIVEL_5_IA.md",
+  d365: "Niveles/NIVEL_6_D365.md",
 };
 
 const RESOURCE_FILES: Record<string, string> = {
@@ -104,6 +105,11 @@ const LEVEL_META: Record<LevelId, { title: string; description: string; certific
     title: "Desarrollo Asistido por IA",
     description: "Copilot, GitHub Copilot, Claude Code y Codex aplicados de forma segura y auditable al desarrollo en Power Platform y D365",
     certification: "Buenas Prácticas",
+  },
+  d365: {
+    title: "Dynamics 365 Avanzado",
+    description: "Profundidad funcional en Sales, Customer Service, Customer Insights y Field Service, con arquitectura Customer Engagement end-to-end e integración con Finance & Operations",
+    certification: "Especialista Dynamics 365 CE",
   },
 };
 
@@ -193,8 +199,8 @@ function validateLabFrontmatter(data: Record<string, unknown>, filePath: string)
 
   const title = requireString(data, "title", filePath);
   const level = requireString(data, "level", filePath);
-  if (!["N1", "N2", "N3", "N4", "N5"].includes(level)) {
-    failContent(filePath, `frontmatter 'level' debe ser N1, N2, N3, N4 o N5, recibido '${level}'`);
+  if (!["N1", "N2", "N3", "N4", "N5", "N6"].includes(level)) {
+    failContent(filePath, `frontmatter 'level' debe ser N1, N2, N3, N4, N5 o N6, recibido '${level}'`);
   }
 
   const duration = parseDuration(data["duration"]);

@@ -1013,6 +1013,32 @@
 ---
 ---
 
+## 🔷 NIVEL 6: DYNAMICS 365 AVANZADO
+
+> Nivel transversal — no es prerequisito de los niveles PL-900 → PL-600 ni del nivel IA, ni depende de ellos.
+
+### Módulo 56: Introducción a Dynamics 365 Avanzado
+
+- [ ] **Conocimiento**: Explico por qué Sales y Customer Service comparten Account/Contact sin sincronización | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Dibujé el mapa de las 4 aplicaciones sobre Dataverse sin flechas de sincronización entre ellas | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Identifiqué los 4 eventos que conectan marketing→venta→servicio→campo→fidelización en un caso propio | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico por qué el ALM de una solución D365 CE es el mismo ALM de cualquier solución Power Platform | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 56:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### 🏆 Hitos de Nivel Dynamics 365 Avanzado
+
+- [ ] Módulo 56 completado con 80%+ de checkboxes marcados | Fecha: ___
+- [ ] Autoevaluación promedio ≥ 4.0/5 | Promedio: ___/5
+- [ ] Certificado del Nivel Dynamics 365 Avanzado generado | Fecha: ___
+
+**Fecha de inicio Nivel D365:** ___ | **Fecha de completación:** ___
+
+---
+---
+
 ## 📊 Resumen Total de Progreso
 
 | Nivel | Módulos | Checkboxes est. | Completados | % | Promedio Dominio | Fecha Fin |
@@ -1022,7 +1048,8 @@
 | 🟠 Nivel 3 - Avanzado | 13 | 129 | ___ | ___% | ___/5 | ___ |
 | 🔴 Nivel 4 - Arquitecto | 11 | 105 | ___ | ___% | ___/5 | ___ |
 | 🟣 Nivel IA - Desarrollo Asistido | 14 | 63 | ___ | ___% | ___/5 | ___ |
-| **TOTAL** | **55** | **530** | ___ | ___% | ___/5 | ___ |
+| 🔷 Nivel D365 - Dynamics 365 Avanzado | 1 | 4 | ___ | ___% | ___/5 | ___ |
+| **TOTAL** | **56** | **534** | ___ | ___% | ___/5 | ___ |
 
 ### Resumen por Módulo
 
@@ -1083,6 +1110,7 @@
 | 53 | Dataverse Web API, D365 y Autenticación | ___/5 | ___% | ___/5 |
 | 54 | ALM de Soluciones con Apoyo de IA | ___/5 | ___% | ___/5 |
 | 55 | Análisis, Arquitectura y Consultoría Funcional D365 | ___/6 | ___% | ___/5 |
+| 56 | Introducción a Dynamics 365 Avanzado | ___/4 | ___% | ___/5 |
 
 ### Timeline Visual de Progreso
 

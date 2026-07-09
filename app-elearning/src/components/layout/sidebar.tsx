@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 const LEVEL_CONFIG: Record<LevelId, {
   dot: string;
   label: string;
-  badgeVariant: "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia";
+  badgeVariant: "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365";
   progressColor: string;
 }> = {
   basico:     { dot: "bg-[#107C10]", label: "text-[#107C10] dark:text-green-400",    badgeVariant: "basico",     progressColor: "[&>div]:bg-[#107C10]" },
@@ -24,6 +24,7 @@ const LEVEL_CONFIG: Record<LevelId, {
   avanzado:   { dot: "bg-orange-500", label: "text-orange-600 dark:text-orange-400", badgeVariant: "avanzado",   progressColor: "[&>div]:bg-orange-500" },
   arquitecto: { dot: "bg-[#D13438]", label: "text-[#D13438] dark:text-red-400",      badgeVariant: "arquitecto", progressColor: "[&>div]:bg-[#D13438]"  },
   ia:         { dot: "bg-purple-600", label: "text-purple-600 dark:text-purple-400", badgeVariant: "ia",         progressColor: "[&>div]:bg-purple-600" },
+  d365:       { dot: "bg-teal-600",   label: "text-teal-600 dark:text-teal-400",     badgeVariant: "d365",       progressColor: "[&>div]:bg-teal-600"  },
 };
 
 const RESOURCE_LINKS = [

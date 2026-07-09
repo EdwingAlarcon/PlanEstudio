@@ -18,6 +18,7 @@ const LEVEL_COLORS: Record<LevelId, string> = {
   avanzado:   "from-orange-50 to-amber-50    border-orange-200 dark:from-orange-950 dark:to-amber-950    dark:border-orange-800",
   arquitecto: "from-red-50    to-rose-50     border-red-200    dark:from-red-950    dark:to-rose-950     dark:border-red-800",
   ia:         "from-purple-50 to-violet-50   border-purple-200 dark:from-purple-950 dark:to-violet-950   dark:border-purple-800",
+  d365:       "from-teal-50   to-cyan-50     border-teal-200   dark:from-teal-950   dark:to-cyan-950     dark:border-teal-800",
 };
 
 const TROPHY_COLORS: Record<LevelId, string> = {
@@ -26,6 +27,7 @@ const TROPHY_COLORS: Record<LevelId, string> = {
   avanzado:   "text-orange-600 dark:text-orange-400",
   arquitecto: "text-red-600    dark:text-red-400",
   ia:         "text-purple-600 dark:text-purple-400",
+  d365:       "text-teal-600   dark:text-teal-400",
 };
 
 export function LevelProgressBannerClient({ levelId }: { levelId: LevelId }) {
@@ -53,9 +55,9 @@ export function LevelProgressBannerClient({ levelId }: { levelId: LevelId }) {
 function LevelCompleteBanner({ levelId, total }: { levelId: LevelId; total: number }) {
   const currentIdx = LEVEL_ORDER.indexOf(levelId);
   const rawNextLevelId = currentIdx < LEVEL_ORDER.length - 1 ? LEVEL_ORDER[currentIdx + 1] : null;
-  // El nivel "ia" es transversal: no se sugiere como "siguiente nivel" tras Arquitecto,
-  // así que se excluye del cómputo de nextLevelId/isFinal.
-  const nextLevelId = rawNextLevelId === "ia" ? null : rawNextLevelId;
+  // Los niveles "ia" y "d365" son transversales: no se sugieren como "siguiente nivel"
+  // tras completar otro nivel, así que se excluyen del cómputo de nextLevelId/isFinal.
+  const nextLevelId = rawNextLevelId === "ia" || rawNextLevelId === "d365" ? null : rawNextLevelId;
   const isFinal = nextLevelId === null;
 
   const router = useRouter();
@@ -96,6 +98,8 @@ function LevelCompleteBanner({ levelId, total }: { levelId: LevelId; total: numb
           <h2 className="font-bold text-lg leading-tight">
             {levelId === "ia"
               ? "¡Nivel de Desarrollo Asistido por IA Completado!"
+              : levelId === "d365"
+              ? "¡Nivel Dynamics 365 Avanzado Completado!"
               : isFinal
               ? "¡Plan de Estudio Completado!"
               : `¡${UI.levels.badge[levelId]} Completado!`}
@@ -111,6 +115,8 @@ function LevelCompleteBanner({ levelId, total }: { levelId: LevelId; total: numb
       <p className="text-sm leading-relaxed">
         {levelId === "ia"
           ? "Has completado el nivel de desarrollo asistido por IA. Sigue aplicando el flujo humano diseña → IA implementa → CI valida → humano aprueba en tus proyectos reales de Power Platform y Dynamics 365."
+          : levelId === "d365"
+          ? "Has profundizado en Dynamics 365 Sales, Customer Service, Customer Insights y Field Service más allá de lo conceptual. Sigue aplicando ese criterio en proyectos reales de Customer Engagement, con Power Platform y Finance & Operations como parte del mismo ecosistema."
           : isFinal
           ? "Has completado los cuatro niveles base del plan. El objetivo ahora es demostrar criterio de Solution Architect: gobierno, seguridad, ALM, integración, viabilidad y comunicación ejecutiva."
           : `Has dominado los contenidos de este nivel. El siguiente paso es el ${UI.levels.badge[nextLevelId!]}, donde profundizarás hacia ${UI.levels.cert[nextLevelId!]}: ${UI.levels.description[nextLevelId!]}.`
@@ -120,7 +126,7 @@ function LevelCompleteBanner({ levelId, total }: { levelId: LevelId; total: numb
       {/* Action */}
       <div className="flex flex-wrap items-center gap-3">
         <Badge variant={levelId} className="text-xs">
-          {levelId === "ia" || levelId === "arquitecto"
+          {levelId === "ia" || levelId === "arquitecto" || levelId === "d365"
             ? UI.levels.cert[levelId]
             : `${UI.levels.cert[levelId]} — Listo para repaso de examen`}
         </Badge>

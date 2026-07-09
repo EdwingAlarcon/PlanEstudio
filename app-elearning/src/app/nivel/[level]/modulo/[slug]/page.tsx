@@ -36,8 +36,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-const LEVEL_BADGE: Record<LevelId, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia"> = {
-  basico: "basico", intermedio: "intermedio", avanzado: "avanzado", arquitecto: "arquitecto", ia: "ia",
+const LEVEL_BADGE: Record<LevelId, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365"> = {
+  basico: "basico", intermedio: "intermedio", avanzado: "avanzado", arquitecto: "arquitecto", ia: "ia", d365: "d365",
 };
 
 export default async function ModulePage({ params }: PageProps) {

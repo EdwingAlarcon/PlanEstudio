@@ -30,12 +30,14 @@ export const UI = {
     avanzado: "Avanzado",
     arquitecto: "Arquitecto",
     ia: "Desarrollo Asistido por IA",
+    d365: "Dynamics 365 Avanzado",
     badge: {
       basico: "🟢 Nivel 1",
       intermedio: "🔵 Nivel 2",
       avanzado: "🟠 Nivel 3",
       arquitecto: "🔴 Nivel 4",
       ia: "🟣 IA",
+      d365: "🔷 D365",
     },
     cert: {
       basico: "PL-900",
@@ -43,6 +45,7 @@ export const UI = {
       avanzado: "PL-400",
       arquitecto: "Arquitectura Power Platform",
       ia: "Buenas Prácticas",
+      d365: "Especialista Dynamics 365 CE",
     },
     navCert: {
       basico: "PL-900",
@@ -50,6 +53,7 @@ export const UI = {
       avanzado: "PL-400",
       arquitecto: "Arquitectura",
       ia: "IA",
+      d365: "D365",
     },
     description: {
       basico: "Fundamentos de Power Platform y Dataverse",
@@ -57,6 +61,7 @@ export const UI = {
       avanzado: "Arquitectura, ALM, D365, Copilot Studio y extensibilidad",
       arquitecto: "Gobernanza enterprise, multi-tenant, Azure integrations y liderazgo",
       ia: "Copilot, GitHub Copilot, Claude Code y Codex aplicados de forma segura y auditable al desarrollo, conexión al tenant, Dataverse, ALM y consultoría funcional en Power Platform y D365",
+      d365: "Profundidad funcional en Dynamics 365 Sales, Customer Service, Customer Insights y Field Service, con arquitectura Customer Engagement end-to-end e integración con Finance & Operations",
     },
     modules: {
       basico: 8,
@@ -64,6 +69,7 @@ export const UI = {
       avanzado: 13,
       arquitecto: 11,
       ia: 14,
+      d365: 1,
     },
   },
 
@@ -136,9 +142,9 @@ export const UI = {
 } as const;
 
 // Tipos de nivel para narrowing
-export type LevelId = "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia";
+export type LevelId = "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365";
 
-export const LEVEL_ORDER: LevelId[] = ["basico", "intermedio", "avanzado", "arquitecto", "ia"];
+export const LEVEL_ORDER: LevelId[] = ["basico", "intermedio", "avanzado", "arquitecto", "ia", "d365"];
 
 export const LEVEL_MODULE_RANGE: Record<LevelId, [number, number]> = {
   basico: [1, 8],
@@ -146,4 +152,5 @@ export const LEVEL_MODULE_RANGE: Record<LevelId, [number, number]> = {
   avanzado: [18, 30],
   arquitecto: [31, 41],
   ia: [42, 55],
+  d365: [56, 56],
 };

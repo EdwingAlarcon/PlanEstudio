@@ -16,6 +16,7 @@ const badgeVariants = cva(
         avanzado:   "border-transparent bg-orange-500 text-white",
         arquitecto: "border-transparent bg-[#D13438] text-white",
         ia:         "border-transparent bg-purple-600 text-white",
+        d365:       "border-transparent bg-teal-600 text-white",
       },
     },
     defaultVariants: {

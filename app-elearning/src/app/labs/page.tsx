@@ -16,15 +16,17 @@ const LEVEL_CONFIG: Record<string, { label: string; bar: string; accent: string 
   N3: { label: "Nivel 3 — Avanzado",    bar: "bg-orange-500", accent: "#EA580C" },
   N4: { label: "Nivel 4 — Arquitecto",  bar: "bg-[#D13438]",  accent: "#D13438" },
   N5: { label: "Nivel IA — Desarrollo Asistido", bar: "bg-purple-600", accent: "#9333EA" },
+  N6: { label: "Nivel D365 — Dynamics 365 Avanzado", bar: "bg-teal-600", accent: "#0D9488" },
 };
 
-const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "default"> = {
+const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365" | "default"> = {
   "PL-900": "basico",
   "PL-200": "intermedio",
   "PL-200 (retira 31 ago 2026)": "intermedio",
   "PL-400": "avanzado",
   "Arquitectura Power Platform": "arquitecto",
   "Buenas Prácticas": "ia",
+  "Especialista Dynamics 365 CE": "d365",
 };
 
 const FEATURED_ARTIFACTS = [
@@ -65,7 +67,7 @@ export default function LabsPage() {
     return acc;
   }, {});
 
-  const levelOrder = ["N1", "N2", "N3", "N4", "N5"];
+  const levelOrder = ["N1", "N2", "N3", "N4", "N5", "N6"];
 
   return (
     <main id="main-content" className="max-w-4xl mx-auto px-4 py-8 animate-fade-in">
