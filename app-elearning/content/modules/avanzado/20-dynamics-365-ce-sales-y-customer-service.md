@@ -3,17 +3,25 @@ moduleId: 20
 title: "Dynamics 365 CE — Sales y Customer Service"
 level: "avanzado"
 certification: "PL-400"
-estimatedMinutes: 8
+estimatedMinutes: 12
 slug: "dynamics-365-ce-sales-y-customer-service"
 ---
 ### 🎯 Objetivo
-Configurar y personalizar Dynamics 365 Sales y Customer Service: sales process con BPF personalizado, email-to-case automation, SLA con KPIs, entitlement management, y enrutamiento inteligente de casos con Unified Routing.
+Configurar y personalizar Dynamics 365 Sales y Customer Service entendiendo primero las capacidades estándar: ciclo lead-to-cash, cuentas/contactos, productos, listas de precios, quotes, orders, case management, Customer Service workspace, knowledge, SLAs, entitlements, routing, Copilot y colaboración con Outlook/Teams.
 
 ### 📖 Conceptos Clave
+- **Modelo estándar antes de personalizar:** Dynamics 365 Sales y Customer Service ya incluyen tablas, formularios, vistas, procesos y experiencias de usuario probadas. Antes de crear una tabla custom, el consultor debe mapear el proceso contra entidades estándar: `Lead`, `Opportunity`, `Account`, `Contact`, `Quote`, `Order`, `Invoice`, `Case`, `Queue`, `Knowledge Article` y `SLA KPI Instance`. Personalizar sin revisar lo estándar aumenta costo, deuda técnica y fricción en actualizaciones.
+- **Lead-to-cash en Sales:** proceso comercial completo desde captura de lead hasta orden/facturación. Flujo típico: `Lead` calificado → `Opportunity` con stakeholder, necesidad y probabilidad → productos y price list → `Quote` enviada → `Order` cuando el cliente acepta. En proyectos reales, el diseño debe decidir qué vive en Sales y qué se delega a ERP/F&O para pricing avanzado, inventario, crédito, impuestos y facturación.
+- **Cuentas y contactos:** `Account` representa organizaciones o clientes empresa; `Contact` representa personas. Un error frecuente es usar una tabla custom de "cliente" y perder integración nativa con actividades, oportunidades, casos, marketing y Customer Insights. Si el cliente pide atributos adicionales, se agregan columnas a las entidades estándar salvo que exista una razón de dominio muy fuerte para separar.
+- **Catálogo de productos, price lists y unidades:** Sales usa productos, unidades, listas de precios y price list items para cotizar con consistencia. Si el pricing depende de reglas complejas de ERP, descuentos por contrato, impuestos o disponibilidad de inventario, Dynamics 365 Sales debe integrarse con F&O o el sistema ERP en vez de duplicar lógica financiera en Dataverse.
 - **Sales Accelerator:** herramienta dentro de D365 Sales que crea y ejecuta secuencias de actividades predefinidas para los vendedores — llamadas, emails, tareas — con intervalos y condiciones configurables. Ejemplo: una secuencia "Seguimiento Propuesta" que 1 día después del envío de propuesta crea una tarea de llamada, y si no hay respuesta en 3 días envía un email automático de seguimiento. Se configura en Sales Hub → Sales Accelerator → Sequences.
 - **Predictive Lead/Opportunity Scoring:** funcionalidad de IA de D365 Sales que analiza el historial de oportunidades ganadas/perdidas para entrenar un modelo ML y asignar un score del 1 al 99 a cada Lead y Oportunidad activa. Los vendedores ven qué oportunidades tienen mayor probabilidad de cerrar y pueden priorizar su trabajo. Requiere licencia D365 Sales Premium y mínimo 40 oportunidades históricas para entrenar el modelo.
 - **Pipeline Intelligence:** análisis de tendencias del pipeline de ventas con IA integrada en D365 Sales. Detecta oportunidades en riesgo (sin actividad reciente), predice el cierre de oportunidades con fechas ajustadas automáticamente, y muestra tendencias del pipeline (crecimiento, pérdidas por etapa) en el módulo de pronóstico. Se activa en Configuración → Sales Insights.
+- **Forecasting y gestión de pipeline:** Sales permite forecast por periodos, territorios, equipos, productos y jerarquías comerciales. El objetivo no es solo reportar ventas, sino detectar gaps de pipeline, oportunidades estancadas y forecast comprometido vs realista. En una implementación madura, forecast debe alinearse con seguridad por territorio y con gobierno de datos.
+- **Dynamics 365 App for Outlook y Teams:** Outlook permite trackear emails, citas y contactos contra registros de Dynamics 365; Teams facilita colaboración contextual sobre cuentas, oportunidades y casos. No deben usarse como "extras bonitos": son parte de la adopción, porque reducen doble captura y llevan CRM al flujo de trabajo diario.
+- **Copilot aplicado a ventas:** Copilot ayuda a resumir registros, preparar comunicaciones, priorizar oportunidades y acelerar seguimiento. Debe implementarse con gobierno de datos: permisos correctos, calidad de actividades, privacidad y entrenamiento de usuarios para no delegar decisiones comerciales críticas sin revisión humana.
 - **Case Management:** módulo central de D365 Customer Service para gestionar incidencias de clientes desde apertura hasta resolución. Cada caso tiene un número único, cliente, descripción, prioridad, estado, SLA asociado, actividades (emails, llamadas, tareas), y puede estar relacionado con un producto, contrato, o entitlement. El ciclo de vida del caso sigue un BPF configurable.
+- **Customer Service workspace:** experiencia moderna para agentes que permite manejar múltiples sesiones, consultar información relacionada, usar conocimiento y colaborar sin perder contexto. En implementaciones nuevas debe evaluarse antes de diseñar una app custom para agentes.
 - **SLA (Service Level Agreement):** configuración en D365 Customer Service que define los tiempos máximos de respuesta y resolución para los casos. Los KPIs del SLA incluyen Primera Respuesta (tiempo hasta el primer email/llamada) y Resolución (tiempo hasta el cierre). Cuando se acerca la advertencia o se alcanza el fallo, el SLA dispara acciones automáticas: enviar email, actualizar prioridad, crear tarea de escalamiento. Los tiempos se calculan en horario de atención configurado en el Calendario de Servicio.
 - **Entitlement:** registro en D365 Customer Service que define los derechos de soporte de un cliente: número de casos permitidos, horas de soporte, canales disponibles (teléfono, email, chat), y período de vigencia. Ejemplo: un cliente con contrato Premium tiene 50 casos por año via cualquier canal; un cliente estándar tiene soporte solo por email. El sistema descuenta automáticamente del entitlement al crear casos.
 - **Queues:** colas de trabajo en D365 Customer Service donde se acumulan los casos, emails y tareas pendientes de atención. Los agentes trabajan desde sus colas asignadas. Pueden ser públicas (cualquier agente del equipo ve los ítems) o privadas. Los casos se enrutan a colas por reglas manuales o por Unified Routing automáticamente.
@@ -21,9 +29,22 @@ Configurar y personalizar Dynamics 365 Sales y Customer Service: sales process c
 - **Unified Routing:** motor de enrutamiento inteligente de D365 Customer Service que soporta skills-based routing (asignar al agente con las habilidades requeridas), capacity-based routing (respetar la carga máxima por agente), y ML-based assignment (aprender patrones de asignación del historial). Requiere configurar Workstreams, Queues con miembros, Skills y Skill levels por agente.
 - **Customer Service Hub:** la aplicación Model-Driven de D365 Customer Service diseñada específicamente para agentes de soporte. Incluye timeline de actividades, panel de KB, timer de SLA visible, workspace de agente, y vista de cola. Es la interfaz unificada que reemplaza a la interfaz clásica de Dynamics.
 - **Knowledge Base:** repositorio de artículos de soporte dentro de D365 Customer Service. Los artículos tienen ciclo de vida (Draft → In Review → Published) con aprobación opcional. Se vinculan a casos para trackear qué artículos resolvieron qué problemas. El agente puede buscar y enviar artículos directamente desde el formulario del caso. Copilot Studio puede usar la KB como Knowledge Source.
-- **Omnichannel for Customer Service:** extensión de D365 Customer Service que agrega soporte para canales de comunicación en tiempo real: chat web, WhatsApp Business, SMS, Facebook Messenger, Apple Messages for Business, y Microsoft Teams. Los agentes atienden múltiples conversaciones simultáneas desde un workspace unificado. Requiere licencia adicional de Omnichannel.
+- **Canales digitales y voz:** Customer Service puede integrarse con experiencias de conversación, voz y mensajería digital según licenciamiento y oferta vigente. En proyectos nuevos conviene validar la experiencia recomendada por Microsoft para el tenant, porque algunos nombres históricos como "Omnichannel for Customer Service" siguen apareciendo en clientes existentes mientras Microsoft evoluciona hacia experiencias de workspace y ofertas digitales más modernas.
+- **Copilot para agentes de servicio:** Copilot puede resumir conversaciones, sugerir respuestas, recuperar conocimiento y acelerar resolución. La calidad depende de datos, artículos KB, permisos y proceso; no reemplaza un modelo claro de escalamiento ni una base de conocimiento gobernada.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
+
+#### Actividad 20.0: Mapeo estándar antes de personalizar
+Antes de configurar, toma un proceso real o simulado de ventas y servicio y crea una matriz:
+
+| Paso de negocio | Entidad estándar candidata | ¿Fit, gap o custom? | Decisión |
+|---|---|---|---|
+| Prospecto solicita información | Lead | Fit | Usar Lead estándar |
+| Cliente acepta propuesta | Quote / Order | Fit parcial | Quote en Sales, Order validada contra ERP |
+| Solicitud de soporte premium | Case + Entitlement + SLA | Fit | Usar Customer Service |
+| Descuento requiere aprobación financiera | Opportunity + Power Automate / ERP | Gap | Flujo de aprobación + validación ERP |
+
+Regla: una tabla custom solo se aprueba si no existe entidad estándar razonable o si mezclar conceptos compromete seguridad, reporting o propiedad de datos.
 
 #### Actividad 20.1: Configurar Sales Process personalizado
 1. D365 Sales → Configuración → Proceso de ventas → Nuevo BPF
@@ -113,6 +134,40 @@ Configurar y personalizar Dynamics 365 Sales y Customer Service: sales process c
 3. En formulario de Caso: panel "KB" → buscar artículos relacionados
 4. Configurar sugerencia automática de KB en Copilot Studio (Módulo 22)
 
+#### Actividad 20.6: Outlook, Teams y adopción comercial
+1. Identificar 3 actividades comerciales que hoy ocurren fuera de CRM:
+   - emails de seguimiento,
+   - reuniones de demo,
+   - conversaciones internas sobre descuentos.
+
+2. Diseñar cómo se registrarán en Dynamics 365:
+   - Emails importantes se trackean contra Opportunity o Account desde Outlook.
+   - Reuniones se relacionan con Opportunity y Contact.
+   - Conversaciones de Teams se vinculan al registro cuando aplique.
+
+3. Definir una regla de adopción:
+   - Oportunidad sin actividad en 7 días → alerta al vendedor.
+   - Quote sin respuesta en 5 días hábiles → tarea de seguimiento.
+   - Descuento mayor a 15% → aprobación antes de enviar quote.
+
+#### Actividad 20.7: Customer Service workspace y Copilot
+1. Diseñar una vista de trabajo para agentes con:
+   - casos asignados,
+   - casos vencidos o próximos a vencer SLA,
+   - artículos sugeridos,
+   - prioridad y tipo de cliente.
+
+2. Definir qué puede resumir Copilot:
+   - historial del caso,
+   - última conversación,
+   - artículos KB relacionados,
+   - próximos pasos sugeridos.
+
+3. Definir controles:
+   - el agente revisa la respuesta antes de enviarla,
+   - datos sensibles no se copian en prompts externos,
+   - cada artículo KB tiene owner y fecha de revisión.
+
 ### 💼 Caso Real de Negocio
 **Empresa:** Empresa de software con 5,000 clientes y mesa de ayuda de 30 agentes  
 **Problema:** Los casos se asignaban por turno rotativo sin considerar el expertise del agente. Un caso de SAP llegaba a un agente de Power BI.  
@@ -121,6 +176,8 @@ Configurar y personalizar Dynamics 365 Sales y Customer Service: sales process c
 
 ### ✅ Buenas Prácticas
 - Siempre usar Calendar de servicio en SLAs — los tiempos deben ser en horas hábiles, no absolutas
+- Mapear primero contra entidades estándar; personalizar solo cuando el gap esté documentado
+- Separar responsabilidades Sales vs ERP: Sales gestiona relación, pipeline y cotización comercial; ERP/F&O gobierna contabilidad, impuestos, inventario, crédito y facturación cuando aplica
 - Tener Knowledge Base robusta antes de implementar Copilot Studio para reducir hallucinations
 - Unified Routing > Reglas de enrutamiento legacy — migrar si estás en el sistema viejo
 - Usar entitlements para clientes con niveles de soporte diferenciados
@@ -131,12 +188,17 @@ Configurar y personalizar Dynamics 365 Sales y Customer Service: sales process c
 | SLA no se activa | SLA no está configurado como "default" para el tipo de caso | Marcar SLA como predeterminado en la configuración |
 | Email-to-Case duplica casos | Respuestas al email crean casos nuevos | Configurar que el email de respuesta use el ID del caso en el asunto |
 | Routing no asigna a agentes | Cola sin miembros o capacidad de agentes = 0 | Verificar membresía de cola y límite de capacidad por agente |
+| Se crea una tabla custom de Clientes | No se revisó Account/Contact estándar | Extender Account/Contact salvo que exista una justificación fuerte y documentada |
+| Pricing duplicado en Dataverse y ERP | Se intentó resolver todo en Sales | Definir sistema maestro: Sales cotiza, ERP valida precio final, impuestos, inventario y crédito |
 
 ### 🧪 Criterios de Validación
+- [ ] Matriz fit-gap contra entidades estándar creada antes de personalizar
 - [ ] BPF de venta consultiva con 4 etapas funciona en formulario de Oportunidad
 - [ ] Email a `soporte@empresa.com` crea caso automáticamente con mapeo correcto
 - [ ] SLA escalada al supervisor cuando el caso excede 4 horas sin primera respuesta
 - [ ] Unified Routing dirige casos de facturación a la cola correcta
 - [ ] 5 artículos KB publicados y visibles en el panel del caso
+- [ ] Outlook/Teams tienen reglas claras de adopción y trazabilidad
+- [ ] Copilot para agentes tiene controles humanos y KB gobernada
 
 ---
