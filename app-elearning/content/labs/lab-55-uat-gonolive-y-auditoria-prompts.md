@@ -2,7 +2,7 @@
 id: lab-55
 title: "Generar UAT/Checklist de Go-Live con IA y Auditar Prompts por Seguridad"
 level: "N5"
-duration: 85
+duration: 100
 product: ["GitHub Copilot", "Claude Code", "Dynamics 365"]
 certifications: ["Buenas Prácticas"]
 role: ["Functional Consultant", "Solution Architect", "Developer"]
@@ -16,7 +16,7 @@ files: []
 
 ## Objetivo
 
-Al finalizar este laboratorio habrás usado IA para acelerar dos entregables típicos de consultoría (casos de prueba UAT y checklist de go-live) sobre un escenario funcional real, y habrás practicado auditar tus propios prompts para detectar información sensible antes de compartirlos con un asistente de IA.
+Al finalizar este laboratorio habrás usado IA para acelerar entregables típicos de consultoría (casos de prueba UAT, matriz de trazabilidad y checklist de go-live) sobre un escenario funcional real, y habrás practicado auditar tus propios prompts para detectar información sensible antes de compartirlos con un asistente de IA.
 
 ## Nivel
 
@@ -40,9 +40,10 @@ Functional Consultant, Solution Architect, Developer.
 |---|---|
 | Ejercicio 1 — Redactar el prompt inicial con datos ficticios equivalentes | 15 min |
 | Ejercicio 2 — Generar casos de prueba UAT con IA | 25 min |
-| Ejercicio 3 — Generar checklist de go-live con IA | 20 min |
-| Ejercicio 4 — Auditar tus propios prompts de este laboratorio por seguridad | 25 min |
-| **Total** | **85 min** |
+| Ejercicio 3 — Construir matriz de trazabilidad UAT | 15 min |
+| Ejercicio 4 — Generar checklist de go-live con IA | 20 min |
+| Ejercicio 5 — Auditar tus propios prompts de este laboratorio por seguridad | 25 min |
+| **Total** | **100 min** |
 
 ## Tecnologías utilizadas
 
@@ -57,11 +58,29 @@ Describe el flujo de aprobación de gastos de SIT (basado en el Lab 05) usando *
 
 Pide a un asistente de IA que, a partir de tu descripción del Ejercicio 1, genere al menos 6 casos de prueba UAT cubriendo: caso feliz (aprobación simple), caso de rechazo, caso de doble aprobación por monto alto, y 3 casos límite/error (ej. monto en cero, aprobador inexistente, solicitud duplicada).
 
-## Ejercicio 3 — Generar checklist de go-live con IA
+## Ejercicio 3 — Construir matriz de trazabilidad UAT
+
+Pide a la IA que convierta los casos UAT del Ejercicio 2 en una matriz de trazabilidad. Revisa el resultado manualmente y ajusta cualquier fila que no conecte claramente requerimiento, historia, caso de prueba y evidencia.
+
+Usa esta plantilla mínima:
+
+| Req ID | Historia de usuario | Caso UAT | Tipo | Datos de prueba | Evidencia esperada | Estado |
+|---|---|---|---|---|---|---|
+| REQ-GAS-001 | Como solicitante, quiero registrar un gasto menor para aprobación simple | UAT-001 aprobación simple | Happy path | Monto 250, aprobador válido | Solicitud aprobada, historial con fecha y aprobador | Pendiente |
+| REQ-GAS-002 | Como gerente, quiero rechazar gastos sin soporte | UAT-002 rechazo por soporte faltante | Excepción | Solicitud sin adjunto | Estado rechazado y comentario obligatorio | Pendiente |
+| REQ-GAS-003 | Como finanzas, quiero doble aprobación para montos altos | UAT-003 doble aprobación | Regla de negocio | Monto 1,500 | Dos aprobaciones registradas en orden correcto | Pendiente |
+
+Validaciones de calidad:
+- Cada requerimiento tiene al menos un caso UAT.
+- Cada caso UAT tiene datos de prueba y evidencia esperada.
+- Hay cobertura de happy path, rechazo, permisos y errores.
+- El estado de cada fila permite seguimiento durante la ejecución.
+
+## Ejercicio 4 — Generar checklist de go-live con IA
 
 Pide a la IA que genere un checklist de go-live cubriendo al menos: migración/validación de datos, seguridad (roles asignados), plan de rollback, comunicación a usuarios finales, y monitoreo post-lanzamiento. Compara el resultado contra el pipeline de CI/CD del Módulo 50 — ¿falta algún gate técnico en la propuesta de la IA?
 
-## Ejercicio 4 — Auditar tus propios prompts
+## Ejercicio 5 — Auditar tus propios prompts
 
 Revisa los prompts que usaste en los Ejercicios 1-3 y responde con la checklist del Módulo 49:
 1. ¿Incluiste algún nombre real de cliente, empleado o empresa?
@@ -75,12 +94,14 @@ Revisa los prompts que usaste en los Ejercicios 1-3 y responde con la checklist 
 | Usar el nombre real de un cliente o proyecto en el prompt de UAT | No aplicar la sanitización del Módulo 49 desde el primer prompt | Usar siempre un escenario ficticio equivalente, como el de SIT |
 | Aceptar el checklist de go-live de la IA sin comparar contra el pipeline de CI real | Confiar en que la propuesta genérica cubre todo lo necesario | Contrastar siempre contra los gates técnicos ya definidos en el proyecto (Módulo 50) |
 | Generar solo casos "felices" de UAT, sin casos límite o de error | No pedir explícitamente cobertura de casos límite | Solicitar explícitamente casos de error/límite además del caso feliz |
+| Matriz de trazabilidad con filas desconectadas | La IA genera una tabla bonita, pero sin vínculo real entre requerimiento y evidencia | Revisar que cada Req ID tenga historia, caso UAT, datos y evidencia verificable |
 | Omitir la auditoría de los propios prompts al final | Tratar la seguridad como un paso opcional, no obligatorio | Auditar siempre los prompts usados antes de dar por cerrado el ejercicio |
 
 ## Criterios de Validación
 
 - [ ] Redacté un prompt inicial usando solo datos ficticios equivalentes
 - [ ] Generé al menos 6 casos de prueba UAT cubriendo caso feliz, rechazo y casos límite
+- [ ] Construí una matriz de trazabilidad que conecta requerimientos, historias, casos UAT y evidencia
 - [ ] Generé un checklist de go-live y lo comparé contra el pipeline de CI/CD real del proyecto
 - [ ] Audité mis propios prompts de este laboratorio y corregí cualquier dato sensible encontrado
 
@@ -99,5 +120,6 @@ Revisa los prompts que usaste en los Ejercicios 1-3 y responde con la checklist 
 ## Competencias Desarrolladas
 
 - Generación acelerada de artefactos de consultoría funcional (UAT, checklist de go-live)
+- Construcción de matrices de trazabilidad entre requerimientos, casos UAT y evidencia
 - Auditoría sistemática de prompts por contenido sensible antes de compartirlos
 - Comparación crítica entre una propuesta genérica de IA y los estándares reales del proyecto
