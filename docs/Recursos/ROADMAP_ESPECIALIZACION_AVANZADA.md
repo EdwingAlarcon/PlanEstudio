@@ -12,11 +12,11 @@ PlanEstudio ya cubre con evidencia real:
 
 - **Power Platform completo** (Canvas, Model-Driven, Dataverse, Power Automate, Power Fx, ALM, PCF,
   plugins, gobernanza) — rutas Maker, Consultor Funcional, Developer, Solution Architect.
-- **Dynamics 365 CE base e intermedio-avanzado**: Sales lead-to-cash (Módulo 20, Lab 66), Customer
-  Service case-to-resolution con SLA/escalamiento/dashboard (Módulo 20, Lab 68), Customer Insights -
-  Data y Journeys (Módulos 57/58, Labs 67/58), Field Service work-order-to-close (Módulo 58, Lab 59).
+- **Dynamics 365 CE base e intermedio-avanzado**: Sales lead-to-cash (Módulo 20, LAB-066), Customer
+  Service case-to-resolution con SLA/escalamiento/dashboard (Módulo 20, LAB-068), Customer Insights -
+  Data y Journeys (Módulos 57/58, LAB-067/LAB-058), Field Service work-order-to-close (Módulo 58, LAB-059).
 - **Finance & Operations — awareness avanzado**: vocabulario, mapas paso a paso de los 5 procesos
-  ERP estándar y diseño técnico de integración CE+F&O (Módulo 59, Labs 69/70, capstone Lab 64).
+  ERP estándar y diseño técnico de integración CE+F&O (Módulo 59, LAB-069/LAB-070, capstone LAB-064).
 
 Lo que **no** cubre todavía es configuración productiva en un tenant real de canales de
 Contact Center, operaciones comerciales avanzadas (territorios, forecasting, Sales Insights),
@@ -43,11 +43,11 @@ implicaría un capstone y evidencia que todavía no existen.
 
 ## 1. Ruta Expert Customer Service / Contact Center
 
-**Estado global: ⚪ En expansión**, con una base 🔵 Avanzado ya construida (Módulo 20, Lab 68).
+**Estado global: ⚪ En expansión**, con una base 🔵 Avanzado ya construida (Módulo 20, LAB-068).
 
 | Tema | Madurez actual |
 |---|---|
-| Case management, colas, SLA, escalamiento, dashboard operativo | 🔵 Avanzado (Módulo 20, Lab 68) |
+| Case management, colas, SLA, escalamiento, dashboard operativo | 🔵 Avanzado (Módulo 20, LAB-068) |
 | Omnichannel for Customer Service (routing multicanal, contexto de conversación) | 🟡 Awareness (mencionado en Módulo 20) |
 | Dynamics 365 Contact Center | ⚪ En expansión |
 | Chat | ⚪ En expansión |
@@ -83,11 +83,11 @@ no se publicará como lab "Cubierto" hasta que cumpla ese estándar completo.
 
 ## 2. Ruta Expert Sales Operations
 
-**Estado global: ⚪ En expansión**, con una base 🔵 Avanzado ya construida (Módulo 20, Lab 66).
+**Estado global: ⚪ En expansión**, con una base 🔵 Avanzado ya construida (Módulo 20, LAB-066).
 
 | Tema | Madurez actual |
 |---|---|
-| Proceso lead-to-cash (BPF, Quote → Order → Invoice) | 🔵 Avanzado (Módulo 20, Lab 66) |
+| Proceso lead-to-cash (BPF, Quote → Order → Invoice) | 🔵 Avanzado (Módulo 20, LAB-066) |
 | Territories (asignación geográfica/vertical de cuentas) | ⚪ En expansión |
 | Forecasting (categorías de forecast, forecast configurable) | ⚪ En expansión |
 | Goals (metas individuales/de equipo, rollup) | ⚪ En expansión |
@@ -136,14 +136,14 @@ Commerce o Project Operations.
 | Products and inventory (variantes, dimensiones de producto, políticas de reserva) | 🟡 Awareness (Módulo 59) |
 | Commerce overview (POS, call center, canales unificados) | 🟡 Awareness |
 | Project Operations (estructura de proyecto, WBS, facturación por hitos/tiempo) | 🟡 Awareness |
-| Procure-to-Pay (paso a paso) | 🔵 Avanzado (Módulo 59, Lab 69) |
-| Order-to-Cash (paso a paso) | 🔵 Avanzado (Módulo 59, Lab 69) |
-| Record-to-Report (paso a paso) | 🔵 Avanzado (Módulo 59, Lab 69) |
-| Inventory-to-Deliver / Project-to-Profit (paso a paso) | 🔵 Avanzado (Módulo 59, Lab 69) |
+| Procure-to-Pay (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069) |
+| Order-to-Cash (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069) |
+| Record-to-Report (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069) |
+| Inventory-to-Deliver / Project-to-Profit (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069) |
 | Data entities (estructura, staging, validaciones) | 🟡 Awareness (Módulo 59) |
-| Data Management Framework (importación masiva, manejo de errores) | 🟡 Awareness (Lab 64) |
-| Dual-write setup awareness (mapas, entidades vinculadas) | 🔵 Avanzado (Lab 70) |
-| Integration with Dataverse (patrones de integración, ownership de datos) | 🔵 Avanzado (Lab 70) |
+| Data Management Framework (importación masiva, manejo de errores) | 🟡 Awareness (LAB-064) |
+| Dual-write setup awareness (mapas, entidades vinculadas) | 🔵 Avanzado (LAB-070) |
+| Integration with Dataverse (patrones de integración, ownership de datos) | 🔵 Avanzado (LAB-070) |
 | LCS awareness (ciclo de vida, ambientes, actualizaciones) | ⚪ En expansión |
 | Security (roles de seguridad F&O, duty/privilege) | ⚪ En expansión |
 | Reporting (Financial Reporting, Power BI embebido en F&O) | ⚪ En expansión |
@@ -166,19 +166,19 @@ Competencias pasará de 🟡/⚪ a 🟢 **Cubierto**.
 
 ## 4. Ruta Business Applications Architect Enterprise
 
-**Estado global: ⚪ En expansión**, apoyada en una base 🔵 Avanzado real (Lab 70, Módulo 41).
+**Estado global: ⚪ En expansión**, apoyada en una base 🔵 Avanzado real (LAB-070, Módulo 41).
 
 | Tema | Madurez actual |
 |---|---|
-| CE + F&O architecture (visión combinada, no solo integración punto a punto) | 🔵 Avanzado (Lab 70) |
-| System of record (qué sistema es dueño de qué dato) | 🔵 Avanzado (Lab 70) |
-| Ownership de datos por entidad | 🔵 Avanzado (Lab 70) |
-| Dual-write (diseño técnico) | 🔵 Avanzado (Lab 70) |
-| Virtual tables | 🔵 Avanzado (Lab 70) |
-| Integration patterns (síncrono/asíncrono, retry, circuit breaker) | 🔵 Avanzado (Módulo 25, Lab 70) |
+| CE + F&O architecture (visión combinada, no solo integración punto a punto) | 🔵 Avanzado (LAB-070) |
+| System of record (qué sistema es dueño de qué dato) | 🔵 Avanzado (LAB-070) |
+| Ownership de datos por entidad | 🔵 Avanzado (LAB-070) |
+| Dual-write (diseño técnico) | 🔵 Avanzado (LAB-070) |
+| Virtual tables | 🔵 Avanzado (LAB-070) |
+| Integration patterns (síncrono/asíncrono, retry, circuit breaker) | 🔵 Avanzado (Módulo 25, LAB-070) |
 | Azure integration (Service Bus, Logic Apps, Functions alrededor de D365) | 🟡 Awareness (Módulo 25/34) |
 | Security across CE/F&O (modelo de seguridad combinado) | 🟡 Awareness |
-| ALM across apps (pipelines que despliegan CE y F&O juntos) | 🟡 Awareness (Lab 19 cubre ALM de Power Platform, no F&O) |
+| ALM across apps (pipelines que despliegan CE y F&O juntos) | 🟡 Awareness (LAB-019 cubre ALM de Power Platform, no F&O) |
 | Data governance (calidad de datos, maestros compartidos) | 🟡 Awareness (Módulo 34/59) |
 | Licensing awareness (CE vs. F&O vs. Power Platform combinados) | 🟡 Awareness |
 | Roadmap enterprise (fases de adopción CE→F&O o al revés) | ⚪ En expansión |
@@ -186,7 +186,7 @@ Competencias pasará de 🟡/⚪ a 🟢 **Cubierto**.
 ### Capstone propuesto: Enterprise CE + F&O
 
 **Objetivo (cuando se implemente):** un proyecto integrador que combine el capstone de Customer
-Engagement (Lab 60) y el de Finance & Operations Awareness (Lab 64) en una sola arquitectura de
+Engagement (LAB-060) y el de Finance & Operations Awareness (LAB-064) en una sola arquitectura de
 decisión, con roadmap de adopción por fases, matriz de riesgos combinada y un comité ejecutivo
 ficticio que apruebe o rechace la propuesta.
 
@@ -225,6 +225,7 @@ de verdad sobre qué falta.
 - **Portafolio**: `/portafolio` solo lista evidencia de rutas con capstone real. Ninguna de las
   cuatro rutas de este roadmap aparece ahí todavía — hacerlo antes de tener evidencia sería el
   mismo problema de sobre-promesa que este documento existe para prevenir.
-- **Rutas profesionales** (`/rutas`): la ruta *Dynamics 365 Customer Engagement* y la ruta *Finance
-  & Operations* ya citan este roadmap en su `gapNote` como el lugar donde se detalla, tema por
-  tema, qué falta para dejar de ser "Parcial" o "Especialización en construcción".
+- **Rutas profesionales** (`/rutas`): la ruta *Dynamics 365 Customer Engagement* ("Avanzado —
+  especializaciones en expansión") y la ruta *Finance & Operations* ("Awareness avanzado —
+  práctica en roadmap") ya citan este roadmap en su `gapNote` como el lugar donde se detalla, tema
+  por tema, qué falta para llegar a cobertura completa.

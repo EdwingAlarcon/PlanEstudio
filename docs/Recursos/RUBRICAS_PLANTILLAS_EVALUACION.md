@@ -253,7 +253,7 @@ Estas plantillas están pensadas para copiarse directamente a un archivo Markdow
 
 **Escenario:** diseñar una solución de servicio postventa para SIT que combine Sales, Customer Service, Customer Insights y Field Service.
 
-Laboratorio recomendado: `Lab 60 — Proyecto Integrador: Servicio Postventa con Customer Insights y Field Service`.
+Laboratorio recomendado: `LAB-060 — Proyecto Integrador: Servicio Postventa con Customer Insights y Field Service`.
 
 Entregables mínimos:
 
@@ -358,11 +358,11 @@ conecta con una rúbrica y un umbral numérico, en vez de dejar solo un checklis
 | N2 — Intermedio | Módulo 17, *Proyecto Integrador Nivel 2*: solución de ventas con Component Library, Child Flows, RLS y bot de Teams | Low-code / Maker + Consultoría Funcional (seguridad y documentación funcional) | ≥ 70/100, ningún criterio en 0 | ≥ 88/100 |
 | N3 — Avanzado | Módulo 30, *Proyecto Multicapa Nivel 3*: 6 soluciones con plugin, PCF, integración vía Service Bus y Copilot Studio con SSO | Desarrollo Técnico | ≥ 70/100, ningún criterio en 0 | ≥ 90/100 |
 | N4 — Arquitecto | Módulo 41, *Proyecto Capstone Arquitectura Enterprise*: solución multi-tenant con Zero Trust, Fabric y presentación ejecutiva | Arquitectura Empresarial (ponderada) | ≥ 75/100, ningún criterio en 0-1 | ≥ 92/100 |
-| Nivel IA | Lab 51, *Proyecto Integrador Nivel IA*: flujo diseña→IA implementa→CI valida→humano aprueba sobre un cambio real, con auditoría de prompts y matriz de riesgos de IA propia del cambio | IA y Agentes Gobernados | ≥ 70/100, ningún criterio en 0 | ≥ 88/100 |
+| Nivel IA | LAB-051, *Proyecto Integrador Nivel IA*: flujo diseña→IA implementa→CI valida→humano aprueba sobre un cambio real, con auditoría de prompts y matriz de riesgos de IA propia del cambio | IA y Agentes Gobernados | ≥ 70/100, ningún criterio en 0 | ≥ 88/100 |
 
-Las 5 rutas de nivel quedan con un proyecto de cierre equivalente en exigencia: Lab 51 (Nivel IA)
+Las 5 rutas de nivel quedan con un proyecto de cierre equivalente en exigencia: LAB-051 (Nivel IA)
 tiene el mismo formato de escenario, entregables, evidencia esperada y rúbrica ponderada que los
-módulos 8, 17, 30 y 41. El Capstone AI & Copilot (Lab 65, ver [Matriz de
+módulos 8, 17, 30 y 41. El Capstone AI & Copilot (LAB-065, ver [Matriz de
 Competencias](MATRIZ_COMPETENCIAS.md)) sigue siendo distinto y complementario: cierra la ruta
 profesional transversal AI & Copilot, no el nivel IA completo.
 
@@ -370,10 +370,10 @@ profesional transversal AI & Copilot, no el nivel IA completo.
 nivel transversal (Módulos 56-59) no tiene un único proyecto de cierre propio — sus módulos son
 de vocabulario y arquitectura (Customer Engagement como ecosistema, Customer Insights - Data,
 Field Service avanzado, Finance & Operations), y la práctica evaluable vive en los capstones de
-las rutas profesionales que ese vocabulario alimenta: Lab 66 (Sales, ruta Dynamics 365 CE), Lab 67
-(Customer Insights - Data, misma ruta), Lab 68 (Customer Service case-to-resolution, misma ruta),
-Lab 60 (capstone Microsoft Business Applications, rutas Dynamics 365 CE y Solution Architect) y
-Lab 69/Lab 70/Lab 64 (mapeo de procesos, integración técnica y capstone F&O Awareness, ruta
+las rutas profesionales que ese vocabulario alimenta: LAB-066 (Sales, ruta Dynamics 365 CE), LAB-067
+(Customer Insights - Data, misma ruta), LAB-068 (Customer Service case-to-resolution, misma ruta),
+LAB-060 (capstone Microsoft Business Applications, rutas Dynamics 365 CE y Solution Architect) y
+LAB-069/LAB-070/LAB-064 (mapeo de procesos, integración técnica y capstone F&O Awareness, ruta
 Finance & Operations). Esto es
 intencional, no una brecha: el nivel D365 existe para dar profundidad conceptual transversal, y
 son las rutas profesionales las que exigen la evidencia práctica correspondiente.
@@ -385,8 +385,8 @@ son las rutas profesionales las que exigen la evidencia práctica correspondient
 | Maker | Evidencia de app/flujo funcionando y checklist básico |
 | Consultor Funcional | FDD, historias, UAT, trazabilidad y sign-off |
 | Developer | Diseño técnico, pruebas, ALM y evidencia de build |
-| Dynamics 365 Customer Engagement | Segmento/journey, Work Order/SLA, ciclo case-to-resolution (Lab 68), matriz de trazabilidad y UAT del Lab 60 |
-| Finance & Operations Awareness | Mapas de proceso ERP (Lab 69), diseño técnico de integración (Lab 70), matriz de integración ERP+CRM, dual-write conceptual y matriz de riesgos (Lab 64) |
+| Dynamics 365 Customer Engagement | Segmento/journey, Work Order/SLA, ciclo case-to-resolution (LAB-068), matriz de trazabilidad y UAT del LAB-060 |
+| Finance & Operations Awareness | Mapas de proceso ERP (LAB-069), diseño técnico de integración (LAB-070), matriz de integración ERP+CRM, dual-write conceptual y matriz de riesgos (LAB-064) |
 | Solution Architect | Blueprint, riesgos, decisiones, seguridad, go-live y operación |
 | AI/Copilot | Prompts sanitizados, revisión humana y trazabilidad de decisiones |
 

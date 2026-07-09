@@ -75,7 +75,7 @@ Competencias evaluadas:
 PlanEstudio lo soporta con:
 
 - Módulos 1-8.
-- Labs 02-05.
+- LAB-002 a LAB-005.
 - Simulador y preguntas del Nivel 1.
 
 ### PL-200 — Power Platform Functional Consultant
@@ -119,7 +119,7 @@ Competencias evaluadas:
 PlanEstudio lo soporta con:
 
 - Módulos 18-30.
-- Labs 19, 22, 23 y labs IA 52-54.
+- LAB-019, LAB-022, LAB-023 y laboratorios de IA LAB-052 a LAB-054.
 
 ### MB-230 — Dynamics 365 Customer Service Functional Consultant
 
@@ -136,7 +136,7 @@ Competencias evaluadas:
 Cobertura actual:
 
 - PlanEstudio cubre Customer Service dentro del Módulo 20, la ruta Dynamics 365 Customer
-  Engagement, el Lab 59 (Case -> Work Order y UAT) y el Lab 60 como capstone integrador. La mejora
+  Engagement, el LAB-059 (Case -> Work Order y UAT) y el LAB-060 como capstone integrador. La mejora
   prioritaria pendiente es separar una práctica Customer Service profunda de Case-to-Resolution,
   SLAs, colas, escalamiento y autoservicio.
 
@@ -154,7 +154,7 @@ Competencias evaluadas:
 
 Cobertura actual:
 
-- PlanEstudio cubre Finance & Operations como ruta conceptual inicial en el Módulo 59 y el Lab 64,
+- PlanEstudio cubre Finance & Operations como ruta conceptual inicial en el Módulo 59 y el LAB-064,
   con procesos ERP, dual-write, DMF, virtual tables y arquitectura ERP + CRM. Todavía no cubre
   configuración real profunda de Dynamics 365 Finance.
 
@@ -172,7 +172,7 @@ Competencias evaluadas:
 
 Cobertura actual:
 
-- PlanEstudio ya introduce procesos ERP y su integración con Dataverse en el Módulo 59 y el Lab 64.
+- PlanEstudio ya introduce procesos ERP y su integración con Dataverse en el Módulo 59 y el LAB-064.
   La mejora pendiente es profundizar Supply Chain Management con procesos y laboratorios propios.
 
 ### MB-500 — Finance and Operations Apps Developer Associate
@@ -189,7 +189,7 @@ Competencias evaluadas:
 
 Cobertura actual:
 
-- PlanEstudio ya introdujo F&O conceptual en el Módulo 59 y el Lab 64. El desarrollo X++ y la
+- PlanEstudio ya introdujo F&O conceptual en el Módulo 59 y el LAB-064. El desarrollo X++ y la
   especialización MB-500 siguen fuera de alcance hasta contar con una ruta F&O de producto más
   profunda.
 
@@ -262,14 +262,14 @@ Competencias que siguen siendo válidas:
 
 | Perfil | Certificación vigente o enfoque | PlanEstudio actual | Próxima mejora |
 |---|---|---|---|
-| Maker | PL-900 | Nivel 1 | Añadir ruta Maker explícita. |
-| Consultor funcional Power Platform | PL-200 en transición | Nivel 2 | Crear ruta funcional independiente del examen. |
-| Developer Power Platform | PL-400 | Nivel 3 | Reforzar Custom APIs, CLI, Web API y observabilidad. |
-| Solution Architect | Competencia profesional de arquitectura | Nivel 4 | Reemplazar lenguaje PL-600 por arquitectura demostrable y portafolio. |
-| D365 Customer Service | MB-230 | Parcial | Crear labs dedicados Case-to-Resolution, SLA/colas/escalamiento y autoservicio. |
-| D365 Finance | MB-310 | Ruta conceptual inicial | Profundizar configuración funcional de Finance cuando se abra sprint F&O. |
-| D365 Supply Chain | MB-330 | Ruta conceptual inicial | Crear práctica SCM/Inventory-to-Deliver posterior. |
-| F&O Developer | MB-500 | Brecha avanzada | Agregar solo como especialización posterior. |
+| Maker | PL-900 | Ruta Maker disponible | Mantener capstone (LAB-061) actualizado con Power Fx reciente. |
+| Consultor funcional Power Platform | PL-200 en transición | Ruta Consultor Funcional (Parcial) | Sumar módulos de consultoría específicos de D365 CE/F&O. |
+| Developer Power Platform | PL-400 | Ruta Developer disponible | Reforzar Custom APIs, CLI, Web API y observabilidad. |
+| Solution Architect | Competencia profesional de arquitectura | Ruta Solution Architect disponible | Ampliar casos de estudio de arquitectura enterprise. |
+| D365 Customer Service | MB-230 | Ruta D365 CE — avanzado, especializaciones en expansión | Ver Roadmap de Especialización Avanzada: Contact Center/Omnichannel real. |
+| D365 Sales | Competencia profesional (MB-210 retirado) | Ruta D365 CE — avanzado, especializaciones en expansión | Ver Roadmap de Especialización Avanzada: Territories/Forecasting/Sales Insights. |
+| D365 Finance / Supply Chain | MB-310 / MB-330 | Ruta F&O — awareness avanzado, práctica en roadmap | Ver Roadmap de Especialización Avanzada: configuración real de producto. |
+| F&O Developer | MB-500 | Fuera de alcance actual | Agregar solo como especialización posterior a la práctica F&O funcional. |
 
 ---
 

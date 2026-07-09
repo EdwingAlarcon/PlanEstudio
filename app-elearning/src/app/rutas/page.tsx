@@ -13,6 +13,8 @@ const STATUS_VARIANT: Record<string, "default" | "secondary" | "outline"> = {
   Disponible: "default",
   Parcial: "secondary",
   "Especialización en construcción": "outline",
+  "Avanzado — especializaciones en expansión": "secondary",
+  "Awareness avanzado — práctica en roadmap": "outline",
 };
 
 export default function ProfessionalRoutesPage() {

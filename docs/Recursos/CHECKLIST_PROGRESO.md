@@ -454,7 +454,7 @@
 - [ ] **Conocimiento**: Explico la diferencia entre personalizar D365 CE vs construir desde cero en Dataverse | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Creo una solución que extiende D365 CE con tablas y lógica personalizada | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico las consideraciones de licenciamiento entre D365 y Power Platform | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Lab 68 completado — ciclo case-to-resolution, SLA con pausa/reanudación, escalamiento y dashboard de servicio | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-068 completado — ciclo case-to-resolution, SLA con pausa/reanudación, escalamiento y dashboard de servicio | Dominio: ___/5 | Fecha: ___
 
 **Subtotal Módulo 20:** ___/11 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
@@ -879,7 +879,7 @@
 - [ ] **Práctica**: Uso un agente para localizar todas las ocurrencias de un patrón en el repo y confirmo el resultado manualmente | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Delego una tarea acotada con criterio de éxito verificable y confirmo que el agente la cumplió | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Comparo el resultado de una tarea vaga vs. una acotada y documento la diferencia de calidad | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Lab 45 completado — implementación guiada con Copilot/Claude Code | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-045 completado — implementación guiada con Copilot/Claude Code | Dominio: ___/5 | Fecha: ___
 
 **Subtotal Módulo 45:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
@@ -946,7 +946,7 @@
 - [ ] **Entrega**: Documento en qué etapa (si alguna) tuve que devolverme a un paso anterior y por qué | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: El cambio final pasa lint, typecheck y tests antes de considerarse aprobado | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: Escribo el resumen de una página del ciclo completo aplicado | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Lab 51 completado — flujo completo humano→IA→CI→aprobación sobre un caso real | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: LAB-051 completado — flujo completo humano→IA→CI→aprobación sobre un caso real | Dominio: ___/5 | Fecha: ___
 
 **Subtotal Módulo 51:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
@@ -958,8 +958,8 @@
 - [ ] **Práctica**: Creé un perfil de autenticación contra un entorno Developer/Sandbox con `pac auth create` | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Verifiqué la organización activa con `pac org who` antes de operar | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico la diferencia entre tenant, environment y organización | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Lab 52 completado — CLI y conexión segura al tenant | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Lab 56 completado — cambiar entre entornos Dev/Test/Prod de forma segura | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-052 completado — CLI y conexión segura al tenant | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-056 completado — cambiar entre entornos Dev/Test/Prod de forma segura | Dominio: ___/5 | Fecha: ___
 
 **Subtotal Módulo 52:** ___/6 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
@@ -971,7 +971,7 @@
 - [ ] **Conocimiento**: Distingo cuándo usar client secret vs. certificado para una integración | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Diagnostico correctamente un error 401 vs. un error 403 | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Diseño un Security Role de mínimo privilegio para un Application User | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Lab 54 completado — conexión conceptual de app externa a Dataverse Web API | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-054 completado — conexión conceptual de app externa a Dataverse Web API | Dominio: ___/5 | Fecha: ___
 
 **Subtotal Módulo 53:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
@@ -983,7 +983,7 @@
 - [ ] **Práctica**: Identifiqué connection references y variables de entorno de una solución de práctica | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico por qué Dev debe ser unmanaged y Test/Prod deben ser managed | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: Diseñé los pasos mínimos de un pipeline de GitHub Actions para export/unpack/pack/import | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Lab 53 completado — exportar, desempaquetar y revisar una solución con IA | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-053 completado — exportar, desempaquetar y revisar una solución con IA | Dominio: ___/5 | Fecha: ___
 
 **Subtotal Módulo 54:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
@@ -995,8 +995,8 @@
 - [ ] **Práctica**: Convierto un requerimiento de negocio en user story y evalúo alternativa estándar vs. personalizada | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Genero una matriz de seguridad básica respetando el mínimo privilegio | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Identifico un caso de sobrepersonalización propuesto por la IA y lo corrijo | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Lab 55 completado — UAT/checklist de go-live y auditoría de prompts | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Lab 57 completado — diseño de una solución completa de D365 Sales con IA | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-055 completado — UAT/checklist de go-live y auditoría de prompts | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-057 completado — diseño de una solución completa de D365 Sales con IA | Dominio: ___/5 | Fecha: ___
 
 **Subtotal Módulo 55:** ___/6 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
@@ -1005,7 +1005,7 @@
 ### 🏆 Hitos de Nivel IA
 
 - [ ] Todos los módulos 42-55 completados con 80%+ de checkboxes marcados | Fecha: ___
-- [ ] Labs 45, 51, 52, 53, 54, 55, 56 y 57 completados | Fecha: ___
+- [ ] LAB-045, LAB-051, LAB-052, LAB-053, LAB-054, LAB-055, LAB-056 y LAB-057 completados | Fecha: ___
 - [ ] Autoevaluación promedio ≥ 4.0/5 en todos los módulos del nivel | Promedio: ___/5
 - [ ] Certificado del Nivel IA generado | Fecha: ___
 
@@ -1034,7 +1034,7 @@
 - [ ] **Conocimiento**: Explico por qué Customer Insights - Data no reemplaza a Sales/Customer Service | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Escribí una regla de matching explícita que resuelve un caso sin clave compartida (ej. sin email) | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Definí una medida propia con su fórmula y las fuentes que combina | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Lab 67 completado — unificación de perfiles y Customer 360 | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-067 completado — unificación de perfiles y Customer 360 | Dominio: ___/5 | Fecha: ___
 
 **Subtotal Módulo 57:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
@@ -1045,7 +1045,7 @@
 - [ ] **Conocimiento**: Explico la diferencia entre Scheduling Assistant manual y Resource Scheduling Optimization | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Definí un Incident Type con duración, Characteristics y 3 tareas obligatorias | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Expliqué qué técnicos vería el dispatcher resaltados en el Schedule Board y por qué | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Lab 59 (Paso 3b) completado — Incident Type y Schedule Board para los 3 casos de prueba | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-059 (Paso 3b) completado — Incident Type y Schedule Board para los 3 casos de prueba | Dominio: ___/5 | Fecha: ___
 
 **Subtotal Módulo 58:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
@@ -1056,9 +1056,9 @@
 - [ ] **Conocimiento**: Nombro y explico en una frase cada uno de los procesos ERP estándar (O2C, P2P, R2R, I2D) | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Identifiqué el evento donde el proceso pasa de lead-to-cash (Sales) a order-to-cash (F&O) | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Apliqué el criterio de decisión dual-write vs. DMF vs. virtual tables a un caso concreto | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Lab 69 completado — mapas de proceso ERP end-to-end (O2C/P2P/R2R/I2D/Project-to-Profit) | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Lab 70 completado — arquitectura técnica de integración CE+F&O con diagrama Mermaid y ownership de datos | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: Lab 64 completado con el vocabulario de procesos ERP y la decisión de integración | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-069 completado — mapas de proceso ERP end-to-end (O2C/P2P/R2R/I2D/Project-to-Profit) | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-070 completado — arquitectura técnica de integración CE+F&O con diagrama Mermaid y ownership de datos | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-064 completado con el vocabulario de procesos ERP y la decisión de integración | Dominio: ___/5 | Fecha: ___
 
 **Subtotal Módulo 59:** ___/6 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
@@ -1079,13 +1079,13 @@
 
 | Nivel | Módulos | Checkboxes est. | Completados | % | Promedio Dominio | Fecha Fin |
 |-------|---------|-----------------|-------------|---|-----------------|-----------|
-| 🟢 Nivel 1 - Básico | 8 | 113 | ___ | ___% | ___/5 | ___ |
-| 🔵 Nivel 2 - Intermedio | 9 | 118 | ___ | ___% | ___/5 | ___ |
-| 🟠 Nivel 3 - Avanzado | 13 | 129 | ___ | ___% | ___/5 | ___ |
-| 🔴 Nivel 4 - Arquitecto | 11 | 105 | ___ | ___% | ___/5 | ___ |
+| 🟢 Nivel 1 - Básico | 8 | 114 | ___ | ___% | ___/5 | ___ |
+| 🔵 Nivel 2 - Intermedio | 9 | 120 | ___ | ___% | ___/5 | ___ |
+| 🟠 Nivel 3 - Avanzado | 13 | 131 | ___ | ___% | ___/5 | ___ |
+| 🔴 Nivel 4 - Arquitecto | 11 | 103 | ___ | ___% | ___/5 | ___ |
 | 🟣 Nivel IA - Desarrollo Asistido | 14 | 63 | ___ | ___% | ___/5 | ___ |
-| 🔷 Nivel D365 - Dynamics 365 Avanzado | 4 | 16 | ___ | ___% | ___/5 | ___ |
-| **TOTAL** | **59** | **546** | ___ | ___% | ___/5 | ___ |
+| 🔷 Nivel D365 - Dynamics 365 Avanzado | 4 | 18 | ___ | ___% | ___/5 | ___ |
+| **TOTAL** | **59** | **549** | ___ | ___% | ___/5 | ___ |
 
 ### Resumen por Módulo
 

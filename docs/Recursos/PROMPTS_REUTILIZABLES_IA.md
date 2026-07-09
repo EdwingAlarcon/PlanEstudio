@@ -10,7 +10,7 @@
 
 **Propósito:** obtener un resumen rápido de qué componentes contiene una solución exportada y desempaquetada, antes de decidir si está lista para moverse a otro entorno.
 
-**Cuándo usarlo:** después de `pac solution unpack`, antes de aprobar el pipeline hacia Test/Prod (ver Módulo 54, Lab 53).
+**Cuándo usarlo:** después de `pac solution unpack`, antes de aprobar el pipeline hacia Test/Prod (ver Módulo 54, LAB-053).
 
 **Texto del prompt:**
 ```
@@ -53,7 +53,7 @@ fijo en el componente. Indica el archivo y la línea aproximada de cada hallazgo
 
 **Propósito:** producir un primer borrador de documentación funcional a partir de una descripción de la solución, para consultoría o entrega al cliente.
 
-**Cuándo usarlo:** durante la etapa de UAT o cierre de proyecto (Módulo 55, Lab 55).
+**Cuándo usarlo:** durante la etapa de UAT o cierre de proyecto (Módulo 55, LAB-055).
 
 **Texto del prompt:**
 ```
@@ -135,7 +135,7 @@ parezca excesivo para el rol descrito.
 
 **Propósito:** generar un conjunto de casos de prueba UAT que cubran el caso feliz, casos de error y casos límite.
 
-**Cuándo usarlo:** antes de la etapa de pruebas de usuario, previo al go-live (Módulo 55, Lab 55).
+**Cuándo usarlo:** antes de la etapa de pruebas de usuario, previo al go-live (Módulo 55, LAB-055).
 
 **Texto del prompt:**
 ```
@@ -221,7 +221,7 @@ Solution Checker) antes de importar. Señala qué falta si algo no está cubiert
 
 **Propósito:** generar un checklist de salida a producción que cubra los aspectos técnicos y funcionales mínimos.
 
-**Cuándo usarlo:** antes del despliegue final a producción (Módulo 55, Lab 55).
+**Cuándo usarlo:** antes del despliegue final a producción (Módulo 55, LAB-055).
 
 **Texto del prompt:**
 ```

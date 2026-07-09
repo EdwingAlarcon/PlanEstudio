@@ -75,7 +75,7 @@ export function PortfolioClient({ routes }: { routes: PortfolioRouteData[] }) {
                       ) : (
                         <Circle className="h-3.5 w-3.5" aria-hidden />
                       )}
-                      {capstoneDone ? "Capstone completado" : "Capstone pendiente"}
+                      {capstoneDone ? "Capstone completado" : "Pendiente en tu progreso"}
                     </span>
                   </div>
 

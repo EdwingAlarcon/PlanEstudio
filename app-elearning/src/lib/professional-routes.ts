@@ -18,7 +18,12 @@ export interface ProfessionalRoute {
   modules: number[];
   labs: string[];
   competencies: string[];
-  status: "Disponible" | "Parcial" | "Especialización en construcción";
+  status:
+    | "Disponible"
+    | "Parcial"
+    | "Especialización en construcción"
+    | "Avanzado — especializaciones en expansión"
+    | "Awareness avanzado — práctica en roadmap";
   gapNote?: string;
   nextRouteSlug?: ProfessionalRouteSlug;
   /** Slug del lab que funciona como proyecto final evaluable de la ruta. */
@@ -162,14 +167,14 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-68-customer-service-case-to-resolution",
     ],
     competencies: ["Sales", "Customer Service", "SLA y escalamiento", "Dataverse estándar", "Omnichannel", "Copilot para servicio", "Fit-Gap D365"],
-    status: "Parcial",
-    gapNote: "Sales, Customer Service, Customer Insights - Data y Field Service ya tienen módulo y lab dedicados con datos reales (Módulos 20/56/57/58, Labs 66/67/59/68). El Lab 68 cubre en detalle el ciclo case-to-resolution (colas, SLA con pausa/reanudación, escalamiento, dashboard operativo). Omnichannel/Contact Center avanzado y Sales Operations (territorios, forecasting, Sales Insights) siguen sin configuración práctica — ver el detalle tema por tema en el Roadmap de Especialización Avanzada Dynamics 365.",
+    status: "Avanzado — especializaciones en expansión",
+    gapNote: "Sales, Customer Service, Customer Insights - Data y Field Service ya tienen módulo y lab dedicados con datos reales (Módulos 20/56/57/58, LAB-066/LAB-067/LAB-059/LAB-068). El LAB-068 cubre en detalle el ciclo case-to-resolution (colas, SLA con pausa/reanudación, escalamiento, dashboard operativo). Omnichannel/Contact Center avanzado y Sales Operations (territorios, forecasting, Sales Insights) siguen sin configuración práctica — ver el detalle tema por tema en el Roadmap de Especialización Avanzada Dynamics 365.",
     capstoneLabSlug: "lab-60-proyecto-integrador-servicio-postventa",
     portfolioEvidence: [
       "Documento de diseño de 3-5 páginas (TO-BE, Fit-Gap)",
       "Matriz de trazabilidad y 8 casos UAT",
       "Diseño de Customer Insights (segmento y journey) y de Field Service",
-      "Matriz de configuración de colas, diseño de SLA con pausa/reanudación y dashboard de servicio (Lab 68)",
+      "Matriz de configuración de colas, diseño de SLA con pausa/reanudación y dashboard de servicio (LAB-068)",
       "Flujo de Power Automate con trigger, acciones y manejo de error",
       "Decisión de integración F&O (proceso ERP + dual-write/DMF/virtual tables) y 2 ADRs con roadmap",
       "Checklist de go-live y resumen ejecutivo de 1 página",
@@ -194,12 +199,12 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-64-capstone-fo-awareness-arquitectura-erp-crm",
     ],
     competencies: ["ERP vs CRM", "Procesos ERP estándar", "Mapeo de procesos O2C/P2P/R2R/I2D", "Dual-write técnico", "Virtual tables", "Data Management", "Gobernanza"],
-    status: "Especialización en construcción",
-    gapNote: "El Módulo 59 ya cubre el vocabulario y ahora los mapas paso a paso de los 5 procesos ERP estándar (order-to-cash, procure-to-pay, record-to-report, inventory-to-deliver, project-to-profit), y el Lab 69 los aplica a un escenario concreto. El Lab 70 profundiza el diseño técnico de integración (ownership de datos, dual-write, virtual tables, diagrama Mermaid) antes del capstone ejecutivo del Lab 64. Todavía no reemplaza una ruta profunda de configuración real de producto (Finance, Supply Chain Management, Commerce, Project Operations) — sigue siendo awareness avanzado, no experticia senior de implementación F&O. Ver el Roadmap de Especialización Avanzada Dynamics 365 para el detalle tema por tema de lo que falta.",
+    status: "Awareness avanzado — práctica en roadmap",
+    gapNote: "El Módulo 59 ya cubre el vocabulario y ahora los mapas paso a paso de los 5 procesos ERP estándar (order-to-cash, procure-to-pay, record-to-report, inventory-to-deliver, project-to-profit), y el LAB-069 los aplica a un escenario concreto. El LAB-070 profundiza el diseño técnico de integración (ownership de datos, dual-write, virtual tables, diagrama Mermaid) antes del capstone ejecutivo del LAB-064. Todavía no reemplaza una ruta profunda de configuración real de producto (Finance, Supply Chain Management, Commerce, Project Operations) — sigue siendo awareness avanzado, no experticia senior de implementación F&O. Ver el Roadmap de Especialización Avanzada Dynamics 365 para el detalle tema por tema de lo que falta.",
     capstoneLabSlug: "lab-64-capstone-fo-awareness-arquitectura-erp-crm",
     portfolioEvidence: [
-      "5 mapas de proceso ERP (O2C/P2P/R2R/I2D/Project-to-Profit) con pasos, actores y sistema responsable (Lab 69)",
-      "Diagrama Mermaid de integración y matriz de ownership de datos por entidad (Lab 70)",
+      "5 mapas de proceso ERP (O2C/P2P/R2R/I2D/Project-to-Profit) con pasos, actores y sistema responsable (LAB-069)",
+      "Diagrama Mermaid de integración y matriz de ownership de datos por entidad (LAB-070)",
       "Tabla de clasificación de procesos ERP vs. CRM con el proceso ERP estándar nombrado (O2C/P2P/R2R/I2D)",
       "Mapa de integración con dirección del dual-write",
       "Decisión justificada de dual-write vs. DMF vs. virtual tables para un caso concreto",

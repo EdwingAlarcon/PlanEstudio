@@ -30,6 +30,8 @@ const STATUS_VARIANT: Record<string, "default" | "secondary" | "outline"> = {
   Disponible: "default",
   Parcial: "secondary",
   "Especialización en construcción": "outline",
+  "Avanzado — especializaciones en expansión": "secondary",
+  "Awareness avanzado — práctica en roadmap": "outline",
 };
 
 export default async function ProfessionalRouteDetailPage({ params }: PageProps) {
@@ -79,7 +81,18 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
         {route.gapNote && (
           <div className="mt-4 flex items-start gap-3 rounded-lg border border-amber-500/30 bg-amber-50 px-4 py-3 dark:border-amber-400/20 dark:bg-amber-500/10">
             <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
-            <p className="text-sm leading-relaxed text-amber-900 dark:text-amber-200">{route.gapNote}</p>
+            <div className="space-y-1.5">
+              <p className="text-sm leading-relaxed text-amber-900 dark:text-amber-200">{route.gapNote}</p>
+              {route.gapNote.includes("Roadmap de Especialización Avanzada") && (
+                <Link
+                  href="/recursos/roadmap-especializacion-avanzada"
+                  className="inline-flex items-center gap-1 text-xs font-medium text-amber-800 hover:underline dark:text-amber-300"
+                >
+                  Ver Roadmap de Especialización Avanzada
+                  <ArrowRight className="h-3 w-3" aria-hidden />
+                </Link>
+              )}
+            </div>
           </div>
         )}
       </div>
