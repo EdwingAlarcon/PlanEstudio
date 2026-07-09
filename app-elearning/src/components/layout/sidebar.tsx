@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   BookOpen, CheckSquare, GraduationCap, FileText, Trophy,
-  Home, PlayCircle, FlaskConical, Route, HelpCircle, Briefcase,
+  Home, PlayCircle, FlaskConical, Route, HelpCircle, Briefcase, ClipboardList,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -81,6 +81,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
           {/* Primary actions */}
           <NavLink href="/"          icon={Home}        label={UI.nav.home}      active={pathname === "/"} />
           <NavLink href="/como-usar" icon={HelpCircle}  label={UI.nav.howToUse} active={pathname === "/como-usar"} />
+          <NavLink href="/progreso"  icon={ClipboardList} label={UI.nav.myProgress} active={pathname === "/progreso"} />
           <NavLink href="/rutas"     icon={Route}       label={UI.nav.routes}    active={pathname.startsWith("/rutas")} />
           <NavLink href="/simulador" icon={PlayCircle}  label={UI.nav.simulator} active={pathname === "/simulador"} />
           <NavLink href="/labs"      icon={FlaskConical} label="Laboratorios"    active={pathname.startsWith("/labs")} />

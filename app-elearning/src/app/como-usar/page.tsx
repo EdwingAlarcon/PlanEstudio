@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BookOpen, CheckCircle2, FlaskConical, HelpCircle, Route, Trophy } from "lucide-react";
+import { ArrowRight, BookOpen, CheckCircle2, ClipboardList, FlaskConical, HelpCircle, Route, Trophy } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -37,6 +37,13 @@ const STEPS = [
     description: "Usa el simulador después de estudiar un bloque. El resultado sirve para detectar temas débiles, no como sustituto de los labs.",
     href: "/simulador",
     action: "Practicar",
+  },
+  {
+    icon: ClipboardList,
+    title: "Verifica tu progreso real antes de pedir el certificado",
+    description: "El certificado exige módulos, quizzes aprobados (≥70%) y labs del nivel — no solo lectura. Revisa qué te falta en un solo lugar antes de intentarlo.",
+    href: "/progreso",
+    action: "Ver mi progreso",
   },
 ];
 
@@ -109,7 +116,9 @@ export default function HowToUsePage() {
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           No marques un módulo como dominado solo por leerlo. Primero completa sus criterios de validación,
           después resuelve el quiz, y finalmente ejecuta al menos un laboratorio relacionado cuando exista.
-          El simulador queda para cerrar ciclos y priorizar el repaso.
+          El simulador queda para cerrar ciclos y priorizar el repaso. Esta regla no es solo una
+          recomendación: <Link href="/progreso" className="text-[#0078D4] hover:underline dark:text-[#4DB8FF]">Mi Progreso</Link>{" "}
+          y el certificado de cada nivel la aplican de forma real, verificando quizzes y labs, no solo módulos marcados como leídos.
         </p>
       </section>
     </main>

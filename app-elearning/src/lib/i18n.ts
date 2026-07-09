@@ -16,6 +16,7 @@ export const UI = {
     competencyMatrix: "Matriz de Competencias",
     portfolio: "Portafolio",
     portfolioGuide: "Guía de Portafolio",
+    myProgress: "Mi Progreso",
     skipToContent: "Saltar al contenido",
     toggleTheme: "Cambiar tema",
     search: "Buscar...",
