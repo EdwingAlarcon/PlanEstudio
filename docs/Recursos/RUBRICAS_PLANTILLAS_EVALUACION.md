@@ -91,6 +91,120 @@ Checklist de calidad de evidencia:
 - [ ] Incluye fecha, responsable y ambiente.
 - [ ] Se conserva junto al entregable o en una ruta documentada.
 
+## Plantillas copiables
+
+Estas plantillas están pensadas para copiarse directamente a un archivo Markdown, Word o Excel. Reemplaza los valores entre corchetes y elimina las filas que no apliquen al proyecto.
+
+### 1. Plantilla copiable: matriz de trazabilidad
+
+```markdown
+# Matriz de Trazabilidad — [Proyecto]
+
+**Cliente/área:** [Nombre ficticio o área interna]  
+**Versión:** [v1.0]  
+**Responsable:** [Nombre / rol]  
+**Fecha:** [AAAA-MM-DD]
+
+| Req ID | Requerimiento | Historia de usuario | Diseño funcional | Componente técnico | Caso UAT | Evidencia esperada | Estado |
+|---|---|---|---|---|---|---|---|
+| REQ-001 | [Necesidad de negocio] | Como [rol], quiero [acción], para [beneficio] | FDD-01 [sección] | [Tabla/flujo/app/journey] | UAT-001 | [captura/log/registro] | Pendiente |
+| REQ-002 | [Necesidad de negocio] | Como [rol], quiero [acción], para [beneficio] | FDD-02 [sección] | [Tabla/flujo/app/journey] | UAT-002 | [captura/log/registro] | Pendiente |
+
+## Controles
+
+- [ ] Cada requerimiento crítico tiene al menos un caso UAT.
+- [ ] Cada caso UAT tiene evidencia esperada.
+- [ ] Cada componente técnico tiene una justificación funcional.
+- [ ] Los cambios de alcance están marcados como nuevo requerimiento o change request.
+```
+
+### 2. Plantilla copiable: caso UAT
+
+```markdown
+# Caso UAT — [UAT-###]
+
+| Campo | Valor |
+|---|---|
+| Requerimiento asociado | [REQ-###] |
+| Historia de usuario | Como [rol], quiero [acción], para [beneficio] |
+| Tipo de prueba | [Happy path / excepción / permisos / integración / datos / caso límite] |
+| Rol que ejecuta | [Usuario de negocio] |
+| Ambiente | [UAT / Sandbox] |
+| Precondiciones | [Datos, roles, configuración previa] |
+| Datos de prueba | [Cuenta, contacto, activo, importe, estado, etc.] |
+
+## Pasos
+
+1. [Acción del usuario]
+2. [Acción del usuario]
+3. [Acción del usuario]
+
+## Resultado esperado
+
+- [Resultado observable]
+- [Registro actualizado]
+- [Notificación, booking, journey, approval o evidencia generada]
+
+## Evidencia requerida
+
+- [ ] Captura o enlace del registro.
+- [ ] Log, historial o auditoría si aplica.
+- [ ] Comentario del usuario de negocio.
+
+## Resultado de ejecución
+
+| Estado | Defecto asociado | Comentarios | Aprobador |
+|---|---|---|---|
+| Pendiente | N/A | N/A | [Nombre / rol] |
+```
+
+### 3. Plantilla copiable: sign-off y checklist de evidencia
+
+```markdown
+# Sign-off UAT / Evidencia — [Proyecto]
+
+**Fecha de revisión:** [AAAA-MM-DD]  
+**Sprint / release:** [Nombre]  
+**Ambiente:** [UAT / Sandbox / PROD]  
+**Responsable funcional:** [Nombre / rol]  
+**Responsable técnico:** [Nombre / rol]
+
+## Resumen
+
+| Métrica | Resultado |
+|---|---|
+| Casos UAT planificados | [número] |
+| Casos aprobados | [número] |
+| Casos rechazados | [número] |
+| Defectos bloqueantes abiertos | [número] |
+| Riesgo residual | [Bajo / Medio / Alto] |
+
+## Checklist de aprobación
+
+- [ ] Requerimientos críticos cubiertos por UAT.
+- [ ] Evidencias almacenadas y nombradas de forma trazable.
+- [ ] Roles y permisos validados.
+- [ ] Datos sensibles anonimizados o protegidos.
+- [ ] Defectos bloqueantes cerrados o aceptados formalmente.
+- [ ] Go-live o siguiente fase aprobado por negocio.
+
+## Decisión
+
+| Decisión | Selección |
+|---|---|
+| Aprobado para siguiente fase | [Sí / No] |
+| Aprobado con observaciones | [Sí / No] |
+| Requiere nuevo ciclo UAT | [Sí / No] |
+
+## Firmas
+
+| Rol | Nombre | Comentario | Fecha |
+|---|---|---|---|
+| Negocio | [Nombre] | [Comentario] | [AAAA-MM-DD] |
+| TI / Arquitectura | [Nombre] | [Comentario] | [AAAA-MM-DD] |
+| QA / UAT Lead | [Nombre] | [Comentario] | [AAAA-MM-DD] |
+```
+
 ## Rúbrica específica: Customer Insights
 
 | Criterio | Aprobado profesional |
