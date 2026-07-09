@@ -146,7 +146,7 @@ Documenta cómo debería comportarse el agente en ese caso y qué control lo gar
 
 ## Módulos relacionados
 
-- Módulo 44 — Integración de Agentes con Power Automate y Dataverse
+- Módulo 43 — Copilot en Power Platform (Copilot Studio, Power Automate y Dataverse)
 - Lab 22 — Copilot Studio Avanzado
 - Lab 55 — UAT/Go-live y auditoría de prompts
 - Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)

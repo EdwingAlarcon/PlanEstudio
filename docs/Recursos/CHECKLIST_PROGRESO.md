@@ -502,9 +502,8 @@
 - [ ] **Práctica**: Diseño un agente de RRHH con acceso a políticas y Dataverse | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico las consideraciones de gobernanza de IA para agentes empresariales | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-022 completado — agente de soporte TI con SSO, Generative Answers y Adaptive Cards | Dominio: ___/5 | Fecha: ___
-- [ ] **Entrega**: LAB-065 completado — Capstone AI & Copilot: Agente Empresarial Gobernado | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 22:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 22:** ___/11 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
@@ -874,8 +873,9 @@
 - [ ] **Práctica**: Genero un flujo con "Describe it to design it" en Power Automate y explico cada acción propuesta | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Distingo el rol de Copilot Studio (agentes para usuarios finales) del de Copilot en Power Apps/Automate (asistente de makers) | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: Ubico y documento la configuración de gobernanza de Copilot en el Power Platform Admin Center | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-065 completado — Capstone AI & Copilot: Agente Empresarial Gobernado | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 43:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 43:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
