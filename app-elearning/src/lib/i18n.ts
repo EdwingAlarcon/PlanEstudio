@@ -13,6 +13,7 @@ export const UI = {
     questionBank: "Banco de Preguntas",
     promptsIA: "Prompts Reutilizables IA",
     rubricsTemplates: "Rúbricas y Plantillas",
+    competencyMatrix: "Matriz de Competencias",
     skipToContent: "Saltar al contenido",
     toggleTheme: "Cambiar tema",
     search: "Buscar...",

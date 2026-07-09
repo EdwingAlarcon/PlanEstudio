@@ -13,7 +13,7 @@ const localStorageMock = (() => {
 
 Object.defineProperty(global, "localStorage", { value: localStorageMock });
 
-import { useProgressStore } from "../progress";
+import { useProgressStore, calculateLevelQuizReadiness } from "../progress";
 
 describe("useProgressStore", () => {
   beforeEach(() => {
@@ -273,5 +273,39 @@ describe("useProgressStore", () => {
     it("returns false for a lab never completed", () => {
       expect(useProgressStore.getState().isLabComplete("lab-99-inexistente")).toBe(false);
     });
+  });
+});
+
+describe("calculateLevelQuizReadiness", () => {
+  it("is not ready when no quizzes were attempted", () => {
+    const result = calculateLevelQuizReadiness("basico", {});
+    expect(result).toEqual({ attempted: 0, total: 8, average: 0, ready: false });
+  });
+
+  it("is not ready when only some modules of the level were attempted", () => {
+    const result = calculateLevelQuizReadiness("basico", { "1": 90, "2": 80 });
+    expect(result.attempted).toBe(2);
+    expect(result.ready).toBe(false);
+  });
+
+  it("is not ready when every module was attempted but one scored below 70", () => {
+    const scores = Object.fromEntries(Array.from({ length: 8 }, (_, i) => [String(i + 1), 90]));
+    scores["3"] = 60;
+    const result = calculateLevelQuizReadiness("basico", scores);
+    expect(result.attempted).toBe(8);
+    expect(result.ready).toBe(false);
+  });
+
+  it("is ready when every module was attempted with a score >= 70", () => {
+    const scores = Object.fromEntries(Array.from({ length: 8 }, (_, i) => [String(i + 1), 70]));
+    const result = calculateLevelQuizReadiness("basico", scores);
+    expect(result).toEqual({ attempted: 8, total: 8, average: 70, ready: true });
+  });
+
+  it("ignores quiz scores from modules outside the level's range", () => {
+    const scores = Object.fromEntries(Array.from({ length: 8 }, (_, i) => [String(i + 1), 100]));
+    scores["9"] = 0; // module 9 belongs to "intermedio", not "basico"
+    const result = calculateLevelQuizReadiness("basico", scores);
+    expect(result).toEqual({ attempted: 8, total: 8, average: 100, ready: true });
   });
 });

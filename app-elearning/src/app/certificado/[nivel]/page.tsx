@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { LEVEL_ORDER, type LevelId } from "@/lib/i18n";
+import { getLabsForLevel, getLevelById } from "@/lib/content";
 import { CertificateClient } from "./certificate-client";
 
 interface PageProps {
@@ -21,5 +22,12 @@ export default async function CertificatePage({ params }: PageProps) {
   const { nivel } = await params;
   if (!LEVEL_ORDER.includes(nivel as LevelId)) notFound();
 
-  return <CertificateClient levelId={nivel as LevelId} />;
+  const levelId = nivel as LevelId;
+  const modules = (getLevelById(levelId)?.modules ?? []).map((m) => ({
+    moduleId: m.moduleId,
+    title: m.title,
+  }));
+  const labs = getLabsForLevel(levelId).map((lab) => ({ slug: lab.slug, title: lab.title }));
+
+  return <CertificateClient levelId={levelId} modules={modules} labs={labs} />;
 }

@@ -259,5 +259,10 @@ Criterios de aprobación:
 | Maker | Evidencia de app/flujo funcionando y checklist básico |
 | Consultor Funcional | FDD, historias, UAT, trazabilidad y sign-off |
 | Developer | Diseño técnico, pruebas, ALM y evidencia de build |
+| Dynamics 365 Customer Engagement | Segmento/journey, Work Order/SLA, matriz de trazabilidad y UAT del Lab 60 |
+| Finance & Operations Awareness | Mapa de integración ERP+CRM, dual-write conceptual y matriz de riesgos |
 | Solution Architect | Blueprint, riesgos, decisiones, seguridad, go-live y operación |
 | AI/Copilot | Prompts sanitizados, revisión humana y trazabilidad de decisiones |
+
+Ver la matriz completa de competencias por perfil, con evidencia y criterio de aprobación por
+ítem, en [Matriz de Competencias](MATRIZ_COMPETENCIAS.md).

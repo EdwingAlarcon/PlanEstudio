@@ -78,6 +78,32 @@ export function calculateLevelProgress(
   return { completed, total, percentage };
 }
 
+export interface LevelQuizReadiness {
+  attempted: number;
+  total: number;
+  average: number; // 0-100, average over attempted modules only
+  ready: boolean;  // every module in the level has a quiz score >= 70%
+}
+
+const QUIZ_PASS_THRESHOLD = 70;
+
+export function calculateLevelQuizReadiness(
+  levelId: LevelId,
+  quizScores: Record<string, number>
+): LevelQuizReadiness {
+  const [start, end] = LEVEL_MODULE_RANGE[levelId];
+  const total = end - start + 1;
+  const scores: number[] = [];
+  for (let moduleId = start; moduleId <= end; moduleId++) {
+    const score = quizScores[String(moduleId)];
+    if (typeof score === "number") scores.push(score);
+  }
+  const attempted = scores.length;
+  const average = attempted > 0 ? Math.round(scores.reduce((a, b) => a + b, 0) / attempted) : 0;
+  const ready = attempted === total && scores.every((score) => score >= QUIZ_PASS_THRESHOLD);
+  return { attempted, total, average, ready };
+}
+
 export function calculateOverallProgress(
   completedModules: string[]
 ): { completed: number; total: number; percentage: number } {

@@ -99,7 +99,7 @@ beforeEach(() => {
   vi.resetModules();
 });
 
-import { getAllLabs, getLabBySlug, getSearchDocuments } from "../content";
+import { getAllLabs, getLabBySlug, getLabsForLevel, getSearchDocuments } from "../content";
 
 // ─── getAllLabs con datos ─────────────────────────────────────────────────────
 
@@ -164,6 +164,20 @@ describe("getLabBySlug", () => {
 
   it("devuelve undefined para un slug inexistente", () => {
     expect(getLabBySlug("slug-que-no-existe")).toBeUndefined();
+  });
+});
+
+// ─── getLabsForLevel ───────────────────────────────────────────────────────────
+
+describe("getLabsForLevel", () => {
+  it("devuelve solo los labs cuyo frontmatter level mapea al nivel pedido (N1 → basico)", () => {
+    const labs = getLabsForLevel("basico");
+    expect(labs).toHaveLength(3);
+    expect(labs.every((lab) => lab.level === "N1")).toBe(true);
+  });
+
+  it("devuelve un array vacío para un nivel sin labs en los fixtures", () => {
+    expect(getLabsForLevel("intermedio")).toHaveLength(0);
   });
 });
 

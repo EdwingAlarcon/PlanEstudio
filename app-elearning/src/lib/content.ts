@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import type { LevelId } from "./i18n";
-import { LEVEL_MODULE_RANGE } from "./i18n";
+import { LEVEL_MODULE_RANGE, LEVEL_ORDER } from "./i18n";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -75,6 +75,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "lenguajes-programacion":"Anexos/LENGUAJES_PROGRAMACION.md",
   "prompts-ia":             "Recursos/PROMPTS_REUTILIZABLES_IA.md",
   "rubricas-plantillas":    "Recursos/RUBRICAS_PLANTILLAS_EVALUACION.md",
+  "matriz-competencias":    "Recursos/MATRIZ_COMPETENCIAS.md",
 };
 
 const LEVEL_META: Record<LevelId, { title: string; description: string; certification: string }> = {
@@ -494,6 +495,12 @@ export function getAllLabs(): LabInfo[] {
 
 export function getLabBySlug(slug: string): LabInfo | undefined {
   return getAllLabs().find((l) => l.slug === slug);
+}
+
+// "N1".."N5" (lab frontmatter) map 1:1 to LEVEL_ORDER's position ("basico".."ia").
+export function getLabsForLevel(levelId: LevelId): LabInfo[] {
+  const levelTag = `N${LEVEL_ORDER.indexOf(levelId) + 1}`;
+  return getAllLabs().filter((lab) => lab.level === levelTag);
 }
 
 // ─── Search index ─────────────────────────────────────────────────────────────
