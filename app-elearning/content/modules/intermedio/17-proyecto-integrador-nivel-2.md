@@ -239,6 +239,11 @@ Mensaje:
 - [ ] Solución importada como Managed en TEST sin errores de dependencias
 - [ ] End-to-end: crear oportunidad → aprobar propuesta → ver en Power BI → consultar en bot
 
+**Rúbrica de cierre:** evalúa este proyecto con las rúbricas *Low-code / Maker* y *Consultoría
+Funcional* (seguridad y documentación) de [Rúbricas y Plantillas de
+Evaluación](/recursos/rubricas-plantillas). Aprobación: ≥70/100 sin ningún criterio en 0. Nivel
+profesional/excelencia: ≥88/100.
+
 ---
 
 ## Criterios de Graduación — Nivel 2

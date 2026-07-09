@@ -194,6 +194,13 @@ Al completar el proyecto, debería poder demostrar:
 - [ ] Sentinel tiene al menos 1 regla de alerta funcionando
 - [ ] Presentación ejecutiva de 10 slides presentada y aprobada por mentor/par
 
+**Rúbrica de cierre:** evalúa este capstone con la rúbrica ponderada *Arquitectura Empresarial*
+de [Rúbricas y Plantillas de Evaluación](/recursos/rubricas-plantillas) (ADRs, seguridad, ALM,
+integraciones, gobernanza, riesgos y comunicación ejecutiva). Aprobación: ≥75/100 y ningún
+criterio en nivel 0-1. Nivel profesional/excelencia: ≥92/100. Esta rúbrica es el criterio que
+decide si el capstone está aprobado — la autoevaluación de la sección siguiente es un espacio de
+reflexión complementario, no un sustituto de la rúbrica.
+
 ---
 
 ## Criterios de Graduación — Nivel 4 (Solution Architect)
@@ -223,7 +230,9 @@ Para considerarse Solution Architect Master de Power Platform, debes cumplir:
 - [ ] **Portafolio de arquitectura revisado y aprobado** ← meta final
 
 ### Auto-evaluación Final
-Califica cada área del 1 al 5:
+Espacio de reflexión personal — complementa la rúbrica de cierre, no la reemplaza (la aprobación
+real del capstone la define el puntaje ≥75/100 de la rúbrica *Arquitectura Empresarial*, no este
+promedio). Califica cada área del 1 al 5:
 
 - Enterprise Architecture y Gobernanza: ___/5
 - CoE y Administración a escala: ___/5

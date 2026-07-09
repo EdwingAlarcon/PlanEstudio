@@ -141,6 +141,10 @@ public class CasoPreCreatePlugin : IPlugin
 - [ ] PCF Dataset control reemplaza la subgrid nativa con funcionalidad adicional
 - [ ] Power BI con RLS muestra datos correctos por región
 
+**Rúbrica de cierre:** evalúa este proyecto con la rúbrica *Desarrollo Técnico* de [Rúbricas y
+Plantillas de Evaluación](/recursos/rubricas-plantillas). Aprobación: ≥70/100 sin ningún criterio
+en 0. Nivel profesional/excelencia: ≥90/100.
+
 ---
 
 ## Criterios de Graduación — Nivel 3

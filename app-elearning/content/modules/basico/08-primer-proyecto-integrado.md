@@ -635,6 +635,10 @@ Este módulo es la síntesis aplicada de los conceptos fundamentales del Nivel 1
 - [ ] Métricas del dashboard útiles y accionables
 - [ ] Feedback de usuarios incorporado
 
+**Rúbrica de cierre:** evalúa este proyecto con la rúbrica *Low-code / Maker* de
+[Rúbricas y Plantillas de Evaluación](/recursos/rubricas-plantillas). Aprobación: ≥65/100 sin
+ningún criterio en 0. Nivel profesional/excelencia: ≥85/100.
+
 ---
 
 ## 🎓 Resumen del Nivel 1

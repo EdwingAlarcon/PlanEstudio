@@ -252,6 +252,83 @@ Criterios de aprobación:
 - [ ] La matriz de trazabilidad conecta todos los requerimientos críticos.
 - [ ] La evidencia esperada permite auditar el resultado.
 
+## Rúbrica específica: Low-code / Maker
+
+| Criterio | Aprobado profesional |
+|---|---|
+| Modelo de datos | Tablas relacionadas correctamente, sin columnas `new_`, choices en vez de texto libre para valores fijos |
+| Experiencia de usuario | Formularios con validación visible, mensajes de error claros, sin pantallas en blanco ante datos vacíos |
+| Validaciones | Casos de borde (campo vacío, duplicado, fuera de rango) bloqueados antes de guardar |
+| Seguridad básica | Al menos 2 roles probados con un segundo usuario real, sin acceso "Administrador" por defecto |
+| Documentación | Manual de usuario de 1-2 páginas que un no-técnico puede seguir sin ayuda |
+
+## Rúbrica específica: Consultoría Funcional
+
+| Criterio | Aprobado profesional |
+|---|---|
+| Discovery | Preguntas identifican ambigüedades reales del caso, no solo confirman lo ya dicho |
+| Historias de usuario | Formato "Como... quiero... para..." con criterios de aceptación verificables (no "funciona bien") |
+| Fit-Gap | 100% de requerimientos clasificados (config/personalización/fuera de alcance), brechas con propuesta |
+| Trazabilidad | Cada requerimiento crítico enlaza a un caso UAT y una evidencia |
+| UAT | Casos cubren happy path, al menos una excepción y al menos un caso de permisos |
+| Documentación funcional | Un stakeholder no técnico entiende la solución sin preguntas de seguimiento básicas |
+
+## Rúbrica específica: Desarrollo Técnico (plugins, PCF, connectors, ALM)
+
+| Criterio | Aprobado profesional |
+|---|---|
+| Calidad técnica | Código sin lógica duplicada, sin `context.Depth` sin controlar (anti-recursión en plugins) |
+| Pruebas | Al menos 1 unit test de caso feliz y 1 de caso de error, en verde |
+| Seguridad | Sin secretos/API keys hardcodeados; usa Connection References y Environment Variables |
+| ALM | Solución exportable managed/unmanaged según ambiente, ningún cambio directo en PROD |
+| Mantenibilidad | Nombres de componentes y variables consistentes con la convención del proyecto |
+| Documentación técnica | Explica decisiones no obvias (por qué síncrono/asíncrono, por qué esa integración) |
+
+## Rúbrica específica: Arquitectura Empresarial
+
+| Criterio | Peso | Aprobado profesional |
+|---|---|---|
+| Arquitectura objetivo y ADRs | 20% | Al menos 2 ADRs con alternativas descartadas y su justificación |
+| Modelo de seguridad | 15% | Principio de menor privilegio aplicado, sin roles amplios "por ahora" |
+| ALM enterprise | 15% | Pipeline con gates de aprobación entre ambientes y rollback probado al menos una vez |
+| Integraciones | 15% | Manejo explícito de fallos (retry, circuit breaker, dead-letter) documentado |
+| Gobernanza | 15% | Al menos una política DLP o de CoE verificada en la prueba, no solo descrita |
+| Riesgos y roadmap | 10% | Riesgos con probabilidad/impacto y plan de mitigación, no una lista genérica |
+| Comunicación ejecutiva | 10% | Un ejecutivo no técnico entiende riesgo y costo sin preguntas básicas de seguimiento |
+
+Aprobación: ≥ 75/100 y ningún criterio en nivel 0-1. Esta rúbrica reemplaza como criterio
+principal a la autoevaluación 1-5 de dominio — la autoevaluación se conserva como reflexión
+complementaria, no como el criterio que decide si el capstone está aprobado.
+
+## Rúbrica específica: IA y Agentes Gobernados
+
+| Criterio | Aprobado profesional |
+|---|---|
+| Diseño del agente | Alcance y temas responden a un caso de negocio concreto, no un demo genérico |
+| Fuentes de conocimiento | Documentadas con dueño y fecha de actualización |
+| Seguridad de IA | Matriz de riesgos (alucinación, fuga de datos, sobre-confianza) con mitigación específica, no genérica |
+| Escalamiento humano | Criterio objetivo de cuándo escalar (no "si el bot no sabe") |
+| Integración | Acción del agente en Dataverse/Power Automate coincide exactamente con lo solicitado en la conversación |
+| Auditoría | Log o transcript conservado de al menos 3 conversaciones de prueba, incluida una fuera del guion feliz |
+
+## Evaluación práctica final por nivel
+
+Cada nivel cierra con un proyecto integrador ya existente en el contenido — esta sección lo
+conecta con una rúbrica y un umbral numérico, en vez de dejar solo un checklist de honor.
+
+| Nivel | Caso de negocio y entregables | Rúbrica a aplicar | Aprobación | Excelencia |
+|---|---|---|---|---|
+| N1 — Básico | Módulo 8, *Primer Proyecto Integrado*: sistema de solicitudes con Dataverse, Canvas App, Model-Driven App, Power Automate y Power BI | Low-code / Maker | ≥ 65/100, ningún criterio en 0 | ≥ 85/100 |
+| N2 — Intermedio | Módulo 17, *Proyecto Integrador Nivel 2*: solución de ventas con Component Library, Child Flows, RLS y bot de Teams | Low-code / Maker + Consultoría Funcional (seguridad y documentación funcional) | ≥ 70/100, ningún criterio en 0 | ≥ 88/100 |
+| N3 — Avanzado | Módulo 30, *Proyecto Multicapa Nivel 3*: 6 soluciones con plugin, PCF, integración vía Service Bus y Copilot Studio con SSO | Desarrollo Técnico | ≥ 70/100, ningún criterio en 0 | ≥ 90/100 |
+| N4 — Arquitecto | Módulo 41, *Proyecto Capstone Arquitectura Enterprise*: solución multi-tenant con Zero Trust, Fabric y presentación ejecutiva | Arquitectura Empresarial (ponderada) | ≥ 75/100, ningún criterio en 0-1 | ≥ 92/100 |
+| Nivel IA | Lab 51 (*Flujo Completo Humano→IA→CI*) + Módulo 55: aplicar el flujo diseña→IA implementa→CI valida→humano aprueba a un cambio real, con auditoría de prompts | IA y Agentes Gobernados | ≥ 70/100, ningún criterio en 0 | ≥ 88/100 |
+
+**Nota sobre Nivel IA:** a diferencia de N1-N4, todavía no existe un proyecto integrador dedicado
+del tamaño de los módulos 8/17/30/41 — Lab 51 cubre el proceso pero no un escenario de negocio
+completo con entregables propios. Cerrar esa brecha con un Capstone AI & Copilot dedicado queda
+en el backlog de capstones (ver [Matriz de Competencias](MATRIZ_COMPETENCIAS.md)).
+
 ## Uso recomendado por rol
 
 | Rol | Qué debe entregar |
