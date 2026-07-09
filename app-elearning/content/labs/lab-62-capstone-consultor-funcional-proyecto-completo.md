@@ -3,12 +3,13 @@ id: lab-62
 title: "Capstone Consultor Funcional — Proyecto Funcional Completo"
 level: "N2"
 duration: 720
-product: ["Power Platform", "Dynamics 365"]
-certifications: ["PL-200"]
+product: ["Dynamics 365 Sales", "Power Platform", "Dataverse"]
+certifications: ["PL-200", "MB-210"]
 role: ["Functional Consultant"]
 prerequisites:
   - "Lab 04 completado: Model-Driven App"
   - "Lab 09 completado: Dataverse Avanzado"
+  - "Módulo 20 revisado: Dynamics 365 CE — Sales y Customer Service"
   - "Recurso revisado: Rúbricas y Plantillas de Evaluación"
 ---
 
@@ -24,13 +25,15 @@ Dynamics 365 CE, Finance & Operations o Solution Architect.
 ## Escenario de negocio
 
 **Empresa ficticia:** Distribuidora Andina de Insumos Médicos (DAIM), 180 empleados, 4 sedes
-regionales.
+regionales, ya usa Dynamics 365 Sales para gestionar su pipeline de oportunidades.
 
-El área comercial de DAIM gestiona descuentos especiales para clientes hospitalarios de forma
-manual, con aprobaciones por correo y sin registro centralizado. El gerente comercial pide "una
-solución que ordene las aprobaciones de descuentos" — sin más detalle. Durante el discovery
-descubres que hay al menos 3 tipos de descuento con reglas de aprobación distintas, y que el
-área de Finanzas también necesita visibilidad del impacto de esos descuentos en el margen.
+El área comercial de DAIM gestiona descuentos especiales para clientes hospitalarios por fuera
+del sistema: la Opportunity y la Quote ya existen en Dynamics 365 Sales, pero la aprobación del
+descuento se negocia por correo, sin registro dentro del propio Sales. El gerente comercial pide
+"una solución que ordene las aprobaciones de descuentos dentro de lo que ya tenemos en Sales" —
+sin más detalle. Durante el discovery descubres que hay al menos 3 tipos de descuento con reglas
+de aprobación distintas, y que el área de Finanzas también necesita visibilidad del impacto de
+esos descuentos en el margen antes de que la Quote se envíe al cliente.
 
 El caso es deliberadamente incompleto: parte de tu trabajo es identificar qué falta preguntar
 antes de diseñar la solución.
@@ -61,7 +64,9 @@ Incluye:
   cliente, pero las preguntas deben ser las que realmente harías).
 - Procesos AS-IS y TO-BE.
 - Backlog de historias de usuario con criterios de aceptación.
-- Matriz Fit-Gap contra Dataverse/Dynamics 365 estándar.
+- Matriz Fit-Gap contra entidades y capacidades estándar de Dynamics 365 Sales (Opportunity,
+  Quote, Business Process Flow, Approvals de Power Automate) — no propongas una tabla o app
+  nueva para algo que Sales ya modela.
 - Matriz de trazabilidad requerimiento → prueba.
 - Plan y casos UAT.
 - Manual de usuario.
@@ -107,9 +112,12 @@ que no deben tocarse?
 
 ### 4. Matriz Fit-Gap
 
-- 100% de los requerimientos clasificados: Fit (estándar), Fit parcial (configuración), Gap
+- 100% de los requerimientos clasificados contra las entidades estándar de Dynamics 365 Sales
+  (Opportunity, Quote, BPF, Approvals): Fit (estándar), Fit parcial (configuración), Gap
   (requiere desarrollo o fuera de alcance).
 - Cada Gap con una propuesta (configurar distinto, aceptar la brecha, o escalar a Developer).
+- Ninguna fila debería proponer una tabla personalizada para algo que Opportunity/Quote ya
+  resuelven — si aparece una, justifica explícitamente por qué el estándar no alcanza.
 
 ### 5. Matriz de trazabilidad
 
@@ -143,7 +151,7 @@ presentación.
 |---|---:|---|
 | Discovery | 15% | Preguntas identifican ambigüedades reales, no solo confirman lo ya dicho |
 | Historias de usuario | 15% | ≥8 historias con criterios de aceptación verificables |
-| Fit-Gap | 15% | 100% de requerimientos clasificados, brechas con propuesta, considerando las restricciones del proyecto |
+| Fit-Gap | 15% | 100% de requerimientos clasificados contra entidades estándar de Sales (Opportunity/Quote/BPF), brechas con propuesta, considerando las restricciones del proyecto |
 | Trazabilidad | 10% | Cada requerimiento crítico conectado a UAT y evidencia |
 | UAT | 15% | Cubre happy path, excepción, permisos y datos incompletos |
 | Documentación funcional | 10% | Comprensible para un no-técnico sin preguntas de seguimiento básicas |
@@ -202,14 +210,15 @@ completar el Fit-Gap: ¿qué requerimientos degradarías primero y por qué?
 - Módulo 15 — Copilot Studio: Introducción (contexto de automatización conversacional)
 - Módulo 16 — Seguridad y Administración de Soluciones
 - Módulo 17 — Proyecto Integrador Nivel 2
-- Lab 04, Lab 09
+- Módulo 20 — Dynamics 365 CE — Sales y Customer Service (entidades Opportunity/Quote/BPF)
+- Lab 04, Lab 09, Lab 66 (Sales Lead-to-Cash, como referencia de configuración estándar)
 - Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)
 
 ## Competencias desarrolladas
 
 - Discovery y detección de ambigüedades en requerimientos.
 - Redacción de historias de usuario con criterios de aceptación verificables.
-- Análisis Fit-Gap contra capacidades estándar.
+- Análisis Fit-Gap contra entidades y capacidades estándar de Dynamics 365 Sales.
 - Trazabilidad de requerimientos a evidencia.
 - Preparación y ejecución de UAT.
 - Comunicación funcional para stakeholders no técnicos.

@@ -1,24 +1,30 @@
 ---
 id: lab-60
-title: "Proyecto Integrador — Servicio Postventa con Customer Insights y Field Service"
+title: "Capstone Microsoft Business Applications — Servicio Postventa con Customer Insights, Field Service y F&O"
 level: "N4"
-duration: 180
-product: ["Dynamics 365 Sales", "Dynamics 365 Customer Service", "Customer Insights", "Dynamics 365 Field Service", "Dataverse"]
+duration: 240
+product: ["Dynamics 365 Sales", "Dynamics 365 Customer Service", "Customer Insights", "Dynamics 365 Field Service", "Dataverse", "Power Automate"]
 certifications: ["Arquitectura Power Platform", "Dynamics 365 Customer Engagement"]
 role: ["Functional Consultant", "Solution Architect"]
 prerequisites:
   - "Lab 55 completado: UAT, matriz de trazabilidad y checklist de go-live"
   - "Lab 58 completado: Customer Insights — segmento y journey"
   - "Lab 59 completado: Field Service — Work Order y UAT"
+  - "Módulo 59 estudiado: Finance & Operations — Procesos ERP y Virtual Tables"
   - "Recurso revisado: Rúbricas y Plantillas de Evaluación"
 files: []
 ---
 
-# Lab 60 — Proyecto Integrador: Servicio Postventa con Customer Insights y Field Service
+# Lab 60 — Capstone Microsoft Business Applications: Servicio Postventa con Customer Insights, Field Service y F&O
 
 ## Objetivo
 
-Al finalizar este proyecto integrador habrás diseñado una solución evaluable de servicio postventa para SIT, conectando Sales, Customer Service, Customer Insights y Field Service con trazabilidad, UAT, evidencia y criterios de aprobación basados en la rúbrica `/recursos/rubricas-plantillas`.
+Este es el capstone que demuestra Microsoft Business Applications como ecosistema completo: al
+finalizarlo habrás diseñado una solución evaluable de servicio postventa para SIT que conecta
+Sales, Customer Service, Customer Insights y Field Service con trazabilidad, UAT y evidencia,
+más una automatización real con Power Automate, una decisión explícita de integración con
+Finance & Operations, y una sección de arquitectura y roadmap — todo evaluado con la rúbrica
+profesional de `/recursos/rubricas-plantillas`.
 
 ## Escenario de negocio
 
@@ -163,6 +169,37 @@ Entrega:
 - [ ] Plan de rollback conceptual documentado.
 - [ ] Comunicación a usuarios preparada.
 
+### 8. Automatización con Power Automate
+
+Diseña (y, si tienes ambiente, construye) al menos un flujo real que automatice un paso del
+proceso TO-BE — por ejemplo: notificar al account manager cuando un cliente sale del journey por
+caso crítico, o crear automáticamente el Work Order cuando un Case cumple los criterios de
+garantía y prioridad. Documenta:
+
+- Trigger (qué evento lo dispara).
+- Acciones principales, en orden.
+- Manejo de error (qué pasa si una acción falla — no lo dejes sin definir).
+- Evidencia: captura del flujo o su definición exportada.
+
+### 9. Decisión de integración con Finance & Operations
+
+Formaliza la decisión arquitectónica sobre qué datos quedan en ERP/F&O como sistema maestro y
+cuáles se sincronizan a Dataverse o Customer Insights — usando el vocabulario del Módulo 59:
+
+- Nombra el proceso ERP estándar involucrado (la facturación de la renovación es parte de
+  **order-to-cash**, no de Sales).
+- Decide, con el criterio de decisión del Módulo 59, si la integración de datos de facturación
+  hacia Dataverse debería ser dual-write, DMF o virtual tables — justifica por qué.
+- Explica el impacto en operación, datos y compliance de esa decisión.
+
+### 10. Arquitectura y roadmap
+
+- 2 ADRs (Architecture Decision Records) breves sobre las decisiones más relevantes del proyecto
+  (por ejemplo: la decisión de integración F&O del entregable 9, y una decisión de seguridad o
+  ambientes).
+- Un roadmap de 2-3 fases para llevar esta solución mínima viable a producción (qué se construye
+  primero, qué depende de qué).
+
 ## Resultado esperado
 
 Un paquete de proyecto integrador con diseño funcional, trazabilidad, UAT y evidencia suficiente para calificar el entregable usando la rúbrica profesional.
@@ -171,15 +208,18 @@ Un paquete de proyecto integrador con diseño funcional, trazabilidad, UAT y evi
 
 | Criterio | Peso | Aprobado mínimo |
 |---|---:|---|
-| Diseño funcional TO-BE | 20% | Proceso completo con roles y excepciones |
-| Customer Insights | 15% | Segmento y journey con consentimiento y exclusiones |
-| Field Service | 15% | Work Order, Booking, scheduling y evidencia móvil |
-| Trazabilidad | 20% | Requerimientos conectados a UAT y evidencia |
-| UAT | 15% | 8 casos cubren happy path, errores, permisos e integración |
-| Go-live | 10% | Checklist cubre datos, seguridad, rollback y comunicación |
+| Diseño funcional TO-BE | 15% | Proceso completo con roles y excepciones |
+| Customer Insights | 10% | Segmento y journey con consentimiento y exclusiones |
+| Field Service | 10% | Work Order, Booking, scheduling y evidencia móvil |
+| Trazabilidad | 15% | Requerimientos conectados a UAT y evidencia |
+| UAT | 10% | 8 casos cubren happy path, errores, permisos e integración |
+| Go-live | 5% | Checklist cubre datos, seguridad, rollback y comunicación |
+| Automatización Power Automate | 10% | Flujo con trigger, acciones y manejo de error definidos |
+| Decisión de integración F&O | 10% | Nombra el proceso ERP correcto y justifica dual-write/DMF/virtual tables con el criterio del Módulo 59 |
+| Arquitectura y roadmap | 10% | 2 ADRs con alternativas descartadas + roadmap de fases coherente |
 | Claridad ejecutiva | 5% | Resumen entendible para negocio y arquitectura |
 
-Aprobación: mínimo 75/100 y ningún criterio crítico de Customer Insights, Field Service o trazabilidad en nivel 0-1.
+Aprobación: mínimo 75/100 y ningún criterio crítico de Customer Insights, Field Service, trazabilidad o decisión F&O en nivel 0-1.
 
 ## Evidencia esperada
 
@@ -188,6 +228,9 @@ Aprobación: mínimo 75/100 y ningún criterio crítico de Customer Insights, Fi
 - Matriz de trazabilidad.
 - 8 casos UAT.
 - Checklist de go-live.
+- Captura o definición del flujo de Power Automate.
+- Decisión de integración F&O documentada (proceso ERP + dual-write/DMF/virtual tables).
+- 2 ADRs y roadmap de 2-3 fases.
 - Resumen ejecutivo de máximo 1 página.
 
 ## Errores comunes
@@ -201,12 +244,17 @@ Aprobación: mínimo 75/100 y ningún criterio crítico de Customer Insights, Fi
 
 ## Reto adicional
 
-Agrega una decisión arquitectónica breve: ¿qué datos deben quedarse en ERP/F&O como sistema maestro y cuáles deben sincronizarse a Dataverse o Customer Insights? Justifica con impacto en operación, datos y compliance.
+El comité pregunta: "¿qué pasaría si duplicáramos esta solución para un segundo país con
+regulación de consentimiento distinta?". Explica en un párrafo qué partes del diseño (segmento,
+journey, matriz de seguridad) se reutilizarían tal cual y cuáles requerirían un ADR nuevo.
 
 ## Módulos relacionados
 
 - Módulo 20 — Dynamics 365 CE — Sales y Customer Service
 - Módulo 38 — Liderazgo Técnico y Gestión de Proyectos
+- Módulo 41 — Proyecto Capstone Arquitectura Enterprise
+- Módulo 56 — Introducción a Dynamics 365 Avanzado
+- Módulo 59 — Finance & Operations: Procesos ERP y Virtual Tables
 - Lab 55 — UAT/Checklist de Go-Live y auditoría de prompts
 - Lab 58 — Customer Insights: segmento y journey
 - Lab 59 — Field Service: Work Order y UAT
@@ -218,4 +266,7 @@ Agrega una decisión arquitectónica breve: ¿qué datos deben quedarse en ERP/F
 - Evaluación funcional con rúbrica.
 - Trazabilidad de requerimientos a evidencia.
 - Preparación de UAT y go-live.
+- Automatización de un proceso de negocio con Power Automate.
+- Decisión de integración con Finance & Operations usando vocabulario ERP estándar.
+- Documentación de decisiones arquitectónicas (ADRs) y roadmap.
 - Comunicación de solución para negocio y arquitectura.

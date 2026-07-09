@@ -136,7 +136,7 @@ tarjeta destacada "Proyecto final de la ruta":
 | Maker | Lab 61 — Sistema Interno de Gestión de Solicitudes | Low-code / Maker |
 | Consultor Funcional | Lab 62 — Proyecto Funcional Completo | Consultoría Funcional |
 | Developer | Lab 63 — Solución Técnica Avanzada | Desarrollo Técnico |
-| Dynamics 365 Customer Engagement | Lab 60 — Proyecto Integrador Servicio Postventa | Customer Insights / Field Service |
+| Dynamics 365 Customer Engagement | Lab 60 — Capstone Microsoft Business Applications (Servicio Postventa + Power Automate + decisión F&O + ADRs) | Customer Insights / Field Service |
 | Finance & Operations Awareness | Lab 64 — Arquitectura Conceptual ERP + CRM | Arquitectura Empresarial (alcance conceptual) |
 | Solution Architect | Módulo 41 — Proyecto Capstone Arquitectura Enterprise | Arquitectura Empresarial (ponderada) |
 | AI & Copilot | Lab 65 — Agente Empresarial Gobernado | IA y Agentes Gobernados |
