@@ -5475,6 +5475,104 @@
       answer: [0],
       explanation: "Si una fuente se actualiza mensualmente y otra a diario, una medida que combina ambas refleja información desactualizada de la fuente más lenta — hay que comunicar ese matiz al interpretar el resultado."
     }
+  ],
+  58: [
+    {
+      type: "single",
+      prompt: "¿Qué motor subyacente hace posible el Schedule Board de Field Service?",
+      options: [
+        "Universal Resource Scheduling (URS), que también usan Customer Service y Project Operations",
+        "Un motor exclusivo de Field Service sin relación con otras aplicaciones D365",
+        "Power BI, que genera el panel de asignación de técnicos",
+        "Copilot Studio, que reemplaza por completo al dispatcher humano"
+      ],
+      answer: [0],
+      explanation: "Universal Resource Scheduling (URS) es el motor compartido detrás del Schedule Board; también lo usan Customer Service (reservar salas/agentes) y Project Operations, no es exclusivo de Field Service."
+    },
+    {
+      type: "single",
+      prompt: "Un Work Order no tiene Characteristics (skills) requeridas configuradas. ¿Qué consecuencia tiene esto en el Schedule Board?",
+      options: [
+        "El resaltado de técnicos compatibles pierde sentido, porque cualquier técnico parece disponible aunque no tenga la skill",
+        "El Work Order no puede crearse en absoluto",
+        "El sistema asigna automáticamente al técnico más cercano sin importar la skill",
+        "El Schedule Board oculta ese Work Order de la vista del dispatcher"
+      ],
+      answer: [0],
+      explanation: "Sin Characteristics requeridas, el Schedule Board no puede filtrar técnicos por skill — cualquier técnico 'parece' disponible aunque no tenga la competencia necesaria para el trabajo."
+    },
+    {
+      type: "single",
+      prompt: "¿Cuándo se justifica activar Resource Scheduling Optimization (RSO) en vez de usar el Scheduling Assistant manual?",
+      options: [
+        "Cuando el volumen de Work Orders similares por día es alto (decenas o cientos por región)",
+        "Siempre, porque RSO es superior al Scheduling Assistant en cualquier escenario",
+        "Solo cuando hay menos de 5 Work Orders diarios en total",
+        "Únicamente si la empresa no tiene dispatchers humanos disponibles"
+      ],
+      answer: [0],
+      explanation: "RSO se justifica con volumen alto de Work Orders (decenas o cientos diarios por región); con bajo volumen, el Scheduling Assistant manual es suficiente y más fácil de auditar."
+    },
+    {
+      type: "single",
+      prompt: "Una empresa de mantenimiento de ascensores no configuró Incident Type Tasks, y una auditoría detectó que el 30% de los cierres de mantenimiento preventivo no verificaron el freno de emergencia. ¿Cuál fue la causa raíz?",
+      options: [
+        "El paso crítico no estaba configurado como tarea obligatoria del Incident Type, quedando a criterio de cada técnico",
+        "Los técnicos no tenían la app móvil instalada",
+        "El Schedule Board asignó técnicos sin la skill requerida",
+        "El cliente rechazó la inspección del freno de emergencia"
+      ],
+      answer: [0],
+      explanation: "Sin tareas obligatorias configuradas en el Incident Type, cada técnico decidía qué revisar según su propio criterio — el paso crítico de seguridad no estaba garantizado por el sistema."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué diferencia a un Incident Type de un Work Order Type?",
+      options: [
+        "El Incident Type especifica el problema exacto (con duración, skills y tareas); el Work Order Type clasifica el propósito general (instalación, mantenimiento, reparación)",
+        "Son sinónimos exactos y se pueden usar indistintamente",
+        "El Work Order Type siempre reemplaza al Incident Type en Field Service",
+        "El Incident Type solo aplica a clientes con garantía activa"
+      ],
+      answer: [0],
+      explanation: "El Incident Type es más específico (qué falla exactamente, con duración/skills/tareas); el Work Order Type clasifica el propósito general y se combina con el Incident Type, no lo reemplaza."
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué es importante probar explícitamente la sincronización offline de la app móvil de Field Service antes de un despliegue?",
+      options: [
+        "Porque el técnico puede perder señal en campo, y muchos proyectos descubren problemas de sincronización solo cuando eso ocurre en producción",
+        "Porque la app móvil nunca funciona sin conexión a internet",
+        "Porque la sincronización offline no afecta el registro de materiales consumidos",
+        "Porque solo los administradores usan la app móvil, nunca los técnicos"
+      ],
+      answer: [0],
+      explanation: "El técnico puede perder señal en campo; la app descarga el Work Order y sus tareas antes de salir y sincroniza al recuperar conexión — probar este flujo antes del despliegue evita descubrir fallas en producción."
+    },
+    {
+      type: "single",
+      prompt: "¿Qué rol cumplen los Territorios de Servicio (Service Territories) en el Schedule Board y el RSO?",
+      options: [
+        "Agrupan técnicos por zona geográfica y actúan como primer filtro antes de evaluar skill o disponibilidad",
+        "Determinan exclusivamente el precio del servicio, sin relación con la asignación de técnicos",
+        "Solo se usan para reportes financieros, no para scheduling",
+        "Reemplazan la necesidad de definir Characteristics en el Work Order"
+      ],
+      answer: [0],
+      explanation: "Los Territorios de Servicio agrupan técnicos por zona geográfica; el Schedule Board y el RSO los usan como primer filtro para evitar sugerir un técnico lejano cuando hay uno disponible en la misma zona."
+    },
+    {
+      type: "single",
+      prompt: "El Scheduling Assistant sugiere candidatos para un Work Order. ¿Qué diferencia tiene frente al arrastre manual en el Schedule Board y frente a Resource Scheduling Optimization?",
+      options: [
+        "Sugiere los mejores candidatos (skill + cercanía + disponibilidad), pero la decisión final sigue siendo humana — es un punto intermedio entre lo manual y lo totalmente automatizado",
+        "Es idéntico al arrastre manual, sin ninguna sugerencia adicional",
+        "Asigna automáticamente sin ninguna intervención humana, igual que RSO",
+        "Solo puede usarse si ya se activó Resource Scheduling Optimization"
+      ],
+      answer: [0],
+      explanation: "El Scheduling Assistant sugiere los mejores candidatos según skill, cercanía y disponibilidad, pero la decisión final la toma el dispatcher — es el punto intermedio entre arrastrar manualmente y automatizar por completo con RSO."
+    }
   ]
 };
 

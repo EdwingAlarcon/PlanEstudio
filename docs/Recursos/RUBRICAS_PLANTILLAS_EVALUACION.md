@@ -232,6 +232,7 @@ Estas plantillas están pensadas para copiarse directamente a un archivo Markdow
 | Flujo funcional | Case, Work Order y Booking están diferenciados |
 | Datos mínimos | Cuenta, activo, incident type, ubicación, prioridad y ventana definidos |
 | Scheduling | Asignación considera skill, disponibilidad, ubicación y SLA |
+| Incident Type | Duración, Characteristics y tareas obligatorias definidas, no solo una etiqueta |
 | Evidencia móvil | Checklist, foto, medición, firma o nota de cierre definidos |
 | UAT | Cubre happy path, garantía, prioridad crítica, permisos y evidencia incompleta |
 

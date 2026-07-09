@@ -149,7 +149,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     outcome: "Diseñar procesos de ventas y servicio sobre Dynamics 365 CE con entidades estándar antes de personalizar.",
     level: "Especialización",
     accent: "#4F6BED",
-    modules: [1, 4, 9, 15, 20, 22, 30, 39, 53, 55, 56, 57],
+    modules: [1, 4, 9, 15, 20, 22, 30, 39, 53, 55, 56, 57, 58],
     labs: [
       "lab-22-copilot-studio",
       "lab-55-uat-gonolive-y-auditoria-prompts",
@@ -162,7 +162,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     ],
     competencies: ["Sales", "Customer Service", "Dataverse estándar", "Omnichannel", "Copilot para servicio", "Fit-Gap D365"],
     status: "Parcial",
-    gapNote: "Sales, Customer Service y Customer Insights - Data ya tienen módulo y lab dedicados con datos reales (Módulos 20/56/57, Labs 66/67). Field Service todavía se apoya solo en el Lab 59 sin módulo propio, y Omnichannel avanzado (voz/chat real) sigue sin configuración práctica — complementa esas dos áreas con documentación oficial de Microsoft Learn mientras se profundizan en próximos sprints.",
+    gapNote: "Sales, Customer Service, Customer Insights - Data y Field Service ya tienen módulo y lab dedicados con datos reales (Módulos 20/56/57/58, Labs 66/67/59). Solo Omnichannel avanzado (voz/chat real) sigue sin configuración práctica — complementa esa área con documentación oficial de Microsoft Learn mientras se profundiza en próximos sprints.",
     capstoneLabSlug: "lab-60-proyecto-integrador-servicio-postventa",
     portfolioEvidence: [
       "Documento de diseño de 3-5 páginas (TO-BE, Fit-Gap)",

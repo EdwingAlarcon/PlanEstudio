@@ -81,6 +81,22 @@ El dispatcher debe asignar técnico según:
 
 Documenta por qué técnico asignarías a cada caso de prueba.
 
+### Paso 3b — Configurar Incident Type y Schedule Board (Módulo 58)
+
+Para cada uno de los 3 casos de datos de prueba, define su **Incident Type** con:
+
+- Duración estimada (en minutos).
+- Characteristics requeridas (skill + nivel, ej. "HVAC nivel 2").
+- 2-3 tareas obligatorias (Incident Type Tasks) que el técnico no puede omitir al cerrar.
+
+Luego describe qué verías en el **Schedule Board** al intentar asignar cada caso: qué técnicos
+aparecerían resaltados como compatibles (según Characteristics + territorio + disponibilidad) y
+cuáles no, y por qué.
+
+Con los 3 casos juntos (24h, 72h y 8h de ventana SLA), decide si el volumen justificaría activar
+**Resource Scheduling Optimization** o si el **Scheduling Assistant** manual es suficiente —
+justifica tu decisión con el volumen de casos, no con la urgencia individual del caso crítico.
+
 ### Paso 4 — Diseñar evidencia móvil
 
 Define la evidencia que el técnico debe capturar:
@@ -110,6 +126,7 @@ Un diseño funcional de Field Service que conecta soporte, operación en campo, 
 
 - [ ] Cada caso puede convertirse en Work Order con datos mínimos completos.
 - [ ] Cada Work Order tiene criterios claros de scheduling.
+- [ ] Cada Incident Type tiene duración, Characteristics y tareas obligatorias definidas.
 - [ ] La evidencia móvil permite auditar el cierre.
 - [ ] Los casos UAT cubren happy path, excepción, prioridad, permisos y evidencia incompleta.
 
@@ -144,6 +161,7 @@ Agrega una regla para clientes premium: si la prioridad es crítica y la garant�
 
 - Módulo 20 — Dynamics 365 CE — Sales y Customer Service
 - Módulo 38 — Liderazgo Técnico y Gestión de Proyectos
+- Módulo 58 — Field Service Avanzado: Scheduling, Recursos e Incident Types
 - Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)
 
 ## Competencias desarrolladas

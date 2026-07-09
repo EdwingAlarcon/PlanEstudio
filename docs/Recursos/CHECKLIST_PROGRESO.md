@@ -1039,9 +1039,20 @@
 
 ---
 
+### Módulo 58: Field Service Avanzado — Scheduling, Recursos e Incident Types
+
+- [ ] **Conocimiento**: Explico la diferencia entre Scheduling Assistant manual y Resource Scheduling Optimization | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Definí un Incident Type con duración, Characteristics y 3 tareas obligatorias | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Expliqué qué técnicos vería el dispatcher resaltados en el Schedule Board y por qué | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 59 (Paso 3b) completado — Incident Type y Schedule Board para los 3 casos de prueba | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 58:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
 ### 🏆 Hitos de Nivel Dynamics 365 Avanzado
 
-- [ ] Módulos 56-57 completados con 80%+ de checkboxes marcados | Fecha: ___
+- [ ] Módulos 56-58 completados con 80%+ de checkboxes marcados | Fecha: ___
 - [ ] Autoevaluación promedio ≥ 4.0/5 | Promedio: ___/5
 - [ ] Certificado del Nivel Dynamics 365 Avanzado generado | Fecha: ___
 
@@ -1059,8 +1070,8 @@
 | 🟠 Nivel 3 - Avanzado | 13 | 129 | ___ | ___% | ___/5 | ___ |
 | 🔴 Nivel 4 - Arquitecto | 11 | 105 | ___ | ___% | ___/5 | ___ |
 | 🟣 Nivel IA - Desarrollo Asistido | 14 | 63 | ___ | ___% | ___/5 | ___ |
-| 🔷 Nivel D365 - Dynamics 365 Avanzado | 2 | 8 | ___ | ___% | ___/5 | ___ |
-| **TOTAL** | **57** | **538** | ___ | ___% | ___/5 | ___ |
+| 🔷 Nivel D365 - Dynamics 365 Avanzado | 3 | 12 | ___ | ___% | ___/5 | ___ |
+| **TOTAL** | **58** | **542** | ___ | ___% | ___/5 | ___ |
 
 ### Resumen por Módulo
 
@@ -1123,6 +1134,7 @@
 | 55 | Análisis, Arquitectura y Consultoría Funcional D365 | ___/6 | ___% | ___/5 |
 | 56 | Introducción a Dynamics 365 Avanzado | ___/4 | ___% | ___/5 |
 | 57 | Customer Insights - Data | ___/4 | ___% | ___/5 |
+| 58 | Field Service Avanzado | ___/4 | ___% | ___/5 |
 
 ### Timeline Visual de Progreso
 
