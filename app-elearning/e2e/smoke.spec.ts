@@ -133,15 +133,31 @@ test.describe("Smoke — rutas principales", () => {
 
   test("certificado del nivel IA se genera sin lenguaje de examen PL-xxx", async ({ page }) => {
     await page.goto("/");
-    // Sembrar el store de progreso directamente en localStorage: los 10 módulos
-    // de IA completados + nombre de usuario, para no depender de 10 clics manuales.
+    // Sembrar el store de progreso directamente en localStorage: los 14 módulos
+    // de IA completados con quiz aprobado (>=70%), los 9 labs del nivel IA
+    // completados, y nombre de usuario — el certificado exige las tres cosas,
+    // no solo módulos marcados como leídos.
     await page.evaluate(() => {
       const completedModules = Array.from({ length: 14 }, (_, i) => `ia-${i + 42}`);
+      const quizScores = Object.fromEntries(
+        Array.from({ length: 14 }, (_, i) => [String(i + 42), 90])
+      );
+      const completedLabs = [
+        "lab-45-copilot-implementacion-guiada",
+        "lab-51-flujo-completo-humano-ia-ci",
+        "lab-52-cli-conexion-tenant",
+        "lab-53-exportar-revisar-solucion-con-ia",
+        "lab-54-conectar-app-externa-dataverse",
+        "lab-55-uat-gonolive-y-auditoria-prompts",
+        "lab-56-cambiar-entornos-dev-test-prod",
+        "lab-57-diseno-solucion-d365-sales-con-ia",
+        "lab-65-capstone-ai-copilot-agente-gobernado",
+      ];
       const state = {
         state: {
           completedModules,
-          quizScores: {},
-          completedLabs: [],
+          quizScores,
+          completedLabs,
           checklistItems: {},
           lastVisited: null,
           userName: "Ada Lovelace",
