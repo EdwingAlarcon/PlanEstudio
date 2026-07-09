@@ -3,11 +3,11 @@ moduleId: 20
 title: "Dynamics 365 CE — Sales y Customer Service"
 level: "avanzado"
 certification: "PL-400"
-estimatedMinutes: 12
+estimatedMinutes: 15
 slug: "dynamics-365-ce-sales-y-customer-service"
 ---
 ### 🎯 Objetivo
-Configurar y personalizar Dynamics 365 Sales y Customer Service entendiendo primero las capacidades estándar: ciclo lead-to-cash, cuentas/contactos, productos, listas de precios, quotes, orders, case management, Customer Service workspace, knowledge, SLAs, entitlements, routing, Copilot y colaboración con Outlook/Teams.
+Configurar y personalizar Dynamics 365 Customer Engagement entendiendo primero las capacidades estándar: Sales, Customer Service, Customer Insights y Field Service. El foco es mapear procesos reales contra entidades estándar, evitar duplicidad innecesaria y diseñar integraciones coherentes entre ventas, servicio, marketing, atención en campo y plataformas ERP/F&O.
 
 ### 📖 Conceptos Clave
 - **Modelo estándar antes de personalizar:** Dynamics 365 Sales y Customer Service ya incluyen tablas, formularios, vistas, procesos y experiencias de usuario probadas. Antes de crear una tabla custom, el consultor debe mapear el proceso contra entidades estándar: `Lead`, `Opportunity`, `Account`, `Contact`, `Quote`, `Order`, `Invoice`, `Case`, `Queue`, `Knowledge Article` y `SLA KPI Instance`. Personalizar sin revisar lo estándar aumenta costo, deuda técnica y fricción en actualizaciones.
@@ -31,6 +31,13 @@ Configurar y personalizar Dynamics 365 Sales y Customer Service entendiendo prim
 - **Knowledge Base:** repositorio de artículos de soporte dentro de D365 Customer Service. Los artículos tienen ciclo de vida (Draft → In Review → Published) con aprobación opcional. Se vinculan a casos para trackear qué artículos resolvieron qué problemas. El agente puede buscar y enviar artículos directamente desde el formulario del caso. Copilot Studio puede usar la KB como Knowledge Source.
 - **Canales digitales y voz:** Customer Service puede integrarse con experiencias de conversación, voz y mensajería digital según licenciamiento y oferta vigente. En proyectos nuevos conviene validar la experiencia recomendada por Microsoft para el tenant, porque algunos nombres históricos como "Omnichannel for Customer Service" siguen apareciendo en clientes existentes mientras Microsoft evoluciona hacia experiencias de workspace y ofertas digitales más modernas.
 - **Copilot para agentes de servicio:** Copilot puede resumir conversaciones, sugerir respuestas, recuperar conocimiento y acelerar resolución. La calidad depende de datos, artículos KB, permisos y proceso; no reemplaza un modelo claro de escalamiento ni una base de conocimiento gobernada.
+- **Customer Insights - Data:** plataforma CDP para construir perfiles unificados desde fuentes como Dataverse, Dynamics 365, data lakes, archivos o sistemas externos. Su valor no es "otro CRM", sino una vista 360 del cliente basada en identificación, unificación, enriquecimiento, medidas y segmentos. Debe usarse cuando Sales/Service no tienen por sí solos una visión completa del cliente.
+- **Customer Insights - Journeys:** aplicación para orquestar journeys en tiempo real usando segmentos, triggers, emails, SMS/push según disponibilidad, personalización y consentimiento. Se diferencia del marketing clásico por reaccionar a eventos del cliente y usar datos unificados, no solo listas estáticas o campañas masivas.
+- **Consentimiento y compliance:** Customer Insights - Journeys requiere perfiles de cumplimiento, propósitos, temas, centros de preferencias y registros de consentimiento. En proyectos reales, el consentimiento se diseña con Legal/Compliance desde el inicio; no se agrega al final como campo booleano improvisado.
+- **Field Service:** aplicación D365 para coordinar servicio en campo: work orders, recursos, scheduling, bookings, customer assets, incident types, inspections, inventory, acuerdos y experiencia móvil para técnicos. Encaja cuando el trabajo ocurre fuera de oficina y requiere planificación, desplazamiento, evidencias, materiales o historial de activos.
+- **Work order lifecycle:** ciclo operativo de Field Service donde una orden pasa por estados como unscheduled, scheduled, in progress, completed, posted o canceled. El arquitecto debe distinguir `Work Order` (trabajo a ejecutar) de `Booking` (asignación concreta de recurso/tiempo) y de `Case` (solicitud de soporte que puede originar el trabajo).
+- **Schedule board y recursos:** el dispatcher asigna work orders considerando ubicación, disponibilidad, skills, prioridad y ventanas de servicio. Puede hacerlo manualmente, con Scheduling Assistant o con optimización avanzada cuando el volumen y restricciones lo justifican.
+- **Field Service mobile e inspections:** los técnicos usan la app móvil para ver bookings, navegar al cliente, registrar tiempo, productos/servicios, fotos, firmas, inspecciones y notas. Si el servicio requiere captura estructurada, una inspection template evita evidencias incompletas y mejora trazabilidad.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
@@ -168,11 +175,84 @@ Regla: una tabla custom solo se aprueba si no existe entidad estándar razonable
    - datos sensibles no se copian en prompts externos,
    - cada artículo KB tiene owner y fecha de revisión.
 
+#### Actividad 20.8: Customer Insights — segmento y journey en tiempo real
+Escenario: el área comercial quiere contactar clientes con contrato próximo a vencer, pero solo si tienen consentimiento válido y no tienen un caso crítico abierto.
+
+1. Diseñar el perfil unificado:
+
+| Fuente | Datos usados | Motivo |
+|---|---|---|
+| Dynamics 365 Sales | Account, Contact, Opportunity | Relación comercial |
+| Customer Service | Cases, SLA status | Evitar campañas a clientes con incidentes críticos |
+| ERP/F&O o billing | Fecha de renovación, plan, saldo | Disparar journey de renovación |
+| Consent records | Propósito y canal permitido | Cumplimiento |
+
+2. Crear segmento conceptual:
+   - Contactos con renovación en los próximos 60 días.
+   - Consentimiento válido para email.
+   - Sin caso crítico abierto.
+   - Monto anual mayor a un umbral definido por negocio.
+
+3. Diseñar journey:
+   - Trigger: cliente entra al segmento.
+   - Email 1: recordatorio personalizado con fecha de renovación.
+   - Esperar 5 días.
+   - Si hace clic: crear tarea para vendedor.
+   - Si no interactúa: enviar segundo mensaje con caso de éxito.
+   - Si abre caso crítico: salir del journey y notificar a Customer Service.
+
+4. Validar controles:
+   - propósito de consentimiento correcto,
+   - contenido aprobado por Legal/Marketing,
+   - exclusión de clientes con incidencias críticas,
+   - métricas de interacción documentadas.
+
+#### Actividad 20.9: Field Service — ciclo caso a orden de trabajo
+Escenario: un cliente reporta falla de un equipo en garantía y requiere visita técnica.
+
+1. Modelar el flujo:
+
+| Paso | Tabla/app recomendada | Resultado |
+|---|---|---|
+| Cliente reporta falla | Customer Service Case | Solicitud registrada |
+| Agente valida garantía | Case + Entitlement | Derecho de servicio confirmado |
+| Se requiere visita | Field Service Work Order | Trabajo técnico creado |
+| Dispatcher agenda visita | Booking + Schedule Board | Técnico asignado |
+| Técnico ejecuta trabajo | Field Service Mobile | Evidencias, inspección y materiales |
+| Cierre y facturación | Work Order completed/posted + ERP | Servicio cerrado y costos reportados |
+
+2. Definir datos mínimos de Work Order:
+   - service account,
+   - customer asset,
+   - incident type,
+   - prioridad,
+   - ubicación,
+   - productos/servicios requeridos,
+   - ventana de atención.
+
+3. Definir criterios de scheduling:
+   - skill requerida,
+   - disponibilidad,
+   - distancia,
+   - SLA,
+   - inventario o herramienta necesaria.
+
+4. Definir evidencia móvil:
+   - checklist de inspección,
+   - fotos antes/después,
+   - firma del cliente,
+   - notas del técnico,
+   - materiales usados.
+
 ### 💼 Caso Real de Negocio
 **Empresa:** Empresa de software con 5,000 clientes y mesa de ayuda de 30 agentes  
 **Problema:** Los casos se asignaban por turno rotativo sin considerar el expertise del agente. Un caso de SAP llegaba a un agente de Power BI.  
 **Solución:** Unified Routing con skills-based routing. Agentes califican sus skills. Los casos de SAP van automáticamente a agentes con skill SAP nivel ≥ 3. SLA diferenciado para clientes Premium (4h resolución) vs Estándar (24h).  
 **Resultado:** First-contact resolution: de 45% a 72%. Satisfacción del cliente (CSAT): de 3.2 a 4.4/5.
+
+**Escenario Customer Insights:** una aseguradora enviaba campañas genéricas a clientes con reclamos abiertos. El equipo integró Customer Insights - Data con Sales, Service y billing, creó segmentos que excluyen casos críticos y orquestó journeys de renovación con consentimiento válido. Resultado esperado: menos quejas por comunicaciones inoportunas y mayor conversión en renovaciones.
+
+**Escenario Field Service:** una empresa de mantenimiento industrial gestionaba visitas en Excel y WhatsApp. Al adoptar Field Service, los casos de soporte generan work orders, el dispatcher asigna técnicos por skill y ubicación, y el técnico captura inspecciones desde móvil. Resultado esperado: menor tiempo de asignación, evidencias auditables y mejor cumplimiento de SLA.
 
 ### ✅ Buenas Prácticas
 - Siempre usar Calendar de servicio en SLAs — los tiempos deben ser en horas hábiles, no absolutas
@@ -181,6 +261,9 @@ Regla: una tabla custom solo se aprueba si no existe entidad estándar razonable
 - Tener Knowledge Base robusta antes de implementar Copilot Studio para reducir hallucinations
 - Unified Routing > Reglas de enrutamiento legacy — migrar si estás en el sistema viejo
 - Usar entitlements para clientes con niveles de soporte diferenciados
+- En Customer Insights, diseñar consentimiento, exclusiones y preferencias antes de activar journeys
+- En Field Service, no confundir Case con Work Order: el caso explica la solicitud; la orden de trabajo coordina ejecución en campo
+- Usar assets e incident types para estandarizar diagnóstico, materiales y duración esperada
 
 ### ⚠️ Errores Comunes
 | Error | Causa | Solución |
@@ -190,6 +273,9 @@ Regla: una tabla custom solo se aprueba si no existe entidad estándar razonable
 | Routing no asigna a agentes | Cola sin miembros o capacidad de agentes = 0 | Verificar membresía de cola y límite de capacidad por agente |
 | Se crea una tabla custom de Clientes | No se revisó Account/Contact estándar | Extender Account/Contact salvo que exista una justificación fuerte y documentada |
 | Pricing duplicado en Dataverse y ERP | Se intentó resolver todo en Sales | Definir sistema maestro: Sales cotiza, ERP valida precio final, impuestos, inventario y crédito |
+| Journey enviado sin consentimiento válido | Marketing diseñó la campaña antes de Compliance | Crear compliance profile, propósitos y temas antes de publicar journeys |
+| Customer Insights usado como CRM operativo | Se confundió CDP con sistema transaccional | Usar Customer Insights para perfiles, segmentos e insights; mantener operación en Sales/Service/F&O |
+| Field Service implementado como calendario simple | Se ignoraron work orders, bookings, skills y assets | Modelar ciclo completo: Case → Work Order → Booking → Mobile execution → cierre |
 
 ### 🧪 Criterios de Validación
 - [ ] Matriz fit-gap contra entidades estándar creada antes de personalizar
@@ -200,5 +286,9 @@ Regla: una tabla custom solo se aprueba si no existe entidad estándar razonable
 - [ ] 5 artículos KB publicados y visibles en el panel del caso
 - [ ] Outlook/Teams tienen reglas claras de adopción y trazabilidad
 - [ ] Copilot para agentes tiene controles humanos y KB gobernada
+- [ ] Segmento Customer Insights diseñado con perfil unificado, consentimiento y exclusiones
+- [ ] Journey de renovación documentado con trigger, ramas, salida por caso crítico y métricas
+- [ ] Flujo Case → Work Order → Booking → Mobile execution validado para Field Service
+- [ ] Datos mínimos de Work Order, criterios de scheduling y evidencias móviles definidos
 
 ---
