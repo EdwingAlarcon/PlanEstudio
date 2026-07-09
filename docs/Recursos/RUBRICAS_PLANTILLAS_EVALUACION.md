@@ -322,12 +322,13 @@ conecta con una rúbrica y un umbral numérico, en vez de dejar solo un checklis
 | N2 — Intermedio | Módulo 17, *Proyecto Integrador Nivel 2*: solución de ventas con Component Library, Child Flows, RLS y bot de Teams | Low-code / Maker + Consultoría Funcional (seguridad y documentación funcional) | ≥ 70/100, ningún criterio en 0 | ≥ 88/100 |
 | N3 — Avanzado | Módulo 30, *Proyecto Multicapa Nivel 3*: 6 soluciones con plugin, PCF, integración vía Service Bus y Copilot Studio con SSO | Desarrollo Técnico | ≥ 70/100, ningún criterio en 0 | ≥ 90/100 |
 | N4 — Arquitecto | Módulo 41, *Proyecto Capstone Arquitectura Enterprise*: solución multi-tenant con Zero Trust, Fabric y presentación ejecutiva | Arquitectura Empresarial (ponderada) | ≥ 75/100, ningún criterio en 0-1 | ≥ 92/100 |
-| Nivel IA | Lab 51 (*Flujo Completo Humano→IA→CI*) + Módulo 55: aplicar el flujo diseña→IA implementa→CI valida→humano aprueba a un cambio real, con auditoría de prompts | IA y Agentes Gobernados | ≥ 70/100, ningún criterio en 0 | ≥ 88/100 |
+| Nivel IA | Lab 51, *Proyecto Integrador Nivel IA*: flujo diseña→IA implementa→CI valida→humano aprueba sobre un cambio real, con auditoría de prompts y matriz de riesgos de IA propia del cambio | IA y Agentes Gobernados | ≥ 70/100, ningún criterio en 0 | ≥ 88/100 |
 
-**Nota sobre Nivel IA:** a diferencia de N1-N4, todavía no existe un proyecto integrador dedicado
-del tamaño de los módulos 8/17/30/41 — Lab 51 cubre el proceso pero no un escenario de negocio
-completo con entregables propios. Cerrar esa brecha con un Capstone AI & Copilot dedicado queda
-en el backlog de capstones (ver [Matriz de Competencias](MATRIZ_COMPETENCIAS.md)).
+Las 5 rutas de nivel quedan con un proyecto de cierre equivalente en exigencia: Lab 51 (Nivel IA)
+tiene el mismo formato de escenario, entregables, evidencia esperada y rúbrica ponderada que los
+módulos 8, 17, 30 y 41. El Capstone AI & Copilot (Lab 65, ver [Matriz de
+Competencias](MATRIZ_COMPETENCIAS.md)) sigue siendo distinto y complementario: cierra la ruta
+profesional transversal AI & Copilot, no el nivel IA completo.
 
 ## Uso recomendado por rol
 
