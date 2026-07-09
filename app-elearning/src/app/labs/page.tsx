@@ -51,13 +51,6 @@ const FEATURED_ARTIFACTS = [
   },
 ];
 
-const LAB_MARKERS: Record<string, string> = {
-  "lab-55-uat-gonolive-y-auditoria-prompts": "Plantillas UAT",
-  "lab-58-customer-insights-segmento-journey": "Customer Insights",
-  "lab-59-field-service-work-order-uat": "Field Service",
-  "lab-60-proyecto-integrador-servicio-postventa": "Proyecto integrador",
-};
-
 export default function LabsPage() {
   const labs = getAllLabs();
 
@@ -161,19 +154,17 @@ export default function LabsPage() {
                 return (
                 <Link key={lab.slug} href={`/labs/${lab.slug}`} className="group">
                   <div className="relative h-full rounded-xl border border-border bg-card px-4 py-4 shadow-fluent-1 group-hover:shadow-fluent-4 group-hover:border-[#0078D4]/30 dark:group-hover:border-[#4DB8FF]/30 transition-all duration-200">
-                    <div className="mb-3 flex flex-wrap items-center gap-2">
+                    <div className="mb-2 flex flex-wrap items-center gap-1.5 text-xs">
                       <Badge
                         variant={meta.kind === "Capstone" ? "default" : "secondary"}
                         className="h-6 px-2 font-mono text-xs font-semibold tracking-wide"
                       >
                         {lab.displayId}
                       </Badge>
-                      <span className="text-xs font-medium text-muted-foreground">
-                        {LAB_MARKERS[lab.slug] ?? meta.kindLabel}
-                      </span>
+                      <span className="font-medium text-muted-foreground">· {meta.kindLabel} · {lab.level}</span>
                     </div>
 
-                    <div className="mb-2 grid gap-1 text-[11px] text-muted-foreground">
+                    <div className="mb-3 grid gap-1 text-[11px] text-muted-foreground">
                       <div className="flex items-center gap-1.5">
                         <BookOpen className="h-3 w-3 shrink-0" aria-hidden />
                         <span className="truncate">{primaryRoute}</span>

@@ -80,8 +80,10 @@ export default async function LabDetailPage({ params }: Props) {
                     {lab.displayId}
                   </Badge>
                   <Badge variant={meta.kind === "Capstone" ? "arquitecto" : "outline"}>{meta.kindLabel}</Badge>
-                  <Badge variant="outline">{meta.recommendedLevel}</Badge>
+                  <Badge variant="outline">{lab.level}</Badge>
                   <Badge variant="outline">{meta.difficulty}</Badge>
+                  <Badge variant="outline" className="max-w-full truncate">{meta.routes[0] ?? "Ruta general"}</Badge>
+                  {lab.duration > 0 && <Badge variant="outline">{lab.duration} min</Badge>}
                 </div>
                 <h1 className="text-xl font-bold leading-snug text-foreground">{lab.title}</h1>
                 <p className="text-xs text-muted-foreground mt-0.5">
@@ -107,7 +109,7 @@ export default async function LabDetailPage({ params }: Props) {
             <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
               <span className="flex items-center gap-1.5">
                 <FlaskConical className="h-3.5 w-3.5" aria-hidden />
-                {meta.kind}
+                {meta.kindLabel}
               </span>
               {lab.duration > 0 && (
                 <span className="flex items-center gap-1.5">
@@ -137,7 +139,7 @@ export default async function LabDetailPage({ params }: Props) {
 
             {meta.historicalCertifications.length > 0 && (
               <p className="text-xs leading-relaxed text-muted-foreground">
-                Referencia histórica: {meta.historicalCertifications.join(", ")}. Este lab se presenta como competencia,
+                Referencia histórica: {meta.historicalCertifications.join(", ")} retirada. Este lab se presenta como competencia,
                 no como certificación vigente.
               </p>
             )}

@@ -31,4 +31,28 @@ describe("lab presentation metadata", () => {
     expect(meta.evidenceSummary).toContain("Captura");
     expect(meta.competencies.join(" ")).toContain("lead-to-cash");
   });
+
+  it("clasifica LAB-059 como UAT y no como etiqueta de producto", () => {
+    const lab = getLabBySlug("lab-59-field-service-work-order-uat");
+    expect(lab).toBeDefined();
+
+    const meta = getLabPresentationMeta(lab!);
+
+    expect(lab?.displayId).toBe("LAB-059");
+    expect(meta.kindLabel).toBe("UAT");
+    expect(meta.routes).toContain("Ruta Dynamics 365 Customer Engagement");
+  });
+
+  it("no expone certificaciones retiradas como badges principales", () => {
+    const retired = new Set(["MB-210", "MB-220", "MB-240", "MB-300"]);
+    const salesLab = getLabBySlug("lab-66-sales-lead-to-cash");
+    const consultorCapstone = getLabBySlug("lab-62-capstone-consultor-funcional-proyecto-completo");
+
+    for (const lab of [salesLab, consultorCapstone]) {
+      expect(lab).toBeDefined();
+      const meta = getLabPresentationMeta(lab!);
+      expect(meta.certificationBadges.some((cert) => retired.has(cert))).toBe(false);
+      expect(meta.historicalCertifications).toContain("MB-210");
+    }
+  });
 });
