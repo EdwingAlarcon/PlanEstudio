@@ -1050,9 +1050,20 @@
 
 ---
 
+### Módulo 59: Finance & Operations — Procesos ERP, Virtual Tables y Vocabulario Estándar
+
+- [ ] **Conocimiento**: Nombro y explico en una frase cada uno de los procesos ERP estándar (O2C, P2P, R2R, I2D) | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Identifiqué el evento donde el proceso pasa de lead-to-cash (Sales) a order-to-cash (F&O) | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Apliqué el criterio de decisión dual-write vs. DMF vs. virtual tables a un caso concreto | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 64 completado con el vocabulario de procesos ERP y la decisión de integración | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 59:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
 ### 🏆 Hitos de Nivel Dynamics 365 Avanzado
 
-- [ ] Módulos 56-58 completados con 80%+ de checkboxes marcados | Fecha: ___
+- [ ] Módulos 56-59 completados con 80%+ de checkboxes marcados | Fecha: ___
 - [ ] Autoevaluación promedio ≥ 4.0/5 | Promedio: ___/5
 - [ ] Certificado del Nivel Dynamics 365 Avanzado generado | Fecha: ___
 
@@ -1070,8 +1081,8 @@
 | 🟠 Nivel 3 - Avanzado | 13 | 129 | ___ | ___% | ___/5 | ___ |
 | 🔴 Nivel 4 - Arquitecto | 11 | 105 | ___ | ___% | ___/5 | ___ |
 | 🟣 Nivel IA - Desarrollo Asistido | 14 | 63 | ___ | ___% | ___/5 | ___ |
-| 🔷 Nivel D365 - Dynamics 365 Avanzado | 3 | 12 | ___ | ___% | ___/5 | ___ |
-| **TOTAL** | **58** | **542** | ___ | ___% | ___/5 | ___ |
+| 🔷 Nivel D365 - Dynamics 365 Avanzado | 4 | 16 | ___ | ___% | ___/5 | ___ |
+| **TOTAL** | **59** | **546** | ___ | ___% | ___/5 | ___ |
 
 ### Resumen por Módulo
 
@@ -1135,6 +1146,7 @@
 | 56 | Introducción a Dynamics 365 Avanzado | ___/4 | ___% | ___/5 |
 | 57 | Customer Insights - Data | ___/4 | ___% | ___/5 |
 | 58 | Field Service Avanzado | ___/4 | ___% | ___/5 |
+| 59 | Finance & Operations — Procesos ERP | ___/4 | ___% | ___/5 |
 
 ### Timeline Visual de Progreso
 

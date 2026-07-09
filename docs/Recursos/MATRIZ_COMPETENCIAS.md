@@ -84,13 +84,15 @@ corresponde a cada ruta.
 ## Finance & Operations Consultant / Architect Awareness
 
 *ERP conceptual, integración.* Ruta: Consultor Funcional → Finance & Operations → Solution Architect.
-Estado de la ruta: **cobertura en expansión** — no exigir el capstone completo hasta ampliar
-módulos F&O dedicados.
+Estado de la ruta: **cobertura en expansión** — el Módulo 59 ya cubre vocabulario de procesos ERP
+estándar y virtual tables; sigue faltando profundidad de configuración real de producto (Finance,
+SCM, Commerce, Project Operations) para dejar de ser "cobertura en expansión".
 
 | Competencia | Nivel | Evidencia esperada | Lab / proyecto | Criterio de aprobación |
 |---|---|---|---|---|
 | Diferenciación CE vs. F&O (cuándo aplica cada uno) | Conceptual | Tabla de decisión por escenario de negocio | Módulo 20 (compartido) | Justifica la elección para 3 escenarios sin genéricos ("depende") |
-| Dual-write conceptual | Conceptual | Diagrama de entidades sincronizadas + dirección del flujo | Lab 64 (Capstone F&O Awareness) | Identifica qué entidad es "fuente de verdad" en cada dirección |
+| Vocabulario de procesos ERP estándar (O2C, P2P, R2R, I2D) | Conceptual | Cada proceso nombrado con su nombre estándar, no descrito en palabras propias | Módulo 59, Lab 64 | Nombra correctamente el proceso ERP exacto para ≥3 procesos del escenario |
+| Dual-write vs. DMF vs. virtual tables | Conceptual-Avanzado | Aplicación del criterio de decisión a un caso concreto | Módulo 59, Lab 64 | Justifica por qué las otras 2 opciones no aplican al caso |
 | Data Management Framework conceptual | Conceptual | Explicación de un escenario de importación masiva con manejo de errores | Lab 64 (Capstone F&O Awareness) | Propone estrategia de reintentos y validación previa a carga |
 | Mapa de integración ERP + CRM | Conceptual-Avanzado | Diagrama de arquitectura con puntos de fallo señalados | Lab 64 (Capstone F&O Awareness) | Señala ≥2 puntos de fallo y su mitigación |
 | Límites de Power Platform frente a ERP | Conceptual | Lista de "esto no lo resuelve Power Platform solo" con justificación | Módulo 18/34 | Identifica correctamente ≥3 límites reales (no genéricos) |

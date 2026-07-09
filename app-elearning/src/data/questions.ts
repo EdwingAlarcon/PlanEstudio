@@ -2,7 +2,7 @@
 // Source: docs/javascripts/evaluaciones-simulador.js
 // Regenerate: node scripts/extract-questions.mjs  (or: cd app-elearning && npm run build)
 //
-// 58 modules, 450 questions total.
+// 59 modules, 458 questions total.
 
 export type QuestionType = "single" | "multi";
 
@@ -5529,6 +5529,104 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       ],
       answer: [0],
       explanation: "El Scheduling Assistant sugiere los mejores candidatos según skill, cercanía y disponibilidad, pero la decisión final la toma el dispatcher — es el punto intermedio entre arrastrar manualmente y automatizar por completo con RSO.",
+    },
+  ],
+  59: [
+    {
+      type: "single",
+      prompt: "¿Qué describe el proceso 'order-to-cash' (O2C) en Finance & Operations?",
+      options: [
+      "Desde que un cliente hace un pedido hasta que la empresa lo cobra: cumplimiento, factura y cobro",
+      "Desde que se genera una necesidad de compra hasta que se paga a un proveedor",
+      "El ciclo contable de registrar transacciones y cerrar el periodo financiero",
+      "La gestión de inventario desde la recepción hasta la entrega"
+      ],
+      answer: [0],
+      explanation: "Order-to-cash (O2C) va desde que el cliente hace un pedido hasta que la empresa lo cobra: pedido de venta, cumplimiento/envío, factura y cobro.",
+    },
+    {
+      type: "single",
+      prompt: "En el proceso de SIT (Módulo 20/Lab 66), Dynamics 365 Sales cierra la venta con Quote→Order. ¿En qué proceso ERP estándar continúa esa venta dentro de Finance & Operations?",
+      options: [
+      "Order-to-cash, donde se gestiona el cumplimiento, la factura real, el impuesto y el cobro",
+      "Procure-to-pay, porque toda venta implica automáticamente una compra",
+      "Record-to-report, porque solo se registra contablemente sin más pasos",
+      "Ningún proceso adicional es necesario una vez que Sales genera el Order"
+      ],
+      answer: [0],
+      explanation: "Sales cierra la venta con Quote→Order, pero el cumplimiento, la factura real, el impuesto y el cobro viven en el ciclo order-to-cash de F&O, no en Dynamics 365 Sales.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué proceso ERP estándar cubre desde la requisición de compra hasta el pago al proveedor?",
+      options: [
+      "Procure-to-pay (P2P)",
+      "Order-to-cash (O2C)",
+      "Record-to-report (R2R)",
+      "Inventory-to-deliver (I2D)"
+      ],
+      answer: [0],
+      explanation: "Procure-to-pay (P2P) cubre requisición → orden de compra → recepción de mercancía → factura de proveedor → pago.",
+    },
+    {
+      type: "single",
+      prompt: "Un stakeholder pide mostrar el saldo de inventario de un producto dentro de una Opportunity de Sales, sin duplicar el dato en Dataverse. ¿Qué mecanismo aplica mejor?",
+      options: [
+      "Virtual tables, porque solo se necesita lectura en tiempo real sin duplicar ni escribir el dato",
+      "Dual-write, porque siempre es la opción por defecto para cualquier integración con F&O",
+      "Data Management Framework, porque es una carga masiva puntual",
+      "Ninguno de los tres — Power Platform no puede mostrar datos de F&O bajo ninguna circunstancia"
+      ],
+      answer: [0],
+      explanation: "Cuando solo se necesita leer datos de F&O sin escribir ni duplicarlos, las virtual tables son la opción correcta — dual-write implicaría una réplica sincronizada innecesaria y DMF es para cargas por lotes, no lectura en tiempo real.",
+    },
+    {
+      type: "single",
+      prompt: "¿Cuándo se justifica usar dual-write en vez de Data Management Framework (DMF)?",
+      options: [
+      "Cuando el usuario necesita escribir en ambos sistemas con continuidad operativa, no solo una carga puntual",
+      "Siempre que se requiera mover cualquier volumen de datos entre F&O y Dataverse",
+      "Únicamente para escenarios de analítica masiva",
+      "Nunca — DMF siempre reemplaza a dual-write en cualquier escenario"
+      ],
+      answer: [0],
+      explanation: "Dual-write se justifica cuando se necesita escritura continua en ambos sistemas con continuidad operativa (ej. un cliente creado en Sales debe existir en F&O); DMF es para cargas masivas o migraciones puntuales, no sincronización continua.",
+    },
+    {
+      type: "single",
+      prompt: "Una empresa construyó en Dataverse una tabla personalizada que calculaba impuestos y validaba crédito, duplicando lógica que ya existía en su ERP. ¿Cuál fue la consecuencia cuando cambió una tasa de impuesto regional?",
+      options: [
+      "El ERP se actualizó pero nadie recordó actualizar la tabla de Dataverse, generando aprobaciones con impuestos incorrectos durante semanas",
+      "Ambos sistemas se sincronizaron automáticamente sin ningún problema",
+      "No hubo ninguna consecuencia porque los impuestos nunca cambian",
+      "El sistema rechazó automáticamente todas las cotizaciones hasta corregir el error"
+      ],
+      answer: [0],
+      explanation: "Al duplicar lógica fiscal en Dataverse, el cambio de tasa se actualizó en el ERP pero no en la réplica de Dataverse, generando aprobaciones con impuestos incorrectos durante semanas hasta que Finanzas lo detectó.",
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué el licenciamiento de Finance & Operations suele ser una conversación comercial separada de Dynamics 365 CE?",
+      options: [
+      "Porque F&O se licencia por un pool distinto al de Sales/Service/Field Service, y un proyecto que combina ambos casi siempre involucra dos conversaciones de licenciamiento",
+      "Porque F&O y CE siempre comparten exactamente el mismo tipo de licencia",
+      "Porque Dynamics 365 CE no requiere ningún licenciamiento",
+      "Porque el licenciamiento de F&O nunca se discute en un proyecto de arquitectura"
+      ],
+      answer: [0],
+      explanation: "Finance & Operations se licencia por separado de Dynamics 365 CE; un proyecto que combina ambos casi siempre involucra dos conversaciones de licenciamiento distintas con el cliente.",
+    },
+    {
+      type: "single",
+      prompt: "Al diseñar dual-write entre F&O y Dataverse, ¿qué error de seguridad es común si no se mapean explícitamente los modelos?",
+      options: [
+      "Asumir que los roles de seguridad de F&O (duties/privileges) son equivalentes a los Security Roles de Dataverse sin verificarlo",
+      "Que Dataverse no tenga ningún modelo de seguridad propio",
+      "Que F&O no permita configurar ningún tipo de rol",
+      "Que dual-write elimine automáticamente la necesidad de seguridad en ambos sistemas"
+      ],
+      answer: [0],
+      explanation: "F&O tiene su propio modelo de seguridad basado en duties/privileges, distinto del modelo de Security Roles de Dataverse — asumir que son equivalentes sin mapearlos explícitamente es un error común al diseñar dual-write.",
     },
   ],
 };
