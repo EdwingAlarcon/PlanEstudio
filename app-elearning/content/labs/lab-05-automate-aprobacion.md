@@ -447,6 +447,19 @@ Al crear cualquier solicitud en `sit_Solicitud`, llega un email de confirmación
 
 ---
 
+## Evidencia esperada
+
+- Captura o log de ejecución exitosa de los 3 flujos (notificación, reporte diario, aprobación)
+- Captura del email de confirmación y del mensaje en Teams para una solicitud Crítica
+- Captura del historial de ejecución del flujo de aprobación (aprobado y rechazado)
+
+## Criterios de aprobación
+
+- Los 3 flujos corren sin intervención manual en 3 ejecuciones de prueba consecutivas
+- El flujo de aprobación solo se dispara cuando `sit_prioridad` cambia a Crítica, no en otros cambios
+- Aprobar y rechazar producen el efecto correcto en Dataverse (estado / prioridad + notificación)
+- 100% de los ítems del Checklist final marcados
+
 ## Reto adicional
 
 **Reto básico:** Modifica el Flujo 2 para que incluya en el reporte un conteo separado por prioridad: cuántas son Críticas, cuántas Altas, cuántas Medias. Usa la acción **"Filter array"** (Data Operations) para hacer subconjuntos.

@@ -105,6 +105,20 @@ Revisa los prompts que usaste en los Ejercicios 1-3 y responde con la checklist 
 - [ ] Generé un checklist de go-live y lo comparé contra el pipeline de CI/CD real del proyecto
 - [ ] Audité mis propios prompts de este laboratorio y corregí cualquier dato sensible encontrado
 
+## Evidencia esperada
+
+- Los ≥6 casos UAT generados (caso feliz, rechazo, casos límite) con resultado
+- Matriz de trazabilidad completa (requerimientos → historias → casos UAT → evidencia)
+- Checklist de go-live comparado contra el pipeline de CI/CD real, con diferencias anotadas
+- Registro de la auditoría de prompts con cualquier dato sensible corregido
+
+## Criterios de aprobación
+
+- 100% de los casos UAT generados están ejecutados, con defectos críticos en 0
+- La matriz de trazabilidad no tiene requerimientos sin historia o caso UAT asociado
+- La auditoría de prompts no dejó ningún dato sensible real sin sanitizar
+- 100% de los ítems de Criterios de Validación marcados
+
 ## Preguntas de Reflexión
 
 1. ¿Qué diferencia encontraste entre el checklist de go-live generado por IA y el pipeline de CI/CD real del proyecto?

@@ -508,6 +508,18 @@ Esta política impide que un flujo combine Dataverse (datos sensibles) con HTTP 
 - [ ] Canvas App `App — Environment Request` explorada
 - [ ] Estrategia DLP diseñada con 3 grupos para el tenant SIT
 
+## Evidencia esperada
+
+- Captura de los 5 flujos de sincronización ejecutados con éxito y de la tabla `admin_App` poblada
+- Captura del Power BI dashboard cargando datos reales del ambiente CoE
+- Documento de la estrategia DLP con los 3 grupos definidos para el tenant SIT
+
+## Criterios de aprobación
+
+- Al menos 1 política DLP bloquea un conector no autorizado en una prueba real
+- El dashboard de Power BI refleja el inventario real del tenant, no datos de ejemplo
+- 100% de los ítems del Checklist final marcados
+
 ---
 
 ## Reto adicional

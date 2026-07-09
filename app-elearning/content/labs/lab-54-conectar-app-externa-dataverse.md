@@ -109,6 +109,18 @@ Para cada uno de estos 2 escenarios, documenta la causa más probable y cómo la
 - [ ] Documenté el flujo de obtención de token y llamada a la Web API usando solo placeholders
 - [ ] Diagnostiqué correctamente los escenarios de error 401 y 403
 
+## Evidencia esperada
+
+- Documento de diseño de la app registration con el tipo de credencial justificado (sin secretos reales, solo placeholders)
+- Diagrama o descripción del Security Role de mínimo privilegio para el Application User
+- Diagnóstico documentado de los escenarios de error 401 y 403
+
+## Criterios de aprobación
+
+- El Security Role diseñado sigue el principio de menor privilegio, no un rol administrativo genérico
+- El diagnóstico distingue correctamente cuándo un error es de autenticación (401) vs. de autorización (403)
+- 100% de los ítems de Criterios de Validación marcados
+
 ## Preguntas de Reflexión
 
 1. ¿Por qué un error 403 no significa necesariamente que el token esté mal generado?

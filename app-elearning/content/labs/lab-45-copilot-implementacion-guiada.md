@@ -90,3 +90,15 @@ Documenta el resultado de ambas pruebas antes de marcar el laboratorio como comp
 - [ ] El campo `sit_horasaprobacion` se agregó y se calcula correctamente al cambiar el estado
 - [ ] Revisé el cambio con la checklist de alcance/efectos secundarios/seguridad del Módulo 48
 - [ ] Verifiqué el cálculo con los 2 escenarios de prueba y documenté el resultado
+
+## Evidencia esperada
+
+- Prompt usado y diff generado por la IA para el campo `sit_horasaprobacion`
+- Resultado de los 2 escenarios de prueba con el valor calculado documentado
+- Checklist de revisión (alcance/efectos secundarios/seguridad) completada
+
+## Criterios de aprobación
+
+- El campo calcula correctamente el valor en ambos escenarios de prueba
+- La revisión humana quedó documentada antes de aprobar el cambio generado por IA
+- 100% de los ítems de Criterios de Validación marcados

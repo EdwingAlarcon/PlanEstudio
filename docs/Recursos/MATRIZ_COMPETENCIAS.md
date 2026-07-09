@@ -129,6 +129,9 @@ inicial.
 | Seguridad y gobernanza de agentes | Avanzado | Matriz de riesgos de IA (alucinación, fuga de datos, sobre-confianza) | LAB-065 (Capstone AI & Copilot) | ≥4 riesgos identificados con mitigación concreta, no genérica |
 | Escalamiento humano y auditoría de prompts | Avanzado | Política de escalamiento + log de auditoría | LAB-055 | Existe un criterio objetivo de escalamiento (no "si el bot no sabe") |
 | Integración con Dataverse / Power Automate | Avanzado | Flujo disparado por el agente con resultado verificable en Dataverse | LAB-022, Módulo 44 | El registro creado coincide exactamente con lo solicitado en la conversación |
+| Implementación guiada por IA (cambio acotado, revisión humana) | Intermedio | Prompt + diff + checklist de alcance/efectos secundarios/seguridad completada | LAB-045, Módulo 48 | El cambio generado por IA se verifica contra 2 escenarios de prueba antes de aprobarse |
+| Flujo completo humano→IA→CI→aprobación sobre un caso real | Avanzado | Registro del ciclo diseña→IA implementa→CI valida→humano aprueba, con auditoría de prompts | LAB-051 | Ningún paso del ciclo se salta; la aprobación humana queda documentada antes del merge |
+| Diseño funcional D365 Sales asistido por IA (fit-gap, mapeo a entidades estándar) | Avanzado | Documento de diseño de una página + matriz de seguridad Vendedor/Gerente | LAB-057, Módulo 55 | Cada brecha identificada está justificada, no resuelta por defecto con personalización |
 
 ---
 

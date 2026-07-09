@@ -524,6 +524,19 @@ stages:
 - [ ] La aprobación del environment SIT-TEST permite continuar el deploy
 - [ ] La solución aparece como Managed en el ambiente TEST
 
+## Evidencia esperada
+
+- Captura del pipeline CI ejecutado con éxito (7 pasos) y del artifact con los dos ZIPs
+- Captura del pipeline CD pausado esperando aprobación y luego completado
+- Captura de la solución importada como Managed en el ambiente TEST
+
+## Criterios de aprobación
+
+- El pipeline CI corre sin intervención manual y sin errores
+- El pipeline CD no despliega a TEST sin la aprobación explícita del environment
+- La solución llega a TEST en formato Managed, no Unmanaged
+- 100% de los ítems del Checklist final marcados
+
 ---
 
 ## Reto adicional

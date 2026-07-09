@@ -502,6 +502,20 @@ Esta vista es para el jefe de soporte para acción inmediata.
 
 ---
 
+## Evidencia esperada
+
+- Captura de las tablas `sit_Categoria` y `sit_Solicitud` con sus columnas, dentro de la solución `SIT_SolicitudesInternas`
+- Captura o exportación de las 2 Business Rules activas en `sit_Solicitud`
+- Captura de las 3 vistas publicadas con sus filtros
+- Conteo de registros de prueba cargados (5 Categoría, 10 Solicitud)
+
+## Criterios de aprobación
+
+- Las tablas están dentro de la solución, con prefijo `sit_` (no `new_`)
+- Las 2 Business Rules disparan el mensaje de error y el bloqueo de campos descritos en la Tarea 5.3
+- Las 3 vistas publicadas filtran correctamente sin datos de otros usuarios
+- 100% de los ítems del Checklist final marcados
+
 ## Reto adicional
 
 Si completaste el laboratorio antes del tiempo estimado, intenta:

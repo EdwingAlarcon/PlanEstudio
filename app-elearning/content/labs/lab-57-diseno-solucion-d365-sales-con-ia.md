@@ -87,6 +87,17 @@ Redacta un documento de diseño funcional-técnico de una página cubriendo: pro
 - [ ] Generé y revisé una matriz de seguridad que respeta el mínimo privilegio entre Vendedor y Gerente
 - [ ] Redacté el documento de diseño funcional-técnico completo de una página
 
+## Evidencia esperada
+
+- Documento de diseño funcional-técnico de una página (proceso, mapeo a entidades estándar, brechas, personalización mínima)
+- Matriz de seguridad Vendedor/Gerente con el mínimo privilegio aplicado
+
+## Criterios de aprobación
+
+- Cada brecha identificada tiene una justificación de por qué lo estándar no alcanza, no un "porque sí"
+- La matriz de seguridad no otorga a Vendedor permisos que solo necesita Gerente
+- 100% de los ítems de Criterios de Validación marcados
+
 ## Preguntas de Reflexión
 
 1. ¿Qué parte del proceso fue más tentador resolver con una tabla personalizada, y por qué la alternativa estándar terminó siendo mejor (o peor)?

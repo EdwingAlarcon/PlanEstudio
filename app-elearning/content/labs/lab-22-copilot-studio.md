@@ -541,6 +541,19 @@ En el panel de Test, prueba estas preguntas:
 - [ ] Agente publicado y accesible en Microsoft Teams
 - [ ] SSO funciona en Teams sin pedir credenciales adicionales
 
+## Evidencia esperada
+
+- Transcript de una conversación de prueba usando "Consultar mis solicitudes" y "Crear nueva solicitud"
+- Captura del SSO activo mostrando el nombre del usuario, en Test y en Teams
+- Captura de una pregunta fuera de scope siendo rechazada por Generative Answers
+
+## Criterios de aprobación
+
+- El agente responde correctamente en los 3 topics (consultar, crear, escalar) con datos reales de Dataverse
+- El SSO funciona sin pedir credenciales adicionales tanto en Test como en Teams
+- Generative Answers no inventa respuestas fuera de la Knowledge Source configurada
+- 100% de los ítems del Checklist final marcados
+
 ---
 
 ## Reto adicional

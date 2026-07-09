@@ -128,6 +128,17 @@ Escribe (en un archivo local, no en el repo del proyecto real) tu checklist pers
 - [ ] Verifiqué la organización activa con `pac org who` antes y después de cambiar de perfil
 - [ ] Documenté mi checklist personal de verificación previa a comandos destructivos
 
+## Evidencia esperada
+
+- Historial de comandos usados para instalar el CLI, crear el perfil y verificar la organización activa
+- Checklist personal de verificación previa a comandos destructivos, documentado por escrito
+
+## Criterios de aprobación
+
+- El perfil de autenticación tiene un nombre explícito que identifica el entorno sin ambigüedad
+- `pac org who` confirma la organización correcta antes de cualquier comando de import/export
+- 100% de los ítems de Criterios de Validación marcados
+
 ## Preguntas de Reflexión
 
 1. ¿Qué habría pasado si hubieras ejecutado un `pac solution import` sin verificar el perfil activo?

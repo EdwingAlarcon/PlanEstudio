@@ -102,6 +102,18 @@ Con los hallazgos del Ejercicio 3, escribe:
 - [ ] Verifiqué manualmente al menos 2 hallazgos de la IA contra los archivos reales
 - [ ] Documenté un checklist de importación para el entorno destino
 
+## Evidencia esperada
+
+- Carpeta de la solución desempaquetada versionada en Git (historial de commits)
+- Reporte de la IA con componentes/dependencias/hardcodes identificados, con al menos 2 hallazgos verificados manualmente
+- Checklist de importación documentado para el entorno destino
+
+## Criterios de aprobación
+
+- Exporta e importa sin edición manual del zip
+- Al menos 2 de los hallazgos reportados por la IA fueron confirmados contra los archivos reales, no aceptados a ciegas
+- 100% de los ítems de Criterios de Validación marcados
+
 ## Preguntas de Reflexión
 
 1. ¿Qué riesgo real habría corrido el equipo si hubiera importado la solución a Test sin este proceso de revisión?

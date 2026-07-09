@@ -745,6 +745,20 @@ namespace SIT.Plugins.Tests
 - [ ] Al crear solicitud urgente sin presupuesto desde la UI: aparece el error del plugin
 - [ ] Al cambiar estado de cualquier solicitud: se crea el registro de auditoría
 
+## Evidencia esperada
+
+- Resultado de la ejecución de los 4 unit tests (captura del Explorador de pruebas en verde)
+- Captura del registro de Steps en PRT con Stage, Filtering Attributes y Pre-Image
+- Captura del error del plugin al crear una solicitud urgente sin presupuesto desde la UI
+- Captura del registro de auditoría creado tras un cambio de estado
+
+## Criterios de aprobación
+
+- Cobertura de al menos 1 caso feliz y 1 caso de error por plugin en los unit tests
+- El plugin bloquea la creación urgente sin presupuesto únicamente desde cualquier punto de entrada (UI, API), no solo desde el formulario
+- El registro de auditoría refleja correctamente el estado anterior y el nuevo
+- 100% de los ítems del Checklist final marcados
+
 ---
 
 ## Reto adicional

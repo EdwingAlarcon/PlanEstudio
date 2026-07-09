@@ -61,8 +61,10 @@
 - [ ] **Conocimiento**: Explico qué es el Primary Name Column y por qué es importante | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Uso el Dataverse Web API desde Postman para hacer un GET de registros | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Describo qué son los metadata de Dataverse y cómo se acceden | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-002 completado — modelo de datos del sistema de solicitudes SIT | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-061 completado — Capstone Maker: Sistema Interno de Gestión de Solicitudes | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 2:** ___/16 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 2:** ___/18 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
@@ -84,8 +86,9 @@
 - [ ] **Práctica**: Guardo el contenido de un Form usando SubmitForm() | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Implemento búsqueda en una Gallery usando un TextInput y la función Search() | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Configuro el tema visual de la app (colores, fuentes) de forma consistente | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-003 completado — Canvas App de gestión de solicitudes SIT | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 3:** ___/16 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 3:** ___/17 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
@@ -103,8 +106,9 @@
 - [ ] **Práctica**: Creo un security role personalizado con permisos específicos por tabla | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Publico las customizations y verifico los cambios en la app | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico qué es el UCI (Unified Client Interface) y sus ventajas | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-004 completado — Model-Driven App del sistema de solicitudes SIT | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 4:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 4:** ___/13 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
@@ -126,8 +130,9 @@
 - [ ] **Conocimiento**: Explico qué es un conector premium y cuándo se necesita licencia adicional | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Activo y desactivo un flow y verifico su estado en el portal | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico la diferencia entre cloud flows y desktop flows (RPA) | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-005 completado — flujo de notificación y aprobación de solicitudes SIT | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 5:** ___/16 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 5:** ___/17 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
@@ -225,8 +230,9 @@
 - [ ] **Práctica**: Configuro Solution Layering: comprendo el orden de capas activas vs. managed | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico qué son las Elastic Tables y cuándo convienen sobre las Standard tables | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Uso el Solution Checker y corrijo los issues reportados | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-009 completado — BPF, Rollup y Field Security del sistema SIT | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 9:** ___/16 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 9:** ___/17 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
@@ -387,8 +393,9 @@
 - [ ] **Entrega**: Solution con connection references, environment variables y managed properties | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: DLP policy configurada y security roles detallados | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: Solution Checker sin issues de alta severidad | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-062 completado — Capstone Consultor Funcional: Proyecto Funcional Completo | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 17:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 17:** ___/11 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
@@ -437,8 +444,10 @@
 - [ ] **Práctica**: Implemento una estrategia de rollback: reimportar la versión Managed anterior | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Uso `pac solution unpack` y `pac solution pack` para versionado en control de fuentes | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico el patrón de branching: main/release/develop para soluciones Power Platform | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-019 completado — pipeline CI/CD de Azure DevOps para la solución SIT | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-063 completado — Capstone Developer: Solución Técnica Avanzada | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 19:** ___/11 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 19:** ___/13 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
@@ -455,8 +464,11 @@
 - [ ] **Práctica**: Creo una solución que extiende D365 CE con tablas y lógica personalizada | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico las consideraciones de licenciamiento entre D365 y Power Platform | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-068 completado — ciclo case-to-resolution, SLA con pausa/reanudación, escalamiento y dashboard de servicio | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-066 completado — Sales: proceso comercial Lead-to-Cash | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-058 completado — Customer Insights: segmento, consentimiento y journey de renovación | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-060 completado — Capstone Microsoft Business Applications: Servicio Postventa | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 20:** ___/11 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 20:** ___/14 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
@@ -489,8 +501,10 @@
 - [ ] **Conocimiento**: Explico las diferencias entre Generative Answers, Actions y Topics estáticos | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Diseño un agente de RRHH con acceso a políticas y Dataverse | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico las consideraciones de gobernanza de IA para agentes empresariales | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-022 completado — agente de soporte TI con SSO, Generative Answers y Adaptive Cards | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-065 completado — Capstone AI & Copilot: Agente Empresarial Gobernado | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 22:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 22:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
@@ -507,8 +521,9 @@
 - [ ] **Práctica**: Incluyo el assembly en una solución y lo despliego a un ambiente de prueba | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Genero clases early-bound con CrmSvcUtil y las uso en el plugin | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Depuro el plugin en sandbox aislado con el Plugin Profiler | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-023 completado — plugins de validación server-side y auditoría del sistema SIT | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 23:** ___/11 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 23:** ___/12 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
@@ -673,8 +688,9 @@
 - [ ] **Conocimiento**: Explico la estrategia de Adoption Hub: champions, capacitación continua, comunidad interna | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Diseño el proceso de environment lifecycle: creación, uso, limpieza y eliminación | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Configuro el CoE Innovation Backlog para gestionar solicitudes de nuevas apps | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-032 completado — CoE Starter Kit: gobernanza a escala del tenant | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 32:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 32:** ___/11 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
@@ -1079,13 +1095,13 @@
 
 | Nivel | Módulos | Checkboxes est. | Completados | % | Promedio Dominio | Fecha Fin |
 |-------|---------|-----------------|-------------|---|-----------------|-----------|
-| 🟢 Nivel 1 - Básico | 8 | 114 | ___ | ___% | ___/5 | ___ |
-| 🔵 Nivel 2 - Intermedio | 9 | 120 | ___ | ___% | ___/5 | ___ |
-| 🟠 Nivel 3 - Avanzado | 13 | 131 | ___ | ___% | ___/5 | ___ |
-| 🔴 Nivel 4 - Arquitecto | 11 | 103 | ___ | ___% | ___/5 | ___ |
+| 🟢 Nivel 1 - Básico | 8 | 119 | ___ | ___% | ___/5 | ___ |
+| 🔵 Nivel 2 - Intermedio | 9 | 122 | ___ | ___% | ___/5 | ___ |
+| 🟠 Nivel 3 - Avanzado | 13 | 139 | ___ | ___% | ___/5 | ___ |
+| 🔴 Nivel 4 - Arquitecto | 11 | 104 | ___ | ___% | ___/5 | ___ |
 | 🟣 Nivel IA - Desarrollo Asistido | 14 | 63 | ___ | ___% | ___/5 | ___ |
 | 🔷 Nivel D365 - Dynamics 365 Avanzado | 4 | 18 | ___ | ___% | ___/5 | ___ |
-| **TOTAL** | **59** | **549** | ___ | ___% | ___/5 | ___ |
+| **TOTAL** | **59** | **565** | ___ | ___% | ___/5 | ___ |
 
 ### Resumen por Módulo
 

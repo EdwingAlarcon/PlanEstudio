@@ -414,6 +414,20 @@ Con el rol **SIT Solicitante** activo (en ventana privada o con otro usuario):
 - [ ] Rol "SIT Solicitante" y "SIT Técnico TI" creados con permisos correctos
 - [ ] Prueba con ambos roles verifica comportamiento diferenciado
 
+## Evidencia esperada
+
+- Captura de la MDA publicada con el site map (Operación + Administración)
+- Captura del formulario Main con sus 3 pestañas y del Quick View de Categoría mostrando el SLA
+- Captura del Dashboard con los 2 gráficos y la lista de críticas
+- Captura de la prueba con los 2 Security Roles mostrando acceso diferenciado
+
+## Criterios de aprobación
+
+- El site map organiza correctamente las áreas de Operación y Administración
+- La vista "Cierre Pendiente" filtra únicamente solicitudes en estado Resuelta
+- Un usuario con rol "SIT Solicitante" no puede hacer lo que solo permite "SIT Técnico TI"
+- 100% de los ítems del Checklist final marcados
+
 ---
 
 ## Reto adicional

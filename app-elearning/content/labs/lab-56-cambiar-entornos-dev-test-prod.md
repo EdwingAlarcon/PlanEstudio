@@ -97,6 +97,18 @@ Escribe el procedimiento de verificación como una checklist de equipo de 3 lín
 - [ ] Identifiqué en qué paso se habría detectado un cambio de entorno erróneo simulado
 - [ ] Documenté el procedimiento como checklist de equipo de onboarding
 
+## Evidencia esperada
+
+- Los 3 perfiles de autenticación creados con nombres explícitos (proyecto + etapa)
+- Procedimiento de verificación de 3 pasos documentado como checklist de onboarding
+- Análisis escrito de en qué paso se habría detectado el cambio de entorno erróneo simulado
+
+## Criterios de aprobación
+
+- Ningún cambio pasa directo a Prod sin pasar por el procedimiento de verificación de 3 pasos
+- El checklist de onboarding es suficiente para que otra persona del equipo lo siga sin ayuda
+- 100% de los ítems de Criterios de Validación marcados
+
 ## Preguntas de Reflexión
 
 1. ¿Por qué seleccionar un perfil por nombre es más seguro que seleccionarlo por índice numérico?

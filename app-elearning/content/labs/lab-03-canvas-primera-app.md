@@ -457,6 +457,20 @@ La app está publicada. Los ítems de la galería muestran la barra de color lat
 
 ---
 
+## Evidencia esperada
+
+- Captura de las 3 pantallas (`scrInicio`, `scrNueva`, `scrDetalle`) en funcionamiento
+- Captura del buscador/filtro de `scrInicio` con el contador de registros actualizado
+- Captura de una solicitud crítica mostrando la barra roja lateral
+- Captura de la barra de fórmulas sin triángulo rojo (0 errores) antes de publicar
+
+## Criterios de aprobación
+
+- Las 3 pantallas navegan correctamente entre sí (crear → volver a inicio, ver → editar)
+- El filtro y buscador de `scrInicio` devuelven resultados correctos con datos reales
+- La app está publicada sin errores de fórmula
+- 100% de los ítems del Checklist final marcados
+
 ## Reto adicional
 
 **Reto básico:** Agrega un **badge de conteo** en el botón "+" del encabezado de `scrInicio` que muestre cuántas solicitudes tienen prioridad **Crítica** y estado **Nueva**. Usa `CountIf()`.

@@ -402,6 +402,19 @@ El formulario de `sit_Solicitud` en la MDA muestra:
 - [ ] El BPF aparece en el formulario de la MDA y bloquea avance sin campos obligatorios
 - [ ] Las columnas de diagnóstico y solución visibles en los pasos del BPF
 
+## Evidencia esperada
+
+- Captura del BPF activo con sus 4 etapas y el bloqueo de avance sin campos obligatorios
+- Captura del Field Security Profile aplicado a `sit_costoestimado`
+- Captura de la columna Rollup `sit_solicitudesactivas` tras un recálculo manual
+
+## Criterios de aprobación
+
+- El BPF no permite avanzar de etapa sin los campos obligatorios de cada una
+- Un usuario sin el Field Security Profile no puede ver/editar `sit_costoestimado`
+- El Rollup refleja el conteo correcto de solicitudes activas tras recalcular
+- 100% de los ítems del Checklist final marcados
+
 ---
 
 ## Reto adicional
