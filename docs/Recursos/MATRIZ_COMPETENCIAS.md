@@ -75,7 +75,8 @@ corresponde a cada ruta.
 |---|---|---|---|---|
 | Procesos comerciales (lead-to-cash) | Intermedio-Avanzado | BPF configurado con campos requeridos por etapa, Quote→Order con Price List Item | Módulo 20, Lab 66 | La oportunidad no avanza de etapa sin campos obligatorios; el monto de Quote y Order coincide |
 | Casos de servicio y colas | Intermedio-Avanzado | Cola configurada + regla de enrutamiento probada | Lab 59 (adaptable) | El caso llega a la cola correcta según el criterio definido |
-| Customer Insights (segmentación, journeys) | Avanzado | Segmento + journey documentado con trigger y salida | Lab 58 | Segmento filtra correctamente, sin envíos duplicados en el journey |
+| Customer Insights - Journeys (segmentación, journeys) | Avanzado | Segmento + journey documentado con trigger y salida | Lab 58 | Segmento filtra correctamente, sin envíos duplicados en el journey |
+| Customer Insights - Data (unificación de perfiles, medidas, activación) | Avanzado | Regla de matching aplicada a datos de prueba + medidas con fórmula documentada | Módulo 57, Lab 67 | La regla de matching unifica correctamente al cliente sin email por teléfono/nombre |
 | Field Service (work orders, SLAs) | Avanzado | Work order de principio a fin + SLA con escalamiento | Lab 59 | El SLA se dispara y escala cuando se incumple el tiempo |
 | Integración con Dataverse (datos compartidos entre apps) | Avanzado | Diagrama de flujo de datos entre Sales/Service/Insights | Lab 60 | Sin duplicación de entidades cliente entre apps |
 | UAT y go-live de un escenario CE completo | Avanzado | 8 casos UAT + checklist de go-live | Lab 60 | 100% de casos ejecutados, checklist sin pendientes críticos |

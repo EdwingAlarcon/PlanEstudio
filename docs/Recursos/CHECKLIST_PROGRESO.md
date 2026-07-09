@@ -1028,9 +1028,20 @@
 
 ---
 
+### Módulo 57: Customer Insights - Data: Unificación de Perfiles y Customer 360
+
+- [ ] **Conocimiento**: Explico por qué Customer Insights - Data no reemplaza a Sales/Customer Service | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Escribí una regla de matching explícita que resuelve un caso sin clave compartida (ej. sin email) | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Definí una medida propia con su fórmula y las fuentes que combina | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 67 completado — unificación de perfiles y Customer 360 | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 57:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
 ### 🏆 Hitos de Nivel Dynamics 365 Avanzado
 
-- [ ] Módulo 56 completado con 80%+ de checkboxes marcados | Fecha: ___
+- [ ] Módulos 56-57 completados con 80%+ de checkboxes marcados | Fecha: ___
 - [ ] Autoevaluación promedio ≥ 4.0/5 | Promedio: ___/5
 - [ ] Certificado del Nivel Dynamics 365 Avanzado generado | Fecha: ___
 
@@ -1048,8 +1059,8 @@
 | 🟠 Nivel 3 - Avanzado | 13 | 129 | ___ | ___% | ___/5 | ___ |
 | 🔴 Nivel 4 - Arquitecto | 11 | 105 | ___ | ___% | ___/5 | ___ |
 | 🟣 Nivel IA - Desarrollo Asistido | 14 | 63 | ___ | ___% | ___/5 | ___ |
-| 🔷 Nivel D365 - Dynamics 365 Avanzado | 1 | 4 | ___ | ___% | ___/5 | ___ |
-| **TOTAL** | **56** | **534** | ___ | ___% | ___/5 | ___ |
+| 🔷 Nivel D365 - Dynamics 365 Avanzado | 2 | 8 | ___ | ___% | ___/5 | ___ |
+| **TOTAL** | **57** | **538** | ___ | ___% | ___/5 | ___ |
 
 ### Resumen por Módulo
 
@@ -1111,6 +1122,7 @@
 | 54 | ALM de Soluciones con Apoyo de IA | ___/5 | ___% | ___/5 |
 | 55 | Análisis, Arquitectura y Consultoría Funcional D365 | ___/6 | ___% | ___/5 |
 | 56 | Introducción a Dynamics 365 Avanzado | ___/4 | ___% | ___/5 |
+| 57 | Customer Insights - Data | ___/4 | ___% | ___/5 |
 
 ### Timeline Visual de Progreso
 

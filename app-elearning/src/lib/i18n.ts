@@ -69,7 +69,7 @@ export const UI = {
       avanzado: 13,
       arquitecto: 11,
       ia: 14,
-      d365: 1,
+      d365: 2,
     },
   },
 
@@ -152,5 +152,5 @@ export const LEVEL_MODULE_RANGE: Record<LevelId, [number, number]> = {
   avanzado: [18, 30],
   arquitecto: [31, 41],
   ia: [42, 55],
-  d365: [56, 56],
+  d365: [56, 57],
 };

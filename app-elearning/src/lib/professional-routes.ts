@@ -149,7 +149,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     outcome: "Diseñar procesos de ventas y servicio sobre Dynamics 365 CE con entidades estándar antes de personalizar.",
     level: "Especialización",
     accent: "#4F6BED",
-    modules: [1, 4, 9, 15, 20, 22, 30, 39, 53, 55, 56],
+    modules: [1, 4, 9, 15, 20, 22, 30, 39, 53, 55, 56, 57],
     labs: [
       "lab-22-copilot-studio",
       "lab-55-uat-gonolive-y-auditoria-prompts",
@@ -158,10 +158,11 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-59-field-service-work-order-uat",
       "lab-60-proyecto-integrador-servicio-postventa",
       "lab-66-sales-lead-to-cash",
+      "lab-67-customer-360-insights-data",
     ],
     competencies: ["Sales", "Customer Service", "Dataverse estándar", "Omnichannel", "Copilot para servicio", "Fit-Gap D365"],
     status: "Parcial",
-    gapNote: "Se apoya en el Módulo 20 (compartido) y en los labs 58/59 para Customer Insights y Field Service, pero aún no existen módulos dedicados a esas dos áreas ni a Omnichannel avanzado. Es una base sólida para Sales y Customer Service estándar; para Customer Insights o Field Service profundo, complementa con documentación oficial de Microsoft Learn.",
+    gapNote: "Sales, Customer Service y Customer Insights - Data ya tienen módulo y lab dedicados con datos reales (Módulos 20/56/57, Labs 66/67). Field Service todavía se apoya solo en el Lab 59 sin módulo propio, y Omnichannel avanzado (voz/chat real) sigue sin configuración práctica — complementa esas dos áreas con documentación oficial de Microsoft Learn mientras se profundizan en próximos sprints.",
     capstoneLabSlug: "lab-60-proyecto-integrador-servicio-postventa",
     portfolioEvidence: [
       "Documento de diseño de 3-5 páginas (TO-BE, Fit-Gap)",

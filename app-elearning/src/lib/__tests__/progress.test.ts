@@ -151,9 +151,9 @@ describe("useProgressStore", () => {
   });
 
   describe("getOverallProgress", () => {
-    it("counts total as 56", () => {
+    it("counts total as 57", () => {
       const prog = useProgressStore.getState().getOverallProgress();
-      expect(prog.total).toBe(56);
+      expect(prog.total).toBe(57);
     });
 
     it("reflects completed modules", () => {

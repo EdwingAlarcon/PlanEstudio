@@ -2,7 +2,7 @@
 // Source: docs/javascripts/evaluaciones-simulador.js
 // Regenerate: node scripts/extract-questions.mjs  (or: cd app-elearning && npm run build)
 //
-// 56 modules, 434 questions total.
+// 57 modules, 442 questions total.
 
 export type QuestionType = "single" | "multi";
 
@@ -5333,6 +5333,104 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       ],
       answer: [0],
       explanation: "El Solution Architect es quien diseña la arquitectura común (seguridad, ALM, integración) que conecta las distintas aplicaciones D365 CE dentro de un mismo proyecto Customer Engagement.",
+    },
+  ],
+  57: [
+    {
+      type: "single",
+      prompt: "¿Por qué Customer Insights - Data no es 'otro CRM' además de Sales y Customer Service?",
+      options: [
+      "Porque su valor es unificar el perfil del cliente combinando fuentes que Sales/Service no combinan por sí solos, no reemplazar su operación transaccional",
+      "Porque reemplaza completamente a Sales y Customer Service en cualquier proyecto",
+      "Porque solo puede usarse si la empresa no tiene Dataverse",
+      "Porque es exclusivamente una herramienta de envío de correos"
+      ],
+      answer: [0],
+      explanation: "Customer Insights - Data existe para unificar el perfil del cliente combinando fuentes que Sales/Service no combinan por sí solos (facturación, sistemas externos), no para reemplazar la operación transaccional de esas aplicaciones.",
+    },
+    {
+      type: "single",
+      prompt: "Un Contact de Dataverse no tiene email registrado, pero sí teléfono y empresa. ¿Qué regla de matching resuelve mejor su unificación con un registro de facturación externo?",
+      options: [
+      "Una regla secundaria que combine teléfono exacto con nombre/empresa normalizado, además de la regla de email exacto",
+      "Ignorar ese registro porque sin email no se puede unificar nunca",
+      "Unificarlo automáticamente con cualquier registro que tenga el mismo nombre, sin verificar más datos",
+      "Esperar a que el cliente actualice su email antes de intentar unificarlo"
+      ],
+      answer: [0],
+      explanation: "Cuando falta la clave principal (email), una regla secundaria por teléfono + nombre/empresa normalizado permite resolver la unificación sin depender de un único campo.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué distingue a una 'medida' (measure) de un campo capturado directamente en una tabla?",
+      options: [
+      "La medida es un valor calculado a partir de datos de una o varias fuentes, con una fórmula documentada",
+      "La medida siempre proviene de una sola tabla de Dataverse sin combinar fuentes",
+      "La medida es idéntica a un campo de texto libre capturado por un usuario",
+      "Las medidas no pueden usarse para definir segmentos"
+      ],
+      answer: [0],
+      explanation: "Una medida es un valor calculado (por ejemplo, la suma de facturación de los últimos 24 meses) a partir de una fórmula documentada sobre datos de una o varias fuentes, no un campo capturado directamente.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué significa 'activar' un segmento o medida de Customer Insights - Data?",
+      options: [
+      "Llevar ese segmento o medida hacia un sistema de destino (por ejemplo Journeys o Dataverse) para que dispare una acción concreta",
+      "Simplemente calcular el número una vez y archivarlo en un reporte estático",
+      "Eliminar el segmento después de usarlo una sola vez",
+      "Un sinónimo de 'ingestar' una fuente de datos por primera vez"
+      ],
+      answer: [0],
+      explanation: "La activación es el paso de llevar un segmento o medida hacia un sistema de destino (Journeys, Dataverse, una plataforma de publicidad) para que dispare una acción real — sin activación, el perfil unificado es solo un reporte.",
+    },
+    {
+      type: "single",
+      prompt: "Una hoja de soporte técnico interna contiene comentarios de agentes sobre clientes. ¿Cómo deberían tratarse esos comentarios en un proyecto de Customer Insights - Data?",
+      options: [
+      "Usarlos solo para calcular medidas internas de riesgo, sin activarlos nunca hacia un canal de comunicación con el cliente",
+      "Activarlos directamente como contenido de un email al cliente para mayor personalización",
+      "Ignorarlos por completo, ya que los comentarios internos nunca aportan valor",
+      "Publicarlos en el perfil público del cliente en el Customer 360"
+      ],
+      answer: [0],
+      explanation: "Los datos internos (como comentarios de agentes) pueden alimentar medidas de riesgo u operativas, pero no deben activarse hacia canales de comunicación con el cliente — mezclar dato interno con contenido externo es un riesgo de gobierno.",
+    },
+    {
+      type: "single",
+      prompt: "¿Cuándo NO se justifica introducir Customer Insights - Data en un proyecto?",
+      options: [
+      "Cuando toda la información relevante del cliente ya vive en Dataverse y no hay fuentes externas que unificar",
+      "Cuando existen 3 o más fuentes externas con datos del mismo cliente",
+      "Cuando se necesita calcular medidas que combinan Sales y facturación externa",
+      "Cuando se requiere activar segmentos hacia Journeys en tiempo real"
+      ],
+      answer: [0],
+      explanation: "Si toda la información relevante ya está en Dataverse y no hay fuentes externas que unificar, un reporte sobre Dataverse puede ser suficiente — introducir Customer Insights - Data sin esa necesidad real es sobre-ingeniería.",
+    },
+    {
+      type: "single",
+      prompt: "Una cadena de retail unificó su Dataverse con su sistema de punto de venta asumiendo que el email siempre bastaba como clave de matching. ¿Cuál fue la consecuencia principal?",
+      options: [
+      "Clientes sin email registrado en el POS quedaron sin unificar y perdieron su historial de fidelización",
+      "El sistema rechazó automáticamente la ingesta completa sin generar ningún dato",
+      "No hubo ninguna consecuencia porque el email es siempre suficiente en cualquier escenario",
+      "La empresa tuvo que cancelar el proyecto de Customer Insights por completo"
+      ],
+      answer: [0],
+      explanation: "Al no definir una regla de matching secundaria, los clientes sin email registrado en el POS quedaron sin unificar, apareciendo como 'nuevos' en cada visita y perdiendo su historial de fidelización.",
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué la frecuencia de ingesta de cada fuente importa al interpretar una medida calculada?",
+      options: [
+      "Porque una medida que combina fuentes con distinta frecuencia de actualización no está igual de 'al día' en todas sus partes",
+      "Porque todas las fuentes siempre se actualizan en tiempo real sin excepción",
+      "Porque la frecuencia de ingesta no afecta en nada el resultado de una medida",
+      "Porque solo importa la frecuencia de la fuente de Dataverse, nunca la de fuentes externas"
+      ],
+      answer: [0],
+      explanation: "Si una fuente se actualiza mensualmente y otra a diario, una medida que combina ambas refleja información desactualizada de la fuente más lenta — hay que comunicar ese matiz al interpretar el resultado.",
     },
   ],
 };

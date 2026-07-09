@@ -215,6 +215,16 @@ Estas plantillas están pensadas para copiarse directamente a un archivo Markdow
 | Journey | Trigger, ramas, salida y métricas documentadas |
 | Riesgo operativo | Clientes con casos críticos quedan excluidos o salen del journey |
 
+## Rúbrica específica: Customer Insights - Data
+
+| Criterio | Aprobado profesional |
+|---|---|
+| Matriz de fuentes | Cada fuente documentada con dato, uso y dueño |
+| Reglas de matching | Regla explícita que resuelve casos sin clave compartida (ej. sin email) |
+| Medidas | Fórmula documentada y fuentes identificadas para cada medida |
+| Activación | Todo segmento declara un destino de activación y la acción que dispara ahí |
+| Riesgo de datos | Riesgos de duplicidad, gobierno y frecuencia de actualización identificados |
+
 ## Rúbrica específica: Field Service
 
 | Criterio | Aprobado profesional |
