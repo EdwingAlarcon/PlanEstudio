@@ -3,11 +3,14 @@ import { getAllProfessionalRoutes } from "@/lib/professional-routes";
 
 export interface LabPresentationMeta {
   kind: string;
+  kindLabel: string;
   routes: string[];
   recommendedLevel: string;
   difficulty: string;
   evidenceSummary: string;
   competencies: string[];
+  certificationBadges: string[];
+  historicalCertifications: string[];
 }
 
 const LEVEL_LABELS: Record<string, string> = {
@@ -42,6 +45,38 @@ function getLabKind(lab: LabInfo): string {
   if (haystack.includes("uat") || haystack.includes("go-live")) return "UAT";
   if (haystack.includes("simulador") || haystack.includes("simulacion")) return "Simulacion";
   return "Laboratorio";
+}
+
+function getLabKindLabel(lab: LabInfo, kind: string): string {
+  if (kind !== "Capstone") {
+    return kind === "Laboratorio" ? "Laboratorio práctico" : kind;
+  }
+
+  if (lab.slug.includes("maker")) return "Capstone Maker";
+  if (lab.slug.includes("consultor-funcional")) return "Capstone Consultor Funcional";
+  if (lab.slug.includes("developer")) return "Capstone Developer";
+  if (lab.slug.includes("fo-awareness")) return "Capstone F&O Awareness";
+  if (lab.slug.includes("ai-copilot")) return "Capstone AI & Copilot";
+  return "Capstone";
+}
+
+function getCertificationBadges(lab: LabInfo): Pick<LabPresentationMeta, "certificationBadges" | "historicalCertifications"> {
+  const historical = new Set(["MB-210", "MB-220", "MB-240", "MB-300"]);
+  const historicalCertifications = lab.certifications.filter((cert) => historical.has(cert));
+  const activeCertifications = lab.certifications.filter((cert) => !historical.has(cert));
+
+  const competencyBadges = historicalCertifications.map((cert) => {
+    if (cert === "MB-210") return "Competencia Sales";
+    if (cert === "MB-220") return "Customer Insights Skill Path";
+    if (cert === "MB-240") return "Competencia Field Service";
+    if (cert === "MB-300") return "F&O Awareness";
+    return "Competencia Dynamics 365";
+  });
+
+  return {
+    certificationBadges: [...activeCertifications, ...competencyBadges],
+    historicalCertifications,
+  };
 }
 
 function extractSectionItems(markdown: string, heading: string, maxItems: number): string[] {
@@ -92,12 +127,17 @@ function getRoutesForLab(lab: LabInfo): string[] {
 }
 
 export function getLabPresentationMeta(lab: LabInfo): LabPresentationMeta {
+  const kind = getLabKind(lab);
+  const certifications = getCertificationBadges(lab);
+
   return {
-    kind: getLabKind(lab),
+    kind,
+    kindLabel: getLabKindLabel(lab, kind),
     routes: getRoutesForLab(lab),
     recommendedLevel: LEVEL_LABELS[lab.level] ?? lab.level,
     difficulty: DIFFICULTY_LABELS[lab.level] ?? "Intermedia",
     evidenceSummary: summarizeEvidence(lab),
     competencies: getCompetencies(lab),
+    ...certifications,
   };
 }

@@ -215,6 +215,7 @@ describe("getSearchDocuments — incluye labs", () => {
 
     expect(labDoc?.title).toContain("LAB-002");
     expect(labDoc?.content).toContain("LAB-002");
+    expect(labDoc?.content).toContain("Lab 2");
     expect(labDoc?.content).toContain("lab-02");
   });
 });

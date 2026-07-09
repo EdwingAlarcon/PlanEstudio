@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!lab) return { title: "Lab no encontrado" };
   return {
     title: `${lab.displayId} · ${lab.title}`,
-    description: `${lab.displayId}. Laboratorio práctico: ${lab.title}. Duración: ${lab.duration} min. Certificación: ${lab.certifications.join(", ")}.`,
+    description: `${lab.displayId}. Laboratorio práctico: ${lab.title}. Duración: ${lab.duration} min.`,
   };
 }
 
@@ -76,8 +76,11 @@ export default async function LabDetailPage({ params }: Props) {
               </div>
               <div>
                 <div className="mb-2 flex flex-wrap items-center gap-1.5">
-                  <Badge variant="secondary" className="font-mono">{lab.displayId}</Badge>
-                  <Badge variant={meta.kind === "Capstone" ? "arquitecto" : "outline"}>{meta.kind}</Badge>
+                  <Badge variant="secondary" className="h-7 px-2.5 font-mono text-sm font-semibold tracking-wide">
+                    {lab.displayId}
+                  </Badge>
+                  <Badge variant={meta.kind === "Capstone" ? "arquitecto" : "outline"}>{meta.kindLabel}</Badge>
+                  <Badge variant="outline">{meta.recommendedLevel}</Badge>
                   <Badge variant="outline">{meta.difficulty}</Badge>
                 </div>
                 <h1 className="text-xl font-bold leading-snug text-foreground">{lab.title}</h1>
@@ -89,7 +92,7 @@ export default async function LabDetailPage({ params }: Props) {
 
             {/* Badges */}
             <div className="flex flex-wrap gap-1.5">
-              {lab.certifications.map((cert) => (
+              {meta.certificationBadges.map((cert) => (
                 <Badge key={cert} variant={CERT_VARIANT[cert] ?? "default"}>{cert}</Badge>
               ))}
               {lab.products.map((p) => (
@@ -112,10 +115,10 @@ export default async function LabDetailPage({ params }: Props) {
                   {lab.duration} min
                 </span>
               )}
-              {lab.certifications.length > 0 && (
+              {meta.certificationBadges.length > 0 && (
                 <span className="flex items-center gap-1.5">
                   <Award className="h-3.5 w-3.5" aria-hidden />
-                  {lab.certifications.join(", ")}
+                  {meta.certificationBadges.join(", ")}
                 </span>
               )}
               {lab.role.length > 0 && (
@@ -131,6 +134,13 @@ export default async function LabDetailPage({ params }: Props) {
                 </span>
               )}
             </div>
+
+            {meta.historicalCertifications.length > 0 && (
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                Referencia histórica: {meta.historicalCertifications.join(", ")}. Este lab se presenta como competencia,
+                no como certificación vigente.
+              </p>
+            )}
 
             <div className="grid gap-3 rounded-lg border border-border bg-muted/30 p-3 text-xs sm:grid-cols-2">
               <div>

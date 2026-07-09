@@ -198,6 +198,12 @@ export function formatLabDisplayId(idOrSlug: string): string {
   return `LAB-${match[1].padStart(3, "0")}`;
 }
 
+export function formatLabReadableId(idOrSlug: string): string {
+  const match = idOrSlug.match(/^lab-(\d{2,3})(?:-|$)/);
+  if (!match?.[1]) return idOrSlug;
+  return `Lab ${Number(match[1])}`;
+}
+
 function deriveLabIdFromSlug(slug: string, filePath: string): string {
   const match = slug.match(/^lab-(\d{2,3})(?:-|$)/);
   if (!match?.[1]) {
@@ -571,13 +577,13 @@ export function getSearchDocuments(): SearchDocument[] {
 
   const labDocs: SearchDocument[] = getAllLabs().map((lab) => ({
     id: lab.slug,
-    title: `${lab.displayId} · ${lab.title}`,
+    title: `${lab.displayId} · ${formatLabReadableId(lab.id)} · ${lab.title}`,
     levelId: lab.level,
     moduleId: 0,
     slug: lab.slug,
     type: "lab" as const,
     href: `/labs/${lab.slug}`,
-    content: `${lab.displayId} ${lab.id} ${lab.slug} ${lab.title}\n${lab.rawContent.replace(/^#{1,6}\s+/gm, "")}`.slice(0, 2000),
+    content: `${lab.displayId} ${formatLabReadableId(lab.id)} ${lab.id} ${lab.slug} ${lab.title}\n${lab.rawContent.replace(/^#{1,6}\s+/gm, "")}`.slice(0, 2000),
   }));
 
   return [...moduleDocs, ...labDocs];

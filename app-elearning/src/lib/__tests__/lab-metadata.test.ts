@@ -23,7 +23,11 @@ describe("lab presentation metadata", () => {
 
     expect(lab?.displayId).toBe("LAB-066");
     expect(meta.kind).toBe("Laboratorio");
+    expect(meta.kindLabel).toBe("Laboratorio práctico");
     expect(meta.routes).toContain("Ruta Dynamics 365 Customer Engagement");
+    expect(meta.certificationBadges).toContain("Competencia Sales");
+    expect(meta.certificationBadges).not.toContain("MB-210");
+    expect(meta.historicalCertifications).toContain("MB-210");
     expect(meta.evidenceSummary).toContain("Captura");
     expect(meta.competencies.join(" ")).toContain("lead-to-cash");
   });

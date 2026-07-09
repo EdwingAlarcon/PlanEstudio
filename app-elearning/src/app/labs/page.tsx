@@ -161,19 +161,16 @@ export default function LabsPage() {
                 return (
                 <Link key={lab.slug} href={`/labs/${lab.slug}`} className="group">
                   <div className="relative h-full rounded-xl border border-border bg-card px-4 py-4 shadow-fluent-1 group-hover:shadow-fluent-4 group-hover:border-[#0078D4]/30 dark:group-hover:border-[#4DB8FF]/30 transition-all duration-200">
-                    <div className="mb-3 flex flex-wrap items-center gap-1.5">
+                    <div className="mb-3 flex flex-wrap items-center gap-2">
                       <Badge
                         variant={meta.kind === "Capstone" ? "default" : "secondary"}
-                        className="font-mono text-[10px]"
+                        className="h-6 px-2 font-mono text-xs font-semibold tracking-wide"
                       >
                         {lab.displayId}
                       </Badge>
-                      <Badge variant={meta.kind === "Capstone" ? "arquitecto" : "outline"} className="text-[10px]">
-                        {LAB_MARKERS[lab.slug] ?? meta.kind}
-                      </Badge>
-                      <Badge variant="outline" className="text-[10px]">
-                        {meta.difficulty}
-                      </Badge>
+                      <span className="text-xs font-medium text-muted-foreground">
+                        {LAB_MARKERS[lab.slug] ?? meta.kindLabel}
+                      </span>
                     </div>
 
                     <div className="mb-2 grid gap-1 text-[11px] text-muted-foreground">
@@ -184,6 +181,10 @@ export default function LabsPage() {
                       <div className="flex items-center gap-1.5">
                         <Award className="h-3 w-3 shrink-0" aria-hidden />
                         <span>{meta.recommendedLevel}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <FlaskConical className="h-3 w-3 shrink-0" aria-hidden />
+                        <span>{meta.difficulty}</span>
                       </div>
                     </div>
 
@@ -200,7 +201,7 @@ export default function LabsPage() {
 
                     {/* Badges */}
                     <div className="flex flex-wrap gap-1.5 mb-3">
-                      {lab.certifications.map((cert) => (
+                      {meta.certificationBadges.map((cert) => (
                         <Badge key={cert} variant={CERT_VARIANT[cert] ?? "default"} className="text-[10px] px-1.5 py-0 h-4">
                           {cert}
                         </Badge>
@@ -230,10 +231,10 @@ export default function LabsPage() {
                           {lab.role[0]}
                         </span>
                       )}
-                      {lab.certifications.length > 0 && (
+                      {meta.certificationBadges.length > 0 && (
                         <span className="flex items-center gap-1 ml-auto">
                           <Award className="h-3 w-3" aria-hidden />
-                          {lab.certifications[0]}
+                          {meta.certificationBadges[0]}
                         </span>
                       )}
                     </div>
