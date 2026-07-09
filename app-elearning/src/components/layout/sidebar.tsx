@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   BookOpen, CheckSquare, GraduationCap, FileText, Trophy,
-  Home, PlayCircle, FlaskConical,
+  Home, PlayCircle, FlaskConical, Route,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -32,6 +32,7 @@ const RESOURCE_LINKS = [
   { href: "/recursos/certificaciones", label: UI.nav.certifications, icon: Trophy  },
   { href: "/recursos/banco-preguntas", label: UI.nav.questionBank,   icon: FileText },
   { href: "/recursos/prompts-ia",    label: UI.nav.promptsIA,     icon: FileText },
+  { href: "/recursos/rubricas-plantillas", label: UI.nav.rubricsTemplates, icon: CheckSquare },
 ];
 
 interface SidebarProps {
@@ -77,6 +78,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
         <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden px-2 py-3">
           {/* Primary actions */}
           <NavLink href="/"          icon={Home}        label={UI.nav.home}      active={pathname === "/"} />
+          <NavLink href="/rutas"     icon={Route}       label={UI.nav.routes}    active={pathname.startsWith("/rutas")} />
           <NavLink href="/simulador" icon={PlayCircle}  label={UI.nav.simulator} active={pathname === "/simulador"} />
           <NavLink href="/labs"      icon={FlaskConical} label="Laboratorios"    active={pathname.startsWith("/labs")} />
 
@@ -153,7 +155,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
 
         {/* Footer version tag */}
         <div className="px-4 py-3 border-t shrink-0">
-          <p className="text-[10px] text-muted-foreground">PL-900 → PL-600 · 55 módulos</p>
+          <p className="text-[10px] text-muted-foreground">PL-900 · PL-200 · PL-400 · Arquitectura</p>
         </div>
       </aside>
     </>

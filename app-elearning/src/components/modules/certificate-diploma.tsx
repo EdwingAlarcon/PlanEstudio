@@ -69,6 +69,15 @@ export function CertificateDiploma({ levelId, userName, date }: CertificateDiplo
             , aplicando de forma consistente las buenas prácticas de desarrollo asistido
             por IA en proyectos de Power Platform y Dynamics 365.
           </>
+        ) : levelId === "arquitecto" ? (
+          <>
+            por haber completado exitosamente el{" "}
+            <span className={cn("font-semibold", ACCENT_TEXT_COLORS[levelId])}>
+              {UI.levels.badge[levelId]}
+            </span>
+            , demostrando competencias de arquitectura de soluciones Power Platform,
+            gobernanza, seguridad, ALM e integración empresarial.
+          </>
         ) : (
           <>
             por haber completado exitosamente el{" "}

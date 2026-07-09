@@ -101,7 +101,7 @@ function LevelCompleteBanner({ levelId, total }: { levelId: LevelId; total: numb
               : `¡${UI.levels.badge[levelId]} Completado!`}
           </h2>
           <p className="text-sm text-muted-foreground">
-            {total} módulos · Certificación objetivo:{" "}
+            {total} módulos · Enfoque:{" "}
             <span className="font-medium text-foreground">{UI.levels.cert[levelId]}</span>
           </p>
         </div>
@@ -110,17 +110,19 @@ function LevelCompleteBanner({ levelId, total }: { levelId: LevelId; total: numb
       {/* Message */}
       <p className="text-sm leading-relaxed">
         {levelId === "ia"
-          ? "Has completado los 10 módulos de desarrollo asistido por IA. Sigue aplicando el flujo humano diseña → IA implementa → CI valida → humano aprueba en tus proyectos reales de Power Platform y Dynamics 365."
+          ? "Has completado el nivel de desarrollo asistido por IA. Sigue aplicando el flujo humano diseña → IA implementa → CI valida → humano aprueba en tus proyectos reales de Power Platform y Dynamics 365."
           : isFinal
-          ? "Has completado los cuatro niveles del plan. Estás preparado para rendir el examen PL-600 y ejercer como Power Platform Solution Architect."
-          : `Has dominado los contenidos de este nivel. El siguiente paso es el ${UI.levels.badge[nextLevelId!]}, donde profundizarás hacia la certificación ${UI.levels.cert[nextLevelId!]}: ${UI.levels.description[nextLevelId!]}.`
+          ? "Has completado los cuatro niveles base del plan. El objetivo ahora es demostrar criterio de Solution Architect: gobierno, seguridad, ALM, integración, viabilidad y comunicación ejecutiva."
+          : `Has dominado los contenidos de este nivel. El siguiente paso es el ${UI.levels.badge[nextLevelId!]}, donde profundizarás hacia ${UI.levels.cert[nextLevelId!]}: ${UI.levels.description[nextLevelId!]}.`
         }
       </p>
 
       {/* Action */}
       <div className="flex flex-wrap items-center gap-3">
         <Badge variant={levelId} className="text-xs">
-          {levelId === "ia" ? UI.levels.cert[levelId] : `${UI.levels.cert[levelId]} — Listo para el examen`}
+          {levelId === "ia" || levelId === "arquitecto"
+            ? UI.levels.cert[levelId]
+            : `${UI.levels.cert[levelId]} — Listo para repaso de examen`}
         </Badge>
 
         <Button size="sm" variant="outline" onClick={handleGenerateCertificate}>

@@ -2,12 +2,12 @@
 moduleId: 38
 title: "Liderazgo Técnico y Gestión de Proyectos"
 level: "arquitecto"
-certification: "PL-600"
-estimatedMinutes: 11
+certification: "Arquitectura Power Platform"
+estimatedMinutes: 14
 slug: "liderazgo-tecnico-y-gestion-de-proyectos"
 ---
 ### 🎯 Objetivo
-Desarrollar las competencias de liderazgo técnico necesarias para el rol de Solution Architect: conducir workshops de descubrimiento, estimar proyectos con precisión, gestionar riesgos, comunicar decisiones técnicas al C-suite, y liderar equipos de Fusion Development.
+Desarrollar las competencias de liderazgo técnico y consultoría funcional necesarias para el rol de Solution Architect: conducir workshops de descubrimiento, documentar requerimientos, escribir historias de usuario con criterios de aceptación, estimar proyectos con precisión, gestionar riesgos, comunicar decisiones técnicas al C-suite, y liderar equipos de Fusion Development.
 
 ### 📖 Conceptos Clave
 - **Discovery Workshop:** sesión estructurada de 1-3 días con stakeholders de negocio y técnicos cuyo objetivo es entender profundamente el contexto, procesos actuales, puntos de dolor y visión futura ANTES de proponer ninguna tecnología. Un Discovery bien ejecutado produce: mapa del proceso AS-IS, lista de requerimientos priorizada (MoSCoW), Risk Register inicial, y consenso sobre el MVP. Un arquitecto que propone tecnología antes del Discovery está vendiendo, no diseñando. Herramientas típicas: Miro/Whiteboard para mapear procesos, Confluence/SharePoint para documentar, y una agenda estructurada con facilitación activa.
@@ -20,6 +20,11 @@ Desarrollar las competencias de liderazgo técnico necesarias para el rol de Sol
 - **Velocity (Agile):** métrica que mide la capacidad real del equipo de desarrollo medida en story points completados por sprint (tipicamente 2 semanas). Los primeros 2-3 sprints se usan para calibrar la velocidad real del equipo; no se compromete con fechas hasta tener al menos 2 sprints de historial. Una velocidad de 20 story points/sprint con un backlog de 200 story points significa aproximadamente 10 sprints (20 semanas) para completar el backlog. La velocidad es una propiedad del equipo específico, no una constante universal.
 - **Technical Debt:** acumulación de decisiones de implementación subóptimas tomadas para ganar velocidad a corto plazo que generan costo mayor a largo plazo (más tiempo de mantenimiento, más bugs, más dificultad para agregar features). En Power Platform: hardcodear valores que deberían ser Environment Variables, usar flujos de Power Automate sin error handling, o crear tablas de Dataverse sin pensar en el modelo relacional. El Technical Debt debe ser visible y cuantificado (como una lista en Azure DevOps) para que el equipo pueda pagarlo en sprints dedicados antes de que se vuelva impagable.
 - **Change Request Process:** proceso formal documentado en el SoW para gestionar solicitudes de cambio al scope aprobado. Cuando el cliente pide algo nuevo, el proceso es: documentar el cambio, estimar el impacto en tiempo y costo, obtener aprobación escrita del cliente antes de iniciar, y actualizar el contrato. Sin este proceso, el proyecto sufre scope creep — el scope crece sin presupuesto adicional y el proyecto se retrasa. La frase "es un pequeño cambio" es la más peligrosa en gestión de proyectos.
+- **User Story con criterios de aceptación:** unidad funcional del backlog escrita desde el valor de negocio: "Como [rol], quiero [capacidad], para [beneficio]". No está lista para desarrollo si no tiene criterios de aceptación verificables, reglas de negocio, datos de prueba y excepciones principales. En Power Platform/D365, una historia suele mapear a configuración, seguridad, automatización, integración, reporte o experiencia de usuario.
+- **Documentación funcional:** paquete que explica qué necesita el negocio y cómo se comportará la solución: procesos TO-BE, reglas de negocio, matriz de campos, matriz de roles, pantallas/formularios, flujos de aprobación, reportes, integraciones funcionales y casos UAT. La audiencia principal es negocio, QA y consultoría funcional.
+- **Documentación técnica:** paquete que explica cómo se implementa y opera la solución: arquitectura, componentes, modelo Dataverse, decisiones técnicas, plugins, cloud flows, APIs, pipelines ALM, variables de entorno, seguridad, monitoreo, runbook y rollback. La audiencia principal es arquitectura, desarrollo, soporte y operaciones.
+- **Matriz de trazabilidad:** tabla que conecta requerimiento, historia de usuario, diseño funcional, componente técnico, caso UAT, evidencia y estado. Es la defensa profesional contra discusiones de alcance: si no está trazado, no se puede probar ni aprobar con claridad.
+- **UAT Plan:** plan de pruebas de aceptación de usuario que valida procesos de negocio completos, no solo pantallas. Debe cubrir happy path, excepciones, roles, datos reales anonimizados, criterios de aprobación, responsables, calendario, ambiente, defect management y evidencias.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
@@ -83,7 +88,61 @@ Desarrollar las competencias de liderazgo técnico necesarias para el rol de Sol
 - Won't Have: 1 (14%) — excluidos del scope
 ```
 
-#### Actividad 38.3: Plantilla de estimación
+#### Actividad 38.3: Historias de usuario y criterios de aceptación
+Convertir requerimientos ambiguos en historias listas para desarrollo.
+
+```markdown
+# Historia de Usuario — HU-CRM-014
+
+**Como:** gerente comercial  
+**Quiero:** ver oportunidades bloqueadas por crédito vencido  
+**Para:** priorizar acciones antes de comprometer una fecha de entrega al cliente
+
+## Contexto funcional
+- Aplica a oportunidades B2B mayores a USD 10,000.
+- La información de crédito viene del ERP/F&O.
+- El vendedor puede ver el bloqueo, pero solo finanzas puede liberarlo.
+
+## Criterios de aceptación
+1. Dado un cliente con crédito vencido, cuando el vendedor abre la oportunidad, entonces el sistema muestra alerta visible de bloqueo.
+2. Dado un cliente sin deuda vencida, cuando se consulta la oportunidad, entonces no se muestra alerta de bloqueo.
+3. Dado un usuario sin rol Finanzas, cuando intenta liberar el bloqueo, entonces la acción no está disponible.
+4. Dado que el ERP no responde, cuando se consulta el estado de crédito, entonces se muestra estado "pendiente de validación" y se registra evento para soporte.
+
+## Datos de prueba
+| Cliente | Crédito | Rol usuario | Resultado esperado |
+|---|---|---|---|
+| Contoso A | Vencido | Vendedor | Alerta visible, no libera |
+| Contoso B | Al día | Vendedor | Sin alerta |
+| Contoso C | Vencido | Finanzas | Puede liberar con justificación |
+```
+
+Checklist mínimo antes de pasar a desarrollo:
+- Historia vinculada a un requerimiento aprobado.
+- Criterios de aceptación verificables por QA/UAT.
+- Roles y permisos identificados.
+- Datos de prueba definidos.
+- Dependencias externas documentadas.
+
+#### Actividad 38.4: Matriz de trazabilidad y paquete documental
+Usar una matriz simple para evitar duplicidad y discusiones tardías de alcance.
+
+| Req ID | Historia | Diseño funcional | Componente técnico | Caso UAT | Evidencia | Estado |
+|---|---|---|---|---|---|---|
+| REQ-001 | HU-CRM-014 bloqueo crédito | FDD-03 Reglas comerciales | Cloud flow + campo Dataverse + conector ERP | UAT-014 | Captura alerta + log integración | Aprobado |
+| REQ-002 | HU-CS-021 escalamiento SLA | FDD-05 Servicio al cliente | SLA KPI + routing rule | UAT-021 | Caso vencido escalado | En prueba |
+| REQ-003 | HU-FS-008 visita técnica | FDD-07 Field Service | Work Order + Booking + mobile inspection | UAT-008 | Firma cliente + checklist | Pendiente |
+
+Paquete documental recomendado sin inflar el proyecto:
+- Minutas de workshops con decisiones y pendientes.
+- Backlog con historias, criterios de aceptación y prioridad MoSCoW.
+- FDD/FRD con procesos TO-BE, reglas, campos, roles, reportes e integraciones funcionales.
+- TDD/SDD con arquitectura, componentes, ALM, seguridad, integraciones técnicas y operación.
+- Matriz de trazabilidad de requerimientos a UAT.
+- Plan UAT con casos, datos, responsables, calendario y criterios de aprobación.
+- Registro de riesgos, decisiones y change requests.
+
+#### Actividad 38.5: Plantilla de estimación
 ```markdown
 # Estimación — Proyecto CRM SIT (v1.2)
 
@@ -120,7 +179,7 @@ El item de integración SAP tiene la mayor incertidumbre (±50%).
 Si el API de SAP no tiene documentación actualizada, podría requerir +2 semanas adicionales.
 ```
 
-#### Actividad 38.4: Comunicar arquitectura al C-suite
+#### Actividad 38.6: Comunicar arquitectura al C-suite
 Regla de oro: **La audiencia ejecutiva no quiere detalles técnicos — quiere resultados de negocio**
 
 Mal ejemplo: "Implementaremos Dataverse con 12 tablas personalizadas, un plugin C# pre-operation para validación de SLA, PCF controls basados en React, y pipelines CI/CD en Azure DevOps con YAML."
@@ -132,11 +191,19 @@ Buen ejemplo: "En 7 meses tendrán un sistema donde los vendedores ven en tiempo
 **Lección:** Slides 1-3 = problema de negocio y ROI esperado. Slides 4-6 = solución en lenguaje de negocio. Apéndice = detalles técnicos para quien los pida.  
 **Resultado del arquitecto que aprendió esto:** tasa de cierre de propuestas subió de 30% a 65%.
 
+**Situación:** En un proyecto D365, negocio afirmó en UAT que "siempre se había pedido" una aprobación adicional para descuentos, pero la historia no tenía criterio de aceptación, no existía caso UAT y el diseño funcional no mencionaba esa regla.  
+**Lección:** La consultoría funcional profesional no consiste en escribir documentos largos, sino en mantener trazabilidad viva entre requerimiento, decisión, configuración, prueba y aprobación.  
+**Resultado esperado:** menos reprocesos, menos discusiones de alcance y mayor confianza entre negocio, TI y partner.
+
 ### ✅ Buenas Prácticas
 - El Discovery Workshop debe generar el SoW, no el SoW debe generar el Discovery
 - Nunca comprometer fechas en el Discovery — primero estimar, luego comprometer
 - Risk Register: revisar semanalmente con el cliente — no solo al inicio
 - Las estimaciones con ±30% de incertidumbre son válidas; sé honesto sobre la incertidumbre
+- Ninguna historia entra a desarrollo sin criterios de aceptación, datos de prueba y dependencia principal identificada
+- Separar documentación funcional y técnica, pero mantenerlas conectadas por matriz de trazabilidad
+- Diseñar UAT por proceso de negocio completo, incluyendo errores esperados y roles reales
+- Mantener registro de decisiones y cambios; una decisión no documentada se vuelve opinión discutible dos sprints después
 
 ### ⚠️ Errores Comunes
 | Error | Causa | Solución |
@@ -145,10 +212,18 @@ Buen ejemplo: "En 7 meses tendrán un sistema donde los vendedores ven en tiempo
 | Discovery Workshop donde solo habla el sponsor ejecutivo | El facilitador no gestiona la dinámica grupal y los usuarios clave no participan | Técnica "1 voto por persona": en la priorización MoSCoW, cada participante vota independientemente; el sponsor no puede votar por todos |
 | Risk Register creado al inicio y nunca actualizado | Se ve como un formalismo de documentación, no como herramienta de gestión | El Risk Register es el primer item de revisión en la reunión semanal de steering; si un riesgo no fue revisado esta semana, no existe en la práctica |
 | Presentación técnica confundida con presentación ejecutiva | El arquitecto prepara una sola presentación para todas las audiencias | Tener siempre 2 versiones: "Ejecutiva" (problema + resultado + costo + ROI, sin jerga técnica) y "Técnica" (arquitectura, componentes, decisiones) — presentar según la audiencia |
+| Historias sin criterios de aceptación | Se captura deseo de negocio, pero no comportamiento verificable | Usar Given/When/Then o criterios numerados antes de estimar la historia |
+| UAT limitado al happy path | QA y negocio prueban solo el escenario ideal | Incluir excepciones, permisos, errores de integración, datos incompletos y casos de borde |
+| Documentación escrita al final | Se trata como entregable administrativo y no como herramienta de diseño | Documentar incrementalmente desde Discovery y actualizar en cada cambio aprobado |
+| Requerimientos sin trazabilidad | Backlog, diseño, desarrollo y pruebas viven en documentos separados | Mantener una matriz simple con Req ID, historia, componente, caso UAT, evidencia y estado |
 
 ### 🧪 Criterios de Validación
 - [ ] Discovery Workshop agenda diseñada para un cliente real o simulado
 - [ ] Fit-Gap Analysis con 10+ requerimientos clasificados MoSCoW
+- [ ] 5 historias de usuario con criterios de aceptación, datos de prueba y roles
+- [ ] Matriz de trazabilidad con 10+ requerimientos vinculados a casos UAT
+- [ ] Plan UAT con happy path, excepciones, permisos y evidencias esperadas
+- [ ] Paquete documental separado entre funcional y técnico, con owner y versión
 - [ ] Estimación por módulo con story points y semanas, incluyendo buffer de contingencia
 - [ ] Presentación de 10 slides del proyecto: las primeras 3 en lenguaje de negocio, sin jerga técnica
 

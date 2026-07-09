@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Clock, BookOpen, Award, ChevronRight, FlaskConical } from "lucide-react";
+import { Clock, BookOpen, Award, ChevronRight, FlaskConical, ClipboardCheck, FileCheck2 } from "lucide-react";
 import { getAllLabs } from "@/lib/content";
 import { LabCardStatus } from "@/components/labs/lab-card-status";
 import { Badge } from "@/components/ui/badge";
@@ -19,8 +19,40 @@ const LEVEL_CONFIG: Record<string, { label: string; bar: string; accent: string 
 };
 
 const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "default"> = {
-  "PL-900": "basico", "PL-200": "intermedio", "PL-400": "avanzado", "PL-600": "arquitecto",
+  "PL-900": "basico",
+  "PL-200": "intermedio",
+  "PL-200 (retira 31 ago 2026)": "intermedio",
+  "PL-400": "avanzado",
+  "Arquitectura Power Platform": "arquitecto",
   "Buenas Prácticas": "ia",
+};
+
+const FEATURED_ARTIFACTS = [
+  {
+    href: "/recursos/rubricas-plantillas",
+    title: "Rúbricas y plantillas",
+    description: "Matriz de trazabilidad, caso UAT y sign-off copiables.",
+    icon: ClipboardCheck,
+  },
+  {
+    href: "/labs/lab-55-uat-gonolive-y-auditoria-prompts",
+    title: "UAT y go-live",
+    description: "Genera casos UAT, checklist y matriz de trazabilidad.",
+    icon: FileCheck2,
+  },
+  {
+    href: "/labs/lab-60-proyecto-integrador-servicio-postventa",
+    title: "Proyecto integrador",
+    description: "Capstone evaluable de servicio postventa D365.",
+    icon: FlaskConical,
+  },
+];
+
+const LAB_MARKERS: Record<string, string> = {
+  "lab-55-uat-gonolive-y-auditoria-prompts": "Plantillas UAT",
+  "lab-58-customer-insights-segmento-journey": "Customer Insights",
+  "lab-59-field-service-work-order-uat": "Field Service",
+  "lab-60-proyecto-integrador-servicio-postventa": "Proyecto integrador",
 };
 
 export default function LabsPage() {
@@ -54,6 +86,48 @@ export default function LabsPage() {
         </p>
       </div>
 
+      <section aria-labelledby="artifact-heading" className="mb-8">
+        <div className="mb-3 flex items-end justify-between gap-3">
+          <div>
+            <h2 id="artifact-heading" className="text-sm font-semibold text-foreground">
+              Artefactos evaluables
+            </h2>
+            <p className="text-xs text-muted-foreground">
+              Accesos directos a plantillas, UAT y proyecto integrador.
+            </p>
+          </div>
+          <Link
+            href="/recursos/rubricas-plantillas"
+            className="hidden text-xs font-medium text-[#0078D4] hover:underline dark:text-[#4DB8FF] sm:inline"
+          >
+            Ver recurso
+          </Link>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-3">
+          {FEATURED_ARTIFACTS.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group rounded-xl border border-border bg-card p-4 shadow-fluent-1 transition-all duration-200 hover:border-[#0078D4]/30 hover:shadow-fluent-4"
+              >
+                <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#0078D4]/10">
+                  <Icon className="h-4.5 w-4.5 text-[#0078D4] dark:text-[#4DB8FF]" aria-hidden />
+                </div>
+                <p className="text-sm font-semibold text-foreground transition-colors group-hover:text-[#0078D4] dark:group-hover:text-[#4DB8FF]">
+                  {item.title}
+                </p>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                  {item.description}
+                </p>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
       {labs.length === 0 && (
         <div className="text-center py-16 text-muted-foreground">
           <FlaskConical className="h-12 w-12 mx-auto mb-4 opacity-20" />
@@ -80,6 +154,13 @@ export default function LabsPage() {
               {levelLabs.map((lab) => (
                 <Link key={lab.slug} href={`/labs/${lab.slug}`} className="group">
                   <div className="relative h-full rounded-xl border border-border bg-card px-4 py-4 shadow-fluent-1 group-hover:shadow-fluent-4 group-hover:border-[#0078D4]/30 dark:group-hover:border-[#4DB8FF]/30 transition-all duration-200">
+                    {LAB_MARKERS[lab.slug] && (
+                      <div className="mb-2">
+                        <Badge variant="secondary" className="text-[10px]">
+                          {LAB_MARKERS[lab.slug]}
+                        </Badge>
+                      </div>
+                    )}
 
                     {/* Title row */}
                     <div className="flex items-start justify-between gap-2 mb-3">

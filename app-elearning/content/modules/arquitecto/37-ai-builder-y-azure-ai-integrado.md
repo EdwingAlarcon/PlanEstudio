@@ -2,7 +2,7 @@
 moduleId: 37
 title: "AI Builder y Azure AI integrado"
 level: "arquitecto"
-certification: "PL-600"
+certification: "Arquitectura Power Platform"
 estimatedMinutes: 10
 slug: "ai-builder-y-azure-ai-integrado"
 ---

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: "%s | PlanEstudio",
   },
   description: "Plan de aprendizaje progresivo: de fundamentos a Arquitecto Senior en Power Platform y Dynamics 365.",
-  keywords: ["Power Platform", "Dynamics 365", "PL-900", "PL-200", "PL-400", "PL-600", "e-learning"],
+  keywords: ["Power Platform", "Dynamics 365", "PL-900", "PL-200", "PL-400", "arquitectura", "e-learning"],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

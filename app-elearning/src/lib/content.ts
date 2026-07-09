@@ -74,6 +74,7 @@ const RESOURCE_FILES: Record<string, string> = {
   simulador:               "Recursos/SIMULADOR_EVALUACIONES.md",
   "lenguajes-programacion":"Anexos/LENGUAJES_PROGRAMACION.md",
   "prompts-ia":             "Recursos/PROMPTS_REUTILIZABLES_IA.md",
+  "rubricas-plantillas":    "Recursos/RUBRICAS_PLANTILLAS_EVALUACION.md",
 };
 
 const LEVEL_META: Record<LevelId, { title: string; description: string; certification: string }> = {
@@ -85,7 +86,7 @@ const LEVEL_META: Record<LevelId, { title: string; description: string; certific
   intermedio: {
     title: "Nivel 2 — Intermedio",
     description: "Canvas Apps, Model-Driven, Power Automate y Power BI avanzados",
-    certification: "PL-200",
+    certification: "PL-200 (retira 31 ago 2026)",
   },
   avanzado: {
     title: "Nivel 3 — Avanzado",
@@ -95,7 +96,7 @@ const LEVEL_META: Record<LevelId, { title: string; description: string; certific
   arquitecto: {
     title: "Nivel 4 — Arquitecto",
     description: "Gobernanza enterprise, multi-tenant, Azure integrations y liderazgo",
-    certification: "PL-600",
+    certification: "Arquitectura Power Platform",
   },
   ia: {
     title: "Desarrollo Asistido por IA",

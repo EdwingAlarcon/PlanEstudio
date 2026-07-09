@@ -2,7 +2,7 @@
 moduleId: 36
 title: "Seguridad y Cumplimiento Enterprise"
 level: "arquitecto"
-certification: "PL-600"
+certification: "Arquitectura Power Platform"
 estimatedMinutes: 10
 slug: "seguridad-y-cumplimiento-enterprise"
 ---

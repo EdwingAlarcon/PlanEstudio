@@ -2,7 +2,7 @@
 moduleId: 31
 title: "Enterprise Architecture y Gobernanza"
 level: "arquitecto"
-certification: "PL-600"
+certification: "Arquitectura Power Platform"
 estimatedMinutes: 9
 slug: "enterprise-architecture-y-gobernanza"
 ---
@@ -10,7 +10,7 @@ slug: "enterprise-architecture-y-gobernanza"
 Diseñar y comunicar la arquitectura enterprise de Power Platform para organizaciones de 1,000+ usuarios: estrategia de gobernanza, políticas de adopción, marcos de decisión arquitectónica, y alineación con estándares como TOGAF y el Well-Architected Framework de Microsoft.
 
 ### 📖 Conceptos Clave
-- **TOGAF (referencia contextual):** framework de arquitectura empresarial de The Open Group compuesto por el ADM (Architecture Development Method) de 9 fases. En Power Platform se aplica principalmente la fase *Architecture Vision* para definir el alcance y los principios, y la fase *Technology Architecture* para seleccionar componentes. Para el día a día usar el **Microsoft Well-Architected Framework** que tiene aplicación directa al examen PL-600 y está diseñado específicamente para workloads en la nube de Microsoft.
+- **TOGAF (referencia contextual):** framework de arquitectura empresarial de The Open Group compuesto por el ADM (Architecture Development Method) de 9 fases. En Power Platform se aplica principalmente la fase *Architecture Vision* para definir el alcance y los principios, y la fase *Technology Architecture* para seleccionar componentes. Para el día a día usar el **Microsoft Well-Architected Framework**, diseñado específicamente para workloads en la nube de Microsoft.
 - **Well-Architected Framework (Power Platform):** marco de revisión de Microsoft compuesto por 5 pilares: Fiabilidad (disponibilidad, RTO/RPO, retry policies), Seguridad (identidad, DLP, CMK), Excelencia Operacional (CI/CD, monitoreo, runbooks), Eficiencia de Rendimiento (caché, delegación, paginación), y Optimización de Costos (licencias correctas, eliminar ambientes ociosos). Microsoft publica un cuestionario oficial en aka.ms/ppswa que genera un scorecard con recomendaciones priorizadas; un tenant típico sin revisión previa obtiene entre 40-55 sobre 100.
 - **Governance Framework:** conjunto documentado de políticas, procesos y controles técnicos que definen cómo se usa Power Platform en la organización. Debe cubrir: quién puede crear ambientes, qué conectores están permitidos por tipo de ambiente, el ciclo de vida de una aplicación (DEV→TEST→PROD), y el proceso de excepción cuando una regla no puede cumplirse. Sin sponsor ejecutivo (CTO o CIO), el framework queda en papel y no se cumple.
 - **Fusion Teams:** modelo de trabajo donde equipos mixtos colaboran en el mismo proyecto: desarrolladores ciudadanos (makers) aportan conocimiento del proceso de negocio, desarrolladores pro aportan capacidades técnicas avanzadas (plugins, PCF, integraciones), e IT aporta gobernanza y operaciones. Microsoft documenta este modelo como la clave para escalar Power Platform sin bloquear a IT ni crear shadow IT.

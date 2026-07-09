@@ -2,7 +2,7 @@
 moduleId: 33
 title: "Multi-tenant, Multi-geo y Estrategia de Ambientes"
 level: "arquitecto"
-certification: "PL-600"
+certification: "Arquitectura Power Platform"
 estimatedMinutes: 9
 slug: "multi-tenant-multi-geo-y-estrategia-de-ambientes"
 ---

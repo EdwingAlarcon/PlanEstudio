@@ -261,17 +261,17 @@ describe("certForModule", () => {
   it("returns PL-900 for modules 1-8", () => {
     for (let i = 1; i <= 8; i++) expect(certForModule(i)).toBe("PL-900");
   });
-  it("returns PL-200 for modules 9-17", () => {
-    expect(certForModule(9)).toBe("PL-200");
-    expect(certForModule(17)).toBe("PL-200");
+  it("returns PL-200 transition label for modules 9-17", () => {
+    expect(certForModule(9)).toBe("PL-200 (retira 31 ago 2026)");
+    expect(certForModule(17)).toBe("PL-200 (retira 31 ago 2026)");
   });
   it("returns PL-400 for modules 18-30", () => {
     expect(certForModule(18)).toBe("PL-400");
     expect(certForModule(30)).toBe("PL-400");
   });
-  it("returns PL-600 for modules 31-41", () => {
-    expect(certForModule(31)).toBe("PL-600");
-    expect(certForModule(41)).toBe("PL-600");
+  it("returns architecture competency for modules 31-41", () => {
+    expect(certForModule(31)).toBe("Arquitectura Power Platform");
+    expect(certForModule(41)).toBe("Arquitectura Power Platform");
   });
   it("returns Buenas Prácticas for modules 42-51 (nivel IA)", () => {
     expect(certForModule(42)).toBe("Buenas Prácticas");

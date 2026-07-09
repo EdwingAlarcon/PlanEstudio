@@ -2,7 +2,7 @@
 moduleId: 35
 title: "Arquitectura de Datos — Fabric, Synapse y Medallion"
 level: "arquitecto"
-certification: "PL-600"
+certification: "Arquitectura Power Platform"
 estimatedMinutes: 10
 slug: "arquitectura-de-datos-fabric-synapse-y-medallion"
 ---

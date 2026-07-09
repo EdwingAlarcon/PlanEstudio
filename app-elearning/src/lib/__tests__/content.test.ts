@@ -44,6 +44,7 @@ Modelar datos en Dataverse.
       if (filePath.includes("EVALUACIONES")) return "# 📝 Banco de Preguntas\nContenido banco.";
       if (filePath.includes("SIMULADOR")) return "# 🎯 Simulador\nContenido simulador.";
       if (filePath.includes("LENGUAJES_PROGRAMACION")) return "# Lenguajes de Programación\nContenido lenguajes.";
+      if (filePath.includes("RUBRICAS_PLANTILLAS")) return "# Rúbricas y Plantillas de Evaluación\nContenido rúbricas.";
       return "# Sin contenido";
     }),
   },
@@ -172,12 +173,12 @@ describe("getResourceBySlug", () => {
 // ─── getAllResourcePages ───────────────────────────────────────────────────────
 
 describe("getAllResourcePages", () => {
-  it("returns 7 resource pages (incluyendo lenguajes-programacion y prompts-ia)", () => {
+  it("returns 8 resource pages (incluyendo lenguajes-programacion, prompts-ia y rubricas-plantillas)", () => {
     const pages = getAllResourcePages();
-    expect(pages).toHaveLength(7);
+    expect(pages).toHaveLength(8);
   });
 
-  it("includes checklist, glosario, certificaciones, lenguajes-programacion y prompts-ia", () => {
+  it("includes checklist, glosario, certificaciones, lenguajes-programacion, prompts-ia y rubricas-plantillas", () => {
     const pages = getAllResourcePages();
     const slugs = pages.map((p) => p.slug);
     expect(slugs).toContain("checklist");
@@ -185,6 +186,7 @@ describe("getAllResourcePages", () => {
     expect(slugs).toContain("certificaciones");
     expect(slugs).toContain("lenguajes-programacion");
     expect(slugs).toContain("prompts-ia");
+    expect(slugs).toContain("rubricas-plantillas");
   });
 
   it("each page has a slug, title, and rawContent", () => {
