@@ -115,6 +115,8 @@ Checklist de calidad de evidencia:
 
 **Escenario:** diseñar una solución de servicio postventa para SIT que combine Sales, Customer Service, Customer Insights y Field Service.
 
+Laboratorio recomendado: `Lab 60 — Proyecto Integrador: Servicio Postventa con Customer Insights y Field Service`.
+
 Entregables mínimos:
 
 - Mapa de proceso TO-BE.
@@ -145,4 +147,3 @@ Criterios de aprobación:
 | Developer | Diseño técnico, pruebas, ALM y evidencia de build |
 | Solution Architect | Blueprint, riesgos, decisiones, seguridad, go-live y operación |
 | AI/Copilot | Prompts sanitizados, revisión humana y trazabilidad de decisiones |
-
