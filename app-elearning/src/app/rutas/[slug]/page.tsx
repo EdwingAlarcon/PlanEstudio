@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 const STATUS_VARIANT: Record<string, "default" | "secondary" | "outline"> = {
   Disponible: "default",
   Parcial: "secondary",
-  "Brecha prioritaria": "outline",
+  "Cobertura en expansión": "outline",
 };
 
 export default async function ProfessionalRouteDetailPage({ params }: PageProps) {
@@ -40,6 +40,7 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
   const labsBySlug = new Map(getAllLabs().map((lab) => [lab.slug, lab]));
   const modules = route.modules.map((moduleId) => modulesById.get(moduleId)).filter(Boolean);
   const labs = route.labs.map((labSlug) => labsBySlug.get(labSlug)).filter(Boolean);
+  const nextRoute = route.nextRouteSlug ? getProfessionalRouteBySlug(route.nextRouteSlug) : undefined;
 
   return (
     <main id="main-content" className="max-w-5xl mx-auto px-4 py-8 space-y-8 animate-fade-in">
@@ -147,6 +148,30 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
                 </p>
               </Link>
             ))}
+          </div>
+        </section>
+      )}
+
+      {nextRoute && (
+        <section aria-labelledby="next-route-heading" className="rounded-xl border border-[#0078D4]/20 bg-[#EFF6FC] p-5 shadow-fluent-1 dark:border-[#4DB8FF]/20 dark:bg-[rgba(0,120,212,0.10)]">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="space-y-1">
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#0078D4] dark:text-[#4DB8FF]">
+                Siguiente ruta recomendada
+              </p>
+              <h2 id="next-route-heading" className="text-base font-semibold text-foreground">
+                {nextRoute.title}
+              </h2>
+              <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                Continúa con esta ruta para ampliar el rol sin repetir contenidos que ya cubriste.
+              </p>
+            </div>
+            <Button asChild className="w-full shrink-0 bg-[#0078D4] text-white hover:bg-[#106EBE] sm:w-auto">
+              <Link href={`/rutas/${nextRoute.slug}`}>
+                Ver siguiente ruta
+                <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
+              </Link>
+            </Button>
           </div>
         </section>
       )}

@@ -4,7 +4,7 @@ import { getAllQuestions } from "@/lib/questions-parser";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProgressRingClient } from "@/components/modules/progress-ring-client";
-import { ArrowRight, BookOpen, Trophy, FlaskConical, Route, Zap } from "lucide-react";
+import { ArrowRight, BookOpen, Trophy, FlaskConical, Route, Zap, HelpCircle, Layers3 } from "lucide-react";
 import { UI, LEVEL_ORDER, type LevelId } from "@/lib/i18n";
 
 // Level display config
@@ -52,6 +52,53 @@ export default async function DashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* ── Where to start ────────────────────────────────────────────────── */}
+      <section aria-labelledby="start-heading" className="space-y-4">
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 id="start-heading" className="text-lg font-semibold text-foreground">
+              Por dónde empezar
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Elige el punto de entrada según tu experiencia actual. No necesitas recorrer todo en una sola sesión.
+            </p>
+          </div>
+          <Button asChild variant="ghost" size="sm" className="self-start text-[#0078D4] dark:text-[#4DB8FF] sm:self-auto">
+            <Link href="/como-usar">
+              Ver guía completa
+              <ArrowRight className="ml-1 h-3.5 w-3.5" aria-hidden />
+            </Link>
+          </Button>
+        </div>
+
+        <div className="grid gap-3 md:grid-cols-3">
+          <StartCard
+            href="/nivel/basico"
+            eyebrow="Soy nuevo"
+            title="Empieza por fundamentos"
+            description="Avanza por módulos y laboratorios en orden para construir base sólida."
+            icon={<Layers3 className="h-5 w-5 text-[#107C10]" />}
+            accent="#107C10"
+          />
+          <StartCard
+            href="/rutas"
+            eyebrow="Tengo un rol objetivo"
+            title="Elige una ruta profesional"
+            description="Maker, consultor, developer, architect, D365 o IA: estudia con foco."
+            icon={<Route className="h-5 w-5 text-[#0078D4]" />}
+            accent="#0078D4"
+          />
+          <StartCard
+            href="/simulador"
+            eyebrow="Quiero practicar examen"
+            title="Mide preparación"
+            description="Usa el simulador cuando ya hayas cubierto varios módulos y quieras detectar temas débiles."
+            icon={<Trophy className="h-5 w-5 text-orange-500" />}
+            accent="#EA580C"
+          />
+        </div>
+      </section>
 
       {/* ── Overall progress ──────────────────────────────────────────────── */}
       <OverallProgressBanner />
@@ -115,7 +162,14 @@ export default async function DashboardPage() {
         <h2 id="quick-heading" className="text-lg font-semibold text-foreground mb-4">
           Acceso rápido
         </h2>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          <QuickActionCard
+            href="/como-usar"
+            icon={<HelpCircle className="h-5 w-5 text-[#0078D4]" />}
+            title={UI.nav.howToUse}
+            description="Orden recomendado para estudiar"
+            accent="#0078D4"
+          />
           <QuickActionCard
             href="/rutas"
             icon={<Route className="h-5 w-5 text-[#0078D4]" />}
@@ -147,6 +201,47 @@ export default async function DashboardPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+// ─── Start card ──────────────────────────────────────────────────────────────
+
+function StartCard({
+  href, eyebrow, title, description, icon, accent,
+}: {
+  href: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  accent: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="group rounded-xl border border-border bg-card p-5 shadow-fluent-1 transition-all duration-200 hover:border-[var(--a)] hover:shadow-fluent-4"
+      style={{ "--a": accent + "40" } as React.CSSProperties}
+    >
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <div
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+          style={{ background: accent + "18" }}
+        >
+          {icon}
+        </div>
+        <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+          {eyebrow}
+        </span>
+      </div>
+      <h3 className="text-base font-semibold text-foreground group-hover:text-[#0078D4] dark:group-hover:text-[#4DB8FF]">
+        {title}
+      </h3>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
+      <span className="mt-4 inline-flex items-center text-xs font-medium text-[#0078D4] dark:text-[#4DB8FF]">
+        Ir ahora
+        <ArrowRight className="ml-1 h-3.5 w-3.5" aria-hidden />
+      </span>
+    </Link>
   );
 }
 

@@ -25,6 +25,23 @@ describe("professional routes", () => {
     }
   });
 
+  it("uses professional coverage language instead of backlog wording", () => {
+    const routes = getAllProfessionalRoutes();
+
+    expect(routes.map((route) => route.status)).not.toContain("Brecha prioritaria");
+    expect(getProfessionalRouteBySlug("finance-operations")?.status).toBe("Cobertura en expansión");
+  });
+
+  it("resolves each recommended next route when configured", () => {
+    for (const route of getAllProfessionalRoutes()) {
+      if (!route.nextRouteSlug) continue;
+
+      const nextRoute = getProfessionalRouteBySlug(route.nextRouteSlug);
+      expect(nextRoute, `${route.slug} references missing next route ${route.nextRouteSlug}`).toBeDefined();
+      expect(nextRoute?.slug).not.toBe(route.slug);
+    }
+  });
+
   it("references only existing modules and labs", () => {
     const moduleIds = new Set(getAllModules().map((module) => module.moduleId));
     const labSlugs = new Set(getAllLabs().map((lab) => lab.slug));

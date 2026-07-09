@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const STATUS_VARIANT: Record<string, "default" | "secondary" | "outline"> = {
   Disponible: "default",
   Parcial: "secondary",
-  "Brecha prioritaria": "outline",
+  "Cobertura en expansión": "outline",
 };
 
 export default function ProfessionalRoutesPage() {
@@ -29,7 +29,7 @@ export default function ProfessionalRoutesPage() {
             <h1 className="text-2xl font-bold tracking-tight text-foreground">Rutas profesionales</h1>
             <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
               Elige una ruta según el rol que quieres desempeñar. Cada ruta reutiliza módulos y laboratorios existentes,
-              marca brechas reales y evita repetir contenido solo para inflar el plan.
+              muestra la cobertura disponible y evita repetir contenido solo para inflar el plan.
             </p>
           </div>
         </div>

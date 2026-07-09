@@ -5,6 +5,7 @@ export const UI = {
     levels: "Niveles",
     routes: "Rutas profesionales",
     resources: "Recursos",
+    howToUse: "Cómo usar",
     simulator: "Simulador",
     glossary: "Glosario",
     certifications: "Certificaciones",
@@ -38,6 +39,13 @@ export const UI = {
       avanzado: "PL-400",
       arquitecto: "Arquitectura Power Platform",
       ia: "Buenas Prácticas",
+    },
+    navCert: {
+      basico: "PL-900",
+      intermedio: "PL-200",
+      avanzado: "PL-400",
+      arquitecto: "Arquitectura",
+      ia: "IA",
     },
     description: {
       basico: "Fundamentos de Power Platform y Dataverse",
