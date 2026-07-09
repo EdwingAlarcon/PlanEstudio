@@ -87,9 +87,10 @@ function findInitialModule(level: ChecklistLevel, progress: Record<string, Check
 
 interface ChecklistClientProps {
   checklist: ChecklistData;
+  totalLabs: number;
 }
 
-export function ChecklistClient({ checklist }: ChecklistClientProps) {
+export function ChecklistClient({ checklist, totalLabs }: ChecklistClientProps) {
   const checklistItems = useProgressStore((state) => state.checklistItems);
   const setChecklistItem = useProgressStore((state) => state.setChecklistItem);
   const resetChecklistProgress = useProgressStore((state) => state.resetChecklistProgress);
@@ -184,13 +185,13 @@ export function ChecklistClient({ checklist }: ChecklistClientProps) {
         <SummaryCard
           icon={<ListChecks className="h-4 w-4" />}
           label="Módulos completados"
-          value={`${completedModules.length}/41`}
+          value={`${completedModules.length}/${checklist.totalModules}`}
           detail="El checklist complementa el progreso general de módulos."
         />
         <SummaryCard
           icon={<CheckCircle2 className="h-4 w-4" />}
           label="Labs completados"
-          value={`${completedLabs.length}/9`}
+          value={`${completedLabs.length}/${totalLabs}`}
           detail="Las prácticas formales siguen su propio seguimiento."
         />
       </section>

@@ -129,7 +129,9 @@ export default async function DashboardPage() {
                     <div className="space-y-1.5 flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
                         <Badge variant={cfg.badge}>{UI.levels.badge[levelId]}</Badge>
-                        <Badge variant="outline" className="text-[10px]">{UI.levels.cert[levelId]}</Badge>
+                        <Badge variant="outline" className="text-[10px]" title={UI.levels.cert[levelId]}>
+                          {UI.levels.navCert[levelId]}
+                        </Badge>
                       </div>
                       <h3 className="text-base font-semibold text-foreground leading-snug">{level.title}</h3>
                       <p className="text-sm text-muted-foreground">{level.description}</p>

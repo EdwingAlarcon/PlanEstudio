@@ -51,7 +51,9 @@ export default async function LevelPage({ params }: PageProps) {
           <div className="space-y-2 flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
               <Badge variant={acc.badge}>{UI.levels.badge[levelData.id]}</Badge>
-              <Badge variant="outline">{levelData.certification}</Badge>
+              <Badge variant="outline" title={levelData.certification}>
+                {UI.levels.navCert[levelData.id]}
+              </Badge>
               <span className="text-xs text-muted-foreground flex items-center gap-1">
                 <BookOpen className="h-3 w-3" />
                 {levelData.modules.length} módulos

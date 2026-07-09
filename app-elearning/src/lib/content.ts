@@ -8,7 +8,7 @@ import { LEVEL_MODULE_RANGE, LEVEL_ORDER } from "./i18n";
 
 export interface ModuleInfo {
   id: string;           // "basico-1"
-  moduleId: number;     // 1–41
+  moduleId: number;     // 1-55
   levelId: LevelId;
   title: string;
   slug: string;
@@ -36,7 +36,7 @@ export interface LabInfo {
   id: string;        // "lab-02"
   slug: string;      // filename without .md
   title: string;
-  level: string;     // "N1" | "N2" | "N3" | "N4"
+  level: string;     // "N1" | "N2" | "N3" | "N4" | "N5"
   duration: number;  // minutes
   products: string[];
   certifications: string[];

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getAllResourcePages, getResourceBySlug } from "@/lib/content";
+import { getAllLabs, getAllResourcePages, getResourceBySlug } from "@/lib/content";
 import { parseChecklistMarkdown } from "@/lib/checklist";
 import { ChecklistClient } from "@/components/checklist/checklist-client";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
@@ -27,7 +27,7 @@ export default async function ResourcePage({ params }: PageProps) {
   if (!page) notFound();
 
   if (slug === "checklist") {
-    return <ChecklistClient checklist={parseChecklistMarkdown(page.rawContent)} />;
+    return <ChecklistClient checklist={parseChecklistMarkdown(page.rawContent)} totalLabs={getAllLabs().length} />;
   }
 
   return (

@@ -18,7 +18,7 @@ export interface ProfessionalRoute {
   modules: number[];
   labs: string[];
   competencies: string[];
-  status: "Disponible" | "Parcial" | "Cobertura en expansión";
+  status: "Disponible" | "Parcial" | "Cobertura en expansión" | "Especialización en construcción";
   gapNote?: string;
   nextRouteSlug?: ProfessionalRouteSlug;
   /** Slug del lab que funciona como proyecto final evaluable de la ruta. */
@@ -186,8 +186,8 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-64-capstone-fo-awareness-arquitectura-erp-crm",
     ],
     competencies: ["ERP vs CRM", "Dual-write conceptual", "Data Management", "Integración", "Gobernanza", "Seguridad"],
-    status: "Cobertura en expansión",
-    gapNote: "Todavía no hay módulos dedicados a Finance & Operations (procesos financieros, cadena de suministro, Data Management Framework, dual-write real). Esta ruta agrupa los fundamentos transferibles de arquitectura, integración y gobierno que aplican también a F&O, mientras se desarrollan módulos específicos del producto.",
+    status: "Especialización en construcción",
+    gapNote: "Esta ruta funciona como fundamentos F&O para arquitectos Power Platform: cubre conceptos transferibles de ERP, integración, gobierno y límites de plataforma. Todavía no reemplaza una ruta profunda de Finance & Operations con procesos financieros, cadena de suministro, Data Management Framework y dual-write real.",
     capstoneLabSlug: "lab-64-capstone-fo-awareness-arquitectura-erp-crm",
     portfolioEvidence: [
       "Tabla de clasificación de procesos ERP vs. CRM",

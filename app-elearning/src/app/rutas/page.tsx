@@ -13,6 +13,7 @@ const STATUS_VARIANT: Record<string, "default" | "secondary" | "outline"> = {
   Disponible: "default",
   Parcial: "secondary",
   "Cobertura en expansión": "outline",
+  "Especialización en construcción": "outline",
 };
 
 export default function ProfessionalRoutesPage() {
