@@ -3,6 +3,7 @@ export const UI = {
   nav: {
     home: "Inicio",
     levels: "Niveles",
+    routes: "Rutas profesionales",
     resources: "Recursos",
     simulator: "Simulador",
     glossary: "Glosario",

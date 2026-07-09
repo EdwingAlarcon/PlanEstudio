@@ -4,7 +4,7 @@ import { getAllQuestions } from "@/lib/questions-parser";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProgressRingClient } from "@/components/modules/progress-ring-client";
-import { ArrowRight, BookOpen, Trophy, FlaskConical, Zap } from "lucide-react";
+import { ArrowRight, BookOpen, Trophy, FlaskConical, Route, Zap } from "lucide-react";
 import { UI, LEVEL_ORDER, type LevelId } from "@/lib/i18n";
 
 // Level display config
@@ -115,7 +115,14 @@ export default async function DashboardPage() {
         <h2 id="quick-heading" className="text-lg font-semibold text-foreground mb-4">
           Acceso rápido
         </h2>
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <QuickActionCard
+            href="/rutas"
+            icon={<Route className="h-5 w-5 text-[#0078D4]" />}
+            title={UI.nav.routes}
+            description="7 rutas por rol profesional"
+            accent="#0078D4"
+          />
           <QuickActionCard
             href="/simulador"
             icon={<Trophy className="h-5 w-5 text-[#0078D4]" />}
