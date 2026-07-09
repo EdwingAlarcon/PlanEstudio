@@ -204,6 +204,12 @@ export default function LabsPage() {
                       ))}
                     </div>
 
+                    {meta.competencies.length > 0 && (
+                      <p className="mb-1.5 line-clamp-1 text-xs leading-relaxed text-muted-foreground">
+                        <span className="font-medium text-foreground">Competencias:</span> {meta.competencies.join(", ")}
+                      </p>
+                    )}
+
                     <p className="mb-3 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
                       <span className="font-medium text-foreground">Evidencia:</span> {meta.evidenceSummary}
                     </p>
