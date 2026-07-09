@@ -454,8 +454,9 @@
 - [ ] **Conocimiento**: Explico la diferencia entre personalizar D365 CE vs construir desde cero en Dataverse | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Creo una solución que extiende D365 CE con tablas y lógica personalizada | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico las consideraciones de licenciamiento entre D365 y Power Platform | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Lab 68 completado — ciclo case-to-resolution, SLA con pausa/reanudación, escalamiento y dashboard de servicio | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 20:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 20:** ___/11 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 

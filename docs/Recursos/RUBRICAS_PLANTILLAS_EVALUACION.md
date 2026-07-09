@@ -225,6 +225,19 @@ Estas plantillas están pensadas para copiarse directamente a un archivo Markdow
 | Activación | Todo segmento declara un destino de activación y la acción que dispara ahí |
 | Riesgo de datos | Riesgos de duplicidad, gobierno y frecuencia de actualización identificados |
 
+## Rúbrica específica: Customer Service
+
+| Criterio | Aprobado profesional |
+|---|---|
+| Configuración del caso | Case Type, prioridad y entitlement validados antes de enrutar el caso |
+| Colas | Clasificadas como públicas o privadas con justificación, no por defecto |
+| SLA | KPIs con pausa/reanudación documentados, no un temporizador simple |
+| Escalamiento | Regla automática ligada al KPI (Warning/Failure), no discrecional del agente |
+| Conocimiento | Knowledge Article vinculado al caso resuelto, con ciclo de vida respetado |
+| Dashboard operativo | Reporta First Response Time, Resolution Time, SLA Success Rate, Backlog y CSAT conceptual |
+| Autoservicio | Portal respeta campos de solo lectura para el cliente (prioridad, SLA no editables) |
+| UAT | Cubre happy path, pausa de SLA, escalamiento, entitlement agotado y autoservicio |
+
 ## Rúbrica específica: Field Service
 
 | Criterio | Aprobado profesional |

@@ -74,7 +74,7 @@ corresponde a cada ruta.
 | Competencia | Nivel | Evidencia esperada | Lab / proyecto | Criterio de aprobación |
 |---|---|---|---|---|
 | Procesos comerciales (lead-to-cash) | Intermedio-Avanzado | BPF configurado con campos requeridos por etapa, Quote→Order con Price List Item | Módulo 20, Lab 66 | La oportunidad no avanza de etapa sin campos obligatorios; el monto de Quote y Order coincide |
-| Casos de servicio y colas | Intermedio-Avanzado | Cola configurada + regla de enrutamiento probada | Lab 59 (adaptable) | El caso llega a la cola correcta según el criterio definido |
+| Customer Service (case-to-resolution, SLA, escalamiento, dashboard) | Avanzado | Cola configurada + SLA con pausa/reanudación + escalamiento automático + dashboard con FRT/Resolution Time/SLA Success Rate/Backlog/CSAT | Módulo 20, Lab 68 | El caso llega a la cola correcta, el SLA se pausa en espera del cliente y escala automáticamente al superar el KPI |
 | Customer Insights - Journeys (segmentación, journeys) | Avanzado | Segmento + journey documentado con trigger y salida | Lab 58 | Segmento filtra correctamente, sin envíos duplicados en el journey |
 | Customer Insights - Data (unificación de perfiles, medidas, activación) | Avanzado | Regla de matching aplicada a datos de prueba + medidas con fórmula documentada | Módulo 57, Lab 67 | La regla de matching unifica correctamente al cliente sin email por teléfono/nombre |
 | Field Service (work orders, SLAs, scheduling) | Avanzado | Work order de principio a fin + SLA con escalamiento + Incident Type con tareas obligatorias | Módulo 58, Lab 59 | El SLA se dispara y escala cuando se incumple el tiempo; el Schedule Board resalta solo técnicos con la skill requerida |
