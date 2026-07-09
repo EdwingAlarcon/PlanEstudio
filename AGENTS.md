@@ -156,7 +156,7 @@ Do NOT change these heading formats in `docs/Niveles/*.md` unless you intentiona
 
 ## Content: Question Bank
 
-`docs/javascripts/evaluaciones-simulador.js` contains `MODULE_QUESTIONS` — a JS object with keys 1-41, each an array of question objects:
+`docs/javascripts/evaluaciones-simulador.js` contains `MODULE_QUESTIONS` — a JS object with keys 1-59, each an array of question objects:
 
 ```js
 {
@@ -168,7 +168,7 @@ Do NOT change these heading formats in `docs/Niveles/*.md` unless you intentiona
 }
 ```
 
-- 426 total questions across 55 modules
+- 458 total questions across 59 modules
 - Module 1 has 15 questions (includes AI Builder and Power Pages topics for PL-900)
 - After editing, run `node ../scripts/extract-questions.mjs` from `app-elearning` or run `npm run build:pages`
 - `scripts/extract-questions.mjs` generates `app-elearning/src/data/questions.ts`; `questions-parser.ts` validates associations at build/test time

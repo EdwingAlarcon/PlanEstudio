@@ -18,7 +18,7 @@ export interface ProfessionalRoute {
   modules: number[];
   labs: string[];
   competencies: string[];
-  status: "Disponible" | "Parcial" | "Cobertura en expansión" | "Especialización en construcción";
+  status: "Disponible" | "Parcial" | "Especialización en construcción";
   gapNote?: string;
   nextRouteSlug?: ProfessionalRouteSlug;
   /** Slug del lab que funciona como proyecto final evaluable de la ruta. */

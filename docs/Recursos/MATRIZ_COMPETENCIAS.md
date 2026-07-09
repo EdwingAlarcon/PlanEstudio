@@ -84,9 +84,10 @@ corresponde a cada ruta.
 ## Finance & Operations Consultant / Architect Awareness
 
 *ERP conceptual, integración.* Ruta: Consultor Funcional → Finance & Operations → Solution Architect.
-Estado de la ruta: **cobertura en expansión** — el Módulo 59 ya cubre vocabulario de procesos ERP
-estándar y virtual tables; sigue faltando profundidad de configuración real de producto (Finance,
-SCM, Commerce, Project Operations) para dejar de ser "cobertura en expansión".
+Estado de la ruta: **especialización en construcción** — el Módulo 59 ya cubre vocabulario de
+procesos ERP estándar y virtual tables; sigue faltando profundidad de configuración real de
+producto (Finance, SCM, Commerce, Project Operations) para dejar de ser una ruta conceptual
+inicial.
 
 | Competencia | Nivel | Evidencia esperada | Lab / proyecto | Criterio de aprobación |
 |---|---|---|---|---|

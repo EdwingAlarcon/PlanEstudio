@@ -20,7 +20,7 @@ prerequisites:
 Razonar sobre una arquitectura híbrida ERP + CRM sin necesidad de un tenant de Finance &
 Operations real: cuándo aplica cada plataforma, cómo se sincronizan los datos, y qué riesgos trae
 la integración. Este capstone es **conceptual**, no de implementación — refleja que la ruta
-Finance & Operations Awareness está en cobertura en expansión, y su objetivo es que sepas tomar
+Finance & Operations está como especialización en construcción, y su objetivo es que sepas tomar
 decisiones informadas, no configurar F&O.
 
 ## Escenario de negocio

@@ -133,9 +133,12 @@ Competencias evaluadas:
 - Routing y experiencias multi-sesión.
 - Analytics, visualizations, insights y extensibilidad con Power Platform.
 
-Brecha actual:
+Cobertura actual:
 
-- PlanEstudio cubre parte de Customer Service en el Módulo 20, pero necesita una ruta y labs específicos.
+- PlanEstudio cubre Customer Service dentro del Módulo 20, la ruta Dynamics 365 Customer
+  Engagement, el Lab 59 (Case -> Work Order y UAT) y el Lab 60 como capstone integrador. La mejora
+  prioritaria pendiente es separar una práctica Customer Service profunda de Case-to-Resolution,
+  SLAs, colas, escalamiento y autoservicio.
 
 ### MB-310 — Dynamics 365 Finance Functional Consultant Associate
 
@@ -149,9 +152,11 @@ Competencias evaluadas:
 - Credit and collections.
 - Budgeting, fixed assets, expense management y reporting financiero.
 
-Brecha actual:
+Cobertura actual:
 
-- PlanEstudio todavía no cubre Finance con profundidad suficiente.
+- PlanEstudio cubre Finance & Operations como ruta conceptual inicial en el Módulo 59 y el Lab 64,
+  con procesos ERP, dual-write, DMF, virtual tables y arquitectura ERP + CRM. Todavía no cubre
+  configuración real profunda de Dynamics 365 Finance.
 
 ### MB-330 — Dynamics 365 Supply Chain Management Functional Consultant Associate
 
@@ -165,9 +170,10 @@ Competencias evaluadas:
 - Quality, asset management, master planning y planning optimization.
 - Copilot in Dynamics 365 Supply Chain Management.
 
-Brecha actual:
+Cobertura actual:
 
-- PlanEstudio necesita una ruta F&O que explique procesos ERP y su integración con Dataverse.
+- PlanEstudio ya introduce procesos ERP y su integración con Dataverse en el Módulo 59 y el Lab 64.
+  La mejora pendiente es profundizar Supply Chain Management con procesos y laboratorios propios.
 
 ### MB-500 — Finance and Operations Apps Developer Associate
 
@@ -181,9 +187,11 @@ Competencias evaluadas:
 - Reportes, workspaces, UI customization.
 - Endpoints, APIs, integración, seguridad, rendimiento y ALM.
 
-Brecha actual:
+Cobertura actual:
 
-- PlanEstudio debe introducir primero F&O conceptual antes de llevar al estudiante a desarrollo X++.
+- PlanEstudio ya introdujo F&O conceptual en el Módulo 59 y el Lab 64. El desarrollo X++ y la
+  especialización MB-500 siguen fuera de alcance hasta contar con una ruta F&O de producto más
+  profunda.
 
 ---
 
@@ -258,9 +266,9 @@ Competencias que siguen siendo válidas:
 | Consultor funcional Power Platform | PL-200 en transición | Nivel 2 | Crear ruta funcional independiente del examen. |
 | Developer Power Platform | PL-400 | Nivel 3 | Reforzar Custom APIs, CLI, Web API y observabilidad. |
 | Solution Architect | Competencia profesional de arquitectura | Nivel 4 | Reemplazar lenguaje PL-600 por arquitectura demostrable y portafolio. |
-| D365 Customer Service | MB-230 | Parcial | Crear ruta CE con Sales/Service/Field/Customer Insights. |
-| D365 Finance | MB-310 | Brecha | Crear ruta F&O conceptual y funcional. |
-| D365 Supply Chain | MB-330 | Brecha | Crear ruta SCM conceptual y funcional. |
+| D365 Customer Service | MB-230 | Parcial | Crear labs dedicados Case-to-Resolution, SLA/colas/escalamiento y autoservicio. |
+| D365 Finance | MB-310 | Ruta conceptual inicial | Profundizar configuración funcional de Finance cuando se abra sprint F&O. |
+| D365 Supply Chain | MB-330 | Ruta conceptual inicial | Crear práctica SCM/Inventory-to-Deliver posterior. |
 | F&O Developer | MB-500 | Brecha avanzada | Agregar solo como especialización posterior. |
 
 ---
@@ -273,8 +281,8 @@ Competencias que siguen siendo válidas:
 | PL-200, si aplica antes del retiro | Pendiente | Antes del 31 ago 2026 | Practice assessment + proyecto Nivel 2 |
 | PL-400 | Pendiente | | Labs técnicos + simulador Nivel 3 |
 | Arquitectura Power Platform | Enfoque profesional | | Capstone, ADRs, arquitectura, runbook y defensa ejecutiva |
-| MB-230 | Especialización recomendada | | Ruta Customer Service pendiente |
-| MB-310 / MB-330 | Especialización F&O recomendada | | Ruta F&O pendiente |
+| MB-230 | Especialización recomendada | | Labs Customer Service profundos pendientes |
+| MB-310 / MB-330 | Especialización F&O recomendada | | Ruta F&O conceptual disponible; profundidad de producto pendiente |
 | MB-500 | Especialización developer avanzada | | Ruta F&O developer pendiente |
 
 ---

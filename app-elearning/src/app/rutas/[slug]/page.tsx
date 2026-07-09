@@ -28,7 +28,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 const STATUS_VARIANT: Record<string, "default" | "secondary" | "outline"> = {
   Disponible: "default",
   Parcial: "secondary",
-  "Cobertura en expansión": "outline",
   "Especialización en construcción": "outline",
 };
 
