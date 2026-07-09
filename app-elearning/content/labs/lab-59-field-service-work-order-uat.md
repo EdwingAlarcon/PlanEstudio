@@ -144,6 +144,7 @@ Agrega una regla para clientes premium: si la prioridad es crítica y la garant�
 
 - Módulo 20 — Dynamics 365 CE — Sales y Customer Service
 - Módulo 38 — Liderazgo Técnico y Gestión de Proyectos
+- Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)
 
 ## Competencias desarrolladas
 

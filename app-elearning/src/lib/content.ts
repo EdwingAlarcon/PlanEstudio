@@ -74,6 +74,7 @@ const RESOURCE_FILES: Record<string, string> = {
   simulador:               "Recursos/SIMULADOR_EVALUACIONES.md",
   "lenguajes-programacion":"Anexos/LENGUAJES_PROGRAMACION.md",
   "prompts-ia":             "Recursos/PROMPTS_REUTILIZABLES_IA.md",
+  "rubricas-plantillas":    "Recursos/RUBRICAS_PLANTILLAS_EVALUACION.md",
 };
 
 const LEVEL_META: Record<LevelId, { title: string; description: string; certification: string }> = {

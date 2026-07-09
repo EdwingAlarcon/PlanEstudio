@@ -11,6 +11,7 @@ export const UI = {
     checklist: "Checklist de Progreso",
     questionBank: "Banco de Preguntas",
     promptsIA: "Prompts Reutilizables IA",
+    rubricsTemplates: "Rúbricas y Plantillas",
     skipToContent: "Saltar al contenido",
     toggleTheme: "Cambiar tema",
     search: "Buscar...",

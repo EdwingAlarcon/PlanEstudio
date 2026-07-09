@@ -136,6 +136,7 @@ Agrega una rama para clientes premium: si el valor anual es mayor a 25000, el jo
 
 - Módulo 20 — Dynamics 365 CE — Sales y Customer Service
 - Módulo 38 — Liderazgo Técnico y Gestión de Proyectos
+- Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)
 
 ## Competencias desarrolladas
 

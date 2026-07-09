@@ -116,6 +116,7 @@ Revisa los prompts que usaste en los Ejercicios 1-3 y responde con la checklist 
 - Módulo 55 — IA para Análisis de Soluciones, Arquitectura y Consultoría Funcional D365
 - Módulo 49 — Seguridad, Secretos y Compliance en IA
 - Módulo 50 — Tests, CI/CD y Guardrails para Código Generado por IA
+- Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)
 
 ## Competencias Desarrolladas
 
