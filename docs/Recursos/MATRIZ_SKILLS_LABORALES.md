@@ -184,6 +184,8 @@ Estas rutas aún no son rutas oficiales de `/rutas`. Son propuestas de empleabil
 
 ### Ruta Job-Ready Dynamics 365 CRM Developer
 
+Recurso detallado: [Ruta Job-Ready Dynamics 365 CRM Developer](JOB_READY_CRM_DEVELOPER.md).
+
 - **Objetivo:** preparar para roles técnicos CRM con C#, JavaScript, plugins, Web API, integraciones, testing y ALM.
 - **Perfil laboral objetivo:** Dynamics 365 CRM Developer, Power Platform Developer, Technical Consultant.
 - **Skills cubiertos:** C#, plugins, JavaScript CRM, web resources, Web API, Azure Functions, Logic Apps, Service Bus, testing, tracing.
@@ -260,4 +262,3 @@ Estas rutas aún no son rutas oficiales de `/rutas`. Son propuestas de empleabil
 - Usa `PORTAFOLIO_PROFESIONAL.md` para empaquetar esa evidencia.
 - Usa `ROADMAP_ESPECIALIZACION_AVANZADA.md` para no sobreprometer especializaciones aún incompletas.
 - Usa esta matriz para traducir vacantes en decisiones de estudio y práctica.
-
