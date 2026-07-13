@@ -216,6 +216,8 @@ Recurso detallado: [Ruta Job-Ready Data Migration + CRM Legacy](JOB_READY_DATA_M
 
 ### Ruta Technical English & Interview Readiness
 
+Recurso detallado: [Ruta Job-Ready Interview Readiness + Portafolio Laboral](JOB_READY_INTERVIEW_READINESS.md).
+
 - **Objetivo:** preparar al estudiante para explicar proyectos, responder entrevistas, presentar capstones y comunicarse en contextos remotos/internacionales.
 - **Perfil laboral objetivo:** todos los perfiles.
 - **Skills cubiertos:** CV, LinkedIn, demo de 10 minutos, respuestas técnicas, inglés técnico, STAR, comunicación remota.
