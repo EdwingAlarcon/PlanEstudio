@@ -47,6 +47,7 @@ Modelar datos en Dataverse.
       if (filePath.includes("RUBRICAS_PLANTILLAS")) return "# Rúbricas y Plantillas de Evaluación\nContenido rúbricas.";
       if (filePath.includes("MATRIZ_SKILLS_LABORALES")) return "# Matriz de Skills Laborales\nPower Platform Development.";
       if (filePath.includes("JOB_READY_CRM_DEVELOPER")) return "# Ruta Job-Ready Dynamics 365 CRM Developer\nDynamics 365 CRM Developer.";
+      if (filePath.includes("JOB_READY_CRM_FUNCTIONAL")) return "# Ruta Job-Ready Dynamics 365 CRM Functional Specialist\nDynamics 365 CRM Functional.";
       if (filePath.includes("JOB_READY_ADMIN_GOVERNANCE")) return "# Ruta Job-Ready Power Platform Admin / Governance\nPower Platform Admin.";
       return "# Sin contenido";
     }),
@@ -176,12 +177,12 @@ describe("getResourceBySlug", () => {
 // ─── getAllResourcePages ───────────────────────────────────────────────────────
 
 describe("getAllResourcePages", () => {
-  it("returns 14 resource pages (incluyendo lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, job-ready-admin-governance, portafolio-profesional y roadmap-especializacion-avanzada)", () => {
+  it("returns 15 resource pages (incluyendo lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, job-ready-crm-functional, job-ready-admin-governance, portafolio-profesional y roadmap-especializacion-avanzada)", () => {
     const pages = getAllResourcePages();
-    expect(pages).toHaveLength(14);
+    expect(pages).toHaveLength(15);
   });
 
-  it("includes checklist, glosario, certificaciones, lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, job-ready-admin-governance, portafolio-profesional y roadmap-especializacion-avanzada", () => {
+  it("includes checklist, glosario, certificaciones, lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, job-ready-crm-functional, job-ready-admin-governance, portafolio-profesional y roadmap-especializacion-avanzada", () => {
     const pages = getAllResourcePages();
     const slugs = pages.map((p) => p.slug);
     expect(slugs).toContain("checklist");
@@ -193,6 +194,7 @@ describe("getAllResourcePages", () => {
     expect(slugs).toContain("matriz-competencias");
     expect(slugs).toContain("matriz-skills-laborales");
     expect(slugs).toContain("job-ready-crm-developer");
+    expect(slugs).toContain("job-ready-crm-functional");
     expect(slugs).toContain("job-ready-admin-governance");
     expect(slugs).toContain("portafolio-profesional");
     expect(slugs).toContain("roadmap-especializacion-avanzada");
@@ -212,6 +214,14 @@ describe("getAllResourcePages", () => {
     expect(resource).toBeDefined();
     expect(resource?.title).toBe("Ruta Job-Ready Dynamics 365 CRM Developer");
     expect(resource?.rawContent).toContain("Dynamics 365 CRM Developer");
+  });
+
+  it("loads the CRM Functional job-ready resource", () => {
+    const resource = getResourceBySlug("job-ready-crm-functional");
+
+    expect(resource).toBeDefined();
+    expect(resource?.title).toBe("Ruta Job-Ready Dynamics 365 CRM Functional Specialist");
+    expect(resource?.rawContent).toContain("Dynamics 365 CRM Functional");
   });
 
   it("loads the Admin Governance job-ready resource", () => {
