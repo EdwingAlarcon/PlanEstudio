@@ -15,6 +15,7 @@ export const UI = {
     rubricsTemplates: "Rúbricas y Plantillas",
     competencyMatrix: "Matriz de Competencias",
     laborSkillsMatrix: "Skills Laborales",
+    crmDeveloperJobReady: "CRM Developer Job-Ready",
     portfolio: "Portafolio",
     portfolioGuide: "Guía de Portafolio",
     advancedRoadmap: "Roadmap Especialización Avanzada",

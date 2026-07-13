@@ -36,6 +36,7 @@ const RESOURCE_LINKS = [
   { href: "/recursos/rubricas-plantillas", label: UI.nav.rubricsTemplates, icon: CheckSquare },
   { href: "/recursos/matriz-competencias", label: UI.nav.competencyMatrix, icon: FileText },
   { href: "/recursos/matriz-skills-laborales", label: UI.nav.laborSkillsMatrix, icon: Briefcase },
+  { href: "/recursos/job-ready-crm-developer", label: UI.nav.crmDeveloperJobReady, icon: FileText },
   { href: "/recursos/portafolio-profesional", label: UI.nav.portfolioGuide, icon: FileText },
   { href: "/recursos/roadmap-especializacion-avanzada", label: UI.nav.advancedRoadmap, icon: Route },
 ];
