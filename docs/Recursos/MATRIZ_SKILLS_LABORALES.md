@@ -202,6 +202,8 @@ Recurso detallado: [Ruta Job-Ready Dynamics 365 CRM Developer](JOB_READY_CRM_DEV
 
 ### Ruta CRM Legacy & Cloud Migration
 
+Recurso detallado: [Ruta Job-Ready Data Migration + CRM Legacy](JOB_READY_DATA_MIGRATION_LEGACY.md).
+
 - **Objetivo:** preparar para roles enterprise donde conviven CRM on-premises, sistemas legacy y migración a Dynamics 365 cloud.
 - **Perfil laboral objetivo:** CRM Migration Specialist, Solution Architect, Legacy Modernization Consultant.
 - **Skills cubiertos:** mapping, cleansing, importación, reconciliación, cutover, CRM on-prem awareness, SQL/IIS/networking, health assessment.
