@@ -82,6 +82,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "job-ready-crm-developer": "Recursos/JOB_READY_CRM_DEVELOPER.md",
   "job-ready-crm-functional": "Recursos/JOB_READY_CRM_FUNCTIONAL.md",
   "job-ready-data-migration-legacy": "Recursos/JOB_READY_DATA_MIGRATION_LEGACY.md",
+  "job-ready-interview-readiness": "Recursos/JOB_READY_INTERVIEW_READINESS.md",
   "job-ready-admin-governance": "Recursos/JOB_READY_ADMIN_GOVERNANCE.md",
   "portafolio-profesional": "Recursos/PORTAFOLIO_PROFESIONAL.md",
   "roadmap-especializacion-avanzada": "Recursos/ROADMAP_ESPECIALIZACION_AVANZADA.md",

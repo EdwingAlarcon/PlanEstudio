@@ -49,6 +49,7 @@ Modelar datos en Dataverse.
       if (filePath.includes("JOB_READY_CRM_DEVELOPER")) return "# Ruta Job-Ready Dynamics 365 CRM Developer\nDynamics 365 CRM Developer.";
       if (filePath.includes("JOB_READY_CRM_FUNCTIONAL")) return "# Ruta Job-Ready Dynamics 365 CRM Functional Specialist\nDynamics 365 CRM Functional.";
       if (filePath.includes("JOB_READY_DATA_MIGRATION_LEGACY")) return "# Ruta Job-Ready Data Migration + CRM Legacy\nData Migration.";
+      if (filePath.includes("JOB_READY_INTERVIEW_READINESS")) return "# Ruta Job-Ready Interview Readiness + Portafolio Laboral\nInterview Readiness.";
       if (filePath.includes("JOB_READY_ADMIN_GOVERNANCE")) return "# Ruta Job-Ready Power Platform Admin / Governance\nPower Platform Admin.";
       return "# Sin contenido";
     }),
@@ -178,12 +179,12 @@ describe("getResourceBySlug", () => {
 // ─── getAllResourcePages ───────────────────────────────────────────────────────
 
 describe("getAllResourcePages", () => {
-  it("returns 16 resource pages (incluyendo lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, job-ready-crm-functional, job-ready-data-migration-legacy, job-ready-admin-governance, portafolio-profesional y roadmap-especializacion-avanzada)", () => {
+  it("returns 17 resource pages (incluyendo lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, job-ready-crm-functional, job-ready-data-migration-legacy, job-ready-interview-readiness, job-ready-admin-governance, portafolio-profesional y roadmap-especializacion-avanzada)", () => {
     const pages = getAllResourcePages();
-    expect(pages).toHaveLength(16);
+    expect(pages).toHaveLength(17);
   });
 
-  it("includes checklist, glosario, certificaciones, lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, job-ready-crm-functional, job-ready-data-migration-legacy, job-ready-admin-governance, portafolio-profesional y roadmap-especializacion-avanzada", () => {
+  it("includes checklist, glosario, certificaciones, lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, job-ready-crm-functional, job-ready-data-migration-legacy, job-ready-interview-readiness, job-ready-admin-governance, portafolio-profesional y roadmap-especializacion-avanzada", () => {
     const pages = getAllResourcePages();
     const slugs = pages.map((p) => p.slug);
     expect(slugs).toContain("checklist");
@@ -197,6 +198,7 @@ describe("getAllResourcePages", () => {
     expect(slugs).toContain("job-ready-crm-developer");
     expect(slugs).toContain("job-ready-crm-functional");
     expect(slugs).toContain("job-ready-data-migration-legacy");
+    expect(slugs).toContain("job-ready-interview-readiness");
     expect(slugs).toContain("job-ready-admin-governance");
     expect(slugs).toContain("portafolio-profesional");
     expect(slugs).toContain("roadmap-especializacion-avanzada");
@@ -232,6 +234,14 @@ describe("getAllResourcePages", () => {
     expect(resource).toBeDefined();
     expect(resource?.title).toBe("Ruta Job-Ready Data Migration + CRM Legacy");
     expect(resource?.rawContent).toContain("Data Migration");
+  });
+
+  it("loads the Interview Readiness job-ready resource", () => {
+    const resource = getResourceBySlug("job-ready-interview-readiness");
+
+    expect(resource).toBeDefined();
+    expect(resource?.title).toBe("Ruta Job-Ready Interview Readiness + Portafolio Laboral");
+    expect(resource?.rawContent).toContain("Interview Readiness");
   });
 
   it("loads the Admin Governance job-ready resource", () => {
