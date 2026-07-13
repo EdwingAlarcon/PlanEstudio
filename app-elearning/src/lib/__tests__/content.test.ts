@@ -46,6 +46,7 @@ Modelar datos en Dataverse.
       if (filePath.includes("LENGUAJES_PROGRAMACION")) return "# Lenguajes de Programación\nContenido lenguajes.";
       if (filePath.includes("RUBRICAS_PLANTILLAS")) return "# Rúbricas y Plantillas de Evaluación\nContenido rúbricas.";
       if (filePath.includes("MATRIZ_SKILLS_LABORALES")) return "# Matriz de Skills Laborales\nPower Platform Development.";
+      if (filePath.includes("JOB_READY_CRM_DEVELOPER")) return "# Ruta Job-Ready Dynamics 365 CRM Developer\nDynamics 365 CRM Developer.";
       return "# Sin contenido";
     }),
   },
@@ -174,12 +175,12 @@ describe("getResourceBySlug", () => {
 // ─── getAllResourcePages ───────────────────────────────────────────────────────
 
 describe("getAllResourcePages", () => {
-  it("returns 12 resource pages (incluyendo lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, portafolio-profesional y roadmap-especializacion-avanzada)", () => {
+  it("returns 13 resource pages (incluyendo lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, portafolio-profesional y roadmap-especializacion-avanzada)", () => {
     const pages = getAllResourcePages();
-    expect(pages).toHaveLength(12);
+    expect(pages).toHaveLength(13);
   });
 
-  it("includes checklist, glosario, certificaciones, lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, portafolio-profesional y roadmap-especializacion-avanzada", () => {
+  it("includes checklist, glosario, certificaciones, lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, portafolio-profesional y roadmap-especializacion-avanzada", () => {
     const pages = getAllResourcePages();
     const slugs = pages.map((p) => p.slug);
     expect(slugs).toContain("checklist");
@@ -190,6 +191,7 @@ describe("getAllResourcePages", () => {
     expect(slugs).toContain("rubricas-plantillas");
     expect(slugs).toContain("matriz-competencias");
     expect(slugs).toContain("matriz-skills-laborales");
+    expect(slugs).toContain("job-ready-crm-developer");
     expect(slugs).toContain("portafolio-profesional");
     expect(slugs).toContain("roadmap-especializacion-avanzada");
   });
@@ -200,6 +202,14 @@ describe("getAllResourcePages", () => {
     expect(resource).toBeDefined();
     expect(resource?.title).toBe("Matriz de Skills Laborales");
     expect(resource?.rawContent).toContain("Power Platform Development");
+  });
+
+  it("loads the CRM Developer job-ready resource", () => {
+    const resource = getResourceBySlug("job-ready-crm-developer");
+
+    expect(resource).toBeDefined();
+    expect(resource?.title).toBe("Ruta Job-Ready Dynamics 365 CRM Developer");
+    expect(resource?.rawContent).toContain("Dynamics 365 CRM Developer");
   });
 
   it("each page has a slug, title, and rawContent", () => {
