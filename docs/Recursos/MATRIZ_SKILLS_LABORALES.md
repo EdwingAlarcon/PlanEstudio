@@ -174,6 +174,8 @@ Recurso detallado: [Ruta Job-Ready Power Platform Admin / Governance](JOB_READY_
 
 ### Ruta Job-Ready Dynamics 365 CRM Functional Specialist
 
+Recurso detallado: [Ruta Job-Ready Dynamics 365 CRM Functional Specialist](JOB_READY_CRM_FUNCTIONAL.md).
+
 - **Objetivo:** preparar para roles funcionales CRM con configuración, soporte, Customer Service, Sales, reporting y UAT.
 - **Perfil laboral objetivo:** CRM Specialist, Dynamics 365 CE Functional Consultant, Customer Service Specialist.
 - **Skills cubiertos:** formularios, vistas, tablas, BPF, workflows/procesos, casos, colas, SLA, entitlements, KB, dashboards, UAT.
