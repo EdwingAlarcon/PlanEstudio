@@ -16,6 +16,7 @@ export const UI = {
     competencyMatrix: "Matriz de Competencias",
     laborSkillsMatrix: "Skills Laborales",
     crmDeveloperJobReady: "CRM Developer Job-Ready",
+    adminGovernanceJobReady: "Admin/Governance Job-Ready",
     portfolio: "Portafolio",
     portfolioGuide: "Guía de Portafolio",
     advancedRoadmap: "Roadmap Especialización Avanzada",
