@@ -45,6 +45,7 @@ Modelar datos en Dataverse.
       if (filePath.includes("SIMULADOR")) return "# 🎯 Simulador\nContenido simulador.";
       if (filePath.includes("LENGUAJES_PROGRAMACION")) return "# Lenguajes de Programación\nContenido lenguajes.";
       if (filePath.includes("RUBRICAS_PLANTILLAS")) return "# Rúbricas y Plantillas de Evaluación\nContenido rúbricas.";
+      if (filePath.includes("MATRIZ_SKILLS_LABORALES")) return "# Matriz de Skills Laborales\nPower Platform Development.";
       return "# Sin contenido";
     }),
   },
@@ -173,12 +174,12 @@ describe("getResourceBySlug", () => {
 // ─── getAllResourcePages ───────────────────────────────────────────────────────
 
 describe("getAllResourcePages", () => {
-  it("returns 11 resource pages (incluyendo lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, portafolio-profesional y roadmap-especializacion-avanzada)", () => {
+  it("returns 12 resource pages (incluyendo lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, portafolio-profesional y roadmap-especializacion-avanzada)", () => {
     const pages = getAllResourcePages();
-    expect(pages).toHaveLength(11);
+    expect(pages).toHaveLength(12);
   });
 
-  it("includes checklist, glosario, certificaciones, lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, portafolio-profesional y roadmap-especializacion-avanzada", () => {
+  it("includes checklist, glosario, certificaciones, lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, portafolio-profesional y roadmap-especializacion-avanzada", () => {
     const pages = getAllResourcePages();
     const slugs = pages.map((p) => p.slug);
     expect(slugs).toContain("checklist");
@@ -188,8 +189,17 @@ describe("getAllResourcePages", () => {
     expect(slugs).toContain("prompts-ia");
     expect(slugs).toContain("rubricas-plantillas");
     expect(slugs).toContain("matriz-competencias");
+    expect(slugs).toContain("matriz-skills-laborales");
     expect(slugs).toContain("portafolio-profesional");
     expect(slugs).toContain("roadmap-especializacion-avanzada");
+  });
+
+  it("loads the labor skills matrix resource", () => {
+    const resource = getResourceBySlug("matriz-skills-laborales");
+
+    expect(resource).toBeDefined();
+    expect(resource?.title).toBe("Matriz de Skills Laborales");
+    expect(resource?.rawContent).toContain("Power Platform Development");
   });
 
   it("each page has a slug, title, and rawContent", () => {
