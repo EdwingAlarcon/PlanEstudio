@@ -17,6 +17,7 @@ export const UI = {
     laborSkillsMatrix: "Skills Laborales",
     crmDeveloperJobReady: "CRM Developer Job-Ready",
     crmFunctionalJobReady: "CRM Functional Job-Ready",
+    dataMigrationJobReady: "Data Migration Job-Ready",
     adminGovernanceJobReady: "Admin/Governance Job-Ready",
     portfolio: "Portafolio",
     portfolioGuide: "Guía de Portafolio",
