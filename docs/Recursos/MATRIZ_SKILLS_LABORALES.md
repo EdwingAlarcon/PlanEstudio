@@ -230,18 +230,20 @@ Recurso detallado: [Ruta Job-Ready Interview Readiness + Portafolio Laboral](JOB
 
 ## Laboratorios Job-Ready recomendados
 
+Implementación en la app: JR-001 a JR-010 están disponibles como **LAB-071 a LAB-080** para mantener compatibilidad con la numeración técnica de laboratorios.
+
 | Lab propuesto | Prioridad | Vacante que valida | Skills que valida | Evidencia esperada | Rúbrica sugerida | Dificultad | Duración |
 |---|---|---|---|---|---|---|---|
-| JR-001 Model-Driven App Job Test | Alta | Power Platform Developer / Functional | Dataverse, forms, views, BPF, security roles | Solución exportada, capturas, matriz de seguridad | 40% funcionalidad, 25% seguridad, 20% calidad, 15% explicación | Intermedia | 3-4 h |
-| JR-002 CRM JavaScript Customization | Alta | Dynamics 365 CRM Developer | OnLoad, OnChange, OnSave, `formContext`, `Xrm.WebApi` | Web resource, registro de eventos, casos de prueba | 35% eventos, 25% Web API, 20% errores, 20% clean code | Avanzada | 4 h |
-| JR-003 Dataverse Plugin C# | Alta | CRM Developer | Plugin pipeline, tracing, errores, tests | Código, plugin registrado, trazas, tests | 35% pipeline, 25% testing, 20% tracing, 20% ALM | Avanzada | 4-5 h |
-| JR-004 CRM Integration Challenge | Media-Alta | Integration Developer | API externa, Logic Apps/Power Automate, errores | Diagrama, flujo/API, logs | 35% patrón integración, 25% seguridad, 25% resiliencia, 15% documentación | Avanzada | 4 h |
-| JR-005 Data Migration to Dynamics 365 | Alta | Migration Specialist | mapping, cleansing, importación, reconciliación, cutover | Mapping, carga, reporte validación | 30% mapping, 25% limpieza, 25% validación, 20% cutover | Avanzada | 5 h |
-| JR-006 PPAC Governance Assessment | Alta | Admin / Governance | PPAC, DLP, capacity, licensing, audit logs, CoE | Informe de tenant, DLP, runbook | 30% diagnóstico, 25% controles, 25% recomendaciones, 20% evidencia | Avanzada | 4 h |
-| JR-007 Customer Service Specialist Job Simulation | Alta | CRM Functional / Customer Service | casos, colas, SLA, entitlements, KB, dashboard | Configuración y UAT | 35% proceso, 25% SLA/colas, 20% reporting, 20% soporte | Intermedia-Avanzada | 4 h |
-| JR-008 CRM Legacy Health Assessment | Media-Alta | Legacy / Migration | IIS, SQL, networking, upgrade, performance | Health assessment y riesgos | 40% diagnóstico, 25% riesgos, 20% roadmap, 15% comunicación | Avanzada | 3 h |
-| JR-009 Technical Interview Simulation | Media-Alta | Todos | entrevista, inglés técnico, demo, CV | Guion, respuestas, demo de 10 minutos | 30% claridad, 25% evidencia, 25% precisión técnica, 20% inglés/comunicación | Transversal | 2-3 h |
-| JR-010 AI-Assisted CRM Development | Media | CRM Developer moderno | IA, revisión de código, seguridad, prompts | Prompt, diff, checklist de revisión | 30% prompt, 30% revisión, 25% seguridad, 15% resultado | Intermedia | 3 h |
+| JR-001 / LAB-071 Model-Driven App Job Test | Alta | Power Platform Developer / Functional | Dataverse, forms, views, BPF, security roles | Solución exportada, capturas, matriz de seguridad | 40% funcionalidad, 25% seguridad, 20% calidad, 15% explicación | Intermedia | 3-4 h |
+| JR-002 / LAB-072 CRM JavaScript Customization | Alta | Dynamics 365 CRM Developer | OnLoad, OnChange, OnSave, `formContext`, `Xrm.WebApi` | Web resource, registro de eventos, casos de prueba | 35% eventos, 25% Web API, 20% errores, 20% clean code | Avanzada | 4 h |
+| JR-003 / LAB-073 Dataverse Plugin C# | Alta | CRM Developer | Plugin pipeline, tracing, errores, tests | Código, plugin registrado, trazas, tests | 35% pipeline, 25% testing, 20% tracing, 20% ALM | Avanzada | 4-5 h |
+| JR-004 / LAB-074 CRM Integration Challenge | Media-Alta | Integration Developer | API externa, Logic Apps/Power Automate, errores | Diagrama, flujo/API, logs | 35% patrón integración, 25% seguridad, 25% resiliencia, 15% documentación | Avanzada | 4 h |
+| JR-005 / LAB-075 Data Migration to Dynamics 365 | Alta | Migration Specialist | mapping, cleansing, importación, reconciliación, cutover | Mapping, carga, reporte validación | 30% mapping, 25% limpieza, 25% validación, 20% cutover | Avanzada | 5 h |
+| JR-006 / LAB-076 PPAC Governance Assessment | Alta | Admin / Governance | PPAC, DLP, capacity, licensing, audit logs, CoE | Informe de tenant, DLP, runbook | 30% diagnóstico, 25% controles, 25% recomendaciones, 20% evidencia | Avanzada | 4 h |
+| JR-007 / LAB-077 Customer Service Specialist Job Simulation | Alta | CRM Functional / Customer Service | casos, colas, SLA, entitlements, KB, dashboard | Configuración y UAT | 35% proceso, 25% SLA/colas, 20% reporting, 20% soporte | Intermedia-Avanzada | 4 h |
+| JR-008 / LAB-078 CRM Legacy Health Assessment | Media-Alta | Legacy / Migration | IIS, SQL, networking, upgrade, performance | Health assessment y riesgos | 40% diagnóstico, 25% riesgos, 20% roadmap, 15% comunicación | Avanzada | 3 h |
+| JR-009 / LAB-079 Technical Interview Simulation | Media-Alta | Todos | entrevista, inglés técnico, demo, CV | Guion, respuestas, demo de 10 minutos | 30% claridad, 25% evidencia, 25% precisión técnica, 20% inglés/comunicación | Transversal | 2-3 h |
+| JR-010 / LAB-080 AI-Assisted CRM Development | Media | CRM Developer moderno | IA, revisión de código, seguridad, prompts | Prompt, diff, checklist de revisión | 30% prompt, 30% revisión, 25% seguridad, 15% resultado | Intermedia | 3 h |
 
 ## Brechas críticas
 
@@ -262,7 +264,7 @@ Recurso detallado: [Ruta Job-Ready Interview Readiness + Portafolio Laboral](JOB
 | JR-4 | Ruta Power Platform Admin/Governance | Ruta con PPAC, DLP, ambientes, licencias, capacity y CoE moderno. |
 | JR-5 | Data Migration + CRM Legacy | Ruta/labs de migración, on-prem awareness y health assessment. |
 | JR-6 | Interview readiness + portafolio laboral | CV, LinkedIn, demo de 10 minutos, respuestas técnicas e inglés. |
-| JR-7 | Labs job-ready y simulaciones técnicas | Implementación progresiva de JR-001 a JR-010 según prioridad. |
+| JR-7 | Labs job-ready y simulaciones técnicas | Implementado como LAB-071 a LAB-080. |
 
 ## Relación con recursos existentes
 
