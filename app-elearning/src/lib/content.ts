@@ -80,6 +80,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "matriz-competencias":    "Recursos/MATRIZ_COMPETENCIAS.md",
   "matriz-skills-laborales": "Recursos/MATRIZ_SKILLS_LABORALES.md",
   "job-ready-crm-developer": "Recursos/JOB_READY_CRM_DEVELOPER.md",
+  "job-ready-admin-governance": "Recursos/JOB_READY_ADMIN_GOVERNANCE.md",
   "portafolio-profesional": "Recursos/PORTAFOLIO_PROFESIONAL.md",
   "roadmap-especializacion-avanzada": "Recursos/ROADMAP_ESPECIALIZACION_AVANZADA.md",
 };
