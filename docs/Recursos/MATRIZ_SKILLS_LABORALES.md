@@ -160,6 +160,8 @@ Estas rutas aún no son rutas oficiales de `/rutas`. Son propuestas de empleabil
 
 ### Ruta Job-Ready Power Platform Admin / Governance
 
+Recurso detallado: [Ruta Job-Ready Power Platform Admin / Governance](JOB_READY_ADMIN_GOVERNANCE.md).
+
 - **Objetivo:** preparar para administrar tenants, ambientes, seguridad, DLP, capacidad, licenciamiento y gobierno.
 - **Perfil laboral objetivo:** Power Platform Admin, Governance Specialist, CoE Analyst, Platform Owner.
 - **Skills cubiertos:** PPAC, ambientes, DLP, security roles, Managed Environments, licensing, capacity, CoE, soporte operativo.
