@@ -18,6 +18,7 @@ export const UI = {
     crmDeveloperJobReady: "CRM Developer Job-Ready",
     crmFunctionalJobReady: "CRM Functional Job-Ready",
     dataMigrationJobReady: "Data Migration Job-Ready",
+    interviewJobReady: "Interview Job-Ready",
     adminGovernanceJobReady: "Admin/Governance Job-Ready",
     portfolio: "Portafolio",
     portfolioGuide: "Guía de Portafolio",

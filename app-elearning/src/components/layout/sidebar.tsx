@@ -39,6 +39,7 @@ const RESOURCE_LINKS = [
   { href: "/recursos/job-ready-crm-developer", label: UI.nav.crmDeveloperJobReady, icon: FileText },
   { href: "/recursos/job-ready-crm-functional", label: UI.nav.crmFunctionalJobReady, icon: FileText },
   { href: "/recursos/job-ready-data-migration-legacy", label: UI.nav.dataMigrationJobReady, icon: FileText },
+  { href: "/recursos/job-ready-interview-readiness", label: UI.nav.interviewJobReady, icon: FileText },
   { href: "/recursos/job-ready-admin-governance", label: UI.nav.adminGovernanceJobReady, icon: FileText },
   { href: "/recursos/portafolio-profesional", label: UI.nav.portfolioGuide, icon: FileText },
   { href: "/recursos/roadmap-especializacion-avanzada", label: UI.nav.advancedRoadmap, icon: Route },
