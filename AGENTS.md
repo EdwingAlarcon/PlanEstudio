@@ -38,11 +38,11 @@ docs/                    # MkDocs legacy/reference content + shared question ban
     CERTIFICACIONES.md
     PROMPTS_REUTILIZABLES_IA.md
   javascripts/
-    evaluaciones-simulador.js   # Banco de 458 preguntas A/B/C/D en MODULE_QUESTIONS (módulos 1-59, incluye Nivel IA y Nivel D365 transversales)
+    evaluaciones-simulador.js   # Banco de 488 preguntas A/B/C/D en MODULE_QUESTIONS (módulos 1-65, incluye Nivel IA y Nivel D365 transversales)
   stylesheets/
     extra.css            # Custom CSS for MkDocs site
 app-elearning/           # Next.js 15 interactive app (THE primary surface)
-  content/               # Official app content: 65 modules + 50 labs with frontmatter across 6 levels (incl. Nivel IA 42-55, Nivel D365 modules 56-65, and route capstones)
+  content/               # Official app content: 65 modules + 60 labs with frontmatter across 6 levels (incl. Nivel IA 42-55, Nivel D365 modules 56-65, job-ready simulations 71-80/91-92, F&O hands-on labs 93-100, and route capstones)
   next.config.ts         # output: 'export', basePath: '/PlanEstudio'
   src/
     app/                 # App Router pages
@@ -156,7 +156,7 @@ Do NOT change these heading formats in `docs/Niveles/*.md` unless you intentiona
 
 ## Content: Question Bank
 
-`docs/javascripts/evaluaciones-simulador.js` contains `MODULE_QUESTIONS` — a JS object with keys 1-59, each an array of question objects:
+`docs/javascripts/evaluaciones-simulador.js` contains `MODULE_QUESTIONS` — a JS object with keys 1-65, each an array of question objects:
 
 ```js
 {

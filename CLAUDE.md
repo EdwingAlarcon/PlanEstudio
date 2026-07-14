@@ -38,7 +38,7 @@ docs/                    # MkDocs source content — legacy/reference site only 
     CERTIFICACIONES.md
     PROMPTS_REUTILIZABLES_IA.md  # 16 reusable prompts for AI-assisted Power Platform/D365 work (Nivel IA, /recursos/prompts-ia)
   javascripts/
-    evaluaciones-simulador.js   # Banco de preguntas A/B/C/D en MODULE_QUESTIONS (módulos 1-59) — shared by BOTH surfaces, not migrated
+    evaluaciones-simulador.js   # Banco de preguntas A/B/C/D en MODULE_QUESTIONS (módulos 1-65) — shared by BOTH surfaces, not migrated
   stylesheets/
     extra.css            # Custom CSS for MkDocs site
 app-elearning/           # Next.js 15 interactive app (THE primary surface)
@@ -94,7 +94,7 @@ site/                    # MkDocs generated output (git-ignored)
 cd app-elearning
 npm install
 npm run dev          # http://localhost:3000
-npm test             # Vitest unit tests (127 tests)
+npm test             # Vitest unit tests (223 tests)
 npm run test:coverage
 npm run lint
 npx tsc --noEmit

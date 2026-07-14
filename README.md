@@ -25,7 +25,7 @@ PlanEstudio/
 │   ├── Anexos/             ← Copilot Studio, ALM/DevOps, Arquitectura
 │   ├── Recursos/           ← Checklist, Glosario, Certificaciones, Prompts Reutilizables IA
 │   └── javascripts/
-│       └── evaluaciones-simulador.js  ← Banco de 458 preguntas (fuente actual, incluye Nivel IA y Nivel D365)
+│       └── evaluaciones-simulador.js  ← Banco de 488 preguntas (fuente actual, incluye Nivel IA y Nivel D365)
 │
 ├── .github/workflows/ci.yml  ← CI/CD: lint → test → build → deploy + MkDocs
 ├── mkdocs.yml              ← Configuración del sitio MkDocs (referencia/legacy)
@@ -54,6 +54,10 @@ docs/javascripts/evaluaciones-simulador.js  ──build-time──▶  questions
 | Nivel 2 — Intermedio | 9 | PL-200 | 2–3 meses |
 | Nivel 3 — Avanzado | 13 | PL-400 | 3–4 meses |
 | Nivel 4 — Arquitecto | 11 | PL-600 | 4–6 meses |
+| Nivel IA — Desarrollo Asistido *(transversal)* | 14 | Buenas Prácticas | Estudio libre, sin prerequisitos |
+| Nivel D365 — Especialización *(transversal)* | 10 | CE avanzado + F&O Awareness | Estudio libre, sin prerequisitos |
+
+Los niveles IA y D365 son transversales: no bloquean ni son bloqueados por la cadena PL-900 → PL-600.
 
 ---
 
@@ -104,7 +108,7 @@ GitHub Actions ejecuta en cada push a `master`:
 | Job | Qué valida |
 |-----|------------|
 | `lint` | ESLint CLI + TypeScript (`tsc --noEmit`) + validación de contenido (`validate:content`) |
-| `test` | Vitest con cobertura (umbral 80%; 127 tests al último diagnóstico local) |
+| `test` | Vitest con cobertura (umbral 80%; 223 tests al último diagnóstico local) |
 | `e2e` | Playwright smoke: home, niveles, módulo, labs, simulador, búsqueda, dark mode, 404 |
 | `build` | `GITHUB_PAGES=true next build` vía `npm run build:pages` → export estático en `out/` |
 | `mkdocs` | `mkdocs build --strict` (valida nav, links internos) |
@@ -160,7 +164,7 @@ const MODULE_QUESTIONS = {
 ```
 
 Para agregar preguntas:
-1. Localiza la clave del módulo (`1` a `41`).
+1. Localiza la clave del módulo (`1` a `65`).
 2. Agrega el objeto de pregunta siguiendo el esquema exacto.
 3. Verifica que el JS sigue siendo válido: `node -e "const MODULE_QUESTIONS = require('./docs/javascripts/evaluaciones-simulador.js')"` — o abre la consola del navegador y pega el objeto.
 
@@ -170,7 +174,7 @@ Para agregar preguntas:
 
 ## Laboratorios
 
-Los laboratorios oficiales para la app están en `app-elearning/content/labs/` con frontmatter validado. `docs/Labs/` queda como copia legacy/referencia para MkDocs.
+Los laboratorios oficiales para la app están en `app-elearning/content/labs/` con frontmatter validado (60 labs en total). `docs/Labs/` queda como copia legacy/referencia para MkDocs. Muestra parcial:
 
 | Lab | Nivel | Cert |
 |-----|-------|------|
@@ -183,6 +187,11 @@ Los laboratorios oficiales para la app están en `app-elearning/content/labs/` c
 | Lab 22 — Copilot Studio: SSO y Knowledge Sources | N3 | PL-400 |
 | Lab 23 — Plugin C#: Validación Server-Side | N3 | PL-400 |
 | Lab 32 — CoE Starter Kit: Gobernanza del Tenant | N4 | PL-600 |
+
+Otros grupos de labs no listados arriba: 71–80/91–92 (simulaciones job-ready por perfil laboral,
+filtrable en `/labs` o `/portafolio` por perfil), 93–100 (F&O hands-on: Finance, P2P, O2C,
+Inventory, Project Operations, Commerce, Security, Reporting — requieren que el estudiante consiga
+un trial/demo tenant de Dynamics 365 Finance & SCM; ver `docs/Recursos/ROADMAP_ESPECIALIZACION_AVANZADA.md`).
 
 ---
 
