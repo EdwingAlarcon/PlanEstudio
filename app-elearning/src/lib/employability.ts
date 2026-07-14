@@ -68,7 +68,7 @@ export function getEmployabilityHub(): EmployabilityHub {
         links: [
           {
             title: "CRM Functional Specialist",
-            description: "Discovery, fit-gap, configuración funcional, UAT, soporte y evidencia consultiva.",
+            description: "Discovery, fit-gap, backlog en Azure DevOps, configuración funcional, UAT, soporte y evidencia consultiva.",
             href: "/recursos/job-ready-crm-functional",
           },
           {

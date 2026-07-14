@@ -42,12 +42,13 @@ corresponde a cada ruta.
 
 | Competencia | Nivel | Evidencia esperada | Lab / proyecto | Criterio de aprobación |
 |---|---|---|---|---|
-| Levantamiento de requerimientos / workshops | Intermedio | Acta de workshop con decisiones y pendientes | LAB-062 (Capstone Consultor Funcional) | Acta identifica ≥5 requerimientos con dueño y prioridad |
-| Historias de usuario y criterios de aceptación | Intermedio | Backlog "Como... quiero... para..." + Given/When/Then | LAB-062 (Capstone Consultor Funcional) | ≥8 historias, criterios verificables (no ambiguos) |
-| Procesos AS-IS / TO-BE | Intermedio | 2 diagramas de flujo con puntos de fricción marcados | LAB-060 (referencia reutilizable) | TO-BE elimina ≥2 fricciones identificadas en AS-IS |
-| Fit-Gap | Intermedio | Matriz Fit-Gap con decisión (config/personalización/fuera de alcance) | LAB-060 | 100% de requerimientos clasificados, brechas con propuesta |
+| Levantamiento de requerimientos / workshops | Intermedio | Acta de workshop con decisiones y pendientes | LAB-062 (Capstone Consultor Funcional), LAB-101 | Acta identifica ≥5 requerimientos con dueño y prioridad |
+| Historias de usuario y criterios de aceptación | Intermedio | Backlog "Como... quiero... para..." + Given/When/Then | LAB-062 (Capstone Consultor Funcional), LAB-101 | ≥8 historias, criterios verificables (no ambiguos) |
+| Backlog funcional en Azure DevOps (Epics/Features/Historias) | Intermedio-Avanzado | Backlog estructurado y priorizado, exportado o documentado | LAB-101 (JR-013) | ≥10 historias distribuidas en ≥3 Epics, con priorización justificada del primer sprint |
+| Procesos AS-IS / TO-BE | Intermedio | 2 diagramas de flujo con puntos de fricción marcados | LAB-060 (referencia reutilizable), LAB-101 | TO-BE elimina ≥2 fricciones identificadas en AS-IS |
+| Fit-Gap | Intermedio | Matriz Fit-Gap con decisión (config/personalización/fuera de alcance) | LAB-060, LAB-101 | 100% de requerimientos clasificados, brechas con propuesta |
 | Configuración Dataverse/D365 sin código | Intermedio | Entorno configurado + captura de seguridad por rol | LAB-009 | Seguridad de campo y BPF configurados y probados |
-| UAT (casos, ejecución, sign-off) | Intermedio | ≥8 casos UAT con resultado pass/fail | LAB-055, LAB-060 | 100% de casos ejecutados, defectos críticos en 0 |
+| UAT (casos, ejecución, sign-off) | Intermedio | ≥8 casos UAT con resultado pass/fail | LAB-055, LAB-060, LAB-101 | 100% de casos ejecutados, defectos críticos en 0 |
 | Documentación funcional para stakeholders | Intermedio | Documento funcional de 3-5 páginas, lenguaje no técnico | LAB-060 | Un no-técnico puede explicar la solución tras leerlo |
 | Capacitación a usuarios finales | Intermedio | Manual de usuario + agenda de sesión de capacitación | LAB-062 (Capstone Consultor Funcional) | Manual cubre los 3 flujos más usados sin jerga técnica |
 
@@ -84,6 +85,7 @@ requieren tenant/licencia real se controlan con el recurso
 | Field Service (work orders, agreements, mobile offline, scheduling) | Avanzado | Work order end-to-end + agreement preventivo + matriz mobile offline | Módulo 58, LAB-086, LAB-087 | El ciclo de orden de trabajo, mantenimiento preventivo y offline profile quedan validados o simulados con evidencia |
 | Integración con Dataverse (datos compartidos entre apps) | Avanzado | Diagrama de flujo de datos entre Sales/Service/Insights | LAB-060 | Sin duplicación de entidades cliente entre apps |
 | UAT y go-live de un escenario CE completo | Avanzado | 8 casos UAT + checklist de go-live | LAB-060 | 100% de casos ejecutados, checklist sin pendientes críticos |
+| Caso funcional integrado multi-proceso (admisión, servicio, retención, cobranza) | Avanzado | Backlog Azure DevOps + modelo de datos + diseño de servicio + Power Automate + matriz de trazabilidad requerimiento→historia→configuración→prueba | LAB-101 (JR-013) | Los 4 procesos quedan conectados en un solo caso con 10 casos UAT y ≥3 defectos registrados |
 
 ## Finance & Operations Consultant / Architect Awareness
 
