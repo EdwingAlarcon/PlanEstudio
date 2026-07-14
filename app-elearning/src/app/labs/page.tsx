@@ -17,7 +17,7 @@ const LEVEL_CONFIG: Record<string, { label: string; bar: string; accent: string 
   N3: { label: "Nivel 3 — Avanzado",    bar: "bg-orange-500", accent: "#EA580C" },
   N4: { label: "Nivel 4 — Arquitecto",  bar: "bg-[#D13438]",  accent: "#D13438" },
   N5: { label: "Nivel IA — Desarrollo Asistido", bar: "bg-purple-600", accent: "#9333EA" },
-  N6: { label: "Nivel D365 — Dynamics 365 Enterprise Apps", bar: "bg-teal-600", accent: "#0D9488" },
+  N6: { label: "Nivel D365 — Dynamics 365 Especialización", bar: "bg-teal-600", accent: "#0D9488" },
 };
 
 const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365" | "default"> = {
@@ -29,8 +29,10 @@ const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arqui
   "Buenas Prácticas": "ia",
   "Especialista Dynamics 365 CE": "d365",
   "D365 CE avanzado + F&O awareness": "d365",
-  "D365 Enterprise Apps": "d365",
-  "D365 Enterprise Apps Portfolio": "d365",
+  "CE avanzado + F&O Awareness": "d365",
+  "D365 Especialización": "d365",
+  "D365 Especialización Integration": "d365",
+  "D365 Especialización Portfolio": "d365",
 };
 
 const FEATURED_ARTIFACTS = [

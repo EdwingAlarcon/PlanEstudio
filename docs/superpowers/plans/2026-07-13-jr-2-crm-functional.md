@@ -86,8 +86,8 @@ Esta ruta debe evitar prácticas legacy como centro del aprendizaje. El enfoque 
 | Entitlements | Parcial | Módulo 20, LAB-068 parcial | Política de cobertura por cliente | Hacerlo obligatorio en JR-007 |
 | Knowledge base | Parcial | Módulos 20, 22; LAB-068 parcial | Artículos y búsqueda | Hacerlo obligatorio en JR-007 |
 | Dynamics 365 Sales | Cubierto | Módulos 20, 56; LAB-066 | Lead-to-cash y fit-gap | Profundizar forecasting/territories en roadmap |
-| Customer Insights / Customer 360 | Parcial | Módulo 57, LAB-067 | Perfil unificado / Customer 360 | Mantener como especialización |
-| Field Service awareness | Parcial | Módulo 58, LAB-059 | Work order y UAT | Mantener como especialización |
+| Customer Insights / Customer 360 | Cubierto | Módulos 57, 63; LAB-084, LAB-085, LAB-067 | Perfil unificado, consentimiento y real-time journey | Mantener como ruta específica Customer Insights |
+| Field Service awareness | Cubierto | Módulo 58; LAB-086, LAB-087, LAB-059 | Work order, agreement preventivo, mobile offline y UAT | Mantener como ruta específica Field Service |
 | Reporting y dashboards | Parcial | Módulos 6, 12, 20; LAB-068 | Dashboard operativo | Falta escenario funcional más fuerte |
 | Fit-gap | Cubierto | Módulos 20, 38, 55; LAB-057, LAB-062 | Matriz fit-gap | Conectar con entrevista funcional |
 | UAT | Cubierto | Módulos 38, 55; LAB-055, LAB-062 | Casos UAT y sign-off | Conectar con soporte post-go-live |
@@ -99,7 +99,7 @@ Esta ruta debe evitar prácticas legacy como centro del aprendizaje. El enfoque 
 2. **Customer Engagement base:** Módulos 20 y 56 para Sales, Customer Service y entidades estándar.
 3. **Customer Service hands-on:** LAB-068 para casos, colas, SLA, dashboard y ciclo case-to-resolution.
 4. **Sales hands-on:** LAB-066 y LAB-057 para lead-to-cash, entidades estándar y fit-gap.
-5. **Especializaciones CE:** LAB-058, LAB-067 y LAB-059 para Customer Insights y Field Service awareness.
+5. **Especializaciones CE:** LAB-084, LAB-085, LAB-086 y LAB-087 para Customer Insights y Field Service avanzado.
 6. **Consultoría funcional:** Módulos 38 y 55, LAB-055 y LAB-062 para UAT, documentación, training, fit-gap y go-live.
 
 ## Mapeo a contenido actual
@@ -498,4 +498,3 @@ Report:
 - Validation commands and results.
 - MkDocs result or local limitation.
 - Microsoft docs consulted for current functional CRM guidance.
-

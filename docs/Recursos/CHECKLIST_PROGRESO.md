@@ -1159,12 +1159,12 @@
 
 ---
 
-### 🏆 Hitos de Nivel Dynamics 365 Enterprise Apps
+### 🏆 Hitos de Nivel Dynamics 365 Especialización
 
 - [ ] Módulos 56-65 completados con 80%+ de checkboxes marcados | Fecha: ___
 - [ ] D365 Tenant Readiness completado para cada lab presentado como Sandbox real o Productivo controlado | Fecha: ___
 - [ ] Autoevaluación promedio ≥ 4.0/5 | Promedio: ___/5
-- [ ] Certificado del Nivel Dynamics 365 Enterprise Apps generado | Fecha: ___
+- [ ] Certificado del Nivel Dynamics 365 Especialización generado | Fecha: ___
 
 **Fecha de inicio Nivel D365:** ___ | **Fecha de completación:** ___
 
@@ -1180,7 +1180,7 @@
 | 🟠 Nivel 3 - Avanzado | 13 | 139 | ___ | ___% | ___/5 | ___ |
 | 🔴 Nivel 4 - Arquitecto | 11 | 104 | ___ | ___% | ___/5 | ___ |
 | 🟣 Nivel IA - Desarrollo Asistido | 14 | 63 | ___ | ___% | ___/5 | ___ |
-| 🔷 Nivel D365 - Dynamics 365 Enterprise Apps | 10 | 55 | ___ | ___% | ___/5 | ___ |
+| 🔷 Nivel D365 - Dynamics 365 Especialización | 10 | 55 | ___ | ___% | ___/5 | ___ |
 | **TOTAL** | **65** | **602** | ___ | ___% | ___/5 | ___ |
 
 ### Resumen por Módulo

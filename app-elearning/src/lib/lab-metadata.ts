@@ -32,17 +32,17 @@ const DIFFICULTY_LABELS: Record<string, string> = {
 };
 
 const ROUTE_LABEL_FALLBACKS: Record<string, string> = {
-  "lab-58-customer-insights-segmento-journey": "Ruta Dynamics 365 Customer Engagement",
+  "lab-58-customer-insights-segmento-journey": "Ruta Dynamics 365 Customer Insights",
   "lab-59-field-service-work-order-uat": "Ruta Dynamics 365 Customer Engagement",
   "lab-66-sales-lead-to-cash": "Ruta Dynamics 365 Customer Engagement",
-  "lab-67-customer-360-insights-data": "Ruta Dynamics 365 Customer Engagement",
+  "lab-67-customer-360-insights-data": "Ruta Dynamics 365 Customer Insights",
   "lab-81-d365-sales-forecasting-pipeline-review": "Ruta Dynamics 365 Customer Engagement",
   "lab-82-customer-service-sla-entitlements-routing": "Ruta Dynamics 365 Customer Engagement",
   "lab-83-contact-center-simulation": "Ruta Dynamics 365 Customer Engagement",
-  "lab-84-customer-insights-real-time-journey": "Ruta Dynamics 365 Customer Engagement",
-  "lab-85-customer-insights-data-unification": "Ruta Dynamics 365 Customer Engagement",
-  "lab-86-field-service-agreement-preventive-maintenance": "Ruta Dynamics 365 Customer Engagement",
-  "lab-87-field-service-mobile-offline-work-order": "Ruta Dynamics 365 Customer Engagement",
+  "lab-84-customer-insights-real-time-journey": "Ruta Dynamics 365 Customer Insights",
+  "lab-85-customer-insights-data-unification": "Ruta Dynamics 365 Customer Insights",
+  "lab-86-field-service-agreement-preventive-maintenance": "Ruta Dynamics 365 Field Service",
+  "lab-87-field-service-mobile-offline-work-order": "Ruta Dynamics 365 Field Service",
   "lab-88-ce-fo-dual-write-ownership-matrix": "Ruta Finance & Operations",
   "lab-89-fo-process-mapping-advanced": "Ruta Finance & Operations",
   "lab-90-capstone-enterprise-d365": "Ruta Dynamics 365 Customer Engagement",
@@ -130,7 +130,7 @@ function getRoutesForLab(lab: LabInfo): string[] {
     .filter((route) => route.labs.includes(lab.slug) || route.capstoneLabSlug === lab.slug)
     .map((route) => route.title);
 
-  if (routes.length > 0) return routes;
+  if (routes.length > 0) return [...new Set(routes)].slice(0, 3);
   const fallbackRoute = ROUTE_LABEL_FALLBACKS[lab.slug];
   if (fallbackRoute) return [fallbackRoute];
   return ["Ruta general"];

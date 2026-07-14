@@ -366,7 +366,7 @@ módulos 8, 17, 30 y 41. El Capstone AI & Copilot (LAB-065, ver [Matriz de
 Competencias](MATRIZ_COMPETENCIAS.md)) sigue siendo distinto y complementario: cierra la ruta
 profesional transversal AI & Copilot, no el nivel IA completo.
 
-**Nota sobre el Nivel Dynamics 365 Enterprise Apps:** a diferencia de los 5 niveles anteriores, este
+**Nota sobre el Nivel Dynamics 365 Especialización:** a diferencia de los 5 niveles anteriores, este
 nivel transversal (Módulos 56-65) sí cuenta con un capstone enterprise (LAB-090) y labs avanzados por dominio — sus módulos son
 de vocabulario y arquitectura (Customer Engagement como ecosistema, Customer Insights - Data,
 Field Service avanzado, Finance & Operations), y la práctica evaluable vive en los capstones de

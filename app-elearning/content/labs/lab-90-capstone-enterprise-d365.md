@@ -4,7 +4,7 @@ title: "Capstone Enterprise D365"
 level: "N6"
 duration: 240
 product: ["Dynamics 365 Sales", "Dynamics 365 Customer Service", "Dynamics 365 Contact Center", "Dynamics 365 Customer Insights", "Dynamics 365 Field Service", "Dynamics 365 Finance"]
-certifications: ["D365 Enterprise Apps Portfolio"]
+certifications: ["D365 Especialización Portfolio"]
 role: ["Solution Architect", "Consultor Funcional D365 CE"]
 prerequisites:
   - "Módulo 65 estudiado: Capstone Enterprise D365"
@@ -78,6 +78,6 @@ Diseña 10 casos UAT y una lista de evidencias para entrevista laboral.
 
 ## Competencias desarrolladas
 
-- Arquitectura D365 Enterprise Apps.
+- Arquitectura D365 Especialización.
 - Consultoría funcional avanzada.
 - Portafolio profesional defendible.

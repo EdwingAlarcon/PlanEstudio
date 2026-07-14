@@ -4,7 +4,7 @@ title: "CE + F&O Dual-write Ownership Matrix"
 level: "N6"
 duration: 150
 product: ["Dynamics 365 Finance", "Dynamics 365 Supply Chain Management", "Dataverse"]
-certifications: ["D365 Enterprise Apps Integration"]
+certifications: ["D365 Especialización Integration"]
 role: ["Solution Architect", "Integration Consultant"]
 prerequisites:
   - "Módulo 64 estudiado: Integración CE + Finance & Operations"

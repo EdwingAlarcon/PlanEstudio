@@ -121,8 +121,8 @@ La brecha principal no es falta total de contenido, sino falta de una capa expli
 | Entitlements | Customer Service Specialist | Intermedio | Parcial | Modulo 20 | LAB-068 parcial | Politica de cobertura por cliente | Para que sirven los entitlements en Customer Service? | Hacerlos obligatorios en JR-007 | Media-Alta |
 | Knowledge base | Customer Service Specialist | Intermedio | Parcial | Modulos 20, 22 | LAB-068 parcial | Articulos y uso en resolucion | Como conectas knowledge articles al soporte de agentes? | Ampliar JR-007 con KB y busqueda | Media-Alta |
 | Dynamics 365 Sales | CE Consultant | Intermedio-Avanzado | Cubierto | Modulos 20, 56 | LAB-066, LAB-057 | Proceso lead-to-cash y fit-gap | Como evitas personalizar Sales antes de usar entidades estandar? | Mantener como evidencia CE | Alta |
-| Customer Insights - Journeys/Data | CE Consultant / Data Specialist | Intermedio | Parcial | Modulo 57 | LAB-058, LAB-067 | Segmento, journey o customer 360 | Diferencia entre Customer Insights Data y Journeys? | Separar mejor Data vs Journeys en ruta laboral | Media |
-| Field Service | CE Consultant | Intermedio | Parcial | Modulo 58 | LAB-059 | Work order, scheduling y UAT | Que elementos minimos necesita una orden de trabajo? | Mantener como especializacion CE | Media |
+| Customer Insights - Data/Journeys | CE Consultant / Data Specialist | Avanzado | Cubierto | Modulos 57, 63 | LAB-084, LAB-085, LAB-067 | Customer 360 + real-time journey con consentimiento | Diferencia entre Customer Insights Data y Journeys? | Mantener como ruta especifica Customer Insights | Alta |
+| Field Service | CE Consultant | Avanzado | Cubierto | Modulo 58 | LAB-086, LAB-087, LAB-059 | Work order end-to-end, agreement, mobile offline y scheduling | Que elementos minimos necesita una orden de trabajo? | Mantener como ruta especifica Field Service | Alta |
 | Reporting / dashboards | Functional Consultant | Intermedio | Parcial | Modulos 6, 12, 20 | LAB-068 | Dashboard operativo | Que KPIs usarias para medir soporte al cliente? | Agregar dashboards como evidencia transversal | Media-Alta |
 | UAT y soporte funcional | Functional Consultant | Intermedio | Cubierto | Modulos 38, 55 | LAB-055, LAB-062 | Casos UAT y sign-off | Como manejas un defecto critico encontrado en UAT? | Conectar con Interview Readiness | Alta |
 
@@ -589,4 +589,3 @@ Report:
 - Files changed.
 - Validation commands and results.
 - Any validation not run or any unrelated failure.
-

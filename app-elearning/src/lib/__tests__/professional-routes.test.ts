@@ -3,13 +3,15 @@ import { getAllLabs, getAllModules } from "../content";
 import { getAllProfessionalRoutes, getProfessionalRouteBySlug } from "../professional-routes";
 
 describe("professional routes", () => {
-  it("defines the seven academy routes requested for Sprint 2", () => {
+  it("defines the academy routes including D365 specializations", () => {
     expect(getAllProfessionalRoutes().map((route) => route.slug)).toEqual([
       "maker",
       "consultor-funcional",
       "developer",
       "solution-architect",
       "dynamics-365-customer-engagement",
+      "dynamics-365-customer-insights",
+      "dynamics-365-field-service",
       "finance-operations",
       "ai-copilot",
     ]);

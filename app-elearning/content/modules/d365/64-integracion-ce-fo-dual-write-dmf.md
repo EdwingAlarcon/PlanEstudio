@@ -2,7 +2,7 @@
 moduleId: 64
 title: "Integración CE + Finance & Operations — Dual-write, DMF y Ownership"
 level: "d365"
-certification: "D365 Enterprise Apps Integration"
+certification: "D365 Especialización Integration"
 estimatedMinutes: 14
 slug: "integracion-ce-fo-dual-write-dmf"
 ---
@@ -49,4 +49,3 @@ Un cliente activó sincronización de clientes sin decidir si el dueño era Sale
 - [ ] Elegí patrón de integración con criterio explícito
 - [ ] Diseñé monitoreo, reconciliación y rollback
 - [ ] Identifiqué dependencias de ambiente real para dual-write
-

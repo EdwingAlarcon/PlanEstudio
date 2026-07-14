@@ -4,6 +4,8 @@ export type ProfessionalRouteSlug =
   | "developer"
   | "solution-architect"
   | "dynamics-365-customer-engagement"
+  | "dynamics-365-customer-insights"
+  | "dynamics-365-field-service"
   | "finance-operations"
   | "ai-copilot";
 
@@ -189,6 +191,61 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "Capstone Enterprise D365 con Fit-Gap, ownership, roadmap, UAT y resumen ejecutivo",
     ],
     nextRouteSlug: "solution-architect",
+  },
+  {
+    slug: "dynamics-365-customer-insights",
+    title: "Ruta Dynamics 365 Customer Insights",
+    role: "Consultor que diseña Customer 360, segmentación y journeys gobernados",
+    summary: "Separa Customer Insights - Data y Customer Insights - Journeys para construir perfiles unificados, consentimiento, triggers y activación de audiencias sin mezclar CDP con ejecución de marketing.",
+    outcome: "Diseñar un flujo Customer 360 + real-time journey con datos unificados, consentimiento, canal, métricas y límites claros de tenant/licencia.",
+    level: "Especialización",
+    accent: "#0D9488",
+    modules: [20, 56, 57, 63, 65],
+    labs: [
+      "lab-58-customer-insights-segmento-journey",
+      "lab-67-customer-360-insights-data",
+      "lab-84-customer-insights-real-time-journey",
+      "lab-85-customer-insights-data-unification",
+      "lab-90-capstone-enterprise-d365",
+    ],
+    competencies: ["Customer Insights - Data", "Customer Insights - Journeys", "Consentimiento", "Segmentos", "Triggers", "Analytics"],
+    status: "Disponible",
+    gapNote: "La ejecución real requiere Customer Insights habilitado, canales/dominios configurados, datos de prueba y permisos. Sin tenant, la ruta se evalúa con diseño documentado, matriz de consentimiento y simulación de journey.",
+    capstoneLabSlug: "lab-90-capstone-enterprise-d365",
+    portfolioEvidence: [
+      "Mapa de fuentes y reglas de unificación de Customer Insights - Data",
+      "Segmentos y medidas con fórmula o criterio de negocio documentado",
+      "Diseño de real-time journey con trigger, consentimiento, canal, salida y métricas",
+      "Prueba negativa de consentimiento o exclusión de audiencia",
+    ],
+    nextRouteSlug: "dynamics-365-customer-engagement",
+  },
+  {
+    slug: "dynamics-365-field-service",
+    title: "Ruta Dynamics 365 Field Service",
+    role: "Consultor CE especializado en operación de campo y ciclo de work orders",
+    summary: "Profundiza en work orders, agreements, activos, inspecciones, inventario, mobile offline, scheduling y RSO desde una perspectiva end-to-end.",
+    outcome: "Diseñar y validar un proceso Field Service completo con mantenimiento preventivo, ciclo de orden de trabajo, movilidad y criterios operativos.",
+    level: "Especialización",
+    accent: "#107C10",
+    modules: [20, 56, 58, 65],
+    labs: [
+      "lab-59-field-service-work-order-uat",
+      "lab-86-field-service-agreement-preventive-maintenance",
+      "lab-87-field-service-mobile-offline-work-order",
+      "lab-90-capstone-enterprise-d365",
+    ],
+    competencies: ["Work Orders", "Agreements", "Assets", "Inspections", "Mobile Offline", "Scheduling", "RSO"],
+    status: "Disponible",
+    gapNote: "La ejecución real requiere Dynamics 365 Field Service instalado, roles adecuados, recursos configurados y, para RSO/mobile offline, licenciamiento y configuración adicional. Sin tenant, se evalúa con matriz de diseño y simulación del ciclo.",
+    capstoneLabSlug: "lab-90-capstone-enterprise-d365",
+    portfolioEvidence: [
+      "Diseño end-to-end de work order lifecycle",
+      "Agreement de mantenimiento preventivo con recurrencia y evidencia esperada",
+      "Matriz de mobile offline por perfil, tabla y conflicto",
+      "Criterios de scheduling/RSO y restricciones operativas",
+    ],
+    nextRouteSlug: "dynamics-365-customer-engagement",
   },
   {
     slug: "finance-operations",

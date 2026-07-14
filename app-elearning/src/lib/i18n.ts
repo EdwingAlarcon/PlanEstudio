@@ -38,7 +38,7 @@ export const UI = {
     avanzado: "Avanzado",
     arquitecto: "Arquitecto",
     ia: "Desarrollo Asistido por IA",
-    d365: "Dynamics 365 Enterprise Apps",
+    d365: "Dynamics 365 Especialización",
     badge: {
       basico: "🟢 Nivel 1",
       intermedio: "🔵 Nivel 2",
@@ -53,7 +53,7 @@ export const UI = {
       avanzado: "PL-400",
       arquitecto: "Arquitectura Power Platform",
       ia: "Buenas Prácticas",
-      d365: "D365 CE avanzado + F&O awareness",
+      d365: "CE avanzado + F&O Awareness",
     },
     navCert: {
       basico: "PL-900",
@@ -69,7 +69,7 @@ export const UI = {
       avanzado: "Arquitectura, ALM, D365, Copilot Studio y extensibilidad",
       arquitecto: "Gobernanza enterprise, multi-tenant, Azure integrations y liderazgo",
       ia: "Copilot, GitHub Copilot, Claude Code y Codex aplicados de forma segura y auditable al desarrollo, conexión al tenant, Dataverse, ALM y consultoría funcional en Power Platform y D365",
-      d365: "Especialización práctica en Dynamics 365 Customer Engagement: Sales, Customer Service, Contact Center, Customer Insights, Field Service e integración CE + Finance & Operations",
+      d365: "Especialización práctica en Dynamics 365: Customer Engagement avanzado, Customer Insights, Field Service, integración CE + F&O y awareness avanzado de Finance & Operations",
     },
     modules: {
       basico: 8,

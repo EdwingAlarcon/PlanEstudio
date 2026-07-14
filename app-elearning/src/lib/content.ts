@@ -116,9 +116,9 @@ const LEVEL_META: Record<LevelId, { title: string; description: string; certific
     certification: "Buenas Prácticas",
   },
   d365: {
-    title: "Dynamics 365 Enterprise Apps",
-    description: "Especialización práctica en Dynamics 365 Customer Engagement: Sales, Customer Service, Contact Center, Customer Insights, Field Service e integración CE + Finance & Operations",
-    certification: "D365 CE avanzado + F&O awareness",
+    title: "Dynamics 365 Especialización — CE avanzado + F&O Awareness",
+    description: "Especialización práctica en Dynamics 365: Customer Engagement avanzado, Customer Insights, Field Service, integración CE + F&O y awareness avanzado de Finance & Operations",
+    certification: "CE avanzado + F&O Awareness",
   },
 };
 

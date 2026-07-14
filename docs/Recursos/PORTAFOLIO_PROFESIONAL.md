@@ -87,7 +87,7 @@ competencia de tu ruta. Tu portafolio no necesita cubrir las 7 rutas — necesit
 tuya. Si tu ruta es Developer, un portafolio con 3 proyectos técnicos sólidos vale más que uno con
 7 proyectos superficiales de todas las rutas.
 
-## Especialización Dynamics 365 Enterprise Apps en el portafolio
+## Especialización Dynamics 365 CE avanzado + F&O Awareness en el portafolio
 
 La ruta Dynamics 365 Customer Engagement y la ruta Finance & Operations ya pueden producir un
 portafolio enterprise usando el **LAB-090 — Capstone Enterprise D365**. Guarda como mínimo:

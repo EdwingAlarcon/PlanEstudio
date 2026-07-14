@@ -1,10 +1,10 @@
-# 🔷 NIVEL 6: DYNAMICS 365 ENTERPRISE APPS
+# 🔷 NIVEL 6: DYNAMICS 365 ESPECIALIZACIÓN — CE AVANZADO + F&O AWARENESS
 
 > Contenido oficial para la app en `app-elearning/content/modules/d365/`. Este archivo es un
 > stub legacy requerido por `content.ts` (mismo patrón que los otros 5 niveles) y no se
 > renderiza en la app Next.js — ver `CLAUDE.md` para el porqué.
 
-Nivel transversal de profundización en Dynamics 365 Enterprise Apps: Sales avanzado,
+Nivel transversal de profundización en Dynamics 365: CE avanzado + F&O Awareness. Incluye Sales avanzado,
 Customer Service avanzado, Contact Center/Omnichannel, Customer Insights - Data,
 Customer Insights - Journeys, Field Service end-to-end, Finance & Operations awareness,
 integración CE + F&O y capstone enterprise. No es prerequisito de los niveles PL-900 →

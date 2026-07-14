@@ -2,7 +2,7 @@
 moduleId: 65
 title: "Capstone Enterprise D365 — Arquitectura CE, Contact Center, Field Service e Integración F&O"
 level: "d365"
-certification: "D365 Enterprise Apps Portfolio"
+certification: "D365 Especialización Portfolio"
 estimatedMinutes: 14
 slug: "capstone-enterprise-d365"
 ---
@@ -50,4 +50,3 @@ Una organización quiso implementar Sales, Service, Field Service e integración
 - [ ] Construí matrices Fit-Gap y ownership de datos
 - [ ] Definí roadmap por fases con dependencias de licencia/tenant
 - [ ] Preparé evidencias de portafolio defendibles en entrevista
-

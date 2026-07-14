@@ -84,8 +84,8 @@ La brecha principal no es falta total de contenido, sino falta de una capa expl�
 | Entitlements | Customer Service Specialist | Intermedio | Parcial | Módulo 20 | LAB-068 parcial | Política de cobertura por cliente | ¿Para qué sirven los entitlements en Customer Service? | Hacerlos obligatorios en JR-007 | Media-Alta |
 | Knowledge base | Customer Service Specialist | Intermedio | Parcial | Módulos 20, 22 | LAB-068 parcial | Artículos y uso en resolución | ¿Cómo conectas knowledge articles al soporte de agentes? | Ampliar JR-007 con KB y búsqueda | Media-Alta |
 | Dynamics 365 Sales | CE Consultant | Intermedio-Avanzado | Cubierto | Módulos 20, 56 | LAB-066, LAB-057 | Proceso lead-to-cash y fit-gap | ¿Cómo evitas personalizar Sales antes de usar entidades estándar? | Mantener como evidencia CE | Alta |
-| Customer Insights - Journeys/Data | CE Consultant / Data Specialist | Intermedio | Parcial | Módulo 57 | LAB-058, LAB-067 | Segmento, journey o customer 360 | ¿Diferencia entre Customer Insights Data y Journeys? | Separar mejor Data vs Journeys en ruta laboral | Media |
-| Field Service | CE Consultant | Intermedio | Parcial | Módulo 58 | LAB-059 | Work order, scheduling y UAT | ¿Qué elementos mínimos necesita una orden de trabajo? | Mantener como especialización CE | Media |
+| Customer Insights - Data/Journeys | CE Consultant / Data Specialist | Avanzado | Cubierto | Módulos 57, 63 | LAB-084, LAB-085, LAB-067 | Customer 360 + real-time journey con consentimiento | ¿Diferencia entre Customer Insights Data y Journeys? | Mantener como ruta específica Customer Insights | Alta |
+| Field Service | CE Consultant | Avanzado | Cubierto | Módulo 58 | LAB-086, LAB-087, LAB-059 | Work order end-to-end, agreement, mobile offline y scheduling | ¿Qué elementos mínimos necesita una orden de trabajo? | Mantener como ruta específica Field Service | Alta |
 | Reporting / dashboards | Functional Consultant | Intermedio | Parcial | Módulos 6, 12, 20 | LAB-068 | Dashboard operativo | ¿Qué KPIs usarías para medir soporte al cliente? | Agregar dashboards como evidencia transversal | Media-Alta |
 | UAT y soporte funcional | Functional Consultant | Intermedio | Cubierto | Módulos 38, 55 | LAB-055, LAB-062 | Casos UAT y sign-off | ¿Cómo manejas un defecto crítico encontrado en UAT? | Conectar con Interview Readiness | Alta |
 
@@ -180,7 +180,7 @@ Recurso detallado: [Ruta Job-Ready Dynamics 365 CRM Functional Specialist](JOB_R
 - **Perfil laboral objetivo:** CRM Specialist, Dynamics 365 CE Functional Consultant, Customer Service Specialist.
 - **Skills cubiertos:** formularios, vistas, tablas, BPF, workflows/procesos, casos, colas, SLA, entitlements, KB, dashboards, UAT.
 - **Módulos reutilizados:** 4, 9, 20, 38, 55, 56, 57, 58.
-- **Labs reutilizados:** LAB-057, LAB-058, LAB-059, LAB-066, LAB-067, LAB-068.
+- **Labs reutilizados:** LAB-057, LAB-058, LAB-059, LAB-066, LAB-067, LAB-068, LAB-081 a LAB-090.
 - **Nuevos labs recomendados:** JR-007.
 - **Evidencia esperada:** configuración case-to-resolution, dashboard, matriz UAT, manual funcional.
 - **Preguntas de entrevista:** cómo configuras un SLA, cómo haces fit-gap, cómo das soporte funcional a usuarios.

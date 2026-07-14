@@ -43,8 +43,10 @@ const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arqui
   "Buenas Prácticas": "ia",
   "Especialista Dynamics 365 CE": "d365",
   "D365 CE avanzado + F&O awareness": "d365",
-  "D365 Enterprise Apps": "d365",
-  "D365 Enterprise Apps Portfolio": "d365",
+  "CE avanzado + F&O Awareness": "d365",
+  "D365 Especialización": "d365",
+  "D365 Especialización Integration": "d365",
+  "D365 Especialización Portfolio": "d365",
 };
 
 export default async function LabDetailPage({ params }: Props) {
@@ -90,7 +92,7 @@ export default async function LabDetailPage({ params }: Props) {
                 </div>
                 <h1 className="text-xl font-bold leading-snug text-foreground">{lab.title}</h1>
                 <p className="text-xs text-muted-foreground mt-0.5">
-                  {meta.recommendedLevel} · {meta.routes.join(" / ")}
+                  {meta.recommendedLevel} · {meta.routes.slice(0, 3).join(" / ")}
                 </p>
               </div>
             </div>

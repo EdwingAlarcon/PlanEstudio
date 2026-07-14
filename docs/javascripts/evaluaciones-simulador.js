@@ -5,7 +5,7 @@
     if (moduleId <= 30) return "PL-400";
     if (moduleId <= 41) return "Arquitectura Power Platform";
     if (moduleId <= 55) return "Buenas Prácticas IA";
-    return "D365 Enterprise Apps";
+    return "D365 Especialización";
   }
 
   function levelForModule(moduleId) {
@@ -14,7 +14,7 @@
     if (moduleId <= 30) return "Avanzado";
     if (moduleId <= 41) return "Arquitecto";
     if (moduleId <= 55) return "Desarrollo Asistido por IA";
-    return "Dynamics 365 Enterprise Apps";
+    return "Dynamics 365 Especialización";
   }
 
   const moduleTitles = [
