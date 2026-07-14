@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { getAllLabs, getLabBySlug } from "../content";
+import { getAllLabs, getAllLevels, getLabBySlug } from "../content";
 import { getLabDomains, getLabPresentationMeta } from "../lab-metadata";
+
+const RETIRED_CERTIFICATIONS = new Set(["PL-600", "MB-210", "MB-220", "MB-240", "MB-260", "MB-300"]);
 
 describe("lab presentation metadata", () => {
   it("identifica capstones y conserva la ruta profesional asociada", () => {
@@ -25,9 +27,8 @@ describe("lab presentation metadata", () => {
     expect(meta.kind).toBe("Laboratorio");
     expect(meta.kindLabel).toBe("Laboratorio práctico");
     expect(meta.routes).toContain("Ruta Dynamics 365 Customer Engagement");
-    expect(meta.certificationBadges).toContain("Competencia Sales");
+    expect(meta.certificationBadges).toContain("Dynamics 365 Sales");
     expect(meta.certificationBadges).not.toContain("MB-210");
-    expect(meta.historicalCertifications).toContain("MB-210");
     expect(meta.evidenceSummary).toContain("Captura");
     expect(meta.competencies.join(" ")).toContain("lead-to-cash");
   });
@@ -44,15 +45,44 @@ describe("lab presentation metadata", () => {
   });
 
   it("no expone certificaciones retiradas como badges principales", () => {
-    const retired = new Set(["MB-210", "MB-220", "MB-240", "MB-300"]);
-    const salesLab = getLabBySlug("lab-66-sales-lead-to-cash");
-    const consultorCapstone = getLabBySlug("lab-62-capstone-consultor-funcional-proyecto-completo");
+    const slugs = [
+      "lab-66-sales-lead-to-cash",
+      "lab-62-capstone-consultor-funcional-proyecto-completo",
+      "lab-74-jr-004-crm-integration-challenge",
+      "lab-75-jr-005-data-migration-dynamics",
+      "lab-76-jr-006-ppac-governance-assessment",
+      "lab-78-jr-008-crm-legacy-health-assessment",
+      "lab-79-jr-009-technical-interview-simulation",
+      "lab-67-customer-360-insights-data",
+      "lab-86-field-service-agreement-preventive-maintenance",
+      "lab-87-field-service-mobile-offline-work-order",
+    ];
 
-    for (const lab of [salesLab, consultorCapstone]) {
-      expect(lab).toBeDefined();
+    for (const slug of slugs) {
+      const lab = getLabBySlug(slug);
+      expect(lab, slug).toBeDefined();
+      // El frontmatter ya usa la etiqueta de competencia (skill path), no el código de examen retirado.
+      expect(lab!.certifications.some((cert) => RETIRED_CERTIFICATIONS.has(cert)), slug).toBe(false);
       const meta = getLabPresentationMeta(lab!);
-      expect(meta.certificationBadges.some((cert) => retired.has(cert))).toBe(false);
-      expect(meta.historicalCertifications).toContain("MB-210");
+      expect(meta.certificationBadges.some((cert) => RETIRED_CERTIFICATIONS.has(cert)), slug).toBe(false);
+    }
+  });
+
+  it("ningún lab expone un código de examen/certificación retirado en su frontmatter", () => {
+    for (const lab of getAllLabs()) {
+      expect(
+        lab.certifications.some((cert) => RETIRED_CERTIFICATIONS.has(cert)),
+        `${lab.slug}: ${lab.certifications.join(", ")}`
+      ).toBe(false);
+    }
+  });
+
+  it("ningún nivel expone un código de examen/certificación retirado como certificación principal", () => {
+    for (const level of getAllLevels()) {
+      expect(
+        RETIRED_CERTIFICATIONS.has(level.certification),
+        `${level.id}: ${level.certification}`
+      ).toBe(false);
     }
   });
 });

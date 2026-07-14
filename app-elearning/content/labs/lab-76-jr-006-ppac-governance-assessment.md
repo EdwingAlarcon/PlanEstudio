@@ -4,7 +4,7 @@ title: "JR-006 — PPAC Governance Assessment"
 level: "N4"
 duration: 240
 product: ["Power Platform Admin Center", "Dataverse", "Governance"]
-certifications: ["PL-600", "Arquitectura Power Platform"]
+certifications: ["Governance", "Arquitectura Power Platform"]
 role: ["Power Platform Admin", "Governance Specialist", "Solution Architect"]
 prerequisites:
   - "Módulo 31 estudiado: Enterprise Architecture y Gobernanza"

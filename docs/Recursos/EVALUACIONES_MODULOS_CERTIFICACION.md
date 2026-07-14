@@ -674,7 +674,7 @@
 
 ---
 
-## 🔴 Nivel 4 — Arquitecto (Módulos 31–41) — PL-600
+## 🔴 Nivel 4 — Arquitecto (Módulos 31–41) — Arquitectura Power Platform (PL-600 retirado)
 
 ### Módulo 31: Fundamentos de Arquitectura Empresarial
 

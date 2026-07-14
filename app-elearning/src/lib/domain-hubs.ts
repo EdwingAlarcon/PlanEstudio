@@ -37,7 +37,7 @@ export function getPowerPlatformHub(): DomainHub {
       { label: "Fundamentos", description: "Ecosistema, Dataverse básico y Power Fx antes de construir." },
       { label: "Construir", description: "Canvas, Model-Driven, Power Automate y Power Pages." },
       { label: "Administrar y extender", description: "ALM, gobernanza, CoE, JavaScript, PCF y plugins." },
-      { label: "Arquitectura", description: "Diseño de soluciones enterprise y preparación PL-600." },
+      { label: "Arquitectura", description: "Diseño de soluciones enterprise y skill path Solution Architect." },
     ],
     sections: [
       {
@@ -122,12 +122,12 @@ export function getPowerPlatformHub(): DomainHub {
       },
       {
         title: "Architect",
-        description: "Diseño de soluciones enterprise y preparación PL-600.",
+        description: "Diseño de soluciones enterprise y competencias Solution Architect.",
         links: [
           { title: "Arquitectura de soluciones Power Platform", description: "Módulo 18.", href: "/nivel/avanzado/modulo/arquitectura-de-soluciones-power-platform" },
           { title: "Enterprise Architecture y Gobernanza", description: "Módulo 31.", href: "/nivel/arquitecto/modulo/enterprise-architecture-y-gobernanza" },
           { title: "Multi-tenant, multi-geo y ambientes", description: "Módulo 33.", href: "/nivel/arquitecto/modulo/multi-tenant-multi-geo-y-estrategia-de-ambientes" },
-          { title: "Arquitectura Power Platform — Casos de estudio", description: "Módulo 40, preparación PL-600.", href: "/nivel/arquitecto/modulo/preparacion-pl-600" },
+          { title: "Arquitectura Power Platform — Casos de estudio", description: "Módulo 40, referencia histórica PL-600 como skill path.", href: "/nivel/arquitecto/modulo/preparacion-pl-600" },
           { title: "Proyecto Capstone — Arquitectura Enterprise", description: "Módulo 41.", href: "/nivel/arquitecto/modulo/proyecto-capstone-arquitectura-enterprise" },
         ],
       },

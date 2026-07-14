@@ -25,7 +25,7 @@ docs/                    # MkDocs legacy/reference content + shared question ban
     NIVEL_1_BASICO.md    # Level 1: Fundamentals — 8 modules + Suplementos 1A (AI Builder) y 1B (Power Pages)
     NIVEL_2_INTERMEDIO.md  # Level 2: Intermediate — 9 modules (PL-200)
     NIVEL_3_AVANZADO.md    # Level 3: Advanced — 13 modules (PL-400)
-    NIVEL_4_ARQUITECTO.md  # Level 4: Architect — 11 modules (PL-600)
+    NIVEL_4_ARQUITECTO.md  # Level 4: Architect — 11 modules (Arquitectura Power Platform; PL-600 retirado)
   Anexos/
     LENGUAJES_PROGRAMACION.md
     COPILOT_STUDIO_COMPLETO.md
@@ -184,7 +184,7 @@ Do NOT change these heading formats in `docs/Niveles/*.md` unless you intentiona
 **Do not skip levels.** Each level builds on the previous:
 
 ```
-NIVEL 1 (PL-900) → NIVEL 2 (PL-200) → NIVEL 3 (PL-400) → NIVEL 4 (PL-600)
+NIVEL 1 (PL-900) → NIVEL 2 (PL-200) → NIVEL 3 (PL-400) → NIVEL 4 (Arquitectura Power Platform)
 ```
 
 **Nivel IA and Nivel D365 are transversal, not part of this chain.** Neither has prerequisites,

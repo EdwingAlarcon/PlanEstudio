@@ -2,7 +2,7 @@
 moduleId: 58
 title: "Field Service End-to-End — Work Orders, Agreements, Mobile Offline y RSO"
 level: "d365"
-certification: "Dynamics 365 Field Service / MB-240 (retirado 30 jun 2026)"
+certification: "Dynamics 365 Field Service skill path"
 estimatedMinutes: 13
 slug: "field-service-scheduling-avanzado"
 ---

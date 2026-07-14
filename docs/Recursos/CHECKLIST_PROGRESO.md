@@ -808,14 +808,14 @@
 
 ---
 
-### Módulo 40: Preparación PL-600
+### Módulo 40: Arquitectura Power Platform (referencia histórica PL-600)
 
-- [ ] **Conocimiento**: Explico el formato del examen PL-600: caso de estudio largo, secciones técnicas y de diseño | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Completo los módulos de Microsoft Learn para PL-600 y verifico mi cobertura de temario | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Resuelvo el Practice Assessment oficial de PL-600 en learn.microsoft.com | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Simulo el examen con un caso de estudio de 4h: analizo, propongo arquitectura y defiendo decisiones | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Revisito todos los ADRs del proyecto capstone y aseguro coherencia con los temas del PL-600 | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Identifico mis 3 áreas de debilidad en el temario PL-600 y las refuerzo | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico que PL-600 es una referencia histórica retirada y que el foco actual es competencia de arquitectura Power Platform | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Completo rutas de Microsoft Learn sobre arquitectura, gobierno, seguridad e integración Power Platform y verifico cobertura de competencias | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Resuelvo casos de estudio de arquitectura sin presentarlos como preparación de examen vigente | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Simulo un caso de estudio de 4h: analizo, propongo arquitectura y defiendo decisiones | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Revisito todos los ADRs del proyecto capstone y aseguro coherencia con competencias de Solution Architect | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Identifico mis 3 áreas de debilidad en arquitectura Power Platform y las refuerzo | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Completo el banco de preguntas del Módulo 40 del simulador con 70%+ de aciertos | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Estudio los Microsoft Reference Architectures de Power Platform disponibles en la documentación oficial | Dominio: ___/5 | Fecha: ___
 
@@ -834,7 +834,7 @@
 - [ ] **Práctica**: El proyecto tiene plan de DR documentado con RTO y RPO definidos y probados | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: La seguridad fue revisada: Field Security, Hierarchy, Audit, DLP, Customer Lockbox | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: El Well-Architected Assessment del capstone tiene score ≥ 4/5 en los 5 pilares | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: PL-600 aprobado | Fecha: ___ | Puntaje: ___/1000
+- [ ] **Práctica**: Portfolio de arquitectura Power Platform revisado como skill path; PL-600 no se agenda porque está retirado | Fecha: ___
 
 **Subtotal Módulo 41:** ___/10 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
@@ -845,8 +845,8 @@
 - [ ] Todos los módulos 31-41 completados con 80%+ de checkboxes marcados | Fecha: ___
 - [ ] Proyecto Capstone desplegado con CI/CD y documentación completa | Fecha: ___
 - [ ] Autoevaluación promedio ≥ 4.0/5 en todos los módulos del nivel | Promedio: ___/5
-- [ ] Completé los Microsoft Learn paths para PL-600 | Fecha: ___
-- [ ] PL-600 aprobado | Fecha: ___ | Puntaje: ___/1000
+- [ ] Completé Microsoft Learn paths de arquitectura Power Platform y gobierno | Fecha: ___
+- [ ] Portfolio de arquitectura revisado como skill path; PL-600 retirado, no examen vigente | Fecha: ___
 - [ ] He liderado al menos 1 proyecto enterprise completo de Power Platform como Arquitecto | Proyecto: ___
 
 **Fecha de inicio Nivel 4:** ___ | **Fecha de completación:** ___
@@ -855,7 +855,7 @@
 
 ## 🟣 NIVEL 5: DESARROLLO ASISTIDO POR IA
 
-> Nivel transversal — no es prerequisito de los niveles PL-900 → PL-600 ni depende de ellos.
+> Nivel transversal — no es prerequisito de los niveles base de Power Platform ni depende de ellos.
 
 ### Módulo 42: Fundamentos de IA para Desarrollo
 
@@ -1033,7 +1033,7 @@
 
 ## 🔷 NIVEL 6: DYNAMICS 365 ENTERPRISE APPS
 
-> Nivel transversal — no es prerequisito de los niveles PL-900 → PL-600 ni del nivel IA, ni depende de ellos. Incluye CE avanzado, Contact Center, Customer Insights, Field Service e integración CE + F&O.
+> Nivel transversal — no es prerequisito de los niveles base de Power Platform ni del nivel IA, ni depende de ellos. Incluye CE avanzado, Contact Center, Customer Insights, Field Service e integración CE + F&O.
 
 ### Módulo 56: Dynamics 365 CE Avanzado — Customer Engagement como Ecosistema Enterprise
 
@@ -1227,7 +1227,7 @@
 | 37 | AI Builder y Azure AI | ___/9 | ___% | ___/5 |
 | 38 | Liderazgo Técnico | ___/10 | ___% | ___/5 |
 | 39 | Casos de Transformación Digital | ___/8 | ___% | ___/5 |
-| 40 | Preparación PL-600 | ___/8 | ___% | ___/5 |
+| 40 | Arquitectura Power Platform | ___/8 | ___% | ___/5 |
 | 41 | Proyecto Capstone | ___/10 | ___% | ___/5 |
 | 42 | Fundamentos de IA para Desarrollo | ___/4 | ___% | ___/5 |
 | 43 | Copilot en Power Platform | ___/4 | ___% | ___/5 |
@@ -1272,7 +1272,7 @@ TOTAL   [                    ] ___% completado
 | PL-900 | ⬜ Pendiente | ___ | ___ | ___/1000 |
 | PL-200 | ⬜ Pendiente | ___ | ___ | ___/1000 |
 | PL-400 | ⬜ Pendiente | ___ | ___ | ___/1000 |
-| PL-600 | ⬜ Pendiente | ___ | ___ | ___/1000 |
+| Arquitectura Power Platform | Skill path | ___ | ___ | No aplica |
 
 ### Notas Personales de Aprendizaje
 

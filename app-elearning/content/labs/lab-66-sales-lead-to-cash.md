@@ -4,7 +4,7 @@ title: "Dynamics 365 Sales — Proceso Comercial Lead-to-Cash"
 level: "N3"
 duration: 240
 product: ["Dynamics 365 Sales", "Dataverse"]
-certifications: ["MB-210"]
+certifications: ["Dynamics 365 Sales"]
 role: ["Functional Consultant", "Sales"]
 prerequisites:
   - "Módulo 20 estudiado: Dynamics 365 CE — Sales y Customer Service"

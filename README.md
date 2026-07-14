@@ -53,11 +53,11 @@ docs/javascripts/evaluaciones-simulador.js  ──build-time──▶  questions
 | Nivel 1 — Básico | 8 | PL-900 | 4–6 semanas |
 | Nivel 2 — Intermedio | 9 | PL-200 | 2–3 meses |
 | Nivel 3 — Avanzado | 13 | PL-400 | 3–4 meses |
-| Nivel 4 — Arquitecto | 11 | PL-600 | 4–6 meses |
+| Nivel 4 — Arquitecto | 11 | Arquitectura Power Platform | 4–6 meses |
 | Nivel IA — Desarrollo Asistido *(transversal)* | 14 | Buenas Prácticas | Estudio libre, sin prerequisitos |
 | Nivel D365 — Especialización *(transversal)* | 10 | CE avanzado + F&O Awareness | Estudio libre, sin prerequisitos |
 
-Los niveles IA y D365 son transversales: no bloquean ni son bloqueados por la cadena PL-900 → PL-600.
+Los niveles IA y D365 son transversales: no bloquean ni son bloqueados por los cuatro niveles base de Power Platform.
 
 ---
 
@@ -186,7 +186,7 @@ Los laboratorios oficiales para la app están en `app-elearning/content/labs/` c
 | Lab 19 — ALM y CI/CD: Azure DevOps Pipeline | N3 | PL-400 |
 | Lab 22 — Copilot Studio: SSO y Knowledge Sources | N3 | PL-400 |
 | Lab 23 — Plugin C#: Validación Server-Side | N3 | PL-400 |
-| Lab 32 — CoE Starter Kit: Gobernanza del Tenant | N4 | PL-600 |
+| Lab 32 — CoE Starter Kit: Gobernanza del Tenant | N4 | Arquitectura Power Platform |
 
 Otros grupos de labs no listados arriba: 71–80/91–92 (simulaciones job-ready por perfil laboral,
 filtrable en `/labs` o `/portafolio` por perfil), 93–100 (F&O hands-on: Finance, P2P, O2C,

@@ -4,7 +4,7 @@ title: "Field Service Agreement + Preventive Maintenance"
 level: "N6"
 duration: 150
 product: ["Dynamics 365 Field Service", "Dataverse"]
-certifications: ["Dynamics 365 Field Service", "MB-240 (retirado 30 jun 2026)"]
+certifications: ["Dynamics 365 Field Service", "Field Operations"]
 role: ["Consultor Funcional D365 CE", "Field Service Consultant"]
 prerequisites:
   - "Módulo 58 estudiado: Field Service End-to-End"

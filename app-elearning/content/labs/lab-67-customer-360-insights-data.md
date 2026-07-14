@@ -4,7 +4,7 @@ title: "Customer Insights - Data: Unificación de Perfiles y Customer 360"
 level: "N6"
 duration: 150
 product: ["Customer Insights", "Dataverse"]
-certifications: ["MB-260"]
+certifications: ["Customer Insights"]
 role: ["Functional Consultant", "Solution Architect", "Data Specialist"]
 prerequisites:
   - "Módulo 57 estudiado: Customer Insights - Data"

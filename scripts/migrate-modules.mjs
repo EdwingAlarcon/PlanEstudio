@@ -43,7 +43,7 @@ const LEVELS = {
   arquitecto: {
     file: "NIVEL_4_ARQUITECTO.md",
     range: [31, 41],
-    certification: "PL-600",
+    certification: "Arquitectura Power Platform",
   },
 };
 

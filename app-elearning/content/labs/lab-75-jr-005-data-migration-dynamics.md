@@ -4,7 +4,7 @@ title: "JR-005 — Data Migration to Dynamics 365"
 level: "N4"
 duration: 300
 product: ["Dataverse", "Dynamics 365", "Data Migration"]
-certifications: ["PL-400", "PL-600"]
+certifications: ["PL-400", "Data Migration"]
 role: ["Migration Specialist", "Solution Architect"]
 prerequisites:
   - "Módulo 34 revisado: integraciones empresariales"

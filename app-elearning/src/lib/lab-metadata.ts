@@ -76,14 +76,24 @@ function getLabKindLabel(lab: LabInfo, kind: string): string {
 }
 
 function getCertificationBadges(lab: LabInfo): Pick<LabPresentationMeta, "certificationBadges" | "historicalCertifications"> {
-  const historical = new Set(["MB-210", "MB-220", "MB-240", "MB-240 (retirado 30 jun 2026)", "MB-300"]);
+  const historical = new Set([
+    "PL-600",
+    "MB-210",
+    "MB-220",
+    "MB-240",
+    "MB-240 (retirado 30 jun 2026)",
+    "MB-260",
+    "MB-300",
+  ]);
   const historicalCertifications = lab.certifications.filter((cert) => historical.has(cert));
   const activeCertifications = lab.certifications.filter((cert) => !historical.has(cert));
 
   const competencyBadges = historicalCertifications.map((cert) => {
+    if (cert === "PL-600") return "Solution Architect";
     if (cert === "MB-210") return "Competencia Sales";
     if (cert === "MB-220") return "Customer Insights Skill Path";
     if (cert === "MB-240" || cert === "MB-240 (retirado 30 jun 2026)") return "Competencia Field Service";
+    if (cert === "MB-260") return "Customer Insights Skill Path";
     if (cert === "MB-300") return "F&O Awareness";
     return "Competencia Dynamics 365";
   });

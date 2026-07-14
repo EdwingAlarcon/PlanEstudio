@@ -4,7 +4,7 @@ title: "JR-009 — Technical Interview Simulation"
 level: "N6"
 duration: 180
 product: ["Power Platform", "Dynamics 365", "Technical Interview"]
-certifications: ["PL-900", "PL-200", "PL-400", "PL-600"]
+certifications: ["PL-900", "PL-200", "PL-400", "Solution Architect"]
 role: ["Todos"]
 prerequisites:
   - "Ruta Job-Ready Interview Readiness revisada"

@@ -91,7 +91,7 @@ Este plan te llevará desde fundamentos hasta arquitectura empresarial en **Micr
   <div class="path-connector"></div>
   <div class="path-step path-step-4">
     <div class="step-node">4</div>
-    <div class="step-cert">PL-600</div>
+    <div class="step-cert">Arquitectura</div>
     <div class="step-title">Arquitecto</div>
     <div class="step-duration">6-12 meses</div>
   </div>
@@ -215,7 +215,7 @@ Dominar arquitectura de soluciones, ALM, Dynamics 365, C#, TypeScript y gobernan
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="currentColor"/></svg>
   </div>
   <div class="lc-badges">
-    <span class="lc-cert">PL-600</span>
+    <span class="lc-cert">Arquitectura Power Platform</span>
     <span class="lc-mcount">11 módulos · 6-12 meses · 15-25 hrs/sem</span>
   </div>
 </div>
@@ -318,8 +318,8 @@ Guía de certificaciones Microsoft alineadas con tu progreso
 | **Básico** | 4-6 meses | 10-15 | 240-360 | PL-900 (Fundamentals) |
 | **Intermedio** | 4-6 meses | 12-18 | 288-432 | PL-200 (Functional Consultant) |
 | **Avanzado** | 6-8 meses | 15-20 | 480-640 | PL-400 (Developer) |
-| **Arquitecto** | 6-12 meses | 15-25 | 540-1200 | PL-600 (Solution Architect) |
-| **TOTAL** | **20-32 meses** | **Variable** | **1548-2632 hrs** | **4 certificaciones** |
+| **Arquitecto** | 6-12 meses | 15-25 | 540-1200 | Arquitectura Power Platform (skill path; PL-600 retirado) |
+| **TOTAL** | **20-32 meses** | **Variable** | **1548-2632 hrs** | **3 certificaciones + 1 skill path de arquitectura** |
 
 > **Nota realista:** Este es un camino de formación profesional serio. Puedes acelerarlo con dedicación intensiva o tomarte más tiempo. Lo importante es la consistencia y la práctica continua.
 
@@ -563,8 +563,8 @@ NIVEL 4 (ARQUITECTO)
 3️⃣ PL-400: Microsoft Power Platform Developer
    ↓ (después de Nivel 3)
    
-4️⃣ PL-600: Microsoft Power Platform Solution Architect
-   ↓ (después de Nivel 4)
+4️⃣ Arquitectura Power Platform: skill path Solution Architect
+   ↓ (después de Nivel 4; PL-600 queda solo como referencia histórica retirada)
    
 🏆 ARQUITECTO CERTIFICADO
 ```
@@ -984,7 +984,7 @@ Confianza
 - **PL-900:** Después de completar Nivel 1 (fundamentos sólidos)
 - **PL-200:** A mitad/final de Nivel 2 (ya trabajas soluciones)
 - **PL-400:** Final de Nivel 3 (desarrollo profesional)
-- **PL-600:** Final de Nivel 4 (arquitectura empresarial)
+- **Arquitectura Power Platform:** Final de Nivel 4 como skill path; PL-600 está retirado y no debe planearse como examen vigente.
 
 ### ¿Son Necesarias?
 - **Sí para:** Validación externa, credibilidad profesional, roles enterprise

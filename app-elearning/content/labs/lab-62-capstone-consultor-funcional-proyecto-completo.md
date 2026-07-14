@@ -4,7 +4,7 @@ title: "Capstone Consultor Funcional — Proyecto Funcional Completo"
 level: "N2"
 duration: 720
 product: ["Dynamics 365 Sales", "Power Platform", "Dataverse"]
-certifications: ["PL-200", "MB-210"]
+certifications: ["PL-200", "Sales skill path"]
 role: ["Functional Consultant"]
 prerequisites:
   - "Lab 04 completado: Model-Driven App"

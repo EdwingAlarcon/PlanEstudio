@@ -8,7 +8,7 @@ Nivel transversal de profundización en Dynamics 365: CE avanzado + F&O Awarenes
 Customer Service avanzado, Contact Center/Omnichannel, Customer Insights - Data,
 Customer Insights - Journeys, Field Service end-to-end, Finance & Operations awareness,
 integración CE + F&O y capstone enterprise. No es prerequisito de los niveles PL-900 →
-PL-600 ni del nivel IA, ni depende de ellos.
+los niveles base de Power Platform ni del nivel IA, ni depende de ellos.
 
 Módulos oficiales del nivel:
 

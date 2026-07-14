@@ -37,6 +37,7 @@ El Nivel 4 del plan deja de ser una ruta de examen PL-600 y pasa a ser una ruta 
 | MB-230 | Dynamics 365 Customer Service Functional Consultant | Vigente. | Agregar/fortalecer ruta Customer Service. |
 | MB-240 | Dynamics 365 Field Service Functional Consultant | Retirado el 30 jun 2026. | Tratar como competencia histórica; no vender como objetivo agendable. |
 | MB-280 | Dynamics 365 Customer Experience Analyst Associate | En transición: Microsoft indica retiro el 31 jul 2026. | Usar solo como referencia temporal para Customer Experience/Sales mientras esté disponible. |
+| MB-260 | Dynamics 365 Customer Insights (Data) Specialist | Retirado el 30 nov 2024. | Mantener Customer Insights - Data como competencia Customer 360, no como examen. |
 | MB-300 | Dynamics 365: Core Finance and Operations | Retirado el 29 feb 2024. | No usar como objetivo. Conservar competencias F&O base dentro de ruta F&O. |
 | MB-310 | Dynamics 365 Finance Functional Consultant Associate | Vigente. | Recomendado para especialización Finance & Operations. |
 | MB-330 | Dynamics 365 Supply Chain Management Functional Consultant Associate | Vigente. | Recomendado para especialización Finance & Operations. |
@@ -53,6 +54,7 @@ Fuentes oficiales Microsoft Learn:
 - [MB-230 Customer Service](https://learn.microsoft.com/en-us/credentials/certifications/exams/mb-230/)
 - [MB-240 Field Service](https://learn.microsoft.com/en-us/credentials/certifications/exams/mb-240/)
 - [MB-280 Customer Experience Analyst Associate](https://learn.microsoft.com/en-us/credentials/certifications/exams/mb-280/)
+- [MB-260 Customer Insights - Data](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/mb-260)
 - [MB-300 Core Finance and Operations](https://learn.microsoft.com/en-us/credentials/certifications/exams/mb-300/)
 - [MB-310 Finance](https://learn.microsoft.com/en-us/credentials/certifications/d365-functional-consultant-financials/)
 - [MB-330 Supply Chain Management](https://learn.microsoft.com/en-us/credentials/certifications/d365-functional-consultant-supply-chain-management/)
@@ -237,6 +239,16 @@ Competencias que siguen siendo válidas:
 - Real-time journeys.
 - Emails, eventos, consentimiento y personalización.
 - Lead nurturing e integración con Dataverse y Dynamics 365 Sales.
+
+### MB-260 — retirado
+
+Microsoft retiró MB-260 el 30 de noviembre de 2024. Customer Insights - Data sigue siendo relevante para unificación de perfiles, Customer 360 y activación de segmentos.
+
+Competencias que siguen siendo válidas:
+
+- Reglas de matching y deduplicación.
+- Medidas y segmentos sobre perfil unificado.
+- Gobierno de datos para activación en journeys o canales comerciales.
 
 ### MB-240 — retirado
 

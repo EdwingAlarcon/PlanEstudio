@@ -1,12 +1,12 @@
 # NIVEL 4: ARQUITECTO MASTER — Power Platform & Dynamics 365
 **Duración estimada:** 8–12 meses (part-time) | **Prerequisito:** NIVEL_3_AVANZADO.md completado  
-**Certificaciones objetivo:** PL-600 (Power Platform Solution Architect Expert)
+**Enfoque objetivo:** Arquitectura Power Platform como competencia profesional (PL-600 fue retirado por Microsoft el 30 de junio de 2026; ver `Recursos/CERTIFICACIONES.md`)
 
 ---
 
 ## Resumen del Nivel
 
-En este nivel dejas de ser desarrollador técnico para convertirte en **Solution Architect**. Tomas decisiones de diseño que afectan a toda la organización, líderas equipos técnicos, defines estrategias de gobernanza, diseñas integraciones enterprise con Azure, y puedes hablar con el C-suite sobre ROI y transformación digital. Al completar este nivel estás listo para la certificación PL-600 y para liderar proyectos de transformación digital de gran escala.
+En este nivel dejas de ser desarrollador técnico para convertirte en **Solution Architect**. Tomas decisiones de diseño que afectan a toda la organización, líderas equipos técnicos, defines estrategias de gobernanza, diseñas integraciones enterprise con Azure, y puedes hablar con el C-suite sobre ROI y transformación digital. Al completar este nivel dominas competencias de arquitectura Power Platform históricamente asociadas a PL-600 (retirado) y estás listo para liderar proyectos de transformación digital de gran escala.
 
 **Módulos de este nivel:** 11 módulos (Módulos 31–41)
 
@@ -21,7 +21,7 @@ En este nivel dejas de ser desarrollador técnico para convertirte en **Solution
 | 37 | AI Builder y Azure AI integrado en Power Platform | 3–4 |
 | 38 | Liderazgo Técnico y Gestión de Proyectos | 3–4 |
 | 39 | Casos de Transformación Digital | 3–4 |
-| 40 | Preparación PL-600 | 4–5 |
+| 40 | Arquitectura Power Platform (referencia histórica PL-600) | 4–5 |
 | 41 | Proyecto Capstone — Arquitectura Enterprise | 8–10 |
 
 ---
@@ -32,7 +32,7 @@ En este nivel dejas de ser desarrollador técnico para convertirte en **Solution
 Diseñar y comunicar la arquitectura enterprise de Power Platform para organizaciones de 1,000+ usuarios: estrategia de gobernanza, políticas de adopción, marcos de decisión arquitectónica, y alineación con estándares como TOGAF y el Well-Architected Framework de Microsoft.
 
 ### 📖 Conceptos Clave
-- **TOGAF (referencia contextual):** framework de arquitectura empresarial de The Open Group compuesto por el ADM (Architecture Development Method) de 9 fases. En Power Platform se aplica principalmente la fase *Architecture Vision* para definir el alcance y los principios, y la fase *Technology Architecture* para seleccionar componentes. Para el día a día usar el **Microsoft Well-Architected Framework** que tiene aplicación directa al examen PL-600 y está diseñado específicamente para workloads en la nube de Microsoft.
+- **TOGAF (referencia contextual):** framework de arquitectura empresarial de The Open Group compuesto por el ADM (Architecture Development Method) de 9 fases. En Power Platform se aplica principalmente la fase *Architecture Vision* para definir el alcance y los principios, y la fase *Technology Architecture* para seleccionar componentes. Para el día a día usar el **Microsoft Well-Architected Framework**, que se alinea con competencias de arquitectura históricamente asociadas a PL-600 y está diseñado específicamente para workloads en la nube de Microsoft.
 - **Well-Architected Framework (Power Platform):** marco de revisión de Microsoft compuesto por 5 pilares: Fiabilidad (disponibilidad, RTO/RPO, retry policies), Seguridad (identidad, DLP, CMK), Excelencia Operacional (CI/CD, monitoreo, runbooks), Eficiencia de Rendimiento (caché, delegación, paginación), y Optimización de Costos (licencias correctas, eliminar ambientes ociosos). Microsoft publica un cuestionario oficial en aka.ms/ppswa que genera un scorecard con recomendaciones priorizadas; un tenant típico sin revisión previa obtiene entre 40-55 sobre 100.
 - **Governance Framework:** conjunto documentado de políticas, procesos y controles técnicos que definen cómo se usa Power Platform en la organización. Debe cubrir: quién puede crear ambientes, qué conectores están permitidos por tipo de ambiente, el ciclo de vida de una aplicación (DEV→TEST→PROD), y el proceso de excepción cuando una regla no puede cumplirse. Sin sponsor ejecutivo (CTO o CIO), el framework queda en papel y no se cumple.
 - **Fusion Teams:** modelo de trabajo donde equipos mixtos colaboran en el mismo proyecto: desarrolladores ciudadanos (makers) aportan conocimiento del proceso de negocio, desarrolladores pro aportan capacidades técnicas avanzadas (plugins, PCF, integraciones), e IT aporta gobernanza y operaciones. Microsoft documenta este modelo como la clave para escalar Power Platform sin bloquear a IT ni crear shadow IT.
@@ -1469,17 +1469,17 @@ Resultado esperado:
 
 ---
 
-## MÓDULO 40: Preparación PL-600
+## MÓDULO 40: Arquitectura Power Platform (referencia histórica PL-600)
 
 ### 🎯 Objetivo
-Dominar los dominios del examen PL-600 (Power Platform Solution Architect Expert), practicar con casos de estudio de arquitectura, y desarrollar la mentalidad del arquitecto que el examen evalúa.
+Trabajar competencias de arquitectura Power Platform históricamente asociadas a PL-600, practicar con casos de estudio de arquitectura y desarrollar la mentalidad de Solution Architect. PL-600 está retirado; este módulo se mantiene como skill path profesional, no como preparación para un examen vigente.
 
-### 📖 Conceptos Clave del Examen PL-600
+### 📖 Conceptos Clave de Arquitectura Power Platform
 
 **Dominio 1: Realizar análisis de solución (35-40%)**
 
 - **Análisis de requerimientos y soluciones existentes:** el examen evalúa la capacidad de revisar una solución ya implementada e identificar sus debilidades arquitectónicas. Preguntas típicas presentan un escenario con una solución existente y preguntan qué cambiarías. La respuesta correcta siempre considera: escalabilidad (¿aguanta 10x el volumen actual?), mantenibilidad (¿puede el equipo actual mantenerlo?), y alineación con el Well-Architected Framework. Nunca se refactoriza solo por preferencia técnica; siempre debe haber una razón de negocio documentada.
-- **Evaluación de plataforma vs customización:** el principio rector del PL-600 es "configurar primero, customizar si es necesario, integrar si no hay otra opción, construir desde cero como último recurso". El examen presenta escenarios donde la respuesta correcta es usar una capacidad nativa que el estudiante podría no conocer (BPF, Calculated Columns, Business Rules) en lugar de crear un plugin C# innecesario. Conocer profundamente las capacidades nativas de Dataverse, Power Automate y Model-Driven Apps es más valioso que saber escribir código.
+- **Evaluación de plataforma vs customización:** el principio rector de arquitectura Power Platform es "configurar primero, customizar si es necesario, integrar si no hay otra opción, construir desde cero como último recurso". Los escenarios de arquitectura presentan casos donde la respuesta correcta es usar una capacidad nativa que el estudiante podría no conocer (BPF, Calculated Columns, Business Rules) en lugar de crear un plugin C# innecesario. Conocer profundamente las capacidades nativas de Dataverse, Power Automate y Model-Driven Apps es más valioso que saber escribir código.
 - **Análisis de riesgo y viabilidad:** el examen evalúa si el candidato puede identificar los riesgos arquitectónicos de una propuesta y cuantificar su impacto. Preguntas frecuentes: ¿qué pasa si el sistema externo no tiene API? ¿qué pasa si el cliente no puede proveer usuarios para UAT? ¿qué pasa si el volumen de datos es 10x el estimado? Un arquitecto siempre debe tener un plan B documentado para los top 5 riesgos del proyecto.
 - **Estrategia de migración de datos:** área donde muchos candidatos fallan porque la subestiman. El examen evalúa: cuándo usar Data Import Wizard vs SSIS vs Azure Data Factory vs Power Query para migrar datos, cómo manejar relaciones (los registros padre deben migrarse antes que los hijos), cómo validar la integridad de los datos después de la migración, y cuántas iteraciones de migración se necesitan (siempre al menos 2: una migración de prueba + la migración final del cutover).
 
@@ -1493,13 +1493,13 @@ Dominar los dominios del examen PL-600 (Power Platform Solution Architect Expert
 
 **Dominio 3: Implementar la solución (15-20%)**
 
-- **Guiar al equipo de desarrollo:** el arquitecto PL-600 no es el que hace todo el código — es el que toma decisiones técnicas, resuelve bloqueos y asegura que el equipo implementa la solución como fue diseñada. El examen evalúa habilidades de comunicación técnica: cómo explicar un ADR a un developer junior, cómo facilitar una code review, y cómo balancear velocidad con calidad técnica en los sprints.
+- **Guiar al equipo de desarrollo:** el arquitecto Power Platform no es el que hace todo el código — es el que toma decisiones técnicas, resuelve bloqueos y asegura que el equipo implementa la solución como fue diseñada. La competencia evalúa habilidades de comunicación técnica: cómo explicar un ADR a un developer junior, cómo facilitar una code review, y cómo balancear velocidad con calidad técnica en los sprints.
 - **Validar que la implementación sigue la arquitectura:** incluye: revisión de código (Solution Checker + revisión manual de plugins y flujos), revisión de seguridad (¿los Security Roles tienen mínimo privilegio?), y revisión de performance (¿las consultas usan filtros delegables? ¿los plugins son async cuando es posible?). El arquitecto firma que la implementación es conforme a la arquitectura antes de aprobar el despliegue a PROD.
 - **Gestión de calidad:** métricas de calidad para Power Platform: Solution Checker score (0 errores críticos), cobertura de unit tests para plugins C# (mínimo 80%), time-to-load de Canvas Apps (< 3 segundos en el happy path), y tasa de flujos fallidos (< 0.5% en 7 días). El examen puede preguntar qué herramienta usar para monitorear la salud del sistema post go-live.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
-#### Caso de estudio 1 — Pregunta típica PL-600
+#### Caso de estudio 1 — Pregunta típica de Solution Architect
 ```
 Escenario:
 Una empresa farmacéutica con 5,000 empleados en 12 países necesita implementar 
@@ -1574,15 +1574,15 @@ Practicar con las siguientes áreas donde el examen tiende a ser más difícil:
 
 #### Actividad 40.2: Recursos de preparación
 ```markdown
-## Plan de estudio PL-600 (8 semanas antes del examen)
+## Plan de refuerzo de arquitectura Power Platform
 
-Semana 1-2: Revisar learn.microsoft.com/certifications/exams/pl-600
-  - Leer todo el "Study Guide" oficial
-  - Identificar los domains con menor puntaje en el self-assessment
+Semana 1-2: Revisar documentación oficial de arquitectura Power Platform
+  - Leer guías de arquitectura, gobierno, seguridad, ALM e integración
+  - Identificar los dominios de competencia con menor puntaje en el self-assessment
 
-Semana 3-4: Practice tests
-  - MeasureUp PL-600 practice test (oficial de Microsoft)
-  - Si score < 70%: repasar el domain con menor puntaje
+Semana 3-4: Casos de estudio
+  - Resolver escenarios de gobierno, seguridad, migración e integración
+  - Si score < 70%: repasar el dominio de competencia con menor puntaje
 
 Semana 5-6: Casos de estudio
   - Leer 3 casos de estudio del blog de Microsoft Power Platform
@@ -1592,40 +1592,39 @@ Semana 7: Repaso intensivo
   - Revisar todos los ADRs y decisiones arquitectónicas del Nivel 3 y 4
   - Repasar: cuándo usar cada componente de Power Platform
 
-Semana 8: Simulacro y descanso
-  - Día 1-5: simulacro de examen completo (90 minutos, 60 preguntas)
-  - Día 6-7: descanso — no estudiar el día antes del examen
+Semana 8: Simulacro de defensa y descanso
+  - Día 1-5: defensa completa de arquitectura ante un panel simulado
+  - Día 6-7: descanso y revisión ligera del portfolio
 
 ## Recursos gratuitos
-- Microsoft Learn: Power Platform Solution Architect learning path
-- GitHub: PL-600 study guide community notes
+- Microsoft Learn: arquitectura, gobierno, seguridad, ALM e integración Power Platform
+- Microsoft Learn: Power Platform Solution Architect learning paths como referencia histórica de competencias, no como examen vigente
 - YouTube: John Savill's Technical Training (arquitectura de referencia)
 ```
 
 ### 💼 Caso Real de Negocio
 **Candidato:** Desarrollador senior de Power Platform con 4 años de experiencia, excelentes habilidades técnicas pero sin experiencia en decisiones arquitectónicas de alto nivel.  
-**Problema al prepararse para el PL-600:** Aprobó los exámenes PL-900, PL-200 y PL-400 con altas notas memorizando preguntas de práctica. Intentó el PL-600 dos veces y reprobó en el Dominio 1 (Análisis de solución) porque las preguntas requerían razonar sobre escenarios completos de negocio, no recordar configuraciones técnicas.  
+**Problema al crecer hacia Solution Architect:** Aprobó exámenes técnicos con altas notas memorizando preguntas de práctica, pero al enfrentar escenarios enterprise le costaba razonar sobre negocio, restricciones, riesgos y trade-offs.  
 **Approach de preparación correcto:** En el tercer intento, cambió de estrategia: en lugar de practicar preguntas de opción múltiple, analizó 5 casos de estudio reales de Microsoft (Customer Stories), diseñó la arquitectura él mismo antes de ver la solución, y documentó las diferencias entre su propuesta y la solución real. Adicionalmente completó el proyecto capstone (análogo al Módulo 41) que lo forzó a tomar y justificar 10+ decisiones arquitectónicas con ADRs.  
-**Resultado:** Aprobó el PL-600 con 815/1000 en el tercer intento. Comentó: "La diferencia fue que aprendí a pensar como arquitecto, no como alguien que recuerda respuestas."
+**Resultado:** Logró defender una arquitectura enterprise completa ante un panel técnico. Comentó: "La diferencia fue que aprendí a pensar como arquitecto, no como alguien que recuerda respuestas."
 
 ### ✅ Buenas Prácticas
-- El PL-600 evalúa pensamiento arquitectónico, no memorización — practicar con casos reales
-- En el examen: preguntar "¿qué haría un arquitecto senior en esta situación?" no "¿cuál opción es técnicamente correcta?"
-- Programar el examen DESPUÉS de completar el proyecto capstone (Módulo 41) — la experiencia práctica es irremplazable
+- La arquitectura evalúa pensamiento sistémico, no memorización — practicar con casos reales
+- En cada escenario: preguntar "¿qué haría un arquitecto senior en esta situación?" no "¿cuál opción es técnicamente correcta?"
+- Defender el portfolio DESPUÉS de completar el proyecto capstone (Módulo 41) — la experiencia práctica es irremplazable
 
 ### ⚠️ Errores Comunes
 | Error | Causa | Solución |
 |-------|-------|----------|
-| Estudiar memorizando respuestas de dumps de examen | Intentar atajo que no desarrolla el pensamiento arquitectónico | El PL-600 usa escenarios únicos y detallados; la única preparación efectiva es resolver casos reales y justificar decisiones arquitectónicas |
+| Estudiar memorizando respuestas de dumps de examen | Intentar atajo que no desarrolla el pensamiento arquitectónico | Los escenarios reales son únicos y detallados; la preparación efectiva es resolver casos reales y justificar decisiones arquitectónicas |
 | No repasar el Dominio 1 (35-40%) por considerarlo "blando" | El análisis de solución parece menos técnico que el diseño | Este dominio tiene el mayor peso; practicar explícitamente la lectura crítica de soluciones existentes y la identificación de anti-patrones |
 | Elegir la opción más técnicamente sofisticada en preguntas del examen | El developer instinto es resolver con código lo que Power Platform puede resolver con configuración | Aplicar siempre el principio "configurar primero": si hay una capacidad nativa, esa es la respuesta correcta aunque no sea la más impresionante técnicamente |
 | Fallar por no saber cuándo usar Logic Apps vs Power Automate | Es una de las preguntas más frecuentes del examen y muchos candidatos no tienen claridad | Regla mnemónica: Power Automate para makers + latencia tolerada + costos bajos; Logic Apps para IT + SLA estricto + EDI/B2B + estado persistido |
 
 ### 🧪 Criterios de Validación
-- [ ] Self-assessment de los 3 dominios PL-600 con puntaje por dominio
+- [ ] Self-assessment de los 3 dominios que evaluaba PL-600 (referencia histórica retirada), con puntaje por dominio
 - [ ] 3 casos de estudio resueltos con justificación de decisiones arquitectónicas
-- [ ] Practice test: score ≥ 70% en simulacro antes de agendar el examen real
-- [ ] Examen PL-600 agendado (fecha concreta)
+- [ ] Portafolio de arquitectura Power Platform documentado como skill path (no se agenda PL-600: el examen está retirado)
 
 ---
 
@@ -1845,7 +1844,7 @@ Para considerarse Solution Architect Master de Power Platform, debes cumplir:
 - [ ] PL-900 obtenida (debería estar completada desde Nivel 1)
 - [ ] PL-200 obtenida (Nivel 2)
 - [ ] PL-400 obtenida (Nivel 3)
-- [ ] **PL-600 agendada y aprobada** ← meta final
+- [ ] **Portafolio de Arquitectura Power Platform completo** ← meta final (PL-600 está retirado; no se agenda como examen)
 
 ### Auto-evaluación Final
 Califica cada área del 1 al 5:

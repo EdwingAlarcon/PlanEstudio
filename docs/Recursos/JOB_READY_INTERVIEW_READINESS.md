@@ -73,7 +73,7 @@ Prepara estos artefactos antes de aplicar:
 4. **Proyectos / capstones**
    - 2 a 4 proyectos con problema, solucion y evidencia.
 5. **Certificaciones / aprendizaje**
-   - PL-900, PL-200/PL-400/PL-600 si aplica.
+   - PL-900, PL-200/PL-400 si aplica; Arquitectura Power Platform como skill path, no PL-600 vigente.
    - PlanEstudio como ruta de aprendizaje, no como certificacion oficial Microsoft.
 
 ### Formula para bullets

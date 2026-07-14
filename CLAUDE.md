@@ -25,7 +25,7 @@ docs/                    # MkDocs source content — legacy/reference site only 
     NIVEL_1_BASICO.md    # Level 1 (MkDocs only) — 8 modules + Suplementos 1A (AI Builder) y 1B (Power Pages)
     NIVEL_2_INTERMEDIO.md  # Level 2 (MkDocs only) — 9 modules (PL-200)
     NIVEL_3_AVANZADO.md    # Level 3 (MkDocs only) — 13 modules (PL-400)
-    NIVEL_4_ARQUITECTO.md  # Level 4 (MkDocs only) — 11 modules (PL-600)
+    NIVEL_4_ARQUITECTO.md  # Level 4 (MkDocs only) — 11 modules (Arquitectura Power Platform; PL-600 retirado)
   Anexos/
     LENGUAJES_PROGRAMACION.md
     COPILOT_STUDIO_COMPLETO.md
@@ -190,7 +190,7 @@ Don't change these if editing `docs/Niveles/*.md` for MkDocs.
 **Do not skip levels.** Each of the 4 certification levels builds on the previous:
 
 ```
-NIVEL 1 (PL-900) → NIVEL 2 (PL-200) → NIVEL 3 (PL-400) → NIVEL 4 (PL-600)
+NIVEL 1 (PL-900) → NIVEL 2 (PL-200) → NIVEL 3 (PL-400) → NIVEL 4 (Arquitectura Power Platform)
 ```
 
 **Nivel IA (Desarrollo Asistido por IA) and Nivel D365 (Dynamics 365 Enterprise Apps) are transversal,

@@ -4,7 +4,7 @@ title: "JR-008 — CRM Legacy Health Assessment"
 level: "N4"
 duration: 180
 product: ["Dynamics CRM On-Premises", "SQL Server", "IIS", "Dataverse"]
-certifications: ["PL-600", "Arquitectura Power Platform"]
+certifications: ["CRM Legacy", "Arquitectura Power Platform"]
 role: ["Legacy Consultant", "Migration Specialist", "Solution Architect"]
 prerequisites:
   - "Módulo 39 estudiado: casos de transformación digital"

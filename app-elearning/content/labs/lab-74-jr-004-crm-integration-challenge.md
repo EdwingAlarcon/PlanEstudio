@@ -4,7 +4,7 @@ title: "JR-004 — CRM Integration Challenge"
 level: "N4"
 duration: 240
 product: ["Dataverse", "Power Automate", "Azure Functions", "Azure Service Bus"]
-certifications: ["PL-400", "PL-600"]
+certifications: ["PL-400", "Integration"]
 role: ["Integration Developer", "Solution Architect"]
 prerequisites:
   - "Módulo 24 revisado: Azure Functions y Service Bus"

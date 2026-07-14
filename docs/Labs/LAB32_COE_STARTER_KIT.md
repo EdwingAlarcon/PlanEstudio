@@ -4,7 +4,7 @@ title: "CoE Starter Kit — Gobernanza a Escala del Tenant de Power Platform"
 level: "N4"
 duration: "130 min"
 product: ["CoE Starter Kit", "Power BI", "Power Automate", "Power Apps", "Dataverse"]
-certifications: ["PL-600"]
+certifications: ["Arquitectura Power Platform"]
 role: ["Solution Architect", "Admin", "CoE Lead"]
 prerequisites:
   - "Rol de Administrador Global o Power Platform Service Admin en el tenant"
@@ -49,7 +49,7 @@ Al finalizar este laboratorio habrás instalado los componentes Core del CoE Sta
 
 ## Nivel
 
-**N4 Arquitecto** — Certificación objetivo: **PL-600**
+**N4 Arquitecto** — Enfoque: **Arquitectura Power Platform** (PL-600 retirado; referencia histórica)
 
 ## Tecnologías utilizadas
 

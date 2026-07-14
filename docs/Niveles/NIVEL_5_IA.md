@@ -6,4 +6,4 @@
 
 Nivel transversal de buenas prácticas de desarrollo asistido por IA (Copilot, GitHub
 Copilot, Claude Code, Codex) aplicado a soluciones Power Platform y Dynamics 365. No es
-prerequisito de los niveles PL-900 → PL-600 ni depende de ellos.
+prerequisito de los niveles base de Power Platform ni depende de ellos.

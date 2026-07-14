@@ -61,7 +61,7 @@ El gobierno moderno de Power Platform no debe depender únicamente de instalar e
 2. **CoE y administración a escala:** Módulo 32 y LAB-032, leyéndolos con enfoque moderno: CoE como práctica operativa y PPAC como fuente principal.
 3. **Estrategia de ambientes:** Módulo 33 y LAB-056 para DEV/TEST/PROD, Managed Environments, multi-tenant y restricciones.
 4. **Seguridad y cumplimiento:** Módulo 36 para Zero Trust, auditoría, Purview, DLP y defensa en profundidad.
-5. **Decisión arquitectónica:** Módulo 40 para preguntas tipo PL-600 sobre licenciamiento, riesgo, migración y gobierno.
+5. **Decisión arquitectónica:** Módulo 40 para casos tipo Solution Architect sobre licenciamiento, riesgo, migración y gobierno; PL-600 queda solo como referencia histórica retirada.
 6. **Portafolio:** convertir LAB-032/LAB-056 en un governance assessment demostrable.
 
 ## Mapeo a contenido actual
@@ -72,7 +72,7 @@ El gobierno moderno de Power Platform no debe depender únicamente de instalar e
 | Módulo 32 - CoE Starter Kit y Administración a Escala | CoE y visibilidad | Inventario, operación de CoE y transición hacia PPAC nativo |
 | Módulo 33 - Multi-tenant, Multi-geo y Estrategia de Ambientes | Estrategia de ambientes | Matriz de ambientes, Managed Environments, restricciones por región |
 | Módulo 36 - Seguridad y Cumplimiento Enterprise | Seguridad y auditoría | Diseño de auditoría, DLP, Purview y controles de datos |
-| Módulo 40 - Preparación PL-600 | Decisión de arquitectura | Respuestas de escenario sobre gobierno, licencias y riesgo |
+| Módulo 40 - Arquitectura Power Platform | Decisión de arquitectura | Respuestas de escenario sobre gobierno, licencias y riesgo |
 | LAB-032 | Gobernanza a escala | Reporte CoE/gobierno y recomendaciones |
 | LAB-056 | Cambio de ambientes DEV/TEST/PROD | Evidencia de promoción controlada y estrategia de ambientes |
 
