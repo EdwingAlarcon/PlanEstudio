@@ -23,6 +23,7 @@ export const UI = {
     portfolio: "Portafolio",
     portfolioGuide: "Guía de Portafolio",
     advancedRoadmap: "Roadmap Especialización Avanzada",
+    d365TenantReadiness: "D365 Tenant Readiness",
     myProgress: "Mi Progreso",
     skipToContent: "Saltar al contenido",
     toggleTheme: "Cambiar tema",
@@ -37,7 +38,7 @@ export const UI = {
     avanzado: "Avanzado",
     arquitecto: "Arquitecto",
     ia: "Desarrollo Asistido por IA",
-    d365: "Dynamics 365 Avanzado",
+    d365: "Dynamics 365 Enterprise Apps",
     badge: {
       basico: "🟢 Nivel 1",
       intermedio: "🔵 Nivel 2",
@@ -52,7 +53,7 @@ export const UI = {
       avanzado: "PL-400",
       arquitecto: "Arquitectura Power Platform",
       ia: "Buenas Prácticas",
-      d365: "Especialista Dynamics 365 CE",
+      d365: "D365 CE avanzado + F&O awareness",
     },
     navCert: {
       basico: "PL-900",
@@ -68,7 +69,7 @@ export const UI = {
       avanzado: "Arquitectura, ALM, D365, Copilot Studio y extensibilidad",
       arquitecto: "Gobernanza enterprise, multi-tenant, Azure integrations y liderazgo",
       ia: "Copilot, GitHub Copilot, Claude Code y Codex aplicados de forma segura y auditable al desarrollo, conexión al tenant, Dataverse, ALM y consultoría funcional en Power Platform y D365",
-      d365: "Profundidad funcional en Dynamics 365 Sales, Customer Service, Customer Insights y Field Service, con arquitectura Customer Engagement end-to-end e integración con Finance & Operations",
+      d365: "Especialización práctica en Dynamics 365 Customer Engagement: Sales, Customer Service, Contact Center, Customer Insights, Field Service e integración CE + Finance & Operations",
     },
     modules: {
       basico: 8,
@@ -76,7 +77,7 @@ export const UI = {
       avanzado: 13,
       arquitecto: 11,
       ia: 14,
-      d365: 4,
+      d365: 10,
     },
   },
 
@@ -159,5 +160,5 @@ export const LEVEL_MODULE_RANGE: Record<LevelId, [number, number]> = {
   avanzado: [18, 30],
   arquitecto: [31, 41],
   ia: [42, 55],
-  d365: [56, 59],
+  d365: [56, 65],
 };

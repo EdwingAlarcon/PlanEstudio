@@ -2,7 +2,7 @@
 // Source: docs/javascripts/evaluaciones-simulador.js
 // Regenerate: node scripts/extract-questions.mjs  (or: cd app-elearning && npm run build)
 //
-// 59 modules, 458 questions total.
+// 65 modules, 488 questions total.
 
 export type QuestionType = "single" | "multi";
 
@@ -5627,6 +5627,378 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       ],
       answer: [0],
       explanation: "F&O tiene su propio modelo de seguridad basado en duties/privileges, distinto del modelo de Security Roles de Dataverse — asumir que son equivalentes sin mapearlos explícitamente es un error común al diseñar dual-write.",
+    },
+  ],
+  60: [
+    {
+      type: "single",
+      prompt: "En Dynamics 365 Sales, ¿por qué forecast category no debe confundirse con la etapa de la Opportunity?",
+      options: [
+      "Porque la etapa describe avance operativo y forecast category expresa compromiso comercial esperado",
+      "Porque forecast category reemplaza por completo al proceso de ventas",
+      "Porque la etapa solo existe para reportes de Customer Service",
+      "Porque forecast category calcula impuestos de F&O"
+      ],
+      answer: [0],
+      explanation: "La etapa indica avance del proceso; forecast category clasifica compromiso comercial como Pipeline, Best Case o Committed.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué elemento es indispensable antes de activar un forecast real en Dynamics 365 Sales?",
+      options: [
+      "Jerarquía comercial, periodos/cuotas y usuarios con licencia/configuración de Sales",
+      "Un flujo de escritorio de Power Automate",
+      "Un Agreement de Field Service",
+      "Una virtual table de inventario"
+      ],
+      answer: [0],
+      explanation: "Forecasting real requiere jerarquía, periodos, cuotas y configuración en un ambiente/licencia de Dynamics 365 Sales.",
+    },
+    {
+      type: "single",
+      prompt: "¿Cuál es una regla sana de pipeline hygiene?",
+      options: [
+      "Toda oportunidad activa debe tener fecha de cierre vigente, next step y categoría de forecast revisada",
+      "Toda oportunidad debe estar siempre en Committed",
+      "Las oportunidades vencidas deben ocultarse del forecast",
+      "No se deben usar campos obligatorios en ventas"
+      ],
+      answer: [0],
+      explanation: "Pipeline hygiene exige datos accionables y actualizados: fecha, siguiente paso, etapa coherente y forecast category revisada.",
+    },
+    {
+      type: "single",
+      prompt: "Si F&O será responsable de facturación fiscal e inventario, ¿qué debe evitarse en Dynamics 365 Sales?",
+      options: [
+      "Duplicar lógica fiscal, disponibilidad real o cumplimiento que pertenece a F&O",
+      "Usar oportunidades y cuentas",
+      "Definir territorios comerciales",
+      "Revisar el pipeline semanalmente"
+      ],
+      answer: [0],
+      explanation: "Sales gestiona el proceso comercial; F&O debe mantener lógica regulatoria, inventario y facturación cuando es el ERP dueño.",
+    },
+    {
+      type: "multi",
+      prompt: "¿Qué evidencias pertenecen a un lab de Sales Forecasting & Pipeline Review?",
+      options: [
+      "Matriz de forecast por vendedor",
+      "Oportunidades con next step y riesgo",
+      "Perfil offline de Field Service Mobile",
+      "Agenda de revisión de pipeline"
+      ],
+      answer: [0, 1, 3],
+      explanation: "El lab de Sales se centra en forecast, oportunidades, riesgos y cadencia de revisión; el perfil offline pertenece a Field Service.",
+    },
+  ],
+  61: [
+    {
+      type: "single",
+      prompt: "¿Qué diferencia un entitlement de un SLA en Customer Service?",
+      options: [
+      "El entitlement define derechos/cobertura de servicio; el SLA mide compromisos operativos como respuesta o resolución",
+      "El entitlement reemplaza a las colas",
+      "El SLA define productos del catálogo de Sales",
+      "No existe diferencia funcional"
+      ],
+      answer: [0],
+      explanation: "Entitlement y SLA se relacionan, pero uno define cobertura/derechos y el otro compromisos medibles.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué debe incluir un SLA enterprise para evitar métricas engañosas?",
+      options: [
+      "Calendario, pausa/reanudación, warning, failure y acciones de escalamiento",
+      "Solo una fecha de vencimiento manual",
+      "Únicamente el nombre del cliente",
+      "Un dashboard de ventas"
+      ],
+      answer: [0],
+      explanation: "Sin calendario y reglas de pausa/reanudación, el temporizador no refleja el compromiso operativo real.",
+    },
+    {
+      type: "single",
+      prompt: "¿Cuál es una señal de que una cola de Customer Service está mal gobernada?",
+      options: [
+      "No tiene owner, aging ni métrica de backlog",
+      "Tiene casos asignables",
+      "Tiene agentes asociados",
+      "Se usa para separar trabajo por prioridad"
+      ],
+      answer: [0],
+      explanation: "Una cola sin responsable ni métrica se convierte en trabajo invisible.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué prueba negativa es importante en un diseño SLA + routing?",
+      options: [
+      "Un caso que incumple SLA y dispara warning/failure",
+      "Solo un caso que cierra exitosamente",
+      "Un forecast de ventas ganado",
+      "Una orden de compra de F&O"
+      ],
+      answer: [0],
+      explanation: "El UAT debe demostrar incumplimientos, pausas y escalamiento, no solo el caso feliz.",
+    },
+    {
+      type: "multi",
+      prompt: "¿Qué componentes son típicos de Customer Service avanzado?",
+      options: [
+      "Queues",
+      "Entitlements",
+      "SLA",
+      "Chart of accounts de F&O"
+      ],
+      answer: [0, 1, 2],
+      explanation: "Queues, entitlements y SLA son componentes de servicio; chart of accounts pertenece a Finance.",
+    },
+  ],
+  62: [
+    {
+      type: "single",
+      prompt: "¿Qué agrega Contact Center/Omnichannel sobre un diseño clásico de Customer Service?",
+      options: [
+      "Canales, conversaciones, presencia, capacidad, unified routing y operación en tiempo real",
+      "Solo una tabla adicional de casos",
+      "Cálculo fiscal de facturas",
+      "Forecasting de oportunidades"
+      ],
+      answer: [0],
+      explanation: "Contact Center agrega la operación de canales y distribución de conversaciones en tiempo real.",
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué capacity profile y presence son críticos en un workstream?",
+      options: [
+      "Evitan asignar más conversaciones de las que un agente puede atender",
+      "Definen el plan de cuentas financiero",
+      "Reemplazan la necesidad de consentimiento",
+      "Cambian automáticamente la licencia del usuario"
+      ],
+      answer: [0],
+      explanation: "Capacidad y presencia protegen la calidad operativa limitando asignaciones simultáneas.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué debe conservar un handoff correcto de bot a agente?",
+      options: [
+      "Intención, transcript, resumen, cliente identificado y prioridad",
+      "Solo el saludo inicial del bot",
+      "El inventario disponible de F&O",
+      "La cuota trimestral del vendedor"
+      ],
+      answer: [0],
+      explanation: "Sin contexto, el agente debe repetir preguntas y la experiencia se degrada.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué métrica ayuda a detectar mala experiencia en un canal de chat?",
+      options: [
+      "Abandon rate",
+      "Three-way match",
+      "Forecast gap",
+      "Project-to-profit"
+      ],
+      answer: [0],
+      explanation: "Abandon rate muestra usuarios que abandonan antes de ser atendidos o resolver su necesidad.",
+    },
+    {
+      type: "multi",
+      prompt: "¿Qué elementos requieren normalmente tenant/licencia/canal real para probar Contact Center?",
+      options: [
+      "Canal configurado",
+      "Agentes con presencia/capacidad",
+      "Workstream y unified routing",
+      "Una matriz en papel solamente"
+      ],
+      answer: [0, 1, 2],
+      explanation: "El diseño puede documentarse sin tenant, pero la prueba real necesita canal, agentes y configuración.",
+    },
+  ],
+  63: [
+    {
+      type: "single",
+      prompt: "¿Cuál es la frontera correcta entre Customer Insights - Data y Customer Insights - Journeys?",
+      options: [
+      "Data unifica perfiles/segmentos; Journeys orquesta comunicaciones y experiencias",
+      "Journeys reemplaza la unificación de perfiles",
+      "Data solo envía emails masivos",
+      "No hay diferencia entre ambos productos"
+      ],
+      answer: [0],
+      explanation: "Data construye Customer 360 y segmentos; Journeys activa experiencias y comunicaciones.",
+    },
+    {
+      type: "single",
+      prompt: "En un real-time journey, ¿qué rol cumple un trigger?",
+      options: [
+      "Inicia o ramifica el journey a partir de un evento o condición",
+      "Define el plan de cuentas de F&O",
+      "Calcula la cuota de ventas",
+      "Asigna técnicos en Field Service"
+      ],
+      answer: [0],
+      explanation: "El trigger es el evento que inicia o modifica el recorrido en tiempo real.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué debe validarse antes de enviar comunicaciones desde Journeys?",
+      options: [
+      "Consentimiento por propósito y canal",
+      "Solo que el contacto tenga nombre",
+      "Que exista una Work Order abierta",
+      "Que haya inventario disponible"
+      ],
+      answer: [0],
+      explanation: "El consentimiento debe validarse por propósito/canal antes del envío.",
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué en 2026 conviene diseñar sobre real-time journeys y no depender de outbound heredado?",
+      options: [
+      "Porque Microsoft ha movido el foco a journeys en tiempo real y outbound heredado está retirándose/removido",
+      "Porque real-time journeys no requiere consentimiento",
+      "Porque outbound heredado es el único modelo soportado",
+      "Porque Journeys solo funciona con F&O"
+      ],
+      answer: [0],
+      explanation: "El diseño actualizado debe evitar depender de capacidades outbound heredadas y privilegiar real-time journeys.",
+    },
+    {
+      type: "multi",
+      prompt: "¿Qué pruebas deben existir para un journey de renovación?",
+      options: [
+      "Contacto con consentimiento válido",
+      "Contacto sin consentimiento",
+      "Contacto con email inválido",
+      "Pedido de compra aprobado en F&O"
+      ],
+      answer: [0, 1, 2],
+      explanation: "Las pruebas deben cubrir caso feliz y exclusiones negativas del canal/consentimiento.",
+    },
+  ],
+  64: [
+    {
+      type: "single",
+      prompt: "¿Cuál es el propósito de una matriz de ownership CE + F&O?",
+      options: [
+      "Definir sistema dueño, consumidores, dirección, patrón y regla de conflicto por entidad",
+      "Reemplazar todas las integraciones con Excel",
+      "Eliminar seguridad en Dataverse",
+      "Crear campañas de marketing"
+      ],
+      answer: [0],
+      explanation: "La matriz evita ownership ambiguo y guía el patrón de integración correcto.",
+    },
+    {
+      type: "single",
+      prompt: "¿Cuándo tiene sentido dual-write?",
+      options: [
+      "Cuando se requiere sincronización continua y escritura operativa entre Dataverse y F&O para entidades soportadas",
+      "Cuando solo se necesita leer inventario en tiempo real",
+      "Cuando se hace una migración puntual",
+      "Cuando se quiere evitar definir ownership"
+      ],
+      answer: [0],
+      explanation: "Dual-write sirve para continuidad operativa sincronizada, no para lectura simple ni cargas puntuales.",
+    },
+    {
+      type: "single",
+      prompt: "Si solo se necesita consultar saldo de inventario de F&O en Sales sin copiarlo, ¿qué patrón encaja mejor?",
+      options: [
+      "Virtual tables",
+      "Dual-write para todo",
+      "Entitlements",
+      "Real-time journey"
+      ],
+      answer: [0],
+      explanation: "Virtual tables permiten lectura sin duplicar el dato.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué control operativo debe existir en una integración CE + F&O?",
+      options: [
+      "Monitoreo, reconciliación, owner de errores y rollback",
+      "Solo un diagrama inicial",
+      "Un forecast de ventas",
+      "Un bot sin handoff"
+      ],
+      answer: [0],
+      explanation: "La integración necesita operación continua, no solo diseño inicial.",
+    },
+    {
+      type: "multi",
+      prompt: "¿Qué elementos deben aparecer en una matriz CE + F&O por entidad?",
+      options: [
+      "Sistema dueño",
+      "Patrón de integración",
+      "Regla de conflicto",
+      "Color del tema de la app"
+      ],
+      answer: [0, 1, 2],
+      explanation: "Ownership, patrón y conflicto son decisiones críticas; el color visual no resuelve integración.",
+    },
+  ],
+  65: [
+    {
+      type: "single",
+      prompt: "¿Qué distingue al capstone Enterprise D365 de una simple demo de pantallas?",
+      options: [
+      "Incluye arquitectura, Fit-Gap, ownership, roadmap, UAT, licencias y evidencias de portafolio",
+      "Solo muestra navegación por menús",
+      "Evita mencionar riesgos",
+      "No requiere explicar datos ni integración"
+      ],
+      answer: [0],
+      explanation: "El capstone demuestra criterio de arquitectura y consultoría, no solo uso de UI.",
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué un roadmap por fases es preferible a un big bang D365 enterprise?",
+      options: [
+      "Permite entregar valor incremental, reducir riesgo y validar dependencias por producto",
+      "Porque impide integrar sistemas",
+      "Porque elimina toda necesidad de licencias",
+      "Porque evita hacer UAT"
+      ],
+      answer: [0],
+      explanation: "Una arquitectura completa puede desplegarse por fases para controlar adopción, licencias, datos e integración.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué debe cubrir la matriz de datos del capstone?",
+      options: [
+      "Account, Contact, Opportunity, Case, Conversation, Work Order, Product, Sales Order, Invoice e Inventory con ownership",
+      "Solo nombres de usuarios",
+      "Únicamente colores del dashboard",
+      "Solo preguntas de entrevista"
+      ],
+      answer: [0],
+      explanation: "La matriz de datos define ownership y frontera entre CE, Customer Insights, Field Service y F&O.",
+    },
+    {
+      type: "single",
+      prompt: "¿Qué dependencia debe declararse explícitamente en un capstone serio?",
+      options: [
+      "Licencias/tenant por producto, canales, usuarios, datos e integraciones",
+      "Solo la preferencia de color del cliente",
+      "Que todo funciona sin ambiente real",
+      "Que F&O no requiere especialistas"
+      ],
+      answer: [0],
+      explanation: "Un diseño enterprise debe transparentar dependencias reales de licenciamiento y ambiente.",
+    },
+    {
+      type: "multi",
+      prompt: "¿Qué evidencias son válidas para portafolio en el Capstone Enterprise D365?",
+      options: [
+      "Diagrama de arquitectura",
+      "Matriz Fit-Gap",
+      "Casos UAT end-to-end",
+      "Solo una captura aislada del menú principal"
+      ],
+      answer: [0, 1, 2],
+      explanation: "Portafolio defendible requiere artefactos de diseño y validación, no capturas aisladas.",
     },
   ],
 };

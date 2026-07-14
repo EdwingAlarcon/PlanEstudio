@@ -43,6 +43,7 @@ const RESOURCE_LINKS = [
   { href: "/recursos/job-ready-admin-governance", label: UI.nav.adminGovernanceJobReady, icon: FileText },
   { href: "/recursos/portafolio-profesional", label: UI.nav.portfolioGuide, icon: FileText },
   { href: "/recursos/roadmap-especializacion-avanzada", label: UI.nav.advancedRoadmap, icon: Route },
+  { href: "/recursos/d365-tenant-readiness", label: UI.nav.d365TenantReadiness, icon: CheckSquare },
 ];
 
 interface SidebarProps {

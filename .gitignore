@@ -6,6 +6,7 @@ site/
 *.jpeg
 *.jpg
 .playwright-mcp/
+.d365-app-install/
 
 # Python
 __pycache__/

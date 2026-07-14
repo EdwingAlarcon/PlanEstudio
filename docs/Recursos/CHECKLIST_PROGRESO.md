@@ -1030,18 +1030,20 @@
 ---
 ---
 
-## 🔷 NIVEL 6: DYNAMICS 365 AVANZADO
+## 🔷 NIVEL 6: DYNAMICS 365 ENTERPRISE APPS
 
-> Nivel transversal — no es prerequisito de los niveles PL-900 → PL-600 ni del nivel IA, ni depende de ellos.
+> Nivel transversal — no es prerequisito de los niveles PL-900 → PL-600 ni del nivel IA, ni depende de ellos. Incluye CE avanzado, Contact Center, Customer Insights, Field Service e integración CE + F&O.
 
-### Módulo 56: Introducción a Dynamics 365 Avanzado
+### Módulo 56: Dynamics 365 CE Avanzado — Customer Engagement como Ecosistema Enterprise
 
 - [ ] **Conocimiento**: Explico por qué Sales y Customer Service comparten Account/Contact sin sincronización | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Dibujé el mapa de las 4 aplicaciones sobre Dataverse sin flechas de sincronización entre ellas | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Identifiqué los 4 eventos que conectan marketing→venta→servicio→campo→fidelización en un caso propio | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico por qué el ALM de una solución D365 CE es el mismo ALM de cualquier solución Power Platform | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Separé qué prácticas requieren tenant/licencia real y cuáles pueden entregarse como diseño documentado | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Puedo posicionar Contact Center, Customer Insights Data/Journeys y F&O dentro del mapa enterprise | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 56:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 56:** ___/6 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
@@ -1051,23 +1053,26 @@
 - [ ] **Práctica**: Escribí una regla de matching explícita que resuelve un caso sin clave compartida (ej. sin email) | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Definí una medida propia con su fórmula y las fuentes que combina | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-067 completado — unificación de perfiles y Customer 360 | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-085 completado — fuentes, matching, medidas, segmento y gobierno de datos | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 57:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 57:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 58: Field Service Avanzado — Scheduling, Recursos e Incident Types
+### Módulo 58: Field Service End-to-End — Work Orders, Agreements, Mobile Offline y RSO
 
 - [ ] **Conocimiento**: Explico la diferencia entre Scheduling Assistant manual y Resource Scheduling Optimization | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Definí un Incident Type con duración, Characteristics y 3 tareas obligatorias | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Expliqué qué técnicos vería el dispatcher resaltados en el Schedule Board y por qué | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-059 (Paso 3b) completado — Incident Type y Schedule Board para los 3 casos de prueba | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-086 completado — Agreement y mantenimiento preventivo | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-087 completado — Field Service Mobile offline y lifecycle de Work Order | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 58:** ___/4 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 58:** ___/6 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 59: Finance & Operations — Procesos ERP, Virtual Tables y Vocabulario Estándar
+### Módulo 59: F&O Awareness — Procesos ERP, Seguridad e Integración con CE
 
 - [ ] **Conocimiento**: Nombro y explico en una frase cada uno de los procesos ERP estándar (O2C, P2P, R2R, I2D) | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Identifiqué el evento donde el proceso pasa de lead-to-cash (Sales) a order-to-cash (F&O) | Dominio: ___/5 | Fecha: ___
@@ -1075,16 +1080,91 @@
 - [ ] **Entrega**: LAB-069 completado — mapas de proceso ERP end-to-end (O2C/P2P/R2R/I2D/Project-to-Profit) | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-070 completado — arquitectura técnica de integración CE+F&O con diagrama Mermaid y ownership de datos | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-064 completado con el vocabulario de procesos ERP y la decisión de integración | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Separé datos maestros y transaccionales en una matriz CE + F&O | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-089 completado — process mapping F&O avanzado | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 59:** ___/6 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 59:** ___/8 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### 🏆 Hitos de Nivel Dynamics 365 Avanzado
+### Módulo 60: Dynamics 365 Sales Avanzado
 
-- [ ] Módulos 56-59 completados con 80%+ de checkboxes marcados | Fecha: ___
+- [ ] **Conocimiento**: Distingo etapa de oportunidad, probabilidad y forecast category | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Construí una matriz de forecast con cuota, committed, best case y gap | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Definí una política de pipeline hygiene aplicable a un equipo comercial | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-081 completado — Sales Forecasting & Pipeline Review | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Identifiqué qué requiere tenant/licencia Dynamics 365 Sales | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 60:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 61: Dynamics 365 Customer Service Avanzado
+
+- [ ] **Conocimiento**: Distingo entitlement, SLA, queue y routing | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Documenté pausa, advertencia y escalamiento del SLA | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseñé reglas de routing verificables con casos de prueba | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-082 completado — SLA + Entitlements + Routing | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Identifiqué evidencias que requieren ambiente Customer Service real | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 61:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 62: Dynamics 365 Contact Center / Omnichannel
+
+- [ ] **Conocimiento**: Explico la diferencia entre Customer Service y Contact Center/Omnichannel | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseñé un workstream con canal, cola, capacidad y routing | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Definí handoff bot-agente con contexto mínimo | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-083 completado — Contact Center Simulation | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Identifiqué licencias/canales/tenant necesarios para probar Contact Center real | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 62:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 63: Customer Insights - Journeys
+
+- [ ] **Conocimiento**: Distingo Customer Insights - Data de Customer Insights - Journeys | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseñé un real-time journey con trigger, condición, espera y objetivo | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Documenté consentimiento por propósito y canal | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-084 completado — Customer Insights Real-Time Journey | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Identifiqué pruebas negativas y requisitos de tenant/licencia | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 63:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 64: Integración CE + Finance & Operations
+
+- [ ] **Conocimiento**: Explico dual-write, DMF, virtual tables e integración custom | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Construí una matriz de ownership CE + F&O para 5 entidades | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Elegí patrón de integración con criterio explícito | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-088 completado — Dual-write Ownership Matrix | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Identifiqué dependencias de ambiente real para dual-write | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 64:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 65: Capstone Enterprise D365
+
+- [ ] **Entrega**: Diseñé un flujo end-to-end con producto responsable por paso | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Construí matrices Fit-Gap y ownership de datos | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Definí roadmap por fases con dependencias de licencia/tenant | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-090 completado — Capstone Enterprise D365 | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Preparé evidencias defendibles en entrevista | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 65:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### 🏆 Hitos de Nivel Dynamics 365 Enterprise Apps
+
+- [ ] Módulos 56-65 completados con 80%+ de checkboxes marcados | Fecha: ___
+- [ ] D365 Tenant Readiness completado para cada lab presentado como Sandbox real o Productivo controlado | Fecha: ___
 - [ ] Autoevaluación promedio ≥ 4.0/5 | Promedio: ___/5
-- [ ] Certificado del Nivel Dynamics 365 Avanzado generado | Fecha: ___
+- [ ] Certificado del Nivel Dynamics 365 Enterprise Apps generado | Fecha: ___
 
 **Fecha de inicio Nivel D365:** ___ | **Fecha de completación:** ___
 
@@ -1100,8 +1180,8 @@
 | 🟠 Nivel 3 - Avanzado | 13 | 139 | ___ | ___% | ___/5 | ___ |
 | 🔴 Nivel 4 - Arquitecto | 11 | 104 | ___ | ___% | ___/5 | ___ |
 | 🟣 Nivel IA - Desarrollo Asistido | 14 | 63 | ___ | ___% | ___/5 | ___ |
-| 🔷 Nivel D365 - Dynamics 365 Avanzado | 4 | 18 | ___ | ___% | ___/5 | ___ |
-| **TOTAL** | **59** | **565** | ___ | ___% | ___/5 | ___ |
+| 🔷 Nivel D365 - Dynamics 365 Enterprise Apps | 10 | 55 | ___ | ___% | ___/5 | ___ |
+| **TOTAL** | **65** | **602** | ___ | ___% | ___/5 | ___ |
 
 ### Resumen por Módulo
 
@@ -1162,10 +1242,16 @@
 | 53 | Dataverse Web API, D365 y Autenticación | ___/5 | ___% | ___/5 |
 | 54 | ALM de Soluciones con Apoyo de IA | ___/5 | ___% | ___/5 |
 | 55 | Análisis, Arquitectura y Consultoría Funcional D365 | ___/6 | ___% | ___/5 |
-| 56 | Introducción a Dynamics 365 Avanzado | ___/4 | ___% | ___/5 |
-| 57 | Customer Insights - Data | ___/4 | ___% | ___/5 |
-| 58 | Field Service Avanzado | ___/4 | ___% | ___/5 |
-| 59 | Finance & Operations — Procesos ERP | ___/4 | ___% | ___/5 |
+| 56 | Dynamics 365 CE Avanzado | ___/6 | ___% | ___/5 |
+| 57 | Customer Insights - Data | ___/5 | ___% | ___/5 |
+| 58 | Field Service End-to-End | ___/6 | ___% | ___/5 |
+| 59 | F&O Awareness | ___/8 | ___% | ___/5 |
+| 60 | Dynamics 365 Sales Avanzado | ___/5 | ___% | ___/5 |
+| 61 | Customer Service Avanzado | ___/5 | ___% | ___/5 |
+| 62 | Contact Center / Omnichannel | ___/5 | ___% | ___/5 |
+| 63 | Customer Insights - Journeys | ___/5 | ___% | ___/5 |
+| 64 | Integración CE + F&O | ___/5 | ___% | ___/5 |
+| 65 | Capstone Enterprise D365 | ___/5 | ___% | ___/5 |
 
 ### Timeline Visual de Progreso
 

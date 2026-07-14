@@ -5,7 +5,7 @@ import { getLevelById, getAllLevels } from "@/lib/content";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ModuleCompletionClient } from "@/components/modules/module-completion-client";
-import { ArrowRight, Clock, BookOpen } from "lucide-react";
+import { ArrowRight, Clock, BookOpen, ClipboardCheck, FlaskConical, ShieldCheck } from "lucide-react";
 import { UI, type LevelId } from "@/lib/i18n";
 
 interface PageProps {
@@ -69,6 +69,8 @@ export default async function LevelPage({ params }: PageProps) {
       {/* ── Level progress ────────────────────────────────────────────────── */}
       <LevelProgressBanner levelId={levelData.id} />
 
+      {levelData.id === "d365" && <D365EnterprisePracticePanel />}
+
       {/* ── Module list ──────────────────────────────────────────────────── */}
       <section aria-labelledby="modules-heading">
         <h2 id="modules-heading" className="text-base font-semibold text-foreground mb-4">
@@ -118,6 +120,87 @@ export default async function LevelPage({ params }: PageProps) {
         )}
       </section>
     </div>
+  );
+}
+
+function D365EnterprisePracticePanel() {
+  const practiceTracks = [
+    {
+      title: "Preparación del tenant",
+      description: "Confirma ambientes, licencias, roles, DLP y apps instaladas antes de ejecutar labs que cambian configuración real.",
+      icon: ShieldCheck,
+      href: "/recursos/d365-tenant-readiness",
+      label: "Ver readiness",
+    },
+    {
+      title: "Labs avanzados",
+      description: "Trabaja Sales, SLA/routing, Contact Center, Customer Insights, Field Service y CE + F&O con evidencias de portafolio.",
+      icon: FlaskConical,
+      href: "/labs",
+      label: "Ver labs",
+    },
+    {
+      title: "Capstone enterprise",
+      description: "Cierra con Fit-Gap, matriz de ownership, roadmap, UAT y resumen ejecutivo para defender una solución D365 completa.",
+      icon: ClipboardCheck,
+      href: "/labs/lab-90-capstone-enterprise-d365",
+      label: "Abrir capstone",
+    },
+  ];
+
+  return (
+    <section
+      aria-labelledby="d365-practice-heading"
+      className="rounded-xl border border-teal-200/70 bg-teal-50/70 px-5 py-5 shadow-fluent-1 dark:border-teal-900/70 dark:bg-teal-950/30"
+    >
+      <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <div className="mb-2 flex items-center gap-2">
+            <Badge variant="d365">Práctica enterprise</Badge>
+            <Badge variant="outline">Dev → QA → Prod</Badge>
+          </div>
+          <h2 id="d365-practice-heading" className="text-base font-semibold text-foreground">
+            Ruta práctica recomendada para Dynamics 365
+          </h2>
+          <p className="mt-1 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Primero diseña y documenta; después configura en Dev; al final valida instalación de módulos y promoción a QA. Prod queda fuera de prácticas de prueba.
+          </p>
+        </div>
+        <Button asChild size="sm" variant="outline" className="shrink-0">
+          <Link href="/recursos/d365-tenant-readiness">
+            Checklist tenant
+            <ArrowRight className="ml-1.5 h-3.5 w-3.5" aria-hidden />
+          </Link>
+        </Button>
+      </div>
+
+      <div className="grid gap-3 md:grid-cols-3">
+        {practiceTracks.map((track) => {
+          const Icon = track.icon;
+          return (
+            <Link
+              key={track.href}
+              href={track.href}
+              className="group rounded-lg border border-border bg-card p-4 shadow-fluent-1 transition-all duration-150 hover:border-teal-500/40 hover:shadow-fluent-2"
+            >
+              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-teal-100 text-teal-700 dark:bg-teal-900/60 dark:text-teal-300">
+                <Icon className="h-4.5 w-4.5" aria-hidden />
+              </div>
+              <p className="text-sm font-semibold text-foreground group-hover:text-teal-700 dark:group-hover:text-teal-300">
+                {track.title}
+              </p>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                {track.description}
+              </p>
+              <span className="mt-3 inline-flex items-center text-xs font-medium text-teal-700 dark:text-teal-300">
+                {track.label}
+                <ArrowRight className="ml-1 h-3 w-3" aria-hidden />
+              </span>
+            </Link>
+          );
+        })}
+      </div>
+    </section>
   );
 }
 

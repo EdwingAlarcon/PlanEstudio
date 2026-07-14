@@ -87,12 +87,20 @@ competencia de tu ruta. Tu portafolio no necesita cubrir las 7 rutas — necesit
 tuya. Si tu ruta es Developer, un portafolio con 3 proyectos técnicos sólidos vale más que uno con
 7 proyectos superficiales de todas las rutas.
 
-## Especializaciones que todavía no forman parte del portafolio
+## Especialización Dynamics 365 Enterprise Apps en el portafolio
 
-Si buscas evidencia de Contact Center avanzado, Sales Operations (territorios, forecasting, Sales
-Insights) o configuración real de Finance & Operations, no la vas a encontrar en `/portafolio`
-todavía — esas áreas no tienen capstone ni lab implementado. El
-[Roadmap de Especialización Avanzada Dynamics 365](ROADMAP_ESPECIALIZACION_AVANZADA.md) explica,
-tema por tema, qué existe hoy (awareness o diseño avanzado) y qué falta para que se convierta en
-evidencia de portafolio real. Preséntalo así ante un entrevistador si te preguntan: como roadmap
-declarado, no como brecha oculta.
+La ruta Dynamics 365 Customer Engagement y la ruta Finance & Operations ya pueden producir un
+portafolio enterprise usando el **LAB-090 — Capstone Enterprise D365**. Guarda como mínimo:
+
+- Diagrama de arquitectura CE + F&O.
+- Matriz Fit-Gap.
+- Matriz de datos/ownership.
+- Roadmap por fases con dependencias de tenant/licencia.
+- Casos UAT end-to-end.
+- Resumen ejecutivo de 1 página.
+
+Para ser honesto en entrevista: Sales forecasting, SLA, routing, Contact Center, real-time journeys,
+Field Service Mobile/RSO y dual-write deben declarar estado de ejecución usando
+[D365 Tenant Readiness](D365_TENANT_READINESS.md): **Simulado**, **Sandbox real** o **Productivo
+controlado**. La configuración profunda de Finance o Supply Chain Management sigue fuera del
+alcance base y debe presentarse como siguiente paso de especialización.

@@ -70,10 +70,10 @@ corresponde a cada ruta.
 ## Dynamics 365 Customer Engagement Consultant
 
 *Sales, Service, Insights, Field Service.* Ruta: Consultor Funcional → Dynamics 365 CE → Solution Architect.
-Estado de la ruta: **avanzado — especializaciones en expansión** — Sales, Customer Service,
-Customer Insights - Data y Field Service ya tienen módulo y lab dedicados con datos reales;
-Contact Center/Omnichannel avanzado y Sales Operations siguen en el
-[Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md).
+Estado de la ruta: **disponible** — Sales, Customer Service, Contact Center/Omnichannel, Customer
+Insights - Data/Journeys y Field Service tienen módulo y lab dedicados. Las capacidades que
+requieren tenant/licencia real se controlan con el recurso
+[D365 Tenant Readiness](D365_TENANT_READINESS.md).
 
 | Competencia | Nivel | Evidencia esperada | Lab / proyecto | Criterio de aprobación |
 |---|---|---|---|---|
@@ -88,11 +88,10 @@ Contact Center/Omnichannel avanzado y Sales Operations siguen en el
 ## Finance & Operations Consultant / Architect Awareness
 
 *ERP conceptual, integración.* Ruta: Consultor Funcional → Finance & Operations → Solution Architect.
-Estado de la ruta: **awareness avanzado — práctica en roadmap** — el Módulo 59 ya cubre vocabulario y mapas
-paso a paso de los 5 procesos ERP estándar, y los LAB-069/LAB-070 aplican ese vocabulario a un
-escenario concreto con diseño técnico de integración; sigue faltando profundidad de configuración
-real de producto (Finance, SCM, Commerce, Project Operations) para dejar de ser una ruta conceptual
-inicial.
+Estado de la ruta: **awareness avanzado — práctica en roadmap** — los Módulos 59/64 cubren vocabulario,
+mapas de proceso, ownership de datos e integración CE + F&O. Los LAB-069/LAB-070/LAB-088/LAB-089
+producen evidencia de arquitectura; la configuración real de producto Finance/SCM/Commerce/Project
+Operations requiere tenant F&O y formación dedicada.
 
 | Competencia | Nivel | Evidencia esperada | Lab / proyecto | Criterio de aprobación |
 |---|---|---|---|---|
@@ -154,21 +153,19 @@ Con esto, las 7 rutas quedan con evidencia de cierre verificable — no solo lec
 
 ---
 
-## Especializaciones futuras / en expansión
+## Especializaciones avanzadas y gates de ambiente real
 
-Las filas "Customer Service" y "Finance & Operations Consultant / Architect Awareness" de esta
-matriz representan lo máximo que se puede demostrar **hoy**. Cuatro áreas de especialización
-avanzada todavía no tienen fila propia porque no tienen módulo, lab ni rúbrica implementados:
+Estas áreas ya tienen cobertura de módulo/lab o roadmap declarado. Cuando una capacidad depende de
+tenant/licencia/canal real, debe completarse el gate correspondiente en
+[D365 Tenant Readiness](D365_TENANT_READINESS.md) antes de presentarla como ejecución real.
 
-| Especialización futura | Estado | Detalle tema por tema |
+| Especialización | Estado | Detalle tema por tema |
 |---|---|---|
-| Expert Customer Service / Contact Center | ⚪ En expansión (base 🔵 Avanzado ya cubierta: Módulo 20, LAB-068) | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#1-ruta-expert-customer-service--contact-center) |
-| Expert Sales Operations | ⚪ En expansión (base 🔵 Avanzado ya cubierta: Módulo 20, LAB-066) | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#2-ruta-expert-sales-operations) |
-| F&O Practitioner / Architect Track | ⚪ En expansión (mayor brecha: solo awareness/diseño, sin configuración de producto) | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#3-ruta-fo-practitioner--architect-track) |
-| Business Applications Architect Enterprise | ⚪ En expansión (base 🔵 Avanzado ya cubierta: LAB-070, Módulo 41) | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#4-ruta-business-applications-architect-enterprise) |
+| Expert Customer Service / Contact Center | 🔵 Avanzado con simulación; ejecución real requiere canal/licencia | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#1-ruta-expert-customer-service-contact-center) |
+| Expert Sales Operations | 🔵 Avanzado con forecasting/pipeline; predicción real requiere Sales/licencia/datos | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#2-ruta-expert-sales-operations) |
+| F&O Practitioner / Architect Track | 🔵 Arquitectura e integración; configuración Finance/SCM sigue fuera de alcance base | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#3-ruta-fo-practitioner-architect-track) |
+| Business Applications Architect Enterprise | 🔵 Avanzado con Capstone Enterprise D365 | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#4-ruta-business-applications-architect-enterprise) |
 
-Ninguna de estas cuatro aparece como ruta profesional en `/rutas` ni tiene evidencia listada en
-`/portafolio` — hacerlo antes de tener lab, evidencia y rúbrica reales sería prometer una
-experticia que la plataforma todavía no puede respaldar. El roadmap enlazado detalla, tema por
-tema, qué está en 🔵 Avanzado, qué en 🟡 Awareness y qué en ⚪ En expansión, y qué se necesita para
-que cada tema pase a 🟢 Cubierto.
+El roadmap enlazado detalla qué está cubierto como diseño/lab y qué exige ambiente real. El
+portafolio debe declarar el estado de cada evidencia: Simulado, Sandbox real o Productivo
+controlado.

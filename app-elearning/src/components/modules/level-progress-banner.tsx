@@ -99,7 +99,7 @@ function LevelCompleteBanner({ levelId, total }: { levelId: LevelId; total: numb
             {levelId === "ia"
               ? "¡Nivel de Desarrollo Asistido por IA Completado!"
               : levelId === "d365"
-              ? "¡Nivel Dynamics 365 Avanzado Completado!"
+              ? "¡Nivel Dynamics 365 Enterprise Apps Completado!"
               : isFinal
               ? "¡Plan de Estudio Completado!"
               : `¡${UI.levels.badge[levelId]} Completado!`}

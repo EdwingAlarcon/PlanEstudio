@@ -1,9 +1,9 @@
 ---
 moduleId: 59
-title: "Finance & Operations — Procesos ERP, Virtual Tables y Vocabulario Estándar"
+title: "F&O Awareness — Procesos ERP, Seguridad e Integración con CE"
 level: "d365"
-certification: "Especialista Dynamics 365 CE"
-estimatedMinutes: 12
+certification: "Finance & Operations awareness"
+estimatedMinutes: 13
 slug: "finance-operations-procesos-erp"
 ---
 ### 🎯 Objetivo
@@ -36,12 +36,17 @@ Nombrar y reconocer los procesos ERP estándar de Dynamics 365 Finance & Operati
 - **Consideraciones de licenciamiento:** Finance & Operations se licencia por separado de Dynamics 365 CE (Sales/Service/Field Service comparten un pool de licencias distinto al de F&O) — un proyecto que combina CE y F&O casi siempre involucra dos conversaciones de licenciamiento distintas con el cliente, no una sola.
 - **Consideraciones de seguridad:** F&O tiene su propio modelo de seguridad basado en roles y "duties/privileges" a nivel de proceso de negocio, distinto del modelo de Security Roles de Dataverse — al diseñar dual-write, hay que mapear explícitamente qué rol de F&O corresponde a qué rol de Dataverse, no asumir que son equivalentes.
 - **Riesgo de sobrepersonalización específico de F&O:** construir en Dataverse una réplica de lógica que F&O ya resuelve (cálculo de impuestos, validación de crédito, costeo de inventario) es el error de arquitectura más costoso en proyectos CE+F&O — esa lógica depende de configuración fiscal y contable que cambia por país y por regulación, y F&O ya la mantiene actualizada.
+- **Legal entities y dimensiones financieras:** F&O organiza operación financiera por entidades legales, plan de cuentas y dimensiones. Un Account en Sales no equivale automáticamente a un customer financiero listo para facturar.
+- **Master data vs. transactional data:** clientes, productos y proveedores son datos maestros; órdenes, facturas, pagos y movimientos de inventario son transaccionales. La estrategia de integración cambia según el tipo.
+- **Awareness, no implementación senior F&O:** este módulo prepara a un arquitecto/consultor CE para conversar con equipos ERP, no reemplaza formación profunda en Finance, SCM, Commerce o Project Operations.
+- **Requisitos reales de práctica:** mapear procesos puede hacerse sin tenant. Configurar entidades legales, contabilidad, almacenes, dual-write o DMF requiere ambiente F&O real, datos maestros, permisos y participación de consultores F&O.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 1. Para el escenario del Lab 66 (SIT vende licencias Power Platform), identifica en qué punto exacto el proceso deja de ser "lead-to-cash de Sales" y pasa a ser "order-to-cash de F&O" — nombra el evento que dispara ese cambio de sistema.
 2. Escribe, en una tabla de 2 columnas, los 4 procesos ERP (O2C, P2P, R2R, I2D) con un ejemplo concreto de una transacción de SIT para cada uno.
 3. Un stakeholder pide "mostrar el saldo de inventario de un producto dentro de la Opportunity de Sales, sin duplicar el dato en Dataverse". Decide, usando el criterio de la sección de Conceptos Clave, si la solución correcta es dual-write, DMF o virtual tables — justifica por qué las otras dos no aplican.
 4. Identifica un caso donde construir la lógica en Dataverse en vez de dejarla en F&O sería sobrepersonalización — explica qué regulación o configuración cambiante haría que esa lógica se desactualizara si se duplicara.
+5. Crea una matriz master/transactional para Customer, Product, Sales Order, Invoice e Inventory, indicando si el dato se consulta, sincroniza o migra.
 
 ### 💼 Casos Reales de Negocio
 Un distribuidor mediano implementó Dynamics 365 Sales y, para "agilizar", construyó en Dataverse una tabla personalizada que calculaba impuestos y validaba crédito del cliente antes de aprobar una Opportunity — duplicando lógica que ya existía en su ERP (no D365 F&O, un sistema legado, pero el problema es el mismo). Seis meses después, un cambio en la tasa de IVA regional se actualizó en el ERP pero nadie recordó actualizar la tabla de Dataverse — el equipo comercial estuvo aprobando cotizaciones con impuestos incorrectos durante semanas hasta que Finanzas lo detectó en una conciliación. La lección: la lógica fiscal y de crédito pertenece al sistema que la mantiene regulatoriamente actualizado (F&O o el ERP equivalente), no a una réplica en Dataverse por conveniencia de UI.
@@ -51,6 +56,7 @@ Un distribuidor mediano implementó Dynamics 365 Sales y, para "agilizar", const
 - Aplicar el criterio de decisión (escritura continua → dual-write; carga puntual → DMF; solo lectura → virtual tables) ANTES de proponer una integración, no elegir por familiaridad con una sola opción.
 - Tratar el licenciamiento de F&O como una conversación comercial separada desde el inicio del proyecto, no un detalle a resolver después del diseño técnico.
 - Nunca replicar en Dataverse lógica fiscal, de crédito o de costeo que ya vive en F&O — es la forma más común de sobrepersonalización costosa en proyectos CE+F&O.
+- Involucrar consultores F&O en decisiones de legal entity, impuestos, crédito, inventario y cierre financiero.
 
 ### ⚠️ Errores Comunes
 | Error | Causa | Solución |
@@ -59,9 +65,12 @@ Un distribuidor mediano implementó Dynamics 365 Sales y, para "agilizar", const
 | Elegir dual-write para una carga masiva puntual | Confundir sincronización continua con migración de datos | Usar DMF para cargas batch/migraciones, dual-write solo para continuidad operativa |
 | Duplicar lógica fiscal o de crédito en Dataverse | Priorizar velocidad de UI sobre gobierno del dato | Dejar esa lógica en F&O y consultarla vía virtual tables o dual-write, nunca replicarla |
 | Asumir que los roles de seguridad de F&O y Dataverse son equivalentes | No mapear explícitamente ambos modelos de seguridad | Documentar la correspondencia rol F&O ↔ rol Dataverse antes de activar dual-write |
+| Tratar F&O como "otra app CE" | Se desconoce su modelo financiero/operativo | Reconocer entidad legal, procesos ERP y seguridad propia |
 
 ### 🧪 Criterios de Validación
 - [ ] Puedo nombrar y explicar en una frase cada uno de los 4-5 procesos ERP estándar (O2C, P2P, R2R, I2D, project-to-profit)
 - [ ] Identifiqué el evento exacto donde el proceso de SIT pasa de lead-to-cash (Sales) a order-to-cash (F&O)
 - [ ] Apliqué el criterio de decisión dual-write vs. DMF vs. virtual tables a un caso concreto
 - [ ] Identifiqué un ejemplo de sobrepersonalización por duplicar lógica fiscal/crédito fuera de F&O
+- [ ] Separé datos maestros y transaccionales en una matriz CE + F&O
+- [ ] Puedo explicar qué requiere ambiente F&O real y qué es solo awareness de arquitectura

@@ -1,10 +1,9 @@
 # Roadmap de Especialización Avanzada Dynamics 365
 
 Este documento es la contraparte honesta de la [Matriz de Competencias](MATRIZ_COMPETENCIAS.md):
-donde esa matriz certifica lo que **ya puedes demostrar hoy**, este roadmap enumera lo que
-**todavía no**, y por qué. Ninguna ruta de esta página tiene módulo, lab, rúbrica ni evidencia
-implementados todavía. Existen aquí para que la promesa de la plataforma sea trazable — puedes ver
-exactamente qué falta y qué se necesitaría para cerrarlo — en lugar de quedar implícita o inflada.
+donde esa matriz certifica lo que **ya puedes demostrar hoy**, este roadmap enumera qué quedó
+cubierto como módulo/lab y qué todavía requiere tenant, licencia, canal o ambiente real para
+convertirse en configuración productiva verificable.
 
 ## Por qué existe este roadmap
 
@@ -12,16 +11,19 @@ PlanEstudio ya cubre con evidencia real:
 
 - **Power Platform completo** (Canvas, Model-Driven, Dataverse, Power Automate, Power Fx, ALM, PCF,
   plugins, gobernanza) — rutas Maker, Consultor Funcional, Developer, Solution Architect.
-- **Dynamics 365 CE base e intermedio-avanzado**: Sales lead-to-cash (Módulo 20, LAB-066), Customer
-  Service case-to-resolution con SLA/escalamiento/dashboard (Módulo 20, LAB-068), Customer Insights -
-  Data y Journeys (Módulos 57/58, LAB-067/LAB-058), Field Service work-order-to-close (Módulo 58, LAB-059).
-- **Finance & Operations — awareness avanzado**: vocabulario, mapas paso a paso de los 5 procesos
-  ERP estándar y diseño técnico de integración CE+F&O (Módulo 59, LAB-069/LAB-070, capstone LAB-064).
+- **Dynamics 365 CE avanzado**: Sales forecasting/pipeline (Módulo 60, LAB-081), Customer Service
+  SLA/entitlements/routing (Módulo 61, LAB-082), Contact Center simulation (Módulo 62, LAB-083),
+  Customer Insights Data/Journeys separados (Módulos 57/63, LAB-085/LAB-084) y Field Service
+  end-to-end (Módulo 58, LAB-086/LAB-087).
+- **Finance & Operations — awareness avanzado e integración**: vocabulario, mapas de proceso,
+  ownership CE + F&O y diseño de integración (Módulos 59/64, LAB-069/LAB-070/LAB-088/LAB-089).
+- **Capstone Enterprise D365**: arquitectura CE + F&O, roadmap, Fit-Gap, UAT y evidencia de
+  portafolio (Módulo 65, LAB-090).
 
-Lo que **no** cubre todavía es configuración productiva en un tenant real de canales de
-Contact Center, operaciones comerciales avanzadas (territorios, forecasting, Sales Insights),
-implementación de producto F&O (Finance/SCM/Commerce/Project Operations) y un capstone enterprise
-que combine CE y F&O de punta a punta. Esas cuatro áreas son el contenido de este roadmap.
+La ejecución real de canales Contact Center, Sales Insights predictivo, RSO/Field Service Mobile,
+Customer Insights, dual-write y F&O debe pasar por el gate de
+[D365 Tenant Readiness](D365_TENANT_READINESS.md). Si el gate no se cumple, el entregable se
+presenta como diseño/simulación avanzada, no como configuración productiva.
 
 ## Leyenda de madurez
 
@@ -35,35 +37,34 @@ categoría implícita de "experto":
 | 🟡 **Awareness** | Solo vocabulario y contexto conceptual | Sirve para conversación funcional/arquitectónica, no para configurar el producto |
 | ⚪ **En expansión (roadmap)** | Todavía no tiene contenido en la plataforma | Aparece aquí como plan, no como lab disponible |
 
-Ninguna de las cuatro rutas de este documento llega hoy a 🟢 **Cubierto** en su conjunto — de ahí
-que ninguna aparezca en `/rutas` como ruta profesional "Disponible" o "Parcial": aparecer ahí
-implicaría un capstone y evidencia que todavía no existen.
+Las rutas Dynamics 365 Customer Engagement y Finance & Operations ya aparecen en `/rutas`, con
+evidencia de diseño/lab y gate explícito para ambiente real.
 
 ---
 
 ## 1. Ruta Expert Customer Service / Contact Center
 
-**Estado global: ⚪ En expansión**, con una base 🔵 Avanzado ya construida (Módulo 20, LAB-068).
+**Estado global: 🔵 Avanzado**, con simulación de Contact Center implementada (Módulo 62, LAB-083).
 
 | Tema | Madurez actual |
 |---|---|
 | Case management, colas, SLA, escalamiento, dashboard operativo | 🔵 Avanzado (Módulo 20, LAB-068) |
 | Omnichannel for Customer Service (routing multicanal, contexto de conversación) | 🟡 Awareness (mencionado en Módulo 20) |
-| Dynamics 365 Contact Center | ⚪ En expansión |
-| Chat | ⚪ En expansión |
-| Voice | ⚪ En expansión |
-| SMS | ⚪ En expansión |
-| Email (enrutamiento avanzado, no el caso base) | ⚪ En expansión |
-| Unified routing (reglas basadas en habilidad/capacidad/prioridad) | ⚪ En expansión |
-| Agent experience (espacio de trabajo multi-sesión, macros, productivity pane) | ⚪ En expansión |
-| Supervisor experience (monitoreo en vivo, intervención, reasignación) | ⚪ En expansión |
+| Dynamics 365 Contact Center | 🔵 Avanzado (Módulo 62, LAB-083 como simulación) |
+| Chat | 🔵 Avanzado (diseño de canal/workstream; ejecución requiere canal real) |
+| Voice | 🟡 Awareness (requiere número/proveedor/tenant real) |
+| SMS | 🟡 Awareness (requiere proveedor/canal real) |
+| Email (enrutamiento avanzado, no el caso base) | 🔵 Avanzado (diseño de routing; configuración real depende de tenant) |
+| Unified routing (reglas basadas en habilidad/capacidad/prioridad) | 🔵 Avanzado (Módulo 62, LAB-083) |
+| Agent experience (espacio de trabajo multi-sesión, macros, productivity pane) | 🟡 Awareness |
+| Supervisor experience (monitoreo en vivo, intervención, reasignación) | 🔵 Avanzado (dashboard conceptual en LAB-083) |
 | Analytics (Customer Service Analytics, Omnichannel Insights) | ⚪ En expansión |
 | Copilot para agentes (resúmenes de caso, respuestas sugeridas) | 🟡 Awareness (mencionado en Módulo 20) |
 | Escenarios de atención multicanal integrados (un mismo cliente saltando de chat a voz a caso) | ⚪ En expansión |
 
-### Laboratorio propuesto: Contact Center Simulation
+### Laboratorio implementado: Contact Center Simulation
 
-**Objetivo (cuando se implemente):** diseñar el enrutamiento unificado de un caso que entra por
+**Objetivo:** diseñar el enrutamiento unificado de un caso que entra por
 tres canales distintos (chat, voz, email) para el mismo cliente, con reglas de habilidad/capacidad,
 y documentar la experiencia de agente y de supervisor sin necesitar licencias de Contact Center
 activas.
@@ -75,39 +76,38 @@ existen en un ambiente de práctica estándar. Sin ese tenant, el laboratorio so
 matrices de decisión, wireframes de cola unificada) — no una configuración productiva verificable
 con datos reales entrando por un canal de voz o chat en vivo.
 
-Cuando este lab se construya, seguirá el mismo estándar que el resto de la plataforma: frontmatter
-completo, datos de prueba, pasos numerados, evidencia esperada y rúbrica de aprobación explícitas —
-no se publicará como lab "Cubierto" hasta que cumpla ese estándar completo.
+Este lab ya existe como LAB-083. Sigue siendo simulación avanzada: no afirma configuración productiva
+de canales reales sin tenant/licencia.
 
 ---
 
 ## 2. Ruta Expert Sales Operations
 
-**Estado global: ⚪ En expansión**, con una base 🔵 Avanzado ya construida (Módulo 20, LAB-066).
+**Estado global: 🔵 Avanzado**, con Sales Forecasting & Pipeline Review implementado (Módulo 60, LAB-081).
 
 | Tema | Madurez actual |
 |---|---|
 | Proceso lead-to-cash (BPF, Quote → Order → Invoice) | 🔵 Avanzado (Módulo 20, LAB-066) |
 | Territories (asignación geográfica/vertical de cuentas) | ⚪ En expansión |
-| Forecasting (categorías de forecast, forecast configurable) | ⚪ En expansión |
-| Goals (metas individuales/de equipo, rollup) | ⚪ En expansión |
-| Sales Insights (relationship health, predicción de conversión) | ⚪ En expansión |
+| Forecasting (categorías de forecast, forecast configurable) | 🔵 Avanzado (Módulo 60, LAB-081; validación real requiere Sales) |
+| Goals (metas individuales/de equipo, rollup) | 🔵 Avanzado (diseño/matriz; configuración real requiere tenant) |
+| Sales Insights (relationship health, predicción de conversión) | 🟡 Awareness (requiere licencia/datos históricos) |
 | Sales Accelerator (secuencias, listas de trabajo priorizadas) | ⚪ En expansión |
-| Pipeline management (vistas Kanban, revisión de pipeline) | ⚪ En expansión |
+| Pipeline management (vistas Kanban, revisión de pipeline) | 🔵 Avanzado (LAB-081) |
 | Dashboards ejecutivos de ventas | 🟡 Awareness (patrón de dashboard cubierto en Módulo 20 para Service, no adaptado a Sales) |
 | Productividad comercial (plantillas de email, secuencias, notas asistidas por IA) | ⚪ En expansión |
 | Integración con Outlook/Teams/Copilot para venta asistida | 🟡 Awareness |
 
-### Laboratorio propuesto: Forecasting & Pipeline Review
+### Laboratorio implementado: Forecasting & Pipeline Review
 
-**Objetivo (cuando se implemente):** configurar una jerarquía de forecast simple (individual →
+**Objetivo:** diseñar una jerarquía de forecast simple (individual →
 gerente), definir metas de un trimestre y ejecutar una revisión de pipeline con al menos 3
 oportunidades en distintas etapas, documentando qué decisión comercial tomaría un gerente de ventas
 a partir de esa vista.
 
 **Qué requiere un tenant real:** Forecasting configurable y Sales Insights dependen de licencias
 Premium/Insights y de datos históricos suficientes para que las predicciones sean significativas.
-Sin eso, el lab propuesto puede cubrir la **configuración de la jerarquía de forecast y goals** (que
+Sin eso, el lab cubre el **diseño de la jerarquía de forecast y goals** (que
 sí es reproducible con datos de prueba), pero no una demostración real de predicción de Sales
 Insights — ese punto quedará marcado explícitamente como fuera de alcance dentro del lab, no
 presentado como si funcionara.
@@ -142,8 +142,8 @@ Commerce o Project Operations.
 | Inventory-to-Deliver / Project-to-Profit (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069) |
 | Data entities (estructura, staging, validaciones) | 🟡 Awareness (Módulo 59) |
 | Data Management Framework (importación masiva, manejo de errores) | 🟡 Awareness (LAB-064) |
-| Dual-write setup awareness (mapas, entidades vinculadas) | 🔵 Avanzado (LAB-070) |
-| Integration with Dataverse (patrones de integración, ownership de datos) | 🔵 Avanzado (LAB-070) |
+| Dual-write setup awareness (mapas, entidades vinculadas) | 🔵 Avanzado (LAB-070, LAB-088) |
+| Integration with Dataverse (patrones de integración, ownership de datos) | 🔵 Avanzado (Módulo 64, LAB-070, LAB-088) |
 | LCS awareness (ciclo de vida, ambientes, actualizaciones) | ⚪ En expansión |
 | Security (roles de seguridad F&O, duty/privilege) | ⚪ En expansión |
 | Reporting (Financial Reporting, Power BI embebido en F&O) | ⚪ En expansión |
@@ -166,7 +166,7 @@ Competencias pasará de 🟡/⚪ a 🟢 **Cubierto**.
 
 ## 4. Ruta Business Applications Architect Enterprise
 
-**Estado global: ⚪ En expansión**, apoyada en una base 🔵 Avanzado real (LAB-070, Módulo 41).
+**Estado global: 🔵 Avanzado**, apoyada en CE + F&O ownership y capstone enterprise (Módulo 65, LAB-090).
 
 | Tema | Madurez actual |
 |---|---|
@@ -181,19 +181,16 @@ Competencias pasará de 🟡/⚪ a 🟢 **Cubierto**.
 | ALM across apps (pipelines que despliegan CE y F&O juntos) | 🟡 Awareness (LAB-019 cubre ALM de Power Platform, no F&O) |
 | Data governance (calidad de datos, maestros compartidos) | 🟡 Awareness (Módulo 34/59) |
 | Licensing awareness (CE vs. F&O vs. Power Platform combinados) | 🟡 Awareness |
-| Roadmap enterprise (fases de adopción CE→F&O o al revés) | ⚪ En expansión |
+| Roadmap enterprise (fases de adopción CE→F&O o al revés) | 🔵 Avanzado (Módulo 65, LAB-090) |
 
-### Capstone propuesto: Enterprise CE + F&O
+### Capstone implementado: Enterprise D365
 
-**Objetivo (cuando se implemente):** un proyecto integrador que combine el capstone de Customer
-Engagement (LAB-060) y el de Finance & Operations Awareness (LAB-064) en una sola arquitectura de
-decisión, con roadmap de adopción por fases, matriz de riesgos combinada y un comité ejecutivo
-ficticio que apruebe o rechace la propuesta.
+**Objetivo:** integrar CE, Contact Center, Customer Insights, Field Service y F&O awareness en una
+arquitectura de decisión con roadmap por fases, matriz Fit-Gap, ownership de datos, UAT y evidencia
+de portafolio.
 
-**Por qué no existe todavía:** un capstone enterprise real necesita que la ruta F&O Practitioner
-(sección 3) tenga primero contenido de configuración real — de lo contrario, este capstone
-combinaría un lado con evidencia productiva (CE) y un lado puramente conceptual (F&O), lo que
-volvería a inflar la promesa que este roadmap existe para evitar.
+**Límite declarado:** el capstone es enterprise architecture y portafolio. No afirma configuración
+profunda de Finance/SCM ni dual-write ejecutado en ambiente real.
 
 ---
 

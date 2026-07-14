@@ -42,6 +42,9 @@ const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arqui
   "Arquitectura Power Platform": "arquitecto",
   "Buenas Prácticas": "ia",
   "Especialista Dynamics 365 CE": "d365",
+  "D365 CE avanzado + F&O awareness": "d365",
+  "D365 Enterprise Apps": "d365",
+  "D365 Enterprise Apps Portfolio": "d365",
 };
 
 export default async function LabDetailPage({ params }: Props) {

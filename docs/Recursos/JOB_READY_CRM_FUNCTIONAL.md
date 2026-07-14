@@ -75,7 +75,7 @@ Esta ruta debe evitar prácticas legacy como centro del aprendizaje. El enfoque 
 | Módulo 20 - Dynamics 365 CE Sales y Customer Service | Core funcional CE | Sales, Customer Service, casos, colas, SLAs |
 | Módulo 38 - Liderazgo Técnico y Gestión de Proyectos | Consultoría y stakeholders | Backlog, gestión de cambios, training |
 | Módulo 55 - IA para Consultoría Funcional D365 | Fit-gap y análisis asistido | Documento de diseño y matriz de seguridad |
-| Módulo 56 - Introducción Dynamics 365 Avanzado | Visión CE | Mapa funcional de apps CE |
+| Módulo 56 - Dynamics 365 CE Avanzado | Visión CE | Mapa funcional de apps CE |
 | Módulo 57 - Customer Insights Data | Customer 360 | Perfil unificado, matching y medidas |
 | Módulo 58 - Field Service | Servicio en campo | Work order, scheduling y UAT |
 | LAB-057 | Diseño D365 Sales | Fit-gap Sales y entidades estándar |

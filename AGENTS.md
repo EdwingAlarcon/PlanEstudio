@@ -42,7 +42,7 @@ docs/                    # MkDocs legacy/reference content + shared question ban
   stylesheets/
     extra.css            # Custom CSS for MkDocs site
 app-elearning/           # Next.js 15 interactive app (THE primary surface)
-  content/               # Official app content: 59 modules + 27 labs with frontmatter across 6 levels (incl. Nivel IA labs 45/51/52/53/54/55/56/57, Nivel D365 modules 56-59, and route capstones 60-67)
+  content/               # Official app content: 65 modules + 50 labs with frontmatter across 6 levels (incl. Nivel IA 42-55, Nivel D365 modules 56-65, and route capstones)
   next.config.ts         # output: 'export', basePath: '/PlanEstudio'
   src/
     app/                 # App Router pages
@@ -168,7 +168,7 @@ Do NOT change these heading formats in `docs/Niveles/*.md` unless you intentiona
 }
 ```
 
-- 458 total questions across 59 modules
+- 488 total questions across 65 modules
 - Module 1 has 15 questions (includes AI Builder and Power Pages topics for PL-900)
 - After editing, run `node ../scripts/extract-questions.mjs` from `app-elearning` or run `npm run build:pages`
 - `scripts/extract-questions.mjs` generates `app-elearning/src/data/questions.ts`; `questions-parser.ts` validates associations at build/test time

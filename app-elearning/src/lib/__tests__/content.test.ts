@@ -51,6 +51,7 @@ Modelar datos en Dataverse.
       if (filePath.includes("JOB_READY_DATA_MIGRATION_LEGACY")) return "# Ruta Job-Ready Data Migration + CRM Legacy\nData Migration.";
       if (filePath.includes("JOB_READY_INTERVIEW_READINESS")) return "# Ruta Job-Ready Interview Readiness + Portafolio Laboral\nInterview Readiness.";
       if (filePath.includes("JOB_READY_ADMIN_GOVERNANCE")) return "# Ruta Job-Ready Power Platform Admin / Governance\nPower Platform Admin.";
+      if (filePath.includes("D365_TENANT_READINESS")) return "# Dynamics 365 Tenant Readiness Checklist\nSimulado\nProductivo controlado.";
       return "# Sin contenido";
     }),
   },
@@ -179,9 +180,9 @@ describe("getResourceBySlug", () => {
 // ─── getAllResourcePages ───────────────────────────────────────────────────────
 
 describe("getAllResourcePages", () => {
-  it("returns 17 resource pages (incluyendo lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, job-ready-crm-functional, job-ready-data-migration-legacy, job-ready-interview-readiness, job-ready-admin-governance, portafolio-profesional y roadmap-especializacion-avanzada)", () => {
+  it("returns 18 resource pages (incluyendo lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, job-ready-crm-functional, job-ready-data-migration-legacy, job-ready-interview-readiness, job-ready-admin-governance, portafolio-profesional, roadmap-especializacion-avanzada y d365-tenant-readiness)", () => {
     const pages = getAllResourcePages();
-    expect(pages).toHaveLength(17);
+    expect(pages).toHaveLength(18);
   });
 
   it("includes checklist, glosario, certificaciones, lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, job-ready-crm-functional, job-ready-data-migration-legacy, job-ready-interview-readiness, job-ready-admin-governance, portafolio-profesional y roadmap-especializacion-avanzada", () => {
@@ -202,6 +203,16 @@ describe("getAllResourcePages", () => {
     expect(slugs).toContain("job-ready-admin-governance");
     expect(slugs).toContain("portafolio-profesional");
     expect(slugs).toContain("roadmap-especializacion-avanzada");
+    expect(slugs).toContain("d365-tenant-readiness");
+  });
+
+  it("loads the D365 tenant readiness resource", () => {
+    const resource = getResourceBySlug("d365-tenant-readiness");
+
+    expect(resource).toBeDefined();
+    expect(resource?.title).toBe("Dynamics 365 Tenant Readiness Checklist");
+    expect(resource?.rawContent).toContain("Simulado");
+    expect(resource?.rawContent).toContain("Productivo controlado");
   });
 
   it("loads the labor skills matrix resource", () => {

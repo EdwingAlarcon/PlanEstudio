@@ -35,7 +35,8 @@ El Nivel 4 del plan deja de ser una ruta de examen PL-600 y pasa a ser una ruta 
 | MB-210 | Dynamics 365 Sales Functional Consultant | Retirado el 30 nov 2024. | Mantener Sales como especialización funcional, no como examen. |
 | MB-220 | Dynamics 365 Customer Insights (Journeys) Functional Consultant | Retirado el 30 nov 2024. | Mantener Customer Insights como competencia de marketing/journeys, no como examen. |
 | MB-230 | Dynamics 365 Customer Service Functional Consultant | Vigente. | Agregar/fortalecer ruta Customer Service. |
-| MB-240 | Dynamics 365 Field Service Functional Consultant | Retiro anunciado para el 30 jun 2026. | Tratar como competencia en transición; no vender como objetivo de largo plazo. |
+| MB-240 | Dynamics 365 Field Service Functional Consultant | Retirado el 30 jun 2026. | Tratar como competencia histórica; no vender como objetivo agendable. |
+| MB-280 | Dynamics 365 Customer Experience Analyst Associate | En transición: Microsoft indica retiro el 31 jul 2026. | Usar solo como referencia temporal para Customer Experience/Sales mientras esté disponible. |
 | MB-300 | Dynamics 365: Core Finance and Operations | Retirado el 29 feb 2024. | No usar como objetivo. Conservar competencias F&O base dentro de ruta F&O. |
 | MB-310 | Dynamics 365 Finance Functional Consultant Associate | Vigente. | Recomendado para especialización Finance & Operations. |
 | MB-330 | Dynamics 365 Supply Chain Management Functional Consultant Associate | Vigente. | Recomendado para especialización Finance & Operations. |
@@ -51,6 +52,7 @@ Fuentes oficiales Microsoft Learn:
 - [MB-220 Customer Insights - Journeys](https://learn.microsoft.com/en-us/credentials/certifications/exams/mb-220/)
 - [MB-230 Customer Service](https://learn.microsoft.com/en-us/credentials/certifications/exams/mb-230/)
 - [MB-240 Field Service](https://learn.microsoft.com/en-us/credentials/certifications/exams/mb-240/)
+- [MB-280 Customer Experience Analyst Associate](https://learn.microsoft.com/en-us/credentials/certifications/exams/mb-280/)
 - [MB-300 Core Finance and Operations](https://learn.microsoft.com/en-us/credentials/certifications/exams/mb-300/)
 - [MB-310 Finance](https://learn.microsoft.com/en-us/credentials/certifications/d365-functional-consultant-financials/)
 - [MB-330 Supply Chain Management](https://learn.microsoft.com/en-us/credentials/certifications/d365-functional-consultant-supply-chain-management/)
@@ -135,10 +137,10 @@ Competencias evaluadas:
 
 Cobertura actual:
 
-- PlanEstudio cubre Customer Service dentro del Módulo 20, la ruta Dynamics 365 Customer
-  Engagement, el LAB-059 (Case -> Work Order y UAT) y el LAB-060 como capstone integrador. La mejora
-  prioritaria pendiente es separar una práctica Customer Service profunda de Case-to-Resolution,
-  SLAs, colas, escalamiento y autoservicio.
+- PlanEstudio cubre Customer Service dentro del Módulo 20 y lo profundiza en el Módulo 61 y
+  LAB-082 con entitlements, SLA, colas, routing, pruebas negativas y evidencias de ambiente real.
+- Contact Center/Omnichannel se aborda en el Módulo 62 y LAB-083 como simulación avanzada; la
+  ejecución productiva requiere licencias, canales y tenant configurado.
 
 ### MB-310 — Dynamics 365 Finance Functional Consultant Associate
 
@@ -154,9 +156,9 @@ Competencias evaluadas:
 
 Cobertura actual:
 
-- PlanEstudio cubre Finance & Operations como ruta conceptual inicial en el Módulo 59 y el LAB-064,
-  con procesos ERP, dual-write, DMF, virtual tables y arquitectura ERP + CRM. Todavía no cubre
-  configuración real profunda de Dynamics 365 Finance.
+- PlanEstudio cubre Finance & Operations como awareness avanzado en los Módulos 59 y 64, con
+  procesos ERP, dual-write, DMF, virtual tables, ownership CE + F&O y labs LAB-064, LAB-069,
+  LAB-070, LAB-088 y LAB-089. Todavía no cubre configuración real profunda de Dynamics 365 Finance.
 
 ### MB-330 — Dynamics 365 Supply Chain Management Functional Consultant Associate
 
@@ -172,8 +174,9 @@ Competencias evaluadas:
 
 Cobertura actual:
 
-- PlanEstudio ya introduce procesos ERP y su integración con Dataverse en el Módulo 59 y el LAB-064.
-  La mejora pendiente es profundizar Supply Chain Management con procesos y laboratorios propios.
+- PlanEstudio introduce procesos ERP y su integración con Dataverse en los Módulos 59 y 64, y los
+  practica como diseño en LAB-069, LAB-070, LAB-088 y LAB-089. La mejora pendiente es profundizar
+  Supply Chain Management con configuración real de producto.
 
 ### MB-500 — Finance and Operations Apps Developer Associate
 
@@ -235,9 +238,9 @@ Competencias que siguen siendo válidas:
 - Emails, eventos, consentimiento y personalización.
 - Lead nurturing e integración con Dataverse y Dynamics 365 Sales.
 
-### MB-240 — en retiro
+### MB-240 — retirado
 
-Microsoft indica retiro del examen MB-240 para el 30 de junio de 2026. Field Service debe mantenerse como competencia conceptual y funcional.
+Microsoft retiró el examen MB-240 el 30 de junio de 2026. Field Service debe mantenerse como competencia conceptual y funcional, no como examen agendable.
 
 Competencias que siguen siendo válidas:
 
@@ -267,8 +270,8 @@ Competencias que siguen siendo válidas:
 | Developer Power Platform | PL-400 | Ruta Developer disponible | Reforzar Custom APIs, CLI, Web API y observabilidad. |
 | Solution Architect | Competencia profesional de arquitectura | Ruta Solution Architect disponible | Ampliar casos de estudio de arquitectura enterprise. |
 | D365 Customer Service | MB-230 | Ruta D365 CE — avanzado, especializaciones en expansión | Ver Roadmap de Especialización Avanzada: Contact Center/Omnichannel real. |
-| D365 Sales | Competencia profesional (MB-210 retirado) | Ruta D365 CE — avanzado, especializaciones en expansión | Ver Roadmap de Especialización Avanzada: Territories/Forecasting/Sales Insights. |
-| D365 Finance / Supply Chain | MB-310 / MB-330 | Ruta F&O — awareness avanzado, práctica en roadmap | Ver Roadmap de Especialización Avanzada: configuración real de producto. |
+| D365 Sales | Competencia profesional (MB-210 retirado) / MB-280 en transición hasta 31 jul 2026 | Ruta D365 CE disponible con Sales avanzado | Profundizar Sales Insights/predicción real solo con tenant/licencia. |
+| D365 Finance / Supply Chain | MB-310 / MB-330 | Ruta F&O disponible como awareness avanzado + integración CE/F&O | Configuración real de producto Finance/SCM sigue como mejora futura. |
 | F&O Developer | MB-500 | Fuera de alcance actual | Agregar solo como especialización posterior a la práctica F&O funcional. |
 
 ---
@@ -281,8 +284,8 @@ Competencias que siguen siendo válidas:
 | PL-200, si aplica antes del retiro | Pendiente | Antes del 31 ago 2026 | Practice assessment + proyecto Nivel 2 |
 | PL-400 | Pendiente | | Labs técnicos + simulador Nivel 3 |
 | Arquitectura Power Platform | Enfoque profesional | | Capstone, ADRs, arquitectura, runbook y defensa ejecutiva |
-| MB-230 | Especialización recomendada | | Labs Customer Service profundos pendientes |
-| MB-310 / MB-330 | Especialización F&O recomendada | | Ruta F&O conceptual disponible; profundidad de producto pendiente |
+| MB-230 | Especialización recomendada | | Módulo 61 + LAB-082 + LAB-083 |
+| MB-310 / MB-330 | Especialización F&O recomendada | | Módulos 59/64 + LAB-088/LAB-089; profundidad de producto pendiente |
 | MB-500 | Especialización developer avanzada | | Ruta F&O developer pendiente |
 
 ---

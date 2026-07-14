@@ -36,6 +36,16 @@ const ROUTE_LABEL_FALLBACKS: Record<string, string> = {
   "lab-59-field-service-work-order-uat": "Ruta Dynamics 365 Customer Engagement",
   "lab-66-sales-lead-to-cash": "Ruta Dynamics 365 Customer Engagement",
   "lab-67-customer-360-insights-data": "Ruta Dynamics 365 Customer Engagement",
+  "lab-81-d365-sales-forecasting-pipeline-review": "Ruta Dynamics 365 Customer Engagement",
+  "lab-82-customer-service-sla-entitlements-routing": "Ruta Dynamics 365 Customer Engagement",
+  "lab-83-contact-center-simulation": "Ruta Dynamics 365 Customer Engagement",
+  "lab-84-customer-insights-real-time-journey": "Ruta Dynamics 365 Customer Engagement",
+  "lab-85-customer-insights-data-unification": "Ruta Dynamics 365 Customer Engagement",
+  "lab-86-field-service-agreement-preventive-maintenance": "Ruta Dynamics 365 Customer Engagement",
+  "lab-87-field-service-mobile-offline-work-order": "Ruta Dynamics 365 Customer Engagement",
+  "lab-88-ce-fo-dual-write-ownership-matrix": "Ruta Finance & Operations",
+  "lab-89-fo-process-mapping-advanced": "Ruta Finance & Operations",
+  "lab-90-capstone-enterprise-d365": "Ruta Dynamics 365 Customer Engagement",
 };
 
 function getLabKind(lab: LabInfo): string {
@@ -61,14 +71,14 @@ function getLabKindLabel(lab: LabInfo, kind: string): string {
 }
 
 function getCertificationBadges(lab: LabInfo): Pick<LabPresentationMeta, "certificationBadges" | "historicalCertifications"> {
-  const historical = new Set(["MB-210", "MB-220", "MB-240", "MB-300"]);
+  const historical = new Set(["MB-210", "MB-220", "MB-240", "MB-240 (retirado 30 jun 2026)", "MB-300"]);
   const historicalCertifications = lab.certifications.filter((cert) => historical.has(cert));
   const activeCertifications = lab.certifications.filter((cert) => !historical.has(cert));
 
   const competencyBadges = historicalCertifications.map((cert) => {
     if (cert === "MB-210") return "Competencia Sales";
     if (cert === "MB-220") return "Customer Insights Skill Path";
-    if (cert === "MB-240") return "Competencia Field Service";
+    if (cert === "MB-240" || cert === "MB-240 (retirado 30 jun 2026)") return "Competencia Field Service";
     if (cert === "MB-300") return "F&O Awareness";
     return "Competencia Dynamics 365";
   });

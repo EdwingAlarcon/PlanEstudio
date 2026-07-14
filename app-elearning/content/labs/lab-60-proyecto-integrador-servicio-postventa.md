@@ -253,7 +253,7 @@ journey, matriz de seguridad) se reutilizarían tal cual y cuáles requerirían 
 - Módulo 20 — Dynamics 365 CE — Sales y Customer Service
 - Módulo 38 — Liderazgo Técnico y Gestión de Proyectos
 - Módulo 41 — Proyecto Capstone Arquitectura Enterprise
-- Módulo 56 — Introducción a Dynamics 365 Avanzado
+- Módulo 56 — Dynamics 365 CE Avanzado
 - Módulo 59 — Finance & Operations: Procesos ERP y Virtual Tables
 - Lab 55 — UAT/Checklist de Go-Live y auditoría de prompts
 - Lab 58 — Customer Insights: segmento y journey

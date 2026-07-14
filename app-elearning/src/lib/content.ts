@@ -8,7 +8,7 @@ import { LEVEL_MODULE_RANGE, LEVEL_ORDER } from "./i18n";
 
 export interface ModuleInfo {
   id: string;           // "basico-1"
-  moduleId: number;     // 1-59
+  moduleId: number;     // 1-65
   levelId: LevelId;
   title: string;
   slug: string;
@@ -86,6 +86,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "job-ready-admin-governance": "Recursos/JOB_READY_ADMIN_GOVERNANCE.md",
   "portafolio-profesional": "Recursos/PORTAFOLIO_PROFESIONAL.md",
   "roadmap-especializacion-avanzada": "Recursos/ROADMAP_ESPECIALIZACION_AVANZADA.md",
+  "d365-tenant-readiness": "Recursos/D365_TENANT_READINESS.md",
 };
 
 const LEVEL_META: Record<LevelId, { title: string; description: string; certification: string }> = {
@@ -115,9 +116,9 @@ const LEVEL_META: Record<LevelId, { title: string; description: string; certific
     certification: "Buenas Prácticas",
   },
   d365: {
-    title: "Dynamics 365 Avanzado",
-    description: "Profundidad funcional en Sales, Customer Service, Customer Insights y Field Service, con arquitectura Customer Engagement end-to-end e integración con Finance & Operations",
-    certification: "Especialista Dynamics 365 CE",
+    title: "Dynamics 365 Enterprise Apps",
+    description: "Especialización práctica en Dynamics 365 Customer Engagement: Sales, Customer Service, Contact Center, Customer Insights, Field Service e integración CE + Finance & Operations",
+    certification: "D365 CE avanzado + F&O awareness",
   },
 };
 
