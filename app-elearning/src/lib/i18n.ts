@@ -4,6 +4,7 @@ export const UI = {
     home: "Inicio",
     levels: "Niveles",
     routes: "Rutas profesionales",
+    employability: "Empleabilidad",
     resources: "Recursos",
     howToUse: "Cómo usar",
     simulator: "Simulador",

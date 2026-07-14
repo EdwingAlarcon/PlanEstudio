@@ -4,7 +4,7 @@ import { getAllQuestions } from "@/lib/questions-parser";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProgressRingClient } from "@/components/modules/progress-ring-client";
-import { ArrowRight, BookOpen, Trophy, FlaskConical, Route, Zap, HelpCircle, Layers3 } from "lucide-react";
+import { ArrowRight, BookOpen, Trophy, FlaskConical, Route, Zap, HelpCircle, Layers3, Briefcase } from "lucide-react";
 import { UI, LEVEL_ORDER, type LevelId } from "@/lib/i18n";
 
 // Level display config
@@ -46,9 +46,9 @@ export default async function DashboardPage() {
               Plan de Estudio Progresivo
             </h1>
             <p className="text-muted-foreground text-base leading-relaxed max-w-xl">
-              De cero a Solution Architect. {moduleCount} módulos, {labCount} laboratorios
-              y {questionCount} preguntas de evaluación — con certificaciones vigentes,
-              competencias profesionales y una capa transversal de Desarrollo Asistido por IA.
+              Aprende por nivel, especialízate por rol, practica con labs, construye portafolio
+              y prepárate para vacantes. {moduleCount} módulos, {labCount} laboratorios
+              y {questionCount} preguntas de evaluación.
             </p>
           </div>
         </div>
@@ -73,7 +73,7 @@ export default async function DashboardPage() {
           </Button>
         </div>
 
-        <div className="grid gap-3 md:grid-cols-3">
+        <div className="grid gap-3 md:grid-cols-4">
           <StartCard
             href="/nivel/basico"
             eyebrow="Soy nuevo"
@@ -97,6 +97,14 @@ export default async function DashboardPage() {
             description="Usa el simulador cuando ya hayas cubierto varios módulos y quieras detectar temas débiles."
             icon={<Trophy className="h-5 w-5 text-orange-500" />}
             accent="#EA580C"
+          />
+          <StartCard
+            href="/empleabilidad"
+            eyebrow="Quiero aplicar"
+            title="Conecta con vacantes"
+            description="Cruza perfiles, skills, entrevista y evidencia sin convertir vacantes en módulos."
+            icon={<Briefcase className="h-5 w-5 text-[#0F6CBD]" />}
+            accent="#0F6CBD"
           />
         </div>
       </section>
@@ -165,7 +173,7 @@ export default async function DashboardPage() {
         <h2 id="quick-heading" className="text-lg font-semibold text-foreground mb-4">
           Acceso rápido
         </h2>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
           <QuickActionCard
             href="/como-usar"
             icon={<HelpCircle className="h-5 w-5 text-[#0078D4]" />}
@@ -177,8 +185,15 @@ export default async function DashboardPage() {
             href="/rutas"
             icon={<Route className="h-5 w-5 text-[#0078D4]" />}
             title={UI.nav.routes}
-            description="7 rutas por rol profesional"
+            description="9 rutas por rol profesional"
             accent="#0078D4"
+          />
+          <QuickActionCard
+            href="/empleabilidad"
+            icon={<Briefcase className="h-5 w-5 text-[#0F6CBD]" />}
+            title={UI.nav.employability}
+            description="Skills, perfiles y entrevistas"
+            accent="#0F6CBD"
           />
           <QuickActionCard
             href="/simulador"

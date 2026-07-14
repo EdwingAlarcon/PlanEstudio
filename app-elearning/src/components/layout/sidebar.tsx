@@ -35,15 +35,18 @@ const RESOURCE_LINKS = [
   { href: "/recursos/prompts-ia",    label: UI.nav.promptsIA,     icon: FileText },
   { href: "/recursos/rubricas-plantillas", label: UI.nav.rubricsTemplates, icon: CheckSquare },
   { href: "/recursos/matriz-competencias", label: UI.nav.competencyMatrix, icon: FileText },
-  { href: "/recursos/matriz-skills-laborales", label: UI.nav.laborSkillsMatrix, icon: Briefcase },
-  { href: "/recursos/job-ready-crm-developer", label: UI.nav.crmDeveloperJobReady, icon: FileText },
-  { href: "/recursos/job-ready-crm-functional", label: UI.nav.crmFunctionalJobReady, icon: FileText },
-  { href: "/recursos/job-ready-data-migration-legacy", label: UI.nav.dataMigrationJobReady, icon: FileText },
-  { href: "/recursos/job-ready-interview-readiness", label: UI.nav.interviewJobReady, icon: FileText },
-  { href: "/recursos/job-ready-admin-governance", label: UI.nav.adminGovernanceJobReady, icon: FileText },
   { href: "/recursos/portafolio-profesional", label: UI.nav.portfolioGuide, icon: FileText },
   { href: "/recursos/roadmap-especializacion-avanzada", label: UI.nav.advancedRoadmap, icon: Route },
   { href: "/recursos/d365-tenant-readiness", label: UI.nav.d365TenantReadiness, icon: CheckSquare },
+];
+
+const EMPLOYABILITY_LINKS = [
+  { href: "/recursos/matriz-skills-laborales", label: UI.nav.laborSkillsMatrix, icon: Briefcase },
+  { href: "/recursos/job-ready-crm-functional", label: UI.nav.crmFunctionalJobReady, icon: FileText },
+  { href: "/recursos/job-ready-crm-developer", label: UI.nav.crmDeveloperJobReady, icon: FileText },
+  { href: "/recursos/job-ready-admin-governance", label: UI.nav.adminGovernanceJobReady, icon: FileText },
+  { href: "/recursos/job-ready-data-migration-legacy", label: UI.nav.dataMigrationJobReady, icon: FileText },
+  { href: "/recursos/job-ready-interview-readiness", label: UI.nav.interviewJobReady, icon: FileText },
 ];
 
 interface SidebarProps {
@@ -95,6 +98,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
           <NavLink href="/simulador" icon={PlayCircle}  label={UI.nav.simulator} active={pathname === "/simulador"} />
           <NavLink href="/labs"      icon={FlaskConical} label="Laboratorios"    active={pathname.startsWith("/labs")} />
           <NavLink href="/portafolio" icon={Briefcase}   label={UI.nav.portfolio} active={pathname === "/portafolio"} />
+          <NavLink href="/empleabilidad" icon={Briefcase} label={UI.nav.employability} active={pathname === "/empleabilidad"} />
 
           <Separator className="my-3" />
 
@@ -148,6 +152,22 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
               </div>
             );
           })}
+
+          <Separator className="my-3" />
+
+          <p className="px-3 text-[10px] font-semibold text-muted-foreground mb-2 uppercase tracking-widest">
+            {UI.nav.employability}
+          </p>
+
+          {EMPLOYABILITY_LINKS.map((link) => (
+            <NavLink
+              key={link.href}
+              href={link.href}
+              icon={link.icon}
+              label={link.label}
+              active={pathname === link.href}
+            />
+          ))}
 
           <Separator className="my-3" />
 
