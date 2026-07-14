@@ -86,7 +86,7 @@ Propón una de estas rutas:
 - Rediseño funcional sobre Dataverse.
 - Mantener legacy temporal con integración controlada.
 
-## Criterios de validacion
+## Criterios de validación
 
 - [ ] El assessment separa hechos, riesgos y recomendaciones.
 - [ ] Incluye SQL, IIS, CRM, red e integraciones.
@@ -94,7 +94,7 @@ Propón una de estas rutas:
 - [ ] Propone roadmap realista.
 - [ ] Explica limitaciones por no tener acceso real al servidor.
 
-## Rubrica
+## Rúbrica
 
 | Criterio | Peso |
 |---|---|

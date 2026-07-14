@@ -53,7 +53,7 @@ Actúas como CRM Developer moderno que usa IA como asistente, no como reemplazo 
 Elige una:
 
 - Refactor de JavaScript CRM para usar `formContext`.
-- Plugin C# con tracing y control de recursion.
+- Plugin C# con tracing y control de recursión.
 - Manejo de errores en flujo/integracion.
 - README tecnico de una solucion CRM.
 
@@ -112,7 +112,7 @@ Respuesta esperada:
 - No acepto codigo que no entiendo.
 - Documento decisiones.
 
-## Criterios de validacion
+## Criterios de validación
 
 - [ ] El prompt tiene contexto y restricciones.
 - [ ] La IA no inventa entidades sin ser detectada.
@@ -120,7 +120,7 @@ Respuesta esperada:
 - [ ] Hay pruebas.
 - [ ] Puedes explicar el resultado sin leer el prompt.
 
-## Rubrica
+## Rúbrica
 
 | Criterio | Peso |
 |---|---|

@@ -105,7 +105,7 @@ Documenta:
 - Valor bajo muestra riesgo normal.
 - Campo vacio no genera error de script.
 
-## Criterios de validacion
+## Criterios de validación
 
 - [ ] Usa `executionContext.getFormContext()`.
 - [ ] No usa `Xrm.Page`.
@@ -113,7 +113,7 @@ Documenta:
 - [ ] Maneja valores nulos.
 - [ ] Documenta eventos y pruebas.
 
-## Rubrica
+## Rúbrica
 
 | Criterio | Peso |
 |---|---|

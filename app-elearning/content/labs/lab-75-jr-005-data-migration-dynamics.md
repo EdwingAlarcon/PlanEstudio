@@ -103,7 +103,7 @@ Escribe un runbook con:
 - Rollback.
 - Comunicación a usuarios.
 
-## Criterios de validacion
+## Criterios de validación
 
 - [ ] El mapping cubre tablas principales.
 - [ ] Hay reglas de limpieza claras.
@@ -111,7 +111,7 @@ Escribe un runbook con:
 - [ ] Reconciliación separa validación técnica y funcional.
 - [ ] Cutover incluye rollback.
 
-## Rubrica
+## Rúbrica
 
 | Criterio | Peso |
 |---|---|

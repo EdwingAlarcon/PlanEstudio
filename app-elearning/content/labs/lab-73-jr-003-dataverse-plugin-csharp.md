@@ -16,7 +16,7 @@ prerequisites:
 ## Objetivo
 
 Diseñar, implementar o documentar un plugin C# de Dataverse con pipeline correcto, tracing,
-validacion de negocio, manejo de recursion y evidencia de pruebas.
+validación de negocio, manejo de recursión y evidencia de pruebas.
 
 ## Escenario de negocio
 
@@ -72,7 +72,7 @@ public class MaintenanceApprovalPlugin : IPlugin
 
         if (context.Depth > 1)
         {
-            tracing.Trace("Depth mayor a 1. Se evita recursion.");
+            tracing.Trace("Depth mayor a 1. Se evita recursión.");
             return;
         }
 
@@ -100,15 +100,15 @@ Documenta:
 - Target sin prioridad no falla.
 - Depth > 1 no ejecuta logica.
 
-## Criterios de validacion
+## Criterios de validación
 
 - [ ] El stage elegido esta justificado.
 - [ ] Usa tracing.
-- [ ] Controla recursion.
+- [ ] Controla recursión.
 - [ ] Maneja atributos ausentes.
 - [ ] Tiene pruebas o matriz de pruebas.
 
-## Rubrica
+## Rúbrica
 
 | Criterio | Peso |
 |---|---|

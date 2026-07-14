@@ -83,7 +83,7 @@ Incluye:
 - APIM o Function Key segun arquitectura.
 - Logs sin datos sensibles.
 
-## Criterios de validacion
+## Criterios de validación
 
 - [ ] El diagrama muestra origen, integracion, API, Dataverse y monitoreo.
 - [ ] Hay estrategia de idempotencia.
@@ -91,7 +91,7 @@ Incluye:
 - [ ] Hay decision sync/async justificada.
 - [ ] Hay evidencia o simulacion.
 
-## Rubrica
+## Rúbrica
 
 | Criterio | Peso |
 |---|---|

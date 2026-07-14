@@ -25,6 +25,7 @@ const LABOR_PROFILES: LaborProfile[] = [
     jobReadyLabSlugs: [
       "lab-71-jr-001-model-driven-app-job-test",
       "lab-77-jr-007-customer-service-specialist-simulation",
+      "lab-101-jr-013-crm-functional-analyst-caso-integrado",
       "lab-79-jr-009-technical-interview-simulation",
     ],
     minimumEvidence: getProfessionalRouteBySlug("consultor-funcional")?.portfolioEvidence ?? [],

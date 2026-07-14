@@ -174,7 +174,7 @@ Para agregar preguntas:
 
 ## Laboratorios
 
-Los laboratorios oficiales para la app están en `app-elearning/content/labs/` con frontmatter validado (60 labs en total). `docs/Labs/` queda como copia legacy/referencia para MkDocs. Muestra parcial:
+Los laboratorios oficiales para la app están en `app-elearning/content/labs/` con frontmatter validado (61 labs en total). `docs/Labs/` queda como copia legacy/referencia para MkDocs. Muestra parcial:
 
 | Lab | Nivel | Cert |
 |-----|-------|------|

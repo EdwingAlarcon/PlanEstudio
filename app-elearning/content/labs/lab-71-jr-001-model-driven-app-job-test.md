@@ -93,7 +93,7 @@ Propón roles:
 | Supervisor | Todas | Todas | Si | No |
 | Administrador funcional | Todas | Todas | Si | Si |
 
-### Paso 5 — Evidencia de validacion
+### Paso 5 — Evidencia de validación
 
 Crea al menos 4 casos de prueba:
 
@@ -102,7 +102,7 @@ Crea al menos 4 casos de prueba:
 - Supervisor cierra solicitud.
 - Solicitante intenta cerrar solicitud y no puede.
 
-## Criterios de validacion
+## Criterios de validación
 
 - [ ] El modelo de datos tiene relaciones correctas.
 - [ ] La app tiene navegación limpia.
@@ -111,14 +111,14 @@ Crea al menos 4 casos de prueba:
 - [ ] La matriz de roles aplica minimo privilegio.
 - [ ] El README explica problema, solucion, seguridad y lecciones.
 
-## Rubrica
+## Rúbrica
 
 | Criterio | Peso |
 |---|---|
 | Modelo de datos | 25% |
 | UX model-driven | 20% |
 | Seguridad | 25% |
-| Validacion y evidencia | 20% |
+| Validación y evidencia | 20% |
 | Explicacion de entrevista | 10% |
 
 ## Errores comunes

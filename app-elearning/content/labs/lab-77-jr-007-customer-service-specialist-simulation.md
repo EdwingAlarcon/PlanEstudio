@@ -90,7 +90,7 @@ Incluye KPIs:
 
 Documenta cinco casos UAT con resultado esperado y evidencia.
 
-## Criterios de validacion
+## Criterios de validación
 
 - [ ] El proceso cubre creación, asignación, resolución y cierre.
 - [ ] SLA y entitlements están conectados.
@@ -98,7 +98,7 @@ Documenta cinco casos UAT con resultado esperado y evidencia.
 - [ ] El dashboard responde preguntas del supervisor.
 - [ ] UAT tiene datos y resultados esperados.
 
-## Rubrica
+## Rúbrica
 
 | Criterio | Peso |
 |---|---|

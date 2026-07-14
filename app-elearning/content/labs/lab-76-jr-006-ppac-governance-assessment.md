@@ -87,7 +87,7 @@ Diseña un runbook:
 - Exportación sospechosa.
 - Ambiente sin dueño.
 
-## Criterios de validacion
+## Criterios de validación
 
 - [ ] El informe prioriza riesgos.
 - [ ] DLP está explicado para negocio.
@@ -95,7 +95,7 @@ Diseña un runbook:
 - [ ] Hay decisión de Managed Environments.
 - [ ] Hay runbook de incidentes.
 
-## Rubrica
+## Rúbrica
 
 | Criterio | Peso |
 |---|---|

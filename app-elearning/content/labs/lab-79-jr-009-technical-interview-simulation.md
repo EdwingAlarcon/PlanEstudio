@@ -114,7 +114,7 @@ Graba o ejecuta una entrevista de 30 minutos:
 - 10 minutos preguntas tecnicas.
 - 5 minutos preguntas del candidato.
 
-## Criterios de validacion
+## Criterios de validación
 
 - [ ] La demo cabe en 10 minutos.
 - [ ] Las respuestas no exageran experiencia laboral.
@@ -122,7 +122,7 @@ Graba o ejecuta una entrevista de 30 minutos:
 - [ ] El ingles es claro aunque no sea perfecto.
 - [ ] La retrospectiva identifica mejoras concretas.
 
-## Rubrica
+## Rúbrica
 
 | Criterio | Peso |
 |---|---|

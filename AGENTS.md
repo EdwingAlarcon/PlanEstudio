@@ -42,7 +42,7 @@ docs/                    # MkDocs legacy/reference content + shared question ban
   stylesheets/
     extra.css            # Custom CSS for MkDocs site
 app-elearning/           # Next.js 15 interactive app (THE primary surface)
-  content/               # Official app content: 65 modules + 60 labs with frontmatter across 6 levels (incl. Nivel IA 42-55, Nivel D365 modules 56-65, job-ready simulations 71-80/91-92, F&O hands-on labs 93-100, and route capstones)
+  content/               # Official app content: 65 modules + 61 labs with frontmatter across 6 levels (incl. Nivel IA 42-55, Nivel D365 modules 56-65, job-ready simulations 71-80/91-92, F&O hands-on labs 93-100, the integrated CRM Functional Analyst case 101, and route capstones)
   next.config.ts         # output: 'export', basePath: '/PlanEstudio'
   src/
     app/                 # App Router pages
