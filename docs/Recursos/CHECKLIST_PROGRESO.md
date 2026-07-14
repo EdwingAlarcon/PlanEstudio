@@ -467,8 +467,9 @@
 - [ ] **Entrega**: LAB-066 completado — Sales: proceso comercial Lead-to-Cash | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-058 completado — Customer Insights: segmento, consentimiento y journey de renovación | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-060 completado — Capstone Microsoft Business Applications: Servicio Postventa | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-101 completado — JR-013: CRM Functional Analyst, caso integrado de admisión/servicio/retención/cobranza con backlog Azure DevOps | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 20:** ___/14 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 20:** ___/15 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 

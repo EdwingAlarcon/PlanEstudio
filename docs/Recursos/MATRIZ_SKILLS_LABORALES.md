@@ -75,7 +75,8 @@ La brecha principal no es falta total de contenido, sino falta de una capa expl�
 
 | Skill laboral | Perfil laboral asociado | Nivel esperado | Estado | Dónde se aprende | Dónde se practica | Evidencia para portafolio | Pregunta típica de entrevista | Recomendación | Prioridad |
 |---|---|---|---|---|---|---|---|---|---|
-| Administración CRM | CRM Functional Specialist | Intermedio | Parcial | Módulos 20, 56 | LAB-066, LAB-068 | Configuración funcional documentada | ¿Qué revisas al recibir un CRM con configuración heredada? | Crear ruta JR Functional CRM | Alta |
+| Administración CRM | CRM Functional Specialist | Intermedio | Parcial | Módulos 20, 56 | LAB-066, LAB-068, LAB-101 | Configuración funcional documentada | ¿Qué revisas al recibir un CRM con configuración heredada? | Crear ruta JR Functional CRM | Alta |
+| Backlog funcional en Azure DevOps (historias + criterios de aceptación) | CRM Functional Specialist / Business Analyst | Intermedio-Avanzado | Cubierto | Módulos 38, 55 | LAB-101 | Backlog Epics/Features/Historias priorizado con criterios de aceptación verificables | ¿Cómo estructuras un backlog funcional en Azure DevOps y cómo priorizas el primer sprint? | Mantener como evidencia obligatoria de portafolio para vacantes que piden Azure DevOps | Alta |
 | Formularios y vistas | CRM Functional / Developer | Intermedio | Cubierto | Módulos 4, 20 | LAB-004, LAB-066 | Formularios, vistas y pruebas por rol | ¿Cómo decides qué campo va en formulario vs business rule? | Reforzar en JR-001/JR-007 | Alta |
 | Business Process Flows | Functional Consultant | Intermedio | Cubierto | Módulos 4, 9, 20 | LAB-004, LAB-066 | BPF con etapas y validaciones | ¿Cuándo usas BPF y cuándo no? | Mantener como prueba técnica functional | Alta |
 | Customer Service casos | Customer Service Specialist | Intermedio-Avanzado | Cubierto | Módulo 20 | LAB-068 | Caso end-to-end con cola, SLA y dashboard | ¿Cómo modelas el ciclo case-to-resolution? | Convertir LAB-068 en base JR-007 | Alta |
@@ -87,7 +88,7 @@ La brecha principal no es falta total de contenido, sino falta de una capa expl�
 | Customer Insights - Data/Journeys | CE Consultant / Data Specialist | Avanzado | Cubierto | Módulos 57, 63 | LAB-084, LAB-085, LAB-067 | Customer 360 + real-time journey con consentimiento | ¿Diferencia entre Customer Insights Data y Journeys? | Mantener como ruta específica Customer Insights | Alta |
 | Field Service | CE Consultant | Avanzado | Cubierto | Módulo 58 | LAB-086, LAB-087, LAB-059 | Work order end-to-end, agreement, mobile offline y scheduling | ¿Qué elementos mínimos necesita una orden de trabajo? | Mantener como ruta específica Field Service | Alta |
 | Reporting / dashboards | Functional Consultant | Intermedio | Parcial | Módulos 6, 12, 20 | LAB-068 | Dashboard operativo | ¿Qué KPIs usarías para medir soporte al cliente? | Agregar dashboards como evidencia transversal | Media-Alta |
-| UAT y soporte funcional | Functional Consultant | Intermedio | Cubierto | Módulos 38, 55 | LAB-055, LAB-062 | Casos UAT y sign-off | ¿Cómo manejas un defecto crítico encontrado en UAT? | Conectar con Interview Readiness | Alta |
+| UAT y soporte funcional | Functional Consultant | Intermedio | Cubierto | Módulos 38, 55 | LAB-055, LAB-062, LAB-101 | Casos UAT y sign-off | ¿Cómo manejas un defecto crítico encontrado en UAT? | Conectar con Interview Readiness | Alta |
 
 ### Dynamics 365 CRM Developer
 
@@ -178,12 +179,12 @@ Recurso detallado: [Ruta Job-Ready Dynamics 365 CRM Functional Specialist](JOB_R
 
 - **Objetivo:** preparar para roles funcionales CRM con configuración, soporte, Customer Service, Sales, reporting y UAT.
 - **Perfil laboral objetivo:** CRM Specialist, Dynamics 365 CE Functional Consultant, Customer Service Specialist.
-- **Skills cubiertos:** formularios, vistas, tablas, BPF, workflows/procesos, casos, colas, SLA, entitlements, KB, dashboards, UAT.
+- **Skills cubiertos:** formularios, vistas, tablas, BPF, workflows/procesos, casos, colas, SLA, entitlements, KB, dashboards, UAT, backlog funcional en Azure DevOps con historias de usuario y criterios de aceptación.
 - **Módulos reutilizados:** 4, 9, 20, 38, 55, 56, 57, 58.
 - **Labs reutilizados:** LAB-057, LAB-058, LAB-059, LAB-066, LAB-067, LAB-068, LAB-081 a LAB-090.
-- **Nuevos labs recomendados:** JR-007.
-- **Evidencia esperada:** configuración case-to-resolution, dashboard, matriz UAT, manual funcional.
-- **Preguntas de entrevista:** cómo configuras un SLA, cómo haces fit-gap, cómo das soporte funcional a usuarios.
+- **Nuevos labs recomendados:** JR-007, JR-013.
+- **Evidencia esperada:** configuración case-to-resolution, dashboard, matriz UAT, manual funcional, backlog Azure DevOps con historias y criterios de aceptación (JR-013).
+- **Preguntas de entrevista:** cómo configuras un SLA, cómo haces fit-gap, cómo das soporte funcional a usuarios, cómo estructuras y priorizas un backlog funcional.
 - **Nivel sugerido:** Intermedio.
 
 ### Ruta Job-Ready Dynamics 365 CRM Developer
@@ -230,7 +231,7 @@ Recurso detallado: [Ruta Job-Ready Interview Readiness + Portafolio Laboral](JOB
 
 ## Laboratorios Job-Ready recomendados
 
-Implementación en la app: JR-001 a JR-010 están disponibles como **LAB-071 a LAB-080** para mantener compatibilidad con la numeración técnica de laboratorios.
+Implementación en la app: JR-001 a JR-010 están disponibles como **LAB-071 a LAB-080**, JR-011/JR-012 como **LAB-091/LAB-092** y JR-013 como **LAB-101**, para mantener compatibilidad con la numeración técnica de laboratorios.
 
 | Lab propuesto | Prioridad | Vacante que valida | Skills que valida | Evidencia esperada | Rúbrica sugerida | Dificultad | Duración |
 |---|---|---|---|---|---|---|---|
@@ -244,6 +245,7 @@ Implementación en la app: JR-001 a JR-010 están disponibles como **LAB-071 a L
 | JR-008 / LAB-078 CRM Legacy Health Assessment | Media-Alta | Legacy / Migration | IIS, SQL, networking, upgrade, performance | Health assessment y riesgos | 40% diagnóstico, 25% riesgos, 20% roadmap, 15% comunicación | Avanzada | 3 h |
 | JR-009 / LAB-079 Technical Interview Simulation | Media-Alta | Todos | entrevista, inglés técnico, demo, CV | Guion, respuestas, demo de 10 minutos | 30% claridad, 25% evidencia, 25% precisión técnica, 20% inglés/comunicación | Transversal | 2-3 h |
 | JR-010 / LAB-080 AI-Assisted CRM Development | Media | CRM Developer moderno | IA, revisión de código, seguridad, prompts | Prompt, diff, checklist de revisión | 30% prompt, 30% revisión, 25% seguridad, 15% resultado | Intermedia | 3 h |
+| JR-013 / LAB-101 CRM Functional Analyst: Caso Integrado | Alta | Analista Funcional CRM / Dynamics 365 | AS-IS/TO-BE, fit-gap, backlog Azure DevOps con historias de usuario y criterios de aceptación, modelo de datos/seguridad, BPF, casos/colas/SLA/entitlements/KB, Power Automate, calidad de datos, decisión config/automate/JS/plugin, UAT y trazabilidad | Documento de requerimientos, matriz fit-gap, backlog Azure DevOps, modelo de datos, diseño de servicio, flujos Power Automate, matriz de calidad de datos, 10 casos UAT con defectos, documento de soporte/adopción y roadmap | 15% AS-IS/TO-BE/fit-gap, 20% backlog Azure DevOps, 15% modelo de datos/seguridad/BPF, 15% atención (casos/colas/SLA/KB), 10% Power Automate, 10% calidad de datos/reporting, 10% UAT/trazabilidad, 5% documentación/soporte/roadmap | Avanzada | 5 h |
 
 ## Brechas críticas
 
@@ -264,7 +266,7 @@ Implementación en la app: JR-001 a JR-010 están disponibles como **LAB-071 a L
 | JR-4 | Ruta Power Platform Admin/Governance | Ruta con PPAC, DLP, ambientes, licencias, capacity y CoE moderno. |
 | JR-5 | Data Migration + CRM Legacy | Ruta/labs de migración, on-prem awareness y health assessment. |
 | JR-6 | Interview readiness + portafolio laboral | CV, LinkedIn, demo de 10 minutos, respuestas técnicas e inglés. |
-| JR-7 | Labs job-ready y simulaciones técnicas | Implementado como LAB-071 a LAB-080. |
+| JR-7 | Labs job-ready y simulaciones técnicas | Implementado como LAB-071 a LAB-080 (JR-001 a JR-010), LAB-091/LAB-092 (JR-011/JR-012) y LAB-101 (JR-013, caso integrado CRM Functional Analyst). |
 
 ## Relación con recursos existentes
 
