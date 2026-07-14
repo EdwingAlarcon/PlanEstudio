@@ -87,11 +87,14 @@ requieren tenant/licencia real se controlan con el recurso
 
 ## Finance & Operations Consultant / Architect Awareness
 
-*ERP conceptual, integración.* Ruta: Consultor Funcional → Finance & Operations → Solution Architect.
-Estado de la ruta: **awareness avanzado — práctica en roadmap** — los Módulos 59/64 cubren vocabulario,
-mapas de proceso, ownership de datos e integración CE + F&O. Los LAB-069/LAB-070/LAB-088/LAB-089
-producen evidencia de arquitectura; la configuración real de producto Finance/SCM/Commerce/Project
-Operations requiere tenant F&O y formación dedicada.
+*ERP conceptual, integración y — desde LAB-093 a LAB-097 — configuración práctica en tenant real.*
+Ruta: Consultor Funcional → Finance & Operations → Solution Architect.
+Estado de la ruta: **awareness avanzado + práctica hands-on con trial tenant** — los Módulos 59/64
+cubren vocabulario, mapas de proceso, ownership de datos e integración CE + F&O. Los
+LAB-069/LAB-070/LAB-088/LAB-089 producen evidencia de arquitectura; LAB-093 a LAB-097 llevan al
+estudiante a configurar Finance/SCM/Project Operations paso a paso en un ambiente trial/demo real.
+Los pasos de LAB-093 a LAB-097 no fueron verificados contra un tenant en vivo al momento de
+escribirse — ver la nota de verificación en cada lab.
 
 | Competencia | Nivel | Evidencia esperada | Lab / proyecto | Criterio de aprobación |
 |---|---|---|---|---|
@@ -101,6 +104,11 @@ Operations requiere tenant F&O y formación dedicada.
 | Data Management Framework conceptual | Conceptual | Explicación de un escenario de importación masiva con manejo de errores | LAB-064 (Capstone F&O Awareness) | Propone estrategia de reintentos y validación previa a carga |
 | Mapa de integración ERP + CRM | Conceptual-Avanzado | Diagrama de arquitectura con puntos de fallo señalados | LAB-070, LAB-064 (Capstone F&O Awareness) | Señala ≥2 puntos de fallo y su mitigación |
 | Límites de Power Platform frente a ERP | Conceptual | Lista de "esto no lo resuelve Power Platform solo" con justificación | Módulo 18/34 | Identifica correctamente ≥3 límites reales (no genéricos) |
+| Setup financiero (legal entity, calendario fiscal, catálogo de cuentas, dimensiones) | Práctico (tenant real) | Configuración ejecutada en trial/demo con capturas | LAB-093 | Legal entity, calendario, catálogo y ≥2 dimensiones documentados con evidencia |
+| Ciclo Procure-to-Pay end-to-end | Práctico (tenant real) | Orden de compra → recepción → factura → pago ejecutados, con discrepancia de cantidad manejada | LAB-094 | Coincidencia de 3 vías correcta y asientos contables documentados |
+| Ciclo Order-to-Cash end-to-end | Práctico (tenant real) | Pedido → envío → factura → cobro ejecutados, con envío parcial manejado | LAB-095 | Factura coincide con lo enviado, no con lo pedido; saldo pendiente documentado |
+| Maestro de producto e inventario (variantes, dimensiones, reservas) | Práctico (tenant real) | Producto con variantes y jerarquía de reservas configurados | LAB-096 | ≥9 variantes y jerarquía de reservas justificada con ejemplo |
+| Setup de Project Operations (WBS, facturación por hitos) | Práctico (tenant real) | Proyecto con WBS y regla de facturación mixta (hito + tiempo) configurados | LAB-097 | Hito fijo y facturación por tiempo distinguidos correctamente en la propuesta de factura |
 
 ## Solution Architect
 
@@ -163,7 +171,7 @@ tenant/licencia/canal real, debe completarse el gate correspondiente en
 |---|---|---|
 | Expert Customer Service / Contact Center | 🔵 Avanzado con simulación; ejecución real requiere canal/licencia | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#1-ruta-expert-customer-service-contact-center) |
 | Expert Sales Operations | 🔵 Avanzado con forecasting/pipeline; predicción real requiere Sales/licencia/datos | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#2-ruta-expert-sales-operations) |
-| F&O Practitioner / Architect Track | 🔵 Arquitectura e integración; configuración Finance/SCM sigue fuera de alcance base | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#3-ruta-fo-practitioner-architect-track) |
+| F&O Practitioner / Architect Track | 🔵 Arquitectura, integración y setup práctico (Finance, P2P, O2C, Inventory, Project Operations) en trial tenant; Commerce y Supply Chain avanzado siguen en expansión | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#3-ruta-fo-practitioner-architect-track) |
 | Business Applications Architect Enterprise | 🔵 Avanzado con Capstone Enterprise D365 | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#4-ruta-business-applications-architect-enterprise) |
 
 El roadmap enlazado detalla qué está cubierto como diseño/lab y qué exige ambiente real. El

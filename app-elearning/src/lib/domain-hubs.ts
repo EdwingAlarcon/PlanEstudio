@@ -220,12 +220,17 @@ export function getDynamics365Hub(): DomainHub {
         ],
       },
       {
-        title: "F&O Awareness (Finance & Operations)",
-        description: "Vocabulario, procesos ERP y frontera con CE — awareness, no configuración productiva.",
+        title: "F&O (Finance & Operations)",
+        description: "Vocabulario y mapas de proceso, más configuración hands-on (LAB-093 a LAB-097) en trial tenant — requiere ambiente Dynamics 365 Finance/SCM propio.",
         links: [
           { title: "F&O Awareness — Procesos ERP, seguridad e integración con CE", description: "Módulo 59.", href: "/nivel/d365/modulo/finance-operations-procesos-erp" },
           { title: "Lab 69 — Process mapping ERP end-to-end", description: "Mapeo O2C/P2P/R2R/I2D.", href: "/labs/lab-69-fo-process-mapping-erp-end-to-end" },
           { title: "Lab 89 — Process mapping avanzado", description: "Profundización de mapeo de procesos.", href: "/labs/lab-89-fo-process-mapping-advanced" },
+          { title: "Lab 93 — Finance Setup Walkthrough", description: "Legal entity, calendario fiscal, catálogo de cuentas y dimensiones en trial tenant.", href: "/labs/lab-93-fo-finance-setup-walkthrough" },
+          { title: "Lab 94 — Procure-to-Pay Hands-On", description: "Orden de compra, recepción, factura y pago end-to-end.", href: "/labs/lab-94-fo-procure-to-pay-hands-on" },
+          { title: "Lab 95 — Order-to-Cash Hands-On", description: "Pedido, envío, factura y cobro end-to-end.", href: "/labs/lab-95-fo-order-to-cash-hands-on" },
+          { title: "Lab 96 — Inventory & Products Setup", description: "Variantes de producto, dimensiones y jerarquía de reservas.", href: "/labs/lab-96-fo-inventory-products-setup" },
+          { title: "Lab 97 — Project Operations Setup", description: "WBS y facturación por hito + tiempo.", href: "/labs/lab-97-fo-project-operations-setup" },
           { title: "Lab 64 — Capstone F&O Awareness", description: "Arquitectura ERP + CRM.", href: "/labs/lab-64-capstone-fo-awareness-arquitectura-erp-crm" },
         ],
       },
@@ -253,7 +258,7 @@ export function getDynamics365Hub(): DomainHub {
         links: [
           { title: "🔵 Expert Customer Service / Contact Center", description: "Case management, SLA y routing avanzados; canales de voz/SMS reales quedan en awareness sin tenant con licencia.", href: "/recursos/roadmap-especializacion-avanzada" },
           { title: "🔵 Expert Sales Operations", description: "Forecasting y pipeline review con datos de prueba; Sales Insights predictivo requiere licencia Premium y datos históricos reales.", href: "/recursos/roadmap-especializacion-avanzada" },
-          { title: "⚪ F&O Practitioner / Architect Track", description: "Vocabulario, mapas de proceso e integración CE+F&O cubiertos; configuración real de Finance/SCM/Commerce todavía no existe en la plataforma.", href: "/recursos/roadmap-especializacion-avanzada" },
+          { title: "🔵 F&O Practitioner / Architect Track", description: "Vocabulario, mapas de proceso, integración CE+F&O y —desde LAB-093 a LAB-097— configuración hands-on de Finance/P2P/O2C/Inventory/Project Operations en trial tenant; Commerce, seguridad y reporting siguen en expansión.", href: "/recursos/roadmap-especializacion-avanzada" },
           { title: "🔵 Business Applications Architect Enterprise", description: "Capstone CE + F&O con ownership de datos, roadmap por fases y Fit-Gap enterprise.", href: "/recursos/roadmap-especializacion-avanzada" },
         ],
       },

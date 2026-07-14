@@ -17,13 +17,18 @@ PlanEstudio ya cubre con evidencia real:
   end-to-end (Módulo 58, LAB-086/LAB-087).
 - **Finance & Operations — awareness avanzado e integración**: vocabulario, mapas de proceso,
   ownership CE + F&O y diseño de integración (Módulos 59/64, LAB-069/LAB-070/LAB-088/LAB-089).
+- **Finance & Operations — práctica hands-on**: setup financiero, Procure-to-Pay, Order-to-Cash,
+  inventario/producto y Project Operations ejecutados paso a paso en un trial tenant propio del
+  estudiante (LAB-093 a LAB-097 — ver nota de verificación en cada uno).
 - **Capstone Enterprise D365**: arquitectura CE + F&O, roadmap, Fit-Gap, UAT y evidencia de
   portafolio (Módulo 65, LAB-090).
 
 La ejecución real de canales Contact Center, Sales Insights predictivo, RSO/Field Service Mobile,
-Customer Insights, dual-write y F&O debe pasar por el gate de
-[D365 Tenant Readiness](D365_TENANT_READINESS.md). Si el gate no se cumple, el entregable se
-presenta como diseño/simulación avanzada, no como configuración productiva.
+Customer Insights, dual-write y F&O productivo (más allá de los 5 procesos de LAB-093 a LAB-097)
+debe pasar por el gate de [D365 Tenant Readiness](D365_TENANT_READINESS.md). Si el gate no se
+cumple, el entregable se presenta como diseño/simulación avanzada, no como configuración productiva.
+Los labs F&O hands-on son la excepción declarada: se ejecutan en un trial/demo que el propio
+estudiante consigue (igual que un lab de Microsoft Learn), no en un tenant corporativo real.
 
 ## Leyenda de madurez
 
@@ -116,28 +121,33 @@ presentado como si funcionara.
 
 ## 3. Ruta F&O Practitioner / Architect Track
 
-**Estado global: ⚪ En expansión.** Esta es la ruta con la brecha más grande frente a "experto": la
-plataforma cubre hoy **vocabulario, mapas de proceso y diseño de integración** (🔵 Avanzado /
-🟡 Awareness), pero **cero configuración de producto real** en Finance, Supply Chain Management,
-Commerce o Project Operations.
+**Estado global: 🔵 Avanzado con práctica hands-on en trial tenant.** La plataforma cubre
+**vocabulario, mapas de proceso y diseño de integración** (🔵 Avanzado) y, desde LAB-093 a LAB-097,
+**configuración real paso a paso** de Finance, Procure-to-Pay, Order-to-Cash, inventario/producto y
+Project Operations — ejecutada por el propio estudiante en un ambiente trial/demo. Commerce, LCS,
+seguridad F&O y reporting siguen sin cobertura hands-on.
 
-> ⚠️ **Regla explícita de esta ruta:** no se presentará como "Ruta F&O Practitioner disponible" ni
-> se le asignará una certificación de especialista hasta que existan laboratorios con
-> configuración real verificable (tenant de práctica o simulación **muy** detallada paso a paso con
-> capturas equivalentes a las de un tenant real) — no descripciones conceptuales de qué botón se
-> apretaría.
+> ⚠️ **Regla explícita de esta ruta (actualizada):** un tema se presenta como 🔵 Avanzado/práctico
+> solo cuando tiene un lab con pasos numerados, nombres de menú concretos y evidencia esperada
+> verificable — no descripciones conceptuales de qué botón se apretaría. Los labs LAB-093 a LAB-097
+> cumplen ese estándar de especificidad, pero **sus pasos no fueron verificados contra un tenant en
+> vivo al momento de escribirse** (ver la nota de verificación en cada lab). Esto no es lo mismo que
+> "conceptual": el estudiante ejecuta los pasos en su propio trial y documenta cualquier diferencia
+> de UI que encuentre — igual que ocurre con cualquier lab de Microsoft Learn frente a un release
+> nuevo. No se le asignará a esta ruta una certificación de "especialista F&O" hasta que Commerce,
+> seguridad y reporting tengan el mismo nivel de práctica hands-on.
 
 | Tema | Madurez actual |
 |---|---|
-| Finance configuration fundamentals (legal entities, calendarios fiscales, catálogo de cuentas) | ⚪ En expansión |
-| Legal entities (estructura multi-entidad, intercompany) | 🟡 Awareness (Módulo 59) |
-| Financial dimensions (segmentos, jerarquías, valores por defecto) | ⚪ En expansión |
-| Supply Chain configuration fundamentals (sitios, almacenes, ubicaciones) | ⚪ En expansión |
-| Products and inventory (variantes, dimensiones de producto, políticas de reserva) | 🟡 Awareness (Módulo 59) |
+| Finance configuration fundamentals (legal entities, calendarios fiscales, catálogo de cuentas) | 🔵 Avanzado (LAB-093, requiere trial tenant) |
+| Legal entities (estructura multi-entidad, intercompany) | 🔵 Avanzado (Módulo 59, LAB-093) |
+| Financial dimensions (segmentos, jerarquías, valores por defecto) | 🔵 Avanzado (LAB-093) |
+| Supply Chain configuration fundamentals (sitios, almacenes, ubicaciones) | 🔵 Avanzado (LAB-096) |
+| Products and inventory (variantes, dimensiones de producto, políticas de reserva) | 🔵 Avanzado (Módulo 59, LAB-096) |
 | Commerce overview (POS, call center, canales unificados) | 🟡 Awareness |
-| Project Operations (estructura de proyecto, WBS, facturación por hitos/tiempo) | 🟡 Awareness |
-| Procure-to-Pay (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069) |
-| Order-to-Cash (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069) |
+| Project Operations (estructura de proyecto, WBS, facturación por hitos/tiempo) | 🔵 Avanzado (LAB-097) |
+| Procure-to-Pay (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069 mapa de proceso; LAB-094 ejecución hands-on) |
+| Order-to-Cash (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069 mapa de proceso; LAB-095 ejecución hands-on) |
 | Record-to-Report (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069) |
 | Inventory-to-Deliver / Project-to-Profit (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069) |
 | Data entities (estructura, staging, validaciones) | 🟡 Awareness (Módulo 59) |
@@ -148,19 +158,23 @@ Commerce o Project Operations.
 | Security (roles de seguridad F&O, duty/privilege) | ⚪ En expansión |
 | Reporting (Financial Reporting, Power BI embebido en F&O) | ⚪ En expansión |
 
-### Laboratorios propuestos (uno por proceso, cuando se implementen)
+### Laboratorios disponibles (hands-on, requieren trial tenant)
 
-| Lab propuesto | Alcance previsto |
-|---|---|
-| F&O Finance Setup Walkthrough | Legal entity, calendario fiscal, catálogo de cuentas, dimensiones financieras — en un ambiente demo/sandbox real, no descripción |
-| F&O Procure-to-Pay Hands-On | Orden de compra → recepción → factura de proveedor → pago, con capturas de cada paso en un ambiente real |
-| F&O Order-to-Cash Hands-On | Cliente en `CustomersV3` → pedido de venta → picking → envío → factura → cobro, en ambiente real |
-| F&O Inventory & Products Setup | Producto liberado, variantes, políticas de reserva, dimensiones de inventario |
-| F&O Project Operations Setup | Estructura de proyecto, WBS, facturación por hitos, en ambiente real |
+| Lab disponible | Alcance | Requiere |
+|---|---|---|
+| LAB-093 F&O Finance Setup Walkthrough | Legal entity, calendario fiscal, catálogo de cuentas, dimensiones financieras | Trial/demo Dynamics 365 Finance |
+| LAB-094 F&O Procure-to-Pay Hands-On | Orden de compra → recepción → factura de proveedor → pago, con manejo de discrepancia | Trial/demo Dynamics 365 SCM/Finance |
+| LAB-095 F&O Order-to-Cash Hands-On | Cliente → pedido de venta → envío → factura → cobro, con envío parcial | Trial/demo Dynamics 365 SCM/Finance |
+| LAB-096 F&O Inventory & Products Setup | Producto liberado, variantes, dimensiones, jerarquía de reservas | Trial/demo Dynamics 365 SCM |
+| LAB-097 F&O Project Operations Setup | WBS, contrato de proyecto, regla de facturación por hito + tiempo | Trial/demo Dynamics 365 Project Operations |
 
-Cada uno de estos labs, al construirse, seguirá el mismo estándar de frontmatter, evidencia y
-rúbrica que el resto de la plataforma — y solo entonces la fila correspondiente en la Matriz de
-Competencias pasará de 🟡/⚪ a 🟢 **Cubierto**.
+### Pendiente para que la ruta se presente como "F&O Practitioner disponible" en `/rutas`
+
+1. Commerce (POS, canales unificados) con al menos un lab hands-on.
+2. Seguridad F&O (duty/privilege) con un lab de diseño de roles.
+3. Reporting (Financial Reporting o Power BI embebido) con un lab de al menos un reporte real.
+4. Verificación de LAB-093 a LAB-097 contra un tenant en vivo por alguien con acceso, actualizando
+   la nota de verificación de cada lab de "no verificado" a "verificado el [fecha] contra [versión]".
 
 ---
 
