@@ -52,11 +52,12 @@ Esta ruta debe evitar prácticas legacy como centro del aprendizaje. El enfoque 
 | Dynamics 365 Sales | Cubierto | Módulos 20, 56, 60; LAB-066, LAB-081 | Lead-to-cash, forecasting y pipeline review | Mantener como evidencia CE avanzada |
 | Customer Insights / Customer 360 | Cubierto | Módulos 57, 63; LAB-084, LAB-085, LAB-067 | Perfil unificado, consentimiento y real-time journey | Mantener como ruta específica Customer Insights |
 | Field Service awareness | Cubierto | Módulo 58; LAB-086, LAB-087, LAB-059 | Work order, agreement preventivo, mobile offline y UAT | Mantener como ruta específica Field Service |
-| Reporting y dashboards | Parcial | Módulos 6, 12, 20; LAB-068 | Dashboard operativo | Falta escenario funcional más fuerte |
+| Reporting y dashboards | Parcial | Módulos 6, 12, 20; LAB-068 | Dashboard operativo | Falta escenario funcional más fuerte (reporting profundo con Data Lake/Power BI sigue en roadmap) |
 | Fit-gap | Cubierto | Módulos 20, 38, 55; LAB-057, LAB-062, LAB-101 | Matriz fit-gap | Conectar con entrevista funcional |
 | Backlog funcional en Azure DevOps (historias + criterios de aceptación) | Cubierto | LAB-101 (JR-013) | Backlog Epics/Features/Historias con criterios de aceptación priorizado | Ninguna crítica |
+| Sales lead-to-cash como job test dedicado | Cubierto | LAB-102 (JR-014) | Prueba técnica cronometrada solo de Sales (lead, opportunity, quote, order, invoice) | Ninguna crítica |
 | UAT | Cubierto | Módulos 38, 55; LAB-055, LAB-062, LAB-101 | Casos UAT y sign-off | Conectar con soporte post-go-live |
-| Soporte funcional | Parcial | Módulos 38, 55; LAB-101 | Manual, training y resolución; documento de soporte/adopción en LAB-101 | Falta incidente funcional simulado post-go-live |
+| Soporte funcional post-go-live | Cubierto | Módulos 38, 55; LAB-101, LAB-103 (JR-015) | Manual, training, documento de soporte/adopción (LAB-101) e incidente funcional simulado con triage, causa raíz y fix de configuración (LAB-103) | Ninguna crítica |
 
 ## Secuencia recomendada de estudio
 
@@ -66,7 +67,8 @@ Esta ruta debe evitar prácticas legacy como centro del aprendizaje. El enfoque 
 4. **Sales hands-on:** LAB-066 y LAB-057 para lead-to-cash, entidades estándar y fit-gap.
 5. **Especializaciones CE:** LAB-084, LAB-085, LAB-086 y LAB-087 para Customer Insights y Field Service avanzado.
 6. **Consultoría funcional:** Módulos 38 y 55, LAB-055 y LAB-062 para UAT, documentación, training, fit-gap y go-live.
-7. **Caso integrado tipo vacante real:** LAB-101 (JR-013) para practicar el ciclo completo requerimiento→backlog en Azure DevOps→configuración→UAT en un solo caso de admisión, servicio, retención y cobranza — recomendado como cierre de la ruta antes de aplicar.
+7. **Caso integrado tipo vacante real:** LAB-101 (JR-013) para practicar el ciclo completo requerimiento→backlog en Azure DevOps→configuración→UAT en un solo caso de admisión, servicio, retención y cobranza.
+8. **Job test dedicado y troubleshooting post-go-live:** LAB-102 (JR-014) para una prueba técnica cronometrada solo de Sales lead-to-cash, y LAB-103 (JR-015) para practicar un incidente funcional post-go-live (casos mal enrutados y SLA que no se dispara) — recomendados como cierre de la ruta antes de aplicar.
 
 ## Mapeo a contenido actual
 
@@ -159,14 +161,44 @@ Un portafolio CRM Functional debería incluir al menos:
 |---|---|---|---|---|---|---|
 | LAB-077 (JR-007) - Customer Service Specialist Job Simulation | CRM Functional / Customer Service Specialist | casos, colas, SLA, entitlements, KB, dashboard, UAT, soporte funcional | configuración funcional, matriz de colas/SLA, dashboard, casos UAT y manual | Intermedia-Avanzada | 4 h | Demuestra configuración Customer Service y criterio funcional |
 | LAB-101 (JR-013) - CRM Functional Analyst: Caso Integrado (Admisión, Servicio, Retención y Cobranza) | Analista Funcional CRM / Dynamics 365 (vacante tipo administración, workflows, casos/colas/SLA/entitlements, backlog en Azure DevOps, UAT) | AS-IS/TO-BE, fit-gap, backlog funcional en Azure DevOps con historias de usuario y criterios de aceptación, modelo de datos/seguridad, BPF, casos/colas/SLA/entitlements/KB, Power Automate, calidad de datos, auditoría de configuración, decisión config vs. automatización vs. plugin vs. integración, UAT y matriz de trazabilidad | documento de requerimientos, matriz fit-gap, backlog Azure DevOps exportado, modelo de datos, diseño de servicio, flujos Power Automate, matriz de calidad de datos, 10 casos UAT con defectos, documento de soporte/adopción y roadmap, presentación ejecutiva | Avanzada | 5 h | Único lab que cubre en un solo caso todo el ciclo requerimiento→backlog→configuración→prueba que pide esta vacante específica |
+| LAB-102 (JR-014) - Dynamics 365 Sales: Lead-to-Cash Job Test | Dynamics 365 Sales Functional Consultant | calificación y conversión de leads, BPF de Opportunity con condición de rama, price lists y Quote, conversión Order/Invoice, casos de prueba end-to-end | diagrama del ciclo lead-to-cash, matriz de calificación de leads, 2 price lists con reglas de descuento, BPF con condición de rama, 5 casos de prueba con al menos un caso negativo | Intermedia-Avanzada | 2.5 h (cronometrado) | Prueba técnica dedicada solo a Sales, sin mezclar con Customer Service/retención/cobranza |
+| LAB-103 (JR-015) - CRM Functional Post-Go-Live Incident Simulation | CRM Functional / Customer Service Specialist | triage funcional, análisis de causa raíz sobre evidencia de configuración (reglas de enrutamiento, definición de SLA), fix de configuración, plan de regresión, post-mortem | nota de triage, análisis de 3+ hipótesis descartadas/confirmadas, fix de configuración por síntoma, plan de regresión, post-mortem con acción preventiva | Avanzada | 2 h | Incidente funcional post-go-live simulado con evidencia, sin depender de código ni logs técnicos |
 
 ## Brechas críticas
 
-1. Reporting operativo requiere un escenario funcional más fuerte que JR-007 (JR-013 aporta 5 indicadores ejecutivos, pero el reporting profundo con Data Lake/Power BI sigue en roadmap).
-2. Soporte funcional post-go-live y troubleshooting de configuración necesitan simulación adicional más allá de JR-007 y JR-013 (ambos cubren el diseño del soporte, no un incidente post-go-live simulado en vivo).
-3. Omnichannel/Contact Center avanzado sigue en roadmap y no debe presentarse como cubierto (JR-013 lo trata como diseño conceptual en su Paso 10, consistente con este límite).
-4. ~~Falta un job test dedicado para Dynamics 365 Sales (lead-to-cash)~~ — parcialmente cerrada: JR-013 integra Sales (admisión) junto con Customer Service, retención y cobranza en un solo caso cronometrado; sigue pendiente un job test dedicado *solo* a Sales lead-to-cash con formato de prueba técnica.
+1. Reporting operativo requiere un escenario funcional más fuerte que JR-007 (JR-013 aporta 5 indicadores ejecutivos, pero el reporting profundo con Data Lake/Power BI sigue en roadmap — ver `ROADMAP_ESPECIALIZACION_AVANZADA.md`; requiere una fuente de datos real, no solo documentación).
+2. ~~Soporte funcional post-go-live y troubleshooting de configuración necesitan simulación adicional~~ — cerrada por LAB-103 (JR-015): incidente funcional simulado con evidencia de configuración (enrutamiento y SLA), triage, causa raíz, fix y post-mortem, en el mismo formato de "job test" que JR-012 (developer) pero para consultor funcional.
+3. Omnichannel/Contact Center avanzado sigue en roadmap y no debe presentarse como cubierto (JR-013 lo trata como diseño conceptual en su Paso 10, consistente con este límite; una implementación real requiere licenciamiento de un proveedor de canal, fuera del alcance de este repositorio de contenido).
+4. ~~Falta un job test dedicado para Dynamics 365 Sales (lead-to-cash)~~ — cerrada por LAB-102 (JR-014): prueba técnica cronometrada (150 min) exclusiva de Sales lead-to-cash, sin mezclarla con Customer Service/retención/cobranza.
 5. Azure DevOps como **backlog funcional** (historias de usuario + criterios de aceptación, no ALM técnico) — cerrada por LAB-101/JR-013.
+
+### Pendientes que siguen abiertos y por qué
+
+Estos puntos no se cierran con contenido nuevo porque dependen de recursos que este repositorio no
+controla — un proyecto de Azure DevOps o tenant productivo real, usuarios reales de una empresa,
+licenciamiento de un proveedor de WhatsApp/telefonía, o una fuente de datos real para un Data Lake.
+Un lab solo puede *simular* esas condiciones con evidencia realista (como hacen LAB-101, LAB-102 y
+LAB-103); no puede sustituir la experiencia verificable en una organización real ni una integración
+que dependa de un contrato externo:
+
+- **Experiencia laboral verificable:** ningún lab, por bien diseñado que esté, sustituye el
+  historial laboral en una empresa. Los labs producen evidencia de portafolio, no antigüedad
+  laboral.
+- **Azure DevOps/tenant en producción real:** LAB-101 acepta explícitamente un equivalente en
+  Markdown/Excel porque exigir un tenant real excluiría a quien no tiene acceso a uno; quien sí lo
+  tenga puede (y debería) ejecutar los pasos ahí.
+- **WhatsApp/telefonía productivos:** requieren contratar un canal con un proveedor externo
+  (licenciamiento real); el Paso 10 de LAB-101 documenta el diseño conceptual, que es lo que un
+  analista funcional entrega antes de que el canal se contrate.
+- **Data Lake/reporting profundo:** requiere una fuente de datos real para tener sentido; se
+  mantiene en `ROADMAP_ESPECIALIZACION_AVANZADA.md` como candidato a un lab futuro cuando exista un
+  dataset de referencia reutilizable.
+- **Integración real con proveedores externos:** tratarla como implementación real requeriría
+  credenciales y contratos con un proveedor específico (pasarela de pagos, sistema académico), que
+  varían por vacante y no se pueden generalizar en contenido educativo.
+- **Usuarios reales en discovery:** el Paso 1 de LAB-101 ya es explícito en que las entrevistas son
+  simuladas con supuestos razonables — el ejercicio de valor es escribir un AS-IS defendible a
+  partir de supuestos declarados, no inventar transcripciones de entrevistas reales.
 
 ## Checklist antes de aplicar
 
@@ -176,6 +208,8 @@ Un portafolio CRM Functional debería incluir al menos:
 - [ ] Puedo explicar el ciclo lead-to-cash usando entidades estándar.
 - [ ] Tengo una matriz fit-gap clara.
 - [ ] Tengo un backlog funcional en Azure DevOps con historias de usuario y criterios de aceptación (LAB-101).
+- [ ] Resolví una prueba técnica cronometrada solo de Sales lead-to-cash (LAB-102).
+- [ ] Puedo diagnosticar un incidente funcional post-go-live con evidencia de configuración, no solo diseñar el proceso (LAB-103).
 - [ ] Tengo al menos 8 casos UAT con criterios verificables.
 - [ ] Puedo preparar una demo funcional de 10 minutos.
 - [ ] Puedo explicar qué brechas todavía tengo sin venderlas como experiencia.
