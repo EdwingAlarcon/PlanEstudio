@@ -383,7 +383,7 @@ son las rutas profesionales las que exigen la evidencia práctica correspondient
 | Rol | Qué debe entregar |
 |---|---|
 | Maker | Evidencia de app/flujo funcionando y checklist básico |
-| Consultor Funcional | FDD, historias, UAT, trazabilidad y sign-off |
+| Consultor Funcional | FDD, historias, UAT, trazabilidad y sign-off (LAB-062, LAB-101 — backlog Azure DevOps y caso integrado admisión/servicio/retención/cobranza) |
 | Developer | Diseño técnico, pruebas, ALM y evidencia de build |
 | Dynamics 365 Customer Engagement | Segmento/journey, Work Order/SLA, ciclo case-to-resolution (LAB-068), matriz de trazabilidad y UAT del LAB-060 |
 | Finance & Operations Awareness | Mapas de proceso ERP (LAB-069), diseño técnico de integración (LAB-070), matriz de integración ERP+CRM, dual-write conceptual y matriz de riesgos (LAB-064) |
