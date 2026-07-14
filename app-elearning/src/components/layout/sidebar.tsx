@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   BookOpen, CheckSquare, GraduationCap, FileText, Trophy,
   Home, PlayCircle, FlaskConical, Route, HelpCircle, Briefcase, ClipboardList,
+  Layers3, Building2, Workflow,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -38,6 +39,13 @@ const RESOURCE_LINKS = [
   { href: "/recursos/portafolio-profesional", label: UI.nav.portfolioGuide, icon: FileText },
   { href: "/recursos/roadmap-especializacion-avanzada", label: UI.nav.advancedRoadmap, icon: Route },
   { href: "/recursos/d365-tenant-readiness", label: UI.nav.d365TenantReadiness, icon: CheckSquare },
+];
+
+const DOMAIN_LINKS = [
+  { href: "/power-platform", label: UI.nav.powerPlatform, icon: Layers3 },
+  { href: "/dynamics-365",   label: UI.nav.dynamics365,   icon: Building2 },
+  { href: "/integracion",    label: UI.nav.integration,   icon: Workflow },
+  { href: "/empleabilidad",  label: UI.nav.employability, icon: Briefcase },
 ];
 
 const EMPLOYABILITY_LINKS = [
@@ -98,7 +106,23 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
           <NavLink href="/simulador" icon={PlayCircle}  label={UI.nav.simulator} active={pathname === "/simulador"} />
           <NavLink href="/labs"      icon={FlaskConical} label="Laboratorios"    active={pathname.startsWith("/labs")} />
           <NavLink href="/portafolio" icon={Briefcase}   label={UI.nav.portfolio} active={pathname === "/portafolio"} />
-          <NavLink href="/empleabilidad" icon={Briefcase} label={UI.nav.employability} active={pathname === "/empleabilidad"} />
+
+          <Separator className="my-3" />
+
+          {/* Domains */}
+          <p className="px-3 text-[10px] font-semibold text-muted-foreground mb-2 uppercase tracking-widest">
+            {UI.nav.domains}
+          </p>
+
+          {DOMAIN_LINKS.map((link) => (
+            <NavLink
+              key={link.href}
+              href={link.href}
+              icon={link.icon}
+              label={link.label}
+              active={pathname === link.href}
+            />
+          ))}
 
           <Separator className="my-3" />
 

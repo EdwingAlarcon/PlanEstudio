@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { getAllLabs, getAllModules } from "@/lib/content";
 import { getAllProfessionalRoutes } from "@/lib/professional-routes";
-import { PortfolioClient, type PortfolioRouteData } from "./portfolio-client";
+import { getLaborProfiles } from "@/lib/labor-profiles";
+import { PortfolioClient, type PortfolioProfileData, type PortfolioRouteData } from "./portfolio-client";
 
 export const metadata: Metadata = {
   title: "Portafolio profesional",
@@ -33,5 +34,23 @@ export default function PortfolioPage() {
     };
   });
 
-  return <PortfolioClient routes={routes} />;
+  const profiles: PortfolioProfileData[] = getLaborProfiles().map((profile) => ({
+    slug: profile.slug,
+    title: profile.title,
+    accent: profile.accent,
+    summary: profile.summary,
+    routeLinks: profile.routeSlugs
+      .map((routeSlug) => getAllProfessionalRoutes().find((r) => r.slug === routeSlug))
+      .filter((r): r is NonNullable<typeof r> => Boolean(r))
+      .map((route) => ({ title: route.title, href: `/rutas/${route.slug}` })),
+    jobReadyLabs: profile.jobReadyLabSlugs
+      .map((slug) => labsBySlug.get(slug))
+      .filter((lab): lab is NonNullable<typeof lab> => Boolean(lab))
+      .map((lab) => ({ slug: lab.slug, displayId: lab.displayId, title: lab.title, href: `/labs/${lab.slug}` })),
+    minimumEvidence: profile.minimumEvidence,
+    jobReadyGuideHref: profile.jobReadyGuideHref,
+    interviewHref: profile.interviewHref,
+  }));
+
+  return <PortfolioClient routes={routes} profiles={profiles} />;
 }

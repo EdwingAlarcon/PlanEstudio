@@ -33,18 +33,19 @@ Al completar la secuencia recomendada, deberías poder explicar y demostrar:
 | Plugin pipeline | Cubierto | Módulo 23 | Explicación de PreOperation/PostOperation | Más casos de PreValidation y async |
 | Pre/Post Images | Parcial | Módulo 23, LAB-023 | Registro de PreImage en PRT | Caso de comparación de cambios más fuerte |
 | Depth y recursión | Cubierto | Módulo 23 | Guard clause `context.Depth > 1` | Preguntas de troubleshooting |
-| ITracingService / Plugin Trace Log | Parcial | Módulo 23 | Trazas básicas en plugin | Simular incidente con log real |
+| ITracingService / Plugin Trace Log | Cubierto | Módulo 23; LAB-092 | Trazas de plugin analizadas como evidencia de incidente en JR-012 | Ampliar a escenarios con múltiples incidentes concurrentes |
+| Custom API / Custom Workflow Activity | Cubierto | LAB-091 | Contrato de Custom API, plugin backing y `CodeActivity` legacy evaluados en JR-011 | Custom Connectors sigue sin job test dedicado |
 | Unit testing de plugins | Parcial | Módulo 23, Módulo 50, LAB-023 | Tests con Moq | Ampliar casos error/feliz/seguridad |
-| JavaScript CRM | Parcial | Módulo 13 | Web Resource básico | Falta prueba técnica JR-002 |
-| `formContext` / `executionContext` | Parcial | Módulo 13 | Handler OnLoad/OnSave | Reforzar OnChange y errores comunes |
-| `Xrm.WebApi` | Parcial | Módulo 13, Módulo 53 | Consulta desde formulario | Falta CRUD completo y manejo de errores |
-| Dataverse Web API | Cubierto | Módulo 53, LAB-054 | App externa o conexión conceptual | Integración job-test JR-004 |
-| Azure Functions | Parcial | Módulo 24 | Diseño de integración | Falta implementación laboral guiada |
+| JavaScript CRM | Cubierto | Módulo 13; LAB-072 | Web Resource evaluado en prueba técnica JR-002 | Reforzar OnChange y errores comunes |
+| `formContext` / `executionContext` | Cubierto | Módulo 13; LAB-072 | Handler OnLoad/OnSave/OnChange evaluado en JR-002 | Reforzar validación async |
+| `Xrm.WebApi` | Cubierto | Módulo 13, Módulo 53; LAB-072 | Consulta desde formulario evaluada en JR-002 | Falta CRUD completo y manejo de errores |
+| Dataverse Web API | Cubierto | Módulo 53, LAB-054, LAB-074 | App externa e integración evaluada en JR-004 | Ampliar casos de manejo de errores |
+| Azure Functions | Cubierto | Módulo 24; LAB-074 | Implementación de integración evaluada en JR-004 | Profundizar en patrones de reintento |
 | Azure Logic Apps | Awareness | Módulo 34 | Comparación con Power Automate | Falta challenge práctico |
-| Service Bus | Awareness | Módulos 24, 34 | Patrón asíncrono conceptual | Falta simulación de resiliencia |
+| Service Bus | Parcial | Módulos 24, 34; LAB-074 | Patrón asíncrono con idempotencia evaluado en JR-004 | Falta simulación de resiliencia bajo carga |
 | ALM técnico | Cubierto | Módulos 19, 54; LAB-019, LAB-053 | Pipeline y solución desempaquetada | Conectar con repo CRM Developer |
 | Clean code | Parcial | Módulos 48, 50 | Revisión de diff y guardrails | Checklist específico CRM |
-| Debugging y troubleshooting | Parcial | Módulos 23, 26 | Logs y diagnóstico básico | Falta caso de incidente CRM |
+| Debugging y troubleshooting | Cubierto | Módulos 23, 26; LAB-092 | Diagnóstico de incidente de producción con trace log evaluado en JR-012 | Escenario con múltiples incidentes concurrentes |
 | IA aplicada al desarrollo | Parcial | Módulos 42-55, LAB-045, LAB-051, LAB-053 | Prompt, diff y revisión humana | JR-010 como práctica job-ready |
 
 ## Secuencia recomendada de estudio
@@ -129,24 +130,22 @@ Un portafolio CRM Developer debería incluir al menos:
 - ¿Qué revisarías en un diff generado por IA antes de aprobarlo?
 - ¿Qué datos nunca pegarías en un prompt?
 
-## Labs Job-Ready recomendados
+## Labs Job-Ready disponibles
 
-Estos labs aún no existen como contenido disponible. Son el roadmap recomendado para cerrar la ruta.
-
-| Lab propuesto | Vacante que valida | Skills que valida | Evidencia esperada | Dificultad | Duración | Relación con portafolio |
+| Lab disponible | Vacante que valida | Skills que valida | Evidencia esperada | Dificultad | Duración | Relación con portafolio |
 |---|---|---|---|---|---|---|
-| JR-002 - CRM JavaScript Customization | Dynamics 365 CRM Developer | OnLoad, OnChange, OnSave, `formContext`, `Xrm.WebApi` | Web Resource, casos de prueba, captura de eventos | Avanzada | 4 h | Demuestra client-side customization |
-| JR-003 - Dataverse Plugin C# Job Test | CRM Developer | Plugin pipeline, tracing, depth, images, tests | Código, tests, PRT, Plugin Trace Log | Avanzada | 4-5 h | Demuestra server-side development |
-| JR-004 - CRM Integration Challenge | Integration Developer | Web API, Azure Function/Logic Apps, errores, idempotencia | Diagrama, API/flujo, logs, decisiones | Avanzada | 4 h | Demuestra integración enterprise |
-| JR-010 - AI-Assisted CRM Development | CRM Developer moderno | Prompting, revisión de código, seguridad, guardrails | Prompt, diff, checklist, pruebas | Intermedia | 3 h | Demuestra uso responsable de IA |
+| LAB-072 (JR-002) - CRM JavaScript Customization | Dynamics 365 CRM Developer | OnLoad, OnChange, OnSave, `formContext`, `Xrm.WebApi` | Web Resource, casos de prueba, captura de eventos | Avanzada | 4 h | Demuestra client-side customization |
+| LAB-073 (JR-003) - Dataverse Plugin C# Job Test | CRM Developer | Plugin pipeline, tracing, depth, images, tests | Código, tests, PRT, Plugin Trace Log | Avanzada | 4-5 h | Demuestra server-side development |
+| LAB-074 (JR-004) - CRM Integration Challenge | Integration Developer | Web API, Azure Function/Service Bus, errores, idempotencia | Diagrama, API/flujo, logs, decisiones | Avanzada | 4 h | Demuestra integración enterprise |
+| LAB-080 (JR-010) - AI-Assisted CRM Development | CRM Developer moderno | Prompting, revisión de código, seguridad, guardrails | Prompt, diff, checklist, pruebas | Intermedia | 3 h | Demuestra uso responsable de IA |
+| LAB-091 (JR-011) - Custom API & Workflow Extensibility Job Test | CRM Developer | Custom API (contrato, parámetros), Custom Workflow Activity legacy, criterio de elección de mecanismo | Definición de Custom API, código del plugin, código del `CodeActivity`, tabla comparativa, pruebas | Avanzada | 4 h | Demuestra extensibilidad avanzada más allá del plugin tradicional |
+| LAB-092 (JR-012) - Production Incident Simulation | CRM Developer | Lectura de Plugin Trace Log, descarte de hipótesis, causa raíz, fix, regresión, post-mortem | Triage, análisis de causa raíz, fix propuesto, plan de regresión, post-mortem | Avanzada | 3 h | Demuestra troubleshooting de producción con evidencia, no solo código nuevo |
 
 ## Brechas críticas
 
-1. Falta un lab dedicado de JavaScript CRM estilo prueba técnica.
-2. Falta práctica específica de Custom APIs.
-3. Falta práctica de custom workflow activities para contextos legacy.
-4. Logic Apps y Service Bus están en awareness/concepto, no en challenge práctico.
-5. Debugging/tracing necesita una simulación de incidente más fuerte.
+1. JR-011 y JR-012 cierran las brechas de Custom APIs, workflow activities legacy y simulación de incidente en producción documentadas en la revisión anterior de esta ruta.
+2. Custom Connectors (más allá de Custom API) siguen sin un job test dedicado.
+3. La simulación de incidente de JR-012 usa un extracto de trace log fijo; un escenario con múltiples incidentes concurrentes queda como roadmap.
 
 ## Checklist antes de aplicar
 

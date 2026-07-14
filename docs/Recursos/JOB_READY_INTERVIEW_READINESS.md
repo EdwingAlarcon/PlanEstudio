@@ -234,6 +234,8 @@ Proximo update: 11:30 con resultado y causa raiz.
 - ¿Como defines criterios de aceptacion?
 - ¿Como pruebas una regla de negocio?
 - ¿Como entrenas usuarios resistentes al cambio?
+- ¿Que harias si un usuario pide un campo nuevo cada semana sin justificacion?
+- ¿Como decides si algo se resuelve con Power Fx o con Power Automate?
 
 ### CRM Functional
 
@@ -242,6 +244,18 @@ Proximo update: 11:30 con resultado y causa raiz.
 - ¿Como validas un SLA?
 - ¿Como documentas UAT?
 - ¿Como explicas Sales lead-to-cash?
+- ¿Como decides si un entitlement se mide por horas, casos o vigencia?
+- ¿Que harias si dos equipos reclaman ownership del mismo tipo de caso?
+
+### Dynamics 365 Sales
+
+- ¿Como explicas el ciclo lead-to-cash sin usar jerga interna?
+- ¿Que diferencia hay entre lead qualification y opportunity qualification?
+- ¿Como decides si una oportunidad esta lista para convertirse en quote?
+- ¿Como interpretarias un forecast que no coincide con el pipeline real?
+- ¿Que revisarias si el equipo de ventas duplica leads constantemente?
+- ¿Como explicarias territory management a un gerente comercial no tecnico?
+- ¿Que metricas usarias para evaluar salud del pipeline en una revision semanal?
 
 ### Developer
 
@@ -250,6 +264,9 @@ Proximo update: 11:30 con resultado y causa raiz.
 - ¿Como usas `formContext`?
 - ¿Como consumes Dataverse Web API?
 - ¿Como haces tracing y debugging?
+- ¿Que diferencia hay entre PreOperation y PostOperation y cuando usarias cada uno?
+- ¿Como decidirias entre un Custom API y un plugin tradicional?
+- ¿Como revisarias codigo generado por IA antes de aprobarlo en un PR?
 
 ### Admin / Governance
 
@@ -258,6 +275,8 @@ Proximo update: 11:30 con resultado y causa raiz.
 - ¿Como explicas DLP a negocio?
 - ¿Que revisas en capacidad/licenciamiento?
 - ¿Como operarias un CoE moderno?
+- ¿Como investigarias quien exporto datos sensibles de un ambiente?
+- ¿Que harias si un maker crea una app fuera de politica en produccion?
 
 ### Migration / Legacy
 
@@ -266,6 +285,8 @@ Proximo update: 11:30 con resultado y causa raiz.
 - ¿Como validas integridad post-carga?
 - ¿Que revisas en CRM on-prem lento?
 - ¿Que debe incluir un cutover runbook?
+- ¿Como decidirias entre big-bang y migracion incremental por fases?
+- ¿Que harias si la reconciliacion post-carga muestra registros duplicados?
 
 ### Architect
 
@@ -274,14 +295,16 @@ Proximo update: 11:30 con resultado y causa raiz.
 - ¿Como manejas riesgos de integracion?
 - ¿Como documentas una decision arquitectonica?
 - ¿Como explicas trade-offs a negocio?
+- ¿Como decidirias entre dual-write, DMF o virtual tables para integrar CE y F&O?
+- ¿Como justificarias Managed Environments a un stakeholder enfocado en costos?
+- ¿Que preguntarias primero al heredar una arquitectura Power Platform sin documentacion?
+- ¿Como priorizarias riesgos tecnicos cuando el negocio presiona por velocidad?
 
-## Lab Job-Ready recomendado
+## Lab Job-Ready disponible
 
-JR-009 queda como roadmap para una simulacion ejecutable posterior.
-
-| Lab recomendado | Prioridad | Perfil | Skills | Evidencia |
+| Lab disponible | Prioridad | Perfil | Skills | Evidencia |
 |---|---|---|---|---|
-| JR-009 Technical Interview Simulation | Media-Alta | Todos | entrevista, ingles tecnico, demo, CV, comunicacion remota | Guion de demo, respuestas STAR, README, pitch en ingles, CV draft |
+| LAB-079 (JR-009) Technical Interview Simulation | Media-Alta | Todos | entrevista, ingles tecnico, demo, CV, comunicacion remota | Guion de demo, respuestas STAR, README, pitch en ingles, CV draft |
 
 ## Checklist antes de aplicar
 

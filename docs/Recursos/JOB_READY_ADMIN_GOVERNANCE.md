@@ -40,7 +40,7 @@ El gobierno moderno de Power Platform no debe depender únicamente de instalar e
 
 | Skill laboral | Estado actual | Contenido actual | Evidencia posible hoy | Brecha |
 |---|---|---|---|---|
-| Power Platform admin center | Parcial | Módulos 1, 31, 32 | Inventario y decisiones de gobierno | Falta assessment operativo JR-006 |
+| Power Platform admin center | Cubierto | Módulos 1, 31, 32; LAB-076 | Inventario, DLP, capacidad y decisiones de gobierno documentadas en JR-006 | Profundizar investigación de incidentes con audit logs/Purview |
 | Environment strategy | Cubierto | Módulos 31, 33; LAB-056 | Diagrama DEV/TEST/PROD y política de promoción | Agregar criterios por tipo de workload |
 | Environment types y lifecycle | Parcial | Módulos 31, 33 | Matriz de ambientes | Falta runbook de creación/cierre |
 | DLP policies | Cubierto | Módulos 31, 33, 36; LAB-032 | Política DLP y prueba de bloqueo | Conectar a excepciones y revisión periódica |
@@ -132,21 +132,18 @@ Un portafolio Admin/Governance debería incluir al menos:
 - ¿Qué métricas usarías para medir salud de la plataforma?
 - ¿Cómo harías onboarding y offboarding de makers?
 
-## Lab Job-Ready recomendado
+## Lab Job-Ready disponible
 
-Este lab aún no existe como contenido disponible. Es el roadmap recomendado para cerrar la ruta.
-
-| Lab propuesto | Vacante que valida | Skills que valida | Evidencia esperada | Rúbrica sugerida | Dificultad | Duración | Relación con portafolio |
-|---|---|---|---|---|---|---|---|
-| JR-006 - PPAC Governance Assessment | Power Platform Admin / Governance Specialist | PPAC, DLP, ambientes, Managed Environments, licensing, capacity, audit logs, CoE | Informe de tenant, matriz de ambientes, DLP, runbook y riesgos | 30% diagnóstico, 25% controles, 25% recomendaciones, 20% evidencia | Avanzada | 4 h | Demuestra gobierno operativo y criterio de plataforma |
+| Lab disponible | Vacante que valida | Skills que valida | Evidencia esperada | Dificultad | Duración | Relación con portafolio |
+|---|---|---|---|---|---|---|
+| LAB-076 (JR-006) - PPAC Governance Assessment | Power Platform Admin / Governance Specialist | PPAC, DLP, ambientes, capacidad, licensing, operación | Informe de tenant, matriz de ambientes, DLP, runbook y riesgos | Avanzada | 4 h | Demuestra gobierno operativo y criterio de plataforma |
 
 ## Brechas críticas
 
-1. Falta un lab dedicado de PPAC Governance Assessment.
-2. Falta práctica con audit logs/Purview en una simulación de investigación.
-3. Licensing y capacity necesitan ejercicio operativo con recomendaciones.
-4. CoE Starter Kit existe en contenido, pero la ruta debe reforzar PPAC nativo y CoE operativo moderno.
-5. Falta un runbook de soporte operativo para apps/flujos en producción.
+1. Falta práctica dedicada con audit logs/Purview en una simulación de investigación de incidente de seguridad (JR-006 cubre inventario, DLP, capacidad/licencias y operación, no investigación forense).
+2. Falta profundizar Managed Environments como ejercicio propio con impacto de licenciamiento.
+3. CoE Starter Kit existe en contenido, pero la ruta debe seguir reforzando PPAC nativo y CoE operativo moderno sobre la instalación del kit.
+4. Falta un runbook de soporte operativo detallado para apps/flujos en producción más allá del que produce JR-006.
 
 ## Checklist antes de aplicar
 

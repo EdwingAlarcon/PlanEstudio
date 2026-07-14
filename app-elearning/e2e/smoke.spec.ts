@@ -124,6 +124,33 @@ test.describe("Smoke — rutas principales", () => {
     await expect(page.locator('a[href*="/nivel/ia/modulo/"]').first()).toBeVisible();
   });
 
+  test("filtro de laboratorios por dominio reduce los resultados", async ({ page }) => {
+    await page.goto("/labs");
+    await expect(page.locator("h1")).toContainText("Laboratorios");
+    const counter = page.getByText(/de \d+ labs/);
+    await expect(counter).toBeVisible();
+
+    await page.getByRole("button", { name: "Dynamics 365", exact: true }).click();
+    await expect(page.locator("a[href*='/labs/lab-90']")).toBeVisible();
+    await expect(page.locator("a[href*='/labs/lab-02']")).toHaveCount(0);
+
+    await page.getByRole("button", { name: "Limpiar filtros" }).click();
+    await expect(page.locator("a[href*='/labs/lab-02']").first()).toBeVisible();
+  });
+
+  test("portafolio cambia a la vista por perfil laboral", async ({ page }) => {
+    await page.goto("/portafolio");
+    await expect(page.locator("h1")).toContainText("Portafolio profesional");
+
+    await page.getByRole("tab", { name: "Por perfil laboral" }).click();
+    await expect(page.getByRole("heading", { name: "CRM Functional Specialist" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "CRM Developer" })).toBeVisible();
+    await expect(page.locator("text=Labs Job-Ready").first()).toBeVisible();
+
+    await page.getByRole("tab", { name: "Por ruta" }).click();
+    await expect(page.getByText("Reúne para tu portafolio").first()).toBeVisible();
+  });
+
   test("detalle de módulo del nivel IA carga contenido", async ({ page }) => {
     await page.goto("/nivel/ia/modulo/fundamentos-ia-desarrollo");
     await expect(page).toHaveURL(/\/nivel\/ia\/modulo\//);

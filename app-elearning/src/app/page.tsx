@@ -4,7 +4,7 @@ import { getAllQuestions } from "@/lib/questions-parser";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProgressRingClient } from "@/components/modules/progress-ring-client";
-import { ArrowRight, BookOpen, Trophy, FlaskConical, Route, Zap, HelpCircle, Layers3, Briefcase } from "lucide-react";
+import { ArrowRight, BookOpen, Trophy, FlaskConical, Route, Zap, HelpCircle, Layers3, Briefcase, Building2, Workflow } from "lucide-react";
 import { UI, LEVEL_ORDER, type LevelId } from "@/lib/i18n";
 
 // Level display config
@@ -46,9 +46,9 @@ export default async function DashboardPage() {
               Plan de Estudio Progresivo
             </h1>
             <p className="text-muted-foreground text-base leading-relaxed max-w-xl">
-              Aprende por nivel, especialízate por rol, practica con labs, construye portafolio
-              y prepárate para vacantes. {moduleCount} módulos, {labCount} laboratorios
-              y {questionCount} preguntas de evaluación.
+              Aprende por nivel, especialízate por rol o por dominio (Power Platform, Dynamics 365,
+              Integración), practica con labs, construye portafolio y prepárate para vacantes.{" "}
+              {moduleCount} módulos, {labCount} laboratorios y {questionCount} preguntas de evaluación.
             </p>
           </div>
         </div>
@@ -105,6 +105,45 @@ export default async function DashboardPage() {
             description="Cruza perfiles, skills, entrevista y evidencia sin convertir vacantes en módulos."
             icon={<Briefcase className="h-5 w-5 text-[#0F6CBD]" />}
             accent="#0F6CBD"
+          />
+        </div>
+      </section>
+
+      {/* ── Domains ───────────────────────────────────────────────────────── */}
+      <section aria-labelledby="domains-heading" className="space-y-4">
+        <div>
+          <h2 id="domains-heading" className="text-lg font-semibold text-foreground">
+            Especialízate por dominio
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            Mismo contenido de niveles y labs, agrupado por área para que no se mezcle Power Platform con Dynamics 365.
+          </p>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-3">
+          <StartCard
+            href="/power-platform"
+            eyebrow="Dominio"
+            title="Power Platform"
+            description="Dataverse, Power Apps, Power Automate, Power Pages, ALM y gobernanza."
+            icon={<Layers3 className="h-5 w-5 text-[#0078D4]" />}
+            accent="#0078D4"
+          />
+          <StartCard
+            href="/dynamics-365"
+            eyebrow="Dominio"
+            title="Dynamics 365"
+            description="Sales, Customer Service, Customer Insights, Field Service y F&O awareness."
+            icon={<Building2 className="h-5 w-5 text-[#0D9488]" />}
+            accent="#0D9488"
+          />
+          <StartCard
+            href="/integracion"
+            eyebrow="Capa puente"
+            title="Integración PP + D365"
+            description="Dataverse común, ALM, APIs/Azure y CE + F&O (dual-write, virtual tables)."
+            icon={<Workflow className="h-5 w-5 text-[#8661C5]" />}
+            accent="#8661C5"
           />
         </div>
       </section>

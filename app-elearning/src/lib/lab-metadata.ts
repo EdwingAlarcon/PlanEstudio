@@ -1,6 +1,10 @@
 import type { LabInfo } from "@/lib/content";
 import { getAllProfessionalRoutes } from "@/lib/professional-routes";
 
+export type DomainTag = "Power Platform" | "Dynamics 365" | "Integración" | "IA" | "Empleabilidad";
+
+export const DOMAIN_TAGS: DomainTag[] = ["Power Platform", "Dynamics 365", "Integración", "IA", "Empleabilidad"];
+
 export interface LabPresentationMeta {
   kind: string;
   kindLabel: string;
@@ -11,6 +15,7 @@ export interface LabPresentationMeta {
   competencies: string[];
   certificationBadges: string[];
   historicalCertifications: string[];
+  domains: DomainTag[];
 }
 
 const LEVEL_LABELS: Record<string, string> = {
@@ -136,6 +141,31 @@ function getRoutesForLab(lab: LabInfo): string[] {
   return ["Ruta general"];
 }
 
+const INTEGRATION_SLUG_PATTERN = /ce-fo|dual-write|integration|integrador|process-mapping|conectar/;
+const IA_SLUG_PATTERN = /copilot|claude-code|ai-assisted/;
+const JOB_READY_SLUG_PATTERN = /-jr-\d{3}-/;
+const D365_PRODUCT_PATTERN = /dynamics 365|customer insights|field service|dynamics crm/;
+const POWER_PLATFORM_PRODUCT_PATTERN = /power|dataverse|plugin|coe starter kit/;
+
+/**
+ * Clasificación heurística por dominio (level + slug + products del frontmatter),
+ * no requiere un campo nuevo en el contenido. Un lab puede tener varios dominios.
+ */
+export function getLabDomains(lab: LabInfo): DomainTag[] {
+  const domains = new Set<DomainTag>();
+  const productsLower = lab.products.map((p) => p.toLowerCase());
+  const hasD365Product = productsLower.some((p) => D365_PRODUCT_PATTERN.test(p));
+  const hasPPProduct = productsLower.some((p) => POWER_PLATFORM_PRODUCT_PATTERN.test(p));
+
+  if (JOB_READY_SLUG_PATTERN.test(lab.slug)) domains.add("Empleabilidad");
+  if (lab.level === "N5" || IA_SLUG_PATTERN.test(lab.slug)) domains.add("IA");
+  if (INTEGRATION_SLUG_PATTERN.test(lab.slug)) domains.add("Integración");
+  if (hasD365Product || lab.level === "N6") domains.add("Dynamics 365");
+  if (hasPPProduct || domains.size === 0) domains.add("Power Platform");
+
+  return DOMAIN_TAGS.filter((tag) => domains.has(tag));
+}
+
 export function getLabPresentationMeta(lab: LabInfo): LabPresentationMeta {
   const kind = getLabKind(lab);
   const certifications = getCertificationBadges(lab);
@@ -148,6 +178,7 @@ export function getLabPresentationMeta(lab: LabInfo): LabPresentationMeta {
     difficulty: DIFFICULTY_LABELS[lab.level] ?? "Intermedia",
     evidenceSummary: summarizeEvidence(lab),
     competencies: getCompetencies(lab),
+    domains: getLabDomains(lab),
     ...certifications,
   };
 }

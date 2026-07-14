@@ -40,15 +40,15 @@ Esta ruta debe evitar prácticas legacy como centro del aprendizaje. El enfoque 
 
 | Skill laboral | Estado actual | Contenido actual | Evidencia posible hoy | Brecha |
 |---|---|---|---|---|
-| Administración CRM | Parcial | Módulos 20, 56 | Configuración funcional documentada | Falta simulación laboral JR-007 |
+| Administración CRM | Cubierto | Módulos 20, 56; LAB-077 | Configuración funcional documentada y evaluada en JR-007 | Reforzar troubleshooting de configuración post-go-live |
 | Tablas, formularios y vistas | Cubierto | Módulos 4, 9, 20 | Formularios, vistas y pruebas por rol | Reforzar escenario CRM real |
 | Business Process Flows | Cubierto | Módulos 4, 9, 20; LAB-066 | BPF con etapas y validaciones | Agregar troubleshooting funcional |
 | Business rules | Parcial | Módulos 4, 9 | Reglas de negocio básicas | Falta evidencia específica |
-| Customer Service cases | Cubierto | Módulo 20, LAB-068 | Case-to-resolution end-to-end | Convertir en job simulation JR-007 |
-| Queues | Cubierto | Módulo 20, LAB-068 | Cola configurada y enrutamiento | Profundizar criterios de diseño |
-| SLAs | Cubierto | Módulo 20, LAB-068 | SLA con pausa/reanudación y escalamiento | Agregar troubleshooting |
-| Entitlements | Parcial | Módulo 20, LAB-068 parcial | Política de cobertura por cliente | Hacerlo obligatorio en JR-007 |
-| Knowledge base | Parcial | Módulos 20, 22; LAB-068 parcial | Artículos y búsqueda | Hacerlo obligatorio en JR-007 |
+| Customer Service cases | Cubierto | Módulo 20, LAB-068, LAB-077 | Case-to-resolution end-to-end evaluado en job simulation | Profundizar troubleshooting de casos mal enrutados |
+| Queues | Cubierto | Módulo 20, LAB-068, LAB-077 | Cola configurada y enrutamiento | Profundizar criterios de diseño |
+| SLAs | Cubierto | Módulo 20, LAB-068, LAB-077 | SLA con pausa/reanudación y escalamiento | Agregar troubleshooting |
+| Entitlements | Cubierto | Módulo 20, LAB-068, LAB-077 | Política de cobertura por cliente evaluada en JR-007 | Profundizar reglas de vigencia y renovación |
+| Knowledge base | Cubierto | Módulos 20, 22; LAB-068, LAB-077 | Artículos y búsqueda evaluados en JR-007 | Profundizar métricas de uso de KB |
 | Dynamics 365 Sales | Cubierto | Módulos 20, 56, 60; LAB-066, LAB-081 | Lead-to-cash, forecasting y pipeline review | Mantener como evidencia CE avanzada |
 | Customer Insights / Customer 360 | Cubierto | Módulos 57, 63; LAB-084, LAB-085, LAB-067 | Perfil unificado, consentimiento y real-time journey | Mantener como ruta específica Customer Insights |
 | Field Service awareness | Cubierto | Módulo 58; LAB-086, LAB-087, LAB-059 | Work order, agreement preventivo, mobile offline y UAT | Mantener como ruta específica Field Service |
@@ -153,19 +153,16 @@ Un portafolio CRM Functional debería incluir al menos:
 
 ## Lab Job-Ready recomendado
 
-Este lab aún no existe como contenido disponible. Es el roadmap recomendado para cerrar la ruta.
-
-| Lab propuesto | Vacante que valida | Skills que valida | Evidencia esperada | Rúbrica sugerida | Dificultad | Duración | Relación con portafolio |
-|---|---|---|---|---|---|---|---|
-| JR-007 - Customer Service Specialist Job Simulation | CRM Functional / Customer Service Specialist | casos, colas, SLA, entitlements, KB, dashboard, UAT, soporte funcional | configuración funcional, matriz de colas/SLA, dashboard, casos UAT y manual | 35% proceso, 25% SLA/colas, 20% reporting, 20% soporte | Intermedia-Avanzada | 4 h | Demuestra configuración Customer Service y criterio funcional |
+| Lab disponible | Vacante que valida | Skills que valida | Evidencia esperada | Dificultad | Duración | Relación con portafolio |
+|---|---|---|---|---|---|---|
+| LAB-077 (JR-007) - Customer Service Specialist Job Simulation | CRM Functional / Customer Service Specialist | casos, colas, SLA, entitlements, KB, dashboard, UAT, soporte funcional | configuración funcional, matriz de colas/SLA, dashboard, casos UAT y manual | Intermedia-Avanzada | 4 h | Demuestra configuración Customer Service y criterio funcional |
 
 ## Brechas críticas
 
-1. Falta un lab dedicado JR-007 para Customer Service Specialist Job Simulation.
-2. Entitlements y Knowledge Base están parcialmente cubiertos, pero necesitan práctica obligatoria.
-3. Reporting operativo requiere un escenario funcional más fuerte.
-4. Soporte funcional post-go-live y troubleshooting de configuración necesitan simulación.
-5. Omnichannel/Contact Center avanzado sigue en roadmap y no debe presentarse como cubierto.
+1. Reporting operativo requiere un escenario funcional más fuerte que JR-007.
+2. Soporte funcional post-go-live y troubleshooting de configuración necesitan simulación adicional más allá de JR-007.
+3. Omnichannel/Contact Center avanzado sigue en roadmap y no debe presentarse como cubierto.
+4. Falta un job test dedicado para Dynamics 365 Sales (lead-to-cash), hoy solo cubierto como práctica hands-on (LAB-066) sin formato de prueba técnica cronometrada.
 
 ## Checklist antes de aplicar
 
