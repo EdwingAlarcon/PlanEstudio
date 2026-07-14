@@ -23,6 +23,7 @@ interface CertificateClientProps {
 
 export function CertificateClient({ levelId, modules = [], labs = [] }: CertificateClientProps) {
   const router = useRouter();
+  const [hasHydratedProgress, setHasHydratedProgress] = useState(false);
   const userName = useProgressStore((s) => s.userName);
   const setUserName = useProgressStore((s) => s.setUserName);
   const completedModules = useProgressStore((s) => s.completedModules);
@@ -32,10 +33,15 @@ export function CertificateClient({ levelId, modules = [], labs = [] }: Certific
   const quizReadiness = calculateLevelQuizReadiness(levelId, quizScores);
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const shouldRedirect = percentage < 100 || !userName;
+  const shouldRedirect = hasHydratedProgress && (percentage < 100 || !userName);
   const pendingModules = modules.filter((m) => (quizScores[String(m.moduleId)] ?? 0) < 70);
   const pendingLabs = labs.filter((lab) => !completedLabs.includes(lab.slug));
   const competencyReady = quizReadiness.ready && pendingLabs.length === 0;
+
+  useEffect(() => {
+    setHasHydratedProgress(useProgressStore.persist.hasHydrated());
+    return useProgressStore.persist.onFinishHydration(() => setHasHydratedProgress(true));
+  }, []);
 
   useEffect(() => {
     if (shouldRedirect) {
@@ -43,7 +49,7 @@ export function CertificateClient({ levelId, modules = [], labs = [] }: Certific
     }
   }, [shouldRedirect, levelId, router]);
 
-  if (shouldRedirect) {
+  if (!hasHydratedProgress || shouldRedirect) {
     return null;
   }
 
@@ -100,6 +106,8 @@ export function CertificateClient({ levelId, modules = [], labs = [] }: Certific
     );
   }
 
+  const certificateUserName = userName ?? "";
+
   return (
     <div className="max-w-4xl mx-auto space-y-4 animate-fade-in">
       <div className="flex flex-wrap items-center justify-between gap-3 print:hidden">
@@ -122,12 +130,12 @@ export function CertificateClient({ levelId, modules = [], labs = [] }: Certific
         </div>
       </div>
 
-      <CertificateDiploma levelId={levelId} userName={userName} date={new Date()} />
+      <CertificateDiploma levelId={levelId} userName={certificateUserName} date={new Date()} />
 
       <CertificateNameDialog
         open={dialogOpen}
         onOpenChange={setDialogOpen}
-        initialName={userName}
+        initialName={certificateUserName}
         onConfirm={setUserName}
       />
     </div>

@@ -134,7 +134,7 @@ test.describe("Smoke — rutas principales", () => {
   test("certificado del nivel IA se genera sin lenguaje de examen PL-xxx", async ({ page }) => {
     await page.goto("/");
     // Sembrar el store de progreso directamente en localStorage: los 14 módulos
-    // de IA completados con quiz aprobado (>=70%), los 9 labs del nivel IA
+    // de IA completados con quiz aprobado (>=70%), los 10 labs del nivel IA
     // completados, y nombre de usuario — el certificado exige las tres cosas,
     // no solo módulos marcados como leídos.
     await page.evaluate(() => {
@@ -152,6 +152,7 @@ test.describe("Smoke — rutas principales", () => {
         "lab-56-cambiar-entornos-dev-test-prod",
         "lab-57-diseno-solucion-d365-sales-con-ia",
         "lab-65-capstone-ai-copilot-agente-gobernado",
+        "lab-80-jr-010-ai-assisted-crm-development",
       ];
       const state = {
         state: {
