@@ -126,20 +126,21 @@ presentado como si funcionara.
 ## 3. Ruta F&O Practitioner / Architect Track
 
 **Estado global: 🔵 Avanzado con práctica hands-on en trial tenant.** La plataforma cubre
-**vocabulario, mapas de proceso y diseño de integración** (🔵 Avanzado) y, desde LAB-093 a LAB-097,
-**configuración real paso a paso** de Finance, Procure-to-Pay, Order-to-Cash, inventario/producto y
-Project Operations — ejecutada por el propio estudiante en un ambiente trial/demo. Commerce, LCS,
-seguridad F&O y reporting siguen sin cobertura hands-on.
+**vocabulario, mapas de proceso y diseño de integración** (🔵 Avanzado) y, desde LAB-093 a LAB-100,
+**configuración real paso a paso** de Finance, Procure-to-Pay, Order-to-Cash, inventario/producto,
+Project Operations, Commerce, seguridad (duty/privilege) y reporting — ejecutada por el propio
+estudiante en un ambiente trial/demo. Solo queda LCS awareness sin cobertura hands-on, y todos los
+labs siguen pendientes de verificación contra un tenant en vivo (ver regla más abajo).
 
 > ⚠️ **Regla explícita de esta ruta (actualizada):** un tema se presenta como 🔵 Avanzado/práctico
 > solo cuando tiene un lab con pasos numerados, nombres de menú concretos y evidencia esperada
-> verificable — no descripciones conceptuales de qué botón se apretaría. Los labs LAB-093 a LAB-097
+> verificable — no descripciones conceptuales de qué botón se apretaría. Los labs LAB-093 a LAB-100
 > cumplen ese estándar de especificidad, pero **sus pasos no fueron verificados contra un tenant en
 > vivo al momento de escribirse** (ver la nota de verificación en cada lab). Esto no es lo mismo que
 > "conceptual": el estudiante ejecuta los pasos en su propio trial y documenta cualquier diferencia
 > de UI que encuentre — igual que ocurre con cualquier lab de Microsoft Learn frente a un release
-> nuevo. No se le asignará a esta ruta una certificación de "especialista F&O" hasta que Commerce,
-> seguridad y reporting tengan el mismo nivel de práctica hands-on.
+> nuevo. No se le asignará a esta ruta una certificación de "especialista F&O" hasta que esa
+> verificación contra tenant en vivo ocurra (ver "Pendiente" más abajo).
 
 | Tema | Madurez actual |
 |---|---|
@@ -148,19 +149,19 @@ seguridad F&O y reporting siguen sin cobertura hands-on.
 | Financial dimensions (segmentos, jerarquías, valores por defecto) | 🔵 Avanzado (LAB-093) |
 | Supply Chain configuration fundamentals (sitios, almacenes, ubicaciones) | 🔵 Avanzado (LAB-096) |
 | Products and inventory (variantes, dimensiones de producto, políticas de reserva) | 🔵 Avanzado (Módulo 59, LAB-096) |
-| Commerce overview (POS, call center, canales unificados) | 🟡 Awareness |
+| Commerce overview (POS, call center, canales unificados) | 🔵 Avanzado (LAB-098 — módulo Commerce puede no venir habilitado en todo trial, ver nota del lab) |
 | Project Operations (estructura de proyecto, WBS, facturación por hitos/tiempo) | 🔵 Avanzado (LAB-097) |
 | Procure-to-Pay (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069 mapa de proceso; LAB-094 ejecución hands-on) |
 | Order-to-Cash (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069 mapa de proceso; LAB-095 ejecución hands-on) |
-| Record-to-Report (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069) |
+| Record-to-Report (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069, LAB-100 reporting hands-on) |
 | Inventory-to-Deliver / Project-to-Profit (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069) |
 | Data entities (estructura, staging, validaciones) | 🟡 Awareness (Módulo 59) |
 | Data Management Framework (importación masiva, manejo de errores) | 🟡 Awareness (LAB-064) |
 | Dual-write setup awareness (mapas, entidades vinculadas) | 🔵 Avanzado (LAB-070, LAB-088) |
 | Integration with Dataverse (patrones de integración, ownership de datos) | 🔵 Avanzado (Módulo 64, LAB-070, LAB-088) |
 | LCS awareness (ciclo de vida, ambientes, actualizaciones) | ⚪ En expansión |
-| Security (roles de seguridad F&O, duty/privilege) | ⚪ En expansión |
-| Reporting (Financial Reporting, Power BI embebido en F&O) | ⚪ En expansión |
+| Security (roles de seguridad F&O, duty/privilege) | 🔵 Avanzado (LAB-099) |
+| Reporting (Financial Reporting, Power BI embebido en F&O) | 🔵 Avanzado (LAB-100) |
 
 ### Laboratorios disponibles (hands-on, requieren trial tenant)
 
@@ -171,14 +172,19 @@ seguridad F&O y reporting siguen sin cobertura hands-on.
 | LAB-095 F&O Order-to-Cash Hands-On | Cliente → pedido de venta → envío → factura → cobro, con envío parcial | Trial/demo Dynamics 365 SCM/Finance |
 | LAB-096 F&O Inventory & Products Setup | Producto liberado, variantes, dimensiones, jerarquía de reservas | Trial/demo Dynamics 365 SCM |
 | LAB-097 F&O Project Operations Setup | WBS, contrato de proyecto, regla de facturación por hito + tiempo | Trial/demo Dynamics 365 Project Operations |
+| LAB-098 F&O Commerce Overview Hands-On | Canal de venta, publicación de producto, sincronización catálogo-canal | Trial/demo con Retail and Commerce habilitado (no siempre viene por defecto) |
+| LAB-099 F&O Security — Duty/Privilege Hands-On | Jerarquía Role/Duty/Privilege, diseño de roles sin conflicto de SoD | Trial/demo Dynamics 365 Finance/SCM con permisos de admin de seguridad |
+| LAB-100 F&O Reporting Hands-On | Balance de comprobación, workspace con Power BI embebido, cadencia de actualización | Trial/demo Dynamics 365 Finance con Financial Reporting habilitado |
 
 ### Pendiente para que la ruta se presente como "F&O Practitioner disponible" en `/rutas`
 
-1. Commerce (POS, canales unificados) con al menos un lab hands-on.
-2. Seguridad F&O (duty/privilege) con un lab de diseño de roles.
-3. Reporting (Financial Reporting o Power BI embebido) con un lab de al menos un reporte real.
-4. Verificación de LAB-093 a LAB-097 contra un tenant en vivo por alguien con acceso, actualizando
+1. Verificación de LAB-093 a LAB-100 contra un tenant en vivo por alguien con acceso, actualizando
    la nota de verificación de cada lab de "no verificado" a "verificado el [fecha] contra [versión]".
+2. LCS awareness (ciclo de vida, ambientes, actualizaciones) con al menos un lab o documento de diseño.
+
+Con LAB-093 a LAB-100 cubriendo Finance, P2P, O2C, Inventory, Project Operations, Commerce,
+seguridad y reporting, el contenido ya no es el limitante principal de esta ruta — la verificación
+contra un tenant real sí lo es, y depende de que alguien con acceso la ejecute.
 
 ---
 

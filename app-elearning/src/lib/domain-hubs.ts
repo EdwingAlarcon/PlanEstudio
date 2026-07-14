@@ -231,6 +231,9 @@ export function getDynamics365Hub(): DomainHub {
           { title: "Lab 95 — Order-to-Cash Hands-On", description: "Pedido, envío, factura y cobro end-to-end.", href: "/labs/lab-95-fo-order-to-cash-hands-on" },
           { title: "Lab 96 — Inventory & Products Setup", description: "Variantes de producto, dimensiones y jerarquía de reservas.", href: "/labs/lab-96-fo-inventory-products-setup" },
           { title: "Lab 97 — Project Operations Setup", description: "WBS y facturación por hito + tiempo.", href: "/labs/lab-97-fo-project-operations-setup" },
+          { title: "Lab 98 — Commerce Overview Hands-On", description: "Canal de venta y sincronización de catálogo.", href: "/labs/lab-98-fo-commerce-overview-hands-on" },
+          { title: "Lab 99 — Security Duty/Privilege Hands-On", description: "Diseño de roles sin conflicto de segregación de funciones.", href: "/labs/lab-99-fo-security-duty-privilege-hands-on" },
+          { title: "Lab 100 — Reporting Hands-On", description: "Balance de comprobación y Power BI embebido.", href: "/labs/lab-100-fo-reporting-hands-on" },
           { title: "Lab 64 — Capstone F&O Awareness", description: "Arquitectura ERP + CRM.", href: "/labs/lab-64-capstone-fo-awareness-arquitectura-erp-crm" },
         ],
       },
@@ -258,7 +261,7 @@ export function getDynamics365Hub(): DomainHub {
         links: [
           { title: "🔵 Expert Customer Service / Contact Center", description: "Case management, SLA, routing avanzado y canal de chat hands-on en trial (LAB-083); Voz y SMS requieren además un proveedor de telefonía real.", href: "/recursos/roadmap-especializacion-avanzada" },
           { title: "🔵 Expert Sales Operations", description: "Forecasting y pipeline review con datos de prueba; Sales Insights predictivo requiere licencia Premium y datos históricos reales.", href: "/recursos/roadmap-especializacion-avanzada" },
-          { title: "🔵 F&O Practitioner / Architect Track", description: "Vocabulario, mapas de proceso, integración CE+F&O y —desde LAB-093 a LAB-097— configuración hands-on de Finance/P2P/O2C/Inventory/Project Operations en trial tenant; Commerce, seguridad y reporting siguen en expansión.", href: "/recursos/roadmap-especializacion-avanzada" },
+          { title: "🔵 F&O Practitioner / Architect Track", description: "Vocabulario, mapas de proceso, integración CE+F&O y —desde LAB-093 a LAB-100— configuración hands-on completa: Finance, P2P, O2C, Inventory, Project Operations, Commerce, seguridad y reporting en trial tenant. Solo falta verificación contra tenant en vivo.", href: "/recursos/roadmap-especializacion-avanzada" },
           { title: "🔵 Business Applications Architect Enterprise", description: "Capstone CE + F&O con ownership de datos, roadmap por fases y Fit-Gap enterprise.", href: "/recursos/roadmap-especializacion-avanzada" },
         ],
       },

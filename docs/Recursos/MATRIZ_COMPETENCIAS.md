@@ -109,6 +109,9 @@ escribirse — ver la nota de verificación en cada lab.
 | Ciclo Order-to-Cash end-to-end | Práctico (tenant real) | Pedido → envío → factura → cobro ejecutados, con envío parcial manejado | LAB-095 | Factura coincide con lo enviado, no con lo pedido; saldo pendiente documentado |
 | Maestro de producto e inventario (variantes, dimensiones, reservas) | Práctico (tenant real) | Producto con variantes y jerarquía de reservas configurados | LAB-096 | ≥9 variantes y jerarquía de reservas justificada con ejemplo |
 | Setup de Project Operations (WBS, facturación por hitos) | Práctico (tenant real) | Proyecto con WBS y regla de facturación mixta (hito + tiempo) configurados | LAB-097 | Hito fijo y facturación por tiempo distinguidos correctamente en la propuesta de factura |
+| Commerce (canal de venta, sincronización de catálogo) | Práctico (tenant real) | Canal configurado con producto publicado y sincronización documentada | LAB-098 | Sincronización catálogo-canal explicada con mecanismo y frecuencia reales |
+| Seguridad F&O (Role/Duty/Privilege, segregación de funciones) | Práctico (tenant real) | Dos roles diseñados sin superposición de SoD, con verificación de conflicto | LAB-099 | Roles AP Clerk/AP Approver sin superposición y verificación de SoD documentada |
+| Reporting F&O (Financial Reporting, Power BI embebido) | Práctico (tenant real) | Balance de comprobación generado y workspace con Power BI embebido documentado | LAB-100 | Cadencia de actualización explicada para cada mecanismo de reporte |
 
 ## Solution Architect
 
@@ -171,7 +174,7 @@ tenant/licencia/canal real, debe completarse el gate correspondiente en
 |---|---|---|
 | Expert Customer Service / Contact Center | 🔵 Avanzado con canal de chat hands-on en trial (LAB-083); Voz/SMS requieren además proveedor de telefonía real | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#1-ruta-expert-customer-service-contact-center) |
 | Expert Sales Operations | 🔵 Avanzado con forecasting/pipeline; predicción real requiere Sales/licencia/datos | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#2-ruta-expert-sales-operations) |
-| F&O Practitioner / Architect Track | 🔵 Arquitectura, integración y setup práctico (Finance, P2P, O2C, Inventory, Project Operations) en trial tenant; Commerce y Supply Chain avanzado siguen en expansión | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#3-ruta-fo-practitioner-architect-track) |
+| F&O Practitioner / Architect Track | 🔵 Arquitectura, integración y setup práctico completo (Finance, P2P, O2C, Inventory, Project Operations, Commerce, Security, Reporting) en trial tenant; pendiente verificación contra tenant en vivo | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#3-ruta-fo-practitioner-architect-track) |
 | Business Applications Architect Enterprise | 🔵 Avanzado con Capstone Enterprise D365 | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#4-ruta-business-applications-architect-enterprise) |
 
 El roadmap enlazado detalla qué está cubierto como diseño/lab y qué exige ambiente real. El
