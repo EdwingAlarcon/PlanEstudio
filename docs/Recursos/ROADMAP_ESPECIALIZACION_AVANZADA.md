@@ -12,9 +12,9 @@ PlanEstudio ya cubre con evidencia real:
 - **Power Platform completo** (Canvas, Model-Driven, Dataverse, Power Automate, Power Fx, ALM, PCF,
   plugins, gobernanza) — rutas Maker, Consultor Funcional, Developer, Solution Architect.
 - **Dynamics 365 CE avanzado**: Sales forecasting/pipeline (Módulo 60, LAB-081), Customer Service
-  SLA/entitlements/routing (Módulo 61, LAB-082), Contact Center simulation (Módulo 62, LAB-083),
-  Customer Insights Data/Journeys separados (Módulos 57/63, LAB-085/LAB-084) y Field Service
-  end-to-end (Módulo 58, LAB-086/LAB-087).
+  SLA/entitlements/routing (Módulo 61, LAB-082), Contact Center con canal de chat hands-on en trial
+  (Módulo 62, LAB-083), Customer Insights Data/Journeys separados (Módulos 57/63, LAB-085/LAB-084) y
+  Field Service end-to-end (Módulo 58, LAB-086/LAB-087).
 - **Finance & Operations — awareness avanzado e integración**: vocabulario, mapas de proceso,
   ownership CE + F&O y diseño de integración (Módulos 59/64, LAB-069/LAB-070/LAB-088/LAB-089).
 - **Finance & Operations — práctica hands-on**: setup financiero, Procure-to-Pay, Order-to-Cash,
@@ -49,40 +49,44 @@ evidencia de diseño/lab y gate explícito para ambiente real.
 
 ## 1. Ruta Expert Customer Service / Contact Center
 
-**Estado global: 🔵 Avanzado**, con simulación de Contact Center implementada (Módulo 62, LAB-083).
+**Estado global: 🔵 Avanzado**, con el canal de Chat hands-on en trial implementado (Módulo 62,
+LAB-083). Voz y SMS son el único límite real que queda: no requieren "más tenant", requieren
+**contratar un proveedor de telefonía/SMS externo** — eso es un compromiso de costo, no un gate de
+configuración que este roadmap pueda resolver solo con documentación.
 
 | Tema | Madurez actual |
 |---|---|
 | Case management, colas, SLA, escalamiento, dashboard operativo | 🔵 Avanzado (Módulo 20, LAB-068) |
-| Omnichannel for Customer Service (routing multicanal, contexto de conversación) | 🟡 Awareness (mencionado en Módulo 20) |
-| Dynamics 365 Contact Center | 🔵 Avanzado (Módulo 62, LAB-083 como simulación) |
-| Chat | 🔵 Avanzado (diseño de canal/workstream; ejecución requiere canal real) |
-| Voice | 🟡 Awareness (requiere número/proveedor/tenant real) |
-| SMS | 🟡 Awareness (requiere proveedor/canal real) |
+| Omnichannel for Customer Service (routing multicanal, contexto de conversación) | 🔵 Avanzado (Módulo 20, LAB-083) |
+| Dynamics 365 Contact Center | 🔵 Avanzado (Módulo 62, LAB-083 canal de chat hands-on) |
+| Chat | 🔵 Avanzado (LAB-083 — widget, workstream, routing y conversación de prueba ejecutados en trial) |
+| Voice | 🟡 Awareness (requiere proveedor de telefonía real, no solo trial — ver LAB-083 "Alcance de este lab") |
+| SMS | 🟡 Awareness (requiere proveedor de SMS real, no solo trial — ver LAB-083 "Alcance de este lab") |
 | Email (enrutamiento avanzado, no el caso base) | 🔵 Avanzado (diseño de routing; configuración real depende de tenant) |
-| Unified routing (reglas basadas en habilidad/capacidad/prioridad) | 🔵 Avanzado (Módulo 62, LAB-083) |
-| Agent experience (espacio de trabajo multi-sesión, macros, productivity pane) | 🟡 Awareness |
-| Supervisor experience (monitoreo en vivo, intervención, reasignación) | 🔵 Avanzado (dashboard conceptual en LAB-083) |
-| Analytics (Customer Service Analytics, Omnichannel Insights) | ⚪ En expansión |
+| Unified routing (reglas basadas en habilidad/capacidad/prioridad) | 🔵 Avanzado (Módulo 62, LAB-083 — routing por prioridad ejecutado y probado) |
+| Agent experience (espacio de trabajo multi-sesión, macros, productivity pane) | 🔵 Avanzado (LAB-083 — presencia y capacidad configuradas y probadas; macros/productivity pane siguen en awareness) |
+| Supervisor experience (monitoreo en vivo, intervención, reasignación) | 🔵 Avanzado (LAB-083 — dashboard con métricas realmente disponibles en trial documentadas) |
+| Analytics (Customer Service Analytics, Omnichannel Insights) | ⚪ En expansión (requiere licencia Insights, fuera de un trial base) |
 | Copilot para agentes (resúmenes de caso, respuestas sugeridas) | 🟡 Awareness (mencionado en Módulo 20) |
 | Escenarios de atención multicanal integrados (un mismo cliente saltando de chat a voz a caso) | ⚪ En expansión |
 
-### Laboratorio implementado: Contact Center Simulation
+### Laboratorio implementado: Contact Center Chat Channel Hands-On
 
-**Objetivo:** diseñar el enrutamiento unificado de un caso que entra por
-tres canales distintos (chat, voz, email) para el mismo cliente, con reglas de habilidad/capacidad,
-y documentar la experiencia de agente y de supervisor sin necesitar licencias de Contact Center
-activas.
+**Objetivo:** configurar y probar de punta a punta el canal de chat (el único ejecutable con solo un
+trial Microsoft, sin proveedor de telefonía externo): widget, workstream, routing por prioridad,
+presencia/capacidad de agente y una conversación de prueba real con handoff.
 
-**Por qué "simulación" y no "configuración":** Omnichannel y Contact Center requieren licenciamiento
-y canales provisionados (número de voz, conector de WhatsApp/SMS, workstream configurado) que no
-existen en un ambiente de práctica estándar. Sin ese tenant, el laboratorio solo puede cubrir
-**diseño de reglas de enrutamiento y experiencia de agente/supervisor en papel** (diagramas,
-matrices de decisión, wireframes de cola unificada) — no una configuración productiva verificable
-con datos reales entrando por un canal de voz o chat en vivo.
+**Por qué Chat sí y Voz/SMS no:** Chat se configura íntegramente dentro de un trial de Dynamics 365
+Customer Service con Digital messaging — el "canal real" es una página web de prueba con el widget
+embebido, algo que cualquier estudiante puede montar. Voz y SMS necesitan un número de teléfono y un
+proveedor de telefonía/mensajería (Azure Communication Services u otro) con costo real — no es un
+límite de documentación, es un límite de qué puede pedirse razonablemente que un estudiante contrate
+solo para completar un lab. Por eso Voz y SMS quedan documentados como diseño (matriz de canal,
+routing, capacidad) dentro del mismo LAB-083, sin presentarse como configuración ejecutada.
 
-Este lab ya existe como LAB-083. Sigue siendo simulación avanzada: no afirma configuración productiva
-de canales reales sin tenant/licencia.
+Este lab ya existe como LAB-083, actualizado a un lab hands-on con nota de verificación explícita:
+sus pasos están basados en terminología documentada, no verificados contra un tenant en vivo al
+momento de escribirse.
 
 ---
 

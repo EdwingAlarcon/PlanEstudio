@@ -178,7 +178,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     ],
     competencies: ["Sales Forecasting", "Customer Service SLA", "Contact Center", "Customer Insights Data/Journeys", "Field Service", "Fit-Gap D365"],
     status: "Disponible",
-    gapNote: "La ruta ya cubre Sales avanzado, Customer Service avanzado, Contact Center/Omnichannel, Customer Insights - Data, Customer Insights - Journeys, Field Service end-to-end y capstone enterprise. La práctica real de forecasting, routing, channels, journeys, mobile offline y RSO requiere tenant/licencias correspondientes.",
+    gapNote: "La ruta ya cubre Sales avanzado, Customer Service avanzado, Contact Center/Omnichannel (incluye canal de chat hands-on en trial, LAB-083), Customer Insights - Data, Customer Insights - Journeys, Field Service end-to-end y capstone enterprise. La práctica real de forecasting, journeys, mobile offline, RSO y canales de Voz/SMS de Contact Center requiere tenant/licencias/proveedor de telefonía correspondientes.",
     capstoneLabSlug: "lab-90-capstone-enterprise-d365",
     portfolioEvidence: [
       "Documento de diseño de 3-5 páginas (TO-BE, Fit-Gap)",

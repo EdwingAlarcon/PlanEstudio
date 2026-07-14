@@ -169,7 +169,7 @@ tenant/licencia/canal real, debe completarse el gate correspondiente en
 
 | Especialización | Estado | Detalle tema por tema |
 |---|---|---|
-| Expert Customer Service / Contact Center | 🔵 Avanzado con simulación; ejecución real requiere canal/licencia | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#1-ruta-expert-customer-service-contact-center) |
+| Expert Customer Service / Contact Center | 🔵 Avanzado con canal de chat hands-on en trial (LAB-083); Voz/SMS requieren además proveedor de telefonía real | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#1-ruta-expert-customer-service-contact-center) |
 | Expert Sales Operations | 🔵 Avanzado con forecasting/pipeline; predicción real requiere Sales/licencia/datos | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#2-ruta-expert-sales-operations) |
 | F&O Practitioner / Architect Track | 🔵 Arquitectura, integración y setup práctico (Finance, P2P, O2C, Inventory, Project Operations) en trial tenant; Commerce y Supply Chain avanzado siguen en expansión | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#3-ruta-fo-practitioner-architect-track) |
 | Business Applications Architect Enterprise | 🔵 Avanzado con Capstone Enterprise D365 | [Roadmap de Especialización Avanzada](ROADMAP_ESPECIALIZACION_AVANZADA.md#4-ruta-business-applications-architect-enterprise) |

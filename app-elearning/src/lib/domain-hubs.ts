@@ -213,10 +213,10 @@ export function getDynamics365Hub(): DomainHub {
       },
       {
         title: "Contact Center / Omnichannel",
-        description: "Canales, routing y operación (simulación — requiere tenant real para práctica productiva).",
+        description: "Canales, routing y operación — Chat es hands-on con trial; Voz y SMS quedan como diseño hasta contratar un proveedor de telefonía real.",
         links: [
           { title: "Contact Center / Omnichannel — Canales, routing y operación", description: "Módulo 62.", href: "/nivel/d365/modulo/dynamics-365-contact-center-omnichannel" },
-          { title: "Lab 83 — Simulación de Contact Center", description: "Diseño de canales y routing.", href: "/labs/lab-83-contact-center-simulation" },
+          { title: "Lab 83 — Contact Center Chat Channel Hands-On", description: "Canal de chat, workstream, routing y conversación de prueba en trial.", href: "/labs/lab-83-contact-center-simulation" },
         ],
       },
       {
@@ -256,7 +256,7 @@ export function getDynamics365Hub(): DomainHub {
         title: "Academia D365 Expert Tracks",
         description: "Los 4 tracks de especialización avanzada del roadmap, con estado de madurez honesto — ninguno se presenta como 'experto' hasta tener configuración real verificable.",
         links: [
-          { title: "🔵 Expert Customer Service / Contact Center", description: "Case management, SLA y routing avanzados; canales de voz/SMS reales quedan en awareness sin tenant con licencia.", href: "/recursos/roadmap-especializacion-avanzada" },
+          { title: "🔵 Expert Customer Service / Contact Center", description: "Case management, SLA, routing avanzado y canal de chat hands-on en trial (LAB-083); Voz y SMS requieren además un proveedor de telefonía real.", href: "/recursos/roadmap-especializacion-avanzada" },
           { title: "🔵 Expert Sales Operations", description: "Forecasting y pipeline review con datos de prueba; Sales Insights predictivo requiere licencia Premium y datos históricos reales.", href: "/recursos/roadmap-especializacion-avanzada" },
           { title: "🔵 F&O Practitioner / Architect Track", description: "Vocabulario, mapas de proceso, integración CE+F&O y —desde LAB-093 a LAB-097— configuración hands-on de Finance/P2P/O2C/Inventory/Project Operations en trial tenant; Commerce, seguridad y reporting siguen en expansión.", href: "/recursos/roadmap-especializacion-avanzada" },
           { title: "🔵 Business Applications Architect Enterprise", description: "Capstone CE + F&O con ownership de datos, roadmap por fases y Fit-Gap enterprise.", href: "/recursos/roadmap-especializacion-avanzada" },
