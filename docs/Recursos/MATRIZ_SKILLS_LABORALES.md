@@ -30,10 +30,10 @@ La brecha principal no es falta total de contenido, sino falta de una capa expl�
 | Área laboral | Estado actual | Lectura ejecutiva |
 |---|---|---|
 | Power Platform Development | Cubierto | Buena base para roles maker/developer, con gaps puntuales en pruebas técnicas CRM JavaScript y Power Automate Desktop. |
-| Power Platform Administration & Governance | Parcial | Hay arquitectura, CoE, DLP y ambientes; falta simulación operativa PPAC con audit logs, capacity y licensing. |
+| Power Platform Administration & Governance | Cubierto con brechas | Hay arquitectura, CoE, DLP, ambientes y LAB-076 como simulación operativa PPAC; siguen abiertas prácticas con logs reales de Purview/Dataverse audit y Managed Environments en tenant real. |
 | Dynamics 365 CRM Functional | Parcial | Sales y Customer Service tienen buena base; faltan más simulaciones de soporte funcional diario y configuración tipo vacante. |
 | Dynamics 365 CRM Developer | Parcial | Hay C#, plugins, Web API e integraciones; falta JavaScript CRM profundo, Custom APIs/workflows y debugging/tracing de entrevista. |
-| Data Migration & Legacy CRM | Awareness | Hay conceptos de migración y legacy modernization; falta lab dedicado de mapping, cleansing, reconciliación, cutover y health assessment on-premises. |
+| Data Migration & Legacy CRM | Cubierto con brechas | LAB-075 cubre mapping, cleansing, staging, reconciliación y cutover; LAB-078 cubre health assessment legacy. Siguen abiertas prácticas con dataset grande, carga real y logs/servidores on-prem reales. |
 | Business / Consulting / Soft Skills | Parcial | Hay discovery, UAT, documentación y portafolio; falta entrevista técnica, demo laboral, CV/LinkedIn e inglés técnico. |
 
 ## Matriz de Skills Laborales
@@ -60,16 +60,16 @@ La brecha principal no es falta total de contenido, sino falta de una capa expl�
 
 | Skill laboral | Perfil laboral asociado | Nivel esperado | Estado | Dónde se aprende | Dónde se practica | Evidencia para portafolio | Pregunta típica de entrevista | Recomendación | Prioridad |
 |---|---|---|---|---|---|---|---|---|---|
-| Power Platform Admin Center | Admin / Governance Specialist | Intermedio | Parcial | Módulos 1, 31, 32 | LAB-032 | Inventario y decisiones de gobierno | ¿Qué revisarías primero en PPAC ante un tenant desordenado? | Crear JR-006 con assessment PPAC operativo | Alta |
+| Power Platform Admin Center | Admin / Governance Specialist | Intermedio | Cubierto | Módulos 1, 31, 32 | LAB-032, LAB-076 | Inventario, riesgos y decisiones de gobierno | ¿Qué revisarías primero en PPAC ante un tenant desordenado? | Usar LAB-076 como assessment PPAC operativo; practicar con tenant real cuando exista acceso | Alta |
 | Estrategia de ambientes | Admin / Architect | Avanzado | Cubierto | Módulos 31, 33 | LAB-056 | Diagrama DEV/TEST/PROD y política de promoción | ¿Cómo separas ambientes por criticidad y ciclo de vida? | Conectar con matriz laboral como evidencia Admin | Alta |
 | DLP policies | Admin / Governance Specialist | Avanzado | Cubierto | Módulos 31, 33, 36 | LAB-032 | Política DLP y prueba de bloqueo | ¿Cómo impedirías mezclar datos corporativos con conectores personales? | Actualizar lenguaje CoE hacia capacidades nativas PPAC | Alta |
 | Security roles | Admin / Functional / Architect | Intermedio-Avanzado | Cubierto | Módulos 9, 16, 36 | LAB-009, LAB-068 | Matriz rol-entidad-privilegio | ¿Cómo diagnosticas acceso indebido a un registro? | Mantener evidencia obligatoria por ruta | Alta |
-| Licensing | Admin / Architect | Intermedio | Parcial | Módulos 31, 40 | Preguntas banco/simulador | Análisis de licencias por escenario | ¿Diferencia entre licencia standard y premium en Power Platform? | Agregar ejercicio JR-006 de optimización de licencias | Alta |
-| Capacity planning | Admin / Architect | Intermedio | Awareness | Módulos 31, 35 | Sin lab dedicado | Estimación de capacidad y riesgos | ¿Qué revisas si Dataverse se queda sin capacidad? | Agregar sección en JR-006 | Alta |
-| M365 audit logs | Admin / Security Specialist | Intermedio | No cubierto | No evidente | Sin lab dedicado | Consulta o informe de auditoría | ¿Cómo investigarías quién exportó datos sensibles? | Agregar a JR-006 como simulación guiada | Alta |
-| Managed Environments | Admin / Architect | Avanzado | Parcial | Módulo 33 | LAB-056 parcial | Decisión de habilitación y controles | ¿Cuándo justificas Managed Environments en producción? | Agregar decisión licensing/governance en JR-006 | Media-Alta |
-| CoE / gobierno | Governance Specialist / CoE Lead | Avanzado | Parcial | Módulo 32 | LAB-032 | Modelo operativo CoE y reporte de inventario | ¿Qué diferencia hay entre instalar CoE Starter Kit y operar un CoE? | Actualizar enfoque a CoE moderno + PPAC nativo | Alta |
-| Soporte operativo | Admin / Support Engineer | Intermedio | Parcial | Módulos 26, 31, 32 | LAB-032 | Runbook de incidentes y monitoreo | ¿Cómo priorizas un flujo fallando en producción? | Crear checklist operativo dentro de JR-006 | Media-Alta |
+| Licensing | Admin / Architect | Intermedio | Parcial | Módulos 31, 40 | LAB-076 | Análisis de licencias por escenario y licencias sin uso | ¿Diferencia entre licencia standard y premium en Power Platform? | Profundizar con datos reales de consumo cuando haya tenant | Alta |
+| Capacity planning | Admin / Architect | Intermedio | Parcial | Módulos 31, 35 | LAB-076 | Estimación de capacidad, riesgos y recomendación | ¿Qué revisas si Dataverse se queda sin capacidad? | Profundizar monitoreo continuo con datos reales | Alta |
+| M365/Purview activity logs | Admin / Security Specialist | Intermedio | Awareness | Módulo 36 | LAB-076 conceptual | Runbook de investigación y matriz de fuentes | ¿Cómo investigarías quién exportó datos sensibles? | Crear práctica futura con logs reales de Purview/Dataverse audit | Alta |
+| Managed Environments | Admin / Architect | Avanzado | Parcial | Módulo 33 | LAB-056 parcial, LAB-076 | Decisión de habilitación, controles y licenciamiento | ¿Cuándo justificas Managed Environments en producción? | Practicar activación/configuración real cuando haya tenant/licencia | Media-Alta |
+| CoE / gobierno | Governance Specialist / CoE Lead | Avanzado | Parcial | Módulo 32 | LAB-032, LAB-076 | Modelo operativo CoE, inventario y reporte ejecutivo | ¿Qué diferencia hay entre instalar CoE Starter Kit y operar un CoE? | Mantener enfoque PPAC nativo + CoE como operación, no solo instalación | Alta |
+| Soporte operativo | Admin / Support Engineer | Intermedio | Parcial | Módulos 26, 31, 32 | LAB-076 | Runbook de incidentes y monitoreo | ¿Cómo priorizas un flujo fallando en producción? | Crear práctica futura con run history/logs reales | Media-Alta |
 
 ### Dynamics 365 CRM Functional
 
@@ -113,18 +113,18 @@ La brecha principal no es falta total de contenido, sino falta de una capa expl�
 
 | Skill laboral | Perfil laboral asociado | Nivel esperado | Estado | Dónde se aprende | Dónde se practica | Evidencia para portafolio | Pregunta típica de entrevista | Recomendación | Prioridad |
 |---|---|---|---|---|---|---|---|---|---|
-| Migración CRM legacy a Dynamics 365 | Migration Specialist / Architect | Avanzado | Awareness | Módulos 39, 40 | Sin lab dedicado | Roadmap de migración y cutover | ¿Cómo reduces riesgo al migrar un CRM crítico? | Crear JR-005 | Alta |
-| Mapping de datos | Migration Specialist | Intermedio | Parcial | Módulos 34, 40 | LAB-064 conceptual | Mapping origen-destino con reglas | ¿Qué haces con campos legacy sin equivalente en Dataverse? | Incluir en JR-005 | Alta |
-| Data cleansing | Migration Specialist | Intermedio | Awareness | Módulos 39, 40 | Sin lab dedicado | Reglas de deduplicación y estandarización | ¿Cómo limpias datos antes de cargarlos a Dataverse? | Incluir dataset sucio en JR-005 | Alta |
-| Importación masiva | Migration Specialist | Avanzado | Awareness | Módulos 34, 40 | Sin lab dedicado | Estrategia batch y errores | ¿Por qué Excel no es buena opción para millones de registros? | Incluir ADF/Power Query/Bulk API conceptual | Alta |
-| Reconciliación | Migration Specialist | Avanzado | No cubierto | No evidente | Sin lab dedicado | Conteos, checksums y reporte post-carga | ¿Cómo demuestras que la migración fue correcta? | Incluir validación post-migración en JR-005 | Alta |
-| Cutover | Migration Lead | Avanzado | Awareness | Módulos 39, 40 | Sin lab dedicado | Plan de corte y rollback | ¿Qué contiene un plan de cutover CRM? | Incluir runbook en JR-005 | Alta |
-| SQL Server awareness | Legacy Specialist | Intermedio | Awareness | Módulos 34, 35, 39 | Sin lab dedicado | Diagnóstico conceptual | ¿Qué revisas en SQL si CRM on-prem está lento? | Incluir en JR-008 como awareness técnico | Media-Alta |
+| Migración CRM legacy a Dynamics 365 | Migration Specialist / Architect | Avanzado | Cubierto | Módulos 34, 39, 40 | LAB-075 | Roadmap de migración, mapping, reconciliación y cutover | ¿Cómo reduces riesgo al migrar un CRM crítico? | Usar LAB-075 como evidencia principal; profundizar con tenant/dataset real | Alta |
+| Mapping de datos | Migration Specialist | Intermedio | Cubierto | Módulos 34, 40 | LAB-075 | Mapping origen-destino con reglas | ¿Qué haces con campos legacy sin equivalente en Dataverse? | Ampliar con dataset grande futuro | Alta |
+| Data cleansing | Migration Specialist | Intermedio | Cubierto | Módulos 39, 40 | LAB-075 | Reglas de deduplicación y estandarización aplicadas a muestra | ¿Cómo limpias datos antes de cargarlos a Dataverse? | Crear dataset sucio reutilizable futuro | Alta |
+| Importación masiva | Migration Specialist | Avanzado | Parcial | Módulos 34, 40 | LAB-075 | Estrategia batch y errores | ¿Por qué Excel no es buena opción para millones de registros? | Profundizar con ADF/Dataflows/Web API o Bulk API real cuando haya tenant | Alta |
+| Reconciliación | Migration Specialist | Avanzado | Cubierto | Ruta JR-5 | LAB-075 | Conteos, muestras y reporte post-carga | ¿Cómo demuestras que la migración fue correcta? | Profundizar con datos reales de negocio | Alta |
+| Cutover | Migration Lead | Avanzado | Cubierto | Módulos 39, 40 | LAB-075 | Plan de corte, delta y rollback | ¿Qué contiene un plan de cutover CRM? | Crear simulación cronometrada futura | Alta |
+| SQL Server awareness | Legacy Specialist | Intermedio | Parcial | Módulos 34, 35, 39 | LAB-078 | Diagnóstico conceptual | ¿Qué revisas en SQL si CRM on-prem está lento? | Practicar con logs/métricas reales solo si hay infraestructura | Media-Alta |
 | Oracle/Sybase awareness | Migration Specialist | Básico | No cubierto | No evidente | Sin lab dedicado | Inventario de fuentes legacy | ¿Cómo abordas una fuente de datos que no conoces? | Tratar como fuente externa en JR-005 | Media |
-| IIS / CRM on-prem | Legacy Specialist | Intermedio | No cubierto | No evidente | Sin lab dedicado | Health assessment conceptual | ¿Qué rol cumple IIS en Dynamics CRM on-prem? | Crear JR-008 | Media-Alta |
-| Networking/troubleshooting | Legacy / Integration Specialist | Intermedio | Awareness | Módulo 34 | Sin lab dedicado | Diagrama de conectividad y riesgos | ¿Cómo diagnosticas latencia entre CRM y un sistema on-prem? | Incluir checklist en JR-008 | Media |
+| IIS / CRM on-prem | Legacy Specialist | Intermedio | Parcial | Ruta JR-5 | LAB-078 | Health assessment conceptual | ¿Qué rol cumple IIS en Dynamics CRM on-prem? | Practicar con servidor real solo si existe acceso | Media-Alta |
+| Networking/troubleshooting | Legacy / Integration Specialist | Intermedio | Parcial | Módulo 34 | LAB-078 | Diagrama de conectividad y riesgos | ¿Cómo diagnosticas latencia entre CRM y un sistema on-prem? | Profundizar con métricas reales cuando haya infraestructura | Media |
 | Upgrade path CRM 2015+ | Legacy Specialist | Avanzado | No cubierto | No evidente | Sin lab dedicado | Plan de upgrade/migración | ¿Qué factores revisas antes de actualizar CRM on-prem? | Incluir como roadmap, no promesa actual | Media |
-| Health assessment | Legacy Specialist / Architect | Avanzado | No cubierto | No evidente | Sin lab dedicado | Informe de salud y riesgos | ¿Qué pondrías en un health assessment de CRM? | Crear JR-008 | Alta |
+| Health assessment | Legacy Specialist / Architect | Avanzado | Cubierto | Ruta JR-5 | LAB-078 | Informe de salud, riesgos y roadmap | ¿Qué pondrías en un health assessment de CRM? | Usar LAB-078 como evidencia conceptual; no venderlo como auditoría real de servidor | Alta |
 
 ### Business / Consulting / Soft Skills
 
@@ -167,8 +167,8 @@ Recurso detallado: [Ruta Job-Ready Power Platform Admin / Governance](JOB_READY_
 - **Perfil laboral objetivo:** Power Platform Admin, Governance Specialist, CoE Analyst, Platform Owner.
 - **Skills cubiertos:** PPAC, ambientes, DLP, security roles, Managed Environments, licensing, capacity, CoE, soporte operativo.
 - **Módulos reutilizados:** 31, 32, 33, 36, 40.
-- **Labs reutilizados:** LAB-032, LAB-056.
-- **Nuevos labs recomendados:** JR-006.
+- **Labs reutilizados:** LAB-032, LAB-056, LAB-076 (JR-006).
+- **Nuevos labs recomendados:** ninguno crítico; futuras prácticas pueden profundizar Purview/audit logs y Managed Environments con tenant real.
 - **Evidencia esperada:** governance assessment, matriz de ambientes, política DLP, análisis de licencias/capacidad, runbook operativo.
 - **Preguntas de entrevista:** cómo gobernar Default environment, cómo investigar fuga de datos, cuándo habilitar Managed Environments.
 - **Nivel sugerido:** Intermedio-Avanzado.
@@ -209,8 +209,8 @@ Recurso detallado: [Ruta Job-Ready Data Migration + CRM Legacy](JOB_READY_DATA_M
 - **Perfil laboral objetivo:** CRM Migration Specialist, Solution Architect, Legacy Modernization Consultant.
 - **Skills cubiertos:** mapping, cleansing, importación, reconciliación, cutover, CRM on-prem awareness, SQL/IIS/networking, health assessment.
 - **Módulos reutilizados:** 34, 39, 40.
-- **Labs reutilizados:** LAB-064, LAB-070 como referencia conceptual.
-- **Nuevos labs recomendados:** JR-005, JR-008.
+- **Labs reutilizados:** LAB-064, LAB-070 como referencia conceptual, LAB-075 (JR-005), LAB-078 (JR-008).
+- **Nuevos labs recomendados:** ninguno crítico; futuras prácticas pueden agregar dataset grande, carga real y simulación de cutover cronometrada.
 - **Evidencia esperada:** plan de migración, mapping, reporte post-migración, health assessment, matriz de riesgos.
 - **Preguntas de entrevista:** cómo migrar 10M registros, cómo validar integridad, qué revisar en CRM on-prem lento.
 - **Nivel sugerido:** Avanzado / Especialización.

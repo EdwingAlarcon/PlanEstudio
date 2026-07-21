@@ -4,6 +4,20 @@ Esta ruta convierte el contenido actual de administración, seguridad, gobernanz
 
 No garantiza empleo. Tampoco convierte automáticamente los labs en experiencia laboral formal. Su valor está en ayudarte a practicar criterios de administración, reunir evidencia operativa y explicar decisiones de gobierno con el lenguaje que usan equipos de plataforma, seguridad y arquitectura.
 
+## Criterio de profundidad de esta ruta
+
+Esta ruta debe prepararte para dos niveles de conversación:
+
+- **Admin/Governance operativo:** revisar ambientes, DLP, capacidad, licencias, owners, riesgos e
+  incidentes desde Power Platform admin center.
+- **Solution Architect con responsabilidad de gobierno:** justificar por qué una solución debe vivir
+  en cierto ambiente, qué controles necesita antes de producción, qué excepciones acepta y qué
+  deuda operativa queda documentada.
+
+La evidencia mínima no es una captura del admin center. Es un paquete defendible: inventario,
+matriz de ambientes, política DLP, análisis de licencias/capacidad, decisión de Managed
+Environments, runbook de incidentes, modelo operativo CoE y resumen ejecutivo de riesgos.
+
 ## Vacantes objetivo
 
 Esta ruta apunta a roles como:
@@ -25,6 +39,8 @@ Al completar la secuencia recomendada, deberías poder explicar y demostrar:
 - Cómo razonar sobre licensing, capacity, Managed Environments y recomendaciones operativas.
 - Cómo usar auditoría, logs y Microsoft Purview como parte de una investigación.
 - Cómo presentar un modelo de CoE moderno basado en personas, procesos, políticas y mejora continua.
+- Cómo convertir hallazgos de administración en decisiones arquitectónicas: restricciones,
+  trade-offs, excepciones, owners, presupuesto y riesgo aceptado.
 
 ## Enfoque moderno de gobierno
 
@@ -36,24 +52,77 @@ El gobierno moderno de Power Platform no debe depender únicamente de instalar e
 - **Auditoría y Purview:** trazabilidad para investigar actividad, cambios y riesgos.
 - **CoE operativo:** gobierno como capacidad organizacional, no como instalación de una solución.
 
+## Modelo operativo recomendado
+
+Un administrador junior tiende a listar configuraciones. Un perfil job-ready debe convertirlas en
+operación repetible:
+
+```mermaid
+flowchart LR
+  A["Inventario PPAC"] --> B["Clasificacion de ambientes"]
+  B --> C["Riesgos y controles"]
+  C --> D["Decisiones de arquitectura"]
+  D --> E["Runbooks operativos"]
+  E --> F["Revision mensual de gobierno"]
+  F --> A
+```
+
+| Cadencia | Actividad | Evidencia |
+|---|---|---|
+| Diaria | Revisar incidentes críticos: flujos fallidos, apps bloqueadas, alertas de seguridad | Registro de incidente y acción tomada |
+| Semanal | Revisar apps/flujos de alto uso, owners faltantes, conectores riesgosos | Reporte operativo para plataforma |
+| Mensual | Revisar DLP, capacidad, licencias, ambientes sin uso y excepciones vencidas | Comité de gobierno con decisiones |
+| Trimestral | Revaluar Managed Environments, políticas de ambiente, auditoría y roadmap CoE | Resumen ejecutivo y backlog de remediación |
+
+## Puente hacia Solution Architect
+
+Para roles de arquitectura, no basta con saber dónde se configura cada control. Debes explicar qué
+decisión protege y qué costo introduce.
+
+| Decisión arquitectónica | Pregunta que debes responder | Evidencia |
+|---|---|---|
+| Separar DEV/TEST/PROD | ¿Qué riesgo evita y qué proceso de ALM exige? | Matriz de ambientes y política de promoción |
+| Habilitar Managed Environments | ¿Qué controles justifican el costo/licenciamiento? | ADR con capacidades habilitadas y presupuesto |
+| Restringir Default environment | ¿Qué se puede controlar si no se puede eliminar? | Plan de contención, comunicación y migración progresiva |
+| Crear excepción DLP | ¿Qué riesgo se acepta, por cuánto tiempo y quién aprueba? | Registro de excepción con fecha de expiración |
+| Usar CoE Starter Kit | ¿Qué problema resuelve que PPAC nativo no cubre suficientemente? | Decision record: PPAC nativo vs CoE Starter Kit |
+| Investigar actividad sospechosa | ¿Qué fuente responde cada pregunta: Dataverse audit, Purview o PPAC? | Runbook de investigación y matriz de fuentes |
+
+## Alineación técnica actual
+
+Mantén estas ideas como base cuando expliques gobierno moderno:
+
+- Power Platform admin center es la superficie central para administrar ambientes y configuración
+  de plataforma.
+- Las data policies/DLP funcionan como guardrails: clasifican conectores y reducen el riesgo de
+  exposición accidental de datos; no sustituyen diseño de seguridad de Dataverse.
+- Managed Environments agrupa capacidades premium para administrar a escala con más control e
+  insights; requiere revisar licenciamiento antes de recomendarlo.
+- Los logs de actividad de Power Platform se consultan en Microsoft Purview con permisos y
+  licenciamiento adecuados; Dataverse auditing se configura por ambiente/tabla y consume log
+  storage.
+- El CoE Starter Kit puede seguir siendo útil para inventario, procesos y nurture, pero no debe
+  presentarse como la única forma de gobernar Power Platform.
+
 ## Skills laborales y estado actual
 
 | Skill laboral | Estado actual | Contenido actual | Evidencia posible hoy | Brecha |
 |---|---|---|---|---|
-| Power Platform admin center | Cubierto | Módulos 1, 31, 32; LAB-076 | Inventario, DLP, capacidad y decisiones de gobierno documentadas en JR-006 | Profundizar investigación de incidentes con audit logs/Purview |
-| Environment strategy | Cubierto | Módulos 31, 33; LAB-056 | Diagrama DEV/TEST/PROD y política de promoción | Agregar criterios por tipo de workload |
+| Power Platform admin center | Cubierto | Módulos 1, 31, 32; LAB-076 | Inventario, DLP, capacidad y decisiones de gobierno documentadas en JR-006 | Profundizar export real de inventario cuando haya tenant |
+| Environment strategy | Cubierto | Módulos 31, 33; LAB-056, LAB-076 | Diagrama DEV/TEST/PROD y política de promoción | Agregar criterios por tipo de workload |
 | Environment types y lifecycle | Parcial | Módulos 31, 33 | Matriz de ambientes | Falta runbook de creación/cierre |
-| DLP policies | Cubierto | Módulos 31, 33, 36; LAB-032 | Política DLP y prueba de bloqueo | Conectar a excepciones y revisión periódica |
+| DLP policies | Cubierto | Módulos 31, 33, 36; LAB-032, LAB-076 | Política DLP, prueba de bloqueo y decisión de excepción | Conectar a revisión periódica con fecha de expiración |
 | Security roles | Cubierto | Módulos 9, 16, 36; LAB-009 | Matriz rol-entidad-privilegio | Profundizar troubleshooting de acceso |
-| Managed Environments | Parcial | Módulo 33, LAB-056 parcial | Decisión de habilitación | Falta práctica de controles y licenciamiento |
-| Licensing | Parcial | Módulos 31, 40 | Análisis por escenario | Falta ejercicio operativo con recomendaciones |
-| Capacity planning | Awareness | Módulos 31, 35 | Estimación de capacidad y riesgos | Falta monitoreo y plan de remediación |
-| Dataverse auditing | Parcial | Módulo 36 | Diseño de auditoría | Falta consulta/investigación guiada |
+| Managed Environments | Parcial | Módulo 33, LAB-056, LAB-076 | Decisión de habilitación con impacto de licenciamiento | Falta práctica real de activar/configurar controles |
+| Licensing | Parcial | Módulos 31, 40; LAB-076 | Análisis por escenario y licencias sin uso | Falta conexión con datos reales de consumo |
+| Capacity planning | Parcial | Módulos 31, 35; LAB-076 | Estimación de capacidad y riesgos | Falta monitoreo continuo con datos reales |
+| Dataverse auditing | Parcial | Módulo 36; LAB-076 conceptual | Diseño de auditoría e hipótesis de investigación | Falta consulta real de logs |
 | Purview / activity logs | Awareness | Módulo 36 | Awareness de auditoría centralizada | Falta simulación de investigación |
-| Inventory / usage / monitor / actions | Parcial | Módulo 32 | Reporte conceptual de CoE | Reorientar hacia PPAC nativo |
-| CoE operativo | Parcial | Módulos 31, 32 | Modelo de gobierno y CoE | Falta operating model completo |
-| Soporte operativo | Parcial | Módulos 26, 31, 32 | Runbook básico | Falta incidente app/flow en producción |
-| Reporte ejecutivo de riesgos | Parcial | Módulos 31, 38, 40 | Recomendaciones y roadmap | Falta formato de assessment laboral |
+| Inventory / usage / monitor / actions | Parcial | Módulo 32; LAB-076 | Reporte conceptual de CoE y priorización PPAC | Falta export real de inventario |
+| CoE operativo | Cubierto a nivel de diseño | Módulos 31, 32; LAB-032, LAB-076 | Modelo de gobierno y operación recurrente | Falta simulación completa de comité mensual |
+| Soporte operativo | Parcial | Módulos 26, 31, 32; LAB-076 | Runbook para flujo, app, export sospechosa y ambiente sin dueño | Falta incidente app/flow con logs reales |
+| Reporte ejecutivo de riesgos | Cubierto | Módulos 31, 38, 40; LAB-076 | Recomendaciones priorizadas y roadmap | Mantener formato ejecutivo, no solo tabla técnica |
+| Architecture Decision Records de gobierno | Parcial | Módulos 18, 31, 33; LAB-070, LAB-090 como complemento | ADRs de ambiente, DLP, Managed Environments y excepción | Falta plantilla específica en lab dedicado |
 
 ## Secuencia recomendada de estudio
 
@@ -62,7 +131,10 @@ El gobierno moderno de Power Platform no debe depender únicamente de instalar e
 3. **Estrategia de ambientes:** Módulo 33 y LAB-056 para DEV/TEST/PROD, Managed Environments, multi-tenant y restricciones.
 4. **Seguridad y cumplimiento:** Módulo 36 para Zero Trust, auditoría, Purview, DLP y defensa en profundidad.
 5. **Decisión arquitectónica:** Módulo 40 para casos tipo Solution Architect sobre licenciamiento, riesgo, migración y gobierno; PL-600 queda solo como referencia histórica retirada.
-6. **Portafolio:** convertir LAB-032/LAB-056 en un governance assessment demostrable.
+6. **Job-ready assessment:** LAB-076 para convertir inventario, DLP, licencias, capacidad y runbook
+   en evidencia laboral.
+7. **Puente Solution Architect:** usar LAB-090 si tu vacante exige propuesta enterprise y decision
+   log; no reemplaza el assessment Admin, lo complementa.
 
 ## Mapeo a contenido actual
 
@@ -75,6 +147,8 @@ El gobierno moderno de Power Platform no debe depender únicamente de instalar e
 | Módulo 40 - Arquitectura Power Platform | Decisión de arquitectura | Respuestas de escenario sobre gobierno, licencias y riesgo |
 | LAB-032 | Gobernanza a escala | Reporte CoE/gobierno y recomendaciones |
 | LAB-056 | Cambio de ambientes DEV/TEST/PROD | Evidencia de promoción controlada y estrategia de ambientes |
+| LAB-076 (JR-006) | Assessment PPAC job-ready | Informe de tenant, DLP, capacidad, licencias, Managed Environments y runbooks |
+| LAB-090 | Capstone enterprise D365 | Decision log y propuesta ejecutiva cuando la vacante cruza gobierno con arquitectura D365 |
 
 ## Evidencia de portafolio
 
@@ -89,6 +163,44 @@ Un portafolio Admin/Governance debería incluir al menos:
 - Runbook operativo: qué revisar ante app crítica caída, flujo fallando o capacity alert.
 - Diseño de auditoría: qué eventos investigar, dónde mirar y cuándo escalar a seguridad/Purview.
 - Resumen ejecutivo de riesgos con prioridades Alta/Media/Baja.
+- Decision log con al menos 5 ADRs: ambiente, DLP, Managed Environments, Default environment y
+  auditoría/Purview.
+
+## Plantillas mínimas de entrega
+
+### 1. Governance assessment
+
+| Sección | Qué debe contener |
+|---|---|
+| Resumen ejecutivo | 3-5 riesgos principales, impacto, decisión recomendada |
+| Inventario | Ambientes, owners, tipo, criticidad, apps/flujos activos, conectores relevantes |
+| Riesgos | Score por probabilidad/impacto y dueño de mitigación |
+| Controles | DLP, security roles, Managed Environments, auditoría, ALM |
+| Roadmap | Quick wins 0-30 días, estabilización 30-60, gobierno recurrente 60-90 |
+
+### 2. Matriz de ambientes
+
+| Ambiente | Tipo | Propósito | Owner | Datos | DLP | Managed | Ciclo de vida |
+|---|---|---|---|---|---|---|---|
+| Default | Default | Productividad personal controlada | Platform owner | Bajo/medio | Base restrictiva | No/según política | Contener y migrar apps críticas |
+| DEV-CRM | Developer/Sandbox | Desarrollo solución CRM | Equipo CRM | Datos sintéticos | Dev | No | Revisión mensual |
+| TEST-CRM | Sandbox | QA/UAT | QA + negocio | Datos anonimizados | Production-like | Opcional | Reset controlado |
+| PROD-CRM | Production | Operación crítica | Owner negocio + TI | Datos reales | Strict | Sí si aplica | Backup, monitoreo y change control |
+
+### 3. Registro de excepciones DLP
+
+| Excepción | Justificación | Riesgo | Mitigación | Aprobador | Expira |
+|---|---|---|---|---|---|
+| Permitir conector X en ambiente Y | Proceso crítico temporal | Exfiltración de datos | Scope limitado + monitoreo | CISO/CTO | 90 días |
+
+### 4. Runbook de incidente
+
+| Incidente | Primeras preguntas | Fuente de evidencia | Acción inicial | Escalamiento |
+|---|---|---|---|---|
+| Flujo fallando en producción | ¿Desde cuándo? ¿Qué cambió? ¿Impacto usuario? | Run history, owner, solución | Pausar/reintentar/controlar cola | App owner + soporte |
+| App con permisos excesivos | ¿Quién accede? ¿Qué tabla? ¿Qué rol? | Security roles, sharing, audit | Retirar acceso no aprobado | Seguridad + owner |
+| Exportación sospechosa | ¿Quién exportó? ¿Qué datos? ¿Desde dónde? | Purview/activity logs, Dataverse audit | Preservar evidencia | Seguridad/Compliance |
+| Ambiente sin dueño | ¿Qué apps son críticas? ¿Quién las usa? | PPAC inventory, usage | Asignar owner temporal | Comité de gobierno |
 
 ## Preguntas de entrevista
 
@@ -132,18 +244,28 @@ Un portafolio Admin/Governance debería incluir al menos:
 - ¿Qué métricas usarías para medir salud de la plataforma?
 - ¿Cómo harías onboarding y offboarding de makers?
 
-## Lab Job-Ready disponible
+## Labs y capstones recomendados
 
 | Lab disponible | Vacante que valida | Skills que valida | Evidencia esperada | Dificultad | Duración | Relación con portafolio |
 |---|---|---|---|---|---|---|
 | LAB-076 (JR-006) - PPAC Governance Assessment | Power Platform Admin / Governance Specialist | PPAC, DLP, ambientes, capacidad, licensing, operación | Informe de tenant, matriz de ambientes, DLP, runbook y riesgos | Avanzada | 4 h | Demuestra gobierno operativo y criterio de plataforma |
+| LAB-032 - CoE Starter Kit | CoE Lead / Governance Analyst | Inventario, gobierno, nurture, compliance conceptual | Reporte CoE/gobierno y decisiones | Avanzada | 3-4 h | Complementa LAB-076 cuando la vacante menciona CoE |
+| LAB-056 - Ambientes DEV/TEST/PROD | Admin / ALM / Architect | Separación de ambientes, promoción, control de cambios | Evidencia de estrategia de ambientes | Intermedia | 2 h | Apoya el apartado de environment strategy |
+| LAB-090 - Capstone Enterprise D365 | Solution Architect | Arquitectura enterprise, decision log, roadmap, ownership | Propuesta ejecutiva y decision log | Avanzada | 4 h | Complemento si la vacante cruza gobierno con arquitectura D365 |
 
 ## Brechas críticas
 
-1. Falta práctica dedicada con audit logs/Purview en una simulación de investigación de incidente de seguridad (JR-006 cubre inventario, DLP, capacidad/licencias y operación, no investigación forense).
-2. Falta profundizar Managed Environments como ejercicio propio con impacto de licenciamiento.
-3. CoE Starter Kit existe en contenido, pero la ruta debe seguir reforzando PPAC nativo y CoE operativo moderno sobre la instalación del kit.
-4. Falta un runbook de soporte operativo detallado para apps/flujos en producción más allá del que produce JR-006.
+1. LAB-076 cubre assessment operativo, pero falta una simulación más profunda de investigación con
+   logs reales en Microsoft Purview y Dataverse audit.
+2. Managed Environments está tratado como decisión; falta práctica real activando controles
+   específicos como sharing limits, environment groups, IP firewall o pipelines nativos.
+3. CoE Starter Kit existe en contenido, pero la ruta debe seguir reforzando PPAC nativo y CoE
+   operativo moderno sobre la instalación del kit.
+4. Falta un incidente app/flow con evidencia real de run history, owner, cambio reciente y plan de
+   remediación.
+5. Solution Architect queda bien como puente de decisión, pero no existe una ruta job-ready separada
+   solo de arquitectura Power Platform enterprise; hoy se cubre mediante Módulos 31-41, LAB-090 y
+   capstones.
 
 ## Checklist antes de aplicar
 
