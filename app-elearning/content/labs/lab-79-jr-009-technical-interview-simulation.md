@@ -18,6 +18,15 @@ prerequisites:
 Preparar y ejecutar una simulación de entrevista técnica con CV, LinkedIn, demo de 10 minutos,
 respuestas STAR, ingles tecnico y preguntas por perfil.
 
+## Perfil laboral y skill validado
+
+**Vacante objetivo:** cualquier rol de Power Platform/Dynamics 365 en etapa de entrevista técnica.
+
+**Skill concreto que valida:** capacidad de defender un proyecto real de tu portafolio con
+precisión técnica, sin inflar experiencia, y de comunicarlo con la misma claridad en español e
+inglés técnico — el criterio de evaluación más duro de este lab es la honestidad al distinguir
+"lo hice en un lab" de "tengo experiencia laboral".
+
 ## Escenario de negocio
 
 Aplicaste a una vacante junior/mid de Power Platform o Dynamics 365. El entrevistador quiere ver
@@ -35,6 +44,13 @@ Actúas como candidato. Tu objetivo no es sonar perfecto, sino demostrar evidenc
 - Capturas o ambiente de demo.
 - Cronometro.
 - Grabadora opcional.
+
+## Qué puedes hacer en tenant real vs. qué debes simular
+
+Este lab es en sí mismo una simulación — no requiere tenant. Lo que sí debe ser real es el proyecto
+que demuestras: usa un lab o capstone que efectivamente completaste (ej. lab-23, lab-63, lab-101),
+no un proyecto hipotético. Si no tienes ningún lab completado con evidencia, ese es el bloqueador a
+resolver antes de este lab, no algo que se pueda simular aquí.
 
 ## Entregables
 
@@ -74,7 +90,7 @@ relevante es [proyecto], donde resolví [problema] mediante [solución]. Tengo e
 
 ### Paso 3 — Demo de 10 minutos
 
-Usa esta estructura:
+Usa esta estructura, basada en un proyecto real que completaste:
 
 | Minuto | Contenido |
 |---|---|
@@ -87,7 +103,7 @@ Usa esta estructura:
 
 ### Paso 4 — STAR
 
-Prepara respuestas para:
+Prepara respuestas para, usando situaciones reales de tus labs (no inventadas):
 
 - Problema tecnico dificil.
 - Requerimiento ambiguo.
@@ -114,11 +130,21 @@ Graba o ejecuta una entrevista de 30 minutos:
 - 10 minutos preguntas tecnicas.
 - 5 minutos preguntas del candidato.
 
+## Decisiones que debes tomar
+
+- **¿Qué proyecto de tu portafolio eliges para la demo?** Elige el que puedas defender con más
+  detalle técnico, no necesariamente el más impresionante visualmente.
+- **¿Cómo respondes si el entrevistador pregunta algo que tu proyecto no cubre?** Decide de
+  antemano tu estrategia: reconocer el límite y explicar cómo lo investigarías, en vez de improvisar
+  una respuesta insegura.
+- **¿Incluyes en el CV labs que empezaste pero no terminaste?** Define tu propio criterio de qué
+  cuenta como evidencia presentable.
+
 ## Criterios de validación
 
 - [ ] La demo cabe en 10 minutos.
 - [ ] Las respuestas no exageran experiencia laboral.
-- [ ] Hay evidencia verificable.
+- [ ] Hay evidencia verificable de un proyecto real completado.
 - [ ] El ingles es claro aunque no sea perfecto.
 - [ ] La retrospectiva identifica mejoras concretas.
 
@@ -130,6 +156,19 @@ Graba o ejecuta una entrevista de 30 minutos:
 | Evidencia | 25% |
 | Precision tecnica | 25% |
 | Ingles/comunicacion | 20% |
+
+## Preguntas de entrevista asociadas
+
+Este lab es en sí un banco de preguntas (Paso 5 y Paso 6); adicionalmente prepárate para la
+pregunta meta más común de este tipo de entrevista: "Cuéntame sobre un momento en que tu solución
+no funcionó como esperabas" — respuesta esperada: un caso real (no genérico) con causa raíz,
+diagnóstico y qué cambiarías, no solo "lo arreglé".
+
+## Qué no debe sobreprometerse
+
+Esta simulación entrena comunicación y defensa de portafolio; no garantiza el resultado de una
+entrevista real, que depende también de la vacante específica, del entrevistador y de factores
+fuera de tu control.
 
 ## Errores comunes
 

@@ -8,10 +8,10 @@ slug: "introduccion-al-ecosistema-power-platform"
 ---
 *Duración: 1-2 semanas*
 
-#### 🎯 Objetivo
+### 🎯 Objetivo
 Comprender la arquitectura, componentes y casos de uso de Power Platform.
 
-#### 📖 Conceptos Clave
+### 📖 Conceptos Clave
 - **Arquitectura de Power Platform**: Componentes principales y su interrelación
 - **Microsoft Dataverse**: Base de datos común (Common Data Service)
 - **Ambientes (Environments)**: Tipos (producción, sandbox, developer)
@@ -23,7 +23,7 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 - **AI Builder**: servicio de IA integrado en Power Platform que permite agregar inteligencia artificial a apps y flujos sin escribir código de ML. Modelos preconstruidos (clasificación de texto, extracción de datos de documentos, detección de objetos, predicción binaria) accesibles directamente desde Power Apps y Power Automate
 - **Power Pages**: plataforma de bajo código para crear sitios web externos con acceso a datos de Dataverse. Antes llamado "Power Apps portals". Permite a usuarios anónimos o con cuenta externa (B2C) ver, crear y editar registros de Dataverse a través de formularios y vistas configurables
 
-#### 👨‍💻 Actividades Prácticas
+### 👨‍💻 Actividades Prácticas
 
 ##### Práctica 1.1: Configurar Entorno de Desarrollo
 
@@ -61,7 +61,7 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 
 4. Crear datos de prueba manualmente (5 registros de Account)
 
-#### 💼 Caso Real de Negocio
+### 💼 Caso Real de Negocio
 
 **Empresa:** Laboratorio Farmacéutico NovaBio — 280 empleados, 2 plantas de producción  
 **Problema:** El área de Calidad gestionaba no-conformidades (productos fuera de especificación) por email y hojas Excel. Los formularios llegaban incompletos, las aprobaciones tardaban semanas y era imposible auditar el proceso para la certificación ISO 9001.  
@@ -80,13 +80,13 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 
 **Por qué Power Platform:** Ningún componente requirió código. El equipo de Calidad configuró el sistema en 3 semanas sin soporte externo.
 
-#### ✅ Buenas Prácticas
+### ✅ Buenas Prácticas
 - Usar ambientes Developer/Sandbox para pruebas, nunca directamente en Production
 - Nombrar ambientes con convenciones claras: `DEV-TuNombre`, `TEST-Proyecto`
 - Documentar propósito de cada ambiente desde su creación
 - No compartir credenciales de trial; crear usuarios de prueba en el tenant
 
-#### ⚠️ Errores Comunes
+### ⚠️ Errores Comunes
 - **Error**: Trabajar sin ambiente dedicado, modificar ambiente default
   - **Solución**: Siempre crear ambiente específico para aprendizaje
 
@@ -96,7 +96,7 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 - **Error**: No comprender límites de licencias trial
   - **Solución**: Revisar documentación de límites (usuarios, API calls, almacenamiento)
 
-#### 🧪 Criterios de Validación
+### 🧪 Criterios de Validación
 - [ ] Ambiente de desarrollo creado y funcional
 - [ ] Acceso a Power Apps, Power Automate, Power BI confirmado
 - [ ] 5+ registros de prueba en tabla Account de Dataverse

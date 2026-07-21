@@ -8,10 +8,10 @@ slug: "dataverse-fundamentos-y-modelado-basico"
 ---
 *Duración: 2-3 semanas*
 
-#### 🎯 Objetivo
+### 🎯 Objetivo
 Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 
-#### 📖 Conceptos Clave
+### 📖 Conceptos Clave
 - **Tablas (Tables)**: Estándar vs Personalizadas, Virtual Tables
 - **Columnas (Columns)**: Tipos de datos (Text, Number, Choice, Lookup, DateTime)
 - **Relaciones (Relationships)**: One-to-Many, Many-to-One, Many-to-Many
@@ -22,7 +22,7 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 - **Auditoria**: Tracking de cambios en datos
 - **Business Rules**: Lógica sin código
 
-#### 👨‍💻 Actividades Prácticas
+### 👨‍💻 Actividades Prácticas
 
 ##### Práctica 2.1: Crear Tablas Personalizadas
 
@@ -102,7 +102,7 @@ Crear manualmente 10 registros de Solicitudes con variedad de:
 - Estados variados
 - Fechas distribuidas en últimos 30 días
 
-#### 💼 Caso Real de Negocio
+### 💼 Caso Real de Negocio
 
 **Empresa:** Empresa de Logística TransCargo — 120 vehículos, flota propia  
 **Problema:** Los activos de la empresa (vehículos, equipos de bodega, herramientas especializadas) se registraban en Excel. Asignaciones duplicadas, equipos prestados sin registro de devolución, sin historial de mantenimiento por activo. Al momento de una auditoría interna no podían demostrar quién tenía qué equipo ni en qué estado.  
@@ -120,7 +120,7 @@ Crear manualmente 10 registros de Solicitudes con variedad de:
 - Costo de mantenimiento atribuible por unidad: ahorro del 22% al identificar equipos con mantenimiento excesivo
 - Cero activos en operación con documentación vencida desde la implementación
 
-#### ✅ Buenas Prácticas
+### ✅ Buenas Prácticas
 
 **Nomenclatura**:
 
@@ -146,7 +146,7 @@ Crear manualmente 10 registros de Solicitudes con variedad de:
 - Agregar Description a cada tabla y columna personalizada
 - Documentar propósito de Business Rules en Comments
 
-#### ⚠️ Errores Comunes
+### ⚠️ Errores Comunes
 
 1. **Error**: Crear columnas redundantes (ej: Full Name cuando existe First + Last Name)
     - **Solución**: Usar Calculated Columns o concatenar en Power Apps
@@ -163,7 +163,7 @@ Crear manualmente 10 registros de Solicitudes con variedad de:
 5. **Error**: Relaciones circulares o mal diseñadas
     - **Solución**: Diagramar modelo antes de implementar, validar cardinalidad
 
-#### 🧪 Criterios de Validación
+### 🧪 Criterios de Validación
 - [ ] Tabla "Solicitud TI" con mínimo 7 columnas personalizadas creada
 - [ ] 3+ relaciones establecidas y funcionales
 - [ ] 2+ Business Rules implementadas y probadas

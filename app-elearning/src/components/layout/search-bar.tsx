@@ -30,7 +30,9 @@ const LEVEL_LABELS: Record<string, string> = {
   intermedio: "Nivel 2",
   avanzado: "Nivel 3",
   arquitecto: "Nivel 4",
-  N1: "Nivel 1", N2: "Nivel 2", N3: "Nivel 3", N4: "Nivel 4",
+  ia: "Nivel IA",
+  d365: "Nivel D365",
+  N1: "Nivel 1", N2: "Nivel 2", N3: "Nivel 3", N4: "Nivel 4", N5: "Nivel IA", N6: "Nivel D365",
 };
 
 const TYPE_CONFIG: Record<SearchDocumentType, { label: string; color: string }> = {

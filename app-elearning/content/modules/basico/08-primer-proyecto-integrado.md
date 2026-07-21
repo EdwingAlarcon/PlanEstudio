@@ -8,10 +8,26 @@ slug: "primer-proyecto-integrado"
 ---
 *Duración: 2-3 semanas*
 
-#### 🎯 Objetivo
+### 🎯 Objetivo
 Aplicar todos los conocimientos del Nivel 1 en un proyecto end-to-end real.
 
-#### 📋 Descripción del Proyecto
+### 📖 Conceptos Clave
+
+Este módulo es la síntesis aplicada de los conceptos fundamentales del Nivel 1. Asegúrate de dominarlos antes de comenzar:
+
+- **Integración de soluciones Power Platform:** capacidad de combinar Dataverse, Canvas Apps, Model-Driven Apps, Power Automate y Power BI en una arquitectura cohesionada donde cada componente tiene un rol claro. La integración no es solo conectar herramientas — es diseñar la interacción entre ellas para resolver un problema de negocio completo.
+- **Solución como unidad de ALM:** todos los componentes (tablas, apps, flujos, reportes) deben vivir dentro de una única solución con prefijo de publisher consistente (`sse_`). La solución es el artefacto que se mueve entre ambientes (DEV→TEST→PROD), no los componentes individuales.
+- **Diseño data-first:** el modelo de datos en Dataverse es el núcleo. Las aplicaciones y flujos son consumidores del dato — si el modelo es incorrecto, las capas superiores heredan sus problemas. Antes de crear la primera pantalla, el modelo debe estar validado.
+- **Separación de capas por audiencia:** Canvas App para usuarios operativos (móvil, simplicidad, velocidad); Model-Driven App para gestores y administradores (formularios complejos, vistas, BPF, auditoría); Power BI para tomadores de decisiones (analítica, tendencias, KPIs).
+- **Business Process Flow (BPF):** orquestador visual de etapas que guía al gestor a través del proceso de aprobación y ejecución. El BPF es la fuente de verdad del estado del proceso — no un campo de elección aislado.
+- **Security Roles y Row-Level Security:** el principio de mínimo privilegio aplica desde el inicio. Un usuario que crea solicitudes no debe poder aprobarlas. El modelo de seguridad debe diseñarse en paralelo con el modelo de datos, no al final.
+- **Power Automate como orquestador de procesos:** los flujos automatizan notificaciones, escalaciones, actualizaciones de estado y registros de auditoría — liberando a las apps de lógica que no pertenece a la UI. Un flujo bien diseñado tiene manejo de errores explícito (Scope Try/Catch).
+- **RLS en Power BI:** Row-Level Security garantiza que cada área solo vea sus propias métricas. En un dashboard empresarial, los KPIs sin RLS son un riesgo de confidencialidad.
+- **Connection References y Environment Variables:** los componentes configurables (conexiones a servicios, URLs, parámetros de ambiente) deben parametrizarse desde el inicio para que la solución sea desplegable en múltiples ambientes sin edición manual.
+
+### 👨‍💻 Actividades Prácticas Paso a Paso
+
+**📋 Descripción del Proyecto**
 
 **Sistema Completo de Gestión de Solicitudes Internas**
 
@@ -23,7 +39,7 @@ Desarrollar una solución empresarial integral que incluya:
 - Power Automate para automatizaciones
 - Power BI Dashboard para métricas
 
-#### 🏗️ Arquitectura de la Solución
+**🏗️ Arquitectura de la Solución**
 
 **Componentes:**
 
@@ -32,8 +48,6 @@ Desarrollar una solución empresarial integral que incluya:
 3. **Power Apps Model-Driven**: App escritorio para gestión
 4. **Power Automate**: 4 flujos
 5. **Power BI**: Dashboard ejecutivo
-
-#### 👨‍💻 Desarrollo Paso a Paso
 
 **FASE 1: Diseño y Modelado de Datos (Días 1-3)**
 
@@ -544,21 +558,7 @@ Configuración de solución
 6. Compartir Model-Driven App con gestores
 7. Publicar Dashboard Power BI y compartir
 
-#### 📖 Conceptos Clave
-
-Este módulo es la síntesis aplicada de los conceptos fundamentales del Nivel 1. Asegúrate de dominarlos antes de comenzar:
-
-- **Integración de soluciones Power Platform:** capacidad de combinar Dataverse, Canvas Apps, Model-Driven Apps, Power Automate y Power BI en una arquitectura cohesionada donde cada componente tiene un rol claro. La integración no es solo conectar herramientas — es diseñar la interacción entre ellas para resolver un problema de negocio completo.
-- **Solución como unidad de ALM:** todos los componentes (tablas, apps, flujos, reportes) deben vivir dentro de una única solución con prefijo de publisher consistente (`sse_`). La solución es el artefacto que se mueve entre ambientes (DEV→TEST→PROD), no los componentes individuales.
-- **Diseño data-first:** el modelo de datos en Dataverse es el núcleo. Las aplicaciones y flujos son consumidores del dato — si el modelo es incorrecto, las capas superiores heredan sus problemas. Antes de crear la primera pantalla, el modelo debe estar validado.
-- **Separación de capas por audiencia:** Canvas App para usuarios operativos (móvil, simplicidad, velocidad); Model-Driven App para gestores y administradores (formularios complejos, vistas, BPF, auditoría); Power BI para tomadores de decisiones (analítica, tendencias, KPIs).
-- **Business Process Flow (BPF):** orquestador visual de etapas que guía al gestor a través del proceso de aprobación y ejecución. El BPF es la fuente de verdad del estado del proceso — no un campo de elección aislado.
-- **Security Roles y Row-Level Security:** el principio de mínimo privilegio aplica desde el inicio. Un usuario que crea solicitudes no debe poder aprobarlas. El modelo de seguridad debe diseñarse en paralelo con el modelo de datos, no al final.
-- **Power Automate como orquestador de procesos:** los flujos automatizan notificaciones, escalaciones, actualizaciones de estado y registros de auditoría — liberando a las apps de lógica que no pertenece a la UI. Un flujo bien diseñado tiene manejo de errores explícito (Scope Try/Catch).
-- **RLS en Power BI:** Row-Level Security garantiza que cada área solo vea sus propias métricas. En un dashboard empresarial, los KPIs sin RLS son un riesgo de confidencialidad.
-- **Connection References y Environment Variables:** los componentes configurables (conexiones a servicios, URLs, parámetros de ambiente) deben parametrizarse desde el inicio para que la solución sea desplegable en múltiples ambientes sin edición manual.
-
-#### 💼 Caso Real de Negocio
+### 💼 Caso Real de Negocio
 
 **Empresa:** Constructora Andina S.A. — 450 empleados, 3 sedes (Bogotá, Medellín, Cali)  
 **Problema:** El proceso de solicitudes internas (materiales, soporte TI, mantenimiento, RRHH) se gestionaba por WhatsApp y correos. Sin trazabilidad, sin métricas de tiempo de respuesta, sin control de costos por área.  
@@ -578,7 +578,7 @@ Este módulo es la síntesis aplicada de los conceptos fundamentales del Nivel 1
 
 **Lección clave:** Una solución integrada de Power Platform puede reemplazar herramientas desconectadas y generar ROI medible en el primer trimestre de operación.
 
-#### ✅ Buenas Prácticas
+### ✅ Buenas Prácticas
 
 - **Diseñar el modelo de datos primero, nunca al revés.** El tiempo invertido en revisar el modelo antes de crear la primera pantalla siempre se recupera. Un cambio de relación a mitad del proyecto puede requerir recrear flujos y formularios completos.
 - **Usar un único publisher prefix en todos los componentes.** `sse_` en todos los campos, `sse_` en nombres de solución. Nunca mezclar prefijos dentro del mismo proyecto.
@@ -589,7 +589,7 @@ Este módulo es la síntesis aplicada de los conceptos fundamentales del Nivel 1
 - **Probar con datos reales desde el sprint 1.** Cargar datos representativos temprano revela problemas de performance y delegación antes de que sean costosos de resolver.
 - **Documentar decisiones arquitectónicas mientras las tomas.** Al final del proyecto, nadie recuerda por qué se eligió un tipo de relación específico o por qué un flujo tiene cierta estructura.
 
-#### ⚠️ Errores Comunes
+### ⚠️ Errores Comunes
 
 - **Crear tablas sin prefijo o con `new_`.** Genera conflictos al importar la solución en ambientes con otras soluciones instaladas. **Fix:** eliminar columnas `new_` y recrearlas con el prefijo correcto antes de comenzar a poblar datos.
 - **Olvidar activar auditoría antes de los primeros datos.** La auditoría de Dataverse no aplica retroactivamente — los registros creados antes de activarla no tienen historial. **Fix:** activar auditoría como paso 2, inmediatamente después de crear las tablas.
@@ -600,7 +600,7 @@ Este módulo es la síntesis aplicada de los conceptos fundamentales del Nivel 1
 - **No usar Connection References en los flujos.** La solución queda atada a conexiones del ambiente de desarrollo y falla al importar. **Fix:** siempre crear Connection References para cada conector usado en flujos y configurarlas como parte del despliegue.
 - **Exportar como Unmanaged a producción.** Permite edición directa en PROD, generando desvíos entre ambientes. **Fix:** exportar siempre como Managed para producción — las personalizaciones solo van por el pipeline.
 
-#### ✅ Criterios de Validación Final
+### 🧪 Criterios de Validación Final
 
 **Funcional:**
 

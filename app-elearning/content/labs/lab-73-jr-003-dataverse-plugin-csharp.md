@@ -18,9 +18,20 @@ prerequisites:
 Diseñar, implementar o documentar un plugin C# de Dataverse con pipeline correcto, tracing,
 validación de negocio, manejo de recursión y evidencia de pruebas.
 
+## Perfil laboral y skill validado
+
+**Vacante objetivo:** Dynamics 365 CRM Developer que escribe lógica de servidor (plugins) para
+reglas de negocio que no pueden vivir solo en el cliente.
+
+**Skill concreto que valida:** elección correcta de stage (Pre/PostOperation), control de
+recursión con `Depth`, tracing consistente, y manejo defensivo de atributos ausentes — a diferencia
+del lab-92 (JR-012), que evalúa troubleshooting de un incidente ya ocurrido, este lab evalúa la
+construcción original del plugin.
+
 ## Escenario de negocio
 
-**Empresa ficticia:** Litware Field Services.
+**Empresa ficticia:** Litware Field Services — 60 técnicos de campo, ~200 solicitudes de
+mantenimiento activas por semana.
 
 Cuando se crea una solicitud de mantenimiento critica, Dataverse debe calcular un campo
 `sit_requiresmanagerapproval` y registrar una traza clara. La prueba tecnica evalua si entiendes
@@ -35,15 +46,33 @@ Actúas como CRM Developer responsable de logica de servidor.
 - Visual Studio o VS Code con .NET.
 - Dataverse Plugin Registration Tool o PAC CLI.
 - Ambiente Dataverse de practica.
-- Si no tienes tenant, entrega codigo, registro esperado y pruebas unitarias conceptuales.
+
+## Qué puedes hacer en tenant real vs. qué debes simular
+
+- **Con tenant real:** registra el plugin, crea los 4 registros de datos de prueba y adjunta el
+  Plugin Trace Log real de cada ejecución.
+- **Sin tenant:** entrega el código compilable, el registro de step documentado y, para cada dato
+  de prueba, el texto de traza que el plugin *debería* producir según tu propia lógica — dejando
+  explícito que no fue verificado contra un ambiente real.
+
+## Datos de prueba
+
+Ejecuta (o simula) el plugin contra estos 4 registros de `sit_maintenance request`:
+
+| Registro | sit_priority | Resultado esperado en `sit_requiresmanagerapproval` |
+|---|---|---|
+| Solicitud A | Crítica (100000002) | `true` |
+| Solicitud B | Baja (100000000) | `false` |
+| Solicitud C | *(sin valor)* | `false` (atributo ausente no debe lanzar excepción) |
+| Solicitud D | Crítica, creada por un plugin previo con Depth 2 | El plugin no ejecuta lógica (corta por recursión) |
 
 ## Entregables
 
 - Clase plugin C#.
 - Registro de step.
 - Configuracion de filtering attributes.
-- Evidencia de Plugin Trace Log.
-- Casos de prueba.
+- Evidencia de Plugin Trace Log (real o simulada, ver arriba).
+- Casos de prueba contra los 4 datos anteriores.
 
 ## Pasos detallados
 
@@ -93,12 +122,22 @@ public class MaintenanceApprovalPlugin : IPlugin
 
 ### Paso 3 — Pruebas
 
-Documenta:
+Ejecuta o simula, documentando entrada y salida para cada uno de los 4 datos de prueba:
 
-- Prioridad critica marca aprobacion.
-- Prioridad baja no marca aprobacion.
-- Target sin prioridad no falla.
-- Depth > 1 no ejecuta logica.
+- Prioridad critica marca aprobacion (Solicitud A).
+- Prioridad baja no marca aprobacion (Solicitud B).
+- Target sin prioridad no falla (Solicitud C).
+- Depth > 1 no ejecuta logica (Solicitud D).
+
+## Decisiones que debes tomar
+
+- **¿Por qué PreOperation y no PostOperation?** Debes justificar que PreOperation permite modificar
+  `target` antes de que se persista, evitando una segunda escritura a la base de datos.
+- **¿Qué pasa si `sit_priority` tiene un valor de OptionSet que no está en el mapa de negocio (ej. un
+  valor nuevo agregado después)?** Decide si el plugin debe fallar, ignorar, o loguear una
+  advertencia — y documenta el trade-off.
+- **¿Este plugin necesita una imagen (pre-image) del registro?** Como es `Create`, no existe estado
+  previo — explica por qué una pre-image no aplica aquí pero sí aplicaría en un `Update`.
 
 ## Criterios de validación
 
@@ -106,7 +145,7 @@ Documenta:
 - [ ] Usa tracing.
 - [ ] Controla recursión.
 - [ ] Maneja atributos ausentes.
-- [ ] Tiene pruebas o matriz de pruebas.
+- [ ] Tiene pruebas contra los 4 datos de prueba definidos arriba.
 
 ## Rúbrica
 
@@ -117,6 +156,24 @@ Documenta:
 | Tracing y errores | 20% |
 | Pruebas | 15% |
 | Explicacion de entrevista | 10% |
+
+## Preguntas de entrevista asociadas
+
+- "¿Qué pasa si dos plugins síncronos en el mismo stage modifican el mismo campo?" — respuesta
+  esperada: orden de ejecución configurable (rank), y riesgo de que uno sobrescriba al otro si no se
+  coordina.
+- "¿Cómo evitarías un loop infinito si este plugin dispara un Update que vuelve a activar el mismo
+  step?" — respuesta esperada: control de `Depth`, y diseño para no reactivar el mismo mensaje sobre
+  la misma tabla sin necesidad.
+- "¿Por qué usar `GetAttributeValue<T>` en vez de indexar directamente `target["sit_priority"]`?" —
+  respuesta esperada: `GetAttributeValue<T>` devuelve `null`/default en vez de lanzar `KeyNotFoundException`
+  si el atributo no viene en el mensaje.
+
+## Qué no debe sobreprometerse
+
+Este plugin cubre un solo mensaje (`Create`) y una sola tabla; no demuestra por sí solo manejo de
+transacciones distribuidas, bulk operations, ni plugins asíncronos — esos quedan fuera de alcance de
+este lab.
 
 ## Errores comunes
 

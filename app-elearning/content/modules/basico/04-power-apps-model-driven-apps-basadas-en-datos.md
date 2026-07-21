@@ -8,10 +8,10 @@ slug: "power-apps-model-driven-apps-basadas-en-datos"
 ---
 *Duración: 1-2 semanas*
 
-#### 🎯 Objetivo
+### 🎯 Objetivo
 Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 
-#### 📖 Conceptos Clave
+### 📖 Conceptos Clave
 - **Arquitectura Model-Driven**: Metadata-driven, auto-generada
 - **Componentes**: Forms, Views, Charts, Dashboards, Business Process Flows
 - **Site Map**: Navegación y estructura de áreas
@@ -22,7 +22,7 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 - **UCI (Unified Client Interface)**: Experiencia moderna
 - **Modern App Designer** (2023+): nuevo diseñador visual unificado que reemplaza al editor clásico. Permite configurar páginas, tablas, formularios, vistas y navegación desde una sola interfaz. Es el editor predeterminado en todos los ambientes actuales — si las instrucciones mencionan el "diseñador clásico", selecciona **Switch to classic** en la barra superior si necesitas reproducir pasos del tutorial
 
-#### 👨‍💻 Actividades Prácticas
+### 👨‍💻 Actividades Prácticas
 
 ##### Práctica 4.1: Crear Primera Model-Driven App
 
@@ -183,7 +183,7 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
     - Validar que solo ven datos según permisos
     - Verificar botones habilitados/deshabilitados
 
-#### 💼 Caso Real de Negocio
+### 💼 Caso Real de Negocio
 
 **Escenario**: Sistema CRM de Gestión de Clientes para PyME
 
@@ -215,7 +215,7 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 - Opportunity en "Proposal" > 30 días → Alerta gerente
 - Quote aceptada → Crear Deal en sistema ERP externo
 
-#### ✅ Buenas Prácticas
+### ✅ Buenas Prácticas
 
 **Diseño de Forms**:
 
@@ -245,7 +245,7 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 - Documentar cada componente (description field)
 - Versionar solutions antes de cambios mayores
 
-#### ⚠️ Errores Comunes
+### ⚠️ Errores Comunes
 
 1. **Error**: Usuarios no ven la app o datos
     - **Causa**: Falta Security Role asignado
@@ -267,7 +267,7 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
     - **Causa**: Estructura inválida (subarea sin group, etc.)
     - **Solución**: Validar jerarquía: Area > Group > Subarea
 
-#### 🧪 Criterios de Validación
+### 🧪 Criterios de Validación
 - [ ] Model-Driven App publicada con site map de 2+ áreas
 - [ ] 2+ forms personalizados (Main + Quick Create)
 - [ ] 3+ vistas con filtros y columnas optimizadas

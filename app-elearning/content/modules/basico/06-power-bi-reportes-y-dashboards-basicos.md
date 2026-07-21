@@ -8,10 +8,10 @@ slug: "power-bi-reportes-y-dashboards-basicos"
 ---
 *Duración: 2 semanas*
 
-#### 🎯 Objetivo
+### 🎯 Objetivo
 Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 
-#### 📖 Conceptos Clave
+### 📖 Conceptos Clave
 - **Componentes**: Power BI Desktop, Service, Mobile
 - **Fuentes de datos**: Dataverse, Excel, SQL, APIs, Web
 - **Modelo de datos**: Star schema, relaciones, cardinalidad
@@ -23,7 +23,7 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 - **Publicación**: Workspaces, apps, compartir
 - **Row-Level Security (RLS)**: Filtros de datos por usuario
 
-#### 👨‍💻 Actividades Prácticas
+### 👨‍💻 Actividades Prácticas
 
 ##### Práctica 6.1: Conectar a Dataverse y Modelar
 
@@ -251,7 +251,7 @@ CALCULATE(
 4. Publicar
 5. En Service, Dataset security > agregar usuarios a roles
 
-#### 💼 Caso Real de Negocio
+### 💼 Caso Real de Negocio
 
 **Escenario**: Dashboard Ejecutivo de Ventas para Gerencia
 
@@ -288,7 +288,7 @@ CALCULATE(
 - Incremental refresh (últimos 3 meses diarios, histórico mensual)
 - Alerts en Service si revenue < 80% target
 
-#### ✅ Buenas Prácticas
+### ✅ Buenas Prácticas
 
 **Modelado de datos**:
 
@@ -325,7 +325,7 @@ CALCULATE(
 - Documentación de sources y transformaciones
 - RLS siempre que datos sean sensibles
 
-#### ⚠️ Errores Comunes
+### ⚠️ Errores Comunes
 
 1. **Error**: Relaciones no funcionan (visuals no filtran)
     - **Causa**: Cardinalidad incorrecta o ambigüedad
@@ -351,7 +351,7 @@ CALCULATE(
     - **Causa**: Rol mal configurado o usuario no asignado
     - **Solución**: Validar con "View as role" en Desktop antes de publicar
 
-#### 🧪 Criterios de Validación
+### 🧪 Criterios de Validación
 - [ ] Reporte con 2+ páginas y mínimo 8 visualizaciones
 - [ ] Conexión a Dataverse funcional con refresh configurado
 - [ ] Modelo de datos con 3+ tablas relacionadas

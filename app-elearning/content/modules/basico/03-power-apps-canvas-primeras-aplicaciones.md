@@ -8,10 +8,10 @@ slug: "power-apps-canvas-primeras-aplicaciones"
 ---
 *Duración: 2-3 semanas*
 
-#### 🎯 Objetivo
+### 🎯 Objetivo
 Crear aplicaciones Canvas desde cero con controles, navegación y conexión a datos.
 
-#### 📖 Conceptos Clave
+### 📖 Conceptos Clave
 - **Canvas vs Model-Driven**: Diferencias conceptuales y casos de uso
 - **Controles**: Input, Label, Button, Gallery, Forms, Media
 - **Propiedades**: Sintaxis de fórmulas, referencias a controles
@@ -22,7 +22,30 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 - **Responsive Design**: Scaling, orientación
 - **Temas (Themes)**: Branding corporativo
 
-#### 👨‍💻 Actividades Prácticas
+> **🧭 Antes de continuar: mini-guía Power Fx para este módulo**
+>
+> Este módulo usa fórmulas de Power Fx (el lenguaje de expresiones de Power Apps) antes de que el
+> **Módulo 07 lo explique formalmente**. Con estas cinco ideas puedes seguir las prácticas de hoy;
+> el Módulo 07 profundiza en sintaxis, tipos de datos y todas las funciones disponibles.
+>
+> - **Fórmula**: una expresión que calcula un valor o ejecuta una acción, similar a Excel. Se
+>   escribe en la barra de fórmulas de una propiedad del control (ej. `Text`, `Items`, `OnSelect`).
+> - **Función**: una palabra reservada que hace algo con datos, como `Filter()` (filtra una tabla) o
+>   `Search()` (busca texto dentro de una tabla). Siempre va seguida de paréntesis con sus argumentos.
+> - **Propiedad**: un atributo configurable de un control (ej. `Items` define qué datos muestra una
+>   Gallery, `OnSelect` define qué pasa al hacer clic). Cada control tiene su propio set de propiedades.
+> - **Buscar vs. filtrar**: `Search(tabla, texto, columnas...)` busca coincidencias de texto en una o
+>   más columnas; `Filter(tabla, condición)` devuelve solo las filas que cumplen una condición lógica
+>   exacta (ej. `Estado = "Activa"`). `Distinct(tabla, columna)` devuelve los valores únicos de una
+>   columna, útil para poblar un Dropdown de opciones sin repetir.
+> - **Delegación**: cuando la tabla vive en Dataverse (no en memoria), Power Apps intenta traducir tu
+>   fórmula en una consulta que el servidor ejecuta completa. Si la función no es delegable, Power Apps
+>   solo trae los primeros 500-2000 registros y filtra sobre eso — por eso verás una advertencia (línea
+>   azul) en algunas fórmulas de este módulo. El Módulo 07 explica cómo identificar y resolver esto.
+>
+> Cada bloque de código de este módulo trae comentarios `//` explicando línea por línea qué hace.
+
+### 👨‍💻 Actividades Prácticas
 
 ##### Práctica 3.1: Primera Canvas App - Lista de Tareas
 
@@ -47,6 +70,8 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 2. Agregar Search Box arriba de Gallery
     - Fórmula Items del Gallery:
    ```javascript
+   // Search(tabla, texto a buscar, columnas donde buscar...)
+   // Busca SearchBox.Text dentro de las columnas título/descripción; si el cuadro está vacío, devuelve todo
    Search(
        'Solicitudes TI',
        SearchBox.Text,
@@ -68,11 +93,14 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 3. Configurar botones:
     - **Guardar Button**:
    ```javascript
+   // SubmitForm() envía los valores del Form a Dataverse (guarda el registro)
    SubmitForm(Form1);
+   // Vuelve a la pantalla de inicio con transición inversa a como se navegó aquí
    Navigate(ScreenInicio, ScreenTransition.UnCover)
    ```
     - **Cancelar Button**:
    ```javascript
+   // ResetForm() descarta los cambios no guardados y vuelve el Form a su estado inicial
    ResetForm(Form1);
    Navigate(ScreenInicio, ScreenTransition.UnCover)
    ```
@@ -128,6 +156,8 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 
 1. **Inicializar Collection en App.OnStart**
    ```javascript
+   // ClearCollect(nombreColeccion, registro1, registro2, ...) vacía y llena una tabla en memoria (Collection)
+   // Cada { } es un registro con sus columnas; a diferencia de Dataverse, vive solo en el dispositivo
    ClearCollect(
        ColPresupuestoItems,
        {Item: "Laptops", Cantidad: 0, PrecioUnit: 1200, Total: 0},
@@ -140,6 +170,8 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
     - Text Input para Cantidad
     - OnChange de Input:
    ```javascript
+   // UpdateIf(coleccion, condición, cambios) actualiza solo las filas que cumplen la condición
+   // Value() convierte el texto del input a número para poder multiplicar
    UpdateIf(
        ColPresupuestoItems,
        Item = ThisItem.Item,
@@ -152,6 +184,7 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 
 3. **Label Total General**
    ```javascript
+   // Sum(coleccion, columna) suma una columna numérica de todas las filas; Text() la formatea como moneda
    "Total: $" & Text(Sum(ColPresupuestoItems, Total), "$#,##0.00")
    ```
 
@@ -169,7 +202,7 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
    If(Screen.Width < 768, Screen.Width - 20, Screen.Width * 0.6)
    ```
 
-#### 💼 Caso Real de Negocio
+### 💼 Caso Real de Negocio
 
 **Empresa:** Hotel Boutique Terramar — 5 sedes en Colombia, 90 empleados operativos  
 **Problema:** El control de visitas a oficinas administrativas era un cuaderno manual. Sin trazabilidad de quién ingresó, a qué hora salió, ni a quién visitó. En una auditoría de seguridad, detectaron que personas no autorizadas habían accedido a zonas restringidas sin registro.  
@@ -189,7 +222,7 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 - Tiempo de implementación: 2 semanas (1 desarrollador junior Power Platform)
 - Costo: $0 adicional — incluido en licencias Microsoft 365 ya existentes
 
-#### ✅ Buenas Prácticas
+### ✅ Buenas Prácticas
 
 **Desarrollo**:
 
@@ -218,7 +251,7 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 - Filtrar datos según User() actual
 - Usar roles de Dataverse, no lógica en app
 
-#### ⚠️ Errores Comunes
+### ⚠️ Errores Comunes
 
 1. **Error**: Gallery no muestra datos o solo 500 registros
     - **Causa**: Función no delegable o limit implícito
@@ -245,7 +278,7 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
     - **Causa**: Queries pesadas en OnStart o OnVisible sin caché
     - **Solución**: Cargar datos críticos en OnStart, lazy load el resto
 
-#### 🧪 Criterios de Validación
+### 🧪 Criterios de Validación
 - [ ] App con mínimo 3 screens conectadas con navegación funcional
 - [ ] Gallery mostrando datos de Dataverse con búsqueda/filtros
 - [ ] Form para crear y editar registros operativo

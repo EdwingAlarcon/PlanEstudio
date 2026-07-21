@@ -213,7 +213,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
 
         {/* Footer version tag */}
         <div className="px-4 py-3 border-t shrink-0">
-          <p className="text-[10px] text-muted-foreground">PL-900 · PL-200 · PL-400 · Arquitectura · IA</p>
+          <p className="text-[10px] text-muted-foreground">PL-900 · PL-200 · PL-400 · Arquitectura · IA · D365</p>
         </div>
       </aside>
     </>

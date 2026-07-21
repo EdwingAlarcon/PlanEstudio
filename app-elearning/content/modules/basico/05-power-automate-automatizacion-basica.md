@@ -8,10 +8,10 @@ slug: "power-automate-automatizacion-basica"
 ---
 *Duración: 2-3 semanas*
 
-#### 🎯 Objetivo
+### 🎯 Objetivo
 Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 
-#### 📖 Conceptos Clave
+### 📖 Conceptos Clave
 - **Tipos de flujos**: Cloud (automated, instant, scheduled), Desktop, Business Process
 - **Triggers**: When item created/modified, recurrence, manual, HTTP request
 - **Actions**: CRUD operations, notifications, approvals, HTTP calls
@@ -23,7 +23,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 - **Concurrency**: Serial vs parallel execution
 - **Scopes**: Agrupar acciones para manejo de errores
 
-#### 👨‍💻 Actividades Prácticas
+### 👨‍💻 Actividades Prácticas
 
 ##### Práctica 5.1: Flujo Automated - Notificación de Solicitudes
 
@@ -314,7 +314,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
     - Desktop flow: Importar Solicitudes desde Excel
     - Run mode: Attended / Unattended (con VM)
 
-#### 💼 Caso Real de Negocio
+### 💼 Caso Real de Negocio
 
 **Escenario Completo**: Automatización de Onboarding de Empleados
 
@@ -348,7 +348,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 - Eliminación errores manuales en creación cuentas
 - Visibilidad completa del proceso para RRHH
 
-#### ✅ Buenas Prácticas
+### ✅ Buenas Prácticas
 
 **Diseño de flujos**:
 
@@ -385,7 +385,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 - Notificaciones proactivas de fallos
 - Timeout adecuados (no dejar defaults de 1 hora)
 
-#### ⚠️ Errores Comunes
+### ⚠️ Errores Comunes
 
 1. **Error**: Flujo falla con "Item not found"
     - **Causa**: Race condition o registro eliminado entre trigger y acción
@@ -411,7 +411,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
     - **Causa**: Quotes incorrectas o funciones no existentes
     - **Solución**: Validar en Expression editor, consultar documentación
 
-#### 🧪 Criterios de Validación
+### 🧪 Criterios de Validación
 - [ ] 3+ flujos cloud funcionales (automated, scheduled, instant)
 - [ ] 1 flujo con aprobaciones implementado y probado
 - [ ] Uso correcto de Apply to each con transformación de datos

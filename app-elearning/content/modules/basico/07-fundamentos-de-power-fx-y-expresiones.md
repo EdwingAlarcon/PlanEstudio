@@ -8,10 +8,10 @@ slug: "fundamentos-de-power-fx-y-expresiones"
 ---
 *Duración: 1-2 semanas*
 
-#### 🎯 Objetivo
+### 🎯 Objetivo
 Dominar el lenguaje de fórmulas Power Fx para lógica avanzada en Canvas Apps.
 
-#### 📖 Conceptos Clave
+### 📖 Conceptos Clave
 - **Sintaxis**: Funciones, operadores, referencias
 - **Tipos de datos**: Text, Number, Boolean, Date, Table, Record
 - **Funciones de tablas**: Filter, Sort, Search, Lookup, AddColumns
@@ -25,7 +25,7 @@ Dominar el lenguaje de fórmulas Power Fx para lógica avanzada en Canvas Apps.
 - **Comportamiento (Behavior)**: OnSelect, OnChange, OnVisible
 - **Patrones**: Context variables, global variables, collections
 
-#### 👨‍💻 Actividades Prácticas
+### 👨‍💻 Actividades Prácticas
 
 ##### Práctica 7.1: Funciones de Tablas y Filtrado
 
@@ -260,7 +260,7 @@ Filter(
 )
 ```
 
-#### 💼 Caso Real de Negocio
+### 💼 Caso Real de Negocio
 
 **Empresa:** Distribuidora Farmacéutica MediSupply — 8,000 SKUs, 3 bodegas  
 **Problema:** Los analistas de inventario calculaban manualmente en Excel cuándo pedir cada producto: promedio de consumo, días de stock restante, cantidad mínima de pedido. El proceso tomaba 4 horas diarias para 8,000 SKUs. Errores frecuentes generaban quiebres de stock en productos críticos y sobrestock en productos de baja rotación.
@@ -278,7 +278,7 @@ Filter(
 - Sobrestock: reducción del 38% (mejor planificación de cantidades de pedido)
 - Impacto económico: ahorro estimado de $180,000 USD anuales en costos de urgencia y pérdidas por vencimiento
 
-#### ✅ Buenas Prácticas
+### ✅ Buenas Prácticas
 
 **Sintaxis y Legibilidad**:
 
@@ -307,7 +307,7 @@ Filter(
 - Monitor para ver network calls y performance
 - App formulas > Variables para inspeccionar contexto
 
-#### ⚠️ Errores Comunes
+### ⚠️ Errores Comunes
 
 1. **Error**: Fórmula devuelve Blank inesperadamente
     - **Causa**: Lookup no encuentra registro o división por 0
@@ -333,7 +333,7 @@ Filter(
     - **Causa**: Asumir que funciona con >500 registros
     - **Solución**: NUNCA ignorar warnings de delegación; refactorizar o usar Collections
 
-#### 🧪 Criterios de Validación
+### 🧪 Criterios de Validación
 - [ ] 10+ fórmulas complejas implementadas en Canvas App
 - [ ] Uso correcto de Filter, LookUp, AddColumns, ForAll
 - [ ] Collection con operaciones CRUD funcional
