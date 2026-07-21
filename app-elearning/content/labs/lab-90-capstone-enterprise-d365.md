@@ -19,6 +19,10 @@ prerequisites:
 Crear una propuesta enterprise integrada de Dynamics 365 CE + F&O con arquitectura, roadmap,
 matrices, UAT, licencias, riesgos y evidencias de portafolio.
 
+Este capstone no debe copiar entregables de los Labs 81-89. Debe integrarlos en una propuesta
+ejecutiva defendible: decisiones, trade-offs, dependencias, secuencia de implantación y evidencia
+de portafolio. Las matrices detalladas viven en los labs previos; aquí se resumen y se conectan.
+
 ## Escenario de negocio
 
 SIT quiere integrar venta consultiva, soporte premium, contact center, mantenimiento preventivo,
@@ -58,6 +62,12 @@ Define fases, dependencias de tenant/licencia, criterio de salida y riesgos.
 
 Diseña 10 casos UAT y una lista de evidencias para entrevista laboral.
 
+### Paso 7 — Registro de decisiones integradas
+
+Construye un decision log con al menos 8 decisiones: producto responsable, razón, alternativa
+descartada, riesgo aceptado, dependencia de licencia/tenant y evidencia que lo sustenta en los
+Labs 81-89. Este decision log es el puente entre los labs especializados y la propuesta enterprise.
+
 ## Validaciones
 
 - [ ] Arquitectura cubre CE, Field Service, Customer Insights y F&O.
@@ -66,6 +76,7 @@ Diseña 10 casos UAT y una lista de evidencias para entrevista laboral.
 - [ ] Roadmap separa fases y dependencias reales.
 - [ ] UAT cubre procesos end-to-end.
 - [ ] Cada capacidad declara estado: Simulado, Sandbox real o Productivo controlado.
+- [ ] El decision log conecta decisiones con evidencias de los Labs 81-89.
 
 ## Evidencia esperada
 
@@ -75,6 +86,7 @@ Diseña 10 casos UAT y una lista de evidencias para entrevista laboral.
 - Roadmap con licencias y dependencias.
 - Casos UAT.
 - Resumen ejecutivo de 1 página.
+- Decision log integrado con referencias a evidencias previas.
 
 ## Competencias desarrolladas
 

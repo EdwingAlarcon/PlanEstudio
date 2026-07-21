@@ -26,6 +26,14 @@ híbrida ERP+CRM): mientras el Lab 64 produce una recomendación para un comité
 laboratorio produce el diseño técnico de integración que un arquitecto entregaría al equipo de
 implementación.
 
+## Diferencia con el Lab 88
+
+Este lab documenta la **arquitectura técnica base** de integración CE + F&O: diagrama, ownership,
+dual-write, virtual tables, conflictos y ADR. El Lab 88 se enfoca en la **operación avanzada de la
+integración**: matriz extendida de ownership, monitoreo, reconciliación, owner de errores,
+rollback y controles de soporte. Si completas ambos, no dupliques el diagrama base; en el Lab 88
+parte de esta arquitectura y demuestra cómo se gobierna en operación.
+
 ## Escenario de negocio
 
 **Empresa ficticia:** Manufacturas del Pacífico S.A. (mismo escenario del Lab 64 y el Lab 69).

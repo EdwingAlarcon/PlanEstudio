@@ -18,6 +18,10 @@ prerequisites:
 Diseñar un modelo de soporte con entitlements, SLA, colas, routing y escalamiento. La configuración
 real de temporizadores, SLA y routing requiere ambiente Dynamics 365 Customer Service.
 
+Este lab **no repite** el caso end-to-end del Lab 68. El Lab 68 valida un ciclo concreto
+case-to-resolution; este lab define la política operacional reusable para muchos casos, clientes,
+planes y excepciones.
+
 ## Escenario de negocio
 
 SIT ofrece soporte estándar y premium. Los clientes premium tienen respuesta inicial de 1 hora y
@@ -51,12 +55,19 @@ Diseña reglas por cliente premium, producto y severidad.
 
 Define 6 casos UAT: 3 positivos y 3 negativos, incluyendo pausa/reanudación y breach.
 
+### Paso 6 — Política operacional reusable
+
+Documenta qué reglas se aplican por defecto y qué excepciones requieren aprobación: cambio manual
+de prioridad, override de SLA, consumo de entitlement fuera de vigencia, reasignacion a cola VIP y
+reapertura de caso resuelto. Para cada excepción indica owner de aprobación y evidencia.
+
 ## Validaciones
 
 - [ ] Hay entitlements con cobertura y consumo claros.
 - [ ] SLA incluye calendario, pausa, warning y failure.
 - [ ] Routing asigna casos a cola correcta.
 - [ ] UAT prueba incumplimientos, no solo casos exitosos.
+- [ ] Las excepciones operativas tienen owner y evidencia de aprobación.
 - [ ] El estado de ejecución está marcado como Simulado, Sandbox real o Productivo controlado.
 
 ## Evidencia esperada
@@ -65,6 +76,7 @@ Define 6 casos UAT: 3 positivos y 3 negativos, incluyendo pausa/reanudación y b
 - Matriz SLA.
 - Reglas de routing.
 - Casos UAT.
+- Política de excepciones operativas.
 
 ## Competencias desarrolladas
 

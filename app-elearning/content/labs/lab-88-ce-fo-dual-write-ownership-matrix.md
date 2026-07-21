@@ -18,6 +18,10 @@ prerequisites:
 Construir una matriz de ownership para integración CE + F&O y decidir patrón por entidad. La
 configuración real de dual-write requiere entornos Dataverse/F&O conectados y permisos.
 
+Este lab no repite el diseño técnico base del Lab 70. Parte de una arquitectura ya definida y se
+centra en operar la integración: ownership por campo, excepciones, monitoreo, reconciliación,
+rollback y soporte cuando dual-write no se comporta como se esperaba.
+
 ## Escenario de negocio
 
 SIT usa Sales para oportunidades y F&O para clientes financieros, inventario, pedidos y facturas.
@@ -36,7 +40,9 @@ Incluye Account/Customer, Product, Sales Order, Invoice e Inventory.
 
 ### Paso 2 — Ownership
 
-Define dueño, consumidor, campos editables y regla de conflicto.
+Define dueño, consumidor, campos editables, campos solo lectura, regla de conflicto y owner de
+aprobación para cambios de ownership. Incluye al menos un campo que sea visible en Sales pero
+editable solo en F&O.
 
 ### Paso 3 — Patrón
 
@@ -46,12 +52,22 @@ Elige dual-write, DMF, virtual table o integración custom por entidad.
 
 Diseña monitoreo, reconciliación, owner de errores y rollback.
 
+Incluye un runbook de incidentes con severidad, tiempo objetivo de respuesta, responsable
+funcional, responsable técnico y criterio para pausar temporalmente un mapa de dual-write.
+
+### Paso 5 — Reconciliación mensual
+
+Diseña una reconciliación mensual entre CE y F&O para Customers, Products, Sales Orders e
+Invoices: conteo esperado, campos críticos a comparar, tolerancia aceptada y acción correctiva si
+hay diferencia.
+
 ## Validaciones
 
 - [ ] Cada entidad tiene dueño y consumidor.
 - [ ] Patrón elegido está justificado.
 - [ ] Hay regla de conflicto.
 - [ ] Hay controles operativos.
+- [ ] Existe runbook de incidente y reconciliación mensual por entidad crítica.
 - [ ] El estado de ejecución está marcado como Simulado, Sandbox real o Productivo controlado.
 
 ## Evidencia esperada
@@ -59,6 +75,7 @@ Diseña monitoreo, reconciliación, owner de errores y rollback.
 - Matriz ownership.
 - Matriz patrón de integración.
 - Plan de monitoreo/reconciliación.
+- Runbook de soporte para fallas de dual-write.
 
 ## Competencias desarrolladas
 

@@ -38,6 +38,14 @@ Actúas como **consultor funcional de Customer Service** responsable del diseño
 ciclo de vida del caso — no escribes código; documentas configuración, decisiones y evidencia
 que un equipo de implementación podría ejecutar.
 
+## Diferencia con el Lab 82
+
+Este laboratorio prueba el **ciclo completo de un caso individual**: creación, cola, SLA,
+escalamiento, Knowledge Article, autoservicio y UAT funcional. El Lab 82 se enfoca en el **modelo
+operativo reusable**: catálogo de casos, entitlements por plan, matriz SLA, routing por reglas y
+pruebas positivas/negativas a nivel de soporte enterprise. Si haces ambos, evita copiar matrices:
+usa este lab para evidenciar el caso end-to-end y el Lab 82 para definir la política reusable.
+
 ## Prerrequisitos
 
 - Entender la diferencia entre `Case`, `Queue`, `Entitlement` y `SLA KPI`.

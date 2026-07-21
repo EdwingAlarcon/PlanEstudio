@@ -41,6 +41,10 @@ oportunidad ni cuánto pipeline ponderado existe para el próximo trimestre.
 ## Alcance del proyecto
 
 Configurar el proceso lead-to-cash con datos de prueba reales, no solo diseñarlo en un documento.
+Este lab cubre el **flujo transaccional base** de Sales. Si ya completaste o vas a completar el
+Lab 81, no repitas aquí forecast avanzado, cuotas ni pipeline review ejecutivo: deja esos temas
+para el Lab 81 y usa este laboratorio para demostrar que el dato comercial nace bien desde Lead,
+Opportunity, Quote y Order.
 
 Incluye:
 
@@ -57,6 +61,8 @@ Fuera de alcance:
 - Facturación real, cálculo de impuestos o descuento de inventario (eso vive en ERP/F&O, no en
   Dynamics 365 Sales — ver Módulo 34).
 - Sales Accelerator y Pipeline Intelligence (mencionar como reto adicional, no obligatorio).
+- Forecast categories, cuotas por vendedor, gap contra objetivo y governance de pipeline. Esos
+  entregables pertenecen al Lab 81.
 
 ## Prerrequisitos
 

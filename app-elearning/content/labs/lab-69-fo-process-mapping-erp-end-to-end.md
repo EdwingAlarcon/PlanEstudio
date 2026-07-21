@@ -24,6 +24,14 @@ ambos.
 Este laboratorio es de **diseño funcional por proceso**, no de configuración de un tenant F&O real
 — refuerza el vocabulario y el razonamiento de proceso del Módulo 59 con datos concretos.
 
+## Diferencia con el Lab 89
+
+Este lab construye el **mapa fundacional** de cinco procesos ERP con pasos, actores y sistema
+responsable. El Lab 89 parte de ese mapa y sube el nivel: frontera CE/F&O, clasificación de datos
+maestros/transaccionales y riesgos de sobrepersonalización. No repitas en el Lab 89 las mismas
+secuencias paso a paso; usa este laboratorio como baseline y reserva el análisis arquitectónico
+para el avanzado.
+
 ## Escenario de negocio
 
 **Empresa ficticia:** Manufacturas del Pacífico S.A., fabricante mediano de empaques industriales

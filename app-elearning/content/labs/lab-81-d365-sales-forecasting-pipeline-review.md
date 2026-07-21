@@ -19,6 +19,10 @@ Diseñar una revisión avanzada de pipeline y forecast para un equipo B2B usando
 forecast categories, cuotas, riesgos y acciones de seguimiento. La ejecución visual de forecasting
 requiere tenant con Dynamics 365 Sales; sin tenant, el entregable se completa como diseño y matriz.
 
+Este lab **no repite** el flujo Lead-to-Cash del Lab 66. Asume que Lead, Opportunity, productos,
+Quote y Order ya existen o fueron definidos allí. Aquí evalúas si el pipeline es confiable para
+dirección comercial: forecast, cuota, gap, riesgos y cadencia de revisión.
+
 ## Escenario de negocio
 
 SIT vende servicios administrados a empresas medianas. Dirección necesita saber si el trimestre se
@@ -39,7 +43,10 @@ configurable, marca la entrega como **Simulado**.
 
 ### Paso 1 — Modelo de etapas
 
-Define 5 etapas comerciales con criterios de entrada/salida y campos obligatorios.
+Define 5 etapas comerciales con criterios de entrada/salida y campos obligatorios, pero enfocadas
+en calidad de forecast: qué información debe existir para pasar de Pipeline a Best Case,
+Committed y Closed/Won. No vuelvas a documentar conversión Lead -> Opportunity ni Quote -> Order,
+salvo como referencia al Lab 66.
 
 ### Paso 2 — Datos de pipeline
 
@@ -54,10 +61,20 @@ Agrupa por vendedor y periodo: cuota, pipeline, best case, committed, won y gap.
 
 Prepara una agenda de 30 minutos con preguntas por oportunidad riesgosa y decisión esperada.
 
+Incluye una sección de **pipeline hygiene** con reglas para oportunidades sin next step, cierre
+estimado vencido, probabilidad manual incoherente con etapa, descuentos fuera de política y
+oportunidades infladas para cubrir cuota.
+
 ### Paso 5 — Requisitos de tenant/licencia
 
 Lista qué se necesita para implementar: licencias Sales, jerarquía comercial, forecast configurado,
 seguridad, productos/precios y datos históricos.
+
+### Paso 6 — Acciones ejecutivas post-review
+
+Para las 3 oportunidades de mayor riesgo, define la acción posterior a la reunión: mantener,
+degradar de forecast category, escalar a gerente, pedir apoyo técnico o sacar del commit. Cada
+acción debe tener owner, fecha compromiso y evidencia esperada antes del siguiente review.
 
 ## Validaciones
 
@@ -65,6 +82,7 @@ seguridad, productos/precios y datos históricos.
 - [ ] La matriz muestra gap contra cuota.
 - [ ] Se identifican al menos 3 riesgos comerciales con acción.
 - [ ] Se documentan dependencias de tenant/licencia.
+- [ ] Las acciones post-review tienen owner, fecha y decisión de forecast.
 - [ ] El estado de ejecución está marcado como Simulado, Sandbox real o Productivo controlado.
 
 ## Evidencia esperada
@@ -73,6 +91,7 @@ seguridad, productos/precios y datos históricos.
 - Matriz de forecast por vendedor.
 - Agenda de pipeline review.
 - Lista de dependencias reales.
+- Registro de acciones post-review por oportunidad riesgosa.
 
 ## Competencias desarrolladas
 

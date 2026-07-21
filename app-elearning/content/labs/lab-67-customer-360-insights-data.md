@@ -44,6 +44,10 @@ decidir si invierte en migrar la hoja de soporte a Customer Service o no.
 ## Alcance del proyecto
 
 Diseñar la unificación y activación, no configurarla en un producto real.
+Este lab es el **diseño base de Customer 360**: fuentes, matching, medidas y un segmento activable
+con datos pequeños. El Lab 85 retoma el mismo dominio, pero exige gobierno ampliado, frecuencia de
+actualización, reglas exactas/difusas y criterios de ejecución en tenant. No dupliques el Lab 85
+aquí; entrega una especificación mínima pero trazable que sirva como insumo.
 
 Incluye:
 
@@ -57,6 +61,8 @@ Fuera de alcance:
 
 - Configuración real en Customer Insights - Data.
 - El journey en sí (eso es el Lab 58 — este lab entrega el segmento que Journeys consumiría).
+- Catálogo ampliado de gobierno, retención, base legal y readiness de tenant. Eso se evalúa en el
+  Lab 85.
 
 ## Prerrequisitos
 
