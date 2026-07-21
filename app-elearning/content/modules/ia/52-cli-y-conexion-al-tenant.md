@@ -48,6 +48,16 @@ Configurar un entorno de desarrollo local para Power Platform, entender la difer
    ```
    Este comando muestra la URL del entorno, el ID de la organización y el usuario autenticado — es tu "doble verificación" antes de cualquier operación.
 7. Crea en tu repo local una carpeta de estructura básica (`solutions/`, `src/`, `docs/`) y un archivo `.env.example` (sin valores reales) documentando qué variables de entorno usará tu proyecto para Dev/Test/Prod.
+8. **Prompt seguro para pedir ayuda de diagnóstico** (nunca pegues el output real de `pac auth list` ni URLs reales de tu tenant si son confidenciales):
+   ```
+   Rol: ayudas a diagnosticar problemas de conexión de Power Platform CLI.
+   Contexto: ejecuté `pac auth create --environment {{URL_ENTORNO_PLACEHOLDER}}` y me da un error de
+   autenticación. Uso Node {{versión}} y pac versión {{versión}}.
+   Tarea: dame los 3 diagnósticos más probables en orden de frecuencia y qué comando ejecutaría para
+   confirmar cada uno.
+   Restricción: no necesito pegar mi URL real ni credenciales — usa el placeholder tal cual.
+   ```
+   *Evalúa:* ¿la IA sugiere verificar la versión de `pac` y el tipo de entorno antes de asumir un problema de credenciales? ¿alguna sugerencia asume un comando o flag que no existe en la versión actual de `pac help`?
 
 ### 💼 Casos Reales de Negocio
 Un consultor de Servicios Integrados Tecnológicos S.A. (SIT) atendía tres clientes distintos en la misma semana y tenía perfiles de `pac auth` guardados para cada uno. Un viernes, sin ejecutar `pac org who` antes de un `pac solution export`, exportó y sobrescribió sin querer una solución del Cliente B pensando que estaba conectado al entorno de pruebas del Cliente A — el perfil activo había quedado seleccionado de la sesión anterior. Ningún dato de producción se perdió porque no era el ambiente productivo, pero el incidente generó confusión y retrabajo. Desde entonces, el equipo adoptó como regla obligatoria: **ejecutar `pac org who` antes de cualquier comando que exporte, importe o modifique algo**, y nombrar los perfiles de forma explícita por cliente y entorno (ej. `sit-cliente-a-dev`, `sit-cliente-a-prod`).
@@ -72,3 +82,5 @@ Un consultor de Servicios Integrados Tecnológicos S.A. (SIT) atendía tres clie
 - [ ] Listé mis perfiles con `pac auth list` y seleccioné uno explícitamente con `pac auth select`
 - [ ] Verifiqué la organización activa con `pac org who` antes de continuar
 - [ ] Explico la diferencia entre tenant, environment y organización con mis propias palabras
+- [ ] Uso el prompt de diagnóstico con placeholders, sin pegar nunca URLs o credenciales reales, y verifico cada sugerencia contra `pac help` antes de ejecutarla
+- [ ] Relaciono este módulo con el Lab 52 (CLI y conexión al tenant) como práctica hands-on directa

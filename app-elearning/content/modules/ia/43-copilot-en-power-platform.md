@@ -17,10 +17,21 @@ Usar las capacidades de Copilot integradas en Power Apps, Power Automate y Copil
 - **Límites de generación:** Copilot en Power Apps/Automate es un punto de partida, no una solución final — genera un primer boceto funcional que casi siempre requiere ajustes de UX, manejo de errores y performance.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
-1. En Power Apps Studio, usa "Crear con Copilot" describiendo una app simple de seguimiento de solicitudes (título, estado, fecha) y observa qué estructura de datos propone.
-2. Pide a Copilot dentro del editor de fórmulas que genere una fórmula Power Fx para filtrar una galería por el estado "Pendiente" y compárala con cómo la escribirías manualmente.
-3. En Power Automate, crea un flujo nuevo usando "Describe it to design it" pidiendo "cuando se cree un registro en una tabla, enviar un correo al responsable" y revisa las acciones que propuso.
+1. En Power Apps Studio, usa "Crear con Copilot" con este prompt completo y observa qué estructura de datos propone:
+   ```
+   Crea una app para dar seguimiento a solicitudes de mantenimiento de activos, con título, estado
+   (Nueva/En proceso/Cerrada), prioridad y fecha requerida.
+   ```
+   *Evalúa:* ¿las columnas propuestas tienen el tipo de dato correcto (Choice para estado/prioridad, no texto libre)? ¿la app generada delega correctamente sobre Dataverse (Módulo 7) o solo "se ve bien" con pocos registros?
+2. Pide a Copilot dentro del editor de fórmulas: `Filtra esta galería para mostrar solo los registros donde Estado sea "Pendiente"` y compara la fórmula generada con cómo la escribirías manualmente usando `Filter()`.
+3. En Power Automate, crea un flujo nuevo usando "Describe it to design it" con este prompt:
+   ```
+   Cuando se cree un registro en la tabla Solicitudes de Mantenimiento, envía un correo al usuario del
+   campo "Asignado a" con el título y la prioridad de la solicitud.
+   ```
+   Revisa las acciones que propuso: ¿usó el trigger correcto (`When a row is added`)? ¿el correo generado incluye manejo de error si "Asignado a" está vacío?
 4. En el Power Platform Admin Center, ubica la configuración de Copilot a nivel de entorno y documenta qué opciones de gobernanza de datos existen.
+5. **Ejemplo de mejora iterativa:** prompt inicial débil `"hazme una app de solicitudes"` (sin campos, sin estados) → problema: Copilot inventa una estructura genérica que no calza con tu proceso real → prompt mejorado: el del paso 1, con campos y valores de choice explícitos → resultado mejorado: estructura de datos alineada al proceso real desde el primer intento.
 
 ### 💼 Casos Reales de Negocio
 En SIT, un Power Platform Admin activó Copilot en Power Apps para todo el tenant sin revisar antes qué entornos contenían datos de clientes bajo NDA. Un maker generó una app describiendo el proceso de negocio, y la sugerencia de Copilot incluyó nombres reales de columnas de una tabla confidencial visibles en la fórmula generada, expuestos luego en una captura de pantalla compartida externamente. La corrección: habilitar Copilot entorno por entorno, revisando primero el Data Loss Prevention (DLP) policy y la clasificación de datos de cada entorno.
@@ -38,6 +49,8 @@ En SIT, un Power Platform Admin activó Copilot en Power Apps para todo el tenan
 | Confundir Copilot Studio (agentes para usuarios finales) con Copilot en Power Apps/Automate (asistente para makers) | Uso indistinto del término "Copilot" en el ecosistema | Distinguir explícitamente el rol: asistente de autor vs agente conversacional |
 
 ### 🧪 Criterios de Validación
-- [ ] Genero una app Canvas simple usando Copilot y documento qué ajustes manuales necesitó
-- [ ] Genero un flujo con "Describe it to design it" y explico cada acción propuesta
+- [ ] Genero una app Canvas simple usando el prompt completo del paso 1 y documento qué ajustes manuales necesitó
+- [ ] Genero un flujo con "Describe it to design it" y explico cada acción propuesta, incluyendo si maneja el caso de campo vacío
 - [ ] Ubico y documento la configuración de gobernanza de Copilot en el Admin Center
+- [ ] Comparé un prompt vago ("hazme una app de solicitudes") contra uno específico y documenté la diferencia de calidad del resultado
+- [ ] Relaciono este módulo con cualquier lab de Nivel Básico donde pueda usar Copilot para acelerar el primer boceto de una Canvas App, revisando siempre delegación y UX antes de aceptarlo

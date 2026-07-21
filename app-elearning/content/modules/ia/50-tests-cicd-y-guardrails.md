@@ -17,10 +17,20 @@ Exigir tests automatizados y gates de CI/CD para cualquier código generado con 
 - **Cobertura de tests como métrica de confianza:** un cambio que reduce la cobertura de tests existente es una señal de alerta, generado por IA o no — el umbral de cobertura configurado en el proyecto (80% en `vitest.config.ts`) aplica igual a código asistido por IA.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
-1. Toma un cambio generado por un agente en un módulo anterior (44 o 45) y escribe al menos un test que valide su comportamiento esperado, si no lo tiene ya.
-2. Ejecuta `npm run lint && npx tsc --noEmit && npm run test:coverage` sobre ese cambio y confirma que pasa los 3 gates antes de considerarlo terminado.
-3. Identifica en `.github/workflows/ci.yml` de este proyecto cuáles son los gates obligatorios antes de un deploy y explica con tus palabras qué atraparía cada uno si un cambio generado por IA introdujera un error.
-4. Diseña (en texto, sin implementarlo) cómo desplegarías detrás de un feature flag un cambio de alto riesgo generado con asistencia de IA en un flujo de aprobación real.
+1. Prompt para generar tests de un cambio ya implementado (nunca el único paso, siempre revisado):
+   ```
+   Rol: escribes tests unitarios con Vitest para este proyecto.
+   Contexto: la función calculateLevelProgress en src/lib/progress.ts recibe {{descripción de
+   parámetros}} y retorna {{descripción del resultado}}.
+   Tarea: genera 3 tests: el caso normal, un caso límite (0 módulos completados) y un caso de entrada
+   inválida. Sigue el patrón de los tests existentes en progress.test.ts.
+   Formato de salida: bloque de código de test listo para pegar en el archivo de test existente.
+   ```
+   *Evalúa:* ¿los tests generados realmente fallan si rompes la función a propósito (mutation testing manual)? Un test que siempre pasa, pase lo que pase, no vale nada.
+2. Toma un cambio generado por un agente en un módulo anterior (44 o 45) y usa el prompt anterior para escribir al menos un test que valide su comportamiento esperado, si no lo tiene ya.
+3. Ejecuta `npm run lint && npx tsc --noEmit && npm run test:coverage` sobre ese cambio y confirma que pasa los 3 gates antes de considerarlo terminado.
+4. Identifica en `.github/workflows/ci.yml` de este proyecto cuáles son los gates obligatorios antes de un deploy y explica con tus palabras qué atraparía cada uno si un cambio generado por IA introdujera un error.
+5. Diseña (en texto, sin implementarlo) cómo desplegarías detrás de un feature flag un cambio de alto riesgo generado con asistencia de IA en un flujo de aprobación real.
 
 ### 💼 Casos Reales de Negocio
 Un equipo de SIT fusionó directamente a producción un cambio generado por un agente que "pasaba visualmente bien" en una prueba manual, sin agregar tests ni pasar por el pipeline de CI completo (lo hicieron manualmente fuera del flujo normal, saltándose el pipeline "para ir rápido"). El cambio introdujo una regresión en un cálculo de descuentos que no se detectó hasta que un cliente reportó una factura incorrecta. La política adoptada después: ningún cambio, generado por IA o no, se fusiona sin pasar por el pipeline de CI completo — sin excepciones por "urgencia".
@@ -38,6 +48,8 @@ Un equipo de SIT fusionó directamente a producción un cambio generado por un a
 | Desplegar directamente a producción un cambio de alto riesgo generado por IA | No usar feature flags ni despliegue progresivo | Usar flags o rollout gradual en cambios de alto riesgo, generados por IA o no |
 
 ### 🧪 Criterios de Validación
+- [ ] Uso el prompt de generación de tests y verifico que el test realmente falla si rompo la función a propósito
 - [ ] Agrego un test de validación a un cambio generado por IA de un módulo anterior
 - [ ] Confirmo que un cambio pasa los 3 gates locales (lint, typecheck, test:coverage) antes de darlo por terminado
 - [ ] Explico qué gate del pipeline de CI de este proyecto atraparía un error específico introducido por IA
+- [ ] Relaciono este módulo con cualquier lab donde genere tests o valide un entregable con el pipeline de CI antes de presentarlo

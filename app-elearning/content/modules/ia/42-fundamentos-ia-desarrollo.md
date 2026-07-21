@@ -17,10 +17,22 @@ Entender qué es un modelo de lenguaje (LLM) aplicado a generación de código, 
 - **Determinismo relativo:** la misma pregunta puede producir respuestas distintas en ejecuciones diferentes. Esto es aceptable para explorar ideas, pero exige revisión humana antes de aceptar cualquier cambio en código de producción.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
-1. Abre un editor con Copilot o Claude Code instalado y pide "generar una función de Power Fx que valide un email" — observa que la respuesta es plausible pero puede usar sintaxis de otro lenguaje si no se le da contexto de Power Fx.
-2. Repite la misma petición aclarando explícitamente "en Power Fx, para un control de texto en Canvas Apps" — compara la diferencia de precisión.
-3. Pide al modelo que genere una función que use un campo de una tabla de Dataverse que no existe en tu entorno (invéntalo) y observa cómo el modelo no te avisa que el campo es inventado — así se ve una alucinación en la práctica.
-4. Documenta en un párrafo la diferencia que observaste entre pedirle algo con contexto específico vs. sin contexto.
+1. **Prompt débil (sin contexto):**
+   ```
+   Genera una función que valide un email.
+   ```
+   *Problema detectado:* el modelo puede responder en JavaScript, Python o cualquier lenguaje — no sabe que necesitas Power Fx.
+2. **Prompt mejorado:**
+   ```
+   Rol: desarrollador Power Apps Canvas.
+   Contexto: tengo un control de texto llamado TextInputEmail en una pantalla de registro.
+   Tarea: escribe la fórmula Power Fx para la propiedad OnChange/Visible de un mensaje de error que
+   valide que TextInputEmail.Text tiene formato de email válido, usando IsMatch.
+   Formato de salida: solo la fórmula, con un comentario // explicando el patrón usado.
+   ```
+   *Resultado esperado:* una fórmula de una línea con `IsMatch(TextInputEmail.Text, "^[^@\s]+@[^@\s]+\.[^@\s]+$")` y su comentario. **Evalúa:** ¿la fórmula usa sintaxis real de Power Fx (no de otro lenguaje)? ¿el patrón de validación es razonable, no exageradamente estricto?
+3. Pide al modelo que genere una función que use un campo de una tabla de Dataverse que no existe en tu entorno (invéntalo, ej. `cr123_nivelfidelidad`) y observa cómo el modelo no te avisa que el campo es inventado — así se ve una alucinación en la práctica: código sintácticamente perfecto sobre un campo que no existe.
+4. Documenta en un párrafo la diferencia que observaste entre el prompt débil del paso 1 y el mejorado del paso 2, y qué haría un revisor humano distinto en cada caso antes de aceptar el resultado.
 
 ### 💼 Casos Reales de Negocio
 Un equipo de Servicios Integrados Tecnológicos S.A. (SIT) pidió a un desarrollador junior generar un plugin C# completo con Copilot Chat sin revisar el resultado. El código compiló y pasó el Solution Checker, pero llamaba a una API de Dataverse en modo síncrono dentro de un bucle, generando timeouts en producción con volúmenes reales. La causa no fue el modelo — fue no verificar el resultado contra las buenas prácticas de rendimiento ya conocidas por el equipo antes de este módulo.
@@ -39,5 +51,7 @@ Un equipo de Servicios Integrados Tecnológicos S.A. (SIT) pidió a un desarroll
 
 ### 🧪 Criterios de Validación
 - [ ] Explico la diferencia entre autocompletado, chat y agente con un ejemplo de cada uno
+- [ ] Comparé un prompt débil y uno mejorado para la misma tarea y documenté la diferencia de precisión
 - [ ] Identifico una alucinación de código provocada intencionalmente en la actividad práctica
 - [ ] Puedo enumerar 2 riesgos de aceptar código generado sin verificación
+- [ ] Relaciono este módulo con cualquier lab de Nivel Básico/Intermedio donde pueda usar IA para acelerar una fórmula Power Fx, revisando siempre el resultado contra el esquema real

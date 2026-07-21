@@ -17,10 +17,20 @@ Revisar con criterio un diff generado por IA — propio o de un compañero — i
 - **Checklist de revisión repetible:** tener una lista corta y consistente (alcance, efectos secundarios, seguridad, tests) evita que la revisión dependa del estado de ánimo o el tiempo disponible del revisor ese día.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
-1. Toma un diff generado por un agente de código en una tarea anterior de este nivel (Módulo 44 o 45) y revísalo con esta checklist: ¿toca solo lo pedido?, ¿tiene efectos secundarios?, ¿introduce algún secreto o permiso nuevo?, ¿tiene test que lo valide?
-2. Genera intencionalmente un diff con un cambio fuera de alcance (pide a un agente "arregla el bug X" sin acotar el archivo) y practica identificar qué parte del diff no correspondía a la tarea.
-3. Si tienes acceso a un revisor automático de PRs (ej. Copilot code review en GitHub), actívalo en un PR de prueba y compara sus observaciones contra tu propia revisión manual.
-4. Escribe la checklist de revisión que usarás de forma consistente en tus propios PRs de aquí en adelante.
+1. Prompt para pedirle a un asistente de IA que te ayude a revisar un diff propio (nunca como aprobación final, solo como apoyo):
+   ```
+   Actúa como revisor senior. Este es el diff de un cambio que debía "corregir la validación de fecha en
+   el formulario de solicitudes":
+   {{pega aquí el diff completo}}
+   Responde: (1) ¿el diff toca solo archivos relacionados con la tarea?, (2) ¿hay líneas eliminadas o
+   modificadas sin relación aparente con la tarea?, (3) ¿hay algo que parezca un secreto, credencial o
+   permiso nuevo?, (4) ¿el cambio tiene un test que lo valide?
+   Formato de salida: lista de hallazgos con severidad (bloqueante/advertencia/ok).
+   ```
+   *Evalúa:* el resumen de la IA es un punto de partida — confirma tú mismo cada hallazgo "bloqueante" leyendo el diff real antes de decidir.
+2. Genera intencionalmente un diff con un cambio fuera de alcance (pide a un agente "arregla el bug X" sin acotar el archivo) y practica identificar, sin ayuda de IA esta vez, qué parte del diff no correspondía a la tarea.
+3. Si tienes acceso a un revisor automático de PRs (ej. Copilot code review en GitHub), actívalo en un PR de prueba y compara sus observaciones contra tu propia revisión manual y contra el resultado del prompt del paso 1.
+4. Escribe la checklist de revisión que usarás de forma consistente en tus propios PRs de aquí en adelante — incluye el prompt del paso 1 como primer filtro, no como aprobación.
 
 ### 💼 Casos Reales de Negocio
 Un PR generado con ayuda de un agente en SIT resolvía correctamente el bug reportado (un cálculo incorrecto en un flujo), pero también eliminaba una validación de rango que existía por una razón de negocio no documentada en el código. El revisor humano aprobó el PR porque el bug reportado sí se resolvió y no notó la validación eliminada al no comparar el diff completo contra la intención original de cada línea. La regla adoptada: todo diff se revisa línea por línea contra "¿por qué cambió esto?", no solo contra "¿se resolvió el síntoma reportado?".
@@ -38,6 +48,8 @@ Un PR generado con ayuda de un agente en SIT resolvía correctamente el bug repo
 | No tener una checklist consistente de revisión | Revisar "a ojo" según el tiempo disponible ese día | Definir y aplicar siempre la misma checklist corta |
 
 ### 🧪 Criterios de Validación
-- [ ] Reviso un diff real usando la checklist de alcance/efectos secundarios/seguridad/tests
-- [ ] Identifico un cambio fuera de alcance en un diff generado intencionalmente con ese defecto
-- [ ] Documento mi propia checklist de revisión de PRs
+- [ ] Uso el prompt de revisión asistida sobre un diff real y verifico manualmente cada hallazgo "bloqueante"
+- [ ] Identifico un cambio fuera de alcance en un diff generado intencionalmente con ese defecto, sin ayuda de IA
+- [ ] Documento mi propia checklist de revisión de PRs, incluyendo el prompt de apoyo como primer filtro
+- [ ] Explico por qué un revisor automático (IA o herramienta) nunca reemplaza la aprobación humana final
+- [ ] Relaciono este módulo con la revisión de cualquier entregable de lab antes de presentarlo como evidencia de portafolio

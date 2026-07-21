@@ -18,9 +18,25 @@ Usar GitHub Copilot en VS Code (autocompletado, Copilot Chat y Copilot Edits) de
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 1. Abre un componente PCF existente del proyecto SIT y usa el autocompletado para escribir una función `updateView` — observa qué tan bien predice la firma del método al tener el archivo real como contexto.
-2. Abre Copilot Chat y pregunta "¿qué hace este componente PCF?" con el archivo abierto — evalúa si la explicación es correcta contra lo que tú ya sabes que hace.
-3. Usa Copilot Edits para pedir "agregar manejo de errores try/catch a este plugin C#" sobre un plugin ya existente, revisa el diff propuesto antes de aceptarlo.
-4. Crea un archivo `.github/copilot-instructions.md` con al menos 2 convenciones del proyecto (ej. prefijo de columnas, patrón de logging) y repite el paso 1 para comparar la mejora en la sugerencia.
+2. Abre Copilot Chat y usa este prompt con el archivo abierto:
+   ```
+   Explica qué hace este componente PCF en menos de 5 líneas: qué props/context recibe, qué renderiza,
+   y en qué evento actualiza su estado.
+   ```
+   Evalúa si la explicación es correcta contra lo que tú ya sabes que hace — una explicación plausible pero incorrecta sobre tu propio código es una alucinación difícil de detectar si no conoces el código de antemano.
+3. Usa Copilot Edits con este prompt sobre un plugin C# ya existente:
+   ```
+   Agrega manejo de errores try/catch a este plugin, capturando InvalidPluginExecutionException y
+   registrando el error con ITracingService antes de relanzarlo. No cambies la lógica de negocio existente.
+   ```
+   Revisa el diff propuesto línea por línea antes de aceptarlo — confirma que no tocó nada fuera del manejo de errores pedido.
+4. Crea un archivo `.github/copilot-instructions.md` con este contenido mínimo y repite el paso 1 para comparar la mejora en la sugerencia:
+   ```markdown
+   # Convenciones del proyecto SIT
+   - Prefijo de columnas Dataverse: `sit_`, nunca `new_`.
+   - Logging en plugins C#: usar siempre `ITracingService`, nunca `Console.WriteLine`.
+   - Componentes PCF: TypeScript estricto, sin `any` salvo justificación en comentario.
+   ```
 
 ### 💼 Casos Reales de Negocio
 Un desarrollador de SIT usó Copilot Chat para generar un plugin C# de validación de un campo de Dataverse sin tener abierto el archivo del plugin base del proyecto (que ya tenía un patrón establecido de logging con `ITracingService`). El código generado usó `Console.WriteLine`, que no funciona dentro de un plugin de Dataverse y no genera ningún log visible. El equipo perdió tiempo depurando en producción hasta notar que el patrón de logging del proyecto no se había seguido — la causa raíz fue no dar a Copilot el contexto del patrón ya establecido.
@@ -39,6 +55,7 @@ Un desarrollador de SIT usó Copilot Chat para generar un plugin C# de validaci�
 
 ### 🧪 Criterios de Validación
 - [ ] Genero un fragmento de código en un componente PCF real usando autocompletado y explico qué contexto ayudó a la precisión
-- [ ] Uso Copilot Chat para explicar un archivo existente y verifico la explicación contra mi propio conocimiento
-- [ ] Aplico un cambio con Copilot Edits revisando el diff antes de aceptarlo
-- [ ] Creo un `.github/copilot-instructions.md` con al menos 2 convenciones del proyecto
+- [ ] Uso el prompt de explicación de Copilot Chat y verifico la explicación contra mi propio conocimiento del archivo
+- [ ] Aplico el prompt de manejo de errores con Copilot Edits revisando el diff completo antes de aceptarlo
+- [ ] Creo un `.github/copilot-instructions.md` con al menos 2 convenciones del proyecto y confirmo que mejoró la sugerencia
+- [ ] Relaciono este módulo con el Lab 91 (Custom API/extensibilidad) o cualquier lab de desarrollo donde revise código generado antes de integrarlo

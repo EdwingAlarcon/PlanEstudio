@@ -17,10 +17,22 @@ Prevenir la fuga de secretos y datos sensibles hacia prompts o logs de herramien
 - **Logs y auditoría:** algunas herramientas registran qué se les pidió y qué devolvieron; esto puede ser deseable para auditoría interna, pero significa que un secreto pegado en un prompt persiste en esos logs también.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
-1. Revisa un prompt real que hayas usado en un módulo anterior de este nivel y verifica si incluye algún dato que en un proyecto real sería sensible (nombre de tabla real con datos de clientes, credencial, URL interna).
-2. Reescribe ese prompt reemplazando cualquier dato sensible por un equivalente ficticio que preserve la estructura (mismo tipo de campo, mismo formato) sin exponer información real.
-3. Ubica en la documentación de la herramienta de IA que usas (Copilot, Claude, etc.) su política de retención de datos y de qué región procesa las solicitudes.
-4. En el Power Platform Admin Center, revisa qué conectores/IA generativa están permitidos en un entorno de ejemplo vía DLP policy y documenta cómo restringirías uno adicional.
+1. **Prompt inseguro (nunca lo uses así):**
+   ```
+   Genera el código de conexión a Dataverse usando esta cadena:
+   Server=orgabc123.crm.dynamics.com;User ID=admin@sit.onmicrosoft.com;Password=Contraseña Real123!
+   ```
+   *Problema:* la credencial real queda en el historial de la herramienta y potencialmente en logs del proveedor.
+2. **Prompt seguro equivalente (con placeholders):**
+   ```
+   Genera el código de conexión a Dataverse usando client-credentials OAuth. Usa los placeholders
+   {{TENANT_ID}}, {{CLIENT_ID}} y {{CLIENT_SECRET}} — los valores reales viven en Environment
+   Variables/Key Vault, nunca en este prompt ni en el código generado.
+   ```
+   *Resultado esperado:* código con placeholders explícitos, sin ningún valor real. **Evalúa:** ¿el código generado deja claro dónde deben vivir los valores reales (no hardcodeados)?
+3. Revisa un prompt real que hayas usado en un módulo anterior de este nivel y verifica si incluye algún dato que en un proyecto real sería sensible (nombre de tabla real con datos de clientes, credencial, URL interna) — reescríbelo con placeholders equivalentes en estructura.
+4. Ubica en la documentación de la herramienta de IA que usas (Copilot, Claude, etc.) su política de retención de datos y de qué región procesa las solicitudes.
+5. En el Power Platform Admin Center, revisa qué conectores/IA generativa están permitidos en un entorno de ejemplo vía DLP policy y documenta cómo restringirías uno adicional.
 
 ### 💼 Casos Reales de Negocio
 Un desarrollador de SIT pegó una cadena de conexión completa a una base de datos de staging en un prompt para "que el modelo generara el código de conexión correcto", incluyendo usuario y contraseña reales. La credencial quedó en el historial de la herramienta usada. El incidente se resolvió rotando la credencial de inmediato y estableciendo la regla de equipo: ningún secreto real se pega en un prompt, siempre se usan placeholders (`{{CONNECTION_STRING}}`) y los valores reales viven únicamente en Environment Variables/Key Vault, nunca en texto plano en una conversación con IA.
@@ -38,6 +50,8 @@ Un desarrollador de SIT pegó una cadena de conexión completa a una base de dat
 | Asumir que todos los proveedores de IA cumplen automáticamente la política de residencia del tenant | No verificar la documentación del proveedor | Confirmar explícitamente dónde procesa datos el proveedor antes de usarlo con datos sensibles |
 
 ### 🧪 Criterios de Validación
+- [ ] Comparo un prompt inseguro (con credencial real) y su versión segura equivalente con placeholders
 - [ ] Identifico y corrijo un dato sensible en un prompt propio de un módulo anterior
 - [ ] Documento la política de retención/residencia de datos de al menos una herramienta de IA que uso
 - [ ] Reviso la configuración DLP de un entorno respecto a conectores/IA generativa
+- [ ] Relaciono este módulo con el Lab 91 o cualquier lab de integración/desarrollo donde use placeholders al pedir ayuda de IA sobre credenciales

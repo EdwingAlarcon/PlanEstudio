@@ -28,7 +28,17 @@ Aplicar el ciclo de vida de aplicaciones (ALM) de Power Platform — soluciones 
    ```bash
    pac solution unpack --zipfile ./exports/SITSolicitudesGastos.zip --folder ./solutions/SITSolicitudesGastos --packagetype Unmanaged
    ```
-3. Inspecciona la carpeta resultante (`Other/Solution.xml`, `Entities/`, `Workflows/`) y pide a un asistente de IA que te resuma qué componentes contiene la solución a partir de `Solution.xml`, sin pegar el archivo completo si es muy extenso — usa fragmentos relevantes.
+3. Inspecciona la carpeta resultante (`Other/Solution.xml`, `Entities/`, `Workflows/`) y usa este prompt para auditar el ALM de la solución:
+   ```
+   Rol: auditas soluciones Power Platform para revisión de ALM.
+   Contexto: este es un fragmento de Solution.xml de mi solución {{nombre}}:
+   {{pega aquí solo el fragmento relevante, nunca el archivo completo si es muy extenso}}
+   Tarea: identifica (1) qué componentes contiene, (2) si hay algo que parezca un valor hardcodeado de
+   entorno específico (URL, GUID de conexión) que debería ser variable de entorno o connection
+   reference, (3) qué falta para que esta solución sea segura de importar como managed en Test/Prod.
+   Formato de salida: lista de hallazgos con severidad.
+   ```
+   *Evalúa:* ¿la IA distinguió correctamente un GUID de referencia estructural (normal en Solution.xml) de un valor realmente hardcodeado de un entorno específico? Verifica manualmente cualquier hallazgo "bloqueante" contra el archivo real.
 4. Identifica en el proyecto todas las **connection references** y **variables de entorno** definidas, y documenta cuáles cambiarían de valor entre Dev, Test y Prod (ej. URL de un conector personalizado).
 5. Crea (en texto, sin ejecutarlo contra un entorno real de producción) el esqueleto de un archivo `deployment-settings.json` mapeando esas variables para un entorno de Test hipotético.
 6. Diseña conceptualmente los 3 pasos mínimos de un pipeline de GitHub Actions para este flujo: `pac solution unpack` (en push a Dev), `pac solution pack` + `pac solution import` (en un job manual o disparado por PR aprobado hacia Test).
@@ -53,7 +63,9 @@ El equipo de plataforma de SIT importaba soluciones directamente desde el entorn
 
 ### 🧪 Criterios de Validación
 - [ ] Exporté una solución unmanaged y la desempaqueté con `pac solution unpack` para versionarla en Git
+- [ ] Usé el prompt de auditoría de ALM sobre un fragmento de Solution.xml y verifiqué manualmente los hallazgos bloqueantes
 - [ ] Identifiqué las connection references y variables de entorno de una solución de práctica
 - [ ] Diseñé el esqueleto de un `deployment-settings.json` para un entorno de Test
 - [ ] Explico por qué Dev debe ser unmanaged y Test/Prod deben ser managed
 - [ ] Diseñé los pasos mínimos de un pipeline de GitHub Actions para export/unpack/pack/import
+- [ ] Relaciono este módulo con el Lab 19 (CI/CD Azure DevOps) y el Lab 53 (exportar y revisar solución con IA)

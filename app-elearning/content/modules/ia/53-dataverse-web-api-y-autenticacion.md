@@ -30,7 +30,17 @@ Entender cómo se conecta una aplicación o script externo a Dataverse/Dynamics 
    OData-MaxVersion: 4.0
    Accept: application/json
    ```
-5. Pide a un asistente de IA (Copilot/Claude Code) que te explique, en un entorno de prueba documentado con **placeholders**, el flujo completo de obtención de un token OAuth client-credentials para un service principal — verifica que la explicación no incluya nunca valores reales, solo la estructura de la petición.
+5. Prompt completo para pedir el flujo de autenticación con placeholders (nunca con valores reales):
+   ```
+   Rol: explicas autenticación OAuth 2.0 client-credentials para Dataverse Web API.
+   Contexto: tengo una app registration con Application (client) ID {{CLIENT_ID}}, Directory (tenant) ID
+   {{TENANT_ID}} y un client secret {{CLIENT_SECRET}} (todos placeholders, no valores reales).
+   Tarea: muéstrame la petición HTTP completa para obtener un token, y luego cómo usarlo en el header
+   Authorization de una llamada GET a la Web API.
+   Restricción: usa siempre los placeholders tal cual, nunca inventes un ID o secret de ejemplo que
+   parezca real.
+   ```
+   *Resultado esperado:* una petición POST al endpoint de token de Entra ID con los placeholders, seguida de un GET de ejemplo con `Authorization: Bearer {{TOKEN}}`. **Evalúa:** ¿la explicación usó siempre los placeholders literales o inventó valores que parecen reales (un riesgo si luego los copias sin darte cuenta)?
 6. Documenta en una tabla los 2 errores de autenticación más comunes que vas a encontrar (`401` y `403`) y su causa típica, usando la tabla de Errores Comunes de este módulo como referencia.
 
 ### 💼 Casos Reales de Negocio
@@ -55,4 +65,5 @@ Un desarrollador de SIT integró un sistema de facturación externo con Datavers
 - [ ] Identifico qué Security Role asignaría a una integración de solo lectura/escritura sobre 2 tablas específicas
 - [ ] Distingo cuándo usar client secret vs. certificado para una integración
 - [ ] Diagnostico correctamente si un error 401 o 403 es de autenticación o de autorización
-- [ ] Uso siempre placeholders al pedir ayuda de IA sobre credenciales, nunca valores reales
+- [ ] Uso el prompt de autenticación con placeholders y confirmo que la IA no inventó valores que parezcan reales
+- [ ] Relaciono este módulo con el Lab 54 (conectar app externa a Dataverse) y el Lab 91 (Custom API)

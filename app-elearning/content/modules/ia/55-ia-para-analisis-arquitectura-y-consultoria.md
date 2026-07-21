@@ -19,11 +19,52 @@ Usar IA como acelerador en tres roles distintos de un proyecto Power Platform/D3
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 1. **Análisis técnico:** toma la carpeta de solución desempaquetada del Módulo 54 y pide a un asistente de IA que identifique todas las dependencias entre tablas (relaciones 1:N, N:N) a partir de los archivos XML — verifica manualmente al menos 2 de esas dependencias contra el modelo real.
-2. **Desarrollo técnico:** pide a Copilot o Claude Code que genere el esqueleto de un Custom API de Dataverse (nombre, parámetros de entrada/salida, tipo de plugin asociado) para un caso simple ("calcular el descuento de una cotización"), y revisa el resultado con la checklist del Módulo 48 antes de aceptarlo.
-3. **Consultoría funcional:** toma un requerimiento de negocio en una frase (ej. "el equipo de ventas necesita registrar visitas a clientes con ubicación y notas") y pide a un asistente que proponga: (a) si se resuelve con una tabla estándar de D365 Sales o requiere una tabla personalizada, y (b) una user story en formato "Como [rol], quiero [acción], para [beneficio]".
-4. **Matriz de seguridad:** pide a la IA que genere una matriz de seguridad básica (tabla × rol × permiso: crear/leer/escribir/eliminar) para 2 roles (Vendedor, Gerente de Ventas) sobre la tabla de Oportunidades — revisa si el resultado respeta el principio de mínimo privilegio del Módulo 53.
-5. **Arquitectura:** pide a la IA que redacte un ADR corto (contexto, decisión, alternativas consideradas, consecuencias) sobre una decisión real de tu proyecto (ej. "¿integración vía Power Automate o vía Azure Function?"), dándole como contexto explícito las políticas DLP y restricciones de tu tenant.
-6. Para cada uno de los 5 pasos anteriores, anota explícitamente si la IA propuso sobrepersonalización (una solución custom donde existía una alternativa estándar) y corrige la propuesta si es necesario.
+2. **Desarrollo técnico — prompt completo:**
+   ```
+   Rol: arquitecto de Dataverse.
+   Contexto: necesito un Custom API para calcular el descuento de una cotización según el volumen y la
+   categoría del cliente.
+   Tarea: propone el esqueleto: nombre del Custom API, parámetros de entrada/salida con tipo de dato,
+   y si el plugin asociado debe ser síncrono o asíncrono y por qué.
+   Formato de salida: tabla de parámetros + 3 líneas de justificación de síncrono/asíncrono.
+   ```
+   Revisa el resultado con la checklist del Módulo 48 antes de aceptarlo.
+3. **Consultoría funcional — prompt completo:**
+   ```
+   Rol: consultor funcional Dynamics 365 Sales.
+   Contexto: "el equipo de ventas necesita registrar visitas a clientes con ubicación y notas".
+   Tarea: (a) responde si esto se resuelve con la entidad estándar de actividades/citas de D365 Sales o
+   requiere una tabla personalizada, evaluando la alternativa estándar primero; (b) redacta la user
+   story en formato "Como [rol], quiero [acción], para [beneficio]".
+   ```
+4. **Matriz de seguridad — prompt completo:**
+   ```
+   Rol: arquitecto de seguridad Dataverse.
+   Contexto: tabla Oportunidades, roles Vendedor y Gerente de Ventas.
+   Tarea: genera una matriz crear/leer/escribir/eliminar por rol, aplicando mínimo privilegio (Módulo
+   53) — el Vendedor no debería tener acceso de eliminar salvo justificación explícita.
+   Formato de salida: tabla rol × permiso con una columna de justificación.
+   ```
+   Revisa si el resultado respeta el principio de mínimo privilegio antes de aceptarlo.
+5. **Arquitectura — prompt completo de ADR:**
+   ```
+   Rol: Solution Architect documentando una decisión técnica.
+   Contexto: proyecto {{nombre}}. Decisión a tomar: ¿integración vía Power Automate o vía Azure
+   Function? Políticas del tenant: {{DLP relevante, restricciones de conectores}}.
+   Tarea: redacta un ADR corto con las secciones Contexto, Decisión, Alternativas consideradas (mínimo
+   2) y Consecuencias (positivas y negativas).
+   ```
+6. **Empleabilidad — prompt completo de preparación de entrevista técnica:**
+   ```
+   Rol: entrevistador técnico senior de Power Platform/Dynamics 365.
+   Contexto: voy a entrevistarme para {{rol, ej. "Consultor Funcional D365 CE"}}. Mi evidencia incluye:
+   {{lista de labs completados}}.
+   Tarea: hazme 5 preguntas técnicas que un entrevistador real haría para ese rol, basadas en mi
+   evidencia, y después de cada una dame el criterio de una buena respuesta (sin dármela completa,
+   para que yo la practique primero).
+   ```
+   *Evalúa:* ¿las preguntas generadas son específicas a tu evidencia real, o genéricas de cualquier vacante? Nunca uses la respuesta que te dé la IA palabra por palabra en una entrevista real sin haberla entendido y practicado tú mismo.
+7. Para cada uno de los 6 pasos anteriores, anota explícitamente si la IA propuso sobrepersonalización (una solución custom donde existía una alternativa estándar) y corrige la propuesta si es necesario.
 
 ### 💼 Casos Reales de Negocio
 Un consultor funcional de SIT le pidió a un asistente de IA "diseña cómo registrar las visitas de los vendedores a clientes" sin darle contexto de que Dynamics 365 Sales ya incluye la entidad estándar de citas/actividades. La IA propuso crear una tabla personalizada completa con relaciones, vistas y un formulario custom — una solución funcional, pero que duplicaba capacidades ya existentes y aumentaba el costo de mantenimiento futuro (actualizaciones de la tabla estándar no se heredarían). Al revisar la propuesta con la pregunta explícita "¿existe una alternativa estándar de D365 antes de crear algo custom?", el equipo identificó que las actividades estándar cubrían el 90% del caso, y solo se necesitó un campo personalizado adicional. La lección: **siempre pedirle a la IA que evalúe primero la alternativa estándar antes de proponer desarrollo a medida**.
@@ -48,4 +89,6 @@ Un consultor funcional de SIT le pidió a un asistente de IA "diseña cómo regi
 - [ ] Convierto un requerimiento de negocio en una user story y evalúo tabla estándar vs. personalizada
 - [ ] Genero una matriz de seguridad básica y verifico que respeta el mínimo privilegio
 - [ ] Redacto un ADR con IA dando contexto explícito de las políticas de gobierno del tenant
+- [ ] Uso el prompt de preparación de entrevista técnica con mi propia evidencia de labs y practico las respuestas sin memorizar texto de la IA
 - [ ] Identifico al menos un caso de sobrepersonalización propuesto por la IA y lo corrijo
+- [ ] Relaciono este módulo con el Lab 90 (Capstone Enterprise D365), el Lab 79 (simulación de entrevista técnica) y cualquier lab de arquitectura donde documente decisiones como ADR

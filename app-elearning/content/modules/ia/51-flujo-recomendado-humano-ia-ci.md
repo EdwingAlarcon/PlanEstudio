@@ -17,10 +17,17 @@ Aplicar de punta a punta el flujo recomendado de desarrollo asistido por IA — 
 - **El ciclo se repite, no se acorta:** ante un resultado insatisfactorio en cualquier etapa, se vuelve a la etapa anterior (ej. si CI falla, se ajusta la implementación; si la implementación no cumple el criterio, se re-especifica el diseño) — nunca se salta una etapa para "avanzar más rápido".
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
-1. **Diseña:** elige una mejora pequeña y real en este mismo repositorio (ej. un mensaje de error más claro en un componente, o un test faltante) y escribe el criterio de éxito en una frase verificable.
-2. **Implementa:** usando una plantilla de prompt (Módulo 47) o una instrucción acotada a un agente (Módulo 45), genera el cambio dentro del alcance definido.
+1. **Diseña:** elige una mejora pequeña y real en este mismo repositorio (ej. un mensaje de error más claro en un componente, o un test faltante) y escribe el criterio de éxito en una frase verificable (ej. "el mensaje de error debe indicar qué campo falló, no solo 'error de validación'").
+2. **Implementa:** usa este prompt de tarea acotada (combinando la plantilla del Módulo 47 con el patrón del Módulo 45):
+   ```
+   Rol: desarrollador de este proyecto Next.js.
+   Contexto: en {{archivo}}, el mensaje de error actual es "{{mensaje genérico}}".
+   Tarea: cámbialo para que indique específicamente qué campo falló la validación.
+   Restricciones: no toques ningún otro archivo ni cambies la lógica de validación en sí.
+   Verificación: ejecuta npm run lint y npx tsc --noEmit al terminar y muéstrame el resultado.
+   ```
 3. **Valida:** ejecuta `npm run lint`, `npx tsc --noEmit` y `npx vitest run` (o el subconjunto relevante) sobre el cambio, y corrige cualquier falla antes de continuar.
-4. **Aprueba:** revisa el diff completo con la checklist del Módulo 48 (alcance, efectos secundarios, seguridad, tests) como si fueras un segundo revisor, y documenta explícitamente por qué lo apruebas o qué le falta.
+4. **Aprueba:** usa el prompt de revisión del Módulo 48 sobre el diff generado, y luego revísalo tú mismo con la checklist completa (alcance, efectos secundarios, seguridad, tests) como si fueras un segundo revisor — documenta explícitamente por qué lo apruebas o qué le falta.
 5. Escribe un resumen de una página del ciclo completo que seguiste, identificando en qué etapa (si alguna) tuviste que devolverte a un paso anterior.
 
 ### 💼 Casos Reales de Negocio
@@ -39,7 +46,8 @@ El equipo de plataforma de SIT adoptó este flujo de 4 etapas como estándar des
 | Re-especificar el diseño a mitad de la implementación en lugar de volver a la etapa de diseño explícitamente | Ajustar el alcance sobre la marcha sin documentarlo | Si el criterio de éxito cambia, volver formalmente a la etapa de diseño antes de continuar |
 
 ### 🧪 Criterios de Validación
-- [ ] Completo el ciclo de las 4 etapas sobre un cambio real en este repositorio
+- [ ] Completo el ciclo de las 4 etapas sobre un cambio real en este repositorio usando el prompt de tarea acotada
 - [ ] Documento en qué etapa (si alguna) tuve que devolverme a un paso anterior y por qué
 - [ ] El cambio final pasa lint, typecheck y tests antes de considerarse aprobado
 - [ ] Escribo el resumen de una página del ciclo aplicado
+- [ ] Relaciono este flujo completo con la preparación de evidencia de cualquier lab de este plan de estudio (diseño → implementación asistida → validación con CI → revisión humana antes de entregar)

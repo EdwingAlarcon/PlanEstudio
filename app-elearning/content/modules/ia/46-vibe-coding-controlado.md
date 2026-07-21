@@ -17,10 +17,20 @@ Distinguir cuándo generar código sin especificación exhaustiva ("vibe coding"
 - **Diferencia con desarrollo asistido "normal":** vibe coding no elimina la necesidad de estos controles — los vuelve más críticos, porque el humano invirtió menos tiempo revisando cada línea mientras se escribía.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
-1. Identifica una tarea de bajo riesgo (ej. un script para reformatear un CSV de prueba) y pide a un agente que la resuelva completa con una sola instrucción de alto nivel, sin revisar cada paso intermedio.
-2. Identifica una tarea de alto riesgo (ej. una validación de seguridad en un plugin C# que se ejecuta en producción) y contrasta: ¿qué controles adicionales necesitarías antes de aceptar el resultado sin revisión detallada?
-3. Escribe una regla de equipo de una sola frase que decida cuándo vibe coding está permitido en tu proyecto (ej. "solo en prototipos y scripts fuera de la rama principal").
-4. Para el resultado del paso 1, agrega al menos un test que valide el comportamiento antes de considerarlo terminado.
+1. Prompt de bajo riesgo (apto para vibe coding):
+   ```
+   Escribe un script Node.js que lea un CSV de solicitudes de prueba (columnas: titulo, estado, fecha) y
+   genere un resumen por estado en consola. Es un script de un solo uso, fuera de la rama principal.
+   ```
+   Pide al agente que lo resuelva completo con una sola instrucción de alto nivel, sin revisar cada paso intermedio — es aceptable porque el alcance es acotado y descartable.
+2. Prompt de alto riesgo (NO apto para vibe coding sin controles):
+   ```
+   Genera la validación de seguridad que decide si un usuario puede aprobar un pago mayor a $10,000 en
+   el plugin de Aprobaciones.
+   ```
+   *Contraste:* aquí no basta con "una instrucción de alto nivel" — necesitas especificar la regla de negocio exacta, revisar cada línea, y agregar tests antes de aceptar el resultado. Explica qué controles adicionales (tests, revisión línea por línea, ambiente de prueba) necesitarías aquí que no necesitaste en el paso 1.
+3. Escribe una regla de equipo de una sola frase que decida cuándo vibe coding está permitido en tu proyecto (ej. "solo en prototipos y scripts fuera de la rama principal, nunca en lógica de aprobación o pagos").
+4. Para el resultado del paso 1, agrega al menos un test que valide el comportamiento antes de considerarlo terminado — incluso un script "descartable" necesita una prueba mínima si alguien más lo reutilizará.
 
 ### 💼 Casos Reales de Negocio
 Un maker de SIT usó vibe coding para generar un flujo completo de aprobación de gastos en una sola sesión, sin revisar el detalle de cada acción, y lo publicó directamente a producción porque "funcionó en la prueba". Una condición de carrera entre dos aprobadores duplicó pagos durante una semana antes de detectarse. El equipo adoptó la regla: cualquier flujo generado sin revisión detallada pasa primero por un ambiente de pruebas con datos reales simulados y una revisión de un segundo maker antes de publicarse.
@@ -38,6 +48,8 @@ Un maker de SIT usó vibe coding para generar un flujo completo de aprobación d
 | No tener una regla de equipo explícita sobre cuándo se permite | Decisión informal caso por caso | Documentar la regla una vez y aplicarla consistentemente |
 
 ### 🧪 Criterios de Validación
-- [ ] Distingo con un ejemplo propio una tarea apta para vibe coding de una que no lo es
+- [ ] Usé el prompt de bajo riesgo y obtuve un script funcional revisando solo el resultado final
+- [ ] Contrasté el prompt de alto riesgo y documenté qué controles adicionales necesitaría antes de aceptarlo
 - [ ] Escribo una regla de equipo de una frase sobre cuándo se permite vibe coding
-- [ ] Agrego al menos un test de validación a un resultado generado con vibe coding
+- [ ] Agrego al menos un test de validación al resultado del prompt de bajo riesgo
+- [ ] Relaciono este módulo con cualquier lab de prototipado rápido donde el alcance sea acotado y descartable, nunca con labs de lógica de negocio crítica
