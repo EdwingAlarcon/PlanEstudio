@@ -18,7 +18,11 @@ migracion ante tres audiencias distintas:
 
 La evidencia minima aceptable no es una lista de conceptos; es un paquete de artefactos conectados:
 assessment, mapping, reglas de limpieza, diseno de staging, estrategia de carga, reconciliacion,
-runbook de cutover y health assessment legacy.
+runbook de cutover, rollback plan y health assessment legacy.
+
+Estado honesto de la ruta: **parcial / awareness avanzado / job-ready simulation**. No debe
+presentarse como migracion productiva enterprise, migracion incremental real, tooling ETL productivo
+o auditoria operativa completa de CRM on-premises sin evidencia externa adicional.
 
 ## Vacantes objetivo
 
@@ -110,17 +114,17 @@ Usa estas reglas para mantener el discurso alineado con practicas modernas de Da
 
 | Skill laboral | Estado en PlanEstudio | Evidencia esperada | Pregunta tipica de entrevista |
 |---|---|---|---|
-| Source system assessment | Cubierto por ruta + LAB-075/LAB-078 | Inventario de tablas, volumenes, integraciones y riesgos | ¿Que preguntas haces antes de migrar un CRM legacy? |
-| Mapping origen-destino | Cubierto por LAB-075 | Workbook con tabla origen, campo destino, regla y responsable | ¿Que haces con campos legacy sin equivalente en Dataverse? |
-| Data cleansing | Cubierto por LAB-075 | Reglas de deduplicacion, normalizacion y descarte aplicadas a muestra | ¿Como limpias datos antes de cargarlos a Dataverse? |
-| Staging database | Cubierto por LAB-075 | Modelo conceptual con tablas main, success y error | ¿Por que usar staging en una migracion compleja? |
+| Source system assessment | Parcial / job-ready simulation | Inventario de tablas, volumenes, integraciones y riesgos | ¿Que preguntas haces antes de migrar un CRM legacy? |
+| Mapping origen-destino | Parcial / job-ready simulation | Workbook con tabla origen, campo destino, regla y responsable | ¿Que haces con campos legacy sin equivalente en Dataverse? |
+| Data cleansing | Parcial / job-ready simulation | Reglas de deduplicacion, normalizacion y descarte aplicadas a muestra | ¿Como limpias datos antes de cargarlos a Dataverse? |
+| Staging database | Parcial / job-ready simulation | Modelo conceptual con tablas main, success y error | ¿Por que usar staging en una migracion compleja? |
 | Importacion batch | Parcial | Estrategia de carga por lotes y manejo de errores | ¿Por que Excel no es suficiente para millones de registros? |
 | Upsert / claves externas | Parcial | Estrategia idempotente para cargas repetibles | ¿Como evitas duplicados si repites una carga? |
 | Bulk operations | Awareness fuerte | Decision document sobre APIs, batch size y retries | ¿Como manejas throttling o errores 429? |
-| Reconciliacion | Cubierto por LAB-075 | Reporte con conteos, muestras y reglas de integridad | ¿Como demuestras que la migracion fue correcta? |
-| Cutover | Cubierto por LAB-075 | Runbook con ventana, delta, rollback y comunicacion | ¿Que contiene un plan de cutover CRM? |
-| SQL/IIS/networking awareness | Cubierto por LAB-078 | Checklist conceptual de salud on-prem | ¿Que revisas si CRM on-prem esta lento? |
-| Health assessment | Cubierto por LAB-078 | Informe de riesgos y roadmap de migracion | ¿Que pondrias en un health assessment de CRM? |
+| Reconciliacion | Parcial / job-ready simulation | Reporte con conteos, muestras y reglas de integridad | ¿Como demuestras que la migracion fue correcta? |
+| Cutover | Parcial / job-ready simulation | Runbook con ventana, delta, rollback y comunicacion | ¿Que contiene un plan de cutover CRM? |
+| SQL/IIS/networking awareness | Awareness avanzado | Checklist conceptual de salud on-prem | ¿Que revisas si CRM on-prem esta lento? |
+| Health assessment | Parcial / awareness avanzado | Informe de riesgos y roadmap de migracion | ¿Que pondrias en un health assessment de CRM? |
 
 ## Secuencia recomendada
 
@@ -330,10 +334,27 @@ Brechas que siguen abiertas:
 - Ejercicio tecnico opcional con Dataflows, Azure Data Factory o Dataverse Web API contra un tenant
   real de practica.
 - Simulacion de performance con bulk operations, service protection limits, retries y particion por lotes.
-- Evidencia real de CRM on-premises: logs, SQL metrics, IIS, Async Service y customizaciones solo
-  pueden practicarse plenamente con acceso a infraestructura real.
+- Evidencia real de CRM on-premises: logs, SQL metrics, IIS, ADFS/certificados, Async Service,
+  networking y customizaciones solo pueden practicarse plenamente con acceso a infraestructura real.
 
 Estas brechas no bloquean el aprendizaje, pero si marcan que JR-5 debe presentarse como preparacion y criterio profesional, no como experiencia operativa completa.
+
+## Roadmap avanzado fuera de alcance actual
+
+Estos puntos quedan identificados como practica futura y no forman parte del cierre actual de la
+ruta:
+
+- Dataset grande realista con cuentas, contactos, oportunidades, actividades, relaciones padre-hijo
+  y datos historicos sucios.
+- Migracion incremental con delta loads, ejecucion paralela y criterios de apagado del legacy.
+- Reconciliacion avanzada con reglas de integridad, excepciones por lote y aprobacion de negocio.
+- Tooling ETL real con Dataflows, Azure Data Factory, Dataverse Web API, Bulk API o herramienta
+  equivalente.
+- CRM on-premises real con acceso a SQL Server, IIS, ADFS/certificados, CRM Async Service, logs,
+  networking y customizaciones.
+- Performance troubleshooting real: service protection limits, throughput por lote, retries,
+  particion, errores transitorios y monitoreo.
+- Cutover productivo con ventana real, war room, comunicaciones, freeze, rollback y go/no-go.
 
 ## Checklist antes de aplicar
 
@@ -348,6 +369,7 @@ Antes de aplicar a una vacante de migracion o legacy CRM, deberias poder:
 - [ ] Proponer manejo de errores y reintentos.
 - [ ] Crear un reporte de reconciliacion.
 - [ ] Escribir un runbook de cutover.
+- [ ] Documentar rollback plan y responsables de go/no-go.
 - [ ] Explicar riesgos de SQL/IIS/networking en CRM on-premises.
 - [ ] Presentar un health assessment conceptual sin exagerar experiencia real.
 

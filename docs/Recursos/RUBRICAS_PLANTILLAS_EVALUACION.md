@@ -320,6 +320,27 @@ Criterios de aprobación:
 | Riesgos técnicos | ≥5 riesgos con probabilidad, impacto y mitigación específica |
 | Comunicación ejecutiva | Un comité no técnico entiende la recomendación final sin jerga de F&O |
 
+## Rúbrica específica: Data Migration & Legacy CRM Assessment
+
+Aplica esta rúbrica a `LAB-075`, `LAB-078` y a la ruta
+[Data Migration + CRM Legacy](JOB_READY_DATA_MIGRATION_LEGACY.md). Evalúa preparación job-ready
+simulada y awareness avanzado; no debe usarse para afirmar experiencia productiva enterprise sin
+tenant, dataset grande e infraestructura legacy real.
+
+| Criterio | Peso | Aprobado profesional |
+|---|---|---|
+| Assessment de fuente legacy | 15% | Inventario de tablas, volumen, owner, criticidad, dependencias, integraciones y riesgos iniciales |
+| Mapping workbook | 15% | Cada campo crítico tiene origen, destino, regla, obligatoriedad, owner y decisión para campos sin equivalente |
+| Datos críticos y limpieza | 15% | Identifica duplicados, datos incompletos, valores inválidos, reglas de normalización y criterio de descarte/merge |
+| Staging y estrategia de carga | 15% | Define staging, success/error tables, claves alternativas, lotes, reintentos y límites del mecanismo elegido |
+| Validación y reconciliación | 15% | Incluye conteos origen/destino, muestreo, integridad padre-hijo, excepciones y evidencia post-carga |
+| Cutover y rollback | 10% | Runbook con ventana, freeze, delta load, comunicación, go/no-go, responsables y plan de reversa |
+| Riesgos técnicos legacy | 10% | Evalúa SQL Server, IIS, CRM Async Service, ADFS/certificados, networking, integraciones directas y upgrade path |
+| Comunicación ejecutiva y límites | 5% | Resume recomendación, riesgos residuales y declara qué fue simulado vs. qué exige ambiente real |
+
+Aprobación: ≥ 75/100 y ningún criterio crítico en 0-1. Excelencia: ≥ 90/100, con matriz de
+riesgos priorizada y evidencia nombrada de forma trazable para portafolio.
+
 ## Rúbrica específica: Arquitectura Empresarial
 
 | Criterio | Peso | Aprobado profesional |
@@ -387,6 +408,7 @@ son las rutas profesionales las que exigen la evidencia práctica correspondient
 | Developer | Diseño técnico, pruebas, ALM y evidencia de build |
 | Dynamics 365 Customer Engagement | Segmento/journey, Work Order/SLA, ciclo case-to-resolution (LAB-068), matriz de trazabilidad y UAT del LAB-060 |
 | Finance & Operations Awareness | Mapas de proceso ERP (LAB-069), diseño técnico de integración (LAB-070), matriz de integración ERP+CRM, dual-write conceptual y matriz de riesgos (LAB-064) |
+| Data Migration + CRM Legacy | LAB-075 y LAB-078 como simulación job-ready: assessment, mapping, cleansing, staging, reconciliación, cutover, rollback y health assessment legacy con límites declarados |
 | Solution Architect | Blueprint, riesgos, decisiones, seguridad, go-live y operación |
 | AI/Copilot | Prompts sanitizados, revisión humana y trazabilidad de decisiones |
 

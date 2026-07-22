@@ -33,7 +33,7 @@ La brecha principal no es falta total de contenido, sino falta de una capa expl�
 | Power Platform Administration & Governance | Cubierto con brechas | Hay arquitectura, CoE, DLP, ambientes y LAB-076 como simulación operativa PPAC; siguen abiertas prácticas con logs reales de Purview/Dataverse audit y Managed Environments en tenant real. |
 | Dynamics 365 CRM Functional | Parcial | Sales y Customer Service tienen buena base; faltan más simulaciones de soporte funcional diario y configuración tipo vacante. |
 | Dynamics 365 CRM Developer | Parcial | Hay C#, plugins, Web API e integraciones; falta JavaScript CRM profundo, Custom APIs/workflows y debugging/tracing de entrevista. |
-| Data Migration & Legacy CRM | Cubierto con brechas | LAB-075 cubre mapping, cleansing, staging, reconciliación y cutover; LAB-078 cubre health assessment legacy. Siguen abiertas prácticas con dataset grande, carga real y logs/servidores on-prem reales. |
+| Data Migration & Legacy CRM | Parcial / Awareness avanzado / Job-ready simulation | LAB-075 cubre mapping, cleansing, staging, reconciliación y cutover como simulación defendible; LAB-078 cubre health assessment legacy conceptual. Siguen abiertas prácticas con dataset grande, carga real, migración incremental y logs/servidores on-prem reales. |
 | Business / Consulting / Soft Skills | Cubierto con brechas | Hay discovery, UAT, documentación, portafolio, entrevista técnica, demo laboral, CV/LinkedIn e inglés técnico mediante LAB-079; sigue faltando feedback real de recruiters/entrevistadores y práctica con personas. |
 
 ## Matriz de Skills Laborales
@@ -113,18 +113,18 @@ La brecha principal no es falta total de contenido, sino falta de una capa expl�
 
 | Skill laboral | Perfil laboral asociado | Nivel esperado | Estado | Dónde se aprende | Dónde se practica | Evidencia para portafolio | Pregunta típica de entrevista | Recomendación | Prioridad |
 |---|---|---|---|---|---|---|---|---|---|
-| Migración CRM legacy a Dynamics 365 | Migration Specialist / Architect | Avanzado | Cubierto | Módulos 34, 39, 40 | LAB-075 | Roadmap de migración, mapping, reconciliación y cutover | ¿Cómo reduces riesgo al migrar un CRM crítico? | Usar LAB-075 como evidencia principal; profundizar con tenant/dataset real | Alta |
-| Mapping de datos | Migration Specialist | Intermedio | Cubierto | Módulos 34, 40 | LAB-075 | Mapping origen-destino con reglas | ¿Qué haces con campos legacy sin equivalente en Dataverse? | Ampliar con dataset grande futuro | Alta |
-| Data cleansing | Migration Specialist | Intermedio | Cubierto | Módulos 39, 40 | LAB-075 | Reglas de deduplicación y estandarización aplicadas a muestra | ¿Cómo limpias datos antes de cargarlos a Dataverse? | Crear dataset sucio reutilizable futuro | Alta |
+| Migración CRM legacy a Dynamics 365 | Migration Specialist / Architect | Avanzado | Parcial / Job-ready simulation | Módulos 34, 39, 40 | LAB-075 | Roadmap de migración, mapping, reconciliación y cutover simulado | ¿Cómo reduces riesgo al migrar un CRM crítico? | Usar LAB-075 como evidencia principal; no vender como migración productiva sin tenant/dataset real | Alta |
+| Mapping de datos | Migration Specialist | Intermedio | Parcial / Job-ready simulation | Módulos 34, 40 | LAB-075 | Mapping origen-destino con reglas sobre muestra | ¿Qué haces con campos legacy sin equivalente en Dataverse? | Ampliar con dataset grande futuro | Alta |
+| Data cleansing | Migration Specialist | Intermedio | Parcial / Job-ready simulation | Módulos 39, 40 | LAB-075 | Reglas de deduplicación y estandarización aplicadas a muestra | ¿Cómo limpias datos antes de cargarlos a Dataverse? | Crear dataset sucio reutilizable futuro | Alta |
 | Importación masiva | Migration Specialist | Avanzado | Parcial | Módulos 34, 40 | LAB-075 | Estrategia batch y errores | ¿Por qué Excel no es buena opción para millones de registros? | Profundizar con ADF/Dataflows/Web API o Bulk API real cuando haya tenant | Alta |
-| Reconciliación | Migration Specialist | Avanzado | Cubierto | Ruta JR-5 | LAB-075 | Conteos, muestras y reporte post-carga | ¿Cómo demuestras que la migración fue correcta? | Profundizar con datos reales de negocio | Alta |
-| Cutover | Migration Lead | Avanzado | Cubierto | Módulos 39, 40 | LAB-075 | Plan de corte, delta y rollback | ¿Qué contiene un plan de cutover CRM? | Crear simulación cronometrada futura | Alta |
+| Reconciliación | Migration Specialist | Avanzado | Parcial / Job-ready simulation | Ruta JR-5 | LAB-075 | Conteos, muestras y reporte post-carga simulado | ¿Cómo demuestras que la migración fue correcta? | Profundizar con datos reales de negocio | Alta |
+| Cutover | Migration Lead | Avanzado | Parcial / Job-ready simulation | Módulos 39, 40 | LAB-075 | Plan de corte, delta y rollback conceptual | ¿Qué contiene un plan de cutover CRM? | Crear simulación cronometrada futura | Alta |
 | SQL Server awareness | Legacy Specialist | Intermedio | Parcial | Módulos 34, 35, 39 | LAB-078 | Diagnóstico conceptual | ¿Qué revisas en SQL si CRM on-prem está lento? | Practicar con logs/métricas reales solo si hay infraestructura | Media-Alta |
 | Oracle/Sybase awareness | Migration Specialist | Básico | No cubierto | No evidente | Sin lab dedicado | Inventario de fuentes legacy | ¿Cómo abordas una fuente de datos que no conoces? | Tratar como fuente externa en JR-005 | Media |
 | IIS / CRM on-prem | Legacy Specialist | Intermedio | Parcial | Ruta JR-5 | LAB-078 | Health assessment conceptual | ¿Qué rol cumple IIS en Dynamics CRM on-prem? | Practicar con servidor real solo si existe acceso | Media-Alta |
 | Networking/troubleshooting | Legacy / Integration Specialist | Intermedio | Parcial | Módulo 34 | LAB-078 | Diagrama de conectividad y riesgos | ¿Cómo diagnosticas latencia entre CRM y un sistema on-prem? | Profundizar con métricas reales cuando haya infraestructura | Media |
 | Upgrade path CRM 2015+ | Legacy Specialist | Avanzado | No cubierto | No evidente | Sin lab dedicado | Plan de upgrade/migración | ¿Qué factores revisas antes de actualizar CRM on-prem? | Incluir como roadmap, no promesa actual | Media |
-| Health assessment | Legacy Specialist / Architect | Avanzado | Cubierto | Ruta JR-5 | LAB-078 | Informe de salud, riesgos y roadmap | ¿Qué pondrías en un health assessment de CRM? | Usar LAB-078 como evidencia conceptual; no venderlo como auditoría real de servidor | Alta |
+| Health assessment | Legacy Specialist / Architect | Avanzado | Parcial / Awareness avanzado | Ruta JR-5 | LAB-078 | Informe de salud, riesgos y roadmap conceptual | ¿Qué pondrías en un health assessment de CRM? | Usar LAB-078 como evidencia conceptual; no venderlo como auditoría real de servidor | Alta |
 
 ### Business / Consulting / Soft Skills
 
@@ -207,13 +207,14 @@ Recurso detallado: [Ruta Job-Ready Data Migration + CRM Legacy](JOB_READY_DATA_M
 
 - **Objetivo:** preparar para roles enterprise donde conviven CRM on-premises, sistemas legacy y migración a Dynamics 365 cloud.
 - **Perfil laboral objetivo:** CRM Migration Specialist, Solution Architect, Legacy Modernization Consultant.
-- **Skills cubiertos:** mapping, cleansing, importación, reconciliación, cutover, CRM on-prem awareness, SQL/IIS/networking, health assessment.
+- **Estado:** Parcial / Awareness avanzado / Job-ready simulation; no equivale a migración productiva enterprise.
+- **Skills cubiertos:** mapping, cleansing, importación simulada, reconciliación conceptual, cutover/rollback, CRM on-prem awareness, SQL/IIS/networking, health assessment conceptual.
 - **Módulos reutilizados:** 34, 39, 40.
 - **Labs reutilizados:** LAB-064, LAB-070 como referencia conceptual, LAB-075 (JR-005), LAB-078 (JR-008).
-- **Nuevos labs recomendados:** ninguno crítico; futuras prácticas pueden agregar dataset grande, carga real y simulación de cutover cronometrada.
-- **Evidencia esperada:** plan de migración, mapping, reporte post-migración, health assessment, matriz de riesgos.
+- **Nuevos labs recomendados:** ninguno crítico ahora; futuras prácticas pueden agregar dataset grande, carga real, migración incremental, tooling ETL y simulación de cutover cronometrada.
+- **Evidencia esperada:** plan de migración, mapping, reporte post-migración simulado, health assessment conceptual, matriz de riesgos, rollback plan y resumen ejecutivo.
 - **Preguntas de entrevista:** cómo migrar 10M registros, cómo validar integridad, qué revisar en CRM on-prem lento.
-- **Nivel sugerido:** Avanzado / Especialización.
+- **Nivel sugerido:** Avanzado / Especialización, con límites declarados.
 
 ### Ruta Technical English & Interview Readiness
 
@@ -252,8 +253,8 @@ Implementación en la app: JR-001 a JR-010 están disponibles como **LAB-071 a L
 1. Power Automate Desktop práctico.
 2. PPAC operativo con audit logs, capacity, licensing y Managed Environments.
 3. JavaScript CRM profundo.
-4. Data migration hands-on.
-5. CRM on-premises / legacy health assessment.
+4. Data migration hands-on con dataset grande, tooling ETL y tenant real.
+5. CRM on-premises / legacy health assessment con SQL/IIS/ADFS/networking reales.
 6. Feedback real externo sobre CV/LinkedIn y fluidez de inglés técnico con personas reales.
 
 ## Plan de implementación por sprints

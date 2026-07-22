@@ -131,3 +131,45 @@ Field Service Mobile/RSO y dual-write deben declarar estado de ejecución usando
 [D365 Tenant Readiness](D365_TENANT_READINESS.md): **Simulado**, **Sandbox real** o **Productivo
 controlado**. La configuración profunda de Finance o Supply Chain Management sigue fuera del
 alcance base y debe presentarse como siguiente paso de especialización.
+
+## CRM Legacy & Cloud Migration Specialist en el portafolio
+
+La ruta [Data Migration + CRM Legacy](JOB_READY_DATA_MIGRATION_LEGACY.md) puede presentarse como
+evidencia de **criterio funcional/técnico para migraciones**, no como experiencia laboral real en
+una migración productiva enterprise. El alcance correcto es: **parcial / awareness avanzado /
+job-ready simulation**.
+
+Guarda los entregables de `LAB-075` y `LAB-078` como un proyecto único de portafolio:
+
+- Legacy CRM assessment.
+- Migration strategy.
+- Data mapping workbook.
+- Cleansing rules.
+- Staging and load plan.
+- Reconciliation report.
+- Cutover runbook.
+- Rollback plan.
+- Legacy health assessment.
+- Risk matrix.
+- Executive migration summary.
+
+En el README del proyecto declara explícitamente:
+
+- Qué evidencia fue simulada con datos de práctica.
+- Qué parte requeriría tenant real, dataset grande o infraestructura CRM on-premises.
+- Qué decisiones tomaste para reducir riesgo antes de cargar datos.
+- Qué señales revisarías en SQL Server, IIS, ADFS/certificados, networking y CRM Async Service
+  antes de recomendar una migración.
+
+Para entrevista, una frase honesta sería:
+
+```text
+Este proyecto simula el ciclo de assessment, mapping, cleansing, staging, reconciliación y cutover
+para una migración CRM legacy hacia Dynamics 365. Demuestra criterio de consultoría y arquitectura,
+pero no sustituye una migración productiva con infraestructura real, dataset grande y operación de
+cutover bajo ventana de negocio.
+```
+
+La práctica avanzada con CRM on-premises real, logs de SQL/IIS/ADFS, networking productivo,
+migración incremental, tooling ETL y performance troubleshooting queda como roadmap de
+especialización futura.

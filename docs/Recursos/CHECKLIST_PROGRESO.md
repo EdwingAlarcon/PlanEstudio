@@ -1170,6 +1170,24 @@
 **Fecha de inicio Nivel D365:** ___ | **Fecha de completación:** ___
 
 ---
+
+## Checklist de Ruta Job-Ready: Migration/Legacy
+
+Este checklist complementa los criterios modulares anteriores y no aumenta el conteo de módulos del plan. Úsalo para validar la ruta **Data Migration + CRM Legacy** con alcance honesto: **parcial / awareness avanzado / job-ready simulation**.
+
+- [ ] Assessment de fuente legacy completado para tablas, volumen, owner, criticidad, dependencias e integraciones.
+- [ ] Mapping workbook origen-destino creado con regla de transformación, obligatoriedad, owner y decisión para campos sin equivalente.
+- [ ] Reglas de limpieza documentadas para normalización, descarte, datos incompletos y valores inválidos.
+- [ ] Estrategia de staging definida con tablas main, success/error, claves alternativas y trazabilidad de lote.
+- [ ] Validación de duplicados definida antes de carga, con regla de coincidencia y decisión de merge/survivorship.
+- [ ] Reconciliación post-migración diseñada con conteos origen/destino, muestreo, integridad padre-hijo y excepciones.
+- [ ] Cutover runbook escrito con ventana, freeze, delta load, comunicación, criterios go/no-go y responsables.
+- [ ] Rollback plan documentado, incluyendo qué datos se revierten, quién aprueba y cómo se reabre operación legacy si aplica.
+- [ ] Health assessment legacy preparado con riesgos de SQL Server, IIS, CRM Async Service, networking, ADFS/certificados e integraciones directas.
+- [ ] Matriz de riesgos incluye probabilidad, impacto, mitigación, owner y evidencia esperada para cada riesgo crítico.
+- [ ] Alcance declarado: qué queda simulado en LAB-075/LAB-078 y qué requiere tenant, dataset grande o infraestructura CRM on-premises real.
+
+---
 ---
 
 ## 📊 Resumen Total de Progreso
