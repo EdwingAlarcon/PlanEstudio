@@ -24,6 +24,19 @@ Dominar el lenguaje de fórmulas Power Fx para lógica avanzada en Canvas Apps.
 2. Practica en una app pequeña con 2 controles y 1 Gallery; no intentes copiar todas las fórmulas en una sola pantalla.
 3. Si aparece una advertencia azul de delegación, no la ignores: anótala como hallazgo aunque todavía no sepas resolverla completamente.
 
+### 📚 Power Fx en español simple
+
+| Fórmula | Qué significa en lenguaje normal | Dónde suele ir |
+|---|---|---|
+| `If(condición, valorSiSí, valorSiNo)` | Si pasa esto, muestra/haz una cosa; si no, otra. | `Text`, `Visible`, `DisplayMode`, `OnSelect` |
+| `IsBlank(valor)` | Revisa si un campo está vacío. | Validaciones de formularios |
+| `Filter(tabla, condición)` | Muestra solo las filas que cumplen una regla. | `Items` de una Gallery |
+| `LookUp(tabla, condición, columna)` | Busca una fila y devuelve un dato específico. | Labels, emails, datos relacionados |
+| `Notify("mensaje", tipo)` | Muestra un aviso al usuario. | `OnSelect` de botones |
+| `ThisItem.Campo` | El campo del registro actual dentro de una Gallery. | Controles dentro de una Gallery |
+
+> Si una fórmula te abruma, léela de adentro hacia afuera y reemplaza cada nombre técnico por una frase: `Filter(Solicitudes, Estado = "Nueva")` = "muéstrame solo solicitudes nuevas".
+
 ### 📖 Conceptos Clave
 - **Sintaxis**: Funciones, operadores, referencias
 - **Tipos de datos**: Text, Number, Boolean, Date, Table, Record

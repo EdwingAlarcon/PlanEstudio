@@ -34,7 +34,8 @@ estrictamente necesario. Nunca tocar conteos.
 | 12 | `28bfa4f` | Micro-sprint de polish | Footer/sidebar y badges PL-600 verificados ya correctos (sin cambio); frase de `/portafolio` sobre Contact Center/Sales Ops/F&O corregida (ya no niega evidencia existente en LAB-081/083/093-100) |
 | 13 | *(sin commit)* | Incidente de caché — resuelto sin tocar código | Usuario reportó el polish del sprint 12 "no reflejado en producción" en 4 navegadores tras hard refresh. `curl` con cache-busting confirmó `X-Cache: MISS` y contenido correcto en el servidor — era caché de red/DNS local del usuario, se resolvió solo. **Antes de investigar código por un reporte similar, verificar el servidor real primero** (ver sección "Verificación de producción" más abajo) |
 | 14 | `b71d3f7` | Onboarding de principiante — Módulos 1-3 | Simulación de estudiante principiante (diagnóstico) seguida de un micro-sprint de reducción de fricción: Módulo 1 (setup separado de la primera práctica, mini-glosario, conceptos recortados, suplementos opcionales), Módulo 2 (explicaciones breves + enlace a Lab 02), Módulo 3 (Núcleo obligatorio vs. Profundización opcional + enlace a Lab 03), `estimatedMinutes` corregido (10→20, 5→15, 6→25) con línea lectura/práctica visible, criterio de avance a Intermedio agregado al checklist |
-| 15 | `este commit` | Onboarding de principiante — Módulos 4-8 | Módulos 4-8 auditados y reforzados sin cambiar conteos: tiempos visibles realistas, "Qué vas a lograr hoy", separación Núcleo obligatorio/Profundización opcional o iteraciones, evidencia para guardar, enlaces a Lab 04/Lab 05 cuando existen, ruta honesta para Power BI/Power Fx/proyecto integrado cuando no hay lab básico dedicado |
+| 15 | `3cabbd3` | Onboarding de principiante — Módulos 4-8 | Módulos 4-8 auditados y reforzados sin cambiar conteos: tiempos visibles realistas, "Qué vas a lograr hoy", separación Núcleo obligatorio/Profundización opcional o iteraciones, evidencia para guardar, enlaces a Lab 04/Lab 05 cuando existen, ruta honesta para Power BI/Power Fx/proyecto integrado cuando no hay lab básico dedicado |
+| 16 | `este commit` | Primeras 2 horas + quick wins principiante | Ruta concreta de primeras 2 horas en "Cómo usar"; Mini Lab 01 embebido en Módulo 1 sin crear lab nuevo; práctica 6.0 de Power BI con datos de ejemplo; tabla "Power Fx en español simple"; Módulo 8 dividido en entrega mínima/completa/excelente; checklist mínimo para principiantes sin alterar los 603 criterios |
 
 Cada sprint terminó en verde con: `npm run validate:content`, `npm run lint`, `npx tsc --noEmit` (o `npm run typecheck`),
 `npm run test:coverage` (225/225 tests históricamente), `npm run build` (o `build:pages`), y `npm run e2e` (Playwright
@@ -153,6 +154,10 @@ el mismo diagnóstico para **Módulos 4-8** y cerró la línea de onboarding pri
 estimados realistas, primer logro explícito, separación de núcleo/profundización, evidencia esperada y
 puentes a labs o proyecto cuando correspondía.
 
+El sprint 16 cerró un polish adicional de entrada para estudiantes absolutos: ruta "primeras 2 horas",
+Mini Lab 01 dentro del Módulo 1, checklist mínimo y quick wins/glosarios en los puntos de mayor carga
+cognitiva (Power BI, Power Fx y capstone). No creó módulos ni labs nuevos y no modificó conteos.
+
 ## Pendientes reales actuales (todo lo demás está `Cerrado` o es `Roadmap enterprise real`)
 
 No queda ningún pendiente de contenido "post-auditoría" ni de UX bloqueante en el roadmap original.
@@ -210,9 +215,10 @@ regresión de honestidad, no una mejora.
 - **Antes de tocar nada**, hacer `git pull --ff-only` y verificar con `git log --oneline -15` si el
   sprint pedido ya fue resuelto por una sesión anterior (con otra herramienta incluso) — ya ha pasado
   más de una vez que el trabajo ya estaba hecho y no reflejado en la copia local.
-- El flujo esperado es: diagnóstico → refuerzo de contenido (si hace falta) → validaciones → informe
-  al usuario **sin commitear todavía** → solo si el usuario responde algo como "commit, push y deploy"
-  (mensaje corto y explícito), hacer commit + push + verificar el deploy en GitHub Actions.
+- Preferencia actual del usuario: cuando un sprint de cambios quede validado, hacer **commit, push y deploy**
+  por defecto, salvo que el usuario pida explícitamente dejarlo sin commit.
+- El flujo esperado es: diagnóstico → refuerzo de contenido (si hace falta) → validaciones → commit + push →
+  verificar el deploy en GitHub Actions y producción.
 - Mensaje de commit: descriptivo, en español, terminando con
   `Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>`.
 - **No mezclar** "fuera de alcance de este sprint puntual" con "pendiente sin resolver" al escribir el

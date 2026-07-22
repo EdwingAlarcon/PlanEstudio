@@ -19,6 +19,16 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 ### 🔧 Qué queda para después (Profundización opcional)
 - Publicar en Power BI Service, configurar refresh, compartir dashboards y aplicar Row-Level Security. Son habilidades importantes, pero dependen más de permisos/licencias del tenant.
 
+### 📚 Mini-glosario antes de abrir Power BI
+
+| Término | En una frase |
+|---|---|
+| **Power BI Desktop** | La aplicación local donde creas el reporte `.pbix`. |
+| **Power BI Service** | El sitio web donde publicas y compartes reportes con otras personas. |
+| **Power Query** | El editor para limpiar datos antes de visualizarlos. |
+| **DAX** | Lenguaje de fórmulas para crear métricas como totales, porcentajes y promedios. |
+| **RLS** | Seguridad por filas: cada usuario ve solo los datos que le corresponden. |
+
 ### 📖 Conceptos Clave
 - **Componentes**: Power BI Desktop, Service, Mobile
 - **Fuentes de datos**: Dataverse, Excel, SQL, APIs, Web
@@ -34,6 +44,26 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 ### 👨‍💻 Actividades Prácticas
 
 ## 🟢 Núcleo obligatorio
+
+##### Práctica 6.0: Primera victoria con datos de ejemplo
+
+> Si todavía no tienes Dataverse listo o Power BI Service disponible, empieza aquí. La meta es ver un reporte en pantalla antes de configurar todo.
+
+1. Abre Power BI Desktop.
+2. Selecciona **Enter data**.
+3. Crea esta tabla manual:
+   | Estado | Cantidad |
+   |---|---:|
+   | Nueva | 5 |
+   | En Proceso | 8 |
+   | Resuelta | 12 |
+   | Cerrada | 4 |
+4. Inserta un **bar chart** con `Estado` en Axis y `Cantidad` en Values.
+5. Inserta una **card** con la suma de `Cantidad`.
+
+**Resultado esperado:** tienes un mini dashboard local con una gráfica y una tarjeta.
+
+**Evidencia:** captura del reporte con la gráfica y la card. Este archivo puede llamarse `primer-reporte-power-bi.pbix`.
 
 ##### Práctica 6.1: Conectar a Dataverse y Modelar
 

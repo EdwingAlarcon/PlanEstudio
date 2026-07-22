@@ -44,6 +44,27 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 
 ### 👨‍💻 Actividades Prácticas
 
+## 🟢 Mini Lab 01 — Primera victoria en 5 minutos
+
+> Haz esto apenas puedas entrar a [make.powerapps.com](https://make.powerapps.com). No necesitas crear una app todavía.
+
+**Qué vas a construir:** no vas a construir una solución completa; vas a crear tu primera evidencia real dentro del ambiente.
+
+1. Entra a [make.powerapps.com](https://make.powerapps.com).
+2. En el menú lateral, abre **Tables**.
+3. Busca y abre la tabla estándar **Account**.
+4. En la pestaña de datos, crea 1 registro de prueba:
+   - Account Name: `Cliente Demo 01`
+   - Phone: `3000000000`
+   - City: `Bogotá`
+5. Guarda el registro y confirma que aparece en la lista.
+
+**Resultado esperado:** ves una fila nueva en la tabla Account. Esa fila es tu primera interacción real con Dataverse.
+
+**Evidencia para guardar:** captura de la tabla Account mostrando `Cliente Demo 01` y el nombre del ambiente en la parte superior.
+
+**Si no puedes entrar todavía:** guarda una nota con el mensaje de bloqueo del tenant/trial. Eso también sirve como evidencia de avance; el setup depende de Microsoft, no solo de ti.
+
 ##### Práctica 1.1: Configurar Entorno de Desarrollo
 
 1. Crear cuenta Microsoft 365 Developer (gratuita)
@@ -79,6 +100,8 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
     - Views (vistas)
 
 4. Crear datos de prueba manualmente (5 registros de Account)
+
+> Si ya completaste el Mini Lab 01, aquí solo agrega 4 registros más. Tu objetivo total del módulo son 5 registros de prueba, no 5 registros adicionales.
 
 ### 💼 Caso Real de Negocio
 
@@ -123,6 +146,13 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 - [ ] Explicar con palabras propias qué es Dataverse y su propósito
 - [ ] Identificar los 4 modelos preconstruidos más usados de AI Builder
 - [ ] Describir para qué sirve Power Pages y en qué se diferencia de una Canvas App
+
+> Para avanzar al Módulo 2 como principiante, los primeros 5 criterios son suficientes. AI Builder y Power Pages son suplementos opcionales: no los uses como excusa para frenar tu primera práctica.
+
+### 📸 Evidencia para guardar
+- Captura del ambiente Developer activo.
+- Captura de la tabla Account con 5 registros de prueba.
+- Nota breve en tus palabras: "Dataverse sirve para..." en 2-3 líneas.
 
 ---
 

@@ -20,6 +20,23 @@
 
 ## 🟢 NIVEL 1: BÁSICO
 
+### Checklist mínimo para principiantes
+
+Si estás empezando desde cero, usa esta lista antes de mirar todos los criterios del nivel. La lista completa
+sirve para profundizar; esta sirve para no perderte en la primera semana.
+
+- [ ] Entré a Power Platform y sé reconocer el ambiente donde estoy trabajando.
+- [ ] Guardé mi primera evidencia: captura del ambiente o de la tabla Account con registros de prueba.
+- [ ] Creé o exploré una tabla en Dataverse y puedo explicar en una frase para qué sirve.
+- [ ] Completé Lab 02 o tengo listo el modelo de datos básico de solicitudes.
+- [ ] Completé Lab 03 o tengo una Canvas App simple con lista, formulario y navegación.
+- [ ] Creé al menos un flujo básico o puedo explicar qué evento lo dispara.
+- [ ] Tengo mínimo 3 evidencias guardadas para mi portafolio inicial.
+- [ ] Sé qué me falta antes de pasar a Intermedio: práctica, quiz, lab o proyecto.
+
+> Meta realista: no necesitas completar 119 criterios en la primera vuelta. Primero logra esta lista mínima;
+> luego usa los criterios por módulo para fortalecer lo que todavía esté flojo.
+
 ### ¿Listo para pasar a Intermedio?
 
 Este bloque no aumenta el conteo de criterios modulares — es una guía de auto-evaluación, no un módulo. Estás listo para avanzar a Nivel 2 cuando puedas marcar todo esto:

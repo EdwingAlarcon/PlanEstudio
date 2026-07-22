@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BookOpen, CheckCircle2, ClipboardList, FlaskConical, HelpCircle, Route, Trophy } from "lucide-react";
+import { ArrowRight, BookOpen, Camera, CheckCircle2, ClipboardList, FlaskConical, HelpCircle, Route, Trophy } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -44,6 +44,29 @@ const STEPS = [
     description: "El certificado exige módulos, quizzes aprobados (≥70%) y labs del nivel — no solo lectura. Revisa qué te falta en un solo lugar antes de intentarlo.",
     href: "/progreso",
     action: "Ver mi progreso",
+  },
+];
+
+const FIRST_SESSION = [
+  {
+    title: "0-15 min",
+    description: "Lee Home y esta guía. Tu meta no es entender todo el mapa: solo saber que empezarás por Nivel Básico.",
+    href: "/",
+  },
+  {
+    title: "15-60 min",
+    description: "Abre el Módulo 1 y completa la exploración inicial de Power Apps. Si el ambiente tarda, registra el bloqueo y sigue leyendo.",
+    href: "/nivel/basico/modulo/introduccion-al-ecosistema-power-platform",
+  },
+  {
+    title: "60-90 min",
+    description: "Completa el Mini Lab 01 dentro del Módulo 1: ubica Tables, abre Account y crea registros de prueba.",
+    href: "/nivel/basico/modulo/introduccion-al-ecosistema-power-platform",
+  },
+  {
+    title: "90-120 min",
+    description: "Guarda tus primeras evidencias: captura del ambiente, tabla Account y registros creados. Después mira el Checklist mínimo.",
+    href: "/recursos/checklist",
   },
 ];
 
@@ -108,6 +131,31 @@ export default function HowToUsePage() {
               </article>
             );
           })}
+        </div>
+      </section>
+
+      <section className="rounded-xl border border-[#107C10]/25 bg-card p-5 shadow-fluent-1" aria-labelledby="first-session-heading">
+        <div className="mb-4 flex items-center gap-2">
+          <Camera className="h-4 w-4 text-[#107C10]" aria-hidden />
+          <h2 id="first-session-heading" className="text-lg font-semibold text-foreground">
+            Primeras 2 horas si empiezas desde cero
+          </h2>
+        </div>
+        <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+          Esta ruta evita que abras todo el programa de golpe. Al terminar, deberías tener tu primera
+          evidencia guardada: una captura del ambiente y una tabla con registros de prueba.
+        </p>
+        <div className="grid gap-3 md:grid-cols-4">
+          {FIRST_SESSION.map((item) => (
+            <Link
+              key={item.title}
+              href={item.href}
+              className="rounded-lg border border-border bg-background p-4 transition-colors hover:border-[#107C10]/40"
+            >
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#107C10]">{item.title}</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+            </Link>
+          ))}
         </div>
       </section>
 

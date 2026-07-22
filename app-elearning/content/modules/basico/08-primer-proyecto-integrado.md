@@ -31,6 +31,27 @@ Si tienes poco tiempo o estás estudiando solo, apunta primero a este alcance:
 
 Cuando esto funcione, ya tienes una historia completa para explicar en entrevista: dato, app, automatización, reporte y seguridad básica.
 
+### 🪜 Tres niveles de entrega
+
+| Nivel | Qué incluye | Cuándo usarlo |
+|---|---|---|
+| **Entrega mínima** | 2 tablas, 1 app, 1 flujo, 1 reporte o dashboard simple, 5 evidencias. | Para cerrar el Nivel Básico sin bloquearte. |
+| **Entrega completa** | 5 tablas, Canvas App, Model-Driven App, 4 flujos, Power BI, roles y testing. | Para portafolio sólido de Maker/Functional Consultant junior. |
+| **Entrega excelente** | Documentación técnica, matriz de seguridad, solución exportable, demo grabada y mejoras por feedback. | Para entrevista o muestra profesional. |
+
+> No intentes hacer la entrega excelente desde el primer día. Completa primero la entrega mínima; después decides cuánto profundizar.
+
+### 📚 Mini-glosario del proyecto integrado
+
+| Término | En una frase |
+|---|---|
+| **Capstone** | Proyecto final que junta lo aprendido en el nivel. |
+| **ALM** | Forma ordenada de mover cambios entre ambientes, sin editar producción a mano. |
+| **Managed solution** | Paquete cerrado para producción; se instala, no se edita directamente. |
+| **Unmanaged solution** | Paquete editable para desarrollo y aprendizaje. |
+| **Connection Reference** | Referencia reutilizable a una conexión, para que un flujo no dependa de una cuenta personal. |
+| **Environment Variable** | Valor configurable por ambiente, como un correo o URL. |
+
 ### 📖 Conceptos Clave
 
 Este módulo es la síntesis aplicada de los conceptos fundamentales del Nivel 1. Asegúrate de dominarlos antes de comenzar:
@@ -68,6 +89,15 @@ Desarrollar una solución empresarial integral que incluya:
 3. **Power Apps Model-Driven**: App escritorio para gestión
 4. **Power Automate**: 4 flujos
 5. **Power BI**: Dashboard ejecutivo
+
+**Orden recomendado si solo tienes 1 hora al día:**
+
+1. Día 1: Fase 1 hasta crear las 2 tablas mínimas.
+2. Día 2: carga 10 registros de prueba y valida relaciones.
+3. Día 3: crea una Canvas App o Model-Driven App, no ambas.
+4. Día 4: crea el flujo de notificación.
+5. Día 5: crea el dashboard/reporte simple y guarda evidencias.
+6. Días siguientes: completa flujos, seguridad y documentación si vas por entrega completa.
 
 **FASE 1: Diseño y Modelado de Datos (Días 1-3)**
 
