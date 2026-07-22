@@ -160,6 +160,8 @@ export const UI = {
 export type LevelId = "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365";
 
 export const LEVEL_ORDER: LevelId[] = ["basico", "intermedio", "avanzado", "arquitecto", "ia", "d365"];
+export const CERTIFICATION_LEVEL_ORDER: LevelId[] = ["basico", "intermedio", "avanzado", "arquitecto"];
+export const TRANSVERSAL_LEVEL_ORDER: LevelId[] = ["ia", "d365"];
 
 export const LEVEL_MODULE_RANGE: Record<LevelId, [number, number]> = {
   basico: [1, 8],

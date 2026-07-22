@@ -1,6 +1,34 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Smoke — rutas principales", () => {
+  test("sidebar mantiene D365 consistente en rutas transversales", async ({ page }) => {
+    test.setTimeout(60_000);
+
+    const routes = [
+      "/",
+      "/nivel/ia",
+      "/nivel/d365",
+      "/labs",
+      "/recursos/checklist",
+      "/power-platform",
+      "/dynamics-365",
+      "/integracion",
+      "/empleabilidad",
+      "/recursos/prompts-ia",
+    ];
+
+    for (const route of routes) {
+      await page.goto(route, { waitUntil: "domcontentloaded" });
+      const sidebar = page.getByRole("complementary", { name: "Navegación principal" });
+
+      await expect(sidebar.getByRole("link", { name: /Dynamics 365 Especialización\s+D365/ })).toBeVisible();
+      await expect(sidebar.getByText("0/10")).toBeVisible();
+      await expect(sidebar.getByText("PL-900 · PL-200 · PL-400 · Arquitectura · IA · D365")).toBeVisible();
+      await expect(sidebar.getByText("Dynamics 365 Avanzado")).toHaveCount(0);
+      await expect(sidebar.getByText("0/4")).toHaveCount(0);
+    }
+  });
+
   test("dashboard carga con level cards", async ({ page }) => {
     await page.goto("/");
     await expect(page).toHaveTitle(/Power Platform|PlanEstudio/i);

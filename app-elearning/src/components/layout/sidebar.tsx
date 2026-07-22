@@ -12,7 +12,7 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useProgressStore, calculateLevelProgress } from "@/lib/progress";
-import { UI, type LevelId } from "@/lib/i18n";
+import { CERTIFICATION_LEVEL_ORDER, LEVEL_ORDER, TRANSVERSAL_LEVEL_ORDER, UI, type LevelId } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const LEVEL_CONFIG: Record<LevelId, {
@@ -29,8 +29,7 @@ const LEVEL_CONFIG: Record<LevelId, {
   d365:       { dot: "bg-teal-600",   label: "text-teal-600 dark:text-teal-400",     badgeVariant: "d365",       progressColor: "[&>div]:bg-teal-600"  },
 };
 
-const CERTIFICATION_LEVELS: LevelId[] = ["basico", "intermedio", "avanzado", "arquitecto"];
-const TRANSVERSAL_LEVELS: LevelId[] = ["ia", "d365"];
+const SIDEBAR_FOOTER_LABEL = LEVEL_ORDER.map((levelId) => UI.levels.navCert[levelId]).join(" · ");
 
 const RESOURCE_LINKS = [
   { href: "/recursos/checklist",    label: UI.nav.checklist,     icon: CheckSquare },
@@ -136,7 +135,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
           </p>
 
           <LevelGroupLabel>{UI.nav.certificationLevels}</LevelGroupLabel>
-          {CERTIFICATION_LEVELS.map((levelId) => (
+          {CERTIFICATION_LEVEL_ORDER.map((levelId) => (
             <LevelNavItem
               key={levelId}
               levelId={levelId}
@@ -147,7 +146,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
 
           <LevelGroupLabel>{UI.nav.transversalLevels}</LevelGroupLabel>
           <div className="rounded-lg border border-border/70 bg-muted/25 px-1.5 py-1">
-            {TRANSVERSAL_LEVELS.map((levelId) => (
+            {TRANSVERSAL_LEVEL_ORDER.map((levelId) => (
               <LevelNavItem
                 key={levelId}
                 levelId={levelId}
@@ -193,7 +192,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
 
         {/* Footer version tag */}
         <div className="px-4 py-3 border-t shrink-0">
-          <p className="text-[10px] text-muted-foreground">PL-900 · PL-200 · PL-400 · Arquitectura · IA · D365</p>
+          <p className="text-[10px] text-muted-foreground">{SIDEBAR_FOOTER_LABEL}</p>
         </div>
       </aside>
     </>
