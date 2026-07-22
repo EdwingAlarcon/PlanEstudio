@@ -252,11 +252,14 @@ export function PortfolioClient({ routes, profiles }: { routes: PortfolioRouteDa
           <Route className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground" aria-hidden />
           <div className="space-y-1.5">
             <h2 className="text-sm font-semibold text-foreground">
-              ¿Buscas Contact Center, Sales Operations o F&amp;O real?
+              ¿Buscas Contact Center, Sales Operations o F&amp;O en producción real?
             </h2>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Esas especializaciones todavía no tienen capstone ni evidencia aquí — están
-              declaradas como plan, no como brecha oculta.
+              Ya existe evidencia como simulación, walkthrough o sandbox de trial para estas tres
+              áreas (Contact Center Chat, forecasting/pipeline review y hands-on F&amp;O). Lo que
+              todavía no cubre esta plataforma es la operación enterprise real: tenant productivo,
+              licencias, datos de producción y usuarios reales. Esa capa queda declarada como
+              roadmap, no como brecha oculta.
             </p>
             <Link
               href="/recursos/roadmap-especializacion-avanzada"
