@@ -2,6 +2,19 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Current Handoff for Claude
+
+Before starting new work, read `SPRINT_HANDOFF.md`. It is the active operational memory for the post-audit sprints.
+
+Current stable state as of commit `c0a729a`:
+- Latest pushed/deployed sprint: **Sprint 19 — Protección e2e de onboarding + puente a Intermedio**.
+- GitHub Pages production has been verified at `https://edwingalarcon.github.io/PlanEstudio/`.
+- Fixed content counts: **65 modules, 63 labs, 488 questions, 603 checklist criteria**.
+- Current local/CI test baseline: **225 Vitest tests** and **20 Playwright smoke tests**.
+- Recent beginner-onboarding work is intentional and should not be removed: "Primeras 2 horas", Mini Lab 01, checklist mínimo para principiantes, Power Fx en español simple, entregable mínimo del Nivel Básico, and the Módulo 9 bridge into Intermedio.
+- User preference for this repo: after completing a change, **commit, push to `master`, and wait for deploy/production verification** unless the user explicitly says not to.
+- Local validation should run `npm run build` and `npm run e2e` **serially**, not in parallel, because both can touch `.next` locally and cause transient `/_document` false negatives.
+
 ## What This Repository Is
 
 A structured, progressive learning plan for Microsoft Power Platform and Dynamics 365 — from beginner to Solution Architect. The repo has two parallel surfaces:
@@ -49,7 +62,7 @@ app-elearning/           # Next.js 15 interactive app (THE primary surface)
       avanzado/18-*.md … 30-*.md
       arquitecto/31-*.md … 41-*.md
       ia/42-*.md … 55-*.md              # transversal level (14 modules) — no prerequisites, doesn't gate/get gated by the 4 levels above
-      d365/56-*.md … 59-*.md            # transversal level (4 modules, added 2026-07-10) — Dynamics 365 CE/F&O vocabulary and architecture; same non-gating pattern as ia
+      d365/56-*.md … 65-*.md            # transversal level (10 modules) — Dynamics 365 CE/F&O vocabulary, architecture, Customer Insights, Field Service and integration; same non-gating pattern as ia
     labs/
       lab-02-*.md, lab-03-*.md, …       # one file per lab, same frontmatter pattern (63 total; includes labs 45/51/52/53/54/55/56/57 for ia, 61-67 for capstones/D365 depth, 71-80 for job-ready simulations, 91-92 for CRM Developer job-ready extensibility/troubleshooting, 93-100 for F&O hands-on practitioner labs requiring a trial/demo Finance & Operations tenant, 101 for the integrated CRM Functional Analyst job-ready case (JR-013), and 102-103 for the dedicated Sales lead-to-cash job test (JR-014) and the CRM functional post-go-live incident simulation (JR-015) — see ROADMAP_ESPECIALIZACION_AVANZADA.md #3 for which topics are covered and the pending live-tenant verification)
   next.config.ts         # output: 'export', basePath: '/PlanEstudio'
@@ -94,12 +107,13 @@ site/                    # MkDocs generated output (git-ignored)
 cd app-elearning
 npm install
 npm run dev          # http://localhost:3000
-npm test             # Vitest unit tests (223 tests)
+npm test             # Vitest unit tests (225 tests)
 npm run test:coverage
 npm run lint
 npx tsc --noEmit
 npm run validate:content  # Frontmatter, unique moduleId/slug, level ranges, question coverage
 npm run build        # Static export → app-elearning/out/
+npm run e2e          # Playwright smoke tests (20 tests)
 ```
 
 ### MkDocs (reference/legacy)
@@ -113,8 +127,9 @@ mkdocs serve --dev-addr=127.0.0.1:8001
 Push to `master` → GitHub Actions (`ci.yml`):
 1. **Lint & Type Check** — ESLint + `tsc --noEmit`
 2. **Unit Tests** — Vitest with coverage (80% threshold)
-3. **Build** — `next build` → static export in `app-elearning/out/`
-4. **Deploy** — `actions/deploy-pages` → `https://edwingalarcon.github.io/PlanEstudio/`
+3. **Playwright Smoke** — end-to-end checks for main routes, labs, search, progress, certificates and onboarding guardrails
+4. **Build** — `next build` → static export in `app-elearning/out/`
+5. **Deploy** — `actions/deploy-pages` → `https://edwingalarcon.github.io/PlanEstudio/`
 
 **If CI fails:** check ESLint errors first (most common cause). Run `npm run lint` locally before pushing.
 
