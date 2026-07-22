@@ -55,6 +55,17 @@ const FILTER_LABEL: Record<ChecklistFilter, string> = {
   completed: "Completados",
 };
 
+const BEGINNER_MINIMUM = [
+  "Entré a Power Platform y reconozco el ambiente donde trabajo.",
+  "Guardé una captura del ambiente o de la tabla Account con registros de prueba.",
+  "Puedo explicar Dataverse en una frase.",
+  "Completé Lab 02 o tengo listo el modelo básico de solicitudes.",
+  "Completé Lab 03 o tengo una Canvas App simple con lista, formulario y navegación.",
+  "Creé un flujo básico o puedo explicar qué evento lo dispara.",
+  "Tengo mínimo 3 evidencias guardadas para mi portafolio inicial.",
+  "Sé qué me falta antes de pasar a Intermedio: práctica, quiz, lab o proyecto.",
+];
+
 function today(): string {
   return new Date().toISOString().slice(0, 10);
 }
@@ -195,6 +206,36 @@ export function ChecklistClient({ checklist, totalLabs }: ChecklistClientProps) 
           value={`${completedLabs.length}/${totalLabs}`}
           detail="Las prácticas formales siguen su propio seguimiento."
         />
+      </section>
+
+      <section
+        aria-labelledby="beginner-minimum-heading"
+        className="rounded-lg border border-[#107C10]/25 bg-card p-4 shadow-fluent-1"
+      >
+        <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+          <div>
+            <Badge className="w-fit border-0 bg-[#107C10] text-white">Primera semana</Badge>
+            <h2 id="beginner-minimum-heading" className="mt-2 text-base font-semibold text-foreground">
+              Checklist mínimo para principiantes
+            </h2>
+            <p className="mt-1 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              Usa esta lista antes de mirar todos los criterios del nivel. La meta es avanzar sin sentir
+              que debes completar todo el programa en la primera vuelta.
+            </p>
+          </div>
+          <Button type="button" size="sm" variant="outline" onClick={() => changeLevel("basico")}>
+            Ir a Nivel Básico
+            <ArrowRight className="h-4 w-4" aria-hidden />
+          </Button>
+        </div>
+        <div className="mt-4 grid gap-2 md:grid-cols-2">
+          {BEGINNER_MINIMUM.map((item) => (
+            <div key={item} className="flex items-start gap-2 rounded-md border border-border bg-background p-3">
+              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#107C10]" aria-hidden />
+              <p className="text-sm leading-relaxed text-muted-foreground">{item}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section aria-label="Selector de nivel" className="flex flex-wrap gap-2">

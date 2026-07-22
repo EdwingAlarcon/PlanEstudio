@@ -35,7 +35,8 @@ estrictamente necesario. Nunca tocar conteos.
 | 13 | *(sin commit)* | Incidente de caché — resuelto sin tocar código | Usuario reportó el polish del sprint 12 "no reflejado en producción" en 4 navegadores tras hard refresh. `curl` con cache-busting confirmó `X-Cache: MISS` y contenido correcto en el servidor — era caché de red/DNS local del usuario, se resolvió solo. **Antes de investigar código por un reporte similar, verificar el servidor real primero** (ver sección "Verificación de producción" más abajo) |
 | 14 | `b71d3f7` | Onboarding de principiante — Módulos 1-3 | Simulación de estudiante principiante (diagnóstico) seguida de un micro-sprint de reducción de fricción: Módulo 1 (setup separado de la primera práctica, mini-glosario, conceptos recortados, suplementos opcionales), Módulo 2 (explicaciones breves + enlace a Lab 02), Módulo 3 (Núcleo obligatorio vs. Profundización opcional + enlace a Lab 03), `estimatedMinutes` corregido (10→20, 5→15, 6→25) con línea lectura/práctica visible, criterio de avance a Intermedio agregado al checklist |
 | 15 | `3cabbd3` | Onboarding de principiante — Módulos 4-8 | Módulos 4-8 auditados y reforzados sin cambiar conteos: tiempos visibles realistas, "Qué vas a lograr hoy", separación Núcleo obligatorio/Profundización opcional o iteraciones, evidencia para guardar, enlaces a Lab 04/Lab 05 cuando existen, ruta honesta para Power BI/Power Fx/proyecto integrado cuando no hay lab básico dedicado |
-| 16 | `este commit` | Primeras 2 horas + quick wins principiante | Ruta concreta de primeras 2 horas en "Cómo usar"; Mini Lab 01 embebido en Módulo 1 sin crear lab nuevo; práctica 6.0 de Power BI con datos de ejemplo; tabla "Power Fx en español simple"; Módulo 8 dividido en entrega mínima/completa/excelente; checklist mínimo para principiantes sin alterar los 603 criterios |
+| 16 | `d4b5b2a` | Primeras 2 horas + quick wins principiante | Ruta concreta de primeras 2 horas en "Cómo usar"; Mini Lab 01 embebido en Módulo 1 sin crear lab nuevo; práctica 6.0 de Power BI con datos de ejemplo; tabla "Power Fx en español simple"; Módulo 8 dividido en entrega mínima/completa/excelente; checklist mínimo para principiantes sin alterar los 603 criterios |
+| 17 | `este commit` | Checklist mínimo visible en app | El checklist mínimo de principiante quedó visible en `/recursos/checklist` dentro del componente interactivo `ChecklistClient`, no solo en el Markdown legacy; no altera parser ni conteo de 603 criterios |
 
 Cada sprint terminó en verde con: `npm run validate:content`, `npm run lint`, `npx tsc --noEmit` (o `npm run typecheck`),
 `npm run test:coverage` (225/225 tests históricamente), `npm run build` (o `build:pages`), y `npm run e2e` (Playwright
@@ -156,7 +157,8 @@ puentes a labs o proyecto cuando correspondía.
 
 El sprint 16 cerró un polish adicional de entrada para estudiantes absolutos: ruta "primeras 2 horas",
 Mini Lab 01 dentro del Módulo 1, checklist mínimo y quick wins/glosarios en los puntos de mayor carga
-cognitiva (Power BI, Power Fx y capstone). No creó módulos ni labs nuevos y no modificó conteos.
+cognitiva (Power BI, Power Fx y capstone). No creó módulos ni labs nuevos y no modificó conteos. El
+sprint 17 hizo visible ese checklist mínimo en la UI interactiva de `/recursos/checklist`.
 
 ## Pendientes reales actuales (todo lo demás está `Cerrado` o es `Roadmap enterprise real`)
 
