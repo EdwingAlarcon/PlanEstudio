@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -11,7 +12,7 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useProgressStore, calculateLevelProgress } from "@/lib/progress";
-import { UI, LEVEL_ORDER, type LevelId } from "@/lib/i18n";
+import { UI, type LevelId } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const LEVEL_CONFIG: Record<LevelId, {
@@ -27,6 +28,9 @@ const LEVEL_CONFIG: Record<LevelId, {
   ia:         { dot: "bg-purple-600", label: "text-purple-600 dark:text-purple-400", badgeVariant: "ia",         progressColor: "[&>div]:bg-purple-600" },
   d365:       { dot: "bg-teal-600",   label: "text-teal-600 dark:text-teal-400",     badgeVariant: "d365",       progressColor: "[&>div]:bg-teal-600"  },
 };
+
+const CERTIFICATION_LEVELS: LevelId[] = ["basico", "intermedio", "avanzado", "arquitecto"];
+const TRANSVERSAL_LEVELS: LevelId[] = ["ia", "d365"];
 
 const RESOURCE_LINKS = [
   { href: "/recursos/checklist",    label: UI.nav.checklist,     icon: CheckSquare },
@@ -131,51 +135,27 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
             {UI.nav.levels}
           </p>
 
-          {LEVEL_ORDER.map((levelId) => {
-            const cfg = LEVEL_CONFIG[levelId];
-            const { completed, total, percentage } = calculateLevelProgress(levelId, completedModules);
-            const isActive = pathname.startsWith(`/nivel/${levelId}`);
+          <LevelGroupLabel>{UI.nav.certificationLevels}</LevelGroupLabel>
+          {CERTIFICATION_LEVELS.map((levelId) => (
+            <LevelNavItem
+              key={levelId}
+              levelId={levelId}
+              active={pathname.startsWith(`/nivel/${levelId}`)}
+              completedModules={completedModules}
+            />
+          ))}
 
-            return (
-              <div key={levelId} className="mb-0.5">
-                <Link
-                  href={`/nivel/${levelId}`}
-                  className={cn(
-                    "relative flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors overflow-hidden",
-                    "hover:bg-accent hover:text-accent-foreground",
-                    isActive
-                      ? "bg-[#EFF6FC] dark:bg-[rgba(33,150,243,0.12)] font-medium"
-                      : ""
-                  )}
-                >
-                  {/* Active indicator bar */}
-                  {isActive && (
-                    <span className="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] w-0.5 rounded-r bg-[#0078D4]" aria-hidden />
-                  )}
-                  <span className={cn("h-2 w-2 rounded-full shrink-0", cfg.dot)} aria-hidden />
-                  <span className={cn("flex-1 min-w-0 truncate", isActive ? cfg.label : "")}>
-                    {UI.levels[levelId]}
-                  </span>
-                  <Badge
-                    variant={cfg.badgeVariant}
-                    className="text-[9px] px-1.5 py-0 h-4 shrink-0 max-w-[100px] truncate"
-                    title={UI.levels.cert[levelId]}
-                  >
-                    {UI.levels.navCert[levelId]}
-                  </Badge>
-                </Link>
-
-                {/* Mini progress bar */}
-                <div className="px-3 pb-1.5">
-                  <div className="flex justify-between text-[10px] text-muted-foreground mb-0.5">
-                    <span>{completed}/{total}</span>
-                    <span>{percentage}%</span>
-                  </div>
-                  <Progress value={percentage} className={cn("h-1", cfg.progressColor)} />
-                </div>
-              </div>
-            );
-          })}
+          <LevelGroupLabel>{UI.nav.transversalLevels}</LevelGroupLabel>
+          <div className="rounded-lg border border-border/70 bg-muted/25 px-1.5 py-1">
+            {TRANSVERSAL_LEVELS.map((levelId) => (
+              <LevelNavItem
+                key={levelId}
+                levelId={levelId}
+                active={pathname.startsWith(`/nivel/${levelId}`)}
+                completedModules={completedModules}
+              />
+            ))}
+          </div>
 
           <Separator className="my-3" />
 
@@ -248,5 +228,64 @@ function NavLink({
       <Icon className={cn("h-4 w-4 shrink-0", active ? "text-[#0078D4] dark:text-[#4DB8FF]" : "text-muted-foreground")} aria-hidden />
       <span className="truncate">{label}</span>
     </Link>
+  );
+}
+
+function LevelGroupLabel({ children }: { children: ReactNode }) {
+  return (
+    <p className="px-3 pb-1 pt-2 text-[10px] font-medium uppercase tracking-wider text-muted-foreground/80">
+      {children}
+    </p>
+  );
+}
+
+function LevelNavItem({
+  levelId,
+  active,
+  completedModules,
+}: {
+  levelId: LevelId;
+  active: boolean;
+  completedModules: string[];
+}) {
+  const cfg = LEVEL_CONFIG[levelId];
+  const { completed, total, percentage } = calculateLevelProgress(levelId, completedModules);
+
+  return (
+    <div className="mb-0.5">
+      <Link
+        href={`/nivel/${levelId}`}
+        className={cn(
+          "relative flex items-center gap-2.5 overflow-hidden rounded-md px-3 py-2 text-sm transition-colors",
+          "hover:bg-accent hover:text-accent-foreground",
+          active
+            ? "bg-[#EFF6FC] font-medium dark:bg-[rgba(33,150,243,0.12)]"
+            : ""
+        )}
+      >
+        {active && (
+          <span className="absolute left-0 top-1/2 h-[60%] w-0.5 -translate-y-1/2 rounded-r bg-[#0078D4]" aria-hidden />
+        )}
+        <span className={cn("h-2 w-2 shrink-0 rounded-full", cfg.dot)} aria-hidden />
+        <span className={cn("min-w-0 flex-1 truncate", active ? cfg.label : "")}>
+          {UI.levels[levelId]}
+        </span>
+        <Badge
+          variant={cfg.badgeVariant}
+          className="h-4 max-w-[100px] shrink-0 truncate px-1.5 py-0 text-[9px]"
+          title={UI.levels.cert[levelId]}
+        >
+          {UI.levels.navCert[levelId]}
+        </Badge>
+      </Link>
+
+      <div className="px-3 pb-1.5">
+        <div className="mb-0.5 flex justify-between text-[10px] text-muted-foreground">
+          <span>{completed}/{total}</span>
+          <span>{percentage}%</span>
+        </div>
+        <Progress value={percentage} className={cn("h-1", cfg.progressColor)} />
+      </div>
+    </div>
   );
 }

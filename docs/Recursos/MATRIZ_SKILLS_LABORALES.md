@@ -34,7 +34,7 @@ La brecha principal no es falta total de contenido, sino falta de una capa expl�
 | Dynamics 365 CRM Functional | Parcial | Sales y Customer Service tienen buena base; faltan más simulaciones de soporte funcional diario y configuración tipo vacante. |
 | Dynamics 365 CRM Developer | Parcial | Hay C#, plugins, Web API e integraciones; falta JavaScript CRM profundo, Custom APIs/workflows y debugging/tracing de entrevista. |
 | Data Migration & Legacy CRM | Cubierto con brechas | LAB-075 cubre mapping, cleansing, staging, reconciliación y cutover; LAB-078 cubre health assessment legacy. Siguen abiertas prácticas con dataset grande, carga real y logs/servidores on-prem reales. |
-| Business / Consulting / Soft Skills | Parcial | Hay discovery, UAT, documentación y portafolio; falta entrevista técnica, demo laboral, CV/LinkedIn e inglés técnico. |
+| Business / Consulting / Soft Skills | Cubierto con brechas | Hay discovery, UAT, documentación, portafolio, entrevista técnica, demo laboral, CV/LinkedIn e inglés técnico mediante LAB-079; sigue faltando feedback real de recruiters/entrevistadores y práctica con personas. |
 
 ## Matriz de Skills Laborales
 
@@ -137,10 +137,10 @@ La brecha principal no es falta total de contenido, sino falta de una capa expl�
 | Training a clientes | Functional Consultant / Admin | Intermedio | Parcial | Módulo 38 | LAB-062 | Agenda y manual de usuario | ¿Cómo entrenas usuarios resistentes al cambio? | Agregar simulación de sesión cliente | Media-Alta |
 | Agile/Scrum | Consultant / Developer | Intermedio | Parcial | Módulo 38 | LAB-062 | Backlog y criterios de aceptación | ¿Cómo manejas cambios de alcance durante un sprint? | Incluir en entrevista JR-009 | Media |
 | Resolución de problemas | Todos | Intermedio | Parcial | Módulos 26, 38 | LAB-023, LAB-068 | Registro de incidente y RCA | Cuéntame de un problema técnico difícil que resolviste | Crear banco de respuestas STAR | Alta |
-| Inglés técnico | Todos | Intermedio | No cubierto | No evidente | Sin lab dedicado | Demo bilingüe y respuestas técnicas | Explain a plugin pipeline in English. | Crear JR-009 | Alta |
-| CV técnico | Todos | Básico | No cubierto | Recurso portafolio parcial | Sin lab dedicado | CV orientado a Power Platform/D365 | ¿Cómo presentarías tus labs como experiencia académica/proyecto? | Crear sección Interview Readiness | Media-Alta |
-| LinkedIn técnico | Todos | Básico | No cubierto | No evidente | Sin lab dedicado | Perfil optimizado | ¿Qué headline usarías para un rol Power Platform junior? | Crear guía JR-6 | Media |
-| Demo de 10 minutos | Todos | Intermedio | Parcial | Portafolio Profesional | Capstones | Guion y grabación/demo | Muéstrame un proyecto del que estés orgulloso. | Crear JR-009 | Alta |
+| Inglés técnico | Todos | Intermedio | Cubierto | JOB_READY_INTERVIEW_READINESS | LAB-079 | Demo bilingüe, vocabulario por perfil y respuestas técnicas en inglés | Explain a plugin pipeline in English. | Practicar con entrevistas simuladas/personas reales para ganar fluidez | Alta |
+| CV técnico | Todos | Básico | Cubierto | JOB_READY_INTERVIEW_READINESS, PORTAFOLIO_PROFESIONAL | LAB-079 | CV orientado a rol, proyectos con evidencia y lenguaje honesto | ¿Cómo presentarías tus labs como experiencia académica/proyecto? | Revisar contra vacantes reales antes de aplicar | Media-Alta |
+| LinkedIn técnico | Todos | Básico | Cubierto | JOB_READY_INTERVIEW_READINESS | LAB-079 | Headline, About, Featured, Projects y nota de alcance | ¿Qué headline usarías para un rol Power Platform junior? | Pedir feedback externo y mantener enlaces visibles | Media |
+| Demo de 10 minutos | Todos | Intermedio | Cubierto | Portafolio Profesional, JOB_READY_INTERVIEW_READINESS | LAB-079, capstones | Guion, grabación/demo y fallback con capturas | Muéstrame un proyecto del que estés orgulloso. | Practicar con cronómetro y feedback externo | Alta |
 | Trabajo remoto / comunicación | Todos | Intermedio | Parcial | Módulo 38 | LAB-062 | Update escrito, decisiones y riesgos | ¿Cómo reportas bloqueo técnico a un cliente remoto? | Incluir en JR-009 | Media |
 
 ## Rutas Job-Ready propuestas
@@ -221,11 +221,11 @@ Recurso detallado: [Ruta Job-Ready Interview Readiness + Portafolio Laboral](JOB
 
 - **Objetivo:** preparar al estudiante para explicar proyectos, responder entrevistas, presentar capstones y comunicarse en contextos remotos/internacionales.
 - **Perfil laboral objetivo:** todos los perfiles.
-- **Skills cubiertos:** CV, LinkedIn, demo de 10 minutos, respuestas técnicas, inglés técnico, STAR, comunicación remota.
+- **Skills cubiertos:** CV técnico, LinkedIn, demo de 10 minutos, respuestas técnicas, inglés técnico por perfil, STAR, comunicación remota.
 - **Módulos reutilizados:** 38, 55 y recursos de portafolio.
 - **Labs reutilizados:** capstones LAB-060 a LAB-065.
 - **Nuevos labs recomendados:** JR-009.
-- **Evidencia esperada:** CV, perfil LinkedIn, guion de demo, respuestas en español/inglés, README de proyecto.
+- **Evidencia esperada:** CV orientado a rol, perfil LinkedIn optimizado, guion de demo, mini-demo en inglés, vocabulario técnico por perfil, respuestas en español/inglés, README de proyecto.
 - **Preguntas de entrevista:** Tell me about a Power Platform project you built. Explain ALM in Power Platform. How do you handle production incidents?
 - **Nivel sugerido:** Transversal.
 
@@ -243,7 +243,7 @@ Implementación en la app: JR-001 a JR-010 están disponibles como **LAB-071 a L
 | JR-006 / LAB-076 PPAC Governance Assessment | Alta | Admin / Governance | PPAC, DLP, capacity, licensing, audit logs, CoE | Informe de tenant, DLP, runbook | 30% diagnóstico, 25% controles, 25% recomendaciones, 20% evidencia | Avanzada | 4 h |
 | JR-007 / LAB-077 Customer Service Specialist Job Simulation | Alta | CRM Functional / Customer Service | casos, colas, SLA, entitlements, KB, dashboard | Configuración y UAT | 35% proceso, 25% SLA/colas, 20% reporting, 20% soporte | Intermedia-Avanzada | 4 h |
 | JR-008 / LAB-078 CRM Legacy Health Assessment | Media-Alta | Legacy / Migration | IIS, SQL, networking, upgrade, performance | Health assessment y riesgos | 40% diagnóstico, 25% riesgos, 20% roadmap, 15% comunicación | Avanzada | 3 h |
-| JR-009 / LAB-079 Technical Interview Simulation | Media-Alta | Todos | entrevista, inglés técnico, demo, CV | Guion, respuestas, demo de 10 minutos | 30% claridad, 25% evidencia, 25% precisión técnica, 20% inglés/comunicación | Transversal | 2-3 h |
+| JR-009 / LAB-079 Technical Interview Simulation | Media-Alta | Todos | entrevista, inglés técnico, demo, CV, LinkedIn | Guion, respuestas, demo de 10 minutos, CV, LinkedIn, mini-demo en inglés | 30% claridad, 25% evidencia, 25% precisión técnica, 20% inglés/comunicación | Transversal | 2-3 h |
 | JR-010 / LAB-080 AI-Assisted CRM Development | Media | CRM Developer moderno | IA, revisión de código, seguridad, prompts | Prompt, diff, checklist de revisión | 30% prompt, 30% revisión, 25% seguridad, 15% resultado | Intermedia | 3 h |
 | JR-013 / LAB-101 CRM Functional Analyst: Caso Integrado | Alta | Analista Funcional CRM / Dynamics 365 | AS-IS/TO-BE, fit-gap, backlog Azure DevOps con historias de usuario y criterios de aceptación, modelo de datos/seguridad, BPF, casos/colas/SLA/entitlements/KB, Power Automate, calidad de datos, decisión config/automate/JS/plugin, UAT y trazabilidad | Documento de requerimientos, matriz fit-gap, backlog Azure DevOps, modelo de datos, diseño de servicio, flujos Power Automate, matriz de calidad de datos, 10 casos UAT con defectos, documento de soporte/adopción y roadmap | 15% AS-IS/TO-BE/fit-gap, 20% backlog Azure DevOps, 15% modelo de datos/seguridad/BPF, 15% atención (casos/colas/SLA/KB), 10% Power Automate, 10% calidad de datos/reporting, 10% UAT/trazabilidad, 5% documentación/soporte/roadmap | Avanzada | 5 h |
 
@@ -254,7 +254,7 @@ Implementación en la app: JR-001 a JR-010 están disponibles como **LAB-071 a L
 3. JavaScript CRM profundo.
 4. Data migration hands-on.
 5. CRM on-premises / legacy health assessment.
-6. Interview readiness e inglés técnico.
+6. Feedback real externo sobre CV/LinkedIn y fluidez de inglés técnico con personas reales.
 
 ## Plan de implementación por sprints
 

@@ -80,6 +80,33 @@ Usa esta señal simple: si no puedes explicar el proyecto en 60 segundos a algui
 Power Platform, todavía no está listo para mostrarse. Vuelve al README y simplifica hasta que sí
 puedas.
 
+## Cómo enlazar el portafolio desde CV y LinkedIn
+
+Un proyecto listo para portafolio debe poder aparecer en tres lugares sin cambiar de historia:
+
+| Lugar | Qué mostrar | Qué evitar |
+|---|---|---|
+| CV | 1-2 bullets con problema, tecnología y evidencia | Listar todos los archivos del proyecto |
+| LinkedIn Featured | README, demo, captura o documento resumen | Enlaces privados o sin explicación |
+| LinkedIn Projects | Descripción corta, tecnologías y nota de alcance | Presentar un lab como empleo formal |
+
+Ejemplo de bullet para CV:
+
+```text
+Diseñé una solución model-driven para gestión de solicitudes con Dataverse, roles de seguridad,
+BPF y casos UAT; evidencia disponible en README, matriz de datos y capturas de validación.
+```
+
+Ejemplo para LinkedIn Projects:
+
+```text
+Proyecto académico/simulado de Power Platform para gestionar solicitudes internas. Incluye
+Dataverse, model-driven app, Power Automate, matriz de seguridad, casos UAT y retrospectiva.
+```
+
+La palabra clave es **consistencia**: el CV, LinkedIn y README deben decir el mismo alcance. Si el
+proyecto fue simulado, dilo una vez y con naturalidad. Eso transmite más confianza que exagerar.
+
 ## Relación con la matriz de competencias
 
 La [Matriz de Competencias](MATRIZ_COMPETENCIAS.md) lista qué evidencia corresponde a cada

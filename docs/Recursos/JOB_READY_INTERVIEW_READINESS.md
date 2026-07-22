@@ -57,6 +57,10 @@ Prepara estos artefactos antes de aplicar:
 
 ## CV tecnico
 
+Antes de escribir el CV, elige **un rol objetivo principal**. El error mas comun es crear un CV que
+parece aplicar a Maker, Developer, Admin, Functional, Migration y Architect al mismo tiempo. Eso no
+se lee como versatilidad; se lee como falta de foco.
+
 ### Estructura recomendada
 
 1. **Titulo profesional objetivo**
@@ -75,6 +79,60 @@ Prepara estos artefactos antes de aplicar:
 5. **Certificaciones / aprendizaje**
    - PL-900, PL-200/PL-400 si aplica; Arquitectura Power Platform como skill path, no PL-600 vigente.
    - PlanEstudio como ruta de aprendizaje, no como certificacion oficial Microsoft.
+
+### Plantilla de CV de 1 pagina
+
+```text
+NOMBRE APELLIDO
+Power Platform [rol objetivo] Junior | Dataverse | [2-3 skills clave]
+Ciudad / Remoto | Email | LinkedIn | GitHub/Portafolio
+
+RESUMEN
+Perfil en formacion en Microsoft Power Platform y Dynamics 365, con practica documentada en
+[tecnologias]. Portafolio con [tipo de evidencia: capstone, lab, README, UAT, plugin, assessment].
+Busco rol junior/trainee en [rol objetivo], aportando en [3 actividades realistas].
+
+SKILLS
+Power Platform: Dataverse, Power Apps, Power Automate, Power Fx, Solutions.
+Dynamics 365: [Sales / Customer Service / Field Service / segun aplique].
+Desarrollo/Gobierno: [JavaScript, C#, ALM, PPAC, DLP, Web API, segun perfil].
+Trabajo: documentacion, UAT, troubleshooting, comunicacion remota.
+
+PROYECTOS
+[Proyecto 1] - [Tecnologias]
+- Diseñe/construi/documente [solucion] para [problema], con evidencia en [README/capturas/UAT].
+- Aplique [decision tecnica o funcional] para resolver [riesgo/constraint].
+- Resultado: [criterio validado, artefacto generado, prueba completada].
+
+[Proyecto 2] - [Tecnologias]
+- ...
+
+CERTIFICACIONES / APRENDIZAJE
+- Microsoft Learn / PlanEstudio: ruta [rol], [modulos/labs principales].
+- Certificacion oficial Microsoft: [si aplica].
+```
+
+### Titulos por perfil
+
+| Perfil objetivo | Titulo sugerido |
+|---|---|
+| Maker | Power Platform Maker Junior | Power Apps | Power Automate | Dataverse |
+| Functional | Dynamics 365 CE Functional Consultant Jr | Customer Service | Sales | UAT |
+| Developer | Power Platform Developer Jr | Dataverse | JavaScript | C# Plugins | ALM |
+| Admin/Governance | Power Platform Admin Jr | PPAC | DLP | Environment Strategy | Governance |
+| Migration | Dynamics 365 Migration Jr | Dataverse | Data Mapping | Cutover Planning |
+| Architect | Power Platform Solution Architect in Training | Governance | Integration | ALM |
+
+### Bullets por perfil
+
+| Perfil | Bullet de CV usable |
+|---|---|
+| Maker | Diseñe una app model-driven para gestion de solicitudes con Dataverse, formularios, vistas, BPF y matriz de roles; documente criterios UAT y evidencia de validacion. |
+| Functional | Documente un proceso case-to-resolution con colas, SLA, entitlements, knowledge base y dashboard operativo; entregue matriz UAT y plan de soporte funcional. |
+| Developer | Desarrolle un plugin C# para Dataverse con validacion server-side, tracing y pruebas unitarias; documente pipeline, step registration y escenarios de error. |
+| Admin/Governance | Elabore un governance assessment con inventario de ambientes, DLP, capacidad, licenciamiento, decision de Managed Environments y runbook de incidentes. |
+| Migration | Diseñe una estrategia de migracion CRM legacy con assessment, mapping, cleansing, staging, reconciliacion y runbook de cutover. |
+| Architect | Documente una propuesta enterprise con matriz Fit-Gap, ownership de datos, decision log, roadmap por fases y riesgos de integracion CE + F&O. |
 
 ### Formula para bullets
 
@@ -105,6 +163,16 @@ Prefiere:
 - "Evidencia academica/proyecto".
 - "Conocimiento aplicado de".
 - "Awareness de".
+
+### Checklist ATS/recruiter
+
+- [ ] El titulo coincide con una familia de vacantes, no con todas.
+- [ ] El resumen dice tecnologias, evidencia y rol objetivo en menos de 4 lineas.
+- [ ] Cada proyecto tiene problema, tecnologia, accion y evidencia.
+- [ ] No hay claims de produccion si el trabajo fue lab/capstone.
+- [ ] Las skills estan agrupadas, no en una nube interminable.
+- [ ] El CV incluye enlaces revisables: LinkedIn, GitHub, README o portafolio.
+- [ ] El PDF se llama `Nombre_Apellido_PowerPlatform_[Rol].pdf`.
 
 ## LinkedIn tecnico
 
@@ -138,6 +206,100 @@ Mi portafolio incluye capstones documentados con modelo de datos, roles de segur
 
 Busco oportunidades junior o trainee donde pueda aportar en configuracion, soporte funcional, automatizacion, documentacion y mejora continua.
 ```
+
+### About por perfil
+
+#### Developer
+
+```text
+Estoy construyendo un perfil como Power Platform / Dynamics 365 CRM Developer junior, con foco en
+Dataverse, model-driven apps, JavaScript, C# plugins, Web API y ALM.
+
+Mi portafolio incluye proyectos documentados con modelo de datos, plugins, trazas, pruebas,
+soluciones y decisiones tecnicas. Presento estos proyectos como practica academica/profesional
+simulada, con evidencia clara y sin exagerar alcance.
+
+Busco oportunidades junior donde pueda aportar en extensibilidad Dataverse, soporte tecnico,
+integraciones, automatizacion y mejora continua.
+```
+
+#### Functional
+
+```text
+Estoy orientando mi perfil hacia Dynamics 365 CE Functional Consultant junior, con foco en Customer
+Service, Sales, Dataverse, UAT, documentacion funcional y soporte post-go-live.
+
+Mi portafolio incluye procesos case-to-resolution, lead-to-cash, fit-gap, backlog funcional,
+matrices UAT y guias de usuario. Trabajo con evidencia documentada y diferenciando claramente labs,
+capstones y experiencia real.
+
+Busco oportunidades donde pueda apoyar levantamiento de requerimientos, configuracion, pruebas,
+documentacion y soporte funcional.
+```
+
+#### Admin/Governance
+
+```text
+Estoy construyendo un perfil como Power Platform Admin / Governance junior, con foco en PPAC,
+estrategia de ambientes, DLP, capacidad, licenciamiento, seguridad Dataverse y gobierno operativo.
+
+Mi evidencia incluye governance assessments, matrices de ambientes, decisiones de Managed
+Environments, runbooks de incidentes y recomendaciones ejecutivas para reducir riesgo sin bloquear
+la adopcion.
+
+Busco oportunidades donde pueda apoyar administracion de plataforma, inventario, controles,
+documentacion y mejora continua.
+```
+
+#### Migration / Legacy
+
+```text
+Estoy desarrollando un perfil orientado a Dynamics 365 data migration y CRM legacy modernization,
+con foco en assessment, mapping, cleansing, staging, reconciliacion y cutover planning.
+
+Mi portafolio incluye estrategias de migracion documentadas, health assessments conceptuales,
+matrices de riesgo y runbooks. Presento estos proyectos como simulaciones profesionales con
+evidencia, no como migraciones productivas reales.
+
+Busco oportunidades junior/trainee donde pueda apoyar analisis de datos, documentacion de migracion,
+validacion funcional y soporte de cutover.
+```
+
+### Secciones de LinkedIn que debes llenar
+
+| Seccion | Que poner | Error comun |
+|---|---|---|
+| Headline | Rol objetivo + 3-4 skills clave | "Buscando oportunidades" sin indicar stack |
+| About | 3 parrafos: foco, evidencia, busqueda | Biografia larga sin evidencia |
+| Featured | README, capstone, demo, certificado oficial si aplica | Enlaces rotos o privados |
+| Experience | Proyecto academico/portafolio, si no fue empleo | Presentar labs como empleo |
+| Projects | 2-4 proyectos con tecnologias y evidencia | Listar todos los labs sin curadoria |
+| Skills | 20-30 skills relevantes al rol | 80 skills mezcladas sin foco |
+
+### Proyecto LinkedIn listo para publicar
+
+```text
+Proyecto: Sistema de gestion de solicitudes con Power Platform
+
+Caso simulado de portafolio donde diseñe una solucion con Dataverse, model-driven app, Power
+Automate y criterios UAT. El objetivo fue practicar modelado de datos, roles de seguridad, flujo de
+aprobacion y documentacion funcional.
+
+Evidencia: README, diagrama de datos, capturas, matriz de seguridad, casos UAT y lecciones
+aprendidas.
+
+Nota de alcance: proyecto academico/simulado, no implementacion productiva.
+```
+
+### Checklist LinkedIn
+
+- [ ] Headline enfocado en un rol.
+- [ ] About menciona evidencia, no solo ganas de aprender.
+- [ ] Featured tiene al menos 1 README o proyecto visible.
+- [ ] No hay labs presentados como experiencia laboral.
+- [ ] Skills principales coinciden con el CV.
+- [ ] La URL del perfil esta limpia y personalizada.
+- [ ] El primer proyecto tiene nota de alcance honesta.
 
 ## Demo de 10 minutos
 
@@ -186,11 +348,54 @@ STAR significa Situacion, Tarea, Accion, Resultado.
 
 Prepara respuestas cortas. No busques sonar perfecto; busca ser claro.
 
+El objetivo no es sonar como nativo. El objetivo es que un entrevistador pueda entender:
+
+- Que construiste.
+- Que decision tomaste.
+- Que problema encontraste.
+- Que harias distinto.
+- Que parte fue practica simulada y que parte fue ejecucion real.
+
+### Regla de respuesta en ingles
+
+Usa frases de 2-4 oraciones. Evita respuestas largas que se vuelven dificiles de sostener bajo
+presion.
+
+```text
+Context: In my capstone, I built a model-driven app for service requests.
+Decision: I used Dataverse because I needed security roles, relationships, and auditability.
+Evidence: I documented the data model, forms, views, business process flow, and UAT cases.
+Limit: It was a simulated portfolio project, not a production implementation.
+```
+
+### Vocabulario minimo por dominio
+
+| Dominio | Palabras que debes poder usar | Frase util |
+|---|---|---|
+| Dataverse | table, column, relationship, business rule, security role, row-level access | "I modeled the process using Dataverse tables and relationships." |
+| Power Apps | canvas app, model-driven app, form, view, command bar, delegation | "I chose a model-driven app because the process is data-centric." |
+| Power Automate | trigger, action, condition, approval, retry, run history, connection reference | "I checked the run history to find the failed action and the input/output values." |
+| ALM | solution, managed, unmanaged, environment, deployment, pipeline, rollback | "I would move changes from dev to test and production using solutions and controlled deployments." |
+| Dynamics 365 CE | lead, opportunity, quote, case, queue, SLA, entitlement, knowledge article | "A case-to-resolution process usually includes queues, SLAs and clear ownership." |
+| Governance | DLP policy, connector, environment strategy, owner, capacity, audit log | "A DLP policy reduces the risk of mixing business data with personal connectors." |
+| Migration | mapping, cleansing, staging, upsert, reconciliation, cutover, rollback | "A complex migration needs staging, reconciliation and a cutover runbook." |
+| Architecture | trade-off, constraint, dependency, risk, decision record, system of record | "I documented the trade-off in an architecture decision record." |
+
 ### Pitch de 45 segundos
 
 ```text
 I am building my professional profile around Microsoft Power Platform and Dynamics 365. My strongest areas are Dataverse, model-driven apps, Power Automate, and solution lifecycle basics. I have documented capstone projects with data models, security roles, process flows, validation criteria, and lessons learned. I am looking for a junior role where I can contribute to configuration, support, automation, and continuous improvement.
 ```
+
+### Pitch por perfil
+
+| Perfil | Pitch breve |
+|---|---|
+| Functional Consultant | "I focus on translating business requirements into Dataverse configuration, model-driven apps, business process flows and UAT cases. My portfolio includes functional documentation, fit-gap analysis and validation evidence." |
+| CRM Developer | "I focus on Dataverse extensibility with JavaScript, C# plugins, Web API and ALM. I can explain the plugin pipeline, tracing, testing and how I review code before moving it across environments." |
+| Admin/Governance | "I focus on Power Platform governance: environment strategy, DLP policies, capacity, licensing and operational runbooks. I can turn an admin-center inventory into prioritized risks and recommendations." |
+| Migration Specialist | "I focus on data migration planning: assessment, mapping, cleansing, staging, reconciliation and cutover. I can explain how to repeat a load without creating duplicates by using external identifiers and upsert logic." |
+| Solution Architect | "I focus on architecture decisions, trade-offs and governance. I can explain why a capability belongs in Dataverse, Dynamics 365, Azure integration services or an external system of record." |
 
 ### Preguntas tecnicas en ingles
 
@@ -201,6 +406,135 @@ I am building my professional profile around Microsoft Power Platform and Dynami
 | How do you troubleshoot a failed flow? | I check run history, inputs and outputs, failed actions, retry policy, connection references and error handling. |
 | What is a model-driven app? | It is an app generated from the Dataverse data model, forms, views, business rules and navigation. |
 | How do you explain a plugin pipeline? | A plugin runs on Dataverse events such as create or update, in stages like pre-validation, pre-operation and post-operation. |
+
+### Respuestas tecnicas ampliadas por perfil
+
+#### Functional / CRM Functional
+
+**Question:** How do you gather requirements for a Power Platform project?
+
+```text
+I start by understanding the business process, the current pain points and the expected outcome.
+Then I document the AS-IS and TO-BE process, identify fit-gap items, and write acceptance criteria.
+I try to validate requirements with users before designing tables, forms or automations.
+```
+
+**Question:** How would you explain a case-to-resolution process?
+
+```text
+A case-to-resolution process starts when a customer issue is captured as a case.
+The case is assigned to a queue or owner, measured with an SLA, enriched with notes or knowledge
+articles, and closed only when the resolution is validated. The key is ownership and measurable
+service expectations.
+```
+
+#### Developer / CRM Developer
+
+**Question:** When would you use a plugin instead of Power Automate?
+
+```text
+I would use a plugin when the logic must run synchronously, close to the Dataverse transaction, or
+when it requires strict validation before the record is saved. Power Automate is better for
+orchestration, notifications and integrations that do not need to block the transaction.
+```
+
+**Question:** How do you avoid recursion in a Dataverse plugin?
+
+```text
+I check the execution context, especially depth, and I register filtering attributes so the plugin
+does not run for irrelevant updates. I also avoid updating the same record unnecessarily inside the
+same pipeline.
+```
+
+#### Admin / Governance
+
+**Question:** What would you review first in Power Platform admin center?
+
+```text
+I would start with environments, owners, DLP policies, capacity, connectors and critical apps or
+flows. My goal is to identify high-risk areas first: production apps without owners, risky
+connectors, missing DLP policies and capacity pressure.
+```
+
+**Question:** How would you explain DLP to a business stakeholder?
+
+```text
+A DLP policy defines which connectors are allowed to work together. In business terms, it prevents
+corporate data from being accidentally sent to personal or unapproved services. It is a guardrail,
+not a replacement for proper security roles.
+```
+
+#### Migration / Legacy
+
+**Question:** Why do complex migrations need staging?
+
+```text
+Staging gives us a controlled place to clean, transform, validate and retry data before it reaches
+Dataverse. It also helps us track success and error records, preserve source identifiers and make
+the migration repeatable.
+```
+
+**Question:** How do you prove a migration was successful?
+
+```text
+I use technical and functional reconciliation. Technical reconciliation compares counts, rejected
+records and relationships. Functional reconciliation asks business users to validate samples and
+confirm that the migrated data supports real work.
+```
+
+#### Solution Architect
+
+**Question:** How do you document an architecture decision?
+
+```text
+I document the context, the options considered, the decision, the trade-offs and the consequences.
+For example, if I choose Dataverse instead of SharePoint, I explain security, relationships,
+licensing, lifecycle and future maintenance.
+```
+
+**Question:** How do you handle pressure to deliver quickly when there are technical risks?
+
+```text
+I make the risk visible and propose options. Some risks can be accepted temporarily with a clear
+mitigation and expiration date, but critical risks such as security, data loss or lack of rollback
+must be addressed before production.
+```
+
+### Frases para reconocer limites sin sonar inseguro
+
+| Situacion | Respuesta en ingles |
+|---|---|
+| No lo has hecho en produccion | "I have practiced this in a portfolio project, but I have not operated it in a production tenant yet." |
+| Solo conoces el concepto | "I understand the concept and the decision criteria, but I would need hands-on validation before presenting it as implementation experience." |
+| No sabes una respuesta | "I do not want to guess. My first step would be to check the official documentation and validate it in a test environment." |
+| Tu lab fue simulado | "This was a simulated project. The value is in the design, documentation and validation criteria, not in claiming production experience." |
+| Te preguntan algo fuera de alcance | "That was outside the scope of my project, but I can explain how I would approach it." |
+
+### Mini-demo en ingles (2 minutos)
+
+```text
+This project is a service request solution built with Dataverse and a model-driven app.
+The business problem was that requests were tracked manually, with no clear ownership or status.
+
+I designed Dataverse tables for requests, categories and approvals. I used a business process flow
+to guide the lifecycle and security roles to separate requesters, approvers and administrators.
+
+The main trade-off was choosing a model-driven app instead of a canvas app. I chose model-driven
+because the process is data-centric and needs forms, views, relationships and role-based access.
+
+The project was validated with UAT cases and a documented checklist. It was a portfolio project, not
+a production implementation, so the next improvement would be testing it with real users and
+production-like data.
+```
+
+### Rubrica de ingles tecnico
+
+| Nivel | Claridad | Precision tecnica | Honestidad de alcance |
+|---|---|---|---|
+| 1 | Respuestas sueltas, dificiles de seguir | Usa terminos sin explicar | Exagera o confunde lab con empleo |
+| 2 | Se entiende la idea general | Explica conceptos basicos con algunos errores | Reconoce limites solo si le preguntan |
+| 3 | Responde en frases cortas y ordenadas | Usa terminos correctos y ejemplos propios | Distingue claramente lab, capstone y produccion |
+| 4 | Maneja repreguntas con calma | Explica trade-offs y criterios de decision | Reconoce limites y propone siguiente paso verificable |
 
 ## Comunicacion remota
 

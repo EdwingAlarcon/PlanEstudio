@@ -1180,9 +1180,9 @@
 | 🔵 Nivel 2 - Intermedio | 9 | 122 | ___ | ___% | ___/5 | ___ |
 | 🟠 Nivel 3 - Avanzado | 13 | 139 | ___ | ___% | ___/5 | ___ |
 | 🔴 Nivel 4 - Arquitecto | 11 | 104 | ___ | ___% | ___/5 | ___ |
-| 🟣 Nivel IA - Desarrollo Asistido | 14 | 63 | ___ | ___% | ___/5 | ___ |
+| 🟣 Nivel IA - Desarrollo Asistido | 14 | 64 | ___ | ___% | ___/5 | ___ |
 | 🔷 Nivel D365 - Dynamics 365 Especialización | 10 | 55 | ___ | ___% | ___/5 | ___ |
-| **TOTAL** | **65** | **602** | ___ | ___% | ___/5 | ___ |
+| **TOTAL** | **65** | **603** | ___ | ___% | ___/5 | ___ |
 
 ### Resumen por Módulo
 

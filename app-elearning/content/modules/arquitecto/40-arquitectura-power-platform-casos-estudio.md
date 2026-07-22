@@ -4,7 +4,7 @@ title: "Arquitectura Power Platform — Casos de Estudio"
 level: "arquitecto"
 certification: "Arquitectura Power Platform"
 estimatedMinutes: 11
-slug: "preparacion-pl-600"
+slug: "arquitectura-power-platform-casos-estudio"
 ---
 ### 🎯 Objetivo
 Desarrollar la mentalidad de Solution Architect en Power Platform mediante casos de estudio de arquitectura, análisis de requerimientos, trade-offs, gobernanza, seguridad, integración y comunicación ejecutiva. El examen PL-600 fue retirado por Microsoft el 30 de junio de 2026; este módulo conserva las competencias profesionales que siguen siendo válidas aunque la credencial ya no esté disponible.

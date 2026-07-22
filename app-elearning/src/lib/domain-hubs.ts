@@ -127,7 +127,7 @@ export function getPowerPlatformHub(): DomainHub {
           { title: "Arquitectura de soluciones Power Platform", description: "Módulo 18.", href: "/nivel/avanzado/modulo/arquitectura-de-soluciones-power-platform" },
           { title: "Enterprise Architecture y Gobernanza", description: "Módulo 31.", href: "/nivel/arquitecto/modulo/enterprise-architecture-y-gobernanza" },
           { title: "Multi-tenant, multi-geo y ambientes", description: "Módulo 33.", href: "/nivel/arquitecto/modulo/multi-tenant-multi-geo-y-estrategia-de-ambientes" },
-          { title: "Arquitectura Power Platform — Casos de estudio", description: "Módulo 40, referencia histórica PL-600 como skill path.", href: "/nivel/arquitecto/modulo/preparacion-pl-600" },
+          { title: "Arquitectura Power Platform — Casos de estudio", description: "Módulo 40, referencia histórica PL-600 como skill path.", href: "/nivel/arquitecto/modulo/arquitectura-power-platform-casos-estudio" },
           { title: "Proyecto Capstone — Arquitectura Enterprise", description: "Módulo 41.", href: "/nivel/arquitecto/modulo/proyecto-capstone-arquitectura-enterprise" },
         ],
       },

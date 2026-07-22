@@ -3,6 +3,8 @@ export const UI = {
   nav: {
     home: "Inicio",
     levels: "Niveles",
+    certificationLevels: "Ruta certificación",
+    transversalLevels: "Especializaciones transversales",
     routes: "Rutas profesionales",
     domains: "Dominios",
     powerPlatform: "Power Platform",
