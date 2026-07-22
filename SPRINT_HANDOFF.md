@@ -28,7 +28,12 @@ estrictamente necesario. Nunca tocar conteos.
 | 6 | `df2bbc6` | Cierre de pendientes job-ready | `JOB_READY_ADMIN_GOVERNANCE.md` y `JOB_READY_INTERVIEW_READINESS.md` completados (Admin/Governance, Solution Architect, Inglés técnico, CV/LinkedIn); checklist, portafolio, rúbricas y matriz laboral actualizados |
 | 7 | `6c4b1dc` | Trazabilidad Migration/Legacy | Lenguaje corregido a `Parcial / Awareness avanzado / Job-ready simulation` en checklist, portafolio, rúbricas y matriz laboral. Deploy: Actions run `29888427282` |
 | 8 | *(sin commit — nada que cambiar)* | Verificación Migration/Legacy | Se re-diagnosticaron checklist/portafolio/rúbrica/matriz contra el pedido explícito de un sprint de cierre y se confirmó que el sprint 7 ya los había resuelto por completo. No se modificó nada; solo se descartó un artefacto autogenerado (`questions.ts`) sin diferencia real |
-| 9 | *(este sprint — ver detalle abajo)* | Cierre UX/navegación + release readiness | Auditoría de navegación transversal, verificación del slug del Módulo 40, limpieza de pendientes stale en este documento, y primera versión de "Estado estable" para release |
+| 9 | `1ae65ba` | Cierre UX/navegación + release readiness | Auditoría de navegación transversal (0 enlaces rotos, 0 labs huérfanos), verificación del slug del Módulo 40, retiro de la página huérfana `/recursos/simulador`, primera versión de "Estado estable" |
+| 10 | `30fdcea`/`43b1cf8` | Consolidación de handoffs | Fusión de dos documentos de handoff en un solo `SPRINT_HANDOFF.md` con la taxonomía de 5 estados de más abajo |
+| 11 | `749a491` | README versión estable | Marcador "versión estable pública" en el README, con resumen honesto de cobertura y corrección de conteos desactualizados (61→63 labs, 223→225 tests) |
+| 12 | `28bfa4f` | Micro-sprint de polish | Footer/sidebar y badges PL-600 verificados ya correctos (sin cambio); frase de `/portafolio` sobre Contact Center/Sales Ops/F&O corregida (ya no niega evidencia existente en LAB-081/083/093-100) |
+| 13 | *(sin commit)* | Incidente de caché — resuelto sin tocar código | Usuario reportó el polish del sprint 12 "no reflejado en producción" en 4 navegadores tras hard refresh. `curl` con cache-busting confirmó `X-Cache: MISS` y contenido correcto en el servidor — era caché de red/DNS local del usuario, se resolvió solo. **Antes de investigar código por un reporte similar, verificar el servidor real primero** (ver sección "Verificación de producción" más abajo) |
+| 14 | `b71d3f7` | Onboarding de principiante — Módulos 1-3 | Simulación de estudiante principiante (diagnóstico) seguida de un micro-sprint de reducción de fricción: Módulo 1 (setup separado de la primera práctica, mini-glosario, conceptos recortados, suplementos opcionales), Módulo 2 (explicaciones breves + enlace a Lab 02), Módulo 3 (Núcleo obligatorio vs. Profundización opcional + enlace a Lab 03), `estimatedMinutes` corregido (10→20, 5→15, 6→25) con línea lectura/práctica visible, criterio de avance a Intermedio agregado al checklist |
 
 Cada sprint terminó en verde con: `npm run validate:content`, `npm run lint`, `npx tsc --noEmit` (o `npm run typecheck`),
 `npm run test:coverage` (225/225 tests históricamente), `npm run build` (o `build:pages`), y `npm run e2e` (Playwright
@@ -84,6 +89,8 @@ terminar" son cosas distintas):
 | Managed Environments / capacity / licensing con datos reales | Roadmap enterprise real | Documentado en `JOB_READY_ADMIN_GOVERNANCE.md` |
 | Logs reales de Purview/Dataverse audit | Roadmap enterprise real | Mismo recurso |
 | Fluidez de inglés/feedback real de CV-LinkedIn con personas | Roadmap enterprise real | Requiere práctica externa, no contenido |
+| Onboarding principiante Módulos 1-3 (Nivel Básico) | Cerrado | Sprint 14 |
+| Onboarding principiante Módulos 4-8 (Nivel Básico) | Pendiente no bloqueante | No auditado todavía — ver sección "Beginner UX" abajo |
 
 ## UX / navegación transversal — auditoría del sprint 9
 
@@ -110,11 +117,53 @@ respaldo, ni certificaciones retiradas presentadas como vigentes (PL-600 aparece
 como retirado; PL-200 muestra correctamente su fecha de retiro futura, 31 ago 2026, sin presentarse
 como indefinidamente vigente).
 
+## Verificación de producción — antes de investigar código por un reporte de "no se refleja"
+
+Si el usuario dice que un cambio ya desplegado (deploy confirmado en verde) no se ve en producción:
+
+1. `curl -s -D - -o /dev/null "https://edwingalarcon.github.io/PlanEstudio/<ruta>?nocache=$(date +%s)"` y
+   revisar `X-Cache` (MISS = fresco), `Age`, `Last-Modified`.
+2. Si el body tiene el contenido correcto y `X-Cache: MISS`, el servidor está bien — el problema es del
+   lado del cliente (caché de navegador, DNS local, proxy corporativo). No tocar código todavía.
+3. Si persiste en varios navegadores del mismo dispositivo/red tras hard refresh, pedir probar desde otra
+   red (datos móviles) para aislar la causa antes de asumir nada sobre el repo.
+
+Esto ya pasó una vez (sprint 13): el servidor nunca sirvió contenido viejo, era caché local del usuario,
+se resolvió solo.
+
+## Beginner UX — auditoría de estudiante principiante (sprint 14)
+
+Se simuló un estudiante principiante real (sin experiencia previa) recorriendo Home, Cómo usar, Nivel
+Básico, Módulos 1-3 y Lab 02. Hallazgos que motivaron el sprint 14:
+
+- Home y "Cómo usar" ya estaban bien orientados — sin cambios ahí más que una frase de expectativa de
+  tiempo.
+- Módulo 1 pedía crear cuenta M365 Developer + activar trial + 16 conceptos antes de cualquier logro
+  visible — alto riesgo de abandono en el primer contacto.
+- Módulo 3 mezclaba primera app + filtros + modo oscuro + segunda app (Collections/calculadora) +
+  responsive design en un solo bloque — demasiado denso para el tercer módulo de un principiante.
+- `estimatedMinutes` no reflejaba tiempo real de práctica (10/5/6 min vs. 45-90 min reales).
+- No existía enlace módulo→lab en ningún módulo.
+- Lab 02 (el primer lab) ya era el mejor material del recorrido — clic-por-clic, resultado esperado,
+  evidencia explícita; no se tocó su contenido, solo se referenció desde los módulos.
+
+El sprint 14 corrigió esto en Módulos 1-3 únicamente (ver tabla de sprints arriba). **Módulos 4-8 del
+Nivel Básico no fueron auditados ni tocados** — si se pide continuar esta línea, el siguiente paso lógico
+es repetir el mismo diagnóstico (setup temprano, densidad, estimatedMinutes, enlace a lab) en los módulos
+4-8 antes de asumir que están bien.
+
 ## Pendientes reales actuales (todo lo demás está `Cerrado` o es `Roadmap enterprise real`)
 
-No queda ningún pendiente de contenido ni de UX bloqueante. Lo único abierto es lo ya clasificado como
-**Roadmap enterprise real** en la tabla de arriba — por definición, no forma parte de un sprint de
-cierre porque depende de tenant, licencia o personas reales, no de trabajo de contenido.
+No queda ningún pendiente de contenido "post-auditoría" ni de UX bloqueante en el roadmap original.
+Pendientes honestos que sí quedan abiertos, fuera de ese roadmap:
+
+- **Pendiente no bloqueante** — Módulos 4-8 del Nivel Básico no recibieron la misma auditoría de
+  principiante que 1-3 (sprint 14). No se sabe si tienen los mismos problemas de densidad/estimados.
+- **Pendiente no bloqueante** — no se verificó visualmente en navegador cómo renderiza
+  `MarkdownRenderer` los headings `## 🟢 Núcleo obligatorio` / `## 🔧 Profundización opcional` insertados
+  en el Módulo 3 (build/lint no reportaron problema, pero no hubo revisión visual).
+- Todo lo demás sigue clasificado como **Roadmap enterprise real** en la tabla de arriba — depende de
+  tenant, licencia o personas reales, no de trabajo de contenido.
 
 ## Estado estable — release readiness
 
