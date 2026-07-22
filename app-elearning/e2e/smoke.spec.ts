@@ -49,6 +49,25 @@ test.describe("Smoke — rutas principales", () => {
     await expect(page.getByRole("heading", { name: /Objetivo/i }).first()).toBeVisible();
   });
 
+  test("onboarding principiante mantiene sus bloques de inicio", async ({ page }) => {
+    await page.goto("/como-usar");
+    await expect(page.getByRole("heading", { name: "Primeras 2 horas si empiezas desde cero" })).toBeVisible();
+    await expect(page.getByText("60-90 min")).toBeVisible();
+    await expect(page.getByText("Completa el Mini Lab 01 dentro del Módulo 1")).toBeVisible();
+
+    await page.goto("/nivel/basico/modulo/introduccion-al-ecosistema-power-platform");
+    await expect(page.getByRole("heading", { name: /Mini Lab 01/i })).toBeVisible();
+    await expect(page.getByText("Primera victoria en 5 minutos")).toBeVisible();
+
+    await page.goto("/nivel/basico/modulo/fundamentos-de-power-fx-y-expresiones");
+    await expect(page.getByRole("heading", { name: "Power Fx en español simple" })).toBeVisible();
+    await expect(page.getByText("léela de adentro hacia afuera")).toBeVisible();
+
+    await page.goto("/nivel/basico/modulo/primer-proyecto-integrado");
+    await expect(page.getByRole("heading", { name: "Entregable mínimo viable del Nivel Básico" })).toBeVisible();
+    await expect(page.getByText("No intentes hacer la entrega excelente desde el primer día")).toBeVisible();
+  });
+
   test("marcar módulo como completado actualiza el progreso", async ({ page }) => {
     await page.goto("/nivel/basico/modulo/introduccion-al-ecosistema-power-platform");
     const completeBtn = page.locator('button[aria-label*="Marcar"]').first();

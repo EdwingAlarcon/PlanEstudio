@@ -3,11 +3,15 @@ moduleId: 9
 title: "Dataverse Avanzado"
 level: "intermedio"
 certification: "PL-200"
-estimatedMinutes: 9
+estimatedMinutes: 30
 slug: "dataverse-avanzado"
 ---
 ### 🎯 Objetivo
 Diseñar modelos de datos empresariales complejos en Dataverse: relaciones polimórficas, columnas calculadas y rollup, reglas de negocio avanzadas, seguridad a nivel de campo, y auditoría completa de datos.
+
+> **Antes de empezar:** este módulo marca el salto de "crear tablas" a "diseñar un modelo mantenible". Si vienes del Nivel Básico, no intentes memorizar todos los nombres en la primera lectura. Tu meta mínima es poder explicar cuándo usar relación 1:N, N:N manual, columna calculada, rollup, Field Security Profile y auditoría, y luego validarlo en el Lab 09.
+
+**Tiempo recomendado:** 30 min de lectura guiada + 60-90 min de práctica en ambiente o simulación documentada.
 
 ### 📖 Conceptos Clave
 - **Tipos de relaciones:** Dataverse soporta cuatro patrones: 1:N (padre-hijo, ej. Proyecto → Tareas), N:N nativa (tabla de intersección gestionada automáticamente por la plataforma), N:N manual (tabla de intersección propia con columnas adicionales, ej. `sit_oportunidad_etiqueta` con campo `sit_relevancia`), y Polimórfica (un Lookup que puede apuntar a múltiples tablas, como el campo `sit_referencia` que acepta Cuenta o Contacto). Las relaciones definen el comportamiento en cascada (Cascade) para operaciones de Asignar, Compartir, Eliminar y Desactivar.
@@ -152,5 +156,10 @@ Diseñar modelos de datos empresariales complejos en Dataverse: relaciones polim
 - [ ] Field Security Profile aplicado: usuario sin perfil no puede editar presupuesto
 - [ ] Business Process Flow de 4 etapas funciona en el formulario Model-Driven
 - [ ] Auditoría registra cambios en sit_estado y sit_presupuesto
+- [ ] Guardé evidencia mínima: diagrama simple del modelo, captura del rollup/BPF y nota corta explicando por qué elegí cada relación
+
+Completa ahora: **[Lab 09 · Dataverse Avanzado — BPF, Rollup y Field Security](/labs/lab-09-dataverse-avanzado)**
+
+**Por qué:** el Lab 09 convierte este módulo en práctica sobre la solución SIT que ya construiste: agrega columnas calculadas/rollup, seguridad de campo y un Business Process Flow sin inventar otro caso de negocio desde cero.
 
 ---

@@ -38,6 +38,7 @@ estrictamente necesario. Nunca tocar conteos.
 | 16 | `d4b5b2a` | Primeras 2 horas + quick wins principiante | Ruta concreta de primeras 2 horas en "Cómo usar"; Mini Lab 01 embebido en Módulo 1 sin crear lab nuevo; práctica 6.0 de Power BI con datos de ejemplo; tabla "Power Fx en español simple"; Módulo 8 dividido en entrega mínima/completa/excelente; checklist mínimo para principiantes sin alterar los 603 criterios |
 | 17 | `bab3325` | Checklist mínimo visible en app | El checklist mínimo de principiante quedó visible en `/recursos/checklist` dentro del componente interactivo `ChecklistClient`, no solo en el Markdown legacy; no altera parser ni conteo de 603 criterios |
 | 18 | `este commit` | Smoke e2e del checklist mínimo + validación serial | Playwright ahora valida que `/recursos/checklist` muestre el bloque "Checklist mínimo para principiantes"; el handoff documenta que `npm run build` y `npm run e2e` deben correrse en serie localmente para evitar falsos negativos transitorios de `.next` |
+| 19 | `este commit` | Protección e2e de onboarding + puente a Intermedio | Smoke test cubre "Primeras 2 horas", Mini Lab 01, Power Fx en español y entregable mínimo; Módulo 9 ajustado con tiempo realista, puente para quien viene de Básico, evidencia mínima y enlace a Lab 09 |
 
 Cada sprint terminó en verde con: `npm run validate:content`, `npm run lint`, `npx tsc --noEmit` (o `npm run typecheck`),
 `npm run test:coverage` (225/225 tests históricamente), `npm run build` (o `build:pages`), y `npm run e2e` (Playwright
