@@ -3,13 +3,21 @@ moduleId: 6
 title: "Power BI - Reportes y Dashboards Básicos"
 level: "basico"
 certification: "PL-900"
-estimatedMinutes: 8
+estimatedMinutes: 25
 slug: "power-bi-reportes-y-dashboards-basicos"
 ---
-*Duración: 2 semanas*
+*Duración: 2 semanas · Lectura: 10-12 min · Con práctica: 60-90 min (reporte local en Power BI Desktop); publicación, refresh y RLS pueden quedar para una segunda sesión*
 
 ### 🎯 Objetivo
 Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
+
+### ✅ Qué vas a lograr hoy (Núcleo obligatorio)
+- Conectar Power BI Desktop a datos de solicitudes.
+- Crear un modelo simple con relaciones.
+- Construir un reporte de 2 páginas con KPIs, gráficos y filtros básicos.
+
+### 🔧 Qué queda para después (Profundización opcional)
+- Publicar en Power BI Service, configurar refresh, compartir dashboards y aplicar Row-Level Security. Son habilidades importantes, pero dependen más de permisos/licencias del tenant.
 
 ### 📖 Conceptos Clave
 - **Componentes**: Power BI Desktop, Service, Mobile
@@ -24,6 +32,8 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 - **Row-Level Security (RLS)**: Filtros de datos por usuario
 
 ### 👨‍💻 Actividades Prácticas
+
+## 🟢 Núcleo obligatorio
 
 ##### Práctica 6.1: Conectar a Dataverse y Modelar
 
@@ -176,6 +186,10 @@ CALCULATE(
 ```
 
 > **Nota:** Las funciones AVERAGEX con FILTER y el cálculo MoM con DATEADD son DAX avanzado — las verás en detalle en el **Módulo 12 (Nivel 2)** con el contexto correcto de inteligencia de tiempo.
+
+## 🔧 Profundización opcional
+
+> Si ya lograste abrir el `.pbix`, ver datos y crear visuales básicos, continúa con publicación e interactividad. Si no tienes workspace o licencia suficiente, guarda el reporte local como evidencia y vuelve a esta sección cuando el tenant lo permita.
 
 ##### Práctica 6.4: Interactividad y Drill-Through
 
@@ -362,5 +376,19 @@ CALCULATE(
 - [ ] Dashboard con tiles pinneados creado
 - [ ] Explicar diferencia entre Import y DirectQuery
 - [ ] Calcular tamaño de dataset y estimar refresh time
+
+> Como principiante, considera aprobado el núcleo si tienes conexión, modelo simple, 2 páginas y visuales que responden a filtros. Publicación, refresh, dashboard y RLS pertenecen a la profundización cuando tengas Power BI Service disponible.
+
+### 📸 Evidencia para guardar
+- Captura de Power Query con tablas cargadas y columnas renombradas.
+- Captura del modelo con relaciones visibles.
+- Captura de las 2 páginas del reporte con slicers y KPIs.
+- Si publicas: captura del workspace, configuración de refresh y roles RLS.
+
+## ➡️ Siguiente práctica recomendada
+
+Guarda tu archivo `.pbix` como evidencia del Nivel Básico y úsalo como insumo del **Módulo 08 · Primer Proyecto Integrado**.
+
+**Por qué:** este módulo no tiene un lab básico dedicado, pero el reporte que construyes aquí se integra naturalmente al proyecto final del Nivel 1. Si tienes poco tiempo, prioriza un dashboard local claro antes que publicación y seguridad avanzada.
 
 ---

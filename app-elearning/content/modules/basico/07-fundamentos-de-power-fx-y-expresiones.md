@@ -3,13 +3,26 @@ moduleId: 7
 title: "Fundamentos de Power Fx y Expresiones"
 level: "basico"
 certification: "PL-900"
-estimatedMinutes: 8
+estimatedMinutes: 30
 slug: "fundamentos-de-power-fx-y-expresiones"
 ---
-*Duración: 1-2 semanas*
+*Duración: 1-2 semanas · Lectura: 12-15 min · Con práctica: 60-90 min (núcleo obligatorio); delegación avanzada y operaciones batch pueden quedar para una segunda sesión*
 
 ### 🎯 Objetivo
 Dominar el lenguaje de fórmulas Power Fx para lógica avanzada en Canvas Apps.
+
+### ✅ Qué vas a lograr hoy (Núcleo obligatorio)
+- Leer fórmulas de Power Fx sin sentir que son “código misterioso”.
+- Escribir validaciones simples con `If`, `IsBlank`, `Len`, `Notify` y operadores lógicos.
+- Usar `Filter`, `LookUp`, formato de texto/fechas y un ejemplo básico de delegación.
+
+### 🔧 Qué queda para después (Profundización opcional)
+- `AddColumns`, `ForAll`, batch updates, Collections complejas y optimización fina de delegación. Puedes volver a estos patrones después de practicar más Canvas Apps.
+
+### 🧭 Cómo recorrer este módulo si eres principiante
+1. Primero lee las fórmulas y explica en voz alta qué hace cada línea.
+2. Practica en una app pequeña con 2 controles y 1 Gallery; no intentes copiar todas las fórmulas en una sola pantalla.
+3. Si aparece una advertencia azul de delegación, no la ignores: anótala como hallazgo aunque todavía no sepas resolverla completamente.
 
 ### 📖 Conceptos Clave
 - **Sintaxis**: Funciones, operadores, referencias
@@ -26,6 +39,10 @@ Dominar el lenguaje de fórmulas Power Fx para lógica avanzada en Canvas Apps.
 - **Patrones**: Context variables, global variables, collections
 
 ### 👨‍💻 Actividades Prácticas
+
+## 🟢 Núcleo obligatorio
+
+Completa primero los ejercicios 7.1.1, 7.1.2, 7.2.1, 7.3.1 y 7.5.1. Con eso tendrás búsqueda/filtro, búsqueda de un registro, validación de formulario, formato de texto y una primera lectura de delegación.
 
 ##### Práctica 7.1: Funciones de Tablas y Filtrado
 
@@ -52,6 +69,9 @@ LookUp(
 ```
 
 **Ejercicio 3: AddColumns para Enriquecer Datos**
+
+> Profundización opcional: este patrón ya combina tabla, columna calculada y búsqueda relacionada. Si todavía estás entendiendo `Filter` y `LookUp`, vuelve a este ejercicio después.
+
 ```javascript
 // Agregar columna calculada "Días Transcurridos" en Collection
 ClearCollect(
@@ -147,6 +167,8 @@ Split("Hardware,Software,Red,Accesos", ",")
 ```
 
 ##### Práctica 7.4: Collections y Contexto
+
+> Profundización opcional: Collections, `ForAll` y patrones batch son útiles para apps reales, pero no son requisito para entender Power Fx básico. Trabaja esta práctica cuando ya puedas crear y explicar fórmulas simples sin copiar/pegar a ciegas.
 
 **Ejercicio 1: Carrito de Compras (Pattern)**
 ```javascript
@@ -343,5 +365,19 @@ Filter(
 - [ ] Identificar y resolver 3+ warnings de delegación
 - [ ] Explicar diferencia entre variables globales y contextuales
 - [ ] Debugging de fórmula compleja con Labels temporales
+
+> Para avanzar como principiante, valida al menos 5 fórmulas: una de filtro, una de búsqueda, una de validación, una de formato y una corrección de delegación. Los 10+ ejemplos y operaciones batch son profundización.
+
+### 📸 Evidencia para guardar
+- Captura de una Gallery filtrada por texto o estado.
+- Captura de un botón o formulario con validación funcionando.
+- Captura de una fórmula con comentario `//` explicando su intención.
+- Captura de una advertencia de delegación identificada y su versión corregida.
+
+## ➡️ Siguiente práctica recomendada
+
+Vuelve a tu Canvas App del **Módulo 03 / Lab 03** y reemplaza una fórmula simple por una versión más robusta de este módulo.
+
+**Por qué:** Power Fx se aprende mejor mejorando una app existente que copiando muchas fórmulas aisladas. Tu objetivo no es memorizar funciones, sino reconocer patrones: filtrar, validar, formatear, navegar y evitar delegación peligrosa.
 
 ---

@@ -3,13 +3,21 @@ moduleId: 4
 title: "Power Apps Model-Driven - Apps Basadas en Datos"
 level: "basico"
 certification: "PL-900"
-estimatedMinutes: 7
+estimatedMinutes: 20
 slug: "power-apps-model-driven-apps-basadas-en-datos"
 ---
-*Duración: 1-2 semanas*
+*Duración: 1-2 semanas · Lectura: 8-10 min · Con práctica: 60-90 min (núcleo obligatorio); seguridad y BPF pueden completarse en una segunda sesión*
 
 ### 🎯 Objetivo
 Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
+
+### ✅ Qué vas a lograr hoy (Núcleo obligatorio)
+- Publicar una Model-Driven App conectada a las tablas que ya creaste en Dataverse.
+- Configurar navegación básica, formulario principal, vista de trabajo y dashboard simple.
+- Entender por qué esta app sirve mejor para gestores/técnicos que para usuarios móviles.
+
+### 🔧 Qué queda para después (Profundización opcional)
+- Business Process Flow completo y Security Roles probados con usuarios diferentes. Son importantes, pero no bloquean tu primer logro visible del módulo.
 
 ### 📖 Conceptos Clave
 - **Arquitectura Model-Driven**: Metadata-driven, auto-generada
@@ -23,6 +31,8 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 - **Modern App Designer** (2023+): nuevo diseñador visual unificado que reemplaza al editor clásico. Permite configurar páginas, tablas, formularios, vistas y navegación desde una sola interfaz. Es el editor predeterminado en todos los ambientes actuales — si las instrucciones mencionan el "diseñador clásico", selecciona **Switch to classic** en la barra superior si necesitas reproducir pasos del tutorial
 
 ### 👨‍💻 Actividades Prácticas
+
+## 🟢 Núcleo obligatorio
 
 ##### Práctica 4.1: Crear Primera Model-Driven App
 
@@ -117,6 +127,10 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
     - **Panel superior izquierda**: Chart "Solicitudes por Estado" (Donut)
     - **Panel superior derecha**: Chart "Solicitudes por Prioridad" (Column)
     - **Panel inferior**: List de "Solicitudes Pendientes" (View)
+
+## 🔧 Profundización opcional
+
+> Si estás empezando desde cero, completa primero la app, el formulario, una vista y un dashboard. Vuelve a esta sección cuando ya puedas abrir la Model-Driven App publicada y navegar por registros reales.
 
 ##### Práctica 4.2: Business Process Flow
 
@@ -276,5 +290,21 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 - [ ] 2+ Security Roles configurados y asignados
 - [ ] Probar app con distintos roles y verificar permisos
 - [ ] Explicar cuándo usar Model-Driven vs Canvas
+
+> Los primeros 4 criterios son el Núcleo obligatorio. BPF y Security Roles pertenecen a la Profundización opcional si no tienes todavía usuarios de prueba o tiempo para validar permisos.
+
+### 📸 Evidencia para guardar
+- Captura de la app publicada con el site map visible.
+- Captura del formulario Main con secciones organizadas.
+- Captura de una vista filtrada y del dashboard con datos de prueba.
+- Si haces la profundización: captura del BPF activo y de la prueba con roles.
+
+## ➡️ Siguiente práctica recomendada
+
+Completa ahora: **[Lab 04 · Model-Driven App — Sistema de Gestión de Solicitudes Completo](/labs/lab-04-model-driven-app)**
+
+**Por qué:** el Lab 04 convierte este módulo en un recorrido clic-por-clic sobre la solución SIT creada en los labs anteriores. Es la mejor forma de practicar formularios, vistas, dashboard y roles sin inventar estructura nueva.
+
+**Qué evidencia guardar del lab:** site map publicado, formulario Main, Quick Create, dashboard y prueba de permisos con los roles `SIT Solicitante` y `SIT Técnico TI`.
 
 ---

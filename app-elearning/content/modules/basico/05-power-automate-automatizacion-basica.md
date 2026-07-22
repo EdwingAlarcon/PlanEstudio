@@ -3,13 +3,21 @@ moduleId: 5
 title: "Power Automate - Automatización Básica"
 level: "basico"
 certification: "PL-900"
-estimatedMinutes: 9
+estimatedMinutes: 25
 slug: "power-automate-automatizacion-basica"
 ---
-*Duración: 2-3 semanas*
+*Duración: 2-3 semanas · Lectura: 10-12 min · Con práctica: 75-120 min (núcleo obligatorio); RPA y error handling avanzado pueden quedar para una segunda sesión*
 
 ### 🎯 Objetivo
 Automatizar procesos de negocio mediante flujos cloud y de escritorio.
+
+### ✅ Qué vas a lograr hoy (Núcleo obligatorio)
+- Crear un flujo automatizado que reacciona a una nueva Solicitud TI en Dataverse.
+- Crear un flujo programado que envía un reporte diario sencillo.
+- Leer el historial de ejecución para saber si un flujo corrió bien o dónde falló.
+
+### 🔧 Qué queda para después (Profundización opcional)
+- Aprobaciones, patrones Try/Catch con Scopes y Power Automate Desktop. Son muy útiles, pero no necesitas completarlos antes de tener tus primeros flujos funcionando.
 
 ### 📖 Conceptos Clave
 - **Tipos de flujos**: Cloud (automated, instant, scheduled), Desktop, Business Process
@@ -24,6 +32,8 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 - **Scopes**: Agrupar acciones para manejo de errores
 
 ### 👨‍💻 Actividades Prácticas
+
+## 🟢 Núcleo obligatorio
 
 ##### Práctica 5.1: Flujo Automated - Notificación de Solicitudes
 
@@ -161,6 +171,10 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
     - Expression: `empty(outputs('List_rows')?['body/value'])`
     - Yes: Terminate (Success) con mensaje "No hay solicitudes"
     - No: Enviar email
+
+## 🔧 Profundización opcional
+
+> Completa esta parte cuando ya tengas al menos un flujo automated y uno scheduled con ejecución exitosa en Run history. Si todavía estás luchando con conexiones o permisos, quédate en el núcleo y guarda evidencia.
 
 ##### Práctica 5.3: Flujo Instant - Aprobación de Cambios
 
@@ -421,5 +435,21 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 - [ ] 1 flujo Desktop creado (opcional según infraestructura)
 - [ ] Explicar diferencia entre triggers y cuándo usar cada uno
 - [ ] Calcular costo estimado de ejecuciones de flujo
+
+> Para avanzar como principiante, mínimo valida 2 flujos cloud: uno automated y uno scheduled. El flujo instant de aprobación, el flujo Desktop y el cálculo de costo son profundización.
+
+### 📸 Evidencia para guardar
+- Captura del diseñador del flujo automated con trigger de Dataverse.
+- Captura del Run history con al menos una ejecución exitosa.
+- Captura del email o mensaje enviado por el flujo.
+- Si haces aprobaciones: captura del email de aprobación y del cambio aplicado en Dataverse.
+
+## ➡️ Siguiente práctica recomendada
+
+Completa ahora: **[Lab 05 · Power Automate — Notificación y Aprobación de Solicitudes](/labs/lab-05-automate-aprobacion)**
+
+**Por qué:** el Lab 05 aterriza este módulo en tres flujos concretos sobre la solución SIT: notificación, reporte diario y aprobación de prioridad crítica. Además evita la ambigüedad más común en Dataverse: filtros OData y valores numéricos de columnas Choice.
+
+**Qué evidencia guardar del lab:** historial exitoso de los 3 flujos, email de confirmación, mensaje de Teams para solicitud crítica y resultado de aprobar/rechazar una prioridad crítica.
 
 ---

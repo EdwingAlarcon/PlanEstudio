@@ -3,13 +3,33 @@ moduleId: 8
 title: "Primer Proyecto Integrado"
 level: "basico"
 certification: "PL-900"
-estimatedMinutes: 19
+estimatedMinutes: 45
 slug: "primer-proyecto-integrado"
 ---
-*Duración: 2-3 semanas*
+*Duración: 2-3 semanas · Lectura/planificación: 25-45 min · Construcción guiada: 8-16 horas distribuidas en varias sesiones*
 
 ### 🎯 Objetivo
 Aplicar todos los conocimientos del Nivel 1 en un proyecto end-to-end real.
+
+### ✅ Qué vas a lograr hoy (Núcleo obligatorio)
+- Diseñar el alcance del proyecto y crear la Solution con el modelo de datos base.
+- Dejar al menos una app funcional conectada a Dataverse: Canvas App o Model-Driven App.
+- Definir la evidencia mínima que usarás para demostrar que completaste el Nivel Básico.
+
+### 🔧 Qué queda para después (Iteraciones del proyecto)
+- Completar los 4 flujos, el dashboard Power BI con RLS, testing multi-role y documentación formal. Este módulo es un capstone: se termina por iteraciones, no en una sola sesión.
+
+### 🧭 Entregable mínimo viable del Nivel Básico
+
+Si tienes poco tiempo o estás estudiando solo, apunta primero a este alcance:
+
+1. Solution `Sistema Solicitudes Empresariales` con publisher `sse`.
+2. Tabla `Solicitud` + tabla `Categoría Solicitud` con relación y 10 registros de prueba.
+3. Una Canvas App para crear/ver solicitudes o una Model-Driven App para gestionarlas.
+4. Un flujo Power Automate de notificación al crear solicitud.
+5. Un reporte Power BI local con KPIs básicos o, si no tienes Power BI listo, una vista/dashboard dentro de Model-Driven.
+
+Cuando esto funcione, ya tienes una historia completa para explicar en entrevista: dato, app, automatización, reporte y seguridad básica.
 
 ### 📖 Conceptos Clave
 
@@ -50,6 +70,8 @@ Desarrollar una solución empresarial integral que incluya:
 5. **Power BI**: Dashboard ejecutivo
 
 **FASE 1: Diseño y Modelado de Datos (Días 1-3)**
+
+> **Meta de la primera sesión:** termina esta fase antes de construir pantallas. Si el modelo queda claro, el resto del proyecto avanza con menos retrabajo.
 
 **Paso 1: Documentar requerimientos**
 
@@ -138,6 +160,8 @@ Version: 1.0.0.0
     - Show "Comentarios Aprobador" only if Estado = Aprobada OR Rechazada
 
 **FASE 2: Canvas App para Solicitantes (Días 4-7)**
+
+> Puedes escoger esta fase como tu primera app funcional si quieres demostrar experiencia de usuario móvil y formularios rápidos.
 
 **Paso 1: Estructura de pantallas**
 ```
@@ -237,6 +261,8 @@ Refresh(Comentarios)
 
 **FASE 3: Model-Driven App para Gestión (Días 8-10)**
 
+> Puedes escoger esta fase como tu primera app funcional si quieres demostrar gestión operativa, vistas, formularios y proceso guiado.
+
 **Paso 1: Configurar sitemap**
 ```
 Área: Solicitudes
@@ -324,6 +350,8 @@ Stage 4: Cierre
 
 **FASE 4: Power Automate Flujos (Días 11-13)**
 
+> Para el entregable mínimo, implementa primero solo el Flujo 1. Los demás flujos completan la madurez del proyecto, pero no son necesarios para demostrar integración básica.
+
 **Flujo 1: Notificar Nueva Solicitud**
 ```
 Trigger: Manual (llamado desde Canvas App)
@@ -392,6 +420,8 @@ Actions:
 ```
 
 **FASE 5: Power BI Dashboard (Días 14-16)**
+
+> Si no tienes permisos de Power BI Service, crea el reporte en Power BI Desktop y guarda capturas. RLS y publicación pueden quedar documentados como siguiente iteración.
 
 **Paso 1: Conectar y modelar datos**
 ```
@@ -465,6 +495,8 @@ Filter: Solicitudes[Aprobador Email] = USERPRINCIPALNAME()
 
 **FASE 6: Seguridad y Testing (Días 17-19)**
 
+> No necesitas muchos usuarios reales para aprender el patrón. Con 2-3 usuarios de prueba, o una matriz documentada si tu tenant no permite crearlos, ya puedes demostrar criterio de seguridad.
+
 **Paso 1: Configurar Security Roles**
 
 *Role: Solicitante*
@@ -517,6 +549,8 @@ Configuración de solución
 - Probar en móvil (Canvas App responsive)
 
 **FASE 7: Documentación y Despliegue (Días 20-21)**
+
+> En un ambiente de aprendizaje, "despliegue" puede significar exportar la solution y documentar los pasos. No prometas producción real si no tienes ambiente TEST/PROD.
 
 **Paso 1: Documentación técnica**
 ```markdown
@@ -638,6 +672,14 @@ Configuración de solución
 **Rúbrica de cierre:** evalúa este proyecto con la rúbrica *Low-code / Maker* de
 [Rúbricas y Plantillas de Evaluación](/recursos/rubricas-plantillas). Aprobación: ≥65/100 sin
 ningún criterio en 0. Nivel profesional/excelencia: ≥85/100.
+
+### 📸 Evidencia mínima de cierre
+- Captura de la Solution con tablas, apps y flujo incluidos.
+- Captura del modelo de datos con relaciones principales.
+- Captura de la app elegida funcionando con registros reales.
+- Captura del flujo con una ejecución exitosa en Run history.
+- Captura del reporte/dashboard o, si no se pudo publicar, del `.pbix` abierto en Power BI Desktop.
+- Breve README del proyecto: problema, alcance, arquitectura, decisiones de seguridad y próximos pasos.
 
 ---
 

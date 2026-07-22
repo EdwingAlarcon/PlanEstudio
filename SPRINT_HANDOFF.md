@@ -34,6 +34,7 @@ estrictamente necesario. Nunca tocar conteos.
 | 12 | `28bfa4f` | Micro-sprint de polish | Footer/sidebar y badges PL-600 verificados ya correctos (sin cambio); frase de `/portafolio` sobre Contact Center/Sales Ops/F&O corregida (ya no niega evidencia existente en LAB-081/083/093-100) |
 | 13 | *(sin commit)* | Incidente de caché — resuelto sin tocar código | Usuario reportó el polish del sprint 12 "no reflejado en producción" en 4 navegadores tras hard refresh. `curl` con cache-busting confirmó `X-Cache: MISS` y contenido correcto en el servidor — era caché de red/DNS local del usuario, se resolvió solo. **Antes de investigar código por un reporte similar, verificar el servidor real primero** (ver sección "Verificación de producción" más abajo) |
 | 14 | `b71d3f7` | Onboarding de principiante — Módulos 1-3 | Simulación de estudiante principiante (diagnóstico) seguida de un micro-sprint de reducción de fricción: Módulo 1 (setup separado de la primera práctica, mini-glosario, conceptos recortados, suplementos opcionales), Módulo 2 (explicaciones breves + enlace a Lab 02), Módulo 3 (Núcleo obligatorio vs. Profundización opcional + enlace a Lab 03), `estimatedMinutes` corregido (10→20, 5→15, 6→25) con línea lectura/práctica visible, criterio de avance a Intermedio agregado al checklist |
+| 15 | `este commit` | Onboarding de principiante — Módulos 4-8 | Módulos 4-8 auditados y reforzados sin cambiar conteos: tiempos visibles realistas, "Qué vas a lograr hoy", separación Núcleo obligatorio/Profundización opcional o iteraciones, evidencia para guardar, enlaces a Lab 04/Lab 05 cuando existen, ruta honesta para Power BI/Power Fx/proyecto integrado cuando no hay lab básico dedicado |
 
 Cada sprint terminó en verde con: `npm run validate:content`, `npm run lint`, `npx tsc --noEmit` (o `npm run typecheck`),
 `npm run test:coverage` (225/225 tests históricamente), `npm run build` (o `build:pages`), y `npm run e2e` (Playwright
@@ -90,7 +91,7 @@ terminar" son cosas distintas):
 | Logs reales de Purview/Dataverse audit | Roadmap enterprise real | Mismo recurso |
 | Fluidez de inglés/feedback real de CV-LinkedIn con personas | Roadmap enterprise real | Requiere práctica externa, no contenido |
 | Onboarding principiante Módulos 1-3 (Nivel Básico) | Cerrado | Sprint 14 |
-| Onboarding principiante Módulos 4-8 (Nivel Básico) | Pendiente no bloqueante | No auditado todavía — ver sección "Beginner UX" abajo |
+| Onboarding principiante Módulos 4-8 (Nivel Básico) | Cerrado | Sprint 15 |
 
 ## UX / navegación transversal — auditoría del sprint 9
 
@@ -147,21 +148,19 @@ Básico, Módulos 1-3 y Lab 02. Hallazgos que motivaron el sprint 14:
 - Lab 02 (el primer lab) ya era el mejor material del recorrido — clic-por-clic, resultado esperado,
   evidencia explícita; no se tocó su contenido, solo se referenció desde los módulos.
 
-El sprint 14 corrigió esto en Módulos 1-3 únicamente (ver tabla de sprints arriba). **Módulos 4-8 del
-Nivel Básico no fueron auditados ni tocados** — si se pide continuar esta línea, el siguiente paso lógico
-es repetir el mismo diagnóstico (setup temprano, densidad, estimatedMinutes, enlace a lab) en los módulos
-4-8 antes de asumir que están bien.
+El sprint 14 corrigió esto en Módulos 1-3 únicamente (ver tabla de sprints arriba). El sprint 15 repitió
+el mismo diagnóstico para **Módulos 4-8** y cerró la línea de onboarding principiante del Nivel Básico:
+estimados realistas, primer logro explícito, separación de núcleo/profundización, evidencia esperada y
+puentes a labs o proyecto cuando correspondía.
 
 ## Pendientes reales actuales (todo lo demás está `Cerrado` o es `Roadmap enterprise real`)
 
 No queda ningún pendiente de contenido "post-auditoría" ni de UX bloqueante en el roadmap original.
 Pendientes honestos que sí quedan abiertos, fuera de ese roadmap:
 
-- **Pendiente no bloqueante** — Módulos 4-8 del Nivel Básico no recibieron la misma auditoría de
-  principiante que 1-3 (sprint 14). No se sabe si tienen los mismos problemas de densidad/estimados.
 - **Pendiente no bloqueante** — no se verificó visualmente en navegador cómo renderiza
   `MarkdownRenderer` los headings `## 🟢 Núcleo obligatorio` / `## 🔧 Profundización opcional` insertados
-  en el Módulo 3 (build/lint no reportaron problema, pero no hubo revisión visual).
+  en los Módulos 3-7 (build/lint/e2e no reportaron problema, pero no hubo revisión visual humana página por página).
 - Todo lo demás sigue clasificado como **Roadmap enterprise real** en la tabla de arriba — depende de
   tenant, licencia o personas reales, no de trabajo de contenido.
 
