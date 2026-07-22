@@ -44,21 +44,31 @@ Conteos fijos confirmados en todos los sprints: **65 módulos, 63 labs, 488 preg
   `40-arquitectura-power-platform-casos-estudio.md` (commit `0477cc5` y anteriores). Verificar si este
   pendiente histórico ya quedó resuelto antes de asumir que sigue abierto.
 
-## Pendientes honestos (sin resolver, en orden probable de siguiente sprint)
+## Pendientes honestos (revisado 2026-07-22 — todos los accionables dentro de la regla de oro ya están resueltos)
 
-1. **Admin/Governance y Solution Architect** — solo tocado con ejemplos mínimos dentro de IA
-   (Módulo 55), sin sprint dedicado propio.
-2. **Inglés técnico** — pendiente, ningún sprint lo ha tocado todavía.
-3. **CV/LinkedIn práctico** — solo ejemplos de prompt en Módulo 47 (análisis de vacante contra
-   portafolio); no existe un sprint completo de CV/LinkedIn.
-4. **UX de navegación transversal** — cerrada para D365; solo revisar si aparece nueva inconsistencia.
-5. **Discrepancia 602 vs. 632** en `docs/Recursos/CHECKLIST_PROGRESO.md` — solo investigar si la
+**Verificado el 2026-07-22:** al diagnosticar esta lista se confirmó que Admin/Governance,
+Solution Architect, Inglés técnico y CV/LinkedIn ya tienen contenido dedicado completo
+(`JOB_READY_ADMIN_GOVERNANCE.md`, `JOB_READY_INTERVIEW_READINESS.md`, integrados en
+`MATRIZ_SKILLS_LABORALES.md` y `CHECKLIST_PROGRESO.md`), aunque un handoff previo los seguía
+listando como pendientes. No queda ningún ítem de contenido reforzable dentro de la regla de oro
+(sin tenant real, sin personas/feedback externo). Lo que sigue abierto es estructural, no de sprint:
+
+1. **UX de navegación transversal** — cerrada para D365; solo revisar si aparece nueva inconsistencia.
+2. **Discrepancia 602 vs. 632** en `docs/Recursos/CHECKLIST_PROGRESO.md` — solo investigar si la
    mención vuelve a aparecer; al cierre del último sprint el validador reporta 603 criterios de forma
    consistente.
-6. **Migración enterprise real** (dataset grande realista, migración incremental, reconciliación
-   avanzada, tooling ETL real, CRM on-premises real, SQL/IIS/ADFS/networking productivo, performance
-   troubleshooting real, cutover productivo) — explícitamente fuera de alcance actual de Migration/Legacy,
-   documentado como límite reconocido, no como "próximo sprint" normal.
+3. **Limitaciones que requieren infraestructura o personas reales** (fuera de alcance de un sprint de
+   contenido):
+   - Migración enterprise real (dataset grande, migración incremental, reconciliación avanzada,
+     tooling ETL real, CRM on-premises, SQL/IIS/ADFS/networking productivo, cutover productivo).
+   - Managed Environments / capacity / licensing con datos reales de consumo (requiere tenant real).
+   - Investigación con logs reales de Microsoft Purview / Dataverse audit (requiere tenant real).
+   - Fluidez de inglés técnico y feedback de CV/LinkedIn con recruiters o personas reales (requiere
+     práctica externa, no contenido).
+
+**Si el usuario quiere seguir sprintando**, la conversación debe ser sobre qué módulo/lab existente
+necesita más profundidad específica (releer y comparar contra el nivel de 56-59 o 42-55), no sobre
+esta lista — ya no señala huecos de contenido reales.
 
 ## Cómo continuar
 
