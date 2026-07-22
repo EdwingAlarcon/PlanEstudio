@@ -1,8 +1,16 @@
 # Power Platform & D365 — Plan de Estudio
 
+**Estado: versión estable pública** — 65 módulos · 63 laboratorios · 488 preguntas · 603 criterios de checklist, con roadmap de sprints correctivos post-auditoría cerrado. Detalle completo, taxonomía de estados y limitaciones honestas en la sección "Estado estable — release readiness" de [`SPRINT_HANDOFF.md`](SPRINT_HANDOFF.md).
+
 Plan de aprendizaje progresivo de Microsoft Power Platform y Dynamics 365, desde fundamentos hasta Solution Architect, alineado con las certificaciones oficiales de Microsoft.
 
 **App en producción:** [edwingalarcon.github.io/PlanEstudio](https://edwingalarcon.github.io/PlanEstudio/)
+
+### Qué cubre esta versión estable
+
+- **Cubre bien:** progresión PL-900 → PL-200 → PL-400 → Arquitectura; especialización transversal en IA aplicada al desarrollo (Copilot/Claude Code/Codex); especialización transversal en Dynamics 365 CE (Sales, Customer Service, Customer Insights, Field Service) con labs hands-on donde el trial lo permite; capa de empleabilidad (rutas job-ready, matriz de skills, portafolio, CV/LinkedIn, inglés técnico).
+- **Cubre parcialmente (job-ready / simulación):** Migration/Legacy, Admin/Governance y Solution Architect preparan criterio y evidencia defendible en entrevista, no sustituyen operación con tenant/infraestructura real. Contact Center Voz/SMS y Sales Insights predictivo quedan como diseño hasta contratar proveedor de telefonía o licencia Premium real.
+- **No debe prometerse:** migración productiva enterprise, CRM on-premises operado en vivo, auditoría con logs reales de Purview/Dataverse, ni PL-600/MB-2xx como certificaciones vigentes (todas retiradas por Microsoft).
 
 ---
 
@@ -108,7 +116,7 @@ GitHub Actions ejecuta en cada push a `master`:
 | Job | Qué valida |
 |-----|------------|
 | `lint` | ESLint CLI + TypeScript (`tsc --noEmit`) + validación de contenido (`validate:content`) |
-| `test` | Vitest con cobertura (umbral 80%; 223 tests al último diagnóstico local) |
+| `test` | Vitest con cobertura (umbral 80%; 225 tests al último diagnóstico local) |
 | `e2e` | Playwright smoke: home, niveles, módulo, labs, simulador, búsqueda, dark mode, 404 |
 | `build` | `GITHUB_PAGES=true next build` vía `npm run build:pages` → export estático en `out/` |
 | `mkdocs` | `mkdocs build --strict` (valida nav, links internos) |
@@ -174,7 +182,7 @@ Para agregar preguntas:
 
 ## Laboratorios
 
-Los laboratorios oficiales para la app están en `app-elearning/content/labs/` con frontmatter validado (61 labs en total). `docs/Labs/` queda como copia legacy/referencia para MkDocs. Muestra parcial:
+Los laboratorios oficiales para la app están en `app-elearning/content/labs/` con frontmatter validado (63 labs en total). `docs/Labs/` queda como copia legacy/referencia para MkDocs. Muestra parcial:
 
 | Lab | Nivel | Cert |
 |-----|-------|------|
