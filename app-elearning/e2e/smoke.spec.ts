@@ -87,6 +87,8 @@ test.describe("Smoke — rutas principales", () => {
   test("checklist permite marcar criterios y conserva estado local", async ({ page }) => {
     await page.goto("/recursos/checklist");
     await expect(page.getByRole("heading", { name: "Checklist de Progreso" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Checklist mínimo para principiantes" })).toBeVisible();
+    await expect(page.getByText("Entré a Power Platform y reconozco el ambiente donde trabajo.")).toBeVisible();
 
     const firstCriterion = page.locator('input[type="checkbox"]').first();
     await firstCriterion.check();
