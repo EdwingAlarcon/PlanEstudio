@@ -3,25 +3,44 @@ moduleId: 1
 title: "Introducción al Ecosistema Power Platform"
 level: "basico"
 certification: "PL-900"
-estimatedMinutes: 10
+estimatedMinutes: 20
 slug: "introduccion-al-ecosistema-power-platform"
 ---
-*Duración: 1-2 semanas*
+*Duración: 1-2 semanas · Lectura: 10-12 min · Con práctica y setup de ambiente: 45-90 min (el tiempo de setup varía y no depende de ti)*
 
 ### 🎯 Objetivo
 Comprender la arquitectura, componentes y casos de uso de Power Platform.
 
-### 📖 Conceptos Clave
+### ✅ Qué vas a lograr hoy
+- Tener tu propio ambiente Developer de Power Platform funcionando.
+- Explorar Power Apps, Dataverse y sus conectores por primera vez, sin construir nada complejo todavía.
+- Crear 5 registros de prueba en una tabla ya existente — tu primera interacción real con Dataverse.
+
+### 🙅 Qué NO necesitas dominar todavía
+- No necesitas entender licenciamiento a fondo, ni CoE, ni ALM en detalle — solo saber que existen y para qué sirven a grandes rasgos.
+- No necesitas terminar los Suplementos 1A (AI Builder) y 1B (Power Pages) hoy — son opcionales y puedes volver a ellos después de tu primera práctica.
+- No necesitas escribir ninguna fórmula de Power Fx en este módulo.
+
+> **📌 Si aún no tienes tu ambiente listo:** crear la cuenta Microsoft 365 Developer y activar el trial de Dynamics 365 puede tardar minutos o hasta un día completo si requiere verificación. Esto puede tomar más tiempo que una clase normal — **no significa que hiciste algo mal**. Puedes seguir leyendo el resto del módulo mientras esperas, o volver mañana cuando el ambiente esté activo.
+
+### 📚 Mini-glosario antes de empezar
+
+| Término | En una frase |
+|---|---|
+| **Dataverse** | La base de datos común de Power Platform — donde viven las tablas que usan tus apps y flujos. |
+| **Ambiente (Environment)** | Un espacio separado y aislado para trabajar, como una carpeta propia; nunca mezcles pruebas con producción. |
+| **Tenant** | La organización completa en Microsoft 365/Power Platform a la que perteneces — puede tener varios ambientes adentro. |
+| **Solución (Solution)** | El contenedor donde empaquetas tablas, apps y flujos para poder moverlos entre ambientes de forma ordenada. |
+| **Publisher** | El "sello" con tu prefijo (ej. `sit_`) que identifica que una tabla o columna es tuya, no del sistema. |
+
+### 📖 Conceptos Clave (esenciales para hoy)
 - **Arquitectura de Power Platform**: Componentes principales y su interrelación
 - **Microsoft Dataverse**: Base de datos común (Common Data Service)
 - **Ambientes (Environments)**: Tipos (producción, sandbox, developer)
 - **Conectores**: Estándar vs Premium vs Personalizados
-- **Soluciones**: Contenedores de componentes para ALM
-- **Licenciamiento**: Per-user, per-app, pay-as-you-go
 - **Power Platform Admin Center**: Gestión de ambientes y recursos
-- **Center of Excellence (CoE)**: Introducción conceptual
-- **AI Builder**: servicio de IA integrado en Power Platform que permite agregar inteligencia artificial a apps y flujos sin escribir código de ML. Modelos preconstruidos (clasificación de texto, extracción de datos de documentos, detección de objetos, predicción binaria) accesibles directamente desde Power Apps y Power Automate
-- **Power Pages**: plataforma de bajo código para crear sitios web externos con acceso a datos de Dataverse. Antes llamado "Power Apps portals". Permite a usuarios anónimos o con cuenta externa (B2C) ver, crear y editar registros de Dataverse a través de formularios y vistas configurables
+
+> **Verás esto más adelante, no hace falta dominarlo hoy:** Soluciones y ALM (se practica a fondo desde el Módulo 2), Licenciamiento per-user/per-app/pay-as-you-go (retomado en niveles posteriores), Center of Excellence — introducción conceptual únicamente por ahora.
 
 ### 👨‍💻 Actividades Prácticas
 
@@ -109,6 +128,8 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 
 ### 📌 Suplemento 1A: AI Builder — Inteligencia Artificial sin código
 
+> **📌 Opcional — puedes volver a esta sección después de completar tu primera práctica.** No es necesario para avanzar al Módulo 2.
+>
 > **Relevancia PL-900:** ~15% del examen. Capacidad de agregar IA a apps y flujos desde la interfaz, sin entrenar modelos desde cero.
 
 #### 🎯 Objetivo
@@ -169,6 +190,8 @@ Una empresa de logística recibe cientos de albaranes en papel diariamente. Con 
 
 ### 📌 Suplemento 1B: Power Pages — Sitios web externos con Dataverse
 
+> **📌 Opcional — puedes volver a esta sección después de completar tu primera práctica.** No es necesario para avanzar al Módulo 2.
+>
 > **Relevancia PL-900:** ~10% del examen. Diferencia entre Power Pages y otras herramientas; casos de uso de portales externos.
 
 #### 🎯 Objetivo

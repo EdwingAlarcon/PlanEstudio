@@ -3,10 +3,10 @@ moduleId: 2
 title: "Dataverse - Fundamentos y Modelado Básico"
 level: "basico"
 certification: "PL-900"
-estimatedMinutes: 5
+estimatedMinutes: 15
 slug: "dataverse-fundamentos-y-modelado-basico"
 ---
-*Duración: 2-3 semanas*
+*Duración: 2-3 semanas · Lectura: 6-8 min · Con práctica: 40-60 min*
 
 ### 🎯 Objetivo
 Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
@@ -14,13 +14,18 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 ### 📖 Conceptos Clave
 - **Tablas (Tables)**: Estándar vs Personalizadas, Virtual Tables
 - **Columnas (Columns)**: Tipos de datos (Text, Number, Choice, Lookup, DateTime)
-- **Relaciones (Relationships)**: One-to-Many, Many-to-One, Many-to-Many
+- **Relaciones (Relationships)**: One-to-Many, Many-to-One, Many-to-Many — ejemplo simple: una `Categoría` (ej. "Software") puede tener muchas `Solicitudes` asociadas, pero cada `Solicitud` apunta a una sola `Categoría`:
+  ```
+  Categoria (1) ──── tiene muchas ────▶ (N) Solicitud
+     "Software"                          "Sin acceso al sistema contable"
+     "Hardware"                          "Impresora offline piso 2"
+  ```
 - **Primary Name Column**: Campo principal de identificación
-- **Ownership**: User/Team owned vs Organization owned
-- **Publisher**: Prefijos de personalización
+- **Ownership**: quién es "dueño" de cada registro. *User/Team owned* = cada registro pertenece a una persona/equipo (útil para "mis solicitudes"). *Organization owned* = el registro es de todos, sin dueño individual (útil para catálogos como Categoría).
+- **Publisher**: el "sello" con tu prefijo (ej. `sit_`) que marca que una tabla/columna es tuya y no del sistema — se crea una sola vez, antes de la primera tabla, y ya no se puede cambiar.
 - **Soluciones**: Administradas vs No Administradas (introducción básica)
 - **Auditoria**: Tracking de cambios en datos
-- **Business Rules**: Lógica sin código
+- **Business Rules**: lógica sin código que corre en el servidor. El **scope** ("All Forms" vs "Solo entidad") define si la regla se aplica solo cuando alguien llena un formulario, o también cuando los datos llegan por otra vía (ej. una API).
 
 ### 👨‍💻 Actividades Prácticas
 
@@ -171,5 +176,19 @@ Crear manualmente 10 registros de Solicitudes con variedad de:
 - [ ] 10+ registros de prueba con datos variados
 - [ ] Explicar diferencia entre tabla Standard y Custom
 - [ ] Describir cuándo usar One-to-Many vs Many-to-Many
+
+### 📸 Evidencia para guardar
+- Captura de las tablas creadas con sus columnas.
+- Captura de al menos una Business Rule configurada.
+- Captura de una vista personalizada con su filtro.
+- Conteo de registros de prueba cargados.
+
+## ➡️ Siguiente práctica recomendada
+
+Completa ahora: **[Lab 02 · Dataverse — Modelado de Datos para un Sistema de Solicitudes](/labs/lab-02-dataverse-modelo-datos)**
+
+**Por qué:** el Lab 02 te guía paso a paso a construir exactamente el modelo de datos de este módulo (tablas, columnas, relaciones, Business Rules y vistas), con instrucciones de clic-por-clic y valores exactos a usar — es la forma más directa de convertir lo que acabas de leer en algo real y verificable.
+
+**Qué evidencia guardar del lab:** capturas de las tablas dentro de tu solución, de las 2 Business Rules activas, de las 3 vistas publicadas, y el conteo de registros de prueba (5 Categoría + 10 Solicitud).
 
 ---

@@ -64,6 +64,8 @@ export default function HowToUsePage() {
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
                 Esta plataforma combina aprendizaje progresivo, rutas por rol, laboratorios y simulador.
                 La mejor estrategia es estudiar en ciclos cortos: aprender, practicar, validar y ajustar.
+                Los primeros módulos muestran un tiempo de lectura corto, pero con práctica y setup de
+                ambiente toman más — es normal, no es que vayas lento.
               </p>
             </div>
           </div>

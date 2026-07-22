@@ -3,13 +3,19 @@ moduleId: 3
 title: "Power Apps Canvas - Primeras Aplicaciones"
 level: "basico"
 certification: "PL-900"
-estimatedMinutes: 6
+estimatedMinutes: 25
 slug: "power-apps-canvas-primeras-aplicaciones"
 ---
-*Duración: 2-3 semanas*
+*Duración: 2-3 semanas · Lectura: 8-12 min · Con práctica: 60-90 min (solo el Núcleo obligatorio; la Profundización opcional suma tiempo aparte)*
 
 ### 🎯 Objetivo
 Crear aplicaciones Canvas desde cero con controles, navegación y conexión a datos.
+
+### ✅ Qué vas a lograr hoy (Núcleo obligatorio)
+- Una Canvas App funcional de 3 pantallas conectada a Dataverse, con lista, búsqueda, creación y edición de registros.
+
+### 🔧 Qué queda para después (Profundización opcional)
+- Modo oscuro, Collections en memoria, una segunda app (calculadora de presupuestos) y diseño responsive. No son necesarios para tener tu primera app funcionando — puedes volver a esto en otra sesión, incluso después del Módulo 07 de Power Fx.
 
 ### 📖 Conceptos Clave
 - **Canvas vs Model-Driven**: Diferencias conceptuales y casos de uso
@@ -46,6 +52,10 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 > Cada bloque de código de este módulo trae comentarios `//` explicando línea por línea qué hace.
 
 ### 👨‍💻 Actividades Prácticas
+
+## 🟢 Núcleo obligatorio
+
+*Completa esto primero. Es tu primera app funcional de principio a fin.*
 
 ##### Práctica 3.1: Primera Canvas App - Lista de Tareas
 
@@ -117,6 +127,10 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 
 4. Agregar navegación desde Gallery:
     - OnSelect de Gallery: `Navigate(ScreenDetalle, ScreenTransition.Cover)`
+
+## 🔧 Profundización opcional
+
+> Si estás empezando desde cero, completa primero el Núcleo obligatorio de arriba y guarda tu evidencia. Esta sección — filtros avanzados, modo oscuro, Collections, una segunda app y diseño responsive — puedes hacerla después, incluso después del Módulo 07 de Power Fx. No es requisito para avanzar al Módulo 4.
 
 ##### Práctica 3.2: Interactividad y Variables
 
@@ -287,5 +301,20 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 - [ ] App publicada y compartida con otro usuario de prueba
 - [ ] Explicar diferencia entre Canvas y Model-Driven
 - [ ] Identificar 3 funciones no delegables y alternativas
+
+> Los primeros 3 criterios (screens, Gallery, Form) corresponden al Núcleo obligatorio. Los demás pertenecen a la Profundización opcional — márcalos cuando vuelvas a esa sección.
+
+### 📸 Evidencia para guardar
+- Captura de las 3 pantallas de la app con navegación funcionando.
+- Captura del Form guardando un registro nuevo en Dataverse.
+- (Opcional, cuando completes la Profundización) captura de la app de calculadora con Collections.
+
+## ➡️ Siguiente práctica recomendada
+
+Completa ahora: **[Lab 03 · Primera Canvas App](/labs/lab-03-canvas-primera-app)**
+
+**Por qué:** el Lab 03 construye la interfaz de usuario sobre las tablas `sit_Solicitud` y `sit_Categoria` que ya creaste en el Lab 02 — es la continuación directa de lo que acabas de leer, con pasos exactos en lugar de solo fórmulas de ejemplo.
+
+**Qué evidencia guardar del lab:** capturas de la app publicada, de la navegación entre pantallas, y del formulario guardando un registro real.
 
 ---

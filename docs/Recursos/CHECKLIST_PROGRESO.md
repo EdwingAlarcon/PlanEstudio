@@ -20,6 +20,16 @@
 
 ## 🟢 NIVEL 1: BÁSICO
 
+### ¿Listo para pasar a Intermedio?
+
+Este bloque no aumenta el conteo de criterios modulares — es una guía de auto-evaluación, no un módulo. Estás listo para avanzar a Nivel 2 cuando puedas marcar todo esto:
+
+- [ ] Completaste al menos 6 de los 8 módulos del Nivel Básico.
+- [ ] Ejecutaste los labs recomendados del nivel (al menos Lab 02 y Lab 03).
+- [ ] Puedes explicar con tus propias palabras qué es Dataverse, qué es una app Canvas, qué es una app Model-Driven y qué es un flujo básico de Power Automate.
+- [ ] Tienes al menos 3 evidencias guardadas (capturas o exportaciones) de tus prácticas.
+- [ ] Aprobaste el simulador básico o repasaste las preguntas que fallaste.
+
 ### Módulo 1: Introducción al Ecosistema Power Platform
 
 - [ ] **Conocimiento**: Explico qué es Power Platform y sus 5 componentes principales (Power Apps, Power Automate, Power BI, Power Pages, Copilot Studio) | Dominio: ___/5 | Fecha: ___
