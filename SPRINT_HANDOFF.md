@@ -4,6 +4,15 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
+## Pausa de sesión (2026-07-27, retomar 2026-07-28)
+
+Sesión cerrada en commit `cda417e5`, `master` al día con `origin/master`, CI/deploy en verde,
+working tree limpio. Último trabajo: Sprint 21 (`/impeccable document` → `PRODUCT.md`/`DESIGN.md`/
+`.impeccable/design.json`) y Sprint 22 (`/impeccable audit`, 17/20 → 20/20 tras fixes de heading
+hierarchy, reading-progress bar y touch targets — ver tabla de sprints más abajo). No queda ningún
+pendiente conocido, ni de contenido ni de UI/a11y/perf. Antes de empezar algo nuevo: `git pull --ff-only`
+y preguntar al usuario el siguiente objetivo — no asumir que queda algo de lo anterior.
+
 ## Contexto
 
 Una auditoría externa evaluó PlanEstudio (65 módulos, 63 labs, 488 preguntas, 603 criterios) y encontró
