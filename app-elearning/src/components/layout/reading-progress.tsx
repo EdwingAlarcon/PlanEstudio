@@ -6,15 +6,30 @@ export function ReadingProgress() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    // AppShell scrolls its own <main id="main-content">, not window
+    // (root is h-screen overflow-hidden) — the progress bar must track that
+    // element, not window.scrollY, or it stays frozen at 0%.
+    const scrollEl = document.getElementById("main-content");
+    if (!scrollEl) return;
+
+    let ticking = false;
+
     const updateProgress = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const { scrollTop, scrollHeight, clientHeight } = scrollEl;
+      const docHeight = scrollHeight - clientHeight;
       const pct = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
       setProgress(pct);
+      ticking = false;
     };
 
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    return () => window.removeEventListener("scroll", updateProgress);
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(updateProgress);
+    };
+
+    scrollEl.addEventListener("scroll", onScroll, { passive: true });
+    return () => scrollEl.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
@@ -25,7 +40,7 @@ export function ReadingProgress() {
       aria-valuemin={0}
       aria-valuemax={100}
       aria-label="Progreso de lectura"
-      style={{ width: `${progress}%` }}
+      style={{ transform: `scaleX(${progress / 100})` }}
     />
   );
 }

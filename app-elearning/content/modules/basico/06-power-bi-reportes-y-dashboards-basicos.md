@@ -43,7 +43,7 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 
 ### 👨‍💻 Actividades Prácticas
 
-## 🟢 Núcleo obligatorio
+#### 🟢 Núcleo obligatorio
 
 ##### Práctica 6.0: Primera victoria con datos de ejemplo
 
@@ -217,7 +217,7 @@ CALCULATE(
 
 > **Nota:** Las funciones AVERAGEX con FILTER y el cálculo MoM con DATEADD son DAX avanzado — las verás en detalle en el **Módulo 12 (Nivel 2)** con el contexto correcto de inteligencia de tiempo.
 
-## 🔧 Profundización opcional
+#### 🔧 Profundización opcional
 
 > Si ya lograste abrir el `.pbix`, ver datos y crear visuales básicos, continúa con publicación e interactividad. Si no tienes workspace o licencia suficiente, guarda el reporte local como evidencia y vuelve a esta sección cuando el tenant lo permita.
 
@@ -415,7 +415,7 @@ CALCULATE(
 - Captura de las 2 páginas del reporte con slicers y KPIs.
 - Si publicas: captura del workspace, configuración de refresh y roles RLS.
 
-## ➡️ Siguiente práctica recomendada
+### ➡️ Siguiente práctica recomendada
 
 Guarda tu archivo `.pbix` como evidencia del Nivel Básico y úsalo como insumo del **Módulo 08 · Primer Proyecto Integrado**.
 

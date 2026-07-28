@@ -207,8 +207,8 @@ const PROSE_CLASSES = [
   "prose-h2:border-b prose-h2:border-border",
   "prose-h3:text-[1.1rem] prose-h3:leading-snug",
   "prose-h3:mt-10 prose-h3:mb-4",
-  "prose-h4:text-base prose-h4:leading-snug",
-  "prose-h4:mt-6 prose-h4:mb-3",
+  "prose-h4:text-[1.05rem] prose-h4:leading-snug prose-h4:text-primary",
+  "prose-h4:mt-9 prose-h4:mb-3",
 
   // Paragraphs
   "prose-p:my-5 prose-p:leading-[1.85]",

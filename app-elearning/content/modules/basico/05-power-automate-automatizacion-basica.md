@@ -33,7 +33,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 
 ### 👨‍💻 Actividades Prácticas
 
-## 🟢 Núcleo obligatorio
+#### 🟢 Núcleo obligatorio
 
 ##### Práctica 5.1: Flujo Automated - Notificación de Solicitudes
 
@@ -172,7 +172,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
     - Yes: Terminate (Success) con mensaje "No hay solicitudes"
     - No: Enviar email
 
-## 🔧 Profundización opcional
+#### 🔧 Profundización opcional
 
 > Completa esta parte cuando ya tengas al menos un flujo automated y uno scheduled con ejecución exitosa en Run history. Si todavía estás luchando con conexiones o permisos, quédate en el núcleo y guarda evidencia.
 
@@ -444,7 +444,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 - Captura del email o mensaje enviado por el flujo.
 - Si haces aprobaciones: captura del email de aprobación y del cambio aplicado en Dataverse.
 
-## ➡️ Siguiente práctica recomendada
+### ➡️ Siguiente práctica recomendada
 
 Completa ahora: **[Lab 05 · Power Automate — Notificación y Aprobación de Solicitudes](/labs/lab-05-automate-aprobacion)**
 

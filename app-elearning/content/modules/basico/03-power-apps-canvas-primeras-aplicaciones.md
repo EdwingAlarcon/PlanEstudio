@@ -53,7 +53,7 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 
 ### 👨‍💻 Actividades Prácticas
 
-## 🟢 Núcleo obligatorio
+#### 🟢 Núcleo obligatorio
 
 *Completa esto primero. Es tu primera app funcional de principio a fin.*
 
@@ -128,7 +128,7 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 4. Agregar navegación desde Gallery:
     - OnSelect de Gallery: `Navigate(ScreenDetalle, ScreenTransition.Cover)`
 
-## 🔧 Profundización opcional
+#### 🔧 Profundización opcional
 
 > Si estás empezando desde cero, completa primero el Núcleo obligatorio de arriba y guarda tu evidencia. Esta sección — filtros avanzados, modo oscuro, Collections, una segunda app y diseño responsive — puedes hacerla después, incluso después del Módulo 07 de Power Fx. No es requisito para avanzar al Módulo 4.
 
@@ -309,7 +309,7 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 - Captura del Form guardando un registro nuevo en Dataverse.
 - (Opcional, cuando completes la Profundización) captura de la app de calculadora con Collections.
 
-## ➡️ Siguiente práctica recomendada
+### ➡️ Siguiente práctica recomendada
 
 Completa ahora: **[Lab 03 · Primera Canvas App](/labs/lab-03-canvas-primera-app)**
 

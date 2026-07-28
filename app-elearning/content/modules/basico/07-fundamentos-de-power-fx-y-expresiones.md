@@ -53,7 +53,7 @@ Dominar el lenguaje de fórmulas Power Fx para lógica avanzada en Canvas Apps.
 
 ### 👨‍💻 Actividades Prácticas
 
-## 🟢 Núcleo obligatorio
+#### 🟢 Núcleo obligatorio
 
 Completa primero los ejercicios 7.1.1, 7.1.2, 7.2.1, 7.3.1 y 7.5.1. Con eso tendrás búsqueda/filtro, búsqueda de un registro, validación de formulario, formato de texto y una primera lectura de delegación.
 
@@ -387,7 +387,7 @@ Filter(
 - Captura de una fórmula con comentario `//` explicando su intención.
 - Captura de una advertencia de delegación identificada y su versión corregida.
 
-## ➡️ Siguiente práctica recomendada
+### ➡️ Siguiente práctica recomendada
 
 Vuelve a tu Canvas App del **Módulo 03 / Lab 03** y reemplaza una fórmula simple por una versión más robusta de este módulo.
 

@@ -32,7 +32,7 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 
 ### 👨‍💻 Actividades Prácticas
 
-## 🟢 Núcleo obligatorio
+#### 🟢 Núcleo obligatorio
 
 ##### Práctica 4.1: Crear Primera Model-Driven App
 
@@ -128,7 +128,7 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
     - **Panel superior derecha**: Chart "Solicitudes por Prioridad" (Column)
     - **Panel inferior**: List de "Solicitudes Pendientes" (View)
 
-## 🔧 Profundización opcional
+#### 🔧 Profundización opcional
 
 > Si estás empezando desde cero, completa primero la app, el formulario, una vista y un dashboard. Vuelve a esta sección cuando ya puedas abrir la Model-Driven App publicada y navegar por registros reales.
 
@@ -299,7 +299,7 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 - Captura de una vista filtrada y del dashboard con datos de prueba.
 - Si haces la profundización: captura del BPF activo y de la prueba con roles.
 
-## ➡️ Siguiente práctica recomendada
+### ➡️ Siguiente práctica recomendada
 
 Completa ahora: **[Lab 04 · Model-Driven App — Sistema de Gestión de Solicitudes Completo](/labs/lab-04-model-driven-app)**
 
