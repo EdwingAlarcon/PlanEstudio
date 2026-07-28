@@ -39,7 +39,8 @@ estrictamente necesario. Nunca tocar conteos.
 | 17 | `bab3325` | Checklist mínimo visible en app | El checklist mínimo de principiante quedó visible en `/recursos/checklist` dentro del componente interactivo `ChecklistClient`, no solo en el Markdown legacy; no altera parser ni conteo de 603 criterios |
 | 18 | `766bb76` | Smoke e2e del checklist mínimo + validación serial | Playwright ahora valida que `/recursos/checklist` muestre el bloque "Checklist mínimo para principiantes"; el handoff documenta que `npm run build` y `npm run e2e` deben correrse en serie localmente para evitar falsos negativos transitorios de `.next` |
 | 19 | `c0a729a` | Protección e2e de onboarding + puente a Intermedio | Smoke test cubre "Primeras 2 horas", Mini Lab 01, Power Fx en español y entregable mínimo; Módulo 9 ajustado con tiempo realista, puente para quien viene de Básico, evidencia mínima y enlace a Lab 09 |
-| 20 | `este commit` | Memoria explícita para Claude | `CLAUDE.md` actualizado con estado estable, conteos, baseline de tests, regla del usuario commit/push/deploy y recordatorio de leer este handoff antes de continuar |
+| 20 | `a51728d` | Memoria explícita para Claude | `CLAUDE.md` actualizado con estado estable, conteos, baseline de tests, regla del usuario commit/push/deploy y recordatorio de leer este handoff antes de continuar |
+| 21 | `147d766`, `este commit` | Sistema de diseño Impeccable + cierre visual Núcleo/Profundización | `/impeccable document`: `PRODUCT.md` + `DESIGN.md` ("The Fluent Learning Console") + `.impeccable/design.json` capturando tokens reales de `tailwind.config.ts`/`globals.css`/componentes `ui/`. Luego se cerró el único pendiente no bloqueante del handoff: verificación visual en navegador de los headings Núcleo obligatorio/Profundización opcional en Módulos 3, 4 y 7 — sin hallazgos |
 
 Cada sprint terminó en verde con: `npm run validate:content`, `npm run lint`, `npx tsc --noEmit` (o `npm run typecheck`),
 `npm run test:coverage` (225/225 tests históricamente), `npm run build` (o `build:pages`), y `npm run e2e` (Playwright
@@ -167,13 +168,18 @@ sprint 17 hizo visible ese checklist mínimo en la UI interactiva de `/recursos/
 ## Pendientes reales actuales (todo lo demás está `Cerrado` o es `Roadmap enterprise real`)
 
 No queda ningún pendiente de contenido "post-auditoría" ni de UX bloqueante en el roadmap original.
-Pendientes honestos que sí quedan abiertos, fuera de ese roadmap:
 
-- **Pendiente no bloqueante** — no se verificó visualmente en navegador cómo renderiza
-  `MarkdownRenderer` los headings `## 🟢 Núcleo obligatorio` / `## 🔧 Profundización opcional` insertados
-  en los Módulos 3-7 (build/lint/e2e no reportaron problema, pero no hubo revisión visual humana página por página).
 - Todo lo demás sigue clasificado como **Roadmap enterprise real** en la tabla de arriba — depende de
   tenant, licencia o personas reales, no de trabajo de contenido.
+
+**Cerrado (sprint 21):** verificación visual en navegador de cómo renderiza `MarkdownRenderer` los
+headings `## 🟢 Núcleo obligatorio` / `## 🔧 Profundización opcional` insertados en los Módulos 3-7.
+Se levantó `npm run dev` y se inspeccionaron con captura de pantalla los Módulos 03
+(`power-apps-canvas-primeras-aplicaciones`), 04 (`power-apps-model-driven-apps-basadas-en-datos`) y 07
+(`fundamentos-de-power-fx-y-expresiones`) en modo oscuro: los H2/H3 con emoji renderizan con el peso,
+borde inferior y espaciado esperados, los blockquotes de "Profundización opcional" usan el estilo de
+callout azul correcto, y los bloques de código Power Fx renderizan con scroll horizontal propio sin
+romper el layout. Sin hallazgos — no se requirió ningún cambio de código.
 
 ## Estado estable — release readiness
 
