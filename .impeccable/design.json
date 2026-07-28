@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-27T00:00:00.000Z",
+  "title": "Design System: PlanEstudio",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "MS Blue",
+        "canonical": "hsl(206, 100%, 41.6%)",
+        "tonalRamp": [
+          "hsl(206, 100%, 15%)",
+          "hsl(206, 100%, 22%)",
+          "hsl(206, 100%, 30%)",
+          "hsl(206, 100%, 37%)",
+          "hsl(206, 100%, 41.6%)",
+          "hsl(206, 100%, 58%)",
+          "hsl(206, 90%, 75%)",
+          "hsl(206, 83%, 90%)"
+        ]
+      },
+      "muted-foreground": {
+        "role": "neutral",
+        "displayName": "Slate Secondary",
+        "canonical": "hsl(220, 9%, 38%)",
+        "tonalRamp": [
+          "hsl(220, 14%, 14%)",
+          "hsl(220, 12%, 22%)",
+          "hsl(220, 10%, 30%)",
+          "hsl(220, 9%, 38%)",
+          "hsl(220, 8%, 55%)",
+          "hsl(210, 20%, 75%)",
+          "hsl(210, 20%, 88%)",
+          "hsl(210, 20%, 96%)"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Border Subtle",
+        "canonical": "hsl(20, 5%, 88%)",
+        "tonalRamp": [
+          "hsl(20, 5%, 20%)",
+          "hsl(20, 5%, 40%)",
+          "hsl(20, 5%, 60%)",
+          "hsl(20, 5%, 75%)",
+          "hsl(20, 5%, 88%)",
+          "hsl(20, 5%, 92%)",
+          "hsl(20, 5%, 96%)",
+          "hsl(20, 5%, 99%)"
+        ]
+      },
+      "ms-success": { "role": "success", "displayName": "Fluent Success Green", "canonical": "#107C10" },
+      "ms-warning": { "role": "warning", "displayName": "Fluent Warning Amber", "canonical": "#FFB900" },
+      "ms-danger":  { "role": "destructive", "displayName": "Fluent Danger Red", "canonical": "#D13438" },
+      "nivel-avanzado": { "role": "accent", "displayName": "Nivel Avanzado Orange", "canonical": "#f97316" },
+      "nivel-ia":       { "role": "accent", "displayName": "Nivel IA Purple", "canonical": "#9333ea" },
+      "nivel-d365":     { "role": "accent", "displayName": "Nivel D365 Teal", "canonical": "#0d9488" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "H1 de contenido de módulo únicamente." },
+      "headline": { "displayName": "Headline", "purpose": "H2 de contenido, con borde inferior separador." },
+      "title": { "displayName": "Title", "purpose": "H3 de contenido y títulos de card." },
+      "body": { "displayName": "Body", "purpose": "Párrafos de contenido de módulo, max-width 980px." },
+      "label": { "displayName": "Label", "purpose": "Encabezados de grupo de sidebar y texto de badge, uppercase." },
+      "mono": { "displayName": "Mono", "purpose": "Código y prefijo de letra (A./B./C./D.) en opciones de quiz." }
+    },
+    "shadows": [
+      { "name": "fluent-1", "value": "0 1px 2px rgba(0,0,0,.08), 0 0 1px rgba(0,0,0,.06)", "purpose": "Topbar sticky sobre contenido con scroll — único nivel en uso actualmente." },
+      { "name": "fluent-2", "value": "0 2px 4px rgba(0,0,0,.1), 0 0 2px rgba(0,0,0,.06)", "purpose": "Reservado para popovers/dropdowns de bajo nivel." },
+      { "name": "fluent-4", "value": "0 4px 8px rgba(0,0,0,.12), 0 0 2px rgba(0,0,0,.06)", "purpose": "Reservado para cards flotantes y menús." },
+      { "name": "fluent-8", "value": "0 8px 16px rgba(0,0,0,.14), 0 0 2px rgba(0,0,0,.06)", "purpose": "Reservado para modales y diálogos." }
+    ],
+    "motion": [
+      { "name": "fade-in", "value": "0.15s ease-out", "purpose": "Entrada suave de contenido dinámico (from: opacity 0 + translateY(4px))." },
+      { "name": "reading-progress", "value": "width 0.1s ease", "purpose": "Barra de progreso de lectura sticky en top de viewport." }
+    ],
+    "breakpoints": [
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Acción principal — iniciar quiz, enviar respuesta, CTAs de módulo.",
+      "html": "<button class=\"ds-btn-primary\">Comenzar quiz</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; white-space: nowrap; border-radius: 6px; height: 36px; padding: 8px 16px; font-size: 14px; font-weight: 500; font-family: 'Segoe UI', system-ui, sans-serif; background: #0078D4; color: #ffffff; border: none; transition: background-color 0.15s; } .ds-btn-primary:hover { background: rgba(0,120,212,0.9); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #0078D4; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Acción secundaria — reintentar quiz, cancelar.",
+      "html": "<button class=\"ds-btn-outline\">Reintentar</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 6px; height: 36px; padding: 8px 16px; font-size: 14px; font-weight: 500; font-family: 'Segoe UI', system-ui, sans-serif; background: #ffffff; color: #1F2328; border: 1px solid #E1DFDD; transition: background-color 0.15s, color 0.15s; } .ds-btn-outline:hover { background: #EFF6FC; color: #005A9E; } .ds-btn-outline:focus-visible { outline: none; box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #0078D4; }"
+    },
+    {
+      "name": "Level Badge",
+      "kind": "chip",
+      "refersTo": "badge-nivel-intermedio",
+      "description": "Indicador de dos letras de nivel de certificación, siempre de solo lectura.",
+      "html": "<span class=\"ds-badge-nivel\">PL-200</span>",
+      "css": ".ds-badge-nivel { display: inline-flex; align-items: center; border-radius: 6px; padding: 2px 10px; font-size: 11px; font-weight: 600; font-family: 'Segoe UI', system-ui, sans-serif; background: #0078D4; color: #ffffff; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Contenedor base — módulos, labs, tarjetas de progreso.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Módulo 9: Dataverse Avanzado</h3><p class=\"ds-card-desc\">Relaciones, business rules y plugins.</p></div>",
+      "css": ".ds-card { border-radius: 12px; border: 1px solid #E1DFDD; background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.06); padding: 24px; } .ds-card-title { font-size: 16px; font-weight: 650; font-family: 'Segoe UI', system-ui, sans-serif; margin: 0 0 4px; color: #1F2328; } .ds-card-desc { font-size: 14px; color: #616161; margin: 0; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Campo de búsqueda / texto de sistema (Ctrl+K search).",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Buscar módulos, labs, recursos...\" />",
+      "css": ".ds-input { display: flex; height: 36px; width: 100%; border-radius: 6px; border: 1px solid #E1DFDD; background: #ffffff; padding: 4px 12px; font-size: 14px; font-family: 'Segoe UI', system-ui, sans-serif; color: #1F2328; box-shadow: 0 1px 2px rgba(0,0,0,0.04); transition: box-shadow 0.15s; } .ds-input::placeholder { color: #616161; } .ds-input:focus-visible { outline: none; box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #0078D4; }"
+    },
+    {
+      "name": "Sidebar Nav Item",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Item de navegación primaria del sidebar, con indicador de barra izquierda cuando está activo.",
+      "html": "<a class=\"ds-nav-item ds-nav-item--active\" href=\"#\"><span class=\"ds-nav-indicator\"></span>Mi Progreso</a>",
+      "css": ".ds-nav-item { position: relative; display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 6px; font-size: 14px; font-family: 'Segoe UI', system-ui, sans-serif; color: rgba(31,35,40,0.8); text-decoration: none; transition: background-color 0.15s, color 0.15s; } .ds-nav-item:hover { background: #EFF6FC; } .ds-nav-item--active { background: #EFF6FC; color: #0078D4; font-weight: 500; } .ds-nav-indicator { display: none; } .ds-nav-item--active .ds-nav-indicator { display: block; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 3px; height: 60%; border-radius: 0 2px 2px 0; background: #0078D4; }"
+    },
+    {
+      "name": "Quiz Option Button",
+      "kind": "custom",
+      "refersTo": "quiz-option",
+      "description": "Botón de opción de respuesta con tres estados: reposo, seleccionado y feedback correcto/incorrecto post-respuesta.",
+      "html": "<button class=\"ds-quiz-option ds-quiz-option--correct\"><span class=\"ds-quiz-option-letter\">B.</span>Crear una Business Rule en la tabla</button>",
+      "css": ".ds-quiz-option { display: block; width: 100%; text-align: left; padding: 12px 16px; border-radius: 6px; border: 1px solid #E1DFDD; font-size: 14px; font-family: 'Segoe UI', system-ui, sans-serif; background: transparent; color: #1F2328; transition: background-color 0.15s, border-color 0.15s; cursor: pointer; } .ds-quiz-option:hover { background: #EFF6FC; border-color: rgba(0,120,212,0.4); } .ds-quiz-option-letter { font-family: 'Cascadia Code', Consolas, monospace; font-size: 12px; font-weight: 700; margin-right: 8px; } .ds-quiz-option--correct { border-color: #22c55e; background: #f0fdf4; color: #14532d; } .ds-quiz-option--incorrect { border-color: #ef4444; background: #fef2f2; color: #7f1d1d; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Fluent Learning Console",
+    "overview": "PlanEstudio deliberadamente clona el lenguaje visual de Microsoft Learn / Fluent UI / Azure Portal, no lo reinterpreta. La fuente es Segoe UI del sistema (sin descargas remotas), el acento primario es el MS Blue exacto (#0078D4), y los cuatro colores semánticos de Fluent (success #107C10, warning #FFB900, danger #D13438, más el propio blue) se propagan sin cambios a badges de nivel, callouts y estados de quiz. Esto no es un accidente de shadcn/ui por defecto: el código nombra explícitamente un namespace ms-* y comentarios que dicen \"matches Fluent UI / MS Learn\" — la fidelidad es la decisión de diseño. El sistema es denso en información y funciona como un panel de progreso/examen serio (checklist, quiz cronometrado, breakdown de errores), no como una landing de marketing. La superficie es casi plana: bordes finos (#E1DFDD en claro) hacen el trabajo de separación que en otros sistemas harían las sombras. La escala shadow-fluent-1..8 existe como techo Fluent-consistente para elevación futura (sticky headers, overlays, modales), pero en el estado actual solo fluent-1 está en uso, en el topbar sticky.",
+    "keyCharacteristics": [
+      "Fidelidad exacta a hex de Microsoft (#0078D4, #107C10, #FFB900, #D13438), nunca aproximaciones Tailwind genéricas.",
+      "Superficie plana con bordes, no sombras, como separador primario.",
+      "Un dot + badge de dos letras identifica cada nivel de certificación en toda la navegación.",
+      "Todo el color de estado (correcto/incorrecto, aprobado/reprobado) reutiliza los mismos cuatro semánticos Fluent — nunca colores ad hoc."
+    ],
+    "rules": [
+      { "name": "The Exact-Hex Rule", "body": "Los colores de marca Microsoft (#0078D4, #107C10, #FFB900, #D13438) se escriben como hex literal en el código (namespace ms-* y nivel-*), nunca se aproximan a la paleta por defecto de Tailwind (blue-600, green-500). Nueva UI que necesite estos roles reutiliza el hex exacto o el token ms-*/nivel-* existente, no inventa un tono cercano.", "section": "colors" },
+      { "name": "The Border-First Rule", "body": "En reposo, toda superficie se separa con border de 1px, nunca con sombra. La sombra solo aparece cuando una superficie se sobrepone activamente a otra (sticky, overlay, modal) y debe tomarse de la escala fluent-* existente.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do usar el hex exacto de Microsoft (#0078D4, #107C10, #FFB900, #D13438) para cualquier nuevo elemento de marca o estado semántico — nunca el azul/verde/rojo por defecto de Tailwind.",
+      "Do separar superficies con border de 1px en --border-subtle como primer recurso; reservar sombra para overlays reales (sticky, dropdown, modal), tomada de la escala fluent-1..8 existente.",
+      "Do mantener Segoe UI (pila de sistema) como única familia tipográfica; la jerarquía se construye con peso y tamaño, no con una segunda fuente.",
+      "Do usar el patrón de barra izquierda de 2px + fondo accent para cualquier nuevo estado \"activo\" de navegación, replicando el de sidebar/tabs existente."
+    ],
+    "donts": [
+      "Don't introducir una paleta de acento nueva o un segundo azul \"de marca\" — el sistema tiene un único primario (MS Blue) y la regla es que se usa con moderación como acento, no como color de fondo masivo.",
+      "Don't añadir sombras decorativas a cards, badges o botones en reposo — el sistema es border-first; una sombra nueva fuera de la escala fluent-* rompe la consistencia con Fluent UI.",
+      "Don't usar radios grandes tipo pill (rounded-full) fuera de badges/dots/avatares — el lenguaje de forma del sistema es md/lg moderado, no redondeo agresivo.",
+      "Don't descargar fuentes web para contenido de UI o de módulo — la pila es 100% fuentes de sistema por diseño (sin dependencia de red, coincide con Fluent UI / MS Learn nativo)."
+    ]
+  }
+}
