@@ -7,6 +7,7 @@ export const PRACTICE_DOMAINS = [
   "alm-deployment-operations",
   "consulting-functional-analysis",
   "architecture-governance",
+  "rpa-desktop-automation",
 ] as const;
 export const PRACTICE_ROLES = [
   "maker",
@@ -16,6 +17,9 @@ export const PRACTICE_ROLES = [
   "administrator",
   "support-analyst",
   "solution-architect",
+  "rpa-developer",
+  "automation-engineer",
+  "rpa-operations-specialist",
 ] as const;
 export const EVIDENCE_TYPES = [
   "screenshot",
@@ -87,6 +91,7 @@ export const PRACTICE_DOMAIN_LABELS: Record<PracticeDomain, string> = {
   "alm-deployment-operations": "ALM, despliegue y operación",
   "consulting-functional-analysis": "Consultoría y análisis funcional",
   "architecture-governance": "Arquitectura y gobierno",
+  "rpa-desktop-automation": "Power Automate Desktop & RPA",
 };
 
 export const PRACTICE_ROLE_LABELS: Record<PracticeRole, string> = {
@@ -97,6 +102,9 @@ export const PRACTICE_ROLE_LABELS: Record<PracticeRole, string> = {
   administrator: "Administrator",
   "support-analyst": "Support Analyst",
   "solution-architect": "Solution Architect",
+  "rpa-developer": "RPA Developer",
+  "automation-engineer": "Automation Engineer",
+  "rpa-operations-specialist": "RPA Operations Specialist",
 };
 
 export const PRACTICE_HINT_LEVEL_LABELS: Record<PracticeHintLevel, string> = {

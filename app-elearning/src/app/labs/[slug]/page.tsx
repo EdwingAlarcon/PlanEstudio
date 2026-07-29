@@ -31,10 +31,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const LEVEL_BAR: Record<string, string> = {
   N1: "bg-[#107C10]", N2: "bg-[#0078D4]", N3: "bg-orange-500", N4: "bg-[#D13438]",
-  N5: "bg-purple-600", N6: "bg-teal-600",
+  N5: "bg-purple-600", N6: "bg-teal-600", RPA: "bg-[#6B4EFF]",
 };
 
-const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365" | "default"> = {
+const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365" | "rpa" | "default"> = {
   "PL-900": "basico",
   "PL-200": "intermedio",
   "PL-200 (retira 31 ago 2026)": "intermedio",
@@ -47,6 +47,8 @@ const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arqui
   "D365 Especialización": "d365",
   "D365 Especialización Integration": "d365",
   "D365 Especialización Portfolio": "d365",
+  "Power Automate Desktop & RPA": "rpa",
+  "RPA": "rpa",
 };
 
 export default async function LabDetailPage({ params }: Props) {

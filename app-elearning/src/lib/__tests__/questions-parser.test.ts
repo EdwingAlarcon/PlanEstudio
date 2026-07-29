@@ -75,10 +75,10 @@ describe("getAllQuestions — bank integrity", () => {
     });
   });
 
-  it("moduleId values are between 1 and 65", () => {
+  it("moduleId values are between 1 and 75", () => {
     all.forEach((q) => {
       expect(q.moduleId, `${q.id}: moduleId out of range`).toBeGreaterThanOrEqual(1);
-      expect(q.moduleId, `${q.id}: moduleId out of range`).toBeLessThanOrEqual(65);
+      expect(q.moduleId, `${q.id}: moduleId out of range`).toBeLessThanOrEqual(75);
     });
   });
 
@@ -125,8 +125,8 @@ describe("getQuestionsForLevel", () => {
     });
   });
 
-  it("returns questions for all 5 levels", () => {
-    (["basico", "intermedio", "avanzado", "arquitecto", "ia"] as const).forEach((level) => {
+  it("returns questions for all levels and transversal specializations", () => {
+    (["basico", "intermedio", "avanzado", "arquitecto", "ia", "d365", "rpa"] as const).forEach((level) => {
       const qs = getQuestionsForLevel(level);
       expect(qs.length, `No questions for level: ${level}`).toBeGreaterThan(0);
     });
@@ -142,12 +142,16 @@ describe("getQuestionsForLevel", () => {
     const avanzado = getQuestionsForLevel("avanzado").map((q) => q.moduleId);
     const arquitecto = getQuestionsForLevel("arquitecto").map((q) => q.moduleId);
     const ia = getQuestionsForLevel("ia").map((q) => q.moduleId);
+    const d365 = getQuestionsForLevel("d365").map((q) => q.moduleId);
+    const rpa = getQuestionsForLevel("rpa").map((q) => q.moduleId);
 
     const basicoSet = new Set(basico);
     intermedio.forEach((id) => expect(basicoSet.has(id)).toBe(false));
     avanzado.forEach((id) => expect(basicoSet.has(id)).toBe(false));
     arquitecto.forEach((id) => expect(basicoSet.has(id)).toBe(false));
     ia.forEach((id) => expect(basicoSet.has(id)).toBe(false));
+    d365.forEach((id) => expect(basicoSet.has(id)).toBe(false));
+    rpa.forEach((id) => expect(basicoSet.has(id)).toBe(false));
   });
 
   it("union of all levels equals full question bank", () => {
@@ -158,7 +162,8 @@ describe("getQuestionsForLevel", () => {
       getQuestionsForLevel("avanzado").length +
       getQuestionsForLevel("arquitecto").length +
       getQuestionsForLevel("ia").length +
-      getQuestionsForLevel("d365").length;
+      getQuestionsForLevel("d365").length +
+      getQuestionsForLevel("rpa").length;
     expect(sum).toBe(all);
   });
 });

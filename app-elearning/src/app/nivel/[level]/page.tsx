@@ -27,13 +27,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-const LEVEL_ACCENT: Record<LevelId, { badge: "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365"; bar: string }> = {
+const LEVEL_ACCENT: Record<LevelId, { badge: "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365" | "rpa"; bar: string }> = {
   basico:     { badge: "basico",     bar: "bg-[#107C10]" },
   intermedio: { badge: "intermedio", bar: "bg-[#0078D4]" },
   avanzado:   { badge: "avanzado",   bar: "bg-orange-500" },
   arquitecto: { badge: "arquitecto", bar: "bg-[#D13438]" },
   ia:         { badge: "ia",         bar: "bg-purple-600" },
   d365:       { badge: "d365",       bar: "bg-teal-600" },
+  rpa:        { badge: "rpa",        bar: "bg-[#6B4EFF]" },
 };
 
 export default async function LevelPage({ params }: PageProps) {
@@ -70,6 +71,7 @@ export default async function LevelPage({ params }: PageProps) {
       <LevelProgressBanner levelId={levelData.id} />
 
       {levelData.id === "d365" && <D365EnterprisePracticePanel />}
+      {levelData.id === "rpa" && <RpaPracticePanel />}
 
       {/* ── Module list ──────────────────────────────────────────────────── */}
       <section aria-labelledby="modules-heading">
@@ -120,6 +122,87 @@ export default async function LevelPage({ params }: PageProps) {
         )}
       </section>
     </div>
+  );
+}
+
+function RpaPracticePanel() {
+  const practiceTracks = [
+    {
+      title: "Labs PAD",
+      description: "Construye desktop flows mantenibles para Excel, web, legacy, cloud integration, despliegue y operación.",
+      icon: FlaskConical,
+      href: "/labs",
+      label: "Ver labs RPA",
+    },
+    {
+      title: "Incidentes RPA",
+      description: "Practica selector roto, unattended, Excel bloqueado, reintentos, máquina no disponible y configuración incorrecta.",
+      icon: ShieldCheck,
+      href: "/experiencia-practica",
+      label: "Ver incidentes",
+    },
+    {
+      title: "Capstone end-to-end",
+      description: "Cierra con análisis AS-IS/TO-BE, desktop flow, cloud flow, pruebas, ALM, runbook y RCA.",
+      icon: ClipboardCheck,
+      href: "/labs/lab-112-rpa-capstone-proceso-administrativo",
+      label: "Abrir capstone",
+    },
+  ];
+
+  return (
+    <section
+      aria-labelledby="rpa-practice-heading"
+      className="rounded-xl border border-[#6B4EFF]/25 bg-[#F5F3FF] px-5 py-5 shadow-fluent-1 dark:border-[#A99BFF]/30 dark:bg-[rgba(107,78,255,0.12)]"
+    >
+      <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <div className="mb-2 flex items-center gap-2">
+            <Badge variant="rpa">RPA</Badge>
+            <Badge variant="outline">Analizar → operar → diagnosticar</Badge>
+          </div>
+          <h2 id="rpa-practice-heading" className="text-base font-semibold text-foreground">
+            Ruta práctica recomendada para Power Automate Desktop
+          </h2>
+          <p className="mt-1 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Usa RPA cuando la interfaz sea la frontera real; si existe API o conector estable, documenta por qué esa alternativa es preferible.
+          </p>
+        </div>
+        <Button asChild size="sm" variant="outline" className="shrink-0">
+          <Link href="/recursos/rpa-artefactos-profesionales">
+            Artefactos RPA
+            <ArrowRight className="ml-1.5 h-3.5 w-3.5" aria-hidden />
+          </Link>
+        </Button>
+      </div>
+
+      <div className="grid gap-3 md:grid-cols-3">
+        {practiceTracks.map((track) => {
+          const Icon = track.icon;
+          return (
+            <Link
+              key={track.href}
+              href={track.href}
+              className="group rounded-lg border border-border bg-card p-4 shadow-fluent-1 transition-all duration-150 hover:border-[#6B4EFF]/40 hover:shadow-fluent-2"
+            >
+              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#6B4EFF]/10 text-[#6B4EFF] dark:text-[#A99BFF]">
+                <Icon className="h-4.5 w-4.5" aria-hidden />
+              </div>
+              <p className="text-sm font-semibold text-foreground group-hover:text-[#6B4EFF] dark:group-hover:text-[#A99BFF]">
+                {track.title}
+              </p>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                {track.description}
+              </p>
+              <span className="mt-3 inline-flex items-center text-xs font-medium text-[#6B4EFF] dark:text-[#A99BFF]">
+                {track.label}
+                <ArrowRight className="ml-1 h-3 w-3" aria-hidden />
+              </span>
+            </Link>
+          );
+        })}
+      </div>
+    </section>
   );
 }
 

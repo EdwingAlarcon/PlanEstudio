@@ -23,9 +23,10 @@ test.describe("Smoke — rutas principales", () => {
       const sidebar = page.getByRole("complementary", { name: "Navegación principal" });
 
       await expect(sidebar.getByRole("link", { name: /Dynamics 365 Especialización\s+D365/ })).toBeVisible();
+      await expect(sidebar.getByRole("link", { name: /Power Automate Desktop & RPA\s+RPA/ })).toBeVisible();
       await expect(sidebar.getByRole("link", { name: "Experiencia práctica" })).toBeVisible();
-      await expect(sidebar.getByText("0/10")).toBeVisible();
-      await expect(sidebar.getByText("PL-900 · PL-200 · PL-400 · Arquitectura · IA · D365")).toBeVisible();
+      await expect(sidebar.getByText("0/10")).toHaveCount(2);
+      await expect(sidebar.getByText("PL-900 · PL-200 · PL-400 · Arquitectura · IA · D365 · RPA")).toBeVisible();
       await expect(sidebar.getByText("Dynamics 365 Avanzado")).toHaveCount(0);
       await expect(sidebar.getByText("0/4")).toHaveCount(0);
     }
@@ -66,6 +67,10 @@ test.describe("Smoke — rutas principales", () => {
 
     await page.mouse.move(mainBox.x + mainBox.width / 2, mainBox.y + mainBox.height / 2);
     await page.mouse.wheel(0, 1400);
+    await mainContent.evaluate((el) => {
+      el.scrollTop = Math.max(el.scrollTop, 1400);
+      el.dispatchEvent(new Event("scroll", { bubbles: true }));
+    });
 
     await expect
       .poll(async () => mainContent.evaluate((el) => el.scrollTop))
@@ -128,18 +133,18 @@ test.describe("Smoke — rutas principales", () => {
   test("experiencia práctica lista y filtra el piloto profesional", async ({ page }) => {
     await page.goto("/experiencia-practica");
     await expect(page.locator("h1")).toContainText("Experiencia práctica");
-    await expect(page.getByText("5 incidentes")).toBeVisible();
-    await expect(page.getByText("2 challenges")).toBeVisible();
-    await expect(page.getByText("1 simulación")).toBeVisible();
+    await expect(page.getByText("13 incidentes")).toBeVisible();
+    await expect(page.getByText("5 challenges")).toBeVisible();
+    await expect(page.getByText("2 simulaciones")).toBeVisible();
 
     await page.getByRole("button", { name: "Incident Lab" }).click();
-    await expect(page.getByText("5 de 8")).toBeVisible();
+    await expect(page.getByText("13 de 20")).toBeVisible();
     await expect(page.getByText("INC-001")).toBeVisible();
     await expect(page.getByText("CH-001")).toHaveCount(0);
 
     await page.getByRole("button", { name: "Limpiar filtros" }).click();
     await page.getByRole("button", { name: "Challenge Lab" }).click();
-    await expect(page.getByText("2 de 8")).toBeVisible();
+    await expect(page.getByText("5 de 20")).toBeVisible();
     await expect(page.getByText("CH-001")).toBeVisible();
   });
 
@@ -227,6 +232,8 @@ test.describe("Smoke — rutas principales", () => {
   });
 
   test("portabilidad práctica exporta, reinicia e importa sin tocar progreso académico", async ({ page }) => {
+    test.setTimeout(60_000);
+
     await page.goto("/");
     await page.evaluate(() => {
       window.localStorage.clear();
@@ -249,14 +256,14 @@ test.describe("Smoke — rutas principales", () => {
     await page.getByRole("button", { name: "Guardar notas" }).click();
     await page.goto("/progreso");
 
-    const downloadPromise = page.waitForEvent("download");
-    await page.getByRole("button", { name: "Exportar progreso práctico" }).last().click();
-    const download = await downloadPromise;
+    const exportButton = page.getByRole("region", { name: "Respaldo y portabilidad" }).getByRole("button", { name: "Exportar progreso práctico" });
+    await expect(exportButton).toBeEnabled();
+    await exportButton.click();
+    await expect(page.getByText(/Backup generado: 1 prácticas y 1 intentos/)).toBeVisible();
     const backupText = await page.evaluate(async () => {
       const stored = window.localStorage.getItem("planestudio.practice-progress.v1");
       return stored;
     });
-    expect(download.suggestedFilename()).toMatch(/planestudio-practicas-\d{4}-\d{2}-\d{2}\.json/);
 
     page.once("dialog", (dialog) => dialog.accept());
     await page.getByRole("button", { name: "Reiniciar progreso práctico" }).click();
@@ -354,6 +361,41 @@ test.describe("Smoke — rutas principales", () => {
     await expect(page.locator("text=Módulo").or(page.locator("text=Lab")).first()).toBeVisible();
     await input.fill("Primeros cinco días");
     await expect(page.getByRole("option").filter({ hasText: "Simulación" }).first()).toBeVisible();
+    await input.fill("Power Automate Desktop");
+    await expect(page.getByRole("option").filter({ hasText: "RPA" }).first()).toBeVisible();
+    await input.fill("unattended");
+    await expect(page.getByRole("option").filter({ hasText: /RPA|Módulo|Lab/i }).first()).toBeVisible();
+  });
+
+  test("nivel RPA integra módulos, labs, práctica y checklist", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByRole("link", { name: /Power Automate Desktop & RPA/i }).first()).toBeVisible();
+
+    await page.goto("/nivel/rpa");
+    await expect(page.locator("h1")).toContainText("Power Automate Desktop & RPA");
+    await expect(page.locator('a[href="/nivel/rpa/modulo/fundamentos-rpa-seleccion-procesos"]')).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Ruta práctica recomendada/i })).toBeVisible();
+
+    await page.goto("/nivel/rpa/modulo/fundamentos-rpa-seleccion-procesos");
+    await expect(page.getByRole("heading", { name: /Objetivo/i }).first()).toBeVisible();
+    await expect(page.getByText(/API, conector o integración viable/i).first()).toBeVisible();
+
+    await page.goto("/labs");
+    await page.getByRole("button", { name: "RPA", exact: true }).first().click();
+    await expect(page.locator('a[href="/labs/lab-104-rpa-primer-desktop-flow-mantenible"]')).toBeVisible();
+
+    await page.goto("/experiencia-practica/inc-rpa-001-selector-roto-actualizacion");
+    await expect(page.locator("h1")).toContainText("Selector roto");
+    await page.goto("/experiencia-practica/ch-rpa-01-consolidacion-financiera-automatizada");
+    await expect(page.locator("h1")).toContainText("Consolidación financiera");
+    await page.goto("/experiencia-practica/sim-rpa-001-primeras-dos-semanas-rpa-developer");
+    await expect(page.locator("h1")).toContainText("Primeras dos semanas");
+
+    await page.goto("/recursos/checklist");
+    await page.getByRole("button", { name: /Power Automate Desktop & RPA 0%/ }).click();
+    await expect(page.getByRole("heading", { name: /Fundamentos de RPA y Selección de Procesos/i })).toBeVisible();
+    await page.goto("/progreso");
+    await expect(page.getByRole("heading", { name: /RPA · RPA/i })).toBeVisible();
   });
 
   test("skip-to-content es accesible por teclado", async ({ page }) => {

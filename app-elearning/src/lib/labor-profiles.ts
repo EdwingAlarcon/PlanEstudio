@@ -78,6 +78,24 @@ const LABOR_PROFILES: LaborProfile[] = [
     jobReadyGuideHref: "/recursos/job-ready-data-migration-legacy",
     interviewHref: INTERVIEW_HREF,
   },
+  {
+    slug: "rpa-developer-automation-engineer",
+    title: "RPA Developer / Automation Engineer",
+    accent: "#6B4EFF",
+    summary: "Power Automate Desktop, procesos atendidos/no atendidos, selectores, integración cloud, operación y soporte.",
+    routeSlugs: ["rpa"],
+    jobReadyLabSlugs: [
+      "lab-104-rpa-primer-desktop-flow-mantenible",
+      "lab-105-rpa-excel-consolidacion-ventas",
+      "lab-106-rpa-automatizacion-web-portal",
+      "lab-109-rpa-errores-idempotencia",
+      "lab-111-rpa-despliegue-operacion-unattended",
+      "lab-112-rpa-capstone-proceso-administrativo",
+    ],
+    minimumEvidence: getProfessionalRouteBySlug("rpa")?.portfolioEvidence ?? [],
+    jobReadyGuideHref: "/recursos/rpa-portafolio-empleabilidad",
+    interviewHref: INTERVIEW_HREF,
+  },
 ];
 
 export function getLaborProfiles(): LaborProfile[] {

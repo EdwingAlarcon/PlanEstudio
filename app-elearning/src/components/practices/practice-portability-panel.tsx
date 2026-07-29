@@ -36,7 +36,7 @@ export function PracticePortabilityPanel({ practiceIds }: { practiceIds: string[
     document.body.appendChild(anchor);
     anchor.click();
     anchor.remove();
-    URL.revokeObjectURL(url);
+    window.setTimeout(() => URL.revokeObjectURL(url), 0);
   }
 
   function handleExport() {

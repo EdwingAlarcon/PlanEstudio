@@ -6,18 +6,21 @@
 
 ## Última actualización (2026-07-29)
 
-Último estado estable desplegado en `master`:
+Último estado local validado antes del commit del sprint RPA:
 
-- Commit más reciente de producto: `6e0604ac` — `feat: integrar seguimiento de experiencia practica`.
-- GitHub Actions: run `30419768845`, **success**, con deploy de GitHub Pages confirmado.
-- Producción verificada en `https://edwingalarcon.github.io/PlanEstudio/`.
-- Workspace local limpio y sincronizado con `origin/master`.
+- Branch local: `master`, partiendo de `origin/master` limpio.
+- Sprint en curso: **Power Automate Desktop & RPA Professional Track**.
+- Conteos finales locales: **75 módulos**, **72 labs**, **508 preguntas**, **633 criterios**, **20 prácticas profesionales**.
+- Nuevo nivel transversal: `rpa` / **Power Automate Desktop & RPA**, módulos 66-75.
+- Nuevos labs RPA: `LAB-104` a `LAB-112`.
+- Nuevas prácticas RPA: **3 Challenge Labs**, **8 Incident Labs**, **1 Work Simulation**.
+- Nuevos recursos RPA: artefactos profesionales, portafolio/empleabilidad honesta y validación tenant.
+- Producción pendiente de confirmar hasta hacer commit + push + GitHub Actions deploy.
 
 Después del Sprint 22 se agregó una capa nueva **Experiencia práctica**:
 `/experiencia-practica`, `app-elearning/content/practices/`, parser/validador `practices.ts`,
-metadata client-safe `practice-meta.ts`, documentación `docs/Recursos/MARCO_PRACTICAS_PROFESIONALES.md`
-y pilotos exactos: **5 Incident Labs, 2 Challenge Labs, 1 Work Simulation**. Los conteos existentes no
-cambian: 65 módulos, 63 labs, 488 preguntas, 603 criterios. Los nuevos elementos se reportan por separado.
+metadata client-safe `practice-meta.ts`, documentación `docs/Recursos/MARCO_PRACTICAS_PROFESIONALES.md`.
+El sprint RPA amplió esa capa de piloto inicial a **13 Incident Labs, 5 Challenge Labs y 2 Work Simulations**.
 
 El micro-sprint más reciente integró esa capa con la experiencia diaria:
 
@@ -56,6 +59,16 @@ Sprint posterior — **Practice Validation & Portability**:
 - Nuevos recursos: guía de portabilidad para estudiantes, guía para revisores y protocolo/matriz de validación
   sandbox. Conteos académicos sin cambios; recursos Next.js suben a 21 y build estático a 193 páginas.
 - Baseline posterior: **247 Vitest tests**, **26 Playwright smoke tests**, build estático de **193 páginas**.
+
+Sprint posterior — **Power Automate Desktop & RPA Professional Track**:
+
+- Agrega nivel transversal `rpa` con rango `66-75`, navegación en Home/sidebar/progreso/checklist/labs/búsqueda/certificado.
+- Implementa 10 módulos RPA con enfoque profesional: viabilidad RPA vs API/conector/cloud, instalación/runtime, desktop flows mantenibles, archivos/Excel, web, Windows legacy, selectores, errores/idempotencia, cloud + desktop, ALM/operación/gobierno.
+- Implementa 9 labs RPA (`LAB-104` a `LAB-112`) con capstone end-to-end.
+- Implementa 12 prácticas RPA (`CH-RPA-01` a `03`, `INC-RPA-001` a `008`, `SIM-RPA-001`) integradas al buscador, progreso práctico y portafolio.
+- Actualiza matriz laboral: Power Automate Desktop pasa de `Awareness / Sin lab dedicado` a `Cubierto`, manteniendo como riesgo la validación unattended/machine groups/licencia en tenant real.
+- Actualiza `CHECKLIST_PROGRESO.md`, preguntas del simulador, rutas profesionales, perfiles laborales, empleabilidad y recursos RPA.
+- Baseline posterior: **247 Vitest tests**, **27 Playwright smoke tests**, build estático de **230 páginas**.
 
 Validaciones locales ejecutadas y en verde antes del commit `6e0604ac`:
 

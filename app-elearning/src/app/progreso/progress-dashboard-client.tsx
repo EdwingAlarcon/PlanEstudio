@@ -26,6 +26,7 @@ const LEVEL_ACCENT: Record<LevelId, string> = {
   arquitecto: "#D13438",
   ia: "#9333EA",
   d365: "#0D9488",
+  rpa: "#6B4EFF",
 };
 
 type ReadinessStatus = "en-progreso" | "falta-evidencia" | "listo";

@@ -5,7 +5,8 @@
     if (moduleId <= 30) return "PL-400";
     if (moduleId <= 41) return "Arquitectura Power Platform";
     if (moduleId <= 55) return "Buenas Prácticas IA";
-    return "D365 Especialización";
+    if (moduleId <= 65) return "D365 Especialización";
+    return "Power Automate Desktop & RPA";
   }
 
   function levelForModule(moduleId) {
@@ -14,7 +15,8 @@
     if (moduleId <= 30) return "Avanzado";
     if (moduleId <= 41) return "Arquitecto";
     if (moduleId <= 55) return "Desarrollo Asistido por IA";
-    return "Dynamics 365 Especialización";
+    if (moduleId <= 65) return "Dynamics 365 Especialización";
+    return "Power Automate Desktop & RPA";
   }
 
   const moduleTitles = [
@@ -82,7 +84,17 @@
     "Dynamics 365 Contact Center / Omnichannel",
     "Customer Insights - Journeys",
     "Integración CE + F&O",
-    "Capstone Enterprise D365"
+    "Capstone Enterprise D365",
+    "Fundamentos de RPA y Selección de Procesos",
+    "Entorno, Instalación y Arquitectura PAD",
+    "Construcción Mantenible de Desktop Flows",
+    "Archivos, CSV y Excel con PAD",
+    "Automatización Web con PAD",
+    "Aplicaciones Windows y Legacy",
+    "Selectores, Sincronización y Resiliencia",
+    "Errores, Logging e Idempotencia",
+    "Integración Cloud Flow + Desktop Flow",
+    "ALM, Operación, Gobierno y Soporte RPA"
   ];
 
   const MODULE_QUESTIONS = {
@@ -6071,6 +6083,46 @@
       answer: [0, 1, 2],
       explanation: "Portafolio defendible requiere artefactos de diseño y validación, no capturas aisladas."
     }
+  ],
+  66: [
+    { type: "single", prompt: "Un sistema legacy no expone API, pero su pantalla cambia cada semana y el volumen es bajo. ¿Cuál es la decisión más profesional?", options: ["Automatizar con RPA sin más análisis", "Rechazar o posponer RPA y proponer mejora manual/proceso estable hasta reducir variabilidad", "Usar coordenadas para acelerar", "Prometer unattended"], answer: [1], explanation: "RPA requiere interfaz suficientemente estable y beneficio que justifique la deuda operativa." },
+    { type: "multi", prompt: "¿Qué evidencias debe incluir una evaluación de viabilidad RPA?", options: ["Matriz RPA/API/conector/cloud/manual", "Riesgos y excepciones", "Deuda operativa", "Contraseñas de prueba en texto plano"], answer: [0, 1, 2], explanation: "La viabilidad combina opción técnica, riesgo, excepciones y operación; nunca secretos." }
+  ],
+  67: [
+    { type: "single", prompt: "El flujo funciona attended pero falla unattended. ¿Qué revisar antes de modificar selectores?", options: ["Usuario, sesión, permisos, runtime, máquina y resolución", "Solo colores de la app", "Únicamente el nombre del flujo", "Cambiar todos los botones a coordenadas"], answer: [0], explanation: "La diferencia attended/unattended suele estar en sesión, cuenta, máquina, permisos o runtime." },
+    { type: "single", prompt: "¿Qué representa una conexión de máquina en RPA?", options: ["Cómo Power Automate se conecta e inicia sesión para ejecutar en una máquina", "Un archivo Excel", "Un selector web", "Un tipo de variable"], answer: [0], explanation: "La conexión define la relación de ejecución con la máquina y sus credenciales asociadas." }
+  ],
+  68: [
+    { type: "single", prompt: "¿Qué estructura favorece mantenibilidad en un desktop flow?", options: ["Un flujo lineal de 200 acciones", "Subflows para inicializar, validar, ejecutar, errores, cierre y logging", "Variables sin nombre", "Pausas fijas entre todo"], answer: [1], explanation: "Separar responsabilidades permite soporte, pruebas y cambios más seguros." },
+    { type: "multi", prompt: "¿Qué outputs son útiles para operación?", options: ["Total procesado", "Errores", "Ruta del log", "Contraseña usada"], answer: [0, 1, 2], explanation: "Outputs operativos resumen resultado sin exponer secretos." }
+  ],
+  69: [
+    { type: "single", prompt: "Un bot deja procesos Excel abiertos tras fallar. ¿Qué patrón corrige el riesgo?", options: ["Subflow de cleanup ejecutado en éxito y error", "Aumentar memoria de la PC solamente", "Ignorar archivos bloqueados", "Usar Excel como base productiva"], answer: [0], explanation: "El cleanup controlado libera recursos aunque la ejecución falle." },
+    { type: "multi", prompt: "¿Qué controles evitan duplicados al procesar archivos?", options: ["Clave por registro o lote", "Carpeta de procesados", "Manifest de archivos", "Reprocesar todo sin validar"], answer: [0, 1, 2], explanation: "La idempotencia requiere saber qué ya fue procesado." }
+  ],
+  70: [
+    { type: "single", prompt: "Si un portal tiene API soportada para descargar datos, ¿qué alternativa suele ser preferible?", options: ["API o conector antes que automatización UI", "Click por coordenadas", "OCR de toda la página", "Copiar manualmente siempre"], answer: [0], explanation: "Una API soportada suele ser más estable, observable y mantenible que UI automation." },
+    { type: "single", prompt: "¿Qué espera es más robusta en una automatización web?", options: ["Esperar a que exista/sea visible el elemento o estado esperado", "Sleep fijo muy largo", "Ninguna espera", "Mover el mouse al azar"], answer: [0], explanation: "La sincronización por estado reduce fallos por carga asincrónica." }
+  ],
+  71: [
+    { type: "single", prompt: "¿Por qué coordenadas e imágenes deben ser último recurso en apps legacy?", options: ["Son frágiles ante resolución, escalado y cambios de UI", "Siempre son más seguras", "No requieren pruebas", "Eliminan necesidad de selector"], answer: [0], explanation: "Coordenadas e imágenes se rompen con facilidad; deben justificarse como fallback." },
+    { type: "multi", prompt: "¿Qué factores afectan una automatización Windows?", options: ["Foco", "Ventanas modales", "Resolución y escalado", "Permisos del usuario"], answer: [0, 1, 2, 3], explanation: "La UI de escritorio depende de contexto visual, sesión y permisos." }
+  ],
+  72: [
+    { type: "single", prompt: "Un selector incluye el número de versión del botón. ¿Qué riesgo introduce?", options: ["Se romperá con actualizaciones menores", "Será más portable", "Evita regresión", "Protege credenciales"], answer: [0], explanation: "Atributos dinámicos como versión no son buenos identificadores estables." },
+    { type: "multi", prompt: "¿Qué prácticas fortalecen selectores?", options: ["Ventana padre", "Atributos estables", "Selector alternativo", "Wildcard sin límite"], answer: [0, 1, 2], explanation: "La resiliencia viene de atributos estables y contexto; comodines excesivos pueden seleccionar mal." }
+  ],
+  73: [
+    { type: "single", prompt: "¿Por qué reintentar todo un lote puede ser peligroso?", options: ["Puede repetir efectos ya confirmados y crear duplicados", "Siempre reduce riesgos", "Elimina la necesidad de logs", "Hace innecesario validar resultados"], answer: [0], explanation: "Sin idempotencia, retry global puede duplicar registros o pagos." },
+    { type: "multi", prompt: "¿Qué elementos apoyan idempotencia?", options: ["Clave única", "Checkpoint", "Estado persistente", "Retry infinito"], answer: [0, 1, 2], explanation: "Idempotencia requiere saber qué operación ya ocurrió y limitar reintentos." }
+  ],
+  74: [
+    { type: "single", prompt: "¿Qué debe devolver un desktop flow invocado por cloud flow?", options: ["Estado, mensaje, métricas y referencia a evidencia", "Solo una captura sin contexto", "La contraseña usada", "Nada"], answer: [0], explanation: "Un contrato de outputs permite monitoreo y soporte desde cloud." },
+    { type: "single", prompt: "¿Por qué persistir estado fuera de la VM?", options: ["Para reanudar, monitorear y auditar aunque la máquina falle", "Para ocultar errores", "Para evitar UAT", "Para no usar logs"], answer: [0], explanation: "El estado externo permite operación y recuperación." }
+  ],
+  75: [
+    { type: "single", prompt: "¿Qué evidencia muestra que un desktop flow está listo para operación?", options: ["Deployment plan, rollback, runbook, pruebas y owner", "Solo una ejecución feliz en DEV", "Captura del diseñador", "Nombre bonito"], answer: [0], explanation: "Operación requiere ALM, soporte, rollback, pruebas y ownership." },
+    { type: "multi", prompt: "¿Qué fallos son críticos en RPA?", options: ["Credenciales en texto plano", "Reintentos infinitos", "Cambios directos en producción", "No cerrar aplicaciones o archivos"], answer: [0, 1, 2, 3], explanation: "Todos comprometen seguridad, datos, operación o continuidad." }
   ]
 };
 

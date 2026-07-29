@@ -13,13 +13,13 @@ import {
 } from "../practices";
 
 describe("professional practices content", () => {
-  it("loads exactly the pilot scope", () => {
+  it("loads the expanded professional practice scope", () => {
     const counts = getPracticeCounts();
 
-    expect(counts.total).toBe(8);
-    expect(counts.incidents).toBe(5);
-    expect(counts.challenges).toBe(2);
-    expect(counts.simulations).toBe(1);
+    expect(counts.total).toBe(20);
+    expect(counts.incidents).toBe(13);
+    expect(counts.challenges).toBe(5);
+    expect(counts.simulations).toBe(2);
   });
 
   it("validates controlled metadata vocabulary", () => {
@@ -62,7 +62,7 @@ describe("professional practices content", () => {
     }
 
     const searchDocs = getPracticeSearchDocuments();
-    expect(searchDocs).toHaveLength(8);
+    expect(searchDocs).toHaveLength(20);
     expect(searchDocs.find((doc) => doc.practiceId === "INC-001")?.content).toMatch(/security-roles|Dataverse/i);
     expect(searchDocs.map((doc) => doc.href)).toContain("/experiencia-practica/inc-001-seguridad-dataverse-oportunidades");
   });
@@ -70,7 +70,7 @@ describe("professional practices content", () => {
   it("incident labs include protected solution material and RCA language", () => {
     const incidents = getAllPractices().filter((practice) => practice.practiceType === "incident");
 
-    expect(incidents).toHaveLength(5);
+    expect(incidents).toHaveLength(13);
     for (const incident of incidents) {
       expect(incident.rawContent).toContain("## Solución de referencia");
       expect(incident.rawContent.toLowerCase()).toContain("causa raíz");

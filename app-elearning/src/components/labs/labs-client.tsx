@@ -26,11 +26,12 @@ const LEVEL_CONFIG: Record<string, { label: string; bar: string; accent: string 
   N4: { label: "Nivel 4 — Arquitecto",  bar: "bg-[#D13438]",  accent: "#D13438" },
   N5: { label: "Nivel IA — Desarrollo Asistido", bar: "bg-purple-600", accent: "#9333EA" },
   N6: { label: "Nivel D365 — Dynamics 365 Especialización", bar: "bg-teal-600", accent: "#0D9488" },
+  RPA: { label: "Especialización RPA — Power Automate Desktop", bar: "bg-[#6B4EFF]", accent: "#6B4EFF" },
 };
 
-const LEVEL_ORDER = ["N1", "N2", "N3", "N4", "N5", "N6"];
+const LEVEL_ORDER = ["N1", "N2", "N3", "N4", "N5", "N6", "RPA"];
 
-const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365" | "default"> = {
+const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365" | "rpa" | "default"> = {
   "PL-900": "basico",
   "PL-200": "intermedio",
   "PL-200 (retira 31 ago 2026)": "intermedio",
@@ -43,10 +44,12 @@ const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arqui
   "D365 Especialización": "d365",
   "D365 Especialización Integration": "d365",
   "D365 Especialización Portfolio": "d365",
+  "Power Automate Desktop & RPA": "rpa",
+  "RPA": "rpa",
 };
 
-const DOMAIN_ORDER: DomainTag[] = ["Power Platform", "Dynamics 365", "Integración", "IA", "Empleabilidad"];
-const DIFFICULTY_ORDER = ["Fundacional", "Intermedia", "Avanzada", "Enterprise", "Especializada", "Especializada D365"];
+const DOMAIN_ORDER: DomainTag[] = ["Power Platform", "Dynamics 365", "Integración", "IA", "RPA", "Empleabilidad"];
+const DIFFICULTY_ORDER = ["Fundacional", "Intermedia", "Avanzada", "Enterprise", "Especializada", "Especializada D365", "Especializada RPA"];
 
 function toggle<T>(set: Set<T>, value: T): Set<T> {
   const next = new Set(set);

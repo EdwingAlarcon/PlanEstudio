@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import {
   BookOpen, CheckSquare, GraduationCap, FileText, Trophy,
   Home, PlayCircle, FlaskConical, Route, HelpCircle, Briefcase, ClipboardList, Activity,
-  Layers3, Building2, Workflow,
+  Layers3, Building2, Workflow, Bot,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -18,7 +18,7 @@ import { cn } from "@/lib/utils";
 const LEVEL_CONFIG: Record<LevelId, {
   dot: string;
   label: string;
-  badgeVariant: "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365";
+  badgeVariant: "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365" | "rpa";
   progressColor: string;
 }> = {
   basico:     { dot: "bg-[#107C10]", label: "text-[#107C10] dark:text-green-400",    badgeVariant: "basico",     progressColor: "[&>div]:bg-[#107C10]" },
@@ -27,6 +27,7 @@ const LEVEL_CONFIG: Record<LevelId, {
   arquitecto: { dot: "bg-[#D13438]", label: "text-[#D13438] dark:text-red-400",      badgeVariant: "arquitecto", progressColor: "[&>div]:bg-[#D13438]"  },
   ia:         { dot: "bg-purple-600", label: "text-purple-600 dark:text-purple-400", badgeVariant: "ia",         progressColor: "[&>div]:bg-purple-600" },
   d365:       { dot: "bg-teal-600",   label: "text-teal-600 dark:text-teal-400",     badgeVariant: "d365",       progressColor: "[&>div]:bg-teal-600"  },
+  rpa:        { dot: "bg-[#6B4EFF]",  label: "text-[#6B4EFF] dark:text-[#A99BFF]",   badgeVariant: "rpa",        progressColor: "[&>div]:bg-[#6B4EFF]" },
 };
 
 const SIDEBAR_FOOTER_LABEL = LEVEL_ORDER.map((levelId) => UI.levels.navCert[levelId]).join(" · ");
@@ -43,12 +44,16 @@ const RESOURCE_LINKS = [
   { href: "/recursos/roadmap-especializacion-avanzada", label: UI.nav.advancedRoadmap, icon: Route },
   { href: "/recursos/d365-tenant-readiness", label: UI.nav.d365TenantReadiness, icon: CheckSquare },
   { href: "/recursos/marco-practicas-profesionales", label: UI.nav.professionalPracticeFramework, icon: ClipboardList },
+  { href: "/recursos/rpa-artefactos-profesionales", label: UI.nav.rpaArtifacts, icon: ClipboardList },
+  { href: "/recursos/rpa-portafolio-empleabilidad", label: UI.nav.rpaPortfolio, icon: Briefcase },
+  { href: "/recursos/rpa-validacion-tenant", label: UI.nav.rpaTenantValidation, icon: CheckSquare },
 ];
 
 const DOMAIN_LINKS = [
   { href: "/power-platform", label: UI.nav.powerPlatform, icon: Layers3 },
   { href: "/dynamics-365",   label: UI.nav.dynamics365,   icon: Building2 },
   { href: "/integracion",    label: UI.nav.integration,   icon: Workflow },
+  { href: "/nivel/rpa",      label: "RPA",                 icon: Bot },
   { href: "/empleabilidad",  label: UI.nav.employability, icon: Briefcase },
 ];
 

@@ -14,6 +14,7 @@ const BORDER_COLORS: Record<LevelId, string> = {
   arquitecto: "border-red-600     dark:border-red-400",
   ia:         "border-purple-600  dark:border-purple-400",
   d365:       "border-teal-600    dark:border-teal-400",
+  rpa:        "border-[#6B4EFF]   dark:border-[#A99BFF]",
 };
 
 const ACCENT_TEXT_COLORS: Record<LevelId, string> = {
@@ -23,6 +24,7 @@ const ACCENT_TEXT_COLORS: Record<LevelId, string> = {
   arquitecto: "text-red-700     dark:text-red-400",
   ia:         "text-purple-700  dark:text-purple-400",
   d365:       "text-teal-700    dark:text-teal-400",
+  rpa:        "text-[#6B4EFF]   dark:text-[#A99BFF]",
 };
 
 function formatDate(date: Date): string {
@@ -80,6 +82,15 @@ export function CertificateDiploma({ levelId, userName, date }: CertificateDiplo
             , demostrando profundidad funcional en Dynamics 365 Sales, Customer Service,
             Customer Insights y Field Service, con visión de arquitectura Customer
             Engagement end-to-end.
+          </>
+        ) : levelId === "rpa" ? (
+          <>
+            por haber completado exitosamente la especialización{" "}
+            <span className={cn("font-semibold", ACCENT_TEXT_COLORS[levelId])}>
+              {UI.levels.badge[levelId]}
+            </span>
+            , demostrando diseño, construcción, operación y diagnóstico de automatizaciones
+            Power Automate Desktop en alcance controlado.
           </>
         ) : levelId === "arquitecto" ? (
           <>

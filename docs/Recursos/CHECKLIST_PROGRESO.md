@@ -1217,6 +1217,123 @@ Este checklist complementa los criterios modulares anteriores y no aumenta el co
 ---
 ---
 
+## ⚙️ NIVEL 7: POWER AUTOMATE DESKTOP & RPA
+
+> Especialización transversal. Estos criterios validan capacidad profesional simulada o en sandbox; no equivalen por sí solos a experiencia productiva.
+
+### Módulo 66: Fundamentos de RPA y Selección de Procesos
+
+- [ ] **Conocimiento**: Puedo decidir cuándo no usar RPA y defender una alternativa API, conector, cloud flow, desarrollo o proceso manual mejorado | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Construí una matriz de viabilidad RPA con riesgo, beneficio, deuda operativa y estabilidad de interfaz | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-104 o evidencia equivalente con AS-IS, TO-BE y ADR breve | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 66:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 67: Entorno, Instalación y Arquitectura PAD
+
+- [ ] **Conocimiento**: Diferencio máquina registrada, conexión de máquina, grupo, usuario, cuenta de servicio, sesión attended y unattended | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Preparé machine readiness checklist con licencia, runtime, permisos, sesión, resolución y aplicaciones | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Evidencia de configuración real o simulación marcada sin afirmar validación unattended | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 67:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 68: Construcción Mantenible de Desktop Flows
+
+- [ ] **Conocimiento**: Explico el patrón inicialización, configuración, ejecución, errores, cierre y logging | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseñé desktop flow modular con inputs, outputs, subflows y nombres mantenibles | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-104 completado con log y reflexión de mantenibilidad | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 68:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 69: Archivos, CSV y Excel con PAD
+
+- [ ] **Conocimiento**: Explico cuándo Excel no debe usarse como base de datos | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Automatizo Excel sin dejar procesos abiertos y manejo archivos bloqueados | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-105 completado con reporte, errores, deduplicación y log | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 69:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 70: Automatización Web con PAD
+
+- [ ] **Conocimiento**: Diferencio automatización web por UI frente a llamada HTTP/API | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Manejo tablas, paginación, descargas, esperas, selectores y timeout | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-106 completado con evidencia anonimizada y decisión API vs RPA | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 70:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 71: Aplicaciones Windows y Legacy
+
+- [ ] **Conocimiento**: Explico por qué coordenadas, OCR e imágenes son último recurso | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Automatizo ventana, selector, validación, modal inesperada y recuperación | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-107 completado con mapa de ventanas, log y justificación de fallback | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 71:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 72: Selectores, Sincronización y Resiliencia
+
+- [ ] **Conocimiento**: Leo la anatomía de un selector y detecto atributos dinámicos | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo selectores alternativos, waits, timeouts, polling y validación de estado | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-108 o INC-RPA-001 completado con prueba de regresión | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 72:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 73: Errores, Logging e Idempotencia
+
+- [ ] **Conocimiento**: Explico por qué reintentar todo puede causar corrupción o duplicados | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Diseño checkpoints, estados, retry acotado, compensación y cierre seguro | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-109 o INC-RPA-004 completado con prueba de reejecución sin duplicados | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 73:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 74: Integración Cloud Flow + Desktop Flow
+
+- [ ] **Conocimiento**: Diferencio responsabilidades de cloud flow, desktop flow, cola/lote, máquina y estado | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Integro cloud y desktop con inputs, outputs, estado, notificación y error cruzado | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-110 completado con run history y diagrama end-to-end | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 74:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### Módulo 75: ALM, Operación, Gobierno y Soporte RPA
+
+- [ ] **Conocimiento**: Explico solución, variables de entorno, connection references, DLP, owner, SLA y rollback para RPA | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo deployment checklist, rollback checklist, governance register y runbook | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: LAB-111 o LAB-112 completado con evidencias de operación y soporte | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 75:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
+### 🏆 Hitos de Nivel RPA
+
+- [ ] Módulos 66-75 completados con evidencia | Fecha: ___
+- [ ] Ocho labs RPA guiados completados o equivalentes documentados | Fecha: ___
+- [ ] Tres challenges RPA y ocho incidentes RPA intentados con evidencia | Fecha: ___
+- [ ] Capstone LAB-112 presentado con demo honesta y límites declarados | Fecha: ___
+- [ ] Validación en tenant documentada como real, simulada o bloqueada | Fecha: ___
+
+**Fecha de inicio Nivel RPA:** ___ | **Fecha de completación:** ___
+
+---
+---
+
 ## 📊 Resumen Total de Progreso
 
 | Nivel | Módulos | Checkboxes est. | Completados | % | Promedio Dominio | Fecha Fin |
@@ -1227,7 +1344,8 @@ Este checklist complementa los criterios modulares anteriores y no aumenta el co
 | 🔴 Nivel 4 - Arquitecto | 11 | 104 | ___ | ___% | ___/5 | ___ |
 | 🟣 Nivel IA - Desarrollo Asistido | 14 | 64 | ___ | ___% | ___/5 | ___ |
 | 🔷 Nivel D365 - Dynamics 365 Especialización | 10 | 55 | ___ | ___% | ___/5 | ___ |
-| **TOTAL** | **65** | **603** | ___ | ___% | ___/5 | ___ |
+| ⚙️ Nivel RPA - Power Automate Desktop & RPA | 10 | 30 | ___ | ___% | ___/5 | ___ |
+| **TOTAL** | **75** | **633** | ___ | ___% | ___/5 | ___ |
 
 ### Resumen por Módulo
 
@@ -1298,6 +1416,16 @@ Este checklist complementa los criterios modulares anteriores y no aumenta el co
 | 63 | Customer Insights - Journeys | ___/5 | ___% | ___/5 |
 | 64 | Integración CE + F&O | ___/5 | ___% | ___/5 |
 | 65 | Capstone Enterprise D365 | ___/5 | ___% | ___/5 |
+| 66 | Fundamentos de RPA y Selección de Procesos | ___/3 | ___% | ___/5 |
+| 67 | Entorno, Instalación y Arquitectura PAD | ___/3 | ___% | ___/5 |
+| 68 | Construcción Mantenible de Desktop Flows | ___/3 | ___% | ___/5 |
+| 69 | Archivos, CSV y Excel con PAD | ___/3 | ___% | ___/5 |
+| 70 | Automatización Web con PAD | ___/3 | ___% | ___/5 |
+| 71 | Aplicaciones Windows y Legacy | ___/3 | ___% | ___/5 |
+| 72 | Selectores, Sincronización y Resiliencia | ___/3 | ___% | ___/5 |
+| 73 | Errores, Logging e Idempotencia | ___/3 | ___% | ___/5 |
+| 74 | Integración Cloud Flow + Desktop Flow | ___/3 | ___% | ___/5 |
+| 75 | ALM, Operación, Gobierno y Soporte RPA | ___/3 | ___% | ___/5 |
 
 ### Timeline Visual de Progreso
 
@@ -1307,6 +1435,7 @@ NIVEL 2 [                    ] ___% completado
 NIVEL 3 [                    ] ___% completado
 NIVEL 4 [                    ] ___% completado
 NIVEL IA [                    ] ___% completado
+RPA      [                    ] ___% completado
 TOTAL   [                    ] ___% completado
 ```
 

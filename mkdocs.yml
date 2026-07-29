@@ -55,6 +55,8 @@ nav:
       - Contenido: Niveles/NIVEL_4_ARQUITECTO.md
   - "🟣 Nivel IA — Desarrollo Asistido":
       - Contenido: Niveles/NIVEL_5_IA.md
+  - "⚙️ Nivel RPA — Power Automate Desktop":
+      - Contenido: Niveles/NIVEL_7_RPA.md
   - Anexos:
       - Lenguajes de Programación: Anexos/LENGUAJES_PROGRAMACION.md
       - Copilot Studio Completo: Anexos/COPILOT_STUDIO_COMPLETO.md
@@ -86,6 +88,9 @@ nav:
       - "🧳 Portabilidad de Prácticas": Recursos/PRACTICAS_PORTABILIDAD_ESTUDIANTE.md
       - "🧑‍🏫 Guía de Revisores": Recursos/PRACTICAS_GUIA_REVISORES.md
       - "🧪 Validación Sandbox": Recursos/PRACTICAS_VALIDACION_SANDBOX.md
+      - "⚙️ RPA Artefactos Profesionales": Recursos/RPA_ARTEFACTOS_PROFESIONALES.md
+      - "💼 RPA Portafolio": Recursos/RPA_PORTAFOLIO_EMPLEABILIDAD.md
+      - "🧾 RPA Validación Tenant": Recursos/RPA_VALIDACION_TENANT.md
       - "📝 Banco de Preguntas": Recursos/EVALUACIONES_MODULOS_CERTIFICACION.md
       - "🎯 Simulador de Evaluaciones": Recursos/SIMULADOR_EVALUACIONES.md
 

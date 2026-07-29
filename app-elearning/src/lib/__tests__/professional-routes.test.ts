@@ -13,6 +13,7 @@ describe("professional routes", () => {
       "dynamics-365-customer-insights",
       "dynamics-365-field-service",
       "finance-operations",
+      "rpa",
       "ai-copilot",
     ]);
   });

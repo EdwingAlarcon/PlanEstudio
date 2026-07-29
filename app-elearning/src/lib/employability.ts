@@ -86,6 +86,11 @@ export function getEmployabilityHub(): EmployabilityHub {
             description: "Migración, limpieza, mapeo, CRM on-premises y modernización controlada.",
             href: "/recursos/job-ready-data-migration-legacy",
           },
+          {
+            title: "RPA Developer / Automation Engineer",
+            description: "Power Automate Desktop, attended/unattended, selectores, operación, RCA y portafolio honesto.",
+            href: "/recursos/rpa-portafolio-empleabilidad",
+          },
         ],
       },
       {

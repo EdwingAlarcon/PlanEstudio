@@ -38,6 +38,9 @@ Modelar datos en Dataverse.
       if (filePath.includes("NIVEL_2")) return "# NIVEL 2\n\n## MÓDULO 9: Dataverse Avanzado\nContenido Nivel 2.";
       if (filePath.includes("NIVEL_3")) return "# NIVEL 3\n\n## MÓDULO 18: Arquitectura\nContenido Nivel 3.";
       if (filePath.includes("NIVEL_4")) return "# NIVEL 4\n\n## MÓDULO 31: Enterprise\nContenido Nivel 4.";
+      if (filePath.includes("NIVEL_5")) return "# NIVEL 5\n\n## MÓDULO 42: IA\nContenido Nivel IA.";
+      if (filePath.includes("NIVEL_6")) return "# NIVEL 6\n\n## MÓDULO 56: D365\nContenido Nivel D365.";
+      if (filePath.includes("NIVEL_7")) return "# NIVEL 7\n\n## MÓDULO 66: RPA\nContenido Nivel RPA.";
       if (filePath.includes("CHECKLIST")) return "# ✅ Checklist de Progreso\nContenido checklist.";
       if (filePath.includes("GLOSARIO")) return "# 📖 Glosario de Términos\nContenido glosario.";
       if (filePath.includes("CERTIFICACIONES")) return "# 🏆 Certificaciones\nContenido certificaciones.";
@@ -56,6 +59,9 @@ Modelar datos en Dataverse.
       if (filePath.includes("PRACTICAS_PORTABILIDAD_ESTUDIANTE")) return "# Portabilidad y entrega de prácticas\nBackup.";
       if (filePath.includes("PRACTICAS_GUIA_REVISORES")) return "# Guía para revisores de prácticas\nRúbrica.";
       if (filePath.includes("PRACTICAS_VALIDACION_SANDBOX")) return "# Protocolo de validación en tenant sandbox\nMatriz.";
+      if (filePath.includes("RPA_ARTEFACTOS_PROFESIONALES")) return "# Power Automate Desktop & RPA — Artefactos profesionales\nMatriz.";
+      if (filePath.includes("RPA_PORTAFOLIO_EMPLEABILIDAD")) return "# Portafolio RPA y empleabilidad honesta\nPortafolio.";
+      if (filePath.includes("RPA_VALIDACION_TENANT")) return "# Protocolo de validación en tenant para RPA\nTenant.";
       return "# Sin contenido";
     }),
   },
@@ -71,9 +77,9 @@ import { getAllLevels, getLevelById, getModuleById, getModuleBySlug, getAllResou
 // ─── getAllLevels ─────────────────────────────────────────────────────────────
 
 describe("getAllLevels", () => {
-  it("returns 6 levels", () => {
+  it("returns 7 levels", () => {
     const levels = getAllLevels();
-    expect(levels).toHaveLength(6);
+    expect(levels).toHaveLength(7);
   });
 
   it("returns levels in correct order", () => {
@@ -184,9 +190,9 @@ describe("getResourceBySlug", () => {
 // ─── getAllResourcePages ───────────────────────────────────────────────────────
 
 describe("getAllResourcePages", () => {
-  it("returns 21 resource pages (incluyendo portabilidad, revisión y validación sandbox; no incluye 'simulador', que quedó retirado del mapeo de la app Next.js por ser un stub sin equivalente funcional — el simulador real vive en /simulador)", () => {
+  it("returns 24 resource pages (incluye recursos RPA y portabilidad; no incluye 'simulador', que quedó retirado del mapeo de la app Next.js por ser un stub sin equivalente funcional — el simulador real vive en /simulador)", () => {
     const pages = getAllResourcePages();
-    expect(pages).toHaveLength(21);
+    expect(pages).toHaveLength(24);
   });
 
   it("includes checklist, glosario, certificaciones, lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, job-ready-crm-functional, job-ready-data-migration-legacy, job-ready-interview-readiness, job-ready-admin-governance, portafolio-profesional y roadmap-especializacion-avanzada", () => {
@@ -212,6 +218,9 @@ describe("getAllResourcePages", () => {
     expect(slugs).toContain("practicas-portabilidad-estudiante");
     expect(slugs).toContain("practicas-guia-revisores");
     expect(slugs).toContain("practicas-validacion-sandbox");
+    expect(slugs).toContain("rpa-artefactos-profesionales");
+    expect(slugs).toContain("rpa-portafolio-empleabilidad");
+    expect(slugs).toContain("rpa-validacion-tenant");
   });
 
   it("loads the D365 tenant readiness resource", () => {

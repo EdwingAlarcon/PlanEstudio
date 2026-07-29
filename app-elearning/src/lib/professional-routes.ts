@@ -7,7 +7,8 @@ export type ProfessionalRouteSlug =
   | "dynamics-365-customer-insights"
   | "dynamics-365-field-service"
   | "finance-operations"
-  | "ai-copilot";
+  | "ai-copilot"
+  | "rpa";
 
 export interface ProfessionalRoute {
   slug: ProfessionalRouteSlug;
@@ -294,6 +295,40 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "Documento ejecutivo de 1-2 páginas",
     ],
     nextRouteSlug: "solution-architect",
+  },
+  {
+    slug: "rpa",
+    title: "Ruta RPA Developer / Automation Engineer",
+    role: "Profesional que diseña, construye, opera y diagnostica automatizaciones de escritorio",
+    summary: "Especialización transversal en Power Automate Desktop, selección tecnológica, attended/unattended, selectores, Excel, web, legacy, ALM, soporte y gobierno.",
+    outcome: "Automatizar un proceso administrativo end-to-end con PAD y Power Automate cloud, evidencia, pruebas, despliegue, runbook y RCA.",
+    level: "Especialización",
+    accent: "#6B4EFF",
+    modules: [66, 67, 68, 69, 70, 71, 72, 73, 74, 75],
+    labs: [
+      "lab-104-rpa-primer-desktop-flow-mantenible",
+      "lab-105-rpa-excel-consolidacion-ventas",
+      "lab-106-rpa-automatizacion-web-portal",
+      "lab-107-rpa-aplicacion-legacy-controlada",
+      "lab-108-rpa-selectores-resiliencia",
+      "lab-109-rpa-errores-idempotencia",
+      "lab-110-rpa-cloud-desktop-end-to-end",
+      "lab-111-rpa-despliegue-operacion-unattended",
+      "lab-112-rpa-capstone-proceso-administrativo",
+    ],
+    competencies: ["PAD", "RPA attended/unattended", "Selectores", "Excel automation", "Web automation", "Legacy apps", "Idempotencia", "ALM", "Operación"],
+    status: "Disponible",
+    gapNote: "La ruta permite ejecución real o simulada según tenant/licencia. Unattended, machine groups y hosted machines requieren validar capacidades disponibles; sin licencia se entrega variante simulada claramente marcada.",
+    capstoneLabSlug: "lab-112-rpa-capstone-proceso-administrativo",
+    portfolioEvidence: [
+      "Matriz de viabilidad RPA vs API/conector/cloud flow",
+      "AS-IS, TO-BE y diagrama cloud + desktop",
+      "Desktop flow con logs, manejo de errores e idempotencia",
+      "Evidencia de pruebas positivas, negativas y reejecución sin duplicados",
+      "Deployment checklist, rollback plan y runbook",
+      "RCA de un incidente RPA y demo honesta de alcance simulado/tenant",
+    ],
+    nextRouteSlug: "developer",
   },
   {
     slug: "ai-copilot",

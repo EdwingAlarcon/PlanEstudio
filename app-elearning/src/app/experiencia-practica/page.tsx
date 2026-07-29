@@ -33,7 +33,7 @@ export default function PracticalExperiencePage() {
               <Badge className="border-0 bg-[#0078D4] text-white">Piloto profesional</Badge>
               <Badge variant="outline">{counts.incidents} incidentes</Badge>
               <Badge variant="outline">{counts.challenges} challenges</Badge>
-              <Badge variant="outline">{counts.simulations} simulación</Badge>
+              <Badge variant="outline">{counts.simulations} {counts.simulations === 1 ? "simulación" : "simulaciones"}</Badge>
             </div>
             <div>
               <h1 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">Experiencia práctica</h1>

@@ -29,7 +29,7 @@ La brecha principal no es falta total de contenido, sino falta de una capa expl�
 
 | Área laboral | Estado actual | Lectura ejecutiva |
 |---|---|---|
-| Power Platform Development | Cubierto | Buena base para roles maker/developer, con gaps puntuales en pruebas técnicas CRM JavaScript y Power Automate Desktop. |
+| Power Platform Development | Cubierto | Buena base para roles maker/developer, con gaps puntuales en pruebas técnicas CRM JavaScript. Power Automate Desktop ya cuenta con especialización RPA dedicada. |
 | Power Platform Administration & Governance | Cubierto con brechas | Hay arquitectura, CoE, DLP, ambientes y LAB-076 como simulación operativa PPAC; siguen abiertas prácticas con logs reales de Purview/Dataverse audit y Managed Environments en tenant real. |
 | Dynamics 365 CRM Functional | Parcial | Sales y Customer Service tienen buena base; faltan más simulaciones de soporte funcional diario y configuración tipo vacante. |
 | Dynamics 365 CRM Developer | Parcial | Hay C#, plugins, Web API e integraciones; falta JavaScript CRM profundo, Custom APIs/workflows y debugging/tracing de entrevista. |
@@ -48,7 +48,7 @@ La brecha principal no es falta total de contenido, sino falta de una capa expl�
 | Dataverse modelado | Developer / Functional Consultant | Intermedio | Cubierto | Módulos 2, 9 | LAB-002, LAB-009 | Diagrama de tablas, relaciones, choices y seguridad | ¿Cómo modelas una relación N:N y cuándo la evitas? | Mantener como evidencia obligatoria en capstones | Alta |
 | Dataverse seguridad | Admin / Developer / Functional | Intermedio | Cubierto | Módulos 9, 16, 36 | LAB-009 | Matriz de roles y field security probado | ¿Cómo aplicas mínimo privilegio en Dataverse? | Conectar evidencia con JR-006 Governance Assessment | Alta |
 | Power Automate cloud flows | Maker / Functional Consultant | Intermedio | Cubierto | Módulos 5, 11 | LAB-005 | Flujo con aprobación, errores y ejecución exitosa | ¿Cómo evitas loops o ejecuciones duplicadas en un flujo? | Agregar manejo de errores más visible en portafolio | Alta |
-| Power Automate Desktop | RPA / Admin / Developer | Intermedio | Awareness | Módulo 39 menciona RPA | Sin lab dedicado | Documento de proceso RPA y monitoreo, aún no disponible | ¿Cómo monitoreas y recuperas un desktop flow fallido? | Crear JR posterior de desktop flow operativo | Alta |
+| Power Automate Desktop | RPA / Admin / Developer | Intermedio | Cubierto | Módulos 66-75 | LAB-104 a LAB-112, CH-RPA-01 a CH-RPA-03, INC-RPA-001 a INC-RPA-008, SIM-RPA-001 | Matriz de viabilidad, desktop flow, logs, runbook, RCA, plan de despliegue y evidencia de pruebas | ¿Cómo monitoreas y recuperas un desktop flow fallido? | Validar unattended/machine groups en tenant real cuando haya licencia | Alta |
 | Power Pages | Developer / Portal Consultant | Intermedio-Avanzado | Parcial | Módulos 21, 29 | Sin lab job-ready dedicado | Portal con autenticación, permisos y página externa | ¿Cómo aseguras datos de Dataverse expuestos en Power Pages? | Crear lab de portal externo con seguridad y roles web | Alta |
 | ALM via Solutions | Developer / Architect | Avanzado | Cubierto | Módulos 19, 54 | LAB-019, LAB-053 | Pipeline, solución exportada y checklist de importación | ¿Diferencia entre solución managed y unmanaged? | Mantener como requisito para rutas Developer/Admin | Alta |
 | Power Platform CLI | Developer / ALM Specialist | Avanzado | Cubierto | Módulo 52 | LAB-052, LAB-053 | Historial de comandos y solución desempaquetada | ¿Para qué usas `pac solution unpack`? | Agregar preguntas prácticas en JR-003/JR-006 | Media |
@@ -250,11 +250,11 @@ Implementación en la app: JR-001 a JR-010 están disponibles como **LAB-071 a L
 
 ## Brechas críticas
 
-1. Power Automate Desktop práctico.
-2. PPAC operativo con audit logs, capacity, licensing y Managed Environments.
-3. JavaScript CRM profundo.
-4. Data migration hands-on con dataset grande, tooling ETL y tenant real.
-5. CRM on-premises / legacy health assessment con SQL/IIS/ADFS/networking reales.
+1. PPAC operativo con audit logs, capacity, licensing y Managed Environments.
+2. JavaScript CRM profundo.
+3. Data migration hands-on con dataset grande, tooling ETL y tenant real.
+4. CRM on-premises / legacy health assessment con SQL/IIS/ADFS/networking reales.
+5. Validación RPA unattended, machine groups y licenciamiento en tenant real.
 6. Feedback real externo sobre CV/LinkedIn y fluidez de inglés técnico con personas reales.
 
 ## Plan de implementación por sprints
@@ -268,6 +268,7 @@ Implementación en la app: JR-001 a JR-010 están disponibles como **LAB-071 a L
 | JR-5 | Data Migration + CRM Legacy | Ruta/labs de migración, on-prem awareness y health assessment. |
 | JR-6 | Interview readiness + portafolio laboral | CV, LinkedIn, demo de 10 minutos, respuestas técnicas e inglés. |
 | JR-7 | Labs job-ready y simulaciones técnicas | Implementado como LAB-071 a LAB-080 (JR-001 a JR-010), LAB-091/LAB-092 (JR-011/JR-012) y LAB-101 (JR-013, caso integrado CRM Functional Analyst). |
+| RPA-1 | Power Automate Desktop & RPA Professional Track | Implementado como Nivel RPA 66-75, LAB-104 a LAB-112, 3 challenges, 8 incident labs, 1 simulación profesional y recursos de portafolio/tenant. |
 
 ## Relación con recursos existentes
 

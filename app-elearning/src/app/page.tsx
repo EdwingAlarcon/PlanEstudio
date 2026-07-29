@@ -5,7 +5,7 @@ import { getAllPractices } from "@/lib/practices";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProgressRingClient } from "@/components/modules/progress-ring-client";
-import { ArrowRight, BookOpen, Trophy, FlaskConical, Route, Zap, HelpCircle, Layers3, Briefcase, Building2, Workflow, Activity } from "lucide-react";
+import { ArrowRight, BookOpen, Trophy, FlaskConical, Route, Zap, HelpCircle, Layers3, Briefcase, Building2, Workflow, Activity, Bot } from "lucide-react";
 import { UI, LEVEL_ORDER, type LevelId } from "@/lib/i18n";
 import { PracticeProgressSummary } from "@/components/practices/practice-progress-summary";
 
@@ -15,7 +15,7 @@ const LEVEL_CONFIG: Record<LevelId, {
   accent: string;
   accentDark: string;
   border: string;
-  badge: "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365";
+  badge: "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365" | "rpa";
 }> = {
   basico:     { ring: "stroke-[#107C10]", accent: "#107C10", accentDark: "#2DB52D", border: "border-[#107C10]/20 dark:border-[#2DB52D]/20", badge: "basico"     },
   intermedio: { ring: "stroke-[#0078D4]", accent: "#0078D4", accentDark: "#4DB8FF", border: "border-[#0078D4]/20 dark:border-[#4DB8FF]/20",  badge: "intermedio" },
@@ -23,6 +23,7 @@ const LEVEL_CONFIG: Record<LevelId, {
   arquitecto: { ring: "stroke-[#D13438]", accent: "#D13438", accentDark: "#E85555", border: "border-[#D13438]/20 dark:border-[#E85555]/20",   badge: "arquitecto" },
   ia:         { ring: "stroke-purple-600", accent: "#9333EA", accentDark: "#C084FC", border: "border-purple-600/20 dark:border-purple-400/20", badge: "ia"         },
   d365:       { ring: "stroke-teal-600",   accent: "#0D9488", accentDark: "#2DD4BF", border: "border-teal-600/20 dark:border-teal-400/20",     badge: "d365"       },
+  rpa:        { ring: "stroke-[#6B4EFF]",  accent: "#6B4EFF", accentDark: "#A99BFF", border: "border-[#6B4EFF]/20 dark:border-[#A99BFF]/20",   badge: "rpa"        },
 };
 
 export default async function DashboardPage() {
@@ -125,7 +126,7 @@ export default async function DashboardPage() {
           </p>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <StartCard
             href="/power-platform"
             eyebrow="Dominio"
@@ -149,6 +150,14 @@ export default async function DashboardPage() {
             description="Dataverse común, ALM, APIs/Azure y CE + F&O (dual-write, virtual tables)."
             icon={<Workflow className="h-5 w-5 text-[#8661C5]" />}
             accent="#8661C5"
+          />
+          <StartCard
+            href="/nivel/rpa"
+            eyebrow="Especialización"
+            title="Power Automate Desktop & RPA"
+            description="Desktop flows, attended/unattended, selectores, Excel, web, legacy y operación."
+            icon={<Bot className="h-5 w-5 text-[#6B4EFF]" />}
+            accent="#6B4EFF"
           />
         </div>
       </section>
@@ -231,7 +240,7 @@ export default async function DashboardPage() {
             href="/rutas"
             icon={<Route className="h-5 w-5 text-[#0078D4]" />}
             title={UI.nav.routes}
-            description="9 rutas por rol profesional"
+            description="10 rutas por rol profesional"
             accent="#0078D4"
           />
           <QuickActionCard

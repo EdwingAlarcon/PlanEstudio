@@ -33,6 +33,9 @@ export const UI = {
     advancedRoadmap: "Roadmap Especialización Avanzada",
     d365TenantReadiness: "D365 Tenant Readiness",
     professionalPracticeFramework: "Marco de prácticas profesionales",
+    rpaArtifacts: "Artefactos RPA",
+    rpaPortfolio: "Portafolio RPA",
+    rpaTenantValidation: "Validación RPA tenant",
     myProgress: "Mi Progreso",
     skipToContent: "Saltar al contenido",
     toggleTheme: "Cambiar tema",
@@ -48,6 +51,7 @@ export const UI = {
     arquitecto: "Arquitecto",
     ia: "Desarrollo Asistido por IA",
     d365: "Dynamics 365 Especialización",
+    rpa: "Power Automate Desktop & RPA",
     badge: {
       basico: "🟢 Nivel 1",
       intermedio: "🔵 Nivel 2",
@@ -55,6 +59,7 @@ export const UI = {
       arquitecto: "🔴 Nivel 4",
       ia: "🟣 IA",
       d365: "🔷 D365",
+      rpa: "⚙️ RPA",
     },
     cert: {
       basico: "PL-900",
@@ -63,6 +68,7 @@ export const UI = {
       arquitecto: "Arquitectura Power Platform",
       ia: "Buenas Prácticas",
       d365: "CE avanzado + F&O Awareness",
+      rpa: "Power Automate Desktop & RPA",
     },
     navCert: {
       basico: "PL-900",
@@ -71,6 +77,7 @@ export const UI = {
       arquitecto: "Arquitectura",
       ia: "IA",
       d365: "D365",
+      rpa: "RPA",
     },
     description: {
       basico: "Fundamentos de Power Platform y Dataverse",
@@ -79,6 +86,7 @@ export const UI = {
       arquitecto: "Gobernanza enterprise, multi-tenant, Azure integrations y liderazgo",
       ia: "Copilot, GitHub Copilot, Claude Code y Codex aplicados de forma segura y auditable al desarrollo, conexión al tenant, Dataverse, ALM y consultoría funcional en Power Platform y D365",
       d365: "Especialización práctica en Dynamics 365: Customer Engagement avanzado, Customer Insights, Field Service, integración CE + F&O y awareness avanzado de Finance & Operations",
+      rpa: "Automatización de escritorio, operación unattended y soporte profesional.",
     },
     modules: {
       basico: 8,
@@ -87,6 +95,7 @@ export const UI = {
       arquitecto: 11,
       ia: 14,
       d365: 10,
+      rpa: 10,
     },
   },
 
@@ -159,11 +168,11 @@ export const UI = {
 } as const;
 
 // Tipos de nivel para narrowing
-export type LevelId = "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365";
+export type LevelId = "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365" | "rpa";
 
-export const LEVEL_ORDER: LevelId[] = ["basico", "intermedio", "avanzado", "arquitecto", "ia", "d365"];
+export const LEVEL_ORDER: LevelId[] = ["basico", "intermedio", "avanzado", "arquitecto", "ia", "d365", "rpa"];
 export const CERTIFICATION_LEVEL_ORDER: LevelId[] = ["basico", "intermedio", "avanzado", "arquitecto"];
-export const TRANSVERSAL_LEVEL_ORDER: LevelId[] = ["ia", "d365"];
+export const TRANSVERSAL_LEVEL_ORDER: LevelId[] = ["ia", "d365", "rpa"];
 
 export const LEVEL_MODULE_RANGE: Record<LevelId, [number, number]> = {
   basico: [1, 8],
@@ -172,4 +181,5 @@ export const LEVEL_MODULE_RANGE: Record<LevelId, [number, number]> = {
   arquitecto: [31, 41],
   ia: [42, 55],
   d365: [56, 65],
+  rpa: [66, 75],
 };

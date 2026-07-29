@@ -1,9 +1,9 @@
 import type { LabInfo } from "@/lib/content";
 import { getAllProfessionalRoutes } from "@/lib/professional-routes";
 
-export type DomainTag = "Power Platform" | "Dynamics 365" | "Integración" | "IA" | "Empleabilidad";
+export type DomainTag = "Power Platform" | "Dynamics 365" | "Integración" | "IA" | "RPA" | "Empleabilidad";
 
-export const DOMAIN_TAGS: DomainTag[] = ["Power Platform", "Dynamics 365", "Integración", "IA", "Empleabilidad"];
+export const DOMAIN_TAGS: DomainTag[] = ["Power Platform", "Dynamics 365", "Integración", "IA", "RPA", "Empleabilidad"];
 
 export interface LabPresentationMeta {
   kind: string;
@@ -25,6 +25,7 @@ const LEVEL_LABELS: Record<string, string> = {
   N4: "Nivel 4 - Arquitecto",
   N5: "Nivel IA",
   N6: "Nivel D365",
+  RPA: "Especialización RPA",
 };
 
 const DIFFICULTY_LABELS: Record<string, string> = {
@@ -34,6 +35,7 @@ const DIFFICULTY_LABELS: Record<string, string> = {
   N4: "Enterprise",
   N5: "Especializada",
   N6: "Especializada D365",
+  RPA: "Especializada RPA",
 };
 
 const ROUTE_LABEL_FALLBACKS: Record<string, string> = {
@@ -156,6 +158,7 @@ const IA_SLUG_PATTERN = /copilot|claude-code|ai-assisted/;
 const JOB_READY_SLUG_PATTERN = /-jr-\d{3}-/;
 const D365_PRODUCT_PATTERN = /dynamics 365|customer insights|field service|dynamics crm/;
 const POWER_PLATFORM_PRODUCT_PATTERN = /power|dataverse|plugin|coe starter kit/;
+const RPA_PRODUCT_PATTERN = /power automate desktop|desktop flow|machine runtime|rpa|ui elements|selector/i;
 
 /**
  * Clasificación heurística por dominio (level + slug + products del frontmatter),
@@ -166,7 +169,9 @@ export function getLabDomains(lab: LabInfo): DomainTag[] {
   const productsLower = lab.products.map((p) => p.toLowerCase());
   const hasD365Product = productsLower.some((p) => D365_PRODUCT_PATTERN.test(p));
   const hasPPProduct = productsLower.some((p) => POWER_PLATFORM_PRODUCT_PATTERN.test(p));
+  const hasRpaProduct = productsLower.some((p) => RPA_PRODUCT_PATTERN.test(p)) || lab.level === "RPA";
 
+  if (hasRpaProduct) domains.add("RPA");
   if (JOB_READY_SLUG_PATTERN.test(lab.slug)) domains.add("Empleabilidad");
   if (lab.level === "N5" || IA_SLUG_PATTERN.test(lab.slug)) domains.add("IA");
   if (INTEGRATION_SLUG_PATTERN.test(lab.slug)) domains.add("Integración");

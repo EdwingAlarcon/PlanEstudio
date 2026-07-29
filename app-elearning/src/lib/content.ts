@@ -66,6 +66,7 @@ const LEVEL_FILES: Record<LevelId, string> = {
   arquitecto: "Niveles/NIVEL_4_ARQUITECTO.md",
   ia: "Niveles/NIVEL_5_IA.md",
   d365: "Niveles/NIVEL_6_D365.md",
+  rpa: "Niveles/NIVEL_7_RPA.md",
 };
 
 const RESOURCE_FILES: Record<string, string> = {
@@ -90,6 +91,9 @@ const RESOURCE_FILES: Record<string, string> = {
   "practicas-portabilidad-estudiante": "Recursos/PRACTICAS_PORTABILIDAD_ESTUDIANTE.md",
   "practicas-guia-revisores": "Recursos/PRACTICAS_GUIA_REVISORES.md",
   "practicas-validacion-sandbox": "Recursos/PRACTICAS_VALIDACION_SANDBOX.md",
+  "rpa-artefactos-profesionales": "Recursos/RPA_ARTEFACTOS_PROFESIONALES.md",
+  "rpa-portafolio-empleabilidad": "Recursos/RPA_PORTAFOLIO_EMPLEABILIDAD.md",
+  "rpa-validacion-tenant": "Recursos/RPA_VALIDACION_TENANT.md",
 };
 
 const LEVEL_META: Record<LevelId, { title: string; description: string; certification: string }> = {
@@ -122,6 +126,11 @@ const LEVEL_META: Record<LevelId, { title: string; description: string; certific
     title: "Dynamics 365 Especialización — CE avanzado + F&O Awareness",
     description: "Especialización práctica en Dynamics 365: Customer Engagement avanzado, Customer Insights, Field Service, integración CE + F&O y awareness avanzado de Finance & Operations",
     certification: "CE avanzado + F&O Awareness",
+  },
+  rpa: {
+    title: "Power Automate Desktop & RPA",
+    description: "Automatización de escritorio, operación unattended y soporte profesional.",
+    certification: "Power Automate Desktop & RPA",
   },
 };
 
@@ -244,8 +253,8 @@ function validateLabFrontmatter(
 
   const title = requireString(data, "title", filePath);
   const level = requireString(data, "level", filePath);
-  if (!["N1", "N2", "N3", "N4", "N5", "N6"].includes(level)) {
-    failContent(filePath, `frontmatter 'level' debe ser N1, N2, N3, N4, N5 o N6, recibido '${level}'`);
+  if (!["N1", "N2", "N3", "N4", "N5", "N6", "RPA"].includes(level)) {
+    failContent(filePath, `frontmatter 'level' debe ser N1, N2, N3, N4, N5, N6 o RPA, recibido '${level}'`);
   }
 
   const duration = parseDuration(data["duration"]);
@@ -550,8 +559,9 @@ export function getLabBySlug(slug: string): LabInfo | undefined {
   return getAllLabs().find((l) => l.slug === slug);
 }
 
-// "N1".."N5" (lab frontmatter) map 1:1 to LEVEL_ORDER's position ("basico".."ia").
+// "N1".."N6" map to the base/transversal numeric levels; "RPA" is a transversal specialization.
 export function getLabsForLevel(levelId: LevelId): LabInfo[] {
+  if (levelId === "rpa") return getAllLabs().filter((lab) => lab.level === "RPA");
   const levelTag = `N${LEVEL_ORDER.indexOf(levelId) + 1}`;
   return getAllLabs().filter((lab) => lab.level === levelTag);
 }

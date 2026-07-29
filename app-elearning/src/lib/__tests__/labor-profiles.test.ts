@@ -4,12 +4,13 @@ import { getProfessionalRouteBySlug } from "../professional-routes";
 import { getLaborProfileBySlug, getLaborProfiles } from "../labor-profiles";
 
 describe("labor profiles", () => {
-  it("defines the four job-ready profiles from the employability hub", () => {
+  it("defines the job-ready profiles from the employability hub", () => {
     expect(getLaborProfiles().map((p) => p.slug)).toEqual([
       "crm-functional-specialist",
       "crm-developer",
       "admin-governance",
       "data-migration-crm-legacy",
+      "rpa-developer-automation-engineer",
     ]);
   });
 
