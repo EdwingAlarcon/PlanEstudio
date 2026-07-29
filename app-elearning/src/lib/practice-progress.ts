@@ -29,6 +29,8 @@ export type ExternalPracticeReviewResult =
   | "reviewed"
   | "approved"
   | "approved_with_observations"
+  | "requires_changes"
+  | "rejected"
   | "requires_adjustments"
   | "not_approved";
 
@@ -50,18 +52,32 @@ export interface PracticeSelfAssessment {
 
 export interface ExternalPracticeReview {
   id: string;
+  reviewId?: string;
   practiceId: string;
   attemptId: string;
   reviewedAt: string;
   reviewerAlias: string;
+  reviewerDisplayName?: string;
+  reviewerRole?: string;
+  reviewerOrganization?: string;
   reviewerType: "mentor" | "peer" | "lead" | "instructor" | "other";
   result: ExternalPracticeReviewResult;
   criterionScores: Record<string, AssessmentLevel>;
+  criteria?: PracticeAssessmentCriterion[];
+  score?: number;
   criticalFailures: string[];
   comments: string;
   strengths: string;
   improvements: string;
   requiresResubmission: boolean;
+  suggestedDueDate?: string;
+  evidenceComments?: Record<string, string>;
+  securityNotes?: string;
+  reviewedPackage?: {
+    format?: string;
+    generatedAt?: string;
+    attemptNumber?: number;
+  };
   status: "draft" | "final";
   source: "manual" | "imported";
   schemaVersion: number;
@@ -83,6 +99,7 @@ export interface PracticeAttempt {
   reflection?: string;
   result?: string;
   externalReview?: ExternalPracticeReview;
+  externalReviews?: ExternalPracticeReview[];
   schemaVersion: number;
 }
 
@@ -133,6 +150,9 @@ interface PracticeProgressActions {
   resetAllPracticeProgress: () => void;
   exportPracticeProgress: () => string;
   importPracticeProgress: (records: Record<string, PracticeProgressRecord>) => void;
+  importExternalReview: (practiceId: string, review: ExternalPracticeReview, replace?: boolean) => void;
+  deleteExternalReview: (practiceId: string, reviewId: string) => void;
+  createResubmissionAttempt: (practiceId: string, fromAttemptId: string, evidenceKeys?: string[]) => void;
 }
 
 const STATUS_LABELS: Record<PracticeStatus, string> = {
@@ -161,6 +181,17 @@ const VALIDATION_LABELS: Record<PracticeValidationStatus, string> = {
   sandbox_validated: "Validada en sandbox",
 };
 
+export const EXTERNAL_REVIEW_RESULT_LABELS: Record<ExternalPracticeReviewResult, string> = {
+  pending: "Pendiente",
+  reviewed: "Revisada",
+  approved: "Aprobada",
+  approved_with_observations: "Aprobada con observaciones",
+  requires_changes: "Requiere ajustes",
+  rejected: "No aprobada",
+  requires_adjustments: "Requiere ajustes",
+  not_approved: "No aprobada",
+};
+
 export const CRITICAL_FAILURE_OPTIONS = [
   "Otorgué privilegios excesivos",
   "Modifiqué producción directamente",
@@ -176,6 +207,10 @@ export function getPracticeStatusLabel(status: PracticeStatus): string {
 
 export function getPracticeValidationStatusLabel(status: PracticeValidationStatus): string {
   return VALIDATION_LABELS[status];
+}
+
+export function getExternalReviewResultLabel(result: ExternalPracticeReviewResult): string {
+  return EXTERNAL_REVIEW_RESULT_LABELS[result];
 }
 
 function nowIso(): string {
@@ -218,7 +253,8 @@ function getActiveAttempt(record: PracticeProgressRecord): PracticeAttempt | und
 }
 
 function syncAttemptAggregate(record: PracticeProgressRecord, attempt: PracticeAttempt): PracticeProgressRecord {
-  const validationStatus: PracticeValidationStatus = attempt.externalReview
+  const hasExternalReview = Boolean(attempt.externalReview || attempt.externalReviews?.length || record.externalReviews.some((review) => review.attemptId === attempt.id));
+  const validationStatus: PracticeValidationStatus = hasExternalReview
     ? "externally_reviewed"
     : attempt.selfAssessment
       ? "self_assessed"
@@ -435,6 +471,7 @@ function sanitizeAttempts(value: unknown, practiceId: string, fallbackEvidence: 
       reflection: typeof raw.reflection === "string" ? raw.reflection.slice(0, 8000) : "",
       result: typeof raw.result === "string" ? raw.result.slice(0, 500) : undefined,
       externalReview: raw.externalReview && typeof raw.externalReview === "object" ? raw.externalReview as ExternalPracticeReview : undefined,
+      externalReviews: sanitizeReviews(raw.externalReviews, practiceId, [{ id } as PracticeAttempt]),
       schemaVersion: PRACTICE_PROGRESS_SCHEMA_VERSION,
     }];
   }).sort((a, b) => a.attemptNumber - b.attemptNumber);
@@ -447,25 +484,44 @@ function sanitizeReviews(value: unknown, practiceId: string, attempts: PracticeA
     if (!item || typeof item !== "object") return [];
     const raw = item as Record<string, unknown>;
     if (typeof raw.id !== "string" || typeof raw.attemptId !== "string" || !attemptIds.has(raw.attemptId)) return [];
-    return [{
-      id: raw.id,
+    return [sanitizeReviewObject(raw, practiceId)];
+  });
+}
+
+function sanitizeReviewObject(raw: Record<string, unknown>, practiceId: string): ExternalPracticeReview {
+  const result = ["pending", "reviewed", "approved", "approved_with_observations", "requires_changes", "rejected", "requires_adjustments", "not_approved"].includes(String(raw.result))
+    ? raw.result as ExternalPracticeReview["result"]
+    : "reviewed";
+  const id = typeof raw.id === "string" ? raw.id.slice(0, 160) : newId(`review-${practiceId.toLowerCase()}`);
+  const attemptId = typeof raw.attemptId === "string" ? raw.attemptId.slice(0, 160) : "";
+  return {
+      id,
+      reviewId: typeof raw.reviewId === "string" ? raw.reviewId.slice(0, 120) : id,
       practiceId,
-      attemptId: raw.attemptId,
+      attemptId,
       reviewedAt: typeof raw.reviewedAt === "string" ? raw.reviewedAt : nowIso(),
       reviewerAlias: typeof raw.reviewerAlias === "string" ? raw.reviewerAlias.slice(0, 120) : "Revisor",
+      reviewerDisplayName: typeof raw.reviewerDisplayName === "string" ? raw.reviewerDisplayName.slice(0, 160) : undefined,
+      reviewerRole: typeof raw.reviewerRole === "string" ? raw.reviewerRole.slice(0, 160) : undefined,
+      reviewerOrganization: typeof raw.reviewerOrganization === "string" ? raw.reviewerOrganization.slice(0, 160) : undefined,
       reviewerType: ["mentor", "peer", "lead", "instructor", "other"].includes(String(raw.reviewerType)) ? raw.reviewerType as ExternalPracticeReview["reviewerType"] : "other",
-      result: ["pending", "reviewed", "approved", "approved_with_observations", "requires_adjustments", "not_approved"].includes(String(raw.result)) ? raw.result as ExternalPracticeReviewResult : "reviewed",
+      result,
       criterionScores: raw.criterionScores && typeof raw.criterionScores === "object" ? raw.criterionScores as Record<string, AssessmentLevel> : {},
+      criteria: Array.isArray(raw.criteria) ? raw.criteria as PracticeAssessmentCriterion[] : undefined,
+      score: Number.isFinite(Number(raw.score)) ? Math.round(Number(raw.score)) : undefined,
       criticalFailures: Array.isArray(raw.criticalFailures) ? raw.criticalFailures.filter((v): v is string => typeof v === "string") : [],
       comments: typeof raw.comments === "string" ? raw.comments.slice(0, 4000) : "",
       strengths: typeof raw.strengths === "string" ? raw.strengths.slice(0, 2000) : "",
       improvements: typeof raw.improvements === "string" ? raw.improvements.slice(0, 2000) : "",
       requiresResubmission: raw.requiresResubmission === true,
+      suggestedDueDate: typeof raw.suggestedDueDate === "string" ? raw.suggestedDueDate : undefined,
+      evidenceComments: raw.evidenceComments && typeof raw.evidenceComments === "object" ? raw.evidenceComments as Record<string, string> : undefined,
+      securityNotes: typeof raw.securityNotes === "string" ? raw.securityNotes.slice(0, 2000) : undefined,
+      reviewedPackage: raw.reviewedPackage && typeof raw.reviewedPackage === "object" ? raw.reviewedPackage as ExternalPracticeReview["reviewedPackage"] : undefined,
       status: raw.status === "draft" ? "draft" : "final",
       source: raw.source === "imported" ? "imported" : "manual",
       schemaVersion: PRACTICE_PROGRESS_SCHEMA_VERSION,
-    }];
-  });
+    };
 }
 
 export function sanitizePracticeProgressState(value: unknown): PracticeProgressState {
@@ -493,6 +549,7 @@ function patchRecord(
 
 export function calculatePracticeCounts(records: Record<string, PracticeProgressRecord>) {
   const values = Object.values(records);
+  const latestReviews = values.map(getLatestExternalReview).filter((review): review is ExternalPracticeReview => Boolean(review));
   return {
     started: values.filter((r) => r.status !== "not_started").length,
     attempted: values.filter((r) => r.attemptCount > 0).length,
@@ -506,6 +563,55 @@ export function calculatePracticeCounts(records: Record<string, PracticeProgress
     externallyReviewed: values.filter((r) => r.validationStatus === "externally_reviewed").length,
     evidencePrepared: values.filter((r) => r.validationStatus === "evidence_prepared").length,
     sandboxValidated: values.filter((r) => r.validationStatus === "sandbox_validated").length,
+    externalReviews: values.reduce((sum, r) => sum + r.externalReviews.length, 0),
+    externallyApproved: latestReviews.filter((review) => review.result === "approved").length,
+    externallyApprovedWithObservations: latestReviews.filter((review) => review.result === "approved_with_observations").length,
+    externallyRequiresChanges: latestReviews.filter((review) => review.result === "requires_changes" || review.result === "requires_adjustments").length,
+    externallyRejected: latestReviews.filter((review) => review.result === "rejected" || review.result === "not_approved").length,
+    pendingResubmission: latestReviews.filter((review) => review.requiresResubmission).length,
+  };
+}
+
+export function getLatestExternalReview(record: PracticeProgressRecord): ExternalPracticeReview | undefined {
+  return [...record.externalReviews].sort((a, b) => b.reviewedAt.localeCompare(a.reviewedAt))[0];
+}
+
+export function getAttemptReviews(record: PracticeProgressRecord, attemptId: string): ExternalPracticeReview[] {
+  return record.externalReviews
+    .filter((review) => review.attemptId === attemptId)
+    .sort((a, b) => b.reviewedAt.localeCompare(a.reviewedAt));
+}
+
+export function addExternalReviewToRecord(record: PracticeProgressRecord, review: ExternalPracticeReview, replace = false): PracticeProgressRecord {
+  const timestamp = nowIso();
+  const normalized = { ...review, source: "imported" as const, schemaVersion: PRACTICE_PROGRESS_SCHEMA_VERSION };
+  const existing = record.externalReviews.find((item) => item.id === normalized.id);
+  const externalReviews = existing
+    ? replace
+      ? record.externalReviews.map((item) => item.id === normalized.id ? normalized : item)
+      : record.externalReviews
+    : [...record.externalReviews, normalized];
+  const attempts: PracticeAttempt[] = record.attempts.map((attempt) => {
+    if (attempt.id !== normalized.attemptId) return attempt;
+    const attemptReviews = externalReviews.filter((item) => item.attemptId === attempt.id);
+    const latest = attemptReviews.sort((a, b) => b.reviewedAt.localeCompare(a.reviewedAt))[0];
+    return {
+      ...attempt,
+      status: attempt.status === "completed" ? "completed" : "reviewed",
+      externalReview: latest,
+      externalReviews: attemptReviews,
+      updatedAt: timestamp,
+    };
+  });
+  const requiresChanges = normalized.requiresResubmission || normalized.result === "requires_changes" || normalized.result === "requires_adjustments" || normalized.result === "rejected" || normalized.result === "not_approved";
+  return {
+    ...record,
+    attempts,
+    externalReviews,
+    validationStatus: "externally_reviewed",
+    status: requiresChanges ? "needs_reinforcement" : transitionPracticeStatus(record.status === "not_started" ? "attempted" : record.status, "reviewed"),
+    lastActivityAt: timestamp,
+    completedAt: requiresChanges ? undefined : record.completedAt,
   };
 }
 
@@ -675,6 +781,54 @@ export const usePracticeProgressStore = create<PracticeProgressState & PracticeP
         records: get().records,
       }, null, 2),
       importPracticeProgress: (records) => set({ records }),
+      importExternalReview: (practiceId, review, replace = false) => set((state) => {
+        const current = state.records[practiceId];
+        if (!current) return state;
+        return {
+          records: {
+            ...state.records,
+            [practiceId]: addExternalReviewToRecord(current, review, replace),
+          },
+        };
+      }),
+      deleteExternalReview: (practiceId, reviewId) => set((state) => {
+        const current = state.records[practiceId];
+        if (!current) return state;
+        const externalReviews = current.externalReviews.filter((review) => review.id !== reviewId);
+        const attempts = current.attempts.map((attempt) => {
+          const attemptReviews = externalReviews.filter((review) => review.attemptId === attempt.id);
+          const latest = attemptReviews.sort((a, b) => b.reviewedAt.localeCompare(a.reviewedAt))[0];
+          return { ...attempt, externalReviews: attemptReviews, externalReview: latest };
+        });
+        return {
+          records: {
+            ...state.records,
+            [practiceId]: {
+              ...current,
+              attempts,
+              externalReviews,
+              validationStatus: externalReviews.length > 0 ? "externally_reviewed" : current.selfAssessment ? "self_assessed" : "unvalidated",
+              lastActivityAt: nowIso(),
+            },
+          },
+        };
+      }),
+      createResubmissionAttempt: (practiceId, fromAttemptId, evidenceKeys) => set((state) => patchRecord(state, practiceId, evidenceKeys, (record, timestamp) => {
+        const closedAttempts = record.attempts.map((attempt) => attempt.status === "active" ? { ...attempt, status: "submitted" as const, completedAt: attempt.completedAt ?? timestamp, updatedAt: timestamp } : attempt);
+        const previous = closedAttempts.find((attempt) => attempt.id === fromAttemptId);
+        const attempt = {
+          ...createAttempt({ ...record, attempts: closedAttempts }, timestamp, evidenceKeys),
+          reflection: previous ? `Reentrega basada en feedback del intento ${previous.attemptNumber}.` : "",
+        };
+        return {
+          ...syncAttemptAggregate({ ...record, attempts: [...closedAttempts, attempt], activeAttemptId: attempt.id }, attempt),
+          status: "in_progress",
+          validationStatus: "unvalidated",
+          lastActivityAt: timestamp,
+          completedAt: undefined,
+          attemptCount: Math.max(record.attemptCount + 1, closedAttempts.length + 1),
+        };
+      })),
     }),
     {
       name: PRACTICE_PROGRESS_STORAGE_KEY,

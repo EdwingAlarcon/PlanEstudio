@@ -294,6 +294,66 @@ test.describe("Smoke — rutas principales", () => {
     await expect(page.evaluate(() => window.localStorage.getItem("planestudio.practice-progress.v1"))).resolves.toContain("Nota portable");
   });
 
+  test("importa revisión humana externa con vista previa, duplicado y reentrega", async ({ page }) => {
+    await page.goto("/experiencia-practica/inc-001-seguridad-dataverse-oportunidades");
+    await page.evaluate(() => window.localStorage.clear());
+    await page.reload();
+    await page.getByRole("button", { name: "Iniciar práctica", exact: true }).click();
+
+    const attemptId = await page.evaluate(() => {
+      const stored = window.localStorage.getItem("planestudio.practice-progress.v1");
+      const record = stored ? JSON.parse(stored).state.records["INC-001"] : null;
+      return record?.attempts?.[0]?.id;
+    });
+    const weights = [10, 15, 15, 10, 15, 15, 10, 10];
+    const criteria = await page.locator('select[id^="criterion-"]').evaluateAll((selects, itemWeights) => selects.map((select, index) => {
+      const id = select.getAttribute("id") ?? "";
+      const label = document.querySelector(`label[for="${CSS.escape(id)}"]`)?.textContent?.trim() ?? "";
+      return { criterion: label, weight: itemWeights[index] ?? 0, level: "solid", comment: "Validado por revisión externa." };
+    }), weights);
+    const review = {
+      format: "planestudio-external-review",
+      schemaVersion: 1,
+      reviewId: "REV-E2E-INC-001",
+      practiceId: "INC-001",
+      attemptId,
+      reviewedAt: "2026-07-29T00:00:00.000Z",
+      reviewer: { displayName: "Mentora E2E", alias: "mentora-e2e" },
+      result: "requires_changes",
+      criteria,
+      score: 85,
+      criticalFindings: [],
+      strengths: ["Buen diagnóstico inicial."],
+      improvements: ["Agregar evidencia de regresión."],
+      summary: "Revisión humana externa de prueba.",
+      resubmissionRequired: true,
+    };
+
+    await page.getByTestId("external-review-file-input").setInputFiles({
+      name: "revision-externa.json",
+      mimeType: "application/json",
+      buffer: Buffer.from(JSON.stringify(review)),
+    });
+    await expect(page.getByText("Lista para importar")).toBeVisible();
+    await expect(page.getByText("Mentora E2E")).toBeVisible();
+    await page.getByRole("button", { name: "Confirmar importación" }).click();
+    await expect(page.getByText("Requiere ajustes").first()).toBeVisible();
+    await expect(page.getByText(/Agregar evidencia de regresión/)).toBeVisible();
+
+    await page.getByTestId("external-review-file-input").setInputFiles({
+      name: "revision-externa-duplicada.json",
+      mimeType: "application/json",
+      buffer: Buffer.from(JSON.stringify(review)),
+    });
+    await expect(page.getByText("Duplicado idéntico")).toBeVisible();
+    await page.getByRole("button", { name: "Cancelar" }).click();
+
+    page.once("dialog", (dialog) => dialog.accept());
+    await page.getByRole("button", { name: "Crear reentrega" }).click();
+    await expect(page.getByText("Intentos: 2")).toBeVisible();
+    await expect(page.evaluate(() => window.localStorage.getItem("planestudio.practice-progress.v1"))).resolves.toContain("REV-E2E-INC-001");
+  });
+
   test("detalle de challenge y simulación cargan como prácticas autónomas", async ({ page }) => {
     await page.goto("/experiencia-practica/ch-001-solucion-solicitudes-empresariales");
     await expect(page.locator("h1")).toContainText("Solución de solicitudes empresariales");

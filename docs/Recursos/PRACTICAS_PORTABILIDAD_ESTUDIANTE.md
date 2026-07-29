@@ -35,6 +35,18 @@ Registrar un nuevo intento conserva el anterior. La comparación se basa en auto
 
 Una revisión externa significa que una persona revisó un paquete bajo la rúbrica de la práctica. No significa que seas experto certificado ni reemplaza experiencia laboral. Si recibes observaciones, crea un nuevo intento y compara la evolución.
 
+### Importar revisión externa
+
+1. Abre la práctica y registra o selecciona el intento revisado.
+2. Entrega al revisor el **Paquete de evidencia** y, si hace falta, la **Plantilla de revisión**.
+3. Cuando recibas el JSON de vuelta, usa **Importar revisión** dentro de **Historial y evidencia**.
+4. Revisa la vista previa: práctica, intento, revisor, resultado, puntaje, errores, advertencias, duplicados o conflictos.
+5. Confirma la importación solo si el archivo coincide con tu intento y no contiene datos sensibles que no quieras conservar localmente.
+
+PlanEstudio rechaza JSON corrupto, versiones futuras incompatibles, rúbricas incompletas, pesos incorrectos, puntajes que no coinciden con la rúbrica, revisiones de otra práctica, intentos inexistentes y campos peligrosos como `__proto__`. Si llega un archivo con el mismo `reviewId`, la app distingue entre duplicado idéntico y conflicto; reemplaza solo cuando confíes en que el nuevo archivo es la versión correcta del revisor.
+
+Una práctica puede tener varias revisiones externas para el mismo intento. La última revisión queda visible en el intento seleccionado y el historial conserva las anteriores. Si la revisión requiere reentrega, usa **Crear reentrega** para abrir un nuevo intento sin borrar la evidencia anterior.
+
 ## Validación sandbox
 
 Validar en sandbox significa que el escenario se probó técnicamente en un tenant controlado. Puede depender de licencias, permisos o configuración empresarial. No uses datos reales de clientes.

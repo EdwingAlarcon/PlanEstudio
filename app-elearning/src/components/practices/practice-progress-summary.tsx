@@ -54,7 +54,7 @@ export function PracticeProgressSummary({
     document.body.appendChild(anchor);
     anchor.click();
     anchor.remove();
-    URL.revokeObjectURL(url);
+    window.setTimeout(() => URL.revokeObjectURL(url), 0);
   }
 
   function handleReset() {
@@ -98,6 +98,23 @@ export function PracticeProgressSummary({
         <Metric label="Revisadas" value={counts.reviewed} />
         <Metric label="Completadas" value={counts.completed} />
         <Metric label="Refuerzo" value={counts.needsReinforcement} />
+      </div>
+
+      <div className="mt-4 rounded-lg border border-border bg-muted/20 p-3">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Validación humana externa</p>
+            <p className="mt-1 text-xs text-muted-foreground">Métricas separadas del progreso académico local.</p>
+          </div>
+          <Badge variant="outline">{counts.externalReviews} {counts.externalReviews === 1 ? "revisión importada" : "revisiones importadas"}</Badge>
+        </div>
+        <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
+          <Metric label="Prácticas revisadas" value={counts.externallyReviewed} />
+          <Metric label="Aprobadas" value={counts.externallyApproved} />
+          <Metric label="Con observaciones" value={counts.externallyApprovedWithObservations} />
+          <Metric label="Requieren ajustes" value={counts.externallyRequiresChanges} />
+          <Metric label="Reentrega pendiente" value={counts.pendingResubmission} />
+        </div>
       </div>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -170,6 +187,7 @@ export function PracticeDomainProgress({ practices }: { practices: PracticeSumma
         <Badge variant="outline">Completadas sin pistas: {counts.completedWithoutHints}</Badge>
         <Badge variant="outline">Completadas con pistas: {counts.completedWithHints}</Badge>
         <Badge variant="outline">Autoevaluación media: {average === null ? "insuficiente" : `${average}%`}</Badge>
+        <Badge variant="outline">Revisiones externas: {counts.externalReviews}</Badge>
       </div>
     </section>
   );

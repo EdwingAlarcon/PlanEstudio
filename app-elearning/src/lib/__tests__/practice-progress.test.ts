@@ -1,14 +1,18 @@
 import { describe, expect, it } from "vitest";
 import {
   buildSelfAssessment,
+  addExternalReviewToRecord,
   calculatePracticeCounts,
   canCompletePractice,
   compareLatestAttempts,
   createPracticeRecord,
+  getAttemptReviews,
+  getLatestExternalReview,
   getPracticeValidationStatusLabel,
   getRecommendedPractice,
   sanitizePracticeProgressState,
   transitionPracticeStatus,
+  type ExternalPracticeReview,
 } from "../practice-progress";
 
 const rubric = [
@@ -17,6 +21,35 @@ const rubric = [
 ];
 
 describe("practice progress model", () => {
+  function review(overrides: Partial<ExternalPracticeReview> = {}): ExternalPracticeReview {
+    return {
+      id: "REV-1",
+      reviewId: "REV-1",
+      practiceId: "INC-001",
+      attemptId: "attempt-1",
+      reviewedAt: "2026-01-02T00:00:00.000Z",
+      reviewerAlias: "mentora",
+      reviewerDisplayName: "Mentora externa",
+      reviewerType: "mentor",
+      result: "requires_changes",
+      criterionScores: { Diagnóstico: "solid", Validación: "partial" },
+      criteria: [
+        { criterion: "Diagnóstico", weight: 50, level: "solid" },
+        { criterion: "Validación", weight: 50, level: "partial" },
+      ],
+      score: 63,
+      criticalFailures: [],
+      comments: "Debe reforzar validación.",
+      strengths: "Buen diagnóstico.",
+      improvements: "Agregar evidencia de regresión.",
+      requiresResubmission: true,
+      status: "final",
+      source: "imported",
+      schemaVersion: 2,
+      ...overrides,
+    };
+  }
+
   it("creates a safe initial record with evidence defaults", () => {
     const record = createPracticeRecord("INC-001", ["incident-report", "test-results"]);
 
@@ -161,5 +194,40 @@ describe("practice progress model", () => {
 
     expect(compared.improved).toEqual(["Diagnóstico", "Validación"]);
     expect(compared.scoreDelta).toBeGreaterThan(0);
+  });
+
+  it("associates multiple external reviews with attempts and updates validation counts", () => {
+    const assessment = buildSelfAssessment(rubric, { Diagnóstico: "solid", Validación: "solid" });
+    const record = {
+      ...createPracticeRecord("INC-001"),
+      status: "attempted" as const,
+      attemptCount: 1,
+      attempts: [{
+        id: "attempt-1",
+        attemptNumber: 1,
+        startedAt: "2026-01-01T00:00:00.000Z",
+        updatedAt: "2026-01-01T00:00:00.000Z",
+        status: "submitted" as const,
+        revealedHintIds: [],
+        solutionViewed: false,
+        evidenceChecklist: {},
+        selfAssessment: assessment,
+        score: assessment.score,
+        criticalFailures: [],
+        schemaVersion: 2,
+      }],
+      externalReviews: [],
+    };
+
+    const first = addExternalReviewToRecord(record, review());
+    const second = addExternalReviewToRecord(first, review({ id: "REV-2", reviewId: "REV-2", reviewedAt: "2026-01-03T00:00:00.000Z", result: "approved", requiresResubmission: false, improvements: "" }));
+    const counts = calculatePracticeCounts({ "INC-001": second });
+
+    expect(first.status).toBe("needs_reinforcement");
+    expect(second.validationStatus).toBe("externally_reviewed");
+    expect(getAttemptReviews(second, "attempt-1")).toHaveLength(2);
+    expect(getLatestExternalReview(second)?.id).toBe("REV-2");
+    expect(counts.externalReviews).toBe(2);
+    expect(counts.externallyApproved).toBe(1);
   });
 });

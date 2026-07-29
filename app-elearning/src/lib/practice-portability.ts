@@ -10,8 +10,10 @@ import {
 
 export const PRACTICE_EXPORT_FORMAT = "planestudio-practice-progress";
 export const PRACTICE_REVIEW_FORMAT = "planestudio-practice-review";
+export const EXTERNAL_REVIEW_FORMAT = "planestudio-external-review";
 export const PRACTICE_EVIDENCE_FORMAT = "planestudio-practice-evidence-package";
 export const PRACTICE_IMPORT_MAX_BYTES = 1_000_000;
+export const EXTERNAL_REVIEW_IMPORT_MAX_BYTES = 500_000;
 
 export type ImportStrategy = "merge" | "replace";
 export type ImportPreviewStatus = "valid" | "warning" | "incompatible" | "corrupt";
@@ -59,11 +61,31 @@ export interface EvidencePackage {
     executionStatus: PracticeProgressRecord["status"];
     validationStatus: PracticeProgressRecord["validationStatus"];
   };
+  externalReviews: ExternalPracticeReview[];
   reviewerQuestions: string[];
   privacyNotice: string;
 }
 
 export type EvidencePackagePractice = EvidencePackage["practice"];
+
+export type ExternalReviewPreviewStatus = "valid" | "warning" | "incompatible" | "corrupt" | "duplicate" | "conflict";
+
+export interface ExternalReviewImportPreview {
+  status: ExternalReviewPreviewStatus;
+  review?: ExternalPracticeReview;
+  practiceId?: string;
+  attemptId?: string;
+  reviewId?: string;
+  reviewedAt?: string;
+  reviewer?: string;
+  result?: ExternalPracticeReview["result"];
+  score?: number;
+  duplicateIdentical: boolean;
+  conflictingReview: boolean;
+  existingReview?: ExternalPracticeReview;
+  warnings: string[];
+  errors: string[];
+}
 
 export function createPracticeProgressExport(
   records: Record<string, PracticeProgressRecord>,
@@ -120,6 +142,142 @@ export function parsePracticeImportText(text: string, knownPracticeIds: string[]
     return corruptPreview("El archivo no es JSON válido.");
   }
   return validatePracticeImportPayload(parsed, knownPracticeIds);
+}
+
+export function parseExternalReviewImportText(
+  text: string,
+  practice: EvidencePackagePractice,
+  record: PracticeProgressRecord
+): ExternalReviewImportPreview {
+  if (text.length > EXTERNAL_REVIEW_IMPORT_MAX_BYTES) return corruptReviewPreview("El archivo supera el tamaño máximo permitido para una revisión externa.");
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(text);
+  } catch {
+    return corruptReviewPreview("El archivo no es JSON válido.");
+  }
+  return validateExternalReviewPayload(parsed, practice, record);
+}
+
+export function validateExternalReviewPayload(
+  payload: unknown,
+  practice: EvidencePackagePractice,
+  record: PracticeProgressRecord
+): ExternalReviewImportPreview {
+  const dangerous = findDangerousKey(payload);
+  if (dangerous) return corruptReviewPreview(`El archivo contiene un campo no permitido: ${dangerous}.`);
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) return corruptReviewPreview("La revisión debe ser un objeto JSON.");
+  const raw = payload as Record<string, unknown>;
+  const format = raw.format;
+  if (format !== EXTERNAL_REVIEW_FORMAT && format !== PRACTICE_REVIEW_FORMAT) return corruptReviewPreview("El formato no corresponde a una revisión externa de PlanEstudio.");
+  const schemaVersion = Number(raw.schemaVersion ?? 1);
+  if (!Number.isInteger(schemaVersion) || schemaVersion < 1) return corruptReviewPreview("La versión de esquema no es válida.");
+  if (schemaVersion > 1) {
+    return {
+      ...emptyReviewPreview(),
+      status: "incompatible",
+      errors: ["La revisión pertenece a una versión futura de PlanEstudio y no se importará."],
+    };
+  }
+
+  const reviewId = stringField(raw.reviewId ?? raw.id, 120);
+  const practiceId = stringField(raw.practiceId, 80);
+  const attemptId = stringField(raw.attemptId, 160);
+  const reviewedAt = stringField(raw.reviewedAt, 80);
+  const result = normalizeReviewResult(raw.result);
+  const warnings: string[] = [];
+  const errors: string[] = [];
+
+  if (!reviewId) errors.push("Falta reviewId.");
+  if (!practiceId) errors.push("Falta practiceId.");
+  if (practiceId && practiceId !== practice.id) errors.push(`La revisión corresponde a ${practiceId}, no a ${practice.id}.`);
+  if (!attemptId) errors.push("Falta attemptId.");
+  const attempt = attemptId ? record.attempts.find((item) => item.id === attemptId) : undefined;
+  if (attemptId && !attempt) errors.push("El intento indicado no existe en esta práctica.");
+  if (!reviewedAt || Number.isNaN(Date.parse(reviewedAt))) errors.push("reviewedAt no es una fecha válida.");
+  if (reviewedAt && !Number.isNaN(Date.parse(reviewedAt)) && Date.parse(reviewedAt) > Date.now() + 5 * 60_000) warnings.push("La fecha de revisión está en el futuro.");
+  if (!result) errors.push("Resultado de revisión inválido.");
+
+  const reviewer = parseReviewer(raw.reviewer, raw);
+  if (!reviewer.alias) errors.push("Falta reviewer.displayName o reviewerAlias.");
+
+  const criteriaValidation = parseReviewCriteria(raw.criteria, raw.criterionScores, practice.rubric);
+  errors.push(...criteriaValidation.errors);
+  warnings.push(...criteriaValidation.warnings);
+
+  const summary = stringField(raw.summary ?? raw.comments, 4000);
+  const strengths = textListOrString(raw.strengths, 2000);
+  const improvements = textListOrString(raw.improvements, 2000);
+  const criticalFailures = textArray(raw.criticalFindings ?? raw.criticalFailures, 1000);
+  const requiresResubmission = raw.resubmissionRequired === true || raw.requiresResubmission === true;
+  if (!summary) errors.push("Falta summary.");
+  if ((result === "requires_changes" || requiresResubmission) && !improvements.trim()) errors.push("Una revisión que requiere ajustes debe incluir mejoras solicitadas.");
+  if (result === "approved" && requiresResubmission) errors.push("approved no puede coexistir con resubmissionRequired.");
+  if (result === "approved" && criticalFailures.length > 0) errors.push("approved no puede tener fallos críticos.");
+  if (result === "rejected" && summary.length < 8) errors.push("rejected requiere un resumen claro.");
+
+  const score = criteriaValidation.score;
+  const declaredScore = Number(raw.score ?? raw.totalScore);
+  if (Number.isFinite(declaredScore) && Math.round(declaredScore) !== score) errors.push(`El puntaje declarado (${Math.round(declaredScore)}) no coincide con el recalculado (${score}).`);
+
+  const review: ExternalPracticeReview | undefined = errors.length === 0 && reviewId && attemptId && result ? {
+    id: reviewId,
+    reviewId,
+    practiceId: practice.id,
+    attemptId,
+    reviewedAt: reviewedAt || new Date().toISOString(),
+    reviewerAlias: reviewer.alias,
+    reviewerDisplayName: reviewer.displayName,
+    reviewerRole: reviewer.role,
+    reviewerOrganization: reviewer.organization,
+    reviewerType: reviewer.type,
+    result,
+    criterionScores: Object.fromEntries(criteriaValidation.criteria.map((item) => [item.criterion, item.level])),
+    criteria: criteriaValidation.criteria,
+    score,
+    criticalFailures,
+    comments: summary,
+    strengths,
+    improvements,
+    requiresResubmission,
+    suggestedDueDate: stringField(raw.suggestedDueDate, 80),
+    evidenceComments: parseTextRecord(raw.evidenceComments),
+    securityNotes: stringField(raw.securityNotes ?? raw.securityObservations, 2000),
+    reviewedPackage: raw.reviewedPackage && typeof raw.reviewedPackage === "object" ? raw.reviewedPackage as ExternalPracticeReview["reviewedPackage"] : undefined,
+    status: "final",
+    source: "imported",
+    schemaVersion: 1,
+  } : undefined;
+
+  const existing = reviewId ? record.externalReviews.find((item) => item.id === reviewId) : undefined;
+  const duplicateIdentical = Boolean(existing && review && stableStringify(canonicalReviewForComparison(existing)) === stableStringify(canonicalReviewForComparison(review)));
+  const conflictingReview = Boolean(existing && review && stableStringify(canonicalReviewForComparison(existing)) !== stableStringify(canonicalReviewForComparison(review)));
+  const status: ExternalReviewPreviewStatus = errors.length > 0
+    ? "corrupt"
+    : conflictingReview
+      ? "conflict"
+      : duplicateIdentical
+        ? "duplicate"
+        : warnings.length > 0
+          ? "warning"
+          : "valid";
+
+  return {
+    status,
+    review,
+    practiceId,
+    attemptId,
+    reviewId,
+    reviewedAt,
+    reviewer: reviewer.displayName || reviewer.alias,
+    result: result ?? undefined,
+    score,
+    duplicateIdentical,
+    conflictingReview,
+    existingReview: existing,
+    warnings,
+    errors,
+  };
 }
 
 export function validatePracticeImportPayload(payload: unknown, knownPracticeIds: string[]): PracticeImportPreview {
@@ -314,6 +472,7 @@ export function createEvidencePackage(practice: EvidencePackagePractice, record:
       executionStatus: record.status,
       validationStatus: record.validationStatus,
     },
+    externalReviews: attempt ? record.externalReviews.filter((review) => review.attemptId === attempt.id) : record.externalReviews,
     reviewerQuestions: [
       "¿La evidencia demuestra el criterio de aceptación principal?",
       "¿Hay riesgos de seguridad, ALM o datos sensibles que deban corregirse?",
@@ -371,26 +530,173 @@ ${packageData.privacyNotice}
 }
 
 export function createReviewTemplate(practice: EvidencePackagePractice, attempt: PracticeAttempt | null): string {
-  const rubric = practice.rubric.map((item) => [item.criterion, "adequate"]);
-  const review: Omit<ExternalPracticeReview, "id"> & { format: typeof PRACTICE_REVIEW_FORMAT } = {
-    format: PRACTICE_REVIEW_FORMAT,
+  const criteria = practice.rubric.map((item) => ({
+    criterion: item.criterion,
+    weight: item.weight,
+    level: "adequate",
+    comment: "",
+  }));
+  const review = {
+    format: EXTERNAL_REVIEW_FORMAT,
+    schemaVersion: 1,
+    reviewId: `REV-${new Date().toISOString().slice(0, 10)}-${practice.id}`,
     practiceId: practice.id,
     attemptId: attempt?.id ?? "REEMPLAZAR-CON-ID-DE-INTENTO",
     reviewedAt: new Date().toISOString(),
-    reviewerAlias: "alias-del-revisor",
-    reviewerType: "mentor",
+    reviewer: {
+      displayName: "Revisor externo",
+      role: "Power Platform Consultant",
+      organization: "",
+      alias: "mentor-externo",
+    },
     result: "reviewed",
-    criterionScores: Object.fromEntries(rubric),
-    criticalFailures: [],
-    comments: "Comentario específico sobre la evidencia revisada.",
-    strengths: "Fortalezas observadas.",
-    improvements: "Mejoras solicitadas.",
-    requiresResubmission: false,
-    status: "final",
-    source: "manual",
-    schemaVersion: PRACTICE_PROGRESS_SCHEMA_VERSION,
+    criteria,
+    score: 70,
+    criticalFindings: [],
+    strengths: ["Fortaleza observada."],
+    improvements: ["Mejora sugerida."],
+    summary: "Comentario específico sobre la evidencia revisada.",
+    resubmissionRequired: false,
+    suggestedDueDate: "",
+    evidenceComments: {},
+    securityNotes: "Sin datos sensibles observados en la muestra revisada.",
+    reviewedPackage: {
+      format: PRACTICE_EVIDENCE_FORMAT,
+      attemptNumber: attempt?.attemptNumber,
+    },
   };
-  return JSON.stringify({ id: `review-${practice.id.toLowerCase()}-${Date.now()}`, ...review }, null, 2);
+  return JSON.stringify(review, null, 2);
+}
+
+const REVIEW_RESULT_VALUES: ExternalPracticeReview["result"][] = ["reviewed", "approved", "approved_with_observations", "requires_changes", "rejected"];
+const LEVEL_VALUES: AssessmentLevel[] = ["none", "partial", "adequate", "solid", "excellent"];
+const LEVEL_MULTIPLIER: Record<AssessmentLevel, number> = { none: 0, partial: 0.4, adequate: 0.7, solid: 0.85, excellent: 1 };
+
+function normalizeReviewResult(value: unknown): ExternalPracticeReview["result"] | null {
+  if (value === "requires_adjustments") return "requires_changes";
+  if (value === "not_approved") return "rejected";
+  return typeof value === "string" && REVIEW_RESULT_VALUES.includes(value as ExternalPracticeReview["result"])
+    ? value as ExternalPracticeReview["result"]
+    : null;
+}
+
+function parseReviewCriteria(criteriaValue: unknown, criterionScoresValue: unknown, rubric: PracticeInfo["rubric"]) {
+  const errors: string[] = [];
+  const warnings: string[] = [];
+  const expected = new Map(rubric.map((item) => [item.criterion, item.weight]));
+  const seen = new Set<string>();
+  const criteria: NonNullable<ExternalPracticeReview["criteria"]> = [];
+  if (Array.isArray(criteriaValue)) {
+    for (const item of criteriaValue) {
+      if (!item || typeof item !== "object") {
+        errors.push("Cada criterio debe ser un objeto.");
+        continue;
+      }
+      const raw = item as Record<string, unknown>;
+      const criterion = stringField(raw.criterion, 240);
+      const level = stringField(raw.level ?? raw.score, 40) as AssessmentLevel;
+      const weight = Number(raw.weight);
+      if (!criterion || !expected.has(criterion)) errors.push(`Criterio inexistente: ${criterion || "(vacío)"}.`);
+      if (criterion && seen.has(criterion)) errors.push(`Criterio duplicado: ${criterion}.`);
+      if (criterion) seen.add(criterion);
+      if (!LEVEL_VALUES.includes(level)) errors.push(`Nivel inválido para ${criterion}.`);
+      if (criterion && expected.has(criterion) && weight !== expected.get(criterion)) errors.push(`Peso incorrecto para ${criterion}: esperado ${expected.get(criterion)}, recibido ${weight}.`);
+      if (criterion && LEVEL_VALUES.includes(level)) criteria.push({ criterion, weight, level, comment: stringField(raw.comment, 1000) || undefined });
+    }
+  } else if (criterionScoresValue && typeof criterionScoresValue === "object") {
+    const scores = criterionScoresValue as Record<string, unknown>;
+    for (const item of rubric) {
+      const level = scores[item.criterion] as AssessmentLevel;
+      if (!LEVEL_VALUES.includes(level)) errors.push(`Nivel inválido para ${item.criterion}.`);
+      else criteria.push({ criterion: item.criterion, weight: item.weight, level });
+      seen.add(item.criterion);
+    }
+  } else {
+    errors.push("Falta criteria.");
+  }
+  for (const item of rubric) {
+    if (!seen.has(item.criterion)) errors.push(`Falta criterio de rúbrica: ${item.criterion}.`);
+  }
+  const totalWeight = criteria.reduce((sum, item) => sum + item.weight, 0);
+  if (criteria.length > 0 && totalWeight !== 100) errors.push(`La suma de pesos debe ser 100; recibida ${totalWeight}.`);
+  if (criteria.length !== rubric.length && errors.length === 0) warnings.push("La rúbrica no tiene la misma cantidad de criterios que la práctica actual.");
+  const score = Math.round(criteria.reduce((sum, item) => sum + item.weight * LEVEL_MULTIPLIER[item.level], 0));
+  return { criteria, score, errors, warnings };
+}
+
+function parseReviewer(value: unknown, raw: Record<string, unknown>) {
+  const reviewer = value && typeof value === "object" ? value as Record<string, unknown> : {};
+  const displayName = stringField(reviewer.displayName ?? raw.reviewerDisplayName, 160);
+  const alias = stringField(reviewer.alias ?? raw.reviewerAlias ?? displayName, 120);
+  const role = stringField(reviewer.role ?? raw.reviewerRole, 160);
+  const organization = stringField(reviewer.organization ?? raw.reviewerOrganization, 160);
+  const type = ["mentor", "peer", "lead", "instructor", "other"].includes(String(raw.reviewerType)) ? raw.reviewerType as ExternalPracticeReview["reviewerType"] : "other";
+  return { displayName, alias, role, organization, type };
+}
+
+function findDangerousKey(value: unknown, depth = 0): string | null {
+  if (depth > 12) return "profundidad excesiva";
+  if (!value || typeof value !== "object") return null;
+  for (const [key, nested] of Object.entries(value as Record<string, unknown>)) {
+    if (["__proto__", "constructor", "prototype"].includes(key)) return key;
+    const found = findDangerousKey(nested, depth + 1);
+    if (found) return found;
+  }
+  return null;
+}
+
+function stringField(value: unknown, maxLength: number): string {
+  return typeof value === "string" ? value.replace(/[<>]/g, "").trim().slice(0, maxLength) : "";
+}
+
+function textArray(value: unknown, maxItemLength: number): string[] {
+  if (!Array.isArray(value)) return [];
+  return value.filter((item): item is string => typeof item === "string").map((item) => stringField(item, maxItemLength)).filter(Boolean).slice(0, 20);
+}
+
+function textListOrString(value: unknown, maxLength: number): string {
+  if (Array.isArray(value)) return textArray(value, Math.min(maxLength, 500)).join("\n");
+  return stringField(value, maxLength);
+}
+
+function parseTextRecord(value: unknown): Record<string, string> | undefined {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return undefined;
+  const entries = Object.entries(value as Record<string, unknown>)
+    .filter((entry): entry is [string, string] => typeof entry[1] === "string")
+    .map(([key, text]) => [stringField(key, 120), stringField(text, 1000)] as const)
+    .filter(([key, text]) => key && text);
+  return entries.length > 0 ? Object.fromEntries(entries) : undefined;
+}
+
+function stableStringify(value: unknown): string {
+  return JSON.stringify(sortObject(value));
+}
+
+function canonicalReviewForComparison(review: ExternalPracticeReview): Omit<ExternalPracticeReview, "schemaVersion" | "source"> {
+  const stableReview: Partial<ExternalPracticeReview> = { ...review };
+  delete stableReview.schemaVersion;
+  delete stableReview.source;
+  return stableReview as Omit<ExternalPracticeReview, "schemaVersion" | "source">;
+}
+
+function sortObject(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(sortObject);
+  if (!value || typeof value !== "object") return value;
+  return Object.fromEntries(Object.entries(value as Record<string, unknown>).sort(([a], [b]) => a.localeCompare(b)).map(([key, nested]) => [key, sortObject(nested)]));
+}
+
+function corruptReviewPreview(message: string): ExternalReviewImportPreview {
+  return { ...emptyReviewPreview(), status: "corrupt", errors: [message] };
+}
+
+function emptyReviewPreview(): ExternalReviewImportPreview {
+  return {
+    status: "valid",
+    duplicateIdentical: false,
+    conflictingReview: false,
+    warnings: [],
+    errors: [],
+  };
 }
 
 function corruptPreview(message: string): PracticeImportPreview {

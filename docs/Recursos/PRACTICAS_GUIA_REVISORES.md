@@ -27,6 +27,20 @@ Aprobar significa que la evidencia revisada satisface la rúbrica indicada para 
 
 Evita feedback genérico como "bien hecho". Nombra el criterio, la evidencia observada y la acción siguiente.
 
+## JSON importable
+
+Si el estudiante comparte la plantilla de revisión, devuélvela como JSON con `format: "planestudio-external-review"` y `schemaVersion: 1`. Conserva `practiceId`, `attemptId`, criterios y pesos exactamente como vienen en el paquete. La app recalcula el puntaje desde la rúbrica, por lo que `score` debe coincidir con los niveles declarados.
+
+Resultados admitidos:
+
+- `reviewed`: revisado sin dictamen final.
+- `approved`: aprobado sin observaciones bloqueantes.
+- `approved_with_observations`: aprobado con recomendaciones.
+- `requires_changes`: requiere ajustes y normalmente nueva entrega.
+- `rejected`: no aprobado por fallos graves o evidencia insuficiente.
+
+Usa `resubmissionRequired: true` cuando el estudiante debe crear un nuevo intento. En ese caso incluye `improvements` accionables. No marques `approved` si también solicitas reentrega o registras fallos críticos.
+
 ## Sesgos a evitar
 
 No penalices por usar pistas si la práctica las permite. No asumas dominio por rapidez. No exijas licencias o tenant real cuando el enunciado declara evidencia simulada o conceptual. No aceptes capturas con datos reales como mejor evidencia.

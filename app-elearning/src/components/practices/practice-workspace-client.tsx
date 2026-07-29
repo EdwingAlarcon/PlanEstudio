@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AlertTriangle, CheckCircle2, Download, Eye, EyeOff, FileText, Lightbulb, RotateCcw, Save } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Download, Eye, EyeOff, FileText, GitBranch, Lightbulb, RotateCcw, Save, Trash2, Upload } from "lucide-react";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,15 +18,23 @@ import {
   compareLatestAttempts,
   getPracticeStatusLabel,
   getPracticeValidationStatusLabel,
+  getAttemptReviews,
+  getExternalReviewResultLabel,
   usePracticeProgressStore,
   type AssessmentLevel,
+  type ExternalPracticeReview,
+  type PracticeAttempt,
+  type PracticeAssessmentCriterion,
   type PracticeProgressRecord,
 } from "@/lib/practice-progress";
 import {
+  EXTERNAL_REVIEW_IMPORT_MAX_BYTES,
   createEvidencePackage,
   createReviewTemplate,
   evidencePackageBaseName,
   evidencePackageMarkdown,
+  parseExternalReviewImportText,
+  type ExternalReviewImportPreview,
 } from "@/lib/practice-portability";
 import type { PracticeDifficulty, PracticeDomain, PracticeEvidence, PracticeRole, PracticeType, PracticeRubricItem } from "@/lib/practices";
 
@@ -350,7 +358,7 @@ function PracticeAttemptHistory({ practice, record }: { practice: PracticeWorksp
     document.body.appendChild(anchor);
     anchor.click();
     anchor.remove();
-    URL.revokeObjectURL(url);
+    window.setTimeout(() => URL.revokeObjectURL(url), 0);
   }
 
   function handleEvidencePackage() {
@@ -412,7 +420,9 @@ function PracticeAttemptHistory({ practice, record }: { practice: PracticeWorksp
       ) : (
         <div className="mt-4 grid gap-4 lg:grid-cols-[240px_minmax(0,1fr)]">
           <div className="space-y-2">
-            {record.attempts.map((attempt) => (
+            {record.attempts.map((attempt) => {
+              const reviewCount = getAttemptReviews(record, attempt.id).length;
+              return (
               <button
                 key={attempt.id}
                 type="button"
@@ -424,8 +434,10 @@ function PracticeAttemptHistory({ practice, record }: { practice: PracticeWorksp
               >
                 <span className="font-medium text-foreground">Intento {attempt.attemptNumber}</span>
                 <span className="mt-1 block text-xs text-muted-foreground">{attempt.status} · {attempt.selfAssessment?.score ?? "sin puntaje"}</span>
+                {reviewCount > 0 && <span className="mt-1 block text-xs text-[#0078D4] dark:text-[#4DB8FF]">{reviewCount} {reviewCount === 1 ? "revisión externa" : "revisiones externas"}</span>}
               </button>
-            ))}
+              );
+            })}
           </div>
           <div className="rounded-lg border border-border bg-muted/15 p-4">
             <div className="grid gap-2 text-sm sm:grid-cols-2">
@@ -454,6 +466,269 @@ function PracticeAttemptHistory({ practice, record }: { practice: PracticeWorksp
           </div>
         </div>
       )}
+      <ExternalReviewPanel
+        practice={practice}
+        record={record}
+        selectedAttempt={selectedAttempt}
+        onSelectAttempt={setSelectedAttemptId}
+      />
     </section>
   );
+}
+
+function ExternalReviewPanel({
+  practice,
+  record,
+  selectedAttempt,
+  onSelectAttempt,
+}: {
+  practice: PracticeWorkspaceData;
+  record: PracticeProgressRecord;
+  selectedAttempt: PracticeAttempt | null;
+  onSelectAttempt: (attemptId: string) => void;
+}) {
+  const importExternalReview = usePracticeProgressStore((s) => s.importExternalReview);
+  const deleteExternalReview = usePracticeProgressStore((s) => s.deleteExternalReview);
+  const createResubmissionAttempt = usePracticeProgressStore((s) => s.createResubmissionAttempt);
+  const [preview, setPreview] = useState<ExternalReviewImportPreview | null>(null);
+  const [fileName, setFileName] = useState("");
+  const selectedReviews = selectedAttempt ? getAttemptReviews(record, selectedAttempt.id) : [];
+  const latestSelectedReview = selectedReviews[0];
+  const allReviews = [...record.externalReviews].sort((a, b) => b.reviewedAt.localeCompare(a.reviewedAt));
+
+  async function handleReviewFile(file: File | null) {
+    setFileName(file?.name ?? "");
+    if (!file) {
+      setPreview(null);
+      return;
+    }
+    if (file.size > EXTERNAL_REVIEW_IMPORT_MAX_BYTES) {
+      setPreview({
+        status: "corrupt",
+        duplicateIdentical: false,
+        conflictingReview: false,
+        warnings: [],
+        errors: ["El archivo supera el tamaño máximo permitido para una revisión externa."],
+      });
+      return;
+    }
+    const text = await file.text();
+    setPreview(parseExternalReviewImportText(text, {
+      id: practice.id,
+      slug: practice.slug,
+      title: practice.title,
+      practiceType: practice.practiceType,
+      difficulty: practice.difficulty,
+      domain: practice.domain,
+      roles: practice.roles,
+      rubric: practice.rubric,
+      evidence: practice.evidence,
+    }, record));
+  }
+
+  function handleImport(replace = false) {
+    if (!preview?.review) return;
+    importExternalReview(practice.id, preview.review, replace);
+    onSelectAttempt(preview.review.attemptId);
+    setPreview(null);
+    setFileName("");
+  }
+
+  function handleDelete(review: ExternalPracticeReview) {
+    if (window.confirm("Eliminar esta revisión importada solo afecta el progreso local. ¿Continuar?")) {
+      deleteExternalReview(practice.id, review.id);
+    }
+  }
+
+  function handleResubmission(review: ExternalPracticeReview) {
+    if (window.confirm("Se creará un nuevo intento para reentrega basado en esta revisión. ¿Continuar?")) {
+      createResubmissionAttempt(practice.id, review.attemptId, practice.evidence.required);
+    }
+  }
+
+  const canImport = preview?.review && (preview.status === "valid" || preview.status === "warning");
+  const canReplace = preview?.review && preview.status === "conflict";
+
+  return (
+    <div className="mt-4 rounded-lg border border-border bg-background p-4" aria-labelledby="external-review-heading">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h3 id="external-review-heading" className="text-sm font-semibold text-foreground">Revisión humana externa</h3>
+          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+            Importa solo JSON recibido de una persona revisora confiable. Revisa nombres, organización, comentarios y notas de seguridad antes de conservarlos localmente.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <label>
+            <input
+              type="file"
+              accept="application/json,.json"
+              className="sr-only"
+              aria-label="Archivo JSON de revisión externa"
+              data-testid="external-review-file-input"
+              onChange={(event) => void handleReviewFile(event.target.files?.[0] ?? null)}
+            />
+            <span className="inline-flex h-8 cursor-pointer items-center justify-center rounded-md border border-border bg-background px-3 text-xs font-medium text-foreground hover:bg-muted">
+              <Upload className="mr-1 h-3.5 w-3.5" aria-hidden />
+              Importar revisión
+            </span>
+          </label>
+        </div>
+      </div>
+
+      {preview && (
+        <div className="mt-3 rounded-lg border border-border bg-muted/15 p-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge variant={preview.status === "corrupt" || preview.status === "incompatible" ? "destructive" : preview.status === "conflict" ? "secondary" : "outline"}>
+              {reviewPreviewLabel(preview.status)}
+            </Badge>
+            <span className="text-xs text-muted-foreground">{fileName || "archivo JSON"}</span>
+            {preview.reviewId && <span className="text-xs text-muted-foreground">ID: {preview.reviewId}</span>}
+          </div>
+          <div className="mt-3 grid gap-2 text-xs text-muted-foreground sm:grid-cols-2 lg:grid-cols-4">
+            <span>Intento: {attemptLabel(record, preview.attemptId)}</span>
+            <span>Revisor: {preview.reviewer || "-"}</span>
+            <span>Resultado: {preview.result ? getExternalReviewResultLabel(preview.result) : "-"}</span>
+            <span>Puntaje: {typeof preview.score === "number" ? `${preview.score}%` : "-"}</span>
+          </div>
+          {preview.errors.length > 0 && <MessageList title="Errores" items={preview.errors} tone="danger" />}
+          {preview.warnings.length > 0 && <MessageList title="Advertencias" items={preview.warnings} tone="warning" />}
+          {preview.status === "duplicate" && <p className="mt-2 text-xs text-muted-foreground">Esta revisión ya existe con el mismo contenido.</p>}
+          {preview.status === "conflict" && <p className="mt-2 text-xs text-muted-foreground">Ya existe una revisión con el mismo ID, pero el contenido cambió. Puedes reemplazarla si confías en el nuevo archivo.</p>}
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Button size="sm" onClick={() => handleImport(false)} disabled={!canImport}>
+              Confirmar importación
+            </Button>
+            <Button size="sm" variant="outline" onClick={() => handleImport(true)} disabled={!canReplace}>
+              Reemplazar revisión
+            </Button>
+            <Button size="sm" variant="ghost" onClick={() => { setPreview(null); setFileName(""); }}>
+              Cancelar
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {latestSelectedReview ? (
+        <div className="mt-4 grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(260px,340px)]">
+          <ReviewDetailCard review={latestSelectedReview} attempt={selectedAttempt} onResubmission={handleResubmission} />
+          <RubricComparison attempt={selectedAttempt} review={latestSelectedReview} />
+        </div>
+      ) : (
+        <p className="mt-4 rounded-lg border border-border bg-muted/15 p-3 text-sm text-muted-foreground">
+          El intento seleccionado aún no tiene revisión externa importada.
+        </p>
+      )}
+
+      {allReviews.length > 0 && (
+        <div className="mt-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Historial de revisiones externas</p>
+          <div className="mt-2 grid gap-2">
+            {allReviews.map((review) => (
+              <div key={review.id} className="flex flex-col gap-2 rounded-lg border border-border bg-muted/15 p-3 sm:flex-row sm:items-center sm:justify-between">
+                <button type="button" className="text-left" onClick={() => onSelectAttempt(review.attemptId)}>
+                  <span className="text-sm font-medium text-foreground">{getExternalReviewResultLabel(review.result)} · {review.score ?? "-"}%</span>
+                  <span className="mt-1 block text-xs text-muted-foreground">
+                    {attemptLabel(record, review.attemptId)} · {review.reviewerDisplayName || review.reviewerAlias} · {new Date(review.reviewedAt).toLocaleDateString("es-CO")}
+                  </span>
+                </button>
+                <Button size="sm" variant="ghost" onClick={() => handleDelete(review)} aria-label={`Eliminar revisión ${review.id}`}>
+                  <Trash2 className="h-3.5 w-3.5" aria-hidden />
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ReviewDetailCard({
+  review,
+  attempt,
+  onResubmission,
+}: {
+  review: ExternalPracticeReview;
+  attempt: PracticeAttempt | null;
+  onResubmission: (review: ExternalPracticeReview) => void;
+}) {
+  return (
+    <div className="rounded-lg border border-border bg-muted/15 p-3">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <p className="text-sm font-semibold text-foreground">{getExternalReviewResultLabel(review.result)}</p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Intento {attempt?.attemptNumber ?? "-"} · {review.reviewerDisplayName || review.reviewerAlias} · {new Date(review.reviewedAt).toLocaleString("es-CO")}
+          </p>
+        </div>
+        <Badge variant={review.requiresResubmission ? "destructive" : "outline"}>{review.score ?? "-"}%</Badge>
+      </div>
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{review.comments}</p>
+      {review.strengths && <p className="mt-2 text-xs text-muted-foreground"><span className="font-semibold text-foreground">Fortalezas:</span> {review.strengths}</p>}
+      {review.improvements && <p className="mt-2 text-xs text-muted-foreground"><span className="font-semibold text-foreground">Mejoras:</span> {review.improvements}</p>}
+      {review.criticalFailures.length > 0 && <MessageList title="Fallos críticos" items={review.criticalFailures} tone="danger" />}
+      {review.securityNotes && <p className="mt-2 rounded-md border border-amber-500/30 bg-amber-50 p-2 text-xs text-muted-foreground dark:bg-amber-500/10">{review.securityNotes}</p>}
+      {review.requiresResubmission && (
+        <Button size="sm" className="mt-3" variant="outline" onClick={() => onResubmission(review)}>
+          <GitBranch className="mr-1 h-3.5 w-3.5" aria-hidden />
+          Crear reentrega
+        </Button>
+      )}
+    </div>
+  );
+}
+
+function RubricComparison({ attempt, review }: { attempt: PracticeAttempt | null; review: ExternalPracticeReview }) {
+  const selfCriteria = new Map((attempt?.selfAssessment?.criteria ?? []).map((item) => [item.criterion, item]));
+  const externalCriteria: PracticeAssessmentCriterion[] = review.criteria ?? Object.entries(review.criterionScores).map(([criterion, level]) => ({ criterion, level, weight: 0 }));
+  return (
+    <div className="rounded-lg border border-border bg-muted/15 p-3">
+      <p className="text-sm font-semibold text-foreground">Autoevaluación vs revisión</p>
+      <div className="mt-3 grid gap-2">
+        {externalCriteria.map((criterion) => {
+          const self = selfCriteria.get(criterion.criterion) as PracticeAssessmentCriterion | undefined;
+          return (
+            <div key={criterion.criterion} className="rounded-md border border-border bg-background p-2 text-xs">
+              <p className="font-medium text-foreground">{criterion.criterion}</p>
+              <p className="mt-1 text-muted-foreground">Yo: {self ? assessmentLevelLabel(self.level) : "sin autoevaluación"} · Revisor: {assessmentLevelLabel(criterion.level)}</p>
+              {criterion.comment && <p className="mt-1 text-muted-foreground">{criterion.comment}</p>}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function MessageList({ title, items, tone }: { title: string; items: string[]; tone: "danger" | "warning" }) {
+  return (
+    <div className={cn("mt-2 rounded-md border p-2 text-xs", tone === "danger" ? "border-destructive/30 bg-destructive/10 text-destructive" : "border-amber-500/30 bg-amber-50 text-muted-foreground dark:bg-amber-500/10")}>
+      <p className="font-semibold">{title}</p>
+      <ul className="mt-1 list-disc space-y-1 pl-4">
+        {items.map((item) => <li key={item}>{item}</li>)}
+      </ul>
+    </div>
+  );
+}
+
+function reviewPreviewLabel(status: ExternalReviewImportPreview["status"]): string {
+  const labels: Record<ExternalReviewImportPreview["status"], string> = {
+    valid: "Lista para importar",
+    warning: "Importable con advertencias",
+    incompatible: "Versión incompatible",
+    corrupt: "Archivo rechazado",
+    duplicate: "Duplicado idéntico",
+    conflict: "Conflicto de revisión",
+  };
+  return labels[status];
+}
+
+function attemptLabel(record: PracticeProgressRecord, attemptId?: string): string {
+  const attempt = record.attempts.find((item) => item.id === attemptId);
+  return attempt ? `Intento ${attempt.attemptNumber}` : "Intento no encontrado";
+}
+
+function assessmentLevelLabel(level: AssessmentLevel): string {
+  return ASSESSMENT_OPTIONS.find((option) => option.value === level)?.label ?? level;
 }

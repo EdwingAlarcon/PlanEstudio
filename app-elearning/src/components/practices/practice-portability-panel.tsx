@@ -41,8 +41,8 @@ export function PracticePortabilityPanel({ practiceIds }: { practiceIds: string[
 
   function handleExport() {
     const payload = createPracticeProgressExport(records, { includeNotes });
-    downloadFile(serializePracticeProgressExport(payload), practiceBackupFileName());
     setMessage(`Backup generado: ${payload.metadata.recordCount} prácticas y ${payload.metadata.attemptCount} intentos.`);
+    downloadFile(serializePracticeProgressExport(payload), practiceBackupFileName());
   }
 
   async function handleFile(file: File | undefined) {

@@ -6,16 +6,25 @@
 
 ## Última actualización (2026-07-29)
 
-Último estado local validado antes del commit del sprint RPA:
+Último estado local antes del micro-sprint de revisión humana externa:
 
 - Branch local: `master`, partiendo de `origin/master` limpio.
-- Sprint en curso: **Power Automate Desktop & RPA Professional Track**.
+- Sprint en curso: **External Human Review Import**.
 - Conteos finales locales: **75 módulos**, **72 labs**, **508 preguntas**, **633 criterios**, **20 prácticas profesionales**.
 - Nuevo nivel transversal: `rpa` / **Power Automate Desktop & RPA**, módulos 66-75.
 - Nuevos labs RPA: `LAB-104` a `LAB-112`.
 - Nuevas prácticas RPA: **3 Challenge Labs**, **8 Incident Labs**, **1 Work Simulation**.
 - Nuevos recursos RPA: artefactos profesionales, portafolio/empleabilidad honesta y validación tenant.
-- Producción pendiente de confirmar hasta hacer commit + push + GitHub Actions deploy.
+- Sprint RPA previo ya quedó publicado; el micro-sprint actual debe terminar con commit + push + GitHub Actions deploy.
+
+Micro-sprint actual — **External Human Review Import**:
+
+- No crea módulos, labs ni prácticas.
+- Agrega formato importable `planestudio-external-review` schema v1, manteniendo compatibilidad con la plantilla legacy `planestudio-practice-review`.
+- Permite múltiples revisiones externas por práctica e intento, historial, última revisión por intento, eliminación local y creación de reentrega cuando el revisor lo solicita.
+- Valida tamaño, JSON, formato, versión, campos peligrosos, práctica, intento, revisor, fecha, resultado, rúbrica completa, pesos, puntaje recalculado, fallos críticos, consistencia de `approved`/reentrega y duplicados/conflictos por `reviewId`.
+- La UI de cada práctica ahora importa JSON, muestra vista previa, detecta duplicado idéntico/conflicto, compara autoevaluación vs revisión externa, y expone métricas separadas de validación humana en `/progreso`.
+- Recursos actualizados: `PRACTICAS_PORTABILIDAD_ESTUDIANTE.md` y `PRACTICAS_GUIA_REVISORES.md`.
 
 Después del Sprint 22 se agregó una capa nueva **Experiencia práctica**:
 `/experiencia-practica`, `app-elearning/content/practices/`, parser/validador `practices.ts`,
