@@ -22,6 +22,23 @@ evidence:
   sensitiveDataWarning: "No incluyas nombres, correos ni cuentas reales; usa usuarios ficticios o iniciales."
 solutionAvailability: after-attempt
 coverageState: partial
+hints:
+  - id: hint-1
+    level: light
+    title: "Empieza por el alcance del registro"
+    content: "Distingue si el problema ocurre por propiedad del registro, Business Unit, equipo propietario o campo protegido."
+  - id: hint-2
+    level: tool
+    title: "Revisa roles y equipo"
+    content: "Contrasta el rol directo del usuario con el rol asignado al owner team y el nivel de privilegio sobre Opportunity."
+  - id: hint-3
+    level: hypothesis
+    title: "Hipótesis de privilegio insuficiente"
+    content: "Si el equipo es propietario pero el rol del equipo solo tiene Write a nivel User, el usuario puede quedar sin escritura efectiva."
+  - id: hint-4
+    level: near-solution
+    title: "Apunta a mínimo privilegio"
+    content: "Corrige el nivel de Write en el rol adecuado y valida con usuario de prueba; no resuelvas asignando System Administrator."
 rubric:
   - criterion: "Reproducción y delimitación"
     weight: 10

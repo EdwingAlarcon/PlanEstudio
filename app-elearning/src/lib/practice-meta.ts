@@ -47,6 +47,7 @@ export const EVIDENCE_TYPES = [
 ] as const;
 export const SOLUTION_AVAILABILITY = ["inline-collapsed", "after-attempt", "separate-file", "facilitator-only"] as const;
 export const COVERAGE_STATES = ["covered", "partial", "guided-only", "not-evaluated", "not-covered"] as const;
+export const PRACTICE_HINT_LEVELS = ["light", "tool", "hypothesis", "near-solution"] as const;
 
 export type PracticeType = typeof PRACTICE_TYPES[number];
 export type PracticeDifficulty = typeof PRACTICE_DIFFICULTIES[number];
@@ -55,6 +56,14 @@ export type PracticeRole = typeof PRACTICE_ROLES[number];
 export type EvidenceType = typeof EVIDENCE_TYPES[number];
 export type SolutionAvailability = typeof SOLUTION_AVAILABILITY[number];
 export type CoverageState = typeof COVERAGE_STATES[number];
+export type PracticeHintLevel = typeof PRACTICE_HINT_LEVELS[number];
+
+export interface PracticeHint {
+  id: string;
+  level: PracticeHintLevel;
+  title: string;
+  content: string;
+}
 
 export const PRACTICE_TYPE_LABELS: Record<PracticeType, string> = {
   guided: "Guided Lab",
@@ -88,4 +97,11 @@ export const PRACTICE_ROLE_LABELS: Record<PracticeRole, string> = {
   administrator: "Administrator",
   "support-analyst": "Support Analyst",
   "solution-architect": "Solution Architect",
+};
+
+export const PRACTICE_HINT_LEVEL_LABELS: Record<PracticeHintLevel, string> = {
+  light: "Orientación ligera",
+  tool: "Área o herramienta",
+  hypothesis: "Hipótesis concreta",
+  "near-solution": "Cerca de la resolución",
 };

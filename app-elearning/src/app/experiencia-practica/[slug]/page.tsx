@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ChevronLeft, Clock, ShieldCheck, Wrench } from "lucide-react";
 import { getAllPractices, getPracticeBySlug, PRACTICE_DIFFICULTY_LABELS, PRACTICE_DOMAIN_LABELS, PRACTICE_ROLE_LABELS, PRACTICE_TYPE_LABELS } from "@/lib/practices";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
+import { PracticeWorkspaceClient } from "@/components/practices/practice-workspace-client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -30,6 +31,7 @@ export default async function PracticeDetailPage({ params }: Props) {
   const { slug } = await params;
   const practice = getPracticeBySlug(slug);
   if (!practice) notFound();
+  const { bodyContent, solutionContent } = splitSolution(practice.rawContent);
 
   return (
     <div className="mx-auto max-w-4xl space-y-6 animate-fade-in">
@@ -94,20 +96,19 @@ export default async function PracticeDetailPage({ params }: Props) {
       </section>
 
       <section className="rounded-xl border border-border bg-card px-6 py-8 shadow-fluent-1">
-        <MarkdownRenderer content={practice.rawContent} />
+        <MarkdownRenderer content={bodyContent} />
       </section>
 
-      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="rubric-heading">
-        <h2 id="rubric-heading" className="mb-3 text-base font-semibold text-foreground">Rúbrica</h2>
-        <div className="grid gap-2 sm:grid-cols-2">
-          {practice.rubric.map((item) => (
-            <div key={item.criterion} className="flex items-center justify-between gap-3 rounded-lg border border-border bg-muted/20 px-3 py-2 text-sm">
-              <span>{item.criterion}</span>
-              <Badge variant="secondary">{item.weight}%</Badge>
-            </div>
-          ))}
-        </div>
-      </section>
+      <PracticeWorkspaceClient
+        practice={{
+          id: practice.id,
+          title: practice.title,
+          hints: practice.hints,
+          evidence: practice.evidence,
+          rubric: practice.rubric,
+          solutionMarkdown: solutionContent,
+        }}
+      />
 
       <Separator />
       <Button asChild variant="ghost" size="sm" className="px-0 text-muted-foreground hover:text-foreground">
@@ -130,4 +131,14 @@ function Info({ icon: Icon, title, text }: { icon: typeof Clock; title: string; 
       <p className="text-sm font-semibold text-foreground">{text}</p>
     </div>
   );
+}
+
+function splitSolution(content: string): { bodyContent: string; solutionContent: string } {
+  const marker = /^## Solución de referencia\s*$/im;
+  const match = marker.exec(content);
+  if (!match) return { bodyContent: content, solutionContent: "## Solución de referencia\n\nSolución no disponible." };
+  return {
+    bodyContent: content.slice(0, match.index).trim(),
+    solutionContent: content.slice(match.index).trim(),
+  };
 }

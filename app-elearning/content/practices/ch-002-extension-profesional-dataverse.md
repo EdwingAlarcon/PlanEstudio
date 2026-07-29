@@ -22,6 +22,23 @@ evidence:
   sensitiveDataWarning: "No guardes secretos, connection strings ni tokens en código o capturas."
 solutionAvailability: after-attempt
 coverageState: partial
+hints:
+  - id: hint-1
+    level: light
+    title: "Aclara el contrato"
+    content: "Define entradas, salidas, errores esperados y límites antes de escribir código o configurar una API."
+  - id: hint-2
+    level: tool
+    title: "Revisa extensibilidad Dataverse"
+    content: "Evalúa Custom API, plugin, registro de pasos, seguridad y empaquetado en solución."
+  - id: hint-3
+    level: hypothesis
+    title: "Evita acoplar a datos frágiles"
+    content: "Una extensión profesional valida parámetros, maneja errores y no depende de IDs o usuarios reales."
+  - id: hint-4
+    level: near-solution
+    title: "Entrega como componente mantenible"
+    content: "Incluye código, pruebas, solution export, trazas y documentación para soporte y despliegue."
 rubric:
   - criterion: "Cumplimiento funcional"
     weight: 20

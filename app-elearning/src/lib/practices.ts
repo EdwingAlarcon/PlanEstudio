@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { getAllLabs, getAllModules, ContentValidationError } from "./content";
+import { getAllLabs, getAllModules, ContentValidationError, type SearchDocument } from "./content";
+import { PRACTICE_HINT_LEVELS, type PracticeHint, type PracticeHintLevel } from "./practice-meta";
 
 export const PRACTICE_TYPES = ["guided", "semi-guided", "challenge", "incident", "simulation"] as const;
 export const PRACTICE_DIFFICULTIES = ["foundation", "practitioner", "advanced", "expert"] as const;
@@ -96,6 +97,7 @@ export interface PracticeInfo {
   environment: PracticeEnvironment;
   skills: string[];
   evidence: PracticeEvidence;
+  hints: PracticeHint[];
   solutionAvailability: SolutionAvailability;
   rubric: PracticeRubricItem[];
   coverageState: CoverageState;
@@ -221,6 +223,28 @@ function parseRubric(value: unknown, filePath: string): PracticeRubricItem[] {
   return rubric;
 }
 
+function parseHints(value: unknown, filePath: string): PracticeHint[] {
+  if (!Array.isArray(value) || value.length === 0) {
+    failPractice(filePath, "frontmatter 'hints' debe contener pistas escalonadas");
+  }
+  const seen = new Set<string>();
+  return value.map((item, index) => {
+    if (!item || typeof item !== "object") failPractice(filePath, "cada pista debe ser objeto");
+    const record = item as Record<string, unknown>;
+    const id = String(record["id"] ?? "").trim();
+    const expectedId = `hint-${index + 1}`;
+    const title = String(record["title"] ?? "").trim();
+    const content = String(record["content"] ?? "").trim();
+    const level = String(record["level"] ?? "").trim() as PracticeHintLevel;
+    if (!id || id !== expectedId) failPractice(filePath, `pista ${index + 1} debe usar id '${expectedId}'`);
+    if (seen.has(id)) failPractice(filePath, `id de pista duplicado '${id}'`);
+    if (!PRACTICE_HINT_LEVELS.includes(level)) failPractice(filePath, `nivel de pista inválido '${level}'`);
+    if (!title || !content) failPractice(filePath, "cada pista requiere title y content no vacíos");
+    seen.add(id);
+    return { id, level, title, content };
+  });
+}
+
 function validatePracticeFrontmatter(data: Record<string, unknown>, filePath: string, slug: string): Omit<PracticeInfo, "rawContent"> {
   const id = requireString(data, "id", filePath);
   const title = requireString(data, "title", filePath);
@@ -272,6 +296,7 @@ function validatePracticeFrontmatter(data: Record<string, unknown>, filePath: st
     environment: { tenantRequired, codeRequired, tools },
     skills,
     evidence: { required, optional, format, qualityCriteria, sensitiveDataWarning },
+    hints: parseHints(data["hints"], filePath),
     solutionAvailability,
     rubric: parseRubric(data["rubric"], filePath),
     coverageState,
@@ -313,6 +338,9 @@ function validatePracticeRelations(practices: PracticeInfo[]): void {
     if (!/criterios de aceptación/i.test(practice.rawContent)) {
       failPractice(practice.slug, "debe incluir criterios de aceptación");
     }
+    if (practice.hints.length < 4) {
+      failPractice(practice.slug, "debe incluir al menos 4 pistas escalonadas");
+    }
   }
 }
 
@@ -350,6 +378,37 @@ export function getPracticeCounts() {
     challenges: practices.filter((practice) => practice.practiceType === "challenge").length,
     simulations: practices.filter((practice) => practice.practiceType === "simulation").length,
   };
+}
+
+export function getPracticeSearchDocuments(): SearchDocument[] {
+  return getAllPractices().map((practice) => ({
+    id: `practice-${practice.id}`,
+    title: `${practice.id} · ${practice.title}`,
+    levelId: "",
+    moduleId: 0,
+    slug: practice.slug,
+    type: practice.practiceType,
+    href: `/experiencia-practica/${practice.slug}`,
+    practiceId: practice.id,
+    practiceType: practice.practiceType,
+    practiceDomain: practice.domain,
+    practiceDifficulty: practice.difficulty,
+    practiceRoles: practice.roles,
+    content: [
+      practice.id,
+      practice.slug,
+      practice.title,
+      practice.practiceType,
+      practice.domain,
+      practice.difficulty,
+      practice.roles.join(" "),
+      practice.skills.join(" "),
+      practice.environment.tools.join(" "),
+      practice.evidence.required.join(" "),
+      practice.hints.map((hint) => `${hint.title} ${hint.content}`).join(" "),
+      practice.rawContent.replace(/^#{1,6}\s+/gm, ""),
+    ].join("\n").slice(0, 4000),
+  }));
 }
 
 export function getPracticeCompetencyMatrix(): PracticeCompetency[] {

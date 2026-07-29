@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { getAllLabs, getAllLevels } from "@/lib/content";
 import { getAllQuestions } from "@/lib/questions-parser";
+import { getAllPractices } from "@/lib/practices";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProgressRingClient } from "@/components/modules/progress-ring-client";
-import { ArrowRight, BookOpen, Trophy, FlaskConical, Route, Zap, HelpCircle, Layers3, Briefcase, Building2, Workflow } from "lucide-react";
+import { ArrowRight, BookOpen, Trophy, FlaskConical, Route, Zap, HelpCircle, Layers3, Briefcase, Building2, Workflow, Activity } from "lucide-react";
 import { UI, LEVEL_ORDER, type LevelId } from "@/lib/i18n";
+import { PracticeProgressSummary } from "@/components/practices/practice-progress-summary";
 
 // Level display config
 const LEVEL_CONFIG: Record<LevelId, {
@@ -28,6 +30,9 @@ export default async function DashboardPage() {
   const moduleCount = levels.reduce((total, level) => total + level.modules.length, 0);
   const labCount = getAllLabs().length;
   const questionCount = getAllQuestions().length;
+  const practices = getAllPractices().map(({ id, slug, title, practiceType, domain, roles, difficulty, prerequisites }) => ({
+    id, slug, title, practiceType, domain, roles, difficulty, prerequisites,
+  }));
 
   return (
     <div className="max-w-5xl mx-auto space-y-10 animate-fade-in">
@@ -151,6 +156,8 @@ export default async function DashboardPage() {
       {/* ── Overall progress ──────────────────────────────────────────────── */}
       <OverallProgressBanner />
 
+      <PracticeProgressSummary practices={practices} />
+
       {/* ── Level cards ───────────────────────────────────────────────────── */}
       <section aria-labelledby="levels-heading">
         <div className="flex items-center justify-between mb-5">
@@ -247,6 +254,13 @@ export default async function DashboardPage() {
             title="Laboratorios"
             description={`${labCount} guías prácticas con escenario SIT`}
             accent="#107C10"
+          />
+          <QuickActionCard
+            href="/experiencia-practica"
+            icon={<Activity className="h-5 w-5 text-[#D13438]" />}
+            title="Experiencia práctica"
+            description="Incidentes, challenges y simulación"
+            accent="#D13438"
           />
           <QuickActionCard
             href="/recursos/checklist"

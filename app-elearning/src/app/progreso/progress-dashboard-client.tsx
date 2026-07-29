@@ -10,6 +10,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { UI, type LevelId } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { PracticeDomainProgress, PracticeProgressSummary, type PracticeSummaryItem } from "@/components/practices/practice-progress-summary";
 
 export interface LevelReadinessData {
   levelId: LevelId;
@@ -43,7 +44,7 @@ const STATUS_CONFIG: Record<ReadinessStatus, { label: string; className: string 
   },
 };
 
-export function ProgressDashboardClient({ levels }: { levels: LevelReadinessData[] }) {
+export function ProgressDashboardClient({ levels, practices }: { levels: LevelReadinessData[]; practices: PracticeSummaryItem[] }) {
   const completedModules = useProgressStore((s) => s.completedModules);
   const quizScores = useProgressStore((s) => s.quizScores);
   const completedLabs = useProgressStore((s) => s.completedLabs);
@@ -61,7 +62,11 @@ export function ProgressDashboardClient({ levels }: { levels: LevelReadinessData
         </p>
       </div>
 
-      <div className="space-y-4">
+      <section className="space-y-4" aria-labelledby="academic-progress-heading">
+        <div>
+          <h2 id="academic-progress-heading" className="text-lg font-semibold text-foreground">Progreso académico</h2>
+          <p className="text-xs text-muted-foreground">Módulos, quizzes y laboratorios mantienen su cálculo original.</p>
+        </div>
         {levels.map(({ levelId, labs }) => {
           const moduleProgress = calculateLevelProgress(levelId, completedModules);
           const quizReadiness = calculateLevelQuizReadiness(levelId, quizScores);
@@ -146,7 +151,10 @@ export function ProgressDashboardClient({ levels }: { levels: LevelReadinessData
             </section>
           );
         })}
-      </div>
+      </section>
+
+      <PracticeProgressSummary practices={practices} showReset />
+      <PracticeDomainProgress practices={practices} />
 
       <Link
         href="/portafolio"

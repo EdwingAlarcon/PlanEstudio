@@ -4,6 +4,7 @@ import { Activity, ClipboardCheck, FileWarning, GraduationCap } from "lucide-rea
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { PracticesClient } from "@/components/practices/practices-client";
+import { PracticeProgressSummary } from "@/components/practices/practice-progress-summary";
 import { getAllLabs, getAllModules } from "@/lib/content";
 import { getAllPractices, getPracticeCompetencyMatrix, getPracticeCounts } from "@/lib/practices";
 
@@ -16,6 +17,9 @@ export default function PracticalExperiencePage() {
   const practices = getAllPractices();
   const counts = getPracticeCounts();
   const matrix = getPracticeCompetencyMatrix();
+  const practiceSummary = practices.map(({ id, slug, title, practiceType, domain, roles, difficulty, prerequisites }) => ({
+    id, slug, title, practiceType, domain, roles, difficulty, prerequisites,
+  }));
 
   return (
     <div className="mx-auto max-w-5xl space-y-8 px-4 py-8 animate-fade-in">
@@ -47,6 +51,8 @@ export default function PracticalExperiencePage() {
         <Metric icon={ClipboardCheck} label="Labs existentes" value={getAllLabs().length} />
         <Metric icon={FileWarning} label="Prácticas piloto" value={practices.length} />
       </section>
+
+      <PracticeProgressSummary practices={practiceSummary} />
 
       <PracticesClient practices={practices} />
 

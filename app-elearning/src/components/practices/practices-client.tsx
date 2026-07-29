@@ -15,6 +15,7 @@ import {
   type PracticeRole,
   type PracticeType,
 } from "@/lib/practice-meta";
+import { getPracticeStatusLabel, usePracticeProgressStore, type PracticeStatus } from "@/lib/practice-progress";
 
 export interface PracticeCard {
   id: string;
@@ -37,6 +38,7 @@ export interface PracticeCard {
 
 const TYPE_ORDER: PracticeType[] = ["incident", "challenge", "simulation", "semi-guided", "guided"];
 const DIFFICULTY_ORDER: PracticeDifficulty[] = ["foundation", "practitioner", "advanced", "expert"];
+const STATUS_ORDER: PracticeStatus[] = ["not_started", "in_progress", "attempted", "reviewed", "completed", "needs_reinforcement"];
 
 function toggle<T>(set: Set<T>, value: T): Set<T> {
   const next = new Set(set);
@@ -92,10 +94,12 @@ function FilterChips<T extends string>({
 }
 
 export function PracticesClient({ practices }: { practices: PracticeCard[] }) {
+  const records = usePracticeProgressStore((s) => s.records);
   const [types, setTypes] = useState<Set<PracticeType>>(new Set());
   const [domains, setDomains] = useState<Set<PracticeDomain>>(new Set());
   const [roles, setRoles] = useState<Set<PracticeRole>>(new Set());
   const [difficulties, setDifficulties] = useState<Set<PracticeDifficulty>>(new Set());
+  const [statuses, setStatuses] = useState<Set<PracticeStatus>>(new Set());
 
   const domainOptions = useMemo(
     () => [...new Set(practices.map((practice) => practice.domain))].sort(),
@@ -113,16 +117,18 @@ export function PracticesClient({ practices }: { practices: PracticeCard[] }) {
       intersects(types, [practice.practiceType]) &&
       intersects(domains, [practice.domain]) &&
       intersects(roles, practice.roles) &&
-      intersects(difficulties, [practice.difficulty])
+      intersects(difficulties, [practice.difficulty]) &&
+      intersects(statuses, [records[practice.id]?.status ?? "not_started"])
   );
 
-  const hasFilters = types.size > 0 || domains.size > 0 || roles.size > 0 || difficulties.size > 0;
+  const hasFilters = types.size > 0 || domains.size > 0 || roles.size > 0 || difficulties.size > 0 || statuses.size > 0;
 
   function clearFilters() {
     setTypes(new Set());
     setDomains(new Set());
     setRoles(new Set());
     setDifficulties(new Set());
+    setStatuses(new Set());
   }
 
   return (
@@ -157,6 +163,13 @@ export function PracticesClient({ practices }: { practices: PracticeCard[] }) {
           <FilterChips label="Dominio" options={domainOptions} selected={domains} onToggle={(value) => setDomains((set) => toggle(set, value))} labels={PRACTICE_DOMAIN_LABELS} />
           <FilterChips label="Rol" options={roleOptions} selected={roles} onToggle={(value) => setRoles((set) => toggle(set, value))} labels={PRACTICE_ROLE_LABELS} />
           <FilterChips label="Dificultad" options={difficultyOptions} selected={difficulties} onToggle={(value) => setDifficulties((set) => toggle(set, value))} labels={PRACTICE_DIFFICULTY_LABELS} />
+          <FilterChips
+            label="Estado"
+            options={STATUS_ORDER}
+            selected={statuses}
+            onToggle={(value) => setStatuses((set) => toggle(set, value))}
+            labels={Object.fromEntries(STATUS_ORDER.map((status) => [status, getPracticeStatusLabel(status)])) as Record<PracticeStatus, string>}
+          />
         </div>
       </section>
 
@@ -170,6 +183,9 @@ export function PracticesClient({ practices }: { practices: PracticeCard[] }) {
                 </Badge>
                 <Badge variant="outline">{PRACTICE_TYPE_LABELS[practice.practiceType]}</Badge>
                 <Badge variant="outline">{PRACTICE_DIFFICULTY_LABELS[practice.difficulty]}</Badge>
+                <Badge variant={records[practice.id]?.status === "completed" ? "default" : records[practice.id]?.status === "needs_reinforcement" ? "destructive" : "outline"}>
+                  {getPracticeStatusLabel(records[practice.id]?.status ?? "not_started")}
+                </Badge>
               </div>
               <h3 className="text-sm font-semibold leading-snug text-foreground transition-colors group-hover:text-[#0078D4] dark:group-hover:text-[#4DB8FF]">
                 {practice.title}

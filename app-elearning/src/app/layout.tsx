@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/layout/theme-provider";
 import { AppShell } from "@/components/layout/app-shell";
 import { ReadingProgress } from "@/components/layout/reading-progress";
 import { getSearchDocuments } from "@/lib/content";
+import { getPracticeSearchDocuments } from "@/lib/practices";
 
 export const metadata: Metadata = {
   title: {
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const searchDocuments = getSearchDocuments();
+  const searchDocuments = [...getSearchDocuments(), ...getPracticeSearchDocuments()];
 
   return (
     <html lang="es" suppressHydrationWarning>

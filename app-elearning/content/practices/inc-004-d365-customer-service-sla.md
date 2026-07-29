@@ -22,6 +22,23 @@ evidence:
   sensitiveDataWarning: "No uses datos reales de clientes; anonimiza asunto, contacto y cuenta."
 solutionAvailability: after-attempt
 coverageState: partial
+hints:
+  - id: hint-1
+    level: light
+    title: "Define el evento de SLA"
+    content: "Aclara cuándo debe iniciar, pausar y fallar el SLA antes de cambiar reglas."
+  - id: hint-2
+    level: tool
+    title: "Revisa calendario y KPIs"
+    content: "Contrasta calendario de servicio, SLA Items, KPI Instances y condiciones de pausa."
+  - id: hint-3
+    level: hypothesis
+    title: "La pausa puede no aplicar"
+    content: "Si el estado del caso no coincide con la condición de pausa, el temporizador seguirá corriendo."
+  - id: hint-4
+    level: near-solution
+    title: "Valida con caso controlado"
+    content: "Ajusta condiciones de pausa/fallo y prueba un caso nuevo con calendario conocido y evidencia de KPI."
 rubric:
   - criterion: "Reproducción y delimitación"
     weight: 10

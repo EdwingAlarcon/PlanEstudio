@@ -2,13 +2,15 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { Search, FileText, FlaskConical } from "lucide-react";
+import { Search, FileText, FlaskConical, Activity, BookOpen } from "lucide-react";
 import FlexSearch from "flexsearch";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { UI } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import type { SearchDocument, SearchDocumentType } from "@/lib/content";
+import { PRACTICE_DIFFICULTY_LABELS, PRACTICE_DOMAIN_LABELS, PRACTICE_ROLE_LABELS, PRACTICE_TYPE_LABELS, type PracticeDifficulty, type PracticeDomain, type PracticeRole, type PracticeType } from "@/lib/practice-meta";
+import { getPracticeStatusLabel, usePracticeProgressStore } from "@/lib/practice-progress";
 
 interface SearchBarProps {
   documents: SearchDocument[];
@@ -23,6 +25,11 @@ interface SearchHit {
   href: string;
   type: SearchDocumentType;
   snippet: string;
+  practiceId?: string;
+  practiceType?: PracticeType;
+  practiceDomain?: PracticeDomain;
+  practiceDifficulty?: PracticeDifficulty;
+  practiceRoles?: PracticeRole[];
 }
 
 const LEVEL_LABELS: Record<string, string> = {
@@ -38,11 +45,19 @@ const LEVEL_LABELS: Record<string, string> = {
 const TYPE_CONFIG: Record<SearchDocumentType, { label: string; color: string }> = {
   module: { label: "Módulo", color: "bg-[#EFF6FC] text-[#0078D4] dark:bg-[rgba(33,150,243,0.15)] dark:text-[#4DB8FF]" },
   lab:    { label: "Lab",    color: "bg-[#EFF8EE] text-[#107C10] dark:bg-[rgba(16,124,16,0.15)] dark:text-[#2DB52D]" },
+  resource: { label: "Recurso", color: "bg-[#FFF4CE] text-[#8A6A00] dark:bg-yellow-500/10 dark:text-yellow-300" },
+  incident: { label: "Incidente", color: "bg-red-50 text-[#D13438] dark:bg-red-500/10 dark:text-red-300" },
+  challenge: { label: "Challenge", color: "bg-orange-50 text-[#EA580C] dark:bg-orange-500/10 dark:text-orange-300" },
+  simulation: { label: "Simulación", color: "bg-[#F3F2F1] text-[#5C2D91] dark:bg-purple-500/10 dark:text-purple-300" },
+  guided: { label: "Práctica guiada", color: "bg-[#EFF6FC] text-[#0078D4] dark:bg-[rgba(33,150,243,0.15)] dark:text-[#4DB8FF]" },
+  "semi-guided": { label: "Semi guiada", color: "bg-[#EFF6FC] text-[#0078D4] dark:bg-[rgba(33,150,243,0.15)] dark:text-[#4DB8FF]" },
 };
 
 export function SearchBar({ documents }: SearchBarProps) {
   const moduleCount = documents.filter((doc) => doc.type === "module").length;
   const labCount = documents.filter((doc) => doc.type === "lab").length;
+  const practiceCount = documents.filter((doc) => !["module", "lab", "resource"].includes(doc.type)).length;
+  const practiceRecords = usePracticeProgressStore((s) => s.records);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchHit[]>([]);
@@ -96,6 +111,11 @@ export function SearchBar({ documents }: SearchBarProps) {
           href: doc.href,
           type: doc.type,
           snippet,
+          practiceId: doc.practiceId,
+          practiceType: doc.practiceType as PracticeType | undefined,
+          practiceDomain: doc.practiceDomain as PracticeDomain | undefined,
+          practiceDifficulty: doc.practiceDifficulty as PracticeDifficulty | undefined,
+          practiceRoles: doc.practiceRoles as PracticeRole[] | undefined,
         });
       }
     }
@@ -212,7 +232,9 @@ export function SearchBar({ documents }: SearchBarProps) {
 
           {results.map((hit, i) => {
             const typeCfg = TYPE_CONFIG[hit.type] ?? TYPE_CONFIG.module;
-            const Icon = hit.type === "lab" ? FlaskConical : FileText;
+            const isPractice = !["module", "lab", "resource"].includes(hit.type);
+            const Icon = hit.type === "lab" ? FlaskConical : hit.type === "resource" ? BookOpen : isPractice ? Activity : FileText;
+            const status = hit.practiceId ? getPracticeStatusLabel(practiceRecords[hit.practiceId]?.status ?? "not_started") : null;
             return (
               <button
                 key={hit.id}
@@ -238,7 +260,18 @@ export function SearchBar({ documents }: SearchBarProps) {
                         {LEVEL_LABELS[hit.levelId] ?? hit.levelId}
                       </span>
                     )}
+                    {status && (
+                      <span className="shrink-0 rounded bg-muted px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
+                        {status}
+                      </span>
+                    )}
                   </div>
+                  {isPractice && hit.practiceType && (
+                    <p className="mb-1 text-[11px] text-muted-foreground">
+                      {PRACTICE_TYPE_LABELS[hit.practiceType]} · {hit.practiceDifficulty ? PRACTICE_DIFFICULTY_LABELS[hit.practiceDifficulty] : ""} · {hit.practiceDomain ? PRACTICE_DOMAIN_LABELS[hit.practiceDomain] : ""}
+                      {hit.practiceRoles?.length ? ` · ${hit.practiceRoles.map((role) => PRACTICE_ROLE_LABELS[role]).slice(0, 2).join(", ")}` : ""}
+                    </p>
+                  )}
                   {hit.snippet && (
                     <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
                       {hit.snippet}
@@ -251,7 +284,7 @@ export function SearchBar({ documents }: SearchBarProps) {
 
           {!query && (
             <div className="px-4 py-8 text-center text-sm text-muted-foreground">
-              Escribe para buscar en {moduleCount} módulos y {labCount} laboratorios
+              Escribe para buscar en {moduleCount} módulos, {labCount} laboratorios y {practiceCount} prácticas
             </div>
           )}
         </div>

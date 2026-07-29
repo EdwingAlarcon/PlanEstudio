@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { LEVEL_ORDER } from "@/lib/i18n";
 import { getLevelById, getLabsForLevel } from "@/lib/content";
+import { getAllPractices } from "@/lib/practices";
 import { ProgressDashboardClient, type LevelReadinessData } from "./progress-dashboard-client";
 
 export const metadata: Metadata = {
@@ -20,6 +21,9 @@ export default function ProgressDashboardPage() {
 
     return { levelId, modules, labs };
   });
+  const practices = getAllPractices().map(({ id, slug, title, practiceType, domain, roles, difficulty, prerequisites }) => ({
+    id, slug, title, practiceType, domain, roles, difficulty, prerequisites,
+  }));
 
-  return <ProgressDashboardClient levels={levels} />;
+  return <ProgressDashboardClient levels={levels} practices={practices} />;
 }

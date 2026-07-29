@@ -149,7 +149,80 @@ test.describe("Smoke — rutas principales", () => {
     await expect(page.locator("h1")).toContainText("Seguridad Dataverse");
     await expect(page.getByText("Evidencia profesional requerida")).toBeVisible();
     await expect(page.getByRole("heading", { name: "Solución de referencia" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Sí, ya intenté" })).toBeVisible();
+    await expect(page.getByText(/Las soluciones forman parte de un sitio estático/i)).toBeVisible();
+    await expect(page.getByText(/Corrige el nivel de Write/i)).toHaveCount(0);
+  });
+
+  test("flujo práctico persiste sin alterar progreso académico y permite reset separado", async ({ page }) => {
+    await page.goto("/");
+    await page.evaluate(() => {
+      window.localStorage.clear();
+      window.localStorage.setItem("plan-estudio-progress", JSON.stringify({
+        state: {
+          completedModules: ["basico-1"],
+          quizScores: {},
+          completedLabs: [],
+          checklistItems: {},
+          lastVisited: null,
+          userName: null,
+        },
+        version: 0,
+      }));
+    });
+
+    await page.goto("/");
+    await expect(page.getByRole("heading", { name: "Experiencia práctica" }).first()).toBeVisible();
+    await expect(page.getByText("Iniciadas").first()).toBeVisible();
+
+    await page.keyboard.press("Control+k");
+    const input = page.locator('input[aria-label="Buscar en el contenido"]');
+    await input.waitFor({ state: "visible" });
+    await input.fill("INC-001 seguridad");
+    await expect(page.getByRole("option").filter({ hasText: "Incidente" }).first()).toBeVisible();
+    await page.getByRole("option").first().click();
+    await expect(page).toHaveURL(/\/experiencia-practica\/inc-001-seguridad/);
+
+    await page.getByRole("button", { name: "Iniciar práctica", exact: true }).click();
+    await expect(page.getByText("En progreso").first()).toBeVisible();
+    page.once("dialog", (dialog) => dialog.accept());
+    await page.getByRole("button", { name: "Registrar intento" }).click();
+    await expect(page.getByText("Intentos: 1")).toBeVisible();
+
+    page.once("dialog", (dialog) => dialog.accept());
+    await page.getByRole("button", { name: "Revelar pista" }).first().click();
+    await expect(page.getByText(/Empieza por el alcance del registro/i)).toBeVisible();
+    await page.getByRole("button", { name: "Abrir de todos modos" }).click();
     await expect(page.getByText(/mínimo privilegio/i).first()).toBeVisible();
+    await expect(page.evaluate(() => {
+      const stored = window.localStorage.getItem("planestudio.practice-progress.v1");
+      return stored ? JSON.parse(stored).state.records["INC-001"].status : null;
+    })).resolves.not.toBe("completed");
+
+    const evidence = page.locator('section[aria-labelledby="evidence-checklist-heading"] input[type="checkbox"]');
+    const evidenceCount = await evidence.count();
+    for (let i = 0; i < evidenceCount; i += 1) await evidence.nth(i).check();
+    const selects = page.locator('select[id^="criterion-"]');
+    const selectCount = await selects.count();
+    for (let i = 0; i < selectCount; i += 1) await selects.nth(i).selectOption("solid");
+    await page.getByRole("button", { name: "Guardar autoevaluación" }).click();
+    await page.getByRole("button", { name: "Marcar completada" }).click();
+    await expect(page.getByText("Completada").first()).toBeVisible();
+
+    await page.reload();
+    await expect(page.getByText("Completada").first()).toBeVisible();
+    await expect(page.getByText("Intentos: 1")).toBeVisible();
+
+    await page.goto("/progreso");
+    await expect(page.getByRole("heading", { name: "Progreso académico" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Experiencia práctica" }).first()).toBeVisible();
+    await expect(page.getByText("Completadas").first()).toBeVisible();
+    const academic = await page.evaluate(() => window.localStorage.getItem("plan-estudio-progress"));
+    expect(academic).toContain("basico-1");
+
+    page.once("dialog", (dialog) => dialog.accept());
+    await page.getByRole("button", { name: "Reiniciar prácticas" }).click();
+    await expect(page.evaluate(() => window.localStorage.getItem("plan-estudio-progress"))).resolves.toContain("basico-1");
   });
 
   test("detalle de challenge y simulación cargan como prácticas autónomas", async ({ page }) => {
@@ -161,7 +234,7 @@ test.describe("Smoke — rutas principales", () => {
     await page.goto("/experiencia-practica/sim-001-primeros-cinco-dias-proyecto");
     await expect(page.locator("h1")).toContainText("Primeros cinco días");
     await expect(page.getByRole("heading", { name: /Día 5/i })).toBeVisible();
-    await expect(page.locator("#rubric-heading")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Autoevaluación por rúbrica" })).toBeVisible();
   });
 
   test("recurso lenguajes-programacion carga", async ({ page }) => {
@@ -217,6 +290,8 @@ test.describe("Smoke — rutas principales", () => {
     await expect(page.locator('[role="option"]').first()).toBeVisible();
     // Al menos un resultado con badge Módulo o Lab
     await expect(page.locator("text=Módulo").or(page.locator("text=Lab")).first()).toBeVisible();
+    await input.fill("Primeros cinco días");
+    await expect(page.getByRole("option").filter({ hasText: "Simulación" }).first()).toBeVisible();
   });
 
   test("skip-to-content es accesible por teclado", async ({ page }) => {

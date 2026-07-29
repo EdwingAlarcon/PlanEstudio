@@ -4,6 +4,7 @@ import {
   getPracticeBySlug,
   getPracticeCompetencyMatrix,
   getPracticeCounts,
+  getPracticeSearchDocuments,
   PRACTICE_DIFFICULTIES,
   PRACTICE_DOMAINS,
   PRACTICE_ROLES,
@@ -48,6 +49,19 @@ describe("professional practices content", () => {
       const total = practice.rubric.reduce((sum, item) => sum + item.weight, 0);
       expect(total).toBe(100);
     }
+  });
+
+  it("validates staged hints and indexes practices for global search", () => {
+    for (const practice of getAllPractices()) {
+      expect(practice.hints).toHaveLength(4);
+      expect(practice.hints.map((hint) => hint.id)).toEqual(["hint-1", "hint-2", "hint-3", "hint-4"]);
+      expect(practice.hints.every((hint) => hint.title.length > 0 && hint.content.length > 0)).toBe(true);
+    }
+
+    const searchDocs = getPracticeSearchDocuments();
+    expect(searchDocs).toHaveLength(8);
+    expect(searchDocs.find((doc) => doc.practiceId === "INC-001")?.content).toMatch(/security-roles|Dataverse/i);
+    expect(searchDocs.map((doc) => doc.href)).toContain("/experiencia-practica/inc-001-seguridad-dataverse-oportunidades");
   });
 
   it("incident labs include protected solution material and RCA language", () => {

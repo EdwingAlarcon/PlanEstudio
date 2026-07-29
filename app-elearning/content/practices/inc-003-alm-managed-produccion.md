@@ -22,6 +22,23 @@ evidence:
   sensitiveDataWarning: "No incluyas connection strings ni nombres reales de ambientes productivos."
 solutionAvailability: after-attempt
 coverageState: partial
+hints:
+  - id: hint-1
+    level: light
+    title: "No empieces por producción"
+    content: "Clasifica primero ambiente, tipo de solución, dependencias y evidencia disponible antes de tocar configuración."
+  - id: hint-2
+    level: tool
+    title: "Revisa Solution History"
+    content: "Usa historial de importación, dependencias y layers para entender qué cambió y qué falló."
+  - id: hint-3
+    level: hypothesis
+    title: "Atiende dependencias y variables"
+    content: "Los fallos managed suelen aparecer por componentes faltantes, variables sin valor o orden incorrecto de despliegue."
+  - id: hint-4
+    level: near-solution
+    title: "Planifica rollback verificable"
+    content: "Documenta mitigación inmediata, rollback o forward-fix, y pruebas postdeploy antes de cerrar el incidente."
 rubric:
   - criterion: "Reproducción y delimitación"
     weight: 10

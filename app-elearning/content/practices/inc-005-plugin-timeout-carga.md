@@ -22,6 +22,23 @@ evidence:
   sensitiveDataWarning: "No incluyas IDs reales de organización, endpoints privados ni datos de clientes."
 solutionAvailability: after-attempt
 coverageState: partial
+hints:
+  - id: hint-1
+    level: light
+    title: "Delimita síncrono versus asíncrono"
+    content: "Identifica si el impacto está en la transacción principal o en procesamiento posterior."
+  - id: hint-2
+    level: tool
+    title: "Usa trazas y métricas"
+    content: "Revisa Plugin Trace Log, profundidad, mensajes registrados y volumen de registros procesados."
+  - id: hint-3
+    level: hypothesis
+    title: "Busca trabajo pesado en Pre/Post Operation"
+    content: "Un plugin síncrono que consulta o actualiza demasiados registros puede agotar tiempo y bloquear carga."
+  - id: hint-4
+    level: near-solution
+    title: "Reduce la transacción"
+    content: "Propón filtros, columnas mínimas, procesamiento asíncrono o batching, con prueba de carga controlada."
 rubric:
   - criterion: "Reproducción y delimitación"
     weight: 10

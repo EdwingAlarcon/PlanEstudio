@@ -22,6 +22,23 @@ evidence:
   sensitiveDataWarning: "Usa datos ficticios; no exportes usuarios o conexiones reales."
 solutionAvailability: after-attempt
 coverageState: guided-only
+hints:
+  - id: hint-1
+    level: light
+    title: "Empieza por el proceso"
+    content: "Modela estados, actores y decisiones antes de crear tablas o flujos."
+  - id: hint-2
+    level: tool
+    title: "Usa Dataverse y soluciones"
+    content: "Piensa en tablas, roles, app model-driven, variables de entorno y solución no administrada para desarrollo."
+  - id: hint-3
+    level: hypothesis
+    title: "La seguridad define el diseño"
+    content: "Los roles de solicitante, gestor y aprobador deben guiar visibilidad, permisos y automatizaciones."
+  - id: hint-4
+    level: near-solution
+    title: "Cierra con evidencia operativa"
+    content: "Incluye pruebas, despliegue, rollback y runbook; una demo sin evidencia no satisface el challenge."
 rubric:
   - criterion: "Cumplimiento funcional"
     weight: 20

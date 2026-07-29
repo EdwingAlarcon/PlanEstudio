@@ -555,7 +555,7 @@ export function getLabsForLevel(levelId: LevelId): LabInfo[] {
 
 // ─── Search index ─────────────────────────────────────────────────────────────
 
-export type SearchDocumentType = "module" | "lab";
+export type SearchDocumentType = "module" | "lab" | "resource" | "incident" | "challenge" | "simulation" | "guided" | "semi-guided";
 
 export interface SearchDocument {
   id: string;
@@ -569,6 +569,11 @@ export interface SearchDocument {
   // Used to build href
   href: string;
   content: string;
+  practiceId?: string;
+  practiceType?: SearchDocumentType;
+  practiceDomain?: string;
+  practiceDifficulty?: string;
+  practiceRoles?: string[];
 }
 
 export function getSearchDocuments(): SearchDocument[] {
@@ -593,6 +598,16 @@ export function getSearchDocuments(): SearchDocument[] {
     href: `/labs/${lab.slug}`,
     content: `${lab.displayId} ${formatLabReadableId(lab.id)} ${lab.id} ${lab.slug} ${lab.title}\n${lab.rawContent.replace(/^#{1,6}\s+/gm, "")}`.slice(0, 2000),
   }));
+  const resourceDocs: SearchDocument[] = getAllResourcePages().map((resource) => ({
+    id: `resource-${resource.slug}`,
+    title: resource.title,
+    levelId: "",
+    moduleId: 0,
+    slug: resource.slug,
+    type: "resource" as const,
+    href: `/recursos/${resource.slug}`,
+    content: `${resource.title}\n${resource.rawContent.replace(/^#{1,6}\s+/gm, "")}`.slice(0, 2000),
+  }));
 
-  return [...moduleDocs, ...labDocs];
+  return [...moduleDocs, ...labDocs, ...resourceDocs];
 }

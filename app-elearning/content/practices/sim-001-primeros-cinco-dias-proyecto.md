@@ -22,6 +22,23 @@ evidence:
   sensitiveDataWarning: "Todos los nombres, datos y stakeholders deben ser ficticios."
 solutionAvailability: inline-collapsed
 coverageState: partial
+hints:
+  - id: hint-1
+    level: light
+    title: "Gestiona el tiempo por día"
+    content: "No intentes resolver todo en el Día 1; separa descubrimiento, diseño, entrega, UAT y soporte."
+  - id: hint-2
+    level: tool
+    title: "Usa artefactos de consultoría"
+    content: "Backlog, ADR, matriz de seguridad, plan UAT y runbook deben evolucionar juntos."
+  - id: hint-3
+    level: hypothesis
+    title: "Los cambios de alcance son parte del caso"
+    content: "Cuando aparezcan contradicciones, registra supuestos, impacto y decisión; no los escondas en la solución."
+  - id: hint-4
+    level: near-solution
+    title: "Cierra con defensa"
+    content: "Prepara qué entregarías, qué dejarías fuera, cómo validarías y qué riesgos comunicarías al sponsor."
 rubric:
   - criterion: "Descubrimiento y análisis"
     weight: 15

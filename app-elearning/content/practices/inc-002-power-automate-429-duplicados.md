@@ -22,6 +22,23 @@ evidence:
   sensitiveDataWarning: "No pegues run history con tokens, URLs internas o datos personales."
 solutionAvailability: after-attempt
 coverageState: partial
+hints:
+  - id: hint-1
+    level: light
+    title: "Separa síntomas de causas"
+    content: "No asumas que 429 y duplicados tienen una única causa; analiza concurrencia, reintentos e idempotencia."
+  - id: hint-2
+    level: tool
+    title: "Observa el historial del flujo"
+    content: "Revisa run history, política de retry, concurrencia del trigger y acciones que escriben en Dataverse."
+  - id: hint-3
+    level: hypothesis
+    title: "Busca escrituras repetidas"
+    content: "Un flujo sin clave de idempotencia puede crear registros duplicados cuando un retry repite una operación parcialmente exitosa."
+  - id: hint-4
+    level: near-solution
+    title: "Diseña control de repetición"
+    content: "Propón clave natural, upsert o verificación previa, y ajusta concurrencia/retry con validación de regresión."
 rubric:
   - criterion: "Reproducción y delimitación"
     weight: 10
