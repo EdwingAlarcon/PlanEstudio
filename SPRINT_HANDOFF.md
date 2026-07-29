@@ -4,14 +4,59 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
-## Última actualización (2026-07-28/29)
+## Última actualización (2026-07-29)
+
+Último estado estable desplegado en `master`:
+
+- Commit más reciente de producto: `6e0604ac` — `feat: integrar seguimiento de experiencia practica`.
+- GitHub Actions: run `30419768845`, **success**, con deploy de GitHub Pages confirmado.
+- Producción verificada en `https://edwingalarcon.github.io/PlanEstudio/`.
+- Workspace local limpio y sincronizado con `origin/master`.
 
 Después del Sprint 22 se agregó una capa nueva **Experiencia práctica**:
 `/experiencia-practica`, `app-elearning/content/practices/`, parser/validador `practices.ts`,
 metadata client-safe `practice-meta.ts`, documentación `docs/Recursos/MARCO_PRACTICAS_PROFESIONALES.md`
 y pilotos exactos: **5 Incident Labs, 2 Challenge Labs, 1 Work Simulation**. Los conteos existentes no
 cambian: 65 módulos, 63 labs, 488 preguntas, 603 criterios. Los nuevos elementos se reportan por separado.
-Baseline local posterior: **231 Vitest tests** y **24 Playwright smoke tests**.
+
+El micro-sprint más reciente integró esa capa con la experiencia diaria:
+
+- Progreso práctico independiente en `app-elearning/src/lib/practice-progress.ts`, persistido en
+  `localStorage` con clave `planestudio.practice-progress.v1`.
+- Estados internos: `not_started`, `in_progress`, `attempted`, `reviewed`, `completed`,
+  `needs_reinforcement`; etiquetas visibles en español.
+- No reutiliza ni modifica la clave académica `plan-estudio-progress`.
+- Página de detalle de práctica ahora separa la solución del Markdown principal y la muestra mediante
+  interacción explícita en `PracticeWorkspaceClient`.
+- Pistas escalonadas en metadata YAML de las 8 prácticas (`hint-1` a `hint-4`) y validadas por parser.
+- Notas personales locales, evidencias producidas, intentos confirmados, solución consultada,
+  autoevaluación por rúbrica, fallos críticos, completitud explícita y reset solo práctico.
+- Home, `/experiencia-practica`, `/progreso` y buscador global muestran progreso práctico separado.
+- Buscador global indexa módulos, labs, recursos e incidentes/challenges/simulaciones, con estado práctico
+  local para resultados de prácticas.
+- Recomendación determinística: continuar `in_progress`, retomar `needs_reinforcement`, sugerir por
+  prerrequisitos académicos completados y luego primera práctica disponible.
+
+Baseline posterior al micro-sprint: **238 Vitest tests**, **25 Playwright smoke tests**, build estático
+de **190 páginas**.
+
+Validaciones locales ejecutadas y en verde antes del commit `6e0604ac`:
+
+```powershell
+cd app-elearning
+npm run validate:content
+npm run lint
+npm run typecheck
+npm run test:coverage
+npm run build:pages
+npm run e2e
+cd ..
+mkdocs build --strict
+```
+
+Nota operativa: `npm run build:pages` y `npm run e2e` deben correr en serie en local. En este sprint se
+confirmó de nuevo que correrlos en paralelo puede generar falsos negativos transitorios por carrera sobre
+artefactos `.next`.
 
 ## Pausa de sesión (2026-07-27, retomar 2026-07-28)
 
