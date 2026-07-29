@@ -86,6 +86,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "portafolio-profesional": "Recursos/PORTAFOLIO_PROFESIONAL.md",
   "roadmap-especializacion-avanzada": "Recursos/ROADMAP_ESPECIALIZACION_AVANZADA.md",
   "d365-tenant-readiness": "Recursos/D365_TENANT_READINESS.md",
+  "marco-practicas-profesionales": "Recursos/MARCO_PRACTICAS_PROFESIONALES.md",
 };
 
 const LEVEL_META: Record<LevelId, { title: string; description: string; certification: string }> = {

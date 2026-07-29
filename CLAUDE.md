@@ -8,10 +8,11 @@ Before starting new work, read `SPRINT_HANDOFF.md`. It is the active operational
 
 Current stable state as of the latest pushed `master` commit:
 - Latest pushed/deployed course/design sprint: **Sprint 22 — `/impeccable audit` (17/20 → 20/20 after fixes) + `PRODUCT.md`/`DESIGN.md`/`.impeccable/design.json` (Sprint 21)**.
-- Latest technical maintenance after Sprint 22: unique `#main-content` ownership in `AppShell`, reading-progress e2e coverage, `verify:full` command.
+- Latest product sprint after Sprint 22: **Professional Practice Framework** — nueva capa `Experiencia práctica` con 5 Incident Labs, 2 Challenge Labs y 1 Work Simulation, metadata tipada/validada, matriz de competencias práctica, documentación `MARCO_PRACTICAS_PROFESIONALES.md` y navegación `/experiencia-practica`.
 - GitHub Pages production has been verified at `https://edwingalarcon.github.io/PlanEstudio/`.
-- Fixed content counts: **65 modules, 63 labs, 488 questions, 603 checklist criteria**.
-- Current local/CI test baseline: **225 Vitest tests** and **21 Playwright smoke tests**.
+- Fixed learning content counts: **65 modules, 63 labs, 488 questions, 603 checklist criteria**.
+- Professional practice pilot counts: **5 incidents, 2 challenges, 1 simulation**. Do not merge these into the existing lab count.
+- Current local/CI test baseline: **231 Vitest tests** and **24 Playwright smoke tests**.
 - Post-audit content roadmap (sprints 1-20) is fully closed — no known pending items. Sprints 21-22 added a design-system layer (`DESIGN.md`, "The Fluent Learning Console") and closed real a11y/perf bugs found via `/impeccable audit` (heading hierarchy H2→H4 in Módulos 3-7, dead reading-progress scroll listener, touch target 36px→44px). See `SPRINT_HANDOFF.md` sprints 21-22 for full detail before touching UI/markdown heading levels again.
 - Recent beginner-onboarding work is intentional and should not be removed: "Primeras 2 horas", Mini Lab 01, checklist mínimo para principiantes, Power Fx en español simple, entregable mínimo del Nivel Básico, and the Módulo 9 bridge into Intermedio.
 - User preference for this repo: after completing a change, **commit, push to `master`, and wait for deploy/production verification** unless the user explicitly says not to.
@@ -115,7 +116,7 @@ npm run lint
 npx tsc --noEmit
 npm run validate:content  # Frontmatter, unique moduleId/slug, level ranges, question coverage
 npm run build        # Static export → app-elearning/out/
-npm run e2e          # Playwright smoke tests (21 tests)
+npm run e2e          # Playwright smoke tests (24 tests)
 ```
 
 ### MkDocs (reference/legacy)

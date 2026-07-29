@@ -8,6 +8,7 @@
  * al menos una pregunta.
  */
 import { ContentValidationError, getAllLevels, getAllLabs, getResourceBySlug } from "../src/lib/content";
+import { getPracticeCounts } from "../src/lib/practices";
 import { getAllQuestions } from "../src/lib/questions-parser";
 import { parseChecklistMarkdown, validateChecklistData } from "../src/lib/checklist";
 import { LEVEL_MODULE_RANGE } from "../src/lib/i18n";
@@ -22,6 +23,7 @@ function main(): void {
   }
   const checklist = parseChecklistMarkdown(checklistPage.rawContent);
   validateChecklistData(checklist);
+  const practiceCounts = getPracticeCounts();
 
   const allModuleIds = levels.flatMap((level) => level.modules.map((mod) => mod.moduleId));
   const expectedModuleIds = Object.values(LEVEL_MODULE_RANGE).flatMap(([min, max]) => {
@@ -51,6 +53,7 @@ function main(): void {
   console.log(`✓ ${labs.length} labs válidos (id único, slug único)`);
   console.log(`✓ ${questions.length} preguntas válidas cubriendo los ${expectedModuleIds.length} módulos`);
   console.log(`✓ Checklist válido (${checklist.totalModules} módulos, ${checklist.totalItems} criterios)`);
+  console.log(`✓ Experiencia práctica válida (${practiceCounts.incidents} incidentes, ${practiceCounts.challenges} challenges, ${practiceCounts.simulations} simulaciones)`);
 }
 
 try {

@@ -9,6 +9,7 @@ test.describe("Smoke — rutas principales", () => {
       "/nivel/ia",
       "/nivel/d365",
       "/labs",
+      "/experiencia-practica",
       "/recursos/checklist",
       "/power-platform",
       "/dynamics-365",
@@ -22,6 +23,7 @@ test.describe("Smoke — rutas principales", () => {
       const sidebar = page.getByRole("complementary", { name: "Navegación principal" });
 
       await expect(sidebar.getByRole("link", { name: /Dynamics 365 Especialización\s+D365/ })).toBeVisible();
+      await expect(sidebar.getByRole("link", { name: "Experiencia práctica" })).toBeVisible();
       await expect(sidebar.getByText("0/10")).toBeVisible();
       await expect(sidebar.getByText("PL-900 · PL-200 · PL-400 · Arquitectura · IA · D365")).toBeVisible();
       await expect(sidebar.getByText("Dynamics 365 Avanzado")).toHaveCount(0);
@@ -121,6 +123,45 @@ test.describe("Smoke — rutas principales", () => {
     await expect(page).toHaveURL(/\/labs\/lab-/);
     await expect(page.locator("h1").first()).toBeVisible();
     await expect(page.getByRole("heading", { name: /Objetivo/i }).first()).toBeVisible();
+  });
+
+  test("experiencia práctica lista y filtra el piloto profesional", async ({ page }) => {
+    await page.goto("/experiencia-practica");
+    await expect(page.locator("h1")).toContainText("Experiencia práctica");
+    await expect(page.getByText("5 incidentes")).toBeVisible();
+    await expect(page.getByText("2 challenges")).toBeVisible();
+    await expect(page.getByText("1 simulación")).toBeVisible();
+
+    await page.getByRole("button", { name: "Incident Lab" }).click();
+    await expect(page.getByText("5 de 8")).toBeVisible();
+    await expect(page.getByText("INC-001")).toBeVisible();
+    await expect(page.getByText("CH-001")).toHaveCount(0);
+
+    await page.getByRole("button", { name: "Limpiar filtros" }).click();
+    await page.getByRole("button", { name: "Challenge Lab" }).click();
+    await expect(page.getByText("2 de 8")).toBeVisible();
+    await expect(page.getByText("CH-001")).toBeVisible();
+  });
+
+  test("detalle de incident lab muestra evidencias, método y solución de referencia", async ({ page }) => {
+    await page.goto("/experiencia-practica/inc-001-seguridad-dataverse-oportunidades");
+    await expect(page).toHaveURL(/\/experiencia-practica\/inc-001/);
+    await expect(page.locator("h1")).toContainText("Seguridad Dataverse");
+    await expect(page.getByText("Evidencia profesional requerida")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Solución de referencia" })).toBeVisible();
+    await expect(page.getByText(/mínimo privilegio/i).first()).toBeVisible();
+  });
+
+  test("detalle de challenge y simulación cargan como prácticas autónomas", async ({ page }) => {
+    await page.goto("/experiencia-practica/ch-001-solucion-solicitudes-empresariales");
+    await expect(page.locator("h1")).toContainText("Solución de solicitudes empresariales");
+    await expect(page.getByText("Límites de ayuda")).toBeVisible();
+    await expect(page.getByText("Cumplimiento funcional")).toBeVisible();
+
+    await page.goto("/experiencia-practica/sim-001-primeros-cinco-dias-proyecto");
+    await expect(page.locator("h1")).toContainText("Primeros cinco días");
+    await expect(page.getByRole("heading", { name: /Día 5/i })).toBeVisible();
+    await expect(page.locator("#rubric-heading")).toBeVisible();
   });
 
   test("recurso lenguajes-programacion carga", async ({ page }) => {

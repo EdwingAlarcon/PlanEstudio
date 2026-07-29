@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   BookOpen, CheckSquare, GraduationCap, FileText, Trophy,
-  Home, PlayCircle, FlaskConical, Route, HelpCircle, Briefcase, ClipboardList,
+  Home, PlayCircle, FlaskConical, Route, HelpCircle, Briefcase, ClipboardList, Activity,
   Layers3, Building2, Workflow,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
@@ -42,6 +42,7 @@ const RESOURCE_LINKS = [
   { href: "/recursos/portafolio-profesional", label: UI.nav.portfolioGuide, icon: FileText },
   { href: "/recursos/roadmap-especializacion-avanzada", label: UI.nav.advancedRoadmap, icon: Route },
   { href: "/recursos/d365-tenant-readiness", label: UI.nav.d365TenantReadiness, icon: CheckSquare },
+  { href: "/recursos/marco-practicas-profesionales", label: UI.nav.professionalPracticeFramework, icon: ClipboardList },
 ];
 
 const DOMAIN_LINKS = [
@@ -106,6 +107,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
           <NavLink href="/como-usar" icon={HelpCircle}  label={UI.nav.howToUse} active={pathname === "/como-usar"} />
           <NavLink href="/progreso"  icon={ClipboardList} label={UI.nav.myProgress} active={pathname === "/progreso"} />
           <NavLink href="/rutas"     icon={Route}       label={UI.nav.routes}    active={pathname.startsWith("/rutas")} />
+          <NavLink href="/experiencia-practica" icon={Activity} label={UI.nav.practicalExperience} active={pathname.startsWith("/experiencia-practica")} />
           <NavLink href="/simulador" icon={PlayCircle}  label={UI.nav.simulator} active={pathname === "/simulador"} />
           <NavLink href="/labs"      icon={FlaskConical} label="Laboratorios"    active={pathname.startsWith("/labs")} />
           <NavLink href="/portafolio" icon={Briefcase}   label={UI.nav.portfolio} active={pathname === "/portafolio"} />

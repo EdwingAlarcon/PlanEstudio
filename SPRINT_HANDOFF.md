@@ -4,6 +4,15 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
+## Última actualización (2026-07-28/29)
+
+Después del Sprint 22 se agregó una capa nueva **Experiencia práctica**:
+`/experiencia-practica`, `app-elearning/content/practices/`, parser/validador `practices.ts`,
+metadata client-safe `practice-meta.ts`, documentación `docs/Recursos/MARCO_PRACTICAS_PROFESIONALES.md`
+y pilotos exactos: **5 Incident Labs, 2 Challenge Labs, 1 Work Simulation**. Los conteos existentes no
+cambian: 65 módulos, 63 labs, 488 preguntas, 603 criterios. Los nuevos elementos se reportan por separado.
+Baseline local posterior: **231 Vitest tests** y **24 Playwright smoke tests**.
+
 ## Pausa de sesión (2026-07-27, retomar 2026-07-28)
 
 Sesión cerrada en commit `cda417e5`, `master` al día con `origin/master`, CI/deploy en verde,
