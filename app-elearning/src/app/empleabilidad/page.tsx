@@ -16,7 +16,7 @@ export default function EmployabilityPage() {
   const hub = getEmployabilityHub();
 
   return (
-    <main id="main-content" className="mx-auto max-w-5xl space-y-8 px-4 py-8 animate-fade-in">
+    <div className="mx-auto max-w-5xl space-y-8 px-4 py-8 animate-fade-in">
       <section className="rounded-xl border border-border bg-card px-6 py-6 shadow-fluent-1">
         <div className="flex items-start gap-4">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#0F6CBD]">
@@ -118,6 +118,6 @@ export default function EmployabilityPage() {
           </Button>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

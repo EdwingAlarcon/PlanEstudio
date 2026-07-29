@@ -44,7 +44,7 @@ export default function LabsPage() {
   }));
 
   return (
-    <main id="main-content" className="max-w-4xl mx-auto px-4 py-8 animate-fade-in">
+    <div className="max-w-4xl mx-auto px-4 py-8 animate-fade-in">
       {/* ── Page header ─────────────────────────────────────────────────── */}
       <div className="rounded-2xl border border-border bg-gradient-to-br from-[#EFF6FC] to-white dark:from-[rgba(0,120,212,0.08)] dark:to-background px-6 py-6 mb-8 shadow-fluent-1">
         <div className="flex items-center gap-3 mb-2">
@@ -105,6 +105,6 @@ export default function LabsPage() {
       </section>
 
       <LabsClient labs={labs} />
-    </main>
+    </div>
   );
 }

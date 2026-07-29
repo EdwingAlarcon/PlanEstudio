@@ -62,7 +62,7 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
   const capstoneTitle = capstoneLab?.title ?? capstoneModule?.title;
 
   return (
-    <main id="main-content" className="max-w-5xl mx-auto px-4 py-8 space-y-8 animate-fade-in">
+    <div className="max-w-5xl mx-auto px-4 py-8 space-y-8 animate-fade-in">
       <Button asChild variant="ghost" size="sm" className="px-0 -ml-1 text-muted-foreground hover:text-foreground">
         <Link href="/rutas">
           <ArrowLeft className="h-4 w-4 mr-1" aria-hidden />
@@ -244,6 +244,6 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
           </div>
         </section>
       )}
-    </main>
+    </div>
   );
 }

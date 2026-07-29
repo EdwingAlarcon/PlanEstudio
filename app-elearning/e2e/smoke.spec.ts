@@ -45,8 +45,33 @@ test.describe("Smoke — rutas principales", () => {
   test("detalle de módulo carga contenido", async ({ page }) => {
     await page.goto("/nivel/basico/modulo/introduccion-al-ecosistema-power-platform");
     await expect(page).toHaveURL(/\/nivel\/basico\/modulo\//);
+    await expect(page.locator("#main-content")).toHaveCount(1);
     await expect(page.locator("h1").first()).toBeVisible();
     await expect(page.getByRole("heading", { name: /Objetivo/i }).first()).toBeVisible();
+  });
+
+  test("barra de progreso sigue el scroll del contenedor principal", async ({ page }) => {
+    await page.goto("/nivel/basico/modulo/power-apps-canvas-primeras-aplicaciones");
+    await expect(page.locator("#main-content")).toHaveCount(1);
+
+    const progressBar = page.getByRole("progressbar", { name: "Progreso de lectura" });
+    await expect(progressBar).toBeAttached();
+    await expect(progressBar).toHaveAttribute("aria-valuenow", "0");
+
+    const mainContent = page.locator("#main-content");
+    const mainBox = await mainContent.boundingBox();
+    if (!mainBox) throw new Error("main-content no tiene caja visible");
+
+    await page.mouse.move(mainBox.x + mainBox.width / 2, mainBox.y + mainBox.height / 2);
+    await page.mouse.wheel(0, 1400);
+
+    await expect
+      .poll(async () => mainContent.evaluate((el) => el.scrollTop))
+      .toBeGreaterThan(0);
+
+    await expect
+      .poll(async () => Number(await progressBar.getAttribute("aria-valuenow")))
+      .toBeGreaterThan(0);
   });
 
   test("onboarding principiante mantiene sus bloques de inicio", async ({ page }) => {

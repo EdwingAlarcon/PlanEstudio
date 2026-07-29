@@ -20,7 +20,8 @@
     "test:coverage": "vitest run --coverage",
     "e2e": "playwright test",
     "validate:content": "tsx scripts/validate-content.ts",
-    "verify": "npm run lint && npm run typecheck && npm run validate:content && npm run test:coverage && npm run build:pages"
+    "verify": "npm run lint && npm run typecheck && npm run validate:content && npm run test:coverage && npm run build:pages",
+    "verify:full": "npm run verify && npm run e2e"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.14",

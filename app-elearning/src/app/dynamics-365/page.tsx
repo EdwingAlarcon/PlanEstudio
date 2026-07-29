@@ -14,7 +14,7 @@ export default function Dynamics365HubPage() {
   const hub = getDynamics365Hub();
 
   return (
-    <main id="main-content" className="mx-auto max-w-5xl space-y-8 px-4 py-8 animate-fade-in">
+    <div className="mx-auto max-w-5xl space-y-8 px-4 py-8 animate-fade-in">
       <section className="rounded-xl border border-border bg-card px-6 py-6 shadow-fluent-1">
         <div className="flex items-start gap-4">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg" style={{ background: hub.accent }}>
@@ -108,6 +108,6 @@ export default function Dynamics365HubPage() {
           </Button>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

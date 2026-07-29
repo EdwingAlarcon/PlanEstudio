@@ -6,11 +6,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Before starting new work, read `SPRINT_HANDOFF.md`. It is the active operational memory for the post-audit sprints.
 
-Current stable state as of commit `cda417e5`:
-- Latest pushed/deployed sprint: **Sprint 22 — `/impeccable audit` (17/20 → 20/20 after fixes) + `PRODUCT.md`/`DESIGN.md`/`.impeccable/design.json` (Sprint 21)**.
+Current stable state as of the latest pushed `master` commit:
+- Latest pushed/deployed course/design sprint: **Sprint 22 — `/impeccable audit` (17/20 → 20/20 after fixes) + `PRODUCT.md`/`DESIGN.md`/`.impeccable/design.json` (Sprint 21)**.
+- Latest technical maintenance after Sprint 22: unique `#main-content` ownership in `AppShell`, reading-progress e2e coverage, `verify:full` command.
 - GitHub Pages production has been verified at `https://edwingalarcon.github.io/PlanEstudio/`.
 - Fixed content counts: **65 modules, 63 labs, 488 questions, 603 checklist criteria**.
-- Current local/CI test baseline: **225 Vitest tests** and **20 Playwright smoke tests**.
+- Current local/CI test baseline: **225 Vitest tests** and **21 Playwright smoke tests**.
 - Post-audit content roadmap (sprints 1-20) is fully closed — no known pending items. Sprints 21-22 added a design-system layer (`DESIGN.md`, "The Fluent Learning Console") and closed real a11y/perf bugs found via `/impeccable audit` (heading hierarchy H2→H4 in Módulos 3-7, dead reading-progress scroll listener, touch target 36px→44px). See `SPRINT_HANDOFF.md` sprints 21-22 for full detail before touching UI/markdown heading levels again.
 - Recent beginner-onboarding work is intentional and should not be removed: "Primeras 2 horas", Mini Lab 01, checklist mínimo para principiantes, Power Fx en español simple, entregable mínimo del Nivel Básico, and the Módulo 9 bridge into Intermedio.
 - User preference for this repo: after completing a change, **commit, push to `master`, and wait for deploy/production verification** unless the user explicitly says not to.
@@ -114,7 +115,7 @@ npm run lint
 npx tsc --noEmit
 npm run validate:content  # Frontmatter, unique moduleId/slug, level ranges, question coverage
 npm run build        # Static export → app-elearning/out/
-npm run e2e          # Playwright smoke tests (20 tests)
+npm run e2e          # Playwright smoke tests (21 tests)
 ```
 
 ### MkDocs (reference/legacy)
@@ -178,7 +179,7 @@ Don't change these if editing `docs/Niveles/*.md` for MkDocs.
 
 ## Content: Question Bank
 
-`docs/javascripts/evaluaciones-simulador.js` contains `MODULE_QUESTIONS` — a JS object with keys 1-59, each an array of question objects:
+`docs/javascripts/evaluaciones-simulador.js` contains `MODULE_QUESTIONS` — a JS object with keys 1-65, each an array of question objects:
 
 ```js
 {

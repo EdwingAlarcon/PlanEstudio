@@ -30,7 +30,7 @@ export default function ProfessionalRoutesPage() {
   const routes = getAllProfessionalRoutes();
 
   return (
-    <main id="main-content" className="max-w-5xl mx-auto px-4 py-8 space-y-8 animate-fade-in">
+    <div className="max-w-5xl mx-auto px-4 py-8 space-y-8 animate-fade-in">
       <div className="rounded-2xl border border-border bg-gradient-to-br from-[#EFF6FC] to-white dark:from-[rgba(0,120,212,0.08)] dark:to-background px-6 py-6 shadow-fluent-1">
         <div className="flex items-start gap-4">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0078D4] shadow-fluent-2">
@@ -98,6 +98,6 @@ export default function ProfessionalRoutesPage() {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

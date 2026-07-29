@@ -72,7 +72,7 @@ const FIRST_SESSION = [
 
 export default function HowToUsePage() {
   return (
-    <main id="main-content" className="mx-auto max-w-5xl space-y-8 px-4 py-8 animate-fade-in">
+    <div className="mx-auto max-w-5xl space-y-8 px-4 py-8 animate-fade-in">
       <section className="rounded-2xl border border-border bg-gradient-to-br from-[#EFF6FC] to-white px-6 py-7 shadow-fluent-1 dark:from-[rgba(0,120,212,0.08)] dark:to-background">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#0078D4] shadow-fluent-2">
@@ -171,6 +171,6 @@ export default function HowToUsePage() {
           y el certificado de cada nivel la aplican de forma real, verificando quizzes y labs, no solo módulos marcados como leídos.
         </p>
       </section>
-    </main>
+    </div>
   );
 }

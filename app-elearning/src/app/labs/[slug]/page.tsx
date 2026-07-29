@@ -58,7 +58,7 @@ export default async function LabDetailPage({ params }: Props) {
   const meta = getLabPresentationMeta(lab);
 
   return (
-    <main id="main-content" className="max-w-4xl mx-auto space-y-6 animate-fade-in">
+    <div className="max-w-4xl mx-auto space-y-6 animate-fade-in">
       {/* Back */}
       <Button asChild variant="ghost" size="sm" className="px-0 -ml-1 text-muted-foreground hover:text-foreground">
         <Link href="/labs">
@@ -200,6 +200,6 @@ export default async function LabDetailPage({ params }: Props) {
         </Button>
         <LabCompleteButton slug={lab.slug} />
       </div>
-    </main>
+    </div>
   );
 }
