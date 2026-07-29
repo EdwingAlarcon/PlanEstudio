@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "maxRetries": 2,
+  "timeoutMs": 7000,
+  "slowModeMs": 1800,
+  "acceptedCurrencies": [
+    "COP",
+    "USD"
+  ],
+  "runIdPrefix": "RUN-SIT-RPA"
+}

@@ -1,0 +1,2 @@
+runId,mode,startedAt,endedAt,status,records,errors
+RUN-SIT-RPA-0001,simulation,2026-07-29T08:00:00.000Z,2026-07-29T08:10:00.000Z,completed-with-rejections,10,1

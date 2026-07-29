@@ -1,0 +1,5 @@
+requestId,customerId,productId,quantity,unitPrice,currency,requestedDate,region,status,sourceFile
+SOL-2026-0003,CLI-0003,PROD-003,2,180000,COP,2026-07-03,REG-CLO,review,solicitudes_sucursales.csv
+SOL-2026-0005,CLI-0005,PROD-002,3,320000,COP,2026-07-05,REG-BOG,new,solicitudes_sucursales.csv
+SOL-2026-0009,CLI-0005,PROD-003,4,180000,COP,2026-07-09,REG-BOG,new,solicitudes_sucursales.csv
+SOL-2026-0010,CLI-0001,PROD-004,1,240000,COP,2026-07-10,REG-BOG,new,solicitudes_sucursales.csv

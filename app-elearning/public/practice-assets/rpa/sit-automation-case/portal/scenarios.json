@@ -1,0 +1,10 @@
+[
+  "normal",
+  "slow",
+  "selector-shift",
+  "unexpected-modal",
+  "server-error",
+  "incomplete-data",
+  "extended-pagination",
+  "expired-session"
+]

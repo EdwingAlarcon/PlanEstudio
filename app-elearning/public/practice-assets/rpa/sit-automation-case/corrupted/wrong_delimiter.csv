@@ -1,0 +1,2 @@
+requestId;customerId;productId;quantity;unitPrice;currency;requestedDate;region;status;sourceFile
+SOL-2026-0004;CLI-0004;PROD-004;1;240000;COP;2026-07-04;REG-BAQ;new;ventas_caribe_2026_07.xlsx

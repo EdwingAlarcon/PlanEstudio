@@ -1,0 +1,2 @@
+requestId,customerId,productId,quantity,unitPrice,currency,requestedDate,region,status,sourceFile,processedAt,correlationId,rejectionReason
+SOL-2026-0003,CLI-0003,PROD-003,2,180000,COP,2026-07-03,REG-CLO,review,solicitudes_sucursales.csv,,COR-SIT-2026-REJ-0001,Cliente bloqueado

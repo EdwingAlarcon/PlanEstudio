@@ -55,6 +55,15 @@ Un sistema legacy de escritorio no tiene API. Operaciones necesita cargar solici
 - La ventana se recupera después de error.
 - Se documentan límites de RDP/Citrix como awareness.
 
+## Assets reproducibles
+
+- Simulador legacy: [SIT Registro Legacy](../rpa-sandbox/legacy-app).
+- Datos semilla: [legacy-records.json](../practice-assets/rpa/sit-automation-case/legacy-app/legacy-records.json).
+- Resultado esperado: [log esperado](../practice-assets/rpa/sit-automation-case/expected/log_esperado.csv).
+- Modos disponibles: normal, duplicado, bloqueo, layout cambiado, confirmación lenta y botón deshabilitado.
+- Reset: usa el botón `Reset` del simulador y conserva solo evidencias anonimizadas.
+- Variante sin Windows/PAD: ejecuta el flujo manualmente sobre el simulador y documenta selectores propuestos.
+
 ## Reto adicional
 
 Agrega validación de resolución y escalado antes de iniciar.

@@ -1,0 +1,11 @@
+{
+  "total": 10,
+  "valid": 9,
+  "rejected": 1,
+  "duplicate": 0,
+  "blockedCustomers": 1,
+  "currencies": [
+    "COP",
+    "USD"
+  ]
+}

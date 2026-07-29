@@ -1,0 +1,2 @@
+requestId,customerId,productId,quantity,unitPrice,currency,requestedDate,region,status,sourceFile,processedAt
+SOL-2026-0010,CLI-0001,PROD-004,1,240000,COP,2026-07-10,REG-BOG,new,solicitudes_sucursales.csv,2026-07-29T08:10:00.000Z

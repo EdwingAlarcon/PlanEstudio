@@ -169,8 +169,8 @@ function RpaPracticePanel() {
           </p>
         </div>
         <Button asChild size="sm" variant="outline" className="shrink-0">
-          <Link href="/recursos/rpa-artefactos-profesionales">
-            Artefactos RPA
+          <Link href="/recursos/rpa-recursos-practica">
+            Recursos RPA
             <ArrowRight className="ml-1.5 h-3.5 w-3.5" aria-hidden />
           </Link>
         </Button>

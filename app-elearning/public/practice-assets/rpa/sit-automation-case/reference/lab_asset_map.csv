@@ -1,0 +1,10 @@
+lab,assets,reset,expected
+LAB-104,"input/solicitudes_sucursales.csv,templates/pdd-ligero.md,expected/log_esperado.csv",Borrar output local y volver a copiar input,expected/log_esperado.csv
+LAB-105,"input/*.xlsx,input/solicitudes_sucursales.csv,expected/consolidado_esperado.csv",Borrar output local y volver a copiar input,expected/metricas_esperadas.json
+LAB-106,"portal/portal-data.json,/rpa-sandbox/portal",Botón Reset del portal,expected/registros_validos.csv
+LAB-107,"legacy-app/legacy-records.json,/rpa-sandbox/legacy-app",Botón Reset del simulador,expected/log_esperado.csv
+LAB-108,"/rpa-sandbox/portal,/rpa-sandbox/legacy-app,templates/selector-troubleshooting-checklist.md",Volver ambos simuladores a modo normal,validation/matriz_operacional.csv
+LAB-109,"corrupted/duplicates.csv,corrupted/partial_processed.csv",Limpiar checkpoint,expected/registros_rechazados.csv
+LAB-110,"manifest.json,input/parametros_proceso.json,expected/metricas_esperadas.json",Usar nuevo correlationId,expected/metricas_esperadas.json
+LAB-111,"validation/matriz_operacional.csv,templates/runbook.md",Nuevo registro de validación,Estado bloqueado si no hay licencia
+LAB-112,"README.md,reference/lab_asset_map.csv,templates/as-is.md,templates/to-be.md,templates/test-plan.md,templates/casos-uat.md",Restaurar input y reiniciar simuladores,expected/resumen_ejecutivo.md

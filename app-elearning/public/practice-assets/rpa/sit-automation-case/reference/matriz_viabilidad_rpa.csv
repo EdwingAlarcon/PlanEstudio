@@ -1,0 +1,8 @@
+criterio,peso,score_1,score_5
+volumen,10,menos de 20 casos/mes,más de 1000 casos/mes
+frecuencia,8,ocasional,diaria
+reglas definidas,10,criterio humano variable,reglas claras
+estabilidad UI,10,cambia semanalmente,estable
+API disponible,12,API madura,sin API viable
+excepciones,8,muchas variantes,pocas excepciones
+mantenimiento,10,alto,controlado

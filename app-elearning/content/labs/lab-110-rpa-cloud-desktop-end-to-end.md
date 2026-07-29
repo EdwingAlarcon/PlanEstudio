@@ -55,6 +55,15 @@ Un equipo registra solicitudes de trabajo en una lista. Cloud flow orquesta el l
 - El estado persiste fuera de la VM.
 - No se registran secretos en logs.
 
+## Assets reproducibles
+
+- Manifest del paquete: [manifest.json](../practice-assets/rpa/sit-automation-case/manifest.json).
+- Parámetros: [parametros_proceso.json](../practice-assets/rpa/sit-automation-case/input/parametros_proceso.json).
+- Métricas esperadas: [metricas_esperadas.json](../practice-assets/rpa/sit-automation-case/expected/metricas_esperadas.json).
+- Plantilla: [Runbook operativo](../practice-assets/rpa/sit-automation-case/templates/runbook.md).
+- Reset: usa un `correlationId` nuevo por corrida y conserva los logs separados.
+- Variante sin cloud flow: simula el disparador cloud con parámetros locales y documenta qué quedaría pendiente en tenant.
+
 ## Reto adicional
 
 Agrega distribución por machine group si tu licencia/tenant lo permite; si no, documenta variante simulada.

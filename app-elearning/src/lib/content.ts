@@ -92,6 +92,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "practicas-guia-revisores": "Recursos/PRACTICAS_GUIA_REVISORES.md",
   "practicas-validacion-sandbox": "Recursos/PRACTICAS_VALIDACION_SANDBOX.md",
   "rpa-artefactos-profesionales": "Recursos/RPA_ARTEFACTOS_PROFESIONALES.md",
+  "rpa-recursos-practica": "Recursos/RPA_RECURSOS_PRACTICA.md",
   "rpa-portafolio-empleabilidad": "Recursos/RPA_PORTAFOLIO_EMPLEABILIDAD.md",
   "rpa-validacion-tenant": "Recursos/RPA_VALIDACION_TENANT.md",
 };

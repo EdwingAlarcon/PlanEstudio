@@ -62,6 +62,7 @@ Modelar datos en Dataverse.
       if (filePath.includes("RPA_ARTEFACTOS_PROFESIONALES")) return "# Power Automate Desktop & RPA — Artefactos profesionales\nMatriz.";
       if (filePath.includes("RPA_PORTAFOLIO_EMPLEABILIDAD")) return "# Portafolio RPA y empleabilidad honesta\nPortafolio.";
       if (filePath.includes("RPA_VALIDACION_TENANT")) return "# Protocolo de validación en tenant para RPA\nTenant.";
+      if (filePath.includes("RPA_RECURSOS_PRACTICA")) return "# Recursos de práctica RPA\nSIT Automation Case.";
       return "# Sin contenido";
     }),
   },
@@ -190,9 +191,9 @@ describe("getResourceBySlug", () => {
 // ─── getAllResourcePages ───────────────────────────────────────────────────────
 
 describe("getAllResourcePages", () => {
-  it("returns 24 resource pages (incluye recursos RPA y portabilidad; no incluye 'simulador', que quedó retirado del mapeo de la app Next.js por ser un stub sin equivalente funcional — el simulador real vive en /simulador)", () => {
+  it("returns 25 resource pages (incluye recursos RPA y portabilidad; no incluye 'simulador', que quedó retirado del mapeo de la app Next.js por ser un stub sin equivalente funcional — el simulador real vive en /simulador)", () => {
     const pages = getAllResourcePages();
-    expect(pages).toHaveLength(24);
+    expect(pages).toHaveLength(25);
   });
 
   it("includes checklist, glosario, certificaciones, lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, job-ready-crm-functional, job-ready-data-migration-legacy, job-ready-interview-readiness, job-ready-admin-governance, portafolio-profesional y roadmap-especializacion-avanzada", () => {
@@ -221,6 +222,7 @@ describe("getAllResourcePages", () => {
     expect(slugs).toContain("rpa-artefactos-profesionales");
     expect(slugs).toContain("rpa-portafolio-empleabilidad");
     expect(slugs).toContain("rpa-validacion-tenant");
+    expect(slugs).toContain("rpa-recursos-practica");
   });
 
   it("loads the D365 tenant readiness resource", () => {

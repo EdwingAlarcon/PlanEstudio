@@ -55,6 +55,14 @@ El bot registra solicitudes en un portal. Si falla después de confirmar un regi
 - Los errores esperados no se mezclan con errores técnicos.
 - El cierre seguro de aplicaciones está probado.
 
+## Assets reproducibles
+
+- Casos de error: [duplicados](../practice-assets/rpa/sit-automation-case/corrupted/duplicates.csv) y [procesamiento parcial](../practice-assets/rpa/sit-automation-case/corrupted/partial_processed.csv).
+- Plantillas: [matriz de excepciones](../practice-assets/rpa/sit-automation-case/templates/matriz-excepciones.md) y [RCA](../practice-assets/rpa/sit-automation-case/templates/rca.md).
+- Logs de referencia: [run history sample](../practice-assets/rpa/sit-automation-case/logs/run_history_sample.csv).
+- Reset: limpia tu checkpoint local o cambia el `runId` antes de probar una corrida nueva.
+- Variante sin tenant: demuestra idempotencia con archivos locales y evidencia de reconciliación.
+
 ## Reto adicional
 
 Agrega backoff progresivo solo para errores transitorios.

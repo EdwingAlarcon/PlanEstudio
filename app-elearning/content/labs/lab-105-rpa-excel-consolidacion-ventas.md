@@ -55,6 +55,15 @@ Tres sucursales envían archivos Excel mensuales. El equipo financiero necesita 
 - Los errores de datos no detienen todo el lote.
 - El reporte permite reconciliación.
 
+## Assets reproducibles
+
+- Centro de recursos: [Recursos de práctica RPA](../recursos/rpa-recursos-practica).
+- Entradas: [Bogotá](../practice-assets/rpa/sit-automation-case/input/ventas_bogota_2026_07.xlsx), [Medellín](../practice-assets/rpa/sit-automation-case/input/ventas_medellin_2026_07.xlsx), [Caribe](../practice-assets/rpa/sit-automation-case/input/ventas_caribe_2026_07.xlsx) y [solicitudes CSV](../practice-assets/rpa/sit-automation-case/input/solicitudes_sucursales.csv).
+- Salida esperada: [consolidado esperado](../practice-assets/rpa/sit-automation-case/expected/consolidado_esperado.csv).
+- Incidentes de datos: [manifest de casos corruptos](../practice-assets/rpa/sit-automation-case/corrupted/manifest.json).
+- Reset: vuelve a descargar las entradas limpias y borra cualquier consolidado local.
+- Variante sin tenant: resuelve la consolidación completa con Excel/archivos locales y deja la integración cloud como diseño.
+
 ## Reto adicional
 
 Agrega un manifiesto de lote con hash o nombre de archivo procesado para evitar reprocesamiento.

@@ -55,6 +55,15 @@ SIT procesa solicitudes administrativas recibidas por archivo. Parte puede resol
 - El ALM separa ambientes y configuración.
 - La operación tiene owner, monitoreo, soporte y rollback.
 
+## Assets reproducibles
+
+- Dataset completo: [SIT Automation Case](../practice-assets/rpa/sit-automation-case/README.md).
+- Mapa lab-assets: [lab_asset_map.csv](../practice-assets/rpa/sit-automation-case/reference/lab_asset_map.csv).
+- Plantillas base: [AS-IS](../practice-assets/rpa/sit-automation-case/templates/as-is.md), [TO-BE](../practice-assets/rpa/sit-automation-case/templates/to-be.md), [plan de pruebas](../practice-assets/rpa/sit-automation-case/templates/test-plan.md) y [casos UAT](../practice-assets/rpa/sit-automation-case/templates/casos-uat.md).
+- Comparativa: [matriz de viabilidad RPA](../practice-assets/rpa/sit-automation-case/reference/matriz_viabilidad_rpa.csv) y [comparativa tecnológica](../practice-assets/rpa/sit-automation-case/reference/comparativa_tecnologica.csv).
+- Reset: restaura el paquete desde `input`, reinicia simuladores y usa un nuevo identificador de corrida.
+- Variante sin tenant: entrega la simulación completa y separa explícitamente qué validaciones quedan pendientes por licencia o ambiente.
+
 ## Rúbrica resumida
 
 | Criterio | Peso |

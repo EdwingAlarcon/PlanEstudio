@@ -56,6 +56,14 @@ El bot debe pasar de DEV a TEST. Operaciones exige evidencia de readiness de má
 - La variante unattended distingue licencia real vs simulación.
 - La validación postdeploy cubre configuración y ejecución.
 
+## Assets reproducibles
+
+- Matriz operacional: [matriz_operacional.csv](../practice-assets/rpa/sit-automation-case/validation/matriz_operacional.csv).
+- Protocolo de tenant: [protocolo_tenant.md](../practice-assets/rpa/sit-automation-case/validation/protocolo_tenant.md).
+- Plantillas: [deployment plan](../practice-assets/rpa/sit-automation-case/templates/deployment-checklist.md), [rollback plan](../practice-assets/rpa/sit-automation-case/templates/rollback-plan.md) y [runbook](../practice-assets/rpa/sit-automation-case/templates/runbook.md).
+- Reset: revierte parámetros de ambiente y deja evidencia de que no cambiaste producción real.
+- Variante sin licencia unattended: declara el bloqueo, valida el diseño y completa solo simulación attended/local.
+
 ## Reto adicional
 
 Agrega plan de continuidad si la máquina principal no está disponible.

@@ -1,0 +1,4 @@
+caso,ambiente,licencia,maquina,usuario,fecha,version,pasos,resultadoEsperado,resultadoObservado,evidencia,runId,error,recuperacion,diferencias,estado,responsable
+attended manual,tenant,Power Automate Premium,laboratorio,anonimizado,,1.0.0,Ejecutar desktop flow manual,Ejecución completada,,,,,,,preparado,
+cloud llama desktop,tenant,requiere licencia válida,machine group,cuenta servicio,,1.0.0,Cloud flow con inputs,Outputs registrados,,,,,,,no ejecutado,
+unattended,tenant,unattended requerido,máquina disponible,cuenta autorizada,,1.0.0,Ejecución sin sesión interactiva,Run history completo,,,,,,,bloqueado,

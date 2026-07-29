@@ -54,6 +54,15 @@ SIT necesita procesar una lista de solicitudes internas desde un archivo de prue
 - El cierre de recursos ocurre en ejecución exitosa y fallida.
 - Los outputs permiten diagnóstico desde cloud flow en el futuro.
 
+## Assets reproducibles
+
+- Centro de recursos: [Recursos de práctica RPA](../recursos/rpa-recursos-practica).
+- Dataset base: [SIT Automation Case](../practice-assets/rpa/sit-automation-case/README.md).
+- Plantilla recomendada: [PDD ligero](../practice-assets/rpa/sit-automation-case/templates/pdd-ligero.md).
+- Resultado esperado: [log esperado](../practice-assets/rpa/sit-automation-case/expected/log_esperado.csv).
+- Reset: copia nuevamente los archivos de `input` y elimina outputs locales generados por tu flow.
+- Variante sin tenant: documenta el diseño, ejecuta solo con archivos locales y marca la validación de tenant como no ejecutada.
+
 ## Reto adicional
 
 Agrega un parámetro `in_MaxRetries` y úsalo solo para una acción recuperable, no para repetir todo el lote.

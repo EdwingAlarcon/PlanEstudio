@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ChevronLeft, Clock, ShieldCheck, Wrench } from "lucide-react";
+import { ArrowRight, Bot, ChevronLeft, Clock, Download, MonitorCog, ShieldCheck, Wrench } from "lucide-react";
 import { getAllPractices, getPracticeBySlug, PRACTICE_DIFFICULTY_LABELS, PRACTICE_DOMAIN_LABELS, PRACTICE_ROLE_LABELS, PRACTICE_TYPE_LABELS } from "@/lib/practices";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
 import { PracticeWorkspaceClient } from "@/components/practices/practice-workspace-client";
@@ -73,6 +73,44 @@ export default async function PracticeDetailPage({ params }: Props) {
         <Info icon={Wrench} title="Herramientas" text={practice.environment.tools.slice(0, 2).join(", ")} />
         <Info icon={ShieldCheck} title="Solución" text={practice.solutionAvailability} />
       </section>
+
+      {practice.domain === "rpa-desktop-automation" && (
+        <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="rpa-assets-heading">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                <Bot className="h-4 w-4" aria-hidden />
+                Assets reproducibles
+              </div>
+              <h2 id="rpa-assets-heading" className="text-base font-semibold text-foreground">Sandbox y paquete SIT Automation Case</h2>
+              <p className="mt-1 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                Usa datos ficticios, portal estático, simulador legacy y plantillas descargables para producir evidencia sin exponer credenciales ni depender de un tenant real.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Button asChild size="sm" variant="outline">
+                <Link href="/rpa-sandbox/portal">
+                  <MonitorCog className="mr-2 h-4 w-4" aria-hidden />
+                  Portal
+                </Link>
+              </Button>
+              <Button asChild size="sm" variant="outline">
+                <Link href="/rpa-sandbox/legacy-app">
+                  <Wrench className="mr-2 h-4 w-4" aria-hidden />
+                  Legacy
+                </Link>
+              </Button>
+              <Button asChild size="sm">
+                <Link href="/recursos/rpa-recursos-practica">
+                  <Download className="mr-2 h-4 w-4" aria-hidden />
+                  Recursos
+                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="evidence-heading">
         <h2 id="evidence-heading" className="mb-3 text-base font-semibold text-foreground">Evidencia profesional requerida</h2>

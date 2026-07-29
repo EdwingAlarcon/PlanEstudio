@@ -1,0 +1,3 @@
+requestId,customerId,productId,quantity,unitPrice,currency,requestedDate,region,status,sourceFile
+SOL-2026-0006,CLI-0001,PROD-003,2,180000,COP,2026-07-06,REG-BOG,new,ventas_bogota_2026_07.xlsx
+SOL-2026-0006,CLI-0002,PROD-004,2,240000,COP,2026-07-07,REG-MDE,new,ventas_medellin_2026_07.xlsx

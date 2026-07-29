@@ -55,6 +55,15 @@ Una aplicación cambia etiquetas después de una actualización menor. El bot fa
 - La regresión cubre al menos dos pantallas.
 - Se explica diferencia entre lentitud y selector roto.
 
+## Assets reproducibles
+
+- Portal con selector modificado: [Portal SIT](../rpa-sandbox/portal) en modo `Selector modificado`.
+- Legacy con layout cambiante: [SIT Registro Legacy](../rpa-sandbox/legacy-app) en modo `Layout cambiado`.
+- Plantilla: [Checklist de selectores](../practice-assets/rpa/sit-automation-case/templates/selector-troubleshooting-checklist.md).
+- Referencia: [matriz operacional](../practice-assets/rpa/sit-automation-case/validation/matriz_operacional.csv).
+- Reset: vuelve a modo normal en ambos simuladores antes de cada corrida comparativa.
+- Variante sin tenant: captura evidencia de selector antes/después y propone remediación sin publicar cambios.
+
 ## Reto adicional
 
 Diseña alerta de monitoreo cuando los fallos por selector superan un umbral semanal.

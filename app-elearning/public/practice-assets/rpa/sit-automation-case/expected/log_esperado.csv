@@ -1,0 +1,4 @@
+timestamp,correlationId,level,step,message
+2026-07-29T08:00:00.000Z,COR-SIT-2026-0001,INFO,read,Archivo leído
+2026-07-29T08:01:00.000Z,COR-SIT-2026-REJ-0001,WARN,validate,Cliente bloqueado
+2026-07-29T08:09:00.000Z,COR-SIT-2026-0009,INFO,write,Consolidado generado

@@ -255,15 +255,28 @@ test.describe("Smoke — rutas principales", () => {
     await page.locator('textarea[aria-label="Notas personales de la práctica"]').fill("Nota portable sin datos reales");
     await page.getByRole("button", { name: "Guardar notas" }).click();
     await page.goto("/progreso");
+    await page.evaluate(() => {
+      (window as typeof window & { __practiceDownload?: { download: string; href: string } | null }).__practiceDownload = null;
+      HTMLAnchorElement.prototype.click = function click() {
+        (window as typeof window & { __practiceDownload?: { download: string; href: string } | null }).__practiceDownload = {
+          download: this.download,
+          href: this.href,
+        };
+      };
+    });
 
     const exportButton = page.getByRole("region", { name: "Respaldo y portabilidad" }).getByRole("button", { name: "Exportar progreso práctico" });
     await expect(exportButton).toBeEnabled();
-    await exportButton.click();
-    await expect(page.getByText(/Backup generado: 1 prácticas y 1 intentos/)).toBeVisible();
+    await exportButton.evaluate((button) => (button as HTMLButtonElement).click());
+    await expect.poll(async () => page.evaluate(() => {
+      return (window as typeof window & { __practiceDownload?: { download: string; href: string } | null }).__practiceDownload?.download ?? "";
+    })).toMatch(/^planestudio-practicas-.*\.json$/);
+    await expect(page.getByText(/Backup generado: 1 prácticas/)).toBeVisible();
     const backupText = await page.evaluate(async () => {
       const stored = window.localStorage.getItem("planestudio.practice-progress.v1");
       return stored;
     });
+    expect(backupText).toContain("Nota portable sin datos reales");
 
     page.once("dialog", (dialog) => dialog.accept());
     await page.getByRole("button", { name: "Reiniciar progreso práctico" }).click();
@@ -435,6 +448,7 @@ test.describe("Smoke — rutas principales", () => {
     await expect(page.locator("h1")).toContainText("Power Automate Desktop & RPA");
     await expect(page.locator('a[href="/nivel/rpa/modulo/fundamentos-rpa-seleccion-procesos"]')).toBeVisible();
     await expect(page.getByRole("heading", { name: /Ruta práctica recomendada/i })).toBeVisible();
+    await expect(page.getByRole("link", { name: /Recursos RPA/i })).toBeVisible();
 
     await page.goto("/nivel/rpa/modulo/fundamentos-rpa-seleccion-procesos");
     await expect(page.getByRole("heading", { name: /Objetivo/i }).first()).toBeVisible();
@@ -446,6 +460,7 @@ test.describe("Smoke — rutas principales", () => {
 
     await page.goto("/experiencia-practica/inc-rpa-001-selector-roto-actualizacion");
     await expect(page.locator("h1")).toContainText("Selector roto");
+    await expect(page.getByRole("heading", { name: /Sandbox y paquete SIT Automation Case/i })).toBeVisible();
     await page.goto("/experiencia-practica/ch-rpa-01-consolidacion-financiera-automatizada");
     await expect(page.locator("h1")).toContainText("Consolidación financiera");
     await page.goto("/experiencia-practica/sim-rpa-001-primeras-dos-semanas-rpa-developer");
@@ -456,6 +471,46 @@ test.describe("Smoke — rutas principales", () => {
     await expect(page.getByRole("heading", { name: /Fundamentos de RPA y Selección de Procesos/i })).toBeVisible();
     await page.goto("/progreso");
     await expect(page.getByRole("heading", { name: /RPA · RPA/i })).toBeVisible();
+  });
+
+  test("recursos y sandbox RPA funcionan en desktop, móvil y modo oscuro", async ({ page }) => {
+    await page.goto("/recursos/rpa-recursos-practica");
+    await expect(page.locator("h1, h2").first()).toContainText(/Recursos de práctica RPA/i);
+    await expect(page.getByRole("link", { name: /SIT Automation Case/i }).first()).toHaveAttribute("href", /practice-assets\/rpa\/sit-automation-case\/README.md/);
+    await expect(page.getByRole("link", { name: /PDD ligero/i })).toBeVisible();
+
+    await page.goto("/rpa-sandbox/portal");
+    await expect(page.getByRole("heading", { name: "Portal SIT de solicitudes comerciales" })).toBeVisible();
+    await expect(page.locator('[data-rpa-table="requests"]')).toBeVisible();
+    await page.locator("#scenario-mode").selectOption("slow");
+    await expect(page.getByRole("status")).toContainText(/Cargando tabla lenta simulada/i);
+    await page.locator("#scenario-mode").selectOption("unexpected-modal");
+    await expect(page.getByRole("dialog", { name: /Modal inesperado simulado/i })).toBeVisible();
+    await page.getByRole("button", { name: "Cerrar modal" }).click();
+    await page.locator("#scenario-mode").selectOption("selector-shift");
+    await expect(page.locator('[data-rpa-table="requests-v2"]')).toBeVisible();
+    await page.getByRole("button", { name: /Upload simulado/i }).click();
+    await expect(page.getByRole("status")).toContainText(/Archivo recibido en simulación/i);
+
+    await page.goto("/rpa-sandbox/legacy-app");
+    await expect(page.getByRole("heading", { name: "SIT Registro Legacy" })).toBeVisible();
+    await page.getByRole("button", { name: "Registrar" }).click();
+    await expect(page.getByRole("dialog", { name: /Registro confirmado/i })).toBeVisible();
+    await page.getByRole("button", { name: "Cerrar" }).click();
+    await page.locator("#legacy-mode").selectOption("duplicate");
+    await page.getByRole("button", { name: "Registrar" }).click();
+    await expect(page.getByRole("status")).toContainText(/Registro duplicado/i);
+
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto("/rpa-sandbox/portal");
+    await expect(page.getByRole("heading", { name: "Portal SIT de solicitudes comerciales" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Reset" })).toBeVisible();
+
+    await page.setViewportSize({ width: 768, height: 1024 });
+    await page.goto("/rpa-sandbox/legacy-app");
+    await page.locator('button[aria-label="Cambiar tema"]').click();
+    await expect(page.locator("html")).toHaveClass(/dark/);
+    await expect(page.getByRole("heading", { name: "SIT Registro Legacy" })).toBeVisible();
   });
 
   test("skip-to-content es accesible por teclado", async ({ page }) => {

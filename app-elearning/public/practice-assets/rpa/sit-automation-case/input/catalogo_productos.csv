@@ -1,0 +1,5 @@
+productId,productName,currency,unitPrice
+PROD-001,Licencia Power Automate Premium,USD,15
+PROD-002,Servicio consultoría RPA,COP,320000
+PROD-003,Soporte operación mensual,COP,180000
+PROD-004,Paquete validación QA,COP,240000

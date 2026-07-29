@@ -55,6 +55,15 @@ Un proveedor entrega solicitudes en un portal sin API. El bot debe consultar por
 - La evidencia no expone credenciales.
 - Existe alternativa simulada si no hay portal real.
 
+## Assets reproducibles
+
+- Portal sandbox: [Portal SIT de solicitudes comerciales](../rpa-sandbox/portal).
+- Datos del portal: [portal-data.json](../practice-assets/rpa/sit-automation-case/portal/portal-data.json).
+- Salida esperada: [registros válidos](../practice-assets/rpa/sit-automation-case/expected/registros_validos.csv).
+- Escenarios disponibles: normal, lento, selector modificado, modal inesperado, error, datos incompletos, paginación extendida y sesión expirada.
+- Reset: usa el botón `Reset` del portal y recarga la página antes de repetir la prueba.
+- Variante sin tenant: automatiza solo el portal estático; no requiere credenciales ni backend.
+
 ## Reto adicional
 
 Agrega comparación con un endpoint HTTP simulado y explica qué cambiaría en producción.

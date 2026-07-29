@@ -1,0 +1,35 @@
+{
+  "version": "1.0.0",
+  "records": [
+    {
+      "requestId": "SOL-2026-0001",
+      "customerId": "CLI-0001",
+      "productId": "PROD-001",
+      "status": "pending"
+    },
+    {
+      "requestId": "SOL-2026-0002",
+      "customerId": "CLI-0002",
+      "productId": "PROD-002",
+      "status": "pending"
+    },
+    {
+      "requestId": "SOL-2026-0004",
+      "customerId": "CLI-0004",
+      "productId": "PROD-004",
+      "status": "pending"
+    },
+    {
+      "requestId": "SOL-2026-0005",
+      "customerId": "CLI-0005",
+      "productId": "PROD-002",
+      "status": "pending"
+    },
+    {
+      "requestId": "SOL-2026-0006",
+      "customerId": "CLI-0001",
+      "productId": "PROD-003",
+      "status": "pending"
+    }
+  ]
+}

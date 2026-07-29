@@ -34,6 +34,7 @@ export const UI = {
     d365TenantReadiness: "D365 Tenant Readiness",
     professionalPracticeFramework: "Marco de prácticas profesionales",
     rpaArtifacts: "Artefactos RPA",
+    rpaPracticeResources: "Recursos práctica RPA",
     rpaPortfolio: "Portafolio RPA",
     rpaTenantValidation: "Validación RPA tenant",
     myProgress: "Mi Progreso",

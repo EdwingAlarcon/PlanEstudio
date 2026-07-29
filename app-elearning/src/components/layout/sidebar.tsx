@@ -45,6 +45,7 @@ const RESOURCE_LINKS = [
   { href: "/recursos/d365-tenant-readiness", label: UI.nav.d365TenantReadiness, icon: CheckSquare },
   { href: "/recursos/marco-practicas-profesionales", label: UI.nav.professionalPracticeFramework, icon: ClipboardList },
   { href: "/recursos/rpa-artefactos-profesionales", label: UI.nav.rpaArtifacts, icon: ClipboardList },
+  { href: "/recursos/rpa-recursos-practica", label: UI.nav.rpaPracticeResources, icon: Bot },
   { href: "/recursos/rpa-portafolio-empleabilidad", label: UI.nav.rpaPortfolio, icon: Briefcase },
   { href: "/recursos/rpa-validacion-tenant", label: UI.nav.rpaTenantValidation, icon: CheckSquare },
 ];

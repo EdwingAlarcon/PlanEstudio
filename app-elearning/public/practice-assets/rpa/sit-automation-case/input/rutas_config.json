@@ -1,0 +1,8 @@
+{
+  "input": "input",
+  "processed": "processed",
+  "errors": "errors",
+  "output": "output",
+  "screenshots": "evidence/screenshots",
+  "logs": "logs"
+}

@@ -1,0 +1,7 @@
+opcion,usar_cuando,evitar_cuando
+Power Automate cloud,hay conector/evento/API,solo existe interfaz de escritorio
+Power Automate Desktop,UI es la frontera accesible,hay API soportada y estable
+Logic Apps,integración enterprise y monitoreo Azure,proceso depende de sesión Windows
+Custom connector,API reusable con gobierno,API no existe o viola soporte
+Python/.NET,requiere lógica compleja y ciclo DevOps,equipo no puede operar código
+Proceso manual rediseñado,la automatización aumenta riesgo,volumen y reglas justifican robot

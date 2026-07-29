@@ -1,0 +1,5 @@
+region,city,branch,timezone
+REG-BOG,Bogotá,Sucursal Centro,America/Bogota
+REG-MDE,Medellín,Sucursal Antioquia,America/Bogota
+REG-CLO,Cali,Sucursal Pacífico,America/Bogota
+REG-BAQ,Barranquilla,Sucursal Caribe,America/Bogota

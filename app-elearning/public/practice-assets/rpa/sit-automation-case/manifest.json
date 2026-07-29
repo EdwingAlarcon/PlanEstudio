@@ -1,0 +1,27 @@
+{
+  "format": "planestudio-rpa-practice-assets",
+  "assetPackId": "sit-automation-case",
+  "version": "1.0.0",
+  "generatedAt": "2026-07-29T00:00:00.000Z",
+  "company": "Servicios Integrados Tecnológicos S.A.",
+  "scenario": "Consolidación, validación y registro de solicitudes comerciales recibidas desde sucursales.",
+  "totals": {
+    "inputRecords": 10,
+    "expectedValid": 9,
+    "expectedRejected": 1
+  },
+  "scenarios": [
+    "normal",
+    "slow",
+    "selector-shift",
+    "unexpected-modal",
+    "server-error",
+    "incomplete-data",
+    "extended-pagination",
+    "expired-session"
+  ],
+  "paths": {
+    "portal": "/rpa-sandbox/portal",
+    "legacyApp": "/rpa-sandbox/legacy-app"
+  }
+}

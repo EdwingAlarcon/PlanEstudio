@@ -1,0 +1,6 @@
+customerId,customerName,region,status,segment
+CLI-0001,Cliente Alfa S.A.S.,REG-BOG,active,enterprise
+CLI-0002,Comercial Beta Ltda.,REG-MDE,active,standard
+CLI-0003,Servicios Gamma S.A.,REG-CLO,blocked,standard
+CLI-0004,Distribuciones Delta S.A.S.,REG-BAQ,active,standard
+CLI-0005,Operaciones Épsilon S.A.,REG-BOG,active,enterprise

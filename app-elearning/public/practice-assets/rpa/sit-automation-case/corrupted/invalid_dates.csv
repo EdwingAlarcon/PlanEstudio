@@ -1,0 +1,2 @@
+requestId,customerId,productId,quantity,unitPrice,currency,requestedDate,region,status,sourceFile
+SOL-2026-0002,CLI-0002,PROD-002,1,320000,COP,31/31/2026,REG-MDE,new,ventas_medellin_2026_07.xlsx

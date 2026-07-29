@@ -1,0 +1,58 @@
+[
+  {
+    "file": "corrupted/missing_columns.csv",
+    "reproduces": "INC-RPA-DATA-001"
+  },
+  {
+    "file": "corrupted/wrong_headers.csv",
+    "reproduces": "INC-RPA-DATA-002"
+  },
+  {
+    "file": "corrupted/duplicates.csv",
+    "reproduces": "INC-RPA-004"
+  },
+  {
+    "file": "corrupted/invalid_dates.csv",
+    "reproduces": "INC-RPA-DATA-003"
+  },
+  {
+    "file": "corrupted/non_numeric_amounts.csv",
+    "reproduces": "INC-RPA-DATA-004"
+  },
+  {
+    "file": "corrupted/wrong_delimiter.csv",
+    "reproduces": "INC-RPA-DATA-005"
+  },
+  {
+    "file": "corrupted/empty_file.csv",
+    "reproduces": "INC-RPA-DATA-006"
+  },
+  {
+    "file": "corrupted/wrong_name_ventas_julio.csv",
+    "reproduces": "INC-RPA-DATA-007"
+  },
+  {
+    "file": "corrupted/repeated_id.csv",
+    "reproduces": "INC-RPA-DATA-008"
+  },
+  {
+    "file": "corrupted/unknown_product.csv",
+    "reproduces": "INC-RPA-DATA-009"
+  },
+  {
+    "file": "corrupted/blocked_customer.csv",
+    "reproduces": "INC-RPA-DATA-010"
+  },
+  {
+    "file": "corrupted/invalid_currency.csv",
+    "reproduces": "INC-RPA-DATA-011"
+  },
+  {
+    "file": "corrupted/partial_processed.csv",
+    "reproduces": "INC-RPA-008"
+  },
+  {
+    "file": "corrupted/bad_encoding.csv",
+    "reproduces": "INC-RPA-DATA-012"
+  }
+]

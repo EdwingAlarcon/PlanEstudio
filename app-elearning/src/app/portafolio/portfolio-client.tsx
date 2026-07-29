@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Briefcase, CheckCircle2, Circle, MessageSquare, Route } from "lucide-react";
+import { ArrowRight, Bot, Briefcase, CheckCircle2, Circle, Download, MessageSquare, MonitorCog, Route } from "lucide-react";
 import { useProgressStore } from "@/lib/progress";
 import type { ProfessionalRouteSlug } from "@/lib/professional-routes";
 import { cn } from "@/lib/utils";
@@ -267,6 +267,37 @@ export function PortfolioClient({ routes, profiles }: { routes: PortfolioRouteDa
             >
               Ver Roadmap de Especialización Avanzada
               <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              <Bot className="h-4 w-4" aria-hidden />
+              RPA Job-Ready
+            </div>
+            <h2 className="text-sm font-semibold text-foreground">Evidencia reproducible para portafolio RPA</h2>
+            <p className="mt-1 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              El paquete SIT Automation Case reúne dataset, portal, simulador legacy, matrices y plantillas para defender una automatización sin prometer experiencia en producción real.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href="/rpa-sandbox/portal"
+              className="inline-flex items-center gap-1 rounded-md border border-border px-3 py-1.5 text-sm font-medium text-foreground hover:border-[#0078D4]/40 hover:text-[#0078D4] dark:hover:text-[#4DB8FF]"
+            >
+              <MonitorCog className="h-4 w-4" aria-hidden />
+              Portal
+            </Link>
+            <Link
+              href="/recursos/rpa-recursos-practica"
+              className="inline-flex items-center gap-1 rounded-md border border-border px-3 py-1.5 text-sm font-medium text-foreground hover:border-[#0078D4]/40 hover:text-[#0078D4] dark:hover:text-[#4DB8FF]"
+            >
+              <Download className="h-4 w-4" aria-hidden />
+              Recursos
             </Link>
           </div>
         </div>
