@@ -53,6 +53,7 @@ export const EVIDENCE_TYPES = [
 ] as const;
 export const SOLUTION_AVAILABILITY = ["inline-collapsed", "after-attempt", "separate-file", "facilitator-only"] as const;
 export const COVERAGE_STATES = ["covered", "partial", "guided-only", "not-evaluated", "not-covered"] as const;
+export const EVIDENCE_ARTIFACT_TYPES = ["real", "simulated", "conceptual", "sandbox-reproducible", "requires-license", "requires-enterprise-configuration"] as const;
 
 export type PracticeType = typeof PRACTICE_TYPES[number];
 export type PracticeDifficulty = typeof PRACTICE_DIFFICULTIES[number];
@@ -61,6 +62,7 @@ export type PracticeRole = typeof PRACTICE_ROLES[number];
 export type EvidenceType = typeof EVIDENCE_TYPES[number];
 export type SolutionAvailability = typeof SOLUTION_AVAILABILITY[number];
 export type CoverageState = typeof COVERAGE_STATES[number];
+export type EvidenceArtifactType = typeof EVIDENCE_ARTIFACT_TYPES[number];
 
 export interface PracticeRubricItem {
   criterion: string;
@@ -73,6 +75,7 @@ export interface PracticeEvidence {
   format: string;
   qualityCriteria: string[];
   sensitiveDataWarning: string;
+  artifactTypes: EvidenceArtifactType[];
 }
 
 export interface PracticeEnvironment {
@@ -282,6 +285,7 @@ function validatePracticeFrontmatter(data: Record<string, unknown>, filePath: st
   const format = requireString(evidenceData, "format", filePath);
   const qualityCriteria = requireStringArray(evidenceData, "qualityCriteria", filePath);
   const sensitiveDataWarning = requireString(evidenceData, "sensitiveDataWarning", filePath);
+  const artifactTypes = requireEnumArray(requireStringArray(evidenceData, "artifactTypes", filePath), EVIDENCE_ARTIFACT_TYPES, "evidence.artifactTypes", filePath);
 
   return {
     id,
@@ -295,7 +299,7 @@ function validatePracticeFrontmatter(data: Record<string, unknown>, filePath: st
     prerequisites: { modules, labs },
     environment: { tenantRequired, codeRequired, tools },
     skills,
-    evidence: { required, optional, format, qualityCriteria, sensitiveDataWarning },
+    evidence: { required, optional, format, qualityCriteria, sensitiveDataWarning, artifactTypes },
     hints: parseHints(data["hints"], filePath),
     solutionAvailability,
     rubric: parseRubric(data["rubric"], filePath),

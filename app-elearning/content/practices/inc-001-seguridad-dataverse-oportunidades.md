@@ -20,6 +20,7 @@ evidence:
   format: "Documento breve con hechos, hipótesis descartadas, matriz antes/después y validación por usuario de prueba."
   qualityCriteria: ["No usa System Administrator como solución", "Distingue rol, equipo, BU y sharing", "Valida mínimo privilegio"]
   sensitiveDataWarning: "No incluyas nombres, correos ni cuentas reales; usa usuarios ficticios o iniciales."
+  artifactTypes: ["simulated", "sandbox-reproducible"]
 solutionAvailability: after-attempt
 coverageState: partial
 hints:

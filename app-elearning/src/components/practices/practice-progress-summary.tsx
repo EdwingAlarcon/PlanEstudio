@@ -51,7 +51,9 @@ export function PracticeProgressSummary({
     const anchor = document.createElement("a");
     anchor.href = url;
     anchor.download = "planestudio-practice-progress.json";
+    document.body.appendChild(anchor);
     anchor.click();
+    anchor.remove();
     URL.revokeObjectURL(url);
   }
 

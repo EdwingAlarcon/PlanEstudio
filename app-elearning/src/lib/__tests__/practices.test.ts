@@ -9,6 +9,7 @@ import {
   PRACTICE_DOMAINS,
   PRACTICE_ROLES,
   PRACTICE_TYPES,
+  EVIDENCE_ARTIFACT_TYPES,
 } from "../practices";
 
 describe("professional practices content", () => {
@@ -29,6 +30,8 @@ describe("professional practices content", () => {
       expect(practice.roles.length).toBeGreaterThan(0);
       for (const role of practice.roles) expect(PRACTICE_ROLES).toContain(role);
       expect(practice.evidence.required.length).toBeGreaterThan(0);
+      expect(practice.evidence.artifactTypes.length).toBeGreaterThan(0);
+      for (const artifactType of practice.evidence.artifactTypes) expect(EVIDENCE_ARTIFACT_TYPES).toContain(artifactType);
       expect(practice.prerequisites.modules.length).toBeGreaterThan(0);
       expect(practice.prerequisites.labs.length).toBeGreaterThan(0);
     }

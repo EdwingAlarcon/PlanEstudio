@@ -20,6 +20,7 @@ evidence:
   format: "Matriz por canal con condición de SLA, datos de caso, entitlement y resultado esperado/real."
   qualityCriteria: ["Distingue canal, calendario y entitlement", "Valida con casos nuevos", "No fuerza SLA manual sin causa"]
   sensitiveDataWarning: "No uses datos reales de clientes; anonimiza asunto, contacto y cuenta."
+  artifactTypes: ["simulated", "requires-license", "sandbox-reproducible"]
 solutionAvailability: after-attempt
 coverageState: partial
 hints:

@@ -20,6 +20,7 @@ evidence:
   format: "Análisis técnico con traza simulada, hipótesis, cambio de diseño y prueba de carga conceptual."
   qualityCriteria: ["No aumenta timeouts como solución principal", "Reduce trabajo síncrono", "Incluye tracing útil y prevención"]
   sensitiveDataWarning: "No incluyas IDs reales de organización, endpoints privados ni datos de clientes."
+  artifactTypes: ["simulated", "sandbox-reproducible"]
 solutionAvailability: after-attempt
 coverageState: partial
 hints:

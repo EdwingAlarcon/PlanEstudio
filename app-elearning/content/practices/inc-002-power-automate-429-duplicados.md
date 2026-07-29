@@ -20,6 +20,7 @@ evidence:
   format: "RCA con tabla de ejecuciones, hipótesis, cambio mínimo y prueba de no duplicidad."
   qualityCriteria: ["Usa clave idempotente", "No propone reintentos infinitos", "Incluye prevención y monitoreo"]
   sensitiveDataWarning: "No pegues run history con tokens, URLs internas o datos personales."
+  artifactTypes: ["simulated", "sandbox-reproducible"]
 solutionAvailability: after-attempt
 coverageState: partial
 hints:

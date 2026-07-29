@@ -83,6 +83,9 @@ nav:
       - "📖 Glosario": Recursos/GLOSARIO_TERMINOS.md
       - "🏆 Certificaciones": Recursos/CERTIFICACIONES.md
       - "🔷 D365 Tenant Readiness": Recursos/D365_TENANT_READINESS.md
+      - "🧳 Portabilidad de Prácticas": Recursos/PRACTICAS_PORTABILIDAD_ESTUDIANTE.md
+      - "🧑‍🏫 Guía de Revisores": Recursos/PRACTICAS_GUIA_REVISORES.md
+      - "🧪 Validación Sandbox": Recursos/PRACTICAS_VALIDACION_SANDBOX.md
       - "📝 Banco de Preguntas": Recursos/EVALUACIONES_MODULOS_CERTIFICACION.md
       - "🎯 Simulador de Evaluaciones": Recursos/SIMULADOR_EVALUACIONES.md
 

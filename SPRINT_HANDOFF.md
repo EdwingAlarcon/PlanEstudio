@@ -40,6 +40,23 @@ El micro-sprint más reciente integró esa capa con la experiencia diaria:
 Baseline posterior al micro-sprint: **238 Vitest tests**, **25 Playwright smoke tests**, build estático
 de **190 páginas**.
 
+Sprint posterior — **Practice Validation & Portability**:
+
+- `schemaVersion` práctico sube a **2** manteniendo la clave separada `planestudio.practice-progress.v1`.
+- El progreso práctico conserva historial real de intentos (`attempts`, `activeAttemptId`), migra registros v1
+  con `attemptCount` a un intento legacy, y distingue estado de ejecución vs. estado de validación.
+- `/progreso` incorpora **Respaldo y portabilidad**: exportación JSON versionada, exclusión opcional de notas,
+  importación validada con vista previa, estrategias `Combinar`/`Reemplazar`, confirmación destructiva y reset
+  solo práctico. No toca `plan-estudio-progress`.
+- Cada práctica muestra historial/comparación de intentos y puede exportar paquete de evidencia JSON + Markdown
+  y plantilla JSON de revisión humana. La importación estructurada de revisiones queda documentada como evolución
+  futura; no se simula revisión externa desde autoevaluación.
+- Las 8 prácticas piloto declaran `evidence.artifactTypes` (`simulated`, `conceptual`, `sandbox-reproducible`,
+  `requires-license`, etc.) y el parser lo valida.
+- Nuevos recursos: guía de portabilidad para estudiantes, guía para revisores y protocolo/matriz de validación
+  sandbox. Conteos académicos sin cambios; recursos Next.js suben a 21 y build estático a 193 páginas.
+- Baseline posterior: **247 Vitest tests**, **26 Playwright smoke tests**, build estático de **193 páginas**.
+
 Validaciones locales ejecutadas y en verde antes del commit `6e0604ac`:
 
 ```powershell

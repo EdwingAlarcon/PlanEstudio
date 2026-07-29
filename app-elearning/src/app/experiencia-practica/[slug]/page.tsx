@@ -90,6 +90,12 @@ export default async function PracticeDetailPage({ params }: Props) {
             </ul>
           </div>
         </div>
+        <div className="mt-4">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">Tipo de evidencia</p>
+          <div className="flex flex-wrap gap-1.5">
+            {practice.evidence.artifactTypes.map((item) => <Badge key={item} variant="secondary">{item}</Badge>)}
+          </div>
+        </div>
         <p className="mt-4 rounded-lg border border-amber-500/30 bg-amber-50 p-3 text-xs leading-relaxed text-muted-foreground dark:bg-amber-500/10">
           {practice.evidence.sensitiveDataWarning}
         </p>
@@ -102,7 +108,12 @@ export default async function PracticeDetailPage({ params }: Props) {
       <PracticeWorkspaceClient
         practice={{
           id: practice.id,
+          slug: practice.slug,
           title: practice.title,
+          practiceType: practice.practiceType,
+          difficulty: practice.difficulty,
+          domain: practice.domain,
+          roles: practice.roles,
           hints: practice.hints,
           evidence: practice.evidence,
           rubric: practice.rubric,

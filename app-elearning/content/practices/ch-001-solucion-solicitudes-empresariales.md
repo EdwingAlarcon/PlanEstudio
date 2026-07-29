@@ -20,6 +20,7 @@ evidence:
   format: "Paquete de entrega con diseño, implementación o maqueta defendible, pruebas y documentación operativa."
   qualityCriteria: ["Incluye criterios de aceptación", "Usa mínimo privilegio", "No depende de configuración en default solution"]
   sensitiveDataWarning: "Usa datos ficticios; no exportes usuarios o conexiones reales."
+  artifactTypes: ["conceptual", "sandbox-reproducible"]
 solutionAvailability: after-attempt
 coverageState: guided-only
 hints:

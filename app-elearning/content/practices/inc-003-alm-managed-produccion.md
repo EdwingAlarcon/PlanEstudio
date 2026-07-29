@@ -20,6 +20,7 @@ evidence:
   format: "Informe de despliegue con dependencia faltante, decisión de rollback/corrección y validación postdeploy."
   qualityCriteria: ["No edita producción directamente", "Incluye plan de rollback", "Distingue unmanaged vs managed layers"]
   sensitiveDataWarning: "No incluyas connection strings ni nombres reales de ambientes productivos."
+  artifactTypes: ["simulated", "sandbox-reproducible", "requires-enterprise-configuration"]
 solutionAvailability: after-attempt
 coverageState: partial
 hints:

@@ -53,6 +53,9 @@ Modelar datos en Dataverse.
       if (filePath.includes("JOB_READY_ADMIN_GOVERNANCE")) return "# Ruta Job-Ready Power Platform Admin / Governance\nPower Platform Admin.";
       if (filePath.includes("D365_TENANT_READINESS")) return "# Dynamics 365 Tenant Readiness Checklist\nSimulado\nProductivo controlado.";
       if (filePath.includes("MARCO_PRACTICAS_PROFESIONALES")) return "# Marco de Prácticas Profesionales\nExperiencia práctica.";
+      if (filePath.includes("PRACTICAS_PORTABILIDAD_ESTUDIANTE")) return "# Portabilidad y entrega de prácticas\nBackup.";
+      if (filePath.includes("PRACTICAS_GUIA_REVISORES")) return "# Guía para revisores de prácticas\nRúbrica.";
+      if (filePath.includes("PRACTICAS_VALIDACION_SANDBOX")) return "# Protocolo de validación en tenant sandbox\nMatriz.";
       return "# Sin contenido";
     }),
   },
@@ -181,9 +184,9 @@ describe("getResourceBySlug", () => {
 // ─── getAllResourcePages ───────────────────────────────────────────────────────
 
 describe("getAllResourcePages", () => {
-  it("returns 18 resource pages (incluyendo el marco de prácticas profesionales; no incluye 'simulador', que quedó retirado del mapeo de la app Next.js por ser un stub sin equivalente funcional — el simulador real vive en /simulador)", () => {
+  it("returns 21 resource pages (incluyendo portabilidad, revisión y validación sandbox; no incluye 'simulador', que quedó retirado del mapeo de la app Next.js por ser un stub sin equivalente funcional — el simulador real vive en /simulador)", () => {
     const pages = getAllResourcePages();
-    expect(pages).toHaveLength(18);
+    expect(pages).toHaveLength(21);
   });
 
   it("includes checklist, glosario, certificaciones, lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, job-ready-crm-functional, job-ready-data-migration-legacy, job-ready-interview-readiness, job-ready-admin-governance, portafolio-profesional y roadmap-especializacion-avanzada", () => {
@@ -206,6 +209,9 @@ describe("getAllResourcePages", () => {
     expect(slugs).toContain("roadmap-especializacion-avanzada");
     expect(slugs).toContain("d365-tenant-readiness");
     expect(slugs).toContain("marco-practicas-profesionales");
+    expect(slugs).toContain("practicas-portabilidad-estudiante");
+    expect(slugs).toContain("practicas-guia-revisores");
+    expect(slugs).toContain("practicas-validacion-sandbox");
   });
 
   it("loads the D365 tenant readiness resource", () => {

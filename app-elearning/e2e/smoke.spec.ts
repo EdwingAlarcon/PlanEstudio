@@ -185,9 +185,10 @@ test.describe("Smoke — rutas principales", () => {
 
     await page.getByRole("button", { name: "Iniciar práctica", exact: true }).click();
     await expect(page.getByText("En progreso").first()).toBeVisible();
+    await expect(page.getByText("Intentos: 1")).toBeVisible();
     page.once("dialog", (dialog) => dialog.accept());
     await page.getByRole("button", { name: "Registrar intento" }).click();
-    await expect(page.getByText("Intentos: 1")).toBeVisible();
+    await expect(page.getByText("Intentos: 2")).toBeVisible();
 
     page.once("dialog", (dialog) => dialog.accept());
     await page.getByRole("button", { name: "Revelar pista" }).first().click();
@@ -211,7 +212,7 @@ test.describe("Smoke — rutas principales", () => {
 
     await page.reload();
     await expect(page.getByText("Completada").first()).toBeVisible();
-    await expect(page.getByText("Intentos: 1")).toBeVisible();
+    await expect(page.getByText("Intentos: 2")).toBeVisible();
 
     await page.goto("/progreso");
     await expect(page.getByRole("heading", { name: "Progreso académico" })).toBeVisible();
@@ -223,6 +224,67 @@ test.describe("Smoke — rutas principales", () => {
     page.once("dialog", (dialog) => dialog.accept());
     await page.getByRole("button", { name: "Reiniciar prácticas" }).click();
     await expect(page.evaluate(() => window.localStorage.getItem("plan-estudio-progress"))).resolves.toContain("basico-1");
+  });
+
+  test("portabilidad práctica exporta, reinicia e importa sin tocar progreso académico", async ({ page }) => {
+    await page.goto("/");
+    await page.evaluate(() => {
+      window.localStorage.clear();
+      window.localStorage.setItem("plan-estudio-progress", JSON.stringify({
+        state: {
+          completedModules: ["basico-1"],
+          quizScores: {},
+          completedLabs: [],
+          checklistItems: {},
+          lastVisited: null,
+          userName: null,
+        },
+        version: 0,
+      }));
+    });
+
+    await page.goto("/experiencia-practica/inc-001-seguridad-dataverse-oportunidades");
+    await page.getByRole("button", { name: "Iniciar práctica", exact: true }).click();
+    await page.locator('textarea[aria-label="Notas personales de la práctica"]').fill("Nota portable sin datos reales");
+    await page.getByRole("button", { name: "Guardar notas" }).click();
+    await page.goto("/progreso");
+
+    const downloadPromise = page.waitForEvent("download");
+    await page.getByRole("button", { name: "Exportar progreso práctico" }).last().click();
+    const download = await downloadPromise;
+    const backupText = await page.evaluate(async () => {
+      const stored = window.localStorage.getItem("planestudio.practice-progress.v1");
+      return stored;
+    });
+    expect(download.suggestedFilename()).toMatch(/planestudio-practicas-\d{4}-\d{2}-\d{2}\.json/);
+
+    page.once("dialog", (dialog) => dialog.accept());
+    await page.getByRole("button", { name: "Reiniciar progreso práctico" }).click();
+    await expect(page.getByText("0 registros locales")).toBeVisible();
+
+    const backup = JSON.parse(backupText ?? "{}");
+    const rawRecords = backup.state?.records ?? {};
+    const portable = {
+      format: "planestudio-practice-progress",
+      schemaVersion: 2,
+      exportedAt: "2026-07-29T00:00:00.000Z",
+      product: "PlanEstudio",
+      storageKey: "planestudio.practice-progress.v1",
+      metadata: { recordCount: 1, attemptCount: 1, notesIncluded: true },
+      records: rawRecords,
+    };
+    await page.setInputFiles('input[type="file"]', {
+      name: "backup.json",
+      mimeType: "application/json",
+      buffer: Buffer.from(JSON.stringify(portable)),
+    });
+    await expect(page.getByText("Vista previa de importación")).toBeVisible();
+    await expect(page.getByText("Válido")).toBeVisible();
+    page.once("dialog", (dialog) => dialog.accept());
+    await page.getByRole("button", { name: "Importar con vista previa" }).click();
+    await expect(page.getByText(/Progreso práctico combinado/)).toBeVisible();
+    await expect(page.evaluate(() => window.localStorage.getItem("plan-estudio-progress"))).resolves.toContain("basico-1");
+    await expect(page.evaluate(() => window.localStorage.getItem("planestudio.practice-progress.v1"))).resolves.toContain("Nota portable");
   });
 
   test("detalle de challenge y simulación cargan como prácticas autónomas", async ({ page }) => {

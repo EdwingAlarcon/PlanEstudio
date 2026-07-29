@@ -20,6 +20,7 @@ evidence:
   format: "Carpeta de simulación con entregables por día y decisiones versionadas."
   qualityCriteria: ["Distingue hechos y supuestos", "Gestiona cambios de alcance", "Incluye UAT, soporte y retrospectiva"]
   sensitiveDataWarning: "Todos los nombres, datos y stakeholders deben ser ficticios."
+  artifactTypes: ["conceptual", "simulated"]
 solutionAvailability: inline-collapsed
 coverageState: partial
 hints:

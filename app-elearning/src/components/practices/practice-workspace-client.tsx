@@ -1,14 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AlertTriangle, CheckCircle2, Eye, EyeOff, Lightbulb, RotateCcw, Save } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Download, Eye, EyeOff, FileText, Lightbulb, RotateCcw, Save } from "lucide-react";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
   PRACTICE_HINT_LEVEL_LABELS,
-  type EvidenceType,
   type PracticeHint,
 } from "@/lib/practice-meta";
 import {
@@ -16,20 +15,32 @@ import {
   buildSelfAssessment,
   canCompletePractice,
   createPracticeRecord,
+  compareLatestAttempts,
   getPracticeStatusLabel,
+  getPracticeValidationStatusLabel,
   usePracticeProgressStore,
   type AssessmentLevel,
+  type PracticeProgressRecord,
 } from "@/lib/practice-progress";
+import {
+  createEvidencePackage,
+  createReviewTemplate,
+  evidencePackageBaseName,
+  evidencePackageMarkdown,
+} from "@/lib/practice-portability";
+import type { PracticeDifficulty, PracticeDomain, PracticeEvidence, PracticeRole, PracticeType, PracticeRubricItem } from "@/lib/practices";
 
 export interface PracticeWorkspaceData {
   id: string;
+  slug: string;
   title: string;
+  practiceType: PracticeType;
+  difficulty: PracticeDifficulty;
+  domain: PracticeDomain;
+  roles: PracticeRole[];
   hints: PracticeHint[];
-  evidence: {
-    required: EvidenceType[];
-    sensitiveDataWarning: string;
-  };
-  rubric: { criterion: string; weight: number }[];
+  evidence: PracticeEvidence;
+  rubric: PracticeRubricItem[];
   solutionMarkdown: string;
 }
 
@@ -114,7 +125,7 @@ export function PracticeWorkspaceClient({ practice }: { practice: PracticeWorksp
             </p>
           </div>
           <Badge variant={persistedRecord.status === "completed" ? "default" : persistedRecord.status === "needs_reinforcement" ? "destructive" : "outline"}>
-            {getPracticeStatusLabel(persistedRecord.status)}
+            {getPracticeStatusLabel(persistedRecord.status)} · {getPracticeValidationStatusLabel(persistedRecord.validationStatus)}
           </Badge>
         </div>
         <div className="mt-4 flex flex-wrap gap-2">
@@ -142,6 +153,8 @@ export function PracticeWorkspaceClient({ practice }: { practice: PracticeWorksp
           <span>Solución consultada: {persistedRecord.solutionViewed ? "sí" : "no"}</span>
         </div>
       </div>
+
+      <PracticeAttemptHistory practice={practice} record={persistedRecord} />
 
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(280px,360px)]">
         <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="notes-heading">
@@ -319,6 +332,128 @@ export function PracticeWorkspaceClient({ practice }: { practice: PracticeWorksp
           {!completion.ok && <span className="text-xs text-muted-foreground">Falta: {completion.missing.join(", ")}.</span>}
         </div>
       </section>
+    </section>
+  );
+}
+
+function PracticeAttemptHistory({ practice, record }: { practice: PracticeWorkspaceData; record: PracticeProgressRecord }) {
+  const [selectedAttemptId, setSelectedAttemptId] = useState(record.activeAttemptId ?? record.attempts.at(-1)?.id ?? "");
+  const selectedAttempt = record.attempts.find((attempt) => attempt.id === selectedAttemptId) ?? record.attempts.at(-1) ?? null;
+  const comparison = compareLatestAttempts(record);
+
+  function downloadFile(content: string, fileName: string, type = "application/json") {
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = fileName;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function handleEvidencePackage() {
+    const packageData = createEvidencePackage({
+      id: practice.id,
+      slug: practice.slug,
+      title: practice.title,
+      practiceType: practice.practiceType,
+      difficulty: practice.difficulty,
+      domain: practice.domain,
+      roles: practice.roles,
+      rubric: practice.rubric,
+      evidence: practice.evidence,
+    }, record, selectedAttempt?.id);
+    const baseName = evidencePackageBaseName(practice.id, selectedAttempt?.attemptNumber);
+    downloadFile(JSON.stringify(packageData, null, 2), `${baseName}.json`);
+    downloadFile(evidencePackageMarkdown(packageData), `${baseName}.md`, "text/markdown");
+  }
+
+  function handleReviewTemplate() {
+    downloadFile(createReviewTemplate({
+      id: practice.id,
+      slug: practice.slug,
+      title: practice.title,
+      practiceType: practice.practiceType,
+      difficulty: practice.difficulty,
+      domain: practice.domain,
+      roles: practice.roles,
+      rubric: practice.rubric,
+      evidence: practice.evidence,
+    }, selectedAttempt), `${evidencePackageBaseName(practice.id, selectedAttempt?.attemptNumber)}-revision.json`);
+  }
+
+  return (
+    <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="attempt-history-heading">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h2 id="attempt-history-heading" className="text-base font-semibold text-foreground">Historial y evidencia</h2>
+          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+            Los intentos anteriores se conservan para comparar evolución. Una revisión externa solo significa que una persona revisó este paquete con la rúbrica.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Button size="sm" variant="outline" onClick={handleEvidencePackage} disabled={!selectedAttempt}>
+            <Download className="mr-1 h-3.5 w-3.5" aria-hidden />
+            Paquete de evidencia
+          </Button>
+          <Button size="sm" variant="outline" onClick={handleReviewTemplate} disabled={!selectedAttempt}>
+            <FileText className="mr-1 h-3.5 w-3.5" aria-hidden />
+            Plantilla de revisión
+          </Button>
+        </div>
+      </div>
+
+      {record.attempts.length === 0 ? (
+        <p className="mt-4 rounded-lg border border-border bg-muted/15 p-3 text-sm text-muted-foreground">
+          Inicia la práctica o registra un intento para crear historial. Visitar esta página no crea intentos.
+        </p>
+      ) : (
+        <div className="mt-4 grid gap-4 lg:grid-cols-[240px_minmax(0,1fr)]">
+          <div className="space-y-2">
+            {record.attempts.map((attempt) => (
+              <button
+                key={attempt.id}
+                type="button"
+                onClick={() => setSelectedAttemptId(attempt.id)}
+                className={cn(
+                  "w-full rounded-lg border p-3 text-left text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[#0078D4]",
+                  selectedAttempt?.id === attempt.id ? "border-[#0078D4] bg-[#F3F9FD] dark:bg-[#0078D4]/10" : "border-border bg-muted/15 hover:bg-muted/30"
+                )}
+              >
+                <span className="font-medium text-foreground">Intento {attempt.attemptNumber}</span>
+                <span className="mt-1 block text-xs text-muted-foreground">{attempt.status} · {attempt.selfAssessment?.score ?? "sin puntaje"}</span>
+              </button>
+            ))}
+          </div>
+          <div className="rounded-lg border border-border bg-muted/15 p-4">
+            <div className="grid gap-2 text-sm sm:grid-cols-2">
+              <span>Inicio: {selectedAttempt?.startedAt ? new Date(selectedAttempt.startedAt).toLocaleString("es-CO") : "-"}</span>
+              <span>Última actividad: {selectedAttempt?.updatedAt ? new Date(selectedAttempt.updatedAt).toLocaleString("es-CO") : "-"}</span>
+              <span>Pistas: {selectedAttempt?.revealedHintIds.length ?? 0}/{practice.hints.length}</span>
+              <span>Solución consultada: {selectedAttempt?.solutionViewed ? "sí" : "no"}</span>
+              <span>Evidencias: {Object.values(selectedAttempt?.evidenceChecklist ?? {}).filter(Boolean).length}</span>
+              <span>Fallos críticos: {selectedAttempt?.criticalFailures.length ?? 0}</span>
+            </div>
+            {selectedAttempt?.reflection && <p className="mt-3 text-sm text-muted-foreground">{selectedAttempt.reflection}</p>}
+            {comparison.current && comparison.previous && (
+              <div className="mt-4 rounded-lg border border-border bg-background p-3">
+                <p className="text-sm font-semibold text-foreground">
+                  Comparación: {comparison.previous.selfAssessment?.score}% → {comparison.current.selfAssessment?.score}% ({comparison.scoreDelta >= 0 ? "+" : ""}{comparison.scoreDelta})
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  {comparison.improved.length > 0
+                    ? `Mejoraste en ${comparison.improved.slice(0, 3).join(", ")}.`
+                    : comparison.worsened.length > 0
+                      ? `Revisa ${comparison.worsened.slice(0, 3).join(", ")} antes del siguiente intento.`
+                      : "La rúbrica se mantuvo estable entre intentos."}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

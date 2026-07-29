@@ -20,6 +20,7 @@ evidence:
   format: "Repositorio o diff con diseño, código, pruebas, trazas y ADR de la ruta técnica elegida."
   qualityCriteria: ["Justifica plugin vs Custom API vs JavaScript", "Incluye tracing", "Prueba errores y casos felices"]
   sensitiveDataWarning: "No guardes secretos, connection strings ni tokens en código o capturas."
+  artifactTypes: ["conceptual", "sandbox-reproducible"]
 solutionAvailability: after-attempt
 coverageState: partial
 hints:
