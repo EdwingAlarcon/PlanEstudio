@@ -7,7 +7,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Before starting new work, read `SPRINT_HANDOFF.md`. It is the active operational memory for the post-audit sprints.
 
 Current stable state as of the latest pushed `master` commit:
-- Latest pushed/deployed product sprint: **Practice Experience Integration** — commit `6e0604ac` (`feat: integrar seguimiento de experiencia practica`), GitHub Actions run `30419768845` success, GitHub Pages verified.
+- Latest pushed/deployed product sprint: **Beginner Guided Journey & Progressive Disclosure** — commit `a14e72d` (`feat: añadir recorrido guiado para principiantes`), GitHub Actions run `30551134055` success, GitHub Pages verified.
+- Previous product sprint: **Practice Experience Integration** — commit `6e0604ac` (`feat: integrar seguimiento de experiencia practica`), GitHub Actions run `30419768845` success, GitHub Pages verified.
 - Previous course/design sprint: **Sprint 22 — `/impeccable audit` (17/20 → 20/20 after fixes) + `PRODUCT.md`/`DESIGN.md`/`.impeccable/design.json` (Sprint 21)**.
 - Professional Practice Framework now has daily UX integration: nueva capa `Experiencia práctica` con 5 Incident Labs, 2 Challenge Labs y 1 Work Simulation, metadata tipada/validada, matriz de competencias práctica, documentación `MARCO_PRACTICAS_PROFESIONALES.md`, navegación `/experiencia-practica`, progreso práctico independiente, pistas escalonadas, intentos, notas, evidencias, solución colapsada y autoevaluación por rúbrica.
 - GitHub Pages production has been verified at `https://edwingalarcon.github.io/PlanEstudio/`.
@@ -17,7 +18,7 @@ Current stable state as of the latest pushed `master` commit:
 - Current local/CI test baseline: **238 Vitest tests** and **25 Playwright smoke tests**.
 - Post-audit content roadmap (sprints 1-20) is fully closed — no known pending items. Sprints 21-22 added a design-system layer (`DESIGN.md`, "The Fluent Learning Console") and closed real a11y/perf bugs found via `/impeccable audit` (heading hierarchy H2→H4 in Módulos 3-7, dead reading-progress scroll listener, touch target 36px→44px). See `SPRINT_HANDOFF.md` sprints 21-22 for full detail before touching UI/markdown heading levels again.
 - Recent beginner-onboarding work is intentional and should not be removed: "Primeras 2 horas", Mini Lab 01, checklist mínimo para principiantes, Power Fx en español simple, entregable mínimo del Nivel Básico, and the Módulo 9 bridge into Intermedio.
-- User preference for this repo: after completing a change, **commit, push to `master`, and wait for deploy/production verification** unless the user explicitly says not to.
+- User preference for this repo: before starting work, **fetch/pull/sync the repo and verify whether a merge is needed**; after completing a change, **commit, push to `master`, and wait for deploy/production verification** unless the user explicitly says not to.
 - Local validation should run `npm run build:pages` or `npm run build`, then `npm run e2e` **serially**, not in parallel, because both can touch `.next` locally and cause transient route/module false negatives.
 
 ## What This Repository Is

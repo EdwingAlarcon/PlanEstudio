@@ -2,6 +2,24 @@
 
 This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
+## Current Handoff for Codex
+
+Before starting new work, read `SPRINT_HANDOFF.md`. It is the active operational memory for the post-audit sprints.
+
+Current stable state as of the latest pushed `master` commit:
+- Latest pushed/deployed product sprint: **Beginner Guided Journey & Progressive Disclosure** — commit `a14e72d` (`feat: añadir recorrido guiado para principiantes`), GitHub Actions run `30551134055` success, GitHub Pages verified.
+- Previous product sprint: **Practice Experience Integration** — commit `6e0604ac` (`feat: integrar seguimiento de experiencia practica`), GitHub Actions run `30419768845` success, GitHub Pages verified.
+- Previous course/design sprint: **Sprint 22 — `/impeccable audit` (17/20 → 20/20 after fixes) + `PRODUCT.md`/`DESIGN.md`/`.impeccable/design.json` (Sprint 21)**.
+- Beginner-onboarding work is intentional and should not be removed: "Primeras 2 horas", Mini Lab 01, checklist mínimo para principiantes, Power Fx en español simple, entregable mínimo del Nivel Básico, Módulo 9 bridge into Intermedio, and the beginner guided route surfaced through `/mi-ruta`, `/mapa`, and `/experiencia-practica`.
+- Professional Practice Framework has daily UX integration: capa `Experiencia práctica` con 5 Incident Labs, 2 Challenge Labs y 1 Work Simulation, metadata tipada/validada, matriz de competencias práctica, navegación `/experiencia-practica`, progreso práctico independiente, pistas escalonadas, intentos, notas, evidencias, solución colapsada y autoevaluación por rúbrica.
+- GitHub Pages production has been verified at `https://edwingalarcon.github.io/PlanEstudio/`.
+- Fixed learning content counts: **65 modules, 63 labs, 488 questions, 603 checklist criteria**.
+- Professional practice pilot counts: **5 incidents, 2 challenges, 1 simulation**. Do not merge these into the existing lab count.
+- Practical progress uses separate localStorage key `planestudio.practice-progress.v1`; academic progress remains `plan-estudio-progress`. Do not merge these stores or show a single combined percentage.
+- Current local/CI test baseline: **238 Vitest tests** and **25 Playwright smoke tests**.
+- User preference for this repo: before work, fetch/sync the repo and resolve merge needs; after completing a change, **commit, push to `master`, and wait for deploy/production verification** unless the user explicitly says not to.
+- Local validation should run `npm run build:pages` or `npm run build`, then `npm run e2e` **serially**, because both can touch `.next` locally and cause transient route/module false negatives.
+
 ## What This Repository Is
 
 A structured, progressive learning plan for Microsoft Power Platform and Dynamics 365 — from beginner to Solution Architect. The repo has two parallel surfaces:
