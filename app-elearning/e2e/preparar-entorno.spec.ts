@@ -39,6 +39,16 @@ test.describe("Preparar mi entorno", () => {
     await expect(page.getByText("Visual Studio Community")).toHaveCount(0);
   });
 
+  test("perfil RPA en macOS advierte que Power Automate Desktop requiere Windows", async ({ page }) => {
+    await page.goto("/preparar-entorno");
+    await page.getByRole("button", { name: "RPA", exact: true }).click();
+    await page.getByRole("button", { name: "macOS" }).click();
+    await expect(page.getByText(/Power Automate Desktop solo corre en Windows/)).toBeVisible();
+
+    await page.getByRole("button", { name: "Windows" }).click();
+    await expect(page.getByText(/Power Automate Desktop solo corre en Windows/)).toHaveCount(0);
+  });
+
   test("sin tenant muestra la alternativa conceptual del setup esencial", async ({ page }) => {
     await page.goto("/preparar-entorno");
     await page.getByRole("button", { name: "No", exact: true }).click();
@@ -102,6 +112,14 @@ test.describe("Preparar mi entorno", () => {
 
     await page.goto("/labs/lab-52-cli-conexion-tenant");
     await expect(page.getByRole("heading", { name: "Antes de este lab puede convenirte verificar" })).toHaveCount(0);
+  });
+
+  test("el gate técnico reconoce GitHub Copilot/Claude Code como señal de VS Code", async ({ page }) => {
+    await page.goto("/labs/lab-45-copilot-implementacion-guiada");
+    const gateHeading = page.getByRole("heading", { name: "Antes de este lab puede convenirte verificar" });
+    await expect(gateHeading).toBeVisible();
+    const gateSection = page.locator("section", { has: gateHeading });
+    await expect(gateSection.getByText("Visual Studio Code", { exact: true })).toBeVisible();
   });
 
   test("marcar herramientas no altera el progreso académico", async ({ page }) => {

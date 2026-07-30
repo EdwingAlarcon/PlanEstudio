@@ -27,7 +27,11 @@ emit_tool() {
   id="$1"
   command_label="$2"
   probe="$3"
-  raw_version=$(eval "$probe" 2>/dev/null | head -n 1)
+  full_output=$(eval "$probe" 2>/dev/null)
+  raw_version=$(printf '%s\n' "$full_output" | grep -m 1 -E '[0-9]+\.[0-9]+')
+  if [ -z "$raw_version" ]; then
+    raw_version=$(printf '%s\n' "$full_output" | head -n 1)
+  fi
   if [ -n "$raw_version" ]; then
     detected="true"
     status="installed"

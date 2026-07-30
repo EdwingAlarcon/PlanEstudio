@@ -10,6 +10,18 @@ export const VERIFIABLE_TOOL_IDS: string[] = WORKSTATION_TOOLS
   .filter((tool) => Boolean(tool.verification))
   .map((tool) => tool.id);
 
+const MIN_MAJOR_VERSION_BY_TOOL_ID: Record<string, number> = Object.fromEntries(
+  WORKSTATION_TOOLS
+    .filter((tool) => typeof tool.verification?.minMajorVersion === "number")
+    .map((tool) => [tool.id, tool.verification!.minMajorVersion as number])
+);
+
+export function extractMajorVersion(rawVersion: string): number | null {
+  const match = rawVersion.match(/(\d+)\.\d+/);
+  if (!match) return null;
+  return Number(match[1]);
+}
+
 export interface WorkstationReportEntry {
   toolId: string;
   status: ToolStatus;
@@ -122,7 +134,16 @@ export function validateWorkstationReportPayload(payload: unknown): WorkstationR
         continue;
       }
       const detectedVersion = stringField(entry.rawVersion, 120) || undefined;
-      entries.push({ toolId, status: statusValue as ToolStatus, detectedVersion });
+      let resolvedStatus = statusValue as ToolStatus;
+      const minMajorVersion = MIN_MAJOR_VERSION_BY_TOOL_ID[toolId];
+      if (resolvedStatus === "installed" && detectedVersion && typeof minMajorVersion === "number") {
+        const majorVersion = extractMajorVersion(detectedVersion);
+        if (majorVersion !== null && majorVersion < minMajorVersion) {
+          resolvedStatus = "outdated";
+          warnings.push(`${toolId} detectada en una versión anterior a la mínima recomendada (${minMajorVersion}.x); se marcó como desactualizada.`);
+        }
+      }
+      entries.push({ toolId, status: resolvedStatus, detectedVersion });
     }
   }
 

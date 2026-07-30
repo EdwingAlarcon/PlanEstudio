@@ -19,6 +19,7 @@ export type ToolStatus =
 
 export interface WorkstationToolVerification {
   command: string;
+  minMajorVersion?: number;
 }
 
 export interface WorkstationTool {
@@ -71,7 +72,7 @@ export const WORKSTATION_TOOLS: WorkstationTool[] = [
     category: "control-de-versiones",
     platforms: ALL_OS,
     officialUrl: "https://git-scm.com/downloads",
-    verification: { command: "git --version" },
+    verification: { command: "git --version", minMajorVersion: 2 },
     requiredBy: { maker: "recommended", functional: "recommended", developer: "required", admin: "recommended", architect: "required", rpa: "recommended" },
   },
   {
@@ -97,7 +98,7 @@ export const WORKSTATION_TOOLS: WorkstationTool[] = [
     category: "desarrollo-web",
     platforms: ALL_OS,
     officialUrl: "https://nodejs.org",
-    verification: { command: "node --version" },
+    verification: { command: "node --version", minMajorVersion: 18 },
     requiredBy: { maker: "not_required", functional: "not_required", developer: "required_later", admin: "not_required", architect: "optional", rpa: "not_required" },
   },
   {
@@ -106,7 +107,7 @@ export const WORKSTATION_TOOLS: WorkstationTool[] = [
     category: "desarrollo-net",
     platforms: ALL_OS,
     officialUrl: "https://dotnet.microsoft.com/download",
-    verification: { command: "dotnet --info" },
+    verification: { command: "dotnet --info", minMajorVersion: 6 },
     requiredBy: { maker: "not_required", functional: "not_required", developer: "required_later", admin: "optional", architect: "optional", rpa: "not_required" },
   },
   {
@@ -123,7 +124,7 @@ export const WORKSTATION_TOOLS: WorkstationTool[] = [
     category: "administracion",
     platforms: ALL_OS,
     officialUrl: "https://learn.microsoft.com/powershell/scripting/install/installing-powershell",
-    verification: { command: "$PSVersionTable" },
+    verification: { command: "$PSVersionTable", minMajorVersion: 7 },
     requiredBy: { maker: "optional", functional: "optional", developer: "recommended", admin: "required", architect: "recommended", rpa: "optional" },
   },
   {
@@ -192,6 +193,9 @@ export const LAB_PRODUCT_TOOL_HINTS: Record<string, string[]> = {
   "Power Platform CLI": ["pac-cli"],
   "C#": ["dotnet-sdk"],
   "Power Automate Desktop": ["power-automate-desktop"],
+  "Azure DevOps": ["git"],
+  "GitHub Copilot": ["vscode"],
+  "Claude Code": ["vscode"],
 };
 
 export function getRecommendedToolsForProducts(products: string[]): WorkstationTool[] {

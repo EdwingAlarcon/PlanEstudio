@@ -26,12 +26,14 @@ function Test-Command {
         $exitCode = $LASTEXITCODE
         $text = ($output | Out-String).Trim()
         if ($text.Length -gt 0 -and ($null -eq $exitCode -or $exitCode -eq 0)) {
-            $firstLine = (($text -split "`n")[0]).Trim().TrimEnd("`r")
+            $lines = ($text -split "`n") | ForEach-Object { $_.Trim().TrimEnd("`r") }
+            $versionLine = $lines | Where-Object { $_ -match '\d+\.\d+' } | Select-Object -First 1
+            $rawVersion = if ($versionLine) { $versionLine } else { $lines[0] }
             return [PSCustomObject]@{
                 id         = $Id
                 command    = $Command
                 detected   = $true
-                rawVersion = $firstLine
+                rawVersion = $rawVersion
                 status     = "installed"
             }
         }

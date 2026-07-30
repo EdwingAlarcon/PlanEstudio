@@ -99,6 +99,12 @@ export function PrepararEntornoClient() {
             </button>
           ))}
         </div>
+
+        {profile === "rpa" && os !== "windows" && (
+          <p className="mt-3 rounded-lg border border-amber-500/30 bg-amber-50 p-3 text-xs leading-relaxed text-amber-900 dark:border-amber-400/20 dark:bg-amber-950/20 dark:text-amber-200">
+            {T.rpaNonWindowsWarning}
+          </p>
+        )}
       </section>
 
       <section

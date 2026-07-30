@@ -482,14 +482,60 @@ Lo que entrega la Fase 1 (ya en `master`, commit `f4ba827`):
   pasaron limpiamente al re-ejecutarlas en aislamiento inmediatamente después; no es una regresión de
   esta sub-fase). `validate:content`, `lint`, `tsc --noEmit` y `build:pages` en verde localmente.
 
-**Pendiente explícito — sub-fase F de la Fase 2 (no implementada, en curso en esta misma sesión):**
-1. Plantillas starter de repositorio por tipo de proyecto; lógica de `outdated` con umbrales de
-   versión (el campo `status` del store ya lo admite, solo falta la comparación de versiones); ampliar
-   `LAB_PRODUCT_TOOL_HINTS` con más señales si se identifican otras strings de `product` de alta
-   confianza; el resto de los ~23 casos E2E del sprint original (§63, ahora con varios casos ya
-   cubiertos entre las sub-fases A, B, D y E); auditoría manual por los 6 perfiles (§64).
-2. No fusionar el progreso de `preparar-entorno` con el progreso académico ni con
-   `practice-progress` — son y deben seguir siendo tres stores independientes.
+**Fase 2, sub-fase F — Lógica de `outdated`, ampliación de hints y auditoría de 6 perfiles: COMPLETADA
+(cierra la Fase 2 con el alcance verificable disponible en esta sesión).**
+
+- **Bug real corregido en los scripts de la sub-fase A**: `tools/check-workstation.ps1`/`.sh` tomaban
+  ciegamente la primera línea de la salida del comando de verificación como `rawVersion`. Para
+  `dotnet --info`, la primera línea es un encabezado ("SDK DE .NET:"), no la versión — el reporte
+  nunca mostró una versión útil para `.NET SDK`. Corregido: ambos scripts ahora buscan la primera
+  línea que matchea un patrón de versión (`\d+\.\d+`) en toda la salida, con la primera línea como
+  fallback si ninguna matchea. Verificado manualmente en PowerShell y en `sh`.
+- **Lógica de `outdated` por versión mínima**: `WorkstationToolVerification` ahora admite
+  `minMajorVersion` opcional (declarado para `git` ≥2, `node` ≥18, `dotnet-sdk` ≥6, `powershell` ≥7;
+  `pac-cli` queda sin umbral por no tener una referencia confiable de versión mínima). Nueva función
+  `extractMajorVersion()` en `workstation-report.ts`: si el parser recibe una entrada `"installed"`
+  con versión por debajo del mínimo, la reclasifica como `"outdated"` con un warning explicativo. Los
+  scripts locales siguen reportando solo `installed`/`not_installed` — la comparación de versión vive
+  enteramente en el cliente.
+- **`LAB_PRODUCT_TOOL_HINTS` ampliado** con 3 señales adicionales de alta confianza ya presentes en
+  `product` de labs reales: `"Azure DevOps"` → `git`, `"GitHub Copilot"` y `"Claude Code"` → `vscode`
+  (el Módulo 44 ya liga explícitamente Copilot con VS Code). El guardarraíl anti-drift ya existente
+  cubre las nuevas entradas sin cambios.
+- **Auditoría manual de los 6 perfiles** (`maker`, `functional`, `developer`, `admin`, `architect`,
+  `rpa`) × 3 sistemas operativos, vía script de inspección directa sobre `getToolsForProfile`
+  (equivalente a recorrer la UI a mano, pero reproducible): confirmó que cada perfil recibe el
+  conjunto de herramientas obligatorias esperado y que el "Setup esencial" es idéntico e independiente
+  del perfil. **Hallazgo real**: el perfil `rpa` en macOS/Linux no tiene ninguna herramienta
+  obligatoria relacionada con RPA (Power Automate Desktop es solo Windows y se excluye del todo por
+  plataforma), pero la app no explicaba por qué. Corregido con un aviso inline en `/preparar-entorno`
+  cuando `profile === "rpa"` y el SO no es Windows, explicando que se necesita una máquina Windows
+  (física o virtual) para los labs de RPA.
+- **Fuera de alcance de esta sub-fase, honestamente sin resolver**: el "resto de los ~23 casos E2E
+  del sprint original (§63)" y el detalle exacto de "plantillas starter de repositorio por tipo de
+  proyecto" provienen de un prompt de 72 secciones de una sesión anterior que no está disponible en el
+  contexto de esta sesión — no se puede enumerar ni verificar contra ese documento sin que el usuario
+  lo vuelva a proporcionar. No se inventó una lista de casos para simular cobertura.
+- Tests nuevos/actualizados: `workstation-report.test.ts` (+4 casos: outdated por versión mínima, no
+  outdated en o sobre el mínimo, sin umbral nunca marca outdated, `extractMajorVersion` con distintos
+  formatos), `workstation.test.ts` (+1 caso: nuevas señales de `LAB_PRODUCT_TOOL_HINTS`),
+  `preparar-entorno.spec.ts` (+2 casos: aviso RPA no-Windows, gate reconoce Copilot/Claude Code →
+  VS Code en `lab-45`).
+- Baseline posterior: **316 tests Vitest**, **42/42 Playwright** confirmados en una corrida completa.
+  `validate:content`, `lint`, `tsc --noEmit` y `build:pages` en verde localmente.
+
+## Cierre de la Fase 2 (Developer Workstation, Environment Setup & Project Foundations)
+
+Sub-fases A–F completas y desplegadas: script verificador + parser (A), gate técnico advisory en
+labs (B), guía de herramientas (C), prácticas guiadas + challenge de setup (D), incident labs de
+troubleshooting (E), y outdated/hints/auditoría de perfiles (F). Todo el trabajo quedó verificado en
+producción tras cada sub-fase. Los dos ítems que quedan explícitamente abiertos (plantillas starter de
+repositorio, y el resto exacto de casos E2E del prompt original de 72 secciones) requieren que el
+usuario aporte de nuevo ese documento o defina el alcance de las plantillas — no son un olvido, son
+una dependencia externa a esta sesión.
+
+No fusionar el progreso de `preparar-entorno` con el progreso académico ni con `practice-progress` —
+son y deben seguir siendo tres stores independientes.
 
 ## Cómo continuar
 

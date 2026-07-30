@@ -174,6 +174,7 @@ export const UI = {
     title: "Preparar mi entorno",
     subtitle: "Instala solo lo que necesitas ahora. El sistema te recomienda el siguiente requisito segun tu perfil y sistema operativo.",
     toolsGuideLink: "Ver guia de instalacion y errores comunes por herramienta",
+    rpaNonWindowsWarning: "Power Automate Desktop solo corre en Windows. Si tu equipo es macOS o Linux, necesitaras una maquina Windows (fisica o virtual) para los labs de RPA; el resto del contenido conceptual del nivel RPA lo puedes estudiar desde cualquier sistema operativo.",
     profileLabel: "Tu perfil",
     profile: {
       maker: "Maker",

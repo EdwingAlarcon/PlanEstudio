@@ -121,6 +121,13 @@ describe("getRecommendedToolsForProducts", () => {
     expect(getRecommendedToolsForProducts(["Dataverse", "Power Apps"])).toEqual([]);
   });
 
+  it("maps Azure DevOps to git and GitHub Copilot / Claude Code to vscode", () => {
+    expect(getRecommendedToolsForProducts(["Azure DevOps"]).map((tool) => tool.id)).toEqual(["git"]);
+    expect(getRecommendedToolsForProducts(["GitHub Copilot"]).map((tool) => tool.id)).toEqual(["vscode"]);
+    expect(getRecommendedToolsForProducts(["Claude Code"]).map((tool) => tool.id)).toEqual(["vscode"]);
+    expect(getRecommendedToolsForProducts(["GitHub Copilot", "Claude Code"]).map((tool) => tool.id)).toEqual(["vscode"]);
+  });
+
   it("every hinted tool id exists in WORKSTATION_TOOLS (anti-drift)", () => {
     const knownIds = new Set(WORKSTATION_TOOLS.map((tool) => tool.id));
     for (const toolIds of Object.values(LAB_PRODUCT_TOOL_HINTS)) {

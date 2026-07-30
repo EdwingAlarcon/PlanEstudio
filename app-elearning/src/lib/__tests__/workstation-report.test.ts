@@ -3,6 +3,7 @@ import {
   VERIFIABLE_TOOL_IDS,
   WORKSTATION_REPORT_FORMAT,
   WORKSTATION_REPORT_MAX_BYTES,
+  extractMajorVersion,
   parseWorkstationReportText,
   validateWorkstationReportPayload,
 } from "../workstation-report";
@@ -83,6 +84,42 @@ describe("workstation-report", () => {
     const preview = parseWorkstationReportText(oversized);
     expect(preview.status).toBe("corrupt");
     expect(preview.errors[0]).toMatch(/tamaño máximo/);
+  });
+
+  it("marca como outdated una herramienta instalada por debajo de la versión mínima", () => {
+    const preview = validateWorkstationReportPayload(
+      validPayload({
+        tools: [{ id: "node", status: "installed", rawVersion: "v16.20.2" }],
+      })
+    );
+    expect(preview.status).toBe("valid");
+    expect(preview.entries).toEqual([{ toolId: "node", status: "outdated", detectedVersion: "v16.20.2" }]);
+    expect(preview.warnings.some((warning) => warning.includes("node"))).toBe(true);
+  });
+
+  it("no marca outdated una herramienta instalada en o por encima de la versión mínima", () => {
+    const preview = validateWorkstationReportPayload(
+      validPayload({
+        tools: [{ id: "node", status: "installed", rawVersion: "v18.20.4" }],
+      })
+    );
+    expect(preview.entries).toEqual([{ toolId: "node", status: "installed", detectedVersion: "v18.20.4" }]);
+  });
+
+  it("no marca outdated una herramienta sin minMajorVersion declarado, sin importar la versión", () => {
+    const preview = validateWorkstationReportPayload(
+      validPayload({
+        tools: [{ id: "pac-cli", status: "installed", rawVersion: "Version: 0.1.0" }],
+      })
+    );
+    expect(preview.entries).toEqual([{ toolId: "pac-cli", status: "installed", detectedVersion: "Version: 0.1.0" }]);
+  });
+
+  it("extractMajorVersion extrae el número mayor de distintos formatos de versión", () => {
+    expect(extractMajorVersion("git version 2.45.1")).toBe(2);
+    expect(extractMajorVersion("v18.20.4")).toBe(18);
+    expect(extractMajorVersion(" Version:           10.0.302")).toBe(10);
+    expect(extractMajorVersion("sin numero de version")).toBeNull();
   });
 
   it("guardarraíl anti-drift: todo VERIFIABLE_TOOL_ID tiene verification.command en WORKSTATION_TOOLS", () => {
