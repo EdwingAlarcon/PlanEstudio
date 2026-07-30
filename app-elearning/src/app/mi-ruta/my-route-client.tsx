@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Circle, Clock, Compass, HelpCircle, RotateCcw, Route, ShieldAlert } from "lucide-react";
+import { ArrowRight, CheckCircle2, Circle, Clock, Compass, HelpCircle, RotateCcw, Route, ShieldAlert, Wrench } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -11,6 +11,9 @@ import { useOnboardingStore } from "@/lib/onboarding-store";
 import { useProgressStore } from "@/lib/progress";
 import { cn } from "@/lib/utils";
 import type { ProfessionalRouteSlug } from "@/lib/professional-routes";
+import { UI } from "@/lib/i18n";
+import { getNextWorkstationRequirement, getToolsForProfile, recommendWorkstationProfile } from "@/lib/workstation";
+import { useWorkstationStore } from "@/lib/workstation-store";
 
 interface RouteSummary {
   slug: ProfessionalRouteSlug;
@@ -64,6 +67,8 @@ export function MyRouteClient({
       </section>
 
       {!started && <DiagnosticPanel />}
+
+      <WorkstationPreviewSection />
 
       <section className="grid gap-4 lg:grid-cols-[1fr_0.85fr]">
         <div className="rounded-xl border border-[#0078D4]/20 bg-[#EFF6FC] p-5 shadow-fluent-1 dark:border-[#4DB8FF]/20 dark:bg-[rgba(0,120,212,0.10)]">
@@ -233,6 +238,46 @@ export function MyRouteClient({
         </div>
       </section>
     </main>
+  );
+}
+
+function WorkstationPreviewSection() {
+  const onboarding = useOnboardingStore();
+  const workstation = useWorkstationStore();
+  const profile = workstation.profileOverride ?? recommendWorkstationProfile(onboarding.answers);
+  const os = workstation.os ?? "windows";
+  const nextRequirement = getNextWorkstationRequirement(profile, os, workstation.toolStates);
+  const toolCount = getToolsForProfile(profile, os).length;
+
+  return (
+    <section
+      aria-labelledby="workstation-preview-heading"
+      className="rounded-xl border border-border bg-card p-5 shadow-fluent-1"
+    >
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-start gap-3">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted">
+            <Wrench className="h-4 w-4 text-[#0078D4] dark:text-[#4DB8FF]" aria-hidden />
+          </div>
+          <div>
+            <h2 id="workstation-preview-heading" className="text-base font-semibold text-foreground">
+              {UI.workstation.title}
+            </h2>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+              {nextRequirement
+                ? `Siguiente requisito: ${nextRequirement.name}.`
+                : `Requisitos obligatorios de tu perfil (${toolCount} herramientas en la matriz) verificados.`}
+            </p>
+          </div>
+        </div>
+        <Button asChild variant="outline" size="sm" className="shrink-0">
+          <Link href="/preparar-entorno">
+            {UI.nav.prepareEnvironment}
+            <ArrowRight className="ml-1 h-3.5 w-3.5" aria-hidden />
+          </Link>
+        </Button>
+      </div>
+    </section>
   );
 }
 

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import {
   BookOpen, CheckSquare, GraduationCap, FileText, Trophy,
   Home, PlayCircle, FlaskConical, Route, HelpCircle, Briefcase, ClipboardList, Activity,
-  Layers3, Building2, Workflow, Bot, Compass, GitBranch,
+  Layers3, Building2, Workflow, Bot, Compass, GitBranch, Wrench,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -126,6 +126,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
             Explorar
           </p>
 
+          <NavLink href="/preparar-entorno" icon={Wrench} label={UI.nav.prepareEnvironment} active={pathname === "/preparar-entorno"} />
           <NavLink href="/rutas"     icon={Route}       label={UI.nav.routes}    active={pathname.startsWith("/rutas")} />
           <NavLink href="/experiencia-practica" icon={Activity} label={UI.nav.practicalExperience} active={pathname.startsWith("/experiencia-practica")} />
           <NavLink href="/mapa"      icon={GitBranch} label="Mapa curricular" active={pathname === "/mapa"} />
