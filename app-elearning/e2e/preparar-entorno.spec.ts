@@ -86,6 +86,24 @@ test.describe("Preparar mi entorno", () => {
     await expect(gitRow.getByText(/git version 2\.45\.1/)).toBeVisible();
   });
 
+  test("el gate técnico de un lab aparece sin la herramienta instalada y desaparece al marcarla", async ({ page }) => {
+    await page.goto("/labs/lab-52-cli-conexion-tenant");
+    const gateHeading = page.getByRole("heading", { name: "Antes de este lab puede convenirte verificar" });
+    await expect(gateHeading).toBeVisible();
+    const gateSection = page.locator("section", { has: gateHeading });
+    await expect(gateSection.getByText("Power Platform CLI", { exact: true })).toBeVisible();
+
+    await gateSection.getByRole("link", { name: "Preparar mi entorno" }).click();
+    await expect(page).toHaveURL(/\/preparar-entorno$/);
+
+    const pacRow = page.locator("tr", { hasText: "Power Platform CLI" });
+    await pacRow.getByRole("button", { name: "Marcar instalada" }).click();
+    await expect(pacRow.getByText("Instalada", { exact: true })).toBeVisible();
+
+    await page.goto("/labs/lab-52-cli-conexion-tenant");
+    await expect(page.getByRole("heading", { name: "Antes de este lab puede convenirte verificar" })).toHaveCount(0);
+  });
+
   test("marcar herramientas no altera el progreso académico", async ({ page }) => {
     await page.goto("/preparar-entorno");
     const gitRow = page.locator("tr", { hasText: "Git" });

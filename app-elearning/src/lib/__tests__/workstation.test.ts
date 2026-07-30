@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest";
 import {
   ESSENTIAL_SETUP_STEPS,
+  LAB_PRODUCT_TOOL_HINTS,
   WORKSTATION_TOOLS,
   getEssentialSetupProgress,
   getNextWorkstationRequirement,
+  getRecommendedToolsForProducts,
   getToolRequirement,
   getToolsForProfile,
   recommendWorkstationProfile,
@@ -101,6 +103,29 @@ describe("recommendWorkstationProfile", () => {
     expect(recommendWorkstationProfile({ ...baseAnswers, preference: "configure" })).toBe("functional");
     expect(recommendWorkstationProfile({ ...baseAnswers, preference: "analyze" })).toBe("functional");
     expect(recommendWorkstationProfile({ ...baseAnswers, preference: "build" })).toBe("maker");
+  });
+});
+
+describe("getRecommendedToolsForProducts", () => {
+  it("maps known product strings to their tool", () => {
+    const tools = getRecommendedToolsForProducts(["Power Platform CLI", "Dataverse"]);
+    expect(tools.map((tool) => tool.id)).toEqual(["pac-cli"]);
+  });
+
+  it("deduplicates when multiple products map to the same tool", () => {
+    const tools = getRecommendedToolsForProducts(["C#", "Custom API", "C#"]);
+    expect(tools.map((tool) => tool.id)).toEqual(["dotnet-sdk"]);
+  });
+
+  it("returns an empty list when no product matches a known hint", () => {
+    expect(getRecommendedToolsForProducts(["Dataverse", "Power Apps"])).toEqual([]);
+  });
+
+  it("every hinted tool id exists in WORKSTATION_TOOLS (anti-drift)", () => {
+    const knownIds = new Set(WORKSTATION_TOOLS.map((tool) => tool.id));
+    for (const toolIds of Object.values(LAB_PRODUCT_TOOL_HINTS)) {
+      for (const id of toolIds) expect(knownIds.has(id)).toBe(true);
+    }
   });
 });
 

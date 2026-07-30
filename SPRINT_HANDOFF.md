@@ -391,14 +391,43 @@ Lo que entrega la Fase 1 (ya en `master`, commit `f4ba827`):
 - Conteos de contenido académico **sin cambios** (75 módulos, 72 labs, 508 preguntas, 633 criterios,
   20 prácticas profesionales).
 
-**Pendiente explícito para la próxima sesión / Codex — sub-fases B+ de la Fase 2 (no implementadas):**
+**Fase 2, sub-fase B — Gate técnico advisory antes de abrir un lab: COMPLETADA.**
+
+- `workstation.ts`: nuevo `LAB_PRODUCT_TOOL_HINTS` (tabla explícita y pequeña, mantenida a mano, NO
+  heurística difusa) que mapea 3 strings literales de `product` ya presentes en frontmatter de labs
+  (`"Power Platform CLI"`, `"C#"`, `"Power Automate Desktop"`) a los ids de herramientas verificables
+  `pac-cli`/`dotnet-sdk`/`power-automate-desktop`, y `getRecommendedToolsForProducts(products)`.
+  `validateWorkstationReferences()` ahora también valida que todo id referenciado en
+  `LAB_PRODUCT_TOOL_HINTS` exista en `WORKSTATION_TOOLS` (guardarraíl anti-drift en sentido inverso al
+  de la sub-fase A). **No se tocó frontmatter de ningún lab ni sus conteos.**
+- `components/labs/lab-workstation-gate.tsx` (nuevo, cliente): banner **advisory, nunca bloqueante** —
+  no oculta contenido ni deshabilita "Marcar completado". Lee `useWorkstationStore`, calcula
+  herramientas recomendadas para `lab.products` que aún no estén `installed`/`verified`, y no renderiza
+  nada si no hay ninguna pendiente (evita ruido en los ~69 labs sin señal de herramienta). Integrado en
+  `app/labs/[slug]/page.tsx` entre el header y el contenido Markdown.
+- i18n: nueva clave `labWorkstationGate` (`title`/`body`/`cta`) en `i18n.ts`.
+- Tests nuevos: 4 casos añadidos a `workstation.test.ts` (mapeo conocido, deduplicación, sin match,
+  guardarraíl anti-drift) y `lab-workstation-gate.test.tsx` (3 casos: sin match no renderiza, herramienta
+  ya instalada no renderiza, herramienta pendiente muestra banner). Nuevo caso E2E en
+  `preparar-entorno.spec.ts`: visita `/labs/lab-52-cli-conexion-tenant` (declara `"Power Platform CLI"`
+  en `product`), confirma el banner, navega a `/preparar-entorno` vía el CTA del propio banner, marca
+  `pac-cli` como instalada, vuelve al lab y confirma que el banner ya no aparece.
+- Baseline posterior: **312 tests Vitest**, **40 casos Playwright** en la corrida completa (1 falla
+  aislada y no relacionada — "barra de progreso sigue el scroll del contenedor principal" de
+  `smoke.spec.ts`, ya existente desde el sprint 22, confirmada como flaky: pasa 1/1 al re-ejecutarla
+  sola; no toca ningún archivo de esta sub-fase). `npm run validate:content`, `lint`, `tsc --noEmit` y
+  `build:pages` en verde localmente, corridos en serie.
+- Conteos de contenido académico **sin cambios** (75 módulos, 72 labs, 508 preguntas, 633 criterios,
+  20 prácticas profesionales).
+
+**Pendiente explícito para la próxima sesión / Codex — sub-fases C+ de la Fase 2 (no implementadas):**
 1. Guías profundas de Git/VS Code/Visual Studio/Node/.NET/PowerShell/PAC CLI como contenido navegable;
    prácticas SETUP-01 a SETUP-06; challenge CH-SETUP-01; incident labs INC-SETUP-001 a 005; plantillas
-   starter de repositorio por tipo de proyecto; gates técnicos (`workstationRequirements`/
-   `environmentRequirements`) que se muestren antes de abrir un lab; lógica de `outdated` con umbrales
-   de versión (el campo `status` del store ya lo admite, solo falta la comparación de versiones); el
-   resto de los ~23 casos E2E del sprint original (§63, ahora con 1 caso ya cubierto por la sub-fase A);
-   auditoría manual por los 6 perfiles (§64).
+   starter de repositorio por tipo de proyecto; lógica de `outdated` con umbrales de versión (el campo
+   `status` del store ya lo admite, solo falta la comparación de versiones); ampliar
+   `LAB_PRODUCT_TOOL_HINTS` con más señales si se identifican otras strings de `product` de alta
+   confianza; el resto de los ~23 casos E2E del sprint original (§63, ahora con 2 casos ya cubiertos
+   entre las sub-fases A y B); auditoría manual por los 6 perfiles (§64).
 2. No fusionar el progreso de `preparar-entorno` con el progreso académico ni con
    `practice-progress` — son y deben seguir siendo tres stores independientes.
 

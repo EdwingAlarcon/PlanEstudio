@@ -188,6 +188,20 @@ export function getToolRequirement(toolId: string, profile: WorkstationProfile):
   return tool ? tool.requiredBy[profile] : "not_required";
 }
 
+export const LAB_PRODUCT_TOOL_HINTS: Record<string, string[]> = {
+  "Power Platform CLI": ["pac-cli"],
+  "C#": ["dotnet-sdk"],
+  "Power Automate Desktop": ["power-automate-desktop"],
+};
+
+export function getRecommendedToolsForProducts(products: string[]): WorkstationTool[] {
+  const ids = new Set<string>();
+  for (const product of products) {
+    for (const id of LAB_PRODUCT_TOOL_HINTS[product] ?? []) ids.add(id);
+  }
+  return WORKSTATION_TOOLS.filter((tool) => ids.has(tool.id));
+}
+
 export function getToolsForProfile(profile: WorkstationProfile, os: OperatingSystem): WorkstationTool[] {
   return WORKSTATION_TOOLS
     .filter((tool) => tool.platforms.includes(os))
@@ -248,6 +262,14 @@ export function validateWorkstationReferences(): string[] {
     if (seenSteps.has(step.id)) errors.push(`Paso de setup esencial duplicado: ${step.id}`);
     seenSteps.add(step.id);
     if (!step.tenantAlternative) errors.push(`Paso ${step.id} no tiene alternativa sin tenant`);
+  }
+
+  for (const [product, toolIds] of Object.entries(LAB_PRODUCT_TOOL_HINTS)) {
+    for (const toolId of toolIds) {
+      if (!seenTools.has(toolId)) {
+        errors.push(`LAB_PRODUCT_TOOL_HINTS['${product}'] referencia una herramienta inexistente: ${toolId}`);
+      }
+    }
   }
 
   return errors;

@@ -238,6 +238,11 @@ export const UI = {
     detectedVersionLabel: "Version detectada",
     importApplied: "Estado actualizado con el reporte.",
   },
+  labWorkstationGate: {
+    title: "Antes de este lab puede convenirte verificar",
+    body: "Este lab usa herramientas que no marcaste como instaladas o verificadas todavia. No es obligatorio: puedes seguir el lab igual, pero preparar tu entorno primero suele ahorrar tiempo.",
+    cta: "Preparar mi entorno",
+  },
 } as const;
 
 // Tipos de nivel para narrowing

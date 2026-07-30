@@ -6,6 +6,7 @@ import { getAllLabs, getLabBySlug } from "@/lib/content";
 import { getLabPresentationMeta } from "@/lib/lab-metadata";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
 import { LabCompleteButton } from "@/components/labs/lab-complete-button";
+import { LabWorkstationGate } from "@/components/labs/lab-workstation-gate";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
@@ -185,6 +186,8 @@ export default async function LabDetailPage({ params }: Props) {
           </div>
         )}
       </div>
+
+      <LabWorkstationGate products={lab.products} />
 
       {/* ── Lab markdown content ──────────────────────────────────────────── */}
       <div className="rounded-xl border border-border bg-card px-6 py-8 md:px-8 shadow-fluent-1">
