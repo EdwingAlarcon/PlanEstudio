@@ -12,6 +12,7 @@ import { getPracticeCounts } from "../src/lib/practices";
 import { getAllQuestions } from "../src/lib/questions-parser";
 import { parseChecklistMarkdown, validateChecklistData } from "../src/lib/checklist";
 import { LEVEL_MODULE_RANGE } from "../src/lib/i18n";
+import { validateGuidedJourneyReferences } from "../src/lib/guided-journey";
 
 function main(): void {
   const levels = getAllLevels();
@@ -24,6 +25,13 @@ function main(): void {
   const checklist = parseChecklistMarkdown(checklistPage.rawContent);
   validateChecklistData(checklist);
   const practiceCounts = getPracticeCounts();
+  const guidedErrors = validateGuidedJourneyReferences(
+    levels.flatMap((level) => level.modules),
+    labs,
+  );
+  if (guidedErrors.length > 0) {
+    throw new ContentValidationError(`Ruta guiada invalida: ${guidedErrors.join("; ")}`);
+  }
 
   const allModuleIds = levels.flatMap((level) => level.modules.map((mod) => mod.moduleId));
   const expectedModuleIds = Object.values(LEVEL_MODULE_RANGE).flatMap(([min, max]) => {
@@ -54,6 +62,7 @@ function main(): void {
   console.log(`✓ ${questions.length} preguntas válidas cubriendo los ${expectedModuleIds.length} módulos`);
   console.log(`✓ Checklist válido (${checklist.totalModules} módulos, ${checklist.totalItems} criterios)`);
   console.log(`✓ Experiencia práctica válida (${practiceCounts.incidents} incidentes, ${practiceCounts.challenges} challenges, ${practiceCounts.simulations} simulaciones)`);
+  console.log("✓ Ruta guiada de fundamentos válida (referencias, orden, práctica temprana y decisión posterior)");
 }
 
 try {

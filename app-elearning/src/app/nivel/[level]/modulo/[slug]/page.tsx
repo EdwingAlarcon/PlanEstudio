@@ -11,6 +11,7 @@ import { QuizPanel } from "@/components/quiz/quiz-panel";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
 import { ArrowLeft, ArrowRight, Clock, BookOpen } from "lucide-react";
 import { UI, type LevelId } from "@/lib/i18n";
+import { FOUNDATION_ACTIVITIES } from "@/lib/guided-journey";
 
 interface PageProps {
   params: Promise<{ level: string; slug: string }>;
@@ -53,6 +54,10 @@ export default async function ModulePage({ params }: PageProps) {
   const nextModule = currentIdx < modules.length - 1 ? modules[currentIdx + 1] : null;
 
   const questions = getQuestionsForModule(mod.moduleId);
+  const foundationActivity = FOUNDATION_ACTIVITIES.find((activity) => activity.moduleId === mod.moduleId);
+  const recommendedLab = foundationActivity
+    ? FOUNDATION_ACTIVITIES.find((activity) => activity.type === "lab" && activity.step === foundationActivity.step + 1)
+    : undefined;
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-fade-in">
@@ -101,6 +106,27 @@ export default async function ModulePage({ params }: PageProps) {
       </div>
 
       {/* ── Quiz panel ───────────────────────────────────────────────────── */}
+      {recommendedLab && (
+        <section aria-labelledby="recommended-lab-heading" className="rounded-xl border border-[#107C10]/25 bg-card px-6 py-5 shadow-fluent-1">
+          <h2 id="recommended-lab-heading" className="text-lg font-semibold text-foreground">
+            Practica recomendada
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            Despues de este modulo, realiza &ldquo;{recommendedLab.title}&rdquo; para convertir la teoria en evidencia.
+            Requisitos: {recommendedLab.prerequisites.join(", ")}. Tiempo estimado: {recommendedLab.minutes} min.
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            Si no tienes tenant, usa esta variante: {recommendedLab.tenantAlternative}
+          </p>
+          <Button asChild variant="outline" size="sm" className="mt-4 border-[#107C10]/30 text-[#107C10] hover:bg-[#EFF8EE]">
+            <Link href={recommendedLab.href}>
+              Realizar practica recomendada
+              <ArrowRight className="ml-1 h-3.5 w-3.5" aria-hidden />
+            </Link>
+          </Button>
+        </section>
+      )}
+
       {questions.length > 0 && (
         <section aria-labelledby="quiz-heading" className="rounded-xl border border-border bg-card px-6 py-6 shadow-fluent-1">
           <h2 id="quiz-heading" className="text-lg font-semibold mb-5 flex items-center gap-2">

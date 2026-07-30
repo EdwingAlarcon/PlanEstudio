@@ -12,6 +12,7 @@ import { UI, type LevelId } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { PracticeDomainProgress, PracticeProgressSummary, type PracticeSummaryItem } from "@/components/practices/practice-progress-summary";
 import { PracticePortabilityPanel } from "@/components/practices/practice-portability-panel";
+import { GuidedDashboardSummary } from "@/components/guided/guided-dashboard-summary";
 
 export interface LevelReadinessData {
   levelId: LevelId;
@@ -63,6 +64,8 @@ export function ProgressDashboardClient({ levels, practices }: { levels: LevelRe
           que exige el certificado: no basta con marcar módulos como leídos.
         </p>
       </div>
+
+      <GuidedDashboardSummary />
 
       <section className="space-y-4" aria-labelledby="academic-progress-heading">
         <div>

@@ -21,12 +21,18 @@ test.describe("Smoke — rutas principales", () => {
     for (const route of routes) {
       await page.goto(route, { waitUntil: "domcontentloaded" });
       const sidebar = page.getByRole("complementary", { name: "Navegación principal" });
+      const d365Link = sidebar.getByRole("link", { name: /Dynamics 365 Especialización\s+D365/ });
+      const rpaLink = sidebar.getByRole("link", { name: /Power Automate Desktop & RPA\s+RPA/ });
+      const footerLabel = sidebar.getByText("PL-900 · PL-200 · PL-400 · Arquitectura · IA · D365 · RPA");
 
-      await expect(sidebar.getByRole("link", { name: /Dynamics 365 Especialización\s+D365/ })).toBeVisible();
-      await expect(sidebar.getByRole("link", { name: /Power Automate Desktop & RPA\s+RPA/ })).toBeVisible();
+      await d365Link.scrollIntoViewIfNeeded();
+      await expect(d365Link).toBeVisible();
+      await rpaLink.scrollIntoViewIfNeeded();
+      await expect(rpaLink).toBeVisible();
       await expect(sidebar.getByRole("link", { name: "Experiencia práctica" })).toBeVisible();
       await expect(sidebar.getByText("0/10")).toHaveCount(2);
-      await expect(sidebar.getByText("PL-900 · PL-200 · PL-400 · Arquitectura · IA · D365 · RPA")).toBeVisible();
+      await footerLabel.scrollIntoViewIfNeeded();
+      await expect(footerLabel).toBeVisible();
       await expect(sidebar.getByText("Dynamics 365 Avanzado")).toHaveCount(0);
       await expect(sidebar.getByText("0/4")).toHaveCount(0);
     }
@@ -35,8 +41,33 @@ test.describe("Smoke — rutas principales", () => {
   test("dashboard carga con level cards", async ({ page }) => {
     await page.goto("/");
     await expect(page).toHaveTitle(/Power Platform|PlanEstudio/i);
+    await expect(page.getByRole("heading", { name: "Empieza aqui" })).toBeVisible();
+    await expect(page.getByText("Comenzar desde cero")).toBeVisible();
     await expect(page.locator("text=Nivel 1").first()).toBeVisible();
     await expect(page.locator("text=Básico").first()).toBeVisible();
+  });
+
+  test("onboarding guiado persiste y muestra ruta de fundamentos", async ({ page }) => {
+    await page.goto("/");
+    await page.getByText("Empiezo desde cero").click();
+    await expect(page).toHaveURL(/\/mi-ruta$/);
+    await expect(page.getByRole("heading", { name: "Fundamentos para empezar" })).toBeVisible();
+    await expect(page.getByText("Avance de fundamentos")).toBeVisible();
+    await page.reload();
+    await expect(page.getByText("Modo guiado")).toBeVisible();
+    await expect(page.getByText("Proxima mejor accion")).toBeVisible();
+  });
+
+  test("modo libre y cambio de ruta conservan progreso local", async ({ page }) => {
+    await page.goto("/");
+    await page.evaluate(() => window.localStorage.clear());
+    await page.goto("/nivel/basico/modulo/introduccion-al-ecosistema-power-platform");
+    await page.locator('button[aria-label*="Marcar"]').first().click();
+    await page.goto("/mi-ruta#roles");
+    await page.getByRole("button", { name: /Activar explorar libremente/i }).click();
+    await expect(page.getByText("Explorar libremente").first()).toBeVisible();
+    await page.getByRole("button", { name: /Me interesa esta familia/i }).nth(2).click();
+    await expect(page.getByText("2/7")).toBeVisible();
   });
 
   test("Nivel 1 muestra lista de módulos", async ({ page }) => {

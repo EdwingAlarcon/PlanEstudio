@@ -11,6 +11,8 @@ import { cn } from "@/lib/utils";
 import type { SearchDocument, SearchDocumentType } from "@/lib/content";
 import { PRACTICE_DIFFICULTY_LABELS, PRACTICE_DOMAIN_LABELS, PRACTICE_ROLE_LABELS, PRACTICE_TYPE_LABELS, type PracticeDifficulty, type PracticeDomain, type PracticeRole, type PracticeType } from "@/lib/practice-meta";
 import { getPracticeStatusLabel, usePracticeProgressStore } from "@/lib/practice-progress";
+import { classifySearchDocument } from "@/lib/guided-journey";
+import { useOnboardingStore } from "@/lib/onboarding-store";
 
 interface SearchBarProps {
   documents: SearchDocument[];
@@ -25,6 +27,7 @@ interface SearchHit {
   href: string;
   type: SearchDocumentType;
   snippet: string;
+  content: string;
   practiceId?: string;
   practiceType?: PracticeType;
   practiceDomain?: PracticeDomain;
@@ -65,6 +68,7 @@ export function SearchBar({ documents }: SearchBarProps) {
   const [activeIdx, setActiveIdx] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const onboarding = useOnboardingStore();
 
   // Build FlexSearch index once
   const indexRef = useRef<FlexSearch.Document<SearchDocument, true> | null>(null);
@@ -112,6 +116,7 @@ export function SearchBar({ documents }: SearchBarProps) {
           href: doc.href,
           type: doc.type,
           snippet,
+          content: doc.content,
           practiceId: doc.practiceId,
           practiceType: doc.practiceType as PracticeType | undefined,
           practiceDomain: doc.practiceDomain as PracticeDomain | undefined,
@@ -120,9 +125,15 @@ export function SearchBar({ documents }: SearchBarProps) {
         });
       }
     }
-    setResults(hits);
+    const order = { "en-tu-ruta": 0, opcional: 1, avanzado: 2, "otra-especializacion": 3 };
+    setResults(
+      hits.sort(
+        (a, b) =>
+          order[classifySearchDocument(a, onboarding)] - order[classifySearchDocument(b, onboarding)]
+      )
+    );
     setActiveIdx(0);
-  }, [query]);
+  }, [query, onboarding]);
 
   // Focus input when dialog opens
   useEffect(() => {
@@ -236,6 +247,7 @@ export function SearchBar({ documents }: SearchBarProps) {
             const isPractice = !["module", "lab", "resource"].includes(hit.type);
             const Icon = hit.type === "lab" ? FlaskConical : hit.type === "resource" ? BookOpen : isPractice ? Activity : FileText;
             const status = hit.practiceId ? getPracticeStatusLabel(practiceRecords[hit.practiceId]?.status ?? "not_started") : null;
+            const context = classifySearchDocument(hit, onboarding);
             return (
               <button
                 key={hit.id}
@@ -266,6 +278,9 @@ export function SearchBar({ documents }: SearchBarProps) {
                         {status}
                       </span>
                     )}
+                    <span className={cn("shrink-0 text-[10px] font-medium px-1.5 py-0.5 rounded", contextClassName(context))}>
+                      {contextLabel(context)}
+                    </span>
                   </div>
                   {isPractice && hit.practiceType && (
                     <p className="mb-1 text-[11px] text-muted-foreground">
@@ -292,4 +307,18 @@ export function SearchBar({ documents }: SearchBarProps) {
       </DialogContent>
     </Dialog>
   );
+}
+
+function contextLabel(context: "en-tu-ruta" | "opcional" | "avanzado" | "otra-especializacion"): string {
+  if (context === "en-tu-ruta") return "En tu ruta";
+  if (context === "avanzado") return "Avanzado";
+  if (context === "otra-especializacion") return "Otra especializacion";
+  return "Opcional";
+}
+
+function contextClassName(context: "en-tu-ruta" | "opcional" | "avanzado" | "otra-especializacion"): string {
+  if (context === "en-tu-ruta") return "bg-[#EFF8EE] text-[#107C10] dark:bg-[rgba(16,124,16,0.15)] dark:text-[#2DB52D]";
+  if (context === "avanzado") return "bg-orange-50 text-orange-700 dark:bg-orange-500/10 dark:text-orange-300";
+  if (context === "otra-especializacion") return "bg-purple-50 text-purple-700 dark:bg-purple-500/10 dark:text-purple-300";
+  return "bg-muted text-muted-foreground";
 }

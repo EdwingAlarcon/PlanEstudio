@@ -5,9 +5,10 @@ import { getAllPractices } from "@/lib/practices";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProgressRingClient } from "@/components/modules/progress-ring-client";
-import { ArrowRight, BookOpen, Trophy, FlaskConical, Route, Zap, HelpCircle, Layers3, Briefcase, Building2, Workflow, Activity, Bot } from "lucide-react";
+import { ArrowRight, BookOpen, Trophy, FlaskConical, Route, HelpCircle, Layers3, Briefcase, Building2, Workflow, Activity, Bot } from "lucide-react";
 import { UI, LEVEL_ORDER, type LevelId } from "@/lib/i18n";
 import { PracticeProgressSummary } from "@/components/practices/practice-progress-summary";
+import { GuidedHomeClient } from "@/components/guided/guided-home-client";
 
 // Level display config
 const LEVEL_CONFIG: Record<LevelId, {
@@ -37,81 +38,25 @@ export default async function DashboardPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-10 animate-fade-in">
-      {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <div className="rounded-2xl border border-border bg-gradient-to-br from-[#EFF6FC] to-white dark:from-[rgba(0,120,212,0.08)] dark:to-background px-6 py-8 md:px-10 shadow-fluent-1">
-        <div className="flex items-start gap-4">
-          <div className="hidden sm:flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#0078D4] shadow-fluent-4">
-            <Zap className="h-7 w-7 text-white" aria-hidden />
-          </div>
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 flex-wrap">
-              <Badge className="bg-[#0078D4] text-white border-0 text-xs px-2 py-0.5">Power Platform</Badge>
-              <Badge className="bg-[#107C10] text-white border-0 text-xs px-2 py-0.5">Dynamics 365</Badge>
-            </div>
-            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
-              Plan de Estudio Progresivo
-            </h1>
-            <p className="text-muted-foreground text-base leading-relaxed max-w-xl">
-              Aprende por nivel, especialízate por rol o por dominio (Power Platform, Dynamics 365,
-              Integración), practica con labs, construye portafolio y prepárate para vacantes.{" "}
-              {moduleCount} módulos, {labCount} laboratorios y {questionCount} preguntas de evaluación.
-            </p>
-          </div>
-        </div>
-      </div>
+      <GuidedHomeClient />
 
-      {/* ── Where to start ────────────────────────────────────────────────── */}
-      <section aria-labelledby="start-heading" className="space-y-4">
-        <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+      <section aria-labelledby="catalog-heading" className="space-y-4">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 id="start-heading" className="text-lg font-semibold text-foreground">
-              Por dónde empezar
+            <h2 id="catalog-heading" className="text-lg font-semibold text-foreground">
+              Explorar todo el contenido
             </h2>
-            <p className="text-sm text-muted-foreground">
-              Elige el punto de entrada según tu experiencia actual. No necesitas recorrer todo en una sola sesión.
+            <p className="max-w-2xl text-sm text-muted-foreground">
+              Todo sigue disponible: {moduleCount} módulos, {labCount} laboratorios y {questionCount} preguntas.
+              Esta vista es consultiva; si empiezas desde cero, tu ruta actual solo cuenta 7 actividades.
             </p>
           </div>
-          <Button asChild variant="ghost" size="sm" className="self-start text-[#0078D4] dark:text-[#4DB8FF] sm:self-auto">
+          <Button asChild variant="outline" size="sm" className="self-start sm:self-auto">
             <Link href="/como-usar">
-              Ver guía completa
+              Ver guia completa
               <ArrowRight className="ml-1 h-3.5 w-3.5" aria-hidden />
             </Link>
           </Button>
-        </div>
-
-        <div className="grid gap-3 md:grid-cols-4">
-          <StartCard
-            href="/nivel/basico"
-            eyebrow="Soy nuevo"
-            title="Empieza por fundamentos"
-            description="Avanza por módulos y laboratorios en orden para construir base sólida."
-            icon={<Layers3 className="h-5 w-5 text-[#107C10]" />}
-            accent="#107C10"
-          />
-          <StartCard
-            href="/rutas"
-            eyebrow="Tengo un rol objetivo"
-            title="Elige una ruta profesional"
-            description="Maker, consultor, developer, architect, D365 o IA: estudia con foco."
-            icon={<Route className="h-5 w-5 text-[#0078D4]" />}
-            accent="#0078D4"
-          />
-          <StartCard
-            href="/simulador"
-            eyebrow="Quiero practicar examen"
-            title="Mide preparación"
-            description="Usa el simulador cuando ya hayas cubierto varios módulos y quieras detectar temas débiles."
-            icon={<Trophy className="h-5 w-5 text-orange-500" />}
-            accent="#EA580C"
-          />
-          <StartCard
-            href="/empleabilidad"
-            eyebrow="Quiero aplicar"
-            title="Conecta con vacantes"
-            description="Cruza perfiles, skills, entrevista y evidencia sin convertir vacantes en módulos."
-            icon={<Briefcase className="h-5 w-5 text-[#0F6CBD]" />}
-            accent="#0F6CBD"
-          />
         </div>
       </section>
 

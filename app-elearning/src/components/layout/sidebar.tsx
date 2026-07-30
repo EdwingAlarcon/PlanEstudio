@@ -6,12 +6,14 @@ import { usePathname } from "next/navigation";
 import {
   BookOpen, CheckSquare, GraduationCap, FileText, Trophy,
   Home, PlayCircle, FlaskConical, Route, HelpCircle, Briefcase, ClipboardList, Activity,
-  Layers3, Building2, Workflow, Bot,
+  Layers3, Building2, Workflow, Bot, Compass, GitBranch,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useProgressStore, calculateLevelProgress } from "@/lib/progress";
+import { useOnboardingStore } from "@/lib/onboarding-store";
+import { getNextBestAction } from "@/lib/guided-journey";
 import { CERTIFICATION_LEVEL_ORDER, LEVEL_ORDER, TRANSVERSAL_LEVEL_ORDER, UI, type LevelId } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
@@ -75,6 +77,9 @@ interface SidebarProps {
 export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
   const pathname = usePathname();
   const completedModules = useProgressStore((s) => s.completedModules);
+  const completedLabs = useProgressStore((s) => s.completedLabs);
+  const onboarding = useOnboardingStore();
+  const nextAction = getNextBestAction(completedModules, completedLabs, onboarding);
 
   return (
     <>
@@ -110,10 +115,20 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
         <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden px-2 py-3">
           {/* Primary actions */}
           <NavLink href="/"          icon={Home}        label={UI.nav.home}      active={pathname === "/"} />
-          <NavLink href="/como-usar" icon={HelpCircle}  label={UI.nav.howToUse} active={pathname === "/como-usar"} />
+          <NavLink href="/mi-ruta"   icon={Compass}     label="Mi ruta"          active={pathname === "/mi-ruta"} />
+          <NavLink href={nextAction.activity.href} icon={PlayCircle} label="Continuar" active={pathname === nextAction.activity.href} />
           <NavLink href="/progreso"  icon={ClipboardList} label={UI.nav.myProgress} active={pathname === "/progreso"} />
+          <NavLink href="/como-usar" icon={HelpCircle}  label="Ayuda" active={pathname === "/como-usar"} />
+
+          <Separator className="my-3" />
+
+          <p className="px-3 text-[10px] font-semibold text-muted-foreground mb-2 uppercase tracking-widest">
+            Explorar
+          </p>
+
           <NavLink href="/rutas"     icon={Route}       label={UI.nav.routes}    active={pathname.startsWith("/rutas")} />
           <NavLink href="/experiencia-practica" icon={Activity} label={UI.nav.practicalExperience} active={pathname.startsWith("/experiencia-practica")} />
+          <NavLink href="/mapa"      icon={GitBranch} label="Mapa curricular" active={pathname === "/mapa"} />
           <NavLink href="/simulador" icon={PlayCircle}  label={UI.nav.simulator} active={pathname === "/simulador"} />
           <NavLink href="/labs"      icon={FlaskConical} label="Laboratorios"    active={pathname.startsWith("/labs")} />
           <NavLink href="/portafolio" icon={Briefcase}   label={UI.nav.portfolio} active={pathname === "/portafolio"} />
