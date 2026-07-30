@@ -16,10 +16,11 @@ describe("professional practices content", () => {
   it("loads the expanded professional practice scope", () => {
     const counts = getPracticeCounts();
 
-    expect(counts.total).toBe(20);
+    expect(counts.total).toBe(27);
     expect(counts.incidents).toBe(13);
-    expect(counts.challenges).toBe(5);
+    expect(counts.challenges).toBe(6);
     expect(counts.simulations).toBe(2);
+    expect(counts.guided).toBe(6);
   });
 
   it("validates controlled metadata vocabulary", () => {
@@ -62,7 +63,7 @@ describe("professional practices content", () => {
     }
 
     const searchDocs = getPracticeSearchDocuments();
-    expect(searchDocs).toHaveLength(20);
+    expect(searchDocs).toHaveLength(27);
     expect(searchDocs.find((doc) => doc.practiceId === "INC-001")?.content).toMatch(/security-roles|Dataverse/i);
     expect(searchDocs.map((doc) => doc.href)).toContain("/experiencia-practica/inc-001-seguridad-dataverse-oportunidades");
   });

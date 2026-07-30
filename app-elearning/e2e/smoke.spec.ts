@@ -165,18 +165,24 @@ test.describe("Smoke — rutas principales", () => {
     await page.goto("/experiencia-practica");
     await expect(page.locator("h1")).toContainText("Experiencia práctica");
     await expect(page.getByText("13 incidentes")).toBeVisible();
-    await expect(page.getByText("5 challenges")).toBeVisible();
+    await expect(page.getByText("6 challenges")).toBeVisible();
     await expect(page.getByText("2 simulaciones")).toBeVisible();
+    await expect(page.getByText("6 guiadas")).toBeVisible();
 
     await page.getByRole("button", { name: "Incident Lab" }).click();
-    await expect(page.getByText("13 de 20")).toBeVisible();
+    await expect(page.getByText("13 de 27")).toBeVisible();
     await expect(page.getByText("INC-001")).toBeVisible();
     await expect(page.getByText("CH-001")).toHaveCount(0);
 
     await page.getByRole("button", { name: "Limpiar filtros" }).click();
     await page.getByRole("button", { name: "Challenge Lab" }).click();
-    await expect(page.getByText("5 de 20")).toBeVisible();
+    await expect(page.getByText("6 de 27")).toBeVisible();
     await expect(page.getByText("CH-001")).toBeVisible();
+
+    await page.getByRole("button", { name: "Limpiar filtros" }).click();
+    await page.getByRole("button", { name: "Guided Lab" }).click();
+    await expect(page.getByText("6 de 27")).toBeVisible();
+    await expect(page.getByText("GL-SETUP-01")).toBeVisible();
   });
 
   test("detalle de incident lab muestra evidencias, método y solución de referencia", async ({ page }) => {

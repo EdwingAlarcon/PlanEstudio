@@ -438,13 +438,36 @@ Lo que entrega la Fase 1 (ya en `master`, commit `f4ba827`):
 - Conteos de contenido académico **sin cambios** (75 módulos, 72 labs, 508 preguntas, 633 criterios,
   20 prácticas profesionales) — esta guía es un recurso, no un módulo ni un lab.
 
-**Pendiente explícito — sub-fases D+ de la Fase 2 (no implementadas, en curso en esta misma sesión):**
-1. Prácticas SETUP-01 a SETUP-06; challenge CH-SETUP-01; incident labs INC-SETUP-001 a 005; plantillas
-   starter de repositorio por tipo de proyecto; lógica de `outdated` con umbrales de versión (el campo
-   `status` del store ya lo admite, solo falta la comparación de versiones); ampliar
-   `LAB_PRODUCT_TOOL_HINTS` con más señales si se identifican otras strings de `product` de alta
-   confianza; el resto de los ~23 casos E2E del sprint original (§63, ahora con 2 casos ya cubiertos
-   entre las sub-fases A y B); auditoría manual por los 6 perfiles (§64).
+**Fase 2, sub-fase D — Prácticas SETUP-01..06 + challenge CH-SETUP-01: COMPLETADA.**
+
+- El roadmap original hablaba de "SETUP-01..06", pero el esquema real de `practices.ts` exige que el
+  `id` empiece con el prefijo de su `practiceType` (`GL-`/`SGL-`/`CH-`/`INC-`/`SIM-`), igual que ya
+  existe `CH-RPA-01`/`INC-RPA-001`. Se adoptó el mismo patrón: **`GL-SETUP-01` a `GL-SETUP-06`**
+  (tipo `guided`, el primer uso real de ese `practiceType` en el repo — antes solo estaba declarado
+  en el esquema) y **`CH-SETUP-01`**, sin tocar el esquema ni añadir un tipo nuevo.
+- Las 6 prácticas guiadas cubren, paso a paso: Git + identidad, Node.js LTS, Power Platform CLI +
+  conexión segura, VS Code + extensión Power Platform Tools, confirmación de entorno no productivo y
+  rol de seguridad, y correr el verificador de estación (`tools/check-workstation`) e importar su
+  reporte en `/preparar-entorno`. Cada una enlaza a la guía de herramientas (sub-fase C) y a
+  `/preparar-entorno`. `CH-SETUP-01` integra las 6 en un cierre completo por perfil, sin instrucciones
+  paso a paso (cumple la regla de `validatePracticeRelations` para `challenge`).
+- `getPracticeCounts()` (`practices.ts`) ahora también expone `guided`; `validate-content.ts` y el
+  badge de `/experiencia-practica` lo muestran junto a incidentes/challenges/simulaciones.
+- Conteos de prácticas: **13 incidentes, 6 challenges (+1), 2 simulaciones, 6 guiadas (nuevo) = 27
+  prácticas totales** (antes 20). Conteos de contenido académico **sin cambios** (75 módulos, 72 labs,
+  508 preguntas, 633 criterios) — las prácticas son una capa aparte, no módulos ni labs.
+- Tests actualizados: `practices.test.ts` (total 20→27, challenges 5→6, `guided` 6, búsqueda 20→27) y
+  `smoke.spec.ts` (badges de conteo, filtro "Guided Lab" añadido con `GL-SETUP-01` visible).
+- Baseline posterior: **312 tests Vitest**, **40/40 Playwright**. `validate:content`, `lint`,
+  `tsc --noEmit` y `build:pages` en verde localmente.
+
+**Pendiente explícito — sub-fases E+ de la Fase 2 (no implementadas, en curso en esta misma sesión):**
+1. Incident labs INC-SETUP-001 a 005; plantillas starter de repositorio por tipo de proyecto; lógica
+   de `outdated` con umbrales de versión (el campo `status` del store ya lo admite, solo falta la
+   comparación de versiones); ampliar `LAB_PRODUCT_TOOL_HINTS` con más señales si se identifican otras
+   strings de `product` de alta confianza; el resto de los ~23 casos E2E del sprint original (§63,
+   ahora con varios casos ya cubiertos entre las sub-fases A, B y D); auditoría manual por los 6
+   perfiles (§64).
 2. No fusionar el progreso de `preparar-entorno` con el progreso académico ni con
    `practice-progress` — son y deben seguir siendo tres stores independientes.
 

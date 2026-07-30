@@ -34,6 +34,7 @@ export default function PracticalExperiencePage() {
               <Badge variant="outline">{counts.incidents} incidentes</Badge>
               <Badge variant="outline">{counts.challenges} challenges</Badge>
               <Badge variant="outline">{counts.simulations} {counts.simulations === 1 ? "simulación" : "simulaciones"}</Badge>
+              <Badge variant="outline">{counts.guided} {counts.guided === 1 ? "guiada" : "guiadas"}</Badge>
             </div>
             <div>
               <h1 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">Experiencia práctica</h1>

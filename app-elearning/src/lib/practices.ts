@@ -389,6 +389,7 @@ export function getPracticeCounts() {
     incidents: practices.filter((practice) => practice.practiceType === "incident").length,
     challenges: practices.filter((practice) => practice.practiceType === "challenge").length,
     simulations: practices.filter((practice) => practice.practiceType === "simulation").length,
+    guided: practices.filter((practice) => practice.practiceType === "guided").length,
   };
 }
 

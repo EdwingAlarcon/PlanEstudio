@@ -61,7 +61,7 @@ function main(): void {
   console.log(`✓ ${labs.length} labs válidos (id único, slug único)`);
   console.log(`✓ ${questions.length} preguntas válidas cubriendo los ${expectedModuleIds.length} módulos`);
   console.log(`✓ Checklist válido (${checklist.totalModules} módulos, ${checklist.totalItems} criterios)`);
-  console.log(`✓ Experiencia práctica válida (${practiceCounts.incidents} incidentes, ${practiceCounts.challenges} challenges, ${practiceCounts.simulations} simulaciones)`);
+  console.log(`✓ Experiencia práctica válida (${practiceCounts.incidents} incidentes, ${practiceCounts.challenges} challenges, ${practiceCounts.simulations} simulaciones, ${practiceCounts.guided} guiadas)`);
   console.log("✓ Ruta guiada de fundamentos válida (referencias, orden, práctica temprana y decisión posterior)");
 }
 
