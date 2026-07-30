@@ -6,20 +6,62 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Before starting new work, read `SPRINT_HANDOFF.md`. It is the active operational memory for the post-audit sprints.
 
-Current stable state as of the latest pushed `master` commit:
-- Latest pushed/deployed product sprint: **Beginner Guided Journey & Progressive Disclosure** — commit `a14e72d` (`feat: añadir recorrido guiado para principiantes`), GitHub Actions run `30551134055` success, GitHub Pages verified.
-- Previous product sprint: **Practice Experience Integration** — commit `6e0604ac` (`feat: integrar seguimiento de experiencia practica`), GitHub Actions run `30419768845` success, GitHub Pages verified.
-- Previous course/design sprint: **Sprint 22 — `/impeccable audit` (17/20 → 20/20 after fixes) + `PRODUCT.md`/`DESIGN.md`/`.impeccable/design.json` (Sprint 21)**.
-- Professional Practice Framework now has daily UX integration: nueva capa `Experiencia práctica` con 5 Incident Labs, 2 Challenge Labs y 1 Work Simulation, metadata tipada/validada, matriz de competencias práctica, documentación `MARCO_PRACTICAS_PROFESIONALES.md`, navegación `/experiencia-practica`, progreso práctico independiente, pistas escalonadas, intentos, notas, evidencias, solución colapsada y autoevaluación por rúbrica.
-- GitHub Pages production has been verified at `https://edwingalarcon.github.io/PlanEstudio/`.
-- Fixed learning content counts: **65 modules, 63 labs, 488 questions, 603 checklist criteria**.
-- Professional practice pilot counts: **5 incidents, 2 challenges, 1 simulation**. Do not merge these into the existing lab count.
-- Practical progress uses separate localStorage key `planestudio.practice-progress.v1`; academic progress remains `plan-estudio-progress`. Do not merge these stores or show a single combined percentage.
-- Current local/CI test baseline: **238 Vitest tests** and **25 Playwright smoke tests**.
-- Post-audit content roadmap (sprints 1-20) is fully closed — no known pending items. Sprints 21-22 added a design-system layer (`DESIGN.md`, "The Fluent Learning Console") and closed real a11y/perf bugs found via `/impeccable audit` (heading hierarchy H2→H4 in Módulos 3-7, dead reading-progress scroll listener, touch target 36px→44px). See `SPRINT_HANDOFF.md` sprints 21-22 for full detail before touching UI/markdown heading levels again.
-- Recent beginner-onboarding work is intentional and should not be removed: "Primeras 2 horas", Mini Lab 01, checklist mínimo para principiantes, Power Fx en español simple, entregable mínimo del Nivel Básico, and the Módulo 9 bridge into Intermedio.
-- User preference for this repo: before starting work, **fetch/pull/sync the repo and verify whether a merge is needed**; after completing a change, **commit, push to `master`, and wait for deploy/production verification** unless the user explicitly says not to.
-- Local validation should run `npm run build:pages` or `npm run build`, then `npm run e2e` **serially**, not in parallel, because both can touch `.next` locally and cause transient route/module false negatives.
+Current stable state as of the latest pushed `master` commit (2026-07-30):
+- Latest pushed/deployed sprint: **Developer Workstation, Environment Setup & Project Foundations —
+  Fase 2, sub-fases A–F, all complete** — commit `ea03d77` (`fix: corregir extracción de versión .NET,
+  añadir umbral outdated y auditoría de 6 perfiles`). CI/deploy run `30579292651` completed
+  successfully; production verified at `https://edwingalarcon.github.io/PlanEstudio/preparar-entorno`
+  (200, `X-Cache: MISS`).
+- Sub-fase summary (full detail in `SPRINT_HANDOFF.md`, section "Sprint en curso — Developer
+  Workstation..."): (A) `tools/check-workstation.ps1`/`.sh` + report parser +
+  `/preparar-entorno` import UI — commit `2698172`. (B) advisory (non-blocking) workstation gate on
+  lab pages via `LAB_PRODUCT_TOOL_HINTS` — commit `6a12e0a`. (C) `/recursos/guia-herramientas-workstation`
+  — commit `aa2b636`. (D) `GL-SETUP-01..06` guided practices + `CH-SETUP-01` challenge (first real use
+  of the `guided` practiceType) — commit `91b5b8d`. (E) `INC-SETUP-001..005` incident labs — commit
+  `bc3137a`. (F) fixed a real `.NET SDK` version-parsing bug in the check-workstation scripts, added
+  `outdated` version-threshold logic (`minMajorVersion` in `workstation.ts`), extended
+  `LAB_PRODUCT_TOOL_HINTS`, and a manual audit of the 6 workstation profiles found and fixed a real gap
+  (no warning that Power Automate Desktop requires Windows for the `rpa` profile on macOS/Linux) —
+  commit `ea03d77`.
+- **Explicitly still open, not started, needs the user to re-supply context**: the original sprint was
+  requested via a 72-section prompt from an earlier session not available in later sessions' context.
+  Two items from it remain unimplemented and were NOT fabricated a scope for: (1) the exact remaining
+  ~23 E2E test cases referenced as "§63" in that original prompt, (2) "starter repository templates by
+  project type". Do not invent a checklist for these — ask the user for the original prompt or a fresh
+  scope definition before attempting them.
+- Previous product sprint: **Beginner Guided Journey & Progressive Disclosure** — commit `a14e72d`,
+  GitHub Actions run `30551134055` success.
+- Previous course/design sprint: **Sprint 22 — `/impeccable audit` (17/20 → 20/20 after fixes) +
+  `PRODUCT.md`/`DESIGN.md`/`.impeccable/design.json` (Sprint 21)**.
+- GitHub Pages production has been verified at `https://edwingalarcon.github.io/PlanEstudio/` after
+  every sub-fase above.
+- Fixed learning content counts: **75 modules, 72 labs, 508 questions, 633 checklist criteria**. These
+  did NOT change in the Workstation Setup sprint — that sprint added a parallel `preparar-entorno`
+  layer and grew the professional-practice pilot, not modules/labs.
+- Professional practice pilot counts: **32 practices total — 18 incidents, 6 challenges, 2
+  simulations, 6 guided**. Do not merge these into the existing lab count. `guided` is a new count as
+  of sub-fase D — `getPracticeCounts()` now returns a `guided` field in addition to
+  `incidents`/`challenges`/`simulations`.
+- `/preparar-entorno` state uses its own localStorage key `planestudio.workstation.v1`
+  (`workstation-store.ts`), independent from `plan-estudio-progress` (academic) and
+  `planestudio.practice-progress.v1` (professional practice). **Never merge these three stores.**
+- Current local/CI test baseline: **316 Vitest tests** and **42 Playwright smoke tests** (up from 238 /
+  25 pre-Workstation-Setup-sprint).
+- Post-audit content roadmap (sprints 1-20) is fully closed — no known pending items. Sprints 21-22
+  added a design-system layer (`DESIGN.md`, "The Fluent Learning Console") and closed real a11y/perf
+  bugs found via `/impeccable audit`. See `SPRINT_HANDOFF.md` sprints 21-22 for full detail before
+  touching UI/markdown heading levels again.
+- Recent beginner-onboarding work is intentional and should not be removed: "Primeras 2 horas", Mini
+  Lab 01, checklist mínimo para principiantes, Power Fx en español simple, entregable mínimo del Nivel
+  Básico, and the Módulo 9 bridge into Intermedio.
+- User preference for this repo: before starting work, **fetch/pull/sync the repo and verify whether a
+  merge is needed**; after completing a change, **commit, push to `master`, and wait for
+  deploy/production verification** unless the user explicitly says not to. After pushing, check CI
+  with a single `gh run list` query, not `gh run watch` (wastes tokens blocking the turn) — see the
+  `feedback_ci_watch` memory.
+- Local validation should run `npm run build:pages` or `npm run build`, then `npm run e2e`
+  **serially**, not in parallel, because both can touch `.next` locally and cause transient
+  route/module false negatives.
 
 ## What This Repository Is
 
