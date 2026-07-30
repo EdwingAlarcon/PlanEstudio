@@ -461,13 +461,33 @@ Lo que entrega la Fase 1 (ya en `master`, commit `f4ba827`):
 - Baseline posterior: **312 tests Vitest**, **40/40 Playwright**. `validate:content`, `lint`,
   `tsc --noEmit` y `build:pages` en verde localmente.
 
-**Pendiente explícito — sub-fases E+ de la Fase 2 (no implementadas, en curso en esta misma sesión):**
-1. Incident labs INC-SETUP-001 a 005; plantillas starter de repositorio por tipo de proyecto; lógica
-   de `outdated` con umbrales de versión (el campo `status` del store ya lo admite, solo falta la
-   comparación de versiones); ampliar `LAB_PRODUCT_TOOL_HINTS` con más señales si se identifican otras
-   strings de `product` de alta confianza; el resto de los ~23 casos E2E del sprint original (§63,
-   ahora con varios casos ya cubiertos entre las sub-fases A, B y D); auditoría manual por los 6
-   perfiles (§64).
+**Fase 2, sub-fase E — Incident labs INC-SETUP-001..005: COMPLETADA.**
+
+- 5 incidentes nuevos de troubleshooting de estación, todos con causa raíz real y verificable
+  localmente (ninguno requiere tenant): `INC-SETUP-001` (`pac: command not found` tras instalar PAC
+  CLI — PATH no recargado), `INC-SETUP-002` (`node --version` inconsistente entre terminales — dos
+  instalaciones de Node compitiendo), `INC-SETUP-003` (commits con identidad de Git incorrecta —
+  configuración local sobrescribe la global), `INC-SETUP-004` (el verificador de estación reporta
+  falso "no instalada" — terminal no recargada tras instalar), `INC-SETUP-005` (extensión Power
+  Platform Tools no se activa en VS Code — requiere reinicio completo, no solo "Reload Window").
+  Cada uno referencia la Guía de herramientas de estación (sub-fase C) en su prevención.
+- Todos cumplen el guardarraíl de `validatePracticeRelations` para `incident`: incluyen
+  `## Solución de referencia` y la frase "causa raíz", y tienen 4 pistas escalonadas.
+- Conteos de prácticas: **18 incidentes (+5), 6 challenges, 2 simulaciones, 6 guiadas = 32 prácticas
+  totales** (antes 27). Conteos de contenido académico **sin cambios**.
+- Tests actualizados: `practices.test.ts` (total 27→32, incidentes 13→18, búsqueda 27→32) y
+  `smoke.spec.ts` (badges de conteo, "18 de 32" en el filtro de incidentes).
+- Baseline posterior: **312 tests Vitest**, **40/40 Playwright** confirmados (una corrida completa
+  tuvo 5 timeouts transitorios por contención de recursos del entorno de validación — las mismas 5
+  pasaron limpiamente al re-ejecutarlas en aislamiento inmediatamente después; no es una regresión de
+  esta sub-fase). `validate:content`, `lint`, `tsc --noEmit` y `build:pages` en verde localmente.
+
+**Pendiente explícito — sub-fase F de la Fase 2 (no implementada, en curso en esta misma sesión):**
+1. Plantillas starter de repositorio por tipo de proyecto; lógica de `outdated` con umbrales de
+   versión (el campo `status` del store ya lo admite, solo falta la comparación de versiones); ampliar
+   `LAB_PRODUCT_TOOL_HINTS` con más señales si se identifican otras strings de `product` de alta
+   confianza; el resto de los ~23 casos E2E del sprint original (§63, ahora con varios casos ya
+   cubiertos entre las sub-fases A, B, D y E); auditoría manual por los 6 perfiles (§64).
 2. No fusionar el progreso de `preparar-entorno` con el progreso académico ni con
    `practice-progress` — son y deben seguir siendo tres stores independientes.
 
