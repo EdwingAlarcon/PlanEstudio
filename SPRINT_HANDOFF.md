@@ -323,6 +323,53 @@ Este resumen sirve como control de calidad para futuros agentes: si un cambio fu
 esta sección (por ejemplo, presentar Migration/Legacy como "Cubierto" sin matices), es una señal de
 regresión de honestidad, no una mejora.
 
+## Sprint en curso — Developer Workstation, Environment Setup & Project Foundations (Fase 1)
+
+**Estado: commit y push hechos, CI/deploy y verificación de producción PENDIENTES de confirmar en la próxima sesión** (el usuario cerró la sesión mientras el run de GitHub Actions seguía en progreso).
+
+Contexto: el sprint pedido por el usuario es un prompt de 72 secciones ("Developer Workstation,
+Environment Setup & Project Foundations") — equivalente a varios sprints reales (guías profundas de
+herramientas, verificador de estación con script real, prácticas SETUP-01..06, challenge, 5 incident
+labs, 30 casos E2E, gates técnicos por lab, auditoría manual de 6 perfiles). Se acordó con el usuario
+dividirlo en fases; **esta sesión implementó solo la Fase 1: arquitectura + setup esencial.**
+
+Lo que entrega la Fase 1 (ya en `master`, commit `f4ba827`):
+- `app-elearning/src/lib/workstation.ts`: tipos y datos puros — perfiles (`maker`, `functional`,
+  `developer`, `admin`, `architect`, `rpa`), matriz de 11 herramientas × perfil × SO con nivel de
+  requisito (`required`/`recommended`/`optional`/`not_required`/`required_later`), 7 pasos de setup
+  esencial (tenant/entorno/Dataverse/roles/no-producción) con alternativa sin tenant, funciones puras
+  (`getToolsForProfile`, `getNextWorkstationRequirement`, `recommendWorkstationProfile`,
+  `validateWorkstationReferences`).
+- `app-elearning/src/lib/workstation-store.ts`: store Zustand persistido, independiente, clave
+  `planestudio.workstation.v1` — **no toca** `plan-estudio-progress` ni `planestudio.practice-progress.v1`.
+- Ruta `/preparar-entorno` (`app-elearning/src/app/preparar-entorno/`): selector de perfil/SO, checklist
+  de setup esencial, "siguiente requisito" único destacado, matriz responsive (tabla en desktop, tarjetas
+  en móvil), aviso pedagógico de no-producción.
+- Integrado en el sidebar (`/preparar-entorno`) y en `/mi-ruta` (bloque compacto separado del progreso
+  académico, sin sumar al %).
+- Tests: `workstation.test.ts` (14), `workstation-store.test.ts` (7) — Vitest en verde junto con el resto
+  de la suite (315 tests totales). E2E nuevo `e2e/preparar-entorno.spec.ts` (7 casos) — 38/38 Playwright
+  en verde localmente. `npm run validate:content` y `npm run build:pages` en verde.
+- Conteos de contenido académico **sin cambios** (75 módulos, 72 labs, 508 preguntas, 633 criterios,
+  20 prácticas profesionales) — esta fase no toca contenido de módulos/labs.
+
+**Pendiente explícito para la próxima sesión / Codex:**
+1. Verificar el run de GitHub Actions del commit `f4ba827` (`https://github.com/EdwingAlarcon/PlanEstudio/actions/runs/30560120482` o el más reciente en `master` si ya rotó) — confirmar que CI/Deploy terminó en verde.
+2. Verificar producción: abrir `https://edwingalarcon.github.io/PlanEstudio/preparar-entorno` y confirmar
+   que carga, que el selector de perfil/SO funciona, que la matriz es responsive en móvil y que el bloque
+   en `/mi-ruta` enlaza correctamente.
+3. Si CI falló, diagnosticar con `gh run view <id> --log-failed` antes de tocar código.
+4. **Fases siguientes del sprint (no implementadas todavía)**: guías profundas de Git/VS Code/Visual
+   Studio/Node/.NET/PowerShell/PAC CLI como contenido navegable; script verificador de estación
+   (`tools/check-workstation`) + parser de reporte pegado manualmente; prácticas SETUP-01 a SETUP-06;
+   challenge CH-SETUP-01; incident labs INC-SETUP-001 a 005; plantillas starter de repositorio por tipo
+   de proyecto; gates técnicos (`workstationRequirements`/`environmentRequirements`) que se muestren antes
+   de abrir un lab; los ~23 casos E2E restantes del sprint original (§63); auditoría manual por los 6
+   perfiles (§64). El diseño de datos de Fase 1 ya deja los campos necesarios (`verification.command`,
+   estados `verified`/`outdated`/`blocked`) para no rehacer nada en fases futuras.
+5. No fusionar el progreso de `preparar-entorno` con el progreso académico ni con
+   `practice-progress` — son y deben seguir siendo tres stores independientes.
+
 ## Cómo continuar
 
 - El usuario normalmente pide sprints en el orden de la lista de pendientes de arriba, uno por turno,
