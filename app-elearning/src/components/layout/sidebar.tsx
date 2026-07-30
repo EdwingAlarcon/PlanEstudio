@@ -45,6 +45,7 @@ const RESOURCE_LINKS = [
   { href: "/recursos/portafolio-profesional", label: UI.nav.portfolioGuide, icon: FileText },
   { href: "/recursos/roadmap-especializacion-avanzada", label: UI.nav.advancedRoadmap, icon: Route },
   { href: "/recursos/d365-tenant-readiness", label: UI.nav.d365TenantReadiness, icon: CheckSquare },
+  { href: "/recursos/guia-herramientas-workstation", label: UI.nav.workstationToolsGuide, icon: Wrench },
   { href: "/recursos/marco-practicas-profesionales", label: UI.nav.professionalPracticeFramework, icon: ClipboardList },
   { href: "/recursos/rpa-artefactos-profesionales", label: UI.nav.rpaArtifacts, icon: ClipboardList },
   { href: "/recursos/rpa-recursos-practica", label: UI.nav.rpaPracticeResources, icon: Bot },

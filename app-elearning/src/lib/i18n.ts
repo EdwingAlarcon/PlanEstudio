@@ -39,6 +39,7 @@ export const UI = {
     rpaTenantValidation: "Validación RPA tenant",
     myProgress: "Mi Progreso",
     prepareEnvironment: "Preparar mi entorno",
+    workstationToolsGuide: "Guía de herramientas de estación",
     skipToContent: "Saltar al contenido",
     toggleTheme: "Cambiar tema",
     search: "Buscar...",
@@ -172,6 +173,7 @@ export const UI = {
   workstation: {
     title: "Preparar mi entorno",
     subtitle: "Instala solo lo que necesitas ahora. El sistema te recomienda el siguiente requisito segun tu perfil y sistema operativo.",
+    toolsGuideLink: "Ver guia de instalacion y errores comunes por herramienta",
     profileLabel: "Tu perfil",
     profile: {
       maker: "Maker",

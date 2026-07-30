@@ -87,6 +87,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "portafolio-profesional": "Recursos/PORTAFOLIO_PROFESIONAL.md",
   "roadmap-especializacion-avanzada": "Recursos/ROADMAP_ESPECIALIZACION_AVANZADA.md",
   "d365-tenant-readiness": "Recursos/D365_TENANT_READINESS.md",
+  "guia-herramientas-workstation": "Recursos/GUIA_HERRAMIENTAS_WORKSTATION.md",
   "marco-practicas-profesionales": "Recursos/MARCO_PRACTICAS_PROFESIONALES.md",
   "practicas-portabilidad-estudiante": "Recursos/PRACTICAS_PORTABILIDAD_ESTUDIANTE.md",
   "practicas-guia-revisores": "Recursos/PRACTICAS_GUIA_REVISORES.md",

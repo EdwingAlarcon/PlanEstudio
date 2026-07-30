@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { AlertTriangle, CheckCircle2, Circle, ExternalLink, ShieldAlert } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -49,6 +50,12 @@ export function PrepararEntornoClient() {
       <header className="space-y-2">
         <h1 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">{T.title}</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">{T.subtitle}</p>
+        <Link
+          href="/recursos/guia-herramientas-workstation"
+          className="inline-flex items-center gap-1 text-xs font-medium text-[#0078D4] hover:underline dark:text-[#4DB8FF]"
+        >
+          {T.toolsGuideLink}
+        </Link>
       </header>
 
       <section aria-labelledby="profile-heading" className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">

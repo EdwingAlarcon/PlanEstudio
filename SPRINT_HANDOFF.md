@@ -420,9 +420,26 @@ Lo que entrega la Fase 1 (ya en `master`, commit `f4ba827`):
 - Conteos de contenido académico **sin cambios** (75 módulos, 72 labs, 508 preguntas, 633 criterios,
   20 prácticas profesionales).
 
-**Pendiente explícito para la próxima sesión / Codex — sub-fases C+ de la Fase 2 (no implementadas):**
-1. Guías profundas de Git/VS Code/Visual Studio/Node/.NET/PowerShell/PAC CLI como contenido navegable;
-   prácticas SETUP-01 a SETUP-06; challenge CH-SETUP-01; incident labs INC-SETUP-001 a 005; plantillas
+**Fase 2, sub-fase C — Guías profundas de herramientas: COMPLETADA.**
+
+- `docs/Recursos/GUIA_HERRAMIENTAS_WORKSTATION.md` (nuevo): guía navegable con instalación por SO,
+  comando de verificación, configuración mínima y errores comunes para las 7 herramientas de la
+  matriz de `/preparar-entorno` (Navegador, Git, VS Code, Visual Studio Community, Node.js LTS, .NET
+  SDK, PowerShell, PAC CLI), más una nota que remite a Power Automate Desktop al Módulo 67 (sin
+  duplicar contenido) y una sección final de troubleshooting sobre falsos negativos del script
+  verificador.
+- Registrada como recurso Next.js en `RESOURCE_FILES` (`content.ts`) con slug
+  `guia-herramientas-workstation`; enlazada desde el sidebar (`sidebar.tsx`, icono `Wrench`) y desde
+  el header de `/preparar-entorno` (`preparar-entorno-client.tsx`).
+- `content.test.ts` actualizado: conteo de recursos 25→26, nuevo slug en la lista de assertions.
+- Baseline posterior: **312 tests Vitest**, **40/40 Playwright** (incluye el flaky de scroll de la
+  sub-fase B, que pasó en esta corrida). `validate:content`, `lint`, `tsc --noEmit` y `build:pages`
+  en verde localmente.
+- Conteos de contenido académico **sin cambios** (75 módulos, 72 labs, 508 preguntas, 633 criterios,
+  20 prácticas profesionales) — esta guía es un recurso, no un módulo ni un lab.
+
+**Pendiente explícito — sub-fases D+ de la Fase 2 (no implementadas, en curso en esta misma sesión):**
+1. Prácticas SETUP-01 a SETUP-06; challenge CH-SETUP-01; incident labs INC-SETUP-001 a 005; plantillas
    starter de repositorio por tipo de proyecto; lógica de `outdated` con umbrales de versión (el campo
    `status` del store ya lo admite, solo falta la comparación de versiones); ampliar
    `LAB_PRODUCT_TOOL_HINTS` con más señales si se identifican otras strings de `product` de alta
