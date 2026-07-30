@@ -325,7 +325,12 @@ regresión de honestidad, no una mejora.
 
 ## Sprint en curso — Developer Workstation, Environment Setup & Project Foundations (Fase 1)
 
-**Estado: commit y push hechos, CI/deploy y verificación de producción PENDIENTES de confirmar en la próxima sesión** (el usuario cerró la sesión mientras el run de GitHub Actions seguía en progreso).
+**Estado: commit, push, CI/deploy y verificación de producción CONFIRMADOS.** Run de GitHub Actions
+`30560120482` terminó `completed success`. Producción verificada con `curl` en
+`https://edwingalarcon.github.io/PlanEstudio/preparar-entorno` (sin barra final — con barra final da
+404, mismo comportamiento que el resto del sitio con el export estático de Next.js/GitHub Pages):
+responde 200 y contiene "Preparar mi entorno", "Setup esencial", "Matriz de herramientas". Sin acción
+pendiente de verificación para esta fase.
 
 Contexto: el sprint pedido por el usuario es un prompt de 72 secciones ("Developer Workstation,
 Environment Setup & Project Foundations") — equivalente a varios sprints reales (guías profundas de
@@ -354,12 +359,7 @@ Lo que entrega la Fase 1 (ya en `master`, commit `f4ba827`):
   20 prácticas profesionales) — esta fase no toca contenido de módulos/labs.
 
 **Pendiente explícito para la próxima sesión / Codex:**
-1. Verificar el run de GitHub Actions del commit `f4ba827` (`https://github.com/EdwingAlarcon/PlanEstudio/actions/runs/30560120482` o el más reciente en `master` si ya rotó) — confirmar que CI/Deploy terminó en verde.
-2. Verificar producción: abrir `https://edwingalarcon.github.io/PlanEstudio/preparar-entorno` y confirmar
-   que carga, que el selector de perfil/SO funciona, que la matriz es responsive en móvil y que el bloque
-   en `/mi-ruta` enlaza correctamente.
-3. Si CI falló, diagnosticar con `gh run view <id> --log-failed` antes de tocar código.
-4. **Fases siguientes del sprint (no implementadas todavía)**: guías profundas de Git/VS Code/Visual
+1. **Fases siguientes del sprint (no implementadas todavía)**: guías profundas de Git/VS Code/Visual
    Studio/Node/.NET/PowerShell/PAC CLI como contenido navegable; script verificador de estación
    (`tools/check-workstation`) + parser de reporte pegado manualmente; prácticas SETUP-01 a SETUP-06;
    challenge CH-SETUP-01; incident labs INC-SETUP-001 a 005; plantillas starter de repositorio por tipo
@@ -367,7 +367,7 @@ Lo que entrega la Fase 1 (ya en `master`, commit `f4ba827`):
    de abrir un lab; los ~23 casos E2E restantes del sprint original (§63); auditoría manual por los 6
    perfiles (§64). El diseño de datos de Fase 1 ya deja los campos necesarios (`verification.command`,
    estados `verified`/`outdated`/`blocked`) para no rehacer nada en fases futuras.
-5. No fusionar el progreso de `preparar-entorno` con el progreso académico ni con
+2. No fusionar el progreso de `preparar-entorno` con el progreso académico ni con
    `practice-progress` — son y deben seguir siendo tres stores independientes.
 
 ## Cómo continuar
