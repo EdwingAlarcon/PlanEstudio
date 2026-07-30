@@ -3,6 +3,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { ESSENTIAL_SETUP_STEPS, type OperatingSystem, type ToolStatus, type WorkstationProfile } from "./workstation";
+import type { WorkstationReportEntry } from "./workstation-report";
 
 export const WORKSTATION_STORAGE_KEY = "planestudio.workstation.v1";
 export const WORKSTATION_SCHEMA_VERSION = 1;
@@ -34,6 +35,7 @@ interface WorkstationActions {
   markTool: (toolId: string, status: ToolStatus) => void;
   setToolNotes: (toolId: string, notes: string) => void;
   toggleEssentialStep: (stepId: string, done: boolean) => void;
+  applyWorkstationReport: (entries: WorkstationReportEntry[]) => void;
   resetWorkstation: () => void;
 }
 
@@ -128,6 +130,18 @@ export const useWorkstationStore = create<WorkstationProgressState & Workstation
       toggleEssentialStep: (stepId, done) => set((state) => ({
         essentialSteps: { ...state.essentialSteps, [stepId]: done },
       })),
+      applyWorkstationReport: (entries) => set((state) => {
+        const toolStates = { ...state.toolStates };
+        for (const entry of entries) {
+          toolStates[entry.toolId] = {
+            ...toolStates[entry.toolId],
+            status: entry.status,
+            detectedVersion: entry.detectedVersion,
+            verifiedAt: nowIso(),
+          };
+        }
+        return { toolStates };
+      }),
       resetWorkstation: () => set(INITIAL_STATE),
     }),
     {

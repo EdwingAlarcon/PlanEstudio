@@ -358,15 +358,47 @@ Lo que entrega la Fase 1 (ya en `master`, commit `f4ba827`):
 - Conteos de contenido académico **sin cambios** (75 módulos, 72 labs, 508 preguntas, 633 criterios,
   20 prácticas profesionales) — esta fase no toca contenido de módulos/labs.
 
-**Pendiente explícito para la próxima sesión / Codex:**
-1. **Fases siguientes del sprint (no implementadas todavía)**: guías profundas de Git/VS Code/Visual
-   Studio/Node/.NET/PowerShell/PAC CLI como contenido navegable; script verificador de estación
-   (`tools/check-workstation`) + parser de reporte pegado manualmente; prácticas SETUP-01 a SETUP-06;
-   challenge CH-SETUP-01; incident labs INC-SETUP-001 a 005; plantillas starter de repositorio por tipo
-   de proyecto; gates técnicos (`workstationRequirements`/`environmentRequirements`) que se muestren antes
-   de abrir un lab; los ~23 casos E2E restantes del sprint original (§63); auditoría manual por los 6
-   perfiles (§64). El diseño de datos de Fase 1 ya deja los campos necesarios (`verification.command`,
-   estados `verified`/`outdated`/`blocked`) para no rehacer nada en fases futuras.
+**Fase 2, sub-fase A — Script verificador de estación + parser de reporte: COMPLETADA.**
+
+- `tools/check-workstation.ps1` (Windows/PowerShell) y `tools/check-workstation.sh` (macOS/Linux)
+  corren localmente en el equipo del usuario y emiten a stdout un JSON `planestudio-workstation-report`
+  v1 con el estado (`installed`/`not_installed`) y la versión detectada de las 5 herramientas
+  verificables por CLI: `git`, `pac-cli`, `node`, `dotnet-sdk`, `powershell`. `tools/README.md` documenta
+  el uso. Ambos scripts se probaron manualmente y producen JSON válido.
+- `app-elearning/src/lib/workstation-report.ts`: parser/validador puro (`parseWorkstationReportText`,
+  `validateWorkstationReportPayload`) que reutiliza el patrón de seguridad de
+  `practice-portability.ts` (`findDangerousKey` contra `__proto__`/`constructor`/`prototype`, cap de
+  tamaño 200 KB, `format`/`schemaVersion` versionados, `schemaVersion` futuro ⇒ `incompatible`,
+  herramientas desconocidas ignoradas con warning en vez de romper el reporte completo).
+- `workstation-store.ts`: nueva acción `applyWorkstationReport(entries)` que aplica `status` +
+  `detectedVersion` + `verifiedAt` solo a las herramientas reconocidas, sin tocar notas ni otras
+  herramientas. Sin bump de `schemaVersion` del store (v1 ya soportaba `detectedVersion`).
+- `/preparar-entorno` tiene una nueva sección "Importar reporte del verificador": muestra el comando
+  exacto según el SO elegido, un textarea para pegar el JSON, botón "Analizar reporte" con vista previa
+  (herramientas detectadas, advertencias, errores) y botón "Aplicar al estado". La matriz de
+  herramientas ahora también muestra la versión detectada junto al estado cuando existe.
+- Guardarraíl anti-drift: test que verifica que todo id que el parser acepta como verificable tiene
+  `verification.command` declarado en `WORKSTATION_TOOLS` (evita que reporte y modelo se desincronicen).
+- Tests nuevos: `workstation-report.test.ts` (9 casos: válido, JSON inválido, formato incorrecto,
+  versión futura, clave peligrosa, SO inválido, herramienta desconocida ignorada, tamaño excedido,
+  guardarraíl anti-drift) y 2 casos añadidos a `workstation-store.test.ts` (`applyWorkstationReport`
+  setea solo ids conocidos; preserva notas de herramientas no tocadas por el reporte). Nuevo caso E2E
+  en `preparar-entorno.spec.ts`: pegar un reporte válido, analizar, aplicar, y verificar que la matriz
+  muestra "Instalada" + la versión detectada.
+- Baseline posterior: **305 tests Vitest**, **39 casos Playwright** (8/8 en `preparar-entorno.spec.ts`,
+  31/31 en el resto de smoke). `npm run validate:content`, `lint`, `tsc --noEmit`, `build:pages` y
+  `e2e` en verde localmente, corridos en serie.
+- Conteos de contenido académico **sin cambios** (75 módulos, 72 labs, 508 preguntas, 633 criterios,
+  20 prácticas profesionales).
+
+**Pendiente explícito para la próxima sesión / Codex — sub-fases B+ de la Fase 2 (no implementadas):**
+1. Guías profundas de Git/VS Code/Visual Studio/Node/.NET/PowerShell/PAC CLI como contenido navegable;
+   prácticas SETUP-01 a SETUP-06; challenge CH-SETUP-01; incident labs INC-SETUP-001 a 005; plantillas
+   starter de repositorio por tipo de proyecto; gates técnicos (`workstationRequirements`/
+   `environmentRequirements`) que se muestren antes de abrir un lab; lógica de `outdated` con umbrales
+   de versión (el campo `status` del store ya lo admite, solo falta la comparación de versiones); el
+   resto de los ~23 casos E2E del sprint original (§63, ahora con 1 caso ya cubierto por la sub-fase A);
+   auditoría manual por los 6 perfiles (§64).
 2. No fusionar el progreso de `preparar-entorno` con el progreso académico ni con
    `practice-progress` — son y deben seguir siendo tres stores independientes.
 

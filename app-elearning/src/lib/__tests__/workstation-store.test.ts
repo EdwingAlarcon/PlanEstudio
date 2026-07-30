@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { WORKSTATION_SCHEMA_VERSION, sanitizeWorkstationState } from "../workstation-store";
+import { beforeEach, describe, expect, it } from "vitest";
+import { WORKSTATION_SCHEMA_VERSION, sanitizeWorkstationState, useWorkstationStore } from "../workstation-store";
 
 describe("sanitizeWorkstationState", () => {
   it("returns a clean initial state for garbage input", () => {
@@ -58,5 +58,29 @@ describe("sanitizeWorkstationState", () => {
     });
     expect(state).not.toHaveProperty("records");
     expect(state).not.toHaveProperty("completedModules");
+  });
+});
+
+describe("applyWorkstationReport", () => {
+  beforeEach(() => {
+    useWorkstationStore.getState().resetWorkstation();
+  });
+
+  it("sets status and detectedVersion only for known tool ids", () => {
+    useWorkstationStore.getState().applyWorkstationReport([
+      { toolId: "git", status: "installed", detectedVersion: "git version 2.45.1" },
+      { toolId: "node", status: "not_installed" },
+    ]);
+    const { toolStates } = useWorkstationStore.getState();
+    expect(toolStates.git?.status).toBe("installed");
+    expect(toolStates.git?.detectedVersion).toBe("git version 2.45.1");
+    expect(toolStates.git?.verifiedAt).toBeTruthy();
+    expect(toolStates.node?.status).toBe("not_installed");
+  });
+
+  it("preserves existing notes for a tool untouched by the report", () => {
+    useWorkstationStore.getState().setToolNotes("vscode", "instalado manualmente");
+    useWorkstationStore.getState().applyWorkstationReport([{ toolId: "git", status: "installed" }]);
+    expect(useWorkstationStore.getState().toolStates.vscode?.notes).toBe("instalado manualmente");
   });
 });

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { AlertTriangle, CheckCircle2, Circle, ExternalLink, ShieldAlert } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,7 @@ import {
   type WorkstationTool,
 } from "@/lib/workstation";
 import { useWorkstationStore } from "@/lib/workstation-store";
+import { parseWorkstationReportText, type WorkstationReportPreview } from "@/lib/workstation-report";
 import { cn } from "@/lib/utils";
 
 const T = UI.workstation;
@@ -185,6 +186,8 @@ export function PrepararEntornoClient() {
         )}
       </section>
 
+      <WorkstationReportImport os={os} />
+
       <section
         aria-labelledby="non-production-heading"
         className="rounded-xl border border-amber-500/30 bg-amber-50 p-4 dark:border-amber-400/20 dark:bg-amber-950/20"
@@ -234,13 +237,98 @@ export function PrepararEntornoClient() {
   );
 }
 
+function WorkstationReportImport({ os }: { os: OperatingSystem }) {
+  const workstation = useWorkstationStore();
+  const [text, setText] = useState("");
+  const [preview, setPreview] = useState<WorkstationReportPreview | null>(null);
+  const [applied, setApplied] = useState(false);
+
+  const command = T.importReportCommand[os];
+
+  function handleAnalyze() {
+    setApplied(false);
+    setPreview(parseWorkstationReportText(text));
+  }
+
+  function handleApply() {
+    if (!preview || preview.status !== "valid") return;
+    workstation.applyWorkstationReport(preview.entries);
+    setApplied(true);
+  }
+
+  return (
+    <section aria-labelledby="import-report-heading" className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+      <h2 id="import-report-heading" className="text-sm font-semibold text-foreground">{T.importReportTitle}</h2>
+      <p className="mb-3 mt-1 text-xs leading-relaxed text-muted-foreground">{T.importReportSubtitle}</p>
+
+      <p className="mb-1 text-xs font-medium text-foreground">{T.importReportCommandLabel}</p>
+      <pre className="mb-3 overflow-x-auto rounded-lg border border-border bg-muted/40 p-2 font-mono text-xs text-foreground">{command}</pre>
+
+      <textarea
+        value={text}
+        onChange={(event) => setText(event.target.value)}
+        placeholder={T.importReportPlaceholder}
+        rows={6}
+        className="w-full rounded-lg border border-border bg-background p-3 font-mono text-xs text-foreground placeholder:text-muted-foreground"
+        aria-label={T.importReportTitle}
+      />
+
+      <div className="mt-3 flex flex-wrap gap-2">
+        <Button size="sm" variant="outline" onClick={handleAnalyze} disabled={text.trim().length === 0}>
+          {T.importAnalyze}
+        </Button>
+        {preview?.status === "valid" && (
+          <Button size="sm" className="bg-[#0078D4] text-white hover:bg-[#106EBE]" onClick={handleApply} disabled={applied}>
+            {T.importApply}
+          </Button>
+        )}
+      </div>
+
+      {preview && (
+        <div className="mt-3 space-y-2">
+          {preview.status === "corrupt" && (
+            <p className="text-xs text-destructive">{T.importInvalid}: {preview.errors.join(" ")}</p>
+          )}
+          {preview.status === "incompatible" && (
+            <p className="text-xs text-destructive">{T.importIncompatible}.</p>
+          )}
+          {preview.status === "valid" && (
+            <div className="rounded-lg border border-border bg-background p-3">
+              <p className="mb-2 text-xs font-semibold text-foreground">{T.importDetectedTitle}</p>
+              <ul className="space-y-1">
+                {preview.entries.map((entry) => (
+                  <li key={entry.toolId} className="flex items-center justify-between gap-2 text-xs">
+                    <span className="text-foreground/90">{entry.toolId}</span>
+                    <span className="text-muted-foreground">
+                      {T.status[entry.status]}
+                      {entry.detectedVersion ? ` · ${entry.detectedVersion}` : ""}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {preview.warnings.length > 0 && (
+            <ul className="list-inside list-disc text-xs text-muted-foreground">
+              {preview.warnings.map((warning, index) => (
+                <li key={index}>{warning}</li>
+              ))}
+            </ul>
+          )}
+          {applied && <p className="text-xs text-[#107C10]">{T.importApplied}</p>}
+        </div>
+      )}
+    </section>
+  );
+}
+
 function requirementBadge(tool: WorkstationTool, profile: WorkstationProfile) {
   const requirement = tool.requiredBy[profile];
   const variant = requirement === "required" ? "destructive" : requirement === "recommended" ? "default" : "outline";
   return <Badge variant={variant}>{T.requirement[requirement]}</Badge>;
 }
 
-function StatusIndicator({ status }: { status: ToolStatus }) {
+function StatusIndicator({ status, detectedVersion }: { status: ToolStatus; detectedVersion?: string }) {
   const isDone = status === "installed" || status === "verified";
   const Icon = isDone ? CheckCircle2 : status === "blocked" || status === "outdated" ? AlertTriangle : Circle;
   const color = isDone
@@ -249,9 +337,10 @@ function StatusIndicator({ status }: { status: ToolStatus }) {
       ? "text-amber-600 dark:text-amber-400"
       : "text-muted-foreground";
   return (
-    <span className="inline-flex items-center gap-1.5 text-xs">
+    <span className="inline-flex flex-wrap items-center gap-1.5 text-xs">
       <Icon className={cn("h-3.5 w-3.5", color)} aria-hidden />
       {T.status[status]}
+      {detectedVersion && <span className="text-muted-foreground">· {detectedVersion}</span>}
     </span>
   );
 }
@@ -284,12 +373,13 @@ function ToolActions({ tool }: { tool: WorkstationTool }) {
 
 function ToolRow({ tool, profile }: { tool: WorkstationTool; profile: WorkstationProfile }) {
   const workstation = useWorkstationStore();
-  const status = workstation.toolStates[tool.id]?.status ?? "unknown";
+  const toolState = workstation.toolStates[tool.id];
+  const status = toolState?.status ?? "unknown";
   return (
     <tr className="border-t border-border">
       <td className="px-4 py-3 font-medium text-foreground">{tool.name}</td>
       <td className="px-4 py-3">{requirementBadge(tool, profile)}</td>
-      <td className="px-4 py-3"><StatusIndicator status={status} /></td>
+      <td className="px-4 py-3"><StatusIndicator status={status} detectedVersion={toolState?.detectedVersion} /></td>
       <td className="px-4 py-3"><ToolActions tool={tool} /></td>
     </tr>
   );
@@ -297,14 +387,15 @@ function ToolRow({ tool, profile }: { tool: WorkstationTool; profile: Workstatio
 
 function ToolCard({ tool, profile }: { tool: WorkstationTool; profile: WorkstationProfile }) {
   const workstation = useWorkstationStore();
-  const status = workstation.toolStates[tool.id]?.status ?? "unknown";
+  const toolState = workstation.toolStates[tool.id];
+  const status = toolState?.status ?? "unknown";
   return (
     <li className="rounded-xl border border-border bg-card p-4">
       <div className="mb-2 flex items-center justify-between gap-2">
         <h3 className="font-medium text-foreground">{tool.name}</h3>
         {requirementBadge(tool, profile)}
       </div>
-      <div className="mb-3"><StatusIndicator status={status} /></div>
+      <div className="mb-3"><StatusIndicator status={status} detectedVersion={toolState?.detectedVersion} /></div>
       <ToolActions tool={tool} />
     </li>
   );

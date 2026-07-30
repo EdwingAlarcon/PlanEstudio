@@ -220,6 +220,23 @@ export const UI = {
     nonProductionWarningBody: "Usa un entorno Developer, Trial o Sandbox para practicar. Confirma el tenant y el entorno antes de cualquier cambio.",
     noTenantAlternativeTitle: "Sin tenant todavia",
     noTenantAlternativeBody: "Puedes avanzar con la alternativa conceptual de cada paso mientras consigues acceso a un entorno.",
+    importReportTitle: "Importar reporte del verificador",
+    importReportSubtitle: "Corre el script en tu equipo, pega aqui el JSON que imprime y confirma para actualizar el estado detectado. PlanEstudio no ejecuta nada por ti ni accede a tu equipo.",
+    importReportCommandLabel: "Comando para tu sistema operativo",
+    importReportCommand: {
+      windows: "pwsh -File tools/check-workstation.ps1",
+      macos: "sh tools/check-workstation.sh",
+      linux: "sh tools/check-workstation.sh",
+    },
+    importReportPlaceholder: "Pega aqui el JSON completo que imprimio el script...",
+    importAnalyze: "Analizar reporte",
+    importApply: "Aplicar al estado",
+    importDetectedTitle: "Herramientas detectadas",
+    importInvalid: "El reporte no se pudo interpretar",
+    importIncompatible: "El reporte pertenece a una version futura de PlanEstudio",
+    importNoTools: "Aun no analizaste ningun reporte.",
+    detectedVersionLabel: "Version detectada",
+    importApplied: "Estado actualizado con el reporte.",
   },
 } as const;
 

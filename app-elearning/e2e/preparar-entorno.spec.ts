@@ -60,6 +60,32 @@ test.describe("Preparar mi entorno", () => {
     await expect(page.getByRole("heading", { name: "Preparar mi entorno" })).toBeVisible();
   });
 
+  test("importar un reporte del verificador actualiza la matriz con la versión detectada", async ({ page }) => {
+    await page.goto("/preparar-entorno");
+    await page.getByRole("button", { name: "Windows" }).click();
+
+    const report = JSON.stringify({
+      format: "planestudio-workstation-report",
+      schemaVersion: 1,
+      generatedAt: new Date().toISOString(),
+      os: "windows",
+      tools: [
+        { id: "git", command: "git --version", detected: true, rawVersion: "git version 2.45.1", status: "installed" },
+      ],
+    });
+
+    await page.getByRole("textbox", { name: "Importar reporte del verificador" }).fill(report);
+    await page.getByRole("button", { name: "Analizar reporte" }).click();
+    await expect(page.getByText("Herramientas detectadas")).toBeVisible();
+
+    await page.getByRole("button", { name: "Aplicar al estado" }).click();
+    await expect(page.getByText("Estado actualizado con el reporte.")).toBeVisible();
+
+    const gitRow = page.locator("tr", { hasText: "Git" });
+    await expect(gitRow.getByText(/Instalada/)).toBeVisible();
+    await expect(gitRow.getByText(/git version 2\.45\.1/)).toBeVisible();
+  });
+
   test("marcar herramientas no altera el progreso académico", async ({ page }) => {
     await page.goto("/preparar-entorno");
     const gitRow = page.locator("tr", { hasText: "Git" });
