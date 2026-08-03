@@ -68,7 +68,7 @@ export function PrepararEntornoClient() {
               onClick={() => workstation.setProfileOverride(option === recommendedProfile ? null : option)}
               aria-pressed={profile === option}
               className={cn(
-                "rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
+                "inline-flex min-h-11 items-center rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
                 profile === option
                   ? "border-[#0078D4] bg-[#EFF6FC] text-[#005A9E] dark:bg-[rgba(0,120,212,0.12)] dark:text-[#4DB8FF]"
                   : "border-border bg-background text-foreground/80 hover:border-[#0078D4]/40"
@@ -89,7 +89,7 @@ export function PrepararEntornoClient() {
               onClick={() => workstation.setOs(option)}
               aria-pressed={os === option}
               className={cn(
-                "rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
+                "inline-flex min-h-11 items-center rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
                 os === option
                   ? "border-[#0078D4] bg-[#EFF6FC] text-[#005A9E] dark:bg-[rgba(0,120,212,0.12)] dark:text-[#4DB8FF]"
                   : "border-border bg-background text-foreground/80 hover:border-[#0078D4]/40"
@@ -123,7 +123,7 @@ export function PrepararEntornoClient() {
               )}
             </div>
             <Button
-              className="w-full shrink-0 bg-[#0078D4] text-white hover:bg-[#106EBE] sm:w-auto"
+              className="w-full shrink-0 sm:w-auto"
               onClick={() => workstation.markTool(nextRequirement.id, "installed")}
             >
               {T.nextRequirementCta}
@@ -178,14 +178,14 @@ export function PrepararEntornoClient() {
           <button
             type="button"
             onClick={() => workstation.setTenant(true)}
-            className={cn("rounded-full border px-2.5 py-1", workstation.hasTenant === true ? "border-[#0078D4] bg-[#EFF6FC] text-[#005A9E] dark:bg-[rgba(0,120,212,0.12)] dark:text-[#4DB8FF]" : "border-border")}
+            className={cn("inline-flex min-h-11 items-center rounded-full border px-2.5 py-1", workstation.hasTenant === true ? "border-[#0078D4] bg-[#EFF6FC] text-[#005A9E] dark:bg-[rgba(0,120,212,0.12)] dark:text-[#4DB8FF]" : "border-border")}
           >
             Si
           </button>
           <button
             type="button"
             onClick={() => workstation.setTenant(false)}
-            className={cn("rounded-full border px-2.5 py-1", workstation.hasTenant === false ? "border-[#0078D4] bg-[#EFF6FC] text-[#005A9E] dark:bg-[rgba(0,120,212,0.12)] dark:text-[#4DB8FF]" : "border-border")}
+            className={cn("inline-flex min-h-11 items-center rounded-full border px-2.5 py-1", workstation.hasTenant === false ? "border-[#0078D4] bg-[#EFF6FC] text-[#005A9E] dark:bg-[rgba(0,120,212,0.12)] dark:text-[#4DB8FF]" : "border-border")}
           >
             No
           </button>
@@ -291,7 +291,7 @@ function WorkstationReportImport({ os }: { os: OperatingSystem }) {
           {T.importAnalyze}
         </Button>
         {preview?.status === "valid" && (
-          <Button size="sm" className="bg-[#0078D4] text-white hover:bg-[#106EBE]" onClick={handleApply} disabled={applied}>
+          <Button size="sm" onClick={handleApply} disabled={applied}>
             {T.importApply}
           </Button>
         )}

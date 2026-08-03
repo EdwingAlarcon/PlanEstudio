@@ -133,7 +133,9 @@ Paleta de producto Microsoft aplicada literalmente, más una capa semántica sha
 - **Rich Navy** (`#0B1020`): fondo modo oscuro; no es negro puro, es azul-carbón Fluent-dark.
 
 ### Named Rules (optional, powerful)
-**The Exact-Hex Rule.** Los colores de marca Microsoft (`#0078D4`, `#107C10`, `#FFB900`, `#D13438`) se escriben como hex literal en el código (namespace `ms-*` y `nivel-*`), nunca se aproximan a la paleta por defecto de Tailwind (`blue-600`, `green-500`). Nueva UI que necesite estos roles reutiliza el hex exacto o el token `ms-*`/`nivel-*` existente, no inventa un tono cercano.
+**The Exact-Hex Rule.** Los colores de marca Microsoft (`#0078D4`, `#107C10`, `#D13438`) se escriben como hex literal en el código (namespace `ms-*` y `nivel-*`), nunca se aproximan a la paleta por defecto de Tailwind (`blue-600`, `green-500`). Nueva UI que necesite estos roles reutiliza el hex exacto o el token `ms-*`/`nivel-*` existente, no inventa un tono cercano.
+
+**La excepción documentada: Warning.** `ms-warning` (`#FFB900`) está definido en `globals.css` pero no se consume en ningún componente. La convención real, ya establecida en 14+ archivos (callouts de advertencia en labs, incidentes, `preparar-entorno`, etc.), es la escala `amber-*` de Tailwind (`amber-50/500/600/900/950` + variantes `dark:`). Nueva UI de advertencia debe seguir `amber-*`, no `ms-warning` — es el token muerto, no la convención viva.
 
 ## Typography
 
