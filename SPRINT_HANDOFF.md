@@ -4,6 +4,24 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
+## Sprint propuesto — Code Apps (Power Apps) — NO INICIADO (2026-08-03)
+
+El usuario notó que el plan no cubre **Power Apps Code Apps** (apps React/Vite con conectores/Dataverse
+vía PAC CLI) y pidió agregarlo por ser tema actual/tendencia de Power Platform. Se estaba usando la
+skill `superpowers:brainstorming` para diseñar el alcance cuando el usuario pidió guardar el estado
+antes de seguir (retomar mañana o con Codex).
+
+**Pregunta de alcance hecha al usuario, sin responder todavía**:
+1. Nivel transversal nuevo (como `ia`/`d365`/`rpa`: `LEVEL_ORDER`/`TRANSVERSAL_LEVEL_ORDER` en
+   `app-elearning/src/lib/i18n.ts`) — rango de `moduleId` propio, labs y prácticas dedicadas,
+   navegación/progreso/certificado independientes. Mismo patrón que el sprint RPA (ver sección
+   "Power Automate Desktop & RPA Professional Track" más abajo).
+2. Unos módulos (2-4) dentro de un nivel de certificación existente (`avanzado` o `arquitecto`), sin
+   nueva infraestructura de nivel.
+
+No decidir por cuenta propia — retomar la pregunta con el usuario antes de tocar código o contenido.
+Ver memoria `project_code_apps_gap` para contexto adicional.
+
 ## Última actualización (2026-07-29)
 
 Último estado local antes del micro-sprint de revisión humana externa:
