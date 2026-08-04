@@ -17,6 +17,25 @@
 
 ---
 
+## 🌱 Si es tu primera vez programando (léelo antes que todo lo demás)
+
+Esta guía es una referencia de sintaxis — asume que ya sabes qué es una variable o una función y
+solo necesitas ver cómo se escriben en cada lenguaje. Si nunca has programado nada, estos 5
+conceptos son la base que reaparece en **todos** los lenguajes de abajo, solo con sintaxis distinta:
+
+| Concepto | En una frase | Cómo se ve (Power Fx, el más simple del curso) |
+|---|---|---|
+| **Variable** | Una caja con nombre donde guardas un valor para usarlo después. | `Set(varNombre, "Ana")` guarda `"Ana"` en una caja llamada `varNombre`. |
+| **Función** | Una receta con nombre que recibe algo, hace un proceso, y devuelve un resultado. | `Len("Ana")` devuelve `3` — la función `Len` cuenta letras. |
+| **Condicional (if)** | "Si pasa esto, haz A; si no, haz B." | `If(edad >= 18, "Adulto", "Menor")`. |
+| **Bucle (loop)** | Repetir la misma acción para cada elemento de una lista. | `ForAll(Clientes, Notify(ThisRecord.Nombre))` — hace algo por cada cliente. |
+| **Tipo de dato** | La clase de valor que es algo: texto, número, fecha, verdadero/falso. | `"Ana"` es texto, `42` es número, `true` es booleano. |
+
+No necesitas practicar esto de forma aislada — lo vas a ver en contexto real dentro de los módulos.
+Vuelve a esta tabla cuando un ejemplo de código más abajo use una palabra que no reconoces.
+
+---
+
 ## Power Fx
 
 **Usado en:** Canvas Apps, Model-Driven (formularios con Express Design), Power Pages  

@@ -6,6 +6,18 @@ certification: "Arquitectura Power Platform"
 estimatedMinutes: 9
 slug: "enterprise-architecture-y-gobernanza"
 ---
+> **📌 Primer módulo de Arquitecto.** Asume Básico, Intermedio y Avanzado ya completos — aquí el foco pasa de "construir una solución" a "gobernar muchas soluciones a la vez en una organización grande". Si algún término de gobernanza/framework se siente nuevo, no es porque te falte inteligencia — es la primera vez que el curso lo introduce.
+
+### 📚 Mini-glosario antes de empezar
+
+| Término | En una frase |
+|---|---|
+| **Gobernanza** | Las reglas que decides de antemano (quién puede crear qué, dónde) para que la plataforma no crezca sin control. |
+| **Framework** | Una estructura ya pensada por otros (Microsoft, TOGAF) que puedes seguir en vez de inventar tu propio proceso desde cero. |
+| **Stakeholder** | Cualquier persona con interés o poder de decisión sobre el proyecto — no solo quien lo usa, también quien lo paga o lo aprueba. |
+| **SLA (Service Level Agreement)** | Un compromiso medible de qué tan bien/rápido debe funcionar algo (ej. "el sistema responde en menos de 2 segundos"). |
+| **Auditoría** | Revisar después de los hechos qué pasó realmente, para confirmar que se siguieron las reglas. |
+
 ### 🎯 Objetivo
 Diseñar y comunicar la arquitectura enterprise de Power Platform para organizaciones de 1,000+ usuarios: estrategia de gobernanza, políticas de adopción, marcos de decisión arquitectónica, y alineación con estándares como TOGAF y el Well-Architected Framework de Microsoft.
 

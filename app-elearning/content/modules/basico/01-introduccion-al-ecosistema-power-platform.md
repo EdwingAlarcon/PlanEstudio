@@ -8,6 +8,22 @@ slug: "introduccion-al-ecosistema-power-platform"
 ---
 *Duración: 1-2 semanas · Lectura: 10-12 min · Con práctica y setup de ambiente: 45-90 min (el tiempo de setup varía y no depende de ti)*
 
+> **📌 ¿Primera vez usando una herramienta profesional en la nube?** Si nunca has creado una cuenta de trabajo, entrado a un panel de administración o usado algo parecido a Excel/Access, lee primero la tabla de abajo. Si ya usas software de oficina o herramientas web con soltura, sáltala y ve directo al Objetivo.
+
+### 🌱 Fundamentos digitales antes de empezar (opcional si ya los conoces)
+
+| Término | En una frase |
+|---|---|
+| **Nube (Cloud)** | Programas y datos que viven en computadoras de Microsoft, no en tu PC — por eso accedes desde cualquier navegador con internet. |
+| **Navegador** | El programa donde abres páginas web (Edge, Chrome) — aquí es donde vas a trabajar todo el curso, no instalas nada pesado. |
+| **URL** | La dirección de una página, como `make.powerapps.com` — la escribes o pegas en la barra de arriba del navegador. |
+| **Cuenta / Login** | Tu usuario y contraseña para identificarte; la cuenta que crearás en este módulo es de trabajo/estudio, distinta a tu correo personal. |
+| **Panel de administración (Admin Center)** | Una página donde se configuran cosas a nivel de toda la organización, no de una sola app — normalmente no la tocas hasta niveles más avanzados. |
+| **Tabla (como en Excel)** | Filas y columnas de datos. Dataverse (lo verás abajo) es básicamente muchas tablas conectadas entre sí, como varias hojas de Excel que se hablan entre ellas. |
+| **Registro (Record)** | Una fila dentro de una tabla — por ejemplo, un cliente específico es un registro en la tabla de clientes. |
+
+> No necesitas memorizar esto. Vuelve aquí si te pierdes en una palabra durante el módulo.
+
 ### 🎯 Objetivo
 Comprender la arquitectura, componentes y casos de uso de Power Platform.
 

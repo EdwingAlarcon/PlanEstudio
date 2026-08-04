@@ -6,6 +6,8 @@ certification: "Buenas Prácticas"
 estimatedMinutes: 10
 slug: "dataverse-web-api-y-autenticacion"
 ---
+> **📌 Primera vez viendo términos como API, HTTP o token?** Este módulo asume que sabes qué es una petición a un servidor. Mini-glosario rápido: **API** = la forma en que un programa le pide datos a otro programa (en vez de que un humano use un formulario, un script hace la misma pregunta). **HTTP** = el protocolo/idioma con el que viajan esas peticiones por internet (GET para leer, POST para crear). **Token** = una credencial temporal que demuestra "tengo permiso" sin mandar tu contraseña en cada petición. Si estos tres términos son nuevos, no hace falta dominarlos hoy — solo entiende que este módulo describe cómo un script (no una persona) le habla a Dataverse. Si además nunca has programado nada, revisa primero la sección "Si es tu primera vez programando" en el [Anexo de Lenguajes de Programación](/recursos/lenguajes-programacion).
+
 ### 🎯 Objetivo
 Entender cómo se conecta una aplicación o script externo a Dataverse/Dynamics 365 mediante la Web API, qué mecanismo de autenticación usa (OAuth vía Microsoft Entra ID), y cómo diagnosticar los errores de permisos más comunes — todo esto como contexto indispensable antes de pedirle a un asistente de IA que genere código de integración.
 

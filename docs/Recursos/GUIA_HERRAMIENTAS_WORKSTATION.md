@@ -20,6 +20,39 @@ Automate Desktop.
    [script verificador de estación](/preparar-entorno) una sola vez al final en vez de marcar cada
    una a mano — ver la sección "Importar reporte del verificador" en `/preparar-entorno`.
 
+## Antes de instalar nada: tu cuenta y tu tenant
+
+Ninguna herramienta de esta guía sirve sin esto primero — es el bloqueo real anterior a todo lo
+demás, y si es tu primera vez con software de trabajo en la nube, aquí es donde más tiempo conviene
+invertir con calma. No necesitas tarjeta de crédito para el trial gratuito estándar.
+
+1. **Crea tu cuenta Microsoft 365 Developer** (gratuita, distinta a tu correo personal):
+   - Entra a [developer.microsoft.com/microsoft-365/dev-program](https://developer.microsoft.com/microsoft-365/dev-program).
+   - Clic en **Join now**, usa un correo cualquiera para registrarte (no necesita ser corporativo).
+   - Elige la opción de suscripción **Instant sandbox** — te da un tenant de prueba con datos de
+     ejemplo ya cargados, sin esperar activación manual.
+   - Verificación de identidad: puede pedir un número de teléfono para enviarte un código por SMS.
+     Es normal, es solo para confirmar que eres una persona real, no un bot.
+2. **Qué es un "tenant" en la práctica**: es tu organización de prueba completa — un nombre como
+   `tunombreXXXXX.onmicrosoft.com` que verás en la esquina superior derecha de cualquier pantalla de
+   Microsoft. Todo lo que hagas en el curso vive dentro de ese tenant; no afecta a nadie más.
+3. **Activa el trial de Dynamics 365** (necesario desde el Módulo 1 en adelante):
+   - Dentro de tu tenant recién creado, ve a
+     [Power Platform Admin Center](https://admin.powerplatform.microsoft.com).
+   - **Environments** → confirma que existe un ambiente (usualmente se crea uno automático con el
+     Developer Program).
+   - Si necesitas Dynamics 365 apps (Sales, Customer Service) para labs específicos del nivel D365,
+     actívalos desde ese mismo ambiente en la sección **Dynamics 365 apps**.
+4. **Si algo se traba** (verificación pendiente, error de creación de tenant, pantalla en blanco):
+   - Espera — puede tardar minutos o hasta 24 horas si Microsoft pide revisión manual. No es un
+     error tuyo ni de esta guía.
+   - Cierra sesión, borra caché del navegador, o prueba en una ventana privada antes de repetir el
+     registro — registrar el mismo correo dos veces suele generar el error más confuso de este paso.
+   - Guarda una captura del mensaje de error como evidencia de avance mientras esperas — el Módulo 1
+     ya contempla esto como progreso válido.
+
+Una vez tengas tu tenant y ambiente activos, continúa con **Navegador moderno** abajo.
+
 ## Navegador moderno
 
 **Para qué**: acceso a Power Apps Maker Portal, Power Platform Admin Center, Dynamics 365 y a esta

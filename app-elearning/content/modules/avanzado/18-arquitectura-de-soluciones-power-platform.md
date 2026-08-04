@@ -6,6 +6,18 @@ certification: "PL-400"
 estimatedMinutes: 7
 slug: "arquitectura-de-soluciones-power-platform"
 ---
+> **📌 Primer módulo de Avanzado (PL-400).** Este nivel asume que ya completaste Básico e Intermedio — el vocabulario de aquí en adelante (ADR, capas, patrones de integración) construye sobre eso, no lo repite. Si llegaste saltando niveles, vuelve a Módulo 1 antes de seguir; el resto del curso no te espera dos veces.
+
+### 📚 Mini-glosario antes de empezar
+
+| Término | En una frase |
+|---|---|
+| **ADR (Architecture Decision Record)** | Un documento corto que explica por qué elegiste una opción técnica sobre otra, para que alguien en 6 meses entienda el "por qué", no solo el "qué". |
+| **Capa (Layer)** | Una responsabilidad separada del sistema (ej. "donde se ve" vs "donde se guardan los datos") — separarlas evita que un cambio en una rompa las demás. |
+| **API** | La forma en que un programa le pide datos a otro programa, sin intervención humana. |
+| **Middleware** | Un sistema intermedio que conecta dos aplicaciones que no se hablan directamente entre sí. |
+| **Escalabilidad** | Que la solución siga funcionando bien cuando crece el número de usuarios o datos, no solo en la prueba con 5 registros. |
+
 ### 🎯 Objetivo
 Diseñar arquitecturas de soluciones escalables, definir estrategias de datos multi-capa, seleccionar el tipo correcto de aplicación según el escenario, y documentar decisiones arquitectónicas con ADRs (Architecture Decision Records).
 
