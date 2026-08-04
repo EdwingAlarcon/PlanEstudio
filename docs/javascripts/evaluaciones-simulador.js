@@ -2960,6 +2960,71 @@
       ],
       answer: [0, 1],
       explanation: "microsoft/powerplatform-actions replica en GitHub Actions las capacidades de los Build Tools de Azure DevOps y automatiza la instalación del pac CLI. No está limitado a Azure DevOps —es específico de GitHub— y sigue requiriendo credenciales (app-id, client-secret, tenant-id) para autenticarse."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Partner Microsoft): los despliegues manuales tardaban 3 horas y 1 de cada 4 tenía errores, sin audit trail de qué se desplegó. ¿Qué solución del caso ataca la raíz de ese problema?",
+      options: [
+      "Contratar más personas para hacer el despliegue manual en paralelo",
+      "Un pipeline completo de CI/CD en Azure DevOps con build automático en cada PR",
+      "Aumentar el tamaño del equipo de QA",
+      "Desplegar directamente a producción sin pasar por TEST/UAT"
+      ],
+      answer: [1],
+      explanation: "El caso implementa un pipeline CI/CD completo que automatiza build, validación y despliegue, eliminando el proceso manual propenso a error y dejando trazabilidad completa en Azure DevOps.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Partner Microsoft): se necesita que el pipeline falle inmediatamente si la solución tiene errores críticos, sin gastar tiempo en pasos posteriores. ¿Qué práctica del caso lo logra?",
+      options: [
+      "Ejecutar el Solution Checker en el primer stage del pipeline",
+      "Ejecutar el Solution Checker solo después de desplegar a PROD",
+      "Omitir el Solution Checker si el equipo tiene prisa",
+      "Ejecutar el Solution Checker una vez al mes"
+      ],
+      answer: [0],
+      explanation: "El caso indica 'el pipeline debe fallar rápido — Solution Checker en el primer stage', deteniendo el proceso antes de invertir tiempo en stages posteriores si hay errores críticos.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Partner Microsoft): PROD requiere una validación humana extra que TEST no requiere (deploy automático). ¿Qué configuración de Azure DevOps implementa esa diferencia?",
+      options: [
+      "'Required approvers' configurado en el Environment de PROD (2 aprobadores)",
+      "Una Business Rule en Dataverse",
+      "Un Connection Reference adicional",
+      "Aumentar el timeout del pipeline"
+      ],
+      answer: [0],
+      explanation: "El caso configura 'Required approvers' en los Environments de UAT (aprobación del cliente) y PROD (2 aprobadores) de Azure DevOps, mientras que TEST se despliega automáticamente sin aprobación.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Partner Microsoft): ¿por qué el caso recomienda usar Managed Identity en producción en vez de secretos de usuario?",
+      options: [
+      "Porque Managed Identity es más rápida de configurar, sin importar la seguridad",
+      "Porque evita almacenar y rotar credenciales de un usuario específico, reduciendo el riesgo de exposición",
+      "Porque los secretos de usuario no funcionan en Azure DevOps",
+      "Porque Managed Identity no requiere ningún tipo de permiso"
+      ],
+      answer: [1],
+      explanation: "Managed Identity elimina la necesidad de gestionar y rotar credenciales de un usuario/aplicación, reduciendo la superficie de exposición de secretos en el pipeline de producción.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Partner Microsoft): ¿cuáles DOS resultados demuestra el caso tras implementar el pipeline CI/CD?",
+      options: [
+      "Tiempo de despliegue reducido de 3 horas a 25 minutos",
+      "Cero errores en PROD durante 6 meses",
+      "Se eliminó la necesidad de ambientes TEST y UAT",
+      "El Solution Checker dejó de ser necesario"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente estos dos resultados. Los ambientes TEST/UAT y el Solution Checker siguen siendo parte central del pipeline, no se eliminaron.",
+      appliesTo: "caso"
     }
   ],
   20: [
@@ -3058,6 +3123,71 @@
       ],
       answer: [0, 1],
       explanation: "El Entitlement es un registro propio que define casos permitidos, canales y vigencia, y Dataverse descuenta automáticamente el consumo al crear cada caso. No es una sub-configuración del SLA, y los Web Roles pertenecen a Power Pages, no al control de canales de soporte en D365."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Mesa de ayuda de software): los casos se asignaban por turno rotativo sin considerar expertise; un caso de SAP llegaba a un agente de Power BI. ¿Qué mecanismo resuelve la raíz de ese problema?",
+      options: [
+      "Unified Routing con skills-based routing",
+      "Aumentar el número de agentes en el turno",
+      "Un dashboard de Power BI que muestre los casos mal asignados",
+      "Eliminar el turno rotativo sin reemplazarlo por otro criterio"
+      ],
+      answer: [0],
+      explanation: "Unified Routing con skills-based routing asigna automáticamente los casos según el skill del agente (ej. SAP nivel ≥ 3), resolviendo la causa raíz de asignaciones sin considerar expertise.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Mesa de ayuda de software): se necesita que los clientes Premium reciban resolución en 4 horas y los Estándar en 24 horas. ¿Qué mecanismo de D365 CE implementa ese SLA diferenciado?",
+      options: [
+      "Entitlements con SLA distinto por nivel de cliente",
+      "Una Business Rule en el formulario de caso",
+      "Skills-based routing, sin relación con el SLA",
+      "Un campo de texto libre indicando la prioridad"
+      ],
+      answer: [0],
+      explanation: "El caso implementa SLA diferenciado (4h Premium vs 24h Estándar) mediante Entitlements, que definen el nivel de servicio según el cliente.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Escenario Customer Insights — aseguradora): se enviaban campañas genéricas a clientes con reclamos abiertos, generando quejas. ¿Qué corrigió eso?",
+      options: [
+      "Enviar las campañas con mayor frecuencia para compensar las quejas",
+      "Crear segmentos que excluyen casos críticos, integrando Customer Insights - Data con Sales, Service y billing",
+      "Eliminar por completo las campañas de renovación",
+      "Enviar las campañas solo por correo postal"
+      ],
+      answer: [1],
+      explanation: "El caso integra Customer Insights - Data con Sales/Service/billing para crear segmentos que excluyen clientes con reclamos abiertos, evitando comunicaciones inoportunas.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Escenario Field Service — mantenimiento industrial): las visitas se gestionaban en Excel y WhatsApp. ¿Qué objeto de Field Service se genera a partir de un caso de soporte, según el caso?",
+      options: [
+      "Un Work Order, asignado por el dispatcher según skill y ubicación del técnico",
+      "Un correo automático sin seguimiento estructurado",
+      "Una hoja de cálculo compartida en OneDrive",
+      "Un ticket en un sistema externo no integrado"
+      ],
+      answer: [0],
+      explanation: "El caso describe que los casos de soporte generan Work Orders, asignados por el dispatcher según skill y ubicación, con captura de inspecciones desde móvil por el técnico.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Mesa de ayuda de software): ¿cuáles DOS resultados demuestra el caso principal tras implementar Unified Routing?",
+      options: [
+      "First-contact resolution mejoró del 45% al 72%",
+      "CSAT (satisfacción del cliente) mejoró de 3.2 a 4.4/5",
+      "Se eliminó por completo la necesidad de agentes humanos",
+      "Los SLA dejaron de aplicarse a clientes Premium"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente estos dos resultados cuantificables. Los agentes siguen atendiendo los casos (ahora mejor asignados) y los SLA diferenciados siguen aplicando.",
+      appliesTo: "caso"
     }
   ],
   21: [
@@ -3156,6 +3286,71 @@
       ],
       answer: [0],
       explanation: "El CDN distribuye los archivos estáticos en nodos geográficamente cercanos a los usuarios, reduciendo la latencia de carga. Deshabilitar Web Files rompe la funcionalidad, Anonymous Access es un tema de seguridad no de rendimiento, y el límite de delegación no aplica a Power Pages."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa de servicios): el 60% de las llamadas eran consultas de estado de contratos/casos, no problemas reales. ¿Qué solución del caso reduce ese volumen?",
+      options: [
+      "Contratar más agentes telefónicos",
+      "Un portal Power Pages donde el cliente ve el estado en tiempo real de sus contratos y casos",
+      "Un buzón de correo dedicado a consultas de estado",
+      "Un menú de IVR telefónico más largo"
+      ],
+      answer: [1],
+      explanation: "El caso implementa un portal Power Pages integrado con Dataverse donde el cliente autogestiona la consulta de estado, eliminando la necesidad de llamar para eso.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa de servicios): se necesita que un cliente autenticado en el portal solo vea sus propios contratos, nunca los de otro cliente. ¿Qué mecanismo lo garantiza?",
+      options: [
+      "Table Permissions configuradas en 'Contact', no en 'Global'",
+      "Ocultar visualmente los contratos de otros clientes con CSS",
+      "Confiar en que el cliente no navegue a otras URLs",
+      "Un Field Security Profile sobre la tabla de contratos"
+      ],
+      answer: [0],
+      explanation: "El caso es explícito: 'Table Permissions en Contact > Global — nunca exponer todos los registros a usuarios del portal'. El alcance 'Contact' limita el acceso a los registros del propio contacto autenticado.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa de servicios): el portal debe cargar en menos de 3 segundos para usuarios externos. ¿Qué práctica del caso ayuda directamente a lograrlo?",
+      options: [
+      "CDN y compresión de imágenes",
+      "Agregar más campos a cada formulario",
+      "Deshabilitar la autenticación del portal",
+      "Aumentar el número de Table Permissions"
+      ],
+      answer: [0],
+      explanation: "El caso indica explícitamente usar CDN y compresión de imágenes como requisito de rendimiento para portales externos.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa de servicios): ¿qué componente de seguridad debe habilitarse en producción para proteger el portal externo de ataques comunes?",
+      options: [
+      "WAF (Web Application Firewall)",
+      "Un Field Security Profile adicional",
+      "Una Business Rule de validación",
+      "Un Connection Reference"
+      ],
+      answer: [0],
+      explanation: "El caso indica habilitar WAF en producción como buena práctica de seguridad para el portal expuesto a internet.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Empresa de servicios): ¿cuáles DOS resultados demuestra el caso tras implementar el portal Power Pages?",
+      options: [
+      "Llamadas de soporte reducidas en 55%",
+      "NPS (Net Promoter Score) subió de 42 a 68",
+      "Se eliminó por completo el equipo de soporte telefónico",
+      "El CRM dejó de necesitar Dataverse como base de datos"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente estos dos resultados. El equipo de soporte sigue existiendo (ahora con menos volumen de consultas triviales) y el portal está integrado con Dataverse, no lo reemplaza.",
+      appliesTo: "caso"
     }
   ],
   22: [
@@ -3254,6 +3449,71 @@
       ],
       answer: [0, 1],
       explanation: "El nodo nativo de escalamiento envía el contexto completo de la conversación al agente humano, quien puede continuar la atención sin pedir de nuevo la información. No se elimina la sesión ni se requiere reiniciar la conversación."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Banco): el chatbot anterior respondía genérico sin saber quién preguntaba (ej. días de vacaciones). ¿Qué solución del caso personaliza la respuesta según el usuario?",
+      options: [
+      "SSO Azure AD + integración con HRIS vía Power Automate",
+      "Aumentar el número de Knowledge Sources genéricos",
+      "Pedir al empleado que escriba su número de identificación en cada pregunta",
+      "Un menú de opciones predefinidas sin conexión a datos reales"
+      ],
+      answer: [0],
+      explanation: "El caso implementa SSO con Azure AD (para saber quién es el usuario) e integración con el HRIS vía Power Automate (para consultar sus datos específicos), personalizando la respuesta.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Banco): ¿por qué el caso considera el SSO 'prácticamente obligatorio' en bots corporativos?",
+      options: [
+      "Porque evita fricciones de autenticación repetidas para el usuario",
+      "Porque es un requisito técnico de Copilot Studio sin el cual no funciona",
+      "Porque reduce el costo de licenciamiento del bot",
+      "Porque permite que cualquier persona externa use el bot sin restricciones"
+      ],
+      answer: [0],
+      explanation: "El SSO evita que el usuario tenga que autenticarse manualmente cada vez, eliminando fricción — es una buena práctica de experiencia y seguridad, no un requisito técnico obligatorio de la plataforma.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Banco): se necesita que el bot ofrezca acciones directas (botones) en vez de solo texto plano. ¿Qué componente usa el caso para esto?",
+      options: [
+      "Adaptive Cards",
+      "Un Knowledge Source adicional",
+      "Una entidad Closed List",
+      "Un topic de Fallback"
+      ],
+      answer: [0],
+      explanation: "El caso indica explícitamente el uso de Adaptive Cards con botones para acciones directas, en vez de depender solo de respuestas de texto.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Banco): ¿qué salvaguarda debe tener siempre el bot para no dejar atrapado a un empleado cuya consulta no puede resolver?",
+      options: [
+      "El topic 'Escalar a agente' como escape hatch siempre disponible",
+      "Cerrar la conversación automáticamente sin alternativa",
+      "Redirigir siempre a la política genérica de RRHH",
+      "Repetir la misma respuesta hasta que el usuario se rinda"
+      ],
+      answer: [0],
+      explanation: "El caso indica tener siempre disponible el topic 'Escalar a agente' como vía de salida cuando el bot no puede resolver la consulta.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Banco): ¿cuáles DOS resultados demuestra el caso tras implementar SSO + integración HRIS?",
+      options: [
+      "Resolución en el primer mensaje del 78%",
+      "Llamadas a RRHH reducidas en 40%",
+      "Se eliminó por completo el equipo de RRHH",
+      "El bot dejó de necesitar Knowledge Sources"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente estos dos resultados. RRHH sigue existiendo (con menos carga de consultas repetitivas) y el bot sigue usando Knowledge Sources para preguntas de procedimientos.",
+      appliesTo: "caso"
     }
   ],
   23: [
@@ -3352,6 +3612,71 @@
       ],
       answer: [0],
       explanation: "SharedVariables está diseñado exactamente para pasar datos entre plugins que corren en el mismo pipeline de ejecución. ITracingService es solo para logging, y usar variables estáticas o registros temporales en Dataverse son soluciones frágiles e innecesarias para este propósito."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa financiera): los usuarios podían crear préstamos sin validar deudas vencidas porque la validación del formulario era fácil de eludir. ¿Qué solución del caso hace imposible eludir esa validación?",
+      options: [
+      "Una Business Rule adicional en el formulario",
+      "Un plugin Pre-Create en el servidor, que se ejecuta independientemente de la UI",
+      "Un mensaje de advertencia más visible en el formulario",
+      "Capacitar a los usuarios para que no eludan la validación"
+      ],
+      answer: [1],
+      explanation: "El plugin Pre-Create se ejecuta en el servidor, sin importar desde dónde llegue la solicitud de creación (UI, API, importación), lo que hace imposible eludirlo como sí ocurría con la validación del formulario.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa financiera): ¿qué excepción lanza el plugin del caso cuando detecta que el cliente tiene deudas vencidas, para bloquear la operación con un mensaje claro?",
+      options: [
+      "InvalidPluginExecutionException",
+      "NullReferenceException",
+      "System.Exception genérica sin mensaje",
+      "TimeoutException"
+      ],
+      answer: [0],
+      explanation: "El caso especifica que el plugin lanza InvalidPluginExecutionException con un mensaje claro, que Dataverse propaga al usuario como error de negocio comprensible.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa financiera): ¿por qué el plugin debe verificar 'context.Depth > 1' como buena práctica?",
+      options: [
+      "Para evitar recursión infinita si el plugin dispara otra operación que vuelve a activarlo",
+      "Para mejorar el rendimiento de las consultas a la API del buró de crédito",
+      "Para cumplir un requisito de licenciamiento de Dataverse",
+      "Para permitir que el plugin se ejecute en modo asíncrono"
+      ],
+      answer: [0],
+      explanation: "Verificar la profundidad de ejecución (Depth) evita que el plugin se dispare a sí mismo en un ciclo infinito cuando su propia lógica provoca otra operación sobre el mismo registro.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa financiera): se necesita registrar información de diagnóstico dentro del plugin para depurar problemas en producción, donde no se puede usar un debugger interactivo. ¿Qué mecanismo usa el caso?",
+      options: [
+      "ITracingService",
+      "Console.WriteLine",
+      "Un archivo de log local en el servidor",
+      "System.Diagnostics.Debug.Print"
+      ],
+      answer: [0],
+      explanation: "El caso indica ITracingService como 'indispensable para debugging en producción', ya que su salida queda registrada y accesible en los logs de ejecución de Dataverse, a diferencia de mecanismos de consola o archivos locales que no aplican en ese entorno.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Empresa financiera): ¿cuáles DOS resultados demuestra el caso tras implementar el plugin Pre-Create?",
+      options: [
+      "Cumplimiento regulatorio del 100%",
+      "Eliminación de préstamos aprobados con deuda vencida",
+      "Los usuarios dejaron de necesitar el formulario de préstamos",
+      "El buró de crédito dejó de ser necesario para la validación"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente estos dos resultados. El formulario y la consulta al buró de crédito siguen siendo parte del proceso — ahora validados de forma infranqueable por el plugin.",
+      appliesTo: "caso"
     }
   ],
   24: [
@@ -3450,6 +3775,71 @@
       ],
       answer: [0],
       explanation: "El Outbox Pattern desacopla la creación del mensaje de su entrega: el plugin solo registra el mensaje pendiente en Dataverse y un proceso separado lo envía y reintenta si falla. Llamar directamente en el plugin síncrono arriesga perder el mensaje si el sistema externo está caído, e ignorar errores o alargar el timeout no son soluciones robustas."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa de logística): los sistemas se llamaban directamente; si SAP estaba caído, las órdenes de Dataverse se perdían sin reintentos ni audit trail. ¿Qué solución del caso resuelve la raíz de ese problema?",
+      options: [
+      "Service Bus como middleware entre Dataverse y SAP",
+      "Aumentar la frecuencia de sincronización manual",
+      "Duplicar manualmente cada orden en un Excel de respaldo",
+      "Eliminar la integración con SAP"
+      ],
+      answer: [0],
+      explanation: "El Service Bus desacopla Dataverse de SAP: Dataverse envía el evento al bus, y una Azure Function lo procesa con reintentos, eliminando la dependencia de disponibilidad directa entre ambos sistemas.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa de logística): si SAP falla 3 veces al procesar un mensaje, ¿qué ocurre según el caso?",
+      options: [
+      "El mensaje se descarta silenciosamente",
+      "El mensaje va a una Dead Letter Queue para atención manual",
+      "El sistema reintenta indefinidamente sin límite",
+      "Se detiene todo el Service Bus hasta que un administrador lo reinicie"
+      ],
+      answer: [1],
+      explanation: "El caso especifica que tras 3 fallos, el mensaje va a la Dead Letter Queue, que se procesa en horario de mantenimiento — ni se descarta ni se reintenta indefinidamente.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa de logística): ¿por qué las integraciones externas del caso deben ser siempre asíncronas?",
+      options: [
+      "Para no bloquear el pipeline de Dataverse mientras se espera respuesta de un sistema externo",
+      "Porque las llamadas síncronas no están permitidas en Azure",
+      "Porque el modo asíncrono es más barato en licenciamiento",
+      "Porque solo el modo asíncrono soporta Managed Identity"
+      ],
+      answer: [0],
+      explanation: "El caso indica 'Async siempre para integraciones externas — nunca bloquear el pipeline de Dataverse', evitando que la latencia de un sistema externo detenga operaciones internas.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa de logística): el mismo mensaje puede llegar dos veces a la Azure Function. ¿Qué principio de diseño evita que se procese dos veces con efectos duplicados?",
+      options: [
+      "Idempotencia",
+      "Recursión",
+      "Herencia múltiple",
+      "Inyección de dependencias"
+      ],
+      answer: [0],
+      explanation: "El caso indica 'Idempotencia en las Azure Functions — el mismo mensaje puede llegar 2 veces; debe procesarse 1 vez', evitando efectos duplicados por reintentos o entregas repetidas del bus.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Empresa de logística): ¿cuáles DOS resultados demuestra el caso tras implementar el middleware con Service Bus?",
+      options: [
+      "Cero pérdida de órdenes",
+      "SLA de integración del 99.9%",
+      "Se eliminó la necesidad de contar con SAP",
+      "Las órdenes dejaron de requerir procesamiento asíncrono"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente estos dos resultados. SAP sigue siendo el sistema ERP de destino, y el procesamiento asíncrono es justamente el mecanismo que sostiene esos resultados.",
+      appliesTo: "caso"
     }
   ],
   25: [
@@ -3548,6 +3938,71 @@
       ],
       answer: [0, 1],
       explanation: "Open corta las llamadas y falla rápido, mientras Half-Open prueba con una llamada limitada para decidir si el servicio se recuperó. Closed es el estado de operación normal (no bloqueado), y Half-Open no ejecuta llamadas masivas en paralelo, sino una prueba controlada."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Marketplace B2B): una orden que involucraba 3 sistemas podía quedar en estado inconsistente si uno fallaba a mitad del proceso (inventario reservado, orden no creada). ¿Qué patrón resuelve directamente este problema?",
+      options: [
+      "Saga Pattern con compensaciones en Azure Durable Functions",
+      "Aumentar el timeout de cada sistema",
+      "Ejecutar los 3 sistemas de forma completamente independiente sin coordinación",
+      "Revisar manualmente cada orden al final del día"
+      ],
+      answer: [0],
+      explanation: "El Saga Pattern coordina los pasos entre sistemas y, si alguno falla, deshace automáticamente (compensa) los pasos anteriores ya ejecutados, evitando el estado inconsistente.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Marketplace B2B): ¿qué requisito de diseño es indispensable para que un paso de la Saga pueda deshacerse si algo falla después?",
+      options: [
+      "Que la operación sea compensable (tenga una acción inversa definida)",
+      "Que la operación se ejecute en menos de 1 segundo",
+      "Que la operación use únicamente Dataverse, sin sistemas externos",
+      "Que la operación no tenga ningún efecto secundario"
+      ],
+      answer: [0],
+      explanation: "El caso indica que 'Saga requiere que todas las operaciones sean compensables — diseñar con esto en mente desde el inicio'. Sin una acción de compensación definida, el paso no puede deshacerse ante un fallo posterior.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Marketplace B2B): ¿qué patrón previene que un sistema externo caído genere una avalancha de errores en cascada sobre el resto de la integración?",
+      options: [
+      "Circuit Breaker",
+      "Saga Pattern",
+      "Repository Pattern",
+      "Singleton Pattern"
+      ],
+      answer: [0],
+      explanation: "El Circuit Breaker corta las llamadas a un sistema que detecta como caído, evitando que los reintentos constantes generen una avalancha de errores adicionales.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Marketplace B2B): ¿qué patrón hace que los plugins sean mucho más fáciles de testear, según el caso?",
+      options: [
+      "Repository Pattern",
+      "Circuit Breaker",
+      "Dead Letter Queue",
+      "Outbox Pattern"
+      ],
+      answer: [0],
+      explanation: "El caso indica explícitamente: 'Repository Pattern hace los plugins 10x más fáciles de testear', al desacoplar el acceso a datos de la lógica de negocio del plugin.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Marketplace B2B): ¿cuáles DOS resultados demuestra el caso tras implementar el Saga Pattern?",
+      options: [
+      "Cero órdenes en estado inconsistente",
+      "Auditoría completa de cada intento y compensación",
+      "Se eliminó la necesidad de coordinar múltiples sistemas",
+      "Las órdenes ahora se procesan de forma completamente síncrona"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente estos dos resultados. La Saga sigue coordinando múltiples sistemas (ahora de forma robusta) y el patrón es intrínsecamente asíncrono/orquestado, no síncrono.",
+      appliesTo: "caso"
     }
   ],
   26: [
@@ -3646,6 +4101,71 @@
       ],
       answer: [0],
       explanation: "La Batch API agrupa múltiples operaciones CRUD en una sola solicitud HTTP, reduciendo drásticamente la latencia de red frente a llamadas individuales. FetchXML es un lenguaje de consulta, no de inserción masiva, y aumentar el timeout no reduce el número de round-trips."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Retailer): la Canvas App de 15 pantallas tardaba 45 segundos en cargar y los vendedores la abandonaban antes de que terminara. ¿Qué cambio del caso contribuyó más a reducir ese tiempo?",
+      options: [
+      "Reducir Concurrent() de 8 tablas a 3 esenciales en App.OnStart, con Named Formulas lazy-load",
+      "Agregar más pantallas para distribuir la carga",
+      "Aumentar la resolución de las imágenes de productos",
+      "Cargar todas las tablas con ClearCollect al inicio para tenerlas listas"
+      ],
+      answer: [0],
+      explanation: "El caso reduce drásticamente lo que se carga de forma concurrente al inicio (de 8 tablas a 3 esenciales) y usa Named Formulas de carga diferida, en vez de cargar todo por adelantado.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Retailer): para tablas con más de 1000 registros, ¿qué técnica recomienda el caso en vez de un ClearCollect de toda la tabla?",
+      options: [
+      "Paginación",
+      "Duplicar la tabla en dos tablas más pequeñas",
+      "Eliminar registros antiguos permanentemente",
+      "Convertir la tabla en una colección local fija"
+      ],
+      answer: [0],
+      explanation: "El caso indica 'Paginación > ClearCollect de toda la tabla para datos > 1000 registros', trayendo solo lo necesario en cada página en vez de toda la tabla de una vez.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Retailer): ¿por qué nunca se debe hacer ClearCollect dentro de Gallery.Items?",
+      options: [
+      "Porque se ejecuta en cada render de la galería, multiplicando innecesariamente las llamadas",
+      "Porque Gallery.Items no admite fórmulas",
+      "Porque ClearCollect solo funciona en App.OnStart",
+      "Porque rompe la delegación de todas las consultas"
+      ],
+      answer: [0],
+      explanation: "El caso advierte explícitamente que ClearCollect dentro de Gallery.Items se ejecuta en cada render, generando llamadas repetidas e innecesarias que degradan el rendimiento.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Retailer): ¿qué herramienta usa el caso para medir el tiempo de cada llamada dentro de la Canvas App y diagnosticar el problema de carga?",
+      options: [
+      "Monitor (Alt+Shift+M en Canvas App)",
+      "El Solution Checker",
+      "Power BI Desktop",
+      "El editor de Power Fx sin herramientas adicionales"
+      ],
+      answer: [0],
+      explanation: "El caso indica usar Monitor (Alt+Shift+M) para medir tiempos de cada llamada y así identificar cuáles eran los cuellos de botella de rendimiento.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Retailer): ¿cuáles DOS resultados demuestra el caso tras las optimizaciones de rendimiento?",
+      options: [
+      "Tiempo de carga reducido de 45 segundos a 6 segundos",
+      "Adopción de la app aumentó del 60% al 92%",
+      "Se eliminaron las 15 pantallas de la app",
+      "Las imágenes dejaron de ser necesarias en la app"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente estos dos resultados. Las 15 pantallas y las imágenes de producto siguen presentes — las imágenes se optimizaron a WebP, no se eliminaron.",
+      appliesTo: "caso"
     }
   ],
   27: [
@@ -3744,6 +4264,71 @@
       ],
       answer: [0],
       explanation: "La convención semántica indica incrementar el patch para bugfixes, minor para features nuevas no disruptivas y major para cambios breaking. Omitir el incremento de versión provoca que el navegador siga sirviendo la versión en caché."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Firma de abogados): la subgrid nativa de documentos del expediente no permitía preview, tags ni acciones masivas, obligando a abrir cada registro individualmente. ¿Qué solución del caso resuelve esto?",
+      options: [
+      "Un PCF Dataset Control con preview inline, tags por categoría y botón de firmar",
+      "Aumentar el número de columnas visibles en la subgrid nativa",
+      "Reemplazar la subgrid por un reporte de Power BI",
+      "Pedir a los abogados que abran los registros más rápido"
+      ],
+      answer: [0],
+      explanation: "El caso implementa un PCF Dataset Control personalizado con preview inline de PDFs, tags coloridos y una acción de firma directa, cubriendo lo que la subgrid nativa no soporta.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Firma de abogados): ¿qué variante de PCF recomienda el caso por su menor bundle y mejor rendimiento?",
+      options: [
+      "PCF Virtual (React)",
+      "PCF Standard",
+      "No hay diferencia de rendimiento entre variantes",
+      "PCF Standard, porque no requiere compilación"
+      ],
+      answer: [0],
+      explanation: "El caso indica 'Siempre usar Virtual PCF (React) — menor bundle, mejor rendimiento', al compartir el runtime de React de la plataforma en vez de empaquetar uno propio.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Firma de abogados): tras una operación de escritura desde el PCF (por ejemplo, firmar un documento), ¿qué se debe llamar para mantener la lista sincronizada con los datos actuales?",
+      options: [
+      "dataset.refresh()",
+      "window.location.reload()",
+      "No es necesario, la lista se actualiza sola siempre",
+      "Xrm.Page.data.refresh()"
+      ],
+      answer: [0],
+      explanation: "El caso indica 'dataset.refresh() después de cualquier operación de escritura — mantiene la lista sincronizada', el método correcto dentro del ciclo de vida del PCF.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Firma de abogados): ¿por qué el caso recomienda probar el PCF en el test harness local (`npm start`) antes de hacer `pac pcf push`?",
+      options: [
+      "Porque el ciclo de feedback local es de segundos, frente a minutos al desplegar a Dataverse",
+      "Porque `pac pcf push` no permite hacer pruebas nunca",
+      "Porque el test harness local es obligatorio por licenciamiento",
+      "Porque `npm start` reemplaza la necesidad de compilar en modo Release"
+      ],
+      answer: [0],
+      explanation: "El caso destaca la diferencia de velocidad de iteración: probar localmente con `npm start` da retroalimentación en segundos, mientras que desplegar a Dataverse con `pac pcf push` toma minutos por ciclo.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Firma de abogados): ¿cuáles DOS resultados demuestra el caso tras implementar el PCF Dataset Control?",
+      options: [
+      "Tiempo de revisión de expediente reducido de 8 a 2 minutos",
+      "Satisfacción de los abogados de 4.7/5",
+      "Se eliminó la necesidad de la tabla de expedientes en Dataverse",
+      "Los documentos dejaron de requerir firma"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente estos dos resultados. La tabla de expedientes en Dataverse y el proceso de firma siguen siendo el núcleo de la solución — ahora con mejor experiencia de uso.",
+      appliesTo: "caso"
     }
   ],
   28: [
@@ -3842,6 +4427,71 @@
       ],
       answer: [0, 1],
       explanation: "Al vivir dentro de Power Platform, la Code App hereda DLP Policies y auditoría de acceso de la plataforma gestionada sin escribir código adicional. La optimización del build y la generación de tests no son beneficios de gobernanza de la plataforma, sino tareas del desarrollo normal."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Firma de consultoría): el portal de proyectos necesitaba Kanban con drag-and-drop, gráficos interactivos y timesheet con edición masiva — patrones que Canvas App no soporta bien. ¿Qué decisión arquitectónica tomó el caso?",
+      options: [
+      "Construir una Code App en React conectada a Dataverse",
+      "Renunciar al Kanban y los gráficos interactivos",
+      "Construir 3 Canvas Apps separadas, una por patrón de UI",
+      "Migrar todo a una hoja de Excel compartida"
+      ],
+      answer: [0],
+      explanation: "El caso elige una Code App en React precisamente porque soporta patrones de UI (drag-and-drop, gráficos, grids editables) que Canvas App no cubre nativamente.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Firma de consultoría): ¿qué ventaja de tiempo de desarrollo reporta el caso al elegir Code App en vez de construir cada patrón como un PCF Component separado?",
+      options: [
+      "40% menos tiempo de desarrollo (3 semanas vs 3 meses estimados con PCF)",
+      "El mismo tiempo, pero con menos líneas de código",
+      "Un 90% más de tiempo, pero con mejor calidad",
+      "No hay diferencia de tiempo entre ambos enfoques"
+      ],
+      answer: [0],
+      explanation: "El caso indica que construir cada patrón como PCF Component separado tomaría 3 meses, mientras la Code App resolvió todo en 3 semanas — un 40% menos de tiempo de desarrollo.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Firma de consultoría): ¿qué gestiona la plataforma automáticamente en la Code App, evitando que el equipo escriba código de autenticación?",
+      options: [
+      "Autenticación Entra ID gestionada por la plataforma",
+      "El diseño visual del Kanban",
+      "La lógica de negocio del timesheet",
+      "Los gráficos de utilización con recharts"
+      ],
+      answer: [0],
+      explanation: "El caso indica 'Autenticación Entra ID gestionada por la plataforma — cero código de auth', un beneficio directo de construir la Code App dentro de Power Platform.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Firma de consultoría): ¿cómo se desplegó la Code App a producción según el caso?",
+      options: [
+      "Como solución Managed, con pipeline CI/CD de Azure DevOps",
+      "Copiando manualmente los archivos al servidor de producción",
+      "Como solución Unmanaged directamente en PROD",
+      "Sin ningún proceso de despliegue formal"
+      ],
+      answer: [0],
+      explanation: "El caso especifica que la Code App se desplegó 'como solución Managed en producción con pipeline CI/CD Azure DevOps', siguiendo el mismo rigor de ALM que otros componentes de Power Platform.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Firma de consultoría): ¿cuáles DOS librerías de React usa el caso para implementar el Kanban y los gráficos de utilización?",
+      options: [
+      "react-beautiful-dnd, para el drag-and-drop del Kanban",
+      "recharts, para los gráficos de utilización en tiempo real",
+      "jQuery UI, para el drag-and-drop",
+      "Bootstrap, para los gráficos"
+      ],
+      answer: [0, 1],
+      explanation: "El caso especifica explícitamente 'react-beautiful-dnd' para el Kanban con drag-and-drop y 'recharts' para los gráficos de utilización conectados a datos reales.",
+      appliesTo: "caso"
     }
   ],
   29: [
@@ -3940,6 +4590,71 @@
       ],
       answer: [0],
       explanation: "Los meta-tags dinámicos generados con Liquid (título, descripción, Open Graph) son una práctica directa de SEO en Power Pages. Deshabilitar el sitemap, ocultar páginas del menú o forzar autenticación en todo el sitio perjudican la indexación y el acceso público."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (SaaS multi-país): necesitaban un portal de autoservicio para clientes externos de 50 países, sin darles cuentas en el Azure AD corporativo. ¿Qué solución usa el caso para el registro/login?",
+      options: [
+      "Azure AD B2C",
+      "Azure AD corporativo compartido con los clientes",
+      "Una cuenta genérica compartida para todos los clientes",
+      "Autenticación básica con usuario y contraseña en texto plano"
+      ],
+      answer: [0],
+      explanation: "El caso usa Azure AD B2C, diseñado específicamente para identidades de clientes externos, separado del Azure AD corporativo interno.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (SaaS multi-país): ¿por qué el caso recomienda nunca mezclar Azure AD B2C y Azure AD interno en el mismo portal sin MFA diferenciado?",
+      options: [
+      "Porque son audiencias distintas (externos vs internos) con requisitos de seguridad diferentes",
+      "Porque técnicamente es imposible configurar ambos en el mismo tenant",
+      "Porque B2C no soporta ningún tipo de autenticación multifactor",
+      "Porque mezclar ambos duplica el costo de licenciamiento del portal"
+      ],
+      answer: [0],
+      explanation: "El caso es explícito: 'B2C para usuarios externos, Azure AD para usuarios internos — nunca mezclar en el mismo portal sin MFA diferenciado', reconociendo que ambas audiencias tienen perfiles de riesgo distintos.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (SaaS multi-país): ¿qué recomienda el caso para el 90% de los escenarios de autenticación B2C, reservando la otra opción solo para requisitos especiales?",
+      options: [
+      "User Flows, reservando Custom Policies solo cuando el User Flow no alcance",
+      "Custom Policies para todos los escenarios, sin excepción",
+      "No usar ningún flujo predefinido, todo debe ser código personalizado",
+      "User Flows únicamente para clientes de un solo país"
+      ],
+      answer: [0],
+      explanation: "El caso indica usar User Flows de B2C para el 90% de los casos estándar, y reservar Custom Policies (de mantenimiento mucho más costoso) solo para requisitos que el User Flow no puede satisfacer.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (SaaS multi-país): un usuario se autentica con B2C pero no ve ningún registro porque el email del token no coincide con ningún Contact existente. ¿Qué configuración del caso soluciona esto?",
+      options: [
+      "Configurar el claim 'email' en el User Flow y activar la creación automática de Contact en el portal",
+      "Pedir al usuario que se registre con un email distinto cada vez",
+      "Eliminar la validación de email por completo",
+      "Crear manualmente cada Contact antes de que el usuario se registre"
+      ],
+      answer: [0],
+      explanation: "El caso indica configurar el claim 'email' en el User Flow y activar el Site Setting 'Authentication/Registration/Enabled' para que el portal cree automáticamente el Contact al primer login.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (SaaS multi-país): ¿cuáles DOS resultados demuestra el caso tras implementar el portal con Azure AD B2C?",
+      options: [
+      "3,500 usuarios registrados en el primer mes",
+      "Cero llamadas de soporte para 'cómo inicio sesión'",
+      "Se eliminó la necesidad de Table Permissions en el portal",
+      "El portal dejó de necesitar un language switcher"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente estos dos resultados. Table Permissions y el language switcher (ES/EN/PT) siguen siendo parte de la solución descrita.",
+      appliesTo: "caso"
     }
   ],
   30: [
@@ -4038,6 +4753,71 @@
       ],
       answer: [0, 1],
       explanation: "Las alertas sobre la Dead Letter Queue y el Plugin Trace Log en modo Exception Only con revisión periódica permiten detectar problemas proactivamente. Desactivar alertas o revisar Analytics solo anualmente van en contra del objetivo de observabilidad continua."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Proyecto Multicapa): al importar las soluciones, SIT_CustomerService falla porque no encuentra componentes de SIT_Foundation. ¿Cuál es la causa y la corrección según el caso?",
+      options: [
+      "Se importó CustomerService antes que Foundation; hay que ordenar explícitamente los stages: Foundation → CustomerService → Portal → Bot",
+      "SIT_Foundation nunca debió crearse como solución separada",
+      "El pipeline debe importar todas las soluciones en paralelo para ser más rápido",
+      "Es un error aleatorio sin relación con el orden de importación"
+      ],
+      answer: [0],
+      explanation: "El caso identifica la causa exacta: orden de importación incorrecto. La corrección es ordenar explícitamente los stages del YAML según las dependencias entre soluciones.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Proyecto Multicapa): un plugin funciona en DEV pero falla en TEST con 'Object reference'. ¿Cuál es la causa más probable según el caso?",
+      options: [
+      "Una Environment Variable usada en el plugin tiene valor vacío en TEST",
+      "El plugin nunca se probó en ningún ambiente",
+      "TEST no soporta plugins de C#",
+      "El código del plugin tiene un error de sintaxis que no se detectó en DEV"
+      ],
+      answer: [0],
+      explanation: "El caso señala que la causa es una Environment Variable sin configurar en TEST; la corrección es configurar todas las Environment Variables en TEST antes de ejecutar el pipeline CD.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Proyecto Multicapa): el bot de Copilot Studio no responde con datos del usuario en TEST, aunque funciona en DEV. ¿Cuál es la causa según el caso?",
+      options: [
+      "El Service Connection del bot apunta al entorno DEV, no a TEST",
+      "Copilot Studio no está disponible en ambientes de TEST",
+      "El bot perdió su configuración de Knowledge Sources",
+      "El usuario de prueba en TEST no existe"
+      ],
+      answer: [0],
+      explanation: "El caso indica que la integración del bot debe reconfigurarse para apuntar al entorno TEST al importar la solución — de lo contrario, sigue consultando datos de DEV.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Proyecto Multicapa): Power Pages no crea casos desde el portal en PROD, aunque funcionaba en DEV. ¿Cuál es la causa según el caso?",
+      options: [
+      "El Table Permission se configuró en DEV pero no se exportó como parte de la solución SIT_Portal",
+      "El portal nunca tuvo permisos configurados en ningún ambiente",
+      "PROD bloquea por defecto la creación de casos desde portales externos",
+      "Es necesario reconstruir el portal completo en PROD"
+      ],
+      answer: [0],
+      explanation: "El caso señala que los Table Permissions son componentes exportables que deben agregarse explícitamente a la solución antes del export — si no, PROD nunca los recibe aunque existan en DEV.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Proyecto Multicapa): ¿por qué el caso recomienda documentar el orden de despliegue en el README del repositorio en vez de confiar en que el equipo lo recuerde?",
+      options: [
+      "Para que, ante una urgencia o un desarrollador nuevo, el orden correcto esté escrito y no dependa de la memoria de alguien",
+      "Porque Azure DevOps borra automáticamente el historial de despliegues después de 30 días",
+      "Porque el README es el único lugar donde se pueden versionar archivos YAML",
+      "Es solo una formalidad sin impacto real en el proyecto"
+      ],
+      answer: [0],
+      explanation: "El caso es explícito: el orden correcto 'no debería ser recordado, debe estar escrito', precisamente para evitar errores como los de importación descritos en los errores comunes de este mismo módulo.",
+      appliesTo: "caso"
     }
   ],
   31: [

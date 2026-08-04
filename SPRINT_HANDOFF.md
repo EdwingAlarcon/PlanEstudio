@@ -594,12 +594,25 @@ completado en el mismo día.** Contexto para quien retome esto (Codex u otra ses
   no mostró este problema** en ningún run de este sprint; la validación de negocio para cada
   nivel se apoya en: unit tests (322/322), lint, tsc y build siempre verdes localmente, más el
   resultado real de CI tras cada push.
+- **Nivel Avanzado completado** (2026-08-04, mismo día): 60 preguntas nuevas (5 por módulo) para
+  los módulos 19-30 (módulo 18 ya cubierto por el piloto), ancladas a sus Casos Reales (Partner
+  Microsoft/CI-CD Azure DevOps, Software company/Unified Routing + Customer Insights + Field
+  Service, Empresa de servicios/Power Pages, Banco/Copilot Studio SSO+HRIS, Empresa
+  financiera/C# Plugin Pre-Create, Logística/Service Bus middleware, Marketplace B2B/Saga
+  Pattern, Retailer/performance Canvas App, Firma de abogados/PCF Dataset Control, Firma de
+  consultoría/Code Apps, SaaS multi-país/Azure AD B2C, Proyecto Multicapa/orden de despliegue).
+  Total banco: 668 preguntas (508 quiz + 160 caso). Niveles Básico, Intermedio y Avanzado
+  completos (módulos 1-30).
+- **Nota de validación de este nivel**: dado el flakiness ambiental ya confirmado y documentado
+  arriba (mismo comportamiento con y sin cambios, vía `git stash`), la suite `npm run e2e` local
+  se omitió para este nivel; la validación se apoyó en unit tests (322/322), lint, tsc y build
+  (todos verdes) más el resultado real del run de CI en GitHub Actions tras el push.
 - **Próximo paso al retomar**: continuar escalando nivel por nivel, un commit por nivel. Hechos:
-  Básico (1-8) e Intermedio (9-17). Orden sugerido para lo que falta: Avanzado (19-30, 12
-  módulos, módulo 18 ya cubierto), Arquitecto (32-41, 10 módulos, módulo 31 ya cubierto), IA
-  (42-52+54-55, 13 módulos, módulo 53 ya cubierto), D365 (56-65, 10 módulos), RPA (66-75, 10
-  módulos). Mismo patrón: leer el "Caso Real de Negocio" real de cada módulo, 5 preguntas
-  `appliesTo: "caso"` al final del array del módulo en `evaluaciones-simulador.js`, regenerar con
+  Básico (1-8), Intermedio (9-17) y Avanzado (18-30). Orden sugerido para lo que falta:
+  Arquitecto (32-41, 10 módulos, módulo 31 ya cubierto), IA (42-52+54-55, 13 módulos, módulo 53
+  ya cubierto), D365 (56-65, 10 módulos), RPA (66-75, 10 módulos). Mismo patrón: leer el
+  "Caso Real de Negocio" real de cada módulo, 5 preguntas `appliesTo: "caso"` al final del array
+  del módulo en `evaluaciones-simulador.js`, regenerar con
   `extract-questions.mjs`, correr `validate:content` + lint + tsc + tests + build antes de cada
   commit (e2e es opcional/informativo en máquina local larga — ver nota de flakiness arriba; el
   run de CI en GitHub Actions tras el push es la validación real de e2e).
