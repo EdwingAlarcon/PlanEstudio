@@ -7,7 +7,7 @@ import { ContentValidationError, getAllModules } from "./content";
 
 let _cache: Question[] | null = null;
 
-export function getAllQuestions(): Question[] {
+function getAllParsedQuestions(): Question[] {
   if (_cache) return _cache;
 
   const questions: Question[] = [];
@@ -30,6 +30,9 @@ export function getAllQuestions(): Question[] {
       if (raw.answer.some((answer) => answer < 0 || answer >= raw.options.length)) {
         throw new ContentValidationError(`${id}: respuesta fuera del rango de opciones`);
       }
+      if (raw.appliesTo !== undefined && !["quiz", "caso"].includes(raw.appliesTo)) {
+        throw new ContentValidationError(`${id}: appliesTo inválido '${raw.appliesTo}'`);
+      }
 
       questions.push({
         id,
@@ -39,12 +42,23 @@ export function getAllQuestions(): Question[] {
         options: raw.options,
         answer: raw.answer,
         explanation: raw.explanation,
+        appliesTo: raw.appliesTo ?? "quiz",
       });
     });
   }
 
   _cache = questions;
   return questions;
+}
+
+/** Question bank consumed by module quizzes, the simulator and the dashboard — excludes "caso" questions. */
+export function getAllQuestions(): Question[] {
+  return getAllParsedQuestions().filter((q) => q.appliesTo === "quiz");
+}
+
+/** Preguntas del "Diagnóstico de caso aplicado" para un módulo (vacío si el módulo no tiene piloto). */
+export function getCaseDiagnosisForModule(moduleId: number): Question[] {
+  return getAllParsedQuestions().filter((q) => q.moduleId === moduleId && q.appliesTo === "caso");
 }
 
 export function getQuestionsForModule(moduleId: number): Question[] {

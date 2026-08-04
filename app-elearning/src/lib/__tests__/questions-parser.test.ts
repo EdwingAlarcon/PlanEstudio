@@ -1,5 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { getAllQuestions, getQuestionsForModule, getQuestionsForLevel } from "../questions-parser";
+import {
+  getAllQuestions,
+  getQuestionsForModule,
+  getQuestionsForLevel,
+  getCaseDiagnosisForModule,
+} from "../questions-parser";
 import { LEVEL_MODULE_RANGE } from "../i18n";
 
 // ─── Integrity of the full question bank ─────────────────────────────────────
@@ -136,6 +141,11 @@ describe("getQuestionsForLevel", () => {
     expect(getQuestionsForLevel("desconocido")).toHaveLength(0);
   });
 
+  it("excludes case-diagnosis questions from getAllQuestions", () => {
+    const all = getAllQuestions();
+    expect(all.every((q) => q.appliesTo !== "caso")).toBe(true);
+  });
+
   it("level ranges do not overlap", () => {
     const basico = getQuestionsForLevel("basico").map((q) => q.moduleId);
     const intermedio = getQuestionsForLevel("intermedio").map((q) => q.moduleId);
@@ -165,5 +175,31 @@ describe("getQuestionsForLevel", () => {
       getQuestionsForLevel("d365").length +
       getQuestionsForLevel("rpa").length;
     expect(sum).toBe(all);
+  });
+});
+
+// ─── getCaseDiagnosisForModule ────────────────────────────────────────────────
+
+describe("getCaseDiagnosisForModule", () => {
+  it("returns case-diagnosis questions for pilot modules", () => {
+    [1, 9, 18, 31, 53].forEach((moduleId) => {
+      const qs = getCaseDiagnosisForModule(moduleId);
+      expect(qs.length, `Módulo ${moduleId} sin preguntas de caso`).toBeGreaterThan(0);
+      qs.forEach((q) => {
+        expect(q.moduleId).toBe(moduleId);
+        expect(q.appliesTo).toBe("caso");
+      });
+    });
+  });
+
+  it("returns an empty array for a module without a pilot", () => {
+    expect(getCaseDiagnosisForModule(2)).toHaveLength(0);
+  });
+
+  it("case-diagnosis questions never appear in getQuestionsForModule", () => {
+    [1, 9, 18, 31, 53].forEach((moduleId) => {
+      const quizQuestions = getQuestionsForModule(moduleId);
+      expect(quizQuestions.every((q) => q.appliesTo !== "caso")).toBe(true);
+    });
   });
 });

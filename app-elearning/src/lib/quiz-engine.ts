@@ -12,6 +12,8 @@ export interface Question {
   options: string[];
   answer: number[];     // indices of correct options
   explanation: string;
+  /** "quiz" (default) feeds module quizzes/simulator; "caso" is the Diagnóstico de caso aplicado pool. */
+  appliesTo?: "quiz" | "caso";
 }
 
 export interface QuizAttempt {

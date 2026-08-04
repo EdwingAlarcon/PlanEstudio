@@ -537,10 +537,39 @@ una dependencia externa a esta sesión.
 No fusionar el progreso de `preparar-entorno` con el progreso académico ni con `practice-progress` —
 son y deben seguir siendo tres stores independientes.
 
-## Sprint en curso — Diagnóstico de caso aplicado (piloto, NO iniciado)
+## Sprint — Diagnóstico de caso aplicado (piloto, ENTREGADO 2026-08-04, pendiente validación del usuario)
 
-**Estado: solo diseñado y acordado con el usuario en conversación (2026-08-03/04). Cero código, cero
-contenido escrito todavía.** Contexto para quien retome esto (Codex u otra sesión):
+**Estado: implementado, validado localmente (lint, tsc, 322 tests, build, 42 e2e) y probado
+manualmente en navegador. Pendiente: que el usuario valide tono/dificultad/formato antes de
+escalar a los 70 módulos restantes.** Contexto para quien retome esto (Codex u otra sesión):
+
+- Entregado: campo `appliesTo: "quiz" | "caso"` en `Question`/`RawQuestion` (`quiz-engine.ts`,
+  `extract-questions.mjs`, regenerado en `data/questions.ts`); `questions-parser.ts` separa el
+  pool completo (`getAllParsedQuestions`, interno) del pool público `getAllQuestions()`
+  (solo `appliesTo: "quiz"`, así el simulador/dashboard/quiz de módulo no cambian: siguen en
+  508) y expone `getCaseDiagnosisForModule(moduleId)` para las preguntas de caso.
+- 25 preguntas nuevas (5 por módulo × 5 módulos: **1, 9, 18, 31, 53**) en
+  `docs/javascripts/evaluaciones-simulador.js`, ancladas al "Caso Real de Negocio" real de cada
+  módulo (NovaBio, Constructora, Aseguradora, Banco, Application User con permisos excesivos).
+  Total banco tras `extract-questions.mjs`: 533 preguntas (508 quiz + 25 caso).
+- UI: nueva sección "Diagnóstico de caso aplicado" en `page.tsx` de módulo, entre el contenido
+  markdown y la sección de "Práctica recomendada"/quiz normal, reutilizando `QuizPanel` con
+  `moduleId={`caso-${mod.moduleId}`}` y `saveScore={false}` (decisión del usuario: piloto
+  efímero, sin tocar `progress.ts`; solo se muestra si el módulo tiene preguntas de caso).
+- **Bug preexistente encontrado y corregido en el mismo commit** (afectaba también el quiz
+  normal de 508 preguntas en producción, no solo el piloto): en `quiz-panel.tsx`, la pantalla de
+  "feedback" tras responder mostraba el prompt/opciones de la *siguiente* pregunta (porque
+  `getCurrentQuestion(session)` ya avanza tras `recordAttempt`), mientras que el texto de
+  correcto/incorrecto y la explicación sí correspondían a la pregunta recién respondida. Fix:
+  nuevo `displayQuestion` (usa `lastAttempt.question` durante feedback) y el número de pregunta
+  del header ahora usa `answeredCount` en feedback en vez de `answeredCount + 1`. Test de
+  regresión en `quiz-panel.test.tsx` (nuevo archivo, primer test de componente para QuizPanel).
+- **Próximo paso al retomar**: mostrar el piloto al usuario en los 5 módulos, recoger feedback de
+  tono/dificultad, y solo tras su aprobación escribir las preguntas de caso para los 70 módulos
+  restantes (300-450 preguntas adicionales) siguiendo el mismo patrón (`appliesTo: "caso"` al
+  final del array de cada módulo en `evaluaciones-simulador.js`).
+
+### Contexto original del diseño (2026-08-03/04, antes de implementar)
 
 - Origen: el usuario preguntó cómo funcionan las secciones "Casos Reales de Negocio" de cada módulo
   (75 módulos, 1 por módulo, sección 4 del formato fijo de 7). Se confirmó por código: son narrativa

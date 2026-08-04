@@ -168,7 +168,13 @@ export function QuizPanel({
 
   if (!currentQuestion) return null;
 
-  const isMulti = currentQuestion.type === "multi";
+  // During "feedback", currentQuestion has already advanced to the next unanswered
+  // question (recordAttempt marks the submitted one as answered) — the question being
+  // reviewed is lastAttempt.question, not currentQuestion.
+  const displayQuestion =
+    panelState === "feedback" && lastAttempt ? lastAttempt.question : currentQuestion;
+  const isMulti = displayQuestion.type === "multi";
+  const questionNumber = panelState === "feedback" ? answeredCount : answeredCount + 1;
   const timeIsLow = secondsLeft !== null && secondsLeft < 300; // < 5 min
 
   return (
@@ -176,7 +182,7 @@ export function QuizPanel({
       {/* Progress + timer header */}
       <div className="p-4 border-b bg-muted/30 space-y-2">
         <div className="flex justify-between text-xs text-muted-foreground">
-          <span>{UI.quiz.questionOf(answeredCount + 1, session.questions.length)}</span>
+          <span>{UI.quiz.questionOf(questionNumber, session.questions.length)}</span>
           <div className="flex items-center gap-2">
             {isMulti && (
               <Badge variant="secondary" className="text-[10px]">
@@ -203,21 +209,21 @@ export function QuizPanel({
 
       {/* Question */}
       <div className="p-5 space-y-4">
-        <p className="font-medium leading-relaxed">{currentQuestion.prompt}</p>
+        <p className="font-medium leading-relaxed">{displayQuestion.prompt}</p>
 
         {isMulti && (
           <p className="text-xs text-muted-foreground">{UI.quiz.selectMultipleHint}</p>
         )}
 
         <div className="space-y-2" role="group" aria-label="Opciones de respuesta">
-          {currentQuestion.options.map((option, idx) => {
+          {displayQuestion.options.map((option, idx) => {
             const isSelected = selected.includes(idx);
 
             let optionClass =
               "w-full text-left px-4 py-3 rounded-md border text-sm transition-colors focus-visible:ring-2 focus-visible:ring-ring";
 
             if (panelState === "feedback") {
-              const isCorrect = currentQuestion.answer.includes(idx);
+              const isCorrect = displayQuestion.answer.includes(idx);
               if (isCorrect) optionClass += " border-green-500 bg-green-50 dark:bg-green-950 text-green-900 dark:text-green-100";
               else if (isSelected && !isCorrect) optionClass += " border-red-500 bg-red-50 dark:bg-red-950 text-red-900 dark:text-red-100";
               else optionClass += " border-border opacity-60";

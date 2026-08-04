@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getAllLevels, getModuleBySlug } from "@/lib/content";
-import { getQuestionsForModule } from "@/lib/questions-parser";
+import { getQuestionsForModule, getCaseDiagnosisForModule } from "@/lib/questions-parser";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -54,6 +54,7 @@ export default async function ModulePage({ params }: PageProps) {
   const nextModule = currentIdx < modules.length - 1 ? modules[currentIdx + 1] : null;
 
   const questions = getQuestionsForModule(mod.moduleId);
+  const caseQuestions = getCaseDiagnosisForModule(mod.moduleId);
   const foundationActivity = FOUNDATION_ACTIVITIES.find((activity) => activity.moduleId === mod.moduleId);
   const recommendedLab = foundationActivity
     ? FOUNDATION_ACTIVITIES.find((activity) => activity.type === "lab" && activity.step === foundationActivity.step + 1)
@@ -104,6 +105,20 @@ export default async function ModulePage({ params }: PageProps) {
       <div className="rounded-xl border border-border bg-card px-6 py-8 md:px-8 shadow-fluent-1">
         <MarkdownRenderer content={mod.rawContent} />
       </div>
+
+      {/* ── Diagnóstico de caso aplicado (piloto) ───────────────────────────── */}
+      {caseQuestions.length > 0 && (
+        <section aria-labelledby="case-diagnosis-heading" className="rounded-xl border border-border bg-card px-6 py-6 shadow-fluent-1">
+          <h2 id="case-diagnosis-heading" className="text-lg font-semibold mb-1 flex items-center gap-2">
+            <BookOpen className="h-5 w-5 text-[#0078D4]" aria-hidden />
+            Diagnóstico de caso aplicado
+          </h2>
+          <p className="text-sm text-muted-foreground mb-5">
+            Preguntas de decisión basadas en el &ldquo;Caso Real de Negocio&rdquo; de este módulo. No afectan tu puntaje de quiz ni del simulador.
+          </p>
+          <QuizPanel questions={caseQuestions} moduleId={`caso-${mod.moduleId}`} saveScore={false} />
+        </section>
+      )}
 
       {/* ── Quiz panel ───────────────────────────────────────────────────── */}
       {recommendedLab && (

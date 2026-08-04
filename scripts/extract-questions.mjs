@@ -99,6 +99,9 @@ moduleIds.forEach((moduleId) => {
 
     if (!["single", "multi"].includes(q.type))
       errors.push(`${qid}: invalid type "${q.type}"`);
+
+    if (q.appliesTo !== undefined && !["quiz", "caso"].includes(q.appliesTo))
+      errors.push(`${qid}: invalid appliesTo "${q.appliesTo}"`);
   });
 });
 
@@ -120,7 +123,7 @@ function serializeQuestion(q, indent) {
   const pad = " ".repeat(indent);
   const optionsStr = q.options.map((o) => `${pad}    ${escapeStr(o)}`).join(",\n");
   const answerStr = q.answer.join(", ");
-  return [
+  const lines = [
     `${pad}  {`,
     `${pad}    type: "${q.type}",`,
     `${pad}    prompt: ${escapeStr(q.prompt)},`,
@@ -129,8 +132,12 @@ function serializeQuestion(q, indent) {
     `${pad}    ],`,
     `${pad}    answer: [${answerStr}],`,
     `${pad}    explanation: ${escapeStr(q.explanation ?? "")},`,
-    `${pad}  }`,
-  ].join("\n");
+  ];
+  if (q.appliesTo !== undefined) {
+    lines.push(`${pad}    appliesTo: "${q.appliesTo}",`);
+  }
+  lines.push(`${pad}  }`);
+  return lines.join("\n");
 }
 
 const moduleBlocks = moduleIds.map((moduleId) => {
@@ -152,6 +159,7 @@ export interface RawQuestion {
   options: string[];
   answer: number[];   // 0-based indices of correct options
   explanation: string;
+  appliesTo?: "quiz" | "caso"; // "quiz" (default/absent) or "caso" (Diagnóstico de caso aplicado)
 }
 
 const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {

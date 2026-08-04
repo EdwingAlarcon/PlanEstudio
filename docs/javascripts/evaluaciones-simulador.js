@@ -278,6 +278,71 @@
       ],
       answer: [1],
       explanation: "La diferencia fundamental de audiencia: Power Pages atiende a usuarios externos (ciudadanos, clientes, socios) que no tienen ni necesitan licencia de Microsoft 365, autenticándose con cuentas externas. Canvas Apps está pensada para usuarios internos que tienen licencia de Power Platform. Esta distinción determina cuál herramienta elegir según quién consume la experiencia."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (NovaBio): los formularios de no-conformidades llegaban incompletos porque nadie validaba los campos obligatorios antes de enviarlos. ¿Qué componente elimina ese problema desde su origen?",
+      options: [
+      "Power BI, con un dashboard que muestre cuántos registros están incompletos",
+      "Power Apps Canvas, con validación de campos obligatorios antes de permitir el envío",
+      "Dataverse, simplemente creando la tabla de no-conformidades",
+      "Power Automate, notificando al responsable después de que el registro ya se guardó incompleto"
+      ],
+      answer: [1],
+      explanation: "Validar en el formulario (Power Apps Canvas) impide que el registro incompleto llegue a existir. Dataverse solo almacena, Power BI solo reporta después del hecho, y Power Automate actúa sobre un registro que ya se guardó — ninguno de los tres previene el problema en el punto de origen.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (NovaBio): se necesita que, si el responsable no atiende una no-conformidad en 48 horas, el caso se escale automáticamente al supervisor sin intervención manual. ¿Qué componente implementa esa regla?",
+      options: [
+      "Power BI",
+      "Una columna calculada en Dataverse",
+      "Power Automate, con un flujo que evalúe el tiempo transcurrido y escale si no hay respuesta",
+      "Power Apps Canvas, agregando un botón de 'escalar' manual"
+      ],
+      answer: [2],
+      explanation: "La escalación condicionada al tiempo transcurrido es lógica de proceso automatizado — el dominio de Power Automate. Un botón manual (Canvas) depende de que alguien lo presione, lo que no garantiza la escalación; Power BI y una columna calculada no ejecutan acciones.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (NovaBio): el Jefe de Calidad necesita ver, de forma visual, el tiempo de cierre promedio agrupado por tipo de no-conformidad, área y responsable. ¿Qué componente cubre ese requisito?",
+      options: [
+      "Power Automate",
+      "Power BI, con un dashboard de indicadores",
+      "Field Security Profile en Dataverse",
+      "Una Business Rule en el formulario de Power Apps"
+      ],
+      answer: [1],
+      explanation: "Agregación, agrupación y visualización de indicadores es exactamente el rol de Power BI dentro de la solución. Los otros componentes (flujos, seguridad de campo, reglas de negocio) no están diseñados para reportes analíticos.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (NovaBio): ¿cuáles DOS resultados reales demostró la solución en los primeros 6 meses?",
+      options: [
+      "Se eliminaron los registros incompletos desde el primer día gracias a la validación en el formulario",
+      "El tiempo de cierre promedio se redujo de 18 días a 6 días",
+      "Fue necesario contratar desarrolladores externos especializados en código para mantener la solución",
+      "El dashboard de Power BI reemplazó las decisiones del Jefe de Calidad"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta 100% de registros completos (vs 66% previo) desde el arranque y una reducción del tiempo de cierre de 18 a 6 días. Ningún componente requirió código ni desarrolladores externos, y el dashboard es una herramienta de apoyo a la decisión, no un reemplazo del rol del Jefe de Calidad.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (NovaBio): el equipo de Calidad configuró toda la solución en 3 semanas sin soporte externo. ¿Cuál es la razón principal, según el caso?",
+      options: [
+      "Contrataron a un desarrollador senior de forma temporal",
+      "Usaron una plantilla predefinida de Microsoft específica para laboratorios farmacéuticos",
+      "Ningún componente de la solución (Dataverse, Power Apps Canvas, Power Automate, Power BI) requirió código personalizado",
+      "Redujeron el alcance del proceso de no-conformidades para simplificarlo"
+      ],
+      answer: [2],
+      explanation: "El caso es explícito: 'Ningún componente requirió código'. Esa es la razón por la que un equipo de negocio, sin perfil técnico, pudo implementar la solución completa por su cuenta.",
+      appliesTo: "caso"
     }
   ],
   2: [
@@ -810,6 +875,71 @@
       ],
       answer: [0, 1],
       explanation: "La N:N nativa gestiona su tabla de intersección de forma transparente y no expone columnas adicionales al maker, mientras que la N:N manual usa una tabla de intersección propia donde sí se pueden agregar columnas como sit_relevancia. Por eso, cuando se necesita un campo extra en la relación, se debe optar por la N:N manual."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Constructora): se necesita que solo el Director de Operaciones pueda editar el campo de presupuesto de un proyecto, y que ningún Project Manager pueda hacerlo aunque tenga acceso al registro. ¿Qué mecanismo de Dataverse aplica exactamente esa restricción a nivel de campo?",
+      options: [
+      "Field Security Profile sobre la columna de presupuesto",
+      "Una Business Rule que oculte el campo en el formulario",
+      "Una relación N:N manual con la tabla de aprobaciones",
+      "Auditoría activada sobre la tabla Proyecto"
+      ],
+      answer: [0],
+      explanation: "Field Security Profile es el único mecanismo que restringe lectura/edición de una columna específica por perfil de seguridad, incluso si el usuario tiene acceso al registro completo. Ocultar el campo en el formulario (Business Rule) no impide editarlo por API o vista; auditoría solo registra cambios, no los bloquea.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Constructora): se necesita validar automáticamente, sin escribir código, que la fecha de fin de un proyecto nunca sea anterior a su fecha de inicio. ¿Qué componente usarías?",
+      options: [
+      "Field Security Profile",
+      "Una Business Rule sobre la tabla Proyecto",
+      "Una columna de tipo Rollup",
+      "Un registro de auditoría"
+      ],
+      answer: [1],
+      explanation: "Validar la relación entre dos campos al guardar es lógica de negocio declarativa — el caso de uso típico de una Business Rule. Field Security Profile controla permisos, Rollup agrega valores relacionados, y auditoría solo registra cambios ya ocurridos.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Constructora): el dashboard en tiempo real necesita mostrar el costo total acumulado de cada proyecto, recalculado automáticamente a partir de los gastos relacionados, sin que nadie lo actualice manualmente. ¿Qué tipo de columna es la solución correcta?",
+      options: [
+      "Una columna de texto que el PM actualiza cada semana",
+      "Una columna de tipo Rollup que agrega los registros relacionados",
+      "Un Field Security Profile sobre la columna de costo",
+      "Una Business Rule que muestra un mensaje de alerta"
+      ],
+      answer: [1],
+      explanation: "Una columna Rollup se recalcula automáticamente a partir de registros relacionados (en este caso, los gastos), exactamente el requisito de un dashboard en tiempo real sin actualización manual. Las otras opciones no realizan agregación automática.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Constructora): ¿cuáles DOS elementos de la solución permiten que Contraloría reciba un reporte mensual confiable sin depender de actualizaciones manuales?",
+      options: [
+      "La auditoría completa activada sobre la tabla, que registra cada cambio",
+      "El Rollup de costos, que se mantiene actualizado cada hora sin intervención manual",
+      "Un archivo Excel que el PM envía por correo cada mes",
+      "Eliminar el historial de cambios para que el reporte sea más simple"
+      ],
+      answer: [0, 1],
+      explanation: "La auditoría deja trazabilidad de cada cambio y el Rollup mantiene el costo actualizado automáticamente — ambos alimentan un reporte confiable sin depender de un envío manual. Un Excel por correo reintroduce el problema original, y eliminar el historial es contrario al objetivo de control.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Constructora): el Director de Operaciones sí necesita poder editar el presupuesto cuando corresponde. ¿Cómo se configura correctamente el Field Security Profile para lograr esto sin abrir el campo a los PM?",
+      options: [
+      "Se marca la columna de presupuesto como campo seguro (secured field) y se otorga permiso de edición solo al perfil de seguridad del Director de Operaciones",
+      "Se desactiva la seguridad de campo por completo para evitar bloqueos accidentales",
+      "Se crea una tabla duplicada de presupuestos solo visible para el Director",
+      "Se oculta el campo con una Business Rule únicamente en el formulario de los PM"
+      ],
+      answer: [0],
+      explanation: "Un campo seguro con Field Security Profile deniega acceso por defecto y solo lo concede a los perfiles explícitamente asignados — en este caso, el del Director de Operaciones. Desactivar la seguridad o solo ocultar el campo en el formulario deja el dato editable por otras vías (API, vistas, importación).",
+      appliesTo: "caso"
     }
   ],
   10: [
@@ -1692,6 +1822,71 @@
       ],
       answer: [1],
       explanation: "Hub-and-Spoke centraliza el enrutamiento en un middleware y evita el crecimiento exponencial de conexiones directas del patrón Point-to-Point. Exportar a Excel o duplicar lógica no resuelve el problema de mantenibilidad ni escalabilidad."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Aseguradora): con 12 aplicaciones separadas y datos de pólizas duplicados, nadie sabía cuál sistema era la 'fuente de verdad'. ¿Qué decisión arquitectónica resolvió directamente ese problema?",
+      options: [
+      "Migrar las 12 aplicaciones a la nube sin cambiar su arquitectura",
+      "Establecer Dataverse como Master Data hub, fuente única de verdad para el dato de póliza",
+      "Duplicar los datos en un data warehouse adicional para tener una copia de respaldo",
+      "Eliminar 6 de las 12 aplicaciones sin migrar sus datos"
+      ],
+      answer: [1],
+      explanation: "El problema era la ausencia de una fuente única de verdad. Establecer Dataverse como Master Data hub centraliza el dato de póliza en un solo lugar del que dependen los demás dominios, eliminando la duplicidad y la ambigüedad sobre cuál sistema manda.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Aseguradora): se necesita que Pólizas, Siniestros y Agentes evolucionen de forma independiente sin convertirse en una mega-solución difícil de mantener. ¿Qué patrón de organización de soluciones aplica?",
+      options: [
+      "Una única solución que contenga todos los componentes de los 3 dominios",
+      "Una solución por dominio funcional, cada una dependiendo del Foundation layer compartido",
+      "Una solución por cada tabla de Dataverse individual",
+      "Una solución por cada ambiente (Dev, Test, Prod)"
+      ],
+      answer: [1],
+      explanation: "Separar por dominio funcional en soluciones propias, con dependencia hacia un Foundation layer de catálogos compartidos, permite que cada dominio evolucione de forma independiente sin acoplar todo en una mega-solución.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Aseguradora): el Foundation layer contiene los catálogos compartidos que usan Pólizas, Siniestros y Agentes. ¿En qué dirección debe fluir la dependencia entre estas capas?",
+      options: [
+      "El Foundation layer puede depender de cualquier solución de dominio si lo necesita",
+      "La dependencia es unidireccional: los dominios dependen de Foundation, nunca al revés",
+      "No debe existir ninguna dependencia entre Foundation y los dominios",
+      "La dirección de la dependencia no importa mientras todo esté en el mismo ambiente"
+      ],
+      answer: [1],
+      explanation: "Una de las buenas prácticas explícitas del caso es que el Foundation layer nunca depende de capas superiores — la dependencia es unidireccional, de los dominios hacia Foundation. Esto evita ciclos de dependencia y mantiene la capa base estable.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Aseguradora): los agentes externos necesitan consultar información de pólizas sin tener licencia de Power Apps. ¿Qué componente de Power Platform se usó para ese portal?",
+      options: [
+      "Una Canvas App adicional para agentes",
+      "Power Pages",
+      "Power BI embebido en un sitio externo",
+      "Power Automate con notificaciones por correo"
+      ],
+      answer: [1],
+      explanation: "Power Pages está diseñado específicamente para usuarios externos que no requieren licencia de Microsoft 365 ni de Power Apps — el caso lo usa exactamente para el portal de agentes.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Aseguradora): ¿cuáles DOS prácticas explican que el onboarding de nuevos desarrolladores bajara de 3 semanas a 3 días?",
+      options: [
+      "Documentar las decisiones arquitectónicas mayores con ADR, incluso las que parecen obvias",
+      "Separar por dominio funcional con dependencias claras hacia el Foundation layer",
+      "Concentrar toda la lógica de negocio en una única solución monolítica",
+      "Evitar cualquier documentación para que el equipo avance más rápido"
+      ],
+      answer: [0, 1],
+      explanation: "Los ADR dan contexto inmediato de por qué se tomó cada decisión, y la separación clara por dominio con dependencias explícitas hace que un desarrollador nuevo entienda rápido dónde está cada cosa. Una mega-solución o la ausencia de documentación tienen el efecto contrario: más tiempo de onboarding.",
+      appliesTo: "caso"
     }
   ],
   19: [
@@ -2966,6 +3161,71 @@
       ],
       answer: [0, 1],
       explanation: "Las Reference Architectures documentan patrones validados y reutilizables, y Platform Engineering publica golden paths para adopción rápida y consistente. Permitir reinvención por proyecto o eliminar documentación va en contra del objetivo de consistencia y velocidad."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Banco): el incidente de seguridad que expuso datos de 5,000 clientes ocurrió porque un maker usó un connector externo no aprobado. ¿Qué mecanismo de gobernanza previene directamente ese escenario?",
+      options: [
+      "Un dashboard de Power BI que reporte el incidente después de ocurrido",
+      "DLP (Data Loss Prevention) policies aplicadas en todos los ambientes",
+      "El CoE Starter Kit, usado solo para generar reportes de inventario",
+      "Aumentar la capacidad de licenciamiento del tenant"
+      ],
+      answer: [1],
+      explanation: "Las políticas DLP son el mecanismo que bloquea o restringe qué connectors pueden combinarse en una misma app o flujo, evitando precisamente que datos sensibles salgan por un connector no aprobado. Un dashboard solo informa después del hecho; no lo previene.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Banco): antes de la intervención, el 60% de las 800 apps del tenant no tenía owner identificado. ¿Qué herramienta le dio al banco visibilidad centralizada de esas apps y sus responsables?",
+      options: [
+      "CoE Starter Kit",
+      "Field Security Profile",
+      "Power Pages",
+      "Una Business Rule por cada app"
+      ],
+      answer: [0],
+      explanation: "El CoE (Center of Excellence) Starter Kit es la herramienta de Microsoft diseñada para inventariar apps, flujos y makers del tenant, exactamente el problema de visibilidad que enfrentaba el banco.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Banco): se necesita que cada nuevo proyecto arranque ya con las políticas de seguridad y gobernanza correctas aplicadas, sin que el equipo las configure manualmente cada vez. ¿Qué implementó el banco para lograrlo?",
+      options: [
+      "Landing Zones automatizadas",
+      "Un manual en PDF con las políticas recomendadas",
+      "Una reunión mensual de revisión de nuevos proyectos",
+      "Eliminar la capacidad de crear nuevos ambientes"
+      ],
+      answer: [0],
+      explanation: "Las Landing Zones automatizadas aprovisionan ambientes con la configuración de gobernanza ya aplicada desde el inicio (como código), evitando depender de que cada equipo la configure manualmente o de que alguien recuerde revisarla.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Banco): el caso señala que el Governance Framework solo se cumplió de forma efectiva cuando tuvo una condición específica. ¿Cuál?",
+      options: [
+      "Que estuviera escrito en el idioma local del país",
+      "Que tuviera aprobación y sponsor ejecutivo (C-suite)",
+      "Que se publicara en la intranet interna",
+      "Que lo revisara el equipo de IT una vez al año"
+      ],
+      answer: [1],
+      explanation: "El caso es explícito: 'sin sponsor ejecutivo, no se cumple'. Un framework de gobernanza sin respaldo del C-suite carece de la autoridad organizacional necesaria para hacerse cumplir.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Banco): ¿cuáles DOS acciones reflejan una gobernanza madura que habilita con control, en vez de solo bloquear?",
+      options: [
+      "Definir un proceso de excepción formal para casos legítimos que no cumplen la política por defecto",
+      "Revisar el Well-Architected Framework periódicamente porque la plataforma evoluciona",
+      "Prohibir de forma permanente la creación de nuevas apps en el tenant",
+      "Ignorar las apps ya existentes que no tienen owner identificado"
+      ],
+      answer: [0, 1],
+      explanation: "Un proceso de excepción formal permite avanzar en casos legítimos sin romper la política general, y revisar el framework periódicamente reconoce que la plataforma cambia. Prohibir permanentemente o ignorar apps sin owner son respuestas de bloqueo total, no de gobernanza madura.",
+      appliesTo: "caso"
     }
   ],
   32: [
@@ -5122,6 +5382,71 @@
       ],
       answer: [0],
       explanation: "Nunca se deben pegar credenciales ni tokens reales en un prompt; usar placeholders permite obtener ayuda sobre la estructura sin exponer información sensible."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso: un bug en un sistema externo generó una actualización masiva accidental sobre tablas de Contactos y Oportunidades que la integración de facturación no debía tocar. ¿Cuál fue la causa raíz?",
+      options: [
+        "El Application User tenía asignado el Security Role de System Administrator, con acceso a todo el entorno",
+        "La Web API de Dataverse tiene un límite de throttling demasiado alto",
+        "El desarrollador olvidó usar HTTPS en la llamada a la API",
+        "El sistema externo no tenía configurado un token de OAuth"
+      ],
+      answer: [0],
+      explanation: "El caso es explícito: el Application User recibió el rol System Administrator 'para no tener que depurar permisos', lo que le dio acceso a todo el entorno, incluyendo tablas fuera del alcance real de la integración.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso: ¿qué principio de seguridad se debió aplicar desde el diseño inicial de la integración de facturación, y que habría evitado el incidente?",
+      options: [
+        "Principio de permisos mínimos (least privilege)",
+        "Principio de alta disponibilidad",
+        "Principio de separación de ambientes (Dev/Test/Prod)",
+        "Principio de versionado semántico"
+      ],
+      answer: [0],
+      explanation: "El caso concluye que se debió aplicar 'el principio de permisos mínimos... desde el diseño inicial': otorgar al Application User solo el acceso estrictamente necesario para su función, no acceso total al entorno.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso: ¿qué corrección se aplicó para que la integración solo pudiera afectar las tablas que realmente necesita?",
+      options: [
+        "Se creó un Security Role específico con acceso de lectura/escritura únicamente a las 2 tablas necesarias, asignado al Application User",
+        "Se desactivó por completo el Application User y se usó un usuario interactivo real",
+        "Se migró la integración de Web API a un flujo de Power Automate sin autenticación",
+        "Se aumentó el nivel de logging para detectar el próximo incidente más rápido"
+      ],
+      answer: [0],
+      explanation: "La corrección descrita en el caso fue reemplazar el rol System Administrator por un Security Role acotado a las 2 tablas que la integración realmente usa — acceso mínimo necesario, no eliminación de la integración ni solo más monitoreo.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso: si un Application User solo necesita crear y leer registros en la tabla Factura, ¿qué acceso NO debería tener bajo el principio de permisos mínimos aplicado en este caso?",
+      options: [
+        "Acceso de administrador a todas las tablas del entorno, incluyendo Contactos y Oportunidades",
+        "Permiso de lectura sobre la tabla Factura",
+        "Permiso de creación sobre la tabla Factura",
+        "Un Security Role dedicado solo a esa integración"
+      ],
+      answer: [0],
+      explanation: "El acceso amplio a tablas no relacionadas con la función de la integración (como Contactos y Oportunidades) es exactamente lo que el principio de permisos mínimos prohíbe, y fue la causa del incidente del caso.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso: ¿cuáles DOS consecuencias reales tuvo asignar System Administrator al Application User 'para no depurar permisos'?",
+      options: [
+        "Un bug del sistema externo pudo modificar tablas fuera del alcance previsto de la integración",
+        "El acceso amplio ocultó cuáles permisos realmente necesitaba la integración para funcionar",
+        "Mejoró el rendimiento de las llamadas a la Web API",
+        "Redujo la necesidad de mantener un Security Role específico a largo plazo"
+      ],
+      answer: [0, 1],
+      explanation: "El acceso total permitió que un bug externo afectara tablas no relacionadas con la integración, y además ocultó qué permisos eran realmente necesarios (algo que solo se hizo evidente al diseñar el Security Role acotado después del incidente). No hay relación entre el rol asignado y el rendimiento de la API, y evitar el Security Role específico fue la causa del problema, no un beneficio.",
+        appliesTo: "caso"
     }
   ],
   54: [
