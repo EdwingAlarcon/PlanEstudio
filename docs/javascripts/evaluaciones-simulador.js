@@ -405,6 +405,71 @@
       ],
       answer: [1],
       explanation: "Primero debe existir la tabla padre para que los contactos puedan mapear correctamente el Lookup hacia la empresa. Guardar nombres en texto o confiar en coincidencias no controladas rompe integridad referencial y dificulta mantenimiento."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (TransCargo): en la auditoría no podían demostrar quién tenía qué equipo asignado ni en qué estado. ¿Qué elemento del modelo de datos resuelve directamente ese problema?",
+      options: [
+      "La tabla sit_activo, con el estado del equipo",
+      "La tabla sit_asignacion, con Lookup a Activo y a Empleado, y fechas de inicio/devolución",
+      "La tabla sit_mantenimiento, con historial de intervenciones",
+      "La vista 'Seguros próximos a vencer'"
+      ],
+      answer: [1],
+      explanation: "sit_asignacion es la tabla que relaciona activo y empleado con fechas de inicio y devolución — exactamente el dato que faltaba para saber quién tenía qué equipo y desde cuándo. sit_activo solo describe el activo, sit_mantenimiento es historial de reparaciones, y la vista de seguros es un filtro, no una relación.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (TransCargo): se necesita impedir que un activo marcado como 'En Mantenimiento' o 'Dado de Baja' pueda asignarse a un empleado. ¿Qué mecanismo de Dataverse implementa esa validación?",
+      options: [
+      "Una Business Rule sobre la tabla de asignación",
+      "Una columna Rollup en sit_activo",
+      "Un Field Security Profile sobre el campo estado",
+      "Una vista filtrada por estado"
+      ],
+      answer: [0],
+      explanation: "El caso es explícito: 'Business Rule: bloquea asignación si el activo está en estado En Mantenimiento o Dado de Baja'. Un Rollup agrega valores relacionados, un Field Security Profile controla permisos de campo, y una vista solo filtra qué se muestra, no bloquea la acción.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (TransCargo): se necesita anticipar los vencimientos de seguro 30 días antes de que ocurran, sin revisar manualmente los 120 vehículos. ¿Qué elemento de la solución cubre ese requisito?",
+      options: [
+      "La Business Rule de bloqueo de asignación",
+      "La vista 'Seguros próximos a vencer', filtrada por fecha de vencimiento",
+      "La tabla sit_mantenimiento",
+      "El campo serial del activo"
+      ],
+      answer: [1],
+      explanation: "Una vista filtrada por rango de fechas es el mecanismo declarativo para mostrar proactivamente los registros que vencen en una ventana de tiempo determinada, sin lógica adicional.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (TransCargo): ¿cuáles DOS elementos del modelo trabajan juntos para impedir que un equipo en mal estado sea asignado?",
+      options: [
+      "El campo estado en sit_activo (Disponible/Asignado/En Mantenimiento/Dado de Baja)",
+      "La Business Rule que lee ese estado y bloquea la asignación si no es 'Disponible'",
+      "El historial de sit_mantenimiento por sí solo",
+      "La vista de seguros próximos a vencer por sí sola"
+      ],
+      answer: [0, 1],
+      explanation: "El campo estado es el dato que se evalúa, y la Business Rule es la que actúa sobre ese dato para bloquear la asignación. El historial de mantenimiento y la vista de seguros son útiles pero no participan en esa validación específica.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (TransCargo): ¿por qué la trazabilidad se modeló con dos tablas relacionadas (sit_activo y sit_asignacion) en vez de agregar una sola columna 'asignado a' en sit_activo?",
+      options: [
+      "Porque Dataverse no permite columnas de tipo Lookup en la misma tabla del activo",
+      "Porque se necesita el historial completo de asignaciones a lo largo del tiempo, no solo quién lo tiene ahora",
+      "Porque una sola tabla no puede tener más de 10 columnas",
+      "Porque las Business Rules solo funcionan con dos tablas relacionadas"
+      ],
+      answer: [1],
+      explanation: "Una columna 'asignado a' solo guardaría el estado actual y perdería el historial. Una tabla de asignación con fechas de inicio/devolución permite múltiples registros por activo a lo largo del tiempo, exactamente lo que la auditoría necesitaba.",
+      appliesTo: "caso"
     }
   ],
   3: [
@@ -467,6 +532,71 @@
       ],
       answer: [1],
       explanation: "LookUp está pensado para devolver un solo registro que cumpla una condición, por lo que encaja en escenarios de detalle. Filter devuelve una tabla, mientras Collect y UpdateContext no realizan la consulta deseada al origen."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Hotel Terramar): se necesita que el ingreso de un visitante no se considere autorizado hasta que el empleado visitado lo confirme, y que si no responde a tiempo, escale a otra persona. ¿Qué mecanismo del caso implementa esa regla?",
+      options: [
+      "La galería de visitas activas",
+      "El botón de 'marcar salida'",
+      "Un flujo que notifica al empleado y escala al jefe de seguridad si no confirma en 5 minutos",
+      "La foto tomada con la cámara integrada"
+      ],
+      answer: [2],
+      explanation: "El caso describe exactamente esta regla de tiempo y escalación, que es lógica de proceso automatizado (Power Automate), no algo que la galería, el botón de salida o la foto puedan implementar por sí solos.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Hotel Terramar): ¿por qué se eligió una Canvas App en tablet para recepción, en vez de una Model-Driven App?",
+      options: [
+      "Porque Model-Driven Apps no pueden conectarse a Dataverse",
+      "Porque se necesita una experiencia simple orientada a un dispositivo específico, con acceso a la cámara del tablet",
+      "Porque Canvas Apps no requieren licencia de Power Apps",
+      "Porque Model-Driven Apps no permiten crear registros"
+      ],
+      answer: [1],
+      explanation: "Canvas Apps dan control total del diseño y acceso a capacidades del dispositivo como la cámara, ideal para una experiencia táctil simple en un tablet de recepción. Una Model-Driven App está pensada para gestión de datos tabular, no para esta experiencia de captura rápida.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Hotel Terramar): ¿qué dato adicional, más allá de nombre, empresa y persona a visitar, refuerza específicamente la seguridad del registro de visitas?",
+      options: [
+      "El color del uniforme del recepcionista",
+      "La foto del visitante tomada con la cámara integrada",
+      "El número de habitaciones del hotel",
+      "El nombre del proveedor de la app"
+      ],
+      answer: [1],
+      explanation: "La foto capturada en el momento del registro es la evidencia visual que permite verificar identidad ante cualquier incidente — el resto de las opciones no son parte de la solución.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Hotel Terramar): la auditoría de seguridad detectó personas no autorizadas en zonas restringidas sin registro. ¿Cuál era la causa raíz según el caso?",
+      options: [
+      "El sistema Dataverse tenía un error de sincronización",
+      "El control de visitas era un cuaderno manual, sin trazabilidad de horarios ni de a quién visitaban",
+      "Los empleados no confirmaban las visitas por falta de capacitación",
+      "El hotel no tenía cámaras de seguridad"
+      ],
+      answer: [1],
+      explanation: "El caso señala explícitamente que el control era un cuaderno manual sin trazabilidad — la causa raíz es la ausencia de un sistema digital de registro y confirmación, no un problema técnico o de capacitación.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Hotel Terramar): ¿cuáles DOS resultados reales demuestra el caso tras la implementación?",
+      options: [
+      "Control de acceso en tiempo real desde el primer día de implementación",
+      "Registro digital del 100% de las visitas con foto y hora exacta",
+      "Eliminación total de la necesidad de personal de recepción",
+      "Un tiempo de implementación de 6 meses con un equipo de 5 desarrolladores"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta control en tiempo real desde el día uno y trazabilidad del 100% de las visitas. La app no reemplaza al recepcionista, y el tiempo real de implementación fue de 2 semanas con 1 desarrollador junior.",
+      appliesTo: "caso"
     }
   ],
   4: [
@@ -529,6 +659,71 @@
       ],
       answer: [0],
       explanation: "El Sitemap define la navegación y agrupación de áreas, tablas y páginas dentro de una Model-Driven App. Security Roles controlan acceso, pero no reorganizan menús; formularios y reglas tampoco estructuran navegación global."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (CRM PyME): según el Business Process Flow del caso, ¿cuál es el orden correcto de las etapas?",
+      options: [
+      "Opportunity → Lead → Quote → Won/Lost",
+      "Lead → Opportunity → Quote → Won/Lost",
+      "Quote → Lead → Opportunity → Won/Lost",
+      "Lead → Quote → Opportunity → Won/Lost"
+      ],
+      answer: [1],
+      explanation: "El caso define explícitamente el flujo Lead → Opportunity → Quote → Won/Lost: primero se califica el prospecto, luego se convierte en oportunidad, después se cotiza y finalmente se gana o pierde.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (CRM PyME): un prospecto que todavía no ha sido calificado como oportunidad de venta se representa en este modelo con la tabla:",
+      options: [
+      "Account",
+      "Opportunity",
+      "Lead",
+      "Quote"
+      ],
+      answer: [2],
+      explanation: "Lead representa al prospecto antes de calificarse; solo al calificarlo avanza a Opportunity según el Business Process Flow del caso.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (CRM PyME): cuando un Lead se califica y se convierte en una negociación de venta activa, ¿a qué tabla pasa según el modelo del caso?",
+      options: [
+      "Contact",
+      "Opportunity",
+      "Account",
+      "Sigue siendo Lead, solo cambia de estado"
+      ],
+      answer: [1],
+      explanation: "El Business Process Flow del caso mueve al prospecto calificado de Lead a Opportunity — son tablas distintas, no un cambio de estado dentro de la misma.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (CRM PyME): el dashboard 'Top 10 clientes por revenue' necesita agregar el revenue generado por cada cliente. ¿Sobre qué tabla del modelo se construye principalmente ese dashboard?",
+      options: [
+      "Lead, porque ahí están los prospectos",
+      "Account, agregando el revenue de sus Opportunities/Quotes relacionadas",
+      "Contact, porque tiene el nombre del cliente",
+      "Quote, de forma aislada sin relacionarla con el cliente"
+      ],
+      answer: [1],
+      explanation: "Account representa al cliente (empresa); el revenue se agrega desde sus oportunidades/cotizaciones relacionadas hacia esa cuenta, no desde Lead (ya calificado y convertido) ni desde Contact (persona, no la entidad que factura) de forma aislada.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (CRM PyME): ¿cuáles DOS tablas del modelo representan personas u organizaciones, y no una etapa del proceso de venta?",
+      options: [
+      "Account",
+      "Contact",
+      "Opportunity",
+      "Quote"
+      ],
+      answer: [0, 1],
+      explanation: "Account (empresa) y Contact (persona) son las entidades del modelo; Opportunity y Quote representan etapas/artefactos del proceso comercial, no personas u organizaciones.",
+      appliesTo: "caso"
     }
   ],
   5: [
@@ -591,6 +786,71 @@
       ],
       answer: [0],
       explanation: "Las Approval actions entregan trazabilidad, asignación y experiencia consistente para aprobar o rechazar desde canales comunes. Variables o flujos de escritorio no sustituyen el modelo de aprobación ni su registro auditable."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Onboarding): el flujo 'Nuevo Empleado Registrado' se dispara automáticamente. ¿Qué evento lo activa, según el caso?",
+      options: [
+      "Que alguien lo ejecute manualmente desde un botón",
+      "Que se cree un registro en la tabla 'Empleado' en Dataverse",
+      "Que llegue un correo de Recursos Humanos",
+      "Que pasen 24 horas sin actividad"
+      ],
+      answer: [1],
+      explanation: "El caso especifica un trigger automático: 'Crear registro en tabla Empleado (Dataverse)'. No depende de una ejecución manual, un correo, ni de un temporizador.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Onboarding): el flujo 'Proceso de Aprobación de Equipamiento' usa un trigger de tipo Instant, llamado desde una Model-Driven App. ¿Qué implica esto?",
+      options: [
+      "Se ejecuta automáticamente cada vez que cambia cualquier registro",
+      "Se invoca bajo demanda, cuando alguien lo dispara manualmente desde la app",
+      "Se ejecuta según un horario programado",
+      "Se ejecuta solo si falla el flujo de onboarding"
+      ],
+      answer: [1],
+      explanation: "Un trigger Instant se dispara manualmente (por ejemplo, un botón en una Model-Driven App), a diferencia de un trigger automático por cambio de datos o uno programado.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Onboarding): ¿cuál de estas acciones del flujo de onboarding depende de un sistema externo a Power Platform, integrado vía HTTP?",
+      options: [
+      "Crear cuenta Azure AD (HTTP a Graph API)",
+      "Crear registro en la tabla Empleado en Dataverse",
+      "Evaluar la condición del flujo",
+      "Asignar el flujo a un ambiente Developer"
+      ],
+      answer: [0],
+      explanation: "El caso especifica que la creación de la cuenta Azure AD se hace mediante una llamada HTTP a Microsoft Graph API — una integración explícita con un sistema/API externo al flujo mismo.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Onboarding): el ticket para que el equipo de IT prepare laptop y accesos se crea en:",
+      options: [
+      "Una tabla nativa de Dataverse llamada 'Ticket'",
+      "ServiceNow, un sistema externo integrado desde el flujo",
+      "Un archivo Excel adjunto al correo de bienvenida",
+      "El mismo registro de la tabla Empleado"
+      ],
+      answer: [1],
+      explanation: "El caso indica explícitamente 'Crear ticket en ServiceNow para equipo IT' — un sistema de gestión de tickets externo, no una tabla de Dataverse ni parte del registro de Empleado.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Onboarding): ¿cuáles DOS acciones del flujo de onboarding ocurren en sistemas externos a Power Platform, integrados vía conector o HTTP?",
+      options: [
+      "Crear cuenta Azure AD (HTTP a Graph API)",
+      "Crear ticket en ServiceNow para equipo IT",
+      "Crear registro en la tabla Empleado en Dataverse",
+      "Enviar email de bienvenida con credenciales temporales"
+      ],
+      answer: [0, 1],
+      explanation: "La cuenta Azure AD (vía Graph API) y el ticket en ServiceNow son integraciones con sistemas externos. Crear el registro en Dataverse es el trigger interno del propio flujo, y el correo de bienvenida usa el conector nativo de Office 365.",
+      appliesTo: "caso"
     }
   ],
   6: [
@@ -653,6 +913,71 @@
       ],
       answer: [2],
       explanation: "La matriz es adecuada para analizar intersecciones entre dimensiones como producto y región, con totales y subtotales. La tarjeta y el gráfico de líneas sirven para KPI y tendencia, pero no para el detalle cruzado solicitado."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Dashboard Ejecutivo de Ventas): el caso combina D365 Sales, SQL Server histórico y Excel de targets en un solo modelo. ¿Qué capacidad de Power BI hace posible unificar estas 3 fuentes heterogéneas?",
+      options: [
+      "Power Query y el modelo de datos, que permiten conectar y relacionar múltiples orígenes",
+      "Un solo gráfico de tarjeta por cada fuente, sin relacionarlas",
+      "Exportar todo a un archivo Excel único antes de conectar Power BI",
+      "Power BI solo puede conectarse a una fuente por reporte"
+      ],
+      answer: [0],
+      explanation: "Power Query (para extraer y transformar) junto con el modelo de datos (para relacionar tablas de distintos orígenes) es lo que permite a Power BI combinar D365 Sales, SQL Server y Excel en un único modelo analítico.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Dashboard Ejecutivo de Ventas): el KPI 'Revenue actual vs target' necesita datos de D365 Sales Y de Excel (targets mensuales) al mismo tiempo. ¿Qué implica esto sobre el modelo?",
+      options: [
+      "Que el KPI puede calcularse con una sola fuente y se ignora la otra",
+      "Que se necesita relacionar tablas de distintos orígenes en el mismo modelo",
+      "Que Excel debe eliminarse del reporte para simplificarlo",
+      "Que D365 Sales ya trae los targets mensuales de fábrica"
+      ],
+      answer: [1],
+      explanation: "Como el revenue real vive en D365 Sales y el target vive en Excel, el modelo debe relacionar ambas fuentes (por ejemplo, por vendedor y periodo) para poder comparar una contra la otra.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Dashboard Ejecutivo de Ventas): 'Customer Acquisition Cost (CAC)' es una métrica calculada que no existe como campo directo en ninguna fuente. ¿Qué mecanismo de Power BI la produce?",
+      options: [
+      "Una medida DAX",
+      "Un segmentador (slicer)",
+      "Un gráfico de líneas",
+      "Una columna de texto importada de Excel"
+      ],
+      answer: [0],
+      explanation: "Las métricas derivadas que combinan varios valores (por ejemplo, costo de adquisición dividido entre clientes nuevos) se calculan con medidas DAX, no con visuales ni columnas importadas directamente.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Dashboard Ejecutivo de Ventas): la Gerencia necesita ver de inmediato si el revenue actual está por debajo, en línea o por encima del target, sin leer números exactos. ¿Qué recurso visual del caso resuelve eso?",
+      options: [
+      "Una tabla con miles de filas de detalle",
+      "Un semáforo (indicador visual) sobre el KPI de revenue vs target",
+      "Una matriz de producto x región",
+      "Un campo de texto libre"
+      ],
+      answer: [1],
+      explanation: "El caso menciona explícitamente 'Revenue actual vs target (con semáforo)' — un indicador visual de color es lo que permite una lectura instantánea del estado, a diferencia de una tabla detallada.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Dashboard Ejecutivo de Ventas): ¿cuáles DOS fuentes del caso NO provienen nativamente de Dynamics 365 y requieren integración adicional en Power BI?",
+      options: [
+      "SQL Server (histórico transaccional)",
+      "Excel (targets mensuales)",
+      "D365 Sales — Opportunities",
+      "D365 Sales — Accounts"
+      ],
+      answer: [0, 1],
+      explanation: "SQL Server y Excel son fuentes externas a Dynamics 365 que deben conectarse e integrarse explícitamente en el modelo; Opportunities y Accounts ya son datos nativos de D365 Sales.",
+      appliesTo: "caso"
     }
   ],
   7: [
@@ -715,6 +1040,71 @@
       ],
       answer: [2],
       explanation: "ThisItem referencia el registro del contexto de la galería y Self hace referencia al control que evalúa la fórmula. Invertirlos provoca fórmulas incorrectas y usar variables globales para todo complica innecesariamente el diseño."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (MediSupply): los analistas tardaban 4 horas diarias calculando manualmente cuándo pedir cada uno de los 8,000 SKUs. ¿Qué elemento de la solución elimina ese cálculo manual?",
+      options: [
+      "Una tabla adicional en Dataverse para guardar los resultados",
+      "Fórmulas Power Fx que calculan en tiempo real consumo promedio, días de stock y cantidad sugerida",
+      "Un reporte de Power BI que se actualiza una vez al día",
+      "Un flujo de Power Automate que envía un correo diario con los cálculos"
+      ],
+      answer: [1],
+      explanation: "El caso especifica que las fórmulas Power Fx calculan estos valores en tiempo real dentro de la Canvas App — es el cálculo mismo, no solo el almacenamiento o la notificación, lo que reemplaza el proceso manual.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (MediSupply): con 8,000 SKUs, el analista no puede revisar todos manualmente cada día. ¿Qué técnica del caso muestra solo los productos que requieren acción hoy?",
+      options: [
+      "Ordenar la tabla completa por nombre de producto",
+      "Una Gallery filtrada automáticamente por la condición de stock crítico (< 15 días o < 20% del ideal)",
+      "Exportar los 8,000 SKUs a Excel cada mañana",
+      "Un formulario que el analista debe llenar manualmente por producto"
+      ],
+      answer: [1],
+      explanation: "El caso describe una Gallery filtrada automáticamente por la condición de urgencia, de modo que solo aparecen los productos que realmente requieren revisión — no los 8,000 SKUs completos.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (MediSupply): los colores semáforo (verde/amarillo/rojo) de cada producto se determinan por:",
+      options: [
+      "Una columna fija asignada manualmente por el analista en Dataverse",
+      "El nivel de urgencia calculado en tiempo real por una fórmula Power Fx",
+      "El orden alfabético del nombre del producto",
+      "Un valor aleatorio para llamar la atención del analista"
+      ],
+      answer: [1],
+      explanation: "El caso indica que los colores semáforo dependen del nivel de urgencia calculado por Power Fx — es dinámico, no un valor fijo asignado manualmente.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (MediSupply): al presionar el botón 'Generar Orden', se debe crear la solicitud de compra Y notificar al proveedor. ¿Qué combinación de componentes ejecuta esa acción completa?",
+      options: [
+      "Solo Power Fx, sin ningún otro componente",
+      "Dataverse (crea el registro de la solicitud) + Power Automate (notifica al proveedor)",
+      "Solo Power BI, generando un reporte",
+      "Solo una Business Rule sobre la tabla de productos"
+      ],
+      answer: [1],
+      explanation: "El caso describe que el botón crea la solicitud en Dataverse y notifica al proveedor vía Power Automate — dos componentes distintos trabajando juntos, no uno solo.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (MediSupply): ¿cuáles DOS resultados cuantificables demuestra el caso tras implementar la solución?",
+      options: [
+      "Reducción del 71% en quiebres de stock de productos críticos en el primer trimestre",
+      "Ahorro estimado de $180,000 USD anuales en costos de urgencia y pérdidas por vencimiento",
+      "Eliminación total de la necesidad de mantener inventario de seguridad",
+      "Reducción del número de SKUs administrados de 8,000 a 2,000"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente una reducción del 71% en quiebres de stock crítico y un ahorro estimado de $180,000 USD anuales. No elimina el inventario de seguridad ni reduce el número de SKUs administrados.",
+      appliesTo: "caso"
     }
   ],
   8: [
@@ -777,6 +1167,71 @@
       ],
       answer: [1],
       explanation: "La inconsistencia de prefijos afecta mantenibilidad, identificación de componentes y gobernanza de la solución en todo el ciclo de vida. No bloquea técnicamente Power BI o Connection References, pero sí deteriora la calidad del modelo."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Constructora Andina): el problema real no era la falta de solicitudes, sino la ausencia de trazabilidad y control de costos al gestionarlas por WhatsApp y correos. ¿Qué componente centraliza los datos para hacerlos auditables?",
+      options: [
+      "Power BI, mostrando gráficos sin almacenar los datos",
+      "Dataverse, con un modelo centralizado (quién solicitó, quién aprobó, tiempos, costos)",
+      "WhatsApp Business API",
+      "Un archivo Excel compartido en la nube"
+      ],
+      answer: [1],
+      explanation: "El caso indica que Dataverse aporta el modelo centralizado con trazabilidad completa. Power BI visualiza esos datos pero no los origina, y WhatsApp/Excel son justamente lo que causaba el problema original.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Constructora Andina): un empleado necesita crear una solicitud desde su celular en menos de 2 minutos, con una interfaz simple. ¿Qué componente cubre ese requisito?",
+      options: [
+      "Canvas App",
+      "Model-Driven App",
+      "Power BI",
+      "Un flujo de Power Automate sin interfaz"
+      ],
+      answer: [0],
+      explanation: "El caso asigna explícitamente esa función a la Canvas App, diseñada para una captura rápida y simple desde el celular. Las Model-Driven Apps están orientadas a gestión tabular más compleja.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Constructora Andina): un gestor necesita aprobar, asignar y cerrar solicitudes con visibilidad completa del proceso, como una herramienta de administración. ¿Qué componente es el más adecuado según el caso?",
+      options: [
+      "Canvas App",
+      "Model-Driven App",
+      "Power BI",
+      "Power Automate"
+      ],
+      answer: [1],
+      explanation: "El caso asigna esta función a la Model-Driven App, orientada a la gestión de datos con vistas, formularios y procesos de negocio — justo lo que un gestor necesita para administrar solicitudes.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Constructora Andina): se necesita que, si una solicitud no tiene respuesta en 24 horas, escale automáticamente sin que nadie lo haga manualmente. ¿Qué componente implementa esa regla?",
+      options: [
+      "Power BI",
+      "Power Automate",
+      "Canvas App",
+      "Una Business Rule en el formulario de Canvas App"
+      ],
+      answer: [1],
+      explanation: "El caso asigna la notificación automática y la escalación por tiempo a Power Automate — es lógica de proceso automatizado, no algo que Power BI o una Business Rule de formulario ejecuten.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Constructora Andina): ¿cuáles DOS resultados demuestra el caso a los 3 meses de implementación?",
+      options: [
+      "Tiempo de aprobación reducido de 5 días a 4 horas promedio",
+      "100% de solicitudes trazables (0 perdidas, frente al 8% previo)",
+      "Eliminación total del equipo de gestores de solicitudes",
+      "Aumento del costo de mantenimiento por la nueva plataforma"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente la reducción del tiempo de aprobación y la trazabilidad completa. No elimina el rol de los gestores (siguen aprobando desde la Model-Driven App) y el costo de mantenimiento se redujo un 18%, no aumentó.",
+      appliesTo: "caso"
     }
   ],
   9: [

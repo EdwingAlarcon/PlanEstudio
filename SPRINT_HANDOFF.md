@@ -537,11 +537,12 @@ una dependencia externa a esta sesión.
 No fusionar el progreso de `preparar-entorno` con el progreso académico ni con `practice-progress` —
 son y deben seguir siendo tres stores independientes.
 
-## Sprint — Diagnóstico de caso aplicado (piloto, ENTREGADO 2026-08-04, pendiente validación del usuario)
+## Sprint — Diagnóstico de caso aplicado (piloto APROBADO 2026-08-04; escalando por nivel)
 
-**Estado: implementado, validado localmente (lint, tsc, 322 tests, build, 42 e2e) y probado
-manualmente en navegador. Pendiente: que el usuario valide tono/dificultad/formato antes de
-escalar a los 70 módulos restantes.** Contexto para quien retome esto (Codex u otra sesión):
+**Estado: piloto de 5 módulos entregado y APROBADO por el usuario sin cambios ("Las preguntas
+están bien, acordes. Me gusta. Apruebo") el 2026-08-04. Escalando a los 70 módulos restantes,
+por nivel, un commit por nivel (decisión del usuario). Nivel Básico (módulos 2-8, 35 preguntas)
+completado en el mismo día.** Contexto para quien retome esto (Codex u otra sesión):
 
 - Entregado: campo `appliesTo: "quiz" | "caso"` en `Question`/`RawQuestion` (`quiz-engine.ts`,
   `extract-questions.mjs`, regenerado en `data/questions.ts`); `questions-parser.ts` separa el
@@ -564,10 +565,26 @@ escalar a los 70 módulos restantes.** Contexto para quien retome esto (Codex u 
   nuevo `displayQuestion` (usa `lastAttempt.question` durante feedback) y el número de pregunta
   del header ahora usa `answeredCount` en feedback en vez de `answeredCount + 1`. Test de
   regresión en `quiz-panel.test.tsx` (nuevo archivo, primer test de componente para QuizPanel).
-- **Próximo paso al retomar**: mostrar el piloto al usuario en los 5 módulos, recoger feedback de
-  tono/dificultad, y solo tras su aprobación escribir las preguntas de caso para los 70 módulos
-  restantes (300-450 preguntas adicionales) siguiendo el mismo patrón (`appliesTo: "caso"` al
-  final del array de cada módulo en `evaluaciones-simulador.js`).
+- **Piloto aprobado** (2026-08-04): el usuario confirmó tono/dificultad sin pedir cambios. Ver
+  memoria `feedback_case_diagnosis_pilot` — no hace falta re-aprobar el estilo en cada nivel.
+- **Nivel Básico completado** (2026-08-04, mismo día que la aprobación): 35 preguntas nuevas (5
+  por módulo) para los módulos 2-8 (módulo 1 ya cubierto por el piloto), ancladas a sus Casos
+  Reales (TransCargo, Hotel Terramar, CRM PyME, Onboarding, Dashboard Ejecutivo de Ventas,
+  MediSupply, Constructora Andina). Total banco tras `extract-questions.mjs`: 568 preguntas (508
+  quiz + 60 caso). Nivel Básico completo (módulos 1-8) ya tiene Diagnóstico de caso.
+- **Nota de e2e**: durante la validación del Nivel Básico, `npm run e2e` mostró flakiness real de
+  entorno (tests distintos fallando en cada corrida — sidebar D365, onboarding, RPA — ninguno
+  relacionado con el contenido nuevo). Aislados uno por uno, todos pasaron; el más lento tardó
+  37.7s en una navegación simple, consistente con máquina bajo carga tras una sesión larga de
+  builds/tests repetidos, no con una regresión real. Si esto se repite en sesiones futuras, correr
+  los tests fallidos en aislamiento (`npx playwright test -g "<nombre>"`) antes de asumir un bug.
+- **Próximo paso al retomar**: continuar escalando nivel por nivel, un commit por nivel, en este
+  orden sugerido: Intermedio (10-17, 8 módulos), Avanzado (19-30, 12 módulos, módulo 18 ya
+  cubierto), Arquitecto (32-41, 10 módulos, módulo 31 ya cubierto), IA (42-52+54-55, 13 módulos,
+  módulo 53 ya cubierto), D365 (56-65, 10 módulos), RPA (66-75, 10 módulos). Mismo patrón: leer el
+  "Caso Real de Negocio" real de cada módulo, 5 preguntas `appliesTo: "caso"` al final del array
+  del módulo en `evaluaciones-simulador.js`, regenerar con `extract-questions.mjs`, correr
+  `validate:content` + lint + tsc + tests + build + e2e antes de cada commit.
 
 ### Contexto original del diseño (2026-08-03/04, antes de implementar)
 
