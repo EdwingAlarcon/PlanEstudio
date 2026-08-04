@@ -625,12 +625,30 @@ completado en el mismo día.** Contexto para quien retome esto (Codex u otra ses
   arriba (mismo comportamiento con y sin cambios, vía `git stash`), la suite `npm run e2e` local
   se omitió para este nivel; la validación se apoyó en unit tests (322/322), lint, tsc y build
   (todos verdes) más el resultado real del run de CI en GitHub Actions tras el push.
+- **Nivel Arquitecto completado** (2026-08-04, mismo día): 50 preguntas nuevas (5 por módulo) para
+  los módulos 32-41 (módulo 31 ya cubierto por el piloto), ancladas a sus Casos Reales (Multinacional
+  5,000 empleados/CoE Starter Kit, Grupo empresarial LATAM-España/GDPR y multi-tenant, Grupo
+  industrial/Azure Integration Services, Retailer 50 tiendas/Fabric-Synapse-Medallion, Empresa de
+  salud/HIPAA y seguridad enterprise, Firma de contabilidad/AI Builder Document Processing, dos
+  casos de liderazgo técnico — propuesta al CFO y trazabilidad en UAT—, Aseguradora/transformación
+  digital con Power Pages+AI Builder, preparación de candidato a Solution Architect, Cooperativa
+  financiera/proyecto capstone). Total banco tras `extract-questions.mjs`: 718 preguntas (508 quiz +
+  210 caso). Niveles Básico, Intermedio, Avanzado y Arquitecto completos (módulos 1-41).
+- **Fixture de test actualizado**: `questions-parser.test.ts` verificaba que el módulo 32 (recién
+  cubierto en este nivel) devolviera un array vacío — se actualizó la lista de módulos con caso
+  (ahora incluye 32-41) y el módulo usado como "sin pilot" pasó de 32 a 60 (nivel D365, aún sin
+  cubrir). Sin este ajuste el test fallaba porque la aserción quedó obsoleta al escalar el nivel.
+- **e2e de este nivel**: se corrió `npm run e2e` completo; 1 test falló
+  ("onboarding guiado persiste y muestra ruta de fundamentos") por timeout esperando el texto
+  "Empiezo desde cero". Confirmado con `git stash` que el mismo test falla igual sin los cambios de
+  este nivel aplicados — es el mismo flakiness ambiental ya documentado en Nivel Intermedio, no una
+  regresión del contenido nuevo. Validación real: unit tests (322/322), lint, tsc y build verdes
+  localmente, más el resultado de CI en GitHub Actions tras el push.
 - **Próximo paso al retomar**: continuar escalando nivel por nivel, un commit por nivel. Hechos:
-  Básico (1-8), Intermedio (9-17) y Avanzado (18-30). Orden sugerido para lo que falta:
-  Arquitecto (32-41, 10 módulos, módulo 31 ya cubierto), IA (42-52+54-55, 13 módulos, módulo 53
-  ya cubierto), D365 (56-65, 10 módulos), RPA (66-75, 10 módulos). Mismo patrón: leer el
-  "Caso Real de Negocio" real de cada módulo, 5 preguntas `appliesTo: "caso"` al final del array
-  del módulo en `evaluaciones-simulador.js`, regenerar con
+  Básico (1-8), Intermedio (9-17), Avanzado (18-30) y Arquitecto (31-41). Orden sugerido para lo que
+  falta: IA (42-52+54-55, 13 módulos, módulo 53 ya cubierto), D365 (56-65, 10 módulos), RPA (66-75,
+  10 módulos). Mismo patrón: leer el "Caso Real de Negocio" real de cada módulo, 5 preguntas
+  `appliesTo: "caso"` al final del array del módulo en `evaluaciones-simulador.js`, regenerar con
   `extract-questions.mjs`, correr `validate:content` + lint + tsc + tests + build antes de cada
   commit (e2e es opcional/informativo en máquina local larga — ver nota de flakiness arriba; el
   run de CI en GitHub Actions tras el push es la validación real de e2e).

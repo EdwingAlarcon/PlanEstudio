@@ -5079,6 +5079,71 @@
       ],
       answer: [0, 1],
       explanation: "El App Catalog de Nurture Components permite a los makers descubrir apps existentes antes de construir algo nuevo, y el Innovation Backlog formaliza y prioriza las ideas propuestas. Core y Governance Components cumplen roles de inventario y cumplimiento, no de comunidad o priorización de ideas."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Multinacional): el primer sync del CoE reveló 1,200 apps cuando el IT esperaba 200. ¿Qué paquete del CoE Starter Kit produjo ese inventario inicial?",
+      options: [
+      "Core Components",
+      "Nurture Components",
+      "Innovation Backlog",
+      "Power BI CoE Dashboard únicamente, sin instalar ningún paquete"
+      ],
+      answer: [0],
+      explanation: "Core Components es el paquete que sincroniza y registra apps, flujos, conectores y makers del tenant; es lo que produjo el inventario real de 1,200 apps frente a las 200 esperadas.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Multinacional): 340 apps sin uso fueron archivadas sin que un administrador tuviera que revisarlas una por una. ¿Qué proceso del CoE logró esto?",
+      options: [
+      "Compliance Process, contactando automáticamente a los owners",
+      "Maker Assessment, evaluando el nivel técnico de cada maker",
+      "Environment Request Process, aprobando nuevos ambientes",
+      "El Power BI CoE Dashboard, que solo visualiza datos"
+      ],
+      answer: [0],
+      explanation: "El Compliance Process contacta automáticamente a los owners de apps sin uso y, tras notificaciones sin respuesta, las marca para archivado, convirtiendo una revisión manual de cientos de apps en un flujo automatizado.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Multinacional): antes de la solución, aparecían apps en producción con datos de clientes en SharePoint externo sin que nadie las aprobara. ¿Qué gap describe mejor este problema?",
+      options: [
+      "Falta de visibilidad y gobernanza sobre el inventario real del tenant",
+      "Un error de licenciamiento de Power BI",
+      "Una configuración incorrecta de Business Process Flow",
+      "Falta de plantillas de Power Pages"
+      ],
+      answer: [0],
+      explanation: "El problema central era la ausencia de visibilidad: sin inventario ni gobernanza, apps con datos sensibles se publicaban sin control ni aprobación. Las otras opciones son componentes puntuales que no explican el gap organizacional.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Multinacional): los requests de nuevos ambientes pasaron de tardar semanas a procesarse en menos de 2 días. ¿Qué componente del CoE formalizó y aceleró ese proceso?",
+      options: [
+      "Environment Request Process con aprobación y provisioning automatizado",
+      "El Compliance Process de apps sin uso",
+      "El Maker Assessment de nivel de conocimiento",
+      "El App Catalog de Nurture Components"
+      ],
+      answer: [0],
+      explanation: "El Environment Request Process reemplaza el ticket informal a IT por un formulario con aprobación del arquitecto y ejecución automática del script de Landing Zone, reduciendo drásticamente el tiempo de espera.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Multinacional): ¿cuáles DOS resultados reflejan directamente el impacto de instalar el CoE Starter Kit en este tenant?",
+      options: [
+      "Reducción de apps sin owner de 600 a 12",
+      "El CIO ahora revisa el CoE Dashboard como primer reporte en su reunión mensual de IT",
+      "Eliminación total de la necesidad de crear nuevos ambientes",
+      "Migración completa del tenant a un proveedor de nube distinto"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta explícitamente la caída de apps sin owner y que el CoE Dashboard se volvió el reporte de referencia del CIO. No se elimina la creación de ambientes ni se menciona ninguna migración de proveedor.",
+      appliesTo: "caso"
     }
   ],
   33: [
@@ -5177,6 +5242,71 @@
       ],
       answer: [0],
       explanation: "Los conectores nativos de Dataverse no cruzan límites de tenant; la integración cross-tenant requiere un intermediario como Azure API Management, donde el flujo en el tenant A llama a una API que a su vez accede al tenant B con sus propias credenciales. Landing Zone, CMK y Managed Environments no resuelven esta limitación de plataforma."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Grupo empresarial LATAM/España): los datos de clientes españoles residían en datacenters de US porque el tenant único era de esa región. ¿Qué principio de arquitectura multi-geo se violó?",
+      options: [
+      "Residencia de datos y cumplimiento regulatorio según la geografía del cliente",
+      "El uso de Hub-and-Spoke entre tenants",
+      "La configuración de Sharing limits en Managed Environments",
+      "El uso de guest users para colaboración cross-tenant"
+      ],
+      answer: [0],
+      explanation: "El caso es un problema clásico de residencia de datos: los datos de ciudadanos europeos deben cumplir GDPR y, en general, residir en geografías compatibles con esa regulación, no en el datacenter que resultó ser el del tenant único preexistente.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Grupo empresarial LATAM/España): la solución fue separar en 2 tenants (LATAM en Brazil South y EU en West Europe). ¿Qué obtuvo la empresa con Microsoft como parte de esa separación?",
+      options: [
+      "Un DPA (Data Processing Agreement) firmado para ambos tenants",
+      "Una Landing Zone compartida entre ambos tenants",
+      "Un solo CoE Starter Kit centralizado para los dos tenants",
+      "La eliminación completa de la necesidad de cumplimiento regulatorio"
+      ],
+      answer: [0],
+      explanation: "El caso indica explícitamente que Microsoft firmó un DPA para ambos tenants, formalizando el tratamiento de datos personales conforme a la regulación aplicable en cada región. No se comparte CoE ni Landing Zone entre tenants separados, y el cumplimiento regulatorio no desaparece, se gestiona.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Grupo empresarial LATAM/España): tras separar los tenants, cada uno mantiene su propio CoE pero con sincronización de políticas corporativas. ¿Qué patrón de gobernanza describe mejor esta relación entre tenants?",
+      options: [
+      "Cada tenant es autónomo en su CoE local, alineado a un conjunto de políticas corporativas comunes",
+      "Un tenant controla completamente al otro sin autonomía local",
+      "Los tenants comparten un único ambiente de producción",
+      "No existe ninguna coordinación entre los CoE de cada tenant"
+      ],
+      answer: [0],
+      explanation: "El caso describe CoE independientes por tenant pero con sincronización de políticas corporativas, es decir, autonomía operativa local dentro de un marco de gobernanza común, no control unilateral ni ausencia total de coordinación.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Grupo empresarial LATAM/España): la multa de la AEPD fue de €50,000 por incumplimiento de GDPR. ¿Qué rol es responsable de anticipar este tipo de riesgo regulatorio en la arquitectura de ambientes?",
+      options: [
+      "El DPO (Data Protection Officer), en conjunto con el arquitecto de la plataforma",
+      "Únicamente el equipo de marketing",
+      "Únicamente el proveedor de licenciamiento",
+      "Ningún rol específico; es responsabilidad exclusiva de Microsoft"
+      ],
+      answer: [0],
+      explanation: "El caso menciona explícitamente al DPO recibiendo la multa; el diseño de dónde residen los datos y cómo se cumple la regulación es una responsabilidad conjunta entre el DPO y el arquitecto que decide la topología de tenants y ambientes.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Grupo empresarial LATAM/España): ¿cuáles DOS acciones reflejan directamente la solución implementada tras la multa?",
+      options: [
+      "Separación en tenants LATAM (Brazil South) y EU (West Europe) según residencia de datos",
+      "Integración entre los tenants vía Azure Service Bus",
+      "Migración completa de todo el grupo a un solo tenant global sin distinción geográfica",
+      "Eliminación de todo el histórico de datos de clientes españoles"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta la separación en dos tenants por región y la integración entre ellos vía Azure Service Bus. No se consolidó todo en un tenant único (eso repetiría el problema original) ni se eliminó el histórico de datos.",
+      appliesTo: "caso"
     }
   ],
   34: [
@@ -5275,6 +5405,71 @@
       ],
       answer: [0, 1],
       explanation: "El Integration Account almacena los artefactos B2B (schemas, mapas XSLT, partners, acuerdos EDI) y se vincula a Logic Apps, que es el servicio diseñado para orquestar estos escenarios con protocolos B2B. Data Factory se orienta a ETL/ELT de datos y Event Grid enruta eventos; ninguno gestiona artefactos B2B."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Grupo industrial): tenían 9 integraciones punto a punto (SAP→Dataverse, Salesforce→Dataverse, WMS→SAP) y una falla en SAP derribaba 3 integraciones simultáneamente. ¿Qué patrón de arquitectura resuelve directamente ese acoplamiento excesivo?",
+      options: [
+      "Un Integration Hub con Service Bus desacoplando los sistemas",
+      "Duplicar cada integración punto a punto para redundancia",
+      "Eliminar SAP del panorama de integración",
+      "Aumentar el timeout de cada integración individual"
+      ],
+      answer: [0],
+      explanation: "El Integration Hub con Service Bus como capa de desacoplamiento rompe la dependencia directa entre sistemas: una falla en SAP ya no derriba automáticamente las integraciones que dependen de él, porque los mensajes quedan en cola hasta que el sistema se recupera.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Grupo industrial): APIM actúa como puerta de entrada del Integration Hub. ¿Cuál es su rol principal en esta arquitectura?",
+      options: [
+      "Punto de entrada único que expone y gobierna las APIs hacia los sistemas backend",
+      "Almacenar los mensajes en cola de forma duradera",
+      "Ejecutar la lógica de transformación EDI/B2B",
+      "Reemplazar completamente la necesidad de Service Bus"
+      ],
+      answer: [0],
+      explanation: "Azure API Management actúa como gateway: expone, securiza y gobierna el acceso a las APIs del hub. El almacenamiento de mensajes en cola es responsabilidad de Service Bus, y la transformación B2B/EDI es de Logic Apps con Integration Account.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Grupo industrial): el MTTR (Mean Time to Recover) de las integraciones bajó de 4 horas a 20 minutos tras la migración al hub centralizado. ¿Qué capacidad del nuevo diseño explica principalmente esta mejora?",
+      options: [
+      "Visibilidad completa de mensajes en tránsito desde Azure Monitor",
+      "La eliminación total de la necesidad de monitoreo",
+      "Que las 9 integraciones originales se mantuvieron sin cambios",
+      "Que se dejó de usar Service Bus para simplificar la arquitectura"
+      ],
+      answer: [0],
+      explanation: "El caso indica explícitamente que la visibilidad completa de mensajes en tránsito vía Azure Monitor permite identificar y resolver fallas mucho más rápido que con 9 integraciones aisladas sin monitoreo centralizado.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Grupo industrial): Event Grid se usa para distribuir eventos a múltiples suscriptores dentro del hub. ¿Qué tipo de escenario justifica su uso frente a una integración punto a punto directa?",
+      options: [
+      "Cuando un mismo evento de negocio debe notificar a varios sistemas independientes sin acoplarlos entre sí",
+      "Cuando solo existe un único consumidor posible para el evento",
+      "Cuando se necesita procesamiento ordenado estricto tipo FIFO",
+      "Cuando el requisito es transformar documentos EDI X12"
+      ],
+      answer: [0],
+      explanation: "Event Grid está diseñado para el patrón publish-subscribe: un evento se distribuye a múltiples suscriptores sin que el emisor conozca ni dependa de ellos, exactamente el problema de las 9 integraciones rígidas del caso. El orden estricto es dominio de Message Sessions en Service Bus, y el EDI es de Logic Apps con Integration Account.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Grupo industrial): ¿cuáles DOS componentes conforman el Integration Hub que reemplazó las 9 integraciones punto a punto?",
+      options: [
+      "Azure API Management como puerta de entrada",
+      "Azure Service Bus para desacoplar sistemas",
+      "Un Excel compartido para trackear el estado de cada integración",
+      "Eliminar por completo cualquier sistema de mensajería"
+      ],
+      answer: [0, 1],
+      explanation: "El caso describe el hub como APIM (puerta de entrada) más Service Bus (desacoplamiento) más Logic Apps y Event Grid para casos específicos. Un Excel compartido o la ausencia de mensajería no son parte de la solución de integración enterprise.",
+      appliesTo: "caso"
     }
   ],
   35: [
@@ -5373,6 +5568,71 @@
       ],
       answer: [0, 1],
       explanation: "Data Activator permite definir reglas de alerta sobre datos en tiempo real y disparar acciones (como notificaciones a Teams) sin escribir código, conectándose a streams o tablas del Lakehouse. Azure Functions no es requisito para esta capacidad, y el Gold layer no necesita eliminarse."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Retailer): el equipo de BI tardaba 3 días en producir el reporte mensual porque extraía manualmente de D365, SAP y WMS y consolidaba en Excel. ¿Qué componente de Fabric elimina la necesidad de esa extracción manual desde Dataverse?",
+      options: [
+      "Dataverse Link, exportando el CRM en tiempo real hacia Fabric",
+      "El Semantic Model certificado únicamente",
+      "El Data Activator con reglas de alerta",
+      "Time travel sobre el Gold layer"
+      ],
+      answer: [0],
+      explanation: "Dataverse Link (basado en Azure Synapse Link) exporta los datos de Dataverse hacia Fabric en tiempo casi real sin scripts de extracción manual, resolviendo exactamente el cuello de botella de tener que sacar datos de D365 a mano cada mes.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Retailer): SAP y el WMS se sincronizan al Bronze layer mediante ADF (Azure Data Factory). ¿Qué rol cumple específicamente la capa Bronze en la arquitectura Medallion de este caso?",
+      options: [
+      "Almacenar los datos crudos tal como llegan de las fuentes, sin transformar",
+      "Contener únicamente los KPIs finales listos para Power BI",
+      "Reemplazar la necesidad de un Warehouse en T-SQL",
+      "Servir como capa de alertas para el gerente de operaciones"
+      ],
+      answer: [0],
+      explanation: "Bronze es la capa de ingesta cruda en el patrón Medallion: los datos de SAP y WMS llegan sin transformar, y son los Notebooks Silver/Gold los que aplican limpieza y modelado hasta llegar a los KPIs finales.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Retailer): tras la solución, el reporte mensual pasó de tardar 3 días a estar disponible el día 1 del mes. ¿Qué capacidad de Fabric permite que Power BI lea datos actualizados sin un proceso de importación tradicional?",
+      options: [
+      "DirectLake",
+      "El área 'Files' del Lakehouse",
+      "Un refresh programado cada 24 horas en Power BI Desktop",
+      "Time travel sobre el transaction log"
+      ],
+      answer: [0],
+      explanation: "DirectLake permite que Power BI consulte directamente las tablas Delta de OneLake sin necesidad de importar ni duplicar los datos, lo que explica que el reporte esté listo casi de inmediato en vez de esperar un ciclo de importación.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Retailer): las decisiones de reabastecimiento pasaron de basarse en datos de hace 1 semana a datos del día anterior. ¿Qué principio arquitectónico del caso explica esta mejora en frescura de datos?",
+      options: [
+      "Fabric Lakehouse como single source of truth con sincronización cercana al tiempo real desde las 3 fuentes",
+      "Mover todo el reporting de vuelta a Excel para mayor control manual",
+      "Eliminar el WMS del panorama de datos",
+      "Duplicar manualmente los datos cada semana en un nuevo Excel"
+      ],
+      answer: [0],
+      explanation: "Al centralizar D365, SAP y WMS en un Lakehouse como fuente única de verdad con sincronización frecuente (Dataverse Link en tiempo real, ADF para SAP/WMS), los datos disponibles para decisiones dejan de estar desactualizados por semanas.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Retailer): ¿cuáles DOS componentes de Fabric explican directamente que el reporte mensual ya no dependa de consolidación manual en Excel?",
+      options: [
+      "Dataverse Link para la ingesta de D365 en tiempo real",
+      "ADF sincronizando SAP y WMS hacia el Bronze layer",
+      "Un Excel compartido entre las 50 tiendas para centralizar datos",
+      "Eliminar completamente el uso de Power BI"
+      ],
+      answer: [0, 1],
+      explanation: "El caso describe Dataverse Link para D365 y ADF para SAP/WMS como los mecanismos de ingesta automatizada que reemplazan la extracción y consolidación manual en Excel. Power BI se mantiene como herramienta de consumo vía DirectLake, no se elimina.",
+      appliesTo: "caso"
     }
   ],
   36: [
@@ -5471,6 +5731,71 @@
       ],
       answer: [0, 1],
       explanation: "La prevención de exfiltración de datos requiere combinar múltiples capas: DLP Policies que restrinjan conectores no aprobados y Conditional Access que bloquee descargas desde dispositivos no gestionados, entre otros controles. Desactivar la auditoría o permitir sharing sin límites debilita la defensa en profundidad en lugar de reforzarla."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa de salud): un ex-empleado descargó datos de 50,000 pacientes en su último día de trabajo y nadie lo detectó hasta 3 meses después. ¿Qué herramienta hubiera alertado en tiempo real ese patrón de descarga masiva?",
+      options: [
+      "Microsoft Sentinel con una regla de detección de descarga masiva",
+      "Un Sensitivity Label aplicado solo después del incidente",
+      "El CoE Starter Kit, para inventariar apps del tenant",
+      "Un Business Process Flow en Dataverse"
+      ],
+      answer: [0],
+      explanation: "Microsoft Sentinel, el SIEM de Microsoft, permite definir reglas de detección de anomalías como una descarga masiva e inusual de registros, generando una alerta en tiempo real en vez de descubrirse meses después. El CoE Starter Kit y un Business Process Flow no son herramientas de detección de seguridad.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa de salud): la solución incluyó CMK (Customer-Managed Keys) para que los datos de pacientes fueran inaccesibles sin la clave corporativa. ¿Qué protege específicamente este control?",
+      options: [
+      "Que incluso Microsoft, sin la clave del cliente, no pueda acceder a los datos cifrados en reposo",
+      "Que los usuarios no puedan compartir apps entre ambientes",
+      "Que los flujos de Power Automate se ejecuten más rápido",
+      "Que el Solution Checker bloquee importaciones inseguras"
+      ],
+      answer: [0],
+      explanation: "Customer-Managed Keys da al cliente control exclusivo sobre la clave de cifrado de sus datos en reposo, de forma que ni siquiera el proveedor de la nube puede acceder a ellos sin esa clave — una capa adicional relevante para datos de salud altamente regulados.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa de salud): PIM se implementó para el acceso a datos de producción, exigiendo aprobación previa. ¿Qué problema de seguridad previene directamente este control frente al escenario del ex-empleado?",
+      options: [
+      "El acceso permanente e implícito a datos sensibles sin necesidad de solicitarlo ni justificarlo cada vez",
+      "La necesidad de clasificar los reportes de Power BI",
+      "La velocidad de sincronización del CoE Starter Kit",
+      "El costo de licenciamiento de Dataverse"
+      ],
+      answer: [0],
+      explanation: "PIM (Privileged Identity Management) obliga a solicitar y justificar la elevación de privilegios de forma temporal y auditada, en vez de mantener acceso permanente a producción — exactamente el tipo de acceso sin control que permitió la descarga no detectada.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa de salud): Purview clasifica automáticamente los datos de pacientes. ¿Qué beneficio aporta esta clasificación automática frente a depender de que cada maker etiquete manualmente sus datos?",
+      options: [
+      "Reduce el riesgo de que datos sensibles queden sin clasificar por error u omisión humana",
+      "Elimina por completo la necesidad de Conditional Access",
+      "Acelera la ejecución de los flujos de Power Automate",
+      "Sustituye la necesidad de CMK"
+      ],
+      answer: [0],
+      explanation: "La clasificación automática de Purview identifica y etiqueta datos sensibles (como información de pacientes) sin depender de que cada maker lo haga manualmente, cerrando un gap habitual donde datos críticos quedan sin proteger por descuido humano.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Empresa de salud): ¿cuáles DOS controles combinados permitieron que, en el simulacro post-implementación, una brecha similar se detectara en 4 minutos?",
+      options: [
+      "Sentinel con reglas de detección de descarga masiva en tiempo real",
+      "PIM exigiendo aprobación para acceso a datos de producción",
+      "Eliminar toda auditoría para simplificar el sistema",
+      "Permitir acceso permanente a producción a todo el equipo de IT"
+      ],
+      answer: [0, 1],
+      explanation: "El caso combina detección en tiempo real (Sentinel) con control de acceso privilegiado (PIM) como las capas que permitieron detectar y contener una brecha similar en minutos. Eliminar auditoría o dar acceso permanente son justo las prácticas que causaron el incidente original.",
+      appliesTo: "caso"
     }
   ],
   37: [
@@ -5569,6 +5894,71 @@
       ],
       answer: [0, 1],
       explanation: "Text Classification categoriza texto libre en categorías de negocio definidas, y Prediction Model se entrena con historial de Dataverse para predecir resultados como ganar/perder una oportunidad. Ninguno requiere Azure OpenAI como prerequisito, y Prediction Model puede ejecutarse tanto en tiempo real desde Canvas App como en batch vía Power Automate."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Firma de contabilidad): 5 personas tipeaban manualmente datos de 2,000 facturas mensuales con un error rate del 3%. ¿Qué tipo de modelo de AI Builder resuelve directamente la extracción de esos datos?",
+      options: [
+      "Document Processing (Document Processing Model / Invoice Processing)",
+      "Object Detection",
+      "Text Classification",
+      "Prediction Model"
+      ],
+      answer: [0],
+      explanation: "Document Processing (incluyendo el modelo prebuilt de Invoice Processing) está diseñado para extraer campos estructurados de documentos como facturas: proveedor, fecha, monto, líneas de detalle. Object Detection localiza objetos en imágenes, Text Classification categoriza texto libre, y Prediction Model estima resultados desde datos históricos.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Firma de contabilidad): las facturas con confianza menor al 85% se envían a revisión humana, mientras el resto se procesa automáticamente. ¿Qué principio de diseño de soluciones con IA refleja esta regla?",
+      options: [
+      "Human-in-the-loop basado en el score de confianza del modelo",
+      "Automatizar el 100% de los casos sin excepción",
+      "Ignorar el score de confianza y confiar siempre en el modelo",
+      "Enviar todas las facturas a revisión manual sin excepción"
+      ],
+      answer: [0],
+      explanation: "El patrón human-in-the-loop usa el score de confianza del modelo para decidir qué casos requieren revisión humana y cuáles pueden procesarse automáticamente, balanceando velocidad con control de calidad — ni automatización ciega ni revisión manual de todo.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Firma de contabilidad): tras el AI Builder, el flujo de Power Automate crea el registro directamente en D365 para las facturas que pasan el umbral de confianza. ¿Qué rol cumple Power Automate en esta arquitectura?",
+      options: [
+      "Orquestar el flujo end-to-end: invocar el modelo, evaluar el score y crear el registro en D365",
+      "Entrenar el modelo de Document Processing",
+      "Reemplazar la necesidad de AI Builder por completo",
+      "Servir como la interfaz donde el usuario sube la factura físicamente"
+      ],
+      answer: [0],
+      explanation: "Power Automate orquesta el proceso completo: recibe el documento, invoca el modelo de AI Builder, evalúa el resultado de confianza y, si supera el umbral, crea el registro en D365 automáticamente. El entrenamiento del modelo ocurre en AI Builder, no en el flujo.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Firma de contabilidad): el error rate bajó de 3% a 0.3% y el ROI se logró en 18 meses. ¿Qué combinación de factores explica mejor esta mejora, según el caso?",
+      options: [
+      "Alta exactitud del modelo (95%) combinada con revisión humana solo en el 8% de casos de baja confianza",
+      "Haber despedido a las 5 personas sin reubicarlas",
+      "Haber eliminado por completo la revisión humana desde el primer día",
+      "Un aumento en el precio del servicio de contabilidad"
+      ],
+      answer: [0],
+      explanation: "El caso indica que el modelo alcanza 95% de exactitud y que solo el 8% de las facturas (las de baja confianza) requieren revisión humana, lo que explica la caída del error rate sin necesidad de eliminar por completo el control humano. Las 5 personas fueron reubicadas, no despedidas.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Firma de contabilidad): ¿cuáles DOS resultados de negocio reporta directamente el caso tras implementar AI Builder?",
+      options: [
+      "Las 5 personas que tipeaban facturas fueron reubicadas a trabajo de mayor valor",
+      "El error rate bajó de 3% a 0.3%",
+      "Se eliminó por completo la necesidad de D365",
+      "El volumen de facturas mensuales se redujo a la mitad"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta explícitamente la reubicación del personal y la caída del error rate. D365 sigue siendo el destino de los registros creados automáticamente, y el volumen de facturas mensuales no cambia, solo cómo se procesan.",
+      appliesTo: "caso"
     }
   ],
   38: [
@@ -5667,6 +6057,71 @@
       ],
       answer: [0, 1],
       explanation: "El Technical Debt debe hacerse visible y cuantificado para pagarlo de forma planificada, y el Change Request Process formaliza cualquier solicitud de cambio de scope con estimación y aprobación previa. Ignorar los cambios como 'pequeños' es la frase más peligrosa en gestión de proyectos, y el Technical Debt no se resuelve solo."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Consultoría): un arquitecto presentó 40 slides de diagramas técnicos a un CFO, que interrumpió en el slide 5 preguntando cuánto costaba y cuándo lo vería funcionando. ¿Qué principio de comunicación ejecutiva se violó?",
+      options: [
+      "Abrir con negocio y ROI antes de entrar en detalle técnico",
+      "Usar demasiados colores en los diagramas de arquitectura",
+      "No incluir un Risk Register en la propuesta",
+      "No haber hecho un Discovery Workshop previo"
+      ],
+      answer: [0],
+      explanation: "El caso señala explícitamente que las primeras slides deben cubrir el problema de negocio y el ROI esperado, dejando el detalle técnico para un apéndice. El arquitecto invirtió el orden y perdió al CFO antes de llegar al valor de negocio.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Consultoría): tras reordenar sus propuestas (negocio/ROI primero, solución en lenguaje de negocio después, detalle técnico en apéndice), la tasa de cierre del arquitecto subió de 30% a 65%. ¿Qué lección de negocio ilustra este resultado?",
+      options: [
+      "La forma de comunicar una solución técnica a un ejecutivo afecta directamente el éxito comercial de la propuesta",
+      "El contenido técnico de una propuesta no importa si el arquitecto es carismático",
+      "Los CFOs nunca aprueban proyectos técnicos sin importar cómo se presenten",
+      "Agregar más slides técnicas siempre mejora la tasa de cierre"
+      ],
+      answer: [0],
+      explanation: "El caso es una demostración directa de que la estructura de la comunicación (negocio primero, técnica como apéndice) puede duplicar la tasa de cierre de propuestas, sin cambiar la solución técnica en sí.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Consultoría): en un proyecto D365, negocio exigió en UAT una aprobación adicional para descuentos que 'siempre se había pedido', pero no existía historia con criterio de aceptación, ni caso de prueba, ni mención en el diseño funcional. ¿Qué falta de práctica de gestión de proyectos explica este conflicto?",
+      options: [
+      "Falta de trazabilidad viva entre requerimiento, decisión, configuración, prueba y aprobación",
+      "Falta de un Power BI Dashboard de gobernanza",
+      "Falta de un Field Security Profile en Dataverse",
+      "Falta de instalar el CoE Starter Kit"
+      ],
+      answer: [0],
+      explanation: "El caso concluye que la consultoría funcional profesional consiste en mantener trazabilidad viva entre requerimiento, decisión, configuración, prueba y aprobación — no en escribir documentos largos. Sin esa trazabilidad, un reclamo de último momento no puede resolverse con evidencia.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Consultoría): el reclamo del cliente sobre la aprobación de descuentos surgió porque el requerimiento nunca quedó documentado formalmente con un criterio de aceptación claro. ¿Qué artefacto del Módulo 38 previene directamente este tipo de disputa de alcance?",
+      options: [
+      "Una historia de usuario con criterio de aceptación explícito, referenciada en el diseño funcional y su caso de prueba",
+      "El Weekly Digest del CoE Starter Kit",
+      "El Maker Assessment de Nurture Components",
+      "El Data Activator de Microsoft Fabric"
+      ],
+      answer: [0],
+      explanation: "Una historia de usuario bien escrita, con criterio de aceptación y trazabilidad hacia el diseño funcional y el caso de prueba, es exactamente el artefacto que hubiera evitado el reclamo, porque documenta explícitamente qué se acordó y qué no.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Consultoría): ¿cuáles DOS lecciones combinan ambos casos (la propuesta al CFO y el conflicto de UAT) sobre el rol de un arquitecto/consultor senior?",
+      options: [
+      "Comunicar en el lenguaje del interlocutor (negocio vs técnico) según a quién se dirige",
+      "Mantener trazabilidad documental viva a lo largo de todo el ciclo de vida del requerimiento",
+      "Priorizar siempre el detalle técnico exhaustivo sobre cualquier otra consideración",
+      "Evitar documentar acuerdos para mantener flexibilidad con el cliente"
+      ],
+      answer: [0, 1],
+      explanation: "Ambos casos ilustran habilidades blandas críticas de un arquitecto senior: adaptar la comunicación a la audiencia y mantener trazabilidad documental que sustente decisiones. Priorizar solo el detalle técnico o evitar documentar son justamente los errores que causaron ambos conflictos.",
+      appliesTo: "caso"
     }
   ],
   39: [
@@ -5765,6 +6220,71 @@
       ],
       answer: [0, 1],
       explanation: "Power Automate Desktop (RPA) resuelve la interacción con sistemas legados sin API mediante scraping controlado, y AI Builder extrae y valida datos de documentos no estructurados como comprobantes de ingresos. Power BI Embedded es una herramienta de visualización y Synapse Link exporta datos de Dataverse a analítica, ninguno automatiza estas tareas operativas."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Aseguradora): 3 empleados se dedicaban solo a enviar recordatorios de renovación y procesar formularios en papel. ¿Qué canal digital reemplazó el formulario en papel en la solución implementada?",
+      options: [
+      "Power Pages, para que el asegurado renueve en línea",
+      "Un flujo de Power Automate sin ninguna interfaz de usuario",
+      "AI Builder, actuando como canal de autoservicio",
+      "D365, usado directamente por el asegurado sin portal"
+      ],
+      answer: [0],
+      explanation: "Power Pages provee el portal externo donde el asegurado puede renovar su póliza en línea, reemplazando el formulario físico. AI Builder solo interviene después, extrayendo datos si el formulario llega en PDF; D365 es el sistema interno que se actualiza, no el canal del asegurado.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Aseguradora): Power Automate envía recordatorios 60/30/15 días antes del vencimiento. ¿Qué principio de automatización explica la mejora en la tasa de renovación (de 68% a 79%)?",
+      options: [
+      "Recordatorios personalizados y oportunos en momentos clave del ciclo de renovación",
+      "Enviar un único recordatorio genérico el día del vencimiento",
+      "Eliminar por completo los recordatorios para no molestar al cliente",
+      "Delegar todos los recordatorios al equipo de ventas manualmente"
+      ],
+      answer: [0],
+      explanation: "El caso indica que la mejora vino de recordatorios personalizados y oportunos (60/30/15 días antes), no de un único aviso genérico ni de depender de que el equipo humano recuerde contactar a cada cliente a tiempo.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Aseguradora): si un asegurado envía su formulario de renovación como PDF escaneado en vez de usar el portal, ¿qué componente de la solución extrae los datos automáticamente?",
+      options: [
+      "AI Builder, mediante Document Processing",
+      "Power Pages, procesando el PDF directamente sin AI Builder",
+      "D365, leyendo el PDF de forma nativa",
+      "El equipo de los 3 empleados, que sigue tipeando manualmente todos los PDF"
+      ],
+      answer: [0],
+      explanation: "AI Builder extrae los datos estructurados del PDF mediante Document Processing, permitiendo que el flujo continúe automatizado incluso cuando el asegurado no usa el portal Power Pages, sin que un empleado tenga que tipear el contenido.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Aseguradora): el proceso quedó 85% automatizado y los 3 empleados fueron reubicados a ventas. ¿Qué principio de transformación digital ilustra esta decisión de reubicación en vez de despido?",
+      options: [
+      "La automatización libera capacidad humana para trabajo de mayor valor, no solo reduce costos",
+      "La automatización siempre implica reducción de personal",
+      "Los empleados reubicados dejaron de ser necesarios en la empresa",
+      "El 15% restante del proceso no requiere ninguna intervención humana"
+      ],
+      answer: [0],
+      explanation: "El caso destaca explícitamente que los empleados fueron reubicados a ventas (mayor valor), reflejando que la automatización bien implementada libera capacidad para tareas de mayor impacto en vez de simplemente eliminar puestos. El 15% restante son justamente los casos con excepciones que sí requieren intervención humana.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Aseguradora): ¿cuáles DOS componentes de la solución trabajan juntos para que 'solo los casos con excepciones lleguen a los empleados'?",
+      options: [
+      "AI Builder extrayendo datos y detectando confianza baja en formularios PDF",
+      "D365 actualizando la póliza automáticamente cuando el proceso se completa sin excepciones",
+      "Un Excel compartido donde los 3 empleados registran manualmente cada renovación",
+      "Eliminar completamente D365 del proceso de renovación"
+      ],
+      answer: [0, 1],
+      explanation: "AI Builder filtra los casos que requieren revisión humana por baja confianza, mientras D365 se actualiza automáticamente en los casos sin excepciones, dejando a los empleados solo los casos que realmente necesitan su intervención. El Excel manual es justamente lo que la solución elimina.",
+      appliesTo: "caso"
     }
   ],
   40: [
@@ -5863,6 +6383,71 @@
       ],
       answer: [0, 1],
       explanation: "El arquitecto debe distinguir Power Automate (makers, SLA tolerante) de Logic Apps (IT, SLA estricto, EDI/B2B) y saber cuándo Azure Functions es necesario para código de alta performance. Elegir un servicio por 'branding' o asumir costos sin analizar el escenario no refleja pensamiento arquitectónico."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Candidato a Solution Architect): en sus primeros dos intentos de certificación, el candidato memorizaba preguntas de práctica y aprobaba con notas altas, pero fallaba al razonar sobre escenarios enterprise reales. ¿Qué gap describe mejor este patrón?",
+      options: [
+      "Conocimiento técnico certificado sin experiencia real en decisiones arquitectónicas de alto nivel",
+      "Falta de conocimiento técnico básico de Power Platform",
+      "Falta de tiempo disponible para estudiar",
+      "Falta de acceso a un ambiente de práctica"
+      ],
+      answer: [0],
+      explanation: "El caso es explícito: el candidato tenía excelentes habilidades técnicas y aprobaba certificaciones memorizando, pero le costaba razonar sobre negocio, restricciones, riesgos y trade-offs — el gap no era conocimiento técnico sino juicio arquitectónico.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Candidato a Solution Architect): en el tercer intento, el candidato analizó 5 casos de estudio reales de Microsoft, diseñó su propia arquitectura antes de ver la solución oficial, y comparó las diferencias. ¿Qué habilidad estaba entrenando específicamente con este método?",
+      options: [
+      "La capacidad de razonar y justificar decisiones arquitectónicas ante un escenario ambiguo",
+      "La memorización de opciones de respuesta de exámenes anteriores",
+      "La velocidad de lectura de documentación técnica",
+      "El manejo de la interfaz de Power Apps Studio"
+      ],
+      answer: [0],
+      explanation: "Diseñar su propia solución antes de ver la respuesta oficial y comparar diferencias entrena directamente el razonamiento arquitectónico ante ambigüedad, que es justo la habilidad que las preguntas de opción múltiple memorizadas no desarrollan.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Solution Architect): el candidato completó también el proyecto capstone (análogo al Módulo 41), lo que lo forzó a tomar y justificar más de 10 decisiones arquitectónicas con ADRs. ¿Qué valor agrega un ADR (Architecture Decision Record) en este contexto?",
+      options: [
+      "Documenta la decisión tomada, las alternativas consideradas y el porqué, dejando trazabilidad del razonamiento",
+      "Reemplaza la necesidad de un Discovery Workshop",
+      "Sirve únicamente como plantilla de diseño visual sin contenido técnico",
+      "Es un requisito exclusivo de proyectos con Azure DevOps, no de Power Platform"
+      ],
+      answer: [0],
+      explanation: "Un ADR documenta qué se decidió, qué alternativas se evaluaron y por qué se eligió una sobre otra, dejando trazabilidad del razonamiento arquitectónico — exactamente la habilidad de justificar decisiones que el candidato necesitaba desarrollar.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Solution Architect): el resultado final fue mejorar su capacidad de defender decisiones frente a stakeholders técnicos y ejecutivos. ¿Qué conclusión general sobre la preparación para el rol de arquitecto ilustra este caso?",
+      options: [
+      "Aprender a pensar como arquitecto (razonar sobre trade-offs) es distinto de memorizar respuestas correctas",
+      "Aprobar la certificación técnica es suficiente para desempeñarse como Solution Architect",
+      "La experiencia práctica no aporta nada que la teoría no cubra",
+      "Los casos de estudio de Microsoft no son útiles para prepararse"
+      ],
+      answer: [0],
+      explanation: "El caso concluye explícitamente que la diferencia fue 'aprender a pensar como arquitecto, no como alguien que recuerda respuestas' — la certificación técnica es necesaria pero no suficiente para el juicio arquitectónico que exige el rol.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Solution Architect): ¿cuáles DOS acciones concretas tomó el candidato en su tercer intento que marcaron la diferencia frente a los dos anteriores?",
+      options: [
+      "Analizar casos de estudio reales de Microsoft diseñando su propia solución antes de ver la oficial",
+      "Completar un proyecto capstone justificando decisiones arquitectónicas con ADRs",
+      "Repetir exactamente la misma estrategia de memorización de los intentos anteriores",
+      "Evitar cualquier escenario enterprise complejo durante su preparación"
+      ],
+      answer: [0, 1],
+      explanation: "El caso detalla estas dos acciones concretas como el cambio de estrategia del tercer intento. Repetir la memorización o evitar escenarios complejos es justamente lo que había fallado en los dos intentos previos.",
+      appliesTo: "caso"
     }
   ],
   41: [
@@ -5961,6 +6546,71 @@
       ],
       answer: [0, 1],
       explanation: "El Runbook de Operaciones documenta cómo monitorear y responder a incidentes, mientras el Stakeholder Communication Plan define el contenido, formato y frecuencia de comunicación para cada stakeholder, incluyendo al CFO. Un ADR documenta decisiones arquitectónicas, no reemplaza estos dos artefactos, y el Risk Register gestiona riesgos, no operación ni comunicación."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Cooperativa financiera): la aprobación de créditos tardaba 5 días hábiles mientras la competencia fintech lo hacía en 10 minutos, y cada oficina regional usaba su propio Excel inconsistente. ¿Qué gap arquitectónico describe mejor este problema antes del capstone?",
+      options: [
+      "Ausencia de una plataforma centralizada de datos y proceso, con visibilidad ejecutiva en tiempo real",
+      "Falta de licencias de Power BI Premium",
+      "Falta de un Field Service Mobile configurado",
+      "Falta de Copilot Studio en el proceso de aprobación"
+      ],
+      answer: [0],
+      explanation: "El problema central era la fragmentación: cada oficina con su propio Excel, sin sistema centralizado ni visibilidad en tiempo real para la sede central, lo que explica tanto la lentitud como la inconsistencia de datos.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Cooperativa financiera): el cumplimiento de la Ley 1581 en Colombia y las regulaciones de la Superintendencia de Bancos en Ecuador y Perú no estaba documentado. ¿Qué actividad del ciclo de vida del proyecto debía capturar estos requisitos regulatorios desde el inicio?",
+      options: [
+      "El Discovery Workshop y el Risk Register, identificando restricciones regulatorias por país",
+      "El Go-Live Checklist, al final del proyecto",
+      "El Runbook de Operaciones, después de producción",
+      "El Weekly Digest del CoE Starter Kit"
+      ],
+      answer: [0],
+      explanation: "Los requisitos regulatorios por país (Ley 1581, Superintendencia de Bancos) debían identificarse desde el Discovery Workshop y quedar reflejados en el Risk Register, no descubrirse tarde en el proyecto o al momento del go-live.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Cooperativa financiera): el 70% de las solicitudes de crédito ahora se resuelve en 4 horas, y el 30% restante sigue en revisión humana pero con la información ya preparada automáticamente. ¿Qué patrón de diseño de solución refleja este resultado?",
+      options: [
+      "Automatización con human-in-the-loop para los casos que requieren juicio humano",
+      "Automatización del 100% de los casos sin ninguna excepción",
+      "Eliminar por completo la revisión humana del proceso de crédito",
+      "Mantener el proceso 100% manual como antes, sin ningún cambio"
+      ],
+      answer: [0],
+      explanation: "El resultado describe un patrón de human-in-the-loop: la mayoría de los casos se resuelve automáticamente, mientras los casos que requieren juicio humano llegan ya con la información preparada, acelerando incluso la parte manual del proceso.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Cooperativa financiera): el costo del sistema resultó 60% menor que la solución legacy que cotizaban antes de conocer Power Platform. ¿Qué argumento de negocio ilustra mejor este resultado para justificar la elección de la plataforma?",
+      options: [
+      "Power Platform puede ofrecer una alternativa de menor costo total frente a soluciones legacy a medida, sin sacrificar el resultado funcional",
+      "El costo de las soluciones legacy siempre es menor que Power Platform",
+      "El 60% de ahorro se debió únicamente a reducir personal",
+      "El costo de licenciamiento de Power Platform es irrelevante para la decisión arquitectónica"
+      ],
+      answer: [0],
+      explanation: "El caso usa la comparación de costos como argumento de negocio: la solución en Power Platform logró el mismo (o mejor) resultado funcional a un costo total significativamente menor que la alternativa legacy cotizada previamente.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Cooperativa financiera): ¿cuáles DOS resultados del capstone reflejan directamente el cierre exitoso de los gaps identificados al inicio del caso?",
+      options: [
+      "Tiempo de aprobación reducido de 5 días a 4 horas para el 70% de solicitudes",
+      "Cumplimiento regulatorio documentado y auditado en los 3 países",
+      "Eliminación total de la necesidad de revisión humana en cualquier caso",
+      "Migración de la cooperativa a un tenant distinto en cada país"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta explícitamente estos dos resultados como cierre de los gaps de velocidad y cumplimiento regulatorio identificados al inicio. El 30% de casos sigue requiriendo revisión humana, y no se describe ninguna migración de tenants por país.",
+      appliesTo: "caso"
     }
   ],
   42: [
