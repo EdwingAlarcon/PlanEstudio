@@ -537,6 +537,40 @@ una dependencia externa a esta sesión.
 No fusionar el progreso de `preparar-entorno` con el progreso académico ni con `practice-progress` —
 son y deben seguir siendo tres stores independientes.
 
+## Sprint en curso — Diagnóstico de caso aplicado (piloto, NO iniciado)
+
+**Estado: solo diseñado y acordado con el usuario en conversación (2026-08-03/04). Cero código, cero
+contenido escrito todavía.** Contexto para quien retome esto (Codex u otra sesión):
+
+- Origen: el usuario preguntó cómo funcionan las secciones "Casos Reales de Negocio" de cada módulo
+  (75 módulos, 1 por módulo, sección 4 del formato fijo de 7). Se confirmó por código: son narrativa
+  de lectura (empresa ficticia distinta por módulo, ej. "NovaBio" en Módulo 1), **sin validación, sin
+  ejercicio** — 0 labs las replican (los 72 labs usan una empresa ficticia recurrente distinta, "SIT",
+  y sí son hands-on paso a paso). El usuario esperaba que los Casos Reales también fueran guiados.
+- Decisión acordada: no reescribir los 75 casos como labs completos (duplicaría el trabajo de los 72
+  labs ya existentes, alto riesgo de calidad si se hace de golpe). En su lugar, agregar un
+  **"Diagnóstico de caso aplicado"** al final de cada Caso Real de Negocio: 4-6 preguntas de
+  *aplicación/decisión* (no de memoria — tipo "dado este problema, ¿qué componente usarías"),
+  auto-calificadas al instante.
+- Mecanismo técnico ya identificado y reutilizable, sin construir nada nuevo: `quiz-engine.ts` +
+  `quiz-panel.tsx` (el motor de quiz existente, 43 tests, patrón visual "Quiz Option Button" de 3
+  estados ya documentado en DESIGN.md) sirve tal cual — mismo schema `Question` (`moduleId`, `type`,
+  `prompt`, `options`, `answer`, `explanation`). Se necesita un campo nuevo para distinguir estas
+  preguntas de las del quiz normal del módulo (p. ej. `appliesTo: "quiz" | "caso"`) para que no se
+  mezclen con el pool del simulador ni contaminen el score del quiz de módulo — el "Diagnóstico de
+  caso" se trackea como señal aparte.
+- Escala real: 4-6 preguntas × 75 módulos = **300-450 preguntas nuevas**, casi duplica el banco actual
+  (508). Por eso el plan acordado es **piloto primero**, no todo de una vez:
+  1. Escribir el Diagnóstico de caso aplicado para 5 módulos piloto: **Módulo 1, 9, 18, 31, 53** (uno
+     por nivel: Básico, Intermedio, Avanzado, Arquitecto, IA/D365).
+  2. Validar tono/dificultad/formato con el usuario antes de tocar los 70 módulos restantes.
+  3. Solo tras aprobación del piloto, escalar al resto.
+- **Próximo paso concreto al retomar**: extender el tipo `Question` (`quiz-engine.ts`) y el formato de
+  `evaluaciones-simulador.js`/`questions-parser.ts` con el campo de distinción, escribir las preguntas
+  piloto de los 5 módulos listados, montar el componente de diagnóstico bajo la sección "Caso Real de
+  Negocio" en `markdown-renderer.tsx` o donde se renderice el contenido de módulo, correr
+  `validate:content` + lint + tsc + tests + build antes de mostrar el piloto al usuario.
+
 ## Cómo continuar
 
 - El usuario normalmente pide sprints en el orden de la lista de pendientes de arriba, uno por turno,
