@@ -578,13 +578,31 @@ completado en el mismo día.** Contexto para quien retome esto (Codex u otra ses
   37.7s en una navegación simple, consistente con máquina bajo carga tras una sesión larga de
   builds/tests repetidos, no con una regresión real. Si esto se repite en sesiones futuras, correr
   los tests fallidos en aislamiento (`npx playwright test -g "<nombre>"`) antes de asumir un bug.
-- **Próximo paso al retomar**: continuar escalando nivel por nivel, un commit por nivel, en este
-  orden sugerido: Intermedio (10-17, 8 módulos), Avanzado (19-30, 12 módulos, módulo 18 ya
-  cubierto), Arquitecto (32-41, 10 módulos, módulo 31 ya cubierto), IA (42-52+54-55, 13 módulos,
-  módulo 53 ya cubierto), D365 (56-65, 10 módulos), RPA (66-75, 10 módulos). Mismo patrón: leer el
-  "Caso Real de Negocio" real de cada módulo, 5 preguntas `appliesTo: "caso"` al final del array
-  del módulo en `evaluaciones-simulador.js`, regenerar con `extract-questions.mjs`, correr
-  `validate:content` + lint + tsc + tests + build + e2e antes de cada commit.
+- **Nivel Intermedio completado** (2026-08-04, mismo día): 40 preguntas nuevas (5 por módulo)
+  para los módulos 10-17 (módulo 9 ya cubierto por el piloto), ancladas a sus Casos Reales
+  (Banco regional/Component Library, Empresa importadora/flujos, Cadena de retail/RLS-DAX,
+  Aseguradora/JS-PCF, Distribuidora/Custom Connector CUFE, Mesa de ayuda IT/Copilot Studio,
+  Firma de consultoría/ALM, Proyecto Integrador Nivel 2). Total banco: 608 preguntas (508 quiz +
+  100 caso). Nivel Intermedio completo (módulos 9-17) ya tiene Diagnóstico de caso.
+- **Confirmación adicional de flakiness ambiental (Nivel Intermedio)**: el test
+  "sidebar mantiene D365 consistente en rutas transversales" volvió a fallar por timeout de
+  navegación (`page.goto` a `/dynamics-365`, página con mucho contenido) tanto con los cambios
+  del Nivel Intermedio aplicados como con `git stash` (código exactamente igual al ya commiteado
+  y desplegado con éxito en CI, commit `cab2e97`). Esto descarta de forma concluyente que sea un
+  problema del contenido nuevo — es degradación de la máquina local tras muchas horas de
+  builds/dev-servers/tests repetidos en la misma sesión. **CI en GitHub Actions (máquina limpia)
+  no mostró este problema** en ningún run de este sprint; la validación de negocio para cada
+  nivel se apoya en: unit tests (322/322), lint, tsc y build siempre verdes localmente, más el
+  resultado real de CI tras cada push.
+- **Próximo paso al retomar**: continuar escalando nivel por nivel, un commit por nivel. Hechos:
+  Básico (1-8) e Intermedio (9-17). Orden sugerido para lo que falta: Avanzado (19-30, 12
+  módulos, módulo 18 ya cubierto), Arquitecto (32-41, 10 módulos, módulo 31 ya cubierto), IA
+  (42-52+54-55, 13 módulos, módulo 53 ya cubierto), D365 (56-65, 10 módulos), RPA (66-75, 10
+  módulos). Mismo patrón: leer el "Caso Real de Negocio" real de cada módulo, 5 preguntas
+  `appliesTo: "caso"` al final del array del módulo en `evaluaciones-simulador.js`, regenerar con
+  `extract-questions.mjs`, correr `validate:content` + lint + tsc + tests + build antes de cada
+  commit (e2e es opcional/informativo en máquina local larga — ver nota de flakiness arriba; el
+  run de CI en GitHub Actions tras el push es la validación real de e2e).
 
 ### Contexto original del diseño (2026-08-03/04, antes de implementar)
 

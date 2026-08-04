@@ -2,7 +2,7 @@
 // Source: docs/javascripts/evaluaciones-simulador.js
 // Regenerate: node scripts/extract-questions.mjs  (or: cd app-elearning && npm run build)
 //
-// 75 modules, 568 questions total.
+// 75 modules, 608 questions total.
 
 export type QuestionType = "single" | "multi";
 
@@ -1412,6 +1412,71 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       answer: [0],
       explanation: "Lazy Loading distribuye la carga de datos moviéndola de App.OnStart al evento OnVisible de cada pantalla, cargando solo lo necesario cuando el usuario navega a ella, lo cual reduce drásticamente el tiempo de apertura inicial. Named Formulas ayudan con cálculos derivados, pero no resuelven por sí solas la carga inicial de datos remotos.",
     },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Banco regional): 15 apps Canvas tenían su propio header, colores y estilos; un cambio de branding requería actualizar las 15 manualmente. ¿Qué mecanismo resuelve la raíz de ese problema?",
+      options: [
+      "Duplicar el código de la app 15 veces con los nuevos colores",
+      "Una Component Library con el tema corporativo centralizado",
+      "Aumentar el número de desarrolladores asignados al mantenimiento",
+      "Migrar las 15 apps a Model-Driven Apps"
+      ],
+      answer: [1],
+      explanation: "Una Component Library centraliza el diseño en un solo lugar; al actualizarla y publicarla, todas las apps que la consumen pueden aceptar el cambio en un clic, en vez de editarse una por una.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Banco regional): tras publicar un cambio en la Component Library, ¿qué debe hacer cada app consumidora para reflejar el cambio?",
+      options: [
+      "Reconstruirse completamente desde cero",
+      "Aceptar la actualización del componente desde Insertar → Componentes → ícono de actualización",
+      "Nada — el cambio se aplica automáticamente sin acción del maker",
+      "Reinstalar Power Apps Studio"
+      ],
+      answer: [1],
+      explanation: "El caso y la tabla de errores comunes lo indican explícitamente: la app debe aceptar la actualización manualmente desde el panel de componentes; no ocurre de forma automática ni requiere reconstruir la app.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Banco regional): ¿por qué las propiedades de salida de un componente reutilizable deben ser simples (texto, número, booleano) en vez de colecciones?",
+      options: [
+      "Porque Power Apps no permite colecciones en ningún componente",
+      "Porque mantiene el componente predecible, reutilizable entre apps y con mejor rendimiento",
+      "Porque las colecciones ocupan más espacio en disco",
+      "Porque solo los componentes con salidas simples pueden versionarse"
+      ],
+      answer: [1],
+      explanation: "Es una buena práctica explícita del caso: las salidas simples hacen que el componente sea más predecible y fácil de reutilizar en distintos contextos, sin acoplar la librería a estructuras de datos específicas.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Banco regional): ¿qué mecanismo se recomienda sobre las variables globales en App.OnStart para valores que no dependen de eventos de usuario?",
+      options: [
+      "Named Formulas declaradas en App.Formulas, evaluadas de forma lazy y reactiva",
+      "Más variables globales, pero declaradas al final del OnStart",
+      "Guardar los valores en una tabla de Dataverse en vez de la app",
+      "Colecciones creadas con ClearCollect en cada pantalla"
+      ],
+      answer: [0],
+      explanation: "El caso recomienda Named Formulas en App.Formulas por su evaluación lazy y reactiva, con mejor rendimiento que variables calculadas imperativamente en App.OnStart.",
+      appliesTo: "caso",
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Banco regional): ¿cuáles DOS resultados reales demuestra el caso tras adoptar la Component Library?",
+      options: [
+      "Reducción del tiempo de implementación de cambios visuales de 2 semanas a 2 horas",
+      "Ahorro de aproximadamente 40 horas al mes en mantenimiento",
+      "Eliminó por completo la necesidad de publicar actualizaciones en las apps",
+      "Cada app pasó a tener su propia copia independiente del componente"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta ambos resultados cuantificables. Las apps siguen necesitando aceptar la actualización publicada, y el punto de la Component Library es justamente evitar copias independientes por app.",
+      appliesTo: "caso",
+    },
   ],
   11: [
     {
@@ -1509,6 +1574,71 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       ],
       answer: [0],
       explanation: "Cuando una API externa pagina resultados con '@odata.nextLink', el patrón correcto es un Do Until que siga ese enlace mientras exista, acumulando los registros de cada página hasta agotar la paginación. Procesar solo la primera página perdería datos silenciosamente.",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa importadora): el flujo fallaba silenciosamente cuando la API de proveedores no respondía, sin que nadie se enterara del error. ¿Qué patrón del caso resuelve directamente ese problema?",
+      options: [
+      "Un Apply to Each adicional sobre el mismo paso",
+      "Scope + Run After, con registro de errores en SharePoint y notificación al admin",
+      "Aumentar el número de reintentos automáticos a 100",
+      "Eliminar el paso que llama a la API de proveedores"
+      ],
+      answer: [1],
+      explanation: "El patrón Scope + Run After (Try-Catch) es lo que permite capturar el error, registrarlo (en SharePoint) y notificar al admin, en vez de que el flujo falle sin dejar rastro.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa importadora): el cálculo del nivel de aprobación es idéntico para órdenes de compra y para contratos. ¿Qué técnica evita duplicar esa lógica en dos flujos distintos?",
+      options: [
+      "Copiar y pegar el mismo bloque de acciones en ambos flujos",
+      "Un Child Flow reutilizable que ambos flujos padre invocan",
+      "Una Business Rule de Dataverse",
+      "Una variable de entorno compartida"
+      ],
+      answer: [1],
+      explanation: "El caso usa un Child Flow reutilizable para el cálculo de aprobación, evitando duplicar la misma lógica en los flujos de órdenes de compra y de contratos.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa importadora): se necesita notificar a varias personas al mismo tiempo en vez de una tras otra, para reducir el tiempo total del flujo. ¿Qué técnica usa el caso?",
+      options: [
+      "Ramas paralelas (parallel branches) en vez de pasos secuenciales",
+      "Un Do Until que repite la notificación",
+      "Un trigger adicional por cada persona a notificar",
+      "Aumentar la frecuencia de ejecución del flujo"
+      ],
+      answer: [0],
+      explanation: "El caso reemplaza 3 pasos secuenciales por 1 paso paralelo (ramas paralelas), reduciendo el tiempo total de notificación al ejecutarlas simultáneamente.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Empresa importadora): ¿dónde debe estar guardado un Child Flow para que el flujo padre pueda usarlo de forma portable entre ambientes?",
+      options: [
+      "En cualquier ambiente, no importa cuál",
+      "En la misma solución que el flujo padre",
+      "En una carpeta local del desarrollador",
+      "Solo en el ambiente de Producción"
+      ],
+      answer: [1],
+      explanation: "El caso y la tabla de errores comunes lo indican: el Child Flow debe estar en la misma solución que el flujo padre para que la referencia se resuelva correctamente al moverse entre ambientes.",
+      appliesTo: "caso",
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Empresa importadora): ¿cuáles DOS resultados demuestra el caso tras aplicar Try-Catch, Child Flow y ramas paralelas?",
+      options: [
+      "Tiempo de flujo reducido de 4 minutos a 45 segundos",
+      "Tasa de errores silenciosos del 0%",
+      "El flujo dejó de necesitar conexión a la API de proveedores",
+      "El nivel de aprobación pasó a calcularse manualmente por un analista"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta explícitamente ambos resultados cuantificables. El flujo sigue dependiendo de la API de proveedores (ahora con manejo de errores) y el cálculo de aprobación sigue siendo automático vía el Child Flow.",
+      appliesTo: "caso",
     },
   ],
   12: [
@@ -1608,6 +1738,71 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       answer: [0],
       explanation: "RELATED() se usa en el contexto de fila del lado 'muchos' de una relación para traer un valor único desde la tabla del lado 'uno', como la Categoría del producto de una venta. RELATEDTABLE hace lo inverso (retorna múltiples filas relacionadas), y las otras funciones no navegan relaciones de esta forma.",
     },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Cadena de retail): los gerentes veían ventas de todas las regiones y los vendedores necesitaban ver solo sus propios clientes. ¿Qué mecanismo de Power BI resuelve esto?",
+      options: [
+      "RLS (Row-Level Security) con roles distintos por perfil",
+      "Ocultar visualmente las columnas del reporte",
+      "Crear un archivo .pbix distinto para cada vendedor",
+      "Una medida DAX que oculte los totales"
+      ],
+      answer: [0],
+      explanation: "El caso implementa RLS con 3 roles (Director, Gerente Regional, Vendedor), cada uno filtrando realmente los datos a nivel de fila según el perfil — no solo ocultando visualmente columnas.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Cadena de retail): ¿dónde debe aplicarse (publicarse y asignarse) el RLS del caso para que los usuarios finales realmente lo experimenten?",
+      options: [
+      "Únicamente en Power BI Desktop, sin publicar",
+      "En el Dataset publicado en Power BI Service",
+      "En un archivo Excel adjunto al reporte",
+      "En la tabla de fechas del modelo"
+      ],
+      answer: [1],
+      explanation: "Es una buena práctica explícita del caso: RLS se aplica al Dataset en el Service (donde se asignan los roles a usuarios/grupos), no solo en Desktop.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Cadena de retail): se necesita comparar las ventas del periodo actual contra el mismo periodo del año anterior (YoY). ¿Qué técnica DAX usa el caso?",
+      options: [
+      "Time intelligence",
+      "RLS",
+      "Un Custom Connector",
+      "Una relación N:N nativa"
+      ],
+      answer: [0],
+      explanation: "El caso usa funciones de time intelligence de DAX para los comparativos año contra año (YoY), una capacidad distinta de RLS (seguridad) o de las relaciones del modelo.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Cadena de retail): ¿qué técnica del caso suaviza la estacionalidad en el dashboard ejecutivo para mostrar una tendencia más estable?",
+      options: [
+      "Una media móvil de 3 meses",
+      "Filtrar solo el último día del mes",
+      "Redondear todos los valores a miles",
+      "Eliminar los meses con ventas bajas del reporte"
+      ],
+      answer: [0],
+      explanation: "El caso usa una media móvil de 3 meses para suavizar picos y valles estacionales en el dashboard ejecutivo, sin distorsionar ni eliminar datos reales.",
+      appliesTo: "caso",
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Cadena de retail): ¿cuáles DOS prácticas del caso hacen que el modelo DAX sea confiable y mantenible?",
+      options: [
+      "Usar DIVIDE() en vez de '/' para evitar errores por división entre cero",
+      "Crear la tabla de fechas manualmente en vez de usar AutoDate/Time de Power BI",
+      "Concatenar todas las medidas en una única fórmula gigante para ahorrar tiempo",
+      "Aplicar el RLS solo en Power BI Desktop sin publicarlo al Service"
+      ],
+      answer: [0, 1],
+      explanation: "Ambas son buenas prácticas explícitas del caso. Concatenar medidas en una fórmula gigante dificulta el mantenimiento, y no publicar el RLS al Service significa que nunca se aplica realmente para los usuarios finales.",
+      appliesTo: "caso",
+    },
   ],
   13: [
     {
@@ -1705,6 +1900,71 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       ],
       answer: [0],
       explanation: "ComponentFramework.WebApi, accesible vía context.webAPI dentro del PCF, permite leer, crear, actualizar y eliminar registros de Dataverse sin depender de Xrm, heredando la autenticación del contexto de la plataforma. Xrm.Page es legacy y formContext pertenece a los formularios, no a los controles PCF.",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Aseguradora): los ajustadores aprobaban siniestros sin verificar que todos los documentos requeridos estuvieran adjuntos, generando errores. ¿Qué mecanismo del caso bloquea ese error antes de guardar?",
+      options: [
+      "Un reporte de Power BI que se revisa una vez por semana",
+      "JavaScript en el evento OnSave que verifica los documentos requeridos antes de permitir el cambio de estado",
+      "Un correo automático enviado después de guardar el siniestro",
+      "Una columna de texto donde el ajustador escribe si adjuntó todo"
+      ],
+      answer: [1],
+      explanation: "El caso describe validación JS en OnSave que impide el cambio de estado si faltan documentos — se previene el error antes de que ocurra, no se detecta después.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Aseguradora): se necesita mostrar visualmente el estado del siniestro con colores semáforo directamente en el formulario. ¿Qué componente del caso implementa esto?",
+      options: [
+      "Un control PCF (StatusBadge)",
+      "Una Business Rule con mensaje de texto",
+      "Un campo de solo lectura sin formato visual",
+      "Un dashboard de Power BI embebido"
+      ],
+      answer: [0],
+      explanation: "El caso usa un control PCF llamado StatusBadge para representar visualmente el estado del siniestro con colores semáforo directamente en el formulario.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Aseguradora): ¿por qué el script de validación debe usar executionContext.getFormContext() en vez de Xrm.Page?",
+      options: [
+      "Porque Xrm.Page es más rápido pero menos seguro",
+      "Porque Xrm.Page está deprecated y getFormContext() es el patrón vigente y recomendado",
+      "Porque Xrm.Page solo funciona en Internet Explorer",
+      "No hay diferencia real entre ambos"
+      ],
+      answer: [1],
+      explanation: "Es una buena práctica explícita del caso: Xrm.Page está deprecated; usar executionContext.getFormContext() es el enfoque correcto y soportado a futuro.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Aseguradora): ¿qué variante de PCF se prefiere en el caso, y por qué?",
+      options: [
+      "PCF Standard, porque es más simple de configurar",
+      "PCF Virtual (React), porque comparte el runtime de React del sistema",
+      "No importa la variante, el rendimiento es idéntico",
+      "PCF Virtual, porque no requiere compilación"
+      ],
+      answer: [1],
+      explanation: "El caso recomienda PCF Virtual (React) porque comparte el runtime de React ya cargado por la plataforma, evitando duplicar esa dependencia y mejorando el rendimiento frente a PCF Standard.",
+      appliesTo: "caso",
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Aseguradora): ¿cuáles DOS resultados demuestra el caso tras implementar la validación JS y el control PCF?",
+      options: [
+      "Reducción de errores de proceso del 60%",
+      "Tiempo de auditoría de calidad reducido de 2 días a 4 horas por semana",
+      "Eliminación total del rol de ajustador de siniestros",
+      "El formulario dejó de requerir conexión a Dataverse"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente estos dos resultados. El ajustador sigue siendo parte del proceso (ahora con menos errores) y el formulario sigue dependiendo de Dataverse para guardar los datos.",
+      appliesTo: "caso",
     },
   ],
   14: [
@@ -1804,6 +2064,71 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       answer: [0],
       explanation: "Dynamic Values permite que el campo de un parámetro muestre opciones cargadas dinámicamente desde la API en tiempo de diseño, como una lista de proyectos. Set Query Parameter y Route Request son políticas de transformación de la llamada, no de generación de listas dinámicas.",
     },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Distribuidora): el proceso de facturación electrónica requería exportar a Excel, subir al portal del gobierno y copiar manualmente el código CUFE de vuelta al ERP. ¿Qué elimina ese proceso manual de raíz?",
+      options: [
+      "Un Custom Connector + Power Automate que automatiza el envío y captura la respuesta CUFE en tiempo real",
+      "Un recordatorio diario en el calendario del analista",
+      "Una plantilla de Excel más ordenada",
+      "Aumentar el número de analistas en el equipo de facturación"
+      ],
+      answer: [0],
+      explanation: "El caso automatiza el flujo completo (envío y captura de respuesta) con un Custom Connector integrado en Power Automate, eliminando los 8 pasos manuales previos.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Distribuidora): ¿qué evento de Dataverse dispara el flujo de facturación electrónica en el caso?",
+      options: [
+      "Que un usuario abra manualmente el registro del pedido",
+      "Que el pedido pase al estado 'Facturado'",
+      "Que pasen 24 horas desde la creación del pedido",
+      "Que el analista presione un botón en Excel"
+      ],
+      answer: [1],
+      explanation: "El caso especifica un trigger en Dataverse cuando el pedido pasa a 'Facturado' — un cambio de estado automático, no una acción manual periódica.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Distribuidora): ¿qué práctica evita que el conector deje de funcionar si la URL de la API del gobierno cambia?",
+      options: [
+      "Hardcodear la URL directamente en el conector",
+      "Usar parámetros de conexión en vez de URLs fijas",
+      "Duplicar el conector por cada URL posible",
+      "No es necesario prevenir esto, las URLs de gobierno nunca cambian"
+      ],
+      answer: [1],
+      explanation: "Es una buena práctica explícita del caso: nunca hardcodear URLs de API en el conector, usar parámetros de conexión que puedan actualizarse sin modificar el conector mismo.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Distribuidora): ¿qué mecanismo permite portar el conector entre ambientes (DEV/TEST/PROD) sin reconfigurar conexiones directas en cada flujo?",
+      options: [
+      "Guardar el conector en una solución y usar Connection References en los flujos",
+      "Copiar y pegar el conector manualmente en cada ambiente",
+      "Usar conexiones directas, una por flujo",
+      "No es posible portar Custom Connectors entre ambientes"
+      ],
+      answer: [0],
+      explanation: "El caso recomienda guardar el conector en una solución y usar Connection References (no conexiones directas) para que los flujos sean portables entre ambientes.",
+      appliesTo: "caso",
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Distribuidora): ¿cuáles DOS resultados demuestra el caso tras implementar el Custom Connector?",
+      options: [
+      "Cero errores de CUFE copiado incorrectamente",
+      "4 horas de trabajo manual diario eliminadas",
+      "Se eliminó la necesidad de facturar electrónicamente ante el gobierno",
+      "El ERP dejó de necesitar el código CUFE"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente estos dos resultados cuantificables. La facturación electrónica y el CUFE siguen siendo requisitos del proceso — ahora automatizados, no eliminados.",
+      appliesTo: "caso",
+    },
   ],
   15: [
     {
@@ -1901,6 +2226,71 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       ],
       answer: [0],
       explanation: "Los Knowledge Sources no se sincronizan automáticamente ante cambios en el contenido origen; es necesario actualizarlos o forzar el reindexado cuando el material cambia. Las trigger phrases y el canal no afectan la vigencia del contenido consultado por Generative Answers.",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Mesa de ayuda IT): el 70% de los tickets eran consultas de estado repetitivas que consumían 4 horas diarias de los analistas. ¿Qué solución del caso resuelve directamente ese volumen?",
+      options: [
+      "Contratar más analistas para el equipo de mesa de ayuda",
+      "Un bot de Copilot Studio integrado a Dataverse vía Power Automate",
+      "Un formulario de Power Apps para que los empleados llenen su propio ticket",
+      "Un dashboard de Power BI con el estado de los tickets"
+      ],
+      answer: [1],
+      explanation: "El caso implementa un bot de Copilot Studio que consulta Dataverse vía Power Automate para responder automáticamente las consultas de estado, liberando el tiempo de los analistas.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Mesa de ayuda IT): ¿por qué el caso recomienda mínimo 8 trigger phrases por topic, con variaciones naturales y errores tipográficos comunes?",
+      options: [
+      "Para cumplir un requisito técnico obligatorio de Copilot Studio",
+      "Para que el bot reconozca la intención del usuario aunque la formule de distintas formas",
+      "Porque cada trigger phrase consume una licencia distinta",
+      "Para que el bot responda más rápido"
+      ],
+      answer: [1],
+      explanation: "Los usuarios formulan la misma pregunta de muchas maneras; variar las trigger phrases (incluyendo errores comunes) mejora la tasa de reconocimiento del topic correcto.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Mesa de ayuda IT): se necesita compartir un valor entre varios topics del bot, no solo dentro de uno. ¿Qué tipo de variable debe usarse?",
+      options: [
+      "Topic.X, porque es la variable estándar",
+      "Global.X, ya que Topic.X es local a un solo topic",
+      "Una variable de entorno de Power Platform",
+      "No es posible compartir variables entre topics"
+      ],
+      answer: [1],
+      explanation: "El caso indica que las variables Topic.X son locales al topic donde se declaran; para compartir un valor entre varios topics se debe usar Global.X.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Mesa de ayuda IT): ¿qué salvaguarda debe tener siempre el bot para no dejar al usuario sin respuesta cuando no entiende la pregunta?",
+      options: [
+      "Un Fallback topic personalizado con nodo de 'no entendí'",
+      "Cerrar la conversación automáticamente",
+      "Redirigir siempre a un analista humano sin excepción",
+      "Repetir la última respuesta dada"
+      ],
+      answer: [0],
+      explanation: "El caso indica como buena práctica agregar siempre un nodo de 'no entendí' en el Fallback topic personalizado, en vez de dejar la conversación sin una respuesta útil.",
+      appliesTo: "caso",
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Mesa de ayuda IT): ¿cuáles DOS resultados demuestra el caso tras implementar el bot?",
+      options: [
+      "65% de las consultas resueltas por el bot",
+      "Tiempo de respuesta reducido de 2 horas a instantáneo",
+      "Eliminación total del equipo de analistas de mesa de ayuda",
+      "El bot dejó de necesitar el canal de Teams para funcionar"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente estos dos resultados cuantificables. Los analistas siguen atendiendo el 35% restante de consultas, y el canal Teams es parte central de la solución, no algo prescindible.",
+      appliesTo: "caso",
     },
   ],
   16: [
@@ -2000,6 +2390,71 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       answer: [0],
       explanation: "El nivel de acceso 'Organización' en un Security Role otorga el privilegio sobre todos los registros de la tabla en el tenant, independientemente del propietario o la Business Unit, a diferencia de los niveles Usuario o Unidad de Negocio que restringen el alcance. Es el nivel más amplio dentro del modelo de seguridad de Dataverse.",
     },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Firma de consultoría): al exportar soluciones a clientes, los flujos fallaban porque tenían la URL y credenciales del entorno de desarrollo hardcodeadas. ¿Qué mecanismo resuelve esto?",
+      options: [
+      "Environment Variables y Connection References",
+      "Aumentar el timeout de los flujos",
+      "Exportar siempre en modo Unmanaged",
+      "Pedir al cliente que use las mismas credenciales del desarrollador"
+      ],
+      answer: [0],
+      explanation: "El caso mueve URLs y credenciales a Environment Variables y convierte las conexiones a Connection References, permitiendo que cada cliente configure sus propios valores al importar.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Firma de consultoría): ¿qué modo de exportación debe usarse siempre para mover soluciones a TEST/UAT/PROD, según las buenas prácticas del caso?",
+      options: [
+      "Managed, nunca Unmanaged a producción",
+      "Unmanaged, porque permite editar directamente en el cliente",
+      "Cualquiera de los dos, no hay diferencia real",
+      "Managed solo en DEV, Unmanaged en el resto"
+      ],
+      answer: [0],
+      explanation: "El caso es explícito: exportar siempre en modo Managed para TEST/UAT/PROD, nunca Unmanaged a producción, para proteger la integridad de los componentes en el ambiente del cliente.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Firma de consultoría): ¿por qué nunca se debe editar un componente directamente en PROD, según el caso?",
+      options: [
+      "Porque PROD no permite ediciones técnicamente",
+      "Porque los cambios deben originarse en DEV, empaquetarse en una solución e importarse — editar en PROD rompe el ALM",
+      "Porque solo el administrador global puede editar en PROD",
+      "Porque editar en PROD consume más licencias"
+      ],
+      answer: [1],
+      explanation: "El flujo correcto de ALM es DEV → solución → importar; editar directamente en PROD rompe la trazabilidad de cambios y desincroniza el ambiente productivo del control de versiones.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Firma de consultoría): la firma entrega una DLP policy estándar como parte de la implementación. ¿Qué recomendación de DLP para producción menciona el caso?",
+      options: [
+      "Permitir todos los conectores sin restricción para no limitar al cliente",
+      "Bloquear HTTP genérico en producción si no es necesario",
+      "Desactivar DLP en producción para mayor flexibilidad",
+      "Aplicar DLP solo en el ambiente de desarrollo"
+      ],
+      answer: [1],
+      explanation: "El caso recomienda bloquear el conector HTTP genérico en producción cuando no es necesario, reduciendo el riesgo de integraciones no controladas.",
+      appliesTo: "caso",
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Firma de consultoría): ¿cuáles DOS resultados demuestra el caso tras estandarizar Environment Variables y Connection References?",
+      options: [
+      "Tiempo de implementación en un nuevo cliente reducido de 3 días a 4 horas",
+      "Cero tickets de 'el flujo falla' por credenciales incorrectas",
+      "Ya no fue necesario que el cliente configurara ninguna credencial propia",
+      "Se eliminó la necesidad de exportar en modo Managed"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente estos dos resultados. El wizard de importación sigue guiando al cliente para configurar SUS propias credenciales (no las elimina), y el modo Managed sigue siendo obligatorio para TEST/UAT/PROD.",
+      appliesTo: "caso",
+    },
   ],
   17: [
     {
@@ -2097,6 +2552,71 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       ],
       answer: [0, 1],
       explanation: "RLS con USERPRINCIPALNAME() filtra realmente los datos del vendedor en el modelo de Power BI, y un topic con Acción que invoca un flujo con el trigger correcto permite que el bot consulte Dataverse y devuelva datos actualizados. Ocultar columnas visualmente no es seguridad real, y reemplazar el modelo de Power BI no resuelve el requisito de reporting analítico.",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Proyecto Integrador): pipeline en Excel, sin visibilidad para gerentes, propuestas aprobadas por WhatsApp. ¿Qué componente da a los vendedores en campo una app simple y mobile-friendly para capturar datos?",
+      options: [
+      "Model-Driven App",
+      "Canvas App",
+      "Power BI",
+      "Copilot Studio"
+      ],
+      answer: [1],
+      explanation: "El caso asigna explícitamente la Canvas App mobile-friendly para los vendedores en campo — una experiencia simple orientada a captura rápida desde el celular.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Proyecto Integrador): los gerentes necesitan una vista de administración completa del pipeline, con capacidad de gestión de datos tabular. ¿Qué componente cubre ese rol?",
+      options: [
+      "Canvas App",
+      "Model-Driven App",
+      "Power Automate",
+      "Un bot de Teams"
+      ],
+      answer: [1],
+      explanation: "El caso asigna la Model-Driven App a los gerentes, orientada a gestión de datos con vistas y formularios administrativos — distinto del rol de captura simple de la Canvas App.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Proyecto Integrador): se necesita que las aprobaciones de propuestas queden formalizadas con historial auditable (audit trail), reemplazando las aprobaciones por WhatsApp. ¿Qué componente lo implementa?",
+      options: [
+      "Power BI",
+      "Power Automate",
+      "Canvas App, con un botón de aprobar",
+      "Un canal de Teams sin flujo asociado"
+      ],
+      answer: [1],
+      explanation: "El caso asigna a Power Automate la formalización de las aprobaciones con audit trail, algo que un simple botón o un canal de chat no garantizan por sí solos.",
+      appliesTo: "caso",
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Proyecto Integrador): según las buenas prácticas del caso, ¿qué se debe diseñar PRIMERO en un proyecto integrado, antes de construir cualquier app?",
+      options: [
+      "El modelo de datos",
+      "El bot de Teams",
+      "El dashboard de Power BI",
+      "El esquema de colores de la Canvas App"
+      ],
+      answer: [0],
+      explanation: "El caso indica explícitamente: 'diseñar el modelo de datos PRIMERO antes de construir cualquier app' — todos los demás componentes (Canvas, Model-Driven, flujos, BI, bot) dependen de ese modelo.",
+      appliesTo: "caso",
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Proyecto Integrador): ¿cuáles DOS resultados demuestra el caso tras implementar la solución integrada?",
+      options: [
+      "Tiempo de aprobación de propuestas reducido de 3 días a 4 horas",
+      "Adopción del sistema del 90% en el primer mes",
+      "Eliminación total de la necesidad de un modelo de datos centralizado",
+      "El bot de Teams reemplazó completamente a la Canvas App"
+      ],
+      answer: [0, 1],
+      explanation: "El caso reporta específicamente estos dos resultados. El modelo de datos centralizado es la base de toda la solución, y el bot de Teams cumple un rol de consulta rápida, no reemplaza a la Canvas App de captura.",
+      appliesTo: "caso",
     },
   ],
   18: [
