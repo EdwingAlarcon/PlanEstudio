@@ -8991,6 +8991,71 @@
       ],
       answer: [0],
       explanation: "El Solution Architect es quien diseña la arquitectura común (seguridad, ALM, integración) que conecta las distintas aplicaciones D365 CE dentro de un mismo proyecto Customer Engagement."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (aseguradora Sales + Service): ¿cuál fue el error de gobierno principal al implementar Sales y Customer Service en proyectos separados?",
+      options: [
+        "Tratar aplicaciones que comparten Dataverse como proyectos independientes sin modelo común de datos y seguridad",
+        "Usar Business Units en Sales",
+        "Usar equipos en Customer Service",
+        "Contratar consultoras distintas, aunque hubieran compartido arquitectura"
+      ],
+      answer: [0],
+      explanation: "El problema no fue una técnica aislada, sino no gobernar Sales y Service como un ecosistema común sobre Dataverse desde el día uno.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (aseguradora Sales + Service): ¿qué consecuencia directa tuvo no reutilizar las tablas ya pobladas por Sales?",
+      options: [
+        "Contactos duplicados y retrabajo de unificación posterior",
+        "Mayor velocidad de implementación sin impacto futuro",
+        "Eliminación automática del modelo de seguridad",
+        "Separación completa y segura entre ventas y servicio"
+      ],
+      answer: [0],
+      explanation: "El proyecto de Service creó duplicidad de contactos al no partir del modelo existente de Sales; luego hubo que unificar duplicados.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (aseguradora Sales + Service): ¿cuáles DOS frentes tuvo que corregir la organización meses después?",
+      options: [
+        "Unificar duplicados de Contact",
+        "Migrar dos modelos de seguridad a uno coherente",
+        "Eliminar Dataverse para separar productos",
+        "Reemplazar Sales por Customer Insights"
+      ],
+      answer: [0, 1],
+      explanation: "La corrección dolorosa fue de datos y seguridad: deduplicar contactos y converger modelos incompatibles.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (aseguradora Sales + Service): ¿qué decisión temprana habría evitado el retrabajo?",
+      options: [
+        "Definir arquitectura común de Dataverse, seguridad y ownership antes de iniciar implementaciones separadas",
+        "Impedir que Customer Service use tablas estándar",
+        "Crear una base de datos externa para cada app",
+        "Ocultar contactos de Sales al equipo de Service"
+      ],
+      answer: [0],
+      explanation: "Aunque los productos se implementen en fases, deben compartir una arquitectura común desde el inicio.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (aseguradora Sales + Service): ¿qué lección resume mejor el caso?",
+      options: [
+        "Sales y Customer Service comparten Dataverse desde el día uno, se implementen juntos o no",
+        "Cada app de D365 debe tener su propio Contact independiente",
+        "Los modelos de seguridad incompatibles se resuelven solos con el tiempo",
+        "Dataverse solo importa cuando el proyecto ya está en producción"
+      ],
+      answer: [0],
+      explanation: "El caso cierra explícitamente con esta lección de gobierno de proyecto.",
+      appliesTo: "caso"
     }
   ],
   57: [
@@ -9089,6 +9154,71 @@
       ],
       answer: [0],
       explanation: "Si una fuente se actualiza mensualmente y otra a diario, una medida que combina ambas refleja información desactualizada de la fuente más lenta — hay que comunicar ese matiz al interpretar el resultado."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (retail Customer 360): ¿por qué el 12% de clientes con compras físicas quedó sin unificar?",
+      options: [
+        "Porque se asumió que el email bastaba como regla de matching, pero el POS no siempre tenía email",
+        "Porque Customer Insights - Data no puede ingerir datos de POS",
+        "Porque Dataverse no admite clientes sin email",
+        "Porque se usó teléfono + nombre normalizado como regla primaria"
+      ],
+      answer: [0],
+      explanation: "El caso indica que muchos clientes de tienda física no tenían email en POS, por lo que el matching solo por email falló.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (retail Customer 360): ¿qué corrección permitió mejorar la unificación de perfiles?",
+      options: [
+        "Agregar una regla secundaria por teléfono + nombre normalizado y reprocesar la ingesta",
+        "Eliminar las compras de tienda física del modelo",
+        "Crear un cliente nuevo en cada visita",
+        "Usar solo el ID interno del CRM, ignorando POS"
+      ],
+      answer: [0],
+      explanation: "La corrección descrita fue añadir una regla secundaria y reprocesar la ingesta completa.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (retail Customer 360): ¿cuáles DOS impactos tuvo una regla de matching insuficiente?",
+      options: [
+        "Clientes aparecían como nuevos en cada visita",
+        "Se perdía historial de fidelización",
+        "Se duplicaban automáticamente todos los productos",
+        "Se bloqueaba la ingesta de Dataverse por completo"
+      ],
+      answer: [0, 1],
+      explanation: "El caso menciona que los clientes no unificados aparecían como nuevos y perdían historial de fidelización.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (retail Customer 360): ¿por qué la regla de matching es una decisión de negocio y no solo técnica?",
+      options: [
+        "Porque define si el perfil 360 representa realmente al cliente y su relación histórica con la empresa",
+        "Porque solo el área legal puede escribir expresiones de matching",
+        "Porque el equipo técnico no participa en Customer Insights",
+        "Porque no afecta métricas ni segmentación"
+      ],
+      answer: [0],
+      explanation: "La forma de unir identidades determina fidelización, segmentación y lectura del cliente; por eso requiere decisión de negocio.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (retail Customer 360): antes de activar el modelo en producción, ¿qué prueba habría revelado el problema?",
+      options: [
+        "Validar muestras de clientes con compras POS sin email y comprobar si se unifican correctamente",
+        "Revisar solo clientes con email completo",
+        "Probar únicamente registros creados desde Sales",
+        "Confirmar que la ingesta termina sin errores técnicos"
+      ],
+      answer: [0],
+      explanation: "El caso falló en el segmento sin email. Una prueba con esa muestra habría evidenciado la brecha del matching.",
+      appliesTo: "caso"
     }
   ],
   58: [
@@ -9187,6 +9317,71 @@
       ],
       answer: [0],
       explanation: "El Scheduling Assistant sugiere los mejores candidatos según skill, cercanía y disponibilidad, pero la decisión final la toma el dispatcher — es el punto intermedio entre arrastrar manualmente y automatizar por completo con RSO."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (mantenimiento de ascensores): ¿qué configuración faltante permitió cierres incompletos de mantenimiento preventivo?",
+      options: [
+        "Incident Type Tasks obligatorias para pasos críticos como revisar el freno de emergencia",
+        "Un dashboard de ventas",
+        "Una tabla custom de impuestos",
+        "Una regla de matching por email"
+      ],
+      answer: [0],
+      explanation: "Sin tareas obligatorias en el Incident Type, cada técnico decidía su checklist y omitía pasos críticos.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (mantenimiento de ascensores): ¿qué hallazgo reveló la auditoría de seguridad?",
+      options: [
+        "El 30% de cierres no había verificado el freno de emergencia",
+        "Todos los técnicos usaban la app móvil offline correctamente",
+        "La empresa tenía demasiados Incident Type Tasks",
+        "RSO asignaba rutas demasiado cortas"
+      ],
+      answer: [0],
+      explanation: "La auditoría detectó omisión de un paso crítico en 30% de mantenimientos preventivos.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (mantenimiento de ascensores): ¿cuáles DOS riesgos acumuló la empresa por no modelar tareas obligatorias?",
+      options: [
+        "Riesgo legal por cierres incompletos",
+        "Riesgo de seguridad por omitir verificaciones críticas",
+        "Pérdida automática de licencias Field Service",
+        "Imposibilidad de crear Work Orders"
+      ],
+      answer: [0, 1],
+      explanation: "El caso contrasta una corrección simple con meses de riesgo legal y de seguridad acumulado.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (mantenimiento de ascensores): ¿qué corrección de bajo esfuerzo resolvía la causa raíz?",
+      options: [
+        "Agregar las tareas obligatorias al Incident Type",
+        "Crear una app Canvas separada para cada técnico",
+        "Eliminar auditorías de seguridad",
+        "Pedir a los técnicos recordar pasos de memoria"
+      ],
+      answer: [0],
+      explanation: "La corrección fue una configuración directa: convertir pasos críticos en tareas obligatorias del Incident Type.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (mantenimiento de ascensores): ¿qué principio de Field Service demuestra este caso?",
+      options: [
+        "Los procedimientos críticos deben modelarse como checklist operativo obligatorio, no quedar al criterio individual",
+        "Los técnicos siempre deben decidir libremente qué revisar",
+        "Los Incident Types solo sirven para reportes comerciales",
+        "La app móvil reemplaza cualquier configuración de proceso"
+      ],
+      answer: [0],
+      explanation: "Field Service debe codificar el procedimiento operativo para garantizar consistencia, auditoría y seguridad.",
+      appliesTo: "caso"
     }
   ],
   59: [
@@ -9285,6 +9480,71 @@
       ],
       answer: [0],
       explanation: "F&O tiene su propio modelo de seguridad basado en duties/privileges, distinto del modelo de Security Roles de Dataverse — asumir que son equivalentes sin mapearlos explícitamente es un error común al diseñar dual-write."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (ERP vs Dataverse): ¿qué error cometió el distribuidor al crear una tabla custom de impuestos y crédito en Dataverse?",
+      options: [
+        "Duplicó lógica fiscal y de crédito que pertenecía al ERP regulatoriamente actualizado",
+        "Usó Dataverse para almacenar oportunidades",
+        "Permitió que Finanzas conciliara información",
+        "Integró Sales con un sistema legado"
+      ],
+      answer: [0],
+      explanation: "El problema fue replicar lógica regulatoria del ERP en Dataverse por conveniencia de UI.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (ERP vs Dataverse): ¿qué ocurrió cuando cambió la tasa de IVA regional?",
+      options: [
+        "El ERP se actualizó, pero la réplica en Dataverse quedó obsoleta y aprobó cotizaciones con impuestos incorrectos",
+        "Dataverse actualizó automáticamente la tabla custom",
+        "Sales bloqueó todas las oportunidades",
+        "El sistema heredado dejó de existir"
+      ],
+      answer: [0],
+      explanation: "La duplicación hizo que una regla fiscal se actualizara en un sistema pero no en la copia custom de Dataverse.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (ERP vs Dataverse): ¿cuáles DOS tipos de lógica debían permanecer en el sistema ERP o equivalente?",
+      options: [
+        "Cálculo fiscal",
+        "Validación de crédito del cliente",
+        "Color de la vista de oportunidades",
+        "Texto de ayuda del formulario comercial"
+      ],
+      answer: [0, 1],
+      explanation: "El caso menciona impuestos y crédito como lógica que pertenece al sistema que la mantiene regulatoriamente actualizada.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (ERP vs Dataverse): ¿cuál habría sido un diseño más sano para Sales?",
+      options: [
+        "Consultar o integrarse con el sistema dueño de impuestos/crédito en vez de replicar esa lógica en una tabla custom",
+        "Copiar manualmente reglas fiscales cada mes sin ownership",
+        "Permitir que cada vendedor decida impuestos",
+        "Bloquear toda integración entre CE y ERP"
+      ],
+      answer: [0],
+      explanation: "La solución correcta respeta el ownership: Sales puede consumir el resultado, pero no duplicar la lógica regulatoria.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (ERP vs Dataverse): ¿qué señal temprana debía haber frenado la solución custom?",
+      options: [
+        "La necesidad de mantener reglas fiscales y de crédito sincronizadas manualmente con otro sistema",
+        "Que los vendedores quisieran una UI ágil",
+        "Que existiera una Opportunity en Sales",
+        "Que el ERP fuera legado y no D365 F&O"
+      ],
+      answer: [0],
+      explanation: "Si una regla requiere actualización regulatoria en otro sistema, duplicarla manualmente crea riesgo operativo.",
+      appliesTo: "caso"
     }
   ],
   60: [
@@ -9347,6 +9607,71 @@
       ],
       answer: [0, 1, 3],
       explanation: "El lab de Sales se centra en forecast, oportunidades, riesgos y cadencia de revisión; el perfil offline pertenece a Field Service."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (forecast en Excel): ¿por qué Dirección veía un pipeline inflado?",
+      options: [
+        "Porque los vendedores dejaban oportunidades en Pipeline y actualizaban compromisos reales solo en Excel",
+        "Porque Dynamics 365 Sales no tiene forecast categories",
+        "Porque Finanzas no podía acceder a hojas de cálculo",
+        "Porque todas las oportunidades estaban cerradas como ganadas"
+      ],
+      answer: [0],
+      explanation: "El CRM existía, pero el comportamiento comercial no estaba gobernado: compromiso real vivía fuera de Sales.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (forecast en Excel): ¿qué cambio fue más importante que agregar más campos?",
+      options: [
+        "Gobernar el comportamiento comercial con forecast categories, reviews y reglas de cierre",
+        "Crear otra hoja Excel con más columnas",
+        "Eliminar todas las oportunidades antiguas",
+        "Mover Forecasting a Customer Service"
+      ],
+      answer: [0],
+      explanation: "El caso recalca que la solución fue de operación comercial: categorías obligatorias, cadencia y dashboard único.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (forecast en Excel): ¿cuáles DOS medidas formaron parte de la corrección?",
+      options: [
+        "Forecast categories obligatorias por etapa mínima",
+        "Cadencia semanal de pipeline review",
+        "Eliminar Dynamics 365 Sales del proceso",
+        "Permitir que cada vendedor mantenga su Excel privado"
+      ],
+      answer: [0, 1],
+      explanation: "El caso menciona forecast categories obligatorias y pipeline review semanal como parte de la corrección.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (forecast en Excel): ¿por qué Finanzas no podía anticipar ingresos de forma confiable?",
+      options: [
+        "Porque el compromiso real no estaba en Sales y el pipeline aparecía sin distinción entre Pipeline y Committed",
+        "Porque Sales no permite reportes financieros",
+        "Porque las oportunidades no tenían nombres",
+        "Porque Customer Insights no estaba implementado"
+      ],
+      answer: [0],
+      explanation: "Sin forecast categories confiables en el sistema, Finanzas veía datos inflados y no accionables.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (forecast en Excel): ¿qué evidencia indicaría que la corrección funcionó?",
+      options: [
+        "Dashboard único en Sales usado en reviews y abandono de hojas Excel paralelas",
+        "Más hojas Excel por región",
+        "Oportunidades sin fecha de cierre",
+        "Menos uso de forecast categories"
+      ],
+      answer: [0],
+      explanation: "El caso dice que nadie volvió a mirar Excel porque el dashboard y las reglas de Sales pasaron a gobernar la operación.",
+      appliesTo: "caso"
     }
   ],
   61: [
@@ -9409,6 +9734,71 @@
       ],
       answer: [0, 1, 2],
       explanation: "Queues, entitlements y SLA son componentes de servicio; chart of accounts pertenece a Finance."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (SLA contractual): ¿por qué los reportes penalizaban injustamente a agentes?",
+      options: [
+        "Porque el SLA no pausaba cuando el caso esperaba respuesta del cliente",
+        "Porque los agentes no podían resolver casos urgentes",
+        "Porque Customer Service no admite calendarios de soporte",
+        "Porque los contratos estaban en PDF"
+      ],
+      answer: [0],
+      explanation: "Un caso en espera del cliente aparecía incumplido porque la lógica de pausa del SLA no estaba configurada.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (SLA contractual): ¿qué convirtió el contrato de PDF archivado en lógica operativa auditable?",
+      options: [
+        "Modelar entitlements, calendario, reglas de pausa, warning y escalation",
+        "Pedir a los agentes memorizar los contratos",
+        "Crear una hoja Excel de tiempos",
+        "Eliminar los reportes de SLA"
+      ],
+      answer: [0],
+      explanation: "La remediación fue modelar explícitamente las reglas contractuales en Dynamics 365 Customer Service.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (SLA contractual): ¿cuáles DOS elementos faltantes explican los tiempos inconsistentes?",
+      options: [
+        "Reglas de pausa del SLA",
+        "Calendario/horario de soporte configurado",
+        "Customer Insights - Journeys",
+        "Dual-write con F&O"
+      ],
+      answer: [0, 1],
+      explanation: "Pausas y calendario determinan cómo se mide el tiempo real del SLA. Sin ellos, el reporte no refleja obligación contractual.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (SLA contractual): ¿qué cambio mejora la defensa ante el cliente?",
+      options: [
+        "Datos auditables de cumplimiento, pausas y escalaciones configuradas en el sistema",
+        "Explicaciones manuales caso por caso sin evidencia",
+        "Ocultar casos incumplidos del reporte",
+        "Medir todos los casos con un reloj continuo sin pausas"
+      ],
+      answer: [0],
+      explanation: "El caso destaca que el equipo pudo defenderse con datos, no con excusas, al modelar correctamente SLA y entitlements.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (SLA contractual): ¿cuál es la lección principal para Customer Service avanzado?",
+      options: [
+        "Los SLA de contrato deben configurarse como lógica operacional, no quedarse solo en documentos legales",
+        "Los SLA deben depender de memoria del agente",
+        "Los contratos no deben reflejarse en el sistema",
+        "La pausa de SLA siempre debe estar deshabilitada"
+      ],
+      answer: [0],
+      explanation: "La madurez está en traducir compromisos contractuales a configuración auditable y operable.",
+      appliesTo: "caso"
     }
   ],
   62: [
@@ -9471,6 +9861,71 @@
       ],
       answer: [0, 1, 2],
       explanation: "El diseño puede documentarse sin tenant, pero la prueba real necesita canal, agentes y configuración."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (chat omnicanal): ¿cuál era la causa real de la tasa alta de abandono?",
+      options: [
+        "Falta de capacity profiles, presencia, skills y reglas de routing que evitaran saturar agentes",
+        "Caída técnica del canal de chat",
+        "Falta de una tabla custom de conversaciones",
+        "Problema fiscal en F&O"
+      ],
+      answer: [0],
+      explanation: "El canal no se caía; unified routing asignaba demasiado trabajo porque no había capacidad/presencia gobernadas.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (chat omnicanal): ¿por qué escalar a infraestructura no resolvía el problema?",
+      options: [
+        "Porque el problema no era de disponibilidad técnica, sino de configuración operativa del routing",
+        "Porque Contact Center no usa infraestructura",
+        "Porque los agentes no tenían licencias de Sales",
+        "Porque la campaña de marketing no generaba volumen"
+      ],
+      answer: [0],
+      explanation: "El diagnóstico inicial fue equivocado: no faltaba infraestructura, faltaba gobernar distribución de trabajo.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (chat omnicanal): ¿cuáles DOS configuraciones fueron parte de la solución?",
+      options: [
+        "Capacity profiles",
+        "Presencia y reglas de unified routing",
+        "Tabla custom de IVA",
+        "Deshabilitar todos los canales digitales"
+      ],
+      answer: [0, 1],
+      explanation: "La solución incluyó capacity profiles, presencia, skills y reglas de routing por prioridad.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (chat omnicanal): ¿qué métrica de experiencia estaba empeorando aunque el canal funcionaba técnicamente?",
+      options: [
+        "Tasa de abandono",
+        "Número de Work Orders",
+        "Porcentaje de matching de perfiles",
+        "Cantidad de soluciones managed"
+      ],
+      answer: [0],
+      explanation: "El canal estaba disponible, pero los clientes abandonaban por saturación de agentes.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (chat omnicanal): ¿qué aprendizaje operativo deja el caso?",
+      options: [
+        "Abrir canales sin gobernar capacidad y routing puede empeorar la experiencia aunque la plataforma esté disponible",
+        "Más canales siempre mejoran la atención sin configuración adicional",
+        "La presencia de agentes es irrelevante para routing",
+        "Unified routing solo sirve para llamadas telefónicas"
+      ],
+      answer: [0],
+      explanation: "La calidad omnicanal depende de distribuir trabajo según capacidad, presencia, skills y prioridad.",
+      appliesTo: "caso"
     }
   ],
   63: [
@@ -9533,6 +9988,71 @@
       ],
       answer: [0, 1, 2],
       explanation: "Las pruebas deben cubrir caso feliz y exclusiones negativas del canal/consentimiento."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (real-time journey): ¿cuál fue el problema de consentimiento detectado por Legal?",
+      options: [
+        "Se reutilizó consentimiento de servicio para comunicaciones de marketing sin opt-in vigente para ese propósito",
+        "No existía ningún contacto en Dataverse",
+        "El journey no tenía correos configurados",
+        "El trigger era demasiado lento técnicamente"
+      ],
+      answer: [0],
+      explanation: "El consentimiento existía para servicio, no para marketing; propósito y opt-in no son intercambiables.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (real-time journey): ¿qué debía revisarse antes de migrar campañas outbound históricas?",
+      options: [
+        "Propósitos, fuentes de consentimiento, exclusiones y triggers",
+        "Solo el diseño visual del email",
+        "Únicamente la cantidad de contactos",
+        "El nombre interno del journey"
+      ],
+      answer: [0],
+      explanation: "La corrección fue redefinir propósitos, fuentes, exclusiones y pruebas negativas antes de activar comunicaciones.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (real-time journey): ¿cuáles DOS controles reducen riesgo de enviar marketing sin permiso?",
+      options: [
+        "Pruebas negativas de contactos sin opt-in válido",
+        "Propósitos de consentimiento separados para servicio y marketing",
+        "Reutilizar cualquier consentimiento disponible",
+        "Activar el journey primero y revisar después"
+      ],
+      answer: [0, 1],
+      explanation: "Separar propósitos y probar exclusiones evita que contactos sin consentimiento aplicable entren al journey.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (real-time journey): ¿por qué compliance debe diseñarse desde el primer nodo del journey?",
+      options: [
+        "Porque triggers, audiencias y consentimiento determinan quién puede recibir cada comunicación",
+        "Porque Legal solo revisa después del envío masivo",
+        "Porque Customer Insights - Journeys no permite pruebas",
+        "Porque compliance solo afecta el texto del asunto"
+      ],
+      answer: [0],
+      explanation: "El cumplimiento no es una capa final; define segmentación, exclusiones y condiciones desde el diseño.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (real-time journey): ¿qué resultado indica que el revisor legal intervino a tiempo?",
+      options: [
+        "Detectó el problema antes del despliegue masivo",
+        "El journey ya había enviado correos a toda la base",
+        "Se eliminó todo Customer Insights",
+        "Se aprobó reutilizar consentimiento de servicio para marketing"
+      ],
+      answer: [0],
+      explanation: "El caso dice que Legal detectó el problema antes del despliegue masivo, evitando mayor impacto.",
+      appliesTo: "caso"
     }
   ],
   64: [
@@ -9595,6 +10115,71 @@
       ],
       answer: [0, 1, 2],
       explanation: "Ownership, patrón y conflicto son decisiones críticas; el color visual no resuelve integración."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (dual-write ownership): ¿qué faltó antes de activar la sincronización de clientes?",
+      options: [
+        "Decidir ownership de datos entre Sales y F&O",
+        "Crear más campos duplicados en ambos sistemas",
+        "Desactivar reconciliación",
+        "Usar solo nombres comerciales en facturas fiscales"
+      ],
+      answer: [0],
+      explanation: "Sin ownership explícito, ambos sistemas escribían cambios en direcciones opuestas.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (dual-write ownership): ¿qué reveló el reporte fiscal incorrecto?",
+      options: [
+        "Una guerra silenciosa de sobrescrituras entre datos comerciales y fiscales",
+        "Que dual-write nunca sincronizó ningún cliente",
+        "Que Sales debía ser dueño de datos fiscales",
+        "Que F&O no tiene relación con facturación"
+      ],
+      answer: [0],
+      explanation: "El nombre incorrecto en factura oficial evidenció sobrescrituras no gobernadas entre sistemas.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (dual-write ownership): según la solución, ¿cuáles DOS ownerships quedaron claros?",
+      options: [
+        "Sales dueño de datos comerciales",
+        "F&O dueño de datos fiscales y de crédito",
+        "Marketing dueño de datos fiscales",
+        "El bot de IA dueño de todos los campos"
+      ],
+      answer: [0, 1],
+      explanation: "La matriz asignó Sales a datos comerciales y F&O a datos fiscales/crédito.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (dual-write ownership): ¿qué práctica ayuda a detectar discrepancias antes de que lleguen a documentos fiscales?",
+      options: [
+        "Reconciliación semanal entre sistemas",
+        "Esperar a la próxima auditoría anual",
+        "Permitir edición libre de todos los campos en ambos sistemas",
+        "Desactivar reportes fiscales"
+      ],
+      answer: [0],
+      explanation: "La solución incluyó reconciliación semanal para detectar discrepancias temprano.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (dual-write ownership): ¿cuál es la lección sobre integración CE + F&O?",
+      options: [
+        "Integrar sistemas exige gobierno de datos y reglas explícitas, no solo conexión técnica",
+        "Dual-write elimina la necesidad de ownership",
+        "Si dos sistemas editan el mismo campo, siempre gana el más reciente sin impacto",
+        "La integración debe evitar roles y reglas de edición"
+      ],
+      answer: [0],
+      explanation: "El caso cierra con esa idea: la integración pasó de conectar sistemas a gobernar datos con reglas explícitas.",
+      appliesTo: "caso"
     }
   ],
   65: [
@@ -9657,6 +10242,71 @@
       ],
       answer: [0, 1, 2],
       explanation: "Portafolio defendible requiere artefactos de diseño y validación, no capturas aisladas."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (capstone D365): ¿por qué el primer UAT reveló decenas de vacíos simultáneos?",
+      options: [
+        "Porque se intentó implementar Sales, Service, Field Service e integración ERP en una sola salida sin ownership, pruebas por canal ni adopción",
+        "Porque el comité ejecutivo no quería usar Dynamics 365",
+        "Porque Field Service no tiene app móvil",
+        "Porque Customer Insights impide fases incrementales"
+      ],
+      answer: [0],
+      explanation: "El alcance integrado no tenía gobierno ni pruebas suficientes por producto/canal, por eso UAT concentró demasiados vacíos.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (capstone D365): ¿qué estrategia rescató el proyecto?",
+      options: [
+        "Dividirlo en fases con valor incremental y ownership claro",
+        "Aumentar alcance para incluir todos los productos a la vez",
+        "Eliminar UAT para no encontrar más vacíos",
+        "Desplegar todo directo a producción"
+      ],
+      answer: [0],
+      explanation: "El proyecto se rescató por fases: pipeline, SLA/casos, Field Service, Customer Insights e integración ERP gobernada.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (capstone D365): ¿cuáles DOS vacíos de gobierno estaban presentes antes del rescate?",
+      options: [
+        "Sin ownership de datos definido",
+        "Sin plan de adopción para técnicos de Field Service móvil",
+        "Demasiadas pruebas negativas bien documentadas",
+        "Pipeline ERP ya gobernado con matriz completa"
+      ],
+      answer: [0, 1],
+      explanation: "El caso menciona falta de ownership y falta de adopción para técnicos como brechas claves.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (capstone D365): ¿cuál fue la primera fase de valor incremental sugerida?",
+      options: [
+        "Pipeline comercial primero",
+        "Integración ERP completa primero",
+        "Customer Insights antes de tener datos gobernados",
+        "Todos los canales de Contact Center primero"
+      ],
+      answer: [0],
+      explanation: "El caso lista pipeline comercial como primera fase, antes de SLA/casos, Field Service, Customer Insights e integración ERP.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (capstone D365): ¿qué disciplina replica el capstone?",
+      options: [
+        "Arquitectura completa diseñada de una vez, pero implementación entregada por fases con valor demostrable",
+        "Implementación sin arquitectura para avanzar rápido",
+        "UAT solo al final de todos los productos juntos",
+        "Cambios directos en producción para cada producto"
+      ],
+      answer: [0],
+      explanation: "El capstone busca practicar esa disciplina: visión integrada, entrega incremental y evidencia de valor por fase.",
+      appliesTo: "caso"
     }
   ],
   66: [

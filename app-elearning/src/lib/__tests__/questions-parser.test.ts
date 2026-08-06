@@ -182,7 +182,7 @@ describe("getQuestionsForLevel", () => {
 
 describe("getCaseDiagnosisForModule", () => {
   it("returns case-diagnosis questions for pilot modules", () => {
-    Array.from({ length: 55 }, (_, index) => index + 1).forEach((moduleId) => {
+    Array.from({ length: 65 }, (_, index) => index + 1).forEach((moduleId) => {
       const qs = getCaseDiagnosisForModule(moduleId);
       expect(qs.length, `Módulo ${moduleId} sin preguntas de caso`).toBeGreaterThan(0);
       qs.forEach((q) => {
@@ -193,11 +193,11 @@ describe("getCaseDiagnosisForModule", () => {
   });
 
   it("returns an empty array for a module without a pilot", () => {
-    expect(getCaseDiagnosisForModule(60)).toHaveLength(0);
+    expect(getCaseDiagnosisForModule(66)).toHaveLength(0);
   });
 
   it("case-diagnosis questions never appear in getQuestionsForModule", () => {
-    Array.from({ length: 55 }, (_, index) => index + 1).forEach((moduleId) => {
+    Array.from({ length: 65 }, (_, index) => index + 1).forEach((moduleId) => {
       const quizQuestions = getQuestionsForModule(moduleId);
       expect(quizQuestions.every((q) => q.appliesTo !== "caso")).toBe(true);
     });
