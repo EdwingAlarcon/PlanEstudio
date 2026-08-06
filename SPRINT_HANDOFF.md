@@ -66,21 +66,20 @@ todo en verde):**
 - **No** se hizo la migración terminológica completa por módulo/lab/UI — solo la nota de convención.
 - **No** se corrió una auditoría manual de accesibilidad ni de los 6 perfiles A-F del sprint original
   más allá de lo que ya cubre la suite e2e existente (dark mode, móvil 375px, teclado/skip-link).
-**Estado de git/CI/producción al cerrar esta sesión (2026-08-06, ~17:05 UTC):**
-- Commit `ad80574` ("feat: cerrar brechas de continuidad para principiantes") ya está en
-  `origin/master` — push confirmado, working tree limpio.
-- **CI/Deploy (run `31120748032`) NO se completó** — quedó en `queued` sin que GitHub asignara
-  runners hosted, en dos intentos (push original + un `gh run rerun`). Causa confirmada vía
-  [githubstatus.com](https://www.githubstatus.com): **incidente activo "Major Outage" de GitHub
-  Actions el 6 de agosto de 2026** ("Workflow runs are still failing or delayed in starting, and
-  some queued jobs may time out"). No es un problema de este repo ni del código del sprint — todas
-  las validaciones locales (lint, typecheck, 323 tests, `validate:content`, build, 47 e2e) ya habían
-  pasado en verde antes del push.
-- **Próximo paso pendiente, no hacer nada más hasta esto**: cuando se retome el trabajo, verificar
-  primero `gh run list --limit 3` para ese repo. Si el run `31120748032` (o uno reintentado) sigue sin
-  completarse, correr `gh run rerun 31120748032` de nuevo — no hace falta ningún cambio de código.
-  Una vez el run termine en success, verificar producción en
-  `https://edwingalarcon.github.io/PlanEstudio/` con cache-busting, en particular:
+**Estado de git/CI/producción al retomar con Codex (2026-08-06):**
+- Commit `ad80574` ("feat: cerrar brechas de continuidad para principiantes") sí estaba en
+  `origin/master`, pero los runs `31120748032` y `31125305385` quedaron en un estado inconsistente
+  durante el Major Outage de GitHub Actions/Pages: la lista los mostraba como `queued`, mientras la
+  API de cancelación respondía que el re-run todavía no había entrado a cola.
+- Codex agregó `workflow_dispatch` y concurrencia global por rama al workflow `CI / Deploy`, para poder
+  disparar el pipeline sin commits vacíos y cancelar runs obsoletos en futuros pushes.
+- Al disparar manualmente el run `31126679431`, GitHub ya asignó runner y reveló el fallo real de CI:
+  `npm ci` fallaba porque `app-elearning/package.json` y `app-elearning/package-lock.json` estaban
+  desincronizados tras añadir `rehype-slug` (faltaban entradas `@emnapi/*` y `@emnapi/wasi-threads`
+  tenía versión incompatible).
+- Fix en curso: regenerar `app-elearning/package-lock.json` con `npm install`, validar `npm ci`, lint,
+  typecheck, `validate:content`, `test:coverage` y build, luego commit + push. Tras el deploy exitoso,
+  verificar producción en `https://edwingalarcon.github.io/PlanEstudio/` con cache-busting, en particular:
   `/recursos/guia-herramientas-workstation` (sección "Cómo abrir una terminal"),
   `/labs/lab-03-canvas-primera-app` (sección "Variante sin tenant"), Módulos 23 y 34 (banner "Antes
   de comenzar"), y que el favicon ya no dé 404.
