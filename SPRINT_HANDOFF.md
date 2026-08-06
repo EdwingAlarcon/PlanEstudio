@@ -92,6 +92,13 @@ todo en verde):**
 - **Producción oficial migrada a Vercel (2026-08-06)**: la URL oficial ya no es GitHub Pages sino
   `https://planestudio.vercel.app/`. Se creó una publicación estática en Vercel desde
   el `out/` local ya generado y se asignó alias estable a esa URL.
+  El proyecto visible en Vercel debe llamarse **`app-elearning`**. También quedó agregado
+  `https://app-elearning.vercel.app/` como dominio Production limpio del proyecto; el dominio heredado
+  `out-gilt-tau.vercel.app` se retiró desde **Settings → Domains** porque Vercel lo había conservado
+  como default production domain al crear el primer deploy desde la carpeta `out/`.
+  Si la CLI todavía muestra `out-gilt-tau` en `project list`/`inspect`, tratarlo como metadata/cache
+  interna: `vercel alias ls --scope edwingalarcons-projects` confirmó los aliases activos
+  `planestudio.vercel.app` y `app-elearning.vercel.app`.
   No usar build remoto desde `app-elearning` sin ajustar root/contexto, porque `content.ts` y el
   `prebuild` dependen de archivos hermanos (`../docs`, `../scripts`) que no existen si Vercel sube
   solo la subcarpeta. Receta que funcionó: `cd app-elearning`, `npm run build`, `vercel deploy out -y

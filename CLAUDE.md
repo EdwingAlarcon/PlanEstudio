@@ -37,7 +37,10 @@ Current stable state as of the latest local handoff (2026-08-06):
   GitHub Actions run `30551134055` success.
 - Previous course/design sprint: **Sprint 22 — `/impeccable audit` (17/20 → 20/20 after fixes) +
   `PRODUCT.md`/`DESIGN.md`/`.impeccable/design.json` (Sprint 21)**.
-- Official production URL is `https://planestudio.vercel.app/`. GitHub Pages was used
+- Official production URL is `https://planestudio.vercel.app/`. Vercel project name is
+  `app-elearning`; `https://app-elearning.vercel.app/` is also connected as the clean Production
+  domain. The old `out-gilt-tau.vercel.app` domain was removed from Vercel Settings → Domains after
+  an initial static deploy from `out/` left it as the default production domain. GitHub Pages was used
   historically and may still exist as a secondary mirror, but it is no longer the release blocker.
 - Fixed learning content counts: **75 modules, 72 labs, 508 quiz questions, 375 case-diagnosis
   questions, 633 checklist criteria**. The case-diagnosis questions are tagged with
