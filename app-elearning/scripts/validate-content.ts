@@ -45,6 +45,37 @@ function main(): void {
     throw new ContentValidationError(`Faltan módulos para moduleId: ${missingModules.join(", ")}`);
   }
 
+  // Guardarraíl de continuidad para principiantes: módulos que exigen conocimiento externo
+  // (programación, Azure) deben declarar sus prerrequisitos explícitamente, y el primer lab
+  // que "Mi ruta" promete con variante sin tenant debe seguir ofreciéndola.
+  const modulesRequiringExternalPrereqBanner = [13, 23, 27, 34];
+  for (const level of levels) {
+    for (const mod of level.modules) {
+      if (modulesRequiringExternalPrereqBanner.includes(mod.moduleId) && !mod.rawContent.includes("Antes de comenzar")) {
+        throw new ContentValidationError(
+          `Módulo ${mod.moduleId} requiere conocimiento externo (programación/Azure) pero no declara un aviso "Antes de comenzar"`
+        );
+      }
+    }
+  }
+
+  const lab03 = labs.find((lab) => lab.id === "lab-03");
+  if (lab03 && !lab03.rawContent.includes("Variante sin tenant")) {
+    throw new ContentValidationError('Lab 03 no ofrece "Variante sin tenant" pese a que "Mi ruta" la promete');
+  }
+
+  // El renderer de la app (remark-gfm) no interpreta admonitions estilo MkDocs (`!!! tip`);
+  // ese contenido queda invisible/roto para el estudiante. Ver módulos 13/23/27/34 corregidos.
+  for (const level of levels) {
+    for (const mod of level.modules) {
+      if (mod.rawContent.includes("!!!")) {
+        throw new ContentValidationError(
+          `Módulo ${mod.moduleId} usa sintaxis de admonition estilo MkDocs ("!!!") que no se renderiza en la app Next.js`
+        );
+      }
+    }
+  }
+
   const questionsByModule = new Map<number, number>();
   for (const question of questions) {
     questionsByModule.set(question.moduleId, (questionsByModule.get(question.moduleId) ?? 0) + 1);
@@ -63,6 +94,7 @@ function main(): void {
   console.log(`✓ Checklist válido (${checklist.totalModules} módulos, ${checklist.totalItems} criterios)`);
   console.log(`✓ Experiencia práctica válida (${practiceCounts.incidents} incidentes, ${practiceCounts.challenges} challenges, ${practiceCounts.simulations} simulaciones, ${practiceCounts.guided} guiadas)`);
   console.log("✓ Ruta guiada de fundamentos válida (referencias, orden, práctica temprana y decisión posterior)");
+  console.log("✓ Prerrequisitos externos declarados en módulos 23 y 34; variante sin tenant presente en Lab 03");
 }
 
 try {

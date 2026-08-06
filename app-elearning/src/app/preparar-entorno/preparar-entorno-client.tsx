@@ -275,7 +275,13 @@ function WorkstationReportImport({ os }: { os: OperatingSystem }) {
       <p className="mb-3 mt-1 text-xs leading-relaxed text-muted-foreground">{T.importReportSubtitle}</p>
 
       <p className="mb-1 text-xs font-medium text-foreground">{T.importReportCommandLabel}</p>
-      <pre className="mb-3 overflow-x-auto rounded-lg border border-border bg-muted/40 p-2 font-mono text-xs text-foreground">{command}</pre>
+      <pre className="mb-1 overflow-x-auto rounded-lg border border-border bg-muted/40 p-2 font-mono text-xs text-foreground">{command}</pre>
+      <Link
+        href="/recursos/guia-herramientas-workstation#cómo-abrir-una-terminal-por-primera-vez"
+        className="mb-3 inline-block text-xs font-medium text-[#0078D4] hover:underline dark:text-[#4DB8FF]"
+      >
+        {T.terminalHelpLinkLabel}
+      </Link>
 
       <textarea
         value={text}

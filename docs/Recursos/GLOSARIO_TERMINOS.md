@@ -1,6 +1,13 @@
 # GLOSARIO DE TÉRMINOS — Power Platform & Dynamics 365
 **Referencia rápida** | Ordenado alfabéticamente por categoría
 
+> **Nota de convención terminológica:** en PlanEstudio usamos **"entorno"** como término principal en
+> español para *environment*, y **"solución administrada"** / **"solución no administrada"** para
+> *managed solution* / *unmanaged solution*. Verás también "ambiente" (sinónimo usado en algunos
+> módulos y en la interfaz real de Power Platform en español) y "Managed"/"Administrada" alternados —
+> se refieren siempre al mismo concepto. Microsoft y algunas pantallas del producto pueden mostrar
+> "environment" directamente en inglés; no es un error si lo ves así fuera de este glosario.
+
 ---
 
 ## A

@@ -156,3 +156,15 @@ muestre cuántas solicitudes están pendientes, aprobadas y rechazadas.
 - Automatización de un proceso de aprobación real.
 - Aplicación de seguridad de mínimo privilegio.
 - Documentación orientada al usuario final.
+
+## Convierte esto en evidencia laboral
+
+Este capstone es tu primer proyecto completo — vale la pena documentarlo bien antes de pasar al
+siguiente nivel.
+
+- Aprende a documentar tu primer proyecto: estructura de README, qué capturas guardar y cómo
+  describir en 3 líneas qué problema resolviste — ver [Guía de Portafolio](/recursos/portafolio-profesional).
+- Cuando tengas 2-3 proyectos así, prepara tu CV y tu perfil de LinkedIn con la
+  [guía Job-Ready de entrevistas y portafolio](/recursos/job-ready-interview-readiness).
+- Recuerda el principio central: presenta esto como proyecto de práctica, no como experiencia
+  laboral si no lo fue.

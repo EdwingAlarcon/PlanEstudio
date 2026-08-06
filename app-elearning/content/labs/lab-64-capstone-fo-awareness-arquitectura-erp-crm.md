@@ -164,3 +164,14 @@ harías distinto para reducir ese acoplamiento.
 - Razonamiento sobre dual-write y dirección de sincronización.
 - Análisis de riesgos de integración entre sistemas empresariales.
 - Comunicación ejecutiva de una decisión arquitectónica.
+
+## Convierte esto en evidencia laboral
+
+Una decisión de integración ERP/CRM bien argumentada es material fuerte de entrevista de
+arquitectura — no la dejes solo en el repositorio.
+
+- Prepara una presentación técnica defendible con riesgos, tradeoffs y alternativas descartadas —
+  ver [Empleabilidad](/empleabilidad) para elegir la guía Job-Ready más cercana a tu rol objetivo.
+- Documenta la decisión y sus ADRs con la [Guía de Portafolio](/recursos/portafolio-profesional).
+- Practica cómo explicarla en entrevista con la
+  [guía Job-Ready de entrevistas y portafolio](/recursos/job-ready-interview-readiness).

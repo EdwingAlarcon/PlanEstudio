@@ -66,6 +66,52 @@ misma app. Obligatorio para todos los perfiles.
   romper el Maker Portal. Si una pantalla no carga, primero prueba en una ventana privada/incógnito
   antes de asumir un problema de la plataforma.
 
+## Cómo abrir una terminal por primera vez
+
+A partir de aquí vas a ver comandos como `git --version`. Si nunca has usado una terminal, esta
+sección es para ti — **no la saltes**, porque ningún otro punto de esta guía ni de las prácticas
+`GL-SETUP` explica esto.
+
+**Qué es una terminal**: una ventana donde escribes texto (comandos) en vez de hacer clic, y el
+programa te responde con más texto. No es peligrosa por sí sola — lo que hace peligroso a un
+comando es lo que tú decides ejecutar en ella, no la ventana en sí.
+
+**Cómo abrirla según tu sistema operativo:**
+
+- **Windows**: presiona la tecla `Windows`, escribe `Terminal` (o `PowerShell`) y presiona Enter
+  cuando aparezca la aplicación en los resultados. Alternativa: clic derecho sobre el botón Inicio →
+  **Terminal**. No uses "Ejecutar como administrador" a menos que un paso de esta guía lo pida
+  explícitamente — la mayoría de comandos de este curso no lo necesitan.
+- **macOS**: presiona `Cmd + Espacio` para abrir Spotlight, escribe `Terminal` y presiona Enter.
+  La aplicación vive en Aplicaciones → Utilidades → Terminal si prefieres buscarla a mano.
+- **Linux**: presiona `Ctrl + Alt + T` (funciona en la mayoría de distribuciones de escritorio) o
+  abre el menú de aplicaciones y busca `Terminal`/`Konsole`/`GNOME Terminal` según tu distribución.
+
+**Cómo ejecutar tu primer comando de forma segura:**
+
+1. Copia el comando exactamente como aparece (por ejemplo `git --version`).
+2. Haz clic dentro de la ventana de la terminal para asegurarte de que tiene el foco.
+3. Pega el comando: `Ctrl+V` en Windows/Linux, `Cmd+V` en macOS (algunas terminales de Windows usan
+   clic derecho para pegar en vez de `Ctrl+V`).
+4. Presiona Enter.
+5. Lee la salida antes de continuar: un número de versión significa que funcionó; un mensaje como
+   `comando no encontrado` / `command not found` / `no se reconoce como un comando` significa que la
+   herramienta no está instalada todavía o que necesitas cerrar y volver a abrir la terminal después
+   de instalarla (el instalador actualiza el `PATH`, pero las ventanas ya abiertas no se enteran solas).
+
+**Terminal, PowerShell, CMD y shell — la diferencia mínima que necesitas:** "terminal" es la ventana;
+"PowerShell", "CMD" (Símbolo del sistema) y "bash/zsh" (macOS/Linux) son los programas que interpretan
+lo que escribes dentro de esa ventana — el "shell". Este curso usa comandos compatibles con
+PowerShell en Windows y con el shell por defecto de macOS/Linux; si un comando no funciona en CMD
+clásico, abre PowerShell en su lugar.
+
+**Seguridad básica**: no ejecutes un comando que no entiendas solo porque alguien (o un sitio) te
+lo pidió, especialmente si pide desactivar el antivirus, descargar un archivo de un enlace
+desconocido, o dar permisos de administrador sin que esta guía o el módulo correspondiente lo hayan
+pedido explícitamente. Todos los comandos de este curso son de solo lectura o configuración local
+(`--version`, `config --global`, instaladores oficiales) — ninguno requiere permisos elevados salvo
+que se indique lo contrario.
+
 ## Git
 
 **Para qué**: control de versiones para soluciones exportadas, ALM, Copilot Studio y cualquier

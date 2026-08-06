@@ -115,7 +115,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
 
         <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden px-2 py-3">
           {/* Primary actions */}
-          <NavLink href="/"          icon={Home}        label={UI.nav.home}      active={pathname === "/"} />
+          <NavLink href="/"          icon={Home}        label={UI.nav.home}      active={pathname === "/"} prefetch={false} />
           <NavLink href="/mi-ruta"   icon={Compass}     label="Mi ruta"          active={pathname === "/mi-ruta"} />
           <NavLink href={nextAction.activity.href} icon={PlayCircle} label="Continuar" active={pathname === nextAction.activity.href} />
           <NavLink href="/progreso"  icon={ClipboardList} label={UI.nav.myProgress} active={pathname === "/progreso"} />
@@ -229,15 +229,18 @@ function NavLink({
   icon: Icon,
   label,
   active,
+  prefetch,
 }: {
   href: string;
   icon: React.ComponentType<{ className?: string }>;
   label: string;
   active: boolean;
+  prefetch?: boolean;
 }) {
   return (
     <Link
       href={href}
+      prefetch={prefetch}
       className={cn(
         "relative flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors",
         "hover:bg-accent hover:text-accent-foreground",

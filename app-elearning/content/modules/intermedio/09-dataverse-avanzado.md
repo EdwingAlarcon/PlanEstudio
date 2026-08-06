@@ -13,6 +13,42 @@ Diseñar modelos de datos empresariales complejos en Dataverse: relaciones polim
 
 **Tiempo recomendado:** 30 min de lectura guiada + 60-90 min de práctica en ambiente o simulación documentada.
 
+### 🔍 Consultar datos más allá de las vistas: FetchXML y OData
+
+Antes de leer "Conceptos Clave" verás dos siglas nuevas — **FetchXML** y **OData** — que este
+módulo usa para explicar por qué algunas columnas se pueden filtrar y otras no. Aquí tienes lo
+mínimo para entender esas menciones sin necesitar saber programar todavía:
+
+- **¿Qué es "consultar datos"?** Cuando una vista, un flujo o una app pide registros a Dataverse
+  ("dame las Cuentas de Bogotá"), en algún punto esa petición se traduce a un lenguaje que Dataverse
+  entiende. FetchXML y OData son dos formas distintas de escribir esa petición.
+- **FetchXML**: un lenguaje de consulta propio de Dataverse escrito en XML. Lo usan internamente las
+  vistas, los reportes y algunas herramientas avanzadas. Ejemplo mínimo — pedir el nombre de todas
+  las Cuentas:
+  ```xml
+  <fetch>
+    <entity name="account">
+      <attribute name="name" />
+    </entity>
+  </fetch>
+  ```
+  `<entity name="account">` indica la tabla; `<attribute name="name" />` indica qué columna quieres.
+- **OData**: el estándar que usa la Web API de Dataverse (la forma en que apps y flujos externos
+  piden datos por HTTP). Ejemplo conceptual — el mismo pedido de nombres de Cuenta:
+  ```text
+  /api/data/v9.2/accounts?$select=name&$top=10
+  ```
+  `accounts` es la tabla, `$select=name` elige la columna, `$top=10` limita a 10 resultados. **No
+  copies ni pruebes URLs de un entorno productivo real** — esto es solo para reconocer el patrón.
+- **¿Cuándo se usa cada uno?** FetchXML es el lenguaje "nativo" de vistas y reportes dentro de
+  Dataverse; OData es el que usan integraciones externas y algunas Formula columns. No necesitas
+  escribir ninguno de los dos todavía — solo reconocer que existen y que "filtrable en FetchXML" o
+  "filtrable en OData" (como leerás abajo) se refiere a si ese tipo de columna puede usarse como
+  criterio de búsqueda desde cada uno de esos dos caminos.
+- **Riesgos a tener en cuenta más adelante** (no hoy): ambos lenguajes permiten paginación
+  (`$top`, `page cookie`) y filtros (`$filter`, `<filter>`) — mal usados sobre tablas grandes pueden
+  ser lentos o exceder límites de la plataforma. Lo verás con más detalle en Avanzado.
+
 ### 📖 Conceptos Clave
 - **Tipos de relaciones:** Dataverse soporta cuatro patrones: 1:N (padre-hijo, ej. Proyecto → Tareas), N:N nativa (tabla de intersección gestionada automáticamente por la plataforma), N:N manual (tabla de intersección propia con columnas adicionales, ej. `sit_oportunidad_etiqueta` con campo `sit_relevancia`), y Polimórfica (un Lookup que puede apuntar a múltiples tablas, como el campo `sit_referencia` que acepta Cuenta o Contacto). Las relaciones definen el comportamiento en cascada (Cascade) para operaciones de Asignar, Compartir, Eliminar y Desactivar.
 

@@ -225,6 +225,7 @@ export const UI = {
     noTenantAlternativeBody: "Puedes avanzar con la alternativa conceptual de cada paso mientras consigues acceso a un entorno.",
     importReportTitle: "Importar reporte del verificador",
     importReportSubtitle: "Corre el script en tu equipo, pega aqui el JSON que imprime y confirma para actualizar el estado detectado. PlanEstudio no ejecuta nada por ti ni accede a tu equipo.",
+    terminalHelpLinkLabel: "¿No sabes donde escribir esto? Aprende a abrir una terminal",
     importReportCommandLabel: "Comando para tu sistema operativo",
     importReportCommand: {
       windows: "pwsh -File tools/check-workstation.ps1",

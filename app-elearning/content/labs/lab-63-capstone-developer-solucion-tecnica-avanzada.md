@@ -168,3 +168,14 @@ debería aprobarlo y qué debería revisar antes de aprobar.
 - Construcción de componentes de interfaz con manejo de errores.
 - Integración con sistemas externos vía Custom Connectors.
 - Diseño de un pipeline de ALM con validación y plan de rollback.
+
+## Convierte esto en evidencia laboral
+
+Este es tu proyecto técnico más defendible hasta ahora — prepáralo para una entrevista de desarrollo.
+
+- Arma una presentación técnica: arquitectura, decisiones no obvias, tradeoffs y qué harías
+  distinto — ver la [guía Job-Ready CRM Developer](/recursos/job-ready-crm-developer).
+- Documenta el repositorio (README, decisiones, resultado de tests) con la
+  [Guía de Portafolio](/recursos/portafolio-profesional).
+- Practica cómo explicar troubleshooting y decisiones de arquitectura en entrevista con la
+  [guía Job-Ready de entrevistas y portafolio](/recursos/job-ready-interview-readiness).

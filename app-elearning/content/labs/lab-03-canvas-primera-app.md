@@ -68,6 +68,53 @@ Al finalizar este laboratorio podrás construir una Canvas App de tres pantallas
 
 ---
 
+## Variante sin tenant
+
+**¿Todavía no tienes Lab 02 completado ni un ambiente Developer activo?** No te saltes este lab —
+completa esta variante en su lugar. Es la misma referenciada desde "Mi ruta" en el paso de práctica
+guiada de la primera app.
+
+**Qué SÍ valida esta variante:** tu capacidad de diseñar la solución — modelar datos, pensar la
+navegación entre pantallas y escribir las fórmulas de Power Fx correctas antes de tocar el editor.
+
+**Qué NO valida:** que sepas operar el editor de Power Apps ni que la app corra realmente contra
+Dataverse. Esa parte queda pendiente hasta que completes el Lab 02 y este Lab 03 en su forma
+original, con tenant.
+
+Produce, en un documento o carpeta local (Word, Markdown o incluso papel fotografiado — lo que ya
+uses), estos 6 entregables:
+
+1. **Modelo de datos conceptual**: la tabla `sit_Solicitud` con sus columnas (`sit_titulo`,
+   `sit_descripcion`, `sit_categoria`, `sit_prioridad`, `sit_estado`, `sit_fechasolicitud`,
+   `sit_fecharesolucion`, `sit_asignado`) y sus tipos de dato, igual que las usa este lab.
+2. **Wireframes de las 3 pantallas**: dibuja (a mano, en una herramienta de diseño o incluso en una
+   hoja de cálculo con celdas como cuadrícula) `scrInicio`, `scrNueva` y `scrDetalle` con los
+   controles que llevarían — mismos nombres de la [convención de controles](#convención-de-nombres-de-controles)
+   de abajo, para que sea directamente reutilizable cuando tengas tenant.
+3. **Fórmulas Power Fx propuestas**: escribe (sin poder probarlas todavía) la fórmula de `Items` de
+   `galSolicitudes` con `Filter`/`Search`, y el `OnSelect` de `btnGuardar` con `SubmitForm` — puedes
+   basarte en las del Ejercicio 1 y 2 de este mismo lab como referencia de qué se espera, pero
+   escribe primero tu propia versión antes de mirarlas.
+4. **Flujo de navegación**: un diagrama simple (cajas y flechas) mostrando qué pantalla lleva a cuál
+   y con qué acción del usuario.
+5. **Casos de prueba**: lista de al menos 5 casos ("si el usuario busca X, debería ver Y", "si
+   guarda sin título, debería ver Z") que usarías para validar la app una vez construida.
+6. **Reflexión de limitaciones** (3-5 líneas): qué de todo esto no puedes confirmar sin ejecutar la
+   app de verdad — por ejemplo, si la fórmula de filtrado es delegable, o si el Lookup de Categoría
+   se resuelve como esperas.
+
+**Evidencia para guardar**: los 6 documentos anteriores, agrupados en una sola carpeta o archivo.
+Regístralo igual que cualquier evidencia de "Mi progreso" — marca explícitamente que fue la
+**variante sin tenant**, no la ejecución real, para no confundir tu propio historial de aprendizaje
+ni tu portafolio más adelante.
+
+**Cómo completar la práctica real después**: cuando consigas tu ambiente Developer (ver la
+[Guía de herramientas de estación](/recursos/guia-herramientas-workstation#antes-de-instalar-nada-tu-cuenta-y-tu-tenant)),
+vuelve a este mismo lab y sigue los Ejercicios 1 a 4 con tus wireframes y fórmulas ya listos — vas a
+construir mucho más rápido porque el diseño ya está hecho.
+
+---
+
 ## Datos de apoyo
 
 ### Convención de nombres de controles

@@ -4,6 +4,71 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
+## Sprint — Beginner Continuity & Honest Prerequisites (2026-08-06)
+
+Cierra las brechas de continuidad detectadas en la auditoría diagnóstica previa (simulación de
+estudiante sin experiencia). **Alcance real ejecutado, distinto del sprint originalmente pedido de
+30 secciones** — se priorizaron los fixes de mayor impacto con evidencia real (tests/build/e2e en
+verde) en vez de fingir cobertura completa de cada bloque. Ver el mensaje de auditoría anterior en
+el historial de conversación para el detalle de los 9 hallazgos que originaron este sprint.
+
+**Hecho y verificado (lint + typecheck + 323 tests unitarios + `validate:content` + build + 47 e2e,
+todo en verde):**
+- **Terminal desde cero**: nueva sección "Cómo abrir una terminal por primera vez" (Windows/macOS/
+  Linux, copiar/pegar seguro, seguridad básica) en `docs/Recursos/GUIA_HERRAMIENTAS_WORKSTATION.md`,
+  enlazada desde `GL-SETUP-01` paso 3 y desde `/preparar-entorno` (junto al comando del verificador).
+- **Bug real descubierto y corregido**: el renderer de markdown de la app (`markdown-renderer.tsx`,
+  solo `remark-gfm`) no soportaba anclas de heading ni admonitions estilo MkDocs (`!!! tip`). Se
+  instaló `rehype-slug` (dependencia nueva, pequeña, mismo ecosistema que `rehype-highlight`/
+  `rehype-raw` ya usados) para generar `id` reales en los headings — esto arregla no solo los anclas
+  nuevos de este sprint sino anclas **preexistentes ya rotos en producción** en `GL-SETUP-02/03/04`
+  (`#git`, `#nodejs-lts`, `#power-platform-cli-pac`, `#visual-studio-code`). Se reemplazó el bloque
+  `!!! tip "Prerequisito de Lenguaje"` (invisible/roto en la app) por un blockquote real en los
+  Módulos 13, 23, 27 y 34.
+- **Lab 03 — variante sin tenant**: sección nueva con los 6 entregables prometidos desde "Mi ruta"
+  (modelo de datos, wireframes, fórmulas Power Fx propuestas, flujo de navegación, casos de prueba,
+  reflexión de limitaciones), diferenciando explícitamente qué valida y qué no.
+- **Módulos 23 y 34 — prerrequisitos honestos**: banner "Antes de comenzar" con modo conceptual vs.
+  práctico, sin bloquear el acceso ni reducir el contenido técnico existente. Módulo 34 añade aviso
+  de costos de Azure y checklist de limpieza de recursos.
+- **Módulo 09 — FetchXML/OData**: introducción mínima (qué son, ejemplos, cuándo se usan) antes de su
+  primer uso en "Conceptos Clave".
+- **Empleabilidad conectada al recorrido**: sección "Convierte esto en evidencia laboral" al final de
+  los 5 capstones (61-65), y botón "Convierte este nivel en evidencia laboral" (no obligatorio) en el
+  banner de nivel completado (`level-progress-banner.tsx`).
+- **Terminología**: nota de convención ("entorno" / "solución administrada" como términos principales,
+  "ambiente" / "Managed" como sinónimos válidos) agregada en `GLOSARIO_TERMINOS.md`. **No** se hizo
+  una migración masiva de texto en todo el repo — se descartó por riesgo de reemplazos ciegos.
+- **404 de favicon**: `src/app/icon.svg` nuevo (no existía ningún icon file); confirmado en el build
+  que Next genera `<link rel="icon">` respetando `basePath`.
+- **404 de prefetch RSC** (`PlanEstudio.txt?_rsc=...`): mitigación acotada (`prefetch={false}` en el
+  link "Inicio" del sidebar) basada en diagnóstico de la causa más probable (prefetch de Next con
+  `output: export` + `basePath`); **no verificado en producción real** — pendiente de confirmar tras
+  deploy.
+- Guardarraíles nuevos en `scripts/validate-content.ts`: falla si los Módulos 13/23/27/34 pierden su
+  banner de prerrequisitos, si Lab 03 pierde la variante sin tenant, o si reaparece sintaxis `!!!`
+  rota en cualquier módulo. Test unitario nuevo para el enlace de empleabilidad en el banner de nivel
+  completo. Suite e2e nueva `e2e/beginner-continuity.spec.ts` (5 tests) cubriendo terminal, ancla real,
+  Lab 03, Módulos 23/34 y el flujo de empleabilidad.
+
+**Explícitamente NO hecho en este sprint (deferred, documentado, no inventado):**
+- **Programming Foundations for Power Platform** y **Azure Foundations for Power Platform
+  Integrations**: los dos cursos puente reales siguen sin existir. Los Módulos 23/34 ahora lo
+  declaran honestamente; el roadmap sigue pendiente de decisión de alcance con el usuario.
+- **No** se construyó el componente `TerminalPrimer` interactivo con tabs por SO — se resolvió con
+  contenido markdown (misma información, sin el componente React reutilizable pedido en la sección
+  5.3 del sprint original). Si se quiere la versión componentizada, es trabajo de un sprint futuro.
+- **No** se implementó el sistema de metadata `prerequisiteStatus`/`learningMode` con selector de
+  "modo conceptual/práctico" persistido en el store — el banner de prerrequisitos es contenido
+  estático, no un estado de progreso rastreado.
+- **No** se integró empleabilidad en portafolio/buscador/progreso más allá de los dos puntos ya
+  descritos (capstones + banner de nivel).
+- **No** se hizo la migración terminológica completa por módulo/lab/UI — solo la nota de convención.
+- **No** se corrió una auditoría manual de accesibilidad ni de los 6 perfiles A-F del sprint original
+  más allá de lo que ya cubre la suite e2e existente (dark mode, móvil 375px, teclado/skip-link).
+- **No** se hizo commit/push/deploy todavía en este mensaje — pendiente de confirmación del usuario
+  antes de push a `master` (ver política del repo de no dar por hecho el push).
+
 ## Sprint propuesto — Code Apps (Power Apps) — NO INICIADO (2026-08-03)
 
 El usuario notó que el plan no cubre **Power Apps Code Apps** (apps React/Vite con conectores/Dataverse

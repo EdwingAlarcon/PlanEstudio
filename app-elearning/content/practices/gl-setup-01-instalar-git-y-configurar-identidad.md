@@ -58,7 +58,9 @@ dejarlo configurado con tu identidad, sin asumir experiencia previa con la termi
 1. Abre [`/preparar-entorno`](/preparar-entorno) y confirma tu sistema operativo.
 2. Instala Git siguiendo la sección correspondiente de la
    [Guía de herramientas de estación](/recursos/guia-herramientas-workstation#git).
-3. Abre una terminal **nueva** (cierra cualquiera que ya tuvieras abierta) y ejecuta:
+3. Abre una terminal **nueva** (cierra cualquiera que ya tuvieras abierta). Si nunca has abierto una
+   terminal, sigue primero [cómo abrir una terminal por primera vez](/recursos/guia-herramientas-workstation#cómo-abrir-una-terminal-por-primera-vez)
+   — explica Windows, macOS y Linux, y cómo copiar y pegar un comando de forma segura. Luego ejecuta:
    ```
    git --version
    ```

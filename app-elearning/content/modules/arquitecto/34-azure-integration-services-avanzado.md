@@ -6,6 +6,39 @@ certification: "Arquitectura Power Platform"
 estimatedMinutes: 12
 slug: "azure-integration-services-avanzado"
 ---
+### 🚧 Antes de comenzar: este módulo no es autosuficiente en Azure
+
+> **Requiere fundamentos de Azure que PlanEstudio todavía no enseña desde cero:** suscripción de
+> Azure, Azure Portal, resource groups, regiones, roles y permisos (RBAC), y consumo/costos. Las
+> "Actividades Prácticas" de este módulo son fragmentos de código de producción (JSON de Logic Apps,
+> XML de políticas APIM, C# con `async`/LINQ en Durable Functions) — para ejecutarlas de verdad
+> necesitas además crear los recursos de Azure correspondientes en el portal, lo cual **no está
+> explicado en este módulo**.
+
+**Elige cómo avanzar según tu situación real:**
+
+- **Modo conceptual (recomendado si nunca has usado Azure):** analiza las arquitecturas, compara los
+  servicios entre sí, diseña el flujo de integración en un diagrama, mapea qué patrón (dual-write,
+  DMF, virtual tables) aplicarías a un caso dado, e identifica riesgos de seguridad y costos —
+  todo esto sin crear ningún recurso real. **Este modo no valida que puedas desplegar o depurar una
+  integración de Azure en producción.**
+- **Modo práctico:** requiere una suscripción de Azure (de pago, o con créditos de una cuenta
+  gratuita/estudiante), permisos para crear recursos, y supervisión activa de costos — ver aviso
+  abajo. Un puente real de fundamentos de Azure (Azure Foundations for Power Platform Integrations)
+  está en el roadmap de PlanEstudio y todavía no existe.
+
+> ⚠️ **Aviso de costos:** algunos servicios de Azure (Logic Apps Standard, API Management, Service
+> Bus Premium, Azure Functions con planes dedicados) **pueden generar costos reales**, incluso en
+> pruebas pequeñas, según el plan y la región. Antes de crear cualquier recurso: verifica el tipo de
+> suscripción, revisa el pricing del servicio, y agrupa todo en un Resource Group dedicado que
+> puedas eliminar por completo al terminar. No asumas que todo en Azure es gratuito solo porque el
+> resto de este curso lo fue.
+
+**Checklist de limpieza si trabajas en modo práctico:** al terminar cualquier actividad de este
+módulo, confirma — (1) qué recursos creaste, (2) en qué Resource Group, (3) qué costo estimado
+generaron, (4) que los desactivaste o eliminaste, y (5) que no queda ningún recurso facturable activo
+en tu suscripción. Revísalo en el portal de Azure, no solo de memoria.
+
 ### 🎯 Objetivo
 Diseñar e implementar arquitecturas de integración enterprise usando el stack completo de Azure Integration Services: Logic Apps, API Management, Service Bus, Event Grid, Azure Functions y Azure Data Factory, orquestados para crear sistemas de integración robustos con Power Platform en el centro.
 

@@ -60,4 +60,14 @@ describe("LevelProgressBannerClient — reactividad ante cambios externos del st
 
     expect(screen.getByText(/Completado!/)).toBeInTheDocument();
   });
+
+  it("ofrece un enlace no obligatorio a empleabilidad al completar un nivel", () => {
+    for (let i = 1; i <= 8; i++) {
+      useProgressStore.getState().markModuleComplete(`basico-${i}`);
+    }
+    render(<LevelProgressBannerClient levelId="basico" />);
+
+    const employabilityLink = screen.getByRole("link", { name: /Convierte este nivel en evidencia laboral/i });
+    expect(employabilityLink).toHaveAttribute("href", "/empleabilidad");
+  });
 });

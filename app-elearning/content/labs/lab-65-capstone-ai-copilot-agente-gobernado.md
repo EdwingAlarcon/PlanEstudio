@@ -158,3 +158,15 @@ Documenta cómo debería comportarse el agente en ese caso y qué control lo gar
 - Análisis de riesgos de IA y definición de mitigaciones concretas.
 - Diseño de políticas de escalamiento humano con criterios objetivos.
 - Planeación de monitoreo y auditoría de un agente en producción.
+
+## Convierte esto en evidencia laboral
+
+Diseñar un agente con riesgos y escalamiento humano bien pensados es evidencia diferenciadora en un
+mercado saturado de demos de IA sin gobierno.
+
+- Documenta el diseño, la matriz de riesgos y los transcripts de prueba con la
+  [Guía de Portafolio](/recursos/portafolio-profesional).
+- Explora las guías por perfil en [Empleabilidad](/empleabilidad) para conectar este proyecto con
+  vacantes reales.
+- Prepara cómo defender las decisiones de gobierno del agente en entrevista con la
+  [guía Job-Ready de entrevistas y portafolio](/recursos/job-ready-interview-readiness).

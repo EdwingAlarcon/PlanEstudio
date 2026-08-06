@@ -3,6 +3,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeSlug from "rehype-slug";
 import { cn } from "@/lib/utils";
 import { MermaidDiagram } from "@/components/modules/mermaid-diagram";
 import type { Components } from "react-markdown";
@@ -246,7 +247,7 @@ interface MarkdownRendererProps {
 export function MarkdownRenderer({ content, className }: MarkdownRendererProps) {
   return (
     <article className={cn(PROSE_CLASSES, className)}>
-      <ReactMarkdown remarkPlugins={[remarkGfm]} components={COMPONENTS}>
+      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSlug]} components={COMPONENTS}>
         {content}
       </ReactMarkdown>
     </article>

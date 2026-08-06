@@ -222,3 +222,17 @@ completar el Fit-Gap: ¿qué requerimientos degradarías primero y por qué?
 - Trazabilidad de requerimientos a evidencia.
 - Preparación y ejecución de UAT.
 - Comunicación funcional para stakeholders no técnicos.
+
+## Convierte esto en evidencia laboral
+
+Ya tienes un caso completo de discovery a UAT — conviértelo en un caso de portafolio defendible en
+entrevista.
+
+- Estructura este proyecto como caso STAR (Situación, Tarea, Acción, Resultado): problema, tus
+  decisiones de fit-gap, y el resultado medible — ver la
+  [guía Job-Ready CRM Functional](/recursos/job-ready-crm-functional).
+- Documenta la evidencia siguiendo la [Guía de Portafolio](/recursos/portafolio-profesional).
+- Prepara respuestas de entrevista técnica y conductual con la
+  [guía Job-Ready de entrevistas y portafolio](/recursos/job-ready-interview-readiness).
+- Preséntalo como proyecto simulado con evidencia real, no como implementación en cliente real si
+  no lo fue.

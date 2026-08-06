@@ -6,8 +6,33 @@ certification: "PL-400"
 estimatedMinutes: 11
 slug: "c-plugins-para-dataverse"
 ---
-!!! tip "Prerequisito de Lenguaje"
-    Este módulo requiere conocimientos básicos de **C# y .NET**: clases, interfaces, herencia, NuGet y async/await. Si es tu primer contacto con C#, dedica al menos 2 semanas al [Anexo de Lenguajes de Programación](/recursos/lenguajes-programacion) — sección C# — antes de continuar.
+### 🚧 Antes de comenzar: este módulo no es autosuficiente en programación
+
+> **Requiere conocimientos previos que PlanEstudio todavía no enseña desde cero:** programación
+> básica, C# (clases, interfaces, herencia, excepciones, async/await), NuGet, y familiaridad con
+> Visual Studio y testing unitario (Moq). El [Anexo de Lenguajes de Programación](/recursos/lenguajes-programacion)
+> es una **referencia de sintaxis para quien ya programa**, no un curso de fundamentos — no lo trates
+> como preparación suficiente si nunca has escrito código antes.
+
+**Elige cómo avanzar según tu situación real:**
+
+- **Ya programas en C# o un lenguaje similar (Java, TypeScript con tipado fuerte):** puedes seguir
+  el módulo completo, incluidas las actividades prácticas, con normalidad.
+- **Programas en otro lenguaje pero nunca en C#:** puedes seguir el módulo, pero dedica tiempo extra
+  a los conceptos de tipado fuerte, interfaces y `async/await` antes de la Actividad 23.1 — no vienen
+  explicados aquí.
+- **Nunca has programado:** te recomendamos estudiar este módulo en **modo conceptual**: lee la
+  arquitectura del pipeline de plugins, el contexto de ejecución, el tracing y los patrones de
+  registro para entender **qué hace** un plugin y **cuándo** se usa — sin intentar todavía compilar
+  ni registrar el código tú mismo. Esto te prepara para una conversación técnica o una decisión de
+  arquitectura, pero **no valida que puedas desarrollar un plugin de forma independiente**. Ese
+  puente de programación real (Programming Foundations for Power Platform) está en el roadmap de
+  PlanEstudio y todavía no existe — no lo des por hecho.
+
+**Antes de los labs asociados a este módulo, confirma que tienes:** C# y .NET (según arriba), Visual
+Studio instalado, y acceso a un ambiente Dataverse propio o compartido para registrar y probar el
+plugin — sin esto, solo la lectura conceptual y los unit tests locales (que no requieren tenant) son
+realizables.
 
 ### 🎯 Objetivo
 Desarrollar plugins C# robustos para ejecutar lógica de negocio compleja en el servidor de Dataverse: validaciones, cálculos, integraciones síncronas con APIs externas, y patrones de plugin avanzados como Early-Bound entities y Shared Variables.

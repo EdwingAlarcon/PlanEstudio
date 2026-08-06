@@ -142,6 +142,10 @@ function LevelCompleteBanner({ levelId, total }: { levelId: LevelId; total: numb
           Generar certificado
         </Button>
 
+        <Button asChild size="sm" variant="outline">
+          <Link href="/empleabilidad">Convierte este nivel en evidencia laboral</Link>
+        </Button>
+
         {nextLevelId && (
           <Button asChild size="sm">
             <Link href={`/nivel/${nextLevelId}`}>
