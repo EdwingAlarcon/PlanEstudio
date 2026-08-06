@@ -740,14 +740,27 @@ completado en el mismo día.** Contexto para quien retome esto (Codex u otra ses
   (323/323), `build:pages` y `npm run e2e` (47/47) en verde. Nota operativa confirmada de nuevo:
   no correr `typecheck` en paralelo con `build:pages` porque ambos tocan `.next` y puede aparecer un
   falso TS6053 sobre `.next/types`.
-- **Próximo paso al retomar**: continuar escalando nivel por nivel, un commit por nivel. Hechos:
-  Básico (1-8), Intermedio (9-17), Avanzado (18-30), Arquitecto (31-41) e IA (42-55). Orden sugerido
-  para lo que falta: D365 (56-65, 10 módulos), RPA (66-75, 10 módulos). Mismo patrón: leer el
-  "Caso Real de Negocio" real de cada módulo, 5 preguntas
-  `appliesTo: "caso"` al final del array del módulo en `evaluaciones-simulador.js`, regenerar con
-  `extract-questions.mjs`, correr `validate:content` + lint + tsc + tests + build antes de cada
-  commit (e2e es opcional/informativo en máquina local larga — ver nota de flakiness arriba; el
-  run de CI en GitHub Actions tras el push es la validación real de e2e).
+- **Nivel D365 completado por Codex (2026-08-06)**: 50 preguntas nuevas (5 por módulo) para los
+  módulos 56-65, ancladas a sus casos reales de negocio: Sales, Customer Service, Field Service,
+  Project Operations, Finance, Supply Chain, Commerce, Marketing/Journeys, Contact Center y el
+  capstone integrado D365. Total banco tras `extract-questions.mjs`: **833 preguntas** (508 quiz +
+  325 caso). Niveles Básico, Intermedio, Avanzado, Arquitecto, IA y D365 completos (módulos 1-65).
+- **Validación local del Nivel D365**: `validate:content`, `questions-parser.test.ts`, `lint`,
+  `typecheck`, `test:coverage` (323/323) y `build:pages` en verde antes del commit.
+- **Nivel RPA completado por Codex (2026-08-06)**: 50 preguntas nuevas (5 por módulo) para los
+  módulos 66-75, preservando las 20 preguntas normales de quiz que ya existían en RPA. Los
+  diagnósticos cubren viabilidad RPA/API, ejecución unattended, mantenibilidad por subflows,
+  idempotencia de archivos y pagos, automatización web, legacy Win32, selectores resilientes,
+  orquestación cloud+PAD+Dataverse y ALM/rollback por ambiente. Total banco tras
+  `extract-questions.mjs`: **883 preguntas** (508 quiz + 375 caso). Todos los 75 módulos ya tienen
+  "Diagnóstico de caso aplicado".
+- **Validación local final del sprint de Diagnóstico de caso aplicado**: `validate:content`, `lint`,
+  `typecheck`, `test:coverage` (323/323), `build:pages` y `npm run e2e` (47/47) en verde, corridos en
+  serie. El guardarraíl `questions-parser.test.ts` ahora exige preguntas de caso para los módulos
+  1-75 y mantiene que `getQuestionsForModule()` no incluya preguntas `appliesTo: "caso"`.
+- **Próximo paso al retomar**: ya no quedan niveles pendientes para escalar el Diagnóstico de caso
+  aplicado. Solo revisar el estado de CI/deploy remoto del último push; si GitHub Actions sigue en
+  cola/capacidad, no asumir regresión local sin evidencia porque la validación local completa pasó.
 
 ### Contexto original del diseño (2026-08-03/04, antes de implementar)
 

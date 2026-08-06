@@ -6,8 +6,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Before starting new work, read `SPRINT_HANDOFF.md`. It is the active operational memory for the post-audit sprints.
 
-Current stable state as of the latest pushed `master` commit (2026-07-30):
-- Latest pushed/deployed sprint: **Developer Workstation, Environment Setup & Project Foundations —
+Current stable state as of the latest local handoff (2026-08-06):
+- Latest product/content sprint: **Diagnóstico de caso aplicado** complete for all 75 modules. The
+  normal quiz pool remains **508 questions**; the case-diagnosis pool now has **375 questions** (5
+  per module), for **883 questions total** in the generated bank. See `SPRINT_HANDOFF.md`, section
+  "Sprint — Diagnóstico de caso aplicado", for exact commits, validations and CI/deploy status.
+- Previous pushed/deployed sprint: **Developer Workstation, Environment Setup & Project Foundations —
   Fase 2, sub-fases A–F, all complete** — commit `ea03d77` (`fix: corregir extracción de versión .NET,
   añadir umbral outdated y auditoría de 6 perfiles`). CI/deploy run `30579292651` completed
   successfully; production verified at `https://edwingalarcon.github.io/PlanEstudio/preparar-entorno`
@@ -35,9 +39,10 @@ Current stable state as of the latest pushed `master` commit (2026-07-30):
   `PRODUCT.md`/`DESIGN.md`/`.impeccable/design.json` (Sprint 21)**.
 - GitHub Pages production has been verified at `https://edwingalarcon.github.io/PlanEstudio/` after
   every sub-fase above.
-- Fixed learning content counts: **75 modules, 72 labs, 508 questions, 633 checklist criteria**. These
-  did NOT change in the Workstation Setup sprint — that sprint added a parallel `preparar-entorno`
-  layer and grew the professional-practice pilot, not modules/labs.
+- Fixed learning content counts: **75 modules, 72 labs, 508 quiz questions, 375 case-diagnosis
+  questions, 633 checklist criteria**. The case-diagnosis questions are tagged with
+  `appliesTo: "caso"` and are intentionally excluded from `getQuestionsForModule()` and the simulator
+  quiz pool.
 - Professional practice pilot counts: **32 practices total — 18 incidents, 6 challenges, 2
   simulations, 6 guided**. Do not merge these into the existing lab count. `guided` is a new count as
   of sub-fase D — `getPracticeCounts()` now returns a `guided` field in addition to
@@ -45,8 +50,7 @@ Current stable state as of the latest pushed `master` commit (2026-07-30):
 - `/preparar-entorno` state uses its own localStorage key `planestudio.workstation.v1`
   (`workstation-store.ts`), independent from `plan-estudio-progress` (academic) and
   `planestudio.practice-progress.v1` (professional practice). **Never merge these three stores.**
-- Current local/CI test baseline: **316 Vitest tests** and **42 Playwright smoke tests** (up from 238 /
-  25 pre-Workstation-Setup-sprint).
+- Current local test baseline: **323 Vitest tests** and **47 Playwright smoke tests**.
 - Post-audit content roadmap (sprints 1-20) is fully closed — no known pending items. Sprints 21-22
   added a design-system layer (`DESIGN.md`, "The Fluent Learning Console") and closed real a11y/perf
   bugs found via `/impeccable audit`. See `SPRINT_HANDOFF.md` sprints 21-22 for full detail before

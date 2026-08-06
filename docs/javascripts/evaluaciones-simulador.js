@@ -10310,44 +10310,1110 @@
     }
   ],
   66: [
-    { type: "single", prompt: "Un sistema legacy no expone API, pero su pantalla cambia cada semana y el volumen es bajo. ¿Cuál es la decisión más profesional?", options: ["Automatizar con RPA sin más análisis", "Rechazar o posponer RPA y proponer mejora manual/proceso estable hasta reducir variabilidad", "Usar coordenadas para acelerar", "Prometer unattended"], answer: [1], explanation: "RPA requiere interfaz suficientemente estable y beneficio que justifique la deuda operativa." },
-    { type: "multi", prompt: "¿Qué evidencias debe incluir una evaluación de viabilidad RPA?", options: ["Matriz RPA/API/conector/cloud/manual", "Riesgos y excepciones", "Deuda operativa", "Contraseñas de prueba en texto plano"], answer: [0, 1, 2], explanation: "La viabilidad combina opción técnica, riesgo, excepciones y operación; nunca secretos." }
+      {
+          "type": "single",
+          "prompt": "Un sistema legacy no expone API, pero su pantalla cambia cada semana y el volumen es bajo. ¿Cuál es la decisión más profesional?",
+          "options": [
+              "Automatizar con RPA sin más análisis",
+              "Rechazar o posponer RPA y proponer mejora manual/proceso estable hasta reducir variabilidad",
+              "Usar coordenadas para acelerar",
+              "Prometer unattended"
+          ],
+          "answer": [
+              1
+          ],
+          "explanation": "RPA requiere interfaz suficientemente estable y beneficio que justifique la deuda operativa."
+      },
+      {
+          "type": "multi",
+          "prompt": "¿Qué evidencias debe incluir una evaluación de viabilidad RPA?",
+          "options": [
+              "Matriz RPA/API/conector/cloud/manual",
+              "Riesgos y excepciones",
+              "Deuda operativa",
+              "Contraseñas de prueba en texto plano"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "La viabilidad combina opción técnica, riesgo, excepciones y operación; nunca secretos."
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 66): En el proceso de correos, adjuntos y portal bancario, ¿qué parte justifica usar RPA?",
+          "options": [
+              "Solo la carga final en el portal bancario sin API disponible",
+              "La lectura de correos aunque exista cloud flow",
+              "La validación de datos aunque pueda hacerse en Excel o Dataverse",
+              "Todo el proceso de punta a punta para evitar arquitectura"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso reduce la superficie frágil: correo, adjuntos y validación quedan en servicios más estables; RPA se reserva para la UI del portal sin API.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 66): ¿Qué decisiones reducen la deuda operativa del bot?",
+          "options": [
+              "Mover la descarga de correos y adjuntos a cloud flow",
+              "Validar datos antes de abrir el portal bancario",
+              "Usar RPA solo donde no existe API o conector viable",
+              "Automatizar cada clic del proceso aunque haya alternativas"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "La arquitectura profesional usa RPA como último tramo necesario, no como sustituto de integración, validación y orquestación disponibles.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 66): ¿Cuál sería una mala señal en la evaluación de viabilidad?",
+          "options": [
+              "Aceptar RPA para todo el proceso sin comparar API, conector, cloud flow o validación previa",
+              "Documentar que el portal no tiene API",
+              "Separar excepciones antes de cargar al banco",
+              "Medir volumen y frecuencia del proceso"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso pide decidir con criterio. Si se automatiza todo por UI sin evaluar alternativas, aumenta fragilidad y costo de soporte.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 66): ¿Qué evidencias sustentan la decisión de automatizar solo el tramo bancario?",
+          "options": [
+              "El portal bancario no expone API útil para la carga",
+              "El volumen del proceso justifica la operación del bot",
+              "La validación previa reduce errores antes de tocar el portal",
+              "El bot puede ejecutar con credenciales personales del desarrollador"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "Viabilidad RPA combina ausencia de integración soportada, beneficio operativo y controles previos. Credenciales personales no son evidencia aceptable.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 66): ¿Qué resultado demuestra una arquitectura más mantenible?",
+          "options": [
+              "El bot recibe datos ya validados y solo registra en el portal sin API",
+              "El bot abre Outlook, descarga adjuntos, valida, transforma y carga todo por pantalla",
+              "El bot usa sleeps fijos para compensar cualquier demora",
+              "El bot ignora registros dudosos sin trazabilidad"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "Un desktop flow pequeño, con entradas validadas y responsabilidad clara, es más fácil de soportar que una automatización UI gigante.",
+          "appliesTo": "caso"
+      }
   ],
   67: [
-    { type: "single", prompt: "El flujo funciona attended pero falla unattended. ¿Qué revisar antes de modificar selectores?", options: ["Usuario, sesión, permisos, runtime, máquina y resolución", "Solo colores de la app", "Únicamente el nombre del flujo", "Cambiar todos los botones a coordenadas"], answer: [0], explanation: "La diferencia attended/unattended suele estar en sesión, cuenta, máquina, permisos o runtime." },
-    { type: "single", prompt: "¿Qué representa una conexión de máquina en RPA?", options: ["Cómo Power Automate se conecta e inicia sesión para ejecutar en una máquina", "Un archivo Excel", "Un selector web", "Un tipo de variable"], answer: [0], explanation: "La conexión define la relación de ejecución con la máquina y sus credenciales asociadas." }
+      {
+          "type": "single",
+          "prompt": "El flujo funciona attended pero falla unattended. ¿Qué revisar antes de modificar selectores?",
+          "options": [
+              "Usuario, sesión, permisos, runtime, máquina y resolución",
+              "Solo colores de la app",
+              "Únicamente el nombre del flujo",
+              "Cambiar todos los botones a coordenadas"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "La diferencia attended/unattended suele estar en sesión, cuenta, máquina, permisos o runtime."
+      },
+      {
+          "type": "single",
+          "prompt": "¿Qué representa una conexión de máquina en RPA?",
+          "options": [
+              "Cómo Power Automate se conecta e inicia sesión para ejecutar en una máquina",
+              "Un archivo Excel",
+              "Un selector web",
+              "Un tipo de variable"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "La conexión define la relación de ejecución con la máquina y sus credenciales asociadas."
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 67): El bot funciona en el PC del desarrollador pero falla en la VM de operaciones. ¿Cuál es el diagnóstico más probable del caso?",
+          "options": [
+              "La aplicación legacy está instalada o configurada solo en el perfil del desarrollador",
+              "El selector debe convertirse inmediatamente a coordenadas",
+              "Power Automate Desktop no sirve para aplicaciones legacy",
+              "La solución se corrige cambiando el nombre del flujo"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso describe una brecha de máquina, sesión, usuario e instalación. Antes de tocar acciones, hay que validar el entorno de ejecución.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 67): ¿Qué controles pertenecen al readiness de ejecución unattended?",
+          "options": [
+              "Aplicación instalada para el usuario que ejecuta el bot",
+              "Permisos, sesión y resolución validados en la VM",
+              "Credenciales y conexión de máquina configuradas por ambiente",
+              "Dependencia de que el desarrollador deje su sesión abierta"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "Unattended exige entorno reproducible. Depender de la sesión del desarrollador contradice el diseño operativo.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 67): ¿Qué corrección evita repetir el mismo fallo en UAT?",
+          "options": [
+              "Crear una checklist de máquina, usuario, instalación, permisos y prueba de arranque",
+              "Agregar más esperas fijas en todos los pasos",
+              "Cambiar todos los selectores por imágenes",
+              "Ejecutar siempre desde el equipo del desarrollador"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "La solución es de arquitectura operativa: validar que la máquina objetivo puede iniciar y operar la app con la cuenta correcta.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 67): ¿Qué evidencias deben existir antes de declarar listo el bot?",
+          "options": [
+              "Ejecución exitosa en la VM de operaciones o TEST",
+              "Registro de usuario usado, permisos y versión instalada",
+              "Prueba de inicio de sesión y apertura de la aplicación legacy",
+              "Captura del diseñador ejecutando en DEV únicamente"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "La evidencia válida pertenece al entorno objetivo, no solo al diseñador o a la máquina del autor.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 67): ¿Por qué modificar selectores sin revisar la VM sería riesgoso?",
+          "options": [
+              "Porque podría ocultar que el problema real es instalación, usuario o sesión",
+              "Porque los selectores nunca fallan en unattended",
+              "Porque la VM no influye en PAD",
+              "Porque los bots no requieren permisos"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El síntoma aparece al cambiar de entorno. El primer análisis debe confirmar contexto de ejecución antes de cambiar la lógica.",
+          "appliesTo": "caso"
+      }
   ],
   68: [
-    { type: "single", prompt: "¿Qué estructura favorece mantenibilidad en un desktop flow?", options: ["Un flujo lineal de 200 acciones", "Subflows para inicializar, validar, ejecutar, errores, cierre y logging", "Variables sin nombre", "Pausas fijas entre todo"], answer: [1], explanation: "Separar responsabilidades permite soporte, pruebas y cambios más seguros." },
-    { type: "multi", prompt: "¿Qué outputs son útiles para operación?", options: ["Total procesado", "Errores", "Ruta del log", "Contraseña usada"], answer: [0, 1, 2], explanation: "Outputs operativos resumen resultado sin exponer secretos." }
+      {
+          "type": "single",
+          "prompt": "¿Qué estructura favorece mantenibilidad en un desktop flow?",
+          "options": [
+              "Un flujo lineal de 200 acciones",
+              "Subflows para inicializar, validar, ejecutar, errores, cierre y logging",
+              "Variables sin nombre",
+              "Pausas fijas entre todo"
+          ],
+          "answer": [
+              1
+          ],
+          "explanation": "Separar responsabilidades permite soporte, pruebas y cambios más seguros."
+      },
+      {
+          "type": "multi",
+          "prompt": "¿Qué outputs son útiles para operación?",
+          "options": [
+              "Total procesado",
+              "Errores",
+              "Ruta del log",
+              "Contraseña usada"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "Outputs operativos resumen resultado sin exponer secretos."
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 68): Un flujo con 180 acciones lineales es difícil de soportar. ¿Qué refactor responde mejor al caso?",
+          "options": [
+              "Dividirlo en subflows por validación, navegación, procesamiento, errores y cierre",
+              "Agregar comentarios al inicio y dejar las 180 acciones juntas",
+              "Duplicar el flujo para cada excepción",
+              "Reemplazar toda validación por sleeps"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "Los subflows separan responsabilidades y permiten aislar puntos de reinicio, validación y soporte.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 68): ¿Qué beneficios espera soporte después del refactor?",
+          "options": [
+              "Encontrar más rápido dónde falló la ejecución",
+              "Reducir cambios accidentales en pasos no relacionados",
+              "Reiniciar desde checkpoints claros cuando sea seguro",
+              "Eliminar la necesidad de registrar errores"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "El objetivo del caso es mantenibilidad operativa: diagnóstico más rápido, cambios acotados y reanudación controlada.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 68): ¿Qué señal indica que el flujo todavía no está listo para operación?",
+          "options": [
+              "Nadie puede explicar los puntos de validación y reinicio",
+              "Tiene subflows con nombres de negocio",
+              "Devuelve métricas al final",
+              "Cierra aplicaciones en el cleanup"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "Si soporte no entiende dónde validar o reiniciar, el bot sigue siendo una caja negra frágil.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 68): ¿Qué subflows son coherentes con el caso?",
+          "options": [
+              "Inicializar y validar entradas",
+              "Procesar registros",
+              "Manejar excepciones y registrar evidencia",
+              "Guardar contraseñas en variables visibles"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "La estructura debe reflejar fases operativas. Secretos visibles no forman parte de un diseño mantenible.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 68): ¿Qué métrica demostraría mejora real después del refactor?",
+          "options": [
+              "Menor tiempo medio de diagnóstico y corrección de fallos",
+              "Mayor cantidad de acciones en el mismo flujo",
+              "Más dependencias de la pantalla del desarrollador",
+              "Menos logs para leer"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso se centra en soporte. La mejora debe verse en tiempo de diagnóstico, cambios más seguros y menor esfuerzo operativo.",
+          "appliesTo": "caso"
+      }
   ],
   69: [
-    { type: "single", prompt: "Un bot deja procesos Excel abiertos tras fallar. ¿Qué patrón corrige el riesgo?", options: ["Subflow de cleanup ejecutado en éxito y error", "Aumentar memoria de la PC solamente", "Ignorar archivos bloqueados", "Usar Excel como base productiva"], answer: [0], explanation: "El cleanup controlado libera recursos aunque la ejecución falle." },
-    { type: "multi", prompt: "¿Qué controles evitan duplicados al procesar archivos?", options: ["Clave por registro o lote", "Carpeta de procesados", "Manifest de archivos", "Reprocesar todo sin validar"], answer: [0, 1, 2], explanation: "La idempotencia requiere saber qué ya fue procesado." }
+      {
+          "type": "single",
+          "prompt": "Un bot deja procesos Excel abiertos tras fallar. ¿Qué patrón corrige el riesgo?",
+          "options": [
+              "Subflow de cleanup ejecutado en éxito y error",
+              "Aumentar memoria de la PC solamente",
+              "Ignorar archivos bloqueados",
+              "Usar Excel como base productiva"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El cleanup controlado libera recursos aunque la ejecución falle."
+      },
+      {
+          "type": "multi",
+          "prompt": "¿Qué controles evitan duplicados al procesar archivos?",
+          "options": [
+              "Clave por registro o lote",
+              "Carpeta de procesados",
+              "Manifest de archivos",
+              "Reprocesar todo sin validar"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "La idempotencia requiere saber qué ya fue procesado."
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 69): La operación carga archivos de sucursales cada mañana. ¿Qué control evita insertar registros duplicados?",
+          "options": [
+              "Una clave o manifest que marque archivos y registros ya procesados",
+              "Reprocesar todos los archivos todos los días",
+              "Cerrar Excel solo cuando no haya errores",
+              "Cambiar la carpeta de entrada manualmente"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso requiere procesar solo novedades. La idempotencia necesita una marca persistente de lo ya cargado.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 69): ¿Qué controles operativos pertenecen al flujo?",
+          "options": [
+              "Cerrar Excel en éxito y error",
+              "Generar reporte de auditoría por ejecución",
+              "Mover o marcar archivos procesados",
+              "Ignorar archivos fallidos para que el lote termine en verde"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "El bot debe liberar recursos, dejar evidencia y separar procesados. Ocultar fallos rompe la auditoría.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 69): ¿Qué decisión mejora la recuperación cuando un archivo falla a mitad del lote?",
+          "options": [
+              "Registrar estado por archivo o registro y continuar/reintentar de forma controlada",
+              "Borrar todo el lote y comenzar desde cero sin validación",
+              "Asumir que Excel cerrará automáticamente",
+              "Guardar el resultado solo en la pantalla"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso exige continuidad diaria. Persistir estado permite reanudar sin duplicar ni perder trazabilidad.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 69): ¿Qué debe incluir el reporte de auditoría?",
+          "options": [
+              "Archivos recibidos, procesados, omitidos y fallidos",
+              "Conteo de registros insertados y rechazados",
+              "Detalle de errores o evidencia asociada",
+              "Contraseña del usuario que ejecutó el bot"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "Auditoría significa trazabilidad de resultado y error, no exposición de credenciales.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 69): ¿Qué práctica reduce bloqueos de archivos en ejecuciones futuras?",
+          "options": [
+              "Usar un subflow de cleanup que cierre libros y procesos Excel aun cuando ocurra error",
+              "Dejar Excel abierto para revisar manualmente",
+              "Reiniciar la máquina como primer paso normal",
+              "Procesar con archivos abiertos por varios usuarios"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "Cerrar recursos en una ruta de limpieza evita archivos bloqueados y ejecuciones inestables al día siguiente.",
+          "appliesTo": "caso"
+      }
   ],
   70: [
-    { type: "single", prompt: "Si un portal tiene API soportada para descargar datos, ¿qué alternativa suele ser preferible?", options: ["API o conector antes que automatización UI", "Click por coordenadas", "OCR de toda la página", "Copiar manualmente siempre"], answer: [0], explanation: "Una API soportada suele ser más estable, observable y mantenible que UI automation." },
-    { type: "single", prompt: "¿Qué espera es más robusta en una automatización web?", options: ["Esperar a que exista/sea visible el elemento o estado esperado", "Sleep fijo muy largo", "Ninguna espera", "Mover el mouse al azar"], answer: [0], explanation: "La sincronización por estado reduce fallos por carga asincrónica." }
+      {
+          "type": "single",
+          "prompt": "Si un portal tiene API soportada para descargar datos, ¿qué alternativa suele ser preferible?",
+          "options": [
+              "API o conector antes que automatización UI",
+              "Click por coordenadas",
+              "OCR de toda la página",
+              "Copiar manualmente siempre"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "Una API soportada suele ser más estable, observable y mantenible que UI automation."
+      },
+      {
+          "type": "single",
+          "prompt": "¿Qué espera es más robusta en una automatización web?",
+          "options": [
+              "Esperar a que exista/sea visible el elemento o estado esperado",
+              "Sleep fijo muy largo",
+              "Ninguna espera",
+              "Mover el mouse al azar"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "La sincronización por estado reduce fallos por carga asincrónica."
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 70): El proveedor no ofrece API y el volumen justifica automatización. ¿Por qué RPA es aceptable aquí?",
+          "options": [
+              "Porque automatiza una UI inevitable con beneficio operativo documentado",
+              "Porque RPA debe usarse aunque exista una API estable",
+              "Porque elimina la necesidad de monitorear cambios del portal",
+              "Porque permite ignorar excepciones de negocio"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso cumple el criterio: portal sin API viable, volumen suficiente y proceso repetitivo. Aun así requiere monitoreo y runbook.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 70): ¿Qué debe declarar el runbook cuando el proveedor cambia el portal?",
+          "options": [
+              "Revisar selectores y DOM antes de reactivar producción",
+              "Ejecutar una prueba de regresión del bot",
+              "Registrar evidencia del cambio y ajuste realizado",
+              "Seguir ejecutando con errores hasta que el usuario reclame"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "El caso menciona cambios de DOM como riesgo explícito. La operación debe tener pasos de revisión, prueba y evidencia.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 70): ¿Qué diseño es más robusto para consultar solicitudes y descargar reportes?",
+          "options": [
+              "Esperar estados o elementos específicos y validar cada descarga",
+              "Usar sleeps largos sin verificar resultado",
+              "Confiar en coordenadas para todos los botones",
+              "Omitir logs para acelerar la ejecución"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "La automatización web debe sincronizar por estado visible/esperado y confirmar artefactos descargados.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 70): ¿Qué riesgos deben quedar explícitos en la evaluación?",
+          "options": [
+              "Cambios de DOM o texto en el portal",
+              "Autenticación y disponibilidad del sitio del proveedor",
+              "Formato de reportes descargados",
+              "Que el volumen sea demasiado alto para justificar el bot"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "El caso depende de una UI externa y reportes descargados. Esos puntos son riesgos reales de mantenimiento.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 70): Si mañana el proveedor publica una API soportada, ¿qué decisión sería más profesional?",
+          "options": [
+              "Reevaluar la arquitectura y migrar gradualmente a integración API si reduce riesgo",
+              "Mantener siempre la automatización UI aunque sea más frágil",
+              "Duplicar el bot para comparar pantallas",
+              "Eliminar auditoría porque la API existe"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "RPA no es dogma. Si aparece una integración soportada, conviene comparar costo, estabilidad y trazabilidad.",
+          "appliesTo": "caso"
+      }
   ],
   71: [
-    { type: "single", prompt: "¿Por qué coordenadas e imágenes deben ser último recurso en apps legacy?", options: ["Son frágiles ante resolución, escalado y cambios de UI", "Siempre son más seguras", "No requieren pruebas", "Eliminan necesidad de selector"], answer: [0], explanation: "Coordenadas e imágenes se rompen con facilidad; deben justificarse como fallback." },
-    { type: "multi", prompt: "¿Qué factores afectan una automatización Windows?", options: ["Foco", "Ventanas modales", "Resolución y escalado", "Permisos del usuario"], answer: [0, 1, 2, 3], explanation: "La UI de escritorio depende de contexto visual, sesión y permisos." }
+      {
+          "type": "single",
+          "prompt": "¿Por qué coordenadas e imágenes deben ser último recurso en apps legacy?",
+          "options": [
+              "Son frágiles ante resolución, escalado y cambios de UI",
+              "Siempre son más seguras",
+              "No requieren pruebas",
+              "Eliminan necesidad de selector"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "Coordenadas e imágenes se rompen con facilidad; deben justificarse como fallback."
+      },
+      {
+          "type": "multi",
+          "prompt": "¿Qué factores afectan una automatización Windows?",
+          "options": [
+              "Foco",
+              "Ventanas modales",
+              "Resolución y escalado",
+              "Permisos del usuario"
+          ],
+          "answer": [
+              0,
+              1,
+              2,
+              3
+          ],
+          "explanation": "La UI de escritorio depende de contexto visual, sesión y permisos."
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 71): En el ERP Win32 sin API, ¿qué debe ocurrir antes de registrar cada solicitud del CSV?",
+          "options": [
+              "Validar el registro y descartar o marcar errores antes de tocar la UI",
+              "Enviar cada fila sin revisar para ganar tiempo",
+              "Capturar solo la primera pantalla",
+              "Cerrar el ERP después de cada campo"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso exige validar cada registro. La UI legacy debe recibir solo datos aptos o excepciones controladas.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 71): ¿Qué controles evitan estados ambiguos en la aplicación legacy?",
+          "options": [
+              "Esperar confirmación explícita después de guardar",
+              "Detectar ventanas modales o mensajes de error",
+              "Guardar evidencia cuando un registro falla",
+              "Asumir que cada tecla enviada fue aceptada"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "La automatización de escritorio necesita confirmar estado real y capturar evidencia de excepciones.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 71): ¿Cuándo sería aceptable usar imagen o coordenadas?",
+          "options": [
+              "Solo como fallback justificado cuando no hay selector estable y con pruebas de resolución",
+              "Como primera opción para todo el ERP",
+              "Para evitar validar mensajes de error",
+              "Para no documentar dependencias de pantalla"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "En Win32 legacy puede haber limitaciones, pero coordenadas e imágenes son frágiles y deben estar justificadas y probadas.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 71): ¿Qué evidencia debe conservarse por registro fallido?",
+          "options": [
+              "Identificador del registro o fila",
+              "Mensaje o pantalla de error capturada",
+              "Motivo de rechazo y estado final",
+              "Credenciales usadas por el bot"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "La evidencia debe permitir diagnóstico y reproceso seguro sin exponer secretos.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 71): ¿Qué contrato de salida ayuda a operar el bot?",
+          "options": [
+              "Procesados, rechazados, fallidos, evidencia y estado final por lote",
+              "Solo un mensaje genérico de terminado",
+              "Una captura del diseñador",
+              "El número de clicks realizados"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso necesita trazabilidad por registro y lote para saber qué se puede reprocesar y qué requiere intervención.",
+          "appliesTo": "caso"
+      }
   ],
   72: [
-    { type: "single", prompt: "Un selector incluye el número de versión del botón. ¿Qué riesgo introduce?", options: ["Se romperá con actualizaciones menores", "Será más portable", "Evita regresión", "Protege credenciales"], answer: [0], explanation: "Atributos dinámicos como versión no son buenos identificadores estables." },
-    { type: "multi", prompt: "¿Qué prácticas fortalecen selectores?", options: ["Ventana padre", "Atributos estables", "Selector alternativo", "Wildcard sin límite"], answer: [0, 1, 2], explanation: "La resiliencia viene de atributos estables y contexto; comodines excesivos pueden seleccionar mal." }
+      {
+          "type": "single",
+          "prompt": "Un selector incluye el número de versión del botón. ¿Qué riesgo introduce?",
+          "options": [
+              "Se romperá con actualizaciones menores",
+              "Será más portable",
+              "Evita regresión",
+              "Protege credenciales"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "Atributos dinámicos como versión no son buenos identificadores estables."
+      },
+      {
+          "type": "multi",
+          "prompt": "¿Qué prácticas fortalecen selectores?",
+          "options": [
+              "Ventana padre",
+              "Atributos estables",
+              "Selector alternativo",
+              "Wildcard sin límite"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "La resiliencia viene de atributos estables y contexto; comodines excesivos pueden seleccionar mal."
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 72): El botón cambió de `Enviar v3.14` a `Enviar v3.15`. ¿Cuál fue el defecto del selector?",
+          "options": [
+              "Dependía de texto dinámico que incluye la versión",
+              "Usaba demasiados atributos estables",
+              "Validaba demasiado bien la ventana padre",
+              "Tenía pruebas de regresión excesivas"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso muestra un selector acoplado a texto variable. Una actualización menor rompe el bot sin que cambie la intención del botón.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 72): ¿Qué acciones corrigen el problema de forma profesional?",
+          "options": [
+              "Usar atributos más estables o texto parcial controlado",
+              "Agregar contexto de ventana o contenedor padre",
+              "Crear prueba de regresión para la pantalla actualizada",
+              "Cambiar a coordenadas fijas como solución principal"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "La corrección debe fortalecer selector y prueba. Coordenadas fijas serían una solución frágil.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 72): ¿Qué prueba habría detectado el riesgo antes de producción?",
+          "options": [
+              "Una regresión que abra la versión nueva y confirme que el selector encuentra el botón correcto",
+              "Una prueba que solo cuente acciones del flujo",
+              "Una ejecución manual sin logs",
+              "Un cambio de nombre del bot"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso requiere probar contra la UI actualizada y verificar selección funcional, no solo existencia del flujo.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 72): ¿Qué atributos suelen ser mejores candidatos para estabilidad?",
+          "options": [
+              "AutomationId o identificador equivalente cuando existe",
+              "Rol/tipo del control y contenedor padre",
+              "Nombre funcional sin sufijos de versión",
+              "Texto completo con número de versión exacto"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "Los mejores selectores combinan identidad estable y contexto. El número de versión fue precisamente el punto frágil.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 72): ¿Qué cambio en el runbook reduce impacto futuro?",
+          "options": [
+              "Toda actualización de proveedor dispara revisión de selectores y smoke test",
+              "Solo se revisa el bot cuando ya haya doble registro",
+              "Se prohíben pruebas porque atrasan el despliegue",
+              "Se elimina el log de errores de UI"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso enseña que cambios pequeños de versión afectan la UI. El runbook debe convertir eso en una validación operativa explícita.",
+          "appliesTo": "caso"
+      }
   ],
   73: [
-    { type: "single", prompt: "¿Por qué reintentar todo un lote puede ser peligroso?", options: ["Puede repetir efectos ya confirmados y crear duplicados", "Siempre reduce riesgos", "Elimina la necesidad de logs", "Hace innecesario validar resultados"], answer: [0], explanation: "Sin idempotencia, retry global puede duplicar registros o pagos." },
-    { type: "multi", prompt: "¿Qué elementos apoyan idempotencia?", options: ["Clave única", "Checkpoint", "Estado persistente", "Retry infinito"], answer: [0, 1, 2], explanation: "Idempotencia requiere saber qué operación ya ocurrió y limitar reintentos." }
+      {
+          "type": "single",
+          "prompt": "¿Por qué reintentar todo un lote puede ser peligroso?",
+          "options": [
+              "Puede repetir efectos ya confirmados y crear duplicados",
+              "Siempre reduce riesgos",
+              "Elimina la necesidad de logs",
+              "Hace innecesario validar resultados"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "Sin idempotencia, retry global puede duplicar registros o pagos."
+      },
+      {
+          "type": "multi",
+          "prompt": "¿Qué elementos apoyan idempotencia?",
+          "options": [
+              "Clave única",
+              "Checkpoint",
+              "Estado persistente",
+              "Retry infinito"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "Idempotencia requiere saber qué operación ya ocurrió y limitar reintentos."
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 73): El bot registró un pago y falló al enviar confirmación; el operador reintentó y duplicó el pago. ¿Qué faltó?",
+          "options": [
+              "Checkpoint e idempotencia antes de repetir efectos de negocio",
+              "Más velocidad en los clicks",
+              "Un nombre más corto para el flujo",
+              "Desactivar validaciones de pago"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso muestra un efecto confirmado seguido de fallo secundario. Sin checkpoint, el retry repite una operación que ya ocurrió.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 73): ¿Qué información permite reanudar sin duplicar?",
+          "options": [
+              "Clave idempotente del pago o solicitud",
+              "Estado persistente por etapa",
+              "Confirmación o comprobante de registro",
+              "Retry infinito desde el primer paso"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "Reanudar con seguridad exige saber qué operación ya fue confirmada y desde qué punto continuar.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 73): ¿Cuál retry es seguro después del fallo de confirmación?",
+          "options": [
+              "Reintentar solo el envío de confirmación si el pago ya está marcado como registrado",
+              "Reejecutar todo el lote desde cero",
+              "Registrar otro pago para compensar",
+              "Borrar logs para evitar confusión"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El checkpoint separa el efecto de pago de la notificación. El retry debe continuar desde la etapa fallida, no repetir el efecto confirmado.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 73): ¿Qué controles deberían existir antes de ejecutar un pago?",
+          "options": [
+              "Consultar si la clave idempotente ya fue procesada",
+              "Validar estado previo de la solicitud",
+              "Registrar transición de estado antes y después del efecto",
+              "Permitir reintentos manuales sin revisar estado"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "El caso exige prevención de duplicados y trazabilidad de estado antes de operaciones con impacto financiero.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 73): ¿Qué alerta debería recibir soporte?",
+          "options": [
+              "Pago registrado, confirmación pendiente, retry seguro solo desde notificación",
+              "Fallo genérico, ejecutar todo de nuevo",
+              "Proceso exitoso aunque falte confirmación",
+              "No registrar nada para evitar ruido"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "Una alerta útil distingue el estado real del negocio y la siguiente acción segura.",
+          "appliesTo": "caso"
+      }
   ],
   74: [
-    { type: "single", prompt: "¿Qué debe devolver un desktop flow invocado por cloud flow?", options: ["Estado, mensaje, métricas y referencia a evidencia", "Solo una captura sin contexto", "La contraseña usada", "Nada"], answer: [0], explanation: "Un contrato de outputs permite monitoreo y soporte desde cloud." },
-    { type: "single", prompt: "¿Por qué persistir estado fuera de la VM?", options: ["Para reanudar, monitorear y auditar aunque la máquina falle", "Para ocultar errores", "Para evitar UAT", "Para no usar logs"], answer: [0], explanation: "El estado externo permite operación y recuperación." }
+      {
+          "type": "single",
+          "prompt": "¿Qué debe devolver un desktop flow invocado por cloud flow?",
+          "options": [
+              "Estado, mensaje, métricas y referencia a evidencia",
+              "Solo una captura sin contexto",
+              "La contraseña usada",
+              "Nada"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "Un contrato de outputs permite monitoreo y soporte desde cloud."
+      },
+      {
+          "type": "single",
+          "prompt": "¿Por qué persistir estado fuera de la VM?",
+          "options": [
+              "Para reanudar, monitorear y auditar aunque la máquina falle",
+              "Para ocultar errores",
+              "Para evitar UAT",
+              "Para no usar logs"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El estado externo permite operación y recuperación."
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 74): En el batch nocturno, ¿qué rol debe cumplir el cloud flow?",
+          "options": [
+              "Orquestar, distribuir trabajo por máquina y persistir estado",
+              "Hacer todos los clicks del portal legacy",
+              "Guardar el estado solo en archivos locales de la VM",
+              "Reemplazar Dataverse por capturas de pantalla"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso separa orquestación cloud de ejecución desktop. Cloud flow coordina y Dataverse deja trazabilidad visible.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 74): ¿Qué datos debe guardar Dataverse para soporte?",
+          "options": [
+              "Estado por solicitud o lote",
+              "Máquina asignada y resultado de ejecución",
+              "Error, evidencia y fecha de último intento",
+              "Contraseña local de la VM"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "La operación necesita ver estado y evidencia sin abrir la VM; los secretos no deben almacenarse allí.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 74): ¿Por qué no conviene que el estado viva solo en la VM?",
+          "options": [
+              "Porque soporte perdería visibilidad y recuperación si la máquina falla",
+              "Porque Dataverse no puede guardar estados",
+              "Porque cloud flow no puede invocar desktop flows",
+              "Porque los logs locales siempre son suficientes"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso busca observabilidad centralizada. Estado externo permite monitorear, reintentar y auditar aunque falle una máquina.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 74): ¿Qué contrato debe devolver PAD al cloud flow?",
+          "options": [
+              "Estado final y mensaje de error si aplica",
+              "Conteos procesados, fallidos y omitidos",
+              "Referencia a evidencia o log",
+              "Solo un booleano sin contexto"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "Un contrato rico permite que la capa cloud actualice Dataverse y habilite soporte sin inspección manual de escritorio.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 74): ¿Qué diseño facilita escalar a varias máquinas?",
+          "options": [
+              "Cola o asignación central de trabajo con estados transaccionales",
+              "Copiar manualmente el mismo archivo a cada VM",
+              "Dejar que cada VM elija registros sin coordinación",
+              "Reintentar todos los lotes en todas las máquinas"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El batch distribuido necesita coordinación central para evitar duplicados, huecos y diagnósticos opacos.",
+          "appliesTo": "caso"
+      }
   ],
   75: [
-    { type: "single", prompt: "¿Qué evidencia muestra que un desktop flow está listo para operación?", options: ["Deployment plan, rollback, runbook, pruebas y owner", "Solo una ejecución feliz en DEV", "Captura del diseñador", "Nombre bonito"], answer: [0], explanation: "Operación requiere ALM, soporte, rollback, pruebas y ownership." },
-    { type: "multi", prompt: "¿Qué fallos son críticos en RPA?", options: ["Credenciales en texto plano", "Reintentos infinitos", "Cambios directos en producción", "No cerrar aplicaciones o archivos"], answer: [0, 1, 2, 3], explanation: "Todos comprometen seguridad, datos, operación o continuidad." }
+      {
+          "type": "single",
+          "prompt": "¿Qué evidencia muestra que un desktop flow está listo para operación?",
+          "options": [
+              "Deployment plan, rollback, runbook, pruebas y owner",
+              "Solo una ejecución feliz en DEV",
+              "Captura del diseñador",
+              "Nombre bonito"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "Operación requiere ALM, soporte, rollback, pruebas y ownership."
+      },
+      {
+          "type": "multi",
+          "prompt": "¿Qué fallos son críticos en RPA?",
+          "options": [
+              "Credenciales en texto plano",
+              "Reintentos infinitos",
+              "Cambios directos en producción",
+              "No cerrar aplicaciones o archivos"
+          ],
+          "answer": [
+              0,
+              1,
+              2,
+              3
+          ],
+          "explanation": "Todos comprometen seguridad, datos, operación o continuidad."
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 75): UAT falla porque TEST usa una ruta local de DEV y credencial del desarrollador. ¿Cuál es la causa raíz?",
+          "options": [
+              "Falta de configuración por ambiente y connection references gobernadas",
+              "El usuario de UAT hizo demasiadas pruebas",
+              "Power Automate Desktop no permite ALM",
+              "El bot necesita más acciones duplicadas"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso es de ALM: variables, rutas, credenciales y conexiones deben resolverse por ambiente, no venir pegadas desde DEV.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 75): ¿Qué debe incluir el despliegue correcto hacia TEST?",
+          "options": [
+              "Variables o configuración por ambiente para rutas",
+              "Connection references y credenciales no personales",
+              "Validación postdeploy y plan de rollback",
+              "Dependencia de carpetas locales del desarrollador"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "Un despliegue operable separa configuración, conexiones y validación. La carpeta del desarrollador no debe viajar a TEST.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 75): ¿Qué prueba habría detectado el fallo el primer día de UAT?",
+          "options": [
+              "Smoke postdeploy que valida rutas, credenciales, máquina y ejecución mínima en TEST",
+              "Una captura del flujo en DEV",
+              "Un conteo de acciones del diseñador",
+              "Una revisión visual del nombre del flujo"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "La validación postdeploy debe ejecutarse en el ambiente destino y confirmar dependencias reales antes de entregar UAT.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "multi",
+          "prompt": "Diagnóstico de caso (RPA 75): ¿Qué artefactos operativos debe recibir el equipo?",
+          "options": [
+              "Deployment plan y rollback",
+              "Runbook con owners y pasos de soporte",
+              "Evidencia de pruebas en TEST",
+              "Contraseña personal del desarrollador"
+          ],
+          "answer": [
+              0,
+              1,
+              2
+          ],
+          "explanation": "Operación necesita plan, soporte y evidencia. Las credenciales personales son una práctica insegura.",
+          "appliesTo": "caso"
+      },
+      {
+          "type": "single",
+          "prompt": "Diagnóstico de caso (RPA 75): ¿Qué decisión evita que DEV contamine otros ambientes?",
+          "options": [
+              "Parametrizar rutas, usuarios y endpoints mediante configuración de ambiente",
+              "Copiar archivos locales junto con el bot",
+              "Usar siempre la cuenta del creador",
+              "Ejecutar UAT en la máquina de DEV"
+          ],
+          "answer": [
+              0
+          ],
+          "explanation": "El caso exige separar solución de configuración. Cada ambiente debe resolver sus propias rutas, credenciales y dependencias.",
+          "appliesTo": "caso"
+      }
   ]
 };
 
