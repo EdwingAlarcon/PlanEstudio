@@ -37,7 +37,7 @@ Current stable state as of the latest local handoff (2026-08-06):
   GitHub Actions run `30551134055` success.
 - Previous course/design sprint: **Sprint 22 — `/impeccable audit` (17/20 → 20/20 after fixes) +
   `PRODUCT.md`/`DESIGN.md`/`.impeccable/design.json` (Sprint 21)**.
-- Official production URL is `https://planestudio-edwingalarcon.vercel.app/`. GitHub Pages was used
+- Official production URL is `https://planestudio.vercel.app/`. GitHub Pages was used
   historically and may still exist as a secondary mirror, but it is no longer the release blocker.
 - Fixed learning content counts: **75 modules, 72 labs, 508 quiz questions, 375 case-diagnosis
   questions, 633 checklist criteria**. The case-diagnosis questions are tagged with
@@ -72,7 +72,7 @@ Current stable state as of the latest local handoff (2026-08-06):
 A structured, progressive learning plan for Microsoft Power Platform and Dynamics 365 — from beginner to Solution Architect. The repo has two parallel surfaces:
 
 1. **MkDocs site** — Markdown documentation served via MkDocs Material (legacy/reference site, reads from `docs/`)
-2. **Next.js app** (`app-elearning/`) — interactive e-learning app deployed officially to Vercel at `https://planestudio-edwingalarcon.vercel.app/` (reads modules and labs from `app-elearning/content/`, NOT from `docs/`)
+2. **Next.js app** (`app-elearning/`) — interactive e-learning app deployed officially to Vercel at `https://planestudio.vercel.app/` (reads modules and labs from `app-elearning/content/`, NOT from `docs/`)
 
 **Important — module content is NOT shared between the two surfaces anymore.** Since commit `8b0433c8` (2026-06-25, "migración completa — 41 módulos a archivos individuales con frontmatter"), app modules and labs live as individual files with frontmatter in `app-elearning/content/modules/<levelId>/` and `app-elearning/content/labs/`. The current app surface contains **75 modules and 72 labs across 7 levels** (4 certification levels + transversal `ia`, `d365` and `rpa`). `docs/Niveles/*.md` still exists and still feeds MkDocs, but for the Next.js app it is now dead legacy fallback code (`extractModulesFromContent` in `content.ts`) that never fires because every module already has an individual file. **When editing module content for the app, edit `app-elearning/content/modules/`, not `docs/Niveles/`.** The question bank (`docs/javascripts/evaluaciones-simulador.js`) was NOT part of this migration and remains the single source for both surfaces (see Content: Question Bank below).
 

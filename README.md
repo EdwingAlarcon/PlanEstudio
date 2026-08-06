@@ -4,7 +4,7 @@
 
 Plan de aprendizaje progresivo de Microsoft Power Platform y Dynamics 365, desde fundamentos hasta Solution Architect, alineado con las certificaciones oficiales de Microsoft.
 
-**App oficial en producción:** [planestudio-edwingalarcon.vercel.app](https://planestudio-edwingalarcon.vercel.app/)
+**App oficial en producción:** [planestudio.vercel.app](https://planestudio.vercel.app/)
 
 ### Qué cubre esta versión estable
 

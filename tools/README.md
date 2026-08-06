@@ -20,7 +20,7 @@ sh tools/check-workstation.sh
 
 Ambos imprimen un JSON a la salida estándar. Copia ese JSON completo y pégalo en la
 sección "Importar reporte del verificador" de
-[`/preparar-entorno`](https://planestudio-edwingalarcon.vercel.app/preparar-entorno).
+[`/preparar-entorno`](https://planestudio.vercel.app/preparar-entorno).
 La app valida el reporte, muestra una vista previa y, si confirmas, actualiza el
 estado de cada herramienta con la versión detectada.
 

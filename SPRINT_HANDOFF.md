@@ -90,7 +90,7 @@ todo en verde):**
   `/labs/lab-03-canvas-primera-app` (sección "Variante sin tenant"), Módulos 23 y 34 (banner "Antes
   de comenzar"), y que el favicon ya no dé 404.
 - **Producción oficial migrada a Vercel (2026-08-06)**: la URL oficial ya no es GitHub Pages sino
-  `https://planestudio-edwingalarcon.vercel.app/`. Se creó una publicación estática en Vercel desde
+  `https://planestudio.vercel.app/`. Se creó una publicación estática en Vercel desde
   el `out/` local ya generado y se asignó alias estable a esa URL.
   No usar build remoto desde `app-elearning` sin ajustar root/contexto, porque `content.ts` y el
   `prebuild` dependen de archivos hermanos (`../docs`, `../scripts`) que no existen si Vercel sube

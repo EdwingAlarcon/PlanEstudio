@@ -20,7 +20,7 @@ Progresion rigida de 4 niveles (Basico -> Intermedio -> Avanzado -> Arquitecto) 
 
 ## Operating Context
 
-App Next.js 15 (App Router, static export) deployada oficialmente en Vercel en `https://planestudio-edwingalarcon.vercel.app/`. GitHub Pages queda como espejo legacy bajo basePath `/PlanEstudio`, no como URL principal. Contenido en Markdown con frontmatter (`app-elearning/content/modules/`, `app-elearning/content/labs/`). Banco de preguntas compartido en `docs/javascripts/evaluaciones-simulador.js`. El estudiante navega por nivel, abre un modulo, lee la teoria, hace labs practicos y responde el quiz; tambien puede tomar el simulador cronometrado independiente. Existe una version legacy/paralela en MkDocs (`docs/`) que sirve como sitio de referencia estatico, no interactivo.
+App Next.js 15 (App Router, static export) deployada oficialmente en Vercel en `https://planestudio.vercel.app/`. GitHub Pages queda como espejo legacy bajo basePath `/PlanEstudio`, no como URL principal. Contenido en Markdown con frontmatter (`app-elearning/content/modules/`, `app-elearning/content/labs/`). Banco de preguntas compartido en `docs/javascripts/evaluaciones-simulador.js`. El estudiante navega por nivel, abre un modulo, lee la teoria, hace labs practicos y responde el quiz; tambien puede tomar el simulador cronometrado independiente. Existe una version legacy/paralela en MkDocs (`docs/`) que sirve como sitio de referencia estatico, no interactivo.
 
 ## Capabilities and Constraints
 
