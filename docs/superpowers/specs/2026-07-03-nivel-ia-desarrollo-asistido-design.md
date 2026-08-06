@@ -1,7 +1,7 @@
 # Diseño: Nivel transversal "Desarrollo Asistido por IA"
 
 **Fecha:** 2026-07-03
-**Estado:** Aprobado, pendiente de implementación
+**Estado:** Implementado y extendido. El diseño original del nivel IA ya está materializado en la app; los conteos históricos de este documento se conservan como contexto de diseño inicial, no como estado actual.
 
 ## Contexto y motivación
 

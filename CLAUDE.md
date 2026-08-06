@@ -74,7 +74,7 @@ A structured, progressive learning plan for Microsoft Power Platform and Dynamic
 1. **MkDocs site** — Markdown documentation served via MkDocs Material (legacy/reference site, reads from `docs/`)
 2. **Next.js app** (`app-elearning/`) — interactive e-learning app deployed to GitHub Pages at `https://edwingalarcon.github.io/PlanEstudio/` (reads modules and labs from `app-elearning/content/`, NOT from `docs/`)
 
-**Important — module content is NOT shared between the two surfaces anymore.** Since commit `8b0433c8` (2026-06-25, "migración completa — 41 módulos a archivos individuales con frontmatter"), app modules and labs live as individual files with frontmatter in `app-elearning/content/modules/<levelId>/` and `app-elearning/content/labs/`. The current app surface contains **65 modules and 63 labs across 6 levels** (5 certification/specialization levels + the transversal `d365` level added 2026-07-10, mirroring how `ia` was added). `docs/Niveles/*.md` still exists and still feeds MkDocs, but for the Next.js app it is now dead legacy fallback code (`extractModulesFromContent` in `content.ts`) that never fires because every module already has an individual file. **When editing module content for the app, edit `app-elearning/content/modules/`, not `docs/Niveles/`.** The question bank (`docs/javascripts/evaluaciones-simulador.js`) was NOT part of this migration and remains the single source for both surfaces (see Content: Question Bank below).
+**Important — module content is NOT shared between the two surfaces anymore.** Since commit `8b0433c8` (2026-06-25, "migración completa — 41 módulos a archivos individuales con frontmatter"), app modules and labs live as individual files with frontmatter in `app-elearning/content/modules/<levelId>/` and `app-elearning/content/labs/`. The current app surface contains **75 modules and 72 labs across 7 levels** (4 certification levels + transversal `ia`, `d365` and `rpa`). `docs/Niveles/*.md` still exists and still feeds MkDocs, but for the Next.js app it is now dead legacy fallback code (`extractModulesFromContent` in `content.ts`) that never fires because every module already has an individual file. **When editing module content for the app, edit `app-elearning/content/modules/`, not `docs/Niveles/`.** The question bank (`docs/javascripts/evaluaciones-simulador.js`) was NOT part of this migration and remains the single source for both surfaces (see Content: Question Bank below).
 
 ## Repository Structure
 
@@ -103,7 +103,7 @@ docs/                    # MkDocs source content — legacy/reference site only 
     CERTIFICACIONES.md
     PROMPTS_REUTILIZABLES_IA.md  # 16 reusable prompts for AI-assisted Power Platform/D365 work (Nivel IA, /recursos/prompts-ia)
   javascripts/
-    evaluaciones-simulador.js   # Banco de preguntas A/B/C/D en MODULE_QUESTIONS (módulos 1-65) — shared by BOTH surfaces, not migrated
+    evaluaciones-simulador.js   # Banco de 883 preguntas en MODULE_QUESTIONS (módulos 1-75): 508 quiz + 375 diagnóstico de caso aplicado
   stylesheets/
     extra.css            # Custom CSS for MkDocs site
 app-elearning/           # Next.js 15 interactive app (THE primary surface)
@@ -116,7 +116,7 @@ app-elearning/           # Next.js 15 interactive app (THE primary surface)
       ia/42-*.md … 55-*.md              # transversal level (14 modules) — no prerequisites, doesn't gate/get gated by the 4 levels above
       d365/56-*.md … 65-*.md            # transversal level (10 modules) — Dynamics 365 CE/F&O vocabulary, architecture, Customer Insights, Field Service and integration; same non-gating pattern as ia
     labs/
-      lab-02-*.md, lab-03-*.md, …       # one file per lab, same frontmatter pattern (63 total; includes labs 45/51/52/53/54/55/56/57 for ia, 61-67 for capstones/D365 depth, 71-80 for job-ready simulations, 91-92 for CRM Developer job-ready extensibility/troubleshooting, 93-100 for F&O hands-on practitioner labs requiring a trial/demo Finance & Operations tenant, 101 for the integrated CRM Functional Analyst job-ready case (JR-013), and 102-103 for the dedicated Sales lead-to-cash job test (JR-014) and the CRM functional post-go-live incident simulation (JR-015) — see ROADMAP_ESPECIALIZACION_AVANZADA.md #3 for which topics are covered and the pending live-tenant verification)
+      lab-02-*.md, lab-03-*.md, …       # one file per lab, same frontmatter pattern (72 total; includes labs 45/51/52/53/54/55/56/57 for ia, 61-67 for capstones/D365 depth, 71-80 for job-ready simulations, 91-92 for CRM Developer job-ready extensibility/troubleshooting, 93-100 for F&O hands-on practitioner labs requiring a trial/demo Finance & Operations tenant, 101 for the integrated CRM Functional Analyst job-ready case (JR-013), 102-103 for Sales/post-go-live simulations, and 104-112 for the RPA track — see ROADMAP_ESPECIALIZACION_AVANZADA.md #3 for which topics are covered and the pending live-tenant verification)
   next.config.ts         # output: 'export', basePath: '/PlanEstudio'
   src/
     app/                 # App Router pages
@@ -159,13 +159,13 @@ site/                    # MkDocs generated output (git-ignored)
 cd app-elearning
 npm install
 npm run dev          # http://localhost:3000
-npm test             # Vitest unit tests (225 tests)
+npm test             # Vitest unit tests (323 tests)
 npm run test:coverage
 npm run lint
-npx tsc --noEmit
+npm run typecheck
 npm run validate:content  # Frontmatter, unique moduleId/slug, level ranges, question coverage
-npm run build        # Static export → app-elearning/out/
-npm run e2e          # Playwright smoke tests (24 tests)
+npm run build:pages  # Static export for GitHub Pages → app-elearning/out/
+npm run e2e          # Playwright smoke tests (47 tests)
 ```
 
 ### MkDocs (reference/legacy)
@@ -229,7 +229,7 @@ Don't change these if editing `docs/Niveles/*.md` for MkDocs.
 
 ## Content: Question Bank
 
-`docs/javascripts/evaluaciones-simulador.js` contains `MODULE_QUESTIONS` — a JS object with keys 1-65, each an array of question objects:
+`docs/javascripts/evaluaciones-simulador.js` contains `MODULE_QUESTIONS` — a JS object with keys 1-75, each an array of question objects:
 
 ```js
 {
@@ -237,11 +237,12 @@ Don't change these if editing `docs/Niveles/*.md` for MkDocs.
   prompt: "Question text",
   options: ["A", "B", "C", "D"],
   answer: [0],           // 0-based indices of correct options
-  explanation: "Why the answer is correct..."
+  explanation: "Why the answer is correct...",
+  appliesTo: "caso" // optional; reserve "caso" for Diagnóstico de caso aplicado
 }
 ```
 
-- 488 total questions across 65 modules (8 per module in Niveles 2-4 and Nivel IA, 5-8 per module in Nivel D365, 15 in Módulo 1)
+- 883 total questions across 75 modules: 508 normal quiz questions + 375 `appliesTo: "caso"` questions
 - Module 1 has 15 questions (includes AI Builder and Power Pages topics for PL-900)
 - After editing, validate with Node.js that the object parses correctly
 - `scripts/extract-questions.mjs` parses `evaluaciones-simulador.js` via `vm.runInContext` at `prebuild` time and generates `app-elearning/src/data/questions.ts`, which `questions-parser.ts` imports statically (no runtime `eval`/`new Function`)

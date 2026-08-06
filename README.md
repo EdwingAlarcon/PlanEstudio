@@ -1,6 +1,6 @@
 # Power Platform & D365 — Plan de Estudio
 
-**Estado: versión estable pública** — 65 módulos · 63 laboratorios · 488 preguntas · 603 criterios de checklist, con roadmap de sprints correctivos post-auditoría cerrado. Detalle completo, taxonomía de estados y limitaciones honestas en la sección "Estado estable — release readiness" de [`SPRINT_HANDOFF.md`](SPRINT_HANDOFF.md).
+**Estado: versión estable pública** — 75 módulos · 72 laboratorios · 508 preguntas de quiz · 375 diagnósticos de caso · 633 criterios de checklist, con roadmap de sprints correctivos post-auditoría y diagnóstico de caso aplicado cerrados. Detalle completo, taxonomía de estados y limitaciones honestas en [`SPRINT_HANDOFF.md`](SPRINT_HANDOFF.md).
 
 Plan de aprendizaje progresivo de Microsoft Power Platform y Dynamics 365, desde fundamentos hasta Solution Architect, alineado con las certificaciones oficiales de Microsoft.
 
@@ -33,7 +33,7 @@ PlanEstudio/
 │   ├── Anexos/             ← Copilot Studio, ALM/DevOps, Arquitectura
 │   ├── Recursos/           ← Checklist, Glosario, Certificaciones, Prompts Reutilizables IA
 │   └── javascripts/
-│       └── evaluaciones-simulador.js  ← Banco de 488 preguntas (fuente actual, incluye Nivel IA y Nivel D365)
+│       └── evaluaciones-simulador.js  ← Banco de 883 preguntas: 508 quiz + 375 diagnóstico de caso
 │
 ├── .github/workflows/ci.yml  ← CI/CD: lint → test → build → deploy + MkDocs
 ├── mkdocs.yml              ← Configuración del sitio MkDocs (referencia/legacy)
@@ -64,8 +64,9 @@ docs/javascripts/evaluaciones-simulador.js  ──build-time──▶  questions
 | Nivel 4 — Arquitecto | 11 | Arquitectura Power Platform | 4–6 meses |
 | Nivel IA — Desarrollo Asistido *(transversal)* | 14 | Buenas Prácticas | Estudio libre, sin prerequisitos |
 | Nivel D365 — Especialización *(transversal)* | 10 | CE avanzado + F&O Awareness | Estudio libre, sin prerequisitos |
+| Nivel RPA — Power Automate Desktop *(transversal)* | 10 | RPA profesional | Estudio libre, requiere Windows para labs PAD |
 
-Los niveles IA y D365 son transversales: no bloquean ni son bloqueados por los cuatro niveles base de Power Platform.
+Los niveles IA, D365 y RPA son transversales: no bloquean ni son bloqueados por los cuatro niveles base de Power Platform.
 
 ---
 
@@ -116,7 +117,7 @@ GitHub Actions ejecuta en cada push a `master`:
 | Job | Qué valida |
 |-----|------------|
 | `lint` | ESLint CLI + TypeScript (`tsc --noEmit`) + validación de contenido (`validate:content`) |
-| `test` | Vitest con cobertura (umbral 80%; 225 tests al último diagnóstico local) |
+| `test` | Vitest con cobertura (umbral 80%; 323 tests al último diagnóstico local) |
 | `e2e` | Playwright smoke: home, niveles, módulo, labs, simulador, búsqueda, dark mode, 404 |
 | `build` | `GITHUB_PAGES=true next build` vía `npm run build:pages` → export estático en `out/` |
 | `mkdocs` | `mkdocs build --strict` (valida nav, links internos) |
@@ -172,9 +173,9 @@ const MODULE_QUESTIONS = {
 ```
 
 Para agregar preguntas:
-1. Localiza la clave del módulo (`1` a `65`).
-2. Agrega el objeto de pregunta siguiendo el esquema exacto.
-3. Verifica que el JS sigue siendo válido: `node -e "const MODULE_QUESTIONS = require('./docs/javascripts/evaluaciones-simulador.js')"` — o abre la consola del navegador y pega el objeto.
+1. Localiza la clave del módulo (`1` a `75`).
+2. Agrega el objeto de pregunta siguiendo el esquema exacto. Usa `appliesTo: "caso"` solo para preguntas del bloque "Diagnóstico de caso aplicado"; el quiz normal queda sin ese campo o con `appliesTo: "quiz"`.
+3. Regenera el archivo derivado desde `app-elearning`: `node ../scripts/extract-questions.mjs`.
 
 > El script `scripts/extract-questions.mjs` valida y genera `app-elearning/src/data/questions.ts` antes del build. Si el archivo tiene sintaxis o estructura inválida, el build falla con error explícito.
 
@@ -182,7 +183,7 @@ Para agregar preguntas:
 
 ## Laboratorios
 
-Los laboratorios oficiales para la app están en `app-elearning/content/labs/` con frontmatter validado (63 labs en total). `docs/Labs/` queda como copia legacy/referencia para MkDocs. Muestra parcial:
+Los laboratorios oficiales para la app están en `app-elearning/content/labs/` con frontmatter validado (72 labs en total). `docs/Labs/` queda como copia legacy/referencia para MkDocs. Muestra parcial:
 
 | Lab | Nivel | Cert |
 |-----|-------|------|

@@ -7,16 +7,17 @@ This file provides guidance to Codex (Codex.ai/code) when working with code in t
 Before starting new work, read `SPRINT_HANDOFF.md`. It is the active operational memory for the post-audit sprints.
 
 Current stable state as of the latest pushed `master` commit:
-- Latest pushed/deployed product sprint: **Beginner Guided Journey & Progressive Disclosure** — commit `a14e72d` (`feat: añadir recorrido guiado para principiantes`), GitHub Actions run `30551134055` success, GitHub Pages verified.
+- Latest pushed product/content sprint: **Diagnóstico de caso aplicado** completo para los 75 módulos — commits `bc205885` (IA), `5ba5131e` (D365) y `450137ce` (RPA). Validación local final: `validate:content`, `lint`, `typecheck`, `test:coverage` (323/323), `build:pages` y `npm run e2e` (47/47). GitHub Actions run manual `31127332409` quedó en cola para el commit `450137ce` por capacidad/cola remota, sin pasos ejecutados ni evidencia de fallo local.
+- Previous pushed/deployed product sprint: **Beginner Guided Journey & Progressive Disclosure** — commit `a14e72d` (`feat: añadir recorrido guiado para principiantes`), GitHub Actions run `30551134055` success, GitHub Pages verified.
 - Previous product sprint: **Practice Experience Integration** — commit `6e0604ac` (`feat: integrar seguimiento de experiencia practica`), GitHub Actions run `30419768845` success, GitHub Pages verified.
 - Previous course/design sprint: **Sprint 22 — `/impeccable audit` (17/20 → 20/20 after fixes) + `PRODUCT.md`/`DESIGN.md`/`.impeccable/design.json` (Sprint 21)**.
 - Beginner-onboarding work is intentional and should not be removed: "Primeras 2 horas", Mini Lab 01, checklist mínimo para principiantes, Power Fx en español simple, entregable mínimo del Nivel Básico, Módulo 9 bridge into Intermedio, and the beginner guided route surfaced through `/mi-ruta`, `/mapa`, and `/experiencia-practica`.
-- Professional Practice Framework has daily UX integration: capa `Experiencia práctica` con 5 Incident Labs, 2 Challenge Labs y 1 Work Simulation, metadata tipada/validada, matriz de competencias práctica, navegación `/experiencia-practica`, progreso práctico independiente, pistas escalonadas, intentos, notas, evidencias, solución colapsada y autoevaluación por rúbrica.
+- Professional Practice Framework has daily UX integration: capa `Experiencia práctica` con 18 Incident Labs, 6 Challenge Labs, 2 Work Simulations y 6 guided practices, metadata tipada/validada, matriz de competencias práctica, navegación `/experiencia-practica`, progreso práctico independiente, pistas escalonadas, intentos, notas, evidencias, solución colapsada y autoevaluación por rúbrica.
 - GitHub Pages production has been verified at `https://edwingalarcon.github.io/PlanEstudio/`.
-- Fixed learning content counts: **65 modules, 63 labs, 488 questions, 603 checklist criteria**.
-- Professional practice pilot counts: **5 incidents, 2 challenges, 1 simulation**. Do not merge these into the existing lab count.
+- Fixed learning content counts: **75 modules, 72 labs, 508 quiz questions, 375 case-diagnosis questions, 633 checklist criteria**.
+- Professional practice counts: **32 practices total — 18 incidents, 6 challenges, 2 simulations, 6 guided**. Do not merge these into the existing lab count.
 - Practical progress uses separate localStorage key `planestudio.practice-progress.v1`; academic progress remains `plan-estudio-progress`. Do not merge these stores or show a single combined percentage.
-- Current local/CI test baseline: **238 Vitest tests** and **25 Playwright smoke tests**.
+- Current local test baseline: **323 Vitest tests** and **47 Playwright smoke tests**.
 - User preference for this repo: before work, fetch/sync the repo and resolve merge needs; after completing a change, **commit, push to `master`, and wait for deploy/production verification** unless the user explicitly says not to.
 - Local validation should run `npm run build:pages` or `npm run build`, then `npm run e2e` **serially**, because both can touch `.next` locally and cause transient route/module false negatives.
 
@@ -56,11 +57,11 @@ docs/                    # MkDocs legacy/reference content + shared question ban
     CERTIFICACIONES.md
     PROMPTS_REUTILIZABLES_IA.md
   javascripts/
-    evaluaciones-simulador.js   # Banco de 488 preguntas A/B/C/D en MODULE_QUESTIONS (módulos 1-65, incluye Nivel IA y Nivel D365 transversales)
+    evaluaciones-simulador.js   # Banco de 883 preguntas en MODULE_QUESTIONS (módulos 1-75): 508 quiz + 375 diagnóstico de caso aplicado
   stylesheets/
     extra.css            # Custom CSS for MkDocs site
 app-elearning/           # Next.js 15 interactive app (THE primary surface)
-  content/               # Official app content: 65 modules + 61 labs with frontmatter across 6 levels (incl. Nivel IA 42-55, Nivel D365 modules 56-65, job-ready simulations 71-80/91-92, F&O hands-on labs 93-100, the integrated CRM Functional Analyst case 101, and route capstones)
+  content/               # Official app content: 75 modules + 72 labs with frontmatter across 7 levels (incl. Nivel IA 42-55, Nivel D365 56-65, Nivel RPA 66-75, job-ready simulations, F&O hands-on labs and route capstones)
   next.config.ts         # output: 'export', basePath: '/PlanEstudio'
   src/
     app/                 # App Router pages
@@ -174,7 +175,7 @@ Do NOT change these heading formats in `docs/Niveles/*.md` unless you intentiona
 
 ## Content: Question Bank
 
-`docs/javascripts/evaluaciones-simulador.js` contains `MODULE_QUESTIONS` — a JS object with keys 1-65, each an array of question objects:
+`docs/javascripts/evaluaciones-simulador.js` contains `MODULE_QUESTIONS` — a JS object with keys 1-75, each an array of question objects:
 
 ```js
 {
@@ -182,11 +183,12 @@ Do NOT change these heading formats in `docs/Niveles/*.md` unless you intentiona
   prompt: "Question text",
   options: ["A", "B", "C", "D"],
   answer: [0],           // 0-based indices of correct options
-  explanation: "Why the answer is correct..."
+  explanation: "Why the answer is correct...",
+  appliesTo: "caso" // optional; reserve "caso" for Diagnóstico de caso aplicado
 }
 ```
 
-- 488 total questions across 65 modules
+- 883 total questions across 75 modules: 508 normal quiz questions + 375 `appliesTo: "caso"` questions
 - Module 1 has 15 questions (includes AI Builder and Power Pages topics for PL-900)
 - After editing, run `node ../scripts/extract-questions.mjs` from `app-elearning` or run `npm run build:pages`
 - `scripts/extract-questions.mjs` generates `app-elearning/src/data/questions.ts`; `questions-parser.ts` validates associations at build/test time

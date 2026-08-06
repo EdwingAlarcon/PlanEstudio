@@ -24,7 +24,7 @@ App Next.js 15 (App Router, static export) deployada en GitHub Pages bajo basePa
 
 ## Capabilities and Constraints
 
-- 65 modulos, 63 labs, 488 preguntas, 603 criterios de checklist repartidos en 6 niveles (4 certificacion + IA + D365 transversales).
+- 75 modulos, 72 labs, 508 preguntas de quiz, 375 preguntas de diagnostico de caso aplicado y 633 criterios de checklist repartidos en 7 niveles (4 certificacion + IA + D365 + RPA transversales).
 - Progreso y resultados de quiz persisten solo en localStorage del navegador (sin cuenta ni backend).
 - Simulador: 40 preguntas, 50 minutos, con desglose de errores al final.
 - Todo el contenido esta en espanol; terminos tecnicos de producto (Power Fx, Dataverse, DAX, Canvas, Model-Driven) se mantienen en ingles como nombres propios.
@@ -38,7 +38,7 @@ Nombre del proyecto: "PlanEstudio" / "Plan Maestro: De Basico a Arquitecto en Mi
 
 ## Evidence on Hand
 
-Contenido real y completo ya existente: 65 modulos con casos reales de negocio, 63 labs paso a paso, 488 preguntas de evaluacion con explicaciones, checklist de progreso. No hay testimonios, casos de estudio externos, prensa ni metricas de uso reales — no fabricar ninguno de estos.
+Contenido real y completo ya existente: 75 modulos con casos reales de negocio, 72 labs paso a paso, 508 preguntas de evaluacion con explicaciones, 375 preguntas de diagnostico de caso aplicado y checklist de progreso. No hay testimonios, casos de estudio externos, prensa ni metricas de uso reales — no fabricar ninguno de estos.
 
 ## Product Principles
 

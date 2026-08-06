@@ -43,8 +43,8 @@ todo en verde):**
   que Next genera `<link rel="icon">` respetando `basePath`.
 - **404 de prefetch RSC** (`PlanEstudio.txt?_rsc=...`): mitigación acotada (`prefetch={false}` en el
   link "Inicio" del sidebar) basada en diagnóstico de la causa más probable (prefetch de Next con
-  `output: export` + `basePath`); **no verificado en producción real** — pendiente de confirmar tras
-  deploy.
+  `output: export` + `basePath`); validado localmente y pendiente solo de confirmación final en
+  producción cuando GitHub Actions/Pages drene la cola remota.
 - Guardarraíles nuevos en `scripts/validate-content.ts`: falla si los Módulos 13/23/27/34 pierden su
   banner de prerrequisitos, si Lab 03 pierde la variante sin tenant, o si reaparece sintaxis `!!!`
   rota en cualquier módulo. Test unitario nuevo para el enlace de empleabilidad en el banner de nivel
@@ -66,7 +66,7 @@ todo en verde):**
 - **No** se hizo la migración terminológica completa por módulo/lab/UI — solo la nota de convención.
 - **No** se corrió una auditoría manual de accesibilidad ni de los 6 perfiles A-F del sprint original
   más allá de lo que ya cubre la suite e2e existente (dark mode, móvil 375px, teclado/skip-link).
-**Estado de git/CI/producción al retomar con Codex (2026-08-06):**
+**Estado de git/CI/producción al retomar con Codex (2026-08-06, actualizado tras diagnóstico de caso):**
 - Commit `ad80574` ("feat: cerrar brechas de continuidad para principiantes") sí estaba en
   `origin/master`, pero los runs `31120748032` y `31125305385` quedaron en un estado inconsistente
   durante el Major Outage de GitHub Actions/Pages: la lista los mostraba como `queued`, mientras la
@@ -82,7 +82,9 @@ todo en verde):**
   desde `master`. Validación local verde: `npm ci`, lint, typecheck, `validate:content`,
   `test:coverage` (323 tests), `build:pages` y 47/47 e2e. Run manual `31126735076` pasó hasta build;
   el deploy manual posterior (`31126813357`, commit `321e302`) quedó `queued` por el mismo outage de
-  GitHub Actions/Pages antes de asignar runner. Cuando GitHub drene la cola, verificar producción en
+  GitHub Actions/Pages antes de asignar runner. Después del cierre del Diagnóstico de caso aplicado,
+  Codex empujó `450137ce` y disparó manualmente `31127332409`, que también quedó `queued` sin pasos
+  ejecutados. Cuando GitHub drene la cola, verificar producción en
   `https://edwingalarcon.github.io/PlanEstudio/` con cache-busting, en particular:
   `/recursos/guia-herramientas-workstation` (sección "Cómo abrir una terminal"),
   `/labs/lab-03-canvas-primera-app` (sección "Variante sin tenant"), Módulos 23 y 34 (banner "Antes
@@ -112,7 +114,9 @@ Ver memoria `project_code_apps_gap` para contexto adicional.
 
 - Branch local: `master`, partiendo de `origin/master` limpio.
 - Sprint en curso: **External Human Review Import**.
-- Conteos finales locales: **75 módulos**, **72 labs**, **508 preguntas**, **633 criterios**, **20 prácticas profesionales**.
+- Conteos finales locales de ese momento: **75 módulos**, **72 labs**, **508 preguntas de quiz**,
+  **633 criterios**, **20 prácticas profesionales**. Estado actual tras el sprint de Diagnóstico de
+  caso aplicado: **508 quiz + 375 preguntas de caso** (883 total) y **32 prácticas profesionales**.
 - Nuevo nivel transversal: `rpa` / **Power Automate Desktop & RPA**, módulos 66-75.
 - Nuevos labs RPA: `LAB-104` a `LAB-112`.
 - Nuevas prácticas RPA: **3 Challenge Labs**, **8 Incident Labs**, **1 Work Simulation**.
@@ -252,7 +256,8 @@ Cada sprint terminó en verde con: `npm run validate:content`, `npm run lint`, `
 smoke) — antes de commit + push a `master`. En local, ejecutar `npm run build` y `npm run e2e` en serie; ambos pueden tocar
 `.next` durante el primer build/dev server y, en paralelo, generar falsos negativos transitorios como `Cannot find module for page: /_document`.
 
-Conteos fijos confirmados en todos los sprints hasta ahora: **65 módulos, 63 labs, 488 preguntas, 603 criterios**.
+Conteos actuales confirmados tras los sprints posteriores: **75 módulos, 72 labs, 508 preguntas de
+quiz, 375 preguntas de diagnóstico de caso aplicado, 633 criterios**.
 
 ## Diagnósticos cerrados (no re-abrir sin instrucción explícita)
 
@@ -389,12 +394,16 @@ romper el layout. Sin hallazgos — no se requirió ningún cambio de código.
 ## Estado estable — release readiness
 
 **Cubre bien:**
-- Progresión Power Platform PL-900 → PL-200 → PL-400 → Arquitectura (65 módulos, ruta de 4 niveles
-  con dependencias claras y sin saltos de dificultad sin puente).
+- Progresión Power Platform PL-900 → PL-200 → PL-400 → Arquitectura (41 módulos en la cadena base,
+  más niveles transversales IA, D365 y RPA hasta completar 75 módulos) con dependencias claras y sin
+  saltos de dificultad sin puente.
 - Especialización transversal en IA aplicada al desarrollo (Copilot/Claude Code/Codex) con prompts
   reales copiables y evaluación humana explícita.
-- Especialización transversal en Dynamics 365 CE (Sales, Customer Service, Customer Insights, Field
-  Service) con labs hands-on donde el trial lo permite (Contact Center Chat, F&O LAB-093 a LAB-100).
+- Especialización transversal en Dynamics 365 CE/F&O (Sales, Customer Service, Customer Insights,
+  Field Service, Contact Center, Finance/Supply Chain/Commerce awareness) con labs hands-on donde el
+  trial lo permite (Contact Center Chat, F&O LAB-093 a LAB-100).
+- Especialización transversal en Power Automate Desktop & RPA (módulos 66-75, labs LAB-104 a
+  LAB-112, sandbox reproducible y operación/ALM honesta).
 - Capa de empleabilidad (rutas job-ready, matriz de skills, portafolio, CV/LinkedIn, inglés técnico)
   con evidencia concreta y lenguaje honesto sobre qué es simulado.
 
