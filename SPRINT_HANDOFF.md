@@ -66,8 +66,24 @@ todo en verde):**
 - **No** se hizo la migración terminológica completa por módulo/lab/UI — solo la nota de convención.
 - **No** se corrió una auditoría manual de accesibilidad ni de los 6 perfiles A-F del sprint original
   más allá de lo que ya cubre la suite e2e existente (dark mode, móvil 375px, teclado/skip-link).
-- **No** se hizo commit/push/deploy todavía en este mensaje — pendiente de confirmación del usuario
-  antes de push a `master` (ver política del repo de no dar por hecho el push).
+**Estado de git/CI/producción al cerrar esta sesión (2026-08-06, ~17:05 UTC):**
+- Commit `ad80574` ("feat: cerrar brechas de continuidad para principiantes") ya está en
+  `origin/master` — push confirmado, working tree limpio.
+- **CI/Deploy (run `31120748032`) NO se completó** — quedó en `queued` sin que GitHub asignara
+  runners hosted, en dos intentos (push original + un `gh run rerun`). Causa confirmada vía
+  [githubstatus.com](https://www.githubstatus.com): **incidente activo "Major Outage" de GitHub
+  Actions el 6 de agosto de 2026** ("Workflow runs are still failing or delayed in starting, and
+  some queued jobs may time out"). No es un problema de este repo ni del código del sprint — todas
+  las validaciones locales (lint, typecheck, 323 tests, `validate:content`, build, 47 e2e) ya habían
+  pasado en verde antes del push.
+- **Próximo paso pendiente, no hacer nada más hasta esto**: cuando se retome el trabajo, verificar
+  primero `gh run list --limit 3` para ese repo. Si el run `31120748032` (o uno reintentado) sigue sin
+  completarse, correr `gh run rerun 31120748032` de nuevo — no hace falta ningún cambio de código.
+  Una vez el run termine en success, verificar producción en
+  `https://edwingalarcon.github.io/PlanEstudio/` con cache-busting, en particular:
+  `/recursos/guia-herramientas-workstation` (sección "Cómo abrir una terminal"),
+  `/labs/lab-03-canvas-primera-app` (sección "Variante sin tenant"), Módulos 23 y 34 (banner "Antes
+  de comenzar"), y que el favicon ya no dé 404.
 
 ## Sprint propuesto — Code Apps (Power Apps) — NO INICIADO (2026-08-03)
 
