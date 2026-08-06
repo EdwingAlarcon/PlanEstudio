@@ -77,9 +77,13 @@ todo en verde):**
   `npm ci` fallaba porque `app-elearning/package.json` y `app-elearning/package-lock.json` estaban
   desincronizados tras añadir `rehype-slug` (faltaban entradas `@emnapi/*` y `@emnapi/wasi-threads`
   tenía versión incompatible).
-- Fix en curso: regenerar `app-elearning/package-lock.json` con `npm install`, validar `npm ci`, lint,
-  typecheck, `validate:content`, `test:coverage` y build, luego commit + push. Tras el deploy exitoso,
-  verificar producción en `https://edwingalarcon.github.io/PlanEstudio/` con cache-busting, en particular:
+- Fix completado por Codex: `package-lock.json` fue regenerado, `npm ci` volvió a pasar localmente y
+  en GitHub Actions; también quedaron `workflow_dispatch`, concurrencia global por rama y deploy manual
+  desde `master`. Validación local verde: `npm ci`, lint, typecheck, `validate:content`,
+  `test:coverage` (323 tests), `build:pages` y 47/47 e2e. Run manual `31126735076` pasó hasta build;
+  el deploy manual posterior (`31126813357`, commit `321e302`) quedó `queued` por el mismo outage de
+  GitHub Actions/Pages antes de asignar runner. Cuando GitHub drene la cola, verificar producción en
+  `https://edwingalarcon.github.io/PlanEstudio/` con cache-busting, en particular:
   `/recursos/guia-herramientas-workstation` (sección "Cómo abrir una terminal"),
   `/labs/lab-03-canvas-primera-app` (sección "Variante sin tenant"), Módulos 23 y 34 (banner "Antes
   de comenzar"), y que el favicon ya no dé 404.
@@ -724,10 +728,22 @@ completado en el mismo día.** Contexto para quien retome esto (Codex u otra ses
   este nivel aplicados — es el mismo flakiness ambiental ya documentado en Nivel Intermedio, no una
   regresión del contenido nuevo. Validación real: unit tests (322/322), lint, tsc y build verdes
   localmente, más el resultado de CI en GitHub Actions tras el push.
+- **Nivel IA completado por Codex (2026-08-06)**: 65 preguntas nuevas (5 por módulo) para los módulos
+  42-52 y 54-55; el módulo 53 ya estaba cubierto por el piloto. Todas están ancladas a los casos reales
+  de SIT: plugin C# con llamadas síncronas, Copilot habilitado sin gobierno por entorno, logging con
+  `Console.WriteLine`, agente con alcance demasiado amplio, flujo de gastos con condición de carrera,
+  plantillas de prompt reutilizables, revisión de diffs, secretos en prompts, CI omitido, flujo humano-IA,
+  `pac auth` contra cliente equivocado, ALM managed/unmanaged y evaluación estándar D365 antes de custom.
+  Total banco tras `extract-questions.mjs`: **783 preguntas** (508 quiz + 275 caso). Niveles Básico,
+  Intermedio, Avanzado, Arquitecto e IA completos (módulos 1-55).
+- **Validación local del Nivel IA**: `validate:content`, `lint`, `typecheck` en serie, `test:coverage`
+  (323/323), `build:pages` y `npm run e2e` (47/47) en verde. Nota operativa confirmada de nuevo:
+  no correr `typecheck` en paralelo con `build:pages` porque ambos tocan `.next` y puede aparecer un
+  falso TS6053 sobre `.next/types`.
 - **Próximo paso al retomar**: continuar escalando nivel por nivel, un commit por nivel. Hechos:
-  Básico (1-8), Intermedio (9-17), Avanzado (18-30) y Arquitecto (31-41). Orden sugerido para lo que
-  falta: IA (42-52+54-55, 13 módulos, módulo 53 ya cubierto), D365 (56-65, 10 módulos), RPA (66-75,
-  10 módulos). Mismo patrón: leer el "Caso Real de Negocio" real de cada módulo, 5 preguntas
+  Básico (1-8), Intermedio (9-17), Avanzado (18-30), Arquitecto (31-41) e IA (42-55). Orden sugerido
+  para lo que falta: D365 (56-65, 10 módulos), RPA (66-75, 10 módulos). Mismo patrón: leer el
+  "Caso Real de Negocio" real de cada módulo, 5 preguntas
   `appliesTo: "caso"` al final del array del módulo en `evaluaciones-simulador.js`, regenerar con
   `extract-questions.mjs`, correr `validate:content` + lint + tsc + tests + build antes de cada
   commit (e2e es opcional/informativo en máquina local larga — ver nota de flakiness arriba; el

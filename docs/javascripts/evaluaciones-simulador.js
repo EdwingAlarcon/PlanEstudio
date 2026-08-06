@@ -6709,6 +6709,71 @@
       ],
       answer: [0],
       explanation: "Dada la naturaleza no determinista relativa de los modelos, conviene iterar el prompt y comparar 2-3 respuestas antes de asumir que la primera es la mejor opción."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (SIT plugin C#): el código generado por Copilot compiló y pasó Solution Checker, pero hacía llamadas síncronas a Dataverse dentro de un bucle. ¿Cuál era la decisión correcta antes de aceptar el plugin?",
+      options: [
+        "Revisar el patrón generado contra buenas prácticas de rendimiento de Dataverse antes de promoverlo",
+        "Aceptar el código porque compilar y pasar Solution Checker es suficiente",
+        "Publicarlo y esperar a que producción revele si hay problemas de volumen",
+        "Desactivar Solution Checker porque no detectó el problema"
+      ],
+      answer: [0],
+      explanation: "El caso muestra que compilar y pasar Solution Checker no sustituyen la revisión humana de rendimiento. El problema fue aceptar una llamada síncrona en bucle sin contrastarla con buenas prácticas conocidas.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (SIT plugin C#): ¿por qué la causa raíz no fue simplemente 'Copilot se equivocó'?",
+      options: [
+        "Porque el modelo entregó un borrador que requería validación humana contra conocimiento de dominio antes de usarse",
+        "Porque Copilot nunca puede generar código con problemas de rendimiento",
+        "Porque Dataverse no permite llamadas síncronas desde plugins",
+        "Porque Solution Checker garantiza que un plugin escala con datos reales"
+      ],
+      answer: [0],
+      explanation: "La IA puede acelerar la generación, pero el equipo sigue siendo responsable de validar diseño, rendimiento y contexto real. El modelo no reemplaza el criterio técnico del desarrollador.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (SIT plugin C#): ¿cuáles DOS señales debieron activar una revisión más profunda antes de publicar?",
+      options: [
+        "Uso de una API de Dataverse en modo síncrono dentro de un bucle",
+        "Ausencia de prueba con volúmenes representativos antes de producción",
+        "Que el código hubiera sido escrito en C#",
+        "Que el plugin usara una solución de Power Platform"
+      ],
+      answer: [0, 1],
+      explanation: "El patrón síncrono dentro de un bucle y la falta de validación con volumen real son señales directas de riesgo. C# y Power Platform no son problemas por sí mismos.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (SIT plugin C#): si el desarrollador quería usar IA de forma responsable, ¿qué prompt posterior habría sido más útil?",
+      options: [
+        "Revisa este plugin C# para Dataverse buscando riesgos de llamadas síncronas, bucles, throttling y timeouts con alto volumen",
+        "Haz que este plugin parezca más profesional sin cambiar su lógica",
+        "Reduce la cantidad de comentarios aunque no revises rendimiento",
+        "Convierte todo el código a JavaScript para evitar revisar Dataverse"
+      ],
+      answer: [0],
+      explanation: "Un buen uso de IA para revisión debe pedir riesgos concretos alineados con el dominio: Dataverse, bucles, llamadas síncronas, throttling y timeouts.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (SIT plugin C#): ¿qué evidencia mínima habría reducido el riesgo antes de desplegar a producción?",
+      options: [
+        "Un diff revisado por un humano y una prueba con volumen representativo enfocada en tiempos de ejecución",
+        "Una captura de pantalla de Copilot mostrando que respondió sin errores",
+        "El nombre del modelo usado para generar el código",
+        "Un comentario diciendo que el código fue generado con IA"
+      ],
+      answer: [0],
+      explanation: "El riesgo era de comportamiento y rendimiento, no de apariencia. Una revisión humana y una prueba con volumen representativo atacan directamente la causa del incidente.",
+      appliesTo: "caso"
     }
   ],
   43: [
@@ -6807,6 +6872,71 @@
       ],
       answer: [0],
       explanation: "Los nombres de columnas reales sugeridos por Copilot pueden exponer estructura de datos confidenciales si se comparten externamente sin revisión, por lo que la gobernanza de datos por entorno es clave antes de habilitar Copilot ampliamente."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Copilot en tenant SIT): ¿qué error de gobierno cometió el administrador al activar Copilot para todo el tenant?",
+      options: [
+        "No revisó primero la clasificación de datos y las políticas DLP por entorno",
+        "No instaló GitHub Copilot en VS Code",
+        "No convirtió todas las tablas confidenciales en tablas virtuales",
+        "No creó un plugin C# para filtrar las capturas de pantalla"
+      ],
+      answer: [0],
+      explanation: "El caso dice que Copilot se habilitó ampliamente sin revisar qué entornos contenían datos bajo NDA ni su DLP. La corrección fue habilitar entorno por entorno con gobierno previo.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Copilot en tenant SIT): una fórmula generada incluyó nombres reales de columnas confidenciales y luego se compartió en una captura. ¿Cuál fue el riesgo concreto?",
+      options: [
+        "Exposición externa de estructura de datos confidencial por falta de control del entorno",
+        "Pérdida automática de todos los registros de Dataverse",
+        "Aumento de consumo de capacidad de Power Pages",
+        "Bloqueo permanente del editor de Power Apps"
+      ],
+      answer: [0],
+      explanation: "El incidente fue de confidencialidad: nombres reales de columnas de una tabla bajo NDA quedaron visibles fuera del contexto autorizado.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (Copilot en tenant SIT): ¿cuáles DOS controles debieron aplicarse antes de habilitar Copilot ampliamente?",
+      options: [
+        "Revisar DLP por entorno",
+        "Clasificar qué entornos contienen datos de clientes bajo NDA",
+        "Dar System Administrator a todos los makers",
+        "Eliminar todas las columnas con nombres descriptivos"
+      ],
+      answer: [0, 1],
+      explanation: "La corrección descrita combina gobierno por entorno, DLP y clasificación de datos. Dar más privilegios o borrar nombres útiles no resuelve el problema de gobierno.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Copilot en tenant SIT): ¿cuál es la política de habilitación más segura para un tenant con entornos de distinta sensibilidad?",
+      options: [
+        "Habilitar Copilot entorno por entorno después de revisar datos, DLP y audiencia",
+        "Habilitar Copilot globalmente y corregir incidentes después",
+        "Prohibir permanentemente Copilot incluso en entornos sin datos sensibles",
+        "Habilitarlo solo si todos los usuarios prometen no tomar capturas"
+      ],
+      answer: [0],
+      explanation: "La habilitación gradual por entorno permite balancear productividad y control de datos. El caso muestra el riesgo de una activación global sin revisión.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (Copilot en tenant SIT): si un maker debe documentar una fórmula generada sobre una tabla confidencial, ¿qué práctica reduce el riesgo de exposición?",
+      options: [
+        "Anonimizar nombres sensibles o usar ejemplos ficticios antes de compartir material fuera del equipo autorizado",
+        "Compartir la captura completa porque solo muestra metadatos",
+        "Pegar también registros reales para que el contexto sea más claro",
+        "Desactivar DLP porque dificulta la colaboración"
+      ],
+      answer: [0],
+      explanation: "Cuando hay datos bajo NDA, incluso la estructura puede ser sensible. Anonimizar o usar ejemplos ficticios reduce exposición fuera del contexto autorizado.",
+      appliesTo: "caso"
     }
   ],
   44: [
@@ -6905,6 +7035,71 @@
       ],
       answer: [0],
       explanation: "El archivo de instrucciones del repositorio se usa como contexto automático, mejorando la consistencia de las sugerencias con las convenciones ya establecidas del proyecto."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (plugin con Console.WriteLine): ¿por qué Copilot generó un logging incorrecto para Dataverse?",
+      options: [
+        "Porque no recibió el contexto del plugin base ni del patrón de ITracingService usado por el proyecto",
+        "Porque C# no permite logging en plugins de Dataverse",
+        "Porque ITracingService solo funciona en Canvas Apps",
+        "Porque Console.WriteLine es obligatorio en todos los plugins"
+      ],
+      answer: [0],
+      explanation: "El caso es explícito: el desarrollador no tenía abierto el archivo base ni el patrón establecido. Sin ese contexto, Copilot usó una salida genérica no válida para plugins.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (plugin con Console.WriteLine): ¿qué archivo o contexto habría reducido la probabilidad del error?",
+      options: [
+        "El plugin base del proyecto o instrucciones de repositorio indicando que se usa ITracingService",
+        "Un archivo vacío sin referencias al proyecto",
+        "Una captura del formulario de producción",
+        "Un README sin convenciones técnicas"
+      ],
+      answer: [0],
+      explanation: "Copilot necesita contexto relevante. El archivo base o instrucciones explícitas del repositorio le muestran el patrón real que debe seguir.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (plugin con Console.WriteLine): ¿cuáles DOS revisiones debieron hacerse antes de aceptar el código generado?",
+      options: [
+        "Confirmar que usa ITracingService para logging de plugin",
+        "Comparar el estilo generado con el patrón existente del proyecto",
+        "Verificar que use Console.WriteLine al menos una vez",
+        "Aceptar cualquier logging si el código compila"
+      ],
+      answer: [0, 1],
+      explanation: "El problema fue no seguir el patrón del proyecto y usar un mecanismo de logging que no da trazas útiles en Dataverse. Compilar no basta.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (plugin con Console.WriteLine): ¿qué pregunta de revisión humana habría detectado el problema más rápido?",
+      options: [
+        "¿El código generado sigue los patrones de logging y diagnóstico ya usados en este repositorio?",
+        "¿La respuesta de Copilot fue suficientemente larga?",
+        "¿El archivo tiene más comentarios que antes?",
+        "¿La IA usó el mismo idioma que el desarrollador?"
+      ],
+      answer: [0],
+      explanation: "La falla era de adaptación al contexto del proyecto. Preguntar por patrones locales de logging habría llevado directamente a ITracingService.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (plugin con Console.WriteLine): ¿qué impacto operativo tuvo aceptar el patrón equivocado?",
+      options: [
+        "El equipo perdió tiempo depurando porque no había logs visibles útiles en Dataverse",
+        "El plugin dejó de compilar inmediatamente",
+        "Copilot desactivó el entorno de producción",
+        "Se eliminaron automáticamente las trazas históricas"
+      ],
+      answer: [0],
+      explanation: "El caso indica que el equipo perdió tiempo depurando en producción porque Console.WriteLine no generaba el logging esperado dentro del contexto de plugins de Dataverse.",
+      appliesTo: "caso"
     }
   ],
   45: [
@@ -7003,6 +7198,71 @@
       ],
       answer: [0],
       explanation: "En un monorepo, un agente con herramientas puede explorar y correlacionar múltiples archivos (ej. cada `Record<LevelId, ...>`) antes de proponer un cambio, algo que un chat sin herramientas no puede hacer por sí mismo."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (agente 'optimiza el proyecto'): ¿cuál fue el problema principal del prompt dado al agente?",
+      options: [
+        "Era demasiado amplio y no definía alcance ni criterio de éxito verificable",
+        "Era demasiado específico sobre un formulario lento",
+        "Incluía demasiadas pruebas automatizadas",
+        "Prohibía modificar archivos no relacionados"
+      ],
+      answer: [0],
+      explanation: "El prompt 'optimiza el proyecto' abrió la puerta a cambios extensos no solicitados. El equipo adoptó tareas con alcance explícito y criterio de éxito verificable.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (PR de 40 archivos): ¿qué instrucción habría reducido el riesgo de cambios no relacionados?",
+      options: [
+        "Reduce el tiempo de carga de este formulario específico; no toques otros archivos",
+        "Optimiza todo lo que encuentres en el repositorio",
+        "Refactoriza cualquier componente que parezca mejorable",
+        "Haz el PR más grande para aprovechar la sesión"
+      ],
+      answer: [0],
+      explanation: "La instrucción correcta combina objetivo concreto, superficie acotada y una prohibición explícita de tocar archivos fuera del problema real.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (PR de 40 archivos): ¿cuáles DOS propiedades debe tener una tarea delegada a un agente de código?",
+      options: [
+        "Alcance explícito",
+        "Criterio de éxito verificable",
+        "Permiso para refactorizar todo el proyecto",
+        "Ausencia total de pruebas para ahorrar tiempo"
+      ],
+      answer: [0, 1],
+      explanation: "El caso concluye exactamente con esas dos reglas: alcance explícito y criterio verificable. Sin ellas, el agente puede producir cambios difíciles de revisar.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (PR de 40 archivos): ¿por qué un PR masivo generado por agente es riesgoso aunque parte del cambio sea útil?",
+      options: [
+        "Porque mezcla el objetivo real con refactors no solicitados, haciendo difícil revisar intención y regresiones",
+        "Porque Git no permite revisar PRs de más de 10 archivos",
+        "Porque todo cambio hecho por IA es inválido por definición",
+        "Porque los PRs grandes siempre despliegan automáticamente a producción"
+      ],
+      answer: [0],
+      explanation: "El riesgo no es que la IA haya participado, sino que el diff mezcla cambios de distinta intención y aumenta la carga de revisión humana.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (formulario lento): ¿qué evidencia debería acompañar el criterio de éxito?",
+      options: [
+        "Una medición antes/después del tiempo de carga del formulario afectado",
+        "La cantidad total de archivos editados",
+        "Una explicación de por qué el agente eligió tantos componentes",
+        "Una promesa de que el refactor se revisará después"
+      ],
+      answer: [0],
+      explanation: "Si el problema era un formulario lento, la validación debe medir ese formulario. El tamaño del PR no prueba que el objetivo se cumplió.",
+      appliesTo: "caso"
     }
   ],
   46: [
@@ -7101,6 +7361,71 @@
       ],
       answer: [0],
       explanation: "Documentar la regla como estándar de equipo evita que la decisión dependa del criterio individual de cada persona en cada momento, asegurando consistencia en la aplicación de controles."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (flujo de gastos): ¿qué práctica causó el incidente de pagos duplicados?",
+      options: [
+        "Publicar a producción un flujo generado por vibe coding sin revisar cada acción ni probar con datos reales simulados",
+        "Usar un flujo de aprobación para gastos",
+        "Tener dos aprobadores en el proceso",
+        "Probar el flujo antes de publicarlo"
+      ],
+      answer: [0],
+      explanation: "El caso no condena los flujos de aprobación ni los dos aprobadores; el problema fue publicar una generación completa sin revisión detallada ni pruebas suficientes.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (flujo de gastos): ¿qué tipo de defecto apareció cuando dos aprobadores actuaron casi al mismo tiempo?",
+      options: [
+        "Una condición de carrera que duplicó pagos",
+        "Una pérdida de contraseña de Dataverse",
+        "Un error de certificado de Entra ID",
+        "Una falla de formato visual en Canvas Apps"
+      ],
+      answer: [0],
+      explanation: "El caso identifica una condición de carrera entre dos aprobadores como causa inmediata de pagos duplicados.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (flujo de gastos): ¿cuáles DOS controles adoptó el equipo antes de publicar flujos generados sin revisión detallada?",
+      options: [
+        "Pasar primero por ambiente de pruebas con datos reales simulados",
+        "Revisión de un segundo maker",
+        "Publicar directo si la primera prueba manual funciona",
+        "Eliminar aprobadores para evitar concurrencia"
+      ],
+      answer: [0, 1],
+      explanation: "La regla adoptada fue pruebas con datos realistas en un ambiente seguro y revisión por otro maker. Publicar directo fue el problema original.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (flujo de gastos): ¿qué escenario de prueba habría detectado mejor el riesgo antes de producción?",
+      options: [
+        "Simular dos aprobadores actuando sobre la misma solicitud casi al mismo tiempo",
+        "Cambiar el color del correo de aprobación",
+        "Ejecutar el flujo una sola vez con un aprobador",
+        "Revisar solo que el flujo guarde correctamente"
+      ],
+      answer: [0],
+      explanation: "El defecto surgió por concurrencia entre aprobadores. Una prueba con dos acciones casi simultáneas habría atacado el riesgo central.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (flujo de gastos): ¿cuál es la lección principal sobre vibe coding controlado?",
+      options: [
+        "Puede acelerar prototipos, pero requiere revisión paso a paso, ambiente de prueba y aprobación humana antes de producción",
+        "Debe usarse solo para producción porque ahorra más tiempo",
+        "Elimina la necesidad de makers expertos",
+        "Solo sirve si se omiten pruebas para mantener velocidad"
+      ],
+      answer: [0],
+      explanation: "El módulo promueve control: usar IA para acelerar, manteniendo revisión, pruebas y separación de entornos antes de publicar.",
+      appliesTo: "caso"
     }
   ],
   47: [
@@ -7199,6 +7524,71 @@
       ],
       answer: [0],
       explanation: "Las plantillas se revisan y actualizan cuando dejan de dar buenos resultados, aplicando el mismo criterio de mantenimiento que se usa para refactorizar código."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (plantillas SIT): ¿qué problema provocaba que cada desarrollador pidiera 'genera un flujo de aprobación' con instrucciones distintas?",
+      options: [
+        "Flujos con estructura y nomenclatura inconsistentes, difíciles de mantener en equipo",
+        "Imposibilidad técnica de crear flujos de aprobación",
+        "Bloqueo automático de Power Automate",
+        "Eliminación de la convención de publisher en Dataverse"
+      ],
+      answer: [0],
+      explanation: "El caso describe inconsistencia entre proyectos como problema principal: estructuras y nombres distintos dificultaban mantenimiento.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (plantillas SIT): ¿qué elemento de la plantilla común ayudó a estandarizar los flujos?",
+      options: [
+        "Convención de nombres `sit_`, patrón de dos aprobadores y manejo de rechazo especificados",
+        "Instrucciones vagas para que cada desarrollador decidiera el patrón",
+        "Uso obligatorio de System Administrator en todos los conectores",
+        "Eliminación de cualquier prefijo para ahorrar caracteres"
+      ],
+      answer: [0],
+      explanation: "La plantilla común incluyó convenciones concretas: prefijo, patrón de aprobación y manejo de rechazo. Eso permitió consistencia repetible.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (plantillas SIT): ¿cuáles DOS beneficios produjo introducir prompts técnicos reutilizables?",
+      options: [
+        "Redujo el tiempo de creación de nuevos flujos",
+        "Mejoró la consistencia entre flujos de distintos desarrolladores",
+        "Eliminó la necesidad de revisar los flujos generados",
+        "Permitió usar nombres distintos en cada proyecto sin impacto"
+      ],
+      answer: [0, 1],
+      explanation: "El caso menciona explícitamente menor tiempo de creación y mejor consistencia. La revisión humana sigue siendo necesaria.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (plantillas SIT): si un equipo quiere mantener flujos a largo plazo, ¿por qué una plantilla de prompt es mejor que prompts improvisados?",
+      options: [
+        "Porque captura decisiones repetibles de arquitectura, nombres y manejo de errores para que todos partan del mismo estándar",
+        "Porque garantiza que ningún flujo tendrá errores",
+        "Porque impide que un maker revise el resultado",
+        "Porque reemplaza la documentación del proceso de negocio"
+      ],
+      answer: [0],
+      explanation: "Una plantilla reutilizable no garantiza perfección, pero sí vuelve repetibles las decisiones importantes y reduce variación accidental.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (plantillas SIT): ¿qué señal indicaría que el equipo volvió al problema original?",
+      options: [
+        "Cada nuevo flujo usa nombres, estructura y manejo de rechazo diferentes sin justificación",
+        "Todos los flujos usan el prefijo `sit_`",
+        "Los flujos comparten el patrón de dos aprobadores cuando aplica",
+        "Los desarrolladores reutilizan una plantilla revisada"
+      ],
+      answer: [0],
+      explanation: "La variación injustificada en nombres, estructura y manejo de rechazo era justamente el síntoma que la plantilla buscaba corregir.",
+      appliesTo: "caso"
     }
   ],
   48: [
@@ -7297,6 +7687,71 @@
       ],
       answer: [0],
       explanation: "El revisor automático acelera encontrar dónde mirar, pero no sustituye el juicio humano final antes de aprobar un PR."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (PR con validación eliminada): ¿por qué el PR era peligroso aunque resolvía el bug reportado?",
+      options: [
+        "Porque también eliminaba una validación de rango con razón de negocio no documentada",
+        "Porque todo PR generado con IA debe rechazarse automáticamente",
+        "Porque los cálculos en flujos nunca deben modificarse",
+        "Porque el revisor no ejecutó `pac org who`"
+      ],
+      answer: [0],
+      explanation: "El peligro fue un cambio colateral: el bug se resolvía, pero se eliminaba una validación existente importante para el negocio.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (PR con validación eliminada): ¿qué pregunta de revisión adoptó el equipo después del incidente?",
+      options: [
+        "¿Por qué cambió esto?",
+        "¿La IA respondió rápido?",
+        "¿El PR tiene menos de 5 archivos?",
+        "¿El commit menciona una herramienta de IA?"
+      ],
+      answer: [0],
+      explanation: "La regla adoptada fue revisar cada línea contra la intención: no solo confirmar que el síntoma reportado desapareció.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (PR con validación eliminada): ¿cuáles DOS hábitos habrían reducido el riesgo de aprobar el cambio?",
+      options: [
+        "Revisar el diff completo línea por línea",
+        "Comparar cada cambio contra la intención original o regla de negocio",
+        "Aprobar si el bug reportado ya no se reproduce",
+        "Omitir archivos no relacionados porque el agente los tocó"
+      ],
+      answer: [0, 1],
+      explanation: "El problema fue enfocarse solo en el síntoma resuelto. La revisión debe cubrir todo el diff y preguntar por la razón de cada cambio.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (PR con validación eliminada): ¿qué documentación habría ayudado al revisor humano?",
+      options: [
+        "Una nota explicando la razón de negocio de la validación de rango",
+        "Un comentario diciendo que el bug fue corregido visualmente",
+        "Una captura del editor de flujo",
+        "El nombre del agente que hizo el cambio"
+      ],
+      answer: [0],
+      explanation: "La validación tenía una razón de negocio no documentada. Documentarla habría hecho más visible que eliminarla era riesgoso.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (PR con validación eliminada): ¿cuál es el rol correcto de la IA en una revisión de diff?",
+      options: [
+        "Ayudar a detectar cambios sospechosos y explicar impacto, sin reemplazar la aprobación humana línea por línea",
+        "Aprobar automáticamente todo cambio que compile",
+        "Ocultar cambios colaterales para que el PR sea más fácil de leer",
+        "Eliminar validaciones antiguas si no entiende su propósito"
+      ],
+      answer: [0],
+      explanation: "La IA puede ayudar, pero la responsabilidad final sigue siendo del revisor humano que entiende intención, reglas de negocio e impacto.",
+      appliesTo: "caso"
     }
   ],
   49: [
@@ -7395,6 +7850,71 @@
       ],
       answer: [0],
       explanation: "La misma lógica de gobernanza de datos (políticas DLP, clasificación de datos por entorno) aplicada a conectores tradicionales debe aplicarse también a las herramientas de IA generativa."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (secreto en prompt): ¿cuál fue el incidente de seguridad principal?",
+      options: [
+        "Se pegó una cadena de conexión real con usuario y contraseña en el historial de una herramienta de IA",
+        "Se usó un placeholder en lugar de una credencial real",
+        "Se guardó la credencial en Key Vault",
+        "Se documentó la variable de entorno sin valor"
+      ],
+      answer: [0],
+      explanation: "El caso describe exposición de una credencial real en el historial de la herramienta. Placeholders y Key Vault son controles correctos, no incidentes.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (secreto en prompt): ¿cuál fue la primera acción correctiva adecuada?",
+      options: [
+        "Rotar la credencial expuesta de inmediato",
+        "Borrar solo el mensaje local y seguir usando la misma contraseña",
+        "Publicar la cadena de conexión en el repositorio para auditarla",
+        "Cambiar el nombre de la variable sin cambiar el valor"
+      ],
+      answer: [0],
+      explanation: "Una credencial expuesta debe considerarse comprometida. Rotarla inmediatamente reduce la ventana de abuso.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (secreto en prompt): ¿cuáles DOS reglas adoptó el equipo para evitar repetir el incidente?",
+      options: [
+        "Usar placeholders como `{{CONNECTION_STRING}}` en prompts",
+        "Guardar valores reales en Environment Variables o Key Vault, no en conversaciones",
+        "Pegar secretos reales solo si el modelo promete no guardarlos",
+        "Compartir contraseñas en texto plano para acelerar revisiones"
+      ],
+      answer: [0, 1],
+      explanation: "El caso establece placeholders para prompts y almacenamiento seguro para valores reales. Nunca se deben pegar secretos reales en conversaciones con IA.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (secreto en prompt): si necesitas que la IA genere código de conexión, ¿qué dato deberías proporcionar?",
+      options: [
+        "Un placeholder con nombre claro, por ejemplo `{{CONNECTION_STRING}}`",
+        "La cadena de conexión completa de staging",
+        "Un token de producción recién generado",
+        "Usuario y contraseña reales para que pruebe el ejemplo"
+      ],
+      answer: [0],
+      explanation: "La IA necesita la forma del dato, no el secreto real. Los placeholders permiten explicar estructura sin exponer credenciales.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (secreto en prompt): ¿por qué staging no debe tratarse como 'seguro para compartir'?",
+      options: [
+        "Porque una credencial de staging puede dar acceso real a sistemas y datos, y también abrir camino a otros entornos",
+        "Porque staging siempre es público por definición",
+        "Porque solo producción requiere rotación de secretos",
+        "Porque los modelos de IA rechazan automáticamente cualquier secreto de staging"
+      ],
+      answer: [0],
+      explanation: "Staging sigue siendo un entorno real. Sus credenciales deben protegerse y rotarse si se exponen igual que cualquier secreto operativo.",
+      appliesTo: "caso"
     }
   ],
   50: [
@@ -7493,6 +8013,71 @@
       ],
       answer: [0],
       explanation: "El job 'Lint & Type Check' del pipeline ejecuta `tsc --noEmit`, que detecta errores de tipos antes de que el cambio llegue a los siguientes gates."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (cambio sin CI): ¿qué decisión permitió que una regresión de descuentos llegara a producción?",
+      options: [
+        "Fusionar un cambio generado por agente sin tests ni pipeline de CI completo",
+        "Usar un pipeline de CI con pruebas automatizadas",
+        "Exigir revisión antes de merge",
+        "Detectar el problema durante una prueba automatizada"
+      ],
+      answer: [0],
+      explanation: "El equipo se saltó tests y CI 'para ir rápido'. La regresión no se detectó hasta que un cliente reportó una factura incorrecta.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (cambio sin CI): ¿por qué la prueba visual manual fue insuficiente?",
+      options: [
+        "Porque no cubría el cálculo de descuentos que terminó regresando",
+        "Porque las pruebas manuales siempre están prohibidas",
+        "Porque Playwright solo funciona en producción",
+        "Porque los descuentos no pueden probarse automáticamente"
+      ],
+      answer: [0],
+      explanation: "La prueba visual validó apariencia o flujo básico, pero no el cálculo de negocio afectado. Se necesitaban pruebas y CI.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (cambio sin CI): ¿cuáles DOS controles son obligatorios antes de fusionar cambios generados por IA?",
+      options: [
+        "Tests relevantes para la lógica modificada",
+        "Pipeline de CI completo en verde",
+        "Aprobación automática por la herramienta de IA",
+        "Omitir validaciones por urgencia"
+      ],
+      answer: [0, 1],
+      explanation: "La política adoptada fue sin excepciones: ningún cambio se fusiona sin pasar por CI completo, y las pruebas deben cubrir la lógica que cambió.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (cambio sin CI): ¿qué frase refleja mejor la política adoptada después del incidente?",
+      options: [
+        "Ningún cambio, generado por IA o no, se fusiona sin pasar por CI completo",
+        "Los cambios generados por IA pueden saltarse CI si parecen correctos",
+        "CI solo aplica a cambios escritos manualmente",
+        "La urgencia permite omitir pruebas si el cliente espera"
+      ],
+      answer: [0],
+      explanation: "El caso declara la política explícita: sin excepciones por urgencia y sin distinción entre cambios generados por IA o humanos.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (cambio sin CI): ¿qué test habría atacado directamente la regresión reportada por el cliente?",
+      options: [
+        "Una prueba automatizada del cálculo de descuentos con escenarios límite",
+        "Una prueba visual del color del botón de factura",
+        "Un test que solo confirma que la página carga",
+        "Una validación de que el agente respondió en menos de un minuto"
+      ],
+      answer: [0],
+      explanation: "La regresión fue de cálculo de descuentos. La cobertura debe probar esa regla de negocio, incluyendo casos límite.",
+      appliesTo: "caso"
     }
   ],
   51: [
@@ -7591,6 +8176,71 @@
       ],
       answer: [0],
       explanation: "La actividad práctica pide documentar explícitamente en qué etapa (si alguna) se tuvo que retroceder y por qué, como parte del aprendizaje del ciclo completo."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (flujo de 4 etapas): ¿qué problema buscaba corregir el equipo al adoptar Humano diseña, IA implementa, CI valida, Humano aprueba?",
+      options: [
+        "Incidentes causados por saltarse CI o aprobación humana para ir más rápido",
+        "Falta de modelos de IA disponibles para escribir código",
+        "Exceso de documentación de requisitos",
+        "Imposibilidad de usar GitHub Actions"
+      ],
+      answer: [0],
+      explanation: "El caso conecta el flujo con incidentes previos por saltarse validación y aprobación. La solución mantiene esas etapas intactas.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (flujo de 4 etapas): ¿dónde se obtuvo la ganancia de productividad?",
+      options: [
+        "En reducir tiempo de implementación, no en eliminar validación ni aprobación",
+        "En quitar CI del proceso",
+        "En eliminar la revisión humana final",
+        "En publicar directo desde el entorno de desarrollo"
+      ],
+      answer: [0],
+      explanation: "El caso dice que la ganancia no fue saltarse pasos, sino acelerar implementación manteniendo validación y aprobación humana.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (flujo de 4 etapas): ¿cuáles DOS etapas NO deben eliminarse aunque la IA implemente más rápido?",
+      options: [
+        "CI valida",
+        "Humano aprueba",
+        "IA implementa",
+        "Redacción inicial del prompt"
+      ],
+      answer: [0, 1],
+      explanation: "Los incidentes previos venían de saltar CI o aprobación humana. Esas etapas son guardarraíles, no burocracia opcional.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (flujo de 4 etapas): ¿qué métrica validó que el flujo completo funcionaba mejor?",
+      options: [
+        "Reducción medible de regresiones detectadas en producción durante los primeros 3 meses",
+        "Aumento del número de commits por día sin revisar calidad",
+        "Eliminación total de revisiones de PR",
+        "Mayor cantidad de cambios directos en producción"
+      ],
+      answer: [0],
+      explanation: "El caso reporta menor cantidad de regresiones en producción como evidencia de mejora, sin aumentar riesgo por saltarse pasos.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (flujo de 4 etapas): ¿qué decisión conservaría el equilibrio correcto entre velocidad y control?",
+      options: [
+        "Permitir que IA acelere la implementación, pero exigir CI verde y aprobación humana antes de merge",
+        "Fusionar automáticamente todo lo generado por IA",
+        "Eliminar diseño humano porque la IA puede inferir requisitos",
+        "Permitir excepciones de CI si el cambio parece pequeño"
+      ],
+      answer: [0],
+      explanation: "El flujo recomendado conserva diseño, validación y aprobación. La IA acelera una etapa, no sustituye el sistema de control.",
+      appliesTo: "caso"
     }
   ],
   52: [
@@ -7689,6 +8339,71 @@
       ],
       answer: [0],
       explanation: "Cuando un entorno tiene Dataverse habilitado, se crea una organización con una URL única (ej. `https://<org>.crm.dynamics.com`), que es el punto de conexión real para Web API y otras herramientas."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (`pac auth`): ¿qué omisión causó que el consultor exportara desde el cliente equivocado?",
+      options: [
+        "No ejecutó `pac org who` antes de un comando que exportaba o modificaba solución",
+        "No tenía Power Platform CLI instalado",
+        "No usó una cuenta de administrador global",
+        "No generó una app registration nueva"
+      ],
+      answer: [0],
+      explanation: "El perfil activo había quedado de una sesión anterior. `pac org who` habría mostrado el entorno real antes del export.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (`pac auth`): ¿qué convención de nombres reduce confusiones entre clientes y entornos?",
+      options: [
+        "Perfiles explícitos como `sit-cliente-a-dev` y `sit-cliente-a-prod`",
+        "Perfiles llamados `default`, `test` y `nuevo`",
+        "Usar el mismo nombre de perfil para todos los clientes",
+        "No guardar perfiles y confiar en memoria"
+      ],
+      answer: [0],
+      explanation: "Nombres explícitos por cliente y entorno reducen ambigüedad cuando se atienden varios clientes en la misma semana.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (`pac auth`): ¿cuáles DOS acciones adoptó el equipo para evitar repetir el incidente?",
+      options: [
+        "Ejecutar `pac org who` antes de comandos que exportan, importan o modifican",
+        "Nombrar perfiles de forma explícita por cliente y entorno",
+        "Usar siempre el último perfil activo sin verificar",
+        "Trabajar todos los clientes desde un solo entorno"
+      ],
+      answer: [0, 1],
+      explanation: "El caso termina con dos reglas: verificar la organización activa antes de comandos sensibles y usar nombres explícitos para perfiles.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (`pac auth`): ¿por qué el incidente generó retrabajo aunque no hubo pérdida de datos de producción?",
+      options: [
+        "Porque se sobrescribió una solución del Cliente B creyendo estar en el entorno de pruebas del Cliente A",
+        "Porque se borró el tenant del Cliente A",
+        "Porque `pac org who` dañó una solución managed",
+        "Porque todos los perfiles de `pac auth` se eliminaron automáticamente"
+      ],
+      answer: [0],
+      explanation: "El caso señala que no era producción, pero sí se exportó/sobrescribió solución del cliente equivocado, generando confusión y retrabajo.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (`pac auth`): antes de `pac solution import` hacia producción, ¿cuál es la verificación mínima obligatoria?",
+      options: [
+        "Ejecutar `pac org who` y confirmar cliente, entorno y URL antes de continuar",
+        "Confiar en que la terminal recuerda el entorno correcto",
+        "Revisar solo que el archivo ZIP exista",
+        "Cambiar el nombre local del ZIP para que diga prod"
+      ],
+      answer: [0],
+      explanation: "Comandos de importación/exportación modifican artefactos reales. Confirmar organización activa evita actuar sobre el tenant o entorno equivocado.",
+      appliesTo: "caso"
     }
   ],
   53: [
@@ -7950,6 +8665,71 @@
       ],
       answer: [0],
       explanation: "La IA puede acelerar la revisión de diffs y riesgos de una solución, pero la decisión de aprobar el pipeline hacia Test/Prod sigue siendo responsabilidad humana, igual que en el resto del nivel IA."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (ALM SIT): ¿cuál fue la causa raíz de perder una personalización hecha en producción?",
+      options: [
+        "No existía una separación real Dev unmanaged / Test y Prod managed con pipeline como único camino de despliegue",
+        "GitHub Actions no puede desplegar soluciones Power Platform",
+        "Las soluciones managed siempre eliminan formularios",
+        "El maker no tenía licencia para abrir Test"
+      ],
+      answer: [0],
+      explanation: "El caso explica que la causa raíz no fue solo el error del maker, sino la ausencia de separación managed/unmanaged y control de despliegue.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (ALM SIT): ¿qué estándar adoptó el equipo para Dev, Test y Prod?",
+      options: [
+        "Dev siempre unmanaged y editable; Test y Prod siempre managed y de solo lectura",
+        "Todos los entornos unmanaged para editar más rápido",
+        "Producción editable y Dev managed",
+        "Importar manualmente desde cualquier entorno disponible"
+      ],
+      answer: [0],
+      explanation: "El estándar descrito es explícito: Dev editable/unmanaged; Test y Prod managed/de solo lectura, con pipeline como camino de despliegue.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (ALM SIT): ¿cuáles DOS prácticas habrían evitado que una personalización directa en Prod quedara fuera de control de versiones?",
+      options: [
+        "Impedir edición directa en Prod usando soluciones managed",
+        "Usar GitHub Actions como único camino de despliegue",
+        "Hacer cambios rápidos manuales en Prod si parecen pequeños",
+        "Mantener Test y Prod visualmente idénticos sin controles adicionales"
+      ],
+      answer: [0, 1],
+      explanation: "Managed en Prod evita edición directa, y el pipeline asegura trazabilidad. Los cambios manuales fueron el problema.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (ALM SIT): ¿por qué importar desde desarrollo directamente a producción era riesgoso?",
+      options: [
+        "Porque evitaba un pipeline controlado y mezclaba cambios editables con despliegues productivos sin trazabilidad suficiente",
+        "Porque las soluciones unmanaged no pueden contener formularios",
+        "Porque producción no admite soluciones de Power Platform",
+        "Porque Git no puede versionar soluciones desempaquetadas"
+      ],
+      answer: [0],
+      explanation: "El riesgo era de proceso y trazabilidad: saltarse pipeline y separación de entornos dejó personalizaciones fuera del ciclo controlado.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (ALM SIT): si un maker necesita corregir un formulario, ¿cuál es el flujo correcto bajo el estándar adoptado?",
+      options: [
+        "Editar en Dev unmanaged, versionar, validar en Test managed y desplegar a Prod mediante pipeline",
+        "Editar directamente en Prod para ahorrar tiempo",
+        "Cambiar Test y asumir que Prod queda sincronizado",
+        "Pedirle a la IA que modifique producción sin revisión"
+      ],
+      answer: [0],
+      explanation: "El estándar conserva trazabilidad: cambios en Dev, validación en Test y despliegue controlado a Prod.",
+      appliesTo: "caso"
     }
   ],
   55: [
@@ -8048,6 +8828,71 @@
       ],
       answer: [0],
       explanation: "Sin importar cuán completa parezca una propuesta de arquitectura generada con apoyo de IA, la decisión final y la responsabilidad ante el cliente siguen siendo del arquitecto humano."
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (visitas de vendedores): ¿qué omisión hizo que la IA propusiera una tabla personalizada innecesaria?",
+      options: [
+        "No se le pidió evaluar primero capacidades estándar de Dynamics 365 Sales, como citas/actividades",
+        "No se le pidió crear suficientes relaciones personalizadas",
+        "No se incluyó una cadena de conexión real en el prompt",
+        "No se usó Power Platform CLI antes de preguntar"
+      ],
+      answer: [0],
+      explanation: "El caso muestra que la IA propuso custom porque no recibió la restricción de evaluar estándar primero. Dynamics 365 ya cubría gran parte con actividades.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (visitas de vendedores): ¿qué alternativa estándar cubría cerca del 90% del requerimiento?",
+      options: [
+        "Actividades/citas estándar de Dynamics 365 Sales",
+        "Una tabla custom completa sin componentes estándar",
+        "Un pipeline de GitHub Actions",
+        "Un Application User con System Administrator"
+      ],
+      answer: [0],
+      explanation: "Al revisar la propuesta, el equipo identificó que las actividades estándar cubrían el 90% del caso y solo hacía falta un campo adicional.",
+      appliesTo: "caso"
+    },
+    {
+      type: "multi",
+      prompt: "Diagnóstico de caso (visitas de vendedores): ¿cuáles DOS costos generaba crear una tabla custom completa sin revisar lo estándar?",
+      options: [
+        "Duplicar capacidades existentes de Dynamics 365 Sales",
+        "Aumentar mantenimiento futuro al no heredar mejoras de la tabla estándar",
+        "Mejorar automáticamente la compatibilidad con actualizaciones estándar",
+        "Eliminar la necesidad de gobernanza funcional"
+      ],
+      answer: [0, 1],
+      explanation: "Duplicar estándar aumenta costo y reduce aprovechamiento de capacidades existentes. La solución custom no hereda automáticamente mejoras del estándar.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (visitas de vendedores): ¿qué pregunta explícita cambió la dirección de la solución?",
+      options: [
+        "¿Existe una alternativa estándar de D365 antes de crear algo custom?",
+        "¿Cuántas tablas custom podemos crear en una sola solución?",
+        "¿Puede la IA inventar una entidad más moderna?",
+        "¿Cómo hacemos que el formulario custom sea visualmente distinto?"
+      ],
+      answer: [0],
+      explanation: "La pregunta sobre alternativa estándar llevó al equipo a descubrir que actividades/citas cubrían la mayor parte del requerimiento.",
+      appliesTo: "caso"
+    },
+    {
+      type: "single",
+      prompt: "Diagnóstico de caso (visitas de vendedores): ¿cuál habría sido una solución proporcional al requerimiento?",
+      options: [
+        "Usar actividades estándar y agregar solo el campo personalizado necesario",
+        "Crear una solución paralela completa para reemplazar Sales",
+        "Evitar cualquier componente estándar para tener control total",
+        "Pedir a cada vendedor que registre visitas fuera de D365"
+      ],
+      answer: [0],
+      explanation: "El caso concluye que el estándar cubría el 90%; por tanto, una extensión mínima era más proporcional que desarrollo a medida completo.",
+      appliesTo: "caso"
     }
   ],
   56: [
