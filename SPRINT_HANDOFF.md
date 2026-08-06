@@ -89,8 +89,9 @@ todo en verde):**
   `/recursos/guia-herramientas-workstation` (sección "Cómo abrir una terminal"),
   `/labs/lab-03-canvas-primera-app` (sección "Variante sin tenant"), Módulos 23 y 34 (banner "Antes
   de comenzar"), y que el favicon ya no dé 404.
-- **Bypass de despliegue mientras GitHub Pages está en cola (2026-08-06)**: se creó una publicación
-  estática en Vercel desde el `out/` local ya generado: `https://out-erplccp6g-edwingalarcons-projects.vercel.app`.
+- **Producción oficial migrada a Vercel (2026-08-06)**: la URL oficial ya no es GitHub Pages sino
+  `https://planestudio-edwingalarcon.vercel.app/`. Se creó una publicación estática en Vercel desde
+  el `out/` local ya generado y se asignó alias estable a esa URL.
   No usar build remoto desde `app-elearning` sin ajustar root/contexto, porque `content.ts` y el
   `prebuild` dependen de archivos hermanos (`../docs`, `../scripts`) que no existen si Vercel sube
   solo la subcarpeta. Receta que funcionó: `cd app-elearning`, `npm run build`, `vercel deploy out -y

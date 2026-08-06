@@ -37,8 +37,8 @@ Current stable state as of the latest local handoff (2026-08-06):
   GitHub Actions run `30551134055` success.
 - Previous course/design sprint: **Sprint 22 — `/impeccable audit` (17/20 → 20/20 after fixes) +
   `PRODUCT.md`/`DESIGN.md`/`.impeccable/design.json` (Sprint 21)**.
-- GitHub Pages production has been verified at `https://edwingalarcon.github.io/PlanEstudio/` after
-  every sub-fase above.
+- Official production URL is `https://planestudio-edwingalarcon.vercel.app/`. GitHub Pages was used
+  historically and may still exist as a secondary mirror, but it is no longer the release blocker.
 - Fixed learning content counts: **75 modules, 72 labs, 508 quiz questions, 375 case-diagnosis
   questions, 633 checklist criteria**. The case-diagnosis questions are tagged with
   `appliesTo: "caso"` and are intentionally excluded from `getQuestionsForModule()` and the simulator
@@ -72,7 +72,7 @@ Current stable state as of the latest local handoff (2026-08-06):
 A structured, progressive learning plan for Microsoft Power Platform and Dynamics 365 — from beginner to Solution Architect. The repo has two parallel surfaces:
 
 1. **MkDocs site** — Markdown documentation served via MkDocs Material (legacy/reference site, reads from `docs/`)
-2. **Next.js app** (`app-elearning/`) — interactive e-learning app deployed to GitHub Pages at `https://edwingalarcon.github.io/PlanEstudio/` (reads modules and labs from `app-elearning/content/`, NOT from `docs/`)
+2. **Next.js app** (`app-elearning/`) — interactive e-learning app deployed officially to Vercel at `https://planestudio-edwingalarcon.vercel.app/` (reads modules and labs from `app-elearning/content/`, NOT from `docs/`)
 
 **Important — module content is NOT shared between the two surfaces anymore.** Since commit `8b0433c8` (2026-06-25, "migración completa — 41 módulos a archivos individuales con frontmatter"), app modules and labs live as individual files with frontmatter in `app-elearning/content/modules/<levelId>/` and `app-elearning/content/labs/`. The current app surface contains **75 modules and 72 labs across 7 levels** (4 certification levels + transversal `ia`, `d365` and `rpa`). `docs/Niveles/*.md` still exists and still feeds MkDocs, but for the Next.js app it is now dead legacy fallback code (`extractModulesFromContent` in `content.ts`) that never fires because every module already has an individual file. **When editing module content for the app, edit `app-elearning/content/modules/`, not `docs/Niveles/`.** The question bank (`docs/javascripts/evaluaciones-simulador.js`) was NOT part of this migration and remains the single source for both surfaces (see Content: Question Bank below).
 
@@ -83,7 +83,7 @@ mkdocs.yml               # MkDocs configuration
 requirements.txt         # Python deps: mkdocs-material
 .github/
   workflows/
-    ci.yml               # CI/CD: lint → test → build → deploy to GitHub Pages (on push to master)
+    ci.yml               # Legacy CI/CD: lint → test → build → deploy to GitHub Pages secondary mirror
 docs/                    # MkDocs source content — legacy/reference site only (NOT read by the Next.js app for modules/labs)
   index.md               # Master index and overview
   Niveles/
@@ -164,7 +164,8 @@ npm run test:coverage
 npm run lint
 npm run typecheck
 npm run validate:content  # Frontmatter, unique moduleId/slug, level ranges, question coverage
-npm run build:pages  # Static export for GitHub Pages → app-elearning/out/
+npm run build        # Static export for official Vercel/root hosting → app-elearning/out/
+npm run build:pages  # Static export for legacy GitHub Pages → app-elearning/out/
 npm run e2e          # Playwright smoke tests (47 tests)
 ```
 
@@ -181,7 +182,7 @@ Push to `master` → GitHub Actions (`ci.yml`):
 2. **Unit Tests** — Vitest with coverage (80% threshold)
 3. **Playwright Smoke** — end-to-end checks for main routes, labs, search, progress, certificates and onboarding guardrails
 4. **Build** — `next build` → static export in `app-elearning/out/`
-5. **Deploy** — `actions/deploy-pages` → `https://edwingalarcon.github.io/PlanEstudio/`
+5. **Deploy** — legacy GitHub Pages mirror; official production is Vercel
 
 **If CI fails:** check ESLint errors first (most common cause). Run `npm run lint` locally before pushing.
 

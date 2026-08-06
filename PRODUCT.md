@@ -8,7 +8,7 @@ web
 
 ## Users
 
-Estudiantes de Microsoft Power Platform y Dynamics 365 que buscan progresar desde cero hasta rol de Arquitecto de Soluciones Empresariales. Perfil ancla: ingeniero de sistemas con experiencia inicial en Power Platform/D365, foco en automatizacion de procesos y analisis tecnico, que usa IA como herramienta de apoyo moderno. Producto publico real: deployado en GitHub Pages para que cualquier estudiante lo use como recurso serio, no solo para uso personal del autor.
+Estudiantes de Microsoft Power Platform y Dynamics 365 que buscan progresar desde cero hasta rol de Arquitecto de Soluciones Empresariales. Perfil ancla: ingeniero de sistemas con experiencia inicial en Power Platform/D365, foco en automatizacion de procesos y analisis tecnico, que usa IA como herramienta de apoyo moderno. Producto publico real: deployado oficialmente en Vercel para que cualquier estudiante lo use como recurso serio, no solo para uso personal del autor.
 
 ## Product Purpose
 
@@ -20,7 +20,7 @@ Progresion rigida de 4 niveles (Basico -> Intermedio -> Avanzado -> Arquitecto) 
 
 ## Operating Context
 
-App Next.js 15 (App Router, static export) deployada en GitHub Pages bajo basePath `/PlanEstudio`. Contenido en Markdown con frontmatter (`app-elearning/content/modules/`, `app-elearning/content/labs/`). Banco de preguntas compartido en `docs/javascripts/evaluaciones-simulador.js`. El estudiante navega por nivel, abre un modulo, lee la teoria, hace labs practicos y responde el quiz; tambien puede tomar el simulador cronometrado independiente. Existe una version legacy/paralela en MkDocs (`docs/`) que sirve como sitio de referencia estatico, no interactivo.
+App Next.js 15 (App Router, static export) deployada oficialmente en Vercel en `https://planestudio-edwingalarcon.vercel.app/`. GitHub Pages queda como espejo legacy bajo basePath `/PlanEstudio`, no como URL principal. Contenido en Markdown con frontmatter (`app-elearning/content/modules/`, `app-elearning/content/labs/`). Banco de preguntas compartido en `docs/javascripts/evaluaciones-simulador.js`. El estudiante navega por nivel, abre un modulo, lee la teoria, hace labs practicos y responde el quiz; tambien puede tomar el simulador cronometrado independiente. Existe una version legacy/paralela en MkDocs (`docs/`) que sirve como sitio de referencia estatico, no interactivo.
 
 ## Capabilities and Constraints
 

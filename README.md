@@ -4,7 +4,7 @@
 
 Plan de aprendizaje progresivo de Microsoft Power Platform y Dynamics 365, desde fundamentos hasta Solution Architect, alineado con las certificaciones oficiales de Microsoft.
 
-**App en producción:** [edwingalarcon.github.io/PlanEstudio](https://edwingalarcon.github.io/PlanEstudio/)
+**App oficial en producción:** [planestudio-edwingalarcon.vercel.app](https://planestudio-edwingalarcon.vercel.app/)
 
 ### Qué cubre esta versión estable
 
@@ -98,7 +98,8 @@ cd app-elearning
 
 npm run dev           # Servidor de desarrollo con Turbopack
 npm run build         # Build estático → out/
-npm run build:pages   # Build estático para GitHub Pages con basePath /PlanEstudio
+npm run build         # Build estático sin basePath para Vercel/hosting raíz
+npm run build:pages   # Build estático legacy para GitHub Pages con basePath /PlanEstudio
 npm run lint             # ESLint
 npm run typecheck        # TypeScript check
 npm run validate:content # Frontmatter, moduleId/slug únicos, rangos por nivel, cobertura de preguntas
@@ -121,7 +122,7 @@ GitHub Actions ejecuta en cada push a `master`:
 | `e2e` | Playwright smoke: home, niveles, módulo, labs, simulador, búsqueda, dark mode, 404 |
 | `build` | `GITHUB_PAGES=true next build` vía `npm run build:pages` → export estático en `out/` |
 | `mkdocs` | `mkdocs build --strict` (valida nav, links internos) |
-| `deploy` | Despliega `out/` a GitHub Pages (solo `master`) |
+| `deploy` | Despliegue legacy a GitHub Pages; producción oficial vive en Vercel |
 
 El job `deploy` depende de `build` y `mkdocs`; si falla lint, typecheck, tests, smoke E2E, build o MkDocs strict, no se despliega.
 
@@ -214,5 +215,5 @@ un trial/demo tenant de Dynamics 365 Finance & SCM; ver `docs/Recursos/ROADMAP_E
 | Búsqueda | FlexSearch 0.7 |
 | Markdown | react-markdown + remark-gfm + rehype-highlight |
 | Tests | Vitest v3, jsdom, @testing-library/react |
-| CI/CD | GitHub Actions → GitHub Pages |
+| CI/CD | Vercel para producción oficial; GitHub Actions/GitHub Pages como espejo legacy |
 | Contenido | Markdown en `app-elearning/content/` para la app; `docs/` para MkDocs legacy y preguntas |

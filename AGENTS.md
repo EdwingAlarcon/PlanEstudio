@@ -13,7 +13,7 @@ Current stable state as of the latest pushed `master` commit:
 - Previous course/design sprint: **Sprint 22 — `/impeccable audit` (17/20 → 20/20 after fixes) + `PRODUCT.md`/`DESIGN.md`/`.impeccable/design.json` (Sprint 21)**.
 - Beginner-onboarding work is intentional and should not be removed: "Primeras 2 horas", Mini Lab 01, checklist mínimo para principiantes, Power Fx en español simple, entregable mínimo del Nivel Básico, Módulo 9 bridge into Intermedio, and the beginner guided route surfaced through `/mi-ruta`, `/mapa`, and `/experiencia-practica`.
 - Professional Practice Framework has daily UX integration: capa `Experiencia práctica` con 18 Incident Labs, 6 Challenge Labs, 2 Work Simulations y 6 guided practices, metadata tipada/validada, matriz de competencias práctica, navegación `/experiencia-practica`, progreso práctico independiente, pistas escalonadas, intentos, notas, evidencias, solución colapsada y autoevaluación por rúbrica.
-- GitHub Pages production has been verified at `https://edwingalarcon.github.io/PlanEstudio/`.
+- Official production URL is `https://planestudio-edwingalarcon.vercel.app/`. GitHub Pages is legacy/secondary and should not be treated as the release blocker.
 - Fixed learning content counts: **75 modules, 72 labs, 508 quiz questions, 375 case-diagnosis questions, 633 checklist criteria**.
 - Professional practice counts: **32 practices total — 18 incidents, 6 challenges, 2 simulations, 6 guided**. Do not merge these into the existing lab count.
 - Practical progress uses separate localStorage key `planestudio.practice-progress.v1`; academic progress remains `plan-estudio-progress`. Do not merge these stores or show a single combined percentage.
@@ -25,7 +25,7 @@ Current stable state as of the latest pushed `master` commit:
 
 A structured, progressive learning plan for Microsoft Power Platform and Dynamics 365 — from beginner to Solution Architect. The repo has two parallel surfaces:
 
-1. **Next.js app** (`app-elearning/`) — primary interactive e-learning app deployed to GitHub Pages at `https://edwingalarcon.github.io/PlanEstudio/`
+1. **Next.js app** (`app-elearning/`) — primary interactive e-learning app deployed officially to Vercel at `https://planestudio-edwingalarcon.vercel.app/`
 2. **MkDocs site** — Markdown documentation served via MkDocs Material (legacy/reference site)
 
 `app-elearning/content/` is the authoritative source for modules and labs rendered by the Next.js app. `docs/` remains for MkDocs legacy/reference content and shared resources such as the question bank.
@@ -37,7 +37,7 @@ mkdocs.yml               # MkDocs configuration
 requirements.txt         # Python deps: mkdocs-material
 .github/
   workflows/
-    ci.yml               # CI/CD: lint → test → build → deploy to GitHub Pages (on push to master)
+    ci.yml               # Legacy CI/CD: lint → test → build → deploy to GitHub Pages (secondary mirror)
 docs/                    # MkDocs legacy/reference content + shared question bank
   index.md               # Master index and overview
   Niveles/
@@ -109,7 +109,8 @@ npm run test:coverage
 npm run lint
 npm run typecheck
 npm run validate:content  # Frontmatter, unique moduleId/slug, level ranges, question coverage
-npm run build:pages  # Static export for GitHub Pages → app-elearning/out/
+npm run build        # Static export for official Vercel/root hosting → app-elearning/out/
+npm run build:pages  # Static export for legacy GitHub Pages → app-elearning/out/
 npm run e2e          # Playwright smoke tests
 npm run verify       # lint + typecheck + coverage + build:pages
 ```
@@ -128,7 +129,7 @@ Push to `master` → GitHub Actions (`ci.yml`):
 3. **E2E Smoke** — Playwright checks home, levels, module detail, labs, simulator, search, dark mode, navigation, 404
 4. **Build** — `npm run build:pages` → static export in `app-elearning/out/`
 5. **MkDocs strict** — validates legacy/reference site
-6. **Deploy** — `actions/deploy-pages` → `https://edwingalarcon.github.io/PlanEstudio/`
+6. **Deploy** — legacy GitHub Pages mirror via `actions/deploy-pages`; official production is Vercel
 
 **If CI fails:** check ESLint errors first (most common cause). Run `npm run lint` locally before pushing.
 
