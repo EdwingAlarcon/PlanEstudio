@@ -21,7 +21,8 @@
     "e2e": "playwright test",
     "generate:rpa-assets": "node scripts/generate-rpa-assets.mjs",
     "validate:assets": "node scripts/validate-rpa-assets.mjs",
-    "validate:content": "tsx scripts/validate-content.ts && npm run validate:assets",
+    "validate:interactive-practices": "tsx scripts/validate-interactive-practices.ts",
+    "validate:content": "tsx scripts/validate-content.ts && npm run validate:assets && npm run validate:interactive-practices",
     "verify": "npm run lint && npm run typecheck && npm run validate:content && npm run test:coverage && npm run build:pages",
     "verify:full": "npm run verify && npm run e2e"
   },

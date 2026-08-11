@@ -14,6 +14,8 @@ import type { ProfessionalRouteSlug } from "@/lib/professional-routes";
 import { UI } from "@/lib/i18n";
 import { getNextWorkstationRequirement, getToolsForProfile, recommendWorkstationProfile } from "@/lib/workstation";
 import { useWorkstationStore } from "@/lib/workstation-store";
+import { InteractivePracticeSummary } from "@/components/interactive-practices/interactive-practice-summary";
+import type { InteractivePractice } from "@/lib/interactive-practices";
 
 interface RouteSummary {
   slug: ProfessionalRouteSlug;
@@ -26,8 +28,10 @@ interface RouteSummary {
 
 export function MyRouteClient({
   routes,
+  interactivePractices,
 }: {
   routes: RouteSummary[];
+  interactivePractices: InteractivePractice[];
 }) {
   const onboarding = useOnboardingStore();
   const completedModules = useProgressStore((s) => s.completedModules);
@@ -69,6 +73,7 @@ export function MyRouteClient({
       {!started && <DiagnosticPanel />}
 
       <WorkstationPreviewSection />
+      <InteractivePracticeSummary practices={interactivePractices} />
 
       <section className="grid gap-4 lg:grid-cols-[1fr_0.85fr]">
         <div className="rounded-xl border border-[#0078D4]/20 bg-[#EFF6FC] p-5 shadow-fluent-1 dark:border-[#4DB8FF]/20 dark:bg-[rgba(0,120,212,0.10)]">

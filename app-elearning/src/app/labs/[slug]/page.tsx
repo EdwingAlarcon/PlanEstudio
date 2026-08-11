@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Clock, ChevronLeft, Award, Users, BookOpen, AlertTriangle, FlaskConical } from "lucide-react";
+import { Clock, ChevronLeft, Award, Users, BookOpen, AlertTriangle, FlaskConical, BrainCircuit, ArrowRight } from "lucide-react";
 import { getAllLabs, getLabBySlug } from "@/lib/content";
+import { getInteractivePracticesForLab, INTERACTIVE_TYPE_LABELS } from "@/lib/interactive-practices";
 import { getLabPresentationMeta } from "@/lib/lab-metadata";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
 import { LabCompleteButton } from "@/components/labs/lab-complete-button";
@@ -59,6 +60,7 @@ export default async function LabDetailPage({ params }: Props) {
 
   const bar = LEVEL_BAR[lab.level] ?? "bg-[#0078D4]";
   const meta = getLabPresentationMeta(lab);
+  const interactivePractices = getInteractivePracticesForLab(lab.displayId).slice(0, 2);
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-fade-in">
@@ -186,6 +188,37 @@ export default async function LabDetailPage({ params }: Props) {
           </div>
         )}
       </div>
+
+      {interactivePractices.length > 0 && (
+        <section aria-labelledby="lab-interactive-practice-heading" className="rounded-xl border border-[#107C10]/25 bg-card px-6 py-5 shadow-fluent-1">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h2 id="lab-interactive-practice-heading" className="flex items-center gap-2 text-lg font-semibold text-foreground">
+                <BrainCircuit className="h-5 w-5 text-[#107C10]" aria-hidden />
+                Antes de ejecutar el lab
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                Ensaya el razonamiento en un entorno simulado. No reemplaza la evidencia del laboratorio.
+              </p>
+            </div>
+            <Button asChild variant="outline" size="sm" className="border-[#107C10]/30 text-[#107C10] hover:bg-[#EFF8EE]">
+              <Link href={`/practica/${interactivePractices[0]?.slug}`}>
+                Abrir práctica
+                <ArrowRight className="ml-1 h-3.5 w-3.5" aria-hidden />
+              </Link>
+            </Button>
+          </div>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            {interactivePractices.map((practice) => (
+              <Link key={practice.id} href={`/practica/${practice.slug}`} className="rounded-lg border border-border bg-background p-3 transition-colors hover:border-[#107C10]/45">
+                <Badge variant="outline" className="mb-2 text-[10px]">{INTERACTIVE_TYPE_LABELS[practice.type]}</Badge>
+                <h3 className="text-sm font-semibold text-foreground">{practice.title}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{practice.description}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       <LabWorkstationGate products={lab.products} />
 

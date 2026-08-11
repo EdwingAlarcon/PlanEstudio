@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { Search, FileText, FlaskConical, Activity, BookOpen } from "lucide-react";
+import { Search, FileText, FlaskConical, Activity, BookOpen, BrainCircuit } from "lucide-react";
 import FlexSearch from "flexsearch";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -55,6 +55,7 @@ const TYPE_CONFIG: Record<SearchDocumentType, { label: string; color: string }> 
   simulation: { label: "Simulación", color: "bg-[#F3F2F1] text-[#5C2D91] dark:bg-purple-500/10 dark:text-purple-300" },
   guided: { label: "Práctica guiada", color: "bg-[#EFF6FC] text-[#0078D4] dark:bg-[rgba(33,150,243,0.15)] dark:text-[#4DB8FF]" },
   "semi-guided": { label: "Semi guiada", color: "bg-[#EFF6FC] text-[#0078D4] dark:bg-[rgba(33,150,243,0.15)] dark:text-[#4DB8FF]" },
+  "interactive-practice": { label: "Práctica interactiva", color: "bg-[#EFF8EE] text-[#107C10] dark:bg-[rgba(16,124,16,0.15)] dark:text-[#2DB52D]" },
 };
 
 export function SearchBar({ documents }: SearchBarProps) {
@@ -244,9 +245,10 @@ export function SearchBar({ documents }: SearchBarProps) {
 
           {results.map((hit, i) => {
             const typeCfg = TYPE_CONFIG[hit.type] ?? TYPE_CONFIG.module;
-            const isPractice = !["module", "lab", "resource"].includes(hit.type);
-            const Icon = hit.type === "lab" ? FlaskConical : hit.type === "resource" ? BookOpen : isPractice ? Activity : FileText;
-            const status = hit.practiceId ? getPracticeStatusLabel(practiceRecords[hit.practiceId]?.status ?? "not_started") : null;
+            const isProfessionalPractice = ["incident", "challenge", "simulation", "guided", "semi-guided"].includes(hit.type);
+            const isInteractivePractice = hit.type === "interactive-practice";
+            const Icon = hit.type === "lab" ? FlaskConical : hit.type === "resource" ? BookOpen : isInteractivePractice ? BrainCircuit : isProfessionalPractice ? Activity : FileText;
+            const status = isProfessionalPractice && hit.practiceId ? getPracticeStatusLabel(practiceRecords[hit.practiceId]?.status ?? "not_started") : null;
             const context = classifySearchDocument(hit, onboarding);
             return (
               <button
@@ -282,7 +284,7 @@ export function SearchBar({ documents }: SearchBarProps) {
                       {contextLabel(context)}
                     </span>
                   </div>
-                  {isPractice && hit.practiceType && (
+                  {isProfessionalPractice && hit.practiceType && (
                     <p className="mb-1 text-[11px] text-muted-foreground">
                       {PRACTICE_TYPE_LABELS[hit.practiceType]} · {hit.practiceDifficulty ? PRACTICE_DIFFICULTY_LABELS[hit.practiceDifficulty] : ""} · {hit.practiceDomain ? PRACTICE_DOMAIN_LABELS[hit.practiceDomain] : ""}
                       {hit.practiceRoles?.length ? ` · ${hit.practiceRoles.map((role) => PRACTICE_ROLE_LABELS[role]).slice(0, 2).join(", ")}` : ""}

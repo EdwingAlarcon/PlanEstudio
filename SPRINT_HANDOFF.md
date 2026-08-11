@@ -4,6 +4,80 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
+## Sprint Piloto — Interactive Practice Engine (2026-08-11)
+
+Implementado localmente y validado el piloto de **Práctica interactiva** en la app Next.js, sin backend
+ni ejecución de código arbitrario. Es una capa nueva y separada de módulos, quizzes, labs y experiencia
+práctica profesional.
+
+**Alcance entregado:**
+- Nueva ruta `/practica` y páginas estáticas `/practica/[slug]`.
+- Banco inicial de **15 prácticas interactivas**:
+  - Multiple Decision
+  - Flow Builder
+  - Query Playground
+  - Debug Scenario
+- Fixtures locales versionados en `app-elearning/src/data/practice/` para cuentas, solicitudes,
+  productos y órdenes de prueba.
+- Parser limitado para FetchXML/OData: solo fixtures locales, gramática pequeña y rechazo explícito
+  de entradas no declarativas o peligrosas (`script`, `fetch`, `http`, `https`, etc.).
+- Progreso independiente en `localStorage` con clave `planestudio.interactive-practice.v1`.
+  No toca `plan-estudio-progress` ni `planestudio.practice-progress.v1`.
+- Estados visibles: **No iniciado**, **En progreso**, **Completado/Dominado**, **Requiere refuerzo**.
+  No se usan etiquetas de experto/senior.
+- Integraciones:
+  - Sidebar: `Práctica interactiva`.
+  - Home: resumen y acceso rápido.
+  - `/mi-ruta`: siguiente micro-práctica recomendada.
+  - `/progreso`: bloque independiente y reset separado.
+  - Módulos: sección `Prueba lo aprendido`.
+  - Labs: sección `Antes de ejecutar el lab`.
+  - Búsqueda global: tipo `Práctica interactiva`.
+  - Recursos/MkDocs: `docs/Recursos/GUIA_PRACTICAS_INTERACTIVAS.md`.
+- Recomendación determinística: prioriza `needs-review`, luego `learning`, luego prácticas relacionadas
+  con módulos completados, luego la primera pendiente.
+
+**Guardarraíles y pruebas agregadas:**
+- Script nuevo `npm run validate:interactive-practices`.
+- `validate:content` ahora ejecuta también el validador interactivo.
+- Unit tests nuevos para banco, engines, parser, mastery, recomendación y store.
+- E2E nuevo `e2e/interactive-practices.spec.ts` con 7 pruebas:
+  catálogo/búsqueda, multiple decision con persistencia y recarga profunda, flow builder, FetchXML
+  seguro/inseguro, debug scenario, integraciones módulo/lab/mi ruta/progreso y responsive móvil.
+
+**Validación local en verde antes de commit/push:**
+```powershell
+cd app-elearning
+npm run lint
+npm run typecheck
+npm run validate:content
+npm run test:coverage   # 339/339
+npm run build:pages
+npm run e2e             # 54/54
+```
+
+**Conteos posteriores al sprint:**
+- 75 módulos.
+- 72 labs.
+- 508 preguntas de quiz.
+- 375 preguntas de diagnóstico de caso aplicado.
+- 633 criterios de checklist.
+- 32 prácticas profesionales.
+- 15 prácticas interactivas.
+- 27 recursos Next.js.
+- Build estático GitHub Pages: 267 páginas generadas.
+- Baseline local: **339 Vitest tests** y **54 Playwright E2E**.
+
+**Pendientes honestos / Fase 2 recomendada:**
+- Mejorar el filtro visual para que opcionalmente sincronice el ejercicio seleccionado con el primer
+  resultado filtrado. El filtro del banco ya existe; el panel de detalle permanece estable para no
+  interrumpir al estudiante.
+- Añadir drag-and-drop real al Flow Builder si se requiere una experiencia más visual. Hoy está
+  cubierto por botones accesibles Subir/Bajar.
+- Ampliar el banco más allá del piloto solo después de revisar telemetría cualitativa o feedback
+  del usuario; no inflar conteos por volumen.
+- Considerar export/import de progreso interactivo si se vuelve parte de evaluación formal.
+
 ## Sprint — Beginner Continuity & Honest Prerequisites (2026-08-06)
 
 Cierra las brechas de continuidad detectadas en la auditoría diagnóstica previa (simulación de

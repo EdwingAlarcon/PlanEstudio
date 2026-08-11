@@ -6,8 +6,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Before starting new work, read `SPRINT_HANDOFF.md`. It is the active operational memory for the post-audit sprints.
 
-Current stable state as of the latest local handoff (2026-08-06):
-- Latest product/content sprint: **Diagnóstico de caso aplicado** complete for all 75 modules. The
+Current stable state as of the latest local handoff (2026-08-11):
+- Latest product sprint: **Interactive Practice Engine piloto** complete locally. Adds `/practica`
+  and `/practica/[slug]`, 15 simulated interactive practices across Multiple Decision, Flow Builder,
+  Query Playground and Debug Scenario, local fixtures, limited FetchXML/OData parsers, independent
+  store `planestudio.interactive-practice.v1`, global search/sidebar/home/mi-ruta/progreso/module/lab
+  integrations, and authoring guide `docs/Recursos/GUIA_PRACTICAS_INTERACTIVAS.md`. See
+  `SPRINT_HANDOFF.md`, section "Sprint Piloto — Interactive Practice Engine", before editing it.
+- Previous product/content sprint: **Diagnóstico de caso aplicado** complete for all 75 modules. The
   normal quiz pool remains **508 questions**; the case-diagnosis pool now has **375 questions** (5
   per module), for **883 questions total** in the generated bank. See `SPRINT_HANDOFF.md`, section
   "Sprint — Diagnóstico de caso aplicado", for exact commits, validations and CI/deploy status.
@@ -50,10 +56,12 @@ Current stable state as of the latest local handoff (2026-08-06):
   simulations, 6 guided**. Do not merge these into the existing lab count. `guided` is a new count as
   of sub-fase D — `getPracticeCounts()` now returns a `guided` field in addition to
   `incidents`/`challenges`/`simulations`.
+- Interactive practice pilot counts: **15 practices total**, separate from labs and professional
+  practices. Do not merge these into the lab count or professional-practice count.
 - `/preparar-entorno` state uses its own localStorage key `planestudio.workstation.v1`
   (`workstation-store.ts`), independent from `plan-estudio-progress` (academic) and
   `planestudio.practice-progress.v1` (professional practice). **Never merge these three stores.**
-- Current local test baseline: **323 Vitest tests** and **47 Playwright smoke tests**.
+- Current local test baseline: **339 Vitest tests** and **54 Playwright E2E tests**.
 - Post-audit content roadmap (sprints 1-20) is fully closed — no known pending items. Sprints 21-22
   added a design-system layer (`DESIGN.md`, "The Fluent Learning Console") and closed real a11y/perf
   bugs found via `/impeccable audit`. See `SPRINT_HANDOFF.md` sprints 21-22 for full detail before
@@ -162,14 +170,15 @@ site/                    # MkDocs generated output (git-ignored)
 cd app-elearning
 npm install
 npm run dev          # http://localhost:3000
-npm test             # Vitest unit tests (323 tests)
+npm test             # Vitest unit tests (339 tests)
 npm run test:coverage
 npm run lint
 npm run typecheck
-npm run validate:content  # Frontmatter, unique moduleId/slug, level ranges, question coverage
+npm run validate:content  # Content + assets + interactive-practices validation
+npm run validate:interactive-practices
 npm run build        # Static export for official Vercel/root hosting → app-elearning/out/
 npm run build:pages  # Static export for legacy GitHub Pages → app-elearning/out/
-npm run e2e          # Playwright smoke tests (47 tests)
+npm run e2e          # Playwright smoke tests (54 tests)
 ```
 
 ### MkDocs (reference/legacy)

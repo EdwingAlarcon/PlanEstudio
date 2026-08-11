@@ -96,6 +96,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "rpa-recursos-practica": "Recursos/RPA_RECURSOS_PRACTICA.md",
   "rpa-portafolio-empleabilidad": "Recursos/RPA_PORTAFOLIO_EMPLEABILIDAD.md",
   "rpa-validacion-tenant": "Recursos/RPA_VALIDACION_TENANT.md",
+  "guia-practicas-interactivas": "Recursos/GUIA_PRACTICAS_INTERACTIVAS.md",
 };
 
 const LEVEL_META: Record<LevelId, { title: string; description: string; certification: string }> = {
@@ -570,7 +571,7 @@ export function getLabsForLevel(levelId: LevelId): LabInfo[] {
 
 // ─── Search index ─────────────────────────────────────────────────────────────
 
-export type SearchDocumentType = "module" | "lab" | "resource" | "incident" | "challenge" | "simulation" | "guided" | "semi-guided";
+export type SearchDocumentType = "module" | "lab" | "resource" | "incident" | "challenge" | "simulation" | "guided" | "semi-guided" | "interactive-practice";
 
 export interface SearchDocument {
   id: string;
@@ -589,6 +590,8 @@ export interface SearchDocument {
   practiceDomain?: string;
   practiceDifficulty?: string;
   practiceRoles?: string[];
+  interactivePracticeId?: string;
+  interactiveType?: string;
 }
 
 export function getSearchDocuments(): SearchDocument[] {

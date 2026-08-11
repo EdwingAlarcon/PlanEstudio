@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getAllLabs, getAllLevels } from "@/lib/content";
 import { getAllQuestions } from "@/lib/questions-parser";
 import { getAllPractices } from "@/lib/practices";
+import { getAllInteractivePractices } from "@/lib/interactive-practices";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProgressRingClient } from "@/components/modules/progress-ring-client";
@@ -9,6 +10,7 @@ import { ArrowRight, BookOpen, Trophy, FlaskConical, Route, HelpCircle, Layers3,
 import { UI, LEVEL_ORDER, type LevelId } from "@/lib/i18n";
 import { PracticeProgressSummary } from "@/components/practices/practice-progress-summary";
 import { GuidedHomeClient } from "@/components/guided/guided-home-client";
+import { InteractivePracticeSummary } from "@/components/interactive-practices/interactive-practice-summary";
 
 // Level display config
 const LEVEL_CONFIG: Record<LevelId, {
@@ -35,6 +37,7 @@ export default async function DashboardPage() {
   const practices = getAllPractices().map(({ id, slug, title, practiceType, domain, roles, difficulty, prerequisites }) => ({
     id, slug, title, practiceType, domain, roles, difficulty, prerequisites,
   }));
+  const interactivePractices = getAllInteractivePractices();
 
   return (
     <div className="max-w-5xl mx-auto space-y-10 animate-fade-in">
@@ -111,6 +114,7 @@ export default async function DashboardPage() {
       <OverallProgressBanner />
 
       <PracticeProgressSummary practices={practices} />
+      <InteractivePracticeSummary practices={interactivePractices} />
 
       {/* ── Level cards ───────────────────────────────────────────────────── */}
       <section aria-labelledby="levels-heading">
@@ -215,6 +219,13 @@ export default async function DashboardPage() {
             title="Experiencia práctica"
             description="Incidentes, challenges y simulación"
             accent="#D13438"
+          />
+          <QuickActionCard
+            href="/practica"
+            icon={<Activity className="h-5 w-5 text-[#107C10]" />}
+            title="Práctica interactiva"
+            description={`${interactivePractices.length} ejercicios con feedback inmediato`}
+            accent="#107C10"
           />
           <QuickActionCard
             href="/recursos/checklist"

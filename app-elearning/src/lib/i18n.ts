@@ -7,6 +7,7 @@ export const UI = {
     transversalLevels: "Especializaciones transversales",
     routes: "Rutas profesionales",
     practicalExperience: "Experiencia práctica",
+    interactivePractice: "Práctica interactiva",
     domains: "Dominios",
     powerPlatform: "Power Platform",
     dynamics365: "Dynamics 365",

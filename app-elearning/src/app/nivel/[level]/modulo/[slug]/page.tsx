@@ -3,13 +3,14 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getAllLevels, getModuleBySlug } from "@/lib/content";
 import { getQuestionsForModule, getCaseDiagnosisForModule } from "@/lib/questions-parser";
+import { getInteractivePracticesForModule, INTERACTIVE_TYPE_LABELS } from "@/lib/interactive-practices";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ModuleCompletionClient } from "@/components/modules/module-completion-client";
 import { QuizPanel } from "@/components/quiz/quiz-panel";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
-import { ArrowLeft, ArrowRight, Clock, BookOpen } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, BookOpen, BrainCircuit } from "lucide-react";
 import { UI, type LevelId } from "@/lib/i18n";
 import { FOUNDATION_ACTIVITIES } from "@/lib/guided-journey";
 
@@ -55,6 +56,7 @@ export default async function ModulePage({ params }: PageProps) {
 
   const questions = getQuestionsForModule(mod.moduleId);
   const caseQuestions = getCaseDiagnosisForModule(mod.moduleId);
+  const interactivePractices = getInteractivePracticesForModule(mod.moduleId).slice(0, 3);
   const foundationActivity = FOUNDATION_ACTIVITIES.find((activity) => activity.moduleId === mod.moduleId);
   const recommendedLab = foundationActivity
     ? FOUNDATION_ACTIVITIES.find((activity) => activity.type === "lab" && activity.step === foundationActivity.step + 1)
@@ -105,6 +107,31 @@ export default async function ModulePage({ params }: PageProps) {
       <div className="rounded-xl border border-border bg-card px-6 py-8 md:px-8 shadow-fluent-1">
         <MarkdownRenderer content={mod.rawContent} />
       </div>
+
+      {interactivePractices.length > 0 && (
+        <section aria-labelledby="interactive-practice-heading" className="rounded-xl border border-[#107C10]/25 bg-card px-6 py-5 shadow-fluent-1">
+          <h2 id="interactive-practice-heading" className="text-lg font-semibold text-foreground flex items-center gap-2">
+            <BrainCircuit className="h-5 w-5 text-[#107C10]" aria-hidden />
+            Prueba lo aprendido
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            Practica decisiones y validaciones cortas con feedback inmediato. Este avance usa un progreso independiente del módulo.
+          </p>
+          <div className="mt-4 grid gap-3 md:grid-cols-3">
+            {interactivePractices.map((practice) => (
+              <Link
+                key={practice.id}
+                href={`/practica/${practice.slug}`}
+                className="rounded-lg border border-border bg-background p-3 transition-colors hover:border-[#107C10]/45"
+              >
+                <Badge variant="outline" className="mb-2 text-[10px]">{INTERACTIVE_TYPE_LABELS[practice.type]}</Badge>
+                <h3 className="text-sm font-semibold text-foreground">{practice.title}</h3>
+                <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{practice.description}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ── Diagnóstico de caso aplicado (piloto) ───────────────────────────── */}
       {caseQuestions.length > 0 && (

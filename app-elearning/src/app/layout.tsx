@@ -5,6 +5,7 @@ import { AppShell } from "@/components/layout/app-shell";
 import { ReadingProgress } from "@/components/layout/reading-progress";
 import { getSearchDocuments } from "@/lib/content";
 import { getPracticeSearchDocuments } from "@/lib/practices";
+import { getInteractivePracticeSearchDocuments } from "@/lib/interactive-practices";
 
 export const metadata: Metadata = {
   title: {
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const searchDocuments = [...getSearchDocuments(), ...getPracticeSearchDocuments()];
+  const searchDocuments = [...getSearchDocuments(), ...getPracticeSearchDocuments(), ...getInteractivePracticeSearchDocuments()];
 
   return (
     <html lang="es" suppressHydrationWarning>

@@ -13,6 +13,8 @@ import { cn } from "@/lib/utils";
 import { PracticeDomainProgress, PracticeProgressSummary, type PracticeSummaryItem } from "@/components/practices/practice-progress-summary";
 import { PracticePortabilityPanel } from "@/components/practices/practice-portability-panel";
 import { GuidedDashboardSummary } from "@/components/guided/guided-dashboard-summary";
+import { InteractivePracticeSummary } from "@/components/interactive-practices/interactive-practice-summary";
+import type { InteractivePractice } from "@/lib/interactive-practices";
 
 export interface LevelReadinessData {
   levelId: LevelId;
@@ -47,7 +49,7 @@ const STATUS_CONFIG: Record<ReadinessStatus, { label: string; className: string 
   },
 };
 
-export function ProgressDashboardClient({ levels, practices }: { levels: LevelReadinessData[]; practices: PracticeSummaryItem[] }) {
+export function ProgressDashboardClient({ levels, practices, interactivePractices }: { levels: LevelReadinessData[]; practices: PracticeSummaryItem[]; interactivePractices: InteractivePractice[] }) {
   const completedModules = useProgressStore((s) => s.completedModules);
   const quizScores = useProgressStore((s) => s.quizScores);
   const completedLabs = useProgressStore((s) => s.completedLabs);
@@ -159,6 +161,7 @@ export function ProgressDashboardClient({ levels, practices }: { levels: LevelRe
       </section>
 
       <PracticeProgressSummary practices={practices} showReset />
+      <InteractivePracticeSummary practices={interactivePractices} showReset />
       <PracticePortabilityPanel practiceIds={practices.map((practice) => practice.id)} />
       <PracticeDomainProgress practices={practices} />
 

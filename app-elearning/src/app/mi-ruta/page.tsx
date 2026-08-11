@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getAllProfessionalRoutes } from "@/lib/professional-routes";
+import { getAllInteractivePractices } from "@/lib/interactive-practices";
 import { MyRouteClient } from "./my-route-client";
 
 export const metadata: Metadata = {
@@ -17,5 +18,5 @@ export default function MyRoutePage() {
     competencies: route.competencies,
   }));
 
-  return <MyRouteClient routes={routes} />;
+  return <MyRouteClient routes={routes} interactivePractices={getAllInteractivePractices()} />;
 }
