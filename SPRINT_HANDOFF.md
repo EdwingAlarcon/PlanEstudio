@@ -33,9 +33,11 @@ práctica profesional.
   - Módulos: sección `Prueba lo aprendido`.
   - Labs: sección `Antes de ejecutar el lab`.
   - Búsqueda global: tipo `Práctica interactiva`.
-  - Recursos/MkDocs: `docs/Recursos/GUIA_PRACTICAS_INTERACTIVAS.md`.
+- Recursos/MkDocs: `docs/Recursos/GUIA_PRACTICAS_INTERACTIVAS.md`.
 - Recomendación determinística: prioriza `needs-review`, luego `learning`, luego prácticas relacionadas
   con módulos completados, luego la primera pendiente.
+- `app-elearning/public/vercel.json` con `cleanUrls: true`, requerido para que el deploy estático
+  manual de `out/` sirva rutas limpias como `/practica` y `/practica/[slug]` en Vercel.
 
 **Guardarraíles y pruebas agregadas:**
 - Script nuevo `npm run validate:interactive-practices`.

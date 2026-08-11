@@ -13,6 +13,8 @@ Current stable state as of the latest local handoff (2026-08-11):
   store `planestudio.interactive-practice.v1`, global search/sidebar/home/mi-ruta/progreso/module/lab
   integrations, and authoring guide `docs/Recursos/GUIA_PRACTICAS_INTERACTIVAS.md`. See
   `SPRINT_HANDOFF.md`, section "Sprint Piloto — Interactive Practice Engine", before editing it.
+  Static Vercel deploys require `app-elearning/public/vercel.json` (`cleanUrls: true`) so clean
+  routes like `/practica` do not 404 when deploying the exported `out/` directory.
 - Previous product/content sprint: **Diagnóstico de caso aplicado** complete for all 75 modules. The
   normal quiz pool remains **508 questions**; the case-diagnosis pool now has **375 questions** (5
   per module), for **883 questions total** in the generated bank. See `SPRINT_HANDOFF.md`, section
