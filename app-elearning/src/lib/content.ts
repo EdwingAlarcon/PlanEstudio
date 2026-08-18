@@ -97,6 +97,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "rpa-portafolio-empleabilidad": "Recursos/RPA_PORTAFOLIO_EMPLEABILIDAD.md",
   "rpa-validacion-tenant": "Recursos/RPA_VALIDACION_TENANT.md",
   "guia-practicas-interactivas": "Recursos/GUIA_PRACTICAS_INTERACTIVAS.md",
+  "guia-repaso-inteligente": "Recursos/GUIA_REPASO_INTELIGENTE.md",
 };
 
 const LEVEL_META: Record<LevelId, { title: string; description: string; certification: string }> = {

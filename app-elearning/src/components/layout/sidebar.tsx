@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import {
   BookOpen, CheckSquare, GraduationCap, FileText, Trophy,
   Home, PlayCircle, FlaskConical, Route, HelpCircle, Briefcase, ClipboardList, Activity,
-  Layers3, Building2, Workflow, Bot, Compass, GitBranch, Wrench, BrainCircuit,
+  Layers3, Building2, Workflow, Bot, Compass, GitBranch, Wrench, BrainCircuit, Brain,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -52,6 +52,7 @@ const RESOURCE_LINKS = [
   { href: "/recursos/rpa-portafolio-empleabilidad", label: UI.nav.rpaPortfolio, icon: Briefcase },
   { href: "/recursos/rpa-validacion-tenant", label: UI.nav.rpaTenantValidation, icon: CheckSquare },
   { href: "/recursos/guia-practicas-interactivas", label: "Guía práctica interactiva", icon: BrainCircuit },
+  { href: "/recursos/guia-repaso-inteligente", label: UI.nav.reviewGuide, icon: Brain },
 ];
 
 const DOMAIN_LINKS = [
@@ -131,6 +132,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
           <NavLink href="/preparar-entorno" icon={Wrench} label={UI.nav.prepareEnvironment} active={pathname === "/preparar-entorno"} />
           <NavLink href="/rutas"     icon={Route}       label={UI.nav.routes}    active={pathname.startsWith("/rutas")} />
           <NavLink href="/practica" icon={BrainCircuit} label={UI.nav.interactivePractice} active={pathname.startsWith("/practica")} />
+          <NavLink href="/repaso" icon={Brain} label={UI.nav.review} active={pathname === "/repaso"} />
           <NavLink href="/experiencia-practica" icon={Activity} label={UI.nav.practicalExperience} active={pathname.startsWith("/experiencia-practica")} />
           <NavLink href="/mapa"      icon={GitBranch} label="Mapa curricular" active={pathname === "/mapa"} />
           <NavLink href="/simulador" icon={PlayCircle}  label={UI.nav.simulator} active={pathname === "/simulador"} />

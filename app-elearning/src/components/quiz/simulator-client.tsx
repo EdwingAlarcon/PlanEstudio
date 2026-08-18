@@ -98,6 +98,7 @@ export function SimulatorClient({ allQuestions }: SimulatorClientProps) {
         timeLimit={SIMULATOR_TIME_SECONDS}
         onComplete={handleComplete}
         saveScore={false}
+        registerForReview={false}
       />
     );
   }

@@ -16,6 +16,7 @@ import { getNextWorkstationRequirement, getToolsForProfile, recommendWorkstation
 import { useWorkstationStore } from "@/lib/workstation-store";
 import { InteractivePracticeSummary } from "@/components/interactive-practices/interactive-practice-summary";
 import type { InteractivePractice } from "@/lib/interactive-practices";
+import { RetentionTodayCard } from "@/components/review/retention-today-card";
 
 interface RouteSummary {
   slug: ProfessionalRouteSlug;
@@ -74,6 +75,7 @@ export function MyRouteClient({
 
       <WorkstationPreviewSection />
       <InteractivePracticeSummary practices={interactivePractices} />
+      <RetentionTodayCard />
 
       <section className="grid gap-4 lg:grid-cols-[1fr_0.85fr]">
         <div className="rounded-xl border border-[#0078D4]/20 bg-[#EFF6FC] p-5 shadow-fluent-1 dark:border-[#4DB8FF]/20 dark:bg-[rgba(0,120,212,0.10)]">

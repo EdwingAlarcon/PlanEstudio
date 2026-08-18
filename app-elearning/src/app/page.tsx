@@ -11,6 +11,7 @@ import { UI, LEVEL_ORDER, type LevelId } from "@/lib/i18n";
 import { PracticeProgressSummary } from "@/components/practices/practice-progress-summary";
 import { GuidedHomeClient } from "@/components/guided/guided-home-client";
 import { InteractivePracticeSummary } from "@/components/interactive-practices/interactive-practice-summary";
+import { RetentionTodayCard } from "@/components/review/retention-today-card";
 
 // Level display config
 const LEVEL_CONFIG: Record<LevelId, {
@@ -115,6 +116,7 @@ export default async function DashboardPage() {
 
       <PracticeProgressSummary practices={practices} />
       <InteractivePracticeSummary practices={interactivePractices} />
+      <RetentionTodayCard />
 
       {/* ── Level cards ───────────────────────────────────────────────────── */}
       <section aria-labelledby="levels-heading">

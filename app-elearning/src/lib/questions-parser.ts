@@ -56,6 +56,16 @@ export function getAllQuestions(): Question[] {
   return getAllParsedQuestions().filter((q) => q.appliesTo === "quiz");
 }
 
+/** Full bank (quiz + case-diagnosis) — the spaced repetition engine resolves review cards against this. */
+export function getAllReviewableQuestions(): Question[] {
+  return getAllParsedQuestions();
+}
+
+/** O(1)-ish lookup map by question id, for resolving review cards to their question content. */
+export function getQuestionById(id: string): Question | undefined {
+  return getAllParsedQuestions().find((q) => q.id === id);
+}
+
 /** Preguntas del "Diagnóstico de caso aplicado" para un módulo (vacío si el módulo no tiene piloto). */
 export function getCaseDiagnosisForModule(moduleId: number): Question[] {
   return getAllParsedQuestions().filter((q) => q.moduleId === moduleId && q.appliesTo === "caso");

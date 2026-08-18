@@ -12,6 +12,8 @@ import {
   isSessionComplete,
 } from "@/lib/quiz-engine";
 import { useProgressStore } from "@/lib/progress";
+import { useReviewStore } from "@/lib/review-store";
+import { getReviewNow } from "@/lib/review-date";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
@@ -28,6 +30,12 @@ interface QuizPanelProps {
   onComplete?: (result: ReturnType<typeof calculateResult>) => void;
   /** Whether to persist the score to ProgressStore. Default: true. */
   saveScore?: boolean;
+  /**
+   * Registers each answered question in the spaced repetition engine. Default: true.
+   * The simulator passes false: it measures performance under timed exam conditions,
+   * a different signal than "did I still remember this concept?" (see review-store.ts).
+   */
+  registerForReview?: boolean;
 }
 
 type PanelState = "idle" | "question" | "feedback" | "result";
@@ -44,6 +52,7 @@ export function QuizPanel({
   timeLimit,
   onComplete,
   saveScore = true,
+  registerForReview = true,
 }: QuizPanelProps) {
   const [panelState, setPanelState] = useState<PanelState>("idle");
   const [session, setSession] = useState(() =>
@@ -60,6 +69,7 @@ export function QuizPanel({
   );
 
   const saveQuizScore = useProgressStore((s) => s.saveQuizScore);
+  const registerQuestionForReview = useReviewStore((s) => s.registerQuestionForReview);
 
   // Refs so the timer effect always sees the current session/callbacks without
   // needing them in the dep array (avoids stale closure issues).
@@ -117,14 +127,18 @@ export function QuizPanel({
 
     const newSession = recordAttempt(session, currentQuestion.id, selected);
     const attempt = newSession.attempts.find((a) => a.questionId === currentQuestion.id);
+    const isCorrect = attempt?.isCorrect ?? false;
     setLastAttempt({
       question: currentQuestion,
       selected,
-      isCorrect: attempt?.isCorrect ?? false,
+      isCorrect,
     });
     setSession(newSession);
     setPanelState("feedback");
-  }, [session, currentQuestion, selected]);
+    if (registerForReview) {
+      registerQuestionForReview(currentQuestion, isCorrect, getReviewNow());
+    }
+  }, [session, currentQuestion, selected, registerForReview, registerQuestionForReview]);
 
   const continueQuiz = useCallback(() => {
     if (isSessionComplete(session)) {
@@ -162,6 +176,7 @@ export function QuizPanel({
         result={result}
         questions={session.questions}
         onRetry={startQuiz}
+        registeredForReview={registerForReview}
       />
     );
   }
@@ -301,11 +316,14 @@ export function QuizResult({
   questions,
   onRetry,
   extraActions,
+  registeredForReview = false,
 }: {
   result: ReturnType<typeof calculateResult>;
   questions?: Question[];
   onRetry: () => void;
   extraActions?: React.ReactNode;
+  /** Shows the "these questions will feed your future reviews" note — only when they actually were registered. */
+  registeredForReview?: boolean;
 }) {
   const [showBreakdown, setShowBreakdown] = useState(false);
 
@@ -333,6 +351,11 @@ export function QuizResult({
           </p>
         </div>
         <p className="text-xs text-muted-foreground">{UI.quiz.passingScore}</p>
+        {registeredForReview && (
+          <p className="text-xs text-muted-foreground">
+            Estas preguntas formarán parte de tus futuros repasos.
+          </p>
+        )}
         <div className="flex justify-center gap-2 flex-wrap">
           <Button variant="outline" onClick={onRetry}>
             <RotateCcw className="h-4 w-4 mr-1.5" aria-hidden />

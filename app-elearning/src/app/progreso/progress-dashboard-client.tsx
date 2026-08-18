@@ -15,6 +15,7 @@ import { PracticePortabilityPanel } from "@/components/practices/practice-portab
 import { GuidedDashboardSummary } from "@/components/guided/guided-dashboard-summary";
 import { InteractivePracticeSummary } from "@/components/interactive-practices/interactive-practice-summary";
 import type { InteractivePractice } from "@/lib/interactive-practices";
+import { RetentionSummary } from "@/components/review/retention-summary";
 
 export interface LevelReadinessData {
   levelId: LevelId;
@@ -162,6 +163,7 @@ export function ProgressDashboardClient({ levels, practices, interactivePractice
 
       <PracticeProgressSummary practices={practices} showReset />
       <InteractivePracticeSummary practices={interactivePractices} showReset />
+      <RetentionSummary />
       <PracticePortabilityPanel practiceIds={practices.map((practice) => practice.id)} />
       <PracticeDomainProgress practices={practices} />
 

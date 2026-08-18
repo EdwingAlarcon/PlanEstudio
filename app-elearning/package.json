@@ -22,7 +22,8 @@
     "generate:rpa-assets": "node scripts/generate-rpa-assets.mjs",
     "validate:assets": "node scripts/validate-rpa-assets.mjs",
     "validate:interactive-practices": "tsx scripts/validate-interactive-practices.ts",
-    "validate:content": "tsx scripts/validate-content.ts && npm run validate:assets && npm run validate:interactive-practices",
+    "validate:spaced-repetition": "tsx scripts/validate-spaced-repetition.ts",
+    "validate:content": "tsx scripts/validate-content.ts && npm run validate:assets && npm run validate:interactive-practices && npm run validate:spaced-repetition",
     "verify": "npm run lint && npm run typecheck && npm run validate:content && npm run test:coverage && npm run build:pages",
     "verify:full": "npm run verify && npm run e2e"
   },

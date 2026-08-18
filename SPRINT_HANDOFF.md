@@ -4,6 +4,84 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
+## Sprint — Spaced Repetition & Long-Term Retention Engine (2026-08-18)
+
+Motor de repetición espaciada (*retrieval practice*) implementado localmente, capa completamente
+independiente del progreso académico, práctico e interactivo. Resuelve un problema real detectado
+en conversación con el usuario: la app medía "contenido completado" pero no "conocimiento todavía
+recordado" — un módulo aprobado seguía en 100 % semanas después aunque el estudiante hubiera
+olvidado gran parte del contenido.
+
+**Arquitectura** (ver `docs/Recursos/SISTEMA_REPASO_ESPACIADO.md` para el detalle técnico completo):
+- `src/lib/review-date.ts` — utilidades de fecha local centralizadas (no existían antes; `nowIso()`
+  estaba duplicado en tres stores).
+- `src/lib/review-scheduler.ts` — scheduler SM-2 puro y determinista detrás de la interfaz
+  `ReviewScheduler` (reemplazable sin tocar UI/store/banco). Reglas clave: una respuesta incorrecta
+  nunca puede producir un intervalo "fácil" (degradación forzada de confianza dentro del scheduler,
+  no confiada a la UI); una respuesta correcta con confianza "Otra vez" se trata como lapso suave
+  (intervalo corto, pero sin incrementar `lapses`/`incorrectReviews`, porque fue objetivamente
+  correcta) — este caso no estaba en el plan original y se descubrió al diseñar la UI de sesión.
+- `src/lib/review-queue.ts` — elegibilidad (`isQuestionEligibleForReview`: una pregunta solo es
+  elegible si ya tiene tarjeta, es decir, si fue respondida — nunca por completar un módulo),
+  `getDueReviewItems` con interleaving determinista por módulo, `getIncorrectReviewItems`
+  ("necesita refuerzo", vista lógica sin segundo store), `getRetentionSummary` (solo conteos
+  observables, nunca "% de conocimiento").
+- `src/lib/review-store.ts` — Zustand persistido `planestudio.spaced-repetition.v1`, con
+  `version`/`migrate`/`sanitizeReviewState()` siguiendo el patrón de `practice-progress.ts` y
+  `workstation-store.ts` (no el de `progress.ts`, que no tiene sanitización).
+- `src/lib/retention-portability.ts` — export/import versionado calcando `practice-portability.ts`
+  (formato `planestudio-retention`, límite 1 MB, guardia anti prototype-pollution, ids desconocidos
+  se ignoran con warning sin abortar el import, merge por `lastReviewedAt` más reciente).
+
+**Integración con el quiz existente**: un único punto de enganche (`registerForReview` en
+`QuizPanel`, default `true`) cubre quiz de módulo, diagnóstico de caso y simulador porque los tres
+ya comparten `QuizPanel`. El simulador pasa `registerForReview={false}` explícitamente — mide
+desempeño bajo condiciones de examen cronometrado, una señal distinta a "¿todavía lo recuerdo?".
+No se duplicó `evaluateAnswer`, `recordAttempt` ni el feedback.
+
+**UI**: ruta `/repaso` nueva (`review-session-client.tsx`) con flujo pregunta → responder →
+feedback → confianza (`Otra vez/Difícil/Bien/Fácil`) → siguiente, cola diaria acotada por tamaño de
+sesión (corta 10/normal 20/larga 30), secciones "Necesita refuerzo" e "Historial", y panel de
+respaldo propio. Puntos de entrada: `RetentionTodayCard` en Inicio y Mi ruta (jerarquía: Continuar
+ruta → Repaso → Prácticas, nunca compite visualmente), `RetentionSummary` en Mi progreso (bloque
+"Retención", separado del bloque "Progreso académico" que queda intacto), y enlace "Repaso" en el
+sidebar junto a Práctica interactiva.
+
+**Validado en verde localmente**: `npm run lint`, `npx tsc --noEmit`, `npm run validate:content`
+(incluye el validador nuevo `npm run validate:spaced-repetition`, encadenado), `npm run
+test:coverage` (406 tests, cobertura global 90.11 % stmts / 80.8 % branch / 84.98 % funcs / 90.11 %
+lines — sobre el umbral del 80 % en las cuatro métricas), `npm run build` (genera `/repaso`
+correctamente, 12.6 kB / 135 kB First Load JS), y `npm run e2e` con el spec nuevo
+`e2e/spaced-repetition.spec.ts` (11 tests: empty state, registro desde quiz de módulo, el simulador
+nunca registra, tarjeta vencida → sesión → reprogramación, interleaving sin contenido futuro,
+backlog acotado por tamaño de sesión, `/progreso` sin afectar progreso académico, CTA en Home/Mi
+ruta, export/import, teclado/móvil/localStorage corrupto).
+
+**Bug real de UX descubierto durante el E2E**: el módulo 1 (como casi todos ya, tras el sprint de
+Diagnóstico de caso aplicado) tiene *dos* botones "Iniciar evaluación" en la misma página (quiz
+normal + diagnóstico de caso) — el test tuvo que aislar `getByLabel("Evaluación del módulo")`. No es
+un bug de producto (cada botón está correctamente dentro de su propia sección con heading), pero
+es una nota útil para cualquier selector futuro en `/nivel/[level]/modulo/[slug]`.
+
+**Nota técnica de testing**: la descarga del backup de repaso (como la de prácticas profesionales)
+usa un anchor `Blob`/`URL.createObjectURL`, que no dispara de forma confiable el evento nativo
+`page.waitForEvent("download")` de Playwright en esta configuración de Chromium headless. Se
+reutilizó el mismo workaround ya probado en `smoke.spec.ts` (monkey-patch de
+`HTMLAnchorElement.prototype.click` para capturar `download`/`href` antes del click real).
+
+**Documentación**: `docs/Recursos/SISTEMA_REPASO_ESPACIADO.md` (técnico, para mantenimiento) y
+`docs/Recursos/GUIA_REPASO_INTELIGENTE.md` (breve, para el estudiante, expuesto en la app en
+`/recursos/guia-repaso-inteligente` y enlazado en el sidebar). Ambos registrados en `mkdocs.yml`.
+
+**Explícitamente fuera de alcance en esta Fase 1** (documentado, no fingido): prácticas interactivas
+dentro del scheduler, suspensión automática de leeches (`isLeech` se marca pero nunca suspende),
+estadísticas avanzadas, priorización adaptativa, preguntas de respuesta abierta, Interview Review
+Mode. `ReviewItemType` queda preparado para `"interactive-practice"` sin implementarlo.
+
+**Estado de git al cierre de este sprint**: cambios completos en el working tree, pendientes de
+commit/push/verificación de producción según se indique explícitamente (ver
+`feedback_sprint_workflow` en memoria: informar primero, desplegar solo si se pide).
+
 ## Sprint Piloto — Interactive Practice Engine (2026-08-11)
 
 Implementado localmente y validado el piloto de **Práctica interactiva** en la app Next.js, sin backend
