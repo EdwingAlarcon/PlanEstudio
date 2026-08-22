@@ -1,0 +1,7 @@
+<!-- converted from ventas_bogota_2026_07.xlsx -->
+
+## Sheet: Solicitudes
+| requestId | customerId | productId | quantity | unitPrice | currency | requestedDate | region | status | sourceFile |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| SOL-2026-0001 | CLI-0001 | PROD-001 | 12 | 15 | USD | 2026-07-01 | REG-BOG | new | ventas_bogota_2026_07.xlsx |
+| SOL-2026-0006 | CLI-0001 | PROD-003 | 2 | 180000 | COP | 2026-07-06 | REG-BOG | new | ventas_bogota_2026_07.xlsx |
