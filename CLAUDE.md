@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Before starting new work, read `SPRINT_HANDOFF.md`. It is the active operational memory for the post-audit sprints.
 
-Current stable state as of the latest local handoff (2026-08-18):
+Current stable state as of the latest local handoff (2026-08-22):
 - Latest product sprint: **Spaced Repetition & Long-Term Retention Engine** complete locally. Adds
   `/repaso`, a SM-2-inspired scheduler (`review-scheduler.ts`), eligibility/queue/interleaving logic
   (`review-queue.ts`), independent store `planestudio.spaced-repetition.v1` (`review-store.ts`), and
@@ -17,12 +17,13 @@ Current stable state as of the latest local handoff (2026-08-18):
   it measures timed-exam performance, a different signal. See `SPRINT_HANDOFF.md`, section "Sprint —
   Spaced Repetition & Long-Term Retention Engine", and `docs/Recursos/SISTEMA_REPASO_ESPACIADO.md`
   for full architecture detail before touching this again.
-- Previous product sprint: **Interactive Practice Engine piloto** complete locally. Adds `/practica`
-  and `/practica/[slug]`, 15 simulated interactive practices across Multiple Decision, Flow Builder,
-  Query Playground and Debug Scenario, local fixtures, limited FetchXML/OData parsers, independent
-  store `planestudio.interactive-practice.v1`, global search/sidebar/home/mi-ruta/progreso/module/lab
-  integrations, and authoring guide `docs/Recursos/GUIA_PRACTICAS_INTERACTIVAS.md`. See
-  `SPRINT_HANDOFF.md`, section "Sprint Piloto — Interactive Practice Engine", before editing it.
+- Previous product sprint: **Interactive Practice Engine cierre/endurecimiento** complete locally.
+  The pilot still has exactly **15 simulated interactive practices** across Multiple Decision,
+  Flow Builder, Query Playground and Debug Scenario. The closure adds Flow Builder drag optional
+  plus keyboard/buttons, filter-selection sync, empty filter state, session-only filter persistence,
+  export/import JSON with merge/replace, isolated reset, local feedback capture, review queue helpers,
+  broader unit/E2E coverage, and an expanded authoring guide. See `SPRINT_HANDOFF.md`, section
+  "Sprint de cierre — Interactive Practice Engine Completion & Validation", before editing it.
   Static Vercel deploys require `app-elearning/public/vercel.json` (`cleanUrls: true`) so clean
   routes like `/practica` do not 404 when deploying the exported `out/` directory.
 - Previous product/content sprint: **Diagnóstico de caso aplicado** complete for all 75 modules. The
@@ -75,8 +76,10 @@ Current stable state as of the latest local handoff (2026-08-18):
   `planestudio.practice-progress.v1` (professional practice), `planestudio.interactive-practice.v1`
   (interactive practice) and `planestudio.spaced-repetition.v1` (spaced repetition). **Never merge
   these five stores.**
-- Current local test baseline: **406 Vitest tests** and **65 Playwright E2E tests** (54 pre-existing
-  + 11 new in `e2e/spaced-repetition.spec.ts`).
+- Current local test baseline: at least **406 Vitest tests** and **65 Playwright E2E tests** (54
+  pre-existing + 11 new in `e2e/spaced-repetition.spec.ts`), pending an updated count after merging in
+  the local Interactive Practice closure work (unit/E2E counts for that sprint were not finalized
+  before this merge — re-run `npm test` and `npm run e2e` to get the real combined totals).
 - Post-audit content roadmap (sprints 1-20) is fully closed — no known pending items. Sprints 21-22
   added a design-system layer (`DESIGN.md`, "The Fluent Learning Console") and closed real a11y/perf
   bugs found via `/impeccable audit`. See `SPRINT_HANDOFF.md` sprints 21-22 for full detail before

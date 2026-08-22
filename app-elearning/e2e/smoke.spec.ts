@@ -330,7 +330,7 @@ test.describe("Smoke — rutas principales", () => {
       metadata: { recordCount: 1, attemptCount: 1, notesIncluded: true },
       records: rawRecords,
     };
-    await page.setInputFiles('input[type="file"]', {
+    await page.getByRole("region", { name: "Respaldo y portabilidad" }).locator('input[type="file"]').setInputFiles({
       name: "backup.json",
       mimeType: "application/json",
       buffer: Buffer.from(JSON.stringify(portable)),

@@ -82,6 +82,63 @@ Mode. `ReviewItemType` queda preparado para `"interactive-practice"` sin impleme
 commit/push/verificación de producción según se indique explícitamente (ver
 `feedback_sprint_workflow` en memoria: informar primero, desplegar solo si se pide).
 
+## Sprint de cierre — Interactive Practice Engine Completion & Validation (2026-08-11)
+
+Sprint de endurecimiento del piloto, sin ampliar el banco ni construir Fase 2. Mantiene **15 prácticas
+interactivas** y cierra los pendientes reales detectados después del despliegue inicial.
+
+**Cerrado en este sprint:**
+- Flow Builder conserva `Subir`/`Bajar` y añade drag visual opcional, foco visible, teclado con flechas,
+  `aria-live`, selección de bloque, insertar antes/después, eliminar y restaurar bloques.
+- Catálogo sincroniza filtros con el panel de detalle. Si cambia dominio, engine, dificultad, estado o
+  búsqueda y la práctica seleccionada deja de estar visible, se selecciona la primera resultante. Si no
+  hay resultados, aparece `No encontramos prácticas con estos filtros` sin detalle obsoleto.
+- Filtros persisten solo durante la sesión en `sessionStorage` (`planestudio.interactive-practice.filters.v1`);
+  no se mezclan con progreso académico ni profesional.
+- `/progreso` añade backup aislado de prácticas interactivas:
+  - Export JSON versionado `schemaVersion: 1`, `source: planestudio.interactive-practice`.
+  - Import con validación de tamaño, JSON, source, versión futura, versión 0 migrable, campos requeridos,
+    IDs desconocidos y preview.
+  - Estrategias `Fusionar` y `Reemplazar solo prácticas interactivas`.
+  - Reset confirmado solo para `planestudio.interactive-practice.v1`.
+- Reglas de merge documentadas: preservar mejor mastery, mejor score, hints, `solutionRevealed`, eventos
+  recientes y timestamps más adecuados.
+- Feedback local opcional al completar una práctica (`planestudio.interactive-feedback.v1`), sin backend.
+- Cola de repaso determinística para `needs-review`, solución revelada, varios intentos y abandonos.
+- Guía de autores ampliada con drag, accesibilidad, filtros, export/import, matriz E2E, seguridad,
+  evaluación pedagógica interna y Definition of Good Interactive Practice.
+
+**Matriz de cierre resumida:**
+| Requisito | Estado | Evidencia | Acción |
+|---|---|---|---|
+| Multiple Decision | Completo | Unit + E2E error/retry/correcto/deep link | Ninguna |
+| Flow Builder | Completo piloto | Drag opcional, teclado, botones, test cases | Cerrar |
+| Query Playground | Completo piloto | FetchXML/OData limitado, rechazo inseguro | Cerrar |
+| Debug Scenario | Completo piloto | Hints, solution reveal, mastery needs-review | Cerrar |
+| Filtros | Completo | Sincronización selección + empty state | Cerrar |
+| Export/import | Completo | JSON versionado, merge, replace, reset aislado | Cerrar |
+| E2E original | Cubierto/justificado | `e2e/interactive-practices.spec.ts` + matriz en guía | Cerrar |
+
+**Validación esperada de cierre:**
+```powershell
+cd app-elearning
+npm run validate:content
+npm run validate:interactive-practices
+npm run lint
+npm run typecheck
+npm run test:coverage   # 348/348 después del cierre
+npm run build
+npm run build:pages
+npm run e2e
+mkdocs build --strict
+```
+
+**No hecho intencionalmente:**
+- No se añadieron prácticas nuevas.
+- No se construyó Power Fx Playground avanzado, Dataverse Designer, Flow Simulator Fase 2, PCF, C#,
+  Azure, Interview Mode completo ni adaptive AI.
+- No hay feedback de usuarios reales; la tabla pedagógica es simulación interna.
+
 ## Sprint Piloto — Interactive Practice Engine (2026-08-11)
 
 Implementado localmente y validado el piloto de **Práctica interactiva** en la app Next.js, sin backend

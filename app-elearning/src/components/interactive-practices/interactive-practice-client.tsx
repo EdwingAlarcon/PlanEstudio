@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useId, useMemo, useState, type DragEvent, type KeyboardEvent, type ReactNode } from "react";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Code2, Lightbulb, RotateCcw, Search, ShieldCheck, SlidersHorizontal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -16,11 +16,20 @@ import {
   type FlowBuilderPractice,
   type InteractiveEvaluationResult,
   type InteractivePractice,
-  type InteractivePracticeDomain,
-  type InteractivePracticeType,
   type MultipleDecisionPractice,
   type QueryPlaygroundPractice,
 } from "@/lib/interactive-practices";
+import {
+  DEFAULT_INTERACTIVE_PRACTICE_FILTERS,
+  filterInteractivePractices,
+  hasActiveInteractivePracticeFilters,
+  syncSelectedInteractivePracticeSlug,
+  type InteractivePracticeDomainFilter,
+  type InteractivePracticeFilters,
+  type InteractivePracticeLevelFilter,
+  type InteractivePracticeMasteryFilter,
+  type InteractivePracticeTypeFilter,
+} from "@/lib/interactive-practice-filters";
 import {
   summarizeInteractivePracticeProgress,
   useInteractivePracticeProgressStore,
@@ -33,43 +42,49 @@ interface InteractivePracticeClientProps {
   initialSlug?: string;
 }
 
-type DomainFilter = "all" | InteractivePracticeDomain;
-type TypeFilter = "all" | InteractivePracticeType;
-type MasteryFilter = "all" | "needs-review" | "completed" | "not-started";
+const INTERACTIVE_FILTER_SESSION_KEY = "planestudio.interactive-practice.filters.v1";
+const INTERACTIVE_FEEDBACK_STORAGE_KEY = "planestudio.interactive-feedback.v1";
 
 export function InteractivePracticeClient({ practices, initialSlug }: InteractivePracticeClientProps) {
   const [selectedSlug, setSelectedSlug] = useState(initialSlug ?? practices[0]?.slug ?? "");
-  const [domain, setDomain] = useState<DomainFilter>("all");
-  const [type, setType] = useState<TypeFilter>("all");
-  const [mastery, setMastery] = useState<MasteryFilter>("all");
-  const [query, setQuery] = useState("");
+  const [mounted, setMounted] = useState(false);
+  const [filters, setFilters] = useState<InteractivePracticeFilters>(() => {
+    if (typeof window === "undefined") return DEFAULT_INTERACTIVE_PRACTICE_FILTERS;
+    const stored = window.sessionStorage.getItem(INTERACTIVE_FILTER_SESSION_KEY);
+    if (!stored) return DEFAULT_INTERACTIVE_PRACTICE_FILTERS;
+    try {
+      return { ...DEFAULT_INTERACTIVE_PRACTICE_FILTERS, ...JSON.parse(stored) };
+    } catch {
+      window.sessionStorage.removeItem(INTERACTIVE_FILTER_SESSION_KEY);
+      return DEFAULT_INTERACTIVE_PRACTICE_FILTERS;
+    }
+  });
   const records = useInteractivePracticeProgressStore((s) => s.records);
   const completedModules = useProgressStore((s) => s.completedModules);
 
-  const selected = practices.find((practice) => practice.slug === selectedSlug) ?? practices[0];
   const summary = summarizeInteractivePracticeProgress(records, practices.map((practice) => practice.id));
   const recommended = getRecommendedInteractivePractice(records, completedModules);
 
   const filtered = useMemo(() => {
-    const normalized = query.trim().toLowerCase();
-    return practices.filter((practice) => {
-      const record = records[practice.id];
-      const matchesDomain = domain === "all" || practice.domain === domain;
-      const matchesType = type === "all" || practice.type === type;
-      const matchesMastery =
-        mastery === "all" ||
-        (mastery === "needs-review" && record?.mastery === "needs-review") ||
-        (mastery === "completed" && record?.status === "completed") ||
-        (mastery === "not-started" && !record);
-      const matchesText =
-        !normalized ||
-        [practice.title, practice.description, practice.tags.join(" "), INTERACTIVE_DOMAIN_LABELS[practice.domain]]
-          .join(" ")
-          .toLowerCase()
-          .includes(normalized);
-      return matchesDomain && matchesType && matchesMastery && matchesText;
-    });
-  }, [domain, mastery, practices, query, records, type]);
+    return filterInteractivePractices(practices, records, filters);
+  }, [filters, practices, records]);
+  const selected = filtered.find((practice) => practice.slug === selectedSlug) ?? filtered[0];
+  const hasActiveFilters = hasActiveInteractivePracticeFilters(filters);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    window.sessionStorage.setItem(INTERACTIVE_FILTER_SESSION_KEY, JSON.stringify(filters));
+  }, [filters]);
+
+  useEffect(() => {
+    const nextSlug = syncSelectedInteractivePracticeSlug(selectedSlug, filtered);
+    if (nextSlug !== selectedSlug) setSelectedSlug(nextSlug);
+  }, [filtered, selectedSlug]);
+
+  const clearFilters = () => setFilters(DEFAULT_INTERACTIVE_PRACTICE_FILTERS);
 
   return (
     <div className="mx-auto max-w-6xl space-y-6 px-4 py-8 animate-fade-in">
@@ -127,31 +142,43 @@ export function InteractivePracticeClient({ practices, initialSlug }: Interactiv
                 <span className="mt-1 flex items-center gap-2 rounded-md border border-input bg-background px-2">
                   <Search className="h-3.5 w-3.5 text-muted-foreground" aria-hidden />
                   <input
-                    value={query}
-                    onChange={(event) => setQuery(event.target.value)}
+                    value={filters.query}
+                    onChange={(event) => setFilters((current) => ({ ...current, query: event.target.value }))}
+                    disabled={!mounted}
                     className="h-9 min-w-0 flex-1 bg-transparent text-sm outline-none"
                     placeholder="Dataverse, OData, flujo..."
                   />
                 </span>
               </label>
-              <FilterSelect label="Dominio" value={domain} onChange={(value) => setDomain(value as DomainFilter)}>
+              <FilterSelect label="Dominio" value={filters.domain} disabled={!mounted} onChange={(value) => setFilters((current) => ({ ...current, domain: value as InteractivePracticeDomainFilter }))}>
                 <option value="all">Todos</option>
                 {Array.from(new Set(practices.map((practice) => practice.domain))).map((item) => (
                   <option key={item} value={item}>{INTERACTIVE_DOMAIN_LABELS[item]}</option>
                 ))}
               </FilterSelect>
-              <FilterSelect label="Engine" value={type} onChange={(value) => setType(value as TypeFilter)}>
+              <FilterSelect label="Engine" value={filters.type} disabled={!mounted} onChange={(value) => setFilters((current) => ({ ...current, type: value as InteractivePracticeTypeFilter }))}>
                 <option value="all">Todos</option>
                 {Array.from(new Set(practices.map((practice) => practice.type))).map((item) => (
                   <option key={item} value={item}>{INTERACTIVE_TYPE_LABELS[item]}</option>
                 ))}
               </FilterSelect>
-              <FilterSelect label="Estado" value={mastery} onChange={(value) => setMastery(value as MasteryFilter)}>
+              <FilterSelect label="Dificultad" value={filters.level} disabled={!mounted} onChange={(value) => setFilters((current) => ({ ...current, level: value as InteractivePracticeLevelFilter }))}>
+                <option value="all">Todas</option>
+                {Array.from(new Set(practices.map((practice) => practice.level))).map((item) => (
+                  <option key={item} value={item}>{INTERACTIVE_LEVEL_LABELS[item]}</option>
+                ))}
+              </FilterSelect>
+              <FilterSelect label="Estado" value={filters.mastery} disabled={!mounted} onChange={(value) => setFilters((current) => ({ ...current, mastery: value as InteractivePracticeMasteryFilter }))}>
                 <option value="all">Todos</option>
                 <option value="not-started">No iniciado</option>
                 <option value="completed">Completado</option>
                 <option value="needs-review">Para repasar</option>
               </FilterSelect>
+              {hasActiveFilters && (
+                <Button type="button" variant="outline" size="sm" className="w-full" onClick={clearFilters}>
+                  Limpiar filtros
+                </Button>
+              )}
             </div>
           </section>
 
@@ -166,12 +193,25 @@ export function InteractivePracticeClient({ practices, initialSlug }: Interactiv
               />
             ))}
             {filtered.length === 0 && (
-              <p className="rounded-xl border border-dashed border-border p-4 text-sm text-muted-foreground">No hay prácticas con esos filtros.</p>
+              <section className="rounded-xl border border-dashed border-border p-4" aria-live="polite">
+                <h3 className="text-sm font-semibold text-foreground">No encontramos prácticas con estos filtros</h3>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">Ajusta dominio, engine, dificultad, estado o búsqueda para volver al banco.</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <Button type="button" variant="outline" size="sm" onClick={clearFilters}>Limpiar filtros</Button>
+                  <Button type="button" variant="ghost" size="sm" onClick={clearFilters}>Ver todas</Button>
+                  <Button type="button" variant="ghost" size="sm" onClick={() => setFilters((current) => ({ ...current, domain: "all" }))}>Cambiar dominio</Button>
+                </div>
+              </section>
             )}
           </section>
         </aside>
 
-        {selected && <InteractiveExercise practice={selected} />}
+        {selected ? <InteractiveExercise practice={selected} /> : (
+          <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-live="polite">
+            <h2 className="text-lg font-semibold text-foreground">No encontramos prácticas con estos filtros</h2>
+            <p className="mt-2 text-sm text-muted-foreground">El panel se actualizará cuando exista al menos una práctica visible.</p>
+          </section>
+        )}
       </div>
     </div>
   );
@@ -181,6 +221,8 @@ function InteractiveExercise({ practice }: { practice: InteractivePractice }) {
   const [answer, setAnswer] = useState<unknown>(initialAnswer(practice));
   const [result, setResult] = useState<InteractiveEvaluationResult | null>(null);
   const [showSolution, setShowSolution] = useState(false);
+  const [feedbackChoice, setFeedbackChoice] = useState<string | null>(null);
+  const [feedbackNote, setFeedbackNote] = useState("");
   const record = useInteractivePracticeProgressStore((s) => s.records[practice.id]);
   const openPractice = useInteractivePracticeProgressStore((s) => s.openPractice);
   const recordAttempt = useInteractivePracticeProgressStore((s) => s.recordAttempt);
@@ -195,6 +237,8 @@ function InteractiveExercise({ practice }: { practice: InteractivePractice }) {
     setAnswer(initialAnswer(practice));
     setResult(null);
     setShowSolution(false);
+    setFeedbackChoice(null);
+    setFeedbackNote("");
   }, [practice.id, practice]);
 
   const attemptNumber = (record?.attemptCount ?? 0) + 1;
@@ -274,6 +318,15 @@ function InteractiveExercise({ practice }: { practice: InteractivePractice }) {
             {result && <FeedbackPanel result={result} />}
           </div>
           {showSolution && <SolutionPanel practice={practice} />}
+          {result?.status === "correct" && (
+            <PracticeFeedbackPanel
+              practiceId={practice.id}
+              choice={feedbackChoice}
+              note={feedbackNote}
+              setChoice={setFeedbackChoice}
+              setNote={setFeedbackNote}
+            />
+          )}
         </div>
 
         <aside className="space-y-3">
@@ -348,6 +401,22 @@ function DecisionEngine({ practice, answer, setAnswer }: { practice: MultipleDec
 }
 
 function FlowEngine({ practice, answer, setAnswer }: { practice: FlowBuilderPractice; answer: string[]; setAnswer: (value: string[]) => void }) {
+  const [draggedId, setDraggedId] = useState<string | null>(null);
+  const [dropIndex, setDropIndex] = useState<number | null>(null);
+  const [selectedBlockId, setSelectedBlockId] = useState<string | null>(answer[0] ?? null);
+  const [announcement, setAnnouncement] = useState("");
+
+  useEffect(() => {
+    if (selectedBlockId && answer.includes(selectedBlockId)) return;
+    setSelectedBlockId(answer[0] ?? null);
+  }, [answer, selectedBlockId]);
+
+  const announce = (id: string, next: string[]) => {
+    const block = practice.blocks.find((item) => item.id === id);
+    const position = next.indexOf(id) + 1;
+    setAnnouncement(`${block?.label ?? id} movido a posición ${position} de ${next.length}.`);
+  };
+
   const move = (id: string, direction: -1 | 1) => {
     const index = answer.indexOf(id);
     const target = index + direction;
@@ -355,31 +424,138 @@ function FlowEngine({ practice, answer, setAnswer }: { practice: FlowBuilderPrac
     const next = [...answer];
     [next[index], next[target]] = [next[target]!, next[index]!];
     setAnswer(next);
+    setSelectedBlockId(id);
+    announce(id, next);
+  };
+
+  const moveToIndex = (id: string, targetIndex: number) => {
+    const index = answer.indexOf(id);
+    if (index < 0 || targetIndex < 0 || targetIndex >= answer.length || index === targetIndex) return;
+    const next = [...answer];
+    next.splice(index, 1);
+    next.splice(targetIndex, 0, id);
+    setAnswer(next);
+    setSelectedBlockId(id);
+    announce(id, next);
+  };
+
+  const remove = (id: string) => {
+    const next = answer.filter((item) => item !== id);
+    setAnswer(next);
+    setSelectedBlockId(next[0] ?? null);
+    const block = practice.blocks.find((item) => item.id === id);
+    setAnnouncement(`${block?.label ?? id} eliminado del flujo. Usa Restaurar bloques para recuperarlo.`);
+  };
+
+  const restoreBlocks = () => {
+    const next = practice.blocks.map((block) => block.id);
+    setAnswer(next);
+    setSelectedBlockId(next[0] ?? null);
+    setAnnouncement("Bloques restaurados al orden inicial.");
+  };
+
+  const insertRelative = (targetId: string, offset: 0 | 1) => {
+    if (!selectedBlockId) return;
+    const targetIndex = answer.indexOf(targetId);
+    const currentIndex = answer.indexOf(selectedBlockId);
+    if (targetIndex < 0 || currentIndex < 0 || selectedBlockId === targetId) return;
+    const next = [...answer];
+    next.splice(currentIndex, 1);
+    const adjustedTarget = next.indexOf(targetId);
+    next.splice(adjustedTarget + offset, 0, selectedBlockId);
+    setAnswer(next);
+    announce(selectedBlockId, next);
+  };
+
+  const onDragStart = (event: DragEvent<HTMLLIElement>, id: string) => {
+    setDraggedId(id);
+    setSelectedBlockId(id);
+    event.dataTransfer.setData("text/plain", id);
+    event.dataTransfer.effectAllowed = "move";
+  };
+
+  const onDrop = (event: DragEvent<HTMLLIElement>, index: number) => {
+    event.preventDefault();
+    const id = draggedId ?? event.dataTransfer.getData("text/plain");
+    moveToIndex(id, index);
+    setDraggedId(null);
+    setDropIndex(null);
+  };
+
+  const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>, id: string) => {
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+      move(id, -1);
+    }
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      move(id, 1);
+    }
   };
 
   return (
     <section className="space-y-3">
       <div>
         <h3 className="text-sm font-semibold text-foreground">Ordena el flujo</h3>
-        <p className="text-xs text-muted-foreground">Usa los botones para reordenar. El validador ejecuta casos locales con umbral de {practice.threshold}.</p>
+        <p className="text-xs text-muted-foreground">Arrastra bloques o usa teclado y botones. En móvil, los botones son el método recomendado. El validador ejecuta casos locales con umbral de {practice.threshold}.</p>
       </div>
+      <p className="sr-only" id="flow-builder-instructions">Selecciona un bloque. Usa flecha arriba o abajo para moverlo, o los botones Subir, Bajar, Insertar antes, Insertar después y Eliminar.</p>
+      <p className="sr-only" aria-live="polite">{announcement}</p>
       <ol className="space-y-2">
         {answer.map((blockId, index) => {
           const block = practice.blocks.find((item) => item.id === blockId);
           if (!block) return null;
           return (
-            <li key={block.id} className="flex items-center gap-2 rounded-lg border border-border bg-background p-3">
+            <li
+              key={block.id}
+              draggable
+              onDragStart={(event) => onDragStart(event, block.id)}
+              onDragOver={(event) => {
+                event.preventDefault();
+                setDropIndex(index);
+              }}
+              onDragLeave={() => setDropIndex(null)}
+              onDrop={(event) => onDrop(event, index)}
+              onDragEnd={() => {
+                setDraggedId(null);
+                setDropIndex(null);
+              }}
+              className={cn(
+                "flex flex-col gap-3 rounded-lg border bg-background p-3 transition-colors sm:flex-row sm:items-center",
+                selectedBlockId === block.id ? "border-[#0078D4]" : "border-border",
+                dropIndex === index ? "ring-2 ring-[#0078D4]" : ""
+              )}
+            >
               <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-muted text-xs font-semibold">{index + 1}</span>
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-medium text-foreground">{block.label}</p>
                 <p className="text-xs text-muted-foreground">{block.kind}</p>
               </div>
-              <Button type="button" variant="outline" size="sm" onClick={() => move(block.id, -1)} disabled={index === 0}>Subir</Button>
-              <Button type="button" variant="outline" size="sm" onClick={() => move(block.id, 1)} disabled={index === answer.length - 1}>Bajar</Button>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  type="button"
+                  variant={selectedBlockId === block.id ? "default" : "outline"}
+                  size="sm"
+                  aria-describedby="flow-builder-instructions"
+                  aria-label={`Arrastrar o mover ${block.label}`}
+                  onClick={() => setSelectedBlockId(block.id)}
+                  onKeyDown={(event) => onKeyDown(event, block.id)}
+                >
+                  Arrastrar
+                </Button>
+                <Button type="button" variant="outline" size="sm" onClick={() => move(block.id, -1)} disabled={index === 0}>Subir</Button>
+                <Button type="button" variant="outline" size="sm" onClick={() => move(block.id, 1)} disabled={index === answer.length - 1}>Bajar</Button>
+                <Button type="button" variant="outline" size="sm" onClick={() => insertRelative(block.id, 0)} disabled={!selectedBlockId || selectedBlockId === block.id}>Insertar antes</Button>
+                <Button type="button" variant="outline" size="sm" onClick={() => insertRelative(block.id, 1)} disabled={!selectedBlockId || selectedBlockId === block.id}>Insertar después</Button>
+                <Button type="button" variant="ghost" size="sm" onClick={() => remove(block.id)}>Eliminar</Button>
+              </div>
             </li>
           );
         })}
       </ol>
+      {answer.length !== practice.blocks.length && (
+        <Button type="button" variant="outline" size="sm" onClick={restoreBlocks}>Restaurar bloques</Button>
+      )}
     </section>
   );
 }
@@ -493,6 +669,64 @@ function SolutionPanel({ practice }: { practice: InteractivePractice }) {
   );
 }
 
+function PracticeFeedbackPanel({
+  practiceId,
+  choice,
+  note,
+  setChoice,
+  setNote,
+}: {
+  practiceId: string;
+  choice: string | null;
+  note: string;
+  setChoice: (value: string) => void;
+  setNote: (value: string) => void;
+}) {
+  const save = (nextChoice: string, nextNote = note) => {
+    setChoice(nextChoice);
+    const raw = window.localStorage.getItem(INTERACTIVE_FEEDBACK_STORAGE_KEY);
+    const current = raw ? safeParseFeedback(raw) : {};
+    window.localStorage.setItem(
+      INTERACTIVE_FEEDBACK_STORAGE_KEY,
+      JSON.stringify({ ...current, [practiceId]: { choice: nextChoice, note: nextNote, updatedAt: new Date().toISOString() } })
+    );
+  };
+
+  return (
+    <section className="rounded-lg border border-border bg-background p-4">
+      <h3 className="text-sm font-semibold text-foreground">¿Esta práctica te ayudó a entender el concepto?</h3>
+      <div className="mt-3 flex flex-wrap gap-2">
+        {["Sí", "Más o menos", "No"].map((option) => (
+          <Button key={option} type="button" variant={choice === option ? "default" : "outline"} size="sm" onClick={() => save(option)}>
+            {option}
+          </Button>
+        ))}
+      </div>
+      <label className="mt-3 block text-xs font-medium text-muted-foreground">
+        ¿Qué fue confuso?
+        <textarea
+          value={note}
+          onChange={(event) => {
+            const next = event.target.value;
+            setNote(next);
+            if (choice) save(choice, next);
+          }}
+          className="mt-1 min-h-20 w-full rounded-md border border-input bg-background p-2 text-sm text-foreground outline-none focus:ring-2 focus:ring-ring"
+        />
+      </label>
+    </section>
+  );
+}
+
+function safeParseFeedback(raw: string): Record<string, unknown> {
+  try {
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed as Record<string, unknown> : {};
+  } catch {
+    return {};
+  }
+}
+
 function ScenarioPanel({ practice }: { practice: InteractivePractice }) {
   return (
     <section className="rounded-lg border border-border bg-background p-4">
@@ -544,18 +778,23 @@ function Metric({ label, value }: { label: string; value: string }) {
   );
 }
 
-function FilterSelect({ label, value, onChange, children }: { label: string; value: string; onChange: (value: string) => void; children: ReactNode }) {
+function FilterSelect({ label, value, disabled = false, onChange, children }: { label: string; value: string; disabled?: boolean; onChange: (value: string) => void; children: ReactNode }) {
+  const id = useId();
   return (
-    <label className="block text-xs font-medium text-muted-foreground">
+    <div className="block text-xs font-medium text-muted-foreground">
+      <label htmlFor={id}>
       {label}
+      </label>
       <select
+        id={id}
         value={value}
+        disabled={disabled}
         onChange={(event) => onChange(event.target.value)}
         className="mt-1 h-9 w-full rounded-md border border-input bg-background px-2 text-sm text-foreground outline-none focus:ring-2 focus:ring-ring"
       >
         {children}
       </select>
-    </label>
+    </div>
   );
 }
 
