@@ -66,12 +66,20 @@ export interface FlowTestCase {
   expected: "auto-approved" | "approval-required";
 }
 
+export interface FlowBranchPreview {
+  conditionLabel: string;
+  yes: { label: string; blockIds: string[] };
+  no: { label: string; blockIds: string[] };
+}
+
 export interface FlowBuilderPractice extends BaseInteractivePractice {
   type: "flow-builder";
   blocks: FlowBlock[];
   expectedBlockIds: string[];
   threshold: number;
   testCases: FlowTestCase[];
+  /** Vista de solo lectura de cómo se ramifica el flujo en Power Automate real (Sí/No), aparte del orden lineal que el estudiante arma. */
+  branchPreview?: FlowBranchPreview;
 }
 
 export interface QueryPlaygroundPractice extends BaseInteractivePractice {
@@ -80,6 +88,10 @@ export interface QueryPlaygroundPractice extends BaseInteractivePractice {
   starter: string;
   expectedColumns: string[];
   expectedNames: string[];
+  /** Sintaxis mínima del dialecto, mostrada junto al editor antes de escribir la consulta. */
+  syntaxRef: string;
+  /** Consulta completa y correcta, mostrada en "Ver solución". */
+  solutionQuery: string;
 }
 
 export interface DebugScenarioPractice extends BaseInteractivePractice {
@@ -290,6 +302,11 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     ],
     expectedBlockIds: ["trigger-row-added", "condition-amount-gt", "start-approval", "update-approved", "send-notification"],
     threshold: 10000000,
+    branchPreview: {
+      conditionLabel: "Condition: Amount > 10000000",
+      yes: { label: "Sí (supera el umbral)", blockIds: ["start-approval", "update-approved"] },
+      no: { label: "No (no supera el umbral)", blockIds: ["update-approved"] },
+    },
     testCases: [
       { id: "low", label: "Monto: 5.000.000", amount: 5000000, expected: "auto-approved" },
       { id: "high", label: "Monto: 15.000.000", amount: 15000000, expected: "approval-required" },
@@ -420,6 +437,10 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     starter: "<fetch>\n  <entity name=\"account\">\n  </entity>\n</fetch>",
     expectedColumns: ["name"],
     expectedNames: ["Contoso Norte", "Litware Capital"],
+    syntaxRef:
+      "FetchXML es XML: cada columna que quieres leer se pide con <attribute name=\"...\" />, y cada filtro con <condition attribute=\"...\" operator=\"...\" value=\"...\" />. Ambos van dentro de <entity>. Ejemplo con otra entidad: <entity name=\"contact\"><attribute name=\"fullname\" /><condition attribute=\"statecode\" operator=\"eq\" value=\"0\" /></entity> devuelve el nombre de los contactos activos.",
+    solutionQuery:
+      "<fetch>\n  <entity name=\"account\">\n    <attribute name=\"name\" />\n    <condition attribute=\"city\" operator=\"eq\" value=\"Bogota\" />\n  </entity>\n</fetch>",
     hints: [
       { id: "h1", content: "La entidad debe ser account." },
       { id: "h2", content: "Agrega attribute name y una condición sobre city." },
@@ -448,6 +469,9 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     starter: "/accounts?$select=name,revenue&$orderby=revenue desc&$top=2",
     expectedColumns: ["name", "revenue"],
     expectedNames: ["Litware Capital", "Fabrikam Andina"],
+    syntaxRef:
+      "OData añade parámetros después de ? en la URL del recurso: $select=col1,col2 elige columnas, $orderby=columna desc|asc ordena, $top=N limita cuántos registros vuelven. Se combinan con &. Ejemplo con otro recurso: /contacts?$select=fullname&$orderby=fullname asc&$top=5 trae los 5 primeros contactos por nombre.",
+    solutionQuery: "/accounts?$select=name,revenue&$orderby=revenue desc&$top=2",
     hints: [
       { id: "h1", content: "Usa $select para limitar columnas." },
       { id: "h2", content: "Ordena revenue de mayor a menor antes de aplicar top." },

@@ -163,6 +163,7 @@ export function PrepararEntornoClient() {
                       {step.title}
                     </span>
                     <span className="mt-0.5 block text-xs text-muted-foreground">{step.outcome}</span>
+                    <span className="mt-1 block rounded-md bg-muted/50 px-2 py-1 text-xs italic leading-relaxed text-muted-foreground">{step.glossary}</span>
                     {workstation.hasTenant === false && (
                       <span className="mt-1 block text-xs text-[#0078D4] dark:text-[#4DB8FF]">{step.tenantAlternative}</span>
                     )}

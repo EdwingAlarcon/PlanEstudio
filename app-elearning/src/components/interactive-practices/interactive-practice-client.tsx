@@ -556,7 +556,36 @@ function FlowEngine({ practice, answer, setAnswer }: { practice: FlowBuilderPrac
       {answer.length !== practice.blocks.length && (
         <Button type="button" variant="outline" size="sm" onClick={restoreBlocks}>Restaurar bloques</Button>
       )}
+      {practice.branchPreview && <FlowBranchPreviewPanel practice={practice} />}
     </section>
+  );
+}
+
+function FlowBranchPreviewPanel({ practice }: { practice: FlowBuilderPractice }) {
+  const preview = practice.branchPreview;
+  if (!preview) return null;
+  const labelFor = (id: string) => practice.blocks.find((block) => block.id === id)?.label ?? id;
+  return (
+    <div className="rounded-lg border border-border bg-muted/20 p-3">
+      <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+        Así se ve en Power Automate real (solo lectura)
+      </p>
+      <p className="mb-3 text-xs text-muted-foreground">{preview.conditionLabel} evalúa cada ejecución y la divide en dos ramas:</p>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div className="rounded-md border border-[#107C10]/30 bg-[#107C10]/5 p-3">
+          <p className="mb-2 text-xs font-semibold text-[#107C10]">{preview.yes.label}</p>
+          <div className="space-y-1 text-xs text-foreground">
+            {preview.yes.blockIds.map((id) => <p key={id}>→ {labelFor(id)}</p>)}
+          </div>
+        </div>
+        <div className="rounded-md border border-[#D13438]/30 bg-[#D13438]/5 p-3">
+          <p className="mb-2 text-xs font-semibold text-[#D13438]">{preview.no.label}</p>
+          <div className="space-y-1 text-xs text-foreground">
+            {preview.no.blockIds.map((id) => <p key={id}>→ {labelFor(id)}</p>)}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -569,6 +598,10 @@ function QueryEngine({ practice, answer, setAnswer }: { practice: QueryPlaygroun
           Query Playground
         </h3>
         <p className="text-xs text-muted-foreground">Parser limitado para {practice.dialect}. Solo acepta consultas declarativas contra fixtures locales.</p>
+      </div>
+      <div className="rounded-lg border border-[#0078D4]/25 bg-[#0078D4]/5 p-3 text-xs text-foreground dark:bg-[#0078D4]/10">
+        <p className="mb-1 font-semibold uppercase tracking-wide text-muted-foreground">Sintaxis de {practice.dialect === "fetchxml" ? "FetchXML" : "OData"}</p>
+        <p className="leading-relaxed">{practice.syntaxRef}</p>
       </div>
       <textarea
         value={answer}
@@ -665,6 +698,9 @@ function SolutionPanel({ practice }: { practice: InteractivePractice }) {
     <section className="rounded-lg border border-[#FFB900]/30 bg-[#FFFBE6] p-4 text-sm dark:bg-yellow-500/10">
       <h3 className="mb-2 font-semibold text-foreground">Solución de referencia</h3>
       <p className="leading-relaxed text-muted-foreground">{content}</p>
+      {practice.type === "query-playground" && (
+        <pre className="mt-3 overflow-x-auto rounded-md border border-border bg-background p-3 font-mono text-xs text-foreground">{practice.solutionQuery}</pre>
+      )}
     </section>
   );
 }

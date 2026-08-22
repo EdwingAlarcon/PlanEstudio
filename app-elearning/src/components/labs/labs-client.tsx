@@ -7,6 +7,28 @@ import { Badge } from "@/components/ui/badge";
 import { LabCardStatus } from "./lab-card-status";
 import type { DomainTag, LabPresentationMeta } from "@/lib/lab-metadata";
 import { cn } from "@/lib/utils";
+import { useProgressStore } from "@/lib/progress";
+import { LEVEL_ORDER as CONTENT_LEVEL_ORDER, type LevelId } from "@/lib/i18n";
+
+const LEVEL_ID_TO_CODE: Record<LevelId, string> = {
+  basico: "N1",
+  intermedio: "N2",
+  avanzado: "N3",
+  arquitecto: "N4",
+  ia: "N5",
+  d365: "N6",
+  rpa: "RPA",
+};
+
+// completedModules entries look like "basico-1"; the level id is everything before the last "-".
+function getActiveLevelCode(completedModules: string[]): string {
+  if (completedModules.length === 0) return "N1";
+  const completedLevelIds = new Set(
+    completedModules.map((entry) => entry.slice(0, entry.lastIndexOf("-")))
+  );
+  const furthestLevelId = [...CONTENT_LEVEL_ORDER].reverse().find((levelId) => completedLevelIds.has(levelId));
+  return furthestLevelId ? LEVEL_ID_TO_CODE[furthestLevelId] : "N1";
+}
 
 export interface LabWithMeta {
   slug: string;
@@ -113,6 +135,9 @@ export function LabsClient({ labs }: { labs: LabWithMeta[] }) {
   const [selectedRoles, setSelectedRoles] = useState<Set<string>>(new Set());
   const [selectedLevels, setSelectedLevels] = useState<Set<string>>(new Set());
   const [selectedDifficulties, setSelectedDifficulties] = useState<Set<string>>(new Set());
+  const [manualOpen, setManualOpen] = useState<Record<string, boolean>>({});
+  const completedModules = useProgressStore((s) => s.completedModules);
+  const activeLevelCode = useMemo(() => getActiveLevelCode(completedModules), [completedModules]);
 
   const roleOptions = useMemo(
     () => [...new Set(labs.flatMap((l) => l.role))].sort((a, b) => a.localeCompare(b)),
@@ -217,15 +242,28 @@ export function LabsClient({ labs }: { labs: LabWithMeta[] }) {
         const levelLabs = byLevel[levelKey];
         if (!levelLabs || levelLabs.length === 0) return null;
         const cfg = LEVEL_CONFIG[levelKey] ?? { label: levelKey, bar: "bg-slate-400", accent: "#64748B" };
+        const isOpen = manualOpen[levelKey] ?? (hasActiveFilters || levelKey === activeLevelCode);
 
         return (
-          <section key={levelKey} className="mb-10">
+          <details
+            key={levelKey}
+            className="group/level mb-10"
+            open={isOpen}
+            onToggle={(event) => {
+              const nextOpen = (event.currentTarget as HTMLDetailsElement).open;
+              setManualOpen((prev) => ({ ...prev, [levelKey]: nextOpen }));
+            }}
+          >
             {/* Section label with accent bar */}
-            <div className="flex items-center gap-2.5 mb-4">
+            <summary className="mb-4 flex cursor-pointer list-none items-center gap-2.5">
               <div className={`h-5 w-1 rounded-full ${cfg.bar}`} aria-hidden />
               <h2 className="text-sm font-semibold text-foreground">{cfg.label}</h2>
               <span className="text-xs text-muted-foreground">({levelLabs.length})</span>
-            </div>
+              {levelKey === activeLevelCode && (
+                <Badge variant="outline" className="text-[10px]">tu nivel actual</Badge>
+              )}
+              <ChevronRight className="ml-auto h-4 w-4 text-muted-foreground transition-transform group-open/level:rotate-90" aria-hidden />
+            </summary>
 
             <div className="grid gap-3 sm:grid-cols-2">
               {levelLabs.map((lab) => {
@@ -321,7 +359,7 @@ export function LabsClient({ labs }: { labs: LabWithMeta[] }) {
                 );
               })}
             </div>
-          </section>
+          </details>
         );
       })}
     </>

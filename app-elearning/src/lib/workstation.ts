@@ -36,6 +36,8 @@ export interface EssentialSetupStep {
   id: string;
   title: string;
   outcome: string;
+  /** Definicion de una frase del termino clave del paso, en lenguaje llano, para quien nunca lo ha oido. */
+  glossary: string;
   tenantAlternative: string;
 }
 
@@ -142,42 +144,49 @@ export const ESSENTIAL_SETUP_STEPS: EssentialSetupStep[] = [
     id: "login",
     title: "Puedo iniciar sesión con mi cuenta",
     outcome: "Confirmas que tienes credenciales validas para acceder al ecosistema Microsoft.",
+    glossary: "Es la cuenta con la que entras a Microsoft 365 o a un plan gratuito de desarrollador; sin ella no puedes abrir ninguna herramienta de Power Platform.",
     tenantAlternative: "Si aun no tienes cuenta, solicita acceso a tu organizacion o crea un tenant de prueba antes de continuar.",
   },
   {
     id: "identify-tenant",
     title: "Se que tenant estoy usando",
     outcome: "Identificas el Microsoft Entra tenant al que pertenece tu cuenta.",
+    glossary: "Un tenant es la \"casa\" en la nube de una organizacion: agrupa sus usuarios, datos y licencias. Tu cuenta siempre vive dentro de exactamente un tenant.",
     tenantAlternative: "Sin tenant propio, documenta que necesitarias uno y continua con contenido conceptual.",
   },
   {
     id: "identify-environment",
     title: "Se que entorno estoy usando",
     outcome: "Reconoces el Power Platform environment (Developer, Trial, Sandbox o Production) y su proposito.",
+    glossary: "Un entorno es un espacio de trabajo aislado dentro de tu tenant, con sus propios datos y apps; una organizacion suele tener varios (uno para practicar, otro para producción).",
     tenantAlternative: "Describe conceptualmente la diferencia entre entornos sin necesitar acceso real todavia.",
   },
   {
     id: "confirm-dataverse",
     title: "Se si mi entorno tiene Dataverse",
     outcome: "Verificas si el entorno incluye Dataverse antes de iniciar labs que lo requieran.",
+    glossary: "Dataverse es la base de datos integrada de Power Platform (tablas, relaciones, seguridad); algunos entornos gratuitos no la traen activada por defecto.",
     tenantAlternative: "Usa la variante simulada de los labs que dependen de Dataverse.",
   },
   {
     id: "know-role",
     title: "Conozco mi rol y mis permisos",
     outcome: "Identificas tu rol de seguridad (Environment Maker, Basic User, System Customizer, etc.) aplicando minimo privilegio.",
+    glossary: "Un rol de seguridad define qué puedes ver y hacer dentro de un entorno; \"minimo privilegio\" significa usar el rol mas bajo que te alcance para la tarea, no el mas alto disponible.",
     tenantAlternative: "Sin acceso a un entorno, revisa la teoria de roles y permisos en el modulo correspondiente.",
   },
   {
     id: "confirm-non-production",
     title: "Confirmo que no estoy trabajando en produccion",
     outcome: "Verificas explicitamente que el entorno usado para practicar no es un entorno de produccion.",
+    glossary: "\"Producción\" es el entorno real que usan las personas del negocio todos los dias; practicar ahí puede dañar datos reales, así que los labs deben hacerse en un entorno Developer o Trial aparte.",
     tenantAlternative: "Si solo tienes acceso a produccion, no practiques alli: solicita un entorno Developer o Trial.",
   },
   {
     id: "open-maker-portal",
     title: "Puedo abrir el Maker Portal",
     outcome: "Accedes a make.powerapps.com y ubicas tu entorno activo en el selector superior.",
+    glossary: "El Maker Portal (make.powerapps.com) es la pagina web donde construyes apps, tablas y flujos; el selector de entorno arriba a la derecha decide sobre cuál de tus entornos estás trabajando.",
     tenantAlternative: "Explora capturas de referencia del Maker Portal mientras consigues acceso.",
   },
 ];

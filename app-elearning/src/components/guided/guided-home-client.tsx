@@ -29,6 +29,13 @@ export function GuidedHomeClient() {
             </Badge>
             <Badge variant="outline">Recomendacion determinista</Badge>
           </div>
+          <p className="text-xs leading-relaxed text-muted-foreground">
+            {onboarding.navigationMode === "guided"
+              ? "Modo guiado: te sugerimos siempre la siguiente actividad, pero puedes cambiar de ruta cuando quieras."
+              : "Explorar libremente: eliges tú qué módulo o lab abrir a continuación, sin una sugerencia fija."}
+            {" "}
+            Recomendación determinista: la misma respuesta te lleva siempre a la misma ruta recomendada — no depende del azar ni de un algoritmo que cambie con el tiempo.
+          </p>
 
           <div className="space-y-2">
             <h1 id="guided-heading" className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
