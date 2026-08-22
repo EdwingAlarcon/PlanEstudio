@@ -4,6 +4,43 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
+## Estado al 2026-08-22 (pausa por reinicio de PC del usuario)
+
+**Hecho y ya en remoto:**
+- Se hizo `git pull origin master`, que trajo el sprint "Spaced Repetition & Long-Term Retention
+  Engine" (2 commits: `fa2440a6`, `b9a1a75c`) mientras había trabajo local sin commitear del cierre
+  de "Interactive Practice Engine". Se resolvió el conflicto de merge en `CLAUDE.md` y en este mismo
+  archivo (ambos tenían ediciones competidoras en la sección de handoff) preservando ambos sprints en
+  orden cronológico.
+- Se commiteó (`60254ed8`, "feat: cerrar Interactive Practice Engine y fusionar con motor de
+  repaso") y se hizo `git push origin master`. El push llegó bien
+  (`b9a1a75c..60254ed8  master -> master`).
+- **CI del run del push (`32579939435`) estaba `in_progress` en el momento de esta pausa** — no se
+  confirmó éxito ni fallo. Verificar con `gh run list --branch master --limit 3` o `gh run view
+  32579939435` al retomar. Si falló, revisar logs con `gh run view 32579939435 --log-failed` antes de
+  asumir que el merge está roto: la única falla local conocida en E2E (`smoke.spec.ts`, test "nivel
+  RPA integra módulos, labs, práctica y checklist") es una flakiness de timeout por compilación en
+  frío del dev server en rutas RPA pesadas, reproducida 3 veces con fallos en líneas distintas cada
+  vez — no una regresión funcional. Si CI vuelve a fallar justo en ese test, es consistente con eso;
+  si falla en otro punto, investigar de nuevo antes de asumir lo mismo.
+- Validación local previa al push, todo en verde: `npm run lint`, `npx tsc --noEmit`, `npm run
+  validate:content` (incluye `validate:interactive-practices` y `validate:spaced-repetition`), `npm
+  run test:coverage` (415/415 tests, cobertura 90.49 % stmts / 80.87 % branch / 85.54 % funcs / 90.49 %
+  lines), `npm run build` (genera `/repaso` y `/practica` correctamente). E2E: 67/68 (la única falla es
+  la flakiness de RPA descrita arriba).
+
+**Pendiente al retomar (siguiente sesión, Claude o Codex):**
+1. Confirmar resultado final de CI run `32579939435` en GitHub Actions.
+2. Si CI pasó: verificar producción en Vercel (`https://planestudio.vercel.app/`) según la preferencia
+   habitual del usuario de confirmar deploy tras push.
+3. Actualizar el conteo real de tests en `CLAUDE.md`/aquí: quedó anotado como "pendiente de
+   re-ejecutar" tras la fusión de los dos sprints — ya se re-ejecutó localmente y dio **415 Vitest
+   tests** (no 406 ni 348) y **68 Playwright E2E tests** (67 pasan, 1 flaky conocido). Reemplazar la
+   nota "pendiente" en `CLAUDE.md` línea del test baseline por estos números confirmados si no se hizo
+   ya en un commit posterior.
+4. No hay ninguna otra tarea en curso sin cerrar de esta sesión — el trabajo de cierre de Interactive
+   Practice Engine y la fusión con Spaced Repetition quedaron completos y pusheados.
+
 ## Sprint — Spaced Repetition & Long-Term Retention Engine (2026-08-18)
 
 Motor de repetición espaciada (*retrieval practice*) implementado localmente, capa completamente
