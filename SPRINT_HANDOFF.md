@@ -4,6 +4,51 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
+## Estado al 2026-08-22 (auditoría de estudiante sin conocimientos previos + mejoras)
+
+**Hecho y ya en remoto:**
+- Se hizo una auditoría pedagógica completa navegando `https://planestudio.vercel.app` en vivo,
+  simulando un estudiante sin conocimientos previos de Power Platform/D365. Hallazgo crítico: el
+  ejercicio interactivo de FetchXML (`Query Playground`, práctica `IP-QRY-001`) no enseñaba la
+  sintaxis en ningún punto (ni en el escenario, ni en las pistas, ni en "Ver solución"). Hallazgos
+  altos: jerga sin explicar en `/preparar-entorno`, `/repaso` daba 404 en producción, módulo
+  "JavaScript y PCF Básico" exige programación sin enseñarla (ya declarado honestamente, no se tocó).
+- Se implementaron las 6 mejoras priorizadas y se pushearon en dos commits:
+  - `a01fb09b` ("feat: implementar mejoras de auditoria pedagogica de PlanEstudio"): (1) sintaxis
+    mínima + solución completa en Query Playground (`syntaxRef`/`solutionQuery` en
+    `interactive-practices.ts`), (2) glosario de una frase por ítem del checklist de
+    `/preparar-entorno` (`glossary` en `EssentialSetupStep`, `workstation.ts`), (3) explicación de
+    "Modo guiado"/"Recomendación determinista" en home (`guided-home-client.tsx`), (4) panel de solo
+    lectura con ramas Sí/No en Flow Builder (`branchPreview` en `FlowBuilderPractice`), (5)
+    `/labs` colapsa por defecto al nivel activo del estudiante (`labs-client.tsx`, usa
+    `<details>`/`<summary>`).
+  - `74ac4d8f` ("chore: actualizar grafo graphify tras ultimo commit"): rebuild del grafo
+    graphify-out que el hook post-commit deja sin commitear tras cada push (ver nota de graphify más
+    abajo).
+- Validado antes de pushear: `npx tsc --noEmit` limpio, `npm run lint` limpio, `npm test` 415/415,
+  `npm run validate:interactive-practices` OK, `npm run e2e` 68/68 (se corrigió un test roto por el
+  nuevo panel de branchPreview: el locator `li` con texto "Update row: approved" colisionaba con los
+  `<li>` nuevos del panel — se cambiaron a `<div>`/`<p>` en el panel de solo lectura), `npm run build`
+  OK (exporta `/repaso`, `/practica`, etc. sin problema).
+
+**Pendiente al retomar — acción manual del usuario, no delegable por CLI/MCP:**
+- El sexto hallazgo alto ("`/repaso` da 404") **no era un bug de código**: la ruta ya existía desde
+  `fa2440a67f` y compila/exporta bien. El dominio custom `planestudio.vercel.app` está **fijado
+  (pinned)** en Vercel al deployment `dpl_HqmJq6XQZrnikEuM7vrzXAxF2siP` (commit `fb48f9c3`, "fix:
+  configurar rutas limpias para Vercel estatico", creado 1786492135333) y **no sigue automáticamente
+  los pushes nuevos** — se confirmó con `list_deployments`/`get_deployment` del MCP de Vercel que el
+  deployment del commit `a01fb09b` (`dpl_Hj8GSmiQdiBTPjsBdRdFxcDxC6ur`) está `READY`/`target:
+  production` pero el alias `planestudio.vercel.app` sigue sin reasignarse.
+  **Acción pendiente para el usuario**: en el panel de Vercel → proyecto `app-elearning` →
+  Deployments → deployment del commit más reciente en `master` → menú `⋯` → "Promote to Production"
+  (o Domains → reasignar `planestudio.vercel.app`). No hay herramienta MCP de alias/promoción
+  disponible para hacerlo por CLI en esta sesión — solo lectura (`get_deployment`,
+  `list_deployments`, `get_deployment_build_logs`, `get_runtime_errors`). Verificar después con
+  `get_deployment` sobre `planestudio.vercel.app` que el campo `meta.githubCommitSha` coincida con el
+  HEAD de `master`.
+- No se ejecutó el sexto punto del roadmap de mejoras original (`/repaso` "desplegar o retirar
+  mención") como cambio de código porque no hacía falta: era un problema de alias, no de contenido.
+
 ## Estado al 2026-08-22 (pausa por reinicio de PC del usuario)
 
 **Hecho y ya en remoto:**
