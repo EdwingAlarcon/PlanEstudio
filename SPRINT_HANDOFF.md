@@ -4,6 +4,48 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
+## Estado al 2026-08-22 noche (fix de infra Vercel — dominio planestudio.vercel.app roto)
+
+**Contexto**: el usuario reportó que `planestudio.vercel.app` no reflejaba los últimos cambios
+(ej. `/repaso` daba 404) aunque el código y CI estaban bien. Se investigó a fondo con Vercel MCP +
+CLI (`vercel` ya estaba instalado y logueado como `edwingalarcon` en esta máquina).
+
+**Causas raíz encontradas (ambas preexistían, no las causó esta sesión)**:
+1. Proyecto Vercel (antes `app-elearning`, ahora renombrado `planestudio`) tenía **Root Directory
+   vacío** (`./`) en vez de `app-elearning` — los deploys automáticos por push a GitHub eran
+   builds vacíos de ~300ms (no corrían `npm install`/`next build` real).
+2. **Framework Preset = "Other"** en vez de "Next.js" — aunque se corrigiera el Root Directory,
+   Vercel no aplicaba el ruteo de Next.js sobre el export estático, causando 404 en TODAS las
+   rutas (confirmado: hasta la raíz `/` devolvía 404 en el deployment).
+3. El dominio `planestudio.vercel.app` estaba conectado como **alias manual** (`vercel alias set`,
+   corrido por una sesión anterior con actor "codex"), no como dominio del proyecto — por eso no
+   seguía los pushes automáticos aunque el resto del pipeline funcionara.
+
+**Qué se corrigió (ya en producción, verificado con `curl` en `/`, `/repaso`, `/practica`,
+`/preparar-entorno` → todos 200)**:
+- Root Directory → `app-elearning` (Settings → Build and Deployment → Root Directory).
+- Framework Preset → `Next.js` (confirmado vía API: `"framework":"nextjs"`).
+- Proyecto Vercel renombrado de `app-elearning` a **`planestudio`** (`vercel project rename`) para
+  que `planestudio.vercel.app` sea el dominio *por defecto* del proyecto (igual que
+  `app-elearning.vercel.app` antes) y así siga cada push a `master` automáticamente sin necesidad
+  de correr `vercel alias set` a mano nunca más.
+- `planestudio.vercel.app` agregado explícitamente como dominio de **Production** en
+  Settings → Domains (antes solo existía como alias suelto, no aparecía ni listado ahí).
+- Deploy de producción forzado por CLI (`vercel --prod --yes`) para validar el fix antes de
+  depender del próximo push automático.
+
+**Nota de incidente menor**: durante la investigación, un intento de repuntar el alias al
+deployment automático más reciente (todavía con el bug del Root Directory sin corregir) causó
+~2 minutos de 404 en la raíz de `planestudio.vercel.app`. Se detectó y revirtió de inmediato al
+deployment anterior que funcionaba, antes de identificar y corregir la causa de raíz real.
+
+**Pendiente al retomar**: verificar que el CI del commit `4b8eef20` (push `master`, "chore:
+actualizar grafo graphify tras ultimo commit") terminó bien — estaba en el job "Playwright Smoke"
+cuando se cortó la sesión por apagado de PC del usuario. Correr `gh run list --branch master
+--limit 1` y si falló, investigar antes de asumir que todo sigue verde. Este run de CI es el
+mirror legado de GitHub Pages — no afecta al deploy de producción real en Vercel, que ya quedó
+verificado funcionando antes de este corte.
+
 ## Estado al 2026-08-22 (auditoría de estudiante sin conocimientos previos + mejoras)
 
 **Hecho y ya en remoto:**
