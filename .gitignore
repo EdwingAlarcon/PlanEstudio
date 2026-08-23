@@ -32,3 +32,5 @@ $RECYCLE.BIN/
 # Temp
 *.tmp
 *.bak
+
+.vercel
