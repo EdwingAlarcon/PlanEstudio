@@ -9,6 +9,9 @@ site/
 .d365-app-install/
 .codex-devserver/
 
+# Node (stray root node_modules from accidental npm run outside app-elearning/)
+/node_modules/
+
 # Python
 __pycache__/
 *.pyc
