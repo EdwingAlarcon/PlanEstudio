@@ -1046,9 +1046,19 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 
 ---
 
+### Módulo 56: Fundamentos de JavaScript para Power Platform
+
+- [ ] **Conocimiento**: Explico qué son variables, funciones, objetos, arrays, callbacks y promesas con mis propias palabras | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Ejecuto las tres actividades de la consola del navegador (variables/objetos, arrays, promesa simulada) y obtengo los resultados esperados | Dominio: ___/5 | Fecha: ___
+- [ ] **Entrega**: Completo el checklist de criterios de validación del módulo antes de continuar con el Módulo 13 | Dominio: ___/5 | Fecha: ___
+
+**Subtotal Módulo 56:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+
+---
+
 ### 🏆 Hitos de Nivel IA
 
-- [ ] Todos los módulos 42-55 completados con 80%+ de checkboxes marcados | Fecha: ___
+- [ ] Todos los módulos 42-56 completados con 80%+ de checkboxes marcados | Fecha: ___
 - [ ] LAB-045, LAB-051, LAB-052, LAB-053, LAB-054, LAB-055, LAB-056 y LAB-057 completados | Fecha: ___
 - [ ] Autoevaluación promedio ≥ 4.0/5 en todos los módulos del nivel | Promedio: ___/5
 - [ ] Certificado del Nivel IA generado | Fecha: ___
@@ -1062,7 +1072,7 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 
 > Nivel transversal — no es prerequisito de los niveles base de Power Platform ni del nivel IA, ni depende de ellos. Incluye CE avanzado, Contact Center, Customer Insights, Field Service e integración CE + F&O.
 
-### Módulo 56: Dynamics 365 CE Avanzado — Customer Engagement como Ecosistema Enterprise
+### Módulo 57: Dynamics 365 CE Avanzado — Customer Engagement como Ecosistema Enterprise
 
 - [ ] **Conocimiento**: Explico por qué Sales y Customer Service comparten Account/Contact sin sincronización | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Dibujé el mapa de las 4 aplicaciones sobre Dataverse sin flechas de sincronización entre ellas | Dominio: ___/5 | Fecha: ___
@@ -1071,11 +1081,11 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 - [ ] **Conocimiento**: Separé qué prácticas requieren tenant/licencia real y cuáles pueden entregarse como diseño documentado | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Puedo posicionar Contact Center, Customer Insights Data/Journeys y F&O dentro del mapa enterprise | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 56:** ___/6 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 57:** ___/6 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 57: Customer Insights - Data: Unificación de Perfiles y Customer 360
+### Módulo 58: Customer Insights - Data: Unificación de Perfiles y Customer 360
 
 - [ ] **Conocimiento**: Explico por qué Customer Insights - Data no reemplaza a Sales/Customer Service | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Escribí una regla de matching explícita que resuelve un caso sin clave compartida (ej. sin email) | Dominio: ___/5 | Fecha: ___
@@ -1083,11 +1093,11 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 - [ ] **Entrega**: LAB-067 completado — unificación de perfiles y Customer 360 | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-085 completado — fuentes, matching, medidas, segmento y gobierno de datos | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 57:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 58:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 58: Field Service End-to-End — Work Orders, Agreements, Mobile Offline y RSO
+### Módulo 59: Field Service End-to-End — Work Orders, Agreements, Mobile Offline y RSO
 
 - [ ] **Conocimiento**: Explico la diferencia entre Scheduling Assistant manual y Resource Scheduling Optimization | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Definí un Incident Type con duración, Characteristics y 3 tareas obligatorias | Dominio: ___/5 | Fecha: ___
@@ -1096,11 +1106,11 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 - [ ] **Entrega**: LAB-086 completado — Agreement y mantenimiento preventivo | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-087 completado — Field Service Mobile offline y lifecycle de Work Order | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 58:** ___/6 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 59:** ___/6 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 59: F&O Awareness — Procesos ERP, Seguridad e Integración con CE
+### Módulo 60: F&O Awareness — Procesos ERP, Seguridad e Integración con CE
 
 - [ ] **Conocimiento**: Nombro y explico en una frase cada uno de los procesos ERP estándar (O2C, P2P, R2R, I2D) | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Identifiqué el evento donde el proceso pasa de lead-to-cash (Sales) a order-to-cash (F&O) | Dominio: ___/5 | Fecha: ___
@@ -1111,11 +1121,11 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 - [ ] **Práctica**: Separé datos maestros y transaccionales en una matriz CE + F&O | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-089 completado — process mapping F&O avanzado | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 59:** ___/8 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 60:** ___/8 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 60: Dynamics 365 Sales Avanzado
+### Módulo 61: Dynamics 365 Sales Avanzado
 
 - [ ] **Conocimiento**: Distingo etapa de oportunidad, probabilidad y forecast category | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Construí una matriz de forecast con cuota, committed, best case y gap | Dominio: ___/5 | Fecha: ___
@@ -1123,11 +1133,11 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 - [ ] **Entrega**: LAB-081 completado — Sales Forecasting & Pipeline Review | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Identifiqué qué requiere tenant/licencia Dynamics 365 Sales | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 60:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 61:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 61: Dynamics 365 Customer Service Avanzado
+### Módulo 62: Dynamics 365 Customer Service Avanzado
 
 - [ ] **Conocimiento**: Distingo entitlement, SLA, queue y routing | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Documenté pausa, advertencia y escalamiento del SLA | Dominio: ___/5 | Fecha: ___
@@ -1135,11 +1145,11 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 - [ ] **Entrega**: LAB-082 completado — SLA + Entitlements + Routing | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Identifiqué evidencias que requieren ambiente Customer Service real | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 61:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 62:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 62: Dynamics 365 Contact Center / Omnichannel
+### Módulo 63: Dynamics 365 Contact Center / Omnichannel
 
 - [ ] **Conocimiento**: Explico la diferencia entre Customer Service y Contact Center/Omnichannel | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Diseñé un workstream con canal, cola, capacidad y routing | Dominio: ___/5 | Fecha: ___
@@ -1147,11 +1157,11 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 - [ ] **Entrega**: LAB-083 completado — Contact Center Simulation | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Identifiqué licencias/canales/tenant necesarios para probar Contact Center real | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 62:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 63:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 63: Customer Insights - Journeys
+### Módulo 64: Customer Insights - Journeys
 
 - [ ] **Conocimiento**: Distingo Customer Insights - Data de Customer Insights - Journeys | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Diseñé un real-time journey con trigger, condición, espera y objetivo | Dominio: ___/5 | Fecha: ___
@@ -1159,11 +1169,11 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 - [ ] **Entrega**: LAB-084 completado — Customer Insights Real-Time Journey | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Identifiqué pruebas negativas y requisitos de tenant/licencia | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 63:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 64:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 64: Integración CE + Finance & Operations
+### Módulo 65: Integración CE + Finance & Operations
 
 - [ ] **Conocimiento**: Explico dual-write, DMF, virtual tables e integración custom | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Construí una matriz de ownership CE + F&O para 5 entidades | Dominio: ___/5 | Fecha: ___
@@ -1171,11 +1181,11 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 - [ ] **Entrega**: LAB-088 completado — Dual-write Ownership Matrix | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Identifiqué dependencias de ambiente real para dual-write | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 64:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 65:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 65: Capstone Enterprise D365
+### Módulo 66: Capstone Enterprise D365
 
 - [ ] **Entrega**: Diseñé un flujo end-to-end con producto responsable por paso | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: Construí matrices Fit-Gap y ownership de datos | Dominio: ___/5 | Fecha: ___
@@ -1183,13 +1193,13 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 - [ ] **Entrega**: LAB-090 completado — Capstone Enterprise D365 | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: Preparé evidencias defendibles en entrevista | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 65:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 66:** ___/5 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
 ### 🏆 Hitos de Nivel Dynamics 365 Especialización
 
-- [ ] Módulos 56-65 completados con 80%+ de checkboxes marcados | Fecha: ___
+- [ ] Módulos 57-66 completados con 80%+ de checkboxes marcados | Fecha: ___
 - [ ] D365 Tenant Readiness completado para cada lab presentado como Sandbox real o Productivo controlado | Fecha: ___
 - [ ] Autoevaluación promedio ≥ 4.0/5 | Promedio: ___/5
 - [ ] Certificado del Nivel Dynamics 365 Especialización generado | Fecha: ___
@@ -1221,109 +1231,109 @@ Este checklist complementa los criterios modulares anteriores y no aumenta el co
 
 > Especialización transversal. Estos criterios validan capacidad profesional simulada o en sandbox; no equivalen por sí solos a experiencia productiva.
 
-### Módulo 66: Fundamentos de RPA y Selección de Procesos
+### Módulo 67: Fundamentos de RPA y Selección de Procesos
 
 - [ ] **Conocimiento**: Puedo decidir cuándo no usar RPA y defender una alternativa API, conector, cloud flow, desarrollo o proceso manual mejorado | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Construí una matriz de viabilidad RPA con riesgo, beneficio, deuda operativa y estabilidad de interfaz | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-104 o evidencia equivalente con AS-IS, TO-BE y ADR breve | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 66:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 67:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 67: Entorno, Instalación y Arquitectura PAD
+### Módulo 68: Entorno, Instalación y Arquitectura PAD
 
 - [ ] **Conocimiento**: Diferencio máquina registrada, conexión de máquina, grupo, usuario, cuenta de servicio, sesión attended y unattended | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Preparé machine readiness checklist con licencia, runtime, permisos, sesión, resolución y aplicaciones | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: Evidencia de configuración real o simulación marcada sin afirmar validación unattended | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 67:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 68:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 68: Construcción Mantenible de Desktop Flows
+### Módulo 69: Construcción Mantenible de Desktop Flows
 
 - [ ] **Conocimiento**: Explico el patrón inicialización, configuración, ejecución, errores, cierre y logging | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Diseñé desktop flow modular con inputs, outputs, subflows y nombres mantenibles | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-104 completado con log y reflexión de mantenibilidad | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 68:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 69:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 69: Archivos, CSV y Excel con PAD
+### Módulo 70: Archivos, CSV y Excel con PAD
 
 - [ ] **Conocimiento**: Explico cuándo Excel no debe usarse como base de datos | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Automatizo Excel sin dejar procesos abiertos y manejo archivos bloqueados | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-105 completado con reporte, errores, deduplicación y log | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 69:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 70:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 70: Automatización Web con PAD
+### Módulo 71: Automatización Web con PAD
 
 - [ ] **Conocimiento**: Diferencio automatización web por UI frente a llamada HTTP/API | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Manejo tablas, paginación, descargas, esperas, selectores y timeout | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-106 completado con evidencia anonimizada y decisión API vs RPA | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 70:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 71:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 71: Aplicaciones Windows y Legacy
+### Módulo 72: Aplicaciones Windows y Legacy
 
 - [ ] **Conocimiento**: Explico por qué coordenadas, OCR e imágenes son último recurso | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Automatizo ventana, selector, validación, modal inesperada y recuperación | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-107 completado con mapa de ventanas, log y justificación de fallback | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 71:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 72:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 72: Selectores, Sincronización y Resiliencia
+### Módulo 73: Selectores, Sincronización y Resiliencia
 
 - [ ] **Conocimiento**: Leo la anatomía de un selector y detecto atributos dinámicos | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Creo selectores alternativos, waits, timeouts, polling y validación de estado | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-108 o INC-RPA-001 completado con prueba de regresión | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 72:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 73:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 73: Errores, Logging e Idempotencia
+### Módulo 74: Errores, Logging e Idempotencia
 
 - [ ] **Conocimiento**: Explico por qué reintentar todo puede causar corrupción o duplicados | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Diseño checkpoints, estados, retry acotado, compensación y cierre seguro | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-109 o INC-RPA-004 completado con prueba de reejecución sin duplicados | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 73:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 74:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 74: Integración Cloud Flow + Desktop Flow
+### Módulo 75: Integración Cloud Flow + Desktop Flow
 
 - [ ] **Conocimiento**: Diferencio responsabilidades de cloud flow, desktop flow, cola/lote, máquina y estado | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Integro cloud y desktop con inputs, outputs, estado, notificación y error cruzado | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-110 completado con run history y diagrama end-to-end | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 74:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 75:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
-### Módulo 75: ALM, Operación, Gobierno y Soporte RPA
+### Módulo 76: ALM, Operación, Gobierno y Soporte RPA
 
 - [ ] **Conocimiento**: Explico solución, variables de entorno, connection references, DLP, owner, SLA y rollback para RPA | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Creo deployment checklist, rollback checklist, governance register y runbook | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-111 o LAB-112 completado con evidencias de operación y soporte | Dominio: ___/5 | Fecha: ___
 
-**Subtotal Módulo 75:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
+**Subtotal Módulo 76:** ___/3 checkboxes completados | % completado: ___ | Promedio dominio: ___/5
 
 ---
 
 ### 🏆 Hitos de Nivel RPA
 
-- [ ] Módulos 66-75 completados con evidencia | Fecha: ___
+- [ ] Módulos 67-76 completados con evidencia | Fecha: ___
 - [ ] Ocho labs RPA guiados completados o equivalentes documentados | Fecha: ___
 - [ ] Tres challenges RPA y ocho incidentes RPA intentados con evidencia | Fecha: ___
 - [ ] Capstone LAB-112 presentado con demo honesta y límites declarados | Fecha: ___
@@ -1342,10 +1352,10 @@ Este checklist complementa los criterios modulares anteriores y no aumenta el co
 | 🔵 Nivel 2 - Intermedio | 9 | 122 | ___ | ___% | ___/5 | ___ |
 | 🟠 Nivel 3 - Avanzado | 13 | 139 | ___ | ___% | ___/5 | ___ |
 | 🔴 Nivel 4 - Arquitecto | 11 | 104 | ___ | ___% | ___/5 | ___ |
-| 🟣 Nivel IA - Desarrollo Asistido | 14 | 64 | ___ | ___% | ___/5 | ___ |
+| 🟣 Nivel IA - Desarrollo Asistido | 15 | 67 | ___ | ___% | ___/5 | ___ |
 | 🔷 Nivel D365 - Dynamics 365 Especialización | 10 | 55 | ___ | ___% | ___/5 | ___ |
 | ⚙️ Nivel RPA - Power Automate Desktop & RPA | 10 | 30 | ___ | ___% | ___/5 | ___ |
-| **TOTAL** | **75** | **633** | ___ | ___% | ___/5 | ___ |
+| **TOTAL** | **76** | **636** | ___ | ___% | ___/5 | ___ |
 
 ### Resumen por Módulo
 

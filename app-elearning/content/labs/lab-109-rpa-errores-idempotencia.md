@@ -7,7 +7,7 @@ product: ["Power Automate Desktop", "Logging", "Idempotencia", "RPA"]
 certifications: ["Power Automate Desktop & RPA"]
 role: ["RPA Developer", "RPA Support Analyst", "Automation Engineer"]
 prerequisites:
-  - "Módulo 73 completado"
+  - "Módulo 74 completado"
   - "Conocimientos básicos de estados y claves únicas"
 files: []
 ---

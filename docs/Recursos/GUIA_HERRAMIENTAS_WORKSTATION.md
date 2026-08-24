@@ -244,7 +244,7 @@ admins y arquitectos.
 
 **Para qué**: automatización de escritorio (RPA) con desktop flows. Obligatorio solo para el perfil
 `rpa`; el detalle completo de instalación, runtime y arquitectura vive en el
-[Módulo 67 — Entorno, instalación y arquitectura PAD](/nivel/rpa/modulo/entorno-instalacion-arquitectura-pad)
+[Módulo 68 — Entorno, instalación y arquitectura PAD](/nivel/rpa/modulo/entorno-instalacion-arquitectura-pad)
 y en [`/recursos/rpa-recursos-practica`](/recursos/rpa-recursos-practica). Esta guía no lo repite
 aquí para evitar mantener el mismo contenido en dos lugares.
 

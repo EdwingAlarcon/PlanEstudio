@@ -7,7 +7,7 @@ product: ["Dynamics 365 Customer Service", "Dynamics 365 Contact Center", "Omnic
 certifications: ["Dynamics 365 Contact Center", "Dynamics 365 Customer Service"]
 role: ["Consultor Funcional D365 CE", "Contact Center Architect"]
 prerequisites:
-  - "Módulo 62 estudiado: Contact Center / Omnichannel"
+  - "Módulo 63 estudiado: Contact Center / Omnichannel"
   - "Lab 68 completado (recomendado): Customer Service case-to-resolution"
   - "Acceso a un ambiente trial/demo de Dynamics 365 Customer Service con Digital messaging/Omnichannel habilitado"
   - "Sin ese ambiente, la parte ejecutable de este lab no aplica — ver Alcance de este lab"

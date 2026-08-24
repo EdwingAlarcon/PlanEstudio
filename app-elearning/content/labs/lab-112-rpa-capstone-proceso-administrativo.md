@@ -7,7 +7,7 @@ product: ["Power Automate Desktop", "Power Automate Cloud", "Excel", "ALM", "RPA
 certifications: ["Power Automate Desktop & RPA"]
 role: ["RPA Developer", "Automation Engineer", "Automation Solution Architect"]
 prerequisites:
-  - "Módulos RPA 66-75 completados"
+  - "Módulos RPA 67-76 completados"
   - "Labs RPA principales completados o evidencias equivalentes"
 files: []
 ---

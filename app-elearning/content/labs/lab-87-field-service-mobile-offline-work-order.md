@@ -7,7 +7,7 @@ product: ["Dynamics 365 Field Service", "Field Service Mobile", "Dataverse"]
 certifications: ["Dynamics 365 Field Service", "Field Operations"]
 role: ["Field Service Consultant", "Solution Architect"]
 prerequisites:
-  - "Módulo 58 estudiado: Field Service End-to-End"
+  - "Módulo 59 estudiado: Field Service End-to-End"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
 ---
 

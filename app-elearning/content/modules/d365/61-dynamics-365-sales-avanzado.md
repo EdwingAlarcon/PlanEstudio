@@ -1,5 +1,5 @@
 ---
-moduleId: 60
+moduleId: 61
 title: "Dynamics 365 Sales Avanzado — Forecasting, Pipeline y Sales Operations"
 level: "d365"
 certification: "Dynamics 365 Sales / MB-280 (retira 31 jul 2026)"
@@ -14,7 +14,7 @@ Diseñar y operar un proceso avanzado de Dynamics 365 Sales que conecte lead-to-
 - **Pipeline review:** revisión periódica (semanal en la mayoría de equipos B2B) donde ventas y dirección inspeccionan oportunidades por etapa, fecha estimada de cierre, valor, riesgo, next step y cambios desde la revisión anterior. Una oportunidad que no cambió nada en 2 semanas es una señal de riesgo, no de estabilidad.
 - **Forecasting — mecánica real:** Dynamics 365 Sales proyecta ingresos por jerarquía de vendedores/managers, periodo (mes/trimestre) y forecast category, con una grilla editable donde cada nivel de la jerarquía ve el rollup del nivel inferior. Requiere licencia/ambiente de Dynamics 365 Sales y configuración real de la definición de forecast (recurrencia, categorías incluidas, plantilla); en este curso puedes diseñar la estructura completa con datos simulados, pero validar visualmente el rollup jerárquico requiere tenant.
 - **Forecast categories — con criterio de asignación:** `Pipeline` (oportunidad abierta sin compromiso), `Best Case` (probable pero no confirmado), `Committed` (el vendedor lo compromete con dirección), `Omitted` (excluido intencionalmente del forecast) y `Won`/`Lost`. La categoría NO se deriva automáticamente del stage — un vendedor puede tener una oportunidad en etapa "Negociación" y aun así marcarla `Best Case` si el cliente no ha confirmado presupuesto.
-- **Product catalog:** productos, price lists (una por región/segmento/moneda), unit groups (unidad base y conversiones) y discount lists (por volumen o por cliente). Si el proceso termina en F&O (Módulo 59/64), Sales no debe reinventar impuestos, disponibilidad real de inventario ni facturación fiscal — el price list de Sales es comercial, no fiscal.
+- **Product catalog:** productos, price lists (una por región/segmento/moneda), unit groups (unidad base y conversiones) y discount lists (por volumen o por cliente). Si el proceso termina en F&O (Módulo 60/64), Sales no debe reinventar impuestos, disponibilidad real de inventario ni facturación fiscal — el price list de Sales es comercial, no fiscal.
 - **Sales accelerator y señales:** secuencias (pasos sugeridos de seguimiento), prioridad calculada y actividades guiadas pueden mejorar la ejecución comercial del día a día, pero dependen de licencia Premium/Insights y de configuración habilitada — no vienen activas por defecto.
 - **Territories y ownership:** territorios geográficos o por segmento, equipos de venta y reglas de asignación reducen conflictos de ownership cuando dos vendedores atienden la misma cuenta. En proyectos enterprise se documentan ANTES de migrar oportunidades históricas, no después de la primera disputa de comisión.
 - **Integración con Outlook/Teams:** mejora adopción (el vendedor registra actividad sin salir de su bandeja), pero no corrige mala calidad de pipeline; primero se definen etapas, campos obligatorios y cadencia de revisión, luego se activa la integración.
@@ -22,7 +22,7 @@ Diseñar y operar un proceso avanzado de Dynamics 365 Sales que conecte lead-to-
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 1. Define un proceso de pipeline con 5 etapas: Calificación, Descubrimiento, Propuesta, Negociación y Cierre. Para cada etapa escribe entrada, salida, campos obligatorios y criterio para avanzar.
-2. Construye esta matriz de forecast (puedes usar Excel si no tienes tenant) para 3 vendedores del escenario de SIT (Servicios Integrados Tecnológicos S.A., el mismo caso del Módulo 59 y el Lab 66):
+2. Construye esta matriz de forecast (puedes usar Excel si no tienes tenant) para 3 vendedores del escenario de SIT (Servicios Integrados Tecnológicos S.A., el mismo caso del Módulo 60 y el Lab 66):
 
    | Vendedor | Territorio | Cuota trimestre | Pipeline | Best Case | Committed | Won | Gap vs. cuota |
    |---|---|---|---|---|---|---|---|
@@ -42,7 +42,7 @@ Una empresa B2B reportaba forecast con hojas de cálculo desconectadas de Dynami
 ### ✅ Buenas Prácticas
 - Separar stage operativo de forecast category: una oportunidad en Negociación no siempre está Committed — son dos preguntas distintas ("¿en qué paso del proceso está?" vs. "¿qué tan seguro está el vendedor?").
 - Definir forecast por periodo y jerarquía antes de construir dashboards ejecutivos sobre esos datos.
-- Mantener productos y listas de precios simples si F&O será el sistema de cumplimiento/facturación — evitar duplicar lógica fiscal en Sales (ver Módulo 59).
+- Mantener productos y listas de precios simples si F&O será el sistema de cumplimiento/facturación — evitar duplicar lógica fiscal en Sales (ver Módulo 60).
 - Documentar reglas de ownership, territorio y reasignación antes de migrar oportunidades históricas a una nueva estructura de territorios.
 - Indicar en el diseño qué capacidades requieren licencia Dynamics 365 Sales Premium (Sales Accelerator, Insights) y cuáles pueden simularse para práctica sin tenant.
 
@@ -51,7 +51,7 @@ Una empresa B2B reportaba forecast con hojas de cálculo desconectadas de Dynami
 |-------|-------|----------|
 | Usar probabilidad de etapa como forecast real | Se confunde avance de etapa con compromiso comercial | Usar forecast categories explícitas y revisión semanal en pipeline review |
 | Forecast sin jerarquía comercial | No se modelaron managers/equipos antes de activar forecast | Definir jerarquía y cuotas antes de activar la definición de forecast |
-| Catálogo de productos duplicando lógica de F&O | Ventas intenta resolver impuestos o disponibilidad real de inventario | Dejar precio comercial en Sales y cumplimiento/factura en F&O (Módulo 64) |
+| Catálogo de productos duplicando lógica de F&O | Ventas intenta resolver impuestos o disponibilidad real de inventario | Dejar precio comercial en Sales y cumplimiento/factura en F&O (Módulo 65) |
 | Pipeline con fechas de cierre vencidas sin revisión | No existe política de higiene de pipeline | Dashboard de aging y regla de revisión obligatoria por oportunidad vencida |
 
 ### 🧪 Criterios de Validación

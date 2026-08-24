@@ -80,9 +80,9 @@ requieren tenant/licencia real se controlan con el recurso
 |---|---|---|---|---|
 | Procesos comerciales (lead-to-cash) | Intermedio-Avanzado | BPF configurado con campos requeridos por etapa, Quote→Order con Price List Item | Módulo 20, LAB-066 | La oportunidad no avanza de etapa sin campos obligatorios; el monto de Quote y Order coincide |
 | Customer Service (case-to-resolution, SLA, escalamiento, dashboard) | Avanzado | Cola configurada + SLA con pausa/reanudación + escalamiento automático + dashboard con FRT/Resolution Time/SLA Success Rate/Backlog/CSAT | Módulo 20, LAB-068 | El caso llega a la cola correcta, el SLA se pausa en espera del cliente y escala automáticamente al superar el KPI |
-| Customer Insights - Journeys (segmentación, consentimiento, real-time journeys) | Avanzado | Journey documentado con trigger, consentimiento, canal, salida y métricas | Módulo 63, LAB-084 | El journey respeta consentimiento, evita envíos duplicados y tiene criterio de salida claro |
-| Customer Insights - Data (unificación de perfiles, medidas, activación) | Avanzado | Regla de matching aplicada a datos de prueba + medidas con fórmula documentada | Módulo 57, LAB-085, LAB-067 | La regla de matching unifica correctamente al cliente sin email por teléfono/nombre |
-| Field Service (work orders, agreements, mobile offline, scheduling) | Avanzado | Work order end-to-end + agreement preventivo + matriz mobile offline | Módulo 58, LAB-086, LAB-087 | El ciclo de orden de trabajo, mantenimiento preventivo y offline profile quedan validados o simulados con evidencia |
+| Customer Insights - Journeys (segmentación, consentimiento, real-time journeys) | Avanzado | Journey documentado con trigger, consentimiento, canal, salida y métricas | Módulo 64, LAB-084 | El journey respeta consentimiento, evita envíos duplicados y tiene criterio de salida claro |
+| Customer Insights - Data (unificación de perfiles, medidas, activación) | Avanzado | Regla de matching aplicada a datos de prueba + medidas con fórmula documentada | Módulo 58, LAB-085, LAB-067 | La regla de matching unifica correctamente al cliente sin email por teléfono/nombre |
+| Field Service (work orders, agreements, mobile offline, scheduling) | Avanzado | Work order end-to-end + agreement preventivo + matriz mobile offline | Módulo 59, LAB-086, LAB-087 | El ciclo de orden de trabajo, mantenimiento preventivo y offline profile quedan validados o simulados con evidencia |
 | Integración con Dataverse (datos compartidos entre apps) | Avanzado | Diagrama de flujo de datos entre Sales/Service/Insights | LAB-060 | Sin duplicación de entidades cliente entre apps |
 | UAT y go-live de un escenario CE completo | Avanzado | 8 casos UAT + checklist de go-live | LAB-060 | 100% de casos ejecutados, checklist sin pendientes críticos |
 | Caso funcional integrado multi-proceso (admisión, servicio, retención, cobranza) | Avanzado | Backlog Azure DevOps + modelo de datos + diseño de servicio + Power Automate + matriz de trazabilidad requerimiento→historia→configuración→prueba | LAB-101 (JR-013) | Los 4 procesos quedan conectados en un solo caso con 10 casos UAT y ≥3 defectos registrados |
@@ -91,7 +91,7 @@ requieren tenant/licencia real se controlan con el recurso
 
 *ERP conceptual, integración y — desde LAB-093 a LAB-097 — configuración práctica en tenant real.*
 Ruta: Consultor Funcional → Finance & Operations → Solution Architect.
-Estado de la ruta: **awareness avanzado + práctica hands-on con trial tenant** — los Módulos 59/64
+Estado de la ruta: **awareness avanzado + práctica hands-on con trial tenant** — los Módulos 60/64
 cubren vocabulario, mapas de proceso, ownership de datos e integración CE + F&O. Los
 LAB-069/LAB-070/LAB-088/LAB-089 producen evidencia de arquitectura; LAB-093 a LAB-097 llevan al
 estudiante a configurar Finance/SCM/Project Operations paso a paso en un ambiente trial/demo real.
@@ -101,8 +101,8 @@ escribirse — ver la nota de verificación en cada lab.
 | Competencia | Nivel | Evidencia esperada | Lab / proyecto | Criterio de aprobación |
 |---|---|---|---|---|
 | Diferenciación CE vs. F&O (cuándo aplica cada uno) | Conceptual | Tabla de decisión por escenario de negocio | Módulo 20 (compartido) | Justifica la elección para 3 escenarios sin genéricos ("depende") |
-| Mapeo de procesos ERP estándar (O2C, P2P, R2R, I2D, Project-to-Profit) | Conceptual-Avanzado | Mapa de proceso paso a paso con actores y sistema responsable | Módulo 59, LAB-069 | Documenta los 5 procesos con pasos reales, no solo el nombre del proceso |
-| Dual-write vs. DMF vs. virtual tables (diseño técnico) | Avanzado | Matriz de ownership de datos y diagrama Mermaid de integración | Módulo 59, LAB-070 | Justifica el patrón técnico por entidad y resuelve conflictos de sincronización |
+| Mapeo de procesos ERP estándar (O2C, P2P, R2R, I2D, Project-to-Profit) | Conceptual-Avanzado | Mapa de proceso paso a paso con actores y sistema responsable | Módulo 60, LAB-069 | Documenta los 5 procesos con pasos reales, no solo el nombre del proceso |
+| Dual-write vs. DMF vs. virtual tables (diseño técnico) | Avanzado | Matriz de ownership de datos y diagrama Mermaid de integración | Módulo 60, LAB-070 | Justifica el patrón técnico por entidad y resuelve conflictos de sincronización |
 | Data Management Framework conceptual | Conceptual | Explicación de un escenario de importación masiva con manejo de errores | LAB-064 (Capstone F&O Awareness) | Propone estrategia de reintentos y validación previa a carga |
 | Mapa de integración ERP + CRM | Conceptual-Avanzado | Diagrama de arquitectura con puntos de fallo señalados | LAB-070, LAB-064 (Capstone F&O Awareness) | Señala ≥2 puntos de fallo y su mitigación |
 | Límites de Power Platform frente a ERP | Conceptual | Lista de "esto no lo resuelve Power Platform solo" con justificación | Módulo 18/34 | Identifica correctamente ≥3 límites reales (no genéricos) |

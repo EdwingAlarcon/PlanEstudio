@@ -7,7 +7,7 @@ product: ["Power Automate Desktop", "UI Elements", "Selectors", "RPA"]
 certifications: ["Power Automate Desktop & RPA"]
 role: ["RPA Developer", "RPA Support Analyst", "Automation Engineer"]
 prerequisites:
-  - "Módulo 72 completado"
+  - "Módulo 73 completado"
   - "LAB-RPA-03 o LAB-RPA-04 recomendado"
 files: []
 ---

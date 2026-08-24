@@ -81,7 +81,7 @@ El dispatcher debe asignar técnico según:
 
 Documenta por qué técnico asignarías a cada caso de prueba.
 
-### Paso 3b — Configurar Incident Type y Schedule Board (Módulo 58)
+### Paso 3b — Configurar Incident Type y Schedule Board (Módulo 59)
 
 Para cada uno de los 3 casos de datos de prueba, define su **Incident Type** con:
 
@@ -161,7 +161,7 @@ Agrega una regla para clientes premium: si la prioridad es crítica y la garant�
 
 - Módulo 20 — Dynamics 365 CE — Sales y Customer Service
 - Módulo 38 — Liderazgo Técnico y Gestión de Proyectos
-- Módulo 58 — Field Service Avanzado: Scheduling, Recursos e Incident Types
+- Módulo 59 — Field Service Avanzado: Scheduling, Recursos e Incident Types
 - Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)
 
 ## Competencias desarrolladas

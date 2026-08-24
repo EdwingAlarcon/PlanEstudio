@@ -7,7 +7,7 @@ product: ["Dynamics 365 Finance", "Dynamics 365 Supply Chain Management", "Datav
 certifications: ["Arquitectura Power Platform"]
 role: ["Solution Architect"]
 prerequisites:
-  - "Módulo 59 estudiado: Finance & Operations — Procesos ERP, Virtual Tables y Vocabulario Estándar"
+  - "Módulo 60 estudiado: Finance & Operations — Procesos ERP, Virtual Tables y Vocabulario Estándar"
   - "Módulo 34 revisado: Arquitectura de Datos e Integración"
   - "Lab 69 completado: F&O Process Mapping — Procesos ERP End-to-End (recomendado)"
 ---
@@ -49,7 +49,7 @@ implemente dual-write.
 
 ## Prerrequisitos
 
-- Haber estudiado el Módulo 59 (dual-write, DMF, virtual tables) y el Módulo 34 (integración).
+- Haber estudiado el Módulo 60 (dual-write, DMF, virtual tables) y el Módulo 34 (integración).
 - Haber completado o revisado el Lab 69 (mapas de proceso O2C/P2P/R2R/I2D/Project-to-Profit).
 
 ## Herramientas necesarias
@@ -82,7 +82,7 @@ Para cada una de las 4 entidades, documenta:
 - Sistema **fuente de verdad** (quién puede crear/editar el dato originalmente).
 - **Dirección** de sincronización (F&O → Dataverse, Dataverse → F&O, o bidireccional).
 - **Patrón técnico** elegido (dual-write, DMF o virtual table) con justificación usando el
-  criterio de decisión del Módulo 59.
+  criterio de decisión del Módulo 60.
 
 ### Paso 3 — Diseño de dual-write para Cuentas/Clientes y Pedidos
 
@@ -173,7 +173,7 @@ Aprobación: mínimo 65/100 y ningún criterio en nivel 0. Nivel profesional/exc
 
 ## Módulos relacionados
 
-- Módulo 59 — Finance & Operations: Procesos ERP, Virtual Tables y Vocabulario Estándar
+- Módulo 60 — Finance & Operations: Procesos ERP, Virtual Tables y Vocabulario Estándar
 - Módulo 34 — Arquitectura de Datos e Integración
 - Lab 69 — F&O Process Mapping: Procesos ERP End-to-End
 - Lab 64 — Capstone Finance & Operations Awareness: Arquitectura Conceptual ERP + CRM

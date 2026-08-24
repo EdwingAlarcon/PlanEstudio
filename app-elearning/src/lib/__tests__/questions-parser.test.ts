@@ -80,10 +80,10 @@ describe("getAllQuestions — bank integrity", () => {
     });
   });
 
-  it("moduleId values are between 1 and 75", () => {
+  it("moduleId values are between 1 and 76", () => {
     all.forEach((q) => {
       expect(q.moduleId, `${q.id}: moduleId out of range`).toBeGreaterThanOrEqual(1);
-      expect(q.moduleId, `${q.id}: moduleId out of range`).toBeLessThanOrEqual(75);
+      expect(q.moduleId, `${q.id}: moduleId out of range`).toBeLessThanOrEqual(76);
     });
   });
 
@@ -180,9 +180,16 @@ describe("getQuestionsForLevel", () => {
 
 // ─── getCaseDiagnosisForModule ────────────────────────────────────────────────
 
+// Módulo 56 ("Fundamentos de JavaScript para Power Platform") has no case-diagnosis pilot —
+// only the original 75 modules (now spread across ids 1-55 and 57-76 after the 2026-08-23
+// renumber that opened room for module 56) do.
+const CASE_DIAGNOSIS_PILOT_MODULE_IDS = Array.from({ length: 76 }, (_, index) => index + 1).filter(
+  (id) => id !== 56,
+);
+
 describe("getCaseDiagnosisForModule", () => {
   it("returns case-diagnosis questions for pilot modules", () => {
-    Array.from({ length: 75 }, (_, index) => index + 1).forEach((moduleId) => {
+    CASE_DIAGNOSIS_PILOT_MODULE_IDS.forEach((moduleId) => {
       const qs = getCaseDiagnosisForModule(moduleId);
       expect(qs.length, `Módulo ${moduleId} sin preguntas de caso`).toBeGreaterThan(0);
       qs.forEach((q) => {
@@ -197,7 +204,7 @@ describe("getCaseDiagnosisForModule", () => {
   });
 
   it("case-diagnosis questions never appear in getQuestionsForModule", () => {
-    Array.from({ length: 75 }, (_, index) => index + 1).forEach((moduleId) => {
+    Array.from({ length: 76 }, (_, index) => index + 1).forEach((moduleId) => {
       const quizQuestions = getQuestionsForModule(moduleId);
       expect(quizQuestions.every((q) => q.appliesTo !== "caso")).toBe(true);
     });

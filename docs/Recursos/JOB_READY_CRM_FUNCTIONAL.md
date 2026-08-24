@@ -50,8 +50,8 @@ Esta ruta debe evitar prácticas legacy como centro del aprendizaje. El enfoque 
 | Entitlements | Cubierto | Módulo 20, LAB-068, LAB-077 | Política de cobertura por cliente evaluada en JR-007 | Profundizar reglas de vigencia y renovación |
 | Knowledge base | Cubierto | Módulos 20, 22; LAB-068, LAB-077 | Artículos y búsqueda evaluados en JR-007 | Profundizar métricas de uso de KB |
 | Dynamics 365 Sales | Cubierto | Módulos 20, 56, 60; LAB-066, LAB-081 | Lead-to-cash, forecasting y pipeline review | Mantener como evidencia CE avanzada |
-| Customer Insights / Customer 360 | Cubierto | Módulos 57, 63; LAB-084, LAB-085, LAB-067 | Perfil unificado, consentimiento y real-time journey | Mantener como ruta específica Customer Insights |
-| Field Service awareness | Cubierto | Módulo 58; LAB-086, LAB-087, LAB-059 | Work order, agreement preventivo, mobile offline y UAT | Mantener como ruta específica Field Service |
+| Customer Insights / Customer 360 | Cubierto | Módulos 58, 63; LAB-084, LAB-085, LAB-067 | Perfil unificado, consentimiento y real-time journey | Mantener como ruta específica Customer Insights |
+| Field Service awareness | Cubierto | Módulo 59; LAB-086, LAB-087, LAB-059 | Work order, agreement preventivo, mobile offline y UAT | Mantener como ruta específica Field Service |
 | Reporting y dashboards | Parcial | Módulos 6, 12, 20; LAB-068 | Dashboard operativo | Falta escenario funcional más fuerte (reporting profundo con Data Lake/Power BI sigue en roadmap) |
 | Fit-gap | Cubierto | Módulos 20, 38, 55; LAB-057, LAB-062, LAB-101 | Matriz fit-gap | Conectar con entrevista funcional |
 | Backlog funcional en Azure DevOps (historias + criterios de aceptación) | Cubierto | LAB-101 (JR-013) | Backlog Epics/Features/Historias con criterios de aceptación priorizado | Ninguna crítica |
@@ -79,13 +79,13 @@ Esta ruta debe evitar prácticas legacy como centro del aprendizaje. El enfoque 
 | Módulo 20 - Dynamics 365 CE Sales y Customer Service | Core funcional CE | Sales, Customer Service, casos, colas, SLAs |
 | Módulo 38 - Liderazgo Técnico y Gestión de Proyectos | Consultoría y stakeholders | Backlog, gestión de cambios, training |
 | Módulo 55 - IA para Consultoría Funcional D365 | Fit-gap y análisis asistido | Documento de diseño y matriz de seguridad |
-| Módulo 56 - Dynamics 365 CE Avanzado | Visión CE | Mapa funcional de apps CE |
-| Módulo 57 - Customer Insights Data | Customer 360 | Perfil unificado, matching y medidas |
-| Módulo 58 - Field Service | Servicio en campo | Work order, scheduling y UAT |
-| Módulo 60 - Sales Avanzado | Ventas enterprise | Forecasting, territories, pipeline review |
-| Módulo 61 - Customer Service Avanzado | Servicio enterprise | SLA, entitlements, routing y métricas |
-| Módulo 62 - Contact Center / Omnichannel | Operación omnicanal | Unified Routing, canales y supervisión |
-| Módulo 63 - Customer Insights Journeys | Marketing en tiempo real | Journey con consentimiento, trigger y analítica |
+| Módulo 57 - Dynamics 365 CE Avanzado | Visión CE | Mapa funcional de apps CE |
+| Módulo 58 - Customer Insights Data | Customer 360 | Perfil unificado, matching y medidas |
+| Módulo 59 - Field Service | Servicio en campo | Work order, scheduling y UAT |
+| Módulo 61 - Sales Avanzado | Ventas enterprise | Forecasting, territories, pipeline review |
+| Módulo 62 - Customer Service Avanzado | Servicio enterprise | SLA, entitlements, routing y métricas |
+| Módulo 63 - Contact Center / Omnichannel | Operación omnicanal | Unified Routing, canales y supervisión |
+| Módulo 64 - Customer Insights Journeys | Marketing en tiempo real | Journey con consentimiento, trigger y analítica |
 | LAB-057 | Diseño D365 Sales | Fit-gap Sales y entidades estándar |
 | LAB-059 | Field Service | Work order y validación funcional |
 | LAB-066 | Sales lead-to-cash | Proceso comercial end-to-end |

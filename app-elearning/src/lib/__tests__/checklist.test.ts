@@ -75,7 +75,7 @@ describe("summarizeChecklistProgress", () => {
 
 describe("validateChecklistData", () => {
   it("accepts a checklist with all expected modules and valid categories", () => {
-    const modules = Array.from({ length: 75 }, (_, index) => {
+    const modules = Array.from({ length: 76 }, (_, index) => {
       const moduleId = index + 1;
       return `### Módulo ${moduleId}: Módulo ${moduleId}
 
@@ -96,13 +96,13 @@ ${modules.slice(17, 30).join("\n")}
 ${modules.slice(30, 41).join("\n")}
 ## NIVEL 5: IA
 
-${modules.slice(41, 55).join("\n")}
+${modules.slice(41, 56).join("\n")}
 ## NIVEL 6: D365
 
-${modules.slice(55, 65).join("\n")}
+${modules.slice(56, 66).join("\n")}
 ## NIVEL 7: RPA
 
-${modules.slice(65).join("\n")}`;
+${modules.slice(66).join("\n")}`;
 
     expect(() => validateChecklistData(parseChecklistMarkdown(markdown))).not.toThrow();
   });
@@ -156,7 +156,7 @@ ${modules.slice(65).join("\n")}`;
   });
 
   it("throws a clear error when a criterion category is invalid", () => {
-    const modules = Array.from({ length: 75 }, (_, index) => {
+    const modules = Array.from({ length: 76 }, (_, index) => {
       const moduleId = index + 1;
       const category = moduleId === 1 ? "Otro" : "Conocimiento";
       return `### Módulo ${moduleId}: Módulo ${moduleId}
@@ -178,13 +178,13 @@ ${modules.slice(17, 30).join("\n")}
 ${modules.slice(30, 41).join("\n")}
 ## NIVEL 5: IA
 
-${modules.slice(41, 55).join("\n")}
+${modules.slice(41, 56).join("\n")}
 ## NIVEL 6: D365
 
-${modules.slice(55, 65).join("\n")}
+${modules.slice(56, 66).join("\n")}
 ## NIVEL 7: RPA
 
-${modules.slice(65).join("\n")}`;
+${modules.slice(66).join("\n")}`;
 
     expect(() => validateChecklistData(parseChecklistMarkdown(markdown))).toThrow(
       /Categoría de checklist inválida/i,
@@ -214,11 +214,11 @@ ${modules.slice(22).join("\n")}`;
     );
   });
 
-  // Helper that builds a complete, valid 75-module checklist (one criterion
+  // Helper that builds a complete, valid 76-module checklist (one criterion
   // per module) so individual violation tests can tweak a single module
   // without also tripping the "missing levels/modules" checks first.
   function buildFullChecklistMarkdown(): string[] {
-    return Array.from({ length: 75 }, (_, index) => {
+    return Array.from({ length: 76 }, (_, index) => {
       const moduleId = index + 1;
       return `### Módulo ${moduleId}: Módulo ${moduleId}
 
@@ -242,13 +242,13 @@ ${modules.slice(17, 30).join("\n")}
 ${modules.slice(30, 41).join("\n")}
 ## NIVEL 5: IA
 
-${modules.slice(41, 55).join("\n")}
+${modules.slice(41, 56).join("\n")}
 ## NIVEL 6: D365
 
-${modules.slice(55, 65).join("\n")}
+${modules.slice(56, 66).join("\n")}
 ## NIVEL 7: RPA
 
-${modules.slice(65).join("\n")}`;
+${modules.slice(66).join("\n")}`;
   }
 
   it("throws a clear error when a module id is duplicated across levels", () => {

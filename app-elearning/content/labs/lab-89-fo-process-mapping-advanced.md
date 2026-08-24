@@ -7,7 +7,7 @@ product: ["Dynamics 365 Finance", "Dynamics 365 Supply Chain Management", "Datav
 certifications: ["Finance & Operations awareness"]
 role: ["Solution Architect", "Consultor Funcional"]
 prerequisites:
-  - "Módulo 59 estudiado: F&O Awareness"
+  - "Módulo 60 estudiado: F&O Awareness"
 ---
 
 # Lab 89 — F&O Process Mapping Advanced

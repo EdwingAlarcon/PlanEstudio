@@ -14,7 +14,9 @@ test.describe("Interactive Practice Engine", () => {
   test("catalogo, filtros y busqueda global exponen practicas interactivas", async ({ page }) => {
     await page.goto("/practica");
     await expect(page.getByRole("heading", { name: "Práctica interactiva" })).toBeVisible();
-    await expect(page.getByText("0/15")).toBeVisible();
+    // Scoped to #main-content: the sidebar's Nivel IA progress badge also reads "0/15"
+    // now that IA has 15 modules, coincidentally matching the interactive-practices total.
+    await expect(page.locator("#main-content").getByText("0/15")).toBeVisible();
     await expect(page.locator("select").nth(0)).toBeEnabled();
     await page.locator("select").nth(1).selectOption("query-playground");
     await expect(page.locator("#exercise-heading")).toContainText("FetchXML básico");

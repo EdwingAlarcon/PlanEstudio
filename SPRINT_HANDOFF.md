@@ -4,6 +4,56 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
+## Estado al 2026-08-23 (Módulo 56 — Fundamentos de JavaScript para Power Platform)
+
+**Contexto**: gap pedagógico declarado desde la auditoría del 2026-08-22 (ver sección de abajo) —
+Módulo 13 (JavaScript y PCF Básico) exige programación que el plan nunca enseña desde cero. Se
+cerró creando un módulo nuevo de fundamentos JS sin asumir experiencia previa.
+
+**Hecho y ya en remoto:**
+- Módulo nuevo `app-elearning/content/modules/ia/56-fundamentos-javascript-para-power-platform.md`
+  (variables, funciones, objetos, arrays, callbacks, promesas — ejemplos ejecutables en la consola
+  del navegador). Módulo 13 enlaza a él explícitamente en su caja "Antes de comenzar" en vez de
+  bloquear el acceso.
+- **Hallazgo de arquitectura real, no cosmético**: `LEVEL_MODULE_RANGE` (`i18n.ts`) no es solo
+  documentación — `progress.ts`, `quiz-engine.ts` y `questions-parser.ts` asumen rangos por nivel
+  disjuntos y contiguos (los 7 niveles empaquetan moduleId 1-75 sin huecos). Ensanchar el rango de
+  `ia` para incluir un id al final (76) sin abrir hueco real pisaba por completo los rangos de
+  `d365`/`rpa`, confirmado con tests fallando (conteo total inflado a 96 en vez de 76, banco de
+  preguntas de `ia` incluyendo por error preguntas de d365/rpa). Ver el comentario largo en
+  `CLAUDE.md` junto a "Fixed learning content counts" para el detalle completo — no lo dupliques
+  aquí, solo el resumen: se decidió renumerar `d365` (56-65→57-66) y `rpa` (66-75→67-76) en +1 para
+  abrir hueco real al final de `ia` (ahora 42-56), en vez de forzar el módulo nuevo bajo un nivel que
+  no le corresponde semánticamente.
+- La renumeración tocó: 20 archivos de contenido de módulo (rename + frontmatter), 20 claves del
+  banco de preguntas (`evaluaciones-simulador.js`, vía script en el scratchpad de esta sesión, no a
+  mano), encabezados y subtotales del checklist (`docs/Recursos/CHECKLIST_PROGRESO.md`), y **~106
+  referencias cruzadas** ("Módulo 59 estudiado", "ver Módulo 62", rangos "56-65"/"66-75", etc.) en
+  labs (`app-elearning/content/labs/`), módulos d365 y siete archivos de `docs/Recursos/`
+  (`CERTIFICACIONES.md`, `GUIA_HERRAMIENTAS_WORKSTATION.md`, `JOB_READY_CRM_FUNCTIONAL.md`,
+  `MATRIZ_COMPETENCIAS.md`, `MATRIZ_SKILLS_LABORALES.md`, `ROADMAP_ESPECIALIZACION_AVANZADA.md`,
+  `RUBRICAS_PLANTILLAS_EVALUACION.md`), hecha con `sed` de límite de palabra en orden descendente
+  (75→76 primero) para evitar doble desplazamiento.
+- Conteos actualizados en `CLAUDE.md`: **76 módulos, 891 preguntas totales (516 quiz + 375 caso), 636
+  criterios de checklist**, `ia` ahora 15 módulos.
+- Tests que hardcodeaban el conteo viejo, corregidos: `progress.test.ts` (`getOverallProgress` total
+  75→76), `questions-parser.test.ts` (rango 1-76, y el loop de `getCaseDiagnosisForModule` ahora
+  excluye explícitamente el id 56 — el único módulo sin preguntas de caso piloto), `checklist.test.ts`
+  (tres fixtures sintéticos de 75→76 módulos con los nuevos límites de slice por nivel),
+  `certificate-client.test.tsx` y `e2e/smoke.spec.ts` (nivel IA completo ahora exige 15 módulos, no
+  14), `e2e/interactive-practices.spec.ts` (colisión real de `getByText("0/15")`: el badge de
+  progreso del sidebar para Nivel IA ahora coincide numéricamente con el total de prácticas
+  interactivas — se acotó el locator a `#main-content`).
+- Validado antes de pushear: `npm run lint`, `npx tsc --noEmit`, `npm run validate:content` (76
+  módulos, 891 preguntas, 636 criterios), `npx vitest run` 415/415, `npm run build` (exporta
+  `/nivel/ia/modulo/fundamentos-javascript-para-power-platform` y las 76 rutas de módulo), `npm run
+  e2e` 68/68.
+
+**Pendiente al retomar**: ninguna acción manual pendiente de este sprint. Si se agrega otro módulo a
+futuro a un nivel que NO es el último de `LEVEL_ORDER` (`["basico","intermedio","avanzado",
+"arquitecto","ia","d365","rpa"]`), esperar el mismo problema de rango disjunto — leer primero el
+comentario en `CLAUDE.md` antes de repetir la investigación desde cero.
+
 ## Estado al 2026-08-22 noche (fix de infra Vercel — dominio planestudio.vercel.app roto)
 
 **Contexto**: el usuario reportó que `planestudio.vercel.app` no reflejaba los últimos cambios

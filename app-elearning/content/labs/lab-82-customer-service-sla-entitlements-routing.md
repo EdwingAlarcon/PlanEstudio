@@ -7,7 +7,7 @@ product: ["Dynamics 365 Customer Service", "Dataverse"]
 certifications: ["Dynamics 365 Customer Service"]
 role: ["Consultor Funcional D365 CE", "Customer Service Lead"]
 prerequisites:
-  - "Módulo 61 estudiado: Customer Service Avanzado"
+  - "Módulo 62 estudiado: Customer Service Avanzado"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
 ---
 

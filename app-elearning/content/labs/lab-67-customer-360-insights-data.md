@@ -7,7 +7,7 @@ product: ["Customer Insights", "Dataverse"]
 certifications: ["Customer Insights"]
 role: ["Functional Consultant", "Solution Architect", "Data Specialist"]
 prerequisites:
-  - "Módulo 57 estudiado: Customer Insights - Data"
+  - "Módulo 58 estudiado: Customer Insights - Data"
   - "Lab 58 completado: Customer Insights — Segmento y Journey"
 ---
 
@@ -66,7 +66,7 @@ Fuera de alcance:
 
 ## Prerrequisitos
 
-- Haber estudiado el Módulo 57 y completado el Lab 58.
+- Haber estudiado el Módulo 58 y completado el Lab 58.
 
 ## Herramientas necesarias
 
@@ -178,7 +178,7 @@ su fuente.
 
 ## Módulos relacionados
 
-- Módulo 57 — Customer Insights - Data: Unificación de Perfiles y Customer 360
+- Módulo 58 — Customer Insights - Data: Unificación de Perfiles y Customer 360
 - Módulo 20 — Dynamics 365 CE — Sales y Customer Service
 - Lab 58 — Customer Insights: Segmento y Journey de Renovación
 - Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)

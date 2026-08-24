@@ -1,5 +1,5 @@
 ---
-moduleId: 63
+moduleId: 64
 title: "Customer Insights - Journeys — Real-Time Journeys y Consentimiento"
 level: "d365"
 certification: "Dynamics 365 Customer Insights"
@@ -7,16 +7,16 @@ estimatedMinutes: 12
 slug: "customer-insights-journeys-real-time"
 ---
 ### 🎯 Objetivo
-Diseñar journeys en tiempo real con triggers, segmentos, consentimiento, canales y medición, produciendo un diagrama de flujo completo y un modelo de consentimiento auditable — separando claramente Customer Insights - Journeys de Customer Insights - Data (Módulo 57) y evitando depender de outbound marketing heredado.
+Diseñar journeys en tiempo real con triggers, segmentos, consentimiento, canales y medición, produciendo un diagrama de flujo completo y un modelo de consentimiento auditable — separando claramente Customer Insights - Journeys de Customer Insights - Data (Módulo 58) y evitando depender de outbound marketing heredado.
 
 ### 📖 Conceptos Clave
-- **Journeys vs. Data:** Customer Insights - Data (Módulo 57) unifica perfiles, calcula medidas y define segmentos; Journeys orquesta comunicaciones y experiencias en tiempo real a partir de esos segmentos o de eventos directos en Dataverse. Un journey nunca "inventa" un segmento — lo consume de Data o lo define localmente sobre datos de Dataverse.
+- **Journeys vs. Data:** Customer Insights - Data (Módulo 58) unifica perfiles, calcula medidas y define segmentos; Journeys orquesta comunicaciones y experiencias en tiempo real a partir de esos segmentos o de eventos directos en Dataverse. Un journey nunca "inventa" un segmento — lo consume de Data o lo define localmente sobre datos de Dataverse.
 - **Real-time journey — anatomía:** recorrido activado por evento o segmento, con nodos de decisión (condición sí/no), esperas (delay), mensajes (email, SMS, push) y objetivos medibles (goal). El motor evalúa cada contacto de forma individual y asíncrona — dos contactos que entran el mismo día pueden estar en pasos distintos del journey según cómo interactúen.
 - **Triggers — con ejemplos concretos de origen:** eventos que inician o ramifican un journey, como formulario enviado (Dataverse/Forms Pro), caso cerrado (`Case` con `statuscode = Resuelto`), oportunidad ganada (`Opportunity` con `statecode = Won`) o un evento personalizado enviado vía API. El trigger debe ser un evento discreto y con timestamp claro — "cliente insatisfecho" no es un trigger válido; "CSAT registrado menor a 3" sí lo es.
 - **Consentimiento:** requisito operativo y legal por canal, propósito y contacto — un contacto puede tener consentimiento para email de servicio pero no para email de marketing; son dos consentimientos distintos, no uno genérico. Sin consentimiento válido y vigente para ese propósito y canal específico, el journey no debería enviar la comunicación, sin importar cuán relevante sea el trigger.
 - **Outbound marketing heredado:** Microsoft ha movido el foco de la plataforma a real-time journeys; para 2026 el diseño de cualquier journey nuevo debe evitar depender de capacidades outbound retiradas o en camino de retiro — migrar journeys heredados es trabajo de modernización, no de mantenimiento.
 - **Canales:** email, SMS, push u otros dependen de configuración, proveedor, dominio verificado (para email, SPF/DKIM), consentimiento vigente y licencia — un journey bien diseñado puede fallar en producción si el dominio de envío no está verificado, un problema de configuración, no de lógica del journey.
-- **Personalización:** usa datos del perfil/contacto, medidas de Customer Insights - Data (Módulo 57, ej. LTV) o eventos recientes, pero debe respetar minimización de datos — personalizar con el dato mínimo necesario, no con todo el perfil disponible solo porque existe.
+- **Personalización:** usa datos del perfil/contacto, medidas de Customer Insights - Data (Módulo 58, ej. LTV) o eventos recientes, pero debe respetar minimización de datos — personalizar con el dato mínimo necesario, no con todo el perfil disponible solo porque existe.
 - **Marketing-to-sales handoff:** cuando un journey detecta que un contacto alcanzó un umbral de calificación (ej. completó 3 journeys de nutrición y visitó la página de precios), el paso siguiente no es "seguir enviando más contenido" — es crear o actualizar un `Lead` en Sales con el contexto de journeys recorridos, para que el vendedor no empiece la conversación desde cero.
 - **Métricas:** delivery, open/click (cuando el canal lo permite), conversion (goal attainment), unsubscribe y error rate. Un journey con alto delivery pero bajo conversion puede tener el trigger correcto pero el mensaje o la oferta equivocada — son diagnósticos distintos.
 - **Requisitos reales de práctica:** diseñar el flujo del journey, el modelo de consentimiento y las pruebas negativas puede hacerse sin tenant. Validar entrega real, triggers en vivo, dominio de envío y consentimiento operando requiere Customer Insights - Journeys habilitado, dominio/canal configurado y contactos reales.
@@ -36,7 +36,7 @@ Diseñar journeys en tiempo real con triggers, segmentos, consentimiento, canale
    ```
 
 2. Define el modelo de consentimiento en tabla: propósito, canal, campo/fuente de consentimiento y regla de exclusión, para al menos 2 propósitos distintos (ej. "renovación" y "marketing general").
-3. Especifica qué datos vienen de Customer Insights - Data (perfil unificado, medidas, segmentos — Módulo 57) y qué datos viven en Dataverse/Journeys (contrato, fecha de vencimiento, interacciones del journey).
+3. Especifica qué datos vienen de Customer Insights - Data (perfil unificado, medidas, segmentos — Módulo 58) y qué datos viven en Dataverse/Journeys (contrato, fecha de vencimiento, interacciones del journey).
 4. Redacta 3 pruebas: contacto con consentimiento válido para "renovación", contacto sin consentimiento para ese propósito, y contacto con email inválido/rebotado — describe el resultado esperado de cada una.
 5. Diseña el criterio de marketing-to-sales handoff para este journey: ¿qué umbral de interacción convierte al contacto en una oportunidad para el vendedor, y qué contexto de journeys recibe el vendedor al recibirlo?
 6. Indica qué requiere tenant real: entorno Customer Insights - Journeys, dominio/canal configurado y verificado, consentimiento vigente, contactos reales y permisos.

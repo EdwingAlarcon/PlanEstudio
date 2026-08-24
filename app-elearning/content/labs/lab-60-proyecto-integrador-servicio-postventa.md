@@ -10,7 +10,7 @@ prerequisites:
   - "Lab 55 completado: UAT, matriz de trazabilidad y checklist de go-live"
   - "Lab 58 completado: Customer Insights — segmento y journey"
   - "Lab 59 completado: Field Service — Work Order y UAT"
-  - "Módulo 59 estudiado: Finance & Operations — Procesos ERP y Virtual Tables"
+  - "Módulo 60 estudiado: Finance & Operations — Procesos ERP y Virtual Tables"
   - "Recurso revisado: Rúbricas y Plantillas de Evaluación"
 files: []
 ---
@@ -184,11 +184,11 @@ garantía y prioridad. Documenta:
 ### 9. Decisión de integración con Finance & Operations
 
 Formaliza la decisión arquitectónica sobre qué datos quedan en ERP/F&O como sistema maestro y
-cuáles se sincronizan a Dataverse o Customer Insights — usando el vocabulario del Módulo 59:
+cuáles se sincronizan a Dataverse o Customer Insights — usando el vocabulario del Módulo 60:
 
 - Nombra el proceso ERP estándar involucrado (la facturación de la renovación es parte de
   **order-to-cash**, no de Sales).
-- Decide, con el criterio de decisión del Módulo 59, si la integración de datos de facturación
+- Decide, con el criterio de decisión del Módulo 60, si la integración de datos de facturación
   hacia Dataverse debería ser dual-write, DMF o virtual tables — justifica por qué.
 - Explica el impacto en operación, datos y compliance de esa decisión.
 
@@ -215,7 +215,7 @@ Un paquete de proyecto integrador con diseño funcional, trazabilidad, UAT y evi
 | UAT | 10% | 8 casos cubren happy path, errores, permisos e integración |
 | Go-live | 5% | Checklist cubre datos, seguridad, rollback y comunicación |
 | Automatización Power Automate | 10% | Flujo con trigger, acciones y manejo de error definidos |
-| Decisión de integración F&O | 10% | Nombra el proceso ERP correcto y justifica dual-write/DMF/virtual tables con el criterio del Módulo 59 |
+| Decisión de integración F&O | 10% | Nombra el proceso ERP correcto y justifica dual-write/DMF/virtual tables con el criterio del Módulo 60 |
 | Arquitectura y roadmap | 10% | 2 ADRs con alternativas descartadas + roadmap de fases coherente |
 | Claridad ejecutiva | 5% | Resumen entendible para negocio y arquitectura |
 
@@ -253,8 +253,8 @@ journey, matriz de seguridad) se reutilizarían tal cual y cuáles requerirían 
 - Módulo 20 — Dynamics 365 CE — Sales y Customer Service
 - Módulo 38 — Liderazgo Técnico y Gestión de Proyectos
 - Módulo 41 — Proyecto Capstone Arquitectura Enterprise
-- Módulo 56 — Dynamics 365 CE Avanzado
-- Módulo 59 — Finance & Operations: Procesos ERP y Virtual Tables
+- Módulo 57 — Dynamics 365 CE Avanzado
+- Módulo 60 — Finance & Operations: Procesos ERP y Virtual Tables
 - Lab 55 — UAT/Checklist de Go-Live y auditoría de prompts
 - Lab 58 — Customer Insights: segmento y journey
 - Lab 59 — Field Service: Work Order y UAT

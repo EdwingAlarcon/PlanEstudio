@@ -7,7 +7,7 @@ product: ["Dynamics 365 Finance", "Dynamics 365 Supply Chain Management", "Dynam
 certifications: ["Arquitectura Power Platform"]
 role: ["Functional Consultant", "Solution Architect"]
 prerequisites:
-  - "Módulo 59 estudiado: Finance & Operations — Procesos ERP, Virtual Tables y Vocabulario Estándar"
+  - "Módulo 60 estudiado: Finance & Operations — Procesos ERP, Virtual Tables y Vocabulario Estándar"
   - "Módulo 20 revisado: Dynamics 365 CE — Sales y Customer Service"
 ---
 
@@ -22,7 +22,7 @@ CE (Dataverse/Dynamics 365 Sales) y qué vive en F&O, y qué riesgos aparecen en
 ambos.
 
 Este laboratorio es de **diseño funcional por proceso**, no de configuración de un tenant F&O real
-— refuerza el vocabulario y el razonamiento de proceso del Módulo 59 con datos concretos.
+— refuerza el vocabulario y el razonamiento de proceso del Módulo 60 con datos concretos.
 
 ## Diferencia con el Lab 89
 
@@ -46,7 +46,7 @@ proceso, qué pasa exactamente entre que un distribuidor hace un pedido y la emp
 
 ## Prerrequisitos
 
-- Haber estudiado el Módulo 59 (procesos ERP estándar y vocabulario).
+- Haber estudiado el Módulo 60 (procesos ERP estándar y vocabulario).
 - Entender la diferencia entre Sales (CRM) y F&O (ERP) del Módulo 20.
 
 ## Herramientas necesarias
@@ -125,7 +125,7 @@ un consultor funcional podría usar en un Fit-Gap real de F&O, en vez de definic
 
 | Error | Causa | Solución |
 |---|---|---|
-| Describir el proceso con el nombre pero sin pasos | Quedarse en el vocabulario del Módulo 59 sin aplicarlo a datos concretos | Documentar cada paso con su actor, sistema y resultado, como en este laboratorio |
+| Describir el proceso con el nombre pero sin pasos | Quedarse en el vocabulario del Módulo 60 sin aplicarlo a datos concretos | Documentar cada paso con su actor, sistema y resultado, como en este laboratorio |
 | Asumir que todo O2C vive en F&O | No reconocer que Sales gestiona Lead/Oportunidad/Quote antes del pedido | Nombrar el evento exacto (confirmación del pedido) donde el proceso cruza a F&O |
 | Ignorar el three-way match en P2P | Simplificar la orden de compra → factura → pago sin la recepción | Incluir siempre la recepción de mercancía como paso de control |
 | Riesgos genéricos sin mitigación concreta | Copiar riesgos de plantilla sin adaptarlos al proceso | Nombrar la entidad, transacción o control específico afectado en cada riesgo |
@@ -155,7 +155,7 @@ Aprobación: mínimo 65/100 y ningún criterio en nivel 0. Nivel profesional/exc
 
 ## Módulos relacionados
 
-- Módulo 59 — Finance & Operations: Procesos ERP, Virtual Tables y Vocabulario Estándar
+- Módulo 60 — Finance & Operations: Procesos ERP, Virtual Tables y Vocabulario Estándar
 - Módulo 20 — Dynamics 365 CE — Sales y Customer Service
 - Lab 64 — Capstone Finance & Operations Awareness: Arquitectura Conceptual ERP + CRM
 - Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)

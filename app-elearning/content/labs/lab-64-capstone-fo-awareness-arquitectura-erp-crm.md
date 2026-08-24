@@ -10,7 +10,7 @@ prerequisites:
   - "Módulo 18 revisado: fundamentos de arquitectura"
   - "Módulo 20 revisado: Dynamics 365 CE — Sales y Customer Service"
   - "Módulo 34 revisado: arquitectura de datos / integración"
-  - "Módulo 59 estudiado: Finance & Operations — Procesos ERP y Virtual Tables"
+  - "Módulo 60 estudiado: Finance & Operations — Procesos ERP y Virtual Tables"
 ---
 
 # Lab 64 — Capstone Finance & Operations Awareness: Arquitectura Conceptual ERP + CRM
@@ -74,7 +74,7 @@ Tabla que clasifique al menos 6 procesos del escenario (ejemplo: facturación, p
 inventario, gestión de oportunidades, cotización comercial, seguimiento postventa) indicando si
 pertenecen a F&O, a Dataverse/CE, o a ambos con sincronización. **Para cada proceso que pertenezca
 a F&O, nombra el proceso ERP estándar exacto al que corresponde** (order-to-cash, procure-to-pay,
-record-to-report o inventory-to-deliver — ver Módulo 59) en vez de describirlo solo en tus
+record-to-report o inventory-to-deliver — ver Módulo 60) en vez de describirlo solo en tus
 propias palabras.
 
 ### 2. Mapa de integración con dirección de dual-write
@@ -92,7 +92,7 @@ propias palabras.
 ### 3b. Decisión dual-write vs. DMF vs. virtual tables
 
 - Para el requerimiento "mostrar el saldo de inventario de un producto en la Opportunity de Sales,
-  sin duplicar el dato", aplica el criterio de decisión del Módulo 59 y justifica por qué las
+  sin duplicar el dato", aplica el criterio de decisión del Módulo 60 y justifica por qué las
   otras dos opciones (de las tres: dual-write, DMF, virtual tables) no son la mejor elección para
   este caso específico.
 
@@ -154,7 +154,7 @@ harías distinto para reducir ese acoplamiento.
 - Módulo 18 — Fundamentos de Arquitectura de Soluciones
 - Módulo 20 — Dynamics 365 CE — Sales y Customer Service
 - Módulo 34 — Arquitectura de Datos e Integración
-- Módulo 59 — Finance & Operations: Procesos ERP y Virtual Tables
+- Módulo 60 — Finance & Operations: Procesos ERP y Virtual Tables
 - Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)
 - Recurso — Matriz de Competencias (`/recursos/matriz-competencias`)
 

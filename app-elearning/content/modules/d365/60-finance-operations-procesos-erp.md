@@ -1,5 +1,5 @@
 ---
-moduleId: 59
+moduleId: 60
 title: "F&O Awareness — Procesos ERP, Seguridad e Integración con CE"
 level: "d365"
 certification: "Finance & Operations awareness"

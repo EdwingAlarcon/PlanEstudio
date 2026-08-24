@@ -7,7 +7,7 @@ product: ["Dynamics 365 Customer Insights - Journeys", "Dataverse"]
 certifications: ["Dynamics 365 Customer Insights"]
 role: ["Consultor Funcional D365 CE", "Marketing Automation Specialist"]
 prerequisites:
-  - "Módulo 63 estudiado: Customer Insights - Journeys"
+  - "Módulo 64 estudiado: Customer Insights - Journeys"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
 ---
 

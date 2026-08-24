@@ -91,7 +91,7 @@ describe("CertificateClient", () => {
   });
 
   it("shows IA-specific phrasing (no PL-xxx exam language) when the level is 'ia'", () => {
-    for (let i = 42; i <= 55; i++) {
+    for (let i = 42; i <= 56; i++) {
       useProgressStore.getState().markModuleComplete(`ia-${i}`);
       useProgressStore.getState().saveQuizScore(String(i), 90);
     }

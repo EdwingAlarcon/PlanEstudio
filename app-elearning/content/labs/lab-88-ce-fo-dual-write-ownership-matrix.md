@@ -7,7 +7,7 @@ product: ["Dynamics 365 Finance", "Dynamics 365 Supply Chain Management", "Datav
 certifications: ["D365 Especialización Integration"]
 role: ["Solution Architect", "Integration Consultant"]
 prerequisites:
-  - "Módulo 64 estudiado: Integración CE + Finance & Operations"
+  - "Módulo 65 estudiado: Integración CE + Finance & Operations"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
 ---
 

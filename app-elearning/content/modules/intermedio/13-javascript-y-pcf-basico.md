@@ -8,12 +8,12 @@ slug: "javascript-y-pcf-basico"
 ---
 ### 🚧 Antes de comenzar: requiere JavaScript básico
 
-> **Requiere conocimientos previos que PlanEstudio todavía no enseña desde cero:** JavaScript
-> (funciones, callbacks, promesas, módulos ES6) y manipulación del DOM. El
-> [Anexo de Lenguajes de Programación](/recursos/lenguajes-programacion) es una referencia de
-> sintaxis para quien ya programa, no un curso de fundamentos. Si nunca has escrito código, estudia
-> este módulo en modo conceptual (arquitectura de PCF, ciclo de vida del control) sin intentar
-> compilar el código todavía — eso no valida que puedas desarrollarlo de forma independiente.
+> **Si nunca has escrito código**, primero completa el módulo
+> [Fundamentos de JavaScript para Power Platform](/nivel/ia/modulo/fundamentos-javascript-para-power-platform)
+> — enseña desde cero variables, funciones, objetos, arrays, callbacks y promesas usando ejemplos
+> con la misma forma que verás aquí. Con eso resuelto, este módulo se puede seguir de punta a
+> punta sin bloquearte. El [Anexo de Lenguajes de Programación](/recursos/lenguajes-programacion)
+> sigue disponible como referencia de sintaxis para quien ya programa.
 
 ### 🎯 Objetivo
 Implementar lógica de cliente con JavaScript en formularios Model-Driven y crear tu primer Power Apps Component Framework (PCF) control con TypeScript que extiende las capacidades nativas de Dataverse.

@@ -562,7 +562,7 @@ test.describe("Smoke — rutas principales", () => {
     await expect(page.locator("a", { hasText: "Volver al inicio" })).toBeVisible();
   });
 
-  test("nivel IA carga desde el sidebar y muestra sus 14 módulos", async ({ page }) => {
+  test("nivel IA carga desde el sidebar y muestra sus 15 módulos", async ({ page }) => {
     await page.goto("/");
     await page.locator('a[href="/nivel/ia"]').first().click();
     await expect(page).toHaveURL(/\/nivel\/ia$/);
@@ -606,14 +606,14 @@ test.describe("Smoke — rutas principales", () => {
 
   test("certificado del nivel IA se genera sin lenguaje de examen PL-xxx", async ({ page }) => {
     await page.goto("/");
-    // Sembrar el store de progreso directamente en localStorage: los 14 módulos
+    // Sembrar el store de progreso directamente en localStorage: los 15 módulos
     // de IA completados con quiz aprobado (>=70%), los 10 labs del nivel IA
     // completados, y nombre de usuario — el certificado exige las tres cosas,
     // no solo módulos marcados como leídos.
     await page.evaluate(() => {
-      const completedModules = Array.from({ length: 14 }, (_, i) => `ia-${i + 42}`);
+      const completedModules = Array.from({ length: 15 }, (_, i) => `ia-${i + 42}`);
       const quizScores = Object.fromEntries(
-        Array.from({ length: 14 }, (_, i) => [String(i + 42), 90])
+        Array.from({ length: 15 }, (_, i) => [String(i + 42), 90])
       );
       const completedLabs = [
         "lab-45-copilot-implementacion-guiada",

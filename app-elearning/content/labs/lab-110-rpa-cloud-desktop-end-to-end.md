@@ -7,7 +7,7 @@ product: ["Power Automate Cloud", "Power Automate Desktop", "Machine Runtime", "
 certifications: ["Power Automate Desktop & RPA"]
 role: ["RPA Developer", "Automation Engineer", "Power Platform Consultant"]
 prerequisites:
-  - "Módulo 74 completado"
+  - "Módulo 75 completado"
   - "Power Automate cloud básico"
 files: []
 ---

@@ -7,7 +7,7 @@ product: ["Power Automate Desktop", "UI Automation", "Windows Apps", "RPA"]
 certifications: ["Power Automate Desktop & RPA"]
 role: ["RPA Developer", "RPA Support Analyst"]
 prerequisites:
-  - "Módulo 71 completado"
+  - "Módulo 72 completado"
   - "Aplicación Windows de prueba o simulación documentada"
 files: []
 ---

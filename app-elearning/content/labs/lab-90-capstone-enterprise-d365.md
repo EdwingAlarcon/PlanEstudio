@@ -7,7 +7,7 @@ product: ["Dynamics 365 Sales", "Dynamics 365 Customer Service", "Dynamics 365 C
 certifications: ["D365 Especialización Portfolio"]
 role: ["Solution Architect", "Consultor Funcional D365 CE"]
 prerequisites:
-  - "Módulo 65 estudiado: Capstone Enterprise D365"
+  - "Módulo 66 estudiado: Capstone Enterprise D365"
   - "Labs 81-89 revisados o completados"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
 ---

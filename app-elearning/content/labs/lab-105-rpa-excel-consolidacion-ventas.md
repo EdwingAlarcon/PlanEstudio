@@ -7,7 +7,7 @@ product: ["Power Automate Desktop", "Excel", "Archivos", "RPA"]
 certifications: ["Power Automate Desktop & RPA"]
 role: ["RPA Developer", "Automation Engineer", "RPA Support Analyst"]
 prerequisites:
-  - "Módulo 69 completado"
+  - "Módulo 70 completado"
   - "Carpeta local de práctica con archivos ficticios"
 files: []
 ---

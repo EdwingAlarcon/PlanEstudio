@@ -8896,6 +8896,104 @@
     }
   ],
   56: [
+      {
+          "type": "single",
+          "prompt": "¿Qué diferencia principal hay entre `const` y `let`?",
+          "options": [
+              "`const` no permite reasignar el valor; `let` sí",
+              "`const` es más rápido en ejecución",
+              "`let` solo funciona dentro de funciones",
+              "No hay ninguna diferencia real"
+          ],
+          "answer": [0],
+          "explanation": "`const` declara una variable cuyo valor no puede reasignarse; `let` sí permite reasignación."
+      },
+      {
+          "type": "single",
+          "prompt": "Dado `const cliente = { nombre: \"Ana\", activo: true };`, ¿cómo se accede al nombre?",
+          "options": [
+              "cliente.nombre",
+              "cliente(nombre)",
+              "cliente->nombre",
+              "nombre.cliente"
+          ],
+          "answer": [0],
+          "explanation": "Las propiedades de un objeto se acceden con notación de punto: `objeto.propiedad`."
+      },
+      {
+          "type": "single",
+          "prompt": "¿Qué devuelve `colores[0]` si `const colores = [\"rojo\", \"verde\", \"azul\"];`?",
+          "options": [
+              "\"rojo\"",
+              "\"verde\"",
+              "\"azul\"",
+              "undefined"
+          ],
+          "answer": [0],
+          "explanation": "Los arrays se indexan desde 0; la posición 0 es el primer elemento."
+      },
+      {
+          "type": "multi",
+          "prompt": "¿Qué afirmaciones sobre `.forEach()` y `.map()` son correctas?",
+          "options": [
+              "`.forEach()` recorre cada elemento de un array",
+              "`.map()` transforma cada elemento y devuelve un nuevo array",
+              "`.forEach()` devuelve un array transformado como `.map()`",
+              "Ambos métodos existen para recorrer arrays"
+          ],
+          "answer": [0, 1, 3],
+          "explanation": "`.forEach()` solo recorre (no devuelve nada útil), `.map()` recorre y construye un nuevo array transformado."
+      },
+      {
+          "type": "single",
+          "prompt": "¿Qué es un callback?",
+          "options": [
+              "Una función que se pasa como argumento a otra función para ejecutarse más tarde",
+              "Un tipo de variable especial",
+              "Un error de sintaxis común",
+              "Un método exclusivo de Dataverse"
+          ],
+          "answer": [0],
+          "explanation": "Un callback es una función pasada como argumento para ser invocada cuando ocurre un evento o termina una operación."
+      },
+      {
+          "type": "single",
+          "prompt": "¿Por qué las llamadas a la Dataverse Web API (`Xrm.WebApi.retrieveMultipleRecords`) van seguidas de `.then(...)`?",
+          "options": [
+              "Porque devuelven una promesa (el resultado no está disponible de inmediato)",
+              "Porque `.then()` es obligatorio en todo JavaScript",
+              "Porque mejora el rendimiento del navegador",
+              "Porque así lo exige TypeScript"
+          ],
+          "answer": [0],
+          "explanation": "Las llamadas asíncronas devuelven una Promise; `.then(exito, error)` define qué hacer cuando se resuelve o falla."
+      },
+      {
+          "type": "single",
+          "prompt": "¿Qué valores se consideran \"falsy\" en JavaScript (equivalentes a falso en un `if`)?",
+          "options": [
+              "null, undefined, 0, \"\", false",
+              "Solo `false`",
+              "Cualquier número negativo",
+              "Solo objetos vacíos"
+          ],
+          "answer": [0],
+          "explanation": "null, undefined, 0, la cadena vacía \"\" y false se evalúan como falso en una condición."
+      },
+      {
+          "type": "single",
+          "prompt": "¿Cuál es la mejor razón para preferir `===` sobre `==` al comparar valores?",
+          "options": [
+              "`===` compara tipo y valor, evitando conversiones inesperadas",
+              "`===` es más corto de escribir",
+              "`==` no existe en JavaScript moderno",
+              "No hay diferencia práctica"
+          ],
+          "answer": [0],
+          "explanation": "`===` (igualdad estricta) no convierte tipos antes de comparar, evitando bugs sutiles que sí ocurren con `==`."
+      }
+  ],
+  57: [
     {
       type: "single",
       prompt: "¿Por qué un Contact con un caso abierto en Customer Service aparece con el mismo historial en Sales, sin ningún proceso de sincronización?",
@@ -9058,7 +9156,7 @@
       appliesTo: "caso"
     }
   ],
-  57: [
+  58: [
     {
       type: "single",
       prompt: "¿Por qué Customer Insights - Data no es 'otro CRM' además de Sales y Customer Service?",
@@ -9221,7 +9319,7 @@
       appliesTo: "caso"
     }
   ],
-  58: [
+  59: [
     {
       type: "single",
       prompt: "¿Qué motor subyacente hace posible el Schedule Board de Field Service?",
@@ -9384,7 +9482,7 @@
       appliesTo: "caso"
     }
   ],
-  59: [
+  60: [
     {
       type: "single",
       prompt: "¿Qué describe el proceso 'order-to-cash' (O2C) en Finance & Operations?",
@@ -9547,7 +9645,7 @@
       appliesTo: "caso"
     }
   ],
-  60: [
+  61: [
     {
       type: "single",
       prompt: "En Dynamics 365 Sales, ¿por qué forecast category no debe confundirse con la etapa de la Opportunity?",
@@ -9674,7 +9772,7 @@
       appliesTo: "caso"
     }
   ],
-  61: [
+  62: [
     {
       type: "single",
       prompt: "¿Qué diferencia un entitlement de un SLA en Customer Service?",
@@ -9801,7 +9899,7 @@
       appliesTo: "caso"
     }
   ],
-  62: [
+  63: [
     {
       type: "single",
       prompt: "¿Qué agrega Contact Center/Omnichannel sobre un diseño clásico de Customer Service?",
@@ -9928,7 +10026,7 @@
       appliesTo: "caso"
     }
   ],
-  63: [
+  64: [
     {
       type: "single",
       prompt: "¿Cuál es la frontera correcta entre Customer Insights - Data y Customer Insights - Journeys?",
@@ -10055,7 +10153,7 @@
       appliesTo: "caso"
     }
   ],
-  64: [
+  65: [
     {
       type: "single",
       prompt: "¿Cuál es el propósito de una matriz de ownership CE + F&O?",
@@ -10182,7 +10280,7 @@
       appliesTo: "caso"
     }
   ],
-  65: [
+  66: [
     {
       type: "single",
       prompt: "¿Qué distingue al capstone Enterprise D365 de una simple demo de pantallas?",
@@ -10309,7 +10407,7 @@
       appliesTo: "caso"
     }
   ],
-  66: [
+  67: [
       {
           "type": "single",
           "prompt": "Un sistema legacy no expone API, pero su pantalla cambia cada semana y el volumen es bajo. ¿Cuál es la decisión más profesional?",
@@ -10342,7 +10440,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 66): En el proceso de correos, adjuntos y portal bancario, ¿qué parte justifica usar RPA?",
+          "prompt": "Diagnóstico de caso (RPA 67): En el proceso de correos, adjuntos y portal bancario, ¿qué parte justifica usar RPA?",
           "options": [
               "Solo la carga final en el portal bancario sin API disponible",
               "La lectura de correos aunque exista cloud flow",
@@ -10357,7 +10455,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 66): ¿Qué decisiones reducen la deuda operativa del bot?",
+          "prompt": "Diagnóstico de caso (RPA 67): ¿Qué decisiones reducen la deuda operativa del bot?",
           "options": [
               "Mover la descarga de correos y adjuntos a cloud flow",
               "Validar datos antes de abrir el portal bancario",
@@ -10374,7 +10472,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 66): ¿Cuál sería una mala señal en la evaluación de viabilidad?",
+          "prompt": "Diagnóstico de caso (RPA 67): ¿Cuál sería una mala señal en la evaluación de viabilidad?",
           "options": [
               "Aceptar RPA para todo el proceso sin comparar API, conector, cloud flow o validación previa",
               "Documentar que el portal no tiene API",
@@ -10389,7 +10487,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 66): ¿Qué evidencias sustentan la decisión de automatizar solo el tramo bancario?",
+          "prompt": "Diagnóstico de caso (RPA 67): ¿Qué evidencias sustentan la decisión de automatizar solo el tramo bancario?",
           "options": [
               "El portal bancario no expone API útil para la carga",
               "El volumen del proceso justifica la operación del bot",
@@ -10406,7 +10504,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 66): ¿Qué resultado demuestra una arquitectura más mantenible?",
+          "prompt": "Diagnóstico de caso (RPA 67): ¿Qué resultado demuestra una arquitectura más mantenible?",
           "options": [
               "El bot recibe datos ya validados y solo registra en el portal sin API",
               "El bot abre Outlook, descarga adjuntos, valida, transforma y carga todo por pantalla",
@@ -10420,7 +10518,7 @@
           "appliesTo": "caso"
       }
   ],
-  67: [
+  68: [
       {
           "type": "single",
           "prompt": "El flujo funciona attended pero falla unattended. ¿Qué revisar antes de modificar selectores?",
@@ -10451,7 +10549,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 67): El bot funciona en el PC del desarrollador pero falla en la VM de operaciones. ¿Cuál es el diagnóstico más probable del caso?",
+          "prompt": "Diagnóstico de caso (RPA 68): El bot funciona en el PC del desarrollador pero falla en la VM de operaciones. ¿Cuál es el diagnóstico más probable del caso?",
           "options": [
               "La aplicación legacy está instalada o configurada solo en el perfil del desarrollador",
               "El selector debe convertirse inmediatamente a coordenadas",
@@ -10466,7 +10564,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 67): ¿Qué controles pertenecen al readiness de ejecución unattended?",
+          "prompt": "Diagnóstico de caso (RPA 68): ¿Qué controles pertenecen al readiness de ejecución unattended?",
           "options": [
               "Aplicación instalada para el usuario que ejecuta el bot",
               "Permisos, sesión y resolución validados en la VM",
@@ -10483,7 +10581,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 67): ¿Qué corrección evita repetir el mismo fallo en UAT?",
+          "prompt": "Diagnóstico de caso (RPA 68): ¿Qué corrección evita repetir el mismo fallo en UAT?",
           "options": [
               "Crear una checklist de máquina, usuario, instalación, permisos y prueba de arranque",
               "Agregar más esperas fijas en todos los pasos",
@@ -10498,7 +10596,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 67): ¿Qué evidencias deben existir antes de declarar listo el bot?",
+          "prompt": "Diagnóstico de caso (RPA 68): ¿Qué evidencias deben existir antes de declarar listo el bot?",
           "options": [
               "Ejecución exitosa en la VM de operaciones o TEST",
               "Registro de usuario usado, permisos y versión instalada",
@@ -10515,7 +10613,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 67): ¿Por qué modificar selectores sin revisar la VM sería riesgoso?",
+          "prompt": "Diagnóstico de caso (RPA 68): ¿Por qué modificar selectores sin revisar la VM sería riesgoso?",
           "options": [
               "Porque podría ocultar que el problema real es instalación, usuario o sesión",
               "Porque los selectores nunca fallan en unattended",
@@ -10529,7 +10627,7 @@
           "appliesTo": "caso"
       }
   ],
-  68: [
+  69: [
       {
           "type": "single",
           "prompt": "¿Qué estructura favorece mantenibilidad en un desktop flow?",
@@ -10562,7 +10660,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 68): Un flujo con 180 acciones lineales es difícil de soportar. ¿Qué refactor responde mejor al caso?",
+          "prompt": "Diagnóstico de caso (RPA 69): Un flujo con 180 acciones lineales es difícil de soportar. ¿Qué refactor responde mejor al caso?",
           "options": [
               "Dividirlo en subflows por validación, navegación, procesamiento, errores y cierre",
               "Agregar comentarios al inicio y dejar las 180 acciones juntas",
@@ -10577,7 +10675,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 68): ¿Qué beneficios espera soporte después del refactor?",
+          "prompt": "Diagnóstico de caso (RPA 69): ¿Qué beneficios espera soporte después del refactor?",
           "options": [
               "Encontrar más rápido dónde falló la ejecución",
               "Reducir cambios accidentales en pasos no relacionados",
@@ -10594,7 +10692,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 68): ¿Qué señal indica que el flujo todavía no está listo para operación?",
+          "prompt": "Diagnóstico de caso (RPA 69): ¿Qué señal indica que el flujo todavía no está listo para operación?",
           "options": [
               "Nadie puede explicar los puntos de validación y reinicio",
               "Tiene subflows con nombres de negocio",
@@ -10609,7 +10707,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 68): ¿Qué subflows son coherentes con el caso?",
+          "prompt": "Diagnóstico de caso (RPA 69): ¿Qué subflows son coherentes con el caso?",
           "options": [
               "Inicializar y validar entradas",
               "Procesar registros",
@@ -10626,7 +10724,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 68): ¿Qué métrica demostraría mejora real después del refactor?",
+          "prompt": "Diagnóstico de caso (RPA 69): ¿Qué métrica demostraría mejora real después del refactor?",
           "options": [
               "Menor tiempo medio de diagnóstico y corrección de fallos",
               "Mayor cantidad de acciones en el mismo flujo",
@@ -10640,7 +10738,7 @@
           "appliesTo": "caso"
       }
   ],
-  69: [
+  70: [
       {
           "type": "single",
           "prompt": "Un bot deja procesos Excel abiertos tras fallar. ¿Qué patrón corrige el riesgo?",
@@ -10673,7 +10771,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 69): La operación carga archivos de sucursales cada mañana. ¿Qué control evita insertar registros duplicados?",
+          "prompt": "Diagnóstico de caso (RPA 70): La operación carga archivos de sucursales cada mañana. ¿Qué control evita insertar registros duplicados?",
           "options": [
               "Una clave o manifest que marque archivos y registros ya procesados",
               "Reprocesar todos los archivos todos los días",
@@ -10688,7 +10786,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 69): ¿Qué controles operativos pertenecen al flujo?",
+          "prompt": "Diagnóstico de caso (RPA 70): ¿Qué controles operativos pertenecen al flujo?",
           "options": [
               "Cerrar Excel en éxito y error",
               "Generar reporte de auditoría por ejecución",
@@ -10705,7 +10803,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 69): ¿Qué decisión mejora la recuperación cuando un archivo falla a mitad del lote?",
+          "prompt": "Diagnóstico de caso (RPA 70): ¿Qué decisión mejora la recuperación cuando un archivo falla a mitad del lote?",
           "options": [
               "Registrar estado por archivo o registro y continuar/reintentar de forma controlada",
               "Borrar todo el lote y comenzar desde cero sin validación",
@@ -10720,7 +10818,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 69): ¿Qué debe incluir el reporte de auditoría?",
+          "prompt": "Diagnóstico de caso (RPA 70): ¿Qué debe incluir el reporte de auditoría?",
           "options": [
               "Archivos recibidos, procesados, omitidos y fallidos",
               "Conteo de registros insertados y rechazados",
@@ -10737,7 +10835,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 69): ¿Qué práctica reduce bloqueos de archivos en ejecuciones futuras?",
+          "prompt": "Diagnóstico de caso (RPA 70): ¿Qué práctica reduce bloqueos de archivos en ejecuciones futuras?",
           "options": [
               "Usar un subflow de cleanup que cierre libros y procesos Excel aun cuando ocurra error",
               "Dejar Excel abierto para revisar manualmente",
@@ -10751,7 +10849,7 @@
           "appliesTo": "caso"
       }
   ],
-  70: [
+  71: [
       {
           "type": "single",
           "prompt": "Si un portal tiene API soportada para descargar datos, ¿qué alternativa suele ser preferible?",
@@ -10782,7 +10880,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 70): El proveedor no ofrece API y el volumen justifica automatización. ¿Por qué RPA es aceptable aquí?",
+          "prompt": "Diagnóstico de caso (RPA 71): El proveedor no ofrece API y el volumen justifica automatización. ¿Por qué RPA es aceptable aquí?",
           "options": [
               "Porque automatiza una UI inevitable con beneficio operativo documentado",
               "Porque RPA debe usarse aunque exista una API estable",
@@ -10797,7 +10895,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 70): ¿Qué debe declarar el runbook cuando el proveedor cambia el portal?",
+          "prompt": "Diagnóstico de caso (RPA 71): ¿Qué debe declarar el runbook cuando el proveedor cambia el portal?",
           "options": [
               "Revisar selectores y DOM antes de reactivar producción",
               "Ejecutar una prueba de regresión del bot",
@@ -10814,7 +10912,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 70): ¿Qué diseño es más robusto para consultar solicitudes y descargar reportes?",
+          "prompt": "Diagnóstico de caso (RPA 71): ¿Qué diseño es más robusto para consultar solicitudes y descargar reportes?",
           "options": [
               "Esperar estados o elementos específicos y validar cada descarga",
               "Usar sleeps largos sin verificar resultado",
@@ -10829,7 +10927,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 70): ¿Qué riesgos deben quedar explícitos en la evaluación?",
+          "prompt": "Diagnóstico de caso (RPA 71): ¿Qué riesgos deben quedar explícitos en la evaluación?",
           "options": [
               "Cambios de DOM o texto en el portal",
               "Autenticación y disponibilidad del sitio del proveedor",
@@ -10846,7 +10944,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 70): Si mañana el proveedor publica una API soportada, ¿qué decisión sería más profesional?",
+          "prompt": "Diagnóstico de caso (RPA 71): Si mañana el proveedor publica una API soportada, ¿qué decisión sería más profesional?",
           "options": [
               "Reevaluar la arquitectura y migrar gradualmente a integración API si reduce riesgo",
               "Mantener siempre la automatización UI aunque sea más frágil",
@@ -10860,7 +10958,7 @@
           "appliesTo": "caso"
       }
   ],
-  71: [
+  72: [
       {
           "type": "single",
           "prompt": "¿Por qué coordenadas e imágenes deben ser último recurso en apps legacy?",
@@ -10894,7 +10992,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 71): En el ERP Win32 sin API, ¿qué debe ocurrir antes de registrar cada solicitud del CSV?",
+          "prompt": "Diagnóstico de caso (RPA 72): En el ERP Win32 sin API, ¿qué debe ocurrir antes de registrar cada solicitud del CSV?",
           "options": [
               "Validar el registro y descartar o marcar errores antes de tocar la UI",
               "Enviar cada fila sin revisar para ganar tiempo",
@@ -10909,7 +11007,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 71): ¿Qué controles evitan estados ambiguos en la aplicación legacy?",
+          "prompt": "Diagnóstico de caso (RPA 72): ¿Qué controles evitan estados ambiguos en la aplicación legacy?",
           "options": [
               "Esperar confirmación explícita después de guardar",
               "Detectar ventanas modales o mensajes de error",
@@ -10926,7 +11024,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 71): ¿Cuándo sería aceptable usar imagen o coordenadas?",
+          "prompt": "Diagnóstico de caso (RPA 72): ¿Cuándo sería aceptable usar imagen o coordenadas?",
           "options": [
               "Solo como fallback justificado cuando no hay selector estable y con pruebas de resolución",
               "Como primera opción para todo el ERP",
@@ -10941,7 +11039,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 71): ¿Qué evidencia debe conservarse por registro fallido?",
+          "prompt": "Diagnóstico de caso (RPA 72): ¿Qué evidencia debe conservarse por registro fallido?",
           "options": [
               "Identificador del registro o fila",
               "Mensaje o pantalla de error capturada",
@@ -10958,7 +11056,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 71): ¿Qué contrato de salida ayuda a operar el bot?",
+          "prompt": "Diagnóstico de caso (RPA 72): ¿Qué contrato de salida ayuda a operar el bot?",
           "options": [
               "Procesados, rechazados, fallidos, evidencia y estado final por lote",
               "Solo un mensaje genérico de terminado",
@@ -10972,7 +11070,7 @@
           "appliesTo": "caso"
       }
   ],
-  72: [
+  73: [
       {
           "type": "single",
           "prompt": "Un selector incluye el número de versión del botón. ¿Qué riesgo introduce?",
@@ -11005,7 +11103,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 72): El botón cambió de `Enviar v3.14` a `Enviar v3.15`. ¿Cuál fue el defecto del selector?",
+          "prompt": "Diagnóstico de caso (RPA 73): El botón cambió de `Enviar v3.14` a `Enviar v3.15`. ¿Cuál fue el defecto del selector?",
           "options": [
               "Dependía de texto dinámico que incluye la versión",
               "Usaba demasiados atributos estables",
@@ -11020,7 +11118,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 72): ¿Qué acciones corrigen el problema de forma profesional?",
+          "prompt": "Diagnóstico de caso (RPA 73): ¿Qué acciones corrigen el problema de forma profesional?",
           "options": [
               "Usar atributos más estables o texto parcial controlado",
               "Agregar contexto de ventana o contenedor padre",
@@ -11037,7 +11135,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 72): ¿Qué prueba habría detectado el riesgo antes de producción?",
+          "prompt": "Diagnóstico de caso (RPA 73): ¿Qué prueba habría detectado el riesgo antes de producción?",
           "options": [
               "Una regresión que abra la versión nueva y confirme que el selector encuentra el botón correcto",
               "Una prueba que solo cuente acciones del flujo",
@@ -11052,7 +11150,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 72): ¿Qué atributos suelen ser mejores candidatos para estabilidad?",
+          "prompt": "Diagnóstico de caso (RPA 73): ¿Qué atributos suelen ser mejores candidatos para estabilidad?",
           "options": [
               "AutomationId o identificador equivalente cuando existe",
               "Rol/tipo del control y contenedor padre",
@@ -11069,7 +11167,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 72): ¿Qué cambio en el runbook reduce impacto futuro?",
+          "prompt": "Diagnóstico de caso (RPA 73): ¿Qué cambio en el runbook reduce impacto futuro?",
           "options": [
               "Toda actualización de proveedor dispara revisión de selectores y smoke test",
               "Solo se revisa el bot cuando ya haya doble registro",
@@ -11083,7 +11181,7 @@
           "appliesTo": "caso"
       }
   ],
-  73: [
+  74: [
       {
           "type": "single",
           "prompt": "¿Por qué reintentar todo un lote puede ser peligroso?",
@@ -11116,7 +11214,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 73): El bot registró un pago y falló al enviar confirmación; el operador reintentó y duplicó el pago. ¿Qué faltó?",
+          "prompt": "Diagnóstico de caso (RPA 74): El bot registró un pago y falló al enviar confirmación; el operador reintentó y duplicó el pago. ¿Qué faltó?",
           "options": [
               "Checkpoint e idempotencia antes de repetir efectos de negocio",
               "Más velocidad en los clicks",
@@ -11131,7 +11229,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 73): ¿Qué información permite reanudar sin duplicar?",
+          "prompt": "Diagnóstico de caso (RPA 74): ¿Qué información permite reanudar sin duplicar?",
           "options": [
               "Clave idempotente del pago o solicitud",
               "Estado persistente por etapa",
@@ -11148,7 +11246,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 73): ¿Cuál retry es seguro después del fallo de confirmación?",
+          "prompt": "Diagnóstico de caso (RPA 74): ¿Cuál retry es seguro después del fallo de confirmación?",
           "options": [
               "Reintentar solo el envío de confirmación si el pago ya está marcado como registrado",
               "Reejecutar todo el lote desde cero",
@@ -11163,7 +11261,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 73): ¿Qué controles deberían existir antes de ejecutar un pago?",
+          "prompt": "Diagnóstico de caso (RPA 74): ¿Qué controles deberían existir antes de ejecutar un pago?",
           "options": [
               "Consultar si la clave idempotente ya fue procesada",
               "Validar estado previo de la solicitud",
@@ -11180,7 +11278,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 73): ¿Qué alerta debería recibir soporte?",
+          "prompt": "Diagnóstico de caso (RPA 74): ¿Qué alerta debería recibir soporte?",
           "options": [
               "Pago registrado, confirmación pendiente, retry seguro solo desde notificación",
               "Fallo genérico, ejecutar todo de nuevo",
@@ -11194,7 +11292,7 @@
           "appliesTo": "caso"
       }
   ],
-  74: [
+  75: [
       {
           "type": "single",
           "prompt": "¿Qué debe devolver un desktop flow invocado por cloud flow?",
@@ -11225,7 +11323,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 74): En el batch nocturno, ¿qué rol debe cumplir el cloud flow?",
+          "prompt": "Diagnóstico de caso (RPA 75): En el batch nocturno, ¿qué rol debe cumplir el cloud flow?",
           "options": [
               "Orquestar, distribuir trabajo por máquina y persistir estado",
               "Hacer todos los clicks del portal legacy",
@@ -11240,7 +11338,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 74): ¿Qué datos debe guardar Dataverse para soporte?",
+          "prompt": "Diagnóstico de caso (RPA 75): ¿Qué datos debe guardar Dataverse para soporte?",
           "options": [
               "Estado por solicitud o lote",
               "Máquina asignada y resultado de ejecución",
@@ -11257,7 +11355,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 74): ¿Por qué no conviene que el estado viva solo en la VM?",
+          "prompt": "Diagnóstico de caso (RPA 75): ¿Por qué no conviene que el estado viva solo en la VM?",
           "options": [
               "Porque soporte perdería visibilidad y recuperación si la máquina falla",
               "Porque Dataverse no puede guardar estados",
@@ -11272,7 +11370,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 74): ¿Qué contrato debe devolver PAD al cloud flow?",
+          "prompt": "Diagnóstico de caso (RPA 75): ¿Qué contrato debe devolver PAD al cloud flow?",
           "options": [
               "Estado final y mensaje de error si aplica",
               "Conteos procesados, fallidos y omitidos",
@@ -11289,7 +11387,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 74): ¿Qué diseño facilita escalar a varias máquinas?",
+          "prompt": "Diagnóstico de caso (RPA 75): ¿Qué diseño facilita escalar a varias máquinas?",
           "options": [
               "Cola o asignación central de trabajo con estados transaccionales",
               "Copiar manualmente el mismo archivo a cada VM",
@@ -11303,7 +11401,7 @@
           "appliesTo": "caso"
       }
   ],
-  75: [
+  76: [
       {
           "type": "single",
           "prompt": "¿Qué evidencia muestra que un desktop flow está listo para operación?",
@@ -11337,7 +11435,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 75): UAT falla porque TEST usa una ruta local de DEV y credencial del desarrollador. ¿Cuál es la causa raíz?",
+          "prompt": "Diagnóstico de caso (RPA 76): UAT falla porque TEST usa una ruta local de DEV y credencial del desarrollador. ¿Cuál es la causa raíz?",
           "options": [
               "Falta de configuración por ambiente y connection references gobernadas",
               "El usuario de UAT hizo demasiadas pruebas",
@@ -11352,7 +11450,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 75): ¿Qué debe incluir el despliegue correcto hacia TEST?",
+          "prompt": "Diagnóstico de caso (RPA 76): ¿Qué debe incluir el despliegue correcto hacia TEST?",
           "options": [
               "Variables o configuración por ambiente para rutas",
               "Connection references y credenciales no personales",
@@ -11369,7 +11467,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 75): ¿Qué prueba habría detectado el fallo el primer día de UAT?",
+          "prompt": "Diagnóstico de caso (RPA 76): ¿Qué prueba habría detectado el fallo el primer día de UAT?",
           "options": [
               "Smoke postdeploy que valida rutas, credenciales, máquina y ejecución mínima en TEST",
               "Una captura del flujo en DEV",
@@ -11384,7 +11482,7 @@
       },
       {
           "type": "multi",
-          "prompt": "Diagnóstico de caso (RPA 75): ¿Qué artefactos operativos debe recibir el equipo?",
+          "prompt": "Diagnóstico de caso (RPA 76): ¿Qué artefactos operativos debe recibir el equipo?",
           "options": [
               "Deployment plan y rollback",
               "Runbook con owners y pasos de soporte",
@@ -11401,7 +11499,7 @@
       },
       {
           "type": "single",
-          "prompt": "Diagnóstico de caso (RPA 75): ¿Qué decisión evita que DEV contamine otros ambientes?",
+          "prompt": "Diagnóstico de caso (RPA 76): ¿Qué decisión evita que DEV contamine otros ambientes?",
           "options": [
               "Parametrizar rutas, usuarios y endpoints mediante configuración de ambiente",
               "Copiar archivos locales junto con el bot",

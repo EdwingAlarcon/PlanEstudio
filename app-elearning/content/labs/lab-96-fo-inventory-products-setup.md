@@ -8,7 +8,7 @@ certifications: ["Arquitectura Power Platform"]
 role: ["F&O Practitioner", "Solution Architect"]
 prerequisites:
   - "Lab 93 completado: F&O Finance Setup Walkthrough"
-  - "Módulo 59 estudiado: F&O Awareness — Procesos ERP, Virtual Tables y Vocabulario Estándar"
+  - "Módulo 60 estudiado: F&O Awareness — Procesos ERP, Virtual Tables y Vocabulario Estándar"
   - "Acceso a un ambiente trial/demo de Dynamics 365 Supply Chain Management"
 ---
 

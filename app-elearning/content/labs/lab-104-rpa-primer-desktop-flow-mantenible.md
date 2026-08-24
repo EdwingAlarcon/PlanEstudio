@@ -7,7 +7,7 @@ product: ["Power Automate Desktop", "Desktop Flow", "RPA"]
 certifications: ["Power Automate Desktop & RPA"]
 role: ["RPA Developer", "Automation Engineer"]
 prerequisites:
-  - "Módulo 66 completado"
+  - "Módulo 67 completado"
   - "Power Automate Desktop instalado o variante simulada documentada"
 files: []
 ---

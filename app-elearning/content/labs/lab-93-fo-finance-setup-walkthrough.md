@@ -7,7 +7,7 @@ product: ["Dynamics 365 Finance", "Legal Entities", "Chart of Accounts", "Financ
 certifications: ["Arquitectura Power Platform"]
 role: ["F&O Practitioner", "Solution Architect"]
 prerequisites:
-  - "Módulo 59 estudiado: F&O Awareness — Procesos ERP, Virtual Tables y Vocabulario Estándar"
+  - "Módulo 60 estudiado: F&O Awareness — Procesos ERP, Virtual Tables y Vocabulario Estándar"
   - "Acceso a un ambiente trial/demo de Dynamics 365 Finance & Supply Chain Management (LCS demo environment con datos Contoso, o Dynamics 365 free trial)"
   - "Sin ese ambiente, este lab no es ejecutable — es el primer requisito, no un detalle opcional"
 ---
@@ -120,4 +120,4 @@ Ve a **General ledger > Chart of accounts > Dimensions > Financial dimensions**.
 - Confundir dimensión financiera con una cuenta contable adicional.
 - No asociar correctamente el calendario fiscal al ledger antes de intentar contabilizar.
 - Crear cuentas sin agruparlas por tipo, dificultando el reporte financiero.
-- Saltarse este lab y asumir que el vocabulario de Módulo 59 es suficiente sin haber tocado la UI real.
+- Saltarse este lab y asumir que el vocabulario de Módulo 60 es suficiente sin haber tocado la UI real.

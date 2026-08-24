@@ -139,9 +139,9 @@ Competencias evaluadas:
 
 Cobertura actual:
 
-- PlanEstudio cubre Customer Service dentro del Módulo 20 y lo profundiza en el Módulo 61 y
+- PlanEstudio cubre Customer Service dentro del Módulo 20 y lo profundiza en el Módulo 62 y
   LAB-082 con entitlements, SLA, colas, routing, pruebas negativas y evidencias de ambiente real.
-- Contact Center/Omnichannel se aborda en el Módulo 62 y LAB-083 como simulación avanzada; la
+- Contact Center/Omnichannel se aborda en el Módulo 63 y LAB-083 como simulación avanzada; la
   ejecución productiva requiere licencias, canales y tenant configurado.
 
 ### MB-310 — Dynamics 365 Finance Functional Consultant Associate
@@ -158,7 +158,7 @@ Competencias evaluadas:
 
 Cobertura actual:
 
-- PlanEstudio cubre Finance & Operations como awareness avanzado en los Módulos 59 y 64, con
+- PlanEstudio cubre Finance & Operations como awareness avanzado en los Módulos 60 y 64, con
   procesos ERP, dual-write, DMF, virtual tables, ownership CE + F&O y labs LAB-064, LAB-069,
   LAB-070, LAB-088 y LAB-089. Todavía no cubre configuración real profunda de Dynamics 365 Finance.
 
@@ -176,7 +176,7 @@ Competencias evaluadas:
 
 Cobertura actual:
 
-- PlanEstudio introduce procesos ERP y su integración con Dataverse en los Módulos 59 y 64, y los
+- PlanEstudio introduce procesos ERP y su integración con Dataverse en los Módulos 60 y 64, y los
   practica como diseño en LAB-069, LAB-070, LAB-088 y LAB-089. La mejora pendiente es profundizar
   Supply Chain Management con configuración real de producto.
 
@@ -194,7 +194,7 @@ Competencias evaluadas:
 
 Cobertura actual:
 
-- PlanEstudio ya introdujo F&O conceptual en el Módulo 59 y el LAB-064. El desarrollo X++ y la
+- PlanEstudio ya introdujo F&O conceptual en el Módulo 60 y el LAB-064. El desarrollo X++ y la
   especialización MB-500 siguen fuera de alcance hasta contar con una ruta F&O de producto más
   profunda.
 
@@ -296,8 +296,8 @@ Competencias que siguen siendo válidas:
 | PL-200, si aplica antes del retiro | Pendiente | Antes del 31 ago 2026 | Practice assessment + proyecto Nivel 2 |
 | PL-400 | Pendiente | | Labs técnicos + simulador Nivel 3 |
 | Arquitectura Power Platform | Enfoque profesional | | Capstone, ADRs, arquitectura, runbook y defensa ejecutiva |
-| MB-230 | Especialización recomendada | | Módulo 61 + LAB-082 + LAB-083 |
-| MB-310 / MB-330 | Especialización F&O recomendada | | Módulos 59/64 + LAB-088/LAB-089; profundidad de producto pendiente |
+| MB-230 | Especialización recomendada | | Módulo 62 + LAB-082 + LAB-083 |
+| MB-310 / MB-330 | Especialización F&O recomendada | | Módulos 60/64 + LAB-088/LAB-089; profundidad de producto pendiente |
 | MB-500 | Especialización developer avanzada | | Ruta F&O developer pendiente |
 
 ---

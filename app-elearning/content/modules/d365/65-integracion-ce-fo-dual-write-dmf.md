@@ -1,5 +1,5 @@
 ---
-moduleId: 64
+moduleId: 65
 title: "Integración CE + Finance & Operations — Dual-write, DMF y Ownership"
 level: "d365"
 certification: "D365 Especialización Integration"
@@ -22,7 +22,7 @@ Diseñar una integración responsable entre Dynamics 365 Customer Engagement y F
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 1. Crea una matriz para Account/Customer, Product, Sales Order, Invoice e Inventory con columnas: dueño, consumidor, patrón, dirección, frecuencia y regla de conflicto.
-2. Decide patrón por entidad aplicando este criterio de decisión (el mismo del Módulo 59): ¿necesita escritura continua en ambos sistemas? → dual-write. ¿Es carga puntual/migración? → DMF. ¿Solo lectura desde Power Platform? → virtual tables. ¿No calza en ninguna? → integración custom. Justifica cada decisión con una frase.
+2. Decide patrón por entidad aplicando este criterio de decisión (el mismo del Módulo 60): ¿necesita escritura continua en ambos sistemas? → dual-write. ¿Es carga puntual/migración? → DMF. ¿Solo lectura desde Power Platform? → virtual tables. ¿No calza en ninguna? → integración custom. Justifica cada decisión con una frase.
 3. Dibuja este flujo CE + F&O y complétalo indicando qué sistema es dueño en cada paso:
 
    ```mermaid

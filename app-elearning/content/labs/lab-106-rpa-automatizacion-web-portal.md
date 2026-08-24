@@ -7,7 +7,7 @@ product: ["Power Automate Desktop", "Browser Automation", "UI Elements", "RPA"]
 certifications: ["Power Automate Desktop & RPA"]
 role: ["RPA Developer", "Automation Engineer"]
 prerequisites:
-  - "Módulo 70 completado"
+  - "Módulo 71 completado"
   - "Portal de práctica o HTML local controlado"
 files: []
 ---

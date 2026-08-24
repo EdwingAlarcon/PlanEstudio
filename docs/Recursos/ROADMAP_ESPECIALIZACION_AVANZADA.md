@@ -11,17 +11,17 @@ PlanEstudio ya cubre con evidencia real:
 
 - **Power Platform completo** (Canvas, Model-Driven, Dataverse, Power Automate, Power Fx, ALM, PCF,
   plugins, gobernanza) — rutas Maker, Consultor Funcional, Developer, Solution Architect.
-- **Dynamics 365 CE avanzado**: Sales forecasting/pipeline (Módulo 60, LAB-081), Customer Service
-  SLA/entitlements/routing (Módulo 61, LAB-082), Contact Center con canal de chat hands-on en trial
-  (Módulo 62, LAB-083), Customer Insights Data/Journeys separados (Módulos 57/63, LAB-085/LAB-084) y
-  Field Service end-to-end (Módulo 58, LAB-086/LAB-087).
+- **Dynamics 365 CE avanzado**: Sales forecasting/pipeline (Módulo 61, LAB-081), Customer Service
+  SLA/entitlements/routing (Módulo 62, LAB-082), Contact Center con canal de chat hands-on en trial
+  (Módulo 63, LAB-083), Customer Insights Data/Journeys separados (Módulos 58/63, LAB-085/LAB-084) y
+  Field Service end-to-end (Módulo 59, LAB-086/LAB-087).
 - **Finance & Operations — awareness avanzado e integración**: vocabulario, mapas de proceso,
-  ownership CE + F&O y diseño de integración (Módulos 59/64, LAB-069/LAB-070/LAB-088/LAB-089).
+  ownership CE + F&O y diseño de integración (Módulos 60/64, LAB-069/LAB-070/LAB-088/LAB-089).
 - **Finance & Operations — práctica hands-on**: setup financiero, Procure-to-Pay, Order-to-Cash,
   inventario/producto y Project Operations ejecutados paso a paso en un trial tenant propio del
   estudiante (LAB-093 a LAB-097 — ver nota de verificación en cada uno).
 - **Capstone Enterprise D365**: arquitectura CE + F&O, roadmap, Fit-Gap, UAT y evidencia de
-  portafolio (Módulo 65, LAB-090).
+  portafolio (Módulo 66, LAB-090).
 
 La ejecución real de canales Contact Center, Sales Insights predictivo, RSO/Field Service Mobile,
 Customer Insights, dual-write y F&O productivo (más allá de los 5 procesos de LAB-093 a LAB-097)
@@ -49,7 +49,7 @@ evidencia de diseño/lab y gate explícito para ambiente real.
 
 ## 1. Ruta Expert Customer Service / Contact Center
 
-**Estado global: 🔵 Avanzado**, con el canal de Chat hands-on en trial implementado (Módulo 62,
+**Estado global: 🔵 Avanzado**, con el canal de Chat hands-on en trial implementado (Módulo 63,
 LAB-083). Voz y SMS son el único límite real que queda: no requieren "más tenant", requieren
 **contratar un proveedor de telefonía/SMS externo** — eso es un compromiso de costo, no un gate de
 configuración que este roadmap pueda resolver solo con documentación.
@@ -58,12 +58,12 @@ configuración que este roadmap pueda resolver solo con documentación.
 |---|---|
 | Case management, colas, SLA, escalamiento, dashboard operativo | 🔵 Avanzado (Módulo 20, LAB-068) |
 | Omnichannel for Customer Service (routing multicanal, contexto de conversación) | 🔵 Avanzado (Módulo 20, LAB-083) |
-| Dynamics 365 Contact Center | 🔵 Avanzado (Módulo 62, LAB-083 canal de chat hands-on) |
+| Dynamics 365 Contact Center | 🔵 Avanzado (Módulo 63, LAB-083 canal de chat hands-on) |
 | Chat | 🔵 Avanzado (LAB-083 — widget, workstream, routing y conversación de prueba ejecutados en trial) |
 | Voice | 🟡 Awareness (requiere proveedor de telefonía real, no solo trial — ver LAB-083 "Alcance de este lab") |
 | SMS | 🟡 Awareness (requiere proveedor de SMS real, no solo trial — ver LAB-083 "Alcance de este lab") |
 | Email (enrutamiento avanzado, no el caso base) | 🔵 Avanzado (diseño de routing; configuración real depende de tenant) |
-| Unified routing (reglas basadas en habilidad/capacidad/prioridad) | 🔵 Avanzado (Módulo 62, LAB-083 — routing por prioridad ejecutado y probado) |
+| Unified routing (reglas basadas en habilidad/capacidad/prioridad) | 🔵 Avanzado (Módulo 63, LAB-083 — routing por prioridad ejecutado y probado) |
 | Agent experience (espacio de trabajo multi-sesión, macros, productivity pane) | 🔵 Avanzado (LAB-083 — presencia y capacidad configuradas y probadas; macros/productivity pane siguen en awareness) |
 | Supervisor experience (monitoreo en vivo, intervención, reasignación) | 🔵 Avanzado (LAB-083 — dashboard con métricas realmente disponibles en trial documentadas) |
 | Analytics (Customer Service Analytics, Omnichannel Insights) | ⚪ En expansión (requiere licencia Insights, fuera de un trial base) |
@@ -92,13 +92,13 @@ momento de escribirse.
 
 ## 2. Ruta Expert Sales Operations
 
-**Estado global: 🔵 Avanzado**, con Sales Forecasting & Pipeline Review implementado (Módulo 60, LAB-081).
+**Estado global: 🔵 Avanzado**, con Sales Forecasting & Pipeline Review implementado (Módulo 61, LAB-081).
 
 | Tema | Madurez actual |
 |---|---|
 | Proceso lead-to-cash (BPF, Quote → Order → Invoice) | 🔵 Avanzado (Módulo 20, LAB-066) |
 | Territories (asignación geográfica/vertical de cuentas) | ⚪ En expansión |
-| Forecasting (categorías de forecast, forecast configurable) | 🔵 Avanzado (Módulo 60, LAB-081; validación real requiere Sales) |
+| Forecasting (categorías de forecast, forecast configurable) | 🔵 Avanzado (Módulo 61, LAB-081; validación real requiere Sales) |
 | Goals (metas individuales/de equipo, rollup) | 🔵 Avanzado (diseño/matriz; configuración real requiere tenant) |
 | Sales Insights (relationship health, predicción de conversión) | 🟡 Awareness (requiere licencia/datos históricos) |
 | Sales Accelerator (secuencias, listas de trabajo priorizadas) | ⚪ En expansión |
@@ -145,20 +145,20 @@ labs siguen pendientes de verificación contra un tenant en vivo (ver regla más
 | Tema | Madurez actual |
 |---|---|
 | Finance configuration fundamentals (legal entities, calendarios fiscales, catálogo de cuentas) | 🔵 Avanzado (LAB-093, requiere trial tenant) |
-| Legal entities (estructura multi-entidad, intercompany) | 🔵 Avanzado (Módulo 59, LAB-093) |
+| Legal entities (estructura multi-entidad, intercompany) | 🔵 Avanzado (Módulo 60, LAB-093) |
 | Financial dimensions (segmentos, jerarquías, valores por defecto) | 🔵 Avanzado (LAB-093) |
 | Supply Chain configuration fundamentals (sitios, almacenes, ubicaciones) | 🔵 Avanzado (LAB-096) |
-| Products and inventory (variantes, dimensiones de producto, políticas de reserva) | 🔵 Avanzado (Módulo 59, LAB-096) |
+| Products and inventory (variantes, dimensiones de producto, políticas de reserva) | 🔵 Avanzado (Módulo 60, LAB-096) |
 | Commerce overview (POS, call center, canales unificados) | 🔵 Avanzado (LAB-098 — módulo Commerce puede no venir habilitado en todo trial, ver nota del lab) |
 | Project Operations (estructura de proyecto, WBS, facturación por hitos/tiempo) | 🔵 Avanzado (LAB-097) |
-| Procure-to-Pay (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069 mapa de proceso; LAB-094 ejecución hands-on) |
-| Order-to-Cash (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069 mapa de proceso; LAB-095 ejecución hands-on) |
-| Record-to-Report (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069, LAB-100 reporting hands-on) |
-| Inventory-to-Deliver / Project-to-Profit (paso a paso) | 🔵 Avanzado (Módulo 59, LAB-069) |
-| Data entities (estructura, staging, validaciones) | 🟡 Awareness (Módulo 59) |
+| Procure-to-Pay (paso a paso) | 🔵 Avanzado (Módulo 60, LAB-069 mapa de proceso; LAB-094 ejecución hands-on) |
+| Order-to-Cash (paso a paso) | 🔵 Avanzado (Módulo 60, LAB-069 mapa de proceso; LAB-095 ejecución hands-on) |
+| Record-to-Report (paso a paso) | 🔵 Avanzado (Módulo 60, LAB-069, LAB-100 reporting hands-on) |
+| Inventory-to-Deliver / Project-to-Profit (paso a paso) | 🔵 Avanzado (Módulo 60, LAB-069) |
+| Data entities (estructura, staging, validaciones) | 🟡 Awareness (Módulo 60) |
 | Data Management Framework (importación masiva, manejo de errores) | 🟡 Awareness (LAB-064) |
 | Dual-write setup awareness (mapas, entidades vinculadas) | 🔵 Avanzado (LAB-070, LAB-088) |
-| Integration with Dataverse (patrones de integración, ownership de datos) | 🔵 Avanzado (Módulo 64, LAB-070, LAB-088) |
+| Integration with Dataverse (patrones de integración, ownership de datos) | 🔵 Avanzado (Módulo 65, LAB-070, LAB-088) |
 | LCS awareness (ciclo de vida, ambientes, actualizaciones) | ⚪ En expansión |
 | Security (roles de seguridad F&O, duty/privilege) | 🔵 Avanzado (LAB-099) |
 | Reporting (Financial Reporting, Power BI embebido en F&O) | 🔵 Avanzado (LAB-100) |
@@ -190,7 +190,7 @@ contra un tenant real sí lo es, y depende de que alguien con acceso la ejecute.
 
 ## 4. Ruta Business Applications Architect Enterprise
 
-**Estado global: 🔵 Avanzado**, apoyada en CE + F&O ownership y capstone enterprise (Módulo 65, LAB-090).
+**Estado global: 🔵 Avanzado**, apoyada en CE + F&O ownership y capstone enterprise (Módulo 66, LAB-090).
 
 | Tema | Madurez actual |
 |---|---|
@@ -205,7 +205,7 @@ contra un tenant real sí lo es, y depende de que alguien con acceso la ejecute.
 | ALM across apps (pipelines que despliegan CE y F&O juntos) | 🟡 Awareness (LAB-019 cubre ALM de Power Platform, no F&O) |
 | Data governance (calidad de datos, maestros compartidos) | 🟡 Awareness (Módulo 34/59) |
 | Licensing awareness (CE vs. F&O vs. Power Platform combinados) | 🟡 Awareness |
-| Roadmap enterprise (fases de adopción CE→F&O o al revés) | 🔵 Avanzado (Módulo 65, LAB-090) |
+| Roadmap enterprise (fases de adopción CE→F&O o al revés) | 🔵 Avanzado (Módulo 66, LAB-090) |
 
 ### Capstone implementado: Enterprise D365
 

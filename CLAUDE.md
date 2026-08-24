@@ -61,8 +61,25 @@ Current stable state as of the latest local handoff (2026-08-22):
   domain. The old `out-gilt-tau.vercel.app` domain was removed from Vercel Settings → Domains after
   an initial static deploy from `out/` left it as the default production domain. GitHub Pages was used
   historically and may still exist as a secondary mirror, but it is no longer the release blocker.
-- Fixed learning content counts: **75 modules, 72 labs, 508 quiz questions, 375 case-diagnosis
-  questions, 633 checklist criteria**. The case-diagnosis questions are tagged with
+- Fixed learning content counts: **76 modules, 72 labs, 516 quiz questions, 375 case-diagnosis
+  questions, 636 checklist criteria**. Module 56 ("Fundamentos de JavaScript para Power Platform",
+  `ia` level) was added 2026-08-23 as a from-scratch JS prerequisite, closing a real pedagogical gap
+  found in the 2026-08-22 audit: módulo 13 (JavaScript y PCF Básico) required programming knowledge
+  it never taught. Módulo 13 links to it explicitly in its "Antes de comenzar" box instead of gating
+  on it. **Why moduleId 56 and not appended at 76**: `LEVEL_MODULE_RANGE` (`i18n.ts`) ranges are
+  disjoint, contiguous, and load-bearing well beyond content validation — `progress.ts`
+  (`getOverallProgress`, `getTotalModulesForLevel`), `quiz-engine.ts` (`levelForModule`, which scans
+  `LEVEL_ORDER` and returns the *first* range match) and `questions-parser.ts`
+  (`getQuestionsForLevel`) all assume no overlap. Widening `ia`'s range past its neighbors silently
+  double-counts and misclassifies d365/rpa modules and questions (caught by
+  `progress.test.ts`/`questions-parser.test.ts` failing with inflated totals, e.g. 96 instead of 76).
+  Since all 7 levels pack moduleId 1-75 with zero gaps, the only way to add a module to `ia` without
+  breaking that invariant was to open real room for it: `ia` is now `[42, 56]`, and `d365`/`rpa` each
+  shifted **+1** (`d365` → `[57, 66]`, `rpa` → `[67, 76]`). This renumbered 20 module content files,
+  their question-bank keys, checklist headings, and ~106 internal cross-references ("Módulo 59
+  estudiado", "ver Módulo 62", etc.) across labs and docs/Recursos — done via a scripted mapping
+  (see `git log` around this change), not by hand. If you ever add another module to a level that
+  isn't the last in `LEVEL_ORDER`, expect the same constraint. The case-diagnosis questions are tagged with
   `appliesTo: "caso"` and are intentionally excluded from `getQuestionsForModule()` and the simulator
   quiz pool.
 - Professional practice pilot counts: **32 practices total — 18 incidents, 6 challenges, 2
@@ -132,7 +149,7 @@ docs/                    # MkDocs source content — legacy/reference site only 
     CERTIFICACIONES.md
     PROMPTS_REUTILIZABLES_IA.md  # 16 reusable prompts for AI-assisted Power Platform/D365 work (Nivel IA, /recursos/prompts-ia)
   javascripts/
-    evaluaciones-simulador.js   # Banco de 883 preguntas en MODULE_QUESTIONS (módulos 1-75): 508 quiz + 375 diagnóstico de caso aplicado
+    evaluaciones-simulador.js   # Banco de 891 preguntas en MODULE_QUESTIONS (módulos 1-76): 516 quiz + 375 diagnóstico de caso aplicado
   stylesheets/
     extra.css            # Custom CSS for MkDocs site
 app-elearning/           # Next.js 15 interactive app (THE primary surface)
@@ -142,7 +159,7 @@ app-elearning/           # Next.js 15 interactive app (THE primary surface)
       intermedio/09-*.md … 17-*.md
       avanzado/18-*.md … 30-*.md
       arquitecto/31-*.md … 41-*.md
-      ia/42-*.md … 55-*.md              # transversal level (14 modules) — no prerequisites, doesn't gate/get gated by the 4 levels above
+      ia/42-*.md … 56-*.md              # transversal level (15 modules) — no prerequisites, doesn't gate/get gated by the 4 levels above; module 56 ("Fundamentos de JavaScript para Power Platform") was appended 2026-08-23, which shifted d365 to 57-66 and rpa to 67-76 — see moduleId ordering note below
       d365/56-*.md … 65-*.md            # transversal level (10 modules) — Dynamics 365 CE/F&O vocabulary, architecture, Customer Insights, Field Service and integration; same non-gating pattern as ia
     labs/
       lab-02-*.md, lab-03-*.md, …       # one file per lab, same frontmatter pattern (72 total; includes labs 45/51/52/53/54/55/56/57 for ia, 61-67 for capstones/D365 depth, 71-80 for job-ready simulations, 91-92 for CRM Developer job-ready extensibility/troubleshooting, 93-100 for F&O hands-on practitioner labs requiring a trial/demo Finance & Operations tenant, 101 for the integrated CRM Functional Analyst job-ready case (JR-013), 102-103 for Sales/post-go-live simulations, and 104-112 for the RPA track — see ROADMAP_ESPECIALIZACION_AVANZADA.md #3 for which topics are covered and the pending live-tenant verification)
@@ -274,7 +291,7 @@ Don't change these if editing `docs/Niveles/*.md` for MkDocs.
 }
 ```
 
-- 883 total questions across 75 modules: 508 normal quiz questions + 375 `appliesTo: "caso"` questions
+- 891 total questions across 76 modules: 516 normal quiz questions + 375 `appliesTo: "caso"` questions
 - Module 1 has 15 questions (includes AI Builder and Power Pages topics for PL-900)
 - After editing, validate with Node.js that the object parses correctly
 - `scripts/extract-questions.mjs` parses `evaluaciones-simulador.js` via `vm.runInContext` at `prebuild` time and generates `app-elearning/src/data/questions.ts`, which `questions-parser.ts` imports statically (no runtime `eval`/`new Function`)

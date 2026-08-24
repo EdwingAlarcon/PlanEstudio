@@ -7,7 +7,7 @@ product: ["Power Automate Desktop", "Solutions", "Machine Runtime", "Unattended 
 certifications: ["Power Automate Desktop & RPA"]
 role: ["RPA Developer", "RPA Operations Specialist", "Automation Solution Architect"]
 prerequisites:
-  - "Módulos 67 y 75 completados"
+  - "Módulos 68 y 75 completados"
   - "Ambiente DEV/TEST o simulación documentada"
 files: []
 ---

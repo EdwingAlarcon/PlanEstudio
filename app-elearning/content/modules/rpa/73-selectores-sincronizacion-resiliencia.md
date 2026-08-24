@@ -1,5 +1,5 @@
 ---
-moduleId: 72
+moduleId: 73
 title: "Selectores, sincronización y resiliencia"
 level: "rpa"
 certification: "Power Automate Desktop & RPA"

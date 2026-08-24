@@ -1,5 +1,5 @@
 ---
-moduleId: 65
+moduleId: 66
 title: "Capstone Enterprise D365 — Arquitectura CE, Contact Center, Field Service e Integración F&O"
 level: "d365"
 certification: "D365 Especialización Portfolio"
@@ -11,12 +11,12 @@ Integrar Sales, Customer Service, Contact Center, Customer Insights, Field Servi
 
 ### 📖 Conceptos Clave
 - **Capstone enterprise:** evidencia final que demuestra criterio de consultoría (decisiones, trade-offs, secuenciación) — no solo la capacidad de navegar pantallas de cada producto.
-- **Proceso end-to-end — con producto responsable por tramo:** campaña/segmento (Customer Insights - Journeys, Módulo 63) → lead (Sales) → oportunidad (Sales, Módulo 60) → venta/orden (Sales → F&O, Módulo 59/64) → caso (Customer Service, Módulo 61) → conversación (Contact Center, Módulo 62) → work order (Field Service, Módulo 58) → factura/ERP (F&O) → fidelización (Customer Insights - Data, Módulo 57, que retroalimenta el ciclo). Ningún tramo de este flujo pertenece a un solo producto — es la integración completa la que se defiende en el capstone.
+- **Proceso end-to-end — con producto responsable por tramo:** campaña/segmento (Customer Insights - Journeys, Módulo 64) → lead (Sales) → oportunidad (Sales, Módulo 61) → venta/orden (Sales → F&O, Módulo 60/64) → caso (Customer Service, Módulo 62) → conversación (Contact Center, Módulo 63) → work order (Field Service, Módulo 59) → factura/ERP (F&O) → fidelización (Customer Insights - Data, Módulo 58, que retroalimenta el ciclo). Ningún tramo de este flujo pertenece a un solo producto — es la integración completa la que se defiende en el capstone.
 - **Fit-Gap:** documento que decide, proceso por proceso, qué se configura estándar (sin personalizar), qué se personaliza dentro de la plataforma, qué se resuelve con integración a otro sistema, y qué explícitamente queda fuera de alcance en esta fase.
-- **Arquitectura de datos:** Account/Contact como base compartida de CE (Módulo 56), perfiles unificados y medidas en Customer Insights - Data, journeys para activación de esos perfiles, y F&O como dueño de los procesos ERP (order-to-cash, procure-to-pay) con ownership definido vía la matriz del Módulo 64.
-- **Licenciamiento:** Sales, Customer Service, Contact Center, Customer Insights, Field Service y F&O tienen licencias/capacidades distintas, con pools de licenciamiento separados entre CE y F&O (Módulo 59). Un capstone serio marca explícitamente qué licencias asume por rol/usuario, no las omite "para simplificar".
+- **Arquitectura de datos:** Account/Contact como base compartida de CE (Módulo 57), perfiles unificados y medidas en Customer Insights - Data, journeys para activación de esos perfiles, y F&O como dueño de los procesos ERP (order-to-cash, procure-to-pay) con ownership definido vía la matriz del Módulo 65.
+- **Licenciamiento:** Sales, Customer Service, Contact Center, Customer Insights, Field Service y F&O tienen licencias/capacidades distintas, con pools de licenciamiento separados entre CE y F&O (Módulo 60). Un capstone serio marca explícitamente qué licencias asume por rol/usuario, no las omite "para simplificar".
 - **Ambientes y ALM:** DEV/TEST/PROD, soluciones versionadas, variables de entorno, pipelines de despliegue, ownership de componentes y estrategia de datos de prueba — la misma disciplina de ALM del Módulo 19, aplicada a un alcance multi-producto.
-- **Operación:** SLA (Módulo 61), unified routing (Módulo 62), Schedule Board (Módulo 58), mobile offline (Módulo 58), monitoreo de integración CE+F&O (Módulo 64), soporte post-go-live y plan de adopción por rol de usuario.
+- **Operación:** SLA (Módulo 62), unified routing (Módulo 63), Schedule Board (Módulo 59), mobile offline (Módulo 59), monitoreo de integración CE+F&O (Módulo 65), soporte post-go-live y plan de adopción por rol de usuario.
 - **Evidencia de portafolio:** diagramas de arquitectura y de proceso, matrices (Fit-Gap, ownership de datos), backlog priorizado, plan de UAT por proceso (no por producto aislado), dashboards ejecutivos y una demo narrada que conecte los 6 productos en una sola historia de negocio.
 - **Requisitos reales de práctica:** el Fit-Gap, las matrices, el roadmap y los diagramas de arquitectura pueden construirse sin tenant, como el entregable central de este capstone. Ejecutar el flujo end-to-end en vivo (crear la Opportunity, generar el caso, ver el Work Order, confirmar la factura en F&O) requiere ambientes reales conectados de CE y F&O, licencias de cada producto y datos maestros consistentes entre sistemas.
 
@@ -24,7 +24,7 @@ Integrar Sales, Customer Service, Contact Center, Customer Insights, Field Servi
 1. Elige un caso: empresa de servicios técnicos B2B con venta consultiva, soporte premium y mantenimiento preventivo (puedes reutilizar Andina Servicios Industriales del Lab 71 o SIT de los Labs 66/81).
 2. Diseña el flujo end-to-end en 10 pasos desde campaña hasta renovación. Nombra el producto D365 responsable por cada paso, usando la cadena de la sección de Conceptos Clave como plantilla.
 3. Crea una matriz Fit-Gap con 12 filas: proceso, estándar, gap, decisión, riesgo, owner y evidencia. Incluye al menos un gap por cada uno de los 6 productos (Sales, Customer Service, Contact Center, Customer Insights, Field Service, F&O).
-4. Crea una matriz de datos con Account, Contact, Opportunity, Case, Conversation, Work Order, Product, Sales Order, Invoice e Inventory, indicando sistema dueño (reutiliza el criterio del Módulo 64).
+4. Crea una matriz de datos con Account, Contact, Opportunity, Case, Conversation, Work Order, Product, Sales Order, Invoice e Inventory, indicando sistema dueño (reutiliza el criterio del Módulo 65).
 5. Define un roadmap por fases: piloto CE (Sales + Customer Service), Contact Center, Field Service, Customer Insights, integración F&O, y hardening ALM — con al menos un criterio de salida (exit criteria) medible por fase.
 6. Responde esta pregunta de entrevista/consultoría de Solution Architect: "El cliente quiere lanzar Sales, Service, Field Service e integración F&O en una sola salida a producción — ¿qué le responderías?" (respuesta esperada: recomendar despliegue por fases con valor incremental, citando el riesgo de ownership de datos sin probar y adopción sin plan, como en el caso de negocio de este módulo).
 7. Lista qué requiere tenant real: licencias por producto, ambientes conectados, canales configurados, usuarios, datos maestros, integraciones activas y permisos administrativos.

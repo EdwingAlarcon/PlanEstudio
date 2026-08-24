@@ -7,7 +7,7 @@ product: ["Dynamics 365 Customer Insights - Data", "Dataverse", "Power BI"]
 certifications: ["Dynamics 365 Customer Insights"]
 role: ["Data Specialist", "Consultor Funcional D365 CE"]
 prerequisites:
-  - "Módulo 57 estudiado: Customer Insights - Data"
+  - "Módulo 58 estudiado: Customer Insights - Data"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
 ---
 
