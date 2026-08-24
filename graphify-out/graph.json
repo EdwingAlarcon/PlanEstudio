@@ -26,10 +26,21 @@
       "norm_label": "planestudio \u2014 estado de sprints post-auditoria (handoff)"
     },
     {
-      "label": "Estado al 2026-08-22 (auditor\u00eda de estudiante sin conocimientos previos + mejoras)",
+      "label": "Estado al 2026-08-22 noche (fix de infra Vercel \u2014 dominio planestudio.vercel.app roto)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
       "source_location": "L7",
+      "_origin": "ast",
+      "id": "sprint_handoff_estado_al_2026_08_22_noche_fix_de_infra_vercel_dominio_planestudio_vercel_app_roto",
+      "community": 22,
+      "community_name": "Community 22",
+      "norm_label": "estado al 2026-08-22 noche (fix de infra vercel \u2014 dominio planestudio.vercel.app roto)"
+    },
+    {
+      "label": "Estado al 2026-08-22 (auditor\u00eda de estudiante sin conocimientos previos + mejoras)",
+      "file_type": "document",
+      "source_file": "SPRINT_HANDOFF.md",
+      "source_location": "L49",
       "_origin": "ast",
       "id": "sprint_handoff_estado_al_2026_08_22_auditor\u00eda_de_estudiante_sin_conocimientos_previos_mejoras",
       "community": 22,
@@ -40,7 +51,7 @@
       "label": "Estado al 2026-08-22 (pausa por reinicio de PC del usuario)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L52",
+      "source_location": "L94",
       "_origin": "ast",
       "id": "sprint_handoff_estado_al_2026_08_22_pausa_por_reinicio_de_pc_del_usuario",
       "community": 22,
@@ -51,7 +62,7 @@
       "label": "Sprint \u2014 Spaced Repetition & Long-Term Retention Engine (2026-08-18)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L89",
+      "source_location": "L131",
       "_origin": "ast",
       "id": "sprint_handoff_sprint_spaced_repetition_long_term_retention_engine_2026_08_18",
       "community": 22,
@@ -62,7 +73,7 @@
       "label": "Sprint de cierre \u2014 Interactive Practice Engine Completion & Validation (2026-08-11)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L167",
+      "source_location": "L209",
       "_origin": "ast",
       "id": "sprint_handoff_sprint_de_cierre_interactive_practice_engine_completion_validation_2026_08_11",
       "community": 22,
@@ -73,7 +84,7 @@
       "label": "Sprint Piloto \u2014 Interactive Practice Engine (2026-08-11)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L224",
+      "source_location": "L266",
       "_origin": "ast",
       "id": "sprint_handoff_sprint_piloto_interactive_practice_engine_2026_08_11",
       "community": 22,
@@ -84,7 +95,7 @@
       "label": "Sprint \u2014 Beginner Continuity & Honest Prerequisites (2026-08-06)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L300",
+      "source_location": "L342",
       "_origin": "ast",
       "id": "sprint_handoff_sprint_beginner_continuity_honest_prerequisites_2026_08_06",
       "community": 22,
@@ -95,7 +106,7 @@
       "label": "Sprint propuesto \u2014 Code Apps (Power Apps) \u2014 NO INICIADO (2026-08-03)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L400",
+      "source_location": "L442",
       "_origin": "ast",
       "id": "sprint_handoff_sprint_propuesto_code_apps_power_apps_no_iniciado_2026_08_03",
       "community": 22,
@@ -106,7 +117,7 @@
       "label": "\u00daltima actualizaci\u00f3n (2026-07-29)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L418",
+      "source_location": "L460",
       "_origin": "ast",
       "id": "sprint_handoff_\u00faltima_actualizaci\u00f3n_2026_07_29",
       "community": 22,
@@ -117,7 +128,7 @@
       "label": "Pausa de sesi\u00f3n (2026-07-27, retomar 2026-07-28)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L513",
+      "source_location": "L555",
       "_origin": "ast",
       "id": "sprint_handoff_pausa_de_sesi\u00f3n_2026_07_27_retomar_2026_07_28",
       "community": 22,
@@ -128,7 +139,7 @@
       "label": "Contexto",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L522",
+      "source_location": "L564",
       "_origin": "ast",
       "id": "sprint_handoff_contexto",
       "community": 22,
@@ -139,7 +150,7 @@
       "label": "Sprints completados (orden cronol\u00f3gico, todos en `master`)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L534",
+      "source_location": "L576",
       "_origin": "ast",
       "id": "sprint_handoff_sprints_completados_orden_cronol\u00f3gico_todos_en_master",
       "community": 22,
@@ -150,7 +161,7 @@
       "label": "Diagn\u00f3sticos cerrados (no re-abrir sin instrucci\u00f3n expl\u00edcita)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L569",
+      "source_location": "L611",
       "_origin": "ast",
       "id": "sprint_handoff_diagn\u00f3sticos_cerrados_no_re_abrir_sin_instrucci\u00f3n_expl\u00edcita",
       "community": 22,
@@ -161,7 +172,7 @@
       "label": "Estado de cada frente (taxonom\u00eda estandarizada)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L585",
+      "source_location": "L627",
       "_origin": "ast",
       "id": "sprint_handoff_estado_de_cada_frente_taxonom\u00eda_estandarizada",
       "community": 22,
@@ -172,7 +183,7 @@
       "label": "UX / navegaci\u00f3n transversal \u2014 auditor\u00eda del sprint 9",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L620",
+      "source_location": "L662",
       "_origin": "ast",
       "id": "sprint_handoff_ux_navegaci\u00f3n_transversal_auditor\u00eda_del_sprint_9",
       "community": 22,
@@ -183,7 +194,7 @@
       "label": "Verificaci\u00f3n de producci\u00f3n \u2014 antes de investigar c\u00f3digo por un reporte de \"no se refleja\"",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L645",
+      "source_location": "L687",
       "_origin": "ast",
       "id": "sprint_handoff_verificaci\u00f3n_de_producci\u00f3n_antes_de_investigar_c\u00f3digo_por_un_reporte_de_no_se_refleja",
       "community": 22,
@@ -194,7 +205,7 @@
       "label": "Beginner UX \u2014 auditor\u00eda de estudiante principiante (sprint 14)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L659",
+      "source_location": "L701",
       "_origin": "ast",
       "id": "sprint_handoff_beginner_ux_auditor\u00eda_de_estudiante_principiante_sprint_14",
       "community": 22,
@@ -205,7 +216,7 @@
       "label": "Pendientes reales actuales (todo lo dem\u00e1s est\u00e1 `Cerrado` o es `Roadmap enterprise real`)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L685",
+      "source_location": "L727",
       "_origin": "ast",
       "id": "sprint_handoff_pendientes_reales_actuales_todo_lo_dem\u00e1s_est\u00e1_cerrado_o_es_roadmap_enterprise_real",
       "community": 22,
@@ -216,7 +227,7 @@
       "label": "Estado estable \u2014 release readiness",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L701",
+      "source_location": "L743",
       "_origin": "ast",
       "id": "sprint_handoff_estado_estable_release_readiness",
       "community": 22,
@@ -227,7 +238,7 @@
       "label": "Sprint en curso \u2014 Developer Workstation, Environment Setup & Project Foundations (Fase 1)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L744",
+      "source_location": "L786",
       "_origin": "ast",
       "id": "sprint_handoff_sprint_en_curso_developer_workstation_environment_setup_project_foundations_fase_1",
       "community": 22,
@@ -238,7 +249,7 @@
       "label": "Cierre de la Fase 2 (Developer Workstation, Environment Setup & Project Foundations)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L945",
+      "source_location": "L987",
       "_origin": "ast",
       "id": "sprint_handoff_cierre_de_la_fase_2_developer_workstation_environment_setup_project_foundations",
       "community": 22,
@@ -249,7 +260,7 @@
       "label": "Sprint \u2014 Diagn\u00f3stico de caso aplicado (piloto APROBADO 2026-08-04; escalando por nivel)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L958",
+      "source_location": "L1000",
       "_origin": "ast",
       "id": "sprint_handoff_sprint_diagn\u00f3stico_de_caso_aplicado_piloto_aprobado_2026_08_04_escalando_por_nivel",
       "community": 22,
@@ -260,7 +271,7 @@
       "label": "Contexto original del dise\u00f1o (2026-08-03/04, antes de implementar)",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L1081",
+      "source_location": "L1123",
       "_origin": "ast",
       "id": "sprint_handoff_contexto_original_del_dise\u00f1o_2026_08_03_04_antes_de_implementar",
       "community": 22,
@@ -271,7 +282,7 @@
       "label": "C\u00f3mo continuar",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L1112",
+      "source_location": "L1154",
       "_origin": "ast",
       "id": "sprint_handoff_c\u00f3mo_continuar",
       "community": 22,
@@ -282,7 +293,7 @@
       "label": "Comandos de validaci\u00f3n de referencia",
       "file_type": "document",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L1128",
+      "source_location": "L1170",
       "_origin": "ast",
       "id": "sprint_handoff_comandos_de_validaci\u00f3n_de_referencia",
       "community": 22,
@@ -669,8 +680,8 @@
       "source_file": "app-elearning/src/components/labs/labs-client.tsx",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 3,
-      "community_name": "Community 3",
+      "community": 26,
+      "community_name": "Community 26",
       "norm_label": "labwithmeta",
       "id": "app_elearning_src_components_labs_labs_client_labwithmeta"
     },
@@ -1142,8 +1153,8 @@
       "source_file": "app-elearning/src/lib/interactive-practices.ts",
       "source_location": "L662",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "Community 2",
+      "community": 19,
+      "community_name": "Community 19",
       "norm_label": "getinteractivepracticesearchdocuments()",
       "id": "app_elearning_src_lib_interactive_practices_getinteractivepracticesearchdocuments"
     },
@@ -2583,9 +2594,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L31",
       "_origin": "ast",
-      "community": 80,
+      "community": 51,
       "norm_label": "@radix-ui/react-dialog",
-      "community_name": "@radix-ui/react-dialog",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_radix_ui_react_dialog"
     },
     {
@@ -2594,9 +2605,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L31",
       "_origin": "ast",
-      "community": 80,
+      "community": 51,
       "norm_label": "@radix-ui/react-dialog",
-      "community_name": "@radix-ui/react-dialog",
+      "community_name": "Community 51",
       "id": "radix_ui_react_dialog"
     },
     {
@@ -2605,9 +2616,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L32",
       "_origin": "ast",
-      "community": 81,
+      "community": 51,
       "norm_label": "@radix-ui/react-dropdown-menu",
-      "community_name": "@radix-ui/react-dropdown-menu",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_radix_ui_react_dropdown_menu"
     },
     {
@@ -2616,9 +2627,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L32",
       "_origin": "ast",
-      "community": 81,
+      "community": 51,
       "norm_label": "@radix-ui/react-dropdown-menu",
-      "community_name": "@radix-ui/react-dropdown-menu",
+      "community_name": "Community 51",
       "id": "radix_ui_react_dropdown_menu"
     },
     {
@@ -2627,9 +2638,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 82,
+      "community": 51,
       "norm_label": "@radix-ui/react-progress",
-      "community_name": "@radix-ui/react-progress",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_radix_ui_react_progress"
     },
     {
@@ -2638,9 +2649,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 82,
+      "community": 51,
       "norm_label": "@radix-ui/react-progress",
-      "community_name": "@radix-ui/react-progress",
+      "community_name": "Community 51",
       "id": "radix_ui_react_progress"
     },
     {
@@ -2649,9 +2660,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 83,
+      "community": 51,
       "norm_label": "@radix-ui/react-scroll-area",
-      "community_name": "@radix-ui/react-scroll-area",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_radix_ui_react_scroll_area"
     },
     {
@@ -2660,9 +2671,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 83,
+      "community": 51,
       "norm_label": "@radix-ui/react-scroll-area",
-      "community_name": "@radix-ui/react-scroll-area",
+      "community_name": "Community 51",
       "id": "radix_ui_react_scroll_area"
     },
     {
@@ -2693,9 +2704,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 84,
+      "community": 51,
       "norm_label": "@radix-ui/react-slot",
-      "community_name": "@radix-ui/react-slot",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_radix_ui_react_slot"
     },
     {
@@ -2704,9 +2715,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 84,
+      "community": 51,
       "norm_label": "@radix-ui/react-slot",
-      "community_name": "@radix-ui/react-slot",
+      "community_name": "Community 51",
       "id": "radix_ui_react_slot"
     },
     {
@@ -2715,9 +2726,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 85,
+      "community": 51,
       "norm_label": "@radix-ui/react-tooltip",
-      "community_name": "@radix-ui/react-tooltip",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_radix_ui_react_tooltip"
     },
     {
@@ -2726,9 +2737,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 85,
+      "community": 51,
       "norm_label": "@radix-ui/react-tooltip",
-      "community_name": "@radix-ui/react-tooltip",
+      "community_name": "Community 51",
       "id": "radix_ui_react_tooltip"
     },
     {
@@ -2781,9 +2792,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L40",
       "_origin": "ast",
-      "community": 73,
+      "community": 51,
       "norm_label": "clsx",
-      "community_name": "clsx",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_clsx"
     },
     {
@@ -2792,9 +2803,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L40",
       "_origin": "ast",
-      "community": 73,
+      "community": 51,
       "norm_label": "clsx",
-      "community_name": "clsx",
+      "community_name": "Community 51",
       "id": "clsx"
     },
     {
@@ -2803,9 +2814,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L41",
       "_origin": "ast",
-      "community": 74,
+      "community": 51,
       "norm_label": "flexsearch",
-      "community_name": "flexsearch",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_flexsearch"
     },
     {
@@ -2814,9 +2825,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L41",
       "_origin": "ast",
-      "community": 74,
+      "community": 51,
       "norm_label": "flexsearch",
-      "community_name": "flexsearch",
+      "community_name": "Community 51",
       "id": "flexsearch"
     },
     {
@@ -2825,9 +2836,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L42",
       "_origin": "ast",
-      "community": 75,
+      "community": 51,
       "norm_label": "gray-matter",
-      "community_name": "gray-matter",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_gray_matter"
     },
     {
@@ -2836,9 +2847,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L42",
       "_origin": "ast",
-      "community": 75,
+      "community": 51,
       "norm_label": "gray-matter",
-      "community_name": "gray-matter",
+      "community_name": "Community 51",
       "id": "gray_matter"
     },
     {
@@ -2847,9 +2858,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L43",
       "_origin": "ast",
-      "community": 76,
+      "community": 51,
       "norm_label": "lucide-react",
-      "community_name": "lucide-react",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_lucide_react"
     },
     {
@@ -2858,9 +2869,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L43",
       "_origin": "ast",
-      "community": 76,
+      "community": 51,
       "norm_label": "lucide-react",
-      "community_name": "lucide-react",
+      "community_name": "Community 51",
       "id": "lucide_react"
     },
     {
@@ -2869,9 +2880,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L44",
       "_origin": "ast",
-      "community": 77,
+      "community": 51,
       "norm_label": "mermaid",
-      "community_name": "mermaid",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_mermaid"
     },
     {
@@ -2880,9 +2891,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L44",
       "_origin": "ast",
-      "community": 77,
+      "community": 51,
       "norm_label": "mermaid",
-      "community_name": "mermaid",
+      "community_name": "Community 51",
       "id": "mermaid"
     },
     {
@@ -2891,9 +2902,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L45",
       "_origin": "ast",
-      "community": 78,
+      "community": 51,
       "norm_label": "next",
-      "community_name": "next",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_next"
     },
     {
@@ -2902,9 +2913,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L45",
       "_origin": "ast",
-      "community": 78,
+      "community": 51,
       "norm_label": "next",
-      "community_name": "next",
+      "community_name": "Community 51",
       "id": "next"
     },
     {
@@ -2913,9 +2924,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 79,
+      "community": 51,
       "norm_label": "next-themes",
-      "community_name": "next-themes",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_next_themes"
     },
     {
@@ -2924,9 +2935,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 79,
+      "community": 51,
       "norm_label": "next-themes",
-      "community_name": "next-themes",
+      "community_name": "Community 51",
       "id": "next_themes"
     },
     {
@@ -2935,9 +2946,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L47",
       "_origin": "ast",
-      "community": 69,
+      "community": 20,
       "norm_label": "react",
-      "community_name": "react",
+      "community_name": "Community 20",
       "id": "app_elearning_package_dependencies_react"
     },
     {
@@ -2946,9 +2957,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L47",
       "_origin": "ast",
-      "community": 69,
+      "community": 20,
       "norm_label": "react",
-      "community_name": "react",
+      "community_name": "Community 20",
       "id": "react"
     },
     {
@@ -2957,9 +2968,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L48",
       "_origin": "ast",
-      "community": 108,
+      "community": 51,
       "norm_label": "react-dom",
-      "community_name": "react-dom",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_react_dom"
     },
     {
@@ -2968,9 +2979,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L48",
       "_origin": "ast",
-      "community": 108,
+      "community": 51,
       "norm_label": "react-dom",
-      "community_name": "react-dom",
+      "community_name": "Community 51",
       "id": "react_dom"
     },
     {
@@ -2979,9 +2990,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L49",
       "_origin": "ast",
-      "community": 109,
+      "community": 51,
       "norm_label": "react-markdown",
-      "community_name": "react-markdown",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_react_markdown"
     },
     {
@@ -2990,9 +3001,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L49",
       "_origin": "ast",
-      "community": 109,
+      "community": 51,
       "norm_label": "react-markdown",
-      "community_name": "react-markdown",
+      "community_name": "Community 51",
       "id": "react_markdown"
     },
     {
@@ -3001,9 +3012,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L50",
       "_origin": "ast",
-      "community": 110,
+      "community": 51,
       "norm_label": "rehype-highlight",
-      "community_name": "rehype-highlight",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_rehype_highlight"
     },
     {
@@ -3012,9 +3023,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L50",
       "_origin": "ast",
-      "community": 110,
+      "community": 51,
       "norm_label": "rehype-highlight",
-      "community_name": "rehype-highlight",
+      "community_name": "Community 51",
       "id": "rehype_highlight"
     },
     {
@@ -3023,9 +3034,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L51",
       "_origin": "ast",
-      "community": 111,
+      "community": 51,
       "norm_label": "rehype-raw",
-      "community_name": "rehype-raw",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_rehype_raw"
     },
     {
@@ -3034,9 +3045,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L51",
       "_origin": "ast",
-      "community": 111,
+      "community": 51,
       "norm_label": "rehype-raw",
-      "community_name": "rehype-raw",
+      "community_name": "Community 51",
       "id": "rehype_raw"
     },
     {
@@ -3045,9 +3056,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L52",
       "_origin": "ast",
-      "community": 112,
+      "community": 51,
       "norm_label": "rehype-slug",
-      "community_name": "rehype-slug",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_rehype_slug"
     },
     {
@@ -3056,9 +3067,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L52",
       "_origin": "ast",
-      "community": 112,
+      "community": 51,
       "norm_label": "rehype-slug",
-      "community_name": "rehype-slug",
+      "community_name": "Community 51",
       "id": "rehype_slug"
     },
     {
@@ -3067,9 +3078,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 113,
+      "community": 51,
       "norm_label": "remark-gfm",
-      "community_name": "remark-gfm",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_remark_gfm"
     },
     {
@@ -3078,9 +3089,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 113,
+      "community": 51,
       "norm_label": "remark-gfm",
-      "community_name": "remark-gfm",
+      "community_name": "Community 51",
       "id": "remark_gfm"
     },
     {
@@ -3089,9 +3100,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L54",
       "_origin": "ast",
-      "community": 114,
+      "community": 51,
       "norm_label": "tailwind-merge",
-      "community_name": "tailwind-merge",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_tailwind_merge"
     },
     {
@@ -3100,9 +3111,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L54",
       "_origin": "ast",
-      "community": 114,
+      "community": 51,
       "norm_label": "tailwind-merge",
-      "community_name": "tailwind-merge",
+      "community_name": "Community 51",
       "id": "tailwind_merge"
     },
     {
@@ -3111,9 +3122,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L55",
       "_origin": "ast",
-      "community": 115,
+      "community": 51,
       "norm_label": "zustand",
-      "community_name": "zustand",
+      "community_name": "Community 51",
       "id": "app_elearning_package_dependencies_zustand"
     },
     {
@@ -3122,9 +3133,9 @@
       "source_file": "app-elearning/package.json",
       "source_location": "L55",
       "_origin": "ast",
-      "community": 115,
+      "community": 51,
       "norm_label": "zustand",
-      "community_name": "zustand",
+      "community_name": "Community 51",
       "id": "zustand"
     },
     {
@@ -4079,9 +4090,9 @@
       "source_file": "app-elearning/scripts/validate-content.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 46,
+      "community": 20,
       "norm_label": "validate-content.ts",
-      "community_name": "validate-content.ts",
+      "community_name": "Community 20",
       "id": "app_elearning_scripts_validate_content"
     },
     {
@@ -4090,9 +4101,9 @@
       "source_file": "app-elearning/scripts/validate-content.ts",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 46,
+      "community": 20,
       "norm_label": "main()",
-      "community_name": "validate-content.ts",
+      "community_name": "Community 20",
       "id": "app_elearning_scripts_validate_content_main"
     },
     {
@@ -4332,9 +4343,9 @@
       "source_file": "app-elearning/src/app/certificado/[nivel]/certificate-client.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 41,
+      "community": 39,
       "norm_label": "certificate-client.tsx",
-      "community_name": "Community 41",
+      "community_name": "review-scheduler.ts",
       "id": "app_elearning_src_app_certificado_nivel_certificate_client"
     },
     {
@@ -4343,9 +4354,9 @@
       "source_file": "app-elearning/src/app/certificado/[nivel]/certificate-client.tsx",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 41,
+      "community": 39,
       "norm_label": "certificateclientprops",
-      "community_name": "Community 41",
+      "community_name": "review-scheduler.ts",
       "id": "app_elearning_src_app_certificado_nivel_certificate_client_certificateclientprops"
     },
     {
@@ -4420,9 +4431,9 @@
       "source_file": "app-elearning/src/app/como-usar/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 11,
+      "community": 52,
       "norm_label": "page.tsx",
-      "community_name": "Community 11",
+      "community_name": "domain-hubs.ts",
       "id": "app_elearning_src_app_como_usar_page"
     },
     {
@@ -4431,9 +4442,9 @@
       "source_file": "app-elearning/src/app/como-usar/page.tsx",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 11,
+      "community": 52,
       "norm_label": "metadata",
-      "community_name": "Community 11",
+      "community_name": "domain-hubs.ts",
       "id": "app_elearning_src_app_como_usar_page_metadata"
     },
     {
@@ -4442,9 +4453,9 @@
       "source_file": "app-elearning/src/app/como-usar/page.tsx",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 11,
+      "community": 52,
       "norm_label": "steps",
-      "community_name": "Community 11",
+      "community_name": "domain-hubs.ts",
       "id": "app_elearning_src_app_como_usar_page_steps"
     },
     {
@@ -4453,9 +4464,9 @@
       "source_file": "app-elearning/src/app/como-usar/page.tsx",
       "source_location": "L50",
       "_origin": "ast",
-      "community": 11,
+      "community": 52,
       "norm_label": "first_session",
-      "community_name": "Community 11",
+      "community_name": "domain-hubs.ts",
       "id": "app_elearning_src_app_como_usar_page_first_session"
     },
     {
@@ -4464,9 +4475,9 @@
       "source_file": "app-elearning/src/app/como-usar/page.tsx",
       "source_location": "L73",
       "_origin": "ast",
-      "community": 11,
+      "community": 52,
       "norm_label": "howtousepage()",
-      "community_name": "Community 11",
+      "community_name": "domain-hubs.ts",
       "id": "app_elearning_src_app_como_usar_page_howtousepage"
     },
     {
@@ -4629,9 +4640,9 @@
       "source_file": "app-elearning/src/app/experiencia-practica/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 19,
       "norm_label": "page.tsx",
-      "community_name": "Community 2",
+      "community_name": "Community 19",
       "id": "app_elearning_src_app_experiencia_practica_page"
     },
     {
@@ -4640,9 +4651,9 @@
       "source_file": "app-elearning/src/app/experiencia-practica/page.tsx",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 2,
+      "community": 19,
       "norm_label": "metadata",
-      "community_name": "Community 2",
+      "community_name": "Community 19",
       "id": "app_elearning_src_app_experiencia_practica_page_metadata"
     },
     {
@@ -4662,9 +4673,9 @@
       "source_file": "app-elearning/src/app/experiencia-practica/page.tsx",
       "source_location": "L101",
       "_origin": "ast",
-      "community": 2,
+      "community": 19,
       "norm_label": "metric()",
-      "community_name": "Community 2",
+      "community_name": "Community 19",
       "id": "app_elearning_src_app_experiencia_practica_page_metric"
     },
     {
@@ -4673,9 +4684,9 @@
       "source_file": "app-elearning/src/app/integracion/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 11,
+      "community": 52,
       "norm_label": "page.tsx",
-      "community_name": "Community 11",
+      "community_name": "domain-hubs.ts",
       "id": "app_elearning_src_app_integracion_page"
     },
     {
@@ -4684,9 +4695,9 @@
       "source_file": "app-elearning/src/app/integracion/page.tsx",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 11,
+      "community": 52,
       "norm_label": "metadata",
-      "community_name": "Community 11",
+      "community_name": "domain-hubs.ts",
       "id": "app_elearning_src_app_integracion_page_metadata"
     },
     {
@@ -4783,9 +4794,9 @@
       "source_file": "app-elearning/src/app/labs/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 3,
+      "community": 26,
       "norm_label": "page.tsx",
-      "community_name": "Community 3",
+      "community_name": "Community 26",
       "id": "app_elearning_src_app_labs_page"
     },
     {
@@ -4794,9 +4805,9 @@
       "source_file": "app-elearning/src/app/labs/page.tsx",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 3,
+      "community": 26,
       "norm_label": "metadata",
-      "community_name": "Community 3",
+      "community_name": "Community 26",
       "id": "app_elearning_src_app_labs_page_metadata"
     },
     {
@@ -4805,9 +4816,9 @@
       "source_file": "app-elearning/src/app/labs/page.tsx",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 3,
+      "community": 26,
       "norm_label": "featured_artifacts",
-      "community_name": "Community 3",
+      "community_name": "Community 26",
       "id": "app_elearning_src_app_labs_page_featured_artifacts"
     },
     {
@@ -4816,9 +4827,9 @@
       "source_file": "app-elearning/src/app/labs/page.tsx",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 3,
+      "community": 26,
       "norm_label": "labspage()",
-      "community_name": "Community 3",
+      "community_name": "Community 26",
       "id": "app_elearning_src_app_labs_page_labspage"
     },
     {
@@ -4827,9 +4838,9 @@
       "source_file": "app-elearning/src/app/layout.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 19,
       "norm_label": "layout.tsx",
-      "community_name": "Community 2",
+      "community_name": "Community 19",
       "id": "app_elearning_src_app_layout"
     },
     {
@@ -4838,9 +4849,9 @@
       "source_file": "app-elearning/src/app/layout.tsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 2,
+      "community": 19,
       "norm_label": "metadata",
-      "community_name": "Community 2",
+      "community_name": "Community 19",
       "id": "app_elearning_src_app_layout_metadata"
     },
     {
@@ -4849,9 +4860,9 @@
       "source_file": "app-elearning/src/app/layout.tsx",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 2,
+      "community": 19,
       "norm_label": "rootlayout()",
-      "community_name": "Community 2",
+      "community_name": "Community 19",
       "id": "app_elearning_src_app_layout_rootlayout"
     },
     {
@@ -4904,9 +4915,9 @@
       "source_file": "app-elearning/src/app/mi-ruta/my-route-client.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "my-route-client.tsx",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_app_mi_ruta_my_route_client"
     },
     {
@@ -4915,9 +4926,9 @@
       "source_file": "app-elearning/src/app/mi-ruta/my-route-client.tsx",
       "source_location": "L21",
       "_origin": "ast",
-      "community": 0,
+      "community": 46,
       "norm_label": "routesummary",
-      "community_name": "Community 0",
+      "community_name": "validate-content.ts",
       "id": "app_elearning_src_app_mi_ruta_my_route_client_routesummary"
     },
     {
@@ -4926,9 +4937,9 @@
       "source_file": "app-elearning/src/app/mi-ruta/my-route-client.tsx",
       "source_location": "L30",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "myrouteclient()",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_app_mi_ruta_my_route_client_myrouteclient"
     },
     {
@@ -4948,9 +4959,9 @@
       "source_file": "app-elearning/src/app/mi-ruta/my-route-client.tsx",
       "source_location": "L291",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "diagnosticpanel()",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_app_mi_ruta_my_route_client_diagnosticpanel"
     },
     {
@@ -4970,9 +4981,9 @@
       "source_file": "app-elearning/src/app/mi-ruta/my-route-client.tsx",
       "source_location": "L360",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "availabilityselector()",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_app_mi_ruta_my_route_client_availabilityselector"
     },
     {
@@ -4981,9 +4992,9 @@
       "source_file": "app-elearning/src/app/mi-ruta/my-route-client.tsx",
       "source_location": "L383",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "labelrequirement()",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_app_mi_ruta_my_route_client_labelrequirement"
     },
     {
@@ -4992,9 +5003,9 @@
       "source_file": "app-elearning/src/app/mi-ruta/my-route-client.tsx",
       "source_location": "L390",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "pickrecommendedroutes()",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_app_mi_ruta_my_route_client_pickrecommendedroutes"
     },
     {
@@ -5531,9 +5542,9 @@
       "source_file": "app-elearning/src/app/progreso/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 66,
+      "community": 48,
       "norm_label": "page.tsx",
-      "community_name": "page.tsx",
+      "community_name": "progress-dashboard-client.tsx",
       "id": "app_elearning_src_app_progreso_page"
     },
     {
@@ -5542,9 +5553,9 @@
       "source_file": "app-elearning/src/app/progreso/page.tsx",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 66,
+      "community": 48,
       "norm_label": "metadata",
-      "community_name": "page.tsx",
+      "community_name": "progress-dashboard-client.tsx",
       "id": "app_elearning_src_app_progreso_page_metadata"
     },
     {
@@ -5564,9 +5575,9 @@
       "source_file": "app-elearning/src/app/progreso/progress-dashboard-client.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 48,
       "norm_label": "progress-dashboard-client.tsx",
-      "community_name": "Community 0",
+      "community_name": "progress-dashboard-client.tsx",
       "id": "app_elearning_src_app_progreso_progress_dashboard_client"
     },
     {
@@ -5575,9 +5586,9 @@
       "source_file": "app-elearning/src/app/progreso/progress-dashboard-client.tsx",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 66,
+      "community": 48,
       "norm_label": "levelreadinessdata",
-      "community_name": "page.tsx",
+      "community_name": "progress-dashboard-client.tsx",
       "id": "app_elearning_src_app_progreso_progress_dashboard_client_levelreadinessdata"
     },
     {
@@ -5586,9 +5597,9 @@
       "source_file": "app-elearning/src/app/progreso/progress-dashboard-client.tsx",
       "source_location": "L26",
       "_origin": "ast",
-      "community": 0,
+      "community": 48,
       "norm_label": "level_accent",
-      "community_name": "Community 0",
+      "community_name": "progress-dashboard-client.tsx",
       "id": "app_elearning_src_app_progreso_progress_dashboard_client_level_accent"
     },
     {
@@ -5597,9 +5608,9 @@
       "source_file": "app-elearning/src/app/progreso/progress-dashboard-client.tsx",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 0,
+      "community": 48,
       "norm_label": "readinessstatus",
-      "community_name": "Community 0",
+      "community_name": "progress-dashboard-client.tsx",
       "id": "app_elearning_src_app_progreso_progress_dashboard_client_readinessstatus"
     },
     {
@@ -5608,9 +5619,9 @@
       "source_file": "app-elearning/src/app/progreso/progress-dashboard-client.tsx",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 0,
+      "community": 48,
       "norm_label": "status_config",
-      "community_name": "Community 0",
+      "community_name": "progress-dashboard-client.tsx",
       "id": "app_elearning_src_app_progreso_progress_dashboard_client_status_config"
     },
     {
@@ -5619,9 +5630,9 @@
       "source_file": "app-elearning/src/app/progreso/progress-dashboard-client.tsx",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 0,
+      "community": 48,
       "norm_label": "progressdashboardclient()",
-      "community_name": "Community 0",
+      "community_name": "progress-dashboard-client.tsx",
       "id": "app_elearning_src_app_progreso_progress_dashboard_client_progressdashboardclient"
     },
     {
@@ -5630,9 +5641,9 @@
       "source_file": "app-elearning/src/app/recursos/[slug]/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 46,
+      "community": 20,
       "norm_label": "page.tsx",
-      "community_name": "validate-content.ts",
+      "community_name": "Community 20",
       "id": "app_elearning_src_app_recursos_slug_page"
     },
     {
@@ -5641,9 +5652,9 @@
       "source_file": "app-elearning/src/app/recursos/[slug]/page.tsx",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 46,
+      "community": 20,
       "norm_label": "pageprops",
-      "community_name": "validate-content.ts",
+      "community_name": "Community 20",
       "id": "app_elearning_src_app_recursos_slug_page_pageprops"
     },
     {
@@ -5652,9 +5663,9 @@
       "source_file": "app-elearning/src/app/recursos/[slug]/page.tsx",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 46,
+      "community": 20,
       "norm_label": "generatestaticparams()",
-      "community_name": "validate-content.ts",
+      "community_name": "Community 20",
       "id": "app_elearning_src_app_recursos_slug_page_generatestaticparams"
     },
     {
@@ -5663,9 +5674,9 @@
       "source_file": "app-elearning/src/app/recursos/[slug]/page.tsx",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 46,
+      "community": 20,
       "norm_label": "generatemetadata()",
-      "community_name": "validate-content.ts",
+      "community_name": "Community 20",
       "id": "app_elearning_src_app_recursos_slug_page_generatemetadata"
     },
     {
@@ -5674,9 +5685,9 @@
       "source_file": "app-elearning/src/app/recursos/[slug]/page.tsx",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 46,
+      "community": 20,
       "norm_label": "resourcepage()",
-      "community_name": "validate-content.ts",
+      "community_name": "Community 20",
       "id": "app_elearning_src_app_recursos_slug_page_resourcepage"
     },
     {
@@ -5905,9 +5916,9 @@
       "source_file": "app-elearning/src/app/rutas/[slug]/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 58,
+      "community": 12,
       "norm_label": "page.tsx",
-      "community_name": "getAllProfessionalRoutes",
+      "community_name": "Community 12",
       "id": "app_elearning_src_app_rutas_slug_page"
     },
     {
@@ -5916,9 +5927,9 @@
       "source_file": "app-elearning/src/app/rutas/[slug]/page.tsx",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 58,
+      "community": 12,
       "norm_label": "pageprops",
-      "community_name": "getAllProfessionalRoutes",
+      "community_name": "Community 12",
       "id": "app_elearning_src_app_rutas_slug_page_pageprops"
     },
     {
@@ -5927,9 +5938,9 @@
       "source_file": "app-elearning/src/app/rutas/[slug]/page.tsx",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 58,
+      "community": 12,
       "norm_label": "generatestaticparams()",
-      "community_name": "getAllProfessionalRoutes",
+      "community_name": "Community 12",
       "id": "app_elearning_src_app_rutas_slug_page_generatestaticparams"
     },
     {
@@ -5938,9 +5949,9 @@
       "source_file": "app-elearning/src/app/rutas/[slug]/page.tsx",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 58,
+      "community": 12,
       "norm_label": "generatemetadata()",
-      "community_name": "getAllProfessionalRoutes",
+      "community_name": "Community 12",
       "id": "app_elearning_src_app_rutas_slug_page_generatemetadata"
     },
     {
@@ -5949,9 +5960,9 @@
       "source_file": "app-elearning/src/app/rutas/[slug]/page.tsx",
       "source_location": "L29",
       "_origin": "ast",
-      "community": 58,
+      "community": 12,
       "norm_label": "status_variant",
-      "community_name": "getAllProfessionalRoutes",
+      "community_name": "Community 12",
       "id": "app_elearning_src_app_rutas_slug_page_status_variant"
     },
     {
@@ -5960,9 +5971,9 @@
       "source_file": "app-elearning/src/app/rutas/[slug]/page.tsx",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 58,
+      "community": 12,
       "norm_label": "status_short_label",
-      "community_name": "getAllProfessionalRoutes",
+      "community_name": "Community 12",
       "id": "app_elearning_src_app_rutas_slug_page_status_short_label"
     },
     {
@@ -5971,9 +5982,9 @@
       "source_file": "app-elearning/src/app/rutas/[slug]/page.tsx",
       "source_location": "L45",
       "_origin": "ast",
-      "community": 58,
+      "community": 12,
       "norm_label": "professionalroutedetailpage()",
-      "community_name": "getAllProfessionalRoutes",
+      "community_name": "Community 12",
       "id": "app_elearning_src_app_rutas_slug_page_professionalroutedetailpage"
     },
     {
@@ -6037,9 +6048,9 @@
       "source_file": "app-elearning/src/app/simulador/page.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 11,
+      "community": 49,
       "norm_label": "page.tsx",
-      "community_name": "Community 11",
+      "community_name": "questions-parser.ts",
       "id": "app_elearning_src_app_simulador_page"
     },
     {
@@ -6048,9 +6059,9 @@
       "source_file": "app-elearning/src/app/simulador/page.tsx",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 11,
+      "community": 49,
       "norm_label": "metadata",
-      "community_name": "Community 11",
+      "community_name": "questions-parser.ts",
       "id": "app_elearning_src_app_simulador_page_metadata"
     },
     {
@@ -6059,9 +6070,9 @@
       "source_file": "app-elearning/src/app/simulador/page.tsx",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 11,
+      "community": 49,
       "norm_label": "simulatorpage()",
-      "community_name": "Community 11",
+      "community_name": "questions-parser.ts",
       "id": "app_elearning_src_app_simulador_page_simulatorpage"
     },
     {
@@ -6070,9 +6081,9 @@
       "source_file": "app-elearning/src/app/simulador/page.tsx",
       "source_location": "L63",
       "_origin": "ast",
-      "community": 11,
+      "community": 49,
       "norm_label": "simulatorcontextcard()",
-      "community_name": "Community 11",
+      "community_name": "questions-parser.ts",
       "id": "app_elearning_src_app_simulador_page_simulatorcontextcard"
     },
     {
@@ -6290,9 +6301,9 @@
       "source_file": "app-elearning/src/components/guided/guided-dashboard-summary.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "guided-dashboard-summary.tsx",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_components_guided_guided_dashboard_summary"
     },
     {
@@ -6301,9 +6312,9 @@
       "source_file": "app-elearning/src/components/guided/guided-dashboard-summary.tsx",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "guideddashboardsummary()",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_components_guided_guided_dashboard_summary_guideddashboardsummary"
     },
     {
@@ -6488,9 +6499,9 @@
       "source_file": "app-elearning/src/components/layout/app-shell.tsx",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 2,
+      "community": 19,
       "norm_label": "appshell()",
-      "community_name": "Community 2",
+      "community_name": "Community 19",
       "id": "app_elearning_src_components_layout_app_shell_appshell"
     },
     {
@@ -6499,9 +6510,9 @@
       "source_file": "app-elearning/src/components/layout/reading-progress.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 19,
       "norm_label": "reading-progress.tsx",
-      "community_name": "Community 2",
+      "community_name": "Community 19",
       "id": "app_elearning_src_components_layout_reading_progress"
     },
     {
@@ -6510,9 +6521,9 @@
       "source_file": "app-elearning/src/components/layout/reading-progress.tsx",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 2,
+      "community": 19,
       "norm_label": "readingprogress()",
-      "community_name": "Community 2",
+      "community_name": "Community 19",
       "id": "app_elearning_src_components_layout_reading_progress_readingprogress"
     },
     {
@@ -6686,9 +6697,9 @@
       "source_file": "app-elearning/src/components/layout/sidebar.tsx",
       "source_location": "L80",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "sidebar()",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_components_layout_sidebar_sidebar"
     },
     {
@@ -6730,9 +6741,9 @@
       "source_file": "app-elearning/src/components/layout/theme-provider.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 19,
       "norm_label": "theme-provider.tsx",
-      "community_name": "Community 2",
+      "community_name": "Community 19",
       "id": "app_elearning_src_components_layout_theme_provider"
     },
     {
@@ -6741,9 +6752,9 @@
       "source_file": "app-elearning/src/components/layout/theme-provider.tsx",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 2,
+      "community": 19,
       "norm_label": "themeprovider()",
-      "community_name": "Community 2",
+      "community_name": "Community 19",
       "id": "app_elearning_src_components_layout_theme_provider_themeprovider"
     },
     {
@@ -6807,9 +6818,9 @@
       "source_file": "app-elearning/src/components/modules/__tests__/level-progress-banner.test.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 41,
+      "community": 0,
       "norm_label": "level-progress-banner.test.tsx",
-      "community_name": "Community 41",
+      "community_name": "Community 0",
       "id": "app_elearning_src_components_modules_tests_level_progress_banner_test"
     },
     {
@@ -6818,9 +6829,9 @@
       "source_file": "app-elearning/src/components/modules/__tests__/level-progress-banner.test.tsx",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 41,
+      "community": 0,
       "norm_label": "localstoragemock",
-      "community_name": "Community 41",
+      "community_name": "Community 0",
       "id": "app_elearning_src_components_modules_tests_level_progress_banner_test_localstoragemock"
     },
     {
@@ -6829,9 +6840,9 @@
       "source_file": "app-elearning/src/components/modules/certificate-diploma.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 41,
+      "community": 39,
       "norm_label": "certificate-diploma.tsx",
-      "community_name": "Community 41",
+      "community_name": "review-scheduler.ts",
       "id": "app_elearning_src_components_modules_certificate_diploma"
     },
     {
@@ -6840,9 +6851,9 @@
       "source_file": "app-elearning/src/components/modules/certificate-diploma.tsx",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 41,
+      "community": 39,
       "norm_label": "certificatediplomaprops",
-      "community_name": "Community 41",
+      "community_name": "review-scheduler.ts",
       "id": "app_elearning_src_components_modules_certificate_diploma_certificatediplomaprops"
     },
     {
@@ -6851,9 +6862,9 @@
       "source_file": "app-elearning/src/components/modules/certificate-diploma.tsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 41,
+      "community": 39,
       "norm_label": "border_colors",
-      "community_name": "Community 41",
+      "community_name": "review-scheduler.ts",
       "id": "app_elearning_src_components_modules_certificate_diploma_border_colors"
     },
     {
@@ -6862,9 +6873,9 @@
       "source_file": "app-elearning/src/components/modules/certificate-diploma.tsx",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 41,
+      "community": 39,
       "norm_label": "accent_text_colors",
-      "community_name": "Community 41",
+      "community_name": "review-scheduler.ts",
       "id": "app_elearning_src_components_modules_certificate_diploma_accent_text_colors"
     },
     {
@@ -6873,9 +6884,9 @@
       "source_file": "app-elearning/src/components/modules/certificate-diploma.tsx",
       "source_location": "L30",
       "_origin": "ast",
-      "community": 41,
+      "community": 39,
       "norm_label": "formatdate()",
-      "community_name": "Community 41",
+      "community_name": "review-scheduler.ts",
       "id": "app_elearning_src_components_modules_certificate_diploma_formatdate"
     },
     {
@@ -6884,9 +6895,9 @@
       "source_file": "app-elearning/src/components/modules/certificate-diploma.tsx",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 41,
+      "community": 39,
       "norm_label": "certificatediploma()",
-      "community_name": "Community 41",
+      "community_name": "review-scheduler.ts",
       "id": "app_elearning_src_components_modules_certificate_diploma_certificatediploma"
     },
     {
@@ -6961,9 +6972,9 @@
       "source_file": "app-elearning/src/components/modules/level-progress-banner.tsx",
       "source_location": "L35",
       "_origin": "ast",
-      "community": 41,
+      "community": 0,
       "norm_label": "levelprogressbannerclient()",
-      "community_name": "Community 41",
+      "community_name": "Community 0",
       "id": "app_elearning_src_components_modules_level_progress_banner_levelprogressbannerclient"
     },
     {
@@ -6972,9 +6983,9 @@
       "source_file": "app-elearning/src/components/modules/level-progress-banner.tsx",
       "source_location": "L57",
       "_origin": "ast",
-      "community": 10,
+      "community": 41,
       "norm_label": "levelcompletebanner()",
-      "community_name": "Community 10",
+      "community_name": "Community 41",
       "id": "app_elearning_src_components_modules_level_progress_banner_levelcompletebanner"
     },
     {
@@ -6983,9 +6994,9 @@
       "source_file": "app-elearning/src/components/modules/markdown-renderer.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 31,
+      "community": 20,
       "norm_label": "markdown-renderer.tsx",
-      "community_name": "Community 31",
+      "community_name": "Community 20",
       "id": "app_elearning_src_components_modules_markdown_renderer"
     },
     {
@@ -6994,9 +7005,9 @@
       "source_file": "app-elearning/src/components/modules/markdown-renderer.tsx",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 31,
+      "community": 20,
       "norm_label": "extractlanguage()",
-      "community_name": "Community 31",
+      "community_name": "Community 20",
       "id": "app_elearning_src_components_modules_markdown_renderer_extractlanguage"
     },
     {
@@ -7005,9 +7016,9 @@
       "source_file": "app-elearning/src/components/modules/markdown-renderer.tsx",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 69,
+      "community": 20,
       "norm_label": "extracttext()",
-      "community_name": "react",
+      "community_name": "Community 20",
       "id": "app_elearning_src_components_modules_markdown_renderer_extracttext"
     },
     {
@@ -7016,9 +7027,9 @@
       "source_file": "app-elearning/src/components/modules/markdown-renderer.tsx",
       "source_location": "L31",
       "_origin": "ast",
-      "community": 31,
+      "community": 20,
       "norm_label": "components",
-      "community_name": "Community 31",
+      "community_name": "Community 20",
       "id": "app_elearning_src_components_modules_markdown_renderer_components"
     },
     {
@@ -7027,9 +7038,9 @@
       "source_file": "app-elearning/src/components/modules/markdown-renderer.tsx",
       "source_location": "L201",
       "_origin": "ast",
-      "community": 31,
+      "community": 20,
       "norm_label": "prose_classes",
-      "community_name": "Community 31",
+      "community_name": "Community 20",
       "id": "app_elearning_src_components_modules_markdown_renderer_prose_classes"
     },
     {
@@ -7038,9 +7049,9 @@
       "source_file": "app-elearning/src/components/modules/markdown-renderer.tsx",
       "source_location": "L242",
       "_origin": "ast",
-      "community": 31,
+      "community": 20,
       "norm_label": "markdownrendererprops",
-      "community_name": "Community 31",
+      "community_name": "Community 20",
       "id": "app_elearning_src_components_modules_markdown_renderer_markdownrendererprops"
     },
     {
@@ -7049,9 +7060,9 @@
       "source_file": "app-elearning/src/components/modules/markdown-renderer.tsx",
       "source_location": "L247",
       "_origin": "ast",
-      "community": 31,
+      "community": 20,
       "norm_label": "markdownrenderer()",
-      "community_name": "Community 31",
+      "community_name": "Community 20",
       "id": "app_elearning_src_components_modules_markdown_renderer_markdownrenderer"
     },
     {
@@ -7060,9 +7071,9 @@
       "source_file": "app-elearning/src/components/modules/mermaid-diagram.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 31,
+      "community": 20,
       "norm_label": "mermaid-diagram.tsx",
-      "community_name": "Community 31",
+      "community_name": "Community 20",
       "id": "app_elearning_src_components_modules_mermaid_diagram"
     },
     {
@@ -7071,9 +7082,9 @@
       "source_file": "app-elearning/src/components/modules/mermaid-diagram.tsx",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 31,
+      "community": 20,
       "norm_label": "mermaiddiagramprops",
-      "community_name": "Community 31",
+      "community_name": "Community 20",
       "id": "app_elearning_src_components_modules_mermaid_diagram_mermaiddiagramprops"
     },
     {
@@ -7082,9 +7093,9 @@
       "source_file": "app-elearning/src/components/modules/mermaid-diagram.tsx",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 31,
+      "community": 20,
       "norm_label": "renderqueue",
-      "community_name": "Community 31",
+      "community_name": "Community 20",
       "id": "app_elearning_src_components_modules_mermaid_diagram_renderqueue"
     },
     {
@@ -7093,9 +7104,9 @@
       "source_file": "app-elearning/src/components/modules/mermaid-diagram.tsx",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 31,
+      "community": 20,
       "norm_label": "mermaiddiagram()",
-      "community_name": "Community 31",
+      "community_name": "Community 20",
       "id": "app_elearning_src_components_modules_mermaid_diagram_mermaiddiagram"
     },
     {
@@ -7148,9 +7159,9 @@
       "source_file": "app-elearning/src/components/modules/progress-ring-client.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 10,
       "norm_label": "progress-ring-client.tsx",
-      "community_name": "Community 0",
+      "community_name": "Community 10",
       "id": "app_elearning_src_components_modules_progress_ring_client"
     },
     {
@@ -7170,9 +7181,9 @@
       "source_file": "app-elearning/src/components/modules/progress-ring.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 10,
       "norm_label": "progress-ring.tsx",
-      "community_name": "Community 0",
+      "community_name": "Community 10",
       "id": "app_elearning_src_components_modules_progress_ring"
     },
     {
@@ -7181,9 +7192,9 @@
       "source_file": "app-elearning/src/components/modules/progress-ring.tsx",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 0,
+      "community": 10,
       "norm_label": "progressringprops",
-      "community_name": "Community 0",
+      "community_name": "Community 10",
       "id": "app_elearning_src_components_modules_progress_ring_progressringprops"
     },
     {
@@ -7192,9 +7203,9 @@
       "source_file": "app-elearning/src/components/modules/progress-ring.tsx",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 0,
+      "community": 10,
       "norm_label": "progressring()",
-      "community_name": "Community 0",
+      "community_name": "Community 10",
       "id": "app_elearning_src_components_modules_progress_ring_progressring"
     },
     {
@@ -7225,9 +7236,9 @@
       "source_file": "app-elearning/src/components/practices/practice-portability-panel.tsx",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 30,
+      "community": 48,
       "norm_label": "practiceportabilitypanel()",
-      "community_name": "Community 30",
+      "community_name": "progress-dashboard-client.tsx",
       "id": "app_elearning_src_components_practices_practice_portability_panel_practiceportabilitypanel"
     },
     {
@@ -7346,9 +7357,9 @@
       "source_file": "app-elearning/src/components/practices/practice-workspace-client.tsx",
       "source_location": "L347",
       "_origin": "ast",
-      "community": 30,
+      "community": 15,
       "norm_label": "practiceattempthistory()",
-      "community_name": "Community 30",
+      "community_name": "Community 15",
       "id": "app_elearning_src_components_practices_practice_workspace_client_practiceattempthistory"
     },
     {
@@ -7357,9 +7368,9 @@
       "source_file": "app-elearning/src/components/practices/practice-workspace-client.tsx",
       "source_location": "L479",
       "_origin": "ast",
-      "community": 30,
+      "community": 15,
       "norm_label": "externalreviewpanel()",
-      "community_name": "Community 30",
+      "community_name": "Community 15",
       "id": "app_elearning_src_components_practices_practice_workspace_client_externalreviewpanel"
     },
     {
@@ -7390,9 +7401,9 @@
       "source_file": "app-elearning/src/components/practices/practice-workspace-client.tsx",
       "source_location": "L704",
       "_origin": "ast",
-      "community": 10,
+      "community": 15,
       "norm_label": "messagelist()",
-      "community_name": "Community 10",
+      "community_name": "Community 15",
       "id": "app_elearning_src_components_practices_practice_workspace_client_messagelist"
     },
     {
@@ -7401,9 +7412,9 @@
       "source_file": "app-elearning/src/components/practices/practice-workspace-client.tsx",
       "source_location": "L715",
       "_origin": "ast",
-      "community": 30,
+      "community": 15,
       "norm_label": "reviewpreviewlabel()",
-      "community_name": "Community 30",
+      "community_name": "Community 15",
       "id": "app_elearning_src_components_practices_practice_workspace_client_reviewpreviewlabel"
     },
     {
@@ -7412,9 +7423,9 @@
       "source_file": "app-elearning/src/components/practices/practice-workspace-client.tsx",
       "source_location": "L727",
       "_origin": "ast",
-      "community": 30,
+      "community": 15,
       "norm_label": "attemptlabel()",
-      "community_name": "Community 30",
+      "community_name": "Community 15",
       "id": "app_elearning_src_components_practices_practice_workspace_client_attemptlabel"
     },
     {
@@ -7841,9 +7852,9 @@
       "source_file": "app-elearning/src/components/ui/badge.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 11,
+      "community": 52,
       "norm_label": "badge.tsx",
-      "community_name": "Community 11",
+      "community_name": "domain-hubs.ts",
       "id": "app_elearning_src_components_ui_badge"
     },
     {
@@ -7852,9 +7863,9 @@
       "source_file": "app-elearning/src/components/ui/badge.tsx",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 11,
+      "community": 52,
       "norm_label": "badgevariants",
-      "community_name": "Community 11",
+      "community_name": "domain-hubs.ts",
       "id": "app_elearning_src_components_ui_badge_badgevariants"
     },
     {
@@ -7863,9 +7874,9 @@
       "source_file": "app-elearning/src/components/ui/badge.tsx",
       "source_location": "L29",
       "_origin": "ast",
-      "community": 11,
+      "community": 52,
       "norm_label": "badgeprops",
-      "community_name": "Community 11",
+      "community_name": "domain-hubs.ts",
       "id": "app_elearning_src_components_ui_badge_badgeprops"
     },
     {
@@ -7874,9 +7885,9 @@
       "source_file": "app-elearning/src/components/ui/badge.tsx",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 11,
+      "community": 52,
       "norm_label": "badge()",
-      "community_name": "Community 11",
+      "community_name": "domain-hubs.ts",
       "id": "app_elearning_src_components_ui_badge_badge"
     },
     {
@@ -7885,9 +7896,9 @@
       "source_file": "app-elearning/src/components/ui/button.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 11,
+      "community": 41,
       "norm_label": "button.tsx",
-      "community_name": "Community 11",
+      "community_name": "Community 41",
       "id": "app_elearning_src_components_ui_button"
     },
     {
@@ -7896,9 +7907,9 @@
       "source_file": "app-elearning/src/components/ui/button.tsx",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 11,
+      "community": 41,
       "norm_label": "buttonvariants",
-      "community_name": "Community 11",
+      "community_name": "Community 41",
       "id": "app_elearning_src_components_ui_button_buttonvariants"
     },
     {
@@ -7907,9 +7918,9 @@
       "source_file": "app-elearning/src/components/ui/button.tsx",
       "source_location": "L32",
       "_origin": "ast",
-      "community": 11,
+      "community": 41,
       "norm_label": "buttonprops",
-      "community_name": "Community 11",
+      "community_name": "Community 41",
       "id": "app_elearning_src_components_ui_button_buttonprops"
     },
     {
@@ -7918,9 +7929,9 @@
       "source_file": "app-elearning/src/components/ui/button.tsx",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 11,
+      "community": 41,
       "norm_label": "button",
-      "community_name": "Community 11",
+      "community_name": "Community 41",
       "id": "app_elearning_src_components_ui_button_button"
     },
     {
@@ -8138,9 +8149,9 @@
       "source_file": "app-elearning/src/components/ui/progress.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "progress.tsx",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_components_ui_progress"
     },
     {
@@ -8149,9 +8160,9 @@
       "source_file": "app-elearning/src/components/ui/progress.tsx",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "progress",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_components_ui_progress_progress"
     },
     {
@@ -8160,9 +8171,9 @@
       "source_file": "app-elearning/src/components/ui/scroll-area.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 42,
+      "community": 10,
       "norm_label": "scroll-area.tsx",
-      "community_name": "review-queue.ts",
+      "community_name": "Community 10",
       "id": "app_elearning_src_components_ui_scroll_area"
     },
     {
@@ -8171,9 +8182,9 @@
       "source_file": "app-elearning/src/components/ui/scroll-area.tsx",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 42,
+      "community": 10,
       "norm_label": "scrollarea",
-      "community_name": "review-queue.ts",
+      "community_name": "Community 10",
       "id": "app_elearning_src_components_ui_scroll_area_scrollarea"
     },
     {
@@ -8182,9 +8193,9 @@
       "source_file": "app-elearning/src/components/ui/scroll-area.tsx",
       "source_location": "L21",
       "_origin": "ast",
-      "community": 42,
+      "community": 10,
       "norm_label": "scrollbar",
-      "community_name": "review-queue.ts",
+      "community_name": "Community 10",
       "id": "app_elearning_src_components_ui_scroll_area_scrollbar"
     },
     {
@@ -8501,9 +8512,9 @@
       "source_file": "app-elearning/src/lib/__tests__/content.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 66,
+      "community": 14,
       "norm_label": "content.test.ts",
-      "community_name": "page.tsx",
+      "community_name": "Community 14",
       "id": "app_elearning_src_lib_tests_content_test"
     },
     {
@@ -8512,9 +8523,9 @@
       "source_file": "app-elearning/src/lib/__tests__/domain-hubs.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 52,
+      "community": 58,
       "norm_label": "domain-hubs.test.ts",
-      "community_name": "domain-hubs.ts",
+      "community_name": "getAllProfessionalRoutes",
       "id": "app_elearning_src_lib_tests_domain_hubs_test"
     },
     {
@@ -8523,9 +8534,9 @@
       "source_file": "app-elearning/src/lib/__tests__/domain-hubs.test.ts",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 52,
+      "community": 58,
       "norm_label": "hubs",
-      "community_name": "domain-hubs.ts",
+      "community_name": "getAllProfessionalRoutes",
       "id": "app_elearning_src_lib_tests_domain_hubs_test_hubs"
     },
     {
@@ -8534,9 +8545,9 @@
       "source_file": "app-elearning/src/lib/__tests__/domain-hubs.test.ts",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 46,
+      "community": 58,
       "norm_label": "resolvablehrefs()",
-      "community_name": "validate-content.ts",
+      "community_name": "getAllProfessionalRoutes",
       "id": "app_elearning_src_lib_tests_domain_hubs_test_resolvablehrefs"
     },
     {
@@ -8556,9 +8567,9 @@
       "source_file": "app-elearning/src/lib/__tests__/guided-journey.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "guided-journey.test.ts",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_tests_guided_journey_test"
     },
     {
@@ -8567,9 +8578,9 @@
       "source_file": "app-elearning/src/lib/__tests__/guided-journey.test.ts",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "baseanswers",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_tests_guided_journey_test_baseanswers"
     },
     {
@@ -8666,9 +8677,9 @@
       "source_file": "app-elearning/src/lib/__tests__/practice-portability.test.ts",
       "source_location": "L47",
       "_origin": "ast",
-      "community": 5,
+      "community": 30,
       "norm_label": "recordwithattempt()",
-      "community_name": "Community 5",
+      "community_name": "Community 30",
       "id": "app_elearning_src_lib_tests_practice_portability_test_recordwithattempt"
     },
     {
@@ -9150,9 +9161,9 @@
       "source_file": "app-elearning/src/lib/checklist.ts",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 20,
+      "community": 39,
       "norm_label": "checklistlevel",
-      "community_name": "Community 20",
+      "community_name": "review-scheduler.ts",
       "id": "app_elearning_src_lib_checklist_checklistlevel"
     },
     {
@@ -9238,9 +9249,9 @@
       "source_file": "app-elearning/src/lib/checklist.ts",
       "source_location": "L61",
       "_origin": "ast",
-      "community": 46,
+      "community": 20,
       "norm_label": "parsechecklistmarkdown()",
-      "community_name": "validate-content.ts",
+      "community_name": "Community 20",
       "id": "app_elearning_src_lib_checklist_parsechecklistmarkdown"
     },
     {
@@ -9271,9 +9282,9 @@
       "source_file": "app-elearning/src/lib/checklist.ts",
       "source_location": "L151",
       "_origin": "ast",
-      "community": 46,
+      "community": 20,
       "norm_label": "validatechecklistdata()",
-      "community_name": "validate-content.ts",
+      "community_name": "Community 20",
       "id": "app_elearning_src_lib_checklist_validatechecklistdata"
     },
     {
@@ -9293,9 +9304,9 @@
       "source_file": "app-elearning/src/lib/content.ts",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 14,
+      "community": 39,
       "norm_label": "moduleinfo",
-      "community_name": "Community 14",
+      "community_name": "review-scheduler.ts",
       "id": "app_elearning_src_lib_content_moduleinfo"
     },
     {
@@ -9304,9 +9315,9 @@
       "source_file": "app-elearning/src/lib/content.ts",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 14,
+      "community": 39,
       "norm_label": "levelinfo",
-      "community_name": "Community 14",
+      "community_name": "review-scheduler.ts",
       "id": "app_elearning_src_lib_content_levelinfo"
     },
     {
@@ -9326,9 +9337,9 @@
       "source_file": "app-elearning/src/lib/content.ts",
       "source_location": "L35",
       "_origin": "ast",
-      "community": 26,
+      "community": 14,
       "norm_label": "labinfo",
-      "community_name": "Community 26",
+      "community_name": "Community 14",
       "id": "app_elearning_src_lib_content_labinfo"
     },
     {
@@ -9403,9 +9414,9 @@
       "source_file": "app-elearning/src/lib/content.ts",
       "source_location": "L143",
       "_origin": "ast",
-      "community": 46,
+      "community": 49,
       "norm_label": "contentvalidationerror",
-      "community_name": "validate-content.ts",
+      "community_name": "questions-parser.ts",
       "id": "app_elearning_src_lib_content_contentvalidationerror"
     },
     {
@@ -9414,9 +9425,9 @@
       "source_file": "app-elearning/src/lib/content.ts",
       "source_location": "L144",
       "_origin": "ast",
-      "community": 46,
+      "community": 49,
       "norm_label": ".constructor()",
-      "community_name": "validate-content.ts",
+      "community_name": "questions-parser.ts",
       "id": "app_elearning_src_lib_content_contentvalidationerror_constructor"
     },
     {
@@ -9502,9 +9513,9 @@
       "source_file": "app-elearning/src/lib/content.ts",
       "source_location": "L225",
       "_origin": "ast",
-      "community": 25,
+      "community": 14,
       "norm_label": "formatlabreadableid()",
-      "community_name": "Community 25",
+      "community_name": "Community 14",
       "id": "app_elearning_src_lib_content_formatlabreadableid"
     },
     {
@@ -9645,9 +9656,9 @@
       "source_file": "app-elearning/src/lib/content.ts",
       "source_location": "L489",
       "_origin": "ast",
-      "community": 66,
+      "community": 14,
       "norm_label": "getmodulebyid()",
-      "community_name": "page.tsx",
+      "community_name": "Community 14",
       "id": "app_elearning_src_lib_content_getmodulebyid"
     },
     {
@@ -9678,9 +9689,9 @@
       "source_file": "app-elearning/src/lib/content.ts",
       "source_location": "L505",
       "_origin": "ast",
-      "community": 46,
+      "community": 58,
       "norm_label": "getallresourcepages()",
-      "community_name": "validate-content.ts",
+      "community_name": "getAllProfessionalRoutes",
       "id": "app_elearning_src_lib_content_getallresourcepages"
     },
     {
@@ -9689,9 +9700,9 @@
       "source_file": "app-elearning/src/lib/content.ts",
       "source_location": "L524",
       "_origin": "ast",
-      "community": 46,
+      "community": 20,
       "norm_label": "getresourcebyslug()",
-      "community_name": "validate-content.ts",
+      "community_name": "Community 20",
       "id": "app_elearning_src_lib_content_getresourcebyslug"
     },
     {
@@ -9755,9 +9766,9 @@
       "source_file": "app-elearning/src/lib/content.ts",
       "source_location": "L598",
       "_origin": "ast",
-      "community": 25,
+      "community": 14,
       "norm_label": "getsearchdocuments()",
-      "community_name": "Community 25",
+      "community_name": "Community 14",
       "id": "app_elearning_src_lib_content_getsearchdocuments"
     },
     {
@@ -9920,9 +9931,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "guided-journey.ts",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_guided_journey"
     },
     {
@@ -9931,9 +9942,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 0,
+      "community": 46,
       "norm_label": "onboardingstage",
-      "community_name": "Community 0",
+      "community_name": "validate-content.ts",
       "id": "app_elearning_src_lib_guided_journey_onboardingstage"
     },
     {
@@ -9942,9 +9953,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 0,
+      "community": 46,
       "norm_label": "experiencegoal",
-      "community_name": "Community 0",
+      "community_name": "validate-content.ts",
       "id": "app_elearning_src_lib_guided_journey_experiencegoal"
     },
     {
@@ -9953,9 +9964,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 0,
+      "community": 46,
       "norm_label": "navigationmode",
-      "community_name": "Community 0",
+      "community_name": "validate-content.ts",
       "id": "app_elearning_src_lib_guided_journey_navigationmode"
     },
     {
@@ -9964,9 +9975,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "experiencelevel",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_guided_journey_experiencelevel"
     },
     {
@@ -9975,9 +9986,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "tenantaccess",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_guided_journey_tenantaccess"
     },
     {
@@ -9986,9 +9997,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "workpreference",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_guided_journey_workpreference"
     },
     {
@@ -9997,9 +10008,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "studypurpose",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_guided_journey_studypurpose"
     },
     {
@@ -10008,9 +10019,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "weeklyavailability",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_guided_journey_weeklyavailability"
     },
     {
@@ -10019,9 +10030,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 0,
+      "community": 46,
       "norm_label": "onboardinganswers",
-      "community_name": "Community 0",
+      "community_name": "validate-content.ts",
       "id": "app_elearning_src_lib_guided_journey_onboardinganswers"
     },
     {
@@ -10030,9 +10041,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 0,
+      "community": 46,
       "norm_label": "onboardingstate",
-      "community_name": "Community 0",
+      "community_name": "validate-content.ts",
       "id": "app_elearning_src_lib_guided_journey_onboardingstate"
     },
     {
@@ -10041,9 +10052,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L43",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "foundationactivitytype",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_guided_journey_foundationactivitytype"
     },
     {
@@ -10052,9 +10063,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L44",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "requirementlevel",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_guided_journey_requirementlevel"
     },
     {
@@ -10063,9 +10074,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "foundationactivity",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_guided_journey_foundationactivity"
     },
     {
@@ -10074,9 +10085,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L63",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "nextbestaction",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_guided_journey_nextbestaction"
     },
     {
@@ -10096,9 +10107,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L80",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "default_onboarding_state",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_guided_journey_default_onboarding_state"
     },
     {
@@ -10107,9 +10118,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L95",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "foundation_route",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_lib_guided_journey_foundation_route"
     },
     {
@@ -10118,9 +10129,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L111",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "foundation_activities",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_guided_journey_foundation_activities"
     },
     {
@@ -10129,9 +10140,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L218",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "role_experiences",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_guided_journey_role_experiences"
     },
     {
@@ -10140,9 +10151,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L227",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "normalizeonboardingstate()",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_guided_journey_normalizeonboardingstate"
     },
     {
@@ -10151,9 +10162,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L239",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "isfoundationactivitycomplete()",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_lib_guided_journey_isfoundationactivitycomplete"
     },
     {
@@ -10162,9 +10173,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L260",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "getfoundationprogress()",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_lib_guided_journey_getfoundationprogress"
     },
     {
@@ -10173,9 +10184,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L272",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "recommendrouteslug()",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_lib_guided_journey_recommendrouteslug"
     },
     {
@@ -10184,9 +10195,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L283",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "getrecommendationreason()",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_lib_guided_journey_getrecommendationreason"
     },
     {
@@ -10195,9 +10206,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L296",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "getnextbestaction()",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_lib_guided_journey_getnextbestaction"
     },
     {
@@ -10206,9 +10217,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L327",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "buildweeklyplan()",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_lib_guided_journey_buildweeklyplan"
     },
     {
@@ -10217,9 +10228,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L337",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "classifysearchdocument()",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_guided_journey_classifysearchdocument"
     },
     {
@@ -10228,9 +10239,9 @@
       "source_file": "app-elearning/src/lib/guided-journey.ts",
       "source_location": "L345",
       "_origin": "ast",
-      "community": 0,
+      "community": 42,
       "norm_label": "validateguidedjourneyreferences()",
-      "community_name": "Community 0",
+      "community_name": "review-queue.ts",
       "id": "app_elearning_src_lib_guided_journey_validateguidedjourneyreferences"
     },
     {
@@ -10261,9 +10272,9 @@
       "source_file": "app-elearning/src/lib/i18n.ts",
       "source_location": "L256",
       "_origin": "ast",
-      "community": 41,
+      "community": 39,
       "norm_label": "levelid",
-      "community_name": "Community 41",
+      "community_name": "review-scheduler.ts",
       "id": "app_elearning_src_lib_i18n_levelid"
     },
     {
@@ -10305,9 +10316,9 @@
       "source_file": "app-elearning/src/lib/i18n.ts",
       "source_location": "L262",
       "_origin": "ast",
-      "community": 49,
+      "community": 20,
       "norm_label": "level_module_range",
-      "community_name": "questions-parser.ts",
+      "community_name": "Community 20",
       "id": "app_elearning_src_lib_i18n_level_module_range"
     },
     {
@@ -10976,9 +10987,9 @@
       "source_file": "app-elearning/src/lib/onboarding-store.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 46,
       "norm_label": "onboarding-store.ts",
-      "community_name": "Community 0",
+      "community_name": "validate-content.ts",
       "id": "app_elearning_src_lib_onboarding_store"
     },
     {
@@ -10987,9 +10998,9 @@
       "source_file": "app-elearning/src/lib/onboarding-store.ts",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 0,
+      "community": 46,
       "norm_label": "journeyeventname",
-      "community_name": "Community 0",
+      "community_name": "validate-content.ts",
       "id": "app_elearning_src_lib_onboarding_store_journeyeventname"
     },
     {
@@ -10998,9 +11009,9 @@
       "source_file": "app-elearning/src/lib/onboarding-store.ts",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 0,
+      "community": 46,
       "norm_label": "journeyevent",
-      "community_name": "Community 0",
+      "community_name": "validate-content.ts",
       "id": "app_elearning_src_lib_onboarding_store_journeyevent"
     },
     {
@@ -11009,9 +11020,9 @@
       "source_file": "app-elearning/src/lib/onboarding-store.ts",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 0,
+      "community": 46,
       "norm_label": "onboardingactions",
-      "community_name": "Community 0",
+      "community_name": "validate-content.ts",
       "id": "app_elearning_src_lib_onboarding_store_onboardingactions"
     },
     {
@@ -11020,9 +11031,9 @@
       "source_file": "app-elearning/src/lib/onboarding-store.ts",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 0,
+      "community": 46,
       "norm_label": "onboardingstorestate",
-      "community_name": "Community 0",
+      "community_name": "validate-content.ts",
       "id": "app_elearning_src_lib_onboarding_store_onboardingstorestate"
     },
     {
@@ -11031,9 +11042,9 @@
       "source_file": "app-elearning/src/lib/onboarding-store.ts",
       "source_location": "L50",
       "_origin": "ast",
-      "community": 0,
+      "community": 46,
       "norm_label": "now()",
-      "community_name": "Community 0",
+      "community_name": "validate-content.ts",
       "id": "app_elearning_src_lib_onboarding_store_now"
     },
     {
@@ -11042,9 +11053,9 @@
       "source_file": "app-elearning/src/lib/onboarding-store.ts",
       "source_location": "L52",
       "_origin": "ast",
-      "community": 0,
+      "community": 31,
       "norm_label": "useonboardingstore",
-      "community_name": "Community 0",
+      "community_name": "Community 31",
       "id": "app_elearning_src_lib_onboarding_store_useonboardingstore"
     },
     {
@@ -11053,9 +11064,9 @@
       "source_file": "app-elearning/src/lib/onboarding-store.ts",
       "source_location": "L155",
       "_origin": "ast",
-      "community": 0,
+      "community": 46,
       "norm_label": "appendevent()",
-      "community_name": "Community 0",
+      "community_name": "validate-content.ts",
       "id": "app_elearning_src_lib_onboarding_store_appendevent"
     },
     {
@@ -11064,9 +11075,9 @@
       "source_file": "app-elearning/src/lib/onboarding-store.ts",
       "source_location": "L163",
       "_origin": "ast",
-      "community": 0,
+      "community": 46,
       "norm_label": "inferonboardingforexistinguser()",
-      "community_name": "Community 0",
+      "community_name": "validate-content.ts",
       "id": "app_elearning_src_lib_onboarding_store_inferonboardingforexistinguser"
     },
     {
@@ -11383,9 +11394,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 15,
+      "community": 7,
       "norm_label": "evidencepackage",
-      "community_name": "Community 15",
+      "community_name": "Community 7",
       "id": "app_elearning_src_lib_practice_portability_evidencepackage"
     },
     {
@@ -11482,9 +11493,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L147",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "parseexternalreviewimporttext()",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_parseexternalreviewimporttext"
     },
     {
@@ -11493,9 +11504,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L162",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "validateexternalreviewpayload()",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_validateexternalreviewpayload"
     },
     {
@@ -11647,9 +11658,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L571",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "review_result_values",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_review_result_values"
     },
     {
@@ -11658,9 +11669,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L572",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "level_values",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_level_values"
     },
     {
@@ -11680,9 +11691,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L575",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "normalizereviewresult()",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_normalizereviewresult"
     },
     {
@@ -11691,9 +11702,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L583",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "parsereviewcriteria()",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_parsereviewcriteria"
     },
     {
@@ -11702,9 +11713,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L627",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "parsereviewer()",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_parsereviewer"
     },
     {
@@ -11713,9 +11724,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L637",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "finddangerouskey()",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_finddangerouskey"
     },
     {
@@ -11724,9 +11735,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L648",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "stringfield()",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_stringfield"
     },
     {
@@ -11735,9 +11746,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L652",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "textarray()",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_textarray"
     },
     {
@@ -11746,9 +11757,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L657",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "textlistorstring()",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_textlistorstring"
     },
     {
@@ -11757,9 +11768,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L662",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "parsetextrecord()",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_parsetextrecord"
     },
     {
@@ -11768,9 +11779,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L671",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "stablestringify()",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_stablestringify"
     },
     {
@@ -11779,9 +11790,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L675",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "canonicalreviewforcomparison()",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_canonicalreviewforcomparison"
     },
     {
@@ -11790,9 +11801,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L682",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "sortobject()",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_sortobject"
     },
     {
@@ -11801,9 +11812,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L688",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "corruptreviewpreview()",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_corruptreviewpreview"
     },
     {
@@ -11812,9 +11823,9 @@
       "source_file": "app-elearning/src/lib/practice-portability.ts",
       "source_location": "L692",
       "_origin": "ast",
-      "community": 7,
+      "community": 43,
       "norm_label": "emptyreviewpreview()",
-      "community_name": "Community 7",
+      "community_name": "validateExternalReviewPayload",
       "id": "app_elearning_src_lib_practice_portability_emptyreviewpreview"
     },
     {
@@ -11867,9 +11878,9 @@
       "source_file": "app-elearning/src/lib/practice-progress.ts",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 5,
+      "community": 15,
       "norm_label": "assessmentlevel",
-      "community_name": "Community 5",
+      "community_name": "Community 15",
       "id": "app_elearning_src_lib_practice_progress_assessmentlevel"
     },
     {
@@ -11944,9 +11955,9 @@
       "source_file": "app-elearning/src/lib/practice-progress.ts",
       "source_location": "L86",
       "_origin": "ast",
-      "community": 15,
+      "community": 7,
       "norm_label": "practiceattempt",
-      "community_name": "Community 15",
+      "community_name": "Community 7",
       "id": "app_elearning_src_lib_practice_progress_practiceattempt"
     },
     {
@@ -12109,9 +12120,9 @@
       "source_file": "app-elearning/src/lib/practice-progress.ts",
       "source_location": "L225",
       "_origin": "ast",
-      "community": 5,
+      "community": 30,
       "norm_label": "createpracticerecord()",
-      "community_name": "Community 5",
+      "community_name": "Community 30",
       "id": "app_elearning_src_lib_practice_progress_createpracticerecord"
     },
     {
@@ -12120,9 +12131,9 @@
       "source_file": "app-elearning/src/lib/practice-progress.ts",
       "source_location": "L241",
       "_origin": "ast",
-      "community": 5,
+      "community": 30,
       "norm_label": "ensureevidence()",
-      "community_name": "Community 5",
+      "community_name": "Community 30",
       "id": "app_elearning_src_lib_practice_progress_ensureevidence"
     },
     {
@@ -12197,9 +12208,9 @@
       "source_file": "app-elearning/src/lib/practice-progress.ts",
       "source_location": "L326",
       "_origin": "ast",
-      "community": 30,
+      "community": 5,
       "norm_label": "transitionpracticestatus()",
-      "community_name": "Community 30",
+      "community_name": "Community 5",
       "id": "app_elearning_src_lib_practice_progress_transitionpracticestatus"
     },
     {
@@ -12208,9 +12219,9 @@
       "source_file": "app-elearning/src/lib/practice-progress.ts",
       "source_location": "L339",
       "_origin": "ast",
-      "community": 5,
+      "community": 30,
       "norm_label": "buildselfassessment()",
-      "community_name": "Community 5",
+      "community_name": "Community 30",
       "id": "app_elearning_src_lib_practice_progress_buildselfassessment"
     },
     {
@@ -12285,9 +12296,9 @@
       "source_file": "app-elearning/src/lib/practice-progress.ts",
       "source_location": "L539",
       "_origin": "ast",
-      "community": 5,
+      "community": 30,
       "norm_label": "patchrecord()",
-      "community_name": "Community 5",
+      "community_name": "Community 30",
       "id": "app_elearning_src_lib_practice_progress_patchrecord"
     },
     {
@@ -12318,9 +12329,9 @@
       "source_file": "app-elearning/src/lib/practice-progress.ts",
       "source_location": "L579",
       "_origin": "ast",
-      "community": 30,
+      "community": 15,
       "norm_label": "getattemptreviews()",
-      "community_name": "Community 30",
+      "community_name": "Community 15",
       "id": "app_elearning_src_lib_practice_progress_getattemptreviews"
     },
     {
@@ -12329,9 +12340,9 @@
       "source_file": "app-elearning/src/lib/practice-progress.ts",
       "source_location": "L585",
       "_origin": "ast",
-      "community": 30,
+      "community": 5,
       "norm_label": "addexternalreviewtorecord()",
-      "community_name": "Community 30",
+      "community_name": "Community 5",
       "id": "app_elearning_src_lib_practice_progress_addexternalreviewtorecord"
     },
     {
@@ -12384,9 +12395,9 @@
       "source_file": "app-elearning/src/lib/practice-progress.ts",
       "source_location": "L683",
       "_origin": "ast",
-      "community": 30,
+      "community": 2,
       "norm_label": "usepracticeprogressstore",
-      "community_name": "Community 30",
+      "community_name": "Community 2",
       "id": "app_elearning_src_lib_practice_progress_usepracticeprogressstore"
     },
     {
@@ -12615,9 +12626,9 @@
       "source_file": "app-elearning/src/lib/practices.ts",
       "source_location": "L91",
       "_origin": "ast",
-      "community": 15,
+      "community": 7,
       "norm_label": "practiceinfo",
-      "community_name": "Community 15",
+      "community_name": "Community 7",
       "id": "app_elearning_src_lib_practices_practiceinfo"
     },
     {
@@ -12846,9 +12857,9 @@
       "source_file": "app-elearning/src/lib/practices.ts",
       "source_location": "L385",
       "_origin": "ast",
-      "community": 46,
+      "community": 19,
       "norm_label": "getpracticecounts()",
-      "community_name": "validate-content.ts",
+      "community_name": "Community 19",
       "id": "app_elearning_src_lib_practices_getpracticecounts"
     },
     {
@@ -12857,9 +12868,9 @@
       "source_file": "app-elearning/src/lib/practices.ts",
       "source_location": "L396",
       "_origin": "ast",
-      "community": 2,
+      "community": 19,
       "norm_label": "getpracticesearchdocuments()",
-      "community_name": "Community 2",
+      "community_name": "Community 19",
       "id": "app_elearning_src_lib_practices_getpracticesearchdocuments"
     },
     {
@@ -12890,9 +12901,9 @@
       "source_file": "app-elearning/src/lib/professional-routes.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 46,
       "norm_label": "professionalrouteslug",
-      "community_name": "Community 0",
+      "community_name": "validate-content.ts",
       "id": "app_elearning_src_lib_professional_routes_professionalrouteslug"
     },
     {
@@ -13088,9 +13099,9 @@
       "source_file": "app-elearning/src/lib/questions-parser.ts",
       "source_location": "L60",
       "_origin": "ast",
-      "community": 18,
+      "community": 58,
       "norm_label": "getallreviewablequestions()",
-      "community_name": "Community 18",
+      "community_name": "getAllProfessionalRoutes",
       "id": "app_elearning_src_lib_questions_parser_getallreviewablequestions"
     },
     {
@@ -14078,9 +14089,9 @@
       "source_file": "app-elearning/src/lib/utils.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 42,
+      "community": 10,
       "norm_label": "utils.ts",
-      "community_name": "review-queue.ts",
+      "community_name": "Community 10",
       "id": "app_elearning_src_lib_utils"
     },
     {
@@ -15271,7 +15282,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L659",
+      "source_location": "L701",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15282,7 +15293,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L945",
+      "source_location": "L987",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15293,7 +15304,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L1128",
+      "source_location": "L1170",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15304,7 +15315,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L522",
+      "source_location": "L564",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15315,7 +15326,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L1112",
+      "source_location": "L1154",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15326,7 +15337,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L569",
+      "source_location": "L611",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15337,7 +15348,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L7",
+      "source_location": "L49",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15348,7 +15359,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L52",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
+      "target": "sprint_handoff_estado_al_2026_08_22_noche_fix_de_infra_vercel_dominio_planestudio_vercel_app_roto",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SPRINT_HANDOFF.md",
+      "source_location": "L94",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15359,7 +15381,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L585",
+      "source_location": "L627",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15370,7 +15392,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L701",
+      "source_location": "L743",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15381,7 +15403,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L513",
+      "source_location": "L555",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15392,7 +15414,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L685",
+      "source_location": "L727",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15403,7 +15425,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L300",
+      "source_location": "L342",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15414,7 +15436,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L167",
+      "source_location": "L209",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15425,7 +15447,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L958",
+      "source_location": "L1000",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15436,7 +15458,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L744",
+      "source_location": "L786",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15447,7 +15469,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L224",
+      "source_location": "L266",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15458,7 +15480,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L400",
+      "source_location": "L442",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15469,7 +15491,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L89",
+      "source_location": "L131",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15480,7 +15502,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L534",
+      "source_location": "L576",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15491,7 +15513,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L620",
+      "source_location": "L662",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15502,7 +15524,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L645",
+      "source_location": "L687",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15513,7 +15535,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L418",
+      "source_location": "L460",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_planestudio_estado_de_sprints_post_auditor\u00eda_handoff",
@@ -15524,7 +15546,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "SPRINT_HANDOFF.md",
-      "source_location": "L1081",
+      "source_location": "L1123",
       "weight": 1.0,
       "_origin": "ast",
       "source": "sprint_handoff_sprint_diagn\u00f3stico_de_caso_aplicado_piloto_aprobado_2026_08_04_escalando_por_nivel",
@@ -50378,5 +50400,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "6f8cb23794a780c6fd877c31fe5b7e4bd9b28d8d"
+  "built_at_commit": "4b99372d3037f13967d785a4d7e9cc844f0efa22"
 }
