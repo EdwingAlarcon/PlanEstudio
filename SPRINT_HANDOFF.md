@@ -4,6 +4,49 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
+## Estado al 2026-08-24 (fix crítico: última pregunta en blanco en todo quiz + cierre parcial de "§63")
+
+**Contexto de origen — resuelve el punto abierto de "~23 casos E2E §63"**: la sección "Explícitamente
+still open" de este documento (ver más abajo, sprint Developer Workstation) advertía que el prompt
+original de 72 secciones que definía esos ~23 casos E2E se había perdido, y pedía explícitamente NO
+inventar un checklist para rellenarlo. En vez de reconstruir esa lista fantasma, se hizo una
+**auditoría de gaps reales** contra el código actual (no contra el prompt perdido) y se escribieron
+7 bloques de tests nuevos en `app-elearning/e2e/coverage-gaps.spec.ts` (8 tests) cerrando huecos de
+cobertura confirmados: diagnóstico de caso aplicado (nunca tenía tests), nivel D365 integrado
+(módulos+labs+práctica+checklist, análogo al test que ya existía para RPA), puente pedagógico
+Módulo 13→56, lenguaje de examen PL-xxx en certificados por nivel, prácticas `guided` (primer test
+de ese `practiceType`), aislamiento cruzado de los 5 stores actuando simultáneamente, y el flujo
+completo del simulador (40 preguntas + resultado + desglose de errores). Esto no agota el número
+"~23" original (era una cifra de un documento que ya no existe), pero cierra los gaps reales
+verificables hoy — si en el futuro aparece el prompt original de 72 secciones, cotejar contra esta
+lista antes de asumir que sigue faltando algo.
+
+**Bug real de producción encontrado por el test del simulador (no era flakiness del test)**:
+en `app-elearning/src/components/quiz/quiz-panel.tsx`, la pantalla de feedback de la **última
+pregunta de cualquier evaluación** (quiz de módulo, diagnóstico de caso, o simulador) se quedaba
+en blanco — sin mostrar correcto/incorrecto, sin explicación, y sin el botón para ver resultados —
+haciendo **imposible terminar cualquier quiz desde la última pregunta** por la UI normal. Causa:
+`if (!currentQuestion) return null;` corría *antes* de calcular `displayQuestion` (el fallback que
+resuelve `lastAttempt.question` en estado `"feedback"`). `getCurrentQuestion()` devuelve `undefined`
+en cuanto no queda ninguna pregunta sin responder — que es exactamente lo que pasa justo después de
+responder la última — así que el guard cortaba el render antes de llegar al fallback. Fix: mover el
+cálculo de `displayQuestion` antes del guard, y que el guard use `displayQuestion` en vez de
+`currentQuestion`. Cómo se detectó: un test E2E que completaba las 40 preguntas del simulador
+clic-a-clic se quedaba colgado esperando el botón "Ver resultados" en la pregunta 40 — al
+instrumentar con logs se confirmó que el botón simplemente no existía en el DOM en ese punto
+(la pantalla completa quedaba vacía), no un problema de timing/selector.
+
+**Validado**: suite E2E completa local 76/76 en verde (`npx playwright test`, ~5.3 min), lint y
+`tsc --noEmit` limpios. Commit `134b4e2e` pusheado a `master`, CI (`gh run list`) lanzado.
+
+**Nota operativa de esta sesión, no repetir**: correr la suite completa de Playwright en background
+y matarla a mitad de camino (para reintentar) deja procesos `node.exe`/`chrome-headless-shell.exe`
+zombis que compiten por CPU/RAM entre sí y con el servidor `next dev` — en esta sesión eso infló el
+proceso del dev server de ~300MB a **~4.9GB** de RAM y provocó timeouts de 5 minutos por test que
+parecían fallos reales pero eran solo contención de recursos. Si una corrida de Playwright hay que
+cortarla, matarla limpio (no dejarla "colgada" en background) y verificar con `tasklist` que no
+quedaron duplicados de `playwright test` ni de `next dev` antes de relanzar.
+
 ## Estado al 2026-08-23 (Módulo 56 — Fundamentos de JavaScript para Power Platform)
 
 **Contexto**: gap pedagógico declarado desde la auditoría del 2026-08-22 (ver sección de abajo) —
