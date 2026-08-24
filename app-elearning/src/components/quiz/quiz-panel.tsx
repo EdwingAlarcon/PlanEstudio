@@ -181,13 +181,17 @@ export function QuizPanel({
     );
   }
 
-  if (!currentQuestion) return null;
-
   // During "feedback", currentQuestion has already advanced to the next unanswered
   // question (recordAttempt marks the submitted one as answered) — the question being
-  // reviewed is lastAttempt.question, not currentQuestion.
+  // reviewed is lastAttempt.question, not currentQuestion. On the last question of a
+  // session, currentQuestion is undefined at this point (nothing left unanswered), so
+  // displayQuestion must be resolved before bailing out, or the final question's feedback
+  // screen (and its "Ver resultados" button) never renders.
   const displayQuestion =
     panelState === "feedback" && lastAttempt ? lastAttempt.question : currentQuestion;
+
+  if (!displayQuestion) return null;
+
   const isMulti = displayQuestion.type === "multi";
   const questionNumber = panelState === "feedback" ? answeredCount : answeredCount + 1;
   const timeIsLow = secondsLeft !== null && secondsLeft < 300; // < 5 min
