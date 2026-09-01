@@ -23,7 +23,7 @@ export default function CurriculumMapPage() {
   const routes = getAllProfessionalRoutes();
 
   return (
-    <main id="main-content" className="mx-auto max-w-5xl space-y-8 px-4 py-8 animate-fade-in">
+    <div className="mx-auto max-w-5xl space-y-8 px-4 py-8 animate-fade-in">
       <section className="rounded-xl border border-border bg-card p-6 shadow-fluent-1">
         <div className="flex items-start gap-4">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0078D4]">
@@ -93,6 +93,6 @@ export default function CurriculumMapPage() {
           <Link href="/mi-ruta">Volver a Mi ruta</Link>
         </Button>
       </section>
-    </main>
+    </div>
   );
 }

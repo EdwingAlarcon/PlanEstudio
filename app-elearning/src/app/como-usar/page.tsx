@@ -49,6 +49,11 @@ const STEPS = [
 
 const FIRST_SESSION = [
   {
+    title: "Antes de todo",
+    description: "Si nunca usaste Power Platform ni Dynamics 365, lee la Ruta cero absoluta: qué es un tenant, un ambiente Developer y qué puedes practicar ya.",
+    href: "/recursos/ruta-cero-absoluta",
+  },
+  {
     title: "0-15 min",
     description: "Lee Home y esta guía. Tu meta no es entender todo el mapa: solo saber que empezarás por Nivel Básico.",
     href: "/",
@@ -156,6 +161,33 @@ export default function HowToUsePage() {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
             </Link>
           ))}
+        </div>
+      </section>
+
+      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="zero-heading">
+        <h2 id="zero-heading" className="text-base font-semibold text-foreground">
+          Guías conceptuales de partida
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          Lectura previa sin herramienta — vocabulario mínimo antes de tocar Power Platform o Dynamics 365.
+        </p>
+        <div className="mt-4 grid gap-3 md:grid-cols-2">
+          <Link href="/recursos/ruta-cero-absoluta" className="rounded-lg border border-border bg-background p-4 transition-colors hover:border-[#0078D4]/40">
+            <p className="text-sm font-semibold text-foreground">Ruta cero absoluta</p>
+            <p className="mt-1 text-xs text-muted-foreground">Qué es Power Platform, Dataverse, un tenant y un ambiente Developer/Sandbox/Production/trial.</p>
+          </Link>
+          <Link href="/recursos/fundamentos-crm" className="rounded-lg border border-border bg-background p-4 transition-colors hover:border-[#0078D4]/40">
+            <p className="text-sm font-semibold text-foreground">Fundamentos funcionales CRM</p>
+            <p className="mt-1 text-xs text-muted-foreground">Cliente, cuenta, contacto, lead, oportunidad, caso, cola, SLA, actividades.</p>
+          </Link>
+          <Link href="/recursos/fundamentos-dataverse" className="rounded-lg border border-border bg-background p-4 transition-colors hover:border-[#0078D4]/40">
+            <p className="text-sm font-semibold text-foreground">Fundamentos de Dataverse</p>
+            <p className="mt-1 text-xs text-muted-foreground">Tablas, columnas, relaciones, formularios, vistas, reglas de negocio, seguridad, soluciones.</p>
+          </Link>
+          <Link href="/recursos/tipos-de-practica" className="rounded-lg border border-border bg-background p-4 transition-colors hover:border-[#0078D4]/40">
+            <p className="text-sm font-semibold text-foreground">Tipos de práctica</p>
+            <p className="mt-1 text-xs text-muted-foreground">Conceptual, simulada, Developer environment, trial Dynamics 365, tenant/ambiente compatible.</p>
+          </Link>
         </div>
       </section>
 

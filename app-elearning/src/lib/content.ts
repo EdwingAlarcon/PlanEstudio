@@ -98,6 +98,10 @@ const RESOURCE_FILES: Record<string, string> = {
   "rpa-validacion-tenant": "Recursos/RPA_VALIDACION_TENANT.md",
   "guia-practicas-interactivas": "Recursos/GUIA_PRACTICAS_INTERACTIVAS.md",
   "guia-repaso-inteligente": "Recursos/GUIA_REPASO_INTELIGENTE.md",
+  "ruta-cero-absoluta": "Recursos/RUTA_CERO_ABSOLUTA.md",
+  "fundamentos-crm": "Recursos/FUNDAMENTOS_CRM.md",
+  "fundamentos-dataverse": "Recursos/FUNDAMENTOS_DATAVERSE.md",
+  "tipos-de-practica": "Recursos/TIPOS_DE_PRACTICA.md",
 };
 
 const LEVEL_META: Record<LevelId, { title: string; description: string; certification: string }> = {
