@@ -312,3 +312,9 @@ fuera de tu control.
 - Crear un CV "para todo" que no coincide con ninguna vacante concreta.
 - Llenar LinkedIn de skills sin evidencia visible.
 - Poner proyectos en Experience como si fueran trabajos reales cuando son labs/capstones.
+
+## Reto adicional
+
+Repetí la simulación completa (Pasos 3-6) para un rol objetivo distinto al que elegiste en el Paso 1
+(ej. si preparaste Consultor Funcional, repetí para Maker o Developer). Comparás qué preguntas
+cambian y cuáles del "vocabulario técnico mínimo" son transferibles entre roles.

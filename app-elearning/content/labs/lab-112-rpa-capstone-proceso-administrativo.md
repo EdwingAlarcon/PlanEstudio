@@ -82,3 +82,10 @@ SIT procesa solicitudes administrativas recibidas por archivo. Parte puede resol
 ## Fallos críticos
 
 Credenciales en texto plano, permisos excesivos, cambios directos en producción, ausencia de manejo de errores, duplicaciones no controladas, datos sensibles expuestos, ausencia de rollback en procesos críticos, automatización basada únicamente en coordenadas sin justificación, reintentos infinitos, no cerrar aplicaciones o archivos, no validar resultados.
+
+## Reto adicional
+
+Agrega un segundo proceso administrativo distinto (con su propio dataset de `sit-automation-case`) que
+comparta componentes reutilizables (selectores, manejo de errores, logging) con el primero. Documenta
+qué porcentaje del código quedó reutilizado vs. escrito de cero — es el indicador real de si tu
+arquitectura de automatización escala a más de un proceso.

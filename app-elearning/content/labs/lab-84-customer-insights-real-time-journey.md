@@ -62,6 +62,34 @@ Diseña pruebas para consentimiento válido, sin consentimiento, email inválido
 - Matriz de consentimiento.
 - Casos de prueba.
 
+## Rúbrica de aprobación
+
+| Criterio | Peso | Aprobado mínimo |
+|---|---:|---|
+| Trigger | 15% | Trigger real-time con condición de entrada clara |
+| Consentimiento | 30% | Se valida ANTES del envío, no después; incluye caso "sin consentimiento" probado |
+| Diseño del journey | 25% | Mensaje, espera, condición de interacción, tarea y objetivo, todos justificados |
+| Pruebas | 20% | Cubre consentimiento válido, sin consentimiento, email inválido y cliente ya renovado |
+| Separación Data/Journeys | 10% | El journey no rehace unificación — consume perfiles/segmentos ya resueltos en Data |
+
+Aprobación: mínimo 65/100 y ningún criterio en nivel 0. El caso "sin consentimiento" en 0 es
+descalificante sin importar el resto del puntaje — es el criterio de cumplimiento no negociable.
+
+## Errores comunes
+
+| Error | Causa | Solución |
+|---|---|---|
+| Validar consentimiento después de enviar el primer mensaje | Se diseña el journey como flujo lineal sin gate previo | El chequeo de consentimiento debe ser el primer paso ejecutable, antes de cualquier envío |
+| Journey que re-unifica datos en vez de consumir Data | Se mezcla lógica de CDP dentro del journey | El journey consume segmentos/perfiles ya resueltos por Customer Insights - Data, no recalcula matching |
+| Sin caso de prueba negativo | Solo se prueba el camino feliz (cliente califica, todo bien) | Los 4 casos de prueba (válido, sin consentimiento, email inválido, ya renovado) son obligatorios, no opcionales |
+| Objetivo del journey ambiguo | "Enviar comunicación" no es un objetivo medible | El objetivo debe ser observable (ej. "tasa de renovación del segmento sube X%"), no solo "enviar" |
+
+## Reto adicional
+
+Agregá un segundo canal (ej. SMS como fallback si el email no se abre en 48 horas) y documentá cómo
+el journey decide entre canales sin violar el consentimiento específico de cada uno — el consentimiento
+de email no habilita automáticamente SMS.
+
 ## Competencias desarrolladas
 
 - Real-time journeys.

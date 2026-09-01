@@ -82,6 +82,34 @@ la activación hacia Journeys o Sales.
 - Segmento y destino.
 - Tablero o matriz de calidad post-unificación.
 
+## Rúbrica de aprobación
+
+| Criterio | Peso | Aprobado mínimo |
+|---|---:|---|
+| Fuentes y calidad | 20% | Matriz de fuentes con formato, frecuencia y campos clave documentados |
+| Reglas de matching | 25% | Al menos 2 reglas (exacta + probabilística/fuzzy) con orden de prioridad definido |
+| Medidas | 15% | Cada medida declara fórmula y fuente, no solo el nombre |
+| Segmento y activación | 15% | Segmento con criterio verificable y destino de activación real (Journeys o Sales) |
+| Gobierno de datos | 15% | Matriz de propósito/retención/consentimiento completa |
+| Operación y calidad | 10% | Métrica de calidad con umbral que detiene la activación |
+
+Aprobación: mínimo 65/100 y ningún criterio en nivel 0.
+
+## Errores comunes
+
+| Error | Causa | Solución |
+|---|---|---|
+| Reglas de matching solo exactas | Parece suficiente en datos de prueba pequeños | Agregar al menos una regla probabilística/fuzzy y documentar su umbral de confianza |
+| Medida sin fórmula documentada | Se nombra la medida pero no cómo se calcula | Escribir la fórmula exacta y la fuente de cada campo que usa |
+| Segmento sin destino de activación | Se diseña el segmento como ejercicio aislado | Todo segmento debe declarar a dónde se activa (Journeys, Sales u otro) |
+| Confundir Customer Insights - Data con Journeys | Se mezcla unificación de perfiles con ejecución de campañas | Data es CDP (unificación); Journeys es ejecución de marketing — ver [Ruta dedicada Journeys](/rutas/dynamics-365-customer-insights-journeys) |
+
+## Reto adicional
+
+Diseña una regla de supresión: un perfil que cumple el criterio del segmento pero que, por una señal
+de gobierno de datos (ej. solicitud de baja reciente), debe excluirse igual de la activación.
+Documenta cómo se resuelve el conflicto entre "califica por segmento" y "debe excluirse por gobierno".
+
 ## Competencias desarrolladas
 
 - Customer 360.

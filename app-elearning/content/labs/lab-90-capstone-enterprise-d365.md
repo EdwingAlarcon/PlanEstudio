@@ -88,6 +88,37 @@ Labs 81-89. Este decision log es el puente entre los labs especializados y la pr
 - Resumen ejecutivo de 1 página.
 - Decision log integrado con referencias a evidencias previas.
 
+## Rúbrica de aprobación
+
+| Criterio | Peso | Aprobado mínimo |
+|---|---:|---|
+| Arquitectura integrada | 25% | Cubre CE, Field Service, Customer Insights y F&O con límites explícitos entre productos |
+| Fit-Gap | 20% | Cada gap tiene decisión defendible (estándar/configuración/personalización/fuera de alcance) |
+| Matriz de datos | 15% | Ownership claro por tabla/producto, sin ambigüedad de quién es la fuente de verdad |
+| Roadmap | 15% | Fases con dependencias reales de licencia/tenant, no solo fechas |
+| UAT | 15% | Casos end-to-end cruzando al menos 2 productos |
+| Decision log | 10% | 8+ decisiones con evidencia de los Labs 81-89 referenciada |
+
+Aprobación: mínimo 65/100 y ningún criterio en nivel 0. Nivel profesional/excelencia: ≥85/100 con
+las 4 capacidades (CE, Field Service, Customer Insights, F&O) declarando su estado real
+(Simulado/Sandbox real/Productivo controlado) sin ninguna marcada como "Productivo controlado" sin
+evidencia que lo sustente.
+
+## Errores comunes
+
+| Error | Causa | Solución |
+|---|---|---|
+| Arquitectura que trata los 4 productos como un solo sistema | Se diseña sin marcar fronteras de dato/ownership entre CE, Field Service, CI y F&O | Definir explícitamente qué tabla es fuente de verdad en cada producto y dónde hay integración vs. duplicación |
+| Roadmap sin dependencias reales | Se ordenan fases por preferencia, no por bloqueo real de licencia/tenant | Cada fase declara qué licencia/trial la desbloquea antes de fijar fecha |
+| Decision log desconectado de los Labs 81-89 | Se documentan decisiones nuevas en vez de citar evidencia ya generada | Cada entrada del decision log referencia el Lab/artefacto donde se sustentó |
+| Declarar "Productivo controlado" sin evidencia | Se asume el nivel más alto porque suena más profesional | Usa el estado real — "Simulado" es una respuesta honesta válida si no hay tenant |
+
+## Reto adicional
+
+Agrega un quinto producto (Contact Center o Power Automate/RPA) al decision log, marcando
+explícitamente su estado (awareness/opcional) y por qué no se incluyó en el alcance principal de la
+arquitectura — es la misma disciplina que exige la promesa pedagógica del propio plan.
+
 ## Competencias desarrolladas
 
 - Arquitectura D365 Especialización.

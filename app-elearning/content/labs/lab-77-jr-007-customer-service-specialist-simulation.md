@@ -180,3 +180,9 @@ producción a lo largo de varias semanas.
 - Definir SLA sin pausa/reanudación.
 - No documentar entitlement agotado.
 - Crear dashboard sin decisiones accionables.
+
+## Reto adicional
+
+Diseñá un cuarto tipo de caso (ej. "Reclamo de facturación") que cruce con el proceso de Sales — un
+caso que, si no se resuelve en cierto tiempo, debería generar una alerta hacia el equipo comercial.
+Documentá qué dato compartido entre Customer Service y Sales hace posible esa alerta.

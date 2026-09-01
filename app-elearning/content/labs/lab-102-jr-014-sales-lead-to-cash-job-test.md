@@ -127,5 +127,11 @@ Escribe 5 casos de prueba que cubran el ciclo completo, incluyendo al menos:
 - Definir price lists sin reglas de descuento explícitas por segmento.
 - Omitir el caso de prueba negativo (conversión que debería fallar).
 - Diseñar el BPF sin condición de rama, perdiendo la oportunidad de mostrar criterio funcional.
+
+## Reto adicional
+
+Agrega una tercera price list para un segmento de cliente distinto (ej. "Gobierno" o "Distribuidor")
+con reglas de descuento propias, y documentá qué condición del BPF de Opportunity determina cuál de
+las 3 price lists se sugiere automáticamente.
 - No registrar el tiempo real usado, perdiendo la evidencia de que se resolvió bajo presión de
   tiempo como en una prueba técnica real.
