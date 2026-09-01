@@ -24,8 +24,8 @@ slug: "azure-integration-services-avanzado"
   integración de Azure en producción.**
 - **Modo práctico:** requiere una suscripción de Azure (de pago, o con créditos de una cuenta
   gratuita/estudiante), permisos para crear recursos, y supervisión activa de costos — ver aviso
-  abajo. Un puente real de fundamentos de Azure (Azure Foundations for Power Platform Integrations)
-  está en el roadmap de PlanEstudio y todavía no existe.
+  abajo. Lee primero [Fundamentos de Azure](/recursos/fundamentos-azure) (20-30 min, incluye práctica
+  con cuenta gratuita) — cierra suscripción/resource group/RBAC/costos antes de este módulo.
 
 > ⚠️ **Aviso de costos:** algunos servicios de Azure (Logic Apps Standard, API Management, Service
 > Bus Premium, Azure Functions con planes dedicados) **pueden generar costos reales**, incluso en

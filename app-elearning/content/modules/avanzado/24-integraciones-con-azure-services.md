@@ -6,6 +6,11 @@ certification: "PL-400"
 estimatedMinutes: 8
 slug: "integraciones-con-azure-services"
 ---
+
+> **☁️ ¿Nunca usaste Azure Portal?** Lee primero [Fundamentos de Azure](/recursos/fundamentos-azure)
+> — suscripción, resource group, RBAC y costos, con práctica en cuenta gratuita antes de crear los
+> recursos que este módulo usa (Service Bus, Functions, API Management, Event Grid).
+
 ### 🎯 Objetivo
 Integrar Power Platform con Azure Service Bus, Azure Functions, Azure API Management y Event Grid para construir arquitecturas de integración robustas, escalables y desacopladas entre Dataverse y sistemas externos.
 

@@ -6,6 +6,11 @@ certification: "Arquitectura Power Platform"
 estimatedMinutes: 10
 slug: "seguridad-y-cumplimiento-enterprise"
 ---
+
+> **☁️ ¿Nunca usaste Azure Portal?** Lee primero [Fundamentos de Azure](/recursos/fundamentos-azure)
+> — suscripción, resource group, RBAC y costos, antes de las actividades con Azure Key Vault y
+> Azure AD PIM de este módulo.
+
 ### 🎯 Objetivo
 Implementar una postura de seguridad Zero Trust para Power Platform: clasificación de datos con Microsoft Purview, Customer-Managed Keys, Privileged Identity Management para administradores, auditoría avanzada con Microsoft Sentinel, y cumplimiento regulatorio documentado.
 
