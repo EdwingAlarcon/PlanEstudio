@@ -6,6 +6,10 @@ certification: "Dynamics 365 Sales / MB-280 (retirado 31 jul 2026)"
 estimatedMinutes: 13
 slug: "dynamics-365-sales-avanzado"
 ---
+
+> **🧭 ¿Lead, oportunidad, cuenta y contacto todavía no son claros?** Este módulo asume ese vocabulario.
+> Repasa primero [Fundamentos funcionales CRM](/recursos/fundamentos-crm) — 15 minutos, sin tenant.
+
 ### 🎯 Objetivo
 Diseñar y operar un proceso avanzado de Dynamics 365 Sales que conecte lead-to-opportunity, catálogo de productos, pipeline review, forecasting y gobierno de datos comerciales, produciendo los mismos artefactos (matriz de forecast, política de pipeline hygiene, decisión de forecast category) que se te pediría entregar en un proyecto real — y diferenciando lo que puede practicarse con datos simulados de lo que requiere tenant, licencia de Dynamics 365 Sales y ambiente real.
 

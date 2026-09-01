@@ -8,6 +8,10 @@ slug: "introduccion-al-ecosistema-power-platform"
 ---
 *Duración: 1-2 semanas · Lectura: 10-12 min · Con práctica y setup de ambiente: 45-90 min (el tiempo de setup varía y no depende de ti)*
 
+> **🌱 ¿Nunca tocaste Power Platform?** Lee primero [Ruta cero absoluta](/recursos/ruta-cero-absoluta) —
+> aclara qué es un tenant, un ambiente y la diferencia entre Developer/Sandbox/Production/trial antes
+> de que este módulo te pida crear el tuyo.
+
 > **📌 ¿Primera vez usando una herramienta profesional en la nube?** Si nunca has creado una cuenta de trabajo, entrado a un panel de administración o usado algo parecido a Excel/Access, lee primero la tabla de abajo. Si ya usas software de oficina o herramientas web con soltura, sáltala y ve directo al Objetivo.
 
 ### 🌱 Fundamentos digitales antes de empezar (opcional si ya los conoces)

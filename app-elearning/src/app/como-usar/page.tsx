@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Camera, CheckCircle2, ClipboardList, FlaskConical, HelpCircle, Route, Trophy } from "lucide-react";
+import { ArrowRight, BookOpen, Camera, CheckCircle2, ClipboardList, Compass, FlaskConical, HelpCircle, Route, Trophy } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -131,6 +131,48 @@ export default function HowToUsePage() {
               </article>
             );
           })}
+        </div>
+      </section>
+
+      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="zero-start-heading">
+        <div className="mb-4 flex items-center gap-2">
+          <Compass className="h-4 w-4 text-[#6B4EFF]" aria-hidden />
+          <h2 id="zero-start-heading" className="text-lg font-semibold text-foreground">
+            Antes de empezar, si nunca usaste Power Platform ni un CRM
+          </h2>
+        </div>
+        <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+          Estos 3 recursos son puentes cortos, sin ambiente ni cuenta necesaria, para llegar al Módulo 1
+          (o al Módulo 61 de Dynamics 365) ya sabiendo distinguir los términos que vas a encontrar.
+        </p>
+        <div className="grid gap-3 md:grid-cols-3">
+          <Link
+            href="/recursos/ruta-cero-absoluta"
+            className="rounded-lg border border-border bg-background p-4 transition-colors hover:border-[#6B4EFF]/40"
+          >
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#6B4EFF]">Ruta cero absoluta</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Qué es Power Platform, Dataverse, tenant y ambiente — y la diferencia entre Developer, Sandbox, Production y trial.
+            </p>
+          </Link>
+          <Link
+            href="/recursos/fundamentos-crm"
+            className="rounded-lg border border-border bg-background p-4 transition-colors hover:border-[#6B4EFF]/40"
+          >
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#6B4EFF]">Fundamentos CRM</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Cliente, cuenta, contacto, lead, oportunidad, caso, cola, SLA y actividad — con un caso guiado.
+            </p>
+          </Link>
+          <Link
+            href="/recursos/tipos-de-practica"
+            className="rounded-lg border border-border bg-background p-4 transition-colors hover:border-[#6B4EFF]/40"
+          >
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#6B4EFF]">Tipos de práctica</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Qué necesitas para cada módulo o lab: conceptual, simulada, Developer environment, trial D365 o tenant real.
+            </p>
+          </Link>
         </div>
       </section>
 

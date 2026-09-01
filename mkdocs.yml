@@ -74,6 +74,9 @@ nav:
       - "Lab 23 — Plugin C#: Validación Server-Side": Labs/LAB23_PLUGIN_CSHARP.md
       - "Lab 32 — CoE Starter Kit: Gobernanza del Tenant": Labs/LAB32_COE_STARTER_KIT.md
   - Recursos:
+      - "🌱 Ruta Cero Absoluta": Recursos/RUTA_CERO_ABSOLUTA.md
+      - "🧭 Fundamentos CRM": Recursos/FUNDAMENTOS_CRM.md
+      - "🏷️ Tipos de Práctica": Recursos/TIPOS_DE_PRACTICA.md
       - "✅ Checklist de Progreso": Recursos/CHECKLIST_PROGRESO.md
       - "💼 Matriz de Skills Laborales": Recursos/MATRIZ_SKILLS_LABORALES.md
       - "💻 CRM Developer Job-Ready": Recursos/JOB_READY_CRM_DEVELOPER.md

@@ -6,6 +6,10 @@ certification: "Dynamics 365 Customer Service"
 estimatedMinutes: 13
 slug: "dynamics-365-customer-service-avanzado"
 ---
+
+> **🧭 ¿Caso, cola y SLA todavía no son claros?** Este módulo asume ese vocabulario. Repasa primero
+> [Fundamentos funcionales CRM](/recursos/fundamentos-crm) — 15 minutos, sin tenant.
+
 ### 🎯 Objetivo
 Configurar conceptualmente un proceso avanzado de Customer Service con casos, colas, contratos de servicio, entitlements, SLA, knowledge management y routing, produciendo una matriz de SLA operable y un árbol de decisión de agente defendibles en una entrevista de Consultor Funcional — distinguiendo configuración practicable con datos simulados de validación que requiere ambiente real.
 
