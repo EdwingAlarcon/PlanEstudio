@@ -18,16 +18,16 @@ slug: "c-plugins-para-dataverse"
 
 - **Ya programas en C# o un lenguaje similar (Java, TypeScript con tipado fuerte):** puedes seguir
   el módulo completo, incluidas las actividades prácticas, con normalidad.
-- **Programas en otro lenguaje pero nunca en C#:** puedes seguir el módulo, pero dedica tiempo extra
-  a los conceptos de tipado fuerte, interfaces y `async/await` antes de la Actividad 23.1 — no vienen
-  explicados aquí.
-- **Nunca has programado:** te recomendamos estudiar este módulo en **modo conceptual**: lee la
-  arquitectura del pipeline de plugins, el contexto de ejecución, el tracing y los patrones de
-  registro para entender **qué hace** un plugin y **cuándo** se usa — sin intentar todavía compilar
-  ni registrar el código tú mismo. Esto te prepara para una conversación técnica o una decisión de
-  arquitectura, pero **no valida que puedas desarrollar un plugin de forma independiente**. Ese
-  puente de programación real (Programming Foundations for Power Platform) está en el roadmap de
-  PlanEstudio y todavía no existe — no lo des por hecho.
+- **Programas en otro lenguaje pero nunca en C#:** lee primero [Fundamentos de C#/.NET para Power Platform](/recursos/fundamentos-csharp-dotnet)
+  (20-30 min, incluye práctica local sin tenant) — cierra la sintaxis básica de clases, tipos,
+  excepciones y `try/catch` antes de la Actividad 23.1.
+- **Nunca has programado:** el puente de arriba te da la sintaxis mínima, pero no reemplaza un curso
+  completo de programación. Con el puente hecho, puedes intentar las actividades con más esfuerzo del
+  habitual; sin él, te recomendamos estudiar este módulo en **modo conceptual**: lee la arquitectura
+  del pipeline de plugins, el contexto de ejecución, el tracing y los patrones de registro para
+  entender **qué hace** un plugin y **cuándo** se usa — sin intentar todavía compilar ni registrar el
+  código tú mismo. Esto te prepara para una conversación técnica o una decisión de arquitectura, pero
+  **no valida que puedas desarrollar un plugin de forma independiente**.
 
 **Antes de los labs asociados a este módulo, confirma que tienes:** C# y .NET (según arriba), Visual
 Studio instalado, y acceso a un ambiente Dataverse propio o compartido para registrar y probar el

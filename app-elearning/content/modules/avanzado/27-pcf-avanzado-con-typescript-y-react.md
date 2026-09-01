@@ -9,12 +9,13 @@ slug: "pcf-avanzado-con-typescript-y-react"
 ### 🚧 Antes de comenzar: requiere TypeScript sólido
 
 > **Requiere conocimientos previos que PlanEstudio todavía no enseña desde cero:** TypeScript
-> (tipos, interfaces, genéricos, clases, módulos ES6, async/await) y JSX/TSX básico. El
-> [Anexo de Lenguajes de Programación](/recursos/lenguajes-programacion) es una referencia de
-> sintaxis para quien ya programa, no un curso de fundamentos. Si vienes solo del Módulo 13
-> (JavaScript y PCF básico) sin experiencia previa en tipado estático, estudia este módulo en modo
-> conceptual (arquitectura del control avanzado, patrones de React) antes de intentar construirlo —
-> eso no valida que puedas desarrollarlo de forma independiente.
+> (tipos, interfaces, genéricos, clases, módulos ES6, async/await) y JSX/TSX básico. Lee primero
+> [Fundamentos de TypeScript y React para PCF](/recursos/fundamentos-typescript-react) (30-40 min,
+> incluye práctica local con Vite, sin tenant) — cierra la sintaxis básica de tipos, interfaces,
+> componentes y `useState`. Ese puente no reemplaza un curso completo: si vienes solo del Módulo 13
+> (JavaScript y PCF básico) sin experiencia previa en tipado estático, aun con el puente hecho
+> considera estudiar este módulo en modo conceptual (arquitectura del control avanzado, patrones de
+> React) antes de intentar construirlo — eso no valida que puedas desarrollarlo de forma independiente.
 
 ### 🎯 Objetivo
 Desarrollar controles PCF avanzados: Dataset controls que reemplazan subgrids, controles con Web API para operaciones CRUD, uso de Fluent UI para consistencia visual, y publicación de PCF en soluciones managed.

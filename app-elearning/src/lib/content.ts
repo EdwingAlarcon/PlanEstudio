@@ -101,6 +101,8 @@ const RESOURCE_FILES: Record<string, string> = {
   "ruta-cero-absoluta": "Recursos/RUTA_CERO_ABSOLUTA.md",
   "fundamentos-crm": "Recursos/FUNDAMENTOS_CRM.md",
   "tipos-de-practica": "Recursos/TIPOS_DE_PRACTICA.md",
+  "fundamentos-csharp-dotnet": "Recursos/FUNDAMENTOS_CSHARP_DOTNET.md",
+  "fundamentos-typescript-react": "Recursos/FUNDAMENTOS_TYPESCRIPT_REACT.md",
 };
 
 const LEVEL_META: Record<LevelId, { title: string; description: string; certification: string }> = {

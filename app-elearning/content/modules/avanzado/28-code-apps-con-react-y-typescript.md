@@ -6,6 +6,16 @@ certification: "PL-400"
 estimatedMinutes: 9
 slug: "code-apps-con-react-y-typescript"
 ---
+
+### 🚧 Antes de comenzar: es el módulo con más exigencia de código de la ruta Developer
+
+> **Requiere conocimientos previos que PlanEstudio todavía no enseña desde cero:** TypeScript,
+> React (componentes, props, estado, hooks) y el flujo de un proyecto Vite. Lee primero
+> [Fundamentos de TypeScript y React para PCF](/recursos/fundamentos-typescript-react) (30-40 min,
+> incluye práctica local con Vite, sin tenant) — este módulo asume ese nivel de entrada y no lo
+> reintroduce. Si el puente todavía te resulta difícil, estudia este módulo en modo conceptual
+> (arquitectura de Code Apps, SDK, ALM) antes de intentar construir la app vos mismo.
+
 ### 🎯 Objetivo
 Construir aplicaciones web completas (React + TypeScript + Vite) que corren dentro de Power Platform, con acceso nativo y tipado a conectores y Dataverse, control total del UI, y despliegue como soluciones administradas mediante el pipeline de ALM.
 
