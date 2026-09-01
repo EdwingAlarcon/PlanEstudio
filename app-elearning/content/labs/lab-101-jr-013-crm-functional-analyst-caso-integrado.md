@@ -4,7 +4,7 @@ title: "JR-013 — CRM Functional Analyst: Caso Integrado (Admisión, Servicio, 
 level: "N3"
 duration: 300
 product: ["Dynamics 365 Sales", "Dynamics 365 Customer Service", "Dataverse", "Power Automate", "Azure DevOps"]
-certifications: ["PL-200", "Especialista Dynamics 365 CE"]
+certifications: ["PL-200 (retirado 31 ago 2026)", "Especialista Dynamics 365 CE"]
 role: ["CRM Functional", "Business Analyst", "Functional Consultant"]
 prerequisites:
   - "Lab 66 revisado: Sales Lead-to-Cash"

@@ -173,7 +173,7 @@ El formulario por defecto tiene una sola sección. Vas a reorganizarlo en 3 pest
      - Sección `Personas`: campos `sit_solicitante`, `sit_asignado`
 
 3. Agrega **Pestaña 2 — Resolución**:
-   - Nueva pestaña: `Resolución`
+   - Nueva pestaña: `Resolución` — asígnale nombre lógico `tab_resolucion` explícitamente en el panel de propiedades de la pestaña (no lo dejes autogenerado); el Módulo 13 lo referencia por ese nombre exacto en código.
    - Sección `Fechas`: `sit_fechasolicitud`, `sit_fecharesolucion`
    - Sección `Detalle de Solución`: `sit_descripcion_solucion`, `sit_costoestimado`
 
@@ -354,9 +354,13 @@ El Quick View Form muestra datos de un registro relacionado dentro del formulari
    |---|---|---|---|---|
    | sit_Solicitud | Organización | Organización | Organización | Unidad de negocio |
    | sit_Categoria | Organización | Organización | Organización | Organización |
-   | sit_auditoriasolicitud | No | Organización | No | No |
 
 3. Guarda el rol.
+
+   > **📌 Pendiente para más adelante:** cuando completes el Módulo 23 (Plugins C# para Dataverse) vas a
+   > crear la tabla `sit_auditoriasolicitud`. En ese momento, vuelve a este rol y agrega una fila con
+   > permiso Leer = Organización (sin Crear/Escribir/Eliminar, porque esa tabla la escribe el plugin,
+   > no el usuario). No la agregues ahora — la tabla todavía no existe.
 
 ### Tarea 5.3 — Compartir la app y asignar roles
 

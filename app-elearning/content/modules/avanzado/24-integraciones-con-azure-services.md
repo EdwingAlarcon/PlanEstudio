@@ -164,7 +164,7 @@ public class SolicitudProcessor
            var body = context.Response.Body.As<JObject>();
            return new JObject(
              new JProperty("id", body["sit_solicitudid"]),
-             new JProperty("numero", body["sit_numero"]),
+             new JProperty("numero", body["sit_numerosolicitud"]),
              new JProperty("status", "created")
            ).ToString();
          }

@@ -4,7 +4,7 @@ title: "JR-015 — CRM Functional Post-Go-Live Incident Simulation"
 level: "N4"
 duration: 120
 product: ["Dynamics 365 Customer Service", "Dataverse"]
-certifications: ["PL-200", "Especialista Dynamics 365 CE"]
+certifications: ["PL-200 (retirado 31 ago 2026)", "Especialista Dynamics 365 CE"]
 role: ["CRM Functional", "Functional Consultant", "Customer Service Specialist"]
 prerequisites:
   - "Lab 68 completado: Customer Service Case-to-Resolution"

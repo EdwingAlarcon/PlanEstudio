@@ -133,7 +133,7 @@ namespace SIT.Plugins
 
             // Asignar número automático (búsqueda del último número)
             var query = new Microsoft.Xrm.Sdk.Query.QueryExpression("sit_solicitud");
-            query.ColumnSet = new Microsoft.Xrm.Sdk.Query.ColumnSet("sit_numero");
+            query.ColumnSet = new Microsoft.Xrm.Sdk.Query.ColumnSet("sit_numerosolicitud");
             query.AddOrder("createdon", Microsoft.Xrm.Sdk.Query.OrderType.Descending);
             query.TopCount = 1;
 
@@ -142,7 +142,7 @@ namespace SIT.Plugins
 
             if (resultados.Entities.Count > 0)
             {
-                var ultimoNumero = resultados.Entities[0].GetAttributeValue<string>("sit_numero");
+                var ultimoNumero = resultados.Entities[0].GetAttributeValue<string>("sit_numerosolicitud");
                 if (!string.IsNullOrEmpty(ultimoNumero) && ultimoNumero.StartsWith("SOL-"))
                 {
                     if (int.TryParse(ultimoNumero.Substring(4), out int num))
@@ -150,7 +150,7 @@ namespace SIT.Plugins
                 }
             }
 
-            solicitud["sit_numero"] = $"SOL-{siguienteNumero:D5}";
+            solicitud["sit_numerosolicitud"] = $"SOL-{siguienteNumero:D5}";
             tracer.Trace("Número asignado: SOL-{0:D5}", siguienteNumero);
         }
     }
@@ -197,8 +197,12 @@ public class SolicitudPostUpdatePlugin : IPlugin
         auditoria["sit_fecha"] = DateTime.UtcNow;
         service.Create(auditoria);
 
-        // Si el nuevo estado es "Aprobado" (100000001), disparar lógica de negocio
-        if (estadoNuevo == 100000001)
+        // Si el nuevo estado es "Aprobada", disparar lógica de negocio.
+        // El valor numérico de "Aprobada" NO es universal: Dataverse lo asigna según el orden
+        // en que creaste las opciones de sit_estado (Lab 02). Verifica el valor real en tu
+        // ambiente (Personalizar columna → Editar opciones) antes de reemplazar este placeholder.
+        const int ESTADO_APROBADA = /* TU VALOR REAL AQUÍ */ 100000004;
+        if (estadoNuevo == ESTADO_APROBADA)
         {
             // Actualizar campos de aprobación
             var update = new Entity("sit_solicitud", context.PrimaryEntityId);

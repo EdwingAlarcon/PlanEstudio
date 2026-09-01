@@ -80,6 +80,7 @@ function getLabKindLabel(lab: LabInfo, kind: string): string {
 function getCertificationBadges(lab: LabInfo): Pick<LabPresentationMeta, "certificationBadges" | "historicalCertifications"> {
   const historical = new Set([
     "PL-600",
+    "PL-200 (retirado 31 ago 2026)",
     "MB-210",
     "MB-220",
     "MB-240",
@@ -94,6 +95,7 @@ function getCertificationBadges(lab: LabInfo): Pick<LabPresentationMeta, "certif
 
   const competencyBadges = historicalCertifications.map((cert) => {
     if (cert === "PL-600") return "Solution Architect";
+    if (cert === "PL-200 (retirado 31 ago 2026)") return "Competencia Functional Consultant";
     if (cert === "MB-210") return "Competencia Sales";
     if (cert === "MB-220") return "Customer Insights Skill Path";
     if (cert === "MB-240" || cert === "MB-240 (retirado 30 jun 2026)") return "Competencia Field Service";

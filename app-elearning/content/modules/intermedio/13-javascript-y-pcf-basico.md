@@ -48,6 +48,10 @@ Implementar lógica de cliente con JavaScript en formularios Model-Driven y crea
 // Namespace pattern para evitar conflictos globales
 var SolicitudFormHandler = SolicitudFormHandler || {};
 
+// Valor NO universal: Dataverse lo asigna según el orden de creación de las opciones
+// de sit_estado (Lab 02). Verifica el valor real en tu ambiente antes de usar este código.
+SolicitudFormHandler.ESTADO_APROBADA = /* TU VALOR REAL AQUÍ */ 100000004;
+
 // Handler: se llama al cargar el formulario
 SolicitudFormHandler.onLoad = function(executionContext) {
     var formContext = executionContext.getFormContext();
@@ -67,7 +71,7 @@ SolicitudFormHandler.onSave = function(executionContext) {
     var estado = formContext.getAttribute("sit_estado").getValue();
     var presupuesto = formContext.getAttribute("sit_costoestimado").getValue();
     
-    if (estado === 100000001 && (presupuesto === null || presupuesto <= 0)) {
+    if (estado === SolicitudFormHandler.ESTADO_APROBADA && (presupuesto === null || presupuesto <= 0)) {
         // Cancelar el guardado y mostrar error
         executionContext.getEventArgs().preventDefault();
         formContext.ui.setFormNotification(
@@ -85,7 +89,7 @@ SolicitudFormHandler.onSave = function(executionContext) {
 // Función privada de visibilidad (convención: _ prefijo)
 SolicitudFormHandler._configurarVisibilidad = function(formContext) {
     var estado = formContext.getAttribute("sit_estado").getValue();
-    var esAprobado = estado === 100000001; // valor del option: Aprobado
+    var esAprobado = estado === SolicitudFormHandler.ESTADO_APROBADA;
     
     // Mostrar sección de implementación solo si está aprobado
     // En el Lab 04 la pestaña se llama "Resolución"; asigna el nombre lógico tab_resolucion.

@@ -4,7 +4,7 @@ title: "JR-007 — Customer Service Specialist Job Simulation"
 level: "N3"
 duration: 240
 product: ["Dynamics 365 Customer Service", "Dataverse", "Power Automate"]
-certifications: ["PL-200", "Especialista Dynamics 365 CE"]
+certifications: ["PL-200 (retirado 31 ago 2026)", "Especialista Dynamics 365 CE"]
 role: ["CRM Functional", "Customer Service Specialist"]
 prerequisites:
   - "Módulo 20 estudiado: Dynamics 365 CE Sales y Customer Service"

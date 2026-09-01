@@ -57,14 +57,14 @@ Al finalizar este laboratorio habrás usado un asistente o agente de código par
 
 Antes de abrir cualquier herramienta de IA, escribe en un párrafo:
 1. El campo exacto a agregar (`sit_horasaprobacion`, tipo Whole Number).
-2. En qué punto del flujo se debe calcular (al cambiar `sit_estado` a "Aprobado" o "Rechazado").
+2. En qué punto del flujo se debe calcular (al cambiar `sit_estado` a "Aprobada" o "Rechazada").
 3. El criterio de éxito: "el campo refleja las horas completas transcurridas entre la creación de la solicitud y el cambio de estado, redondeadas hacia abajo".
 
 ## Ejercicio 2 — Implementar con asistencia de IA
 
 Usando la plantilla de prompt que hayas construido en el Módulo 47 (o una instrucción acotada siguiendo el Módulo 45), pide a Copilot o Claude Code:
 1. Agregar el campo `sit_horasaprobacion` a la definición de la tabla (o los pasos para agregarlo desde el editor de Dataverse, si tu herramienta no edita el esquema directamente).
-2. Modificar el flujo de Power Automate del Lab 05 agregando una acción que calcule la diferencia en horas entre `createdon` y la fecha actual, y la guarde en el nuevo campo, solo cuando `sit_estado` cambie a Aprobado o Rechazado.
+2. Modificar el flujo de Power Automate del Lab 05 agregando una acción que calcule la diferencia en horas entre `createdon` y la fecha actual, y la guarde en el nuevo campo, solo cuando `sit_estado` cambie a Aprobada o Rechazada.
 
 Da a la herramienta el contexto del flujo existente (ábrelo o descríbelo) antes de pedir la modificación.
 

@@ -4,7 +4,7 @@ title: "JR-014 — Dynamics 365 Sales: Lead-to-Cash Job Test"
 level: "N3"
 duration: 150
 product: ["Dynamics 365 Sales", "Dataverse"]
-certifications: ["PL-200", "Especialista Dynamics 365 CE"]
+certifications: ["PL-200 (retirado 31 ago 2026)", "Especialista Dynamics 365 CE"]
 role: ["Dynamics 365 Sales Functional Consultant", "CRM Functional"]
 prerequisites:
   - "Lab 66 completado: Sales Lead-to-Cash"

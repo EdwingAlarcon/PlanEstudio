@@ -93,6 +93,9 @@ Columnas:
 | Usuario | `sit_usuario` | Lookup → SystemUser |
 | Fecha | `sit_fecha` | Fecha y hora |
 
+> **📌 Cierra el loop con Lab 04:** volvé al rol de seguridad "SIT Técnico TI" que creaste en el Lab 04
+> (Tarea 5.2) y agregá esta tabla con permiso Leer = Organización, como quedó anotado ahí.
+
 ---
 
 ## Datos de apoyo
@@ -188,6 +191,10 @@ Antes de escribir el plugin, anota los valores numéricos de las opciones. Los e
 2. Nombre: `SolicitudPreCreatePlugin.cs`.
 
 ### Tarea 2.2 — Implementar la lógica
+
+> **📌 Antes de escribir este código:** el plugin usa la columna `sit_numerosolicitud`, que se crea en
+> la Tarea 2.3 (más abajo). Andá primero a la Tarea 2.3, creá la columna, y volvé acá — el código no
+> compila/ejecuta sin ella.
 
 ```csharp
 using Microsoft.Xrm.Sdk;

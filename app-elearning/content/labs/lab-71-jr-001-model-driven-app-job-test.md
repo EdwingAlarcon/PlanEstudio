@@ -4,7 +4,7 @@ title: "JR-001 — Model-Driven App Job Test"
 level: "N3"
 duration: 240
 product: ["Dataverse", "Power Apps", "Model-Driven Apps"]
-certifications: ["PL-200", "PL-400"]
+certifications: ["PL-200 (retirado 31 ago 2026)", "PL-400"]
 role: ["Power Platform Developer", "Functional Consultant"]
 prerequisites:
   - "Módulo 4 estudiado: Power Apps Model-Driven"

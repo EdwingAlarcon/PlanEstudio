@@ -121,18 +121,17 @@ Solution: SIT_SolicitudesInternas
 │
 ├── Table: sit_Categoria (catálogo)
 │   ├── sit_nombre (Primary Name Column)
-│   ├── sit_descripcion
-│   └── sit_sla_horas
+│   └── sit_descripcion
 │
 └── Table: sit_Solicitud
     ├── sit_titulo (Primary Name Column)
     ├── sit_descripcion
     ├── sit_categoria    → Lookup a sit_Categoria (1:N)
     ├── sit_prioridad    (Choice: Baja/Media/Alta/Crítica)
-    ├── sit_estado       (Choice: Nueva/En Proceso/Resuelta/Cerrada)
-    ├── sit_fecha_solicitud
-    ├── sit_fecha_resolucion
-    ├── sit_sla_horas    (Número — calculado por Business Rule)
+    ├── sit_estado       (Choice: Nueva/En Proceso/Resuelta/Cerrada/Aprobada/Rechazada)
+    ├── sit_fechasolicitud
+    ├── sit_fecharesolucion
+    ├── sit_slahoras     (Número entero)
     ├── sit_solicitante  → Lookup a Contact
     └── sit_asignado     → Lookup a SystemUser (User)
 ```
@@ -270,6 +269,13 @@ La solución `SIT_SolicitudesInternas` está abierta y lista. El breadcrumb supe
    | En Proceso | (automático) |
    | Resuelta | (automático) |
    | Cerrada | (automático) |
+   | Aprobada | (automático) — usada más adelante en los Módulos 13/23 para el escenario de aprobación |
+   | Rechazada | (automático) — idem |
+
+   > **📌 Sobre los valores numéricos:** Dataverse asigna el número de cada opción automáticamente según el
+   > orden en que la creas (visible en **Personalizar columna → Editar opciones**). No existe un número
+   > universal para "Aprobada" — si un módulo posterior te muestra un valor de ejemplo (ej. `100000004`),
+   > es solo ilustrativo; verifica siempre el valor real de tu propio ambiente antes de usarlo en código.
 
 ### Tarea 2.3 — Crear relaciones (Lookups)
 
@@ -522,9 +528,9 @@ Si completaste el laboratorio antes del tiempo estimado, intenta:
 
 **Reto básico:** Agrega una columna **Rollup** en `sit_Categoria` que cuente cuántas solicitudes activas (Estado ≠ Cerrada, ≠ Resuelta) tiene cada categoría. Llámala `sit_solicitudes_activas`.
 
-**Reto intermedio:** Crea una columna **Calculada** en `sit_Solicitud` llamada `sit_dias_abierta` de tipo número entero que calcule `HOY() - sit_fechasolicitud` en días. Úsala en una cuarta vista "Solicitudes Antiguas" que filtre las solicitudes abiertas con más de 7 días.
+**Reto intermedio:** Crea una columna **Calculada** en `sit_Solicitud` llamada `sit_diasabierta` de tipo número entero que calcule `HOY() - sit_fechasolicitud` en días. Úsala en una cuarta vista "Solicitudes Antiguas" que filtre las solicitudes abiertas con más de 7 días. (Si ya completaste el Lab 09 — Dataverse Avanzado, esta columna ya existe con este mismo nombre; no la recrees, solo úsala en la vista.)
 
-**Reto avanzado:** Crea una tercera tabla `sit_Comentario` con columnas `sit_texto`, `sit_fecha` y un Lookup a `sit_Solicitud`. Configura una relación 1:N (una solicitud puede tener muchos comentarios). Esta tabla se usará en el Lab 03 para agregar comentarios desde la Canvas App.
+**Reto avanzado:** Crea una tercera tabla `sit_Comentario` con columnas `sit_texto`, `sit_fecha` y un Lookup a `sit_Solicitud`. Configura una relación 1:N (una solicitud puede tener muchos comentarios). Esta tabla se retoma como opcional en el Lab 09 — Dataverse Avanzado si completaste este reto.
 
 ---
 

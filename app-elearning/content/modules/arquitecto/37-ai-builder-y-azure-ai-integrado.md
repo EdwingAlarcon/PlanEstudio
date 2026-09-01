@@ -54,7 +54,7 @@ Acción: AI Builder — Process and save information from documents
 Condición: Confidence score >= 0.85 (alta confianza)
   TRUE:
     Acción: Create row (Dataverse - Factura)
-      sit_numero: outputs('AI_Builder')?['fields']?['NumeroFactura']?['value']
+      sit_numerosolicitud: outputs('AI_Builder')?['fields']?['NumeroFactura']?['value']
       sit_fecha: outputs('AI_Builder')?['fields']?['Fecha']?['value']
       sit_total: outputs('AI_Builder')?['fields']?['Total']?['value']
       sit_proveedor: outputs('AI_Builder')?['fields']?['NIT']?['value']

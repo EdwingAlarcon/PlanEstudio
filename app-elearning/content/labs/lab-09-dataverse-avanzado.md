@@ -4,7 +4,7 @@ title: "Dataverse Avanzado — BPF, Rollup y Field Security"
 level: "N2"
 duration: 100
 product: ["Dataverse", "Power Apps Model-Driven"]
-certifications: ["PL-200"]
+certifications: ["PL-200 (retirado 31 ago 2026)"]
 role: ["Developer", "Maker"]
 prerequisites:
   - "Lab 02 completado — tablas sit_Solicitud y sit_Categoria con datos"
@@ -36,7 +36,7 @@ Al finalizar este laboratorio podrás extender un modelo de datos existente con 
 
 - **Columna Rollup** en `sit_Categoria`: contador de solicitudes activas por categoría
 - **Columna Calculada** en `sit_Solicitud`: días transcurridos desde la fecha de solicitud
-- **Field Security Profile** "Financiero TI" que protege la columna `sit_costo_estimado`
+- **Field Security Profile** "Financiero TI" que protege la columna `sit_costoestimado`
 - **Business Process Flow** "Ciclo de Vida de Solicitud" con 4 etapas y pasos obligatorios
 
 ## Duración estimada

@@ -116,7 +116,7 @@ Crear un agente conversacional funcional en Copilot Studio que resuelve consulta
 3. Acción: List rows (Dataverse)
    ```
    Table: Solicitudes
-   Filter: sit_numero eq '@{triggerBody()?['text']}'
+   Filter: sit_numerosolicitud eq '@{triggerBody()?['text']}'
    Select: sit_estado,sit_nombre,modifiedon
    Top: 1
    ```
