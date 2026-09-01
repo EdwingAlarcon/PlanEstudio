@@ -4,6 +4,106 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
+## Sprint — Reorganización integral post-auditoría F&O/Contact Center (2026-09-01)
+
+**Contexto**: el usuario pidió una auditoría de cierre (enfoque D365 CE vs F&O/Contact Center no
+principales, distinción de tipos de práctica, promesa pedagógica honesta, certificaciones retiradas)
+seguida de una reorganización integral de contenido real, no solo recomendaciones. Fase 0 usó 4
+agentes Explore (solo lectura, sin herramientas de escritura — a diferencia de un incidente anterior
+en esta misma sesión donde un fork con acceso de escritura ignoró una instrucción de "solo lectura" y
+commiteó/pusheó sin autorización; ver `feedback_subagent_write_scope` en memoria).
+
+**Hecho, commiteado localmente, NO pusheado a `master` todavía** (pendiente de autorización explícita
+del usuario para el push final — commits en orden: `ea0a1bf9`, `521bdc61`, `5ff8047f` [auditoría de
+cierre previa, ya en `master`], luego `21f2959b`, `9d1ec4c1`, `f3e918f0`, `10fa2a7e`, `98ab2f75`,
+`15b1fda0`, `fb546eb9` [esta reorganización, locales]):
+
+- **Fase 1 (certificaciones)**: 8 labs con `"PL-200"` sin marcar retiro en su frontmatter
+  `certifications` (aunque `i18n.ts` ya lo marcaba retirado) — alineados a
+  `"PL-200 (retirado 31 ago 2026)"`. `lab-metadata.ts` `historical` set ampliado con ese literal y
+  con `"MB-280 (retirado 31 jul 2026)"` (ya existía el bare `"MB-280"` pero no la variante con fecha
+  que usan los labs reales).
+- **Fase 2**: `docs/Recursos/ENTORNOS_Y_TRIALS.md` — matriz única (ruta | tipo de ambiente |
+  producto/licencia | rol | duración | alternativa sin acceso | evidencia) para las 16 rutas, sourced
+  desde los `gapNote` reales de `professional-routes.ts` (nada inventado; donde Microsoft no fija una
+  duración exacta de trial, dice explícitamente "verificar al activar").
+- **Fase 3 (modelo de datos SIT)**: `sit_auditoriasolicitud` se usaba en el rol de seguridad del
+  Lab 04 antes de crearse en el Lab 23 (violación real de secuencia, no cosmética) — corregido con
+  nota de "volver después del Módulo 23" en ambos labs. `sit_estado = "Aprobada"` se usaba en Módulo
+  13/23 y Lab 45 con un número mágico (`100000001`) que en realidad correspondía a
+  `sit_prioridad = Alta` — la opción "Aprobada"/"Rechazada" nunca existía en `sit_estado`; agregada en
+  Lab 02 + nota de que los valores de choice no son universales (Dataverse los autoasigna). 5
+  inconsistencias de nomenclatura normalizadas (`sit_costoestimado` no `sit_costo_estimado`,
+  `sit_slahoras`/`sit_fechasolicitud`/`sit_fecharesolucion` sin guion bajo, `sit_diasabierta` no
+  `sit_dias_abierta`, `sit_numero`→`sit_numerosolicitud` en 4 archivos). `tab_resolucion` (nombre
+  lógico de pestaña) ahora se declara explícitamente en Lab 04 en vez de asumirse. Afirmación falsa en
+  Lab 02 ("sit_Comentario se usa en el Lab 03") corregida — apunta al Lab 09, que sí lo referencia.
+- **Fase 4**: puentes nuevos `docs/Recursos/FUNDAMENTOS_CSHARP_DOTNET.md` y
+  `FUNDAMENTOS_TYPESCRIPT_REACT.md` — los Módulos 23 y 27 se autodenunciaban sin puente de
+  programación (igual que el Módulo 56 cerró el gap de JS para el Módulo 13); el Módulo 28 no tenía
+  ni siquiera advertencia pese a ser el de mayor exigencia de código de la ruta Developer, ahora la
+  tiene.
+- **Fase 5 (la de mayor riesgo — confirmada con el usuario antes de ejecutar)**: 6 rutas profesionales
+  nuevas agregadas de forma **aditiva** en `professional-routes.ts` (NO se renombró ni tocó ninguna de
+  las 10 rutas existentes, para no dejar huérfano el `selectedRouteSlug` persistido de alumnos que ya
+  eligieron ruta): `fundamentos-power-platform` (exactamente Nivel Básico, Módulos 1-8),
+  `dynamics-365-sales`, `dynamics-365-customer-service` (separadas de la ruta combinada
+  `dynamics-365-customer-engagement`, que sigue existiendo), `dynamics-365-customer-insights-data`,
+  `dynamics-365-customer-insights-journeys` (separadas de `dynamics-365-customer-insights`), y
+  `empleabilidad` (reúne los 15 job tests JR-001 a JR-015 y los proyectos integradores de cada nivel).
+  Enlazadas desde `domain-hubs.ts` como "Ruta dedicada" junto al contenido combinado.
+- **Fase 6**: `src/lib/route-readiness.ts` + `route-readiness-types.ts` +
+  `components/routes/route-readiness-card.tsx` — tarjeta "Tu progreso en esta ruta" en
+  `/rutas/[slug]`, scopeada solo a los módulos/labs de esa ruta (no un porcentaje global). **Nota
+  técnica real encontrada**: un solo archivo con la parte server (`getAllModules()`, usa `fs`) y la
+  parte pura (`computeRouteReadiness`) rompía el build (`Module not found: fs`) porque el bundle de
+  cliente arrastraba el import completo del módulo aunque el componente cliente solo usara la mitad
+  pura — se separó en 2 archivos físicos. No se tocó el store de progreso existente (`progress.ts`)
+  ni su esquema persistido.
+- **Fase 8**: `docs/Recursos/FUNDAMENTOS_AZURE.md` — los Módulos 24 y 36 asumían Azure Portal/
+  suscripción/resource group/RBAC sin ningún aviso; el Módulo 34 ya se autodenunciaba y pedía
+  explícitamente un puente que no existía. Práctica con cuenta gratuita de Azure (crear/limpiar un
+  resource group, Key Vault, alerta de presupuesto).
+- **Bug real encontrado y corregido, no estaba en la lista original del usuario**: race de
+  hidratación en `interactive-practice-client.tsx` — el efecto que sincroniza `answer` con el registro
+  persistido se disparaba con cada cambio de `progressHydrated` (false→true) sin importar si el
+  alumno ya había interactuado ANTES de que terminara la hidratación de `localStorage`, pisando
+  silenciosamente esa interacción de vuelta al estado inicial. Encontrado por el E2E
+  "flow builder valida drag..." (el único fallo real de 89 tests E2E corridos; los 3 fallos
+  "reportados" originalmente — sidebar D365, progreso RPA, sandbox legacy — **no se reprodujeron**).
+  Fix: solo sincronizar cuando cambia la práctica activa (ref inicializado al `practice.id` actual,
+  no `null` — el primer intento de fix tenía el mismo bug por esa razón) o cuando hay una respuesta
+  persistida real que restaurar.
+- **4 "bugs" reportados por el usuario que NO se reprodujeron** (verificado con evidencia file:line,
+  no asumido): `id="main-content"` duplicado en `/mi-ruta` (el bug real estaba en `/mapa`, ya corregido
+  en la auditoría anterior de esta sesión), persistencia parcial de quiz (ya existe "Continuar
+  intento" con guardado mientras se responde), estado inconsistente de práctica interactiva entre
+  lista y detalle (ambos leen el mismo store con el mismo selector), numeración "76.1/76.2/76.3" del
+  Módulo 56 (ya dice correctamente 56.1/56.2/56.3).
+
+**Validado en verde antes de cada commit**: `npm run lint`, `npx tsc --noEmit`, `npm test` (420/420,
+subió de 416 por los 4 tests nuevos de `route-readiness.test.ts`), `npm run validate:content`,
+`npm run build`, y al final de la sesión **la suite E2E completa (89/89 tests, ~5.7 min)** —
+incluyendo el que fallaba antes del fix de hidratación.
+
+**Explícitamente NO hecho en esta sesión** (documentado, no fingido — demasiado grande para una sola
+sesión con la calidad pedida):
+- Fase 7 (10 proyectos integradores completos con brief, datos de prueba, rúbrica, criterios de
+  aceptación y solución de referencia por cada una de las 16 rutas) — el usuario confirmó explícitamente
+  seguir con el resto de fases, pero Fase 7 sola es un sprint de contenido completo por sí misma.
+- Fase 9 (defectos técnicos): 4 de los 5 puntos no se reprodujeron (arriba); el que sí era real
+  (hidratación) ya está corregido.
+- Fase 11 (etiquetas de navegación por tipo de práctica en cada lab individual): la taxonomía existe
+  (`TIPOS_DE_PRACTICA.md`, `ENTORNOS_Y_TRIALS.md`) pero no se retaggeó cada uno de los 112 labs con un
+  campo tipado — sigue viviendo en prosa dentro de `prerequisites`, como ya se había marcado como
+  hallazgo importante en la auditoría de cierre.
+
+**Pendiente al retomar**: el usuario dijo explícitamente "no pushees aún, sigue acumulando" — los
+commits `21f2959b`...`fb546eb9` están en `master` local pero NO en `origin/master`. Antes de pushear:
+confirmar autorización explícita del usuario (principio 10 del pedido original: "no hagas push, merge
+ni despliegue a producción sin autorización expresa"). Después de pushear, verificar CI
+(`gh run list --branch master --limit 1`) y producción en Vercel según la preferencia habitual.
+
 ## Estado al 2026-08-24 (fix crítico: última pregunta en blanco en todo quiz + cierre parcial de "§63")
 
 **Contexto de origen — resuelve el punto abierto de "~23 casos E2E §63"**: la sección "Explícitamente

@@ -6,8 +6,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Before starting new work, read `SPRINT_HANDOFF.md`. It is the active operational memory for the post-audit sprints.
 
-Current stable state as of the latest local handoff (2026-08-22):
-- Latest product sprint: **Spaced Repetition & Long-Term Retention Engine** complete locally. Adds
+Current stable state as of the latest local handoff (2026-09-01):
+- Latest sprint: **Reorganización integral post-auditoría F&O/Contact Center** (2026-09-01, not yet
+  pushed to `master` — commits sit locally, see `SPRINT_HANDOFF.md` section "Sprint — Reorganización
+  integral" for the exact commit list and what's still pending user go-ahead to push). Adds 6 new
+  professional routes (Fundamentos Power Platform, Dynamics 365 Sales, Dynamics 365 Customer Service,
+  Customer Insights - Data, Customer Insights - Journeys, Empleabilidad — additive, the original 10
+  routes are untouched to preserve persisted `selectedRouteSlug`), a per-route progress card (not a
+  global percentage) on `/rutas/[slug]`, 7 new bridge resources under `docs/Recursos/`
+  (`RUTA_CERO_ABSOLUTA.md`, `FUNDAMENTOS_CRM.md`, `TIPOS_DE_PRACTICA.md`, `FUNDAMENTOS_CSHARP_DOTNET.md`,
+  `FUNDAMENTOS_TYPESCRIPT_REACT.md`, `ENTORNOS_Y_TRIALS.md`, `FUNDAMENTOS_AZURE.md` — resource page
+  count went 28→35), and fixes to a real data-model sequencing bug in the SIT labs (Lab 04 referenced
+  a table Lab 23 hadn't created yet) plus a real hydration race in interactive practice that silently
+  discarded a student's in-progress interaction. See `SPRINT_HANDOFF.md` for full detail before
+  touching routes, resources, or SIT lab content again.
+- Previous product sprint: **Spaced Repetition & Long-Term Retention Engine** complete locally. Adds
   `/repaso`, a SM-2-inspired scheduler (`review-scheduler.ts`), eligibility/queue/interleaving logic
   (`review-queue.ts`), independent store `planestudio.spaced-repetition.v1` (`review-store.ts`), and
   versioned backup (`retention-portability.ts`). A question only becomes eligible for review once the
