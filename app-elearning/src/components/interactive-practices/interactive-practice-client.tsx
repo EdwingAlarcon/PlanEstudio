@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useMemo, useState, type DragEvent, type KeyboardEvent, type ReactNode } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type DragEvent, type KeyboardEvent, type ReactNode } from "react";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Code2, Lightbulb, RotateCcw, Search, ShieldCheck, SlidersHorizontal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -243,14 +243,23 @@ function InteractiveExercise({ practice, progressHydrated }: { practice: Interac
     openPractice(practice.id);
   }, [openPractice, practice.id, progressHydrated]);
 
+  const previousPracticeIdRef = useRef<string>(practice.id);
+
   useEffect(() => {
     if (!progressHydrated) return;
-    setAnswer(record?.lastAnswer ?? initialAnswer(practice));
+    const practiceChanged = previousPracticeIdRef.current !== practice.id;
+    previousPracticeIdRef.current = practice.id;
+    // Solo pisar `answer` si cambiamos de práctica o hay una respuesta persistida real que restaurar.
+    // Si es la misma práctica y no hay `lastAnswer`, el usuario puede haber empezado a interactuar
+    // ANTES de que terminara la hidratación de localStorage — no lo revertamos a initialAnswer().
+    if (practiceChanged || record?.lastAnswer !== undefined) {
+      setAnswer(record?.lastAnswer ?? initialAnswer(practice));
+    }
     setResult(null);
     setShowSolution(record?.solutionRevealed ?? false);
     setFeedbackChoice(null);
     setFeedbackNote("");
-  }, [practice.id, practice, progressHydrated]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [practice.id, progressHydrated]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const attemptNumber = (record?.attemptCount ?? 0) + 1;
   const statusLabel = progressHydrated
