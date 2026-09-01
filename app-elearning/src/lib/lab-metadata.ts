@@ -86,6 +86,7 @@ function getCertificationBadges(lab: LabInfo): Pick<LabPresentationMeta, "certif
     "MB-240 (retirado 30 jun 2026)",
     "MB-260",
     "MB-280",
+    "MB-280 (retirado 31 jul 2026)",
     "MB-300",
   ]);
   const historicalCertifications = lab.certifications.filter((cert) => historical.has(cert));
@@ -96,7 +97,7 @@ function getCertificationBadges(lab: LabInfo): Pick<LabPresentationMeta, "certif
     if (cert === "MB-210") return "Competencia Sales";
     if (cert === "MB-220") return "Customer Insights Skill Path";
     if (cert === "MB-240" || cert === "MB-240 (retirado 30 jun 2026)") return "Competencia Field Service";
-    if (cert === "MB-280") return "Competencia Customer Experience";
+    if (cert === "MB-280" || cert === "MB-280 (retirado 31 jul 2026)") return "Competencia Customer Experience";
     if (cert === "MB-260") return "Customer Insights Skill Path";
     if (cert === "MB-300") return "F&O Awareness";
     return "Competencia Dynamics 365";
