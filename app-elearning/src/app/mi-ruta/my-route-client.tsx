@@ -45,7 +45,7 @@ export function MyRouteClient({
   const started = onboarding.stage !== "new" || Boolean(onboarding.startedAt);
 
   return (
-    <main id="main-content" className="mx-auto max-w-5xl space-y-8 px-4 py-8 animate-fade-in">
+    <div className="mx-auto max-w-5xl space-y-8 px-4 py-8 animate-fade-in">
       <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1 md:p-6">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
           <div className="space-y-3">
@@ -244,7 +244,7 @@ export function MyRouteClient({
           </Button>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
 

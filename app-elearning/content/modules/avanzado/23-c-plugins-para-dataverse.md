@@ -100,8 +100,8 @@ namespace SIT.Plugins
 
             var solicitud = (Entity)context.InputParameters["Target"];
 
-            // Obtener valor del campo presupuesto
-            var presupuesto = solicitud.GetAttributeValue<Money>("sit_presupuesto");
+            // Obtener valor del campo Costo Estimado creado en el Lab 09
+            var presupuesto = solicitud.GetAttributeValue<Money>("sit_costoestimado");
 
             // Validar que si es urgente, tenga presupuesto
             var prioridad = solicitud.GetAttributeValue<OptionSetValue>("sit_prioridad");
@@ -253,7 +253,7 @@ public class SolicitudPreCreatePluginTests
         // Arrange
         var target = new Entity("sit_solicitud");
         target["sit_prioridad"] = new OptionSetValue(100000002); // Urgente
-        // No se establece sit_presupuesto
+        // No se establece sit_costoestimado
 
         var context = new Mock<IPluginExecutionContext>();
         context.Setup(c => c.MessageName).Returns("Create");

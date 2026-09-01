@@ -48,6 +48,7 @@ const INTERACTIVE_FEEDBACK_STORAGE_KEY = "planestudio.interactive-feedback.v1";
 export function InteractivePracticeClient({ practices, initialSlug }: InteractivePracticeClientProps) {
   const [selectedSlug, setSelectedSlug] = useState(initialSlug ?? practices[0]?.slug ?? "");
   const [mounted, setMounted] = useState(false);
+  const [progressHydrated, setProgressHydrated] = useState(false);
   const [filters, setFilters] = useState<InteractivePracticeFilters>(() => {
     if (typeof window === "undefined") return DEFAULT_INTERACTIVE_PRACTICE_FILTERS;
     const stored = window.sessionStorage.getItem(INTERACTIVE_FILTER_SESSION_KEY);
@@ -73,6 +74,14 @@ export function InteractivePracticeClient({ practices, initialSlug }: Interactiv
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    setProgressHydrated(useInteractivePracticeProgressStore.persist.hasHydrated());
+    const unsubscribe = useInteractivePracticeProgressStore.persist.onFinishHydration(() => {
+      setProgressHydrated(true);
+    });
+    return unsubscribe;
   }, []);
 
   useEffect(() => {
@@ -206,7 +215,7 @@ export function InteractivePracticeClient({ practices, initialSlug }: Interactiv
           </section>
         </aside>
 
-        {selected ? <InteractiveExercise practice={selected} /> : (
+        {selected ? <InteractiveExercise practice={selected} progressHydrated={progressHydrated} /> : (
           <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-live="polite">
             <h2 className="text-lg font-semibold text-foreground">No encontramos prácticas con estos filtros</h2>
             <p className="mt-2 text-sm text-muted-foreground">El panel se actualizará cuando exista al menos una práctica visible.</p>
@@ -217,7 +226,7 @@ export function InteractivePracticeClient({ practices, initialSlug }: Interactiv
   );
 }
 
-function InteractiveExercise({ practice }: { practice: InteractivePractice }) {
+function InteractiveExercise({ practice, progressHydrated }: { practice: InteractivePractice; progressHydrated: boolean }) {
   const [answer, setAnswer] = useState<unknown>(initialAnswer(practice));
   const [result, setResult] = useState<InteractiveEvaluationResult | null>(null);
   const [showSolution, setShowSolution] = useState(false);
@@ -230,19 +239,23 @@ function InteractiveExercise({ practice }: { practice: InteractivePractice }) {
   const revealSolution = useInteractivePracticeProgressStore((s) => s.revealSolution);
 
   useEffect(() => {
+    if (!progressHydrated) return;
     openPractice(practice.id);
-  }, [openPractice, practice.id]);
+  }, [openPractice, practice.id, progressHydrated]);
 
   useEffect(() => {
-    setAnswer(initialAnswer(practice));
+    if (!progressHydrated) return;
+    setAnswer(record?.lastAnswer ?? initialAnswer(practice));
     setResult(null);
-    setShowSolution(false);
+    setShowSolution(record?.solutionRevealed ?? false);
     setFeedbackChoice(null);
     setFeedbackNote("");
-  }, [practice.id, practice]);
+  }, [practice.id, practice, progressHydrated]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const attemptNumber = (record?.attemptCount ?? 0) + 1;
-  const statusLabel = record?.mastery ? masteryLabel(record.mastery) : "No iniciado";
+  const statusLabel = progressHydrated
+    ? record?.mastery ? masteryLabel(record.mastery) : "No iniciado"
+    : "Cargando progreso";
 
   const submit = () => {
     const nextResult = evaluateInteractivePractice(practice, answer, attemptNumber);
@@ -266,7 +279,7 @@ function InteractiveExercise({ practice }: { practice: InteractivePractice }) {
         </div>
         <div className="text-right text-xs text-muted-foreground">
           <p>{practice.estimatedMinutes} min</p>
-          <p>{record?.attemptCount ?? 0} intentos</p>
+          <p>{progressHydrated ? record?.attemptCount ?? 0 : 0} intentos</p>
         </div>
       </div>
 

@@ -69,16 +69,16 @@ export const UI = {
     },
     cert: {
       basico: "PL-900",
-      intermedio: "PL-200 (retira 31 ago 2026)",
+      intermedio: "Consultor funcional (PL-200 retirado 31 ago 2026)",
       avanzado: "PL-400",
       arquitecto: "Arquitectura Power Platform",
       ia: "Buenas Prácticas",
-      d365: "CE avanzado + F&O Awareness",
+      d365: "CE avanzado",
       rpa: "Power Automate Desktop & RPA",
     },
     navCert: {
       basico: "PL-900",
-      intermedio: "PL-200",
+      intermedio: "Funcional",
       avanzado: "PL-400",
       arquitecto: "Arquitectura",
       ia: "IA",
@@ -91,7 +91,7 @@ export const UI = {
       avanzado: "Arquitectura, ALM, D365, Copilot Studio y extensibilidad",
       arquitecto: "Gobernanza enterprise, multi-tenant, Azure integrations y liderazgo",
       ia: "Copilot, GitHub Copilot, Claude Code y Codex aplicados de forma segura y auditable al desarrollo, conexión al tenant, Dataverse, ALM y consultoría funcional en Power Platform y D365",
-      d365: "Especialización práctica en Dynamics 365: Customer Engagement avanzado, Customer Insights, Field Service, integración CE + F&O y awareness avanzado de Finance & Operations",
+      d365: "Especialización práctica en Dynamics 365 Customer Engagement: Sales, Customer Service, Customer Insights y Field Service. F&O queda como archivo/futura especialización.",
       rpa: "Automatización de escritorio, operación unattended y soporte profesional.",
     },
     modules: {

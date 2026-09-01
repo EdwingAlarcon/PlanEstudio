@@ -5,6 +5,16 @@ Este recurso convierte las dependencias de tenant/licencia/ambiente real en un g
 el lab sigue siendo válido como **diseño o simulación avanzada**, pero no como configuración
 productiva.
 
+## Matriz rápida por ruta
+
+| Ruta | Estado por defecto en PlanEstudio | Cuándo puede marcarse como ejecutada |
+|---|---|---|
+| Sales / Customer Service | Ejecutable si existe trial o sandbox con apps instaladas | Lead/opportunity/case/SLA probado con datos SIT y captura de resultado |
+| Customer Insights Data/Journeys | Ejecutable solo con Customer Insights habilitado | Fuente, unificación/segmento o journey real con consentimiento y métrica |
+| Field Service | Ejecutable solo con Field Service instalado | Work order/agreement/mobile/RSO probado según alcance del lab |
+| Contact Center | Especialización opcional | Canal configurado y conversación de prueba real; Voz/SMS requieren proveedor |
+| Finance & Operations | Archivado / futura especialización | Solo si existe ambiente F&O real, datos maestros, roles y validación externa de producto |
+
 ## Estados permitidos
 
 | Estado | Cuándo usarlo | Evidencia mínima |
@@ -44,9 +54,9 @@ Para instalar un producto específico, usa:
 .\scripts\install-d365-test-apps.ps1 -EnvironmentUrl "https://TU_ORG.crm.dynamics.com" -Products Sales -Install
 ```
 
-Finance & Operations no se instala como app Dataverse con este script. Para F&O, valida el ambiente
-F&O existente, sus módulos funcionales y la configuración de dual-write desde el proceso de
-administración correspondiente.
+Finance & Operations no se instala como app Dataverse con este script. En PlanEstudio queda como
+archivo/futura especialización: no lo marques como práctica ejecutada salvo que exista ambiente F&O
+real, datos maestros, roles y una validación paso a paso fuera de este script.
 
 ## Sales avanzado
 

@@ -8,15 +8,15 @@ web
 
 ## Users
 
-Estudiantes de Microsoft Power Platform y Dynamics 365 que buscan progresar desde cero hasta rol de Arquitecto de Soluciones Empresariales. Perfil ancla: ingeniero de sistemas con experiencia inicial en Power Platform/D365, foco en automatizacion de procesos y analisis tecnico, que usa IA como herramienta de apoyo moderno. Producto publico real: deployado oficialmente en Vercel para que cualquier estudiante lo use como recurso serio, no solo para uso personal del autor.
+Estudiantes de Microsoft Power Platform y Dynamics 365 que necesitan una ruta seria desde fundamentos hacia competencias demostrables por rol. Perfil ancla: ingeniero de sistemas con experiencia inicial o nula en Power Platform/D365, foco en automatizacion de procesos y analisis tecnico, que usa IA como herramienta de apoyo moderno. Producto publico real: deployado oficialmente en Vercel para que cualquier estudiante lo use como recurso serio, no solo para uso personal del autor.
 
 ## Product Purpose
 
-Plan de aprendizaje estructurado y progresivo que lleva de Basico a Arquitecto Senior en Power Platform y Dynamics 365, con modulos practicos, labs guiados, quizzes y un simulador tipo examen. Exito significa que el estudiante completa niveles, aprueba evaluaciones y llega preparado para certificaciones Microsoft reales (PL-900, PL-200, PL-400) y para arquitectura empresarial.
+Plan de aprendizaje estructurado y progresivo para Power Platform, Dataverse, Power Apps, Power Automate, Power Fx, extensibilidad, Dynamics 365 CE, IA aplicada, RPA y arquitectura. Exito significa que el estudiante completa una ruta concreta, aprueba evaluaciones, reúne evidencia y distingue contenido conceptual, simulado y ejecutado en tenant real. El producto no promete preparación laboral global por completar todo el catálogo.
 
 ## Positioning
 
-Progresion rigida de 4 niveles (Basico -> Intermedio -> Avanzado -> Arquitecto) con evaluaciones (quiz por modulo + simulador de examen cronometrado de 40 preguntas/50 min) y labs practicos integrados en cada modulo, mas dos niveles transversales (IA, D365) que no rompen la cadena de prerequisitos. No es una coleccion de articulos sueltos: cada modulo sigue una estructura fija de 7 secciones (objetivo, conceptos, actividades, casos de negocio, buenas practicas, errores comunes, criterios de validacion) y el progreso se rastrea localmente (localStorage) por modulo y por intento de quiz.
+Progresion de 4 niveles base (Basico -> Intermedio -> Avanzado -> Arquitecto) con evaluaciones (quiz por modulo + simulador de examen cronometrado de 40 preguntas/50 min) y labs practicos, mas niveles transversales (IA, D365, RPA) que no rompen la cadena de prerequisitos. Rutas profesionales separan núcleo, opcionales y archivo/futura especialización. No es una coleccion de articulos sueltos: cada modulo sigue una estructura fija de 7 secciones y el progreso se rastrea localmente (localStorage) por módulo, quiz, práctica, repaso y estación de trabajo.
 
 ## Operating Context
 
@@ -24,7 +24,7 @@ App Next.js 15 (App Router, static export) deployada oficialmente en Vercel en `
 
 ## Capabilities and Constraints
 
-- 75 modulos, 72 labs, 508 preguntas de quiz, 375 preguntas de diagnostico de caso aplicado y 633 criterios de checklist repartidos en 7 niveles (4 certificacion + IA + D365 + RPA transversales).
+- 76 modulos, 72 labs, 516 preguntas de quiz, 375 preguntas de diagnostico de caso aplicado y 636 criterios de checklist repartidos en 7 niveles (4 base + IA + D365 + RPA transversales).
 - Progreso y resultados de quiz persisten solo en localStorage del navegador (sin cuenta ni backend).
 - Simulador: 40 preguntas, 50 minutos, con desglose de errores al final.
 - Todo el contenido esta en espanol; terminos tecnicos de producto (Power Fx, Dataverse, DAX, Canvas, Model-Driven) se mantienen en ingles como nombres propios.
@@ -38,14 +38,14 @@ Nombre del proyecto: "PlanEstudio" / "Plan Maestro: De Basico a Arquitecto en Mi
 
 ## Evidence on Hand
 
-Contenido real y completo ya existente: 75 modulos con casos reales de negocio, 72 labs paso a paso, 508 preguntas de evaluacion con explicaciones, 375 preguntas de diagnostico de caso aplicado y checklist de progreso. No hay testimonios, casos de estudio externos, prensa ni metricas de uso reales — no fabricar ninguno de estos.
+Contenido real y completo ya existente: 76 modulos con casos reales de negocio, 72 labs paso a paso, 516 preguntas de evaluacion con explicaciones, 375 preguntas de diagnostico de caso aplicado y checklist de progreso. No hay testimonios, casos de estudio externos, prensa ni metricas de uso reales; no fabricar ninguno de estos.
 
 ## Product Principles
 
 - Progresion sin atajos: no saltar niveles ni introducir temas avanzados prematuramente; respetar la cadena Basico -> Intermedio -> Avanzado -> Arquitecto.
 - Contenido de nivel empresarial: priorizar escenarios de negocio reales sobre ejemplos de juguete en cada modulo.
 - Practica antes que teoria pasiva: cada modulo combina conceptos con actividades paso a paso, labs y validacion, no solo lectura.
-- Preparacion para certificacion real: alinear contenido y preguntas con los examenes oficiales de Microsoft (PL-900, PL-200, PL-400) y con documentacion vigente de producto.
+- Preparacion para certificacion/competencia real: alinear contenido y preguntas con Microsoft Learn vigente. PL-200 y MB-280 se tratan como retiradas desde sus fechas oficiales; no se venden como objetivos agendables.
 - Autonomo y sin friccion de cuenta: el estudiante progresa sin registro ni backend; el progreso vive en su propio navegador.
 
 ## Accessibility & Inclusion

@@ -1,29 +1,27 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Smoke — rutas principales", () => {
-  test("sidebar mantiene D365 consistente en rutas transversales", async ({ page }) => {
-    test.setTimeout(60_000);
+  const sidebarConsistencyRoutes = [
+    "/",
+    "/nivel/ia",
+    "/nivel/d365",
+    "/labs",
+    "/experiencia-practica",
+    "/recursos/checklist",
+    "/power-platform",
+    "/dynamics-365",
+    "/integracion",
+    "/empleabilidad",
+    "/recursos/prompts-ia",
+  ];
 
-    const routes = [
-      "/",
-      "/nivel/ia",
-      "/nivel/d365",
-      "/labs",
-      "/experiencia-practica",
-      "/recursos/checklist",
-      "/power-platform",
-      "/dynamics-365",
-      "/integracion",
-      "/empleabilidad",
-      "/recursos/prompts-ia",
-    ];
-
-    for (const route of routes) {
+  for (const route of sidebarConsistencyRoutes) {
+    test(`sidebar mantiene D365 consistente en ${route}`, async ({ page }) => {
       await page.goto(route, { waitUntil: "domcontentloaded" });
       const sidebar = page.getByRole("complementary", { name: "Navegación principal" });
       const d365Link = sidebar.getByRole("link", { name: /Dynamics 365 Especialización\s+D365/ });
       const rpaLink = sidebar.getByRole("link", { name: /Power Automate Desktop & RPA\s+RPA/ });
-      const footerLabel = sidebar.getByText("PL-900 · PL-200 · PL-400 · Arquitectura · IA · D365 · RPA");
+      const footerLabel = sidebar.getByText("PL-900 · Funcional · PL-400 · Arquitectura · IA · D365 · RPA");
 
       await d365Link.scrollIntoViewIfNeeded();
       await expect(d365Link).toBeVisible();
@@ -35,8 +33,8 @@ test.describe("Smoke — rutas principales", () => {
       await expect(footerLabel).toBeVisible();
       await expect(sidebar.getByText("Dynamics 365 Avanzado")).toHaveCount(0);
       await expect(sidebar.getByText("0/4")).toHaveCount(0);
-    }
-  });
+    });
+  }
 
   test("dashboard carga con level cards", async ({ page }) => {
     await page.goto("/");
@@ -510,12 +508,14 @@ test.describe("Smoke — rutas principales", () => {
     await expect(page.getByRole("heading", { name: /RPA · RPA/i })).toBeVisible();
   });
 
-  test("recursos y sandbox RPA funcionan en desktop, móvil y modo oscuro", async ({ page }) => {
+  test("recursos RPA enlazan artefactos de práctica", async ({ page }) => {
     await page.goto("/recursos/rpa-recursos-practica");
     await expect(page.locator("h1, h2").first()).toContainText(/Recursos de práctica RPA/i);
     await expect(page.getByRole("link", { name: /SIT Automation Case/i }).first()).toHaveAttribute("href", /practice-assets\/rpa\/sit-automation-case\/README.md/);
     await expect(page.getByRole("link", { name: /PDD ligero/i })).toBeVisible();
+  });
 
+  test("sandbox RPA portal funciona en desktop", async ({ page }) => {
     await page.goto("/rpa-sandbox/portal");
     await expect(page.getByRole("heading", { name: "Portal SIT de solicitudes comerciales" })).toBeVisible();
     await expect(page.locator('[data-rpa-table="requests"]')).toBeVisible();
@@ -528,7 +528,9 @@ test.describe("Smoke — rutas principales", () => {
     await expect(page.locator('[data-rpa-table="requests-v2"]')).toBeVisible();
     await page.getByRole("button", { name: /Upload simulado/i }).click();
     await expect(page.getByRole("status")).toContainText(/Archivo recibido en simulación/i);
+  });
 
+  test("sandbox RPA legacy maneja registro y duplicado", async ({ page }) => {
     await page.goto("/rpa-sandbox/legacy-app");
     await expect(page.getByRole("heading", { name: "SIT Registro Legacy" })).toBeVisible();
     await page.getByRole("button", { name: "Registrar" }).click();
@@ -537,7 +539,9 @@ test.describe("Smoke — rutas principales", () => {
     await page.locator("#legacy-mode").selectOption("duplicate");
     await page.getByRole("button", { name: "Registrar" }).click();
     await expect(page.getByRole("status")).toContainText(/Registro duplicado/i);
+  });
 
+  test("sandbox RPA responde en móvil y modo oscuro", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto("/rpa-sandbox/portal");
     await expect(page.getByRole("heading", { name: "Portal SIT de solicitudes comerciales" })).toBeVisible();

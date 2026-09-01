@@ -1,16 +1,17 @@
 # Power Platform & D365 — Plan de Estudio
 
-**Estado: versión estable pública** — 75 módulos · 72 laboratorios · 508 preguntas de quiz · 375 diagnósticos de caso · 633 criterios de checklist, con roadmap de sprints correctivos post-auditoría y diagnóstico de caso aplicado cerrados. Detalle completo, taxonomía de estados y limitaciones honestas en [`SPRINT_HANDOFF.md`](SPRINT_HANDOFF.md).
+**Estado: versión estable pública** — 76 módulos · 72 laboratorios · 516 preguntas de quiz · 375 diagnósticos de caso · 636 criterios de checklist, con roadmap de sprints correctivos post-auditoría y diagnóstico de caso aplicado cerrados. Detalle completo, taxonomía de estados y limitaciones honestas en [`SPRINT_HANDOFF.md`](SPRINT_HANDOFF.md).
 
-Plan de aprendizaje progresivo de Microsoft Power Platform y Dynamics 365, desde fundamentos hasta Solution Architect, alineado con las certificaciones oficiales de Microsoft.
+Plan de aprendizaje progresivo de Microsoft Power Platform y Dynamics 365. No promete llevar “de cero a 100” ni convertir el avance de contenido en preparación laboral automática: cada ruta separa teoría, simulación, ejecución en tenant real y evidencia evaluable.
 
 **App oficial en producción:** [planestudio.vercel.app](https://planestudio.vercel.app/)
 
 ### Qué cubre esta versión estable
 
-- **Cubre bien:** progresión PL-900 → PL-200 → PL-400 → Arquitectura; especialización transversal en IA aplicada al desarrollo (Copilot/Claude Code/Codex); especialización transversal en Dynamics 365 CE (Sales, Customer Service, Customer Insights, Field Service) con labs hands-on donde el trial lo permite; capa de empleabilidad (rutas job-ready, matriz de skills, portafolio, CV/LinkedIn, inglés técnico).
-- **Cubre parcialmente (job-ready / simulación):** Migration/Legacy, Admin/Governance y Solution Architect preparan criterio y evidencia defendible en entrevista, no sustituyen operación con tenant/infraestructura real. Contact Center Voz/SMS y Sales Insights predictivo quedan como diseño hasta contratar proveedor de telefonía o licencia Premium real.
-- **No debe prometerse:** migración productiva enterprise, CRM on-premises operado en vivo, auditoría con logs reales de Purview/Dataverse, ni PL-600/MB-2xx como certificaciones vigentes (todas retiradas por Microsoft).
+- **Cubre bien:** fundamentos Power Platform, Dataverse, Canvas/Model-Driven Apps, Power Automate, Power Fx, extensibilidad Power Platform, ALM, seguridad, pruebas, IA aplicada, RPA y Dynamics 365 Customer Engagement con foco en Sales, Customer Service, Customer Insights y Field Service.
+- **Cubre parcialmente (job-ready / simulación):** Migration/Legacy, Admin/Governance, Solution Architect, Contact Center y ejecución avanzada de Customer Insights/Field Service preparan criterio y evidencia defendible, pero dependen de tenant, licencias, datos y revisión humana para declararse práctica real.
+- **Archivado / futura especialización:** Finance & Operations se conserva como material de referencia y awareness de integración CE + ERP. No forma parte del progreso obligatorio ni de la promesa laboral base.
+- **No debe prometerse:** preparación laboral global por completar contenido, implementación F&O practitioner, migración productiva enterprise, CRM on-premises operado en vivo, auditoría con logs reales de Purview/Dataverse, ni PL-600/MB-2xx retiradas como certificaciones vigentes.
 
 ---
 
@@ -33,7 +34,7 @@ PlanEstudio/
 │   ├── Anexos/             ← Copilot Studio, ALM/DevOps, Arquitectura
 │   ├── Recursos/           ← Checklist, Glosario, Certificaciones, Prompts Reutilizables IA
 │   └── javascripts/
-│       └── evaluaciones-simulador.js  ← Banco de 883 preguntas: 508 quiz + 375 diagnóstico de caso
+│       └── evaluaciones-simulador.js  ← Banco de 891 preguntas: 516 quiz + 375 diagnóstico de caso
 │
 ├── .github/workflows/ci.yml  ← CI/CD: lint → test → build → deploy + MkDocs
 ├── mkdocs.yml              ← Configuración del sitio MkDocs (referencia/legacy)
@@ -62,8 +63,8 @@ docs/javascripts/evaluaciones-simulador.js  ──build-time──▶  questions
 | Nivel 2 — Intermedio | 9 | PL-200 | 2–3 meses |
 | Nivel 3 — Avanzado | 13 | PL-400 | 3–4 meses |
 | Nivel 4 — Arquitecto | 11 | Arquitectura Power Platform | 4–6 meses |
-| Nivel IA — Desarrollo Asistido *(transversal)* | 14 | Buenas Prácticas | Estudio libre, sin prerequisitos |
-| Nivel D365 — Especialización *(transversal)* | 10 | CE avanzado + F&O Awareness | Estudio libre, sin prerequisitos |
+| Nivel IA — Desarrollo Asistido *(transversal)* | 15 | Buenas Prácticas | Estudio libre, sin prerequisitos |
+| Nivel D365 — Especialización *(transversal)* | 10 | CE avanzado; F&O archivado como awareness | Estudio libre, sin prerequisitos |
 | Nivel RPA — Power Automate Desktop *(transversal)* | 10 | RPA profesional | Estudio libre, requiere Windows para labs PAD |
 
 Los niveles IA, D365 y RPA son transversales: no bloquean ni son bloqueados por los cuatro niveles base de Power Platform.

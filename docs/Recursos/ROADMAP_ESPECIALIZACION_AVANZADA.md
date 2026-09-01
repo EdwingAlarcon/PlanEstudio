@@ -12,23 +12,20 @@ PlanEstudio ya cubre con evidencia real:
 - **Power Platform completo** (Canvas, Model-Driven, Dataverse, Power Automate, Power Fx, ALM, PCF,
   plugins, gobernanza) — rutas Maker, Consultor Funcional, Developer, Solution Architect.
 - **Dynamics 365 CE avanzado**: Sales forecasting/pipeline (Módulo 61, LAB-081), Customer Service
-  SLA/entitlements/routing (Módulo 62, LAB-082), Contact Center con canal de chat hands-on en trial
-  (Módulo 63, LAB-083), Customer Insights Data/Journeys separados (Módulos 58/63, LAB-085/LAB-084) y
-  Field Service end-to-end (Módulo 59, LAB-086/LAB-087).
-- **Finance & Operations — awareness avanzado e integración**: vocabulario, mapas de proceso,
-  ownership CE + F&O y diseño de integración (Módulos 60/64, LAB-069/LAB-070/LAB-088/LAB-089).
-- **Finance & Operations — práctica hands-on**: setup financiero, Procure-to-Pay, Order-to-Cash,
-  inventario/producto y Project Operations ejecutados paso a paso en un trial tenant propio del
-  estudiante (LAB-093 a LAB-097 — ver nota de verificación en cada uno).
+  SLA/entitlements/routing (Módulo 62, LAB-082), Customer Insights Data/Journeys separados
+  (Módulos 58/64, LAB-085/LAB-084) y Field Service end-to-end (Módulo 59, LAB-086/LAB-087).
+- **Contact Center — opcional**: Módulo 63 y LAB-083 se conservan como especialización separada.
+  No forman parte del núcleo D365 CE para principiantes.
+- **Finance & Operations — archivo/futura especialización**: vocabulario, mapas de proceso,
+  ownership CE + F&O, diseño de integración y labs hands-on F&O se conservan para consulta, pero no
+  forman parte del progreso obligatorio ni de la promesa laboral base.
 - **Capstone Enterprise D365**: arquitectura CE + F&O, roadmap, Fit-Gap, UAT y evidencia de
   portafolio (Módulo 66, LAB-090).
 
 La ejecución real de canales Contact Center, Sales Insights predictivo, RSO/Field Service Mobile,
-Customer Insights, dual-write y F&O productivo (más allá de los 5 procesos de LAB-093 a LAB-097)
-debe pasar por el gate de [D365 Tenant Readiness](D365_TENANT_READINESS.md). Si el gate no se
-cumple, el entregable se presenta como diseño/simulación avanzada, no como configuración productiva.
-Los labs F&O hands-on son la excepción declarada: se ejecutan en un trial/demo que el propio
-estudiante consigue (igual que un lab de Microsoft Learn), no en un tenant corporativo real.
+Customer Insights, dual-write y F&O debe pasar por el gate de
+[D365 Tenant Readiness](D365_TENANT_READINESS.md). Si el gate no se cumple, el entregable se
+presenta como diseño/simulación avanzada, no como configuración productiva.
 
 ## Leyenda de madurez
 
@@ -42,8 +39,9 @@ categoría implícita de "experto":
 | 🟡 **Awareness** | Solo vocabulario y contexto conceptual | Sirve para conversación funcional/arquitectónica, no para configurar el producto |
 | ⚪ **En expansión (roadmap)** | Todavía no tiene contenido en la plataforma | Aparece aquí como plan, no como lab disponible |
 
-Las rutas Dynamics 365 Customer Engagement y Finance & Operations ya aparecen en `/rutas`, con
-evidencia de diseño/lab y gate explícito para ambiente real.
+La ruta Dynamics 365 Customer Engagement aparece como disponible en `/rutas`. Finance & Operations
+queda visible como archivo/futura especialización para no perder contenido ni inflar la promesa
+central del programa.
 
 ---
 

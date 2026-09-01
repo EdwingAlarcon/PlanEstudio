@@ -32,7 +32,7 @@ describe("professional routes", () => {
     const routes = getAllProfessionalRoutes();
 
     expect(routes.map((route) => route.status)).not.toContain("Brecha prioritaria");
-    expect(getProfessionalRouteBySlug("finance-operations")?.status).toBe("Avanzado — especializaciones en expansión");
+    expect(getProfessionalRouteBySlug("finance-operations")?.status).toBe("Archivada / futura especialización");
   });
 
   it("resolves each recommended next route when configured", () => {

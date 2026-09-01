@@ -65,7 +65,7 @@ SolicitudFormHandler.onLoad = function(executionContext) {
 SolicitudFormHandler.onSave = function(executionContext) {
     var formContext = executionContext.getFormContext();
     var estado = formContext.getAttribute("sit_estado").getValue();
-    var presupuesto = formContext.getAttribute("sit_presupuesto").getValue();
+    var presupuesto = formContext.getAttribute("sit_costoestimado").getValue();
     
     if (estado === 100000001 && (presupuesto === null || presupuesto <= 0)) {
         // Cancelar el guardado y mostrar error
@@ -88,7 +88,8 @@ SolicitudFormHandler._configurarVisibilidad = function(formContext) {
     var esAprobado = estado === 100000001; // valor del option: Aprobado
     
     // Mostrar sección de implementación solo si está aprobado
-    formContext.ui.tabs.get("tab_implementacion").setVisible(esAprobado);
+    // En el Lab 04 la pestaña se llama "Resolución"; asigna el nombre lógico tab_resolucion.
+    formContext.ui.tabs.get("tab_resolucion").setVisible(esAprobado);
     
     // Campo responsable requerido si está aprobado
     formContext.getAttribute("sit_responsable").setRequiredLevel(
@@ -114,7 +115,7 @@ SolicitudFormHandler._configurarVisibilidad = function(formContext) {
 ```javascript
 SolicitudFormHandler.cargarHistorialCliente = function(executionContext) {
     var formContext = executionContext.getFormContext();
-    var clienteRef = formContext.getAttribute("sit_cliente").getValue();
+    var clienteRef = formContext.getAttribute("sit_solicitante").getValue();
     
     if (!clienteRef || clienteRef.length === 0) return;
     
@@ -123,7 +124,7 @@ SolicitudFormHandler.cargarHistorialCliente = function(executionContext) {
     // Llamar Dataverse Web API desde JavaScript del formulario
     Xrm.WebApi.retrieveMultipleRecords(
         "sit_solicitud",
-        "?$filter=_sit_cliente_value eq " + clienteId + 
+        "?$filter=_sit_solicitante_value eq " + clienteId +
         "&$select=sit_nombre,sit_estado,createdon" +
         "&$orderby=createdon desc&$top=5"
     ).then(function(result) {

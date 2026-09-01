@@ -58,7 +58,7 @@ test.describe("Preparar mi entorno", () => {
   test("en móvil (375px) la matriz se muestra como tarjetas, no como tabla", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto("/preparar-entorno");
-    await expect(page.locator("table")).not.toBeVisible();
+    await expect(page.locator("table:visible")).toHaveCount(0);
     const matrixSection = page.locator("section", { has: page.getByRole("heading", { name: "Matriz de herramientas por perfil" }) });
     await expect(matrixSection.getByRole("heading", { name: "Navegador moderno" })).toBeVisible();
   });

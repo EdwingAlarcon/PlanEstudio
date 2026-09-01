@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import type { Question } from "@/lib/quiz-engine";
 import { QuizPanel } from "../quiz-panel";
 
@@ -25,6 +25,10 @@ const questions: Question[] = [
 ];
 
 describe("QuizPanel — feedback screen", () => {
+  beforeEach(() => {
+    window.localStorage.clear();
+  });
+
   it("keeps showing the question just answered (not the next one) during feedback", () => {
     // startQuiz shuffles the session, so don't assume question order — capture
     // whichever question renders first, then confirm it (not the other one) is what
@@ -44,6 +48,24 @@ describe("QuizPanel — feedback screen", () => {
     expect(screen.getByText(firstPrompt.prompt)).toBeInTheDocument();
     expect(screen.getByText(new RegExp(firstPrompt.options[1]!))).toBeInTheDocument();
     expect(screen.queryByText(secondPrompt.prompt)).not.toBeInTheDocument();
+    expect(screen.getByText(new RegExp(firstPrompt.explanation))).toBeInTheDocument();
+  });
+
+  it("offers to continue a partial untimed quiz after remounting", () => {
+    const firstRender = render(<QuizPanel questions={questions} moduleId="test" saveScore={false} />);
+
+    fireEvent.click(screen.getByRole("button", { name: /iniciar evaluación/i }));
+
+    const firstPrompt = questions.find((q) => screen.queryByText(q.prompt))!;
+    fireEvent.click(screen.getByRole("button", { name: new RegExp(firstPrompt.options[0]!, "i") }));
+    fireEvent.click(screen.getByRole("button", { name: /enviar respuesta/i }));
+
+    firstRender.unmount();
+    render(<QuizPanel questions={questions} moduleId="test" saveScore={false} />);
+
+    expect(screen.getByText(/intento parcial guardado/i)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: /continuar intento/i }));
+    expect(screen.getByText(firstPrompt.prompt)).toBeInTheDocument();
     expect(screen.getByText(new RegExp(firstPrompt.explanation))).toBeInTheDocument();
   });
 });

@@ -26,7 +26,7 @@ Aprender, desde cero, lo mínimo de JavaScript (variables, funciones, objetos, a
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
-#### Actividad 76.1: Variables, funciones y objetos en la consola del navegador
+#### Actividad 56.1: Variables, funciones y objetos en la consola del navegador
 1. Abre cualquier página web, presiona F12 (herramientas de desarrollador) y abre la pestaña "Console".
 2. Escribe línea por línea y observa el resultado:
 ```javascript
@@ -42,7 +42,7 @@ console.log(saludar(cliente));     // "Hola, Ana"
 ```
 3. Cambia `cliente.activo` a `false` y vuelve a ejecutar `console.log(cliente.activo)` — confirma que el objeto cambió.
 
-#### Actividad 76.2: Arrays y recorridos, como una lista de registros de Dataverse
+#### Actividad 56.2: Arrays y recorridos, como una lista de registros de Dataverse
 ```javascript
 const solicitudes = [
     { nombre: "Compra de laptops", estado: "Aprobado" },
@@ -63,7 +63,7 @@ console.log(nombres); // ["Compra de laptops", "Renovación de licencias", "Viaj
 ```
 Esta es exactamente la forma en que el módulo de JavaScript y PCF recorre los resultados de `retrieveMultipleRecords`.
 
-#### Actividad 76.3: Simular una promesa, como una llamada a la Web API
+#### Actividad 56.3: Simular una promesa, como una llamada a la Web API
 ```javascript
 function pedirDatosSimulado() {
     // Promise representa algo que tardará en resolverse (aquí, 1 segundo)

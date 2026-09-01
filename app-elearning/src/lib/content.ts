@@ -109,7 +109,7 @@ const LEVEL_META: Record<LevelId, { title: string; description: string; certific
   intermedio: {
     title: "Nivel 2 — Intermedio",
     description: "Canvas Apps, Model-Driven, Power Automate y Power BI avanzados",
-    certification: "PL-200 (retira 31 ago 2026)",
+    certification: "Consultor funcional (PL-200 retirado 31 ago 2026)",
   },
   avanzado: {
     title: "Nivel 3 — Avanzado",
@@ -127,9 +127,9 @@ const LEVEL_META: Record<LevelId, { title: string; description: string; certific
     certification: "Buenas Prácticas",
   },
   d365: {
-    title: "Dynamics 365 Especialización — CE avanzado + F&O Awareness",
-    description: "Especialización práctica en Dynamics 365: Customer Engagement avanzado, Customer Insights, Field Service, integración CE + F&O y awareness avanzado de Finance & Operations",
-    certification: "CE avanzado + F&O Awareness",
+    title: "Dynamics 365 Especialización — CE avanzado",
+    description: "Especialización práctica en Dynamics 365 Customer Engagement: Sales, Customer Service, Customer Insights y Field Service. F&O queda como archivo/futura especialización.",
+    certification: "CE avanzado",
   },
   rpa: {
     title: "Power Automate Desktop & RPA",

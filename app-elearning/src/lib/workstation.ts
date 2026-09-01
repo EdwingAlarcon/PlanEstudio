@@ -41,6 +41,17 @@ export interface EssentialSetupStep {
   tenantAlternative: string;
 }
 
+export type LearningExecutionMode = "conceptual" | "simulated" | "real-environment" | "objective-evidence";
+
+export interface EnvironmentAccessRequirement {
+  route: string;
+  minimumAccess: string;
+  executionMode: LearningExecutionMode;
+  realExecutionNeeds: string;
+  evidence: string;
+  fallback: string;
+}
+
 const ALL_OS: OperatingSystem[] = ["windows", "macos", "linux"];
 
 export const WORKSTATION_TOOLS: WorkstationTool[] = [
@@ -188,6 +199,73 @@ export const ESSENTIAL_SETUP_STEPS: EssentialSetupStep[] = [
     outcome: "Accedes a make.powerapps.com y ubicas tu entorno activo en el selector superior.",
     glossary: "El Maker Portal (make.powerapps.com) es la pagina web donde construyes apps, tablas y flujos; el selector de entorno arriba a la derecha decide sobre cuál de tus entornos estás trabajando.",
     tenantAlternative: "Explora capturas de referencia del Maker Portal mientras consigues acceso.",
+  },
+];
+
+export const ENVIRONMENT_ACCESS_MATRIX: EnvironmentAccessRequirement[] = [
+  {
+    route: "Fundamentos Power Platform / Maker",
+    minimumAccess: "Cuenta Microsoft + Power Apps Developer Plan con Dataverse",
+    executionMode: "real-environment",
+    realExecutionNeeds: "Entorno Developer o Trial, rol Environment Maker y confirmación de no producción.",
+    evidence: "Capturas de tabla Dataverse, Canvas App, Model-Driven App y flujo ejecutado con datos SIT.",
+    fallback: "Sin tenant, solo se valida comprensión conceptual y diseño; no se marca como práctica ejecutada.",
+  },
+  {
+    route: "Consultor funcional",
+    minimumAccess: "Entorno Dataverse con permisos de configuración y datos de prueba",
+    executionMode: "objective-evidence",
+    realExecutionNeeds: "Tablas, vistas, formularios, roles, casos UAT y trazabilidad de requerimientos.",
+    evidence: "Backlog, matriz Fit-Gap, UAT con resultados y evidencia de configuración.",
+    fallback: "Entregable simulado aceptable para aprendizaje, no para declarar experiencia de implementación.",
+  },
+  {
+    route: "Developer Power Platform",
+    minimumAccess: "Developer environment + Power Platform CLI + Git + VS Code",
+    executionMode: "real-environment",
+    realExecutionNeeds: "Solución Dataverse, conexión PAC CLI, repo, pruebas locales y export/import controlado.",
+    evidence: "Repositorio, comandos ejecutados, solución exportada y capturas de validación.",
+    fallback: "Lectura y pseudoejercicios no cuentan como competencia developer demostrada.",
+  },
+  {
+    route: "Dynamics 365 Sales / Customer Service",
+    minimumAccess: "Trial o sandbox Dynamics 365 con apps Sales/Customer Service instaladas",
+    executionMode: "real-environment",
+    realExecutionNeeds: "Licencia/trial, security roles, datos de cuentas/contactos/casos y configuración de SLA o pipeline.",
+    evidence: "Lead/opportunity/case/SLA configurado, UAT y captura del resultado esperado.",
+    fallback: "Diseño funcional y simulación de proceso; declarar como no ejecutado en tenant.",
+  },
+  {
+    route: "Customer Insights Data/Journeys",
+    minimumAccess: "Customer Insights habilitado con capacidad y permisos",
+    executionMode: "real-environment",
+    realExecutionNeeds: "Fuentes de datos, consentimiento, dominio/canal si se envían mensajes y segmentos de prueba.",
+    evidence: "Mapa de unificación, segmento, journey en tiempo real, métrica y prueba negativa de consentimiento.",
+    fallback: "Diseño de journey y matriz de consentimiento; no equivale a ejecución real.",
+  },
+  {
+    route: "Contact Center",
+    minimumAccess: "Tenant D365 Contact Center/Omnichannel con canal configurado",
+    executionMode: "simulated",
+    realExecutionNeeds: "Canal de chat/voz/SMS, colas, workstreams, permisos y proveedor si aplica.",
+    evidence: "Solo cuenta como real si hay conversación de prueba y routing verificado.",
+    fallback: "Especialización opcional. Simulación válida para aprender conceptos, no obligatoria para la ruta base.",
+  },
+  {
+    route: "Finance & Operations",
+    minimumAccess: "Ambiente Dynamics 365 Finance/Supply Chain existente",
+    executionMode: "conceptual",
+    realExecutionNeeds: "Legal entity, datos maestros, roles F&O, dual-write/DMF si se prueba integración.",
+    evidence: "PlanEstudio lo trata como contenido archivado/futura especialización salvo evidencia de tenant real.",
+    fallback: "Mantener como awareness de arquitectura e integración CE + ERP, fuera del progreso obligatorio.",
+  },
+  {
+    route: "RPA",
+    minimumAccess: "Windows + Power Automate Desktop; licencia según escenario attended/unattended",
+    executionMode: "real-environment",
+    realExecutionNeeds: "PAD instalado, machine runtime si aplica, archivos SIT y permisos para automatizar escritorio/web.",
+    evidence: "Desktop flow, logs, prueba negativa, reejecución idempotente y runbook.",
+    fallback: "Sandbox local y simulación; marcar claramente como no unattended real si falta licencia.",
   },
 ];
 

@@ -11,6 +11,7 @@ import { UI } from "@/lib/i18n";
 import { useOnboardingStore } from "@/lib/onboarding-store";
 import {
   ESSENTIAL_SETUP_STEPS,
+  ENVIRONMENT_ACCESS_MATRIX,
   OPERATING_SYSTEMS,
   WORKSTATION_PROFILES,
   getEssentialSetupProgress,
@@ -202,6 +203,52 @@ export function PrepararEntornoClient() {
 
       <WorkstationReportImport os={os} />
 
+      <section aria-labelledby="access-matrix-heading" className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+        <h2 id="access-matrix-heading" className="text-sm font-semibold text-foreground">Matriz de acceso por ruta</h2>
+        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+          Esta matriz separa aprendizaje conceptual, simulación y ejecución real. PlanEstudio no valida acceso a tu tenant automáticamente.
+        </p>
+
+        <div className="mt-4 hidden overflow-x-auto rounded-xl border border-border lg:block">
+          <table className="w-full text-left text-sm">
+            <thead className="bg-muted/40 text-xs uppercase tracking-wide text-muted-foreground">
+              <tr>
+                <th scope="col" className="px-4 py-2 font-medium">Ruta</th>
+                <th scope="col" className="px-4 py-2 font-medium">Acceso mínimo</th>
+                <th scope="col" className="px-4 py-2 font-medium">Modo</th>
+                <th scope="col" className="px-4 py-2 font-medium">Evidencia</th>
+                <th scope="col" className="px-4 py-2 font-medium">Sin acceso</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ENVIRONMENT_ACCESS_MATRIX.map((item) => (
+                <tr key={item.route} className="border-t border-border align-top">
+                  <td className="px-4 py-3 font-medium text-foreground">{item.route}</td>
+                  <td className="px-4 py-3 text-muted-foreground">{item.minimumAccess}</td>
+                  <td className="px-4 py-3"><ExecutionModeBadge mode={item.executionMode} /></td>
+                  <td className="px-4 py-3 text-muted-foreground">{item.evidence}</td>
+                  <td className="px-4 py-3 text-muted-foreground">{item.fallback}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <ul className="mt-4 space-y-3 lg:hidden">
+          {ENVIRONMENT_ACCESS_MATRIX.map((item) => (
+            <li key={item.route} className="rounded-lg border border-border bg-background p-3">
+              <div className="mb-2 flex flex-wrap items-center gap-2">
+                <h3 className="text-sm font-semibold text-foreground">{item.route}</h3>
+                <ExecutionModeBadge mode={item.executionMode} />
+              </div>
+              <p className="text-xs text-muted-foreground"><span className="font-medium text-foreground">Acceso:</span> {item.minimumAccess}</p>
+              <p className="mt-1 text-xs text-muted-foreground"><span className="font-medium text-foreground">Evidencia:</span> {item.evidence}</p>
+              <p className="mt-1 text-xs text-muted-foreground"><span className="font-medium text-foreground">Sin acceso:</span> {item.fallback}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <section
         aria-labelledby="non-production-heading"
         className="rounded-xl border border-amber-500/30 bg-amber-50 p-4 dark:border-amber-400/20 dark:bg-amber-950/20"
@@ -249,6 +296,22 @@ export function PrepararEntornoClient() {
       </section>
     </div>
   );
+}
+
+function ExecutionModeBadge({ mode }: { mode: string }) {
+  const label: Record<string, string> = {
+    conceptual: "Conceptual",
+    simulated: "Simulado",
+    "real-environment": "Ejecutable en tenant",
+    "objective-evidence": "Evidencia objetiva",
+  };
+  const className: Record<string, string> = {
+    conceptual: "bg-muted text-muted-foreground",
+    simulated: "bg-[#FFFBE6] text-[#B37800] dark:bg-[rgba(255,185,0,0.12)] dark:text-[#FFB900]",
+    "real-environment": "bg-[#EFF8EE] text-[#107C10] dark:bg-[rgba(16,124,16,0.15)] dark:text-[#2DB52D]",
+    "objective-evidence": "bg-[#EFF6FC] text-[#0078D4] dark:bg-[rgba(0,120,212,0.12)] dark:text-[#4DB8FF]",
+  };
+  return <span className={cn("rounded-full px-2 py-0.5 text-[10px] font-medium", className[mode])}>{label[mode] ?? mode}</span>;
 }
 
 function WorkstationReportImport({ os }: { os: OperatingSystem }) {

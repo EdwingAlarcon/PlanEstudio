@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
-import type { Question } from "@/lib/quiz-engine";
+import type { Question, QuizSession } from "@/lib/quiz-engine";
 import {
   createSession,
   recordAttempt,
@@ -40,10 +40,75 @@ interface QuizPanelProps {
 
 type PanelState = "idle" | "question" | "feedback" | "result";
 
+type DraftPanelState = Extract<PanelState, "question" | "feedback">;
+
+interface QuizDraft {
+  schemaVersion: 1;
+  moduleId: string;
+  questionFingerprint: string;
+  session: QuizSession;
+  panelState: DraftPanelState;
+  selected: number[];
+  lastAttempt: {
+    questionId: string;
+    selected: number[];
+    isCorrect: boolean;
+  } | null;
+  secondsLeft: number | null;
+  updatedAt: number;
+}
+
+const QUIZ_DRAFT_STORAGE_PREFIX = "planestudio.quiz-draft.v1";
+
 function formatTime(seconds: number): string {
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
   return `${m}:${s.toString().padStart(2, "0")}`;
+}
+
+function questionFingerprint(questions: Question[]): string {
+  return questions.map((question) => question.id).join("|");
+}
+
+function quizDraftKey(moduleId: string | number, questions: Question[]): string {
+  return `${QUIZ_DRAFT_STORAGE_PREFIX}:${String(moduleId)}:${questionFingerprint(questions)}`;
+}
+
+function readQuizDraft(moduleId: string | number, questions: Question[]): QuizDraft | null {
+  if (typeof window === "undefined") return null;
+  const key = quizDraftKey(moduleId, questions);
+  const raw = window.localStorage.getItem(key);
+  if (!raw) return null;
+
+  try {
+    const parsed = JSON.parse(raw) as Partial<QuizDraft>;
+    const fingerprint = questionFingerprint(questions);
+    if (
+      parsed.schemaVersion !== 1 ||
+      parsed.moduleId !== String(moduleId) ||
+      parsed.questionFingerprint !== fingerprint ||
+      (parsed.panelState !== "question" && parsed.panelState !== "feedback") ||
+      !parsed.session ||
+      parsed.session.finishedAt !== null
+    ) {
+      window.localStorage.removeItem(key);
+      return null;
+    }
+    return parsed as QuizDraft;
+  } catch {
+    window.localStorage.removeItem(key);
+    return null;
+  }
+}
+
+function writeQuizDraft(moduleId: string | number, questions: Question[], draft: QuizDraft): void {
+  if (typeof window === "undefined") return;
+  window.localStorage.setItem(quizDraftKey(moduleId, questions), JSON.stringify(draft));
+}
+
+function clearQuizDraft(moduleId: string | number, questions: Question[]): void {
+  if (typeof window === "undefined") return;
+  window.localStorage.removeItem(quizDraftKey(moduleId, questions));
 }
 
 export function QuizPanel({
@@ -67,6 +132,8 @@ export function QuizPanel({
   const [secondsLeft, setSecondsLeft] = useState<number | null>(
     timeLimit != null ? timeLimit : null
   );
+  const [savedDraft, setSavedDraft] = useState<QuizDraft | null>(null);
+  const canPersistDraft = timeLimit == null;
 
   const saveQuizScore = useProgressStore((s) => s.saveQuizScore);
   const registerQuestionForReview = useReviewStore((s) => s.registerQuestionForReview);
@@ -82,6 +149,35 @@ export function QuizPanel({
   const answeredCount = getAnsweredCount(session);
   const progressPct = Math.round((answeredCount / session.questions.length) * 100);
 
+  useEffect(() => {
+    if (!canPersistDraft) return;
+    setSavedDraft(readQuizDraft(moduleId, questions));
+  }, [canPersistDraft, moduleId, questions]);
+
+  useEffect(() => {
+    if (!canPersistDraft) return;
+    if (panelState !== "question" && panelState !== "feedback") return;
+    if (session.finishedAt !== null) return;
+
+    writeQuizDraft(moduleId, questions, {
+      schemaVersion: 1,
+      moduleId: String(moduleId),
+      questionFingerprint: questionFingerprint(questions),
+      session,
+      panelState,
+      selected,
+      lastAttempt: lastAttempt
+        ? {
+            questionId: lastAttempt.question.id,
+            selected: lastAttempt.selected,
+            isCorrect: lastAttempt.isCorrect,
+          }
+        : null,
+      secondsLeft,
+      updatedAt: Date.now(),
+    });
+  }, [canPersistDraft, moduleId, questions, panelState, session, selected, lastAttempt, secondsLeft]);
+
   // ── Countdown timer ──────────────────────────────────────────────────────────
   useEffect(() => {
     if (secondsLeft === null) return;
@@ -94,6 +190,10 @@ export function QuizPanel({
       const result = calculateResult(finished);
       if (saveScore) saveQuizScore(String(moduleId), result.percentage);
       onCompleteRef.current?.(result);
+      if (canPersistDraft) {
+        clearQuizDraft(moduleId, questions);
+        setSavedDraft(null);
+      }
       setPanelState("result");
       return;
     }
@@ -106,11 +206,44 @@ export function QuizPanel({
   }, [secondsLeft, panelState]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const startQuiz = () => {
+    if (canPersistDraft) {
+      clearQuizDraft(moduleId, questions);
+      setSavedDraft(null);
+    }
     setSession(createSession(questions, { moduleId: String(moduleId), shuffle: true }));
     setSelected([]);
     setLastAttempt(null);
     setSecondsLeft(timeLimit != null ? timeLimit : null);
     setPanelState("question");
+  };
+
+  const continueSavedQuiz = () => {
+    if (!savedDraft) return;
+    const savedQuestion = savedDraft.lastAttempt
+      ? savedDraft.session.questions.find((question) => question.id === savedDraft.lastAttempt?.questionId)
+      : undefined;
+
+    setSession(savedDraft.session);
+    setSelected(savedDraft.selected);
+    setLastAttempt(savedDraft.lastAttempt && savedQuestion
+      ? {
+          question: savedQuestion,
+          selected: savedDraft.lastAttempt.selected,
+          isCorrect: savedDraft.lastAttempt.isCorrect,
+        }
+      : null);
+    setSecondsLeft(savedDraft.secondsLeft);
+    setPanelState(savedDraft.panelState);
+  };
+
+  const discardSavedQuiz = () => {
+    clearQuizDraft(moduleId, questions);
+    setSavedDraft(null);
+    setSession(createSession(questions, { moduleId: String(moduleId), shuffle: false }));
+    setSelected([]);
+    setLastAttempt(null);
+    setSecondsLeft(timeLimit != null ? timeLimit : null);
+    setPanelState("idle");
   };
 
   const toggleOption = useCallback((idx: number, isMulti: boolean) => {
@@ -147,6 +280,10 @@ export function QuizPanel({
       const result = calculateResult(finished);
       if (saveScore) saveQuizScore(String(moduleId), result.percentage);
       onCompleteRef.current?.(result);
+      if (canPersistDraft) {
+        clearQuizDraft(moduleId, questions);
+        setSavedDraft(null);
+      }
       // Only show built-in result screen when there's no external handler
       if (!onCompleteRef.current) {
         setPanelState("result");
@@ -156,7 +293,7 @@ export function QuizPanel({
       setLastAttempt(null);
       setPanelState("question");
     }
-  }, [session, moduleId, saveScore, saveQuizScore]);
+  }, [session, moduleId, saveScore, saveQuizScore, canPersistDraft, questions]);
 
   if (panelState === "idle") {
     return (
@@ -164,7 +301,20 @@ export function QuizPanel({
         <p className="text-muted-foreground text-sm">
           {questions.length} preguntas de práctica para este módulo.
         </p>
-        <Button onClick={startQuiz}>{UI.quiz.start}</Button>
+        {savedDraft && (
+          <p className="text-xs text-muted-foreground">
+            Tienes un intento parcial guardado con {savedDraft.session.attempts.length} de {savedDraft.session.questions.length} preguntas respondidas.
+          </p>
+        )}
+        <div className="flex flex-wrap justify-center gap-2">
+          {savedDraft && (
+            <>
+              <Button onClick={continueSavedQuiz}>Continuar intento</Button>
+              <Button variant="outline" onClick={discardSavedQuiz}>Descartar intento</Button>
+            </>
+          )}
+          <Button onClick={startQuiz}>{savedDraft ? "Iniciar intento nuevo" : UI.quiz.start}</Button>
+        </div>
       </div>
     );
   }

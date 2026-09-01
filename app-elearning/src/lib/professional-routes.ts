@@ -26,7 +26,8 @@ export interface ProfessionalRoute {
     | "Parcial"
     | "Especialización en construcción"
     | "Avanzado — especializaciones en expansión"
-    | "Awareness avanzado — práctica en roadmap";
+    | "Awareness avanzado — práctica en roadmap"
+    | "Archivada / futura especialización";
   gapNote?: string;
   nextRouteSlug?: ProfessionalRouteSlug;
   /** Slug del lab que funciona como proyecto final evaluable de la ruta. */
@@ -84,7 +85,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     ],
     competencies: ["Discovery", "Requerimientos", "Fit-Gap", "Seguridad funcional", "UAT", "Capacitación", "Backlog Azure DevOps"],
     status: "Parcial",
-    gapNote: "Cubre bien Power Platform genérico (requerimientos, fit-gap, seguridad, UAT) y ahora también backlog funcional en Azure DevOps con historias de usuario y criterios de aceptación (LAB-101), pero todavía no tiene módulos dedicados de consultoría funcional específicos de Dynamics 365 CE/F&O (procesos estándar por industria, catálogos de producto, configuración de áreas funcionales). Complementa esta ruta con Dynamics 365 Customer Engagement o Finance & Operations según el dominio del cliente.",
+    gapNote: "Cubre bien Power Platform genérico (requerimientos, fit-gap, seguridad, UAT) y ahora también backlog funcional en Azure DevOps con historias de usuario y criterios de aceptación (LAB-101), pero todavía no tiene módulos dedicados de consultoría funcional específicos de Dynamics 365 CE por industria. Complementa esta ruta con Dynamics 365 Customer Engagement; usa F&O solo como referencia avanzada/archivada hasta que exista una especialización verificada.",
     capstoneLabSlug: "lab-62-capstone-consultor-funcional-proyecto-completo",
     portfolioEvidence: [
       "Acta de discovery con preguntas reales, no genéricas",
@@ -154,11 +155,11 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     slug: "dynamics-365-customer-engagement",
     title: "Ruta Dynamics 365 Customer Engagement",
     role: "Consultor funcional D365 CE para ventas y servicio",
-    summary: "Profundiza en Sales, Customer Service, Contact Center, Customer Insights, Field Service y el diseño funcional CE enterprise.",
-    outcome: "Diseñar procesos D365 CE end-to-end con pipeline, SLA, routing, journeys, Customer 360, Field Service y frontera ERP clara.",
+    summary: "Profundiza en Sales, Customer Service, Customer Insights, Field Service y diseño funcional CE enterprise. Contact Center y F&O quedan como especializaciones opcionales, no como núcleo obligatorio.",
+    outcome: "Diseñar procesos D365 CE end-to-end con pipeline, SLA, Customer 360, Field Service y frontera ERP clara sin asumir implementación F&O.",
     level: "Especialización",
     accent: "#4F6BED",
-    modules: [1, 4, 9, 15, 20, 22, 30, 39, 53, 55, 56, 57, 58, 60, 61, 62, 63, 65],
+    modules: [1, 4, 9, 15, 20, 22, 30, 39, 53, 55, 56, 57, 58, 59, 61, 62, 64, 66],
     labs: [
       "lab-22-copilot-studio",
       "lab-55-uat-gonolive-y-auditoria-prompts",
@@ -171,25 +172,24 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-68-customer-service-case-to-resolution",
       "lab-81-d365-sales-forecasting-pipeline-review",
       "lab-82-customer-service-sla-entitlements-routing",
-      "lab-83-contact-center-simulation",
       "lab-84-customer-insights-real-time-journey",
       "lab-85-customer-insights-data-unification",
       "lab-86-field-service-agreement-preventive-maintenance",
       "lab-87-field-service-mobile-offline-work-order",
       "lab-90-capstone-enterprise-d365",
     ],
-    competencies: ["Sales Forecasting", "Customer Service SLA", "Contact Center", "Customer Insights Data/Journeys", "Field Service", "Fit-Gap D365"],
+    competencies: ["Sales Forecasting", "Customer Service SLA", "Customer Insights Data/Journeys", "Field Service", "Fit-Gap D365"],
     status: "Disponible",
-    gapNote: "La ruta ya cubre Sales avanzado, Customer Service avanzado, Contact Center/Omnichannel (incluye canal de chat hands-on en trial, LAB-083), Customer Insights - Data, Customer Insights - Journeys, Field Service end-to-end y capstone enterprise. La práctica real de forecasting, journeys, mobile offline, RSO y canales de Voz/SMS de Contact Center requiere tenant/licencias/proveedor de telefonía correspondientes.",
+    gapNote: "La ruta cubre Sales avanzado, Customer Service avanzado, Customer Insights - Data, Customer Insights - Journeys, Field Service end-to-end y capstone enterprise. Contact Center se mantiene como especialización opcional; F&O se conserva como archivo/futura especialización. La práctica real de forecasting, journeys, mobile offline y RSO requiere tenant/licencias correspondientes.",
     capstoneLabSlug: "lab-90-capstone-enterprise-d365",
     portfolioEvidence: [
       "Documento de diseño de 3-5 páginas (TO-BE, Fit-Gap)",
       "Matriz de trazabilidad y 8 casos UAT",
       "Diseño de Customer Insights Data/Journeys y de Field Service",
-      "Matriz de configuración de colas, diseño de SLA con pausa/reanudación y dashboard de servicio (LAB-068)",
-      "Matriz de forecast/pipeline, workstream Contact Center y diseño de mobile offline",
+      "Matriz de configuración de colas, diseño de SLA con pausa/reanudación y dashboard de servicio (LAB-068/LAB-082)",
+      "Matriz de forecast/pipeline y diseño de mobile offline",
       "Flujo de Power Automate con trigger, acciones y manejo de error",
-      "Decisión de integración F&O (proceso ERP + dual-write/DMF/virtual tables) y 2 ADRs con roadmap",
+      "Decisión de frontera ERP documentada sin asumir implementación F&O",
       "Capstone Enterprise D365 con Fit-Gap, ownership, roadmap, UAT y resumen ejecutivo",
     ],
     nextRouteSlug: "solution-architect",
@@ -251,10 +251,10 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
   },
   {
     slug: "finance-operations",
-    title: "Ruta Finance & Operations",
-    role: "Consultor que entiende ERP, CRM e integración empresarial",
-    summary: "Agrupa arquitectura, procesos ERP, ownership de datos e integración CE + F&O para participar con criterio en proyectos enterprise.",
-    outcome: "Explicar cuándo aplica F&O, cómo se integra con Dataverse y qué límites tiene Power Platform alrededor de ERP.",
+    title: "Archivo Finance & Operations",
+    role: "Especialización futura para ERP, CRM e integración empresarial",
+    summary: "Material conservado como archivo y futura especialización. No forma parte del progreso obligatorio ni de la promesa laboral base de PlanEstudio.",
+    outcome: "Reconocer procesos ERP y fronteras CE + F&O a nivel conceptual; no declarar competencia F&O practitioner sin tenant, licencia, datos y mentoría de producto.",
     level: "Especialización",
     accent: "#8661C5",
     modules: [1, 18, 24, 31, 34, 35, 36, 38, 39, 41, 53, 59, 64, 65],
@@ -277,9 +277,9 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-100-fo-reporting-hands-on",
       "lab-90-capstone-enterprise-d365",
     ],
-    competencies: ["ERP vs CRM", "Procesos ERP estándar", "Mapeo de procesos O2C/P2P/R2R/I2D", "Dual-write técnico", "Virtual tables", "Data Management", "Gobernanza", "Configuración Finance/SCM/Project Operations/Commerce/Seguridad/Reporting (trial tenant)"],
-    status: "Avanzado — especializaciones en expansión",
-    gapNote: "La ruta cubre F&O awareness avanzado, process mapping, matriz de ownership, diseño CE + F&O y —desde LAB-093 a LAB-100— configuración hands-on completa de Finance, Procure-to-Pay, Order-to-Cash, inventario/producto, Project Operations, Commerce, seguridad (duty/privilege) y reporting en un trial tenant. Esos 8 labs no fueron verificados contra un tenant en vivo al momento de escribirse (ver nota de verificación en cada uno) — esa verificación, no la falta de contenido, es lo único que falta para que la ruta se presente como F&O Practitioner disponible. Sigue faltando LCS awareness con la misma profundidad práctica.",
+    competencies: ["ERP vs CRM", "Procesos ERP estándar", "Mapeo de procesos O2C/P2P/R2R/I2D", "Dual-write conceptual", "Virtual tables", "Data Management", "Gobernanza"],
+    status: "Archivada / futura especialización",
+    gapNote: "Contenido preservado para consulta avanzada. Los labs F&O hands-on LAB-093 a LAB-100 no están verificados contra tenant en vivo y no deben contar como ruta laboral disponible. Para reactivar esta ruta se requiere ambiente F&O real, datos maestros, licencias, validación paso a paso y revisión de un consultor F&O.",
     capstoneLabSlug: "lab-90-capstone-enterprise-d365",
     portfolioEvidence: [
       "5 mapas de proceso ERP (O2C/P2P/R2R/I2D/Project-to-Profit) con pasos, actores y sistema responsable (LAB-069)",

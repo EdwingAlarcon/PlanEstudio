@@ -262,9 +262,9 @@ describe("certForModule", () => {
   it("returns PL-900 for modules 1-8", () => {
     for (let i = 1; i <= 8; i++) expect(certForModule(i)).toBe("PL-900");
   });
-  it("returns PL-200 transition label for modules 9-17", () => {
-    expect(certForModule(9)).toBe("PL-200 (retira 31 ago 2026)");
-    expect(certForModule(17)).toBe("PL-200 (retira 31 ago 2026)");
+  it("returns functional consultant label for modules 9-17 after PL-200 retirement", () => {
+    expect(certForModule(9)).toBe("Consultor funcional (PL-200 retirado 31 ago 2026)");
+    expect(certForModule(17)).toBe("Consultor funcional (PL-200 retirado 31 ago 2026)");
   });
   it("returns PL-400 for modules 18-30", () => {
     expect(certForModule(18)).toBe("PL-400");
@@ -350,7 +350,7 @@ describe("timing helpers", () => {
 
 describe("navigation certification labels", () => {
   it("uses short labels for sidebar badges while preserving full certification copy", () => {
-    expect(UI.levels.navCert.intermedio).toBe("PL-200");
+    expect(UI.levels.navCert.intermedio).toBe("Funcional");
     expect(UI.levels.cert.intermedio).toContain("retira");
     expect(UI.levels.navCert.arquitecto).toBe("Arquitectura");
     expect(UI.levels.navCert.ia).toBe("IA");

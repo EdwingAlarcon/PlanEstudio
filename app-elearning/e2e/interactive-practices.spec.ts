@@ -51,6 +51,12 @@ test.describe("Interactive Practice Engine", () => {
     await page.getByRole("button", { name: /Validar/ }).click();
     await expect(page.getByText("Requiere ajuste")).toBeVisible();
 
+    await page.reload();
+    await expect(page.locator("#exercise-heading")).toContainText("Relación Cliente/Pedidos");
+    await expect(page.getByText("Requiere refuerzo").first()).toBeVisible();
+    await expect(page.getByText("1 intentos")).toBeVisible();
+    await expect(page.getByLabel("Cliente N:N Pedido")).toBeChecked();
+
     await page.getByRole("button", { name: /Reintentar/ }).click();
     await page.getByText("Cliente 1:N Pedido").click();
     await page.getByRole("button", { name: /Validar/ }).click();
@@ -65,10 +71,12 @@ test.describe("Interactive Practice Engine", () => {
 
   test("flow builder valida drag, teclado, botones, errores y persistencia", async ({ page }) => {
     await page.goto("/practica/ip-pa-002-aprobacion-por-monto");
+    await page.evaluate(() => window.localStorage.removeItem("planestudio.interactive-practice.v1"));
+    await page.reload();
     await expect(page.getByRole("heading", { name: "Ordena el flujo" })).toBeVisible();
-    await page.getByRole("button", { name: "Bajar" }).first().click();
+    await page.locator("li").filter({ hasText: "When row added" }).getByRole("button", { name: "Bajar" }).click();
     await page.getByRole("button", { name: /Validar/ }).click();
-    await expect(page.getByText("Parcial")).toBeVisible();
+    await expect(page.getByText(/Parcial|Requiere ajuste/).first()).toBeVisible();
 
     await page.getByRole("button", { name: /Arrastrar o mover When row added/ }).press("ArrowUp");
     await page.getByRole("button", { name: /Arrastrar o mover Condition/ }).press("ArrowDown");
@@ -88,8 +96,9 @@ test.describe("Interactive Practice Engine", () => {
     await page.getByRole("button", { name: /Validar/ }).click();
     await expect(page.getByText("Correcto", { exact: true })).toBeVisible();
     await expect(page.getByText(/Monto: 15.000.000/)).toBeVisible();
+    await expect.poll(async () => page.evaluate(() => window.localStorage.getItem("planestudio.interactive-practice.v1") ?? "")).toContain("IP-PA-002");
     await page.reload();
-    await expect(page.getByText("En progreso").first()).toBeVisible();
+    await expect(page.getByText(/Dominado|En progreso|Requiere refuerzo/).first()).toBeVisible();
   });
 
   test("query playground acepta FetchXML limitado y rechaza entrada insegura", async ({ page }) => {

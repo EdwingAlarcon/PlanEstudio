@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { getAllLabs, getAllLevels, getLabBySlug } from "../content";
 import { getLabDomains, getLabPresentationMeta } from "../lab-metadata";
 
-const RETIRED_CERTIFICATIONS = new Set(["PL-600", "MB-210", "MB-220", "MB-240", "MB-260", "MB-300"]);
+const RETIRED_CERTIFICATIONS = new Set(["PL-600", "MB-210", "MB-220", "MB-240", "MB-260", "MB-280", "MB-300"]);
 
 describe("lab presentation metadata", () => {
   it("identifica capstones y conserva la ruta profesional asociada", () => {
@@ -13,7 +13,7 @@ describe("lab presentation metadata", () => {
 
     expect(lab?.displayId).toBe("LAB-064");
     expect(meta.kind).toBe("Capstone");
-    expect(meta.routes).toContain("Ruta Finance & Operations");
+    expect(meta.routes).toContain("Archivo Finance & Operations");
     expect(meta.difficulty).toBe("Enterprise");
   });
 

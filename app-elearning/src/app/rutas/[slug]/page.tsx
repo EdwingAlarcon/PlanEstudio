@@ -32,6 +32,7 @@ const STATUS_VARIANT: Record<string, "default" | "secondary" | "outline"> = {
   "Especialización en construcción": "outline",
   "Avanzado — especializaciones en expansión": "secondary",
   "Awareness avanzado — práctica en roadmap": "outline",
+  "Archivada / futura especialización": "outline",
 };
 
 // Short label for the badge; the full status string still carries the detail
@@ -40,6 +41,7 @@ const STATUS_SHORT_LABEL: Record<string, string> = {
   "Especialización en construcción": "En construcción",
   "Avanzado — especializaciones en expansión": "Avanzado — en expansión",
   "Awareness avanzado — práctica en roadmap": "Awareness avanzado",
+  "Archivada / futura especialización": "Archivo futuro",
 };
 
 export default async function ProfessionalRouteDetailPage({ params }: PageProps) {

@@ -1,7 +1,7 @@
 # Guía de Certificaciones y Competencias Profesionales
 
-**Última revisión:** 9 de julio de 2026  
-**Alcance:** Power Platform, Dynamics 365 Customer Engagement y Finance & Operations.  
+**Última revisión:** 1 de septiembre de 2026
+**Alcance:** Power Platform, Dynamics 365 Customer Engagement y Finance & Operations archivado/futura especialización.
 **Principio rector:** una certificación retirada no invalida la competencia profesional asociada, pero no debe presentarse como examen vigente ni como objetivo agendable.
 
 ---
@@ -14,7 +14,7 @@ La ruta recomendada queda así:
 
 ```text
 PL-900 vigente
-  → PL-200 en transición hasta 31 ago 2026
+  → Consultor Funcional Power Platform como competencia profesional (PL-200 retirado el 31 ago 2026)
   → PL-400 vigente
   → Arquitectura Power Platform como competencia profesional
   → Especializaciones Dynamics 365 vigentes según rol
@@ -26,22 +26,22 @@ El Nivel 4 del plan deja de ser una ruta de examen PL-600 y pasa a ser una ruta 
 
 ## Estado actual de certificaciones
 
-| Código | Nombre oficial / enfoque | Estado al 9 jul 2026 | Acción en PlanEstudio |
+| Código | Nombre oficial / enfoque | Estado al 1 sep 2026 | Acción en PlanEstudio |
 |---|---|---|---|
 | PL-900 | Microsoft Certified: Power Platform Fundamentals | Vigente. Microsoft anuncia actualización del examen en inglés el 24 jul 2026. | Mantener como objetivo del Nivel 1. |
-| PL-200 | Exam PL-200: Microsoft Power Platform Functional Consultant | En transición: Microsoft indica retiro el 31 ago 2026. | Mantener en Nivel 2 con aviso claro; preparar reemplazo cuando Microsoft publique ruta sucesora. |
+| PL-200 | Exam PL-200: Microsoft Power Platform Functional Consultant | Retirado el 31 ago 2026. | Mantener competencias del Nivel 2; no presentarlo como examen agendable. |
 | PL-400 | Microsoft Certified: Power Platform Developer Associate | Vigente. | Mantener como objetivo del Nivel 3. |
 | PL-600 | Exam PL-600: Microsoft Power Platform Solution Architect | Retirado el 30 jun 2026. | No presentarlo como certificación vigente. Reubicar como competencia de arquitectura profesional. |
 | MB-210 | Dynamics 365 Sales Functional Consultant | Retirado el 30 nov 2024. | Mantener Sales como especialización funcional, no como examen. |
 | MB-220 | Dynamics 365 Customer Insights (Journeys) Functional Consultant | Retirado el 30 nov 2024. | Mantener Customer Insights como competencia de marketing/journeys, no como examen. |
 | MB-230 | Dynamics 365 Customer Service Functional Consultant | Vigente. | Agregar/fortalecer ruta Customer Service. |
 | MB-240 | Dynamics 365 Field Service Functional Consultant | Retirado el 30 jun 2026. | Tratar como competencia histórica; no vender como objetivo agendable. |
-| MB-280 | Dynamics 365 Customer Experience Analyst Associate | En transición: Microsoft indica retiro el 31 jul 2026. | Usar solo como referencia temporal para Customer Experience/Sales mientras esté disponible. |
+| MB-280 | Dynamics 365 Customer Experience Analyst Associate | Retirado el 31 jul 2026. | Usar solo como referencia histórica de skills Customer Experience/Sales; no como objetivo vigente. |
 | MB-260 | Dynamics 365 Customer Insights (Data) Specialist | Retirado el 30 nov 2024. | Mantener Customer Insights - Data como competencia Customer 360, no como examen. |
 | MB-300 | Dynamics 365: Core Finance and Operations | Retirado el 29 feb 2024. | No usar como objetivo. Conservar competencias F&O base dentro de ruta F&O. |
-| MB-310 | Dynamics 365 Finance Functional Consultant Associate | Vigente. | Recomendado para especialización Finance & Operations. |
-| MB-330 | Dynamics 365 Supply Chain Management Functional Consultant Associate | Vigente. | Recomendado para especialización Finance & Operations. |
-| MB-500 | Dynamics 365: Finance and Operations Apps Developer Associate | Vigente. | Recomendado solo para perfil developer F&O avanzado. |
+| MB-310 | Dynamics 365 Finance Functional Consultant Associate | Vigente. | Fuera del núcleo actual; referencia para futura especialización Finance & Operations. |
+| MB-330 | Dynamics 365 Supply Chain Management Functional Consultant Associate | Vigente. | Fuera del núcleo actual; referencia para futura especialización Finance & Operations. |
+| MB-500 | Dynamics 365: Finance and Operations Apps Developer Associate | Vigente. | Fuera del núcleo actual; referencia solo para futura ruta developer F&O avanzada. |
 
 Fuentes oficiales Microsoft Learn:
 
@@ -84,8 +84,8 @@ PlanEstudio lo soporta con:
 
 ### PL-200 — Power Platform Functional Consultant
 
-**Estado:** en transición; Microsoft indica retiro el 31 de agosto de 2026.  
-**Ubicación en PlanEstudio:** Nivel 2 — Intermedio, con aviso visible.
+**Estado:** retirado el 31 de agosto de 2026 según Microsoft Learn.
+**Ubicación en PlanEstudio:** Nivel 2 — Intermedio conserva la competencia profesional, no el objetivo de examen.
 
 Competencias evaluadas:
 
@@ -103,8 +103,8 @@ PlanEstudio lo soporta con:
 
 Acción recomendada:
 
-- Mantener la ruta mientras el examen siga disponible.
-- Preparar una ruta de **Consultor Funcional Power Platform** independiente del examen para que el contenido sobreviva al retiro.
+- Reetiquetar la ruta como **Consultor Funcional Power Platform**.
+- Usar PL-200 solo como referencia histórica de dominios, no como certificación vigente.
 
 ### PL-400 — Power Platform Developer Associate
 
@@ -278,11 +278,11 @@ Competencias que siguen siendo válidas:
 | Perfil | Certificación vigente o enfoque | PlanEstudio actual | Próxima mejora |
 |---|---|---|---|
 | Maker | PL-900 | Ruta Maker disponible | Mantener capstone (LAB-061) actualizado con Power Fx reciente. |
-| Consultor funcional Power Platform | PL-200 en transición | Ruta Consultor Funcional (Parcial) | Sumar módulos de consultoría específicos de D365 CE/F&O. |
+| Consultor funcional Power Platform | Competencia profesional; PL-200 retirado | Ruta Consultor Funcional (Parcial) | Sumar módulos de consultoría específicos de D365 CE. |
 | Developer Power Platform | PL-400 | Ruta Developer disponible | Reforzar Custom APIs, CLI, Web API y observabilidad. |
 | Solution Architect | Competencia profesional de arquitectura | Ruta Solution Architect disponible | Ampliar casos de estudio de arquitectura enterprise. |
 | D365 Customer Service | MB-230 | Ruta D365 CE — avanzado, especializaciones en expansión | Ver Roadmap de Especialización Avanzada: Contact Center/Omnichannel real. |
-| D365 Sales | Competencia profesional (MB-210 retirado) / MB-280 en transición hasta 31 jul 2026 | Ruta D365 CE disponible con Sales avanzado | Profundizar Sales Insights/predicción real solo con tenant/licencia. |
+| D365 Sales | Competencia profesional; MB-210 y MB-280 retirados | Ruta D365 CE disponible con Sales avanzado | Profundizar Sales Insights/predicción real solo con tenant/licencia. |
 | D365 Finance / Supply Chain | MB-310 / MB-330 | Ruta F&O disponible como awareness avanzado + integración CE/F&O | Configuración real de producto Finance/SCM sigue como mejora futura. |
 | F&O Developer | MB-500 | Fuera de alcance actual | Agregar solo como especialización posterior a la práctica F&O funcional. |
 
