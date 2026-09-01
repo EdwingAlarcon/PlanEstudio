@@ -243,7 +243,7 @@ export function LabsClient({ labs }: { labs: LabWithMeta[] }) {
         const levelLabs = byLevel[levelKey];
         if (!levelLabs || levelLabs.length === 0) return null;
         const cfg = LEVEL_CONFIG[levelKey] ?? { label: levelKey, bar: "bg-slate-400", accent: "#64748B" };
-        const isOpen = manualOpen[levelKey] ?? (hasActiveFilters || levelKey === activeLevelCode);
+        const isOpen = hasActiveFilters || (manualOpen[levelKey] ?? levelKey === activeLevelCode);
 
         return (
           <details
@@ -251,6 +251,7 @@ export function LabsClient({ labs }: { labs: LabWithMeta[] }) {
             className="group/level mb-10"
             open={isOpen}
             onToggle={(event) => {
+              if (hasActiveFilters) return;
               const nextOpen = (event.currentTarget as HTMLDetailsElement).open;
               setManualOpen((prev) => ({ ...prev, [levelKey]: nextOpen }));
             }}

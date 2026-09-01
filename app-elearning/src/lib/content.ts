@@ -106,6 +106,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "entornos-y-trials": "Recursos/ENTORNOS_Y_TRIALS.md",
   "fundamentos-azure": "Recursos/FUNDAMENTOS_AZURE.md",
   "soluciones-referencia-capstones": "Recursos/SOLUCIONES_REFERENCIA_CAPSTONES.md",
+  "roadmap-auditoria-tenant-real": "Recursos/ROADMAP_AUDITORIA_TENANT_REAL.md",
 };
 
 const LEVEL_META: Record<LevelId, { title: string; description: string; certification: string }> = {

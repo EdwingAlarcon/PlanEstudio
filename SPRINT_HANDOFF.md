@@ -4,6 +4,41 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
+## Próximo roadmap aprobado — Auditoría bajo premisa tenant-real del alumno (2026-09-01)
+
+**Premisa corregida por el usuario**: el alumno sí tendrá acceso a un tenant real de Microsoft y
+ejecutará allí los laboratorios propuestos. La app no pretende conectarse al tenant ni validar cada
+configuración automáticamente; entrega contenido, instrucciones, casos, criterios de aceptación y
+evidencias. Por tanto, no considerar la ausencia de validación automática como carencia pedagógica
+bloqueante.
+
+**Diferenciar siempre en informes y sprints**:
+
+1. Falta de acceso a tenant real.
+2. Falta de laboratorios ejecutables en tenant.
+3. Falta de validación automática desde la app.
+4. Falta de criterios/evidencias para comprobar manualmente la ejecución.
+
+El documento operativo versionado para continuar es:
+`docs/Recursos/ROADMAP_AUDITORIA_TENANT_REAL.md` (también registrado como recurso Next.js en
+`/recursos/roadmap-auditoria-tenant-real`).
+
+**Orden recomendado de sprints**:
+
+1. Readiness manual por lab: estado de ejecución, licencia/producto, rol, ambiente, datos y evidencia
+   mínima para 72/72 labs.
+2. Troubleshooting de labs base y RPA: LAB-002, LAB-004, LAB-005 y LAB-104..112.
+3. Auditoría tenant-real de D365 CE/Customer Insights/Field Service: LAB-081..088 y LAB-090.
+4. Auditoría tenant-real de F&O: LAB-093..100.
+5. Duraciones y carga cognitiva: separar lectura, práctica, setup y evidencia.
+6. Modo guiado estricto opcional: advertencias por prerequisitos sin bloqueo duro.
+7. Capstones nuevos por ruta laboral: expansión, no corrección.
+
+**Próximo paso si el usuario dice "ejecuta"**: empezar por Sprint 1. Antes de tocar contenido, correr
+`git fetch --prune origin && git pull --ff-only`; luego auditar metadata/labs reales, implementar el
+panel "Antes de empezar" y validar en serie (`validate:content`, `lint`, `typecheck`,
+`test:coverage`, `build`, `e2e`) antes de commit, push y deploy.
+
 ## Sprint — Reorganización integral post-auditoría F&O/Contact Center (2026-09-01)
 
 ### Continuación Codex — Capstones con solución de referencia separada (2026-09-01)

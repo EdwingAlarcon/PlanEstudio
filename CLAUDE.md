@@ -7,6 +7,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Before starting new work, read `SPRINT_HANDOFF.md`. It is the active operational memory for the post-audit sprints.
 
 Current stable state as of the latest local handoff (2026-09-01):
+- Latest planning note: **Roadmap de auditoría tenant-real**. The user corrected the audit premise:
+  the student will have access to a real Microsoft tenant and will execute labs there. Do not treat
+  the lack of automatic tenant validation by the app as a blocking pedagogical defect. Separate:
+  (1) no tenant access, (2) lab not executable in tenant, (3) no automatic app validation, and
+  (4) missing manual criteria/evidence. The continuation roadmap is versioned in
+  `/recursos/roadmap-auditoria-tenant-real` (`docs/Recursos/ROADMAP_AUDITORIA_TENANT_REAL.md`) and
+  the next recommended sprint is "Readiness manual por lab" for 72/72 labs.
 - Latest continuation: **Capstones con solución de referencia separada**. Adds
   `/recursos/soluciones-referencia-capstones` (`docs/Recursos/SOLUCIONES_REFERENCIA_CAPSTONES.md`)
   and links it from LAB-077, LAB-079, LAB-084, LAB-085, LAB-102 and LAB-112 as post-attempt reference
