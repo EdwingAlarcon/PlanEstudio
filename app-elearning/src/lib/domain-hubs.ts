@@ -174,6 +174,7 @@ export function getDynamics365Hub(): DomainHub {
         title: "Sales",
         description: "Forecasting, pipeline y sales operations.",
         links: [
+          { title: "Ruta dedicada — Dynamics 365 Sales", description: "Progresión completa separada de Customer Service y Customer Insights.", href: "/rutas/dynamics-365-sales" },
           { title: "Dynamics 365 Sales Avanzado", description: "Módulo 60 — forecasting, pipeline y sales operations.", href: "/nivel/d365/modulo/dynamics-365-sales-avanzado" },
           { title: "Lab 57 — Diseño de solución D365 Sales con IA", description: "Diseño funcional asistido por IA.", href: "/labs/lab-57-diseno-solucion-d365-sales-con-ia" },
           { title: "Lab 66 — Sales lead-to-cash", description: "Ciclo completo de oportunidad a cierre.", href: "/labs/lab-66-sales-lead-to-cash" },
@@ -184,6 +185,7 @@ export function getDynamics365Hub(): DomainHub {
         title: "Customer Service",
         description: "SLA, entitlements, routing y resolución de casos.",
         links: [
+          { title: "Ruta dedicada — Dynamics 365 Customer Service", description: "Progresión completa separada de Sales y Customer Insights.", href: "/rutas/dynamics-365-customer-service" },
           { title: "Dynamics 365 Customer Service Avanzado", description: "Módulo 61 — SLA, entitlements y routing.", href: "/nivel/d365/modulo/dynamics-365-customer-service-avanzado" },
           { title: "Lab 68 — Customer Service case-to-resolution", description: "Ciclo completo de un caso.", href: "/labs/lab-68-customer-service-case-to-resolution" },
           { title: "Lab 82 — SLA, entitlements y routing", description: "Configuración de colas y SLA con pausa/reanudación.", href: "/labs/lab-82-customer-service-sla-entitlements-routing" },
@@ -193,6 +195,8 @@ export function getDynamics365Hub(): DomainHub {
         title: "Customer Insights",
         description: "Data (Customer 360) y Journeys (real-time, consentimiento).",
         links: [
+          { title: "Ruta dedicada — Customer Insights - Data", description: "Unificación de perfiles (CDP), separada de Journeys.", href: "/rutas/dynamics-365-customer-insights-data" },
+          { title: "Ruta dedicada — Customer Insights - Journeys", description: "Ejecución de marketing, separada de Data.", href: "/rutas/dynamics-365-customer-insights-journeys" },
           { title: "Customer Insights - Data — Unificación de perfiles", description: "Módulo 57.", href: "/nivel/d365/modulo/customer-insights-data-unificacion-perfiles" },
           { title: "Customer Insights - Journeys — Real-time y consentimiento", description: "Módulo 63.", href: "/nivel/d365/modulo/customer-insights-journeys-real-time" },
           { title: "Lab 58 — Segmento y journey", description: "Segmentación y journey básico.", href: "/labs/lab-58-customer-insights-segmento-journey" },

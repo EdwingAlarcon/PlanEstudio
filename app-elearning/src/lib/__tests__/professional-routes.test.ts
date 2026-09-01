@@ -15,6 +15,12 @@ describe("professional routes", () => {
       "finance-operations",
       "rpa",
       "ai-copilot",
+      "fundamentos-power-platform",
+      "dynamics-365-sales",
+      "dynamics-365-customer-service",
+      "dynamics-365-customer-insights-data",
+      "dynamics-365-customer-insights-journeys",
+      "empleabilidad",
     ]);
   });
 
