@@ -65,6 +65,13 @@ resolver antes de este lab, no algo que se pueda simular aquí.
 - Banco de 20 preguntas respondidas, incluyendo al menos 8 en ingles.
 - Retrospectiva de entrevista.
 
+## Requisitos no funcionales
+
+- **Consistencia:** CV, LinkedIn, demo y respuestas deben contar la misma historia profesional.
+- **Trazabilidad:** cada claim técnico debe apuntar a un artefacto verificable del portafolio.
+- **Honestidad profesional:** todo lab, simulación o sandbox debe declararse como tal.
+- **Claridad:** las respuestas deben poder entenderse sin que el entrevistador conozca PlanEstudio.
+
 ## Pasos detallados
 
 ### Paso 1 — Rol objetivo
@@ -283,6 +290,13 @@ Este lab es en sí un banco de preguntas (Paso 5 y Paso 6); adicionalmente prep�
 pregunta meta más común de este tipo de entrevista: "Cuéntame sobre un momento en que tu solución
 no funcionó como esperabas" — respuesta esperada: un caso real (no genérico) con causa raíz,
 diagnóstico y qué cambiarías, no solo "lo arreglé".
+
+## Solución de referencia
+
+Después de completar tu intento, usa
+[Soluciones de Referencia para Capstones](/recursos/soluciones-referencia-capstones#lab-079--technical-interview-simulation)
+como comparador de calidad. El objetivo no es memorizar respuestas, sino verificar que tu evidencia,
+tu alcance y tu comunicación sean defendibles.
 
 ### Preguntas de ingles tecnico que debes poder responder
 

@@ -63,6 +63,13 @@ limitado.
 - Business Process Flow de Opportunity con etapas y campos requeridos por etapa.
 - 5 casos de prueba que verifiquen el flujo completo lead → invoice.
 
+## Requisitos no funcionales
+
+- **Seguridad:** roles comerciales, aprobadores y back-office tienen responsabilidades separadas.
+- **Integridad de datos:** price lists, productos y descuentos no se editan manualmente caso por caso.
+- **Auditabilidad:** cada conversión clave conserva criterio, owner y validación previa.
+- **Mantenibilidad:** el BPF permite ajustar umbrales y aprobaciones sin crear tablas custom innecesarias.
+
 ## Pasos detallados
 
 ### Paso 1 — Calificación y conversión de leads
@@ -121,17 +128,23 @@ Escribe 5 casos de prueba que cubran el ciclo completo, incluyendo al menos:
 | Conversión Order/Invoice y validaciones | 20% |
 | Casos de prueba end-to-end | 20% |
 
+## Solución de referencia
+
+Después de completar tu intento, revisa
+[Soluciones de Referencia para Capstones](/recursos/soluciones-referencia-capstones#lab-102--dynamics-365-sales-lead-to-cash).
+Úsala para comparar tu criterio de calificación, BPF, price lists, validaciones y caso negativo.
+
 ## Errores comunes
 
 - Mezclar requerimientos de Customer Service o cobranza en una prueba que solo evalúa Sales.
 - Definir price lists sin reglas de descuento explícitas por segmento.
 - Omitir el caso de prueba negativo (conversión que debería fallar).
 - Diseñar el BPF sin condición de rama, perdiendo la oportunidad de mostrar criterio funcional.
+- No registrar el tiempo real usado, perdiendo la evidencia de que se resolvió bajo presión de
+  tiempo como en una prueba técnica real.
 
 ## Reto adicional
 
 Agrega una tercera price list para un segmento de cliente distinto (ej. "Gobierno" o "Distribuidor")
 con reglas de descuento propias, y documentá qué condición del BPF de Opportunity determina cuál de
 las 3 price lists se sugiere automáticamente.
-- No registrar el tiempo real usado, perdiendo la evidencia de que se resolvió bajo presión de
-  tiempo como en una prueba técnica real.

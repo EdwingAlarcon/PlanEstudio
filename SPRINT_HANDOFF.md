@@ -6,6 +6,49 @@
 
 ## Sprint — Reorganización integral post-auditoría F&O/Contact Center (2026-09-01)
 
+### Continuación Codex — Capstones con solución de referencia separada (2026-09-01)
+
+**Contexto**: el usuario confirmó para este repo la regla operativa "siempre, commit, push y
+deploy". Antes de continuar se ejecutó `git fetch --prune origin` y `git pull --ff-only`; no había
+cambios remotos pendientes (`Already up to date`). El `HEAD` local y `origin/master` estaban en
+`05e9a479` antes de empezar este bloque. El working tree sí traía cambios generados en
+`graphify-out/` por el hook/rebuild automático; no eran cambios de contenido pedagógico.
+
+**Cerrado en esta continuación**:
+
+- Recurso nuevo `docs/Recursos/SOLUCIONES_REFERENCIA_CAPSTONES.md`, registrado en
+  `RESOURCE_FILES` como `/recursos/soluciones-referencia-capstones`.
+- Soluciones de referencia separadas para los capstones/rutas dedicadas que no tenían un comparador
+  posterior al intento: LAB-077 (Customer Service), LAB-079 (entrevista técnica), LAB-084
+  (Customer Insights - Journeys), LAB-085 (Customer Insights - Data), LAB-102 (Sales Lead-to-Cash) y
+  LAB-112 (RPA capstone).
+- Se agregaron requisitos no funcionales explícitos en esos 6 labs: seguridad, auditabilidad,
+  operación, mantenibilidad, cumplimiento, privacidad, resiliencia e idempotencia según aplique.
+- Cada lab enlaza a la solución de referencia como revisión posterior al intento, no como respuesta
+  dentro del enunciado principal.
+- Corrección menor en LAB-102: una viñeta de "No registrar el tiempo real usado..." estaba colgada
+  debajo de `Reto adicional`; se movió a `Errores comunes`.
+- `content.test.ts` actualizado de 35 a 36 recursos y con guardarraíl para el nuevo slug.
+- Bug real encontrado durante validación, no causado por los capstones: el E2E de Flow Builder
+  fallaba porque los botones `Subir/Bajar/Eliminar` vivían dentro de un `<li draggable>`, patrón que
+  hizo que Chromium no disparara de forma confiable el click del botón `Bajar`. Se movió el
+  comportamiento draggable al botón `Arrastrar` y el `<li>` quedó como destino de drop. El test ahora
+  espera hidratación (`No iniciado`, `0 intentos`), verifica que `Bajar` cambie realmente el orden y
+  arrastra desde el handle dedicado.
+
+**Validación local de esta continuación**: `npm run validate:content`, `npm run lint`,
+`npm run typecheck`, `npm run test:coverage` (420/420), `npm run build` y `npm run e2e` (89/89) en
+verde, corridos en serie. La primera corrida E2E falló 88/89 por el bug de Flow Builder descrito
+arriba; después del fix, el test aislado y la suite completa pasaron.
+
+**Pendiente después de este bloque**:
+
+- Crear proyectos integradores completamente nuevos desde cero para rutas adicionales solo si el
+  usuario pide ese alcance explícitamente. Este bloque no crea 10+ capstones nuevos; profundiza y
+  separa soluciones para los capstones existentes que ya cierran rutas dedicadas.
+- La validación en tenant real de Dynamics 365/Customer Insights/RPA sigue siendo roadmap enterprise
+  real: depende de licencias, ambientes y datos reales.
+
 **Contexto**: el usuario pidió una auditoría de cierre (enfoque D365 CE vs F&O/Contact Center no
 principales, distinción de tipos de práctica, promesa pedagógica honesta, certificaciones retiradas)
 seguida de una reorganización integral de contenido real, no solo recomendaciones. Fase 0 usó 4

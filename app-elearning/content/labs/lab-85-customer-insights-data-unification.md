@@ -32,6 +32,13 @@ Antes de presentar este lab como unificación ejecutada, completa el gate **Cust
 Data** del recurso `/recursos/d365-tenant-readiness`. Sin Customer Insights - Data habilitado y
 fuentes conectadas, la entrega es **Simulado**.
 
+## Requisitos no funcionales
+
+- **Calidad de datos:** define umbrales que detienen la activación si la unificación no es confiable.
+- **Privacidad:** cada fuente declara propósito, retención y base de consentimiento o interés legítimo.
+- **Gobernanza:** los matches ambiguos tienen owner y cola de revisión manual.
+- **Operación:** las fuentes atrasadas, duplicados y perfiles incompletos generan acción correctiva.
+
 ## Pasos detallados
 
 ### Paso 1 — Fuentes
@@ -109,6 +116,12 @@ Aprobación: mínimo 65/100 y ningún criterio en nivel 0.
 Diseña una regla de supresión: un perfil que cumple el criterio del segmento pero que, por una señal
 de gobierno de datos (ej. solicitud de baja reciente), debe excluirse igual de la activación.
 Documenta cómo se resuelve el conflicto entre "califica por segmento" y "debe excluirse por gobierno".
+
+## Solución de referencia
+
+Después de completar tu intento, compara tu diseño con
+[Soluciones de Referencia para Capstones](/recursos/soluciones-referencia-capstones#lab-085--customer-insights-data).
+Enfócate en reglas de matching, umbrales de activación y gobierno de datos.
 
 ## Competencias desarrolladas
 

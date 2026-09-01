@@ -1,16 +1,16 @@
-# Graph Report - PlanEstudio  (2026-08-24)
+# Graph Report - PlanEstudio  (2026-09-01)
 
 ## Corpus Check
-- 474 files · ~801,096 words
+- 485 files · ~816,155 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 6514 nodes · 7980 edges · 453 communities (428 shown, 25 thin omitted)
+- 6632 nodes · 8012 edges · 465 communities (438 shown, 27 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 4 edges (avg confidence: 0.65)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c601b954`
+- Built from commit: `05e9a479`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -402,8 +402,8 @@
 - 🚀 Cómo Usar Este Plan
 - 🚨 Señales de Alerta y Cómo Resolverlas
 - NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365
-- NIVEL 3: AVANZADO — Power Platform & Dynamics 365
-- Preguntas de entrevista
+- 3. Reference Architectures
+- NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365
 - Respuestas tecnicas ampliadas por perfil
 - Portafolio RPA y empleabilidad honesta
 - Protocolo de validación en tenant para RPA
@@ -450,40 +450,50 @@
 - protocolo_tenant.md
 - NIVEL_5_IA.md
 - NIVEL_6_D365.md
-- review-date.ts
-- Plantillas minimas de entrega
 - Preguntas de entrevista
-- 6. Scripts pac CLI de referencia
 - 1. Estrategia de Ambientes
+- 8. Environment Variables — Gestión por ambiente
+- react
+- Servicios Profesionales
+- NIVEL 3: AVANZADO — Power Platform & Dynamics 365
+- @radix-ui/react-dialog
+- page.tsx
+- @radix-ui/react-slot
+- 5. Integración con Power Automate
+- page.tsx
+- questions-parser-validation.test.ts
+- @radix-ui/react-dialog
+- @radix-ui/react-slot
+- @radix-ui/react-tooltip
 
 ## God Nodes (most connected - your core abstractions)
-1. `cn()` - 63 edges
-2. `Button` - 41 edges
-3. `useProgressStore` - 41 edges
-4. `Badge()` - 35 edges
-5. `getAllLabs()` - 35 edges
-6. `🎯 PLAN MAESTRO: De Básico a Arquitecto en Microsoft Power Platform y Dynamics 365` - 32 edges
-7. `PlanEstudio — Estado de sprints post-auditoría (handoff)` - 27 edges
-8. `LevelId` - 24 edges
-9. `Lab 02 — Dataverse: Modelo de Datos para un Sistema de Solicitudes Internas` - 23 edges
-10. `GLOSARIO DE TÉRMINOS — Power Platform & Dynamics 365` - 23 edges
+1. `cn()` - 60 edges
+2. `useProgressStore` - 39 edges
+3. `Button` - 37 edges
+4. `🎯 PLAN MAESTRO: De Básico a Arquitecto en Microsoft Power Platform y Dynamics 365` - 32 edges
+5. `getAllLabs()` - 30 edges
+6. `Badge()` - 30 edges
+7. `PlanEstudio — Estado de sprints post-auditoría (handoff)` - 28 edges
+8. `Lab 02 — Dataverse: Modelo de Datos para un Sistema de Solicitudes Internas` - 23 edges
+9. `GLOSARIO DE TÉRMINOS — Power Platform & Dynamics 365` - 23 edges
+10. `Lab 04 — Model-Driven App: Sistema Completo de Gestión de Solicitudes SIT` - 22 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `generateStaticParams()` --calls--> `getAllLabs()`  [EXTRACTED]
-  app-elearning/src/app/labs/[slug]/page.tsx → app-elearning/src/lib/content.ts
-- `generateMetadata()` --calls--> `getLevelById()`  [EXTRACTED]
-  app-elearning/src/app/nivel/[level]/page.tsx → app-elearning/src/lib/content.ts
-- `LevelPage()` --calls--> `getLevelById()`  [EXTRACTED]
-  app-elearning/src/app/nivel/[level]/page.tsx → app-elearning/src/lib/content.ts
-- `generateStaticParams()` --calls--> `getAllInteractivePractices()`  [EXTRACTED]
-  app-elearning/src/app/practica/[slug]/page.tsx → app-elearning/src/lib/interactive-practices.ts
-- `StatusIndicator()` --calls--> `cn()`  [EXTRACTED]
-  app-elearning/src/app/preparar-entorno/preparar-entorno-client.tsx → app-elearning/src/lib/utils.ts
+- `LaborProfile` --references--> `ProfessionalRouteSlug`  [EXTRACTED]
+  app-elearning/src/lib/labor-profiles.ts → app-elearning/src/lib/professional-routes.ts
+- `LabCompleteButton()` --calls--> `useProgressStore`  [EXTRACTED]
+  app-elearning/src/components/labs/lab-complete-button.tsx → app-elearning/src/lib/progress.ts
+- `MessageList()` --calls--> `cn()`  [EXTRACTED]
+  app-elearning/src/components/practices/practice-workspace-client.tsx → app-elearning/src/lib/utils.ts
+- `FilterChips()` --calls--> `cn()`  [EXTRACTED]
+  app-elearning/src/components/practices/practices-client.tsx → app-elearning/src/lib/utils.ts
+- `calculatePracticeCounts()` --indirect_call--> `review()`  [INFERRED]
+  app-elearning/src/lib/practice-progress.ts → app-elearning/src/lib/__tests__/practice-progress.test.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (453 total, 25 thin omitted)
+## Communities (465 total, 27 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.04
@@ -491,91 +501,91 @@ Nodes (48): Checklist final, Componentes del CoE Starter Kit, Crear el ambiente 
 
 ### Community 1 - "Community 1"
 Cohesion: 0.06
-Nodes (58): WorkstationPreviewSection(), metadata, PrepararEntornoClient(), requirementBadge(), StatusIndicator(), ToolActions(), ToolCard(), ToolRow() (+50 more)
+Nodes (60): WorkstationPreviewSection(), metadata, PrepararEntornoClient(), requirementBadge(), ToolActions(), ToolCard(), ToolRow(), WorkstationReportImport() (+52 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.08
-Nodes (45): LEVEL_ACCENT, ReadinessStatus, STATUS_CONFIG, AppShellProps, contextClassName(), contextLabel(), LEVEL_LABELS, SearchBar() (+37 more)
+Nodes (43): contextClassName(), contextLabel(), LEVEL_LABELS, SearchBar(), SearchHit, TYPE_CONFIG, PracticePortabilityPanel(), getLastPractice() (+35 more)
 
 ### Community 3 - "Community 3"
-Cohesion: 0.08
-Nodes (35): FEATURED_ARTIFACTS, LabsPage(), metadata, LabCardStatus(), LabCardStatusProps, CERT_VARIANT, DIFFICULTY_ORDER, DOMAIN_ORDER (+27 more)
+Cohesion: 0.20
+Nodes (16): Preview, applyRetentionImport(), corruptPreview(), createRetentionExport(), emptyPreview(), findDangerousKey(), parseRetentionImportText(), retentionBackupFileName() (+8 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.09
-Nodes (29): PRACTICE_ACCOUNTS, PracticeAccount, PRACTICE_PRODUCTS, PracticeProduct, PRACTICE_REQUESTS, PracticeRequest, arraysEqual(), BaseInteractivePractice (+21 more)
+Cohesion: 0.08
+Nodes (41): main(), PRACTICE_ACCOUNTS, PracticeAccount, PRACTICE_PRODUCTS, PracticeProduct, PRACTICE_REQUESTS, PracticeRequest, arraysEqual() (+33 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.09
-Nodes (38): addExternalReviewToRecord(), ASSESSMENT_MULTIPLIER, AssessmentLevel, buildSelfAssessment(), canCompletePractice(), createAttempt(), createPracticeRecord(), CRITICAL_FAILURE_OPTIONS (+30 more)
+Nodes (38): PracticeDomainProgress(), PracticeWorkspaceClient(), addExternalReviewToRecord(), ASSESSMENT_MULTIPLIER, buildSelfAssessment(), calculatePracticeCounts(), canCompletePractice(), createAttempt() (+30 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.12
-Nodes (31): InteractivePracticeSummary(), buildImportResult(), cloneRecord(), createInteractivePracticeProgressExport(), createInteractivePracticeRecord(), earliestIso(), getInteractivePracticeReviewQueue(), InteractivePracticeEvent (+23 more)
+Cohesion: 0.13
+Nodes (29): InteractivePracticeSummary(), buildImportResult(), cloneRecord(), createInteractivePracticeProgressExport(), createInteractivePracticeRecord(), earliestIso(), getInteractivePracticeReviewQueue(), InteractivePracticeEvent (+21 more)
 
 ### Community 7 - "Community 7"
-Cohesion: 0.09
-Nodes (46): applyPracticeImport(), canonicalReviewForComparison(), corruptPreview(), corruptReviewPreview(), createEvidencePackage(), createPracticeProgressExport(), createReviewTemplate(), emptyPreview() (+38 more)
+Cohesion: 0.08
+Nodes (51): Preview, applyPracticeImport(), canonicalReviewForComparison(), corruptPreview(), corruptReviewPreview(), createEvidencePackage(), createPracticeProgressExport(), createReviewTemplate() (+43 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.10
-Nodes (31): formatTime(), PanelState, QuizPanel(), QuizPanelProps, QuizResult(), SimulatorClient(), SimulatorClientProps, SimulatorState (+23 more)
+Cohesion: 0.11
+Nodes (38): clearQuizDraft(), DraftPanelState, formatTime(), PanelState, questionFingerprint(), QuizDraft, quizDraftKey(), QuizPanel() (+30 more)
 
 ### Community 9 - "Community 9"
-Cohesion: 0.09
-Nodes (20): FeedbackPanel(), FlowEngine(), initialAnswer(), InteractiveExercise(), InteractivePracticeClientProps, masteryClass(), masteryLabel(), PracticeFeedbackPanel() (+12 more)
+Cohesion: 0.14
+Nodes (8): initialAnswer(), InteractiveExercise(), InteractivePracticeClientProps, masteryClass(), masteryLabel(), PracticeFeedbackPanel(), PracticeListButton(), safeParseFeedback()
 
 ### Community 10 - "Community 10"
-Cohesion: 0.07
-Nodes (33): ChoiceGroup(), metadata, assetHref(), Mode, MODES, REQUESTS, RpaPortalSandboxClient(), CertificateNameDialogProps (+25 more)
+Cohesion: 0.33
+Nodes (6): Auditoría, Purview y soporte operativo, CoE moderno, DLP, seguridad y acceso, Licensing, capacity y Managed Environments, PPAC y ambientes, Preguntas de entrevista
 
 ### Community 11 - "Community 11"
-Cohesion: 0.04
-Nodes (48): 10. Analytics y Mejora Continua, 11. Integración con D365 Customer Service (Omnichannel), 12. Casos de Uso por Industria, 1. Conceptos Fundamentales, 2. Crear el Primer Agente, 3. Topics — Unidad de Conversación, 4. Variables y Entidades, 5. Integración con Power Automate (+40 more)
+Cohesion: 0.09
+Nodes (22): 10. Analytics y Mejora Continua, 11. Integración con D365 Customer Service (Omnichannel), 2. Crear el Primer Agente, 6. Generative AI y Knowledge Sources, 7. Autenticación y SSO, 9. Adaptive Cards, Arquitectura completa bot + agentes humanos, Configuración esencial post-creación (+14 more)
 
 ### Community 12 - "Community 12"
-Cohesion: 0.11
-Nodes (27): CurriculumMapPage(), RouteSummary, metadata, PortfolioPage(), PortfolioClient(), PortfolioProfileData, PortfolioRouteData, ViewMode (+19 more)
+Cohesion: 0.15
+Nodes (18): metadata, PortfolioPage(), PortfolioClient(), PortfolioProfileData, PortfolioRouteData, ViewMode, metadata, ProfessionalRoutesPage() (+10 more)
 
 ### Community 13 - "Community 13"
 Cohesion: 0.07
 Nodes (27): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+19 more)
 
 ### Community 14 - "Community 14"
-Cohesion: 0.09
-Nodes (44): CertificatePage(), generateStaticParams(), generateStaticParams(), DashboardPage(), metadata, ProgressDashboardPage(), LevelReadinessData, generateMetadata() (+36 more)
+Cohesion: 0.10
+Nodes (39): generateMetadata(), generateStaticParams(), PageProps, ResourcePage(), APP_CONTENT_DIR, deriveLabIdFromSlug(), estimateReadingMinutes(), extractModulesFromContent() (+31 more)
 
 ### Community 15 - "Community 15"
 Cohesion: 0.12
-Nodes (27): ASSESSMENT_OPTIONS, assessmentLevelLabel(), attemptLabel(), ExternalReviewPanel(), MessageList(), PracticeAttemptHistory(), PracticeWorkspaceData, ReviewDetailCard() (+19 more)
+Nodes (26): ASSESSMENT_OPTIONS, assessmentLevelLabel(), attemptLabel(), ExternalReviewPanel(), MessageList(), PracticeAttemptHistory(), PracticeWorkspaceData, ReviewDetailCard() (+18 more)
 
 ### Community 16 - "Community 16"
-Cohesion: 0.24
-Nodes (12): main(), MyRoutePage(), InteractivePracticePage(), metadata, evaluateFlow(), evaluateInteractivePractice(), getAllInteractivePractices(), getFixtureSummary() (+4 more)
+Cohesion: 0.13
+Nodes (17): toLocalDayKey(), ReviewSessionSize, ReviewConfidence, INITIAL_STATE, recordDayLog(), ReviewActions, ReviewState, sanitizeCard() (+9 more)
 
 ### Community 17 - "Community 17"
 Cohesion: 0.09
 Nodes (22): assetPackId, company, format, generatedAt, paths, legacyApp, portal, scenario (+14 more)
 
 ### Community 18 - "Community 18"
-Cohesion: 0.11
-Nodes (21): main(), toIsoDate(), getDueReviewItems(), getIncorrectReviewItems(), getLeechItems(), groupReinforcementByModule(), interleaveByModule(), isQuestionEligibleForReview() (+13 more)
+Cohesion: 0.23
+Nodes (9): PageProps, ProfessionalRouteDetailPage(), STATUS_SHORT_LABEL, STATUS_VARIANT, RouteReadinessCard(), getRouteReadinessTargets(), computeRouteReadiness(), RouteReadinessResult (+1 more)
 
 ### Community 19 - "Community 19"
 Cohesion: 0.08
-Nodes (41): metadata, PracticalExperiencePage(), generateMetadata(), generateStaticParams(), PracticeDetailPage(), Props, splitSolution(), APP_CONTENT_DIR (+33 more)
+Nodes (44): metadata, PracticalExperiencePage(), generateMetadata(), generateStaticParams(), PracticeDetailPage(), Props, splitSolution(), DashboardPage() (+36 more)
 
 ### Community 20 - "Community 20"
 Cohesion: 0.10
-Nodes (29): main(), BEGINNER_MINIMUM, CATEGORY_STYLE, ChecklistClient(), ChecklistClientProps, ChecklistFilter, ChecklistRow(), FILTER_LABEL (+21 more)
+Nodes (29): main(), BEGINNER_MINIMUM, CATEGORY_STYLE, ChecklistClient(), ChecklistClientProps, ChecklistFilter, FILTER_LABEL, findInitialModule() (+21 more)
 
 ### Community 21 - "Community 21"
 Cohesion: 0.17
 Nodes (20): build(), crc32(), csv(), customers, dosDateTime(), ensureDir(), products, regions (+12 more)
 
 ### Community 22 - "Community 22"
-Cohesion: 0.05
-Nodes (42): Agregar nuevos módulos, Agregar preguntas al banco, App Next.js (superficie principal), Arquitectura del repositorio, CI/CD, Comandos de la app, Ejecutar localmente, Laboratorios (+34 more)
+Cohesion: 0.04
+Nodes (43): Agregar nuevos módulos, Agregar preguntas al banco, App Next.js (superficie principal), Arquitectura del repositorio, CI/CD, Comandos de la app, Ejecutar localmente, Laboratorios (+35 more)
 
 ### Community 23 - "Community 23"
 Cohesion: 0.10
@@ -602,8 +612,8 @@ Cohesion: 0.06
 Nodes (35): devDependencies, cross-env, eslint, eslint-config-next, jsdom, @playwright/test, tailwindcss, @tailwindcss/typography (+27 more)
 
 ### Community 29 - "Community 29"
-Cohesion: 0.14
-Nodes (13): COVERAGE_STATES, CoverageState, EVIDENCE_TYPES, EvidenceType, PRACTICE_DIFFICULTIES, PRACTICE_DOMAINS, PRACTICE_HINT_LEVEL_LABELS, PRACTICE_HINT_LEVELS (+5 more)
+Cohesion: 0.10
+Nodes (20): Actividad (Activity), Caso (Case), Caso guiado — Instituto Técnico Andino (ITA), Cliente, Cola (Queue), Contacto (Contact), Criterio de aprobación, Cuenta (Account) (+12 more)
 
 ### Community 30 - "Community 30"
 Cohesion: 0.04
@@ -622,16 +632,16 @@ Cohesion: 0.14
 Nodes (13): ctx, __dirname, errors, escapeStr(), INPUT, literal, moduleBlocks, moduleIds (+5 more)
 
 ### Community 34 - "Community 34"
-Cohesion: 0.21
-Nodes (12): generateMetadata(), generateStaticParams(), InteractivePracticeDetailPage(), Props, InteractivePracticeClient(), DEFAULT_INTERACTIVE_PRACTICE_FILTERS, filterInteractivePractices(), hasActiveInteractivePracticeFilters() (+4 more)
+Cohesion: 0.22
+Nodes (11): metadata, MyRoutePage(), InteractivePracticePage(), metadata, generateMetadata(), generateStaticParams(), InteractivePracticeDetailPage(), Props (+3 more)
 
 ### Community 37 - "Community 37"
 Cohesion: 0.19
 Nodes (11): args, __dirname, docsNiveles, estimateMinutes(), filterIds, LEVELS, outputBase, repoRoot (+3 more)
 
 ### Community 39 - "review-scheduler.ts"
-Cohesion: 0.06
-Nodes (41): CertificateClient(), CertificateClientProps, PageProps, BASICO_LABS, BASICO_MODULES, localStorageMock, replaceMock, LEVEL_CONFIG (+33 more)
+Cohesion: 0.33
+Nodes (5): Criterio de aprobación, Cómo leer "Duración o expiración: según oferta vigente de Microsoft", Errores comunes, Matriz de entornos y trials por ruta, Regla general de integración entre productos
 
 ### Community 40 - "Community 40"
 Cohesion: 0.31
@@ -642,8 +652,8 @@ Cohesion: 0.04
 Nodes (46): Checklist final, Componentes del CoE Starter Kit, Crear el ambiente dedicado para el CoE antes de empezar, Datos de apoyo, Duración estimada, Ejercicio 1 — Preparar el ambiente y descargar el kit, Ejercicio 2 — Instalar el componente Core, Ejercicio 3 — Power BI Dashboard: análisis del inventario (+38 more)
 
 ### Community 42 - "review-queue.ts"
-Cohesion: 0.08
-Nodes (49): AvailabilitySelector(), DiagnosticPanel(), labelRequirement(), MyRouteClient(), pickRecommendedRoutes(), metadata, GuidedDashboardSummary(), GuidedHomeClient() (+41 more)
+Cohesion: 0.09
+Nodes (49): AvailabilitySelector(), DiagnosticPanel(), labelRequirement(), MyRouteClient(), pickRecommendedRoutes(), RouteSummary, GuidedDashboardSummary(), GuidedHomeClient() (+41 more)
 
 ### Community 43 - "validateExternalReviewPayload"
 Cohesion: 0.04
@@ -670,8 +680,8 @@ Cohesion: 0.09
 Nodes (21): Competencias desarrolladas, Criterios de aprobación, Datos de prueba, Errores comunes, Escenario de negocio, Evidencia esperada, Herramientas necesarias, Lab 59 — Field Service: Work Order, Evidencia Móvil y UAT de Servicio en Campo (+13 more)
 
 ### Community 49 - "questions-parser.ts"
-Cohesion: 0.09
-Nodes (33): CERT_VARIANT, generateMetadata(), generateStaticParams(), LabDetailPage(), LEVEL_BAR, Props, generateMetadata(), LEVEL_BADGE (+25 more)
+Cohesion: 0.10
+Nodes (20): metadata, ReviewPage(), metadata, SimulatorPage(), MODULE_QUESTIONS, QuestionType, RawQuestion, ContentValidationError (+12 more)
 
 ### Community 50 - "Community 50"
 Cohesion: 0.43
@@ -682,8 +692,8 @@ Cohesion: 0.06
 Nodes (35): dependencies, autoprefixer, class-variance-authority, clsx, flexsearch, lucide-react, mermaid, next-themes (+27 more)
 
 ### Community 52 - "domain-hubs.ts"
-Cohesion: 0.05
-Nodes (43): FIRST_SESSION, metadata, STEPS, Dynamics365HubPage(), metadata, IntegrationHubPage(), metadata, LEGEND (+35 more)
+Cohesion: 0.09
+Nodes (28): generateMetadata(), generateStaticParams(), LEVEL_BADGE, ModulePage(), PageProps, generateMetadata(), generateStaticParams(), LEVEL_ACCENT (+20 more)
 
 ### Community 53 - "Community 53"
 Cohesion: 0.40
@@ -702,8 +712,8 @@ Cohesion: 0.09
 Nodes (21): 1. Identificación de procesos ERP vs. CRM, 2. Mapa de integración con dirección de dual-write, 3. Nota conceptual de Data Management Framework, 3b. Decisión dual-write vs. DMF vs. virtual tables, 4. Matriz de riesgos, 5. Documento ejecutivo, Alcance del proyecto, Competencias desarrolladas (+13 more)
 
 ### Community 64 - "questions-parser-validation.test.ts"
-Cohesion: 0.22
-Nodes (5): MODULE_QUESTIONS, QuestionType, RawQuestion, mockQuestions, VALID_QUESTION
+Cohesion: 0.10
+Nodes (26): main(), RetentionPortabilityPanel(), CONFIDENCE_LABELS, ModuleLink, PanelView, toIsoDate(), getDueReviewItems(), getIncorrectReviewItems() (+18 more)
 
 ### Community 65 - "Lab 67 — Customer Insights - Data: Unificación de Perfiles y Customer 360"
 Cohesion: 0.09
@@ -754,8 +764,8 @@ Cohesion: 0.12
 Nodes (15): Competencias desarrolladas, Escenario de negocio, Evidencia esperada, Gate de ambiente real, Herramientas necesarias, Lab 81 — Sales Forecasting & Pipeline Review, Objetivo, Paso 1 — Modelo de etapas (+7 more)
 
 ### Community 77 - "Lab 90 — Capstone Enterprise D365"
-Cohesion: 0.12
-Nodes (15): Competencias desarrolladas, Escenario de negocio, Evidencia esperada, Gate de ambiente real, Lab 90 — Capstone Enterprise D365, Objetivo, Paso 1 — Flujo end-to-end, Paso 2 — Arquitectura (+7 more)
+Cohesion: 0.11
+Nodes (18): Competencias desarrolladas, Errores comunes, Escenario de negocio, Evidencia esperada, Gate de ambiente real, Lab 90 — Capstone Enterprise D365, Objetivo, Paso 1 — Flujo end-to-end (+10 more)
 
 ### Community 78 - "Lab 93 — F&O Finance Setup Walkthrough"
 Cohesion: 0.12
@@ -786,8 +796,8 @@ Cohesion: 0.13
 Nodes (14): Competencias desarrolladas, Escenario de negocio, Evidencia esperada, Gate de ambiente real, Lab 82 — Customer Service SLA + Entitlements + Routing, Objetivo, Paso 1 — Catálogo de casos, Paso 2 — Entitlements (+6 more)
 
 ### Community 85 - "Lab 85 — Customer Insights Data Unification"
-Cohesion: 0.13
-Nodes (14): Competencias desarrolladas, Escenario de negocio, Evidencia esperada, Gate de ambiente real, Lab 85 — Customer Insights Data Unification, Objetivo, Paso 1 — Fuentes, Paso 2 — Matching (+6 more)
+Cohesion: 0.11
+Nodes (17): Competencias desarrolladas, Errores comunes, Escenario de negocio, Evidencia esperada, Gate de ambiente real, Lab 85 — Customer Insights Data Unification, Objetivo, Paso 1 — Fuentes (+9 more)
 
 ### Community 86 - "Community 86"
 Cohesion: 0.05
@@ -802,8 +812,8 @@ Cohesion: 0.05
 Nodes (36): 10. Monitoreo de Flujos en Producción, 1. Estrategia de Ambientes, 2. Soluciones — Mejores Prácticas, 3. Branching Strategy, 4. Pipeline CI — Azure DevOps, 5. Pipeline CD — GitHub Actions, 6. Scripts pac CLI de referencia, 7. Connection References — Setup en nuevo ambiente (+28 more)
 
 ### Community 89 - "Community 89"
-Cohesion: 0.07
-Nodes (27): Adaptive Card para Copilot Studio / Teams, Azure DevOps Pipeline completo, Comandos pac CLI para PCF, Estructura básica, FetchXML — consultas a Dataverse, Funciones de texto, Fórmulas esenciales, GitHub Actions para Power Platform (+19 more)
+Cohesion: 0.05
+Nodes (37): Adaptive Card para Copilot Studio / Teams, Azure DevOps Pipeline completo, C#, CALCULATE — el corazón de DAX, Comandos pac CLI para PCF, DAX, Entity Reference y relaciones, Estructura básica (+29 more)
 
 ### Community 90 - "Community 90"
 Cohesion: 0.06
@@ -811,11 +821,11 @@ Nodes (31): 👨‍💻 Actividad Práctica: Procesar una tarjeta de presentaci�
 
 ### Community 91 - "Community 91"
 Cohesion: 0.07
-Nodes (28): Criterios de validación, Decisiones que debes tomar, Entregables, Errores comunes, Escenario de negocio, Herramientas necesarias, Lab 79 — JR-009: Technical Interview Simulation, Objetivo (+20 more)
+Nodes (29): Criterios de validación, Decisiones que debes tomar, Entregables, Errores comunes, Escenario de negocio, Herramientas necesarias, Lab 79 — JR-009: Technical Interview Simulation, Objetivo (+21 more)
 
 ### Community 92 - "Community 92"
-Cohesion: 0.12
-Nodes (16): Alineacion tecnica actual, Brechas criticas, Checklist antes de aplicar, Criterio de profundidad de esta ruta, Enfoque moderno de migracion, Evidencia de portafolio, Labs Job-Ready disponibles, Mapeo a contenido actual (+8 more)
+Cohesion: 0.07
+Nodes (28): 1. Assessment brief, 2. Mapping workbook, 3. Staging y control de errores, 4. Reconciliation report, 5. Cutover runbook, Alineacion tecnica actual, Brechas criticas, Checklist antes de aplicar (+20 more)
 
 ### Community 93 - "Community 93"
 Cohesion: 0.08
@@ -850,16 +860,16 @@ Cohesion: 0.08
 Nodes (25): Competencias desarrolladas, Criterios de aprobación, Datos de prueba, Diferencia con el Lab 82, Errores comunes, Escenario de negocio, Evidencia esperada, Herramientas necesarias (+17 more)
 
 ### Community 115 - "review-scheduler.ts"
-Cohesion: 0.08
-Nodes (25): CASO-EDU-01: Plataforma de admisiones universitaria, CASO-ENE-01: Gestión de activos de red eléctrica, CASO-FIN-01: Automatización de aprobación de créditos, CASO-FIN-02: Detección de fraude en tiempo real, CASO-FIN-03: Conciliación bancaria automatizada, CASO-GOB-01: Sistema de PQRS ciudadanas, CASO-GOB-02: Control de contratos gubernamentales, CASO-MAN-01: Control de calidad en línea de producción (+17 more)
+Cohesion: 0.07
+Nodes (29): CASO-EDU-01: Plataforma de admisiones universitaria, CASO-ENE-01: Gestión de activos de red eléctrica, CASO-FIN-01: Automatización de aprobación de créditos, CASO-FIN-02: Detección de fraude en tiempo real, CASO-FIN-03: Conciliación bancaria automatizada, CASO-GOB-01: Sistema de PQRS ciudadanas, CASO-GOB-02: Control de contratos gubernamentales, CASO-MAN-01: Control de calidad en línea de producción (+21 more)
 
 ### Community 116 - "Roadmap de Especialización Avanzada Dynamics 365"
 Cohesion: 0.14
 Nodes (14): 1. Ruta Expert Customer Service / Contact Center, 2. Ruta Expert Sales Operations, 3. Ruta F&O Practitioner / Architect Track, 4. Ruta Business Applications Architect Enterprise, Capstone implementado: Enterprise D365, Cómo una ruta de este roadmap se "gradúa" a ruta profesional real, Laboratorio implementado: Contact Center Chat Channel Hands-On, Laboratorio implementado: Forecasting & Pipeline Review (+6 more)
 
 ### Community 117 - "Lab 84 — Customer Insights Real-Time Journey"
-Cohesion: 0.15
-Nodes (12): Competencias desarrolladas, Escenario de negocio, Evidencia esperada, Gate de ambiente real, Lab 84 — Customer Insights Real-Time Journey, Objetivo, Paso 1 — Trigger, Paso 2 — Consentimiento (+4 more)
+Cohesion: 0.12
+Nodes (15): Competencias desarrolladas, Errores comunes, Escenario de negocio, Evidencia esperada, Gate de ambiente real, Lab 84 — Customer Insights Real-Time Journey, Objetivo, Paso 1 — Trigger (+7 more)
 
 ### Community 118 - "Lab 86 — Field Service Agreement + Preventive Maintenance"
 Cohesion: 0.15
@@ -931,7 +941,7 @@ Nodes (12): 🏆 Hitos de Nivel RPA, Módulo 67: Fundamentos de RPA y Selección
 
 ### Community 135 - "56-fundamentos-javascript-para-power-platform.md"
 Cohesion: 0.18
-Nodes (10): Actividad 76.1: Variables, funciones y objetos en la consola del navegador, Actividad 76.2: Arrays y recorridos, como una lista de registros de Dataverse, Actividad 76.3: Simular una promesa, como una llamada a la Web API, 👨‍💻 Actividades Prácticas Paso a Paso, ✅ Buenas Prácticas, 💼 Caso Real de Negocio, 📖 Conceptos Clave, 🧪 Criterios de Validación (+2 more)
+Nodes (10): Actividad 56.1: Variables, funciones y objetos en la consola del navegador, Actividad 56.2: Arrays y recorridos, como una lista de registros de Dataverse, Actividad 56.3: Simular una promesa, como una llamada a la Web API, 👨‍💻 Actividades Prácticas Paso a Paso, ✅ Buenas Prácticas, 💼 Caso Real de Negocio, 📖 Conceptos Clave, 🧪 Criterios de Validación (+2 more)
 
 ### Community 136 - "🔵 NIVEL 2: INTERMEDIO"
 Cohesion: 0.18
@@ -974,12 +984,8 @@ Cohesion: 0.20
 Nodes (9): Assets reproducibles, Competencias desarrolladas, Criterios de aprobación, Ejercicios, Escenario de negocio, Evidencia esperada, LAB-RPA-08 — Despliegue y operación unattended, Objetivo (+1 more)
 
 ### Community 146 - "RPA Capstone — Automatización end-to-end de un proceso administrativo"
-Cohesion: 0.20
-Nodes (9): Assets reproducibles, Competencias desarrolladas, Criterios de aprobación, Entregables, Escenario de negocio, Fallos críticos, Objetivo, RPA Capstone — Automatización end-to-end de un proceso administrativo (+1 more)
-
-### Community 147 - "layout.tsx"
-Cohesion: 0.29
-Nodes (7): metadata, RootLayout(), AppShell(), ReadingProgress(), ThemeProvider(), getInteractivePracticeSearchDocuments(), getPracticeSearchDocuments()
+Cohesion: 0.18
+Nodes (10): Assets reproducibles, Competencias desarrolladas, Criterios de aprobación, Entregables, Escenario de negocio, Fallos críticos, Objetivo, Reto adicional (+2 more)
 
 ### Community 148 - "topbar.tsx"
 Cohesion: 0.08
@@ -1046,8 +1052,8 @@ Cohesion: 0.09
 Nodes (22): 1. Especificación humana del cambio, 2. Auditoría de prompts, 3. Implementación y diff generado, 4. Evidencia de CI, 5. Revisión humana del diff, 6. Matriz de riesgos de IA del cambio, 7. Resumen ejecutivo del ciclo, Alcance del proyecto (+14 more)
 
 ### Community 164 - "Rutas Job-Ready propuestas"
-Cohesion: 0.29
-Nodes (7): Ruta CRM Legacy & Cloud Migration, Ruta Job-Ready Dynamics 365 CRM Developer, Ruta Job-Ready Dynamics 365 CRM Functional Specialist, Ruta Job-Ready Power Platform Admin / Governance, Ruta Job-Ready Power Platform Developer, Ruta Technical English & Interview Readiness, Rutas Job-Ready propuestas
+Cohesion: 0.13
+Nodes (14): 1. TypeScript = JavaScript + tipos, 2. React — lo mínimo para un componente PCF/Code App, 3. Práctica — proyecto Vite local (sin Dataverse), Componente funcional + JSX/TSX, Criterio de aprobación, Errores comunes, Estado con `useState`, Fundamentos de TypeScript y React para PCF — antes del Módulo 27 (+6 more)
 
 ### Community 165 - "Preguntas de entrevista"
 Cohesion: 0.09
@@ -1058,8 +1064,8 @@ Cohesion: 0.09
 Nodes (23): A, B, C, D, E, F, G, GLOSARIO DE TÉRMINOS — Power Platform & Dynamics 365 (+15 more)
 
 ### Community 168 - "react"
-Cohesion: 0.67
-Nodes (3): react, extractText(), react
+Cohesion: 0.06
+Nodes (40): ChoiceGroup(), ExecutionModeBadge(), StatusIndicator(), metadata, assetHref(), Mode, MODES, REQUESTS (+32 more)
 
 ### Community 169 - "checklist.test.ts"
 Cohesion: 0.09
@@ -1073,9 +1079,13 @@ Nodes (21): Criterios de validación, Datos de prueba, Decisiones que debes toma
 Cohesion: 0.09
 Nodes (21): Criterios de validación, Datos de prueba (muestra del origen legacy), Decisiones que debes tomar, Entregables, Errores comunes, Escenario de negocio, Herramientas necesarias, Lab 75 — JR-005: Data Migration to Dynamics 365 (+13 more)
 
+### Community 172 - "gray-matter"
+Cohesion: 0.07
+Nodes (35): FEATURED_ARTIFACTS, LabsPage(), metadata, CERT_VARIANT, LabDetailPage(), LEVEL_BAR, Props, CERT_VARIANT (+27 more)
+
 ### Community 173 - "lucide-react"
 Cohesion: 0.09
-Nodes (21): Criterios de validación, Datos de prueba, Decisiones que debes tomar, Entregables, Errores comunes, Escenario de negocio, Herramientas necesarias, Lab 77 — JR-007: Customer Service Specialist Job Simulation (+13 more)
+Nodes (22): Criterios de validación, Datos de prueba, Decisiones que debes tomar, Entregables, Errores comunes, Escenario de negocio, Herramientas necesarias, Lab 77 — JR-007: Customer Service Specialist Job Simulation (+14 more)
 
 ### Community 174 - "mermaid"
 Cohesion: 0.09
@@ -1113,17 +1123,29 @@ Nodes (20): Contrato de API (dato de prueba), Criterios de validación, Decision
 Cohesion: 0.10
 Nodes (20): Criterios de validación, Datos de prueba (inventario simulado), Decisiones que debes tomar, Entregables, Errores comunes, Escenario de negocio, Herramientas necesarias, Lab 76 — JR-006: PPAC Governance Assessment (+12 more)
 
+### Community 185 - "rehype-highlight"
+Cohesion: 0.14
+Nodes (13): 1. ¿Qué es C# y qué es .NET?, 2. Lo mínimo de sintaxis que un plugin usa, 3. Práctica — proyecto de consola local (sin Dataverse), `async`/`await` (lo vas a ver, no lo vas a escribir en plugins síncronos), Clases y métodos, Criterio de aprobación, Errores comunes, Excepciones (`try`/`catch`) (+5 more)
+
+### Community 186 - "rehype-raw"
+Cohesion: 0.22
+Nodes (8): 1. Las piezas, de afuera hacia adentro, 2. Los 4 tipos de ambiente que vas a encontrar en este plan, 3. Ejercicio de identificación (antes de seguir al Módulo 1), Criterio de aprobación, Errores comunes, Objetivo, Ruta cero absoluta — antes del Módulo 1, Siguiente paso
+
 ### Community 187 - "rehype-slug"
 Cohesion: 0.10
 Nodes (20): Criterios de validación, Datos de prueba (inventario recolectado en la reunión inicial), Decisiones que debes tomar, Entregables, Errores comunes, Escenario de negocio, Herramientas necesarias, Lab 78 — JR-008: CRM Legacy Health Assessment (+12 more)
+
+### Community 189 - "tailwind-merge"
+Cohesion: 0.32
+Nodes (11): RetentionSummary(), RetentionTodayCard(), ReviewSessionClient(), addDays(), getReviewNow(), isDueOn(), localDaysBetween(), parseIsoDate() (+3 more)
 
 ### Community 190 - "zustand"
 Cohesion: 0.10
 Nodes (20): 👨‍💻 Actividades Prácticas, ✅ Buenas Prácticas, 💼 Caso Real de Negocio, 📖 Conceptos Clave, 🧪 Criterios de Validación, ⚠️ Errores Comunes, 📸 Evidencia para guardar, 📚 Mini-glosario antes de abrir Power BI (+12 more)
 
 ### Community 191 - "progress.test.ts"
-Cohesion: 0.07
-Nodes (27): 1. Governance assessment, 2. Matriz de ambientes, 3. Registro de excepciones DLP, 4. Runbook de incidente, Alineación técnica actual, Auditoría, Purview y soporte operativo, Brechas críticas, Checklist antes de aplicar (+19 more)
+Cohesion: 0.10
+Nodes (21): 1. Governance assessment, 2. Matriz de ambientes, 3. Registro de excepciones DLP, 4. Runbook de incidente, Alineación técnica actual, Brechas críticas, Checklist antes de aplicar, Criterio de profundidad de esta ruta (+13 more)
 
 ### Community 192 - "File Map"
 Cohesion: 0.10
@@ -1187,7 +1209,7 @@ Nodes (16): Before Making Changes, CI/CD, Code Snippets Style, Content: Heading 
 
 ### Community 207 - "Lab 102 — JR-014: Dynamics 365 Sales — Lead-to-Cash Job Test"
 Cohesion: 0.11
-Nodes (17): Criterios de validación, Entregables, Errores comunes, Escenario de negocio, Formato de la prueba, Herramientas necesarias, Lab 102 — JR-014: Dynamics 365 Sales — Lead-to-Cash Job Test, Nota de alcance (léela antes de empezar) (+9 more)
+Nodes (18): Criterios de validación, Entregables, Errores comunes, Escenario de negocio, Formato de la prueba, Herramientas necesarias, Lab 102 — JR-014: Dynamics 365 Sales — Lead-to-Cash Job Test, Nota de alcance (léela antes de empezar) (+10 more)
 
 ### Community 208 - "03-power-apps-canvas-primeras-aplicaciones.md"
 Cohesion: 0.11
@@ -1198,12 +1220,12 @@ Cohesion: 0.11
 Nodes (17): Actividad 17.1: Modelo de datos CRM-lite, Actividad 17.2: Canvas App — Gestión de Oportunidades, Actividad 17.3: Power Automate — Flujo de aprobación de propuesta, Actividad 17.4: Power BI — Dashboard Pipeline Comercial, Actividad 17.5: Copilot Studio — Bot de Pipeline, Actividad 17.6: ALM — Empaquetar y desplegar, 👨‍💻 Actividades Prácticas Paso a Paso, Auto-evaluación de Dominio (+9 more)
 
 ### Community 210 - "workstation-store.ts"
-Cohesion: 0.24
-Nodes (8): EmployabilityPage(), metadata, STEP_ICONS, EmployabilityHub, EmployabilityLink, EmployabilitySection, EmployabilityStep, getEmployabilityHub()
+Cohesion: 0.05
+Nodes (51): CertificateClient(), CertificateClientProps, CertificatePage(), PageProps, BASICO_LABS, BASICO_MODULES, localStorageMock, replaceMock (+43 more)
 
 ### Community 211 - "ARQUITECTURA EMPRESARIAL — Patrones y Reference Architectures"
-Cohesion: 0.08
-Nodes (24): 1. Principios de Arquitectura, 2. Árbol de Decisiones Arquitectónicas, 4. Anti-Patrones a Evitar, 5. Framework de Toma de Decisiones, 6. Capacity Planning, 7. Non-Functional Requirements (NFRs), 8. Mapa de Madurez de Power Platform, ADRs mínimos para cualquier proyecto (+16 more)
+Cohesion: 0.11
+Nodes (17): 1. Principios de Arquitectura, 2. Árbol de Decisiones Arquitectónicas, 5. Framework de Toma de Decisiones, 6. Capacity Planning, 7. Non-Functional Requirements (NFRs), 8. Mapa de Madurez de Power Platform, ADRs mínimos para cualquier proyecto, ARQUITECTURA EMPRESARIAL — Patrones y Reference Architectures (+9 more)
 
 ### Community 212 - "🎯 PLAN MAESTRO: De Básico a Arquitecto en Microsoft Power Platform y Dynamics 365"
 Cohesion: 0.11
@@ -1378,8 +1400,8 @@ Cohesion: 0.15
 Nodes (12): Actividad 16.1: Estrategia de ambientes, Actividad 16.2: Connection References y Environment Variables, Actividad 16.3: Security Roles personalizados, Actividad 16.4: DLP Policy, Actividad 16.5: Exportar e importar solución, 👨‍💻 Actividades Prácticas Paso a Paso, ✅ Buenas Prácticas, 💼 Caso Real de Negocio (+4 more)
 
 ### Community 255 - "workstation-report.ts"
-Cohesion: 0.33
-Nodes (6): 3. Reference Architectures, RA-01: CRM para PYME (< 200 usuarios), RA-02: Portal de Autoservicio B2C (clientes externos), RA-03: Integración Enterprise (SAP + Dataverse), RA-04: Analytics Platform (Power BI + Fabric), RA-05: Solución Multinacional (Multi-tenant)
+Cohesion: 0.29
+Nodes (7): Ruta CRM Legacy & Cloud Migration, Ruta Job-Ready Dynamics 365 CRM Developer, Ruta Job-Ready Dynamics 365 CRM Functional Specialist, Ruta Job-Ready Power Platform Admin / Governance, Ruta Job-Ready Power Platform Developer, Ruta Technical English & Interview Readiness, Rutas Job-Ready propuestas
 
 ### Community 256 - "**Módulo 6: Power BI - Reportes y Dashboards Básicos**"
 Cohesion: 0.15
@@ -1474,8 +1496,8 @@ Cohesion: 0.17
 Nodes (11): Actividad 27.1: Dataset PCF — Tabla de tareas personalizada, Actividad 27.2: Actualizar manifest para Dataset PCF, Actividad 27.3: Publicar en solución y agregar a formulario, 👨‍💻 Actividades Prácticas Paso a Paso, 🚧 Antes de comenzar: requiere TypeScript sólido, ✅ Buenas Prácticas, 💼 Caso Real de Negocio, 📖 Conceptos Clave (+3 more)
 
 ### Community 279 - "28-code-apps-con-react-y-typescript.md"
-Cohesion: 0.17
-Nodes (11): Actividad 28.1: Scaffolding y primera Code App, Actividad 28.2: Conectar a Dataverse, Actividad 28.3: CRUD completo con Fluent UI, Actividad 28.4: Despliegue y ALM, 👨‍💻 Actividades Prácticas Paso a Paso, ✅ Buenas Prácticas, 💼 Caso Real de Negocio, 📖 Conceptos Clave (+3 more)
+Cohesion: 0.15
+Nodes (12): Actividad 28.1: Scaffolding y primera Code App, Actividad 28.2: Conectar a Dataverse, Actividad 28.3: CRUD completo con Fluent UI, Actividad 28.4: Despliegue y ALM, 👨‍💻 Actividades Prácticas Paso a Paso, 🚧 Antes de comenzar: es el módulo con más exigencia de código de la ruta Developer, ✅ Buenas Prácticas, 💼 Caso Real de Negocio (+4 more)
 
 ### Community 280 - "14-conectores-personalizados.md"
 Cohesion: 0.17
@@ -1538,8 +1560,8 @@ Cohesion: 0.17
 Nodes (11): MÓDULO 66: Fundamentos de RPA y Selección de Procesos, MÓDULO 67: Entorno, Instalación y Arquitectura PAD, MÓDULO 68: Construcción Mantenible de Desktop Flows, MÓDULO 69: Archivos, CSV y Excel con PAD, MÓDULO 70: Automatización Web con PAD, MÓDULO 71: Aplicaciones Windows y Legacy, MÓDULO 72: Selectores, Sincronización y Resiliencia, MÓDULO 73: Errores, Logging e Idempotencia (+3 more)
 
 ### Community 295 - "Dynamics 365 Tenant Readiness Checklist"
-Cohesion: 0.17
-Nodes (12): CE + F&O / dual-write, Contact Center / Omnichannel, Customer Insights - Data, Customer Insights - Journeys, Customer Service avanzado, Dynamics 365 Tenant Readiness Checklist, Estados permitidos, Field Service (+4 more)
+Cohesion: 0.15
+Nodes (13): CE + F&O / dual-write, Contact Center / Omnichannel, Customer Insights - Data, Customer Insights - Journeys, Customer Service avanzado, Dynamics 365 Tenant Readiness Checklist, Estados permitidos, Field Service (+5 more)
 
 ### Community 296 - "Protocolo de validación en tenant sandbox"
 Cohesion: 0.17
@@ -1794,8 +1816,8 @@ Cohesion: 0.25
 Nodes (8): Auto-evaluación Final, Certificaciones, Criterios de Graduación — Nivel 4 (Solution Architect), Criterios de Liderazgo, Criterios Técnicos, Mensaje Final, NIVEL 4: ARQUITECTO MASTER — Power Platform & Dynamics 365, Resumen del Nivel
 
 ### Community 359 - "Certificaciones vigentes o accionables"
-Cohesion: 0.25
-Nodes (8): Certificaciones vigentes o accionables, MB-230 — Dynamics 365 Customer Service Functional Consultant, MB-310 — Dynamics 365 Finance Functional Consultant Associate, MB-330 — Dynamics 365 Supply Chain Management Functional Consultant Associate, MB-500 — Finance and Operations Apps Developer Associate, PL-200 — Power Platform Functional Consultant, PL-400 — Power Platform Developer Associate, PL-900 — Power Platform Fundamentals
+Cohesion: 0.29
+Nodes (6): Criterio de aprobación, Cómo identificar la categoría de un módulo o lab, Errores comunes, Las 5 categorías, Relación con Finance & Operations y Contact Center, Tipos de práctica en PlanEstudio
 
 ### Community 360 - "Banco de preguntas por perfil"
 Cohesion: 0.25
@@ -1906,8 +1928,8 @@ Cohesion: 0.29
 Nodes (6): Campos, Control, Documento TO-BE, Ejemplo mínimo, Instrucciones, Propósito
 
 ### Community 387 - "4. Anti-Patrones a Evitar"
-Cohesion: 0.20
-Nodes (16): Preview, applyRetentionImport(), corruptPreview(), createRetentionExport(), emptyPreview(), findDangerousKey(), parseRetentionImportText(), retentionBackupFileName() (+8 more)
+Cohesion: 0.29
+Nodes (7): 4. Anti-Patrones a Evitar, Anti-patrón 1: Mega-solución, Anti-patrón 2: Flujos sin manejo de errores, Anti-patrón 3: Datos sensibles en código, Anti-patrón 4: Canvas App que carga toda la tabla, Anti-patrón 5: Plugin que hace demasiado, Anti-patrón 6: DLP solo en producción
 
 ### Community 388 - "🔧 Ejemplo Ejecutable: Pipeline GitHub Actions para ALM de Power Platform"
 Cohesion: 0.29
@@ -1934,8 +1956,8 @@ Cohesion: 0.33
 Nodes (6): Ejercicio 2 — Crear las tablas y columnas, Resultado esperado del Ejercicio 2, Tarea 2.1 — Crear la tabla `sit_Categoria`, Tarea 2.2 — Crear la tabla `sit_Solicitud`, Tarea 2.3 — Crear relaciones (Lookups), Validación del Ejercicio 2
 
 ### Community 394 - "3. Reference Architectures"
-Cohesion: 0.13
-Nodes (17): toLocalDayKey(), ReviewSessionSize, ReviewConfidence, INITIAL_STATE, recordDayLog(), ReviewActions, ReviewState, sanitizeCard() (+9 more)
+Cohesion: 0.07
+Nodes (30): Dynamics365HubPage(), metadata, EmployabilityPage(), metadata, STEP_ICONS, IntegrationHubPage(), metadata, metadata (+22 more)
 
 ### Community 395 - "🛠️ Anexos Especializados"
 Cohesion: 0.33
@@ -1950,16 +1972,16 @@ Cohesion: 0.33
 Nodes (6): "Los ejercicios son muy básicos", "Me pierdo con tanto contenido", "No entiendo para qué sirve esto", "No tengo tiempo", 🚨 Señales de Alerta y Cómo Resolverlas, "Siento que no avanzo"
 
 ### Community 398 - "NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365"
+Cohesion: 0.25
+Nodes (8): Certificaciones vigentes o accionables, MB-230 — Dynamics 365 Customer Service Functional Consultant, MB-310 — Dynamics 365 Finance Functional Consultant Associate, MB-330 — Dynamics 365 Supply Chain Management Functional Consultant Associate, MB-500 — Finance and Operations Apps Developer Associate, PL-200 — Power Platform Functional Consultant, PL-400 — Power Platform Developer Associate, PL-900 — Power Platform Fundamentals
+
+### Community 399 - "3. Reference Architectures"
+Cohesion: 0.33
+Nodes (6): 3. Reference Architectures, RA-01: CRM para PYME (< 200 usuarios), RA-02: Portal de Autoservicio B2C (clientes externos), RA-03: Integración Enterprise (SAP + Dataverse), RA-04: Analytics Platform (Power BI + Fabric), RA-05: Solución Multinacional (Multi-tenant)
+
+### Community 400 - "NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365"
 Cohesion: 0.33
 Nodes (6): Auto-evaluación de Dominio, Criterios de Calidad, Criterios de Graduación — Nivel 2, Criterios Técnicos, NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365, Resumen del Nivel
-
-### Community 399 - "NIVEL 3: AVANZADO — Power Platform & Dynamics 365"
-Cohesion: 0.33
-Nodes (6): Auto-evaluación de Dominio, Criterios de Calidad, Criterios de Graduación — Nivel 3, Criterios Técnicos, NIVEL 3: AVANZADO — Power Platform & Dynamics 365, Resumen del Nivel
-
-### Community 400 - "Preguntas de entrevista"
-Cohesion: 0.27
-Nodes (11): RetentionPortabilityPanel(), RetentionSummary(), RetentionTodayCard(), CONFIDENCE_LABELS, ModuleLink, PanelView, ReviewSessionClient(), getReviewNow() (+3 more)
 
 ### Community 401 - "Respuestas tecnicas ampliadas por perfil"
 Cohesion: 0.33
@@ -2066,8 +2088,8 @@ Cohesion: 0.50
 Nodes (3): Contexto, Criterios de aceptación, Solución de referencia
 
 ### Community 427 - "Servicios Profesionales"
-Cohesion: 0.33
-Nodes (6): CALCULATE — el corazón de DAX, DAX, Inteligencia de tiempo, Medidas fundamentales, Row Level Security (RLS), Variables y contexto
+Cohesion: 0.40
+Nodes (5): 12. Casos de Uso por Industria, Customer Service (externo), RRHH, Soporte IT (más común), Ventas (interno)
 
 ### Community 428 - "📊 Recursos de Seguimiento"
 Cohesion: 0.50
@@ -2125,45 +2147,65 @@ Nodes (3): Comunicacion remota, Reporte de incidente, Update diario
 Cohesion: 0.67
 Nodes (3): Ejemplo: cambio de alcance, Ejemplo: problema tecnico dificil, Respuestas STAR
 
-### Community 447 - "review-date.ts"
-Cohesion: 0.71
-Nodes (5): addDays(), isDueOn(), localDaysBetween(), parseIsoDate(), startOfLocalDay()
+### Community 447 - "Preguntas de entrevista"
+Cohesion: 0.13
+Nodes (17): DEFAULT_INTERACTIVE_PRACTICE_FILTERS, filterInteractivePractices(), hasActiveInteractivePracticeFilters(), InteractivePracticeDomainFilter, InteractivePracticeFilters, InteractivePracticeLevelFilter, InteractivePracticeMasteryFilter, InteractivePracticeTypeFilter (+9 more)
 
-### Community 448 - "Plantillas minimas de entrega"
-Cohesion: 0.33
-Nodes (6): 1. Assessment brief, 2. Mapping workbook, 3. Staging y control de errores, 4. Reconciliation report, 5. Cutover runbook, Plantillas minimas de entrega
+### Community 450 - "1. Estrategia de Ambientes"
+Cohesion: 0.40
+Nodes (5): 8. Canales de Publicación, Microsoft Teams, Omnichannel for Customer Service, Power Pages (portal), Web Chat (iFrame para sitios web)
 
-### Community 449 - "Preguntas de entrevista"
-Cohesion: 0.33
-Nodes (6): CRM legacy / on-prem awareness, Cutover, Dataverse y carga, Migracion de datos, Preguntas de entrevista, Validacion y reconciliacion
+### Community 451 - "8. Environment Variables — Gestión por ambiente"
+Cohesion: 0.20
+Nodes (9): 1. Las piezas, de afuera hacia adentro, 2. El costo, antes de crear nada, 3. Práctica — crear y limpiar un Resource Group, Criterio de aprobación, Errores comunes, Fundamentos de Azure para integraciones de Power Platform, Objetivo, Qué este puente NO cubre (y por qué no bloquea los Módulos 24/34/36) (+1 more)
 
-### Community 450 - "6. Scripts pac CLI de referencia"
+### Community 452 - "react"
 Cohesion: 0.50
-Nodes (4): CASO-SER-01: Gestión de proyectos para firma de consultoría, CASO-SER-02: Portal de cliente para firma de abogados, CASO-SER-03: Automatización de RFP (propuestas comerciales), Servicios Profesionales
+Nodes (4): 1. Conceptos Fundamentales, Arquitectura de un agente, ¿Qué es Copilot Studio?, Tipos de respuestas
 
-### Community 451 - "1. Estrategia de Ambientes"
+### Community 453 - "Servicios Profesionales"
 Cohesion: 0.50
-Nodes (4): C#, Entity Reference y relaciones, LINQ con OrganizationServiceContext (Early-Bound), Plugin completo con Early-Bound
+Nodes (4): 3. Topics — Unidad de Conversación, Anatomía de un topic, Tipos de nodos en un topic, Trigger Phrases — mejores prácticas
+
+### Community 454 - "NIVEL 3: AVANZADO — Power Platform & Dynamics 365"
+Cohesion: 0.33
+Nodes (6): Auto-evaluación de Dominio, Criterios de Calidad, Criterios de Graduación — Nivel 3, Criterios Técnicos, NIVEL 3: AVANZADO — Power Platform & Dynamics 365, Resumen del Nivel
+
+### Community 456 - "@radix-ui/react-dialog"
+Cohesion: 0.67
+Nodes (3): react, extractText(), react
+
+### Community 457 - "page.tsx"
+Cohesion: 0.40
+Nodes (3): FIRST_SESSION, metadata, STEPS
+
+### Community 459 - "5. Integración con Power Automate"
+Cohesion: 0.50
+Nodes (4): 4. Variables y Entidades, Entidades — tipos de datos que el bot entiende, Establecer variables, Tipos de variables
+
+### Community 461 - "questions-parser-validation.test.ts"
+Cohesion: 0.50
+Nodes (4): 5. Integración con Power Automate, Crear flujo para el bot, Llamadas HTTP directas (sin Power Automate), Usar el flujo en el topic
 
 ## Knowledge Gaps
-- **4692 isolated node(s):** `Estado al 2026-08-24 (fix crítico: última pregunta en blanco en todo quiz + cierre parcial de "§63")`, `Estado al 2026-08-23 (Módulo 56 — Fundamentos de JavaScript para Power Platform)`, `Estado al 2026-08-22 noche (fix de infra Vercel — dominio planestudio.vercel.app roto)`, `Estado al 2026-08-22 (auditoría de estudiante sin conocimientos previos + mejoras)`, `Estado al 2026-08-22 (pausa por reinicio de PC del usuario)` (+4687 more)
+- **4780 isolated node(s):** `Sprint — Reorganización integral post-auditoría F&O/Contact Center (2026-09-01)`, `Estado al 2026-08-24 (fix crítico: última pregunta en blanco en todo quiz + cierre parcial de "§63")`, `Estado al 2026-08-23 (Módulo 56 — Fundamentos de JavaScript para Power Platform)`, `Estado al 2026-08-22 noche (fix de infra Vercel — dominio planestudio.vercel.app roto)`, `Estado al 2026-08-22 (auditoría de estudiante sin conocimientos previos + mejoras)` (+4775 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **25 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **27 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `NIVEL 3: AVANZADO — Power Platform & Dynamics 365` connect `NIVEL 3: AVANZADO — Power Platform & Dynamics 365` to `MÓDULO 19: ALM y CI/CD con Azure DevOps`, `MÓDULO 20: Dynamics 365 CE — Sales y Customer Service`, `MÓDULO 23: C# Plugins para Dataverse`, `MÓDULO 26: Performance y Optimización`, `MÓDULO 25: Patrones de Diseño Avanzados`, `MÓDULO 21: Power Pages — Portales Externos`, `MÓDULO 22: Copilot Studio Avanzado`, `MÓDULO 27: PCF Avanzado con TypeScript y React`, `MÓDULO 29: Power Pages Avanzado y Azure AD B2C`, `index.md`, `MÓDULO 18: Arquitectura de Soluciones Power Platform`, `MÓDULO 24: Integraciones con Azure Services`, `MÓDULO 28: Code Apps con React y TypeScript`, `MÓDULO 30: Proyecto Multicapa Nivel 3`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **Why does `NIVEL 4: ARQUITECTO MASTER — Power Platform & Dynamics 365` connect `NIVEL 4: ARQUITECTO MASTER — Power Platform & Dynamics 365` to `MÓDULO 31: Enterprise Architecture y Gobernanza`, `MÓDULO 33: Multi-tenant, Multi-geo y Estrategia de Ambientes`, `MÓDULO 35: Arquitectura de Datos — Fabric, Synapse y Medallion`, `MÓDULO 38: Liderazgo Técnico y Gestión de Proyectos`, `MÓDULO 39: Casos de Transformación Digital`, `MÓDULO 40: Arquitectura Power Platform (referencia histórica PL-600)`, `MÓDULO 41: Proyecto Capstone — Arquitectura Enterprise`, `MÓDULO 32: CoE Starter Kit y Administración a Escala`, `MÓDULO 34: Azure Integration Services Avanzado`, `MÓDULO 36: Seguridad y Cumplimiento Enterprise`, `MÓDULO 37: AI Builder y Azure AI integrado`, `index.md`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **Why does `NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365` connect `NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365` to `MÓDULO 11: Power Automate Avanzado`, `MÓDULO 15: Copilot Studio — Introducción`, `MÓDULO 16: Seguridad y Administración de Soluciones`, `👨‍💻 Actividades Prácticas Paso a Paso`, `MÓDULO 9: Dataverse Avanzado`, `MÓDULO 10: Canvas Apps — Componentes y Reutilización`, `MÓDULO 13: JavaScript y PCF Básico`, `MÓDULO 17: Proyecto Integrador Nivel 2`, `index.md`, `MÓDULO 14: Conectores Personalizados`?**
-  _High betweenness centrality (0.006) - this node is a cross-community bridge._
-- **What connects `Estado al 2026-08-24 (fix crítico: última pregunta en blanco en todo quiz + cierre parcial de "§63")`, `Estado al 2026-08-23 (Módulo 56 — Fundamentos de JavaScript para Power Platform)`, `Estado al 2026-08-22 noche (fix de infra Vercel — dominio planestudio.vercel.app roto)` to the rest of the system?**
-  _4692 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+- **What connects `Sprint — Reorganización integral post-auditoría F&O/Contact Center (2026-09-01)`, `Estado al 2026-08-24 (fix crítico: última pregunta en blanco en todo quiz + cierre parcial de "§63")`, `Estado al 2026-08-23 (Módulo 56 — Fundamentos de JavaScript para Power Platform)` to the rest of the system?**
+  _4780 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.04081632653061224 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.06438631790744467 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06202435312024353 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.0783744557329463 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08421985815602837 - nodes in this community are weakly interconnected._

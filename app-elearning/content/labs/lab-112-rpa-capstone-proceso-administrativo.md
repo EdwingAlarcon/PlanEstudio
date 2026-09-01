@@ -47,6 +47,14 @@ SIT procesa solicitudes administrativas recibidas por archivo. Parte puede resol
 - Runbook
 - Demo y retrospectiva
 
+## Requisitos no funcionales
+
+- **Seguridad:** credenciales fuera del código y permisos mínimos para cuentas de ejecución.
+- **Resiliencia:** reintentos limitados, manejo de portal caído, archivos corruptos y ejecución parcial.
+- **Idempotencia:** una reejecución no duplica registros, archivos ni pagos.
+- **Operación:** monitoreo, owner, runbook, rollback y criterios claros de escalamiento.
+- **Mantenibilidad:** selectores, rutas, umbrales y configuración por ambiente no quedan hardcodeados.
+
 ## Criterios de aprobación
 
 - La selección tecnológica no presenta RPA como solución universal.
@@ -78,6 +86,12 @@ SIT procesa solicitudes administrativas recibidas por archivo. Parte puede resol
 | Testing | 10% |
 | Operación | 5% |
 | Defensa y evidencia | 5% |
+
+## Solución de referencia
+
+Después de completar tu intento, compara tu entrega con
+[Soluciones de Referencia para Capstones](/recursos/soluciones-referencia-capstones#lab-112--rpa-capstone).
+La referencia te ayuda a validar idempotencia, límites de RPA, seguridad, operación y evidencia.
 
 ## Fallos críticos
 

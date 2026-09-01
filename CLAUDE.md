@@ -7,9 +7,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Before starting new work, read `SPRINT_HANDOFF.md`. It is the active operational memory for the post-audit sprints.
 
 Current stable state as of the latest local handoff (2026-09-01):
-- Latest sprint: **Reorganización integral post-auditoría F&O/Contact Center** (2026-09-01, not yet
-  pushed to `master` — commits sit locally, see `SPRINT_HANDOFF.md` section "Sprint — Reorganización
-  integral" for the exact commit list and what's still pending user go-ahead to push). Adds 6 new
+- Latest continuation: **Capstones con solución de referencia separada**. Adds
+  `/recursos/soluciones-referencia-capstones` (`docs/Recursos/SOLUCIONES_REFERENCIA_CAPSTONES.md`)
+  and links it from LAB-077, LAB-079, LAB-084, LAB-085, LAB-102 and LAB-112 as post-attempt reference
+  material. These six labs now declare explicit non-functional requirements (security,
+  auditability, operation, maintainability, compliance/privacy/resilience/idempotency where relevant).
+  `content.test.ts` resource count is now 36. Validation also found and fixed a real Flow Builder UI
+  issue: draggable behavior now lives on the `Arrastrar` handle instead of the whole `<li>`, so
+  `Subir/Bajar/Eliminar` remain reliable buttons. Local validation for this continuation:
+  `validate:content`, `lint`, `typecheck`, `test:coverage` (420/420), `build`, and `e2e` (89/89).
+  See `SPRINT_HANDOFF.md` before touching capstones or interactive practice again.
+- Previous sprint: **Reorganización integral post-auditoría F&O/Contact Center** (2026-09-01,
+  pushed to `master` through `05e9a479`; see `SPRINT_HANDOFF.md` section "Sprint — Reorganización
+  integral" for the exact commit list and remaining roadmap boundaries). Adds 6 new
   professional routes (Fundamentos Power Platform, Dynamics 365 Sales, Dynamics 365 Customer Service,
   Customer Insights - Data, Customer Insights - Journeys, Empleabilidad — additive, the original 10
   routes are untouched to preserve persisted `selectedRouteSlug`), a per-route progress card (not a

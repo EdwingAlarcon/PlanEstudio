@@ -489,7 +489,7 @@ function FlowEngine({ practice, answer, setAnswer }: { practice: FlowBuilderPrac
     announce(selectedBlockId, next);
   };
 
-  const onDragStart = (event: DragEvent<HTMLLIElement>, id: string) => {
+  const onDragStart = (event: DragEvent<HTMLButtonElement>, id: string) => {
     setDraggedId(id);
     setSelectedBlockId(id);
     event.dataTransfer.setData("text/plain", id);
@@ -530,8 +530,6 @@ function FlowEngine({ practice, answer, setAnswer }: { practice: FlowBuilderPrac
           return (
             <li
               key={block.id}
-              draggable
-              onDragStart={(event) => onDragStart(event, block.id)}
               onDragOver={(event) => {
                 event.preventDefault();
                 setDropIndex(index);
@@ -558,9 +556,15 @@ function FlowEngine({ practice, answer, setAnswer }: { practice: FlowBuilderPrac
                   type="button"
                   variant={selectedBlockId === block.id ? "default" : "outline"}
                   size="sm"
+                  draggable
                   aria-describedby="flow-builder-instructions"
                   aria-label={`Arrastrar o mover ${block.label}`}
                   onClick={() => setSelectedBlockId(block.id)}
+                  onDragStart={(event) => onDragStart(event, block.id)}
+                  onDragEnd={() => {
+                    setDraggedId(null);
+                    setDropIndex(null);
+                  }}
                   onKeyDown={(event) => onKeyDown(event, block.id)}
                 >
                   Arrastrar

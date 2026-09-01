@@ -9,6 +9,7 @@ test.describe("Interactive Practice Engine", () => {
       window.localStorage.clear();
       window.sessionStorage.clear();
     });
+    await page.reload();
   });
 
   test("catalogo, filtros y busqueda global exponen practicas interactivas", async ({ page }) => {
@@ -74,7 +75,12 @@ test.describe("Interactive Practice Engine", () => {
     await page.evaluate(() => window.localStorage.removeItem("planestudio.interactive-practice.v1"));
     await page.reload();
     await expect(page.getByRole("heading", { name: "Ordena el flujo" })).toBeVisible();
-    await page.locator("li").filter({ hasText: "When row added" }).getByRole("button", { name: "Bajar" }).click();
+    const workspace = page.locator('section[aria-labelledby="exercise-heading"]');
+    await expect(workspace.getByText("No iniciado")).toBeVisible();
+    await expect(workspace.getByText("0 intentos")).toBeVisible();
+    const flowItems = workspace.locator("ol > li");
+    await flowItems.first().getByRole("button", { name: "Bajar" }).click();
+    await expect(flowItems.first()).toContainText("Condition: Amount > 10000000");
     await page.getByRole("button", { name: /Validar/ }).click();
     await expect(page.getByText(/Parcial|Requiere ajuste/).first()).toBeVisible();
 
@@ -87,7 +93,7 @@ test.describe("Interactive Practice Engine", () => {
     await expect(page.getByRole("button", { name: "Restaurar bloques" })).toBeVisible();
     await page.getByRole("button", { name: "Restaurar bloques" }).click();
 
-    await page.locator("li").filter({ hasText: "Send notification" }).dragTo(page.locator("li").filter({ hasText: "Update row: approved" }));
+    await workspace.getByRole("button", { name: /Arrastrar o mover Send notification/ }).dragTo(flowItems.filter({ hasText: "Update row: approved" }));
     await expect(page.getByText(/Send notification movido/)).toBeAttached();
     await page.getByRole("button", { name: /Arrastrar o mover Condition/ }).press("ArrowDown");
     await page.getByRole("button", { name: /Validar/ }).click();

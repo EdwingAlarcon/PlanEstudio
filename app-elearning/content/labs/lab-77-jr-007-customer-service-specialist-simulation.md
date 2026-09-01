@@ -80,6 +80,16 @@ Usa estos 5 casos para ejecutar el UAT del Paso 5:
 - Dashboard operativo.
 - Casos UAT ejecutados contra los 5 datos de prueba.
 
+## Requisitos no funcionales
+
+- **Seguridad:** los agentes solo ven casos de las colas que les corresponden; el supervisor puede
+  reasignar y revisar casos vencidos.
+- **Auditabilidad:** cada cambio de SLA, entitlement u override queda documentado con responsable y
+  motivo.
+- **Operación:** el dashboard debe permitir decidir la siguiente acción, no solo mostrar métricas.
+- **Mantenibilidad:** los tipos de caso y reglas de prioridad deben poder ajustarse sin rediseñar
+  todo el proceso.
+
 ## Pasos detallados
 
 ### Paso 1 — Casos y colas
@@ -167,6 +177,13 @@ esperado y evidencia.
   riesgo comercial, y proponer una alerta a supervisión en vez de bloqueo silencioso.
 - "¿Por qué el SLA se pausa fuera de horario y qué pasa si no lo configuras así?" — respuesta
   esperada: sin pausa, casos creados un viernes en la tarde aparecerían falsamente vencidos el lunes.
+
+## Solución de referencia
+
+Después de completar tu intento, compara tu entrega con
+[Soluciones de Referencia para Capstones](/recursos/soluciones-referencia-capstones#lab-077--customer-service-specialist).
+No copies la solución como entregable; úsala para detectar decisiones sin justificar, casos negativos
+faltantes o evidencia insuficiente.
 
 ## Qué no debe sobreprometerse
 

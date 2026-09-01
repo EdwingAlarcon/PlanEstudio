@@ -30,6 +30,13 @@ Antes de presentar este lab como ejecución real, completa el gate **Customer In
 del recurso `/recursos/d365-tenant-readiness`. Sin canal/dominio, consentimiento y contactos de
 prueba, la entrega es **Simulado**.
 
+## Requisitos no funcionales
+
+- **Cumplimiento:** ninguna comunicación sale sin consentimiento válido para ese canal específico.
+- **Medición:** el journey debe tener objetivo medible, no solo actividad enviada.
+- **Operación:** debe existir un criterio para pausar o retirar contactos del journey.
+- **Trazabilidad:** cada prueba indica si fue simulada o ejecutada en sandbox real.
+
 ## Pasos detallados
 
 ### Paso 1 — Trigger
@@ -89,6 +96,12 @@ descalificante sin importar el resto del puntaje — es el criterio de cumplimie
 Agregá un segundo canal (ej. SMS como fallback si el email no se abre en 48 horas) y documentá cómo
 el journey decide entre canales sin violar el consentimiento específico de cada uno — el consentimiento
 de email no habilita automáticamente SMS.
+
+## Solución de referencia
+
+Después de completar tu intento, revisa
+[Soluciones de Referencia para Capstones](/recursos/soluciones-referencia-capstones#lab-084--customer-insights-journeys)
+para comparar consentimiento, pruebas negativas, objetivo y límites de ejecución real.
 
 ## Competencias desarrolladas
 
