@@ -39,7 +39,7 @@ const LEVEL_BAR: Record<string, string> = {
 const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365" | "rpa" | "default"> = {
   "PL-900": "basico",
   "PL-200": "intermedio",
-  "PL-200 (retira 31 ago 2026)": "intermedio",
+  "PL-200 (retirado 31 ago 2026)": "intermedio",
   "Consultor funcional (PL-200 retirado 31 ago 2026)": "intermedio",
   "PL-400": "avanzado",
   "Arquitectura Power Platform": "arquitecto",

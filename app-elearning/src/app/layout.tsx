@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     default: "Power Platform & D365 — Plan de Estudio",
     template: "%s | PlanEstudio",
   },
-  description: "Plan de aprendizaje progresivo: de fundamentos a Arquitecto Senior en Power Platform y Dynamics 365.",
+  description: "Plan de aprendizaje progresivo: de cero a base laboral guiada en Power Platform y Dynamics 365 Customer Engagement.",
   keywords: ["Power Platform", "Dynamics 365", "PL-900", "PL-400", "arquitectura", "consultor funcional", "e-learning"],
 };
 

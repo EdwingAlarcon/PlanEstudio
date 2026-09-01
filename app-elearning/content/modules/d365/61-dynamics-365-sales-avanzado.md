@@ -2,7 +2,7 @@
 moduleId: 61
 title: "Dynamics 365 Sales Avanzado — Forecasting, Pipeline y Sales Operations"
 level: "d365"
-certification: "Dynamics 365 Sales / MB-280 (retira 31 jul 2026)"
+certification: "Dynamics 365 Sales / MB-280 (retirado 31 jul 2026)"
 estimatedMinutes: 13
 slug: "dynamics-365-sales-avanzado"
 ---
