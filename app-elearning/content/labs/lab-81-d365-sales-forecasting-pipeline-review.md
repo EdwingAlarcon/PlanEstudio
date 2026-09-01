@@ -4,7 +4,7 @@ title: "Sales Forecasting & Pipeline Review"
 level: "N6"
 duration: 120
 product: ["Dynamics 365 Sales", "Dataverse", "Power BI"]
-certifications: ["Dynamics 365 Sales", "MB-280 (retirado 31 jul 2026)"]
+certifications: ["Dynamics 365 Sales", "MB-280 (retira 31 jul 2026)"]
 role: ["Consultor Funcional D365 CE", "Sales Operations Analyst"]
 prerequisites:
   - "Módulo 61 estudiado: Dynamics 365 Sales Avanzado"
