@@ -16,6 +16,9 @@ completarla — y qué evidencia produce cada tipo.
 | 🟠 **Trial Dynamics 365** | Requiere activar el trial temporal (normalmente 30 días) del producto Dynamics 365 correspondiente (Sales, Customer Service, Customer Insights, Field Service, Contact Center, Finance & Operations). | Trial activo del producto específico — no alcanza con el ambiente Developer del Módulo 1. | Capturas del registro real (lead, caso, segmento…), export o resultado de UAT. |
 | 🔴 **Requiere tenant/ambiente compatible (fuera de alcance de PlanEstudio)** | Escenarios que solo existen con licencia de producción, integraciones reales con terceros (pasarela de pagos, sistema académico externo) o gobierno empresarial real. | Un tenant real de empresa, fuera del alcance de este plan de autoestudio. | No aplica como evidencia de este plan — el lab lo marca explícitamente como diseño documentado, no como ejecución verificada. |
 
+Para ver qué entorno/licencia exige cada ruta completa (no solo un lab individual), con duración y
+alternativa sin acceso, ver la [Matriz de entornos y trials](/recursos/entornos-y-trials).
+
 ## Cómo identificar la categoría de un módulo o lab
 
 - Si el módulo/lab no menciona ningún ambiente ni licencia, es 🟢 **Conceptual** o vive dentro de una

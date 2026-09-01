@@ -103,6 +103,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "tipos-de-practica": "Recursos/TIPOS_DE_PRACTICA.md",
   "fundamentos-csharp-dotnet": "Recursos/FUNDAMENTOS_CSHARP_DOTNET.md",
   "fundamentos-typescript-react": "Recursos/FUNDAMENTOS_TYPESCRIPT_REACT.md",
+  "entornos-y-trials": "Recursos/ENTORNOS_Y_TRIALS.md",
 };
 
 const LEVEL_META: Record<LevelId, { title: string; description: string; certification: string }> = {
