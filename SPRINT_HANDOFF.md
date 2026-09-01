@@ -86,11 +86,36 @@ subió de 416 por los 4 tests nuevos de `route-readiness.test.ts`), `npm run val
 `npm run build`, y al final de la sesión **la suite E2E completa (89/89 tests, ~5.7 min)** —
 incluyendo el que fallaba antes del fix de hidratación.
 
-**Explícitamente NO hecho en esta sesión** (documentado, no fingido — demasiado grande para una sola
-sesión con la calidad pedida):
-- Fase 7 (10 proyectos integradores completos con brief, datos de prueba, rúbrica, criterios de
-  aceptación y solución de referencia por cada una de las 16 rutas) — el usuario confirmó explícitamente
-  seguir con el resto de fases, pero Fase 7 sola es un sprint de contenido completo por sí misma.
+**Push y CI**: los commits `21f2959b`...`97679ce4` se pushearon a `origin/master` con autorización
+explícita del usuario (confirmada vía pregunta directa antes de pushear). CI (`gh run list`) terminó
+`success` en el run del push. Producción verificada con `curl` contra `planestudio.vercel.app`
+(`/rutas/dynamics-365-sales` y `/recursos/entornos-y-trials`, ambos 200 con `X-Vercel-Cache: MISS` =
+build fresco). Después, en la misma sesión, se cerró parcialmente la Fase 7 (ver abajo) en el commit
+`90492c72`, todavía **NO pusheado** — confirmar con el usuario antes del próximo push.
+
+**Fase 7 — cierre parcial (commit `90492c72`, local, no pusheado todavía)**: se auditaron los 13
+capstones únicos que sirven a las 16 rutas (4 rutas D365 comparten `lab-90`) heading por heading. La
+mayoría (`lab-61`, `lab-62`, `lab-63`, `lab-65`, módulo 41) ya tenían Objetivo/Escenario/Entregables/
+Criterios de validación/Rúbrica/Evidencia/Errores comunes/Reto adicional completos — no se tocaron.
+Se cerraron los gaps reales en 7 capstones: `lab-90`, `lab-85` y `lab-84` no tenían Rúbrica ni Errores
+comunes ni Reto adicional (agregados); `lab-112`, `lab-102`, `lab-77` y `lab-79` tenían todo excepto
+Reto adicional (agregado, sin instrucciones detalladas, como pide el pedido original). Módulo 8
+(capstone de Fundamentos Power Platform) ya tenía el equivalente funcional vía su sección "Tres
+niveles de entrega" (mínima/completa/excelente) — no se agregó un Reto adicional redundante ahí.
+
+**Explícitamente NO hecho todavía** (documentado, no fingido — demasiado grande para esta sesión con
+la calidad pedida):
+- Fase 7 completa: **10+ proyectos integradores NUEVOS de punta a punta** (brief, datos de prueba,
+  requisitos funcionales Y no funcionales, entregables, evidencias, rúbrica, criterios de aceptación,
+  errores frecuentes, **solución de referencia separada**, reto adicional) para las rutas que todavía
+  no tienen un capstone tan completo como `lab-61`/`lab-62`/`lab-63`. Lo que se hizo es un cierre de
+  gaps estructurales sobre capstones YA existentes, no la redacción de proyectos nuevos desde cero —
+  eso sigue pendiente si el usuario lo pide explícitamente.
+- "Solución de referencia separada" (un documento aparte con la solución completa, oculto del
+  enunciado) — ningún capstone del plan la tiene todavía, ni los que ya estaban completos antes de
+  esta sesión. Sería trabajo nuevo, no un gap de estructura.
+- "Requisitos no funcionales" como sección explícita por capstone (performance, seguridad,
+  accesibilidad, mantenibilidad, escalabilidad) — no se agregó; quedó fuera por prioridad de tiempo.
 - Fase 9 (defectos técnicos): 4 de los 5 puntos no se reprodujeron (arriba); el que sí era real
   (hidratación) ya está corregido.
 - Fase 11 (etiquetas de navegación por tipo de práctica en cada lab individual): la taxonomía existe
@@ -98,11 +123,12 @@ sesión con la calidad pedida):
   campo tipado — sigue viviendo en prosa dentro de `prerequisites`, como ya se había marcado como
   hallazgo importante en la auditoría de cierre.
 
-**Pendiente al retomar**: el usuario dijo explícitamente "no pushees aún, sigue acumulando" — los
-commits `21f2959b`...`fb546eb9` están en `master` local pero NO en `origin/master`. Antes de pushear:
-confirmar autorización explícita del usuario (principio 10 del pedido original: "no hagas push, merge
-ni despliegue a producción sin autorización expresa"). Después de pushear, verificar CI
-(`gh run list --branch master --limit 1`) y producción en Vercel según la preferencia habitual.
+**Pendiente al retomar**: pedir autorización explícita antes de pushear el commit `90492c72` (principio
+10 del pedido original: "no hagas push, merge ni despliegue a producción sin autorización expresa").
+Después de pushear, verificar CI (`gh run list --branch master --limit 1`) y producción en Vercel.
+Si se retoma Fase 7 completa, empezar por las rutas sin capstone tan desarrollado como
+`lab-61`/`lab-62`/`lab-63` — revisar primero cuáles ya tienen suficiente profundidad antes de escribir
+nada nuevo, para no duplicar esfuerzo.
 
 ## Estado al 2026-08-24 (fix crítico: última pregunta en blanco en todo quiz + cierre parcial de "§63")
 
