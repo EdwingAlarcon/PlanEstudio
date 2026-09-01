@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { getAllLabs, getAllModules } from "@/lib/content";
 import { getLabPresentationMeta } from "@/lib/lab-metadata";
 import { getAllProfessionalRoutes, getProfessionalRouteBySlug } from "@/lib/professional-routes";
+import { RouteReadinessCard } from "@/components/routes/route-readiness-card";
+import { getRouteReadinessTargets } from "@/lib/route-readiness";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -62,6 +64,7 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
     ? `/nivel/${capstoneModule.levelId}/modulo/${capstoneModule.slug}`
     : undefined;
   const capstoneTitle = capstoneLab?.title ?? capstoneModule?.title;
+  const readinessTargets = getRouteReadinessTargets(route);
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 space-y-8 animate-fade-in">
@@ -109,7 +112,7 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
         )}
       </div>
 
-      <section className="grid gap-4 md:grid-cols-[1fr_1.2fr]" aria-label="Resultado y competencias">
+      <section className="grid gap-4 md:grid-cols-3" aria-label="Resultado, progreso y competencias">
         <div className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
           <div className="mb-3 flex items-center gap-2">
             <Target className="h-4 w-4 text-[#0078D4]" aria-hidden />
@@ -117,6 +120,8 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
           </div>
           <p className="text-sm leading-relaxed text-muted-foreground">{route.outcome}</p>
         </div>
+
+        <RouteReadinessCard targets={readinessTargets} />
 
         <div className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
           <div className="mb-3 flex items-center gap-2">
