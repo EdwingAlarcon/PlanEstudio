@@ -24,6 +24,11 @@ tenant Microsoft real; no valida automáticamente contra ese tenant. El roadmap 
 - Validación local en verde para ambos sprints: `lint`, `tsc --noEmit`, `validate:content`,
   `test:coverage` (424/424), `build`. Repo limpio salvo `graphify-out/` (artefacto del grafo, se
   commitea aparte, ver `feedback_graphify_post_commit` en memoria de Claude).
+- **CI agilizado.** `.github/workflows/ci.yml` ahora tiene `paths-ignore` (push y pull_request) para
+  `SPRINT_HANDOFF.md`, `CLAUDE.md` y `graphify-out/**` — un push que solo toque esos archivos ya no
+  dispara el pipeline completo (~10 min). Commit `5817aaee`, pusheado a `master` (requirió que el
+  usuario corriera `gh auth refresh -h github.com -s workflow` porque el token no tenía scope
+  `workflow`, necesario para modificar archivos en `.github/workflows/`).
 
 ### Pendiente (en orden de prioridad, ver roadmap para detalle de alcance)
 
@@ -64,6 +69,7 @@ tenant Microsoft real; no valida automáticamente contra ese tenant. El roadmap 
 - `app-elearning/content/labs/lab-112-rpa-capstone-proceso-administrativo.md`
 - `SPRINT_HANDOFF.md` (este archivo)
 - `CLAUDE.md` (raíz del repo)
+- `.github/workflows/ci.yml` (paths-ignore para pushes solo de handoff/grafo)
 
 ### Siguiente paso exacto
 
