@@ -434,6 +434,60 @@ Al crear cualquier solicitud en `sit_Solicitud`, llega un email de confirmación
 
 ---
 
+## 🔧 Diagnóstico y reparación
+
+Para los errores más frecuentes de este laboratorio, sigue este flujo antes de pedir ayuda externa.
+
+### El flujo no se dispara al crear solicitudes
+
+- **Causa probable:** la conexión de Dataverse usada por el trigger pertenece a un usuario sin permisos de lectura sobre `sit_Solicitud`, o el flujo quedó guardado como **Apagado** (Off) en vez de **Activo** (On).
+- **Cómo comprobar:** en el portal de Power Automate → **Mis flujos** → abre el flujo → revisa el interruptor superior (Activado/Desactivado). Si está activado, ve a **Historial de ejecuciones**: si no hay ninguna ejecución ni siquiera fallida, el trigger no se está evaluando; si hay ejecuciones fallidas, ábrelas y revisa el error del paso del trigger.
+- **Cómo corregir:** actívalo si estaba apagado. Si el problema es la conexión, ve a **Mis conexiones** (o dentro del flujo, en el disparador → ícono de conexión) → verifica que la cuenta conectada tiene acceso al ambiente y a la tabla `sit_Solicitud`; si no, crea una nueva conexión con una cuenta que sí tenga el rol System Customizer o superior.
+- **Reiniciar vs. reparar:** repara la conexión o el estado activo/inactivo; no es necesario recrear el flujo completo salvo que el trigger mismo esté mal configurado (tabla incorrecta, Change type incorrecto).
+- **Evidencia posterior a la corrección:** al crear una nueva solicitud de prueba, aparece una entrada nueva en **Historial de ejecuciones** con estado **Correcto** (✅) en menos de un minuto.
+
+### Error 401 en la acción de email
+
+- **Causa probable:** la conexión de Office 365 Outlook usada por el flujo expiró (los tokens de conexión caducan periódicamente, especialmente en cuentas de prueba/trial).
+- **Cómo comprobar:** abre la ejecución fallida en **Historial de ejecuciones** → expande el paso "Send an email (V2)" → el error mostrará un código 401 o el texto "the caller's credentials are invalid" o similar.
+- **Cómo corregir:** dentro del editor del flujo, haz clic sobre la acción de email → en el menú (los tres puntos) selecciona **Conexiones utilizadas** → **Actualizar conexión** (o "Fix connection") → inicia sesión nuevamente con la cuenta del tenant. Guarda el flujo después de actualizar.
+- **Reiniciar vs. reparar:** siempre reparar la conexión (reautenticar); nunca hace falta eliminar la acción ni el flujo.
+- **Evidencia posterior a la corrección:** al volver a ejecutar el flujo manualmente, el paso de email muestra estado **Correcto** y el email llega a la bandeja de entrada configurada.
+
+### La tabla HTML llega vacía en el reporte diario
+
+- **Causa probable:** el filtro OData del paso "List rows" tiene un error de sintaxis (por ejemplo, usar `!=` en vez de `ne`), o los valores numéricos de `sit_estado` usados en el filtro no corresponden a los reales de tu ambiente.
+- **Cómo comprobar:** ejecuta el flujo manualmente (**Probar** → **Manualmente**) y, en el historial, expande el paso "List rows" → revisa el campo `body` de la salida: si `value` es un arreglo vacío `[]`, el filtro está excluyendo todo. Compara los números usados en `Filter rows` contra los valores reales anotados en la sección "Datos de apoyo" de este lab (Tabla → Columna `sit_estado` → Opciones de elección → Editar).
+- **Cómo corregir:** corrige la sintaxis OData (siempre `eq`/`ne`/`gt`/`lt`/`and`/`or`, nunca operadores de otros lenguajes) y reemplaza los valores numéricos de ejemplo por los reales de tu ambiente.
+- **Reiniciar vs. reparar:** repara el texto del filtro directamente en el campo "Filter rows"; no hace falta recrear el paso "List rows".
+- **Evidencia posterior a la corrección:** el paso "List rows" retorna un `value` con al menos 1 elemento cuando hay solicitudes no cerradas/resueltas, y la tabla HTML del email muestra filas con datos reales.
+
+### La aprobación no llega al email
+
+- **Causa probable:** el campo "Assigned to" de la acción "Start and wait for an approval" tiene un email fuera del tenant Microsoft 365, o contiene un error de tipeo.
+- **Cómo comprobar:** abre la ejecución en el historial → expande el paso "Start and wait for an approval" → revisa el valor exacto usado en "Assigned to". Compáralo con tu email real del tenant (visible en la esquina superior derecha de make.powerapps.com).
+- **Cómo corregir:** edita el paso, corrige el email por uno válido del mismo tenant, guarda el flujo y vuelve a probar.
+- **Reiniciar vs. reparar:** repara el valor del campo; no requiere recrear el paso de aprobación.
+- **Evidencia posterior a la corrección:** llega una notificación de aprobación pendiente (email y/o notificación en el centro de aprobaciones de Power Automate) con los botones **Aprobar/Rechazar** visibles.
+
+### El flujo de aprobación se dispara en bucle
+
+- **Causa probable:** el paso "Update a row" dentro del propio flujo modifica `sit_estado`, y como el trigger está configurado con "Select columns" limitado a `sit_prioridad`, cualquier otra actualización del registro (incluida la que hace el mismo flujo) puede volver a evaluarse si el Select columns no se configuró correctamente.
+- **Cómo comprobar:** revisa el historial de ejecuciones del flujo — si ves múltiples ejecuciones consecutivas en segundos para el mismo registro, hay un bucle. Confirma en el trigger que el campo **Select columns** contiene exactamente `sit_prioridad` y no está vacío.
+- **Cómo corregir:** verifica que "Select columns" en el trigger tenga solo `sit_prioridad`. Si el bucle persiste, agrega al inicio del flujo (antes de la aprobación) una condición adicional que verifique el estado actual y termine (Terminate) si el registro ya fue procesado, como sugiere la nota de la tabla de errores original.
+- **Reiniciar vs. reparar:** repara agregando la condición de guarda; solo recrea el trigger desde cero si el campo Select columns quedó mal guardado y no se puede editar.
+- **Evidencia posterior a la corrección:** al cambiar la prioridad a Crítica una sola vez, el historial muestra exactamente una ejecución completa del flujo (no ejecuciones repetidas para el mismo cambio).
+
+### `_sit_prioridad_label` está vacío en el email
+
+- **Causa probable:** el campo dinámico se insertó manualmente como texto plano en vez de seleccionarse del panel de contenido dinámico, o se usó una expresión con el prefijo incorrecto.
+- **Cómo comprobar:** en el paso de email, haz clic en el campo del cuerpo y revisa si `_sit_prioridad_label` aparece resaltado como un token de contenido dinámico (chip azul/gris) o como texto suelto sin formato — si es texto suelto, no se evaluará como expresión.
+- **Cómo corregir:** borra el texto plano, haz clic nuevamente en el campo, y usa el panel **Contenido dinámico** (o **Editor de expresiones**) para insertar `triggerOutputs()?['body/_sit_prioridad_label']` correctamente como token.
+- **Reiniciar vs. reparar:** repara únicamente ese campo del cuerpo del email; no afecta al resto del flujo.
+- **Evidencia posterior a la corrección:** el email recibido muestra la etiqueta de texto ("Alta", "Crítica", etc.) en vez de un espacio vacío o el nombre literal del campo.
+
+---
+
 ## Checklist final
 
 - [ ] Flujo 1 ("Notificar Nueva Solicitud") activo y dentro de la solución SIT

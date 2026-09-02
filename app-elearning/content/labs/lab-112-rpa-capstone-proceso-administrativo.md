@@ -47,6 +47,60 @@ SIT procesa solicitudes administrativas recibidas por archivo. Parte puede resol
 - Runbook
 - Demo y retrospectiva
 
+## Errores frecuentes
+
+| Problema | Causa probable | Solución |
+|---|---|---|
+| El PDD/SDD no coincide con lo que realmente construye el desktop/cloud flow | El diseño se documentó antes de descubrir un caso borde en el portal legacy y no se actualizó tras el ajuste técnico | Trata PDD/SDD como documento vivo: actualízalo cada vez que un ajuste de construcción cambie inputs, outputs o el flujo del proceso |
+| Una reejecución tras un fallo parcial duplica registros o pagos | El proceso no valida si un archivo/solicitud ya fue procesado antes de volver a ejecutarse (falta control de idempotencia) | Agrega una verificación de estado (por `correlationId` o identificador único) antes de cada paso crítico, para saltar lo ya procesado |
+| Los datos quedan inconsistentes entre el cloud flow, el desktop flow y el archivo/Excel de origen | Cada componente actualiza su propio registro de estado sin sincronizar con los demás tras un error a mitad de proceso | Centraliza el estado del proceso en un único lugar (tabla/lista) que todos los componentes lean y actualicen, evitando estados locales divergentes |
+| El portal legacy simulado falla y el bot sigue intentando indefinidamente | Los reintentos no tienen límite ni backoff, o no distinguen error transitorio de error permanente | Define un número máximo de reintentos con espera creciente y clasifica el error (transitorio vs. permanente) antes de decidir si reintenta |
+| La demo/retrospectiva no puede explicar por qué falló una corrida específica | El RCA y las evidencias no correlacionan el mismo `correlationId` entre cloud flow, desktop flow y logs de archivo | Usa un identificador único de corrida en todos los componentes (cloud, desktop, logs, RCA) para poder reconstruir la secuencia completa de un incidente |
+
+## 🔧 Diagnóstico y reparación
+
+Para los errores más frecuentes de este laboratorio, sigue este flujo antes de pedir ayuda externa.
+
+### PDD/SDD desalineado con la construcción real
+
+- **Causa probable:** el diseño se documentó antes de resolver un caso borde del portal legacy y nunca se actualizó.
+- **Cómo comprobar:** compara el flujo descrito en el SDD contra los pasos reales del desktop/cloud flow construido.
+- **Cómo corregir:** actualiza el PDD/SDD con el comportamiento real, incluyendo el caso borde y su tratamiento.
+- **Reiniciar vs. reparar:** repara solo la documentación afectada; no requiere reconstruir el flow.
+- **Evidencia posterior a la corrección:** captura del PDD/SDD actualizado junto al diagrama coherente con la construcción.
+
+### Reejecución duplica registros o pagos
+
+- **Causa probable:** falta control de idempotencia: el proceso no verifica si la solicitud ya fue procesada antes de reintentar.
+- **Cómo comprobar:** reejecuta intencionalmente una solicitud ya completada y revisa si se genera un registro/pago duplicado.
+- **Cómo corregir:** agrega una verificación de estado por identificador único antes de ejecutar cada paso crítico (creación de registro, pago, envío).
+- **Reiniciar vs. reparar:** si ya se generó una duplicación, corrígela manualmente (revertir el registro duplicado) y repara la verificación de idempotencia antes de reintentar; no reinicies todo el proceso administrativo sin antes eliminar los duplicados.
+- **Evidencia posterior a la corrección:** captura de una reejecución sobre una solicitud ya procesada que no genera duplicados.
+
+### Datos inconsistentes entre cloud flow, desktop flow y archivo de origen
+
+- **Causa probable:** cada componente mantiene su propio estado local sin sincronizar tras un error a mitad de proceso.
+- **Cómo comprobar:** compara el estado registrado en la tabla/lista central contra el estado real del archivo/Excel y el resultado del portal legacy.
+- **Cómo corregir:** centraliza el estado en un único repositorio (tabla/lista) que todos los componentes lean y actualicen como fuente de verdad.
+- **Reiniciar vs. reparar:** si la inconsistencia ya afectó datos reales (aunque sea simulados), reinicia el caso completo desde el estado central corregido; si solo es un desfase de lectura, basta con resincronizar el componente afectado.
+- **Evidencia posterior a la corrección:** captura del estado central coincidiendo con archivo, desktop flow y cloud flow tras una corrida completa.
+
+### Reintentos indefinidos ante fallo del portal legacy
+
+- **Causa probable:** no hay límite de reintentos ni distinción entre error transitorio (portal lento) y error permanente (selector roto, dato inválido).
+- **Cómo comprobar:** revisa el log de la corrida fallida y cuenta cuántas veces reintentó sin límite ni backoff.
+- **Cómo corregir:** define un máximo de reintentos con espera creciente, y clasifica el error antes de reintentar (solo reintenta transitorios).
+- **Reiniciar vs. reparar:** repara la lógica de reintentos y reinicia únicamente la ejecución que quedó en bucle; el resto del proceso no se ve afectado.
+- **Evidencia posterior a la corrección:** captura del log mostrando el límite de reintentos aplicado y la clasificación del error.
+
+### RCA no puede reconstruir una corrida fallida
+
+- **Causa probable:** cloud flow, desktop flow y logs de archivo no comparten el mismo identificador de corrida (`correlationId`).
+- **Cómo comprobar:** intenta correlacionar los tres registros (cloud, desktop, archivo) de una corrida fallida usando su identificador.
+- **Cómo corregir:** propaga el mismo `correlationId` desde el disparo del cloud flow hasta el log del desktop flow y el archivo de salida.
+- **Reiniciar vs. reparar:** repara la propagación del identificador; no requiere rehacer las corridas ya ejecutadas, solo aplicarlo hacia adelante.
+- **Evidencia posterior a la corrección:** captura del RCA reconstruyendo la secuencia completa de una corrida usando un único `correlationId`.
+
 ## Requisitos no funcionales
 
 - **Seguridad:** credenciales fuera del código y permisos mínimos para cuentas de ejecución.

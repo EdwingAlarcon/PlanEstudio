@@ -406,6 +406,52 @@ Con el rol **SIT Solicitante** activo (en ventana privada o con otro usuario):
 
 ---
 
+## 🔧 Diagnóstico y reparación
+
+Para los errores más frecuentes de este laboratorio, sigue este flujo antes de pedir ayuda externa.
+
+### El BPF no aparece en el formulario
+
+- **Causa probable:** el Business Process Flow del Lab 09 (si lo completaste) está en estado **Borrador** en vez de **Activo**, o tu rol de seguridad no está agregado en la pestaña **Roles de seguridad** del BPF.
+- **Cómo comprobar:** en la solución, abre el proceso `sit_solicitud_bpf` (o el nombre que le hayas dado) → revisa el estado en la parte superior (Borrador/Activo). Si está Activo, ve a la pestaña **Roles de seguridad habilitados** del proceso y verifica si tu rol de usuario aparece en la lista.
+- **Cómo corregir:** si está en Borrador, haz clic en **Activar**. Si el estado ya es Activo pero el BPF no aparece, agrega tu rol de seguridad (por ejemplo, "System Administrator" o "SIT Técnico TI") en **Roles de seguridad habilitados** → **Agregar rol** → Guardar.
+- **Reiniciar vs. reparar:** nunca elimines el BPF por este motivo — es solo activarlo o agregar el rol correcto. Reiniciar (recrear el proceso) solo aplica si el BPF tiene etapas mal configuradas, no por este error de visibilidad.
+- **Evidencia posterior a la corrección:** al abrir un registro de `sit_Solicitud` en la Model-Driven App, la barra del BPF aparece en la parte superior del formulario con sus etapas visibles.
+
+### Las vistas personalizadas no aparecen en la app
+
+- **Causa probable:** las vistas se guardaron pero no se publicaron, o el site map de la app referencia una versión anterior sin actualizar.
+- **Cómo comprobar:** en la tabla `sit_Solicitud` → pestaña **Vistas**, revisa si alguna vista muestra un indicador de "sin publicar" (usualmente un ícono o texto distinto al de las vistas publicadas). También revisa el panel de navegación del Modern App Designer para confirmar qué vistas están realmente asociadas a cada página.
+- **Cómo corregir:** desde la tabla → **Vistas** → selecciona todas las vistas afectadas → **Publicar todas las personalizaciones** (o el botón **Publicar** individual de cada vista). Luego vuelve al Modern App Designer y guarda la app nuevamente.
+- **Reiniciar vs. reparar:** solo republicar; no hace falta eliminar ni recrear la vista salvo que su definición de filtro esté realmente corrupta (raro).
+- **Evidencia posterior a la corrección:** al reproducir la app (botón **Reproducir**), el selector de vistas de la subárea correspondiente muestra la vista esperada con sus columnas y filtro aplicados.
+
+### El Quick Create Form no aparece al hacer clic en "+"
+
+- **Causa probable:** la tabla `sit_Solicitud` no tiene habilitada la propiedad "Permitir creación rápida", o el formulario Quick Create no se publicó.
+- **Cómo comprobar:** ve a la tabla `sit_Solicitud` → **Propiedades** (o **Configuración de la tabla**) → revisa si el interruptor **Permitir creación rápida** está activado. Después, en **Formularios**, confirma que el Quick Create Form tiene estado "Publicado" y no "Borrador".
+- **Cómo corregir:** activa el interruptor si está apagado → **Guardar**. Si el formulario está sin publicar, ábrelo y usa **Guardar y publicar** en vez de solo **Guardar**.
+- **Reiniciar vs. reparar:** repara (activar propiedad + publicar); reiniciar el formulario completo solo si tiene campos duplicados o rotos, no por este síntoma.
+- **Evidencia posterior a la corrección:** al hacer clic en el botón "+ Nuevo" desde cualquier vista de `sit_Solicitud`, se abre el panel lateral del Quick Create con los 4 campos configurados, en vez de abrir el formulario Main completo.
+
+### El gráfico aparece vacío
+
+- **Causa probable:** el filtro de la vista asociada al gráfico excluye todos los registros de prueba (por ejemplo, filtra por un usuario específico que no creó ninguna solicitud), o el gráfico agrupa por una columna sin datos cargados.
+- **Cómo comprobar:** abre la vista que el gráfico usa como fuente (por ejemplo, "Solicitudes Abiertas del Equipo") de forma independiente y confirma cuántos registros retorna. Si retorna 0, el problema está en el filtro de la vista, no en el gráfico.
+- **Cómo corregir:** ajusta el filtro de la vista para que incluya los registros de prueba del Lab 02 (revisa que no esté filtrando por "Es igual a Usuario actual" cuando los datos de prueba no tienen ese usuario asignado). Guarda y publica la vista, luego vuelve al gráfico y refresca (F5) la página del navegador.
+- **Reiniciar vs. reparar:** repara el filtro de la vista; el gráfico en sí no necesita recrearse.
+- **Evidencia posterior a la corrección:** el gráfico muestra barras o segmentos correspondientes a los 10 registros de prueba del Lab 02, agrupados por categoría o estado según corresponda.
+
+### Security Role: el usuario no puede acceder a la app
+
+- **Causa probable:** el rol de seguridad (`SIT Solicitante` o `SIT Técnico TI`) se creó pero nunca se asignó al usuario en el Power Platform Admin Center, o la app no se compartió con ese usuario.
+- **Cómo comprobar:** en el Power Platform Admin Center → selecciona el ambiente → **Usuarios** → busca el usuario afectado → revisa la lista de **Roles de seguridad** asignados. Por separado, en [make.powerapps.com](https://make.powerapps.com) → **Aplicaciones** → "SIT Gestión Solicitudes" → **Compartir**, confirma que el usuario aparece en la lista de personas con acceso.
+- **Cómo corregir:** si falta el rol, agrégalo desde el Admin Center → **Administrar roles** → selecciona el rol correcto → Guardar. Si falta el acceso a la app, compártela nuevamente desde **Compartir**, seleccionando el usuario y confirmando.
+- **Reiniciar vs. reparar:** nunca recrear el rol o la app por este motivo; es exclusivamente un problema de asignación.
+- **Evidencia posterior a la corrección:** el usuario afectado puede abrir la app desde su portal (make.powerapps.com → Aplicaciones) y el comportamiento coincide con el rol asignado (solo sus propias solicitudes si es Solicitante, todas si es Técnico TI).
+
+---
+
 ## Checklist final
 
 - [ ] MDA "SIT Gestión Solicitudes" publicada y accesible desde make.powerapps.com → Aplicaciones

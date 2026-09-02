@@ -7,7 +7,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Before starting new work, read `SPRINT_HANDOFF.md`. It is the active operational memory for the post-audit sprints.
 
 Current stable state as of the latest local handoff (2026-09-01):
-- Latest continuation: **Sprint 1 — Readiness manual por lab, CERRADO**. Added `getLabReadiness()` in
+- Latest continuation: **Sprint 2 — Troubleshooting de labs base y RPA, CERRADO**. Added a
+  `## 🔧 Diagnóstico y reparación` section (4-6 lab-specific errors, each with Causa probable / Cómo
+  comprobar / Cómo corregir / Reiniciar vs. reparar / Evidencia posterior) to LAB-02, LAB-04, LAB-05
+  and LAB-104..112 (9 RPA labs) — 12 files total. LAB-02/04/05 already had an `## Errores frecuentes`
+  table; it was kept as-is and the new section inserted right after it, before `## Checklist final`.
+  LAB-104..112 had no errors section; both `## Errores frecuentes` and
+  `## 🔧 Diagnóstico y reparación` were added between `## Ejercicios` and `## Evidencia esperada`.
+  Content-only change (markdown), no frontmatter/component/route touched. See `SPRINT_HANDOFF.md`
+  section "Sprint 2 — Troubleshooting de labs base y RPA" for full detail before touching lab
+  troubleshooting again. Next roadmap step is Sprint 3 (tenant-real audit for D365 CE/Customer
+  Insights/Field Service, LAB-081..088 and LAB-090).
+- Previous continuation: **Sprint 1 — Readiness manual por lab, CERRADO**. Added `getLabReadiness()` in
   `app-elearning/src/lib/lab-metadata.ts` — derived (not frontmatter) per-lab readiness metadata for
   all 72 labs: execution status (`tenant-real` | `tenant-opcional` | `simulado` |
   `no-verificado-en-tenant`), environment, product/role/data (reusing existing validated frontmatter
@@ -15,8 +26,7 @@ Current stable state as of the latest local handoff (2026-09-01):
   empezar" panel (`LabReadinessPanel`) on `/labs/[slug]`. LAB-093..100 (F&O) are marked
   `no-verificado-en-tenant` per the roadmap; RPA labs are `tenant-opcional`. See
   `SPRINT_HANDOFF.md` section "Sprint 1 — Readiness manual por lab" for full detail before touching
-  lab readiness/metadata again. Next roadmap step is Sprint 2 (troubleshooting for LAB-002/004/005 and
-  LAB-104..112).
+  lab readiness/metadata again.
 - Previous planning note: **Roadmap de auditoría tenant-real**. The user corrected the audit premise:
   the student will have access to a real Microsoft tenant and will execute labs there. Do not treat
   the lack of automatic tenant validation by the app as a blocking pedagogical defect. Separate:

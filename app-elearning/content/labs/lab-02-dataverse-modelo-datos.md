@@ -493,6 +493,52 @@ Esta vista es para el jefe de soporte para acción inmediata.
 
 ---
 
+## 🔧 Diagnóstico y reparación
+
+Para los errores más frecuentes de este laboratorio, sigue este flujo antes de pedir ayuda externa.
+
+### Prefijo `new_` en lugar de `sit_`
+
+- **Causa probable:** creaste la tabla o columna con **+ Nueva tabla** desde fuera de la solución `SIT_SolicitudesInternas`, o el publisher activo en ese momento era el publisher por defecto (`Default Publisher`, prefijo `new`).
+- **Cómo comprobar:** abre la solución `SIT_SolicitudesInternas` → pestaña **Objetos** → verifica si la tabla aparece listada ahí. Si no aparece, ábrela directamente desde **Tablas** (menú lateral) y revisa su nombre lógico completo (aparece bajo el nombre de visualización, entre paréntesis) — si empieza con `new_`, se creó con el publisher equivocado.
+- **Cómo corregir:** el prefijo de una tabla es inmutable una vez guardada. Si la tabla no tiene registros ni relaciones creadas todavía, elimínala (**Tablas** → selecciona la tabla → **Eliminar**) y recréala desde dentro de la solución `SIT_SolicitudesInternas` con **+ Nuevo** → **Tabla**, confirmando antes que el publisher activo de la solución es `SIT Publisher`.
+- **Reiniciar vs. reparar:** si ya tiene columnas dependientes o Business Rules creadas, es más rápido eliminar y recrear la tabla completa que intentar migrar cada columna. Si es solo la tabla vacía recién creada, elimínala de inmediato sin recrear nada más.
+- **Evidencia posterior a la corrección:** al abrir la tabla en **Tablas**, el nombre lógico entre paréntesis muestra el prefijo `sit_` (por ejemplo, `sit_solicitud`), y la tabla aparece listada en la pestaña **Objetos** de la solución `SIT_SolicitudesInternas`.
+
+### La tabla `sit_Solicitud` no aparece en el selector de Lookup
+
+- **Causa probable:** la tabla relacionada (`sit_Categoria` o `Contact`) no terminó de guardarse, o la columna Lookup se está creando en una solución distinta a donde vive la tabla destino.
+- **Cómo comprobar:** en la solución `SIT_SolicitudesInternas` → pestaña **Objetos**, confirma que ambas tablas (`sit_Categoria` y `sit_Solicitud`) aparecen en la lista. Si `sit_Categoria` no aparece, ábrela desde **Tablas** y verifica si tiene un ícono de advertencia o si el botón **Guardar** sigue activo (señal de cambios sin guardar).
+- **Cómo corregir:** abre la tabla faltante, haz clic en **Guardar** explícitamente, espera a que el indicador de guardado desaparezca, y recarga la página del navegador antes de volver a intentar crear el Lookup.
+- **Reiniciar vs. reparar:** nunca elimines la tabla por este error — es un problema de sincronización, no de estructura. Basta con guardar y recargar.
+- **Evidencia posterior a la corrección:** al crear la columna Lookup en `sit_Solicitud`, la tabla relacionada aparece en el selector desplegable; la pestaña **Relaciones** de `sit_Solicitud` muestra la nueva relación 1:N.
+
+### El botón "Activar" en Business Rules está deshabilitado
+
+- **Causa probable:** falta la condición inicial, o hay una rama (Verdadero/Falso) con una acción incompleta (por ejemplo, "Requerir campo" sin columna seleccionada).
+- **Cómo comprobar:** en el diseñador de la Business Rule, revisa cada nodo: un nodo con un borde rojo o un ícono de exclamación indica configuración incompleta. Haz clic en cada acción de cada rama y confirma que todos los campos obligatorios (Columna, Operador, Valor) tienen datos.
+- **Cómo corregir:** completa el nodo incompleto o elimínalo si no es necesario (clic derecho → **Quitar**). El botón **Activar** se habilita solo cuando el diseñador no detecta errores de validación.
+- **Reiniciar vs. reparar:** repara el nodo específico; no es necesario recrear la regla completa salvo que el diseñador quede en un estado inconsistente (por ejemplo, no responde al hacer clic) — en ese caso, cierra sin guardar y vuelve a crear la regla desde cero.
+- **Evidencia posterior a la corrección:** el botón **Activar** queda habilitado (no atenuado) y, tras hacer clic, el estado de la regla cambia a **Activo** en la lista de Reglas de negocio.
+
+### No puedo cambiar el Ownership después de crear la tabla
+
+- **Causa probable:** intentaste editar el campo Ownership desde **Propiedades** de una tabla que ya tiene registros o metadatos dependientes — Dataverse bloquea este cambio por diseño.
+- **Cómo comprobar:** abre la tabla → **Propiedades** → el campo **Ownership** aparece atenuado (no editable) en lugar de como un desplegable activo.
+- **Cómo corregir:** si la tabla no tiene registros, elimínala (**Tablas** → selecciona → **Eliminar**) y recréala con el Ownership correcto desde el inicio. Si ya tiene registros de prueba, expórtalos primero (o vuelve a capturarlos manualmente después, ya que este lab solo tiene 5-10 registros).
+- **Reiniciar vs. reparar:** siempre reiniciar (eliminar y recrear) — Ownership no tiene ruta de reparación en el mismo objeto.
+- **Evidencia posterior a la corrección:** al abrir **Propiedades** de la tabla recién creada, el campo Ownership muestra el valor correcto (`Organization` para `sit_Categoria`, `User or team` para `sit_Solicitud`) y es editable solo porque aún no hay registros.
+
+### Error "No tiene privilegios suficientes" al crear tablas
+
+- **Causa probable:** el rol de seguridad asignado al usuario en ese ambiente no incluye el privilegio de Crear para tablas personalizadas (por ejemplo, tiene un rol básico como "Basic User" en vez de "System Customizer").
+- **Cómo comprobar:** en [make.powerapps.com](https://make.powerapps.com) → **Configuración** (ícono de engranaje) → **Usuarios y permisos** → busca tu usuario y revisa los roles de seguridad asignados en ese ambiente.
+- **Cómo corregir:** pide al administrador del ambiente (o hazlo tú mismo si tienes acceso) que te asigne el rol **System Customizer** o **System Administrator** desde el Power Platform Admin Center → Ambiente → **Usuarios** → selecciona tu usuario → **Administrar roles**.
+- **Reiniciar vs. reparar:** no aplica reiniciar componentes — es un problema de permisos, no de datos. Solo reintenta la acción original después de que el rol se propague (puede tardar 1-2 minutos).
+- **Evidencia posterior a la corrección:** puedes crear una tabla de prueba sin que aparezca el mensaje de error; el rol correcto aparece listado junto a tu usuario en el Admin Center.
+
+---
+
 ## Checklist final
 
 - [ ] Publisher `SIT Publisher` con prefijo `sit` creado

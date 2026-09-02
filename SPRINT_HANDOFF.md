@@ -35,6 +35,33 @@ de instrucciones (ver nota por estado en el panel).
 
 **Siguiente paso**: Sprint 2 — Troubleshooting de labs base y RPA (LAB-002/004/005, LAB-104 a LAB-112).
 
+## Sprint 2 — Troubleshooting de labs base y RPA (2026-09-01) — CERRADO
+
+Alcance: LAB-02, LAB-04, LAB-05 (base N1) y LAB-104 a LAB-112 (RPA, 9 labs) — 12 archivos en total.
+
+- Cada lab del alcance recibió una sección nueva `## 🔧 Diagnóstico y reparación`, con 4-6 errores
+  específicos al contenido real de sus ejercicios (no genéricos), cada uno con los 5 campos exigidos
+  por el roadmap: **Causa probable**, **Cómo comprobar**, **Cómo corregir**, **Reiniciar vs. reparar**,
+  **Evidencia posterior a la corrección**.
+- LAB-02/04/05 ya tenían tabla `## Errores frecuentes` (Problema/Causa probable/Solución) — se
+  conservó intacta y el nuevo bloque se insertó justo después, antes de `## Checklist final`.
+- LAB-104 a LAB-112 no tenían sección de errores — se creó `## Errores frecuentes` (tabla) +
+  `## 🔧 Diagnóstico y reparación`, insertadas entre `## Ejercicios` y `## Evidencia esperada`.
+- Contenido generado vía 4 subagentes en paralelo (3 labs cada uno), con instrucciones que exigían
+  errores derivados del contenido real de cada archivo (no copy-paste entre labs) y terminología ya
+  usada en el archivo (make.powerapps.com, Solución, Publicar, PAD, etc.).
+- Frontmatter, ejercicios, checklist y demás secciones no se tocaron en ningún archivo.
+- Validación local: `lint`, `tsc --noEmit`, `validate:content` (incluye `validate:assets`,
+  `validate:interactive-practices`, `validate:spaced-repetition`), `test:coverage` (424/424), `build`
+  — todo en verde. `e2e` no se corrió en este cierre (cambios son solo contenido markdown, sin tocar
+  componentes ni rutas).
+
+Criterio de cierre del roadmap cumplido: los 12 labs del alcance tienen troubleshooting suficiente
+para completarse sin tutorial externo ante fallos comunes.
+
+**Siguiente paso**: Sprint 3 — Auditoría tenant-real de D365 CE/Customer Insights/Field Service
+(LAB-081..088, LAB-090 como capstone integrador).
+
 ## Próximo roadmap aprobado — Auditoría bajo premisa tenant-real del alumno (2026-09-01)
 
 **Premisa corregida por el usuario**: el alumno sí tendrá acceso a un tenant real de Microsoft y
