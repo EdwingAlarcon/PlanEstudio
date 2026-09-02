@@ -4,6 +4,76 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
+## Resumen de sesión (retomar desde aquí) — actualizado 2026-09-01
+
+### Objetivo
+
+Ejecutar el roadmap de auditoría tenant-real (`docs/Recursos/ROADMAP_AUDITORIA_TENANT_REAL.md`):
+la app entrega contenido/instrucciones/criterios/evidencia para labs que el alumno ejecuta en un
+tenant Microsoft real; no valida automáticamente contra ese tenant. El roadmap tiene 7 sprints.
+
+### Estado actual
+
+- **Sprint 1 (Readiness manual por lab) — CERRADO.** `getLabReadiness()` en `lab-metadata.ts` +
+  panel `LabReadinessPanel` en `/labs/[slug]`, 72/72 labs con estado de ejecución/evidencia. Commit
+  `c71f12b7`, push y CI verdes.
+- **Sprint 2 (Troubleshooting labs base y RPA) — CERRADO.** Sección `## 🔧 Diagnóstico y reparación`
+  agregada a LAB-02, LAB-04, LAB-05 y LAB-104..112 (12 archivos), cada error con causa
+  probable/cómo comprobar/cómo corregir/reiniciar vs. reparar/evidencia posterior. Commit `b85dc99f`,
+  pusheado a `master`, CI run `33576436371` → **success**.
+- Validación local en verde para ambos sprints: `lint`, `tsc --noEmit`, `validate:content`,
+  `test:coverage` (424/424), `build`. Repo limpio salvo `graphify-out/` (artefacto del grafo, se
+  commitea aparte, ver `feedback_graphify_post_commit` en memoria de Claude).
+
+### Pendiente (en orden de prioridad, ver roadmap para detalle de alcance)
+
+1. **Sprint 3** — Auditoría tenant-real D365 CE/Customer Insights/Field Service: LAB-081..088 +
+   LAB-090 (capstone integrador). No iniciado.
+2. **Sprint 4** — Auditoría tenant-real F&O: LAB-093..100. No iniciado.
+3. **Sprint 5** — Duraciones y carga cognitiva: separar lectura/práctica/setup/evidencia. No iniciado.
+4. **Sprint 6** — Modo guiado estricto opcional (advertencias por prerrequisitos, sin bloqueo duro).
+   No iniciado.
+5. **Sprint 7** — Capstones nuevos por ruta laboral (expansión, no corrección). Opcional/solo si se
+   quiere expansión — ver roadmap.
+
+### Decisiones tomadas
+
+- Metadata de readiness (Sprint 1) se calcula en código (`getLabReadiness`), no se agrega como campo
+  nuevo de frontmatter en los 72 archivos de lab — mismo patrón que `getLabDomains` ya existente.
+- Troubleshooting (Sprint 2) se redactó vía 4 subagentes en paralelo (3 labs cada uno) con
+  instrucciones que exigían errores derivados del contenido real de cada lab (no genéricos
+  copy-paste) y el mismo formato de 5 campos en todos los archivos, para mantener consistencia sin
+  perder especificidad por lab.
+- En labs que ya tenían tabla `## Errores frecuentes` (LAB-02/04/05) se conservó intacta y el nuevo
+  bloque se insertó justo después; en RPA (sin esa tabla) se creó tabla + bloque nuevo entre
+  `## Ejercicios` y `## Evidencia esperada`.
+
+### Archivos tocados en esta sesión
+
+- `app-elearning/content/labs/lab-02-dataverse-modelo-datos.md`
+- `app-elearning/content/labs/lab-04-model-driven-app.md`
+- `app-elearning/content/labs/lab-05-automate-aprobacion.md`
+- `app-elearning/content/labs/lab-104-rpa-primer-desktop-flow-mantenible.md`
+- `app-elearning/content/labs/lab-105-rpa-excel-consolidacion-ventas.md`
+- `app-elearning/content/labs/lab-106-rpa-automatizacion-web-portal.md`
+- `app-elearning/content/labs/lab-107-rpa-aplicacion-legacy-controlada.md`
+- `app-elearning/content/labs/lab-108-rpa-selectores-resiliencia.md`
+- `app-elearning/content/labs/lab-109-rpa-errores-idempotencia.md`
+- `app-elearning/content/labs/lab-110-rpa-cloud-desktop-end-to-end.md`
+- `app-elearning/content/labs/lab-111-rpa-despliegue-operacion-unattended.md`
+- `app-elearning/content/labs/lab-112-rpa-capstone-proceso-administrativo.md`
+- `SPRINT_HANDOFF.md` (este archivo)
+- `CLAUDE.md` (raíz del repo)
+
+### Siguiente paso exacto
+
+Empezar Sprint 3: leer el alcance completo en `docs/Recursos/ROADMAP_AUDITORIA_TENANT_REAL.md`
+(sección "Sprint 3 - Auditoria tenant-real de D365 CE, Customer Insights y Field Service"), luego
+abrir y auditar manualmente LAB-081 a LAB-088 y LAB-090 contra lo que un alumno con tenant real
+puede ejecutar y comprobar hoy, antes de tocar contenido.
+
+---
+
 ## Sprint 1 — Readiness manual por lab (2026-09-01) — CERRADO
 
 Implementado sin tocar el frontmatter de los 72 archivos de lab (mismo patrón que `getLabDomains`:

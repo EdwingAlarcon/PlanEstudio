@@ -4,7 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Current Handoff for Claude
 
-Before starting new work, read `SPRINT_HANDOFF.md`. It is the active operational memory for the post-audit sprints.
+Before starting new work, read `SPRINT_HANDOFF.md` — it is the active operational memory for the
+post-audit sprints, and its top section "Resumen de sesión (retomar desde aquí)" has the exact
+Objetivo/Estado actual/Pendiente/Decisiones/Archivos tocados/Siguiente paso needed to resume this
+work from another tool (Claude Code, Codex, or otherwise). As of 2026-09-01: Sprints 1-2 of the
+tenant-real audit roadmap are closed (readiness panel + lab troubleshooting); Sprint 3 (D365 CE/CI/
+Field Service tenant-real audit, LAB-081..088 + LAB-090) is next and not started.
 
 Current stable state as of the latest local handoff (2026-09-01):
 - Latest continuation: **Sprint 2 — Troubleshooting de labs base y RPA, CERRADO**. Added a
