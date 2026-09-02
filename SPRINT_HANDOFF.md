@@ -4,6 +4,37 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
+## Sprint 1 — Readiness manual por lab (2026-09-01) — CERRADO
+
+Implementado sin tocar el frontmatter de los 72 archivos de lab (mismo patrón que `getLabDomains`:
+metadata derivada en código, no un campo nuevo por archivo):
+
+- `getLabReadiness(lab)` en `lab-metadata.ts` calcula, para cada uno de los 72 labs: `executionStatus`
+  (`tenant-real` | `tenant-opcional` | `simulado` | `no-verificado-en-tenant`), `environment` (por
+  nivel), `product`/`role` (reusan `lab.products`/`lab.role` del frontmatter ya validado), `data`
+  (reusa `lab.prerequisites`) y `evidence` (reusa `summarizeEvidence`, ya existente).
+- Clasificación: LAB-093 a LAB-100 (F&O) → `no-verificado-en-tenant` (el propio contenido ya declaraba
+  no haber sido verificado contra tenant vivo); nivel `RPA` → `tenant-opcional` (Power Automate Desktop
+  corre local en Windows sin depender de tenant M365); resto → `tenant-real` por defecto, con rama
+  `simulado` reservada para labs cuyo `kind` heurístico (`getLabKind`) sea "Simulacion" (actualmente
+  ningún archivo de lab dispara esa rama — las simulaciones tituladas en inglés como "Technical
+  Interview Simulation" no calzan el patrón español `simulador|simulacion`; queda documentado por si se
+  usa a futuro).
+- Nuevo componente `LabReadinessPanel` (`components/labs/lab-readiness-panel.tsx`), panel "Antes de
+  empezar" insertado en `/labs/[slug]` antes del `LabWorkstationGate` existente. No bloquea: solo
+  informa producto/rol/ambiente/datos/evidencia y una nota explicando qué significa cada estado (sin
+  presentar "no verificado en tenant" como defecto de la app).
+- Test `lab readiness (Sprint 1 — auditoría tenant-real)` en `lab-metadata.test.ts` verifica que los
+  72/72 labs tienen los 5 campos no vacíos, y fija la clasificación de F&O/RPA/SIT explícitamente.
+- Validación local: `lint`, `tsc --noEmit`, `validate:content`, `test:coverage` (424/424), `build`,
+  `e2e` (89/89) — todo en verde.
+
+Criterio de cierre del roadmap cumplido: 72/72 labs con estado de ejecución y evidencia mínima
+visibles antes de empezar; la app diferencia explícitamente ausencia de validación automática vs falta
+de instrucciones (ver nota por estado en el panel).
+
+**Siguiente paso**: Sprint 2 — Troubleshooting de labs base y RPA (LAB-002/004/005, LAB-104 a LAB-112).
+
 ## Próximo roadmap aprobado — Auditoría bajo premisa tenant-real del alumno (2026-09-01)
 
 **Premisa corregida por el usuario**: el alumno sí tendrá acceso a un tenant real de Microsoft y

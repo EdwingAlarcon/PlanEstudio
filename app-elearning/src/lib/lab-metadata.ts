@@ -186,6 +186,80 @@ export function getLabDomains(lab: LabInfo): DomainTag[] {
   return DOMAIN_TAGS.filter((tag) => domains.has(tag));
 }
 
+export type ExecutionStatus = "tenant-real" | "tenant-opcional" | "simulado" | "no-verificado-en-tenant";
+
+export interface LabReadiness {
+  executionStatus: ExecutionStatus;
+  executionStatusLabel: string;
+  executionStatusNote: string;
+  environment: string;
+  product: string;
+  role: string;
+  data: string;
+  evidence: string;
+}
+
+/**
+ * Labs F&O (093-100): el propio contenido declara que no fueron verificados contra un
+ * tenant/demo vivo al escribirse (ver docs/Recursos/ROADMAP_AUDITORIA_TENANT_REAL.md, Sprint 4).
+ */
+const NO_VERIFICADO_EN_TENANT_IDS = new Set([
+  "lab-93", "lab-94", "lab-95", "lab-96", "lab-97", "lab-98", "lab-99", "lab-100",
+]);
+
+const EXECUTION_STATUS_LABELS: Record<ExecutionStatus, string> = {
+  "tenant-real": "Ejecutable en tenant real",
+  "tenant-opcional": "Ejecutable local u opcional en tenant",
+  simulado: "Práctica simulada (sin tenant)",
+  "no-verificado-en-tenant": "No verificado contra tenant vivo",
+};
+
+const EXECUTION_STATUS_NOTES: Record<ExecutionStatus, string> = {
+  "tenant-real":
+    "Este laboratorio se ejecuta completo en un tenant real de Microsoft siguiendo las instrucciones dadas.",
+  "tenant-opcional":
+    "Puede ejecutarse en tu equipo (Windows/Power Automate Desktop) sin depender de un tenant; capacidades como unattended, hosted o machine groups requieren licencia y tenant adicionales.",
+  simulado:
+    "Es una simulación de razonamiento/decisión: no requiere tenant ni licencia y no sustituye la evidencia de un laboratorio en tenant real.",
+  "no-verificado-en-tenant":
+    "El contenido no fue verificado paso a paso contra un tenant o demo vivo al escribirse. Si tu tenant difiere en nombres de menú o versión, documenta la diferencia como parte de tu evidencia.",
+};
+
+const ENVIRONMENT_BY_LEVEL: Record<string, string> = {
+  N1: "Ambiente Developer de Power Platform (make.powerapps.com)",
+  N2: "Ambiente Developer o Sandbox de Power Platform",
+  N3: "Ambiente Developer/Sandbox con permisos de personalización avanzada",
+  N4: "Ambiente Sandbox o Producción con rol de arquitectura de solución",
+  N5: "Entorno de desarrollo local (Node.js/VS Code/editor con IA) o ambiente Power Platform, según el módulo",
+  N6: "Tenant de Dynamics 365 con la app y licencia del producto habilitadas",
+  RPA: "Equipo Windows con Power Automate Desktop instalado",
+};
+
+function getExecutionStatus(lab: LabInfo, kind: string): ExecutionStatus {
+  if (NO_VERIFICADO_EN_TENANT_IDS.has(lab.id)) return "no-verificado-en-tenant";
+  if (kind === "Simulacion") return "simulado";
+  if (lab.level === "RPA") return "tenant-opcional";
+  return "tenant-real";
+}
+
+export function getLabReadiness(lab: LabInfo): LabReadiness {
+  const kind = getLabKind(lab);
+  const executionStatus = getExecutionStatus(lab, kind);
+
+  return {
+    executionStatus,
+    executionStatusLabel: EXECUTION_STATUS_LABELS[executionStatus],
+    executionStatusNote: EXECUTION_STATUS_NOTES[executionStatus],
+    environment: ENVIRONMENT_BY_LEVEL[lab.level] ?? "Ambiente de Power Platform según lo indicado en el laboratorio",
+    product: lab.products.length > 0 ? lab.products.join(", ") : "Sin producto externo declarado",
+    role: lab.role.length > 0 ? lab.role.join(", ") : "Cualquier rol con acceso al ambiente indicado",
+    data: lab.prerequisites.length > 0
+      ? lab.prerequisites.join("; ")
+      : "El laboratorio provee sus propios datos de prueba; no requiere datos externos previos.",
+    evidence: summarizeEvidence(lab),
+  };
+}
+
 export function getLabPresentationMeta(lab: LabInfo): LabPresentationMeta {
   const kind = getLabKind(lab);
   const certifications = getCertificationBadges(lab);

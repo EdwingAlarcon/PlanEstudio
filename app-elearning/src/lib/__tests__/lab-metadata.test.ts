@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { getAllLabs, getAllLevels, getLabBySlug } from "../content";
-import { getLabDomains, getLabPresentationMeta } from "../lab-metadata";
+import { getLabDomains, getLabPresentationMeta, getLabReadiness } from "../lab-metadata";
 
 const RETIRED_CERTIFICATIONS = new Set(["PL-600", "MB-210", "MB-220", "MB-240", "MB-260", "MB-280", "MB-300"]);
 
@@ -125,5 +125,55 @@ describe("lab domain classification", () => {
     const lab = getLabBySlug("lab-90-capstone-enterprise-d365");
     expect(lab).toBeDefined();
     expect(getLabDomains(lab!)).toEqual(["Dynamics 365"]);
+  });
+});
+
+describe("lab readiness (Sprint 1 — auditoría tenant-real)", () => {
+  it("gives every one of the 72 labs a non-empty execution status and evidence", () => {
+    const labs = getAllLabs();
+    expect(labs.length).toBe(72);
+
+    for (const lab of labs) {
+      const readiness = getLabReadiness(lab);
+      expect(readiness.executionStatus, lab.slug).toBeTruthy();
+      expect(readiness.executionStatusLabel.length, lab.slug).toBeGreaterThan(0);
+      expect(readiness.executionStatusNote.length, lab.slug).toBeGreaterThan(0);
+      expect(readiness.environment.length, lab.slug).toBeGreaterThan(0);
+      expect(readiness.product.length, lab.slug).toBeGreaterThan(0);
+      expect(readiness.role.length, lab.slug).toBeGreaterThan(0);
+      expect(readiness.data.length, lab.slug).toBeGreaterThan(0);
+      expect(readiness.evidence.length, lab.slug).toBeGreaterThan(0);
+    }
+  });
+
+  it("marks F&O labs 093-100 as no verificado en tenant vivo, per the roadmap", () => {
+    const foSlugs = [
+      "lab-93-fo-finance-setup-walkthrough",
+      "lab-94-fo-procure-to-pay-hands-on",
+      "lab-95-fo-order-to-cash-hands-on",
+      "lab-96-fo-inventory-products-setup",
+      "lab-97-fo-project-operations-setup",
+      "lab-98-fo-commerce-overview-hands-on",
+      "lab-99-fo-security-duty-privilege-hands-on",
+      "lab-100-fo-reporting-hands-on",
+    ];
+
+    for (const slug of foSlugs) {
+      const lab = getLabBySlug(slug);
+      expect(lab, slug).toBeDefined();
+      expect(getLabReadiness(lab!).executionStatus, slug).toBe("no-verificado-en-tenant");
+    }
+  });
+
+  it("marks RPA labs as tenant-opcional (ejecutable localmente en Windows)", () => {
+    const lab = getLabBySlug("lab-104-rpa-primer-desktop-flow-mantenible");
+    expect(lab).toBeDefined();
+    expect(getLabReadiness(lab!).executionStatus).toBe("tenant-opcional");
+  });
+
+  it("defaults standard SIT labs to tenant-real", () => {
+    const lab = getLabBySlug("lab-02-dataverse-modelo-datos");
+    expect(lab).toBeDefined();
+    expect(getLabReadiness(lab!).executionStatus).toBe("tenant-real");
   });
 });

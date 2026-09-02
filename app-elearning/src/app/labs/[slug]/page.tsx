@@ -4,10 +4,11 @@ import Link from "next/link";
 import { Clock, ChevronLeft, Award, Users, BookOpen, AlertTriangle, FlaskConical, BrainCircuit, ArrowRight } from "lucide-react";
 import { getAllLabs, getLabBySlug } from "@/lib/content";
 import { getInteractivePracticesForLab, INTERACTIVE_TYPE_LABELS } from "@/lib/interactive-practices";
-import { getLabPresentationMeta } from "@/lib/lab-metadata";
+import { getLabPresentationMeta, getLabReadiness } from "@/lib/lab-metadata";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
 import { LabCompleteButton } from "@/components/labs/lab-complete-button";
 import { LabWorkstationGate } from "@/components/labs/lab-workstation-gate";
+import { LabReadinessPanel } from "@/components/labs/lab-readiness-panel";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
@@ -61,6 +62,7 @@ export default async function LabDetailPage({ params }: Props) {
 
   const bar = LEVEL_BAR[lab.level] ?? "bg-[#0078D4]";
   const meta = getLabPresentationMeta(lab);
+  const readiness = getLabReadiness(lab);
   const interactivePractices = getInteractivePracticesForLab(lab.displayId).slice(0, 2);
 
   return (
@@ -220,6 +222,8 @@ export default async function LabDetailPage({ params }: Props) {
           </div>
         </section>
       )}
+
+      <LabReadinessPanel readiness={readiness} />
 
       <LabWorkstationGate products={lab.products} />
 
