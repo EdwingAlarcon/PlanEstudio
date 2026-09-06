@@ -4,7 +4,21 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
-## Resumen de sesión (retomar desde aquí) — actualizado 2026-09-06 (ROADMAP COMPLETO + auditoría de vigencia)
+## Resumen de sesión (retomar desde aquí) — actualizado 2026-09-06 (ROADMAP COMPLETO + auditoría de vigencia — SESIÓN CERRADA)
+
+### Cierre de sesión
+
+El usuario cerró la sesión conforme el 2026-09-06 con el roadmap y la auditoría de vigencia
+completos. Antes de cerrar, se evaluó y **se decidió explícitamente NO crear** un capstone nuevo de
+Contact Center/Omnichannel: no es uno de los 10 temas del roadmap original de Sprint 7 (fue una idea
+propuesta por Claude al final, no un gap identificado), ya existe cobertura funcional y verificada
+(`lab-83-contact-center-simulation.md`, ya corregido en la auditoría de vigencia), y agregarlo sin
+que resuelva un vacío real habría sido acumulación de contenido sin justificación clara — no reabrir
+esta idea sin una razón concreta nueva (ej. un estudiante o cliente lo pide explícitamente).
+
+**No hay ningún trabajo a medias ni commit pendiente de esta sesión.** Todo lo cerrado está
+commiteado, pusheado a `master` y con CI en verde (último run: `34060543667`, success). El siguiente
+que retome este proyecto puede empezar limpio desde cualquier idea nueva.
 
 ### Objetivo
 
