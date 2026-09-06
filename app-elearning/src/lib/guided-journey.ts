@@ -1,6 +1,6 @@
 import type { ModuleInfo, LabInfo, SearchDocument } from "./content";
 import type { ProfessionalRouteSlug } from "./professional-routes";
-import { CERTIFICATION_LEVEL_ORDER, LEVEL_MODULE_RANGE, type LevelId } from "./i18n";
+import { CERTIFICATION_LEVEL_ORDER, LEVEL_MODULE_RANGE, LEVEL_ORDER, type LevelId } from "./i18n";
 
 export type OnboardingStage =
   | "new"
@@ -385,6 +385,42 @@ export function getModulePrerequisiteWarning(
   }
 
   return null;
+}
+
+// ─── Modo guiado: advertencia de prerrequisito por lab ─────────────────────────
+// LabInfo.prerequisites es texto libre (no IDs verificables), así que solo se
+// puede detectar de forma confiable la referencia a un módulo ("Módulo 9 ...").
+// Referencias a otro lab ("Lab 02 ...") no se resuelven aquí porque requieren el
+// slug real del lab, que no está disponible en el texto libre.
+
+export interface LabPrerequisiteWarning {
+  unmet: string[]; // prerrequisitos (texto original) que referencian un módulo no completado
+}
+
+function levelForModuleId(moduleId: number): LevelId | null {
+  for (const levelId of LEVEL_ORDER) {
+    const [start, end] = LEVEL_MODULE_RANGE[levelId];
+    if (moduleId >= start && moduleId <= end) return levelId;
+  }
+  return null;
+}
+
+export function getLabPrerequisiteWarning(
+  prerequisites: string[],
+  completedModules: string[],
+): LabPrerequisiteWarning | null {
+  const unmet: string[] = [];
+  for (const prereq of prerequisites) {
+    const match = prereq.match(/M[oó]dulo\s+(\d+)/i);
+    if (!match) continue;
+    const moduleId = Number(match[1]);
+    const levelId = levelForModuleId(moduleId);
+    if (!levelId) continue;
+    if (!completedModules.includes(`${levelId}-${moduleId}`)) {
+      unmet.push(prereq);
+    }
+  }
+  return unmet.length > 0 ? { unmet } : null;
 }
 
 export function validateGuidedJourneyReferences(modules: ModuleInfo[], labs: LabInfo[]): string[] {

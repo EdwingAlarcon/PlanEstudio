@@ -5,6 +5,7 @@ import {
   buildWeeklyPlan,
   classifySearchDocument,
   getFoundationProgress,
+  getLabPrerequisiteWarning,
   getModulePrerequisiteWarning,
   getNextBestAction,
   getRecommendationReason,
@@ -206,5 +207,39 @@ describe("getModulePrerequisiteWarning", () => {
     expect(getModulePrerequisiteWarning(42, "ia", [])).toBeNull();
     expect(getModulePrerequisiteWarning(57, "d365", [])).toBeNull();
     expect(getModulePrerequisiteWarning(67, "rpa", [])).toBeNull();
+  });
+});
+
+describe("getLabPrerequisiteWarning", () => {
+  it("returns null when there are no prerequisites referencing a module", () => {
+    expect(getLabPrerequisiteWarning(["Visual Studio 2022 instalado"], [])).toBeNull();
+  });
+
+  it("returns null when the referenced module is already completed", () => {
+    const warning = getLabPrerequisiteWarning(
+      ["Módulo 9 estudiado: Dataverse Avanzado"],
+      ["intermedio-9"],
+    );
+    expect(warning).toBeNull();
+  });
+
+  it("warns with the original prerequisite text when the referenced module is not completed", () => {
+    const warning = getLabPrerequisiteWarning(
+      ["Módulo 9 estudiado: Dataverse Avanzado", "Lab 02 completado"],
+      [],
+    );
+    expect(warning).toEqual({ unmet: ["Módulo 9 estudiado: Dataverse Avanzado"] });
+  });
+
+  it("ignores prerequisite text referencing a lab, not a module (unresolvable without a slug)", () => {
+    expect(getLabPrerequisiteWarning(["Lab 02 completado"], [])).toBeNull();
+  });
+
+  it("collects every unmet module reference across multiple prerequisites", () => {
+    const warning = getLabPrerequisiteWarning(
+      ["Módulo 1 completado", "Módulo 5 estudiado"],
+      [],
+    );
+    expect(warning?.unmet).toHaveLength(2);
   });
 });

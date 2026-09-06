@@ -8,6 +8,7 @@ import { getLabPresentationMeta, getLabReadiness } from "@/lib/lab-metadata";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
 import { LabCompleteButton } from "@/components/labs/lab-complete-button";
 import { LabWorkstationGate } from "@/components/labs/lab-workstation-gate";
+import { LabPrerequisiteGate } from "@/components/labs/lab-prerequisite-gate";
 import { LabReadinessPanel } from "@/components/labs/lab-readiness-panel";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -226,6 +227,8 @@ export default async function LabDetailPage({ params }: Props) {
       <LabReadinessPanel readiness={readiness} />
 
       <LabWorkstationGate products={lab.products} />
+
+      <LabPrerequisiteGate prerequisites={lab.prerequisites} />
 
       {/* ── Lab markdown content ──────────────────────────────────────────── */}
       <div className="rounded-xl border border-border bg-card px-6 py-8 md:px-8 shadow-fluent-1">

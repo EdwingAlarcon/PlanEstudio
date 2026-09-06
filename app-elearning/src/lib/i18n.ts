@@ -253,6 +253,10 @@ export const UI = {
     body: "Este lab usa herramientas que no marcaste como instaladas o verificadas todavia. No es obligatorio: puedes seguir el lab igual, pero preparar tu entorno primero suele ahorrar tiempo.",
     cta: "Preparar mi entorno",
   },
+  labPrerequisiteGate: {
+    title: "Antes de este lab puede convenirte revisar",
+    body: "Este lab da por hecho contenido de un módulo que todavía no marcaste como completado. No es obligatorio volver, pero si algo no se entiende, puede ser por eso.",
+  },
   modulePrerequisiteGate: {
     title: "Antes de este módulo puede convenirte revisar",
     levelIncompleteBody: (previousLevel: string, completed: number, total: number) =>

@@ -60,21 +60,32 @@ forma secuencial, cerrando y commiteando cada sprint por separado como ya era la
 - **CI agilizado.** `.github/workflows/ci.yml` tiene `paths-ignore` (push y pull_request) para
   `SPRINT_HANDOFF.md`, `CLAUDE.md` y `graphify-out/**`.
 
-### Pendiente (en orden de ejecución de esta sesión — ver roadmap para detalle de alcance)
+### Pendiente
 
-1. **Sprint 5** — Duraciones y carga cognitiva: separar lectura/práctica/setup/evidencia en módulos
-   técnicos avanzados (C#, PCF, React/TypeScript, F&O, RPA). **Gap real confirmado**: los módulos
-   18-30 (avanzado) tienen `estimatedMinutes` entre 7 y 15 (ej. módulo 23 "C# Plugins para
-   Dataverse" = 11 min, módulo 27 "PCF Avanzado con TypeScript y React" = 8 min) — exactamente el
-   caso que el roadmap prohíbe ("ningún módulo avanzado sugiere 8-12 minutos cuando el ejercicio
-   real requiere 1-3 horas"). Esos minutos son de *lectura*, no de ejercicio completo. No iniciado —
-   siguiente paso de esta sesión.
-2. **Sprint 6, extensión a labs** — la v1 cerrada cubre solo módulos; `LabInfo.prerequisites` es
-   texto libre (no IDs verificables), habría que definir una heurística antes de intentarlo.
-3. **Sprint 7** — Capstones nuevos por ruta laboral (expansión, no corrección). El propio roadmap
-   dice "crear solo si se decide ampliar alcance" — evaluar con el usuario qué subconjunto de las 10
-   rutas listadas realmente se quiere antes de generar 10 capstones completos (brief + datos + pasos
-   + criterios + evidencia + rúbrica + troubleshooting + solución de referencia cada uno).
+1. **Sprint 7** — Capstones nuevos por ruta laboral (expansión, no corrección). El propio roadmap
+   dice "crear solo si se decide ampliar alcance". **Auditoría rápida ya hecha**: de las 10 rutas
+   listadas en el roadmap, la mayoría ya tiene un lab capstone-grade existente (CRM Functional
+   Consultant → LAB-101, D365 Sales → LAB-66/102, Customer Service → LAB-68/77, Customer Insights
+   Data/Journeys → LAB-84/85, Field Service → LAB-86/87, RPA → LAB-112, Admin/Governance → LAB-76,
+   Data Migration → LAB-75, Solution Architect → LAB-90/41/63) y 6 de esos labs ya tienen solución de
+   referencia en `docs/Recursos/SOLUCIONES_REFERENCIA_CAPSTONES.md` (LAB-77, 79, 84, 85, 102, 112).
+   Siguiente paso real: extender esa misma solución de referencia a los labs capstone-grade que aún
+   no la tienen (candidatos: LAB-75, LAB-76, LAB-90 o LAB-101), no crear 10 capstones nuevos desde
+   cero — sería contenido redundante. Ver sección dedicada más abajo para el detalle de la auditoría.
+
+### Sprint 6, extensión a labs — CERRADA en esta sesión
+
+La v1 de Sprint 6 (ver sección propia arriba) cubría solo módulos. `LabInfo.prerequisites` es texto
+libre, no IDs verificables — la heurística implementada: `getLabPrerequisiteWarning()`
+(`guided-journey.ts`) busca coincidencias `/Módulo\s+(\d+)/i` en cada string de `prerequisites`,
+resuelve el nivel del módulo referenciado vía `LEVEL_MODULE_RANGE` y compara contra
+`completedModules`. Referencias a otro lab ("Lab 02 completado") se ignoran deliberadamente — no
+hay forma de resolver el slug real desde el texto libre sin acceso a `fs` (código de servidor), y el
+componente que consume esto es client-side. Nuevo componente `LabPrerequisiteGate`
+(`components/labs/lab-prerequisite-gate.tsx`), mismo patrón que `LabWorkstationGate`/
+`ModulePrerequisiteGate` (banda ámbar, no bloqueante, oculto fuera de `navigationMode === "guided"`),
+insertado en `/labs/[slug]` justo después de `LabWorkstationGate`. 8 tests nuevos (5 función pura +
+3 componente). Suite total: 444/444 (+8 vs. el cierre de Sprint 5).
 
 ### Dos memorias corregidas en esta sesión (estaban desactualizadas, no eran gaps reales)
 
