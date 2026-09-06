@@ -2,7 +2,7 @@
 moduleId: 69
 title: "Construcción mantenible de desktop flows"
 level: "rpa"
-certification: "Power Automate Desktop & RPA"
+certification: "Power Automate for desktop & RPA"
 estimatedMinutes: 18
 slug: "construccion-mantenible-desktop-flows"
 ---

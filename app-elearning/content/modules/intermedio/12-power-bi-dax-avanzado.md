@@ -2,7 +2,7 @@
 moduleId: 12
 title: "Power BI — DAX Avanzado"
 level: "intermedio"
-certification: "PL-200"
+certification: "PL-200 (retirado 31 ago 2026)"
 estimatedMinutes: 10
 slug: "power-bi-dax-avanzado"
 ---
@@ -28,7 +28,7 @@ Dominar DAX avanzado: CALCULATE con múltiples filtros, contexto de filtro vs fi
 
 - **RANKX:** función DAX que calcula el ranking dinámico de una expresión sobre una tabla. Sintaxis: `RANKX(tabla, expresión, valor, orden, vínculos)`. El parámetro de vínculos acepta DENSE (sin saltos en el ranking) o SKIP (salta posiciones cuando hay empates). Funciona con el contexto de filtro actual, por lo que si hay un filtro de región, el ranking es dentro de esa región. Ejemplo: `RANKX(ALL(Clientes), [Total Ventas],, DESC, DENSE)` rankea todos los clientes por ventas, ignorando filtros, de mayor a menor.
 
-- **Row Level Security (RLS):** mecanismo de Power BI que filtra los datos que un usuario puede ver basándose en su identidad (USERPRINCIPALNAME()). Se define en Power BI Desktop creando roles con expresiones DAX en tablas del modelo. Al publicar en Power BI Service, se asignan usuarios o grupos de Azure AD a cada rol. Los filtros de RLS se propagan por las relaciones del modelo (si filtras Vendedores, automáticamente se filtran Ventas, Productos vendidos, etc.). Los administradores del workspace ven todos los datos salvo que sean añadidos explícitamente a un rol.
+- **Row Level Security (RLS):** mecanismo de Power BI que filtra los datos que un usuario puede ver basándose en su identidad (USERPRINCIPALNAME()). Se define en Power BI Desktop creando roles con expresiones DAX en tablas del modelo. Al publicar en Power BI Service, se asignan usuarios o grupos de Microsoft Entra ID a cada rol. Los filtros de RLS se propagan por las relaciones del modelo (si filtras Vendedores, automáticamente se filtran Ventas, Productos vendidos, etc.). Los administradores del workspace ven todos los datos salvo que sean añadidos explícitamente a un rol.
 
 - **Tablas de calendario:** tabla de fechas que contiene una fila por cada día del período de análisis y columnas adicionales para análisis temporal (Año, Mes, Trimestre, Semana, día de semana, etc.). Es requerida para que funcionen las funciones de Time Intelligence. Debe ser marcada como "Tabla de fechas" en el modelo y tener una columna de tipo Date sin huecos. Puede crearse con DAX (`CALENDAR()` + `ADDCOLUMNS()`), con Power Query, o importarse desde una fuente externa. Recomendación: siempre crear una tabla de fechas personalizada y desactivar el AutoDate/Time de Power BI.
 

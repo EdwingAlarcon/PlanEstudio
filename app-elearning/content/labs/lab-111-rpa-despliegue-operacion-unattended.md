@@ -3,8 +3,8 @@ id: lab-111
 title: "RPA — Despliegue entre ambientes y operación unattended"
 level: "RPA"
 duration: 180
-product: ["Power Automate Desktop", "Solutions", "Machine Runtime", "Unattended RPA"]
-certifications: ["Power Automate Desktop & RPA"]
+product: ["Power Automate for desktop", "Solutions", "Machine Runtime", "Unattended RPA"]
+certifications: ["Power Automate for desktop & RPA"]
 role: ["RPA Developer", "RPA Operations Specialist", "Automation Solution Architect"]
 prerequisites:
   - "Módulos 68 y 75 completados"

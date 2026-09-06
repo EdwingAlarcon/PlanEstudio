@@ -3,12 +3,12 @@ id: lab-104
 title: "RPA — Primer desktop flow mantenible"
 level: "RPA"
 duration: 120
-product: ["Power Automate Desktop", "Desktop Flow", "RPA"]
-certifications: ["Power Automate Desktop & RPA"]
+product: ["Power Automate for desktop", "Desktop Flow", "RPA"]
+certifications: ["Power Automate for desktop & RPA"]
 role: ["RPA Developer", "Automation Engineer"]
 prerequisites:
   - "Módulo 67 completado"
-  - "Power Automate Desktop instalado o variante simulada documentada"
+  - "Power Automate for desktop instalado o variante simulada documentada"
 files: []
 ---
 

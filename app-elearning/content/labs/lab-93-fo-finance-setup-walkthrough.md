@@ -106,7 +106,10 @@ crear una nueva — el objetivo es entender la estructura, no duplicar entidades
 
 ### Paso 2 — Calendario fiscal
 
-Ve a **General ledger > Ledger setup > Fiscal calendars**.
+Ve a **General ledger > Ledger setup > Fiscal calendars**. Algunos artículos de soporte de Microsoft
+usan la ruta alternativa **General ledger > Calendars > Fiscal calendar**; si tu ambiente muestra
+esa variante en vez de la anterior, es el mismo destino — documenta cuál viste como parte de tu
+evidencia, tal como pide la Nota de verificación de este lab.
 
 - Crea o revisa un calendario fiscal con años y períodos.
 - Documenta cuántos períodos tiene un año fiscal y si coincide con el año calendario.

@@ -33,11 +33,11 @@ Construir portales web externos con Power Pages que permiten a clientes y provee
 
 #### Actividad 21.2: Configurar autenticación
 1. Set up → Identity providers
-2. Configurar Azure AD (para empleados del cliente):
-    - App Registration en Azure AD con redirect URI: `https://clientes-sit.powerappsportals.com/signin-oidc`
-    - En Portal: Identity Provider → Azure AD → Client ID, Client Secret, Authority
+2. Configurar Microsoft Entra ID (para empleados del cliente):
+    - App Registration en Microsoft Entra ID con redirect URI: `https://clientes-sit.powerappsportals.com/signin-oidc`
+    - En Portal: Identity Provider → Microsoft Entra ID → Client ID, Client Secret, Authority
 
-3. Configurar Local Authentication (para usuarios externos sin Azure AD):
+3. Configurar Local Authentication (para usuarios externos sin Microsoft Entra ID):
     - Allow users to register with email
     - Configurar email de confirmación con plantilla personalizada
 
@@ -169,7 +169,7 @@ function crearCasoPortal(asunto, descripcion) {
 | Web API retorna 403 | Token de verificación no incluido en la llamada | Siempre incluir `__RequestVerificationToken` en headers de fetch |
 
 ### 🧪 Criterios de Validación
-- [ ] Portal creado con autenticación Azure AD funcional
+- [ ] Portal creado con autenticación Microsoft Entra ID funcional
 - [ ] Usuario autenticado ve solo sus propios casos (Table Permission de tipo Contact)
 - [ ] Página con Liquid muestra datos dinámicos del usuario logueado
 - [ ] Formulario de creación de solicitud guarda en Dataverse correctamente

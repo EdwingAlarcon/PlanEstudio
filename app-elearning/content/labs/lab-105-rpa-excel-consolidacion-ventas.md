@@ -3,8 +3,8 @@ id: lab-105
 title: "RPA — Automatización de Excel y consolidación de ventas"
 level: "RPA"
 duration: 150
-product: ["Power Automate Desktop", "Excel", "Archivos", "RPA"]
-certifications: ["Power Automate Desktop & RPA"]
+product: ["Power Automate for desktop", "Excel", "Archivos", "RPA"]
+certifications: ["Power Automate for desktop & RPA"]
 role: ["RPA Developer", "Automation Engineer", "RPA Support Analyst"]
 prerequisites:
   - "Módulo 70 completado"

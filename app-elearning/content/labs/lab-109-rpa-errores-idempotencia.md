@@ -3,8 +3,8 @@ id: lab-109
 title: "RPA — Manejo de errores e idempotencia"
 level: "RPA"
 duration: 150
-product: ["Power Automate Desktop", "Logging", "Idempotencia", "RPA"]
-certifications: ["Power Automate Desktop & RPA"]
+product: ["Power Automate for desktop", "Logging", "Idempotencia", "RPA"]
+certifications: ["Power Automate for desktop & RPA"]
 role: ["RPA Developer", "RPA Support Analyst", "Automation Engineer"]
 prerequisites:
   - "Módulo 74 completado"

@@ -26,7 +26,9 @@ Al finalizar este laboratorio habrás instalado los componentes Core del CoE Sta
 
 **Problema a resolver:** SIT lleva 2 años adoptando Power Platform. Hoy el tenant tiene 47 aplicaciones Canvas, 120 flujos y 12 ambientes. Nadie sabe cuáles apps son críticas para el negocio, quién las mantiene, si usan conectores de datos sensibles o cuántas están abandonadas por sus creadores. El arquitecto de soluciones necesita visibilidad y control sin bloquear la innovación.
 
-**Por qué el CoE Starter Kit:** Es el conjunto de herramientas de gobernanza oficial de Microsoft para Power Platform. No reemplaza el trabajo del CoE — lo habilita con datos. La alternativa es hacer inventario manual en Excel cada mes.
+**Por qué el CoE Starter Kit:** Es un conjunto de herramientas de gobernanza de Power Platform publicado por Microsoft. No reemplaza el trabajo del CoE — lo habilita con datos. La alternativa es hacer inventario manual en Excel cada mes.
+
+> **Nota de vigencia:** el CoE Starter Kit ya no tiene mantenimiento activo por parte de Microsoft — sus capacidades centrales (visibilidad de inventario del tenant, gobernanza básica) ya están cubiertas de forma nativa por Managed Environments y el Power Platform admin center. Hoy se instala más como complemento para necesidades puntuales (actualización masiva de permisos, limpieza de recursos huérfanos, encuestas a makers) que como punto de partida obligatorio de gobernanza. La instalación y el uso descritos en este lab siguen siendo válidos.
 
 ## Lo que vas a construir / configurar
 

@@ -2,7 +2,7 @@
 moduleId: 70
 title: "Archivos, CSV y Excel con PAD"
 level: "rpa"
-certification: "Power Automate Desktop & RPA"
+certification: "Power Automate for desktop & RPA"
 estimatedMinutes: 20
 slug: "archivos-csv-excel-pad"
 ---

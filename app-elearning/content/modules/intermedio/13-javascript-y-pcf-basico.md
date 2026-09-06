@@ -2,7 +2,7 @@
 moduleId: 13
 title: "JavaScript y PCF Básico"
 level: "intermedio"
-certification: "PL-200"
+certification: "PL-200 (retirado 31 ago 2026)"
 estimatedMinutes: 10
 slug: "javascript-y-pcf-basico"
 ---

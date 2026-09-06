@@ -14,7 +14,7 @@ Diseñar arquitecturas de datos modernas usando Microsoft Fabric y Azure Synapse
 - **Lakehouse:** arquitectura que combina el almacenamiento flexible y económico de un Data Lake (archivos en Azure Data Lake Storage) con las capacidades de consulta SQL de un Data Warehouse, usando el formato Delta Lake para proveer transacciones ACID sobre los archivos. En Fabric, el Lakehouse tiene dos áreas: "Files" (archivos sin esquema, zona de landing del Bronze layer) y "Tables" (tablas Delta registradas en el metastore, accesibles vía SQL). Una organización con 10 años de datos históricos en formatos dispares puede cargarlos en el área Files del Lakehouse y transformarlos gradualmente a Tables estructuradas.
 - **OneLake:** capa de almacenamiento subyacente unificada de Microsoft Fabric — análoga a OneDrive pero para datos analíticos. Todos los items de Fabric (Lakehouses, Warehouses, semantic models) almacenan sus datos en OneLake bajo una estructura de namespaces por workspace. La ventaja es que distintos items pueden leer los mismos datos sin copiarlos: un Notebook en PySpark y un Warehouse en T-SQL pueden consultar la misma tabla Delta simultáneamente. OneLake usa Azure Data Lake Storage Gen2 bajo el capó, con el protocolo ADLS para compatibilidad con herramientas externas.
 - **Medallion Architecture:** patrón de organización de datos en tres capas de calidad creciente. Bronze: datos crudos tal como llegan del sistema fuente, inmutables, con todos sus defectos; se usan para reprocesar en caso de error aguas arriba. Silver: datos limpios, validados, estandarizados (fechas en UTC, tipos corregidos, duplicados eliminados, registros borrados filtrados); son el input de todas las transformaciones de negocio. Gold: métricas y dimensiones orientadas al negocio, pre-calculadas y desnormalizadas para máximo rendimiento en Power BI; cada tabla Gold responde a una pregunta de negocio específica.
-- **Dataverse Link to Fabric (Azure Synapse Link):** funcionalidad nativa que exporta tablas de Dataverse a Microsoft Fabric como Delta Tables de forma continua y sin necesidad de pipelines ETL adicionales. Se configura desde make.powerapps.com → Azure Synapse Link y seleccionando el workspace de Fabric como destino. La sincronización es near-real-time (latencia típica de 5-15 minutos). Es la integración preferida para analytics sobre datos de Dynamics 365 o Power Apps porque elimina carga sobre el ambiente de producción de Dataverse.
+- **Link to Microsoft Fabric vs. Azure Synapse Link (no son sinónimos):** Microsoft distingue hoy dos mecanismos distintos de exportar datos de Dataverse a analítica, y ya no deben tratarse como equivalentes entre paréntesis. **"Link to Microsoft Fabric"** es el mecanismo nuevo y recomendado: no copia datos a una cuenta de almacenamiento propia, escribe directamente como Delta Tables en OneLake dentro de un workspace de Fabric, y se configura desde make.powerapps.com → **Link data → Fabric Links → Link data via Fabric**. **Azure Synapse Link for Dataverse** es el mecanismo anterior: exporta los datos a una cuenta de Azure Data Lake Storage propia del cliente; sigue existiendo y sigue siendo válido para quien necesite esa exportación a su propia cuenta de almacenamiento (por ejemplo, para consumirla desde Synapse o desde herramientas fuera de Fabric), pero en el portal aparece catalogado bajo "Other Links", no como la ruta principal. Para proyectos nuevos orientados a Fabric, usar Link to Microsoft Fabric. La sincronización de ambos mecanismos es near-real-time (latencia típica de 5-15 minutos).
 - **DirectLake:** modo de conexión de Power BI (exclusivo de Microsoft Fabric) que lee datos directamente desde las tablas Delta del Lakehouse sin importarlos al modelo en memoria ni usar DirectQuery sobre el Lakehouse. Combina la velocidad de respuesta del modo Import con la frescura de datos del modo DirectQuery. Tiene limitaciones: no soporta todas las funciones DAX disponibles en Import mode, y el rendimiento depende del tamaño y optimización de las tablas Delta. Recomendado sobre el Gold layer bien diseñado; no recomendado sobre el Bronze layer sin transformar.
 - **Azure Synapse Analytics → Microsoft Fabric:** Synapse Analytics es la plataforma enterprise de análisis de Azure (lanzada 2020) con Synapse Spark, Synapse SQL, y Synapse Pipelines. Microsoft Fabric (2023) es su evolución unificada con experiencia mejorada y modelo de capacidad simplificado. Para proyectos nuevos: usar Fabric directamente. Para entornos con Synapse existente: los conectores de compatibilidad permiten que Fabric acceda a los datos de Synapse, y Fabric Pipelines puede reemplazar Synapse Pipelines gradualmente. Microsoft no ha anunciado una fecha de deprecación de Synapse, pero la inversión de producto está concentrada en Fabric.
 - **Delta Lake format:** formato de tabla open-source (creado por Databricks, adoptado por Microsoft) que agrega transacciones ACID, control de versiones (time travel), y operaciones de upsert/merge/delete sobre archivos Parquet en el Data Lake. En Fabric Lakehouse, todas las tablas usan Delta automáticamente. El "transaction log" de Delta (archivos JSON en `_delta_log/`) registra cada operación permitiendo consultar el estado de la tabla en cualquier punto del pasado: `SELECT * FROM table TIMESTAMP AS OF '2025-01-01'`.
@@ -25,7 +25,7 @@ Diseñar arquitecturas de datos modernas usando Microsoft Fabric y Azure Synapse
 
 ```mermaid
 graph LR
-  D["Dataverse (Synapse Link)"] --> B["Bronze: datos crudos, inmutables"]
+  D["Dataverse (Link to Microsoft Fabric)"] --> B["Bronze: datos crudos, inmutables"]
   B --> S["Silver: datos limpios y estandarizados"]
   S --> G["Gold: métricas de negocio, desnormalizadas"]
   G --> PBI["Power BI (DirectLake / Semantic Model)"]
@@ -34,12 +34,11 @@ graph LR
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
 #### Actividad 35.1: Conectar Dataverse con Microsoft Fabric
-1. make.powerapps.com → Dataverse → Azure Synapse Link → Agregar enlace
+1. make.powerapps.com → Dataverse → **Link data → Fabric Links → Link data via Fabric** (ruta recomendada actual; no usar el flujo de "Azure Synapse Link → Agregar enlace", que hoy corresponde al mecanismo anterior catalogado como "Other Links")
 2. Seleccionar tablas: Account, Contact, sit_solicitud, sit_proyecto, sit_tarea
-3. Seleccionar: Microsoft Fabric (opción nueva vs Azure Synapse)
-4. Workspace de Fabric destino: `SIT-Analytics`
-5. Las tablas se exportan como Delta Tables en el Lakehouse automáticamente
-6. Verificar en Fabric: Lakehouse → Tables → las tablas de Dataverse aparecen
+3. Seleccionar el workspace de Fabric destino: `SIT-Analytics`
+4. Las tablas se exportan como Delta Tables directamente en OneLake, sin copia intermedia a una cuenta de almacenamiento propia
+5. Verificar en Fabric: Lakehouse → Tables → las tablas de Dataverse aparecen
 
 #### Actividad 35.2: Medallion Architecture en Fabric
 ```python
@@ -172,7 +171,7 @@ DIVIDE(
 | Error | Causa | Solución |
 |-------|-------|----------|
 | DirectLake falla con errores de "fallback to DirectQuery" en producción | Las tablas Delta del Lakehouse no están optimizadas (demasiados archivos pequeños, sin V-Order) | Ejecutar `OPTIMIZE` y habilitar V-Order en las tablas Delta del Gold layer; el Semantic Model en DirectLake requiere tablas bien mantenidas |
-| Dataverse Link sincroniza datos incorrectos o con retraso excesivo | El ambiente de Dataverse tiene alta carga o el flujo de sincronización fue pausado sin alertas | Monitorear el estado del Dataverse Link desde la vista "Azure Synapse Link" en make.powerapps.com; configurar alerta si el último sync tiene más de 30 minutos de antigüedad |
+| Dataverse Link sincroniza datos incorrectos o con retraso excesivo | El ambiente de Dataverse tiene alta carga o el flujo de sincronización fue pausado sin alertas | Monitorear el estado del enlace desde "Link data → Fabric Links" (o "Other Links" si es un Azure Synapse Link existente) en make.powerapps.com; configurar alerta si el último sync tiene más de 30 minutos de antigüedad |
 | Notebooks Silver fallan en producción aunque funcionaron en desarrollo | Los datos de producción tienen valores nulos, tipos inesperados o volúmenes que no existían en DEV | Agregar validaciones de datos al inicio de cada notebook (contar nulos, verificar tipos); usar `try/except` con logging para no silenciar errores |
 | Gold layer rediseñado múltiples veces porque Power BI pide cambios | El Gold se diseña desde la perspectiva técnica de Spark, no desde las preguntas de negocio | Diseñar el Gold layer empezando por los reportes: ¿qué preguntas debe responder? → esas preguntas definen las columnas y agregaciones del Gold |
 

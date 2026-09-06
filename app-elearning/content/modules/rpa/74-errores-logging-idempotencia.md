@@ -2,7 +2,7 @@
 moduleId: 74
 title: "Errores, logging e idempotencia"
 level: "rpa"
-certification: "Power Automate Desktop & RPA"
+certification: "Power Automate for desktop & RPA"
 estimatedMinutes: 22
 slug: "errores-logging-idempotencia"
 ---

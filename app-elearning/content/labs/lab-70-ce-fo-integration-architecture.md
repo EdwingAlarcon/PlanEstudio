@@ -64,7 +64,7 @@ implemente dual-write.
 | Cuentas/Clientes | `CustomersV3` | `account` | Alta (nuevo distribuidor cada semana) |
 | Productos | `Released products` | `product` | Media (catálogo revisado mensualmente) |
 | Pedidos de venta | `SalesOrderHeaderV2` / `SalesOrderLineV2` | `salesorder` / `salesorderdetail` | Alta (varios pedidos por día) |
-| Saldo de inventario | `InventOnHand` | (no se sincroniza — se consulta) | Muy alta (cambia por minuto) |
+| Saldo de inventario | `InventSum` (virtual table `mserp_inventoryonhandaientity` desde Dataverse) | (no se sincroniza — se consulta) | Muy alta (cambia por minuto) |
 
 ## Pasos detallados
 
@@ -94,7 +94,7 @@ Para cada una de las 4 entidades, documenta:
 
 ### Paso 4 — Virtual table para saldo de inventario
 
-Justifica por qué el saldo de inventario (`InventOnHand`) usa virtual table y no dual-write ni
+Justifica por qué el saldo de inventario (`InventSum`) usa virtual table y no dual-write ni
 DMF, en términos de la frecuencia de cambio (columna de la tabla de datos de prueba) y del riesgo
 de mostrar un saldo desactualizado si se sincronizara por lotes.
 

@@ -3,8 +3,8 @@ id: lab-108
 title: "RPA — Selectores, sincronización y resiliencia"
 level: "RPA"
 duration: 120
-product: ["Power Automate Desktop", "UI Elements", "Selectors", "RPA"]
-certifications: ["Power Automate Desktop & RPA"]
+product: ["Power Automate for desktop", "UI Elements", "Selectors", "RPA"]
+certifications: ["Power Automate for desktop & RPA"]
 role: ["RPA Developer", "RPA Support Analyst", "Automation Engineer"]
 prerequisites:
   - "Módulo 73 completado"

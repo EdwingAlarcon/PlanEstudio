@@ -2,7 +2,7 @@
 moduleId: 14
 title: "Conectores Personalizados"
 level: "intermedio"
-certification: "PL-200"
+certification: "PL-200 (retirado 31 ago 2026)"
 estimatedMinutes: 8
 slug: "conectores-personalizados"
 ---
@@ -14,7 +14,7 @@ Crear y certificar conectores personalizados para APIs REST, integrar autenticac
 
 - **OpenAPI (Swagger) spec:** estándar JSON/YAML para describir APIs REST de forma legible por máquinas. Especifica endpoints, métodos HTTP, parámetros, bodies de request/response, y esquemas de datos. Power Platform importa specs OpenAPI 2.0 (Swagger) y 3.0 para crear la base del conector. Herramienta recomendada para validar: `editor.swagger.io`. Consideraciones al crear specs para Power Platform: los `operationId` deben ser únicos y descriptivos (son los nombres de las acciones), los schemas deben estar completamente definidos (evitar `additionalProperties: true`).
 
-- **Authentication types:** los conectores soportan cinco tipos de autenticación. `No auth`: API pública sin credenciales. `API Key`: clave estática en header o query parameter (ej. `X-API-Key`). `Basic`: usuario + contraseña en Base64. `OAuth 2.0`: flujo de autorización delegada con Azure AD u otro proveedor de identidad (más seguro, recomendado para APIs corporativas). `Windows Auth`: para APIs en redes internas con autenticación integrada de Windows. La autenticación se configura una vez en el conector y cada usuario crea su propia conexión.
+- **Authentication types:** los conectores soportan cinco tipos de autenticación. `No auth`: API pública sin credenciales. `API Key`: clave estática en header o query parameter (ej. `X-API-Key`). `Basic`: usuario + contraseña en Base64. `OAuth 2.0`: flujo de autorización delegada con Microsoft Entra ID u otro proveedor de identidad (más seguro, recomendado para APIs corporativas). `Windows Auth`: para APIs en redes internas con autenticación integrada de Windows. La autenticación se configura una vez en el conector y cada usuario crea su propia conexión.
 
 - **Triggers vs Actions:** los conectores pueden exponer ambos tipos de operaciones. Las `Actions` son operaciones imperativas iniciadas por el flujo (GET, POST, PUT, DELETE). Los `Triggers` son operaciones que inician el flujo cuando ocurre algo en la API externa. Existen dos tipos de triggers: `Polling` (el conector llama periódicamente a la API para detectar cambios nuevos) y `Webhook` (la API llama al conector cuando ocurre un evento, más eficiente). Los triggers de webhook requieren que la API externa soporte registro y desregistro de webhooks.
 
@@ -105,7 +105,7 @@ Crear y certificar conectores personalizados para APIs REST, integrar autenticac
 1. En la sección "Seguridad" del conector:
     - Tipo de autenticación: OAuth 2.0
     - Proveedor de identidad: Microsoft Entra ID (anteriormente Azure Active Directory)
-    - ID de cliente: (App Registration ID en Azure AD)
+    - ID de cliente: (App Registration ID en Microsoft Entra ID)
     - Secreto de cliente: (secreto de la App Registration)
     - URL de autorización: `https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize`
     - URL de token: `https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token`
@@ -164,7 +164,7 @@ Crear y certificar conectores personalizados para APIs REST, integrar autenticac
 ### ⚠️ Errores Comunes
 | Error | Causa | Solución |
 |-------|-------|----------|
-| 401 Unauthorized en producción | Secreto de cliente expirado | Rotar secreto en Azure AD y actualizar en el conector |
+| 401 Unauthorized en producción | Secreto de cliente expirado | Rotar secreto en Microsoft Entra ID y actualizar en el conector |
 | Conector no aparece en solución importada | No se agregó como componente de la solución | Editar solución → Agregar existente → Conector personalizado |
 | "Invalid connection" después de importar solución | Connection Reference no configurada en destino | Configurar Connection Reference en el ambiente destino |
 

@@ -125,8 +125,9 @@ Seguridad (Zero Trust):
   - Sentinel: alertas de descarga masiva y acceso fuera de horario
   - Conditional Access: MFA + dispositivo cumpliente para acceder a PROD
 
-CoE:
-  - CoE Starter Kit instalado en ambiente dedicado
+CoE (Managed Environments/admin center como punto de partida; CoE Starter Kit como complemento — ver Módulo 32):
+  - Managed Environments + Power Platform admin center configurados para visibilidad y gobernanza del tenant
+  - CoE Starter Kit instalado en ambiente dedicado para capacidades puntuales que el admin center aún no cubre
   - Compliance Process automatizado para apps sin owner
   - Dashboard Power BI del tenant para el CIO
 
@@ -222,7 +223,7 @@ Para considerarse Solution Architect Master de Power Platform, debes cumplir:
 ### Criterios Técnicos
 - [ ] Proyecto Capstone completo y funcionando en ambientes de staging
 - [ ] Well-Architected Review completado con plan de remediación
-- [ ] CoE Starter Kit implementado con compliance process activo
+- [ ] Gobernanza de tenant implementada (Managed Environments + admin center como base; CoE Starter Kit implementado con compliance process activo también es válido — ver Módulo 32)
 - [ ] Pipeline CI/CD multi-solución con aprobaciones por ambiente
 - [ ] Integración enterprise con Azure (Service Bus + Logic Apps + APIM)
 - [ ] Arquitectura de datos Medallion en Fabric con DirectLake Power BI

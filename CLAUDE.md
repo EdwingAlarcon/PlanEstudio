@@ -9,11 +9,27 @@ post-audit sprints, and its top section "Resumen de sesión (retomar desde aquí
 Objetivo/Estado actual/Pendiente/Decisiones/Archivos tocados/Siguiente paso needed to resume this
 work from another tool (Claude Code, Codex, or otherwise). As of 2026-09-06: **all 7 sprints of the
 tenant-real audit roadmap are closed** (`docs/Recursos/ROADMAP_AUDITORIA_TENANT_REAL.md`) — no
-pending roadmap sprint remains. Two long-standing memory items thought to be open turned out to be
-stale/already-implemented (Code Apps module, case-diagnosis extension to IA/D365/RPA) — see the
+pending roadmap sprint remains — AND a full currency audit of all 149 content files (76 modules + 73
+labs) against current Microsoft Learn docs is also closed, with every confirmed finding (high,
+medium, and low confidence) corrected. Two long-standing memory items thought to be open turned out
+to be stale/already-implemented (Code Apps module, case-diagnosis extension to IA/D365/RPA) — see the
 "Corrección de memoria obsoleta" note in `SPRINT_HANDOFF.md` before ever reporting either as a gap
 again. The only net-new content this session added beyond gap-closing is LAB-113 (Field Service
 capstone), approved explicitly by the user since Sprint 7 is "expansion, not correction" by design.
+
+**Currency-audit highlights (see `SPRINT_HANDOFF.md` "Auditoría de vigencia" section for the full
+list before assuming any of this is still wrong):** PL-200's retirement (Aug 31, 2026) is now
+annotated in the 9 Intermedio modules' frontmatter (labs already had it). Module 28 (Code Apps) was
+migrated off the legacy `pac code` CLI to the current npm-based `pa` CLI (`pa app init/run/push/add
+data-source`) across all 4 hands-on activities — this was a meaningful rewrite, not a naming tweak.
+The CoE Starter Kit is Microsoft's own words "no longer actively maintained" — modules 31/32/41 and
+lab-32 now say so without discarding the pedagogical content. Azure AD B2C stopped selling to new
+customers (May 2025, successor: Microsoft Entra External ID) — noted in module 29. Three Field
+Service files (lab-86, lab-87, lab-113) had a **licensing detail I myself wrote earlier this same
+session** (a separate "resource license") corrected to the real model (two user-license SKUs) — the
+anti-fabrication guardrail I gave those subagents ("don't invent SKU/role names") prevented invention
+but did not catch a wrong description of a real mechanism. Lesson: "didn't invent it" and "verified
+it" are not the same guarantee.
 
 Current stable state as of the latest local handoff (2026-09-06):
 - Latest continuation: **full roadmap closure in one session** — Sprints 3, 4, 5, 6 (incl. its lab

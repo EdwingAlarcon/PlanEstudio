@@ -189,11 +189,10 @@ Comprender qué es AI Builder, sus modelos preconstruidos y cómo integrar IA en
 - **Modelos preconstruidos (Prebuilt models):** listos para usar sin datos de entrenamiento propios:
   - *Business Card Reader:* extrae nombre, empresa, correo, teléfono de tarjetas de presentación
   - *Document Processing (Form Processing):* extrae campos estructurados de documentos PDF/imágenes (facturas, contratos)
-  - *Text Classification:* clasifica texto libre en categorías definidas (soporte técnico, ventas, RR.HH.)
-  - *Object Detection:* detecta objetos en imágenes (inventario, inspección de calidad)
+  - *Category classification:* clasifica texto libre en categorías definidas (soporte técnico, ventas, RR.HH.)
   - *Sentiment Analysis:* analiza el sentimiento de texto como positivo, negativo o neutral
   - *Language Detection:* identifica el idioma de un texto
-- **Modelos personalizados (Custom models):** se entrenan con datos propios del negocio; requieren conjunto de datos etiquetados
+- **Modelos personalizados (Custom models):** se entrenan con datos propios del negocio; requieren conjunto de datos etiquetados. Incluyen *Object Detection* (detecta objetos en imágenes, ej. inventario, inspección de calidad), que requiere entrenamiento propio y no viene listo para usar sin datos.
 - **AI Builder Credits:** moneda de consumo para inferencias de IA. Los créditos se incluyen en licencias Premium de Power Platform o se adquieren por separado
 - **Componente AI en Canvas Apps:** control nativo que añade funcionalidad de IA (ej. `AI.BusinessCard.Scanner`) directamente en formularios
 - **Acción AI en Power Automate:** paso "AI Builder" que llama un modelo dentro de un flujo automatizado
@@ -229,7 +228,7 @@ Una empresa de logística recibe cientos de albaranes en papel diariamente. Con 
 - **Error**: Usar AI Builder en ambientes sin licencias Premium asignadas → los créditos de prueba se agotan sin aviso
   - **Solución**: Verificar créditos disponibles en Admin Center antes de producción
 - **Error**: Esperar que Document Processing funcione en documentos no estructurados (cartas libres)
-  - **Solución**: Document Processing es para formularios estructurados repetibles; para texto libre usar Text Classification o Azure AI Services
+  - **Solución**: Document Processing es para formularios estructurados repetibles; para texto libre usar Category classification o Azure AI Services
 
 #### 🧪 Criterios de Validación
 - [ ] Explorar el catálogo AI hub y probar Business Card Reader con una imagen real

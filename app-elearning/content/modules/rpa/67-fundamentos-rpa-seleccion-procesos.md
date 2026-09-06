@@ -2,14 +2,14 @@
 moduleId: 67
 title: "Fundamentos de RPA y selección de procesos"
 level: "rpa"
-certification: "Power Automate Desktop & RPA"
+certification: "Power Automate for desktop & RPA"
 estimatedMinutes: 18
 slug: "fundamentos-rpa-seleccion-procesos"
 ---
 
 ## 🎯 Objetivo
 
-Evaluar si un proceso debe automatizarse con Power Automate Desktop, con cloud flow, con API/conector, con desarrollo tradicional o si conviene mejorar primero el proceso manual.
+Evaluar si un proceso debe automatizarse con Power Automate for desktop, con cloud flow, con API/conector, con desarrollo tradicional o si conviene mejorar primero el proceso manual.
 
 ## 📖 Conceptos Clave
 

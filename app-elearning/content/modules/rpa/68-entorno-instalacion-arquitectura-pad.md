@@ -2,23 +2,23 @@
 moduleId: 68
 title: "Entorno, instalación y arquitectura PAD"
 level: "rpa"
-certification: "Power Automate Desktop & RPA"
+certification: "Power Automate for desktop & RPA"
 estimatedMinutes: 20
 slug: "entorno-instalacion-arquitectura-pad"
 ---
 
 ## 🎯 Objetivo
 
-Preparar un entorno de Power Automate Desktop entendiendo consola, diseñador, máquina registrada, conexión de máquina, machine group, usuario, cuenta de servicio, sesión y diferencias attended/unattended.
+Preparar un entorno de Power Automate for desktop entendiendo consola, diseñador, máquina registrada, conexión de máquina, machine group, usuario, cuenta de servicio, sesión y diferencias attended/unattended.
 
 ## 📖 Conceptos Clave
 
-Power Automate Desktop diseña desktop flows; el Machine Runtime permite ejecutar flujos desde Power Automate cloud. Una máquina registrada representa el equipo; una conexión de máquina define cómo Power Automate inicia sesión; un machine group distribuye ejecuciones; el usuario o cuenta de servicio determina permisos y perfil Windows.
+Power Automate for desktop diseña desktop flows; el Machine Runtime permite ejecutar flujos desde Power Automate cloud. Una máquina registrada representa el equipo; una conexión de máquina define cómo Power Automate inicia sesión; un machine group distribuye ejecuciones; el usuario o cuenta de servicio determina permisos y perfil Windows.
 
 ## 👨‍💻 Actividades Prácticas Paso a Paso
 
 1. Revisa requisitos de Windows, navegador, extensión y permisos locales.
-2. Instala o valida Power Automate Desktop en una máquina de laboratorio.
+2. Instala o valida Power Automate for desktop en una máquina de laboratorio.
 3. Identifica consola, diseñador, variables, UI elements, run history y configuración.
 4. Registra la máquina en el ambiente DEV.
 5. Documenta si puedes ejecutar attended, unattended o solo simulación.

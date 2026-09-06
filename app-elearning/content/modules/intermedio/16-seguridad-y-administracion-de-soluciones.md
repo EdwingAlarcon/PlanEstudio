@@ -2,7 +2,7 @@
 moduleId: 16
 title: "Seguridad y Administración de Soluciones"
 level: "intermedio"
-certification: "PL-200"
+certification: "PL-200 (retirado 31 ago 2026)"
 estimatedMinutes: 10
 slug: "seguridad-y-administracion-de-soluciones"
 ---
@@ -30,7 +30,7 @@ Implementar una estrategia de ambientes múltiples (DEV → TEST → UAT → PRO
 
 - **Security Roles:** conjuntos de permisos granulares sobre tablas de Dataverse que controlan qué operaciones puede realizar un usuario (Crear, Leer, Escribir, Eliminar, Agregar, Adjuntar, Asignar, Compartir) y en qué scope (Usuario, Unidad de Negocio, Organización, Padre:Hijo). Los roles se asignan a usuarios o equipos (Teams). Un usuario puede tener múltiples roles y los permisos son aditivos (el más permisivo gana). Los roles también controlan acceso a características de la plataforma (ver Analytics, exportar a Excel, personalizar el sistema).
 
-- **Teams (Dataverse):** grupos de usuarios en Dataverse que permiten asignar Security Roles a un conjunto de personas en lugar de individualmente. Tipos: Owner Teams (tienen propietario, pueden poseer registros), Access Teams (no poseen registros, acceso puntual compartido), Azure AD Group Teams (sincronizados con grupos de Microsoft Entra ID, el más recomendado para entornos grandes). Usar AD Group Teams permite gestionar miembros desde Microsoft Entra sin tocar Power Platform.
+- **Teams (Dataverse):** grupos de usuarios en Dataverse que permiten asignar Security Roles a un conjunto de personas en lugar de individualmente. Tipos: Owner Teams (tienen propietario, pueden poseer registros), Access Teams (no poseen registros, acceso puntual compartido), Microsoft Entra ID group team (sincronizados con grupos de Microsoft Entra ID, el más recomendado para entornos grandes). Usar Microsoft Entra ID group team permite gestionar miembros desde Microsoft Entra sin tocar Power Platform.
 
 - **Principio de mínimo privilegio:** práctica de diseño de seguridad que establece que cada usuario, rol o proceso debe tener solo los permisos estrictamente necesarios para realizar su función, nada más. En Dataverse implica: no asignar el rol "System Administrator" a usuarios finales, crear roles específicos por función (Jefe de Proyecto, Consultor, Auditor), usar Field Security Profiles para columnas sensibles, y revisar periódicamente los permisos asignados. Una violación de datos causada por exceso de permisos es un riesgo regulatorio y reputacional.
 

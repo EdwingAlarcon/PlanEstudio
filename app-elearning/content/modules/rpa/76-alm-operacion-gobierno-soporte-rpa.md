@@ -2,7 +2,7 @@
 moduleId: 76
 title: "ALM, operación, gobierno y soporte RPA"
 level: "rpa"
-certification: "Power Automate Desktop & RPA"
+certification: "Power Automate for desktop & RPA"
 estimatedMinutes: 24
 slug: "alm-operacion-gobierno-soporte-rpa"
 ---

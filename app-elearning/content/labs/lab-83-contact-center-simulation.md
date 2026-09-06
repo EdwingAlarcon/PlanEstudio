@@ -67,9 +67,11 @@ Actúas como Contact Center Architect configurando y probando el canal de chat e
 
 **Licencia y rol mínimo**
 
-El canal de chat depende del add-on **Digital messaging** (la evolución de lo que antes se llamaba
-Omnichannel for Customer Service) sobre una base de **Dynamics 365 Customer Service Enterprise**;
-sin ese add-on aprovisionado en el entorno, las opciones de canal y workstream no aparecen. No basta
+Sobre una base de **Dynamics 365 Customer Service Enterprise**, Omnichannel for Customer Service
+ofrece distintos add-ons de canal según lo que se necesite: **Chat for Dynamics 365** (chat web
+básico) y **Digital Messaging** (canales sociales y de mensajería más amplios). Este lab usa el
+escenario de chat web, que depende del add-on **Digital messaging** aprovisionado en el entorno;
+sin ese add-on, las opciones de canal y workstream no aparecen. No basta
 con el rol **Customer Service Representative**: quien configura workstreams y colas necesita
 privilegios de administración de Omnichannel, y el usuario que atiende conversaciones como agente
 necesita además el rol de seguridad **Omnichannel Agent** (o equivalente) sumado a su rol base de

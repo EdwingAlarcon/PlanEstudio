@@ -2,7 +2,7 @@
 moduleId: 10
 title: "Canvas Apps — Componentes y Reutilización"
 level: "intermedio"
-certification: "PL-200"
+certification: "PL-200 (retirado 31 ago 2026)"
 estimatedMinutes: 8
 slug: "canvas-apps-componentes-y-reutilizacion"
 ---

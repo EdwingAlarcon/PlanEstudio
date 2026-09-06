@@ -12,7 +12,7 @@ Usar GitHub Copilot en VS Code (autocompletado, Copilot Chat y Copilot Edits) de
 ### 📖 Conceptos Clave
 - **Autocompletado inline:** sugiere la continuación del código mientras escribes, basado en el archivo actual y archivos abiertos relacionados; se acepta con Tab.
 - **Copilot Chat:** panel de conversación dentro del editor para hacer preguntas sobre el código abierto, pedir explicaciones o generar bloques específicos sin tocar directamente el archivo.
-- **Copilot Edits / Agent Mode:** modo que puede proponer y aplicar cambios a través de múltiples archivos del proyecto a partir de una instrucción, mostrando el diff antes de aceptarlo.
+- **Copilot Edits / Agent Mode — no son sinónimos:** *Edit mode* (antes "Copilot Edits") propone y aplica cambios a través de múltiples archivos del proyecto a partir de una instrucción, mostrando el diff antes de aceptarlo. *Agent Mode* es una evolución de Edit mode con más autonomía: además de proponer diffs, ejecuta comandos de terminal, itera sobre errores de build/tests de forma autónoma y usa herramientas (incluyendo servidores MCP) sin que el humano intervenga en cada paso.
 - **Contexto del workspace:** Copilot usa como contexto los archivos abiertos, el árbol del proyecto y (según configuración) el repositorio completo — mientras más específico el contexto abierto, más preciso el resultado en un componente PCF o plugin C# concreto.
 - **`.github/copilot-instructions.md`:** archivo de convenciones de proyecto que Copilot lee automáticamente, útil para fijar patrones propios del repo (ej. convención de prefijos `sit_` de Dataverse, estilo de manejo de errores en plugins).
 

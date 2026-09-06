@@ -30,9 +30,11 @@ oportunidad ni cuánto pipeline ponderado existe para el próximo trimestre.
 
 ## Restricciones del proyecto
 
-- **Licenciamiento:** SIT solo tiene licencias Dynamics 365 Sales Enterprise (no Premium) — no
-  configures Predictive Opportunity Scoring, que requiere licencia Premium; documenta que quedaría
-  disponible si se actualiza el licenciamiento.
+- **Licenciamiento:** SIT solo tiene licencias Dynamics 365 Sales Enterprise (no Premium). Predictive
+  Opportunity Scoring sí puede configurarse con Enterprise (con un tope de 1,500 registros calificados
+  por mes; sin tope si se actualiza a una licencia superior) — la restricción real de licenciamiento
+  Premium aplica a otras capacidades como Sales Accelerator y Pipeline Intelligence, no a Predictive
+  Opportunity Scoring.
 - **Adopción:** los vendedores usan Outlook todo el día y se resisten a "otra herramienta más" —
   cualquier decisión de diseño debe considerar la integración con Outlook, no solo la app web.
 - **Datos incompletos:** varios leads históricos en el Excel no tienen teléfono ni empresa

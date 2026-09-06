@@ -3,8 +3,8 @@ id: lab-112
 title: "RPA Capstone — Automatización end-to-end de proceso administrativo"
 level: "RPA"
 duration: 240
-product: ["Power Automate Desktop", "Power Automate Cloud", "Excel", "ALM", "RPA"]
-certifications: ["Power Automate Desktop & RPA"]
+product: ["Power Automate for desktop", "Power Automate Cloud", "Excel", "ALM", "RPA"]
+certifications: ["Power Automate for desktop & RPA"]
 role: ["RPA Developer", "Automation Engineer", "Automation Solution Architect"]
 prerequisites:
   - "Módulos RPA 67-76 completados"

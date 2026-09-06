@@ -7,13 +7,13 @@ estimatedMinutes: 9
 slug: "copilot-studio-avanzado"
 ---
 ### 🎯 Objetivo
-Implementar agentes conversacionales de producción con SSO integrado a Azure AD, orquestación multi-agente, respuestas generativas con grounding en documentos corporativos, integración con Knowledge Base de D365, y métricas de calidad.
+Implementar agentes conversacionales de producción con SSO integrado a Microsoft Entra ID, orquestación multi-agente, respuestas generativas con grounding en documentos corporativos, integración con Knowledge Base de D365, y métricas de calidad.
 
 ### 📖 Conceptos Clave
 - **Generative Orchestration:** modo avanzado de Copilot Studio donde el LLM decide dinámicamente qué topic activar basado en el contexto completo de la conversación, en lugar de depender exclusivamente de trigger phrases exactas. Permite conversaciones más naturales donde el usuario puede expresarse de múltiples maneras y el agente entiende la intención. Se activa en Configuración → Generative Orchestration y requiere que los topics tengan descripciones claras para que el LLM pueda seleccionarlos correctamente.
 - **Knowledge Sources:** fuentes de conocimiento que el agente consulta para generar respuestas con Generative Answers. Tipos soportados: sitios SharePoint (con sus documentos y páginas), URLs de sitios web públicos (el bot las indexa automáticamente), archivos subidos directamente, y la Knowledge Base de D365 Customer Service. Cada fuente puede tener instrucciones de uso específicas y un nivel de confianza mínimo para mostrar la respuesta.
 - **Grounding:** proceso de anclar las respuestas generativas del LLM a fuentes de información específicas y verificables en lugar de responder desde el conocimiento general del modelo. Un agente "anclado" cita la fuente de su respuesta y rechaza responder sobre temas no cubiertos en sus Knowledge Sources. Evita alucinaciones — el riesgo de que el modelo invente procedimientos, nombres o datos de contacto inexistentes.
-- **SSO (Single Sign-On):** integración de Copilot Studio con Azure AD para que el bot reconozca al usuario autenticado en el canal (Teams, portal) sin pedirle credenciales adicionales. El bot recibe el token del usuario y puede usarlo para llamar APIs en su nombre (On-Behalf-Of). Resultado: el bot saluda al usuario por nombre y consulta sus datos específicos desde el primer mensaje.
+- **SSO (Single Sign-On):** integración de Copilot Studio con Microsoft Entra ID para que el bot reconozca al usuario autenticado en el canal (Teams, portal) sin pedirle credenciales adicionales. El bot recibe el token del usuario y puede usarlo para llamar APIs en su nombre (On-Behalf-Of). Resultado: el bot saluda al usuario por nombre y consulta sus datos específicos desde el primer mensaje.
 - **Microsoft Entra ID Authentication en Copilot Studio:** configuración de OAuth 2.0 con Microsoft Entra ID (antes Azure Active Directory) para que el agente pueda hacer llamadas autenticadas a APIs que requieren identidad del usuario. El flujo OBO (On-Behalf-Of) permite que el bot, con el token del usuario, llame a APIs de Dataverse o Microsoft Graph como si fuera el usuario mismo. Se configura en Copilot Studio → Configuración → Seguridad → Autenticación → Microsoft Entra ID.
 - **Adaptive Cards:** formato de tarjetas interactivas de Microsoft Teams y otros canales que permite mostrar información estructurada con imágenes, tablas, FactSets y botones accionables. En Copilot Studio se insertan en los nodos de mensaje con el editor visual o importando JSON. Las variables del topic se referencian con la sintaxis `${Topic.NombreVariable}`. Los botones pueden ejecutar acciones (Submit, OpenUrl) que el topic puede manejar.
 - **Multi-turn conversations:** capacidad del agente de mantener contexto a lo largo de múltiples intercambios en la misma sesión. Las variables declaradas en un topic persisten durante toda la conversación mientras el topic esté activo. Permite implementar wizards de múltiples preguntas donde cada respuesta del usuario enriquece el contexto para la siguiente acción — por ejemplo, recopilar tipo de solicitud, prioridad y descripción antes de crearla en Dataverse.
@@ -23,8 +23,8 @@ Implementar agentes conversacionales de producción con SSO integrado a Azure AD
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
-#### Actividad 22.1: Configurar SSO con Azure AD
-1. En Azure AD → App Registrations → Nueva (para el bot)
+#### Actividad 22.1: Configurar SSO con Microsoft Entra ID
+1. En Microsoft Entra ID → App Registrations → Nueva (para el bot)
 2. Configurar:
     - Redirect URI: `https://token.botframework.com/.auth/web/redirect`
     - API permissions: `User.Read`, `Mail.Send`, `offline_access`, `openid`
@@ -129,7 +129,7 @@ Implementar agentes conversacionales de producción con SSO integrado a Azure AD
 ### 💼 Caso Real de Negocio
 **Empresa:** Banco con 15,000 empleados  
 **Problema:** El chatbot anterior respondía preguntas genéricas sin saber quién era el usuario. Un empleado preguntaba "¿cuántos días de vacaciones tengo?" y el bot respondía el procedimiento genérico, no los días específicos del empleado.  
-**Solución:** SSO Azure AD + integración con HRIS vía Power Automate. El bot sabe quién es el usuario y consulta sus datos específicos. Knowledge Sources con política interna de RRHH para preguntas de procedimientos. Adaptive Cards con botones para acciones directas.  
+**Solución:** SSO Microsoft Entra ID + integración con HRIS vía Power Automate. El bot sabe quién es el usuario y consulta sus datos específicos. Knowledge Sources con política interna de RRHH para preguntas de procedimientos. Adaptive Cards con botones para acciones directas.  
 **Resultado:** Resolución en el primer mensaje: 78%. Llamadas a RRHH reducidas 40%.
 
 ### ✅ Buenas Prácticas

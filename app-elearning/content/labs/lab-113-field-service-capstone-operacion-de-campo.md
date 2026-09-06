@@ -53,10 +53,12 @@ Scheduling Optimization en el entorno. Sin Agreements activos, perfil offline pr
 
 ### Licencia y rol mínimo
 
-Además de la licencia de usuario de Dynamics 365 Field Service (o el adjunto de Field Service sobre
-Customer Service), cada técnico que aparece en el calendario de programación requiere una
-**licencia de recurso (Resource)** independiente — sin ella, el Bookable Resource no puede
-programarse aunque el técnico tenga sesión activa en la app móvil. Resource Scheduling Optimization
+Field Service se licencia por usuario, no por recurso: cada técnico que aparece en el calendario de
+programación necesita una licencia de usuario Field Service — la SKU completa "Dynamics 365 Field
+Service" para técnicos internos, o "Dynamics 365 Field Service Contractor" (subconjunto) para
+técnicos externos/terceros — no existe una licencia de "recurso" separada de la licencia de usuario;
+sin la licencia de usuario correspondiente, el Bookable Resource no puede programarse aunque el
+técnico tenga sesión activa en la app móvil. Resource Scheduling Optimization
 es una **funcionalidad separada** dentro de Field Service: puede requerir habilitación explícita en
 la configuración del entorno y, según el momento de la licencia/oferta vigente, un componente de
 licenciamiento adicional al de Field Service base — no asumas que está disponible solo porque

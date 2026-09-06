@@ -3,8 +3,8 @@ id: lab-110
 title: "RPA — Cloud flow + desktop flow end-to-end"
 level: "RPA"
 duration: 160
-product: ["Power Automate Cloud", "Power Automate Desktop", "Machine Runtime", "RPA"]
-certifications: ["Power Automate Desktop & RPA"]
+product: ["Power Automate Cloud", "Power Automate for desktop", "Machine Runtime", "RPA"]
+certifications: ["Power Automate for desktop & RPA"]
 role: ["RPA Developer", "Automation Engineer", "Power Platform Consultant"]
 prerequisites:
   - "Módulo 75 completado"

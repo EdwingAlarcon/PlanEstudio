@@ -2,7 +2,7 @@
 moduleId: 71
 title: "Automatización web con PAD"
 level: "rpa"
-certification: "Power Automate Desktop & RPA"
+certification: "Power Automate for desktop & RPA"
 estimatedMinutes: 20
 slug: "automatizacion-web-pad"
 ---

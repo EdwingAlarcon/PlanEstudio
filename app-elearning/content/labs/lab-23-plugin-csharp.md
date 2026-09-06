@@ -10,7 +10,7 @@ prerequisites:
   - "Lab 02 completado — tabla sit_Solicitud con columnas sit_prioridad, sit_estado, sit_costoestimado"
   - "Visual Studio 2022 instalado (Community o superior)"
   - "NuGet package manager disponible"
-  - "Plugin Registration Tool descargado (pac tool install --tool prt)"
+  - "Plugin Registration Tool descargado (pac tool prt)"
   - "Módulo 23 estudiado: C# Plugins para Dataverse"
 ---
 

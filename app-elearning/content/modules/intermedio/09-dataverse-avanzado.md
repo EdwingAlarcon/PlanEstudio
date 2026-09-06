@@ -2,7 +2,7 @@
 moduleId: 9
 title: "Dataverse Avanzado"
 level: "intermedio"
-certification: "PL-200"
+certification: "PL-200 (retirado 31 ago 2026)"
 estimatedMinutes: 30
 slug: "dataverse-avanzado"
 ---

@@ -7,7 +7,7 @@ estimatedMinutes: 11
 slug: "arquitectura-power-platform-casos-estudio"
 ---
 ### 🎯 Objetivo
-Desarrollar la mentalidad de Solution Architect en Power Platform mediante casos de estudio de arquitectura, análisis de requerimientos, trade-offs, gobernanza, seguridad, integración y comunicación ejecutiva. El examen PL-600 fue retirado por Microsoft el 30 de junio de 2026; este módulo conserva las competencias profesionales que siguen siendo válidas aunque la credencial ya no esté disponible.
+Desarrollar la mentalidad de Solution Architect en Power Platform mediante casos de estudio de arquitectura, análisis de requerimientos, trade-offs, gobernanza, seguridad, integración y comunicación ejecutiva. El examen PL-600 fue retirado por Microsoft el 30 de junio de 2026; este módulo conserva las competencias profesionales que siguen siendo válidas aunque la credencial ya no esté disponible. Microsoft anunció una certificación sucesora parcial, "Microsoft Certified: Agentic AI Business Solutions Architect" (AB-100), que fusiona el alcance de PL-600, MB-700 y MB-335 en una ruta orientada a soluciones de negocio con IA agéntica; es la ruta de certificación vigente equivalente para quien busque reemplazar el PL-600.
 
 ### 📖 Conceptos Clave de Arquitectura Power Platform
 
@@ -24,7 +24,7 @@ Desarrollar la mentalidad de Solution Architect en Power Platform mediante casos
 - **Estrategia de datos y seguridad:** incluye modelo de datos, Business Units, Security Roles, Field Security, Row-Level Security en Power BI y cifrado para datos sensibles. El estudiante debe justificar por qué Dataverse es superior a SharePoint Lists para datos relacionales y transaccionales.
 - **Integración con otros sistemas:** decidir cuándo usar Power Automate, Azure Logic Apps, Azure Functions y Azure Service Bus, considerando latencia, SLA, costo, throttling y complejidad operativa.
 - **Estrategia de ALM:** usar managed solutions en TEST y PROD, Connection References y Environment Variables, y Solution Checker con 0 errores críticos antes de aprobar despliegues.
-- **Estrategia de inteligencia artificial:** cuándo usar AI Builder nativo (sin código, integrado en Power Platform, modelos pre-construidos disponibles), Azure AI Services directamente (necesidades más específicas o control granular), o Azure OpenAI (respuestas generativas, clasificación de texto). El arquitecto debe también considerar el impacto en costos (AI Builder credits) y la privacidad de datos en cada opción.
+- **Estrategia de inteligencia artificial:** cuándo usar AI Builder nativo (sin código, integrado en Power Platform, modelos pre-construidos disponibles), Azure AI Services (en transición de nombre a "Foundry Tools") directamente (necesidades más específicas o control granular), o Azure OpenAI (respuestas generativas, clasificación de texto). El arquitecto debe también considerar el impacto en costos (AI Builder credits) y la privacidad de datos en cada opción.
 
 **Dominio 3: Implementar la solución (15-20%)**
 

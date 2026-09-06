@@ -403,7 +403,8 @@ stages:
                     AsyncOperation: true
                     MaxAsyncWaitTime: '120'
                     SkipProductUpdateDependencies: true
-                    ConvertToManaged: true
+                    # ConvertToManaged: true  → obsoleto: al importar una solución managed, la
+                    # conversión a managed ya ocurre automáticamente (no requiere este flag)
 
                 # 3. Verificar que la importación fue exitosa
                 - task: PowerShell@2
@@ -508,7 +509,7 @@ stages:
 | Solution Checker falla con errores de validación | La solución tiene plugins sin check de Depth o APIs obsoletas | Corrige los errores indicados en el reporte del Solution Checker antes de hacer push |
 | El CD pipeline no se disparó después del CI | El trigger de pipeline resource no está configurado correctamente | Verifica que `source` en el YAML del CD coincide exactamente con el nombre del pipeline CI |
 | Error "No se encontró el artifact" en el CD | El CI no publicó el artifact o usó un nombre diferente | Verifica que `ArtifactName` en el CI y `artifact_name` en el CD son idénticos |
-| La solución se importa pero no es Managed | Falta el flag `ConvertToManaged: true` en el CD | Agrega el flag al task de importación |
+| La solución se importa pero no es Managed | Estás importando el `.zip` unmanaged en vez del `_managed.zip` | Verifica `SolutionInputFile` en el task de importación — la conversión a managed ya es automática al importar una solución managed (el flag `ConvertToManaged` está obsoleto, no es necesario) |
 | El environment no pide aprobación | La aprobación no fue configurada correctamente | Verifica en Pipelines → Environments → SIT-TEST → Approvals and checks |
 
 ---

@@ -7,6 +7,18 @@ estimatedMinutes: 9
 practiceMinutes: 90
 slug: "power-pages-avanzado-y-azure-ad-b2c"
 ---
+
+### 🚧 Nota de vigencia: Azure AD B2C ya no está disponible para clientes nuevos
+
+> **Azure AD B2C dejó de venderse a clientes nuevos desde el 1 de mayo de 2025.** Microsoft Entra
+> External ID es la solución CIAM (customer identity and access management) de nueva generación
+> que lo sucede, y todas las funciones nuevas de identidad de clientes se construyen sobre esa
+> plataforma. El contenido de este módulo sigue siendo válido conceptualmente para organizaciones
+> que ya tienen B2C desplegado — los User Flows, Custom Policies (IEF) y el patrón de Claims Mapping
+> hacia Contact siguen operando igual. Pero si estás empezando **un proyecto nuevo hoy**, evaluá
+> primero Microsoft Entra External ID en lugar de aprovisionar un tenant B2C nuevo. Ver el párrafo
+> final del módulo para más detalle.
+
 ### 🎯 Objetivo
 Implementar portales externos con autenticación multitenant usando Azure AD B2C para clientes externos, flujos de registro personalizado, integración con APIs externas vía Web API del portal, y optimización de SEO y rendimiento.
 
@@ -131,5 +143,15 @@ Implementar portales externos con autenticación multitenant usando Azure AD B2C
 - [ ] After login, usuario ve solo sus registros (Table Permissions tipo Contact)
 - [ ] Web Template base aplicado en todas las páginas del portal
 - [ ] Portal carga en < 3 segundos (medir con Lighthouse)
+
+### 🧭 Alternativa vigente para proyectos nuevos: Microsoft Entra External ID
+
+Si estás diseñando la identidad de clientes de un portal nuevo (no migrando uno existente),
+evaluá **Microsoft Entra External ID** antes de aprovisionar un tenant Azure AD B2C: es la ruta
+recomendada por Microsoft desde que B2C dejó de venderse a clientes nuevos (mayo de 2025), recibe
+las funciones CIAM nuevas primero, y sigue el mismo patrón conceptual (flujos de sign-up/sign-in
+configurables, tokens con claims personalizables) que ya estudiaste en este módulo con User Flows.
+Para un despliegue de B2C existente, no hay urgencia de migrar — Microsoft no anunció una fecha de
+retiro para los tenants ya provisionados.
 
 ---

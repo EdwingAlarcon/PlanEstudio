@@ -3,8 +3,8 @@ id: lab-107
 title: "RPA — Aplicación Windows legacy controlada"
 level: "RPA"
 duration: 150
-product: ["Power Automate Desktop", "UI Automation", "Windows Apps", "RPA"]
-certifications: ["Power Automate Desktop & RPA"]
+product: ["Power Automate for desktop", "UI Automation", "Windows Apps", "RPA"]
+certifications: ["Power Automate for desktop & RPA"]
 role: ["RPA Developer", "RPA Support Analyst"]
 prerequisites:
   - "Módulo 72 completado"

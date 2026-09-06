@@ -2,7 +2,7 @@
 moduleId: 75
 title: "Integración cloud flow + desktop flow"
 level: "rpa"
-certification: "Power Automate Desktop & RPA"
+certification: "Power Automate for desktop & RPA"
 estimatedMinutes: 20
 slug: "integracion-cloud-desktop-flow"
 ---

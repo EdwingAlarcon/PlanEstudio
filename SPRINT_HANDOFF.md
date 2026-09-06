@@ -4,7 +4,7 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
-## Resumen de sesión (retomar desde aquí) — actualizado 2026-09-06 (ROADMAP COMPLETO)
+## Resumen de sesión (retomar desde aquí) — actualizado 2026-09-06 (ROADMAP COMPLETO + auditoría de vigencia)
 
 ### Objetivo
 
@@ -18,6 +18,51 @@ forma secuencial, cerrando y commiteando cada sprint por separado como ya era la
 **Resultado: los 7 sprints del roadmap están CERRADOS.** No queda ningún sprint pendiente de este
 roadmap. Ver "Sprint 7" más abajo para el único ítem de expansión real (no gap) que se creó con
 aprobación explícita del usuario.
+
+### Auditoría de vigencia contra Microsoft Learn (2026-09-06) — CERRADA
+
+El usuario planteó un requisito adicional: el contenido debe reflejar información real y vigente,
+nada inventado. Se ejecutó una auditoría completa de los 149 archivos de contenido (76 módulos + 73
+labs) contra Microsoft Learn actual, vía 10 subagentes en paralelo (Fase 1, solo lectura/hallazgos)
+seguidos de 8 subagentes de corrección (Fase 2, solo tras validar cada hallazgo). Full detail y
+metodología en `[[project_auditoria_vigencia_2026_09_06]]` (memoria de Claude). Resumen de las
+correcciones de mayor impacto:
+
+- **PL-200 retirado** (31 ago 2026, ya pasado) — anotado en el frontmatter `certification` de los 9
+  módulos de Intermedio (ya estaba correcto en los labs).
+- **Módulo 28 (Code Apps) migrado al CLI vigente**: Microsoft reemplazó `pac code` por un CLI npm
+  dedicado (`pa app init/run/push/add data-source`) — se reescribieron las 4 actividades prácticas
+  completas del módulo con la sintaxis actual, verificada contra Microsoft Learn. También se corrigió
+  Node.js a LTS v22+ (antes v20+) y la limitación de Power BI (una Code App SÍ puede embeberse en un
+  reporte de Power BI vía "Power Apps Visual" — lo que no soporta es la dirección inversa).
+- **CoE Starter Kit**: Microsoft ya no lo mantiene activamente (sus capacidades centrales pasaron al
+  Power Platform admin center/Managed Environments) — nota de vigencia agregada en Módulos 31/32/41
+  y lab-32, sin invalidar el contenido pedagógico (el kit sigue siendo descargable y útil).
+- **Azure AD B2C** ya no se vende a clientes nuevos desde mayo 2025 (sucesor: Microsoft Entra External
+  ID) — nota agregada al Módulo 29.
+- **Fabric Link vs. Azure Synapse Link**: Microsoft ya no los trata como sinónimos — corregido en
+  Módulo 35 (incluye diagrama Mermaid y pasos de configuración).
+- **Field Service — "licencia de recurso"**: corregido a los 2 SKUs reales (Field Service completa /
+  Field Service Contractor, ambas de usuario, no de "recurso" separado) en lab-86, lab-87 y lab-113
+  (contenido que yo mismo había escrito en Sprint 3 de esta sesión, con el detalle equivocado).
+  **Nota importante**: mi propio guardrail de "no inventar SKUs/roles" en Sprint 3 evitó fabricar el
+  dato, pero no evitó describir mal el modelo de licenciamiento real — verificar sigue siendo
+  necesario incluso cuando no se inventa nada.
+- **lab-66**: Predictive Opportunity Scoring corregido — sí funciona con Sales Enterprise (tope de
+  1,500 registros/mes), la restricción Premium real es de Sales Accelerator, no de esa función.
+  También: "Power Automate Desktop" → "Power Automate for desktop" (naming vigente, 10 módulos RPA +
+  9 labs), lab-23 (`pac tool install --tool prt` → `pac tool prt`, comando inexistente), lab-19
+  (`ConvertToManaged: true` marcado obsoleto por Microsoft, conversión ya automática), lab-70
+  (`InventOnHand` → `InventSum`), lab-83 (Digital Messaging no es "evolución" de Omnichannel, son dos
+  add-ons distintos), Módulo 63 (Contact Center standalone existe, no solo embedded), Módulo 45
+  (Codex y GitHub Copilot Agent Mode son productos de proveedores distintos, no lo mismo), Módulo 44
+  (Edit mode vs. Agent Mode no son sinónimos), Módulo 1 (AI Builder: Object Detection es Custom no
+  Prebuilt; "Text Classification" renombrado a "Category classification"), Módulo 40 (mención de
+  AB-100 como sucesora parcial de PL-600), Módulo 23 (.NET Framework 4.8 recomendado, no 4.6.2),
+  y consistencia interna "Azure AD" → "Microsoft Entra ID" en varios módulos (12, 14, 16, 20-22).
+- 53 archivos tocados en Fase 2, 100% correcciones puntuales (ninguna reescritura completa de
+  módulo/lab). Validación en verde: `lint`, `tsc --noEmit`, `validate:content`, `test` (444/444,
+  sin cambio de conteo — son correcciones de contenido, no de código), `build`.
 
 ### Estado actual
 

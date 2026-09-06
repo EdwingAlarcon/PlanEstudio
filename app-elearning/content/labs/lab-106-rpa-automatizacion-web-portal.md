@@ -3,8 +3,8 @@ id: lab-106
 title: "RPA — Automatización web de portal controlado"
 level: "RPA"
 duration: 150
-product: ["Power Automate Desktop", "Browser Automation", "UI Elements", "RPA"]
-certifications: ["Power Automate Desktop & RPA"]
+product: ["Power Automate for desktop", "Browser Automation", "UI Elements", "RPA"]
+certifications: ["Power Automate for desktop & RPA"]
 role: ["RPA Developer", "Automation Engineer"]
 prerequisites:
   - "Módulo 71 completado"

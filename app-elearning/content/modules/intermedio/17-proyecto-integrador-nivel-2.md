@@ -2,7 +2,7 @@
 moduleId: 17
 title: "Proyecto Integrador Nivel 2"
 level: "intermedio"
-certification: "PL-200"
+certification: "PL-200 (retirado 31 ago 2026)"
 estimatedMinutes: 8
 slug: "proyecto-integrador-nivel-2"
 ---

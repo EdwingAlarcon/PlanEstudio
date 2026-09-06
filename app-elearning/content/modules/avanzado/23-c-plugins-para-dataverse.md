@@ -54,10 +54,10 @@ Desarrollar plugins C# robustos para ejecutar lógica de negocio compleja en el 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
 #### Actividad 23.1: Setup del proyecto de plugin
-1. Visual Studio → Nuevo proyecto → Class Library (.NET Framework 4.6.2)
+1. Visual Studio → Nuevo proyecto → Class Library (.NET Framework 4.8)
    ```
    Nombre: SIT.Plugins
-   Framework: .NET Framework 4.6.2 (requerido para sandbox de Dataverse)
+   Framework: .NET Framework 4.8 (Dataverse soporta ensamblados de 4.6.2 a 4.8 en el sandbox; 4.8 es la versión recomendada por Microsoft para proyectos nuevos)
    ```
 
 2. NuGet packages:
