@@ -265,3 +265,10 @@ externo, y qué feedback loop tendría con las colas ya diseñadas en el Paso 6.
 - Entregar una matriz de trazabilidad incompleta (requerimiento sin historia, historia sin prueba).
 - Justificar la decisión técnica (configuración/Power Automate/JS/plugin) solo con preferencia
   personal en vez de con criterio (volumen, síncrono/asíncrono, mantenibilidad).
+
+## Solución de referencia
+
+Después de completar tu intento, compara tu entrega con
+[Soluciones de Referencia para Capstones](/recursos/soluciones-referencia-capstones#lab-101--crm-functional-analyst-caso-integrado).
+No copies la solución como entregable; úsala para detectar decisiones sin justificar, casos negativos
+faltantes o evidencia insuficiente.

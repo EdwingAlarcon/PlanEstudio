@@ -176,6 +176,13 @@ Escribe un runbook con:
   esperada: los conteos pueden cuadrar y aun así los datos estar mal mapeados; se necesita
   aprobación funcional sobre una muestra real.
 
+## Solución de referencia
+
+Después de completar tu intento, compara tu entrega con
+[Soluciones de Referencia para Capstones](/recursos/soluciones-referencia-capstones#lab-075--data-migration-to-dynamics-365).
+No copies la solución como entregable; úsala para detectar decisiones sin justificar, casos negativos
+faltantes o evidencia insuficiente.
+
 ## Qué no debe sobreprometerse
 
 Este lab entrena el diseño y la disciplina de una migración; no sustituye una migración piloto real

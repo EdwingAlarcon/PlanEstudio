@@ -154,6 +154,13 @@ Agrega un quinto producto (Contact Center o Power Automate/RPA) al decision log,
 explícitamente su estado (awareness/opcional) y por qué no se incluyó en el alcance principal de la
 arquitectura — es la misma disciplina que exige la promesa pedagógica del propio plan.
 
+## Solución de referencia
+
+Después de completar tu intento, compara tu entrega con
+[Soluciones de Referencia para Capstones](/recursos/soluciones-referencia-capstones#lab-090--capstone-enterprise-d365).
+No copies la solución como entregable; úsala para detectar decisiones sin justificar, casos negativos
+faltantes o evidencia insuficiente.
+
 ## Competencias desarrolladas
 
 - Arquitectura D365 Especialización.

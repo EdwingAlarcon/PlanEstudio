@@ -148,6 +148,13 @@ caso resuelto de ejemplo):
   para las licencias adicionales que requiere, o cuando la organización no tiene aún un proceso de
   gobierno mínimo que lo sostenga.
 
+## Solución de referencia
+
+Después de completar tu intento, compara tu entrega con
+[Soluciones de Referencia para Capstones](/recursos/soluciones-referencia-capstones#lab-076--ppac-governance-assessment).
+No copies la solución como entregable; úsala para detectar decisiones sin justificar, casos negativos
+faltantes o evidencia insuficiente.
+
 ## Qué no debe sobreprometerse
 
 Este assessment usa un inventario simulado; un informe real requiere datos exportados de un tenant

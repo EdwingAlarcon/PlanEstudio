@@ -184,6 +184,158 @@ La solucion de referencia procesa cada solicitud con un identificador unico, reg
 - Reintentos infinitos.
 - No hay criterio para decidir "esto no debe automatizarse con RPA".
 
+## LAB-075 — Data Migration to Dynamics 365
+
+### Decisiones esperadas
+
+- Definir el criterio de deduplicacion antes de cargar (normalizar nombre/email, no comparar a ojo).
+- Excluir explicitamente los registros basura (valores tipo "N/A", vacios) en vez de migrarlos "por si acaso".
+- Diseñar staging que permita reintentos sin duplicar (tabla de error separada de la de exito).
+- Definir un umbral de error por lote que decida pausar o continuar la carga.
+- Separar la validacion tecnica (conteos) de la aprobacion funcional de negocio.
+
+### Artefactos minimos aceptables
+
+| Artefacto | Referencia de calidad |
+|---|---|
+| Assessment | Volumen, calidad, dependencias e integraciones documentados con los 40k/65k/12k de referencia |
+| Mapping | Reglas de transformacion aplicadas a los 5 registros de la muestra, no solo enunciadas |
+| Staging | `stg_account_main/success/error` con `source_id`, `batch_id`, `processing_status` |
+| Reconciliacion | Conteo origen-staging-Dataverse, rechazados por causa y aprobacion funcional separada |
+| Runbook de cutover | Freeze, carga delta, validacion, go/no-go, rollback y comunicacion |
+
+### Solucion de referencia resumida
+
+Frente a L-1001 y L-1002 (duplicado funcional), la solucion de referencia normaliza `customer_name` a
+minusculas sin espacios y compara junto con el dominio del email; conserva el registro con mas
+actividad relacionada (L-1001) y redirige cualquier referencia del descartado antes de eliminarlo de
+staging. L-1003 se excluye por regla de lista de valores basura y aparece en el reporte de rechazados
+con causa explicita, no se descarta en silencio. El umbral de error por lote se fija por debajo del
+5%: superarlo pausa el batch para revision manual en vez de continuar cargando datos sospechosos.
+
+### Senales de alerta
+
+- El mapping no resuelve los 5 casos de la muestra, solo los menciona.
+- Se declara "reconciliacion aprobada" sin distinguir conteo tecnico de aprobacion funcional.
+- El rollback no aclara si tambien reactiva el sistema legacy.
+
+## LAB-076 — PPAC Governance Assessment
+
+### Decisiones esperadas
+
+- Priorizar riesgos con base en el inventario real entregado, no en generalidades de gobierno.
+- No bloquear conectores o apps sin evaluar primero el impacto operativo del dueño afectado.
+- Definir que hacer con el ambiente "Default" sin poder eliminarlo.
+- Decidir Managed Environments en funcion de presupuesto y madurez de gobierno, no por moda.
+
+### Artefactos minimos aceptables
+
+| Artefacto | Referencia de calidad |
+|---|---|
+| Inventario de ambientes | Clasificado por criticidad y riesgo usando los 4 ambientes de la muestra |
+| Matriz de DLP | Conectores clasificados business/non-business/blocked con el caso Dropbox resuelto |
+| Capacidad/licencias | Decision sobre el 78% de uso y las 6 licencias Premium sin uso, con siguiente paso claro |
+| Runbook de incidentes | Los 4 casos (flujo fallando, permisos excesivos, exportacion sospechosa, ambiente sin dueño) |
+| Informe ejecutivo | Prioriza 3-5 acciones, no una lista plana de hallazgos |
+
+### Solucion de referencia resumida
+
+Ante el conector Dropbox personal activo en Sandbox-Finanzas con datos financieros, la solucion de
+referencia no bloquea de inmediato: notifica al dueño con un plazo corto (ej. 48 horas) explicando el
+riesgo y bloquea si no hay respuesta o justificacion valida — bloquear sin aviso genera resistencia al
+gobierno futuro. Frente al 78% de capacidad, la recomendacion es investigar el consumo antes de
+comprar mas (posible causa: Default sin control, 62 apps activas sin dueño); las 6 licencias Premium
+sin uso los ultimos 90 dias se reportan a compras para reasignacion, no se descartan. "Default" no se
+elimina ni se congela de golpe: se inventarian sus apps criticas y se migran progresivamente a
+ambientes con dueño mientras se le aplican los controles de DLP que si son aplicables sin eliminar
+acceso.
+
+### Senales de alerta
+
+- El informe recomienda bloquear conectores sin mencionar comunicacion previa al dueño.
+- Se propone eliminar o congelar "Default" sin plan de migracion de sus apps activas.
+- La decision de Managed Environments no menciona presupuesto ni madurez de gobierno como condicion.
+
+## LAB-090 — Capstone Enterprise D365
+
+### Decisiones esperadas
+
+- Marcar fronteras de dato/ownership explicitas entre CE, Field Service, Customer Insights y F&O en
+  vez de tratarlos como un solo sistema.
+- Declarar el estado real (Simulado/Sandbox real/Productivo controlado) de cada capacidad, sin
+  inflar a "Productivo controlado" sin evidencia.
+- Secuenciar el roadmap por dependencias reales de licencia/tenant, no por preferencia.
+- Conectar cada entrada del decision log con evidencia concreta de los Labs 81-89, no inventar
+  decisiones nuevas en el capstone.
+
+### Artefactos minimos aceptables
+
+| Artefacto | Referencia de calidad |
+|---|---|
+| Arquitectura integrada | Cubre CE, Field Service, Customer Insights y F&O con limites de dato explicitos |
+| Fit-Gap | 12 filas con decision defendible (estandar/configuracion/personalizacion/fuera de alcance) |
+| Matriz de datos | Ownership claro por tabla (Account, Case, Work Order, Sales Order, Invoice, etc.) |
+| Roadmap | Fases con dependencia de licencia/tenant que desbloquea cada una |
+| Decision log | 8+ decisiones citando evidencia de Labs 81-89, no genericas |
+
+### Solucion de referencia resumida
+
+La situacion mas ambigua del capstone es integrar F&O con CE cuando ambos viven en entornos
+Dataverse/Finance and Operations distintos y no todos los trials estan disponibles (Contact Center por
+region, Customer Insights por licencia separada). La solucion de referencia no asume acceso: declara
+explicitamente en el resumen ejecutivo que capacidades quedan como "diseño" por falta de trial y cuales
+como "sandbox real", y el roadmap coloca la fase de integracion CE-F&O (dual-write) despues de la fase
+en que ambos entornos esten aprovisionados y vinculados — no antes, aunque el negocio quiera verlo
+"todo junto" desde la fase 1. El decision log cita, para la decision de dual-write, la evidencia
+tecnica generada en los labs de integracion previos, no una afirmacion nueva sin sustento.
+
+### Senales de alerta
+
+- La arquitectura no distingue que producto es la fuente de verdad para cada tabla compartida.
+- El roadmap fija fechas sin mencionar que licencia o trial las desbloquea.
+- Alguna capacidad se marca "Productivo controlado" sin evidencia de tenant real que lo sustente.
+
+## LAB-101 — CRM Functional Analyst Caso Integrado
+
+### Decisiones esperadas
+
+- Usar tablas estandar de Dataverse (Contact, Account, Lead, Opportunity, Case) antes de crear
+  tablas custom como "Matricula" o "Plan de pago".
+- Escribir historias de usuario con criterios de aceptacion verificables, no enunciados vagos.
+- Justificar la decision tecnica (configuracion/Power Automate/JavaScript/plugin/integracion) con
+  criterio (volumen, sincrono/asincrono, mantenibilidad), no con preferencia.
+- Tratar la omnicanalidad (WhatsApp/chat) como diseño conceptual con dependencias de licenciamiento,
+  no como si ya estuviera implementada.
+
+### Artefactos minimos aceptables
+
+| Artefacto | Referencia de calidad |
+|---|---|
+| Fit-Gap | 16+ filas (4 por proceso) con decision, riesgo y owner explicitos |
+| Backlog Azure DevOps | Epics por proceso, Features y 10+ historias con criterios de aceptacion Given/When/Then |
+| Modelo de datos | Tablas estandar primero, custom solo donde el estandar no alcanza, con matriz de roles |
+| Atencion | Casos/colas/SLA/entitlements conectados con knowledge base |
+| UAT | 10 casos (2+ por proceso) con al menos 3 defectos registrados y severidad |
+
+### Solucion de referencia resumida
+
+La decision mas dificil del caso es el entitlement de atencion: no todo estudiante matriculado debe
+tener el mismo nivel de soporte si el programa lo justifica (ej. programas premium con SLA mas
+estricto), pero condicionar el soporte por programa no puede traducirse en negar atencion academica
+basica. La solucion de referencia separa el SLA base (aplicable a todos) de un SLA diferenciado por
+programa solo para canales adicionales (ej. atencion prioritaria telefonica), y conecta la decision
+tecnica de las alertas de retencion (Power Automate, por ser asincrono y basado en eventos con umbral
+de dias sin actividad) con el criterio de mantenibilidad: un flujo de bajo codigo es mas sostenible
+para el equipo de soporte funcional que un plugin, dado que la regla de negocio (N dias sin actividad)
+cambia con frecuencia.
+
+### Senales de alerta
+
+- El backlog tiene historias sin criterios de aceptacion verificables.
+- Se crean tablas custom para procesos que Dataverse ya cubre de forma estandar (ej. Contact, Case).
+- La omnicanalidad se presenta como funcionalidad ya construida en vez de diseño con dependencias.
+- La matriz de trazabilidad tiene requerimientos sin historia o historias sin caso de prueba.
+
 ## Checklist final comun
 
 - [ ] El capstone declara estado real: Simulado, Sandbox real o Productivo controlado.
