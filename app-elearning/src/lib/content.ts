@@ -12,7 +12,8 @@ export interface ModuleInfo {
   levelId: LevelId;
   title: string;
   slug: string;
-  estimatedMinutes: number;
+  estimatedMinutes: number;   // tiempo de LECTURA del cuerpo del módulo
+  practiceMinutes?: number;   // tiempo adicional de práctica guiada embebida (setup + ejercicio), cuando aplica
   rawContent: string;
 }
 
@@ -222,7 +223,15 @@ function validateModuleFrontmatter(
     failContent(filePath, "frontmatter 'estimatedMinutes' debe ser un número positivo");
   }
 
-  return { moduleId, levelId, title, slug, estimatedMinutes };
+  let practiceMinutes: number | undefined;
+  if (data["practiceMinutes"] !== undefined) {
+    practiceMinutes = Number(data["practiceMinutes"]);
+    if (!Number.isFinite(practiceMinutes) || practiceMinutes <= 0) {
+      failContent(filePath, "frontmatter 'practiceMinutes' debe ser un número positivo cuando está presente");
+    }
+  }
+
+  return { moduleId, levelId, title, slug, estimatedMinutes, practiceMinutes };
 }
 
 export function formatLabDisplayId(idOrSlug: string): string {

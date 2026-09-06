@@ -4,6 +4,7 @@ title: "Integraciones con Azure Services"
 level: "avanzado"
 certification: "PL-400"
 estimatedMinutes: 8
+practiceMinutes: 100
 slug: "integraciones-con-azure-services"
 ---
 

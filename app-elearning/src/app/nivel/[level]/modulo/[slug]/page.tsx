@@ -85,7 +85,7 @@ export default async function ModulePage({ params }: PageProps) {
               </span>
               <span className="flex items-center gap-1 text-xs text-muted-foreground">
                 <Clock className="h-3 w-3" aria-hidden />
-                {UI.module.estimatedTime(mod.estimatedMinutes)}
+                {UI.module.estimatedTime(mod.estimatedMinutes, mod.practiceMinutes)}
               </span>
               {questions.length > 0 && (
                 <span className="flex items-center gap-1 text-xs text-muted-foreground">

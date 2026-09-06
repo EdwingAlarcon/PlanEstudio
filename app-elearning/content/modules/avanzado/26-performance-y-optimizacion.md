@@ -4,6 +4,7 @@ title: "Performance y Optimización"
 level: "avanzado"
 certification: "PL-400"
 estimatedMinutes: 9
+practiceMinutes: 60
 slug: "performance-y-optimizacion"
 ---
 ### 🎯 Objetivo

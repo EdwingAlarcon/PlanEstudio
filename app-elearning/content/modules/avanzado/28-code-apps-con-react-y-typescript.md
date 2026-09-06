@@ -4,6 +4,7 @@ title: "Code Apps con React y TypeScript"
 level: "avanzado"
 certification: "PL-400"
 estimatedMinutes: 9
+practiceMinutes: 150
 slug: "code-apps-con-react-y-typescript"
 ---
 

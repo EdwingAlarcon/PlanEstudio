@@ -4,6 +4,7 @@ title: "PCF Avanzado con TypeScript y React"
 level: "avanzado"
 certification: "PL-400"
 estimatedMinutes: 8
+practiceMinutes: 120
 slug: "pcf-avanzado-con-typescript-y-react"
 ---
 ### 🚧 Antes de comenzar: requiere TypeScript sólido

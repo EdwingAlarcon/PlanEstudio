@@ -4,6 +4,7 @@ title: "Dynamics 365 CE — Sales y Customer Service"
 level: "avanzado"
 certification: "PL-400"
 estimatedMinutes: 15
+practiceMinutes: 120
 slug: "dynamics-365-ce-sales-y-customer-service"
 ---
 ### 🎯 Objetivo

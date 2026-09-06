@@ -107,7 +107,10 @@ export const UI = {
 
   // Módulos
   module: {
-    estimatedTime: (min: number) => `${min} min de lectura`,
+    estimatedTime: (min: number, practiceMin?: number) =>
+      practiceMin
+        ? `${min} min de lectura + ~${practiceMin} min de práctica guiada`
+        : `${min} min de lectura`,
     markComplete: "Marcar como completado",
     markIncomplete: "Marcar como incompleto",
     completed: "Completado",

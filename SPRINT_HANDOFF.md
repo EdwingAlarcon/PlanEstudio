@@ -71,14 +71,23 @@ forma secuencial, cerrando y commiteando cada sprint por separado como ya era la
    siguiente paso de esta sesión.
 2. **Sprint 6, extensión a labs** — la v1 cerrada cubre solo módulos; `LabInfo.prerequisites` es
    texto libre (no IDs verificables), habría que definir una heurística antes de intentarlo.
-3. **Diagnóstico de caso aplicado — extensión a IA/D365/RPA** (ver
-   `project_diagnostico_caso_aplicado` en memoria): completo para Básico/Intermedio/Avanzado/
-   Arquitecto (módulos 1-41), faltan 35 módulos (IA 42-56, D365 57-66, RPA 67-76) × 5 preguntas =
-   175 preguntas nuevas en `docs/javascripts/evaluaciones-simulador.js`.
-4. **Sprint 7** — Capstones nuevos por ruta laboral (expansión, no corrección). El propio roadmap
+3. **Sprint 7** — Capstones nuevos por ruta laboral (expansión, no corrección). El propio roadmap
    dice "crear solo si se decide ampliar alcance" — evaluar con el usuario qué subconjunto de las 10
    rutas listadas realmente se quiere antes de generar 10 capstones completos (brief + datos + pasos
    + criterios + evidencia + rúbrica + troubleshooting + solución de referencia cada uno).
+
+### Dos memorias corregidas en esta sesión (estaban desactualizadas, no eran gaps reales)
+
+- **"Gap de Code Apps"**: el módulo `app-elearning/content/modules/avanzado/28-code-apps-con-react-y-typescript.md`
+  ya existía completo. Se implementó como módulos dentro de "avanzado" (la opción que este sesión
+  también habría recomendado) en algún punto no registrado en `SPRINT_HANDOFF.md`. Memoria borrada.
+- **"Diagnóstico de caso aplicado pendiente IA/D365/RPA"**: verificado directamente en
+  `docs/javascripts/evaluaciones-simulador.js` — los módulos 42 (inicio IA), 57 (inicio D365) y 67
+  (inicio RPA) ya tienen 5 preguntas `appliesTo: "caso"` cada uno; el conteo total del proyecto
+  (891 = 516 quiz + 375 caso) ya refleja los 76 módulos completos, no un subconjunto. Memoria
+  borrada. **Lección para el futuro**: antes de reportar un ítem de memoria como pendiente, verificar
+  contra el código/contenido actual — dos memorias de hace 30+ días estaban obsoletas en esta misma
+  sesión.
 
 ### Decisiones tomadas
 

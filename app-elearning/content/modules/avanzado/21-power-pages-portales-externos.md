@@ -4,6 +4,7 @@ title: "Power Pages — Portales Externos"
 level: "avanzado"
 certification: "PL-400"
 estimatedMinutes: 8
+practiceMinutes: 90
 slug: "power-pages-portales-externos"
 ---
 ### 🎯 Objetivo
