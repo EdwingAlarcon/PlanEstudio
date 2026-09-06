@@ -7,12 +7,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Before starting new work, read `SPRINT_HANDOFF.md` — it is the active operational memory for the
 post-audit sprints, and its top section "Resumen de sesión (retomar desde aquí)" has the exact
 Objetivo/Estado actual/Pendiente/Decisiones/Archivos tocados/Siguiente paso needed to resume this
-work from another tool (Claude Code, Codex, or otherwise). As of 2026-09-01: Sprints 1-2 of the
-tenant-real audit roadmap are closed (readiness panel + lab troubleshooting); Sprint 3 (D365 CE/CI/
-Field Service tenant-real audit, LAB-081..088 + LAB-090) is next and not started.
+work from another tool (Claude Code, Codex, or otherwise). As of 2026-09-06: Sprints 1, 2 and 6 of
+the tenant-real audit roadmap are closed (readiness panel, lab troubleshooting, and optional strict
+guided mode); Sprint 3 (D365 CE/CI/Field Service tenant-real audit, LAB-081..088 + LAB-090) is next
+in the original roadmap order and not started.
 
-Current stable state as of the latest local handoff (2026-09-01):
-- Latest continuation: **Sprint 2 — Troubleshooting de labs base y RPA, CERRADO**. Added a
+Current stable state as of the latest local handoff (2026-09-06):
+- Latest continuation: **Sprint 6 — Modo guiado estricto opcional, CERRADO** (pulled ahead of Sprint
+  3/4 by explicit product judgment — beginner-onboarding impact, no tenant dependency). Adds
+  `getModulePrerequisiteWarning()` in `src/lib/guided-journey.ts` (pure function: warns on a
+  certification-level jump via the existing `CERTIFICATION_LEVEL_ORDER`, or on skipping the
+  immediate previous module in the same level; never warns for transversal levels `ia`/`d365`/`rpa`)
+  and a new client component `ModulePrerequisiteGate` (same non-blocking amber-banner pattern as
+  `LabWorkstationGate`), inserted in `nivel/[level]/modulo/[slug]/page.tsx`. Reuses the existing
+  `navigationMode` ("guided"/"explore") from `onboarding-store.ts` — no new store or toggle. Scope is
+  modules only for this v1; labs were deliberately left out (see `SPRINT_HANDOFF.md` section
+  "Sprint 6" for why). Test suite is now 436/436 (+30). See `SPRINT_HANDOFF.md` section "Sprint 6 —
+  Modo guiado estricto opcional" for full detail before touching guided-mode gating again.
+- Previous continuation: **Sprint 2 — Troubleshooting de labs base y RPA, CERRADO**. Added a
   `## 🔧 Diagnóstico y reparación` section (4-6 lab-specific errors, each with Causa probable / Cómo
   comprobar / Cómo corregir / Reiniciar vs. reparar / Evidencia posterior) to LAB-02, LAB-04, LAB-05
   and LAB-104..112 (9 RPA labs) — 12 files total. LAB-02/04/05 already had an `## Errores frecuentes`

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ModuleCompletionClient } from "@/components/modules/module-completion-client";
+import { ModulePrerequisiteGate } from "@/components/modules/module-prerequisite-gate";
 import { QuizPanel } from "@/components/quiz/quiz-panel";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
 import { ArrowLeft, ArrowRight, Clock, BookOpen, BrainCircuit } from "lucide-react";
@@ -102,6 +103,12 @@ export default async function ModulePage({ params }: PageProps) {
           </div>
         </div>
       </div>
+
+      <ModulePrerequisiteGate
+        moduleId={mod.moduleId}
+        levelId={levelId}
+        previousModuleHref={prevModule ? `/nivel/${levelId}/modulo/${prevModule.slug}` : undefined}
+      />
 
       {/* ── Markdown content ─────────────────────────────────────────────── */}
       <div className="rounded-xl border border-border bg-card px-6 py-8 md:px-8 shadow-fluent-1">

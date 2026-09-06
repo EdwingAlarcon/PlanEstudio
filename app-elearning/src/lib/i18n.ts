@@ -250,6 +250,14 @@ export const UI = {
     body: "Este lab usa herramientas que no marcaste como instaladas o verificadas todavia. No es obligatorio: puedes seguir el lab igual, pero preparar tu entorno primero suele ahorrar tiempo.",
     cta: "Preparar mi entorno",
   },
+  modulePrerequisiteGate: {
+    title: "Antes de este módulo puede convenirte revisar",
+    levelIncompleteBody: (previousLevel: string, completed: number, total: number) =>
+      `Este módulo pertenece a un nivel que da por hecho lo anterior. Todavía no completaste ${previousLevel} (${completed}/${total} módulos). No es obligatorio volver, pero si algo no se entiende, ese suele ser el motivo.`,
+    moduleSkippedBody: (previousModuleId: number) =>
+      `Parece que aún no completaste el Módulo ${previousModuleId} de este nivel. No es obligatorio, pero revisarlo primero suele evitar confusiones más adelante.`,
+    ctaSkipped: "Ir al módulo anterior",
+  },
 } as const;
 
 // Tipos de nivel para narrowing

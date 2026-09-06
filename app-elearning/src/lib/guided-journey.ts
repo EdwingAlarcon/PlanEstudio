@@ -1,5 +1,6 @@
 import type { ModuleInfo, LabInfo, SearchDocument } from "./content";
 import type { ProfessionalRouteSlug } from "./professional-routes";
+import { CERTIFICATION_LEVEL_ORDER, LEVEL_MODULE_RANGE, type LevelId } from "./i18n";
 
 export type OnboardingStage =
   | "new"
@@ -340,6 +341,50 @@ export function classifySearchDocument(doc: SearchDocument, onboarding: Onboardi
   if (doc.type === "module" && doc.moduleId >= 18) return "avanzado";
   if (doc.levelId === "ia" || doc.levelId === "d365" || doc.levelId === "N5" || doc.levelId === "N6") return "otra-especializacion";
   return onboarding.navigationMode === "guided" ? "opcional" : "en-tu-ruta";
+}
+
+// ─── Modo guiado: advertencias de prerrequisito por módulo ────────────────────
+// No bloqueante: solo se muestra cuando navigationMode === "guided" (Sprint 6
+// del roadmap post-auditoría). Los niveles transversales (ia/d365/rpa) nunca
+// generan advertencia porque no tienen prerrequisitos por diseño.
+
+export type ModulePrerequisiteWarning =
+  | { kind: "level_incomplete"; previousLevel: LevelId; completed: number; total: number }
+  | { kind: "module_skipped"; previousModuleId: number }
+  | null;
+
+export function getModulePrerequisiteWarning(
+  moduleId: number,
+  levelId: LevelId,
+  completedModules: string[],
+): ModulePrerequisiteWarning {
+  const certIndex = CERTIFICATION_LEVEL_ORDER.indexOf(levelId);
+  if (certIndex === -1) return null;
+
+  if (certIndex > 0) {
+    const previousLevel = CERTIFICATION_LEVEL_ORDER[certIndex - 1]!;
+    const [start, end] = LEVEL_MODULE_RANGE[previousLevel];
+    const total = end - start + 1;
+    const prefix = `${previousLevel}-`;
+    const completed = completedModules.filter((id) => {
+      if (!id.startsWith(prefix)) return false;
+      const num = parseInt(id.slice(prefix.length), 10);
+      return num >= start && num <= end;
+    }).length;
+    if (completed < total) {
+      return { kind: "level_incomplete", previousLevel, completed, total };
+    }
+  }
+
+  const [levelStart] = LEVEL_MODULE_RANGE[levelId];
+  if (moduleId > levelStart) {
+    const previousModuleId = moduleId - 1;
+    if (!completedModules.includes(`${levelId}-${previousModuleId}`)) {
+      return { kind: "module_skipped", previousModuleId };
+    }
+  }
+
+  return null;
 }
 
 export function validateGuidedJourneyReferences(modules: ModuleInfo[], labs: LabInfo[]): string[] {

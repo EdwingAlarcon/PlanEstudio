@@ -4,7 +4,7 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
-## Resumen de sesión (retomar desde aquí) — actualizado 2026-09-01
+## Resumen de sesión (retomar desde aquí) — actualizado 2026-09-06
 
 ### Objetivo
 
@@ -14,6 +14,11 @@ tenant Microsoft real; no valida automáticamente contra ese tenant. El roadmap 
 
 ### Estado actual
 
+- **Sprint 6 (Modo guiado estricto opcional) — CERRADO**, adelantado fuera de orden por criterio
+  propio (impacto directo en onboarding de principiantes, no depende de tenant real, ver sección
+  dedicada más abajo para detalle completo). Reusa el `navigationMode` ("guided"/"explore") ya
+  existente en `onboarding-store.ts` — no se creó store nuevo. Alcance v1: solo módulos, incluye
+  detección de salto de nivel de certificación además del módulo inmediato anterior.
 - **Sprint 1 (Readiness manual por lab) — CERRADO.** `getLabReadiness()` en `lab-metadata.ts` +
   panel `LabReadinessPanel` en `/labs/[slug]`, 72/72 labs con estado de ejecución/evidencia. Commit
   `c71f12b7`, push y CI verdes.
@@ -21,10 +26,10 @@ tenant Microsoft real; no valida automáticamente contra ese tenant. El roadmap 
   agregada a LAB-02, LAB-04, LAB-05 y LAB-104..112 (12 archivos), cada error con causa
   probable/cómo comprobar/cómo corregir/reiniciar vs. reparar/evidencia posterior. Commit `b85dc99f`,
   pusheado a `master`, CI run `33576436371` → **success**.
-- Validación local en verde para ambos sprints: `lint`, `tsc --noEmit`, `validate:content`,
-  `test:coverage` (424/424), `build`. Repo limpio salvo `graphify-out/` (artefacto del grafo, se
-  commitea aparte, ver `feedback_graphify_post_commit` en memoria de Claude).
-- **CI agilizado.** `.github/workflows/ci.yml` ahora tiene `paths-ignore` (push y pull_request) para
+- Validación local en verde: `lint`, `tsc --noEmit`, `validate:content`, `test` (436/436, +30 vs.
+  baseline previo), `build`. Repo limpio salvo `graphify-out/` (artefacto del grafo, se commitea
+  aparte, ver `feedback_graphify_post_commit` en memoria de Claude).
+- **CI agilizado.** `.github/workflows/ci.yml` tiene `paths-ignore` (push y pull_request) para
   `SPRINT_HANDOFF.md`, `CLAUDE.md` y `graphify-out/**` — un push que solo toque esos archivos ya no
   dispara el pipeline completo (~10 min). Commit `5817aaee`, pusheado a `master` (requirió que el
   usuario corriera `gh auth refresh -h github.com -s workflow` porque el token no tenía scope
@@ -36,10 +41,11 @@ tenant Microsoft real; no valida automáticamente contra ese tenant. El roadmap 
    LAB-090 (capstone integrador). No iniciado.
 2. **Sprint 4** — Auditoría tenant-real F&O: LAB-093..100. No iniciado.
 3. **Sprint 5** — Duraciones y carga cognitiva: separar lectura/práctica/setup/evidencia. No iniciado.
-4. **Sprint 6** — Modo guiado estricto opcional (advertencias por prerrequisitos, sin bloqueo duro).
-   No iniciado.
-5. **Sprint 7** — Capstones nuevos por ruta laboral (expansión, no corrección). Opcional/solo si se
+4. **Sprint 7** — Capstones nuevos por ruta laboral (expansión, no corrección). Opcional/solo si se
    quiere expansión — ver roadmap.
+5. **Sprint 6, extensión futura opcional** — extender la advertencia de prerrequisitos a labs. La v1
+   cerrada cubre solo módulos; `LabInfo.prerequisites` es texto libre (no IDs verificables), habría
+   que definir una heurística antes de intentarlo. No fabricar alcance sin pedirlo explícitamente.
 
 ### Decisiones tomadas
 
@@ -137,6 +143,61 @@ para completarse sin tutorial externo ante fallos comunes.
 
 **Siguiente paso**: Sprint 3 — Auditoría tenant-real de D365 CE/Customer Insights/Field Service
 (LAB-081..088, LAB-090 como capstone integrador).
+
+## Sprint 6 — Modo guiado estricto opcional (2026-09-06) — CERRADO
+
+Adelantado fuera del orden del roadmap por criterio propio (ver "Estado actual" arriba): impacta
+directamente a usuarios nuevos sin conocimientos previos, y no depende de acceso a un tenant real
+como Sprint 3/4. Pasó por `superpowers:brainstorming` (clasificado **bounded**: ya existía un patrón
+idéntico no bloqueante — `LabWorkstationGate` — y datos de prerrequisitos reutilizables), diseño
+aprobado en chat, sin spec ni plan document.
+
+**Decisiones de alcance (aprobadas por el usuario):**
+- Toggle: se reusa `navigationMode` (`"guided" | "explore"`) ya existente en
+  `src/lib/onboarding-store.ts` / `src/lib/guided-journey.ts`. No se creó un store ni un toggle
+  nuevo — el control que ya existe en `/mi-ruta` y `guided-home-client.tsx` ahora también activa
+  esta advertencia.
+- Alcance v1: **solo módulos**, no labs. Los labs ya tienen `LabReadinessPanel` +
+  `LabWorkstationGate` + troubleshooting; el campo `LabInfo.prerequisites` es texto libre (no IDs
+  verificables contra `completedModules`), así que extenderlo requeriría definir una heurística
+  aparte — queda como posible extensión futura, no fabricada sin pedirla (ver "Pendiente" arriba).
+- Sí incluye **salto de nivel de certificación** (Básico→Intermedio→Avanzado→Arquitecto), no solo el
+  módulo inmediato anterior — es el caso más costoso para un principiante y ya estaba documentado
+  como regla de progresión en `CLAUDE.md`.
+
+**Implementación:**
+- `getModulePrerequisiteWarning(moduleId, levelId, completedModules)` — función pura nueva en
+  `src/lib/guided-journey.ts`. Devuelve `null` para niveles transversales (`ia`/`d365`/`rpa`, no
+  gatean por diseño); `{ kind: "level_incomplete", previousLevel, completed, total }` si el nivel de
+  certificación anterior (`CERTIFICATION_LEVEL_ORDER`, ya existente en `i18n.ts`) no está 100%
+  completo; si no, `{ kind: "module_skipped", previousModuleId }` si el módulo inmediato anterior
+  dentro del mismo nivel no está en `completedModules`; `null` si no hay advertencia. El caso de
+  salto de nivel tiene prioridad sobre el de módulo salteado cuando ambos aplicarían.
+- Componente cliente nuevo `ModulePrerequisiteGate` (`components/modules/module-prerequisite-gate.tsx`),
+  mismo patrón visual/estructural que `LabWorkstationGate` (banda ámbar, no bloqueante, sin botón de
+  bloqueo). Lee `useProgressStore` (`completedModules`) y `useOnboardingStore` (`navigationMode`); no
+  renderiza nada si `navigationMode !== "guided"` o si no hay advertencia. Insertado en
+  `nivel/[level]/modulo/[slug]/page.tsx` justo antes del contenido markdown del módulo.
+- Textos nuevos en `UI.modulePrerequisiteGate` (`i18n.ts`).
+- Tests: 7 casos nuevos en `guided-journey.test.ts` para la función pura (primer módulo, módulo
+  salteado, nivel completo, salto de nivel, prioridad nivel-sobre-módulo, nivel previo completo,
+  niveles transversales) + 5 casos nuevos en
+  `components/modules/__tests__/module-prerequisite-gate.test.tsx` (modo explore, sin advertencia,
+  nivel transversal, salto de nivel, módulo salteado con link). Total suite: 436/436 (antes 406).
+- Verificación de render client-side en navegador real (Chrome vía extensión) no se pudo completar
+  en esta sesión porque la extensión no estaba conectada — se confirmó en su lugar que el componente
+  no aparece en el HTML estático exportado, exactamente igual que `LabWorkstationGate` (ambos son
+  client-only y pintan tras la hidratación), y que los tests de componente en jsdom sí renderizan el
+  texto esperado. Si se retoma esta área, verificar visualmente en navegador queda pendiente.
+- Validación local: `lint`, `tsc --noEmit`, `validate:content`, `test` (436/436), `build` (76 páginas
+  de módulo generadas) — todo en verde. `e2e` no se corrió en este cierre.
+
+Criterio de cierre cumplido: en modo guiado (default), un alumno que entra a un módulo saltándose el
+nivel anterior o el módulo inmediato anterior ve una advertencia no bloqueante explicando qué se
+saltó, sin restringir a quien navega en modo explorar.
+
+**Siguiente paso**: Sprint 3 — Auditoría tenant-real de D365 CE/Customer Insights/Field Service
+(LAB-081..088, LAB-090 como capstone integrador), según el orden original del roadmap.
 
 ## Próximo roadmap aprobado — Auditoría bajo premisa tenant-real del alumno (2026-09-01)
 

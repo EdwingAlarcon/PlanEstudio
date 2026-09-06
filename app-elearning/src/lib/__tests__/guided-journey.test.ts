@@ -5,6 +5,7 @@ import {
   buildWeeklyPlan,
   classifySearchDocument,
   getFoundationProgress,
+  getModulePrerequisiteWarning,
   getNextBestAction,
   getRecommendationReason,
   normalizeOnboardingState,
@@ -169,5 +170,41 @@ describe("contextual search", () => {
         { ...DEFAULT_ONBOARDING_STATE, navigationMode: "explore" },
       )
     ).toBe("en-tu-ruta");
+  });
+});
+
+describe("getModulePrerequisiteWarning", () => {
+  it("returns null for the very first module of a level with nothing completed", () => {
+    expect(getModulePrerequisiteWarning(1, "basico", [])).toBeNull();
+  });
+
+  it("warns when a module is opened but the immediate previous module in the same level is not complete", () => {
+    const warning = getModulePrerequisiteWarning(3, "basico", ["basico-1"]);
+    expect(warning).toEqual({ kind: "module_skipped", previousModuleId: 2 });
+  });
+
+  it("returns null when the immediate previous module in the same level is complete", () => {
+    expect(getModulePrerequisiteWarning(3, "basico", ["basico-1", "basico-2"])).toBeNull();
+  });
+
+  it("warns with level_incomplete when entering a level whose previous level is not fully done", () => {
+    const warning = getModulePrerequisiteWarning(9, "intermedio", []);
+    expect(warning).toEqual({ kind: "level_incomplete", previousLevel: "basico", completed: 0, total: 8 });
+  });
+
+  it("prioritizes level_incomplete over module_skipped when both apply", () => {
+    const warning = getModulePrerequisiteWarning(11, "intermedio", ["intermedio-9", "intermedio-10"]);
+    expect(warning).toEqual({ kind: "level_incomplete", previousLevel: "basico", completed: 0, total: 8 });
+  });
+
+  it("returns null when the previous level is fully completed and the module sequence is respected", () => {
+    const allBasico = Array.from({ length: 8 }, (_, i) => `basico-${i + 1}`);
+    expect(getModulePrerequisiteWarning(9, "intermedio", allBasico)).toBeNull();
+  });
+
+  it("never warns for transversal levels (ia, d365, rpa)", () => {
+    expect(getModulePrerequisiteWarning(42, "ia", [])).toBeNull();
+    expect(getModulePrerequisiteWarning(57, "d365", [])).toBeNull();
+    expect(getModulePrerequisiteWarning(67, "rpa", [])).toBeNull();
   });
 });
