@@ -7,23 +7,32 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Before starting new work, read `SPRINT_HANDOFF.md` — it is the active operational memory for the
 post-audit sprints, and its top section "Resumen de sesión (retomar desde aquí)" has the exact
 Objetivo/Estado actual/Pendiente/Decisiones/Archivos tocados/Siguiente paso needed to resume this
-work from another tool (Claude Code, Codex, or otherwise). As of 2026-09-06: Sprints 1, 2 and 6 of
-the tenant-real audit roadmap are closed (readiness panel, lab troubleshooting, and optional strict
-guided mode); Sprint 3 (D365 CE/CI/Field Service tenant-real audit, LAB-081..088 + LAB-090) is next
-in the original roadmap order and not started.
+work from another tool (Claude Code, Codex, or otherwise). As of 2026-09-06: **all 7 sprints of the
+tenant-real audit roadmap are closed** (`docs/Recursos/ROADMAP_AUDITORIA_TENANT_REAL.md`) — no
+pending roadmap sprint remains. Two long-standing memory items thought to be open turned out to be
+stale/already-implemented (Code Apps module, case-diagnosis extension to IA/D365/RPA) — see the
+"Corrección de memoria obsoleta" note in `SPRINT_HANDOFF.md` before ever reporting either as a gap
+again. The only net-new content this session added beyond gap-closing is LAB-113 (Field Service
+capstone), approved explicitly by the user since Sprint 7 is "expansion, not correction" by design.
 
 Current stable state as of the latest local handoff (2026-09-06):
-- Latest continuation: **Sprint 6 — Modo guiado estricto opcional, CERRADO** (pulled ahead of Sprint
-  3/4 by explicit product judgment — beginner-onboarding impact, no tenant dependency). Adds
-  `getModulePrerequisiteWarning()` in `src/lib/guided-journey.ts` (pure function: warns on a
-  certification-level jump via the existing `CERTIFICATION_LEVEL_ORDER`, or on skipping the
-  immediate previous module in the same level; never warns for transversal levels `ia`/`d365`/`rpa`)
-  and a new client component `ModulePrerequisiteGate` (same non-blocking amber-banner pattern as
-  `LabWorkstationGate`), inserted in `nivel/[level]/modulo/[slug]/page.tsx`. Reuses the existing
-  `navigationMode` ("guided"/"explore") from `onboarding-store.ts` — no new store or toggle. Scope is
-  modules only for this v1; labs were deliberately left out (see `SPRINT_HANDOFF.md` section
-  "Sprint 6" for why). Test suite is now 436/436 (+30). See `SPRINT_HANDOFF.md` section "Sprint 6 —
-  Modo guiado estricto opcional" for full detail before touching guided-mode gating again.
+- Latest continuation: **full roadmap closure in one session** — Sprints 3, 4, 5, 6 (incl. its lab
+  extension) and 7 all closed and pushed, on top of Sprints 1-2 already closed earlier. Sprint 3/4
+  added tenant/licensing troubleshooting sections to 17 labs (LAB-81..88, LAB-90, LAB-93..100).
+  Sprint 5 added an optional `practiceMinutes` field to `ModuleInfo` (`content.ts`) so the UI can
+  show a composite "X min de lectura + ~Y min de práctica guiada" duration for modules whose
+  hands-on work is embedded in the module itself with no separate lab absorbing it (8 modules in
+  `avanzado`, moduleId 20/21/24/26-30). Sprint 6 (see its own section in `SPRINT_HANDOFF.md`) adds
+  `getModulePrerequisiteWarning()` and `getLabPrerequisiteWarning()` in `src/lib/guided-journey.ts`
+  — non-blocking amber-banner gates (`ModulePrerequisiteGate`, `LabPrerequisiteGate`) shown only in
+  `navigationMode === "guided"` (reused from `onboarding-store.ts`, no new store). Sprint 7 extended
+  `docs/Recursos/SOLUCIONES_REFERENCIA_CAPSTONES.md` to 4 more existing capstone-grade labs (LAB-75,
+  76, 90, 101) instead of building 10 redundant new capstones, and added exactly one genuinely new
+  capstone lab, **LAB-113** (Field Service, wired into the `dynamics-365-field-service` professional
+  route as its `capstoneLabSlug`) — **lab count is now 73, not 72** (a hardcoded `72` in
+  `lab-metadata.test.ts` was updated to `73`; no other test hardcodes the total). Test suite is now
+  444/444 (was 406 before this session). See `SPRINT_HANDOFF.md` for full per-sprint detail before
+  touching tenant-real content, guided-mode gating, module duration, or capstones again.
 - Previous continuation: **Sprint 2 — Troubleshooting de labs base y RPA, CERRADO**. Added a
   `## 🔧 Diagnóstico y reparación` section (4-6 lab-specific errors, each with Causa probable / Cómo
   comprobar / Cómo corregir / Reiniciar vs. reparar / Evidencia posterior) to LAB-02, LAB-04, LAB-05
@@ -127,8 +136,11 @@ Current stable state as of the latest local handoff (2026-09-06):
   domain. The old `out-gilt-tau.vercel.app` domain was removed from Vercel Settings → Domains after
   an initial static deploy from `out/` left it as the default production domain. GitHub Pages was used
   historically and may still exist as a secondary mirror, but it is no longer the release blocker.
-- Fixed learning content counts: **76 modules, 72 labs, 516 quiz questions, 375 case-diagnosis
-  questions, 636 checklist criteria**. Module 56 ("Fundamentos de JavaScript para Power Platform",
+- Fixed learning content counts: **76 modules, 73 labs, 516 quiz questions, 375 case-diagnosis
+  questions, 636 checklist criteria**. Lab count went 72→73 on 2026-09-06 with the addition of
+  LAB-113 (Field Service capstone, Sprint 7 of the tenant-real audit roadmap) — labs have no
+  contiguous-range constraint like modules do, so this was a low-risk addition (see
+  `SPRINT_HANDOFF.md`). Module 56 ("Fundamentos de JavaScript para Power Platform",
   `ia` level) was added 2026-08-23 as a from-scratch JS prerequisite, closing a real pedagogical gap
   found in the 2026-08-22 audit: módulo 13 (JavaScript y PCF Básico) required programming knowledge
   it never taught. Módulo 13 links to it explicitly in its "Antes de comenzar" box instead of gating
@@ -186,7 +198,7 @@ A structured, progressive learning plan for Microsoft Power Platform and Dynamic
 1. **MkDocs site** — Markdown documentation served via MkDocs Material (legacy/reference site, reads from `docs/`)
 2. **Next.js app** (`app-elearning/`) — interactive e-learning app deployed officially to Vercel at `https://planestudio.vercel.app/` (reads modules and labs from `app-elearning/content/`, NOT from `docs/`)
 
-**Important — module content is NOT shared between the two surfaces anymore.** Since commit `8b0433c8` (2026-06-25, "migración completa — 41 módulos a archivos individuales con frontmatter"), app modules and labs live as individual files with frontmatter in `app-elearning/content/modules/<levelId>/` and `app-elearning/content/labs/`. The current app surface contains **75 modules and 72 labs across 7 levels** (4 certification levels + transversal `ia`, `d365` and `rpa`). `docs/Niveles/*.md` still exists and still feeds MkDocs, but for the Next.js app it is now dead legacy fallback code (`extractModulesFromContent` in `content.ts`) that never fires because every module already has an individual file. **When editing module content for the app, edit `app-elearning/content/modules/`, not `docs/Niveles/`.** The question bank (`docs/javascripts/evaluaciones-simulador.js`) was NOT part of this migration and remains the single source for both surfaces (see Content: Question Bank below).
+**Important — module content is NOT shared between the two surfaces anymore.** Since commit `8b0433c8` (2026-06-25, "migración completa — 41 módulos a archivos individuales con frontmatter"), app modules and labs live as individual files with frontmatter in `app-elearning/content/modules/<levelId>/` and `app-elearning/content/labs/`. The current app surface contains **76 modules and 73 labs across 7 levels** (4 certification levels + transversal `ia`, `d365` and `rpa`). `docs/Niveles/*.md` still exists and still feeds MkDocs, but for the Next.js app it is now dead legacy fallback code (`extractModulesFromContent` in `content.ts`) that never fires because every module already has an individual file. **When editing module content for the app, edit `app-elearning/content/modules/`, not `docs/Niveles/`.** The question bank (`docs/javascripts/evaluaciones-simulador.js`) was NOT part of this migration and remains the single source for both surfaces (see Content: Question Bank below).
 
 ## Repository Structure
 

@@ -336,6 +336,52 @@ cambia con frecuencia.
 - La omnicanalidad se presenta como funcionalidad ya construida en vez de diseño con dependencias.
 - La matriz de trazabilidad tiene requerimientos sin historia o historias sin caso de prueba.
 
+## LAB-113 — Capstone Field Service Operacion de Campo
+
+### Decisiones esperadas
+
+- Unificar Agreement (preventivo) y correctivo en el mismo Schedule Board, no como calendarios
+  separados.
+- Definir una regla de prioridad explicita entre correctivo urgente y preventivo programado.
+- Declarar el estado real de Resource Scheduling Optimization (disponible/no disponible en el tenant)
+  antes de diseñar sobre el.
+- Distinguir con claridad el consumo de repuesto cubierto por el Agreement del consumo facturable
+  aparte.
+- Referenciar el perfil offline del Lab 87 sin reconstruirlo, agregando solo los ajustes que exige
+  integrar ambos origenes de Work Order.
+
+### Artefactos minimos aceptables
+
+| Artefacto | Referencia de calidad |
+|---|---|
+| Flujo end-to-end | Origen (Agreement/correctivo) -> scheduling -> ejecucion movil -> cierre -> KPIs, en un solo diagrama |
+| Criterios de scheduling | Regla de prioridad y, si aplica, parametros de RSO; alternativa manual justificada si RSO no esta disponible |
+| Ejecucion movil offline | Checklist diferenciado por origen, citando el perfil del Lab 87 |
+| Cierre e inventario | Regla de que consumo queda cubierto por Agreement y cual se factura |
+| KPIs de servicio | 4+ KPIs con fuente de dato y frecuencia, cubriendo ambos origenes |
+| Decision log | 6+ decisiones citando evidencia de los Labs 86 y 87 |
+
+### Solucion de referencia resumida
+
+La decision mas dificil es la prioridad cuando un tecnico ya tiene su dia lleno de Work Orders de
+Agreement y llega un correctivo urgente: la solucion de referencia no reprograma el correctivo por
+defecto ni desplaza el preventivo sin evaluar vencimiento de contrato. Define una regla explicita
+(ej. correctivo critico > preventivo vencido > preventivo dentro de ventana > correctivo no critico)
+y la aplica igual en el Schedule Board manual o en los parametros de RSO si esta habilitado. Si RSO
+no esta disponible en el tenant de prueba, la solucion documenta el criterio manual equivalente y
+declara explicitamente la perdida de eficiencia esperada, en vez de fingir que RSO esta activo. En
+el cierre, el repuesto consumido dentro del alcance pactado en el Agreement no se factura aparte;
+el consumido en un correctivo fuera de contrato si, y esa regla queda escrita antes de tocar el
+primer Work Order, no decidida caso por caso.
+
+### Senales de alerta
+
+- El diseño trata Agreement y correctivo como procesos con calendarios y reglas independientes.
+- Se asume RSO disponible sin verificarlo en la configuracion del entorno.
+- El decision log no cita evidencia concreta de los Labs 86/87, o inventa decisiones nuevas sin
+  conexion con ellos.
+- Los KPIs solo miden el proceso de mantenimiento preventivo y omiten el correctivo.
+
 ## Checklist final comun
 
 - [ ] El capstone declara estado real: Simulado, Sandbox real o Productivo controlado.

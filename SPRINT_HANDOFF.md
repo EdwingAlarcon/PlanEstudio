@@ -4,7 +4,7 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
-## Resumen de sesión (retomar desde aquí) — actualizado 2026-09-06 (continuación)
+## Resumen de sesión (retomar desde aquí) — actualizado 2026-09-06 (ROADMAP COMPLETO)
 
 ### Objetivo
 
@@ -12,8 +12,12 @@ Ejecutar el roadmap de auditoría tenant-real (`docs/Recursos/ROADMAP_AUDITORIA_
 la app entrega contenido/instrucciones/criterios/evidencia para labs que el alumno ejecuta en un
 tenant Microsoft real; no valida automáticamente contra ese tenant. El roadmap tiene 7 sprints. El
 usuario pidió explícitamente cerrar TODO lo pendiente del roadmap más los frentes sueltos sin
-decisión de alcance ("todos deben quedar... Analiza y procede") — esta sesión ejecuta esa orden de
+decisión de alcance ("todos deben quedar... Analiza y procede") — esta sesión ejecutó esa orden de
 forma secuencial, cerrando y commiteando cada sprint por separado como ya era la práctica.
+
+**Resultado: los 7 sprints del roadmap están CERRADOS.** No queda ningún sprint pendiente de este
+roadmap. Ver "Sprint 7" más abajo para el único ítem de expansión real (no gap) que se creó con
+aprobación explícita del usuario.
 
 ### Estado actual
 
@@ -62,16 +66,45 @@ forma secuencial, cerrando y commiteando cada sprint por separado como ya era la
 
 ### Pendiente
 
-1. **Sprint 7** — Capstones nuevos por ruta laboral (expansión, no corrección). El propio roadmap
-   dice "crear solo si se decide ampliar alcance". **Auditoría rápida ya hecha**: de las 10 rutas
-   listadas en el roadmap, la mayoría ya tiene un lab capstone-grade existente (CRM Functional
-   Consultant → LAB-101, D365 Sales → LAB-66/102, Customer Service → LAB-68/77, Customer Insights
-   Data/Journeys → LAB-84/85, Field Service → LAB-86/87, RPA → LAB-112, Admin/Governance → LAB-76,
-   Data Migration → LAB-75, Solution Architect → LAB-90/41/63) y 6 de esos labs ya tienen solución de
-   referencia en `docs/Recursos/SOLUCIONES_REFERENCIA_CAPSTONES.md` (LAB-77, 79, 84, 85, 102, 112).
-   Siguiente paso real: extender esa misma solución de referencia a los labs capstone-grade que aún
-   no la tienen (candidatos: LAB-75, LAB-76, LAB-90 o LAB-101), no crear 10 capstones nuevos desde
-   cero — sería contenido redundante. Ver sección dedicada más abajo para el detalle de la auditoría.
+**Ninguno del roadmap de auditoría tenant-real — los 7 sprints están cerrados.** Ideas de expansión
+opcional (no gaps, no pedidas explícitamente, no iniciar sin pedirlo): un capstone dedicado a
+Contact Center/Omnichannel (hoy cubierto solo parcialmente por LAB-83), o soluciones de referencia
+para labs no-capstone si en el futuro se decide ampliar ese recurso más allá de los 10 ya cubiertos.
+
+### Sprint 7 — Capstones nuevos por ruta laboral — CERRADO (alcance reducido, aprobado por el usuario)
+
+El roadmap dice "expansión, no corrección — crear solo si se decide ampliar alcance". Auditoría
+inicial: de las 10 rutas listadas, 9 ya tenían un lab capstone-grade existente (CRM Functional
+Consultant → LAB-101, D365 Sales → LAB-66/102, Customer Service → LAB-68/77, Customer Insights
+Data/Journeys → LAB-84/85, RPA → LAB-112, Admin/Governance → LAB-76, Data Migration → LAB-75,
+Solution Architect → LAB-90) y 6 ya tenían solución de referencia en
+`docs/Recursos/SOLUCIONES_REFERENCIA_CAPSTONES.md` (LAB-77, 79, 84, 85, 102, 112). Solo **Field
+Service** no tenía ningún lab capstone-grade (LAB-86/87 son labs normales, no capstones).
+
+Acciones cerradas:
+1. Extendida la solución de referencia a 4 labs capstone-grade que no la tenían: LAB-075 (Data
+   Migration), LAB-076 (Admin/Governance), LAB-090 (Solution Architect), LAB-101 (CRM Functional
+   Consultant) — commit `f3bfd8fb`.
+2. Creado **LAB-113** (`lab-113-field-service-capstone-operacion-de-campo.md`), el único capstone
+   genuinamente nuevo — aprobado explícitamente por el usuario vía pregunta directa ("¿lo creamos?"
+   → sí), porque era el único caso real de expansión de alcance, no cierre de gap. Integra LAB-86
+   (Agreements/mantenimiento preventivo) y LAB-87 (mobile offline/work order lifecycle) en un
+   escenario end-to-end (scheduling con RSO, ejecución offline diferenciada por origen de Work
+   Order, conflicto de sincronización, cierre con inventario/facturación, KPIs de servicio) sin
+   duplicar su contenido paso a paso — los referencia. Sigue exactamente el patrón de secciones de
+   LAB-90 (Gate de ambiente real, Requisitos de tenant y fallos frecuentes, Pasos, Validaciones,
+   Evidencia, Rúbrica, Errores comunes, Reto adicional, Solución de referencia, Competencias).
+   Wireado en `professional-routes.ts`: agregado a `labs[]` y puesto como `capstoneLabSlug` de la
+   ruta `dynamics-365-field-service` (reemplazando el genérico LAB-90 solo en ESA ruta; las otras
+   rutas que usan LAB-90 como capstone no se tocaron). También agregada su propia entrada en
+   `SOLUCIONES_REFERENCIA_CAPSTONES.md`.
+3. **Conteo de labs cambió de 72 a 73** — actualizado en `CLAUDE.md` (2 menciones) y en el único test
+   que lo hardcodeaba (`lab-metadata.test.ts`, "gives every one of the 73 labs..."). Los labs no
+   tienen la restricción de rango contiguo que sí tienen los módulos (`LEVEL_MODULE_RANGE`), así que
+   agregar uno no requirió ningún tipo de renumeración — ver `[[project_modulo56_renumeracion]]` en
+   memoria de Claude para contraste con por qué agregar un MÓDULO sí sería costoso.
+4. Validación local en verde: `lint`, `tsc --noEmit`, `validate:content` (73 labs válidos), `test`
+   (444/444), `build`.
 
 ### Sprint 6, extensión a labs — CERRADA en esta sesión
 
