@@ -1,7 +1,7 @@
 # Graph Report - PlanEstudio  (2026-09-01)
 
 ## Corpus Check
-- 488 files · ~834,061 words
+- 488 files · ~834,144 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f02dcd6f`
+- Built from commit: `4286c03f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -2264,7 +2264,7 @@ Cohesion: 0.67
 Nodes (3): Datos de apoyo, Emails para las pruebas, Valores de OptionSet (Choice) para filtros OData
 
 ## Knowledge Gaps
-- **4914 isolated node(s):** `Current Handoff for Claude`, `What This Repository Is`, `Repository Structure`, `Next.js app (primary)`, `MkDocs (reference/legacy)` (+4909 more)
+- **4914 isolated node(s):** `Objetivo`, `Estado actual`, `Pendiente (en orden de prioridad, ver roadmap para detalle de alcance)`, `Decisiones tomadas`, `Archivos tocados en esta sesión` (+4909 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **28 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -2275,7 +2275,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **Why does `react` connect `react` to `Community 51`?**
   _High betweenness centrality (0.007) - this node is a cross-community bridge._
-- **What connects `Current Handoff for Claude`, `What This Repository Is`, `Repository Structure` to the rest of the system?**
+- **What connects `Objetivo`, `Estado actual`, `Pendiente (en orden de prioridad, ver roadmap para detalle de alcance)` to the rest of the system?**
   _4914 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.04081632653061224 - nodes in this community are weakly interconnected._
