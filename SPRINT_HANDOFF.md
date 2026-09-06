@@ -4,48 +4,81 @@
 > No es contenido del curso — es una nota de proceso. Puede borrarse una vez que el roadmap
 > de sprints termine, o moverse a `docs/Recursos/` si se prefiere mantenerlo como referencia.
 
-## Resumen de sesión (retomar desde aquí) — actualizado 2026-09-06
+## Resumen de sesión (retomar desde aquí) — actualizado 2026-09-06 (continuación)
 
 ### Objetivo
 
 Ejecutar el roadmap de auditoría tenant-real (`docs/Recursos/ROADMAP_AUDITORIA_TENANT_REAL.md`):
 la app entrega contenido/instrucciones/criterios/evidencia para labs que el alumno ejecuta en un
-tenant Microsoft real; no valida automáticamente contra ese tenant. El roadmap tiene 7 sprints.
+tenant Microsoft real; no valida automáticamente contra ese tenant. El roadmap tiene 7 sprints. El
+usuario pidió explícitamente cerrar TODO lo pendiente del roadmap más los frentes sueltos sin
+decisión de alcance ("todos deben quedar... Analiza y procede") — esta sesión ejecuta esa orden de
+forma secuencial, cerrando y commiteando cada sprint por separado como ya era la práctica.
 
 ### Estado actual
 
-- **Sprint 6 (Modo guiado estricto opcional) — CERRADO**, adelantado fuera de orden por criterio
-  propio (impacto directo en onboarding de principiantes, no depende de tenant real, ver sección
-  dedicada más abajo para detalle completo). Reusa el `navigationMode` ("guided"/"explore") ya
-  existente en `onboarding-store.ts` — no se creó store nuevo. Alcance v1: solo módulos, incluye
-  detección de salto de nivel de certificación además del módulo inmediato anterior.
+- **Sprint 3 (Auditoría tenant-real D365 CE/Customer Insights/Field Service) — CERRADO.** LAB-81 a
+  LAB-88 y LAB-90 (9 archivos) recibieron una sección nueva `## 🔧 Requisitos de tenant y fallos
+  frecuentes` (o `## Requisitos de tenant y fallos frecuentes` según el nombre de sección ya usado
+  en cada archivo), con: licencia y rol mínimo exacto por producto (Sales Enterprise vs
+  Professional, Customer Service Enterprise + Omnichannel add-on, Customer Insights - Data/Journeys
+  como productos con licencia propia separada de CE, Field Service con licencia de recurso además
+  de usuario, dual-write como capacidad de integración entre entornos con licencias propias),
+  configuración previa específica, y tabla de 4-6 fallos frecuentes de licencia/región/canal/app no
+  instalada (Síntoma/Causa probable/Cómo comprobar/Cómo corregir) — deliberadamente sin inventar
+  SKUs o límites numéricos no verificables. Generado vía 3 subagentes en paralelo (3 labs cada uno).
+  Cambio 100% aditivo (546 líneas insertadas, 0 eliminadas en 17 archivos contando Sprint 4).
+- **Sprint 4 (Auditoría tenant-real F&O) — CERRADO.** LAB-93 a LAB-100 (8 archivos) recibieron la
+  misma sección (nombrada `## 🔧 Requisitos de ambiente y fallos frecuentes` en este grupo, que ya
+  tenía "Nota de verificación"/Rúbrica/Errores comunes desde antes) con rol de seguridad mínimo
+  descrito como responsabilidad funcional (no se inventaron nombres exactos de rol F&O que no se
+  pudieran confirmar), configuración previa que puede faltar en un trial (módulo no habilitado,
+  parámetros sin inicializar, job de distribución no corriendo), y tabla de 4-6 fallos por módulo no
+  habilitado/permiso insuficiente/trial incompleto. Caso especial: LAB-98 (Commerce) documenta
+  explícitamente que "módulo Commerce no incluido en el trial" es un resultado válido de auditoría,
+  no una tarea sin completar — coherente con el criterio de cierre del roadmap. Generado vía 3
+  subagentes en paralelo.
+- **Sprint 6 (Modo guiado estricto opcional) — CERRADO** (ver sección dedicada más abajo). Reusa el
+  `navigationMode` ("guided"/"explore") ya existente en `onboarding-store.ts` — no se creó store
+  nuevo. Alcance v1: solo módulos, incluye detección de salto de nivel de certificación además del
+  módulo inmediato anterior.
+- **Corrección de memoria obsoleta**: la memoria `project_code_apps_gap` (33 días de antigüedad,
+  decía "sprint pendiente NO iniciado, falta decidir alcance") estaba **desactualizada** — el módulo
+  `app-elearning/content/modules/avanzado/28-code-apps-con-react-y-typescript.md` ya existe,
+  completo (objetivo, 6 conceptos clave, 4 actividades prácticas con `pac code add-data-source`,
+  caso de negocio, buenas prácticas, errores comunes, 7 criterios de validación). Se implementó como
+  módulo dentro de "avanzado" en algún punto posterior a esa memoria, sin quedar registrado en
+  `SPRINT_HANDOFF.md`. La memoria obsoleta fue borrada. **No hay ninguna acción pendiente de "Code
+  Apps"** — si en el futuro se vuelve a mencionar como gap, verificar primero contra el código actual.
 - **Sprint 1 (Readiness manual por lab) — CERRADO.** `getLabReadiness()` en `lab-metadata.ts` +
   panel `LabReadinessPanel` en `/labs/[slug]`, 72/72 labs con estado de ejecución/evidencia. Commit
   `c71f12b7`, push y CI verdes.
 - **Sprint 2 (Troubleshooting labs base y RPA) — CERRADO.** Sección `## 🔧 Diagnóstico y reparación`
-  agregada a LAB-02, LAB-04, LAB-05 y LAB-104..112 (12 archivos), cada error con causa
-  probable/cómo comprobar/cómo corregir/reiniciar vs. reparar/evidencia posterior. Commit `b85dc99f`,
-  pusheado a `master`, CI run `33576436371` → **success**.
-- Validación local en verde: `lint`, `tsc --noEmit`, `validate:content`, `test` (436/436, +30 vs.
-  baseline previo), `build`. Repo limpio salvo `graphify-out/` (artefacto del grafo, se commitea
-  aparte, ver `feedback_graphify_post_commit` en memoria de Claude).
+  agregada a LAB-02, LAB-04, LAB-05 y LAB-104..112 (12 archivos). Commit `b85dc99f`.
+- Validación local en verde tras Sprint 3+4: `lint`, `tsc --noEmit`, `validate:content`, `test`
+  (436/436, sin cambios de conteo — Sprint 3/4 son contenido markdown, no tocan tests), `build`.
 - **CI agilizado.** `.github/workflows/ci.yml` tiene `paths-ignore` (push y pull_request) para
-  `SPRINT_HANDOFF.md`, `CLAUDE.md` y `graphify-out/**` — un push que solo toque esos archivos ya no
-  dispara el pipeline completo (~10 min). Commit `5817aaee`, pusheado a `master` (requirió que el
-  usuario corriera `gh auth refresh -h github.com -s workflow` porque el token no tenía scope
-  `workflow`, necesario para modificar archivos en `.github/workflows/`).
+  `SPRINT_HANDOFF.md`, `CLAUDE.md` y `graphify-out/**`.
 
-### Pendiente (en orden de prioridad, ver roadmap para detalle de alcance)
+### Pendiente (en orden de ejecución de esta sesión — ver roadmap para detalle de alcance)
 
-1. **Sprint 3** — Auditoría tenant-real D365 CE/Customer Insights/Field Service: LAB-081..088 +
-   LAB-090 (capstone integrador). No iniciado.
-2. **Sprint 4** — Auditoría tenant-real F&O: LAB-093..100. No iniciado.
-3. **Sprint 5** — Duraciones y carga cognitiva: separar lectura/práctica/setup/evidencia. No iniciado.
-4. **Sprint 7** — Capstones nuevos por ruta laboral (expansión, no corrección). Opcional/solo si se
-   quiere expansión — ver roadmap.
-5. **Sprint 6, extensión futura opcional** — extender la advertencia de prerrequisitos a labs. La v1
-   cerrada cubre solo módulos; `LabInfo.prerequisites` es texto libre (no IDs verificables), habría
-   que definir una heurística antes de intentarlo. No fabricar alcance sin pedirlo explícitamente.
+1. **Sprint 5** — Duraciones y carga cognitiva: separar lectura/práctica/setup/evidencia en módulos
+   técnicos avanzados (C#, PCF, React/TypeScript, F&O, RPA). **Gap real confirmado**: los módulos
+   18-30 (avanzado) tienen `estimatedMinutes` entre 7 y 15 (ej. módulo 23 "C# Plugins para
+   Dataverse" = 11 min, módulo 27 "PCF Avanzado con TypeScript y React" = 8 min) — exactamente el
+   caso que el roadmap prohíbe ("ningún módulo avanzado sugiere 8-12 minutos cuando el ejercicio
+   real requiere 1-3 horas"). Esos minutos son de *lectura*, no de ejercicio completo. No iniciado —
+   siguiente paso de esta sesión.
+2. **Sprint 6, extensión a labs** — la v1 cerrada cubre solo módulos; `LabInfo.prerequisites` es
+   texto libre (no IDs verificables), habría que definir una heurística antes de intentarlo.
+3. **Diagnóstico de caso aplicado — extensión a IA/D365/RPA** (ver
+   `project_diagnostico_caso_aplicado` en memoria): completo para Básico/Intermedio/Avanzado/
+   Arquitecto (módulos 1-41), faltan 35 módulos (IA 42-56, D365 57-66, RPA 67-76) × 5 preguntas =
+   175 preguntas nuevas en `docs/javascripts/evaluaciones-simulador.js`.
+4. **Sprint 7** — Capstones nuevos por ruta laboral (expansión, no corrección). El propio roadmap
+   dice "crear solo si se decide ampliar alcance" — evaluar con el usuario qué subconjunto de las 10
+   rutas listadas realmente se quiere antes de generar 10 capstones completos (brief + datos + pasos
+   + criterios + evidencia + rúbrica + troubleshooting + solución de referencia cada uno).
 
 ### Decisiones tomadas
 

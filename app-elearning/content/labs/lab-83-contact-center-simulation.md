@@ -63,6 +63,39 @@ Actúas como Contact Center Architect configurando y probando el canal de chat e
 - Una página HTML simple (puede ser un archivo local o una página de Power Pages) donde pegar el script del widget de chat.
 - Dos sesiones de navegador (o una ventana normal y una de incógnito): una para simular al cliente en la página con el widget, otra para el agente en Customer Service workspace.
 
+## 🔧 Requisitos de tenant y fallos frecuentes
+
+**Licencia y rol mínimo**
+
+El canal de chat depende del add-on **Digital messaging** (la evolución de lo que antes se llamaba
+Omnichannel for Customer Service) sobre una base de **Dynamics 365 Customer Service Enterprise**;
+sin ese add-on aprovisionado en el entorno, las opciones de canal y workstream no aparecen. No basta
+con el rol **Customer Service Representative**: quien configura workstreams y colas necesita
+privilegios de administración de Omnichannel, y el usuario que atiende conversaciones como agente
+necesita además el rol de seguridad **Omnichannel Agent** (o equivalente) sumado a su rol base de
+Customer Service.
+
+**Configuración previa**
+
+- El add-on Digital messaging debe estar activado en el entorno desde el Centro de administración
+  de Power Platform; su aprovisionamiento puede tardar (a veces horas) antes de que los menús
+  aparezcan.
+- Al menos una cola creada antes de configurar el workstream y el routing.
+- El usuario agente debe tener asignada la licencia de Digital messaging además del rol de
+  seguridad Omnichannel Agent.
+- Un dominio o página de prueba donde insertar el script del widget (localhost o una página de
+  Power Pages sirven).
+
+**Fallos frecuentes de licencia, rol, canal y región**
+
+| Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
+|---|---|---|---|
+| No aparecen "Chat" ni "Workstreams" en Customer Service admin center / Contact Center admin center. | El add-on Digital messaging no está activado, o su aprovisionamiento todavía no terminó. | En el Centro de administración de Power Platform, revisar el recurso del entorno y si Omnichannel/Digital messaging aparece como aprovisionado. | Activar el add-on desde el Centro de administración y esperar a que termine de aprovisionarse. |
+| El agente no puede poner su presencia en "Disponible" o nunca recibe conversaciones. | Al usuario no se le asignó la licencia de Digital messaging, o le falta el rol de seguridad Omnichannel Agent. | Revisar las licencias asignadas en el Centro de administración de Microsoft 365 y los roles de seguridad del usuario en el entorno. | Asignar la licencia de Digital messaging y el rol Omnichannel Agent al usuario. |
+| El widget de chat no carga en la página de prueba (aunque el script esté pegado). | El dominio de la página de prueba no está en la lista de dominios permitidos del canal, o el canal no está publicado. | Revisar la configuración de dominios permitidos del canal de chat y su estado (Publicado/Borrador). | Agregar el dominio de prueba a la lista permitida y publicar el canal. |
+| Las métricas de supervisor (ASA, AHT, abandon rate) no están disponibles en el trial. | Esas métricas requieren una licencia adicional de Insights/Analytics que el trial base no incluye. | Revisar qué apps y licencias aparecen habilitadas para el entorno en el Centro de administración. | Documentar como limitación de licencia (no como error de configuración); no es alcanzable con solo el trial base. |
+| La conversación queda "En cola" y nunca se asigna a ningún agente. | Al agente no se le asignó un perfil de capacidad, o su presencia no coincide con la que exige el workstream. | Revisar el perfil de capacidad asignado al usuario y su estado de presencia actual. | Asignar el perfil de capacidad correspondiente y poner la presencia en "Disponible". |
+
 ## Entregables
 
 - Canal de chat configurado con widget generado.

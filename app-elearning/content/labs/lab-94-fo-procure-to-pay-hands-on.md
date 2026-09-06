@@ -44,6 +44,38 @@ Actúas como F&O Practitioner ejecutando y documentando el ciclo P2P end-to-end.
 - Un proveedor de prueba (usa uno del demo data Contoso si no quieres crear uno nuevo).
 - Un producto liberado en al menos una legal entity (usa uno del demo data si aplica).
 
+## 🔧 Requisitos de ambiente y fallos frecuentes
+
+**Rol de seguridad mínimo**
+
+Este lab es transaccional, no de configuración: necesitas acceso de escritura al ciclo completo de
+compras y cuentas por pagar, no un rol administrativo amplio. En términos funcionales, el mínimo
+necesario cubre: crear y confirmar órdenes de compra (responsabilidad típica de un rol de comprador,
+"Purchasing agent" o equivalente), registrar recepciones de producto, y capturar/contabilizar
+facturas de proveedor y pagos (responsabilidad típica de un rol de cuentas por pagar, "Accounts
+payable" o equivalente). Si tu ambiente demo te da acceso total como administrador, esta distinción
+no bloquea el lab; si trabajas en un ambiente compartido, pide acceso de escritura a **Procurement
+and sourcing** y **Accounts payable** en vez de pedir un rol genérico de administrador.
+
+**Configuración previa que puede faltar en un trial**
+
+- El proveedor de prueba puede no tener un grupo de método de pago o términos de pago asignados por
+  defecto — sin eso, el payment journal puede rechazar la línea de pago.
+- El producto usado debe estar liberado ("released") en la legal entity donde trabajas; un producto
+  que existe solo a nivel de catálogo global pero no fue liberado a la legal entity no aparecerá al
+  crear la línea de la orden de compra.
+- La coincidencia de 3 vías (three-way match) puede estar desactivada o configurada con tolerancias
+  distintas en **Accounts payable parameters**; si el ambiente permite facturar sin haber recibido,
+  eso puede ser una tolerancia de match configurada así en el demo, no ausencia del control.
+
+| Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
+|---|---|---|---|
+| No aparece el proveedor de prueba al crear la orden de compra | Proveedor no liberado en la legal entity actual | Revisa **Accounts payable > Vendors > All vendors** filtrando por la legal entity activa | Cambia a la legal entity demo (`USMF`/`DEMF`) donde el proveedor Contoso sí existe, o crea el proveedor en tu legal entity |
+| El producto no aparece al agregar la línea de la orden de compra | Producto no liberado a esa legal entity | Ve a **Product information management > Released products** y verifica si el producto aparece para tu legal entity | Libera el producto a la legal entity (**Release products**) o usa un producto Contoso ya liberado |
+| El sistema permite facturar la cantidad pedida sin haber sido recibida | Tolerancia de coincidencia de 3 vías configurada de forma permisiva, o control desactivado | Revisa **Accounts payable > Setup > Accounts payable parameters > Invoice validation** | Documenta la tolerancia configurada como parte de la evidencia; no asumas que el control "no existe" solo porque el trial lo permitió |
+| El payment journal no permite guardar la línea de pago | Falta término de pago o método de pago en el proveedor | Revisa la ficha del proveedor en **Vendors > All vendors > Payment** | Asigna un método y término de pago al proveedor antes de reintentar el pago |
+| La factura no se deja contabilizar (post) | Período fiscal cerrado o permiso insuficiente en el diario de facturas | Revisa el estado del período en **Fiscal calendars** y tus roles asignados | Verifica que el período esté abierto; si el período está correcto, solicita el rol de cuentas por pagar con permiso de contabilización |
+
 ## Entregables
 
 - Orden de compra creada y confirmada.

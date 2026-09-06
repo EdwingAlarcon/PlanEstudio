@@ -32,6 +32,33 @@ Antes de presentar este lab como unificación ejecutada, completa el gate **Cust
 Data** del recurso `/recursos/d365-tenant-readiness`. Sin Customer Insights - Data habilitado y
 fuentes conectadas, la entrega es **Simulado**.
 
+## 🔧 Requisitos de tenant y fallos frecuentes
+
+### Licencia y rol mínimo
+
+Customer Insights - Data tiene licenciamiento propio, separado de Customer Insights - Journeys y
+de Dataverse. Dentro del workspace de la app, el rol se asigna a nivel de aplicación (no como rol
+de seguridad de Dataverse): crear fuentes de datos y ejecutar la unificación requiere un rol de
+tipo administrador/colaborador del workspace; un usuario con rol de solo lectura puede ver
+segmentos ya publicados pero no configurar matching ni fuentes.
+
+### Configuración previa
+
+- Entorno de Dataverse asociado y aprovisionado para Customer Insights - Data.
+- Credenciales o conexión válida a cada fuente externa (CSV, base legada, Customer Service).
+- Rol de administrador del entorno disponible para el aprovisionamiento inicial de la app.
+- Workspace de Power BI creado si se van a publicar las medidas fuera de Customer Insights - Data.
+
+### Fallos frecuentes de licencia, región y fuentes
+
+| Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
+|---|---|---|---|
+| No se puede aprovisionar o crear el workspace de Customer Insights - Data | Usuario sin licencia de Customer Insights - Data asignada, o sin rol de administrador del entorno | Centro de administración de Power Platform > Recursos > Licencias del entorno, y rol del usuario en el entorno (System Administrator) | Solicitar a un administrador del tenant que asigne la licencia y realice o autorice el aprovisionamiento |
+| La fuente CSV/legado no se conecta o falla la ingesta | Conector no soportado directamente, o credenciales/gateway de datos local no configurados | Datos > Fuentes: revisar el estado de la conexión y el mensaje de error del último refresh | Subir el archivo a un storage soportado (ej. Azure Blob/SharePoint) o configurar el gateway de datos local si la fuente es on-premises |
+| El segmento no se puede activar hacia Customer Insights - Journeys o Sales | La app destino no está instalada en el mismo entorno de Dataverse | Centro de administración de Power Platform > Entornos: confirmar que ambas apps comparten entorno | Reconfigurar la unificación en el entorno correcto o instalar la app destino antes de activar el segmento |
+| Los datos no se actualizan con la frecuencia esperada | Límite de frecuencia de refresh del plan/licencia contratado, o throttling propio de un trial | Configuración > Actualización de datos: revisar última ejecución y frecuencia permitida | Ajustar el diseño a la frecuencia real disponible en el tenant, o documentarlo como limitación conocida del trial |
+| Power BI no muestra las medidas creadas en Customer Insights - Data | Falta de licencia Power BI del usuario, o workspace de Power BI no vinculado al entorno | Centro de administración de Power BI > usuarios y licencias; y en Customer Insights - Data > Exportar > destino Power BI | Asignar la licencia Power BI correspondiente y vincular el workspace correcto antes de exportar |
+
 ## Requisitos no funcionales
 
 - **Calidad de datos:** define umbrales que detienen la activación si la unificación no es confiable.

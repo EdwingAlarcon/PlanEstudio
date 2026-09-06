@@ -39,6 +39,34 @@ Antes de presentar este lab como ejecución real, completa el gate **Sales avanz
 `/recursos/d365-tenant-readiness`. Si no hay licencia Sales, jerarquía, cuotas y forecast
 configurable, marca la entrega como **Simulado**.
 
+## 🔧 Requisitos de tenant y fallos frecuentes
+
+**Licencia y rol mínimo**
+
+El forecasting configurable, las jerarquías comerciales y los AI insights de pipeline requieren
+**Dynamics 365 Sales Enterprise**; con **Sales Professional** el modelo de forecast no está
+disponible o está muy limitado. Para configurar jerarquías y ver el forecast de todo un equipo se
+necesita el rol de seguridad **Sales Manager** (no basta con **Salesperson**, que solo ve sus
+propias oportunidades); crear o publicar el modelo de forecast en sí normalmente requiere además un
+rol administrativo del entorno (System Administrator o un rol equivalente de Sales admin).
+
+**Configuración previa**
+
+- Unidad de negocio y jerarquía de gerentes/vendedores ya creada en Dataverse (campo "Manager" del
+  usuario completo).
+- Equipo comercial con roles de seguridad (Salesperson/Sales Manager) ya asignados.
+- Moneda base y año fiscal definidos en el entorno antes de crear cuotas.
+- Catálogo de productos/precios existente (aunque este lab no lo vuelva a documentar).
+
+**Fallos frecuentes de licencia, rol y configuración de tenant**
+
+| Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
+|---|---|---|---|
+| No aparece la opción de configurar "Forecasting" en el área de Sales. | Licencia Sales Professional en vez de Enterprise, o el forecast no fue habilitado por un administrador. | Revisar en el Centro de administración de Power Platform qué licencia tiene asignada el usuario y si existe un modelo de forecast creado. | Solicitar licencia Enterprise o pedir a un administrador que habilite/publique el forecast. |
+| El vendedor solo ve sus propias oportunidades, no las de su equipo. | El rol de seguridad asignado (ej. Salesperson) tiene el privilegio de lectura sobre Opportunity limitado a nivel "Usuario". | Revisar el nivel de acceso (Usuario/Unidad de negocio/Padre-hijo/Organización) del privilegio Read en Opportunity para ese rol. | Asignar el rol Sales Manager o ampliar el nivel de acceso del rol correspondiente. |
+| La jerarquía de gerentes no se refleja en el rollup del forecast. | El campo "Manager" del usuario no está completo, o la jerarquía de posiciones no coincide con la estructura de seguridad. | Revisar el campo Manager en el registro de usuario y la configuración de jerarquía de posición. | Completar el campo Manager y regenerar/republicar el modelo de forecast. |
+| Las forecast categories no son configurables o el modelo de forecast no se ve actualizado. | El modelo de forecast quedó en borrador y nunca se publicó. | Verificar en el área de administración de Sales si el forecast aparece en estado "Publicado". | Publicar (o republicar tras un cambio) el modelo de forecast desde la configuración de Sales. |
+
 ## Pasos detallados
 
 ### Paso 1 — Modelo de etapas

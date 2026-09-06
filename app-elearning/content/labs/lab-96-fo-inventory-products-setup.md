@@ -43,6 +43,43 @@ Actúas como F&O Practitioner configurando el maestro de producto y las reglas d
 - Ambiente trial/demo de Dynamics 365 Supply Chain Management.
 - Al menos un sitio y un almacén configurados (usa los del demo data Contoso si no quieres crear nuevos).
 
+## 🔧 Requisitos de ambiente y fallos frecuentes
+
+### Rol de seguridad mínimo
+
+No uses "System administrator" para este lab si tu ambiente permite asignar roles más acotados: la
+tarea es funcionalmente de **gestión de información de producto e inventario** (Product information
+management + Inventory management), no de administración financiera ni de proyecto. Si tu ambiente
+tiene roles de seguridad predefinidos separados por área funcional, busca uno vinculado a esos dos
+módulos (por ejemplo, un rol orientado a mantenimiento de maestro de producto y a configuración de
+inventario/almacén) en vez de asumir un nombre exacto — los nombres de rol de seguridad varían entre
+versiones y no todos los ambientes demo traen los mismos roles predefinidos. Si no encuentras un rol
+acotado, documenta que usaste un rol amplio (administrador) porque el ambiente no ofrecía uno más
+específico — eso también es evidencia válida de auditoría.
+
+### Configuración previa que puede faltar en un trial
+
+- Los **grupos de dimensión de producto/almacenamiento/seguimiento** por defecto del demo data
+  Contoso pueden no incluir combinaciones de color+talla ya armadas; es normal tener que crear uno
+  nuevo en el Paso 1 en vez de reutilizar uno existente.
+- El módulo **Inventory management** requiere que exista al menos un sitio y un almacén antes de que
+  la jerarquía de reservas tenga sentido — si tu ambiente no trae ninguno preconfigurado, créalos
+  primero aunque el lab no lo liste como paso explícito.
+- Algunos ambientes trial no traen la funcionalidad de jerarquía de reservas habilitada por defecto
+  (depende de la configuración de "Warehouse management" avanzado vs. básico); si el menú no aparece
+  donde se indica, documenta si tu ambiente usa el modelo de almacén básico en vez del avanzado.
+
+### Fallos frecuentes
+
+| Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
+|---|---|---|---|
+| No aparece "Dimension and variant groups" en el menú de Product information management | Módulo no habilitado / licencia trial limitada | Revisa en **System administration > Setup > Licensing** o el equivalente si el módulo SCM está activo | Verifica que el trial incluya Supply Chain Management, no solo Finance; si no, documenta el límite |
+| Al generar variantes no aparecen las 9 combinaciones esperadas | Grupo de dimensión de producto no incluye ambas dimensiones (color y talla) | Revisa el grupo asignado al producto base en la ficha del producto liberado | Reasigna un grupo de dimensión de producto que incluya color y talla antes de generar variantes |
+| No se puede guardar el producto liberado (error de validación) | Permiso insuficiente para escribir en Product information management | Verifica el mensaje de error exacto; suele indicar el objeto de seguridad bloqueado | Solicita o asigna un rol con acceso de escritura a Released products, no solo lectura |
+| El menú "Reservation hierarchy" no existe en la ruta indicada | Trial incompleto o versión distinta con navegación diferente | Busca por nombre en la barra de búsqueda global de F&O en vez de navegar por menú | Documenta la ruta real encontrada y sigue el flujo equivalente |
+| Solo aparece un sitio/almacén de demo data y no se puede crear uno nuevo | Permiso insuficiente sobre Inventory management > Setup | Intenta abrir el formulario de creación y revisa si los botones están deshabilitados | Solicita acceso de escritura sobre Inventory breakdown, o documenta usando los sitios/almacenes existentes |
+| El producto no permite asignar la variante a una orden aunque las 9 combinaciones existen | Dato Contoso faltante: falta activar el producto en la legal entity o el sitio específico | Revisa si el producto está "Released" (liberado) a la legal entity con la que trabajas | Libera el producto explícitamente a la legal entity desde Released products antes de continuar |
+
 ## Entregables
 
 - Grupos de dimensión de producto/almacenamiento/seguimiento configurados o documentados.

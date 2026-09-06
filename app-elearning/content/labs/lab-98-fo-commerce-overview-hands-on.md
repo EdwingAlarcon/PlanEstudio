@@ -43,6 +43,51 @@ Actúas como F&O Practitioner configurando un canal de Commerce sobre el maestro
 - Ambiente trial/demo con Retail and Commerce habilitado.
 - El producto liberado con variantes del Lab 96 (o uno equivalente del demo data).
 
+## 🔧 Requisitos de ambiente y fallos frecuentes
+
+### Rol de seguridad mínimo
+
+No uses "System administrator" si tu ambiente permite algo más acotado: la tarea es funcionalmente
+de **gestión de canal de venta y catálogo de Commerce** (Retail and Commerce), no de administración
+financiera ni de inventario general. Si tu ambiente tiene roles de seguridad separados por área
+funcional, busca uno orientado a la configuración de canales/tiendas y al mantenimiento del catálogo
+de Commerce, en vez de asumir un nombre exacto de rol — los nombres varían entre versiones y no todos
+los ambientes demo traen roles predefinidos para Commerce. Si no encuentras un rol acotado, documenta
+que usaste un rol amplio porque el ambiente no ofrecía uno más específico.
+
+### Configuración previa que puede faltar en un trial
+
+**Atención especial aquí**: a diferencia de Finance/SCM, Retail and Commerce casi nunca viene
+completamente listo en un trial recién aprovisionado. Antes de asumir que un paso falló por error
+tuyo, verifica primero si falta habilitar alguna de estas piezas:
+
+- El **módulo Retail and Commerce en sí** puede no estar habilitado en el trial base de Finance/SCM
+  — es una funcionalidad adicional, no siempre incluida. Si no aparece ningún nodo "Retail and
+  Commerce" en el menú de navegación, este es tu primer punto de verificación, antes que cualquier
+  otro.
+- Aunque el módulo esté habilitado, un **canal de venta (online store o retail store) recién creado
+  no tiene, por defecto, un catálogo publicado**: crear el canal no basta, hay que asignarle
+  productos y ejecutar al menos un job de publicación/distribución antes de que el canal "vea" el
+  producto.
+- El **job de distribución/sincronización** (Distribution schedule o Commerce Scheduler) puede no
+  estar corriendo automáticamente en un ambiente trial — en producción corre en un horario
+  programado, pero en demo/trial suele requerir ejecución manual para ver resultados en la misma
+  sesión de trabajo.
+- La **base de datos del canal (channel database)**, en el modelo de Commerce, es una réplica que se
+  actualiza mediante el job de distribución; si nunca corriste ese job, el canal puede aparecer
+  vacío aunque el catálogo central sí tenga el producto.
+
+### Fallos frecuentes
+
+| Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
+|---|---|---|---|
+| No existe ningún menú "Retail and Commerce" en la navegación | Módulo no habilitado en este trial | Revisa el menú de navegación completo o busca "Retail" en la barra de búsqueda global | Documenta el límite explícitamente como pide la Nota de verificación; no simules pasos que no puedes ejecutar |
+| El canal se crea pero no se puede asociar a la legal entity esperada | Trial incompleto: solo una legal entity tiene Commerce habilitado | Revisa en qué legal entity(es) aparece disponible la opción de crear canal | Usa la legal entity donde Commerce sí está disponible y documenta la limitación |
+| El producto no aparece en el canal después de asignarlo | Catálogo no publicado / job de distribución no ejecutado | Revisa el estado del job en Distribution schedule / Commerce Scheduler | Ejecuta manualmente el job de distribución y vuelve a revisar el canal |
+| El precio cambiado en el catálogo central no se refleja en el canal | Sincronización pendiente (comportamiento esperado, no necesariamente un error) | Verifica la hora de la última ejecución del job de distribución | Ejecuta el job de distribución de nuevo, o documenta la latencia como parte de la respuesta esperada del Paso 2 |
+| Error de permisos al intentar crear o editar el canal | Rol insuficiente para Retail and Commerce | Revisa el mensaje de error exacto y el objeto de seguridad bloqueado | Solicita o asigna un rol con acceso de escritura sobre Channel setup |
+| No se puede completar ningún paso de este lab | Módulo Commerce no incluido en absoluto en el tipo de trial contratado | Confirma con la documentación de tu proveedor de trial (LCS, Dynamics 365 free trial) qué módulos incluye | Documenta este límite como resultado válido del lab: "ambiente sin Commerce disponible" es evidencia de auditoría, no una tarea sin completar |
+
 ## Entregables
 
 - Canal de venta (tienda online u online store) creado y asociado a la legal entity.

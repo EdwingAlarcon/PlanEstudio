@@ -47,6 +47,40 @@ Actúas como F&O Practitioner responsable del setup financiero inicial de una im
 - Ambiente trial/demo de Dynamics 365 Finance & Supply Chain Management con datos Contoso.
 - Acceso con rol de administrador del sistema o "System administrator" en ese ambiente.
 
+## 🔧 Requisitos de ambiente y fallos frecuentes
+
+**Rol de seguridad mínimo**
+
+Este lab configura estructuras maestras (legal entity, calendario fiscal, catálogo de cuentas,
+dimensiones), no transacciones diarias. Ese tipo de configuración suele reservarse a roles con
+responsabilidad de administración financiera — no necesitas literalmente "System administrator" del
+tenant si tu ambiente ya trae uno más acotado con acceso de escritura a General ledger y Organization
+administration (por ejemplo, un rol de tipo "Financial controller" o equivalente en tu demo). En un
+ambiente trial de un solo usuario esta distinción no se nota porque tu cuenta suele tener todos los
+roles asignados; en un ambiente compartido con varios estudiantes o en un tenant corporativo, pide
+específicamente acceso de escritura a **General ledger**, **Organization administration** y **Chart
+of accounts** en vez de asumir que necesitas administrador global.
+
+**Configuración previa que puede faltar en un trial**
+
+- El módulo **General ledger** puede no estar completamente inicializado en un ambiente trial nuevo:
+  algunos parámetros de módulo (**General ledger > Ledger setup > General ledger parameters**) tienen
+  valores por defecto que conviene revisar antes de crear el calendario fiscal.
+- Un demo LCS recién aprovisionado a veces tarda varios minutos (o requiere un refresh de caché de
+  seguridad) en reflejar roles recién asignados — si un menú no aparece, no asumas que no existe:
+  cierra sesión y vuelve a entrar antes de descartar el paso.
+- Los ambientes trial de Dynamics 365 Finance tienen fecha de expiración corta (usualmente 30 días);
+  si el catálogo de cuentas o la legal entity demo lucen incompletos, puede ser un trial cerca de
+  expirar con funciones limitadas en vez de un error tuyo.
+
+| Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
+|---|---|---|---|
+| No aparece la opción "New" en Legal entities | Permiso insuficiente en Organization administration | Revisa qué roles de seguridad tiene tu usuario en **System administration > Security > Users** | Solicita al administrador del ambiente un rol con escritura en Organization administration, o documenta la legal entity demo existente en su lugar |
+| El menú General ledger aparece vacío o sin parámetros | Módulo no habilitado o sin inicializar en el trial | Ve a **General ledger > Ledger setup > General ledger parameters** y verifica si carga valores | Espera a que el ambiente demo termine su aprovisionamiento (puede tardar horas tras crearlo) o solicita un ambiente demo distinto con datos Contoso completos |
+| No se puede guardar el calendario fiscal | Trial incompleto: calendario base no generado | Revisa si existe algún calendario fiscal preexistente en **Fiscal calendars** antes de crear uno nuevo | Usa el calendario fiscal demo existente y documenta su estructura en vez de crear uno desde cero |
+| Las cuentas principales no muestran agrupación por tipo | Dato Contoso faltante o catálogo de cuentas vacío | Ve a **Chart of accounts > Accounts > Main accounts** y filtra por tipo de cuenta | Cambia a la legal entity demo `USMF` o `DEMF`, que sí trae catálogo de cuentas Contoso precargado |
+| Cambios en dimensiones financieras no se reflejan en los formularios | Falta ejecutar el proceso de actualización de dimensiones financieras | Revisa si hay un batch job pendiente relacionado con "Financial dimensions" | Ejecuta manualmente la actualización/publicación de dimensiones si tu versión del ambiente lo requiere, y documenta el tiempo de espera |
+
 ## Entregables
 
 - Legal entity nueva configurada (o documentada si usas una legal entity demo existente).

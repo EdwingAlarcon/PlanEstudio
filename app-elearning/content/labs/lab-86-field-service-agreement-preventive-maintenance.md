@@ -29,6 +29,35 @@ Antes de presentar este lab como configuración real, completa el gate **Field S
 `/recursos/d365-tenant-readiness`. Sin licencia Field Service, recursos, assets, Incident Types y
 Work Orders de prueba, la entrega es **Simulado**.
 
+## 🔧 Requisitos de tenant y fallos frecuentes
+
+### Licencia y rol mínimo
+
+Field Service requiere, además de la licencia de usuario de Dynamics 365 (Customer Engagement o el
+adjunto de Field Service), una **licencia de recurso** independiente para cada técnico programado
+en el calendario — distinta de la licencia del usuario que diseña el Agreement. Rol de seguridad
+mínimo en Dataverse para configurar Agreements e Incident Types: un rol equivalente a
+"Field Service - Administrator"; un usuario con rol solo de "Dispatcher" o "Resource" puede operar
+el calendario pero no crear plantillas de Incident Type ni Agreements.
+
+### Configuración previa
+
+- App Field Service instalada en el entorno de Dataverse.
+- Al menos una Business Unit/territorio configurado.
+- Bookable Resources (técnicos) creados, con horario de trabajo (Resource Hours) asignado.
+- Catálogo de habilidades (Characteristics) si el Incident Type va a exigirlas.
+- Catálogo de productos/repuestos existente en Dataverse.
+
+### Fallos frecuentes de licencia, recurso y funcionalidad
+
+| Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
+|---|---|---|---|
+| La app Field Service no aparece disponible para instalar o usar en el entorno | Licencia de Dynamics 365 Field Service no asignada al tenant o al usuario administrador | Centro de administración de Power Platform > Recursos > Licencias del entorno | Solicitar la asignación de la licencia Field Service antes de continuar; sin ella el lab queda en estado Simulado |
+| Un técnico no aparece disponible para asignarse a los Work Orders del Agreement | Al Bookable Resource no se le asignó la licencia de recurso de Field Service, o no tiene Resource Hours configuradas | Revisar el registro del Bookable Resource (horario) y con el administrador del tenant si tiene licencia de recurso asignada | Asignar la licencia de recurso correspondiente y configurar el calendario de disponibilidad del técnico |
+| El Agreement no genera los Work Orders recurrentes automáticamente | El Agreement quedó en borrador (no activado), o el proceso en segundo plano de generación de Work Orders no está habilitado en el entorno | Revisar el estado del Agreement (Draft vs Active) y el historial de Work Orders generados | Activar formalmente el Agreement y confirmar con el administrador que el job de generación está habilitado |
+| El Incident Type no permite seleccionar ciertos repuestos/productos esperados | El catálogo de productos no está cargado, o el usuario no tiene rol con permisos sobre la tabla de Products | Ventas > Productos: verificar existencia del producto y el rol de seguridad del usuario | Crear/importar los productos en el catálogo antes de diseñar el Incident Type, o solicitar el rol adecuado |
+| No se puede activar la funcionalidad de Inspecciones dentro del Incident Type | Las Inspecciones pueden requerir habilitación explícita en la configuración de la app, no disponible por defecto en todos los tenants | Configuración de Field Service > Inspecciones: verificar si el módulo aparece habilitado | Habilitar la funcionalidad desde la configuración de la app, o documentar el paso como "diseñado, no ejecutable en este tenant" si no está disponible |
+
 ## Pasos detallados
 
 ### Paso 1 — Customer Assets

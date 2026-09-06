@@ -44,6 +44,39 @@ Actúas como F&O Practitioner ejecutando y documentando el ciclo O2C end-to-end.
 - Un cliente de prueba (`CustomersV3`), usa uno del demo data Contoso si no quieres crear uno nuevo.
 - Un producto liberado con inventario disponible en al menos un sitio/almacén.
 
+## 🔧 Requisitos de ambiente y fallos frecuentes
+
+**Rol de seguridad mínimo**
+
+Al igual que el ciclo P2P, este lab es transaccional: necesitas acceso de escritura al ciclo de
+ventas y cuentas por cobrar, no un rol administrativo amplio. El mínimo funcional cubre: crear
+pedidos de venta y generar envíos (responsabilidad típica de un rol de ventas, "Sales order
+processor" o equivalente), y facturar/contabilizar cobros (responsabilidad típica de un rol de
+cuentas por cobrar, "Accounts receivable" o equivalente). Si tu ambiente demo te da acceso total
+como administrador, no necesitas ajustar nada; en un ambiente compartido, pide acceso de escritura a
+**Accounts receivable** (incluye pedidos de venta) en vez de un rol genérico de administrador.
+
+**Configuración previa que puede faltar en un trial**
+
+- El cliente de prueba puede no tener condiciones de pago, grupo de cliente o método de pago
+  asignados — sin eso, el payment journal puede rechazar el cobro o el pedido no calcular
+  correctamente el precio.
+- El producto usado necesita inventario disponible ("on-hand") en el sitio/almacén de envío del
+  pedido; si el trial no tiene inventario cargado para ese producto, el envío parcial que pide el
+  lab no se puede simular de forma realista y hay que documentarlo como limitación del dato demo.
+- Los parámetros de facturación de ventas (**Accounts receivable parameters**) pueden tener
+  configurada una tolerancia distinta para facturar contra lo enviado vs. lo pedido, igual que en
+  el ciclo P2P — si el sistema permite facturar de más, es una tolerancia configurada, no ausencia
+  del control.
+
+| Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
+|---|---|---|---|
+| No aparece el cliente de prueba al crear el pedido de venta | Cliente no liberado/creado en la legal entity actual | Revisa **Accounts receivable > Customers > All customers** filtrando por la legal entity activa | Cambia a la legal entity demo (`USMF`/`DEMF`) donde el cliente Contoso sí existe, o crea el cliente en tu legal entity |
+| El pedido de venta no permite reservar/enviar el producto | Sin inventario disponible ("on-hand") en el sitio/almacén | Ve a **Inventory management > Inquiries > On-hand inventory** para ese producto y sitio | Ajusta el inventario con un movimiento de ajuste, o documenta la limitación y usa un producto Contoso con inventario precargado |
+| El sistema permite facturar la cantidad pedida sin haberla enviado | Tolerancia de facturación configurada de forma permisiva en el trial | Revisa **Accounts receivable > Setup > Accounts receivable parameters** (sección de facturación) | Documenta la tolerancia como parte de la evidencia en vez de asumir que el control no existe |
+| El payment journal no permite registrar el cobro | Falta método de pago o cuenta bancaria configurada | Revisa **Cash and bank management > Bank accounts** y la ficha del cliente | Asigna el método de pago y verifica que exista una cuenta bancaria activa antes de reintentar |
+| El precio o la moneda del pedido no coinciden con lo esperado | Grupo de cliente o lista de precios sin configurar | Revisa la ficha del cliente en **Customers > All customers > Sales demographics** | Asigna el grupo de cliente correcto o documenta el precio/moneda tal como aparece, explicando de dónde se hereda |
+
 ## Entregables
 
 - Cliente identificado y pedido de venta creado.

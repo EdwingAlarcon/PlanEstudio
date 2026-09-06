@@ -45,6 +45,43 @@ Actúas como F&O Practitioner configurando la estructura de proyecto y facturaci
 - Ambiente trial/demo de Dynamics 365 Project Operations.
 - Un cliente de prueba existente en el ambiente.
 
+## 🔧 Requisitos de ambiente y fallos frecuentes
+
+### Rol de seguridad mínimo
+
+No uses "System administrator" si tu ambiente permite algo más acotado: la tarea es funcionalmente
+de **gestión de proyectos y facturación de proyecto** (Project management and accounting), no de
+administración financiera general. Si tu ambiente tiene roles de seguridad separados por área
+funcional, busca uno orientado a la creación/gestión de proyectos y a la generación de propuestas de
+factura, en vez de asumir un nombre exacto de rol — los nombres varían entre versiones y entre la
+variante de Project Operations "for resource/non-stocked scenarios" y la variante completa con SCM.
+Si no encuentras un rol acotado, documenta que usaste un rol amplio porque el ambiente no ofrecía uno
+más específico.
+
+### Configuración previa que puede faltar en un trial
+
+- El módulo **Project management and accounting** requiere que exista al menos un **grupo de
+  proyecto** (project group) configurado con las reglas de contabilización antes de poder crear un
+  proyecto de tiempo y materiales — si el trial no trae uno, hay que crearlo o documentar que se usó
+  uno existente del demo data.
+- Las **reglas de facturación** (billing rules) a veces dependen de parámetros de Project management
+  and accounting sin inicializar en un trial recién aprovisionado (p. ej. categorías de hora/gasto
+  facturables); si el paso 3 no ofrece las opciones esperadas, revisa **Project management and
+  accounting > Setup** antes de asumir que el paso está mal descrito.
+- Project Operations tiene dos variantes de despliegue (con y sin SCM) que cambian nombres de menú y
+  disponibilidad de ciertas funciones (como WBS avanzada); documenta cuál variante trae tu ambiente
+  si notas menús distintos a los descritos.
+
+### Fallos frecuentes
+
+| Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
+|---|---|---|---|
+| No aparece la opción "Time and material" al crear el proyecto | Módulo no habilitado o grupo de proyecto sin ese tipo configurado | Revisa **Project management and accounting > Setup > Project groups** | Crea o ajusta un grupo de proyecto que soporte tiempo y materiales antes de crear el proyecto |
+| No se puede seleccionar el cliente de prueba en el contrato de proyecto | Dato Contoso faltante: cliente no configurado como cuenta facturable en la legal entity actual | Verifica que el cliente exista en **Accounts receivable > Customers** de esa legal entity | Crea o activa el cliente en la legal entity correcta antes de continuar |
+| La WBS no permite marcar tareas como facturables/no facturables | Permiso insuficiente sobre Project management and accounting | Revisa si los campos aparecen deshabilitados (solo lectura) en el formulario | Solicita un rol con acceso de escritura sobre Projects, no solo de consulta |
+| No aparece "Billing rules" ni "Invoice proposals" en el menú esperado | Trial incompleto o variante de Project Operations distinta (con/sin SCM) | Busca por nombre en la barra de búsqueda global de F&O | Documenta la ruta real encontrada; el concepto (regla de facturación por hito vs. por tiempo) es el mismo aunque el menú cambie |
+| El registro de horas no aparece en la propuesta de factura | Tarea marcada como no facturable, o el registro está pendiente de aprobación | Revisa el estado del registro de horas (timesheet) y si requiere aprobación previa | Aprueba el registro de horas o corrige la tarea a facturable antes de generar la propuesta |
+
 ## Entregables
 
 - Contrato de proyecto y proyecto creados, con tipo de facturación documentado.

@@ -32,6 +32,36 @@ Antes de presentar este lab como dual-write ejecutado, completa el gate **CE + F
 del recurso `/recursos/d365-tenant-readiness`. Sin ambientes CE/F&O conectados, mapas soportados,
 permisos y prueba de sincronización, la entrega es arquitectura **Simulada**.
 
+## 🔧 Requisitos de tenant y fallos frecuentes
+
+**Licencia y rol mínimo**
+
+Dual-write es una capacidad de integración entre Dataverse y Finance/SCM, no un producto con
+licencia propia — pero exige que ambos entornos (Dataverse y F&O) tengan sus licencias de producto
+activas y estén vinculados entre sí (linked environments). En Dataverse, activar o pausar mapas
+requiere el rol "System Administrator" o un rol equivalente con acceso a la solución Dual-write; en
+F&O, configurar y publicar los flujos de integración que dual-write usa por debajo requiere el rol
+"System administrator" o "Data Management".
+
+**Configuración previa**
+
+- El entorno Dataverse y el entorno F&O deben estar vinculados desde el Centro de administración de
+  Power Platform (Entornos > vincular entorno Finance and Operations).
+- La solución Dual-write instalada en Dataverse, con los mapas base (Customer, Product, etc.)
+  habilitados desde la vista Collaborate/Solutions.
+- Un usuario/cuenta de integración con permisos suficientes en ambos entornos para que los mapas
+  puedan escribir en ambas direcciones.
+
+**Fallos frecuentes de licencia, región o configuración de entorno**
+
+| Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
+|---|---|---|---|
+| Los registros no sincronizan y no hay error visible | El mapa de dual-write está sin publicar o quedó pausado tras un error masivo previo | En la solución Dual-write dentro de Dataverse, revisar el estado del mapa y el registro de errores | Republicar el mapa y revisar el registro de errores antes de reactivarlo |
+| La sincronización falla solo para ciertos registros con mensaje relacionado a compañía/legal entity | La compañía (legal entity) de F&O del registro no está incluida en el alcance configurado del mapa | En la configuración del mapa de dual-write, revisar la lista de compañías en su scope | Agregar la compañía faltante al scope del mapa o crear un mapa adicional para ella |
+| Cambios en campos financieros no se reflejan en Sales | El campo no está incluido en el mapeo de campos del mapa, o dual-write no lo soporta de forma nativa | Revisar el "field mapping" del mapa específico en Dataverse | Agregar el campo si es soportado, o diseñar una integración custom para ese campo (ver Paso 3) |
+| Error de "entorno no vinculado" al intentar habilitar un mapa | El vínculo entre el entorno Dataverse y el entorno F&O expiró o nunca se completó | Centro de administración de Power Platform > Entornos > verificar el estado de vínculo con Finance and Operations | Revincular el entorno desde el Centro de administración |
+| Falla la sincronización con mensaje de permiso/licencia insuficiente del usuario de integración | El usuario técnico de dual-write no tiene licencia completa de F&O o le falta el rol de seguridad para las entidades sincronizadas | Centro de administración de Power Platform > revisar la licencia asignada a la cuenta de servicio/integración | Asignar la licencia adecuada y el rol de seguridad correspondiente en F&O |
+
 ## Pasos detallados
 
 ### Paso 1 — Entidades

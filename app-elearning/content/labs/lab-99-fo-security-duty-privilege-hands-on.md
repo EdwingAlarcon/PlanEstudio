@@ -43,6 +43,38 @@ Actúas como F&O Practitioner responsable del modelo de seguridad de Cuentas por
 
 - Ambiente trial/demo de Dynamics 365 Finance/SCM con permisos de administrador de seguridad.
 
+## 🔧 Requisitos de ambiente y fallos frecuentes
+
+**Rol de seguridad mínimo**
+
+Para diseñar y asignar roles necesitas acceso de escritura a **System administration > Security**
+(crear/editar roles de seguridad y asignarlos a usuarios), no solo poder ver el formulario. En un
+ambiente trial de un solo usuario tu cuenta suele traer ya ese acceso; en un ambiente compartido o un
+tenant corporativo, pide específicamente permiso de administración de seguridad ("Security
+administrator" o equivalente en tu demo) en vez de tu rol funcional habitual de Cuentas por Pagar —
+el usuario que diseña roles no necesariamente es el mismo que los usa día a día.
+
+**Configuración previa que puede faltar en un trial**
+
+- Crear un "usuario de prueba" nuevo en un ambiente demo requiere una licencia/asiento disponible en
+  el tenant — un trial de un solo usuario puede no tener cupo para un segundo usuario real; si es tu
+  caso, documenta la asignación de rol sobre tu propio usuario (quitando y volviendo a poner el rol)
+  en vez de crear un usuario adicional, y dilo explícitamente en tu evidencia.
+- El motor de **Segregation of duties** puede no estar configurado con reglas de conflicto
+  precargadas en un ambiente demo nuevo — es común que el menú exista pero no tenga ninguna regla de
+  SoD activa, lo cual no es un error tuyo sino un estado por defecto del trial.
+- Los cambios de asignación de rol de seguridad no siempre son inmediatos: puede requerir que el
+  usuario afectado cierre sesión y vuelva a entrar, o que se ejecute un batch job de sincronización de
+  seguridad, antes de que el nuevo rol tenga efecto visible.
+
+| Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
+|---|---|---|---|
+| No puedo crear ni editar roles de seguridad en Security configuration | Permiso insuficiente: el usuario no tiene rol de administración de seguridad | Revisa tus propios roles asignados en **System administration > Users > Users** | Solicita al administrador del ambiente un rol con acceso de escritura a Security configuration |
+| No hay opción para crear un usuario de prueba nuevo | Trial incompleto: sin licencia/asiento disponible en el tenant | Ve a **System administration > Users > Users > New** y revisa si el formulario permite guardar | Usa tu propio usuario para probar la asignación de rol (documentando este límite) en vez de crear uno nuevo |
+| Segregation of duties no muestra ninguna regla de conflicto | Módulo de SoD no habilitado o sin reglas precargadas en el trial | Ve a **System administration > Security > Segregation of duties** y verifica si hay reglas listadas | Documenta la ausencia de reglas como límite del ambiente y describe manualmente el conflicto (AP Clerk + AP Approver en el mismo usuario) como evidencia sustituta |
+| El usuario de prueba no ve el cambio de rol recién asignado | Falta de refresh de caché de seguridad o sesión activa desde antes de la asignación | Pide al usuario de prueba (o tú mismo) cerrar sesión completamente y volver a entrar | Cierra sesión, espera unos minutos y vuelve a entrar antes de descartar el paso como fallido |
+| No aparece la duty de aprobación de pago al armar el rol AP Approver | Duty renombrada o reorganizada entre release waves | Busca por palabra clave parcial (p. ej. "approv" o "payment") en el buscador de Security configuration en vez del nombre exacto documentado | Usa el nombre de duty equivalente que encuentres en tu versión y documenta la diferencia como parte de la evidencia |
+
 ## Entregables
 
 - Documentación de la jerarquía Role > Duty > Privilege > Permission con un ejemplo real del ambiente.

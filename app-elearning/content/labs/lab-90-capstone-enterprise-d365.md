@@ -34,6 +34,41 @@ Antes de presentar este capstone como ejecución real, completa el recurso
 `/recursos/d365-tenant-readiness` para cada producto incluido. Si una capacidad no cumple su gate,
 déjala marcada como diseño/simulación dentro del resumen ejecutivo.
 
+## 🔧 Requisitos de tenant y fallos frecuentes
+
+**Licencia y rol mínimo (por producto)**
+
+Cada producto de este capstone (Sales, Customer Service, Contact Center, Customer Insights, Field
+Service, Finance) tiene licencia propia e independiente; ningún plan las incluye todas —revisa en
+el Centro de administración de Power Platform o en el Microsoft 365 admin center qué licencias
+tiene asignadas tu usuario de prueba antes de asumir acceso a un producto. El rol mínimo también
+varía por producto (por ejemplo "Sales Manager" para Sales, "Customer Service Manager" para
+Service, "Field Service - Dispatcher"/"Field Service - Resource" para Field Service): tener un rol
+de administrador global del tenant no equivale a tener el rol funcional correcto dentro de cada
+app. Customer Insights - Data y Journeys son productos con licencia separada de CE; su ausencia no
+bloquea el resto de la arquitectura, pero debe declararse explícitamente como "no disponible" en
+el resumen ejecutivo si no hay trial.
+
+**Configuración previa**
+
+- Confirmar en el Centro de administración de Power Platform qué entornos y qué licencias existen
+  por producto antes de diseñar la arquitectura, para poder marcar honestamente cada capacidad
+  como Simulado/Sandbox real/Productivo controlado.
+- Si falta trial de algún producto (Field Service o Customer Insights, por ejemplo), solicitarlo
+  con anticipación — algunos trials tardan en aprovisionar y dependen de la región del tenant.
+- Verificar que todos los productos del capstone se prueben sobre el mismo tenant, para no mezclar
+  evidencias de tenants de prueba distintos como si fueran una sola arquitectura.
+
+**Fallos frecuentes de licencia, región, canal o app no instalada**
+
+| Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
+|---|---|---|---|
+| Un producto muestra "no tienes licencia para acceder a esta app" | La licencia de trial expiró o nunca se asignó al usuario de prueba para ese producto | Centro de administración de Power Platform > usuarios > licencias asignadas por producto | Reasignar o renovar el trial correspondiente antes de continuar el paso de arquitectura para ese producto |
+| Dynamics 365 Contact Center no aparece disponible en el tenant | Es una oferta con disponibilidad regional limitada que requiere habilitarse explícitamente | Centro de administración de Power Platform > revisar si el producto aparece disponible para la región del tenant | Si no está disponible en la región, documentarlo como "awareness / fuera de alcance por región", no simularlo como disponible |
+| Customer Insights - Journeys no puede enviar el canal de email/SMS en pruebas | El dominio de envío no está verificado, o el canal requiere configuración y aprobación adicional de proveedor | En Customer Insights - Journeys, revisar el estado de verificación del dominio en configuración de canales | Documentar el canal como "diseñado, no probado" hasta verificar el dominio |
+| Los entornos de distintos productos no aparecen relacionados entre sí | Cada producto puede vivir en un entorno Dataverse distinto si se aprovisionó por separado | Centro de administración de Power Platform > Entornos > revisar qué apps están instaladas en cada entorno | Documentar explícitamente qué producto vive en qué entorno; planear la consolidación o el vínculo como parte del roadmap si se necesita integración real |
+| F&O no está disponible para pruebas dentro del mismo tenant que CE | Finance and Operations requiere un entorno de tipo "Finance and Operations" aprovisionado por separado, no se comparte automáticamente con el entorno Dataverse de CE | Centro de administración de Power Platform > Entornos > tipo de entorno | Solicitar/aprovisionar el trial de F&O como entorno independiente y vincularlo si se necesita dual-write real |
+
 ## Pasos detallados
 
 ### Paso 1 — Flujo end-to-end
