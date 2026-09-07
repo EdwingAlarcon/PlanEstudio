@@ -338,8 +338,8 @@ export function buildWeeklyPlan(availability: WeeklyAvailability, nextAction: Ne
 export function classifySearchDocument(doc: SearchDocument, onboarding: OnboardingState): "en-tu-ruta" | "opcional" | "avanzado" | "otra-especializacion" {
   if (doc.type === "lab" && FOUNDATION_ACTIVITIES.some((activity) => activity.labSlug === doc.slug)) return "en-tu-ruta";
   if (doc.type === "module" && FOUNDATION_ACTIVITIES.some((activity) => activity.moduleId === doc.moduleId)) return "en-tu-ruta";
+  if (["ia", "d365", "rpa", "N5", "N6", "RPA"].includes(doc.levelId)) return "otra-especializacion";
   if (doc.type === "module" && doc.moduleId >= 18) return "avanzado";
-  if (doc.levelId === "ia" || doc.levelId === "d365" || doc.levelId === "N5" || doc.levelId === "N6") return "otra-especializacion";
   return onboarding.navigationMode === "guided" ? "opcional" : "en-tu-ruta";
 }
 
@@ -388,8 +388,8 @@ export function getModulePrerequisiteWarning(
 }
 
 // ─── Modo guiado: advertencia de prerrequisito por lab ─────────────────────────
-// LabInfo.prerequisites es texto libre (no IDs verificables), así que solo se
-// puede detectar de forma confiable la referencia a un módulo ("Módulo 9 ...").
+// LabInfo.prerequisites es texto libre: reconocemos referencias explícitas a
+// módulos, listas y rangos (incluyendo prefijos de especialización IA/D365/RPA).
 // Referencias a otro lab ("Lab 02 ...") no se resuelven aquí porque requieren el
 // slug real del lab, que no está disponible en el texto libre.
 
@@ -411,12 +411,22 @@ export function getLabPrerequisiteWarning(
 ): LabPrerequisiteWarning | null {
   const unmet: string[] = [];
   for (const prereq of prerequisites) {
-    const match = prereq.match(/M[oó]dulo\s+(\d+)/i);
-    if (!match) continue;
-    const moduleId = Number(match[1]);
-    const levelId = levelForModuleId(moduleId);
-    if (!levelId) continue;
-    if (!completedModules.includes(`${levelId}-${moduleId}`)) {
+    const references = prereq.matchAll(/\bM[oó]dulos?\s+(?:(?:IA|D365|RPA)\s+)?(\d+(?:\s*[-–—]\s*\d+)?(?:\s*(?:,|y|e)\s*\d+(?:\s*[-–—]\s*\d+)?)*)/gi);
+    const moduleIds = new Set<number>();
+    for (const reference of references) {
+      for (const interval of reference[1]!.matchAll(/(\d+)(?:\s*[-–—]\s*(\d+))?/g)) {
+        const start = Number(interval[1]);
+        const end = Number(interval[2] ?? interval[1]);
+        // Iterar solo IDs del catálogo evita expandir rangos arbitrarios del texto.
+        for (const level of LEVEL_ORDER) {
+          const [first, last] = LEVEL_MODULE_RANGE[level];
+          for (let id = Math.max(first, start); id <= Math.min(last, end); id++) {
+            moduleIds.add(id);
+          }
+        }
+      }
+    }
+    if ([...moduleIds].some((id) => !completedModules.includes(`${levelForModuleId(id)}-${id}`))) {
       unmet.push(prereq);
     }
   }

@@ -6,18 +6,17 @@ This file provides guidance to Codex (Codex.ai/code) when working with code in t
 
 Before starting new work, read `SPRINT_HANDOFF.md`. It is the active operational memory for the post-audit sprints.
 
-Current stable state as of the latest pushed `master` commit:
-- Latest pushed product/content sprint: **Diagnóstico de caso aplicado** completo para los 75 módulos — commits `bc205885` (IA), `5ba5131e` (D365) y `450137ce` (RPA). Validación local final: `validate:content`, `lint`, `typecheck`, `test:coverage` (323/323), `build:pages` y `npm run e2e` (47/47). GitHub Actions run manual `31127332409` quedó en cola para el commit `450137ce` por capacidad/cola remota, sin pasos ejecutados ni evidencia de fallo local.
-- Previous pushed/deployed product sprint: **Beginner Guided Journey & Progressive Disclosure** — commit `a14e72d` (`feat: añadir recorrido guiado para principiantes`), GitHub Actions run `30551134055` success, GitHub Pages verified.
-- Previous product sprint: **Practice Experience Integration** — commit `6e0604ac` (`feat: integrar seguimiento de experiencia practica`), GitHub Actions run `30419768845` success, GitHub Pages verified.
-- Previous course/design sprint: **Sprint 22 — `/impeccable audit` (17/20 → 20/20 after fixes) + `PRODUCT.md`/`DESIGN.md`/`.impeccable/design.json` (Sprint 21)**.
+Current operational state (2026-09-07; release evidence in `SPRINT_HANDOFF.md`):
+- The seven tenant-real audit roadmap sprints are closed. The latest content audit is commit `a6071a3b`; GitHub Actions run `34060543667` succeeded. Session closure is commit `1728487d`.
+- Current maintenance corrects guided lab prerequisite detection (lists/ranges) and search classification of transversal specializations. See the handoff for validation and deployment status.
+- The app provides instructions and evidence criteria for real Microsoft tenants; it does not automatically validate a student's tenant.
 - Beginner-onboarding work is intentional and should not be removed: "Primeras 2 horas", Mini Lab 01, checklist mínimo para principiantes, Power Fx en español simple, entregable mínimo del Nivel Básico, Módulo 9 bridge into Intermedio, and the beginner guided route surfaced through `/mi-ruta`, `/mapa`, and `/experiencia-practica`.
 - Professional Practice Framework has daily UX integration: capa `Experiencia práctica` con 18 Incident Labs, 6 Challenge Labs, 2 Work Simulations y 6 guided practices, metadata tipada/validada, matriz de competencias práctica, navegación `/experiencia-practica`, progreso práctico independiente, pistas escalonadas, intentos, notas, evidencias, solución colapsada y autoevaluación por rúbrica.
 - Official production URL is `https://planestudio.vercel.app/`. GitHub Pages is legacy/secondary and should not be treated as the release blocker.
-- Fixed learning content counts: **75 modules, 72 labs, 508 quiz questions, 375 case-diagnosis questions, 633 checklist criteria**.
+- Fixed learning content counts: **76 modules, 73 labs, 516 quiz questions, 375 case-diagnosis questions, 636 checklist criteria**.
 - Professional practice counts: **32 practices total — 18 incidents, 6 challenges, 2 simulations, 6 guided**. Do not merge these into the existing lab count.
 - Practical progress uses separate localStorage key `planestudio.practice-progress.v1`; academic progress remains `plan-estudio-progress`. Do not merge these stores or show a single combined percentage.
-- Current local test baseline: **323 Vitest tests** and **47 Playwright smoke tests**.
+- Current local test baseline: **454 Vitest tests** and **89 Playwright tests** (see the handoff for executed results).
 - User preference for this repo: before work, fetch/sync the repo and resolve merge needs; after completing a change, **commit, push to `master`, and wait for deploy/production verification** unless the user explicitly says not to.
 - Local validation should run `npm run build:pages` or `npm run build`, then `npm run e2e` **serially**, because both can touch `.next` locally and cause transient route/module false negatives.
 
@@ -42,7 +41,7 @@ docs/                    # MkDocs legacy/reference content + shared question ban
   index.md               # Master index and overview
   Niveles/
     NIVEL_1_BASICO.md    # Level 1: Fundamentals — 8 modules + Suplementos 1A (AI Builder) y 1B (Power Pages)
-    NIVEL_2_INTERMEDIO.md  # Level 2: Intermediate — 9 modules (PL-200)
+    NIVEL_2_INTERMEDIO.md  # Level 2: Intermediate — 9 modules (Consultor funcional; PL-200 retirado)
     NIVEL_3_AVANZADO.md    # Level 3: Advanced — 13 modules (PL-400)
     NIVEL_4_ARQUITECTO.md  # Level 4: Architect — 11 modules (Arquitectura Power Platform; PL-600 retirado)
   Anexos/
@@ -57,12 +56,12 @@ docs/                    # MkDocs legacy/reference content + shared question ban
     CERTIFICACIONES.md
     PROMPTS_REUTILIZABLES_IA.md
   javascripts/
-    evaluaciones-simulador.js   # Banco de 883 preguntas en MODULE_QUESTIONS (módulos 1-75): 508 quiz + 375 diagnóstico de caso aplicado
+    evaluaciones-simulador.js   # Banco de 891 preguntas en MODULE_QUESTIONS (módulos 1-76): 516 quiz + 375 diagnóstico de caso aplicado
   stylesheets/
     extra.css            # Custom CSS for MkDocs site
 app-elearning/           # Next.js 15 interactive app (THE primary surface)
-  content/               # Official app content: 75 modules + 72 labs with frontmatter across 7 levels (incl. Nivel IA 42-55, Nivel D365 56-65, Nivel RPA 66-75, job-ready simulations, F&O hands-on labs and route capstones)
-  next.config.ts         # output: 'export', basePath: '/PlanEstudio'
+  content/               # Official app content: 76 modules + 73 labs with frontmatter across 7 levels (incl. Nivel IA 42-56, Nivel D365 57-66, Nivel RPA 67-76, job-ready simulations, F&O hands-on labs and route capstones)
+  next.config.ts         # output: 'export'; basePath '/PlanEstudio' only when GITHUB_PAGES=true, otherwise root
   src/
     app/                 # App Router pages
       layout.tsx         # Root layout — Server Component; passes searchDocuments to AppShell
@@ -112,7 +111,7 @@ npm run validate:content  # Frontmatter, unique moduleId/slug, level ranges, que
 npm run build        # Static export for official Vercel/root hosting → app-elearning/out/
 npm run build:pages  # Static export for legacy GitHub Pages → app-elearning/out/
 npm run e2e          # Playwright smoke tests
-npm run verify       # lint + typecheck + coverage + build:pages
+npm run verify       # lint + typecheck + validate:content + coverage + build:pages
 ```
 
 ### MkDocs (reference/legacy)
@@ -142,7 +141,7 @@ Each app module in `app-elearning/content/modules/<levelId>/NN-slug.md` uses YAM
 moduleId: 9
 title: "Dataverse Avanzado"
 level: "intermedio"
-certification: "PL-200"
+certification: "Consultor funcional (PL-200 retirado 31 ago 2026)"
 estimatedMinutes: 9
 slug: "dataverse-avanzado"
 ---
@@ -176,7 +175,7 @@ Do NOT change these heading formats in `docs/Niveles/*.md` unless you intentiona
 
 ## Content: Question Bank
 
-`docs/javascripts/evaluaciones-simulador.js` contains `MODULE_QUESTIONS` — a JS object with keys 1-75, each an array of question objects:
+`docs/javascripts/evaluaciones-simulador.js` contains `MODULE_QUESTIONS` — a JS object with keys 1-76, each an array of question objects:
 
 ```js
 {
@@ -189,9 +188,9 @@ Do NOT change these heading formats in `docs/Niveles/*.md` unless you intentiona
 }
 ```
 
-- 883 total questions across 75 modules: 508 normal quiz questions + 375 `appliesTo: "caso"` questions
+- 891 total questions across 76 modules: 516 normal quiz questions + 375 `appliesTo: "caso"` questions
 - Module 1 has 15 questions (includes AI Builder and Power Pages topics for PL-900)
-- After editing, run `node ../scripts/extract-questions.mjs` from `app-elearning` or run `npm run build:pages`
+- After editing, run `node ../scripts/extract-questions.mjs` from `app-elearning` or run `npm run build` (`prebuild` regenerates questions; `build:pages` does not)
 - `scripts/extract-questions.mjs` generates `app-elearning/src/data/questions.ts`; `questions-parser.ts` validates associations at build/test time
 
 ## Naming and Prefix Conventions
@@ -205,12 +204,10 @@ Do NOT change these heading formats in `docs/Niveles/*.md` unless you intentiona
 **Do not skip levels.** Each level builds on the previous:
 
 ```
-NIVEL 1 (PL-900) → NIVEL 2 (PL-200) → NIVEL 3 (PL-400) → NIVEL 4 (Arquitectura Power Platform)
+NIVEL 1 (PL-900) → NIVEL 2 (Consultor funcional; PL-200 retirado) → NIVEL 3 (PL-400) → NIVEL 4 (Arquitectura Power Platform)
 ```
 
-**Nivel IA and Nivel D365 are transversal, not part of this chain.** Neither has prerequisites,
-neither gates or is gated by the 4 levels above or by each other, and both can be studied at any
-point.
+**Nivel IA, Nivel D365 and Nivel RPA are transversal, not part of this chain.** They do not gate the four certification levels or each other. Individual labs can still declare module prerequisites, which produce non-blocking warnings in guided mode.
 
 ## Language
 

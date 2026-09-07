@@ -1,5 +1,22 @@
 # CLAUDE.md
 
+## Mantenimiento vigente — 2026-09-07
+
+Corrección de navegación guiada: los prerrequisitos explícitos de labs admiten módulo individual,
+listas, rangos y prefijos IA/D365/RPA; se conserva una advertencia no bloqueante por requisito
+original si falta cualquier módulo. Referencias a labs y números ajenos no se interpretan como módulos.
+El buscador clasifica IA/D365/RPA como especializaciones transversales antes de evaluar dificultad.
+
+Conteos actuales verificados: **76 módulos, 73 labs, 516 preguntas quiz + 375 de diagnóstico
+(891 en total), 636 criterios, 32 prácticas profesionales y 15 prácticas interactivas**.
+Las cifras anteriores de las secciones históricas describen sus respectivos sprints.
+Validación local ejecutada: `npm run verify` completo (lint, typecheck, contenido/recursos,
+454 tests con cobertura y build:pages), seguido de `npm run e2e`: **89/89** en 5.8 minutos.
+Cobertura global: 91.89% líneas, 80.99% ramas; build exportó 286 páginas.
+Se añadieron 10 casos de prueba. Publicación y verificación de producción: pendientes tras push.
+Los siete sprints del roadmap anterior siguen cerrados; no se amplía el contenido.
+
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Current Handoff for Claude

@@ -152,13 +152,20 @@ describe("contextual search", () => {
     ).toBe("avanzado");
   });
 
+  it.each([["ia", 42], ["d365", 57], ["rpa", 67]] as const)("classifies %s modules as a specialization", (levelId, moduleId) => {
+    expect(classifySearchDocument(
+      { id: `module-${levelId}`, title: levelId, type: "module", levelId, moduleId, slug: levelId, href: "/x", content: "" },
+      DEFAULT_ONBOARDING_STATE,
+    )).toBe("otra-especializacion");
+  });
+
   it("labels transversal and free-explore content separately", () => {
     expect(
       classifySearchDocument(
         { id: "resource-ia", title: "IA", type: "module", levelId: "ia", moduleId: 42, slug: "ia", href: "/x", content: "" },
         DEFAULT_ONBOARDING_STATE,
       )
-    ).toBe("avanzado");
+    ).toBe("otra-especializacion");
     expect(
       classifySearchDocument(
         { id: "resource-d365", title: "D365", type: "resource", levelId: "d365", moduleId: 0, slug: "d365", href: "/x", content: "" },
@@ -211,6 +218,24 @@ describe("getModulePrerequisiteWarning", () => {
 });
 
 describe("getLabPrerequisiteWarning", () => {
+  it.each([
+    ["Módulos 68 y 75 completados", [68, 75]],
+    ["Módulo 44 y 45 estudiados", [44, 45]],
+    ["Módulos RPA 67-76 completados", [67, 68, 69, 70, 71, 72, 73, 74, 75, 76]],
+    ["Módulos 42–45 estudiados", [42, 43, 44, 45]],
+    ["Modulos 42, 44 y 45 estudiados", [42, 44, 45]],
+    ["Módulo 42 y Módulo 45 estudiados", [42, 45]],
+  ])("checks every module in %s", (prerequisite, ids) => {
+    const completed = ids.map((id) => `${id >= 67 ? "rpa" : "ia"}-${id}`);
+    expect(getLabPrerequisiteWarning([prerequisite], [])).toEqual({ unmet: [prerequisite] });
+    expect(getLabPrerequisiteWarning([prerequisite], completed.slice(0, -1))).toEqual({ unmet: [prerequisite] });
+    expect(getLabPrerequisiteWarning([prerequisite], completed)).toBeNull();
+  });
+
+  it("does not treat unrelated numbers as module references", () => {
+    expect(getLabPrerequisiteWarning(["Módulo 9 estudiado y Visual Studio 2022 instalado; Lab 23 completado"], ["intermedio-9"])).toBeNull();
+    expect(getLabPrerequisiteWarning(["Módulo 999 completado"], [])).toBeNull();
+  });
   it("returns null when there are no prerequisites referencing a module", () => {
     expect(getLabPrerequisiteWarning(["Visual Studio 2022 instalado"], [])).toBeNull();
   });
