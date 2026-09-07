@@ -13,7 +13,15 @@ Las cifras anteriores de las secciones históricas describen sus respectivos spr
 Validación local ejecutada: `npm run verify` completo (lint, typecheck, contenido/recursos,
 454 tests con cobertura y build:pages), seguido de `npm run e2e`: **89/89** en 5.8 minutos.
 Cobertura global: 91.89% líneas, 80.99% ramas; build exportó 286 páginas.
-Se añadieron 10 casos de prueba. Publicación y verificación de producción: pendientes tras push.
+Se añadieron 10 casos de prueba. Cambio publicado en `master`: **`e01be5b8`**.
+Vercel confirmó Production success (deployment GitHub `6315926020`,
+[Vercel](https://vercel.com/edwingalarcons-projects/planestudio/EqBDBQeJ9rKNhXrt3SrQmrpquhNB)).
+Comprobación real en `https://planestudio.vercel.app/` con Chromium aislado: LAB-111 muestra
+la advertencia sin progreso y la retira al completar ambos módulos; el buscador etiqueta
+los módulos IA/D365/RPA como Otra especializacion; sin errores JavaScript de página.
+CI de producto: [run 34160447773](https://github.com/EdwingAlarcon/PlanEstudio/actions/runs/34160447773);
+lint/typecheck, unit tests y MkDocs aprobados al registrar esta evidencia; resto aún en curso.
+Los cambios locales previos de graphify-out y .baton no se incluyeron en los commits.
 Los siete sprints del roadmap anterior siguen cerrados; no se amplía el contenido.
 
 
