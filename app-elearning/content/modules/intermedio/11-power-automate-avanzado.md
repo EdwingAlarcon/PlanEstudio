@@ -3,165 +3,134 @@ moduleId: 11
 title: "Power Automate Avanzado"
 level: "intermedio"
 certification: "PL-200 (retirado 31 ago 2026)"
-estimatedMinutes: 9
+estimatedMinutes: 14
+practiceMinutes: 45
 slug: "power-automate-avanzado"
 ---
 ### 🎯 Objetivo
-Construir flujos empresariales robustos con manejo de errores, ramas paralelas, flujos hijos reutilizables, llamadas HTTP a APIs externas, y procesamiento de alto volumen con batches y paginación.
+Construir flujos empresariales robustos con manejo de errores, ramas paralelas, flujos hijos reutilizables, llamadas HTTP a APIs externas, y procesamiento de alto volumen con batches y paginación — practicando cada concepto de inmediato, con evidencia real de tu propio entorno, antes de pasar al siguiente.
 
-### 📖 Conceptos Clave
-- **Scope:** contenedor de acciones en Power Automate que agrupa un conjunto de pasos lógicamente relacionados y permite aplicar manejo de errores colectivo (patrón try/catch). Si cualquier acción dentro del Scope falla, el Scope completo se marca como fallido, lo que permite al siguiente Scope (Catch) detectar el error. También mejora la legibilidad al organizar flujos complejos. Ejemplo: Scope `Try` contiene el proceso de negocio; Scope `Catch` contiene el registro del error y la notificación al admin.
+> **Cómo está organizado este módulo (piloto):** en vez de leer todo el marco teórico y recién al final "hacer" algo, cada micro-concepto viene con una micropráctica de feedback inmediato justo después. Vas a **construir** parte de la lógica tú mismo (no vas a copiar una solución ya resuelta), vas a **diagnosticar** un síntoma real antes de ver la causa, y vas a cerrar con un **reto de transferencia** que cambia la regla de negocio para comprobar si entendiste el concepto o memorizaste los pasos.
+>
+> Necesitas: una cuenta Microsoft 365 y un [entorno Power Platform Developer](https://learn.microsoft.com/power-platform/developer/plan) (gratuito, con Dataverse y conectores premium habilitados para pruebas — no uses el entorno productivo del tenant). El Developer Plan da 750 ejecuciones de flujo al mes, más que suficiente para este módulo.
 
-- **Run After:** configuración por acción que define en qué estado(s) de la acción previa debe ejecutarse la acción actual. Los cuatro estados posibles son: `succeeded`, `failed`, `skipped` y `timedOut`. Por defecto todas las acciones tienen Run After = succeeded. Para implementar un Catch, configurar el Scope de Catch con Run After = failed + timedOut (desmarcando succeeded). Esto es lo que convierte un Scope en un bloque catch.
+---
 
-- **Parallel Branch:** rama de ejecución simultánea en Power Automate que permite que múltiples acciones se ejecuten al mismo tiempo en lugar de secuencialmente. Se agrega desde el botón "+" en el diseñador. El flujo espera a que TODAS las ramas terminen antes de continuar. Útil cuando acciones son independientes entre sí (ej. enviar Teams + enviar email + actualizar Dataverse). Reducción típica de tiempo: si cada acción toma 10s, 3 acciones secuenciales = 30s vs paralelas = ~12s.
+## 🧩 Microlección 1 — Scope, Run After y el patrón Try/Catch
 
-- **Child Flow:** flujo de Power Automate diseñado para ser invocado desde otros flujos como una función reutilizable. Usa el disparador "When called from a Power Automate flow" y puede recibir parámetros de entrada y retornar valores de salida. Debe estar en la misma solución que el flujo padre. Ventajas: encapsula lógica de negocio reutilizable, facilita el mantenimiento (un solo punto de cambio), y reduce duplicación. Ejemplo: `DeterminarNivelAprobacion` llamado desde flujos de órdenes de compra, contratos y viáticos.
+**¿Qué vas a aprender?** Cómo hacer que un flujo detecte sus propios errores y reaccione, en vez de fallar en silencio.
 
-- **HTTP action:** acción de Power Automate que permite llamar cualquier API REST externa mediante los métodos GET, POST, PUT, PATCH, DELETE. Soporta configuración de headers, body, y autenticación (básica, OAuth, certificado). Es un conector Premium. La respuesta se parsea con la acción Parse JSON. Fundamental para integrar con sistemas externos que no tienen conector nativo en Power Platform. Ejemplo: llamar a `api.exchangerate-api.com` para obtener tasas de cambio en tiempo real.
+**¿Por qué existe esto?** Power Automate no tiene manejo de excepciones como un lenguaje de programación (`try/catch` nativo). El patrón se construye combinando dos piezas: **Scope** (un contenedor de acciones) y **Run After** (una configuración por acción que decide en qué estado de la acción anterior — `succeeded`, `failed`, `skipped`, `timedOut` — debe ejecutarse la siguiente). Un Scope configurado con Run After = failed/timedOut se convierte, en la práctica, en un bloque `catch`.
 
-- **Pagination (Paginación):** mecanismo para obtener más de 256 registros (límite por defecto de las acciones de lista) desde una fuente de datos. En acciones de Dataverse/SharePoint se activa en la configuración de la acción (Settings → Pagination → On, límite personalizado). Para APIs externas vía HTTP, se implementa manualmente siguiendo el token `@odata.nextLink` en la respuesta mientras exista. Ignorar la paginación lleva a pérdida silenciosa de datos en flujos que procesan listas grandes.
+**Ejemplo pequeño:**
+```
+Scope "Try"
+  └─ Crear registro en Dataverse (puede fallar)
+Scope "Catch"  ← Run After del Scope Try: failed + timed out (succeeded desmarcado)
+  └─ Compose con el mensaje de error + Send email al admin
+```
 
-- **Do Until / Apply to Each:** dos patrones de iteración en Power Automate. `Do Until` repite un bloque de acciones hasta que una condición se cumpla (máx 60 iteraciones o 60 minutos por defecto, configurable). `Apply to Each` itera sobre cada elemento de un array/colección ejecutando el bloque interno. Apply to Each es secuencial por defecto pero soporta concurrencia (hasta 50 elementos en paralelo). Usar `Apply to Each` con Concurrency activado para grandes volúmenes reduce tiempos dramáticamente.
+**Ahora haz algo — micropráctica (2 min):** antes de construir nada, resuelve esta decisión conceptual con feedback inmediato → **[Retry vs Scope/Try-Catch](/practica/ip-pa-004-retry-scope-try-catch)**. Te va a pedir distinguir cuándo un error se soluciona reintentando (fallos transitorios como HTTP 429) y cuándo necesita Scope + Catch + compensación (fallos funcionales, como datos inválidos que nunca van a tener éxito por más que reintentes).
 
-- **Variables de entorno (en flujos):** diferente a las Environment Variables de soluciones (que son de plataforma), las variables en flujos son de tipo Initialize Variable + Set Variable + Append. Tipos disponibles: String, Integer, Float, Boolean, Array, Object. El alcance es el flujo completo (no son locales a un Scope o Apply to Each). Para valores de configuración que cambian por ambiente, usar las Environment Variables de la solución, no variables de flujo.
+**Práctica real en tu entorno (10 min):** construye el patrón Try/Catch del ejemplo de arriba en un flujo nuevo de tu entorno Developer, usando **Create a record** de Dataverse dentro del Scope Try (usa una tabla de prueba, ej. `Account`) y **Send an email (V2)** de Outlook dentro del Scope Catch. Fuerza el error a propósito (por ejemplo, referenciando una tabla o columna que no existe) para confirmar que el Catch sí se dispara.
 
-- **Batch Processing:** técnica para agrupar múltiples operaciones en una sola llamada API en lugar de llamar N veces en un loop. La API de Dataverse soporta `$batch` que procesa hasta 1000 operaciones en una sola solicitud HTTP. En Power Automate se implementa con la acción HTTP hacia el endpoint `$batch` de la OData API. Reduce drásticamente el consumo de API calls (importantes para límites de licencia) y mejora el rendimiento en cargas masivas.
+**Evidencia a reportar (no un "sí/no" — el dato exacto que viste):**
 
-- **Compensation pattern:** patrón de diseño para deshacer operaciones ya completadas cuando un paso posterior falla, dado que Power Automate no tiene transacciones nativas. Se implementa con Scope + Run After (failed): si el flujo falla después de crear un registro, el Scope Catch ejecuta las acciones de compensación (eliminar el registro creado, notificar al usuario, registrar el error). Ejemplo: si falla la creación de la factura después de descontar el inventario, la compensación restaura el stock.
+| Campo | Tu valor |
+|---|---|
+| Nombre del flujo | ___ |
+| ¿Qué acción forzaste a fallar y cómo? | ___ |
+| Estado final del Scope "Try" en el run history | ___ |
+| ¿Se ejecutó el Scope "Catch"? (Run After configurado) | ___ |
+| Mensaje de error capturado por `actions('Scope_Try')['error']['message']` | ___ |
 
-### 👨‍💻 Actividades Prácticas Paso a Paso
+---
 
-#### Actividad 11.1: Patrón Try-Catch con Scope
-1. Nuevo flujo → Disparado desde Power Apps (instantáneo)
-2. Agregar acción: **Scope** → Renombrar: `Try`
-3. Dentro del Scope Try, agregar acciones de negocio:
-    - Get Item de SharePoint (puede fallar)
-    - Parsear JSON
-    - Crear registro en Dataverse
+## 🧩 Microlección 2 — Child Flow reutilizable
 
-4. Agregar segundo **Scope** → Renombrar: `Catch`
-5. Configurar Run After del Scope Catch:
-    - Clic en "..." del Scope Catch → "Configure run after"
-    - Desmarcar "succeeded" → Marcar "failed" y "timed out"
+**¿Qué vas a aprender?** Cómo extraer una lógica de decisión reutilizable (un "flujo función") para no duplicarla en varios flujos padre.
 
-6. Dentro del Scope Catch:
-   ```
-   Acción: Compose
-   Inputs: {
-     "error": @{actions('Scope_Try')['error']['message']},
-     "timestamp": @{utcNow()},
-     "flowRunId": @{workflow()['run']['name']}
-   }
-   
-   Acción: Create item (SharePoint — tabla Errores)
-   Descripcion: outputs('Compose_Error')
-   
-   Acción: Send email (Outlook)
-   To: admin@empresa.com
-   Subject: "Error en flujo: @{workflow()['tags']['flowDisplayName']}"
-   Body: "Error: @{actions('Scope_Try')['error']['message']}"
-   ```
+**¿Por qué existe esto?** Si tres procesos distintos (compras, contratos, viáticos) necesitan la misma regla de "¿quién aprueba según el monto?", escribir esa lógica tres veces significa mantenerla tres veces. Un **Child Flow** (trigger `When a Power Automate flow is run`) la centraliza: recibe parámetros, decide, y responde con `Respond to a Power Automate flow`.
 
-#### Actividad 11.2: Flujo Hijo Reutilizable
-1. Crear nuevo flujo → disparador: **"When a Power Automate flow is run"** (Child flow)
-2. Definir inputs:
-    - `solicitudId` (String)
-    - `aprobadorEmail` (String)
-    - `presupuesto` (Float)
+**Ejemplo pequeño:** un Child Flow que recibe `presupuesto` (Float) y solo necesita UNA condición para decidir entre dos niveles — eso ya lo puedes practicar ahora mismo, sin que te dé la solución completa:
 
-3. Lógica del flujo hijo: calcular nivel de aprobación:
-   ```
-   Condition: presupuesto < 5000
-     True → Response: nivel = "Supervisor"
-   
-   Condition: presupuesto < 50000
-     True → Response: nivel = "Gerente"
-   
-   Default → Response: nivel = "Director"
-   ```
+**Ahora haz algo — micropráctica (5 min):** en vez de leer la lógica ya resuelta, ordénala tú mismo con feedback inmediato en → **[Construir aprobación por monto](/practica/ip-pa-002-aprobacion-por-monto)**. Te da las piezas (trigger, condición, acciones) desordenadas y casos de prueba con montos límite — arma la secuencia y valida contra los 3 casos antes de seguir.
 
-4. Acción final: **Respond to a Power Automate flow** con output `nivel`
-5. Guardar y agregar a la solución (importante para Child Flow)
-6. En el flujo padre, agregar: **Run a Child Flow** → seleccionar el flujo creado
-7. Pasar parámetros y usar la respuesta:
-   ```
-   // En flujo padre
-   nivelAprobacion: outputs('Run_a_Child_Flow')?['nivel']
-   ```
+**🏗️ Reto de construcción (sin pasos, tenant real):** ahora construye el Child Flow completo de 3 niveles descrito abajo. No te damos la secuencia de acciones esta vez — solo el requerimiento.
 
-#### Actividad 11.3: Llamada HTTP a API externa
-1. Flujo con trigger de recurrencia (cada hora)
-2. Agregar acción **HTTP**:
-   ```
-   Method: GET
-   URI: https://api.exchangerate-api.com/v4/latest/USD
-   Headers:
-     Accept: application/json
-   ```
+> **Requerimiento:** un Child Flow llamado `DeterminarNivelAprobacion` que reciba `presupuesto` (Float) como input y responda `nivel` (String) con tres posibles valores: `"Supervisor"` (presupuesto < 5.000), `"Gerente"` (presupuesto < 50.000) o `"Director"` (cualquier otro caso).
+> **Criterios de aceptación:** (1) el flujo debe estar guardado en una solución (requisito técnico de los Child Flows); (2) debe responder exactamente uno de los tres valores para cualquier presupuesto; (3) debes poder invocarlo desde un segundo flujo padre y mostrar el `nivel` recibido.
+> **Restricciones:** no uses un Switch/Condition anidado más de 2 niveles de profundidad — resuélvelo con la estructura condicional que consideres más legible.
 
-3. Agregar **Parse JSON** con el schema de respuesta:
-   ```json
-   {
-     "type": "object",
-     "properties": {
-       "base": {"type": "string"},
-       "rates": {
-         "type": "object",
-         "properties": {
-           "EUR": {"type": "number"},
-           "COP": {"type": "number"},
-           "MXN": {"type": "number"}
-         }
-       }
-     }
-   }
-   ```
+Si te atoras, no hay problema — abre las pistas progresivas dentro de la micropráctica de arriba (el mismo patrón de decisión aplica) antes de buscar la solución completa en la documentación.
 
-4. Guardar tasas en Dataverse:
-   ```
-   // Apply to each - iterar sobre monedas de interés
-   Crear/actualizar registro en tabla TasaCambio:
-     sit_moneda: items('Apply_to_each')
-     sit_tasa: body('Parse_JSON')?['rates'][items('Apply_to_each')]
-     sit_fechaactualizacion: utcNow()
-   ```
+**Evidencia a reportar:**
 
-#### Actividad 11.4: Paginación para listas grandes
-1. Trigger: Manual
-2. Inicializar variable: `nextLink` = (vacío)
-3. Inicializar variable: `totalRegistros` = 0
-4. **Do Until:** `nextLink` = "DONE"
-    - Acción HTTP con OData:
-     ```
-     URI: if(empty(variables('nextLink')), 
-              'https://org.crm.dynamics.com/api/data/v9.2/sit_solicituds?$top=250',
-              variables('nextLink'))
-     ```
-    - Parse JSON de la respuesta
-    - Apply to each sobre `value` → procesar cada registro
-    - Increment variable `totalRegistros`
-    - Set Variable `nextLink`:
-     ```
-     if(contains(body('Parse_JSON'), '@odata.nextLink'),
-        body('Parse_JSON')?['@odata.nextLink'],
-        'DONE')
-     ```
+| Campo | Tu valor |
+|---|---|
+| Nombre del Child Flow y de la solución donde vive | ___ |
+| Los 3 valores de prueba que usaste y el `nivel` que devolvió cada uno | ___ |
+| ¿Tu Child Flow aparece en la lista al buscarlo desde el flujo padre? | ___ |
 
-5. Compose resultado final: `Total procesados: @{variables('totalRegistros')}`
+---
 
-#### Actividad 11.5: Ramas paralelas para notificaciones
-1. Flujo disparado cuando una solicitud es aprobada
-2. Agregar acción → buscar "Parallel Branch"
-3. **Rama 1:** Enviar Teams notification al solicitante
-4. **Rama 2:** Enviar email al supervisor con reporte PDF
-5. **Rama 3:** Actualizar registro en Dataverse con fecha aprobación
-6. Las 3 ramas se ejecutan simultáneamente → reducción de tiempo de ~30s a ~10s
+## 🧩 Microlección 3 — HTTP a APIs externas, Parse JSON y Paginación
+
+**¿Qué vas a aprender?** Cómo tu flujo consume una API externa y por qué una lista "completa" a veces no lo está.
+
+**¿Por qué existe esto?** La acción **HTTP** (conector Premium) te permite llamar cualquier API REST. Su respuesta llega como texto y se estructura con **Parse JSON**. Aparte, cualquier acción que liste registros (Dataverse, SharePoint, o tu propia paginación manual con `@odata.nextLink`) tiene un límite por defecto de 256 filas — si no lo sabes, tu flujo "funciona" pero pierde datos en silencio.
+
+**Ejemplo pequeño:** una llamada HTTP a una API pública de tasas de cambio, sin necesidad de licencia adicional para probarla en tu entorno Developer:
+```
+GET https://api.exchangerate-api.com/v4/latest/USD
+Headers: Accept: application/json
+```
+
+**🔧 Diagnosticar antes de construir — troubleshooting challenge (5 min):** antes de que te expliquemos la causa, resuelve este caso con evidencia real → **[Diagnosticar: el flujo se detiene en 256 registros](/practica/ip-pa-005-diagnosticar-corte-en-256-registros)**. Te damos el síntoma y la evidencia de ejecución (run history en "Succeeded", pero solo una fracción de los registros esperados quedó actualizada) — formula tu hipótesis, pide pistas si las necesitas, y solo al final revisa la causa real.
+
+**Práctica real en tu entorno (10 min):** construye el flujo del ejemplo (llamada HTTP + Parse JSON) y guarda 3 monedas de interés en una tabla de Dataverse. Verifica el schema de Parse JSON generándolo desde una respuesta de ejemplo real, no escribiéndolo a mano.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Código de estado HTTP de la respuesta | ___ |
+| Una de las 3 tasas de cambio obtenidas (valor exacto) | ___ |
+| Nombre lógico de la tabla/columnas donde las guardaste | ___ |
+
+---
+
+## 🧩 Microlección 4 — Ramas paralelas, Batch y compensación
+
+**¿Qué vas a aprender?** Cómo ejecutar acciones independientes al mismo tiempo en vez de una tras otra, y qué hacer cuando un paso posterior falla después de que otro ya se completó.
+
+**¿Por qué existe esto?** Si tres notificaciones (Teams, email, actualización de Dataverse) no dependen entre sí, ejecutarlas en **Parallel Branch** puede bajar el tiempo total de 30s a ~10s. Y como Power Automate no tiene transacciones nativas, si un paso falla después de que otro ya escribió datos, necesitas una **compensación** explícita (deshacer lo ya hecho) dentro de un Scope Catch — no asumas que "se puede revertir solo".
+
+**Práctica real en tu entorno (8 min) — sin pasos dados:** agrega 3 ramas paralelas a un flujo disparado por aprobación (puedes reutilizar el Child Flow de la Microlección 2): notificación Teams, email con resumen, y actualización de un campo de fecha en Dataverse. Cronometra la ejecución total en el run history.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Duración total del run con las 3 ramas en paralelo | ___ |
+| ¿Las 3 ramas terminaron antes de que el flujo continuara? | ___ |
+
+---
+
+## 🔁 Reto de transferencia
+
+Ya practicaste: condición con umbral (Microlección 2), llamada HTTP + Parse JSON (Microlección 3), y diagnóstico de paginación. Ahora la regla de negocio **cambia**: la aprobación ya no depende del monto en la moneda original, sino de su equivalente en USD, calculado en tiempo real.
+
+**[Transferir: aprobar según el monto convertido a USD](/practica/ip-pa-006-transferir-umbral-en-moneda-convertida)** — no es solo cambiar un número: tienes que reconocer que la conversión (HTTP + Parse JSON) debe ejecutarse **antes** de la condición, porque la condición ahora depende de un dato que no existe cuando el flujo arranca. Si solo memorizaste el orden de bloques de la Microlección 2 sin entender por qué van en ese orden, este reto te lo va a mostrar.
+
+Si tienes tiempo, constrúyelo también en tu tenant real usando la llamada HTTP de la Microlección 3 y reporta el mismo tipo de evidencia (monto original, tasa usada, monto convertido, resultado de la aprobación).
+
+---
 
 ### 💼 Caso Real de Negocio
-**Empresa:** Empresa importadora con flujos de aprobación de órdenes de compra  
-**Problema:** El flujo de aprobación tardaba 4 minutos por orden, con frecuentes errores silenciosos cuando la API de proveedores fallaba.  
-**Solución:** Patrón Try-Catch con registro de errores en SharePoint + notificación al admin. Flujo hijo reutilizable calcula nivel de aprobación (el mismo para órdenes de compra y contratos). Ramas paralelas reducen notificaciones de 3 steps secuenciales a 1 paso paralelo.  
+**Empresa:** Empresa importadora con flujos de aprobación de órdenes de compra
+**Problema:** El flujo de aprobación tardaba 4 minutos por orden, con frecuentes errores silenciosos cuando la API de proveedores fallaba.
+**Solución:** Patrón Try-Catch con registro de errores en SharePoint + notificación al admin. Flujo hijo reutilizable calcula nivel de aprobación (el mismo para órdenes de compra y contratos). Ramas paralelas reducen notificaciones de 3 steps secuenciales a 1 paso paralelo.
 **Resultado:** Tiempo de flujo reducido de 4 min a 45 seg. Tasa de errores silenciosos: 0%.
 
 ### ✅ Buenas Prácticas
@@ -179,12 +148,18 @@ Construir flujos empresariales robustos con manejo de errores, ramas paralelas, 
 | HTTP 429 Too Many Requests | El flujo llama API sin throttling | Agregar Delay entre iteraciones en Apply to Each |
 | Apply to Each toma horas | Procesamiento secuencial de miles de registros | Activar Concurrency en Apply to Each (máx 50 parallel) |
 | Variables no persisten entre bucles | Se reinician en cada iteración | Usar Compose + Set Variable, no Initialize |
+| Un flujo "Succeeded" perdió datos silenciosamente | Límite de 256 registros sin paginación activada | Activar Pagination en la acción de lista (ver Microlección 3) |
 
 ### 🧪 Criterios de Validación
-- [ ] Flujo con Scope Try/Catch registra errores en SharePoint y envía alerta
-- [ ] Child Flow de niveles de aprobación reutilizable funciona correctamente
-- [ ] Flujo HTTP consume API externa y parsea JSON correctamente
-- [ ] Paginación OData procesa listas de más de 250 registros sin perderse items
-- [ ] Ramas paralelas ejecutan 3 notificaciones simultáneamente
+- [ ] Resolví la micropráctica de Scope/Try-Catch y construí el patrón real en mi entorno, forzando el error a propósito
+- [ ] Construí el Child Flow de 3 niveles sin ver los pasos completos de antemano, y documenté con qué pistas (si alguna) lo logré
+- [ ] Diagnostiqué el corte en 256 registros formulando una hipótesis antes de ver la causa, y lo reproduje/corregí en mi propio entorno
+- [ ] Consumí una API externa real con HTTP + Parse JSON y guardé el resultado en Dataverse
+- [ ] Ejecuté 3 ramas paralelas y medí la reducción real de tiempo en el run history
+- [ ] Completé el reto de transferencia (umbral en USD) explicando por qué el orden de las acciones cambió, no solo el número del umbral
 
 ---
+
+## Notas de esta iteración piloto
+
+Este módulo es el piloto de una arquitectura pedagógica más amplia, todavía no aplicada al resto del curso. Si esta iteración se valida, el mismo patrón (concepto breve → micropráctica → feedback → construir sin pasos → diagnosticar con síntoma primero → transferir con un requisito distinto) es el candidato a generalizarse — ver la auditoría final del piloto para la decisión.

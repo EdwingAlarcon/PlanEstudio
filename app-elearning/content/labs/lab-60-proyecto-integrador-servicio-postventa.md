@@ -10,7 +10,6 @@ prerequisites:
   - "Lab 55 completado: UAT, matriz de trazabilidad y checklist de go-live"
   - "Lab 58 completado: Customer Insights — segmento y journey"
   - "Lab 59 completado: Field Service — Work Order y UAT"
-  - "Módulo 60 estudiado: Finance & Operations — Procesos ERP y Virtual Tables"
   - "Recurso revisado: Rúbricas y Plantillas de Evaluación"
 files: []
 ---

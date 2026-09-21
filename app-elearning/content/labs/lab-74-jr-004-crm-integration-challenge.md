@@ -9,7 +9,6 @@ role: ["Integration Developer", "Solution Architect"]
 prerequisites:
   - "Módulo 24 revisado: Azure Functions y Service Bus"
   - "Módulo 34 estudiado: integraciones empresariales"
-  - "Módulo 53 revisado: Dataverse Web API"
 ---
 
 # Lab 74 — JR-004: CRM Integration Challenge

@@ -7,7 +7,6 @@ product: ["Dynamics 365 Finance", "Dynamics 365 Supply Chain Management", "Dynam
 certifications: ["Arquitectura Power Platform"]
 role: ["Functional Consultant", "Solution Architect"]
 prerequisites:
-  - "Módulo 60 estudiado: Finance & Operations — Procesos ERP, Virtual Tables y Vocabulario Estándar"
   - "Módulo 20 revisado: Dynamics 365 CE — Sales y Customer Service"
 ---
 

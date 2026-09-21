@@ -7,7 +7,6 @@ product: ["Dynamics 365 Finance", "Legal Entities", "Chart of Accounts", "Financ
 certifications: ["Arquitectura Power Platform"]
 role: ["F&O Practitioner", "Solution Architect"]
 prerequisites:
-  - "Módulo 60 estudiado: F&O Awareness — Procesos ERP, Virtual Tables y Vocabulario Estándar"
   - "Acceso a un ambiente trial/demo de Dynamics 365 Finance & Supply Chain Management (LCS demo environment con datos Contoso, o Dynamics 365 free trial)"
   - "Sin ese ambiente, este lab no es ejecutable — es el primer requisito, no un detalle opcional"
 ---

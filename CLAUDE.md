@@ -1,5 +1,26 @@
 # CLAUDE.md
 
+## Piloto Learning by Doing — Módulo 11 (2026-09-21, en curso)
+
+Antes de una eventual migración masiva del curso hacia una arquitectura "aprender haciendo", se
+validó el enfoque en un único módulo piloto. **Fase 0 (correcciones estructurales, cerrada):**
+se eliminaron 11 dependencias cruzadas objetivamente rotas del campo `prerequisites` de labs —
+9 labs de Arquitecto (N4) y 1 de N6 que gateaban sobre el Módulo 60/53 (transversales D365/IA,
+que por diseño no deben gatear ni ser gateados por los 4 niveles de certificación), y 1 lab de
+Intermedio (lab-62) que gateaba sobre un módulo de Avanzado (Módulo 20) sin que su propio cuerpo
+lo mencionara. También se completó el Módulo 68 (RPA) con pasos reales de instalación de Power
+Automate for desktop (antes solo decía "instala o valida"), cerrando un cruce de referencias roto
+con `GUIA_HERRAMIENTAS_WORKSTATION.md`, que ya afirmaba que ese detalle vivía en el Módulo 68 sin
+que existiera. **Fase 2 (infraestructura mínima + piloto, en curso):** Módulo 11 (Power Automate
+Avanzado, Intermedio, sin lab propio) se eligió como piloto y se reescribió en microlecciones con
+práctica continua, evidencia de tenant estructurada, pistas escalonadas, troubleshooting
+síntoma-primero y un reto de transferencia — reutilizando el motor de prácticas interactivas
+existente (`interactive-practices.ts`) en vez de construir infraestructura nueva. Se agregaron
+exactamente 2 prácticas nuevas (IP-PA-005, IP-PA-006), subiendo el tope deliberado del piloto de
+15 a 17 en `validate-interactive-practices.ts` y `interactive-practices.test.ts` — no se crearon
+tipos de práctica nuevos ni stores nuevos. No se tocó ningún otro módulo ni las Fases 1-6 del
+rediseño más amplio, que siguen pendientes de aprobación explícita.
+
 ## Mantenimiento vigente — 2026-09-07
 
 Corrección de navegación guiada: los prerrequisitos explícitos de labs admiten módulo individual,
@@ -205,8 +226,12 @@ Current stable state as of the latest local handoff (2026-09-06):
   simulations, 6 guided**. Do not merge these into the existing lab count. `guided` is a new count as
   of sub-fase D — `getPracticeCounts()` now returns a `guided` field in addition to
   `incidents`/`challenges`/`simulations`.
-- Interactive practice pilot counts: **15 practices total**, separate from labs and professional
-  practices. Do not merge these into the lab count or professional-practice count.
+- Interactive practice pilot counts: **17 practices total** (was 15 before the 2026-09-21
+  Learning-by-Doing pilot on Módulo 11 added IP-PA-005 and IP-PA-006), separate from labs and
+  professional practices. Do not merge these into the lab count or professional-practice count.
+  The pilot-size guard in `validate-interactive-practices.ts` and `interactive-practices.test.ts`
+  was raised from 15 to 17 to allow this — see "Piloto Learning by Doing — Módulo 11" below before
+  raising it again.
 - `/preparar-entorno` state uses its own localStorage key `planestudio.workstation.v1`
   (`workstation-store.ts`), independent from `plan-estudio-progress` (academic),
   `planestudio.practice-progress.v1` (professional practice), `planestudio.interactive-practice.v1`

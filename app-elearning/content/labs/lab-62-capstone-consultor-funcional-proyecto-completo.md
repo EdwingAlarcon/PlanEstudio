@@ -9,7 +9,6 @@ role: ["Functional Consultant"]
 prerequisites:
   - "Lab 04 completado: Model-Driven App"
   - "Lab 09 completado: Dataverse Avanzado"
-  - "Módulo 20 revisado: Dynamics 365 CE — Sales y Customer Service"
   - "Recurso revisado: Rúbricas y Plantillas de Evaluación"
 ---
 

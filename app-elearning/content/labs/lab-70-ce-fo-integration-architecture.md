@@ -7,7 +7,6 @@ product: ["Dynamics 365 Finance", "Dynamics 365 Supply Chain Management", "Datav
 certifications: ["Arquitectura Power Platform"]
 role: ["Solution Architect"]
 prerequisites:
-  - "Módulo 60 estudiado: Finance & Operations — Procesos ERP, Virtual Tables y Vocabulario Estándar"
   - "Módulo 34 revisado: Arquitectura de Datos e Integración"
   - "Lab 69 completado: F&O Process Mapping — Procesos ERP End-to-End (recomendado)"
 ---

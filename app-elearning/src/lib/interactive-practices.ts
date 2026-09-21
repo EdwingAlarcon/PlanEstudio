@@ -641,6 +641,83 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     relatedLabIds: ["LAB-003"],
     tags: ["delegation", "Power Fx", "performance"],
   },
+  {
+    id: "IP-PA-005",
+    slug: "ip-pa-005-diagnosticar-corte-en-256-registros",
+    title: "Diagnosticar: el flujo se detiene en 256 registros",
+    description: "A partir de un síntoma y evidencia de ejecución, identifica la causa antes de ver la solución.",
+    type: "debug-scenario",
+    domain: "power-automate",
+    level: "junior",
+    estimatedMinutes: 8,
+    prerequisites: ["Módulo 11"],
+    learningObjectives: ["Reconocer el límite por defecto de las acciones de lista", "Diferenciar paginación de un fallo de conexión"],
+    scenario: {
+      context: "Un flujo que debía actualizar todas las solicitudes pendientes de un cliente con miles de registros terminó su ejecución 'Succeeded' en el historial, pero solo 256 filas quedaron actualizadas en Dataverse. No hubo ningún error visible en el run history.",
+      objective: "Antes de mirar la solución, formula qué revisarías primero y por qué.",
+    },
+    implementation: "List rows (Dataverse)\n  Table: sit_solicituds\n  Filter: statuscode eq 1\n  (Pagination: Off, sin configurar)\nApply to each\n  Update row: statuscode = 2",
+    symptom: "El run history muestra 'Succeeded' sin errores, pero solo 256 de ~3.400 registros esperados quedaron actualizados.",
+    fixPrompt: "¿Qué cambiarías en la acción 'List rows' para que procese todos los registros esperados?",
+    acceptableFixes: ["activar paginación", "pagination on", "configurar threshold", "aumentar el límite de paginación", "activar paginacion en list rows"],
+    testCases: [
+      { id: "sin-paginacion", input: "Pagination: Off", expected: "solo primeros 256 registros" },
+      { id: "con-paginacion", input: "Pagination: On, Threshold 5000", expected: "procesa los ~3.400 registros" },
+    ],
+    hints: [
+      { id: "h1", content: "El run terminó en 'Succeeded', así que no es un error de conexión ni de permisos — el flujo hizo exactamente lo que se le pidió." },
+      { id: "h2", content: "Las acciones de lista de Dataverse/SharePoint tienen un límite por defecto de 256 registros por ejecución." },
+      { id: "h3", content: "La opción para traer más allá del límite por defecto vive en Settings de la propia acción 'List rows', no en el Apply to each." },
+    ],
+    relatedModuleIds: [11],
+    relatedLabIds: ["LAB-005"],
+    tags: ["paginación", "troubleshooting", "dataverse"],
+  },
+  {
+    id: "IP-PA-006",
+    slug: "ip-pa-006-transferir-umbral-en-moneda-convertida",
+    title: "Transferir: aprobar según el monto convertido a USD",
+    description: "La regla de aprobación ya no usa el monto directo: primero hay que convertir la moneda y luego comparar.",
+    type: "flow-builder",
+    domain: "power-automate",
+    level: "advanced",
+    estimatedMinutes: 10,
+    prerequisites: ["Módulo 11"],
+    learningObjectives: ["Reconocer cuándo un paso de transformación debe ir antes de una condición", "Reutilizar el patrón de aprobación por umbral con un dato derivado, no un dato de entrada directo"],
+    scenario: {
+      context: "La regla cambió: ya no se aprueba según el monto en la moneda original de la solicitud, sino según su equivalente en USD. Si el monto convertido supera 2.000 USD, requiere aprobación; si no, se aprueba automáticamente. La tasa de cambio se obtiene con la misma llamada HTTP que ya construiste en la Actividad 11.3.",
+      objective: "Ordena el flujo para que la conversión ocurra antes de evaluar el umbral, y ejecútalo contra los casos de prueba.",
+    },
+    blocks: [
+      { id: "condition-amount-gt", label: "Condition: montoUSD > 2000", kind: "condition" },
+      { id: "update-approved", label: "Update row: approved", kind: "action" },
+      { id: "http-get-rate", label: "HTTP GET: tasa de cambio", kind: "action" },
+      { id: "start-approval", label: "Start approval", kind: "action" },
+      { id: "trigger-row-added", label: "When row added", kind: "trigger" },
+      { id: "compose-converted", label: "Compose: monto convertido a USD", kind: "action" },
+      { id: "parse-json-rate", label: "Parse JSON: tasa de cambio", kind: "action" },
+    ],
+    expectedBlockIds: ["trigger-row-added", "http-get-rate", "parse-json-rate", "compose-converted", "condition-amount-gt", "start-approval", "update-approved"],
+    threshold: 2000,
+    branchPreview: {
+      conditionLabel: "Condition: montoUSD > 2000",
+      yes: { label: "Sí (supera el umbral en USD)", blockIds: ["start-approval", "update-approved"] },
+      no: { label: "No (no supera el umbral en USD)", blockIds: ["update-approved"] },
+    },
+    testCases: [
+      { id: "low", label: "Monto convertido: 800 USD", amount: 800, expected: "auto-approved" },
+      { id: "high", label: "Monto convertido: 3.500 USD", amount: 3500, expected: "approval-required" },
+      { id: "edge", label: "Monto convertido: 2.000 USD", amount: 2000, expected: "auto-approved" },
+    ],
+    hints: [
+      { id: "h1", content: "El umbral ahora compara un valor que no existe todavía cuando el flujo arranca — hay que calcularlo primero." },
+      { id: "h2", content: "La condición necesita el resultado de Parse JSON, así que la llamada HTTP y su Compose deben ir antes de la condición, no después." },
+      { id: "h3", content: "El orden correcto es: trigger, HTTP, Parse JSON, Compose del monto convertido, y solo entonces la condición." },
+    ],
+    relatedModuleIds: [11],
+    relatedLabIds: ["LAB-005"],
+    tags: ["transferencia", "http", "condition", "test cases"],
+  },
 ];
 
 export function getAllInteractivePractices(): InteractivePractice[] {
@@ -879,8 +956,8 @@ export function validateInteractivePractices(): string[] {
     if (practice.type === "query-playground" && practice.dialect === "fetchxml" && !practice.starter.includes("<fetch")) errors.push(`${practice.id}: starter FetchXML inválido`);
     if (practice.type === "flow-builder" && practice.testCases.length < 2) errors.push(`${practice.id}: flow sin suficientes casos`);
   }
-  if (INTERACTIVE_PRACTICES.length < 12 || INTERACTIVE_PRACTICES.length > 15) {
-    errors.push(`El piloto debe tener 12 a 15 prácticas; tiene ${INTERACTIVE_PRACTICES.length}`);
+  if (INTERACTIVE_PRACTICES.length < 12 || INTERACTIVE_PRACTICES.length > 17) {
+    errors.push(`El piloto debe tener 12 a 17 prácticas; tiene ${INTERACTIVE_PRACTICES.length}`);
   }
   return errors;
 }
