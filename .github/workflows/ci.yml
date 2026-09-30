@@ -6,12 +6,14 @@ on:
     paths-ignore:
       - 'SPRINT_HANDOFF.md'
       - 'CLAUDE.md'
+      - 'HISTORIAL_CLAUDE.md'
       - 'graphify-out/**'
   pull_request:
     branches: [master]
     paths-ignore:
       - 'SPRINT_HANDOFF.md'
       - 'CLAUDE.md'
+      - 'HISTORIAL_CLAUDE.md'
       - 'graphify-out/**'
   workflow_dispatch:
 
