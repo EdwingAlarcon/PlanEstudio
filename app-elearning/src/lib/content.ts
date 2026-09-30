@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import type { LevelId } from "./i18n";
 import { LEVEL_MODULE_RANGE, LEVEL_ORDER } from "./i18n";
+import { isValidLastVerified } from "./content-freshness";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -14,6 +15,7 @@ export interface ModuleInfo {
   slug: string;
   estimatedMinutes: number;   // tiempo de LECTURA del cuerpo del módulo
   practiceMinutes?: number;   // tiempo adicional de práctica guiada embebida (setup + ejercicio), cuando aplica
+  lastVerified?: string;      // "YYYY-MM": última verificación contra Microsoft Learn
   rawContent: string;
 }
 
@@ -44,6 +46,7 @@ export interface LabInfo {
   certifications: string[];
   role: string[];
   prerequisites: string[];
+  lastVerified?: string;     // "YYYY-MM"
   rawContent: string;
 }
 
@@ -196,6 +199,15 @@ function requireStringArray(data: Record<string, unknown>, key: string, filePath
   return value.map((item) => String(item).trim());
 }
 
+function parseLastVerified(data: Record<string, unknown>, filePath: string): string | undefined {
+  const value = data["lastVerified"];
+  if (value === undefined) return undefined;
+  if (typeof value !== "string" || !isValidLastVerified(value)) {
+    failContent(filePath, "frontmatter 'lastVerified' debe tener el formato \"AAAA-MM\" (entre comillas)");
+  }
+  return value;
+}
+
 function validateModuleFrontmatter(
   data: Record<string, unknown>,
   levelId: LevelId,
@@ -231,7 +243,7 @@ function validateModuleFrontmatter(
     }
   }
 
-  return { moduleId, levelId, title, slug, estimatedMinutes, practiceMinutes };
+  return { moduleId, levelId, title, slug, estimatedMinutes, practiceMinutes, lastVerified: parseLastVerified(data, filePath) };
 }
 
 export function formatLabDisplayId(idOrSlug: string): string {
@@ -294,6 +306,7 @@ function validateLabFrontmatter(
     certifications: requireStringArray(data, "certifications", filePath),
     role: requireStringArray(data, "role", filePath),
     prerequisites: requireStringArray(data, "prerequisites", filePath),
+    lastVerified: parseLastVerified(data, filePath),
   };
 }
 

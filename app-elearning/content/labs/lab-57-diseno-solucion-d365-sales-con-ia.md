@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 55 estudiado: IA para Análisis de Soluciones, Arquitectura y Consultoría Funcional D365"
   - "Conocimiento básico de las entidades estándar de Dynamics 365 Sales (cuentas, contactos, oportunidades)"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 57 — Diseñar una Solución Completa de Dynamics 365 Sales con IA

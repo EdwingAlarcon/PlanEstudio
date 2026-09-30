@@ -11,6 +11,7 @@ prerequisites:
   - "Lab 68 revisado: Customer Service Case-to-Resolution"
   - "Lab 62 revisado: Capstone Consultor Funcional (fit-gap, backlog, UAT)"
   - "Ruta Job-Ready CRM Functional revisada"
+lastVerified: "2026-09"
 ---
 
 # Lab 101 — JR-013: CRM Functional Analyst — Caso Integrado

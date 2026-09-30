@@ -9,6 +9,7 @@ role: ["Consultor Funcional D365 CE", "Marketing Automation Specialist"]
 prerequisites:
   - "Módulo 64 estudiado: Customer Insights - Journeys"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
+lastVerified: "2026-09"
 ---
 
 # Lab 84 — Customer Insights Real-Time Journey

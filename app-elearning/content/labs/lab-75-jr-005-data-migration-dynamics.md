@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 34 revisado: integraciones empresariales"
   - "Módulo 37 estudiado: estrategias de migración empresarial"
   - "Ruta Job-Ready Data Migration + CRM Legacy revisada"
+lastVerified: "2026-09"
 ---
 
 # Lab 75 — JR-005: Data Migration to Dynamics 365

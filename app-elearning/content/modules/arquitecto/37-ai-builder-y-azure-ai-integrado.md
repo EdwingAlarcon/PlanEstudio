@@ -5,6 +5,7 @@ level: "arquitecto"
 certification: "Arquitectura Power Platform"
 estimatedMinutes: 10
 slug: "ai-builder-y-azure-ai-integrado"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Integrar capacidades de Inteligencia Artificial en soluciones Power Platform usando AI Builder nativo y Azure AI Services (en transición de nombre a "Foundry Tools"): modelos de clasificación de documentos, extracción de información de facturas, análisis de sentimiento, y orquestación de agentes con Azure OpenAI y Semantic Kernel.

@@ -5,6 +5,7 @@ level: "intermedio"
 certification: "PL-200 (retirado 31 ago 2026)"
 estimatedMinutes: 8
 slug: "conectores-personalizados"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Crear y certificar conectores personalizados para APIs REST, integrar autenticación OAuth2 y API Key, y hacer que los conectores estén disponibles para Power Apps y Power Automate en toda la organización.

@@ -5,6 +5,7 @@ level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 11
 slug: "alm-de-soluciones-con-ia"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Aplicar el ciclo de vida de aplicaciones (ALM) de Power Platform — soluciones managed/unmanaged, export/import/pack/unpack, variables de entorno, connection references y pipelines Dev/Test/Prod — usando IA como apoyo para revisar diffs, riesgos y documentación en cada etapa, sin saltarse ninguna validación.

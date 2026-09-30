@@ -10,6 +10,7 @@ prerequisites:
   - "Lab 93 completado: F&O Finance Setup Walkthrough"
   - "Lab 94 y Lab 95 completados (recomendado): para tener transacciones de prueba que aparezcan en los reportes"
   - "Acceso a un ambiente trial/demo de Dynamics 365 Finance con Financial Reporting habilitado"
+lastVerified: "2026-09"
 ---
 
 # Lab 100 — F&O Reporting Hands-On — Financial Reporting y Power BI Embebido

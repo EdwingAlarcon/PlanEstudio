@@ -9,6 +9,7 @@ role: ["Functional Consultant", "Solution Architect"]
 prerequisites:
   - "Módulo 60 estudiado: Finance & Operations — Procesos ERP, Virtual Tables y Vocabulario Estándar"
   - "Módulo 20 revisado: Dynamics 365 CE — Sales y Customer Service"
+lastVerified: "2026-09"
 ---
 
 # Lab 69 — F&O Process Mapping: Procesos ERP End-to-End

@@ -5,6 +5,7 @@ level: "rpa"
 certification: "Power Automate for desktop & RPA"
 estimatedMinutes: 20
 slug: "aplicaciones-windows-legacy"
+lastVerified: "2026-09"
 ---
 
 ## 🎯 Objetivo

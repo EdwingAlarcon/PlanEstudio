@@ -10,6 +10,7 @@ prerequisites:
   - "Lab 22 completado: Copilot Studio Avanzado"
   - "Lab 55 completado: UAT/Go-live y auditoría de prompts"
   - "Módulo 44 revisado: integración de agentes con Power Automate/Dataverse"
+lastVerified: "2026-09"
 ---
 
 # Lab 65 — Capstone AI & Copilot: Agente Empresarial Gobernado

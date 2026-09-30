@@ -9,6 +9,7 @@ role: ["Consultor Funcional D365 CE", "Customer Service Lead"]
 prerequisites:
   - "Módulo 62 estudiado: Customer Service Avanzado"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
+lastVerified: "2026-09"
 ---
 
 # Lab 82 — Customer Service SLA + Entitlements + Routing

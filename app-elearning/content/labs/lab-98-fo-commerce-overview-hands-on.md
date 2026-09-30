@@ -9,6 +9,7 @@ role: ["F&O Practitioner", "Solution Architect"]
 prerequisites:
   - "Lab 96 completado: F&O Inventory & Products Setup"
   - "Acceso a un ambiente trial/demo con el módulo Retail and Commerce habilitado (no todos los trials de Finance/SCM lo incluyen por defecto — verifica en tu ambiente antes de empezar)"
+lastVerified: "2026-09"
 ---
 
 # Lab 98 — F&O Commerce Overview Hands-On

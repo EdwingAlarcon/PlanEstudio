@@ -1,5 +1,23 @@
 # CLAUDE.md
 
+## Mantenimiento vigente — 2026-09-30
+
+Mejoras de producto (sin ampliar contenido): (1) **backup completo** en `/progreso`
+(`src/lib/progress-backup.ts` + `FullBackupPanel`): un JSON versionado con los 6 stores persistidos
+(`plan-estudio-progress`, `plan-estudio-onboarding` y las 4 claves `planestudio.*`); los stores siguen
+independientes, solo se leen/escriben sus payloads crudos y la página recarga para rehidratar. Merge
+une solo el progreso académico; el resto solo se rellena si está vacío (sus paneles propios hacen merge fino).
+(2) **`lastVerified: "AAAA-MM"`** opcional en frontmatter de módulos y labs (sembrado `2026-09` en los 149
+archivos por la auditoría de vigencia); badge en el módulo y advertencia (no error) en `validate:content`
+para elementos sin verificar o con más de 6 meses (`content-freshness.ts`). (3) **Notas por módulo**
+(`moduleNotes` en el store académico) y tarjeta **Continuar** en el home (`lastVisited` ya existía pero
+nunca se escribía). (4) **PWA**: `manifest.ts`, `public/sw.js` (páginas network-first, `/_next/static`
+cache-first; solo se registra en producción) e iconos; subir `CACHE_VERSION` en `sw.js` invalida todo.
+(5) CI: E2E en 3 shards. No se movió el banco de preguntas ni se retiró MkDocs (decisión pendiente).
+Validación: `npm run verify` (464 tests) y E2E nuevo `e2e/progress-backup.spec.ts` (3/3); flujo probado en
+Chromium sobre `out/` (offline, backup ida y vuelta). Sync entre dispositivos y analítica NO se implementaron
+(requieren cuentas/consentimiento).
+
 ## Mantenimiento vigente — 2026-09-07
 
 Corrección de navegación guiada: los prerrequisitos explícitos de labs admiten módulo individual,

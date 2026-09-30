@@ -5,6 +5,7 @@ level: "d365"
 certification: "Dynamics 365 Customer Service"
 estimatedMinutes: 13
 slug: "dynamics-365-customer-service-avanzado"
+lastVerified: "2026-09"
 ---
 
 > **🧭 ¿Caso, cola y SLA todavía no son claros?** Este módulo asume ese vocabulario. Repasa primero

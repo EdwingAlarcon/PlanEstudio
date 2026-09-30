@@ -5,6 +5,7 @@ level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 10
 slug: "cli-y-conexion-al-tenant"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Configurar un entorno de desarrollo local para Power Platform, entender la diferencia entre tenant, entorno (environment) y organización, y conectarte de forma segura con Power Platform CLI (`pac`) sin arriesgar trabajar por error contra producción.

@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 60 estudiado: F&O Awareness — Procesos ERP, Virtual Tables y Vocabulario Estándar"
   - "Acceso a un ambiente trial/demo de Dynamics 365 Finance & Supply Chain Management (LCS demo environment con datos Contoso, o Dynamics 365 free trial)"
   - "Sin ese ambiente, este lab no es ejecutable — es el primer requisito, no un detalle opcional"
+lastVerified: "2026-09"
 ---
 
 # Lab 93 — F&O Finance Setup Walkthrough

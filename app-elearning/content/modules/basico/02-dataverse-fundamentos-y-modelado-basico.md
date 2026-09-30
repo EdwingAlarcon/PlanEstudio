@@ -5,6 +5,7 @@ level: "basico"
 certification: "PL-900"
 estimatedMinutes: 15
 slug: "dataverse-fundamentos-y-modelado-basico"
+lastVerified: "2026-09"
 ---
 *Duración: 2-3 semanas · Lectura: 6-8 min · Con práctica: 40-60 min*
 

@@ -8,6 +8,7 @@
  * al menos una pregunta.
  */
 import { ContentValidationError, getAllLevels, getAllLabs, getResourceBySlug } from "../src/lib/content";
+import { getFreshness, FRESHNESS_MAX_AGE_MONTHS } from "../src/lib/content-freshness";
 import { getPracticeCounts } from "../src/lib/practices";
 import { getAllQuestions } from "../src/lib/questions-parser";
 import { parseChecklistMarkdown, validateChecklistData } from "../src/lib/checklist";
@@ -85,6 +86,20 @@ function main(): void {
   if (modulesWithoutQuestions.length > 0) {
     throw new ContentValidationError(
       `Módulos sin preguntas: ${modulesWithoutQuestions.join(", ")}`
+    );
+  }
+
+  // Vigencia: advertencia (no falla el build) para contenido sin verificar o con
+  // verificación mayor a FRESHNESS_MAX_AGE_MONTHS meses contra Microsoft Learn.
+  const now = new Date();
+  const staleItems = [
+    ...levels.flatMap((level) => level.modules.map((mod) => ({ name: `módulo ${mod.moduleId}`, lastVerified: mod.lastVerified }))),
+    ...labs.map((lab) => ({ name: lab.displayId, lastVerified: lab.lastVerified })),
+  ].filter((item) => getFreshness(item.lastVerified, now) !== "fresh");
+  if (staleItems.length > 0) {
+    console.warn(
+      `⚠ ${staleItems.length} elemento(s) sin verificar o con verificación > ${FRESHNESS_MAX_AGE_MONTHS} meses: ` +
+        `${staleItems.slice(0, 15).map((item) => item.name).join(", ")}${staleItems.length > 15 ? "…" : ""}`,
     );
   }
 

@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 20 estudiado: Dynamics 365 CE — Sales y Customer Service"
   - "Conocimiento básico de casos, órdenes de trabajo, recursos y roles de servicio"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 59 — Field Service: Work Order, Evidencia Móvil y UAT de Servicio en Campo

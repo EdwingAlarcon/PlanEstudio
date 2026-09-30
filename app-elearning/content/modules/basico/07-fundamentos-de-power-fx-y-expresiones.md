@@ -5,6 +5,7 @@ level: "basico"
 certification: "PL-900"
 estimatedMinutes: 30
 slug: "fundamentos-de-power-fx-y-expresiones"
+lastVerified: "2026-09"
 ---
 *Duración: 1-2 semanas · Lectura: 12-15 min · Con práctica: 60-90 min (núcleo obligatorio); delegación avanzada y operaciones batch pueden quedar para una segunda sesión*
 

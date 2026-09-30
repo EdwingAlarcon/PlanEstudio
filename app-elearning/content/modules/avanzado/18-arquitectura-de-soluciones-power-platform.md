@@ -5,6 +5,7 @@ level: "avanzado"
 certification: "PL-400"
 estimatedMinutes: 7
 slug: "arquitectura-de-soluciones-power-platform"
+lastVerified: "2026-09"
 ---
 > **📌 Primer módulo de Avanzado (PL-400).** Este nivel asume que ya completaste Básico e Intermedio — el vocabulario de aquí en adelante (ADR, capas, patrones de integración) construye sobre eso, no lo repite. Si llegaste saltando niveles, vuelve a Módulo 1 antes de seguir; el resto del curso no te espera dos veces.
 

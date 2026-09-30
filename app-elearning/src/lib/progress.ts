@@ -16,6 +16,7 @@ export interface ProgressState {
   checklistItems: ChecklistProgressMap; // checklist criterion id → state
   lastVisited: string | null;          // last module id visited
   userName: string | null;             // user name for certificate
+  moduleNotes: Record<string, string>; // module id ("basico-1") → personal note
 }
 
 export interface ProgressActions {
@@ -27,6 +28,7 @@ export interface ProgressActions {
   getQuizScore: (moduleId: string) => number | null;
   setLastVisited: (moduleId: string) => void;
   setUserName: (name: string) => void;
+  setModuleNote: (moduleId: string, note: string) => void;
   getLevelProgress: (levelId: LevelId) => { completed: number; total: number; percentage: number };
   getOverallProgress: () => { completed: number; total: number; percentage: number };
   // Labs
@@ -47,6 +49,7 @@ const INITIAL_STATE: ProgressState = {
   checklistItems: {},
   lastVisited: null,
   userName: null,
+  moduleNotes: {},
 };
 
 // ─── Module counts per level ──────────────────────────────────────────────────
@@ -156,6 +159,13 @@ export const useProgressStore = create<ProgressState & ProgressActions>()(
       setLastVisited: (moduleId) => set({ lastVisited: moduleId }),
 
       setUserName: (name) => set({ userName: name }),
+
+      setModuleNote: (moduleId, note) =>
+        set((state) => {
+          const { [moduleId]: _removed, ...rest } = state.moduleNotes ?? {};
+          void _removed;
+          return { moduleNotes: note.trim() ? { ...rest, [moduleId]: note } : rest };
+        }),
 
       getLevelProgress: (levelId) => calculateLevelProgress(levelId, get().completedModules),
 

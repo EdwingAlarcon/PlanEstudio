@@ -6,6 +6,7 @@ certification: "PL-400"
 estimatedMinutes: 8
 practiceMinutes: 90
 slug: "power-pages-portales-externos"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Construir portales web externos con Power Pages que permiten a clientes y proveedores acceder a datos de Dataverse de forma segura, con autenticación, formularios de autoservicio y búsqueda.

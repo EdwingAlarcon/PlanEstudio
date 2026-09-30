@@ -5,6 +5,7 @@ level: "d365"
 certification: "Dynamics 365 Sales / MB-280 (retirado 31 jul 2026)"
 estimatedMinutes: 13
 slug: "dynamics-365-sales-avanzado"
+lastVerified: "2026-09"
 ---
 
 > **🧭 ¿Lead, oportunidad, cuenta y contacto todavía no son claros?** Este módulo asume ese vocabulario.

@@ -5,6 +5,7 @@ level: "rpa"
 certification: "Power Automate for desktop & RPA"
 estimatedMinutes: 20
 slug: "integracion-cloud-desktop-flow"
+lastVerified: "2026-09"
 ---
 
 ## 🎯 Objetivo

@@ -10,6 +10,7 @@ prerequisites:
   - "Lab 02 completado — tablas sit_Solicitud y sit_Categoria con datos"
   - "Lab 09 completado (recomendado) — BPF creado"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 04 — Model-Driven App: Sistema Completo de Gestión de Solicitudes SIT

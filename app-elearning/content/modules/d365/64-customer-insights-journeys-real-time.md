@@ -5,6 +5,7 @@ level: "d365"
 certification: "Dynamics 365 Customer Insights"
 estimatedMinutes: 12
 slug: "customer-insights-journeys-real-time"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Diseñar journeys en tiempo real con triggers, segmentos, consentimiento, canales y medición, produciendo un diagrama de flujo completo y un modelo de consentimiento auditable — separando claramente Customer Insights - Journeys de Customer Insights - Data (Módulo 58) y evitando depender de outbound marketing heredado.

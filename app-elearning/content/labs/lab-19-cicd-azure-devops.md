@@ -11,6 +11,7 @@ prerequisites:
   - "Cuenta de Azure DevOps (dev.azure.com — gratuita)"
   - "App Registration creada en Microsoft Entra ID con permisos de Dataverse"
   - "Módulo 19 estudiado: ALM y CI/CD"
+lastVerified: "2026-09"
 ---
 
 # Lab 19 — ALM y CI/CD: Pipeline de Azure DevOps para Power Platform (SIT)

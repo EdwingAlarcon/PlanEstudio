@@ -11,6 +11,7 @@ import { UI, LEVEL_ORDER, type LevelId } from "@/lib/i18n";
 import { PracticeProgressSummary } from "@/components/practices/practice-progress-summary";
 import { GuidedHomeClient } from "@/components/guided/guided-home-client";
 import { InteractivePracticeSummary } from "@/components/interactive-practices/interactive-practice-summary";
+import { ContinueCard } from "@/components/modules/continue-card";
 import { RetentionTodayCard } from "@/components/review/retention-today-card";
 
 // Level display config
@@ -42,6 +43,12 @@ export default async function DashboardPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-10 animate-fade-in">
+      <ContinueCard
+        modules={levels.flatMap((level) =>
+          level.modules.map((m) => ({ id: m.id, title: m.title, href: `/nivel/${level.id}/modulo/${m.slug}` }))
+        )}
+      />
+
       <GuidedHomeClient />
 
       <section aria-labelledby="catalog-heading" className="space-y-4">

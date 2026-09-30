@@ -5,6 +5,7 @@ level: "rpa"
 certification: "Power Automate for desktop & RPA"
 estimatedMinutes: 22
 slug: "errores-logging-idempotencia"
+lastVerified: "2026-09"
 ---
 
 ## 🎯 Objetivo

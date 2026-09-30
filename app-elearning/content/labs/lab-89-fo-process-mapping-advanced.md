@@ -8,6 +8,7 @@ certifications: ["Finance & Operations awareness"]
 role: ["Solution Architect", "Consultor Funcional"]
 prerequisites:
   - "Módulo 60 estudiado: F&O Awareness"
+lastVerified: "2026-09"
 ---
 
 # Lab 89 — F&O Process Mapping Advanced

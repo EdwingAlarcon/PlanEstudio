@@ -11,6 +11,7 @@ prerequisites:
   - "Editor con GitHub Copilot o Claude Code instalado"
   - "Módulo 44 y 45 estudiados: GitHub Copilot en VS Code, Claude Code y Codex"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 45 — Implementación Guiada con IA sobre el Escenario SIT

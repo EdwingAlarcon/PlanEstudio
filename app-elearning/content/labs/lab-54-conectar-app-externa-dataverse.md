@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 53 estudiado: Dataverse Web API, Dynamics 365 y Autenticación"
   - "Acceso a un entorno Developer/Sandbox y, si es posible, permisos para ver (no necesariamente crear) app registrations en Microsoft Entra ID"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 54 — Conceptos de Conexión de una App Externa a Dataverse Web API

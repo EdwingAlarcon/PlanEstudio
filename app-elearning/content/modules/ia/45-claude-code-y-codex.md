@@ -5,6 +5,7 @@ level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 9
 slug: "claude-code-y-codex"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Usar agentes de código (Claude Code, Codex) para analizar repositorios grandes y ejecutar cambios acotados con herramientas (lectura, edición, bash), entendiendo qué los diferencia de un simple chat y cuándo delegarles una tarea real.

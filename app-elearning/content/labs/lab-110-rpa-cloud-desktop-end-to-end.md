@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 75 completado"
   - "Power Automate cloud básico"
 files: []
+lastVerified: "2026-09"
 ---
 
 # LAB-RPA-07 — Cloud flow + desktop flow

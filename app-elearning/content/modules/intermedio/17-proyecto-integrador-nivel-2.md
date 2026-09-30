@@ -5,6 +5,7 @@ level: "intermedio"
 certification: "PL-200 (retirado 31 ago 2026)"
 estimatedMinutes: 8
 slug: "proyecto-integrador-nivel-2"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Construir un sistema CRM-lite completo para gestión de clientes y oportunidades comerciales, integrando todos los conceptos del Nivel 2: modelo de datos avanzado en Dataverse, Canvas App con Component Library, Model-Driven App, Power Automate con Child Flows, Power BI con DAX avanzado, Copilot Studio, y ALM con 3 ambientes.

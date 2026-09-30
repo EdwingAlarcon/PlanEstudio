@@ -5,6 +5,7 @@ level: "basico"
 certification: "PL-900"
 estimatedMinutes: 20
 slug: "introduccion-al-ecosistema-power-platform"
+lastVerified: "2026-09"
 ---
 *Duración: 1-2 semanas · Lectura: 10-12 min · Con práctica y setup de ambiente: 45-90 min (el tiempo de setup varía y no depende de ti)*
 

@@ -10,6 +10,7 @@ prerequisites:
   - "Lab 93 completado: F&O Finance Setup Walkthrough"
   - "Módulo 60 estudiado: F&O Awareness — Procesos ERP, Virtual Tables y Vocabulario Estándar"
   - "Acceso a un ambiente trial/demo de Dynamics 365 Project Operations"
+lastVerified: "2026-09"
 ---
 
 # Lab 97 — F&O Project Operations Setup

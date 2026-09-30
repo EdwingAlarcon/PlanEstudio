@@ -5,6 +5,7 @@ level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 7
 slug: "fundamentos-ia-desarrollo"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Entender qué es un modelo de lenguaje (LLM) aplicado a generación de código, distinguir entre autocompletado, chat y agentes, y reconocer los límites reales de estas herramientas antes de usarlas en proyectos de Power Platform y Dynamics 365.

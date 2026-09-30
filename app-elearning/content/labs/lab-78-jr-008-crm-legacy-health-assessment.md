@@ -9,6 +9,7 @@ role: ["Legacy Consultant", "Migration Specialist", "Solution Architect"]
 prerequisites:
   - "Módulo 39 estudiado: casos de transformación digital"
   - "Ruta Job-Ready Data Migration + CRM Legacy revisada"
+lastVerified: "2026-09"
 ---
 
 # Lab 78 — JR-008: CRM Legacy Health Assessment

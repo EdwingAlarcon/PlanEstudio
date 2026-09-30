@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 73 completado"
   - "LAB-RPA-03 o LAB-RPA-04 recomendado"
 files: []
+lastVerified: "2026-09"
 ---
 
 # LAB-RPA-05 — Selectores y resiliencia

@@ -9,6 +9,7 @@ role: ["Solution Architect", "Integration Consultant"]
 prerequisites:
   - "Módulo 65 estudiado: Integración CE + Finance & Operations"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
+lastVerified: "2026-09"
 ---
 
 # Lab 88 — CE + F&O Dual-write Ownership Matrix

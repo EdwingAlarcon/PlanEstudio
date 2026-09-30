@@ -5,6 +5,7 @@ level: "avanzado"
 certification: "PL-400"
 estimatedMinutes: 11
 slug: "c-plugins-para-dataverse"
+lastVerified: "2026-09"
 ---
 ### 🚧 Antes de comenzar: este módulo no es autosuficiente en programación
 

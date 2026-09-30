@@ -11,6 +11,7 @@ prerequisites:
   - "Módulo 54 estudiado: ALM de Soluciones Power Platform con Apoyo de IA"
   - "Una solución de práctica en un entorno Developer/Sandbox (puede ser mínima: una tabla y un flujo)"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 53 — Exportar, Desempaquetar y Revisar una Solución con IA

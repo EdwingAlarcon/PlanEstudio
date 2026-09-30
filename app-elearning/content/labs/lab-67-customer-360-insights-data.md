@@ -9,6 +9,7 @@ role: ["Functional Consultant", "Solution Architect", "Data Specialist"]
 prerequisites:
   - "Módulo 58 estudiado: Customer Insights - Data"
   - "Lab 58 completado: Customer Insights — Segmento y Journey"
+lastVerified: "2026-09"
 ---
 
 # Lab 67 — Customer Insights - Data: Unificación de Perfiles y Customer 360

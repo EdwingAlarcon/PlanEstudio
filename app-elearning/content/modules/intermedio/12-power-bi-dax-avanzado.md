@@ -5,6 +5,7 @@ level: "intermedio"
 certification: "PL-200 (retirado 31 ago 2026)"
 estimatedMinutes: 10
 slug: "power-bi-dax-avanzado"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Dominar DAX avanzado: CALCULATE con múltiples filtros, contexto de filtro vs fila, funciones de inteligencia de tiempo, Row Level Security, y métricas de negocio complejas como cohortes y métricas móviles.

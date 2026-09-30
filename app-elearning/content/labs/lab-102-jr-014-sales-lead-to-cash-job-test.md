@@ -9,6 +9,7 @@ role: ["Dynamics 365 Sales Functional Consultant", "CRM Functional"]
 prerequisites:
   - "Lab 66 completado: Sales Lead-to-Cash"
   - "Lab 57 revisado: Fit-Gap D365 Sales"
+lastVerified: "2026-09"
 ---
 
 # Lab 102 — JR-014: Dynamics 365 Sales — Lead-to-Cash Job Test

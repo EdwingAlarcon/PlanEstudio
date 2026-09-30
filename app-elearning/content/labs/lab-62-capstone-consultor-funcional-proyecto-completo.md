@@ -11,6 +11,7 @@ prerequisites:
   - "Lab 09 completado: Dataverse Avanzado"
   - "Módulo 20 revisado: Dynamics 365 CE — Sales y Customer Service"
   - "Recurso revisado: Rúbricas y Plantillas de Evaluación"
+lastVerified: "2026-09"
 ---
 
 # Lab 62 — Capstone Consultor Funcional: Proyecto Funcional Completo

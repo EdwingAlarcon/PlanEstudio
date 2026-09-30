@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 20 estudiado: Dynamics 365 CE — Sales y Customer Service"
   - "Conocimiento básico de cuentas, contactos, casos y consentimiento"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 58 — Customer Insights: Segmento, Consentimiento y Journey de Renovación

@@ -5,6 +5,7 @@ level: "basico"
 certification: "PL-900"
 estimatedMinutes: 25
 slug: "power-apps-canvas-primeras-aplicaciones"
+lastVerified: "2026-09"
 ---
 *Duración: 2-3 semanas · Lectura: 8-12 min · Con práctica: 60-90 min (solo el Núcleo obligatorio; la Profundización opcional suma tiempo aparte)*
 

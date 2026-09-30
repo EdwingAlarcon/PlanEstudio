@@ -5,6 +5,7 @@ level: "d365"
 certification: "Dynamics 365 Customer Insights"
 estimatedMinutes: 12
 slug: "customer-insights-data-unificacion-perfiles"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Entender qué resuelve Customer Insights - Data que Dynamics 365 Sales/Customer Service no resuelven por sí solos: unificación de perfiles desde múltiples fuentes, reglas de matching, medidas calculadas y activación de datos hacia Journeys — la capa que en este curso hasta ahora solo se nombraba, nunca se desarrollaba.

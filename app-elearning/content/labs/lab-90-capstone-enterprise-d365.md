@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 66 estudiado: Capstone Enterprise D365"
   - "Labs 81-89 revisados o completados"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
+lastVerified: "2026-09"
 ---
 
 # Lab 90 — Capstone Enterprise D365

@@ -6,6 +6,7 @@ certification: "PL-400"
 estimatedMinutes: 8
 practiceMinutes: 100
 slug: "integraciones-con-azure-services"
+lastVerified: "2026-09"
 ---
 
 > **☁️ ¿Nunca usaste Azure Portal?** Lee primero [Fundamentos de Azure](/recursos/fundamentos-azure)

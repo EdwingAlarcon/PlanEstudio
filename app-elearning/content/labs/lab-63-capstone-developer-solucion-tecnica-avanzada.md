@@ -11,6 +11,7 @@ prerequisites:
   - "Lab 23 completado: Plugin C# + Unit Tests"
   - "Lab 52 completado: CLI y conexión al tenant"
   - "Lab 53 completado: Exportar y revisar solución con IA"
+lastVerified: "2026-09"
 ---
 
 # Lab 63 — Capstone Developer: Solución Técnica Avanzada

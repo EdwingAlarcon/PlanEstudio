@@ -5,6 +5,7 @@ level: "avanzado"
 certification: "PL-400"
 estimatedMinutes: 7
 slug: "patrones-de-diseno-avanzados"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Aplicar patrones de diseño reconocidos en implementaciones de Power Platform: Repository Pattern, Command Pattern, Observer Pattern con plugins, Saga Pattern para transacciones distribuidas, y CQRS para separar lecturas de escrituras.

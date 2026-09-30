@@ -12,6 +12,7 @@ prerequisites:
   - "Al menos 5 aplicaciones Canvas o flujos ya creados en el tenant (para que el inventario tenga datos)"
   - "Módulo 32 estudiado: CoE Starter Kit"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 32 — CoE Starter Kit: Gobernanza a Escala del Tenant de Power Platform

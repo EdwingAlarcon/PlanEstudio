@@ -5,6 +5,7 @@ level: "intermedio"
 certification: "PL-200 (retirado 31 ago 2026)"
 estimatedMinutes: 30
 slug: "dataverse-avanzado"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Diseñar modelos de datos empresariales complejos en Dataverse: relaciones polimórficas, columnas calculadas y rollup, reglas de negocio avanzadas, seguridad a nivel de campo, y auditoría completa de datos.

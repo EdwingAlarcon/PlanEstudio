@@ -9,6 +9,7 @@ role: ["Todos"]
 prerequisites:
   - "Ruta Job-Ready Interview Readiness revisada"
   - "Al menos un capstone o lab documentado en portafolio"
+lastVerified: "2026-09"
 ---
 
 # Lab 79 — JR-009: Technical Interview Simulation

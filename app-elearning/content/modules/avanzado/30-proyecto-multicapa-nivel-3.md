@@ -6,6 +6,7 @@ certification: "PL-400"
 estimatedMinutes: 9
 practiceMinutes: 180
 slug: "proyecto-multicapa-nivel-3"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Construir una solución enterprise completa integrando todos los conceptos del Nivel 3: arquitectura multi-solución, CI/CD automatizado, D365 Customer Service, Portal para clientes, Copilot Studio con SSO, Plugin C# para lógica de negocio, integración con Azure Service Bus, y PCF Dataset avanzado.

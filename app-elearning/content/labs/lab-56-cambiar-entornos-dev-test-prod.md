@@ -11,6 +11,7 @@ prerequisites:
   - "Acceso (o capacidad de crear) al menos 2 entornos distintos: Developer/Sandbox y un segundo entorno de práctica"
   - "Módulo 52 estudiado: Power Platform CLI y Conexión Segura al Tenant"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 56 — Cambiar entre Entornos Dev/Test/Prod de Forma Segura

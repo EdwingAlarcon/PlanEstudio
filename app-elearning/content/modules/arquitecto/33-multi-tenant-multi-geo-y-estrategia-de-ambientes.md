@@ -5,6 +5,7 @@ level: "arquitecto"
 certification: "Arquitectura Power Platform"
 estimatedMinutes: 9
 slug: "multi-tenant-multi-geo-y-estrategia-de-ambientes"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Diseñar estrategias de implementación para organizaciones multinacionales con múltiples tenants, requisitos de residencia de datos (GDPR, LGPD, Ley 1581), y modelos de gobierno distribuido donde subsidiarias tienen autonomía pero se alinean con políticas corporativas.

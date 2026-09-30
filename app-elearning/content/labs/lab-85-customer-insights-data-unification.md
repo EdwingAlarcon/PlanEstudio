@@ -9,6 +9,7 @@ role: ["Data Specialist", "Consultor Funcional D365 CE"]
 prerequisites:
   - "Módulo 58 estudiado: Customer Insights - Data"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
+lastVerified: "2026-09"
 ---
 
 # Lab 85 — Customer Insights Data Unification

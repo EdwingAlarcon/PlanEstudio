@@ -5,6 +5,7 @@ level: "arquitecto"
 certification: "Arquitectura Power Platform"
 estimatedMinutes: 12
 slug: "azure-integration-services-avanzado"
+lastVerified: "2026-09"
 ---
 ### 🚧 Antes de comenzar: este módulo no es autosuficiente en Azure
 

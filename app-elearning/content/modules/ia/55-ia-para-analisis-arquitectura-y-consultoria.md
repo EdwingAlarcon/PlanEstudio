@@ -5,6 +5,7 @@ level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 12
 slug: "ia-para-analisis-arquitectura-y-consultoria"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Usar IA como acelerador en tres roles distintos de un proyecto Power Platform/D365 — desarrollo técnico (plugins, PCF, Custom APIs), consultoría funcional (Dynamics 365 Sales/Customer Service) y arquitectura de solución — manteniendo siempre al humano como responsable de la decisión final.

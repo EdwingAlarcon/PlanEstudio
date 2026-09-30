@@ -11,6 +11,7 @@ prerequisites:
   - "Módulo 20 revisado: Dynamics 365 CE — Sales y Customer Service"
   - "Módulo 34 revisado: arquitectura de datos / integración"
   - "Módulo 60 estudiado: Finance & Operations — Procesos ERP y Virtual Tables"
+lastVerified: "2026-09"
 ---
 
 # Lab 64 — Capstone Finance & Operations Awareness: Arquitectura Conceptual ERP + CRM

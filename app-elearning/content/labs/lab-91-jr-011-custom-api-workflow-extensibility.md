@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 23 estudiado: C# Plugins para Dataverse"
   - "Lab 73 completado (recomendado): Dataverse Plugin C#"
   - "Conocimiento básico de pipeline, tracing y registro de plugins"
+lastVerified: "2026-09"
 ---
 
 # Lab 91 — JR-011: Custom API & Workflow Extensibility Job Test

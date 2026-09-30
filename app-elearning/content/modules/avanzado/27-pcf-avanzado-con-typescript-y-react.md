@@ -6,6 +6,7 @@ certification: "PL-400"
 estimatedMinutes: 8
 practiceMinutes: 120
 slug: "pcf-avanzado-con-typescript-y-react"
+lastVerified: "2026-09"
 ---
 ### 🚧 Antes de comenzar: requiere TypeScript sólido
 

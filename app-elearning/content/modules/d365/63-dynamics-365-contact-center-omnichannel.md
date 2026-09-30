@@ -5,6 +5,7 @@ level: "d365"
 certification: "Dynamics 365 Contact Center / Customer Service"
 estimatedMinutes: 13
 slug: "dynamics-365-contact-center-omnichannel"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Diseñar una operación de contact center sobre Dynamics 365 Customer Service/Contact Center con canales digitales, conversación, presencia, unified routing, bots, handoff y métricas, produciendo un workstream, una regla de routing y un dashboard de supervisor completos — dejando explícito qué requiere licenciamiento, canal real y configuración del tenant, y qué puede simularse como diseño.

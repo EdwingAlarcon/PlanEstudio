@@ -5,6 +5,7 @@ level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 7
 slug: "prompts-tecnicos-reutilizables"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Disponer de una biblioteca de plantillas de prompt completas, copiables y versionadas para las tareas técnicas y funcionales más recurrentes en Power Platform, Dynamics 365 y empleabilidad — y saber adaptarlas a un caso propio en vez de partir de cero cada vez.

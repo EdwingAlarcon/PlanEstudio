@@ -5,6 +5,7 @@ level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 8
 slug: "github-copilot-en-vscode"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Usar GitHub Copilot en VS Code (autocompletado, Copilot Chat y Copilot Edits) de forma productiva en proyectos reales del plan de estudio: componentes PCF, Code Apps y plugins C#.

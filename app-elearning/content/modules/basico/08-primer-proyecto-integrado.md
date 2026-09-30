@@ -5,6 +5,7 @@ level: "basico"
 certification: "PL-900"
 estimatedMinutes: 45
 slug: "primer-proyecto-integrado"
+lastVerified: "2026-09"
 ---
 *Duración: 2-3 semanas · Lectura/planificación: 25-45 min · Construcción guiada: 8-16 horas distribuidas en varias sesiones*
 

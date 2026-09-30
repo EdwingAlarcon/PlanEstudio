@@ -10,6 +10,7 @@ prerequisites:
   - "Lab 02 completado — tablas sit_Solicitud y sit_Categoria existentes con datos de prueba"
   - "Ambiente Developer activo en make.powerapps.com"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 03 — Canvas App: Gestión de Solicitudes Internas (SIT)

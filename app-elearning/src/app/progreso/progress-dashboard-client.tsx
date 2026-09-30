@@ -11,6 +11,7 @@ import { Progress } from "@/components/ui/progress";
 import { UI, type LevelId } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { PracticeDomainProgress, PracticeProgressSummary, type PracticeSummaryItem } from "@/components/practices/practice-progress-summary";
+import { FullBackupPanel } from "@/components/progress/full-backup-panel";
 import { PracticePortabilityPanel } from "@/components/practices/practice-portability-panel";
 import { GuidedDashboardSummary } from "@/components/guided/guided-dashboard-summary";
 import { InteractivePracticeSummary } from "@/components/interactive-practices/interactive-practice-summary";
@@ -164,6 +165,7 @@ export function ProgressDashboardClient({ levels, practices, interactivePractice
       <PracticeProgressSummary practices={practices} showReset />
       <InteractivePracticeSummary practices={interactivePractices} showReset />
       <RetentionSummary />
+      <FullBackupPanel />
       <PracticePortabilityPanel practiceIds={practices.map((practice) => practice.id)} />
       <PracticeDomainProgress practices={practices} />
 

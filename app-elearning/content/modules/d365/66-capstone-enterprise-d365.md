@@ -5,6 +5,7 @@ level: "d365"
 certification: "D365 Especialización Portfolio"
 estimatedMinutes: 14
 slug: "capstone-enterprise-d365"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Integrar Sales, Customer Service, Contact Center, Customer Insights, Field Service y Finance & Operations en una propuesta enterprise defendible, con alcance, arquitectura, matriz de datos, roadmap, riesgos, licencias y evidencias de portafolio que puedas presentar tanto en una entrevista de Solution Architect como en una revisión ejecutiva real.

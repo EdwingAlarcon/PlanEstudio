@@ -13,6 +13,7 @@ prerequisites:
   - "Módulo 60 estudiado: Finance & Operations — Procesos ERP y Virtual Tables"
   - "Recurso revisado: Rúbricas y Plantillas de Evaluación"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 60 — Capstone Microsoft Business Applications: Servicio Postventa con Customer Insights, Field Service y F&O

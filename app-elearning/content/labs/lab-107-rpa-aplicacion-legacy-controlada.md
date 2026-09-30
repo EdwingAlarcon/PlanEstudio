@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 72 completado"
   - "Aplicación Windows de prueba o simulación documentada"
 files: []
+lastVerified: "2026-09"
 ---
 
 # LAB-RPA-04 — Aplicación legacy

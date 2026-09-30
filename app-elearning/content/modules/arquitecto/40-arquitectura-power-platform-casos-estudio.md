@@ -5,6 +5,7 @@ level: "arquitecto"
 certification: "Arquitectura Power Platform"
 estimatedMinutes: 11
 slug: "arquitectura-power-platform-casos-estudio"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Desarrollar la mentalidad de Solution Architect en Power Platform mediante casos de estudio de arquitectura, análisis de requerimientos, trade-offs, gobernanza, seguridad, integración y comunicación ejecutiva. El examen PL-600 fue retirado por Microsoft el 30 de junio de 2026; este módulo conserva las competencias profesionales que siguen siendo válidas aunque la credencial ya no esté disponible. Microsoft anunció una certificación sucesora parcial, "Microsoft Certified: Agentic AI Business Solutions Architect" (AB-100), que fusiona el alcance de PL-600, MB-700 y MB-335 en una ruta orientada a soluciones de negocio con IA agéntica; es la ruta de certificación vigente equivalente para quien busque reemplazar el PL-600.

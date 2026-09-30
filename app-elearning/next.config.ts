@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
   output: "export",
   basePath: isGitHubPages ? "/PlanEstudio" : "",
   assetPrefix: isGitHubPages ? "/PlanEstudio/" : "",
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isGitHubPages ? "/PlanEstudio" : "",
+  },
   images: {
     unoptimized: true,
   },
