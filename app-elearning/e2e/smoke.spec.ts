@@ -96,17 +96,17 @@ test.describe("Smoke — rutas principales", () => {
 
     await page.mouse.move(mainBox.x + mainBox.width / 2, mainBox.y + mainBox.height / 2);
     await page.mouse.wheel(0, 1400);
-    await mainContent.evaluate((el) => {
-      el.scrollTop = Math.max(el.scrollTop, 1400);
-      el.dispatchEvent(new Event("scroll", { bubbles: true }));
-    });
 
+    // El listener de scroll se engancha al hidratar; aria-valuenow="0" ya es cierto antes de eso.
+    // Reenviar el scroll en cada intento evita perder el evento si llega antes de la hidratación.
     await expect
-      .poll(async () => mainContent.evaluate((el) => el.scrollTop))
-      .toBeGreaterThan(0);
-
-    await expect
-      .poll(async () => Number(await progressBar.getAttribute("aria-valuenow")))
+      .poll(async () => {
+        await mainContent.evaluate((el) => {
+          el.scrollTop = Math.max(el.scrollTop, 1400);
+          el.dispatchEvent(new Event("scroll", { bubbles: true }));
+        });
+        return Number(await progressBar.getAttribute("aria-valuenow"));
+      })
       .toBeGreaterThan(0);
   });
 
