@@ -1,5 +1,20 @@
 # PlanEstudio — Estado de sprints post-auditoría (handoff)
 
+## Mantenimiento vigente — 2026-10-01
+
+Se cerraron los tres ítems que seguían abiertos, con el alcance que eligió el usuario: (1) **MkDocs**: se retiró del CI
+el job `mkdocs` (validación `mkdocs build --strict`) y `deploy` ya no depende de él; MkDocs queda **congelado**:
+`mkdocs.yml`, `requirements.txt` y `docs/` se conservan porque `docs/` sigue siendo fuente de recursos y del banco de
+preguntas, pero ya nada lo valida ni lo despliega. (2) **E2E "§63"**: sin el prompt original, se auditaron rutas y
+funciones contra los specs existentes y se cubrieron los huecos reales en `e2e/coverage-routes-labs.spec.ts`
+(9 tests: `/rutas`, `/rutas/[slug]` y su 404, `/mapa`, panel "Antes de empezar", gate de prerrequisitos de LAB-111 en
+modo guiado y libre, soluciones de referencia de capstones, insignia "Verificado", manifest PWA y `sw.js`).
+El "§63" original queda **cerrado por sustitución**, no por cumplimiento literal de una lista que no se tiene.
+(3) **Plantillas de repositorio**: recurso `docs/Recursos/PLANTILLAS_REPOSITORIO_POR_PROYECTO.md`
+(`/recursos/plantillas-repositorio-por-proyecto`): estructura recomendada para PCF, plugin C#, solución ALM, Power
+Pages, Code App y RPA; es documentación, **no** repositorios descargables. Recursos: 38 páginas.
+Dato útil: el modo de navegación por defecto es **guiado**; para probar el modo libre hay que activarlo desde `/mi-ruta#roles`.
+
 ## Sesión de sincronización y validación — 2026-10-01
 
 Sin cambios de producto. Se sincronizó el local con `origin/master` (4 commits hechos desde otra
@@ -11,8 +26,7 @@ intermitente (2 de 3 repeticiones), carrera de hidratación del test (el evento 
 antes de que `ReadingProgress` enganchara su listener; `aria-valuenow="0"` ya es cierto antes de
 hidratar). Corregido en `91ce2c74` reenviando el scroll dentro del `expect.poll`; 6/6 repeticiones
 pasan. No se re-corrió la suite E2E completa tras el fix; el CI (run `36883695981`) es la confirmación.
-Sigue abierto, sin tocar: retirar MkDocs (decisión del usuario), ~23 casos E2E "§63" y plantillas de
-repositorio por tipo de proyecto (ambos requieren que el usuario aporte alcance).
+Los tres ítems que seguían abiertos se cerraron después, ver la sección 2026-10-01 de arriba.
 
 ## Mantenimiento vigente — 2026-09-30
 

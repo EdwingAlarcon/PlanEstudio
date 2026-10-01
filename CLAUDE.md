@@ -1,5 +1,20 @@
 # CLAUDE.md
 
+## Mantenimiento vigente — 2026-10-01
+
+Se cerraron los tres ítems que seguían abiertos, con el alcance que eligió el usuario: (1) **MkDocs**: se retiró del CI
+el job `mkdocs` (validación `mkdocs build --strict`) y `deploy` ya no depende de él; MkDocs queda **congelado**:
+`mkdocs.yml`, `requirements.txt` y `docs/` se conservan porque `docs/` sigue siendo fuente de recursos y del banco de
+preguntas, pero ya nada lo valida ni lo despliega. (2) **E2E "§63"**: sin el prompt original, se auditaron rutas y
+funciones contra los specs existentes y se cubrieron los huecos reales en `e2e/coverage-routes-labs.spec.ts`
+(9 tests: `/rutas`, `/rutas/[slug]` y su 404, `/mapa`, panel "Antes de empezar", gate de prerrequisitos de LAB-111 en
+modo guiado y libre, soluciones de referencia de capstones, insignia "Verificado", manifest PWA y `sw.js`).
+El "§63" original queda **cerrado por sustitución**, no por cumplimiento literal de una lista que no se tiene.
+(3) **Plantillas de repositorio**: recurso `docs/Recursos/PLANTILLAS_REPOSITORIO_POR_PROYECTO.md`
+(`/recursos/plantillas-repositorio-por-proyecto`): estructura recomendada para PCF, plugin C#, solución ALM, Power
+Pages, Code App y RPA; es documentación, **no** repositorios descargables. Recursos: 38 páginas.
+Dato útil: el modo de navegación por defecto es **guiado**; para probar el modo libre hay que activarlo desde `/mi-ruta#roles`.
+
 ## Mantenimiento vigente — 2026-09-30
 
 Mejoras de producto (sin ampliar contenido): (1) **backup completo** en `/progreso`
@@ -13,7 +28,7 @@ para elementos sin verificar o con más de 6 meses (`content-freshness.ts`). (3)
 (`moduleNotes` en el store académico) y tarjeta **Continuar** en el home (`lastVisited` ya existía pero
 nunca se escribía). (4) **PWA**: `manifest.ts`, `public/sw.js` (páginas network-first, `/_next/static`
 cache-first; solo se registra en producción) e iconos; subir `CACHE_VERSION` en `sw.js` invalida todo.
-(5) CI: E2E en 3 shards. (6) Historial de sprints movido a `HISTORIAL_CLAUDE.md` (CLAUDE.md conserva solo invariantes). No se movió el banco de preguntas (MkDocs lo carga en su simulador) ni se retiró MkDocs (decisión pendiente del usuario).
+(5) CI: E2E en 3 shards. (6) Historial de sprints movido a `HISTORIAL_CLAUDE.md` (CLAUDE.md conserva solo invariantes). No se movió el banco de preguntas (MkDocs lo carga en su simulador) MkDocs quedó congelado el 2026-10-01.
 Validación: `npm run verify` (464 tests) y E2E nuevo `e2e/progress-backup.spec.ts` (3/3); flujo probado en
 Chromium sobre `out/` (offline, backup ida y vuelta). Sync entre dispositivos y analítica NO se implementaron
 (requieren cuentas/consentimiento).
@@ -66,8 +81,7 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 - Los labs no tienen rango contiguo; las preguntas `appliesTo: "caso"` se excluyen de `getQuestionsForModule()` y del simulador.
 - Tenant real: la app no valida automáticamente contra el tenant del alumno y eso no es un defecto; los labs aportan
   criterios y evidencia manual.
-- Ítems abiertos que requieren que el usuario aporte contexto (no inventar alcance): ~23 casos E2E "§63" y
-  "starter repository templates by project type" del sprint Developer Workstation.
+- Sin ítems abiertos: MkDocs congelado, "§63" cerrado por sustitución y plantillas de repositorio documentadas (ver 2026-10-01).
 - Producción oficial: `https://planestudio.vercel.app/` (proyecto Vercel `app-elearning`); GitHub Pages es espejo secundario.
   Los deploys estáticos de Vercel requieren `app-elearning/public/vercel.json` (`cleanUrls: true`).
 - Preferencia del usuario: sincronizar (fetch/pull) antes de empezar; tras un cambio, commit y push a la rama indicada,
