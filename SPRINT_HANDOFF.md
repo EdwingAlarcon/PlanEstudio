@@ -1,5 +1,19 @@
 # PlanEstudio — Estado de sprints post-auditoría (handoff)
 
+## Sesión de sincronización y validación — 2026-10-01
+
+Sin cambios de producto. Se sincronizó el local con `origin/master` (4 commits hechos desde otra
+sesión: `cc6fd426`, `68dae2db`, `8b07458a`, `d91ab4f2`) y se borró la rama remota vacía
+`claude/friendly-ride-imizzu` (sin commits propios). Validación sobre `d91ab4f2`: `npm run verify`
+completo (464/464 tests, cobertura 91.92% líneas / 81.28% ramas, build ok) y `npm run e2e`: 91/92.
+El único fallo era `smoke.spec.ts` "barra de progreso sigue el scroll del contenedor principal":
+intermitente (2 de 3 repeticiones), carrera de hidratación del test (el evento `scroll` se disparaba
+antes de que `ReadingProgress` enganchara su listener; `aria-valuenow="0"` ya es cierto antes de
+hidratar). Corregido en `91ce2c74` reenviando el scroll dentro del `expect.poll`; 6/6 repeticiones
+pasan. No se re-corrió la suite E2E completa tras el fix; el CI (run `36883695981`) es la confirmación.
+Sigue abierto, sin tocar: retirar MkDocs (decisión del usuario), ~23 casos E2E "§63" y plantillas de
+repositorio por tipo de proyecto (ambos requieren que el usuario aporte alcance).
+
 ## Mantenimiento vigente — 2026-09-30
 
 Mejoras de producto (sin ampliar contenido): (1) **backup completo** en `/progreso`
