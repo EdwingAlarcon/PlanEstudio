@@ -2,7 +2,7 @@
 moduleId: 29
 title: "Power Pages Avanzado y Azure AD B2C"
 level: "avanzado"
-certification: "PL-400"
+certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
 estimatedMinutes: 9
 practiceMinutes: 90
 slug: "power-pages-avanzado-y-azure-ad-b2c"

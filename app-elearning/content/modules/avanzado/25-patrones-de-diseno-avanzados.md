@@ -2,7 +2,7 @@
 moduleId: 25
 title: "Patrones de Diseño Avanzados"
 level: "avanzado"
-certification: "PL-400"
+certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
 estimatedMinutes: 7
 slug: "patrones-de-diseno-avanzados"
 lastVerified: "2026-09"

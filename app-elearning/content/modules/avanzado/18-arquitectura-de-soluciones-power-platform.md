@@ -2,7 +2,7 @@
 moduleId: 18
 title: "Arquitectura de Soluciones Power Platform"
 level: "avanzado"
-certification: "PL-400"
+certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
 estimatedMinutes: 7
 slug: "arquitectura-de-soluciones-power-platform"
 lastVerified: "2026-09"

@@ -2,7 +2,7 @@
 moduleId: 23
 title: "C# Plugins para Dataverse"
 level: "avanzado"
-certification: "PL-400"
+certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
 estimatedMinutes: 11
 slug: "c-plugins-para-dataverse"
 lastVerified: "2026-09"

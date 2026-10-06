@@ -2,7 +2,7 @@
 moduleId: 19
 title: "ALM y CI/CD con Azure DevOps"
 level: "avanzado"
-certification: "PL-400"
+certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
 estimatedMinutes: 8
 slug: "alm-y-ci-cd-con-azure-devops"
 lastVerified: "2026-09"

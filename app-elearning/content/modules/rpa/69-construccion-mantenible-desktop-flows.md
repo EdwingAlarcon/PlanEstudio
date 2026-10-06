@@ -16,6 +16,8 @@ Construir desktop flows modulares con acciones, variables, listas, data tables, 
 
 Un desktop flow profesional se organiza por intención: inicialización, configuración, ejecución, validación, manejo de errores, cierre y logging. Las variables deben nombrarse por propósito, los subflows por responsabilidad y las salidas por contrato.
 
+**Scripting complementario (PowerShell/Python):** cuando un paso excede lo que las acciones nativas de PAD resuelven razonablemente (una transformación de texto compleja, una llamada a una librería específica, un cálculo estadístico), PAD tiene acciones nativas `Run PowerShell script` y `Run Python script` para invocar un script externo desde dentro del flujo, pasarle parámetros de entrada (variables del flujo) y recibir de vuelta su salida como variable. No se trata de reemplazar el flujo visual por código — es extender un paso puntual sin salir del desktop flow. Ejemplo de decisión: limpiar un número de teléfono con formato inconsistente es razonable con acciones nativas de texto; parsear un archivo de log con una expresión regular compleja es más mantenible como un script PowerShell de 5 líneas invocado desde el flujo.
+
 ## 👨‍💻 Actividades Prácticas Paso a Paso
 
 1. Define inputs: ruta de entrada, carpeta de salida, modo de prueba y correlation ID.

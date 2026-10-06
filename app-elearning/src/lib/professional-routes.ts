@@ -165,7 +165,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     outcome: "Diseñar procesos D365 CE end-to-end con pipeline, SLA, Customer 360, Field Service y frontera ERP clara sin asumir implementación F&O.",
     level: "Especialización",
     accent: "#4F6BED",
-    modules: [1, 4, 9, 15, 20, 22, 30, 39, 53, 55, 56, 57, 58, 59, 61, 62, 64, 66],
+    modules: [1, 4, 9, 15, 20, 22, 30, 39, 53, 55, 57, 58, 59, 61, 62, 64, 66],
     labs: [
       "lab-22-copilot-studio",
       "lab-55-uat-gonolive-y-auditoria-prompts",
@@ -208,7 +208,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     outcome: "Diseñar un flujo Customer 360 + real-time journey con datos unificados, consentimiento, canal, métricas y límites claros de tenant/licencia.",
     level: "Especialización",
     accent: "#0D9488",
-    modules: [20, 56, 57, 63, 65],
+    modules: [20, 57, 63, 65],
     labs: [
       "lab-58-customer-insights-segmento-journey",
       "lab-67-customer-360-insights-data",
@@ -236,7 +236,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     outcome: "Diseñar y validar un proceso Field Service completo con mantenimiento preventivo, ciclo de orden de trabajo, movilidad y criterios operativos.",
     level: "Especialización",
     accent: "#107C10",
-    modules: [20, 56, 58, 65],
+    modules: [20, 59, 65],
     labs: [
       "lab-59-field-service-work-order-uat",
       "lab-86-field-service-agreement-preventive-maintenance",
@@ -312,7 +312,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     outcome: "Automatizar un proceso administrativo end-to-end con PAD y Power Automate cloud, evidencia, pruebas, despliegue, runbook y RCA.",
     level: "Especialización",
     accent: "#6B4EFF",
-    modules: [66, 67, 68, 69, 70, 71, 72, 73, 74, 75],
+    modules: [67, 68, 69, 70, 71, 72, 73, 74, 75, 76],
     labs: [
       "lab-104-rpa-primer-desktop-flow-mantenible",
       "lab-105-rpa-excel-consolidacion-ventas",
@@ -346,7 +346,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     outcome: "Aplicar IA como acelerador responsable en desarrollo, consultoría, arquitectura y operación Power Platform/D365.",
     level: "Especialización",
     accent: "#9333EA",
-    modules: [15, 22, 37, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 54, 55],
+    modules: [15, 22, 32, 37, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 54, 55],
     labs: [
       "lab-22-copilot-studio",
       "lab-45-copilot-implementacion-guiada",
@@ -418,7 +418,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     outcome: "Diseñar y operar un proceso de servicio completo, con matriz de SLA y árbol de decisión de agente defendibles en una entrevista de Consultor Funcional.",
     level: "Especialización",
     accent: "#0D9488",
-    modules: [1, 9, 62],
+    modules: [1, 9, 62, 63],
     labs: ["lab-68-customer-service-case-to-resolution", "lab-82-customer-service-sla-entitlements-routing", "lab-77-jr-007-customer-service-specialist-simulation", "lab-103-jr-015-functional-post-go-live-incident-simulation"],
     competencies: ["Casos", "Colas", "SLA y entitlements", "Knowledge base", "Routing", "Métricas de servicio"],
     status: "Disponible",
@@ -444,7 +444,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     labs: ["lab-67-customer-360-insights-data", "lab-85-customer-insights-data-unification"],
     competencies: ["Fuentes de datos", "Calidad de datos", "Unificación de perfiles", "Coincidencia (matching)", "Medidas", "Segmentos"],
     status: "Disponible",
-    gapNote: "Requiere activar Customer Insights en el trial correspondiente — ver Matriz de entornos y trials. Sin trial, el diseño de fuentes/unificación es practicable, pero validar perfiles unificados reales requiere ambiente activo.",
+    gapNote: "Requiere activar Customer Insights en el trial correspondiente — ver Matriz de entornos y trials. Sin trial, el diseño de fuentes/unificación es practicable, pero validar perfiles unificados reales requiere ambiente activo. Nota de mercado: el curso separa Data y Journeys por razones pedagógicas (trials independientes), pero en la práctica laboral el mercado contrata con más frecuencia ambas capas en un solo rol de 'Customer Insights/Marketing Consultant' — considera completar también la ruta Journeys si buscas ese perfil combinado.",
     capstoneLabSlug: "lab-85-customer-insights-data-unification",
     portfolioEvidence: [
       "Diagrama de fuentes de datos y reglas de unificación",
@@ -465,7 +465,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     labs: ["lab-58-customer-insights-segmento-journey", "lab-84-customer-insights-real-time-journey"],
     competencies: ["Consentimiento y cumplimiento", "Segmentos", "Formularios", "Emails", "Triggers", "Journeys en tiempo real"],
     status: "Disponible",
-    gapNote: "Requiere activar Customer Insights - Journeys en el trial correspondiente — ver Matriz de entornos y trials. Sin trial, el diseño del journey es practicable, pero validar envío/consentimiento real requiere ambiente activo.",
+    gapNote: "Requiere activar Customer Insights - Journeys en el trial correspondiente — ver Matriz de entornos y trials. Sin trial, el diseño del journey es practicable, pero validar envío/consentimiento real requiere ambiente activo. Nota de mercado: el curso separa Data y Journeys por razones pedagógicas (trials independientes), pero en la práctica laboral el mercado contrata con más frecuencia ambas capas en un solo rol de 'Customer Insights/Marketing Consultant' — considera completar también la ruta Data si buscas ese perfil combinado.",
     capstoneLabSlug: "lab-84-customer-insights-real-time-journey",
     portfolioEvidence: [
       "Diagrama de journey con puntos de consentimiento",

@@ -2,7 +2,7 @@
 moduleId: 61
 title: "Dynamics 365 Sales Avanzado — Forecasting, Pipeline y Sales Operations"
 level: "d365"
-certification: "Dynamics 365 Sales / MB-280 (retirado 31 jul 2026)"
+certification: "Dynamics 365 Sales / MB-280 (retirado 31 jul 2026) — sucesor: AB-210 (Dynamics 365 Sales AI Consultant, vigente desde jun 2026)"
 estimatedMinutes: 13
 slug: "dynamics-365-sales-avanzado"
 lastVerified: "2026-09"
@@ -16,6 +16,8 @@ Diseñar y operar un proceso avanzado de Dynamics 365 Sales que conecte lead-to-
 
 ### 📖 Conceptos Clave
 - **Sales como proceso operativo, no solo CRM:** el valor aparece cuando Lead, Opportunity, Quote, Order y actividades de seguimiento tienen reglas claras de propiedad, etapa, probabilidad y forecast category — no cuando "el vendedor llena un formulario".
+
+- **Copilot y agentes en Sales (certificación AB-210):** desde 2026 Microsoft reposicionó la certificación de Sales hacia "Dynamics 365 Sales AI Consultant" (AB-210), con foco en agent-driven selling — Copilot genera resúmenes de cuenta/oportunidad, borradores de correo contextualizados y next-best-action sugeridas dentro del propio registro, y Sales Agent (agente autónomo) puede calificar leads entrantes y generar pipeline sin intervención humana en el primer contacto. El rol del consultor no es configurar el modelo de IA — es decidir qué datos lo alimentan (calidad de los campos que Copilot lee), qué sugerencias se auditan antes de enviarse al cliente, y cuándo un lead calificado por el agente pasa a revisión humana antes de avanzar de etapa.
 - **Pipeline review:** revisión periódica (semanal en la mayoría de equipos B2B) donde ventas y dirección inspeccionan oportunidades por etapa, fecha estimada de cierre, valor, riesgo, next step y cambios desde la revisión anterior. Una oportunidad que no cambió nada en 2 semanas es una señal de riesgo, no de estabilidad.
 - **Forecasting — mecánica real:** Dynamics 365 Sales proyecta ingresos por jerarquía de vendedores/managers, periodo (mes/trimestre) y forecast category, con una grilla editable donde cada nivel de la jerarquía ve el rollup del nivel inferior. Requiere licencia/ambiente de Dynamics 365 Sales y configuración real de la definición de forecast (recurrencia, categorías incluidas, plantilla); en este curso puedes diseñar la estructura completa con datos simulados, pero validar visualmente el rollup jerárquico requiere tenant.
 - **Forecast categories — con criterio de asignación:** `Pipeline` (oportunidad abierta sin compromiso), `Best Case` (probable pero no confirmado), `Committed` (el vendedor lo compromete con dirección), `Omitted` (excluido intencionalmente del forecast) y `Won`/`Lost`. La categoría NO se deriva automáticamente del stage — un vendedor puede tener una oportunidad en etapa "Negociación" y aun así marcarla `Best Case` si el cliente no ha confirmado presupuesto.
