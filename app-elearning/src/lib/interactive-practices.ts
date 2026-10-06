@@ -3,7 +3,7 @@ import { PRACTICE_PRODUCTS } from "@/data/practice/products";
 import { PRACTICE_REQUESTS } from "@/data/practice/requests";
 
 export const INTERACTIVE_PRACTICE_TYPES = ["multiple-decision", "flow-builder", "query-playground", "debug-scenario"] as const;
-export const INTERACTIVE_PRACTICE_DOMAINS = ["dataverse", "power-apps", "power-automate", "fetchxml", "odata", "troubleshooting"] as const;
+export const INTERACTIVE_PRACTICE_DOMAINS = ["dataverse", "power-apps", "power-automate", "fetchxml", "odata", "troubleshooting", "javascript"] as const;
 export const INTERACTIVE_PRACTICE_LEVELS = ["starter", "junior", "advanced"] as const;
 
 export type InteractivePracticeType = typeof INTERACTIVE_PRACTICE_TYPES[number];
@@ -126,6 +126,7 @@ export const INTERACTIVE_DOMAIN_LABELS: Record<InteractivePracticeDomain, string
   fetchxml: "FetchXML",
   odata: "OData",
   troubleshooting: "Troubleshooting",
+  javascript: "JavaScript / PCF",
 };
 
 export const INTERACTIVE_TYPE_LABELS: Record<InteractivePracticeType, string> = {
@@ -814,6 +815,134 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     relatedLabIds: ["LAB-005"],
     tags: ["transferencia", "http", "condition", "test cases"],
   },
+  {
+    id: "IP-JS-001",
+    slug: "ip-js-001-evento-y-api-correctos",
+    title: "Elegir el evento y la API correctos",
+    description: "Decide qué evento del formulario y qué patrón de acceso usar para cada escenario de JavaScript.",
+    type: "multiple-decision",
+    domain: "javascript",
+    level: "junior",
+    estimatedMinutes: 6,
+    prerequisites: ["Módulo 13"],
+    learningObjectives: ["Elegir el evento correcto (OnLoad/OnChange/OnSave) según el momento que exige el requerimiento", "Usar formContext vía executionContext en vez de Xrm.Page"],
+    scenario: {
+      context: "Estás diseñando el JavaScript del formulario de Solicitud: necesitas mostrar/ocultar una pestaña cuando cambia el estado, y necesitas bloquear el guardado si falta presupuesto en estado Aprobado.",
+      objective: "Selecciona el evento y el patrón de acceso correctos para cada uno de los dos requerimientos.",
+    },
+    multiple: true,
+    options: [
+      { id: "visibilidad-onchange", label: "Mostrar/ocultar la pestaña: registrar la lógica en el evento OnChange del campo 'Estado' (además de OnLoad para el valor inicial)", consequence: "OnChange reacciona en vivo a lo que el usuario modifica — es el único evento que se dispara cada vez que el valor cambia después de cargar el formulario.", score: 1 },
+      { id: "visibilidad-onsave", label: "Mostrar/ocultar la pestaña: registrar la lógica en el evento OnSave", consequence: "OnSave se dispara solo al guardar, no mientras el usuario edita — la pestaña no reaccionaría al cambio de estado hasta recargar el formulario.", score: 0 },
+      { id: "bloqueo-onsave", label: "Bloquear el guardado sin presupuesto: usar el evento OnSave con executionContext.getEventArgs().preventDefault()", consequence: "OnSave es el único evento cancelable para impedir que el registro se guarde — exactamente lo que este requerimiento necesita.", score: 1 },
+      { id: "bloqueo-onchange", label: "Bloquear el guardado sin presupuesto: usar el evento OnChange del campo presupuesto", consequence: "OnChange no puede cancelar un guardado que todavía no ocurrió — el usuario podría seguir editando otros campos y guardar sin que se vuelva a evaluar.", score: 0 },
+    ],
+    correctOptionIds: ["visibilidad-onchange", "bloqueo-onsave"],
+    hints: [
+      { id: "h1", content: "Pregúntate en qué momento exacto necesitas que la lógica se ejecute: ¿una sola vez al abrir, cada vez que cambia un valor, o justo antes de guardar?" },
+      { id: "h2", content: "Solo el evento OnSave te da un executionContext con getEventArgs().preventDefault() para cancelar el guardado." },
+      { id: "h3", content: "La visibilidad necesita reaccionar a cada cambio (OnChange); el bloqueo necesita el único punto cancelable antes de persistir (OnSave)." },
+    ],
+    relatedModuleIds: [13],
+    relatedLabIds: ["LAB-004", "LAB-005"],
+    tags: ["formContext", "eventos", "onsave", "onchange"],
+  },
+  {
+    id: "IP-JS-002",
+    slug: "ip-js-002-contrato-del-control-pcf",
+    title: "Decidir el contrato del control PCF",
+    description: "Elige el tipo de propiedad y el tipo de control PCF correctos antes de crear el proyecto.",
+    type: "multiple-decision",
+    domain: "javascript",
+    level: "junior",
+    estimatedMinutes: 6,
+    prerequisites: ["Módulo 13"],
+    learningObjectives: ["Elegir el of-type correcto para una propiedad de PCF según el dato que representa", "Distinguir cuándo corresponde un Field PCF y cuándo un Dataset PCF"],
+    scenario: {
+      context: "Vas a construir dos controles PCF: `StatusBadge`, que muestra un semáforo de color según el estado de una Solicitud, y una vista tipo calendario que debe mostrar todas las solicitudes pendientes de un usuario con sus columnas.",
+      objective: "Selecciona el tipo de propiedad y el tipo de control correctos para cada uno.",
+    },
+    multiple: true,
+    options: [
+      { id: "badge-optionset", label: "`StatusBadge`: propiedad `statusValue` con `of-type=\"OptionSet\"` en un Field PCF", consequence: "El estado de la Solicitud es una opción de un conjunto fijo, y el control reemplaza la visualización de un solo campo — exactamente lo que describe Field PCF con OptionSet.", score: 1 },
+      { id: "badge-dataset", label: "`StatusBadge`: implementarlo como Dataset PCF", consequence: "Dataset PCF está pensado para colecciones de registros con columnas, no para reemplazar la visualización de un solo campo — es más complejo de lo que este requerimiento necesita.", score: 0 },
+      { id: "calendario-dataset", label: "Vista calendario: implementarla como Dataset PCF", consequence: "Reemplazar una subgrid con una visualización personalizada de una colección completa de registros con sus columnas es exactamente el caso de uso de Dataset PCF.", score: 1 },
+      { id: "calendario-field", label: "Vista calendario: implementarla como Field PCF", consequence: "Field PCF recibe el valor de un solo campo, no una colección de registros — no puede representar varias solicitudes a la vez.", score: 0 },
+    ],
+    correctOptionIds: ["badge-optionset", "calendario-dataset"],
+    hints: [
+      { id: "h1", content: "Pregúntate qué recibe el control: ¿el valor de un solo campo, o una colección completa de registros con columnas?" },
+      { id: "h2", content: "Field PCF reemplaza la visualización de una columna; Dataset PCF reemplaza una subgrid o galería completa." },
+      { id: "h3", content: "El estado de una Solicitud es un valor único por registro (Field + OptionSet); 'todas las solicitudes pendientes' es una colección (Dataset)." },
+    ],
+    relatedModuleIds: [13],
+    relatedLabIds: ["LAB-004", "LAB-005"],
+    tags: ["pcf", "manifest", "field-vs-dataset"],
+  },
+  {
+    id: "IP-JS-003",
+    slug: "ip-js-003-diagnosticar-badge-sin-estado",
+    title: "Diagnosticar: el badge siempre muestra 'Sin estado'",
+    description: "A partir de un síntoma y evidencia de despliegue, identifica la causa antes de ver la solución.",
+    type: "debug-scenario",
+    domain: "javascript",
+    level: "junior",
+    estimatedMinutes: 7,
+    prerequisites: ["Módulo 13"],
+    learningObjectives: ["Distinguir un control que compila y despliega correctamente de uno correctamente enlazado en el formulario", "Reconocer el binding de propiedades en el form designer como un paso separado del despliegue"],
+    scenario: {
+      context: "El control `StatusBadge` compiló sin errores con `npm run build`, `pac pcf push` terminó en éxito, y el badge aparece visualmente en el formulario de Solicitud. Sin embargo, siempre muestra 'Sin estado' en color gris, sin importar qué valor tenga el campo `sit_estado` en ese registro.",
+      objective: "Antes de mirar la solución, formula qué revisarías primero y por qué — el control claramente se desplegó, así que el problema no está ahí.",
+    },
+    implementation: "pac pcf push --publisher-prefix sit → Succeeded\nFormulario → campo sit_estado → Componentes → StatusBadge agregado (visible en el formulario)\nBadge renderizado: gris, texto \"Sin estado\"",
+    symptom: "El control se despliega y se ve en el formulario, pero `statusLabel` siempre llega vacío/sin valor al componente.",
+    fixPrompt: "¿Qué falta configurar para que el control reciba el valor real de sit_estado?",
+    acceptableFixes: ["enlazar la propiedad statusvalue al campo", "configurar statusvalue al campo sit_estado", "falta el binding de la propiedad en el formulario", "asignar el campo a la propiedad statusvalue"],
+    testCases: [
+      { id: "sin-binding", input: "Componente agregado, propiedad statusValue sin campo asignado", expected: "statusLabel llega vacío, badge gris" },
+      { id: "con-binding", input: "Componente agregado, propiedad statusValue → Campo: sit_estado", expected: "badge muestra el color y texto reales del estado" },
+    ],
+    hints: [
+      { id: "h1", content: "El control se compiló y se desplegó correctamente — el problema no está en el código TypeScript ni en el manifest." },
+      { id: "h2", content: "Agregar el componente al formulario y enlazar su propiedad a un campo son dos pasos distintos — agregar el componente no asigna automáticamente ningún campo." },
+      { id: "h3", content: "En el form designer, la propiedad `statusValue` del componente debe configurarse explícitamente apuntando al campo `sit_estado`." },
+    ],
+    relatedModuleIds: [13],
+    relatedLabIds: ["LAB-004", "LAB-005"],
+    tags: ["pcf", "troubleshooting", "binding"],
+  },
+  {
+    id: "IP-JS-004",
+    slug: "ip-js-004-transferir-propiedad-numerica",
+    title: "Transferir: el control ahora recibe un número, no un OptionSet",
+    description: "El contrato del PCF cambia de un valor de opción a un número con rangos — decide qué implica ese cambio.",
+    type: "multiple-decision",
+    domain: "javascript",
+    level: "advanced",
+    estimatedMinutes: 8,
+    prerequisites: ["Módulo 13"],
+    learningObjectives: ["Reconocer que cambiar el of-type de una propiedad PCF cambia también la lógica que la consume", "Transformar una decisión por valor exacto (switch) en una decisión por rango"],
+    scenario: {
+      context: "`StatusBadge` hoy tiene una propiedad `statusValue` de tipo OptionSet que colorea según un valor exacto (1, 2, 3). El requerimiento cambia: ahora debe mostrar el porcentaje de avance de la Solicitud (`sit_porcentajeavance`, un número de 0 a 100), coloreado por rangos (rojo < 30, amarillo 30-70, verde > 70).",
+      objective: "Selecciona qué cambios son necesarios en el manifest, en la lectura del valor y en la lógica de color para este nuevo contrato.",
+    },
+    multiple: true,
+    options: [
+      { id: "cambiar-oftype", label: "Cambiar `of-type` de `OptionSet` a `Whole.Number` en `ControlManifest.Input.xml`", consequence: "El tipo declarado en el manifest determina qué puede recibir la propiedad — es el cambio central del contrato.", score: 1 },
+      { id: "cambiar-getcolor-rangos", label: "Reescribir `getColor` de un `switch` por valor exacto a comparaciones por rango (`< 30`, `>= 30 && <= 70`, `> 70`)", consequence: "Un switch por valor exacto no tiene sentido para un número continuo de 0 a 100 — la decisión de color ahora depende de en qué rango cae el valor, no de cuál opción es.", score: 1 },
+      { id: "mantener-formatted", label: "Seguir leyendo `statusLabel` desde `context.parameters.statusValue.formatted` igual que con el OptionSet", consequence: "Un Whole.Number no tiene una versión 'formatted' con la etiqueta de una opción — hay que mostrar el número mismo (`.raw`), no un texto de opción que ya no existe.", score: 0 },
+      { id: "usar-raw-numero", label: "Leer el valor con `context.parameters.statusValue.raw` y mostrarlo como el porcentaje mismo (ej. \"45%\")", consequence: "Para un Whole.Number, `.raw` es el número real — es la fuente correcta para decidir el color por rango y para mostrarlo.", score: 1 },
+    ],
+    correctOptionIds: ["cambiar-oftype", "cambiar-getcolor-rangos", "usar-raw-numero"],
+    hints: [
+      { id: "h1", content: "El tipo de la propiedad en el manifest no es un detalle interno — determina qué forma de dato le llega al componente." },
+      { id: "h2", content: "Un switch compara igualdad exacta; un número de 0 a 100 con 3 colores necesita comparación por rango, no por valor exacto." },
+      { id: "h3", content: "Un OptionSet tiene `.formatted` (la etiqueta de la opción); un Whole.Number no — para un número, `.raw` es la fuente de verdad." },
+    ],
+    relatedModuleIds: [13],
+    relatedLabIds: ["LAB-004", "LAB-005"],
+    tags: ["transferencia", "pcf", "manifest", "of-type"],
+  },
 ];
 
 export function getAllInteractivePractices(): InteractivePractice[] {
@@ -1036,7 +1165,7 @@ export function validateInteractivePractices(): string[] {
   const ids = new Set<string>();
   const slugs = new Set<string>();
   for (const practice of INTERACTIVE_PRACTICES) {
-    if (!/^IP-(DV|PA|APP|QRY|TRB)-\d{3}$/.test(practice.id)) errors.push(`${practice.id}: id inválido`);
+    if (!/^IP-(DV|PA|APP|QRY|TRB|JS)-\d{3}$/.test(practice.id)) errors.push(`${practice.id}: id inválido`);
     if (ids.has(practice.id)) errors.push(`${practice.id}: id duplicado`);
     if (slugs.has(practice.slug)) errors.push(`${practice.id}: slug duplicado`);
     ids.add(practice.id);
@@ -1052,8 +1181,8 @@ export function validateInteractivePractices(): string[] {
     if (practice.type === "query-playground" && practice.dialect === "fetchxml" && !practice.starter.includes("<fetch")) errors.push(`${practice.id}: starter FetchXML inválido`);
     if (practice.type === "flow-builder" && practice.testCases.length < 2) errors.push(`${practice.id}: flow sin suficientes casos`);
   }
-  if (INTERACTIVE_PRACTICES.length < 12 || INTERACTIVE_PRACTICES.length > 20) {
-    errors.push(`El piloto debe tener 12 a 20 prácticas; tiene ${INTERACTIVE_PRACTICES.length}`);
+  if (INTERACTIVE_PRACTICES.length < 12 || INTERACTIVE_PRACTICES.length > 24) {
+    errors.push(`El piloto debe tener 12 a 24 prácticas; tiene ${INTERACTIVE_PRACTICES.length}`);
   }
   return errors;
 }

@@ -74,9 +74,13 @@ test.describe("Nivel D365 y Módulo 56 (JS fundamentos)", () => {
     await expect(page.getByRole("heading", { name: /D365 · D365/i })).toBeVisible();
   });
 
-  test("Módulo 13 enlaza al Módulo 56 como prerrequisito de JS y Módulo 56 carga con su moduleId renumerado", async ({ page }) => {
+  test("Módulo 13 enlaza al recurso puente de JS/TS/React, que a su vez enlaza al Módulo 56 (moduleId renumerado) solo como profundización opcional", async ({ page }) => {
     await page.goto("/nivel/intermedio/modulo/javascript-y-pcf-basico");
-    await expect(page.getByRole("heading", { name: /Antes de comenzar: requiere JavaScript básico/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Antes de comenzar: requiere JavaScript, TypeScript y React básicos/i })).toBeVisible();
+    await page.getByRole("link", { name: "Fundamentos de JavaScript, TypeScript y React para PCF" }).click();
+    await expect(page).toHaveURL(/\/recursos\/fundamentos-js-ts-react-para-pcf/);
+    await expect(page.locator("h1")).toContainText("Fundamentos de JavaScript, TypeScript y React para PCF");
+
     await page.getByRole("link", { name: "Fundamentos de JavaScript para Power Platform" }).click();
     await expect(page).toHaveURL(/\/nivel\/ia\/modulo\/fundamentos-javascript-para-power-platform/);
     await expect(page.locator("h1")).toContainText("Fundamentos de JavaScript para Power Platform");

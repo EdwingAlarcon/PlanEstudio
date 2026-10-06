@@ -2,10 +2,11 @@ import type { InteractivePracticeRecord } from "@/lib/interactive-practice-progr
 
 /**
  * Modelo de mastery del piloto Learning by Doing (Módulo 11), pedido explícitamente con 5 estados
- * distintos al enum genérico `InteractivePracticeMastery` (4 estados) que ya usan las 17 prácticas
- * interactivas. No se tocó ese enum para no romper su semántica en los otros 16 registros; este
- * módulo deriva un mastery adicional, específico del piloto, a partir de los mismos datos ya
- * persistidos en `planestudio.interactive-practice.v1` — sin store nuevo.
+ * distintos al enum genérico `InteractivePracticeMastery` (4 estados) que ya usan las 24 prácticas
+ * interactivas (tras sumar Módulo 10 y Módulo 13). No se tocó ese enum para no romper su semántica
+ * en el resto de los registros; este módulo deriva un mastery adicional, específico del piloto, a
+ * partir de los mismos datos ya persistidos en `planestudio.interactive-practice.v1` — sin store
+ * nuevo.
  */
 export type PilotMasteryLevel = "no-iniciado" | "aprendiendo" | "practicado" | "autonomo" | "transferido";
 
@@ -36,6 +37,12 @@ export const MODULE_10_PILOT_PRACTICE_IDS: PilotMasteryConfig = {
   transferir: "IP-APP-006",
 };
 
+export const MODULE_13_PILOT_PRACTICE_IDS: PilotMasteryConfig = {
+  guiadas: ["IP-JS-001", "IP-JS-002"],
+  diagnosticar: "IP-JS-003",
+  transferir: "IP-JS-004",
+};
+
 /**
  * Reglas concretas (v1, tras el endurecimiento de Fase A — ver el historial de este archivo para el
  * razonamiento original en Módulo 11):
@@ -58,16 +65,17 @@ export const MODULE_10_PILOT_PRACTICE_IDS: PilotMasteryConfig = {
  *                 visto la solución de la variante, no cuántas pistas usó para llegar — la variante
  *                 en sí ya es la prueba de que no memorizó el ejercicio original.
  *
- * Generalización (Piloto 2, Módulo 10): al construir Módulo 10 se confirmó que necesita exactamente
- * la misma forma (guiadas[] + diagnosticar + transferir) que Módulo 11 — mismo cálculo, distintos
- * ids de práctica. En vez de copiar la función, se parametrizó por `PilotMasteryConfig` una sola vez
- * aquí. `calculateModule11PilotMastery`/`calculateModule10PilotMastery` son wrappers finos que fijan
- * su propio config — se conservan como funciones con nombre (en vez de que cada módulo arme su config
- * inline) para no romper las llamadas y tests ya escritos contra `calculateModule11PilotMastery`, y
- * porque nombrar la función por módulo es más legible en los sitios que la invocan que pasar el
- * config cada vez. Esta es la generalización pequeña que se anticipó al aprobar el Piloto 2 — no es
- * una reescritura: sigue siendo un solo archivo, sin store nueva, sin cambiar el enum genérico de 4
- * estados que usan las otras prácticas.
+ * Generalización (Pilotos 2 y 3, Módulo 10 y Módulo 13): tanto Módulo 10 como Módulo 13 confirmaron
+ * que necesitan exactamente la misma forma (guiadas[] + diagnosticar + transferir) que Módulo 11 —
+ * mismo cálculo, distintos ids de práctica. En vez de copiar la función, se parametrizó por
+ * `PilotMasteryConfig` una sola vez aquí.
+ * `calculateModule11PilotMastery`/`calculateModule10PilotMastery`/`calculateModule13PilotMastery`
+ * son wrappers finos que fijan su propio config — se conservan como funciones con nombre (en vez de
+ * que cada módulo arme su config inline) para no romper las llamadas y tests ya escritos contra
+ * `calculateModule11PilotMastery`, y porque nombrar la función por módulo es más legible en los
+ * sitios que la invocan que pasar el config cada vez. Esta es la generalización pequeña que se
+ * anticipó al aprobar el Piloto 2 — no es una reescritura: sigue siendo un solo archivo, sin store
+ * nueva, sin cambiar el enum genérico de 4 estados que usan las otras prácticas.
  *
  * Estas reglas viven en un módulo aparte (no en el enum genérico `InteractivePracticeMastery` de 4
  * estados que usan el resto de las prácticas) para no cambiar su semántica fuera de los pilotos.
@@ -109,4 +117,10 @@ export function calculateModule10PilotMastery(
   records: Record<string, InteractivePracticeRecord>
 ): PilotMasteryLevel {
   return calculatePilotMastery(records, MODULE_10_PILOT_PRACTICE_IDS);
+}
+
+export function calculateModule13PilotMastery(
+  records: Record<string, InteractivePracticeRecord>
+): PilotMasteryLevel {
+  return calculatePilotMastery(records, MODULE_13_PILOT_PRACTICE_IDS);
 }

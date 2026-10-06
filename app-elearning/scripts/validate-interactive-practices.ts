@@ -14,8 +14,8 @@ function main(): void {
   const labIds = new Set(getAllLabs().map((lab) => lab.displayId));
   const typeCoverage = new Set(practices.map((practice) => practice.type));
 
-  if (practices.length < 12 || practices.length > 20) {
-    errors.push(`El piloto debe tener 12-20 prácticas, pero tiene ${practices.length}`);
+  if (practices.length < 12 || practices.length > 24) {
+    errors.push(`El piloto debe tener 12-24 prácticas, pero tiene ${practices.length}`);
   }
 
   for (const type of INTERACTIVE_PRACTICE_TYPES) {

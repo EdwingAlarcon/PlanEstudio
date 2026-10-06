@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { createInteractivePracticeRecord } from "../interactive-practice-progress";
 import type { InteractivePracticeRecord } from "../interactive-practice-progress";
-import { calculateModule10PilotMastery, calculateModule11PilotMastery } from "../pilot-mastery";
+import { calculateModule10PilotMastery, calculateModule11PilotMastery, calculateModule13PilotMastery } from "../pilot-mastery";
 
 function completed(id: string, overrides: Partial<InteractivePracticeRecord> = {}): InteractivePracticeRecord {
   return { ...createInteractivePracticeRecord(id), status: "completed", bestScore: 100, ...overrides };
@@ -102,5 +102,34 @@ describe("calculateModule10PilotMastery (generalized calculatePilotMastery, Mód
       "IP-APP-006": completed("IP-APP-006", { solutionRevealed: false }),
     };
     expect(calculateModule10PilotMastery(transferred)).toBe("transferido");
+  });
+});
+
+describe("calculateModule13PilotMastery (generalized calculatePilotMastery, Módulo 13 config)", () => {
+  it("uses IP-JS ids instead of IP-PA/IP-APP and reproduces the same 5-state logic", () => {
+    expect(calculateModule13PilotMastery({})).toBe("no-iniciado");
+
+    const learning = { "IP-JS-001": { ...createInteractivePracticeRecord("IP-JS-001"), status: "in-progress" as const } };
+    expect(calculateModule13PilotMastery(learning)).toBe("aprendiendo");
+
+    const practiced = {
+      "IP-JS-001": completed("IP-JS-001"),
+      "IP-JS-002": completed("IP-JS-002"),
+      "IP-JS-003": completed("IP-JS-003", { hintsUsed: ["h1", "h2", "h3"] }),
+    };
+    expect(calculateModule13PilotMastery(practiced)).toBe("practicado");
+
+    const autonomous = {
+      "IP-JS-001": completed("IP-JS-001"),
+      "IP-JS-002": completed("IP-JS-002"),
+      "IP-JS-003": completed("IP-JS-003", { hintsUsed: [] }),
+    };
+    expect(calculateModule13PilotMastery(autonomous)).toBe("autonomo");
+
+    const transferred = {
+      ...autonomous,
+      "IP-JS-004": completed("IP-JS-004", { solutionRevealed: false }),
+    };
+    expect(calculateModule13PilotMastery(transferred)).toBe("transferido");
   });
 });

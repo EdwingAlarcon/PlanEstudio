@@ -1,9 +1,9 @@
 # CLAUDE.md
 
-## Piloto Learning by Doing — Módulo 11 y Módulo 10 (2026-09-21)
+## Piloto Learning by Doing — Módulos 11, 10 y 13 (2026-09-21 → 2026-10-06)
 
 Antes de una eventual migración masiva del curso hacia una arquitectura "aprender haciendo", se
-validó el enfoque en dos módulos piloto. **Fase 0 (correcciones estructurales, cerrada):** se
+validó el enfoque en tres módulos piloto. **Fase 0 (correcciones estructurales, cerrada):** se
 eliminaron 11 dependencias cruzadas objetivamente rotas del campo `prerequisites` de labs — 9 labs
 de Arquitecto (N4) y 1 de N6 que gateaban sobre el Módulo 60/53 (transversales D365/IA, que por
 diseño no deben gatear ni ser gateados por los 4 niveles de certificación), y 1 lab de Intermedio
@@ -17,17 +17,24 @@ bloqueado hasta agotar las 3), troubleshooting síntoma-primero y un reto de tra
 2 (Módulo 10, Canvas Apps — Componentes y Reutilización):** mismo patrón aplicado por primera vez a
 una interfaz visual (Power Apps Studio) en vez de un editor de lógica — valida la hipótesis con una
 observación menor: el reto "sin pasos" depende más de que el alumno ya sepa usar controles como
-Timer, mitigado con pista cruzada a la micropráctica anterior. Ambos pilotos reutilizan el motor de
+Timer, mitigado con pista cruzada a la micropráctica anterior. **Piloto 3 (Módulo 13, JavaScript y
+PCF Básico):** mismo patrón aplicado a código de cliente (JS de formulario + control PCF en
+TypeScript/React) en vez de una interfaz visual o un editor de lógica. Resolvió primero la
+inconsistencia curricular que lo bloqueaba — el prerrequisito de JavaScript enlazaba directo al
+Módulo 56 (Nivel IA, transversal, no alcanzable en la ruta de certificación pura) — creando el
+recurso puente `/recursos/fundamentos-js-ts-react-para-pcf` (cubre TypeScript/React mínimo sin
+duplicar contenido; remite a Módulo 56 solo como profundización opcional de JS puro), con el mismo
+patrón que ya usan los puentes de C#/.NET y TypeScript/React para PCF Avanzado. El "Caso Real de
+Negocio" del Módulo 13 se mantuvo textualmente idéntico porque las preguntas de diagnóstico de caso
+(`appliesTo: "caso"`) referencian sus hechos exactos. Los tres pilotos reutilizan el motor de
 prácticas interactivas existente (`interactive-practices.ts`) y `pilot-mastery.ts`, generalizado a
 `calculatePilotMastery(records, config)` para no duplicar lógica entre módulos — sin tipos de
-práctica ni stores nuevos. Se agregaron 5 prácticas nuevas en total (IP-PA-005/006,
-IP-APP-004/005/006), subiendo el tope del piloto de 15 a 20 en `validate-interactive-practices.ts`
-y `interactive-practices.test.ts`. No se tocó ningún otro módulo ni las Fases 1-6 del rediseño más
-amplio, que siguen pendientes de aprobación explícita. **Módulo 13 bloqueado explícitamente** como
-candidato a Piloto 3 hasta resolver una inconsistencia curricular real: su prerrequisito de
-JavaScript enlaza al Módulo 56 (Nivel IA, transversal, no alcanzable en la ruta de certificación
-pura) — recomendación pendiente de aprobación: un recurso puente `/recursos/` en vez de un enlace
-directo a un módulo transversal.
+práctica (engine) ni stores nuevos; Módulo 13 sí agregó un **dominio** nuevo (`javascript`) al
+catálogo porque ninguno de los 6 dominios existentes describe código de cliente JS/TS/PCF. Se
+agregaron 9 prácticas nuevas en total (IP-PA-005/006, IP-APP-004/005/006, IP-JS-001/002/003/004),
+subiendo el tope del piloto de 15 a 24 en `validate-interactive-practices.ts` y
+`interactive-practices.test.ts`. No se tocó ningún otro módulo ni las Fases 1-6 del rediseño más
+amplio, que siguen pendientes de aprobación explícita.
 
 ## Mantenimiento vigente — 2026-10-01
 
@@ -99,9 +106,10 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 
 **Invariantes que no debes romper:**
 - Conteos vigentes: **76 módulos, 73 labs, 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
-  32 prácticas profesionales (18 incidentes, 6 challenges, 2 simulaciones, 6 guiadas) y 20 prácticas interactivas**
-  (subió de 15 a 17 a 20 con los pilotos Learning by Doing de Módulo 11 y Módulo 10 — ver sección de arriba).
-  No mezclar estos conteos entre sí.
+  32 prácticas profesionales (18 incidentes, 6 challenges, 2 simulaciones, 6 guiadas), 24 prácticas interactivas
+  y 39 páginas de recursos** (prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
+  Doing de Módulos 11, 10 y 13 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de
+  Módulo 13). No mezclar estos conteos entre sí.
 - Los stores persistidos son independientes y **nunca se fusionan**: `plan-estudio-progress` (académico),
   `plan-estudio-onboarding`, `planestudio.practice-progress.v1`, `planestudio.interactive-practice.v1`,
   `planestudio.spaced-repetition.v1`, `planestudio.workstation.v1`. El backup completo solo lee/escribe sus payloads crudos.
@@ -112,8 +120,7 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 - Tenant real: la app no valida automáticamente contra el tenant del alumno y eso no es un defecto; los labs aportan
   criterios y evidencia manual.
 - Sin ítems abiertos del roadmap de auditoría: MkDocs congelado, "§63" cerrado por sustitución y plantillas de
-  repositorio documentadas (ver 2026-10-01). Sigue abierto el recurso puente JS/TS/React pendiente de aprobación
-  para desbloquear el Piloto 3 (Módulo 13) — ver sección de pilotos arriba.
+  repositorio documentadas (ver 2026-10-01). Piloto 3 (Módulo 13) cerrado — ver sección de pilotos arriba.
 - Producción oficial: `https://planestudio.vercel.app/` (proyecto Vercel `app-elearning`); GitHub Pages es espejo secundario.
   Los deploys estáticos de Vercel requieren `app-elearning/public/vercel.json` (`cleanUrls: true`).
 - Preferencia del usuario: sincronizar (fetch/pull) antes de empezar; tras un cambio, commit y push a la rama indicada,

@@ -107,6 +107,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "tipos-de-practica": "Recursos/TIPOS_DE_PRACTICA.md",
   "fundamentos-csharp-dotnet": "Recursos/FUNDAMENTOS_CSHARP_DOTNET.md",
   "fundamentos-typescript-react": "Recursos/FUNDAMENTOS_TYPESCRIPT_REACT.md",
+  "fundamentos-js-ts-react-para-pcf": "Recursos/FUNDAMENTOS_JS_TS_REACT_PARA_PCF.md",
   "entornos-y-trials": "Recursos/ENTORNOS_Y_TRIALS.md",
   "fundamentos-azure": "Recursos/FUNDAMENTOS_AZURE.md",
   "soluciones-referencia-capstones": "Recursos/SOLUCIONES_REFERENCIA_CAPSTONES.md",
