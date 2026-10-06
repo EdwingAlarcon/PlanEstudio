@@ -3380,15 +3380,15 @@
     },
     {
       type: "multi",
-      prompt: "Quieres una arquitectura multi-bot donde un bot principal delega tareas especializadas. ¿Qué DOS elementos son característicos de ese enfoque?",
+      prompt: "Quieres una arquitectura donde un agente principal delega tareas especializadas a otros agentes. ¿Qué DOS elementos son característicos del enfoque de Connected Agents en Copilot Studio?",
       options: [
-      "Un bot maestro que enruta la intención al bot de habilidad adecuado",
-      "Bots especializados por dominio como RR.HH. o TI",
+      "Un agente principal que delega la conversación al agente conectado adecuado según el dominio",
+      "Agentes especializados por dominio como RR.HH. o TI, cada uno con su propia orquestación, instrucciones y conocimiento",
       "Un único topic gigante con toda la lógica de todos los dominios",
-      "Eliminar analítica por bot para centralizar todo"
+      "Eliminar analítica por agente para centralizar todo"
       ],
       answer: [0, 1],
-      explanation: "La separación Master + Skill bots mejora mantenibilidad y permite especialización por dominio. Un topic monolítico o eliminar métricas por bot dificulta operación, ownership y mejora continua."
+      explanation: "Connected Agents permite que un agente principal delegue por coincidencia de dominio a agentes especialistas (deben estar construidos en Copilot Studio), cada uno ejecutando su propio contexto de orquestación. Un topic monolítico o eliminar métricas por agente dificulta operación, ownership y mejora continua."
     },
     {
       type: "single",

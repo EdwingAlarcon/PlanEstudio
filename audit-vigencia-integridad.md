@@ -210,3 +210,35 @@ la simulación no sustituye experiencia real. No se evaluaron los 4 archivos JOB
 No se encontraron brechas de integridad profesional en el material muestreado. La recomendación de
 Parte B es únicamente ampliar el muestreo a los 4 archivos JOB_READY no leídos y
 `PORTAFOLIO_PROFESIONAL.md` si se desea una cobertura completa de esa carpeta, no corregir nada.
+
+---
+
+## Cierre de pendientes (2026-10-06, misma fecha de ejecución)
+
+**A1 — cerrado.** Verificado directamente contra Microsoft Learn
+(`learn.microsoft.com/.../power-platform-developer-associate/`): PL-400 cierra registro el
+16 de octubre de 2026 (mismo día en que abre AB-400 en adelante). Se agregó la nota
+`"PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"` en el frontmatter `certification` de
+los 13 módulos de `avanzado/` (18-30), replicando el patrón ya usado para PL-200.
+
+**A3 — cerrado.** Se agregó una frase en Conceptos Clave del Módulo 37 vinculando "Azure OpenAI
+Service" al paraguas de marca actual "Microsoft Foundry" (Ignite 2025), sin reescribir las
+actividades prácticas (siguen siendo técnicamente correctas).
+
+**Hallazgo residual de la auditoría de empleabilidad (Módulo 22, banco de preguntas) — cerrado.**
+De las 2 preguntas con fraseo del harness antiguo: la de "Solo Topics con trigger phrases fijas"
+se dejó igual porque sigue siendo una opción incorrecta válida (el harness estándar sin
+Generative Orchestration sí depende de frases exactas). La de "bot maestro + bots de habilidad"
+se reescribió a terminología de **Connected Agents** (el mecanismo de delegación actual que
+enseña el Módulo 22 reescrito), conservando el mismo concepto evaluado. Verificado con
+`node ../scripts/extract-questions.mjs` (891 preguntas, parseo correcto) y
+`npm run validate:content`.
+
+**Parte B — cobertura ampliada a los 11 archivos.** Se leyeron íntegramente los 4 archivos
+JOB_READY restantes (`JOB_READY_ADMIN_GOVERNANCE.md`, `JOB_READY_CRM_DEVELOPER.md`,
+`JOB_READY_DATA_MIGRATION_LEGACY.md`) y `PORTAFOLIO_PROFESIONAL.md`. Mismo patrón de integridad
+que los 6 ya evaluados: cada archivo declara explícitamente sus límites (estados "parcial /
+awareness avanzado / job-ready simulation", secciones "Roadmap avanzado fuera de alcance actual",
+tablas "Qué evitar" al enlazar CV/LinkedIn) y ninguno promete empleo o experiencia laboral formal
+a partir de los labs. **Sin hallazgos nuevos.** La cobertura de Parte B queda completa en los 11
+archivos de `docs/Recursos/JOB_READY*.md` + `PORTAFOLIO_PROFESIONAL.md`.
