@@ -10,6 +10,7 @@ prerequisites:
   - "Módulos RPA 67-76 completados"
   - "Labs RPA principales completados o evidencias equivalentes"
 files: []
+lastVerified: "2026-09"
 ---
 
 # RPA Capstone — Automatización end-to-end de un proceso administrativo

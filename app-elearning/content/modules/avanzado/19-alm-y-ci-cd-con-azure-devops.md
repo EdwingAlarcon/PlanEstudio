@@ -5,6 +5,7 @@ level: "avanzado"
 certification: "PL-400"
 estimatedMinutes: 8
 slug: "alm-y-ci-cd-con-azure-devops"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Implementar pipelines completos de CI/CD para Power Platform usando Azure DevOps y GitHub Actions, automatizando export/import de soluciones, comprobación de calidad con Solution Checker, y despliegue multi-ambiente con aprobaciones.

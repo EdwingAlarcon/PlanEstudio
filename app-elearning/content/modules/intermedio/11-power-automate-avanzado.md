@@ -6,6 +6,7 @@ certification: "PL-200 (retirado 31 ago 2026)"
 estimatedMinutes: 14
 practiceMinutes: 45
 slug: "power-automate-avanzado"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Construir flujos empresariales robustos con manejo de errores, ramas paralelas, flujos hijos reutilizables, llamadas HTTP a APIs externas, y procesamiento de alto volumen con batches y paginación — practicando cada concepto de inmediato, con evidencia real de tu propio entorno, antes de pasar al siguiente.

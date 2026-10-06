@@ -6,6 +6,7 @@ certification: "PL-400"
 estimatedMinutes: 15
 practiceMinutes: 120
 slug: "dynamics-365-ce-sales-y-customer-service"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Configurar y personalizar Dynamics 365 Customer Engagement entendiendo primero las capacidades estándar: Sales, Customer Service, Customer Insights y Field Service. El foco es mapear procesos reales contra entidades estándar, evitar duplicidad innecesaria y diseñar integraciones coherentes entre ventas, servicio, marketing, atención en campo y plataformas ERP/F&O.

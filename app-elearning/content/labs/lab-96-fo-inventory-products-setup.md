@@ -9,6 +9,7 @@ role: ["F&O Practitioner", "Solution Architect"]
 prerequisites:
   - "Lab 93 completado: F&O Finance Setup Walkthrough"
   - "Acceso a un ambiente trial/demo de Dynamics 365 Supply Chain Management"
+lastVerified: "2026-09"
 ---
 
 # Lab 96 — F&O Inventory & Products Setup

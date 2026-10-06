@@ -5,6 +5,7 @@ level: "arquitecto"
 certification: "Arquitectura Power Platform"
 estimatedMinutes: 14
 slug: "liderazgo-tecnico-y-gestion-de-proyectos"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Desarrollar las competencias de liderazgo técnico y consultoría funcional necesarias para el rol de Solution Architect: conducir workshops de descubrimiento, documentar requerimientos, escribir historias de usuario con criterios de aceptación, estimar proyectos con precisión, gestionar riesgos, comunicar decisiones técnicas al C-suite, y liderar equipos de Fusion Development.

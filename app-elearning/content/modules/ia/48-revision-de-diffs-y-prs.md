@@ -5,6 +5,7 @@ level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 8
 slug: "revision-de-diffs-y-prs"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Revisar con criterio un diff generado por IA — propio o de un compañero — identificando alcance, efectos secundarios y riesgos de seguridad antes de aprobarlo, con o sin apoyo de un revisor automático.

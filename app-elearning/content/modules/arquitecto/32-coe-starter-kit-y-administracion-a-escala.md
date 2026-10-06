@@ -5,6 +5,7 @@ level: "arquitecto"
 certification: "Arquitectura Power Platform"
 estimatedMinutes: 9
 slug: "coe-starter-kit-y-administracion-a-escala"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Implementar y operar el Center of Excellence Starter Kit de Microsoft para obtener visibilidad completa del tenant, gestionar el inventario de apps y flujos, aplicar políticas de cumplimiento automáticamente, y habilitar al equipo de gobernanza para tomar decisiones basadas en datos.

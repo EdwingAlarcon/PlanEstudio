@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ModuleCompletionClient } from "@/components/modules/module-completion-client";
+import { ModuleVisitTracker } from "@/components/modules/module-visit-tracker";
+import { ModuleNotes } from "@/components/modules/module-notes";
 import { ModulePrerequisiteGate } from "@/components/modules/module-prerequisite-gate";
 import { QuizPanel } from "@/components/quiz/quiz-panel";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
@@ -87,6 +89,11 @@ export default async function ModulePage({ params }: PageProps) {
                 <Clock className="h-3 w-3" aria-hidden />
                 {UI.module.estimatedTime(mod.estimatedMinutes, mod.practiceMinutes)}
               </span>
+              {mod.lastVerified && (
+                <span className="text-xs text-muted-foreground" title="Última verificación del contenido contra Microsoft Learn">
+                  Verificado {mod.lastVerified}
+                </span>
+              )}
               {questions.length > 0 && (
                 <span className="flex items-center gap-1 text-xs text-muted-foreground">
                   <BookOpen className="h-3 w-3" aria-hidden />
@@ -104,6 +111,8 @@ export default async function ModulePage({ params }: PageProps) {
         </div>
       </div>
 
+      <ModuleVisitTracker moduleId={mod.id} />
+
       <ModulePrerequisiteGate
         moduleId={mod.moduleId}
         levelId={levelId}
@@ -114,6 +123,8 @@ export default async function ModulePage({ params }: PageProps) {
       <div className="rounded-xl border border-border bg-card px-6 py-8 md:px-8 shadow-fluent-1">
         <MarkdownRenderer content={mod.rawContent} />
       </div>
+
+      <ModuleNotes moduleId={mod.id} />
 
       {interactivePractices.length > 0 && (
         <section aria-labelledby="interactive-practice-heading" className="rounded-xl border border-[#107C10]/25 bg-card px-6 py-5 shadow-fluent-1">

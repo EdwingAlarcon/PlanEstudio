@@ -11,6 +11,7 @@ prerequisites:
   - "Lab 03 completado: Canvas App — Primera App"
   - "Lab 04 completado: Model-Driven App"
   - "Lab 05 completado: Power Automate — Aprobación"
+lastVerified: "2026-09"
 ---
 
 # Lab 61 — Capstone Maker: Sistema Interno de Gestión de Solicitudes

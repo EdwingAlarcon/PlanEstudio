@@ -5,6 +5,7 @@ level: "arquitecto"
 certification: "Arquitectura Power Platform"
 estimatedMinutes: 10
 slug: "seguridad-y-cumplimiento-enterprise"
+lastVerified: "2026-09"
 ---
 
 > **☁️ ¿Nunca usaste Azure Portal?** Lee primero [Fundamentos de Azure](/recursos/fundamentos-azure)

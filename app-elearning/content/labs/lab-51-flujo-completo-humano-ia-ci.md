@@ -11,6 +11,7 @@ prerequisites:
   - "Módulos 42-51 estudiados (nivel IA completo)"
   - "Acceso a un repositorio con pipeline de CI configurado (puede ser este mismo proyecto)"
   - "Recurso revisado: Rúbricas y Plantillas de Evaluación"
+lastVerified: "2026-09"
 ---
 
 # Lab 51 — Proyecto Integrador Nivel IA: Flujo Completo Humano → IA → CI → Aprobación

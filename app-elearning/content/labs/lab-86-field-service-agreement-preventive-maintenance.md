@@ -9,6 +9,7 @@ role: ["Consultor Funcional D365 CE", "Field Service Consultant"]
 prerequisites:
   - "Módulo 59 estudiado: Field Service End-to-End"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
+lastVerified: "2026-09"
 ---
 
 # Lab 86 — Field Service Agreement + Preventive Maintenance

@@ -6,6 +6,7 @@ certification: "PL-200 (retirado 31 ago 2026)"
 estimatedMinutes: 12
 practiceMinutes: 40
 slug: "canvas-apps-componentes-y-reutilizacion"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Construir una biblioteca de componentes reutilizables en Canvas Apps que elimine la duplicación de código, garantice consistencia visual y reduzca el tiempo de desarrollo en nuevas aplicaciones — practicando cada decisión de diseño de inmediato, con evidencia real de tu propio entorno.

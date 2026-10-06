@@ -5,6 +5,7 @@ level: "basico"
 certification: "PL-900"
 estimatedMinutes: 20
 slug: "power-apps-model-driven-apps-basadas-en-datos"
+lastVerified: "2026-09"
 ---
 *Duración: 1-2 semanas · Lectura: 8-10 min · Con práctica: 60-90 min (núcleo obligatorio); seguridad y BPF pueden completarse en una segunda sesión*
 

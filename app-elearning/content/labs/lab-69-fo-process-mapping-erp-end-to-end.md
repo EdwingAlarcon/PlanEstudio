@@ -8,6 +8,7 @@ certifications: ["Arquitectura Power Platform"]
 role: ["Functional Consultant", "Solution Architect"]
 prerequisites:
   - "Módulo 20 revisado: Dynamics 365 CE — Sales y Customer Service"
+lastVerified: "2026-09"
 ---
 
 # Lab 69 — F&O Process Mapping: Procesos ERP End-to-End

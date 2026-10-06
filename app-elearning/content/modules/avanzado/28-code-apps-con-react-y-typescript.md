@@ -6,6 +6,7 @@ certification: "PL-400"
 estimatedMinutes: 9
 practiceMinutes: 150
 slug: "code-apps-con-react-y-typescript"
+lastVerified: "2026-09"
 ---
 
 ### 🚧 Antes de comenzar: es el módulo con más exigencia de código de la ruta Developer

@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 20 estudiado: Dynamics 365 CE — Sales y Customer Service"
   - "Conocimiento de colas, SLA, entitlements y Knowledge Base"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 68 — Dynamics 365 Customer Service: Case-to-Resolution Avanzado

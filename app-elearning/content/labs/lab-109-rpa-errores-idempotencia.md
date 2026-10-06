@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 74 completado"
   - "Conocimientos básicos de estados y claves únicas"
 files: []
+lastVerified: "2026-09"
 ---
 
 # LAB-RPA-06 — Manejo de errores e idempotencia

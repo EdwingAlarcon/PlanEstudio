@@ -5,6 +5,7 @@ level: "rpa"
 certification: "Power Automate for desktop & RPA"
 estimatedMinutes: 25
 slug: "entorno-instalacion-arquitectura-pad"
+lastVerified: "2026-09"
 ---
 
 ## 🎯 Objetivo

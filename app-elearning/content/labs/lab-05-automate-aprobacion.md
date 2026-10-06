@@ -11,6 +11,7 @@ prerequisites:
   - "Lab 03 completado — Canvas App publicada (opcional pero recomendado)"
   - "Buzón de Outlook activo en el tenant"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 05 — Power Automate: Notificación y Aprobación de Solicitudes (SIT)

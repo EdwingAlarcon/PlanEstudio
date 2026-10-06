@@ -5,6 +5,7 @@ level: "intermedio"
 certification: "PL-200 (retirado 31 ago 2026)"
 estimatedMinutes: 10
 slug: "javascript-y-pcf-basico"
+lastVerified: "2026-09"
 ---
 ### 🚧 Antes de comenzar: requiere JavaScript básico
 

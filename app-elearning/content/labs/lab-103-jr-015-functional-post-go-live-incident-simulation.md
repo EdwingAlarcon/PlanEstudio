@@ -9,6 +9,7 @@ role: ["CRM Functional", "Functional Consultant", "Customer Service Specialist"]
 prerequisites:
   - "Lab 68 completado: Customer Service Case-to-Resolution"
   - "Lab 101 revisado (recomendado): CRM Functional Analyst Caso Integrado"
+lastVerified: "2026-09"
 ---
 
 # Lab 103 — JR-015: CRM Functional Post-Go-Live Incident Simulation

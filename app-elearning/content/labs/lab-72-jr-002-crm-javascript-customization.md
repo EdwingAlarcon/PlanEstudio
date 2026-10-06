@@ -9,6 +9,7 @@ role: ["Dynamics 365 CRM Developer", "Power Platform Developer"]
 prerequisites:
   - "Módulo 13 estudiado: JavaScript y Web Resources"
   - "Módulo 20 revisado: Dynamics 365 CE"
+lastVerified: "2026-09"
 ---
 
 # Lab 72 — JR-002: CRM JavaScript Customization

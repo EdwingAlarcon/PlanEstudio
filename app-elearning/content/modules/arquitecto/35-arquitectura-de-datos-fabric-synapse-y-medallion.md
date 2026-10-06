@@ -5,6 +5,7 @@ level: "arquitecto"
 certification: "Arquitectura Power Platform"
 estimatedMinutes: 10
 slug: "arquitectura-de-datos-fabric-synapse-y-medallion"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Diseñar arquitecturas de datos modernas usando Microsoft Fabric y Azure Synapse Analytics conectados con Dataverse y Power BI, implementando el patrón Medallion (Bronze→Silver→Gold) para crear una fuente única de verdad analítica para la organización.

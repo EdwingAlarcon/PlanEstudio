@@ -5,6 +5,7 @@ level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 8
 slug: "seguridad-secretos-y-compliance"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Prevenir la fuga de secretos y datos sensibles hacia prompts o logs de herramientas de IA, y aplicar la política de datos del tenant (residencia, GDPR) al usar estas herramientas sobre datos de Dataverse.

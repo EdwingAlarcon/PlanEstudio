@@ -11,6 +11,7 @@ prerequisites:
   - "Lab 68 completado (recomendado): Customer Service case-to-resolution"
   - "Acceso a un ambiente trial/demo de Dynamics 365 Customer Service con Digital messaging/Omnichannel habilitado"
   - "Sin ese ambiente, la parte ejecutable de este lab no aplica — ver Alcance de este lab"
+lastVerified: "2026-09"
 ---
 
 # Lab 83 — Contact Center Chat Channel Hands-On

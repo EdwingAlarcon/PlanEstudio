@@ -5,6 +5,7 @@ level: "d365"
 certification: "D365 Especialización Integration"
 estimatedMinutes: 14
 slug: "integracion-ce-fo-dual-write-dmf"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Diseñar una integración responsable entre Dynamics 365 Customer Engagement y Finance & Operations definiendo sistema dueño, patrón de integración, dirección de datos, seguridad, ALM y riesgos operativos, produciendo una matriz de ownership completa y un diagrama de flujo end-to-end defendibles frente a un arquitecto F&O real.

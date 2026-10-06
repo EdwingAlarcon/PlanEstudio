@@ -5,6 +5,7 @@ level: "d365"
 certification: "Finance & Operations awareness"
 estimatedMinutes: 13
 slug: "finance-operations-procesos-erp"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Nombrar y reconocer los procesos ERP estándar de Dynamics 365 Finance & Operations (order-to-cash, procure-to-pay, record-to-report, inventory-to-deliver, project-to-profit) y las opciones técnicas de integración con Dataverse (dual-write, Data Management Framework, virtual tables), para poder participar en una conversación de arquitectura F&O sin depender solo de "es un ERP" como respuesta.

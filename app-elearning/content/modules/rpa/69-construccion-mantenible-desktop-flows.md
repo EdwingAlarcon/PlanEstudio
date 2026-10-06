@@ -5,6 +5,7 @@ level: "rpa"
 certification: "Power Automate for desktop & RPA"
 estimatedMinutes: 18
 slug: "construccion-mantenible-desktop-flows"
+lastVerified: "2026-09"
 ---
 
 ## 🎯 Objetivo

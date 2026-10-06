@@ -10,6 +10,7 @@ prerequisites:
   - "Lab 02 completado — tablas sit_Solicitud y sit_Categoria con datos"
   - "Módulo 9 estudiado: Dataverse Avanzado"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 09 — Dataverse Avanzado: Business Process Flow, Rollup y Field Security (SIT)

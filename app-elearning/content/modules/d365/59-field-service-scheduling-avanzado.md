@@ -5,6 +5,7 @@ level: "d365"
 certification: "Dynamics 365 Field Service skill path"
 estimatedMinutes: 13
 slug: "field-service-scheduling-avanzado"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Profundizar en Field Service end-to-end: acuerdos de mantenimiento, generación de Work Orders, Incident Types, Schedule Board, Resource Scheduling Optimization, Field Service Mobile offline, consumo de inventario y cierre operativo con evidencia.

@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 20 estudiado: Dynamics 365 CE — Sales y Customer Service"
   - "Lab 09 completado: Dataverse Avanzado"
   - "Recurso revisado: Rúbricas y Plantillas de Evaluación"
+lastVerified: "2026-09"
 ---
 
 # Lab 66 — Dynamics 365 Sales: Proceso Comercial Lead-to-Cash

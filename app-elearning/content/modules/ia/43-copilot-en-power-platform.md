@@ -5,6 +5,7 @@ level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 14
 slug: "copilot-en-power-platform"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Usar las capacidades de Copilot integradas en Power Apps (Canvas, Model-Driven y páginas generativas), Power Automate y Copilot Studio para acelerar la construcción de soluciones, entendiendo qué gobierna cada una en materia de datos y permisos.

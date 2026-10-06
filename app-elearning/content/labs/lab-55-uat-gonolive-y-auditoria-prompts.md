@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 55 estudiado: IA para Análisis de Soluciones, Arquitectura y Consultoría Funcional D365"
   - "Módulo 49 estudiado: Seguridad, Secretos y Compliance en IA"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 55 — Generar UAT/Checklist de Go-Live con IA y Auditar Prompts por Seguridad

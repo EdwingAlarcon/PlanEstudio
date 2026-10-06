@@ -10,6 +10,7 @@ prerequisites:
   - "Lab 04 completado: Model-Driven App"
   - "Lab 09 completado: Dataverse Avanzado"
   - "Recurso revisado: Rúbricas y Plantillas de Evaluación"
+lastVerified: "2026-09"
 ---
 
 # Lab 62 — Capstone Consultor Funcional: Proyecto Funcional Completo

@@ -37,3 +37,7 @@ $RECYCLE.BIN/
 *.bak
 
 .vercel
+
+# Iconos PWA (referenciados por manifest.ts)
+!app-elearning/public/icon-192.png
+!app-elearning/public/icon-512.png

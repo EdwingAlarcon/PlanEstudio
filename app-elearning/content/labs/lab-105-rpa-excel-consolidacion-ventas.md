@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 70 completado"
   - "Carpeta local de práctica con archivos ficticios"
 files: []
+lastVerified: "2026-09"
 ---
 
 # LAB-RPA-02 — Automatización de Excel

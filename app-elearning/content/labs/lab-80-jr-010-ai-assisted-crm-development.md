@@ -10,6 +10,7 @@ prerequisites:
   - "Módulos 42-55 revisados: desarrollo asistido por IA"
   - "Módulo 13 o 23 revisado: JavaScript CRM o plugins"
   - "Ruta Job-Ready CRM Developer revisada"
+lastVerified: "2026-09"
 ---
 
 # Lab 80 — JR-010: AI-Assisted CRM Development

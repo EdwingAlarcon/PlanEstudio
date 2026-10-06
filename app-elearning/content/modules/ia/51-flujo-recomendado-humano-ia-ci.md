@@ -5,6 +5,7 @@ level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 10
 slug: "flujo-recomendado-humano-ia-ci"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Aplicar de punta a punta el flujo recomendado de desarrollo asistido por IA — humano diseña, IA implementa, CI valida, humano aprueba — sobre un caso realista, integrando lo aprendido en los módulos 42-50.

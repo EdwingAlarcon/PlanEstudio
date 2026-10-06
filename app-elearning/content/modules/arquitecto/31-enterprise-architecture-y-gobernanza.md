@@ -5,6 +5,7 @@ level: "arquitecto"
 certification: "Arquitectura Power Platform"
 estimatedMinutes: 9
 slug: "enterprise-architecture-y-gobernanza"
+lastVerified: "2026-09"
 ---
 > **📌 Primer módulo de Arquitecto.** Asume Básico, Intermedio y Avanzado ya completos — aquí el foco pasa de "construir una solución" a "gobernar muchas soluciones a la vez en una organización grande". Si algún término de gobernanza/framework se siente nuevo, no es porque te falte inteligencia — es la primera vez que el curso lo introduce.
 

@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 67 completado"
   - "Power Automate for desktop instalado o variante simulada documentada"
 files: []
+lastVerified: "2026-09"
 ---
 
 # LAB-RPA-01 — Primer desktop flow mantenible

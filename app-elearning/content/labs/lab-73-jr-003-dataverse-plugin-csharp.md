@@ -9,6 +9,7 @@ role: ["Dynamics 365 CRM Developer", "Power Platform Developer"]
 prerequisites:
   - "Módulo 23 estudiado: C# Plugins para Dataverse"
   - "Conocimiento básico de pipeline, tracing y registro de plugins"
+lastVerified: "2026-09"
 ---
 
 # Lab 73 — JR-003: Dataverse Plugin C#

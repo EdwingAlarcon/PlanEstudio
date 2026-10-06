@@ -6,6 +6,7 @@ certification: "PL-400"
 estimatedMinutes: 9
 practiceMinutes: 90
 slug: "power-pages-avanzado-y-azure-ad-b2c"
+lastVerified: "2026-09"
 ---
 
 ### 🚧 Nota de vigencia: Azure AD B2C ya no está disponible para clientes nuevos

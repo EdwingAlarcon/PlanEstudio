@@ -5,6 +5,7 @@ level: "d365"
 certification: "D365 CE avanzado + F&O awareness"
 estimatedMinutes: 12
 slug: "introduccion-dynamics-365-avanzado"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Entender por qué Dynamics 365 Sales, Customer Service, Contact Center, Customer Insights y Field Service no son productos aislados sino capas de una arquitectura enterprise sobre Dataverse, reconocer el mapa completo de este nivel transversal, y explicar el ciclo de negocio que conecta marketing, venta, servicio, operación de campo, ERP y fidelización.

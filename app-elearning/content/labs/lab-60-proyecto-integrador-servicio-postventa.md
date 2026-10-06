@@ -12,6 +12,7 @@ prerequisites:
   - "Lab 59 completado: Field Service — Work Order y UAT"
   - "Recurso revisado: Rúbricas y Plantillas de Evaluación"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 60 — Capstone Microsoft Business Applications: Servicio Postventa con Customer Insights, Field Service y F&O

@@ -5,6 +5,7 @@ level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 7
 slug: "vibe-coding-controlado"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Distinguir cuándo generar código sin especificación exhaustiva ("vibe coding") es aceptable en un contexto empresarial, y qué controles mínimos lo convierten en una práctica segura en lugar de un riesgo.

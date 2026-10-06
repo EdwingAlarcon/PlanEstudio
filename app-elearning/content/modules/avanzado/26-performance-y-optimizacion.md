@@ -6,6 +6,7 @@ certification: "PL-400"
 estimatedMinutes: 9
 practiceMinutes: 60
 slug: "performance-y-optimizacion"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Diagnosticar y resolver problemas de rendimiento en Canvas Apps, Power Automate, Dataverse y reportes Power BI usando herramientas nativas y mejores prácticas de optimización.

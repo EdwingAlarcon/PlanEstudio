@@ -9,6 +9,7 @@ role: ["Power Platform Developer", "Functional Consultant"]
 prerequisites:
   - "Módulo 4 estudiado: Power Apps Model-Driven"
   - "Módulo 9 estudiado: Dataverse avanzado y seguridad"
+lastVerified: "2026-09"
 ---
 
 # Lab 71 — JR-001: Model-Driven App Job Test

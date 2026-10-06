@@ -5,6 +5,7 @@ level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 12
 slug: "fundamentos-javascript-para-power-platform"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Aprender, desde cero, lo mínimo de JavaScript (variables, funciones, objetos, arrays, callbacks, promesas) necesario para entender el código de los módulos de JavaScript en formularios Model-Driven y de PCF con TypeScript — sin asumir experiencia previa de programación.

@@ -5,6 +5,7 @@ level: "basico"
 certification: "PL-900"
 estimatedMinutes: 25
 slug: "power-automate-automatizacion-basica"
+lastVerified: "2026-09"
 ---
 *Duración: 2-3 semanas · Lectura: 10-12 min · Con práctica: 75-120 min (núcleo obligatorio); RPA y error handling avanzado pueden quedar para una segunda sesión*
 

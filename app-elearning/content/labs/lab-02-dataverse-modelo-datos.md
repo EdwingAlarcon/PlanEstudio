@@ -10,6 +10,7 @@ prerequisites:
   - "Ambiente Developer activo en make.powerapps.com"
   - "Módulo 1 completado — entorno configurado"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 02 — Dataverse: Modelo de Datos para un Sistema de Solicitudes Internas

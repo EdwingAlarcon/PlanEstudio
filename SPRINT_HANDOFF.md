@@ -1,5 +1,51 @@
 # PlanEstudio — Estado de sprints post-auditoría (handoff)
 
+## Mantenimiento vigente — 2026-10-01
+
+Se cerraron los tres ítems que seguían abiertos, con el alcance que eligió el usuario: (1) **MkDocs**: se retiró del CI
+el job `mkdocs` (validación `mkdocs build --strict`) y `deploy` ya no depende de él; MkDocs queda **congelado**:
+`mkdocs.yml`, `requirements.txt` y `docs/` se conservan porque `docs/` sigue siendo fuente de recursos y del banco de
+preguntas, pero ya nada lo valida ni lo despliega. (2) **E2E "§63"**: sin el prompt original, se auditaron rutas y
+funciones contra los specs existentes y se cubrieron los huecos reales en `e2e/coverage-routes-labs.spec.ts`
+(9 tests: `/rutas`, `/rutas/[slug]` y su 404, `/mapa`, panel "Antes de empezar", gate de prerrequisitos de LAB-111 en
+modo guiado y libre, soluciones de referencia de capstones, insignia "Verificado", manifest PWA y `sw.js`).
+El "§63" original queda **cerrado por sustitución**, no por cumplimiento literal de una lista que no se tiene.
+(3) **Plantillas de repositorio**: recurso `docs/Recursos/PLANTILLAS_REPOSITORIO_POR_PROYECTO.md`
+(`/recursos/plantillas-repositorio-por-proyecto`): estructura recomendada para PCF, plugin C#, solución ALM, Power
+Pages, Code App y RPA; es documentación, **no** repositorios descargables. Recursos: 38 páginas.
+Dato útil: el modo de navegación por defecto es **guiado**; para probar el modo libre hay que activarlo desde `/mi-ruta#roles`.
+
+## Sesión de sincronización y validación — 2026-10-01
+
+Sin cambios de producto. Se sincronizó el local con `origin/master` (4 commits hechos desde otra
+sesión: `cc6fd426`, `68dae2db`, `8b07458a`, `d91ab4f2`) y se borró la rama remota vacía
+`claude/friendly-ride-imizzu` (sin commits propios). Validación sobre `d91ab4f2`: `npm run verify`
+completo (464/464 tests, cobertura 91.92% líneas / 81.28% ramas, build ok) y `npm run e2e`: 91/92.
+El único fallo era `smoke.spec.ts` "barra de progreso sigue el scroll del contenedor principal":
+intermitente (2 de 3 repeticiones), carrera de hidratación del test (el evento `scroll` se disparaba
+antes de que `ReadingProgress` enganchara su listener; `aria-valuenow="0"` ya es cierto antes de
+hidratar). Corregido en `91ce2c74` reenviando el scroll dentro del `expect.poll`; 6/6 repeticiones
+pasan. No se re-corrió la suite E2E completa tras el fix; el CI (run `36883695981`) es la confirmación.
+Los tres ítems que seguían abiertos se cerraron después, ver la sección 2026-10-01 de arriba.
+
+## Mantenimiento vigente — 2026-09-30
+
+Mejoras de producto (sin ampliar contenido): (1) **backup completo** en `/progreso`
+(`src/lib/progress-backup.ts` + `FullBackupPanel`): un JSON versionado con los 6 stores persistidos
+(`plan-estudio-progress`, `plan-estudio-onboarding` y las 4 claves `planestudio.*`); los stores siguen
+independientes, solo se leen/escriben sus payloads crudos y la página recarga para rehidratar. Merge
+une solo el progreso académico; el resto solo se rellena si está vacío (sus paneles propios hacen merge fino).
+(2) **`lastVerified: "AAAA-MM"`** opcional en frontmatter de módulos y labs (sembrado `2026-09` en los 149
+archivos por la auditoría de vigencia); badge en el módulo y advertencia (no error) en `validate:content`
+para elementos sin verificar o con más de 6 meses (`content-freshness.ts`). (3) **Notas por módulo**
+(`moduleNotes` en el store académico) y tarjeta **Continuar** en el home (`lastVisited` ya existía pero
+nunca se escribía). (4) **PWA**: `manifest.ts`, `public/sw.js` (páginas network-first, `/_next/static`
+cache-first; solo se registra en producción) e iconos; subir `CACHE_VERSION` en `sw.js` invalida todo.
+(5) CI: E2E en 3 shards. No se movió el banco de preguntas ni se retiró MkDocs (decisión pendiente).
+Validación: `npm run verify` (464 tests) y E2E nuevo `e2e/progress-backup.spec.ts` (3/3); flujo probado en
+Chromium sobre `out/` (offline, backup ida y vuelta). Sync entre dispositivos y analítica NO se implementaron
+(requieren cuentas/consentimiento).
+
 ## Mantenimiento vigente — 2026-09-07
 
 Corrección de navegación guiada: los prerrequisitos explícitos de labs admiten módulo individual,

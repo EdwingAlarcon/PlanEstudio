@@ -5,6 +5,7 @@ level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 8
 slug: "tests-cicd-y-guardrails"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Exigir tests automatizados y gates de CI/CD para cualquier código generado con asistencia de IA, usando linters, type-checkers y feature flags como red de seguridad antes de llegar a producción.

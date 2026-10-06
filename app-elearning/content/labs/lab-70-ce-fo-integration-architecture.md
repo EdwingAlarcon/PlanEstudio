@@ -9,6 +9,7 @@ role: ["Solution Architect"]
 prerequisites:
   - "Módulo 34 revisado: Arquitectura de Datos e Integración"
   - "Lab 69 completado: F&O Process Mapping — Procesos ERP End-to-End (recomendado)"
+lastVerified: "2026-09"
 ---
 
 # Lab 70 — CE + F&O Integration Architecture: Ownership de Datos y Dual-Write Técnico

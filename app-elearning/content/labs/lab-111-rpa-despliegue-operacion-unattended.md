@@ -10,6 +10,7 @@ prerequisites:
   - "Módulos 68 y 75 completados"
   - "Ambiente DEV/TEST o simulación documentada"
 files: []
+lastVerified: "2026-09"
 ---
 
 # LAB-RPA-08 — Despliegue y operación unattended

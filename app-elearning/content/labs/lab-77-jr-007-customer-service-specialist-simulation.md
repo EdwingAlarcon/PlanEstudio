@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 20 estudiado: Dynamics 365 CE Sales y Customer Service"
   - "Lab 68 revisado: Customer Service Case-to-Resolution"
   - "Ruta Job-Ready CRM Functional revisada"
+lastVerified: "2026-09"
 ---
 
 # Lab 77 — JR-007: Customer Service Specialist Job Simulation

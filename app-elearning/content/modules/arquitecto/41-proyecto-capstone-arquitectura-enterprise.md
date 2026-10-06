@@ -5,6 +5,7 @@ level: "arquitecto"
 certification: "Arquitectura Power Platform"
 estimatedMinutes: 13
 slug: "proyecto-capstone-arquitectura-enterprise"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Diseñar e implementar una solución enterprise completa de inicio a fin, aplicando todos los conceptos del Nivel 4: gobernanza, multi-ambiente, integraciones Azure, AI, datos con Fabric, seguridad Zero Trust, y comunicando la arquitectura a stakeholders ejecutivos como lo haría un Solution Architect certificado.

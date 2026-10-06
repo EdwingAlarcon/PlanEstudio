@@ -5,6 +5,7 @@ level: "avanzado"
 certification: "PL-400"
 estimatedMinutes: 9
 slug: "copilot-studio-avanzado"
+lastVerified: "2026-09"
 ---
 ### 🎯 Objetivo
 Implementar agentes conversacionales de producción con SSO integrado a Microsoft Entra ID, orquestación multi-agente, respuestas generativas con grounding en documentos corporativos, integración con Knowledge Base de D365, y métricas de calidad.

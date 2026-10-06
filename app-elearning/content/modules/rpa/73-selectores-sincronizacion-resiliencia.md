@@ -5,6 +5,7 @@ level: "rpa"
 certification: "Power Automate for desktop & RPA"
 estimatedMinutes: 20
 slug: "selectores-sincronizacion-resiliencia"
+lastVerified: "2026-09"
 ---
 
 ## 🎯 Objetivo

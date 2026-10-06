@@ -9,6 +9,7 @@ role: ["Consultor Funcional D365 CE", "Sales Operations Analyst"]
 prerequisites:
   - "Módulo 61 estudiado: Dynamics 365 Sales Avanzado"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
+lastVerified: "2026-09"
 ---
 
 # Lab 81 — Sales Forecasting & Pipeline Review

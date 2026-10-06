@@ -5,6 +5,7 @@ level: "rpa"
 certification: "Power Automate for desktop & RPA"
 estimatedMinutes: 24
 slug: "alm-operacion-gobierno-soporte-rpa"
+lastVerified: "2026-09"
 ---
 
 ## 🎯 Objetivo

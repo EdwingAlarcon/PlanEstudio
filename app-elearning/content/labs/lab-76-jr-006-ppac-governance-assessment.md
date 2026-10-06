@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 31 estudiado: Enterprise Architecture y Gobernanza"
   - "Módulo 32 estudiado: CoE y gobierno"
   - "Ruta Job-Ready Admin/Governance revisada"
+lastVerified: "2026-09"
 ---
 
 # Lab 76 — JR-006: PPAC Governance Assessment

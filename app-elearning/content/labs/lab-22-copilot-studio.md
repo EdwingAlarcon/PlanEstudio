@@ -12,6 +12,7 @@ prerequisites:
   - "App Registration creada (puede reutilizar la del Lab 19) o nueva"
   - "Módulo 22 estudiado: Copilot Studio Avanzado"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 22 — Copilot Studio: Agente de Soporte TI con SSO, Generative Answers y Adaptive Cards

@@ -11,6 +11,7 @@ prerequisites:
   - "Node.js LTS y Git instalados"
   - "Módulo 52 estudiado: Power Platform CLI y Conexión Segura al Tenant"
 files: []
+lastVerified: "2026-09"
 ---
 
 # Lab 52 — Power Platform CLI: Configuración y Conexión Segura al Tenant

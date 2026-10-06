@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 71 completado"
   - "Portal de práctica o HTML local controlado"
 files: []
+lastVerified: "2026-09"
 ---
 
 # LAB-RPA-03 — Automatización web

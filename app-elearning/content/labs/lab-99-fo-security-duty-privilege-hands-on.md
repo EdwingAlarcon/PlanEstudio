@@ -10,6 +10,7 @@ prerequisites:
   - "Lab 93 completado: F&O Finance Setup Walkthrough"
   - "Módulo 36 estudiado: Seguridad y Cumplimiento Enterprise (modelo de seguridad Dataverse, para comparar)"
   - "Acceso a un ambiente trial/demo de Dynamics 365 Finance & Supply Chain Management con permisos de administrador de seguridad"
+lastVerified: "2026-09"
 ---
 
 # Lab 99 — F&O Security — Duty/Privilege Hands-On

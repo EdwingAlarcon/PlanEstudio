@@ -11,6 +11,7 @@ prerequisites:
   - "Lab 86 completado o revisado: Field Service Agreement + Preventive Maintenance"
   - "Lab 87 completado o revisado: Field Service Mobile Offline + Work Order Lifecycle"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
+lastVerified: "2026-09"
 ---
 
 # Lab 113 — Capstone Field Service — Operación de Campo End-to-End
