@@ -191,9 +191,9 @@ describe("getResourceBySlug", () => {
 // ─── getAllResourcePages ───────────────────────────────────────────────────────
 
 describe("getAllResourcePages", () => {
-  it("returns 39 resource pages (incluye recursos RPA, portabilidad, guías de herramientas, prácticas interactivas, repaso espaciado, los puentes de ruta cero/fundamentos CRM/tipos de práctica/C#-.NET/TypeScript-React/JS-TS-React para PCF (Módulo 13)/entornos y trials/Azure, soluciones de referencia de capstones, roadmap de auditoría tenant-real y estructura de repositorio por tipo de proyecto; no incluye 'simulador', que quedó retirado del mapeo de la app Next.js por ser un stub sin equivalente funcional — el simulador real vive en /simulador)", () => {
+  it("returns 40 resource pages (incluye recursos RPA, portabilidad, guías de herramientas, prácticas interactivas, repaso espaciado, los puentes de ruta cero/fundamentos CRM/tipos de práctica/C#-.NET/TypeScript-React/JS-TS-React para PCF (Módulo 13)/entornos y trials/Azure, soluciones de referencia de capstones, roadmap de auditoría tenant-real, estructura de repositorio por tipo de proyecto, y casos reales por industria (portado de docs/Anexos para cerrar el gap de la ruta Consultor Funcional); no incluye 'simulador', que quedó retirado del mapeo de la app Next.js por ser un stub sin equivalente funcional — el simulador real vive en /simulador)", () => {
     const pages = getAllResourcePages();
-    expect(pages).toHaveLength(39);
+    expect(pages).toHaveLength(40);
   });
 
   it("includes checklist, glosario, certificaciones, lenguajes-programacion, prompts-ia, rubricas-plantillas, matriz-competencias, matriz-skills-laborales, job-ready-crm-developer, job-ready-crm-functional, job-ready-data-migration-legacy, job-ready-interview-readiness, job-ready-admin-governance, portafolio-profesional y roadmap-especializacion-avanzada", () => {

@@ -107,9 +107,12 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 **Invariantes que no debes romper:**
 - Conteos vigentes: **76 módulos, 75 labs, 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
   33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 24 prácticas interactivas
-  y 39 páginas de recursos** (prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
+  y 40 páginas de recursos** (prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
   Doing de Módulos 11, 10 y 13 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de
-  Módulo 13; labs subió de 73 a 75 y simulaciones de 2 a 3 con la auditoría integral 2026-10-06 — Lab 114
+  Módulo 13 y a 40 con "Casos reales por industria" (`Anexos/CASOS_REALES_NEGOCIO.md` portado a la app) para
+  cerrar el gap de la ruta Consultor Funcional (status pasó de "Parcial" a "Disponible" el 2026-10-06,
+  agregando los Módulos 20/61/62 a `professional-routes.ts` y un reto de Fit-Gap por industria en LAB-62);
+  labs subió de 73 a 75 y simulaciones de 2 a 3 con la auditoría integral 2026-10-06 — Lab 114
   monitoreo con Application Insights, Lab 115 disaster recovery RTO/RPO, SIM-002 ceremonia ágil simulada,
   y extensión de incidente post-launch/presentación en LAB-63 — ver `AUDITORIA_INTEGRAL_PLANESTUDIO_2026.md`).
   No mezclar estos conteos entre sí.

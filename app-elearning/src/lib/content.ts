@@ -113,6 +113,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "soluciones-referencia-capstones": "Recursos/SOLUCIONES_REFERENCIA_CAPSTONES.md",
   "roadmap-auditoria-tenant-real": "Recursos/ROADMAP_AUDITORIA_TENANT_REAL.md",
   "plantillas-repositorio-por-proyecto": "Recursos/PLANTILLAS_REPOSITORIO_POR_PROYECTO.md",
+  "casos-reales-por-industria": "Anexos/CASOS_REALES_NEGOCIO.md",
 };
 
 const LEVEL_META: Record<LevelId, { title: string; description: string; certification: string }> = {

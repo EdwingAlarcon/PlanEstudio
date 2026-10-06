@@ -205,14 +205,32 @@ mensaje real al stakeholder, no una nota técnica interna:
 Documenta cómo cambiaría tu recomendación si el presupuesto se redujera a la mitad después de
 completar el Fit-Gap: ¿qué requerimientos degradarías primero y por qué?
 
+## Reto adicional — Fit-Gap adaptado a otra industria
+
+El escenario de SIT Consulting es de ventas B2B genérico. Elige UN caso del recurso
+[Casos reales por industria](/recursos/casos-reales-por-industria) de una industria distinta a la
+de este capstone (ej. Manufactura, Retail, Salud, Servicios Profesionales o Gobierno) y responde:
+
+- ¿Qué entidades estándar de Dynamics 365 (Case, Entitlement, Agreement, Asset, Work Order, u
+  otra según la industria) cambiarían tu matriz Fit-Gap frente a la versión Sales de este capstone?
+- ¿Qué requerimiento que en el caso de Sales era claramente "Fit" (ya cubierto por lo estándar) se
+  vuelve "Gap" en esa industria, y por qué el cambio de contexto lo hace distinto?
+- ¿Qué pregunta de discovery harías en esa industria que no tendría sentido preguntar en un
+  proyecto de ventas B2B genérico?
+
+No se espera que repitas el capstone completo para la nueva industria — es un ejercicio de
+transferencia de criterio, no un segundo proyecto.
+
 ## Módulos relacionados
 
 - Módulo 15 — Copilot Studio: Introducción (contexto de automatización conversacional)
 - Módulo 16 — Seguridad y Administración de Soluciones
 - Módulo 17 — Proyecto Integrador Nivel 2
 - Módulo 20 — Dynamics 365 CE — Sales y Customer Service (entidades Opportunity/Quote/BPF)
+- Módulos 61-62 — Dynamics 365 Sales/Customer Service Avanzado (profundización funcional D365 CE)
 - Lab 04, Lab 09, Lab 66 (Sales Lead-to-Cash, como referencia de configuración estándar)
 - Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)
+- Recurso — Casos reales por industria (`/recursos/casos-reales-por-industria`)
 
 ## Competencias desarrolladas
 
