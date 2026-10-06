@@ -14,7 +14,7 @@ describe("interactive practice bank", () => {
   it("keeps the pilot intentionally small and covers all engines", () => {
     const practices = getAllInteractivePractices();
     expect(practices.length).toBeGreaterThanOrEqual(12);
-    expect(practices.length).toBeLessThanOrEqual(17);
+    expect(practices.length).toBeLessThanOrEqual(20);
     for (const type of INTERACTIVE_PRACTICE_TYPES) {
       expect(practices.some((practice) => practice.type === type)).toBe(true);
     }

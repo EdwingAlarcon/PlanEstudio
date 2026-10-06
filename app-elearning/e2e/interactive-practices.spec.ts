@@ -15,9 +15,8 @@ test.describe("Interactive Practice Engine", () => {
   test("catalogo, filtros y busqueda global exponen practicas interactivas", async ({ page }) => {
     await page.goto("/practica");
     await expect(page.getByRole("heading", { name: "Práctica interactiva" })).toBeVisible();
-    // Scoped to #main-content: the sidebar's Nivel IA progress badge also reads "0/15"
-    // now that IA has 15 modules, coincidentally matching the interactive-practices total.
-    await expect(page.locator("#main-content").getByText("0/15")).toBeVisible();
+    // Scoped to #main-content to avoid the sidebar's own progress badges.
+    await expect(page.locator("#main-content").getByText("0/20")).toBeVisible();
     await expect(page.locator("select").nth(0)).toBeEnabled();
     await page.locator("select").nth(1).selectOption("query-playground");
     await expect(page.locator("#exercise-heading")).toContainText("FetchXML básico");
@@ -35,7 +34,7 @@ test.describe("Interactive Practice Engine", () => {
     await expect(page.locator("#exercise-heading")).toContainText("Elegir trigger correcto");
     await page.locator("select").nth(1).selectOption("flow-builder");
     await expect(page.locator("#exercise-heading")).toContainText("Construir aprobación por monto");
-    await page.locator("select").nth(2).selectOption("advanced");
+    await page.locator("select").nth(2).selectOption("starter");
     await expect(page.getByRole("heading", { name: "No encontramos prácticas con estos filtros" }).first()).toBeVisible();
     await page.getByRole("button", { name: "Limpiar filtros" }).first().click();
     await expect(page.locator("#exercise-heading")).toContainText("Relación Cliente/Pedidos");
@@ -120,15 +119,42 @@ test.describe("Interactive Practice Engine", () => {
     await expect(page.getByText("Contoso Norte")).toBeVisible();
   });
 
-  test("debug scenario registra pistas, solucion y requiere refuerzo", async ({ page }) => {
+  test("debug scenario exige un nuevo intento antes de cada pista y bloquea la solucion hasta agotarlas", async ({ page }) => {
     await page.goto("/practica/ip-trb-001-flow-falla-null");
-    await page.getByText("Pista 1").click();
-    await page.getByRole("button", { name: "Ver solución" }).click();
+    const fix = page.getByLabel("Escribe la corrección.");
+    const solutionButton = page.getByRole("button", { name: "Ver solución" });
+
+    // Antes de cualquier intento, ninguna pista es abrible y la solución está deshabilitada.
+    await expect(page.getByText(/Pista 1 bloqueada/)).toBeVisible();
+    await expect(solutionButton).toBeDisabled();
+
+    await fix.fill("intento 1, todavia incorrecto");
+    await page.getByRole("button", { name: /Validar/ }).click();
+    await page.getByText("Pista 1", { exact: true }).click();
+    await expect(page.getByText(/Pista 2 bloqueada/)).toBeVisible();
+    await expect(solutionButton).toBeDisabled();
+
+    await fix.fill("intento 2, todavia incorrecto");
+    await page.getByRole("button", { name: /Validar/ }).click();
+    await page.getByText("Pista 2", { exact: true }).click();
+    await expect(page.getByText(/Pista 3 bloqueada/)).toBeVisible();
+    await expect(solutionButton).toBeDisabled();
+
+    await fix.fill("intento 3, todavia incorrecto");
+    await page.getByRole("button", { name: /Validar/ }).click();
+    await page.getByText("Pista 3", { exact: true }).click();
+
+    // Recién ahora, tras las 3 pistas, "Ver solución" queda disponible como último recurso.
+    await expect(solutionButton).toBeEnabled();
+    await solutionButton.click();
     await expect(page.getByText("Solución de referencia")).toBeVisible();
-    await page.getByLabel("Escribe la corrección.").fill("Usar coalesce, validar null y condition previa para amount empty.");
+
+    await fix.fill("Usar coalesce, validar null y condition previa para amount empty.");
     await page.getByRole("button", { name: /Validar/ }).click();
     await expect(page.getByText("Correcto", { exact: true })).toBeVisible();
-    await expect(page.evaluate(() => window.localStorage.getItem("planestudio.interactive-practice.v1"))).resolves.toContain("solutionRevealed");
+    const stored = await page.evaluate(() => window.localStorage.getItem("planestudio.interactive-practice.v1"));
+    expect(stored).toContain("solutionRevealed");
+    expect(stored).toContain('"hintsUsed":["h1","h2","h3"]');
   });
 
   test("modulos, labs, mi ruta y progreso enlazan el nuevo motor", async ({ page }) => {

@@ -3,197 +3,146 @@ moduleId: 10
 title: "Canvas Apps — Componentes y Reutilización"
 level: "intermedio"
 certification: "PL-200 (retirado 31 ago 2026)"
-estimatedMinutes: 8
+estimatedMinutes: 12
+practiceMinutes: 40
 slug: "canvas-apps-componentes-y-reutilizacion"
 ---
 ### 🎯 Objetivo
-Construir una biblioteca de componentes reutilizables en Canvas Apps que elimine la duplicación de código, garantice consistencia visual y reduzca el tiempo de desarrollo en nuevas aplicaciones del 40% o más.
+Construir una biblioteca de componentes reutilizables en Canvas Apps que elimine la duplicación de código, garantice consistencia visual y reduzca el tiempo de desarrollo en nuevas aplicaciones — practicando cada decisión de diseño de inmediato, con evidencia real de tu propio entorno.
 
-### 📖 Conceptos Clave
-- **Component Library:** contenedor especial en Power Apps que almacena componentes Canvas reutilizables de forma independiente de cualquier aplicación. Se publica por separado y puede ser importada por múltiples apps. Cuando se actualiza la librería y se publica, todas las apps que la usan pueden aceptar la actualización con un solo clic (sin necesidad de editar cada app). Una librería puede contener N componentes. Permite estandarizar UI a nivel organizacional. Ejemplo: librería `SIT Component Library` con componentes `cmpHeader`, `cmpStatCard`, `cmpSearchBox` usados en 15 aplicaciones del banco.
+> **Cómo está organizado este módulo (piloto — mismo patrón del Módulo 11, aplicado a una interfaz visual en vez de un flujo):** este módulo prueba si "aprender haciendo" también funciona cuando la actividad principal ocurre en Power Apps Studio, no en un editor de lógica. Vas a **decidir** el contrato de un componente antes de construirlo, vas a **construir** uno real en tu tenant, vas a **diagnosticar** un síntoma de publicación antes de ver la causa, y vas a cerrar con un **reto de transferencia** que cambia el tipo de dato que recibe el componente.
+>
+> Necesitas: una cuenta Microsoft 365 con licencia de Power Apps (el nivel gratuito/de prueba alcanza — Component Library no requiere premium) y acceso a make.powerapps.com. No necesitas Dataverse para este módulo; las colecciones en memoria son suficientes.
 
-- **Custom Component:** control Canvas que encapsula un conjunto de controles, lógica y propiedades en una unidad reutilizable con una interfaz definida (inputs/outputs). Se comporta como una caja negra: el desarrollador de la app solo interactúa con sus propiedades, sin ver la implementación interna. Soportan propiedades de Behavior (funciones que el padre puede llamar). Ejemplo: `cmpHeader` que expone `TituloApp`, `ColorFondo`, `MostrarBtnVolver` como propiedades de entrada.
+---
 
-- **Input Properties:** propiedades de entrada del componente que actúan como parámetros de configuración que recibe desde la app padre. Se definen con un tipo (Texto, Número, Color, Boolean, Registro, Tabla) y un valor por defecto. El componente las lee pero no las puede modificar directamente (son de solo lectura dentro del componente). Ejemplo: `cmpStatCard.Titulo = "Total Solicitudes"` configura el texto visible de la tarjeta desde la app padre.
+## 🧩 Microlección 1 — Component Library y Custom Component
 
-- **Output Properties / Custom Properties:** propiedades que el componente expone hacia afuera para que la app padre pueda leer valores calculados o resultados del componente. Son de tipo solo salida (el componente las establece, el padre las lee). Cruciales para componentes de entrada de usuario como buscadores o formularios embebidos. Ejemplo: `cmpSearchBox.TextoBusqueda` expone el texto actual del buscador para que la gallery en la app padre filtre sus items.
+**¿Qué vas a aprender?** Qué es una biblioteca de componentes y por qué encapsular UI reutilizable en una "caja negra" con propiedades definidas, en vez de copiar y pegar controles entre apps.
 
-- **OnReset behavior:** propiedad de comportamiento especial de los componentes que define qué ocurre cuando el padre ejecuta `Reset(nombreComponente)`. Permite que el componente reinicie su estado interno (variables locales, TextInputs) sin necesidad de que el padre conozca los detalles internos. Útil para formularios reutilizables que deben limpiarse después de guardar.
+**¿Por qué existe esto?** Si 15 apps tienen su propio header con su propio color y estilo, un cambio de marca significa editar 15 apps. Una **Component Library** centraliza el diseño: se publica una vez, y cada app que la usa puede aceptar la actualización con un clic — sin copiar nada de nuevo.
 
-- **Component Lifecycle:** ciclo que va desde la creación del componente en la librería, la publicación de la librería, la importación en las apps consumidoras, y la gestión de actualizaciones. Al publicar una nueva versión de la librería, las apps no se actualizan automáticamente — el desarrollador de cada app debe aceptar la actualización manualmente. Esto previene cambios disruptivos no deseados en apps en producción. Importante: siempre documentar breaking changes antes de publicar.
+**Ejemplo pequeño:** una librería `SIT Component Library` con un componente `cmpHeader` que expone `TituloApp` (Texto) y `ColorFondo` (Color) como Input Properties — la app padre configura esos valores, el componente decide cómo dibujarlos.
 
-- **Named Formulas:** expresiones Power Fx declaradas en la propiedad `App.Formulas` (no en `App.OnStart`) que se evalúan de forma lazy (solo cuando se usan) y se recalculan automáticamente cuando sus dependencias cambian. A diferencia de variables en `OnStart` que se calculan una vez al inicio, las Named Formulas son reactivas. Permiten definir cálculos globales sin código imperativo. Ejemplo: `TotalSolicitudes = CountRows(colSolicitudes)` se recalcula automáticamente cada vez que `colSolicitudes` cambia.
+**Ahora haz algo — micropráctica (6 min):** antes de construir nada, resuelve esta decisión de diseño con feedback inmediato → **[Elegir el tipo de Input/Output Property](/practica/ip-app-004-tipo-de-property-correcto)**. Te da dos componentes reales de este módulo (`cmpStatCard`, `cmpSearchBox`) y te pide decidir qué tipo de propiedad — y en qué dirección, Input u Output — usar para cada dato.
 
-- **With():** función Power Fx que crea un scope local con variables nombradas para evitar repetir expresiones complejas y mejorar la legibilidad. Funciona como un "let" local: `With({precioConIVA: precio * 1.19, descuento: precio * 0.05}, precioConIVA - descuento)`. Diferencia vs variables de contexto: With es una expresión (retorna un valor), no una instrucción imperativa. Ideal para cálculos intermedios dentro de una fórmula.
+**Práctica real en tu entorno (10 min):** crea la Component Library y el componente `cmpHeader` descrito arriba.
+1. make.powerapps.com → Aplicaciones → Bibliotecas de componentes → Nueva biblioteca → nómbrala `SIT Component Library`.
+2. Nuevo componente → `cmpHeader`, con Input Properties `TituloApp` (Texto, default "Mi Aplicación"), `ColorFondo` (Color) y `MostrarBtnVolver` (Boolean, default false).
+3. Agrega un Label cuyo `Text` sea `cmpHeader.TituloApp` y un ícono `chevronLeft` cuyo `Visible` sea `cmpHeader.MostrarBtnVolver`.
+4. Guarda y **publica** la librería (Guardar → Publicar) — sin este paso, ninguna app puede consumirla todavía.
 
-- **Delegation (Delegación):** mecanismo por el cual Power Apps transfiere el procesamiento de una consulta al origen de datos (Dataverse, SharePoint) en lugar de traer todos los registros al cliente. Una operación es "delegable" cuando el conector soporta ejecutarla en el servidor. Si no es delegable, Power Apps trae hasta 500 (o 2000) registros y aplica el filtro localmente, perdiendo datos. Ejemplo delegable: `Filter(Proyectos, sit_estado = "En Curso")` en Dataverse. No delegable en Sharepoint: `Filter(lista, StartsWith(Nombre, txtBusqueda.Text))`. Siempre revisar las advertencias de delegación (triángulo amarillo) en el editor de fórmulas.
+**Evidencia a reportar (el dato exacto que viste, no un "sí/no"):**
 
-- **Lazy Loading:** técnica de arquitectura en Canvas Apps para reducir el tiempo de carga inicial cargando datos solo cuando la pantalla que los necesita es navegada. Se implementa cargando colecciones en el evento `OnVisible` de cada pantalla en lugar de todas en `App.OnStart`. Combinar con Named Formulas para cálculos derivados. Impacto típico: reducción del tiempo de carga inicial de 8-15 segundos a 2-3 segundos en apps con múltiples fuentes de datos.
+| Campo | Tu valor |
+|---|---|
+| Nombre de la Component Library | ___ |
+| Nombre del componente y sus 3 Input Properties (nombre + tipo de cada una) | ___ |
+| ¿La librería quedó en estado "Publicada" o "Borrador"? (revisa el indicador en el listado de bibliotecas) | ___ |
 
-### 👨‍💻 Actividades Prácticas Paso a Paso
+---
 
-#### Actividad 10.1: Crear Component Library
-1. make.powerapps.com → Aplicaciones → Bibliotecas de componentes → Nueva biblioteca
-2. Nombre: `SIT Component Library`
-3. Se abre el editor de Canvas con panel de componentes a la izquierda
+## 🧩 Microlección 2 — Output Properties y el contrato del componente
 
-#### Actividad 10.2: Componente Header Universal
-1. En la biblioteca → Nuevo componente → Nombre: `cmpHeader`
-2. Dimensiones: Width=App.Width, Height=60
-3. Agregar propiedades de entrada:
-    - `TituloApp` (Texto, default: "Mi Aplicación")
-    - `ColorFondo` (Color, default: RGBA(0,120,212,1))
-    - `ColorTexto` (Color, default: RGBA(255,255,255,1))
-    - `MostrarBtnVolver` (Boolean, default: false)
+**¿Qué vas a aprender?** Cómo un componente expone hacia afuera un valor que él mismo calcula o captura, para que la app padre pueda leerlo.
 
-4. Insertar Rectangle:
-   ```
-   Rectangle1.Fill: cmpHeader.ColorFondo
-   Rectangle1.Width: Parent.Width
-   Rectangle1.Height: Parent.Height
-   ```
+**¿Por qué existe esto?** Un Input Property es de solo lectura dentro del componente — no sirve para exponer algo que el componente calcula internamente (como el texto que un usuario está escribiendo en un buscador con debounce). Para eso existen las **Output Properties** (Custom Properties de tipo salida): el componente las establece, el padre las lee.
 
-5. Insertar Label para el título:
-   ```
-   lblTitulo.Text: cmpHeader.TituloApp
-   lblTitulo.Color: cmpHeader.ColorTexto
-   lblTitulo.Size: 18
-   lblTitulo.FontWeight: FontWeight.Bold
-   lblTitulo.X: If(cmpHeader.MostrarBtnVolver, 60, 20)
-   ```
+**Ejemplo pequeño:** `cmpSearchBox` tiene un Input Property `Placeholder` (lo configura el padre) y un Output Property `TextoBusqueda` (lo calcula el propio componente mientras el usuario escribe, con un Timer de debounce de 500ms).
 
-6. Insertar Icon chevronLeft (visible condicionalmente):
-   ```
-   icoVolver.Visible: cmpHeader.MostrarBtnVolver
-   icoVolver.Color: cmpHeader.ColorTexto
-   icoVolver.OnSelect: Back()
-   ```
+**🏗️ Reto de construcción (sin pasos, tenant real):** construye `cmpSearchBox` completo. No te damos la secuencia exacta de propiedades del Timer esta vez — solo el requerimiento.
 
-#### Actividad 10.3: Componente Card de Estadística
-1. Nuevo componente → `cmpStatCard`
-2. Dimensiones: Width=200, Height=100
-3. Propiedades de entrada:
-    - `Titulo` (Texto, default: "Métrica")
-    - `Valor` (Número, default: 0)
-    - `Icono` (Texto, default: "calendar") — nombre del ícono de Fluent
-    - `ColorAcento` (Color, default: RGBA(0,120,212,1))
+> **Requerimiento:** un componente `cmpSearchBox` con un `TextInput` y un `Timer`, que exponga un Output Property `TextoBusqueda` con el texto escrito, actualizado **500ms después** de que el usuario deja de escribir (no en cada tecla).
+> **Criterios de aceptación:** (1) `TextoBusqueda` debe ser una Output Property, no una variable global; (2) escribir rápido no debe disparar actualizaciones en cada letra — debe esperar la pausa de 500ms; (3) debes poder leer `TextoBusqueda` desde una pantalla que use el componente.
+> **Restricciones:** no uses `App.OnStart` ni una variable de contexto en la app padre para almacenar el texto — el estado debe vivir dentro del componente.
 
-4. Diseño del componente:
-   ```
-   // Rectangle de fondo con sombra simulada
-   rectFondo.Fill: White
-   rectFondo.BorderColor: RGBA(200,200,200,1)
-   rectFondo.BorderThickness: 1
-   
-   // Barra de color superior
-   rectAccento.Fill: cmpStatCard.ColorAcento
-   rectAccento.Height: 4
-   rectAccento.Width: Parent.Width
-   
-   // Número grande
-   lblValor.Text: Text(cmpStatCard.Valor, "#,##0")
-   lblValor.Size: 28
-   lblValor.FontWeight: FontWeight.Bold
-   lblValor.Color: RGBA(32,32,32,1)
-   
-   // Etiqueta debajo
-   lblTitulo.Text: cmpStatCard.Titulo
-   lblTitulo.Size: 12
-   lblTitulo.Color: RGBA(96,96,96,1)
-   ```
+Si te atoras, revisa las pistas de la micropráctica anterior (mismo principio de Input/Output aplica) antes de buscar la solución completa en la documentación de Power Apps.
 
-#### Actividad 10.4: Componente de Búsqueda con Debounce
-1. Nuevo componente → `cmpSearchBox`
-2. Propiedades de entrada:
-    - `Placeholder` (Texto, default: "Buscar...")
+**Evidencia a reportar:**
 
-3. Propiedades de salida (custom):
-    - `TextoBusqueda` (Texto)
+| Campo | Tu valor |
+|---|---|
+| Nombre del componente y de su Output Property | ___ |
+| Duración configurada en el Timer (en ms) | ___ |
+| Valor de `TextoBusqueda` que leíste desde la pantalla, 1 segundo después de dejar de escribir "prueba" | ___ |
 
-4. Agregar Timer para debounce:
-   ```
-   // Timer que dispara 500ms después de que el usuario deja de escribir
-   tmrDebounce.Duration: 500
-   tmrDebounce.AutoStart: false
-   tmrDebounce.OnTimerEnd: UpdateContext({_textoBusqueda: txtBusqueda.Text})
-   
-   // TextInput
-   txtBusqueda.OnChange: Reset(tmrDebounce); tmrDebounce.Start()
-   txtBusqueda.HintText: cmpSearchBox.Placeholder
-   
-   // Custom Output property
-   TextoBusqueda: _textoBusqueda
-   ```
+---
 
-#### Actividad 10.5: Publicar y usar la librería
-1. En la biblioteca → Guardar → Publicar
-2. Abrir una app Canvas existente (del Módulo 5)
-3. Insertar → Obtener más componentes → Librería: `SIT Component Library`
-4. Importar `cmpHeader`, `cmpStatCard`, `cmpSearchBox`
-5. Usar `cmpHeader` en cada pantalla:
-   ```
-   // En Screen1
-   cmpHeader_1.TituloApp: "Panel de Solicitudes"
-   cmpHeader_1.MostrarBtnVolver: false
-   
-   // En Screen2
-   cmpHeader_2.TituloApp: "Detalle de Solicitud"
-   cmpHeader_2.MostrarBtnVolver: true
-   ```
+## 🧩 Microlección 3 — Consumir la librería y delegación
 
-6. Usar `cmpStatCard` para KPIs:
-   ```
-   // 4 tarjetas en horizontal con Gallery horizontal
-   cmpStatCard_Total.Titulo: "Total Solicitudes"
-   cmpStatCard_Total.Valor: CountRows(colSolicitudes)
-   cmpStatCard_Total.ColorAcento: RGBA(0,120,212,1)
-   ```
+**¿Qué vas a aprender?** Cómo importar y usar componentes publicados desde una app distinta a la que los creó, y por qué algunas fórmulas sobre datos grandes pueden perder registros en silencio.
 
-#### Actividad 10.6: Named Formulas para rendimiento
-1. En App.Formulas (Property: Formulas, no OnStart):
-   ```js
-   // Named formulas — se evalúan lazy, no en OnStart
-   TotalSolicitudes = CountRows(colSolicitudes);
-   SolicitudesPendientes = CountRows(Filter(colSolicitudes, Estado = "Pendiente"));
-   SolicitudesHoy = CountRows(
-       Filter(colSolicitudes, DateValue(Text('Fecha Solicitud')) = Today())
-   );
-   UsuarioActual = User().FullName;
-   ```
+**¿Por qué existe esto?** Un componente no sirve de nada si no se consume. Y en cuanto una app crece, las fórmulas que filtran datos (`Filter`, `Search`) pueden dejar de ejecutarse en el servidor (Dataverse/SharePoint) y empezar a traer todo al cliente — eso es un problema de **delegación**, no de componentes, pero aparece exactamente en las mismas apps que reutilizan estos componentes para mostrar listas.
 
-2. Usar en las tarjetas de estadística:
-   ```
-   cmpStatCard_Pendientes.Valor: SolicitudesPendientes
-   ```
+**Ahora haz algo — micropráctica (7 min):** **[Delegation awareness](/practica/ip-app-003-delegation-awareness)** — ya la resolviste si vienes de Avanzado; si no, este es el momento. Te da una fórmula con riesgo real de delegación y te pide elegir las decisiones que lo evitan.
+
+**Práctica real en tu entorno (8 min):** abre una app Canvas existente (o crea una nueva), inserta `SIT Component Library` desde **Insertar → Obtener más componentes**, y usa `cmpHeader` y `cmpSearchBox` en al menos una pantalla real.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Nombre de la app consumidora y de la pantalla donde insertaste los componentes | ___ |
+| Valor de `cmpHeader.TituloApp` que configuraste desde la app padre | ___ |
+| ¿Apareció el triángulo de advertencia de delegación en alguna fórmula que escribiste? ¿En cuál? | ___ |
+
+---
+
+## 🔧 Diagnosticar — troubleshooting challenge
+
+Antes de construir nada más, resuelve este caso con evidencia real, no con la tabla de errores:
+
+**[Diagnosticar: la app sigue mostrando el componente anterior](/practica/ip-app-005-diagnosticar-componente-desactualizado)**
+
+Síntoma: publicaste una nueva versión de `cmpHeader` con un cambio de color, confirmaste que la librería se publicó sin errores — pero la app consumidora sigue mostrando la versión anterior. Formula tu hipótesis antes de ver la causa: ¿el problema está en la librería, en la app, o en el navegador?
+
+---
+
+## 🔁 Reto de transferencia
+
+`cmpListaTareas` tiene hoy una Input Property `TareaActual` de tipo **Texto** — muestra una sola tarea. El requerimiento cambia: ahora debe recibir **una tabla completa** de tareas pendientes (`Filter(colTareas, Estado = "Pendiente")`), no un texto único.
+
+Esto no es un cambio de valor — es un cambio de **tipo de contrato**. Tabla ya es uno de los 6 tipos de Input Property que viste en la Microlección 1 (Texto, Número, Color, Boolean, Registro, Tabla) y ya usaste colecciones como `colSolicitudes` en las actividades anteriores — no es un concepto nuevo, es aplicar en un componente algo que ya usás en pantallas normales.
+
+**[Transferir: el componente ahora recibe una tabla, no un texto](/practica/ip-app-006-transferir-input-tabla)** — decide qué cambia en el componente y qué cambia en la app consumidora. Si solo memorizaste "Input Property = un valor que configura el padre" sin entender que el *tipo* de ese valor puede ser una colección completa, este reto te lo va a mostrar.
+
+Si tienes tiempo, constrúyelo también en tu tenant real: cambia `TareaActual` a tipo Tabla, agrega una Gallery dentro del componente, y reporta cuántas tareas mostró con datos reales de prueba.
+
+---
 
 ### 💼 Caso Real de Negocio
-**Empresa:** Banco regional con 15 aplicaciones Canvas diferentes  
-**Problema:** Cada app tiene su propio header, colores y estilos. Un cambio de branding requería actualizar 15 apps manualmente.  
-**Solución:** Component Library con tema corporativo centralizado. Al actualizar el componente y publicar, todas las apps pueden aceptar la actualización en 1 clic. Reducción de tiempo de implementación de cambios visuales de 2 semanas a 2 horas.  
+**Empresa:** Banco regional con 15 aplicaciones Canvas diferentes
+**Problema:** Cada app tiene su propio header, colores y estilos. Un cambio de branding requería actualizar 15 apps manualmente.
+**Solución:** Component Library con tema corporativo centralizado. Al actualizar el componente y publicar, todas las apps pueden aceptar la actualización en 1 clic. Reducción de tiempo de implementación de cambios visuales de 2 semanas a 2 horas.
 **Resultado:** Consistencia de marca 100%, ahorro de ~40 horas/mes en mantenimiento.
 
 ### ✅ Buenas Prácticas
 - Una biblioteca por dominio/área de negocio, no una mega-librería global
-- Las propiedades de salida deben ser simples (texto, número, booleano); evitar colecciones como output
+- Las propiedades de salida deben ser simples (texto, número, booleano) salvo que el consumo lo justifique — una Output Property de tipo Tabla es válida, pero súmale la carga de mantenimiento a la decisión
 - Documentar cada propiedad de input con el campo "Descripción" del editor de componentes
 - Versionar las bibliotecas con comentarios de cambio antes de publicar
 - Nunca modificar el componente directamente en la app — hacerlo en la librería y actualizarlo
-- Named Formulas (declaradas en `App.Formulas`, no en `App.OnStart`) son preferibles a variables globales para mejor rendimiento: se evalúan de forma lazy y reactiva en lugar de calcularse de forma imperativa al iniciar la app
+- Named Formulas (declaradas en `App.Formulas`, no en `App.OnStart`) son preferibles a variables globales para cálculos derivados: se evalúan de forma lazy y reactiva
 
 ### ⚠️ Errores Comunes
 | Error | Causa | Solución |
 |-------|-------|----------|
-| Componente no muestra cambios | Librería publicada pero app no actualizada | En la app: Insertar → Componentes → ícono de actualización |
-| Output property siempre vacío | No se asignó `UpdateContext` o falta referencia correcta | Usar variable local dentro del componente y exponerla como property |
-| App lenta con Named Formulas | Fórmula con delegación incompleta trae miles de registros | Asegurar que las fórmulas usen operaciones delegables |
-| Error "circular dependency" | Named Formula referencia otra Named Formula circular | Romper la dependencia usando variable intermedia |
+| Componente no muestra cambios en la app | Librería publicada pero app no actualizada | En la app: Insertar → Componentes → ícono de actualización |
+| Output property siempre vacío | No se asignó una variable interna o falta la referencia correcta | Usar variable local dentro del componente y exponerla como property |
+| App lenta al usar componentes con listas grandes | Fórmula con delegación incompleta trae miles de registros | Asegurar que las fórmulas usen operaciones delegables |
+| Error "circular dependency" en Named Formulas | Una Named Formula referencia otra que depende de ella | Romper la dependencia usando variable intermedia |
+| Cambiar el tipo de una Input Property rompe la app consumidora | El binding de la app padre asumía el tipo anterior | Actualizar el binding en cada app consumidora al mismo tiempo que el tipo del componente |
 
 ### 🧪 Criterios de Validación
-- [ ] Component Library creada y publicada en el entorno de desarrollo
-- [ ] Componente `cmpHeader` funciona con propiedades configurables de título y color
-- [ ] Componente `cmpStatCard` muestra valor numérico formateado con acento de color
-- [ ] `cmpSearchBox` implementa debounce de 500ms y expone `TextoBusqueda` como output
-- [ ] App de prueba importa y usa los 3 componentes correctamente
-- [ ] Named Formulas declaradas en `App.Formulas` eliminan variables globales de `App.OnStart` para cálculos derivados
+- [ ] Creé y publiqué la Component Library con `cmpHeader` y documenté el estado de publicación
+- [ ] Construí `cmpSearchBox` sin ver los pasos completos de antemano, con su Output Property funcionando con debounce de 500ms
+- [ ] Consumí la librería desde una app distinta y configuré al menos un Input Property desde la app padre
+- [ ] Identifiqué si apareció advertencia de delegación en alguna fórmula propia
+- [ ] Diagnostiqué el componente desactualizado formulando una hipótesis antes de ver la causa
+- [ ] Completé el reto de transferencia (Input Text → Input Table) explicando qué cambia en el componente Y en la app consumidora, no solo en uno de los dos
 
 ---
+
+## Notas de esta iteración piloto
+
+Segundo piloto de la arquitectura Learning-by-Doing, después de Módulo 11 (Power Automate). Reutiliza el mismo motor de prácticas interactivas, el mismo sistema de pistas escalonadas y una generalización pequeña de la función de mastery (`calculatePilotMastery`, parametrizada por módulo) — sin infraestructura nueva. Valida si el patrón funciona igual de bien cuando la actividad principal ocurre en una interfaz visual (Power Apps Studio) en vez de un editor de lógica (Power Automate).

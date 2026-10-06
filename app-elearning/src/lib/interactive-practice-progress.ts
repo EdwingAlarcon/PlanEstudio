@@ -213,6 +213,41 @@ export function replaceInteractivePracticeRecords(
   );
 }
 
+export interface HintUnlockState {
+  /** Cuántas pistas ya están reveladas, en orden (asume que `hintsUsed` se llena en secuencia — ver `getNextHintUnlockReason`). */
+  revealedCount: number;
+  /** true si la siguiente pista (índice `revealedCount`) puede abrirse ahora mismo. */
+  nextHintUnlocked: boolean;
+  /** true si el botón "Ver solución" puede habilitarse (solo tras revelar todas las pistas). */
+  solutionUnlocked: boolean;
+}
+
+/**
+ * Progresión exigida (sin temporizadores, solo interacción): intento inicial → Pista 1 → nuevo
+ * intento → Pista 2 → nuevo intento → Pista 3 → opción de solución. Se reconstruye a partir de
+ * `events` (ya persistido) contando cuántos intentos ("attempted"/"completed") ocurrieron después
+ * de la última pista revelada — no se agrega ningún campo nuevo al registro.
+ */
+export function getHintUnlockState(record: InteractivePracticeRecord | undefined, totalHints: number): HintUnlockState {
+  if (!record || totalHints === 0) {
+    return { revealedCount: 0, nextHintUnlocked: false, solutionUnlocked: totalHints === 0 };
+  }
+  const revealedCount = Math.min(record.hintsUsed.length, totalHints);
+  const attemptsSinceLastHint = countAttemptsSinceLastHint(record.events);
+  const nextHintUnlocked = revealedCount < totalHints && attemptsSinceLastHint >= 1;
+  return { revealedCount, nextHintUnlocked, solutionUnlocked: revealedCount >= totalHints };
+}
+
+function countAttemptsSinceLastHint(events: InteractivePracticeEvent[]): number {
+  let count = 0;
+  for (let i = events.length - 1; i >= 0; i--) {
+    const event = events[i]!;
+    if (event.type === "hint") break;
+    if (event.type === "attempted" || event.type === "completed") count++;
+  }
+  return count;
+}
+
 export function getInteractivePracticeReviewQueue<T extends { id: string; level: "starter" | "junior" | "advanced" }>(
   practices: T[],
   records: Record<string, InteractivePracticeRecord>

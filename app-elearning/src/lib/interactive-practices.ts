@@ -642,6 +642,102 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     tags: ["delegation", "Power Fx", "performance"],
   },
   {
+    id: "IP-APP-004",
+    slug: "ip-app-004-tipo-de-property-correcto",
+    title: "Elegir el tipo de Input/Output Property",
+    description: "Decide qué tipo de dato usar para cada propiedad de un componente Canvas.",
+    type: "multiple-decision",
+    domain: "power-apps",
+    level: "junior",
+    estimatedMinutes: 6,
+    prerequisites: ["Módulo 10"],
+    learningObjectives: ["Elegir el tipo correcto de Input Property según el dato", "Distinguir cuándo una propiedad debe ser de salida (Output/Custom) en vez de entrada"],
+    scenario: {
+      context: "Estás diseñando el contrato de `cmpStatCard` (una tarjeta de estadística) y de `cmpSearchBox` (un buscador con debounce) para una Component Library.",
+      objective: "Selecciona las decisiones de diseño correctas para las propiedades de ambos componentes.",
+    },
+    multiple: true,
+    options: [
+      { id: "valor-numero", label: "`cmpStatCard.Valor` como Input Property de tipo Número", consequence: "El padre necesita pasar un número calculado (ej. CountRows) — es exactamente lo que una Input Property de tipo Número resuelve.", score: 1 },
+      { id: "valor-texto", label: "`cmpStatCard.Valor` como Input Property de tipo Texto, formateando el número afuera", consequence: "Funciona, pero rompe el propósito del componente: obliga a cada app consumidora a duplicar el formateo en vez de centralizarlo.", score: 0 },
+      { id: "busqueda-output", label: "`cmpSearchBox.TextoBusqueda` como Output/Custom Property", consequence: "El componente calcula el texto internamente (con su propio debounce) y lo expone hacia afuera — ese es exactamente el caso de uso de una Output Property.", score: 1 },
+      { id: "busqueda-input", label: "`cmpSearchBox.TextoBusqueda` como Input Property que la app padre actualiza", consequence: "Invierte el flujo de datos: el dato nace dentro del componente (lo que el usuario escribe), no afuera — una Input Property no puede ser modificada por el propio componente.", score: 0 },
+    ],
+    correctOptionIds: ["valor-numero", "busqueda-output"],
+    hints: [
+      { id: "h1", content: "Pregúntate de dónde nace el dato: si nace afuera (lo decide la app padre), es Input; si nace adentro (lo calcula o captura el propio componente), es Output." },
+      { id: "h2", content: "Una Input Property es de solo lectura dentro del componente — no puede ser la fuente de un valor que el propio componente calcula." },
+      { id: "h3", content: "`cmpStatCard.Valor` lo decide quien usa el componente (Input, tipo Número); `cmpSearchBox.TextoBusqueda` lo decide el propio componente mientras el usuario escribe (Output)." },
+    ],
+    relatedModuleIds: [10],
+    relatedLabIds: ["LAB-003"],
+    tags: ["component", "input-property", "output-property"],
+  },
+  {
+    id: "IP-APP-005",
+    slug: "ip-app-005-diagnosticar-componente-desactualizado",
+    title: "Diagnosticar: la app sigue mostrando el componente anterior",
+    description: "A partir de un síntoma y evidencia de publicación, identifica la causa antes de ver la solución.",
+    type: "debug-scenario",
+    domain: "power-apps",
+    level: "junior",
+    estimatedMinutes: 6,
+    prerequisites: ["Módulo 10"],
+    learningObjectives: ["Distinguir publicar una librería de actualizarla en cada app consumidora", "Reconocer el Component Lifecycle como causa, no como detalle técnico menor"],
+    scenario: {
+      context: "Publicaste una nueva versión de `SIT Component Library` con un cambio de color en `cmpHeader`. Confirmaste en el editor de la librería que el cambio se guardó y se publicó sin errores. Sin embargo, la aplicación consumidora sigue mostrando la versión anterior del componente después de publicar la actualización.",
+      objective: "Antes de mirar la solución, formula qué revisarías primero y por qué — no asumas que la publicación falló.",
+    },
+    implementation: "Component Library \"SIT Component Library\" v1.1 → Guardar → Publicar (sin errores)\nApp consumidora: sigue usando cmpHeader visualmente idéntico a v1.0",
+    symptom: "La librería se publicó sin errores, pero la app que la consume sigue mostrando la versión anterior del componente.",
+    fixPrompt: "¿Qué acción falta para que la app consumidora refleje el cambio?",
+    acceptableFixes: ["aceptar la actualizacion en la app", "actualizar el componente desde insertar", "insertar componentes icono de actualizacion", "aceptar update manualmente en cada app"],
+    testCases: [
+      { id: "solo-publicar", input: "Librería publicada, app no actualizada manualmente", expected: "la app sigue viendo la versión anterior" },
+      { id: "publicar-y-aceptar", input: "Librería publicada + Insertar > Componentes > aceptar actualización en la app", expected: "la app refleja el cambio" },
+    ],
+    hints: [
+      { id: "h1", content: "La librería sí se publicó correctamente — el síntoma no está en la librería, está en el lado de la app que la consume." },
+      { id: "h2", content: "Publicar una librería no empuja el cambio automáticamente a cada app que la usa — es una acción deliberada, no un efecto secundario del publish." },
+      { id: "h3", content: "En la app, ve a Insertar → Componentes y busca el ícono de actualización para aceptar la nueva versión." },
+    ],
+    relatedModuleIds: [10],
+    relatedLabIds: ["LAB-003"],
+    tags: ["component-library", "troubleshooting", "lifecycle"],
+  },
+  {
+    id: "IP-APP-006",
+    slug: "ip-app-006-transferir-input-tabla",
+    title: "Transferir: el componente ahora recibe una tabla, no un texto",
+    description: "El contrato del componente cambia de un valor simple a una colección — decide qué implica ese cambio.",
+    type: "multiple-decision",
+    domain: "power-apps",
+    level: "advanced",
+    estimatedMinutes: 8,
+    prerequisites: ["Módulo 10"],
+    learningObjectives: ["Reconocer que cambiar el tipo de una Input Property cambia el contrato del componente, no solo su valor", "Anticipar qué se rompe en la app consumidora al cambiar Texto por Tabla"],
+    scenario: {
+      context: "`cmpListaTareas` hoy tiene una Input Property `TareaActual` (Texto) que muestra una sola tarea. El requerimiento cambió: ahora debe mostrar todas las tareas pendientes de un usuario, recibidas como una tabla de registros (`Filter(colTareas, Estado = \"Pendiente\")`), no un texto único.",
+      objective: "Selecciona qué cambios son necesarios en el componente y en la app consumidora para este nuevo contrato.",
+    },
+    multiple: true,
+    options: [
+      { id: "cambiar-tipo-tabla", label: "Cambiar `TareaActual` de tipo Texto a tipo Tabla en el editor de propiedades del componente", consequence: "Es el cambio central: el tipo de la Input Property determina qué puede recibir la app padre.", score: 1 },
+      { id: "reescribir-binding-parent", label: "Actualizar el binding en la app consumidora de un texto fijo a `Filter(colTareas, Estado = \"Pendiente\")`", consequence: "La app padre ahora debe entregar una tabla, no una cadena de texto — el binding anterior ya no es válido.", score: 1 },
+      { id: "gallery-dentro", label: "Dentro del componente, usar una Gallery cuyo Items sea la propiedad de entrada para recorrer la tabla", consequence: "Una Input Property de tipo Tabla se consume igual que cualquier otra fuente de datos: con Gallery/ForAll.", score: 1 },
+      { id: "mantener-texto", label: "Dejar `TareaActual` como Texto y concatenar las tareas con `Concat()` antes de pasarlas", consequence: "Evita tocar el tipo de la propiedad, pero pierde la posibilidad de que el componente itere, filtre u ordene tarea por tarea — solo sirve para mostrar texto plano.", score: 0 },
+    ],
+    correctOptionIds: ["cambiar-tipo-tabla", "reescribir-binding-parent", "gallery-dentro"],
+    hints: [
+      { id: "h1", content: "El tipo de una Input Property no es un detalle interno — es parte del contrato que ve la app consumidora." },
+      { id: "h2", content: "Si el padre antes pasaba un texto y ahora debe pasar el resultado de un Filter(), su fórmula de binding tiene que cambiar también, no solo el componente." },
+      { id: "h3", content: "Dentro del componente, una propiedad de tipo Tabla se recorre con Gallery/ForAll — igual que cualquier colección que ya usaste en este módulo (`colSolicitudes`)." },
+    ],
+    relatedModuleIds: [10],
+    relatedLabIds: ["LAB-003"],
+    tags: ["transferencia", "input-property", "table"],
+  },
+  {
     id: "IP-PA-005",
     slug: "ip-pa-005-diagnosticar-corte-en-256-registros",
     title: "Diagnosticar: el flujo se detiene en 256 registros",
@@ -956,8 +1052,8 @@ export function validateInteractivePractices(): string[] {
     if (practice.type === "query-playground" && practice.dialect === "fetchxml" && !practice.starter.includes("<fetch")) errors.push(`${practice.id}: starter FetchXML inválido`);
     if (practice.type === "flow-builder" && practice.testCases.length < 2) errors.push(`${practice.id}: flow sin suficientes casos`);
   }
-  if (INTERACTIVE_PRACTICES.length < 12 || INTERACTIVE_PRACTICES.length > 17) {
-    errors.push(`El piloto debe tener 12 a 17 prácticas; tiene ${INTERACTIVE_PRACTICES.length}`);
+  if (INTERACTIVE_PRACTICES.length < 12 || INTERACTIVE_PRACTICES.length > 20) {
+    errors.push(`El piloto debe tener 12 a 20 prácticas; tiene ${INTERACTIVE_PRACTICES.length}`);
   }
   return errors;
 }

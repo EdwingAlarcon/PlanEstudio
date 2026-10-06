@@ -39,10 +39,10 @@ Scope "Catch"  ← Run After del Scope Try: failed + timed out (succeeded desmar
 | Campo | Tu valor |
 |---|---|
 | Nombre del flujo | ___ |
-| ¿Qué acción forzaste a fallar y cómo? | ___ |
-| Estado final del Scope "Try" en el run history | ___ |
-| ¿Se ejecutó el Scope "Catch"? (Run After configurado) | ___ |
-| Mensaje de error capturado por `actions('Scope_Try')['error']['message']` | ___ |
+| Qué acción forzaste a fallar y cómo (nombre exacto de la acción + qué cambiaste) | ___ |
+| Estado del Scope "Try" en el run history (ej. Failed, Succeeded with retries) | ___ |
+| Estado del Scope "Catch" en el run history (ej. Succeeded, Skipped) | ___ |
+| Mensaje de error capturado por `actions('Scope_Try')['error']['message']` (valor exacto, no resumido) | ___ |
 
 ---
 
@@ -70,7 +70,7 @@ Si te atoras, no hay problema — abre las pistas progresivas dentro de la micro
 |---|---|
 | Nombre del Child Flow y de la solución donde vive | ___ |
 | Los 3 valores de prueba que usaste y el `nivel` que devolvió cada uno | ___ |
-| ¿Tu Child Flow aparece en la lista al buscarlo desde el flujo padre? | ___ |
+| Nombre exacto del Child Flow tal como aparece en el selector "Run a Child Flow" del flujo padre | ___ |
 
 ---
 
@@ -113,7 +113,8 @@ Headers: Accept: application/json
 | Campo | Tu valor |
 |---|---|
 | Duración total del run con las 3 ramas en paralelo | ___ |
-| ¿Las 3 ramas terminaron antes de que el flujo continuara? | ___ |
+| Duración individual de cada una de las 3 ramas, tal como la muestra el run history (Teams / email / Dataverse) | ___ |
+| Nombre de la acción que se ejecutó inmediatamente después de que las 3 ramas terminaran | ___ |
 
 ---
 

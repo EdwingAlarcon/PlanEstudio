@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   createInteractivePracticeProgressExport,
   createInteractivePracticeRecord,
+  getHintUnlockState,
   getInteractivePracticeReviewQueue,
   mergeInteractivePracticeRecords,
   parseInteractivePracticeImport,
@@ -193,5 +194,46 @@ describe("interactive practice progress helpers", () => {
       }
     );
     expect(queue.map((practice) => practice.id)).toEqual(["IP-DV-001", "IP-QRY-001", "IP-PA-001"]);
+  });
+
+  it("gates progressive hints behind a new attempt each time, never a timer", () => {
+    expect(getHintUnlockState(undefined, 3)).toEqual({ revealedCount: 0, nextHintUnlocked: false, solutionUnlocked: false });
+
+    const fresh = createInteractivePracticeRecord("IP-PA-001", "2026-09-21T00:00:00.000Z");
+    expect(getHintUnlockState(fresh, 3).nextHintUnlocked).toBe(false); // sin intento inicial, Pista 1 sigue bloqueada
+
+    const afterFirstAttempt: InteractivePracticeRecord = {
+      ...fresh,
+      attemptCount: 1,
+      events: [...fresh.events, { type: "attempted", at: "2026-09-21T00:01:00.000Z", score: 0 }],
+    };
+    expect(getHintUnlockState(afterFirstAttempt, 3)).toEqual({ revealedCount: 0, nextHintUnlocked: true, solutionUnlocked: false });
+
+    const afterHint1: InteractivePracticeRecord = {
+      ...afterFirstAttempt,
+      hintsUsed: ["h1"],
+      events: [...afterFirstAttempt.events, { type: "hint", at: "2026-09-21T00:02:00.000Z", detail: "h1" }],
+    };
+    // Pista 1 ya revelada, pero todavía no hay un nuevo intento después de ella → Pista 2 sigue bloqueada.
+    expect(getHintUnlockState(afterHint1, 3)).toEqual({ revealedCount: 1, nextHintUnlocked: false, solutionUnlocked: false });
+
+    const afterSecondAttempt: InteractivePracticeRecord = {
+      ...afterHint1,
+      attemptCount: 2,
+      events: [...afterHint1.events, { type: "attempted", at: "2026-09-21T00:03:00.000Z", score: 20 }],
+    };
+    expect(getHintUnlockState(afterSecondAttempt, 3).nextHintUnlocked).toBe(true);
+
+    const allHintsRevealed: InteractivePracticeRecord = {
+      ...afterSecondAttempt,
+      hintsUsed: ["h1", "h2", "h3"],
+      events: [
+        ...afterSecondAttempt.events,
+        { type: "hint", at: "2026-09-21T00:04:00.000Z", detail: "h2" },
+        { type: "attempted", at: "2026-09-21T00:05:00.000Z", score: 40 },
+        { type: "hint", at: "2026-09-21T00:06:00.000Z", detail: "h3" },
+      ],
+    };
+    expect(getHintUnlockState(allHintsRevealed, 3)).toEqual({ revealedCount: 3, nextHintUnlocked: false, solutionUnlocked: true });
   });
 });

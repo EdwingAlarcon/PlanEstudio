@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useMemo, useRef, useState, type DragEvent, type KeyboardEvent, type ReactNode } from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Code2, Lightbulb, RotateCcw, Search, ShieldCheck, SlidersHorizontal } from "lucide-react";
+import { ArrowRight, CheckCircle2, Code2, Lightbulb, Lock, RotateCcw, Search, ShieldCheck, SlidersHorizontal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -31,6 +31,7 @@ import {
   type InteractivePracticeTypeFilter,
 } from "@/lib/interactive-practice-filters";
 import {
+  getHintUnlockState,
   summarizeInteractivePracticeProgress,
   useInteractivePracticeProgressStore,
 } from "@/lib/interactive-practice-progress";
@@ -262,6 +263,7 @@ function InteractiveExercise({ practice, progressHydrated }: { practice: Interac
   }, [practice.id, progressHydrated]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const attemptNumber = (record?.attemptCount ?? 0) + 1;
+  const hintState = getHintUnlockState(record, practice.hints.length);
   const statusLabel = progressHydrated
     ? record?.mastery ? masteryLabel(record.mastery) : "No iniciado"
     : "Cargando progreso";
@@ -327,7 +329,10 @@ function InteractiveExercise({ practice, progressHydrated }: { practice: Interac
             <Button
               type="button"
               variant="ghost"
+              disabled={!hintState.solutionUnlocked}
+              title={hintState.solutionUnlocked ? undefined : "Se habilita después de revisar las 3 pistas"}
               onClick={() => {
+                if (!hintState.solutionUnlocked) return;
                 setShowSolution(true);
                 revealSolution(practice.id);
               }}
@@ -335,6 +340,11 @@ function InteractiveExercise({ practice, progressHydrated }: { practice: Interac
               Ver solución
             </Button>
           </div>
+          {!hintState.solutionUnlocked && (
+            <p className="text-xs text-muted-foreground">
+              La solución completa es siempre el último recurso: se habilita cuando ya abriste las 3 pistas.
+            </p>
+          )}
 
           <div aria-live="polite">
             {result && <FeedbackPanel result={result} />}
@@ -358,18 +368,41 @@ function InteractiveExercise({ practice, progressHydrated }: { practice: Interac
               <h3 className="text-sm font-semibold text-foreground">Pistas escalonadas</h3>
             </div>
             <div className="space-y-2">
-              {practice.hints.map((hint, index) => (
-                <details
-                  key={hint.id}
-                  className="rounded-md border border-border p-2 text-xs"
-                  onToggle={(event) => {
-                    if ((event.currentTarget as HTMLDetailsElement).open) revealHint(practice.id, hint.id);
-                  }}
-                >
-                  <summary className="cursor-pointer font-medium text-foreground">Pista {index + 1}</summary>
-                  <p className="mt-2 leading-relaxed text-muted-foreground">{hint.content}</p>
-                </details>
-              ))}
+              {practice.hints.map((hint, index) => {
+                const revealed = index < hintState.revealedCount;
+                const unlockable = index === hintState.revealedCount && hintState.nextHintUnlocked;
+                if (revealed) {
+                  return (
+                    <details key={hint.id} className="rounded-md border border-border p-2 text-xs" open>
+                      <summary className="cursor-pointer font-medium text-foreground">Pista {index + 1}</summary>
+                      <p className="mt-2 leading-relaxed text-muted-foreground">{hint.content}</p>
+                    </details>
+                  );
+                }
+                if (unlockable) {
+                  return (
+                    <details
+                      key={hint.id}
+                      className="rounded-md border border-border p-2 text-xs"
+                      onToggle={(event) => {
+                        if ((event.currentTarget as HTMLDetailsElement).open) revealHint(practice.id, hint.id);
+                      }}
+                    >
+                      <summary className="cursor-pointer font-medium text-foreground">Pista {index + 1}</summary>
+                      <p className="mt-2 leading-relaxed text-muted-foreground">{hint.content}</p>
+                    </details>
+                  );
+                }
+                const reason = index > hintState.revealedCount
+                  ? `Se desbloquea después de la Pista ${index}`
+                  : "Valida tu respuesta primero para desbloquearla";
+                return (
+                  <div key={hint.id} className="flex items-center gap-2 rounded-md border border-dashed border-border p-2 text-xs text-muted-foreground">
+                    <Lock className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                    <span>Pista {index + 1} bloqueada — {reason}.</span>
+                  </div>
+                );
+              })}
             </div>
           </section>
 
