@@ -11,6 +11,11 @@ lastVerified: "2026-09"
 > **🧭 ¿Lead, oportunidad, cuenta y contacto todavía no son claros?** Este módulo asume ese vocabulario.
 > Repasa primero [Fundamentos funcionales CRM](/recursos/fundamentos-crm) — 15 minutos, sin tenant.
 
+> **🔗 Relación con el Módulo 20:** el Módulo 20 calculó un forecast ponderado simple a mano (monto ×
+> probabilidad de etapa). Aquí se profundiza en lo que el Módulo 20 no cubre: forecast categories que
+> NO se derivan automáticamente del stage, rollup jerárquico por equipo/manager, pipeline review como
+> ritual operativo, y el gobierno de Copilot/Sales Agent en la calificación de leads (AB-210).
+
 ### 🎯 Objetivo
 Diseñar y operar un proceso avanzado de Dynamics 365 Sales que conecte lead-to-opportunity, catálogo de productos, pipeline review, forecasting y gobierno de datos comerciales, produciendo los mismos artefactos (matriz de forecast, política de pipeline hygiene, decisión de forecast category) que se te pediría entregar en un proyecto real — y diferenciando lo que puede practicarse con datos simulados de lo que requiere tenant, licencia de Dynamics 365 Sales y ambiente real.
 

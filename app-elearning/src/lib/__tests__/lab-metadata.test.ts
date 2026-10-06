@@ -129,9 +129,9 @@ describe("lab domain classification", () => {
 });
 
 describe("lab readiness (Sprint 1 — auditoría tenant-real)", () => {
-  it("gives every one of the 73 labs a non-empty execution status and evidence", () => {
+  it("gives every one of the 75 labs a non-empty execution status and evidence", () => {
     const labs = getAllLabs();
-    expect(labs.length).toBe(73);
+    expect(labs.length).toBe(75);
 
     for (const lab of labs) {
       const readiness = getLabReadiness(lab);

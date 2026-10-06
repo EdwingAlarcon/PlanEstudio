@@ -52,6 +52,59 @@ const INITIAL_STATE: ProgressState = {
   moduleNotes: {},
 };
 
+// ─── Persisted-state sanitization ─────────────────────────────────────────────
+// Guards against corrupted or future-shaped localStorage payloads the same way
+// the other 5 persisted stores in this app already do (see onboarding-store.ts).
+
+function sanitizeProgressState(persisted: unknown): ProgressState {
+  const raw = persisted && typeof persisted === "object" ? (persisted as Record<string, unknown>) : {};
+
+  const completedModules = Array.isArray(raw.completedModules)
+    ? raw.completedModules.filter((id): id is string => typeof id === "string")
+    : INITIAL_STATE.completedModules;
+
+  const quizScores =
+    raw.quizScores && typeof raw.quizScores === "object" && !Array.isArray(raw.quizScores)
+      ? Object.fromEntries(
+          Object.entries(raw.quizScores as Record<string, unknown>).filter(
+            (entry): entry is [string, number] => typeof entry[1] === "number"
+          )
+        )
+      : INITIAL_STATE.quizScores;
+
+  const completedLabs = Array.isArray(raw.completedLabs)
+    ? raw.completedLabs.filter((slug): slug is string => typeof slug === "string")
+    : INITIAL_STATE.completedLabs;
+
+  const checklistItems =
+    raw.checklistItems && typeof raw.checklistItems === "object" && !Array.isArray(raw.checklistItems)
+      ? (raw.checklistItems as ChecklistProgressMap)
+      : INITIAL_STATE.checklistItems;
+
+  const lastVisited = typeof raw.lastVisited === "string" ? raw.lastVisited : INITIAL_STATE.lastVisited;
+
+  const userName = typeof raw.userName === "string" ? raw.userName : INITIAL_STATE.userName;
+
+  const moduleNotes =
+    raw.moduleNotes && typeof raw.moduleNotes === "object" && !Array.isArray(raw.moduleNotes)
+      ? Object.fromEntries(
+          Object.entries(raw.moduleNotes as Record<string, unknown>).filter(
+            (entry): entry is [string, string] => typeof entry[1] === "string"
+          )
+        )
+      : INITIAL_STATE.moduleNotes;
+
+  return {
+    completedModules,
+    quizScores,
+    completedLabs,
+    checklistItems,
+    lastVisited,
+    userName,
+    moduleNotes,
+  };
+}
+
 // ─── Module counts per level ──────────────────────────────────────────────────
 
 function getTotalModulesForLevel(levelId: LevelId): number {
@@ -221,6 +274,8 @@ export const useProgressStore = create<ProgressState & ProgressActions>()(
     {
       name: "plan-estudio-progress",
       storage: createJSONStorage(() => localStorage),
+      version: 1,
+      migrate: (persisted) => sanitizeProgressState(persisted),
     }
   )
 );

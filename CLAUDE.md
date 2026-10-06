@@ -105,11 +105,14 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 149 archivos **cerrados**; sin trabajo a medias.
 
 **Invariantes que no debes romper:**
-- Conteos vigentes: **76 módulos, 73 labs, 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
-  32 prácticas profesionales (18 incidentes, 6 challenges, 2 simulaciones, 6 guiadas), 24 prácticas interactivas
+- Conteos vigentes: **76 módulos, 75 labs, 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
+  33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 24 prácticas interactivas
   y 39 páginas de recursos** (prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
   Doing de Módulos 11, 10 y 13 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de
-  Módulo 13). No mezclar estos conteos entre sí.
+  Módulo 13; labs subió de 73 a 75 y simulaciones de 2 a 3 con la auditoría integral 2026-10-06 — Lab 114
+  monitoreo con Application Insights, Lab 115 disaster recovery RTO/RPO, SIM-002 ceremonia ágil simulada,
+  y extensión de incidente post-launch/presentación en LAB-63 — ver `AUDITORIA_INTEGRAL_PLANESTUDIO_2026.md`).
+  No mezclar estos conteos entre sí.
 - Los stores persistidos son independientes y **nunca se fusionan**: `plan-estudio-progress` (académico),
   `plan-estudio-onboarding`, `planestudio.practice-progress.v1`, `planestudio.interactive-practice.v1`,
   `planestudio.spaced-repetition.v1`, `planestudio.workstation.v1`. El backup completo solo lee/escribe sus payloads crudos.

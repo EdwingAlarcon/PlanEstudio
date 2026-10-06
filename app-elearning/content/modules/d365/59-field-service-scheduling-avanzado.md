@@ -10,6 +10,11 @@ lastVerified: "2026-09"
 ### 🎯 Objetivo
 Profundizar en Field Service end-to-end: acuerdos de mantenimiento, generación de Work Orders, Incident Types, Schedule Board, Resource Scheduling Optimization, Field Service Mobile offline, consumo de inventario y cierre operativo con evidencia.
 
+> **🔗 Relación con el Módulo 20:** el Módulo 20 solo nombró el ciclo Work Order → Booking →
+> ejecución móvil a nivel de vocabulario. Este módulo es la profundización real: Universal Resource
+> Scheduling, Incident Types con tareas obligatorias, Resource Scheduling Optimization, offline sync
+> e inventario — nada de esto se repite del Módulo 20, se construye sobre su mención inicial.
+
 ### 📖 Conceptos Clave
 - **Universal Resource Scheduling (URS):** el motor subyacente que hace posible el Schedule Board — no es exclusivo de Field Service, también lo usan Customer Service (reservar salas, agentes) y Project Operations. Entender URS como motor compartido evita pensar en el Schedule Board como una pantalla aislada de Field Service.
 - **Schedule Board — anatomía:** el panel tiene 3 áreas: la lista de recursos (técnicos) a la izquierda, la grilla de tiempo en el centro (bookings existentes, huecos libres), y el panel de "trabajo no asignado" a la derecha. El dispatcher arrastra un Work Order sin asignar hacia el hueco de un técnico compatible — Dynamics 365 resalta en verde los recursos que cumplen los requisitos (skill, territorio, disponibilidad) y en gris los que no.

@@ -11,6 +11,13 @@ lastVerified: "2026-09"
 > **🧭 ¿Caso, cola y SLA todavía no son claros?** Este módulo asume ese vocabulario. Repasa primero
 > [Fundamentos funcionales CRM](/recursos/fundamentos-crm) — 15 minutos, sin tenant.
 
+> **🔗 Relación con el Módulo 20:** el Módulo 20 configuró SLA, Entitlements y Unified Routing a nivel
+> de pasos de UI (crear el SLA, asociarlo al tipo de caso). Aquí no se repite esa configuración — se
+> profundiza en lo que el Módulo 20 no cubre: la mecánica real de cálculo del calendario de atención
+> (pausa/reanudación), una matriz de SLA completa con condiciones de advertencia/incumplimiento,
+> `reopen rate` como métrica de calidad (no solo de cumplimiento), y la defensa de esas decisiones
+> ante preguntas de entrevista/consultoría.
+
 ### 🎯 Objetivo
 Configurar conceptualmente un proceso avanzado de Customer Service con casos, colas, contratos de servicio, entitlements, SLA, knowledge management y routing, produciendo una matriz de SLA operable y un árbol de decisión de agente defendibles en una entrevista de Consultor Funcional — distinguiendo configuración practicable con datos simulados de validación que requiere ambiente real.
 

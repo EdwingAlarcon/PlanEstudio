@@ -10,6 +10,11 @@ lastVerified: "2026-09"
 ### 🎯 Objetivo
 Diseñar journeys en tiempo real con triggers, segmentos, consentimiento, canales y medición, produciendo un diagrama de flujo completo y un modelo de consentimiento auditable — separando claramente Customer Insights - Journeys de Customer Insights - Data (Módulo 58) y evitando depender de outbound marketing heredado.
 
+> **🔗 Relación con el Módulo 20:** el Módulo 20 (Actividad 20.8) solo enunció en una frase la regla
+> de un segmento y el evento que dispara un journey. Aquí se construye el journey completo: anatomía
+> de nodos (decisión, espera, mensaje, goal), triggers con timestamp discreto, consentimiento por
+> canal/propósito (no genérico), y la migración fuera de outbound marketing heredado.
+
 ### 📖 Conceptos Clave
 - **Journeys vs. Data:** Customer Insights - Data (Módulo 58) unifica perfiles, calcula medidas y define segmentos; Journeys orquesta comunicaciones y experiencias en tiempo real a partir de esos segmentos o de eventos directos en Dataverse. Un journey nunca "inventa" un segmento — lo consume de Data o lo define localmente sobre datos de Dataverse.
 - **Real-time journey — anatomía:** recorrido activado por evento o segmento, con nodos de decisión (condición sí/no), esperas (delay), mensajes (email, SMS, push) y objetivos medibles (goal). El motor evalúa cada contacto de forma individual y asíncrona — dos contactos que entran el mismo día pueden estar en pasos distintos del journey según cómo interactúen.

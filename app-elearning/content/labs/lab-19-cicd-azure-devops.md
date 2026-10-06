@@ -531,6 +531,9 @@ stages:
 - Captura del pipeline CI ejecutado con éxito (7 pasos) y del artifact con los dos ZIPs
 - Captura del pipeline CD pausado esperando aprobación y luego completado
 - Captura de la solución importada como Managed en el ambiente TEST
+- Una entrada de **"release notes" de 3-5 líneas en inglés** para este despliegue (formato real de
+  equipo: `## [version] - what changed - why - rollback plan`), como las que acompañarían el PR o
+  el ticket de release en un equipo que trabaja en inglés.
 
 ## Criterios de aprobación
 

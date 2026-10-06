@@ -10,6 +10,11 @@ lastVerified: "2026-09"
 ### 🎯 Objetivo
 Entender qué resuelve Customer Insights - Data que Dynamics 365 Sales/Customer Service no resuelven por sí solos: unificación de perfiles desde múltiples fuentes, reglas de matching, medidas calculadas y activación de datos hacia Journeys — la capa que en este curso hasta ahora solo se nombraba, nunca se desarrollaba.
 
+> **🔗 Relación con el Módulo 20:** el Módulo 20 (Actividad 20.8) solo identificó, en una frase, qué
+> fuentes alimentarían un perfil unificado. Este módulo es donde esa idea se desarrolla: reglas de
+> matching explícitas, medidas con fórmula documentada, y activación hacia un destino — nada de esto
+> existía todavía en el Módulo 20.
+
 ### 📖 Conceptos Clave
 - **Por qué Customer Insights - Data no es "otro CRM":** Sales y Customer Service ya tienen Account/Contact con buena calidad de dato transaccional, pero ninguno de los dos, por sí solo, combina eso con fuentes externas (facturación, uso de producto, tickets de un sistema legado). Customer Insights - Data existe para construir un perfil unificado del cliente cruzando esas fuentes, no para reemplazar Sales/Service.
 - **Fuentes de datos:** Dataverse (Account/Contact/Case/Opportunity), tablas de Dynamics 365, archivos planos (CSV de un sistema de billing legado), data lakes, o APIs de sistemas externos. Cada fuente se conecta como un "Data Source" con su propio esquema — antes de combinarlas, cada una debe mapearse a un tipo de entidad semántica (`Customer`, `Transaction`, `Interaction`).

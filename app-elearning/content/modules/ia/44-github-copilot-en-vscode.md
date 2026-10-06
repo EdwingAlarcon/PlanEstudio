@@ -38,6 +38,7 @@ Usar GitHub Copilot en VS Code (autocompletado, Copilot Chat y Copilot Edits) de
    - Logging en plugins C#: usar siempre `ITracingService`, nunca `Console.WriteLine`.
    - Componentes PCF: TypeScript estricto, sin `any` salvo justificación en comentario.
    ```
+5. **Sugerencia insegura que debes rechazar:** abre un plugin C# que reciba un parámetro externo (ej. un ID de registro desde el contexto) y pide autocompletado para construir una consulta con `RetrieveMultiple` usando ese valor concatenado directamente en un `FetchXML` como texto. Es común que el autocompletado sugiera exactamente esa concatenación directa de string. *No la aceptes.* Explica por escrito por qué es un riesgo (equivalente a inyección en el contexto de Dataverse si el valor viene de una fuente no controlada) y qué alternativa segura usarías (`QueryExpression`/`FetchXML` parametrizado, o validar y escapar el valor antes de interpolarlo).
 
 ### 💼 Casos Reales de Negocio
 Un desarrollador de SIT usó Copilot Chat para generar un plugin C# de validación de un campo de Dataverse sin tener abierto el archivo del plugin base del proyecto (que ya tenía un patrón establecido de logging con `ITracingService`). El código generado usó `Console.WriteLine`, que no funciona dentro de un plugin de Dataverse y no genera ningún log visible. El equipo perdió tiempo depurando en producción hasta notar que el patrón de logging del proyecto no se había seguido — la causa raíz fue no dar a Copilot el contexto del patrón ya establecido.
@@ -60,3 +61,4 @@ Un desarrollador de SIT usó Copilot Chat para generar un plugin C# de validaci�
 - [ ] Aplico el prompt de manejo de errores con Copilot Edits revisando el diff completo antes de aceptarlo
 - [ ] Creo un `.github/copilot-instructions.md` con al menos 2 convenciones del proyecto y confirmo que mejoró la sugerencia
 - [ ] Relaciono este módulo con el Lab 91 (Custom API/extensibilidad) o cualquier lab de desarrollo donde revise código generado antes de integrarlo
+- [ ] Rechacé la sugerencia insegura de la Actividad 5 y expliqué por escrito el riesgo y la alternativa segura

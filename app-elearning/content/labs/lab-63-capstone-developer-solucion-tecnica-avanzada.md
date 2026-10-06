@@ -111,6 +111,11 @@ Fuera de alcance:
 
 - Explica las decisiones no obvias: por qué el plugin es síncrono o asíncrono, por qué esa
   integración y no otra, qué se dejó fuera de alcance y por qué.
+- Agrega al final un **"Technical summary" de 3-5 líneas en inglés** (no una traducción del
+  documento completo): qué construiste, la decisión técnica más importante y por qué, y qué
+  quedó fuera de alcance. Es la pieza que copiarías directo a un README en inglés o a LinkedIn
+  Projects — practica el mismo registro que exige LAB-79 (JR-009), pero distribuido aquí en vez
+  de concentrado solo al final de la ruta.
 
 ## Resultado esperado
 
@@ -152,6 +157,44 @@ Aprobación: mínimo 70/100 y ningún criterio en nivel 0. Nivel profesional/exc
 
 Agrega un gate de aprobación manual antes del paso a producción en el pipeline, y documenta quién
 debería aprobarlo y qué debería revisar antes de aprobar.
+
+## Extensión — Incidente post-launch y presentación en vivo
+
+Las etapas anteriores terminan en el despliegue. En un proyecto real, el ciclo no termina ahí: la
+solución entra en uso, algo falla, y alguien tiene que explicar el proyecto completo a quien no
+estuvo involucrado en construirlo. Esta extensión cierra ese tramo.
+
+### Incidente post-launch
+
+Una semana después del despliegue (simulado), Operaciones reporta: "desde ayer, algunas
+solicitudes de alto costo no están llegando a aprobación — el solicitante ve que se envió, pero
+el aprobador nunca la ve en su bandeja." Diagnostica con el mismo criterio que usarías en
+producción real:
+
+1. Formula al menos 3 hipótesis distintas antes de revisar nada (ejemplos: falla en el Plugin que
+   registra el flujo de aprobación, un cambio reciente en el rol de seguridad del aprobador, un
+   filtro de la vista que excluye silenciosamente los registros de alto costo).
+2. Para cada hipótesis, indica qué evidencia (Plugin Trace Log, run history, matriz de seguridad,
+   definición de la vista) la confirmaría o la descartaría.
+3. Determina la causa raíz más probable con el razonamiento escrito, no solo la conclusión.
+4. Propón una corrección y, por separado, una medida de prevención para que este tipo de fallo se
+   detecte antes de que Operaciones tenga que reportarlo.
+
+### Presentación en vivo al cliente
+
+Prepara y entrega (grabada, o en vivo ante alguien que no haya visto el proyecto) una presentación
+de 5-8 minutos dirigida al sponsor de negocio de SIT, NO a otro developer:
+
+- Qué problema resolvió el proyecto, en lenguaje de negocio (sin términos técnicos como "plugin"
+  o "PCF" sin traducirlos a impacto).
+- Qué se construyó y por qué se tomaron las decisiones principales (1-2 trade-offs reales).
+- Qué pasó con el incidente post-launch: qué se rompió, cómo se diagnosticó, qué se corrigió y qué
+  cambió para que no vuelva a pasar igual — sin ocultar que hubo un incidente.
+- Qué queda fuera de alcance y qué recomendarías como siguiente paso.
+
+**Validación esperada:** alguien que no conozca el proyecto técnico puede explicar, después de
+tu presentación, qué problema se resolvió y qué pasó con el incidente — sin que tú tengas que
+aclarar nada después.
 
 ## Módulos relacionados
 
