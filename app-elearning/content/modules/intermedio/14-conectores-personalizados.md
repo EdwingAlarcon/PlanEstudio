@@ -29,6 +29,8 @@ Crear y certificar conectores personalizados para APIs REST, integrar autenticac
 
 - **Dynamic Schema / Dynamic Values:** capacidades avanzadas de conectores que permiten que las opciones o esquemas de una acción se carguen dinámicamente desde la API en tiempo de diseño. `Dynamic Values` (x-ms-dynamic-values): el campo muestra un dropdown con opciones obtenidas de la API (ej. lista de proyectos). `Dynamic Schema` (x-ms-dynamic-schema): el schema de los campos de respuesta se determina llamando a la API (útil cuando la API retorna estructuras variables según parámetros). Se configuran con extensiones OpenAPI específicas de Microsoft.
 
+- **Microsoft Graph API:** API REST unificada de Microsoft para acceder a datos de Microsoft 365 y Entra ID — usuarios, correo, calendario, archivos de OneDrive/SharePoint, Teams, grupos — todo bajo un único endpoint base (`https://graph.microsoft.com/v1.0/`). Power Automate y Power Apps ya traen conectores estándar para los escenarios más comunes (Office 365 Outlook, Office 365 Users), pero cualquier operación de Graph que esos conectores no cubran (ej. leer eventos de calendario de un recurso compartido, consultar membresía de grupos de Entra ID) se resuelve con el mismo patrón de Custom Connector + OAuth2 ya usado en este módulo, apuntando el conector a Graph en vez de a una API propia. Requiere registrar una App Registration en Microsoft Entra ID con los permisos (scopes) exactos que la operación necesita — nunca más permisos de los que el conector usa (principio de mínimo privilegio, igual que en Security Roles de Dataverse).
+
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
 #### Actividad 14.1: Connector desde definición OpenAPI
@@ -148,6 +150,34 @@ Crear y certificar conectores personalizados para APIs REST, integrar autenticac
 
 4. Parsear respuesta y actualizar registro Dataverse con el CUFE generado
 
+#### Actividad 14.5: Consumir Microsoft Graph API con un conector propio
+
+1. Registrar la App Registration en Microsoft Entra ID (si no existe una del módulo 14.2):
+    - Microsoft Entra ID → Registros de aplicaciones → Nuevo registro
+    - Permisos de API → Agregar permiso → Microsoft Graph → Delegados → `User.Read`, `Mail.Send`
+    - Conceder consentimiento del administrador para el tenant
+
+2. Crear el conector personalizado apuntando a Graph (mismo flujo de la Actividad 14.1, sin spec OpenAPI — se construye manualmente acción por acción):
+    - Host: `graph.microsoft.com`
+    - Autenticación: igual que la Actividad 14.2 (OAuth 2.0, Microsoft Entra ID), pero con:
+      - URL de autorización: `https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize`
+      - URL de token: `https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token`
+      - Ámbito: `User.Read Mail.Send`
+
+3. Agregar dos acciones:
+   ```
+   ObtenerPerfil
+     GET /v1.0/me
+
+   EnviarCorreo
+     POST /v1.0/me/sendMail
+     Body: { "message": { "subject": "...", "body": { "contentType": "Text", "content": "..." }, "toRecipients": [...] } }
+   ```
+
+4. Probar `ObtenerPerfil` desde el probador del conector y confirmar que retorna el `displayName` y `mail` del usuario autenticado.
+
+**Nota:** para escenarios que Power Automate ya cubre con conectores estándar (enviar un correo simple, leer archivos de OneDrive), usa el conector `Office 365 Outlook`/`OneDrive for Business` en vez de construir uno propio contra Graph — el Custom Connector contra Graph se justifica solo cuando la operación específica no está expuesta por esos conectores estándar.
+
 ### 💼 Caso Real de Negocio
 **Empresa:** Distribuidora con 500 facturas diarias  
 **Problema:** El proceso de facturación electrónica requería exportar a Excel, subir al portal del gobierno, y copiar manualmente el código CUFE de vuelta al ERP.  
@@ -175,5 +205,6 @@ Crear y certificar conectores personalizados para APIs REST, integrar autenticac
 - [ ] Acción principal ejecuta correctamente desde el probador del conector
 - [ ] Conector disponible en Power Automate y Power Apps del entorno
 - [ ] Flujo de automatización usa el conector y procesa la respuesta correctamente
+- [ ] Conector contra Microsoft Graph API autentica con OAuth2/Entra ID y `ObtenerPerfil` retorna el usuario autenticado
 
 ---

@@ -42,6 +42,12 @@ graph LR
 
 - **YAML Pipeline:** definición del pipeline de CI/CD como código YAML versionado en el repositorio de git. Permite que el pipeline mismo esté bajo control de versiones, sea revisado en PRs, y sea idéntico entre ramas. Estructura: `trigger`, `variables`, `stages` → `jobs` → `steps` → `tasks`.
 
+- **Azure Boards — jerarquía de trabajo ágil:** el mismo proyecto de Azure DevOps que aloja los pipelines (Repos + Pipelines) también aloja Boards: tableros de Sprint/Kanban sobre una jerarquía de Work Items `Epic → Feature → User Story → Task`. Un developer de Power Platform normalmente trabaja a nivel de User Story y Task: la User Story describe el valor de negocio ("Como vendedor, quiero ver el historial de solicitudes del cliente para no preguntarle datos que ya dio"), y las Tasks son el desglose técnico (crear Connection Reference, construir el flujo, agregar el componente al formulario). El Sprint Backlog agrupa las User Stories comprometidas para una iteración (típicamente 2 semanas); el Product Backlog es la cola priorizada de todo lo pendiente, sin comprometer todavía a un sprint.
+
+- **Criterios de aceptación en formato Gherkin (Given/When/Then):** formato estándar para escribir criterios de aceptación verificables en una User Story, en vez de frases vagas como "funciona correctamente". Estructura: `Given` (el estado inicial/contexto), `When` (la acción que ejecuta el usuario), `Then` (el resultado esperado, verificable). Ejemplo: `Given una Solicitud en estado "Aprobada" sin presupuesto asignado`, `When el usuario intenta guardar el formulario`, `Then el sistema bloquea el guardado y muestra "Se requiere presupuesto mayor a 0"`. Este formato no es exclusivo de testing automatizado (Cucumber/SpecFlow lo ejecutan literalmente) — en Azure Boards se usa igual de bien como texto plano en el campo "Acceptance Criteria" de la User Story, y es lo que un QA usa para escribir sus casos de prueba sin ambigüedad.
+
+- **Vincular commits y Pull Requests a Work Items:** Azure Repos permite enlazar un commit o PR a un Work Item escribiendo `AB#123` (donde 123 es el ID del Work Item) en el mensaje del commit o la descripción del PR. Azure Boards detecta la referencia automáticamente y muestra el commit/PR vinculado en la User Story — dando trazabilidad completa de qué cambio de código resolvió qué historia, sin mantener una matriz aparte. Al completar el PR, el Work Item puede transicionar de estado automáticamente (configurable en las reglas del board).
+
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
 #### Actividad 19.1: Configurar Service Connection en Azure DevOps
@@ -327,6 +333,23 @@ git add "$OutputPath/$SolutionName"
 git commit -m "chore: export solution $SolutionName $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
 ```
 
+#### Actividad 19.6: Sprint en Azure Boards con criterios Gherkin y trazabilidad al commit
+
+1. Azure DevOps → Boards → Sprints → crear un Sprint de 2 semanas (`Sprint 1`).
+2. Crear una **User Story**: "Como vendedor, quiero ver el historial de solicitudes del cliente en el formulario para no preguntarle datos que ya dio." Escribir sus criterios de aceptación en formato Gherkin en el campo "Acceptance Criteria":
+   ```
+   Given el formulario de Solicitud tiene un cliente seleccionado en sit_solicitante
+   When el usuario abre el formulario
+   Then se muestran las últimas 5 solicitudes de ese cliente, ordenadas de más reciente a más antigua
+
+   Given el campo sit_solicitante está vacío
+   When el usuario abre el formulario
+   Then no se ejecuta ninguna consulta y no aparece ningún error
+   ```
+3. Descomponer la User Story en 2-3 **Tasks** técnicas (ej. "Implementar cargarHistorialCliente en JS", "Configurar Web Resource y registrar evento OnChange") y asignarlas al Sprint.
+4. Al commitear el cambio que resuelve la Task, incluir la referencia al Work Item en el mensaje: `git commit -m "feat: cargarHistorialCliente con filtro por cliente AB#123"` (reemplazando `123` por el ID real de la Task).
+5. Verificar en Azure Boards: la User Story/Task muestra el commit vinculado en su pestaña "Development", sin haber documentado el enlace manualmente.
+
 ### 💼 Caso Real de Negocio
 **Empresa:** Partner de Microsoft con 8 proyectos Power Platform simultáneos  
 **Problema:** Los despliegues a producción eran manuales, tardaban 3 horas, y 1 de cada 4 tenía errores. No había audit trail de qué se desplegó cuándo.  
@@ -339,6 +362,8 @@ git commit -m "chore: export solution $SolutionName $(Get-Date -Format 'yyyy-MM-
 - Versionar la solución con el número de build del pipeline: `1.$(Build.BuildId).0`
 - Separar pipelines de CI y CD — el CD consume artifacts del CI
 - Configurar "Required approvers" en el Environment de UAT y PROD en Azure DevOps
+- Escribir siempre criterios de aceptación en Given/When/Then antes de estimar la User Story — una historia sin criterios verificables no está lista para el sprint (no cumple Definition of Ready)
+- Referenciar `AB#<id>` en cada commit relevante — la trazabilidad código↔historia no debe reconstruirse manualmente en una auditoría
 
 ### ⚠️ Errores Comunes
 | Error | Causa | Solución |
@@ -346,6 +371,8 @@ git commit -m "chore: export solution $SolutionName $(Get-Date -Format 'yyyy-MM-
 | Pipeline falla con "Solution not found" | Nombre de solución con espacio o mayúsculas incorrectas | Verificar nombre exacto en la UI vs el YAML |
 | Import tarda más de 2 minutos y timeout | Solución grande sin async mode | Agregar `AsyncOperation: true` y aumentar `MaxAsyncWaitTime` |
 | Solution Checker da falsos positivos | Reglas muy estrictas para componentes de terceros | Excluir componentes de managed solutions del análisis |
+| User Story con criterio "debe funcionar bien" | Se captura el deseo de negocio pero no el comportamiento verificable | Reescribir como Given/When/Then — si no se puede escribir un escenario concreto, la historia todavía no está entendida |
+| Commit no aparece vinculado en el Work Item | Se olvidó escribir `AB#<id>` en el mensaje del commit o PR | Agregar la referencia; en PRs ya fusionados, se puede vincular manualmente desde la pestaña "Development" del Work Item |
 
 ### 🧪 Criterios de Validación
 - [ ] Service connections configuradas para DEV y TEST en Azure DevOps
@@ -353,5 +380,6 @@ git commit -m "chore: export solution $SolutionName $(Get-Date -Format 'yyyy-MM-
 - [ ] Pipeline CD importa en TEST automáticamente al merge en develop
 - [ ] Environment UAT requiere aprobación manual antes de desplegar
 - [ ] Script pac CLI exporta y desempaqueta la solución en formato legible por git
+- [ ] Sprint en Azure Boards con una User Story con criterios Gherkin y al menos un commit vinculado vía `AB#`
 
 ---
