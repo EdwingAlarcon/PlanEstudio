@@ -34,7 +34,9 @@ catálogo porque ninguno de los 6 dominios existentes describe código de client
 agregaron 9 prácticas nuevas en total (IP-PA-005/006, IP-APP-004/005/006, IP-JS-001/002/003/004),
 subiendo el tope del piloto de 15 a 24 en `validate-interactive-practices.ts` y
 `interactive-practices.test.ts`. No se tocó ningún otro módulo ni las Fases 1-6 del rediseño más
-amplio, que siguen pendientes de aprobación explícita.
+amplio, que siguen pendientes de aprobación explícita. Su definición **no se conservó** del plan
+original; la propuesta vigente (borrador del 2026-10-08, sin aprobar ni implementar) está en
+`PROPUESTA_FASES_APRENDER_HACIENDO.md`.
 
 ## Mantenimiento vigente — 2026-10-01
 
