@@ -36,6 +36,20 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 
 #### 🟢 Núcleo obligatorio
 
+> **Cómo está organizado el Núcleo:** construyes dos flujos en tres bloques (el flujo automatizado, sus condiciones y su historial de ejecución, y el flujo programado). En cada uno alternas una idea corta, una práctica de pocos minutos y un dato real de tu propio flujo. Cierras con un reto en el que ya no te digo los pasos. Las microprácticas no necesitan tenant; construir los flujos sí (tu ambiente Developer y la tabla del Módulo 2).
+
+## 🧩 Microlección 1 — Tu primer flujo automatizado: trigger y acciones
+
+**¿Qué vas a aprender?** Cómo un flujo automatizado se dispara solo cuando pasa algo (el trigger) y encadena acciones usando los datos del paso anterior.
+
+**¿Por qué existe esto?** Si eliges mal el trigger, el flujo no corre o corre cuando no debe. Es el error más común del primer día, y todo lo demás (condiciones, correos, mensajes) depende de que el flujo arranque en el momento correcto.
+
+**Ejemplo pequeño:** "When a row is added" arranca el flujo cuando alguien crea una Solicitud TI; "Get a row by ID" trae los datos de quien la creó; "Send an email" le confirma por correo.
+
+**Ahora haz algo — micropráctica (6 min):** **[Elegir el disparador (trigger) correcto](/practica/ip-pa-001-elegir-trigger-correcto)**. Te da una necesidad de automatización y te pide elegir el trigger que la resuelve.
+
+**Práctica real en tu entorno (25 min):** haz los Pasos 1 a 3 de abajo.
+
 ##### Práctica 5.1: Flujo Automated - Notificación de Solicitudes
 
 *Trigger: Cuando se crea una Solicitud TI en Dataverse*
@@ -73,6 +87,28 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
    <p>Te notificaremos cuando sea asignada.</p>
    ```
 
+**Evidencia a reportar (el dato exacto que viste, no un "sí/no"):**
+
+| Campo | Tu valor |
+|---|---|
+| El trigger exacto que usaste: tabla, tipo de cambio (Change type) y alcance (Scope) | ___ |
+| La acción que obtiene los datos del solicitante y qué valor del trigger usa como Row ID | ___ |
+| El asunto exacto del correo que recibiste | ___ |
+
+---
+
+## 🧩 Microlección 2 — Condiciones y el historial de ejecución
+
+**¿Qué vas a aprender?** Cómo una condición decide qué rama ejecuta el flujo, y cómo leer el Run history para saber qué pasó de verdad.
+
+**¿Por qué existe esto?** Un flujo que falla en silencio es peor que no tener flujo. El Run history te dice qué acciones corrieron, cuáles fallaron y con qué mensaje; es lo que usas para comprobar lo que realmente pasó, no lo que creías que pasaba.
+
+**Ejemplo pequeño:** si Prioridad = Crítica se envía un mensaje a Teams, y si no, un correo al grupo de TI. En el Run history cada acción aparece con una marca verde o una X roja.
+
+**Ahora diagnostica — micropráctica (6 min):** **[Diagnosticar una condición invertida](/practica/ip-pa-003-corregir-condicion-invertida)**. Parte de un síntoma —el flujo manda a aprobación lo que no debía— y te pide arreglar la condición.
+
+**Práctica real en tu entorno (20 min):** haz los Pasos 4 y 5 de abajo.
+
 **Paso 4: Notificar a equipo TI**
 
 1. Condition: Si Prioridad = "Crítica"
@@ -90,6 +126,26 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 2. Crear nueva Solicitud TI desde Power Apps
 3. Verificar en "Run history" del flujo
 4. Validar emails y notificación Teams recibidos
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Qué rama de la condición se ejecutó cuando creaste una solicitud de prioridad Crítica | ___ |
+| El estado que muestra el Run history para esa ejecución (Succeeded, Failed…) y cuánto tardó | ___ |
+| Si alguna acción falló: el nombre exacto de la acción y el mensaje de error que viste | ___ |
+
+---
+
+## 🧩 Microlección 3 — El flujo programado: el reloj en vez del evento
+
+**¿Qué vas a aprender?** Cómo un flujo se ejecuta por horario y consulta los datos con un filtro.
+
+**¿Por qué existe esto?** Los reportes y los recordatorios no dependen de que pase algo: dependen del reloj. Y filtrar en el origen (al leer la tabla) trae solo lo necesario, en vez de traer todo y descartar después.
+
+**Ejemplo pequeño:** una recurrencia diaria a las 8:00, "List rows" con un filtro de estado y un único correo con el resumen.
+
+**Práctica real en tu entorno (30 min):** esta microlección no tiene micropráctica propia; la verificación es ejecutar el flujo a mano (Test) y revisar lo que devolvió.
 
 ##### Práctica 5.2: Flujo Scheduled - Reporte Diario
 
@@ -172,6 +228,37 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
     - Expression: `empty(outputs('List_rows')?['body/value'])`
     - Yes: Terminate (Success) con mensaje "No hay solicitudes"
     - No: Enviar email
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| La hora y la zona horaria que configuraste en la recurrencia | ___ |
+| El filtro exacto de "List rows" | ___ |
+| Cuántas filas devolvió la ejecución de prueba y qué hizo el flujo con ese número | ___ |
+
+---
+
+## 🔁 Reto de transferencia — Aviso de solicitudes sin asignar, sin pasos
+
+Esta vez no te digo los pasos: aplica lo que viste a un pedido nuevo.
+
+> **Requerimiento:** el gerente de TI quiere que se le avise solo cuando haya solicitudes **sin técnico asignado desde hace más de 3 días**. Si no hay ninguna, no quiere recibir nada.
+> **Criterios de aceptación:** (1) el flujo corre solo, una vez al día; (2) el filtro trae únicamente las solicitudes sin asignar y con más de 3 días, y no todas; (3) si no hay ninguna, el flujo termina sin enviar el correo.
+> **Restricciones:** un solo flujo, y sin loops anidados. No uses el trigger "When a row is added": lo que buscas depende del paso del tiempo, no de un evento.
+> **Pistas si te atoras:** la recurrencia y "List rows" están en la Práctica 5.2; la condición de "no enviar si está vacío" es el Paso 5 de esa práctica; recuerda que los valores Choice se filtran por su número, no por su nombre.
+
+**Ahora haz algo — transferencia guiada (8 min):** **[Transferir: avisar solo cuando haga falta](/practica/ip-pa-007-transferir-aviso-sin-asignar)**. Retoma el flujo de reporte diario pero con un pedido nuevo, y te pide decidir qué cambia.
+
+**Si aún no tienes tenant:** escribe el filtro exacto que usarías, en qué punto del flujo evitas enviar el correo vacío y por qué un trigger de evento no sirve aquí.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| El filtro exacto de "List rows" de tu flujo | ___ |
+| En qué punto del flujo evitas enviar el correo cuando no hay solicitudes | ___ |
+| Qué comprobaste en el Run history al probarlo (con y sin solicitudes que cumplan) | ___ |
 
 #### 🔧 Profundización opcional
 
@@ -402,27 +489,27 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 
 ### ⚠️ Errores Comunes
 
-1. **Error**: Flujo falla con "Item not found"
+1. **Lo que ves:** el flujo falla con "Item not found".
     - **Causa**: Race condition o registro eliminado entre trigger y acción
     - **Solución**: Agregar verificación de existencia + error handling
 
-2. **Error**: "Dynamic content not available"
+2. **Lo que ves:** el mensaje "Dynamic content not available" al buscar un valor.
     - **Causa**: Referencia a acción dentro de scope/loop diferente
     - **Solución**: Usar outputs() expression o reestructurar
 
-3. **Error**: Loops infinitos o exceso de ejecuciones
+3. **Lo que ves:** el flujo se ejecuta una y otra vez, o hay muchas más ejecuciones de las esperadas.
     - **Causa**: Trigger "When modified" que actualiza el mismo registro
     - **Solución**: Agregar condición para evitar auto-trigger o usar columnas de control
 
-4. **Error**: "Connection not valid" en ejecuciones automáticas
+4. **Lo que ves:** el error "Connection not valid" en ejecuciones automáticas.
     - **Causa**: Conexión con credenciales de usuario que cambió contraseña
     - **Solución**: Usar Service Account o renovar conexión
 
-5. **Error**: Timeout en "Apply to each" con muchos registros
+5. **Lo que ves:** el flujo se agota (timeout) dentro de un "Apply to each" con muchos registros.
     - **Causa**: Procesamiento serial de miles de items
     - **Solución**: Pagination + múltiples flujos o usar Concurrency control
 
-6. **Error**: Expresiones con sintaxis incorrecta
+6. **Lo que ves:** una expresión que no valida o devuelve un error de sintaxis.
     - **Causa**: Quotes incorrectas o funciones no existentes
     - **Solución**: Validar en Expression editor, consultar documentación
 

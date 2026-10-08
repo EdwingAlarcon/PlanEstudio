@@ -5,8 +5,8 @@ import { PRACTICE_REQUESTS } from "@/data/practice/requests";
 // Tope del banco de prácticas. Regla (PROPUESTA_FASES_APRENDER_HACIENDO.md): solo sube al aprobar una fase
 // del rediseño, y por el número de prácticas que esa fase planea añadir — no por comodidad.
 export const MIN_INTERACTIVE_PRACTICES = 12;
-// 24 (pilotos 10/11/13) + 3 del Módulo 1 + 1 del Módulo 2 + 2 del Módulo 3 + 3 del Módulo 4 (Fase 2).
-export const MAX_INTERACTIVE_PRACTICES = 33;
+// 24 (pilotos 10/11/13) + 3 del Módulo 1 + 1 del Módulo 2 + 2 del Módulo 3 + 3 del Módulo 4 + 1 del Módulo 5 (Fase 2).
+export const MAX_INTERACTIVE_PRACTICES = 34;
 
 export const INTERACTIVE_PRACTICE_TYPES = ["multiple-decision", "flow-builder", "query-playground", "debug-scenario"] as const;
 export const INTERACTIVE_PRACTICE_DOMAINS = ["dataverse", "power-apps", "power-automate", "fetchxml", "odata", "troubleshooting", "javascript"] as const;
@@ -1038,6 +1038,39 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     relatedModuleIds: [4],
     relatedLabIds: ["LAB-004"],
     tags: ["transferencia", "views", "publicar"],
+  },
+  {
+    id: "IP-PA-007",
+    slug: "ip-pa-007-transferir-aviso-sin-asignar",
+    title: "Transferir: avisar solo cuando haga falta",
+    description: "El reporte diario se vuelve un aviso condicionado al paso del tiempo — decide qué cambia en el flujo.",
+    type: "multiple-decision",
+    domain: "power-automate",
+    level: "junior",
+    estimatedMinutes: 8,
+    prerequisites: ["Módulo 5"],
+    learningObjectives: ["Distinguir una necesidad basada en el tiempo de una basada en un evento", "Filtrar en el origen y evitar acciones cuando no hay nada que reportar"],
+    scenario: {
+      context: "El flujo Reporte Diario Solicitudes envía un correo cada mañana a las 8:00 con las solicitudes pendientes, incluso los días sin ninguna, y el gerente ya empezó a ignorarlo. Ahora pide: avisarle solo cuando haya solicitudes sin técnico asignado desde hace más de 3 días, y no recibir nada si no hay.",
+      objective: "Selecciona los cambios correctos para este nuevo requisito.",
+    },
+    multiple: true,
+    options: [
+      { id: "mantener-recurrencia", label: "Mantener el trigger de recurrencia diaria", consequence: "Lo que buscas depende del paso del tiempo (\"más de 3 días\"), y ningún evento lo dispara: necesitas que un reloj lo revise cada día.", score: 1 },
+      { id: "filtrar-origen", label: "Filtrar en \"List rows\" para traer solo las solicitudes sin asignar y con más de 3 días", consequence: "Filtrar en el origen trae solo lo necesario, en vez de traer todo y descartar después.", score: 1 },
+      { id: "terminar-si-vacio", label: "Agregar una condición antes del correo que termine el flujo sin enviar si no hay filas", consequence: "Evita el correo vacío que el gerente ya ignoraba: si no hay nada que reportar, no se avisa.", score: 1 },
+      { id: "trigger-evento", label: "Cambiar el trigger a \"When a row is added\"", consequence: "Se dispara cuando se crea una solicitud, no cuando pasan 3 días sin asignarla: nunca detectaría lo que se pide.", score: 0 },
+      { id: "loop-condicion", label: "Traer todas las solicitudes y revisar cada una con un \"Apply to each\" y una condición dentro", consequence: "Funciona, pero es más lento y gasta más ejecuciones que filtrar al leer la tabla.", score: 0 },
+    ],
+    correctOptionIds: ["mantener-recurrencia", "filtrar-origen", "terminar-si-vacio"],
+    hints: [
+      { id: "h1", content: "Pregúntate qué hace que el aviso sea necesario: ¿ocurre un evento, o pasa el tiempo?" },
+      { id: "h2", content: "Si traes solo lo que cumple la condición y no avisas cuando no hay nada, el correo vuelve a ser útil." },
+      { id: "h3", content: "Se mantiene la recurrencia, el filtro va en List rows y una condición evita enviar cuando la lista está vacía." },
+    ],
+    relatedModuleIds: [5],
+    relatedLabIds: ["LAB-005"],
+    tags: ["transferencia", "recurrence", "list-rows"],
   },
   {
     id: "IP-PA-005",
