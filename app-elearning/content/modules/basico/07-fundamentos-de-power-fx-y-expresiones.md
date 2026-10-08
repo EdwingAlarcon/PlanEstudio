@@ -58,6 +58,20 @@ Dominar el lenguaje de fórmulas Power Fx para lógica avanzada en Canvas Apps.
 
 Completa primero los ejercicios 7.1.1, 7.1.2, 7.2.1, 7.3.1 y 7.5.1. Con eso tendrás búsqueda/filtro, búsqueda de un registro, validación de formulario, formato de texto y una primera lectura de delegación.
 
+> **Cómo está organizado el Núcleo:** aprendes Power Fx en cuatro bloques cortos (leer y filtrar, validar, dar formato, delegación). En cada uno alternas una idea, una práctica de pocos minutos y un dato real de tu propia app. Cierras con un reto en el que ya no te doy las fórmulas. Las microprácticas no necesitan tenant; escribir las fórmulas sí necesita tu app Canvas del Módulo 3. Los ejercicios marcados como profundización quedan para después.
+
+## 🧩 Microlección 1 — Leer una fórmula: Filter y LookUp
+
+**¿Qué vas a aprender?** A traducir una fórmula de Power Fx a una frase normal, y cómo `Filter` (varias filas) y `LookUp` (una fila) traen los datos que una pantalla necesita.
+
+**¿Por qué existe esto?** Power Fx no es código misterioso: cada fórmula se puede decir con palabras. Saber leerla bien es la mitad de saber escribirla, y te permite detectar errores sin ejecutar nada.
+
+**Ejemplo pequeño:** `Filter('Solicitudes TI', Estado.Value = "Nueva")` quiere decir "muéstrame solo las solicitudes nuevas".
+
+**Ahora haz algo — micropráctica (6 min):** **[Leer una fórmula y decir qué hace](/practica/ip-app-011-leer-una-formula)**. Te da una fórmula con dos condiciones y te pide elegir las lecturas correctas, incluyendo lo que la fórmula NO hace.
+
+**Práctica real en tu app (25 min):** haz los Ejercicios 1 y 2 de la Práctica 7.1 de abajo.
+
 ##### Práctica 7.1: Funciones de Tablas y Filtrado
 
 **Ejercicio 1: Multi-Filter Gallery**
@@ -82,6 +96,14 @@ LookUp(
 ) ?? "correo@desconocido.com"
 ```
 
+**Evidencia a reportar (el dato exacto que viste, no un "sí/no"):**
+
+| Campo | Tu valor |
+|---|---|
+| La fórmula exacta de `Items` de tu Gallery con filtros, copiada de la barra de fórmulas | ___ |
+| Con qué combinación de filtros aparece cada solicitud y con cuál desaparece | ___ |
+| El valor que devolvió tu `LookUp` y qué mostró cuando no encontró el registro | ___ |
+
 **Ejercicio 3: AddColumns para Enriquecer Datos**
 
 > Profundización opcional: este patrón ya combina tabla, columna calculada y búsqueda relacionada. Si todavía estás entendiendo `Filter` y `LookUp`, vuelve a este ejercicio después.
@@ -98,6 +120,18 @@ ClearCollect(
     )
 )
 ```
+
+---
+
+## 🧩 Microlección 2 — Validar con If, IsBlank y Len
+
+**¿Qué vas a aprender?** Cómo un botón decide si se habilita según lo que hay en los campos del formulario.
+
+**¿Por qué existe esto?** Una validación evita guardar datos incompletos antes de que lleguen a la base de datos. El error típico es combinar las condiciones con el operador equivocado, y entonces el botón se habilita cuando no debería.
+
+**Ejemplo pequeño:** `!IsBlank(TextInputTitulo.Text) && Len(TextInputDescripcion.Text) >= 20` se cumple solo si hay título Y la descripción tiene al menos 20 caracteres.
+
+**Práctica real en tu app (20 min):** haz el Ejercicio 1 de la Práctica 7.2 de abajo; los Ejercicios 2 y 3 son para ampliar.
 
 ##### Práctica 7.2: Lógica Condicional y Validaciones
 
@@ -142,6 +176,28 @@ If(
 )
 ```
 
+**Ahora diagnostica — micropráctica (5 min):** **[Diagnosticar: el botón Guardar se habilita con el título vacío](/practica/ip-app-012-boton-habilitado-de-mas)**. Parte de un síntoma exacto y te pide la causa y la corrección, antes de ver la solución.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| La fórmula exacta de `Enabled` de tu botón Guardar | ___ |
+| Qué hace el botón con el título vacío y la descripción de 25 caracteres | ___ |
+| Qué hace el botón con el título lleno y la descripción de 5 caracteres | ___ |
+
+---
+
+## 🧩 Microlección 3 — Dar formato a texto y fechas
+
+**¿Qué vas a aprender?** A presentar un número o una fecha como lo espera quien usa la app, con `Text()` y un formato.
+
+**¿Por qué existe esto?** Un dato crudo (una fecha en formato de máquina) confunde. Darle formato es la diferencia entre un dato correcto y un dato que la persona entiende de un vistazo.
+
+**Ejemplo pequeño:** `Text(ThisItem.'Fecha Solicitud', "dd/MM/yyyy")` muestra una fecha como 12/03/2026.
+
+**Práctica real en tu app (15 min):** haz el Ejercicio 1 de la Práctica 7.3 de abajo.
+
 ##### Práctica 7.3: Manipulación de Texto y Fechas
 
 **Ejercicio 1: Formateo de Texto**
@@ -179,6 +235,14 @@ Last(Split(LookUp(Contacts, ID = Solicitante.ID, Email), "@")).Result
 // Convertir string separado por comas a tabla
 Split("Hardware,Software,Red,Accesos", ",")
 ```
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| La fórmula exacta que usaste para dar formato y el texto que produjo | ___ |
+| Qué muestra el mismo dato sin el formato | ___ |
+| Un formato de fecha distinto que probaste y su resultado | ___ |
 
 ##### Práctica 7.4: Collections y Contexto
 
@@ -239,6 +303,18 @@ With(
 )
 ```
 
+---
+
+## 🧩 Microlección 4 — Delegación: que tu app no pierda registros
+
+**¿Qué vas a aprender?** Qué es delegar (que el servidor haga el filtro), qué significa la línea azul de advertencia y cómo reescribir una condición para que sí se delegue.
+
+**¿Por qué existe esto?** Si una fórmula no se puede delegar, la app solo revisa los primeros 500 registros (hasta 2.000 si cambias el límite) y puede mostrar resultados incompletos sin avisarte. Con pocos datos no lo notas; con muchos, falta información.
+
+**Ejemplo pequeño:** poner `DateDiff(...)` sobre la columna dentro de `Filter` no se delega. Comparar la columna con una fecha calculada fuera de la fila, como `'Fecha Solicitud' < DateAdd(Today(), -7, Days)`, sí se delega.
+
+**Práctica real en tu app (20 min):** haz el Ejercicio 1 de la Práctica 7.5 de abajo; los Ejercicios 2 y 3 son para ampliar.
+
 ##### Práctica 7.5: Delegación y Performance
 
 **Ejercicio 1: Identificar Fórmulas No Delegables**
@@ -260,10 +336,11 @@ Filter('Solicitudes TI', 'Fecha Solicitud' < DateAdd(Today(), -7, Days))
 ❌ **Mal rendimiento** (carga 500, luego filtra en cliente):
 ```javascript
 SortByColumns(
-    Filter('Solicitudes TI', StartsWith(Título, TextInputBuscar.Text)),
+    Filter('Solicitudes TI', Len(Título) > 20),
     "Fecha Solicitud",
     Descending
 )
+// Len() aplicada a la columna no se puede delegar a Dataverse
 ```
 
 ✅ **Optimizado** (filtra en servidor):
@@ -271,12 +348,13 @@ SortByColumns(
 SortByColumns(
     Filter(
         'Solicitudes TI',
-        'Fecha Solicitud' >= DateAdd(Today(), -90, Days)  // Delegable
+        StartsWith(Título, TextInputBuscar.Text) &&
+        'Fecha Solicitud' >= DateAdd(Today(), -90, Days)  // StartsWith y la comparación de fecha son delegables
     ),
     "Fecha Solicitud",
     Descending
 )
-// Luego aplicar filtro de texto con Search (también delegable con Dataverse)
+// Search también es delegable con columnas de texto de Dataverse
 ```
 
 **Ejercicio 3: Uso de Collections para No Delegable**
@@ -295,6 +373,37 @@ Filter(
     DateDiff('Fecha Solicitud', Today(), Days) > 7  // Ahora funciona porque es Collection local
 )
 ```
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| La fórmula no delegable que escribiste y el texto de la advertencia azul | ___ |
+| La versión corregida y si la advertencia desapareció | ___ |
+| Cuántas filas devuelve cada versión con tus datos de prueba | ___ |
+
+---
+
+## 🔁 Reto de transferencia — Tu app, más robusta, sin pasos
+
+Esta vez no te doy las fórmulas: aplica lo que viste a un cambio de requisito.
+
+> **Requerimiento:** vuelve a tu app del Módulo 3 y mejora tres cosas. (1) El botón Guardar solo se habilita si hay título y la descripción tiene al menos 20 caracteres. (2) La Gallery de la lista muestra únicamente las solicitudes con más de 14 días abiertas. (3) Un Label muestra la solicitud como "Abierta desde 12/03/2026 - Hardware", con la fecha formateada y la categoría.
+> **Criterios de aceptación:** (1) el botón cambia de estado según el contenido de los campos; (2) el filtro de fecha no muestra la advertencia azul de delegación; (3) cada fórmula tiene un comentario `//` que explica su intención.
+> **Restricciones:** no uses `DateDiff` dentro del `Filter`, y no cambies el modelo de datos.
+> **Pistas si te atoras:** la validación combina `IsBlank` y `Len` (Práctica 7.2); el formato de la fecha está en la Práctica 7.3; la forma delegable de comparar fechas está en la Práctica 7.5, Ejercicio 1.
+
+**Ahora haz algo — transferencia guiada (8 min):** **[Transferir: la condición de fecha con 8.000 registros](/practica/ip-app-013-transferir-condicion-de-fecha)**. Retoma el patrón de delegación del módulo con un caso nuevo y te pide decidir qué cambiar y qué evitar.
+
+**Si aún no tienes tenant:** escribe las tres fórmulas que usarías, cada una con su comentario `//`, y explica con tus palabras por qué no usas `DateDiff` en el filtro.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| La fórmula de `Enabled` del botón Guardar, con su comentario | ___ |
+| La fórmula de `Items` de la Gallery filtrada por fecha y si hay advertencia azul | ___ |
+| La fórmula del Label con el texto que produjo | ___ |
 
 ### 💼 Caso Real de Negocio
 
@@ -345,27 +454,27 @@ Filter(
 
 ### ⚠️ Errores Comunes
 
-1. **Error**: Fórmula devuelve Blank inesperadamente
+1. **Lo que ves:** una fórmula devuelve vacío (Blank) cuando no lo esperabas.
     - **Causa**: Lookup no encuentra registro o división por 0
     - **Solución**: Usar `??` (null coalescing) o If(IsBlank(...))
 
-2. **Error**: "Incompatible type" en Patch
+2. **Lo que ves:** el error "Incompatible type" al usar Patch.
     - **Causa**: Tipo de dato no coincide (text vs number, Choice vs string)
     - **Solución**: Convertir con Value(), Text(), o usar {Value: "..."} para Choices
 
-3. **Error**: Collection no actualiza Gallery
+3. **Lo que ves:** la Gallery no cambia aunque modificaste la colección.
     - **Causa**: Usar Set en lugar de Collect/Patch/Remove
     - **Solución**: Collections son observables, variables no. Usar ClearCollect o UpdateIf
 
-4. **Error**: ForAll no guarda cambios
+4. **Lo que ves:** ForAll parece no guardar los cambios.
     - **Causa**: ForAll es funcional, no ejecuta side-effects en orden
     - **Solución**: Validar con Patch individual o usar Concurrent para operaciones independientes
 
-5. **Error**: Filter devuelve registros incorrectos
-    - **Causa**: Operador lógico mal usado (And vs &&, Or vs ||)
-    - **Solución**: Power Fx usa And/Or, no &&/|| (aunque también soportados)
+5. **Lo que ves:** Filter devuelve registros que no esperabas, o deja fuera algunos.
+    - **Causa**: Se confundió And con Or (o && con ||), o faltan paréntesis al combinar condiciones
+    - **Solución**: And (&&) exige que se cumplan todas las condiciones y Or (||) basta con una; ambas formas son válidas en Power Fx. Agrupa con paréntesis cuando mezcles las dos
 
-6. **Error**: "Delegation warning" ignorado
+6. **Lo que ves:** una línea azul de delegación que decidiste ignorar, y resultados incompletos con muchos registros.
     - **Causa**: Asumir que funciona con >500 registros
     - **Solución**: NUNCA ignorar warnings de delegación; refactorizar o usar Collections
 

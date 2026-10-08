@@ -5,8 +5,8 @@ import { PRACTICE_REQUESTS } from "@/data/practice/requests";
 // Tope del banco de prácticas. Regla (PROPUESTA_FASES_APRENDER_HACIENDO.md): solo sube al aprobar una fase
 // del rediseño, y por el número de prácticas que esa fase planea añadir — no por comodidad.
 export const MIN_INTERACTIVE_PRACTICES = 12;
-// 24 (pilotos 10/11/13) + 3 del Módulo 1 + 1 del Módulo 2 + 2 del Módulo 3 + 3 del Módulo 4 + 1 del Módulo 5 + 4 del Módulo 6 (Fase 2).
-export const MAX_INTERACTIVE_PRACTICES = 38;
+// 24 (pilotos 10/11/13) + 3 del Módulo 1 + 1 del Módulo 2 + 2 del Módulo 3 + 3 del Módulo 4 + 1 del Módulo 5 + 4 del Módulo 6 + 3 del Módulo 7 (Fase 2).
+export const MAX_INTERACTIVE_PRACTICES = 41;
 
 export const INTERACTIVE_PRACTICE_TYPES = ["multiple-decision", "flow-builder", "query-playground", "debug-scenario"] as const;
 export const INTERACTIVE_PRACTICE_DOMAINS = ["dataverse", "power-apps", "power-automate", "fetchxml", "odata", "troubleshooting", "javascript"] as const;
@@ -1203,6 +1203,104 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     relatedModuleIds: [6],
     relatedLabIds: ["LAB-002"],
     tags: ["transferencia", "power-bi", "modelo-estrella"],
+  },
+  {
+    id: "IP-APP-011",
+    slug: "ip-app-011-leer-una-formula",
+    title: "Leer una fórmula y decir qué hace",
+    description: "Traduce una fórmula de Power Fx a una frase y distingue lo que hace de lo que no hace.",
+    type: "multiple-decision",
+    domain: "power-apps",
+    level: "starter",
+    estimatedMinutes: 6,
+    prerequisites: ["Módulo 7"],
+    learningObjectives: ["Leer una fórmula Filter con dos condiciones y decir qué filas devuelve", "Saber que Filter no modifica la tabla, solo decide qué se muestra"],
+    scenario: {
+      context: "En la propiedad Items de la Gallery de tu app aparece esta fórmula: `Filter('Solicitudes TI', Estado.Value = \"Nueva\" && Prioridad.Value = \"Alta\")`. Un compañero te pide que le expliques qué muestra, sin ejecutarla.",
+      objective: "Selecciona las lecturas correctas de la fórmula.",
+    },
+    multiple: true,
+    options: [
+      { id: "ambas-condiciones", label: "Muestra solo las solicitudes cuyo Estado es Nueva y cuya Prioridad es Alta", consequence: "El operador && exige que se cumplan las dos condiciones a la vez.", score: 1 },
+      { id: "descarta-resto", label: "Si una solicitud no cumple las dos condiciones, no aparece en la Gallery", consequence: "Filter descarta toda fila que no cumpla la regla completa.", score: 1 },
+      { id: "no-modifica", label: "No cambia la tabla de Dataverse: solo decide qué filas se muestran", consequence: "Filter devuelve una vista de la tabla; no modifica ni borra datos.", score: 1 },
+      { id: "una-u-otra", label: "Muestra las solicitudes Nuevas o las de prioridad Alta, aunque no cumplan las dos", consequence: "Eso sería con || (Or). Aquí && exige las dos a la vez.", score: 0 },
+      { id: "borra-datos", label: "Borra de la tabla las solicitudes que no cumplen la regla", consequence: "Filter no borra nada: solo filtra lo que se muestra.", score: 0 },
+    ],
+    correctOptionIds: ["ambas-condiciones", "descarta-resto", "no-modifica"],
+    hints: [
+      { id: "h1", content: "Lee la fórmula por partes: primero la tabla, luego cada condición, y al final cómo se unen." },
+      { id: "h2", content: "El operador que une las condiciones decide si deben cumplirse todas o basta con una." },
+      { id: "h3", content: "Con && deben cumplirse las dos, las filas que no cumplen no se muestran, y la tabla de Dataverse no cambia." },
+    ],
+    relatedModuleIds: [7],
+    relatedLabIds: ["LAB-003"],
+    tags: ["power-fx", "filter", "lectura"],
+  },
+  {
+    id: "IP-APP-012",
+    slug: "ip-app-012-boton-habilitado-de-mas",
+    title: "Diagnosticar: el botón Guardar se habilita con el título vacío",
+    description: "A partir de un síntoma exacto, identifica qué operador lógico está mal usado.",
+    type: "debug-scenario",
+    domain: "power-apps",
+    level: "starter",
+    estimatedMinutes: 5,
+    prerequisites: ["Módulo 7"],
+    learningObjectives: ["Distinguir && (todas las condiciones) de || (basta una)", "Leer una validación y predecir cuándo habilita el botón"],
+    scenario: {
+      context: "El botón Guardar de tu formulario tiene esta fórmula en la propiedad Enabled: `!IsBlank(TextInputTitulo.Text) || Len(TextInputDescripcion.Text) >= 20`. El título está vacío, la descripción tiene 25 caracteres y el botón aparece habilitado.",
+      objective: "Antes de mirar la solución, di por qué se habilita y cómo corregirlo.",
+    },
+    implementation: "Botón Guardar → Enabled:\n!IsBlank(TextInputTitulo.Text) || Len(TextInputDescripcion.Text) >= 20\nTítulo: vacío · Descripción: 25 caracteres → el botón se habilita",
+    symptom: "El botón Guardar se habilita con el título vacío siempre que la descripción tenga 20 caracteres o más.",
+    fixPrompt: "¿Qué operador hay que cambiar y por cuál, y por qué?",
+    acceptableFixes: ["&&", "||", "and", "todas las condiciones", "operador"],
+    testCases: [
+      { id: "con-or", input: "Las dos condiciones se unen con ||", expected: "el botón se habilita aunque una de las dos no se cumpla" },
+      { id: "con-and", input: "Las dos condiciones se unen con &&", expected: "el botón se habilita solo si hay título y la descripción es suficiente" },
+    ],
+    hints: [
+      { id: "h1", content: "Prueba la fórmula con el título vacío: ¿qué valor tiene cada lado y qué hace el operador que los une?" },
+      { id: "h2", content: "Con || basta que una condición sea verdadera; para exigir las dos hace falta el otro operador." },
+      { id: "h3", content: "Cambia || por && (And) para que se cumplan todas las condiciones a la vez." },
+    ],
+    relatedModuleIds: [7],
+    relatedLabIds: ["LAB-003"],
+    tags: ["power-fx", "troubleshooting", "operadores"],
+  },
+  {
+    id: "IP-APP-013",
+    slug: "ip-app-013-transferir-condicion-de-fecha",
+    title: "Transferir: la condición de fecha con 8.000 registros",
+    description: "Una condición de fecha funciona en pruebas pero pierde registros con datos reales — decide qué cambiar y qué evitar.",
+    type: "multiple-decision",
+    domain: "power-apps",
+    level: "junior",
+    estimatedMinutes: 8,
+    prerequisites: ["Módulo 7"],
+    learningObjectives: ["Reescribir una condición para que se pueda delegar", "Reconocer que subir el límite o usar una colección no resuelve un filtro no delegable"],
+    scenario: {
+      context: "La tabla Solicitudes TI ya tiene 8.000 registros. El jefe pide ver las solicitudes abiertas hace más de 30 días y escribiste `Filter('Solicitudes TI', DateDiff('Fecha Solicitud', Today(), Days) > 30)`. En pruebas funcionaba, pero en producción faltan solicitudes y la fórmula muestra la advertencia azul de delegación.",
+      objective: "Selecciona los cambios y las decisiones correctas.",
+    },
+    multiple: true,
+    options: [
+      { id: "comparar-con-fecha", label: "Reescribir la condición comparando la columna con una fecha calculada: `'Fecha Solicitud' < DateAdd(Today(), -30, Days)`", consequence: "Comparar la columna con un valor calculado fuera de la fila se puede delegar: Today() se envía al servidor como constante.", score: 1 },
+      { id: "no-envolver-columna", label: "Evitar funciones que envuelvan la columna (como DateDiff) dentro del Filter", consequence: "Una función aplicada a la columna impide delegar el filtro: el servidor no puede evaluarla.", score: 1 },
+      { id: "tratar-advertencia", label: "Tratar la advertencia azul como un hallazgo y comprobar el resultado con más de 500 registros", consequence: "La advertencia avisa de que, con muchos registros, la app puede devolver resultados incompletos sin avisar.", score: 1 },
+      { id: "subir-limite", label: "Subir el límite de filas a 2.000 en la configuración y dar el problema por resuelto", consequence: "Con 8.000 registros siguen faltando; subir el límite solo mueve el corte.", score: 0 },
+      { id: "coleccion", label: "Cargar todas las solicitudes en una colección y filtrar ahí", consequence: "La colección se llena con el mismo límite de 500 o 2.000 filas, así que el problema sigue.", score: 0 },
+    ],
+    correctOptionIds: ["comparar-con-fecha", "no-envolver-columna", "tratar-advertencia"],
+    hints: [
+      { id: "h1", content: "Fíjate en qué le pides al servidor: ¿una comparación sencilla de la columna o una función aplicada a cada fila?" },
+      { id: "h2", content: "Lo que no depende de la fila (como Today()) viaja al servidor como constante; lo que envuelve la columna, no." },
+      { id: "h3", content: "Compara la columna con una fecha calculada, evita DateDiff dentro del Filter y trata la advertencia como un aviso real." },
+    ],
+    relatedModuleIds: [7],
+    relatedLabIds: ["LAB-003"],
+    tags: ["transferencia", "delegacion", "fechas"],
   },
   {
     id: "IP-PA-005",
