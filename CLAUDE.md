@@ -37,11 +37,11 @@ subiendo el tope del piloto de 15 a 24 en `validate-interactive-practices.ts` y
 amplio, que siguen pendientes de aprobación explícita. Su definición **no se conservó** del plan
 original; la propuesta vigente (2026-10-08) está en `PROPUESTA_FASES_APRENDER_HACIENDO.md`. **Fase 1 hecha**
 (línea base: 3/76 módulos con reto de transferencia; `npm run audit:lbd`; tope de prácticas en
-`MIN/MAX_INTERACTIVE_PRACTICES`, hoy 12-41, que solo sube al aprobar cada fase). **Fase 2 en curso:** Módulos 1
-a 7 migrados (10/76 = 13,2%; +3 prácticas IP-DV-005, IP-TRB-003, IP-DV-006 en el M1, +1 IP-DV-007 en el M2,
-+2 IP-APP-007, IP-APP-008 en el M3, +3 IP-APP-009, IP-TRB-004, IP-APP-010 en el M4, +1 IP-PA-007 en el M5, +4
-IP-DV-008, IP-DV-009, IP-TRB-005, IP-DV-010 en el M6 y +3 IP-APP-011, IP-APP-012, IP-APP-013 en el M7); falta el
-Módulo 8. Errores de contenido corregidos (verificados en Microsoft Learn): M6, con dirección Single el filtro
+`MIN/MAX_INTERACTIVE_PRACTICES`, hoy 12-44, que solo sube al aprobar cada fase). **Fase 2 (contenido completo, falta
+la prueba de cierre):** Módulos 1 a 8 migrados (11/76 = 14,5%; +3 prácticas IP-DV-005, IP-TRB-003, IP-DV-006 en el
+M1, +1 IP-DV-007 en el M2, +2 IP-APP-007, IP-APP-008 en el M3, +3 IP-APP-009, IP-TRB-004, IP-APP-010 en el M4, +1
+IP-PA-007 en el M5, +4 IP-DV-008, IP-DV-009, IP-TRB-005, IP-DV-010 en el M6, +3 IP-APP-011, IP-APP-012, IP-APP-013
+en el M7 y +3 IP-DV-011, IP-TRB-006, IP-DV-012 en el M8). Errores de contenido corregidos (verificados en Microsoft Learn): M6, con dirección Single el filtro
 viaja del lado "uno" al "muchos"; M7, `StartsWith` sí es delegable en Dataverse y `Len` no. Duda sin verificar en el
 M7 (Práctica 7.3, Ejercicio 1): `Text(...ID, "000000")` asume un ID numérico, pero en Dataverse el ID es un GUID. La prueba como principiante al cerrar la Fase 2 la
 hace Claude (simulación independiente con un agente sin contexto), no una persona real. El resto de Fases 3-5 y el recorte de la Fase 6 (solo Módulos 43,
@@ -117,9 +117,9 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 
 **Invariantes que no debes romper:**
 - Conteos vigentes: **76 módulos, 75 labs, 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
-  33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 41 prácticas interactivas
+  33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 44 prácticas interactivas
   y 40 páginas de recursos** (prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
-  Doing de Módulos 11, 10 y 13, y a 41 con los Módulos 1 a 7 de la Fase 2 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de
+  Doing de Módulos 11, 10 y 13, y a 44 con los Módulos 1 a 8 de la Fase 2 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de
   Módulo 13 y a 40 con "Casos reales por industria" (`Anexos/CASOS_REALES_NEGOCIO.md` portado a la app) para
   cerrar el gap de la ruta Consultor Funcional (status pasó de "Parcial" a "Disponible" el 2026-10-06,
   agregando los Módulos 20/61/62 a `professional-routes.ts` y un reto de Fit-Gap por industria en LAB-62);

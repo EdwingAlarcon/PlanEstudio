@@ -100,6 +100,28 @@ Desarrollar una solución empresarial integral que incluya:
 5. Día 5: crea el dashboard/reporte simple y guarda evidencias.
 6. Días siguientes: completa flujos, seguridad y documentación si vas por entrega completa.
 
+> **Cómo está organizado este capstone:** lo construyes por capas, en tres bloques (planear, construir dato y app, automatizar y cerrar). En cada uno alternas una idea corta, una práctica de pocos minutos y un dato real de tu proyecto. Cierras con un reto en el que ya no te digo las tablas ni los pasos: el mismo proyecto aplicado a otro negocio. Las microprácticas no necesitan tenant; construir el proyecto sí.
+
+## 🧩 Microlección 1 — Planear: decidir qué entra y qué no
+
+**¿Qué vas a aprender?** A decidir qué entra y qué NO entra en tu primera entrega, para llegar a algo que funcione de punta a punta antes de pulirlo.
+
+**¿Por qué existe esto?** Un capstone fracasa más por querer hacerlo todo a la vez que por falta de habilidad: tablas sin terminar, dos apps a medias y un reporte que nadie ve. Una entrega completa y pequeña vale más que una ambiciosa a medias.
+
+**Ejemplo pequeño:** dos tablas con relación y diez registros, una sola app, un flujo de notificación y un reporte simple ya cuentan una historia completa: dato, app, automatización y reporte.
+
+**Ahora haz algo — micropráctica (6 min):** **[Decidir qué entra en la entrega mínima](/practica/ip-dv-011-alcance-entrega-minima)**. Te da un tiempo limitado y varias ideas de alcance, y te pide elegir las que sí caben y las que conviene dejar para después.
+
+**Evidencia a reportar (el dato exacto, no un "sí/no"):**
+
+| Campo | Tu valor |
+|---|---|
+| La entrega que elegiste (mínima, completa o excelente) y por qué | ___ |
+| Las 5 evidencias que vas a guardar para demostrarla | ___ |
+| Qué dejas explícitamente para una iteración posterior | ___ |
+
+---
+
 **FASE 1: Diseño y Modelado de Datos (Días 1-3)**
 
 > **Meta de la primera sesión:** termina esta fase antes de construir pantallas. Si el modelo queda claro, el resto del proyecto avanza con menos retrabajo.
@@ -190,6 +212,16 @@ Version: 1.0.0.0
 3. **Visibilidad condicional**:
     - Show "Comentarios Aprobador" only if Estado = Aprobada OR Rechazada
 
+## 🧩 Microlección 2 — Construir por capas: dato, app y lo que sale vacío
+
+**¿Qué vas a aprender?** A construir primero el modelo de datos y después una sola app que lo consuma, y a leer una pantalla vacía como un síntoma de la condición que busca el dato, no del dato.
+
+**¿Por qué existe esto?** Las capas de arriba heredan los problemas de las de abajo. Cuando una pantalla sale vacía, casi nunca falta el dato: lo que falla suele ser la condición que lo busca.
+
+**Ejemplo pequeño:** comparar el correo del contacto con el correo del usuario actual trae sus solicitudes; compararlo con un identificador de otro tipo no trae nada y no da ningún error.
+
+**Práctica real en tu entorno:** haz las Fases 1 a 3 de abajo, eligiendo **una sola** app como tu primera app funcional.
+
 **FASE 2: Canvas App para Solicitantes (Días 4-7)**
 
 > Puedes escoger esta fase como tu primera app funcional si quieres demostrar experiencia de usuario móvil y formularios rápidos.
@@ -261,6 +293,8 @@ Notify("Solicitud creada exitosamente", NotificationType.Success);
 // Navegar a detalle
 Navigate(ScreenDetalle, ScreenTransition.Cover, {RegistroActual: FormNueva.LastSubmit})
 ```
+
+**Ahora diagnostica — micropráctica (5 min):** **[Diagnosticar: mi pantalla de inicio sale vacía](/practica/ip-trb-006-pantalla-de-inicio-vacia)**. Parte de un síntoma exacto —la lista vacía sin ningún error aunque hay datos— y te pide la causa y la corrección, antes de ver la solución.
 
 **Paso 3: Agregar componentes avanzados**
 
@@ -378,6 +412,26 @@ Stage 4: Cierre
   - Comentarios Cierre
   - Estado → Completada
 ```
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| El nombre de tu Solution, su publisher y su prefijo | ___ |
+| Las tablas que creaste y la relación principal entre ellas | ___ |
+| La app que elegiste como primera app funcional y cuántos registros reales muestra | ___ |
+
+---
+
+## 🧩 Microlección 3 — Automatizar, probar y cerrar con evidencia
+
+**¿Qué vas a aprender?** A conectar un flujo a tu app, a comprobar con el historial de ejecución que realmente corrió, y a cerrar el proyecto con la evidencia mínima.
+
+**¿Por qué existe esto?** Un proyecto "terminado" que nadie puede demostrar no cuenta. Las capturas, el historial de ejecución y un README breve son lo que lo convierte en una historia que puedes contar en una entrevista.
+
+**Ejemplo pequeño:** el Flujo 1 notifica al crear una solicitud; el Run history muestra la ejecución exitosa y el correo llegó a quien correspondía.
+
+**Práctica real en tu entorno:** haz las Fases 4 a 7 según la entrega que elegiste; para la mínima basta el Flujo 1, un reporte simple y la evidencia de cierre. Esta microlección no tiene micropráctica propia; la verificación es el Run history de tu flujo y tu README.
 
 **FASE 4: Power Automate Flujos (Días 11-13)**
 
@@ -622,6 +676,35 @@ Configuración de solución
 5. Compartir Canvas App con usuarios
 6. Compartir Model-Driven App con gestores
 7. Publicar Dashboard Power BI y compartir
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| El flujo que automatizaste y la hora de su ejecución exitosa en el Run history | ___ |
+| La lista de componentes que contiene tu Solution | ___ |
+| Una decisión de seguridad que tomaste y por qué | ___ |
+
+---
+
+## 🔁 Reto de transferencia — El mismo proyecto, otro negocio, sin pasos
+
+Esta vez no te digo las tablas ni los pasos: aplica lo que construiste a un negocio distinto.
+
+> **Requerimiento:** una universidad quiere gestionar las reservas de sus salas de estudio. Quien reserva es un estudiante; el responsable de espacios las aprueba y quiere ver cuántas horas se ocupa cada sala. Diseña la entrega mínima de este proyecto para ese negocio.
+> **Criterios de aceptación:** (1) defines al menos 2 tablas relacionadas, con las columnas y el tipo correcto de cada una; (2) eliges UNA app y justificas por qué, según quién la usa; (3) describes un flujo de notificación y una regla que impida reservar la misma sala en horarios que se cruzan; (4) dices qué reporte le sirve al responsable.
+> **Restricciones:** no copies las tablas de Solicitudes. No necesitas tenant: es un documento de una página que puedes convertir después en el README de tu proyecto.
+> **Pistas si te atoras:** el orden de trabajo es el de la entrega mínima (dato, app, flujo, reporte); la regla de reservas que se cruzan es una Business Rule o una validación en el flujo; el reporte responde a una sola pregunta del responsable.
+
+**Ahora haz algo — transferencia guiada (8 min):** **[Transferir: el mismo proyecto para reservas de salas](/practica/ip-dv-012-transferir-proyecto-reservas)**. Retoma el mismo caso y te pide decidir qué se conserva del método y qué cambia.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Tus tablas con sus columnas y la relación entre ellas | ___ |
+| La app que elegiste y por qué, según quién la usa | ___ |
+| La regla que impide reservar la misma sala en horarios que se cruzan y el flujo de notificación | ___ |
 
 ### 💼 Caso Real de Negocio
 

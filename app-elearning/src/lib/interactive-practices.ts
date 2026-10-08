@@ -5,8 +5,8 @@ import { PRACTICE_REQUESTS } from "@/data/practice/requests";
 // Tope del banco de prácticas. Regla (PROPUESTA_FASES_APRENDER_HACIENDO.md): solo sube al aprobar una fase
 // del rediseño, y por el número de prácticas que esa fase planea añadir — no por comodidad.
 export const MIN_INTERACTIVE_PRACTICES = 12;
-// 24 (pilotos 10/11/13) + 3 del Módulo 1 + 1 del Módulo 2 + 2 del Módulo 3 + 3 del Módulo 4 + 1 del Módulo 5 + 4 del Módulo 6 + 3 del Módulo 7 (Fase 2).
-export const MAX_INTERACTIVE_PRACTICES = 41;
+// 24 (pilotos 10/11/13) + 3 del Módulo 1 + 1 del Módulo 2 + 2 del Módulo 3 + 3 del Módulo 4 + 1 del Módulo 5 + 4 del Módulo 6 + 3 del Módulo 7 + 3 del Módulo 8 (Fase 2).
+export const MAX_INTERACTIVE_PRACTICES = 44;
 
 export const INTERACTIVE_PRACTICE_TYPES = ["multiple-decision", "flow-builder", "query-playground", "debug-scenario"] as const;
 export const INTERACTIVE_PRACTICE_DOMAINS = ["dataverse", "power-apps", "power-automate", "fetchxml", "odata", "troubleshooting", "javascript"] as const;
@@ -1301,6 +1301,106 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     relatedModuleIds: [7],
     relatedLabIds: ["LAB-003"],
     tags: ["transferencia", "delegacion", "fechas"],
+  },
+  {
+    id: "IP-DV-011",
+    slug: "ip-dv-011-alcance-entrega-minima",
+    title: "Decidir qué entra en la entrega mínima",
+    description: "Elige el alcance que cabe en poco tiempo y deja el resto para una iteración posterior.",
+    type: "multiple-decision",
+    domain: "dataverse",
+    level: "starter",
+    estimatedMinutes: 6,
+    prerequisites: ["Módulo 8"],
+    learningObjectives: ["Elegir un alcance que llegue a algo funcional de punta a punta", "Reconocer qué conviene dejar para una iteración posterior"],
+    scenario: {
+      context: "Vas a construir tu proyecto integrado con una hora al día durante una semana. Tienes ideas para el sistema de solicitudes: tablas, una Canvas App, una Model-Driven App, cuatro flujos, un dashboard con seguridad por filas y documentación formal.",
+      objective: "Selecciona lo que conviene incluir en tu primera entrega y deja fuera lo que no.",
+    },
+    multiple: true,
+    options: [
+      { id: "dos-tablas", label: "Dos tablas relacionadas con 10 registros de prueba", consequence: "Es la base: sin datos y relaciones claras, las demás capas no tienen sobre qué apoyarse.", score: 1 },
+      { id: "una-app", label: "Una sola app, la Canvas o la Model-Driven, para crear y ver solicitudes", consequence: "Una app funcional demuestra la capa de uso; hacer las dos desde el principio duplica el trabajo.", score: 1 },
+      { id: "un-flujo", label: "Un flujo de notificación al crear una solicitud", consequence: "Un flujo completo demuestra la automatización y se puede comprobar con el historial de ejecución.", score: 1 },
+      { id: "reporte-simple", label: "Un reporte o dashboard simple con unos pocos indicadores", consequence: "Cierra la historia de punta a punta: dato, app, automatización y reporte.", score: 1 },
+      { id: "dos-apps", label: "Construir las dos apps desde el día 1", consequence: "Reparte el tiempo en dos mitades; es más probable llegar a la semana con las dos a medias.", score: 0 },
+      { id: "rls-primero", label: "Empezar por la seguridad por filas y la documentación formal, antes de tener datos", consequence: "Sin datos ni app, no hay nada que proteger ni documentar todavía; son iteraciones posteriores.", score: 0 },
+    ],
+    correctOptionIds: ["dos-tablas", "una-app", "un-flujo", "reporte-simple"],
+    hints: [
+      { id: "h1", content: "Pregúntate qué es lo mínimo que cuenta una historia completa: de dónde salen los datos, quién los usa, qué pasa solo y qué se mide." },
+      { id: "h2", content: "Una pieza de cada capa, pequeña y terminada, vale más que varias a medias." },
+      { id: "h3", content: "Dos tablas con datos, una app, un flujo y un reporte simple: lo demás se agrega en iteraciones." },
+    ],
+    relatedModuleIds: [8],
+    relatedLabIds: ["LAB-061"],
+    tags: ["capstone", "alcance", "entrega-minima"],
+  },
+  {
+    id: "IP-TRB-006",
+    slug: "ip-trb-006-pantalla-de-inicio-vacia",
+    title: "Diagnosticar: mi pantalla de inicio sale vacía",
+    description: "A partir de un síntoma exacto, identifica por qué la lista aparece vacía aunque hay datos.",
+    type: "debug-scenario",
+    domain: "troubleshooting",
+    level: "junior",
+    estimatedMinutes: 5,
+    prerequisites: ["Módulo 8"],
+    learningObjectives: ["Comparar datos del mismo tipo en una condición de Filter", "Entender que un Filter sin coincidencias devuelve una lista vacía sin error"],
+    scenario: {
+      context: "En tu Canvas App, la pantalla de inicio carga las solicitudes del usuario con `ClearCollect(ColMisSolicitudes, Filter(Solicitudes, Solicitante.ID = User().Email && Estado.Value <> \"Completada\"))`. Hay 12 solicitudes a nombre de Ana en Dataverse, pero cuando ella abre la app la lista aparece vacía y no hay ningún error.",
+      objective: "Antes de mirar la solución, di por qué sale vacía y cómo corregir la condición.",
+    },
+    implementation: "Pantalla de inicio → OnVisible:\nClearCollect(ColMisSolicitudes, Filter(Solicitudes, Solicitante.ID = User().Email && Estado.Value <> \"Completada\"))\nDataverse: 12 solicitudes de Ana · App: lista vacía, sin error",
+    symptom: "La lista aparece vacía aunque hay solicitudes de la usuaria en Dataverse, y no se muestra ningún error.",
+    fixPrompt: "¿Qué hay que cambiar en la condición y por qué?",
+    acceptableFixes: ["email address", "user().email", "guid", "correo", "solicitante.id"],
+    testCases: [
+      { id: "compara-id", input: "Se compara Solicitante.ID con User().Email", expected: "nunca coinciden: un GUID no es un correo, y la lista queda vacía sin error" },
+      { id: "compara-correo", input: "Se compara el correo del contacto con User().Email", expected: "la lista trae las solicitudes de la usuaria" },
+    ],
+    hints: [
+      { id: "h1", content: "Mira el tipo de dato a cada lado del signo igual: ¿un identificador o un correo?" },
+      { id: "h2", content: "El ID de un registro de Dataverse es un GUID, no un correo: nunca van a coincidir, y por eso no hay error, solo ninguna fila." },
+      { id: "h3", content: "Compara el correo del contacto, `Solicitante.'Email Address'`, con `User().Email` en lugar de `Solicitante.ID`." },
+    ],
+    relatedModuleIds: [8],
+    relatedLabIds: ["LAB-061"],
+    tags: ["troubleshooting", "filter", "user"],
+  },
+  {
+    id: "IP-DV-012",
+    slug: "ip-dv-012-transferir-proyecto-reservas",
+    title: "Transferir: el mismo proyecto para reservas de salas",
+    description: "El método del proyecto integrado aplicado a otro negocio — decide qué se conserva y qué cambia.",
+    type: "multiple-decision",
+    domain: "dataverse",
+    level: "junior",
+    estimatedMinutes: 8,
+    prerequisites: ["Módulo 8"],
+    learningObjectives: ["Separar el método (que se reutiliza) del contenido (que cambia)", "Evitar copiar un modelo de otro negocio sin adaptarlo"],
+    scenario: {
+      context: "Una universidad quiere gestionar las reservas de sus salas de estudio. Quien reserva es un estudiante; el responsable de espacios las aprueba y quiere ver cuántas horas se ocupa cada sala. Acabas de terminar el proyecto de solicitudes internas y piensas reutilizarlo.",
+      objective: "Selecciona lo que se conserva del método y lo que cambia para este nuevo negocio.",
+    },
+    multiple: true,
+    options: [
+      { id: "modelo-primero", label: "Empezar por el modelo de datos (por ejemplo Sala y Reserva) antes de crear pantallas", consequence: "El método se conserva: las apps y los flujos heredan los problemas del modelo, así que se valida primero.", score: 1 },
+      { id: "una-solucion-un-prefijo", label: "Crear una solución nueva con su propio publisher y un prefijo consistente", consequence: "Cada proyecto es su propia unidad que se mueve entre ambientes; mezclar prefijos genera conflictos al importar.", score: 1 },
+      { id: "regla-solapes", label: "Definir una regla que impida reservar la misma sala en horarios que se cruzan", consequence: "Es el requisito propio de este negocio: en solicitudes no existía, y sin ella habría reservas dobles.", score: 1 },
+      { id: "una-app-primero", label: "Elegir primero una sola app (la de quien reserva) y el flujo de confirmación, y dejar la segunda para después", consequence: "La entrega mínima se mantiene: una app, un flujo y un reporte antes de ampliar.", score: 1 },
+      { id: "copiar-y-renombrar", label: "Copiar la solución de solicitudes y renombrar los campos", consequence: "Arrastra tablas, flujos y reglas que no aplican y mezcla prefijos; el negocio es otro y el modelo debe diseñarse para él.", score: 0 },
+      { id: "reusar-tablas", label: "Reutilizar tal cual las cinco tablas de solicitudes", consequence: "Las tablas de aprobación y costos no representan reservas de salas; se diseñan las que este negocio necesita.", score: 0 },
+    ],
+    correctOptionIds: ["modelo-primero", "una-solucion-un-prefijo", "regla-solapes", "una-app-primero"],
+    hints: [
+      { id: "h1", content: "Separa lo que es método (el orden de trabajo, la entrega mínima) de lo que es contenido (las tablas, las reglas del negocio)." },
+      { id: "h2", content: "El método se reutiliza; las tablas y reglas se diseñan para el negocio nuevo, incluyendo el requisito que antes no existía." },
+      { id: "h3", content: "Modelo primero, una solución con su prefijo, una regla para las reservas que se cruzan y una sola app antes de ampliar." },
+    ],
+    relatedModuleIds: [8],
+    relatedLabIds: ["LAB-061"],
+    tags: ["transferencia", "capstone", "reservas"],
   },
   {
     id: "IP-PA-005",
