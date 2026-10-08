@@ -5,7 +5,8 @@ import { PRACTICE_REQUESTS } from "@/data/practice/requests";
 // Tope del banco de prácticas. Regla (PROPUESTA_FASES_APRENDER_HACIENDO.md): solo sube al aprobar una fase
 // del rediseño, y por el número de prácticas que esa fase planea añadir — no por comodidad.
 export const MIN_INTERACTIVE_PRACTICES = 12;
-export const MAX_INTERACTIVE_PRACTICES = 24;
+// 24 (pilotos 10/11/13) + 3 del Módulo 1 (Fase 2).
+export const MAX_INTERACTIVE_PRACTICES = 27;
 
 export const INTERACTIVE_PRACTICE_TYPES = ["multiple-decision", "flow-builder", "query-playground", "debug-scenario"] as const;
 export const INTERACTIVE_PRACTICE_DOMAINS = ["dataverse", "power-apps", "power-automate", "fetchxml", "odata", "troubleshooting", "javascript"] as const;
@@ -744,6 +745,105 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     tags: ["transferencia", "input-property", "table"],
   },
   {
+    id: "IP-DV-005",
+    slug: "ip-dv-005-elegir-piezas-para-un-caso",
+    title: "Elegir las piezas de Power Platform para un caso",
+    description: "Decide qué herramienta resuelve cada necesidad de un negocio antes de construir nada.",
+    type: "multiple-decision",
+    domain: "dataverse",
+    level: "starter",
+    estimatedMinutes: 6,
+    prerequisites: ["Módulo 1"],
+    learningObjectives: ["Asignar a cada necesidad de un negocio la pieza de Power Platform que la resuelve", "Descartar piezas que no resuelven ninguna necesidad del enunciado"],
+    scenario: {
+      context: "Una clínica veterinaria lleva sus citas en una hoja de Excel compartida. La recepcionista duplica citas sin querer, los recordatorios a los dueños se mandan a mano y la directora quiere ver cuántas citas hay por semana. Nadie en la clínica programa.",
+      objective: "Selecciona las piezas que cubren las necesidades del caso, sin añadir ninguna que no haga falta.",
+    },
+    multiple: true,
+    options: [
+      { id: "tabla-citas", label: "Dataverse: una tabla Citas como única fuente de los datos", consequence: "Resuelve los duplicados de raíz: hay un solo lugar donde vive cada cita y todas las demás piezas leen de él.", score: 1 },
+      { id: "app-recepcion", label: "Power Apps Canvas: una app para que la recepcionista registre y consulte citas", consequence: "Le da una pantalla simple sobre la tabla Citas, con validaciones, en vez de editar una hoja compartida.", score: 1 },
+      { id: "flujo-recordatorio", label: "Power Automate: un flujo que envía el recordatorio al dueño cuando se acerca la cita", consequence: "Reemplaza el envío manual de recordatorios con una regla que se ejecuta sola.", score: 1 },
+      { id: "reporte-semanal", label: "Power BI: un reporte de citas por semana para la directora", consequence: "Es la pieza pensada para ver totales y tendencias sin tocar los datos.", score: 1 },
+      { id: "portal-publico", label: "Power Pages: un sitio web público para la clínica", consequence: "Nadie fuera de la clínica necesita entrar al sistema en este caso: sumaría complejidad sin resolver ninguna necesidad del enunciado.", score: 0 },
+      { id: "excel-en-sharepoint", label: "Dejar el Excel y moverlo a una biblioteca de SharePoint", consequence: "No evita duplicados ni automatiza recordatorios: el problema original sigue igual, solo cambia de lugar.", score: 0 },
+    ],
+    correctOptionIds: ["tabla-citas", "app-recepcion", "flujo-recordatorio", "reporte-semanal"],
+    hints: [
+      { id: "h1", content: "Lee el caso como una lista de dolores: duplicados, recordatorios manuales y ver totales. Cada dolor debería tener una pieza responsable." },
+      { id: "h2", content: "Datos en un solo lugar (Dataverse), una pantalla para capturarlos (Power Apps), una regla que actúa sola (Power Automate) y una vista para decidir (Power BI)." },
+      { id: "h3", content: "Si una opción no responde a ninguna frase del enunciado (nadie externo entra, el Excel no se arregla moviéndolo), no es parte de la solución." },
+    ],
+    relatedModuleIds: [1],
+    relatedLabIds: ["LAB-002"],
+    tags: ["ecosistema", "dataverse", "power-apps", "power-automate", "power-bi"],
+  },
+  {
+    id: "IP-TRB-003",
+    slug: "ip-trb-003-ambiente-equivocado",
+    title: "Diagnosticar: lo que creaste no aparece para tu compañera",
+    description: "A partir de un síntoma, identifica en qué ambiente estabas trabajando antes de ver la solución.",
+    type: "debug-scenario",
+    domain: "troubleshooting",
+    level: "starter",
+    estimatedMinutes: 5,
+    prerequisites: ["Módulo 1"],
+    learningObjectives: ["Reconocer que cada ambiente es un espacio aislado con sus propios recursos", "Saber dónde se ve y se cambia el ambiente activo en make.powerapps.com"],
+    scenario: {
+      context: "Creaste una tabla `Citas` y una app de prueba en make.powerapps.com. Tu compañera abre el mismo sitio, entra con su cuenta de la misma organización y no ve ni la tabla ni la app. Arriba a la derecha tú ves el ambiente \"Contoso (default)\"; ella ve \"DEV-Ana\".",
+      objective: "Antes de mirar la solución, di qué pasó y dónde deberías haber trabajado — no asumas que algo se borró.",
+    },
+    implementation: "Selector de ambiente (esquina superior derecha de make.powerapps.com)\nTú: Contoso (default) → tabla Citas y app de prueba\nCompañera: DEV-Ana → no ve nada de lo tuyo",
+    symptom: "Lo que construiste existe, pero tu compañera no lo ve aunque ambas están en la misma organización.",
+    fixPrompt: "¿Qué hay que cambiar para trabajar bien? Menciona en qué ambiente y dónde se cambia.",
+    acceptableFixes: ["ambiente developer", "ambiente propio", "propio", "default", "selector", "cambiar de ambiente"],
+    testCases: [
+      { id: "sigue-en-default", input: "Se sigue trabajando en el ambiente default", expected: "los recursos quedan mezclados con los de toda la organización y nadie más los ve en su ambiente" },
+      { id: "ambiente-propio", input: "Se cambia el selector a un ambiente Developer propio y se crea ahí la tabla", expected: "los recursos viven en un espacio aislado y controlado por quien los creó" },
+    ],
+    hints: [
+      { id: "h1", content: "Nada se borró: cada ambiente es un espacio aislado y lo que creas en uno no aparece en otro." },
+      { id: "h2", content: "Fíjate en el nombre del ambiente que cada una tiene activo arriba a la derecha: no es el mismo." },
+      { id: "h3", content: "Se trabaja en un ambiente Developer propio, no en el default: cambia el ambiente con el selector de arriba a la derecha y vuelve a crear la tabla ahí." },
+    ],
+    relatedModuleIds: [1],
+    relatedLabIds: ["LAB-002"],
+    tags: ["ambiente", "troubleshooting", "tenant"],
+  },
+  {
+    id: "IP-DV-006",
+    slug: "ip-dv-006-transferir-reserva-externa",
+    title: "Transferir: ahora los dueños reservan por su cuenta",
+    description: "El requisito cambia de quién entra al sistema — decide qué cambia y qué se conserva.",
+    type: "multiple-decision",
+    domain: "dataverse",
+    level: "junior",
+    estimatedMinutes: 8,
+    prerequisites: ["Módulo 1"],
+    learningObjectives: ["Distinguir un cambio de acceso (quién entra) de un cambio de datos", "Reconocer cuándo hace falta una pieza para usuarios externos"],
+    scenario: {
+      context: "La clínica veterinaria del caso anterior tiene ya su tabla Citas y la app de la recepcionista. Ahora la directora quiere que los dueños de las mascotas reserven su cita desde un sitio web, sin llamar. Los dueños no son empleados y no tienen cuenta de la organización. La recepcionista seguirá usando su app.",
+      objective: "Selecciona qué se agrega o se define y qué se conserva para este nuevo requisito.",
+    },
+    multiple: true,
+    options: [
+      { id: "conservar-tabla", label: "Conservar la tabla Citas en Dataverse como única fuente de datos", consequence: "El cambio es de acceso, no de datos: la recepcionista y los dueños deben ver la misma verdad.", score: 1 },
+      { id: "agregar-pages", label: "Agregar Power Pages para que los dueños (usuarios externos) reserven desde un sitio web", consequence: "Power Pages es la pieza pensada para personas ajenas a la organización que usan datos de Dataverse.", score: 1 },
+      { id: "permisos-tabla", label: "Definir permisos de tabla para que cada dueño vea solo sus propias citas", consequence: "Sin permisos, un sitio externo o no deja ver nada o deja ver todo; hay que decidir quién ve qué.", score: 1 },
+      { id: "canvas-a-externos", label: "Compartir la app Canvas de la recepcionista con los dueños", consequence: "Esa app es para usuarios internos con licencia: compartirla con externos no es el camino previsto y expondría pantallas internas.", score: 0 },
+      { id: "rehacer-todo", label: "Reconstruir todo desde cero con otra base de datos", consequence: "Innecesario: lo que cambió es quién entra, no cómo se guardan las citas.", score: 0 },
+    ],
+    correctOptionIds: ["conservar-tabla", "agregar-pages", "permisos-tabla"],
+    hints: [
+      { id: "h1", content: "Pregúntate qué cambió realmente: ¿la forma de guardar las citas o quién necesita entrar a verlas?" },
+      { id: "h2", content: "Las personas fuera de la organización no usan las apps internas; para ellas existe una pieza distinta. Si no la recuerdas, revisa el Suplemento 1B de este módulo." },
+      { id: "h3", content: "Se conserva la tabla, se agrega Power Pages para los externos y se definen permisos de tabla para que cada dueño vea solo lo suyo." },
+    ],
+    relatedModuleIds: [1],
+    relatedLabIds: ["LAB-002"],
+    tags: ["transferencia", "power-pages", "usuarios-externos"],
+  },
+  {
     id: "IP-PA-005",
     slug: "ip-pa-005-diagnosticar-corte-en-256-registros",
     title: "Diagnosticar: el flujo se detiene en 256 registros",
@@ -1186,8 +1286,8 @@ export function validateInteractivePractices(): string[] {
     if (practice.type === "query-playground" && practice.dialect === "fetchxml" && !practice.starter.includes("<fetch")) errors.push(`${practice.id}: starter FetchXML inválido`);
     if (practice.type === "flow-builder" && practice.testCases.length < 2) errors.push(`${practice.id}: flow sin suficientes casos`);
   }
-  if (INTERACTIVE_PRACTICES.length < 12 || INTERACTIVE_PRACTICES.length > 24) {
-    errors.push(`El piloto debe tener 12 a 24 prácticas; tiene ${INTERACTIVE_PRACTICES.length}`);
+  if (INTERACTIVE_PRACTICES.length < MIN_INTERACTIVE_PRACTICES || INTERACTIVE_PRACTICES.length > MAX_INTERACTIVE_PRACTICES) {
+    errors.push(`El banco debe tener ${MIN_INTERACTIVE_PRACTICES} a ${MAX_INTERACTIVE_PRACTICES} prácticas; tiene ${INTERACTIVE_PRACTICES.length}`);
   }
   return errors;
 }

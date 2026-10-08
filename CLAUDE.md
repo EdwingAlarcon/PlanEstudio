@@ -37,8 +37,10 @@ subiendo el tope del piloto de 15 a 24 en `validate-interactive-practices.ts` y
 amplio, que siguen pendientes de aprobación explícita. Su definición **no se conservó** del plan
 original; la propuesta vigente (2026-10-08) está en `PROPUESTA_FASES_APRENDER_HACIENDO.md`. **Fase 1 hecha**
 (línea base: 3/76 módulos con reto de transferencia; `npm run audit:lbd`; tope de prácticas en
-`MIN/MAX_INTERACTIVE_PRACTICES`, hoy 12-24, que solo sube al aprobar cada fase). Fases 2-5 y el recorte de la
-Fase 6 (solo Módulos 43, 44, 46, 54, 55) siguen sin implementar.
+`MIN/MAX_INTERACTIVE_PRACTICES`, hoy 12-27, que solo sube al aprobar cada fase). **Fase 2 en curso:** Módulo 1
+migrado (ahora 4/76 = 5,3%; +3 prácticas IP-DV-005, IP-TRB-003, IP-DV-006) y a la espera de revisión del
+usuario antes de seguir con los Módulos 2-8. El resto de Fases 3-5 y el recorte de la Fase 6 (solo Módulos 43,
+44, 46, 54, 55) siguen sin implementar.
 
 ## Mantenimiento vigente — 2026-10-01
 
@@ -110,9 +112,9 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 
 **Invariantes que no debes romper:**
 - Conteos vigentes: **76 módulos, 75 labs, 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
-  33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 24 prácticas interactivas
+  33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 27 prácticas interactivas
   y 40 páginas de recursos** (prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
-  Doing de Módulos 11, 10 y 13 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de
+  Doing de Módulos 11, 10 y 13, y a 27 con el Módulo 1 de la Fase 2 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de
   Módulo 13 y a 40 con "Casos reales por industria" (`Anexos/CASOS_REALES_NEGOCIO.md` portado a la app) para
   cerrar el gap de la ruta Consultor Funcional (status pasó de "Parcial" a "Disponible" el 2026-10-06,
   agregando los Módulos 20/61/62 a `professional-routes.ts` y un reto de Fit-Gap por industria en LAB-62);
