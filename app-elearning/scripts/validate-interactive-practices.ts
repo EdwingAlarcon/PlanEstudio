@@ -4,6 +4,8 @@ import {
   evaluateInteractivePractice,
   getAllInteractivePractices,
   getFixtureSummary,
+  MAX_INTERACTIVE_PRACTICES,
+  MIN_INTERACTIVE_PRACTICES,
   validateInteractivePractices,
 } from "../src/lib/interactive-practices";
 
@@ -14,8 +16,8 @@ function main(): void {
   const labIds = new Set(getAllLabs().map((lab) => lab.displayId));
   const typeCoverage = new Set(practices.map((practice) => practice.type));
 
-  if (practices.length < 12 || practices.length > 24) {
-    errors.push(`El piloto debe tener 12-24 prácticas, pero tiene ${practices.length}`);
+  if (practices.length < MIN_INTERACTIVE_PRACTICES || practices.length > MAX_INTERACTIVE_PRACTICES) {
+    errors.push(`El banco debe tener ${MIN_INTERACTIVE_PRACTICES}-${MAX_INTERACTIVE_PRACTICES} prácticas, pero tiene ${practices.length}`);
   }
 
   for (const type of INTERACTIVE_PRACTICE_TYPES) {

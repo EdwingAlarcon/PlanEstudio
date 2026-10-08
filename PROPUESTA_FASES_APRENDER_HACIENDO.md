@@ -1,6 +1,8 @@
 # Propuesta: Fases 1-6 del rediseño "Aprender haciendo"
 
-**Estado: BORRADOR, no aprobado, nada implementado.** Redactado el 2026-10-08.
+**Estado (2026-10-08): Fase 1 HECHA (herramientas y línea base). Fases 2-5 y el recorte de la Fase 6
+siguen sin implementar y sin aprobación individual.** Las cuatro decisiones de alcance (sección 5) las tomó
+Claude por delegación del usuario ("decide tú las 4") y son revisables.
 
 **Origen de este documento.** `CLAUDE.md` menciona "las Fases 1-6 del rediseño más amplio, pendientes de aprobación
 explícita", pero ninguna lista de esas fases quedó escrita en el repo ni en la memoria. Esta propuesta **no
@@ -38,12 +40,32 @@ original, prevalece sobre este.
 
 ## 3. Las fases propuestas
 
-### Fase 1 — Línea base y herramientas (sin tocar contenido de módulos)
+### Fase 1 — Línea base y herramientas (sin tocar contenido de módulos) — HECHA 2026-10-08
 
-- **Qué:** clasificar los 76 módulos según tengan o no micropráctica, evidencia estructurada, troubleshooting
-  síntoma-primero y reto "sin pasos". Añadir esa clasificación como chequeo informativo (advertencia, no error) a
-  `validate:content`. Subir el tope de prácticas del piloto de 24 en `validate-interactive-practices.ts` y
-  `interactive-practices.test.ts`, que hoy bloquea cualquier práctica nueva.
+- **Qué se hizo:** `src/lib/learning-by-doing-audit.ts` clasifica los 76 módulos (con tests); `npm run audit:lbd`
+  imprime la tabla; `validate:content` muestra una línea informativa (no falla ni avisa). El tope de prácticas
+  (antes un 24 repetido en tres sitios) pasó a las constantes `MIN/MAX_INTERACTIVE_PRACTICES` de
+  `interactive-practices.ts`. **Desviación respecto al plan original de esta propuesta:** el tope se centralizó pero
+  **no se subió**, porque la Fase 1 no añade prácticas. Regla: sube solo al aprobar una fase, por el número que esa
+  fase planea añadir.
+- **Línea base (76 módulos):** 3 piloto, 9 parcial, 64 sin patrón. **Con reto de transferencia: 3/76 (3,9%).**
+
+  | Nivel | Módulos | Piloto | Parcial | Sin patrón |
+  |---|---|---|---|---|
+  | Básico | 8 | 0 | 4 | 4 |
+  | Intermedio | 9 | 3 | 2 | 4 |
+  | Avanzado | 13 | 0 | 2 | 11 |
+  | Arquitecto | 11 | 0 | 0 | 11 |
+  | IA | 15 | 0 | 1 | 14 |
+  | D365 | 10 | 0 | 0 | 10 |
+  | RPA | 10 | 0 | 0 | 10 |
+
+- **Limitaciones de la medición:** solo detecta tres marcas objetivas (encabezado "Microlección", encabezado "Reto
+  de transferencia" y prácticas interactivas vinculadas). **No mide** el troubleshooting síntoma-primero ni la
+  evidencia de tenant, que no tienen encabezado fijo. "Sin patrón" no significa "mal diseñado": el Módulo 18, por
+  ejemplo, tiene un árbol de decisión y un ADR, y aun así sale como sin patrón. La auditoría integral lo cita como
+  ejemplo de actividad "sin pasos"; la medición no lo ve porque usa otras marcas.
+- **Objetivo original de la fase (referencia):** clasificar los 76 módulos y destrabar el tope de prácticas.
 - **Por qué primero:** la auditoría reconoce que el porcentaje de módulos con actividad "sin pasos" "no está
   cuantificado con precisión". Sin esa línea base no se puede decir si una fase mejoró algo.
 - **Entregable:** tabla de 76 módulos con su estado y la métrica "% de módulos con reto sin pasos".
@@ -87,7 +109,10 @@ original, prevalece sobre este.
 - **Cierre:** 11 módulos con retos de decisión y criterios de evaluación explícitos.
 - **Esfuerzo relativo:** medio-alto.
 
-### Fase 6 — Especializaciones transversales (35 módulos: IA 15, D365 10, RPA 10) y cierre
+### Fase 6 — Especializaciones transversales y cierre (alcance decidido: solo 5 módulos de IA)
+
+> Alcance recortado el 2026-10-08 (decisión 2, sección 5): solo los Módulos 43, 44, 46, 54 y 55. El texto de abajo
+> describe el planteamiento amplio original (35 módulos); D365 y RPA no se tocan sin nueva aprobación.
 
 - **Qué:** empezar por lo que la auditoría ya señala: los módulos 43, 44, 46, 54 y 55 del nivel IA (ítem #11, P2),
   que son mayormente expositivos y necesitan una actividad de fallo y corrección. Después, el resto según la
@@ -109,15 +134,19 @@ original, prevalece sobre este.
 
 Total por migrar: 8 + 6 + 13 + 11 + 35 = **73 módulos** (los 3 restantes son los pilotos).
 
-## 5. Decisiones que necesito del usuario antes de empezar
+## 5. Decisiones de alcance (tomadas el 2026-10-08, revisables)
 
-1. **¿La migración es masiva o parcial?** Mi propuesta permite cortar tras cualquier fase. Si lo único que importa
-   es la ruta de certificación, bastan las Fases 1 a 5.
-2. **¿Se incluyen las especializaciones transversales (Fase 6)?** Son casi la mitad de los módulos (35 de 76) y,
-   según la auditoría, su evidencia de mercado es desigual.
-3. **¿El orden es correcto?** Pongo Básico antes que Intermedio porque la queja inicial fue de un principiante. Si
-   se prefiere cerrar primero una certificación completa, se invierten las Fases 2 y 3.
-4. **¿Quién prueba como principiante real?** El cierre de la Fase 2 pide a una persona, no a una simulación mía.
+El usuario delegó estas cuatro decisiones ("decide tú las 4"). Son una elección de Claude, no una aprobación
+específica de cada punto; cualquiera puede revertirse.
+
+1. **Migración parcial, no masiva.** Comprometidas: Fases 1 a 5 (ruta de certificación). La Fase 6 se reduce al
+   punto 2. *Por qué:* es lo que la auditoría prioriza y permite cortar sin dejar el curso incoherente.
+2. **Transversales: solo los 5 módulos de IA que señala la auditoría (43, 44, 46, 54 y 55).** D365 y RPA quedan
+   fuera hasta nueva aprobación. *Por qué:* son 35 módulos y la evidencia de mercado de varios perfiles es desigual
+   (auditoría §37); no justifica el costo sin una señal más clara.
+3. **Orden sin cambios:** Básico antes que Intermedio, porque la queja que motivó esto fue de un principiante.
+4. **La prueba como principiante real la hace el usuario** al cerrar la Fase 2. Esto no lo puede decidir Claude por
+   el usuario: queda como **condición de cierre pendiente**, y si no se cumple la Fase 2 no se da por cerrada.
 
 ## 6. Lo que esta propuesta no resuelve
 

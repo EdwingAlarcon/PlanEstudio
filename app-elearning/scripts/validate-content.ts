@@ -14,6 +14,8 @@ import { getAllQuestions } from "../src/lib/questions-parser";
 import { parseChecklistMarkdown, validateChecklistData } from "../src/lib/checklist";
 import { LEVEL_MODULE_RANGE } from "../src/lib/i18n";
 import { validateGuidedJourneyReferences } from "../src/lib/guided-journey";
+import { getInteractivePracticesForModule } from "../src/lib/interactive-practices";
+import { auditModules, summarizeAudit } from "../src/lib/learning-by-doing-audit";
 
 function main(): void {
   const levels = getAllLevels();
@@ -103,7 +105,26 @@ function main(): void {
     );
   }
 
+  // Línea base "Aprender haciendo" (informativa: no falla ni advierte). Detalle: `npm run audit:lbd`.
+  const lbdSummary = summarizeAudit(
+    auditModules(
+      levels.flatMap((level) =>
+        level.modules.map((mod) => ({
+          moduleId: mod.moduleId,
+          levelId: mod.levelId,
+          title: mod.title,
+          rawContent: mod.rawContent,
+          interactivePractices: getInteractivePracticesForModule(mod.moduleId).length,
+        })),
+      ),
+    ),
+  );
+
   console.log(`✓ ${allModuleIds.length} módulos válidos (moduleId único, slug único, rango por nivel)`);
+  console.log(
+    `ℹ Aprender haciendo: ${lbdSummary.withTransferChallenge}/${lbdSummary.total} módulos con reto de transferencia ` +
+      `(${lbdSummary.withTransferChallengePercent}%); ${lbdSummary.piloto} piloto, ${lbdSummary.parcial} parcial, ${lbdSummary.ninguno} sin patrón`,
+  );
   console.log(`✓ ${labs.length} labs válidos (id único, slug único)`);
   console.log(`✓ ${questions.length} preguntas válidas cubriendo los ${expectedModuleIds.length} módulos`);
   console.log(`✓ Checklist válido (${checklist.totalModules} módulos, ${checklist.totalItems} criterios)`);

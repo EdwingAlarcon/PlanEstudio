@@ -2,6 +2,11 @@ import { PRACTICE_ACCOUNTS } from "@/data/practice/accounts";
 import { PRACTICE_PRODUCTS } from "@/data/practice/products";
 import { PRACTICE_REQUESTS } from "@/data/practice/requests";
 
+// Tope del banco de prácticas. Regla (PROPUESTA_FASES_APRENDER_HACIENDO.md): solo sube al aprobar una fase
+// del rediseño, y por el número de prácticas que esa fase planea añadir — no por comodidad.
+export const MIN_INTERACTIVE_PRACTICES = 12;
+export const MAX_INTERACTIVE_PRACTICES = 24;
+
 export const INTERACTIVE_PRACTICE_TYPES = ["multiple-decision", "flow-builder", "query-playground", "debug-scenario"] as const;
 export const INTERACTIVE_PRACTICE_DOMAINS = ["dataverse", "power-apps", "power-automate", "fetchxml", "odata", "troubleshooting", "javascript"] as const;
 export const INTERACTIVE_PRACTICE_LEVELS = ["starter", "junior", "advanced"] as const;

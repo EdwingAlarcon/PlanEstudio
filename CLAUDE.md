@@ -35,8 +35,10 @@ agregaron 9 prácticas nuevas en total (IP-PA-005/006, IP-APP-004/005/006, IP-JS
 subiendo el tope del piloto de 15 a 24 en `validate-interactive-practices.ts` y
 `interactive-practices.test.ts`. No se tocó ningún otro módulo ni las Fases 1-6 del rediseño más
 amplio, que siguen pendientes de aprobación explícita. Su definición **no se conservó** del plan
-original; la propuesta vigente (borrador del 2026-10-08, sin aprobar ni implementar) está en
-`PROPUESTA_FASES_APRENDER_HACIENDO.md`.
+original; la propuesta vigente (2026-10-08) está en `PROPUESTA_FASES_APRENDER_HACIENDO.md`. **Fase 1 hecha**
+(línea base: 3/76 módulos con reto de transferencia; `npm run audit:lbd`; tope de prácticas en
+`MIN/MAX_INTERACTIVE_PRACTICES`, hoy 12-24, que solo sube al aprobar cada fase). Fases 2-5 y el recorte de la
+Fase 6 (solo Módulos 43, 44, 46, 54, 55) siguen sin implementar.
 
 ## Mantenimiento vigente — 2026-10-01
 

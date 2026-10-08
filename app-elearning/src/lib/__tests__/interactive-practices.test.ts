@@ -7,14 +7,16 @@ import {
   getFixtureSummary,
   getInteractivePracticeSearchDocuments,
   getRecommendedInteractivePractice,
+  MAX_INTERACTIVE_PRACTICES,
+  MIN_INTERACTIVE_PRACTICES,
   validateInteractivePractices,
 } from "../interactive-practices";
 
 describe("interactive practice bank", () => {
   it("keeps the pilot intentionally small and covers all engines", () => {
     const practices = getAllInteractivePractices();
-    expect(practices.length).toBeGreaterThanOrEqual(12);
-    expect(practices.length).toBeLessThanOrEqual(24);
+    expect(practices.length).toBeGreaterThanOrEqual(MIN_INTERACTIVE_PRACTICES);
+    expect(practices.length).toBeLessThanOrEqual(MAX_INTERACTIVE_PRACTICES);
     for (const type of INTERACTIVE_PRACTICE_TYPES) {
       expect(practices.some((practice) => practice.type === type)).toBe(true);
     }
