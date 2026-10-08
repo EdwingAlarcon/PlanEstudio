@@ -5,8 +5,8 @@ import { PRACTICE_REQUESTS } from "@/data/practice/requests";
 // Tope del banco de prácticas. Regla (PROPUESTA_FASES_APRENDER_HACIENDO.md): solo sube al aprobar una fase
 // del rediseño, y por el número de prácticas que esa fase planea añadir — no por comodidad.
 export const MIN_INTERACTIVE_PRACTICES = 12;
-// 24 (pilotos 10/11/13) + 3 del Módulo 1 + 1 del Módulo 2 + 2 del Módulo 3 (Fase 2).
-export const MAX_INTERACTIVE_PRACTICES = 30;
+// 24 (pilotos 10/11/13) + 3 del Módulo 1 + 1 del Módulo 2 + 2 del Módulo 3 + 3 del Módulo 4 (Fase 2).
+export const MAX_INTERACTIVE_PRACTICES = 33;
 
 export const INTERACTIVE_PRACTICE_TYPES = ["multiple-decision", "flow-builder", "query-playground", "debug-scenario"] as const;
 export const INTERACTIVE_PRACTICE_DOMAINS = ["dataverse", "power-apps", "power-automate", "fetchxml", "odata", "troubleshooting", "javascript"] as const;
@@ -940,6 +940,104 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     relatedModuleIds: [3],
     relatedLabIds: ["LAB-003"],
     tags: ["transferencia", "filter", "user", "seguridad"],
+  },
+  {
+    id: "IP-APP-009",
+    slug: "ip-app-009-model-driven-o-canvas",
+    title: "Elegir Model-Driven o Canvas según el caso",
+    description: "Decide qué tipo de app encaja con cada necesidad de una empresa.",
+    type: "multiple-decision",
+    domain: "power-apps",
+    level: "starter",
+    estimatedMinutes: 6,
+    prerequisites: ["Módulo 4"],
+    learningObjectives: ["Reconocer cuándo una Model-Driven aprovecha el modelo de datos mejor que una Canvas", "Reconocer cuándo una Canvas da el control de pantalla que la necesidad exige"],
+    scenario: {
+      context: "Una empresa necesita dos herramientas. La primera es para que 15 gestores trabajen todo el día sobre clientes, oportunidades y cotizaciones relacionadas, con muchas vistas, filtros y un dashboard. La segunda es para que técnicos de campo registren una visita desde el celular, con foto y firma, en una pantalla pensada para el dedo.",
+      objective: "Selecciona el tipo de app que encaja con cada herramienta.",
+    },
+    multiple: true,
+    options: [
+      { id: "md-gestores", label: "Model-Driven para la herramienta de los gestores (datos relacionados, vistas y dashboard)", consequence: "La app se genera a partir del modelo de datos: lista, formulario, relaciones y dashboard salen casi sin dibujar pantallas.", score: 1 },
+      { id: "canvas-campo", label: "Canvas para la app de los técnicos de campo (foto y firma desde el celular)", consequence: "Canvas permite diseñar cada pantalla a medida para el celular, con control total de la captura.", score: 1 },
+      { id: "canvas-gestores", label: "Canvas para la herramienta de los gestores, dibujando cada pantalla", consequence: "Funciona, pero repites a mano lo que Model-Driven ya te da armado, y cada vista nueva cuesta trabajo extra.", score: 0 },
+      { id: "md-campo", label: "Model-Driven para la app de campo, porque también es una app", consequence: "Su diseño es genérico y tienes poco control de la pantalla de captura que los técnicos necesitan en el celular.", score: 0 },
+    ],
+    correctOptionIds: ["md-gestores", "canvas-campo"],
+    hints: [
+      { id: "h1", content: "Pregúntate cuánto control necesitas sobre cada pantalla: ¿lo que importa es el modelo de datos o el diseño de la captura?" },
+      { id: "h2", content: "Quien trabaja todo el día sobre muchos registros relacionados necesita lista, filtros y dashboard; quien captura en el celular necesita una pantalla pensada para eso." },
+      { id: "h3", content: "Gestores con datos relacionados: Model-Driven. Técnicos en el celular con foto y firma: Canvas." },
+    ],
+    relatedModuleIds: [4],
+    relatedLabIds: ["LAB-004"],
+    tags: ["model-driven", "canvas", "eleccion"],
+  },
+  {
+    id: "IP-TRB-004",
+    slug: "ip-trb-004-app-no-visible-para-companero",
+    title: "Diagnosticar: la app está publicada pero mi compañero no la ve",
+    description: "A partir de un síntoma exacto, identifica qué le falta a la otra persona para usar la app.",
+    type: "debug-scenario",
+    domain: "troubleshooting",
+    level: "starter",
+    estimatedMinutes: 5,
+    prerequisites: ["Módulo 4"],
+    learningObjectives: ["Entender que publicar una app no basta para que otra persona la use", "Saber dónde se asigna un rol de seguridad y cómo se comparte una app"],
+    scenario: {
+      context: "Publicaste tu Model-Driven App \"Gestión Solicitudes TI\" y a ti te funciona. Tu compañero Luis, de la misma organización, abre make.powerapps.com y no ve la app; con el enlace directo recibe un mensaje de que no tiene acceso. Tú eres la única persona con un rol de seguridad en el ambiente.",
+      objective: "Antes de mirar la solución, di qué falta y dónde se configura — no asumas que la publicación falló.",
+    },
+    implementation: "App: Gestión Solicitudes TI (publicada)\nTú: rol System Administrator\nLuis: sin rol de seguridad asignado, y la app no está compartida con él",
+    symptom: "La app funciona para quien la creó, pero otra persona de la misma organización no la ve o recibe un mensaje de falta de acceso.",
+    fixPrompt: "¿Qué dos cosas hay que hacer para que Luis pueda usarla y dónde se hacen?",
+    acceptableFixes: ["rol de seguridad", "security role", "rol", "asignar", "manage roles", "compartir"],
+    testCases: [
+      { id: "solo-publicada", input: "La app está publicada pero Luis no tiene rol ni acceso compartido", expected: "Luis no ve la app o recibe un mensaje de falta de acceso" },
+      { id: "rol-y-compartida", input: "Se asigna un rol de seguridad a Luis y se comparte la app con él", expected: "Luis puede abrir la app y ver los datos permitidos por su rol" },
+    ],
+    hints: [
+      { id: "h1", content: "La app funciona para ti, así que el problema no está en la app sino en lo que tiene —o no tiene— la otra persona." },
+      { id: "h2", content: "Para usar una Model-Driven, una persona necesita permisos sobre las tablas (un rol) y que la app esté compartida con ella." },
+      { id: "h3", content: "Asigna un rol de seguridad a Luis (Settings > Security > Users > Manage Roles) y comparte la app con él." },
+    ],
+    relatedModuleIds: [4],
+    relatedLabIds: ["LAB-004"],
+    tags: ["troubleshooting", "security-role", "compartir"],
+  },
+  {
+    id: "IP-APP-010",
+    slug: "ip-app-010-transferir-vista-criticas",
+    title: "Transferir: una vista de críticas sin asignar",
+    description: "El jefe de TI pide un filtro nuevo — decide qué hacer y qué evitar en la app.",
+    type: "multiple-decision",
+    domain: "power-apps",
+    level: "junior",
+    estimatedMinutes: 8,
+    prerequisites: ["Módulo 4"],
+    learningObjectives: ["Crear una vista nueva en vez de alterar las existentes", "Aplicar las buenas prácticas de nombre, columnas y publicación de una vista"],
+    scenario: {
+      context: "Tu Model-Driven App de solicitudes ya tiene las vistas \"Solicitudes Activas\" y \"Mis Asignaciones\". El jefe de TI pide ver rápidamente las solicitudes de prioridad Crítica que todavía no tienen técnico asignado, para repartirlas cada mañana.",
+      objective: "Selecciona lo que conviene hacer y evita lo que no.",
+    },
+    multiple: true,
+    options: [
+      { id: "vista-nueva", label: "Crear una vista nueva con el filtro Prioridad = Crítica y Asignado a vacío", consequence: "Es el cambio central: una vista guardada hace el filtro por ti cada mañana, sin tocar lo que otros ya usan.", score: 1 },
+      { id: "nombre-accion", label: "Ponerle un nombre orientado a la acción, como \"Críticas sin asignar\"", consequence: "Un nombre que dice para qué sirve se encuentra y se entiende; \"Vista 1\" no.", score: 1 },
+      { id: "pocas-columnas", label: "Mostrar solo las columnas que el jefe necesita para decidir (máximo 8-10)", consequence: "Menos columnas cargan más rápido y se leen mejor; el objetivo es repartir, no ver todos los campos.", score: 1 },
+      { id: "publicar", label: "Publicar las personalizaciones y comprobar que la vista aparece en la app", consequence: "Sin publicar, la vista existe pero la app no la muestra.", score: 1 },
+      { id: "modificar-sistema", label: "Modificar la vista \"Solicitudes Activas\" para que solo muestre críticas sin asignar", consequence: "Cambia lo que ven todos los demás y pierdes la vista general que ya usaban.", score: 0 },
+      { id: "filtrar-a-mano", label: "Pedirle que aplique el filtro a mano cada mañana", consequence: "Funciona, pero repite trabajo manual que una vista guardada evita.", score: 0 },
+    ],
+    correctOptionIds: ["vista-nueva", "nombre-accion", "pocas-columnas", "publicar"],
+    hints: [
+      { id: "h1", content: "Pregúntate si el pedido cambia lo que otros ya usan o solo agrega algo nuevo: lo segundo no debería alterar nada existente." },
+      { id: "h2", content: "Una vista bien hecha tiene un filtro correcto, un nombre que dice para qué sirve y pocas columnas." },
+      { id: "h3", content: "Crea una vista nueva con ese filtro, nómbrala con la acción, limita las columnas y publícala." },
+    ],
+    relatedModuleIds: [4],
+    relatedLabIds: ["LAB-004"],
+    tags: ["transferencia", "views", "publicar"],
   },
   {
     id: "IP-PA-005",

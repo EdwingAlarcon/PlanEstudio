@@ -35,6 +35,20 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 
 #### 🟢 Núcleo obligatorio
 
+> **Cómo está organizado el Núcleo:** construyes la app en tres bloques (la app y su navegación, formularios y vistas, dashboard y publicación). En cada uno alternas una idea corta, una práctica de pocos minutos y un dato real de tu propia app. Cierras con un reto en el que ya no te digo los pasos. Las microprácticas no necesitan tenant; construir la app sí (tu ambiente Developer y las tablas de los Módulos 1 y 2).
+
+## 🧩 Microlección 1 — Qué es una Model-Driven y cuándo elegirla
+
+**¿Qué vas a aprender?** Qué es una Model-Driven App (se genera a partir de tu modelo de datos), qué piezas tiene (navegación, formularios, vistas, dashboards) y cuándo conviene frente a una Canvas App.
+
+**¿Por qué existe esto?** En una Canvas App dibujas cada pantalla. En una Model-Driven defines el modelo de datos y la app se arma casi sola: lista, formulario, relaciones y navegación. Para personas que trabajan todo el día sobre muchos registros relacionados, eso es más rápido de construir y más consistente.
+
+**Ejemplo pequeño:** con la tabla Solicitud TI y sus columnas ya creadas, la app genera la lista, el formulario y el menú sin que dibujes una sola pantalla.
+
+**Ahora haz algo — micropráctica (6 min):** **[Elegir Model-Driven o Canvas según el caso](/practica/ip-app-009-model-driven-o-canvas)**. Te da dos necesidades distintas de una empresa y te pide decidir qué tipo de app encaja con cada una.
+
+**Práctica real en tu entorno (25 min):** haz los Pasos 1 y 2 de abajo.
+
 ##### Práctica 4.1: Crear Primera Model-Driven App
 
 > **Nota de versión:** Las capturas y pasos a continuación describen el flujo general; la apariencia exacta puede variar según si tu ambiente usa el **Modern App Designer** (predeterminado desde 2023) o el diseñador clásico. La funcionalidad es equivalente en ambos.
@@ -66,6 +80,26 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
    ```
 
 3. Guardar y publicar
+
+**Evidencia a reportar (el dato exacto que viste, no un "sí/no"):**
+
+| Campo | Tu valor |
+|---|---|
+| Nombre de la solución y prefijo del Publisher que usaste | ___ |
+| Las áreas, grupos y subáreas de tu site map tal como quedaron | ___ |
+| ¿La app aparece como "Publicada" o "Borrador" en la lista de apps de la solución? | ___ |
+
+---
+
+## 🧩 Microlección 2 — Formularios y vistas: lo que ve quien captura y quien revisa
+
+**¿Qué vas a aprender?** Para qué sirve un formulario Main y uno Quick Create, y cómo una vista combina filtro, columnas y orden.
+
+**¿Por qué existe esto?** El formulario organiza lo que ve quien captura el dato; la vista es lo que ve quien revisa muchos registros. Si están mal pensados (demasiadas pestañas, vistas sin filtro) la gente no los usa aunque funcionen.
+
+**Ejemplo pequeño:** la vista "Mis Asignaciones" filtra por Asignado a = usuario actual y Estado distinto de Cerrada, muestra pocas columnas y ordena por fecha.
+
+**Práctica real en tu entorno (35 min):** esta microlección no tiene micropráctica propia; la verificación es abrir tu vista y comprobar que muestra los registros que esperas.
 
 **Paso 3: Personalizar Forms**
 
@@ -120,6 +154,26 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
     - Eje Y: Count of records
     - Eje X: Categoría
 
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Nombre de las pestañas (tabs) de tu formulario Main | ___ |
+| El filtro exacto de tu vista "Mis Asignaciones" | ___ |
+| Cuántas vistas personalizadas creaste y cuántas columnas muestra la que más tiene | ___ |
+
+---
+
+## 🧩 Microlección 3 — Dashboard y publicación: que otros lo vean
+
+**¿Qué vas a aprender?** Cómo un dashboard junta gráficos y listas en una sola pantalla, y qué hace falta para que otra persona vea tu app.
+
+**¿Por qué existe esto?** Un dashboard le ahorra al gestor abrir vista por vista. Pero nada de lo que construyes se ve hasta que lo publicas, y una persona solo puede usar la app si tiene un rol de seguridad y la app está compartida con ella.
+
+**Ejemplo pequeño:** cambias un formulario, no publicas las personalizaciones, y la app sigue mostrando la versión anterior. O publicas bien, pero tu compañero no tiene rol y no ve la app.
+
+**Práctica real en tu entorno (15 min):** haz el Paso 5 de abajo.
+
 **Paso 5: Crear Dashboard**
 
 1. New > Dashboard > 2-Column Regular Dashboard
@@ -128,6 +182,38 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
     - **Panel superior izquierda**: Chart "Solicitudes por Estado" (Donut)
     - **Panel superior derecha**: Chart "Solicitudes por Prioridad" (Column)
     - **Panel inferior**: List de "Solicitudes Pendientes" (View)
+
+**Ahora diagnostica — micropráctica (5 min):** **[Diagnosticar: la app está publicada pero mi compañero no la ve](/practica/ip-trb-004-app-no-visible-para-companero)**. Parte de un síntoma exacto —a ti te funciona y a otra persona no— y te pide qué falta y dónde se configura, antes de ver la solución.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Nombre de tu dashboard y cuántos componentes tiene | ___ |
+| Qué hiciste para confirmar que los cambios se veían en la app publicada | ___ |
+| Qué necesita otra persona para usar tu app (di las dos cosas y dónde se configuran) | ___ |
+
+---
+
+## 🔁 Reto de transferencia — Una vista y un gráfico para el jefe de TI, sin pasos
+
+Esta vez no te digo los pasos: aplica lo que viste a un pedido nuevo.
+
+> **Requerimiento:** el jefe de TI quiere ver cada mañana las solicitudes de prioridad Crítica que todavía no tienen técnico asignado, y un gráfico que diga cuántas son.
+> **Criterios de aceptación:** (1) una vista nueva con el filtro correcto y un nombre que diga para qué sirve; (2) un gráfico en tu dashboard que cuente esas solicitudes; (3) comprobar en la app publicada que la vista y el gráfico aparecen.
+> **Restricciones:** no modifiques las vistas que ya existen y no pases de 6 componentes en el dashboard.
+
+**Ahora haz algo — transferencia guiada (8 min):** **[Transferir: una vista de críticas sin asignar](/practica/ip-app-010-transferir-vista-criticas)**. Retoma la app de este módulo pero con un pedido nuevo, y te pide decidir qué hacer y qué evitar.
+
+**Si aún no tienes tenant:** escribe el filtro exacto que usarías, el nombre de la vista y qué pasos seguirías para publicarla.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| El filtro exacto de tu vista nueva y su nombre | ___ |
+| El tipo de gráfico que elegiste y el número que mostró | ___ |
+| Cómo comprobaste que aparecía en la app publicada | ___ |
 
 #### 🔧 Profundización opcional
 
@@ -262,23 +348,23 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 
 ### ⚠️ Errores Comunes
 
-1. **Error**: Usuarios no ven la app o datos
+1. **Lo que ves:** otras personas no ven la app o no ven los datos.
     - **Causa**: Falta Security Role asignado
     - **Solución**: Settings > Security > Users > Manage Roles + compartir app
 
-2. **Error**: Business Process Flow no aparece en form
+2. **Lo que ves:** el Business Process Flow no aparece en el formulario.
     - **Causa**: No está activado o no asignado a Security Role
     - **Solución**: Process > Activate + Security Roles tab en BPF
 
-3. **Error**: Cambios en form no se reflejan
+3. **Lo que ves:** cambiaste el formulario y la app sigue mostrando la versión anterior.
     - **Causa**: No se publicó customizations
     - **Solución**: Siempre Publish All Customizations después de cambios
 
-4. **Error**: Dashboard no muestra datos actualizados
+4. **Lo que ves:** el dashboard no muestra datos actualizados.
     - **Causa**: Cache del navegador o permisos en vistas subyacentes
     - **Solución**: Refresh browser, verificar security role en charts/views
 
-5. **Error**: Site map no guarda o no aparece en app
+5. **Lo que ves:** el site map no se guarda o no aparece en la app.
     - **Causa**: Estructura inválida (subarea sin group, etc.)
     - **Solución**: Validar jerarquía: Area > Group > Subarea
 
