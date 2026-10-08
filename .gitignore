@@ -41,3 +41,6 @@ $RECYCLE.BIN/
 # Iconos PWA (referenciados por manifest.ts)
 !app-elearning/public/icon-192.png
 !app-elearning/public/icon-512.png
+
+# graphify: cache del AST, derivada y regenerable con `python -m graphify update .`
+graphify-out/cache/
