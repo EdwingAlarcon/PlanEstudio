@@ -156,4 +156,11 @@ específica de cada punto; cualquiera puede revertirse.
 - No valida contra el tenant real del alumno, y eso no es un defecto del diseño.
 - No sustituye los ítems P1 de la auditoría que no son pedagógicos (versionado de `progress.ts`, nivel "Verified",
   motor de Job-Ready scoring). Siguen siendo asuntos aparte.
+- **Pendiente detectado en la Fase 2 (Módulo 6): Power BI no tiene lab básico dedicado.** El Nivel Básico queda con
+  una práctica larga sin lab guiado paso a paso; el sprint 15 de `SPRINT_HANDOFF.md` lo documenta como "ruta honesta
+  cuando no hay lab básico dedicado", pero no registra el motivo (hipótesis no confirmada: Power BI Desktop solo
+  corre en Windows y el resto del curso va en navegador). Las microprácticas del M6 enlazan a LAB-002 por falta de
+  un lab de Power BI. Un lab nuevo cambiaría el conteo de 75 labs, así que **no se crea sin aprobación explícita**.
+- Error de contenido corregido en el M6 (2026-10-08): con dirección Single el filtro viaja del lado "uno" al lado
+  "muchos"; el módulo decía lo contrario. Verificado en Microsoft Learn.
 - La estimación de esfuerzo es relativa, no en horas. No tengo datos de cuánto tardaron los pilotos en tiempo real.

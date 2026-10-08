@@ -46,6 +46,28 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 
 #### 🟢 Núcleo obligatorio
 
+> **Cómo está organizado el Núcleo:** construyes el reporte en tres bloques (tu primer reporte con datos de ejemplo, conectar y modelar, visualizaciones y medidas). En cada uno alternas una idea corta, una práctica de pocos minutos y un dato real de tu propio reporte. Cierras con un reto en el que ya no te digo los pasos. Las microprácticas no necesitan Power BI; el reporte sí necesita Power BI Desktop (gratuito). Este módulo no tiene un lab dedicado: tu archivo `.pbix` es la evidencia.
+
+## 🧩 Microlección 1 — Tu primer reporte: una pregunta, un visual
+
+**¿Qué vas a aprender?** Que un reporte es una tabla de datos más visuales que responden preguntas, y cómo elegir el visual según la pregunta.
+
+**¿Por qué existe esto?** Un gráfico mal elegido (un pastel con 300 partes, una línea para una cifra única) esconde la respuesta en vez de mostrarla. Elegir el visual es decidir qué pregunta responde el reporte.
+
+**Ejemplo pequeño:** "¿cuántas solicitudes hay en total?" se responde con una tarjeta; "¿cómo se reparten por estado?" con barras; "¿cómo evolucionan por mes?" con una línea.
+
+**Ahora haz algo — micropráctica (6 min):** **[Elegir el visual correcto para cada pregunta](/practica/ip-dv-008-elegir-visual-correcto)**. Te da cuatro preguntas de un gerente y te pide emparejar cada una con el visual que la responde bien.
+
+**Práctica real en Power BI Desktop (15 min):** haz la Práctica 6.0 de abajo; no necesita Dataverse.
+
+**Evidencia a reportar (el dato exacto que viste, no un "sí/no"):**
+
+| Campo | Tu valor |
+|---|---|
+| Qué estado tiene la barra más alta de tu gráfica y qué valor | ___ |
+| El número que muestra tu tarjeta (card) | ___ |
+| Por qué elegiste ese tipo de visual para la tarjeta y para la gráfica | ___ |
+
 ##### Práctica 6.0: Primera victoria con datos de ejemplo
 
 > Si todavía no tienes Dataverse listo o Power BI Service disponible, empieza aquí. La meta es ver un reporte en pantalla antes de configurar todo.
@@ -65,6 +87,20 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 **Resultado esperado:** tienes un mini dashboard local con una gráfica y una tarjeta.
 
 **Evidencia:** captura del reporte con la gráfica y la card. Este archivo puede llamarse `primer-reporte-power-bi.pbix`.
+
+---
+
+## 🧩 Microlección 2 — Conectar y modelar: cómo se relacionan las tablas
+
+**¿Qué vas a aprender?** Cómo conectar Power BI a Dataverse, qué hace una relación entre tablas y hacia dónde viaja el filtro.
+
+**¿Por qué existe esto?** Un reporte con varias tablas solo funciona si Power BI sabe cómo se relacionan. Si la relación o la dirección del filtro están mal, los visuales muestran números que no corresponden o no responden a los slicers.
+
+**Ejemplo pequeño:** muchas solicitudes pertenecen a un mismo contacto. La relación es de muchos a uno (Solicitudes hacia Contacts) y, con dirección Single, el filtro viaja del lado "uno" (Contacts) al lado "muchos" (Solicitudes): elegir un contacto filtra sus solicitudes.
+
+**Ahora haz algo — micropráctica (6 min):** **[Elegir la cardinalidad y el sentido del filtro](/practica/ip-dv-009-cardinalidad-y-sentido-del-filtro)**. Te da dos tablas y te pide decidir cómo relacionarlas y hacia dónde debe viajar el filtro.
+
+**Práctica real en tu entorno (30 min):** haz los Pasos 1 a 4 de abajo.
 
 ##### Práctica 6.1: Conectar a Dataverse y Modelar
 
@@ -105,7 +141,27 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 1. Model view (ícono lateral)
 2. Validar relación auto-creada: Solicitudes[Solicitante] → Contacts[ID]
 3. Configurar cardinalidad: Many to One (*)
-4. Cross filter direction: Single (desde Solicitudes hacia Contacts)
+4. Cross filter direction: Single (el filtro viaja desde Contacts, el lado "uno", hacia Solicitudes, el lado "muchos")
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Las tablas que cargaste desde Dataverse y cuántas columnas dejaste en Solicitudes TI | ___ |
+| La relación que ves en Model view: tablas, cardinalidad y dirección del filtro | ___ |
+| Qué pasa en un visual al elegir un contacto en un slicer (¿filtra sus solicitudes?) | ___ |
+
+---
+
+## 🧩 Microlección 3 — Visualizaciones y medidas
+
+**¿Qué vas a aprender?** Cómo construir las páginas del reporte (tarjetas, gráficos, slicers) y cómo una medida DAX calcula una cifra que responde a los filtros.
+
+**¿Por qué existe esto?** Los visuales muestran los datos y las medidas calculan las cifras. Una medida se recalcula según el filtro activo; una columna calculada, no. Por eso los totales y porcentajes van en medidas.
+
+**Ejemplo pequeño:** la medida `% Resueltas` divide las solicitudes resueltas entre el total, y cambia sola cuando eliges una categoría en un slicer.
+
+**Práctica real en tu entorno (45 min):** haz las Prácticas 6.2 y 6.3 de abajo.
 
 ##### Práctica 6.2: Crear Visualizaciones Básicas
 
@@ -217,6 +273,37 @@ CALCULATE(
 ```
 
 > **Nota:** Las funciones AVERAGEX con FILTER y el cálculo MoM con DATEADD son DAX avanzado — las verás en detalle en el **Módulo 12 (Nivel 2)** con el contexto correcto de inteligencia de tiempo.
+
+**Ahora diagnostica — micropráctica (5 min):** **[Diagnosticar: el gráfico por mes no agrupa las fechas](/practica/ip-trb-005-fechas-como-texto)**. Parte de un síntoma exacto —fechas sueltas en el eje, sin jerarquía— y te pide la causa y dónde se corrige, antes de ver la solución.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Cuántas páginas y cuántos visuales tiene tu reporte | ___ |
+| Una medida DAX que escribiste y el valor que devuelve | ___ |
+| Qué cambia en esa cifra cuando eliges un valor en un slicer | ___ |
+
+---
+
+## 🔁 Reto de transferencia — Un reporte de ventas, sin pasos
+
+Esta vez no te digo los pasos: aplica lo que viste a un negocio distinto.
+
+> **Requerimiento:** una tienda quiere ver cuánto vende por producto y por mes. Con **Enter data** crea dos tablas: Ventas (Fecha, Producto, Importe) con al menos 8 filas, y Productos (Producto, Categoría) con esos mismos productos. Arma un reporte con una tarjeta del total vendido, un gráfico del importe por producto y un gráfico del importe por mes.
+> **Criterios de aceptación:** (1) las dos tablas están relacionadas por Producto, de muchos a uno y con filtro Single; (2) el total sale de una medida DAX, no de una columna calculada; (3) la columna Fecha es de tipo fecha y el gráfico por mes agrupa por mes.
+> **Restricciones:** no copies el modelo de Solicitudes. Todo es local en Power BI Desktop, sin Dataverse ni Power BI Service.
+> **Pistas si te atoras:** la medida usa `SUM` (DAX básico de la Práctica 6.3); la relación se revisa en Model view; el tipo de dato se cambia en Power Query.
+
+**Ahora haz algo — transferencia guiada (8 min):** **[Transferir: del reporte de solicitudes al de ventas](/practica/ip-dv-010-transferir-modelo-de-ventas)**. Retoma el modelo de este módulo con otro negocio y te pide decidir qué estructura usar y qué evitar.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| La relación que creaste: tablas, cardinalidad y dirección del filtro | ___ |
+| La medida DAX del total vendido (la fórmula exacta) y el valor que devolvió | ___ |
+| El tipo de dato de la columna Fecha y cómo se ve el eje del gráfico por mes | ___ |
 
 #### 🔧 Profundización opcional
 
@@ -372,27 +459,27 @@ CALCULATE(
 
 ### ⚠️ Errores Comunes
 
-1. **Error**: Relaciones no funcionan (visuals no filtran)
+1. **Lo que ves:** las relaciones no funcionan y los visuales no se filtran entre sí.
     - **Causa**: Cardinalidad incorrecta o ambigüedad
     - **Solución**: Verificar Model view, eliminar relaciones inactivas
 
-2. **Error**: Measures devuelven valores incorrectos con filtros
+2. **Lo que ves:** una medida devuelve valores incorrectos al aplicar filtros.
     - **Causa**: Contexto de filtro no manejado (no usar CALCULATE)
     - **Solución**: Usar CALCULATE con filtros explícitos o ALL/REMOVEFILTERS
 
-3. **Error**: "Cannot display visual" por exceso de datos
+3. **Lo que ves:** el mensaje "Cannot display visual" por exceso de datos.
     - **Causa**: Visual tiene >30k puntos de datos
     - **Solución**: Agregar filtros, usar Top N, o cambiar visual type
 
-4. **Error**: Refresh falla en Service con "Credentials not configured"
+4. **Lo que ves:** el refresh falla en el Service con "Credentials not configured".
     - **Causa**: No se configuró OAuth o gateway para on-premise
     - **Solución**: Dataset settings > Credentials > Update
 
-5. **Error**: Columnas de fecha no permiten time intelligence
+5. **Lo que ves:** las columnas de fecha no permiten agrupar por mes ni usar time intelligence.
     - **Causa**: Columna es text, no date type
     - **Solución**: Power Query > Transform > Data type > Date
 
-6. **Error**: Usuarios no ven datos tras aplicar RLS
+6. **Lo que ves:** los usuarios no ven datos después de aplicar RLS.
     - **Causa**: Rol mal configurado o usuario no asignado
     - **Solución**: Validar con "View as role" en Desktop antes de publicar
 
