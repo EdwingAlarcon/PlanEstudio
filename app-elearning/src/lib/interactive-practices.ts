@@ -5,8 +5,8 @@ import { PRACTICE_REQUESTS } from "@/data/practice/requests";
 // Tope del banco de prácticas. Regla (PROPUESTA_FASES_APRENDER_HACIENDO.md): solo sube al aprobar una fase
 // del rediseño, y por el número de prácticas que esa fase planea añadir — no por comodidad.
 export const MIN_INTERACTIVE_PRACTICES = 12;
-// 24 (pilotos 10/11/13) + 3 del Módulo 1 + 1 del Módulo 2 (Fase 2).
-export const MAX_INTERACTIVE_PRACTICES = 28;
+// 24 (pilotos 10/11/13) + 3 del Módulo 1 + 1 del Módulo 2 + 2 del Módulo 3 (Fase 2).
+export const MAX_INTERACTIVE_PRACTICES = 30;
 
 export const INTERACTIVE_PRACTICE_TYPES = ["multiple-decision", "flow-builder", "query-playground", "debug-scenario"] as const;
 export const INTERACTIVE_PRACTICE_DOMAINS = ["dataverse", "power-apps", "power-automate", "fetchxml", "odata", "troubleshooting", "javascript"] as const;
@@ -875,6 +875,71 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     relatedModuleIds: [2],
     relatedLabIds: ["LAB-002"],
     tags: ["transferencia", "relaciones", "muchos-a-muchos"],
+  },
+  {
+    id: "IP-APP-007",
+    slug: "ip-app-007-formulario-no-guarda",
+    title: "Diagnosticar: el formulario \"guardó\" pero el registro no aparece",
+    description: "A partir de un síntoma exacto, identifica por qué la app cambió de pantalla sin guardar nada.",
+    type: "debug-scenario",
+    domain: "power-apps",
+    level: "junior",
+    estimatedMinutes: 6,
+    prerequisites: ["Módulo 3"],
+    learningObjectives: ["Entender que SubmitForm no espera a saber si el guardado funcionó", "Usar las propiedades del Form para navegar solo cuando el guardado tuvo éxito"],
+    scenario: {
+      context: "Armaste el formulario de creación del módulo. El botón Guardar tiene este OnSelect: `SubmitForm(Form1); Navigate(ScreenInicio, ScreenTransition.UnCover)`. Un usuario deja vacía la columna Categoría (requerida en Dataverse) y pulsa Guardar. La app vuelve a la lista sin mostrar ningún error, y el registro no aparece en la Gallery.",
+      objective: "Antes de mirar la solución, di por qué la app cambió de pantalla aunque no se guardó nada y cómo corregirlo.",
+    },
+    implementation: "Botón Guardar → OnSelect:\nSubmitForm(Form1);\nNavigate(ScreenInicio, ScreenTransition.UnCover)\nColumna Categoría: requerida en Dataverse; el usuario la deja vacía",
+    symptom: "La app vuelve a la lista como si hubiera guardado, pero el registro no existe y no se mostró ningún error.",
+    fixPrompt: "¿Qué hay que cambiar para navegar solo si el guardado funcionó y avisar si falló?",
+    acceptableFixes: ["onsuccess", "onfailure", "form1.error", "notify", "solo si guardo", "requerido"],
+    testCases: [
+      { id: "navega-sin-esperar", input: "Navigate se ejecuta justo después de SubmitForm", expected: "la app cambia de pantalla aunque el guardado haya fallado" },
+      { id: "navega-en-onsuccess", input: "Navigate se mueve a OnSuccess del Form y se avisa con Notify si falla", expected: "solo se cambia de pantalla cuando el registro se guardó" },
+    ],
+    hints: [
+      { id: "h1", content: "SubmitForm envía el guardado, pero no espera a saber si funcionó: la línea siguiente se ejecuta de inmediato." },
+      { id: "h2", content: "El Form tiene dos propiedades pensadas para esto: una que se ejecuta cuando el guardado tiene éxito y otra cuando falla." },
+      { id: "h3", content: "Mueve el Navigate a la propiedad OnSuccess del Form y avisa con OnFailure o con Notify usando Form1.Error; así solo cambias de pantalla si se guardó." },
+    ],
+    relatedModuleIds: [3],
+    relatedLabIds: ["LAB-003"],
+    tags: ["troubleshooting", "submitform", "onsuccess"],
+  },
+  {
+    id: "IP-APP-008",
+    slug: "ip-app-008-transferir-solo-lo-asignado",
+    title: "Transferir: cada técnico ve solo lo suyo",
+    description: "El requisito cambia de mostrar todo a mostrar solo lo asignado — decide qué cambia en la app y en los datos.",
+    type: "multiple-decision",
+    domain: "power-apps",
+    level: "junior",
+    estimatedMinutes: 8,
+    prerequisites: ["Módulo 3"],
+    learningObjectives: ["Distinguir filtrar datos de ocultar filas", "Reconocer que el filtro de la app no sustituye la seguridad de Dataverse"],
+    scenario: {
+      context: "Tu app de solicitudes muestra todas las solicitudes en una Gallery con un buscador. Ahora los técnicos de soporte la usarán y cada uno debe ver solo las solicitudes asignadas a él, con un contador \"Mis pendientes: N\" arriba. La tabla Solicitud TI tiene un Lookup \"Asignado a\" hacia Usuario.",
+      objective: "Selecciona los cambios correctos para este nuevo requisito.",
+    },
+    multiple: true,
+    options: [
+      { id: "filtrar-items", label: "Cambiar `Items` de la Gallery para que filtre las solicitudes asignadas al usuario actual (con `User()`)", consequence: "Es el cambio central: el filtro decide qué registros se traen y se muestran, y el buscador puede seguir trabajando sobre esa lista.", score: 1 },
+      { id: "contador-sobre-galeria", label: "Hacer que el contador cuente las filas de la Gallery ya filtrada (por ejemplo `CountRows(GallerySolicitudes.AllItems)`)", consequence: "Así el contador y la lista siempre coinciden; contar la tabla completa daría un número que no corresponde a lo que ve el técnico.", score: 1 },
+      { id: "rol-seguridad", label: "Pedir que un rol de seguridad de Dataverse limite qué solicitudes puede leer cada técnico", consequence: "El filtro de la app mejora la experiencia, pero no es seguridad: la protección real de los datos vive en Dataverse.", score: 1 },
+      { id: "ocultar-filas", label: "Dejar la Gallery como está y poner `Visible = false` en las filas que no son del técnico", consequence: "Ocultar no filtra: los datos de los demás siguen cargados en la app y el contador seguiría contándolos.", score: 0 },
+      { id: "app-por-tecnico", label: "Crear una app distinta por cada técnico", consequence: "No escala: cada técnico nuevo obligaría a duplicar y mantener otra app.", score: 0 },
+    ],
+    correctOptionIds: ["filtrar-items", "contador-sobre-galeria", "rol-seguridad"],
+    hints: [
+      { id: "h1", content: "Pregúntate si el requisito pide mostrar menos filas o traer menos datos: no es lo mismo ocultar que filtrar." },
+      { id: "h2", content: "El contador debe contar lo que el técnico ve, y la seguridad real de los datos no puede depender solo de lo que la app decida mostrar." },
+      { id: "h3", content: "Se filtra `Items` por el usuario actual, el contador cuenta la Gallery filtrada y un rol de Dataverse protege los datos de verdad." },
+    ],
+    relatedModuleIds: [3],
+    relatedLabIds: ["LAB-003"],
+    tags: ["transferencia", "filter", "user", "seguridad"],
   },
   {
     id: "IP-PA-005",

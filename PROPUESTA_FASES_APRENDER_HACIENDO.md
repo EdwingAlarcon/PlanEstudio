@@ -80,8 +80,8 @@ original, prevalece sobre este.
   empezar". Aprender haciendo rinde más al inicio.
 - **Riesgo:** el principiante no sabe aún usar controles ni herramientas, así que el reto "sin pasos" debe ser más
   corto y con pistas cruzadas a la micropráctica anterior (observación ya hecha en el Módulo 10).
-- **Cierre:** los 8 módulos con el patrón, más una prueba con la persona real que dijo sentirse perdida, no solo una
-  simulación mía.
+- **Cierre:** los 8 módulos con el patrón, más la prueba como principiante hecha por Claude con un agente sin
+  contexto (decisión 4, sección 5). Esa prueba es una simulación y no sustituye a una persona real.
 - **Esfuerzo relativo:** medio.
 
 ### Fase 3 — Intermedio restante (6 módulos: 9, 12, 14, 15, 16, 17)
@@ -145,8 +145,11 @@ específica de cada punto; cualquiera puede revertirse.
    fuera hasta nueva aprobación. *Por qué:* son 35 módulos y la evidencia de mercado de varios perfiles es desigual
    (auditoría §37); no justifica el costo sin una señal más clara.
 3. **Orden sin cambios:** Básico antes que Intermedio, porque la queja que motivó esto fue de un principiante.
-4. **La prueba como principiante real la hace el usuario** al cerrar la Fase 2. Esto no lo puede decidir Claude por
-   el usuario: queda como **condición de cierre pendiente**, y si no se cumple la Fase 2 no se da por cerrada.
+4. **La prueba como principiante la hace Claude** al cerrar la Fase 2 (el usuario lo pidió así el 2026-10-08). Se
+   hará con un agente independiente que recibe solo el texto de cada módulo, sin contexto del proyecto, y lo recorre
+   como alguien sin experiencia. **Límite honesto:** es una simulación; detecta jerga sin explicar, pasos que
+   faltan y saltos de nivel, pero no sustituye a una persona real y puede pasar por alto lo que un modelo ya sabe.
+   Sigue siendo la condición de cierre de la Fase 2.
 
 ## 6. Lo que esta propuesta no resuelve
 

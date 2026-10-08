@@ -58,6 +58,20 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 
 *Completa esto primero. Es tu primera app funcional de principio a fin.*
 
+> **Cómo está organizado el Núcleo:** construyes la app en tres bloques (lista, creación, detalle). En cada uno alternas una idea corta, una práctica de pocos minutos y un dato real de tu propia app para guardar. Cierras con un reto en el que ya no te digo las fórmulas. Las microprácticas no necesitan tenant; construir la app sí (tu ambiente Developer del Módulo 1 y la tabla del Módulo 2). Si aún no tienes tenant, usa la "Variante sin tenant" del Lab 03.
+
+## 🧩 Microlección 1 — La pantalla de lista: Gallery y búsqueda
+
+**¿Qué vas a aprender?** Cómo una Gallery muestra los registros de una tabla y cómo una fórmula `Search` o `Filter` decide cuáles ver.
+
+**¿Por qué existe esto?** Una lista que muestra todo, sin poder buscar, no sirve en cuanto hay más de unas decenas de registros. La fórmula de la propiedad `Items` es lo que conecta la pantalla con los datos.
+
+**Ejemplo pequeño:** `Search('Solicitudes TI', SearchBox.Text, "cr123_título")` devuelve solo las solicitudes cuyo título contiene lo que escribes; si el cuadro está vacío, devuelve todas.
+
+**Ahora haz algo — micropráctica (6 min):** **[Elegir la fórmula de filtro correcta](/practica/ip-app-001-formula-filtro-productos)**. Te da una necesidad de búsqueda o filtro y te pide elegir la fórmula adecuada, con feedback inmediato.
+
+**Práctica real en tu entorno (25 min):** haz los Pasos 1 y 2 de abajo.
+
 ##### Práctica 3.1: Primera Canvas App - Lista de Tareas
 
 *Objetivo: App de To-Do List con Dataverse*
@@ -93,6 +107,28 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 3. Agregar Button "Nueva Solicitud"
     - OnSelect: `Navigate(ScreenNueva, ScreenTransition.Cover)`
 
+**Evidencia a reportar (el dato exacto que viste, no un "sí/no"):**
+
+| Campo | Tu valor |
+|---|---|
+| La fórmula exacta de `Items` de tu Gallery | ___ |
+| Cuántas filas muestra la Gallery con el buscador vacío y cuántas al escribir una palabra que sabes que existe (di la palabra) | ___ |
+| ¿Apareció la línea azul de delegación en alguna fórmula? ¿En cuál? | ___ |
+
+---
+
+## 🧩 Microlección 2 — Crear un registro: formulario y navegación
+
+**¿Qué vas a aprender?** Cómo un Form guarda un registro nuevo en Dataverse y cómo se pasa de una pantalla a otra con `Navigate`.
+
+**¿Por qué existe esto?** Crear datos es la mitad de una app. El punto delicado es *cuándo* navegar: si la app cambia de pantalla antes de saber que el guardado funcionó, el usuario cree que guardó algo que no se guardó.
+
+**Ejemplo pequeño:** `SubmitForm(Form1)` envía los valores a Dataverse; `Navigate(ScreenInicio, ScreenTransition.UnCover)` vuelve a la pantalla de lista.
+
+**Ahora haz algo — micropráctica (6 min):** **[Navegación y formulario](/practica/ip-app-002-navegacion-formulario)**. Te pide decidir cómo conectar el formulario, el botón y la navegación entre pantallas.
+
+**Práctica real en tu entorno (20 min):** haz el Paso 3 de abajo.
+
 **Paso 3: Pantalla de Creación**
 
 1. New Screen > Form
@@ -116,6 +152,28 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
    Navigate(ScreenInicio, ScreenTransition.UnCover)
    ```
 
+**Ahora diagnostica — micropráctica (6 min):** **[Diagnosticar: el formulario "guardó" pero el registro no aparece](/practica/ip-app-007-formulario-no-guarda)**. Parte de un síntoma exacto —el usuario ve la lista sin su registro y ningún error— y te pide la causa antes de ver la solución. Es el error del Paso 3 más común.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| El `OnSelect` exacto de tu botón Guardar | ___ |
+| Qué pasó al guardar con un campo requerido vacío (¿cambió de pantalla? ¿viste un error?) | ___ |
+| Nombre del registro nuevo que aparece en Dataverse después de guardar bien | ___ |
+
+---
+
+## 🧩 Microlección 3 — Detalle y edición de un registro
+
+**¿Qué vas a aprender?** Cómo una pantalla de detalle muestra el registro que elegiste en la lista y cómo se pasa a modo edición.
+
+**¿Por qué existe esto?** Casi toda app de datos sigue el mismo trío: lista, crear y ver/editar. Si entiendes cómo la pantalla de detalle sabe *qué* registro mostrar, puedes armar la mayoría de las apps sencillas.
+
+**Ejemplo pequeño:** el Form de detalle usa `GallerySolicitudes.Selected` como `Item`: lo que seleccionaste en la lista es lo que ves en el detalle.
+
+**Práctica real en tu entorno (15 min):** haz el Paso 4 de abajo.
+
 **Paso 4: Pantalla de Detalles**
 
 1. Duplicate Screen de creación
@@ -128,6 +186,37 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 
 4. Agregar navegación desde Gallery:
     - OnSelect de Gallery: `Navigate(ScreenDetalle, ScreenTransition.Cover)`
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| El `Item` exacto que usaste en el Form de detalle | ___ |
+| Qué ves en el detalle si abres un registro distinto al anterior | ___ |
+| Las pantallas que tiene tu app y cómo navegas de una a otra | ___ |
+
+---
+
+## 🔁 Reto de transferencia — La app del técnico, sin pasos
+
+Esta vez no te digo las fórmulas: aplica lo que viste a un cambio de requisito.
+
+> **Requerimiento:** los técnicos de soporte usarán tu app desde su equipo y cada uno debe ver **solo las solicitudes asignadas a él**, con un contador arriba que diga "Mis pendientes: N".
+> **Criterios de aceptación:** (1) la Gallery muestra únicamente las solicitudes asignadas a quien abre la app; (2) el contador cuenta lo que la Gallery muestra, no toda la tabla; (3) el buscador sigue funcionando sobre esa lista ya filtrada.
+> **Restricciones:** no crees una app distinta por técnico, y no ocultes filas con `Visible = false` (los datos de los demás seguirían cargados).
+> **Pistas si te atoras:** `Filter()` está en la mini-guía de arriba; `User()` aparece en Buenas Prácticas; `CountRows` lo usas en la Práctica 3.2 (opcional).
+
+**Ahora haz algo — transferencia guiada (8 min):** **[Transferir: cada técnico ve solo lo suyo](/practica/ip-app-008-transferir-solo-lo-asignado)**. Retoma la app de este módulo pero cambia un requisito, y te pide decidir qué cambia.
+
+**Si aún no tienes tenant:** escribe las dos fórmulas que usarías (la de `Items` y la del contador) y explica con tus palabras por qué ocultar filas no es lo mismo que filtrarlas.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| La fórmula exacta de `Items` de la Gallery filtrada | ___ |
+| La fórmula del contador y el número que mostró | ___ |
+| Qué hiciste para que el buscador siguiera funcionando sobre la lista filtrada | ___ |
 
 #### 🔧 Profundización opcional
 
@@ -268,16 +357,16 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 
 ### ⚠️ Errores Comunes
 
-1. **Error**: Gallery no muestra datos o solo 500 registros
+1. **Lo que ves:** la Gallery no muestra todos los datos, o parece cortarse en 500 registros.
     - **Causa**: Función no delegable o limit implícito
     - **Solución**: Usar Filter() con operadores delegables (=, <>, >, <, And, Or)
     - **Check**: Línea azul de delegación warning en formula bar
 
-2. **Error**: "Name conflict" al referenciar columnas
+2. **Lo que ves:** un error de "Name conflict" al referenciar una columna.
     - **Causa**: Columna tiene nombre reservado (ej: Name, Value)
     - **Solución**: Usar comillas simples: `ThisItem.'Name'`
 
-3. **Error**: Form no guarda cambios
+3. **Lo que ves:** el formulario vuelve a la lista como si hubiera guardado, pero el registro no aparece y no hay ningún error visible.
     - **Causa**: SubmitForm() sin capturar resultado
     - **Solución**: 
    ```javascript
@@ -285,11 +374,11 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
    If(Form1.Error = Blank(), Navigate(Screen2), Notify("Error: " & Form1.Error))
    ```
 
-4. **Error**: Pérdida de datos en variables al cambiar screen
+4. **Lo que ves:** un valor que guardaste en una variable desaparece al cambiar de pantalla.
     - **Causa**: Usar UpdateContext (local) en lugar de Set (global)
     - **Solución**: Evaluar scope necesario, usar Set para datos persistentes
 
-5. **Error**: App lenta en carga inicial
+5. **Lo que ves:** la app tarda mucho en abrir, con la pantalla en blanco o cargando.
     - **Causa**: Queries pesadas en OnStart o OnVisible sin caché
     - **Solución**: Cargar datos críticos en OnStart, lazy load el resto
 
