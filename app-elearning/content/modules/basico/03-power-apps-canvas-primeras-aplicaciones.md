@@ -7,7 +7,7 @@ estimatedMinutes: 25
 slug: "power-apps-canvas-primeras-aplicaciones"
 lastVerified: "2026-09"
 ---
-*Duración: 2-3 semanas · Lectura: 8-12 min · Con práctica: 60-90 min (solo el Núcleo obligatorio; la Profundización opcional suma tiempo aparte)*
+*Duración: 2-3 semanas · Lectura: 8-12 min · Con práctica: unos 90 min con el ambiente listo; la primera vez, cuenta entre el doble y el triple (solo el Núcleo obligatorio; la Profundización opcional suma tiempo aparte)*
 
 ### 🎯 Objetivo
 Crear aplicaciones Canvas desde cero con controles, navegación y conexión a datos.
@@ -58,7 +58,7 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 
 *Completa esto primero. Es tu primera app funcional de principio a fin.*
 
-> **Cómo está organizado el Núcleo:** construyes la app en tres bloques (lista, creación, detalle). En cada uno alternas una idea corta, una práctica de pocos minutos y un dato real de tu propia app para guardar. Cierras con un reto en el que ya no te digo las fórmulas. Las microprácticas no necesitan tenant; construir la app sí (tu ambiente Developer del Módulo 1 y la tabla del Módulo 2). Si aún no tienes tenant, usa la "Variante sin tenant" del Lab 03.
+> **Cómo está organizado el Núcleo:** construyes la app en tres bloques (lista, creación, detalle). En cada uno alternas una idea corta, una práctica de pocos minutos y un dato real de tu propia app para guardar. Cierras con un reto en el que ya no te digo las fórmulas. Las microprácticas no necesitan tenant; construir la app sí (tu ambiente Developer del Módulo 1 y la tabla del Módulo 2). Si aún no tienes tenant, usa la "Variante sin tenant" del Lab 03. **Nombres:** en las fórmulas la tabla se escribe por su nombre en plural, `'Solicitudes TI'`, y los controles se nombran como en los ejemplos (`GallerySolicitudes`, `SearchBox`, `Form1`…); cámbialos en el árbol de controles, con el menú ⋯ > Cambiar nombre.
 
 ## 🧩 Microlección 1 — La pantalla de lista: Gallery y búsqueda
 
@@ -204,7 +204,7 @@ Esta vez no te digo las fórmulas: aplica lo que viste a un cambio de requisito.
 > **Requerimiento:** los técnicos de soporte usarán tu app desde su equipo y cada uno debe ver **solo las solicitudes asignadas a él**, con un contador arriba que diga "Mis pendientes: N".
 > **Criterios de aceptación:** (1) la Gallery muestra únicamente las solicitudes asignadas a quien abre la app; (2) el contador cuenta lo que la Gallery muestra, no toda la tabla; (3) el buscador sigue funcionando sobre esa lista ya filtrada.
 > **Restricciones:** no crees una app distinta por técnico, y no ocultes filas con `Visible = false` (los datos de los demás seguirían cargados).
-> **Pistas si te atoras:** `Filter()` está en la mini-guía de arriba; `User()` aparece en Buenas Prácticas; `CountRows` lo usas en la Práctica 3.2 (opcional).
+> **Pistas si te atoras:** la columna que dice a quién está asignada cada solicitud es `Asignado a`, la que creaste en el Módulo 2; `User().Email` devuelve el correo de quien abre la app; `Filter()` está en la mini-guía de arriba; y para contar las filas de una Gallery se usa `CountRows(GallerySolicitudes.AllItems)` (aparece completo en la Práctica 3.2, que es opcional). Si `Asignado a` no aparece en tu formulario, no importa: el filtro se aplica a la tabla, no al formulario.
 
 **Ahora haz algo — transferencia guiada (8 min):** **[Transferir: cada técnico ve solo lo suyo](/practica/ip-app-008-transferir-solo-lo-asignado)**. Retoma la app de este módulo pero cambia un requisito, y te pide decidir qué cambia.
 

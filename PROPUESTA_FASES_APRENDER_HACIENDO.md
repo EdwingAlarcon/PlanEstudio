@@ -164,3 +164,42 @@ específica de cada punto; cualquiera puede revertirse.
 - Error de contenido corregido en el M6 (2026-10-08): con dirección Single el filtro viaja del lado "uno" al lado
   "muchos"; el módulo decía lo contrario. Verificado en Microsoft Learn.
 - La estimación de esfuerzo es relativa, no en horas. No tengo datos de cuánto tardaron los pilotos en tiempo real.
+
+## 7. Resultado de la prueba como principiante (2026-10-08)
+
+**Cómo se hizo.** Cuatro agentes independientes, sin contexto del proyecto, cada uno con dos módulos del Nivel Básico y
+la misma persona: una administrativa que sabe Word y Excel, nunca ha programado y abandona si se pierde. Leyeron el
+módulo completo y señalaron dónde se atascan. **Límite:** es una simulación hecha por modelos; los hallazgos se
+verificaron contra el texto antes de actuar, y no sustituye a una persona real.
+
+**Corregido (verificado contra el texto o contra Microsoft Learn):**
+- Mis retos de transferencia pedían cosas que el módulo no enseña (M3, M4, M5, M6, M8). Se añadieron pistas concretas:
+  la columna `Asignado a` y `CountRows` (M3), el operador "Does not contain data" (M4), la sintaxis OData de nulos y
+  fechas (M5), la medida `SUM` y dónde se hace cada paso (M6).
+- M2 y M8 pedían una Business Rule que impidiera préstamos o reservas dobles; una Business Rule solo ve el registro que
+  se guarda, así que ahora piden explicar el diseño (qué columna y quién la cambia), sin exigir implementarlo.
+- M2: la columna `SLA Horas` se usaba sin crearse (arrastraba al M6); el Publisher se exigía en "Errores Comunes" pero
+  la práctica no lo pedía; la vista "Mis Solicitudes Abiertas" filtraba por un Contact como si fuera un usuario.
+- M1: el setup ahora dice qué es lo mínimo (el trial de Dynamics 365 es opcional) y da la URL del Admin Center.
+- M4: se explica lo mínimo sobre roles de seguridad y publicación, que la evidencia exigía sin enseñarlo.
+- M7: se indica qué controles preparar antes de empezar.
+- Los tiempos de cabecera ahora suman los bloques declarados y avisan de que la primera vez hay que contar el doble o el
+  triple. **Esos factores son una estimación mía, no un dato medido con personas.**
+
+**No corregido (pendiente; son anteriores a la migración y piden trabajo de contenido, no parches):**
+1. **Pasos de interfaz demasiado escuetos.** Es el hallazgo más repetido: una línea para tareas de diez clics. Casos
+   citados: el setup del M1; Lookup, Required y condiciones de Business Rules en el M2; `New Screen > Form` en el M3;
+   Business Rules, Quick Create, filtros de vista y gráficos en el M4; los Pasos 3 a 5 de la Práctica 5.2 en el M5
+   (HTML, variables, loop y un marcador `{expression: days since fecha solicitud}` que no es una expresión real);
+   Power Query (M) y DAX sin explicar en el M6; el M8 da las Fases 1 a 7 de la versión completa y no distingue qué
+   saltar para la entrega mínima.
+2. **Vocabulario sin definir** en las listas de "Conceptos Clave", escritas en inglés y sin una definición.
+3. **Incoherencias menores:** `Solicitud TI` / `'Solicitudes TI'` / `cr123_` / `sit_`; `Text(...ID, "000000")` en el M7
+   (el ID de Dataverse es un GUID); en el M6 "Promedio Días Resolución" promedia `Días Abierta`; en el M8 la relación
+   "1:1" con Métrica, el resumen "240-360 horas" frente a "8-16 horas", y columnas como `Cumplió SLA` que la entrega
+   mínima no incluye.
+
+**Conclusión.** El patrón "aprender haciendo" añadió práctica, evidencia y retos, pero **no resuelve el obstáculo más
+grande de un principiante**, que son los pasos de interfaz poco guiados. Recomendación: abrir una fase aparte de
+"pasos clic a clic", empezando por el setup del M1, la Práctica 5.2, el M4 y el M8, y **no dar la Fase 2 por cerrada**
+hasta una prueba con una persona real.

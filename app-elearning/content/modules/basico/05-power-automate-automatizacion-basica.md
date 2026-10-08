@@ -7,7 +7,7 @@ estimatedMinutes: 25
 slug: "power-automate-automatizacion-basica"
 lastVerified: "2026-09"
 ---
-*Duración: 2-3 semanas · Lectura: 10-12 min · Con práctica: 75-120 min (núcleo obligatorio); RPA y error handling avanzado pueden quedar para una segunda sesión*
+*Duración: 2-3 semanas · Lectura: 10-12 min · Con práctica: unos 95 min con el ambiente listo; la primera vez, cuenta entre el doble y el triple (núcleo obligatorio); RPA y error handling avanzado pueden quedar para una segunda sesión*
 
 ### 🎯 Objetivo
 Automatizar procesos de negocio mediante flujos cloud y de escritorio.
@@ -246,7 +246,7 @@ Esta vez no te digo los pasos: aplica lo que viste a un pedido nuevo.
 > **Requerimiento:** el gerente de TI quiere que se le avise solo cuando haya solicitudes **sin técnico asignado desde hace más de 3 días**. Si no hay ninguna, no quiere recibir nada.
 > **Criterios de aceptación:** (1) el flujo corre solo, una vez al día; (2) el filtro trae únicamente las solicitudes sin asignar y con más de 3 días, y no todas; (3) si no hay ninguna, el flujo termina sin enviar el correo.
 > **Restricciones:** un solo flujo, y sin loops anidados. No uses el trigger "When a row is added": lo que buscas depende del paso del tiempo, no de un evento.
-> **Pistas si te atoras:** la recurrencia y "List rows" están en la Práctica 5.2; la condición de "no enviar si está vacío" es el Paso 5 de esa práctica; recuerda que los valores Choice se filtran por su número, no por su nombre.
+> **Pistas si te atoras:** la recurrencia y "List rows" están en la Práctica 5.2; la condición de "no enviar si está vacío" es el Paso 5 de esa práctica; recuerda que los valores Choice se filtran por su número, no por su nombre. Para el filtro de este reto: una columna Lookup (como el técnico asignado) se escribe con su nombre lógico entre guiones bajos, por ejemplo `_cr123_asignadoa_value`, y "vacía" se escribe `eq null`; una fecha va en formato ISO (por ejemplo `2026-10-05T00:00:00Z`) y, para calcularla en el flujo, puedes usar la expresión `addDays(utcNow(), -3)`; los nombres reales de tus columnas los ves en la tabla, en Columns. Un "loop anidado" es un "Apply to each" dentro de otro.
 
 **Ahora haz algo — transferencia guiada (8 min):** **[Transferir: avisar solo cuando haga falta](/practica/ip-pa-007-transferir-aviso-sin-asignar)**. Retoma el flujo de reporte diario pero con un pedido nuevo, y te pide decidir qué cambia.
 

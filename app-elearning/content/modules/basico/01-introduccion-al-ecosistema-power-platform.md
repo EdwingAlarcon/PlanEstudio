@@ -7,7 +7,7 @@ estimatedMinutes: 20
 slug: "introduccion-al-ecosistema-power-platform"
 lastVerified: "2026-09"
 ---
-*Duración: 1-2 semanas · Lectura: 10-12 min · Con práctica y setup de ambiente: 45-90 min (el tiempo de setup varía y no depende de ti)*
+*Duración: 1-2 semanas · Lectura: 10-12 min · Con práctica y setup de ambiente: los bloques suman 70 a 110 min con la cuenta lista; la primera vez, cuenta entre el doble y el triple (el tiempo de setup varía y no depende de ti)*
 
 > **🌱 ¿Nunca tocaste Power Platform?** Lee primero [Ruta cero absoluta](/recursos/ruta-cero-absoluta) —
 > aclara qué es un tenant, un ambiente y la diferencia entre Developer/Sandbox/Production/trial antes
@@ -95,6 +95,8 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 **¿Por qué existe esto?** Todo lo que construyas vive dentro de un ambiente. Si trabajas en el ambiente *default* (el que comparte toda la organización), tus pruebas se mezclan con las de todos y no puedes controlarlas. Un ambiente Developer propio es tu espacio aislado: lo que rompes ahí no afecta a nadie.
 
 **Ejemplo pequeño:** la misma organización tiene el ambiente `Contoso (default)` y el tuyo, `DEV-TuNombre`. Una tabla creada en uno no aparece en el otro.
+
+> **Lo mínimo para este módulo:** una cuenta Microsoft 365 Developer y un ambiente de tipo Developer con Dataverse. El trial de Dynamics 365 es opcional: puedes saltarte ese paso y volver cuando llegues a los módulos de Dynamics 365. El Power Platform Admin Center está en https://admin.powerplatform.microsoft.com.
 
 **Práctica real en tu entorno (20-60 min; el tiempo depende de Microsoft, no de ti):**
 
@@ -191,6 +193,7 @@ Esta vez no te digo qué hacer paso a paso: aplica lo que viste a un caso que co
 > **Requerimiento:** elige un proceso real que conozcas (tu trabajo, tu estudio, un negocio familiar) donde hoy se usen Excel, papel o mensajes sueltos. Arma tu mapa: qué datos guardarías y dónde, quién los capturaría y desde qué, qué debería pasar solo y qué reporte necesitaría quien decide.
 > **Criterios de aceptación:** (1) nombras al menos 4 piezas del ecosistema y cada una resuelve un dolor concreto de tu proceso, no las listas por listar; (2) dices de dónde sale cada dato, con una sola tabla como fuente; (3) indicas si alguien de fuera de la organización necesitaría usarlo y, si es así, qué pieza cambiaría.
 > **Restricciones:** no necesitas tenant ni construir nada; es un mapa en papel o en una nota. Power Pages es la pieza para usuarios externos (el detalle está en el Suplemento 1B, opcional).
+> **Ejemplo resuelto (otro negocio, solo para que veas la forma):** una panadería que anota los pedidos en un cuaderno. Datos: una tabla Pedidos, que es la única fuente. Captura: una app en el mostrador para tomar pedidos. Automatización: un flujo que avisa al obrador cuando entra un pedido. Reporte: pedidos por día. Usuario externo: no; si los clientes pidieran desde su casa, la pieza sería Power Pages. Tu mapa debe tener esa forma, con tu propio proceso.
 
 **Ahora haz algo — transferencia guiada (8 min):** **[Transferir: ahora los dueños reservan por su cuenta](/practica/ip-dv-006-transferir-reserva-externa)**. Retoma el caso de la clínica de la micropráctica anterior pero cambia un requisito, y te pide decidir qué cambia y qué se conserva.
 
@@ -242,7 +245,7 @@ Esta vez no te digo qué hacer paso a paso: aplica lo que viste a un caso que co
 
 ### 🧪 Criterios de Validación
 - [ ] Ambiente de desarrollo creado y funcional
-- [ ] Acceso a Power Apps, Power Automate, Power BI confirmado
+- [ ] Acceso a Power Apps, Power Automate, Power BI confirmado (Power BI se abre en https://app.powerbi.com)
 - [ ] 5+ registros de prueba en tabla Account de Dataverse
 - [ ] Comprensión de diferencia entre conectores Standard y Premium
 - [ ] Explicar con palabras propias qué es Dataverse y su propósito

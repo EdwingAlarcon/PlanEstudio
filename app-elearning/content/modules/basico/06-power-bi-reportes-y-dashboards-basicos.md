@@ -7,7 +7,7 @@ estimatedMinutes: 25
 slug: "power-bi-reportes-y-dashboards-basicos"
 lastVerified: "2026-09"
 ---
-*Duración: 2 semanas · Lectura: 10-12 min · Con práctica: 60-90 min (reporte local en Power BI Desktop); publicación, refresh y RLS pueden quedar para una segunda sesión*
+*Duración: 2 semanas · Lectura: 10-12 min · Con práctica: unos 115 min con Power BI Desktop ya instalado; la primera vez, cuenta entre el doble y el triple (reporte local en Power BI Desktop); publicación, refresh y RLS pueden quedar para una segunda sesión*
 
 ### 🎯 Objetivo
 Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
@@ -231,7 +231,9 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 
 ##### Práctica 6.3: DAX Measures Básicas
 
-Crear measures en tabla "Medidas" (nueva tabla calculada vacía):
+Crear measures en una tabla "Medidas" (créala con Enter data, sin filas, solo para guardar las medidas).
+
+> Las medidas 2 y 3 usan columnas de tu tabla del Módulo 2 (`SLA Horas`, creada en la Práctica 2.1) y la columna `Días Abierta` que creaste en Power Query en la Práctica 6.1. Si no las tienes, salta esas dos y practica con las otras.
 
 1. **% Solicitudes Resueltas**
 ```dax
@@ -293,7 +295,7 @@ Esta vez no te digo los pasos: aplica lo que viste a un negocio distinto.
 > **Requerimiento:** una tienda quiere ver cuánto vende por producto y por mes. Con **Enter data** crea dos tablas: Ventas (Fecha, Producto, Importe) con al menos 8 filas, y Productos (Producto, Categoría) con esos mismos productos. Arma un reporte con una tarjeta del total vendido, un gráfico del importe por producto y un gráfico del importe por mes.
 > **Criterios de aceptación:** (1) las dos tablas están relacionadas por Producto, de muchos a uno y con filtro Single; (2) el total sale de una medida DAX, no de una columna calculada; (3) la columna Fecha es de tipo fecha y el gráfico por mes agrupa por mes.
 > **Restricciones:** no copies el modelo de Solicitudes. Todo es local en Power BI Desktop, sin Dataverse ni Power BI Service.
-> **Pistas si te atoras:** la medida usa `SUM` (DAX básico de la Práctica 6.3); la relación se revisa en Model view; el tipo de dato se cambia en Power Query.
+> **Pistas si te atoras:** crea la segunda tabla igual que en la Práctica 6.0 (Enter data); relaciona las dos arrastrando la columna Producto de una a la otra en Model view, como en el Paso 4 de la 6.1; la medida del total puede ser `Total Vendido = SUM(Ventas[Importe])`; y el tipo de dato de la columna Fecha se cambia en Power Query (Transform > Data type), como en la micropráctica de diagnóstico.
 
 **Ahora haz algo — transferencia guiada (8 min):** **[Transferir: del reporte de solicitudes al de ventas](/practica/ip-dv-010-transferir-modelo-de-ventas)**. Retoma el modelo de este módulo con otro negocio y te pide decidir qué estructura usar y qué evitar.
 

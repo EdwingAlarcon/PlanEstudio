@@ -683,7 +683,7 @@ Configuración de solución
 |---|---|
 | El flujo que automatizaste y la hora de su ejecución exitosa en el Run history | ___ |
 | La lista de componentes que contiene tu Solution | ___ |
-| Una decisión de seguridad que tomaste y por qué | ___ |
+| Una decisión de seguridad que tomaste o, si no llegaste a la Fase 6, el rol que crearías y por qué | ___ |
 
 ---
 
@@ -692,9 +692,9 @@ Configuración de solución
 Esta vez no te digo las tablas ni los pasos: aplica lo que construiste a un negocio distinto.
 
 > **Requerimiento:** una universidad quiere gestionar las reservas de sus salas de estudio. Quien reserva es un estudiante; el responsable de espacios las aprueba y quiere ver cuántas horas se ocupa cada sala. Diseña la entrega mínima de este proyecto para ese negocio.
-> **Criterios de aceptación:** (1) defines al menos 2 tablas relacionadas, con las columnas y el tipo correcto de cada una; (2) eliges UNA app y justificas por qué, según quién la usa; (3) describes un flujo de notificación y una regla que impida reservar la misma sala en horarios que se cruzan; (4) dices qué reporte le sirve al responsable.
+> **Criterios de aceptación:** (1) defines al menos 2 tablas relacionadas, con las columnas y el tipo correcto de cada una; (2) eliges UNA app y justificas por qué, según quién la usa; (3) describes un flujo de notificación y cómo evitarías reservar la misma sala en horarios que se cruzan (qué columnas guardas, por ejemplo hora de inicio y hora de fin, y en qué punto compruebas si ya hay una reserva que se cruza); (4) dices qué reporte le sirve al responsable.
 > **Restricciones:** no copies las tablas de Solicitudes. No necesitas tenant: es un documento de una página que puedes convertir después en el README de tu proyecto.
-> **Pistas si te atoras:** el orden de trabajo es el de la entrega mínima (dato, app, flujo, reporte); la regla de reservas que se cruzan es una Business Rule o una validación en el flujo; el reporte responde a una sola pregunta del responsable.
+> **Pistas si te atoras:** el orden de trabajo es el de la entrega mínima (dato, app, flujo, reporte); la comprobación de reservas que se cruzan se hace en un flujo antes de confirmar la reserva (una Business Rule solo ve el registro que se está guardando, no los demás); el reporte responde a una sola pregunta del responsable.
 
 **Ahora haz algo — transferencia guiada (8 min):** **[Transferir: el mismo proyecto para reservas de salas](/practica/ip-dv-012-transferir-proyecto-reservas)**. Retoma el mismo caso y te pide decidir qué se conserva del método y qué cambia.
 
@@ -704,7 +704,7 @@ Esta vez no te digo las tablas ni los pasos: aplica lo que construiste a un nego
 |---|---|
 | Tus tablas con sus columnas y la relación entre ellas | ___ |
 | La app que elegiste y por qué, según quién la usa | ___ |
-| La regla que impide reservar la misma sala en horarios que se cruzan y el flujo de notificación | ___ |
+| Cómo evitas reservar la misma sala en horarios que se cruzan, y el flujo de notificación | ___ |
 
 ### 💼 Caso Real de Negocio
 

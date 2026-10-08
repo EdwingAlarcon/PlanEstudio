@@ -7,7 +7,7 @@ estimatedMinutes: 20
 slug: "power-apps-model-driven-apps-basadas-en-datos"
 lastVerified: "2026-09"
 ---
-*Duración: 1-2 semanas · Lectura: 8-10 min · Con práctica: 60-90 min (núcleo obligatorio); seguridad y BPF pueden completarse en una segunda sesión*
+*Duración: 1-2 semanas · Lectura: 8-10 min · Con práctica: unos 95 min con el ambiente listo; la primera vez, cuenta entre el doble y el triple (núcleo obligatorio); seguridad y BPF pueden completarse en una segunda sesión*
 
 ### 🎯 Objetivo
 Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
@@ -172,6 +172,8 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 
 **Ejemplo pequeño:** cambias un formulario, no publicas las personalizaciones, y la app sigue mostrando la versión anterior. O publicas bien, pero tu compañero no tiene rol y no ve la app.
 
+**Lo mínimo sobre roles y publicación:** un rol de seguridad es el conjunto de permisos que dice qué tablas puede ver y modificar una persona; se asigna en Settings > Security > Users > Manage Roles (el detalle está en la Práctica 4.3, que es Profundización). Para que tus cambios se vean, abre la solución, elige Publish all customizations y después abre la app con Play.
+
 **Práctica real en tu entorno (15 min):** haz el Paso 5 de abajo.
 
 **Paso 5: Crear Dashboard**
@@ -202,6 +204,7 @@ Esta vez no te digo los pasos: aplica lo que viste a un pedido nuevo.
 > **Requerimiento:** el jefe de TI quiere ver cada mañana las solicitudes de prioridad Crítica que todavía no tienen técnico asignado, y un gráfico que diga cuántas son.
 > **Criterios de aceptación:** (1) una vista nueva con el filtro correcto y un nombre que diga para qué sirve; (2) un gráfico en tu dashboard que cuente esas solicitudes; (3) comprobar en la app publicada que la vista y el gráfico aparecen.
 > **Restricciones:** no modifiques las vistas que ya existen y no pases de 6 componentes en el dashboard.
+> **Pistas si te atoras:** en el editor de la vista, la condición "sin técnico asignado" se escribe con la columna Asignado a y el operador "Does not contain data" (sin datos); un gráfico que cuenta usa "Count of records".
 
 **Ahora haz algo — transferencia guiada (8 min):** **[Transferir: una vista de críticas sin asignar](/practica/ip-app-010-transferir-vista-criticas)**. Retoma la app de este módulo pero con un pedido nuevo, y te pide decidir qué hacer y qué evitar.
 

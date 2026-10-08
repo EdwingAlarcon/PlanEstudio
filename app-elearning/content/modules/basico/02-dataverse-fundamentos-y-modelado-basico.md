@@ -7,7 +7,7 @@ estimatedMinutes: 15
 slug: "dataverse-fundamentos-y-modelado-basico"
 lastVerified: "2026-09"
 ---
-*Duración: 2-3 semanas · Lectura: 6-8 min · Con práctica: 40-60 min*
+*Duración: 2-3 semanas · Lectura: 6-8 min · Con práctica: unos 100 min con el ambiente listo (la primera vez, cuenta entre el doble y el triple)*
 
 ### 🎯 Objetivo
 Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
@@ -48,6 +48,8 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 
 *Caso: Sistema de Gestión de Solicitudes de TI*
 
+**Paso 0 (antes de crear la primera tabla):** crea una Solution con un Publisher propio (por ejemplo, nombre `SIT` y prefijo `sit`) y trabaja siempre dentro de ella. El Publisher es el "sello" que se pone a todas tus tablas y columnas (como `sit_solicitud`) y no se puede cambiar después. Se hace en Power Apps > Solutions > New solution > New publisher.
+
 1. **Crear tabla "Solicitud TI"**
     - Navegar a Tables > New table
     - Display name: `Solicitud TI`
@@ -66,6 +68,7 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
     - Fecha Resolución (Date Only)
     - Solicitante (Lookup → Contact)
     - Asignado a (Lookup → User)
+    - SLA Horas (Whole number)
    ```
 
 3. **Configurar columnas**:
@@ -107,6 +110,7 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 2. **Crear tabla "Categoría Detallada"**
     - Columnas: Nombre, Descripción, SLA (Choice: 24h, 48h, 72h)
     - Relación: Categoría Detallada → Solicitudes TI (One-to-Many)
+    - Nota: ya tienes la columna Choice `Categoría` de la Práctica 2.1; esta tabla es otra forma de modelar lo mismo, con datos propios por categoría (como el SLA). En un modelo real elegirías una de las dos; aquí practicas ambas.
 
 **Evidencia a reportar:**
 
@@ -148,7 +152,8 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 ##### Práctica 2.4: Crear Vistas Personalizadas
 
 1. **Vista: "Mis Solicitudes Abiertas"**
-    - Filtro: Estado ≠ Cerrada AND Solicitante = Current User
+    - Filtro: Estado ≠ Cerrada AND Propietario (Owner) = Current User
+    - Nota: el Solicitante es un Contact, no un usuario de la app, por eso esta vista filtra por el propietario del registro (quien lo creó)
     - Columnas: Título, Categoría, Prioridad, Estado, Fecha Solicitud
     - Orden: Prioridad DESC, Fecha Solicitud DESC
 
@@ -181,7 +186,7 @@ Crear manualmente 10 registros de Solicitudes con variedad de:
 Esta vez no te digo qué tablas ni columnas crear: aplica lo que viste a un negocio distinto.
 
 > **Requerimiento:** una biblioteca de barrio presta libros y tabletas a sus socios. Hoy lo lleva en una hoja de cálculo y a veces presta el mismo libro a dos personas. Diseña el modelo de datos mínimo para que eso no pase.
-> **Criterios de aceptación:** (1) defines al menos 3 tablas y, de cada una, sus columnas con el tipo correcto (usa Choice donde la lista sea fija); (2) indicas qué relaciones hay, de qué lado vive cada Lookup y si son de uno a muchos o de muchos a muchos; (3) incluyes una regla de negocio que impida prestar un ítem que ya está prestado.
+> **Criterios de aceptación:** (1) defines al menos 3 tablas y, de cada una, sus columnas con el tipo correcto (usa Choice donde la lista sea fija); (2) indicas qué relaciones hay, de qué lado vive cada Lookup y si son de uno a muchos o de muchos a muchos; (3) explicas cómo evitarías prestar un ítem que ya está prestado: qué columna guardarías para saberlo (por ejemplo, un Estado Disponible/Prestado en el ítem) y quién la cambia. No hace falta implementarlo: una Business Rule solo ve el registro que se está guardando, no los demás.
 > **Restricciones:** no puedes copiar el modelo de Solicitudes de TI; el negocio es otro y los nombres también. No necesitas tenant: puedes hacerlo en papel o en una nota, y construirlo después si quieres.
 
 **Ahora haz algo — transferencia guiada (8 min):** **[Transferir: una solicitud con varias categorías](/practica/ip-dv-007-transferir-categorias-multiples)**. Retoma el modelo de este módulo pero cambia un requisito, y te pide decidir qué cambia en la relación.
@@ -192,7 +197,7 @@ Esta vez no te digo qué tablas ni columnas crear: aplica lo que viste a un nego
 |---|---|
 | Tus tablas y, de cada una, sus columnas con el tipo elegido | ___ |
 | Tus relaciones: tablas, de qué lado va el Lookup y cardinalidad | ___ |
-| La regla de negocio que impide el préstamo doble y la condición exacta que usa | ___ |
+| Cómo evitas el préstamo doble: la columna que usas para saber si el ítem está prestado y quién la cambia | ___ |
 
 ### 💼 Caso Real de Negocio
 
@@ -217,7 +222,7 @@ Esta vez no te digo qué tablas ni columnas crear: aplica lo que viste a un nego
 **Nomenclatura**:
 
 - Nombres en español/inglés consistentes (elegir uno)
-- Evitar espacios; usar guiones bajos: `Solicitud_TI`
+- En los nombres internos (nombre lógico) evitar espacios y usar guiones bajos: `Solicitud_TI`; el nombre para mostrar (Display name) sí puede llevar espacios, como `Solicitud TI`
 - Publisher prefix: usar personalizado, no default `new_`
 
 **Modelado**:

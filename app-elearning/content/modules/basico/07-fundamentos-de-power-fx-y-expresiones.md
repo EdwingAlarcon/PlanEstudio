@@ -7,7 +7,7 @@ estimatedMinutes: 30
 slug: "fundamentos-de-power-fx-y-expresiones"
 lastVerified: "2026-09"
 ---
-*Duración: 1-2 semanas · Lectura: 12-15 min · Con práctica: 60-90 min (núcleo obligatorio); delegación avanzada y operaciones batch pueden quedar para una segunda sesión*
+*Duración: 1-2 semanas · Lectura: 12-15 min · Con práctica: unos 100 min con la app lista; la primera vez, cuenta entre el doble y el triple (núcleo obligatorio); delegación avanzada y operaciones batch pueden quedar para una segunda sesión*
 
 ### 🎯 Objetivo
 Dominar el lenguaje de fórmulas Power Fx para lógica avanzada en Canvas Apps.
@@ -58,7 +58,7 @@ Dominar el lenguaje de fórmulas Power Fx para lógica avanzada en Canvas Apps.
 
 Completa primero los ejercicios 7.1.1, 7.1.2, 7.2.1, 7.3.1 y 7.5.1. Con eso tendrás búsqueda/filtro, búsqueda de un registro, validación de formulario, formato de texto y una primera lectura de delegación.
 
-> **Cómo está organizado el Núcleo:** aprendes Power Fx en cuatro bloques cortos (leer y filtrar, validar, dar formato, delegación). En cada uno alternas una idea, una práctica de pocos minutos y un dato real de tu propia app. Cierras con un reto en el que ya no te doy las fórmulas. Las microprácticas no necesitan tenant; escribir las fórmulas sí necesita tu app Canvas del Módulo 3. Los ejercicios marcados como profundización quedan para después.
+> **Cómo está organizado el Núcleo:** aprendes Power Fx en cuatro bloques cortos (leer y filtrar, validar, dar formato, delegación). En cada uno alternas una idea, una práctica de pocos minutos y un dato real de tu propia app. Cierras con un reto en el que ya no te doy las fórmulas. Las microprácticas no necesitan tenant; escribir las fórmulas sí necesita tu app Canvas del Módulo 3. Los ejercicios marcados como profundización quedan para después. **Antes de empezar**, prepara tu app del Módulo 3 con estos nombres de controles (en el árbol de controles, menú ⋯ > Cambiar nombre): `GallerySolicitudes`, `DropdownCategoria`, `DropdownEstado`, `DatePickerDesde`, `SearchBox`, `TextInputTitulo` y `TextInputDescripcion`; las fórmulas los usan tal cual.
 
 ## 🧩 Microlección 1 — Leer una fórmula: Filter y LookUp
 
@@ -391,7 +391,7 @@ Esta vez no te doy las fórmulas: aplica lo que viste a un cambio de requisito.
 > **Requerimiento:** vuelve a tu app del Módulo 3 y mejora tres cosas. (1) El botón Guardar solo se habilita si hay título y la descripción tiene al menos 20 caracteres. (2) La Gallery de la lista muestra únicamente las solicitudes con más de 14 días abiertas. (3) Un Label muestra la solicitud como "Abierta desde 12/03/2026 - Hardware", con la fecha formateada y la categoría.
 > **Criterios de aceptación:** (1) el botón cambia de estado según el contenido de los campos; (2) el filtro de fecha no muestra la advertencia azul de delegación; (3) cada fórmula tiene un comentario `//` que explica su intención.
 > **Restricciones:** no uses `DateDiff` dentro del `Filter`, y no cambies el modelo de datos.
-> **Pistas si te atoras:** la validación combina `IsBlank` y `Len` (Práctica 7.2); el formato de la fecha está en la Práctica 7.3; la forma delegable de comparar fechas está en la Práctica 7.5, Ejercicio 1.
+> **Pistas si te atoras:** la validación combina `IsBlank` y `Len` (Práctica 7.2); el formato de la fecha está en la Práctica 7.3; la forma delegable de comparar fechas está en la Práctica 7.5, Ejercicio 1. Un comentario se escribe dentro de la fórmula, empezando con `//`; la advertencia de delegación es una línea azul que subraya la parte de la fórmula que no se delega.
 
 **Ahora haz algo — transferencia guiada (8 min):** **[Transferir: la condición de fecha con 8.000 registros](/practica/ip-app-013-transferir-condicion-de-fecha)**. Retoma el patrón de delegación del módulo con un caso nuevo y te pide decidir qué cambiar y qué evitar.
 
