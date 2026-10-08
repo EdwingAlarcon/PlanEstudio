@@ -131,7 +131,7 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
   criterios y evidencia manual.
 - Sin ítems abiertos del roadmap de auditoría: MkDocs congelado, "§63" cerrado por sustitución y plantillas de
   repositorio documentadas (ver 2026-10-01). Piloto 3 (Módulo 13) cerrado — ver sección de pilotos arriba.
-- Producción oficial: `https://planestudio.vercel.app/` (proyecto Vercel `app-elearning`); GitHub Pages es espejo secundario.
+- Producción oficial: `https://planestudio.vercel.app/` (proyecto Vercel `app-elearning`); el espejo de GitHub Pages se retiró el 2026-10-08 (el CI ya no despliega).
   Los deploys estáticos de Vercel requieren `app-elearning/public/vercel.json` (`cleanUrls: true`).
 - Preferencia del usuario: sincronizar (fetch/pull) antes de empezar; tras un cambio, commit y push a la rama indicada,
   comprobar CI con una sola consulta (no `gh run watch`). Validar con `npm run build:pages` o `npm run build` y luego
@@ -226,8 +226,9 @@ Push to `master` → GitHub Actions (`ci.yml`):
 1. **Lint & Type Check** — ESLint + `tsc --noEmit`
 2. **Unit Tests** — Vitest with coverage (thresholds: 80% lines/functions/statements, 70% branches)
 3. **Playwright Smoke** — end-to-end checks for main routes, labs, search, progress, certificates and onboarding guardrails
-4. **Build** — `next build` → static export in `app-elearning/out/`
-5. **Deploy** — legacy GitHub Pages mirror; official production is Vercel
+4. **Build** — `npm run build` (same build as Vercel) → static export in `app-elearning/out/`
+
+CI no longer deploys: official production is deployed by Vercel from `master`. The GitHub Pages mirror was retired on 2026-10-08.
 
 **If CI fails:** check ESLint errors first (most common cause). Run `npm run lint` locally before pushing.
 

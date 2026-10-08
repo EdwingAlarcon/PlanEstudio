@@ -29,9 +29,9 @@ The project has ESLint, TypeScript, Vitest coverage, Playwright smoke tests, and
 
 The primary product is `app-elearning/`, a Next.js 15 App Router static export deployed at:
 
-https://edwingalarcon.github.io/PlanEstudio/
+https://planestudio.vercel.app/
 
-`next.config.ts` uses `output: "export"` and enables `basePath`/`assetPrefix` only when `GITHUB_PAGES=true`. Local dev runs at `http://localhost:3000`; GitHub Pages builds run with `/PlanEstudio`.
+`next.config.ts` uses `output: "export"` and enables `basePath`/`assetPrefix` only when `GITHUB_PAGES=true` (legacy; the GitHub Pages mirror is retired and production on Vercel uses no `basePath`). Local dev runs at `http://localhost:3000`.
 
 MkDocs remains as a legacy/reference surface from `docs/`. Do not remove it without an explicit product decision.
 

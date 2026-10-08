@@ -121,11 +121,9 @@ GitHub Actions ejecuta en cada push a `master`:
 | `lint` | ESLint CLI + TypeScript (`tsc --noEmit`) + validación de contenido (`validate:content`) |
 | `test` | Vitest con cobertura (umbral 80%; 323 tests al último diagnóstico local) |
 | `e2e` | Playwright smoke: home, niveles, módulo, labs, simulador, búsqueda, dark mode, 404 |
-| `build` | `GITHUB_PAGES=true next build` vía `npm run build:pages` → export estático en `out/` |
-| `mkdocs` | `mkdocs build --strict` (valida nav, links internos) |
-| `deploy` | Despliegue legacy a GitHub Pages; producción oficial vive en Vercel |
+| `build` | `next build` vía `npm run build` (el mismo build que Vercel) → export estático en `out/` |
 
-El job `deploy` depende de `build` y `mkdocs`; si falla lint, typecheck, tests, smoke E2E, build o MkDocs strict, no se despliega.
+El CI ya no despliega: producción oficial la despliega Vercel desde `master`. El espejo de GitHub Pages y el job de MkDocs se retiraron.
 
 ---
 
@@ -216,5 +214,5 @@ un trial/demo tenant de Dynamics 365 Finance & SCM; ver `docs/Recursos/ROADMAP_E
 | Búsqueda | FlexSearch 0.7 |
 | Markdown | react-markdown + remark-gfm + rehype-highlight |
 | Tests | Vitest v3, jsdom, @testing-library/react |
-| CI/CD | Vercel para producción oficial; GitHub Actions/GitHub Pages como espejo legacy |
+| CI/CD | Vercel despliega producción oficial; GitHub Actions solo valida (lint, tests, E2E, build) |
 | Contenido | Markdown en `app-elearning/content/` para la app; `docs/` para MkDocs legacy y preguntas |

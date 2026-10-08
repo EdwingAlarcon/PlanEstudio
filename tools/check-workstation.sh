@@ -3,7 +3,7 @@
 #
 # Corre localmente en tu equipo. No envía nada a ningún servidor: solo imprime un
 # reporte JSON a la salida estándar. Copia ese JSON y pégalo en
-# https://edwingalarcon.github.io/PlanEstudio/preparar-entorno para actualizar tu
+# https://planestudio.vercel.app/preparar-entorno para actualizar tu
 # matriz de herramientas con la versión detectada. PlanEstudio no ejecuta este
 # script por ti ni accede a tu equipo.
 #

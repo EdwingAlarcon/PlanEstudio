@@ -121,46 +121,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Mismo build que Vercel (producción oficial): sin basePath. El deploy lo hace Vercel desde master.
       - name: Build static export
-        run: npm run build:pages
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: nextjs-out
-          path: app-elearning/out/
-
-  # ─── Deploy to GitHub Pages ─────────────────────────────────────────────────
-  deploy:
-    name: Deploy to GitHub Pages
-    runs-on: ubuntu-latest
-    needs: [build]
-    if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
-    concurrency:
-      group: "pages"
-      cancel-in-progress: false
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v8
-        with:
-          name: nextjs-out
-          path: ./out
-
-      - name: Setup GitHub Pages
-        uses: actions/configure-pages@v6
-
-      - name: Upload to GitHub Pages
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: ./out
-
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v5
+        run: npm run build
