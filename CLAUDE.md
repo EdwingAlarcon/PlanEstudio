@@ -145,33 +145,6 @@ A structured, progressive learning plan for Microsoft Power Platform and Dynamic
 ## Repository Structure
 
 ```
-mkdocs.yml               # MkDocs configuration
-requirements.txt         # Python deps: mkdocs-material
-.github/
-  workflows/
-    ci.yml               # Legacy CI/CD: lint → test → build → deploy to GitHub Pages secondary mirror
-docs/                    # MkDocs source content — legacy/reference site only (NOT read by the Next.js app for modules/labs)
-  index.md               # Master index and overview
-  Niveles/
-    NIVEL_1_BASICO.md    # Level 1 (MkDocs only) — 8 modules + Suplementos 1A (AI Builder) y 1B (Power Pages)
-    NIVEL_2_INTERMEDIO.md  # Level 2 (MkDocs only) — 9 modules (PL-200)
-    NIVEL_3_AVANZADO.md    # Level 3 (MkDocs only) — 13 modules (PL-400)
-    NIVEL_4_ARQUITECTO.md  # Level 4 (MkDocs only) — 11 modules (Arquitectura Power Platform; PL-600 retirado)
-  Anexos/
-    LENGUAJES_PROGRAMACION.md
-    COPILOT_STUDIO_COMPLETO.md
-    ALM_DEVOPS_ESTRATEGIAS.md
-    ARQUITECTURA_EMPRESARIAL.md
-    CASOS_REALES_NEGOCIO.md
-  Recursos/
-    CHECKLIST_PROGRESO.md
-    GLOSARIO_TERMINOS.md
-    CERTIFICACIONES.md
-    PROMPTS_REUTILIZABLES_IA.md  # 16 reusable prompts for AI-assisted Power Platform/D365 work (Nivel IA, /recursos/prompts-ia)
-  javascripts/
-    evaluaciones-simulador.js   # Banco de 891 preguntas en MODULE_QUESTIONS (módulos 1-76): 516 quiz + 375 diagnóstico de caso aplicado
-  stylesheets/
-    extra.css            # Custom CSS for MkDocs site
 app-elearning/           # Next.js 15 interactive app (THE primary surface)
   content/               # Authoritative module/lab content for the app (migrated 2026-06-25) — edit HERE, not docs/
     modules/
