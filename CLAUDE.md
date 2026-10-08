@@ -222,7 +222,7 @@ mkdocs serve --dev-addr=127.0.0.1:8001
 
 Push to `master` → GitHub Actions (`ci.yml`):
 1. **Lint & Type Check** — ESLint + `tsc --noEmit`
-2. **Unit Tests** — Vitest with coverage (80% threshold)
+2. **Unit Tests** — Vitest with coverage (thresholds: 80% lines/functions/statements, 70% branches)
 3. **Playwright Smoke** — end-to-end checks for main routes, labs, search, progress, certificates and onboarding guardrails
 4. **Build** — `next build` → static export in `app-elearning/out/`
 5. **Deploy** — legacy GitHub Pages mirror; official production is Vercel
