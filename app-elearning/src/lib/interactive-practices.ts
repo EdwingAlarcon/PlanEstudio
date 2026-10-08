@@ -5,8 +5,8 @@ import { PRACTICE_REQUESTS } from "@/data/practice/requests";
 // Tope del banco de prácticas. Regla (PROPUESTA_FASES_APRENDER_HACIENDO.md): solo sube al aprobar una fase
 // del rediseño, y por el número de prácticas que esa fase planea añadir — no por comodidad.
 export const MIN_INTERACTIVE_PRACTICES = 12;
-// 24 (pilotos 10/11/13) + 3 del Módulo 1 (Fase 2).
-export const MAX_INTERACTIVE_PRACTICES = 27;
+// 24 (pilotos 10/11/13) + 3 del Módulo 1 + 1 del Módulo 2 (Fase 2).
+export const MAX_INTERACTIVE_PRACTICES = 28;
 
 export const INTERACTIVE_PRACTICE_TYPES = ["multiple-decision", "flow-builder", "query-playground", "debug-scenario"] as const;
 export const INTERACTIVE_PRACTICE_DOMAINS = ["dataverse", "power-apps", "power-automate", "fetchxml", "odata", "troubleshooting", "javascript"] as const;
@@ -842,6 +842,39 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     relatedModuleIds: [1],
     relatedLabIds: ["LAB-002"],
     tags: ["transferencia", "power-pages", "usuarios-externos"],
+  },
+  {
+    id: "IP-DV-007",
+    slug: "ip-dv-007-transferir-categorias-multiples",
+    title: "Transferir: una solicitud con varias categorías",
+    description: "El requisito cambia de una categoría por solicitud a varias — decide qué cambia en la relación.",
+    type: "multiple-decision",
+    domain: "dataverse",
+    level: "junior",
+    estimatedMinutes: 8,
+    prerequisites: ["Módulo 2"],
+    learningObjectives: ["Reconocer cuándo una relación de uno a muchos ya no alcanza y hace falta una de muchos a muchos", "Anticipar qué hay que conservar al cambiar un modelo que ya tiene datos"],
+    scenario: {
+      context: "En el modelo de Solicitudes TI, cada solicitud apunta a una sola Categoría Detallada (relación de uno a muchos). Soporte detecta que un mismo problema a veces toca varias categorías a la vez: una falla de red que además necesita un acceso nuevo. Ahora una solicitud puede tener varias categorías, y cada categoría sigue teniendo muchas solicitudes. Ya hay 200 solicitudes con su categoría asignada.",
+      objective: "Selecciona los cambios correctos para soportar el nuevo requisito sin perder lo que ya existe.",
+    },
+    multiple: true,
+    options: [
+      { id: "cambiar-a-muchos-a-muchos", label: "Reemplazar la relación de uno a muchos por una relación de muchos a muchos entre Solicitud TI y Categoría Detallada", consequence: "Es el cambio central: ahora ambos lados tienen \"muchos\", y eso es exactamente lo que modela una relación de muchos a muchos.", score: 1 },
+      { id: "migrar-categorias", label: "Copiar las 200 categorías ya asignadas a la nueva relación antes de retirar el Lookup anterior", consequence: "Evita perder el historial: si se retira primero el Lookup, las solicitudes existentes quedan sin categoría.", score: 1 },
+      { id: "mostrar-subgrid", label: "Mostrar las categorías de cada solicitud en el formulario con una subcuadrícula de la relación", consequence: "Con una relación de muchos a muchos ya no hay un solo valor que mostrar; se ve la lista de categorías relacionadas.", score: 1 },
+      { id: "segundo-lookup", label: "Agregar un segundo Lookup \"Categoría 2\" en la solicitud", consequence: "Parece rápido, pero no escala: ¿y cuando haya una tercera categoría? Cada nuevo caso obligaría a cambiar la tabla.", score: 0 },
+      { id: "duplicar-solicitud", label: "Duplicar la solicitud una vez por cada categoría", consequence: "Rompe los conteos y la trazabilidad: un solo problema aparecería como varias solicitudes.", score: 0 },
+    ],
+    correctOptionIds: ["cambiar-a-muchos-a-muchos", "migrar-categorias", "mostrar-subgrid"],
+    hints: [
+      { id: "h1", content: "Pregúntate cuántas categorías puede tener una solicitud y cuántas solicitudes puede tener una categoría: si ambas respuestas son \"muchas\", ¿qué tipo de relación es?" },
+      { id: "h2", content: "Cambiar el modelo no debe borrar lo que ya existe: piensa qué pasa con las 200 solicitudes que ya tienen categoría." },
+      { id: "h3", content: "Se pasa a una relación de muchos a muchos, se copian las categorías existentes a la nueva relación y el formulario muestra la lista con una subcuadrícula." },
+    ],
+    relatedModuleIds: [2],
+    relatedLabIds: ["LAB-002"],
+    tags: ["transferencia", "relaciones", "muchos-a-muchos"],
   },
   {
     id: "IP-PA-005",
