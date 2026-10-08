@@ -71,6 +71,16 @@ export function GuidedHomeClient() {
             </div>
           </div>
 
+          {!hasStarted && (
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              ¿Nunca tocaste Power Platform? Antes del Módulo 1, lee la{" "}
+              <Link href="/recursos/ruta-cero-absoluta" className="font-medium text-[#0078D4] underline-offset-2 hover:underline dark:text-[#4DB8FF]">
+                Ruta cero absoluta
+              </Link>
+              : solo lectura, sin cuenta ni ambiente.
+            </p>
+          )}
+
           <div className="grid gap-3 sm:grid-cols-4" aria-label="Entradas iniciales">
             <EntryButton title="Empiezo desde cero" href="/mi-ruta" active icon={<Sparkles className="h-4 w-4" />} onClick={() => onboarding.startOnboarding("desde-cero")} />
             <EntryButton title="Ya conozco lo basico" href="/mi-ruta" icon={<Compass className="h-4 w-4" />} onClick={() => onboarding.startOnboarding("basico")} />
