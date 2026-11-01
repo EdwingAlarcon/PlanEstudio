@@ -4,6 +4,7 @@ title: "Power Apps Canvas - Primeras Aplicaciones"
 level: "basico"
 certification: "PL-900"
 estimatedMinutes: 25
+practiceMinutes: 100
 slug: "power-apps-canvas-primeras-aplicaciones"
 lastVerified: "2026-11"
 ---
@@ -69,7 +70,11 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 >   exacta (ej. `Estado = 'Estado (Solicitudes TI)'.Nueva`). Las columnas de tipo *Choice* (como
 >   Estado) no se comparan con el texto de la etiqueta (`"Nueva"`), sino con su *enumeración*: el
 >   nombre de la opción precedido del nombre de la elección; escribe `'Estado (` en la barra de
->   fórmulas y elige lo que te propone. `Distinct(tabla, columna)` devuelve los valores únicos de una
+>   fórmulas y elige lo que te propone. **Plan B:** si al escribir `'Estado (` no aparece ninguna
+>   sugerencia, probablemente creaste Estado como elección *global* (con **Sync with global choice?**
+>   en **Yes**). En ese caso la enumeración se llama igual que la elección global: escribe su nombre
+>   (por ejemplo `Estado.` o el nombre que le pusiste) y elige la opción en la lista que aparece.
+>   `Distinct(tabla, columna)` devuelve los valores únicos de una
 >   columna, útil para poblar un Dropdown de opciones sin repetir.
 > - **Delegación**: cuando la tabla vive en Dataverse (no en memoria), Power Apps intenta traducir tu
 >   fórmula en una consulta que el servidor ejecuta completa. Si la función no es delegable, Power Apps
@@ -78,13 +83,24 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 >
 > Cada bloque de código de este módulo trae comentarios `//` explicando línea por línea qué hace.
 
+> **📒 Palabras que vas a ver en las fórmulas de hoy**
+>
+> - **`ThisItem`**: dentro de una Gallery o un formulario, es "el registro de esta fila". `ThisItem.'Título de Solicitud'` es el título de la solicitud que se está mostrando en esa fila.
+> - **`Selected`**: el registro que el usuario tocó en una Gallery. `galSolicitudes.Selected` es la solicitud elegida.
+> - **`AllItems`**: las filas que la Gallery tiene cargadas. Ojo: si hay muchos registros, la Gallery los carga poco a poco, así que puede tener menos filas que el total de la tabla.
+> - **`ScreenTransition`**: la animación al cambiar de pantalla. Valores posibles: `Cover`, `CoverRight`, `Fade`, `None`, `UnCover` y `UnCoverRight`. `Back()` vuelve a la pantalla anterior con la animación inversa.
+> - **`FormMode`**: el modo de un formulario: `FormMode.New` (registro nuevo, vacío), `FormMode.Edit` (editar uno que existe) y `FormMode.View` (solo lectura).
+> - **`NotificationType`**: el tipo de mensaje que muestra `Notify()` arriba de la pantalla: `Error`, `Information`, `Success` o `Warning`.
+> - **`Visible`**: propiedad de casi todos los controles; si vale `false`, el control no se ve.
+> - **`User()`**: datos de la persona que abrió la app. `User().FullName` es su nombre y `User().Email` su correo de inicio de sesión (el nombre de usuario con el que entra a Microsoft 365).
+
 ### 👨‍💻 Actividades Prácticas
 
 #### 🟢 Núcleo obligatorio
 
 *Completa esto primero. Es tu primera app funcional de principio a fin.*
 
-> **Cómo está organizado el Núcleo:** construyes la app en tres bloques (lista, creación, detalle). En cada uno alternas una idea corta, una práctica de pocos minutos y un dato real de tu propia app para guardar. Cierras con un reto en el que ya no te digo las fórmulas. Las microprácticas no necesitan tenant; construir la app sí (tu ambiente Developer del Módulo 1 y la tabla del Módulo 2). Si aún no tienes tenant, usa la "Variante sin tenant" del Lab 03. **Nombres:** en las fórmulas la tabla se escribe por su nombre en plural, `'Solicitudes TI'`, y sus columnas por el nombre que les diste en el Módulo 2 (por ejemplo, `'Título de Solicitud'`, con comillas simples porque tiene espacios). Los controles se nombran con un prefijo de tipo, igual que en el Lab 03: `scr` para pantallas (`scrInicio`), `gal` para galerías (`galSolicitudes`), `txt` para cuadros de texto (`txtBusqueda`), `frm` para formularios (`frmNueva`) y `btn` para botones (`btnGuardar`). Para cambiar el nombre de un control: en el panel **Tree view** (izquierda), pasa el mouse sobre el control, selecciona **⋯** y luego **Rename**.
+> **Cómo está organizado el Núcleo:** construyes la app en tres bloques (lista, creación, detalle). En cada uno alternas una idea corta, una práctica de pocos minutos y un dato real de tu propia app para guardar. Cierras con un reto en el que ya no te digo las fórmulas. Las microprácticas no necesitan *tenant* (la cuenta de tu organización en Microsoft 365, con la que entras a Power Apps); construir la app sí (tu ambiente Developer del Módulo 1 y la tabla del Módulo 2). Si aún no tienes tenant, usa la "Variante sin tenant" del Lab 03. **Esta app es la tuya del Módulo 2:** usa la tabla **Solicitud TI** que creaste allí (si hiciste el Lab 02, en ese lab Categoría es una búsqueda a otra tabla; aquí seguimos la versión del Módulo 2, donde Categoría es una columna *Choice*). **Nombres:** en las fórmulas la tabla se escribe por su nombre en plural, `'Solicitudes TI'`, y sus columnas por el nombre que les diste en el Módulo 2 (por ejemplo, `'Título de Solicitud'`, con comillas simples porque tiene espacios). Los controles se nombran con un prefijo de tipo, igual que en el Lab 03: `scr` para pantallas (`scrInicio`), `gal` para galerías (`galSolicitudes`), `txt` para cuadros de texto (`txtBusqueda`), `frm` para formularios (`frmNueva`) y `btn` para botones (`btnGuardar`). Para cambiar el nombre de un control: en el panel **Tree view** (izquierda), pasa el mouse sobre el control, selecciona **⋯** y luego **Rename**.
 
 ## 🧩 Microlección 1 — La pantalla de lista: Gallery y búsqueda
 
@@ -98,18 +114,22 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
 
 **Práctica real en tu entorno (30 min):** haz los Pasos 1 y 2 de abajo.
 
-##### Práctica 3.1: Primera Canvas App - Lista de Tareas
+##### Práctica 3.1: Primera Canvas App - Lista de Solicitudes TI
 
-*Objetivo: App de To-Do List con Dataverse*
+*Objetivo: una app de solicitudes de soporte TI conectada a tu tabla de Dataverse*
 
 > **Cómo leer los pasos:** cuando diga "en la lista de propiedades elige `Items` y escribe...", significa: selecciona el control en la pantalla, abre la lista desplegable de propiedades que está a la izquierda de la barra de fórmulas (arriba), elige esa propiedad y escribe la fórmula en la barra de fórmulas. Para probar la app sin salir del editor, pulsa **F5** (vista previa); para volver, pulsa **Esc**.
+
+> **Idioma de los menús:** los pasos usan los nombres en inglés (**Insert**, **Tree view**, **Add data**...). Si tu Power Apps Studio está en español, busca el equivalente con el mismo significado (por ejemplo, **Insert** = **Insertar**). Los nombres de funciones y propiedades (`Items`, `OnSelect`, `Filter`) **no** se traducen: se escriben siempre igual.
+
+> **Controles clásicos o modernos:** Power Apps tiene dos familias de controles. Este módulo usa los **clásicos**, porque sus propiedades (`.Text`, `HintText`, `AllowEmptySelection`, `DefaultDate`) son las que aparecen en las fórmulas. Si al buscar en **Insert** ves una categoría **Classic**, inserta desde ahí el *Text input*, el *Drop down*, el *Date picker* y el *Button*. Si no ves esa categoría, los controles que te aparecen ya son los clásicos.
 
 **Paso 1: Configuración inicial**
 
 1. Entra a [make.powerapps.com](https://make.powerapps.com) y comprueba que estás en tu ambiente Developer del Módulo 1 (el ambiente se cambia desde la página de inicio de Power Apps, antes de abrir la app).
 2. En el panel de navegación de la izquierda, selecciona **Create** y luego **Create from blank**.
 3. En el cuadro **Start with a blank canvas**, elige **Tablet size**.
-4. Si te pide un nombre, escribe `Mi Lista Tareas` y selecciona **Create**. Se abre Power Apps Studio con una pantalla vacía llamada **Screen1**.
+4. Si te pide un nombre, escribe `Mi App Solicitudes` y selecciona **Create**. Se abre Power Apps Studio con una pantalla vacía llamada **Screen1**.
 5. Cambia el nombre de la pantalla: en el panel **Tree view**, pasa el mouse sobre **Screen1**, selecciona **⋯** > **Rename** y escribe `scrInicio`.
 6. Conecta la tabla del Módulo 2:
     1. En el menú de la izquierda, selecciona **Data**.
@@ -131,12 +151,15 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
     2. Arrástrala debajo del cuadro de búsqueda y agrándala desde las esquinas para que ocupe el resto de la pantalla.
     3. Cámbiale el nombre a `galSolicitudes`.
     4. En el panel de propiedades de la derecha, abre **Data source** (en algunas versiones aparece como **Items**) y elige tu tabla **Solicitudes TI**. La lista se llena con tus registros.
-    5. (Opcional) En la lista **Layout** del mismo panel, elige un diseño que muestre título, subtítulo y cuerpo.
+    5. En la lista **Layout** del mismo panel, elige un diseño que tenga **tres textos por fila** (título, subtítulo y cuerpo). Lo necesitas para el punto 3. Si no encuentras uno así, en el punto 3 te digo cómo agregar la etiqueta que falte.
 
-3. **Qué muestra cada fila.** La primera fila de la Gallery es la *plantilla*: lo que cambies en ella se repite en todas las filas. Haz clic sobre cada etiqueta de la primera fila y, en la lista de propiedades, elige `Text` y escribe:
-    - Etiqueta del título: `ThisItem.'Título de Solicitud'`
-    - Etiqueta del subtítulo: `ThisItem.Categoría`
-    - Etiqueta del cuerpo: `Text(ThisItem.'Fecha Solicitud', "dd/mm/yyyy")` (en `Text`, `mm` junto a `dd` y `yyyy` es el mes)
+3. **Qué muestra cada fila.** La primera fila de la Gallery es la *plantilla*: lo que cambies en ella se repite en todas las filas.
+    - Para encontrar las etiquetas: en **Tree view**, expande `galSolicitudes` (flecha a la izquierda de su nombre). Verás las etiquetas de la plantilla, con nombres como `Title1`, `Subtitle1` y `Body1` (el número puede cambiar). Haz clic en cada una para seleccionarla.
+    - Si te falta una etiqueta: selecciona la primera fila de la Gallery (aparece un ícono de lápiz arriba a la izquierda; haz clic en él), luego **Insert** > `Label`. La etiqueta queda dentro de la plantilla.
+    - Con cada etiqueta seleccionada, en la lista de propiedades elige `Text` y escribe:
+        - Etiqueta del título (`Title1`): `ThisItem.'Título de Solicitud'`
+        - Etiqueta del subtítulo (`Subtitle1`): `ThisItem.Categoría`
+        - Etiqueta del cuerpo (`Body1`): `Text(ThisItem.'Fecha Solicitud', "dd/mm/yyyy")` (en `Text`, `mm` junto a `dd` y `yyyy` es el mes)
 
 4. **Fórmula de búsqueda.** Selecciona la Gallery completa (en **Tree view**, haz clic en `galSolicitudes`, no en una etiqueta de dentro). En la lista de propiedades elige `Items` y reemplaza lo que haya por:
    ```javascript
@@ -148,7 +171,7 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
        'Título de Solicitud', Descripción
    )
    ```
-   > Si en otros materiales ves las columnas escritas entre comillas dobles, como `"sit_titulo"`, es la forma antigua de `Search`. Hoy las columnas se escriben por su nombre visible, sin comillas dobles.
+   > **Comillas: regla para todo el curso.** Las comillas **simples** (`'Título de Solicitud'`) encierran *nombres* (de tablas, columnas o controles) que tienen espacios o tildes. Las comillas **dobles** (`"Nueva"`) encierran *texto*. Si en otros materiales ves columnas de `Search` entre comillas dobles, como `"sit_titulo"`, es la forma antigua (antes de la versión 3.24042 de Power Apps). Hoy las columnas se escriben por su nombre, sin comillas dobles.
 
 5. **Botón "Nueva Solicitud"**
     1. Selecciona **Insert**, escribe `Button` y selecciónalo. Colócalo arriba, junto al cuadro de búsqueda.
@@ -295,7 +318,12 @@ Esta vez no te digo las fórmulas: aplica lo que viste a un cambio de requisito.
 > **Requerimiento:** los técnicos de soporte usarán tu app desde su equipo y cada uno debe ver **solo las solicitudes asignadas a él**, con un contador arriba que diga "Mis pendientes: N".
 > **Criterios de aceptación:** (1) la Gallery muestra únicamente las solicitudes asignadas a quien abre la app; (2) el contador cuenta lo que la Gallery muestra, no toda la tabla; (3) el buscador sigue funcionando sobre esa lista ya filtrada.
 > **Restricciones:** no crees una app distinta por técnico, y no ocultes filas con `Visible = false` (los datos de los demás seguirían cargados).
-> **Pistas si te atoras:** la columna que dice a quién está asignada cada solicitud es `Asignado a`, la que creaste en el Módulo 2; `User().Email` devuelve el correo de quien abre la app; `Filter()` está en la mini-guía de arriba; y para contar las filas de una Gallery se usa `CountRows(galSolicitudes.AllItems)` (aparece completo en la Práctica 3.2, que es opcional). Si `Asignado a` no aparece en tu formulario, no importa: el filtro se aplica a la tabla, no al formulario.
+> **Pistas si te atoras:**
+> 1. **Prepara datos de prueba primero.** Si ninguna solicitud está asignada a ti, la lista filtrada saldrá vacía y no sabrás si la fórmula funciona. Abre 2 o 3 solicitudes en Dataverse (o en tu formulario de detalle, si agregaste el campo) y pon tu propio usuario en **Asignado a**.
+> 2. `'Asignado a'` es una columna *Lookup* a la tabla de usuarios (**User**). No guarda texto, guarda un usuario; por eso no se compara directo con un correo. Se compara una columna de ese usuario: su correo, que en la tabla de usuarios se llama **Primary Email**. Se escribe `'Asignado a'.'Primary Email'`.
+> 3. `User().Email` devuelve el correo con el que la persona inició sesión. Compáralos así: `'Asignado a'.'Primary Email' = User().Email`. Si la lista sale vacía aunque tengas solicitudes asignadas, pon una etiqueta temporal con `User().Email` en su `Text` y compárala con el **Primary Email** de tu usuario: en algunas organizaciones el nombre de inicio de sesión y el correo no son iguales.
+> 4. Para que el buscador siga funcionando, pon el filtro **dentro** del `Search`: primero filtras, y sobre ese resultado buscas. La estructura es `Search(Filter('Solicitudes TI', condición), txtBusqueda.Text, 'Título de Solicitud', Descripción)`.
+> 5. Para contar las filas de una Gallery se usa `CountRows(galSolicitudes.AllItems)` (aparece completo en la Práctica 3.2, que es opcional). Si `Asignado a` no aparece en tu formulario, no importa: el filtro se aplica a la tabla, no al formulario.
 
 **Ahora haz algo — transferencia guiada (8 min):** **[Transferir: cada técnico ve solo lo suyo](/practica/ip-app-008-transferir-solo-lo-asignado)**. Retoma la app de este módulo pero cambia un requisito, y te pide decidir qué cambia.
 
@@ -502,7 +530,7 @@ Esta vez no te digo las fórmulas: aplica lo que viste a un cambio de requisito.
 
 Completa ahora: **[Lab 03 · Primera Canvas App](/labs/lab-03-canvas-primera-app)**
 
-**Por qué:** el Lab 03 construye la interfaz de usuario sobre las tablas `sit_Solicitud` y `sit_Categoria` que ya creaste en el Lab 02 — es la continuación directa de lo que acabas de leer, con pasos exactos en lugar de solo fórmulas de ejemplo.
+**Por qué:** el Lab 03 es parte del camino de laboratorios. Allí construyes **una app nueva, distinta de la de este módulo**, sobre las tablas que creaste en el Lab 02 (**Solicitudes TI** y **Categorías**; en el Lab 02 la Categoría es una búsqueda a su propia tabla, no una columna *Choice*). Repites las mismas ideas (lista, creación y detalle) con pasos exactos de principio a fin. La app de este módulo no se modifica: puedes conservarla como práctica.
 
 **Qué evidencia guardar del lab:** capturas de la app publicada, de la navegación entre pantallas, y del formulario guardando un registro real.
 

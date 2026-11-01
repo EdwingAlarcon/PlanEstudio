@@ -4,6 +4,7 @@ title: "Power BI - Reportes y Dashboards Básicos"
 level: "basico"
 certification: "PL-900"
 estimatedMinutes: 25
+practiceMinutes: 125
 slug: "power-bi-reportes-y-dashboards-basicos"
 lastVerified: "2026-11"
 ---
@@ -31,6 +32,17 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 | **DAX** | Lenguaje de fórmulas, parecido a las fórmulas de Excel, para crear métricas como totales, porcentajes y promedios. |
 | **Medida (measure)** | Una fórmula DAX que calcula una cifra y se recalcula sola según los filtros que tengas activos. |
 | **RLS** | Seguridad por filas: cada usuario ve solo los datos que le corresponden. |
+| **Lienzo** (canvas) | El área en blanco del centro de **Report view** donde colocas los visuales. |
+| **Navigator** | La ventana que aparece al conectar una fuente: muestra sus tablas para que marques cuáles cargar. |
+| **Refresh** (actualizar) | Volver a leer los datos de la fuente para que el reporte muestre lo más reciente. |
+| **GUID** | Identificador único de una fila en Dataverse: un código largo de letras y números, como `3f2a...`. Sirve para unir tablas, no para leerlo. |
+| **UTC** | La hora universal de referencia, sin zona horaria. Dataverse guarda las fechas en UTC. |
+| **TDS endpoint** | La "puerta" de Dataverse por la que Power BI lee los datos con el conector Dataverse. Debe estar activada en el entorno. |
+| **Measure tools** | Pestaña de la cinta que aparece al seleccionar una medida; ahí cambias su formato (por ejemplo, porcentaje). |
+| **CALCULATE, ALL, REMOVEFILTERS** | Funciones DAX que verás más adelante: `CALCULATE` calcula una expresión cambiando los filtros; `ALL` y `REMOVEFILTERS` quitan filtros. En este módulo no las necesitas. |
+| **OAuth** | La forma de iniciar sesión con tu cuenta de trabajo para que el Service lea los datos por ti, sin guardar tu contraseña en el reporte. |
+| **Fabric** | Microsoft Fabric, la plataforma de datos de Microsoft de la que Power BI forma parte; administración y licencias van integradas. |
+| **PPU** y **capacidad** | **PPU** (Premium Per User) es una licencia por persona con funciones Premium. Una **capacidad** (Power BI Premium o Fabric F64 o mayor) es un recurso que compra la empresa: el contenido guardado en ella se puede compartir también con usuarios de licencia gratuita. |
 
 ### 📖 Conceptos Clave
 - **Componentes**
@@ -114,16 +126,18 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
    | En Proceso | 8 |
    | Resuelta | 12 |
    | Cerrada | 4 |
+
+   La tabla vacía trae un encabezado genérico (por ejemplo `Column1`). Para renombrarlo, haz doble clic en el encabezado y escribe `Estado`. Para agregar otra columna o más filas, escribe en la celda vacía de la derecha o de abajo, o usa el botón **+** si lo ves junto a ellas. Si te equivocas en una celda, haz clic en ella y corrígela.
 4. Selecciona **Load**. Power BI crea una tabla llamada `Table`; la verás en el panel **Data** (a la derecha).
-5. Crea la gráfica de barras:
-    1. Haz clic en un espacio vacío del lienzo.
-    2. En el panel **Visualizations**, elige un gráfico de barras (barras horizontales).
-    3. En un gráfico de barras, las categorías van al eje vertical y los valores al horizontal: arrastra `Estado` al área **Y-axis** y `Cantidad` al área **X-axis**.
+5. Crea la gráfica de columnas:
+    1. Haz clic en un espacio vacío del lienzo (el área en blanco del centro).
+    2. En el panel **Visualizations**, elige el ícono **Clustered column chart** (gráfico de columnas agrupadas: barras verticales). Si no sabes cuál es, pasa el mouse sobre los íconos: el nombre aparece al hacerlo.
+    3. En un gráfico de columnas, las categorías van al eje horizontal y los valores al vertical: arrastra `Estado` al área **X-axis** y `Cantidad` al área **Y-axis** ([Learn](https://learn.microsoft.com/power-bi/visuals/power-bi-visualization-column-charts)).
 6. Crea la tarjeta:
     1. Haz clic en un espacio vacío del lienzo.
     2. En **Visualizations**, elige **Card**.
-    3. Arrastra `Cantidad` al área de campos de la tarjeta. Debe mostrar **29** (la suma).
-7. Guarda el archivo con **File > Save** como `primer-reporte-power-bi.pbix`.
+    3. Arrastra `Cantidad` al área **Values** de la tarjeta. Debe mostrar **29** (la suma).
+7. Guarda el archivo con **File > Save** como `primer-reporte-power-bi.pbix` en tu carpeta **Documentos**.
 
 > **Si la tarjeta muestra "Count of Cantidad" en vez de la suma:** la columna quedó como texto. Vuelve a crear la tabla, pero en el paso 4 elige **Edit** en lugar de **Load**; en Power Query selecciona la columna `Cantidad`, ve a **Transform > Data type > Whole number** y luego **Home > Close & Apply**.
 
@@ -150,10 +164,14 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 **Paso 1: Descargar e instalar Power BI Desktop**
 
 1. Power BI Desktop solo funciona en **Windows** (Windows 10 o posterior, o Windows Server 2016 o posterior, de 64 bits). Si usas Mac, Microsoft indica que puedes usarlo dentro de un escritorio virtual de Windows, como **Azure Virtual Desktop** o **Windows 365**, si tu empresa lo ofrece.
-2. Instálalo desde **Microsoft Store** (se actualiza solo cada mes) o descárgalo desde el **Microsoft Download Center**.
-3. Ábrelo e inicia sesión con tu cuenta del trabajo (la misma que usas en Power Apps).
+2. **Opción recomendada: Microsoft Store.** Abre la app **Microsoft Store** de Windows, busca `Power BI Desktop` y selecciona el botón de instalar (o abre directamente [aka.ms/pbidesktopstore](https://aka.ms/pbidesktopstore)). Se actualiza solo cada mes y **no necesita permisos de administrador** en tu computadora.
+3. **Opción B: Download Center.** Si la Store está bloqueada en tu computadora, entra a la [página de descarga](https://www.microsoft.com/download/details.aspx?id=58494), selecciona **Download**, elige el archivo de 64 bits y ejecútalo. Esta opción **sí necesita permisos de administrador**: si Windows te los pide y no los tienes, pide a tu área de TI que lo instale (o que habiliten la Store). Las dos opciones están en [Learn: Obtener Power BI Desktop](https://learn.microsoft.com/power-bi/fundamentals/desktop-get-the-desktop).
+4. Ábrelo e inicia sesión con tu cuenta del trabajo (la misma que usas en Power Apps).
+5. **Idioma de los menús:** Power BI Desktop se abre en el idioma de Windows. Este curso usa los nombres en inglés (**Home**, **Get data**, **Transform data**...). Si tus menús salen en español y te cuesta seguir la guía, cámbialo a inglés: **File > Options and settings > Options** (en español: **Archivo > Opciones y configuración > Opciones**), sección **Global** > **Regional settings**, lista **Application language** > **English** y **OK**; luego cierra y vuelve a abrir Power BI Desktop ([Learn](https://learn.microsoft.com/power-bi/fundamentals/supported-languages-countries-regions)).
 
 **Paso 2: Conectar a Dataverse**
+
+> **Empieza un archivo nuevo**, no sigas en `primer-reporte-power-bi.pbix`: abre Power BI Desktop y crea otro reporte en blanco. Ese primer archivo ya tiene una tabla `Table` con una columna `Estado`, y Power BI puede crear relaciones solas al cargar tablas; mezclarla con tus solicitudes reales confundiría los números. Lo guardarás al final del Paso 3.
 
 1. Consigue la dirección de tu entorno:
     1. Abre Power Apps y entra a tu entorno de práctica.
@@ -169,7 +187,7 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
     - *(Opcional)* La tabla **Categoría Detallada**, si la creaste en el Módulo 2.
 6. Selecciona **Transform Data** (no **Load**): así se abre Power Query para limpiar antes de cargar.
 
-> **Si la conexión falla:** el conector usa el punto de conexión TDS de Dataverse, que tu administrador debe tener activado. Además, este conector tiene un límite de 80 MB por consulta: si una tabla es muy grande, quita columnas o filtra filas en Power Query.
+> **Si la conexión falla:** el conector usa el **TDS endpoint** de Dataverse (la "puerta" por la que Power BI lee los datos). Viene activado por defecto, pero alguien pudo desactivarlo. Si eres administradora de tu entorno de desarrollo (rol System Administrator), revísalo tú: en el **Power Platform admin center**, **Manage** > **Environments** > elige tu entorno > **Settings** > despliega **Product** > **Features** > **TDS endpoint** > activa **Enable TDS endpoint** y guarda ([Learn](https://learn.microsoft.com/power-platform/admin/settings-features)). Si no eres administradora, pídeselo a quien lo sea. Además, el conector tiene un tiempo máximo fijo de 5 minutos por consulta: si una tabla es muy grande y tarda demasiado, quita columnas o filtra filas en Power Query ([Learn](https://learn.microsoft.com/power-query/connectors/dataverse)).
 
 **Paso 3: Transformaciones en Power Query**
 
@@ -178,14 +196,14 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 1. **Renombra la consulta de solicitudes:** en el panel **Queries**, haz doble clic en `sit_solicitudti` (o el nombre que tenga) y escribe `Solicitudes TI`. Haz lo mismo con `contact` y llámala `Contacts`.
 2. **Quédate solo con las columnas que necesitas** (en `Solicitudes TI`):
     1. Ve a **Home > Choose columns**.
-    2. Desmarca todo y marca solo estas columnas (Dataverse trae muchas columnas del sistema que no necesitas):
+    2. Desmarca todo y marca solo estas columnas (Dataverse trae muchas columnas del sistema que no necesitas). La lista es larga: si la ventana tiene un cuadro de búsqueda arriba, escribe `sit_` para ver solo las tuyas; si no, recórrela despacio.
         - `sit_titulodesolicitud` (Título de Solicitud)
         - `sit_descripcion` (Descripción)
         - `sit_estadoname`, `sit_prioridadname`, `sit_categorianame`: para cada columna de tipo Choice, Dataverse entrega dos columnas: una con el número interno (`sit_estado`) y otra con la etiqueta que lees (`sit_estadoname`). Usa la que termina en `name`.
         - `sit_fechasolicitud`, `sit_fecharesolucion`, `sit_slahoras`
         - `sit_solicitante`: es el identificador (GUID) del contacto que pidió la solicitud. Lo necesitas para la relación con Contacts.
     3. Selecciona **OK**.
-    > Los nombres exactos dependen de cómo creaste las columnas en el Módulo 2. Busca el prefijo `sit_` y el nombre de la columna.
+    > Los nombres exactos dependen de cómo creaste las columnas en el Módulo 2. Busca el prefijo `sit_` y el nombre de la columna. **La columna principal** (Título de Solicitud) es la que más varía: su nombre interno se generó a partir del nombre que tenía cuando creaste la tabla, así que puede ser otro (por ejemplo `sit_name` o `sit_titulo`). Para saberlo, en Power Apps abre **Tables** > Solicitud TI > **Columns**, selecciona la columna Título de Solicitud y mira su **Name** (nombre interno, con el prefijo) ([Learn](https://learn.microsoft.com/power-apps/maker/data-platform/create-edit-field-portal)).
 3. **Renombra las columnas** con nombres legibles: haz doble clic en cada encabezado (o clic derecho > **Rename**) y escribe el nombre nuevo:
 
     | Columna original | Nombre nuevo |
@@ -201,6 +219,7 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
     | `sit_solicitante` | Solicitante ID |
 
 4. **Cambia las fechas a tipo Fecha:** selecciona la columna `Fecha Solicitud`, ve a **Transform > Data type > Date**. Repite con `Fecha Resolución`. Al pasar de Date/Time a Date, Power Query descarta la hora y deja solo el día, que es lo que necesitas para contar días.
+    > **Ojo con la hora UTC:** Dataverse guarda las fechas en UTC (hora universal) y el conector las entrega así ([Learn](https://learn.microsoft.com/power-apps/maker/data-platform/behavior-format-date-time-field), [Learn](https://learn.microsoft.com/power-apps/developer/data-platform/dataverse-sql-query)). Si en tu país la hora va detrás de UTC (por ejemplo, Colombia o México), una solicitud creada de noche puede quedar en UTC con el día siguiente: al quitar la hora, verás un día más que en Power Apps. Para este curso no pasa nada; si una fecha no te cuadra por un día, esa es la causa.
 5. **Crea la columna `Días Abierta`** (cuántos días han pasado desde que se pidió la solicitud):
     1. Ve a **Add column > Custom column**.
     2. En **New column name** escribe `Días Abierta`.
@@ -209,7 +228,7 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
        Duration.Days(DateTime.Date(DateTime.LocalNow()) - [Fecha Solicitud])
        ```
     4. Selecciona **OK**. Aparece un paso nuevo en **Applied Steps**.
-    5. Con la columna nueva seleccionada, ve a **Transform > Data type > Whole number** (en Power BI Desktop la ventana de columna personalizada no permite elegir el tipo).
+    5. Con la columna nueva seleccionada, ve a **Transform > Data type > Whole number** (en Power BI Desktop la ventana de columna personalizada no permite elegir el tipo: esa opción solo existe en Power Query Online; [Learn](https://learn.microsoft.com/power-query/add-custom-column)).
 
     **Qué hace cada parte de la fórmula, de adentro hacia afuera:**
     - `DateTime.LocalNow()`: la fecha y hora de este momento. En Power BI Desktop toma la hora de tu computadora; en Power BI Service, la hora UTC.
@@ -222,6 +241,7 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 
 6. **Tabla Contacts:** selecciona la consulta `Contacts`, ve a **Home > Choose columns** y deja solo `contactid` (identificador), `fullname` (nombre completo), `emailaddress1` (email) y `department` (departamento). Renómbralas como `Contacto ID`, `Nombre Completo`, `Email` y `Departamento`.
 7. **Carga los datos:** ve a **Home > Close & Apply**. Power Query se cierra y las tablas aparecen en el panel **Data**.
+8. **Guarda ya:** **File > Save** como `reporte-solicitudes-ti.pbix` en tu carpeta **Documentos**. Vuelve a guardar al terminar cada paso y cada práctica (6.2 y 6.3). Este es el archivo que usarás en todo el resto del módulo.
 
 **Paso 4: Configurar relaciones**
 
@@ -234,7 +254,11 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
     - **Cross filter direction**: **Single** (el filtro viaja desde Contacts, el lado "uno", hacia Solicitudes TI, el lado "muchos").
     - Selecciona **OK**.
 5. *(Opcional)* Si cargaste `Categoría Detallada`, repite la revisión para su relación con `Solicitudes TI`, también de muchos a uno.
-6. Comprueba que funciona: vuelve a **Report view**, crea un **Slicer** con `Contacts[Nombre Completo]` y una tarjeta con la cantidad de solicitudes. Al elegir un contacto en el slicer, la tarjeta debe cambiar.
+6. Comprueba que funciona: vuelve a **Report view**, crea un **Slicer** con `Contacts[Nombre Completo]` y una tarjeta con la cantidad de solicitudes. Todavía no tienes medidas, así que la cantidad se saca contando una columna de texto:
+    1. Agrega un visual **Card** y arrastra `Título de Solicitud` (de `Solicitudes TI`) a su área **Values**. Como es texto, Power BI lo cuenta y la tarjeta muestra algo como "Count of Título de Solicitud".
+    2. Si en vez de un número ves un texto (por ejemplo "First..."), abre la flecha junto al campo en el área **Values** (o haz clic derecho en él) y elige **Count** ([Learn](https://learn.microsoft.com/power-bi/create-reports/service-aggregates)).
+    3. Al elegir un contacto en el slicer, la tarjeta debe cambiar. En la Práctica 6.2 reemplazarás este conteo por la medida `Total Solicitudes`.
+7. Guarda (**File > Save**).
 
 **Evidencia a reportar:**
 
@@ -272,6 +296,10 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 > Las medidas usan columnas que preparaste en la Práctica 6.1 (`Estado`, `Fecha Solicitud`, `Fecha Resolución`, `SLA Horas`, `Días Abierta`). `SLA Horas` viene de tu tabla del Módulo 2 (Práctica 2.1). Si te falta alguna columna, salta la medida que la usa y practica con las demás.
 >
 > **Decisión de negocio:** en este curso, una solicitud **Cerrada** ya pasó por Resuelta, así que cuenta como resuelta. Si en tu proceso "Cerrada" significa "cancelada", quita `"Cerrada"` de las listas `IN`.
+
+**Antes de escribir medidas, revisa tus datos (5 min):**
+1. **Tus etiquetas exactas de Estado.** Las medidas comparan texto letra por letra: `"En Proceso"` no es igual a `"En proceso"`. En **Report view**, agrega un visual **Table** con solo la columna `Estado`: verás cada valor una vez. Si alguno se escribe distinto de Nueva, En Proceso, Resuelta y Cerrada, usa tu forma exacta en las fórmulas de abajo. Después borra ese visual.
+2. **Datos variados.** Para que las cifras digan algo, en tu tabla de Power Apps debe haber solicitudes en cada estado y varias **resueltas o cerradas con la Fecha Resolución llena**. Si no las tienes, agrégalas o edítalas en Power Apps y vuelve aquí con **Home > Refresh** (actualizar). Sin filas resueltas con fecha, `Promedio Días Resolución` sale vacío.
 
 1. **Total Solicitudes**
 ```dax
@@ -377,7 +405,7 @@ COUNTROWS(
     - `Total Solicitudes`
     - `Solicitudes Abiertas`
     - `Promedio Días Resolución`
-    > En la tarjeta, si ves "2K" en vez de "2,000", cambia las unidades de visualización (**Display units**) a **None** en el formato del visual.
+    > En la tarjeta, si ves "2K" en vez de "2,000", cambia las unidades de visualización: con la tarjeta seleccionada, **Format visual** > pestaña **Visual** > **Callout values** > **Values** > **Display units** = **None** (con **Auto**, Power BI abrevia en K, M o B) ([Learn](https://learn.microsoft.com/power-bi/visuals/power-bi-visualization-card)).
 
 2. **Chart: Solicitudes por Estado**
     - Visual: **Donut chart**
@@ -518,7 +546,7 @@ Esta vez no te digo los pasos: aplica lo que viste a un negocio distinto.
     - En el workspace, selecciona **Create app**.
     - En **Setup**, ponle nombre y descripción; en **Content**, agrega el reporte y el dashboard; en **Audience**, elige quién la verá.
     - Selecciona **Publish app** y comparte el enlace que te da Power BI.
-    - Solo puede haber una app por workspace.
+    - Solo puedes crear una app por workspace (con hasta 25 audiencias distintas dentro de ella). Las **org apps** de Fabric son otro tipo de elemento y pueden convivir con esa app del workspace ([Learn](https://learn.microsoft.com/power-bi/collaborate-share/service-create-distribute-apps)).
 
 **Paso 5: Configurar Row-Level Security (RLS)**
 
@@ -646,29 +674,36 @@ Esta vez no te digo los pasos: aplica lo que viste a un negocio distinto.
     - **Solución**: Usar la medida `Promedio Días Resolución` con `AVERAGEX` + `DATEDIFF` sobre solicitudes resueltas (Práctica 6.2)
 
 ### 🧪 Criterios de Validación
-- [ ] Reporte con 2+ páginas y mínimo 8 visualizaciones
-- [ ] Conexión a Dataverse funcional con refresh configurado
+
+**Núcleo (con esto apruebas el módulo):**
+- [ ] Conexión a Dataverse funcional desde Power BI Desktop (archivo `reporte-solicitudes-ti.pbix` guardado)
 - [ ] Modelo de datos con 2+ tablas relacionadas (3 si cargaste Categoría Detallada)
 - [ ] 4+ measures DAX creadas y funcionales
-- [ ] Interactividad: cross-filtering, drill-through implementado
+- [ ] Reporte con 2 páginas y mínimo 8 visualizaciones
+- [ ] Los visuales responden a los slicers (filtros)
+- [ ] Explicar diferencia entre Import y DirectQuery
+
+**Opcional (profundización, cuando tengas Power BI Service y licencia):**
+- [ ] Interactividad: cross-filtering editado y drill-through implementado
 - [ ] Reporte publicado en Power BI Service y compartido
+- [ ] Refresh programado configurado
 - [ ] Row-Level Security configurado y probado
 - [ ] Dashboard con tiles pinneados creado
-- [ ] Explicar diferencia entre Import y DirectQuery
-- [ ] Calcular tamaño de dataset y estimar refresh time
+- [ ] Calcular tamaño del semantic model y estimar el tiempo de refresh
 
-> Como principiante, considera aprobado el núcleo si tienes conexión, modelo simple, 2 páginas y visuales que responden a filtros. Publicación, refresh, dashboard y RLS pertenecen a la profundización cuando tengas Power BI Service disponible.
+> Como principiante, considera aprobado el módulo si cumples todo el núcleo. Publicación, refresh, dashboard y RLS pertenecen a la profundización cuando tengas Power BI Service disponible.
 
 ### 📸 Evidencia para guardar
 - Captura de Power Query con tablas cargadas y columnas renombradas.
 - Captura del modelo con relaciones visibles.
 - Captura de las 2 páginas del reporte con slicers y KPIs.
 - Si publicas: captura del workspace, configuración de refresh y roles RLS.
+- El archivo `reporte-solicitudes-ti.pbix` guardado (y `primer-reporte-power-bi.pbix` de la Práctica 6.0).
 
 ### ➡️ Siguiente práctica recomendada
 
-Guarda tu archivo `.pbix` como evidencia del Nivel Básico y úsalo como insumo del **Módulo 08 · Primer Proyecto Integrado**.
+Guarda tu archivo `reporte-solicitudes-ti.pbix` como evidencia del Nivel Básico y como **guía de pasos** para el **Módulo 08 · Primer Proyecto Integrado**.
 
-**Por qué:** este módulo no tiene un lab básico dedicado, pero el reporte que construyes aquí se integra naturalmente al proyecto final del Nivel 1. Si tienes poco tiempo, prioriza un dashboard local claro antes que publicación y seguridad avanzada.
+**Por qué:** este módulo no tiene un lab básico dedicado, pero el método que aprendiste aquí (conectar, limpiar, relacionar, medir y visualizar) es el mismo del proyecto final. Ojo: el proyecto del Módulo 08 usa tablas nuevas (prefijo `sse`) y otros estados, así que allí crearás un `.pbix` nuevo repitiendo estos pasos y adaptando las medidas; este archivo no se reutiliza tal cual. Si tienes poco tiempo, prioriza un dashboard local claro antes que publicación y seguridad avanzada.
 
 ---

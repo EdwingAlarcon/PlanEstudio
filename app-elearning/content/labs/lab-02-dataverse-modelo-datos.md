@@ -40,7 +40,12 @@ Al finalizar este laboratorio podrás diseñar e implementar un modelo de datos 
 Este lab construye **el mismo modelo del Módulo 2**, con los mismos nombres visibles (`Solicitud TI`, `Título de Solicitud`, `Estado`, `Prioridad`…), así que las fórmulas de los Módulos 3 y 7 y del Lab 03 funcionan igual. Tiene dos diferencias, y las dos son a propósito:
 
 1. **La categoría es una tabla catálogo (Lookup), no una columna Choice.** En el Módulo 2 practicaste las dos formas (la columna Choice `Categoría` y la tabla `Categoría Detallada`). Aquí te quedas con la tabla porque el Lab 04 muestra su SLA en el formulario y el Lab 09 le añade un Rollup.
-2. **Los nombres internos se fijan a mano** (`sit_solicitud`, `sit_prioridad`, `sit_estado`…), porque los Labs 03, 04, 05 y 09 los usan en expresiones. Si los dejas automáticos, Dataverse quita las tildes y los espacios del nombre visible y obtienes nombres distintos (por ejemplo, `sit_solicitudti`).
+2. **Los nombres internos se fijan a mano** (`sit_solicitud`, `sit_prioridad`, `sit_estado`…), porque los Labs 03, 04, 05 y 09 los usan en expresiones. Si los dejas automáticos, Dataverse los arma a partir del nombre visible: quita los espacios, y las letras con tilde pueden cambiar o desaparecer. Así obtienes nombres distintos (por ejemplo, `sit_solicitudti`).
+3. **Los nombres de las categorías son un poco más largos** que las opciones del Módulo 2: "Red y Conectividad" equivale a "Red" y "Accesos y Seguridad" equivale a "Accesos". Usa los del lab: los Labs 05 y 22 los usan así.
+
+**Dos datos de SLA, cada uno con su función:** cada **Categoría** tiene un **SLA Horas** de referencia (el tiempo típico de esa categoría; el Lab 04 lo muestra en el formulario). Cada **Solicitud TI** tiene su propio **SLA Horas**, que pone la Regla 1 según la prioridad. Las vistas ordenan por el de la solicitud.
+
+**Sobre el prefijo:** el prefijo del Publisher es `sit` (sin guion bajo). Dataverse le agrega el guion bajo, por eso los nombres internos se ven como `sit_...`.
 
 > **Si ya hiciste las prácticas del Módulo 2 en este mismo ambiente**, ya tienes una tabla llamada `Solicitud TI`. Antes de empezar, cámbiale el nombre visible para no confundirla con la de este lab: **Tables** → `Solicitud TI` → **Properties** → **Display name** = `Solicitud TI (M2)` y **Plural display name** = `Solicitudes TI (M2)` → **Save**. El nombre visible de una tabla sí se puede cambiar después de crearla; el nombre interno (Schema name) no.
 
@@ -200,63 +205,71 @@ La solución `SIT Solicitudes Internas` está abierta, vacía y con el publisher
 > **Qué vas a hacer:** Crear primero el catálogo `Categoría` (para poder apuntar a él) y luego la tabla principal `Solicitud TI` con sus columnas y sus tres Lookups.
 > **Duración:** 40 min
 
+> **Cómo escribir el Schema name (léelo una vez, vale para todo el lab):** en **Advanced options**, el campo **Schema name** ya trae el prefijo `sit_` delante (Dataverse lo pone solo). **Escribe solo la parte de después**, por ejemplo `descripcion`. **Nunca** escribas tú `sit_descripcion` desde cero: quedaría `sit_sit_descripcion`, y ese nombre ya no se puede cambiar. Antes de guardar, lee el nombre completo y comprueba que diga exactamente `sit_descripcion`. En las tablas de abajo, la columna "Escribe solo esto" es lo que tecleas y "Resultado" es lo que debe quedar.
+
 ### Tarea 2.1 — Crear la tabla `Categoría`
 
-1. Dentro de la solución, selecciona **New** y elige crear una tabla con **Set advanced properties** (también: **Tables** → **New table** → **Set advanced properties**). Se abre el panel **New table**.
+1. Dentro de la solución, en la barra de comandos selecciona **New** → **Table** → **Table (advanced properties)**. (Fuera de una solución sería **Tables** → **New table** → **Set advanced properties**; aquí usa el de la solución.) Se abre el panel **New table**.
 
 2. Rellena **Display name** = `Categoría` y **Plural display name** = `Categorías`.
 
 3. En la pestaña **Primary column**, deja o escribe **Display name** = `Nombre`. Después de guardar la tabla ya no podrás cambiarlo.
 
 4. Vuelve a la pestaña de propiedades y despliega **Advanced options**:
-   - **Schema name**: deja el prefijo `sit_` y escribe `Categoria` (sin tilde). Debe quedar `sit_Categoria`. Si el prefijo no es `sit_` (por ejemplo, ves algo como `cr8a3_`), no estás en tu solución: cierra sin guardar y vuelve al Ejercicio 1.
+   - **Schema name**: escribe solo `categoria` (sin tilde). Resultado: `sit_categoria`. Si el prefijo que ves no es `sit_` (por ejemplo, ves algo como `cr8a3_`), no estás en tu solución: cierra sin guardar y vuelve al Ejercicio 1.
    - **Record ownership**: **Organization** (un catálogo es de toda la organización, no de un usuario).
 
 5. Selecciona **Save**. Se abre la página de la tabla (su "hub").
 
 6. En la zona **Columns** → **New column**, crea estas dos columnas. Antes de guardar cada una, despliega **Advanced options** y escribe el **Schema name** indicado:
 
-   | Display name | Schema name | Data type | Required |
-   |---|---|---|---|
-   | Descripción | `sit_descripcion` | Multiline Text | Optional |
-   | SLA Horas | `sit_slahoras` | Whole Number | Business required |
+   | Display name | Schema name: escribe solo esto | Resultado | Data type | Required |
+   |---|---|---|---|---|
+   | Descripción | `descripcion` | `sit_descripcion` | Multiline Text | Optional |
+   | SLA Horas | `slahoras` | `sit_slahoras` | Whole Number | Business required |
 
-7. En **Columns**, busca la columna principal `Nombre` y **anota su nombre interno** (los Labs 03 y 04 la llaman `sit_nombre`; si la tuya tiene otro, usa el tuyo allí).
+7. **Anota el nombre interno de la columna principal `Nombre`.** Este nombre no lo eliges tú: el panel **Primary column** solo deja cambiar el nombre visible y la descripción, y Dataverse genera el nombre interno al guardar la tabla. Para verlo, en **Columns** abre la columna `Nombre` y despliega **Advanced options** (mira **Schema name**). Los labs siguientes la llaman `sit_nombre`. Si la tuya tiene otro nombre, no pasa nada; haz esto:
+   - **Labs 03 y 04:** donde diga `sit_nombre`, elige la columna por su nombre visible, **Nombre**.
+   - **Fórmulas y expresiones** (por ejemplo, en Power Automate): escribe tu nombre interno en minúsculas en lugar de `sit_nombre`.
 
    > **¿Por qué Organization?** En una tabla Organization todos los usuarios con el rol adecuado ven todos los registros: ideal para catálogos. En una User or team, cada registro tiene dueño y puedes filtrar "mis registros". **Ojo:** el tipo de ownership no se puede cambiar después de crear la tabla.
 
 ### Tarea 2.2 — Crear la tabla `Solicitud TI`
 
-1. Dentro de la solución, **New** → tabla con **Set advanced properties**.
+1. Dentro de la solución, **New** → **Table** → **Table (advanced properties)**, igual que en la Tarea 2.1.
 
 2. Rellena **Display name** = `Solicitud TI` y **Plural display name** = `Solicitudes TI`. Marca **Enable Attachments**.
 
 3. En la pestaña **Primary column**, **Display name** = `Título de Solicitud`.
 
 4. En **Advanced options**:
-   - **Schema name**: `sit_Solicitud` (no lo dejes como `sit_SolicitudTI`: los labs siguientes usan `sit_solicitud`).
+   - **Schema name**: escribe solo `solicitud`. Resultado: `sit_solicitud`. No lo dejes como lo propone Dataverse (algo como `sit_SolicitudTI`): los labs siguientes usan `sit_solicitud`.
    - **Record ownership**: **User or team**.
 
 5. **Save**.
 
 6. En **Columns** → **New column**, crea estas columnas, cada una con su **Schema name** en **Advanced options**:
 
-   | Display name | Schema name | Data type | Required | Detalle |
-   |---|---|---|---|---|
-   | Descripción | `sit_descripcion` | Multiline Text | Optional | — |
-   | Prioridad | `sit_prioridad` | Choice | Optional | Opciones: Baja, Media, Alta, Crítica · Default choice = Media |
-   | Estado | `sit_estado` | Choice | Business required | Opciones: Nueva, En Proceso, Resuelta, Cerrada, Aprobada, Rechazada · Default choice = Nueva |
-   | Fecha Solicitud | `sit_fechasolicitud` | Date and Time | Optional | — |
-   | Fecha Resolución | `sit_fecharesolucion` | Date Only | Optional | — |
-   | SLA Horas | `sit_slahoras` | Whole Number | Optional | La rellena la Regla 1 |
+   | Display name | Schema name: escribe solo esto | Resultado | Data type | Required | Detalle |
+   |---|---|---|---|---|---|
+   | Descripción | `descripcion` | `sit_descripcion` | Multiline Text | Optional | — |
+   | Prioridad | `prioridad` | `sit_prioridad` | Choice | Optional | Opciones: Baja, Media, Alta, Crítica · Default choice = Media |
+   | Estado | `estado` | `sit_estado` | Choice | Business required | Opciones: Nueva, En Proceso, Resuelta, Cerrada, Aprobada, Rechazada · Default choice = Nueva |
+   | Fecha Solicitud | `fechasolicitud` | `sit_fechasolicitud` | Date and Time | Optional | — |
+   | Fecha Resolución | `fecharesolucion` | `sit_fecharesolucion` | Date Only | Optional | — |
+   | SLA Horas | `slahoras` | `sit_slahoras` | Whole Number | Optional | La rellena la Regla 1 |
 
    *Para las columnas Choice (Prioridad y Estado):* en **Data type** elige **Choice** > **Choice**; en **Sync with global choice?** elige **No**; escribe la primera opción en **Label** y añade las demás con **New choice**, en el orden de la tabla. El número de **Value** se genera solo: no lo cambies. Elige el **Default choice** indicado.
 
    > **📌 Sobre los valores numéricos de las opciones:** Dataverse genera el número de cada opción a partir del Choice value prefix de tu Publisher. No hay un número universal para "Aprobada": si un módulo posterior muestra uno de ejemplo (como `100000004`), es ilustrativo; mira siempre el valor real en tu ambiente. Aprobada y Rechazada no están en el Módulo 2: las usan los escenarios de aprobación de labs posteriores.
 
    > **No te confundas:** toda tabla trae de fábrica una columna del sistema llamada **Status** (Active/Inactive). Tu columna **Estado** es otra distinta. En reglas, vistas y fórmulas usa siempre **Estado**.
+   >
+   > **Si tu ambiente está en español:** la columna del sistema se llama **Estado** y tiene otra compañera, **Razón para el estado**. Entonces verás dos "Estado" en las listas. La tuya es la que creaste en esta tabla (nombre interno `sit_estado`); la del sistema no lleva el prefijo `sit_`.
 
-7. En **Columns**, anota el nombre interno de la columna principal `Título de Solicitud`. Los Labs 04 y 05 la llaman `sit_titulo`; si la tuya tiene otro nombre, usa el tuyo en esos labs.
+7. **Anota el nombre interno de la columna principal `Título de Solicitud`**, igual que en el paso 7 de la Tarea 2.1 (tampoco lo eliges tú). Los labs siguientes la llaman `sit_titulo`. Si la tuya tiene otro nombre:
+   - **Lab 04:** donde diga `sit_titulo`, elige la columna por su nombre visible, **Título de Solicitud**.
+   - **Lab 05** (expresiones de Power Automate, como `triggerOutputs()?['body/sit_titulo']`): cambia `sit_titulo` por tu nombre interno en minúsculas.
 
 ### Tarea 2.3 — Crear las relaciones (Lookups)
 
@@ -264,16 +277,16 @@ Una columna Lookup crea a la vez una relación entre dos tablas. Créalas desde 
 
 1. En el hub de **Solicitud TI**, zona **Relationships** → **New relationship** → **Many-to-one**.
 
-2. En **Related** elige **Categoría**. En **Lookup column display name** escribe `Categoría` y, si el panel muestra el nombre interno de la columna, comprueba que quede `sit_categoria`. **Lookup column requirement**: **Business required**.
+2. En **Related** elige **Categoría**. En **Lookup column display name** escribe `Categoría`. En **Lookup column name** (el nombre interno) escribe solo `categoria`, con la misma regla de la Tarea 2.1: el prefijo `sit_` ya está delante. Resultado: `sit_categoria`. Si en tu pantalla el nombre completo está en una sola caja, deja `sit_` y escribe después `categoria`. **Lookup column requirement**: **Business required**.
 
 3. Selecciona **Done** y luego **Save table**.
 
 4. Repite los pasos 1 a 3 para las otras dos:
 
-   | Related | Lookup column display name | Nombre interno | Requirement |
-   |---|---|---|---|
-   | Contact | Solicitante | `sit_solicitante` | Optional |
-   | User | Asignado a | `sit_asignado` | Optional |
+   | Related | Lookup column display name | Lookup column name: escribe solo esto | Resultado | Requirement |
+   |---|---|---|---|---|
+   | Contact | Solicitante | `solicitante` | `sit_solicitante` | Optional |
+   | User | Asignado a | `asignado` | `sit_asignado` | Optional |
 
    > `User` es la tabla de usuarios del ambiente (nombre interno `systemuser`). No crees una tabla propia de usuarios: Dataverse ya la tiene.
 
@@ -300,15 +313,17 @@ Una columna Lookup crea a la vez una relación entre dos tablas. Créalas desde 
 
 **Cómo funciona el diseñador (léelo una vez):** una regla es un diagrama que empieza con una **Condition** (el rombo). A su derecha salen el **✓** (se cumple) y el **✕** (no se cumple). Las piezas se arrastran desde la pestaña **Components** hasta un **+** del diagrama, se configuran en **Properties** y se confirman siempre con **Apply**.
 
+**Los operadores:** en la lista **Operator** busca estos nombres en inglés: **Equals** (es igual a) y **Does not contain data** (no contiene datos). Si tu pantalla muestra otro texto, elige el que signifique lo mismo.
+
 ### Tarea 3.1 — Regla 1: SLA según prioridad
 
 1. En el hub de **Solicitud TI**, zona **Business rules** → **Add business rule** (o **New business rule**). Se abre el diseñador con una condición ya creada.
 
 2. Nombre: `SLA según prioridad`. **Scope**: **Entity**.
 
-3. Selecciona la condición. En **Properties**: **Display Name** = `Prioridad es Crítica`; regla: **Source** = **Entity**, **Field** = **Prioridad**, operador de igualdad, **Type** = **Value**, valor **Crítica**. **Apply**.
+3. Selecciona la condición. En **Properties**: **Display Name** = `Prioridad es Crítica`; regla: **Source** = **Entity**, **Field** = **Prioridad**, **Operator** = **Equals**, **Type** = **Value**, valor **Crítica**. **Apply**.
 
-4. Arrastra **Set Field Value** al **+** del **✓**: **SLA Horas** = `4`. **Apply**.
+4. Arrastra **Set Field Value** al **+** del **✓**: **Field** = **SLA Horas**; si te pide **Type**, elige **Value**; valor `4`. **Apply**.
 
 5. Arrastra una nueva **Condition** al **+** del **✕** de la primera: `Prioridad es Alta` → en su **✓**, **Set Field Value** **SLA Horas** = `8`.
 
@@ -324,8 +339,8 @@ Una columna Lookup crea a la vez una relación entre dos tablas. Créalas desde 
 
 2. Selecciona la condición. En **Properties**:
    - **Display Name**: `Resuelta sin fecha`
-   - Primera regla: **Field** = **Estado**, operador de igualdad, **Type** = **Value**, valor **Resuelta**.
-   - Selecciona **New** para añadir una segunda regla, con **Rule Logic** = **AND**: **Field** = **Fecha Resolución** y el operador que significa "no contiene datos" (no necesita valor).
+   - Primera regla: **Field** = **Estado** (la tuya, `sit_estado`), **Operator** = **Equals**, **Type** = **Value**, valor **Resuelta**.
+   - Selecciona **New** para añadir una segunda regla, con **Rule Logic** = **AND**: **Field** = **Fecha Resolución**, **Operator** = **Does not contain data** (no necesita valor).
    - **Apply**.
 
 3. Arrastra **Show Error Message** al **+** del **✓**: **Field** = **Fecha Resolución**, **Message** = `Debe ingresar la fecha de resolución antes de resolver la solicitud.` **Apply**.
@@ -357,11 +372,13 @@ En **Business rules** de `Solicitud TI` aparecen 2 reglas con estado **Activated
 
 **Cómo se crea una vista (vale para las tres):** en el hub de **Solicitud TI**, zona **Views** → **New view** → escribe el nombre → **Create**. Añade columnas con **+ View column**. Los filtros se editan en el panel de propiedades con **Edit filters** → **Add** → **Add row** (las filas se unen con **And** por defecto) → **OK**. Para ordenar, selecciona el encabezado de una columna y elige **Sort ascending** o **Sort descending**; con **Shift** pulsado añades un segundo criterio. Termina con **Save and publish**.
 
+**Operadores de los filtros:** usa **Does not equal** (no es igual a), **Equals** (es igual a), **Equals current user** (es igual al usuario actual) y **Does not contain data** (no contiene datos). Si tu pantalla muestra otro texto, elige el que signifique lo mismo.
+
 ### Tarea 4.1 — Vista "Solicitudes Abiertas del Equipo" (supervisor de soporte)
 
 1. Nombre: `Solicitudes Abiertas del Equipo`.
 2. Columnas: `Título de Solicitud` | `Categoría` | `Prioridad` | `SLA Horas` | `Estado` | `Asignado a` | `Fecha Solicitud`.
-3. Filtros: **Estado** "no es igual a" **Cerrada** y **Estado** "no es igual a" **Resuelta**.
+3. Filtros: **Estado** **Does not equal** **Cerrada** y **Estado** **Does not equal** **Resuelta**.
 4. Orden: **SLA Horas** ascendente y luego **Fecha Solicitud** ascendente.
 5. **Save and publish**.
 
@@ -369,7 +386,7 @@ En **Business rules** de `Solicitud TI` aparecen 2 reglas con estado **Activated
 
 1. Nombre: `Mis Solicitudes Activas`.
 2. Columnas: `Título de Solicitud` | `Categoría` | `Prioridad` | `Estado` | `Fecha Solicitud` | `SLA Horas`.
-3. Filtros: **Estado** "no es igual a" **Cerrada** y **Owner** (Propietario) con el operador que compara con "el usuario actual".
+3. Filtros: **Estado** **Does not equal** **Cerrada** y **Owner** (Propietario) **Equals current user**.
    > **Por qué Owner y no Solicitante:** `Solicitante` apunta a un **Contact**, no a un usuario de la app, así que no se puede comparar con el usuario actual. El Owner es el usuario que creó el registro.
 4. Orden: **Fecha Solicitud** descendente.
 5. **Save and publish**.
@@ -378,7 +395,7 @@ En **Business rules** de `Solicitud TI` aparecen 2 reglas con estado **Activated
 
 1. Nombre: `Críticas Sin Asignar`.
 2. Columnas: `Título de Solicitud` | `Descripción` | `Solicitante` | `Fecha Solicitud`.
-3. Filtros: **Prioridad** igual a **Crítica**, **Estado** igual a **Nueva** y **Asignado a** con el operador que significa "no contiene datos".
+3. Filtros: **Prioridad** **Equals** **Crítica**, **Estado** **Equals** **Nueva** y **Asignado a** **Does not contain data**.
 4. Orden: **Fecha Solicitud** ascendente (la más antigua primero).
 5. **Save and publish**.
 
@@ -399,7 +416,7 @@ En **Business rules** de `Solicitud TI` aparecen 2 reglas con estado **Activated
 ### Tarea 5.1 — Crear las Categorías
 
 1. Abre la tabla **Categoría** desde tu solución.
-2. En el hub, en la zona de columnas y datos, abre el editor de filas (si no lo ves, selecciona **View data** en la barra de comandos, o **Edit** para abrir el diseñador de la tabla, donde también puedes añadir filas).
+2. En la barra de comandos del hub selecciona **Edit**: se abre el diseñador de la tabla, donde puedes escribir filas nuevas. (También sirve **View data**, que abre el editor de filas.)
 3. Agrega los 5 registros de "Datos de prueba — Categorías".
 
 ### Tarea 5.2 — Crear las Solicitudes
@@ -412,26 +429,28 @@ En **Business rules** de `Solicitud TI` aparecen 2 reglas con estado **Activated
 
 1. Revisa la solicitud "VPN caída para equipo remoto" (Prioridad Crítica).
 
-   **Resultado esperado:** al guardarla, **SLA Horas** quedó en `4` sin que lo escribieras.
+   **Resultado esperado:** **SLA Horas** vale `4` sin que lo escribieras. Si la celda sigue vacía, recarga la página (el valor lo pone el servidor al guardar).
 
 2. Abre la solicitud "Error al abrir Excel con macros" (En Proceso). Cambia **Estado** a **Resuelta** y guarda sin llenar **Fecha Resolución**.
 
-   **Resultado esperado:** el guardado se bloquea y aparece `Debe ingresar la fecha de resolución...`
+   **Resultado esperado:** el guardado se bloquea y aparece un error con el texto `Debe ingresar la fecha de resolución antes de resolver la solicitud.` El aviso puede verse distinto según la pantalla (un mensaje junto a la celda o una ventana de error); lo importante es que no se guarda. **Copia el texto que viste:** es parte de tu evidencia.
 
 3. Llena **Fecha Resolución** con la fecha de hoy y guarda.
 
    **Resultado esperado:** ahora sí se guarda.
 
-4. Abre la vista `Solicitudes Abiertas del Equipo`.
+4. Comprueba la vista `Solicitudes Abiertas del Equipo`. Todavía no tienes una app donde verla con datos (llega en el Lab 04), así que haz dos comprobaciones:
+   - En **Views**, abre la vista y revisa que tenga los dos filtros de Estado y el orden **SLA Horas** ascendente.
+   - En el editor de filas de **Solicitud TI**, cuenta las solicitudes que no están ni Resuelta ni Cerrada. Ese es el número de filas que mostrará la vista en el Lab 04.
 
-   **Resultado esperado:** salen primero las dos Críticas (SLA 4) y la resuelta del paso 3 ya no aparece.
+   **Resultado esperado:** la vista está configurada así, y la solicitud que resolviste en el paso 3 ya no cuenta como abierta.
 
 ### Validación del Ejercicio 5
 
 - [ ] 5 registros de Categoría y 10 de Solicitud TI
 - [ ] Las Críticas tienen SLA Horas = 4 (y Alta 8, Media 24, Baja 48)
 - [ ] La regla de fecha bloquea la Resuelta sin fecha y deja guardar con fecha
-- [ ] La vista del equipo ordena por urgencia
+- [ ] La vista del equipo tiene configurado el orden **SLA Horas** ascendente
 
 ---
 
@@ -440,6 +459,7 @@ En **Business rules** de `Solicitud TI` aparecen 2 reglas con estado **Activated
 | Problema | Causa probable | Solución |
 |---|---|---|
 | Mis tablas o columnas tienen un prefijo raro (como `cr8a3_`) en lugar de `sit_` | Las creaste fuera de la solución, con el publisher predeterminado del ambiente | Si aún no tienen datos ni dependencias, elimínalas y recréalas dentro de `SIT Solicitudes Internas` |
+| Un nombre quedó como `sit_sit_...` | Escribiste el prefijo `sit_` en el Schema name, y Dataverse ya lo pone | El nombre no se puede cambiar: elimina la columna o tabla vacía y recréala escribiendo solo la parte después de `sit_` |
 | La tabla quedó como `sit_solicitudti` en lugar de `sit_solicitud` | No cambiaste el Schema name antes de guardar | El Schema name no se puede cambiar: elimina la tabla vacía y recréala; o usa tu nombre real en los labs siguientes |
 | No encuentro **Activate** en el diseñador de la regla | Las reglas no se activan desde la ventana del diseñador | Cierra el diseñador y actívala desde la lista de **Business rules** |
 | El error de fecha sale incluso con la fecha llena | La condición solo comprueba Estado = Resuelta | Añade la segunda regla "Fecha Resolución no contiene datos" con AND |
@@ -513,8 +533,8 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 
 - Captura de las tablas `Categoría` y `Solicitud TI` con sus columnas (y sus Schema names), dentro de la solución `SIT_SolicitudesInternas`
 - Captura de la lista de Business rules con las 2 reglas activas
-- Captura de la vista `Solicitudes Abiertas del Equipo` mostrando las Críticas primero
-- El texto exacto del mensaje de error al marcar Resuelta sin fecha
+- Captura del diseñador de la vista `Solicitudes Abiertas del Equipo` con sus filtros y el orden por SLA Horas
+- El texto del mensaje de error que viste al marcar Resuelta sin fecha
 - Conteo de registros de prueba (5 Categoría, 10 Solicitud TI)
 
 ## Criterios de aprobación
@@ -528,11 +548,11 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 
 Si completaste el laboratorio antes del tiempo estimado, intenta:
 
-**Reto básico:** Agrega en `Categoría` una columna **Rollup** que cuente cuántas solicitudes activas (Estado Nueva o En Proceso) tiene cada categoría. Ponle el Schema name `sit_solicitudesactivas`: el Lab 09 la usa con ese nombre (si la haces aquí, allí solo la reutilizas).
+**Reto básico:** Agrega en `Categoría` una columna **Rollup** que cuente cuántas solicitudes activas (Estado Nueva o En Proceso) tiene cada categoría. En Schema name escribe solo `solicitudesactivas` (resultado `sit_solicitudesactivas`): el Lab 09 la usa con ese nombre (si la haces aquí, allí solo la reutilizas).
 
 **Reto intermedio:** Agrega en `Solicitud TI` la columna calculada `Dias Abierta` (`sit_diasabierta`), los días desde la Fecha Solicitud, siguiendo la Tarea 1.2 del Lab 09. Úsala en una cuarta vista "Solicitudes Antiguas" con las solicitudes abiertas de más de 7 días. Si ya hiciste el Lab 09, la columna ya existe: no la recrees.
 
-**Reto avanzado:** Crea una tercera tabla `Comentario` (`sit_Comentario`) con las columnas `Texto` y `Fecha`, y una relación Many-to-one hacia `Solicitud TI` (una solicitud puede tener muchos comentarios). El Lab 09 la retoma como opcional.
+**Reto avanzado:** Crea una tercera tabla `Comentario` (en Schema name escribe solo `comentario`; resultado `sit_comentario`) con las columnas `Texto` y `Fecha`, y una relación Many-to-one hacia `Solicitud TI` (una solicitud puede tener muchos comentarios). El Lab 09 la retoma como opcional.
 
 ---
 

@@ -4,10 +4,11 @@ title: "Primer Proyecto Integrado"
 level: "basico"
 certification: "PL-900"
 estimatedMinutes: 45
+practiceMinutes: 480
 slug: "primer-proyecto-integrado"
 lastVerified: "2026-11"
 ---
-*Duración: 2-3 semanas · Lectura/planificación: 25-45 min · Construcción guiada: 8-16 horas distribuidas en varias sesiones*
+*Duración: 2-3 semanas · Lectura/planificación: 25-45 min · Construcción (estimación, no medida con alumnos): entrega mínima unas 7-9 horas con Model-Driven o 9-12 horas con Canvas; entrega completa 35-50 horas, siempre en varias sesiones*
 
 ### 🎯 Objetivo
 Aplicar todos los conocimientos del Nivel 1 en un proyecto end-to-end real.
@@ -20,23 +21,34 @@ Aplicar todos los conocimientos del Nivel 1 en un proyecto end-to-end real.
 ### 🔧 Qué queda para después (Iteraciones del proyecto)
 - Completar los 4 flujos, el dashboard Power BI con RLS, testing multi-role y documentación formal. Este módulo es un capstone: se termina por iteraciones, no en una sola sesión.
 
+### 🆕 Por qué empiezas una Solution nueva (y qué hacer con lo de los Módulos 2 a 7)
+
+En los Módulos 2 a 7 trabajaste con la tabla **Solicitud TI** (prefijo `sit`). Este proyecto es **otro sistema, más grande**: solicitudes de varios tipos (TI, Mantenimiento, RRHH, Compras) con aprobación. Por eso empiezas una Solution nueva con su propio publisher y prefijo (`sse`) y tablas nuevas:
+
+- Practicas el arranque de un proyecto real desde cero: Solution, publisher, tablas y relaciones.
+- No rompes lo que ya funciona: tus apps, flujos y reportes de los Módulos 2 a 7 siguen apuntando a `Solicitud TI`. Si cambiaras esa tabla, dejarían de funcionar.
+
+**Qué haces con tu trabajo anterior:** no lo borres ni lo modifiques. Es tu evidencia de los módulos y tu guía: cada paso de este proyecto ya lo hiciste una vez allí, con otra tabla.
+
+**Qué haces con el `.pbix` del Módulo 6:** no lo reutilices tal cual, porque sus consultas leen las tablas `sit_`. Para este proyecto crea un archivo nuevo (`reporte-solicitudes-sse.pbix`) y repite los mismos pasos del Módulo 6 (Práctica 6.1, Pasos 2 a 4) con las tablas `sse_`. Las medidas del Módulo 6 hay que adaptarlas, porque aquí los estados son otros (ver el recuadro "Power BI en versión mínima" en la Fase 5).
+
 ### 🧭 Entregable mínimo viable del Nivel Básico
 
 Si tienes poco tiempo o estás estudiando solo, apunta primero a este alcance:
 
 1. Solution `Sistema Solicitudes Empresariales` con publisher `sse`.
 2. Tabla `Solicitud` + tabla `Categoría Solicitud` con relación y 10 registros de prueba.
-3. Una Canvas App para crear/ver solicitudes o una Model-Driven App para gestionarlas.
+3. Una Model-Driven App para gestionar solicitudes **o** una Canvas App para crearlas y verlas. **Si es tu primer proyecto, elige la Model-Driven:** casi todo se hace con clics y casi no tiene fórmulas, así que tiene menos puntos donde atorarte.
 4. Un flujo Power Automate de notificación al crear solicitud.
-5. Un reporte Power BI local con KPIs básicos o, si no tienes Power BI listo, una vista/dashboard dentro de Model-Driven.
+5. Un reporte Power BI local con KPIs básicos. Si no tienes Power BI listo: con Model-Driven, un dashboard o una vista con gráfico dentro de la app; con Canvas, las etiquetas de métricas de la pantalla de inicio (ver la ruta de abajo).
 
-Cuando esto funcione, ya tienes una historia completa para explicar en entrevista: dato, app, automatización, reporte y seguridad básica.
+Cuando esto funcione, ya tienes una historia completa para explicar en entrevista: dato, app, automatización, reporte y una decisión de seguridad documentada en el README (en la entrega mínima no configuras roles; escribes cuál crearías y por qué).
 
 ### 🪜 Tres niveles de entrega
 
 | Nivel | Qué incluye | Cuándo usarlo |
 |---|---|---|
-| **Entrega mínima** | 2 tablas, 1 app, 1 flujo, 1 reporte o dashboard simple, 5 evidencias. | Para cerrar el Nivel Básico sin bloquearte. |
+| **Entrega mínima** | 2 tablas, 1 app, 1 flujo, 1 reporte o dashboard simple, 6 evidencias. | Para cerrar el Nivel Básico sin bloquearte. |
 | **Entrega completa** | 5 tablas, Canvas App, Model-Driven App, 4 flujos, Power BI, roles y testing. | Para portafolio sólido de Maker/Functional Consultant junior. |
 | **Entrega excelente** | Documentación técnica, matriz de seguridad, solución exportable, demo grabada y mejoras por feedback. | Para entrevista o muestra profesional. |
 
@@ -49,18 +61,18 @@ Las Fases 1 a 7 de abajo describen la **entrega completa**. Si vas por la mínim
 | Fase y paso | En la entrega mínima | Dónde aprendiste los clics |
 |---|---|---|
 | Fase 1 · Paso 1 Requerimientos | Haz solo una línea por punto (tipos, roles y flujo) | — |
-| Fase 1 · Paso 2 Solution | **Haz** (Solution nueva con publisher `sse`) | Módulo 2, Paso 0 |
-| Fase 1 · Paso 3 Tablas | **Solo la tabla 1 (Solicitud) y la 2 (Categoría Solicitud).** En Solicitud crea solo: Título, Descripción, Tipo, Prioridad, Estado, Fecha Solicitud, Solicitante y Asignado a. Salta las tablas 3, 4 y 5 | Módulo 2, Práctica 2.1 |
+| Fase 1 · Paso 2 Solution | **Haz** (Solution nueva con publisher `sse`). Desde aquí, crea **todo** dentro de esta Solution: tablas, app y flujo (la primera evidencia es una captura de la Solution con los tres) | Módulo 2, Paso 0 |
+| Fase 1 · Paso 3 Tablas | **Solo la tabla 1 (Solicitud) y la 2 (Categoría Solicitud).** En Solicitud crea solo: Título, Descripción, Tipo, Prioridad, Estado, Fecha Solicitud, Solicitante y Asignado a. En Categoría Solicitud basta con Nombre. Salta las tablas 3, 4 y 5 | Módulo 2, Práctica 2.1 |
 | Fase 1 · Paso 4 Relaciones | **Solo Categoría 1:N Solicitudes**: se crea al añadir en Solicitud una columna Lookup `Categoría` → Categoría Solicitud | Módulo 2 (Lookup) |
-| Fase 1 · Paso 5 Business Rules | Opcional: solo la regla 1 (validación de fechas) | Módulo 2 y Módulo 4, Paso 3.3 |
-| Carga de datos | **Haz**: 3 categorías y 10 solicitudes con tipos, prioridades y estados distintos | Módulo 1, Microlección 3 |
-| Fase 2 **o** Fase 3 (una sola) | **Canvas:** solo ScreenInicio (Paso 2, sin las métricas) y ScreenNuevaSolicitud; salta el Paso 3 (necesita la tabla Comentario). **Model-Driven:** navegación, formulario Main con las columnas que creaste y 1 vista; salta el BPF y la vista Aprobaciones Pendientes | Módulo 3 (Canvas) o Módulo 4 (Model-Driven) |
+| Fase 1 · Paso 5 Business Rules | Opcional. La regla 1 usa **Fecha Requerida** y **Fecha Completada**, que no están en la lista mínima: si quieres hacerla, crea antes esas dos columnas (Fecha Requerida: Date only; Fecha Completada: Date and time). Si no, salta este paso | Módulo 2 y Módulo 4, Paso 3.3 |
+| Carga de datos | **Haz, en este orden:** (1) en la tabla estándar **Contact**, crea un contacto con tu nombre y **tu correo de trabajo** (el mismo con el que inicias sesión en Power Apps); (2) 3 categorías; (3) 10 solicitudes con tipos, prioridades y estados distintos, con la **Fecha Solicitud** escrita a mano y con **tu contacto como Solicitante en al menos 5 de ellas** (deja esas 5 en un estado distinto de Completada). Sin ese contacto, la pantalla de inicio de la Canvas sale vacía y el correo del flujo no te llega a ti | Módulo 1, Microlección 3 |
+| Fase 2 **o** Fase 3 (una sola) | **Recomendado si es tu primer proyecto: Model-Driven** (Fase 3): navegación, formulario Main con las columnas que creaste y 1 vista; salta el BPF y la vista Aprobaciones Pendientes. **Canvas** (Fase 2): solo ScreenInicio (Paso 2) y ScreenNuevaSolicitud, sin la subida de adjuntos; salta ScreenDetalleSolicitud, ScreenMisSolicitudes y el Paso 3 (necesita la tabla Comentario). Sigue los recuadros "En la entrega mínima" de la Fase 2 | Módulo 4 (Model-Driven) o Módulo 3 (Canvas) |
 | Fase 4 Flujos | **Solo el Flujo 1, en su versión mínima** (ver el recuadro en la Fase 4) | Módulo 5, Práctica 5.1 |
-| Fase 5 Power BI | **Un reporte con 2 visuales** (solicitudes por Estado y por Prioridad) y la medida Total Solicitudes. Salta las medidas de SLA (usan `Cumplió SLA`, de la tabla Métrica, que no creaste) y el RLS. Sin Power BI: el dashboard de la Model-Driven | Módulo 6 o Módulo 4, Paso 5 |
+| Fase 5 Power BI | **Un reporte nuevo con 2 visuales** (solicitudes por Estado y por Prioridad) y la medida Total Solicitudes: sigue el recuadro "Power BI en versión mínima" de la Fase 5. Salta las medidas de SLA, la tabla de calendario y el RLS. **Sin Power BI:** con Model-Driven, el dashboard o una vista con gráfico de la app; con Canvas, tres etiquetas en ScreenInicio con las métricas (`TotalSolicitudes`, `PendientesAprobacion`, `EnProceso`) | Módulo 6, o Módulo 4, Paso 5 |
 | Fase 6 Seguridad | Salta. Escribe en el README qué rol crearías y por qué | — |
-| Fase 7 Documentación | **Solo el README** con las secciones Arquitectura, Modelo de Datos y Flujos | — |
+| Fase 7 Documentación | **Solo el README** con las secciones Arquitectura, Modelo de Datos, Flujos y una decisión de seguridad | — |
 
-**Cuándo terminaste la entrega mínima:** tienes las 5 evidencias de la sección "Evidencia mínima de cierre" y puedes contar en 2 minutos el recorrido completo: una solicitud se crea en la app, el flujo avisa por correo y el reporte la cuenta.
+**Cuándo terminaste la entrega mínima:** tienes las 6 evidencias de la sección "Evidencia mínima de cierre" y puedes contar en 2 minutos el recorrido completo, de punta a punta (*end-to-end*): una solicitud se crea en la app, el flujo avisa por correo y el reporte la cuenta.
 
 ### 📚 Mini-glosario del proyecto integrado
 
@@ -72,6 +84,25 @@ Las Fases 1 a 7 de abajo describen la **entrega completa**. Si vas por la mínim
 | **Unmanaged solution** | Paquete editable para desarrollo y aprendizaje. |
 | **Connection Reference** | Referencia reutilizable a una conexión, para que un flujo no dependa de una cuenta personal. |
 | **Environment Variable** | Valor configurable por ambiente, como un correo o URL. |
+| **End-to-end** (de punta a punta) | Que el recorrido completo funciona: dato → app → flujo → reporte. |
+| **Stakeholder** | Persona interesada en el resultado: quien pide, usa o paga el sistema. |
+| **ROI** (retorno de la inversión) | Cuánto valor devuelve el proyecto comparado con lo que costó. |
+| **Auditoría** (Dataverse) | Registro automático de quién cambió qué dato y cuándo. |
+| **OnVisible** | Propiedad de una pantalla Canvas: lo que pasa cada vez que llegas a ella; sirve para preparar variables y cargar datos. |
+| **OnSuccess** y **LastSubmit** | Propiedades de un formulario Canvas: `OnSuccess` es lo que pasa cuando el guardado salió bien; `LastSubmit` es el último registro guardado, con los campos que llenó el servidor (por ejemplo su ID). |
+| **UpdateContext** y **RegistroActual** | `UpdateContext` crea variables de contexto, que solo viven en la pantalla actual. `RegistroActual` es una de ellas: se crea en la pantalla de destino con el tercer argumento de `Navigate` y guarda la solicitud que estás viendo. |
+| **Sitemap** | El menú de navegación de una Model-Driven App: áreas, grupos y páginas. |
+| **Chart view** | Gráfico guardado sobre una vista de Model-Driven (lo hiciste en el Módulo 4). |
+| **Timeline** | Control de un formulario Model-Driven que muestra las actividades y notas de un registro. |
+| **Run history** | Historial de ejecuciones de un flujo: cuándo corrió y si salió bien o falló. |
+| **Row ID** | El identificador único (GUID) de una fila de Dataverse; lo pide la acción *Get a row by ID*. |
+| **Recurrence** | Trigger de Power Automate que ejecuta el flujo según un horario (cada hora, cada día). |
+| **Switch** | Control de un flujo que elige un camino distinto según el valor de un campo. |
+| **Round-robin** | Repartir en turno: a cada persona le toca la siguiente solicitud, en rueda. |
+| **Planner** | Microsoft Planner, la app de Microsoft 365 para listas de tareas en equipo. |
+| **Niveles de acceso: User, Business Unit, Organization** | En un rol de seguridad: **User** = solo los registros que la persona posee o le compartieron; **Business Unit** = los de su unidad de negocio; **Organization** = todos. |
+| **Hecho (fact) y dimensión** | En Power BI, la tabla de hechos guarda eventos (cada solicitud); una dimensión describe cosas (categorías, personas). |
+| **Tabla de fechas** (date table) | Tabla con una fila por día, que se necesita para comparar periodos (mes contra mes). Es tema del Módulo 12. |
 
 ### 📖 Conceptos Clave
 
@@ -111,14 +142,16 @@ Desarrollar una solución empresarial integral que incluya:
 4. **Power Automate**: 4 flujos
 5. **Power BI**: Dashboard ejecutivo
 
-**Orden recomendado si solo tienes 1 hora al día:**
+**Plan para la entrega mínima si tienes 1 hora al día** (estimación: unas 8-9 sesiones con Model-Driven; con Canvas suma 2 o 3 sesiones más):
 
-1. Día 1: Fase 1 hasta crear las 2 tablas mínimas.
-2. Día 2: carga 10 registros de prueba y valida relaciones.
-3. Día 3: crea una Canvas App o Model-Driven App, no ambas.
-4. Día 4: crea el flujo de notificación.
-5. Día 5: crea el dashboard/reporte simple y guarda evidencias.
-6. Días siguientes: completa flujos, seguridad y documentación si vas por entrega completa.
+1. Sesiones 1-2: Solution, publisher y las 2 tablas mínimas con sus columnas y la relación.
+2. Sesión 3: carga de datos (tu contacto, 3 categorías y 10 solicitudes) y revisa que la relación funciona.
+3. Sesiones 4-5: la app que elegiste (solo una).
+4. Sesiones 6-7: el flujo de notificación, hasta ver una ejecución correcta en el Run history y el correo en tu bandeja.
+5. Sesión 8: el reporte simple (o el dashboard de la app).
+6. Sesión 9: README y capturas de evidencia.
+
+> Si una sesión se alarga, no pasa nada: es una estimación, no un examen. Los días que verás en los títulos de cada Fase (Días 1-21) son de la **entrega completa**, pensados para 2-3 horas al día; no aplican a la mínima.
 
 > **Cómo está organizado este capstone:** lo construyes por capas, en tres bloques (planear, construir dato y app, automatizar y cerrar). En cada uno alternas una idea corta, una práctica de pocos minutos y un dato real de tu proyecto. Cierras con un reto en el que ya no te digo las tablas ni los pasos: el mismo proyecto aplicado a otro negocio. Las microprácticas no necesitan tenant; construir el proyecto sí.
 
@@ -137,7 +170,7 @@ Desarrollar una solución empresarial integral que incluya:
 | Campo | Tu valor |
 |---|---|
 | La entrega que elegiste (mínima, completa o excelente) y por qué | ___ |
-| Las 5 evidencias que vas a guardar para demostrarla | ___ |
+| Las 6 evidencias que vas a guardar para demostrarla | ___ |
 | Qué dejas explícitamente para una iteración posterior | ___ |
 
 ---
@@ -167,7 +200,8 @@ Version: 1.0.0.0
     - Tipo (Choice): TI, Mantenimiento, RRHH, Compras
     - Prioridad (Choice): Baja, Media, Alta, Crítica
     - Estado (Choice): Nueva, Pendiente Aprobación, Aprobada, En Proceso, Completada, Rechazada
-    - Fecha Solicitud (DateTime). Rellénala desde la app con `Now()` al guardar, o usa la columna del sistema **Created On**
+      > **Dos columnas "Estado":** si tu entorno está en español, la columna del sistema `statecode` (Activo/Inactivo) también se muestra como **Estado** (así se llama, por ejemplo, en la tabla Contact: [Learn](https://learn.microsoft.com/es-es/power-apps/developer/data-platform/reference/entities/contact)). En fórmulas, vistas y Power BI te van a aparecer dos "Estado": la tuya es la que tiene el prefijo `sse_` (`sse_estado`) y las opciones Nueva, Pendiente Aprobación, etc.
+    - Fecha Solicitud (DateTime). En la Canvas App se llena sola con un valor por defecto en el formulario (ver la Fase 2); en la Model-Driven, escríbela a mano al crear cada solicitud. Para reportes también puedes usar la columna del sistema **Created On** (fecha de creación)
     - Fecha Requerida (Date Only)
     - Solicitante (Lookup → Contact, required)
     - Aprobador (Lookup → User)
@@ -222,7 +256,7 @@ Version: 1.0.0.0
 
 **Paso 5: Business Rules**
 
-1. **Validación de fechas**:
+1. **Validación de fechas** (usa Fecha Requerida y Fecha Completada; en la entrega mínima solo si creaste esas dos columnas):
     - Si Estado = "Completada", Fecha Completada is required
     - Fecha Requerida >= Fecha Solicitud
 
@@ -246,23 +280,25 @@ Version: 1.0.0.0
 
 > Puedes escoger esta fase como tu primera app funcional si quieres demostrar experiencia de usuario móvil y formularios rápidos.
 
+> **Antes de abrir Power Apps Studio:** crea la app desde tu Solution para que quede dentro de ella: **Solutions** > tu Solution > **New** > **App** > **Canvas app**, y elige el formato (teléfono o tableta) ([Learn](https://learn.microsoft.com/power-apps/maker/canvas-apps/add-app-solution)).
+
 **Paso 1: Estructura de pantallas**
 ```
-1. ScreenInicio (Home)
-   - Mis solicitudes activas (Gallery)
+1. ScreenInicio (Home)                      ← entrega mínima
+   - Mis solicitudes activas (Gallery galMisSolicitudes)
    - Botón "Nueva Solicitud"
-   - Métricas personales (Cards)
+   - Métricas personales (etiquetas)
 
-2. ScreenNuevaSolicitud
-   - Form crear solicitud
-   - Upload de archivos adjuntos
+2. ScreenNuevaSolicitud                     ← entrega mínima
+   - Form frmNueva para crear la solicitud
+   - Upload de archivos adjuntos (opcional, versión completa)
 
-3. ScreenDetalleSolicitud
+3. ScreenDetalleSolicitud                   ← versión completa (opcional)
    - Información completa de solicitud
    - Línea de tiempo de comentarios
    - Agregar nuevo comentario
 
-4. ScreenMisSolicitudes
+4. ScreenMisSolicitudes                     ← versión completa (opcional)
    - Gallery con filtros y búsqueda
    - Exportar a Excel
 ```
@@ -290,18 +326,31 @@ UpdateContext({
 })
 ```
 
-> **Choices en Power Fx:** `Estado` es una columna *Choice*; su etiqueta ("Completada") es solo para mostrar, así que se compara con la enumeración de la elección, `'Estado (Solicitudes)'.Completada`, no con el texto. Las opciones con espacios o tildes van entre comillas simples. Si el nombre de tu tabla es otro, escribe `'Estado (` en la barra de fórmulas y elige la opción que te propone.
+> **Choices en Power Fx:** `Estado` es una columna *Choice*; su etiqueta ("Completada") es solo para mostrar, así que se compara con la enumeración de la elección, `'Estado (Solicitudes)'.Completada`, no con el texto. Las opciones con espacios o tildes van entre comillas simples. Si el nombre de tu tabla es otro, escribe `'Estado (` en la barra de fórmulas y elige la opción que te propone. Si te propone dos "Estado", elige el de tus opciones (Nueva, Completada...), no el del sistema.
 
-*Gallery con búsqueda:*
+> **En la entrega mínima, en ScreenInicio:**
+> 1. Pon la fórmula de arriba en la propiedad **OnVisible** de la pantalla ScreenInicio (selecciona la pantalla en el árbol de la izquierda y elige `OnVisible` en la lista de propiedades). `OnVisible` se ejecuta cada vez que llegas a la pantalla, así que la lista se recarga al volver del formulario.
+> 2. Agrega una galería vertical, llámala `galMisSolicitudes` y en su propiedad **Items** escribe `ColMisSolicitudes`. Dentro de la galería muestra al menos el Título y el Estado.
+> 3. Si la galería sale vacía sin ningún error: el filtro solo trae filas cuyo **Solicitante** es un contacto con **tu mismo correo** y cuyo Estado no es Completada. Revisa la "Carga de datos" de la ruta mínima (tu contacto y tus 5 solicitudes).
+> 4. Métricas (también tu plan B si no tienes Power BI): agrega tres etiquetas (**Label**) y en su propiedad **Text** escribe `"Total: " & TotalSolicitudes`, `"Pendientes de aprobación: " & PendientesAprobacion` y `"En proceso: " & EnProceso`.
+> 5. Agrega un botón "Nueva Solicitud" con **OnSelect**: `NewForm(frmNueva); Navigate(ScreenNuevaSolicitud, ScreenTransition.Cover)`. `NewForm` deja el formulario listo para una solicitud nueva; hace falta porque, después de guardar, el formulario pasa a modo edición ([Learn](https://learn.microsoft.com/power-platform/power-fx/reference/function-form)).
+
+> **En la entrega mínima, en ScreenNuevaSolicitud:**
+> 1. Agrega un formulario de edición (**Edit form**), llámalo `frmNueva`, conéctalo a la tabla Solicitudes y deja visibles las columnas que creaste. En **Solicitante** elige tu propio contacto cuando pruebes.
+> 2. **Fecha Solicitud automática:** selecciona la tarjeta (*card*) de Fecha Solicitud, desbloquéala (panel de propiedades, pestaña **Advanced** > **Unlock to change properties**) y cambia su propiedad **Default** a `Coalesce(ThisItem.'Fecha Solicitud', Now())`. Así, en una solicitud nueva propone la fecha y hora actuales (`Coalesce` devuelve el primer valor que no está vacío). Lo que se guarda es la propiedad **Update** de la tarjeta, que lee el control de fecha, así que no la toques ([Learn: tarjetas](https://learn.microsoft.com/power-apps/maker/canvas-apps/working-with-cards), [Learn: Coalesce](https://learn.microsoft.com/power-platform/power-fx/reference/function-isblank-isempty)).
+> 3. Agrega un botón "Guardar" con **OnSelect**: `SubmitForm(frmNueva)`.
+> 4. En la propiedad **OnSuccess** del formulario pon la fórmula de abajo, **con la versión mínima de la navegación**.
+
+*Gallery con búsqueda* (versión completa, en **ScreenMisSolicitudes**): en esa pantalla agrega un cuadro de texto (**Text input**) llamado `txtBusqueda` y una galería vertical; en la propiedad **Items** de la galería escribe:
 ```javascript
-// ColMisSolicitudes es una Collection local — 'in' es válido aquí, no hay límite de delegación
-SortByColumns(
+// ColMisSolicitudes es una Collection local (la cargó ScreenInicio): 'in' es válido aquí, no hay límite de delegación
+Sort(
     Filter(
         ColMisSolicitudes,
         txtBusqueda.Text in Título || txtBusqueda.Text in Descripción
     ),
-    "Fecha Solicitud",
-    Descending
+    'Fecha Solicitud',
+    SortOrder.Descending
 )
 ```
 
@@ -315,22 +364,28 @@ Notify("Solicitud creada exitosamente", NotificationType.Success);
 // es el de la tabla + "id" (aquí sse_solicitudid; confírmalo en Columns de tu tabla). El flujo recibe texto.
 'Flujo Notificar Nueva Solicitud'.Run(Text(frmNueva.LastSubmit.sse_solicitudid));
 
-// Navegar a detalle
-Navigate(ScreenDetalle, ScreenTransition.Cover, {RegistroActual: frmNueva.LastSubmit})
+// Entrega mínima: volver a la pantalla de inicio (su OnVisible recarga la lista)
+Navigate(ScreenInicio, ScreenTransition.Cover)
+
+// Versión completa (cuando exista ScreenDetalleSolicitud), en lugar de la línea anterior:
+// Navigate(ScreenDetalleSolicitud, ScreenTransition.Cover, {RegistroActual: frmNueva.LastSubmit})
 ```
+
+> **El nombre del flujo en la fórmula:** `'Flujo Notificar Nueva Solicitud'` solo existe después de agregar el flujo a la app (ver el recuadro del Flujo 1 en la Fase 4). Hasta entonces la línea sale en rojo; puedes escribir primero el resto y añadirla al final. Al escribirla, teclea las primeras letras del nombre del flujo y **elige el nombre que te propone la barra de fórmulas** (IntelliSense): si tu flujo se llama distinto, usa ese nombre. El tercer argumento de `Navigate` (`{RegistroActual: ...}`) crea la variable de contexto `RegistroActual` en la pantalla de destino ([Learn](https://learn.microsoft.com/power-platform/power-fx/reference/function-updatecontext)).
 
 **Ahora diagnostica — micropráctica (5 min):** **[Diagnosticar: mi pantalla de inicio sale vacía](/practica/ip-trb-006-pantalla-de-inicio-vacia)**. Parte de un síntoma exacto —la lista vacía sin ningún error aunque hay datos— y te pide la causa y la corrección, antes de ver la solución.
 
-**Paso 3: Agregar componentes avanzados**
+**Paso 3: Agregar componentes avanzados** (versión completa: necesita la tabla Comentario y la pantalla ScreenDetalleSolicitud)
 
-*Component: Timeline de Comentarios*
+*Component: Timeline de Comentarios* (en ScreenDetalleSolicitud)
 ```javascript
-// Gallery vertical de comentarios
+// Items de una Gallery vertical de comentarios
 // La columna Lookup Solicitud se compara con el registro completo, no con un "ID"
-SortByColumns(
+// (Power Fx permite comparar una referencia de registro con un registro completo)
+Sort(
     Filter(Comentarios, Solicitud = RegistroActual),
-    "Fecha",
-    Descending
+    Fecha,
+    SortOrder.Descending
 )
 
 // Form agregar comentario
@@ -354,7 +409,11 @@ Refresh(Comentarios)
 
 > Puedes escoger esta fase como tu primera app funcional si quieres demostrar gestión operativa, vistas, formularios y proceso guiado.
 
-**Paso 1: Configurar sitemap**
+> **Antes de empezar:** crea la app desde dentro de tu Solution (**Solutions** > tu Solution > **New** > **App** y el tipo Model-driven), para que quede incluida en ella.
+>
+> **En la entrega mínima:** en el sitemap basta un área con la página **Solicitudes** (y, si quieres, Categorías); en el formulario, una sola pestaña con las columnas que creaste; y una vista. **Fecha Solicitud** se escribe a mano en el formulario: la documentación de Business Rules no ofrece una acción para poner "la fecha de hoy" ([Learn](https://learn.microsoft.com/power-apps/maker/data-platform/data-platform-create-business-rule)).
+
+**Paso 1: Configurar sitemap** (el menú de navegación de la app: áreas, grupos y páginas; [Learn](https://learn.microsoft.com/power-apps/maker/model-driven-apps/app-navigation))
 ```
 Área: Solicitudes
   Group: Gestión
@@ -363,7 +422,7 @@ Refresh(Comentarios)
     - Mis Asignaciones (vista personal)
   Group: Configuración
     - Categorías
-    - Métricas
+    - Métricas (versión completa: solo si creaste la tabla Métrica Solicitud)
 
 Área: Reportes
   Group: Dashboards
@@ -410,9 +469,10 @@ Tab 4: Timeline
 2. **Vista: Mis Asignaciones**
    ```
    Filtro: Asignado a = Current User AND Estado IN (Aprobada, En Proceso)
-   Columnas: Título, Prioridad, Estado, Fecha Requerida, Días Restantes
+   Columnas: Título, Prioridad, Estado, Fecha Requerida
    Orden: Fecha Requerida ASC (la que vence antes, primero)
    ```
+   > Una vista solo muestra columnas que existen en la tabla; no calcula "días restantes". Ordenar por Fecha Requerida ya pone arriba lo que vence antes.
    > No ordenes esta vista por Prioridad: las vistas ordenan las columnas Choice por el texto de la opción (alfabético), así que "Alta" saldría antes que "Crítica" ([Learn](https://learn.microsoft.com/power-apps/developer/data-platform/fetchxml/order-rows#choice-columns)). Si quieres ver primero lo urgente, filtra por Prioridad o añade una columna numérica que la represente, como el SLA Horas del Módulo 2.
 
 3. **Chart View: Solicitudes por Tipo**
@@ -422,14 +482,15 @@ Tab 4: Timeline
    Grouping: Tipo
    ```
 
-**Paso 4: Business Process Flow**
+**Paso 4: Business Process Flow** (versión completa; todas las columnas son de la tabla Solicitud)
 ```
 Stage 1: Creación
   - Título, Tipo, Categoría, Descripción
   
 Stage 2: Aprobación (if required)
   - Aprobador
-  - Decisión
+  - Fecha Aprobación
+  - Comentarios Aprobador
   
 Stage 3: Ejecución
   - Asignado a
@@ -465,13 +526,16 @@ Stage 4: Cierre
 > Para el entregable mínimo, implementa primero solo el Flujo 1. Los demás flujos completan la madurez del proyecto, pero no son necesarios para demostrar integración básica.
 
 > **Flujo 1 en versión mínima.** La versión de abajo usa aprobaciones y llama al Flujo 3, que la entrega mínima no tiene. Para la mínima, construye esto:
+> - **Dónde se crea:** dentro de tu Solution, para que aparezca en la evidencia: **Solutions** > tu Solution > **New** > **Automation** > **Cloud flow** ([Learn](https://learn.microsoft.com/power-automate/create-flow-solution)). Ponle exactamente el nombre `Flujo Notificar Nueva Solicitud`. Si lo creaste fuera, agrégalo después con **Add existing** > **Automation** > **Cloud flow**.
 > - **Trigger:** si elegiste Canvas, el trigger de Power Apps (V2) del conector **Power Apps** con una entrada de texto `SolicitudID`; si elegiste Model-Driven, el trigger de Dataverse **When a row is added, modified or deleted** (Change type: Added, Table: Solicitudes), igual que en la Práctica 5.1.
-> - **Get a row by ID** (Dataverse) de Solicitudes; con el trigger de Power Apps, el Row ID es `SolicitudID`.
-> - **Get a row by ID** de Contacts con el Solicitante.
-> - **Send an email (V2)** al correo del Contact con el título, el tipo y la prioridad.
+> - **Get a row by ID** (Dataverse), Table name: Solicitudes. En **Row ID** pon el identificador de la solicitud: con el trigger de Power Apps, la entrada `SolicitudID`; con el de Dataverse, el identificador de la fila que trae el trigger.
+> - **Get a row by ID**, Table name: Contacts. En **Row ID** necesitas el identificador (GUID) del contacto que es Solicitante, no su nombre: abre el contenido dinámico, busca "Solicitante" dentro de los resultados del paso anterior y elige el que corresponde al **valor o ID** del lookup (suele verse como *Solicitante (Value)*), no el que trae el nombre ([Learn](https://learn.microsoft.com/power-automate/dataverse/get-row-id)).
+> - **Send an email (V2)**: en **To** pon el **Email** del contacto (del paso anterior) y en el cuerpo el título, el tipo y la prioridad. Para que el correo te llegue a ti, ese contacto debe tener un correo real que puedas abrir: el tuyo de trabajo (ver la "Carga de datos"). Para mostrar Tipo y Prioridad, usa su etiqueta (la versión del campo con el texto, no el número).
 > - Sin condición ni aprobación. El Estado queda en "Nueva".
 >
-> La llamada desde la Canvas App es la del `OnSuccess` de la Fase 2: primero agrega el flujo a la app (panel **Power Automate** del menú de edición de la app → **Add a flow**) para que `'Flujo Notificar Nueva Solicitud'.Run(...)` exista.
+> La llamada desde la Canvas App es la del `OnSuccess` de la Fase 2: primero agrega el flujo a la app (en Power Apps Studio, menú de la app **Power Automate** > **Add a flow** y elige tu flujo) para que `'Flujo Notificar Nueva Solicitud'.Run(...)` exista ([Learn](https://learn.microsoft.com/power-apps/maker/canvas-apps/working-with-flows)). Al escribir la fórmula, usa el nombre que te propone IntelliSense.
+>
+> **Comprueba:** crea una solicitud desde la app y abre el flujo > **Run history** (historial de ejecuciones): debe aparecer una ejecución correcta con su hora, y el correo debe estar en tu bandeja.
 
 **Flujo 1: Notificar Nueva Solicitud**
 ```
@@ -481,29 +545,34 @@ Input: Solicitud ID
 Actions:
 1. Get Solicitud by ID
 2. Get Solicitante (Contact)
-3. Condition: Si requiere aprobación
+3. Get Categoría de la solicitud
+4. Condition: Si la Categoría tiene Requiere Aprobación = Sí
    YES:
      - Update Solicitud: Estado = "Pendiente Aprobación"
-     - Get Aprobador
-     - Send approval request
+       (eso dispara el Flujo 2, que pide la aprobación)
    NO:
      - Update Solicitud: Estado = "Aprobada"
-     - Llamar Flujo Asignar Solicitud
-4. Send email a Solicitante con confirmación
+       (eso dispara el Flujo 3, que la asigna)
+5. Send email a Solicitante con confirmación
 ```
 
 **Flujo 2: Procesar Aprobación**
+
+> El conector **Approvals** no tiene triggers propios del tipo "cuando se responde una aprobación": el patrón documentado es la acción **Start and wait for an approval**, que envía la aprobación y espera la respuesta dentro del mismo flujo ([Learn](https://learn.microsoft.com/connectors/approvals/)).
+
 ```
-Trigger: Approvals - When an approval is responded
-Filter: Approval type = "Solicitud"
+Trigger: Dataverse - When a row is added, modified or deleted
+  (Change type: Modified, Table: Solicitudes)
+Condition inicial: sigue solo si Estado = "Pendiente Aprobación"
 
 Actions:
-1. Get Solicitud relacionada
-2. Create registro en Aprobación table
-3. Condition: Si Outcome = "Approve"
+1. Get Aprobador (el Aprobador Default de la Categoría)
+2. Start and wait for an approval
+   (de tipo Aprobar/Rechazar, asignada al correo del Aprobador)
+3. Create registro en Aprobación table (Decisión, Fecha Decisión, Comentarios)
+4. Condition: Si Outcome = "Approve"
    YES:
-     - Update Solicitud: Estado = "Aprobada"
-     - Llamar Flujo Asignar Solicitud
+     - Update Solicitud: Estado = "Aprobada"  (dispara el Flujo 3)
      - Send email a Solicitante (aprobada)
    NO:
      - Update Solicitud: Estado = "Rechazada"
@@ -512,13 +581,14 @@ Actions:
 
 **Flujo 3: Asignar Solicitud Automáticamente**
 ```
-Trigger: When Solicitud Estado = "Aprobada"
+Trigger: Dataverse - When a row is modified (Solicitudes)
+Condition inicial: sigue solo si Estado = "Aprobada"
 
 Actions:
 1. Get Categoría de la solicitud
-2. Switch por Tipo:
-   TI: Asignar a Usuario específico o Round-robin
-   Mantenimiento: Lookup en tabla Técnicos disponibles
+2. Switch por Tipo (un camino por cada valor):
+   TI: Asignar a un usuario fijo (o, más adelante, en round-robin: por turnos)
+   Mantenimiento: Asignar a un usuario fijo del equipo de mantenimiento
    RRHH: Asignar a responsable área
    Compras: Asignar a comprador
 3. Update Solicitud: Asignado a = {Usuario}
@@ -526,99 +596,173 @@ Actions:
 5. Create task en Planner (opcional)
 ```
 
+> **Versión completa (opcional):** si quieres elegir al técnico según disponibilidad, crea antes una tabla **Técnico** (Nombre; Usuario: Lookup → User; Tipo Solicitud: Choice; Disponible: Yes/No) y en la rama Mantenimiento usa **List rows** de Técnicos con Disponible = Sí y toma el primero.
+
 **Flujo 4: Alertas de SLA y Recordatorios**
 ```
 Trigger: Recurrence (cada hora)
 
 Actions:
 1. List rows Solicitudes
-   Filter: Estado IN (Aprobada, En Proceso) AND Fecha Requerida <= DateAdd(Today(), 2, Days)
+   Filter rows (OData; Estado se filtra por el número de la opción, que ves en la columna Choice):
+   (sse_estado eq <número de Aprobada> or sse_estado eq <número de En Proceso>)
+     and sse_fecharequerida le @{addDays(utcNow(), 2)}
 2. Apply to each:
-   - Condition: Si Fecha Requerida < Today() (vencida)
+   - Condition: Si Fecha Requerida < utcNow() (vencida)
      YES: Send escalation email a manager
      NO: Send reminder email a Asignado
    - Add comment to Solicitud timeline
 ```
 
+> `DateAdd(Today(), ...)` es Power Fx y no funciona en Power Automate. En un flujo, el filtro **Filter rows** de **List rows** es una expresión OData (`eq`, `le`, `and`, `or`) y las fechas se calculan con expresiones de flujo: `utcNow()` devuelve la fecha y hora actuales y `addDays(fecha, 2)` le suma 2 días ([Learn: List rows](https://learn.microsoft.com/power-automate/dataverse/list-rows), [Learn: operadores de filtro](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/query/filter-rows), [Learn: funciones de expresión](https://learn.microsoft.com/azure/logic-apps/workflow-definition-language-functions-reference)).
+
 **FASE 5: Power BI Dashboard (Días 14-16)**
 
 > Si no tienes permisos de Power BI Service, crea el reporte en Power BI Desktop y guarda capturas. RLS y publicación pueden quedar documentados como siguiente iteración.
 
-**Paso 1: Conectar y modelar datos**
+> **Power BI en versión mínima** (archivo nuevo, no el `.pbix` del Módulo 6):
+> 1. Abre Power BI Desktop, crea un reporte en blanco y guárdalo enseguida como `reporte-solicitudes-sse.pbix` en tu carpeta Documentos. Vuelve a guardar (**File > Save**) al terminar cada paso.
+> 2. Conecta a Dataverse como en el Módulo 6 (Práctica 6.1, Paso 2) y en el **Navigator** marca tu tabla de solicitudes (nombre interno parecido a `sse_solicitud`) y, si quieres el filtro por categoría, `sse_categoriasolicitud`. Selecciona **Transform Data**.
+> 3. En Power Query renombra la consulta de solicitudes como `Solicitudes` (y la de categorías como `Categorías`). Con **Home > Choose columns** deja solo las columnas que vas a usar y renómbralas (doble clic en el encabezado):
+>
+>     | Columna original (aprox.) | Nombre nuevo |
+>     |---|---|
+>     | `sse_titulo` | Título |
+>     | `sse_estadoname` | Estado |
+>     | `sse_prioridadname` | Prioridad |
+>     | `sse_tiponame` | Tipo |
+>     | `sse_fechasolicitud` | Fecha Solicitud |
+>     | `sse_categoria` | Categoría ID |
+>
+>     Igual que en el Módulo 6, cada Choice llega en dos columnas: el número (`sse_estado`) y la etiqueta (`sse_estadoname`); usa la que termina en `name`. Los nombres exactos dependen de cómo creaste las columnas: confírmalos en Power Apps (Tables > tu tabla > Columns). Cuidado con el **Estado** del sistema (`statecode` / `statecodename`): no es el tuyo.
+> 4. **Close & Apply**. Crea la medida `Total Solicitudes = COUNTROWS(Solicitudes)` y dos visuales: un **Clustered column chart** con `Estado` en **X-axis** y `Total Solicitudes` en **Y-axis**, y otro igual con `Prioridad`.
+> 5. **Los estados de este proyecto son otros.** Las medidas del Módulo 6 buscan "Resuelta" y "Cerrada", que aquí no existen. Si quieres más medidas, usa estas versiones adaptadas (y revisa que las etiquetas coincidan letra por letra con las tuyas):
+>
+>     ```dax
+>     Solicitudes Abiertas =
+>     COUNTROWS(
+>         FILTER(
+>             Solicitudes,
+>             Solicitudes[Estado] IN {"Nueva", "Pendiente Aprobación", "Aprobada", "En Proceso"}
+>         )
+>     )
+>
+>     % Completadas =
+>     DIVIDE(
+>         COUNTROWS(FILTER(Solicitudes, Solicitudes[Estado] = "Completada")),
+>         COUNTROWS(Solicitudes),
+>         0
+>     )
+>     ```
+>
+>     "Rechazada" no es abierta ni completada: por eso Abiertas + Completadas puede dar menos que el total. Las medidas de días de resolución del Módulo 6 necesitan una fecha de cierre (aquí, Fecha Completada), que la entrega mínima no tiene.
+
+**Paso 1: Conectar y modelar datos** (versión completa)
 ```
-Tables:
-- Solicitudes (fact)
-- Categorías (dimension)
-- Users (dimension - from Azure AD)
-- Calendar (date dimension - crear con DAX)
+Tables (en Power BI renombra las consultas así):
+- Solicitudes  ← tabla Solicitud (fact: cada fila es una solicitud)
+- Categorías   ← tabla Categoría Solicitud (dimension)
+- Métricas     ← tabla Métrica Solicitud (una fila por solicitud, con Cumplió SLA)
+- Contacts     ← tabla Contact (dimension: el Solicitante, con su Email y Departamento)
+- Users        ← tabla User / systemuser de Dataverse (dimension: los usuarios del
+                 entorno, que vienen de Microsoft Entra ID, antes llamado Azure AD).
+                 Deja su ID (systemuserid), el nombre y Primary Email
+- Calendario   ← opcional: tabla de fechas creada con DAX: Calendario = CALENDARAUTO()
+                 (tema del Módulo 12)
 ```
 
-**Paso 2: DAX Measures**
+> Relaciones: Categorías, Contacts y Users filtran a Solicitudes (de muchos a uno, como en el Módulo 6; Users se une por la columna del Aprobador, que en Solicitudes puedes renombrar `Aprobador ID`), y Solicitudes filtra a Métricas (cada métrica tiene el Lookup a su Solicitud). Con dirección **Single**, el filtro viaja del lado "uno" al lado "muchos": por eso los cálculos sobre `Cumplió SLA` se hacen contando filas de **Métricas**, que es donde está la columna. Sobre las tablas de hechos y dimensiones: [Learn](https://learn.microsoft.com/power-bi/guidance/star-schema); sobre la tabla de fechas: [Learn](https://learn.microsoft.com/power-bi/guidance/model-date-tables).
+
+**Paso 2: DAX Measures** (versión completa; mismo estilo `COUNTROWS(FILTER(...))` del Módulo 6)
 ```dax
 Total Solicitudes = COUNTROWS(Solicitudes)
 
-Solicitudes Abiertas = 
-CALCULATE(
-    [Total Solicitudes],
-    Solicitudes[Estado] IN {"Nueva", "Pendiente Aprobación", "Aprobada", "En Proceso"}
+Solicitudes Abiertas =
+COUNTROWS(
+    FILTER(
+        Solicitudes,
+        Solicitudes[Estado] IN {"Nueva", "Pendiente Aprobación", "Aprobada", "En Proceso"}
+    )
 )
 
-% Completadas a Tiempo = 
+% Cumplieron SLA =
 DIVIDE(
-    CALCULATE([Total Solicitudes], Solicitudes[Cumplió SLA] = TRUE),
-    [Total Solicitudes],
+    COUNTROWS(FILTER(Métricas, Métricas[Cumplió SLA] = TRUE())),
+    COUNTROWS(Métricas),
     0
 )
+// Se cuentan filas de Métricas: allí está la columna Cumplió SLA.
+// En Power Query, deja Cumplió SLA con tipo True/False.
 
-Tiempo Promedio Resolución = 
+Tiempo Promedio Resolución Días =
 AVERAGE(Métricas[Tiempo Resolución Horas]) / 24
 
-Backlog = 
-CALCULATE(
-    [Total Solicitudes],
-    Solicitudes[Estado] = "En Proceso",
-    Solicitudes[Fecha Requerida] < TODAY()
+Backlog Vencido =
+COUNTROWS(
+    FILTER(
+        Solicitudes,
+        Solicitudes[Estado] = "En Proceso"
+            && NOT ISBLANK(Solicitudes[Fecha Requerida])
+            && Solicitudes[Fecha Requerida] < TODAY()
+    )
 )
 ```
 
-**Paso 3: Visualizaciones clave**
+**Paso 3: Visualizaciones clave** (versión completa)
 
 *Página 1: Executive Dashboard*
 ```
 1. KPI Cards (top row):
-   - Total Solicitudes (mes actual vs mes anterior)
-   - Tasa de Completadas a Tiempo
-   - Tiempo Promedio Resolución
-   - Backlog Crítico
+   - Total Solicitudes
+   - % Cumplieron SLA
+   - Tiempo Promedio Resolución Días
+   - Backlog Vencido
+   (Opcional, Módulo 12: Total del mes actual vs mes anterior; necesita la
+    tabla Calendario y funciones de inteligencia de tiempo)
 
-2. Column Chart: Solicitudes por Tipo y Estado (stacked)
-3. Line Chart: Trend últimos 6 meses
-4. Funnel: Solicitudes por Stage del BPF
+2. Stacked column chart: Solicitudes por Tipo y Estado
+3. Line Chart: Trend por mes (Fecha Solicitud en el eje X)
+4. Funnel: Solicitudes por Estado
 5. Table: Top 10 Categorías más solicitadas
 ```
 
 *Página 2: Análisis Operativo*
 ```
-1. Heatmap: Solicitudes por Día de Semana y Hora
-2. Box Plot: Distribución tiempo resolución por Tipo
+1. Matrix con formato condicional (efecto "mapa de calor"): Tipo en filas,
+   Prioridad en columnas y Total Solicitudes en valores, con
+   Conditional formatting > Background color
+2. Clustered column chart: Tiempo Promedio Resolución Días por Tipo
 3. Scatter: Costo Estimado vs Costo Real (identificar desviaciones)
 4. Matrix: Solicitantes vs Tipos (pivot)
 ```
 
-**Paso 4: Configurar Row-Level Security**
-```dax
-Role: Departamento
-Filter: Solicitudes[Solicitante Departamento] = USERNAME()
+> Power BI no trae de fábrica un visual "Heatmap" ni "Box Plot": existen como visuales personalizados de AppSource. El efecto de mapa de calor se logra con formato condicional en una tabla o matriz ([Learn: visuales](https://learn.microsoft.com/power-bi/visuals/power-bi-visualizations-overview), [Learn: formato condicional](https://learn.microsoft.com/power-bi/create-reports/desktop-conditional-table-formatting)).
 
-Role: Managers
-Filter: Solicitudes[Aprobador Email] = USERPRINCIPALNAME()
+**Paso 4: Configurar Row-Level Security** (versión completa; mismo patrón que el Módulo 6, Práctica 6.5, Paso 5)
+```dax
+Role: Solicitante        (tabla Contacts)
+[Email] = USERPRINCIPALNAME()
+// Cada persona ve solo las solicitudes donde ella es el Solicitante:
+// el filtro baja de Contacts a Solicitudes por la relación.
+
+Role: Aprobador          (tabla Users)
+[Primary Email] = USERPRINCIPALNAME()
+// Usa la relación Users (Aprobador ID) → Solicitudes.
+
+Role: Departamento Finanzas   (tabla Contacts)
+[Departamento] = "Finanzas"
+// Filtro fijo: un departamento se compara con un texto, nunca con un correo.
 ```
+
+> `USERPRINCIPALNAME()` devuelve el nombre de inicio de sesión (UPN), que no siempre es igual al correo; confírmalo antes de usar estas reglas. RLS solo se aplica a quienes tienen rol **Viewer** en el workspace ([Learn](https://learn.microsoft.com/fabric/security/service-admin-row-level-security)).
 
 **FASE 6: Seguridad y Testing (Días 17-19)**
 
 > No necesitas muchos usuarios reales para aprender el patrón. Con 2-3 usuarios de prueba, o una matriz documentada si tu tenant no permite crearlos, ya puedes demostrar criterio de seguridad.
 
 **Paso 1: Configurar Security Roles**
+
+> **Cómo leer los roles de abajo:** cada línea es tabla: privilegio (nivel de acceso). Los privilegios son Create, Read, Write, Delete, Append, Append to, Assign y Share; los niveles son **User** (los registros que la persona posee o le compartieron), **Business Unit** (los de su unidad de negocio) y **Organization** (todos) ([Learn](https://learn.microsoft.com/power-platform/admin/security-roles-privileges)). Un rol da permisos **por tabla, no por columna**: para que alguien pueda editar solo algunas columnas se usan **perfiles de seguridad de columna** (*column security profiles*), como se explica después del rol Ejecutor.
 
 *Role: Solicitante*
 ```
@@ -630,18 +774,20 @@ Aprobación: Read (User)
 
 *Role: Aprobador*
 ```
-Solicitud: Read (Business Unit), Write (Business Unit - solo Estado, Comentarios Aprobador)
+Solicitud: Read (Business Unit), Write (Business Unit)
 Aprobación: Create, Read, Write, Delete (Business Unit)
 Todos los roles de Solicitante
 ```
 
 *Role: Ejecutor*
 ```
-Solicitud: Read (Organization), Write (Organization - solo Estado, Asignado a, Comentarios)
+Solicitud: Read (Organization), Write (Organization)
 Comentario: Create, Read (Organization)
 Métrica: Create, Read, Write (Organization)
 Todos los roles de Solicitante
 ```
+
+> **Limitar columnas (versión completa, opcional):** si quieres que el Aprobador solo pueda cambiar **Comentarios Aprobador** y el Ejecutor solo **Comentarios Cierre** o **Costo Real**, activa **Enable column security** en esas columnas (Advanced options de la columna) y crea **column security profiles** en el Power Platform admin center (entorno > **Settings** > **Users + permissions** > **Column security profiles**), dando Read/Update a cada perfil. Ojo: las columnas Lookup (como **Asignado a**), la columna principal y las del sistema no se pueden proteger así, y la protección no aplica a quien tiene el rol System Administrator ([Learn](https://learn.microsoft.com/power-platform/admin/field-level-security)).
 
 *Role: Administrador*
 ```
@@ -653,14 +799,14 @@ Configuración de solución
 
 | Escenario | Pasos | Resultado Esperado |
 |-----------|-------|-------------------|
-| Crear solicitud simple | Usuario crea solicitud tipo TI que no requiere aprobación | Solicitud en estado "Aprobada", asignada automáticamente |
-| Crear solicitud con aprobación | Usuario crea solicitud tipo Compras > $1000 | Solicitud en "Pendiente Aprobación", aprobador recibe email |
-| Aprobar solicitud | Aprobador aprueba desde email | Solicitud pasa a "Aprobada", ejecutor asignado y notificado |
+| Crear solicitud simple | Usuario crea solicitud de una Categoría con Requiere Aprobación = No | Solicitud en estado "Aprobada", asignada automáticamente |
+| Crear solicitud con aprobación | Usuario crea solicitud de una Categoría con Requiere Aprobación = Sí (por ejemplo, Compras) | Solicitud en "Pendiente Aprobación", aprobador recibe la aprobación |
+| Aprobar solicitud | Aprobador aprueba desde el correo o desde Approvals | Solicitud pasa a "Aprobada", ejecutor asignado y notificado |
 | Rechazar solicitud | Aprobador rechaza con comentarios | Estado "Rechazada", solicitante notificado con razones |
 | Agregar comentarios | Solicitante y ejecutor intercambian comentarios | Timeline actualizado en tiempo real en ambas apps |
 | Completar solicitud | Ejecutor marca como completada | Estado "Completada", métrica calculada, dashboard actualizado |
 | SLA vencido | Solicitud no completada antes de fecha requerida | Email escalación a manager, alerta en dashboard |
-| Ver dashboard | Manager accede a Power BI | Solo ve solicitudes de su departamento (RLS) |
+| Ver dashboard | Usuario con el rol RLS Departamento Finanzas abre el reporte | Solo ve solicitudes de solicitantes de Finanzas (RLS) |
 
 **Paso 3: Testing multi-role**
 
@@ -786,6 +932,8 @@ Esta vez no te digo las tablas ni los pasos: aplica lo que construiste a un nego
 
 ### 🧪 Criterios de Validación Final
 
+> Estos criterios son de la **entrega completa**. Si vas por la mínima, tu criterio de cierre es la sección "Evidencia mínima de cierre" de abajo (6 evidencias).
+
 **Funcional:**
 
 - [ ] 5 tablas en Dataverse con relaciones correctas
@@ -828,7 +976,7 @@ ningún criterio en 0. Nivel profesional/excelencia: ≥85/100.
 - Captura del modelo de datos con relaciones principales.
 - Captura de la app elegida funcionando con registros reales.
 - Captura del flujo con una ejecución exitosa en Run history.
-- Captura del reporte/dashboard o, si no se pudo publicar, del `.pbix` abierto en Power BI Desktop.
+- Captura del reporte/dashboard o, si no se pudo publicar, del `.pbix` abierto en Power BI Desktop (sin Power BI: el dashboard o la vista con gráfico de la Model-Driven, o las etiquetas de métricas de la Canvas).
 - Breve README del proyecto: problema, alcance, arquitectura, decisiones de seguridad y próximos pasos.
 
 ---
@@ -888,7 +1036,7 @@ Has completado el **Nivel 1: Básico** del Plan Maestro. Ahora puedes:
 
 ### 📊 Estadísticas del Nivel
 
-- **Tiempo invertido en todo el Nivel 1** (los 8 módulos con su práctica, no solo este proyecto): 240-360 horas, estimación del plan, no medida con alumnos. Solo la construcción de este proyecto son 8-16 horas
+- **Tiempo invertido en todo el Nivel 1** (los 8 módulos con su práctica, no solo este proyecto): 240-360 horas, estimación del plan, no medida con alumnos. Solo la construcción de este proyecto: unas 7-12 horas la entrega mínima y 35-50 horas la completa (también estimación)
 - **Módulos completados**: 8
 - **Ejercicios prácticos**: 30+
 - **Proyecto integrado**: 1 completo
@@ -919,14 +1067,17 @@ Has completado el **Nivel 1: Básico** del Plan Maestro. Ahora puedes:
 
 **Documentación Oficial**:
 
-- [Power Platform Documentation](https://docs.microsoft.com/power-platform/)
-- [Power Apps Formula Reference](https://docs.microsoft.com/powerapps/maker/canvas-apps/formula-reference)
-- [DAX Function Reference](https://dax.guide/)
+- [Power Platform Documentation](https://learn.microsoft.com/power-platform/)
+- [Power Fx Formula Reference](https://learn.microsoft.com/power-platform/power-fx/formula-reference-overview)
+- [DAX Function Reference](https://learn.microsoft.com/dax/dax-function-reference)
+
+**Referencias de la comunidad (no oficiales de Microsoft)**:
+
+- [DAX Guide](https://dax.guide/): referencia de DAX mantenida por la comunidad; útil, pero la fuente oficial es Microsoft Learn.
 
 **Comunidades**:
 
-- [Power Platform Community](https://powerusers.microsoft.com/)
-- [Power Apps Community Forums](https://powerusers.microsoft.com/t5/Power-Apps-Community/ct-p/PowerApps1)
+- Power Platform Community: los foros de la comunidad de Power Apps, Power Automate y Power BI (búscalos por ese nombre).
 - Reddit: r/PowerApps, r/PowerBI
 
 **Canales YouTube**:
@@ -954,6 +1105,6 @@ Estás listo para construir soluciones funcionales de Power Platform que aporten
 
 ---
 
-*Última actualización: Mayo 2026*  
+*Última verificación contra Microsoft Learn: noviembre 2026*  
 *Versión: 1.0.0*  
 *Autor: Plan Maestro Power Platform*

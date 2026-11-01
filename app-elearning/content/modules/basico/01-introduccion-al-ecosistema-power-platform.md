@@ -4,6 +4,7 @@ title: "Introducción al Ecosistema Power Platform"
 level: "basico"
 certification: "PL-900"
 estimatedMinutes: 20
+practiceMinutes: 90
 slug: "introduccion-al-ecosistema-power-platform"
 lastVerified: "2026-11"
 ---
@@ -53,6 +54,21 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 | **Tenant** | La organización completa en Microsoft 365/Power Platform a la que perteneces — puede tener varios ambientes adentro. |
 | **Solución (Solution)** | El contenedor donde empaquetas tablas, apps y flujos para poder moverlos entre ambientes de forma ordenada. |
 | **Publisher** | El "sello" con tu prefijo (ej. `sit_`) que identifica que una tabla o columna es tuya, no del sistema. |
+| **Power Apps** | La herramienta para crear apps de negocio. |
+| **Power Automate** | La herramienta para crear flujos: tareas que se hacen solas (por ejemplo, enviar un correo cuando llega una solicitud). |
+| **Power BI** | La herramienta para hacer reportes y tableros con gráficos. Se abre en https://app.powerbi.com. |
+| **Copilot Studio** | La herramienta para crear agentes: asistentes de chat que responden preguntas o hacen tareas. |
+| **Power Fx** | El lenguaje de fórmulas de Power Apps. Se parece a las fórmulas de Excel. |
+| **Canvas App** | Una app que diseñas pantalla por pantalla, como un lienzo en blanco. |
+| **Model-Driven App** | Una app que Power Apps arma sola a partir de tus tablas de Dataverse (listas y formularios). |
+| **Trial (prueba)** | Una versión gratis por tiempo limitado. Al terminar, se deshabilita o pide pago. |
+| **Licencia por usuario** | El permiso de uso que se paga por cada persona que usa el producto. |
+| **Region** | El país o zona donde Microsoft guarda los datos de tu ambiente. |
+| **Security group** | Una lista de personas de tu organización. Si se asigna a un ambiente, solo esas personas pueden entrar. |
+| **Ambiente Developer administrado / no administrado** | *Administrado* (managed) = tu organización le aplica sus reglas de control (Managed Environments). *No administrado* (unmanaged) = sin esas reglas. Desde el 15 de noviembre de 2026 solo se crean Developer administrados. Ojo: en el Módulo 2 verás *managed/unmanaged* para las **soluciones**, y ahí significa otra cosa (si la solución se puede editar o no). |
+| **API** | La "puerta" por la que un programa lee o escribe datos en otro, sin usar la pantalla. |
+| **ALM** | *Application Lifecycle Management*: la forma ordenada de llevar lo que construyes de desarrollo a pruebas y luego a producción. |
+| **CoE** | *Center of Excellence*: el equipo y las herramientas con que una empresa controla y apoya el uso de Power Platform. |
 
 ### 📖 Conceptos Clave (esenciales para hoy)
 - **Arquitectura de Power Platform**: Componentes principales y su interrelación
@@ -67,27 +83,6 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 
 > **Cómo está organizado este módulo:** en vez de leer todo y practicar al final, alternas. Cada bloque tiene una idea corta, una práctica de pocos minutos y un dato real de tu propio ambiente para guardar. Cierras con un reto en el que ya no te digo los pasos. Si tu ambiente aún no está listo, haz las microprácticas y el reto de transferencia (no necesitan tenant) y vuelve a las partes con ambiente cuando esté activo.
 
-## 🟢 Mini Lab 01 — Primera victoria en 5 minutos
-
-> Haz esto apenas puedas entrar a [make.powerapps.com](https://make.powerapps.com). No necesitas crear una app todavía.
-
-**Qué vas a construir:** no vas a construir una solución completa; vas a crear tu primera evidencia real dentro del ambiente.
-
-1. Entra a [make.powerapps.com](https://make.powerapps.com).
-2. En el menú lateral, abre **Tables**.
-3. Busca y abre la tabla estándar **Account**.
-4. En la pestaña de datos, crea 1 registro de prueba:
-   - Account Name: `Cliente Demo 01`
-   - Phone: `3000000000`
-   - City: `Bogotá`
-5. Guarda el registro y confirma que aparece en la lista.
-
-**Resultado esperado:** ves una fila nueva en la tabla Account. Esa fila es tu primera interacción real con Dataverse.
-
-**Evidencia para guardar:** captura de la tabla Account mostrando `Cliente Demo 01` y el nombre del ambiente en la parte superior.
-
-**Si no puedes entrar todavía:** guarda una nota con el mensaje de bloqueo del tenant/trial. Eso también sirve como evidencia de avance; el setup depende de Microsoft, no solo de ti.
-
 ## 🧩 Microlección 1 — Tu tenant y tu ambiente: dónde vas a trabajar
 
 **¿Qué vas a aprender?** Qué es un ambiente, por qué trabajas en uno propio y no en el que ya existe, y cómo ver cuál tienes activo.
@@ -100,23 +95,31 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 
 **Práctica real en tu entorno (20-60 min; el tiempo depende de Microsoft, no de ti):**
 
-> **⚠️ Cambio de Microsoft en curso (verificado en Microsoft Learn, octubre de 2026):** desde el **15 de noviembre de 2026** registrarse en el Power Apps Developer Plan ya no crea un ambiente y ya no se pueden crear ambientes Developer "no administrados" por ninguna vía (tampoco desde el Admin Center); solo quedan los Developer *administrados*. Los ambientes Developer no administrados que ya existan se suspenden desde el **15 de diciembre de 2026** y se borran desde el **15 de enero de 2027**. Si haces este setup antes del 15 de noviembre, sirve para este módulo, pero exporta tus soluciones antes del 15 de diciembre si quieres conservarlas. Detalle: [Cambios importantes en Power Platform](https://learn.microsoft.com/power-platform/important-changes-coming).
+> **⚠️ Cambio de Microsoft en curso (verificado en Microsoft Learn, octubre de 2026):** desde el **15 de noviembre de 2026** registrarse en el Power Apps Developer Plan ya no crea un ambiente y ya no se pueden crear ambientes Developer "no administrados" por ninguna vía (tampoco desde el Admin Center); solo quedan los Developer *administrados*. Los ambientes Developer no administrados que ya existan se suspenden desde el **15 de diciembre de 2026** y se borran desde el **15 de enero de 2027**. Si haces este setup antes del 15 de noviembre, sirve para este módulo, pero exporta tus soluciones antes del 15 de diciembre si quieres conservarlas (más abajo te digo cómo). Detalle: [Cambios importantes en Power Platform](https://learn.microsoft.com/power-platform/important-changes-coming).
 
 **Paso 1 — Consigue una cuenta de trabajo o estudio (no sirve tu correo personal).**
 
 Microsoft no permite registrarse con una cuenta personal como Gmail, Outlook.com o Hotmail. Elige el caso que se parezca al tuyo:
 
-- **Tienes correo de empresa o universidad:** pruébalo en el Paso 2. Si ves un mensaje de que el registro de ambientes de desarrollo está bloqueado, tu organización bloqueó el registro y debes ir al caso siguiente.
+- **Tienes correo de empresa o universidad:** úsalo. Pasa al "Paso 1B" para saber si tienes permisos de administración.
 - **No tienes ninguna cuenta de trabajo:** crea tu propio tenant de prueba:
   1. Abre https://www.microsoft.com/microsoft-365/try.
   2. Elige un plan de empresa con prueba gratuita de un mes.
-  3. Sigue el asistente. Al terminar tendrás una cuenta del tipo `tunombre@tuorganizacion.onmicrosoft.com` y serás el **administrador** de ese tenant.
+  3. Sigue el asistente. Al terminar tendrás una cuenta del tipo `tunombre@tuorganizacion.onmicrosoft.com` y tendrás permisos de **administración** de ese tenant.
   4. Anota el usuario, la contraseña (en un lugar seguro, no en la evidencia) y la **fecha en que termina la prueba**.
+  5. **Cuidado con el cobro:** el registro puede pedirte una tarjeta. Al terminar el mes, la mayoría de las pruebas pasan solas a una suscripción de pago. Si no quieres pagar, antes de que termine entra al Microsoft 365 admin center (https://admin.microsoft.com), ve a **Billing** > **Your products** y desactiva **recurring billing** (la renovación automática).
 - **Tienes una suscripción de Visual Studio Professional o Enterprise:** puedes pedir el sandbox del [Microsoft 365 Developer Program](https://developer.microsoft.com/microsoft-365/dev-program). Hoy solo califican esos suscriptores, algunos partners y clientes de soporte Premier o Unified. La mayoría de los principiantes no califica, así que no lo uses como primera opción.
 
-**Paso 2 — Crea tu ambiente Developer.**
+**Paso 1B — ¿Tienes permisos de administración en tu tenant?**
 
-*Opción A, si eres administrador de tu tenant (el caso del tenant de prueba propio):*
+Los tienes si tu cuenta tiene uno de estos roles: **Global Administrator**, **Power Platform Administrator** o **Dynamics 365 Administrator**.
+
+- Si creaste tu propio tenant de prueba en el Paso 1, sí los tienes: sigue la **Opción A**.
+- Si usas el correo de tu empresa o universidad, casi seguro **no** los tienes. Si no lo sabes, pregúntale a tu equipo de TI: "¿Tengo alguno de estos roles?". Si la respuesta es no, sigue la **Opción B** (solo hasta el 15 de noviembre de 2026) o la **Opción C**.
+
+**Paso 2 — Consigue tu ambiente Developer.**
+
+*Opción A, si tienes permisos de administración en tu tenant (el caso del tenant de prueba propio):*
 
 1. Abre https://admin.powerplatform.microsoft.com e inicia sesión con tu cuenta de trabajo.
 2. En el panel de la izquierda haz clic en **Manage** y luego en **Environments**.
@@ -125,28 +128,49 @@ Microsoft no permite registrarse con una cuenta personal como Gmail, Outlook.com
    - **Name:** `DEV-TuNombre`.
    - **Region:** la más cercana a ti.
    - **Type:** **Developer**. Si esa opción no aparece, elige **Trial** (ver "Si algo sale distinto" abajo).
-   - **Add a Dataverse data store:** **Yes**. Sin esto no hay tablas, y no se puede deshacer después.
+   - **Add a Dataverse data store:** en los ambientes Developer viene apagado. Cámbialo a **Yes**: sin Dataverse no hay tablas. Si eliges **Yes**, ya no se puede quitar. Si lo dejas en **No**, se puede agregar después, pero este curso lo necesita desde hoy.
    - Deja el resto como viene y haz clic en **Next**.
 5. Completa la segunda pantalla:
-   - **Language:** Spanish.
+   - **Language:** **English (United States)**. ¿Por qué? El curso usa los nombres de los botones en inglés, y así evitas tener dos columnas llamadas "Estado" en el Módulo 2. El idioma base del ambiente ya no se puede cambiar después.
    - **URL:** una corta y única, por ejemplo `dev-tunombre`.
    - **Currency:** la de tu país.
    - **Enable Dynamics 365 apps:** **No**. Exige una licencia de Dynamics 365, y en un ambiente Developer no se pueden instalar apps de Dynamics 365.
-   - **Security group:** es obligatorio. Para dejar el acceso abierto (lo normal en tu tenant de prueba personal) elige **None**.
+   - **Security group:** si aparece, elige **None** (acceso abierto, lo normal en tu tenant de prueba personal). En un ambiente **Trial** es obligatorio. En uno **Developer** puede no aparecer, porque los ambientes Developer no admiten security groups.
    - Haz clic en **Save**.
 6. Espera a que tu ambiente aparezca en la lista como **Ready**. Suele tardar unos minutos y a veces más.
 
-*Opción B, si no eres administrador (correo de empresa o universidad), solo antes del 15 de noviembre de 2026:*
+> **Desde el 15 de noviembre de 2026:** el ambiente Developer que crees será *administrado* y solo puedes tener uno. Para crear y previsualizar apps y flujos no necesitas licencia premium. Para **ejecutarlos** sí. En tu tenant de prueba, activa la prueba gratuita de Power Apps en https://apps.powerapps.com/trial.
+
+*Opción B, si no tienes permisos de administración (correo de empresa o universidad), solo antes del 15 de noviembre de 2026:*
 
 1. Abre https://aka.ms/PowerAppsDevPlan e inicia sesión con tu cuenta de trabajo.
 2. Completa el registro. Al terminar te lleva a make.powerapps.com.
 3. Espera unos minutos: tu ambiente se llamará **"Tu Nombre's environment"**. Puedes ver el avance en el Admin Center.
+4. **Planifica desde hoy:** este ambiente es *no administrado*. Se suspende desde el **15 de diciembre de 2026** y se borra desde el **15 de enero de 2027**. Pídele ya a TI lo de la Opción C y exporta tus soluciones antes del 15 de diciembre (ver "Cómo guardar una copia de tu trabajo", abajo).
+
+*Opción C, si no tienes permisos de administración y ya pasó el 15 de noviembre de 2026 (o tu empresa bloqueó el registro):*
+
+Tú no puedes crear el ambiente: lo crea un administrador. Envía a tu equipo de TI un mensaje como este:
+
+> "Hola. Estoy haciendo un curso de Power Platform y necesito un ambiente para practicar. ¿Me pueden dar un **ambiente Developer administrado** (managed developer environment) **con Dataverse**, solo para mí? Se puede crear desde el Power Platform admin center o con *environment routing*. Si no es posible, ¿me pueden dar un ambiente **Sandbox** o **Trial** con Dataverse? En ese ambiente necesito el rol **System Customizer** o **System Administrator**. Para ejecutar apps y flujos en un Developer administrado también necesito una licencia premium de Power Apps (o una de prueba)."
+
+Mientras esperas, sigue leyendo y haz las microprácticas: no necesitan ambiente.
 
 **Paso 3 — Confirma que estás dentro de tu ambiente.**
 
 1. Abre https://make.powerapps.com.
 2. Arriba a la derecha está el selector de ambiente. Haz clic en él y elige el ambiente que creaste.
-3. Comprueba que en el menú de la izquierda aparece **Tables**. Si aparece, tu ambiente tiene Dataverse y ya puedes hacer el Mini Lab 01.
+3. En el menú de la izquierda abre **Tables** (si no lo ves, está en **More**). Si ves una lista de tablas (Account, Contact…), tu ambiente tiene Dataverse y ya puedes hacer el Mini Lab 01. Si en su lugar ves un botón **Create a database**, el ambiente no tiene Dataverse: en tu ambiente propio puedes crearla con ese botón; si no, pídeselo a TI.
+
+> **Si los botones aparecen en español:** la página usa el idioma de tu navegador. Este curso usa los nombres en inglés. Para cambiarlos, abre el engranaje (**Settings**, arriba a la derecha) > **Power Apps settings** y cambia el idioma, o cambia el idioma de tu navegador. Si prefieres dejarlo en español, busca el botón equivalente en la misma zona de la pantalla.
+
+**Cómo guardar una copia de tu trabajo (exportar una solución).** Úsalo antes de que tu ambiente se suspenda o caduque. Lo harás desde el Módulo 2, cuando tengas tu propia solución:
+
+1. En make.powerapps.com abre **Solutions** (si no lo ves, está en **More**).
+2. Selecciona tu solución y, en la barra de comandos, **Export**. (La *Default Solution* no se puede exportar: por eso en el Módulo 2 creas una propia.)
+3. En el panel **Before you export**, selecciona **Publish all changes** y luego **Next**.
+4. En **Export as** elige **Unmanaged** (así podrás seguir editándola en el ambiente nuevo) y selecciona **Export**.
+5. Espera unos minutos. El archivo `.zip` se descarga en tu carpeta de descargas. Guárdalo.
 
 **Paso 4 (opcional, solo cuando llegues a los módulos de Dynamics 365) — Trial de Dynamics 365.**
 
@@ -157,7 +181,8 @@ El trial de Dynamics 365 Customer Service **no se añade a tu ambiente Developer
 | Lo que ves | Qué significa | Qué hacer |
 |---|---|---|
 | En **Type** no aparece **Developer** | Desde el 15 de noviembre de 2026 Microsoft solo permite ambientes Developer *administrados*, y tu tenant puede no tener esa opción | Elige **Trial**. Para crear un ambiente Trial tu usuario (aunque seas administrador) necesita una licencia de prueba por usuario, por ejemplo la de Power Apps: si el Admin Center te la pide, actívala primero en https://apps.powerapps.com/trial. Funciona igual para este módulo, pero dura 30 días: puedes ampliarlo una sola vez otros 30 días en su última semana, y después se deshabilita y se borra. Anota la fecha de fin y exporta tus soluciones antes |
-| Un mensaje de que el registro de ambientes de desarrollo está bloqueado | Tu organización bloqueó el registro | Pide un ambiente de desarrollo a tu administrador o crea tu tenant de prueba propio (Paso 1) |
+| No tienes permisos de administración: no puedes entrar al Admin Center, no ves **New** o te sale un error de permisos | Solo los administradores (Global, Power Platform o Dynamics 365 Administrator) pueden crear ambientes si tu organización lo restringió | Envía a TI el mensaje de la **Opción C**. Mientras tanto, haz las microprácticas |
+| Un mensaje de que el registro de ambientes de desarrollo está bloqueado | Tu organización bloqueó el registro | Envía a TI el mensaje de la **Opción C**, o crea tu tenant de prueba propio (Paso 1) |
 | El portal del Microsoft 365 Developer Program te dice que no calificas | No tienes una suscripción que califique | Usa el tenant de prueba de Microsoft 365 del Paso 1 |
 | Tu ambiente desaparece o queda deshabilitado tras semanas sin usarlo | Los ambientes Developer sin actividad se deshabilitan solos (30 días sin actividad en los no administrados, 60 en los administrados) y se borran 15 días después | Solo abrirlo no cuenta como actividad: abre una app, ejecuta un flujo o crea/edita algo al menos una vez cada pocas semanas, y exporta tus soluciones |
 
@@ -173,6 +198,31 @@ El trial de Dynamics 365 Customer Service **no se añade a tu ambiente Developer
 
 ---
 
+## 🟢 Mini Lab 01 — Primera victoria en 5 minutos
+
+> **Hazlo cuando termines el Paso 3 de la Microlección 1** (necesitas tu ambiente con Dataverse). No necesitas crear una app todavía.
+
+**Qué vas a construir:** no vas a construir una solución completa; vas a crear tu primera evidencia real dentro del ambiente.
+
+1. Entra a [make.powerapps.com](https://make.powerapps.com) con tu ambiente elegido arriba a la derecha.
+2. En el menú lateral, abre **Tables** (si no lo ves, está en **More**).
+3. Elige la pestaña **All** (todas las tablas), busca la tabla estándar **Account** y ábrela. Se abre la página de la tabla, que llamamos su *hub*.
+4. En la barra de comandos selecciona **Edit**. Se abre el diseñador de la tabla, con las filas abajo. (Si ves **View data**, también sirve: abre el editor de filas.)
+5. Agrega una fila nueva con el botón para crear filas (suele llamarse **New row**; si no, elige el más parecido) y escribe:
+   - **Account Name:** `Cliente Demo 01`
+   - **Main Phone:** `3000000000`
+   - **Address 1: City:** `Bogotá`
+   - Si no ves **Main Phone** o **Address 1: City** en la cuadrícula, usa la opción para mostrar más columnas (por ejemplo, **+17 more**) y márcalas.
+6. Guarda si te lo pide y confirma que la fila aparece en la lista.
+
+**Resultado esperado:** ves una fila nueva en la tabla Account. Esa fila es tu primera interacción real con Dataverse.
+
+**Evidencia para guardar:** captura de la tabla Account mostrando `Cliente Demo 01` y el nombre del ambiente en la parte superior.
+
+**Si no puedes entrar todavía:** guarda una nota con el mensaje de bloqueo del tenant/trial. Eso también sirve como evidencia de avance; el setup depende de Microsoft, no solo de ti.
+
+---
+
 ## 🧩 Microlección 2 — Qué pieza resuelve qué
 
 **¿Qué vas a aprender?** Reconocer las piezas del ecosistema (Power Apps, Power Automate, Power BI, Copilot Studio y Dataverse) y qué dolor resuelve cada una.
@@ -185,12 +235,15 @@ El trial de Dynamics 365 Customer Service **no se añade a tu ambiente Developer
 
 **Práctica real en tu entorno (10 min):**
 
-1. Acceder a https://make.powerapps.com
-2. Navegar cada sección del menú lateral:
-    - Home, Create, Learn, Apps, Tables, Flows, Copilots (Copilot Studio), AI Hub
-
-3. Identificar conectores disponibles (Connectors > Premium vs Standard)
-4. Revisar plantillas predefinidas (Templates)
+1. Entra a https://make.powerapps.com.
+2. Recorre el menú lateral. Normalmente verás:
+    - **Home** (inicio), **Create** (crear apps), **Learn** (ayuda y cursos), **Plans** (planes), **Apps** (tus apps) y **AI hub** (modelos de IA).
+    - Tus páginas más usadas, por ejemplo **Tables**, **Connections** o **Flows**. Power Apps fija solas las tres que más usas.
+    - **More**: aquí está todo lo demás. Desde **More** puedes fijar (pin) una página en el menú. Si no encuentras algo, búscalo aquí.
+    - **Power Platform**: te lleva a los otros productos, como Power BI, Power Automate y el Power Platform admin center.
+3. Mira los conectores: abre **Connections** (si no está en el menú, búscalo en **More**) y selecciona **New connection**. Verás la lista de conectores disponibles. No crees ninguna conexión todavía.
+4. Para saber si un conector es Standard o Premium, búscalo en la [lista oficial de conectores](https://learn.microsoft.com/connectors/connector-reference/): los Premium llevan el ícono **Premium**. También hay una lista solo de [Standard](https://learn.microsoft.com/connectors/connector-reference/connector-reference-standard-connectors) y otra solo de [Premium](https://learn.microsoft.com/connectors/connector-reference/connector-reference-premium-connectors).
+5. Abre **Create** y mira las formas que te ofrece para empezar una app.
 
 **Evidencia a reportar:**
 
@@ -198,7 +251,7 @@ El trial de Dynamics 365 Customer Service **no se añade a tu ambiente Developer
 |---|---|
 | Tres secciones del menú lateral que reconociste y, con tus palabras, para qué sirve cada una | ___ |
 | Un conector Standard y uno Premium que encontraste (nombre exacto de cada uno) | ___ |
-| Una plantilla (Template) que podría servir para un caso de tu vida real | ___ |
+| Una forma de empezar una app que viste en **Create** y para qué caso de tu vida real serviría | ___ |
 
 ---
 
@@ -208,21 +261,23 @@ El trial de Dynamics 365 Customer Service **no se añade a tu ambiente Developer
 
 **¿Por qué existe esto?** Las apps, los flujos y los reportes leen y escriben en las mismas tablas. Si entiendes una tabla desde el primer día, no construyes sobre datos desordenados que luego cuesta arreglar.
 
-**Ejemplo pequeño:** la tabla `Account` tiene columnas (Account Name, Phone, City), cada fila es un registro (un cliente concreto) y se relaciona con otras tablas, como `Contact`.
+**Ejemplo pequeño:** la tabla `Account` tiene columnas (Account Name, Main Phone, Address 1: City), cada fila es un registro (un cliente concreto) y se relaciona con otras tablas, como `Contact`.
 
 **Práctica real en tu entorno (15 min):**
 
-1. Ir a "Tables" en el menú
-2. Explorar tablas estándar: Account, Contact, Email, Task
-3. Abrir tabla "Account" y revisar:
-    - Columns (columnas/campos)
-    - Relationships (relaciones)
-    - Business rules
-    - Views (vistas)
-
-4. Crear datos de prueba manualmente (5 registros de Account)
+1. Abre **Tables** en el menú y elige la pestaña **All**.
+2. Busca y mira las tablas estándar Account, Contact, Email y Task.
+3. Abre la tabla **Account**. En su hub revisa estas zonas:
+    - **Columns** (columnas o campos)
+    - **Relationships** (relaciones con otras tablas)
+    - **Business rules** (reglas de negocio)
+    - **Views** (vistas: listas guardadas de registros)
+4. Crea registros de prueba a mano, igual que en el Mini Lab 01 (**Edit** o **View data**, y una fila nueva por registro), hasta tener 5 registros de Account.
+5. Para contar tus registros, mira las filas en el editor de filas. Son pocas, así que caben en una sola pantalla.
 
 > Si ya completaste el Mini Lab 01, aquí solo agrega 4 registros más. Tu objetivo total del módulo son 5 registros de prueba, no 5 registros adicionales.
+>
+> En **Relationships** verás muchas relaciones del sistema. Para la evidencia, elige una cualquiera y anota con qué tabla conecta.
 
 **Evidencia a reportar:**
 
@@ -240,8 +295,8 @@ Esta vez no te digo qué hacer paso a paso: aplica lo que viste a un caso que co
 
 > **Requerimiento:** elige un proceso real que conozcas (tu trabajo, tu estudio, un negocio familiar) donde hoy se usen Excel, papel o mensajes sueltos. Arma tu mapa: qué datos guardarías y dónde, quién los capturaría y desde qué, qué debería pasar solo y qué reporte necesitaría quien decide.
 > **Criterios de aceptación:** (1) nombras al menos 4 piezas del ecosistema y cada una resuelve un dolor concreto de tu proceso, no las listas por listar; (2) dices de dónde sale cada dato, con una sola tabla como fuente; (3) indicas si alguien de fuera de la organización necesitaría usarlo y, si es así, qué pieza cambiaría.
-> **Restricciones:** no necesitas tenant ni construir nada; es un mapa en papel o en una nota. Power Pages es la pieza para usuarios externos (el detalle está en el Suplemento 1B, opcional).
-> **Ejemplo resuelto (otro negocio, solo para que veas la forma):** una panadería que anota los pedidos en un cuaderno. Datos: una tabla Pedidos, que es la única fuente. Captura: una app en el mostrador para tomar pedidos. Automatización: un flujo que avisa al obrador cuando entra un pedido. Reporte: pedidos por día. Usuario externo: no; si los clientes pidieran desde su casa, la pieza sería Power Pages. Tu mapa debe tener esa forma, con tu propio proceso.
+> **Restricciones:** no necesitas tenant ni construir nada; es un mapa en papel o en una nota. Power Pages es la pieza para usuarios externos (personas de fuera de tu organización). Con sus **permisos de tabla** (table permissions) decides qué datos ve cada usuario externo: por ejemplo, que cada cliente vea solo sus propios pedidos. El detalle está en el Suplemento 1B, opcional.
+> **Ejemplo resuelto (otro negocio, solo para que veas la forma):** una panadería que anota los pedidos en un cuaderno. Datos: una tabla Pedidos, que es la única fuente. Captura: una app en el mostrador para tomar pedidos. Automatización: un flujo que avisa a la cocina cuando entra un pedido. Reporte: pedidos por día. Usuario externo: no; si los clientes pidieran desde su casa, la pieza sería Power Pages. Tu mapa debe tener esa forma, con tu propio proceso.
 
 **Ahora haz algo — transferencia guiada (8 min):** **[Transferir: ahora los dueños reservan por su cuenta](/practica/ip-dv-006-transferir-reserva-externa)**. Retoma el caso de la clínica de la micropráctica anterior pero cambia un requisito, y te pide decidir qué cambia y qué se conserva.
 
@@ -313,7 +368,7 @@ Esta vez no te digo qué hacer paso a paso: aplica lo que viste a un caso que co
 
 > **📌 Opcional — puedes volver a esta sección después de completar tu primera práctica.** No es necesario para avanzar al Módulo 2.
 >
-> **Relevancia PL-900:** ~15% del examen. Capacidad de agregar IA a apps y flujos desde la interfaz, sin entrenar modelos desde cero.
+> **Relevancia PL-900:** la guía de estudio vigente (desde el 24 de julio de 2026) pide describir el valor de la IA generativa en Power Platform y las soluciones con IA en Power Apps. AI Builder no tiene un porcentaje propio en el examen. Lo que aprendes aquí: agregar IA a apps y flujos desde la interfaz, sin entrenar modelos desde cero.
 
 #### 🎯 Objetivo
 Comprender qué es AI Builder, sus modelos preconstruidos y cómo integrar IA en apps y flujos sin código de machine learning.
@@ -326,8 +381,8 @@ Comprender qué es AI Builder, sus modelos preconstruidos y cómo integrar IA en
   - *Sentiment Analysis:* analiza el sentimiento de texto como positivo, negativo o neutral
   - *Language Detection:* identifica el idioma de un texto
 - **Modelos personalizados (Custom models):** se entrenan con datos propios del negocio; requieren conjunto de datos etiquetados. Incluyen *Object Detection* (detecta objetos en imágenes, ej. inventario, inspección de calidad), que requiere entrenamiento propio y no viene listo para usar sin datos.
-- **AI Builder Credits:** moneda de consumo para inferencias de IA. Los créditos se incluyen en licencias Premium de Power Platform o se adquieren por separado
-- **Componente AI en Canvas Apps:** control nativo que añade funcionalidad de IA (ej. `AI.BusinessCard.Scanner`) directamente en formularios
+- **Créditos para AI Builder:** cada uso de un modelo de IA consume créditos. Microsoft está retirando los *AI Builder credits*: desde el 1 de noviembre de 2026 las licencias premium nuevas ya no los traen (los que ya tienes se respetan hasta que termine tu contrato). Las funciones de AI Builder siguen funcionando: cuando no hay AI Builder credits, consumen **Copilot Credits**. Si no hay ninguno de los dos, la función se bloquea.
+- **Componente AI en Canvas Apps:** controles que agregan IA a una app sin código, por ejemplo el **Business card reader** (lector de tarjetas de presentación). Al insertarlo recibe un nombre como `BusinessCardReader1`, y lees lo que extrajo con fórmulas como `BusinessCardReader1.FullName`.
 - **Acción AI en Power Automate:** paso "AI Builder" que llama un modelo dentro de un flujo automatizado
 
 #### 👨‍💻 Actividad Práctica: Procesar una tarjeta de presentación con AI Builder
@@ -353,13 +408,13 @@ Comprender qué es AI Builder, sus modelos preconstruidos y cómo integrar IA en
 Una empresa de logística recibe cientos de albaranes en papel diariamente. Con AI Builder + Power Automate: el proceso manual de transcripción se reemplaza por un flujo que digitaliza el documento al adjuntarlo en Teams, extrae número de guía, proveedor, cantidad y estado, y crea automáticamente el registro en Dataverse — reduciendo el tiempo de registro de 5 minutos a 15 segundos por documento.
 
 #### ✅ Buenas Prácticas
-- Usar modelos prebuilt antes de entrenar modelos custom — 70% de casos de negocio se resuelven sin entrenamiento propio
-- Para Document Processing custom: recolectar mínimo 5 documentos de muestra por variante de formulario
-- Monitorear el consumo de AI Builder Credits desde Power Platform Admin Center
+- Prueba primero un modelo preconstruido (prebuilt). Entrena un modelo personalizado (custom) solo si el preconstruido no te sirve.
+- Para Document Processing custom: sube al menos 5 documentos de muestra por colección (una colección = documentos con el mismo diseño). Si son escaneos de mala calidad, usa más.
+- Revisa el consumo de créditos en el Power Platform admin center.
 
 #### ⚠️ Errores Comunes
-- **Error**: Usar AI Builder en ambientes sin licencias Premium asignadas → los créditos de prueba se agotan sin aviso
-  - **Solución**: Verificar créditos disponibles en Admin Center antes de producción
+- **Error**: Usar AI Builder sin revisar qué créditos tiene el ambiente → cuando no quedan AI Builder credits ni Copilot Credits, la función deja de funcionar.
+  - **Solución**: Revisa los créditos disponibles en el Admin Center antes de llevar algo a producción.
 - **Error**: Esperar que Document Processing funcione en documentos no estructurados (cartas libres)
   - **Solución**: Document Processing es para formularios estructurados repetibles; para texto libre usar Category classification o Azure AI Services
 
@@ -374,7 +429,7 @@ Una empresa de logística recibe cientos de albaranes en papel diariamente. Con 
 
 > **📌 Opcional — puedes volver a esta sección después de completar tu primera práctica.** No es necesario para avanzar al Módulo 2.
 >
-> **Relevancia PL-900:** ~10% del examen. Diferencia entre Power Pages y otras herramientas; casos de uso de portales externos.
+> **Relevancia PL-900:** la guía de estudio vigente (desde el 24 de julio de 2026) solo pide describir el valor de Power Pages para crear sitios web, dentro del dominio "valor de negocio" (5–10% del examen, compartido con las demás piezas). Lo que aprendes aquí: la diferencia entre Power Pages y otras herramientas, y los casos de uso de sitios para usuarios externos.
 
 #### 🎯 Objetivo
 Comprender qué es Power Pages, sus capacidades principales y cuándo usarlo en lugar de Canvas Apps o Model-Driven Apps.
@@ -382,12 +437,12 @@ Comprender qué es Power Pages, sus capacidades principales y cuándo usarlo en 
 #### 📖 Conceptos Clave
 - **Power Pages** (antes *Power Apps portals*): plataforma para crear sitios web públicos o con autenticación externa que interactúan con datos de Dataverse
 - **Usuarios externos:** personas fuera de la organización (clientes, socios, ciudadanos) que acceden al sitio sin licencia de Microsoft 365
-- **Table permissions:** controlan qué tablas de Dataverse puede leer/escribir cada rol de portal (Contact, Basic User, Anonymous User)
-- **Webpages, Webforms, Webviews:** componentes de diseño del portal — páginas, formularios y vistas de tabla accesibles desde el sitio
-- **Portal Studio / Pages Studio:** editor visual de bajo código para diseñar el sitio, similar al editor de Canvas Apps pero orientado a web externa
-- **Authentication providers:** Power Pages soporta Azure AD, Azure AD B2C, LinkedIn, Google, Facebook y proveedor local
+- **Web roles (roles web) y table permissions:** un rol web es un conjunto de permisos del sitio. Los *table permissions* deciden qué tablas de Dataverse puede leer o escribir cada rol web. Hay un rol para los usuarios que iniciaron sesión (**Authenticated Users**) y otro para los visitantes sin sesión (**Anonymous Users**). Cada usuario externo que se registra queda guardado como un registro de **Contact**. Ojo: **Basic User** no es un rol web; es un rol de seguridad de Dataverse.
+- **Páginas, formularios y listas:** las piezas del sitio son las páginas, los **basic forms** (formularios básicos: crean o editan un registro), los **multistep forms** (formularios de varios pasos) y las **lists** (listas: muestran registros a partir de una vista de Dataverse).
+- **Design studio:** el editor visual de bajo código donde diseñas el sitio, parecido al editor de Canvas Apps pero para una web externa.
+- **Proveedores de identidad (cómo inician sesión los usuarios):** Microsoft Entra ID (el nuevo nombre de Azure AD), Microsoft Entra External ID, Azure AD B2C, cuenta Microsoft, LinkedIn, Facebook, Google, Twitter y la cuenta local (no recomendada). Azure AD B2C dejó de venderse a clientes nuevos el 1 de mayo de 2025: si empiezas hoy, Microsoft recomienda Microsoft Entra External ID.
 - **Liquid templates:** lenguaje de plantillas basado en Liquid (Open Source) para lógica condicional dentro de páginas del portal
-- **Capacidades:** 1 sitio por ambiente, con su propia URL (`*.powerappsportals.com` o dominio custom)
+- **Capacidades:** un ambiente puede tener varios sitios (hasta 50 con las plantillas más comunes), cada uno con su propia URL o un dominio personalizado.
 
 #### 💼 Caso Real de Negocio
 Un municipio necesita que los ciudadanos puedan registrar solicitudes de permisos de construcción en línea, consultar el estado de su trámite y adjuntar documentos, sin tener que ir en persona. Con Power Pages se crea un portal público donde:

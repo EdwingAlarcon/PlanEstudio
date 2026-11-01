@@ -4,6 +4,7 @@ title: "Dataverse - Fundamentos y Modelado Básico"
 level: "basico"
 certification: "PL-900"
 estimatedMinutes: 15
+practiceMinutes: 120
 slug: "dataverse-fundamentos-y-modelado-basico"
 lastVerified: "2026-11"
 ---
@@ -34,10 +35,23 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 - **Ownership (propiedad del registro)**: quién es "dueño" de cada registro. *User or team* = cada registro pertenece a una persona o equipo (útil para "mis solicitudes"). *Organization* = el registro es de todos, sin dueño individual (útil para catálogos como Categoría).
 - **Required (obligatoria)**: una columna marcada como *Business required* no deja guardar el registro si está vacía.
 - **Solution (solución)**: la "carpeta" donde guardas todo lo que construyes para poder moverlo a otro ambiente. *Unmanaged* (no administrada) = la que editas en tu ambiente de desarrollo; *Managed* (administrada) = la que se instala en pruebas o producción y no se edita directamente.
-- **Publisher (editor)**: el "sello" con tu prefijo (ej. `sit`) que Dataverse antepone al nombre interno de cada tabla y columna que creas (como `sit_...`). Créalo antes de la primera tabla: el nombre interno de cada elemento ya no se puede cambiar después de creado.
+- **Publisher (editor)**: el "sello" con tu prefijo que Dataverse antepone al nombre interno de cada tabla y columna que creas. El prefijo se escribe `sit`, sin guion bajo; Dataverse agrega el guion bajo, y por eso los nombres internos se ven como `sit_...`. Créalo antes de la primera tabla: el nombre interno de cada elemento ya no se puede cambiar después de creado.
 - **Auditing (auditoría)**: registro de quién cambió qué dato y cuándo.
 - **Business Rule (regla de negocio)**: lógica sin código del tipo "si pasa esto, haz aquello" (poner un valor, mostrar un error). Su **Scope** (alcance) decide dónde se aplica: *Entity* = en los formularios y también en el servidor, aunque el dato llegue por otra vía (ej. una API o un flujo); *All Forms* = solo en los formularios de las apps model-driven.
 - **View (vista)**: una lista guardada de registros con filtro, columnas y orden definidos (por ejemplo, "solo las solicitudes abiertas").
+
+**Otras palabras que aparecen en este módulo:**
+
+| Palabra | En una frase |
+|---|---|
+| **Model-driven (app)** | Un tipo de app que Power Apps arma sola a partir de tus tablas, con listas (vistas) y formularios. La construirás en el Lab 04. |
+| **Formulario** | La pantalla donde ves y editas un solo registro, campo por campo. |
+| **Hub (de la tabla)** | La página que se abre al hacer clic en una tabla. Desde ahí llegas a sus columnas, relaciones, vistas, reglas y datos. |
+| **Cardinalidad** | Cuántos registros de una tabla se pueden unir con cuántos de la otra: uno a muchos, muchos a uno o muchos a muchos. |
+| **Autonumber** | Un tipo de columna de texto que Dataverse llena solo con un número o código nuevo cada vez que se crea un registro. |
+| **Calculated column (columna calculada)** | Una columna cuyo valor sale de una fórmula sobre otras columnas, en vez de escribirse a mano. |
+| **Publish / Publish all customizations** | Algunos cambios (tablas, formularios, vistas) se guardan "sin publicar". Publicar los hace visibles en las apps y hace que entren en la exportación de la solución. **Publish all customizations** publica todo lo pendiente de una vez. |
+| **Normalizada (tabla)** | Una tabla que guarda cada dato una sola vez, en su lugar, en vez de repetirlo en muchas filas. |
 
 ### 👨‍💻 Actividades Prácticas
 
@@ -80,7 +94,7 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 
 **Paso 1 — Crear la tabla "Solicitud TI"**
 
-1. Dentro de tu solución, selecciona **New** en la barra de comandos y elige la opción para crear una tabla. Si te ofrece varias formas, elige **Set advanced properties** (también puedes ir a **Tables** > **New table** > **Set advanced properties**). Se abre el panel **New table**.
+1. Dentro de tu solución, en la barra de comandos selecciona **New** > **Table** > **Table (advanced properties)**. (Fuera de una solución el camino es **Tables** > **New table** > **Set advanced properties**; aquí usa el de la solución.) Se abre el panel **New table**.
 2. Rellena:
     - **Display name**: `Solicitud TI`
     - **Plural display name**: `Solicitudes TI`
@@ -126,6 +140,8 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 8. **Save** (o **Done** y luego **Save Table**).
 
 > **No te confundas:** toda tabla trae de fábrica una columna del sistema llamada **Status** (con los valores Active/Inactive). Tu columna **Estado** es otra distinta, creada por ti. En los filtros y reglas de este módulo usa siempre **Estado**.
+>
+> **Si tu ambiente está en español**, esa columna del sistema se llama **Estado** (y su compañera **Status Reason** se llama **Razón para el estado**). Tendrás dos columnas "Estado": la tuya se distingue porque la creaste tú (sus opciones son Nueva, En Proceso, Resuelta y Cerrada; la del sistema solo tiene los dos valores de activo e inactivo). En las fórmulas, IntelliSense (la lista de sugerencias mientras escribes) te mostrará las dos: elige la tuya.
 
 *Si después quieres cambiar Required en una columna ya creada:* en **Columns** selecciona la columna, cambia **Required** y guarda. El nombre interno y el **Data type** ya no se pueden cambiar una vez guardada la columna (salvo convertir texto en autonumber).
 
@@ -171,7 +187,7 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 1. **Relación One-to-Many: Contact → Solicitudes TI**
     - Una persona puede tener múltiples solicitudes.
     - Ya la creaste en la Práctica 2.1 (Paso 3) al crear la Lookup `Solicitante`.
-    - Para verla desde el otro lado: en tu solución abre **Tables** > **Contact** > zona **Relationships**. Desde Contact aparece como **One-to-many**; desde Solicitud TI, como **Many-to-one**. Es la misma relación vista desde cada tabla.
+    - Para verla desde el otro lado: **Contact** no está dentro de tu solución, así que ábrela desde fuera. En el menú de la izquierda selecciona **Tables**, elige la pestaña **All** (todas las tablas), abre **Contact** y entra a la zona **Relationships**. Verás muchas relaciones del sistema: busca en la lista la que va hacia **Solicitud TI**. Desde Contact aparece como **One-to-many**; desde Solicitud TI, como **Many-to-one**. Es la misma relación vista desde cada tabla.
 
 2. **Crear tabla "Categoría Detallada"**
     1. En tu solución, crea una tabla nueva igual que en la Práctica 2.1 (Paso 1), con **Display name** `Categoría Detallada` y **Plural display name** `Categorías Detalladas`.
@@ -187,7 +203,7 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 |---|---|
 | La relación que creaste: tabla "uno", tabla "muchos" y en qué tabla vive el Lookup | ___ |
 | Cardinalidad que Dataverse muestra para esa relación (One-to-Many, Many-to-One o Many-to-Many) | ___ |
-| Cuántas relaciones aparecen en la pestaña Relationships de la tabla Solicitud TI | ___ |
+| Tus tres relaciones personalizadas en la zona Relationships de Solicitud TI (hacia Contact, User y Categoría Detallada). Verás muchas más, del sistema (propietario, creado por…): no las cuentes | ___ |
 
 ---
 
@@ -205,6 +221,8 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 
 **Cómo funciona el diseñador (léelo una vez):** una regla es un diagrama. Empieza siempre con una **Condition** (condición, el rombo). A su derecha hay dos salidas: la del **✓** (se cumple) y la del **✕** (no se cumple). Las piezas se arrastran desde la pestaña **Components** (a la derecha) hasta un signo **+** del diagrama, y cada pieza se configura en la pestaña **Properties**, terminando siempre con **Apply**.
 
+**Los operadores se eligen de una lista en inglés.** Los que usarás: **Equals** ("es igual a"), **Does not equal** ("no es igual a"), **Contains data** ("tiene un valor"), **Does not contain data** ("está vacío") y, en las vistas, **Equals current user** ("es el usuario que está usando la app"). Si en tu lista el nombre es un poco distinto, elige el que signifique lo mismo.
+
 *Regla 1: Auto-asignación de SLA según prioridad*
 
 1. Abre tu solución > **Tables** > **Solicitud TI** > zona **Business rules**.
@@ -213,9 +231,9 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 4. **Scope**: elige **Entity**. Así la regla se aplica en los formularios y también en el servidor, es decir, también cuando cargues los registros de prueba directamente en la tabla (Práctica 2.5), donde todavía no hay formulario de app.
 5. Selecciona la condición del diagrama. En **Properties**:
     - **Display Name**: `Prioridad es Crítica`
-    - En la regla de la condición: **Source** = **Entity**, **Field** = **Prioridad**, operador de igualdad ("es igual a"), **Type** = **Value** y, como valor, **Crítica**.
+    - En la regla de la condición: **Source** = **Entity**, **Field** = **Prioridad**, **Operator** = **Equals** ("es igual a"), **Type** = **Value** y, como valor, **Crítica**.
     - Selecciona **Apply**.
-6. En **Components**, arrastra **Set Field Value** hasta el **+** junto al **✓** de esa condición. Selecciónalo y en **Properties** elige la columna **SLA Horas** y el valor `4`. **Apply**.
+6. En **Components**, arrastra **Set Field Value** hasta el **+** junto al **✓** de esa condición. Selecciónalo y en **Properties** elige la columna **SLA Horas**; si te pide **Type**, elige **Value**; escribe el valor `4`. **Apply**.
 7. Arrastra una nueva **Condition** hasta el **+** junto al **✕** de la primera condición (significa "si no es Crítica, revisa esto otro"). Configúrala como en el paso 5 pero con **Display Name** `Prioridad es Alta` y valor **Alta**. **Apply**.
 8. En su **✓**, arrastra **Set Field Value**: **SLA Horas** = `8`. **Apply**.
 9. Repite los pasos 7 y 8 colgando cada condición nueva del **✕** de la anterior:
@@ -230,11 +248,11 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 1. En **Business rules** de **Solicitud TI**, selecciona **Add business rule**. Nombre: `Exigir fecha de resolución`. **Scope**: **Entity** (por el mismo motivo que la Regla 1).
 2. Selecciona la condición. En **Properties**:
     - **Display Name**: `Resuelta sin fecha`
-    - Primera regla: **Source** = **Entity**, **Field** = **Estado**, operador de igualdad, **Type** = **Value**, valor **Resuelta**.
+    - Primera regla: **Source** = **Entity**, **Field** = **Estado** (la tuya), **Operator** = **Equals**, **Type** = **Value**, valor **Resuelta**.
     - Selecciona **New** (en Properties) para añadir una segunda regla y, en **Rule Logic**, déjala como **AND** ("y además").
-    - Segunda regla: **Field** = **Fecha Resolución** y el operador que significa "no contiene datos" (está vacía). Este operador no necesita valor.
+    - Segunda regla: **Field** = **Fecha Resolución**, **Operator** = **Does not contain data** ("está vacía"). Este operador no necesita valor.
     - Selecciona **Apply**.
-3. En **Components**, arrastra **Show Error Message** hasta el **+** junto al **✓**. En **Properties**: **Field** = **Fecha Resolución**, **Message** = `Debe ingresar fecha de resolución`. **Apply**.
+3. En **Components**, arrastra **Show Error Message** hasta el **+** junto al **✓**. En **Properties**: **Field** = **Fecha Resolución**, **Message** = `Debe ingresar la fecha de resolución antes de resolver la solicitud.` (es el mismo texto que usa el Lab 02). **Apply**.
 4. **Validate**, **Save** y, como en la Regla 1, actívala desde la lista con **Activate**.
 
 > **Para tener en cuenta:**
@@ -251,8 +269,8 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
     2. Selecciona **New view**. En **View name** escribe `Mis Solicitudes Abiertas` y selecciona **Create**. Se abre el diseñador de vistas.
     3. **Columnas:** selecciona **+ View column** y añade, una a una: Categoría, Prioridad, SLA Horas, Estado y Fecha Solicitud. `Título de Solicitud` suele venir ya puesta; si no, añádela también. Para reordenar, arrastra la columna o usa **Move Right** / **Move Left** en el menú de su encabezado.
     4. **Filtro:** en el panel de propiedades de la vista (a la derecha) selecciona **Edit filters**. En la ventana que se abre:
-        - Selecciona **Add** > **Add row**: columna **Estado**, el operador "no es igual a" y el valor **Cerrada**.
-        - Selecciona **Add** > **Add row** otra vez: columna **Owner** (Propietario), con el operador que compara con "el usuario actual".
+        - Selecciona **Add** > **Add row**: columna **Estado**, operador **Does not equal** ("no es igual a") y el valor **Cerrada**.
+        - Selecciona **Add** > **Add row** otra vez: columna **Owner** (Propietario), operador **Equals current user** ("es el usuario actual"). Este operador no necesita valor.
         - Las dos filas quedan unidas con **And** (es el valor por defecto). Selecciona **OK**.
         - Nota: el Solicitante es un Contact, no un usuario de la app, por eso esta vista filtra por el propietario del registro (quien lo creó).
     5. **Orden:** selecciona el encabezado de **SLA Horas** y elige **Sort ascending**. Luego, manteniendo pulsada la tecla **Shift**, selecciona el encabezado de **Fecha Solicitud** y elige **Sort descending** (con Shift se añade un segundo criterio sin borrar el primero). También puedes hacerlo en el panel de propiedades con **Sort by** y **Then sort by**.
@@ -262,18 +280,18 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
     1. En **Views**, **New view** > `Solicitudes Pendientes Atención` > **Create**.
     2. **Columnas** con **+ View column**: Solicitante, Categoría, Prioridad, SLA Horas y Asignado a (además de `Título de Solicitud`).
     3. **Filtro "Estado = Nueva OR Estado = En Proceso":** **Edit filters** y luego:
-        - **Add** > **Add row**: **Estado**, operador de igualdad, valor **Nueva**.
-        - **Add** > **Add row**: **Estado**, operador de igualdad, valor **En Proceso**.
+        - **Add** > **Add row**: **Estado**, operador **Equals**, valor **Nueva**.
+        - **Add** > **Add row**: **Estado**, operador **Equals**, valor **En Proceso**.
         - Marca la casilla de las dos filas, selecciona **More commands** (**...**) en una de ellas y elige **Make group**.
         - En el grupo, cambia el operador de **And** a **Or** ("una u otra"). Selecciona **OK**.
     4. **Orden:** en el encabezado de **SLA Horas**, **Sort ascending**.
     5. **Save and publish**.
 
-> Si un cambio no aparece donde esperas, abre tu solución y selecciona **Publish all customizations** en la barra de comandos. Puede tardar un poco: no cierres la página.
+> Si un cambio no aparece donde esperas, abre tu solución y selecciona **Publish all customizations** en la barra de comandos. Así publicas todos los cambios que quedaron "sin publicar". Puede tardar un poco: no cierres la página.
 
 ##### Práctica 2.5: Insertar Datos de Prueba
 
-Crea manualmente 10 registros de Solicitudes: abre la tabla **Solicitud TI** y usa su zona de datos (en el hub de la tabla, el área de columnas y datos, o **Edit** para abrir el diseñador de la tabla, donde puedes añadir filas). Pon variedad de:
+Crea manualmente 10 registros de Solicitudes. Abre la tabla **Solicitud TI** y, en la barra de comandos, selecciona **Edit** (abre el diseñador de la tabla, donde puedes añadir filas) o **View data** (abre el editor de filas). Agrega una fila nueva por cada solicitud. Pon variedad de:
 
 - Categorías diferentes
 - Prioridades mixtas (incluye al menos una **Crítica** para probar la Regla 1)
@@ -284,9 +302,9 @@ Crea manualmente 10 registros de Solicitudes: abre la tabla **Solicitud TI** y u
 
 | Campo | Tu valor |
 |---|---|
-| Regla 1: valor que quedó en "SLA Horas" al crear una solicitud con Prioridad = Crítica | ___ |
-| Regla 2: texto exacto del mensaje de error al marcar Resuelta sin Fecha Resolución | ___ |
-| Cuántos registros ves en la vista "Solicitudes Pendientes Atención" frente al total de registros | ___ |
+| Regla 1: valor que quedó en "SLA Horas" al guardar una solicitud con Prioridad = Crítica (si la ves vacía, recarga la página: el valor lo pone el servidor al guardar) | ___ |
+| Regla 2: el mensaje de error que viste al guardar una Resuelta sin Fecha Resolución (puede verse con otro formato, pero debe incluir el texto de tu regla) | ___ |
+| Cuántas de tus 10 solicitudes tienen Estado = Nueva o En Proceso (cuéntalas en el editor de filas). Son las que mostrará la vista "Solicitudes Pendientes Atención"; la verás funcionando dentro de una app en el Lab 04 | ___ |
 
 ---
 
@@ -344,7 +362,7 @@ Esta vez no te digo qué tablas ni columnas crear: aplica lo que viste a un nego
 **Performance**:
 
 - Limitar columnas en vistas (máx 8-10 visibles)
-- Usar índices en columnas de filtrado frecuente
+- No necesitas crear índices a mano: Dataverse crea y ajusta sus índices solo. Lo que sí está en tu mano es filtrar por columnas cortas (Choice, número, fecha, Lookup) y evitar filtrar por columnas de texto largo (Multiline Text), que no se pueden indexar bien
 - Evitar Multiline text en primary column
 
 **Documentación**:
@@ -356,7 +374,7 @@ Esta vez no te digo qué tablas ni columnas crear: aplica lo que viste a un nego
 
 1. **Lo que ves:** tienes el mismo dato guardado en dos columnas (por ejemplo Full Name y además First + Last Name) y a veces no coinciden.
     - **Causa probable:** columnas redundantes.
-    - **Qué hacer:** usa Calculated Columns o concatena en Power Apps, en vez de guardar el dato dos veces.
+    - **Qué hacer:** usa una columna calculada (Calculated column, ver el glosario de arriba) o une los textos en Power Apps, en vez de guardar el dato dos veces.
 
 2. **Lo que ves:** tus tablas y columnas aparecen con un prefijo que no es el tuyo (por ejemplo uno aleatorio como `cr8a3_`, el del publisher por defecto) o no puedes agruparlas con tu solución.
     - **Causa probable:** no definiste el Publisher antes de crear tablas, o las creaste fuera de tu solución.
@@ -393,7 +411,7 @@ Esta vez no te digo qué tablas ni columnas crear: aplica lo que viste a un nego
 
 Completa ahora: **[Lab 02 · Dataverse — Modelado de Datos para un Sistema de Solicitudes](/labs/lab-02-dataverse-modelo-datos)**
 
-**Por qué:** el Lab 02 construye el mismo modelo de este módulo (mismos nombres visibles, las mismas dos Business Rules y vistas ordenadas por SLA Horas), en la solución que usan los labs siguientes. Cambian dos cosas, y el lab explica por qué: la categoría es una tabla catálogo con Lookup en lugar de la columna Choice, y los nombres internos (`sit_solicitud`, `sit_estado`…) se escriben a mano porque los Labs 03, 04, 05 y 09 los usan. Si haces el lab en el mismo ambiente, el lab te dice cómo renombrar tu tabla de este módulo para no confundirlas.
+**Por qué:** el Lab 02 construye el mismo modelo de este módulo (mismos nombres visibles y las mismas dos Business Rules, con el mismo mensaje de error), en la solución que usan los labs siguientes. Sus vistas son parecidas: una se ordena por SLA Horas y las otras por fecha. Cambian tres cosas, y el lab explica por qué: la categoría es una tabla catálogo con Lookup en lugar de la columna Choice (con nombres un poco más largos: "Red y Conectividad" en vez de "Red", "Accesos y Seguridad" en vez de "Accesos"); el lab tiene dos datos de SLA distintos (el SLA de referencia de cada categoría y el **SLA Horas** de cada solicitud, que pone la Regla 1 y es el que se usa para ordenar); y los nombres internos (`sit_solicitud`, `sit_estado`…) se escriben a mano porque los Labs 03, 04, 05 y 09 los usan. Si haces el lab en el mismo ambiente, el lab te dice cómo renombrar tu tabla de este módulo para no confundirlas.
 
 **Qué evidencia guardar del lab:** capturas de las tablas dentro de tu solución, de las 2 Business Rules activas, de las 3 vistas publicadas, y el conteo de registros de prueba (5 Categoría + 10 Solicitud TI).
 

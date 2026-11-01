@@ -4,6 +4,7 @@ title: "Power Apps Model-Driven - Apps Basadas en Datos"
 level: "basico"
 certification: "PL-900"
 estimatedMinutes: 20
+practiceMinutes: 120
 slug: "power-apps-model-driven-apps-basadas-en-datos"
 lastVerified: "2026-11"
 ---
@@ -22,12 +23,14 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 
 ### 📖 Conceptos Clave
 - **Arquitectura Model-Driven**: *metadata-driven* (la app se arma a partir de la definición de tus tablas, no la dibujas) y se genera casi sola.
-- **Componentes**: *Forms* (formularios), *Views* (vistas: listas filtradas), *Charts* (gráficos), *Dashboards* (tableros que juntan gráficos y listas) y *Business Process Flows* (barra de etapas que guía un proceso).
+- **Componentes**: *Forms* (formularios), *Views* (vistas: listas filtradas), *Charts* (gráficos), *Dashboards* (tableros que juntan gráficos y listas) y *Business Process Flows* (**BPF**: una barra de etapas, arriba del formulario, que guía a la persona paso a paso por un proceso).
+- **Tenant**: el "espacio" de tu organización en Microsoft 365, con sus usuarios y licencias. Dentro de él están tus ambientes (como tu ambiente Developer).
+- **Play**: el botón del diseñador que abre la app tal como la verán los usuarios.
 - **Site Map** (mapa del sitio): el menú de navegación de la app, organizado en áreas, grupos y páginas.
 - **Security Roles** (roles de seguridad): conjuntos de permisos que dicen qué puede hacer cada persona con cada tabla (crear, leer, editar, borrar).
 - **Forms** (formularios): *Main* (el completo), *Quick Create* (uno corto para crear rápido) y *Quick View* (muestra datos de otro registro relacionado).
 - **Quick View Forms**: mostrar datos de registros relacionados directamente en el formulario principal sin cambiar de pantalla.
-- **Subgrids** (subcuadrículas): una lista de registros relacionados (1:N o N:N) metida dentro de un formulario.
+- **Subgrids** (subcuadrículas): una lista de registros relacionados metida dentro de un formulario; por ejemplo, en la ficha de un contacto, la lista de sus solicitudes. Sirve para relaciones 1:N (uno a muchos: un contacto tiene muchas solicitudes) o N:N (muchos a muchos).
 - **UCI (Unified Client Interface)**: la interfaz moderna y común de las apps model-driven, la misma en navegador, tableta y móvil.
 - **Modern App Designer** (diseñador moderno de apps): el editor visual donde configuras páginas, tablas, formularios, vistas y navegación desde una sola pantalla. Es el que se abre por defecto; algunos pasos avanzados todavía te llevan al diseñador clásico.
 
@@ -68,25 +71,27 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 
 **Paso 2: Organizar la navegación (el antiguo "site map")**
 
-En el diseñador nuevo, las subáreas se llaman **páginas** y se ordenan en grupos y áreas.
+En el diseñador nuevo, las antiguas "subáreas" se llaman **páginas**. Se ordenan así: un **área** contiene **grupos**, y cada grupo contiene **páginas** ([Learn: navegación de la app](https://learn.microsoft.com/power-apps/maker/model-driven-apps/app-navigation)).
 
-1. **Activa las áreas** (vienen apagadas): en la barra superior, **Settings** → en el panel izquierdo, **Navigation** → activa **Enable Areas** → cierra la ventana. Si la app ya tiene varias áreas, la opción viene activada.
-2. En el panel izquierdo, haz clic en **Pages**. Arriba del árbol verás el selector de área. Cámbiale el título al área que ya existe por `Solicitudes` (en el panel de propiedades, a la derecha).
-3. Crea los grupos: haz clic en **...** junto a **Navigation** → **New group** → título `Operación`. Repite para `Configuración`.
-4. Arrastra la página **Solicitud TI** al grupo `Operación` y **Contact** a `Configuración`.
-5. Crea la segunda área: en el selector de área → **New area** → título `Reportes`, con un grupo `Análisis`. Lo dejas vacío por ahora; en el Paso 5 le pondrás el dashboard.
+> **Ojo, hay dos "Navigation" distintos:** (1) dentro de la ventana **Settings**, la sección **Navigation** solo sirve para encender las áreas; (2) en el panel **Pages**, la palabra **Navigation** es el título del árbol de menús, y junto a ella está el botón **...** para crear grupos.
+
+1. **Activa las áreas** (vienen apagadas): en la barra de comandos de arriba, **Settings** → en el panel izquierdo de esa ventana, **Navigation** → activa **Enable Areas** → cierra la ventana **Settings**. Si la app ya tiene varias áreas, la opción viene activada.
+2. En el panel izquierdo del diseñador, haz clic en **Pages**. Debajo de **Pages** aparece el **selector de área** (un menú desplegable con el nombre del área actual; si no lo ves, repite el punto 1). Selecciona el área que ya existe y, en el panel de propiedades de la derecha, cambia su **Title** por `Solicitudes`.
+3. Con el área `Solicitudes` elegida en el selector, crea los grupos: haz clic en **...** junto a **Navigation** → **New group** → en el panel de propiedades, **Title** `Operación`. Repite para `Configuración`. Cada grupo nuevo se crea dentro del área que tienes elegida en el selector.
+4. Arrastra la página **Solicitud TI** al grupo `Operación` y la página **Contact** al grupo `Configuración`.
+5. Crea la segunda área: abre el selector de área → **New area** → **Title** `Reportes`. Con `Reportes` elegida en el selector, crea su grupo igual que en el punto 3: **...** junto a **Navigation** → **New group** → **Title** `Análisis`. Lo dejas vacío por ahora; en el Paso 5 le pondrás el dashboard.
 6. Haz clic en **Save** y luego en **Publish**.
 
 Así queda:
    ```
    Área: Solicitudes
       Grupo: Operación
-         Página: Solicitudes TI (tabla)
+         Página: Solicitud TI
       Grupo: Configuración
-         Página: Contactos
+         Página: Contact
    Área: Reportes
       Grupo: Análisis
-         Página: Dashboard Solicitudes   (se añade en el Paso 5)
+         Página: Dashboard Solicitudes TI   (se añade en el Paso 5)
    ```
 
 > "Categoría" no lleva página propia: es una columna de tipo Choice dentro de Solicitud TI, no una tabla.
@@ -96,7 +101,7 @@ Así queda:
 | Campo | Tu valor |
 |---|---|
 | Nombre de la solución y prefijo del Publisher que usaste | ___ |
-| Las áreas, grupos y subáreas de tu site map tal como quedaron | ___ |
+| Las áreas, grupos y páginas de tu navegación (site map) tal como quedaron | ___ |
 | ¿La app aparece como "Publicada" o "Borrador" en la lista de apps de la solución? | ___ |
 
 ---
@@ -118,28 +123,36 @@ Así queda:
 **3.2 Formulario Main.**
 
 1. En la tabla **Solicitud TI** → **Forms** → abre el formulario **Information** (tipo *Main*).
-2. Organízalo así. Para **agregar una pestaña**: panel izquierdo **Components** → **Layout** → **1-column tab**, y cámbiale el nombre en el panel de propiedades (derecha). Para **agregar una columna**: panel izquierdo **Table columns** → arrástrala a la sección.
+2. Mira lo que ya trae: una pestaña (normalmente **General**) con una sección y algunas columnas, como **Título de Solicitud** (la columna principal) y quizá **Owner** (propietario). **No borres Título de Solicitud**: es la columna principal de la tabla. Owner puedes dejarlo donde está o moverlo a la sección Detalles.
+3. Así se hace cada cosa en el diseñador de formularios ([Learn: secciones del formulario](https://learn.microsoft.com/power-apps/maker/model-driven-apps/add-move-or-delete-sections-on-form)):
+    - **Cambiar el nombre de una pestaña o sección:** haz clic en ella y, en el panel de propiedades de la derecha, cambia su **Label**.
+    - **Agregar una sección:** haz clic en una sección que ya exista (la nueva se crea justo después) → panel izquierdo **Components** → grupo **Layout** → elige un tipo de sección (por ejemplo, de 1 columna). Luego cambia su **Label**.
+    - **Agregar una pestaña:** panel izquierdo **Components** → **Layout** → **1-column tab**, y cámbiale el **Label**. Una pestaña nueva ya trae una sección vacía.
+    - **Agregar una columna:** panel izquierdo **Table columns** → arrástrala a la sección. Para moverla, arrástrala a otra sección.
+4. Organízalo así:
      ```
      Pestaña: General
-        Sección: Información Básica
+        Sección: Información Básica   (la sección que ya existía, con otro Label)
            - Título de Solicitud
            - Categoría
            - Prioridad
            - Estado
-        Sección: Detalles
+        Sección: Detalles             (sección nueva)
            - Descripción
            - Solicitante
            - Asignado a
 
-     Pestaña: Resolución
+     Pestaña: Resolución              (pestaña nueva)
         Sección: Solución
            - Fecha Resolución
            - Notas de Resolución
 
-     Pestaña: Timeline
-        - Control Timeline (Components → Timeline). Muestra notas y adjuntos; funciona porque activaste "Enable attachments" al crear la tabla.
+     Pestaña: Timeline                (pestaña nueva)
+        - Control Timeline: Components → baja en la lista hasta Timeline → arrástralo a la sección de esta pestaña.
+          El Timeline muestra las notas y los archivos adjuntos de cada solicitud. En el Módulo 2 (Práctica 2.1, Paso 1)
+          marcaste "Enable Attachments" en la tabla, que es lo que permite añadirle notas y archivos.
      ```
-3. Haz clic en **Save and publish** (arriba a la derecha).
+5. Haz clic en **Save and publish** (arriba a la derecha) ([Learn: control Timeline](https://learn.microsoft.com/power-apps/maker/model-driven-apps/set-up-timeline-control)).
 
 **3.3 Business Rule: mostrar la resolución solo cuando corresponde.**
 
@@ -158,10 +171,11 @@ Así queda:
 
 **3.4 Formulario Quick Create.**
 
-1. Activa la opción en la tabla: abre las propiedades de la tabla **Solicitud TI** y, entre sus opciones, marca **Enable quick create forms** → **Save**.
-2. En **Forms** → **+ New form** → **Quick create form** → escribe un **Form name** → **Create**.
+1. Activa la opción en la tabla: abre la tabla **Solicitud TI**, haz clic en **Properties** (barra de comandos), despliega **Advanced options** si hace falta, marca **Enable quick create forms** → **Save**. Sin esta opción, el formulario Quick Create no se usa ([Learn: formularios Quick Create](https://learn.microsoft.com/power-apps/maker/model-driven-apps/create-edit-quick-create-forms)).
+2. En **Forms** → **New form** → **Quick create form** → escribe un **Form name** → **Create**.
 3. Desde **Table columns** arrastra solo cuatro columnas: Título de Solicitud, Categoría, Prioridad y Descripción → **Save and publish**.
-4. Para probarlo, en la app haz clic en el botón **Create** de la barra de navegación (arriba) y elige Solicitud TI: se abre un panel lateral corto en vez del formulario completo.
+4. Para probarlo, abre la app con **Play** y haz clic en el botón **Create** (o **+ New**) de la barra de navegación de arriba; elige Solicitud TI: se abre un panel lateral corto en vez del formulario completo.
+5. Si no ves ese botón: Learn documenta otro lugar donde aparece el Quick Create, el **+ New** de un campo Lookup o de una subcuadrícula que apunten a Solicitud TI. Tu app todavía no tiene ninguno, así que, si el botón no aparece, anota en la evidencia que el formulario existe y pruébalo en el Lab 04.
 
 **Paso 4: Crear las vistas y los gráficos**
 
@@ -171,22 +185,23 @@ Así queda:
 - **Orden:** selecciona el encabezado de la columna y elige el orden ascendente o descendente (según el tipo de columna verás **Sort A to Z** / **Sort Z to A** o **Sort ascending** / **Sort descending**). Para un segundo criterio, usa **Then sort by** en el panel de propiedades de la vista.
 - Termina con **Save and publish**.
 
-> **Ojo con ordenar por Prioridad:** las vistas ordenan las columnas Choice por el **texto** de la opción (alfabéticamente), no por el orden en que las creaste ([Learn: ordenar columnas Choice en FetchXML](https://learn.microsoft.com/power-apps/developer/data-platform/fetchxml/order-rows#choice-columns)). Por eso aquí se ordena por **SLA Horas**, que ya refleja la prioridad (Crítica = 4, Alta = 8, Media = 24, Baja = 48, por la regla del Módulo 2).
+> **Ojo con ordenar por Prioridad:** las vistas guardan su consulta en **FetchXML** (el formato interno, en XML, con el que Dataverse guarda las consultas de vistas y gráficos), y FetchXML ordena las columnas Choice por el **texto** de la opción (alfabéticamente), no por el orden en que las creaste ([Learn: ordenar columnas Choice en FetchXML](https://learn.microsoft.com/power-apps/developer/data-platform/fetchxml/order-rows#choice-columns)). Por eso aquí se ordena por **SLA Horas**, que ya refleja la prioridad (Crítica = 4, Alta = 8, Media = 24, Baja = 48, por la regla del Módulo 2).
 
 1. **Vista "Solicitudes Activas"**
-    - Filtro: Estado · operador "no es igual a" · Cerrada
+    - Filtro: Estado · operador **Does not equal** ("no es igual a") · Cerrada
     - Columnas: Título de Solicitud, Solicitante, Prioridad, SLA Horas, Estado, Fecha Solicitud
     - Orden: SLA Horas **ascendente** (Crítica primero), luego Fecha Solicitud **descendente** (más reciente primero)
 
 2. **Vista "Mis Asignaciones"**
-    - Filtro: Asignado a con el operador que lo compara con el **usuario actual**, **y además** Estado · "no es igual a" · Cerrada (dos filas en el mismo grupo, con **And**)
+    - Filtro: Asignado a · operador **Equals current user** ("es igual al usuario actual", es decir, a quien tenga la app abierta; si en tu lista tiene un nombre algo distinto, elige el que diga *current user*), **y además** Estado · **Does not equal** ("no es igual a") · Cerrada (dos filas en el mismo grupo, con **And**)
     - Columnas: Título de Solicitud, Categoría, Prioridad, Fecha Solicitud
     - Orden: Fecha Solicitud **ascendente** (más antigua primero)
 
-3. **Dos gráficos** (los usarás en el dashboard del Paso 5). En **Tables** → **Solicitud TI** → **Charts** (en *Data experiences*) → **New chart** se abre el diseñador de gráficos:
-    - **Gráfico "Solicitudes por Estado":** en **Column** elige Título de Solicitud, en **Aggregate** elige **Count: All**, en **Chart type** elige **Pie** → **Next**. Como categoría (eje horizontal) elige **Estado** → **Apply** → **Save** → **Publish**.
+3. **Dos gráficos** (los usarás en el dashboard del Paso 5). En tu solución → **Tables** → **Solicitud TI** → zona **Data experiences** (la parte del hub de la tabla donde están Forms, Views y Charts) → **Charts** → **New chart**. Se abre el diseñador de gráficos ([Learn: crear un gráfico del sistema](https://learn.microsoft.com/power-apps/maker/model-driven-apps/create-edit-system-chart)):
+    - **Gráfico "Solicitudes por Estado":** en **Column** elige Título de Solicitud; en **Aggregate** (cómo se resume la columna) elige **Count: All** (contar todas las filas); en **Chart type** elige **Pie** → **Next**. Como categoría (eje horizontal) elige **Estado** → **Apply** → **Save** → **Publish**.
     - **Gráfico "Solicitudes por Prioridad":** igual, pero **Chart type** **Column** y categoría **Prioridad**.
-    - El diseñador nombra el gráfico automáticamente a partir de las columnas; cámbiale el nombre a los de arriba en sus propiedades para encontrarlos luego. Si se abre el diseñador clásico, los mismos campos se llaman **Legend Entries (Series)** y **Horizontal (Category) Axis**, y se termina con **Save and Close**.
+    - **El nombre:** el diseñador nombra el gráfico automáticamente a partir de las columnas que elegiste. Anota el nombre que le puso, porque en el Paso 5 lo buscarás en una lista. Si en el diseñador ves un campo **Name**, puedes cambiarlo por los nombres de arriba.
+    - Si después el gráfico no aparece en tu app, abre la app en el diseñador, selecciona la tabla Solicitud TI y marca el gráfico nuevo en su lista de gráficos (pasa cuando la app no está configurada para mostrar **All** los gráficos).
 
     > Un gráfico que "cuenta" siempre se arma así: en la serie, cualquier columna que siempre tenga valor con **Count: All**; en el eje horizontal, la columna por la que agrupas.
 
@@ -216,11 +231,11 @@ Así queda:
 
 1. En tu solución: **+ New** → **Dashboard** → elige el diseño **2-column overview**. Se abre el editor (**Dashboard: New**).
 2. **Name:** `Dashboard Solicitudes TI`.
-3. En un recuadro vacío, haz clic en su icono de gráfico → en el diálogo **Add Component**: **Record Type:** Solicitud TI · **View:** Solicitudes Activas · **Chart:** Solicitudes por Estado → **Add**.
+3. En un recuadro vacío, haz clic en su icono de gráfico → en el diálogo **Add Component**: **Record Type** (la tabla de la que salen los datos): Solicitud TI · **View:** Solicitudes Activas · **Chart:** Solicitudes por Estado (o el nombre automático que anotaste en el Paso 4) → **Add** ([Learn: dashboards](https://learn.microsoft.com/power-apps/maker/model-driven-apps/create-edit-dashboards)).
 4. En otro recuadro, icono de gráfico → igual, con el gráfico **Solicitudes por Prioridad** → **Add**.
 5. En un tercer recuadro, haz clic en su icono de lista → **Record Type:** Solicitud TI · **View:** Solicitudes Activas → **Add**.
 6. **Save** → **Close** → **Publish** (en tu solución).
-7. Vuelve al diseñador de tu app → en el área **Reportes**, grupo **Análisis**: **+ Add page** → **Dashboard** → marca `Dashboard Solicitudes TI` → **Add**.
+7. Vuelve al diseñador de tu app → panel **Pages** → en el selector de área elige **Reportes** y haz clic en el grupo **Análisis** para seleccionarlo. Luego, en la barra de comandos, **Add page** → **Dashboard** → marca `Dashboard Solicitudes TI` → **Add**. Si la página queda en otro grupo, arrástrala a **Análisis**.
 8. **Save** → **Publish** → **Play**. Revisa que el dashboard muestre datos (necesitas algunas solicitudes con estados y prioridades distintos).
 
 **Ahora diagnostica — micropráctica (5 min):** **[Diagnosticar: la app está publicada pero mi compañero no la ve](/practica/ip-trb-004-app-no-visible-para-companero)**. Parte de un síntoma exacto —a ti te funciona y a otra persona no— y te pide qué falta y dónde se configura, antes de ver la solución.
@@ -262,68 +277,74 @@ Esta vez no te digo los pasos: aplica lo que viste a un pedido nuevo.
 
 ##### Práctica 4.2: Business Process Flow
 
-*Crear flujo para ciclo de vida de solicitud*
+*Crear la barra de etapas para el ciclo de vida de una solicitud*
 
-1. Solutions > New > Other > Business Process Flow
-2. Nombre: `Proceso Solicitud TI`
-3. Table: Solicitud TI
+Un **Business Process Flow (BPF)** muestra arriba del formulario una barra con **etapas** (*stages*); cada etapa tiene **pasos** (*steps*), y cada paso es una columna que la persona rellena. La persona avanza con el botón **Next Stage**. Un BPF **no cambia de etapa solo** cuando cambia el valor de una columna (por ejemplo, Estado): Learn indica que no añade lógica condicional ni automatización más allá de guiar la captura de datos y controlar la entrada a cada etapa ([Learn: introducción a los BPF](https://learn.microsoft.com/power-automate/business-process-flows-overview)).
 
-4. **Stages (Etapas)**:
+> **Licencia:** para crear un BPF, Learn pide una licencia *per user* de Power Apps o Power Automate, o una de Dynamics 365 que lo incluya. Si tu ambiente no te deja crearlo, lee esta práctica sin hacerla.
+
+0. **Antes:** crea en la tabla Solicitud TI la columna `Feedback` (**Data type:** Choice, opciones Satisfecho, Neutral, Insatisfecho), igual que creaste las Choice en el Módulo 2.
+1. En tu solución: **New** → **Automation** → **Process** → **Business process flow**.
+2. **Display name:** `Proceso Solicitud TI` (el **Name** se rellena solo). **Table:** Solicitud TI → **Create**. Se abre el diseñador con una primera etapa ya creada ([Learn: crear un BPF](https://learn.microsoft.com/power-automate/create-business-process-flow)).
+3. **Etapas y pasos.** Para agregar una etapa, arrastra **Stage** desde la pestaña **Components** hasta un signo **+** del diseñador; escribe su nombre en **Properties** → **Apply**. Para ver los pasos de una etapa, haz clic en **Details** (abajo a la derecha de la etapa); para agregar uno, arrastra el componente de paso (**Data Step**; Learn lo llama *Step*) a la etapa, elige la columna en **Properties** y marca **Required** si debe rellenarse antes de pasar a la siguiente etapa → **Apply**.
    ```
-   Stage 1: Registro
-      - Título (existing)
-      - Categoría (existing)
-      - Descripción (existing)
-      Action: Validar información completa
-   
-   Stage 2: Asignación
-      - Asignado a (existing)
-      - Prioridad (existing)
-      Action: Notificar asignado
-   
-   Stage 3: Resolución
-      - Notas Resolución (existing)
-      - Fecha Resolución (existing)
-      Action: Cerrar solicitud
-   
-   Stage 4: Cierre
-      - Feedback (new field: Choice - Satisfecho, Neutral, Insatisfecho)
-      Action: Archivar
+   Etapa 1: Registro
+      - Título de Solicitud
+      - Categoría
+      - Descripción
+
+   Etapa 2: Asignación
+      - Asignado a   (Required)
+      - Prioridad
+
+   Etapa 3: Resolución
+      - Notas de Resolución
+      - Fecha Resolución   (Required)
+
+   Etapa 4: Cierre
+      - Feedback
    ```
+4. **Validate** → **Save** (mientras sea un borrador nadie puede usarlo) → **Activate**.
+5. **Edit Security Roles** (barra de comandos del diseñador): por defecto solo **System Administrator** y **System Customizer** ven un BPF nuevo; da acceso a los roles de la Práctica 4.3.
+6. Prueba: abre una solicitud en la app, rellena los pasos de la etapa y pulsa **Next Stage**.
 
-5. Configurar transiciones automáticas:
-    - Al cambiar Estado a "En Proceso" → avanzar a Stage 2
-    - Al cambiar Estado a "Resuelta" → avanzar a Stage 3
-
-6. Guardar, activar y asignar a Security Role
+> **Solo lectura (conceptos avanzados):** el diseñador también permite (a) una **Condition** entre dos etapas para ramificar el proceso según los pasos de la etapa anterior, (b) un componente **Workflow** que lanza un proceso automático al entrar o salir de una etapa, y (c) un **Action Step**, un botón dentro de la etapa que ejecuta una acción o un workflow cuando la persona lo pulsa. Mover la etapa automáticamente según el Estado exigiría automatizaciones fuera de este nivel.
 
 ##### Práctica 4.3: Configurar Seguridad
 
-1. **Crear Security Roles**:
+**Niveles de acceso** (para cada permiso eliges hasta dónde llega) ([Learn: roles y privilegios](https://learn.microsoft.com/power-platform/admin/security-roles-privileges)):
+- **None**: ningún acceso.
+- **User**: solo los registros que son tuyos (o que te compartieron). En algunos textos aparece como nivel *Basic*.
+- **Business Unit**: los registros de tu unidad de negocio (tu "departamento" dentro de Dataverse).
+- **Parent: Child Business Unit**: los de tu unidad y los de las unidades que dependen de ella.
+- **Organization**: todos los registros del ambiente.
 
-   **Role: Solicitante**
-    - Solicitud TI: Create (Own), Read (Business Unit), Write (Own)
-    - Contact: Read (Organization)
-    - Categorías: Read (Organization)
+Además de Create, Read, Write y Delete, hay dos permisos que se olvidan a menudo: **Append** (vincular este registro con otro, por ejemplo elegir un Solicitante en la solicitud) y **Append To** (que otros registros se vinculen a este; lo necesita Contact para poder ser elegido como Solicitante).
 
-   **Role: Técnico TI**
-    - Solicitud TI: Create, Read, Write, Delete (Organization)
-    - Contact: Read (Organization)
-    - Todas las tablas del sistema: Read
+1. **Crear los roles** (nombres con prefijo `SIT`, los mismos que usa el Lab 04): [Power Platform Admin Center](https://admin.powerplatform.microsoft.com) → **Manage** → **Environments** → tu ambiente → **Settings** → **Users + permissions** → **Security roles** → **+ New role**. Escribe el nombre, deja la unidad de negocio que viene y **deja activada** la opción **Include App Opener privileges for running Model-Driven apps**: sin los permisos mínimos de *App Opener*, un rol que solo tiene permisos sobre Solicitud TI **no puede abrir la app** ([Learn: crear un rol y privilegios mínimos](https://learn.microsoft.com/power-platform/admin/create-edit-security-role)) → **Save**. Después, en la pestaña de tablas, busca cada tabla y asigna sus permisos → **Save**.
 
-   **Role: Administrador TI**
-    - Solicitud TI: Todos los permisos (Organization)
-    - Todas las tablas: Admin completo
+   **Rol: SIT Solicitante**
+    - Solicitud TI: Create (User), Read (Business Unit), Write (User), Append (User)
+    - Contact: Read (Organization), Append To (Organization)
+    - Si hiciste la tabla **Categoría Detallada** del Módulo 2 (Práctica 2.2): Read (Organization). La columna **Categoría** es una Choice, no una tabla, así que no lleva permisos propios.
 
-2. **Asignar roles a usuarios de prueba**:
-    - Power Platform Admin Center > Manage > Environments > tu ambiente > Settings > Users + permissions > Users
-    - Seleccionar usuario > Manage security roles
-    - Asignar role creado > Save
+   **Rol: SIT Técnico TI**
+    - Solicitud TI: Create, Read, Write, Delete, Append, Append To (Organization)
+    - Contact: Read, Append To (Organization)
 
-3. **Probar con cada role**:
-    - Login como cada usuario
-    - Validar que solo ven datos según permisos
-    - Verificar botones habilitados/deshabilitados
+   **Rol: SIT Administrador TI**
+    - Solicitud TI: todos los permisos (Organization)
+    - Contact: Read, Write, Append, Append To (Organization)
+    - Da solo los permisos de las tablas que usa la app, no "todas las tablas".
+
+2. **Asignar un rol a una persona y compartir la app:**
+    - Power Platform Admin Center → **Manage** → **Environments** → tu ambiente → **Settings** → **Users + permissions** → **Users** → elige a la persona → **Manage security roles** → marca el rol → **Save**.
+    - En Power Apps → **Apps** → **...** junto a tu app → **Share** → elige el rol o la persona → **Share** ([Learn: compartir una model-driven app](https://learn.microsoft.com/power-apps/maker/model-driven-apps/share-model-driven-app)).
+
+3. **Probar los roles:**
+    - Para probar de verdad necesitas **otra persona usuaria** en tu ambiente, con su licencia. Normalmente no puedes crearla tú: pídesela a un administrador de tu tenant. Si no tienes, deja esta prueba como lectura y guarda como evidencia la captura de los permisos de cada rol.
+    - **No te quites a ti misma el rol System Administrator** para probar: podrías perder el acceso a tu propio ambiente. Mientras lo tengas, verás todo, aunque además te asignes un rol más limitado (los permisos de varios roles se suman).
+    - Con otra persona usuaria: entra con su cuenta, comprueba qué solicitudes ve y qué botones (New, Delete) tiene activos.
 
 ### 💼 Caso Real de Negocio
 
@@ -369,7 +390,7 @@ Esta vez no te digo los pasos: aplica lo que viste a un pedido nuevo.
 **Performance**:
 
 - Limitar columnas en vistas (8-10 máximo)
-- No cargar todos los campos en forms (lazy load tabs)
+- No cargar todos los campos en forms: reparte las columnas en pestañas para que cada una se cargue cuando se abre (*lazy load*, "carga diferida")
 - Usar vistas personales para filtros frecuentes
 - Deshabilitar auto-save si no es necesario
 
@@ -395,7 +416,7 @@ Esta vez no te digo los pasos: aplica lo que viste a un pedido nuevo.
 
 2. **Lo que ves:** el Business Process Flow no aparece en el formulario.
     - **Causa**: No está activado o no asignado a Security Role
-    - **Solución**: Process > Activate + Security Roles tab en BPF
+    - **Solución**: en el diseñador del BPF, **Activate** y luego **Edit Security Roles** para dar acceso a los roles que lo usan
 
 3. **Lo que ves:** cambiaste el formulario y la app sigue mostrando la versión anterior.
     - **Causa**: No se publicó customizations
@@ -406,13 +427,13 @@ Esta vez no te digo los pasos: aplica lo que viste a un pedido nuevo.
     - **Solución**: Refresh browser, verificar security role en charts/views
 
 5. **Lo que ves:** el site map no se guarda o no aparece en la app.
-    - **Causa**: Estructura inválida (subarea sin group, etc.)
-    - **Solución**: Validar jerarquía: Area > Group > Subarea
+    - **Causa**: Estructura inválida (una página sin grupo, etc.)
+    - **Solución**: Validar jerarquía: Área > Grupo > Página (en el diseñador clásico, *Subarea*)
 
 ### 🧪 Criterios de Validación
 - [ ] Model-Driven App publicada con site map de 2+ áreas
 - [ ] 2+ forms personalizados (Main + Quick Create)
-- [ ] 3+ vistas con filtros y columnas optimizadas
+- [ ] 2+ vistas con filtros y columnas optimizadas (las del Paso 4; 3 si hiciste el reto)
 - [ ] 1 Dashboard con mínimo 3 componentes
 - [ ] 1 Business Process Flow con 3+ stages funcional
 - [ ] 2+ Security Roles configurados y asignados

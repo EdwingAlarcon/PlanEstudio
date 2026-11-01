@@ -35,9 +35,16 @@ Microsoft 365 / Power Platform (el "edificio")
 | **Tenant** | Tu organización completa dentro de Microsoft 365/Power Platform. Cuando creas una cuenta de trabajo (ej. `tuNombre@tuOrg.onmicrosoft.com`), esa organización es tu tenant. Un tenant puede tener varios ambientes adentro. | El edificio completo que le pertenece a tu empresa. |
 | **Ambiente (Environment)** | Un espacio aislado dentro de tu tenant, con su propia Dataverse, sus propias apps y sus propios datos. Nada de lo que hagas en un ambiente afecta a otro, a menos que lo conectes explícitamente. | Un piso del edificio, con su propia puerta con llave. |
 
-**Por qué importa esto antes del Módulo 1:** cuando el Módulo 1 te pide "crea una cuenta Microsoft 365
-Developer", en realidad te está dando un **tenant nuevo** con un **ambiente Developer** ya creado
-adentro. Si entiendes la jerarquía de arriba, ese paso deja de sentirse mágico.
+**Por qué importa esto antes del Módulo 1:** el Módulo 1 te pide entrar con una **cuenta de trabajo o
+estudio**. Esa cuenta pertenece a una organización: esa organización es tu **tenant**. Dentro de ese
+tenant necesitas un **ambiente Developer con Dataverse** (si no se puede, un ambiente Trial con
+Dataverse). A partir del 15 de noviembre de 2026 ya no se pueden crear ambientes Developer no
+administrados: solo existirá el ambiente Developer **administrado**, y para tenerlo normalmente hay que
+pedírselo a un administrador o al área de TI. El Módulo 1 te da los pasos y un mensaje listo para
+pedirlo. Ojo: el sandbox gratuito del Microsoft 365 Developer Program no es para todo el mundo; solo lo
+reciben suscriptores de Visual Studio Professional o Enterprise, ciertos partners de Microsoft y
+empresas con soporte Premier o Unified. Si entiendes la jerarquía de arriba, estos pasos dejan de
+sentirse mágicos.
 
 ## 2. Los 4 tipos de ambiente que vas a encontrar en este plan
 
@@ -60,8 +67,8 @@ necesitas activar el trial del producto correspondiente — el Módulo 1 y los m
 
 No necesitas ningún ambiente para esto — es reconocimiento visual.
 
-1. Busca en la [documentación pública de Microsoft sobre ambientes de Power Platform](https://learn.microsoft.com/power-platform/admin/environments-overview) una captura del Power Platform Admin Center.
-2. Identifica en esa captura: el nombre del tenant, al menos un ambiente listado, y el tipo de ambiente (Developer/Sandbox/Production) que muestra la columna correspondiente.
+1. Abre la página en español [Información general sobre entornos de Power Platform](https://learn.microsoft.com/es-es/power-platform/admin/environments-overview). En la documentación en español, **inquilino** significa tenant y **entorno** significa ambiente.
+2. Busca el diagrama de la empresa de ejemplo **Contoso Corporation**. Identifica cuál es el tenant (inquilino) y cuenta cuántos ambientes (entornos) tiene adentro. Después busca la tabla **Tipos de entorno** y anota qué dice de **Prueba** (Trial: cuántos días dura) y de **Desarrollador** (Developer).
 3. Escribe, en tus propias palabras (2-3 líneas), qué pasaría si confundieras un ambiente Sandbox con uno de Production al momento de probar algo nuevo.
 
 **Evidencia esperada:** las 2-3 líneas del punto 3, guardadas en tu bitácora de estudio (la misma que usarás para las evidencias de labs más adelante).

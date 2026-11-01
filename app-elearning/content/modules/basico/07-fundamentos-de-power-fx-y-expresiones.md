@@ -4,6 +4,7 @@ title: "Fundamentos de Power Fx y Expresiones"
 level: "basico"
 certification: "PL-900"
 estimatedMinutes: 30
+practiceMinutes: 105
 slug: "fundamentos-de-power-fx-y-expresiones"
 lastVerified: "2026-11"
 ---
@@ -102,7 +103,28 @@ Dominar el lenguaje de fórmulas Power Fx para lógica avanzada en Canvas Apps.
 
 Completa primero los ejercicios 7.1.1, 7.1.2, 7.2.1, 7.3.1 y 7.5.1. Con eso tendrás búsqueda/filtro, búsqueda de un registro, validación de formulario, formato de texto y una primera lectura de delegación.
 
-> **Cómo está organizado el Núcleo:** aprendes Power Fx en cuatro bloques cortos (leer y filtrar, validar, dar formato, delegación). En cada uno alternas una idea, una práctica de pocos minutos y un dato real de tu propia app. Cierras con un reto en el que ya no te doy las fórmulas. Las microprácticas no necesitan tenant; escribir las fórmulas sí necesita tu app Canvas del Módulo 3. Los ejercicios marcados como profundización quedan para después. **Antes de empezar**, prepara tu app del Módulo 3 con estos nombres de controles (para cambiar un nombre: panel **Tree view**, pasa el mouse sobre el control, **⋯** > **Rename**): `galSolicitudes`, `drpCategoria`, `drpEstado`, `dtpDesde`, `txtBusqueda`, `txtTitulo` y `txtDescripcion`; las fórmulas los usan tal cual. `galSolicitudes` y `txtBusqueda` ya los tienes del Módulo 3; los demás son controles nuevos que agregas con **Insert** (`Drop down`, `Date picker`, `Text input`). En las fórmulas, las columnas se escriben con el nombre que les diste en el Módulo 2, por ejemplo `'Título de Solicitud'`.
+> **Cómo está organizado el Núcleo:** aprendes Power Fx en cuatro bloques cortos (leer y filtrar, validar, dar formato, delegación). En cada uno alternas una idea, una práctica de pocos minutos y un dato real de tu propia app. Cierras con un reto en el que ya no te doy las fórmulas. Las microprácticas no necesitan tenant; escribir las fórmulas sí necesita tu app Canvas del Módulo 3. Los ejercicios marcados como profundización quedan para después. En las fórmulas, las columnas se escriben con el nombre que les diste en el Módulo 2, por ejemplo `'Título de Solicitud'`.
+
+> **🛠️ Antes de empezar: prepara tu app del Módulo 3 (15 min)**
+>
+> Las fórmulas de este módulo usan controles con nombres exactos. Algunos ya los tienes (`galSolicitudes` y `txtBusqueda` en `scrInicio`, `frmNueva` y `btnGuardar` en `scrNueva`, `frmDetalle` en `scrDetalle`). Los demás los preparas ahora. Abre tu app del Módulo 3 en Power Apps Studio (**Apps** > tu app > **Edit**). Para cambiar un nombre: panel **Tree view**, pasa el mouse sobre el control, **⋯** > **Rename**. Igual que en el Módulo 3, usa los controles **clásicos** (si en **Insert** ves una categoría **Classic**, inserta desde ahí).
+>
+> **En la pantalla `scrInicio` (la de la lista).** Sube un poco la Gallery para dejar espacio arriba, junto a `txtBusqueda`, y agrega tres filtros:
+>
+> 1. **Filtro de categoría:** **Insert** > `Drop down`. Nómbralo `drpFiltroCategoria`.
+>     - `Items`: `Distinct('Solicitudes TI', Categoría)`. `Distinct` devuelve cada categoría **una sola vez**, en una columna llamada `Value`. Ojo: solo lista las categorías que ya aparecen en al menos una solicitud; si una categoría no se ha usado nunca, no sale en la lista. Además `Distinct` no se delega (ver Microlección 4), algo que no importa con tus pocos datos de prueba.
+>     - `AllowEmptySelection`: `true`, para poder dejar el filtro vacío ("todas las categorías"). Si la propiedad `Default` tiene algo escrito, bórralo.
+> 2. **Filtro de estado:** si hiciste la Práctica 3.2 ya tienes `drpEstado`. Si no, inserta otro `Drop down`, nómbralo `drpEstado`, pon en `Items` `Distinct('Solicitudes TI', Estado)` y en `AllowEmptySelection` `true`.
+> 3. **Filtro de fecha:** **Insert** > `Date picker`. Nómbralo `dtpDesde`. En su propiedad `DefaultDate` escribe `Blank()`. **Por qué:** un Date picker nuevo empieza con la fecha de **hoy**; con eso, el filtro "desde esta fecha" escondería todas las solicitudes anteriores a hoy y la lista se vería casi vacía. Con `Blank()` el filtro arranca apagado hasta que elijas una fecha.
+>
+> Los nombres son distintos a propósito: `drpFiltroCategoria` es el filtro de la lista. La Categoría que se escribe en el formulario es otro control, dentro de `frmNueva`.
+>
+> **En la pantalla `scrNueva` (la del formulario).** El título y la descripción ya existen, pero dentro del formulario: cada campo de un formulario vive en una *tarjeta* (*card*), y dentro de la tarjeta hay un cuadro de texto con un nombre automático como `DataCardValue1`. Ponles nombres claros:
+>
+> 1. En **Tree view**, expande `frmNueva` (flecha a la izquierda de su nombre). Verás una tarjeta por campo; su nombre incluye el nombre del campo, por ejemplo `Título de Solicitud_DataCard1`.
+> 2. Expande la tarjeta del **Título de Solicitud**, busca dentro el control cuyo nombre empieza por `DataCardValue` y cámbiale el nombre a `txtTitulo`.
+> 3. Haz lo mismo en la tarjeta de **Descripción**: renombra su `DataCardValue...` a `txtDescripcion`.
+> 4. Pulsa **F5** y comprueba que el formulario sigue funcionando igual. Cambiar el nombre no cambia lo que hace el control.
 
 ## 🧩 Microlección 1 — Leer una fórmula: Filter y LookUp
 
@@ -118,23 +140,43 @@ Completa primero los ejercicios 7.1.1, 7.1.2, 7.2.1, 7.3.1 y 7.5.1. Con eso tend
 
 ##### Práctica 7.1: Funciones de Tablas y Filtrado
 
+> **🔣 Operadores que vas a ver en este módulo**
+>
+> - `!` (también se escribe `Not`) se lee "no": `!IsBlank(txtTitulo.Text)` = "el título **no** está vacío".
+> - `&&` (también `And`) se lee "y": `a && b` = se cumplen **las dos** condiciones.
+> - `||` (también `Or`) se lee "o": `a || b` = basta con que se cumpla **una**.
+> - `in` se lee "está dentro de": `"tóner" in 'Título de Solicitud'` = el texto aparece en alguna parte del título, sin importar mayúsculas.
+> - `&` se lee "unido a": `"Hola " & User().FullName` une dos textos en uno.
+> - `=` y `<>` se leen "igual" y "distinto": `Estado <> 'Estado (Solicitudes TI)'.Cerrada` = el estado no es Cerrada.
+
 **Ejercicio 1: Multi-Filter Gallery**
+
+**Dónde va:** pantalla `scrInicio` > selecciona `galSolicitudes` (en **Tree view**, la Gallery completa, no una etiqueta de dentro) > propiedad `Items`. Reemplaza la fórmula `Search` del Módulo 3 por esta:
+
 ```javascript
 // Gallery Items con filtros múltiples
-// drpCategoria y drpEstado tienen como Items Distinct('Solicitudes TI', Categoría) y Distinct('Solicitudes TI', Estado)
-// (como en el Módulo 3): su Selected.Value ya es la opción Choice, no su texto, por eso se compara directo
+// drpFiltroCategoria y drpEstado tienen como Items Distinct(...) (ver "Antes de empezar"):
+// su Selected.Value ya es la opción Choice, no su texto, por eso se compara directo con la columna
 Filter(
     'Solicitudes TI',
-    (IsBlank(drpCategoria.Selected) || Categoría = drpCategoria.Selected.Value) &&
+    (IsBlank(drpFiltroCategoria.Selected) || Categoría = drpFiltroCategoria.Selected.Value) &&
     (IsBlank(drpEstado.Selected) || Estado = drpEstado.Selected.Value) &&
     (IsBlank(dtpDesde.SelectedDate) || 'Fecha Solicitud' >= dtpDesde.SelectedDate) &&
     (txtBusqueda.Text = "" || txtBusqueda.Text in 'Título de Solicitud' || txtBusqueda.Text in Descripción)
 )
 ```
 
+Léela por partes: cada línea entre paréntesis dice "si el filtro está vacío, deja pasar la fila; si no, la fila debe coincidir". Las cuatro partes se unen con `&&`, así que una fila aparece solo si pasa los cuatro filtros. Prueba con **F5**: elige una categoría, luego un estado, luego una fecha, y mira cómo cambia la lista.
+
 **Ejercicio 2: Lookup con Fallback**
+
+> **Lookup (columna) no es lo mismo que `LookUp` (función).** *Lookup* es un **tipo de columna** de Dataverse: `Solicitante` es una columna Lookup que apunta a un contacto. `LookUp()` es una **función** de Power Fx que busca **una** fila en una tabla. Se escriben casi igual, pero son cosas distintas.
+
+**Dónde va:** pantalla `scrInicio` > **Insert** > `Label`. Colócala debajo de los filtros y nómbrala `lblCorreo`. En su propiedad `Text` escribe:
+
 ```javascript
 // Obtener el email del solicitante de la solicitud cuyo título es exactamente lo escrito, con valor por defecto
+// LookUp(tabla, condición, dato) busca la primera fila que cumple la condición y devuelve ese dato
 // Coalesce(valor, alternativa) devuelve la alternativa si el valor está vacío (LookUp no encontró nada)
 Coalesce(
     LookUp(
@@ -145,6 +187,8 @@ Coalesce(
     "correo@desconocido.com"
 )
 ```
+
+Prueba con **F5**: escribe en `txtBusqueda` el título **completo y exacto** de una solicitud (la etiqueta muestra el correo del solicitante); luego escribe un título que no existe (muestra `correo@desconocido.com`). Si la solicitud no tiene Solicitante, también verás el valor por defecto.
 
 > **Por qué no `LookUp(Contacts, ID = ...)`:** `Solicitante` es una columna Lookup hacia **Contacts**, así que ya trae la fila del contacto y puedes leer sus columnas con un punto (`Solicitante.Email`, `Solicitante.'Full Name'`). Además, en Dataverse un contacto no tiene una columna numérica `ID`: su clave es un GUID.
 
@@ -161,17 +205,20 @@ Coalesce(
 > Profundización opcional: este patrón ya combina tabla, columna calculada y búsqueda relacionada. Si todavía estás entendiendo `Filter` y `LookUp`, vuelve a este ejercicio después.
 
 ```javascript
-// Agregar columna calculada "Días Transcurridos" en Collection
+// Agregar columnas calculadas en una Collection (por ejemplo, en el OnVisible de scrInicio)
+// Los nombres de las columnas nuevas se escriben sin comillas (DiasTranscurridos), como cualquier nombre
 ClearCollect(
     ColSolicitudesEnriquecidas,
     AddColumns(
         'Solicitudes TI',
-        "Días Transcurridos", DateDiff('Fecha Solicitud', Today(), Days),
-        "Vencido SLA", DateDiff('Fecha Solicitud', Today(), Hours) > 'SLA Horas',
-        "Nombre Solicitante", Solicitante.'Full Name'  // el Lookup ya trae el contacto relacionado
+        DiasTranscurridos, DateDiff('Fecha Solicitud', Today(), TimeUnit.Days),
+        VencidoSLA, DateDiff('Fecha Solicitud', Now(), TimeUnit.Hours) > 'SLA Horas',
+        NombreSolicitante, Solicitante.'Full Name'  // el Lookup ya trae el contacto relacionado
     )
 )
 ```
+
+> Si en otros materiales ves los nombres nuevos entre comillas dobles (`"Días Transcurridos"`), es la forma antigua de `AddColumns` (antes de la versión 3.24042 de Power Apps).
 
 ---
 
@@ -188,31 +235,47 @@ ClearCollect(
 ##### Práctica 7.2: Lógica Condicional y Validaciones
 
 **Ejercicio 1: Validación de Form Completo**
+
+**Dónde va:** pantalla `scrNueva` > selecciona `btnGuardar` > propiedad `DisplayMode`. Un botón no tiene una propiedad "habilitado sí/no": se habilita o deshabilita con `DisplayMode`, que puede valer `DisplayMode.Edit` (se puede pulsar) o `DisplayMode.Disabled` (se ve gris y no responde). Si en otros materiales, o en la micropráctica de abajo, ves la palabra *Enabled*, en tu app corresponde a esta propiedad.
+
 ```javascript
-// Button Guardar - Enabled property
-!IsBlank(txtTitulo.Text) &&
-!IsBlank(txtDescripcion.Text) &&
-!IsBlank(drpCategoria.Selected) &&
-Len(txtDescripcion.Text) >= 20 &&
-Len(txtTitulo.Text) <= 100
+// DisplayMode de btnGuardar: solo se puede pulsar si el título no está vacío,
+// la descripción tiene al menos 20 caracteres y el título no pasa de 100
+If(
+    !IsBlank(txtTitulo.Text) &&
+    Len(txtDescripcion.Text) >= 20 &&
+    Len(txtTitulo.Text) <= 100,
+    DisplayMode.Edit,      // condición cumplida: botón activo
+    DisplayMode.Disabled   // si no: botón gris
+)
 ```
 
+`Len(texto)` cuenta los caracteres de un texto. No hace falta revisar aquí la Categoría: es una columna requerida, así que si falta, `SubmitForm` no guarda y se ejecuta el `OnFailure` del formulario que configuraste en el Módulo 3.
+
 **Ejercicio 2: Switch para Iconos Dinámicos**
+
+**Dónde va:** pantalla `scrInicio` > selecciona la primera fila de `galSolicitudes` (ícono de lápiz) > **Insert** > `Icons` > elige cualquier ícono. Nómbralo `icoEstado` y, en su propiedad `Icon`, escribe:
+
 ```javascript
-// Image Icon en Gallery según Estado
+// Icon de icoEstado (dentro de la Gallery), según el Estado de la fila
 // Se compara la columna Choice con su enumeración, no con el texto de la etiqueta;
 // las opciones con espacios o tildes van entre comillas simples
 Switch(
     ThisItem.Estado,
-    'Estado (Solicitudes TI)'.Nueva, Icon.AddDocument,
+    'Estado (Solicitudes TI)'.Nueva, Icon.Add,
     'Estado (Solicitudes TI)'.'En Proceso', Icon.Clock,
-    'Estado (Solicitudes TI)'.Resuelta, Icon.CompletedSolid,
+    'Estado (Solicitudes TI)'.Resuelta, Icon.Check,
     'Estado (Solicitudes TI)'.Cerrada, Icon.Cancel,
-    Icon.Warning  // Default
+    Icon.Warning  // Default: cualquier otro estado
 )
 ```
 
+Cada `Icon.Nombre` es uno de los íconos que trae Power Apps. Si uno de estos nombres sale subrayado en rojo, borra lo que va después de `Icon.` y elige otro de la lista que te propone la barra de fórmulas.
+
 **Ejercicio 3: If Anidado para Colores**
+
+**Dónde va:** dentro de la plantilla de `galSolicitudes`, agrega un `Label` con `Text` = `ThisItem.Prioridad` y, en su propiedad `Color`, escribe la fórmula. `RGBA(rojo, verde, azul, opacidad)` arma un color: los tres primeros números van de 0 a 255 y la opacidad de 0 (transparente) a 1 (sólido).
+
 ```javascript
 // Color de Label Prioridad
 If(
@@ -236,7 +299,7 @@ If(
 
 | Campo | Tu valor |
 |---|---|
-| La fórmula exacta de `Enabled` de tu botón Guardar | ___ |
+| La fórmula exacta de `DisplayMode` de tu botón Guardar | ___ |
 | Qué hace el botón con el título vacío y la descripción de 25 caracteres | ___ |
 | Qué hace el botón con el título lleno y la descripción de 5 caracteres | ___ |
 
@@ -267,8 +330,14 @@ If(
 5. Selecciona **Done** y luego **Save Table**.
 6. Crea una solicitud nueva desde tu app del Módulo 3 y comprueba que trae su número. Si la app no muestra la columna nueva, en Power Apps Studio abre el panel **Data**, selecciona **⋯** junto a la tabla y elige **Refresh**.
 
+> **Ojo con las solicitudes viejas:** las solicitudes que ya existían antes de crear la columna pueden quedar **sin número** (la columna aparece vacía). Para este ejercicio, selecciona en la lista una solicitud que hayas creado **después** de agregar la columna.
+
+**Funciones de texto que usa la fórmula:** `Upper(texto)` lo pasa a MAYÚSCULAS; `Lower(texto)` a minúsculas; `Left(texto, n)` toma los primeros `n` caracteres; `Mid(texto, inicio)` toma desde la posición `inicio` hasta el final; `Concatenate(a, b, c...)` une todos los textos en uno (hace lo mismo que `&`).
+
+**Dónde va:** pantalla `scrDetalle` > **Insert** > `Label`. Colócala debajo del formulario, nómbrala `lblResumen` y, en su propiedad `Text`, escribe:
+
 ```javascript
-// Construir mensaje de notificación
+// Text de lblResumen: un resumen legible de la solicitud elegida en la lista
 Concatenate(
     "Solicitud ", galSolicitudes.Selected.'Número de Solicitud',          // columna Autonumber: ya es texto, ej. "SOL-001000"
     " - ", Upper(Left(galSolicitudes.Selected.'Título de Solicitud', 1)), // primera letra del título en mayúscula
@@ -281,20 +350,34 @@ Concatenate(
 Resultado de ejemplo: `Solicitud SOL-001000 - Impresora del piso 3 sin tóner (12/03/2026) · SLA 008 h`. Fíjate en las dos formas de "rellenar con ceros": en el número de solicitud lo hace Dataverse (con `{SEQNUM:6}`), y en el SLA lo hace Power Fx con el formato `"000"` de `Text`, que solo funciona sobre números.
 
 **Ejercicio 2: Cálculos de Fechas**
+
+**Dónde va:** pantalla `scrDetalle` > inserta dos `Label` debajo de `lblResumen`, nómbralos `lblVence` y `lblDiasRestantes`, y escribe una fórmula en el `Text` de cada uno. `DateAdd(fecha, cantidad, unidad)` suma tiempo a una fecha; `DateDiff(inicio, fin, unidad)` cuenta cuánto hay entre dos fechas. La unidad se escribe con `TimeUnit.` (`TimeUnit.Days`, `TimeUnit.Hours`...).
+
 ```javascript
-// Calcular fecha estimada de resolución
-DateAdd(
-    galSolicitudes.Selected.'Fecha Solicitud',
-    galSolicitudes.Selected.'SLA Horas',
-    Hours
+// Text de lblVence: fecha y hora estimada de resolución (fecha de la solicitud + horas de SLA)
+Text(
+    DateAdd(
+        galSolicitudes.Selected.'Fecha Solicitud',
+        galSolicitudes.Selected.'SLA Horas',
+        TimeUnit.Hours
+    ),
+    "dd/mm/yyyy hh:mm"   // aquí "mm" va junto a la hora, así que son minutos
 )
 
-// Días hábiles hasta vencimiento (excluye fines de semana)
-With(
-    {DiasSLA: galSolicitudes.Selected.'SLA Horas' / 24},
-    DiasSLA + Round(DiasSLA / 5 * 2, 0)  // Aproximación días hábiles
+// Text de lblDiasRestantes: días de CALENDARIO que faltan para el vencimiento
+// (cuenta sábados y domingos; si sale negativo, el SLA ya venció)
+DateDiff(
+    Today(),
+    DateAdd(
+        galSolicitudes.Selected.'Fecha Solicitud',
+        galSolicitudes.Selected.'SLA Horas',
+        TimeUnit.Hours
+    ),
+    TimeUnit.Days
 )
 ```
+
+> **¿Y los días hábiles?** `DateDiff` no tiene una unidad de "días hábiles": cuenta todos los días del calendario. Calcular días hábiles exactos (sin fines de semana ni festivos) necesita una fórmula más avanzada o una tabla de festivos; queda fuera de este módulo.
 
 **Ejercicio 3: Split y Parse**
 ```javascript
@@ -364,7 +447,7 @@ Notify(CountIf(galSolicitudes.AllItems, chkSeleccion.Value) & " solicitudes resu
 With(
     {
         RegistroActual: galSolicitudes.Selected,
-        TiempoTranscurrido: DateDiff(galSolicitudes.Selected.'Fecha Solicitud', Now(), Days)
+        TiempoTranscurrido: DateDiff(galSolicitudes.Selected.'Fecha Solicitud', Now(), TimeUnit.Days)
     },
     Concatenate(
         "Solicitud: ", RegistroActual.'Título de Solicitud',
@@ -382,7 +465,7 @@ With(
 
 **¿Por qué existe esto?** Si una fórmula no se puede delegar, la app solo revisa los primeros 500 registros (hasta 10.000 si cambias el límite en **Settings** > **General** > **Data row limit**) y puede mostrar resultados incompletos sin avisarte. Con pocos datos no lo notas; con muchos, falta información.
 
-**Ejemplo pequeño:** poner `DateDiff(...)` sobre la columna dentro de `Filter` no se delega. Comparar la columna con una fecha calculada fuera de la fila, como `'Fecha Solicitud' < DateAdd(Today(), -7, Days)`, sí se delega.
+**Ejemplo pequeño:** poner `DateDiff(...)` sobre la columna dentro de `Filter` no se delega. Comparar la columna con una fecha calculada fuera de la fila, como `'Fecha Solicitud' < DateAdd(Today(), -7, TimeUnit.Days)`, sí se delega.
 
 **Práctica real en tu app (20 min):** haz el Ejercicio 1 de la Práctica 7.5 de abajo; los Ejercicios 2 y 3 son para ampliar.
 
@@ -392,41 +475,51 @@ With(
 
 ❌ **No delegable** (warning línea azul):
 ```javascript
-Filter('Solicitudes TI', DateDiff('Fecha Solicitud', Today(), Days) > 7)
+Filter('Solicitudes TI', DateDiff('Fecha Solicitud', Today(), TimeUnit.Days) > 7)
 // DateDiff no es delegable
 ```
 
 ✅ **Solución delegable**:
 ```javascript
-Filter('Solicitudes TI', 'Fecha Solicitud' < DateAdd(Today(), -7, Days))
+Filter('Solicitudes TI', 'Fecha Solicitud' < DateAdd(Today(), -7, TimeUnit.Days))
 // Operador < es delegable
 ```
 
 **Ejercicio 2: Optimizar Queries con Delegación**
 
-❌ **Mal rendimiento** (carga 500, luego filtra en cliente):
-```javascript
-SortByColumns(
-    Filter('Solicitudes TI', Len('Título de Solicitud') > 20),
-    "Fecha Solicitud",
-    Descending
-)
-// Len() aplicada a la columna no se puede delegar a Dataverse
-```
+Las dos fórmulas de abajo **piden lo mismo**: las solicitudes cuyo título empieza con lo que escribiste en `txtBusqueda`, de la más reciente a la más antigua. Cambia solo **cómo** se pide.
 
-✅ **Optimizado** (filtra en servidor):
+- `Sort(tabla, columna, SortOrder.Descending)` ordena la tabla por esa columna, de mayor a menor (`SortOrder.Ascending` es de menor a mayor). La columna se escribe por su nombre, entre comillas simples si tiene espacios, igual que en `Filter`.
+- `Left(texto, n)` toma los primeros `n` caracteres; `Len(texto)` cuenta caracteres.
+- `StartsWith(texto, inicio)` dice si `texto` empieza con `inicio`.
+
+❌ **Mal rendimiento** (trae como máximo 500 filas y filtra en la app):
 ```javascript
-SortByColumns(
+Sort(
     Filter(
         'Solicitudes TI',
-        StartsWith('Título de Solicitud', txtBusqueda.Text) &&
-        'Fecha Solicitud' >= DateAdd(Today(), -90, Days)  // StartsWith y la comparación de fecha son delegables
+        Left('Título de Solicitud', Len(txtBusqueda.Text)) = txtBusqueda.Text
     ),
-    "Fecha Solicitud",
-    Descending
+    'Fecha Solicitud',
+    SortOrder.Descending
+)
+// Left() y Len() aplicadas a la columna no se pueden delegar a Dataverse: línea azul
+```
+
+✅ **Optimizado** (filtra en el servidor):
+```javascript
+Sort(
+    Filter(
+        'Solicitudes TI',
+        StartsWith('Título de Solicitud', txtBusqueda.Text)  // StartsWith sí es delegable
+    ),
+    'Fecha Solicitud',
+    SortOrder.Descending
 )
 // Search también es delegable con columnas de texto de Dataverse
 ```
+
+> **¿Y `SortByColumns`?** Es otra función para ordenar que verás en otros materiales: recibe el nombre de la columna como **texto**, entre comillas dobles. Para no mezclar estilos de comillas, en este curso usamos `Sort` con el nombre de la columna como en cualquier otra fórmula.
 
 **Ejercicio 3: Uso de Collections para No Delegable**
 ```javascript
@@ -435,14 +528,14 @@ SortByColumns(
 // OnVisible de la pantalla:
 ClearCollect(
     ColSolicitudesRecientes,
-    Filter('Solicitudes TI', 'Fecha Solicitud' >= DateAdd(Today(), -30, Days))
+    Filter('Solicitudes TI', 'Fecha Solicitud' >= DateAdd(Today(), -30, TimeUnit.Days))
 );
 
 // Luego operar localmente sin límite de delegación
 // Items de la Gallery:
 Filter(
     ColSolicitudesRecientes,
-    DateDiff('Fecha Solicitud', Today(), Days) > 7  // Ahora funciona porque es Collection local
+    DateDiff('Fecha Solicitud', Today(), TimeUnit.Days) > 7  // Ahora funciona porque es Collection local
 )
 ```
 
@@ -473,7 +566,7 @@ Esta vez no te doy las fórmulas: aplica lo que viste a un cambio de requisito.
 
 | Campo | Tu valor |
 |---|---|
-| La fórmula de `Enabled` del botón Guardar, con su comentario | ___ |
+| La fórmula de `DisplayMode` del botón Guardar, con su comentario | ___ |
 | La fórmula de `Items` de la Gallery filtrada por fecha y si hay advertencia azul | ___ |
 | La fórmula del Label con el texto que produjo | ___ |
 
@@ -499,7 +592,7 @@ Esta vez no te doy las fórmulas: aplica lo que viste a un cambio de requisito.
 
 **Sintaxis y Legibilidad**:
 
-- Indentar fórmulas complejas con Alt+Shift+F
+- Indentar fórmulas complejas: una condición por línea y los paréntesis de cierre alineados, como en los ejemplos de este módulo
 - Usar With para evitar repetir subcálculos
 - Comentarios con `//` en fórmulas de >3 líneas
 - Nombres descriptivos de variables: `colCarrito` no `col1`
@@ -509,20 +602,20 @@ Esta vez no te doy las fórmulas: aplica lo que viste a un cambio de requisito.
 - Entender y respetar delegación (límite de 500 registros por defecto, ampliable hasta 10.000)
 - Cargar datos una vez, operar local con Collections
 - Evitar Addcolumns dentro de loops (ForAll)
-- Usar Concurrent para operaciones independientes paralelas
+- Usar `Concurrent(fórmula1, fórmula2, ...)` para ejecutar **a la vez** varias acciones que no dependen unas de otras (por ejemplo, cargar dos colecciones al abrir la app). Solo funciona en fórmulas de comportamiento, como `OnSelect` u `OnStart`, y ninguna fórmula de dentro debe usar el resultado de otra, porque no se sabe cuál termina primero
 
 **Mantenibilidad**:
 
 - Centralizar cálculos complejos en una Collection
-- Usar Component + Output properties para reutilizar lógica
+- Usar componentes con *output properties* para reutilizar lógica. Un *componente* es un grupo de controles que armas una vez y reutilizas en varias pantallas; una *output property* es un valor que el componente le entrega a la pantalla que lo usa (por ejemplo, el registro elegido en una Gallery que está dentro del componente)
 - Documentar fórmulas no obvias
-- Named Formulas (declaradas en `App.Formulas`, **no** en `App.OnStart`): son reactivas, lazy y se recalculan automáticamente — a diferencia de variables globales con `Set()` en `OnStart` que son imperativas y se calculan una sola vez al iniciar
+- *Named formulas* (fórmulas con nombre): se declaran en la propiedad `Formulas` del objeto **App** (en **Tree view**, selecciona **App** y elige `Formulas`), con la forma `Nombre = expresión;`, por ejemplo `HoyMasSiete = DateAdd(Today(), 7, TimeUnit.Days);`. A diferencia de una variable creada con `Set()` en `App.OnStart`, que tú debes actualizar a mano, una fórmula con nombre siempre está al día: se recalcula sola cuando cambian los datos de los que depende, Power Apps puede calcularla solo cuando se necesita, y no se puede cambiar con `Set`
 
 **Debugging**:
 
-- Usar Label temporal para ver valores: `Text(Variable, JSON)`
-- Monitor para ver network calls y performance
-- App formulas > Variables para inspeccionar contexto
+- Usar un Label temporal para ver el contenido de una variable con un registro o una tabla: en su `Text` escribe `JSON(NombreVariable, JSONFormat.IndentFour)`. `JSON()` convierte el valor en texto legible, con sangría de cuatro espacios
+- *Live monitor*: herramienta que registra lo que hace la app mientras la usas (llamadas a los datos, errores, tiempos). Se abre desde Power Apps Studio en **Advanced tools** > **Open live monitor**
+- El panel **Variables** de Power Apps Studio (en el menú de la izquierda) muestra las variables globales, las variables de contexto y las colecciones de la app, con su valor actual
 
 ### ⚠️ Errores Comunes
 
@@ -535,12 +628,12 @@ Esta vez no te doy las fórmulas: aplica lo que viste a un cambio de requisito.
     - **Solución**: Convertir con Value() o Text(); para una columna Choice de Dataverse, asignar su enumeración, por ejemplo `{Estado: 'Estado (Solicitudes TI)'.Resuelta}` ([Learn: Patch con columnas de Dataverse](https://learn.microsoft.com/power-platform/power-fx/reference/function-patch#patch-with-dataverse-column-types))
 
 3. **Lo que ves:** la Gallery no cambia aunque modificaste la colección.
-    - **Causa**: Usar Set en lugar de Collect/Patch/Remove
-    - **Solución**: Collections son observables, variables no. Usar ClearCollect o UpdateIf
+    - **Causa**: ni las variables ni las colecciones se recalculan solas: cambian solo cuando una fórmula de comportamiento las actualiza (`Set`, `UpdateContext`, `Collect`, `ClearCollect`, `Patch`, `Remove`, `UpdateIf`...). Un caso típico: la Gallery muestra una **variable** a la que le asignaste la colección con `Set(varLista, ColSolicitudes)`; después cambiaste `ColSolicitudes`, pero `varLista` sigue con el valor que tenía cuando se ejecutó el `Set`.
+    - **Solución**: pon la colección directamente en el `Items` de la Gallery (`Items` = `ColSolicitudes`) y modifícala con `Collect`, `Patch`, `Remove` o `UpdateIf`; o vuelve a ejecutar el `Set` después de cada cambio
 
-4. **Lo que ves:** ForAll parece no guardar los cambios.
-    - **Causa**: ForAll es funcional, no ejecuta side-effects en orden
-    - **Solución**: Validar con Patch individual o usar Concurrent para operaciones independientes
+4. **Lo que ves:** ForAll parece no guardar los cambios, o los guarda "desordenados".
+    - **Causa**: `ForAll` puede procesar las filas **en cualquier orden** y, cuando puede, varias a la vez; una fórmula que depende de lo que pasó en la fila anterior da resultados inesperados. Además, dentro de `ForAll` no puedes modificar la misma tabla que estás recorriendo, ni usar `UpdateContext`, `Clear` o `ClearCollect`
+    - **Solución**: recorre una tabla distinta de la que modificas (por ejemplo, las filas marcadas de la Gallery) y usa `Patch` sobre la tabla de Dataverse, como en la Práctica 7.4, Ejercicio 2; no dependas del orden en que se procesan las filas
 
 5. **Lo que ves:** Filter devuelve registros que no esperabas, o deja fuera algunos.
     - **Causa**: Se confundió And con Or (o && con ||), o faltan paréntesis al combinar condiciones
