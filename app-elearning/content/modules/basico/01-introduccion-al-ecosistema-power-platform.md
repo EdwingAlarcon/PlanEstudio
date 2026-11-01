@@ -56,10 +56,10 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 
 ### 📖 Conceptos Clave (esenciales para hoy)
 - **Arquitectura de Power Platform**: Componentes principales y su interrelación
-- **Microsoft Dataverse**: Base de datos común (Common Data Service)
-- **Ambientes (Environments)**: Tipos (producción, sandbox, developer)
-- **Conectores**: Estándar vs Premium vs Personalizados
-- **Power Platform Admin Center**: Gestión de ambientes y recursos
+- **Microsoft Dataverse**: la base de datos de Power Platform, donde viven las tablas que usan tus apps y flujos (antes se llamaba *Common Data Service*).
+- **Ambientes (Environments)**: espacios separados para trabajar. Tipos: *Production* (producción, lo que usa la gente de verdad), *Sandbox* (pruebas), *Developer* (tu espacio personal de desarrollo) y *Trial* (prueba que caduca).
+- **Conectores**: piezas que conectan Power Platform con otros servicios. *Standard* (estándar, incluidos en la licencia básica), *Premium* (requieren licencia de pago) y *Custom* (personalizados, los creas tú para tu propio sistema).
+- **Power Platform Admin Center**: el panel de administración donde se crean y gestionan los ambientes y sus recursos.
 
 > **Verás esto más adelante, no hace falta dominarlo hoy:** Soluciones y ALM (se practica a fondo desde el Módulo 2), Licenciamiento per-user/per-app/pay-as-you-go (retomado en niveles posteriores), Center of Excellence — introducción conceptual únicamente por ahora.
 
@@ -100,13 +100,13 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 
 **Práctica real en tu entorno (20-60 min; el tiempo depende de Microsoft, no de ti):**
 
-> **⚠️ Cambio de Microsoft en curso (verificado en Microsoft Learn, octubre de 2026):** desde el **15 de noviembre de 2026** registrarse en el Power Apps Developer Plan ya no crea un ambiente, y los ambientes Developer "no administrados" se suspenden desde el **15 de diciembre de 2026** y se borran desde el **15 de enero de 2027**. Si haces este setup antes del 15 de noviembre, sirve para este módulo, pero exporta tus soluciones antes del 15 de diciembre si quieres conservarlas. Detalle: [Cambios importantes en Power Platform](https://learn.microsoft.com/power-platform/important-changes-coming).
+> **⚠️ Cambio de Microsoft en curso (verificado en Microsoft Learn, octubre de 2026):** desde el **15 de noviembre de 2026** registrarse en el Power Apps Developer Plan ya no crea un ambiente y ya no se pueden crear ambientes Developer "no administrados" por ninguna vía (tampoco desde el Admin Center); solo quedan los Developer *administrados*. Los ambientes Developer no administrados que ya existan se suspenden desde el **15 de diciembre de 2026** y se borran desde el **15 de enero de 2027**. Si haces este setup antes del 15 de noviembre, sirve para este módulo, pero exporta tus soluciones antes del 15 de diciembre si quieres conservarlas. Detalle: [Cambios importantes en Power Platform](https://learn.microsoft.com/power-platform/important-changes-coming).
 
 **Paso 1 — Consigue una cuenta de trabajo o estudio (no sirve tu correo personal).**
 
 Microsoft no permite registrarse con una cuenta personal como Gmail, Outlook.com o Hotmail. Elige el caso que se parezca al tuyo:
 
-- **Tienes correo de empresa o universidad:** pruébalo en el Paso 2. Si ves el mensaje *developer environment sign-up is blocked*, tu organización bloqueó el registro y debes ir al caso siguiente.
+- **Tienes correo de empresa o universidad:** pruébalo en el Paso 2. Si ves un mensaje de que el registro de ambientes de desarrollo está bloqueado, tu organización bloqueó el registro y debes ir al caso siguiente.
 - **No tienes ninguna cuenta de trabajo:** crea tu propio tenant de prueba:
   1. Abre https://www.microsoft.com/microsoft-365/try.
   2. Elige un plan de empresa con prueba gratuita de un mes.
@@ -132,7 +132,7 @@ Microsoft no permite registrarse con una cuenta personal como Gmail, Outlook.com
    - **URL:** una corta y única, por ejemplo `dev-tunombre`.
    - **Currency:** la de tu país.
    - **Enable Dynamics 365 apps:** **No**. Exige una licencia de Dynamics 365, y en un ambiente Developer no se pueden instalar apps de Dynamics 365.
-   - **Security group:** es obligatorio. En tu tenant de prueba personal elige la opción que deja el acceso abierto si aparece; si no, el grupo que te ofrezca por defecto.
+   - **Security group:** es obligatorio. Para dejar el acceso abierto (lo normal en tu tenant de prueba personal) elige **None**.
    - Haz clic en **Save**.
 6. Espera a que tu ambiente aparezca en la lista como **Ready**. Suele tardar unos minutos y a veces más.
 
@@ -156,10 +156,10 @@ El trial de Dynamics 365 Customer Service **no se añade a tu ambiente Developer
 
 | Lo que ves | Qué significa | Qué hacer |
 |---|---|---|
-| En **Type** no aparece **Developer** | Desde el 15 de noviembre de 2026 Microsoft solo permite ambientes Developer *administrados*, y tu tenant puede no tener esa opción | Elige **Trial**. Un ambiente Trial exige una licencia de prueba de Power Apps en tu usuario: si el Admin Center te la pide, actívala primero en https://www.microsoft.com/power-platform/products/power-apps/free. Funciona igual para este módulo, pero caduca: anota la fecha que muestra el Admin Center y exporta tus soluciones antes de que termine |
-| *developer environment sign-up is blocked* | Tu organización bloqueó el registro | Pide un ambiente de desarrollo a tu administrador o crea tu tenant de prueba propio (Paso 1) |
-| *You don't currently qualify* en el Microsoft 365 Developer Program | No tienes una suscripción que califique | Usa el tenant de prueba de Microsoft 365 del Paso 1 |
-| Tu ambiente desaparece o queda deshabilitado tras semanas sin usarlo | Los ambientes Developer sin actividad se deshabilitan solos (30 días sin uso en los no administrados) | Entra al menos una vez cada pocas semanas y exporta tus soluciones |
+| En **Type** no aparece **Developer** | Desde el 15 de noviembre de 2026 Microsoft solo permite ambientes Developer *administrados*, y tu tenant puede no tener esa opción | Elige **Trial**. Para crear un ambiente Trial tu usuario (aunque seas administrador) necesita una licencia de prueba por usuario, por ejemplo la de Power Apps: si el Admin Center te la pide, actívala primero en https://apps.powerapps.com/trial. Funciona igual para este módulo, pero dura 30 días: puedes ampliarlo una sola vez otros 30 días en su última semana, y después se deshabilita y se borra. Anota la fecha de fin y exporta tus soluciones antes |
+| Un mensaje de que el registro de ambientes de desarrollo está bloqueado | Tu organización bloqueó el registro | Pide un ambiente de desarrollo a tu administrador o crea tu tenant de prueba propio (Paso 1) |
+| El portal del Microsoft 365 Developer Program te dice que no calificas | No tienes una suscripción que califique | Usa el tenant de prueba de Microsoft 365 del Paso 1 |
+| Tu ambiente desaparece o queda deshabilitado tras semanas sin usarlo | Los ambientes Developer sin actividad se deshabilitan solos (30 días sin actividad en los no administrados, 60 en los administrados) y se borran 15 días después | Solo abrirlo no cuenta como actividad: abre una app, ejecuta un flujo o crea/edita algo al menos una vez cada pocas semanas, y exporta tus soluciones |
 
 **Ahora haz algo — micropráctica (5 min):** **[Diagnosticar: lo que creaste no aparece para tu compañera](/practica/ip-trb-003-ambiente-equivocado)**. Parte de un síntoma real —lo que construiste "desaparece"— y te pide decir qué pasó antes de ver la solución. Es el error de ambiente más común del primer día.
 

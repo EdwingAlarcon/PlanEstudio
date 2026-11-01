@@ -77,15 +77,15 @@ Las Fases 1 a 7 de abajo describen la **entrega completa**. Si vas por la mínim
 
 Este módulo es la síntesis aplicada de los conceptos fundamentales del Nivel 1. Asegúrate de dominarlos antes de comenzar:
 
-- **Integración de soluciones Power Platform:** capacidad de combinar Dataverse, Canvas Apps, Model-Driven Apps, Power Automate y Power BI en una arquitectura cohesionada donde cada componente tiene un rol claro. La integración no es solo conectar herramientas — es diseñar la interacción entre ellas para resolver un problema de negocio completo.
-- **Solución como unidad de ALM:** todos los componentes (tablas, apps, flujos, reportes) deben vivir dentro de una única solución con prefijo de publisher consistente (`sse_`). La solución es el artefacto que se mueve entre ambientes (DEV→TEST→PROD), no los componentes individuales.
-- **Diseño data-first:** el modelo de datos en Dataverse es el núcleo. Las aplicaciones y flujos son consumidores del dato — si el modelo es incorrecto, las capas superiores heredan sus problemas. Antes de crear la primera pantalla, el modelo debe estar validado.
-- **Separación de capas por audiencia:** Canvas App para usuarios operativos (móvil, simplicidad, velocidad); Model-Driven App para gestores y administradores (formularios complejos, vistas, BPF, auditoría); Power BI para tomadores de decisiones (analítica, tendencias, KPIs).
-- **Business Process Flow (BPF):** orquestador visual de etapas que guía al gestor a través del proceso de aprobación y ejecución. El BPF es la fuente de verdad del estado del proceso — no un campo de elección aislado.
-- **Security Roles y Row-Level Security:** el principio de mínimo privilegio aplica desde el inicio. Un usuario que crea solicitudes no debe poder aprobarlas. El modelo de seguridad debe diseñarse en paralelo con el modelo de datos, no al final.
-- **Power Automate como orquestador de procesos:** los flujos automatizan notificaciones, escalaciones, actualizaciones de estado y registros de auditoría — liberando a las apps de lógica que no pertenece a la UI. Un flujo bien diseñado tiene manejo de errores explícito (Scope Try/Catch).
-- **RLS en Power BI:** Row-Level Security garantiza que cada área solo vea sus propias métricas. En un dashboard empresarial, los KPIs sin RLS son un riesgo de confidencialidad.
-- **Connection References y Environment Variables:** los componentes configurables (conexiones a servicios, URLs, parámetros de ambiente) deben parametrizarse desde el inicio para que la solución sea desplegable en múltiples ambientes sin edición manual.
+- **Integración de soluciones Power Platform:** combinar Dataverse, Canvas Apps, Model-Driven Apps, Power Automate y Power BI de forma que cada pieza tenga un papel claro y juntas resuelvan un problema de negocio completo.
+- **Solución como unidad de ALM** (*Application Lifecycle Management*, la forma ordenada de mover cambios entre ambientes): todo vive en una sola solución con el mismo prefijo de publisher (`sse_`), y es la solución, no cada pieza, lo que pasa de DEV a TEST a PROD.
+- **Diseño data-first** (primero los datos): el modelo de Dataverse es el núcleo; si está mal, las apps y flujos heredan el problema. Valídalo antes de crear la primera pantalla.
+- **Separación de capas por audiencia:** Canvas App para quien opera (móvil, simple y rápida); Model-Driven App para gestores y administradores (formularios, vistas, BPF); Power BI para quien decide (análisis, tendencias, KPIs, es decir, indicadores clave).
+- **Business Process Flow (BPF)** (flujo de proceso de negocio): barra de etapas que guía al gestor paso a paso por la aprobación y la ejecución.
+- **Security Roles** (roles de seguridad) **y Row-Level Security** (seguridad por fila: cada persona ve solo los registros que le tocan): da a cada uno el mínimo permiso necesario desde el inicio; quien crea solicitudes no debe poder aprobarlas.
+- **Power Automate como orquestador de procesos:** los flujos se encargan de avisos, escalamientos, cambios de estado y registros de auditoría, para que la app no cargue con esa lógica; un buen flujo maneja sus errores (*Scope Try/Catch*: intentar un bloque y capturar el fallo).
+- **RLS en Power BI** (*Row-Level Security*, seguridad por fila): hace que cada área vea solo sus propias métricas en el reporte.
+- **Connection References** (referencias de conexión: la conexión que usa un flujo, sin atarla a la cuenta de una persona) **y Environment Variables** (variables de entorno: valores como un correo o una URL que cambian según el ambiente): permiten mover la solución entre ambientes sin editarla a mano.
 
 ### 👨‍💻 Actividades Prácticas Paso a Paso
 
@@ -167,7 +167,7 @@ Version: 1.0.0.0
     - Tipo (Choice): TI, Mantenimiento, RRHH, Compras
     - Prioridad (Choice): Baja, Media, Alta, Crítica
     - Estado (Choice): Nueva, Pendiente Aprobación, Aprobada, En Proceso, Completada, Rechazada
-    - Fecha Solicitud (DateTime). Dataverse no deja poner `Now()` como valor por defecto de la columna: rellénala desde la app con `Now()` o usa la columna del sistema **Created On**
+    - Fecha Solicitud (DateTime). Rellénala desde la app con `Now()` al guardar, o usa la columna del sistema **Created On**
     - Fecha Requerida (Date Only)
     - Solicitante (Lookup → Contact, required)
     - Aprobador (Lookup → User)
@@ -192,8 +192,8 @@ Version: 1.0.0.0
 3. **Tabla: Comentario**
     - Solicitud (Lookup → Solicitud, required)
     - Comentario (multiline, 1000 chars, required)
-    - Fecha (DateTime, default Now())
-    - Usuario (Lookup → User, default Current User)
+    - Fecha (DateTime; rellénala desde la app con `Now()` o usa **Created On**)
+    - Usuario (Lookup → User; rellénalo desde la app o usa la columna del sistema **Created By**)
     - Tipo (Choice): Información, Pregunta, Actualización, Resolución
     - Interno (Yes/No) // Solo visible para equipo ejecutor
 
@@ -217,7 +217,7 @@ Version: 1.0.0.0
 
 - Solicitud 1:N Comentarios
 - Solicitud 1:N Aprobaciones
-- Solicitud 1:N Métrica Solicitud. Dataverse no tiene relaciones 1:1: se crea como 1:N (Lookup Solicitud en Métrica Solicitud) y el flujo que la llena debe crear una sola métrica por solicitud
+- Solicitud 1:N Métrica Solicitud. Dataverse solo tiene relaciones 1:N (vistas desde el otro lado, N:1) y N:N, no 1:1: se crea como 1:N (Lookup Solicitud en Métrica Solicitud) y el flujo que la llena debe crear una sola métrica por solicitud
 - Categoría 1:N Solicitudes
 
 **Paso 5: Business Rules**
@@ -227,7 +227,7 @@ Version: 1.0.0.0
     - Fecha Requerida >= Fecha Solicitud
 
 2. **Auto-población (no es una Business Rule):**
-    - "Si se elige una Categoría, poner como Aprobador el Aprobador Default de esa Categoría" **no se puede hacer con una Business Rule**: una regla solo lee y escribe columnas del registro que se guarda, no de un registro relacionado. Hazlo en un flujo (Dataverse *When a row is added* → *Get a row by ID* de la Categoría → *Update a row* de la Solicitud) o, en la Canvas App, con un `LookUp` al guardar.
+    - "Si se elige una Categoría, poner como Aprobador el Aprobador Default de esa Categoría" **no lo plantees como Business Rule**: las condiciones y acciones de una regla se configuran sobre las columnas de su propia tabla, y la documentación de Microsoft no ofrece una forma de leer una columna de la Categoría relacionada. Hazlo en un flujo (Dataverse *When a row is added* → *Get a row by ID* de la Categoría → *Update a row* de la Solicitud) o, en la Canvas App, con un `LookUp` al guardar.
 
 3. **Visibilidad condicional**:
     - Show "Comentarios Aprobador" only if Estado = Aprobada OR Rechazada (Set Visibility sobre la columna, Scope All Forms y rama ✕ con Hide, como en el Módulo 4, Paso 3.3)
@@ -276,18 +276,21 @@ ClearCollect(
     ColMisSolicitudes,
     Filter(
         Solicitudes,
-        Solicitante.'Email Address' = User().Email && Estado.Value <> "Completada"
-        // Compara el email del Contact (Solicitante) con el usuario actual; no usar Solicitante.ID (es GUID, no email)
+        Solicitante.Email = User().Email && Estado <> 'Estado (Solicitudes)'.Completada
+        // Compara la columna Email del Contact (Solicitante) con el correo del usuario actual;
+        // no uses la clave del contacto: es un GUID, nunca coincide con un correo
     )
 );
 
 // Calcular métricas
 UpdateContext({
     TotalSolicitudes: CountRows(ColMisSolicitudes),
-    PendientesAprobacion: CountRows(Filter(ColMisSolicitudes, Estado.Value = "Pendiente Aprobación")),
-    EnProceso: CountRows(Filter(ColMisSolicitudes, Estado.Value = "En Proceso"))
+    PendientesAprobacion: CountRows(Filter(ColMisSolicitudes, Estado = 'Estado (Solicitudes)'.'Pendiente Aprobación')),
+    EnProceso: CountRows(Filter(ColMisSolicitudes, Estado = 'Estado (Solicitudes)'.'En Proceso'))
 })
 ```
+
+> **Choices en Power Fx:** `Estado` es una columna *Choice*; su etiqueta ("Completada") es solo para mostrar, así que se compara con la enumeración de la elección, `'Estado (Solicitudes)'.Completada`, no con el texto. Las opciones con espacios o tildes van entre comillas simples. Si el nombre de tu tabla es otro, escribe `'Estado (` en la barra de fórmulas y elige la opción que te propone.
 
 *Gallery con búsqueda:*
 ```javascript
@@ -295,7 +298,7 @@ UpdateContext({
 SortByColumns(
     Filter(
         ColMisSolicitudes,
-        SearchBox.Text in Título || SearchBox.Text in Descripción
+        txtBusqueda.Text in Título || txtBusqueda.Text in Descripción
     ),
     "Fecha Solicitud",
     Descending
@@ -308,10 +311,12 @@ SortByColumns(
 Notify("Solicitud creada exitosamente", NotificationType.Success);
 
 // Ejecutar flujo de Power Automate
-'Flujo Notificar Nueva Solicitud'.Run(FormNueva.LastSubmit.ID);
+// En Dataverse no hay una columna "ID" numérica: la clave de la fila es un GUID cuyo nombre lógico
+// es el de la tabla + "id" (aquí sse_solicitudid; confírmalo en Columns de tu tabla). El flujo recibe texto.
+'Flujo Notificar Nueva Solicitud'.Run(Text(frmNueva.LastSubmit.sse_solicitudid));
 
 // Navegar a detalle
-Navigate(ScreenDetalle, ScreenTransition.Cover, {RegistroActual: FormNueva.LastSubmit})
+Navigate(ScreenDetalle, ScreenTransition.Cover, {RegistroActual: frmNueva.LastSubmit})
 ```
 
 **Ahora diagnostica — micropráctica (5 min):** **[Diagnosticar: mi pantalla de inicio sale vacía](/practica/ip-trb-006-pantalla-de-inicio-vacia)**. Parte de un síntoma exacto —la lista vacía sin ningún error aunque hay datos— y te pide la causa y la corrección, antes de ver la solución.
@@ -321,8 +326,9 @@ Navigate(ScreenDetalle, ScreenTransition.Cover, {RegistroActual: FormNueva.LastS
 *Component: Timeline de Comentarios*
 ```javascript
 // Gallery vertical de comentarios
+// La columna Lookup Solicitud se compara con el registro completo, no con un "ID"
 SortByColumns(
-    Filter(Comentarios, Solicitud.ID = RegistroActual.ID),
+    Filter(Comentarios, Solicitud = RegistroActual),
     "Fecha",
     Descending
 )
@@ -333,14 +339,14 @@ Patch(
     Comentarios,
     Defaults(Comentarios),
     {
-        Solicitud: {ID: RegistroActual.ID},
-        Comentario: TextInputComentario.Text,
-        Tipo: {Value: "Información"},
+        Solicitud: RegistroActual,  // un Lookup se asigna con el registro relacionado
+        Comentario: txtComentario.Text,
+        Tipo: 'Tipo (Comentarios)'.Información,  // Choice: se asigna su enumeración, no {Value: "..."}
         Usuario: LookUp(Users, 'Primary Email' = User().Email)
         // LookUp a la tabla Users de Dataverse — {ID: User().Email} es incorrecto porque ID debe ser GUID, no email
     }
 );
-Reset(TextInputComentario);
+Reset(txtComentario);
 Refresh(Comentarios)
 ```
 
@@ -405,13 +411,14 @@ Tab 4: Timeline
    ```
    Filtro: Asignado a = Current User AND Estado IN (Aprobada, En Proceso)
    Columnas: Título, Prioridad, Estado, Fecha Requerida, Días Restantes
-   Orden: Prioridad DESC, Fecha Requerida ASC
+   Orden: Fecha Requerida ASC (la que vence antes, primero)
    ```
+   > No ordenes esta vista por Prioridad: las vistas ordenan las columnas Choice por el texto de la opción (alfabético), así que "Alta" saldría antes que "Crítica" ([Learn](https://learn.microsoft.com/power-apps/developer/data-platform/fetchxml/order-rows#choice-columns)). Si quieres ver primero lo urgente, filtra por Prioridad o añade una columna numérica que la represente, como el SLA Horas del Módulo 2.
 
 3. **Chart View: Solicitudes por Tipo**
    ```
    Chart Type: Donut
-   Agregación: Count of Solicitudes
+   Agregación: Count: All (sobre una columna que siempre tenga valor)
    Grouping: Tipo
    ```
 
@@ -458,13 +465,13 @@ Stage 4: Cierre
 > Para el entregable mínimo, implementa primero solo el Flujo 1. Los demás flujos completan la madurez del proyecto, pero no son necesarios para demostrar integración básica.
 
 > **Flujo 1 en versión mínima.** La versión de abajo usa aprobaciones y llama al Flujo 3, que la entrega mínima no tiene. Para la mínima, construye esto:
-> - **Trigger:** si elegiste Canvas, **When Power Apps calls a flow (V2)** (conector Power Apps) con una entrada de texto `SolicitudID`; si elegiste Model-Driven, el trigger de Dataverse **When a row is added, modified or deleted** (Change type: Added, Table: Solicitudes), igual que en la Práctica 5.1.
+> - **Trigger:** si elegiste Canvas, el trigger de Power Apps (V2) del conector **Power Apps** con una entrada de texto `SolicitudID`; si elegiste Model-Driven, el trigger de Dataverse **When a row is added, modified or deleted** (Change type: Added, Table: Solicitudes), igual que en la Práctica 5.1.
 > - **Get a row by ID** (Dataverse) de Solicitudes; con el trigger de Power Apps, el Row ID es `SolicitudID`.
 > - **Get a row by ID** de Contacts con el Solicitante.
 > - **Send an email (V2)** al correo del Contact con el título, el tipo y la prioridad.
 > - Sin condición ni aprobación. El Estado queda en "Nueva".
 >
-> La llamada desde la Canvas App es la del `OnSuccess` de la Fase 2: primero agrega el flujo a la app (panel **Power Automate** → **Add flow**) para que `'Flujo Notificar Nueva Solicitud'.Run(...)` exista.
+> La llamada desde la Canvas App es la del `OnSuccess` de la Fase 2: primero agrega el flujo a la app (panel **Power Automate** del menú de edición de la app → **Add a flow**) para que `'Flujo Notificar Nueva Solicitud'.Run(...)` exista.
 
 **Flujo 1: Notificar Nueva Solicitud**
 ```

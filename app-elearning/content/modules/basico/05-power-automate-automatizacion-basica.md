@@ -21,16 +21,16 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 - Aprobaciones, patrones Try/Catch con Scopes y Power Automate Desktop. Son muy útiles, pero no necesitas completarlos antes de tener tus primeros flujos funcionando.
 
 ### 📖 Conceptos Clave
-- **Tipos de flujos**: Cloud (automated, instant, scheduled), Desktop, Business Process
-- **Triggers**: When item created/modified, recurrence, manual, HTTP request
-- **Actions**: CRUD operations, notifications, approvals, HTTP calls
-- **Expresiones**: Funciones de transformación de datos
-- **Condiciones**: If/else, switch, loops (Apply to each)
-- **Variables**: Initialize, Set, Increment, Append to array
-- **Error Handling**: Configure run after, Try-Catch pattern
-- **Connections**: Service accounts vs user delegated
-- **Concurrency**: Serial vs parallel execution
-- **Scopes**: Agrupar acciones para manejo de errores
+- **Tipos de flujos**: *Cloud* (en la nube): *automated* (arranca solo con un evento), *instant* (lo lanzas tú con un botón) y *scheduled* (corre a una hora fija); *Desktop* (automatiza clics en tu PC); *Business Process* (guía paso a paso dentro de una app).
+- **Triggers** (disparadores): el evento que arranca el flujo; por ejemplo, *when item created/modified* (se crea o cambia un registro), *recurrence* (un horario), *manual* (un botón) o *HTTP request* (una llamada desde otro sistema).
+- **Actions** (acciones): cada paso que hace el flujo: *CRUD* (crear, leer, actualizar y borrar datos), enviar avisos, pedir aprobaciones o llamar a otro servicio por *HTTP*.
+- **Expresiones**: fórmulas pequeñas para transformar datos (fechas, textos, números).
+- **Condiciones**: *If/else* (si pasa esto, haz A; si no, B), *switch* (elige entre varios casos) y *loops* (repetir para cada elemento, con *Apply to each*).
+- **Variables**: valores que guardas y cambias durante el flujo: *Initialize* (crearla), *Set* (darle un valor), *Increment* (sumarle) y *Append to array* (añadirle un elemento a una lista).
+- **Error Handling** (manejo de errores): qué hacer cuando algo falla; *Configure run after* (ejecutar un paso solo si el anterior falló) y el patrón *Try-Catch* (intentar y, si falla, capturar el error).
+- **Connections** (conexiones): con qué cuenta se conecta el flujo a cada servicio: una *service account* (cuenta de servicio, compartida) o la del propio usuario (*user delegated*).
+- **Concurrency** (concurrencia): si los pasos o ejecuciones van uno tras otro (*serial*) o a la vez (*parallel*).
+- **Scopes** (ámbitos): cajas que agrupan acciones, útiles para manejar errores de todo un bloque.
 
 ### 👨‍💻 Actividades Prácticas
 
@@ -152,7 +152,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 *Objetivo: Enviar resumen diario de solicitudes pendientes*
 
 > **Antes de empezar, dos cosas que usarás en varios pasos:**
-> - **Cómo insertar una expresión:** haz clic dentro del campo, luego en el icono **fx** (*Insert expression*) que aparece a su lado, pega la expresión y haz clic en **Add**. En el diseñador clásico es la pestaña **Expression** del panel de contenido dinámico. Una expresión pegada como texto normal no se calcula: se envía tal cual.
+> - **Cómo insertar una expresión:** haz clic dentro del campo, luego en el icono **fx** (*Insert expression*) que aparece a su lado, pega la expresión y haz clic en **Add**. En el diseñador clásico se hace desde la sección de expresiones del panel de contenido dinámico. Una expresión pegada como texto normal no se calcula: se envía tal cual.
 > - **Nombres lógicos:** los ejemplos usan el prefijo `sit_` del Módulo 2 (`sit_estado`, `sit_fechasolicitud`…). Si tu Publisher tiene otro prefijo, cámbialo en todas las expresiones. En el Paso 2 verás los nombres reales de tus columnas.
 >
 > **El flujo terminado queda en este orden:** Recurrence → List rows → Initialize variable → Condition (¿no hay filas?) → Sí: Terminate / No: Apply to each + Append + Send an email.
@@ -166,8 +166,8 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
    - **Starting:** la fecha de mañana.
    - **Repeat every:** `1` y **Day**.
    - Haz clic en **Create**.
-4. Se abre el diseñador con el trigger **Recurrence**. Haz clic sobre él y, en sus parámetros avanzados (*Show all* o *Advanced parameters*), configura:
-   - **Time zone:** tu zona horaria (por ejemplo, `(UTC-05:00) Bogota, Lima, Quito`).
+4. Se abre el diseñador con el trigger **Recurrence**. Haz clic sobre él: en el diseñador nuevo se abre su panel de configuración a la izquierda (en el clásico, despliega **Show advanced options**). Configura:
+   - **Time zone:** elige tu zona horaria en la lista.
    - **At these hours:** `8`.
    - **At these minutes:** `0`.
 5. Haz clic en **Save** (arriba a la derecha).
@@ -182,12 +182,14 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
    - el número que tiene `sit_estado` en una solicitud **Nueva** y en una **En Proceso**. Al lado verás `sit_estado@OData.Community.Display.V1.FormattedValue` con el texto ("Nueva"): así sabes qué número corresponde a cada estado.
 
    > Los Choice se filtran por su número, no por su texto, y Dataverse asigna esos números según tu Publisher (suelen ser de 9 dígitos, como `723500000`). Por eso no hay un número que sirva para todos: lo lees de tu propia ejecución.
-5. Vuelve a **Edit**, abre **List rows** → **Show all** y completa:
+5. Vuelve a **Edit**, abre **List rows**, despliega **Advanced parameters** (en el diseñador clásico, **Show advanced options**) y completa:
    - **Filter rows** (cambia los dos números por los que anotaste):
    ```
    sit_estado eq 723500000 or sit_estado eq 723500001
    ```
    - **Sort By:** `sit_prioridad desc, sit_fechasolicitud desc`
+
+   > Aquí (consulta OData de Dataverse) una columna Choice se ordena por el **número** de la opción, no por su texto ([Learn: ordenar filas con la Web API](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/query/order-rows)). Como en el Módulo 2 creaste las opciones en el orden Baja → Media → Alta → Crítica, `desc` pone primero las Críticas. Ojo: las vistas de una app model-driven sí ordenan las Choice por su texto (Módulo 4).
 
 **Paso 3: Preparar la tabla HTML**
 
@@ -220,7 +222,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 
 **Paso 5: Llenar la tabla y enviar el correo (todo dentro de la rama False)**
 
-1. En la rama **False**, **+** → **Add an action** → **Apply to each** (en el diseñador nuevo puede llamarse **For each**).
+1. En la rama **False**, **+** → **Add an action** → **Apply to each** (en *Control*).
    - En **Select an output from previous steps** elige, del contenido dinámico de *List rows*, el valor **value** (la lista de filas).
 2. Dentro del loop, **+** → **Add an action** → **Append to string variable**:
    - **Name:** `htmlTable`
@@ -240,6 +242,8 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
    | 2 | Categoría (texto, no número) | `item()?['sit_categoria@OData.Community.Display.V1.FormattedValue']` |
    | 3 | Prioridad (texto, no número) | `item()?['sit_prioridad@OData.Community.Display.V1.FormattedValue']` |
    | 4 | Solicitante (nombre del Contact) | `item()?['_sit_solicitante_value@OData.Community.Display.V1.FormattedValue']` |
+
+   > Las columnas `...@OData.Community.Display.V1.FormattedValue` son el texto "formateado" que Dataverse devuelve junto al valor: la etiqueta de una Choice o el nombre principal del registro de un Lookup ([Learn: valores con formato](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/query/select-columns)). Si no ves alguna en los *raw outputs* del Paso 2, usa el nombre que sí aparezca allí.
    | 5 | Días abierta | `div(sub(ticks(utcNow()), ticks(item()?['sit_fechasolicitud'])), 864000000000)` |
 
    > `item()` es la fila que el loop está recorriendo. La expresión 5 resta dos fechas en *ticks* (unidades de 100 nanosegundos) y divide por los ticks de un día (864000000000), así que da días enteros. Si alguna solicitud no tiene **Fecha Solicitud**, esa acción falla: rellena la fecha o usa `createdon` en su lugar.
@@ -247,7 +251,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 4. Debajo, **+** → **Add an action** → **Send an email (V2)** (Office 365 Outlook):
    - **To:** tu propio correo de trabajo.
    - **Subject:** inserta con **fx** `concat('Reporte Diario Solicitudes - ', formatDateTime(utcNow(), 'yyyy-MM-dd'))`.
-   - **Body:** haz clic en el botón de vista de código (**</>**) del editor para poder pegar HTML y escribe:
+   - **Body:** cambia el editor a vista de código para poder pegar HTML (en el diseñador clásico es el botón **</>** de la barra del editor; en el nuevo, usa el botón equivalente de código/HTML de esa barra si aparece) y escribe:
    ```html
    <h2>Solicitudes Pendientes de Atención</h2>
    <p>Total: (expresión) solicitudes</p>
@@ -260,9 +264,9 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 |---|---|---|
 | El correo muestra literalmente `empty(...)` o `length(...)` | Pegaste la expresión como texto | Bórrala e insértala con **fx** |
 | La columna Prioridad muestra un número como `723500002` | Usaste el valor y no la etiqueta | Usa la expresión con `@OData.Community.Display.V1.FormattedValue` |
-| Error *The template language function 'ticks' expects…* | Alguna fila no tiene Fecha Solicitud | Rellena la fecha o usa `createdon` |
-| *The variable 'htmlTable' must be initialized* o no te deja añadir Initialize variable | La pusiste dentro de la condición o del loop | Muévela al nivel principal, justo debajo de List rows |
-| El correo llega con la tabla como texto con etiquetas `<td>` | Escribiste el HTML en el modo de texto enriquecido | Pégalo en la vista de código (**</>**) |
+| La acción de Append falla con un error que menciona la función `ticks` | Alguna fila no tiene Fecha Solicitud (`ticks` necesita una fecha) | Rellena la fecha o usa `createdon` |
+| Un error dice que la variable `htmlTable` no existe o no está inicializada, o no te deja añadir Initialize variable | La pusiste dentro de la condición o del loop | Muévela al nivel principal, justo debajo de List rows |
+| El correo llega con la tabla como texto con etiquetas `<td>` | Escribiste el HTML en el modo de texto enriquecido | Pégalo en la vista de código del editor |
 
 **Evidencia a reportar:**
 
@@ -307,11 +311,13 @@ Esta vez no te digo los pasos: aplica lo que viste a un pedido nuevo.
 
 1. Create > Instant cloud flow
 2. Nombre: `Aprobar Cambio Prioridad`
-3. Trigger: "Manually trigger a flow"
-4. Agregar inputs:
-    - Solicitud ID (text)
-    - Nueva Prioridad (text)
-    - Justificación (text)
+3. Trigger: **PowerApps (V2)** (búscalo por "Power Apps"). No uses "Manually trigger a flow": ese trigger es para lanzar el flujo a mano, y la Canvas App del Paso 5 necesita un trigger de Power Apps para poder llamarlo
+4. En el trigger, agrega tres inputs de tipo **Text**:
+    - Solicitud ID
+    - Nueva Prioridad
+    - Justificación
+
+> Fuente: [Create a canvas app that can trigger a Power Automate flow](https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/how-to/trigger-flow) (trigger PowerApps (V2) e inputs) y [Use Power Automate pane](https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/working-with-flows) (el flujo debe tener un trigger de Power Apps).
 
 **Paso 2: Obtener registro actual**
 
@@ -336,23 +342,25 @@ Esta vez no te digo los pasos: aplica lo que viste a un pedido nuevo.
 
 1. Condition: Si `Outcome = Approve`
     - **Yes**:
-     - Action: "Update a row" (Dataverse)
+     - Action: **Switch** sobre `{Nueva Prioridad input}`, con un caso por prioridad (`Crítica`, `Alta`, `Media`, `Baja`). Dentro de cada caso:
+       - Action: "Update a row" (Dataverse)
        - Table: Solicitudes TI
-       - Row ID: `{Solicitud ID}`
-       - Prioridad: `{Nueva Prioridad input}`
+       - Row ID: `{Solicitud ID input}`
+       - Prioridad: elige en la lista la opción de ese caso. Una columna Choice guarda el número de la opción, no el texto, así que no puedes pegar el input de texto directamente
      - Action: Send email de confirmación al solicitante
     - **No**:
      - Action: Send email de rechazo con comentarios del aprobador
 
 **Paso 5: Integrar con Power Apps**
 
-1. En Canvas App, agregar Button "Cambiar Prioridad"
-2. OnSelect:
+1. En Power Apps Studio, abre **Power Automate** en el menú de creación de la app, selecciona **Add a flow** y elige `Aprobar Cambio Prioridad`
+2. Agrega un Drop down `drpNuevaPrioridad` con Items `["Crítica", "Alta", "Media", "Baja"]`, un Text input `txtJustificacion` y un Button "Cambiar Prioridad"
+3. OnSelect del botón:
    ```javascript
    'Aprobar Cambio Prioridad'.Run(
-       GallerySolicitudes.Selected.ID,
-       DropdownNuevaPrioridad.Selected.Value,
-       TextInputJustificacion.Text
+       Text(galSolicitudes.Selected.'Solicitud TI'), // la columna de clave (GUID) lleva el nombre de la tabla; confírmalo con IntelliSense
+       drpNuevaPrioridad.Selected.Value,             // texto de la lista: coincide con los casos del Switch
+       txtJustificacion.Text
    );
    Notify("Solicitud de cambio enviada", NotificationType.Success)
    ```

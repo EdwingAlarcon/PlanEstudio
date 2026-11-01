@@ -4070,13 +4070,13 @@
       type: "single",
       prompt: "Un desarrollador de Canvas Apps aumenta el límite de registros de datos de una app que usa una fórmula no delegable sobre una tabla de 50,000 registros. ¿Qué es correcto sobre este límite?",
       options: [
-      "El default es 500 registros, configurable hasta un máximo de 2000",
+      "El default es 500 registros, configurable hasta un máximo de 10.000",
       "El límite de delegación no existe para Dataverse, solo para SharePoint",
       "Aumentar el límite garantiza que se procesen los 50,000 registros completos",
       "El límite solo aplica a operaciones de escritura, nunca de lectura"
       ],
       answer: [0],
-      explanation: "El límite de registros de datos por defecto es 500 y puede subirse hasta 2000, pero eso no elimina el riesgo de trabajar sobre un subconjunto incompleto en fórmulas no delegables sobre tablas de 50,000 registros. El límite aplica a lecturas y sí existe también para Dataverse."
+      explanation: "El límite de registros de datos por defecto es 500 y puede subirse hasta 10.000 (Settings > General > Data row limit, según Microsoft Learn: https://learn.microsoft.com/power-apps/maker/canvas-apps/delegation-overview), pero eso no elimina el riesgo de trabajar sobre un subconjunto incompleto en fórmulas no delegables sobre tablas de 50,000 registros. El límite aplica a lecturas y sí existe también para Dataverse."
     },
     {
       type: "single",

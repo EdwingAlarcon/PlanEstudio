@@ -21,15 +21,15 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 - Business Process Flow completo y Security Roles probados con usuarios diferentes. Son importantes, pero no bloquean tu primer logro visible del módulo.
 
 ### 📖 Conceptos Clave
-- **Arquitectura Model-Driven**: Metadata-driven, auto-generada
-- **Componentes**: Forms, Views, Charts, Dashboards, Business Process Flows
-- **Site Map**: Navegación y estructura de áreas
-- **Security Roles**: Permisos granulares por tabla/operación
-- **Forms**: Main, Quick Create, Quick View
-- **Quick View Forms**: mostrar datos de registros relacionados directamente en el formulario principal sin cambiar de pantalla
-- **Subgrids**: mostrar y gestionar registros relacionados (1:N o N:N) embebidos dentro de un formulario Model-Driven
-- **UCI (Unified Client Interface)**: Experiencia moderna
-- **Modern App Designer** (2023+): nuevo diseñador visual unificado que reemplaza al editor clásico. Permite configurar páginas, tablas, formularios, vistas y navegación desde una sola interfaz. Es el editor predeterminado en todos los ambientes actuales — si las instrucciones mencionan el "diseñador clásico", selecciona **Switch to classic** en la barra superior si necesitas reproducir pasos del tutorial
+- **Arquitectura Model-Driven**: *metadata-driven* (la app se arma a partir de la definición de tus tablas, no la dibujas) y se genera casi sola.
+- **Componentes**: *Forms* (formularios), *Views* (vistas: listas filtradas), *Charts* (gráficos), *Dashboards* (tableros que juntan gráficos y listas) y *Business Process Flows* (barra de etapas que guía un proceso).
+- **Site Map** (mapa del sitio): el menú de navegación de la app, organizado en áreas, grupos y páginas.
+- **Security Roles** (roles de seguridad): conjuntos de permisos que dicen qué puede hacer cada persona con cada tabla (crear, leer, editar, borrar).
+- **Forms** (formularios): *Main* (el completo), *Quick Create* (uno corto para crear rápido) y *Quick View* (muestra datos de otro registro relacionado).
+- **Quick View Forms**: mostrar datos de registros relacionados directamente en el formulario principal sin cambiar de pantalla.
+- **Subgrids** (subcuadrículas): una lista de registros relacionados (1:N o N:N) metida dentro de un formulario.
+- **UCI (Unified Client Interface)**: la interfaz moderna y común de las apps model-driven, la misma en navegador, tableta y móvil.
+- **Modern App Designer** (diseñador moderno de apps): el editor visual donde configuras páginas, tablas, formularios, vistas y navegación desde una sola pantalla. Es el que se abre por defecto; algunos pasos avanzados todavía te llevan al diseñador clásico.
 
 ### 👨‍💻 Actividades Prácticas
 
@@ -62,7 +62,7 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 3. En la barra superior: **+ New** → **App** → **Model-driven app**.
 4. **Name:** `Gestión Solicitudes TI` → **Create**. Se abre el diseñador de apps (Modern App Designer).
 5. Agrega las tablas como páginas:
-   - En la barra superior haz clic en **+ Add page** → **Dataverse table** → **Next**.
+   - En la barra superior haz clic en **+ Add page** → **Dataverse table**.
    - Marca **Solicitud TI** y **Contact** → **Add**.
 6. Haz clic en **Save**.
 
@@ -70,7 +70,7 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 
 En el diseñador nuevo, las subáreas se llaman **páginas** y se ordenan en grupos y áreas.
 
-1. **Activa las áreas** (vienen apagadas): en la barra superior, **Settings** → en el panel izquierdo, **Navigation** → activa **Enable Areas** → cierra la ventana. Cuando la app tenga varias áreas, ya no se puede desactivar.
+1. **Activa las áreas** (vienen apagadas): en la barra superior, **Settings** → en el panel izquierdo, **Navigation** → activa **Enable Areas** → cierra la ventana. Si la app ya tiene varias áreas, la opción viene activada.
 2. En el panel izquierdo, haz clic en **Pages**. Arriba del árbol verás el selector de área. Cámbiale el título al área que ya existe por `Solicitudes` (en el panel de propiedades, a la derecha).
 3. Crea los grupos: haz clic en **...** junto a **Navigation** → **New group** → título `Operación`. Repite para `Configuración`.
 4. Arrastra la página **Solicitud TI** al grupo `Operación` y **Contact** a `Configuración`.
@@ -145,47 +145,50 @@ Así queda:
 
 > **Una Business Rule no puede ocultar una pestaña ni una sección, solo columnas.** Por eso esta regla oculta las dos columnas de resolución, no la pestaña. Ocultar la pestaña completa exige JavaScript; lo harás en el Módulo 13.
 
-1. En la tabla **Solicitud TI** → **Business rules** → **+ New business rule**. Se abre el diseñador en otra pestaña del navegador.
-2. Arriba a la derecha, comprueba que **Scope** diga **All Forms** (con *Entity* las acciones de mostrar y ocultar no se aplican).
+1. En la tabla **Solicitud TI** → **Business rules** → **Add business rule**. Se abre el diseñador en otra pestaña del navegador.
+2. Arriba a la derecha, pon **Scope** en **All Forms**. Mostrar/ocultar columnas y hacerlas obligatorias son acciones de formulario, así que la regla debe aplicarse a los formularios.
 3. Haz clic en la caja **Condition** y, en el panel derecho:
-   - **Field:** Estado · **Operator:** Equals · **Type:** Value · **Value:** Resuelta.
-   - Haz clic en **+ New** para añadir otra regla, elige **OR** en **Rule Logic** y configura: Estado · Equals · Value · Cerrada.
+   - **Field:** Estado · operador de igualdad ("es igual a") · **Type:** Value · **Value:** Resuelta.
+   - Haz clic en **+ New** para añadir otra regla, elige **OR** en **Rule Logic** y configura: Estado · igual a · Value · Cerrada.
    - Haz clic en **Apply**.
-4. Desde la pestaña **Components** (derecha), arrastra **Set Visibility** al **+** junto al ✓ (condición verdadera): **Field:** Fecha Resolución · **Status:** Show field → **Apply**. Repite con Notas de Resolución.
-5. Arrastra otra **Set Visibility** al **+** junto a la ✕ (condición falsa) para cada una de las dos columnas, con **Status:** Hide field. La regla no se invierte sola: si no pones la rama ✕, las columnas se quedan visibles.
-6. Arriba, en **Name**, escribe `Mostrar resolución según estado` → **Save** → **Activate** → confirma.
+4. Desde la pestaña **Components** (derecha), arrastra **Set Visibility** al **+** junto al ✓ (condición verdadera): **Field:** Fecha Resolución y elige la opción que **muestra** la columna → **Apply**. Repite con Notas de Resolución.
+5. Arrastra otra **Set Visibility** al **+** junto a la ✕ (condición falsa) para cada una de las dos columnas, eligiendo la opción que la **oculta**. La regla no se invierte sola: si no pones la rama ✕, las columnas se quedan visibles.
+6. En la barra de comandos, en **Business rule name** (viene como *New business rule*), escribe `Mostrar resolución según estado` → **Save**. Para activarla, cierra el diseñador, selecciona la regla en la lista de **Business rules** de la tabla y elige **Activate** (Microsoft indica que no se activa desde la ventana del diseñador).
 7. *(Opcional, misma técnica)* Otra regla con la condición Estado = Resuelta y la acción **Set Business Required** sobre Fecha Resolución (✓ Business Required, ✕ Not Business Required).
 
 **3.4 Formulario Quick Create.**
 
-1. Activa la opción en la tabla: **Tables** → **Solicitud TI** → **Properties** → **Advanced options** → marca **Leverage quick create form if available** (en algunos ambientes aparece como *Enable quick create forms*) → **Save**.
-2. En **Forms** → **+ New form** → **Quick create form**.
-3. Arrastra solo cuatro columnas: Título de Solicitud, Categoría, Prioridad y Descripción → **Save and publish**.
-4. Para probarlo, en la app haz clic en **+** (o **New**) de la barra superior y elige Solicitud TI: se abre un panel lateral corto en vez del formulario completo.
+1. Activa la opción en la tabla: abre las propiedades de la tabla **Solicitud TI** y, entre sus opciones, marca **Enable quick create forms** → **Save**.
+2. En **Forms** → **+ New form** → **Quick create form** → escribe un **Form name** → **Create**.
+3. Desde **Table columns** arrastra solo cuatro columnas: Título de Solicitud, Categoría, Prioridad y Descripción → **Save and publish**.
+4. Para probarlo, en la app haz clic en el botón **Create** de la barra de navegación (arriba) y elige Solicitud TI: se abre un panel lateral corto en vez del formulario completo.
 
 **Paso 4: Crear las vistas y los gráficos**
 
-**Para crear una vista:** **Tables** → **Solicitud TI** → **Views** → **+ New view** → escribe el nombre → **Create**. En el diseñador:
-- **Columnas:** panel izquierdo **Table columns** → haz clic en cada columna para añadirla.
-- **Filtro:** panel derecho → **Edit filters** → **+ Add** → **Add row** → elige columna, operador y valor → **OK**.
-- **Orden:** haz clic en el encabezado de la columna → **Sort A to Z** o **Sort Z to A**. Para un segundo orden, repite en otra columna.
+**Para crear una vista:** **Tables** → **Solicitud TI** → **Views** → añade una vista nueva (**+ New view**) → escribe el nombre → **Create**. En el diseñador:
+- **Columnas:** selecciona **+ View column**, o arrastra la columna desde **Table columns** en el panel izquierdo.
+- **Filtro:** en el panel de propiedades de la vista (derecha) → **Edit filters** → **Add** → **Add row** → elige columna, operador y valor → **OK**. Las filas del mismo grupo se combinan con **And**.
+- **Orden:** selecciona el encabezado de la columna y elige el orden ascendente o descendente (según el tipo de columna verás **Sort A to Z** / **Sort Z to A** o **Sort ascending** / **Sort descending**). Para un segundo criterio, usa **Then sort by** en el panel de propiedades de la vista.
 - Termina con **Save and publish**.
 
+> **Ojo con ordenar por Prioridad:** las vistas ordenan las columnas Choice por el **texto** de la opción (alfabéticamente), no por el orden en que las creaste ([Learn: ordenar columnas Choice en FetchXML](https://learn.microsoft.com/power-apps/developer/data-platform/fetchxml/order-rows#choice-columns)). Por eso aquí se ordena por **SLA Horas**, que ya refleja la prioridad (Crítica = 4, Alta = 8, Media = 24, Baja = 48, por la regla del Módulo 2).
+
 1. **Vista "Solicitudes Activas"**
-    - Filtro: Estado · **Does not equal** · Cerrada
-    - Columnas: Título de Solicitud, Solicitante, Prioridad, Estado, Fecha Solicitud
-    - Orden: Prioridad **Z to A** (Crítica primero, si creaste las opciones en el orden Baja → Crítica), luego Fecha Solicitud **Z to A** (más reciente primero)
+    - Filtro: Estado · operador "no es igual a" · Cerrada
+    - Columnas: Título de Solicitud, Solicitante, Prioridad, SLA Horas, Estado, Fecha Solicitud
+    - Orden: SLA Horas **ascendente** (Crítica primero), luego Fecha Solicitud **descendente** (más reciente primero)
 
 2. **Vista "Mis Asignaciones"**
-    - Filtro: Asignado a · **Equals current user**, **y además** Estado · Does not equal · Cerrada (dos filas en el mismo grupo, con **And**)
+    - Filtro: Asignado a con el operador que lo compara con el **usuario actual**, **y además** Estado · "no es igual a" · Cerrada (dos filas en el mismo grupo, con **And**)
     - Columnas: Título de Solicitud, Categoría, Prioridad, Fecha Solicitud
-    - Orden: Fecha Solicitud **A to Z** (más antigua primero)
+    - Orden: Fecha Solicitud **ascendente** (más antigua primero)
 
-3. **Dos gráficos** (los usarás en el dashboard del Paso 5). En **Tables** → **Solicitud TI** → **Charts** → **+ New chart** se abre el diseñador de gráficos en otra pestaña:
-    - **Gráfico "Solicitudes por Estado":** tipo **Pie** (icono en la barra superior). **Legend Entries (Series):** Título de Solicitud con **Count:All**. **Horizontal (Category) Axis Labels:** Estado. Nombre arriba a la izquierda → **Save & Close**.
-    - **Gráfico "Solicitudes por Prioridad":** igual, pero tipo **Column** y eje horizontal Prioridad.
+3. **Dos gráficos** (los usarás en el dashboard del Paso 5). En **Tables** → **Solicitud TI** → **Charts** (en *Data experiences*) → **New chart** se abre el diseñador de gráficos:
+    - **Gráfico "Solicitudes por Estado":** en **Column** elige Título de Solicitud, en **Aggregate** elige **Count: All**, en **Chart type** elige **Pie** → **Next**. Como categoría (eje horizontal) elige **Estado** → **Apply** → **Save** → **Publish**.
+    - **Gráfico "Solicitudes por Prioridad":** igual, pero **Chart type** **Column** y categoría **Prioridad**.
+    - El diseñador nombra el gráfico automáticamente a partir de las columnas; cámbiale el nombre a los de arriba en sus propiedades para encontrarlos luego. Si se abre el diseñador clásico, los mismos campos se llaman **Legend Entries (Series)** y **Horizontal (Category) Axis**, y se termina con **Save and Close**.
 
-    > Un gráfico que "cuenta" siempre se arma así: en la serie, cualquier columna que siempre tenga valor con **Count:All**; en el eje horizontal, la columna por la que agrupas.
+    > Un gráfico que "cuenta" siempre se arma así: en la serie, cualquier columna que siempre tenga valor con **Count: All**; en el eje horizontal, la columna por la que agrupas.
 
 **Evidencia a reportar:**
 
@@ -211,12 +214,12 @@ Así queda:
 
 **Paso 5: Crear el dashboard y añadirlo a la app**
 
-1. En tu solución: **+ New** → **Dashboard** → **Classic dashboard** → elige el diseño **2-Column Regular Dashboard** → **Create**. Se abre el editor en otra pestaña.
+1. En tu solución: **+ New** → **Dashboard** → elige el diseño **2-column overview**. Se abre el editor (**Dashboard: New**).
 2. **Name:** `Dashboard Solicitudes TI`.
-3. Haz clic en el panel superior izquierdo → en la barra, **Chart** → **Record Type:** Solicitud TI · **View:** Solicitudes Activas · **Chart:** Solicitudes por Estado → **Add**.
-4. Panel superior derecho → **Chart** → igual, con el gráfico **Solicitudes por Prioridad** → **Add**.
-5. Panel inferior → **List** → **Record Type:** Solicitud TI · **View:** Solicitudes Activas → **Add**.
-6. **Save** → **Close**.
+3. En un recuadro vacío, haz clic en su icono de gráfico → en el diálogo **Add Component**: **Record Type:** Solicitud TI · **View:** Solicitudes Activas · **Chart:** Solicitudes por Estado → **Add**.
+4. En otro recuadro, icono de gráfico → igual, con el gráfico **Solicitudes por Prioridad** → **Add**.
+5. En un tercer recuadro, haz clic en su icono de lista → **Record Type:** Solicitud TI · **View:** Solicitudes Activas → **Add**.
+6. **Save** → **Close** → **Publish** (en tu solución).
 7. Vuelve al diseñador de tu app → en el área **Reportes**, grupo **Análisis**: **+ Add page** → **Dashboard** → marca `Dashboard Solicitudes TI` → **Add**.
 8. **Save** → **Publish** → **Play**. Revisa que el dashboard muestre datos (necesitas algunas solicitudes con estados y prioridades distintos).
 
@@ -239,7 +242,7 @@ Esta vez no te digo los pasos: aplica lo que viste a un pedido nuevo.
 > **Requerimiento:** el jefe de TI quiere ver cada mañana las solicitudes de prioridad Crítica que todavía no tienen técnico asignado, y un gráfico que diga cuántas son.
 > **Criterios de aceptación:** (1) una vista nueva con el filtro correcto y un nombre que diga para qué sirve; (2) un gráfico en tu dashboard que cuente esas solicitudes; (3) comprobar en la app publicada que la vista y el gráfico aparecen.
 > **Restricciones:** no modifiques las vistas que ya existen y no pases de 6 componentes en el dashboard.
-> **Pistas si te atoras:** en el editor de la vista, la condición "sin técnico asignado" se escribe con la columna Asignado a y el operador "Does not contain data" (sin datos); un gráfico que cuenta usa "Count of records".
+> **Pistas si te atoras:** en el editor de la vista, la condición "sin técnico asignado" se escribe con la columna Asignado a y el operador "Does not contain data" (sin datos); un gráfico que cuenta usa el agregado "Count: All".
 
 **Ahora haz algo — transferencia guiada (8 min):** **[Transferir: una vista de críticas sin asignar](/practica/ip-app-010-transferir-vista-criticas)**. Retoma la app de este módulo pero con un pedido nuevo, y te pide decidir qué hacer y qué evitar.
 
@@ -313,9 +316,9 @@ Esta vez no te digo los pasos: aplica lo que viste a un pedido nuevo.
     - Todas las tablas: Admin completo
 
 2. **Asignar roles a usuarios de prueba**:
-    - Settings > Security > Users
-    - Seleccionar usuario > Manage Roles
-    - Asignar role creado
+    - Power Platform Admin Center > Manage > Environments > tu ambiente > Settings > Users + permissions > Users
+    - Seleccionar usuario > Manage security roles
+    - Asignar role creado > Save
 
 3. **Probar con cada role**:
     - Login como cada usuario
@@ -388,7 +391,7 @@ Esta vez no te digo los pasos: aplica lo que viste a un pedido nuevo.
 
 1. **Lo que ves:** otras personas no ven la app o no ven los datos.
     - **Causa**: Falta Security Role asignado
-    - **Solución**: Settings > Security > Users > Manage Roles + compartir app
+    - **Solución**: Power Platform Admin Center > Manage > Environments > tu ambiente > Settings > Users + permissions > Users > Manage security roles + compartir app
 
 2. **Lo que ves:** el Business Process Flow no aparece en el formulario.
     - **Causa**: No está activado o no asignado a Security Role

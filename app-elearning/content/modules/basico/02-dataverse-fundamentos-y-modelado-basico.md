@@ -5,32 +5,45 @@ level: "basico"
 certification: "PL-900"
 estimatedMinutes: 15
 slug: "dataverse-fundamentos-y-modelado-basico"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
-*Duración: 2-3 semanas · Lectura: 6-8 min · Con práctica: unos 100 min con el ambiente listo (la primera vez, cuenta entre el doble y el triple)*
+*Duración: 2-3 semanas · Lectura: 8-10 min · Con práctica: unos 120 min con el ambiente listo (la primera vez, cuenta entre el doble y el triple)*
 
 ### 🎯 Objetivo
 Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 
 ### 📖 Conceptos Clave
-- **Tablas (Tables)**: Estándar vs Personalizadas, Virtual Tables
-- **Columnas (Columns)**: Tipos de datos (Text, Number, Choice, Lookup, DateTime)
-- **Relaciones (Relationships)**: One-to-Many, Many-to-One, Many-to-Many — ejemplo simple: una `Categoría` (ej. "Software") puede tener muchas `Solicitudes` asociadas, pero cada `Solicitud` apunta a una sola `Categoría`:
+- **Tabla (Table)**: el lugar donde guardas un tipo de dato, como una hoja de Excel con estructura fija (por ejemplo, "Solicitudes TI").
+    - **Standard (estándar)**: tablas que ya vienen con Power Apps o Dynamics 365, como `Contact`.
+    - **Custom (personalizada)**: tablas que creas tú o tu equipo, como `Solicitud TI`.
+    - **Virtual Table (tabla virtual)**: tabla cuyos datos viven fuera de Dataverse (por ejemplo, en SQL o SharePoint) y se muestran sin copiarlos.
+- **Registro (Row)**: una fila de la tabla; por ejemplo, una solicitud concreta.
+- **Columna (Column)**: cada dato que guardas de un registro, como una columna de Excel. Tipos que usarás aquí:
+    - **Text / Multiline Text**: texto de una línea / texto largo de varias líneas.
+    - **Whole Number**: número entero, sin decimales.
+    - **Choice**: lista fija de opciones; la persona elige una sola.
+    - **Lookup**: apunta a un registro de otra tabla (por ejemplo, a un contacto).
+    - **Date and Time / Date Only**: fecha con hora / solo fecha.
+- **Relación (Relationship)**: cómo se conectan dos tablas. *One-to-Many* (uno a muchos) y *Many-to-One* (muchos a uno) son la misma relación vista desde cada lado; *Many-to-Many* (muchos a muchos) es cuando ambos lados pueden tener muchos. Ejemplo simple: una `Categoría` (ej. "Software") puede tener muchas `Solicitudes` asociadas, pero cada `Solicitud` apunta a una sola `Categoría`:
   ```
   Categoria (1) ──── tiene muchas ────▶ (N) Solicitud
      "Software"                          "Sin acceso al sistema contable"
      "Hardware"                          "Impresora offline piso 2"
   ```
-- **Primary Name Column**: Campo principal de identificación
-- **Ownership**: quién es "dueño" de cada registro. *User/Team owned* = cada registro pertenece a una persona/equipo (útil para "mis solicitudes"). *Organization owned* = el registro es de todos, sin dueño individual (útil para catálogos como Categoría).
-- **Publisher**: el "sello" con tu prefijo (ej. `sit_`) que marca que una tabla/columna es tuya y no del sistema — se crea una sola vez, antes de la primera tabla, y ya no se puede cambiar.
-- **Soluciones**: Administradas vs No Administradas (introducción básica)
-- **Auditoria**: Tracking de cambios en datos
-- **Business Rules**: lógica sin código que corre en el servidor. El **scope** ("All Forms" vs "Solo entidad") define si la regla se aplica solo cuando alguien llena un formulario, o también cuando los datos llegan por otra vía (ej. una API).
+- **Primary Name Column (columna principal)**: el dato que identifica a cada registro ante las personas (su "nombre"); es lo que se ve cuando otra tabla lo apunta con un Lookup.
+- **Ownership (propiedad del registro)**: quién es "dueño" de cada registro. *User or team* = cada registro pertenece a una persona o equipo (útil para "mis solicitudes"). *Organization* = el registro es de todos, sin dueño individual (útil para catálogos como Categoría).
+- **Required (obligatoria)**: una columna marcada como *Business required* no deja guardar el registro si está vacía.
+- **Solution (solución)**: la "carpeta" donde guardas todo lo que construyes para poder moverlo a otro ambiente. *Unmanaged* (no administrada) = la que editas en tu ambiente de desarrollo; *Managed* (administrada) = la que se instala en pruebas o producción y no se edita directamente.
+- **Publisher (editor)**: el "sello" con tu prefijo (ej. `sit`) que Dataverse antepone al nombre interno de cada tabla y columna que creas (como `sit_...`). Créalo antes de la primera tabla: el nombre interno de cada elemento ya no se puede cambiar después de creado.
+- **Auditing (auditoría)**: registro de quién cambió qué dato y cuándo.
+- **Business Rule (regla de negocio)**: lógica sin código del tipo "si pasa esto, haz aquello" (poner un valor, mostrar un error). Su **Scope** (alcance) decide dónde se aplica: *Entity* = en los formularios y también en el servidor, aunque el dato llegue por otra vía (ej. una API o un flujo); *All Forms* = solo en los formularios de las apps model-driven.
+- **View (vista)**: una lista guardada de registros con filtro, columnas y orden definidos (por ejemplo, "solo las solicitudes abiertas").
 
 ### 👨‍💻 Actividades Prácticas
 
 > **Cómo está organizado este módulo:** alternas una idea corta, una práctica de pocos minutos y un dato real de tu propio ambiente. Los pasos de siempre (Práctica 2.1 a 2.5) siguen ahí, ahora dentro de tres bloques. Cierras con un reto en el que ya no te digo las tablas ni las columnas. Las microprácticas no necesitan tenant; las prácticas reales sí (tu ambiente Developer del Módulo 1).
+
+> **Antes de empezar:** Power Apps cambia de vez en cuando el nombre exacto de algunos botones (por ejemplo, **New column** a veces aparece como **Add column**). Si un botón no tiene exactamente el nombre que te digo, busca el más parecido en la misma zona de la pantalla. Siempre trabajas en [make.powerapps.com](https://make.powerapps.com), con tu ambiente Developer seleccionado arriba a la derecha.
 
 ## 🧩 Microlección 1 — Tablas y columnas: elegir el tipo correcto
 
@@ -42,39 +55,92 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 
 **Ahora haz algo — micropráctica (6 min):** **[Elegir tipo de columna](/practica/ip-dv-002-elegir-tipo-columna)**. Te da necesidades de negocio reales y te pide asignar el tipo de columna de Dataverse correcto a cada una.
 
-**Práctica real en tu entorno (25 min):**
+**Práctica real en tu entorno (35 min):**
 
 ##### Práctica 2.1: Crear Tablas Personalizadas
 
 *Caso: Sistema de Gestión de Solicitudes de TI*
 
-**Paso 0 (antes de crear la primera tabla):** crea una Solution con un Publisher propio (por ejemplo, nombre `SIT` y prefijo `sit`) y trabaja siempre dentro de ella. El Publisher es el "sello" que se pone a todas tus tablas y columnas (como `sit_solicitud`) y no se puede cambiar después. Se hace en Power Apps > Solutions > New solution > New publisher.
+**Paso 0 — Crear tu Solution y tu Publisher (antes de crear la primera tabla).** El Publisher es el "sello" que se pone en el nombre interno de todas tus tablas y columnas (como `sit_...`). Ese nombre interno no se puede cambiar después, por eso se hace primero.
 
-1. **Crear tabla "Solicitud TI"**
-    - Navegar a Tables > New table
-    - Display name: `Solicitud TI`
-    - Plural name: `Solicitudes TI`
-    - Primary column: `Título de Solicitud` (Text)
-    - Enable attachments: Sí
-    - Ownership: User or team
+1. En el menú de la izquierda selecciona **Solutions**. Si no lo ves, selecciona **…More** y búscalo ahí.
+2. En la barra de comandos (la fila de botones de arriba) selecciona **New solution**. Se abre un panel a la derecha.
+3. En **Display Name** escribe `Solicitudes TI`. El campo **Name** se rellena solo; déjalo como está.
+4. Debajo de **Publisher**, selecciona **New publisher**. Se abre el formulario **New Publisher**.
+5. Rellena:
+    - **Display Name**: `SIT`
+    - **Name**: `SIT`
+    - **Prefix**: `sit`
+    - **Choice value prefix**: no lo toques; se genera solo a partir del prefijo.
+6. Selecciona **Save**. Vuelves al panel de la solución.
+7. En la lista **Publisher**, comprueba que está elegido **SIT** (si no, elígelo).
+8. Marca **Set as your preferred solution**. Así, lo que crees aunque no estés dentro de la solución también se guarda en ella.
+9. Deja **Version** como viene y selecciona **Create** (en algunas versiones el botón se llama **Save**).
+10. Abre la solución **Solicitudes TI** haciendo clic en su nombre. A partir de aquí, **trabaja siempre dentro de ella**.
 
-2. **Agregar columnas personalizadas**:
-   ```
-    - Descripción (Multiline text)
-    - Categoría (Choice): Hardware, Software, Red, Accesos, Otro
-    - Prioridad (Choice): Baja, Media, Alta, Crítica
-    - Estado (Choice): Nueva, En Proceso, Resuelta, Cerrada
-    - Fecha Solicitud (Date and Time)
-    - Fecha Resolución (Date Only)
-    - Solicitante (Lookup → Contact)
-    - Asignado a (Lookup → User)
-    - SLA Horas (Whole number)
-   ```
+**Paso 1 — Crear la tabla "Solicitud TI"**
 
-3. **Configurar columnas**:
-    - Marcar "Categoría" y "Estado" como Required (requeridas)
-    - Configurar valor por defecto Estado = "Nueva"
-    - Configurar valor por defecto Prioridad = "Media"
+1. Dentro de tu solución, selecciona **New** en la barra de comandos y elige la opción para crear una tabla. Si te ofrece varias formas, elige **Set advanced properties** (también puedes ir a **Tables** > **New table** > **Set advanced properties**). Se abre el panel **New table**.
+2. Rellena:
+    - **Display name**: `Solicitud TI`
+    - **Plural display name**: `Solicitudes TI`
+3. Marca **Enable Attachments** (permite adjuntar notas y archivos a cada solicitud).
+4. Selecciona la pestaña **Primary column** y en **Display name** escribe `Título de Solicitud`. Ojo: después de guardar la tabla ya no podrás cambiar este nombre.
+5. Vuelve a la pestaña de propiedades y despliega **Advanced options**:
+    - Mira **Schema name**: debe empezar por `sit_`. Si ves otro prefijo (por ejemplo, uno raro como `cr8a3_`), no estás en tu solución: cierra sin guardar y repite el Paso 0.
+    - En **Record ownership** deja **User or team**.
+6. Selecciona **Save**. Se abre la página de la tabla (su "hub"), con las zonas **Columns**, **Relationships**, **Views**, **Business rules**, etc.
+
+**Paso 2 — Agregar las columnas.** Vas a crear 9 columnas: 7 de forma "normal" y 2 Lookup (las Lookup van en el Paso 3).
+
+| Columna (Display name) | Data type | Detalle |
+|---|---|---|
+| Descripción | Multiline Text | — |
+| Categoría | Choice | Opciones: Hardware, Software, Red, Accesos, Otro · Required |
+| Prioridad | Choice | Opciones: Baja, Media, Alta, Crítica · Default choice = Media |
+| Estado | Choice | Opciones: Nueva, En Proceso, Resuelta, Cerrada · Required · Default choice = Nueva |
+| Fecha Solicitud | Date and Time | — |
+| Fecha Resolución | Date Only | — |
+| SLA Horas | Whole Number | — |
+| Solicitante | Lookup → Contact | Paso 3 |
+| Asignado a | Lookup → User | Paso 3 |
+
+*Para una columna simple (Descripción, Fecha Solicitud, Fecha Resolución, SLA Horas):*
+
+1. En el hub de la tabla, selecciona la zona **Columns**.
+2. En la barra de comandos selecciona **New column** (en algunas versiones: **Add column**). Se abre el panel de propiedades de la columna.
+3. En **Display name** escribe el nombre de la tabla de arriba (por ejemplo, `Descripción`).
+4. En **Data type** elige el tipo de la tabla. El menú agrupa los tipos por familias; si no ves el tipo a la primera, despliega la familia correspondiente (texto, número, fecha).
+5. Deja **Required** en **Optional**.
+6. Selecciona **Save** (si tu panel muestra **Done**, pulsa **Done** y, al terminar con todas las columnas, **Save Table**: las columnas no se crean hasta que guardas la tabla).
+
+*Para una columna Choice (Categoría, Prioridad, Estado), con Required y valor por defecto:*
+
+1. **New column** y en **Display name** escribe, por ejemplo, `Estado`.
+2. En **Data type** elige **Choice** > **Choice**.
+3. En **Sync with global choice?** elige **No** (estas opciones solo las usa esta columna).
+4. Escribe la primera opción en **Label** (por ejemplo, `Nueva`). El número de **Value** se genera solo: no lo cambies.
+5. Selecciona **New choice** para añadir la siguiente opción y escribe su **Label**. Repite hasta tener todas las opciones de la tabla de arriba, en ese orden.
+6. **Default choice**: elige el valor por defecto si la columna lo lleva (`Nueva` para Estado, `Media` para Prioridad). Para Categoría déjalo sin valor por defecto.
+7. **Required**: para **Categoría** y **Estado** elige **Business required** (no deja guardar una solicitud sin ese dato). Para Prioridad deja **Optional**.
+8. **Save** (o **Done** y luego **Save Table**).
+
+> **No te confundas:** toda tabla trae de fábrica una columna del sistema llamada **Status** (con los valores Active/Inactive). Tu columna **Estado** es otra distinta, creada por ti. En los filtros y reglas de este módulo usa siempre **Estado**.
+
+*Si después quieres cambiar Required en una columna ya creada:* en **Columns** selecciona la columna, cambia **Required** y guarda. El nombre interno y el **Data type** ya no se pueden cambiar una vez guardada la columna (salvo convertir texto en autonumber).
+
+**Paso 3 — Crear las dos columnas Lookup (Solicitante y Asignado a).** Una Lookup crea a la vez una relación entre dos tablas, así que se hace desde **Relationships**:
+
+1. En el hub de la tabla **Solicitud TI**, selecciona la zona **Relationships**.
+2. En la barra de comandos selecciona **New relationship** > **Many-to-one** ("muchas solicitudes apuntan a un mismo contacto").
+3. En el panel, en **Related** (tabla relacionada) elige **Contact**.
+4. En **Lookup column display name** escribe `Solicitante`.
+5. Deja **Lookup column requirement** en **Optional**.
+6. Selecciona **Done** y luego **Save table**. La columna Lookup `Solicitante` queda creada en **Solicitud TI** (la tabla "muchos").
+7. Repite los pasos 2 a 6 con **Related** = **User** (los usuarios de tu ambiente) y **Lookup column display name** = `Asignado a`.
+8. Comprueba en **Columns** que ya aparecen `Solicitante` y `Asignado a` con tipo **Lookup**.
+
+> **Otra forma de llegar a lo mismo:** desde **Columns** > **New column** con **Data type** = **Lookup** > **Lookup**. Crear una columna Lookup crea siempre una relación Many-to-one.
 
 **Ahora diagnostica — micropráctica (6 min):** **[Corregir modelo incorrecto](/practica/ip-dv-003-corregir-modelo-incorrecto)**. Parte de un síntoma (una columna creada con el tipo equivocado) y te pide decidir la corrección segura antes de ver la solución.
 
@@ -83,7 +149,7 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 | Campo | Tu valor |
 |---|---|
 | Nombre exacto de la tabla que creaste y su Primary column | ___ |
-| Las 8 columnas con su tipo (por ejemplo, Prioridad = Choice) | ___ |
+| Las 9 columnas con su tipo (por ejemplo, Prioridad = Choice) | ___ |
 | Las dos columnas que marcaste como Required y los dos valores por defecto que configuraste | ___ |
 
 ---
@@ -102,14 +168,17 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 
 ##### Práctica 2.2: Establecer Relaciones
 
-1. **Relación One-to-Many**: Contact → Solicitudes TI
-    - Una persona puede tener múltiples solicitudes
-    - Ya creada al definir columna Lookup "Solicitante"
-    - Revisar en tabla Contact > Relationships
+1. **Relación One-to-Many: Contact → Solicitudes TI**
+    - Una persona puede tener múltiples solicitudes.
+    - Ya la creaste en la Práctica 2.1 (Paso 3) al crear la Lookup `Solicitante`.
+    - Para verla desde el otro lado: en tu solución abre **Tables** > **Contact** > zona **Relationships**. Desde Contact aparece como **One-to-many**; desde Solicitud TI, como **Many-to-one**. Es la misma relación vista desde cada tabla.
 
 2. **Crear tabla "Categoría Detallada"**
-    - Columnas: Nombre, Descripción, SLA (Choice: 24h, 48h, 72h)
-    - Relación: Categoría Detallada → Solicitudes TI (One-to-Many)
+    1. En tu solución, crea una tabla nueva igual que en la Práctica 2.1 (Paso 1), con **Display name** `Categoría Detallada` y **Plural display name** `Categorías Detalladas`.
+    2. En la pestaña **Primary column**, **Display name** = `Nombre`.
+    3. En **Advanced options** > **Record ownership** elige **Organization** (es un catálogo de todos, sin dueño individual). Selecciona **Save**.
+    4. En **Columns**, agrega `Descripción` (**Multiline Text**) y `SLA` (**Choice** > **Choice**, **Sync with global choice?** = **No**, opciones `24h`, `48h`, `72h`), igual que en el Paso 2.
+    5. **Relación Categoría Detallada → Solicitudes TI (One-to-Many):** abre la tabla **Solicitud TI** > zona **Relationships** > **New relationship** > **Many-to-one**. En **Related** elige **Categoría Detallada** y en **Lookup column display name** escribe `Categoría Detallada` (no `Categoría`, para no confundirla con tu columna Choice). Selecciona **Done** y luego **Save table**. La creas desde Solicitud TI para que el Lookup quede en el lado "muchos"; vista desde Categoría Detallada es una One-to-many.
     - Nota: ya tienes la columna Choice `Categoría` de la Práctica 2.1; esta tabla es otra forma de modelar lo mismo, con datos propios por categoría (como el SLA). En un modelo real elegirías una de las dos; aquí practicas ambas.
 
 **Evidencia a reportar:**
@@ -124,51 +193,91 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 
 ## 🧩 Microlección 3 — Reglas de negocio y vistas
 
-**¿Qué vas a aprender?** Cómo una Business Rule hace cumplir una regla en el servidor sin código, y cómo una vista filtra y ordena los datos para quien los consulta.
+**¿Qué vas a aprender?** Cómo una Business Rule hace cumplir una regla sin código, y cómo una vista filtra y ordena los datos para quien los consulta.
 
 **¿Por qué existe esto?** Las reglas evitan datos inválidos desde el origen (no dependen de que cada persona se acuerde), y las vistas muestran a cada rol solo lo que necesita ver, sin duplicar datos.
 
 **Ejemplo pequeño:** "Si Estado = Resuelta y la fecha de resolución está vacía, muestra un error" es una regla; "solicitudes en Nueva o En Proceso" es una vista.
 
-**Práctica real en tu entorno (30 min):** esta microlección no tiene micropráctica propia; la verificación es probar tu regla con un registro real y anotar lo que pasa.
+**Práctica real en tu entorno (40 min):** esta microlección no tiene micropráctica propia; la verificación es probar tu regla con un registro real y anotar lo que pasa.
 
 ##### Práctica 2.3: Implementar Business Rules
 
+**Cómo funciona el diseñador (léelo una vez):** una regla es un diagrama. Empieza siempre con una **Condition** (condición, el rombo). A su derecha hay dos salidas: la del **✓** (se cumple) y la del **✕** (no se cumple). Las piezas se arrastran desde la pestaña **Components** (a la derecha) hasta un signo **+** del diagrama, y cada pieza se configura en la pestaña **Properties**, terminando siempre con **Apply**.
+
 *Regla 1: Auto-asignación de SLA según prioridad*
 
-1. Abrir tabla "Solicitud TI" > Business rules > New
-2. Condición: Si Prioridad = "Crítica"
-3. Acción: Set Field Value → Campo personalizado "SLA Horas" = 4
-4. Agregar condiciones para otras prioridades (Alta=8, Media=24, Baja=48)
-5. Scope: All Forms
+1. Abre tu solución > **Tables** > **Solicitud TI** > zona **Business rules**.
+2. Selecciona **Add business rule** (en algunas versiones: **New business rule**). Se abre el diseñador con una condición ya creada.
+3. Arriba, cambia el nombre (por defecto *New business rule*) a `SLA según prioridad`. En **Description** escribe para qué sirve (por ejemplo, "Pone las horas de SLA según la prioridad").
+4. **Scope**: elige **Entity**. Así la regla se aplica en los formularios y también en el servidor, es decir, también cuando cargues los registros de prueba directamente en la tabla (Práctica 2.5), donde todavía no hay formulario de app.
+5. Selecciona la condición del diagrama. En **Properties**:
+    - **Display Name**: `Prioridad es Crítica`
+    - En la regla de la condición: **Source** = **Entity**, **Field** = **Prioridad**, operador de igualdad ("es igual a"), **Type** = **Value** y, como valor, **Crítica**.
+    - Selecciona **Apply**.
+6. En **Components**, arrastra **Set Field Value** hasta el **+** junto al **✓** de esa condición. Selecciónalo y en **Properties** elige la columna **SLA Horas** y el valor `4`. **Apply**.
+7. Arrastra una nueva **Condition** hasta el **+** junto al **✕** de la primera condición (significa "si no es Crítica, revisa esto otro"). Configúrala como en el paso 5 pero con **Display Name** `Prioridad es Alta` y valor **Alta**. **Apply**.
+8. En su **✓**, arrastra **Set Field Value**: **SLA Horas** = `8`. **Apply**.
+9. Repite los pasos 7 y 8 colgando cada condición nueva del **✕** de la anterior:
+    - `Prioridad es Media` → **SLA Horas** = `24`
+    - `Prioridad es Baja` → **SLA Horas** = `48`
+10. Selecciona **Validate** en la barra superior. Si aparece un error, revisa que cada condición y cada acción tenga **Apply**.
+11. Selecciona **Save**.
+12. **Activa la regla:** una regla nueva queda guardada pero inactiva, y no se activa desde la ventana del diseñador. Ciérrala, vuelve a la lista de **Business rules** de la tabla (o de tu solución), selecciona `SLA según prioridad` y elige **Activate**.
 
 *Regla 2: Validación de fechas*
 
-1. Nueva Business Rule
-2. Condición: Si Estado = "Resuelta" y Fecha Resolución está vacía
-3. Acción: Show Error Message → "Debe ingresar fecha de resolución"
-4. Scope: All Forms
+1. En **Business rules** de **Solicitud TI**, selecciona **Add business rule**. Nombre: `Exigir fecha de resolución`. **Scope**: **Entity** (por el mismo motivo que la Regla 1).
+2. Selecciona la condición. En **Properties**:
+    - **Display Name**: `Resuelta sin fecha`
+    - Primera regla: **Source** = **Entity**, **Field** = **Estado**, operador de igualdad, **Type** = **Value**, valor **Resuelta**.
+    - Selecciona **New** (en Properties) para añadir una segunda regla y, en **Rule Logic**, déjala como **AND** ("y además").
+    - Segunda regla: **Field** = **Fecha Resolución** y el operador que significa "no contiene datos" (está vacía). Este operador no necesita valor.
+    - Selecciona **Apply**.
+3. En **Components**, arrastra **Show Error Message** hasta el **+** junto al **✓**. En **Properties**: **Field** = **Fecha Resolución**, **Message** = `Debe ingresar fecha de resolución`. **Apply**.
+4. **Validate**, **Save** y, como en la Regla 1, actívala desde la lista con **Activate**.
+
+> **Para tener en cuenta:**
+> - Para modificar una regla que ya está activa, primero desactívala; si no, no podrás editarla.
+> - Una regla nueva no corrige sola los registros que ya existían: actúa cuando un registro se crea o se guarda.
+> - Acciones como mostrar u ocultar columnas o bloquearlas solo funcionan en formularios de apps model-driven; con Scope **Entity**, en el servidor se ignoran. Por eso estas dos reglas usan solo **Set Field Value** y **Show Error Message**, que funcionan en todos los alcances.
 
 ##### Práctica 2.4: Crear Vistas Personalizadas
 
+**Antes de empezar, un detalle importante sobre el orden:** Dataverse ordena las columnas Choice por el texto de la opción (alfabéticamente), no por el orden en que las creaste. Si ordenas por **Prioridad** de forma descendente, obtienes Media, Crítica, Baja, Alta, que no es lo que quieres. Como **SLA Horas** ya refleja la prioridad (Crítica = 4, Alta = 8, Media = 24, Baja = 48), **ordena por SLA Horas de menor a mayor** y verás primero las más urgentes.
+
 1. **Vista: "Mis Solicitudes Abiertas"**
-    - Filtro: Estado ≠ Cerrada AND Propietario (Owner) = Current User
-    - Nota: el Solicitante es un Contact, no un usuario de la app, por eso esta vista filtra por el propietario del registro (quien lo creó)
-    - Columnas: Título, Categoría, Prioridad, Estado, Fecha Solicitud
-    - Orden: Prioridad DESC, Fecha Solicitud DESC
+    1. En tu solución > **Tables** > **Solicitud TI** > zona **Views**.
+    2. Selecciona **New view**. En **View name** escribe `Mis Solicitudes Abiertas` y selecciona **Create**. Se abre el diseñador de vistas.
+    3. **Columnas:** selecciona **+ View column** y añade, una a una: Categoría, Prioridad, SLA Horas, Estado y Fecha Solicitud. `Título de Solicitud` suele venir ya puesta; si no, añádela también. Para reordenar, arrastra la columna o usa **Move Right** / **Move Left** en el menú de su encabezado.
+    4. **Filtro:** en el panel de propiedades de la vista (a la derecha) selecciona **Edit filters**. En la ventana que se abre:
+        - Selecciona **Add** > **Add row**: columna **Estado**, el operador "no es igual a" y el valor **Cerrada**.
+        - Selecciona **Add** > **Add row** otra vez: columna **Owner** (Propietario), con el operador que compara con "el usuario actual".
+        - Las dos filas quedan unidas con **And** (es el valor por defecto). Selecciona **OK**.
+        - Nota: el Solicitante es un Contact, no un usuario de la app, por eso esta vista filtra por el propietario del registro (quien lo creó).
+    5. **Orden:** selecciona el encabezado de **SLA Horas** y elige **Sort ascending**. Luego, manteniendo pulsada la tecla **Shift**, selecciona el encabezado de **Fecha Solicitud** y elige **Sort descending** (con Shift se añade un segundo criterio sin borrar el primero). También puedes hacerlo en el panel de propiedades con **Sort by** y **Then sort by**.
+    6. Selecciona **Save and publish**.
 
 2. **Vista: "Solicitudes Pendientes Atención"**
-    - Filtro: Estado = Nueva OR Estado = En Proceso
-    - Columnas: Título, Solicitante, Categoría, Prioridad, Asignado a
-    - Orden: Prioridad DESC
+    1. En **Views**, **New view** > `Solicitudes Pendientes Atención` > **Create**.
+    2. **Columnas** con **+ View column**: Solicitante, Categoría, Prioridad, SLA Horas y Asignado a (además de `Título de Solicitud`).
+    3. **Filtro "Estado = Nueva OR Estado = En Proceso":** **Edit filters** y luego:
+        - **Add** > **Add row**: **Estado**, operador de igualdad, valor **Nueva**.
+        - **Add** > **Add row**: **Estado**, operador de igualdad, valor **En Proceso**.
+        - Marca la casilla de las dos filas, selecciona **More commands** (**...**) en una de ellas y elige **Make group**.
+        - En el grupo, cambia el operador de **And** a **Or** ("una u otra"). Selecciona **OK**.
+    4. **Orden:** en el encabezado de **SLA Horas**, **Sort ascending**.
+    5. **Save and publish**.
+
+> Si un cambio no aparece donde esperas, abre tu solución y selecciona **Publish all customizations** en la barra de comandos. Puede tardar un poco: no cierres la página.
 
 ##### Práctica 2.5: Insertar Datos de Prueba
 
-Crear manualmente 10 registros de Solicitudes con variedad de:
+Crea manualmente 10 registros de Solicitudes: abre la tabla **Solicitud TI** y usa su zona de datos (en el hub de la tabla, el área de columnas y datos, o **Edit** para abrir el diseñador de la tabla, donde puedes añadir filas). Pon variedad de:
 
 - Categorías diferentes
-- Prioridades mixtas
-- Estados variados
+- Prioridades mixtas (incluye al menos una **Crítica** para probar la Regla 1)
+- Estados variados (intenta guardar una **Resuelta** sin Fecha Resolución para probar la Regla 2; después ponle fecha)
 - Fechas distribuidas en últimos 30 días
 
 **Evidencia a reportar (lo que viste al probar, no solo que la configuraste):**
@@ -222,8 +331,8 @@ Esta vez no te digo qué tablas ni columnas crear: aplica lo que viste a un nego
 **Nomenclatura**:
 
 - Nombres en español/inglés consistentes (elegir uno)
-- En los nombres internos (nombre lógico) evitar espacios y usar guiones bajos: `Solicitud_TI`; el nombre para mostrar (Display name) sí puede llevar espacios, como `Solicitud TI`
-- Publisher prefix: usar personalizado, no default `new_`
+- El nombre interno (Schema name) no admite espacios y siempre lleva delante el prefijo de tu Publisher (por ejemplo `sit_solicitudti`); el nombre para mostrar (Display name) sí puede llevar espacios, como `Solicitud TI`
+- Publisher prefix: usar uno personalizado (como `sit`), no el del publisher por defecto (un prefijo aleatorio como `cr8a3`) ni `new_`
 
 **Modelado**:
 
@@ -241,7 +350,7 @@ Esta vez no te digo qué tablas ni columnas crear: aplica lo que viste a un nego
 **Documentación**:
 
 - Agregar Description a cada tabla y columna personalizada
-- Documentar propósito de Business Rules en Comments
+- Documentar el propósito de cada Business Rule en su campo Description
 
 ### ⚠️ Errores Comunes
 
@@ -249,9 +358,9 @@ Esta vez no te digo qué tablas ni columnas crear: aplica lo que viste a un nego
     - **Causa probable:** columnas redundantes.
     - **Qué hacer:** usa Calculated Columns o concatena en Power Apps, en vez de guardar el dato dos veces.
 
-2. **Lo que ves:** tus tablas y columnas aparecen con el prefijo `new_` o no puedes agruparlas con tu solución.
-    - **Causa probable:** no definiste el Publisher antes de crear tablas.
-    - **Qué hacer:** crea primero la Solution con un Publisher personalizado (por ejemplo `sit_`) y trabaja siempre dentro de ella.
+2. **Lo que ves:** tus tablas y columnas aparecen con un prefijo que no es el tuyo (por ejemplo uno aleatorio como `cr8a3_`, el del publisher por defecto) o no puedes agruparlas con tu solución.
+    - **Causa probable:** no definiste el Publisher antes de crear tablas, o las creaste fuera de tu solución.
+    - **Qué hacer:** crea primero la Solution con un Publisher personalizado (por ejemplo, prefijo `sit`), márcala como preferida y trabaja siempre dentro de ella.
 
 3. **Lo que ves:** una lista que debería ser fija tiene variantes escritas a mano ("Alta", "alta", "ALTA") y los filtros no la agrupan.
     - **Causa probable:** usaste Text simple para una lista desplegable.

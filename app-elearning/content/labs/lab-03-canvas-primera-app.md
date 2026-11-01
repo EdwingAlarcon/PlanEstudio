@@ -85,9 +85,9 @@ original, con tenant.
 Produce, en un documento o carpeta local (Word, Markdown o incluso papel fotografiado — lo que ya
 uses), estos 6 entregables:
 
-1. **Modelo de datos conceptual**: la tabla `sit_Solicitud` con sus columnas (`sit_titulo`,
-   `sit_descripcion`, `sit_categoria`, `sit_prioridad`, `sit_estado`, `sit_fechasolicitud`,
-   `sit_fecharesolucion`, `sit_asignado`) y sus tipos de dato, igual que las usa este lab.
+1. **Modelo de datos conceptual**: la tabla **Solicitudes TI** con sus columnas (`'Título de Solicitud'`,
+   `Descripción`, `Categoría`, `Prioridad`, `Estado`, `'Fecha Solicitud'`, `'Fecha Resolución'`,
+   `'Asignado a'`) y sus tipos de dato, igual que las usa este lab.
 2. **Wireframes de las 3 pantallas**: dibuja (a mano, en una herramienta de diseño o incluso en una
    hoja de cálculo con celdas como cuadrícula) `scrInicio`, `scrNueva` y `scrDetalle` con los
    controles que llevarían — mismos nombres de la [convención de controles](#convención-de-nombres-de-controles)
@@ -126,7 +126,7 @@ Sigue esta convención durante todo el lab — los Labs posteriores referenciar�
 |---|---|---|
 | `scr` | Screen | `scrInicio` |
 | `gal` | Gallery | `galSolicitudes` |
-| `frm` | Form | `frmNuevaSolicitud` |
+| `frm` | Form | `frmNueva` |
 | `btn` | Button | `btnGuardar` |
 | `txt` | Text Input | `txtBusqueda` |
 | `drp` | Dropdown | `drpEstado` |
@@ -173,11 +173,13 @@ Sigue esta convención durante todo el lab — los Labs posteriores referenciar�
 6. Conectar el datasource:
    - En el panel izquierdo, haz clic en el ícono de base de datos (**Datos**)
    - **+ Agregar datos** → busca "Dataverse" → selecciona **Microsoft Dataverse**
-   - En el buscador de tablas escribe `sit_` — aparecerán tus tablas
-   - Selecciona **Solicitudes** (`sit_Solicitud`) y **Categorias** (`sit_Categoria`)
+   - En el buscador de tablas escribe `Solicitud` — aparecerán tus tablas
+   - Selecciona tu tabla de solicitudes (**Solicitud TI**) y, si la creaste en el Lab 02, la de categorías
    - Haz clic en **Conectar**
 
    > Si no ves tus tablas, verifica que el ambiente correcto está seleccionado. El datasource de Dataverse siempre se conecta al ambiente activo.
+
+   > **Nombres en las fórmulas (igual que en los Módulos 2, 3 y 7):** la tabla se escribe por su nombre en plural, `'Solicitudes TI'`, y las columnas por su nombre visible: `'Título de Solicitud'`, `Descripción`, `Categoría`, `Prioridad`, `Estado`, `'Fecha Solicitud'`, `'Fecha Resolución'`, `'Asignado a'` (comillas simples cuando el nombre tiene espacios). Si en tu ambiente la tabla o una columna tiene otro nombre visible, usa el que te propone la barra de fórmulas al empezar a escribirlo.
 
 ### Tarea 1.2 — Construir el encabezado
 
@@ -218,9 +220,10 @@ Sigue esta convención durante todo el lab — los Labs posteriores referenciar�
    - `X`: `12`, `Y`: `134`, `Width`: `App.Width - 24`, `Height`: `40`
    - `Items`:
      ```js
-     ["Todos", "Nueva", "En Proceso", "Resuelta", "Cerrada"]
+     // Distinct devuelve una tabla de una columna llamada Value con cada opción de Estado una sola vez
+     Distinct('Solicitudes TI', Estado)
      ```
-   - `Default`: `"Todos"`
+   - `AllowEmptySelection`: `true` — sin selección, la galería muestra todas las solicitudes (hace el papel de "Todos")
 
 ### Tarea 1.4 — Galería de solicitudes
 
@@ -231,24 +234,25 @@ Sigue esta convención durante todo el lab — los Labs posteriores referenciar�
 2. Configura la propiedad `Items` de la galería con la fórmula de filtrado:
    ```js
    Filter(
+       // Search(tabla, texto, columnas...): las columnas se escriben por su nombre visible, sin comillas dobles
        Search(
-           Solicitudes,
+           'Solicitudes TI',
            txtBusqueda.Text,
-           "sit_titulo",
-           "sit_descripcion"
+           'Título de Solicitud',
+           Descripción
        ),
-       drpEstado.Selected.Value = "Todos"
-           || sit_estado.Label = drpEstado.Selected.Value
+       // Sin estado elegido se muestran todas; si hay uno, solo las de ese estado
+       IsBlank(drpEstado.Selected) || Estado = drpEstado.Selected.Value
    )
    ```
 
-   > **¿Por qué `sit_estado.Label`?** Las columnas de tipo Elección (Choice) en Power Fx se acceden con `.Label` para obtener el texto visible o `.Value` para el número interno. Usa siempre `.Label` para comparar con texto legible.
+   > **¿Por qué no se compara con el texto del estado?** En Dataverse, una columna Choice guarda un número y su etiqueta ("Nueva") es solo para mostrar, porque cambia según el idioma: no se puede comparar con texto. Aquí `drpEstado.Selected.Value` ya es la opción de Estado, así que se compara directo con la columna. Si escribes la condición a mano, usa la *enumeración*: `Estado = 'Estado (Solicitudes TI)'.Nueva` (escribe `'Estado (` en la barra de fórmulas y elige la opción que te propone). Para *mostrar* la etiqueta, basta con poner la columna en el `Text` de un Label.
 
 3. Dentro de la plantilla de la galería, agrega estos controles:
-   - **Label** para título: `Text`: `ThisItem.sit_titulo`, tamaño `16`, negrita
-   - **Label** para estado: `Text`: `ThisItem.sit_estado.Label`
-   - **Label** para prioridad: `Text`: `"🔴 " & ThisItem.sit_prioridad.Label`
-   - **Label** para fecha: `Text`: `Text(ThisItem.sit_fechasolicitud, "dd/MM/yyyy")`
+   - **Label** para título: `Text`: `ThisItem.'Título de Solicitud'`, tamaño `16`, negrita
+   - **Label** para estado: `Text`: `ThisItem.Estado`
+   - **Label** para prioridad: `Text`: `ThisItem.Prioridad`
+   - **Label** para fecha: `Text`: `Text(ThisItem.'Fecha Solicitud', "dd/mm/yyyy")` (en `Text`, `mm` entre el día y el año es el mes)
 
 4. Configura el `OnSelect` de la **galería** (no de los controles internos):
    ```js
@@ -272,7 +276,7 @@ La pantalla `scrInicio` muestra el encabezado azul, el buscador, el dropdown de 
 
 ### Validación del Ejercicio 1
 
-- [ ] La galería muestra los 10 registros de `sit_Solicitud` del Lab 02
+- [ ] La galería muestra los 10 registros de prueba de tu tabla de solicitudes
 - [ ] El buscador filtra por título y descripción en tiempo real
 - [ ] El dropdown de estado filtra correctamente (prueba seleccionando "Nueva" — solo deben verse las nuevas)
 - [ ] El contador actualiza el número al filtrar
@@ -299,21 +303,21 @@ La pantalla `scrInicio` muestra el encabezado azul, el buscador, el dropdown de 
 ### Tarea 2.2 — Formulario de creación
 
 1. Inserta un control **Edit Form**, renómbralo `frmNueva`:
-   - `DataSource`: `Solicitudes`
+   - `DataSource`: `'Solicitudes TI'`
    - `DefaultMode`: `FormMode.New`
-   - `Item`: `Defaults(Solicitudes)`
+   - `Item`: `Defaults('Solicitudes TI')`
    - `X`: `0`, `Y`: `80`, `Width`: `App.Width`, `Height`: `App.Height - 160`
 
 2. En el panel de propiedades del formulario, haz clic en **Editar campos** y agrega exactamente estos campos en este orden:
-   1. `sit_titulo` (Título)
-   2. `sit_descripcion` (Descripcion)
-   3. `sit_categoria` (Categoria — Lookup)
-   4. `sit_prioridad` (Prioridad)
-   5. `sit_fechasolicitud` (Fecha Solicitud)
+   1. **Título de Solicitud**
+   2. **Descripción**
+   3. **Categoría**
+   4. **Prioridad**
+   5. **Fecha Solicitud**
 
    > Elimina cualquier campo que no esté en esta lista si el formulario los agrega automáticamente (como Estado — queremos que sea siempre "Nueva" al crear).
 
-3. Configura el campo `sit_fechasolicitud` para que tenga valor por defecto = hoy:
+3. Configura el campo **Fecha Solicitud** para que tenga valor por defecto = hoy:
    - En el formulario, haz clic en la tarjeta de Fecha Solicitud → expande la tarjeta
    - En el control `DatePicker` interno, propiedad `DefaultDate`: `Today()`
 
@@ -368,7 +372,7 @@ La pantalla `scrNueva` muestra el formulario con los 5 campos. Al hacer clic en 
 1. Agrega una nueva pantalla en blanco, renómbrala `scrDetalle`.
 
 2. Copia el encabezado de `scrNueva` (rectángulo + label + botón atrás) y pégalo en `scrDetalle`:
-   - `lblTitulo`: `Text`: `galSolicitudes.Selected.sit_titulo`
+   - `lblTitulo`: `Text`: `galSolicitudes.Selected.'Título de Solicitud'`
    - `btnAtras`: `OnSelect`: `Navigate(scrInicio, ScreenTransition.Back)`
 
    > `galSolicitudes.Selected` es el registro que el usuario tocó en la galería. Es accesible desde cualquier pantalla mientras esté en el mismo contexto de la app.
@@ -376,15 +380,15 @@ La pantalla `scrNueva` muestra el formulario con los 5 campos. Al hacer clic en 
 ### Tarea 3.2 — Formulario de detalle
 
 1. Inserta un control **Edit Form**, renómbralo `frmDetalle`:
-   - `DataSource`: `Solicitudes`
+   - `DataSource`: `'Solicitudes TI'`
    - `DefaultMode`: `FormMode.View`
    - `Item`: `galSolicitudes.Selected`
    - `X`: `0`, `Y`: `80`, `Width`: `App.Width`, `Height`: `App.Height - 160`
 
 2. Agrega los mismos campos del formulario anterior más estos adicionales:
-   - `sit_estado` (Estado)
-   - `sit_fecharesolucion` (Fecha Resolución)
-   - `sit_asignado` (Asignado A)
+   - **Estado**
+   - **Fecha Resolución**
+   - **Asignado a**
 
 ### Tarea 3.3 — Botón de edición y guardado
 
@@ -437,12 +441,13 @@ En la galería `galSolicitudes`, agrega un rectángulo de color en el borde izqu
    - `X`: `0`, `Y`: `0`, `Width`: `6`, `Height`: `TemplateHeight`
    - `Fill`:
      ```js
+     // Prioridad es una columna Choice: se compara con su enumeración, no con el texto de la etiqueta
      Switch(
-         ThisItem.sit_prioridad.Label,
-         "Crítica", ColorValue("#D13438"),
-         "Alta",    ColorValue("#FF8C00"),
-         "Media",   ColorValue("#0078D4"),
-         "Baja",    ColorValue("#107C10"),
+         ThisItem.Prioridad,
+         'Prioridad (Solicitudes TI)'.'Crítica', ColorValue("#D13438"),
+         'Prioridad (Solicitudes TI)'.Alta,      ColorValue("#FF8C00"),
+         'Prioridad (Solicitudes TI)'.Media,     ColorValue("#0078D4"),
+         'Prioridad (Solicitudes TI)'.Baja,      ColorValue("#107C10"),
          ColorValue("#CCCCCC")
      )
      ```
@@ -465,7 +470,7 @@ En la galería `galSolicitudes`, agrega un rectángulo de color en el borde izqu
 4. Para compartir la app con otros usuarios:
    - Archivo → Compartir
    - Agrega los emails de los usuarios del tenant
-   - Asegúrate de que tengan también permisos sobre las tablas `sit_Solicitud` y `sit_Categoria` en Dataverse (a través de Security Roles)
+   - Asegúrate de que tengan también permisos sobre tus tablas de Dataverse (la de solicitudes y, si la usas, la de categorías) a través de Security Roles
 
 ### Resultado esperado del Ejercicio 4
 
@@ -521,7 +526,7 @@ La app está publicada. Los ítems de la galería muestran la barra de color lat
 
 ## Reto adicional
 
-**Reto básico:** Agrega un **badge de conteo** en el botón "+" del encabezado de `scrInicio` que muestre cuántas solicitudes tienen prioridad **Crítica** y estado **Nueva**. Usa `CountIf()`.
+**Reto básico:** Agrega un **badge de conteo** en el botón "+" del encabezado de `scrInicio` que muestre cuántas solicitudes tienen prioridad **Crítica** y estado **Nueva**. Usa `CountIf()` y compara cada columna Choice con su enumeración (por ejemplo `'Estado (Solicitudes TI)'.Nueva`), no con texto.
 
 **Reto intermedio:** Agrega una cuarta pantalla `scrFiltros` accesible desde `scrInicio` que permita filtrar por Categoría (Dropdown con datos de `sit_Categoria`) además del estado. Usa `UpdateContext()` para guardar los filtros y aplicarlos en `galSolicitudes`.
 

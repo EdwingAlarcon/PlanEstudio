@@ -5,9 +5,9 @@ level: "basico"
 certification: "PL-900"
 estimatedMinutes: 30
 slug: "fundamentos-de-power-fx-y-expresiones"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
-*Duración: 1-2 semanas · Lectura: 12-15 min · Con práctica: unos 100 min con la app lista; la primera vez, cuenta entre el doble y el triple (núcleo obligatorio); delegación avanzada y operaciones batch pueden quedar para una segunda sesión*
+*Duración: 1-2 semanas · Lectura: 12-15 min · Con práctica: unos 105 min con la app lista; la primera vez, cuenta entre el doble y el triple (núcleo obligatorio); delegación avanzada y operaciones batch pueden quedar para una segunda sesión*
 
 ### 🎯 Objetivo
 Dominar el lenguaje de fórmulas Power Fx para lógica avanzada en Canvas Apps.
@@ -36,21 +36,65 @@ Dominar el lenguaje de fórmulas Power Fx para lógica avanzada en Canvas Apps.
 | `Notify("mensaje", tipo)` | Muestra un aviso al usuario. | `OnSelect` de botones |
 | `ThisItem.Campo` | El campo del registro actual dentro de una Gallery. | Controles dentro de una Gallery |
 
-> Si una fórmula te abruma, léela de adentro hacia afuera y reemplaza cada nombre técnico por una frase: `Filter(Solicitudes, Estado = "Nueva")` = "muéstrame solo solicitudes nuevas".
+> Si una fórmula te abruma, léela de adentro hacia afuera y reemplaza cada nombre técnico por una frase: `Filter('Solicitudes TI', Estado = 'Estado (Solicitudes TI)'.Nueva)` = "muéstrame solo solicitudes nuevas".
+>
+> **Por qué `'Estado (Solicitudes TI)'.Nueva` y no `"Nueva"`:** en Dataverse, una columna *Choice* guarda un número; la etiqueta ("Nueva") es solo para mostrar y cambia según el idioma, así que no se puede comparar con texto. Se compara con la *enumeración* de la elección, que para una elección local lleva el nombre de la tabla entre paréntesis. Si no estás seguro del nombre exacto, escribe `'Estado (` en la barra de fórmulas y elige la opción que te propone. Para *mostrar* la etiqueta basta con poner la columna en el `Text` de un Label, por ejemplo `ThisItem.Estado`.
 
 ### 📖 Conceptos Clave
 - **Sintaxis**: Funciones, operadores, referencias
 - **Tipos de datos**: Text, Number, Boolean, Date, Table, Record
-- **Funciones de tablas**: Filter, Sort, Search, Lookup, AddColumns
+    - `Text`: un texto, como "Impresora dañada".
+    - `Number`: un número, como 48.
+    - `Boolean`: un valor que solo puede ser verdadero o falso (*true* / *false*).
+    - `Date`: una fecha sin hora, como el 12/03/2026.
+    - `Table`: una tabla con varias filas, como una hoja de Excel.
+    - `Record`: una sola fila con varios datos, como una fila de esa hoja.
+- **Funciones de tablas**: Filter, Sort, Search, LookUp, AddColumns
+    - `Filter`: devuelve solo las filas que cumplen una condición.
+    - `Sort`: devuelve la tabla ordenada.
+    - `Search`: devuelve las filas que contienen un texto en alguna de las columnas que indiques.
+    - `LookUp`: busca la primera fila que cumple una condición (o un dato de esa fila).
+    - `AddColumns`: devuelve la tabla con columnas calculadas nuevas.
 - **Funciones de agregación**: Sum, Average, Count, Max, Min
+    - `Sum`: suma los valores de una columna.
+    - `Average`: calcula el promedio.
+    - `Count`: cuenta cuántas filas tienen un número en la columna indicada.
+    - `Max`: devuelve el valor más alto.
+    - `Min`: devuelve el valor más bajo.
 - **Funciones de contexto**: With, ForAll, Collect
+    - `With`: calcula algo una sola vez, le pone un nombre y lo usa dentro de la misma fórmula.
+    - `ForAll`: repite un cálculo o una acción para cada fila de una tabla.
+    - `Collect`: crea una colección (tabla en memoria) o le agrega filas.
 - **Funciones de texto**: Concatenate, Text, Value, Split
+    - `Concatenate`: une varios textos en uno solo (igual que el operador `&`).
+    - `Text`: convierte un valor en texto y, si es número o fecha, le da formato.
+    - `Value`: convierte un texto en número.
+    - `Split`: parte un texto por un separador y devuelve una tabla con los pedazos.
 - **Funciones de fecha**: Today, Now, DateAdd, DateDiff
+    - `Today`: la fecha de hoy, sin hora.
+    - `Now`: la fecha y la hora de este momento.
+    - `DateAdd`: suma (o resta, con número negativo) días, meses u otras unidades a una fecha.
+    - `DateDiff`: calcula cuánto hay entre dos fechas, en la unidad que elijas (días, meses...).
 - **Funciones de control**: If, Switch, IsBlank, IsEmpty
+    - `If`: si se cumple la condición devuelve un valor; si no, otro.
+    - `Switch`: compara un valor con una lista de opciones y devuelve el resultado de la que coincide.
+    - `IsBlank`: comprueba si un valor está vacío.
+    - `IsEmpty`: comprueba si una tabla no tiene ninguna fila.
 - **Funciones de navegación**: Navigate, Back, Launch
+    - `Navigate`: cambia la pantalla que se ve.
+    - `Back`: vuelve a la pantalla anterior.
+    - `Launch`: abre una página web u otra app.
 - **Delegación**: Limitaciones y operadores delegables
+    - *Delegation*: que Dataverse haga el filtro en el servidor; si no se puede, la app solo revisa los primeros 500 registros (se puede subir hasta 10.000).
 - **Comportamiento (Behavior)**: OnSelect, OnChange, OnVisible
+    - *Behavior formula*: fórmula que se ejecuta cuando pasa algo (un clic, un cambio), no todo el tiempo.
+    - `OnSelect`: qué hace la app cuando se toca o se hace clic en un control.
+    - `OnChange`: qué hace la app cuando el usuario cambia el valor de un control.
+    - `OnVisible`: qué hace la app cada vez que se llega a una pantalla.
 - **Patrones**: Context variables, global variables, collections
+    - *Context variable*: dato que vive en una sola pantalla (se crea con `UpdateContext`).
+    - *Global variable*: dato que se puede usar en toda la app (se crea con `Set`).
+    - *Collection*: tabla en memoria que se puede usar en toda la app (se crea con `Collect` o `ClearCollect`).
 
 ### 👨‍💻 Actividades Prácticas
 
@@ -58,7 +102,7 @@ Dominar el lenguaje de fórmulas Power Fx para lógica avanzada en Canvas Apps.
 
 Completa primero los ejercicios 7.1.1, 7.1.2, 7.2.1, 7.3.1 y 7.5.1. Con eso tendrás búsqueda/filtro, búsqueda de un registro, validación de formulario, formato de texto y una primera lectura de delegación.
 
-> **Cómo está organizado el Núcleo:** aprendes Power Fx en cuatro bloques cortos (leer y filtrar, validar, dar formato, delegación). En cada uno alternas una idea, una práctica de pocos minutos y un dato real de tu propia app. Cierras con un reto en el que ya no te doy las fórmulas. Las microprácticas no necesitan tenant; escribir las fórmulas sí necesita tu app Canvas del Módulo 3. Los ejercicios marcados como profundización quedan para después. **Antes de empezar**, prepara tu app del Módulo 3 con estos nombres de controles (en el árbol de controles, menú ⋯ > Cambiar nombre): `GallerySolicitudes`, `DropdownCategoria`, `DropdownEstado`, `DatePickerDesde`, `SearchBox`, `TextInputTitulo` y `TextInputDescripcion`; las fórmulas los usan tal cual.
+> **Cómo está organizado el Núcleo:** aprendes Power Fx en cuatro bloques cortos (leer y filtrar, validar, dar formato, delegación). En cada uno alternas una idea, una práctica de pocos minutos y un dato real de tu propia app. Cierras con un reto en el que ya no te doy las fórmulas. Las microprácticas no necesitan tenant; escribir las fórmulas sí necesita tu app Canvas del Módulo 3. Los ejercicios marcados como profundización quedan para después. **Antes de empezar**, prepara tu app del Módulo 3 con estos nombres de controles (para cambiar un nombre: panel **Tree view**, pasa el mouse sobre el control, **⋯** > **Rename**): `galSolicitudes`, `drpCategoria`, `drpEstado`, `dtpDesde`, `txtBusqueda`, `txtTitulo` y `txtDescripcion`; las fórmulas los usan tal cual. `galSolicitudes` y `txtBusqueda` ya los tienes del Módulo 3; los demás son controles nuevos que agregas con **Insert** (`Drop down`, `Date picker`, `Text input`). En las fórmulas, las columnas se escriben con el nombre que les diste en el Módulo 2, por ejemplo `'Título de Solicitud'`.
 
 ## 🧩 Microlección 1 — Leer una fórmula: Filter y LookUp
 
@@ -66,7 +110,7 @@ Completa primero los ejercicios 7.1.1, 7.1.2, 7.2.1, 7.3.1 y 7.5.1. Con eso tend
 
 **¿Por qué existe esto?** Power Fx no es código misterioso: cada fórmula se puede decir con palabras. Saber leerla bien es la mitad de saber escribirla, y te permite detectar errores sin ejecutar nada.
 
-**Ejemplo pequeño:** `Filter('Solicitudes TI', Estado.Value = "Nueva")` quiere decir "muéstrame solo las solicitudes nuevas".
+**Ejemplo pequeño:** `Filter('Solicitudes TI', Estado = 'Estado (Solicitudes TI)'.Nueva)` quiere decir "muéstrame solo las solicitudes nuevas".
 
 **Ahora haz algo — micropráctica (6 min):** **[Leer una fórmula y decir qué hace](/practica/ip-app-011-leer-una-formula)**. Te da una fórmula con dos condiciones y te pide elegir las lecturas correctas, incluyendo lo que la fórmula NO hace.
 
@@ -77,24 +121,32 @@ Completa primero los ejercicios 7.1.1, 7.1.2, 7.2.1, 7.3.1 y 7.5.1. Con eso tend
 **Ejercicio 1: Multi-Filter Gallery**
 ```javascript
 // Gallery Items con filtros múltiples
+// drpCategoria y drpEstado tienen como Items Distinct('Solicitudes TI', Categoría) y Distinct('Solicitudes TI', Estado)
+// (como en el Módulo 3): su Selected.Value ya es la opción Choice, no su texto, por eso se compara directo
 Filter(
     'Solicitudes TI',
-    (IsBlank(DropdownCategoria.Selected) || Categoría = DropdownCategoria.Selected.Value) &&
-    (IsBlank(DropdownEstado.Selected) || Estado = DropdownEstado.Selected.Value) &&
-    (IsBlank(DatePickerDesde.SelectedDate) || 'Fecha Solicitud' >= DatePickerDesde.SelectedDate) &&
-    (SearchBox.Text = "" || SearchBox.Text in Título || SearchBox.Text in Descripción)
+    (IsBlank(drpCategoria.Selected) || Categoría = drpCategoria.Selected.Value) &&
+    (IsBlank(drpEstado.Selected) || Estado = drpEstado.Selected.Value) &&
+    (IsBlank(dtpDesde.SelectedDate) || 'Fecha Solicitud' >= dtpDesde.SelectedDate) &&
+    (txtBusqueda.Text = "" || txtBusqueda.Text in 'Título de Solicitud' || txtBusqueda.Text in Descripción)
 )
 ```
 
 **Ejercicio 2: Lookup con Fallback**
 ```javascript
-// Obtener email del solicitante con valor por defecto
-LookUp(
-    Contacts,
-    ID = GallerySolicitudes.Selected.Solicitante.ID,
-    Email
-) ?? "correo@desconocido.com"
+// Obtener el email del solicitante de la solicitud cuyo título es exactamente lo escrito, con valor por defecto
+// Coalesce(valor, alternativa) devuelve la alternativa si el valor está vacío (LookUp no encontró nada)
+Coalesce(
+    LookUp(
+        'Solicitudes TI',
+        'Título de Solicitud' = txtBusqueda.Text,  // la primera fila que cumple la condición
+        Solicitante.Email                          // de esa fila, el correo del contacto relacionado
+    ),
+    "correo@desconocido.com"
+)
 ```
+
+> **Por qué no `LookUp(Contacts, ID = ...)`:** `Solicitante` es una columna Lookup hacia **Contacts**, así que ya trae la fila del contacto y puedes leer sus columnas con un punto (`Solicitante.Email`, `Solicitante.'Full Name'`). Además, en Dataverse un contacto no tiene una columna numérica `ID`: su clave es un GUID.
 
 **Evidencia a reportar (el dato exacto que viste, no un "sí/no"):**
 
@@ -116,7 +168,7 @@ ClearCollect(
         'Solicitudes TI',
         "Días Transcurridos", DateDiff('Fecha Solicitud', Today(), Days),
         "Vencido SLA", DateDiff('Fecha Solicitud', Today(), Hours) > 'SLA Horas',
-        "Nombre Solicitante", LookUp(Contacts, ID = Solicitante.ID, 'Full Name')
+        "Nombre Solicitante", Solicitante.'Full Name'  // el Lookup ya trae el contacto relacionado
     )
 )
 ```
@@ -129,7 +181,7 @@ ClearCollect(
 
 **¿Por qué existe esto?** Una validación evita guardar datos incompletos antes de que lleguen a la base de datos. El error típico es combinar las condiciones con el operador equivocado, y entonces el botón se habilita cuando no debería.
 
-**Ejemplo pequeño:** `!IsBlank(TextInputTitulo.Text) && Len(TextInputDescripcion.Text) >= 20` se cumple solo si hay título Y la descripción tiene al menos 20 caracteres.
+**Ejemplo pequeño:** `!IsBlank(txtTitulo.Text) && Len(txtDescripcion.Text) >= 20` se cumple solo si hay título Y la descripción tiene al menos 20 caracteres.
 
 **Práctica real en tu app (20 min):** haz el Ejercicio 1 de la Práctica 7.2 de abajo; los Ejercicios 2 y 3 son para ampliar.
 
@@ -138,22 +190,24 @@ ClearCollect(
 **Ejercicio 1: Validación de Form Completo**
 ```javascript
 // Button Guardar - Enabled property
-!IsBlank(TextInputTitulo.Text) &&
-!IsBlank(TextInputDescripcion.Text) &&
-!IsBlank(DropdownCategoria.Selected) &&
-Len(TextInputDescripcion.Text) >= 20 &&
-Len(TextInputTitulo.Text) <= 100
+!IsBlank(txtTitulo.Text) &&
+!IsBlank(txtDescripcion.Text) &&
+!IsBlank(drpCategoria.Selected) &&
+Len(txtDescripcion.Text) >= 20 &&
+Len(txtTitulo.Text) <= 100
 ```
 
 **Ejercicio 2: Switch para Iconos Dinámicos**
 ```javascript
 // Image Icon en Gallery según Estado
+// Se compara la columna Choice con su enumeración, no con el texto de la etiqueta;
+// las opciones con espacios o tildes van entre comillas simples
 Switch(
-    ThisItem.Estado.Value,
-    "Nueva", Icon.AddDocument,
-    "En Proceso", Icon.Clock,
-    "Resuelta", Icon.CompletedSolid,
-    "Cerrada", Icon.Cancel,
+    ThisItem.Estado,
+    'Estado (Solicitudes TI)'.Nueva, Icon.AddDocument,
+    'Estado (Solicitudes TI)'.'En Proceso', Icon.Clock,
+    'Estado (Solicitudes TI)'.Resuelta, Icon.CompletedSolid,
+    'Estado (Solicitudes TI)'.Cerrada, Icon.Cancel,
     Icon.Warning  // Default
 )
 ```
@@ -162,13 +216,13 @@ Switch(
 ```javascript
 // Color de Label Prioridad
 If(
-    ThisItem.Prioridad.Value = "Crítica", 
+    ThisItem.Prioridad = 'Prioridad (Solicitudes TI)'.'Crítica', 
     RGBA(178, 0, 0, 1),  // Rojo oscuro
     If(
-        ThisItem.Prioridad.Value = "Alta",
+        ThisItem.Prioridad = 'Prioridad (Solicitudes TI)'.Alta,
         RGBA(255, 140, 0, 1),  // Naranja
         If(
-            ThisItem.Prioridad.Value = "Media",
+            ThisItem.Prioridad = 'Prioridad (Solicitudes TI)'.Media,
             RGBA(255, 215, 0, 1),  // Amarillo
             RGBA(0, 128, 0, 1)  // Verde (Baja)
         )
@@ -194,43 +248,59 @@ If(
 
 **¿Por qué existe esto?** Un dato crudo (una fecha en formato de máquina) confunde. Darle formato es la diferencia entre un dato correcto y un dato que la persona entiende de un vistazo.
 
-**Ejemplo pequeño:** `Text(ThisItem.'Fecha Solicitud', "dd/MM/yyyy")` muestra una fecha como 12/03/2026.
+**Ejemplo pequeño:** `Text(ThisItem.'Fecha Solicitud', "dd/mm/yyyy")` muestra una fecha como 12/03/2026 (en `Text`, `mm` entre el día y el año es el mes; solo significa minutos si va junto a la hora o a los segundos).
 
-**Práctica real en tu app (15 min):** haz el Ejercicio 1 de la Práctica 7.3 de abajo.
+**Práctica real en tu app (20 min):** haz el Ejercicio 1 de la Práctica 7.3 de abajo (incluye crear una columna nueva en tu tabla).
 
 ##### Práctica 7.3: Manipulación de Texto y Fechas
 
 **Ejercicio 1: Formateo de Texto**
+
+> **Por qué no usamos el ID de la fila:** en Dataverse, el identificador de cada fila no es un número 1, 2, 3…, sino un GUID: un código largo de letras y números como `f8b10550-0f12-4f08-9aa3-bb10958bc3ff`. `Text(..., "000000")` solo sirve para números, así que con el ID no funciona. Para tener un número de solicitud legible, Dataverse ofrece las columnas **Autonumber**, que generan el número solas cada vez que se crea una fila.
+
+**Antes del ejercicio — crea la columna "Número de Solicitud" (5 min):**
+
+1. En [make.powerapps.com](https://make.powerapps.com), selecciona **Tables** en el panel izquierdo (si no aparece, búscala en **More**) y abre tu tabla **Solicitud TI**. Si trabajas dentro de tu solución del Módulo 2, ábrela desde ahí para que la columna lleve tu prefijo `sit_`.
+2. Entra al área **Columns** y, en la barra de comandos, selecciona **New column**.
+3. En **Display name** escribe `Número de Solicitud` y en **Data type** elige **Autonumber**.
+4. Como tipo de autonumeración elige **Custom** y escribe el formato `SOL-{SEQNUM:6}`: `SOL-` es un texto fijo y `{SEQNUM:6}` es un contador que siempre muestra al menos 6 dígitos, rellenando con ceros. Como el contador empieza por defecto en 1000, la primera solicitud será `SOL-001000`, la siguiente `SOL-001001`, y así.
+5. Selecciona **Done** y luego **Save Table**.
+6. Crea una solicitud nueva desde tu app del Módulo 3 y comprueba que trae su número. Si la app no muestra la columna nueva, en Power Apps Studio abre el panel **Data**, selecciona **⋯** junto a la tabla y elige **Refresh**.
+
 ```javascript
 // Construir mensaje de notificación
 Concatenate(
-    "Solicitud #", Text(GallerySolicitudes.Selected.ID, "000000"),
-    " - ", Upper(Left(GallerySolicitudes.Selected.Categoría.Value, 1)),
-    Lower(Mid(GallerySolicitudes.Selected.Categoría.Value, 2)),
-    " (", Text(GallerySolicitudes.Selected.'Fecha Solicitud', "dd/MM/yyyy"), ")"
+    "Solicitud ", galSolicitudes.Selected.'Número de Solicitud',          // columna Autonumber: ya es texto, ej. "SOL-001000"
+    " - ", Upper(Left(galSolicitudes.Selected.'Título de Solicitud', 1)), // primera letra del título en mayúscula
+    Lower(Mid(galSolicitudes.Selected.'Título de Solicitud', 2)),         // el resto del título en minúsculas
+    " (", Text(galSolicitudes.Selected.'Fecha Solicitud', "dd/mm/yyyy"), ")",
+    " · SLA ", Text(galSolicitudes.Selected.'SLA Horas', "000"), " h"     // "000" rellena con ceros a la izquierda: 8 → "008"
 )
 ```
+
+Resultado de ejemplo: `Solicitud SOL-001000 - Impresora del piso 3 sin tóner (12/03/2026) · SLA 008 h`. Fíjate en las dos formas de "rellenar con ceros": en el número de solicitud lo hace Dataverse (con `{SEQNUM:6}`), y en el SLA lo hace Power Fx con el formato `"000"` de `Text`, que solo funciona sobre números.
 
 **Ejercicio 2: Cálculos de Fechas**
 ```javascript
 // Calcular fecha estimada de resolución
 DateAdd(
-    GallerySolicitudes.Selected.'Fecha Solicitud',
-    GallerySolicitudes.Selected.'SLA Horas',
+    galSolicitudes.Selected.'Fecha Solicitud',
+    galSolicitudes.Selected.'SLA Horas',
     Hours
 )
 
 // Días hábiles hasta vencimiento (excluye fines de semana)
 With(
-    {DiasSLA: GallerySolicitudes.Selected.'SLA Horas' / 24},
+    {DiasSLA: galSolicitudes.Selected.'SLA Horas' / 24},
     DiasSLA + Round(DiasSLA / 5 * 2, 0)  // Aproximación días hábiles
 )
 ```
 
 **Ejercicio 3: Split y Parse**
 ```javascript
-// Extraer dominio de email
-Last(Split(LookUp(Contacts, ID = Solicitante.ID, Email), "@")).Result
+// Extraer dominio de email (dentro de una Gallery; Solicitante es el Lookup a Contacts)
+// Split devuelve una tabla de una columna llamada Value
+Last(Split(ThisItem.Solicitante.Email, "@")).Value
 
 // Convertir string separado por comas a tabla
 Split("Hardware,Software,Red,Accesos", ",")
@@ -254,16 +324,16 @@ Split("Hardware,Software,Red,Accesos", ",")
 Collect(
     ColCarrito,
     {
-        Item: GalleryProductos.Selected.Nombre,
-        Precio: GalleryProductos.Selected.Precio,
-        Cantidad: Value(TextInputCantidad.Text),
-        Subtotal: GalleryProductos.Selected.Precio * Value(TextInputCantidad.Text)
+        Item: galProductos.Selected.Nombre,
+        Precio: galProductos.Selected.Precio,
+        Cantidad: Value(txtCantidad.Text),
+        Subtotal: galProductos.Selected.Precio * Value(txtCantidad.Text)
     }
 );
 Notify("Item agregado", NotificationType.Success)
 
 // Button Remover del Carrito
-Remove(ColCarrito, GalleryCarrito.Selected);
+Remove(ColCarrito, galCarrito.Selected);
 Notify("Item removido", NotificationType.Information)
 
 // Label Total
@@ -272,19 +342,20 @@ Notify("Item removido", NotificationType.Information)
 
 **Ejercicio 2: ForAll para Operaciones Batch**
 ```javascript
-// Aprobar múltiples solicitudes seleccionadas
+// Marcar como resueltas varias solicitudes seleccionadas
 ForAll(
-    GallerySolicitudes.AllItems,
+    galSolicitudes.AllItems,
     If(
-        CheckboxSelect.Value,  // Si está seleccionado
+        chkSeleccion.Value,  // Si está seleccionado
         Patch(
             'Solicitudes TI',
-            LookUp('Solicitudes TI', ID = ThisRecord.ID),
-            {Estado: {Value: "Aprobada"}, 'Fecha Aprobación': Now()}
+            ThisRecord,  // la fila viene de la Gallery, que a su vez viene de 'Solicitudes TI': Patch sabe cuál modificar
+            // Una columna Choice se asigna con su enumeración, no con {Value: "..."}
+            {Estado: 'Estado (Solicitudes TI)'.Resuelta, 'Fecha Resolución': Today()}
         )
     )
 );
-Notify(CountIf(GallerySolicitudes.AllItems, CheckboxSelect.Value) & " solicitudes aprobadas", NotificationType.Success)
+Notify(CountIf(galSolicitudes.AllItems, chkSeleccion.Value) & " solicitudes resueltas", NotificationType.Success)
 ```
 
 **Ejercicio 3: With para Contexto Local**
@@ -292,11 +363,11 @@ Notify(CountIf(GallerySolicitudes.AllItems, CheckboxSelect.Value) & " solicitude
 // Evitar repetir cálculos - With pattern
 With(
     {
-        RegistroActual: GallerySolicitudes.Selected,
-        TiempoTranscurrido: DateDiff(GallerySolicitudes.Selected.'Fecha Solicitud', Now(), Days)
+        RegistroActual: galSolicitudes.Selected,
+        TiempoTranscurrido: DateDiff(galSolicitudes.Selected.'Fecha Solicitud', Now(), Days)
     },
     Concatenate(
-        "Solicitud: ", RegistroActual.Título,
+        "Solicitud: ", RegistroActual.'Título de Solicitud',
         " | Días abierta: ", Text(TiempoTranscurrido),
         " | Estado: ", If(TiempoTranscurrido > 7, "VENCIDA", "En plazo")
     )
@@ -309,7 +380,7 @@ With(
 
 **¿Qué vas a aprender?** Qué es delegar (que el servidor haga el filtro), qué significa la línea azul de advertencia y cómo reescribir una condición para que sí se delegue.
 
-**¿Por qué existe esto?** Si una fórmula no se puede delegar, la app solo revisa los primeros 500 registros (hasta 2.000 si cambias el límite) y puede mostrar resultados incompletos sin avisarte. Con pocos datos no lo notas; con muchos, falta información.
+**¿Por qué existe esto?** Si una fórmula no se puede delegar, la app solo revisa los primeros 500 registros (hasta 10.000 si cambias el límite en **Settings** > **General** > **Data row limit**) y puede mostrar resultados incompletos sin avisarte. Con pocos datos no lo notas; con muchos, falta información.
 
 **Ejemplo pequeño:** poner `DateDiff(...)` sobre la columna dentro de `Filter` no se delega. Comparar la columna con una fecha calculada fuera de la fila, como `'Fecha Solicitud' < DateAdd(Today(), -7, Days)`, sí se delega.
 
@@ -336,7 +407,7 @@ Filter('Solicitudes TI', 'Fecha Solicitud' < DateAdd(Today(), -7, Days))
 ❌ **Mal rendimiento** (carga 500, luego filtra en cliente):
 ```javascript
 SortByColumns(
-    Filter('Solicitudes TI', Len(Título) > 20),
+    Filter('Solicitudes TI', Len('Título de Solicitud') > 20),
     "Fecha Solicitud",
     Descending
 )
@@ -348,7 +419,7 @@ SortByColumns(
 SortByColumns(
     Filter(
         'Solicitudes TI',
-        StartsWith(Título, TextInputBuscar.Text) &&
+        StartsWith('Título de Solicitud', txtBusqueda.Text) &&
         'Fecha Solicitud' >= DateAdd(Today(), -90, Days)  // StartsWith y la comparación de fecha son delegables
     ),
     "Fecha Solicitud",
@@ -359,15 +430,16 @@ SortByColumns(
 
 **Ejercicio 3: Uso de Collections para No Delegable**
 ```javascript
-// Cargar data una vez (máx 500 o 2000 con config)
-OnVisible de Screen:
+// Cargar data una vez (ClearCollect no es delegable: trae como máximo el Data row limit,
+// 500 por defecto y hasta 10.000 si lo cambias en Settings)
+// OnVisible de la pantalla:
 ClearCollect(
     ColSolicitudesRecientes,
     Filter('Solicitudes TI', 'Fecha Solicitud' >= DateAdd(Today(), -30, Days))
 );
 
 // Luego operar localmente sin límite de delegación
-Gallery Items:
+// Items de la Gallery:
 Filter(
     ColSolicitudesRecientes,
     DateDiff('Fecha Solicitud', Today(), Days) > 7  // Ahora funciona porque es Collection local
@@ -393,7 +465,7 @@ Esta vez no te doy las fórmulas: aplica lo que viste a un cambio de requisito.
 > **Restricciones:** no uses `DateDiff` dentro del `Filter`, y no cambies el modelo de datos.
 > **Pistas si te atoras:** la validación combina `IsBlank` y `Len` (Práctica 7.2); el formato de la fecha está en la Práctica 7.3; la forma delegable de comparar fechas está en la Práctica 7.5, Ejercicio 1. Un comentario se escribe dentro de la fórmula, empezando con `//`; la advertencia de delegación es una línea azul que subraya la parte de la fórmula que no se delega.
 
-**Ahora haz algo — transferencia guiada (8 min):** **[Transferir: la condición de fecha con 8.000 registros](/practica/ip-app-013-transferir-condicion-de-fecha)**. Retoma el patrón de delegación del módulo con un caso nuevo y te pide decidir qué cambiar y qué evitar.
+**Ahora haz algo — transferencia guiada (8 min):** **[Transferir: la condición de fecha con 25.000 registros](/practica/ip-app-013-transferir-condicion-de-fecha)**. Retoma el patrón de delegación del módulo con un caso nuevo y te pide decidir qué cambiar y qué evitar.
 
 **Si aún no tienes tenant:** escribe las tres fórmulas que usarías, cada una con su comentario `//`, y explica con tus palabras por qué no usas `DateDiff` en el filtro.
 
@@ -434,7 +506,7 @@ Esta vez no te doy las fórmulas: aplica lo que viste a un cambio de requisito.
 
 **Performance**:
 
-- Entender y respetar delegación (límite 500/2000)
+- Entender y respetar delegación (límite de 500 registros por defecto, ampliable hasta 10.000)
 - Cargar datos una vez, operar local con Collections
 - Evitar Addcolumns dentro de loops (ForAll)
 - Usar Concurrent para operaciones independientes paralelas
@@ -456,11 +528,11 @@ Esta vez no te doy las fórmulas: aplica lo que viste a un cambio de requisito.
 
 1. **Lo que ves:** una fórmula devuelve vacío (Blank) cuando no lo esperabas.
     - **Causa**: Lookup no encuentra registro o división por 0
-    - **Solución**: Usar `??` (null coalescing) o If(IsBlank(...))
+    - **Solución**: Usar `Coalesce(valor, alternativa)`, que devuelve la alternativa cuando el valor está vacío, o If(IsBlank(...))
 
 2. **Lo que ves:** el error "Incompatible type" al usar Patch.
     - **Causa**: Tipo de dato no coincide (text vs number, Choice vs string)
-    - **Solución**: Convertir con Value(), Text(), o usar {Value: "..."} para Choices
+    - **Solución**: Convertir con Value() o Text(); para una columna Choice de Dataverse, asignar su enumeración, por ejemplo `{Estado: 'Estado (Solicitudes TI)'.Resuelta}` ([Learn: Patch con columnas de Dataverse](https://learn.microsoft.com/power-platform/power-fx/reference/function-patch#patch-with-dataverse-column-types))
 
 3. **Lo que ves:** la Gallery no cambia aunque modificaste la colección.
     - **Causa**: Usar Set en lugar de Collect/Patch/Remove
