@@ -1,5 +1,37 @@
 # PlanEstudio — Estado de sprints post-auditoría (handoff)
 
+## Rediseño "Aprender haciendo" — estado al 2026-10-08 (retomar desde aquí)
+
+> Este handoff no se actualizó durante las sesiones del 2026-10-08; esta sección reconstruye el estado desde los
+> commits `288f350`…`7c01cc6`, `CLAUDE.md` y `PROPUESTA_FASES_APRENDER_HACIENDO.md` (fuente de verdad del rediseño).
+
+- **Pilotos (Módulos 11, 10 y 13): cerrados.** Patrón: microlecciones, práctica continua, evidencia de tenant,
+  pistas escalonadas con gating (`getHintUnlockState`), troubleshooting síntoma-primero y reto de transferencia.
+- **Fase 1 (línea base): hecha** (`288f350`). `npm run audit:lbd`; tope de prácticas centralizado en
+  `MIN/MAX_INTERACTIVE_PRACTICES` (hoy 12-44).
+- **CI**: se retiró el espejo de GitHub Pages (`5c9dcb1`); el CI valida con el mismo build que Vercel y no despliega.
+- **Fase 2 (Nivel Básico, Módulos 1-8): contenido migrado, NO cerrada.** Commits `ff28c69`…`bc210a2`, uno por módulo.
+  Prácticas interactivas: 44. Módulos con reto de transferencia: 11/76.
+- **Prueba como principiante** (4 agentes sin contexto, simulación): fallos verificables corregidos en `7c01cc6`.
+  Hallazgo principal: **pasos de interfaz demasiado escuetos**, anteriores a la migración. Detalle en
+  `PROPUESTA_FASES_APRENDER_HACIENDO.md` §7.
+
+### Pendiente (en orden)
+
+1. **Fase "pasos clic a clic"**: setup del M1 (**hecho 2026-11-01**) → Práctica 5.2 (incluye el marcador falso
+   `{expression: ...}`) → M4 → M8.
+   - **Hallazgo del M1 que afecta a todo el curso (verificado en Microsoft Learn, páginas de oct. 2026):** desde el
+     2026-11-15 el Developer Plan ya no crea ambiente; los Developer no administrados se suspenden el 2026-12-15 y se
+     borran desde el 2027-01-15. El sandbox del Microsoft 365 Developer Program solo es para suscriptores de Visual
+     Studio Pro/Enterprise, partners y clientes de soporte Premier/Unified, no "gratis 90 días renovables". En un ambiente
+     Developer no se pueden instalar apps de Dynamics 365. El M1 ya está corregido; quedan 12 archivos más con la ruta
+     antigua (`ENTORNOS_Y_TRIALS.md`, `RUTA_CERO_ABSOLUTA.md`, `GUIA_HERRAMIENTAS_WORKSTATION.md`, `workstation.ts`,
+     `professional-routes.ts`, M11, LAB-02, legado MkDocs…): `grep -r "Microsoft 365 Developer\|dev-program"`.
+2. Prueba con una **persona real**: condición para cerrar la Fase 2.
+3. Vocabulario sin definir en "Conceptos Clave" e incoherencias menores (§7.3 de la propuesta).
+4. Sin aprobación: lab básico de Power BI (cambia el conteo de 75 labs), Fases 3-5 y Fase 6 recortada (IA 43, 44, 46,
+   54, 55).
+
 ## Mantenimiento vigente — 2026-10-01
 
 Se cerraron los tres ítems que seguían abiertos, con el alcance que eligió el usuario: (1) **MkDocs**: se retiró del CI

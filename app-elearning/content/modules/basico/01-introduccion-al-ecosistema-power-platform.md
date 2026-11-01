@@ -5,7 +5,7 @@ level: "basico"
 certification: "PL-900"
 estimatedMinutes: 20
 slug: "introduccion-al-ecosistema-power-platform"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 *Duración: 1-2 semanas · Lectura: 10-12 min · Con práctica y setup de ambiente: los bloques suman 70 a 110 min con la cuenta lista; la primera vez, cuenta entre el doble y el triple (el tiempo de setup varía y no depende de ti)*
 
@@ -42,7 +42,7 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 - No necesitas terminar los Suplementos 1A (AI Builder) y 1B (Power Pages) hoy — son opcionales y puedes volver a ellos después de tu primera práctica.
 - No necesitas escribir ninguna fórmula de Power Fx en este módulo.
 
-> **📌 Si aún no tienes tu ambiente listo:** crear la cuenta Microsoft 365 Developer y activar el trial de Dynamics 365 puede tardar minutos o hasta un día completo si requiere verificación. Esto puede tomar más tiempo que una clase normal — **no significa que hiciste algo mal**. Puedes seguir leyendo el resto del módulo mientras esperas, o volver mañana cuando el ambiente esté activo.
+> **📌 Si aún no tienes tu ambiente listo:** conseguir la cuenta de trabajo y crear el ambiente puede tardar minutos o hasta un día completo si requiere verificación. Esto puede tomar más tiempo que una clase normal — **no significa que hiciste algo mal**. Puedes seguir leyendo el resto del módulo mientras esperas, o volver mañana cuando el ambiente esté activo.
 
 ### 📚 Mini-glosario antes de empezar
 
@@ -96,22 +96,70 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 
 **Ejemplo pequeño:** la misma organización tiene el ambiente `Contoso (default)` y el tuyo, `DEV-TuNombre`. Una tabla creada en uno no aparece en el otro.
 
-> **Lo mínimo para este módulo:** una cuenta Microsoft 365 Developer y un ambiente de tipo Developer con Dataverse. El trial de Dynamics 365 es opcional: puedes saltarte ese paso y volver cuando llegues a los módulos de Dynamics 365. El Power Platform Admin Center está en https://admin.powerplatform.microsoft.com.
+> **Lo mínimo para este módulo:** una cuenta de trabajo o estudio y un ambiente de tipo Developer (o Trial) con Dataverse. El trial de Dynamics 365 es opcional: puedes saltarte ese paso y volver cuando llegues a los módulos de Dynamics 365. El Power Platform Admin Center está en https://admin.powerplatform.microsoft.com.
 
 **Práctica real en tu entorno (20-60 min; el tiempo depende de Microsoft, no de ti):**
 
-1. Crear cuenta Microsoft 365 Developer (gratuita)
-    - Acceder a https://developer.microsoft.com/microsoft-365/dev-program
-    - Suscripción gratuita por 90 días renovables
+> **⚠️ Cambio de Microsoft en curso (verificado en Microsoft Learn, octubre de 2026):** desde el **15 de noviembre de 2026** registrarse en el Power Apps Developer Plan ya no crea un ambiente, y los ambientes Developer "no administrados" se suspenden desde el **15 de diciembre de 2026** y se borran desde el **15 de enero de 2027**. Si haces este setup antes del 15 de noviembre, sirve para este módulo, pero exporta tus soluciones antes del 15 de diciembre si quieres conservarlas. Detalle: [Cambios importantes en Power Platform](https://learn.microsoft.com/power-platform/important-changes-coming).
 
-2. Activar trial de Dynamics 365
-    - Desde Power Platform Admin Center
-    - Seleccionar Dynamics 365 Customer Service trial
+**Paso 1 — Consigue una cuenta de trabajo o estudio (no sirve tu correo personal).**
 
-3. Explorar Power Platform Admin Center
-    - Crear ambiente tipo "Developer"
-    - Configurar región (según ubicación)
-    - Habilitar Dynamics 365 apps
+Microsoft no permite registrarse con una cuenta personal como Gmail, Outlook.com o Hotmail. Elige el caso que se parezca al tuyo:
+
+- **Tienes correo de empresa o universidad:** pruébalo en el Paso 2. Si ves el mensaje *developer environment sign-up is blocked*, tu organización bloqueó el registro y debes ir al caso siguiente.
+- **No tienes ninguna cuenta de trabajo:** crea tu propio tenant de prueba:
+  1. Abre https://www.microsoft.com/microsoft-365/try.
+  2. Elige un plan de empresa con prueba gratuita de un mes.
+  3. Sigue el asistente. Al terminar tendrás una cuenta del tipo `tunombre@tuorganizacion.onmicrosoft.com` y serás el **administrador** de ese tenant.
+  4. Anota el usuario, la contraseña (en un lugar seguro, no en la evidencia) y la **fecha en que termina la prueba**.
+- **Tienes una suscripción de Visual Studio Professional o Enterprise:** puedes pedir el sandbox del [Microsoft 365 Developer Program](https://developer.microsoft.com/microsoft-365/dev-program). Hoy solo califican esos suscriptores, algunos partners y clientes de soporte Premier o Unified. La mayoría de los principiantes no califica, así que no lo uses como primera opción.
+
+**Paso 2 — Crea tu ambiente Developer.**
+
+*Opción A, si eres administrador de tu tenant (el caso del tenant de prueba propio):*
+
+1. Abre https://admin.powerplatform.microsoft.com e inicia sesión con tu cuenta de trabajo.
+2. En el panel de la izquierda haz clic en **Manage** y luego en **Environments**.
+3. En la barra superior haz clic en **New**.
+4. Completa la primera pantalla:
+   - **Name:** `DEV-TuNombre`.
+   - **Region:** la más cercana a ti.
+   - **Type:** **Developer**. Si esa opción no aparece, elige **Trial** (ver "Si algo sale distinto" abajo).
+   - **Add a Dataverse data store:** **Yes**. Sin esto no hay tablas, y no se puede deshacer después.
+   - Deja el resto como viene y haz clic en **Next**.
+5. Completa la segunda pantalla:
+   - **Language:** Spanish.
+   - **URL:** una corta y única, por ejemplo `dev-tunombre`.
+   - **Currency:** la de tu país.
+   - **Enable Dynamics 365 apps:** **No**. Exige una licencia de Dynamics 365, y en un ambiente Developer no se pueden instalar apps de Dynamics 365.
+   - **Security group:** es obligatorio. En tu tenant de prueba personal elige la opción que deja el acceso abierto si aparece; si no, el grupo que te ofrezca por defecto.
+   - Haz clic en **Save**.
+6. Espera a que tu ambiente aparezca en la lista como **Ready**. Suele tardar unos minutos y a veces más.
+
+*Opción B, si no eres administrador (correo de empresa o universidad), solo antes del 15 de noviembre de 2026:*
+
+1. Abre https://aka.ms/PowerAppsDevPlan e inicia sesión con tu cuenta de trabajo.
+2. Completa el registro. Al terminar te lleva a make.powerapps.com.
+3. Espera unos minutos: tu ambiente se llamará **"Tu Nombre's environment"**. Puedes ver el avance en el Admin Center.
+
+**Paso 3 — Confirma que estás dentro de tu ambiente.**
+
+1. Abre https://make.powerapps.com.
+2. Arriba a la derecha está el selector de ambiente. Haz clic en él y elige el ambiente que creaste.
+3. Comprueba que en el menú de la izquierda aparece **Tables**. Si aparece, tu ambiente tiene Dataverse y ya puedes hacer el Mini Lab 01.
+
+**Paso 4 (opcional, solo cuando llegues a los módulos de Dynamics 365) — Trial de Dynamics 365.**
+
+El trial de Dynamics 365 Customer Service **no se añade a tu ambiente Developer**: crea un ambiente aparte con las apps de Dynamics 365 instaladas. Sáltalo por ahora.
+
+**Si algo sale distinto:**
+
+| Lo que ves | Qué significa | Qué hacer |
+|---|---|---|
+| En **Type** no aparece **Developer** | Desde el 15 de noviembre de 2026 Microsoft solo permite ambientes Developer *administrados*, y tu tenant puede no tener esa opción | Elige **Trial**. Un ambiente Trial exige una licencia de prueba de Power Apps en tu usuario: si el Admin Center te la pide, actívala primero en https://www.microsoft.com/power-platform/products/power-apps/free. Funciona igual para este módulo, pero caduca: anota la fecha que muestra el Admin Center y exporta tus soluciones antes de que termine |
+| *developer environment sign-up is blocked* | Tu organización bloqueó el registro | Pide un ambiente de desarrollo a tu administrador o crea tu tenant de prueba propio (Paso 1) |
+| *You don't currently qualify* en el Microsoft 365 Developer Program | No tienes una suscripción que califique | Usa el tenant de prueba de Microsoft 365 del Paso 1 |
+| Tu ambiente desaparece o queda deshabilitado tras semanas sin usarlo | Los ambientes Developer sin actividad se deshabilitan solos (30 días sin uso en los no administrados) | Entra al menos una vez cada pocas semanas y exporta tus soluciones |
 
 **Ahora haz algo — micropráctica (5 min):** **[Diagnosticar: lo que creaste no aparece para tu compañera](/practica/ip-trb-003-ambiente-equivocado)**. Parte de un síntoma real —lo que construiste "desaparece"— y te pide decir qué pasó antes de ver la solución. Es el error de ambiente más común del primer día.
 
