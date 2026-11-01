@@ -47,8 +47,9 @@ M7 (el ID de Dataverse es un GUID) se resolvió el 2026-11-01 con una columna Au
 Nivel Básico contra Learn (enumeraciones de Choice en Power Fx, límite de filas 10.000, medidas DAX; ver `SPRINT_HANDOFF.md`). **Prueba como principiante hecha** (2026-10-08, 4 agentes sin
 contexto; simulación, no una persona real): el obstáculo principal son pasos de interfaz demasiado escuetos y tiempos
 subestimados, anteriores a esta migración. Se corrigieron los fallos verificables (retos, `SLA Horas`, Publisher, vista
-del M2, tiempos) y el resto está en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §7. La Fase 2 no debe darse por cerrada sin
-una prueba con una persona real. El resto de Fases 3-5 y el recorte de la Fase 6 (solo Módulos 43,
+del M2, tiempos) y el resto está en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §7. **Fase 2 CERRADA el 2026-11-01 por decisión del usuario**, con una segunda
+prueba simulada (4 agentes, protocolo paso a paso; no es una persona real) y sus hallazgos corregidos contra Learn
+(`PROPUESTA_FASES_APRENDER_HACIENDO.md` §8). El ambiente del curso se crea ahora en English (United States). El resto de Fases 3-5 y el recorte de la Fase 6 (solo Módulos 43,
 44, 46, 54, 55) siguen sin implementar.
 
 ## Mantenimiento vigente — 2026-10-01

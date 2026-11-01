@@ -82,6 +82,8 @@ original, prevalece sobre este.
   corto y con pistas cruzadas a la micropráctica anterior (observación ya hecha en el Módulo 10).
 - **Cierre:** los 8 módulos con el patrón, más la prueba como principiante hecha por Claude con un agente sin
   contexto (decisión 4, sección 5). Esa prueba es una simulación y no sustituye a una persona real.
+- **Estado: CERRADA el 2026-11-01 por decisión del usuario**, con una segunda prueba simulada en lugar de una persona
+  real (ver sección 8). Sigue siendo recomendable una prueba con una persona real cuando sea posible.
 - **Esfuerzo relativo:** medio.
 
 ### Fase 3 — Intermedio restante (6 módulos: 9, 12, 14, 15, 16, 17)
@@ -203,3 +205,58 @@ verificaron contra el texto antes de actuar, y no sustituye a una persona real.
 grande de un principiante**, que son los pasos de interfaz poco guiados. Recomendación: abrir una fase aparte de
 "pasos clic a clic", empezando por el setup del M1, la Práctica 5.2, el M4 y el M8, y **no dar la Fase 2 por cerrada**
 hasta una prueba con una persona real.
+
+## 8. Segunda prueba como principiante y cierre de la Fase 2 (2026-11-01)
+
+**Contexto.** Entre el 2026-10-08 y el 2026-11-01 se hizo la fase "clic a clic" (M1-M8) y se corrigió todo el Nivel
+Básico contra Microsoft Learn (ver `SPRINT_HANDOFF.md`). El usuario pidió **simular** la prueba con persona real y cerrar
+la Fase 2 con ella. **Es una decisión del usuario: la prueba sigue siendo una simulación hecha por modelos, no una
+persona real.**
+
+**Cómo se hizo.** La misma persona que en la sección 7 (Lucía: administrativa, Word y Excel, nunca programó, inglés
+básico, abandona si se pierde más de 10 minutos), pero con un protocolo más estricto: recorrer cada paso numerado como si
+lo hiciera, marcar cada sitio donde tendría que adivinar, comparar tiempos y dar un veredicto por módulo, más una
+revisión técnica separada. Cuatro agentes sin contexto: M1+M2+LAB-02, M3+M7+LAB-03, M4+M5 y M6+M8. **Límite de
+aislamiento:** el entorno les cargó `CLAUDE.md` automáticamente; los cuatro lo declararon y dijeron no usarlo.
+
+**Veredicto antes de corregir.** M1 y M2: con dificultad (bloqueados sin permisos de administración después del
+2026-11-15). LAB-02: con dificultad, con riesgo de nombres internos mal escritos. M3: con dificultad; M7 y LAB-03: no.
+M4: con dificultad; M5: no (Teams inexistente, expresiones antes de enseñarlas). M6: con dificultad; M8 mínima: no por
+la ruta Canvas, con dificultad por la Model-Driven.
+
+**Cómo se trataron los hallazgos.** Antes de corregir, las afirmaciones técnicas se verificaron en Learn, y varias
+resultaron ser falsas alarmas: el nombre visible de la columna principal sí queda fijo al guardar; `OnFailure` sí se
+ejecuta con un campo obligatorio vacío; OData sí ordena las Choice por número. Cuatro agentes corrigieron los hallazgos
+confirmados, cada uno en archivos distintos y citando Learn en cada dato nuevo.
+
+**Corregido (principal):**
+- M1: ruta para quien no es administrador (Opción C con mensaje para TI), cómo saber si eres administradora, exportar
+  soluciones antes de la suspensión del 2026-12-15, idioma del ambiente **English (United States)** (en español la
+  columna del sistema `statecode` se llama "Estado" y choca con la del curso), Mini Lab después de crear el ambiente,
+  nombres de columna reales de Account, menú lateral documentado y Suplementos 1A/1B al día.
+- M2/LAB-02: rutas exactas, operadores con su etiqueta en inglés, cómo escribir el Schema name sin duplicar `sit_`,
+  Lookup column name, aviso del nombre interno de la columna principal, vistas comprobables sin app.
+- M3/M7/LAB-03: controles preparados pantalla por pantalla, `dtpDesde` con `DefaultDate = Blank()`, fórmulas con destino,
+  `JSON()`, `TimeUnit`, `Sort` en lugar de `SortByColumns` con nombres visibles, `NewForm` antes de crear,
+  `Back()` en lugar de `ScreenTransition.Back`, `Parent.TemplateSize`, `DisplayMode` (no existe `Enabled`), reto con
+  `Set()` en lugar de `UpdateContext()`.
+- M4/M5: navegación por áreas y grupos, secciones del formulario, gráficos con un solo diseñador, BPF sin avance
+  automático, roles con privilegios mínimos; en M5, guía del diseñador antes de las expresiones, Teams por chat con Flow
+  bot, flujos dentro de la solución, `result()` como lista.
+- M6/M8: instalación sin permisos de administrador, idioma de Power BI Desktop, guardar el reporte, UTC; en M8, ruta
+  Model-Driven recomendada, ruta Canvas que compila y no sale vacía, RLS con `USERPRINCIPALNAME()`, seguridad de
+  columnas en lugar de roles por columna, filtros OData válidos, tiempos realistas.
+- Tiempos: `practiceMinutes` en el frontmatter de M1-M8 (la app mostraba solo minutos de lectura).
+
+**No corregido o pendiente:**
+- Los Labs 04 y 05 siguen con etiquetas de interfaz en español y algunos pasos escuetos (no entraban en la prueba).
+- Nombre interno de la columna principal: Learn no documenta cómo fijarlo; LAB-02 pide anotarlo y los Labs 04/05 usan
+  `sit_titulo`/`sit_nombre`, así que quien tenga otro nombre debe sustituirlo.
+- Etiquetas sin confirmar en Learn, redactadas con "o el más parecido": operadores dentro del diseñador de reglas,
+  algunos botones del diseñador de flujos y de Power BI Desktop, nombres de iconos.
+- Caso Real del M6 ("mapa de calor geográfico") y del Suplemento 1B (términos antiguos): no se tocan porque las
+  preguntas de caso dependen de su texto.
+
+**Conclusión.** Con estas correcciones los recorridos simulados ya no tienen bloqueos conocidos sin salida en los núcleos
+de M1-M8. La Fase 2 se da por **cerrada por decisión del usuario**. Si en algún momento hay una persona real disponible,
+conviene repetir la prueba con ella antes de abrir la Fase 3.

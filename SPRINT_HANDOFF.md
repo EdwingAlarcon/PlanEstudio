@@ -1,6 +1,6 @@
 # PlanEstudio — Estado de sprints post-auditoría (handoff)
 
-## Rediseño "Aprender haciendo" — estado al 2026-10-08 (retomar desde aquí)
+## Rediseño "Aprender haciendo" — estado al 2026-11-01 (retomar desde aquí)
 
 > Este handoff no se actualizó durante las sesiones del 2026-10-08; esta sección reconstruye el estado desde los
 > commits `288f350`…`7c01cc6`, `CLAUDE.md` y `PROPUESTA_FASES_APRENDER_HACIENDO.md` (fuente de verdad del rediseño).
@@ -10,7 +10,8 @@
 - **Fase 1 (línea base): hecha** (`288f350`). `npm run audit:lbd`; tope de prácticas centralizado en
   `MIN/MAX_INTERACTIVE_PRACTICES` (hoy 12-44).
 - **CI**: se retiró el espejo de GitHub Pages (`5c9dcb1`); el CI valida con el mismo build que Vercel y no despliega.
-- **Fase 2 (Nivel Básico, Módulos 1-8): contenido migrado, NO cerrada.** Commits `ff28c69`…`bc210a2`, uno por módulo.
+- **Fase 2 (Nivel Básico, Módulos 1-8): CERRADA el 2026-11-01 por decisión del usuario**, con una segunda prueba
+  simulada en lugar de una persona real (ver Pendiente, punto 2). Migración: commits `ff28c69`…`bc210a2`.
   Prácticas interactivas: 44. Módulos con reto de transferencia: 11/76.
 - **Prueba como principiante** (4 agentes sin contexto, simulación): fallos verificables corregidos en `7c01cc6`.
   Hallazgo principal: **pasos de interfaz demasiado escuetos**, anteriores a la migración. Detalle en
@@ -57,7 +58,20 @@
      borran desde el 2027-01-15. El sandbox del Microsoft 365 Developer Program solo es para suscriptores de Visual
      Studio Pro/Enterprise, partners y clientes de soporte Premier/Unified, no "gratis 90 días renovables". En un ambiente
      Developer no se pueden instalar apps de Dynamics 365. Corregido en el M1 y en los 12 archivos de la app listados arriba.
-2. Prueba con una **persona real**: condición para cerrar la Fase 2.
+2. ~~Prueba con una persona real~~ → **sustituida por decisión del usuario (2026-11-01)** por una segunda prueba
+   simulada: 4 agentes sin contexto con la persona "Lucía" y protocolo paso a paso (M1+M2+LAB-02, M3+M7+LAB-03, M4+M5,
+   M6+M8). Hallazgos verificados en Learn antes de corregir (tres resultaron ser falsas alarmas) y corregidos en M1-M8,
+   LAB-02, LAB-03, `interactive-practices.ts` y `RUTA_CERO_ABSOLUTA.md`; `practiceMinutes` en el frontmatter de M1-M8.
+   Detalle en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §8. Validado: `npm run verify` (483 tests) y `npm run e2e`
+   (101/101). Caso Real de M1-M8 sin cambios.
+   **→ Fase 2 CERRADA el 2026-11-01 (simulación, no persona real).**
+   Quedan abiertos (no bloquean el cierre):
+   - Labs 04 y 05 sin prueba simulada ni pasos clic a clic (siguen con etiquetas de interfaz en español).
+   - Nombre interno de la columna principal: los labs usan `sit_titulo`/`sit_nombre`; Learn no documenta cómo fijarlo.
+     LAB-02 pide anotar el nombre real. M5/M6 usan `sit_titulodesolicitud`.
+   - Caso Real con términos antiguos sin tocar (las preguntas de caso dependen del texto): Suplemento 1B (Webform,
+     Webview, Azure AD B2C), M5 ("Crear cuenta Azure AD") y M6 ("mapa de calor geográfico").
+   - Etiquetas de interfaz no confirmadas en Learn, escritas con "o el más parecido".
 3. Sin aprobación: lab básico de Power BI (cambia el conteo de 75 labs), Fases 3-5 y Fase 6 recortada (IA 43, 44, 46,
    54, 55).
 
