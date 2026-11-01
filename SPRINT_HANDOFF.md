@@ -22,7 +22,12 @@
    reales, etiquetas de Choice con `FormattedValue`, Initialize variable en el nivel principal, prefijo `sit_`) → M4
    (**hecho 2026-11-01**: usa la solución del M2 en vez de crear otra; Add page; Enable Areas; quitada la subárea
    "Categorías", que era un Choice; Business Rule sobre columnas, porque no puede ocultar pestañas (corregido también en
-   LAB-04); Quick Create con la opción de tabla; gráficos creados antes del dashboard) → **M8 (siguiente)**.
+   LAB-04); Quick Create con la opción de tabla; gráficos creados antes del dashboard) → M8 (**hecho 2026-11-01**:
+   tabla "Ruta de la entrega mínima" con qué hacer y qué saltar por fase; Flujo 1 mínimo; corregidos la relación 1:1
+   inexistente, la Business Rule que leía un registro relacionado, el `default Now()` y la etiqueta de 240-360 horas).
+   **Fase "clic a clic" completa para el setup del M1, la Práctica 5.2, el M4 y el M8.** Quedan del §7 de la propuesta:
+   pasos escuetos en el M2, el M3 y el M6; vocabulario sin definir; `Text(...ID, "000000")` del M7; la medida de
+   "Promedio Días Resolución" del M6. Y sigue pendiente la prueba con una persona real.
    - Ruta antigua del Developer Program **corregida el 2026-11-01** en la app: `ENTORNOS_Y_TRIALS.md` (fuente única,
      sección nueva), `GUIA_HERRAMIENTAS_WORKSTATION.md`, `RUTA_CERO_ABSOLUTA.md`, `TIPOS_DE_PRACTICA.md`,
      `CHECKLIST_PROGRESO.md`, LAB-02, M11, `workstation.ts`, `professional-routes.ts`. **Sin tocar** (MkDocs congelado):

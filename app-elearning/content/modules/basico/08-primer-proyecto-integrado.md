@@ -5,7 +5,7 @@ level: "basico"
 certification: "PL-900"
 estimatedMinutes: 45
 slug: "primer-proyecto-integrado"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 *Duración: 2-3 semanas · Lectura/planificación: 25-45 min · Construcción guiada: 8-16 horas distribuidas en varias sesiones*
 
@@ -41,6 +41,26 @@ Cuando esto funcione, ya tienes una historia completa para explicar en entrevist
 | **Entrega excelente** | Documentación técnica, matriz de seguridad, solución exportable, demo grabada y mejoras por feedback. | Para entrevista o muestra profesional. |
 
 > No intentes hacer la entrega excelente desde el primer día. Completa primero la entrega mínima; después decides cuánto profundizar.
+
+### 🗺️ Ruta de la entrega mínima: qué hacer y qué saltar
+
+Las Fases 1 a 7 de abajo describen la **entrega completa**. Si vas por la mínima, sigue esta tabla y salta todo lo que no aparece en ella. Los clics de cada paso ya los practicaste: la última columna dice en qué módulo.
+
+| Fase y paso | En la entrega mínima | Dónde aprendiste los clics |
+|---|---|---|
+| Fase 1 · Paso 1 Requerimientos | Haz solo una línea por punto (tipos, roles y flujo) | — |
+| Fase 1 · Paso 2 Solution | **Haz** (Solution nueva con publisher `sse`) | Módulo 2, Paso 0 |
+| Fase 1 · Paso 3 Tablas | **Solo la tabla 1 (Solicitud) y la 2 (Categoría Solicitud).** En Solicitud crea solo: Título, Descripción, Tipo, Prioridad, Estado, Fecha Solicitud, Solicitante y Asignado a. Salta las tablas 3, 4 y 5 | Módulo 2, Práctica 2.1 |
+| Fase 1 · Paso 4 Relaciones | **Solo Categoría 1:N Solicitudes**: se crea al añadir en Solicitud una columna Lookup `Categoría` → Categoría Solicitud | Módulo 2 (Lookup) |
+| Fase 1 · Paso 5 Business Rules | Opcional: solo la regla 1 (validación de fechas) | Módulo 2 y Módulo 4, Paso 3.3 |
+| Carga de datos | **Haz**: 3 categorías y 10 solicitudes con tipos, prioridades y estados distintos | Módulo 1, Microlección 3 |
+| Fase 2 **o** Fase 3 (una sola) | **Canvas:** solo ScreenInicio (Paso 2, sin las métricas) y ScreenNuevaSolicitud; salta el Paso 3 (necesita la tabla Comentario). **Model-Driven:** navegación, formulario Main con las columnas que creaste y 1 vista; salta el BPF y la vista Aprobaciones Pendientes | Módulo 3 (Canvas) o Módulo 4 (Model-Driven) |
+| Fase 4 Flujos | **Solo el Flujo 1, en su versión mínima** (ver el recuadro en la Fase 4) | Módulo 5, Práctica 5.1 |
+| Fase 5 Power BI | **Un reporte con 2 visuales** (solicitudes por Estado y por Prioridad) y la medida Total Solicitudes. Salta las medidas de SLA (usan `Cumplió SLA`, de la tabla Métrica, que no creaste) y el RLS. Sin Power BI: el dashboard de la Model-Driven | Módulo 6 o Módulo 4, Paso 5 |
+| Fase 6 Seguridad | Salta. Escribe en el README qué rol crearías y por qué | — |
+| Fase 7 Documentación | **Solo el README** con las secciones Arquitectura, Modelo de Datos y Flujos | — |
+
+**Cuándo terminaste la entrega mínima:** tienes las 5 evidencias de la sección "Evidencia mínima de cierre" y puedes contar en 2 minutos el recorrido completo: una solicitud se crea en la app, el flujo avisa por correo y el reporte la cuenta.
 
 ### 📚 Mini-glosario del proyecto integrado
 
@@ -147,7 +167,7 @@ Version: 1.0.0.0
     - Tipo (Choice): TI, Mantenimiento, RRHH, Compras
     - Prioridad (Choice): Baja, Media, Alta, Crítica
     - Estado (Choice): Nueva, Pendiente Aprobación, Aprobada, En Proceso, Completada, Rechazada
-    - Fecha Solicitud (DateTime, default Now())
+    - Fecha Solicitud (DateTime). Dataverse no deja poner `Now()` como valor por defecto de la columna: rellénala desde la app con `Now()` o usa la columna del sistema **Created On**
     - Fecha Requerida (Date Only)
     - Solicitante (Lookup → Contact, required)
     - Aprobador (Lookup → User)
@@ -197,7 +217,7 @@ Version: 1.0.0.0
 
 - Solicitud 1:N Comentarios
 - Solicitud 1:N Aprobaciones
-- Solicitud 1:1 Métrica Solicitud
+- Solicitud 1:N Métrica Solicitud. Dataverse no tiene relaciones 1:1: se crea como 1:N (Lookup Solicitud en Métrica Solicitud) y el flujo que la llena debe crear una sola métrica por solicitud
 - Categoría 1:N Solicitudes
 
 **Paso 5: Business Rules**
@@ -206,11 +226,11 @@ Version: 1.0.0.0
     - Si Estado = "Completada", Fecha Completada is required
     - Fecha Requerida >= Fecha Solicitud
 
-2. **Auto-población**:
-    - Si Categoría selected, set Aprobador = Categoría.Aprobador Default
+2. **Auto-población (no es una Business Rule):**
+    - "Si se elige una Categoría, poner como Aprobador el Aprobador Default de esa Categoría" **no se puede hacer con una Business Rule**: una regla solo lee y escribe columnas del registro que se guarda, no de un registro relacionado. Hazlo en un flujo (Dataverse *When a row is added* → *Get a row by ID* de la Categoría → *Update a row* de la Solicitud) o, en la Canvas App, con un `LookUp` al guardar.
 
 3. **Visibilidad condicional**:
-    - Show "Comentarios Aprobador" only if Estado = Aprobada OR Rechazada
+    - Show "Comentarios Aprobador" only if Estado = Aprobada OR Rechazada (Set Visibility sobre la columna, Scope All Forms y rama ✕ con Hide, como en el Módulo 4, Paso 3.3)
 
 ## 🧩 Microlección 2 — Construir por capas: dato, app y lo que sale vacío
 
@@ -436,6 +456,15 @@ Stage 4: Cierre
 **FASE 4: Power Automate Flujos (Días 11-13)**
 
 > Para el entregable mínimo, implementa primero solo el Flujo 1. Los demás flujos completan la madurez del proyecto, pero no son necesarios para demostrar integración básica.
+
+> **Flujo 1 en versión mínima.** La versión de abajo usa aprobaciones y llama al Flujo 3, que la entrega mínima no tiene. Para la mínima, construye esto:
+> - **Trigger:** si elegiste Canvas, **When Power Apps calls a flow (V2)** (conector Power Apps) con una entrada de texto `SolicitudID`; si elegiste Model-Driven, el trigger de Dataverse **When a row is added, modified or deleted** (Change type: Added, Table: Solicitudes), igual que en la Práctica 5.1.
+> - **Get a row by ID** (Dataverse) de Solicitudes; con el trigger de Power Apps, el Row ID es `SolicitudID`.
+> - **Get a row by ID** de Contacts con el Solicitante.
+> - **Send an email (V2)** al correo del Contact con el título, el tipo y la prioridad.
+> - Sin condición ni aprobación. El Estado queda en "Nueva".
+>
+> La llamada desde la Canvas App es la del `OnSuccess` de la Fase 2: primero agrega el flujo a la app (panel **Power Automate** → **Add flow**) para que `'Flujo Notificar Nueva Solicitud'.Run(...)` exista.
 
 **Flujo 1: Notificar Nueva Solicitud**
 ```
@@ -852,7 +881,7 @@ Has completado el **Nivel 1: Básico** del Plan Maestro. Ahora puedes:
 
 ### 📊 Estadísticas del Nivel
 
-- **Tiempo invertido**: 240-360 horas
+- **Tiempo invertido en todo el Nivel 1** (los 8 módulos con su práctica, no solo este proyecto): 240-360 horas, estimación del plan, no medida con alumnos. Solo la construcción de este proyecto son 8-16 horas
 - **Módulos completados**: 8
 - **Ejercicios prácticos**: 30+
 - **Proyecto integrado**: 1 completo
