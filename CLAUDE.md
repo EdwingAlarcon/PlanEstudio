@@ -42,8 +42,9 @@ la prueba de cierre):** Módulos 1 a 8 migrados (11/76 = 14,5%; +3 prácticas IP
 M1, +1 IP-DV-007 en el M2, +2 IP-APP-007, IP-APP-008 en el M3, +3 IP-APP-009, IP-TRB-004, IP-APP-010 en el M4, +1
 IP-PA-007 en el M5, +4 IP-DV-008, IP-DV-009, IP-TRB-005, IP-DV-010 en el M6, +3 IP-APP-011, IP-APP-012, IP-APP-013
 en el M7 y +3 IP-DV-011, IP-TRB-006, IP-DV-012 en el M8). Errores de contenido corregidos (verificados en Microsoft Learn): M6, con dirección Single el filtro
-viaja del lado "uno" al "muchos"; M7, `StartsWith` sí es delegable en Dataverse y `Len` no. Duda sin verificar en el
-M7 (Práctica 7.3, Ejercicio 1): `Text(...ID, "000000")` asume un ID numérico, pero en Dataverse el ID es un GUID. **Prueba como principiante hecha** (2026-10-08, 4 agentes sin
+viaja del lado "uno" al "muchos"; M7, `StartsWith` sí es delegable en Dataverse y `Len` no. El `Text(...ID, "000000")` del
+M7 (el ID de Dataverse es un GUID) se resolvió el 2026-11-01 con una columna Autonumber; ese día se corrigió todo el
+Nivel Básico contra Learn (enumeraciones de Choice en Power Fx, límite de filas 10.000, medidas DAX; ver `SPRINT_HANDOFF.md`). **Prueba como principiante hecha** (2026-10-08, 4 agentes sin
 contexto; simulación, no una persona real): el obstáculo principal son pasos de interfaz demasiado escuetos y tiempos
 subestimados, anteriores a esta migración. Se corrigieron los fallos verificables (retos, `SLA Horas`, Publisher, vista
 del M2, tiempos) y el resto está en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §7. La Fase 2 no debe darse por cerrada sin

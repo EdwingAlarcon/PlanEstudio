@@ -25,9 +25,21 @@
    LAB-04); Quick Create con la opción de tabla; gráficos creados antes del dashboard) → M8 (**hecho 2026-11-01**:
    tabla "Ruta de la entrega mínima" con qué hacer y qué saltar por fase; Flujo 1 mínimo; corregidos la relación 1:1
    inexistente, la Business Rule que leía un registro relacionado, el `default Now()` y la etiqueta de 240-360 horas).
-   **Fase "clic a clic" completa para el setup del M1, la Práctica 5.2, el M4 y el M8.** Quedan del §7 de la propuesta:
-   pasos escuetos en el M2, el M3 y el M6; vocabulario sin definir; `Text(...ID, "000000")` del M7; la medida de
-   "Promedio Días Resolución" del M6. Y sigue pendiente la prueba con una persona real.
+   **Fase "clic a clic" completa para el setup del M1, la Práctica 5.2, el M4 y el M8.**
+   - **Corrección completa del Nivel Básico contra Microsoft Learn (2026-11-01, hecha):** M2, M3 y M6 reescritos clic a
+     clic; Conceptos Clave con definiciones en M1, M4 y M8; M1, M4, M5 y M8 re-verificados. Errores reales corregidos:
+     vistas ordenadas por una columna Choice (en las vistas ordenan por etiqueta → ahora por `SLA Horas`); Business
+     Rules con alcance Entity y activación desde la lista; `Text(ID, "000000")` del M7 → columna Autonumber;
+     comparaciones de Choice en Power Fx con etiquetas o `.Value` → enumeraciones (`'Estado (Solicitudes TI)'.Nueva`)
+     en M3, M7, M8, LAB-03 y prácticas interactivas; `Solicitante.ID` de Contacts (no existe, la clave es un GUID); `??`
+     → `Coalesce`; límite de filas 2.000 → **10.000** (M3, M7, M26, IP-APP-013 y una pregunta del banco); medidas DAX
+     del M6 (Solicitudes Este Mes, % Resueltas, Promedio Días Resolución) y RLS; Práctica 5.3 del M5 usaba el trigger
+     "Manually trigger a flow" para llamarlo desde Power Apps → trigger PowerApps (V2) y Switch para la columna Choice.
+     IP-TRB-006 ahora usa un desajuste realmente silencioso (`'Full Name'` vs `User().Email`). Fuentes y lo no
+     verificable en Learn: mensaje del commit.
+   - Queda: **LAB-02 no coincide con M2/M3/LAB-03** (crea "Solicitud" con Titulo y un Lookup a Categoría; el resto del
+     curso usa "Solicitud TI", 'Título de Solicitud' y Categoría Choice). LAB-03 ya pide usar lo que proponga IntelliSense.
+     Legado MkDocs con el límite 2000: `docs/Niveles/NIVEL_1_BASICO.md`, `NIVEL_3_AVANZADO.md` (congelado, sin tocar).
    - Ruta antigua del Developer Program **corregida el 2026-11-01** en la app: `ENTORNOS_Y_TRIALS.md` (fuente única,
      sección nueva), `GUIA_HERRAMIENTAS_WORKSTATION.md`, `RUTA_CERO_ABSOLUTA.md`, `TIPOS_DE_PRACTICA.md`,
      `CHECKLIST_PROGRESO.md`, LAB-02, M11, `workstation.ts`, `professional-routes.ts`. **Sin tocar** (MkDocs congelado):
@@ -37,11 +49,9 @@
      2026-11-15 el Developer Plan ya no crea ambiente; los Developer no administrados se suspenden el 2026-12-15 y se
      borran desde el 2027-01-15. El sandbox del Microsoft 365 Developer Program solo es para suscriptores de Visual
      Studio Pro/Enterprise, partners y clientes de soporte Premier/Unified, no "gratis 90 días renovables". En un ambiente
-     Developer no se pueden instalar apps de Dynamics 365. El M1 ya está corregido; quedan 12 archivos más con la ruta
-     antigua (`ENTORNOS_Y_TRIALS.md`, `RUTA_CERO_ABSOLUTA.md`, `GUIA_HERRAMIENTAS_WORKSTATION.md`, `workstation.ts`,
-     `professional-routes.ts`, M11, LAB-02, legado MkDocs…): `grep -r "Microsoft 365 Developer\|dev-program"`.
+     Developer no se pueden instalar apps de Dynamics 365. Corregido en el M1 y en los 12 archivos de la app listados arriba.
 2. Prueba con una **persona real**: condición para cerrar la Fase 2.
-3. Vocabulario sin definir en "Conceptos Clave" e incoherencias menores (§7.3 de la propuesta).
+3. Alinear LAB-02 con el modelo del M2 (ver arriba).
 4. Sin aprobación: lab básico de Power BI (cambia el conteo de 75 labs), Fases 3-5 y Fase 6 recortada (IA 43, 44, 46,
    54, 55).
 
