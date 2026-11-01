@@ -205,7 +205,7 @@ export const ESSENTIAL_SETUP_STEPS: EssentialSetupStep[] = [
 export const ENVIRONMENT_ACCESS_MATRIX: EnvironmentAccessRequirement[] = [
   {
     route: "Fundamentos Power Platform / Maker",
-    minimumAccess: "Cuenta Microsoft + Power Apps Developer Plan con Dataverse",
+    minimumAccess: "Cuenta de trabajo o estudio + entorno Developer o Trial con Dataverse",
     executionMode: "real-environment",
     realExecutionNeeds: "Entorno Developer o Trial, rol Environment Maker y confirmación de no producción.",
     evidence: "Capturas de tabla Dataverse, Canvas App, Model-Driven App y flujo ejecutado con datos SIT.",

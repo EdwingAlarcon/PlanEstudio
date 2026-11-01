@@ -377,7 +377,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     labs: ["lab-02-dataverse-modelo-datos", "lab-03-canvas-primera-app", "lab-04-model-driven-app", "lab-05-automate-aprobacion"],
     competencies: ["Dataverse básico", "Canvas Apps", "Model-Driven Apps", "Power Automate básico", "Power BI básico", "Power Fx básico"],
     status: "Disponible",
-    gapNote: "Corre completa en tu ambiente Microsoft 365 Developer personal (gratuito) — ver Ruta cero absoluta si todavía no lo tenés. No requiere ningún trial de Dynamics 365.",
+    gapNote: "Corre completa en tu ambiente Developer personal (o un Trial con Dataverse) — ver Entornos y trials si todavía no lo tenés. No requiere ningún trial de Dynamics 365.",
     capstoneModuleId: 8,
     portfolioEvidence: [
       "Capturas del ambiente Developer activo",

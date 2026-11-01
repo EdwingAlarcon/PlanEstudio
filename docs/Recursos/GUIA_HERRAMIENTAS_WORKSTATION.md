@@ -24,25 +24,19 @@ Automate Desktop.
 
 Ninguna herramienta de esta guía sirve sin esto primero — es el bloqueo real anterior a todo lo
 demás, y si es tu primera vez con software de trabajo en la nube, aquí es donde más tiempo conviene
-invertir con calma. No necesitas tarjeta de crédito para el trial gratuito estándar.
+invertir con calma.
 
-1. **Crea tu cuenta Microsoft 365 Developer** (gratuita, distinta a tu correo personal):
-   - Entra a [developer.microsoft.com/microsoft-365/dev-program](https://developer.microsoft.com/microsoft-365/dev-program).
-   - Clic en **Join now**, usa un correo cualquiera para registrarte (no necesita ser corporativo).
-   - Elige la opción de suscripción **Instant sandbox** — te da un tenant de prueba con datos de
-     ejemplo ya cargados, sin esperar activación manual.
-   - Verificación de identidad: puede pedir un número de teléfono para enviarte un código por SMS.
-     Es normal, es solo para confirmar que eres una persona real, no un bot.
+1. **Consigue una cuenta de trabajo o estudio y crea tu ambiente.** Microsoft no acepta cuentas personales
+   (Gmail, Outlook.com, Hotmail), y el sandbox del Microsoft 365 Developer Program ya no está abierto a
+   cualquiera. Sigue el paso a paso de la Microlección 1 del
+   [Módulo 1](/nivel/basico/modulo/introduccion-al-ecosistema-power-platform). El resumen de qué cambió en
+   noviembre de 2026 está en [Entornos y trials](/recursos/entornos-y-trials).
 2. **Qué es un "tenant" en la práctica**: es tu organización de prueba completa — un nombre como
    `tunombreXXXXX.onmicrosoft.com` que verás en la esquina superior derecha de cualquier pantalla de
    Microsoft. Todo lo que hagas en el curso vive dentro de ese tenant; no afecta a nadie más.
-3. **Activa el trial de Dynamics 365** (necesario desde el Módulo 1 en adelante):
-   - Dentro de tu tenant recién creado, ve a
-     [Power Platform Admin Center](https://admin.powerplatform.microsoft.com).
-   - **Environments** → confirma que existe un ambiente (usualmente se crea uno automático con el
-     Developer Program).
-   - Si necesitas Dynamics 365 apps (Sales, Customer Service) para labs específicos del nivel D365,
-     actívalos desde ese mismo ambiente en la sección **Dynamics 365 apps**.
+3. **El trial de Dynamics 365 no hace falta todavía.** Solo lo necesitas desde los módulos de Dynamics 365
+   (57 en adelante). No se añade a tu ambiente Developer: en un ambiente Developer no se pueden instalar apps
+   de Dynamics 365, así que el trial crea su propio ambiente.
 4. **Si algo se traba** (verificación pendiente, error de creación de tenant, pantalla en blanco):
    - Espera — puede tardar minutos o hasta 24 horas si Microsoft pide revisión manual. No es un
      error tuyo ni de esta guía.

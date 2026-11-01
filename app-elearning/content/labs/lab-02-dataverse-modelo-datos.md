@@ -60,9 +60,9 @@ Al finalizar este laboratorio podrás diseñar e implementar un modelo de datos 
 
 ### Entorno
 
-- [ ] Licencia Microsoft 365 Developer o Power Apps Developer Plan activa
+- [ ] Cuenta de trabajo o estudio activa (no personal) — ver [Entornos y trials](/recursos/entornos-y-trials)
 - [ ] Acceso confirmado a [make.powerapps.com](https://make.powerapps.com)
-- [ ] Ambiente de tipo **Developer** creado (nunca usar el ambiente Default de producción)
+- [ ] Ambiente de tipo **Developer** (o **Trial**) con Dataverse creado, como en el Módulo 1 (nunca usar el ambiente Default de producción)
 - [ ] Rol **System Customizer** o **System Administrator** en el ambiente
 
 ### Conocimiento previo

@@ -13,7 +13,7 @@ Construir flujos empresariales robustos con manejo de errores, ramas paralelas, 
 
 > **Cómo está organizado este módulo (piloto):** en vez de leer todo el marco teórico y recién al final "hacer" algo, cada micro-concepto viene con una micropráctica de feedback inmediato justo después. Vas a **construir** parte de la lógica tú mismo (no vas a copiar una solución ya resuelta), vas a **diagnosticar** un síntoma real antes de ver la causa, y vas a cerrar con un **reto de transferencia** que cambia la regla de negocio para comprobar si entendiste el concepto o memorizaste los pasos.
 >
-> Necesitas: una cuenta Microsoft 365 y un [entorno Power Platform Developer](https://learn.microsoft.com/power-platform/developer/plan) (gratuito, con Dataverse y conectores premium habilitados para pruebas — no uses el entorno productivo del tenant). El Developer Plan da 750 ejecuciones de flujo al mes, más que suficiente para este módulo.
+> Necesitas: una cuenta de trabajo o estudio y tu [entorno Power Platform Developer](https://learn.microsoft.com/power-platform/developer/plan) del Módulo 1, o un Trial con Dataverse (gratuito, con conectores premium habilitados para pruebas — no uses el entorno productivo del tenant). El entorno Developer da 750 ejecuciones de flujo al mes, más que suficiente para este módulo. Desde noviembre de 2026 Microsoft cambió cómo se consigue: ver [Entornos y trials](/recursos/entornos-y-trials).
 
 ---
 
