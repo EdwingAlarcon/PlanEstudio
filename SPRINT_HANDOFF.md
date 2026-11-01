@@ -18,8 +18,13 @@
 
 ### Pendiente (en orden)
 
-1. **Fase "pasos clic a clic"**: setup del M1 (**hecho 2026-11-01**) → Práctica 5.2 (incluye el marcador falso
-   `{expression: ...}`) → M4 → M8.
+1. **Fase "pasos clic a clic"**: setup del M1 (**hecho 2026-11-01**) → Práctica 5.2 (**hecha 2026-11-01**: expresiones
+   reales, etiquetas de Choice con `FormattedValue`, Initialize variable en el nivel principal, prefijo `sit_`) → M4 → M8.
+   - Ruta antigua del Developer Program **corregida el 2026-11-01** en la app: `ENTORNOS_Y_TRIALS.md` (fuente única,
+     sección nueva), `GUIA_HERRAMIENTAS_WORKSTATION.md`, `RUTA_CERO_ABSOLUTA.md`, `TIPOS_DE_PRACTICA.md`,
+     `CHECKLIST_PROGRESO.md`, LAB-02, M11, `workstation.ts`, `professional-routes.ts`. **Sin tocar** (MkDocs congelado):
+     `docs/index.md` y `docs/Niveles/NIVEL_1_BASICO.md`.
+   - El "Profundización opcional" del M5 (RPA con Web API) sigue usando `cr123_`.
    - **Hallazgo del M1 que afecta a todo el curso (verificado en Microsoft Learn, páginas de oct. 2026):** desde el
      2026-11-15 el Developer Plan ya no crea ambiente; los Developer no administrados se suspenden el 2026-12-15 y se
      borran desde el 2027-01-15. El sandbox del Microsoft 365 Developer Program solo es para suscriptores de Visual

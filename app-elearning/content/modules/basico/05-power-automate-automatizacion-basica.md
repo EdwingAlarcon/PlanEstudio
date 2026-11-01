@@ -5,9 +5,9 @@ level: "basico"
 certification: "PL-900"
 estimatedMinutes: 25
 slug: "power-automate-automatizacion-basica"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
-*Duración: 2-3 semanas · Lectura: 10-12 min · Con práctica: unos 95 min con el ambiente listo; la primera vez, cuenta entre el doble y el triple (núcleo obligatorio); RPA y error handling avanzado pueden quedar para una segunda sesión*
+*Duración: 2-3 semanas · Lectura: 10-12 min · Con práctica: unos 105 min con el ambiente listo; la primera vez, cuenta entre el doble y el triple (núcleo obligatorio); RPA y error handling avanzado pueden quedar para una segunda sesión*
 
 ### 🎯 Objetivo
 Automatizar procesos de negocio mediante flujos cloud y de escritorio.
@@ -145,40 +145,58 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 
 **Ejemplo pequeño:** una recurrencia diaria a las 8:00, "List rows" con un filtro de estado y un único correo con el resumen.
 
-**Práctica real en tu entorno (30 min):** esta microlección no tiene micropráctica propia; la verificación es ejecutar el flujo a mano (Test) y revisar lo que devolvió.
+**Práctica real en tu entorno (40 min):** esta microlección no tiene micropráctica propia; la verificación es ejecutar el flujo a mano (Test) y revisar lo que devolvió.
 
 ##### Práctica 5.2: Flujo Scheduled - Reporte Diario
 
 *Objetivo: Enviar resumen diario de solicitudes pendientes*
 
-**Paso 1: Trigger recurrente**
+> **Antes de empezar, dos cosas que usarás en varios pasos:**
+> - **Cómo insertar una expresión:** haz clic dentro del campo, luego en el icono **fx** (*Insert expression*) que aparece a su lado, pega la expresión y haz clic en **Add**. En el diseñador clásico es la pestaña **Expression** del panel de contenido dinámico. Una expresión pegada como texto normal no se calcula: se envía tal cual.
+> - **Nombres lógicos:** los ejemplos usan el prefijo `sit_` del Módulo 2 (`sit_estado`, `sit_fechasolicitud`…). Si tu Publisher tiene otro prefijo, cámbialo en todas las expresiones. En el Paso 2 verás los nombres reales de tus columnas.
+>
+> **El flujo terminado queda en este orden:** Recurrence → List rows → Initialize variable → Condition (¿no hay filas?) → Sí: Terminate / No: Apply to each + Append + Send an email.
 
-1. Create > Scheduled cloud flow
-2. Nombre: `Reporte Diario Solicitudes`
-3. Trigger: Recurrence
-    - Interval: 1
-    - Frequency: Day
-    - At: 08:00 AM
-    - Time zone: (Tu zona horaria)
+**Paso 1: Crear el flujo con su horario**
 
-**Paso 2: Consultar solicitudes pendientes**
+1. En [make.powerautomate.com](https://make.powerautomate.com), comprueba arriba a la derecha que estás en tu ambiente.
+2. En el menú lateral haz clic en **Create** y luego en **Scheduled cloud flow**.
+3. En la ventana que se abre:
+   - **Flow name:** `Reporte Diario Solicitudes`.
+   - **Starting:** la fecha de mañana.
+   - **Repeat every:** `1` y **Day**.
+   - Haz clic en **Create**.
+4. Se abre el diseñador con el trigger **Recurrence**. Haz clic sobre él y, en sus parámetros avanzados (*Show all* o *Advanced parameters*), configura:
+   - **Time zone:** tu zona horaria (por ejemplo, `(UTC-05:00) Bogota, Lima, Quito`).
+   - **At these hours:** `8`.
+   - **At these minutes:** `0`.
+5. Haz clic en **Save** (arriba a la derecha).
 
-1. Action: "List rows" (Dataverse)
-    - Table: Solicitudes TI
-    - Filter rows: 
+**Paso 2: Consultar las solicitudes pendientes y ver los valores reales**
+
+1. Debajo del trigger haz clic en **+** → **Add an action**, busca `List rows` y elige la de **Microsoft Dataverse**.
+2. **Table name:** `Solicitudes TI`. **No le cambies el nombre a la acción:** las expresiones de abajo la llaman `List_rows`.
+3. Deja **Filter rows** vacío por ahora y haz clic en **Save** y luego en **Test** → **Manually** → **Test** → **Run flow** → **Done**.
+4. Cuando termine, haz clic en la acción **List rows** dentro de la ejecución y luego en **Show raw outputs**. Busca una solicitud y anota:
+   - el nombre exacto de cada columna (por ejemplo `sit_estado`);
+   - el número que tiene `sit_estado` en una solicitud **Nueva** y en una **En Proceso**. Al lado verás `sit_estado@OData.Community.Display.V1.FormattedValue` con el texto ("Nueva"): así sabes qué número corresponde a cada estado.
+
+   > Los Choice se filtran por su número, no por su texto, y Dataverse asigna esos números según tu Publisher (suelen ser de 9 dígitos, como `723500000`). Por eso no hay un número que sirva para todos: lo lees de tu propia ejecución.
+5. Vuelve a **Edit**, abre **List rows** → **Show all** y completa:
+   - **Filter rows** (cambia los dos números por los que anotaste):
    ```
-   cr123_estado eq 1 or cr123_estado eq 2
-   // Nota: los Choice (OptionSet) se filtran por valor entero, no por label.
-   // Para encontrar los valores: Power Apps > Tables > Solicitud TI > Columns > Estado > editar opciones — cada opción tiene un "Value" numérico.
+   sit_estado eq 723500000 or sit_estado eq 723500001
    ```
-    - Order by: `cr123_prioridad desc, cr123_fechasolicitud desc`
+   - **Sort By:** `sit_prioridad desc, sit_fechasolicitud desc`
 
-**Paso 3: Construir tabla HTML con resultados**
+**Paso 3: Preparar la tabla HTML**
 
-1. Action: "Initialize variable"
-    - Name: `htmlTable`
-    - Type: String
-    - Value: 
+1. Debajo de **List rows**, **+** → **Add an action** → busca **Initialize variable**.
+   > Va aquí, en el nivel principal del flujo: Power Automate no permite inicializar una variable dentro de una condición ni de un loop.
+2. Complétala:
+   - **Name:** `htmlTable`
+   - **Type:** String
+   - **Value:** pega el encabezado de la tabla:
    ```html
    <table border="1">
      <tr>
@@ -190,44 +208,61 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
      </tr>
    ```
 
-2. Action: "Apply to each" (loop)
-    - Select output from previous step: `value` de List rows
-    - Dentro del loop:
-     - Action: "Append to string variable"
-     - Name: `htmlTable`
-     - Value:
-     ```html
-     <tr>
-       <td>{titulo}</td>
-       <td>{categoria}</td>
-       <td>{prioridad}</td>
-       <td>{solicitante nombre}</td>
-       <td>{expression: days since fecha solicitud}</td>
-     </tr>
-     ```
+**Paso 4: No enviar nada si no hay solicitudes**
 
-3. Fuera del loop:
-    - Action: "Append to string variable"
-    - Value: `</table>`
+1. Debajo de **Initialize variable**, **+** → **Add an action** → busca **Condition** (en *Control*).
+2. En el primer cuadro de la condición inserta esta **expresión** (con **fx**):
+   ```
+   empty(outputs('List_rows')?['body/value'])
+   ```
+3. Operador: **is equal to**. En el segundo cuadro inserta la expresión `true` (también con **fx**, para que sea un valor lógico y no la palabra "true").
+4. En la rama **True** agrega la acción **Terminate** y elige **Status: Succeeded**. Con *Succeeded* no se escribe mensaje; el flujo simplemente termina sin enviar el correo.
 
-**Paso 4: Enviar email con reporte**
+**Paso 5: Llenar la tabla y enviar el correo (todo dentro de la rama False)**
 
-1. Action: "Send an email (V2)"
-    - To: gerente-ti@empresa.com
-    - Subject: `Reporte Diario Solicitudes - {utcNow()}`
-    - Body: 
+1. En la rama **False**, **+** → **Add an action** → **Apply to each** (en el diseñador nuevo puede llamarse **For each**).
+   - En **Select an output from previous steps** elige, del contenido dinámico de *List rows*, el valor **value** (la lista de filas).
+2. Dentro del loop, **+** → **Add an action** → **Append to string variable**:
+   - **Name:** `htmlTable`
+   - **Value:** escribe las etiquetas y, donde dice *(expresión N)*, inserta con **fx** la expresión correspondiente:
+   ```html
+   <tr>
+     <td>(expresión 1)</td>
+     <td>(expresión 2)</td>
+     <td>(expresión 3)</td>
+     <td>(expresión 4)</td>
+     <td>(expresión 5)</td>
+   </tr>
+   ```
+   | # | Columna | Expresión |
+   |---|---|---|
+   | 1 | Título | `item()?['sit_titulodesolicitud']` (la columna principal "Título de Solicitud" del Módulo 2; confirma su nombre en el Paso 2) |
+   | 2 | Categoría (texto, no número) | `item()?['sit_categoria@OData.Community.Display.V1.FormattedValue']` |
+   | 3 | Prioridad (texto, no número) | `item()?['sit_prioridad@OData.Community.Display.V1.FormattedValue']` |
+   | 4 | Solicitante (nombre del Contact) | `item()?['_sit_solicitante_value@OData.Community.Display.V1.FormattedValue']` |
+   | 5 | Días abierta | `div(sub(ticks(utcNow()), ticks(item()?['sit_fechasolicitud'])), 864000000000)` |
+
+   > `item()` es la fila que el loop está recorriendo. La expresión 5 resta dos fechas en *ticks* (unidades de 100 nanosegundos) y divide por los ticks de un día (864000000000), así que da días enteros. Si alguna solicitud no tiene **Fecha Solicitud**, esa acción falla: rellena la fecha o usa `createdon` en su lugar.
+3. Debajo del loop, **todavía dentro de la rama False**, agrega otra **Append to string variable** con **Name:** `htmlTable` y **Value:** `</table>`.
+4. Debajo, **+** → **Add an action** → **Send an email (V2)** (Office 365 Outlook):
+   - **To:** tu propio correo de trabajo.
+   - **Subject:** inserta con **fx** `concat('Reporte Diario Solicitudes - ', formatDateTime(utcNow(), 'yyyy-MM-dd'))`.
+   - **Body:** haz clic en el botón de vista de código (**</>**) del editor para poder pegar HTML y escribe:
    ```html
    <h2>Solicitudes Pendientes de Atención</h2>
-   <p>Total: {length(outputs('List_rows')?['body/value'])} solicitudes</p>
-   {htmlTable}
+   <p>Total: (expresión) solicitudes</p>
+   (variable htmlTable)
    ```
+   En *(expresión)* inserta con **fx** `length(outputs('List_rows')?['body/value'])`. En *(variable htmlTable)* elige **htmlTable** desde el contenido dinámico (sección *Variables*).
+5. **Save** → **Test** → **Manually** → **Run flow**. Revisa el correo y el Run history. Para probar la otra rama, cambia temporalmente el filtro a un número que no exista (por ejemplo `sit_estado eq 1`): el flujo debe terminar en **Terminate** sin enviar correo. Después vuelve a poner tu filtro.
 
-**Paso 5: Configurar condición de no envío si está vacío**
-
-1. Antes del email, agregar Condition
-    - Expression: `empty(outputs('List_rows')?['body/value'])`
-    - Yes: Terminate (Success) con mensaje "No hay solicitudes"
-    - No: Enviar email
+| Lo que ves | Causa probable | Qué hacer |
+|---|---|---|
+| El correo muestra literalmente `empty(...)` o `length(...)` | Pegaste la expresión como texto | Bórrala e insértala con **fx** |
+| La columna Prioridad muestra un número como `723500002` | Usaste el valor y no la etiqueta | Usa la expresión con `@OData.Community.Display.V1.FormattedValue` |
+| Error *The template language function 'ticks' expects…* | Alguna fila no tiene Fecha Solicitud | Rellena la fecha o usa `createdon` |
+| *The variable 'htmlTable' must be initialized* o no te deja añadir Initialize variable | La pusiste dentro de la condición o del loop | Muévela al nivel principal, justo debajo de List rows |
+| El correo llega con la tabla como texto con etiquetas `<td>` | Escribiste el HTML en el modo de texto enriquecido | Pégalo en la vista de código (**</>**) |
 
 **Evidencia a reportar:**
 
@@ -246,7 +281,7 @@ Esta vez no te digo los pasos: aplica lo que viste a un pedido nuevo.
 > **Requerimiento:** el gerente de TI quiere que se le avise solo cuando haya solicitudes **sin técnico asignado desde hace más de 3 días**. Si no hay ninguna, no quiere recibir nada.
 > **Criterios de aceptación:** (1) el flujo corre solo, una vez al día; (2) el filtro trae únicamente las solicitudes sin asignar y con más de 3 días, y no todas; (3) si no hay ninguna, el flujo termina sin enviar el correo.
 > **Restricciones:** un solo flujo, y sin loops anidados. No uses el trigger "When a row is added": lo que buscas depende del paso del tiempo, no de un evento.
-> **Pistas si te atoras:** la recurrencia y "List rows" están en la Práctica 5.2; la condición de "no enviar si está vacío" es el Paso 5 de esa práctica; recuerda que los valores Choice se filtran por su número, no por su nombre. Para el filtro de este reto: una columna Lookup (como el técnico asignado) se escribe con su nombre lógico entre guiones bajos, por ejemplo `_cr123_asignadoa_value`, y "vacía" se escribe `eq null`; una fecha va en formato ISO (por ejemplo `2026-10-05T00:00:00Z`) y, para calcularla en el flujo, puedes usar la expresión `addDays(utcNow(), -3)`; los nombres reales de tus columnas los ves en la tabla, en Columns. Un "loop anidado" es un "Apply to each" dentro de otro.
+> **Pistas si te atoras:** la recurrencia y "List rows" están en la Práctica 5.2; la condición de "no enviar si está vacío" es el Paso 5 de esa práctica; recuerda que los valores Choice se filtran por su número, no por su nombre. Para el filtro de este reto: una columna Lookup (como el técnico asignado) se escribe con su nombre lógico entre guiones bajos, por ejemplo `_sit_asignadoa_value`, y "vacía" se escribe `eq null`; una fecha va en formato ISO (por ejemplo `2026-10-05T00:00:00Z`) y, para calcularla en el flujo, puedes usar la expresión `addDays(utcNow(), -3)`; los nombres reales de tus columnas los ves en la tabla, en Columns. Un "loop anidado" es un "Apply to each" dentro de otro.
 
 **Ahora haz algo — transferencia guiada (8 min):** **[Transferir: avisar solo cuando haga falta](/practica/ip-pa-007-transferir-aviso-sin-asignar)**. Retoma el flujo de reporte diario pero con un pedido nuevo, y te pide decidir qué cambia.
 
