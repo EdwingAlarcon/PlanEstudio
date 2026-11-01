@@ -107,7 +107,7 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 - [ ] **Práctica**: Uso variables contextuales para controlar elementos de UI en una screen | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico qué es una collection y cuándo usarla vs. una variable | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Creo una collection usando ClearCollect() y la muestro en una Gallery | Dominio: ___/5 | Fecha: ___
-- [ ] **Conocimiento**: Explico qué es la delegación y por qué el límite de 500/2000 registros importa | Dominio: ___/5 | Fecha: ___
+- [ ] **Conocimiento**: Explico qué es la delegación y por qué el límite de filas (500 por defecto, configurable hasta 10.000) importa | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Uso la función Filter() con una columna indexada para evitar warning de delegación | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Guardo un registro nuevo usando Patch() directamente (sin Form) | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Guardo el contenido de un Form usando SubmitForm() | Dominio: ___/5 | Fecha: ___

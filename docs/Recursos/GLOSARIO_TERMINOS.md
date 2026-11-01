@@ -80,7 +80,7 @@
 
 **Dead Letter Queue (DLQ)** — Cola de mensajes fallidos en Azure Service Bus. Los mensajes que no pueden procesarse después de N reintentos se mueven a la DLQ para revisión manual.
 
-**Delegation** — En Canvas Apps, operación que se ejecuta en el servidor de datos (no en el cliente). Las operaciones delegables pueden procesar todos los registros; las no delegables están limitadas a 500–2000 registros.
+**Delegation** — En Canvas Apps, operación que se ejecuta en el servidor de datos (no en el cliente). Las operaciones delegables pueden procesar todos los registros; las no delegables solo procesan las primeras filas: 500 por defecto, configurable hasta 10.000 en Settings > General > Data row limit ([Learn](https://learn.microsoft.com/power-apps/maker/canvas-apps/delegation-overview)).
 
 **DirectLake (Power BI)** — Modo de conexión en Microsoft Fabric que permite a Power BI leer datos directamente del Lakehouse sin importar ni usar DirectQuery. Combina la velocidad del modo Import con datos actualizados.
 

@@ -2,7 +2,7 @@
 id: lab-02
 title: "Dataverse — Modelado de Datos para un Sistema de Solicitudes"
 level: "N1"
-duration: 90
+duration: 105
 product: ["Dataverse", "Power Apps"]
 certifications: ["PL-900"]
 role: ["Maker", "Developer"]
@@ -10,14 +10,14 @@ prerequisites:
   - "Ambiente Developer activo en make.powerapps.com"
   - "Módulo 1 completado — entorno configurado"
 files: []
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 02 — Dataverse: Modelo de Datos para un Sistema de Solicitudes Internas
 
 ## Objetivo
 
-Al finalizar este laboratorio podrás diseñar e implementar un modelo de datos relacional en Dataverse con tablas personalizadas, columnas tipadas, relaciones 1:N y N:N, Business Rules y vistas, dentro de una solución correctamente empaquetada.
+Al finalizar este laboratorio podrás diseñar e implementar un modelo de datos relacional en Dataverse con tablas personalizadas, columnas tipadas, relaciones Many-to-one, Business Rules y vistas, dentro de una solución con tu propio Publisher.
 
 ## Escenario de negocio
 
@@ -25,26 +25,35 @@ Al finalizar este laboratorio podrás diseñar e implementar un modelo de datos 
 
 **Problema a resolver:** El área de soporte interno registra las solicitudes de sus empleados en un Excel compartido. No hay control de asignación, las prioridades se cambian sin criterio y es imposible generar métricas de tiempo de resolución por categoría.
 
-**Por qué Dataverse:** Las tablas relacionales con ownership por usuario, Business Rules ejecutadas en el servidor y la integración nativa con Power Apps y Power Automate eliminan la hoja de cálculo sin necesitar código.
+**Por qué Dataverse:** Las tablas relacionales con ownership por usuario, Business Rules que también se aplican en el servidor y la integración nativa con Power Apps y Power Automate eliminan la hoja de cálculo sin necesitar código.
 
 ## Lo que vas a construir
 
-- **Tabla `sit_solicitud`:** registro principal de cada solicitud con estado, prioridad, fechas y vínculos a solicitante y responsable
-- **Tabla `sit_categoria`:** catálogo de categorías con SLA en horas
-- **Relación 1:N** entre `sit_categoria` → `sit_solicitud`
-- **Business Rules** que validan estado y auto-calculan SLA
+- **Tabla `Solicitud TI`** (nombre interno `sit_solicitud`): registro principal de cada solicitud con estado, prioridad, fechas y vínculos a categoría, solicitante y responsable
+- **Tabla `Categoría`** (nombre interno `sit_categoria`): catálogo de categorías con su SLA de referencia en horas
+- **Relación Many-to-one** de `Solicitud TI` hacia `Categoría` (muchas solicitudes, una categoría)
+- **2 Business Rules**: SLA según la prioridad y fecha de resolución obligatoria
 - **3 vistas** personalizadas para los distintos roles del equipo de soporte
+
+## Relación con el Módulo 2
+
+Este lab construye **el mismo modelo del Módulo 2**, con los mismos nombres visibles (`Solicitud TI`, `Título de Solicitud`, `Estado`, `Prioridad`…), así que las fórmulas de los Módulos 3 y 7 y del Lab 03 funcionan igual. Tiene dos diferencias, y las dos son a propósito:
+
+1. **La categoría es una tabla catálogo (Lookup), no una columna Choice.** En el Módulo 2 practicaste las dos formas (la columna Choice `Categoría` y la tabla `Categoría Detallada`). Aquí te quedas con la tabla porque el Lab 04 muestra su SLA en el formulario y el Lab 09 le añade un Rollup.
+2. **Los nombres internos se fijan a mano** (`sit_solicitud`, `sit_prioridad`, `sit_estado`…), porque los Labs 03, 04, 05 y 09 los usan en expresiones. Si los dejas automáticos, Dataverse quita las tildes y los espacios del nombre visible y obtienes nombres distintos (por ejemplo, `sit_solicitudti`).
+
+> **Si ya hiciste las prácticas del Módulo 2 en este mismo ambiente**, ya tienes una tabla llamada `Solicitud TI`. Antes de empezar, cámbiale el nombre visible para no confundirla con la de este lab: **Tables** → `Solicitud TI` → **Properties** → **Display name** = `Solicitud TI (M2)` y **Plural display name** = `Solicitudes TI (M2)` → **Save**. El nombre visible de una tabla sí se puede cambiar después de crearla; el nombre interno (Schema name) no.
 
 ## Duración estimada
 
 | Ejercicio | Tiempo estimado |
 |---|---|
-| Ejercicio 1 — Crear Solution y Publisher | 10 min |
-| Ejercicio 2 — Tablas y columnas | 30 min |
-| Ejercicio 3 — Business Rules | 15 min |
+| Ejercicio 1 — Publisher y Solution | 10 min |
+| Ejercicio 2 — Tablas, columnas y relaciones | 40 min |
+| Ejercicio 3 — Business Rules | 20 min |
 | Ejercicio 4 — Vistas personalizadas | 15 min |
 | Ejercicio 5 — Datos de prueba | 20 min |
-| **Total** | **90 min** |
+| **Total** | **105 min** |
 
 ## Nivel
 
@@ -53,8 +62,8 @@ Al finalizar este laboratorio podrás diseñar e implementar un modelo de datos 
 ## Tecnologías utilizadas
 
 - Microsoft Dataverse (tablas, columnas, relaciones, Business Rules, vistas)
-- Power Platform Admin Center
 - make.powerapps.com
+- Power Platform Admin Center (solo si te falta un rol de seguridad)
 
 ## Prerrequisitos
 
@@ -68,17 +77,19 @@ Al finalizar este laboratorio podrás diseñar e implementar un modelo de datos 
 ### Conocimiento previo
 
 - Módulo 1 completado: conceptos de Power Platform y primer contacto con Dataverse
-- Comprensión básica de bases de datos relacionales (tablas, filas, columnas)
+- Módulo 2 leído (tipos de columna, relaciones, Business Rules y vistas)
 
 ### Verificación rápida antes de empezar
 
 En [make.powerapps.com](https://make.powerapps.com), el selector de ambiente en la esquina superior derecha debe mostrar tu ambiente Developer, **no** el ambiente Default.
 
+> **Nombres de los botones:** Power Apps está en inglés en estos pasos, igual que en el Módulo 2. Si tu interfaz está en español o un botón cambió de nombre, busca el más parecido en la misma zona de la pantalla.
+
 ---
 
 ## Datos de apoyo
 
-Usa exactamente estos valores durante el laboratorio para garantizar coherencia con Labs posteriores (03, 05, 09).
+Usa exactamente estos valores durante el laboratorio para garantizar coherencia con Labs posteriores (03, 04, 05, 09).
 
 ### Empresa del escenario
 
@@ -86,13 +97,13 @@ Usa exactamente estos valores durante el laboratorio para garantizar coherencia 
 |---|---|
 | Nombre empresa | Servicios Integrados Tecnológicos S.A. |
 | Abreviación | SIT |
-| Prefijo de publisher | `sit_` |
-| Nombre del publisher | `SIT Publisher` |
+| Prefijo de publisher | `sit` (los nombres internos quedan como `sit_...`) |
+| Publisher | `SIT` (el mismo del Módulo 2, si ya lo creaste) |
 | Nombre de la solución | `SIT_SolicitudesInternas` |
 
 ### Datos de prueba — Categorías
 
-| Nombre | Descripción | SLA (horas) |
+| Nombre | Descripción | SLA Horas |
 |---|---|---|
 | Hardware | Equipos de cómputo, periféricos, impresoras | 48 |
 | Software | Instalación, licencias, errores de aplicaciones | 24 |
@@ -102,7 +113,9 @@ Usa exactamente estos valores durante el laboratorio para garantizar coherencia 
 
 ### Datos de prueba — Solicitudes (crear al final del lab)
 
-| Título | Categoría | Prioridad | Estado |
+Pon a cada una una **Fecha Solicitud** de los últimos 30 días. Deja **SLA Horas** vacía: la rellena la Business Rule.
+
+| Título de Solicitud | Categoría | Prioridad | Estado |
 |---|---|---|---|
 | Pantalla sin señal en oficina 3 | Hardware | Media | Nueva |
 | Sin acceso a sistema contable | Software | Alta | Nueva |
@@ -118,252 +131,220 @@ Usa exactamente estos valores durante el laboratorio para garantizar coherencia 
 ## Arquitectura del laboratorio
 
 ```
-Solution: SIT_SolicitudesInternas
+Solution: SIT_SolicitudesInternas   (Publisher SIT, prefijo sit)
 │
-├── Table: sit_Categoria (catálogo)
-│   ├── sit_nombre (Primary Name Column)
-│   └── sit_descripcion
+├── Table: Categoría  (sit_categoria) — Ownership: Organization
+│   ├── Nombre        (columna principal)
+│   ├── Descripción   sit_descripcion   (Multiline Text)
+│   └── SLA Horas     sit_slahoras      (Whole Number)
 │
-└── Table: sit_Solicitud
-    ├── sit_titulo (Primary Name Column)
-    ├── sit_descripcion
-    ├── sit_categoria    → Lookup a sit_Categoria (1:N)
-    ├── sit_prioridad    (Choice: Baja/Media/Alta/Crítica)
-    ├── sit_estado       (Choice: Nueva/En Proceso/Resuelta/Cerrada/Aprobada/Rechazada)
-    ├── sit_fechasolicitud
-    ├── sit_fecharesolucion
-    ├── sit_slahoras     (Número entero)
-    ├── sit_solicitante  → Lookup a Contact
-    └── sit_asignado     → Lookup a SystemUser (User)
+└── Table: Solicitud TI  (sit_solicitud) — Ownership: User or team
+    ├── Título de Solicitud  (columna principal)
+    ├── Descripción          sit_descripcion      (Multiline Text)
+    ├── Prioridad            sit_prioridad        (Choice: Baja/Media/Alta/Crítica)
+    ├── Estado               sit_estado           (Choice: Nueva/En Proceso/Resuelta/Cerrada/Aprobada/Rechazada)
+    ├── Fecha Solicitud      sit_fechasolicitud   (Date and Time)
+    ├── Fecha Resolución     sit_fecharesolucion  (Date Only)
+    ├── SLA Horas            sit_slahoras         (Whole Number, la rellena una Business Rule)
+    ├── Categoría            sit_categoria        → Lookup a Categoría (Many-to-one)
+    ├── Solicitante          sit_solicitante      → Lookup a Contact (Many-to-one)
+    └── Asignado a           sit_asignado         → Lookup a User (Many-to-one)
 ```
 
 ---
 
-## Ejercicio 1 — Crear Solution y Publisher
+## Ejercicio 1 — Publisher y Solution
 
-> **Qué vas a hacer:** Crear el contenedor de la solución con tu propio Publisher antes de tocar cualquier tabla. Esto garantiza que todos tus artefactos usen el prefijo `sit_` en lugar del genérico `new_`.
+> **Qué vas a hacer:** Crear (o reutilizar) tu Publisher y crear la solución antes de tocar cualquier tabla. El Publisher pone el prefijo `sit_` en el nombre interno de todo lo que crees dentro de la solución.
 > **Duración:** 10 min
 
-### Tarea 1.1 — Crear el Publisher
+### Tarea 1.1 — Crear la Solution (y el Publisher, si no lo tienes)
 
-1. En [make.powerapps.com](https://make.powerapps.com), selecciona tu ambiente **Developer** en el selector superior derecho.
+1. En [make.powerapps.com](https://make.powerapps.com), con tu ambiente **Developer** seleccionado, abre **Solutions** en el menú de la izquierda (si no lo ves, está en **…More**).
 
-2. En el menú lateral, haz clic en **Soluciones**.
+2. En la barra de comandos selecciona **New solution**. Se abre un panel a la derecha.
 
-3. Haz clic en **+ Nueva solución** (esquina superior izquierda).
-
-4. En el panel que aparece, haz clic en **+ Nuevo publisher** (dentro del campo Publisher).
-
-5. Completa los datos del publisher:
+3. Rellena:
 
    | Campo | Valor |
    |---|---|
-   | Nombre de visualización | SIT Publisher |
-   | Nombre | SITPublisher |
-   | Prefijo | sit |
-   | Prefijo de valor de elección | 10000 |
+   | Display Name | `SIT Solicitudes Internas` |
+   | Name | `SIT_SolicitudesInternas` (se rellena solo; corrígelo si hace falta) |
 
-6. Haz clic en **Guardar**.
+4. En **Publisher**:
+   - **Si ya creaste el publisher `SIT` en el Módulo 2**, elígelo en la lista y salta al paso 6.
+   - Si no, selecciona **New publisher** y rellena **Display Name** = `SIT`, **Name** = `SIT` y **Prefix** = `sit`. **Choice value prefix** se genera solo a partir del prefijo: no lo toques. Selecciona **Save**.
 
-   > ⚠️ **El prefijo `sit_` es permanente.** Una vez que lo uses para crear tablas o columnas, no se puede cambiar sin eliminar y recrear los objetos. Verifica que sea exactamente `sit` (3 letras, minúsculas).
+5. Comprueba que en **Publisher** queda elegido **SIT**.
 
-### Tarea 1.2 — Crear la Solution
+6. Marca **Set as your preferred solution** (lo que crees fuera de la solución también se guardará en ella) y selecciona **Create**.
 
-1. De vuelta en el diálogo de nueva solución, completa:
+7. Abre la solución `SIT Solicitudes Internas` haciendo clic en su nombre. Estará vacía. **Trabaja siempre dentro de ella.**
 
-   | Campo | Valor |
-   |---|---|
-   | Nombre de visualización | SIT Solicitudes Internas |
-   | Nombre | SIT\_SolicitudesInternas |
-   | Publisher | SIT Publisher (el que acabas de crear) |
-   | Versión | 1.0.0.0 |
-
-2. Haz clic en **Crear**.
-
-3. La solución aparece en la lista. Haz clic en ella para abrirla — estará vacía.
+   > ⚠️ **El prefijo no se cambia después.** El nombre interno (Schema name) de una tabla o columna no se puede modificar una vez guardada, y lleva delante el prefijo del Publisher. Comprueba que el prefijo sea exactamente `sit`.
 
 ### Resultado esperado del Ejercicio 1
 
-La solución `SIT_SolicitudesInternas` está abierta y lista. El breadcrumb superior muestra `Soluciones > SIT Solicitudes Internas`.
+La solución `SIT Solicitudes Internas` está abierta, vacía y con el publisher `SIT`.
 
 ### Validación del Ejercicio 1
 
-- [ ] La solución existe en la lista de Soluciones del ambiente
-- [ ] El publisher muestra prefijo `sit` (verificable al editar la solución)
-- [ ] La solución está vacía (0 componentes) — aún no has agregado tablas
+- [ ] La solución existe en la lista de Solutions del ambiente
+- [ ] El publisher de la solución tiene el prefijo `sit`
+- [ ] La solución está vacía (0 componentes)
 
 ---
 
-## Ejercicio 2 — Crear las tablas y columnas
+## Ejercicio 2 — Tablas, columnas y relaciones
 
-> **Qué vas a hacer:** Diseñar las dos tablas del modelo (catálogo de categorías y solicitud principal) con todas sus columnas y la relación entre ellas.
-> **Duración:** 30 min
+> **Qué vas a hacer:** Crear primero el catálogo `Categoría` (para poder apuntar a él) y luego la tabla principal `Solicitud TI` con sus columnas y sus tres Lookups.
+> **Duración:** 40 min
 
-### Tarea 2.1 — Crear la tabla `sit_Categoria`
+### Tarea 2.1 — Crear la tabla `Categoría`
 
-1. Dentro de la solución `SIT_SolicitudesInternas`, haz clic en **+ Nuevo** → **Tabla** → **Tabla**.
+1. Dentro de la solución, selecciona **New** y elige crear una tabla con **Set advanced properties** (también: **Tables** → **New table** → **Set advanced properties**). Se abre el panel **New table**.
 
-2. En la pestaña **Propiedades**, completa:
+2. Rellena **Display name** = `Categoría` y **Plural display name** = `Categorías`.
 
-   | Campo | Valor |
-   |---|---|
-   | Nombre de visualización | Categoria |
-   | Nombre plural | Categorias |
-   | Tipo de propiedad principal | Texto |
-   | Nombre de columna principal (visualización) | Nombre |
+3. En la pestaña **Primary column**, deja o escribe **Display name** = `Nombre`. Después de guardar la tabla ya no podrás cambiarlo.
 
-3. Expande **Opciones avanzadas** y verifica:
-   - Ownership: **Organization** (un catálogo es de la organización, no de usuarios individuales)
-   - Habilitar para actividades: **No**
+4. Vuelve a la pestaña de propiedades y despliega **Advanced options**:
+   - **Schema name**: deja el prefijo `sit_` y escribe `Categoria` (sin tilde). Debe quedar `sit_Categoria`. Si el prefijo no es `sit_` (por ejemplo, ves algo como `cr8a3_`), no estás en tu solución: cierra sin guardar y vuelve al Ejercicio 1.
+   - **Record ownership**: **Organization** (un catálogo es de toda la organización, no de un usuario).
 
-4. Haz clic en **Guardar**.
+5. Selecciona **Save**. Se abre la página de la tabla (su "hub").
 
-5. Con la tabla abierta, haz clic en la pestaña **Columnas** → **+ Nueva columna** para agregar:
+6. En la zona **Columns** → **New column**, crea estas dos columnas. Antes de guardar cada una, despliega **Advanced options** y escribe el **Schema name** indicado:
 
-   | Nombre visual | Tipo | Requerido | Notas |
+   | Display name | Schema name | Data type | Required |
    |---|---|---|---|
-   | Descripcion | Texto (multilinea) | Opcional | — |
-   | SLA Horas | Número entero | Requerido | Mínimo: 1, Máximo: 240 |
+   | Descripción | `sit_descripcion` | Multiline Text | Optional |
+   | SLA Horas | `sit_slahoras` | Whole Number | Business required |
 
-6. Guarda cada columna con el botón **Guardar**.
+7. En **Columns**, busca la columna principal `Nombre` y **anota su nombre interno** (los Labs 03 y 04 la llaman `sit_nombre`; si la tuya tiene otro, usa el tuyo allí).
 
-   > **¿Por qué Organization ownership para el catálogo?** Las tablas con Organization ownership no tienen registros "de un usuario" — cualquier usuario con el rol correcto puede ver todos los registros. Ideal para catálogos. Las tablas con User/Team ownership permiten filtrar "mis registros".
+   > **¿Por qué Organization?** En una tabla Organization todos los usuarios con el rol adecuado ven todos los registros: ideal para catálogos. En una User or team, cada registro tiene dueño y puedes filtrar "mis registros". **Ojo:** el tipo de ownership no se puede cambiar después de crear la tabla.
 
-### Tarea 2.2 — Crear la tabla `sit_Solicitud`
+### Tarea 2.2 — Crear la tabla `Solicitud TI`
 
-1. Dentro de la solución, haz clic en **+ Nuevo** → **Tabla** → **Tabla**.
+1. Dentro de la solución, **New** → tabla con **Set advanced properties**.
 
-2. Completa:
+2. Rellena **Display name** = `Solicitud TI` y **Plural display name** = `Solicitudes TI`. Marca **Enable Attachments**.
 
-   | Campo | Valor |
-   |---|---|
-   | Nombre de visualización | Solicitud |
-   | Nombre plural | Solicitudes |
-   | Nombre de columna principal | Titulo |
-   | Ownership | User or team |
+3. En la pestaña **Primary column**, **Display name** = `Título de Solicitud`.
 
-3. Haz clic en **Guardar**, luego ve a la pestaña **Columnas** y agrega:
+4. En **Advanced options**:
+   - **Schema name**: `sit_Solicitud` (no lo dejes como `sit_SolicitudTI`: los labs siguientes usan `sit_solicitud`).
+   - **Record ownership**: **User or team**.
 
-   | Nombre visual | Nombre lógico (autogenerado) | Tipo | Requerido |
+5. **Save**.
+
+6. En **Columns** → **New column**, crea estas columnas, cada una con su **Schema name** en **Advanced options**:
+
+   | Display name | Schema name | Data type | Required | Detalle |
+   |---|---|---|---|---|
+   | Descripción | `sit_descripcion` | Multiline Text | Optional | — |
+   | Prioridad | `sit_prioridad` | Choice | Optional | Opciones: Baja, Media, Alta, Crítica · Default choice = Media |
+   | Estado | `sit_estado` | Choice | Business required | Opciones: Nueva, En Proceso, Resuelta, Cerrada, Aprobada, Rechazada · Default choice = Nueva |
+   | Fecha Solicitud | `sit_fechasolicitud` | Date and Time | Optional | — |
+   | Fecha Resolución | `sit_fecharesolucion` | Date Only | Optional | — |
+   | SLA Horas | `sit_slahoras` | Whole Number | Optional | La rellena la Regla 1 |
+
+   *Para las columnas Choice (Prioridad y Estado):* en **Data type** elige **Choice** > **Choice**; en **Sync with global choice?** elige **No**; escribe la primera opción en **Label** y añade las demás con **New choice**, en el orden de la tabla. El número de **Value** se genera solo: no lo cambies. Elige el **Default choice** indicado.
+
+   > **📌 Sobre los valores numéricos de las opciones:** Dataverse genera el número de cada opción a partir del Choice value prefix de tu Publisher. No hay un número universal para "Aprobada": si un módulo posterior muestra uno de ejemplo (como `100000004`), es ilustrativo; mira siempre el valor real en tu ambiente. Aprobada y Rechazada no están en el Módulo 2: las usan los escenarios de aprobación de labs posteriores.
+
+   > **No te confundas:** toda tabla trae de fábrica una columna del sistema llamada **Status** (Active/Inactive). Tu columna **Estado** es otra distinta. En reglas, vistas y fórmulas usa siempre **Estado**.
+
+7. En **Columns**, anota el nombre interno de la columna principal `Título de Solicitud`. Los Labs 04 y 05 la llaman `sit_titulo`; si la tuya tiene otro nombre, usa el tuyo en esos labs.
+
+### Tarea 2.3 — Crear las relaciones (Lookups)
+
+Una columna Lookup crea a la vez una relación entre dos tablas. Créalas desde la tabla **Solicitud TI** (el lado "muchos"):
+
+1. En el hub de **Solicitud TI**, zona **Relationships** → **New relationship** → **Many-to-one**.
+
+2. En **Related** elige **Categoría**. En **Lookup column display name** escribe `Categoría` y, si el panel muestra el nombre interno de la columna, comprueba que quede `sit_categoria`. **Lookup column requirement**: **Business required**.
+
+3. Selecciona **Done** y luego **Save table**.
+
+4. Repite los pasos 1 a 3 para las otras dos:
+
+   | Related | Lookup column display name | Nombre interno | Requirement |
    |---|---|---|---|
-   | Descripcion | `sit_descripcion` | Texto (multilinea) | Sí |
-   | Prioridad | `sit_prioridad` | Elección | Sí |
-   | Estado | `sit_estado` | Elección | Sí |
-   | Fecha Solicitud | `sit_fechasolicitud` | Fecha y hora | Sí |
-   | Fecha Resolucion | `sit_fecharesolucion` | Solo fecha | No |
-   | SLA Horas | `sit_slahoras` | Número entero | No |
+   | Contact | Solicitante | `sit_solicitante` | Optional |
+   | User | Asignado a | `sit_asignado` | Optional |
 
-4. Para la columna **Prioridad**, configura las opciones de elección:
+   > `User` es la tabla de usuarios del ambiente (nombre interno `systemuser`). No crees una tabla propia de usuarios: Dataverse ya la tiene.
 
-   | Etiqueta | Valor (auto) |
-   |---|---|
-   | Baja | (automático) |
-   | Media | (automático) — **valor por defecto** |
-   | Alta | (automático) |
-   | Crítica | (automático) |
-
-5. Para la columna **Estado**, configura:
-
-   | Etiqueta | Valor (auto) |
-   |---|---|
-   | Nueva | (automático) — **valor por defecto** |
-   | En Proceso | (automático) |
-   | Resuelta | (automático) |
-   | Cerrada | (automático) |
-   | Aprobada | (automático) — usada más adelante en los Módulos 13/23 para el escenario de aprobación |
-   | Rechazada | (automático) — idem |
-
-   > **📌 Sobre los valores numéricos:** Dataverse asigna el número de cada opción automáticamente según el
-   > orden en que la creas (visible en **Personalizar columna → Editar opciones**). No existe un número
-   > universal para "Aprobada" — si un módulo posterior te muestra un valor de ejemplo (ej. `100000004`),
-   > es solo ilustrativo; verifica siempre el valor real de tu propio ambiente antes de usarlo en código.
-
-### Tarea 2.3 — Crear relaciones (Lookups)
-
-Las columnas de tipo **Lookup** crean automáticamente una relación 1:N entre dos tablas.
-
-1. En la tabla `sit_Solicitud` → pestaña **Columnas** → **+ Nueva columna**:
-
-   | Columna | Tipo | Tabla relacionada | Requerido |
-   |---|---|---|---|
-   | Categoria | Lookup | Categoria | Sí |
-   | Solicitante | Lookup | Contact | No |
-
-   > Para el tipo Lookup, selecciona **Búsqueda** en el tipo de datos, luego elige la tabla relacionada.
-
-2. Para el Lookup a **SystemUser** (el usuario asignado):
-   - Agrega columna: nombre visual `Asignado A`, tipo **Lookup**, tabla relacionada: **Usuario (systemuser)**.
-
-   > ⚠️ La tabla SystemUser es especial: búscala como "Usuario" en el selector. No crees una tabla propia de usuarios — Dataverse ya la tiene.
-
-3. Guarda cada columna.
+5. En **Columns**, comprueba que `Categoría`, `Solicitante` y `Asignado a` aparecen con tipo **Lookup**.
 
 ### Resultado esperado del Ejercicio 2
 
-La tabla `sit_Solicitud` tiene 9 columnas personalizadas más la columna `sit_titulo` principal. En la pestaña **Relaciones** se ven 3 relaciones: Contact, Categoria, y SystemUser.
+`Solicitud TI` tiene 9 columnas personalizadas (6 de la Tarea 2.2 y 3 Lookups) además de `Título de Solicitud`. En **Relationships** verás muchas relaciones del sistema (propietario, creado por…); entre ellas están tus tres relaciones Many-to-one hacia Categoría, Contact y User.
 
 ### Validación del Ejercicio 2
 
-- [ ] Tabla `sit_Categoria` existe con columnas `sit_nombre`, `sit_descripcion`, `sit_slahoras`
-- [ ] Tabla `sit_Solicitud` existe con 9 columnas personalizadas
-- [ ] Las columnas `sit_prioridad` y `sit_estado` muestran las opciones de elección configuradas
-- [ ] El Lookup `sit_categoria` aparece en la pestaña Relaciones de `sit_Solicitud`
+- [ ] La tabla `Categoría` (`sit_categoria`) existe con `Descripción` y `SLA Horas`, y ownership **Organization**
+- [ ] La tabla `Solicitud TI` (`sit_solicitud`) existe con 9 columnas personalizadas y ownership **User or team**
+- [ ] `Prioridad` y `Estado` muestran todas sus opciones y su valor por defecto
+- [ ] Las tres relaciones Many-to-one aparecen en **Relationships** de `Solicitud TI`
+- [ ] Anotaste el nombre interno de las dos columnas principales
 
 ---
 
 ## Ejercicio 3 — Business Rules
 
-> **Qué vas a hacer:** Agregar dos Business Rules que se ejecutan en el servidor: una que requiere la fecha de resolución al cerrar, y otra que valida que Crítica solo la asigne el supervisor.
-> **Duración:** 15 min
+> **Qué vas a hacer:** Las mismas dos reglas del Módulo 2: una rellena el SLA según la prioridad y otra impide marcar una solicitud como Resuelta sin fecha de resolución. Las dos usan Scope **Entity**, para que también se apliquen cuando cargues datos directamente en la tabla (Ejercicio 5), donde todavía no hay formulario de app.
+> **Duración:** 20 min
 
-### Tarea 3.1 — Regla: Fecha de resolución obligatoria al resolver
+**Cómo funciona el diseñador (léelo una vez):** una regla es un diagrama que empieza con una **Condition** (el rombo). A su derecha salen el **✓** (se cumple) y el **✕** (no se cumple). Las piezas se arrastran desde la pestaña **Components** hasta un **+** del diagrama, se configuran en **Properties** y se confirman siempre con **Apply**.
 
-1. En la tabla `sit_Solicitud`, haz clic en la pestaña **Reglas de negocio** → **+ Nueva regla de negocio**.
+### Tarea 3.1 — Regla 1: SLA según prioridad
 
-2. El diseñador visual se abre. Haz clic en **Condición** (el primer nodo azul):
-   - Haz clic en el símbolo `+` del canvas para agregar una condición
-   - **Columna:** Estado
-   - **Operador:** Es igual a
-   - **Tipo:** Valor
-   - **Valor:** Resuelta
+1. En el hub de **Solicitud TI**, zona **Business rules** → **Add business rule** (o **New business rule**). Se abre el diseñador con una condición ya creada.
 
-3. En la rama **Verdadero**, agrega una acción **Requerir campo**:
-   - **Columna:** Fecha Resolucion
-   - El campo se vuelve obligatorio solo cuando el estado es Resuelta
+2. Nombre: `SLA según prioridad`. **Scope**: **Entity**.
 
-4. En la misma rama, agrega una acción **Mostrar mensaje de error**:
-   - **Columna:** Fecha Resolucion
-   - **Mensaje:** `Debe ingresar la fecha de resolución antes de cerrar la solicitud.`
+3. Selecciona la condición. En **Properties**: **Display Name** = `Prioridad es Crítica`; regla: **Source** = **Entity**, **Field** = **Prioridad**, operador de igualdad, **Type** = **Value**, valor **Crítica**. **Apply**.
 
-5. En la esquina superior derecha del diseñador, cambia el **Ámbito** de "Solo entidad" a **Entidad** (se ejecuta tanto en formularios como en API).
+4. Arrastra **Set Field Value** al **+** del **✓**: **SLA Horas** = `4`. **Apply**.
 
-6. Haz clic en **Guardar**, luego en **Activar**.
+5. Arrastra una nueva **Condition** al **+** del **✕** de la primera: `Prioridad es Alta` → en su **✓**, **Set Field Value** **SLA Horas** = `8`.
 
-### Tarea 3.2 — Regla: Bloquear edición de solicitudes cerradas
+6. Repite colgando cada condición del **✕** de la anterior: `Prioridad es Media` → `24`; `Prioridad es Baja` → `48`.
 
-1. Nueva regla de negocio en `sit_Solicitud`.
+7. **Validate**, corrige lo que marque y **Save**.
 
-2. Condición: **Estado es igual a Cerrada**.
+8. **Actívala desde la lista:** una regla nueva queda guardada pero inactiva, y no se activa desde la ventana del diseñador. Ciérrala, vuelve a **Business rules** de la tabla, selecciona `SLA según prioridad` y elige **Activate**.
 
-3. En la rama Verdadero, agrega acción **Bloquear campo** para cada columna que no deba editarse:
-   - Bloquear: `sit_titulo`
-   - Bloquear: `sit_prioridad`
-   - Bloquear: `sit_categoria`
+### Tarea 3.2 — Regla 2: Fecha de resolución obligatoria al resolver
 
-4. Ámbito: **Entidad**. Guardar y Activar.
+1. **Add business rule**. Nombre: `Exigir fecha de resolución`. **Scope**: **Entity**.
 
-   > **¿Por qué no bloquear estado también?** Necesitas poder cambiar de "Cerrada" a otro estado si fue un error. Bloquear el estado atraparía el registro permanentemente.
+2. Selecciona la condición. En **Properties**:
+   - **Display Name**: `Resuelta sin fecha`
+   - Primera regla: **Field** = **Estado**, operador de igualdad, **Type** = **Value**, valor **Resuelta**.
+   - Selecciona **New** para añadir una segunda regla, con **Rule Logic** = **AND**: **Field** = **Fecha Resolución** y el operador que significa "no contiene datos" (no necesita valor).
+   - **Apply**.
+
+3. Arrastra **Show Error Message** al **+** del **✓**: **Field** = **Fecha Resolución**, **Message** = `Debe ingresar la fecha de resolución antes de resolver la solicitud.` **Apply**.
+
+4. **Validate**, **Save** y actívala desde la lista con **Activate**.
+
+   > **¿Por qué la condición lleva "y la fecha está vacía"?** Si la condición fuera solo "Estado = Resuelta", el mensaje de error saldría siempre, también después de llenar la fecha, y la solicitud nunca se podría guardar.
+
+   > **Por qué no hay una regla de "bloquear campos":** bloquear, ocultar o mostrar columnas solo funciona en formularios de apps model-driven; en el servidor se ignora. En este lab todavía no hay formulario (llega en el Lab 04), así que no podrías probarla.
 
 ### Resultado esperado del Ejercicio 3
 
-En la pestaña **Reglas de negocio** de `sit_Solicitud` aparecen 2 reglas con estado **Activo**.
+En **Business rules** de `Solicitud TI` aparecen 2 reglas con estado **Activated**.
 
 ### Validación del Ejercicio 3
 
-- [ ] Regla "Fecha resolución obligatoria" está activa
-- [ ] Regla "Bloquear campos en Cerrada" está activa
-- [ ] Al probar en un formulario: cambiar estado a "Resuelta" sin fecha genera el mensaje de error
-- [ ] Al probar en un formulario: cambiar estado a "Cerrada" bloquea Título, Prioridad y Categoría
+- [ ] Regla `SLA según prioridad` activa, con Scope Entity
+- [ ] Regla `Exigir fecha de resolución` activa, con Scope Entity y las dos condiciones unidas con AND
+- [ ] (Se prueban en el Ejercicio 5)
 
 ---
 
@@ -372,112 +353,85 @@ En la pestaña **Reglas de negocio** de `sit_Solicitud` aparecen 2 reglas con es
 > **Qué vas a hacer:** Crear 3 vistas con filtros y columnas distintas para los tres roles que usarán el sistema.
 > **Duración:** 15 min
 
-### Tarea 4.1 — Vista "Solicitudes abiertas de mi equipo"
+**Antes de empezar, sobre el orden:** las vistas ordenan una columna Choice por el texto de la opción, no por el orden en que la creaste. Si ordenas por **Prioridad** descendente obtienes Media, Crítica, Baja, Alta. Como **SLA Horas** ya refleja la prioridad (Crítica 4, Alta 8, Media 24, Baja 48), **ordena por SLA Horas de menor a mayor** para ver primero lo más urgente.
 
-Esta vista es para el supervisor de soporte.
+**Cómo se crea una vista (vale para las tres):** en el hub de **Solicitud TI**, zona **Views** → **New view** → escribe el nombre → **Create**. Añade columnas con **+ View column**. Los filtros se editan en el panel de propiedades con **Edit filters** → **Add** → **Add row** (las filas se unen con **And** por defecto) → **OK**. Para ordenar, selecciona el encabezado de una columna y elige **Sort ascending** o **Sort descending**; con **Shift** pulsado añades un segundo criterio. Termina con **Save and publish**.
 
-1. En la tabla `sit_Solicitud` → pestaña **Vistas** → **+ Nueva vista**.
+### Tarea 4.1 — Vista "Solicitudes Abiertas del Equipo" (supervisor de soporte)
 
-2. Nombre: `Solicitudes Abiertas del Equipo`.
+1. Nombre: `Solicitudes Abiertas del Equipo`.
+2. Columnas: `Título de Solicitud` | `Categoría` | `Prioridad` | `SLA Horas` | `Estado` | `Asignado a` | `Fecha Solicitud`.
+3. Filtros: **Estado** "no es igual a" **Cerrada** y **Estado** "no es igual a" **Resuelta**.
+4. Orden: **SLA Horas** ascendente y luego **Fecha Solicitud** ascendente.
+5. **Save and publish**.
 
-3. Configura las columnas visibles (en este orden):
-   `Titulo` | `Categoria` | `Prioridad` | `Estado` | `Asignado A` | `Fecha Solicitud`
+### Tarea 4.2 — Vista "Mis Solicitudes Activas" (empleado)
 
-4. Agrega filtro:
-   - Estado **No es igual a** Cerrada
-   - **Y** Estado **No es igual a** Resuelta
+1. Nombre: `Mis Solicitudes Activas`.
+2. Columnas: `Título de Solicitud` | `Categoría` | `Prioridad` | `Estado` | `Fecha Solicitud` | `SLA Horas`.
+3. Filtros: **Estado** "no es igual a" **Cerrada** y **Owner** (Propietario) con el operador que compara con "el usuario actual".
+   > **Por qué Owner y no Solicitante:** `Solicitante` apunta a un **Contact**, no a un usuario de la app, así que no se puede comparar con el usuario actual. El Owner es el usuario que creó el registro.
+4. Orden: **Fecha Solicitud** descendente.
+5. **Save and publish**.
 
-5. Ordenar por: **Prioridad Descendente**, luego **Fecha Solicitud Ascendente**.
+### Tarea 4.3 — Vista "Críticas Sin Asignar" (jefe de soporte)
 
-6. Haz clic en **Guardar y publicar**.
+1. Nombre: `Críticas Sin Asignar`.
+2. Columnas: `Título de Solicitud` | `Descripción` | `Solicitante` | `Fecha Solicitud`.
+3. Filtros: **Prioridad** igual a **Crítica**, **Estado** igual a **Nueva** y **Asignado a** con el operador que significa "no contiene datos".
+4. Orden: **Fecha Solicitud** ascendente (la más antigua primero).
+5. **Save and publish**.
 
-### Tarea 4.2 — Vista "Mis solicitudes activas"
-
-Esta vista es para el empleado solicitante.
-
-1. Nueva vista: `Mis Solicitudes Activas`.
-
-2. Columnas: `Titulo` | `Categoria` | `Prioridad` | `Estado` | `Fecha Solicitud` | `SLA Horas`
-
-3. Filtro:
-   - Estado **No es igual a** Cerrada
-   - **Y** Solicitante **Es igual a** `[Current User]` (usa la opción de valor dinámico)
-
-4. Ordenar: **Fecha Solicitud Descendente**.
-
-5. Guardar y publicar.
-
-### Tarea 4.3 — Vista "Críticas sin asignar"
-
-Esta vista es para el jefe de soporte para acción inmediata.
-
-1. Nueva vista: `Críticas Sin Asignar`.
-
-2. Columnas: `Titulo` | `Descripcion` | `Solicitante` | `Fecha Solicitud`
-
-3. Filtro:
-   - Prioridad **Es igual a** Crítica
-   - **Y** Estado **Es igual a** Nueva
-   - **Y** Asignado A **No contiene datos**
-
-4. Ordenar: **Fecha Solicitud Ascendente** (más antigua primero).
-
-5. Guardar y publicar.
+> Si un cambio no aparece donde esperas, en la solución selecciona **Publish all customizations** y espera a que termine.
 
 ### Validación del Ejercicio 4
 
-- [ ] Las 3 vistas aparecen publicadas en la pestaña **Vistas** de `sit_Solicitud`
-- [ ] Cada vista muestra las columnas configuradas al previsualizarla
+- [ ] Las 3 vistas aparecen en **Views** de `Solicitud TI`
+- [ ] Cada vista muestra las columnas configuradas y ordena por el criterio indicado
 
 ---
 
 ## Ejercicio 5 — Datos de prueba
 
-> **Qué vas a hacer:** Poblar el modelo con los registros de la sección "Datos de apoyo" para validar que Business Rules y vistas funcionan correctamente.
+> **Qué vas a hacer:** Cargar los registros de "Datos de apoyo" y comprobar que las Business Rules y las vistas funcionan.
 > **Duración:** 20 min
 
-### Tarea 5.1 — Crear registros de Categoria
+### Tarea 5.1 — Crear las Categorías
 
-1. En la solución, haz clic en la tabla `sit_Categoria`.
+1. Abre la tabla **Categoría** desde tu solución.
+2. En el hub, en la zona de columnas y datos, abre el editor de filas (si no lo ves, selecciona **View data** en la barra de comandos, o **Edit** para abrir el diseñador de la tabla, donde también puedes añadir filas).
+3. Agrega los 5 registros de "Datos de prueba — Categorías".
 
-2. Ve a la pestaña **Datos** (o desde el menú principal: **Tablas** → `sit_Categoria` → **Editar**).
+### Tarea 5.2 — Crear las Solicitudes
 
-3. Agrega los 5 registros de la tabla "Datos de prueba — Categorías" de la sección de apoyo.
-
-   > Si no ves el botón "+ Nuevo registro", verifica que estás en la pestaña **Datos** y no en Columnas.
-
-### Tarea 5.2 — Crear registros de Solicitud
-
-1. Repite el proceso para la tabla `sit_Solicitud`.
-
-2. Agrega los 10 registros de la tabla "Datos de prueba — Solicitudes".
-
-3. Para cada registro, selecciona la Categoría correspondiente del Lookup (usará los registros creados en 5.1).
-
-4. Deja los campos Solicitante y Asignado A vacíos por ahora (se asignan en Labs posteriores).
+1. Abre la tabla **Solicitud TI** y su editor de filas, igual que en 5.1.
+2. Agrega los 10 registros de "Datos de prueba — Solicitudes": elige la **Categoría** en el Lookup (son los registros de 5.1) y pon una **Fecha Solicitud** de los últimos 30 días.
+3. Deja **SLA Horas**, **Solicitante** y **Asignado a** vacíos (SLA lo rellena la Regla 1; los otros dos se usan en labs posteriores).
 
 ### Tarea 5.3 — Probar las Business Rules
 
-1. Abre cualquier solicitud con Estado = "En Proceso".
+1. Revisa la solicitud "VPN caída para equipo remoto" (Prioridad Crítica).
 
-2. Cambia el Estado a **Resuelta** y haz clic en **Guardar** sin llenar la Fecha Resolución.
+   **Resultado esperado:** al guardarla, **SLA Horas** quedó en `4` sin que lo escribieras.
 
-   **Resultado esperado:** aparece el mensaje `Debe ingresar la fecha de resolución...`
+2. Abre la solicitud "Error al abrir Excel con macros" (En Proceso). Cambia **Estado** a **Resuelta** y guarda sin llenar **Fecha Resolución**.
 
-3. Llena la Fecha Resolución con la fecha de hoy y guarda.
+   **Resultado esperado:** el guardado se bloquea y aparece `Debe ingresar la fecha de resolución...`
 
-   **Resultado esperado:** el registro se guarda correctamente.
+3. Llena **Fecha Resolución** con la fecha de hoy y guarda.
 
-4. Cambia ahora el Estado a **Cerrada** y guarda.
+   **Resultado esperado:** ahora sí se guarda.
 
-   **Resultado esperado:** los campos Titulo, Prioridad y Categoría quedan bloqueados (solo lectura).
+4. Abre la vista `Solicitudes Abiertas del Equipo`.
+
+   **Resultado esperado:** salen primero las dos Críticas (SLA 4) y la resuelta del paso 3 ya no aparece.
 
 ### Validación del Ejercicio 5
 
-- [ ] 5 registros de Categoría visibles en la tabla
-- [ ] 10 registros de Solicitud creados con datos variados
-- [ ] La Business Rule de Fecha Resolución dispara el error correctamente
-- [ ] La Business Rule de bloqueo en Cerrada funciona correctamente
+- [ ] 5 registros de Categoría y 10 de Solicitud TI
+- [ ] Las Críticas tienen SLA Horas = 4 (y Alta 8, Media 24, Baja 48)
+- [ ] La regla de fecha bloquea la Resuelta sin fecha y deja guardar con fecha
+- [ ] La vista del equipo ordena por urgencia
 
 ---
 
@@ -485,12 +439,14 @@ Esta vista es para el jefe de soporte para acción inmediata.
 
 | Problema | Causa probable | Solución |
 |---|---|---|
-| El prefijo de mis columnas es `new_` en lugar de `sit_` | Creaste las tablas fuera de la solución o con el publisher por defecto | Elimina las tablas y recréalas dentro de la solución con SIT Publisher |
-| No veo la tabla `sit_Solicitud` en el selector de Lookup | La tabla aún no fue agregada a la solución o tiene error de guardado | En la solución, verifica que ambas tablas aparecen como componentes |
-| El botón "Activar" en Business Rules está deshabilitado | La regla tiene un error de configuración (p. ej., falta la condición) | Revisa que la condición y al menos una acción estén configuradas |
-| No puedo cambiar Ownership después de crear la tabla | Ownership es inmutable una vez que existen registros | Si no hay registros, elimina y recrea la tabla con el Ownership correcto |
-| Las vistas no muestran el filtro de "Current User" | La opción de valor dinámico no se seleccionó — se ingresó como texto estático | Edita la vista, en el filtro usa el ícono de usuario dinámico, no escribas el email |
-| Error "No tiene privilegios suficientes" al crear tablas | El rol del usuario no incluye Create para tablas personalizadas | El System Administrator debe asignarte el rol System Customizer o System Administrator |
+| Mis tablas o columnas tienen un prefijo raro (como `cr8a3_`) en lugar de `sit_` | Las creaste fuera de la solución, con el publisher predeterminado del ambiente | Si aún no tienen datos ni dependencias, elimínalas y recréalas dentro de `SIT Solicitudes Internas` |
+| La tabla quedó como `sit_solicitudti` en lugar de `sit_solicitud` | No cambiaste el Schema name antes de guardar | El Schema name no se puede cambiar: elimina la tabla vacía y recréala; o usa tu nombre real en los labs siguientes |
+| No encuentro **Activate** en el diseñador de la regla | Las reglas no se activan desde la ventana del diseñador | Cierra el diseñador y actívala desde la lista de **Business rules** |
+| El error de fecha sale incluso con la fecha llena | La condición solo comprueba Estado = Resuelta | Añade la segunda regla "Fecha Resolución no contiene datos" con AND |
+| SLA Horas queda vacía | La Regla 1 está inactiva o su Scope no es Entity | Revisa que esté **Activated** y con Scope **Entity**; vuelve a guardar el registro |
+| La vista de "Mis solicitudes" sale vacía | Filtraste por Solicitante (un Contact) en lugar de por Owner | Edita el filtro y usa **Owner** con "el usuario actual" |
+| No puedo cambiar el ownership de la tabla | El tipo de ownership no se puede cambiar después de crear la tabla | Elimina la tabla y recréala con el ownership correcto |
+| Error de privilegios al crear tablas | Tu rol no permite personalizar el ambiente | Pide el rol System Customizer o System Administrator |
 
 ---
 
@@ -498,104 +454,103 @@ Esta vista es para el jefe de soporte para acción inmediata.
 
 Para los errores más frecuentes de este laboratorio, sigue este flujo antes de pedir ayuda externa.
 
-### Prefijo `new_` en lugar de `sit_`
+### Prefijo distinto de `sit_`
 
-- **Causa probable:** creaste la tabla o columna con **+ Nueva tabla** desde fuera de la solución `SIT_SolicitudesInternas`, o el publisher activo en ese momento era el publisher por defecto (`Default Publisher`, prefijo `new`).
-- **Cómo comprobar:** abre la solución `SIT_SolicitudesInternas` → pestaña **Objetos** → verifica si la tabla aparece listada ahí. Si no aparece, ábrela directamente desde **Tablas** (menú lateral) y revisa su nombre lógico completo (aparece bajo el nombre de visualización, entre paréntesis) — si empieza con `new_`, se creó con el publisher equivocado.
-- **Cómo corregir:** el prefijo de una tabla es inmutable una vez guardada. Si la tabla no tiene registros ni relaciones creadas todavía, elimínala (**Tablas** → selecciona la tabla → **Eliminar**) y recréala desde dentro de la solución `SIT_SolicitudesInternas` con **+ Nuevo** → **Tabla**, confirmando antes que el publisher activo de la solución es `SIT Publisher`.
-- **Reiniciar vs. reparar:** si ya tiene columnas dependientes o Business Rules creadas, es más rápido eliminar y recrear la tabla completa que intentar migrar cada columna. Si es solo la tabla vacía recién creada, elimínala de inmediato sin recrear nada más.
-- **Evidencia posterior a la corrección:** al abrir la tabla en **Tablas**, el nombre lógico entre paréntesis muestra el prefijo `sit_` (por ejemplo, `sit_solicitud`), y la tabla aparece listada en la pestaña **Objetos** de la solución `SIT_SolicitudesInternas`.
+- **Causa probable:** creaste la tabla o columna fuera de la solución `SIT Solicitudes Internas`, y Dataverse usó el publisher predeterminado del ambiente, cuyo prefijo suele ser una combinación aleatoria (como `cr8a3`).
+- **Cómo comprobar:** abre la tabla y mira **Advanced options** → **Schema name**, o la columna **Name** en la lista de **Columns**. Comprueba también que la tabla aparece en la lista de objetos de la solución.
+- **Cómo corregir:** el Schema name no se puede cambiar una vez guardado. Si la tabla no tiene datos ni dependencias, elimínala y recréala desde dentro de la solución, comprobando antes que el publisher de la solución es `SIT`.
+- **Reiniciar vs. reparar:** si ya tiene columnas dependientes o Business Rules, suele ser más rápido eliminar y recrear la tabla completa que migrar columna por columna.
+- **Evidencia posterior a la corrección:** el Schema name de la tabla empieza por `sit_` y la tabla aparece entre los objetos de la solución.
 
-### La tabla `sit_Solicitud` no aparece en el selector de Lookup
+### La tabla `Categoría` no aparece en el panel de la relación
 
-- **Causa probable:** la tabla relacionada (`sit_Categoria` o `Contact`) no terminó de guardarse, o la columna Lookup se está creando en una solución distinta a donde vive la tabla destino.
-- **Cómo comprobar:** en la solución `SIT_SolicitudesInternas` → pestaña **Objetos**, confirma que ambas tablas (`sit_Categoria` y `sit_Solicitud`) aparecen en la lista. Si `sit_Categoria` no aparece, ábrela desde **Tablas** y verifica si tiene un ícono de advertencia o si el botón **Guardar** sigue activo (señal de cambios sin guardar).
-- **Cómo corregir:** abre la tabla faltante, haz clic en **Guardar** explícitamente, espera a que el indicador de guardado desaparezca, y recarga la página del navegador antes de volver a intentar crear el Lookup.
-- **Reiniciar vs. reparar:** nunca elimines la tabla por este error — es un problema de sincronización, no de estructura. Basta con guardar y recargar.
-- **Evidencia posterior a la corrección:** al crear la columna Lookup en `sit_Solicitud`, la tabla relacionada aparece en el selector desplegable; la pestaña **Relaciones** de `sit_Solicitud` muestra la nueva relación 1:N.
+- **Causa probable:** la tabla no terminó de guardarse, o la página no se ha refrescado desde que la creaste.
+- **Cómo comprobar:** en la solución, confirma que `Categoría` aparece entre los objetos. Abre la tabla y mira si hay cambios sin guardar.
+- **Cómo corregir:** guarda la tabla, espera a que termine y recarga el navegador antes de volver a crear la relación.
+- **Reiniciar vs. reparar:** nunca elimines la tabla por este error: es de sincronización, no de estructura.
+- **Evidencia posterior a la corrección:** `Categoría` aparece en **Related** y la relación nueva sale en **Relationships** de `Solicitud TI`.
 
-### El botón "Activar" en Business Rules está deshabilitado
+### La Business Rule no hace nada
 
-- **Causa probable:** falta la condición inicial, o hay una rama (Verdadero/Falso) con una acción incompleta (por ejemplo, "Requerir campo" sin columna seleccionada).
-- **Cómo comprobar:** en el diseñador de la Business Rule, revisa cada nodo: un nodo con un borde rojo o un ícono de exclamación indica configuración incompleta. Haz clic en cada acción de cada rama y confirma que todos los campos obligatorios (Columna, Operador, Valor) tienen datos.
-- **Cómo corregir:** completa el nodo incompleto o elimínalo si no es necesario (clic derecho → **Quitar**). El botón **Activar** se habilita solo cuando el diseñador no detecta errores de validación.
-- **Reiniciar vs. reparar:** repara el nodo específico; no es necesario recrear la regla completa salvo que el diseñador quede en un estado inconsistente (por ejemplo, no responde al hacer clic) — en ese caso, cierra sin guardar y vuelve a crear la regla desde cero.
-- **Evidencia posterior a la corrección:** el botón **Activar** queda habilitado (no atenuado) y, tras hacer clic, el estado de la regla cambia a **Activo** en la lista de Reglas de negocio.
+- **Causa probable:** está guardada pero no activada, o su Scope no es **Entity** y estás cargando datos directamente en la tabla (sin formulario).
+- **Cómo comprobar:** en la lista de **Business rules**, la regla debe estar **Activated**. Ábrela y revisa el **Scope** y que cada condición y acción tenga **Apply**; **Validate** te marca lo que falte.
+- **Cómo corregir:** para editar una regla activa, primero desactívala; corrige, **Validate**, **Save** y actívala de nuevo desde la lista.
+- **Reiniciar vs. reparar:** repara la pieza concreta; recrea la regla solo si el diseñador queda en un estado que no responde.
+- **Evidencia posterior a la corrección:** al guardar una solicitud Crítica, **SLA Horas** queda en `4`.
 
-### No puedo cambiar el Ownership después de crear la tabla
+### No puedo cambiar el ownership de la tabla
 
-- **Causa probable:** intentaste editar el campo Ownership desde **Propiedades** de una tabla que ya tiene registros o metadatos dependientes — Dataverse bloquea este cambio por diseño.
-- **Cómo comprobar:** abre la tabla → **Propiedades** → el campo **Ownership** aparece atenuado (no editable) en lugar de como un desplegable activo.
-- **Cómo corregir:** si la tabla no tiene registros, elimínala (**Tablas** → selecciona → **Eliminar**) y recréala con el Ownership correcto desde el inicio. Si ya tiene registros de prueba, expórtalos primero (o vuelve a capturarlos manualmente después, ya que este lab solo tiene 5-10 registros).
-- **Reiniciar vs. reparar:** siempre reiniciar (eliminar y recrear) — Ownership no tiene ruta de reparación en el mismo objeto.
-- **Evidencia posterior a la corrección:** al abrir **Propiedades** de la tabla recién creada, el campo Ownership muestra el valor correcto (`Organization` para `sit_Categoria`, `User or team` para `sit_Solicitud`) y es editable solo porque aún no hay registros.
+- **Causa probable:** el tipo de ownership (User or team u Organization) se elige al crear la tabla y no se puede cambiar después.
+- **Cómo comprobar:** en **Advanced options** de la tabla, **Record ownership** aparece sin poder editarse.
+- **Cómo corregir:** elimina la tabla y recréala con el ownership correcto. Si ya tenía registros de prueba, vuelve a cargarlos (son pocos).
+- **Reiniciar vs. reparar:** siempre reiniciar: no hay forma de repararlo sobre la misma tabla.
+- **Evidencia posterior a la corrección:** `Categoría` muestra **Organization** y `Solicitud TI` muestra **User or team**.
 
-### Error "No tiene privilegios suficientes" al crear tablas
+### Error de privilegios al crear tablas
 
-- **Causa probable:** el rol de seguridad asignado al usuario en ese ambiente no incluye el privilegio de Crear para tablas personalizadas (por ejemplo, tiene un rol básico como "Basic User" en vez de "System Customizer").
-- **Cómo comprobar:** en [make.powerapps.com](https://make.powerapps.com) → **Configuración** (ícono de engranaje) → **Usuarios y permisos** → busca tu usuario y revisa los roles de seguridad asignados en ese ambiente.
-- **Cómo corregir:** pide al administrador del ambiente (o hazlo tú mismo si tienes acceso) que te asigne el rol **System Customizer** o **System Administrator** desde el Power Platform Admin Center → Ambiente → **Usuarios** → selecciona tu usuario → **Administrar roles**.
-- **Reiniciar vs. reparar:** no aplica reiniciar componentes — es un problema de permisos, no de datos. Solo reintenta la acción original después de que el rol se propague (puede tardar 1-2 minutos).
-- **Evidencia posterior a la corrección:** puedes crear una tabla de prueba sin que aparezca el mensaje de error; el rol correcto aparece listado junto a tu usuario en el Admin Center.
+- **Causa probable:** tu rol de seguridad en ese ambiente no permite personalizarlo (por ejemplo, solo tienes "Basic User").
+- **Cómo comprobar y corregir:** en Power Platform Admin Center → **Manage** → **Environments** → tu ambiente → **Settings** → **Users + permissions** → **Users** → selecciona tu usuario → **Manage security roles**, y asigna **System Customizer** o **System Administrator** (o pídeselo al administrador).
+- **Reiniciar vs. reparar:** no hay nada que reiniciar: es un permiso. Reintenta cuando el rol se haya aplicado (puede tardar unos minutos).
+- **Evidencia posterior a la corrección:** puedes crear una tabla de prueba sin error y el rol aparece junto a tu usuario.
 
 ---
 
 ## Checklist final
 
-- [ ] Publisher `SIT Publisher` con prefijo `sit` creado
-- [ ] Solución `SIT_SolicitudesInternas` creada y todas las tablas dentro de ella
-- [ ] Tabla `sit_Categoria` con columnas `sit_descripcion` y `sit_slahoras`
-- [ ] Tabla `sit_Solicitud` con 9 columnas personalizadas (incluyendo 3 Lookups)
-- [ ] Columnas de Elección `sit_prioridad` y `sit_estado` con todas sus opciones
-- [ ] 2 Business Rules activas en `sit_Solicitud`
-- [ ] 3 Vistas publicadas con filtros y columnas correctas
-- [ ] 5 registros de Categoría creados
-- [ ] 10 registros de Solicitud creados con datos variados
-- [ ] Business Rules probadas manualmente con resultado correcto
+- [ ] Publisher `SIT` con prefijo `sit` (creado aquí o en el Módulo 2)
+- [ ] Solución `SIT_SolicitudesInternas` con las dos tablas dentro
+- [ ] Tabla `Categoría` (`sit_categoria`, Organization) con `Descripción` y `SLA Horas`
+- [ ] Tabla `Solicitud TI` (`sit_solicitud`, User or team) con 9 columnas personalizadas, incluidos 3 Lookups
+- [ ] Columnas Choice `Prioridad` y `Estado` con todas sus opciones y valor por defecto
+- [ ] 2 Business Rules activas, con Scope Entity
+- [ ] 3 vistas publicadas, ordenadas por SLA Horas o por fecha
+- [ ] 5 registros de Categoría y 10 de Solicitud TI
+- [ ] Business Rules probadas con el resultado esperado
 
 ---
 
 ## Evidencia esperada
 
-- Captura de las tablas `sit_Categoria` y `sit_Solicitud` con sus columnas, dentro de la solución `SIT_SolicitudesInternas`
-- Captura o exportación de las 2 Business Rules activas en `sit_Solicitud`
-- Captura de las 3 vistas publicadas con sus filtros
-- Conteo de registros de prueba cargados (5 Categoría, 10 Solicitud)
+- Captura de las tablas `Categoría` y `Solicitud TI` con sus columnas (y sus Schema names), dentro de la solución `SIT_SolicitudesInternas`
+- Captura de la lista de Business rules con las 2 reglas activas
+- Captura de la vista `Solicitudes Abiertas del Equipo` mostrando las Críticas primero
+- El texto exacto del mensaje de error al marcar Resuelta sin fecha
+- Conteo de registros de prueba (5 Categoría, 10 Solicitud TI)
 
 ## Criterios de aprobación
 
-- Las tablas están dentro de la solución, con prefijo `sit_` (no `new_`)
-- Las 2 Business Rules disparan el mensaje de error y el bloqueo de campos descritos en la Tarea 5.3
-- Las 3 vistas publicadas filtran correctamente sin datos de otros usuarios
+- Las tablas están dentro de la solución, con prefijo `sit_` y los Schema names indicados
+- Las 2 Business Rules funcionan como en la Tarea 5.3
+- Las 3 vistas filtran y ordenan como se indica
 - 100% de los ítems del Checklist final marcados
 
 ## Reto adicional
 
 Si completaste el laboratorio antes del tiempo estimado, intenta:
 
-**Reto básico:** Agrega una columna **Rollup** en `sit_Categoria` que cuente cuántas solicitudes activas (Estado ≠ Cerrada, ≠ Resuelta) tiene cada categoría. Llámala `sit_solicitudes_activas`.
+**Reto básico:** Agrega en `Categoría` una columna **Rollup** que cuente cuántas solicitudes activas (Estado Nueva o En Proceso) tiene cada categoría. Ponle el Schema name `sit_solicitudesactivas`: el Lab 09 la usa con ese nombre (si la haces aquí, allí solo la reutilizas).
 
-**Reto intermedio:** Crea una columna **Calculada** en `sit_Solicitud` llamada `sit_diasabierta` de tipo número entero que calcule `HOY() - sit_fechasolicitud` en días. Úsala en una cuarta vista "Solicitudes Antiguas" que filtre las solicitudes abiertas con más de 7 días. (Si ya completaste el Lab 09 — Dataverse Avanzado, esta columna ya existe con este mismo nombre; no la recrees, solo úsala en la vista.)
+**Reto intermedio:** Agrega en `Solicitud TI` la columna calculada `Dias Abierta` (`sit_diasabierta`), los días desde la Fecha Solicitud, siguiendo la Tarea 1.2 del Lab 09. Úsala en una cuarta vista "Solicitudes Antiguas" con las solicitudes abiertas de más de 7 días. Si ya hiciste el Lab 09, la columna ya existe: no la recrees.
 
-**Reto avanzado:** Crea una tercera tabla `sit_Comentario` con columnas `sit_texto`, `sit_fecha` y un Lookup a `sit_Solicitud`. Configura una relación 1:N (una solicitud puede tener muchos comentarios). Esta tabla se retoma como opcional en el Lab 09 — Dataverse Avanzado si completaste este reto.
+**Reto avanzado:** Crea una tercera tabla `Comentario` (`sit_Comentario`) con las columnas `Texto` y `Fecha`, y una relación Many-to-one hacia `Solicitud TI` (una solicitud puede tener muchos comentarios). El Lab 09 la retoma como opcional.
 
 ---
 
 ## Preguntas de repaso
 
-1. ¿Cuál es la diferencia entre **Organization ownership** y **User/Team ownership** en una tabla de Dataverse?
-2. ¿Por qué se recomienda crear siempre los objetos personalizados dentro de una **Solución** con Publisher propio?
-3. ¿En qué etapa del pipeline se ejecuta una **Business Rule** con ámbito "Entidad"?
-4. ¿Cuál es la diferencia entre una columna **Calculada** y una columna **Rollup** en Dataverse?
+1. ¿Cuál es la diferencia entre **Organization** y **User or team** ownership, y por qué hay que decidirlo al crear la tabla?
+2. ¿Por qué se crean los objetos dentro de una **Solución** con Publisher propio, y qué pasa con el Schema name si no?
+3. Con Scope **Entity**, ¿dónde se aplica una Business Rule y qué acciones se ignoran en el servidor?
+4. ¿Por qué no se ordena una vista por la columna Choice **Prioridad**, y qué haces en su lugar?
 
 ---
 
 ## Limpieza del laboratorio
 
-> Realiza estos pasos solo si estás usando un ambiente compartido. Si es tu ambiente Developer personal, conserva los datos — el Lab 03 los usará.
+> Realiza estos pasos solo si estás usando un ambiente compartido. Si es tu ambiente Developer personal, conserva los datos: el Lab 03 los usará.
 
-1. Ve a cada tabla (`sit_Solicitud` y `sit_Categoria`) → pestaña **Datos** → selecciona todos los registros → **Eliminar registros**.
-2. **No elimines las tablas ni la solución** — se necesitan en los Labs 03 y 05.
+1. En el editor de filas de cada tabla (`Solicitud TI` y `Categoría`), selecciona los registros de prueba y elimínalos.
+2. **No elimines las tablas ni la solución**: se necesitan en los Labs 03, 04, 05 y 09.
 
 ---
 
@@ -603,4 +558,4 @@ Si completaste el laboratorio antes del tiempo estimado, intenta:
 
 ➡️ **Lab 03 — Primera Canvas App: Gestión de Solicitudes**
 
-**Por qué ir ahí:** El modelo de datos que acabas de crear es exactamente el datasource que usarás en la Canvas App del Lab 03. Construirás la interfaz de usuario sobre las tablas `sit_Solicitud` y `sit_Categoria`.
+**Por qué ir ahí:** el modelo que acabas de crear es el origen de datos de la Canvas App del Lab 03. Allí escribirás las fórmulas con los nombres visibles de este lab (`'Solicitudes TI'`, `'Título de Solicitud'`, `Estado`…).

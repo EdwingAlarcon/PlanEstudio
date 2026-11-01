@@ -37,8 +37,15 @@
      "Manually trigger a flow" para llamarlo desde Power Apps → trigger PowerApps (V2) y Switch para la columna Choice.
      IP-TRB-006 ahora usa un desajuste realmente silencioso (`'Full Name'` vs `User().Email`). Fuentes y lo no
      verificable en Learn: mensaje del commit.
-   - Queda: **LAB-02 no coincide con M2/M3/LAB-03** (crea "Solicitud" con Titulo y un Lookup a Categoría; el resto del
-     curso usa "Solicitud TI", 'Título de Solicitud' y Categoría Choice). LAB-03 ya pide usar lo que proponga IntelliSense.
+   - **LAB-02 alineado con el M2 (2026-11-01):** mismos nombres visibles (`Solicitud TI`, `Título de Solicitud`…) y
+     las mismas dos Business Rules; Schema names escritos a mano (`sit_solicitud`, `sit_estado`…) para no romper los
+     LAB-03/04/05/09. Diferencia deliberada: Categoría es tabla catálogo con Lookup (LAB-04 y LAB-09 usan su SLA y un
+     Rollup). Corregidos en el lab: regla de error de fecha que bloqueaba siempre (faltaba "y la fecha está vacía"),
+     regla de bloqueo imposible de probar sin formulario, vista "mis solicitudes" filtrando un Contact por usuario actual,
+     orden por Prioridad (Choice), ownership "cambiable si no hay registros" (no lo es nunca), prefijo `new_`. Sin
+     verificar en Learn: el nombre interno de la columna principal (no se documenta cómo editarlo); el lab pide anotarlo.
+   - Barrido del resto del curso: condición de M5 sobre una Choice (ahora con FormattedValue), orden por Prioridad en
+     LAB-04, límite 2000 en `CHECKLIST_PROGRESO.md` y `GLOSARIO_TERMINOS.md`.
      Legado MkDocs con el límite 2000: `docs/Niveles/NIVEL_1_BASICO.md`, `NIVEL_3_AVANZADO.md` (congelado, sin tocar).
    - Ruta antigua del Developer Program **corregida el 2026-11-01** en la app: `ENTORNOS_Y_TRIALS.md` (fuente única,
      sección nueva), `GUIA_HERRAMIENTAS_WORKSTATION.md`, `RUTA_CERO_ABSOLUTA.md`, `TIPOS_DE_PRACTICA.md`,
@@ -51,8 +58,7 @@
      Studio Pro/Enterprise, partners y clientes de soporte Premier/Unified, no "gratis 90 días renovables". En un ambiente
      Developer no se pueden instalar apps de Dynamics 365. Corregido en el M1 y en los 12 archivos de la app listados arriba.
 2. Prueba con una **persona real**: condición para cerrar la Fase 2.
-3. Alinear LAB-02 con el modelo del M2 (ver arriba).
-4. Sin aprobación: lab básico de Power BI (cambia el conteo de 75 labs), Fases 3-5 y Fase 6 recortada (IA 43, 44, 46,
+3. Sin aprobación: lab básico de Power BI (cambia el conteo de 75 labs), Fases 3-5 y Fase 6 recortada (IA 43, 44, 46,
    54, 55).
 
 ## Mantenimiento vigente — 2026-10-01

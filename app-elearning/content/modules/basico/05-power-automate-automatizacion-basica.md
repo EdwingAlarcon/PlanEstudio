@@ -80,12 +80,14 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
    <p>Tu solicitud ha sido registrada exitosamente:</p>
    <ul>
      <li><strong>Título:</strong> {Título}</li>
-     <li><strong>Categoría:</strong> {Categoría}</li>
-     <li><strong>Prioridad:</strong> {Prioridad}</li>
+     <li><strong>Categoría:</strong> {etiqueta de Categoría}</li>
+     <li><strong>Prioridad:</strong> {etiqueta de Prioridad}</li>
      <li><strong>Fecha:</strong> {Fecha Solicitud}</li>
    </ul>
    <p>Te notificaremos cuando sea asignada.</p>
    ```
+
+   > **Categoría y Prioridad son columnas Choice:** el valor que llega del trigger es el número de la opción (como `723500002`), no el texto. Para la etiqueta usa una expresión con `@OData.Community.Display.V1.FormattedValue`, por ejemplo `triggerOutputs()?['body/sit_prioridad@OData.Community.Display.V1.FormattedValue']` (ajusta el nombre interno al tuyo). Lo verás con más detalle en la Práctica 5.2 ([Learn: valores con formato](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/query/select-columns)).
 
 **Evidencia a reportar (el dato exacto que viste, no un "sí/no"):**
 
@@ -111,7 +113,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 
 **Paso 4: Notificar a equipo TI**
 
-1. Condition: Si Prioridad = "Crítica"
+1. Condition: la **etiqueta** de Prioridad es igual a `Crítica`. En el lado izquierdo no pongas el valor `Prioridad` (es un número); usa la expresión `triggerOutputs()?['body/sit_prioridad@OData.Community.Display.V1.FormattedValue']`, operador **is equal to**, y a la derecha escribe `Crítica`
     - **Yes branch**: 
      - Action: "Post message in a chat or channel" (Teams)
      - Team: TI Team

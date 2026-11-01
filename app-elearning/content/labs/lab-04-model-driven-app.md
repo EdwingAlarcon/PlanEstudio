@@ -242,8 +242,10 @@ El Quick View Form muestra datos de un registro relacionado dentro del formulari
 2. Agrega la columna `sit_diasabierta` (si existe del Lab 09) o `sit_fechasolicitud`.
 
 3. Configura el orden:
-   - Primera: `sit_prioridad` Descendente (Crítica primero)
+   - Primera: `sit_slahoras` Ascendente (Crítica = 4 horas, primero)
    - Segunda: `sit_fechasolicitud` Ascendente (más antigua primero)
+
+   > No ordenes por `sit_prioridad`: en las vistas, una columna Choice se ordena por el texto de la opción (Alta, Baja, Crítica, Media), no por su número. `SLA Horas` refleja la prioridad gracias a la Business Rule del Lab 02 ([Learn: ordenar filas](https://learn.microsoft.com/power-apps/developer/data-platform/fetchxml/order-rows)).
 
 4. Guarda y publica.
 
@@ -282,7 +284,7 @@ El Quick View Form muestra datos de un registro relacionado dentro del formulari
 
 ### Validación del Ejercicio 3
 
-- [ ] La vista "Cola del Técnico" ordena por prioridad descendente y fecha ascendente
+- [ ] La vista "Cola del Técnico" ordena por SLA Horas ascendente (Críticas primero) y fecha ascendente
 - [ ] La vista "Cierre Pendiente" solo muestra solicitudes en estado Resuelta
 - [ ] Los 2 gráficos son visibles en la tabla sit_Solicitud
 

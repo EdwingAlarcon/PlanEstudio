@@ -55,7 +55,7 @@ App.OnStart:
 // ✅ Carga paralela con Concurrent()
 App.OnStart:
     Concurrent(
-        ClearCollect(colClientes, Filter(Clients, Estado = "Activo")),
+        ClearCollect(colClientes, Filter(Clients, Estado = "Activo")), // Estado de texto; si fuera una columna Choice de Dataverse, compara con su enumeración
         ClearCollect(colProductos, Filter(Products, Disponible = true)),
         Set(varConfig, First(Configuracion))
     )

@@ -393,8 +393,8 @@ Esta vez no te digo qué tablas ni columnas crear: aplica lo que viste a un nego
 
 Completa ahora: **[Lab 02 · Dataverse — Modelado de Datos para un Sistema de Solicitudes](/labs/lab-02-dataverse-modelo-datos)**
 
-**Por qué:** el Lab 02 te guía paso a paso a construir exactamente el modelo de datos de este módulo (tablas, columnas, relaciones, Business Rules y vistas), con instrucciones de clic-por-clic y valores exactos a usar — es la forma más directa de convertir lo que acabas de leer en algo real y verificable.
+**Por qué:** el Lab 02 construye el mismo modelo de este módulo (mismos nombres visibles, las mismas dos Business Rules y vistas ordenadas por SLA Horas), en la solución que usan los labs siguientes. Cambian dos cosas, y el lab explica por qué: la categoría es una tabla catálogo con Lookup en lugar de la columna Choice, y los nombres internos (`sit_solicitud`, `sit_estado`…) se escriben a mano porque los Labs 03, 04, 05 y 09 los usan. Si haces el lab en el mismo ambiente, el lab te dice cómo renombrar tu tabla de este módulo para no confundirlas.
 
-**Qué evidencia guardar del lab:** capturas de las tablas dentro de tu solución, de las 2 Business Rules activas, de las 3 vistas publicadas, y el conteo de registros de prueba (5 Categoría + 10 Solicitud).
+**Qué evidencia guardar del lab:** capturas de las tablas dentro de tu solución, de las 2 Business Rules activas, de las 3 vistas publicadas, y el conteo de registros de prueba (5 Categoría + 10 Solicitud TI).
 
 ---
