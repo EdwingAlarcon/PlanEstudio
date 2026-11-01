@@ -88,7 +88,7 @@ Este lab construye **el mismo modelo del Módulo 2**, con los mismos nombres vis
 
 En [make.powerapps.com](https://make.powerapps.com), el selector de ambiente en la esquina superior derecha debe mostrar tu ambiente Developer, **no** el ambiente Default.
 
-> **Nombres de los botones:** Power Apps está en inglés en estos pasos, igual que en el Módulo 2. Si tu interfaz está en español o un botón cambió de nombre, busca el más parecido en la misma zona de la pantalla.
+> **Nombres de los botones:** Power Apps está en inglés en estos pasos, igual que en el Módulo 2 (el ambiente del curso se crea en English (United States)). Si un botón no aparece con el nombre que se indica, búscalo en la misma zona de la pantalla (barra de comandos de arriba o panel de la derecha) por lo que hace, no por su texto exacto.
 
 ---
 
@@ -228,7 +228,7 @@ La solución `SIT Solicitudes Internas` está abierta, vacía y con el publisher
    | Descripción | `descripcion` | `sit_descripcion` | Multiline Text | Optional |
    | SLA Horas | `slahoras` | `sit_slahoras` | Whole Number | Business required |
 
-7. **Anota el nombre interno de la columna principal `Nombre`.** Este nombre no lo eliges tú: el panel **Primary column** solo deja cambiar el nombre visible y la descripción, y Dataverse genera el nombre interno al guardar la tabla. Para verlo, en **Columns** abre la columna `Nombre` y despliega **Advanced options** (mira **Schema name**). Los labs siguientes la llaman `sit_nombre`. Si la tuya tiene otro nombre, no pasa nada; haz esto:
+7. **Anota el nombre interno de la columna principal `Nombre`.** Este nombre no lo eliges tú: el panel **Primary column** solo deja cambiar el nombre visible y la descripción, y Dataverse genera el nombre interno al guardar la tabla. Para verlo: en el hub de la tabla, zona **Columns**, selecciona la columna `Nombre`; en su panel de propiedades despliega **Advanced options** y mira **Schema name** (se ve, pero ya no se puede cambiar). Anótalo en minúsculas: esa es su forma de *logical name*, la que usan las expresiones ([Learn: columnas](https://learn.microsoft.com/power-apps/maker/data-platform/create-edit-field-portal), [Learn: SchemaName y LogicalName](https://learn.microsoft.com/power-apps/developer/data-platform/entity-attribute-metadata)). Los labs siguientes usan como **ejemplo** `sit_nombre`. Si el tuyo es otro, no pasa nada; haz esto:
    - **Labs 03 y 04:** donde diga `sit_nombre`, elige la columna por su nombre visible, **Nombre**.
    - **Fórmulas y expresiones** (por ejemplo, en Power Automate): escribe tu nombre interno en minúsculas en lugar de `sit_nombre`.
 
@@ -267,9 +267,9 @@ La solución `SIT Solicitudes Internas` está abierta, vacía y con el publisher
    >
    > **Si tu ambiente está en español:** la columna del sistema se llama **Estado** y tiene otra compañera, **Razón para el estado**. Entonces verás dos "Estado" en las listas. La tuya es la que creaste en esta tabla (nombre interno `sit_estado`); la del sistema no lleva el prefijo `sit_`.
 
-7. **Anota el nombre interno de la columna principal `Título de Solicitud`**, igual que en el paso 7 de la Tarea 2.1 (tampoco lo eliges tú). Los labs siguientes la llaman `sit_titulo`. Si la tuya tiene otro nombre:
-   - **Lab 04:** donde diga `sit_titulo`, elige la columna por su nombre visible, **Título de Solicitud**.
-   - **Lab 05** (expresiones de Power Automate, como `triggerOutputs()?['body/sit_titulo']`): cambia `sit_titulo` por tu nombre interno en minúsculas.
+7. **Anota el nombre interno de la columna principal `Título de Solicitud`**, igual que en el paso 7 de la Tarea 2.1 (tampoco lo eliges tú): zona **Columns** > columna **Título de Solicitud** > **Advanced options** > **Schema name**, y anótalo en minúsculas. Los labs siguientes usan como **ejemplo** `sit_titulo`. Si el tuyo es otro:
+   - **Lab 04:** usa siempre el nombre visible, **Título de Solicitud**.
+   - **Lab 05** (la tabla HTML del Flujo 2, `item()?['sit_titulo']`): cambia `sit_titulo` por tu nombre interno en minúsculas. En el resto del Lab 05, inserta **Título de Solicitud** como contenido dinámico.
 
 ### Tarea 2.3 — Crear las relaciones (Lookups)
 
@@ -313,11 +313,11 @@ Una columna Lookup crea a la vez una relación entre dos tablas. Créalas desde 
 
 **Cómo funciona el diseñador (léelo una vez):** una regla es un diagrama que empieza con una **Condition** (el rombo). A su derecha salen el **✓** (se cumple) y el **✕** (no se cumple). Las piezas se arrastran desde la pestaña **Components** hasta un **+** del diagrama, se configuran en **Properties** y se confirman siempre con **Apply**.
 
-**Los operadores:** en la lista **Operator** busca estos nombres en inglés: **Equals** (es igual a) y **Does not contain data** (no contiene datos). Si tu pantalla muestra otro texto, elige el que signifique lo mismo.
+**Los operadores:** en la lista **Operator** busca estos nombres en inglés: **Equals** (es igual a) y **Does not contain data** (no contiene datos). Learn no publica la lista completa de operadores del diseñador de reglas, así que elígelos por su significado: si uno no aparece escrito igual, toma el que diga lo mismo.
 
 ### Tarea 3.1 — Regla 1: SLA según prioridad
 
-1. En el hub de **Solicitud TI**, zona **Business rules** → **Add business rule** (o **New business rule**). Se abre el diseñador con una condición ya creada.
+1. En el hub de **Solicitud TI**, zona **Business rules** → **Add business rule** ([Learn](https://learn.microsoft.com/power-apps/maker/data-platform/data-platform-create-business-rule)). Se abre el diseñador con una condición ya creada.
 
 2. Nombre: `SLA según prioridad`. **Scope**: **Entity**.
 
@@ -372,7 +372,7 @@ En **Business rules** de `Solicitud TI` aparecen 2 reglas con estado **Activated
 
 **Cómo se crea una vista (vale para las tres):** en el hub de **Solicitud TI**, zona **Views** → **New view** → escribe el nombre → **Create**. Añade columnas con **+ View column**. Los filtros se editan en el panel de propiedades con **Edit filters** → **Add** → **Add row** (las filas se unen con **And** por defecto) → **OK**. Para ordenar, selecciona el encabezado de una columna y elige **Sort ascending** o **Sort descending**; con **Shift** pulsado añades un segundo criterio. Termina con **Save and publish**.
 
-**Operadores de los filtros:** usa **Does not equal** (no es igual a), **Equals** (es igual a), **Equals current user** (es igual al usuario actual) y **Does not contain data** (no contiene datos). Si tu pantalla muestra otro texto, elige el que signifique lo mismo.
+**Operadores de los filtros:** usa **Does not equal** (no es igual a), **Equals** (es igual a), **Equals current user** (es igual al usuario actual) y **Does not contain data** (no contiene datos). Learn no enumera estos operadores (de la lista solo nombra por escrito **Contains data**, en [Learn: filtros de vistas](https://learn.microsoft.com/power-apps/maker/model-driven-apps/create-edit-view-filters)); elígelos por su significado: si uno no aparece escrito igual, toma el que diga lo mismo.
 
 ### Tarea 4.1 — Vista "Solicitudes Abiertas del Equipo" (supervisor de soporte)
 
@@ -550,7 +550,7 @@ Si completaste el laboratorio antes del tiempo estimado, intenta:
 
 **Reto básico:** Agrega en `Categoría` una columna **Rollup** que cuente cuántas solicitudes activas (Estado Nueva o En Proceso) tiene cada categoría. En Schema name escribe solo `solicitudesactivas` (resultado `sit_solicitudesactivas`): el Lab 09 la usa con ese nombre (si la haces aquí, allí solo la reutilizas).
 
-**Reto intermedio:** Agrega en `Solicitud TI` la columna calculada `Dias Abierta` (`sit_diasabierta`), los días desde la Fecha Solicitud, siguiendo la Tarea 1.2 del Lab 09. Úsala en una cuarta vista "Solicitudes Antiguas" con las solicitudes abiertas de más de 7 días. Si ya hiciste el Lab 09, la columna ya existe: no la recrees.
+**Reto intermedio:** Agrega en `Solicitud TI` la columna calculada `Días Abierta` (`sit_diasabierta`), los días desde la Fecha Solicitud, siguiendo la Tarea 1.2 del Lab 09. Úsala en una cuarta vista "Solicitudes Antiguas" con las solicitudes abiertas de más de 7 días. Si ya hiciste el Lab 09, la columna ya existe: no la recrees.
 
 **Reto avanzado:** Crea una tercera tabla `Comentario` (en Schema name escribe solo `comentario`; resultado `sit_comentario`) con las columnas `Texto` y `Fecha`, y una relación Many-to-one hacia `Solicitud TI` (una solicitud puede tener muchos comentarios). El Lab 09 la retoma como opcional.
 

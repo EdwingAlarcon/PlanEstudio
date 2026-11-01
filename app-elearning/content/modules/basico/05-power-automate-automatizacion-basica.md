@@ -66,7 +66,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 *Trigger: Cuando se crea una Solicitud TI en Dataverse*
 
 > **Antes de empezar: cómo se usa el diseñador (léelo una vez, te sirve para todo el módulo)**
-> - **Agregar una acción:** debajo de la última tarjeta del flujo haz clic en el signo **+** y luego en **Add an action**. Escribe el nombre de la acción en el buscador y elígela debajo del conector correcto (por ejemplo, *Microsoft Dataverse*). Al elegirla se abre a la izquierda su **panel de configuración**, con la pestaña **Parameters**. Los campos opcionales están en **Advanced parameters** (o **Show all**).
+> - **Agregar una acción:** debajo de la última tarjeta del flujo haz clic en el signo **+** y luego en **Add an action**. Escribe el nombre de la acción en el buscador y elígela debajo del conector correcto (por ejemplo, *Microsoft Dataverse*). Al elegirla se abre a la izquierda su **panel de configuración**, con la pestaña **Parameters**. Los campos opcionales se eligen en la lista desplegable **Advanced parameters** de esa pestaña ([Learn: List rows](https://learn.microsoft.com/power-automate/dataverse/list-rows)).
 > - **Insertar contenido dinámico** (*Dynamic content*: datos de pasos anteriores): haz clic dentro del campo y luego en el **rayo azul** que aparece a su lado (o escribe `/` dentro del campo). Busca el dato por su nombre, por ejemplo **Título de Solicitud**, y haz clic en él: queda insertado como una "pastilla" de color.
 > - **Insertar una expresión** (una fórmula, por ejemplo para obtener el texto de una Choice): haz clic dentro del campo y luego en el botón **fx** (*Insert expression*). En la ventana que se abre, pega la expresión en el cuadro de arriba y haz clic en **Add**. Una expresión pegada como texto normal, sin **fx**, no se calcula: se envía tal cual.
 > - **Guardar y probar:** como creas el flujo dentro de tu solución, la barra de arriba muestra **Save draft** (guardar borrador) y **Publish** (publicar). Un borrador **no se puede probar**: antes de cada prueba haz clic en **Publish**, y luego en **Test** → **Manually** → **Test**, y sigue las instrucciones que aparecen ([Learn: borradores y versiones](https://learn.microsoft.com/power-automate/drafts-versioning)).
@@ -91,7 +91,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
 
 1. **+** → **Add an action** → busca `Get a row by ID` y elige la de **Microsoft Dataverse**. No le cambies el nombre a la acción.
     - **Table name:** Contacts
-    - **Row ID:** con el rayo azul, elige del trigger el dato **Solicitante (Value)** (si en tu lista aparece con un nombre parecido, elige el que dice *Solicitante*). Ese valor es el GUID del contacto, es decir, su Row ID.
+    - **Row ID:** con el rayo azul, busca `Solicitante` y elige, de la sección del trigger, el dato de la columna **Solicitante** que trae su identificador (no su nombre). Ese valor es el GUID del contacto, es decir, su Row ID. Si aparece más de un dato con ese nombre, elige el que no es el nombre del contacto (el identificador); si después la acción falla con un error de ID no válido, es que elegiste el otro.
 
 **Paso 3: Enviar email de confirmación**
 
@@ -200,7 +200,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
    - **Starting:** la fecha de mañana.
    - **Repeat every:** `1` y **Day**.
    - Haz clic en **Create**.
-4. Se abre el diseñador con el trigger **Recurrence**. Haz clic sobre él: en el diseñador nuevo se abre su panel de configuración a la izquierda (en el clásico, despliega **Show advanced options**). Comprueba que **Frequency** dice **Day**: los campos de hora solo aparecen con esa frecuencia. Si no los ves en el panel, despliega **Advanced parameters** (o **Show all**). Configura ([Learn: flujos programados](https://learn.microsoft.com/power-automate/run-scheduled-tasks)):
+4. Se abre el diseñador con el trigger **Recurrence**. Haz clic sobre él: en el diseñador nuevo se abre su panel de configuración a la izquierda (en el clásico, selecciona **Show advanced options** en la tarjeta) ([Learn](https://learn.microsoft.com/power-automate/run-scheduled-tasks)). Comprueba que **Frequency** dice **Day**: los campos de hora solo aparecen con esa frecuencia. Si no los ves en el panel, ábrelos desde la lista desplegable de parámetros opcionales que está debajo de **Interval** y **Frequency**. Configura ([Learn: flujos programados](https://learn.microsoft.com/power-automate/run-scheduled-tasks)):
    - **Time zone:** elige tu zona horaria en la lista.
    - **At these hours:** `8`.
    - **At these minutes:** `0`.
@@ -272,7 +272,7 @@ Automatizar procesos de negocio mediante flujos cloud y de escritorio.
    ```
    | # | Columna | Expresión |
    |---|---|---|
-   | 1 | Título | `item()?['sit_titulodesolicitud']` (la columna principal "Título de Solicitud" del Módulo 2; confirma su nombre en el Paso 2) |
+   | 1 | Título | `item()?['sit_titulodesolicitud']` — **ejemplo**: cambia `sit_titulodesolicitud` por el nombre interno, en minúsculas, de la columna principal "Título de Solicitud" que anotaste en el Módulo 2 (Práctica 2.1, Paso 1, punto 7). En los *raw outputs* del Paso 2 lo ves junto al título de tu solicitud |
    | 2 | Categoría (texto, no número) | `item()?['sit_categoria@OData.Community.Display.V1.FormattedValue']` |
    | 3 | Prioridad (texto, no número) | `item()?['sit_prioridad@OData.Community.Display.V1.FormattedValue']` |
    | 4 | Solicitante (nombre del Contact) | `item()?['_sit_solicitante_value@OData.Community.Display.V1.FormattedValue']` |
@@ -489,7 +489,7 @@ Esta vez no te digo los pasos: aplica lo que viste a un pedido nuevo.
 1. **Flujo: Nuevo Empleado Registrado**
     - Trigger: Crear registro en tabla "Empleado" (Dataverse)
     - Acciones:
-     - Crear cuenta Azure AD (HTTP a Graph API)
+     - Crear la cuenta del usuario en Microsoft Entra ID (HTTP a Microsoft Graph API, `POST /users`)
      - Asignar licencias Microsoft 365
      - Crear buzón Exchange
      - Agregar a grupos de seguridad según departamento

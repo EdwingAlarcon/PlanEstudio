@@ -193,7 +193,7 @@ Así queda:
     - Orden: SLA Horas **ascendente** (Crítica primero), luego Fecha Solicitud **descendente** (más reciente primero)
 
 2. **Vista "Mis Asignaciones"**
-    - Filtro: Asignado a · operador **Equals current user** ("es igual al usuario actual", es decir, a quien tenga la app abierta; si en tu lista tiene un nombre algo distinto, elige el que diga *current user*), **y además** Estado · **Does not equal** ("no es igual a") · Cerrada (dos filas en el mismo grupo, con **And**)
+    - Filtro: Asignado a · operador **Equals current user** ("es igual al usuario actual", es decir, a quien tenga la app abierta; Learn no enumera los operadores de las vistas, así que si no aparece escrito igual, elige el que diga *current user*), **y además** Estado · **Does not equal** ("no es igual a") · Cerrada (dos filas en el mismo grupo, con **And**)
     - Columnas: Título de Solicitud, Categoría, Prioridad, Fecha Solicitud
     - Orden: Fecha Solicitud **ascendente** (más antigua primero)
 

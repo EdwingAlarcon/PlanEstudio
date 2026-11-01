@@ -377,7 +377,7 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 - [ ] **Práctica**: Creo una entity personalizada con lista de valores | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Uso variables dentro de un topic para recordar información del usuario | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Integro un topic con un Power Automate flow para consultar datos en Dataverse | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Configuro autenticación con Azure AD en el bot | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro la autenticación con Microsoft (Microsoft Entra ID) en el agente | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: El bot hace un lookup en Dataverse usando el usuario autenticado | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Despliega el bot en un canal de Microsoft Teams | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico qué es slot filling y cómo mejora la experiencia del usuario | Dominio: ___/5 | Fecha: ___

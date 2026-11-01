@@ -229,7 +229,7 @@
       "Power BI Embedded en un sitio web público"
       ],
       answer: [2],
-      explanation: "Power Pages es la herramienta de Power Platform diseñada específicamente para crear sitios web externos con usuarios fuera de la organización. Permite registro y login de ciudadanos (Azure AD B2C, redes sociales o cuenta local), formularios sobre Dataverse y vistas de estado del trámite. Canvas Apps no está diseñada para portales web públicos, Model-Driven requiere licencias internas, y Power BI no es una plataforma transaccional."
+      explanation: "Power Pages es la herramienta de Power Platform diseñada específicamente para crear sitios web externos con usuarios fuera de la organización. Permite registro y login de ciudadanos (Microsoft Entra External ID, Azure AD B2C para quien ya lo tenía, redes sociales o cuenta local), formularios sobre Dataverse y vistas de estado del trámite. Canvas Apps no está diseñada para portales web públicos, Model-Driven requiere licencias internas, y Power BI no es una plataforma transaccional."
     },
     {
       type: "single",
@@ -817,13 +817,13 @@
       type: "single",
       prompt: "Diagnóstico de caso (Onboarding): ¿cuál de estas acciones del flujo de onboarding depende de un sistema externo a Power Platform, integrado vía HTTP?",
       options: [
-      "Crear cuenta Azure AD (HTTP a Graph API)",
+      "Crear la cuenta del usuario en Microsoft Entra ID (HTTP a Microsoft Graph API)",
       "Crear registro en la tabla Empleado en Dataverse",
       "Evaluar la condición del flujo",
       "Asignar el flujo a un ambiente Developer"
       ],
       answer: [0],
-      explanation: "El caso especifica que la creación de la cuenta Azure AD se hace mediante una llamada HTTP a Microsoft Graph API — una integración explícita con un sistema/API externo al flujo mismo.",
+      explanation: "El caso especifica que la creación de la cuenta del usuario en Microsoft Entra ID (antes Azure AD) se hace mediante una llamada HTTP a Microsoft Graph API — una integración explícita con un sistema/API externo al flujo mismo.",
       appliesTo: "caso"
     },
     {
@@ -843,13 +843,13 @@
       type: "multi",
       prompt: "Diagnóstico de caso (Onboarding): ¿cuáles DOS acciones del flujo de onboarding ocurren en sistemas externos a Power Platform, integrados vía conector o HTTP?",
       options: [
-      "Crear cuenta Azure AD (HTTP a Graph API)",
+      "Crear la cuenta del usuario en Microsoft Entra ID (HTTP a Microsoft Graph API)",
       "Crear ticket en ServiceNow para equipo IT",
       "Crear registro en la tabla Empleado en Dataverse",
       "Enviar email de bienvenida con credenciales temporales"
       ],
       answer: [0, 1],
-      explanation: "La cuenta Azure AD (vía Graph API) y el ticket en ServiceNow son integraciones con sistemas externos. Crear el registro en Dataverse es el trigger interno del propio flujo, y el correo de bienvenida usa el conector nativo de Office 365.",
+      explanation: "La cuenta en Microsoft Entra ID (vía Microsoft Graph API) y el ticket en ServiceNow son integraciones con sistemas externos. Crear el registro en Dataverse es el trigger interno del propio flujo, y el correo de bienvenida usa el conector nativo de Office 365.",
       appliesTo: "caso"
     }
   ],
@@ -1311,13 +1311,13 @@
       type: "single",
       prompt: "Una regla de negocio que bloquea la edición de 'sit_presupuesto' cuando el proyecto está Cancelado funciona correctamente en el formulario, pero un flujo de Power Automate sigue pudiendo modificar ese campo. ¿Cuál es la causa más probable?",
       options: [
-      "La regla tiene alcance 'Solo formulario' en lugar de 'Entidad'",
-      "El campo sit_presupuesto no tiene Field Security Profile",
+      "La acción de bloquear (Lock/Unlock) solo funciona en formularios de model-driven apps y se ignora en el servidor, aunque el alcance sea 'Entidad'",
+      "El flujo se ejecuta con la conexión de otro usuario",
       "La tabla Proyecto no tiene auditoría activada",
       "El flujo usa una relación N:N nativa"
       ],
       answer: [0],
-      explanation: "Las reglas de negocio con alcance 'Solo formulario' solo se ejecutan en la UI, mientras que el alcance 'Entidad' también aplica en el servidor, incluyendo llamadas de API y flujos. Field Security Profile y auditoría son mecanismos distintos que no bloquean escritura por sí mismos."
+      explanation: "Con alcance 'Entidad', en el servidor solo se aplican establecer o borrar valores, valores predeterminados y Show Error Message; Lock/Unlock, mostrar u ocultar y exigir columnas solo funcionan en formularios y se ignoran cuando la regla corre en el servidor. Para proteger el dato también desde flujos y API, usa Show Error Message con alcance Entidad o seguridad de columna. La auditoría solo registra cambios y una relación N:N no tiene que ver con el síntoma."
     },
     {
       type: "multi",
@@ -1367,7 +1367,7 @@
       "Una Business Rule que muestra un mensaje de alerta"
       ],
       answer: [1],
-      explanation: "Una columna Rollup se recalcula automáticamente a partir de registros relacionados (en este caso, los gastos), exactamente el requisito de un dashboard en tiempo real sin actualización manual. Las otras opciones no realizan agregación automática.",
+      explanation: "Una columna Rollup se recalcula automáticamente a partir de registros relacionados (en este caso, los gastos); el recálculo es asíncrono (el trabajo incremental corre cada hora y se puede forzar con Recalculate), y cubre el requisito de un dashboard en tiempo real sin actualización manual. Las otras opciones no realizan agregación automática.",
       appliesTo: "caso"
     },
     {
@@ -2078,13 +2078,13 @@
       type: "multi",
       prompt: "Necesitas adaptar solicitudes y respuestas sin tocar la API backend. ¿Qué DOS políticas de Custom Connector son ejemplos útiles de transformación?",
       options: [
-      "Set Header para agregar o modificar headers enviados al backend",
-      "Set Query para inyectar o transformar parámetros de consulta",
+      "Set HTTP header para agregar o modificar headers enviados al backend",
+      "Set query string parameter para inyectar o transformar parámetros de consulta",
       "Cambiar el plan de licenciamiento del tenant desde el conector",
       "Crear una Business Unit nueva como parte de la llamada"
       ],
       answer: [0, 1],
-      explanation: "Set Header y Set Query son políticas pensadas justamente para alterar el mensaje sin reescribir el servicio backend. El licenciamiento y las Business Units pertenecen a otras áreas de administración de la plataforma."
+      explanation: "Set HTTP header y Set query string parameter son plantillas de política pensadas justamente para alterar el mensaje sin reescribir el servicio backend. El licenciamiento y las Business Units pertenecen a otras áreas de administración de la plataforma."
     },
     {
       type: "single",
@@ -2100,15 +2100,15 @@
     },
     {
       type: "single",
-      prompt: "Tu empresa desea publicar el conector para terceros en AppSource. ¿Qué aspecto adicional debes considerar más allá de que funcione internamente?",
+      prompt: "Tu empresa desea publicar el conector para que lo usen todos los usuarios de Power Platform fuera de tu organización. ¿Qué aspecto adicional debes considerar más allá de que funcione internamente?",
       options: [
-      "Requisitos de certificación, documentación y cumplimiento para AppSource",
+      "Requisitos de certificación de conectores de Microsoft (verified o independent publisher), documentación y cumplimiento",
       "Eliminar autenticación para simplificar la revisión",
       "Limitar el conector a un solo ambiente personal",
       "Convertirlo obligatoriamente en PCF"
       ],
       answer: [0],
-      explanation: "La certificación para AppSource exige criterios adicionales de calidad, documentación, seguridad y soporte. Que el conector funcione dentro del tenant no basta por sí solo para distribución pública."
+      explanation: "La certificación de conectores de Microsoft exige criterios adicionales de calidad, documentación, seguridad y soporte. Que el conector funcione dentro del tenant no basta por sí solo para distribución pública."
     },
     {
       type: "single",
@@ -2129,7 +2129,7 @@
       "Trigger tipo Webhook, más eficiente que consultar periódicamente",
       "Trigger tipo Polling, ejecutado cada minuto",
       "Una Action con método GET",
-      "Un Policy Template de tipo Set Header"
+      "Un Policy Template de tipo Set HTTP header"
       ],
       answer: [0],
       explanation: "Un trigger tipo Webhook permite que la API externa notifique al conector cuando ocurre un evento, siendo más eficiente que Polling, donde el conector debe consultar periódicamente para detectar cambios. Las Actions y los Policy Templates no son mecanismos de disparo de flujo."
@@ -2139,12 +2139,12 @@
       prompt: "En el diseñador de un Custom Connector, el campo de un parámetro debe mostrar automáticamente un menú desplegable con la lista de proyectos disponibles, obtenida en tiempo de diseño llamando a la API. ¿Qué capacidad del conector permite esto?",
       options: [
       "Dynamic Values (x-ms-dynamic-values)",
-      "Set Query Parameter",
-      "Route Request",
+      "Set query string parameter",
+      "Set host URL",
       "Connector Certification"
       ],
       answer: [0],
-      explanation: "Dynamic Values permite que el campo de un parámetro muestre opciones cargadas dinámicamente desde la API en tiempo de diseño, como una lista de proyectos. Set Query Parameter y Route Request son políticas de transformación de la llamada, no de generación de listas dinámicas."
+      explanation: "Dynamic Values permite que el campo de un parámetro muestre opciones cargadas dinámicamente desde la API en tiempo de diseño, como una lista de proyectos. Set query string parameter y Set host URL son políticas de transformación de la llamada, no de generación de listas dinámicas."
     },
     {
       type: "single",
@@ -2253,13 +2253,13 @@
       type: "multi",
       prompt: "El área de soporte quiere medir adopción y además transferir conversaciones complejas a un agente humano cuando el bot no resuelva. ¿Qué DOS capacidades son relevantes?",
       options: [
-      "Transfer to Agent para escalación humana en el momento adecuado",
+      "Transfer conversation para escalación humana en el momento adecuado",
       "Analítica de engagement para revisar abandono, resolución y uso de temas",
       "Cambiar todas las variables del bot a $number",
       "Reemplazar el bot por un dashboard de Power BI"
       ],
       answer: [0, 1],
-      explanation: "Transfer to Agent cubre la continuidad operativa cuando el bot llega a un límite, y la analítica permite mejorar el diseño conversacional con evidencia. Cambiar tipos de variable o reemplazar el canal no resuelve ni escalación ni medición."
+      explanation: "Transfer conversation cubre la continuidad operativa cuando el bot llega a un límite, y la analítica permite mejorar el diseño conversacional con evidencia. Cambiar tipos de variable o reemplazar el canal no resuelve ni escalación ni medición."
     },
     {
       type: "single",
@@ -2275,15 +2275,15 @@
     },
     {
       type: "single",
-      prompt: "Un usuario escribe 'quiero ver el estado de SOL-00123' al activar el topic de consulta, y el agente no le pregunta el número de solicitud porque ya lo detectó en el mismo mensaje. ¿Qué comportamiento de Copilot Studio explica esto?",
+      prompt: "Un usuario escribe 'quiero ver el estado de SOL-001000' al activar el topic de consulta, y el agente no le pregunta el número de solicitud porque ya lo detectó en el mismo mensaje. ¿Qué comportamiento de Copilot Studio explica esto?",
       options: [
       "Slot Filling, que detecta el valor requerido en el mensaje inicial y omite la pregunta",
       "Generative Answers, que responde con contenido de Knowledge Sources",
-      "Transfer to Agent, que escala la conversación",
-      "Un Policy Template de tipo Set Header"
+      "Transfer conversation, que escala la conversación",
+      "Un Policy Template de tipo Set HTTP header"
       ],
       answer: [0],
-      explanation: "Slot Filling detecta automáticamente si el valor de una variable requerida ya vino en el mensaje del usuario y, en ese caso, no formula la pregunta correspondiente. Generative Answers y Transfer to Agent no están relacionados con la captura automática de variables."
+      explanation: "Slot Filling detecta automáticamente si el valor de una variable requerida ya vino en el mensaje del usuario y, en ese caso, no formula la pregunta correspondiente. Generative Answers y Transfer conversation no están relacionados con la captura automática de variables."
     },
     {
       type: "single",
@@ -2299,15 +2299,15 @@
     },
     {
       type: "single",
-      prompt: "Un agente configurado con Generative Answers responde preguntas frecuentes usando el manual de usuario en SharePoint, pero el manual fue actualizado hace dos semanas y las respuestas siguen mostrando información antigua. ¿Cuál es la causa más probable?",
+      prompt: "Un agente configurado con Generative Answers responde preguntas frecuentes usando el manual de usuario, que se subió como archivo (Upload file) a sus Knowledge Sources; el manual se actualizó hace dos semanas y las respuestas siguen mostrando información antigua. ¿Cuál es la causa más probable?",
       options: [
-      "El agente no detecta cambios automáticamente y los Knowledge Sources deben actualizarse/reindexarse manualmente",
+      "Un archivo subido es una copia estática guardada en Dataverse: hay que volver a subir la versión nueva (o usar una fuente SharePoint, que se consulta en el momento)",
       "Las trigger phrases del topic de Fallback están mal configuradas",
       "El bot no tiene canal de Teams publicado",
       "La entidad Closed list del topic no incluye sinónimos"
       ],
       answer: [0],
-      explanation: "Los Knowledge Sources no se sincronizan automáticamente ante cambios en el contenido origen; es necesario actualizarlos o forzar el reindexado cuando el material cambia. Las trigger phrases y el canal no afectan la vigencia del contenido consultado por Generative Answers."
+      explanation: "Un archivo subido como conocimiento es una copia estática: el agente sigue usando esa copia hasta que se sube la versión nueva. Una fuente SharePoint, en cambio, se consulta en el momento de la pregunta. Las trigger phrases y el canal no afectan la vigencia del contenido consultado por Generative Answers."
     },
     {
       type: "single",
@@ -2458,7 +2458,7 @@
       "Hierarchy Security, que propaga acceso por jerarquía de puestos"
       ],
       answer: [0],
-      explanation: "Solution Layers permite que múltiples soluciones modifiquen el mismo componente en capas superpuestas, de modo que la solución importada más recientemente prevalece, lo cual es la forma correcta de personalizar soluciones de terceros sin editar la solución base directamente. Las otras opciones controlan distintos aspectos de gobierno."
+      explanation: "Solution Layers permite que múltiples soluciones modifiquen el mismo componente en capas superpuestas, de modo que la capa unmanaged queda siempre arriba y, entre las managed, en general prevalece la última instalada, lo cual es la forma correcta de personalizar soluciones de terceros sin editar la solución base directamente. Las otras opciones controlan distintos aspectos de gobierno."
     },
     {
       type: "single",
@@ -2628,7 +2628,7 @@
       prompt: "El dashboard de pipeline comercial en Power BI debe mostrar a cada vendedor solo sus propias oportunidades, y el bot de Copilot Studio debe poder consultar el estado de una oportunidad en Dataverse en tiempo real. ¿Qué DOS combinaciones de capacidades del Nivel 2 resuelven correctamente estos dos requisitos del proyecto integrador?",
       options: [
       "Row Level Security con USERPRINCIPALNAME() en el modelo de Power BI para el dashboard por vendedor",
-      "Un topic de Copilot Studio con nodo de Acción que llama a un Power Automate flow (trigger 'When called from a Copilot Studio agent') para consultar Dataverse",
+      "Un topic de Copilot Studio con nodo de Acción que llama a un Power Automate flow (trigger 'When an agent calls the flow') para consultar Dataverse",
       "Ocultar visualmente las columnas del reporte según el nombre del vendedor conectado",
       "Reemplazar el modelo de Power BI por una Canvas App para evitar configurar seguridad"
       ],

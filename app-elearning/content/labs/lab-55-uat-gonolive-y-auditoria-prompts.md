@@ -53,7 +53,7 @@ Functional Consultant, Solution Architect, Developer.
 
 ## Ejercicio 1 — Redactar el prompt inicial
 
-Describe el flujo de aprobación de gastos de SIT (basado en el Lab 05) usando **solo datos ficticios equivalentes** (nombres de campos y estados sí, pero ningún dato real de una empresa existente): tabla de solicitudes, campos (monto, estado, aprobador), y las 2-3 reglas de negocio principales (ej. "montos mayores a $1000 requieren un segundo aprobador").
+Describe el flujo de aprobación de gastos de SIT (un proceso ficticio inspirado en el patrón de aprobación del Lab 05, que aprueba solicitudes de TI, no gastos) usando **solo datos ficticios equivalentes** (nombres de campos y estados sí, pero ningún dato real de una empresa existente): tabla de solicitudes, campos (monto, estado, aprobador), y las 2-3 reglas de negocio principales (ej. "montos mayores a $1000 requieren un segundo aprobador").
 
 ## Ejercicio 2 — Generar casos UAT con IA
 

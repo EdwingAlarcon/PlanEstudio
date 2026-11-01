@@ -47,6 +47,7 @@ export interface LabInfo {
   role: string[];
   prerequisites: string[];
   lastVerified?: string;     // "YYYY-MM"
+  optional?: boolean;        // lab opcional: no cuenta para el certificado ni la preparación del nivel
   rawContent: string;
 }
 
@@ -310,6 +311,7 @@ function validateLabFrontmatter(
     role: requireStringArray(data, "role", filePath),
     prerequisites: requireStringArray(data, "prerequisites", filePath),
     lastVerified: parseLastVerified(data, filePath),
+    optional: data["optional"] === true,
   };
 }
 
@@ -599,9 +601,10 @@ export function getLabBySlug(slug: string): LabInfo | undefined {
 
 // "N1".."N6" map to the base/transversal numeric levels; "RPA" is a transversal specialization.
 export function getLabsForLevel(levelId: LevelId): LabInfo[] {
-  if (levelId === "rpa") return getAllLabs().filter((lab) => lab.level === "RPA");
+  // Los labs opcionales se listan en /labs, pero no cuentan para el certificado ni la preparación del nivel.
+  if (levelId === "rpa") return getAllLabs().filter((lab) => lab.level === "RPA" && !lab.optional);
   const levelTag = `N${LEVEL_ORDER.indexOf(levelId) + 1}`;
-  return getAllLabs().filter((lab) => lab.level === levelTag);
+  return getAllLabs().filter((lab) => lab.level === levelTag && !lab.optional);
 }
 
 // ─── Search index ─────────────────────────────────────────────────────────────

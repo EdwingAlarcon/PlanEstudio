@@ -377,7 +377,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     labs: ["lab-02-dataverse-modelo-datos", "lab-03-canvas-primera-app", "lab-04-model-driven-app", "lab-05-automate-aprobacion"],
     competencies: ["Dataverse básico", "Canvas Apps", "Model-Driven Apps", "Power Automate básico", "Power BI básico", "Power Fx básico"],
     status: "Disponible",
-    gapNote: "Corre completa en tu ambiente Developer personal (o un Trial con Dataverse) — ver Entornos y trials si todavía no lo tenés. No requiere ningún trial de Dynamics 365.",
+    gapNote: "Corre completa en tu ambiente Developer personal (o un Trial con Dataverse) — ver Entornos y trials si todavía no lo tenés. No requiere ningún trial de Dynamics 365. Power BI tiene un lab opcional (LAB-006, lab-06-power-bi-reporte-solicitudes): Power BI Desktop solo corre en Windows y publicar/compartir depende de la licencia, por eso no se cuenta entre los labs requeridos de la ruta.",
     capstoneModuleId: 8,
     portfolioEvidence: [
       "Capturas del ambiente Developer activo",
@@ -385,6 +385,7 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "Canvas App funcional conectada a Dataverse (Lab 03)",
       "Model-Driven App con formularios y vistas (Lab 04)",
       "Flujo de aprobación en Power Automate (Lab 05)",
+      "(Opcional) Reporte de Power BI conectado a Dataverse, archivo .pbix (Lab 06)",
     ],
     nextRouteSlug: "maker",
   },

@@ -91,7 +91,7 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 
 #### 🟢 Núcleo obligatorio
 
-> **Cómo está organizado el Núcleo:** construyes el reporte en tres bloques (tu primer reporte con datos de ejemplo, conectar y modelar, visualizaciones y medidas). En cada uno alternas una idea corta, una práctica de pocos minutos y un dato real de tu propio reporte. Cierras con un reto en el que ya no te digo los pasos. Las microprácticas no necesitan Power BI; el reporte sí necesita Power BI Desktop (gratuito). Este módulo no tiene un lab dedicado: tu archivo `.pbix` es la evidencia.
+> **Cómo está organizado el Núcleo:** construyes el reporte en tres bloques (tu primer reporte con datos de ejemplo, conectar y modelar, visualizaciones y medidas). En cada uno alternas una idea corta, una práctica de pocos minutos y un dato real de tu propio reporte. Cierras con un reto en el que ya no te digo los pasos. Las microprácticas no necesitan Power BI; el reporte sí necesita Power BI Desktop (gratuito). Tu archivo `.pbix` es la evidencia. Si quieres practicar más, el [Lab 06 · Power BI — Reporte de Solicitudes TI desde Dataverse](/labs/lab-06-power-bi-reporte-solicitudes) es **opcional**: repite el reporte, clic a clic, sobre las tablas del Lab 02, y no hace falta para avanzar al Módulo 7.
 
 ## 🧩 Microlección 1 — Tu primer reporte: una pregunta, un visual
 
@@ -197,18 +197,18 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 2. **Quédate solo con las columnas que necesitas** (en `Solicitudes TI`):
     1. Ve a **Home > Choose columns**.
     2. Desmarca todo y marca solo estas columnas (Dataverse trae muchas columnas del sistema que no necesitas). La lista es larga: si la ventana tiene un cuadro de búsqueda arriba, escribe `sit_` para ver solo las tuyas; si no, recórrela despacio.
-        - `sit_titulodesolicitud` (Título de Solicitud)
+        - La columna principal **Título de Solicitud**: busca el nombre interno que anotaste en el Módulo 2 (Práctica 2.1, Paso 1, punto 7). En esta guía se usa como **ejemplo** `sit_titulodesolicitud`; si el tuyo es otro, marca el tuyo.
         - `sit_descripcion` (Descripción)
         - `sit_estadoname`, `sit_prioridadname`, `sit_categorianame`: para cada columna de tipo Choice, Dataverse entrega dos columnas: una con el número interno (`sit_estado`) y otra con la etiqueta que lees (`sit_estadoname`). Usa la que termina en `name`.
         - `sit_fechasolicitud`, `sit_fecharesolucion`, `sit_slahoras`
         - `sit_solicitante`: es el identificador (GUID) del contacto que pidió la solicitud. Lo necesitas para la relación con Contacts.
     3. Selecciona **OK**.
-    > Los nombres exactos dependen de cómo creaste las columnas en el Módulo 2. Busca el prefijo `sit_` y el nombre de la columna. **La columna principal** (Título de Solicitud) es la que más varía: su nombre interno se generó a partir del nombre que tenía cuando creaste la tabla, así que puede ser otro (por ejemplo `sit_name` o `sit_titulo`). Para saberlo, en Power Apps abre **Tables** > Solicitud TI > **Columns**, selecciona la columna Título de Solicitud y mira su **Name** (nombre interno, con el prefijo) ([Learn](https://learn.microsoft.com/power-apps/maker/data-platform/create-edit-field-portal)).
+    > Los nombres exactos dependen de cómo creaste las columnas en el Módulo 2. Busca el prefijo `sit_` y el nombre de la columna. **La columna principal** (Título de Solicitud) es la que más varía: su nombre interno lo generó Dataverse al guardar la tabla y no tiene por qué ser `sit_titulodesolicitud`. Si no lo anotaste en el Módulo 2, en Power Apps abre **Tables** > Solicitud TI > zona **Columns**, selecciona la columna **Título de Solicitud** y, en su panel, despliega **Advanced options** y mira **Schema name**. Power BI lo muestra en minúsculas ([Learn: columnas](https://learn.microsoft.com/power-apps/maker/data-platform/create-edit-field-portal), [Learn: SchemaName y LogicalName](https://learn.microsoft.com/power-apps/developer/data-platform/entity-attribute-metadata)).
 3. **Renombra las columnas** con nombres legibles: haz doble clic en cada encabezado (o clic derecho > **Rename**) y escribe el nombre nuevo:
 
     | Columna original | Nombre nuevo |
     |---|---|
-    | `sit_titulodesolicitud` | Título de Solicitud |
+    | `sit_titulodesolicitud` (ejemplo: usa tu nombre interno anotado) | Título de Solicitud |
     | `sit_descripcion` | Descripción |
     | `sit_estadoname` | Estado |
     | `sit_prioridadname` | Prioridad |
@@ -286,7 +286,7 @@ Crear reportes interactivos y dashboards conectados a Dataverse y otras fuentes.
 
 1. En **Report view**, en el panel **Data**, haz clic derecho en la tabla `Solicitudes TI` y elige **New measure**. (También puedes usar **Home > New measure**.) Arriba del lienzo aparece la barra de fórmulas con el texto `Measure =`.
 2. Borra ese texto y escribe la fórmula completa, incluido el nombre antes del `=`. Para pasar a otra línea dentro de la fórmula usa **Alt + Enter**.
-3. Presiona **Enter** (o el botón de palomita de la barra de fórmulas) para guardarla. La medida aparece en `Solicitudes TI` con un ícono de calculadora.
+3. Presiona **Enter** o selecciona **Commit** (el ícono de palomita de la barra de fórmulas) para guardarla ([Learn](https://learn.microsoft.com/power-bi/transform-model/desktop-tutorial-create-measures)). La medida aparece en `Solicitudes TI` con un ícono de calculadora.
 
 **Reglas de escritura que verás en todas las medidas:**
 - `'Solicitudes TI'`: el nombre de una tabla va entre comillas simples cuando tiene espacios.
@@ -588,7 +588,7 @@ Esta vez no te digo los pasos: aplica lo que viste a un negocio distinto.
 
 **Visualizaciones clave**:
 
-- Mapa de calor geográfico de ventas
+- Mapa de ventas por ubicación con el visual **Azure Maps** y su capa **Heat map** (mapa de calor) ([Learn](https://learn.microsoft.com/azure/azure-maps/power-bi-visual-add-heat-map-layer))
 - Waterfall chart de evolución revenue mensual
 - Funnel chart de pipeline por stage
 - Scatter plot: deal size vs días en pipeline (identificar outliers)
@@ -704,6 +704,6 @@ Esta vez no te digo los pasos: aplica lo que viste a un negocio distinto.
 
 Guarda tu archivo `reporte-solicitudes-ti.pbix` como evidencia del Nivel Básico y como **guía de pasos** para el **Módulo 08 · Primer Proyecto Integrado**.
 
-**Por qué:** este módulo no tiene un lab básico dedicado, pero el método que aprendiste aquí (conectar, limpiar, relacionar, medir y visualizar) es el mismo del proyecto final. Ojo: el proyecto del Módulo 08 usa tablas nuevas (prefijo `sse`) y otros estados, así que allí crearás un `.pbix` nuevo repitiendo estos pasos y adaptando las medidas; este archivo no se reutiliza tal cual. Si tienes poco tiempo, prioriza un dashboard local claro antes que publicación y seguridad avanzada.
+**Por qué:** el método que aprendiste aquí (conectar, limpiar, relacionar, medir y visualizar) es el mismo del proyecto final. Ojo: el proyecto del Módulo 08 usa tablas nuevas (prefijo `sse`) y otros estados, así que allí crearás un `.pbix` nuevo repitiendo estos pasos y adaptando las medidas; este archivo no se reutiliza tal cual. Si tienes poco tiempo, prioriza un dashboard local claro antes que publicación y seguridad avanzada. Si te sobra, el [Lab 06 · Power BI — Reporte de Solicitudes TI desde Dataverse](/labs/lab-06-power-bi-reporte-solicitudes) (opcional) te da otra vuelta de práctica con los datos del Lab 02.
 
 ---

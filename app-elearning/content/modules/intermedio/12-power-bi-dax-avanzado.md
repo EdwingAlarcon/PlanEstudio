@@ -3,240 +3,351 @@ moduleId: 12
 title: "Power BI — DAX Avanzado"
 level: "intermedio"
 certification: "PL-200 (retirado 31 ago 2026)"
-estimatedMinutes: 10
+estimatedMinutes: 22
+practiceMinutes: 150
 slug: "power-bi-dax-avanzado"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
+*Lectura: 20-25 min · Con práctica: unos 150 min en Power BI Desktop; la primera vez, cuenta entre el doble y el triple. La Microlección 5 (RLS en el servicio) y la profundización de cohortes pueden quedar para una segunda sesión.*
+
 ### 🎯 Objetivo
-Dominar DAX avanzado: CALCULATE con múltiples filtros, contexto de filtro vs fila, funciones de inteligencia de tiempo, Row Level Security, y métricas de negocio complejas como cohortes y métricas móviles.
+Dominar DAX avanzado: CALCULATE con múltiples filtros, contexto de filtro vs fila, funciones de inteligencia de tiempo, Row Level Security, y métricas de negocio complejas como cohortes y métricas móviles — practicando cada concepto de inmediato sobre un modelo real en tu Power BI Desktop, con evidencia del valor exacto que viste, antes de pasar al siguiente.
 
-### 📖 Conceptos Clave
-- **Contexto de filtro (Filter Context):** conjunto de todos los filtros activos en un momento dado que determinan qué filas participan en el cálculo de una medida. Proviene de tres fuentes: slicers del reporte, filtros de la página/visual, y filtros definidos en el modelo de datos (relaciones). Comprender el contexto de filtro es la clave para entender por qué una medida DAX retorna un valor específico en una celda particular. Ejemplo: en una tabla con filas por mes y columnas por región, cada celda tiene un contexto de filtro diferente (mes=Enero, región=Norte).
+> **Cómo está organizado este módulo:** cada concepto viene con una micropráctica de feedback inmediato y una práctica en Power BI Desktop. Vas a **construir** una medida sin pasos dados, vas a **diagnosticar** un síntoma real antes de ver la causa, y vas a cerrar con un **reto de transferencia** que cambia la regla de negocio (año fiscal en vez de año calendario).
+>
+> Necesitas: **Power BI Desktop** instalado (lo usaste en el [Módulo 6](/nivel/basico/modulo/power-bi-reportes-y-dashboards-basicos)) y haber completado ese módulo: ahí aprendiste relaciones, **New measure** (nueva medida), formato de medidas y la idea básica de RLS. Aquí no se repite eso. Para la parte opcional de la Microlección 5 en el servicio necesitas un workspace de Power BI con la misma licencia que usaste en el Módulo 6.
 
-- **Contexto de fila (Row Context):** contexto creado durante la iteración fila por fila sobre una tabla, presente en columnas calculadas y en funciones iteradoras (SUMX, AVERAGEX, MAXX, FILTER). En el contexto de fila puedes referenciar cualquier columna de la tabla iterada directamente. No está presente en medidas simples (solo existe en iteradores). Ejemplo: en `SUMX(Ventas, Ventas[Cantidad] * Ventas[Precio])`, el contexto de fila permite multiplicar Cantidad × Precio de cada fila específica.
+---
 
-- **Transición de contexto:** comportamiento de CALCULATE que convierte automáticamente el contexto de fila actual en un contexto de filtro equivalente. Ocurre cuando CALCULATE se llama dentro de un iterador (SUMX, AVERAGEX, etc.) o en una columna calculada. Es uno de los conceptos más avanzados de DAX: permite que las medidas calculadas dentro de un iterador "filtren" la tabla por la fila actual. Comprenderlo es esencial para patrones como SUMX sobre medidas.
+## Antes de empezar — el modelo de práctica (15 min)
 
-- **CALCULATE:** función central de DAX que evalúa una expresión en un contexto de filtro modificado. Acepta la expresión a calcular y N modificadores de filtro. Es la única función que puede modificar el contexto de filtro. Soporta dos tipos de argumentos: expresiones de tabla (que reemplazan el filtro de esa tabla) y funciones especiales como ALL, ALLEXCEPT, USERELATIONSHIP. Ejemplo: `CALCULATE([Total Ventas], Productos[Categoria] = "Electrónica")` calcula Total Ventas solo para productos de electrónica, independientemente del filtro de categoría actual.
+En este módulo no usas el reporte de solicitudes del Módulo 6 (tiene muy pocas filas para notar diferencias entre medidas). Usas el **Financial sample** que Microsoft incluye en Power BI Desktop: una tabla `financials` con ventas por producto, segmento, país y fecha de 2013 y 2014.
 
-- **ALL / ALLEXCEPT / ALLSELECTED:** modificadores de filtro para CALCULATE que controlan qué filtros se eliminan. `ALL(tabla)` elimina todos los filtros de la tabla (útil para porcentajes del total). `ALLEXCEPT(tabla, col1, col2)` elimina todos los filtros EXCEPTO los de las columnas especificadas (útil para cálculos dentro de grupos). `ALLSELECTED(tabla)` elimina los filtros internos del visual pero mantiene los slicers externos (% del total del subconjunto visible).
+1. Abre Power BI Desktop. En la pantalla **Add data to your report** (agregar datos al reporte) elige **Use sample data** (usar datos de ejemplo); si no ves esa pantalla, en la página de inicio busca **Learn with sample data**. Luego elige **Load sample data**.
+2. En el **Navigator** marca la tabla **financials** y pulsa **Load**.
+   - **Si no aparece la opción de datos de ejemplo:** descarga el libro de Excel del Financial sample desde <https://go.microsoft.com/fwlink/?LinkID=521962>, y en Desktop usa **Home** > **Excel workbook**, elige el archivo y carga la tabla **financials**.
+3. Guarda el archivo como `dax-avanzado-financials.pbix`.
+4. Abre la vista de tabla (**Table view**) y comprueba que existen estas columnas: `Segment`, `Country/Region` (en versiones antiguas del libro puede llamarse `Country`), `Product`, `Units Sold`, `Sales`, `Profit`, `Date` y `Month Name`. Si el nombre de alguna es distinto, usa el tuyo en todas las fórmulas.
+5. Crea la medida base (clic derecho sobre la tabla `financials` en el panel **Data** > **New measure**):
 
-- **FILTER:** función DAX que itera una tabla y retorna las filas que cumplen una condición. Retorna una tabla, por lo que se usa dentro de CALCULATE u otras funciones de tabla. A diferencia de los modificadores directos en CALCULATE (más eficientes), FILTER crea un contexto de fila sobre la tabla completa antes de aplicar el filtro, lo que puede ser lento en tablas grandes. Usar modificadores directos cuando sea posible: `CALCULATE([M], Tabla[Col]="X")` es más rápido que `CALCULATE([M], FILTER(Tabla, Tabla[Col]="X"))`.
-
-- **RELATED / RELATEDTABLE:** funciones para navegar relaciones en DAX. `RELATED(Tabla[Columna])` trae un valor de una tabla relacionada hacia el lado "muchos" (en un contexto de fila de la tabla hijo, obtiene el valor del padre). `RELATEDTABLE(Tabla)` retorna todas las filas de la tabla relacionada (desde el lado "uno" hacia el "muchos"). Ejemplo: en una columna calculada de tabla Ventas, `RELATED(Productos[Categoria])` obtiene la categoría del producto de esa venta.
-
-- **Funciones de tiempo (Time Intelligence):** familia de funciones DAX que manipulan períodos de tiempo basándose en la tabla de calendario. Requieren una tabla de fechas marcada como "Tabla de fechas". Las principales: `DATEADD` (desplaza N períodos: -1 mes, +1 año), `TOTALYTD` / `TOTALMTD` / `TOTALQTD` (acumulados año/mes/trimestre hasta la fecha), `SAMEPERIODLASTYEAR` (mismo período del año anterior), `DATESINPERIOD` (rango de fechas desde un punto por N períodos), `DATESBETWEEN` (rango absoluto entre dos fechas). Ejemplo: `TOTALYTD([Total Ventas], 'Calendar'[Date])` retorna la venta acumulada del año hasta la fecha del filtro actual.
-
-- **RANKX:** función DAX que calcula el ranking dinámico de una expresión sobre una tabla. Sintaxis: `RANKX(tabla, expresión, valor, orden, vínculos)`. El parámetro de vínculos acepta DENSE (sin saltos en el ranking) o SKIP (salta posiciones cuando hay empates). Funciona con el contexto de filtro actual, por lo que si hay un filtro de región, el ranking es dentro de esa región. Ejemplo: `RANKX(ALL(Clientes), [Total Ventas],, DESC, DENSE)` rankea todos los clientes por ventas, ignorando filtros, de mayor a menor.
-
-- **Row Level Security (RLS):** mecanismo de Power BI que filtra los datos que un usuario puede ver basándose en su identidad (USERPRINCIPALNAME()). Se define en Power BI Desktop creando roles con expresiones DAX en tablas del modelo. Al publicar en Power BI Service, se asignan usuarios o grupos de Microsoft Entra ID a cada rol. Los filtros de RLS se propagan por las relaciones del modelo (si filtras Vendedores, automáticamente se filtran Ventas, Productos vendidos, etc.). Los administradores del workspace ven todos los datos salvo que sean añadidos explícitamente a un rol.
-
-- **Tablas de calendario:** tabla de fechas que contiene una fila por cada día del período de análisis y columnas adicionales para análisis temporal (Año, Mes, Trimestre, Semana, día de semana, etc.). Es requerida para que funcionen las funciones de Time Intelligence. Debe ser marcada como "Tabla de fechas" en el modelo y tener una columna de tipo Date sin huecos. Puede crearse con DAX (`CALENDAR()` + `ADDCOLUMNS()`), con Power Query, o importarse desde una fuente externa. Recomendación: siempre crear una tabla de fechas personalizada y desactivar el AutoDate/Time de Power BI.
-
-### 👨‍💻 Actividades Prácticas Paso a Paso
-
-#### Actividad 12.1: Tabla de calendario con DAX
-1. En Power BI Desktop → Modelado → Nueva tabla:
-   ```dax
-   Calendar = 
-   ADDCOLUMNS(
-       CALENDAR(DATE(2020,1,1), DATE(2030,12,31)),
-       "Año", YEAR([Date]),
-       "Mes Número", MONTH([Date]),
-       "Mes Nombre", FORMAT([Date], "MMMM"),
-       "Mes Corto", FORMAT([Date], "MMM"),
-       "Trimestre", "Q" & QUARTER([Date]),
-       "Semana", WEEKNUM([Date]),
-       "Día Semana", WEEKDAY([Date], 2),
-       "Día Nombre", FORMAT([Date], "dddd"),
-       "Es Fin de Semana", IF(WEEKDAY([Date],2) >= 6, TRUE(), FALSE()),
-       "Año-Mes", FORMAT([Date], "YYYY-MM"),
-       "Año Trimestre", FORMAT([Date], "YYYY") & " Q" & QUARTER([Date])
-   )
-   ```
-
-2. Marcar tabla como "Tabla de fechas" → columna Date
-3. Crear relación: `Calendar[Date]` → `Ventas[FechaVenta]`
-
-#### Actividad 12.2: Medidas con CALCULATE
 ```dax
-// Medida base
-Total Ventas = SUM(Ventas[Monto])
+Total Ventas = SUM(financials[Sales])
+```
 
-// Con CALCULATE modificando filtro de categoría
-Ventas Electrónica = 
-CALCULATE(
-    [Total Ventas],
-    Productos[Categoria] = "Electrónica"
-)
+> **Separadores:** si tu Windows está en un idioma que usa coma decimal, Power BI Desktop puede pedir `;` en vez de `,` entre argumentos. Si una fórmula de este módulo da error de sintaxis sin motivo aparente, prueba a cambiar las comas por punto y coma.
 
-// Porcentaje del total (ignorar filtro de categoría)
-% del Total = 
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Cómo cargaste los datos (sample integrado o libro descargado) | ___ |
+| Número de filas de `financials` (aparece abajo a la izquierda en **Table view**) | ___ |
+| Valor de `Total Ventas` en una tarjeta (**Card**) sin filtros, con todos los decimales que muestre | ___ |
+
+---
+
+## 📖 Conceptos clave (referencia rápida)
+
+Estos conceptos se trabajan uno por uno en las microlecciones. Vuelve aquí cuando necesites la definición corta.
+
+- **Contexto de filtro:** el conjunto de filtros activos que deciden qué filas participan en el cálculo de una medida en una celda concreta. Viene de slicers, filtros de visual/página/reporte, de las filas y columnas del propio visual, y se propaga por las relaciones del modelo.
+- **Contexto de fila:** existe cuando DAX recorre una tabla fila por fila: en una **columna calculada** y dentro de los **iteradores** (`SUMX`, `AVERAGEX`, `MAXX`, `FILTER`, `RANKX`...). Permite leer columnas de "la fila actual", pero **por sí solo no filtra nada**.
+- **Transición de contexto:** cuando `CALCULATE` se evalúa dentro de un contexto de fila, convierte esa fila en un filtro. Toda referencia a una medida (`[Total Ventas]`) lleva un `CALCULATE` implícito, por eso una medida dentro de un iterador sí "ve" la fila actual y un `SUM` suelto no.
+- **CALCULATE / CALCULATETABLE:** son las funciones que modifican el contexto de filtro (`CALCULATETABLE` hace lo mismo pero devuelve una tabla). Un filtro de `CALCULATE` sobre una columna **reemplaza** el filtro que ya existía sobre esa misma columna, salvo que lo envuelvas en `KEEPFILTERS`, que lo **intersecta**.
+- **REMOVEFILTERS / ALL / ALLEXCEPT / ALLSELECTED:** quitan filtros dentro de `CALCULATE`. `REMOVEFILTERS` es el nombre explícito recomendado cuando solo quieres quitar filtros; `ALL` hace lo mismo como modificador y además puede devolver una tabla. `ALLEXCEPT(tabla, columna)` quita todos los filtros de la tabla excepto los de las columnas indicadas. `ALLSELECTED` conserva los filtros externos al visual (slicers) y quita los del propio visual.
+- **FILTER:** devuelve una tabla iterando fila por fila. Úsalo cuando la condición no se puede expresar como filtro simple de columna (por ejemplo, comparar contra una medida). `CALCULATE([M], Tabla[Col] = "X")` es preferible a `CALCULATE([M], FILTER(Tabla, Tabla[Col] = "X"))`, que itera la tabla completa.
+- **RELATED / RELATEDTABLE:** `RELATED` trae, en contexto de fila del lado "muchos", un valor del lado "uno"; `RELATEDTABLE` devuelve, desde el lado "uno", las filas relacionadas del lado "muchos".
+- **Inteligencia de tiempo (time intelligence):** funciones como `TOTALYTD`, `SAMEPERIODLASTYEAR`, `DATEADD`, `DATESINPERIOD` y `DATESBETWEEN`. Las funciones clásicas necesitan una tabla de fechas con una fila por día, sin huecos, y lo recomendable es marcarla como tabla de fechas. Power BI también ofrece una inteligencia de tiempo basada en calendarios (en versión preliminar); este módulo usa la clásica, que es la que encontrarás en la mayoría de modelos existentes.
+- **RANKX:** `RANKX(tabla, expresión, [valor], [orden], [empates])`. El orden por defecto es descendente y los empates por defecto son `SKIP` (salta posiciones: 1, 1, 3); `DENSE` no salta (1, 1, 2).
+- **Row Level Security (RLS):** roles con filtros DAX definidos en Desktop. Al publicar, se asignan usuarios o grupos de Microsoft Entra ID a cada rol en el modelo semántico (semantic model) del servicio. Los filtros se propagan por las relaciones. **Importante:** RLS solo restringe a quienes tienen rol **Viewer** en el workspace; los roles **Admin**, **Member** y **Contributor** ven todos los datos aunque estén asignados a un rol de RLS.
+
+---
+
+## 🧩 Microlección 1 — Contexto de filtro y CALCULATE
+
+**¿Qué vas a aprender?** A predecir qué valor da una medida en cada celda y a cambiar ese contexto a propósito con `CALCULATE`.
+
+**¿Por qué existe esto?** Casi todas las métricas de negocio necesitan comparar "lo que estoy viendo" contra "otra cosa": el total de la empresa, otro segmento, el año anterior. Una medida simple como `SUM` solo responde con lo que el contexto de filtro deja pasar. `CALCULATE` es la forma de decir "calcula esto, pero con estos filtros cambiados".
+
+**Ejemplo pequeño:**
+
+```dax
+// Siempre devuelve las ventas del segmento Government,
+// aunque el slicer tenga seleccionado otro segmento:
+Ventas Government = CALCULATE([Total Ventas], financials[Segment] = "Government")
+
+// Participación de cada producto dentro de lo que el slicer deja ver:
+% del Total Productos =
 DIVIDE(
     [Total Ventas],
-    CALCULATE([Total Ventas], ALL(Productos[Categoria])),
+    CALCULATE([Total Ventas], REMOVEFILTERS(financials[Product])),  // quita solo el filtro de producto
     0
 )
 
-// % del total de la categoría padre (contexto de tabla visual)
-% del Total Categoría = 
+// Participación sobre el total de la empresa (quita TODOS los filtros de la tabla):
+% del Total General =
 DIVIDE(
     [Total Ventas],
-    CALCULATE([Total Ventas], ALLSELECTED(Productos[Subcategoria])),
+    CALCULATE([Total Ventas], REMOVEFILTERS(financials)),
     0
 )
 ```
 
-#### Actividad 12.3: Inteligencia de tiempo
+**Ahora haz algo — micropráctica (3 min):** antes de construir, decide qué filtro hay que quitar → **[¿Qué filtro quitar para el % del total?](/practica/ip-dv-017-porcentaje-del-total-que-filtro-quitar)**. Te muestra varias versiones del denominador y tienes que elegir las que respetan el slicer de segmento.
+
+**Práctica real en tu entorno (20 min):**
+
+1. Crea las tres medidas del ejemplo. A las dos de porcentaje dales formato de porcentaje en la cinta **Measure tools** (como en el Módulo 6).
+2. En la vista de reporte inserta una **Matrix**: en **Rows** pon `financials[Product]`; en **Values** pon `Total Ventas`, `Ventas Government`, `% del Total Productos` y `% del Total General`.
+3. Inserta un **Slicer** con `financials[Segment]` y selecciona **Small Business**.
+4. Observa: `Ventas Government` **no cambió** al elegir Small Business. Eso es `CALCULATE` reemplazando el filtro de la columna `Segment`.
+5. Crea una cuarta medida y agrégala a la matriz:
+
 ```dax
-// Año hasta la fecha
+Ventas Government KF = CALCULATE([Total Ventas], KEEPFILTERS(financials[Segment] = "Government"))
+```
+
+Con Small Business seleccionado debe quedar **en blanco**: `KEEPFILTERS` intersecta (Small Business y Government a la vez no tiene filas). Si no queda en blanco, revisa que el slicer tenga solo Small Business marcado.
+
+**Evidencia a reportar (el dato exacto, no un "sí/no"):**
+
+| Campo | Tu valor |
+|---|---|
+| Producto con mayor `Total Ventas` con Small Business seleccionado | ___ |
+| Valor de `Ventas Government` en la fila Total con Small Business seleccionado | ___ |
+| Valor de `Ventas Government` en la fila Total con **Government** seleccionado (¿coincide con el anterior? ¿por qué?) | ___ |
+| Valor de `% del Total Productos` en la fila Total | ___ |
+| Valor de `% del Total General` en la fila Total con Small Business seleccionado (qué representa ese número) | ___ |
+| Valor de `Ventas Government KF` con Small Business y con Government seleccionado | ___ |
+
+---
+
+## 🧩 Microlección 2 — Contexto de fila, iteradores y transición de contexto
+
+**¿Qué vas a aprender?** Por qué un promedio "fila por fila" no es lo mismo que un promedio ponderado, y por qué una medida dentro de un iterador se comporta distinto que un `SUM` suelto.
+
+**¿Por qué existe esto?** Muchos errores silenciosos de DAX vienen de aquí: la fórmula no da error, da un número plausible pero equivocado.
+
+**Ejemplo pequeño:**
+
+```dax
+// Columna calculada (clic derecho sobre financials > New column).
+// Se evalúa en contexto de fila: una vez por cada fila de financials.
+Precio Unitario Fila = DIVIDE(financials[Sales], financials[Units Sold])
+```
+
+```dax
+// Medidas:
+Precio Promedio Simple = AVERAGE(financials[Precio Unitario Fila])   // promedio de las filas, todas pesan igual
+Precio Promedio Simple X = AVERAGEX(financials, DIVIDE(financials[Sales], financials[Units Sold]))  // lo mismo con un iterador, sin columna
+Precio Promedio Ponderado = DIVIDE([Total Ventas], SUM(financials[Units Sold]))  // cada unidad pesa igual
+
+// Transición de contexto:
+Ventas Mejor Producto = MAXX(VALUES(financials[Product]), [Total Ventas])  // [Total Ventas] lleva CALCULATE implícito: filtra por cada producto
+Ventas Mejor Producto Sin Transicion = MAXX(VALUES(financials[Product]), SUM(financials[Sales]))  // SUM no filtra por la fila: devuelve el total en cada iteración
+```
+
+**Práctica real en tu entorno (20 min):**
+
+1. Crea la columna calculada y las cinco medidas del ejemplo.
+2. Pon cada medida en una **Card** (o todas en una **Table** de una sola fila) sin slicer seleccionado.
+3. Compara `Ventas Mejor Producto Sin Transicion` con `Total Ventas`: deben ser **iguales**. Ese es el síntoma típico de olvidar la transición de contexto.
+4. Corrige la versión sin transición envolviendo el `SUM` en `CALCULATE(SUM(financials[Sales]))` y comprueba que ahora coincide con `Ventas Mejor Producto`.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| `Precio Promedio Simple` y `Precio Promedio Simple X` (¿son iguales?) | ___ |
+| `Precio Promedio Ponderado` | ___ |
+| Cuál usarías para informar "precio promedio por unidad vendida" y por qué (una frase) | ___ |
+| `Ventas Mejor Producto` y `Ventas Mejor Producto Sin Transicion` antes de corregir | ___ |
+| Valor de la versión corregida con `CALCULATE` | ___ |
+
+---
+
+## 🧩 Microlección 3 — Tabla de calendario e inteligencia de tiempo
+
+**¿Qué vas a aprender?** A crear tu propia tabla de fechas, marcarla y usarla para acumulados, comparativos contra el año anterior y una media móvil correcta.
+
+**¿Por qué existe esto?** Las funciones de inteligencia de tiempo trabajan sobre una columna de fechas continua (una fila por día, sin huecos). La columna `financials[Date]` no lo es: tiene una fecha por mes. Por eso se crea una tabla `Calendar` y se relaciona con los datos.
+
+**Práctica real en tu entorno (35 min):**
+
+1. Desactiva la fecha/hora automática solo para este archivo: **File** > **Options and settings** > **Options** > en **Current File** abre **Data Load** y desmarca **Auto date/time** en la sección **Time intelligence**. Pulsa **OK**.
+2. En **Table view** > **Home** > **New table** escribe:
+
+```dax
+Calendar =
+ADDCOLUMNS(
+    CALENDAR(DATE(2013, 1, 1), DATE(2014, 12, 31)),  // cubre todo el rango de la muestra
+    "Año", YEAR([Date]),
+    "Mes Número", MONTH([Date]),
+    "Año-Mes", FORMAT([Date], "YYYY-MM"),            // texto que se ordena bien alfabéticamente
+    "Trimestre", "T" & QUARTER([Date])
+)
+```
+
+3. Comprueba en **Table view** que `Calendar` tiene **730 filas** (365 × 2 años).
+4. Clic derecho sobre la tabla `Calendar` en el panel **Data** > **Mark as date table** y elige la columna `Date`. Power BI valida que no haya duplicados, ni vacíos, ni huecos. Si da error, revisa que la fórmula sea exactamente la de arriba.
+5. En **Model view** arrastra `Calendar[Date]` sobre `financials[Date]`. En el cuadro **New relationship** comprueba que la cardinalidad es uno a muchos (`Calendar` en el lado "uno") y la dirección **Single**, y guarda.
+6. Crea las medidas:
+
+```dax
 Ventas YTD = TOTALYTD([Total Ventas], 'Calendar'[Date])
 
-// Año anterior (mismo período)
-Ventas Año Anterior = 
-CALCULATE(
-    [Total Ventas],
-    SAMEPERIODLASTYEAR('Calendar'[Date])
-)
+Ventas Año Anterior = CALCULATE([Total Ventas], SAMEPERIODLASTYEAR('Calendar'[Date]))
 
-// Crecimiento vs año anterior
-YoY % = 
-VAR VentasActual = [Total Ventas]
-VAR VentasAnterior = [Ventas Año Anterior]
+Variación YoY % =
+VAR Actual = [Total Ventas]
+VAR Anterior = [Ventas Año Anterior]
 RETURN
-DIVIDE(VentasActual - VentasAnterior, VentasAnterior, BLANK())
+    DIVIDE(Actual - Anterior, Anterior)   // en blanco si no hay año anterior
 
-// Media móvil 3 meses
-Media Movil 3M = 
-CALCULATE(
-    AVERAGE(Ventas[Monto]),
-    DATESINPERIOD(
-        'Calendar'[Date],
-        LASTDATE('Calendar'[Date]),
-        -3,
-        MONTH
-    )
-)
+Ventas Mes Anterior = CALCULATE([Total Ventas], DATEADD('Calendar'[Date], -1, MONTH))
 
-// Acumulado mes a mes
-Ventas MTD = TOTALMTD([Total Ventas], 'Calendar'[Date])
-
-// Ventas últimos 12 meses rodantes
-Ventas R12M = 
-CALCULATE(
-    [Total Ventas],
-    DATESINPERIOD(
-        'Calendar'[Date],
-        LASTDATE('Calendar'[Date]),
-        -12,
-        MONTH
-    )
-)
-
-// MoM (Month over Month) — crecimiento mes a mes
-MoM % = 
-VAR MesActual = [Total Ventas]
-VAR MesAnterior = CALCULATE([Total Ventas], DATEADD('Calendar'[Date], -1, MONTH))
-RETURN DIVIDE(MesActual - MesAnterior, MesAnterior, BLANK())
-```
-
-#### Actividad 12.4: Iteradores (AVERAGEX, SUMX)
-```dax
-// Ticket promedio por venta (patrón AVERAGEX sobre una tabla)
-Ticket Promedio = 
-AVERAGEX(
-    Ventas,
-    Ventas[Monto]
-)
-
-// Días promedio transcurridos desde inicio del año hasta cada venta
-Antigüedad Promedio Días = 
-AVERAGEX(
-    Ventas,
-    DATEDIFF(DATE(YEAR(Ventas[FechaVenta]), 1, 1), Ventas[FechaVenta], DAY)
-)
-
-// Total recalculado fila a fila (patrón SUMX — útil cuando el total depende de cálculo por fila)
-Total Ventas SUMX = 
-SUMX(Ventas, Ventas[Monto])
-```
-> **Nota:** AVERAGEX y SUMX iteran fila por fila (contexto de fila). Son más flexibles que AVERAGE/SUM pero más costosos en performance con tablas grandes. Úsalos cuando el cálculo por fila es distinto al valor almacenado (ej: precio × cantidad cuando el total no está pre-calculado en la tabla).
-
-#### Actividad 12.5: RANKX y Top N dinámico
-```dax
-// Ranking de clientes por ventas
-Ranking Cliente = 
-RANKX(
-    ALL(Clientes[NombreCliente]),
-    [Total Ventas],
-    ,
-    DESC,
-    DENSE
-)
-
-// Solo mostrar Top N (usar con slicer de parámetro)
-Top N Clientes = 
-VAR TopN = SELECTEDVALUE(Parametro[N], 10)
+Media Movil 3M =
+VAR FinPeriodo = EOMONTH(MAX('Calendar'[Date]), 0)        // último día del mes de la fila
+VAR InicioPeriodo = EOMONTH(FinPeriodo, -3) + 1           // primer día de dos meses antes
 RETURN
-IF([Ranking Cliente] <= TopN, [Total Ventas], BLANK())
-
-// Ventas de Top 10 clientes como % del total
-% Top 10 Clientes = 
-VAR Top10 = 
-    TOPN(10, ALL(Clientes[NombreCliente]), [Total Ventas], DESC)
-RETURN
-DIVIDE(
-    CALCULATE([Total Ventas], Top10),
-    CALCULATE([Total Ventas], ALL(Clientes)),
-    0
-)
-```
-
-#### Actividad 12.5: Row Level Security (RLS)
-1. Power BI Desktop → Modelado → Administrar roles
-2. Crear rol `Vendedor`:
-   ```dax
-   // En tabla Vendedores, filtrar por email del usuario actual
-   [Email] = USERPRINCIPALNAME()
-   ```
-
-3. Crear rol `Gerente Regional`:
-   ```dax
-   // En tabla Regiones, filtrar por regiones que gestiona el gerente
-   [GerencEmail] = USERPRINCIPALNAME()
-   ```
-
-4. Verificar: Modelado → Ver como → seleccionar rol → ingresar email de prueba
-5. Al publicar en Power BI Service → Dataset → Seguridad → Asignar usuarios a roles
-
-#### Actividad 12.6: Análisis de cohortes
-```dax
-// Fecha de primera compra por cliente
-Primera Compra = 
-CALCULATE(
-    MIN(Ventas[FechaVenta]),
-    ALLEXCEPT(Ventas, Ventas[ClienteID])
-)
-
-// Cohorte = mes de primera compra
-Cohorte = 
-FORMAT(
-    CALCULATE(
-        MIN(Ventas[FechaVenta]),
-        ALLEXCEPT(Clientes, Clientes[ClienteID])
-    ),
-    "YYYY-MM"
-)
-
-// Retención: clientes que compraron en X meses después de su primera compra
-Clientes Retenidos = 
-COUNTROWS(
-    FILTER(
-        VALUES(Ventas[ClienteID]),
-        NOT ISBLANK([Total Ventas])
+    DIVIDE(
+        CALCULATE([Total Ventas], DATESBETWEEN('Calendar'[Date], InicioPeriodo, FinPeriodo)),
+        3                                                  // promedio de 3 MESES, no de transacciones
     )
-)
 ```
+
+7. Inserta una **Matrix** con `'Calendar'[Año-Mes]` en **Rows** (de la tabla `Calendar`, **no** de `financials`) y las cinco medidas en **Values**.
+
+> **Por qué la media móvil se calcula así:** promediar con `AVERAGE(financials[Sales])` dentro de un rango de fechas da el promedio de las **filas** de esos meses, no de los meses. Aquí se suma la venta de los tres meses y se divide entre 3. Los primeros meses de la serie salen bajos porque no tienen tres meses anteriores con datos: es esperado, anótalo.
+
+**🔧 Diagnosticar antes de seguir — troubleshooting challenge (5 min):** un compañero armó la misma matriz y su `Ventas YTD` "no acumula". Antes de ver la causa, resuélvelo → **[Diagnosticar: el YTD no acumula](/practica/ip-trb-009-ytd-no-acumula)**. Después reprodúcelo en tu archivo: cambia las filas de la matriz por `financials[Month Name]` y anota qué pasa.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Número de filas de `Calendar` | ___ |
+| Primer mes (`Año-Mes`) en el que `Total Ventas` tiene valor | ___ |
+| `Ventas YTD` en 2014-12 (¿coincide con `Total Ventas` del año 2014 completo?) | ___ |
+| Primer mes en que `Ventas Año Anterior` deja de estar en blanco | ___ |
+| `Variación YoY %` en 2014-12 | ___ |
+| `Media Movil 3M` en 2014-12 y el cálculo manual que hiciste para comprobarla (ventas de 2014-10 + 2014-11 + 2014-12, entre 3) | ___ |
+| Qué viste en `Ventas YTD` al usar `financials[Month Name]` en las filas | ___ |
+
+---
+
+## 🧩 Microlección 4 — Ranking dinámico y Top N con parámetro
+
+**¿Qué vas a aprender?** A combinar `RANKX` con un parámetro que elige el usuario.
+
+**¿Por qué existe esto?** "Muéstrame los 3 mejores productos" cambia según el segmento, el país o el periodo que el usuario filtra. Un ranking fijo (calculado en una columna) no responde a los filtros; una medida con `RANKX` sí.
+
+**Ejemplo pequeño:**
+
+```dax
+Ranking Producto = RANKX(ALL(financials[Product]), [Total Ventas], , DESC, DENSE)
+// ALL(financials[Product]): compara contra todos los productos, no solo el de la fila.
+// El segmento seleccionado en el slicer sigue aplicando, así que el ranking es "dentro del segmento".
+```
+
+**🏗️ Reto de construcción (sin pasos, en tu Desktop):**
+
+> **Requerimiento:** un visual donde el usuario elija con un slicer cuántos productos ver (de 1 a 6) y solo aparezcan esos productos, ordenados por ventas, respetando el slicer de segmento de la Microlección 1.
+> **Criterios de aceptación:** (1) el número N lo elige el usuario en un slicer; (2) al cambiar el segmento, el Top N se recalcula; (3) en caso de empate, ningún puesto queda vacío.
+> **Restricciones:** no uses el filtro **Top N** del panel **Filters**; resuélvelo con DAX.
+
+Si te atascas, pistas en orden: (1) **Modeling** > **New parameter** > **Numeric range** crea una tabla con su slicer (**Add slicer to this page**) y una medida `<Nombre> Value` que devuelve el número elegido; (2) una medida que devuelva `[Total Ventas]` solo si `[Ranking Producto]` es menor o igual que ese valor, y blanco en otro caso; (3) las filas con medida en blanco desaparecen de la matriz.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Nombre del parámetro y de la medida que creó Power BI automáticamente | ___ |
+| Fórmula final de tu medida Top N (cópiala) | ___ |
+| Productos que aparecen con N = 3 y segmento **Government** | ___ |
+| Productos que aparecen con N = 3 y segmento **Small Business** (¿cambió alguno?) | ___ |
+| Qué muestra la fila Total de tu medida y si es lo que esperabas | ___ |
+
+---
+
+## 🧩 Microlección 5 — Row Level Security estática y dinámica
+
+**¿Qué vas a aprender?** A definir un rol con filtro fijo, un rol dinámico con `USERPRINCIPALNAME()` y a probarlos antes de publicar.
+
+**¿Por qué existe esto?** El mismo reporte debe mostrar datos distintos según quién lo abre, sin mantener un reporte por persona. El Módulo 6 te presentó la idea; aquí la construyes con una tabla de responsables, que es el patrón real (la seguridad la mantiene una tabla, no la fórmula).
+
+**Práctica real en tu entorno (25 min):**
+
+1. **Home** > **Enter data**. Crea la tabla `Responsables` con dos columnas, `Email` y `Segment`, y una fila por segmento: `gobierno@contoso.com` / `Government`, `pymes@contoso.com` / `Small Business`, `enterprise@contoso.com` / `Enterprise`, `midmarket@contoso.com` / `Midmarket`, `canales@contoso.com` / `Channel Partners`. Comprueba que los textos de `Segment` coinciden exactamente con los de `financials` (mira los valores del slicer).
+2. En **Model view** relaciona `Responsables[Segment]` (lado "uno") con `financials[Segment]` (lado "muchos"), dirección **Single**.
+3. **Modeling** > **Manage roles** > **New**. Rol `Solo Government`: selecciona la tabla `financials` y escribe el filtro DAX (usa **Switch to DAX editor** si ves el editor por defecto):
+
+```dax
+[Segment] = "Government"
+```
+
+4. Crea otro rol `Responsable de segmento` sobre la tabla `Responsables`:
+
+```dax
+[Email] = USERPRINCIPALNAME()
+```
+
+   Pulsa **Save**. El filtro sobre `Responsables` llega a `financials` por la relación.
+5. Prueba: **Modeling** > **View as** > marca `Solo Government` > **OK**. Luego **Stop viewing**. Después **View as** > marca **Other user**, escribe `pymes@contoso.com`, marca `Responsable de segmento` > **OK**.
+
+> En Desktop, `USERPRINCIPALNAME()` devuelve tu usuario (o el que escribas en **Other user**). Si con **Other user** ves todo vacío, el correo no coincide con ninguna fila de `Responsables`: revisa mayúsculas, espacios y el dominio.
+
+6. *(Opcional, en el servicio):* publica el archivo. En el workspace abre **More options** (⋯) del modelo semántico > **Security**, agrega miembros a cada rol y usa **Test as role**. Recuerda: solo se restringe a quienes tengan rol **Viewer** en el workspace; si tú eres Admin del workspace, verás todo y eso no es un error.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| `Total Ventas` sin rol | ___ |
+| `Total Ventas` viendo como `Solo Government` | ___ |
+| `Total Ventas` viendo como `pymes@contoso.com` con `Responsable de segmento` | ___ |
+| Qué pasó al probar con un correo que no está en `Responsables` | ___ |
+| *(Opcional)* Rol de workspace del usuario con quien probaste en el servicio y qué vio | ___ |
+
+---
+
+## 🔁 Reto de transferencia
+
+Ya practicaste acumulados y comparativos sobre el año calendario (Microlección 3). Ahora la regla de negocio **cambia**: la empresa cierra su año fiscal el **30 de junio**. El año fiscal 2014 va del 1 de julio de 2013 al 30 de junio de 2014, y finanzas quiere el acumulado fiscal y el comparativo contra el mismo periodo del año fiscal anterior.
+
+**[Transferir: acumulado en año fiscal](/practica/ip-dv-018-transferir-ano-fiscal)** — tienes que decidir qué cambia y qué **no** cambia. No es "rehacer el calendario": si solo memorizaste la fórmula de la Microlección 3, este reto te lo va a mostrar.
+
+Si tienes tiempo, constrúyelo en tu archivo y reporta la evidencia:
+
+| Campo | Tu valor |
+|---|---|
+| Fórmula de tu columna de año fiscal en `Calendar` | ___ |
+| Fórmula de tu medida de acumulado fiscal | ___ |
+| Acumulado fiscal en 2014-06 y en 2014-07 (¿por qué baja en julio?) | ___ |
+| ¿Tuviste que cambiar `Ventas Año Anterior`? ¿Por qué? | ___ |
+
+---
+
+## Profundización opcional — retención por cohortes
+
+Este patrón no se puede practicar con la muestra Financials (no tiene clientes). Úsalo como referencia cuando tengas un modelo con una tabla `Clientes` (lado "uno") relacionada con una tabla `Ventas` (lado "muchos") por `ClienteID`, y la tabla `Calendar` relacionada con `Ventas[FechaVenta]`.
+
+```dax
+// Columnas calculadas en Clientes:
+Primera Compra = CALCULATE(MIN(Ventas[FechaVenta]))   // transición de contexto: filtra Ventas por el cliente de la fila
+Cohorte = FORMAT(Clientes[Primera Compra], "YYYY-MM")
+```
+
+```dax
+// Medidas:
+Clientes Activos = DISTINCTCOUNT(Ventas[ClienteID])
+Tamaño Cohorte = COUNTROWS(Clientes)                  // Calendar no filtra Clientes (relación Single), así que no depende del mes
+% Retención = DIVIDE([Clientes Activos], [Tamaño Cohorte])
+```
+
+En una matriz con `Clientes[Cohorte]` en filas y `'Calendar'[Año-Mes]` en columnas, `% Retención` muestra qué parte de cada cohorte volvió a comprar en cada mes.
+
+---
 
 ### 💼 Caso Real de Negocio
 **Empresa:** Cadena de retail con 200 tiendas y 50 vendedores  
@@ -245,27 +356,36 @@ COUNTROWS(
 **Resultado:** Adopción de Power BI aumentó de 20% a 85% porque los vendedores confían en que los datos son "solo de ellos".
 
 ### ✅ Buenas Prácticas
-- Siempre crear tabla de fechas manualmente (no usar AutoDate/Time de Power BI)
-- Usar VAR para cálculos intermedios — mejora legibilidad y rendimiento
-- DIVIDE() en lugar de `/` para manejar divisiones por cero
-- Documentar medidas complejas con descripción en el panel de propiedades
-- Centralizar medidas en tabla de medidas dedicada (sin datos)
-- RLS se aplica al Dataset en Service, no en Desktop — recordar publicar y asignar
+- Siempre crear tabla de fechas manualmente (no usar AutoDate/Time de Power BI) y marcarla como tabla de fechas
+- Usar VAR para almacenar cálculos intermedios — mejora legibilidad y evita evaluar dos veces la misma expresión
+- DIVIDE() en lugar de `/` para evitar errores de división por cero
+- Documentar medidas complejas con comentarios `//` en el código DAX y con la descripción de la medida
+- Centralizar medidas en tabla de medidas dedicada
+- Preferir filtros de columna simples en CALCULATE y reservar FILTER para condiciones que comparan contra medidas
+- En visuales con inteligencia de tiempo, usar siempre las columnas de la tabla de calendario en filas, ejes y slicers, no la fecha de la tabla de hechos
+- RLS se define en Desktop pero se aplica al Dataset (modelo semántico) en Service — recordar publicar y asignar; mantener la seguridad dinámica en una tabla de responsables, no en fórmulas con correos escritos a mano
 
 ### ⚠️ Errores Comunes
-| Error | Causa | Solución |
+| Síntoma | Causa | Solución |
 |-------|-------|----------|
-| TOTALYTD retorna BLANK | No hay relación activa con tabla Calendar | Verificar y activar la relación |
-| RLS no filtra correctamente | Rol aplicado a tabla incorrecta | RLS filtra en cascada vía relaciones — aplicar en la tabla que tiene la columna de usuario |
-| CALCULATE con FILTER muy lento | FILTER itera la tabla completa | Usar modificadores de filtro directos en CALCULATE (ej: Tabla[Col]="valor") |
-| SUM y SUMX dan resultados distintos | Confusión de contexto de fila | SUMX itera fila a fila; SUM agrega directamente la columna |
+| El YTD no acumula: cada mes muestra lo mismo que su venta del mes, y el año anterior sale raro | Las filas del visual usan la fecha o el mes de la tabla de hechos, no de `Calendar` | Usar `'Calendar'[Año-Mes]` (u otras columnas de `Calendar`) en filas y slicers (Microlección 3) |
+| Las funciones de tiempo dan error o resultados incompletos | La tabla de fechas tiene huecos, o no cubre todo el rango de los datos | Crear `Calendar` con `CALENDAR` sobre un rango completo y marcarla como tabla de fechas |
+| Una medida "ignora" el slicer y siempre da el mismo valor | `CALCULATE` reemplaza el filtro de esa columna | Si el filtro debe combinarse con el slicer, usar `KEEPFILTERS` (Microlección 1) |
+| El % del total suma 100% en cada fila | El denominador no quita ningún filtro (`DIVIDE([M], [M])`) | Quitar el filtro de la columna de las filas con `REMOVEFILTERS(Tabla[Columna])` |
+| El % del total no respeta el slicer de segmento | El denominador quita todos los filtros de la tabla (`REMOVEFILTERS(Tabla)` o `ALL(Tabla)`) | Quitar solo la columna de las filas |
+| Un iterador devuelve el total en cada fila (`MAXX` = total) | `SUM` dentro del iterador sin transición de contexto | Usar una medida o envolver en `CALCULATE` (Microlección 2) |
+| La media móvil sale demasiado baja | Se promediaron filas de transacciones, no meses | Sumar el periodo y dividir entre el número de meses (Microlección 3) |
+| RANKX da todos 1 | La tabla del primer argumento solo contiene la fila actual | Usar `ALL(Tabla[Columna])` en el primer argumento |
+| RLS no filtra nada en el servicio | El usuario es Admin, Member o Contributor del workspace, o no está asignado al rol | Probar con un usuario con rol Viewer asignado al rol; usar **Test as role** |
+| RLS dinámico deja todo vacío con **Other user** | El correo no coincide con la tabla de responsables | Revisar el valor exacto (dominio, espacios) en la tabla |
 
 ### 🧪 Criterios de Validación
-- [ ] Tabla de calendario creada con DAX y marcada correctamente
-- [ ] Medida YoY% calcula crecimiento correcto con períodos comparables
-- [ ] Media móvil 3 meses se actualiza dinámicamente con el filtro de fecha
-- [ ] RLS funciona: vendedor ve solo sus datos, gerente ve su región
-- [ ] RANKX muestra Top 10 clientes dinámicamente con slicer de parámetro
-- [ ] % del total usa ALL/ALLSELECTED correctamente según el nivel de jerarquía
-
----
+- [ ] Cargué el Financial sample y creé la medida base `Total Ventas`
+- [ ] Resolví la micropráctica del % del total y construí en mi Desktop las medidas con `CALCULATE`, `REMOVEFILTERS` y `KEEPFILTERS`, anotando qué hace cada una con el slicer
+- [ ] Comparé promedio simple contra ponderado y reproduje y corregí el error de transición de contexto en `MAXX`
+- [ ] Creé la tabla `Calendar` con DAX, la marqué como tabla de fechas y la relacioné con `financials`
+- [ ] Construí YTD, año anterior, variación YoY, mes anterior y una media móvil de 3 meses que verifiqué con un cálculo manual
+- [ ] Diagnostiqué el "YTD que no acumula" formulando una hipótesis antes de ver la causa, y lo reproduje en mi archivo
+- [ ] Construí el Top N con parámetro y `RANKX` sin ver los pasos completos de antemano
+- [ ] Creé y probé con **View as** un rol estático y un rol dinámico con tabla de responsables y `USERPRINCIPALNAME()`
+- [ ] Completé el reto de transferencia (año fiscal) explicando qué cambió y qué no cambió respecto al año calendario

@@ -90,6 +90,9 @@ original, prevalece sobre este.
 
 - **Qué:** completar el nivel cuyos otros tres módulos ya son piloto, para que quede homogéneo.
 - **Cierre:** Intermedio completo con el patrón. Primer nivel de certificación terminado de punta a punta.
+- **Estado: HECHA el 2026-11-01** (aprobada por el usuario). Los 6 módulos salen como piloto en `npm run audit:lbd`; +18
+  prácticas (3 por módulo: guiada, diagnóstico y transferencia) y dominio nuevo `copilot-studio`. Caso Real sin cambios.
+  No se hizo prueba simulada como principiante: la definición de esta fase no la exige.
 - **Esfuerzo relativo:** medio.
 
 ### Fase 4 — Avanzado (13 módulos, enfoque código)
@@ -158,6 +161,9 @@ específica de cada punto; cualquiera puede revertirse.
 - No valida contra el tenant real del alumno, y eso no es un defecto del diseño.
 - No sustituye los ítems P1 de la auditoría que no son pedagógicos (versionado de `progress.ts`, nivel "Verified",
   motor de Job-Ready scoring). Siguen siendo asuntos aparte.
+- **Resuelto el 2026-11-01 con el LAB-06 opcional (aprobado por el usuario).** Learn confirma la hipótesis: Power BI
+  Desktop solo corre en Windows (desktop-get-the-desktop); el lab ofrece una variante en el servicio de Power BI y lleva
+  `optional: true`, así que no cuenta para el certificado. Texto original del pendiente:
 - **Pendiente detectado en la Fase 2 (Módulo 6): Power BI no tiene lab básico dedicado.** El Nivel Básico queda con
   una práctica larga sin lab guiado paso a paso; el sprint 15 de `SPRINT_HANDOFF.md` lo documenta como "ruta honesta
   cuando no hay lab básico dedicado", pero no registra el motivo (hipótesis no confirmada: Power BI Desktop solo
@@ -248,7 +254,7 @@ confirmados, cada uno en archivos distintos y citando Learn en cada dato nuevo.
   columnas en lugar de roles por columna, filtros OData válidos, tiempos realistas.
 - Tiempos: `practiceMinutes` en el frontmatter de M1-M8 (la app mostraba solo minutos de lectura).
 
-**No corregido o pendiente:**
+**No corregido o pendiente** (los cuatro puntos se cerraron el 2026-11-01; ver `SPRINT_HANDOFF.md`, Pendiente 3):
 - Los Labs 04 y 05 siguen con etiquetas de interfaz en español y algunos pasos escuetos (no entraban en la prueba).
 - Nombre interno de la columna principal: Learn no documenta cómo fijarlo; LAB-02 pide anotarlo y los Labs 04/05 usan
   `sit_titulo`/`sit_nombre`, así que quien tenga otro nombre debe sustituirlo.

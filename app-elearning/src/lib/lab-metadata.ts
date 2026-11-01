@@ -39,6 +39,8 @@ const DIFFICULTY_LABELS: Record<string, string> = {
 };
 
 const ROUTE_LABEL_FALLBACKS: Record<string, string> = {
+  // Lab opcional de Power BI: no está en route.labs (no cuenta para la preparación de la ruta).
+  "lab-06-power-bi-reporte-solicitudes": "Ruta Fundamentos Power Platform",
   "lab-58-customer-insights-segmento-journey": "Ruta Dynamics 365 Customer Insights",
   "lab-59-field-service-work-order-uat": "Ruta Dynamics 365 Customer Engagement",
   "lab-66-sales-lead-to-cash": "Ruta Dynamics 365 Customer Engagement",

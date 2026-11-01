@@ -208,7 +208,7 @@ El trial de Dynamics 365 Customer Service **no se añade a tu ambiente Developer
 2. En el menú lateral, abre **Tables** (si no lo ves, está en **More**).
 3. Elige la pestaña **All** (todas las tablas), busca la tabla estándar **Account** y ábrela. Se abre la página de la tabla, que llamamos su *hub*.
 4. En la barra de comandos selecciona **Edit**. Se abre el diseñador de la tabla, con las filas abajo. (Si ves **View data**, también sirve: abre el editor de filas.)
-5. Agrega una fila nueva con el botón para crear filas (suele llamarse **New row**; si no, elige el más parecido) y escribe:
+5. Agrega una fila nueva: en la barra de comandos que está justo encima de la cuadrícula de filas, usa el comando que crea una fila (el editor de filas permite crear, editar y borrar filas, según [Learn](https://learn.microsoft.com/power-apps/maker/data-platform/create-edit-entities-portal)), y escribe:
    - **Account Name:** `Cliente Demo 01`
    - **Main Phone:** `3000000000`
    - **Address 1: City:** `Bogotá`
@@ -446,10 +446,12 @@ Comprender qué es Power Pages, sus capacidades principales y cuándo usarlo en 
 
 #### 💼 Caso Real de Negocio
 Un municipio necesita que los ciudadanos puedan registrar solicitudes de permisos de construcción en línea, consultar el estado de su trámite y adjuntar documentos, sin tener que ir en persona. Con Power Pages se crea un portal público donde:
-- El ciudadano se registra con su correo (Azure AD B2C)
-- Completa un formulario Webform que crea un registro de "Solicitud" en Dataverse
-- Visualiza el historial de sus solicitudes mediante una Webview filtrada por su identidad
+- El ciudadano se registra con su correo (Microsoft Entra External ID)
+- Completa un formulario de varios pasos (multistep form) que crea un registro de "Solicitud" en Dataverse
+- Visualiza el historial de sus solicitudes en una lista (list) que, con un table permission de tipo **Contact access**, solo le muestra las suyas
 - El equipo municipal gestiona las solicitudes desde una Model-Driven App interna
+
+> Fuentes: [Learn: Microsoft Entra External ID con Power Pages](https://learn.microsoft.com/power-pages/security/authentication/entra-external-id), [Learn: multistep forms](https://learn.microsoft.com/power-pages/configure/multistep-form-properties), [Learn: mostrar datos de forma segura (Contact access)](https://learn.microsoft.com/power-pages/getting-started/tutorial-display-data-securely).
 
 #### ✅ Buenas Prácticas
 - Configurar Table Permissions **antes** de abrir el portal a usuarios externos — por defecto todo está bloqueado

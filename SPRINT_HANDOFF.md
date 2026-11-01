@@ -65,15 +65,26 @@
    Detalle en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §8. Validado: `npm run verify` (483 tests) y `npm run e2e`
    (101/101). Caso Real de M1-M8 sin cambios.
    **→ Fase 2 CERRADA el 2026-11-01 (simulación, no persona real).**
-   Quedan abiertos (no bloquean el cierre):
-   - Labs 04 y 05 sin prueba simulada ni pasos clic a clic (siguen con etiquetas de interfaz en español).
-   - Nombre interno de la columna principal: los labs usan `sit_titulo`/`sit_nombre`; Learn no documenta cómo fijarlo.
-     LAB-02 pide anotar el nombre real. M5/M6 usan `sit_titulodesolicitud`.
-   - Caso Real con términos antiguos sin tocar (las preguntas de caso dependen del texto): Suplemento 1B (Webform,
-     Webview, Azure AD B2C), M5 ("Crear cuenta Azure AD") y M6 ("mapa de calor geográfico").
-   - Etiquetas de interfaz no confirmadas en Learn, escritas con "o el más parecido".
-3. Sin aprobación: lab básico de Power BI (cambia el conteo de 75 labs), Fases 3-5 y Fase 6 recortada (IA 43, 44, 46,
-   54, 55).
+   Los cuatro pendientes que quedaban abiertos se **cerraron el 2026-11-01** (ver punto 3).
+3. **Cerrado el 2026-11-01 (aprobado por el usuario: "todo"):**
+   - **Labs 04 y 05** reescritos clic a clic con etiquetas en inglés y corregidos contra Learn (entre otros: no existen
+     `_sit_prioridad_label`/`_sit_estado_label` → `FormattedValue`; Terminate Succeeded no lleva mensaje; el "+ New" de una
+     vista no abre Quick Create; un gráfico no lleva vista propia; prueba de roles imposible con System Administrator;
+     retos imposibles rehechos). Labs 45 y 55 alineados (el Lab 05 aprueba prioridad crítica, no gastos).
+   - **Columna principal:** el nombre interno se lee en **Columns** > columna > **Advanced options** > **Schema name**
+     (deducido de create-edit-field-portal; Learn no documenta cómo fijarlo). LAB-02/M2 lo hacen anotar y M5, M6 y los
+     Labs 04/05/06 lo usan como ejemplo o usan el nombre visible.
+   - **Etiquetas:** las confirmables se escribieron exactas (Add business rule, New column, Items, Advanced parameters,
+     Commit…); las no documentadas quedaron neutrales (zona + función). Inventario en el mensaje del commit.
+   - **Caso Real** del Suplemento 1B (Entra External ID, multistep form, list con Contact access), M5 (Microsoft Entra ID,
+     Graph `POST /users`) y M6 (Azure Maps con capa Heat map), con sus preguntas de caso actualizadas.
+   - **LAB-06 Power BI (opcional)**, `optional: true`: `getLabsForLevel` lo excluye del certificado y de `/progreso`.
+     Las prácticas del M6 apuntan a LAB-006. Labs: 76.
+   - **Fase 3** (Módulos 9, 12, 14, 15, 16, 17): Intermedio entero con el patrón; +18 prácticas (62 en total), dominio
+     `copilot-studio`. LAB-09 corregido contra Learn (Column security profiles en PPAC, System Administrator siempre ve
+     las columnas protegidas, BPF desde la solución). Preguntas del banco corregidas en M9, M14, M15, M16 y M17.
+     Sin prueba simulada de la Fase 3.
+4. Sin aprobación: Fases 4-5 y Fase 6 recortada (IA 43, 44, 46, 54, 55).
 
 ## Mantenimiento vigente — 2026-10-01
 

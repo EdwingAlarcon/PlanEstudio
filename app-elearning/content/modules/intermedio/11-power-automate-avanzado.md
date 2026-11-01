@@ -51,7 +51,7 @@ Scope "Catch"  ← Run After del Scope Try: failed + timed out (succeeded desmar
 
 **¿Qué vas a aprender?** Cómo extraer una lógica de decisión reutilizable (un "flujo función") para no duplicarla en varios flujos padre.
 
-**¿Por qué existe esto?** Si tres procesos distintos (compras, contratos, viáticos) necesitan la misma regla de "¿quién aprueba según el monto?", escribir esa lógica tres veces significa mantenerla tres veces. Un **Child Flow** (trigger `When a Power Automate flow is run`) la centraliza: recibe parámetros, decide, y responde con `Respond to a Power Automate flow`.
+**¿Por qué existe esto?** Si tres procesos distintos (compras, contratos, viáticos) necesitan la misma regla de "¿quién aprueba según el monto?", escribir esa lógica tres veces significa mantenerla tres veces. Un **Child Flow** (trigger **Manually trigger a flow**) la centraliza: recibe parámetros, decide, y responde con **Respond to a Power App or flow**. El flujo padre lo llama con **Run a Child Flow**, y si el hijo usa conectores que no son built-in ni Dataverse, en su página de detalles edita **Run only users** y elige **Use this connection** para cada conexión: los Child Flows solo admiten conexiones incrustadas ([Learn](https://learn.microsoft.com/power-automate/create-child-flows)).
 
 **Ejemplo pequeño:** un Child Flow que recibe `presupuesto` (Float) y solo necesita UNA condición para decidir entre dos niveles — eso ya lo puedes practicar ahora mismo, sin que te dé la solución completa:
 
@@ -146,7 +146,7 @@ Si tienes tiempo, constrúyelo también en tu tenant real usando la llamada HTTP
 ### ⚠️ Errores Comunes
 | Error | Causa | Solución |
 |-------|-------|----------|
-| Child Flow no aparece en la lista | No está en solución o no tiene el trigger correcto | Agregar a solución y verificar disparador "Child Flow" |
+| Child Flow no aparece en la lista | No está en solución o no tiene el trigger correcto | Agregar a la misma solución y verificar que el disparador sea **Manually trigger a flow** |
 | HTTP 429 Too Many Requests | El flujo llama API sin throttling | Agregar Delay entre iteraciones en Apply to Each |
 | Apply to Each toma horas | Procesamiento secuencial de miles de registros | Activar Concurrency en Apply to Each (máx 50 parallel) |
 | Variables no persisten entre bucles | Se reinician en cada iteración | Usar Compose + Set Variable, no Initialize |

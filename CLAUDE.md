@@ -37,7 +37,7 @@ subiendo el tope del piloto de 15 a 24 en `validate-interactive-practices.ts` y
 amplio, que siguen pendientes de aprobación explícita. Su definición **no se conservó** del plan
 original; la propuesta vigente (2026-10-08) está en `PROPUESTA_FASES_APRENDER_HACIENDO.md`. **Fase 1 hecha**
 (línea base: 3/76 módulos con reto de transferencia; `npm run audit:lbd`; tope de prácticas en
-`MIN/MAX_INTERACTIVE_PRACTICES`, hoy 12-44, que solo sube al aprobar cada fase). **Fase 2 (contenido completo, falta
+`MIN/MAX_INTERACTIVE_PRACTICES`, hoy 12-62, que solo sube al aprobar cada fase). **Fase 2 (contenido completo, falta
 la prueba de cierre):** Módulos 1 a 8 migrados (11/76 = 14,5%; +3 prácticas IP-DV-005, IP-TRB-003, IP-DV-006 en el
 M1, +1 IP-DV-007 en el M2, +2 IP-APP-007, IP-APP-008 en el M3, +3 IP-APP-009, IP-TRB-004, IP-APP-010 en el M4, +1
 IP-PA-007 en el M5, +4 IP-DV-008, IP-DV-009, IP-TRB-005, IP-DV-010 en el M6, +3 IP-APP-011, IP-APP-012, IP-APP-013
@@ -49,7 +49,17 @@ contexto; simulación, no una persona real): el obstáculo principal son pasos d
 subestimados, anteriores a esta migración. Se corrigieron los fallos verificables (retos, `SLA Horas`, Publisher, vista
 del M2, tiempos) y el resto está en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §7. **Fase 2 CERRADA el 2026-11-01 por decisión del usuario**, con una segunda
 prueba simulada (4 agentes, protocolo paso a paso; no es una persona real) y sus hallazgos corregidos contra Learn
-(`PROPUESTA_FASES_APRENDER_HACIENDO.md` §8). El ambiente del curso se crea ahora en English (United States). El resto de Fases 3-5 y el recorte de la Fase 6 (solo Módulos 43,
+(`PROPUESTA_FASES_APRENDER_HACIENDO.md` §8). El ambiente del curso se crea ahora en English (United States). **Fase 3 HECHA el 2026-11-01** (aprobada por el usuario): Módulos 9, 12, 14, 15, 16 y 17 migrados, así que el Nivel
+Intermedio queda entero con el patrón (17/76 módulos con reto de transferencia, 22,4%). +18 prácticas (IP-DV-013 a 018,
+IP-TRB-007 a 012, IP-PA-008/009, IP-APP-014/015 e IP-CS-001/002) y dominio nuevo `copilot-studio` (prefijo `CS`), porque
+ningún dominio describía Copilot Studio. Caso Real de los 6 módulos sin cambios; errores de contenido corregidos contra
+Learn (OpenAPI solo 2.0, RLS solo restringe a Viewers, Lock/Unlock no corre en servidor, triggers de Child Flow y de agent
+flow, Competitor/Opportunity no existen sin apps de D365, entre otros) y las preguntas del banco que chocaban, actualizadas.
+No se hizo prueba simulada de la Fase 3 (su definición no la exige). Ese mismo día se cerraron los pendientes de la Fase 2:
+Labs 04 y 05 clic a clic, columna principal (se lee en **Advanced options** > **Schema name** y los labs remiten al nombre
+anotado), etiquetas confirmadas o neutras, Caso Real del Suplemento 1B, M5 y M6 al día junto con sus preguntas, y
+**LAB-06 de Power BI**, primer lab con `optional: true` en el frontmatter (se lista, pero `getLabsForLevel` lo excluye del
+certificado y de `/progreso`). Las Fases 4-5 y el recorte de la Fase 6 (solo Módulos 43,
 44, 46, 54, 55) siguen sin implementar.
 
 ## Mantenimiento vigente — 2026-10-01
@@ -121,16 +131,17 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 149 archivos **cerrados**; sin trabajo a medias.
 
 **Invariantes que no debes romper:**
-- Conteos vigentes: **76 módulos, 75 labs, 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
-  33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 44 prácticas interactivas
+- Conteos vigentes: **76 módulos, 76 labs (uno opcional, LAB-06), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
+  33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 62 prácticas interactivas
   y 40 páginas de recursos** (prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
-  Doing de Módulos 11, 10 y 13, y a 44 con los Módulos 1 a 8 de la Fase 2 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de
+  Doing de Módulos 11, 10 y 13, a 44 con los Módulos 1 a 8 de la Fase 2 y a 62 con los Módulos 9, 12, 14-17 de la Fase 3 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de
   Módulo 13 y a 40 con "Casos reales por industria" (`Anexos/CASOS_REALES_NEGOCIO.md` portado a la app) para
   cerrar el gap de la ruta Consultor Funcional (status pasó de "Parcial" a "Disponible" el 2026-10-06,
   agregando los Módulos 20/61/62 a `professional-routes.ts` y un reto de Fit-Gap por industria en LAB-62);
   labs subió de 73 a 75 y simulaciones de 2 a 3 con la auditoría integral 2026-10-06 — Lab 114
   monitoreo con Application Insights, Lab 115 disaster recovery RTO/RPO, SIM-002 ceremonia ágil simulada,
-  y extensión de incidente post-launch/presentación en LAB-63 — ver `AUDITORIA_INTEGRAL_PLANESTUDIO_2026.md`).
+  y extensión de incidente post-launch/presentación en LAB-63 — ver `AUDITORIA_INTEGRAL_PLANESTUDIO_2026.md`;
+  y a 76 con el LAB-06 opcional de Power BI el 2026-11-01).
   No mezclar estos conteos entre sí.
 - Los stores persistidos son independientes y **nunca se fusionan**: `plan-estudio-progress` (académico),
   `plan-estudio-onboarding`, `planestudio.practice-progress.v1`, `planestudio.interactive-practice.v1`,

@@ -529,7 +529,7 @@ Stage 4: Cierre
 > - **Dónde se crea:** dentro de tu Solution, para que aparezca en la evidencia: **Solutions** > tu Solution > **New** > **Automation** > **Cloud flow** ([Learn](https://learn.microsoft.com/power-automate/create-flow-solution)). Ponle exactamente el nombre `Flujo Notificar Nueva Solicitud`. Si lo creaste fuera, agrégalo después con **Add existing** > **Automation** > **Cloud flow**.
 > - **Trigger:** si elegiste Canvas, el trigger de Power Apps (V2) del conector **Power Apps** con una entrada de texto `SolicitudID`; si elegiste Model-Driven, el trigger de Dataverse **When a row is added, modified or deleted** (Change type: Added, Table: Solicitudes), igual que en la Práctica 5.1.
 > - **Get a row by ID** (Dataverse), Table name: Solicitudes. En **Row ID** pon el identificador de la solicitud: con el trigger de Power Apps, la entrada `SolicitudID`; con el de Dataverse, el identificador de la fila que trae el trigger.
-> - **Get a row by ID**, Table name: Contacts. En **Row ID** necesitas el identificador (GUID) del contacto que es Solicitante, no su nombre: abre el contenido dinámico, busca "Solicitante" dentro de los resultados del paso anterior y elige el que corresponde al **valor o ID** del lookup (suele verse como *Solicitante (Value)*), no el que trae el nombre ([Learn](https://learn.microsoft.com/power-automate/dataverse/get-row-id)).
+> - **Get a row by ID**, Table name: Contacts. En **Row ID** necesitas el identificador (GUID) del contacto que es Solicitante, no su nombre: abre el contenido dinámico, busca "Solicitante" dentro de los resultados del paso anterior y elige el que corresponde al **valor o ID** del lookup, no el que trae el nombre (si eliges el del nombre, la acción falla con un error de ID no válido) ([Learn](https://learn.microsoft.com/power-automate/dataverse/get-row-id)).
 > - **Send an email (V2)**: en **To** pon el **Email** del contacto (del paso anterior) y en el cuerpo el título, el tipo y la prioridad. Para que el correo te llegue a ti, ese contacto debe tener un correo real que puedas abrir: el tuyo de trabajo (ver la "Carga de datos"). Para mostrar Tipo y Prioridad, usa su etiqueta (la versión del campo con el texto, no el número).
 > - Sin condición ni aprobación. El Estado queda en "Nueva".
 >
@@ -622,7 +622,7 @@ Actions:
 
 > **Power BI en versión mínima** (archivo nuevo, no el `.pbix` del Módulo 6):
 > 1. Abre Power BI Desktop, crea un reporte en blanco y guárdalo enseguida como `reporte-solicitudes-sse.pbix` en tu carpeta Documentos. Vuelve a guardar (**File > Save**) al terminar cada paso.
-> 2. Conecta a Dataverse como en el Módulo 6 (Práctica 6.1, Paso 2) y en el **Navigator** marca tu tabla de solicitudes (nombre interno parecido a `sse_solicitud`) y, si quieres el filtro por categoría, `sse_categoriasolicitud`. Selecciona **Transform Data**.
+> 2. Conecta a Dataverse como en el Módulo 6 (Práctica 6.1, Paso 2) y en el **Navigator** marca tu tabla de solicitudes (por su nombre interno; por ejemplo `sse_solicitud`, según cómo la hayas creado) y, si quieres el filtro por categoría, `sse_categoriasolicitud`. Selecciona **Transform Data**.
 > 3. En Power Query renombra la consulta de solicitudes como `Solicitudes` (y la de categorías como `Categorías`). Con **Home > Choose columns** deja solo las columnas que vas a usar y renómbralas (doble clic en el encabezado):
 >
 >     | Columna original (aprox.) | Nombre nuevo |

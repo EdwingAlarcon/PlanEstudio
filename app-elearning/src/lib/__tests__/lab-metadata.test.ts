@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getAllLabs, getAllLevels, getLabBySlug } from "../content";
+import { getAllLabs, getAllLevels, getLabBySlug, getLabsForLevel } from "../content";
 import { getLabDomains, getLabPresentationMeta, getLabReadiness } from "../lab-metadata";
 
 const RETIRED_CERTIFICATIONS = new Set(["PL-600", "MB-210", "MB-220", "MB-240", "MB-260", "MB-280", "MB-300"]);
@@ -129,9 +129,9 @@ describe("lab domain classification", () => {
 });
 
 describe("lab readiness (Sprint 1 — auditoría tenant-real)", () => {
-  it("gives every one of the 75 labs a non-empty execution status and evidence", () => {
+  it("gives every one of the 76 labs a non-empty execution status and evidence", () => {
     const labs = getAllLabs();
-    expect(labs.length).toBe(75);
+    expect(labs.length).toBe(76);
 
     for (const lab of labs) {
       const readiness = getLabReadiness(lab);
@@ -171,9 +171,30 @@ describe("lab readiness (Sprint 1 — auditoría tenant-real)", () => {
     expect(getLabReadiness(lab!).executionStatus).toBe("tenant-opcional");
   });
 
+  it("registers the optional Power BI lab (LAB-006) as a basic Power Platform lab with its route label", () => {
+    const lab = getLabBySlug("lab-06-power-bi-reporte-solicitudes");
+    expect(lab).toBeDefined();
+    expect(lab?.displayId).toBe("LAB-006");
+    expect(lab?.level).toBe("N1");
+    expect(getLabDomains(lab!)).toEqual(["Power Platform"]);
+    expect(getLabPresentationMeta(lab!).routes).toEqual(["Ruta Fundamentos Power Platform"]);
+    expect(getLabReadiness(lab!).executionStatus).toBe("tenant-real");
+  });
+
   it("defaults standard SIT labs to tenant-real", () => {
     const lab = getLabBySlug("lab-02-dataverse-modelo-datos");
     expect(lab).toBeDefined();
     expect(getLabReadiness(lab!).executionStatus).toBe("tenant-real");
+  });
+});
+
+describe("labs opcionales", () => {
+  it("lista LAB-006 pero no lo exige para el certificado ni la preparación del Nivel Básico", () => {
+    const lab = getLabBySlug("lab-06-power-bi-reporte-solicitudes");
+    expect(lab?.optional).toBe(true);
+    const basicLabSlugs = getLabsForLevel("basico").map((item) => item.slug);
+    expect(basicLabSlugs).not.toContain("lab-06-power-bi-reporte-solicitudes");
+    expect(basicLabSlugs).toContain("lab-02-dataverse-modelo-datos");
+    expect(getAllLabs().filter((item) => item.optional).map((item) => item.slug)).toEqual(["lab-06-power-bi-reporte-solicitudes"]);
   });
 });

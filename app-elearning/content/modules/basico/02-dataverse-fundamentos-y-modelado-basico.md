@@ -57,7 +57,7 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 
 > **Cómo está organizado este módulo:** alternas una idea corta, una práctica de pocos minutos y un dato real de tu propio ambiente. Los pasos de siempre (Práctica 2.1 a 2.5) siguen ahí, ahora dentro de tres bloques. Cierras con un reto en el que ya no te digo las tablas ni las columnas. Las microprácticas no necesitan tenant; las prácticas reales sí (tu ambiente Developer del Módulo 1).
 
-> **Antes de empezar:** Power Apps cambia de vez en cuando el nombre exacto de algunos botones (por ejemplo, **New column** a veces aparece como **Add column**). Si un botón no tiene exactamente el nombre que te digo, busca el más parecido en la misma zona de la pantalla. Siempre trabajas en [make.powerapps.com](https://make.powerapps.com), con tu ambiente Developer seleccionado arriba a la derecha.
+> **Antes de empezar:** los nombres de botones y menús de este módulo son los de la interfaz en inglés y, donde Microsoft Learn los documenta, llevan su enlace. Power Apps cambia de vez en cuando su interfaz: si un botón no aparece con ese nombre, búscalo en la misma zona de la pantalla (la barra de comandos de arriba o el panel de la derecha) por lo que hace, no por su texto exacto. Siempre trabajas en [make.powerapps.com](https://make.powerapps.com), con tu ambiente Developer seleccionado arriba a la derecha.
 
 ## 🧩 Microlección 1 — Tablas y columnas: elegir el tipo correcto
 
@@ -89,7 +89,7 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 6. Selecciona **Save**. Vuelves al panel de la solución.
 7. En la lista **Publisher**, comprueba que está elegido **SIT** (si no, elígelo).
 8. Marca **Set as your preferred solution**. Así, lo que crees aunque no estés dentro de la solución también se guarda en ella.
-9. Deja **Version** como viene y selecciona **Create** (en algunas versiones el botón se llama **Save**).
+9. Deja **Version** como viene y selecciona el botón de abajo del panel, **Create** o **Save**: Learn usa los dos nombres para este mismo panel ([Learn: crear una solución](https://learn.microsoft.com/power-apps/maker/data-platform/create-solution)).
 10. Abre la solución **Solicitudes TI** haciendo clic en su nombre. A partir de aquí, **trabaja siempre dentro de ella**.
 
 **Paso 1 — Crear la tabla "Solicitud TI"**
@@ -104,6 +104,7 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
     - Mira **Schema name**: debe empezar por `sit_`. Si ves otro prefijo (por ejemplo, uno raro como `cr8a3_`), no estás en tu solución: cierra sin guardar y repite el Paso 0.
     - En **Record ownership** deja **User or team**.
 6. Selecciona **Save**. Se abre la página de la tabla (su "hub"), con las zonas **Columns**, **Relationships**, **Views**, **Business rules**, etc.
+7. **Anota el nombre interno de la columna principal `Título de Solicitud`.** Ese nombre no lo eliges tú: la pestaña **Primary column** solo deja cambiar el nombre visible y la descripción, y Dataverse genera el nombre interno al guardar la tabla. Para verlo: en el hub, zona **Columns**, selecciona la columna **Título de Solicitud**; en su panel de propiedades despliega **Advanced options** y mira **Schema name** (se ve, pero ya no se puede cambiar). Anótalo **en minúsculas**: esa es su forma de *logical name*, la que usan las expresiones de Power Automate y el conector de Power BI ([Learn: columnas](https://learn.microsoft.com/power-apps/maker/data-platform/create-edit-field-portal), [Learn: SchemaName y LogicalName](https://learn.microsoft.com/power-apps/developer/data-platform/entity-attribute-metadata)). Los Módulos 5 y 6 lo usan con un **ejemplo**, `sit_titulodesolicitud`; donde lo veas, escribe el tuyo. En Power Fx y en los diseñadores no lo necesitas: ahí eliges la columna por su nombre visible.
 
 **Paso 2 — Agregar las columnas.** Vas a crear 9 columnas: 7 de forma "normal" y 2 Lookup (las Lookup van en el Paso 3).
 
@@ -122,7 +123,7 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 *Para una columna simple (Descripción, Fecha Solicitud, Fecha Resolución, SLA Horas):*
 
 1. En el hub de la tabla, selecciona la zona **Columns**.
-2. En la barra de comandos selecciona **New column** (en algunas versiones: **Add column**). Se abre el panel de propiedades de la columna.
+2. En la barra de comandos selecciona **New column** ([Learn](https://learn.microsoft.com/power-apps/maker/data-platform/create-edit-field-portal)). Se abre el panel **Column properties**.
 3. En **Display name** escribe el nombre de la tabla de arriba (por ejemplo, `Descripción`).
 4. En **Data type** elige el tipo de la tabla. El menú agrupa los tipos por familias; si no ves el tipo a la primera, despliega la familia correspondiente (texto, número, fecha).
 5. Deja **Required** en **Optional**.
@@ -165,6 +166,7 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 | Campo | Tu valor |
 |---|---|
 | Nombre exacto de la tabla que creaste y su Primary column | ___ |
+| Nombre interno (Schema name, en minúsculas) de la columna principal Título de Solicitud | ___ |
 | Las 9 columnas con su tipo (por ejemplo, Prioridad = Choice) | ___ |
 | Las dos columnas que marcaste como Required y los dos valores por defecto que configuraste | ___ |
 
@@ -221,12 +223,12 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 
 **Cómo funciona el diseñador (léelo una vez):** una regla es un diagrama. Empieza siempre con una **Condition** (condición, el rombo). A su derecha hay dos salidas: la del **✓** (se cumple) y la del **✕** (no se cumple). Las piezas se arrastran desde la pestaña **Components** (a la derecha) hasta un signo **+** del diagrama, y cada pieza se configura en la pestaña **Properties**, terminando siempre con **Apply**.
 
-**Los operadores se eligen de una lista en inglés.** Los que usarás: **Equals** ("es igual a"), **Does not equal** ("no es igual a"), **Contains data** ("tiene un valor"), **Does not contain data** ("está vacío") y, en las vistas, **Equals current user** ("es el usuario que está usando la app"). Si en tu lista el nombre es un poco distinto, elige el que signifique lo mismo.
+**Los operadores se eligen de una lista en inglés.** Los que usarás: **Equals** ("es igual a"), **Does not equal** ("no es igual a"), **Contains data** ("tiene un valor"), **Does not contain data** ("está vacío") y, en las vistas, **Equals current user** ("es el usuario que está usando la app"). Learn solo nombra por escrito **Contains data** ([Learn: filtros de vistas](https://learn.microsoft.com/power-apps/maker/model-driven-apps/create-edit-view-filters)); los demás son los textos de la lista en inglés, pero Learn no los enumera. Por eso, elígelos por su significado: si uno no aparece escrito igual, toma el que diga lo mismo.
 
 *Regla 1: Auto-asignación de SLA según prioridad*
 
 1. Abre tu solución > **Tables** > **Solicitud TI** > zona **Business rules**.
-2. Selecciona **Add business rule** (en algunas versiones: **New business rule**). Se abre el diseñador con una condición ya creada.
+2. Selecciona **Add business rule** ([Learn](https://learn.microsoft.com/power-apps/maker/data-platform/data-platform-create-business-rule)). Se abre el diseñador con una condición ya creada.
 3. Arriba, cambia el nombre (por defecto *New business rule*) a `SLA según prioridad`. En **Description** escribe para qué sirve (por ejemplo, "Pone las horas de SLA según la prioridad").
 4. **Scope**: elige **Entity**. Así la regla se aplica en los formularios y también en el servidor, es decir, también cuando cargues los registros de prueba directamente en la tabla (Práctica 2.5), donde todavía no hay formulario de app.
 5. Selecciona la condición del diagrama. En **Properties**:

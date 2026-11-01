@@ -7,7 +7,7 @@ product: ["Dataverse SDK", "C#", "Plugin Registration Tool"]
 certifications: ["PL-400"]
 role: ["Developer"]
 prerequisites:
-  - "Lab 02 completado — tabla sit_Solicitud con columnas sit_prioridad, sit_estado, sit_costoestimado"
+  - "Lab 02 y Lab 09 completados — tabla Solicitud TI (sit_solicitud) con sit_prioridad, sit_estado y sit_costoestimado (Lab 09)"
   - "Visual Studio 2022 instalado (Community o superior)"
   - "NuGet package manager disponible"
   - "Plugin Registration Tool descargado (pac tool prt)"
@@ -71,7 +71,7 @@ Al finalizar este laboratorio podrás desarrollar, registrar y probar dos plugin
 - [ ] Visual Studio 2022 (Community, Professional o Enterprise)
 - [ ] .NET Framework 4.6.2 Developer Pack instalado
 - [ ] Plugin Registration Tool: ejecutar `pac tool install --tool prt` en una terminal
-- [ ] Tabla `sit_Solicitud` del Lab 02 con las columnas `sit_prioridad`, `sit_estado`, `sit_costoestimado`
+- [ ] Tabla Solicitud TI (`sit_solicitud`) del Lab 02 con las columnas `sit_prioridad` y `sit_estado`, y `sit_costoestimado` del Lab 09
 
 ### Tabla adicional que debes crear antes de empezar
 

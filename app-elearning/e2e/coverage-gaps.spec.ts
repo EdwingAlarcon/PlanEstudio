@@ -99,6 +99,8 @@ test.describe("Certificados — lenguaje de examen por nivel", () => {
         "lab-03-canvas-primera-app",
         "lab-04-model-driven-app",
         "lab-05-automate-aprobacion",
+        // LAB-006 (Power BI) es opcional en el contenido, pero getLabsForLevel("basico") lo cuenta.
+        "lab-06-power-bi-reporte-solicitudes",
         "lab-61-capstone-maker-sistema-solicitudes",
       ];
       window.localStorage.setItem("plan-estudio-progress", JSON.stringify({

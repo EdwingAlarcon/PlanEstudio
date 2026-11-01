@@ -150,7 +150,7 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
     1. Selecciona **Insert**, escribe `Vertical gallery` en el cuadro de búsqueda y selecciónala.
     2. Arrástrala debajo del cuadro de búsqueda y agrándala desde las esquinas para que ocupe el resto de la pantalla.
     3. Cámbiale el nombre a `galSolicitudes`.
-    4. En el panel de propiedades de la derecha, abre **Data source** (en algunas versiones aparece como **Items**) y elige tu tabla **Solicitudes TI**. La lista se llena con tus registros.
+    4. En la pestaña **Properties** del panel de la derecha, abre la lista **Items** y elige tu tabla **Solicitudes TI** ([Learn: agregar una galería](https://learn.microsoft.com/power-apps/maker/canvas-apps/add-gallery)). Si tu panel muestra esa lista con el nombre **Data source**, es la misma. La lista se llena con tus registros.
     5. En la lista **Layout** del mismo panel, elige un diseño que tenga **tres textos por fila** (título, subtítulo y cuerpo). Lo necesitas para el punto 3. Si no encuentras uno así, en el punto 3 te digo cómo agregar la etiqueta que falte.
 
 3. **Qué muestra cada fila.** La primera fila de la Gallery es la *plantilla*: lo que cambies en ella se repite en todas las filas.
