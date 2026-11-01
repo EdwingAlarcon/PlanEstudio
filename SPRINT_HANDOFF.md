@@ -19,7 +19,10 @@
 ### Pendiente (en orden)
 
 1. **Fase "pasos clic a clic"**: setup del M1 (**hecho 2026-11-01**) → Práctica 5.2 (**hecha 2026-11-01**: expresiones
-   reales, etiquetas de Choice con `FormattedValue`, Initialize variable en el nivel principal, prefijo `sit_`) → M4 → M8.
+   reales, etiquetas de Choice con `FormattedValue`, Initialize variable en el nivel principal, prefijo `sit_`) → M4
+   (**hecho 2026-11-01**: usa la solución del M2 en vez de crear otra; Add page; Enable Areas; quitada la subárea
+   "Categorías", que era un Choice; Business Rule sobre columnas, porque no puede ocultar pestañas (corregido también en
+   LAB-04); Quick Create con la opción de tabla; gráficos creados antes del dashboard) → **M8 (siguiente)**.
    - Ruta antigua del Developer Program **corregida el 2026-11-01** en la app: `ENTORNOS_Y_TRIALS.md` (fuente única,
      sección nueva), `GUIA_HERRAMIENTAS_WORKSTATION.md`, `RUTA_CERO_ABSOLUTA.md`, `TIPOS_DE_PRACTICA.md`,
      `CHECKLIST_PROGRESO.md`, LAB-02, M11, `workstation.ts`, `professional-routes.ts`. **Sin tocar** (MkDocs congelado):

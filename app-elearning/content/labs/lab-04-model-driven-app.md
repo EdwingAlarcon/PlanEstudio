@@ -178,7 +178,7 @@ El formulario por defecto tiene una sola sección. Vas a reorganizarlo en 3 pest
    - Sección `Fechas`: `sit_fechasolicitud`, `sit_fecharesolucion`
    - Sección `Detalle de Solución`: `sit_descripcion_solucion`, `sit_costoestimado`
 
-   > Si la pestaña Resolución es innecesaria cuando el estado es "Nueva" o "En Proceso", puedes agregar una Business Rule desde el formulario: ocultar la pestaña si Estado = Nueva o En Proceso.
+   > Una Business Rule no puede ocultar una pestaña ni una sección, solo columnas. Si quieres que la resolución no se vea cuando el estado es "Nueva" o "En Proceso", usa una Business Rule (Scope **All Forms**) con **Set Visibility** sobre sus columnas, como en el Módulo 4. Ocultar la pestaña `tab_resolucion` completa exige JavaScript (Módulo 13).
 
 4. Agrega **Pestaña 3 — Timeline**:
    - Nueva pestaña: `Timeline`

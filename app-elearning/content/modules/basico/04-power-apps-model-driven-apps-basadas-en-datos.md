@@ -5,9 +5,9 @@ level: "basico"
 certification: "PL-900"
 estimatedMinutes: 20
 slug: "power-apps-model-driven-apps-basadas-en-datos"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
-*Duración: 1-2 semanas · Lectura: 8-10 min · Con práctica: unos 95 min con el ambiente listo; la primera vez, cuenta entre el doble y el triple (núcleo obligatorio); seguridad y BPF pueden completarse en una segunda sesión*
+*Duración: 1-2 semanas · Lectura: 8-10 min · Con práctica: unos 120 min con el ambiente listo; la primera vez, cuenta entre el doble y el triple (núcleo obligatorio); seguridad y BPF pueden completarse en una segunda sesión*
 
 ### 🎯 Objetivo
 Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
@@ -47,39 +47,49 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 
 **Ahora haz algo — micropráctica (6 min):** **[Elegir Model-Driven o Canvas según el caso](/practica/ip-app-009-model-driven-o-canvas)**. Te da dos necesidades distintas de una empresa y te pide decidir qué tipo de app encaja con cada una.
 
-**Práctica real en tu entorno (25 min):** haz los Pasos 1 y 2 de abajo.
+**Práctica real en tu entorno (30 min):** haz los Pasos 1 y 2 de abajo.
 
 ##### Práctica 4.1: Crear Primera Model-Driven App
 
 > **Nota de versión:** Las capturas y pasos a continuación describen el flujo general; la apariencia exacta puede variar según si tu ambiente usa el **Modern App Designer** (predeterminado desde 2023) o el diseñador clásico. La funcionalidad es equivalente en ambos.
 
-**Paso 1: Crear app desde solución**
+**Paso 1: Crear la app dentro de tu solución del Módulo 2**
 
-1. Power Apps > Solutions > New solution
-    - Name: `Sistema Solicitudes TI`
-    - Publisher: Crear nuevo con prefix `sit`
+> **No crees otra solución ni otro Publisher.** Usa la solución con prefijo `sit` que creaste en el Paso 0 del Módulo 2: ahí ya están tu tabla Solicitud TI y sus columnas.
 
-2. Dentro de solución > New > App > Model-driven app
-3. Name: `Gestión Solicitudes TI`
+1. En [make.powerapps.com](https://make.powerapps.com), comprueba arriba a la derecha que estás en tu ambiente.
+2. Menú lateral → **Solutions** → abre tu solución del Módulo 2.
+3. En la barra superior: **+ New** → **App** → **Model-driven app**.
+4. **Name:** `Gestión Solicitudes TI` → **Create**. Se abre el diseñador de apps (Modern App Designer).
+5. Agrega las tablas como páginas:
+   - En la barra superior haz clic en **+ Add page** → **Dataverse table** → **Next**.
+   - Marca **Solicitud TI** y **Contact** → **Add**.
+6. Haz clic en **Save**.
 
-**Paso 2: Configurar Site Map**
+**Paso 2: Organizar la navegación (el antiguo "site map")**
 
-1. Click en "Edit site map" (diseñador clásico) o "Navigation" (Modern App Designer)
-2. Estructura:
+En el diseñador nuevo, las subáreas se llaman **páginas** y se ordenan en grupos y áreas.
+
+1. **Activa las áreas** (vienen apagadas): en la barra superior, **Settings** → en el panel izquierdo, **Navigation** → activa **Enable Areas** → cierra la ventana. Cuando la app tenga varias áreas, ya no se puede desactivar.
+2. En el panel izquierdo, haz clic en **Pages**. Arriba del árbol verás el selector de área. Cámbiale el título al área que ya existe por `Solicitudes` (en el panel de propiedades, a la derecha).
+3. Crea los grupos: haz clic en **...** junto a **Navigation** → **New group** → título `Operación`. Repite para `Configuración`.
+4. Arrastra la página **Solicitud TI** al grupo `Operación` y **Contact** a `Configuración`.
+5. Crea la segunda área: en el selector de área → **New area** → título `Reportes`, con un grupo `Análisis`. Lo dejas vacío por ahora; en el Paso 5 le pondrás el dashboard.
+6. Haz clic en **Save** y luego en **Publish**.
+
+Así queda:
    ```
    Área: Solicitudes
-      Group: Operación
-         Subarea: Solicitudes TI (tabla)
-         Subarea: Categorías
-      Group: Configuración
-         Subarea: Contactos
-   
+      Grupo: Operación
+         Página: Solicitudes TI (tabla)
+      Grupo: Configuración
+         Página: Contactos
    Área: Reportes
-      Group: Análisis
-         Subarea: Dashboard Solicitudes
+      Grupo: Análisis
+         Página: Dashboard Solicitudes   (se añade en el Paso 5)
    ```
 
-3. Guardar y publicar
+> "Categoría" no lleva página propia: es una columna de tipo Choice dentro de Solicitud TI, no una tabla.
 
 **Evidencia a reportar (el dato exacto que viste, no un "sí/no"):**
 
@@ -99,60 +109,83 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 
 **Ejemplo pequeño:** la vista "Mis Asignaciones" filtra por Asignado a = usuario actual y Estado distinto de Cerrada, muestra pocas columnas y ordena por fecha.
 
-**Práctica real en tu entorno (35 min):** esta microlección no tiene micropráctica propia; la verificación es abrir tu vista y comprobar que muestra los registros que esperas.
+**Práctica real en tu entorno (50 min):** esta microlección no tiene micropráctica propia; la verificación es abrir tu vista y comprobar que muestra los registros que esperas.
 
-**Paso 3: Personalizar Forms**
+**Paso 3: Personalizar los formularios**
 
-1. **Main Form de Solicitud TI**
-    - Abrir tabla > Forms > Information (Main)
-    - Estructura en tabs:
+**3.1 Crear la columna que falta.** El formulario usa `Notas de Resolución`, que el Módulo 2 no creó. En tu solución → **Tables** → **Solicitud TI** → **Columns** → **+ New column** → **Display name:** `Notas de Resolución`, **Data type:** **Multiple lines of text** → **Save**.
+
+**3.2 Formulario Main.**
+
+1. En la tabla **Solicitud TI** → **Forms** → abre el formulario **Information** (tipo *Main*).
+2. Organízalo así. Para **agregar una pestaña**: panel izquierdo **Components** → **Layout** → **1-column tab**, y cámbiale el nombre en el panel de propiedades (derecha). Para **agregar una columna**: panel izquierdo **Table columns** → arrástrala a la sección.
      ```
-     Tab: General
-        Section: Información Básica
-           - Título
+     Pestaña: General
+        Sección: Información Básica
+           - Título de Solicitud
            - Categoría
            - Prioridad
            - Estado
-        Section: Detalles
+        Sección: Detalles
            - Descripción
            - Solicitante
            - Asignado a
-     
-     Tab: Resolución
-        Section: Solución
+
+     Pestaña: Resolución
+        Sección: Solución
            - Fecha Resolución
-           - Notas de Resolución (multiline)
-     
-     Tab: Timeline
-        - Timeline control (automático)
+           - Notas de Resolución
+
+     Pestaña: Timeline
+        - Control Timeline (Components → Timeline). Muestra notas y adjuntos; funciona porque activaste "Enable attachments" al crear la tabla.
      ```
+3. Haz clic en **Save and publish** (arriba a la derecha).
 
-2. **Configurar Business Rules en el form**
-    - Mostrar Tab "Resolución" solo si Estado = Resuelta o Cerrada
-    - Hacer Required "Fecha Resolución" cuando Estado = Resuelta
+**3.3 Business Rule: mostrar la resolución solo cuando corresponde.**
 
-3. **Quick Create Form**
-    - Crear nuevo form tipo Quick Create
-    - Solo campos esenciales: Título, Categoría, Prioridad, Descripción
-    - Esto permite crear registros rápidos desde cualquier vista
+> **Una Business Rule no puede ocultar una pestaña ni una sección, solo columnas.** Por eso esta regla oculta las dos columnas de resolución, no la pestaña. Ocultar la pestaña completa exige JavaScript; lo harás en el Módulo 13.
 
-**Paso 4: Personalizar Views**
+1. En la tabla **Solicitud TI** → **Business rules** → **+ New business rule**. Se abre el diseñador en otra pestaña del navegador.
+2. Arriba a la derecha, comprueba que **Scope** diga **All Forms** (con *Entity* las acciones de mostrar y ocultar no se aplican).
+3. Haz clic en la caja **Condition** y, en el panel derecho:
+   - **Field:** Estado · **Operator:** Equals · **Type:** Value · **Value:** Resuelta.
+   - Haz clic en **+ New** para añadir otra regla, elige **OR** en **Rule Logic** y configura: Estado · Equals · Value · Cerrada.
+   - Haz clic en **Apply**.
+4. Desde la pestaña **Components** (derecha), arrastra **Set Visibility** al **+** junto al ✓ (condición verdadera): **Field:** Fecha Resolución · **Status:** Show field → **Apply**. Repite con Notas de Resolución.
+5. Arrastra otra **Set Visibility** al **+** junto a la ✕ (condición falsa) para cada una de las dos columnas, con **Status:** Hide field. La regla no se invierte sola: si no pones la rama ✕, las columnas se quedan visibles.
+6. Arriba, en **Name**, escribe `Mostrar resolución según estado` → **Save** → **Activate** → confirma.
+7. *(Opcional, misma técnica)* Otra regla con la condición Estado = Resuelta y la acción **Set Business Required** sobre Fecha Resolución (✓ Business Required, ✕ Not Business Required).
 
-1. **Vista "Solicitudes Activas"** (personal)
-    - Filtro: Estado ≠ Cerrada
-    - Columnas: Título, Solicitante, Prioridad, Estado, Fecha Solicitud
-    - Orden: Prioridad (mayor a menor), Fecha Solicitud (más reciente)
+**3.4 Formulario Quick Create.**
+
+1. Activa la opción en la tabla: **Tables** → **Solicitud TI** → **Properties** → **Advanced options** → marca **Leverage quick create form if available** (en algunos ambientes aparece como *Enable quick create forms*) → **Save**.
+2. En **Forms** → **+ New form** → **Quick create form**.
+3. Arrastra solo cuatro columnas: Título de Solicitud, Categoría, Prioridad y Descripción → **Save and publish**.
+4. Para probarlo, en la app haz clic en **+** (o **New**) de la barra superior y elige Solicitud TI: se abre un panel lateral corto en vez del formulario completo.
+
+**Paso 4: Crear las vistas y los gráficos**
+
+**Para crear una vista:** **Tables** → **Solicitud TI** → **Views** → **+ New view** → escribe el nombre → **Create**. En el diseñador:
+- **Columnas:** panel izquierdo **Table columns** → haz clic en cada columna para añadirla.
+- **Filtro:** panel derecho → **Edit filters** → **+ Add** → **Add row** → elige columna, operador y valor → **OK**.
+- **Orden:** haz clic en el encabezado de la columna → **Sort A to Z** o **Sort Z to A**. Para un segundo orden, repite en otra columna.
+- Termina con **Save and publish**.
+
+1. **Vista "Solicitudes Activas"**
+    - Filtro: Estado · **Does not equal** · Cerrada
+    - Columnas: Título de Solicitud, Solicitante, Prioridad, Estado, Fecha Solicitud
+    - Orden: Prioridad **Z to A** (Crítica primero, si creaste las opciones en el orden Baja → Crítica), luego Fecha Solicitud **Z to A** (más reciente primero)
 
 2. **Vista "Mis Asignaciones"**
-    - Filtro: Asignado a = Current User AND Estado ≠ Cerrada
-    - Columnas: Título, Categoría, Prioridad, Fecha Solicitud
-    - Orden: Fecha Solicitud (más antiguo primero)
+    - Filtro: Asignado a · **Equals current user**, **y además** Estado · Does not equal · Cerrada (dos filas en el mismo grupo, con **And**)
+    - Columnas: Título de Solicitud, Categoría, Prioridad, Fecha Solicitud
+    - Orden: Fecha Solicitud **A to Z** (más antigua primero)
 
-3. **Vista Chart**: Solicitudes por Categoría
-    - Insertar chart en vista
-    - Tipo: Bar chart
-    - Eje Y: Count of records
-    - Eje X: Categoría
+3. **Dos gráficos** (los usarás en el dashboard del Paso 5). En **Tables** → **Solicitud TI** → **Charts** → **+ New chart** se abre el diseñador de gráficos en otra pestaña:
+    - **Gráfico "Solicitudes por Estado":** tipo **Pie** (icono en la barra superior). **Legend Entries (Series):** Título de Solicitud con **Count:All**. **Horizontal (Category) Axis Labels:** Estado. Nombre arriba a la izquierda → **Save & Close**.
+    - **Gráfico "Solicitudes por Prioridad":** igual, pero tipo **Column** y eje horizontal Prioridad.
+
+    > Un gráfico que "cuenta" siempre se arma así: en la serie, cualquier columna que siempre tenga valor con **Count:All**; en el eje horizontal, la columna por la que agrupas.
 
 **Evidencia a reportar:**
 
@@ -172,18 +205,20 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 
 **Ejemplo pequeño:** cambias un formulario, no publicas las personalizaciones, y la app sigue mostrando la versión anterior. O publicas bien, pero tu compañero no tiene rol y no ve la app.
 
-**Lo mínimo sobre roles y publicación:** un rol de seguridad es el conjunto de permisos que dice qué tablas puede ver y modificar una persona; se asigna en Settings > Security > Users > Manage Roles (el detalle está en la Práctica 4.3, que es Profundización). Para que tus cambios se vean, abre la solución, elige Publish all customizations y después abre la app con Play.
+**Lo mínimo sobre roles y publicación:** un rol de seguridad es el conjunto de permisos que dice qué tablas puede ver y modificar una persona. Se asigna en el [Power Platform Admin Center](https://admin.powerplatform.microsoft.com) → **Manage** → **Environments** → tu ambiente → **Settings** → **Users + permissions** → **Users** → elige al usuario → **Manage security roles**. Además, la app se comparte desde la lista de apps con **Share** (el detalle está en la Práctica 4.3, que es Profundización). Para que tus cambios se vean, en tu solución haz clic en **Publish all customizations** y después abre la app con **Play**.
 
-**Práctica real en tu entorno (15 min):** haz el Paso 5 de abajo.
+**Práctica real en tu entorno (20 min):** haz el Paso 5 de abajo.
 
-**Paso 5: Crear Dashboard**
+**Paso 5: Crear el dashboard y añadirlo a la app**
 
-1. New > Dashboard > 2-Column Regular Dashboard
-2. Nombre: `Dashboard Solicitudes TI`
-3. Componentes:
-    - **Panel superior izquierda**: Chart "Solicitudes por Estado" (Donut)
-    - **Panel superior derecha**: Chart "Solicitudes por Prioridad" (Column)
-    - **Panel inferior**: List de "Solicitudes Pendientes" (View)
+1. En tu solución: **+ New** → **Dashboard** → **Classic dashboard** → elige el diseño **2-Column Regular Dashboard** → **Create**. Se abre el editor en otra pestaña.
+2. **Name:** `Dashboard Solicitudes TI`.
+3. Haz clic en el panel superior izquierdo → en la barra, **Chart** → **Record Type:** Solicitud TI · **View:** Solicitudes Activas · **Chart:** Solicitudes por Estado → **Add**.
+4. Panel superior derecho → **Chart** → igual, con el gráfico **Solicitudes por Prioridad** → **Add**.
+5. Panel inferior → **List** → **Record Type:** Solicitud TI · **View:** Solicitudes Activas → **Add**.
+6. **Save** → **Close**.
+7. Vuelve al diseñador de tu app → en el área **Reportes**, grupo **Análisis**: **+ Add page** → **Dashboard** → marca `Dashboard Solicitudes TI` → **Add**.
+8. **Save** → **Publish** → **Play**. Revisa que el dashboard muestre datos (necesitas algunas solicitudes con estados y prioridades distintos).
 
 **Ahora diagnostica — micropráctica (5 min):** **[Diagnosticar: la app está publicada pero mi compañero no la ve](/practica/ip-trb-004-app-no-visible-para-companero)**. Parte de un síntoma exacto —a ti te funciona y a otra persona no— y te pide qué falta y dónde se configura, antes de ver la solución.
 
@@ -325,7 +360,7 @@ Esta vez no te digo los pasos: aplica lo que viste a un pedido nuevo.
 
 - Máximo 3 tabs por form (evitar sobrecarga)
 - Agrupar campos relacionados en sections
-- Ocultar tabs/sections innecesarias según contexto con Business Rules
+- Ocultar columnas innecesarias según contexto con Business Rules (las pestañas y secciones completas solo se ocultan con JavaScript)
 - Usar Quick View Forms para mostrar datos relacionados inline
 
 **Performance**:
