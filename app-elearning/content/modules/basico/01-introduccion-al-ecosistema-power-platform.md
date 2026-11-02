@@ -139,7 +139,7 @@ Los tienes si tu cuenta tiene uno de estos roles: **Global Administrator**, **Po
    - Haz clic en **Save**.
 6. Espera a que tu ambiente aparezca en la lista como **Ready**. Suele tardar unos minutos y a veces más.
 
-> **Desde el 15 de noviembre de 2026:** el ambiente Developer que crees será *administrado* y solo puedes tener uno. Para crear y previsualizar apps y flujos no necesitas licencia premium. Para **ejecutarlos** sí. En tu tenant de prueba, activa la prueba gratuita de Power Apps en https://apps.powerapps.com/trial.
+> **Si lo creas antes del 15 de noviembre de 2026**, nace *no administrado*: actívale Managed Environments o exporta tus soluciones antes del 15 de diciembre. **Desde el 15 de noviembre de 2026:** el ambiente Developer que crees será *administrado* y solo puedes tener uno. Para crear y previsualizar apps y flujos no necesitas licencia premium. Para **ejecutarlos** sí. En tu tenant de prueba, activa la prueba gratuita de Power Apps en https://apps.powerapps.com/trial.
 
 *Opción B, si no tienes permisos de administración (correo de empresa o universidad), solo antes del 15 de noviembre de 2026:*
 

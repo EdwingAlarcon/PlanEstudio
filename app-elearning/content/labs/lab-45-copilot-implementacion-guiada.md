@@ -8,7 +8,7 @@ certifications: ["Buenas Prácticas"]
 role: ["Developer", "Maker"]
 prerequisites:
   - "Lab 05 completado — flujo de aprobación de solicitudes de prioridad crítica en Dataverse"
-  - "Editor con GitHub Copilot o Claude Code instalado"
+  - "Editor con GitHub Copilot, Claude Code o Codex instalado (Claude Code requiere plan de pago; GitHub Copilot Free no)"
   - "Módulo 44 y 45 estudiados: GitHub Copilot en VS Code, Claude Code y Codex"
 files: []
 lastVerified: "2026-09"

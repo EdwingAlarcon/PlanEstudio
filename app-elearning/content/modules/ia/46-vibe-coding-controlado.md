@@ -16,7 +16,7 @@ Distinguir cuándo generar código sin especificación exhaustiva ("vibe coding"
 > **Cómo está organizado este módulo:** cada microlección trae un concepto breve, una micropráctica con feedback inmediato y una práctica con **evidencia** (el dato exacto que observaste, no un sí/no). La Microlección 3 es una actividad de **fallo y corrección**: recibes código generado por IA con errores plausibles, los detectas, los corriges y dejas constancia de qué verificaste y contra qué. Cierras **decidiendo y defendiendo** una regla de equipo y con un **reto de transferencia** sobre otro artefacto.
 >
 > **Antes de empezar, necesitas:**
-> - **Node.js 20 o posterior** (comprueba con `node --version` en una terminal). Desde la versión 20 el ejecutor de pruebas integrado `node:test` es estable ([documentación de Node.js](https://nodejs.org/api/test.html)), así que no instalas nada más.
+> - **Node.js 20 o posterior.** Para comprobarlo, abre una terminal (en VS Code, **Terminal** > **New Terminal**; se abre abajo, en la carpeta que tengas abierta) y escribe `node --version`. Si responde que el comando no existe, instala la versión **LTS** desde [nodejs.org](https://nodejs.org), cierra y vuelve a abrir VS Code, y repite la comprobación (cuenta unos 10 minutos). Desde la versión 20 el ejecutor de pruebas integrado `node:test` es estable ([documentación de Node.js](https://nodejs.org/api/test.html)), así que no instalas nada más.
 > - Un editor y, si lo tienes, un asistente de IA (los de los Módulos 44 y 45 sirven). **Si no tienes ninguno**, no pasa nada: la Microlección 3 te da la salida de la IA ya escrita, y en las Microlecciones 1 y 2 puedes escribir tú el script.
 > - Este módulo es transversal: no necesitas haber hecho ningún nivel de certificación ni tener un tenant de Power Platform.
 
@@ -72,7 +72,11 @@ Distinguir cuándo generar código sin especificación exhaustiva ("vibe coding"
 
 **Práctica real (30 min):**
 
-1. Si tu script imprime directamente en consola, pídele a la IA (o hazlo tú) que separe el cálculo en una función exportada, por ejemplo `export function resumirPorEstado(filas)`, que reciba las filas ya leídas y devuelva un objeto `{ estado: conteo }`. Así se puede probar sin leer archivos.
+1. Separa el cálculo de la lectura del archivo, en **dos archivos** (pídeselo a la IA o hazlo tú):
+   - `resumen.mjs` contiene **solo** la función exportada, por ejemplo `export function resumirPorEstado(filas)`, que recibe las filas ya leídas y devuelve un objeto `{ estado: conteo }`. Nada más: ni `readFileSync` ni `console.log`.
+   - `main.mjs` lee `solicitudes.csv`, importa la función con `import { resumirPorEstado } from "./resumen.mjs";` e imprime el resultado. Desde ahora ejecutas el script con `node main.mjs`, que debe imprimir lo mismo que antes.
+
+   **Por qué dos archivos:** al importar un módulo, Node ejecuta todo su código de primer nivel. Si la lectura del CSV queda en `resumen.mjs`, la prueba la ejecuta también: verás el resumen mezclado con la salida de la prueba y, si lanzas `node --test` desde otra carpeta, la prueba entera falla con `ENOENT` porque no encuentra `solicitudes.csv`.
 2. Crea `resumen.test.mjs` junto al script. Esqueleto con el ejecutor integrado (`node:test`) y las aserciones estrictas (`node:assert/strict`):
    ```js
    import { test } from "node:test";
@@ -88,7 +92,7 @@ Distinguir cuándo generar código sin especificación exhaustiva ("vibe coding"
      assert.deepEqual(resumirPorEstado(filas), { Nueva: 2, Cerrada: 1 });
    });
    ```
-   Ejecuta `node --test` en esa carpeta (busca solo los archivos que terminan en `.test.mjs`, entre otros patrones). **Qué deberías ver:** un resumen con `pass 1` y `fail 0`. **Si ves un error de importación**, revisa que la función esté exportada con ese nombre exacto y que ambos archivos usen la extensión `.mjs`.
+   Ejecuta `node --test` en esa carpeta (busca solo los archivos que terminan en `.test.mjs`, entre otros patrones). **Qué deberías ver:** un resumen con `pass 1` y `fail 0`. **Si ves un error de importación**, revisa que la función esté exportada con ese nombre exacto y que ambos archivos usen la extensión `.mjs`. **Si ves `ENOENT ... solicitudes.csv`**, la lectura del archivo sigue dentro de `resumen.mjs`: muévela a `main.mjs` (paso 1).
 3. **Caso de borde que pasa pruebas superficiales pero falla:** agrega una prueba con una fila con el campo `estado` vacío y otra con espacios en blanco en vez de texto (`"   "`). Es común que vibe coding sin especificación exhaustiva agrupe estos casos incorrectamente (ej. los cuenta como un estado válido llamado "" o los ignora silenciosamente sin avisar). Decide primero qué **debería** pasar (por ejemplo, agruparlos bajo `"Sin estado"`), escríbelo en la prueba y ejecútala.
 4. Si la prueba falla, corrige la función (o pídele a la IA que la corrija **dándole la prueba que falla**) y vuelve a ejecutar `node --test` hasta ver `fail 0`.
 
@@ -157,7 +161,7 @@ export function puedeAprobarPago(usuario, solicitud) {
    **Qué deberías ver:** `pass 3`, `fail 0`. Así es como la regla llegó "probada" a revisión.
 2. **Busca los fallos tú.** Recorre cada punto de la regla de negocio y escribe **una prueba por punto** que la función debería cumplir. Pistas de dónde mirar, sin darte la prueba: un usuario sin ningún rol; una solicitud que trae su propio `rolAprobador`; un monto que llegó como texto desde una hoja de cálculo (`"12,000"`); el solicitante aprobándose a sí mismo. Ejecuta `node --test` y anota cuáles fallan.
 3. **Corrige la función** sin tocar las pruebas. Criterios de aceptación: (1) todas tus pruebas pasan; (2) ante un monto que no es un número finito y positivo, la función devuelve `false` (falla cerrada); (3) los roles se leen solo de `usuario.roles`; (4) no queda ningún `return true` que no compruebe un rol. Si usas la IA para corregir, dale la regla de negocio y las pruebas que fallan, no solo "arréglalo".
-4. **Rompe a propósito para confirmar.** Vuelve a poner temporalmente `return true;` al final de tu función corregida y ejecuta `node --test`: al menos una prueba tiene que fallar. Si ninguna falla, te falta una prueba. Deshaz el cambio.
+4. **Rompe a propósito para confirmar.** En tu función corregida, **reemplaza** la última comprobación de rol (el último `return ...`, el que decide los pagos de hasta 10,000, por ejemplo `return roles.includes("Aprobador") || ...`) por `return true;` y ejecuta `node --test`: al menos una prueba tiene que fallar. Si ninguna falla, te falta una prueba. Deshaz el cambio. **Ojo:** no *añadas* `return true;` después del último `return`: esa línea nunca se ejecuta (código muerto) y ninguna prueba fallaría aunque tus pruebas estén bien.
 
 > **Ojo con dónde vive la regla:** en Power Platform una validación de permisos de este tipo no se confía solo al cliente (una app o un script que el usuario controla): se apoya en los roles de seguridad de Dataverse y en lógica del lado del servidor. La función de este ejercicio sirve para practicar la revisión; la ubicación correcta de la regla se decide en el diseño.
 
@@ -174,7 +178,7 @@ export function puedeAprobarPago(usuario, solicitud) {
 |---|---|
 | Resultado de `node --test` con la salida original de la IA (`pass` / `fail`) | ___ |
 | Resultado con tu versión corregida | ___ |
-| ¿Qué prueba falló cuando volviste a poner `return true`? | ___ |
+| ¿Qué prueba falló cuando reemplazaste el último `return` por `return true`? | ___ |
 
 ---
 
@@ -254,6 +258,6 @@ Un maker de SIT usó vibe coding para generar un flujo completo de aprobación d
 
 ### 📸 Evidencia para guardar
 - Las tablas de evidencia de las tres microlecciones, de la decisión y del reto de transferencia.
-- Los archivos `resumen.mjs`, `resumen.test.mjs`, `aprobaciones.mjs` (tu versión corregida) y `aprobaciones.test.mjs`, más la salida de `node --test` antes y después de corregir.
+- Los archivos `resumen.mjs`, `main.mjs`, `resumen.test.mjs`, `aprobaciones.mjs` (tu versión corregida) y `aprobaciones.test.mjs`, más la salida de `node --test` antes y después de corregir.
 
 > **Para profundizar (opcional, mismo nivel IA):** el Módulo 48 convierte la revisión de la Microlección 3 en una checklist de PR, el Módulo 49 cubre secretos y datos sensibles en prompts, y el Módulo 50 lleva estas pruebas a CI.

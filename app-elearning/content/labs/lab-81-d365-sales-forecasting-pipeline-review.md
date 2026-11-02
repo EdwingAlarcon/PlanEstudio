@@ -65,8 +65,8 @@ rol administrativo del entorno (System Administrator o un rol equivalente de Sal
 |---|---|---|---|
 | No aparece la opción de configurar "Forecasting" en el área de Sales. | Licencia Sales Professional en vez de Enterprise, o el forecast no fue habilitado por un administrador. | Revisar en el Centro de administración de Power Platform qué licencia tiene asignada el usuario y si existe un modelo de forecast creado. | Solicitar licencia Enterprise o pedir a un administrador que habilite/publique el forecast. |
 | El vendedor solo ve sus propias oportunidades, no las de su equipo. | El rol de seguridad asignado (ej. Salesperson) tiene el privilegio de lectura sobre Opportunity limitado a nivel "Usuario". | Revisar el nivel de acceso (Usuario/Unidad de negocio/Padre-hijo/Organización) del privilegio Read en Opportunity para ese rol. | Asignar el rol Sales Manager o ampliar el nivel de acceso del rol correspondiente. |
-| La jerarquía de gerentes no se refleja en el rollup del forecast. | El campo "Manager" del usuario no está completo, o la jerarquía de posiciones no coincide con la estructura de seguridad. | Revisar el campo Manager en el registro de usuario y la configuración de jerarquía de posición. | Completar el campo Manager y regenerar/republicar el modelo de forecast. |
-| Las forecast categories no son configurables o el modelo de forecast no se ve actualizado. | El modelo de forecast quedó en borrador y nunca se publicó. | Verificar en el área de administración de Sales si el forecast aparece en estado "Publicado". | Publicar (o republicar tras un cambio) el modelo de forecast desde la configuración de Sales. |
+| La jerarquía de gerentes no se refleja en el rollup del forecast. | El campo **Manager** del usuario no está completo o no cuelga del **Top of hierarchy**. | Revisar el campo Manager del usuario y la sección **Preview** del paso **General** de la configuración. | Completar el campo Manager y recalcular el forecast. |
+| El forecast no se ve o no se actualiza. | El forecast no se activó, o su último periodo ya venció. | En **App Settings** > **Performance management** > **Forecast configuration**, comprobar que el estado es **Active** y que los periodos están en **Completed**. | Activarlo con **Activate forecast** en el paso **Activate & add quotas**; tras subir cuotas o hacer ajustes, esperar hasta dos horas. |
 
 ## Pasos detallados
 
@@ -76,6 +76,7 @@ Define 5 etapas comerciales con criterios de entrada/salida y campos obligatorio
 en calidad de forecast: qué información debe existir para pasar de Pipeline a Best Case,
 Committed y Closed/Won. No vuelvas a documentar conversión Lead -> Opportunity ni Quote -> Order,
 salvo como referencia al Lab 66.
+Won y Lost no se eligen a mano como forecast category: se asignan al cerrar la oportunidad con **Close as Won** / **Close as Lost**.
 
 ### Paso 2 — Datos de pipeline
 

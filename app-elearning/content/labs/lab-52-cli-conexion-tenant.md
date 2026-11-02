@@ -8,7 +8,7 @@ certifications: ["Buenas Prácticas"]
 role: ["Developer", "Maker", "Solution Architect"]
 prerequisites:
   - "Cuenta con acceso a un entorno Developer o Sandbox (nunca producción)"
-  - "Node.js LTS y Git instalados"
+  - "Visual Studio Code con la extensión Power Platform Tools (o .NET 10 para instalar PAC CLI como herramienta .NET)"
   - "Módulo 52 estudiado: Power Platform CLI y Conexión Segura al Tenant"
 files: []
 lastVerified: "2026-09"
@@ -58,18 +58,17 @@ Instala Power Platform CLI según tu sistema operativo:
 
 ```bash
 dotnet tool install --global Microsoft.PowerApps.CLI.Tool
-# o
-npm install -g @microsoft/powerplatform-cli
+# o, recomendado por Learn: la extensión "Power Platform Tools" de VS Code
 ```
 
 Verifica la instalación:
 
 ```bash
-pac --version
+pac
 pac help
 ```
 
-**Validación esperada:** el comando `pac --version` muestra un número de versión sin errores.
+**Validación esperada:** `pac` (sin argumentos) muestra `Version: ...` en la segunda línea, sin errores. (`pac --version` no es un comando válido.)
 
 ## Ejercicio 2 — Conectar a un entorno de práctica
 
@@ -79,38 +78,38 @@ Crea un perfil de autenticación contra tu entorno Developer o Sandbox (nunca co
 pac auth create --environment "https://orgXXXXXXXX.crm.dynamics.com" --name "sit-practica-dev"
 ```
 
-Confirma la organización activa:
+Confirma la organización activa (`pac env who` es el nombre actual de `pac env who`, que sigue funcionando):
 
 ```bash
-pac org who
+pac env who
 ```
 
-**Validación esperada:** `pac org who` muestra la URL, el ID de organización y tu usuario, coincidiendo con el entorno esperado.
+**Validación esperada:** `pac env who` muestra la URL, el ID de organización y tu usuario, coincidiendo con el entorno esperado.
 
 ## Ejercicio 3 — Simular múltiples clientes/entornos
 
-Si tienes acceso a un segundo entorno (o puedes crear un segundo entorno Developer gratuito), crea un segundo perfil con un nombre igualmente explícito:
+Si tienes acceso a un segundo entorno (por ejemplo, un Trial de 30 días: desde el 15-11-2026 cada usuario solo puede tener un ambiente Developer), crea un segundo perfil con un nombre igualmente explícito:
 
 ```bash
 pac auth create --environment "https://orgYYYYYYYY.crm.dynamics.com" --name "sit-cliente-b-dev"
 pac auth list
 ```
 
-Practica el cambio seguro entre perfiles, verificando SIEMPRE con `pac org who` después de cada cambio:
+Practica el cambio seguro entre perfiles, verificando SIEMPRE con `pac env who` después de cada cambio:
 
 ```bash
-pac auth select --index 0
-pac org who
-pac auth select --index 1
-pac org who
+pac auth select --name "sit-practica-dev"
+pac env who
+pac auth select --name "sit-cliente-b-dev"
+pac env who
 ```
 
-**Validación esperada:** después de cada `pac auth select`, `pac org who` confirma la organización correcta antes de continuar con cualquier otro comando.
+**Validación esperada:** después de cada `pac auth select`, `pac env who` confirma la organización correcta antes de continuar con cualquier otro comando.
 
 ## Ejercicio 4 — Documentar tu checklist personal
 
 Escribe (en un archivo local, no en el repo del proyecto real) tu checklist personal de verificación antes de ejecutar cualquier comando de `pac` que modifique algo:
-1. ¿Ejecuté `pac org who` en los últimos minutos?
+1. ¿Ejecuté `pac env who` en los últimos minutos?
 2. ¿El nombre del perfil coincide con el cliente/entorno que espero?
 3. ¿Es un entorno Developer/Sandbox/Test, o es Production?
 
@@ -119,14 +118,14 @@ Escribe (en un archivo local, no en el repo del proyecto real) tu checklist pers
 | Error | Causa | Solución |
 |-------|-------|----------|
 | `pac` no reconocido como comando | La instalación no agregó la herramienta al PATH, o se requiere reiniciar la terminal | Reiniciar la terminal o verificar la variable PATH tras instalar |
-| Ejecutar un comando contra el perfil equivocado | No verificar `pac org who` tras un `pac auth select` | Verificar siempre la organización activa antes de cualquier operación |
+| Ejecutar un comando contra el perfil equivocado | No verificar `pac env who` tras un `pac auth select` | Verificar siempre la organización activa antes de cualquier operación |
 | Perfiles con nombres genéricos (`profile1`, `profile2`) | No nombrar explícitamente el perfil al crearlo | Usar siempre `--name` con una convención clara cliente-entorno |
 
 ## Criterios de Validación
 
 - [ ] Instalé Power Platform CLI y confirmé la versión
 - [ ] Creé un perfil de autenticación contra un entorno Developer/Sandbox con nombre explícito
-- [ ] Verifiqué la organización activa con `pac org who` antes y después de cambiar de perfil
+- [ ] Verifiqué la organización activa con `pac env who` antes y después de cambiar de perfil
 - [ ] Documenté mi checklist personal de verificación previa a comandos destructivos
 
 ## Evidencia esperada
@@ -137,7 +136,7 @@ Escribe (en un archivo local, no en el repo del proyecto real) tu checklist pers
 ## Criterios de aprobación
 
 - El perfil de autenticación tiene un nombre explícito que identifica el entorno sin ambigüedad
-- `pac org who` confirma la organización correcta antes de cualquier comando de import/export
+- `pac env who` confirma la organización correcta antes de cualquier comando de import/export
 - 100% de los ítems de Criterios de Validación marcados
 
 ## Preguntas de Reflexión

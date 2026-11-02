@@ -1,5 +1,33 @@
 # PlanEstudio — Estado de sprints post-auditoría (handoff)
 
+## Fase 7 (resto del curso) — trabajo a medias, guardado el 2026-11-01 en la rama `wip/fase7-resto-curso`
+
+> El usuario pidió parar y seguir mañana. **Nada de esto está en `master`**; la rama no despliega a producción.
+> Briefs de los agentes, `merge2.py` y una práctica parcial están en `handoff-fase7/` (borrar esa carpeta antes de fusionar).
+
+**Hecho (sin commit en master):**
+- Compilado el C# de Avanzado (.NET SDK 8.0.427, net48 + CrmSdk; M23 7/7, LAB-23 6/6, M24 net10/net8), GitHub Actions
+  del M54 verificado con actionlint, graphify instalado (`pip install --user graphifyy`).
+- Pruebas simuladas de las Fases 4-6 (7 agentes) y sus correcciones aplicadas: M18-M41, LAB-19/22/23/32, IA 43/44/46/54/55.
+- Migrados al patrón: IA 42, 45, 47-53, 56; D365 57-66; RPA 67-68 (completos, con prácticas). Banco de prácticas: **215**
+  (`MAX_INTERACTIVE_PRACTICES = 300` es TEMPORAL; fijar el total exacto al final). Dominio nuevo `rpa` (prefijo RPA).
+- Cambio de ambientes Developer verificado en Learn (uno administrado por usuario desde 15-11-2026; no administrados
+  suspendidos desde 15-12-2026; ejecutar en administrado exige Premium o prueba de 30 días) y aplicado en recursos,
+  M1, M14, M28, M33, LAB-19/56/115 y banco.
+- Correcciones del banco de preguntas (sigue en 891) y de labs 03, 45, 52, 54, 59, 68, 70, 80-85.
+
+**Pendiente (orden sugerido):**
+1. RPA 69-74: el texto del módulo quedó migrado por agentes que se detuvieron **antes de entregar las prácticas y de
+   verificar**; los enlaces `/practica/ip-rpa-007…024` aún no existen. Revisar cada módulo (Caso Real idéntico a HEAD,
+   validate-content, audit:lbd) y crear IP-RPA-007…024 (M69-70: 007-012, M71-72: 013-018, M73-74: 019-024).
+   Hay una versión parcial de 013-018 en `handoff-fase7/`.
+2. RPA 75-76: sin migrar (IP-RPA-025…030).
+3. Pruebas simuladas de IA 42-56, D365 57-66 y RPA 67-76 (`handoff-fase7/BRIEF_SIM_F7.md`), y corregir sus hallazgos
+   (`BRIEF_FIX.md`). Se lanzaron y se detuvieron sin informe.
+4. Cierre: fijar `MAX_INTERACTIVE_PRACTICES`, actualizar `0/149` en `e2e/interactive-practices.spec.ts`, `npm run verify`,
+   `npm run e2e` en serie, actualizar CLAUDE.md / PROPUESTA_FASES (§10) / este handoff, `graphify update .`, fusionar en
+   `master`, push y una consulta de CI.
+
 ## Rediseño "Aprender haciendo" — estado al 2026-11-01 (retomar desde aquí)
 
 > Este handoff no se actualizó durante las sesiones del 2026-10-08; esta sección reconstruye el estado desde los

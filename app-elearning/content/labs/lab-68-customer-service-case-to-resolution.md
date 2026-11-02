@@ -50,7 +50,7 @@ usa este lab para evidenciar el caso end-to-end y el Lab 82 para definir la pol�
 ## Prerrequisitos
 
 - Entender la diferencia entre `Case`, `Queue`, `Entitlement` y `SLA KPI`.
-- Conocer el concepto de Knowledge Article y su ciclo de vida (Draft → In Review → Published).
+- Conocer el concepto de Knowledge Article y su ciclo de vida (Draft → Approved → Published, con Expiration Date).
 - Haber revisado la configuración de Unified Routing del Módulo 20 (Actividad 20.4).
 
 ## Herramientas necesarias
@@ -109,7 +109,7 @@ agente senior) y por qué medio (notificación en Workspace, Power Automate, cor
 ### Paso 5 — Knowledge Article y resolución
 
 - Busca o crea (documentalmente) un Knowledge Article aplicable al incidente de Contoso Andina,
-  siguiendo el ciclo Draft → In Review → Published del Módulo 20.
+  siguiendo el ciclo Draft → Approved → Published (con Expiration Date) de Learn; ver Módulo 62.
 - Explica cómo el agente vincula el artículo al caso al resolverlo, y qué campo del caso queda
   como evidencia de que se usó (o no) conocimiento existente antes de escalar.
 

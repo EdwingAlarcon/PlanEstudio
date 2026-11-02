@@ -4,7 +4,7 @@ title: "GitHub Copilot en VS Code"
 level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 22
-practiceMinutes: 170
+practiceMinutes: 200
 slug: "github-copilot-en-vscode"
 lastVerified: "2026-11"
 ---
@@ -14,10 +14,10 @@ Usar GitHub Copilot en VS Code (sugerencias inline, Copilot Chat con sus agentes
 > **Cómo está organizado este módulo:** cada concepto viene con una micropráctica de feedback inmediato y luego una práctica real en VS Code, con una tabla de evidencia donde anotas el dato exacto que viste. El centro del módulo es una **actividad de fallo y corrección** (Microlección 3): recibes un plugin generado por IA con errores plausibles, los encuentras contra la referencia oficial de la API, los corriges y luego comparas tu corrección con la del agente. En la Microlección 3 vas a **diagnosticar** un síntoma antes de ver la causa, y el módulo cierra con un **reto de transferencia** donde decides y defiendes cómo delegar una tarea grande al agente.
 >
 > **Antes de empezar (lee esto, ahorra media hora):**
-> - **Este módulo es transversal y no necesita tenant:** no exige los módulos de PCF ni de plugins. El código con el que trabajas viene dentro del módulo; **no necesitas compilar C#**: verificas contra la referencia de la API en Microsoft Learn. Si ya hiciste los Módulos 13, 23 o 27, puedes repetir las prácticas sobre tu propio código.
-> - **Tiempo:** la primera vez, cuenta unas 3 horas de práctica (más 22 minutos de lectura). Mejor en dos sesiones: Microlecciones 1 y 2 en la primera; de la 3 al reto en la segunda.
+> - **Este módulo es transversal y no necesita tenant:** no exige los módulos de PCF ni de plugins. El código con el que trabajas viene dentro del módulo; **no necesitas compilar C#**: verificas contra la referencia de la API en Microsoft Learn. Si nunca leíste C#, no te preocupes: la Microlección 3 trae pistas graduadas antes de la solución. Si ya hiciste los Módulos 13, 23 o 27, puedes repetir las prácticas sobre tu propio código.
+> - **Tiempo:** la primera vez, cuenta unas 3 horas y media de práctica (más 22 minutos de lectura); si nunca leíste C#, la Microlección 3 sola puede llevarte una hora. Mejor en dos sesiones: Microlecciones 1 y 2 en la primera; de la 3 al reto en la segunda.
 > - **Software y cuenta:** [Visual Studio Code](https://code.visualstudio.com) y una cuenta de GitHub. Si no tienes suscripción de Copilot, al iniciar sesión quedas en **Copilot Free** ([VS Code: configurar Copilot](https://code.visualstudio.com/docs/copilot/setup)).
-> - **Planes (noviembre de 2026, verifica en [GitHub Docs: planes](https://docs.github.com/copilot/get-started/plans)):** **Copilot Free** incluye el modo agente y MCP, con un límite de 2.000 sugerencias de código (*completions*) al mes y una asignación mensual de *GitHub AI Credits*; los planes de pago (**Pro**, **Pro+**, **Max**, **Business**, **Enterprise**) incluyen más créditos por mes. Desde junio de 2026 GitHub mide el uso con *AI Credits*; las *premium requests* quedan solo para suscripciones anuales que siguieron con la facturación anterior ([GitHub Docs: premium requests](https://docs.github.com/copilot/concepts/billing/copilot-requests)). En VS Code ves cuánto llevas consumido en el panel de estado de Copilot de la barra inferior.
+> - **Planes (noviembre de 2026, verifica en [GitHub Docs: planes](https://docs.github.com/copilot/get-started/plans)):** **Copilot Free** incluye el modo agente y MCP, con un límite de 2.000 sugerencias de código (*completions*) al mes y una asignación mensual de *GitHub AI Credits*; los planes de pago (**Pro**, **Pro+**, **Max**, **Business**, **Enterprise**) incluyen más créditos por mes. Desde junio de 2026 GitHub mide el uso con *AI Credits*; las *premium requests* quedan solo para suscripciones anuales que siguieron con la facturación anterior ([GitHub Docs: premium requests](https://docs.github.com/copilot/concepts/billing/copilot-requests)). En VS Code ves cuánto llevas consumido en el panel de estado de Copilot de la barra inferior. Con **Copilot Free** cada petición al Chat consume créditos y GitHub no publica cuántos trae Free: este módulo hace unas diez peticiones (cuatro de ellas a **Agent**). **Si te quedas sin créditos**, no abandones: la Microlección 3 se hace igual comparando tu corrección con la solución del módulo, y en la evidencia anotas "sin créditos" en las filas de **Keep**/**Undo** y las completas cuando se renueve tu asignación.
 > - **Un cambio reciente que debes conocer:** el antiguo **Edit mode** (antes "Copilot Edits") quedó **obsoleto** en VS Code 1.110 y se elimina por completo en la 1.126; su función la cubre el agente **Agent** ([notas de VS Code 1.111](https://code.visualstudio.com/updates/v1_111)). Si un tutorial te dice "abre Copilot Edits", usa **Agent**.
 
 ---
@@ -50,7 +50,7 @@ Tres datos de seguridad que vas a usar en todo el módulo:
 
 1. Abre VS Code. Pasa el puntero sobre el icono de Copilot en la barra de estado (abajo) y selecciona **Use AI Features**; elige cómo iniciar sesión y sigue los pasos ([VS Code: configurar Copilot](https://code.visualstudio.com/docs/copilot/setup)). Al terminar, el icono deja de mostrar el aviso de inicio de sesión.
 2. Crea una carpeta `sit-copilot-lab`, ábrela con **File** > **Open Folder** y, si VS Code pregunta si confías en los autores, responde que sí (es tu carpeta).
-3. Crea el archivo `ValidarSolicitudPlugin.cs` y pega la **salida generada por IA** de la Microlección 3 (el bloque marcado "con errores"). No la corrijas todavía.
+3. Crea el archivo `ValidarSolicitudPlugin.cs` y pega la **salida generada por IA** de la Microlección 3 (baja hasta el bloque de código que empieza con `// Salida generada por IA — CON ERRORES`). No la corrijas todavía.
 4. Abre el Chat con **Chat** > **Open Chat** en la barra de título (o **Ctrl+Alt+I**). En el selector de agente del cuadro de chat elige **Ask** y escribe:
    ```
    Explica en menos de 5 líneas qué hace este plugin: qué recibe del contexto, qué consulta
@@ -98,7 +98,7 @@ Dos detalles que suelen enseñarse mal:
 1. Antes de crear el archivo, en el Chat con **Agent** pide: `Agrega al plugin un mensaje de log al empezar Execute`. **No aceptes el cambio**: anota qué API de logging usó y selecciona **Undo**.
 2. Crea `.github/copilot-instructions.md` con el contenido del ejemplo. Puedes hacerlo a mano o con la paleta de comandos (**Ctrl+Shift+P**) > **Chat: New Instructions File**.
 3. Repite la misma petición en un chat nuevo. Despliega **References** en la respuesta y comprueba si aparece el archivo de instrucciones. Anota qué API de logging usó esta vez. Ahora sí puedes revisar el diff y elegir **Keep** o **Undo**.
-4. Escribe en el editor el comienzo de una línea de log (`Console.`) y mira la sugerencia inline: comprueba por ti mismo que las instrucciones **no** la cambian.
+4. Escribe en el editor el comienzo de una línea de log (`Console.`) y mira la sugerencia inline: comprueba por ti mismo que las instrucciones **no** la cambian. Para que la prueba sea limpia, hazla en un archivo nuevo (`PruebaInline.cs`) y cierra cualquier otro archivo abierto que ya use `Trace` (por ejemplo, si en el paso 3 conservaste el cambio con **Keep**): la sugerencia inline toma contexto del código alrededor del cursor y de los archivos abiertos, así que si ve `Trace` cerca lo propondrá por eso, no por las instrucciones.
 5. Crea `.github/instructions/plugins.instructions.md` con este contenido y abre de nuevo el Chat:
    ```markdown
    ---
@@ -129,12 +129,13 @@ Dos detalles que suelen enseñarse mal:
 - Los datos sensibles se pasan con la **configuración segura** del paso registrado: llegan como el segundo parámetro (`secure`) del constructor y se guardan en una tabla que solo pueden leer los administradores del sistema. Las variables de entorno de tipo **Secret** (Azure Key Vault) **no** sirven aquí: Learn indica que solo están disponibles para flujos, agentes de Copilot Studio y conectores personalizados ([Learn](https://learn.microsoft.com/power-apps/maker/data-platform/environmentvariables-azure-key-vault-secrets)).
 - El patrón de errores: `FaultException<OrganizationServiceFault>` se envuelve en `InvalidPluginExecutionException`; cualquier otra excepción se registra con `Trace` y se relanza con `throw;`.
 
-**Actividad de fallo y corrección (30 min, sin tenant):** un compañero pidió a Copilot "un plugin que valide la cuenta de una solicitud y rechace solicitudes con una referencia externa repetida". Esto es lo que obtuvo (los nombres lógicos `sit_solicitud`, `sit_cuenta` y `sit_referenciaexterna` son **ejemplos**):
+**Actividad de fallo y corrección (45 min, sin tenant):** un compañero pidió a Copilot "un plugin que valide la cuenta de una solicitud y rechace solicitudes con una referencia externa repetida". Esto es lo que obtuvo (los nombres lógicos `sit_solicitud`, `sit_cuenta` y `sit_referenciaexterna` son **ejemplos**):
 
 ```csharp
 // Salida generada por IA — CON ERRORES: no la uses así
 using System;
 using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Query;
 
 public class ValidarSolicitudPlugin : IPlugin
 {
@@ -163,9 +164,13 @@ public class ValidarSolicitudPlugin : IPlugin
 }
 ```
 
-1. Sin mirar la solución, lista **todos** los problemas que encuentres (hay al menos cinco). Para cada uno escribe: línea, qué está mal, **fuente** que lo confirma (URL de Learn y qué dice) y corrección.
+1. Sin mirar la solución, lista **todos** los problemas que encuentres (hay al menos cinco). Para cada uno escribe: línea, qué está mal, **fuente** que lo confirma (URL de Learn y qué dice) y corrección. Los tres datos de Learn de arriba te dan pistas para cuatro de ellos.
 2. Busca tú mismo cada método dudoso en la referencia de la API de Learn (no le preguntes a Copilot si existe: es la misma fuente que lo inventó).
-3. Compara tu lista con la solución:
+3. **Si encontraste menos de cinco**, usa estas pistas de una en una antes de abrir la solución:
+   - **Pista 1:** imagina una solicitud que se guarda **sin** cuenta. ¿Qué devuelve `GetAttributeValue<EntityReference>("sit_cuenta")` en ese caso, y qué pasa en la línea siguiente al leer `.Id` de eso?
+   - **Pista 2:** imagina que la referencia externa que escribió el usuario es `ABC'123` (con una comilla simple). Escribe a mano cómo queda el texto de `fetchXml` con ese valor: ¿dónde termina ahora el atributo `value`?
+   - **Pista 3:** compila mentalmente: si el código **compilara** (el compilador solo marca `RetrieveById`, con el error CS1061), ¿cuáles de tus problemas seguirían ahí? Los fallos que compilan son los más peligrosos, porque nada te avisa.
+4. Compara tu lista con la solución:
 
 **Solución para comparar (léela solo después de escribir la tuya):**
 
@@ -177,6 +182,8 @@ public class ValidarSolicitudPlugin : IPlugin
 | `Console.WriteLine` | No deja ningún rastro útil en Dataverse; se usa `ITracingService.Trace` | Learn: escribir un plug-in > Tracing service |
 | FetchXML concatenado | El valor del registro entra como texto en el XML: una comilla en el dato rompe la consulta o cambia su filtro. FetchXML no tiene parámetros; se usa `QueryExpression`, donde el valor va como dato | Learn: filtrar filas con QueryExpression |
 | Sin `try/catch` | Los errores del servicio no se registran ni se convierten en un mensaje entendible | Learn: escribir un plug-in > patrón de excepciones |
+
+Si compilas las dos versiones (opcional; con el SDK de .NET y el paquete `Microsoft.CrmSdk.CoreAssemblies`), la versión con errores da **un solo** error de compilación, CS1061 en `RetrieveById`; los otros cinco fallos compilan sin ninguna advertencia. Por eso "compila" no es lo mismo que "está revisado". La versión corregida compila sin errores.
 
 ```csharp
 using System;

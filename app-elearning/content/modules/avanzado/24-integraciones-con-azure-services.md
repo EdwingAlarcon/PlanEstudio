@@ -4,11 +4,11 @@ title: "Integraciones con Azure Services"
 level: "avanzado"
 certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
 estimatedMinutes: 20
-practiceMinutes: 170
+practiceMinutes: 200
 slug: "integraciones-con-azure-services"
 lastVerified: "2026-11"
 ---
-*Lectura: 18-22 min · Con práctica: unos 170 min con una suscripción de Azure (la primera vez, cuenta entre el doble y el triple). La Microlección 3 exige publicar una Function en Azure; la 4 (API Management) es opcional porque crear una instancia tarda y tiene costo.*
+*Lectura: 18-22 min · Con práctica: unos 200 min con una suscripción de Azure (la primera vez, cuenta entre el doble y el triple). La Microlección 3 exige publicar una Function en Azure; la 4 (API Management) es opcional porque crear una instancia tarda y tiene costo.*
 
 > **☁️ ¿Nunca usaste Azure Portal?** Lee primero [Fundamentos de Azure](/recursos/fundamentos-azure)
 > — suscripción, resource group, RBAC y costos, con práctica en cuenta gratuita antes de crear los
@@ -33,7 +33,7 @@ Integrar Power Platform con Azure Service Bus, Azure Functions, Azure API Manage
 - **Azure Functions (modelo isolated worker):** código serverless con triggers (`ServiceBusTrigger`, `HttpTrigger`…). Usa el modelo **isolated worker**: el modelo in-process deja de tener soporte el 10 de noviembre de 2026.
 - **Azure Event Grid:** enrutamiento de eventos publicador-suscriptor (por ejemplo, "se creó un blob en Storage" → Function o Power Automate), con filtros por tipo de evento. Dataverse tiene Event Grid como tipo de service endpoint; este módulo no lo practica.
 - **Azure API Management (APIM):** gateway que publica APIs con políticas (claves, cuotas, transformación, autenticación hacia el backend). La política `rate-limit-by-key` devuelve `429` al pasar la cuota; `authentication-managed-identity` obtiene un token con la identidad administrada de APIM.
-- **Managed Identity y Key Vault:** identidad de Azure para un recurso, sin secretos en código. Microsoft recomienda Microsoft Entra ID antes que las claves SAS para Service Bus; la conexión de un trigger puede usar identidad (`<conexión>__fullyQualifiedNamespace`). Key Vault guarda los secretos que sí hacen falta, con auditoría.
+- **Managed Identity y Key Vault:** identidad de Azure para un recurso, sin secretos en código. Microsoft recomienda Microsoft Entra ID antes que las claves SAS para Service Bus; la conexión de un trigger puede usar identidad (`<conexión>__fullyQualifiedNamespace`). Los permisos se dan con roles de Azure integrados, con el alcance más estrecho posible (la cola, el topic o la suscripción): **Azure Service Bus Data Receiver** para quien solo recibe (una Function consumidora), **Azure Service Bus Data Sender** para quien solo envía y **Azure Service Bus Data Owner** para acceso total, que un consumidor no necesita ([Learn: identidades administradas con Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-managed-service-identity)). Key Vault guarda los secretos que sí hacen falta, con auditoría.
 - **Outbox Pattern:** el plugin solo registra un "mensaje pendiente" en Dataverse y un proceso aparte lo envía y reintenta. Útil cuando no puedes usar un service endpoint (por ejemplo, el mensaje necesita datos que el contexto del evento no trae).
 
 **Diagrama: integración event-driven Dataverse → Azure**
@@ -62,7 +62,7 @@ graph LR
 ### Crear la cola (15 min)
 
 1. En <https://portal.azure.com>, menú > **All services** > **Integration** > **Service Bus** > **Create**.
-2. En **Basics**: tu **Subscription** y **Resource group**; **Namespace name** único (de 6 a 50 caracteres, por ejemplo `sit-integracion-<tus iniciales>`); tu **Location**; **Pricing tier** = **Standard** (la Microlección de construcción usa topics, que no existen en Basic) > **Review + create** > **Create** > **Go to resource**.
+2. En **Basics**: tu **Subscription** y **Resource group**; **Namespace name** único (de 6 a 50 caracteres, por ejemplo `sit-integracion-<tus iniciales>`); tu **Location**; **Pricing tier** = **Standard** (la Microlección de construcción usa topics, que no existen en Basic) > **Review + create** > **Create** > **Go to resource**. Ojo con el costo: Basic se paga solo por operaciones, pero Standard tiene además un **cargo base** por hora, que se cobra aunque no envíes ningún mensaje ([precios de Service Bus](https://azure.microsoft.com/pricing/details/service-bus/)). Para unas horas de práctica es poco dinero, y lo cubre el crédito de una cuenta gratuita de Azure si todavía lo tienes. Aun así, borra el resource group al terminar el módulo.
 3. **Entities** > **Queues** > **+ Queue**: **Name** = `solicitudes-nuevas` y número máximo de entregas (**Max delivery count**) = `3`, como en el caso de negocio; el resto por defecto > **Create**.
 4. Abre la cola > **Shared access policies** > **+ Add**: nombre `dataverse-send`, marca solo **Send** > **Create**. Crea otra, `function-listen`, solo con **Listen**. No uses `RootManageSharedAccessKey`: tiene permiso **Manage** sobre todo el namespace.
 5. Abre `dataverse-send` y copia su **Primary Connection String**.
@@ -96,9 +96,25 @@ graph LR
 
 **¿Por qué existe esto?** Service Bus entrega "al menos una vez": tras un reintento, el ERP puede recibir la misma solicitud dos veces. Y un mensaje que nunca va a funcionar tiene que terminar en un lugar visible, no reintentarse para siempre.
 
-### El proyecto (20 min)
+### El proyecto (30 min)
 
-Crea un proyecto de **Azure Functions** en C# con el modelo **isolated worker** y .NET 8 o posterior, y agrega los paquetes `Microsoft.Azure.Functions.Worker.Extensions.ServiceBus` y `Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore` (y `Microsoft.Extensions.Http` si tu plantilla no lo trae). `Program.cs`:
+**Herramientas (una sola vez).** Necesitas el SDK de .NET y **Azure Functions Core Tools** (el comando `func`), que corre las Functions en tu máquina. En Windows, Learn ofrece dos formas de instalar Core Tools: el instalador MSI (si usas Visual Studio o solo la terminal) o `npm i -g azure-functions-core-tools@4 --unsafe-perm true` (si usas VS Code: su extensión de Azure Functions lo mantiene con npm). Elige una sola, porque las dos a la vez entran en conflicto ([Learn: instalar Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local#install-the-azure-functions-core-tools)). Comprueba con `func --version` que responde con un 4.x.
+
+**Crear el proyecto con la terminal (VS Code):**
+
+```bash
+func init SIT.Functions --worker-runtime dotnet-isolated --target-framework net10.0
+cd SIT.Functions
+dotnet add package Microsoft.Azure.Functions.Worker.Extensions.ServiceBus
+```
+
+`func init` crea el proyecto (`SIT_Functions.csproj`, `Program.cs`, `host.json` y `local.settings.json`) sin ninguna función: las agregas tú en los pasos siguientes. La plantilla ya trae `Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore`, así que solo falta el paquete de Service Bus. Si solo tienes el SDK de .NET 8, usa `--target-framework net8.0`: funciona igual, pero `func init` te avisará de que .NET 8 deja de tener soporte en noviembre de 2026.
+
+*Con Visual Studio:* plantilla **Azure Functions**, **Functions worker** = la versión de .NET más reciente marcada como *Isolated*, y marca **Use Azurite for runtime storage account**. Si la plantilla te crea una función de ejemplo (`Function1`), bórrala. Después agrega el paquete de Service Bus con **Manage NuGet Packages**.
+
+**Qué deberías ver:** `dotnet build` dentro de la carpeta termina con 0 errores.
+
+`Program.cs`: la plantilla ya trae `FunctionsApplication.CreateBuilder` y `ConfigureFunctionsWebApplication()`. Agrega solo la línea `builder.Services.AddHttpClient();` antes de `builder.Build().Run();`. Si quitas la parte de telemetría que trae la plantilla, queda así:
 
 ```csharp
 using Microsoft.Azure.Functions.Worker.Builder;
@@ -111,7 +127,7 @@ builder.Services.AddHttpClient();           // registra IHttpClientFactory
 builder.Build().Run();
 ```
 
-La Function que consume la cola:
+La Function que consume la cola (archivo nuevo `SolicitudProcessor.cs`):
 
 ```csharp
 using System;
@@ -166,7 +182,7 @@ public class SolicitudProcessor
 }
 ```
 
-Y un "ERP" de mentira para probar en local:
+Y un "ERP" de mentira para probar en local (archivo `FakeErp.cs`):
 
 ```csharp
 using Microsoft.AspNetCore.Http;
@@ -181,11 +197,17 @@ public class FakeErp
 }
 ```
 
-En `local.settings.json`, dentro de `Values`, agrega `"ServiceBusConnection"` con la **Primary Connection String** de `function-listen` (incluye `EntityPath=solicitudes-nuevas`, que debe coincidir con el nombre del trigger) y `"ErpUrl": "http://localhost:7071/api/FakeErp"`. Ese archivo no se sube al repositorio: tiene secretos.
+En `local.settings.json`, dentro de `Values`, agrega `"ServiceBusConnection"` con la **Primary Connection String** de `function-listen` (incluye `EntityPath=solicitudes-nuevas`, que debe coincidir con el nombre del trigger) y `"ErpUrl": "http://localhost:7071/api/FakeErp"`. Deja `"AzureWebJobsStorage": "UseDevelopmentStorage=true"` como lo trae la plantilla. Ese archivo no se sube al repositorio: tiene secretos.
+
+**Azurite, antes de arrancar.** Con un trigger que no es HTTP (aquí, el de Service Bus), el host de Functions **necesita** almacenamiento en `AzureWebJobsStorage`. Con `UseDevelopmentStorage=true`, ese almacenamiento es el emulador **Azurite**, que tiene que estar instalado y corriendo **antes** de arrancar la Function. Si no, el host falla al iniciar ([Learn: emulador de almacenamiento local](https://learn.microsoft.com/azure/azure-functions/functions-develop-local#local-storage-emulator)). Según tu herramienta ([Learn: instalar y ejecutar Azurite](https://learn.microsoft.com/azure/storage/common/storage-install-azurite)):
+
+- **VS Code:** instala la extensión **Azurite** desde **Extensions**. Después pulsa **F1** y ejecuta **Azurite: Start**.
+- **Terminal:** `npm install -g azurite` (una vez) y, en una terminal aparte que dejas abierta, `azurite --silent --location c:\azurite`.
+- **Visual Studio 2022:** ya trae Azurite. Si marcaste **Use Azurite for runtime storage account** al crear el proyecto, lo arranca solo.
 
 ### Probar éxito, fallo y DLQ (25 min)
 
-1. Arranca la Function en local (**F5** en Visual Studio, o `func start`). Si al arrancar falla por el almacenamiento (`AzureWebJobsStorage`), inicia el emulador Azurite o pon la cadena de una cuenta de Storage.
+1. Con Azurite corriendo, arranca la Function en local (**F5** en Visual Studio, o `func start` dentro de la carpeta del proyecto). **Qué deberías ver:** la lista de funciones (`DataverseWebhook` aparecerá cuando la agregues en la Microlección 3; ahora, `FakeErp` con su URL y `ProcesarSolicitudCreada` con su trigger de Service Bus), sin errores de almacenamiento.
 2. Crea una solicitud en tu app. En la consola de la Function verás el log de `ProcesarSolicitudCreada` con la entrega 1 y la llamada a `FakeErp`.
 3. Detén la Function y cambia `ErpUrl` por `https://erp.invalid/api/solicitudes` (el dominio `.invalid` nunca existe). Arráncala y crea otra solicitud.
 4. Observa en la consola tres intentos del mismo `MessageId`, con la entrega 1, 2 y 3.
@@ -245,14 +267,16 @@ public class DataverseWebhook
 }
 ```
 
-2. Publica el proyecto en una Function App de Azure con la herramienta que uses (**Publish** de Visual Studio, la extensión de Azure Functions de VS Code o `func azure functionapp publish <tu-app>`). Dataverse no puede llamar a `localhost`. En la Function App, configura `ServiceBusConnection` y `ErpUrl` en sus variables de aplicación.
+2. Publica el proyecto en una Function App de Azure con la herramienta que uses (**Publish** de Visual Studio, la extensión de Azure Functions de VS Code o `func azure functionapp publish <tu-app>`). Dataverse no puede llamar a `localhost`. En la Function App: **Settings** > **Environment variables** > pestaña **App settings** > **+ Add**, agrega `ServiceBusConnection` (la misma cadena de `function-listen`) y `ErpUrl`, y guarda los cambios ([Learn: app settings](https://learn.microsoft.com/azure/azure-functions/functions-how-to-use-azure-function-app-settings#settings)). En Azure, `ErpUrl` **no** puede ser `localhost`: usa la URL de tu `FakeErp` publicado, que copias de la función `FakeErp` en el portal (algo como `https://<tu-app>.azurewebsites.net/api/FakeErp`).
+
+   **Cuidado, dos consumidores de la misma cola.** Al publicar, `ProcesarSolicitudCreada` también corre en Azure. Si dejas la de tu máquina arrancada, las dos compiten por los mensajes de `solicitudes-nuevas` y cada uno lo procesa la que llegue primero, así que no sabrás dónde buscar el log. Detén la local (**Ctrl+C** en la terminal o **Stop** en Visual Studio) antes de seguir. Si no la necesitas en Azure, desactívala allí: en la función, **Overview** > **Disable**, que agrega el ajuste `AzureWebJobs.ProcesarSolicitudCreada.Disabled = true` ([Learn: desactivar una función](https://learn.microsoft.com/azure/azure-functions/disable-function)).
 3. En el portal, abre la función `DataverseWebhook` y copia su URL **sin** el parámetro `code` y, aparte, el valor de la clave de la función.
 4. En el PRT: **Register** > **Register New WebHook**: **Name** = `SIT Webhook Solicitud`, **Endpoint URL** = la URL sin `code`, **Authentication** = **WebhookKey**, **Value** = la clave > guarda.
 5. Clic derecho sobre el webhook > **Register New Step**: **Message** = `Update`, **Primary Entity** = `sit_solicitud`, **Filtering Attributes** = `sit_estado`, **Event Pipeline Stage of Execution** = **PostOperation**, **Execution Mode** = **Asynchronous**.
 6. Cambia el estado de una solicitud y busca la invocación en los logs de la Function App (**Monitor** o la secuencia de logs).
 7. Ahora prueba el riesgo: edita el webhook y pon una clave equivocada. Cambia el step a **Synchronous** y cambia otro estado. Después devuelve la clave correcta y el modo **Asynchronous**.
 
-**Qué deberías ver:** con la clave correcta, una invocación por cada cambio de estado; con la clave equivocada y el step síncrono, un error al guardar en la app (la Function responde 401 y Dataverse cancela la operación).
+**Qué deberías ver:** con la clave correcta, una invocación por cada cambio de estado; con la clave equivocada y el step síncrono, un error al guardar en la app: un cuadro **Endpoint unavailable** (la Function responde 401 y Dataverse cancela la operación; [Learn: webhooks](https://learn.microsoft.com/power-apps/developer/data-platform/use-webhooks)).
 
 | Campo | Tu valor |
 |---|---|
@@ -269,6 +293,7 @@ public class DataverseWebhook
 
 **Antes de empezar:** crear una instancia de APIM tarda y tiene costo; hazlo solo si tu suscripción lo permite. La identidad administrada de APIM tiene que existir en tu ambiente como **application user** con un rol de seguridad que pueda crear solicitudes; sin eso, Dataverse responde 401 o 403.
 
+**Activar la identidad administrada de APIM (antes de crear el application user):** en tu instancia de APIM, menú de la izquierda **Security** > **Managed identities** > pestaña **System assigned** > **Status** = **On** > **Save** ([Learn: identidad administrada en APIM](https://learn.microsoft.com/azure/api-management/api-management-howto-use-managed-service-identity)).
 En tu instancia: **APIs** > crea una API HTTP con **Web service URL** = `https://<tuorg>.crm.dynamics.com/api/data/v9.2` y una operación `POST /solicitudes`. En la operación, esta política:
 
 ```xml

@@ -4,11 +4,11 @@ title: "Performance y Optimización"
 level: "avanzado"
 certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
 estimatedMinutes: 22
-practiceMinutes: 150
+practiceMinutes: 195
 slug: "performance-y-optimizacion"
 lastVerified: "2026-11"
 ---
-*Lectura: 20 min · Con práctica: unos 150 min, mejor en dos sesiones (la primera hasta la Microlección 2; la segunda, de la 3 al final). La primera vez, cuenta entre una vez y media y el doble.*
+*Lectura: 20 min · Con práctica: unos 195 min (más 20 si haces la parte opcional de Power BI), mejor en dos sesiones (la primera hasta la Microlección 2; la segunda, de la 3 al final). La primera vez, cuenta entre una vez y media y el doble.*
 
 ### 🎯 Objetivo
 Diagnosticar y resolver problemas de rendimiento en Canvas Apps, Power Automate, Dataverse y reportes Power BI usando herramientas nativas y mejores prácticas de optimización. La regla del módulo es **medir, cambiar una cosa y volver a medir**: cada optimización que hagas en tu tenant tiene que dejar un número antes y otro después.
@@ -25,7 +25,7 @@ Diagnosticar y resolver problemas de rendimiento en Canvas Apps, Power Automate,
 Un mapa rápido; cada pieza se practica en su microlección.
 
 - **Live monitor (Canvas Apps):** registra cada evento de la app mientras la usas: llamadas a datos, fórmulas, errores. Columnas útiles: **Time**, **Category**, **Operation**, **Result**, **Status**, **Duration**, **Data Source**, **Control**, **Property** y **Response size**; al seleccionar una fila, las pestañas **Details**, **Formula**, **Request** y **Response** muestran el detalle. Se abre desde Power Apps Studio con **Advanced tools** > **Open live monitor**, o para la app publicada desde **Apps** > la app > el menú junto a **Details** > **Live monitor** > **Play published app** ([Learn: Live monitor en canvas apps](https://learn.microsoft.com/power-apps/maker/monitor-canvasapps)).
-- **Delegación en Canvas Apps:** una fórmula delegable se ejecuta en el origen (Dataverse, SharePoint) y solo baja las filas necesarias. Para Dataverse son delegables, entre otras, `Filter`, `Search`, `LookUp`, `First`, `Sort`, `StartsWith` y `EndsWith`; **no** lo son `Len`, `Left`, `Mid`, `Distinct`, `FirstN`, `Last`, ni `Collect`/`ClearCollect` ([Learn: delegación](https://learn.microsoft.com/power-apps/maker/canvas-apps/delegation-overview)).
+- **Delegación en Canvas Apps:** una fórmula delegable se ejecuta en el origen (Dataverse, SharePoint) y solo baja las filas necesarias. Para Dataverse son delegables, entre otras, `Filter`, `Search`, `LookUp`, `First`, `Sort` y `StartsWith`; **no** lo son `Len` ni `Trim` aplicados a una columna, la conversión de una columna con `Text()`, ni `Distinct`, `FirstN`, `Last`, `Choices` o `Collect`/`ClearCollect` ([Learn: delegación](https://learn.microsoft.com/power-apps/maker/canvas-apps/delegation-overview) y [Learn: delegación en el conector de Dataverse](https://learn.microsoft.com/power-apps/maker/canvas-apps/connections/connection-common-data-service#power-apps-delegable-functions-and-operations-for-dataverse)). Cada origen delega cosas distintas: ante la duda, manda la tabla del conector y la advertencia que te muestre Studio. Lo que no depende de la fila (por ejemplo `Trim(txtBusqueda.Text)`, el texto de un control) se envía como constante y no rompe la delegación.
 - **Límite de delegación:** número máximo de registros que Power Apps descarga del servidor cuando una fórmula no es delegable. El default es 500, configurable hasta 10.000 en **Settings** → **General** → **Data row limit** ([Microsoft Learn: delegación en canvas apps](https://learn.microsoft.com/power-apps/maker/canvas-apps/delegation-overview#changing-the-limit)). Si la tabla tiene 50,000 registros y la fórmula no es delegable, el usuario solo verá los primeros 500 (o los que permita el límite configurado, como máximo 10.000) — y la app no le muestra ningún aviso. La advertencia de delegación (triángulo amarillo y subrayado azul) solo la ve el desarrollador en Power Apps Studio, junto a la fórmula, mientras la escribe; viene activada por defecto. Learn sugiere bajar el límite a 1 para probar qué fórmulas no delegan.
 - **Carga inicial: `Concurrent()`, `App.Formulas` y `App.OnStart`:** `Concurrent()` lanza varias fórmulas a la vez (solo en fórmulas de comportamiento) y las fórmulas que contiene no pueden depender unas de otras: Power Apps muestra un error si lo intentas ([Learn: Concurrent](https://learn.microsoft.com/power-platform/power-fx/reference/function-concurrent)). Las **named formulas** de `App.Formulas` siempre están al día, se calculan cuando hacen falta (cálculo diferido) y no admiten funciones de comportamiento. Learn advierte que `App.OnStart` puede causar problemas de rendimiento y recomienda preferir `App.Formulas` y `App.StartScreen` ([Learn: objeto App](https://learn.microsoft.com/power-platform/power-fx/reference/object-app)).
 - **`ClearCollect` y colecciones:** `Collect`, `Clear` y `ClearCollect` solo se pueden usar en fórmulas de comportamiento (como `OnSelect`), y no son delegables: sobre una tabla grande solo traen la primera porción ([Learn: ClearCollect](https://learn.microsoft.com/power-platform/power-fx/reference/function-clear-collect-clearcollect)). Por eso "cargar todo en una colección al inicio" es una optimización falsa con muchos datos.
@@ -53,7 +53,7 @@ Un mapa rápido; cada pieza se practica en su microlección.
 3. En Live monitor, ordena por **Duration** de mayor a menor. Selecciona la fila más lenta que tenga **Data Source** `Solicitudes TI` y mira **Control**, **Property** y **Response size**; en la pestaña **Request** verás la consulta que se envió.
 
    **Qué deberías ver:** filas de categoría de red con operaciones como `getRows` asociadas a `galSolicitudes` (propiedad `Items`) y a `drpEstado`. **Si no ves filas nuevas:** comprueba que Live monitor dice que está conectado a tu sesión y repite el paso 2.
-4. Busca si la consulta de `drpEstado` (`Distinct('Solicitudes TI', Estado)`) aparece con una advertencia o trae más datos de los que muestra. Haz una captura de la tabla ordenada por **Duration**: la necesitarás para comparar.
+4. Busca la llamada de `drpEstado` (`Distinct('Solicitudes TI', Estado)`) y mira cuántos datos trae (**Response size**) frente a las pocas opciones que muestra. Las advertencias de delegación no salen en Live monitor: para verlas, vuelve a Studio y mira si la fórmula `Items` de `drpEstado` tiene el triángulo amarillo. Haz una captura de la tabla ordenada por **Duration**: la necesitarás para comparar.
 
 **Evidencia a reportar:**
 
@@ -129,10 +129,28 @@ Concurrent(
 ```
 
    (La advertencia de delegación de `ClearCollect` es esperable: aquí solo comparamos tiempos.)
-2. Con Live monitor abierto, pulsa `btnSecuencial` (con **Alt** en Studio). Después **cierra y vuelve a abrir la app** (Learn lo indica para que la caché no falsee la segunda medición) y pulsa `btnConcurrente`.
+2. Con Live monitor abierto, pulsa `btnSecuencial` (con **Alt** en Studio). Después guarda, **cierra y vuelve a abrir la app** (Learn lo indica para que la caché no falsee la segunda medición). Al cerrar Studio, Live monitor pierde la conexión con tu sesión: vuelve a abrirlo con **Advanced tools** > **Open live monitor** antes de pulsar `btnConcurrente`.
 
    **Qué deberías ver:** en la columna **Time**, con `btnSecuencial` la segunda petición empieza cuando acaba la primera; con `btnConcurrente`, las dos empiezan casi a la vez. Con pocas filas, la diferencia total puede ser pequeña: anota la que veas.
-3. Prueba la regla de dependencia: dentro de `Concurrent`, cambia la segunda fórmula por `Set(varTotal, CountRows(colSolicitudes))`. **Qué deberías ver:** un error en la fórmula, porque usa lo que carga la otra rama. Deshaz el cambio.
+3. Prueba la regla de dependencia en un botón nuevo, `btnDependencia`, con el patrón del ejemplo de Learn (variables con `Set`):
+
+```js
+// ❌ La segunda rama lee varA, que escribe la primera: el orden entre ramas no está garantizado
+Concurrent(
+    Set(varA, 1),
+    Set(varB, varA + 1)
+)
+```
+
+   **Qué deberías ver:** Learn dice que las fórmulas de `Concurrent()` no deben depender unas de otras y que Power Apps muestra un error si lo intentas; en ese caso verás la fórmula marcada en rojo y el mensaje al pasar el ratón. Learn también avisa de que Power Apps detecta *la mayoría* de estas dependencias, no todas: **si no sale ningún error, anótalo así**, porque es igual de valioso (la regla no cambia aunque Studio no lo detecte). Después cámbialo por la versión correcta, en la que la dependencia queda **dentro de la misma rama** encadenada con `;`, como en el ejemplo de Learn:
+
+```js
+// ✅ Dentro de una rama, ";" ejecuta en orden: varA ya vale 1 cuando se calcula varB
+Concurrent(
+    Set(varA, 1); Set(varB, varA + 1),
+    Set(varX, 2)
+)
+```
 4. Carga diferida: en **Tree view**, selecciona **App** y en su propiedad **Formulas** escribe:
 
 ```js
@@ -148,7 +166,7 @@ nfSolicitudesNuevas = Filter('Solicitudes TI', Estado = 'Estado (Solicitudes TI)
 |---|---|
 | Inicio (**Time**) de las dos peticiones con `btnSecuencial` | |
 | Inicio de las dos peticiones con `btnConcurrente` | |
-| Mensaje de error al hacer depender una rama de otra | |
+| Mensaje de error al hacer depender una rama de otra (o "no apareció") | |
 | Cuándo apareció la consulta de `nfSolicitudesNuevas` | |
 
 ### 🏗️ Reto de construcción (sin pasos, tenant real)
@@ -161,6 +179,30 @@ nfSolicitudesNuevas = Filter('Solicitudes TI', Estado = 'Estado (Solicitudes TI)
 > - Tienes una medición de Live monitor **antes** y otra **después** (capturas) con el número de llamadas y la duración de la más lenta.
 >
 > **Restricciones:** no subas el Data row limit para "arreglarlo"; no cambies el modelo de datos del Lab 02. Al terminar, deja el Data row limit en su valor original.
+
+<details>
+<summary>Pista si te atascas con <code>drpEstado</code></summary>
+
+`Distinct` recorre filas, así que nunca te servirá con el límite en 1. Las opciones de `Estado` ya están definidas en la columna (en el Lab 02 las creaste como opciones locales): no necesitas leer filas para conocerlas. Dos caminos:
+
+- Una tabla escrita a mano con las enumeraciones de la columna (Studio las autocompleta al escribir `'Estado (`). Es una tabla en memoria, sin delegación posible, y como sus valores van en una columna llamada `Value`, `drpEstado.Selected.Value` sigue siendo la opción de Estado y el `Filter` de `galSolicitudes` no cambia:
+
+```js
+// Tabla de una columna (Value) con las opciones de Estado; no consulta ninguna fila
+[
+    'Estado (Solicitudes TI)'.Nueva,
+    'Estado (Solicitudes TI)'.'En Proceso',
+    'Estado (Solicitudes TI)'.Resuelta,
+    'Estado (Solicitudes TI)'.Cerrada,
+    'Estado (Solicitudes TI)'.Aprobada,
+    'Estado (Solicitudes TI)'.Rechazada
+]
+```
+
+- `Choices('Solicitudes TI'.Estado)`: devuelve las opciones de la columna. Learn la lista como no delegable; compruébalo tú con el límite en 1 (cuenta las opciones que ofrece) y anótalo en la evidencia. Si la usas, **revisa después `galSolicitudes.Items`**: si Studio marca en rojo `Estado = drpEstado.Selected.Value`, es que el registro de `Selected` tiene otra forma; escribe `drpEstado.Selected.` y elige el campo que te propone el autocompletado.
+
+Sea cual sea el camino, vuelve a medir con Live monitor: con la tabla escrita a mano, la llamada a `Solicitudes TI` de `drpEstado` desaparece.
+</details>
 
 **Evidencia del reto:**
 
@@ -250,7 +292,7 @@ nfSolicitudesNuevas = Filter('Solicitudes TI', Estado = 'Estado (Solicitudes TI)
 ### ⚠️ Errores Comunes
 | Error | Causa | Solución |
 |-------|-------|----------|
-| Canvas App muestra solo 500 registros en el gallery | Función `Filter` con operador no delegable (e.g., `Left()`) | Reemplazar con operadores delegables: `StartsWith()`, comparaciones de fecha, campos de lookup |
+| Canvas App muestra solo 500 registros en el gallery | Función `Filter` con una función no delegable aplicada a la columna (por ejemplo `Len()`, `Trim()` o `Text()` sobre la columna) | Reemplazar con operadores delegables (`StartsWith()`, `=`, comparaciones de fecha, campos de lookup) y aplicar las funciones al valor del control, no a la columna |
 | Un dropdown no ofrece todas las opciones con muchos datos | `Distinct()` no es delegable: solo ve las filas descargadas | Sacar las opciones de una fuente delegable (la propia columna de opciones o una tabla de catálogo) |
 | Error en una fórmula dentro de `Concurrent()` | Una rama usa la variable o colección que carga otra rama | Las fórmulas de `Concurrent()` no pueden depender entre sí: mueve la dependiente después del `Concurrent()` |
 | La app sigue lenta al abrir aunque usa `Concurrent()` | Carga en paralelo demasiadas tablas completas que la primera pantalla no necesita | Cargar solo lo esencial; el resto, con named formulas o al entrar en la pantalla que lo usa |

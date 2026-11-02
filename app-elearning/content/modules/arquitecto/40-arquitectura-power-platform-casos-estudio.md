@@ -11,7 +11,7 @@ lastVerified: "2026-11"
 *Lectura: 20-25 min · Con práctica: unos 170 min, mejor en dos sesiones (la primera hasta el diagnóstico; la segunda, la Microlección 3 y el reto de transferencia). La primera vez, cuenta entre una vez y media y el doble.*
 
 ### 🎯 Objetivo
-Desarrollar la mentalidad de Solution Architect en Power Platform mediante casos de estudio de arquitectura, análisis de requerimientos, trade-offs, gobernanza, seguridad, integración y comunicación ejecutiva. La certificación Power Platform Solution Architect Expert y su examen PL-600 se retiraron el 30 de junio de 2026 ([Learn](https://learn.microsoft.com/credentials/certifications/power-platform-solution-architect-expert/)); este módulo conserva las competencias profesionales que siguen siendo válidas aunque la credencial ya no esté disponible. La credencial de arquitecto vigente más cercana es **Microsoft Certified: Agentic AI Business Solutions Architect Expert** (examen **AB-100**), que exige además una certificación Associate como PL-200 o PL-400 y se centra en soluciones de negocio con IA y agentes; mide tres áreas: planificar (35-40 %), diseñar (30-35 %) e implementar (20-25 %) soluciones de negocio con IA ([Learn: AB-100](https://learn.microsoft.com/credentials/certifications/exams/ab-100/)). No cubre todo lo que cubría PL-600, así que no la tomes como un reemplazo uno a uno.
+Desarrollar la mentalidad de Solution Architect en Power Platform mediante casos de estudio de arquitectura, análisis de requerimientos, trade-offs, gobernanza, seguridad, integración y comunicación ejecutiva. La certificación Power Platform Solution Architect Expert y su examen PL-600 se retiraron el 30 de junio de 2026 ([Learn](https://learn.microsoft.com/credentials/certifications/power-platform-solution-architect-expert/)); este módulo conserva las competencias profesionales que siguen siendo válidas aunque la credencial ya no esté disponible. La credencial de arquitecto vigente más cercana es **Microsoft Certified: Agentic AI Business Solutions Architect Expert** (examen **AB-100**), que exige además una certificación Associate como PL-200 o PL-400 y se centra en soluciones de negocio con IA y agentes; mide tres áreas: planificar (35-40 %), diseñar (30-35 %) e implementar (20-25 %) soluciones de negocio con IA ([Learn: AB-100](https://learn.microsoft.com/credentials/certifications/exams/ab-100/)). La versión en inglés del examen se actualiza el **16 de noviembre de 2026**: antes de prepararlo, revisa en su study guide qué cambió. No cubre todo lo que cubría PL-600, así que no la tomes como un reemplazo uno a uno.
 
 > **Cómo está organizado este módulo:** es un módulo de casos. Cada microlección es un caso con restricciones en el que **decides y defiendes**: eliges una opción, escribes el trade-off que aceptas y lo contrastas con una rúbrica explícita ("Criterio | Qué demuestra que lo cumples"). No hay una única respuesta correcta; la evidencia es tu decisión escrita con sus razones. La lente común es **Power Platform Well-Architected**. Después diagnosticarás una arquitectura que falló en producción, empezando por el síntoma, y cerrarás con un reto de transferencia en otro sector.
 >
@@ -244,10 +244,11 @@ Cierra el reto con un **ADR de media página** (Contexto, Opciones, Decisión, C
 ```markdown
 Semana 1-2: Revisar fundamentos de arquitectura
   - Leer Power Platform Well-Architected (pilares, checklists y tradeoffs) y las guías de ALM, seguridad e integración
-  - Identificar las áreas con menor puntaje en el self-assessment interno
+  - Self-assessment: puntúa de 0 a 3 cada área (análisis de requisitos, diseño, implementación) con las competencias de los Conceptos Clave de este módulo, y marca la de menor puntaje
 
 Semana 3-4: Escenarios guiados
   - Resolver casos internos del banco de preguntas y del Módulo 41
+  - Hacer el [simulador](/simulador) filtrado por **Nivel 4 — Arquitecto** (40 preguntas, 50 min)
   - Si el score < 70%: repasar el área con menor puntaje
 
 Semana 5-6: Casos de estudio
@@ -268,6 +269,13 @@ Semana 8: Simulacro profesional
 - Microsoft Learn: ruta del examen AB-100 si buscas una credencial de arquitecto vigente
 - YouTube: John Savill's Technical Training (arquitectura de referencia de Azure)
 ```
+
+**Si haces el plan, así sabes que terminaste (opcional; no cuenta para completar el módulo):**
+
+- [ ] Self-assessment de análisis, diseño e implementación con puntaje de 0 a 3 por área y el área más débil marcada (semanas 1-2)
+- [ ] 3 casos de estudio (Customer Stories) resueltos: tu arquitectura escrita antes de leer la solución y una tabla con las diferencias (semanas 5-6)
+- [ ] Simulacro: 70 % o más en el [simulador](/simulador) filtrado por **Nivel 4 — Arquitecto** antes de presentar el portafolio (semanas 3-4 y 8)
+- [ ] Portafolio de casos revisado por un mentor o un par senior; si estudias solo, autoevalúalo con la rúbrica de la Microlección 3 al menos 48 horas después de escribirlo y anota qué cambiarías
 
 ### 💼 Caso Real de Negocio
 **Candidato:** Desarrollador senior de Power Platform con 4 años de experiencia, excelentes habilidades técnicas pero sin experiencia en decisiones arquitectónicas de alto nivel.  
@@ -296,10 +304,6 @@ Semana 8: Simulacro profesional
 | Defender una decisión con una capacidad que ya cambió | Se repite lo que se aprendió hace años (B2C para portales nuevos, "Model-Driven offline es limitado") | Verificar en Learn el estado vigente antes de escribir el ADR y enlazar la fuente |
 
 ### 🧪 Criterios de Validación
-- [ ] Self-assessment de análisis, diseño e implementación con puntaje por área
-- [ ] 3 casos de estudio resueltos con justificación de decisiones arquitectónicas
-- [ ] Simulacro profesional: score ≥ 70% antes de presentar el portafolio
-- [ ] Portafolio de casos de arquitectura revisado por un mentor o par senior
 - [ ] Resolví la micropráctica de ensayos clínicos y leí en el admin center (o en papel) qué requeriría CMK en el PROD del caso
 - [ ] Evalué el SIT contra seis recomendaciones de Well-Architected (RE:02, RE:05, RE:07, SE:03, SE:05, SE:07) con el dato que demuestra cada una
 - [ ] Diagnostiqué la integración nocturna sin dueño formulando una hipótesis antes de ver la causa

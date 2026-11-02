@@ -1023,11 +1023,11 @@
       options: [
       "Filter(Casos, Estado = \"Abierto\")",
       "Filter(Casos, StartsWith(Titulo, txtBuscar.Text))",
-      "Filter(Casos, Left(Titulo, 3) = \"ABC\")",
+      "Filter(Casos, Len(Titulo) > 3)",
       "Filter(Casos, CountRows(Notas) > 0)"
       ],
       answer: [0, 1],
-      explanation: "Las comparaciones simples y patrones como StartsWith suelen ser opciones más delegables para trabajar con grandes volúmenes en Dataverse. Funciones como Left o agregados sobre datos relacionados pueden forzar procesamiento local y devolver resultados incompletos."
+      explanation: "Las comparaciones simples y patrones como StartsWith suelen ser opciones más delegables para trabajar con grandes volúmenes en Dataverse. Funciones como Len o Trim aplicadas a la columna, o agregados sobre datos relacionados pueden forzar procesamiento local y devolver resultados incompletos."
     },
     {
       type: "single",
@@ -7807,13 +7807,13 @@
       type: "single",
       prompt: "¿Qué permite configurar el Power Platform Admin Center respecto a IA generativa y conectores por entorno?",
       options: [
-        "Políticas DLP que restringen qué conectores e IA generativa están disponibles en cada entorno",
+        "Data policies (antes DLP) para los conectores y, por entorno, la tarjeta Generative AI features (por ejemplo, Move data across regions)",
         "Solo el idioma de la interfaz de Power Apps",
         "El número máximo de usuarios que pueden iniciar sesión",
         "No existe ninguna configuración relacionada con IA en el Admin Center"
       ],
       answer: [0],
-      explanation: "Las políticas DLP del Admin Center permiten restringir qué conectores e IA generativa están disponibles por entorno, aplicando la misma lógica de gobernanza de datos que a otros conectores."
+      explanation: "Las data policies (antes DLP) del admin center clasifican conectores, incluidos conectores virtuales de Copilot Studio; las funciones de IA generativa se gobiernan además por entorno en la tarjeta Generative AI features. Es la misma lógica de gobernanza de datos que con otros conectores."
     },
     {
       type: "single",
@@ -7934,13 +7934,13 @@
       type: "single",
       prompt: "Según el pipeline de este proyecto (`ci.yml`), ¿cuáles son los gates obligatorios antes de un deploy?",
       options: [
-        "Lint & Type Check → Unit Tests → Playwright Smoke → Build → Deploy",
+        "Lint & Type Check y Unit Tests → Playwright Smoke → Next.js Build (el despliegue no es un job del CI: lo hace Vercel desde master)",
         "Solo un build manual sin ninguna verificación automatizada",
         "Únicamente una revisión visual del sitio en producción",
         "Solo la ejecución de `npm install`"
       ],
       answer: [0],
-      explanation: "El pipeline de CI de este proyecto encadena lint/typecheck, tests unitarios, smoke tests E2E, build y despliegue, actuando como red de seguridad para cualquier cambio, generado por IA o no."
+      explanation: "El pipeline de CI de este proyecto encadena lint/typecheck y tests unitarios, smoke tests E2E y build, actuando como red de seguridad para cualquier cambio, generado por IA o no; el despliegue lo hace Vercel fuera de ese workflow."
     },
     {
       type: "multi",
@@ -8260,13 +8260,13 @@
       type: "single",
       prompt: "¿Cuál es la diferencia principal entre un entorno Developer y un entorno Production?",
       options: [
-        "El Developer es gratuito, ligado a un solo usuario y pensado para practicar sin riesgo; Production contiene datos y usuarios reales",
+        "El Developer es para uso de su dueño, pensado para desarrollar y probar sin riesgo; Production contiene datos y usuarios reales",
         "No hay ninguna diferencia funcional entre ambos",
         "El entorno Developer no permite instalar Dataverse",
         "Production siempre es más rápido que Developer en rendimiento"
       ],
       answer: [0],
-      explanation: "Un entorno Developer es gratuito y aislado para un solo usuario, ideal para practicar; Production contiene los datos y usuarios reales del negocio y nunca debe usarse para pruebas."
+      explanation: "Un entorno Developer está pensado solo para su dueño, para desarrollar y probar (desde el 15-11-2026 es administrado y ejecutar apps o flujos en él exige licencia premium); Production contiene los datos y usuarios reales del negocio y nunca debe usarse para pruebas."
     },
     {
       type: "single",
@@ -8284,13 +8284,13 @@
       type: "single",
       prompt: "¿Qué comando debe ejecutarse SIEMPRE antes de cualquier operación que exporte, importe o modifique algo, según las buenas prácticas de este módulo?",
       options: [
-        "pac org who",
+        "pac env who (o su nombre anterior, pac org who)",
         "pac help",
         "pac --version",
         "pac auth clear"
       ],
       answer: [0],
-      explanation: "`pac org who` muestra la organización y usuario activos; verificarlo antes de cualquier operación destructiva evita operar contra el entorno equivocado."
+      explanation: "`pac env who` (llamado `pac org who` antes de la versión 1.32; el nombre anterior sigue funcionando) muestra la organización activa; verificarla antes de cualquier operación destructiva evita operar contra el entorno equivocado."
     },
     {
       type: "multi",
@@ -8447,13 +8447,13 @@
       type: "single",
       prompt: "¿Qué diferencia principal hay entre usar un client secret y un certificado como credencial de un service principal?",
       options: [
-        "El client secret es una contraseña con expiración que requiere rotación; el certificado es más seguro y no requiere rotación frecuente de un valor en texto plano",
+        "El client secret es una contraseña con expiración que requiere rotación; el certificado no comparte un valor en texto plano (se prueba la posesión de la clave privada), aunque también expira y debe renovarse",
         "No hay ninguna diferencia de seguridad entre ambos métodos",
         "El certificado solo puede usarse en entornos Developer",
         "El client secret nunca expira una vez generado"
       ],
       answer: [0],
-      explanation: "Un client secret expira y debe rotarse; un certificado ofrece mayor seguridad criptográfica y no depende de un valor en texto plano con rotación frecuente, por lo que es preferible en integraciones de largo plazo."
+      explanation: "Un client secret expira y debe rotarse; un certificado no envía un secreto compartido: el cliente prueba que posee la clave privada. Microsoft recomienda certificados (o identidades administradas) frente a secretos en producción, aunque el certificado también tiene fecha de expiración y hay que renovarlo."
     },
     {
       type: "single",
@@ -9336,25 +9336,25 @@
       type: "single",
       prompt: "Un Work Order no tiene Characteristics (skills) requeridas configuradas. ¿Qué consecuencia tiene esto en el Schedule Board?",
       options: [
-        "El resaltado de técnicos compatibles pierde sentido, porque cualquier técnico parece disponible aunque no tenga la skill",
+        "El schedule assistant no puede filtrar por skill, así que cualquier técnico aparece como candidato aunque no tenga la competencia",
         "El Work Order no puede crearse en absoluto",
         "El sistema asigna automáticamente al técnico más cercano sin importar la skill",
         "El Schedule Board oculta ese Work Order de la vista del dispatcher"
       ],
       answer: [0],
-      explanation: "Sin Characteristics requeridas, el Schedule Board no puede filtrar técnicos por skill — cualquier técnico 'parece' disponible aunque no tenga la competencia necesaria para el trabajo."
+      explanation: "Sin Characteristics requeridas, el schedule assistant no puede filtrar técnicos por skill — cualquier técnico aparece como candidato aunque no tenga la competencia. Ojo: la reserva manual desde el Schedule Board no valida Characteristics en ningún caso."
     },
     {
       type: "single",
-      prompt: "¿Cuándo se justifica activar Resource Scheduling Optimization (RSO) en vez de usar el Scheduling Assistant manual?",
+      prompt: "¿Cuándo se justifica activar Resource Scheduling Optimization (RSO) en vez de usar el schedule assistant?",
       options: [
         "Cuando el volumen de Work Orders similares por día es alto (decenas o cientos por región)",
-        "Siempre, porque RSO es superior al Scheduling Assistant en cualquier escenario",
+        "Siempre, porque RSO es superior al schedule assistant en cualquier escenario",
         "Solo cuando hay menos de 5 Work Orders diarios en total",
         "Únicamente si la empresa no tiene dispatchers humanos disponibles"
       ],
       answer: [0],
-      explanation: "RSO se justifica con volumen alto de Work Orders (decenas o cientos diarios por región); con bajo volumen, el Scheduling Assistant manual es suficiente y más fácil de auditar."
+      explanation: "RSO se justifica con volumen alto de Work Orders (decenas o cientos diarios por región); con bajo volumen, el schedule assistant es suficiente y más fácil de auditar."
     },
     {
       type: "single",
@@ -9396,17 +9396,17 @@
       type: "single",
       prompt: "¿Qué rol cumplen los Territorios de Servicio (Service Territories) en el Schedule Board y el RSO?",
       options: [
-        "Agrupan técnicos por zona geográfica y actúan como primer filtro antes de evaluar skill o disponibilidad",
+        "Agrupan técnicos por zona geográfica y son uno de los filtros que usan el schedule assistant y RSO, junto con skills y disponibilidad",
         "Determinan exclusivamente el precio del servicio, sin relación con la asignación de técnicos",
         "Solo se usan para reportes financieros, no para scheduling",
         "Reemplazan la necesidad de definir Characteristics en el Work Order"
       ],
       answer: [0],
-      explanation: "Los Territorios de Servicio agrupan técnicos por zona geográfica; el Schedule Board y el RSO los usan como primer filtro para evitar sugerir un técnico lejano cuando hay uno disponible en la misma zona."
+      explanation: "Los Territorios de Servicio agrupan técnicos por zona geográfica; el Schedule Board y el RSO los usan como filtro para evitar sugerir un técnico lejano cuando hay uno disponible en la misma zona."
     },
     {
       type: "single",
-      prompt: "El Scheduling Assistant sugiere candidatos para un Work Order. ¿Qué diferencia tiene frente al arrastre manual en el Schedule Board y frente a Resource Scheduling Optimization?",
+      prompt: "El schedule assistant sugiere candidatos para un Work Order. ¿Qué diferencia tiene frente al arrastre manual en el Schedule Board y frente a Resource Scheduling Optimization?",
       options: [
         "Sugiere los mejores candidatos (skill + cercanía + disponibilidad), pero la decisión final sigue siendo humana — es un punto intermedio entre lo manual y lo totalmente automatizado",
         "Es idéntico al arrastre manual, sin ninguna sugerencia adicional",
@@ -9414,7 +9414,7 @@
         "Solo puede usarse si ya se activó Resource Scheduling Optimization"
       ],
       answer: [0],
-      explanation: "El Scheduling Assistant sugiere los mejores candidatos según skill, cercanía y disponibilidad, pero la decisión final la toma el dispatcher — es el punto intermedio entre arrastrar manualmente y automatizar por completo con RSO."
+      explanation: "El schedule assistant sugiere los mejores candidatos según skill, cercanía y disponibilidad, pero la decisión final la toma el dispatcher — es el punto intermedio entre arrastrar manualmente y automatizar por completo con RSO."
     },
     {
       type: "single",
@@ -9511,7 +9511,7 @@
       type: "single",
       prompt: "¿Qué proceso ERP estándar cubre desde la requisición de compra hasta el pago al proveedor?",
       options: [
-        "Procure-to-pay (P2P)",
+        "Procure-to-pay (P2P), que el catálogo de Microsoft llama Source to pay",
         "Order-to-cash (O2C)",
         "Record-to-report (R2R)",
         "Inventory-to-deliver (I2D)"
@@ -9559,13 +9559,13 @@
       type: "single",
       prompt: "¿Por qué el licenciamiento de Finance & Operations suele ser una conversación comercial separada de Dynamics 365 CE?",
       options: [
-        "Porque F&O se licencia por un pool distinto al de Sales/Service/Field Service, y un proyecto que combina ambos casi siempre involucra dos conversaciones de licenciamiento",
+        "Porque las apps de F&O se licencian como productos propios, distintos de Sales/Service/Field Service, y un proyecto que combina ambos casi siempre involucra dos conversaciones de licenciamiento",
         "Porque F&O y CE siempre comparten exactamente el mismo tipo de licencia",
         "Porque Dynamics 365 CE no requiere ningún licenciamiento",
         "Porque el licenciamiento de F&O nunca se discute en un proyecto de arquitectura"
       ],
       answer: [0],
-      explanation: "Finance & Operations se licencia por separado de Dynamics 365 CE; un proyecto que combina ambos casi siempre involucra dos conversaciones de licenciamiento distintas con el cliente."
+      explanation: "Finance & Operations se licencia por separado de Dynamics 365 CE; un proyecto que combina ambos casi siempre involucra dos conversaciones de licenciamiento distintas con el cliente. Verifica precios y combinaciones en la guía de licenciamiento vigente."
     },
     {
       type: "single",
@@ -10067,13 +10067,13 @@
       type: "single",
       prompt: "¿Por qué en 2026 conviene diseñar sobre real-time journeys y no depender de outbound heredado?",
       options: [
-        "Porque Microsoft ha movido el foco a journeys en tiempo real y outbound heredado está retirándose/removido",
+        "Porque outbound marketing se retiró de todos los ambientes en mayo de 2026 y sus activos no se pueden usar en real-time journeys",
         "Porque real-time journeys no requiere consentimiento",
         "Porque outbound heredado es el único modelo soportado",
         "Porque Journeys solo funciona con F&O"
       ],
       answer: [0],
-      explanation: "El diseño actualizado debe evitar depender de capacidades outbound heredadas y privilegiar real-time journeys."
+      explanation: "Outbound marketing se retiró de todos los ambientes en mayo de 2026; sus emails, journeys, segmentos y formularios no se pueden usar en real-time journeys."
     },
     {
       type: "multi",
@@ -10188,7 +10188,7 @@
         "Real-time journey"
       ],
       answer: [0],
-      explanation: "Virtual tables permiten lectura sin duplicar el dato."
+      explanation: "Virtual tables trabajan sobre el dato de F&O sin duplicarlo en Dataverse (admiten lectura y también create, update y delete), así que el inventario se consulta vivo y sin nada que sincronizar."
     },
     {
       type: "single",

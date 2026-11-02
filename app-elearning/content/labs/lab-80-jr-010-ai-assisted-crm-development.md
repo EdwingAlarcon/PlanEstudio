@@ -69,7 +69,7 @@ function onLoad(context) {
     alert("Valor inválido"); // alert() bloquea el hilo de UI, no es el patrón de Dataverse
   }
   var risk = revenue > 100000 ? "Alto" : "Normal";
-  Xrm.Page.getControl("sit_riskfield").setValue(risk); // campo inventado, no existe en el formulario
+  Xrm.Page.getAttribute("sit_riskfield").setValue(risk); // campo inventado, no existe en el formulario
 }
 ```
 

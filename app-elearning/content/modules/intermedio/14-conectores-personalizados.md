@@ -15,7 +15,7 @@ Crear y certificar conectores personalizados para APIs REST, integrar autenticac
 
 > **Cómo está organizado este módulo:** cada concepto viene con una micropráctica de feedback inmediato y una práctica en tu entorno. Vas a **construir** el uso del conector en una app sin pasos dados, vas a **diagnosticar** una importación fallida antes de ver la causa, y vas a cerrar con un **reto de transferencia** con una API distinta (con clave y con una URL diferente por ambiente).
 >
-> Necesitas: tu entorno Developer del Módulo 1 (los conectores personalizados son **Premium**; el entorno Developer permite usarlos para aprender) y el publisher `SIT` (prefijo `sit`) que creaste en el Módulo 2 o en el Laboratorio 2. Es útil haber hecho la Microlección 3 del [Módulo 11](/nivel/intermedio/modulo/power-automate-avanzado): aquí se usa la misma API pública de tasas de cambio, que no pide credenciales.
+> Necesitas: tu entorno Developer del Módulo 1 (los conectores personalizados son **Premium**; el entorno Developer permite crearlos para aprender, pero en un Developer administrado —todos los que se crean desde el 15-11-2026— ejecutar el flujo exige licencia premium o la prueba de 30 días de Power Apps; ver [Entornos y trials](/recursos/entornos-y-trials)) y el publisher `SIT` (prefijo `sit`) que creaste en el Módulo 2 o en el Laboratorio 2. Es útil haber hecho la Microlección 3 del [Módulo 11](/nivel/intermedio/modulo/power-automate-avanzado): aquí se usa la misma API pública de tasas de cambio, que no pide credenciales.
 
 ---
 

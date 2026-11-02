@@ -62,7 +62,7 @@ Actúas como Contact Center Architect configurando y probando el canal de chat e
 
 - Ambiente trial de Dynamics 365 Customer Service con Digital messaging/Omnichannel habilitado.
 - Una página HTML simple (puede ser un archivo local o una página de Power Pages) donde pegar el script del widget de chat.
-- Dos sesiones de navegador (o una ventana normal y una de incógnito): una para simular al cliente en la página con el widget, otra para el agente en Customer Service workspace.
+- Dos sesiones de navegador (o una ventana normal y una de incógnito): una para simular al cliente en la página con el widget, otra para el agente en Copilot Service workspace.
 
 ## 🔧 Requisitos de tenant y fallos frecuentes
 
@@ -120,7 +120,7 @@ En **Customer Service admin center > Channels** (o **Customer support channels**
 
 ### Paso 2 — Workstream y regla de routing
 
-Ve a **Customer Service admin center > Workstreams > New** y crea un workstream de tipo Chat
+Ve a **Copilot Service admin center > Customer support > Workstreams > New workstream** y crea un workstream **Type** Messaging con **Channel** Chat
 asociado al canal del Paso 1.
 
 - Configura una regla de routing: si el cliente está marcado como premium (usa un campo o atributo
@@ -130,19 +130,19 @@ asociado al canal del Paso 1.
 
 ### Paso 3 — Capacidad y presencia de agente
 
-Ve a **Customer Service admin center > Workstreams > Capacity profiles** (o el equivalente en tu
+Ve a **Copilot Service admin center > Customer support > User management > Capacity profile (Manage)** (o el equivalente en tu
 ambiente) y asigna un perfil de capacidad al usuario agente (tu propia cuenta o una cuenta de
 prueba adicional).
 
 - Define el máximo de conversaciones simultáneas para ese perfil.
-- Inicia sesión como agente en **Customer Service workspace** y marca tu presencia como disponible.
+- Inicia sesión como agente en **Copilot Service workspace** y marca tu presencia como disponible.
 - Documenta qué pasa si intentas recibir una conversación con presencia "Ausente".
 
 ### Paso 4 — Conversación de prueba y handoff
 
 Desde tu página de prueba (sesión "cliente"), abre el widget de chat y envía un mensaje inicial.
 
-- Desde Customer Service workspace (sesión "agente"), acepta la conversación entrante.
+- Desde Copilot Service workspace (sesión "agente"), acepta la conversación entrante.
 - Documenta qué contexto ve el agente al aceptar: ¿historial del contacto, transcript, o solo el último mensaje?
 - Si tu ambiente incluye un bot de primer contacto, documenta cómo se transfiere la conversación del
   bot al agente y qué datos se conservan (intención, resumen, transcript).

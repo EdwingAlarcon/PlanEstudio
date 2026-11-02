@@ -33,12 +33,15 @@ lastVerified: "2026-11"
   conversación técnica o una decisión de arquitectura, pero **no valida que puedas desarrollar un
   plugin de forma independiente**.
 
-**Antes de las prácticas en el tenant, confirma que tienes:** Visual Studio con la carga de trabajo de
-.NET (escritorio) y el paquete de desarrollo de **.NET Framework 4.8**, el Power Platform CLI (`pac`)
-instalado (ver [Guía de Herramientas de Workstation](/recursos/guia-herramientas-workstation)), tu
+**Antes de las prácticas en el tenant, confirma que tienes:** una forma de compilar C# para .NET Framework
+(cualquiera de las dos sirve), el Power Platform CLI (`pac`) instalado (ver [Guía de Herramientas de
+Workstation](/recursos/guia-herramientas-workstation)), tu
 entorno Developer con la tabla **Solicitud TI** (`sit_solicitud`) del Laboratorio 2 y las columnas
 **Costo Estimado** (`sit_costoestimado`) y **Descripción de Solución** (`sit_descripcion_solucion`) del
 Laboratorio 9, y la solución con el publisher `SIT` (prefijo `sit`).
+
+- **Con VS Code o solo una terminal:** el **.NET SDK** 8 o posterior. Creas el proyecto con `pac plugin init`, compilas con `dotnet build` y ejecutas las pruebas con `dotnet test`. El proyecto que genera `pac` ya trae el paquete con los ensamblados de referencia de .NET Framework, así que no necesitas instalar aparte el paquete de desarrollo de .NET Framework 4.8.
+- **Con Visual Studio:** la carga de trabajo **.NET desktop development** y el paquete de desarrollo (Developer Pack) de **.NET Framework 4.8**. Instalarlos lleva entre 30 y 60 minutos la primera vez. A cambio, tienes **Test Explorer** y las alternativas con ventanas que se indican en cada paso.
 
 ### 🎯 Objetivo
 Desarrollar plugins C# robustos para ejecutar lógica de negocio compleja en el servidor de Dataverse: validaciones, cálculos, integraciones síncronas con APIs externas, y patrones de plugin avanzados como Early-Bound entities y Shared Variables.
@@ -106,9 +109,10 @@ Desarrollar plugins C# robustos para ejecutar lógica de negocio compleja en el 
 
 1. En <https://make.powerapps.com>, en tu solución, abre la tabla **Solicitud TI** > **Columns** > **New column**: **Display name** = `Fecha Vencimiento`, **Data type** = **Date and time**; en **Advanced options** > **Schema name** escribe solo `fechavencimiento` (resultado `sit_fechavencimiento`) > **Save**.
 2. Anota el **Value** de cada opción de **Prioridad** (`sit_prioridad`) y de **Estado** (`sit_estado`): abre la columna y mira el valor numérico de cada opción. Dataverse los genera a partir del Choice value prefix de tu publisher, así que **los números de los ejemplos de abajo son ilustrativos**: pon los tuyos.
-3. Crea el proyecto con el CLI, en una carpeta vacía: `pac plugin init --outputDirectory SIT.Plugins`. El proyecto que genera ya viene **firmado** con una clave de strong name (salvo que uses `--skip-signing`) y trae una clase base `PluginBase` con una clase de ejemplo. En este módulo escribimos las clases implementando `IPlugin` directamente, para ver cada servicio; puedes borrar la clase de ejemplo.
+3. Crea el proyecto con el CLI, en una carpeta vacía: `pac plugin init --outputDirectory SIT.Plugins`. El proyecto que genera ya viene **firmado** con una clave de strong name (`SIT.Plugins.snk`, salvo que uses `--skip-signing`) y trae una clase base `PluginBase.cs` y una clase de ejemplo `Plugin1.cs`. En este módulo escribimos las clases implementando `IPlugin` directamente, para ver cada servicio; borra `Plugin1.cs`.
    - *Alternativa con Visual Studio:* proyecto **Class Library (.NET Framework)** con **.NET Framework 4.8**, paquete NuGet `Microsoft.CrmSdk.CoreAssemblies`, y en las propiedades del proyecto, pestaña **Signing**, marca **Sign the assembly** y crea una clave nueva.
-4. Abre el proyecto en Visual Studio y comprueba en el `.csproj` el `TargetFramework`: debe ser un .NET Framework entre 4.6.2 y 4.8.
+4. Abre el proyecto (en Visual Studio, o la carpeta `SIT.Plugins` en VS Code) y comprueba en el `.csproj` el `TargetFramework`: debe ser un .NET Framework entre 4.6.2 y 4.8. El de `pac plugin init` dice `net48`.
+5. *Si usas la terminal:* entra en la carpeta (`cd SIT.Plugins`) y ejecuta `dotnet build`. **Qué deberías ver:** `Build succeeded` con 0 errores. Así compruebas la instalación antes de escribir código.
 
 ### Escribir los dos plugins (25 min)
 
@@ -214,7 +218,7 @@ namespace SIT.Plugins
 
 ### Registrar y probar (30 min)
 
-1. Compila (**Build** > **Build Solution**) y localiza el `.dll` en la carpeta `bin` del proyecto.
+1. Compila (en Visual Studio, **Build** > **Build Solution**; en la terminal, `dotnet build` dentro de la carpeta del proyecto) y localiza el `.dll`. Con el proyecto de `pac plugin init` queda en `bin\Debug\net48\SIT.Plugins.dll`. Con el proyecto **Class Library (.NET Framework)** de Visual Studio, en `bin\Debug\SIT.Plugins.dll`. Si en `bin\Debug` ves también un `SIT.Plugins.1.0.0.nupkg`, es un *paquete* de plug-in que genera la plantilla de `pac`. En este módulo no lo uses: registra el `.dll`.
 2. En el Plugin Registration Tool: **Register** > **Register New Assembly**. En el paso 1, pulsa el botón **…** y elige tu `.dll`; comprueba que aparecen marcadas las dos clases. Deja **SandBox** y **Database** como están > **Register Selected Plugins**.
 3. En el árbol, despliega tu ensamblado, haz clic derecho sobre `SIT.Plugins.SolicitudValidarCreatePlugin` > **Register New Step**: **Message** = `Create`, **Primary Entity** = `sit_solicitud`, **Event Pipeline Stage of Execution** = **PreValidation**, **Execution Mode** = **Synchronous** > **Register New Step**.
 4. Repite con `SIT.Plugins.SolicitudCalcularVencimientoPlugin`, pero con **Event Pipeline Stage of Execution** = **PreOperation**.
@@ -348,87 +352,127 @@ namespace SIT.Plugins
 
 **¿Por qué existe esto?** Registrar, probar en el tenant y leer el trace lleva minutos por intento. Una prueba unitaria lleva segundos y se repite en cada cambio.
 
-**Práctica (30 min):** agrega a la solución de Visual Studio un proyecto de pruebas **Class Library (.NET Framework)** 4.8 con los paquetes NuGet `xunit`, `xunit.runner.visualstudio`, `Microsoft.NET.Test.Sdk`, `Moq` y `Microsoft.CrmSdk.CoreAssemblies`, y una referencia al proyecto `SIT.Plugins`. *(Si prefieres MSTest, la estructura es la misma.)*
+**Práctica (40 min):** crea un proyecto de pruebas `SIT.Plugins.Tests` para .NET Framework 4.8 con **MSTest**, el mismo framework que usa el Laboratorio 23 (que amplía estas mismas pruebas).
+
+- **Con Visual Studio:** clic derecho en la solución > **Add** > **New Project** > **Class Library (.NET Framework)**, .NET Framework 4.8. Instala con NuGet `MSTest.TestFramework`, `MSTest.TestAdapter`, `Microsoft.NET.Test.Sdk`, `Moq` y `Microsoft.CrmSdk.CoreAssemblies`, y agrega una referencia (**Add** > **Project Reference**) al proyecto `SIT.Plugins`.
+- **Con la terminal:** junto a la carpeta `SIT.Plugins`, crea la carpeta `SIT.Plugins.Tests` y dentro un archivo `SIT.Plugins.Tests.csproj` con este contenido (la plantilla `dotnet new classlib` no ofrece .NET Framework, por eso se escribe a mano):
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.11.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.11.1" />
+    <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="Microsoft.CrmSdk.CoreAssemblies" Version="9.0.2.60" />
+    <!-- Ensamblados de referencia de .NET Framework: compila sin instalar el Developer Pack -->
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SIT.Plugins\SIT.Plugins.csproj" />
+  </ItemGroup>
+</Project>
+```
+
+Agrega al proyecto de pruebas el archivo `SolicitudPluginsTests.cs`:
 
 ```csharp
 using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Xrm.Sdk;
 using Moq;
 using SIT.Plugins;
-using Xunit;
 
-public class SolicitudPluginsTests
+namespace SIT.Plugins.Tests
 {
-    // Arma un IServiceProvider falso con el contexto y el tracing que piden los plugins
-    private static IServiceProvider CrearProveedor(string mensaje, int etapa, Entity target)
+    [TestClass]
+    public class SolicitudPluginsTests
     {
-        var context = new Mock<IPluginExecutionContext>();
-        context.Setup(c => c.MessageName).Returns(mensaje);
-        context.Setup(c => c.Stage).Returns(etapa);
-        context.Setup(c => c.InputParameters).Returns(new ParameterCollection { { "Target", target } });
+        // Arma un IServiceProvider falso con el contexto y el tracing que piden los plugins
+        private static IServiceProvider CrearProveedor(string mensaje, int etapa, Entity target)
+        {
+            var context = new Mock<IPluginExecutionContext>();
+            context.Setup(c => c.MessageName).Returns(mensaje);
+            context.Setup(c => c.Stage).Returns(etapa);
+            context.Setup(c => c.InputParameters).Returns(new ParameterCollection { { "Target", target } });
 
-        var proveedor = new Mock<IServiceProvider>();
-        proveedor.Setup(p => p.GetService(typeof(IPluginExecutionContext))).Returns(context.Object);
-        proveedor.Setup(p => p.GetService(typeof(ITracingService))).Returns(new Mock<ITracingService>().Object);
-        return proveedor.Object;
-    }
+            var proveedor = new Mock<IServiceProvider>();
+            proveedor.Setup(p => p.GetService(typeof(IPluginExecutionContext))).Returns(context.Object);
+            proveedor.Setup(p => p.GetService(typeof(ITracingService))).Returns(new Mock<ITracingService>().Object);
+            return proveedor.Object;
+        }
 
-    [Fact]
-    public void Critica_sin_costo_cancela_con_mensaje()
-    {
-        var target = new Entity("sit_solicitud");
-        target["sit_prioridad"] = new OptionSetValue(SolicitudValores.PRIORIDAD_CRITICA);
+        [TestMethod]
+        public void Critica_sin_costo_cancela_con_mensaje()
+        {
+            var target = new Entity("sit_solicitud");
+            target["sit_prioridad"] = new OptionSetValue(SolicitudValores.PRIORIDAD_CRITICA);
 
-        var ex = Assert.Throws<InvalidPluginExecutionException>(
-            () => new SolicitudValidarCreatePlugin().Execute(CrearProveedor("Create", 10, target)));
-        Assert.Contains("Costo Estimado", ex.Message);
-    }
+            try
+            {
+                new SolicitudValidarCreatePlugin().Execute(CrearProveedor("Create", 10, target));
+            }
+            catch (InvalidPluginExecutionException ex)
+            {
+                StringAssert.Contains(ex.Message, "Costo Estimado");
+                return; // la excepción esperada llegó: la prueba pasa
+            }
 
-    [Fact]
-    public void Critica_con_costo_no_cancela()
-    {
-        var target = new Entity("sit_solicitud");
-        target["sit_prioridad"] = new OptionSetValue(SolicitudValores.PRIORIDAD_CRITICA);
-        target["sit_costoestimado"] = new Money(500m);
+            Assert.Fail("El plugin debía cancelar la creación de una Crítica sin costo.");
+        }
 
-        var ex = Record.Exception(
-            () => new SolicitudValidarCreatePlugin().Execute(CrearProveedor("Create", 10, target)));
-        Assert.Null(ex);
-    }
+        [TestMethod]
+        public void Critica_con_costo_no_cancela()
+        {
+            var target = new Entity("sit_solicitud");
+            target["sit_prioridad"] = new OptionSetValue(SolicitudValores.PRIORIDAD_CRITICA);
+            target["sit_costoestimado"] = new Money(500m);
 
-    [Fact]
-    public void Baja_vence_en_48_horas()
-    {
-        var target = new Entity("sit_solicitud");
-        target["sit_prioridad"] = new OptionSetValue(SolicitudValores.PRIORIDAD_BAJA);
-        DateTime antes = DateTime.UtcNow;
+            // Si el plugin lanza una excepción, la prueba falla sola
+            new SolicitudValidarCreatePlugin().Execute(CrearProveedor("Create", 10, target));
+        }
 
-        new SolicitudCalcularVencimientoPlugin().Execute(CrearProveedor("Create", 20, target));
+        [TestMethod]
+        public void Baja_vence_en_48_horas()
+        {
+            var target = new Entity("sit_solicitud");
+            target["sit_prioridad"] = new OptionSetValue(SolicitudValores.PRIORIDAD_BAJA);
+            DateTime antes = DateTime.UtcNow;
 
-        DateTime vence = target.GetAttributeValue<DateTime>("sit_fechavencimiento");
-        Assert.InRange(vence, antes.AddHours(48), DateTime.UtcNow.AddHours(48));
-    }
+            new SolicitudCalcularVencimientoPlugin().Execute(CrearProveedor("Create", 20, target));
 
-    [Fact]
-    public void En_otra_etapa_no_toca_el_target()
-    {
-        var target = new Entity("sit_solicitud");
-        target["sit_prioridad"] = new OptionSetValue(SolicitudValores.PRIORIDAD_ALTA);
+            DateTime vence = target.GetAttributeValue<DateTime>("sit_fechavencimiento");
+            Assert.IsTrue(vence >= antes.AddHours(48) && vence <= DateTime.UtcNow.AddHours(48),
+                $"Debía vencer en 48 h. Vence: {vence:u}");
+        }
 
-        new SolicitudCalcularVencimientoPlugin().Execute(CrearProveedor("Create", 40, target));
+        [TestMethod]
+        public void En_otra_etapa_no_toca_el_target()
+        {
+            var target = new Entity("sit_solicitud");
+            target["sit_prioridad"] = new OptionSetValue(SolicitudValores.PRIORIDAD_ALTA);
 
-        Assert.False(target.Contains("sit_fechavencimiento"));
+            new SolicitudCalcularVencimientoPlugin().Execute(CrearProveedor("Create", 40, target));
+
+            Assert.IsFalse(target.Contains("sit_fechavencimiento"));
+        }
     }
 }
 ```
 
-Ejecútalas en **Test** > **Test Explorer** > **Run All Tests**. Después rompe algo a propósito (por ejemplo, cambia 48 por 24 en `HorasSla`) y comprueba que una prueba falla.
+Ejecútalas: en Visual Studio, **Test** > **Test Explorer** > **Run All Tests**; en la terminal, `dotnet test` dentro de la carpeta `SIT.Plugins.Tests`. **Qué deberías ver:** 4 pruebas superadas y ninguna con error. Después rompe algo a propósito (por ejemplo, cambia 48 por 24 en `HorasSla`) y comprueba que falla `Baja_vence_en_48_horas` con tu mensaje "Debía vencer en 48 h…". Deshaz el cambio.
+
+**Si no lo ves:** si `dotnet test` o **Test Explorer** dicen que no hay pruebas, revisa que el proyecto tenga `MSTest.TestAdapter` y `Microsoft.NET.Test.Sdk`, y que la clase tenga `[TestClass]` y los métodos `[TestMethod]`. Si la carpeta del proyecto está muy anidada (rutas de más de 260 caracteres), Windows puede impedir que se encuentren las pruebas: mueve la solución a una ruta corta, como `C:\dev\SIT.Plugins`.
 
 | Campo | Tu valor |
 |---|---|
 | Número de pruebas que pasan | ___ |
 | Mensaje de la prueba que falló al romper `HorasSla` | ___ |
-| Una prueba más que agregarías para `SolicitudAuditarEstadoPlugin` (qué simularías) | ___ |
+| Una prueba más que agregarías para `SolicitudAuditarEstadoPlugin`: qué simularías (basta con describirlo; el Ejercicio 5 del Laboratorio 23 la escribe completa) | ___ |
 
 ---
 
@@ -447,6 +491,14 @@ Ejecútalas en **Test** > **Test Explorer** > **Run All Tests**. Después rompe 
 **Restricciones:** no hagas un `Retrieve` del registro (usa lo que el pipeline ya te da), elige la etapa en la que conviene cancelar y limita el step a las columnas necesarias.
 
 > Pista si te atascas: el `Target` de un Update solo trae lo enviado. ¿Dónde está la descripción guardada de antes, y qué columnas necesita esa imagen?
+>
+> Pista para las pruebas: el `CrearProveedor` de la Microlección 4 no configura imágenes, y un mock de Moq sin `Setup` devuelve `null` para `PreEntityImages`: tu plugin fallaría con `NullReferenceException` en la prueba aunque en el tenant funcione. Amplía `CrearProveedor` con un parámetro opcional `Entity preImage = null` y agrega, antes de crear el proveedor, estas líneas (con el **Entity Alias** que registres en tu step):
+>
+> ```csharp
+> var imagenes = new EntityImageCollection();
+> if (preImage != null) imagenes.Add("PreImage", preImage); // la clave es el Entity Alias de tu imagen
+> context.Setup(c => c.PreEntityImages).Returns(imagenes);
+> ```
 
 | Campo | Tu valor |
 |---|---|

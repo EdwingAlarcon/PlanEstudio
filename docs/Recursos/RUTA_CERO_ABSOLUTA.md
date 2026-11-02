@@ -39,8 +39,10 @@ Microsoft 365 / Power Platform (el "edificio")
 estudio**. Esa cuenta pertenece a una organización: esa organización es tu **tenant**. Dentro de ese
 tenant necesitas un **ambiente Developer con Dataverse** (si no se puede, un ambiente Trial con
 Dataverse). A partir del 15 de noviembre de 2026 ya no se pueden crear ambientes Developer no
-administrados: solo existirá el ambiente Developer **administrado**, y para tenerlo normalmente hay que
-pedírselo a un administrador o al área de TI. El Módulo 1 te da los pasos y un mensaje listo para
+administrados: solo existirá el ambiente Developer **administrado** (uno por usuario), y para tenerlo
+normalmente hay que pedírselo a un administrador o al área de TI (si el tenant de prueba es tuyo, el
+administrador eres tú). En un ambiente administrado puedes crear apps y flujos sin licencia premium, pero
+para ejecutarlos necesitas una (la prueba de Power Apps sirve 30 días). El Módulo 1 te da los pasos y un mensaje listo para
 pedirlo. Ojo: el sandbox gratuito del Microsoft 365 Developer Program no es para todo el mundo; solo lo
 reciben suscriptores de Visual Studio Professional o Enterprise, ciertos partners de Microsoft y
 empresas con soporte Premier o Unified. Si entiendes la jerarquía de arriba, estos pasos dejan de
@@ -53,7 +55,7 @@ pida un tipo de ambiente que no reconozcas.
 
 | Tipo de ambiente | Para qué existe | Qué SÍ puedes practicar ahí | Qué NO puedes practicar ahí |
 |---|---|---|---|
-| **Developer** | Tu ambiente personal y gratuito para aprender y experimentar. Uno por persona. Necesitas una cuenta de trabajo o estudio, no personal; desde noviembre de 2026 Microsoft cambió cómo se consigue (ver [Entornos y trials](/recursos/entornos-y-trials)). Si no puedes crear uno, un ambiente **Trial** con Dataverse sirve igual, aunque caduca. | Crear tablas, apps Canvas y Model-Driven, flujos de Power Automate, Power Fx, Dataverse completo — todo el Nivel Básico e Intermedio de este plan. | Escenarios que requieren varios usuarios reales simultáneos, licencias Dynamics 365 completas (Sales/Customer Service como producto, no solo la tabla), o volumen de datos realista de una empresa. |
+| **Developer** | Tu ambiente personal para aprender y experimentar. Uno por persona (si un lab pide un segundo ambiente, usa un Trial o la variante en papel). Necesitas una cuenta de trabajo o estudio, no personal; desde noviembre de 2026 Microsoft cambió cómo se consigue (ver [Entornos y trials](/recursos/entornos-y-trials)). Si no puedes crear uno, un ambiente **Trial** con Dataverse sirve igual, aunque caduca. | Crear tablas, apps Canvas y Model-Driven, flujos de Power Automate, Power Fx, Dataverse completo — todo el Nivel Básico e Intermedio de este plan. | Escenarios que requieren varios usuarios reales simultáneos, licencias Dynamics 365 completas (Sales/Customer Service como producto, no solo la tabla), o volumen de datos realista de una empresa. |
 | **Sandbox** | Una copia de "casi producción" para probar cambios antes de que lleguen a los usuarios reales — típico en una empresa con un equipo de Power Platform. | Probar soluciones empaquetadas, validar Business Process Flows con datos de prueba, ensayar una migración antes de aplicarla en Production. | Nada que dependa de datos reales de clientes — un Sandbox usa datos de prueba, no datos de producción reales. |
 | **Production** | El ambiente que usan de verdad los empleados/clientes de una empresa. | Nada, en este plan — **nunca vas a practicar directamente en Production**, ni el propio equipo del curso lo hace fuera de un contexto laboral real y gobernado. | Cualquier práctica de aprendizaje. Si un lab menciona Production, es para que entiendas el concepto, no para que operes uno. |
 | **Trial de Dynamics 365** | Una licencia temporal (normalmente 30 días) que te da acceso a un producto completo de Dynamics 365 (Sales, Customer Service, Customer Insights…) sobre un ambiente nuevo, para poder practicar la app real y no solo sus tablas en Dataverse. | Todo lo que pidan los labs marcados "requiere trial": crear leads/oportunidades en Sales, casos/colas/SLA en Customer Service, segmentos en Customer Insights. | Escenarios de integración con sistemas reales de una empresa (pasarela de pagos real, ERP real) — eso queda como diseño documentado, no ejecución. |

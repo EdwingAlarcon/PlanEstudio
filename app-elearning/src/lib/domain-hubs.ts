@@ -167,7 +167,7 @@ export function getDynamics365Hub(): DomainHub {
         description: "Base de Sales y Customer Service antes de especializar.",
         links: [
           { title: "Dynamics 365 CE — Sales y Customer Service", description: "Módulo 20.", href: "/nivel/avanzado/modulo/dynamics-365-ce-sales-y-customer-service" },
-          { title: "Dynamics 365 CE Avanzado — Customer Engagement como ecosistema", description: "Módulo 56.", href: "/nivel/d365/modulo/introduccion-dynamics-365-avanzado" },
+          { title: "Dynamics 365 CE Avanzado — Customer Engagement como ecosistema", description: "Módulo 57.", href: "/nivel/d365/modulo/introduccion-dynamics-365-avanzado" },
         ],
       },
       {
@@ -175,7 +175,7 @@ export function getDynamics365Hub(): DomainHub {
         description: "Forecasting, pipeline y sales operations.",
         links: [
           { title: "Ruta dedicada — Dynamics 365 Sales", description: "Progresión completa separada de Customer Service y Customer Insights.", href: "/rutas/dynamics-365-sales" },
-          { title: "Dynamics 365 Sales Avanzado", description: "Módulo 60 — forecasting, pipeline y sales operations.", href: "/nivel/d365/modulo/dynamics-365-sales-avanzado" },
+          { title: "Dynamics 365 Sales Avanzado", description: "Módulo 61 — forecasting, pipeline y sales operations.", href: "/nivel/d365/modulo/dynamics-365-sales-avanzado" },
           { title: "Lab 57 — Diseño de solución D365 Sales con IA", description: "Diseño funcional asistido por IA.", href: "/labs/lab-57-diseno-solucion-d365-sales-con-ia" },
           { title: "Lab 66 — Sales lead-to-cash", description: "Ciclo completo de oportunidad a cierre.", href: "/labs/lab-66-sales-lead-to-cash" },
           { title: "Lab 81 — Sales forecasting y pipeline review", description: "Revisión de forecast y pipeline.", href: "/labs/lab-81-d365-sales-forecasting-pipeline-review" },
@@ -186,7 +186,7 @@ export function getDynamics365Hub(): DomainHub {
         description: "SLA, entitlements, routing y resolución de casos.",
         links: [
           { title: "Ruta dedicada — Dynamics 365 Customer Service", description: "Progresión completa separada de Sales y Customer Insights.", href: "/rutas/dynamics-365-customer-service" },
-          { title: "Dynamics 365 Customer Service Avanzado", description: "Módulo 61 — SLA, entitlements y routing.", href: "/nivel/d365/modulo/dynamics-365-customer-service-avanzado" },
+          { title: "Dynamics 365 Customer Service Avanzado", description: "Módulo 62 — SLA, entitlements y routing.", href: "/nivel/d365/modulo/dynamics-365-customer-service-avanzado" },
           { title: "Lab 68 — Customer Service case-to-resolution", description: "Ciclo completo de un caso.", href: "/labs/lab-68-customer-service-case-to-resolution" },
           { title: "Lab 82 — SLA, entitlements y routing", description: "Configuración de colas y SLA con pausa/reanudación.", href: "/labs/lab-82-customer-service-sla-entitlements-routing" },
         ],
@@ -197,8 +197,8 @@ export function getDynamics365Hub(): DomainHub {
         links: [
           { title: "Ruta dedicada — Customer Insights - Data", description: "Unificación de perfiles (CDP), separada de Journeys.", href: "/rutas/dynamics-365-customer-insights-data" },
           { title: "Ruta dedicada — Customer Insights - Journeys", description: "Ejecución de marketing, separada de Data.", href: "/rutas/dynamics-365-customer-insights-journeys" },
-          { title: "Customer Insights - Data — Unificación de perfiles", description: "Módulo 57.", href: "/nivel/d365/modulo/customer-insights-data-unificacion-perfiles" },
-          { title: "Customer Insights - Journeys — Real-time y consentimiento", description: "Módulo 63.", href: "/nivel/d365/modulo/customer-insights-journeys-real-time" },
+          { title: "Customer Insights - Data — Unificación de perfiles", description: "Módulo 58.", href: "/nivel/d365/modulo/customer-insights-data-unificacion-perfiles" },
+          { title: "Customer Insights - Journeys — Real-time y consentimiento", description: "Módulo 64.", href: "/nivel/d365/modulo/customer-insights-journeys-real-time" },
           { title: "Lab 58 — Segmento y journey", description: "Segmentación y journey básico.", href: "/labs/lab-58-customer-insights-segmento-journey" },
           { title: "Lab 67 — Customer 360 / Insights Data", description: "Unificación de perfiles.", href: "/labs/lab-67-customer-360-insights-data" },
           { title: "Lab 84 — Real-time journey", description: "Trigger, consentimiento y canal.", href: "/labs/lab-84-customer-insights-real-time-journey" },
@@ -209,7 +209,7 @@ export function getDynamics365Hub(): DomainHub {
         title: "Field Service",
         description: "Work orders, agreements, mobile offline y scheduling/RSO.",
         links: [
-          { title: "Field Service end-to-end", description: "Módulo 58 — work orders, agreements, mobile offline y RSO.", href: "/nivel/d365/modulo/field-service-scheduling-avanzado" },
+          { title: "Field Service end-to-end", description: "Módulo 59 — work orders, agreements, mobile offline y RSO.", href: "/nivel/d365/modulo/field-service-scheduling-avanzado" },
           { title: "Lab 59 — Work order UAT", description: "Ciclo de vida de una orden de trabajo.", href: "/labs/lab-59-field-service-work-order-uat" },
           { title: "Lab 86 — Agreement y mantenimiento preventivo", description: "Recurrencia y evidencia esperada.", href: "/labs/lab-86-field-service-agreement-preventive-maintenance" },
           { title: "Lab 87 — Mobile offline work order", description: "Diseño de sincronización y conflictos.", href: "/labs/lab-87-field-service-mobile-offline-work-order" },
@@ -219,7 +219,7 @@ export function getDynamics365Hub(): DomainHub {
         title: "Contact Center / Omnichannel",
         description: "Canales, routing y operación — Chat es hands-on con trial; Voz y SMS quedan como diseño hasta contratar un proveedor de telefonía real.",
         links: [
-          { title: "Contact Center / Omnichannel — Canales, routing y operación", description: "Módulo 62.", href: "/nivel/d365/modulo/dynamics-365-contact-center-omnichannel" },
+          { title: "Contact Center / Omnichannel — Canales, routing y operación", description: "Módulo 63.", href: "/nivel/d365/modulo/dynamics-365-contact-center-omnichannel" },
           { title: "Lab 83 — Contact Center Chat Channel Hands-On", description: "Canal de chat, workstream, routing y conversación de prueba en trial.", href: "/labs/lab-83-contact-center-simulation" },
         ],
       },
@@ -227,7 +227,7 @@ export function getDynamics365Hub(): DomainHub {
         title: "F&O (Finance & Operations)",
         description: "Vocabulario y mapas de proceso, más configuración hands-on (LAB-093 a LAB-097) en trial tenant — requiere ambiente Dynamics 365 Finance/SCM propio.",
         links: [
-          { title: "F&O Awareness — Procesos ERP, seguridad e integración con CE", description: "Módulo 59.", href: "/nivel/d365/modulo/finance-operations-procesos-erp" },
+          { title: "F&O Awareness — Procesos ERP, seguridad e integración con CE", description: "Módulo 60.", href: "/nivel/d365/modulo/finance-operations-procesos-erp" },
           { title: "Lab 69 — Process mapping ERP end-to-end", description: "Mapeo O2C/P2P/R2R/I2D.", href: "/labs/lab-69-fo-process-mapping-erp-end-to-end" },
           { title: "Lab 89 — Process mapping avanzado", description: "Profundización de mapeo de procesos.", href: "/labs/lab-89-fo-process-mapping-advanced" },
           { title: "Lab 93 — Finance Setup Walkthrough", description: "Legal entity, calendario fiscal, catálogo de cuentas y dimensiones en trial tenant.", href: "/labs/lab-93-fo-finance-setup-walkthrough" },
@@ -254,7 +254,7 @@ export function getDynamics365Hub(): DomainHub {
         title: "Capstone enterprise",
         description: "Integra CE, Contact Center, Field Service e integración F&O en un caso evaluable.",
         links: [
-          { title: "Capstone Enterprise D365", description: "Módulo 65.", href: "/nivel/d365/modulo/capstone-enterprise-d365" },
+          { title: "Capstone Enterprise D365", description: "Módulo 66.", href: "/nivel/d365/modulo/capstone-enterprise-d365" },
           { title: "Lab 90 — Capstone Enterprise D365", description: "Proyecto integrador final del nivel.", href: "/labs/lab-90-capstone-enterprise-d365" },
           { title: "Nivel D365 completo", description: "10 módulos de especialización.", href: "/nivel/d365" },
         ],
@@ -346,8 +346,8 @@ export function getIntegrationHub(): DomainHub {
         title: "CE + F&O — dual-write, DMF y virtual tables",
         description: "Frontera técnica entre Dataverse/CE y Finance & Operations.",
         links: [
-          { title: "F&O Awareness — Procesos ERP, seguridad e integración con CE", description: "Módulo 59.", href: "/nivel/d365/modulo/finance-operations-procesos-erp" },
-          { title: "Integración CE + F&O — Dual-write, DMF y Ownership", description: "Módulo 64.", href: "/nivel/d365/modulo/integracion-ce-fo-dual-write-dmf" },
+          { title: "F&O Awareness — Procesos ERP, seguridad e integración con CE", description: "Módulo 60.", href: "/nivel/d365/modulo/finance-operations-procesos-erp" },
+          { title: "Integración CE + F&O — Dual-write, DMF y Ownership", description: "Módulo 65.", href: "/nivel/d365/modulo/integracion-ce-fo-dual-write-dmf" },
           { title: "Lab 70 — CE + F&O integration architecture", description: "Ownership de datos y dual-write técnico.", href: "/labs/lab-70-ce-fo-integration-architecture" },
           { title: "Lab 88 — Dual-write ownership matrix", description: "Matriz de ownership por entidad.", href: "/labs/lab-88-ce-fo-dual-write-ownership-matrix" },
           { title: "Lab 69 — Process mapping ERP end-to-end", description: "Mapeo O2C/P2P/R2R/I2D.", href: "/labs/lab-69-fo-process-mapping-erp-end-to-end" },
@@ -358,7 +358,7 @@ export function getIntegrationHub(): DomainHub {
         description: "Proyectos que integran Power Platform y Dynamics 365 de punta a punta.",
         links: [
           { title: "Lab 60 — Proyecto integrador de servicio postventa", description: "Capstone D365 con Power Automate.", href: "/labs/lab-60-proyecto-integrador-servicio-postventa" },
-          { title: "Capstone Enterprise D365", description: "Módulo 65 — arquitectura CE, Contact Center, Field Service e integración F&O.", href: "/nivel/d365/modulo/capstone-enterprise-d365" },
+          { title: "Capstone Enterprise D365", description: "Módulo 66 — arquitectura CE, Contact Center, Field Service e integración F&O.", href: "/nivel/d365/modulo/capstone-enterprise-d365" },
           { title: "Lab 90 — Capstone Enterprise D365", description: "Proyecto integrador final.", href: "/labs/lab-90-capstone-enterprise-d365" },
         ],
       },

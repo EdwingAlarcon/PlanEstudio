@@ -4,7 +4,7 @@ title: "Copilot en Power Platform"
 level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 25
-practiceMinutes: 200
+practiceMinutes: 250
 slug: "copilot-en-power-platform"
 lastVerified: "2026-11"
 ---
@@ -15,7 +15,7 @@ Usar las capacidades de Copilot integradas en Power Apps (Canvas, Model-Driven y
 >
 > **Antes de empezar (lee esto, ahorra media hora):**
 > - **Este módulo es transversal:** no exige ningún módulo de los niveles de certificación. Donde un ejercicio usa Power Fx o flujos te doy una variante mínima; si ya hiciste los Módulos 2 a 7, usa tu tabla **Solicitud TI** (en Power Fx, `'Solicitudes TI'`) y te ahorras la Microlección 1.
-> - **Tiempo:** la primera vez, cuenta unas 3 horas y media de práctica (más 25 minutos de lectura). Mejor en dos sesiones: Microlecciones 1 a 3 en la primera; de la 4 al reto en la segunda.
+> - **Tiempo:** la primera vez, cuenta unas 4 horas de práctica (más 25 minutos de lectura): las esperas de Copilot y las pruebas del flujo antes y después de corregirlo pesan más de lo que parece. Mejor en dos sesiones: Microlecciones 1 a 3 en la primera; de la 4 al reto en la segunda.
 > - **Cuenta y entorno:** una cuenta de trabajo o estudio y un entorno **con Dataverse** donde tengas al menos el rol **System Customizer** (Learn lo pide para crear apps con Copilot). Desde noviembre de 2026 cambió cómo se consigue un entorno de práctica: ver [Entornos y trials](/recursos/entornos-y-trials). Si no tienes permisos en el entorno donde estás, Learn indica que Power Apps te pide crear la app en tu propio entorno y, si no tienes un entorno de desarrollador, crea uno automáticamente ([Learn: crear apps con Copilot](https://learn.microsoft.com/power-apps/maker/canvas-apps/ai-conversations-create-app)).
 > - **Idioma:** el ambiente del curso está en **English (United States)**, y conviene: Learn indica que Copilot en Power Automate está optimizado para inglés, que **Create a formula** de la barra de fórmulas solo existe en inglés (en-US) y que las páginas generativas en el navegador solo admiten prompts en inglés de EE. UU. Escribe los prompts de este módulo **en inglés** cuando la herramienta lo exija (te doy ambas versiones).
 > - **Región:** Copilot puede no estar disponible en todas las regiones y, según dónde esté tu entorno, el administrador puede tener que permitir el movimiento de datos entre regiones ([Learn: Copilot en Power Apps](https://learn.microsoft.com/power-apps/maker/canvas-apps/ai-overview), [Learn: movimiento de datos entre regiones](https://learn.microsoft.com/power-platform/admin/geographical-availability-copilot)). Si una opción de Copilot no aparece, anótalo como dato (región del entorno y qué no aparece) y sigue con la parte de revisión, que no depende del tenant.
@@ -130,7 +130,7 @@ Filter(
 3. Corrige la fórmula y comprueba que desaparecen el error y la advertencia.
 4. Si tu entorno está en inglés y ves **Create a formula** en ese mismo menú (preview), pídele la misma fórmula en inglés (`Show only High priority requests whose title starts with the search box text`) y revisa su salida con el mismo método.
 
-**Si no lo ves:** si no aparece el menú de Copilot junto a **fx**, el administrador puede haber apagado las funciones en preview (Microlección 5), o la app tiene desactivado **Copilot for formulas** en **Settings** > **Updates** > **Preview**. Si `'Prioridad (Solicitudes TI)'` no existe, escribe `'Prioridad (` en la barra de fórmulas y elige la opción que te propone (es la enumeración de tu columna Choice).
+**Si no lo ves:** si no aparece el menú de Copilot junto a **fx**, revisa que Copilot esté habilitado para tu entorno y tu tenant (Learn lo pone como requisito; Microlección 5). Si el menú aparece pero falta solo **Create a formula**, revisa en la app **Settings** > **Updates** > **Preview** el interruptor **Copilot for formulas**: según Learn, apagarlo quita únicamente la opción **Create a formula (preview)** del menú, no **Explain this formula**. Recuerda además que **Create a formula** solo existe con el idioma en inglés (en-US). Si `'Prioridad (Solicitudes TI)'` no existe, escribe `'Prioridad (` en la barra de fórmulas y elige la opción que te propone (es la enumeración de tu columna Choice).
 
 **Evidencia a reportar:**
 
@@ -147,9 +147,9 @@ Filter(
 
 **¿Qué vas a aprender?** A crear un flujo con Copilot y a revisar lo que **no** generó: qué pasa cuando un dato falta o una acción falla.
 
-**¿Por qué existe esto?** Copilot en Power Automate construye el **camino feliz**: trigger, acciones y conexiones. Learn reconoce sus límites: admite solo una parte de los conectores y "isn't equipped to help with fixing flow errors" ([Learn: FAQ de Copilot en cloud flows](https://learn.microsoft.com/power-automate/faqs-copilot)). Lo que casi nunca agrega por su cuenta es lo que hace a un flujo apto para producción:
+**¿Por qué existe esto?** Copilot en Power Automate construye el **camino feliz**: trigger, acciones y conexiones. Learn reconoce sus límites: admite solo una parte de los conectores y "isn't equipped to help with fixing flow errors" ([Learn: FAQ de Copilot en cloud flows](https://learn.microsoft.com/power-automate/faqs-copilot)). Existe aparte la función **Troubleshoot in Copilot** del diseñador nuevo, que ante una ejecución fallida da un resumen legible del error y, cuando puede, sugiere una corrección; Learn advierte que puede no funcionar en todos los escenarios ([Learn: solucionar problemas de un cloud flow](https://learn.microsoft.com/power-automate/fix-flow-failures#troubleshoot-in-copilot)). Te ayuda a **diagnosticar** un fallo que ya ocurrió, y su sugerencia también se verifica; no agrega por sí sola el manejo de errores que faltaba. Lo que casi nunca agrega por su cuenta es lo que hace a un flujo apto para producción:
 - **Validar datos opcionales** antes de usarlos (una Lookup vacía hace fallar la acción que la usa).
-- **Manejo de errores** con **Scope** y **Run after**: un Scope "Try" con las acciones y un Scope "Catch" configurado para ejecutarse si el Try falla o agota el tiempo, que registra el error y avisa ([Learn: manejo de errores](https://learn.microsoft.com/power-automate/guidance/coding-guidelines/error-handling)). Es el patrón del Módulo 11; aquí basta con la versión mínima.
+- **Manejo de errores** con **Scope** y **Run after**: un Scope "Try" con las acciones y un Scope "Catch" configurado para ejecutarse si el Try falla o agota el tiempo, que registra el error y avisa ([Learn: manejo de errores](https://learn.microsoft.com/power-automate/guidance/coding-guidelines/error-handling)). Es el patrón del Módulo 11 (y de la práctica de manejo de errores del Módulo 5, si la hiciste); aquí basta con la versión mínima, y te doy los clics.
 - **Terminate** con estado **Failed** cuando hay que detener el flujo dejando claro por qué.
 
 **Ejemplo pequeño:** "Cuando se cree una solicitud, avisa por correo al usuario de **Asignado a**". Si la solicitud se crea sin asignar, la acción que busca al usuario no tiene qué buscar: el flujo falla y **nadie** se entera de la solicitud nueva.
@@ -169,12 +169,14 @@ Filter(
 
 **🔧 Diagnosticar antes de corregir (5 min):** el flujo de un compañero "a veces no avisa a nadie". Encuentra la causa antes de ver la solución → **[Diagnosticar: el flujo generado falla sin avisar](/practica/ip-ia-005-flujo-generado-falla-sin-avisar)**.
 
-**Actividad de fallo y corrección (25 min):** corrige tu flujo con esta versión mínima (si ya hiciste el Módulo 11, aplica allí el patrón completo):
+**Actividad de fallo y corrección (35 min):** corrige tu flujo con esta versión mínima (si ya hiciste el Módulo 11, aplica allí el patrón completo):
 1. Justo después del trigger agrega una **Condition** que compruebe si la columna **Asignado a** (o *assigned user*) está vacía: en el lado izquierdo, la columna desde el contenido dinámico; operador **is equal to**; lado derecho, la expresión `null`. En la rama **True**, envía el correo a un buzón de respaldo (el tuyo, en la práctica) con el asunto `Solicitud sin asignar: ` + el título.
-2. En la rama **False**, agrega un **Scope** y cámbiale el nombre a `Try`; arrastra dentro la búsqueda del usuario y el envío del correo. Debajo agrega otro **Scope** llamado `Catch`; en su **Settings** > **Run after**, deja marcados solo los estados de fallo y de tiempo agotado del Scope `Try` (desmarca el de éxito). Dentro de `Catch`, un **Send an email (V2)** a ti con el texto "Falló el aviso de la solicitud" y, al final, **Terminate** con **Status** = **Failed**.
-3. Vuelve a probar los dos casos y anota qué cambió.
+2. En la rama **False**, con **+** > **Add an action** > **Scope**, agrega un **Scope** y cámbiale el nombre a `Try` (un Scope es solo un contenedor de acciones); arrastra dentro la búsqueda del usuario y el envío del correo. Debajo de `Try` (fuera de él, no dentro), agrega otro **Scope** llamado `Catch`.
+3. Configura cuándo se ejecuta `Catch`: con `Catch` seleccionado, abre la pestaña **Settings** del panel de la acción y busca la sección **Run after**; despliega `Try`, marca **Has failed** y **Has timed out**, y después desmarca **Is successful** (primero marca otro estado: siempre debe quedar al menos uno marcado). **Qué deberías ver:** al volver a abrir **Settings** de `Catch`, en **Run after** aparece `Try` con **Has failed** y **Has timed out** marcados y **Is successful** sin marcar.
+4. Dentro de `Catch`, un **Send an email (V2)** a ti con el texto "Falló el aviso de la solicitud" y, al final, **Terminate** con **Status** = **Failed**.
+5. Vuelve a probar los dos casos y anota qué cambió.
 
-**Si no lo ves:** si el panel de Copilot no aparece al editar, estás en el diseñador clásico: Learn indica que Copilot solo está en el diseñador nuevo. Si la Condition con `null` no da **True** con la Lookup vacía, revisa en el historial el valor exacto que trajo el trigger para esa columna y compáralo con eso.
+**Si no lo ves:** si el panel de Copilot no aparece al editar, estás en el diseñador clásico: Learn indica que Copilot solo está en el diseñador nuevo. Si **Is successful** no se deja desmarcar, marca antes **Has failed**: siempre tiene que quedar un estado marcado. Si la Condition con `null` no da **True** con la Lookup vacía, revisa en el historial el valor exacto que trajo el trigger para esa columna y compáralo con eso.
 
 **Evidencia a reportar:**
 

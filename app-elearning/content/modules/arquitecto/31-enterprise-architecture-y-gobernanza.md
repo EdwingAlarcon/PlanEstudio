@@ -116,7 +116,7 @@ Dos matices de vigencia: (1) **Advanced connector policies** (ACP) son la nueva 
 
 1. **Manage** > **Tenant settings**. Busca los tres ajustes **Environment assignments: Developer**, **Environment assignments: Production** y **Environment assignments: Trial** y anota el valor de cada uno. Si dice que cualquiera puede crear, eso es un hallazgo de Security.
 2. **Security** > **Data and privacy** > **Data policy**. Anota cuántas políticas hay y, de cada una, las columnas **Scope** (inquilino o ambiente) y **Applied to** ("All environments", "All environments, except (n)", "(n) environments" o un ambiente). Si no hay ninguna de inquilino, el admin center lo marca como recomendación de seguridad.
-3. **Manage** > **Environments**. Abre el menú **…** de dos ambientes: si ves **Enable Managed Environments** no es administrado; si ves **Edit Managed Environments**, sí ([Learn](https://learn.microsoft.com/power-platform/admin/managed-environment-enable)). No lo actives todavía: es una capacidad premium.
+3. **Manage** > **Environments**. Abre el menú **…** de dos ambientes: si ves **Enable Managed Environments** no es administrado; si ves **Edit Managed Environments**, sí ([Learn](https://learn.microsoft.com/power-platform/admin/managed-environment-enable)). No lo actives aquí, en tus ambientes reales: es una capacidad premium y, una vez activa, todos los usuarios que ejecutan apps o flujos del ambiente necesitan licencia premium. En el Módulo 33 (microlección 3) lo activarás en un ambiente Developer de prueba, con sus advertencias de licencia y una variante en papel.
 4. **Manage** > **Environment groups**. Anota si hay grupos y, si hay, abre uno y mira la pestaña **Rules**: qué reglas están configuradas y si están publicadas (las modificadas sin publicar aparecen en negrita con asterisco).
 5. **Security** > **Overview**. Si el tenant tiene activada la analítica de inquilino, verás el **security score** (en preview) en escala **Low**, **Medium** o **High** y recomendaciones; si no, verás "Calculating security score" o un aviso para activarla ([Learn](https://learn.microsoft.com/power-platform/admin/security/security-overview)).
 
@@ -130,7 +130,7 @@ Dos matices de vigencia: (1) **Advanced connector policies** (ACP) son la nueva 
 | Grupos de ambientes y reglas publicadas (o "ninguno") | ___ |
 | Security score o el mensaje que viste en **Security** > **Overview** | ___ |
 
-**Entregable — `GOVERNANCE_FRAMEWORK.md`:** completa la plantilla. La columna nueva **Control técnico** es obligatoria: si una regla no tiene control nativo, escribe por qué y cómo se audita.
+**Entregable — `GOVERNANCE_FRAMEWORK.md`:** completa la plantilla. En la sección 3 escribe **al menos 8 reglas**: las 6 de la tabla de controles de arriba y 2 propias que salgan del Caso Real (por ejemplo, sobre apps sin owner o conectores a servicios externos). La columna nueva **Control técnico** es obligatoria: si una regla no tiene control nativo, escribe por qué y cómo se audita.
 
 ```markdown
 # Power Platform Governance Framework — [Empresa]
@@ -245,7 +245,7 @@ La data policy **no** se aplica desde el script: `pac admin dlp-policy` solo tie
 
 **El concepto:** el arquitecto no decide "qué es técnicamente posible", sino **qué capacidad de negocio cubrir primero** y con qué riesgo. El Capability Map muestra los huecos; el Risk Register dice cuáles son peligrosos de dejar abiertos.
 
-**Construye sin pasos:** mapea las capacidades del cliente contra la cobertura actual de la plataforma, identifica al menos 3 gaps y prioriza uno con un ADR corto (contexto, opciones, decisión, consecuencias):
+**Construye sin pasos:** mapea las capacidades del banco del Caso Real (o de tu propia organización) contra la cobertura actual de la plataforma, identifica al menos 3 gaps y prioriza uno con un ADR corto (contexto, opciones, decisión, consecuencias). El mapa de abajo es solo un ejemplo del formato:
 
 ```
 Dominio: Ventas y CRM
@@ -265,7 +265,14 @@ Dominio: RRHH
   Solicitudes de vacaciones  → Power Automate (✅)
 ```
 
-Para el gap elegido, abre su línea en el Risk Register (probabilidad × impacto, mitigación, dueño) y escribe qué **Fusion Team** lo construiría (quién del negocio, qué pro developer, qué aporta IT).
+Para el gap elegido, abre su línea en el Risk Register (probabilidad × impacto, mitigación, dueño) y escribe qué **Fusion Team** lo construiría (quién del negocio, qué pro developer, qué aporta IT). Contrasta tu trabajo con esta rúbrica:
+
+| Criterio | Qué demuestra que lo cumples |
+|---|---|
+| Gap ligado a un riesgo puntuado | El gap priorizado tiene su línea en el Risk Register con probabilidad, impacto y score, y es el de mayor score o explicas por qué no |
+| Opción descartada | El ADR nombra al menos una opción que no elegiste y por qué |
+| Consecuencia negativa | El ADR escribe al menos una consecuencia negativa de la decisión (costo, deuda, dependencia) |
+| Fusion Team concreto | Cada parte del Fusion Team tiene un rol y una responsabilidad, no solo "negocio + IT" |
 
 **Evidencia a reportar:**
 

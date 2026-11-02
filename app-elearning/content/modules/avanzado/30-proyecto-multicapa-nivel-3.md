@@ -4,7 +4,7 @@ title: "Proyecto Multicapa Nivel 3"
 level: "avanzado"
 certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
 estimatedMinutes: 25
-practiceMinutes: 990
+practiceMinutes: 1320
 slug: "proyecto-multicapa-nivel-3"
 lastVerified: "2026-11"
 ---
@@ -13,11 +13,11 @@ Construir una solución enterprise completa integrando todos los conceptos del N
 
 > **Cómo está organizado este proyecto:** cada **hito** es una microlección: qué vas a construir, una micropráctica corta para decidir bien antes de hacerlo, la construcción en tu entorno y una tabla de **evidencia** con el dato exacto que observaste (no un "sí/no"). Como en el Módulo 17, aquí casi no hay clic a clic: cada hito remite al módulo del Nivel 3 donde aprendiste esa pieza (18 a 29). Si te atoras, vuelve a ese módulo. Después de desplegar viene un **incidente que cruza capas** para diagnosticar, y el cierre es un **reto de transferencia**: el mismo diseño para otro requisito.
 >
-> **Duración realista:** unas 16 horas para la entrega completa, repartidas en dos o tres semanas. Cierra cada hito con su evidencia antes de pasar al siguiente: el Hito 7 (despliegue) depende de todo lo anterior.
+> **Duración realista:** unas 22 horas para la entrega completa (la suma de los hitos), repartidas en tres o cuatro semanas; en la ruta B, adaptar el plugin a tu tabla y sacar el sitio fuera de Developer puede sumar algo más. Cierra cada hito con su evidencia antes de pasar al siguiente: el Hito 7 (despliegue) depende de todo lo anterior.
 >
 > **Antes de empezar:**
 > - **Dos entornos con Dynamics 365 Customer Service** (DEV y TEST): la tabla **Case** (`incident`) no existe en un entorno Developer, porque ahí no se pueden instalar apps de Dynamics 365. Ver [Entornos y trials](/recursos/entornos-y-trials). Si no consigues los dos, sigue la **ruta B** (abajo).
-> - **Una suscripción de Azure** para Service Bus y Azure Functions (Módulo 24), y una organización de **Azure DevOps** o un repositorio de **GitHub** para el pipeline (Módulo 19).
+> - **Una suscripción de Azure** para Service Bus y Azure Functions (Módulo 24), y una organización de **Azure DevOps** o un repositorio de **GitHub** para el pipeline (Módulo 19). Antes del Hito 7, comprueba que tu organización puede ejecutar pipelines: ver Módulo 19, agentes.
 > - **Herramientas de código:** Visual Studio con .NET Framework 4.6.2 para el plugin (Módulo 23), Node.js y Power Platform CLI (`pac`) para el PCF (Módulo 27).
 > - **Licencias:** Power Pages (Módulo 21) y Copilot Studio (Módulo 22). Si tu licencia de Copilot Studio no permite publicar, prueba el agente en el panel **Test**.
 > - **Si sigues la ruta Developer:** el [LAB-63](/labs/lab-63-capstone-developer-solucion-tecnica-avanzada) (capstone Developer) pide lo mismo con otro escenario: plugin con unit tests, componente de interfaz con estado de error visible, pipeline de al menos 2 ambientes con validación, plan de despliegue y rollback, y documento técnico con un *Technical summary* en inglés. La evidencia de este proyecto te sirve de base para ese lab.
@@ -33,9 +33,9 @@ Construir una solución enterprise completa integrando todos los conceptos del N
 
 | Nivel | Qué incluye | Para qué sirve |
 |---|---|---|
-| **Mínima** (≈8 h) | Hitos 1, 2 (solo CasoPreCreate y sus 2 tests), 5 y 7 (pipeline a TEST) | Demuestra el núcleo técnico: regla de servidor, integración asíncrona y despliegue reproducible |
-| **Completa** (≈16 h) | Los 7 hitos y el diagnóstico del incidente | Es la que exigen los Criterios de Validación del Proyecto Final |
-| **Excelente** (≈20 h) | Completa + PROD con 2 aprobadores + el reto de transferencia construido + presentación al sponsor (como la extensión del LAB-63) | Es la que conviene mostrar en un portafolio y en una entrevista técnica |
+| **Mínima** (≈11 h) | Hitos 1, 2 (solo CasoPreCreate y sus 2 tests), 5 y 7 (pipeline a TEST) | Demuestra el núcleo técnico: regla de servidor, integración asíncrona y despliegue reproducible |
+| **Completa** (≈22 h) | Los 7 hitos y el diagnóstico del incidente, de DEV a TEST (2 ambientes); en la ruta B, el Hito 4 en papel | Es la que exigen los Criterios de Validación del Proyecto Final y los Criterios de Graduación |
+| **Excelente** (≈27 h) | Completa + PROD con 2 aprobadores + el reto de transferencia construido + presentación al sponsor (como la extensión del LAB-63) | Es la que conviene mostrar en un portafolio y en una entrevista técnica |
 
 ### 📖 Conceptos Clave
 Este módulo aplica y consolida todo el Nivel 3 en un proyecto cohesivo. Los conceptos clave son los patrones de integración y de ejecución de proyecto que conectan todos los módulos anteriores:
@@ -125,7 +125,7 @@ graph LR
 
 ---
 
-## 🧩 Microlección 2 — Hito 2: la regla de servidor — CasoPreCreate con unit tests (≈180 min)
+## 🧩 Microlección 2 — Hito 2: la regla de servidor — CasoPreCreate con unit tests (≈240 min)
 
 **Qué vas a construir:** la validación que no se puede saltar desde ningún canal (portal, app, flujo, agente o API) y el enriquecimiento del caso con el nivel de contrato del cliente (Módulos 23, 25 y 26).
 
@@ -144,12 +144,19 @@ using Microsoft.Xrm.Sdk.Query;
 namespace Sit.Soporte.Plugins
 {
     // Paso: Create · incident · PreOperation · Synchronous.
-    // Ruta B: cambia las constantes por los nombres lógicos y el valor de la opción Alta de tu tabla.
+    // Ruta B: cambia TODAS las constantes de abajo por los nombres lógicos y valores de tu tabla Caso de Soporte.
+    // Los nombres solo aparecen aquí: el cuerpo y los tests usan estas constantes.
     public class CasoPreCreatePlugin : IPlugin
     {
-        private const string TablaCaso = "incident";
-        private const int PrioridadAlta = 1;              // incident.prioritycode: 1 = High, 2 = Normal, 3 = Low
-        private const int LongitudMinimaDescripcion = 100;
+        public const string TablaCaso = "incident";            // Ruta B: p. ej. "sit_casodesoporte"
+        public const string ColPrioridad = "prioritycode";     // Ruta B: p. ej. "sit_prioridad"
+        public const string ColDescripcion = "description";    // Ruta B: p. ej. "sit_descripcion"
+        public const string ColCliente = "customerid";         // Ruta B: p. ej. "sit_cliente" (Lookup a Account)
+        public const string ColNivelServicio = "sit_nivelservicio";
+        public const string ColNivelContratoCuenta = "sit_nivelcontrato"; // columna de Account (igual en las dos rutas)
+        public const int PrioridadAlta = 1;     // incident.prioritycode: 1 = High, 2 = Normal, 3 = Low
+        public const int PrioridadNormal = 2;   // solo la usan los tests; ruta B: el valor de Normal de tu Choice
+        public const int LongitudMinimaDescripcion = 100;
 
         public void Execute(IServiceProvider serviceProvider)
         {
@@ -162,8 +169,10 @@ namespace Sit.Soporte.Plugins
             if (caso == null || caso.LogicalName != TablaCaso) return;
 
             // 1. Validación de servidor: un caso de prioridad alta necesita una descripción útil.
-            var prioridad = caso.GetAttributeValue<OptionSetValue>("prioritycode");
-            var descripcion = caso.GetAttributeValue<string>("description") ?? string.Empty;
+            // Ojo: si un nombre de columna está mal, GetAttributeValue devuelve null sin avisar y la regla no se aplica.
+            var prioridad = caso.GetAttributeValue<OptionSetValue>(ColPrioridad);
+            var descripcion = caso.GetAttributeValue<string>(ColDescripcion) ?? string.Empty;
+            tracing.Trace("CasoPreCreate: prioridad {0}", prioridad == null ? "(vacía)" : prioridad.Value.ToString());
             if (prioridad != null && prioridad.Value == PrioridadAlta
                 && descripcion.Trim().Length < LongitudMinimaDescripcion)
             {
@@ -173,7 +182,7 @@ namespace Sit.Soporte.Plugins
             }
 
             // 2. Enriquecimiento: copiar el Nivel de Contrato de la cuenta del cliente.
-            var cliente = caso.GetAttributeValue<EntityReference>("customerid");   // Customer: account o contact
+            var cliente = caso.GetAttributeValue<EntityReference>(ColCliente);   // ruta A: Customer (account o contact); ruta B: Lookup a Account
             if (cliente == null) return;
 
             var factory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
@@ -184,7 +193,7 @@ namespace Sit.Soporte.Plugins
             {
                 cuentaRef = cliente;
             }
-            else if (cliente.LogicalName == "contact")   // los casos del portal llegan a nombre del contacto
+            else if (cliente.LogicalName == "contact")   // solo ruta A: los casos del portal llegan a nombre del contacto
             {
                 var contacto = service.Retrieve("contact", cliente.Id, new ColumnSet("parentcustomerid"));
                 var empresa = contacto.GetAttributeValue<EntityReference>("parentcustomerid");
@@ -192,19 +201,19 @@ namespace Sit.Soporte.Plugins
             }
             if (cuentaRef == null) return;
 
-            var cuenta = service.Retrieve("account", cuentaRef.Id, new ColumnSet("sit_nivelcontrato"));
-            var nivel = cuenta.GetAttributeValue<OptionSetValue>("sit_nivelcontrato");
+            var cuenta = service.Retrieve("account", cuentaRef.Id, new ColumnSet(ColNivelContratoCuenta));
+            var nivel = cuenta.GetAttributeValue<OptionSetValue>(ColNivelContratoCuenta);
             if (nivel != null)
             {
                 // Se escribe en Target: Dataverse lo guarda en la misma operación, sin otro Update.
-                caso["sit_nivelservicio"] = new OptionSetValue(nivel.Value);
+                caso[ColNivelServicio] = new OptionSetValue(nivel.Value);
             }
         }
     }
 }
 ```
 
-Los nombres `sit_nivelcontrato` y `sit_nivelservicio` son ejemplos: usa los nombres lógicos que veas en tus columnas. Fíjate en que este plugin **no** corta por `context.Depth`: en Pre-operation modifica `Target` en vez de llamar a `Update`, así que no puede dispararse a sí mismo, y cortar por Depth dejaría sin validar los casos que cree otro plugin. El control de recursión sí es obligatorio en el Hito 2b.
+Los nombres `sit_nivelcontrato` y `sit_nivelservicio` son ejemplos: usa los nombres lógicos que veas en tus columnas. **Ruta B:** cambia **todas** las constantes del principio (tabla, Prioridad, Descripción, Cliente, Nivel de Servicio y los valores de Alta y Normal de tu Choice); el cuerpo y los tests no llevan ningún nombre escrito. Si una constante queda mal, `GetAttributeValue` devuelve null sin avisar y el plugin **nunca** valida: si al crear un caso Alta con descripción corta no ves el error, revisa las constantes y la traza `prioridad` en el Plugin Trace Log. Tu Cliente es un Lookup a Account, así que la rama `contact` no se ejecuta. Fíjate en que este plugin **no** corta por `context.Depth`: en Pre-operation modifica `Target` en vez de llamar a `Update`, así que no puede dispararse a sí mismo, y cortar por Depth dejaría sin validar los casos que cree otro plugin. El control de recursión sí es obligatorio en el Hito 2b.
 
 **Los unit tests** (proyecto de prueba MSTest con Moq, como en el Lab 23): uno de caso de error y uno de caso feliz.
 
@@ -239,9 +248,9 @@ public class CasoPreCreatePluginTests
     [TestMethod]
     public void CasoAlto_ConDescripcionCorta_LanzaExcepcion()
     {
-        var caso = new Entity("incident");
-        caso["prioritycode"] = new OptionSetValue(1);   // High
-        caso["description"] = "No funciona";
+        var caso = new Entity(CasoPreCreatePlugin.TablaCaso);
+        caso[CasoPreCreatePlugin.ColPrioridad] = new OptionSetValue(CasoPreCreatePlugin.PrioridadAlta);
+        caso[CasoPreCreatePlugin.ColDescripcion] = "No funciona";
 
         Assert.ThrowsException<InvalidPluginExecutionException>(
             () => new CasoPreCreatePlugin().Execute(CrearProveedor(caso)));
@@ -253,16 +262,16 @@ public class CasoPreCreatePluginTests
         var cuentaId = Guid.NewGuid();
         var service = new Mock<IOrganizationService>();
         service.Setup(s => s.Retrieve("account", cuentaId, It.IsAny<ColumnSet>()))
-               .Returns(new Entity("account", cuentaId) { ["sit_nivelcontrato"] = new OptionSetValue(100000001) });
+               .Returns(new Entity("account", cuentaId) { [CasoPreCreatePlugin.ColNivelContratoCuenta] = new OptionSetValue(100000001) });
 
-        var caso = new Entity("incident");
-        caso["prioritycode"] = new OptionSetValue(2);   // Normal: no exige descripción larga
-        caso["customerid"] = new EntityReference("account", cuentaId);
+        var caso = new Entity(CasoPreCreatePlugin.TablaCaso);
+        caso[CasoPreCreatePlugin.ColPrioridad] = new OptionSetValue(CasoPreCreatePlugin.PrioridadNormal); // no exige descripción larga
+        caso[CasoPreCreatePlugin.ColCliente] = new EntityReference("account", cuentaId);
 
         new CasoPreCreatePlugin().Execute(CrearProveedor(caso, service.Object));
 
         // 100000001 es un valor de ejemplo: el real depende del prefijo de opciones de tu publisher
-        Assert.AreEqual(100000001, caso.GetAttributeValue<OptionSetValue>("sit_nivelservicio").Value);
+        Assert.AreEqual(100000001, caso.GetAttributeValue<OptionSetValue>(CasoPreCreatePlugin.ColNivelServicio).Value);
     }
 }
 ```
@@ -280,9 +289,11 @@ public class CasoPreCreatePluginTests
 
 ---
 
-## 🧩 Microlección 3 — Hito 3: el portal de clientes (≈120 min)
+## 🧩 Microlección 3 — Hito 3: el portal de clientes (≈150 min)
 
 **Qué vas a construir:** el autoservicio donde cada cliente registra y consulta solo sus casos (Módulos 21 y 29).
+
+> **El sitio tiene que poder ser público:** un cliente externo no entra a un sitio privado, y Learn indica que los sitios de ambientes **Developer** no pueden hacerse públicos. Crea el sitio del portal en un ambiente que lo permita (Trial o producción), como en el Módulo 29; si tu administrador lo bloquea (**Access restricted** en **Site visibility**), prueba con usuarios de tu organización y documenta el registro externo en papel.
 
 1. **Identidad:** Azure AD B2C dejó de venderse a clientes nuevos el 1 de mayo de 2025 ([Learn: Azure AD B2C](https://learn.microsoft.com/azure/active-directory-b2c/overview)). En un proyecto nuevo usa **Microsoft Entra External ID**: en el estudio de diseño de Power Pages, **Security** > **Identity providers** > **Microsoft Entra External ID** > **Configure**, y sigue el registro de la app y el user flow en el Microsoft Entra admin center ([Learn: External ID con Power Pages](https://learn.microsoft.com/power-pages/security/authentication/entra-external-id)). Si tu organización ya tiene un tenant B2C, puedes usarlo como en el Módulo 29.
 2. **Table Permissions** sobre Case con acceso de tipo **Contact** (solo los casos del contacto autenticado), privilegios de lectura y creación, asignadas al web role **Authenticated Users** (Módulo 21). Un formulario para crear el caso que asocie al contacto actual y una lista "Mis casos" que muestre el Número de Ticket.
@@ -322,7 +333,7 @@ public class CasoPreCreatePluginTests
 **Qué vas a construir:** que cada caso nuevo llegue al sistema externo sin que el usuario espere y sin perder mensajes (Módulo 24).
 
 1. En Azure: un namespace de Service Bus por entorno (por ejemplo `sb-sit-test` y `sb-sit-prod`) con una cola `casos-nuevos`, configurado con SAS para Dataverse ([Learn: Service Bus y Dataverse](https://learn.microsoft.com/power-apps/developer/data-platform/azure-integration)).
-2. Con el Plug-in Registration Tool, un **service endpoint** de tipo cola y un paso en el mensaje **Create** de `incident`. El post lo hace un trabajo del sistema asíncrono: no bloquea al usuario, y en el ejemplo de Learn el mensaje puede tardar unos minutos en llegar ([Learn: registrar el paso del service endpoint](https://learn.microsoft.com/power-apps/developer/data-platform/walkthrough-register-azure-aware-plug-in-using-plug-in-registration-tool)). Si Service Bus no está disponible, Dataverse reintenta y el trabajo queda en espera.
+2. Con el Plug-in Registration Tool, un **service endpoint** de tipo cola (en **Message Format** elige **JSON**, para que la Function lea el cuerpo como texto; con **.NETBinary** no puede) y un paso en el mensaje **Create** de `incident` ([Learn: formatos del mensaje](https://learn.microsoft.com/power-apps/developer/data-platform/write-listener-application-azure-solution)). El post lo hace un trabajo del sistema asíncrono: no bloquea al usuario, y en el ejemplo de Learn el mensaje puede tardar unos minutos en llegar ([Learn: registrar el paso del service endpoint](https://learn.microsoft.com/power-apps/developer/data-platform/walkthrough-register-azure-aware-plug-in-using-plug-in-registration-tool)). Si Service Bus no está disponible, Dataverse reintenta y el trabajo queda en espera.
 3. Una Azure Function con trigger de Service Bus que lee la cola y notifica al sistema externo (puede ser un mock). El trigger toma la conexión de un **app setting** cuyo nombre indica `Connection` ([Learn: Service Bus trigger](https://learn.microsoft.com/azure/azure-functions/functions-bindings-service-bus-trigger)):
 
    ```csharp
@@ -331,8 +342,12 @@ public class CasoPreCreatePluginTests
    public void Run(
        [ServiceBusTrigger("casos-nuevos", Connection = "ServiceBusConnection")] ServiceBusReceivedMessage mensaje)
    {
-       _logger.LogInformation("Caso recibido. MessageId: {id}", mensaje.MessageId);
-       // Aquí: leer el contexto del caso del cuerpo del mensaje y llamar al sistema externo.
+       _logger.LogInformation("Caso recibido. MessageId: {id}. ContentType: {tipo}", mensaje.MessageId, mensaje.ContentType);
+       // Con Message Format = JSON en el service endpoint, el cuerpo es el contexto de ejecución en JSON
+       // (ContentType "application/json"); con .NETBinary no se puede leer como texto.
+       string contextoJson = mensaje.Body.ToString();
+       _logger.LogInformation("Contexto recibido: {len} caracteres", contextoJson.Length);
+       // Aquí: extraer del JSON los datos del caso que necesitas y llamar al sistema externo.
    }
    ```
 
@@ -350,7 +365,7 @@ public class CasoPreCreatePluginTests
 
 ---
 
-## 🧩 Microlección 6 — Hito 6: las capas de experiencia — PCF, agente y dashboard (≈180 min)
+## 🧩 Microlección 6 — Hito 6: las capas de experiencia — PCF, agente y dashboard (≈300 min)
 
 **Qué vas a construir:** las tres formas en que distintas personas ven el mismo caso. Este hito va sin pasos: cada pieza ya la construiste en su módulo.
 
@@ -368,11 +383,11 @@ public class CasoPreCreatePluginTests
 
 ---
 
-## 🧩 Microlección 7 — Hito 7: pipeline CI/CD, despliegue y prueba de punta a punta (≈180 min)
+## 🧩 Microlección 7 — Hito 7: pipeline CI/CD, despliegue y prueba de punta a punta (≈300 min)
 
 **Qué vas a construir:** el paso de DEV a TEST (y a PROD en la entrega excelente) sin pasos manuales (Módulo 19).
 
-**Ahora haz algo — microprácticas (6 min):** repasa qué se parametriza antes de mover la solución → **[Qué parametrizar antes de mover la solución a TEST](/practica/ip-dv-015-parametrizar-antes-de-mover)** y qué pasa cuando algo apunta al entorno equivocado → **[Entorno incorrecto](/practica/ip-trb-002-entorno-incorrecto)**.
+**Ahora haz algo — microprácticas (12 min):** repasa qué se parametriza antes de mover la solución → **[Qué parametrizar antes de mover la solución a TEST](/practica/ip-dv-015-parametrizar-antes-de-mover)** y qué pasa cuando algo apunta al entorno equivocado → **[Entorno incorrecto](/practica/ip-trb-002-entorno-incorrecto)**.
 
 1. **Branch strategy:**
 
@@ -381,9 +396,11 @@ public class CasoPreCreatePluginTests
    develop → dispara el pipeline CI
    feature/xxx → PRs hacia develop
    ```
-2. **CI:** export de cada solución → Solution Checker como compuerta → pack managed → publicar el artifact. La compuerta con la tarea de Power Platform Build Tools ([Learn: tareas de Build Tools](https://learn.microsoft.com/power-platform/alm/devops-build-tool-tasks)):
+2. **CI:** instalar las herramientas → export de cada solución (unmanaged y managed) → Solution Checker sobre el **managed** como compuerta → publicar el artifact. El Checker analiza los `*_managed.zip`, así que va **después** del export. El inicio del job y la compuerta, con las tareas de Power Platform Build Tools ([Learn: tareas de Build Tools](https://learn.microsoft.com/power-platform/alm/devops-build-tool-tasks)):
 
    ```yaml
+   - task: microsoft-IsvExpTools.PowerPlatform-BuildTools.tool-installer.PowerPlatformToolInstaller@2   # primera tarea de cada job
+   # ...aquí van las tareas de export de cada solución (unmanaged y managed) a $(Build.ArtifactStagingDirectory), Módulo 19
    - task: microsoft-IsvExpTools.PowerPlatform-BuildTools.checker.PowerPlatformChecker@2
      displayName: 'Solution Checker (compuerta)'
      inputs:
@@ -478,6 +495,8 @@ Una semana después del despliegue a PROD (o a TEST, si no llegaste a PROD), Ope
 
 **Después, sin pasos:** escribe en una página el diseño (soluciones y su orden, tipo de acceso de la Table Permission, mensaje, etapa y modo de cada paso, tipo de entidad de Service Bus) como ADR-003, y construye **solo** el plugin de validación con sus 2 tests y el paso del service endpoint en una solución nueva `SIT_Garantias`.
 
+> **Coste:** los topics no existen en el tier **Basic** de Service Bus (solo admite colas); hacen falta **Standard** o Premium, que tienen coste ([Learn: tiers de Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-premium-messaging)). Si tu namespace es Basic, crea uno **Standard** solo para este reto, mira el precio en la página de precios antes de crearlo y bórralo al terminar; o entrega el topic en papel.
+
 | Campo | Tu valor |
 |---|---|
 | Tipo de acceso de la Table Permission y por qué no es Contact | ___ |
@@ -536,17 +555,17 @@ en 0. Nivel profesional/excelencia: ≥90/100.
 
 ## Criterios de Graduación — Nivel 3
 
-Para avanzar al Nivel 4, debes cumplir **todos** los siguientes criterios:
+Para avanzar al Nivel 4, debes cumplir **todos** los siguientes criterios con la entrega **Completa** (ruta A o ruta B). Lo marcado como *Excelente* suma, pero no es obligatorio.
 
 ### Criterios Técnicos
-- [ ] Pipeline CI/CD completo con Solution Checker, approvals y deploy a 3 ambientes
-- [ ] Plugin C# Pre y Post operation con unit tests que pasan
-- [ ] PCF Dataset control desplegado y funcional en formulario de D365
+- [ ] Pipeline CI/CD con Solution Checker como compuerta que despliega de DEV a TEST (2 ambientes) sin pasos manuales; *Excelente:* PROD como tercer ambiente con aprobaciones
+- [ ] Plugin C# Pre-operation (CasoPreCreate) con sus 2 unit tests que pasan, y CasoPostUpdate (Post-operation) con su control de recursión decidido en ADR-002
+- [ ] PCF Dataset control desplegado y funcional en el formulario de Account (en la app de Customer Service en la ruta A, o en tu app model-driven en la ruta B)
 - [ ] Integración Dataverse → Service Bus → Azure Function funcionando
 - [ ] Portal Power Pages con identidad externa para clientes (Microsoft Entra External ID, o Azure AD B2C si la organización ya lo tiene)
-- [ ] Copilot Studio con SSO y Generative Answers desde KB corporativa
-- [ ] D365 Customer Service con SLA, Unified Routing, y Knowledge Base
-- [ ] Dashboard Power BI con RLS, DAX avanzado, y calendario personalizado
+- [ ] Copilot Studio con SSO y Generative Answers desde una base de conocimiento (la Knowledge Base del Hito 4 en la ruta A; en la ruta B, otra fuente de conocimiento)
+- [ ] Customer Service con SLA, Unified Routing y Knowledge Base: construido en la ruta A; en la ruta B, entregado como diseño (matriz de SLA y árbol de colas del Hito 4)
+- [ ] Dashboard Power BI con RLS por región y las medidas DAX del Hito 6 (casos abiertos, vencidos y cumplimiento del SLA)
 
 ### Criterios de Calidad
 - [ ] Ningún plugin que escriba sobre la tabla que lo dispara sin control de recursión (`context.Depth`, filtering attributes o escribir en `Target` en Pre-operation)
@@ -559,13 +578,12 @@ Califica cada tema del 1 al 5:
 
 - Arquitectura multi-solución: ___/5
 - ALM y CI/CD: ___/5
-- D365 CE (Customer Service): ___/5
+- D365 CE (Customer Service; en la ruta B, el diseño del Hito 4): ___/5
 - Power Pages con identidad externa (External ID / B2C): ___/5
 - Copilot Studio avanzado: ___/5
 - C# Plugins con unit tests: ___/5
 - Integraciones Azure (Service Bus, Functions): ___/5
 - PCF Dataset avanzado: ___/5
-- Patrones de diseño (Repository, Circuit Breaker): ___/5
 - Performance y optimización: ___/5
 
 **Promedio ≥ 3.5 en todos → Puedes avanzar al Nivel 4**

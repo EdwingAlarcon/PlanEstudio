@@ -4,11 +4,11 @@ title: "Proyecto Capstone — Arquitectura Enterprise"
 level: "arquitecto"
 certification: "Arquitectura Power Platform"
 estimatedMinutes: 28
-practiceMinutes: 840
+practiceMinutes: 1125
 slug: "proyecto-capstone-arquitectura-enterprise"
 lastVerified: "2026-11"
 ---
-*Lectura: 25-30 min · Con práctica: unas 14 horas, mejor en cinco o seis sesiones (1: Microlección 1; 2: Microlección 2; 3: Microlección 3; 4: Microlección 4 y el diagnóstico; 5: Microlección 5 y preparar la defensa; 6: la defensa ante el comité y el reto de transferencia). La primera vez, cuenta entre una vez y media y el doble.*
+*Lectura: 25-30 min · Con práctica: unas 19 horas, mejor en seis o siete sesiones (1: Microlección 1; 2: Microlección 2; 3: Microlección 3; 4: Microlección 4 y el diagnóstico; 5: Microlección 5; 6: preparar la defensa; 7: la defensa y el reto de transferencia). La primera vez, cuenta entre una vez y media y el doble, más el tiempo de coordinar al comité si lo tienes.*
 
 ### 🎯 Objetivo
 Diseñar, probar en lo esencial y **defender** la arquitectura de una solución enterprise completa, integrando todo lo del Nivel 4: topología de tenant y ambientes, identidad y seguridad, integraciones con Azure, datos analíticos, IA, ALM, gobierno, operación y plan de proyecto. Al terminar tienes un **Architecture Blueprint** con ocho ADRs, un **slice vertical** desplegado de DEV a TEST que demuestra las decisiones más arriesgadas (incluida una data policy verificada y un rollback ensayado), y una presentación que resiste las preguntas de un comité de arquitectura y de un CFO, como lo haría un Solution Architect.
@@ -18,8 +18,13 @@ Diseñar, probar en lo esencial y **defender** la arquitectura de una solución 
 > **Antes de empezar, necesitas:**
 > - Haber terminado los Niveles 1 a 3 y los **Módulos 31 a 40**. Aquí no se vuelve a explicar ningún concepto: se combinan. Cada microlección te dice qué módulo repasar si una decisión se te atraganta.
 > - Un tenant **de práctica** con rol **Power Platform Administrator**, tus ambientes `SIT-DEV` (DEV) y `SIT-TEST` del [Lab 19](/labs/lab-19-cicd-azure-devops). Si vas a desplegar con pipelines in Power Platform, `SIT-TEST` debe ser Managed Environment (lo activas como en el Módulo 33). **Nunca el tenant de tu empresa.**
+> - **Si tus ambientes son Developer, revisa esto antes de empezar** ([Learn: Developer Plan](https://learn.microsoft.com/power-platform/developer/plan)): desde el **15 de noviembre de 2026** cada usuario solo puede crear **un** Developer gestionado (Managed Environment), y los Developer **no** gestionados se suspenden desde el **15 de diciembre de 2026** y se eliminan desde el 15 de enero de 2027. El capstone dura varias semanas, así que es fácil que cruces esas fechas. Además, el Developer Plan no incluye derechos de uso de Managed Environments: para ejecutar apps y flujos en un Developer gestionado necesitas una licencia premium (por ejemplo, la prueba de 30 días de Power Apps). Elige una de estas configuraciones y anótala en tu ADR-008:
+>   - **(a) Dos ambientes:** `SIT-DEV` en tu Developer gestionado y `SIT-TEST` en un ambiente **Trial** estándar (Admin Center → **Manage** → **Environments** → **New**, **Type** **Trial**, con base de datos de Dataverse). Dura 30 días y se puede ampliar una vez otros 30 con **Extend trial**, en sus últimos siete días; **no** admite copia de seguridad ni restauración, así que el rollback por restauración del Lab 115 no te servirá ahí ([Learn: ambientes de prueba](https://learn.microsoft.com/power-platform/admin/trial-environments)). Créalo cuando llegues a la Microlección 2, no antes.
+>   - **(b) Dos ambientes con Sandbox:** si tu tenant te deja crear un Sandbox, úsalo como `SIT-TEST`; es lo más parecido a un TEST real.
+>   - **(c) Un solo ambiente:** haz en él la data policy de la Microlección 2 y el slice de la Microlección 4 (tabla, numeración y security role), y resuelve el paso a TEST y el rollback con la **variante en papel** de la Microlección 4. Es válido para aprobar; en tu Risk Register queda el riesgo "despliegue y rollback no probados".
+> - **Si estudias solo** (sin mentor ni comité): cada paso que pide a otra persona tiene una alternativa. La revisión del mentor se reemplaza por una autorrevisión con la rúbrica de cada microlección, al menos 48 horas después de escribir. La defensa ante el comité se reemplaza por una **defensa grabada**, como se explica en **Decidir y defender**.
 > - Un camino de despliegue que ya funcione: el pipeline de Azure DevOps del Lab 19 o un pipeline de **pipelines in Power Platform** (Módulos 33 y 54).
-> - Para presentar: dos o tres personas que hagan de comité (un colega técnico, alguien no técnico como "CFO simulado" y, si puedes, un mentor con experiencia de arquitectura).
+> - Para presentar: dos o tres personas que hagan de comité (un colega técnico, alguien no técnico como "CFO simulado" y, si puedes, un mentor con experiencia de arquitectura), o la defensa grabada si estudias solo.
 > - El escenario y sus cifras son **ilustrativos**: sirven para razonar, no son datos de una empresa real.
 
 ### 📖 Conceptos Clave
@@ -84,13 +89,13 @@ graph TD
 **Práctica (papel, 50 min):**
 
 1. Escribe la tabla de drivers con al menos 8 requisitos, 6 restricciones y 4 supuestos. Para cada supuesto, anota quién lo confirma y para cuándo.
-2. Haz el **Fit-Gap** de los requisitos (Módulo 38): para cada uno, **Fit** (lo cubre la plataforma con configuración), **Fit con configuración avanzada**, **Gap con extensión** (plugin, PCF, integración) o **Gap sin solución en el alcance**.
+2. Haz el **Fit-Gap** de los requisitos con la misma taxonomía del Módulo 38: para cada uno, **Fit** (lo cubre la plataforma sin desarrollo), **Partial Fit** (configuración adicional o customización menor), **Gap** (necesita desarrollo o integración: plugin, PCF, integración externa) o **Exclusión** (fuera del alcance del proyecto).
 3. Copia en tu repositorio (por ejemplo `docs/adr/`) esta plantilla y crea un archivo por ADR. Los ocho del capstone son los de la lista de abajo; cada microlección te pide escribir dos o tres.
 
 ```markdown
 # ADR-NNN: <decisión en una frase>
 Estado: propuesto | aceptado | superseded por ADR-MMM
-Fecha: AAAA-MM-DD · Autor: <tú> · Revisó: <mentor o par>
+Fecha: AAAA-MM-DD · Autor: <tú> · Revisó: <mentor, par o "autorrevisión">
 
 ## Contexto
 Drivers que obligan a decidir (cita la fila de tu tabla de drivers).
@@ -130,7 +135,7 @@ Elegimos X porque Y, aunque consideramos Z, que rechazamos por W.
 |---|---|
 | Restricción frente a preferencia | Cada restricción de tu tabla tiene al lado la opción que descarta |
 | Supuestos con dueño | Ningún supuesto queda sin quién lo confirma ni fecha |
-| Fit-Gap honesto | Al menos un requisito está en "Gap sin solución en el alcance" o explicas por qué ninguno lo está |
+| Fit-Gap honesto | Al menos un requisito está en **Exclusión** o explicas por qué ninguno lo está |
 | ADR-002 defendible | Tiene tres opciones (Dataverse, Azure SQL, y una tercera, por ejemplo SharePoint Lists, descartada por una restricción) y una consecuencia ⚠️ |
 
 **Evidencia a reportar:**
@@ -139,13 +144,13 @@ Elegimos X porque Y, aunque consideramos Z, que rechazamos por W.
 |---|---|
 | Número de requisitos, restricciones y supuestos de tu tabla | ___ |
 | El supuesto más peligroso, quién lo confirma y para cuándo | ___ |
-| Requisitos en Gap con extensión (cuáles y con qué pieza) | ___ |
+| Requisitos en **Gap** (cuáles y con qué pieza) | ___ |
 | Decisión del ADR-002 y su consecuencia ⚠️ | ___ |
 | Ruta de tu repositorio donde viven los ADRs | ___ |
 
 ---
 
-## 🧩 Microlección 2 — Topología, identidad y seguridad (≈150 min)
+## 🧩 Microlección 2 — Topología, identidad y seguridad (≈180 min)
 
 **¿Qué vas a aprender?** A cerrar ADR-001, ADR-003 y ADR-007 con los criterios de los Módulos 33 y 36, y a **verificar** en tu tenant al menos un control de gobierno, no solo describirlo.
 
@@ -183,13 +188,13 @@ Lo que ya sabes y debes aplicar (cada punto está verificado en el módulo que s
 4. **Custom connectors:** deja el patrón por defecto y **Next**. Anota cómo se clasifican los conectores personalizados en una política de inquilino: por patrones de la URL del host, no por nombre.
 5. **Scope:** elige **Add multiple environments** y **Next**. En **Environments**, selecciona solo `SIT-TEST`, usa **Add to policy** y comprueba en la lista que es el único ambiente incluido antes de seguir. **Next**.
 6. **Review:** revisa y selecciona **Create policy**. **Si no ves Data policy o el botón está deshabilitado**, tu rol no basta: pasa a la variante en papel.
-7. **Comprobarla (la política tarda unos minutos en aplicarse; si al principio no ves efecto, espera y repite):** en [make.powerautomate.com](https://make.powerautomate.com), cambia al ambiente `SIT-TEST`, **My flows** → **New flow** → **Instant cloud flow**, disparador **Manually trigger a flow**. Añade la acción de Dataverse **List rows** sobre cualquier tabla y después intenta añadir una acción **HTTP** contra `https://example.com`. Learn documenta dos comportamientos que debes distinguir: un conector **bloqueado** no se puede añadir a un recurso del ambiente, y un flujo que mezcla conectores de grupos incompatibles **se guarda pero queda marcado como Suspended** y no se ejecuta hasta resolver la violación ([Learn: gestionar data policies](https://learn.microsoft.com/power-platform/admin/prevent-data-loss), [Learn: impacto de las data policies](https://learn.microsoft.com/power-platform/admin/dlp-impact-policies-apps-flows)). Anota qué te pasó con HTTP.
-8. Para ver el segundo comportamiento, quita la acción HTTP y añade en su lugar cualquier acción del conector **RSS** (no lo clasificaste, así que quedó en **Non-business**, el grupo por defecto). Guarda y anota el mensaje exacto del diseñador y el estado del flujo en **My flows**. Después quita la acción RSS, guarda otra vez y anota si el error desaparece.
+7. **Comprobarla (la política tarda unos minutos en aplicarse; si al principio no ves efecto, espera y repite):** en [make.powerautomate.com](https://make.powerautomate.com), cambia al ambiente `SIT-TEST`, **My flows** → **New flow** → **Instant cloud flow**, disparador **Manually trigger a flow**. Añade la acción de Dataverse **List rows** sobre cualquier tabla, después una acción **HTTP** contra `https://example.com`, y **Save**. **Qué deberías ver:** según Learn, en Power Automate un flujo que usa un conector **bloqueado**, o conectores de grupos que no pueden convivir, **se guarda igualmente**, el diseñador muestra un error de data policy y el flujo queda marcado como **Suspended**: no se ejecuta hasta que se resuelva la violación. Que el diseñador te deje añadir HTTP **no** significa que la política falló. En Power Apps es distinto: la app no añade la conexión ([Learn: impacto de las data policies](https://learn.microsoft.com/power-platform/admin/dlp-impact-policies-apps-flows), [Learn: gestionar data policies](https://learn.microsoft.com/power-platform/admin/prevent-data-loss)). Anota el mensaje del diseñador y el estado del flujo en **My flows**. **Si el flujo se guarda sin error y no queda Suspended**, la política aún no se aplicó o el ambiente no está en su alcance: revisa el paso 5 y espera unos minutos.
+8. Para ver el segundo caso (conectores de grupos distintos, ninguno bloqueado), quita la acción HTTP y añade en su lugar cualquier acción del conector **RSS** (no lo clasificaste, así que quedó en **Non-business**, el grupo por defecto). Guarda y anota el mensaje exacto del diseñador y el estado del flujo en **My flows**. Después quita la acción RSS, guarda otra vez y anota si el error desaparece.
 9. **Limpieza:** si el tenant es compartido, elimina la política (**Delete Policy**) o déjala solo sobre `SIT-TEST`; anota cuál de las dos cosas hiciste. Si tu ADR-007 dice que PROD tendrá esta misma política, mantenerla en TEST es lo correcto: lo verás en el diagnóstico.
 
 **Variante en papel (sin rol de administrador):** escribe la política que crearías (nombre, conectores en cada grupo, alcance) y qué pasaría con un flujo existente que use Dataverse y HTTP al publicarla, con la cita de Learn.
 
-**Decisión (papel, 60 min): escribe ADR-001, ADR-003 y ADR-007.** Para el ADR-007, contrasta al menos tres opciones de la única ampliación de licencias, como en el Módulo 36: (a) cumplimiento (E5 o complemento: CMK, Customer Lockbox, IP firewall, Audit Premium); (b) Entra ID P2 (PIM); (c) no ampliar y cubrir con Conditional Access, data policies, IP cookie binding y auditoría de Dataverse.
+**Decisión (papel, 90 min): escribe ADR-001, ADR-003 y ADR-007.** Para el ADR-007, contrasta al menos tres opciones de la única ampliación de licencias, como en el Módulo 36: (a) cumplimiento (E5 o complemento: CMK, Customer Lockbox, IP firewall, Audit Premium); (b) Entra ID P2 (PIM); (c) no ampliar y cubrir con Conditional Access, data policies, IP cookie binding y auditoría de Dataverse.
 
 **Rúbrica de la microlección:**
 
@@ -206,7 +211,7 @@ Lo que ya sabes y debes aplicar (cada punto está verificado en el módulo que s
 | Campo | Tu valor |
 |---|---|
 | Conectores en **Business** y en **Blocked** de tu política, y lo que mostró **Blockable** para Dataverse | ___ |
-| Qué pasó al intentar añadir **HTTP** (conector bloqueado) | ___ |
+| Mensaje del diseñador y estado del flujo al guardarlo con **HTTP** (conector bloqueado) | ___ |
 | Mensaje del diseñador al guardar el flujo con Dataverse + RSS y estado en **My flows** | ___ |
 | Estado del flujo tras quitar la acción RSS | ___ |
 | ADR-001: número de tenants y Region de PROD-ES y de PROD-CO | ___ |
@@ -214,7 +219,7 @@ Lo que ya sabes y debes aplicar (cada punto está verificado en el módulo que s
 
 ---
 
-## 🧩 Microlección 3 — Integración, datos e IA (≈120 min)
+## 🧩 Microlección 3 — Integración, datos e IA (≈180 min)
 
 **¿Qué vas a aprender?** A cerrar ADR-004, ADR-005 y ADR-006 juntando lo que decidiste en los Módulos 34, 35 y 37, y a escribir qué cuesta cada decisión en capacidad, créditos y operación.
 
@@ -247,7 +252,7 @@ Preguntas que el comité te hará y que tu ADR debe contestar:
 
 **Ahora haz algo — repaso dirigido (15 min):** si en alguno de los tres ADRs no sabes qué contestar, vuelve a la micropráctica del módulo que lo trata: **[Elegir el motor y el modelo de integración](/practica/ip-int-004-elegir-motor-y-modelo)**, **[Elegir cómo llega Dataverse a Fabric y dónde va cada capa](/practica/ip-arq-022-elegir-link-a-fabric-y-capas)** o **[Prebuilt, custom, prompt o Azure](/practica/ip-ia-001-prebuilt-custom-prompt-o-azure)**.
 
-**Práctica (papel, 90 min; modo práctico opcional):**
+**Práctica (papel, 150 min; modo práctico opcional):**
 
 1. Escribe ADR-004, ADR-005 y ADR-006 con la plantilla de la Microlección 1.
 2. **Reutiliza tu evidencia real:** si hiciste las prácticas reales de los Módulos 34 (Service Bus y Logic Apps), 35 (Link to Microsoft Fabric) o 37 (modelo de documentos con umbral), enlaza su tabla de evidencia desde el ADR correspondiente: es la prueba de que la decisión se puede construir. Si no las hiciste, el ADR lo dice en **Consecuencias** como riesgo abierto ("no probado en un tenant").
@@ -286,12 +291,16 @@ Preguntas que el comité te hará y que tu ADR debe contestar:
 
 1. **Solución del slice (DEV, 25 min).** En [make.powerapps.com](https://make.powerapps.com), en DEV, crea la solución `SIT Capstone Credito` con tu publisher `sit`. Dentro, la tabla **Solicitud de Crédito** con: la columna principal (anota su nombre interno, como en el LAB-02), una columna **Choice** `Estado` (Recibida, En análisis, Aprobada, Rechazada, Desembolsada), una columna **Currency** `Monto solicitado` y una columna **Lookup** a **Contact** para el solicitante.
 2. **Configurar primero: la numeración (10 min).** El borrador pedía un plugin `SolicitudPreCreate` que generara `SOL-CO-2026-XXXXX` / `SOL-ES-2026-XXXXX`. Antes de escribir código, prueba lo nativo: en la tabla, **Columns** → **New column**, **Display name** `Número de solicitud` y **Data type** **Autonumber**. Elige el tipo (**String prefixed number** o **Date prefixed number**), el prefijo y la semilla (por defecto 1000), y guarda ([Learn: columnas autonuméricas](https://learn.microsoft.com/power-apps/maker/data-platform/autonumber-fields)). Crea dos filas y anota los números que se generan. Ojo con dos datos de Learn que van a tu ADR: la numeración puede tener huecos (un número asignado a una fila que no se guardó no se reutiliza) y la semilla **no viaja** en la solución: se fija en cada ambiente. Decide: ¿una secuencia por ambiente (PROD-CO y PROD-ES) basta, o el negocio exige el código de país y una secuencia propia dentro del **mismo** ambiente? Solo lo segundo justifica el plugin.
-3. **Seguridad mínima (15 min).** Crea en la solución el security role `SIT Asesor Comercial` con lectura y escritura de nivel **User** sobre **Solicitud de Crédito** (el asesor solo ve lo suyo). Anota qué privilegio dejaste sin conceder y por qué.
+3. **Seguridad mínima (15 min).** Crea en la solución el security role `SIT Asesor Comercial` (Learn sugiere partir de una copia del rol predefinido **App Opener**, que trae los privilegios mínimos para abrir una app: [Learn: security roles y privilegios](https://learn.microsoft.com/power-platform/admin/security-roles-privileges)). Concede, como mínimo para crear solicitudes con su solicitante:
+   - Sobre **Solicitud de Crédito**, nivel **User** (el asesor solo ve lo suyo): **Create**, **Read**, **Write** y **Append** (Append porque la solicitud se asocia a un Contact por el lookup).
+   - Sobre **Contact**: **Read** y **Append To** (para que una solicitud pueda asociarse a ese contacto), con el nivel que decidas: ¿el asesor elige entre todos los contactos o solo entre los suyos?
+
+   Si tienes un segundo usuario, prueba el rol con él: si al guardar una solicitud aparece un error de privilegios, el mensaje dice cuál falta. Anota qué privilegio dejaste sin conceder (por ejemplo **Delete**) y por qué.
 4. **Desplegar a `SIT-TEST` (20 min).** Despliega la solución como **managed** a `SIT-TEST` con tu camino de despliegue (el pipeline del [Lab 19](/labs/lab-19-cicd-azure-devops) o un pipeline de pipelines in Power Platform). Anota quién aprobó el despliegue o qué gate lo detuvo. Recuerda lo que viste en la Microlección 2: en `SIT-TEST` hay una data policy; si tu solución tuviera un flujo con HTTP, ¿dónde te habrías enterado?
 5. **Versión 1.1 y rollback ensayado (30 min).** En DEV, añade a la tabla una columna nueva (por ejemplo `Canal de origen`), sube la versión de la solución y despliégala a `SIT-TEST`. Crea una fila en TEST que use esa columna. Ahora ensaya volver a la versión anterior con **uno** de estos métodos y **mide cuánto tardas**:
    - **Pipelines in Power Platform:** si el pipeline tiene activado **Allow redeployments of older versions**, en la página **Pipelines** de tu solución elige el pipeline, **Run history**, los puntos suspensivos junto al despliegue anterior y **Redeploy**. Learn advierte que redesplegar sobrescribe la versión más reciente **y sus datos**, de forma irreversible, y que se eliminan sus novedades, incluidas tablas nuevas ([Learn: redesplegar versiones anteriores](https://learn.microsoft.com/power-platform/alm/redeploy-past-solution-versions)). Anota qué pasó con la columna `Canal de origen` y con el dato que guardaste.
    - **Azure DevOps (Lab 19):** como solo se pueden importar versiones superiores, el rollback es *fix-forward*: revierte el cambio en DEV (o en el repositorio), sube otra vez la versión y despliega. Anota qué tuviste que hacer y si la columna desapareció de TEST.
-   - **Restaurar el ambiente:** con el procedimiento del [Lab 115](/labs/lab-115-disaster-recovery-backup-restore-rto-rpo), restaura una copia de `SIT-TEST` anterior al despliegue. Anota el RTO real.
+   - **Restaurar el ambiente:** con el procedimiento del [Lab 115](/labs/lab-115-disaster-recovery-backup-restore-rto-rpo), restaura una copia de `SIT-TEST` anterior al despliegue. Anota el RTO real. No sirve si tu `SIT-TEST` es un Trial: Learn indica que un Trial no admite copias de seguridad ni restauraciones.
 6. **Si algo no te deja seguir** (no tienes pipeline, el despliegue falla por dependencias, la opción de redespliegue no aparece): anota el mensaje exacto. Es evidencia válida para el ADR-008 y para el Risk Register.
 
 **Variante en papel (sin un segundo ambiente):** escribe el procedimiento de rollback de cada uno de los tres métodos con el riesgo de datos que tiene cada uno, y cuál elegirías para PROD-CO.
@@ -340,7 +349,7 @@ Síntoma: el viernes por la tarde, el equipo de seguridad publicó una data poli
 
 ---
 
-## 🧩 Microlección 5 — Plan, riesgos, costos y comunicación (≈90 min)
+## 🧩 Microlección 5 — Plan, riesgos, costos y comunicación (≈165 min)
 
 **¿Qué vas a aprender?** A convertir el Blueprint en un plan que un sponsor puede aprobar: MVP con alcance explícito, estimación como rango, Risk Register y un plan de comunicación por audiencia (Módulo 38).
 
@@ -348,7 +357,7 @@ Síntoma: el viernes por la tarde, el equipo de seguridad publicó una data poli
 
 **El borrador del equipo dice:** "Entregable 1: Blueprint (semanas 1-2); 2: modelo de datos y core (3-6); 3: aplicaciones — Power Pages, Canvas offline para asesores, Model-Driven con BPF Recepción → Análisis → Aprobación → Desembolso, y un agente de Copilot Studio en Teams para asesores (7-12); 4: integraciones (13-18); 5: analítica y gobierno (19-22); 6: presentación ejecutiva (23)". Son 23 semanas, todo en serie, sin UAT, sin migración de datos y con la IA y el agente dentro del MVP.
 
-**Práctica (papel, 75 min):**
+**Práctica (papel, 150 min):**
 
 1. **MVP con MoSCoW:** clasifica cada pieza del borrador (portal, app de asesores, Model-Driven con BPF, integración con el buró, pagos, analítica, extracción de documentos, predicción de mora, agente de Copilot Studio, CoE) en Must, Should, Could o Won't para el go-live de Colombia. Justifica cada Must con un requisito de tu tabla de drivers.
 2. **Plan por fases:** reordena el borrador para que el MVP de Colombia quepa en 6 meses con el equipo del caso, incluidos UAT, migración de los datos que existan y la formación. Di qué se hace en paralelo y qué depende de qué.
@@ -376,9 +385,11 @@ Síntoma: el viernes por la tarde, el equipo de seguridad publicó una data poli
 
 ---
 
-## 🧭 Decidir y defender — la revisión del comité de arquitectura (≈120 min)
+## 🧭 Decidir y defender — la revisión del comité de arquitectura (≈240 min)
 
 Junta las cinco microlecciones en el **Architecture Blueprint** y defiéndelo ante tu comité simulado. No hay pasos: hay un formato, unas preguntas y una rúbrica.
+
+**Prepara la presentación (≈120 min, en una sesión aparte):** las 10 slides de abajo, a partir de lo que ya escribiste; las tres primeras en lenguaje de negocio (Módulo 38). La sesión con el comité son otros ≈60 min, más el tiempo de corregir lo que te pidan.
 
 **Entrega antes de la sesión (24 horas antes):** el Blueprint (drivers, Fit-Gap, diagrama, los ocho ADRs, Risk Register, estrategia de ambientes, hoja de costos, plan y runbook) y la evidencia de las Microlecciones 2 y 4.
 
@@ -402,7 +413,9 @@ Junta las cinco microlecciones en el **Architecture Blueprint** y defiéndelo an
 - *CISO:* "¿Qué impide que un administrador tenga privilegios permanentes en PROD con las licencias que elegiste?" · "¿Qué pasa con la integración si mañana activamos el IP firewall?"
 - *Arquitecto revisor:* "¿Qué ADR cambiarías primero si el plazo se acorta dos meses?" · "Muéstrame el rollback que ensayaste: ¿qué datos se pierden?"
 
-**Rúbrica de la defensa** (alineada con la rúbrica *Arquitectura Empresarial* de cierre):
+**Si estudias solo — defensa grabada:** graba la presentación (20 minutos, con tu pantalla y tu voz). Después, sin mirar tus notas, elige **cuatro preguntas al azar**, una por rol (por ejemplo, tira una moneda para cada rol: cara, la primera pregunta; cruz, la segunda), y responde cada una en voz alta en la misma grabación, con un máximo de 3 minutos por respuesta. Al menos 24 horas después, mira la grabación y puntúate con la rúbrica de abajo. La evidencia es la grabación (o un enlace a ella), las cuatro preguntas que salieron y tu nivel en cada criterio.
+
+**Rúbrica de la defensa** (son los siete criterios de la rúbrica *Arquitectura Empresarial* de cierre, con lo que cada uno exige en este capstone):
 
 | Criterio | Qué demuestra que lo cumples |
 |---|---|
@@ -412,17 +425,16 @@ Junta las cinco microlecciones en el **Architecture Blueprint** y defiéndelo an
 | Integraciones | El fallo del buró (mantenimiento, reintentos agotados, DLQ) está diseñado y tiene runbook |
 | Gobernanza | Una data policy verificada en TEST y su paridad con PROD decidida en el ADR-008 |
 | Riesgos y roadmap | Risk Register con probabilidad, impacto, dueño y disparador; plan con UAT y migración |
-| Comunicación ejecutiva | El "CFO simulado" entiende riesgo y costo sin preguntas básicas de seguimiento |
-| Respuesta bajo presión | Ante una pregunta que no esperabas, dices qué dato te falta y cómo lo obtendrías, en vez de improvisar una cifra |
+| Comunicación ejecutiva | El "CFO simulado" (o tú, al ver la grabación) entiende riesgo y costo sin preguntas básicas de seguimiento, y ante una pregunta que no esperabas dices qué dato te falta y cómo lo obtendrías, en vez de improvisar una cifra |
 
 **Evidencia a reportar:**
 
 | Campo | Tu valor |
 |---|---|
-| Quiénes formaron el comité y qué rol simuló cada uno | ___ |
+| Quiénes formaron el comité y qué rol simuló cada uno (o "defensa grabada" y las cuatro preguntas que salieron) | ___ |
 | La pregunta más difícil que te hicieron y tu respuesta en dos líneas | ___ |
 | El ADR que el comité te pidió cambiar (o "ninguno") y si lo marcaste como superseded | ___ |
-| Puntaje en la rúbrica *Arquitectura Empresarial* y el criterio más bajo | ___ |
+| Nivel (0-4) de cada criterio, puntaje /100 con la fórmula de la rúbrica de cierre, quién puntuó y el criterio más bajo | ___ |
 
 ---
 
@@ -490,25 +502,33 @@ Las fija el equipo antes del go-live (son umbrales de equipo, orientativos, no c
 
 ### 🧪 Criterios de Validación del Capstone
 - [ ] Tabla de drivers (requisitos, restricciones y supuestos con dueño) y Fit-Gap del caso
-- [ ] Architecture Blueprint con los 8 ADRs (opciones, decisión, al menos una consecuencia negativa y su pilar de Well-Architected), Risk Register y diagrama, versionados en git y revisados por un mentor o par
+- [ ] Architecture Blueprint con los 8 ADRs (opciones, decisión, al menos una consecuencia negativa y su pilar de Well-Architected), Risk Register y diagrama, versionados en git y revisados por un mentor o par (o, si estudias solo, autorrevisados con la rúbrica de cada microlección al menos 48 horas después de escribirlos)
 - [ ] Resolví la micropráctica del Blueprint de créditos y corregí las líneas del borrador que violan una restricción (tenants, región, B2C, CMK)
-- [ ] Verifiqué en `SIT-TEST` una data policy: HTTP bloqueado y un flujo que quedó **Suspended** al mezclar Dataverse con un conector Non-business (o la variante en papel con su cita de Learn)
+- [ ] Verifiqué en `SIT-TEST` una data policy: el flujo con HTTP (bloqueado) y el que mezcla Dataverse con un conector Non-business se guardaron y quedaron **Suspended** (o la variante en papel con su cita de Learn)
 - [ ] Desplegué el slice vertical (tabla, numeración decidida, security role) de DEV a `SIT-TEST` como solución managed por mi camino de despliegue
 - [ ] Ensayé un rollback en TEST, medí el tiempo y anoté qué datos se perdieron (o la variante en papel con el riesgo de cada método)
 - [ ] ADR-004, ADR-005 y ADR-006 con el fallo del buró diseñado, la capacidad estimada y un umbral de revisión humana para la IA
 - [ ] Go-Live Checklist con dueño y evidencia por ítem, y runbook con soporte en los dos países y fuera de horario
 - [ ] Plan del MVP con MoSCoW, estimación como rango, Risk Register de 10 riesgos con disparador y plan de comunicación por audiencia
 - [ ] Diagnostiqué el score detenido tras la data policy formulando tres hipótesis antes de ver la causa
-- [ ] Presentación ejecutiva de 10 slides defendida ante un comité de al menos dos personas con preguntas no anticipadas
+- [ ] Presentación ejecutiva de 10 slides defendida ante un comité de al menos dos personas con preguntas no anticipadas (o, si estudias solo, la defensa grabada con cuatro preguntas sacadas al azar y autoevaluada con la rúbrica)
 - [ ] Completé el reto de transferencia de la ONG con su ADR y la sección "qué cambió respecto al capstone"
 - [ ] (Opcional, modo práctico de los Módulos 34, 35 y 37) Logic App con el buró (real o mock) con reintentos y DLQ, Link to Microsoft Fabric con Bronze/Silver/Gold y un modelo de AI Builder con umbral de confianza, enlazados desde sus ADRs
 
 **Rúbrica de cierre:** evalúa este capstone con la rúbrica ponderada *Arquitectura Empresarial*
-de [Rúbricas y Plantillas de Evaluación](/recursos/rubricas-plantillas) (ADRs, seguridad, ALM,
-integraciones, gobernanza, riesgos y comunicación ejecutiva). Aprobación: ≥75/100 y ningún
-criterio en nivel 0-1. Nivel profesional/excelencia: ≥92/100. Esta rúbrica es el criterio que
-decide si el capstone está aprobado — la autoevaluación de la sección siguiente es un espacio de
-reflexión complementario, no un sustituto de la rúbrica.
+de [Rúbricas y Plantillas de Evaluación](/recursos/rubricas-plantillas): siete criterios (ADRs,
+seguridad, ALM, integraciones, gobernanza, riesgos y comunicación ejecutiva), los mismos de la
+rúbrica de la defensa; en este capstone, el de ADRs exige los **ocho** ADRs.
+
+- **Quién puntúa:** cada miembro del comité, por separado; tu nota es el promedio. Si estudias
+  solo, puntúas tú con la grabación de la defensa y lo dejas escrito ("autoevaluado").
+- **Cómo se calcula:** cada criterio recibe un nivel de 0 a 4 con la escala del recurso (3 =
+  Profesional, 4 = Enterprise). Puntaje = Σ (peso del criterio × nivel / 4). Por ejemplo, nivel 3
+  en todos da 75/100; nivel 4 en ADRs (20 %) y en ALM (15 %) y 3 en el resto da 83,75/100.
+- **Aprobación:** ≥75/100 y ningún criterio en nivel 0-1. Nivel profesional/excelencia: ≥92/100.
+
+Esta rúbrica es el criterio que decide si el capstone está aprobado — la autoevaluación de la
+sección siguiente es un espacio de reflexión complementario, no un sustituto de la rúbrica.
 
 ---
 
@@ -520,19 +540,21 @@ Para considerarse Solution Architect Master de Power Platform, debes cumplir:
 - [ ] Proyecto Capstone completo: Blueprint defendido y slice vertical desplegado en ambientes DEV/TEST
 - [ ] Well-Architected Review completado con plan de remediación
 - [ ] Gobernanza de tenant implementada (Managed Environments + admin center como base; CoE Starter Kit implementado con compliance process activo también es válido — ver Módulo 32)
-- [ ] Pipeline CI/CD multi-solución con aprobaciones por ambiente
-- [ ] Integración enterprise con Azure (Service Bus + Logic Apps + APIM) diseñada y, en modo práctico, construida (Módulo 34)
-- [ ] Arquitectura de datos Medallion en Fabric con Direct Lake Power BI diseñada y, si tienes capacidad de Fabric, construida (Módulo 35)
+- [ ] Pipeline CI/CD con aprobaciones por ambiente, con el número de soluciones que justifique tu ADR-008 (una sola es lo recomendado en implementaciones pequeñas y medianas; Módulo 40)
+- [ ] Integración enterprise con Azure con las piezas que justifique tu ADR-004 (por ejemplo, Service Bus y Logic Apps; APIM solo si el ADR lo justifica) diseñada y, en modo práctico, construida (Módulo 34)
+- [ ] Arquitectura de datos decidida en tu ADR-005 (Medallion en Fabric con Direct Lake u otra opción justificada por el volumen) diseñada y, si eliges Fabric y tienes capacidad, construida (Módulo 35)
 - [ ] Plan de controles Zero Trust (PIM, Purview, Sentinel, Conditional Access) decidido según las licencias, con lo que tu tenant permita activado y lo demás como riesgo documentado (Módulo 36)
 - [ ] AI Builder con un modelo personalizado entrenado y un umbral de revisión humana documentado (Módulo 37)
 
 ### Criterios de Liderazgo
-- [ ] Discovery Workshop facilitado con un cliente real o simulado
+- [ ] Discovery Workshop diseñado (agenda adaptada, Módulo 38) y, si puedes, facilitado con un cliente real o simulado
 - [ ] Fit-Gap Analysis y estimación de proyecto completados
 - [ ] Presentación ejecutiva de arquitectura sin jerga técnica
-- [ ] Al menos 1 colega del Nivel 1-2 mentorado por ti durante tu Nivel 4
+- [ ] (Fuera del curso) Al menos 1 colega del Nivel 1-2 mentorado por ti durante tu Nivel 4
 
-### Certificaciones
+### Certificaciones (fuera del curso)
+Exigen pagar y aprobar exámenes externos; ninguna microlección los produce. Antes de inscribirte, comprueba en Learn cuáles siguen vigentes.
+
 - [ ] PL-900 obtenida (debería estar completada desde Nivel 1)
 - [ ] PL-200 obtenida (Nivel 2)
 - [ ] PL-400 obtenida (Nivel 3)
@@ -553,7 +575,7 @@ promedio). Califica cada área del 1 al 5:
 - Liderazgo técnico y comunicación ejecutiva: ___/5
 - Casos de transformación digital: ___/5
 
-**Promedio ≥ 4.0 en todos → Eres Solution Architect de Power Platform & D365**
+**Cada área en 4 o más → Eres Solution Architect de Power Platform & D365**
 
 ---
 

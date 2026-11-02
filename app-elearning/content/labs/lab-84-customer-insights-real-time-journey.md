@@ -72,6 +72,8 @@ publicar el journey ni configurar canales.
 
 Define evento de entrada, datos mínimos y condición de elegibilidad.
 
+Si el evento es de negocio y masivo (por ejemplo, contratos que vencen), la entrada es por segmento (segment-based journey); usa un trigger solo para acciones individuales del cliente (ver Módulo 64).
+
 ### Paso 2 — Consentimiento
 
 Documenta propósito, canal, fuente del consentimiento y regla de exclusión.

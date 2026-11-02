@@ -4,7 +4,7 @@ title: "Liderazgo Técnico y Gestión de Proyectos"
 level: "arquitecto"
 certification: "Arquitectura Power Platform"
 estimatedMinutes: 22
-practiceMinutes: 420
+practiceMinutes: 470
 slug: "liderazgo-tecnico-y-gestion-de-proyectos"
 lastVerified: "2026-11"
 ---
@@ -56,7 +56,7 @@ Desarrollar las competencias de liderazgo técnico y consultoría funcional nece
 
 ---
 
-## 🧩 Microlección 1 — Discovery y Fit-Gap: decidir qué entra antes de prometer (≈60 min)
+## 🧩 Microlección 1 — Discovery y Fit-Gap: decidir qué entra antes de prometer (≈75 min)
 
 **El concepto:** el Discovery no es una reunión para "levantar requerimientos", es la primera decisión de alcance. Su salida no es una lista de deseos, es una lista **clasificada** (Fit, Partial, Gap, Excluido) y **priorizada** (MoSCoW), con los primeros riesgos escritos. Success by Design pide empezar la Solution Blueprint Review ya en esta fase, no después.
 
@@ -112,8 +112,8 @@ Desarrollar las competencias de liderazgo técnico y consultoría funcional nece
 |---|--------------|-----------|-----------|-------------|
 | 1 | Gestión de oportunidades comerciales | Must Have | ✅ Fit | D365 Sales cubre 100% |
 | 2 | Propuestas con firma digital | Must Have | ⚠️ Partial | Requiere integración con DocuSign o Adobe Sign |
-| 3 | Integración en tiempo real con SAP MM | Must Have | ⚠️ Gap | Requiere desarrollo: Custom Connector + Logic App |
-| 4 | Análisis predictivo de churn | Should Have | ⚠️ Gap | AI Builder Prediction — requiere 6 meses de datos históricos |
+| 3 | Integración en tiempo real con SAP MM | Must Have | 🔧 Gap | Requiere desarrollo: Custom Connector + Logic App |
+| 4 | Análisis predictivo de churn | Should Have | 🔧 Gap | AI Builder Prediction — requiere historial en Dataverse: al menos 50 filas y 10 por clase, 1.000 o más recomendadas (Módulo 37) |
 | 5 | App móvil offline para vendedores en campo | Must Have | ✅ Fit | Canvas App con modo offline |
 | 6 | Chatbot para consultas de clientes | Could Have | ✅ Fit | Copilot Studio — post-MVP |
 | 7 | Integración con sistema de nómina local | Won't Have | ❌ Excluido | Fuera del alcance de este proyecto |
@@ -124,12 +124,15 @@ Desarrollar las competencias de liderazgo técnico y consultoría funcional nece
 - Won't Have: 1 (14%) — excluidos del scope
 ```
 
+**Adapta la agenda al caso continuo (15 min):** reescribe la plantilla para Distribuidora Andina: quién asiste a cada bloque (Director Comercial, CFO, IT de SAP, 2-3 vendedores de campo), qué bloque recorta si solo te dan **un** día, y en qué bloque preguntarás por los pedidos 3, 4 y 12, que son los que más riesgo esconden.
+
 **Haz el Fit-Gap del caso continuo:** clasifica los 12 pedidos (convierte el 12 en requerimientos concretos o exclúyelo con su razón), asigna MoSCoW con un máximo de la mitad como **Must**, y abre las 3 primeras líneas del Risk Register. Para clasificar, apóyate en lo que viste en los módulos anteriores (AI Builder Prediction en el Módulo 37, offline en Canvas Apps, Copilot Studio en los Módulos 15 y 22, integración en el Módulo 24).
 
 **Evidencia a reportar:**
 
 | Campo | Tu valor |
 |---|---|
+| Tu agenda adaptada: asistentes por bloque y el bloque que recortas si solo hay un día | ___ |
 | Cuántos Fit, Partial, Gap y Excluidos te salieron | ___ |
 | Cómo convertiste el pedido 12 ("igual que el Excel") en requerimientos o por qué lo excluiste | ___ |
 | Los Must y por qué cada uno es Must y no Should | ___ |
@@ -262,7 +265,7 @@ Registra también 2 elementos de deuda técnica del proyecto (por ejemplo, un va
 
 ---
 
-## 🧩 Microlección 5 — Historias, trazabilidad y UAT (≈60 min)
+## 🧩 Microlección 5 — Historias, trazabilidad y UAT (≈110 min)
 
 **El concepto:** la mitad de las discusiones de alcance en UAT ("esto siempre se había pedido") se ganan o se pierden con la trazabilidad: si un requerimiento no tiene historia, criterio de aceptación y caso UAT, no se puede probar ni aprobar. Convertir requerimientos ambiguos en historias listas para desarrollo es trabajo del consultor; mantenerlas conectadas hasta el UAT, del arquitecto.
 
@@ -318,7 +321,7 @@ Paquete documental recomendado sin inflar el proyecto:
 - Plan UAT con casos, datos, responsables, calendario y criterios de aprobación.
 - Registro de riesgos, decisiones y change requests.
 
-**Practica con el caso continuo:** escribe 5 historias de los Must (incluida la de aprobación de descuentos y la de visibilidad por región, pedido 11) con criterios de aceptación, roles y datos de prueba; llévalas a una matriz de trazabilidad con 10 o más filas, y esboza el plan UAT: happy path, excepciones, permisos y los criterios **go/no-go** del go-live.
+**Practica con el caso continuo:** escribe 5 historias de los Must (incluida la de aprobación de descuentos y la de visibilidad por región, pedido 11) con criterios de aceptación, roles y datos de prueba; llévalas a una matriz de trazabilidad con 10 o más filas, y esboza el plan UAT: happy path, excepciones, permisos y los criterios **go/no-go** del go-live. Cierra con el **índice del paquete documental** del proyecto (la lista de arriba): para cada documento, si es funcional o técnico, su owner y su versión inicial (por ejemplo, `FDD v0.1 — Consultor funcional`).
 
 **Evidencia a reportar:**
 
@@ -328,6 +331,7 @@ Paquete documental recomendado sin inflar el proyecto:
 | Cuántas filas tiene tu matriz y cuántas tienen ya caso UAT | ___ |
 | Un caso UAT de permisos (pedido 11) con su resultado esperado | ___ |
 | Tus 3 criterios go/no-go del go-live | ___ |
+| Índice del paquete documental: documentos funcionales y técnicos, con owner y versión | ___ |
 
 ---
 
@@ -449,13 +453,13 @@ Junta lo que hiciste en las microlecciones en un **documento de decisión de una
 | Requerimientos sin trazabilidad | Backlog, diseño, desarrollo y pruebas viven en documentos separados | Mantener una matriz simple con Req ID, historia, componente, caso UAT, evidencia y estado |
 
 ### 🧪 Criterios de Validación
-- [ ] Discovery Workshop agenda diseñada para un cliente real o simulado
+- [ ] Agenda del Discovery Workshop adaptada al caso continuo, con asistentes por bloque (Microlección 1)
 - [ ] Fit-Gap Analysis con 10+ requerimientos clasificados MoSCoW
 - [ ] 5 historias de usuario con criterios de aceptación, datos de prueba y roles
 - [ ] Matriz de trazabilidad con 10+ requerimientos vinculados a casos UAT
 - [ ] Plan UAT con happy path, excepciones, permisos y evidencias esperadas
-- [ ] Paquete documental separado entre funcional y técnico, con owner y versión
-- [ ] Estimación por módulo con story points y semanas, incluyendo buffer de contingencia
+- [ ] Índice del paquete documental separado entre funcional y técnico, con owner y versión (Microlección 5)
+- [ ] Estimación por módulo con story points y duración, con la contingencia expresada como rango (mínimo–máximo) y sus supuestos (Microlección 2)
 - [ ] Presentación de 10 slides del proyecto: las primeras 3 en lenguaje de negocio, sin jerga técnica
 - [ ] Estimación presentada como rango con sus supuestos, y sé explicar por qué el cálculo en secuencia y el cálculo por velocidad no coinciden
 - [ ] Un change request completo con impacto, opciones, recomendación y aprobador único

@@ -12,7 +12,10 @@ Microsoft — verificar en el momento de activar" en vez de un número inventado
 
 ## Cómo conseguir tu ambiente Developer (vigente desde noviembre de 2026)
 
-Verificado en Microsoft Learn (páginas actualizadas en octubre de 2026). El paso a paso clic a clic está en el
+Verificado en Microsoft Learn el 1 nov 2026 ([Developer Plan](https://learn.microsoft.com/power-platform/developer/plan),
+[Managed Environments licensing](https://learn.microsoft.com/power-platform/admin/managed-environment-licensing),
+[Environment routing](https://learn.microsoft.com/power-platform/admin/default-environment-routing),
+[Trial environments](https://learn.microsoft.com/power-platform/admin/trial-environments)). El paso a paso clic a clic está en el
 [Módulo 1](/nivel/basico/modulo/introduccion-al-ecosistema-power-platform), Microlección 1.
 
 - **Necesitas una cuenta de trabajo o estudio.** No se puede usar una cuenta personal (Gmail, Outlook.com, Hotmail).
@@ -27,8 +30,27 @@ Verificado en Microsoft Learn (páginas actualizadas en octubre de 2026). El pas
     (uno por usuario).
   - **15 dic 2026:** se suspenden los ambientes Developer no administrados que existan.
   - **15 ene 2027:** empiezan a borrarse.
-  - Si no puedes crear un Developer, usa un ambiente **Trial** con Dataverse: sirve para el Nivel Básico e Intermedio,
-    pero caduca. Exporta tus soluciones antes de la fecha que muestra el Admin Center.
+  - Los ambientes Developer que ya son administrados no cambian. El tipo **Trial** (estándar) tampoco cambia.
+- **Qué hacer si ya tienes un Developer no administrado (creado antes del 15 nov 2026):** antes del **15 dic 2026**,
+  conviértelo en administrado (un administrador activa **Managed Environments** en ese ambiente, ver
+  [Enable Managed Environments](https://learn.microsoft.com/power-platform/admin/managed-environment-enable); en tu
+  tenant de prueba el administrador eres tú) o exporta tus soluciones
+  e impórtalas en otro ambiente. Al convertirlo conserva apps, flujos y datos, y sigue siendo Developer.
+- **Cómo se consigue un Developer administrado:** un administrador convierte uno existente o activa **Environment
+  routing** (Admin Center → **Manage** → **Tenant settings** → **Environment routing**), que le crea a cada maker su
+  Developer administrado al entrar a make.powerapps.com. Si el tenant es tuyo, el administrador eres tú; si no, pídeselo a TI.
+- **Licencia en un ambiente administrado (también si haces el curso solo):** el Developer Plan sigue siendo gratis,
+  pero no incluye el uso de Managed Environments. Para **crear y previsualizar** apps y flujos no necesitas licencia
+  premium; para **ejecutarlos** sí, incluso si eres el dueño y no compartes nada. Una licencia de prueba (por ejemplo,
+  la prueba de Power Apps) sirve, pero dura 30 días. Desde junio de 2026 la app avisa si falta la licencia, y desde
+  **febrero de 2027** no deja abrir apps en un ambiente administrado sin ella (no se borran: vuelven a abrirse al
+  asignar la licencia).
+- **Uno por usuario, y un solo Trial:** cada usuario puede crear un solo Developer administrado, y Learn también limita
+  los ambientes **Trial** (estándar) a uno por usuario: 30 días, con una sola extensión de 30 días más. Si un lab te
+  pide un **segundo ambiente** (por ejemplo, Dev → Test para mover una solución), usa tu Developer + tu Trial, un
+  Sandbox si tu organización te lo da, o haz la variante en papel del lab. No intentes crear un segundo Developer.
+- Si no puedes crear un Developer, usa un ambiente **Trial** con Dataverse: sirve para el Nivel Básico e Intermedio,
+  pero caduca. Exporta tus soluciones antes de la fecha que muestra el Admin Center.
 - **En un ambiente Developer no se pueden instalar apps de Dynamics 365.** Los trials de Sales, Customer Service y
   demás crean su propio ambiente (ver las filas de Dynamics 365 abajo).
 - **Límites del ambiente Developer:** 750 ejecuciones de flujo al mes y 2 GB de base de datos; se deshabilita tras

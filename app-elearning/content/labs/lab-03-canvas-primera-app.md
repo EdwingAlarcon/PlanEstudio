@@ -530,7 +530,7 @@ La app está publicada. Los ítems de la galería muestran la barra de color lat
 
 | Problema | Causa probable | Solución |
 |---|---|---|
-| La galería muestra "Error de delegación" (línea azul) | La fórmula `Filter` usa una función no delegable | Usa solo operadores delegables (`=`, `<>`, `And`, `Or`). Evita `Left()`, `Mid()`, `Len()` en Filter |
+| La galería muestra "Error de delegación" (línea azul) | La fórmula `Filter` usa una función no delegable | Usa solo operadores delegables (`=`, `<>`, `And`, `Or`). Evita `Len()`, `Trim()` o `Text()` aplicadas a la columna en Filter |
 | `galSolicitudes.Selected` está vacío en scrDetalle | El usuario fue a scrDetalle sin seleccionar nada en la galería | Agrega un guard: verifica que `galSolicitudes.Selected` no sea vacío antes de navegar |
 | El formulario no guarda (OnSuccess no se dispara) | Campos Required del formulario están vacíos | Revisa en la barra de errores del formulario qué campos faltan |
 | La tarjeta de Categoría (columna Lookup) no muestra el nombre de la categoría, o muestra un código largo | El cuadro de selección (*Combo box*) de la tarjeta no está mostrando la columna correcta de la tabla **Categorías** | Selecciona la tarjeta de Categoría y, dentro de ella, el *Combo box*. En el panel de propiedades, en **Fields**, selecciona **Edit** y en **Primary text** elige la columna **Nombre** (la columna principal de Categorías en el Lab 02). Si no te deja cambiarlo, desbloquea antes la tarjeta (**Advanced** > **Unlock to change properties**) |

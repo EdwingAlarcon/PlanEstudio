@@ -4,7 +4,7 @@ title: "Seguridad y Cumplimiento Enterprise"
 level: "arquitecto"
 certification: "Arquitectura Power Platform"
 estimatedMinutes: 25
-practiceMinutes: 165
+practiceMinutes: 190
 slug: "seguridad-y-cumplimiento-enterprise"
 lastVerified: "2026-11"
 ---
@@ -13,7 +13,7 @@ lastVerified: "2026-11"
 > — suscripción, resource group, RBAC y costos, antes de las actividades con Azure Key Vault y
 > Privileged Identity Management (PIM) de Microsoft Entra ID de este módulo.
 
-*Lectura: 22-28 min · Con práctica: unos 165 min, mejor en dos sesiones (la primera hasta la Microlección 2; la segunda, de la 3 al final). La primera vez, cuenta entre una vez y media y el doble.*
+*Lectura: 22-28 min · Con práctica: unos 190 min, mejor en dos sesiones (la primera hasta la Microlección 2; la segunda, de la 3 al final). La primera vez, cuenta entre una vez y media y el doble.*
 
 ### 🎯 Objetivo
 Implementar una postura de seguridad Zero Trust para Power Platform: clasificación de datos con Microsoft Purview, Customer-Managed Keys, Privileged Identity Management para administradores, auditoría avanzada con Microsoft Sentinel, y cumplimiento regulatorio documentado.
@@ -22,6 +22,7 @@ Implementar una postura de seguridad Zero Trust para Power Platform: clasificaci
 >
 > **Antes de empezar, necesitas:**
 > - Acceso al [Power Platform Admin Center](https://admin.powerplatform.microsoft.com) como **Power Platform Administrator** y un ambiente **Sandbox** o **Developer** de prueba que ya sea Managed Environment (lo activaste en el Módulo 33). **No uses PROD.**
+> - **Si tu ambiente es Developer:** el Developer Plan **no** incluye derechos de uso de Managed Environments. Para ejecutar apps y flujos en un Developer gestionado necesitas además una licencia premium (Power Apps Premium o Power Automate Premium), y desde febrero de 2027 las apps de un Managed Environment no abren sin ella. Si no la tienes: activa la **prueba de 30 días de Power Apps** (Power Apps Plan Trial) en tu usuario, o haz las prácticas de este módulo con su **variante en papel**. Recuerda también (Módulo 33) que desde el 15 de noviembre de 2026 cada usuario solo puede crear **un** Developer gestionado y que los Developer no gestionados se suspenden desde el 15 de diciembre de 2026.
 > - Para Conditional Access y PIM, el [Microsoft Entra admin center](https://entra.microsoft.com) con un rol de administrador. Conditional Access exige Microsoft Entra ID P1 y PIM exige P2 (o Microsoft Entra ID Governance).
 > - Varias funciones de este módulo (IP firewall, Customer-managed key, Customer Lockbox) exigen, además de Managed Environments, una licencia de cumplimiento tipo Microsoft 365 E5/A5/G5. Un tenant de prueba casi nunca la tiene: cada práctica que la necesita tiene una **variante en papel**, y la de la Microlección 3 es en papel para todos.
 > - Haber hecho los Módulos 16 (seguridad y administración), 31 y 33.
@@ -108,9 +109,15 @@ graph LR
 
 1. En el Admin Center, **Security** → **Identity and access** → **IP firewall**. Selecciona tu ambiente de prueba y **Set up IP firewall**. **Si el ambiente no aparece o el ajuste está deshabilitado**, no es Managed Environment o el tenant no tiene la licencia de cumplimiento: pasa a la variante en papel.
 2. Activa **IP Firewall**. En **Allowed list of IP addresses** escribe tu IP pública en formato CIDR (por ejemplo `203.0.113.10/32`; búscala con cualquier servicio "cuál es mi IP"). Se admiten hasta 200 rangos.
-3. Revisa y anota el estado de **Allowed list of service tags**, **Allow access for Microsoft trusted services**, **Allow access for all application users** y **Reverse proxy IP addresses**.
+3. Revisa y anota el estado de **Allowed list of service tags**, **Allow access for Microsoft trusted services**, **Allow access for all application users** y **Reverse proxy IP addresses**. Según Learn, **Allow access for Microsoft trusted services** y **Allow access for all application users** vienen **activadas por defecto**; si alguien las desactiva, algunos servicios que usan Dataverse, como los flujos de Power Automate, pueden dejar de funcionar (lo verás en el diagnóstico).
 4. Comprueba que **Enable IP firewall in audit-only mode** está activado (viene activado por defecto) y guarda. El cambio tarda entre 5 y 10 minutos en aplicarse.
-5. Ejecuta un flujo que lea o escriba en el ambiente y abre la app desde tu red. En audit-only nada se bloquea: anota qué esperas encontrar en los registros (la acción de auditoría del IP firewall) cuando un acceso viene de una IP no permitida.
+5. Ejecuta un flujo que lea o escriba en el ambiente y abre la app desde tu red. En audit-only nada se bloquea: el registro de lo que **habría** bloqueado se descarga con la Web API de Dataverse. Abre en el navegador (con la sesión iniciada en el ambiente) esta URL, cambiando `[orgURI]` por la URL de tu ambiente (por ejemplo `https://tuorg.crm.dynamics.com`); la acción **118** es la del IP firewall en audit-only y `$top=5` devuelve las cinco más recientes:
+
+   ```http
+   GET https://[orgURI]/api/data/v9.1/audits?$select=createdon,changedata,action&$filter=action eq 118&$orderby=createdon desc&$top=5
+   ```
+
+   Anota cuántas filas devuelve y, si hay alguna, qué datos trae su `changedata`. Si la respuesta es `"value": []`, todo el tráfico de ese rato vino de rangos permitidos (o el cambio aún no se aplicó).
 6. **Cookie binding:** **Manage** → **Environments** → tu ambiente → **Settings** → **Product** → **Privacy + Security** → **IP address settings** → **Enable IP address-based cookie binding**. Actívalo, abre la app, conecta o desconecta una VPN (o cambia a la red del móvil) y recarga: anota qué pasa.
 7. Al terminar, desactiva ambos controles si el ambiente es compartido.
 
@@ -188,7 +195,7 @@ Cómo se configura de verdad (para que tu runbook sea concreto):
 2. En [make.powerapps.com](https://make.powerapps.com), **Tables** → una tabla tuya de un módulo anterior (por ejemplo `Solicitud TI`) → **Edit** → **Edit table properties** → **Advanced options** y marca **Audit changes to its data**. **Save**. Cambia una fila en la app Model-Driven y busca el cambio en la pestaña **Related** → **Audit History** de esa fila (necesitas el privilegio **View Audit History**). Anota quién, qué columna y el valor anterior.
 3. **Lecturas hacia Purview:** en **Audit settings** del ambiente, revisa **Log access** y **Read logs**. Anota si tu ambiente permite activarlos: **Read logs** solo funciona en ambientes de producción, así que en un Sandbox o Developer es normal que no tenga efecto.
 4. **Purview Audit (lectura):** en el [portal de Microsoft Purview](https://purview.microsoft.com), abre **Audit** y busca actividad de Power Platform de los últimos días. **Si no ves Audit**, necesitas el rol **Audit Logs** o **View-Only Audit Logs**. Anota qué tipos de actividad aparecen.
-5. **Regla de detección (papel o Sentinel si lo tienes):** con la solución **Microsoft Business Applications** instalada, los datos de Dataverse llegan a la tabla `DataverseActivity`. Esta consulta es una **plantilla a validar contra tu workspace**: los umbrales son de ejemplo y se calibran con tu línea base.
+5. **Regla de detección (papel o Sentinel si lo tienes):** con la solución **Microsoft Business Applications** instalada, los datos de Dataverse llegan a la tabla `DataverseActivity`. **Antes de activar Sentinel, mira el coste:** se paga la ingesta en Log Analytics y el análisis de Sentinel por GB. La prueba gratuita cubre los primeros 10 GB/día durante 31 días en un workspace; al terminar empieza a facturar, así que apunta la fecha o elimina el workspace. Y si tu ambiente es Developer o Sandbox, `DataverseActivity` quedará **vacía**: los registros de actividad de Dataverse solo llegan a Purview (y de ahí a Sentinel) desde ambientes de producción (paso 3 y Conceptos Clave). En ese caso, escribe la regla y compruébala solo en su sintaxis. Esta consulta es una **plantilla a validar contra tu workspace**: los umbrales son de ejemplo y se calibran con tu línea base.
 
 ```kql
 // Plantilla: lecturas masivas por usuario en ventanas de 5 minutos
@@ -233,7 +240,7 @@ DataverseActivity
 
 **¿Por qué existe esto?** Ningún cliente activa todo el primer mes. Lo que se evalúa en un arquitecto es el orden: qué control cubre más riesgo por cada licencia y cada hora de operación, y qué queda pendiente con un dueño.
 
-**🏗️ Reto (sin pasos): escribe el plan de controles de una cooperativa de ahorro.** No te damos la decisión, solo el caso.
+**🏗️ Reto (sin pasos, unos 45 min): escribe el plan de controles de una cooperativa de ahorro.** No te damos la decisión, solo el caso.
 
 > **Caso:** una cooperativa de ahorro con 120 empleados usa una app Model-Driven sobre Dataverse para gestionar créditos de sus socios. Tiene licencias Microsoft 365 E3 y Microsoft Entra ID P1 (no P2, no E5). Los empleados trabajan desde las oficinas y algunos desde casa sin VPN. Una integración con su core bancario corre desde una Azure Function con application user. El regulador pide conservar evidencia de acceso a datos de socios durante un año. El presupuesto alcanza para **una** ampliación de licencias este año.
 > **Opciones a considerar (al menos estas tres):** (a) comprar E5 (o el complemento de cumplimiento) para tener IP firewall, CMK, Lockbox y Audit (Premium); (b) comprar Entra ID P2 para PIM y quedarse con Conditional Access, auditoría de Dataverse y Audit (Standard) exportado a Sentinel; (c) no ampliar y cubrir con Conditional Access, IP cookie binding, data policies y auditoría de Dataverse.
@@ -268,7 +275,7 @@ El mismo razonamiento, con otras restricciones: un **banco** regulado exige que 
 
 **[Transferir: controles para un banco regulado](/practica/ip-arq-021-controles-banco-regulado)** — decide qué controles activas y cómo. Si solo memorizaste "CMK y listo", este reto te lo va a mostrar: la clave sin un procedimiento de rotación y sin Lockbox deja dos requisitos sin cubrir, y siete años no caben en la retención por defecto de Purview.
 
-Cierra el reto con un plan de media página contrastado con la tabla de criterios de la Microlección 5.
+Cierra el reto (unos 40 min, contando la práctica) con un plan de media página contrastado con la tabla de criterios de la Microlección 5.
 
 **Evidencia a reportar:**
 
@@ -312,8 +319,8 @@ Cierra el reto con un plan de media página contrastado con la tabla de criterio
 ### 🧪 Criterios de Validación
 - [ ] Resolví la micropráctica de amenazas y controles y expliqué por qué CMK no frena a un usuario con permisos
 - [ ] Creé una política de Conditional Access en **Report-only** sobre el recurso de Dataverse y anoté su resultado en el inicio de sesión (o hice la variante en papel)
-- [ ] Leí la configuración de PIM de Power Platform Administrator y encontré **Add me** en **Membership**
-- [ ] Configuré el IP firewall en audit-only y el IP cookie binding en un ambiente de prueba, y anoté qué pasó al cambiar de red
+- [ ] Leí la configuración de PIM de Power Platform Administrator y encontré **Add me** en **Membership** (o, sin Entra ID P2, escribí la configuración de PIM que propondría con una razón por cada valor: la variante en papel de la Microlección 1)
+- [ ] Configuré el IP firewall en audit-only y el IP cookie binding en un ambiente de prueba, y anoté qué pasó al cambiar de red (o, sin Managed Environment o sin licencia de cumplimiento, hice la variante en papel del tráfico de mi ambiente con sus rangos y service tags)
 - [ ] Diagnostiqué las integraciones bloqueadas por el IP firewall formulando una hipótesis antes de ver la causa
 - [ ] Escribí el runbook de CMK con rotación, caducidad y desbloqueo
 - [ ] Activé la auditoría de Dataverse en una tabla y leí un cambio en **Audit History**

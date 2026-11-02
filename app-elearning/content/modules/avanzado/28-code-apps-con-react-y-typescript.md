@@ -4,11 +4,11 @@ title: "Code Apps con React y TypeScript"
 level: "avanzado"
 certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
 estimatedMinutes: 18
-practiceMinutes: 150
+practiceMinutes: 210
 slug: "code-apps-con-react-y-typescript"
 lastVerified: "2026-11"
 ---
-*Lectura: 15-20 min · Con práctica: unos 150 min en tu entorno Developer; la primera vez, cuenta entre el doble y el triple. Habilitar code apps en el entorno requiere un administrador del entorno o de Power Platform.*
+*Lectura: 15-20 min · Con práctica: unos 210 min (3 h 30) en tu entorno Developer, mejor en dos sesiones (1: Microlecciones 1 y 2; 2: el reto y el cierre); la primera vez, cuenta hasta una vez y media más. Habilitar code apps en el entorno requiere un administrador del entorno o de Power Platform.*
 
 ### 🚧 Antes de comenzar: es el módulo con más exigencia de código de la ruta Developer
 
@@ -30,8 +30,9 @@ Construir aplicaciones web completas (React + TypeScript + Vite) que corren dent
 >
 > Necesitas: tu entorno Developer con la tabla **Solicitud TI** (`sit_solicitud`) del Lab 02 y la solución
 > `SIT Solicitudes Internas`; Node.js (versión LTS), Git y Visual Studio Code. Como en el Módulo 14, el
-> entorno Developer te deja usar funciones Premium para aprender; en un entorno real, cada usuario que
-> abra la app necesita licencia Premium (ver Conceptos clave).
+> entorno Developer te deja construir con funciones Premium para aprender; pero en un Developer administrado
+> (todos desde el 15-11-2026) también tú necesitas licencia Premium, o la prueba de 30 días de Power Apps,
+> para abrir la app, y en un entorno real la necesita cada usuario (ver Conceptos clave).
 
 ---
 
@@ -43,7 +44,7 @@ Construir aplicaciones web completas (React + TypeScript + Vite) que corren dent
 - **Power Apps CLI (`pa`) y client library:** se instalan con npm: `@microsoft/power-apps-cli` instala el comando `pa`, y `@microsoft/power-apps` es la *Power Apps client library for code apps* (a veces llamada "Power Apps SDK"), que tu app usa en tiempo de ejecución y que gestiona los modelos y servicios generados. Comandos que usa este módulo: `pa app init` (inicializa la app y crea `power.config.json`), `pa app run` (host local; abre la URL **Local Play**), `pa app add data-source` (conecta una tabla o un conector y genera código tipado), `pa app refresh data-source`, `pa app push` (publica una versión nueva), `pa auth login` / `pa auth status`, `pa solution list` y `pa connection list-references`. Versiones anteriores de la documentación usaban `pac code ...` del Power Platform CLI; la documentación vigente usa solo `pa`.
 - **`power.config.json`:** metadatos de la app (entorno, data sources, conexiones) que usan el CLI y la client library para conectar y publicar. Tu código no necesita leerlo ni editarlo a mano.
 - **Data sources tipados:** `pa app add data-source --connector dataverse --table <nombre-lógico>` conecta una tabla de Dataverse (si no pasas `--org-url`, te pide la URL de la organización). El CLI genera en `src/generated/` un **modelo** (`<Nombre>Model.ts`, la interfaz con las columnas) y un **servicio** (`<Nombre>Service.ts`). El nombre lo genera el CLI a partir del nombre de la tabla en la Web API (para la tabla `account` son `AccountsModel.ts` y `AccountsService.ts`): para la tuya, míralo en la carpeta. Métodos del servicio de Dataverse: `create(registro)`, `get(id)`, `getAll(opciones)`, `update(id, cambios)` y `delete(id)`.
-- **El resultado viene en `.data`:** los métodos devuelven un objeto resultado, no los registros directamente: `const result = await AccountsService.getAll(); const filas = result.data`. `getAll` acepta `{ select, filter, orderBy, top, skip, maxPageSize, skipToken }`; Learn pide limitar **siempre** las columnas con `select`. En `update`, envía **solo** las columnas que cambian: enviar el registro completo provoca "actualizaciones falsas" que disparan lógica de negocio y ensucian la auditoría.
+- **El resultado viene en `.data`, y el error en `.error`:** los métodos devuelven un objeto resultado (`IOperationResult`, con `success`, `data` y `error`), no los registros directamente: `const result = await AccountsService.getAll(); const filas = result.data`. **Ojo:** si Dataverse responde con un error, la client library (comprobado en el código de `@microsoft/power-apps` 1.5.0) **no lanza una excepción**: devuelve `success: false` y el detalle en `result.error`, así que un `try/catch` solo no lo captura. Comprueba siempre `result.success` antes de usar `result.data`. Los ejemplos de Learn solo usan `try/catch`; este comportamiento está en el código de la librería, no en Learn. `getAll` acepta `{ select, filter, orderBy, top, skip, maxPageSize, skipToken }`; Learn pide limitar **siempre** las columnas con `select`. En `update`, envía **solo** las columnas que cambian: enviar el registro completo provoca "actualizaciones falsas" que disparan lógica de negocio y ensucian la auditoría.
 - **Carpeta `src/generated/`:** la sobrescribe el CLI con cada `pa app add data-source` o `pa app refresh data-source` — cualquier modificación manual se perderá. Si se necesita lógica adicional, crear módulos propios que importen desde `src/generated/` sin modificarlos.
 - **Dataverse en Code Apps — soportado:** CRUD, etiquetas formateadas de opciones (Choice), metadatos de tabla, lookups (con `@odata.bind`), delegación de `Filter`, `Sort` y `Top`, y paginación. **Todavía no soportado:** lookups polimórficos, FetchXML, claves alternativas y CRUD de definiciones de tabla.
 - **Connection References:** componente de solución que apunta a una conexión de un conector (Office 365 Users, SharePoint, SQL...) sin atarla a un usuario o entorno. En una Code App se usa al agregar el data source: `pa app add data-source --connector <id> --connection-ref <nombre-lógico> --solution-id <id-solución>`. Así la solución es portable entre DEV, TEST y PROD. **Dataverse nativo no usa** connection ID, connection reference ni dataset: la app accede a la tabla del entorno donde se ejecuta.
@@ -62,7 +63,7 @@ Construir aplicaciones web completas (React + TypeScript + Vite) que corren dent
 
 **Ahora haz algo — micropráctica (6 min):** antes de crear el proyecto, resuelve esta decisión → **[¿Code App, Canvas App o PCF?](/practica/ip-js-008-code-app-canvas-o-pcf)**.
 
-**Práctica real en tu entorno (30 min):**
+**Práctica real en tu entorno (45 min, con las instalaciones y el inicio de sesión):**
 
 1. **Habilitar code apps** (si no eres administrador, pídeselo a quien lo sea): en <https://admin.powerplatform.microsoft.com> > **Manage** > **Environments** > tu entorno Developer > **Settings** > despliega **Product** > **Features** > busca **Power Apps code apps** y activa **Enable code apps** > **Save**.
 
@@ -82,7 +83,10 @@ Construir aplicaciones web completas (React + TypeScript + Vite) que corren dent
     npm install --global @microsoft/power-apps-cli
     npm install --global @microsoft/power-apps
     npm install
+    pa --version
     ```
+
+    Las dos instalaciones globales son las que pide el quickstart de Learn; la app, al compilar y ejecutarse, usa la copia de `@microsoft/power-apps` que la plantilla ya trae en su `package.json` (la instala `npm install`).
 
     **Qué deberías ver:** `pa --version` muestra una versión. Si la terminal no reconoce `pa`, ciérrala y abre una nueva (el instalador global modifica el PATH).
 
@@ -124,7 +128,7 @@ Construir aplicaciones web completas (React + TypeScript + Vite) que corren dent
 
 **¿Por qué existe esto?** Los servicios generados ya resuelven autenticación, formato OData y tipado: no escribes `fetch` contra la Web API. Pero el contrato es suyo (nombres, forma del resultado) y hay que leerlo antes de usarlo.
 
-**Práctica real en tu entorno (30 min):**
+**Práctica real en tu entorno (40 min):**
 
 1. Desde la raíz del proyecto, agrega la tabla (la URL de tu organización la ves en Power Apps > **Settings** (engranaje) > **Session details** > **Instance url**):
 
@@ -156,9 +160,16 @@ Construir aplicaciones web completas (React + TypeScript + Vite) que corren dent
               orderBy: ["createdon desc"],
               top: 20,
             });
+            // Un error de Dataverse NO llega como excepción: viene en el resultado, con success = false
+            if (!result.success) {
+              console.error("No se pudieron leer las solicitudes:", result.error);
+              setError(result.error?.message ?? "No se pudieron leer las solicitudes.");
+              return;
+            }
             setSolicitudes(result.data ?? []); // los registros vienen en .data, no en result
           } catch (err) {
-            console.error("No se pudieron leer las solicitudes:", err);
+            // Red de seguridad para un fallo inesperado que sí se lance como excepción
+            console.error("Error inesperado al leer las solicitudes:", err);
             setError("No se pudieron leer las solicitudes.");
           }
         };
@@ -179,7 +190,7 @@ Construir aplicaciones web completas (React + TypeScript + Vite) que corren dent
 
 4. En `src/App.tsx`, importa `ListaSolicitudes` y muéstralo dentro del componente que devuelve la app (puedes dejar o quitar el contenido de la plantilla). Guarda y vuelve a la pestaña de **Local Play** (con `pa app run` en marcha).
 
-**Qué deberías ver:** las 20 solicitudes más recientes por su título. Si TypeScript marca error en `s.sit_titulo`, tu columna principal tiene otro nombre: búscalo en el Model. Si la lista sale vacía sin error, abre la consola del navegador (Ctrl+Shift+I) y revisa la sección de diagnóstico de abajo.
+**Qué deberías ver:** las 20 solicitudes más recientes por su título. Si TypeScript marca error en `s.sit_titulo`, tu columna principal tiene otro nombre: búscalo en el Model. Si ves un mensaje de error, es el texto de `result.error`: léelo (suele nombrar la columna o el permiso que falla). Si la lista sale vacía sin error, abre la consola del navegador (Ctrl+Shift+I) y revisa la sección de diagnóstico de abajo.
 
 **Evidencia a reportar:**
 
@@ -202,11 +213,11 @@ Construir aplicaciones web completas (React + TypeScript + Vite) que corren dent
 **🏗️ Reto de construcción (sin pasos, tenant real):**
 
 > **Requerimiento:** la app debe permitir (a) crear una solicitud nueva con título y prioridad, y (b) cambiar el Estado de una solicitud de la lista a **En Proceso**.
-> **Criterios de aceptación:** (1) crear y actualizar usan los métodos del servicio generado, no `fetch` ni `axios`; (2) al crear, el registro **no** incluye la clave primaria ni columnas de propietario; (3) al actualizar, el objeto de cambios lleva **solo** `sit_estado`; (4) tras crear o actualizar, la lista muestra el dato nuevo sin recargar la página; (5) un error de Dataverse se muestra en la UI y se registra en consola, no se pierde; (6) la app queda publicada **dentro** de la solución `SIT Solicitudes Internas`.
-> **Restricciones:** no edites nada en `src/generated/`; los valores numéricos de Prioridad y Estado no son universales: tómalos de tu ambiente (o del Model generado, si los trae) y guárdalos en constantes.
+> **Criterios de aceptación:** (1) crear y actualizar usan los métodos del servicio generado, no `fetch` ni `axios`; (2) al crear, el registro **no** incluye la clave primaria ni columnas de propietario; (3) al actualizar, el objeto de cambios lleva **solo** `sit_estado`; (4) tras crear o actualizar, la lista muestra el dato nuevo sin recargar la página; (5) un error de Dataverse se muestra en la UI y se registra en consola, no se pierde: tu código comprueba `result.success` en cada llamada y muestra `result.error`, porque la librería no lanza excepción; (6) la app queda publicada **dentro** de la solución `SIT Solicitudes Internas`.
+> **Restricciones:** no edites nada en `src/generated/`; los valores numéricos de Prioridad y Estado no son universales: tómalos de tu ambiente (o del Model generado, si los trae) y guárdalos en constantes. El Model tipa cada Choice con sus valores exactos, así que declara cada valor como `const ESTADO_EN_PROCESO = 100000001;` o, si los agrupas en un objeto, con `as const` (`const ESTADOS = { EnProceso: 100000001 } as const;`): sin `as const`, TypeScript lo trata como `number` y marca el error TS2322 al pasarlo a `create` o `update`.
 
 Si te atascas, en orden:
-1. Los métodos son `create(registro)` y `update(id, cambios)`; el id de la fila es `sit_solicitudid`. Mueve la carga de la lista a una función que puedas volver a llamar.
+1. Los métodos son `create(registro)` y `update(id, cambios)`; el id de la fila es `sit_solicitudid`. Mueve la carga de la lista a una función que puedas volver a llamar, por ejemplo `const cargar = React.useCallback(async () => { /* getAll, comprobar result.success, setSolicitudes */ }, []);` con `React.useEffect(() => { void cargar(); }, [cargar]);`, y llama a `await cargar()` después de crear o actualizar. Revisa `result.success` y `result.error` también en `create` y `update`: la librería no lanza excepción cuando Dataverse rechaza la operación.
 2. El tipo de `create` en el Service te dice qué acepta; Learn construye el objeto solo con las columnas a rellenar (en su ejemplo, `Omit<Accounts, 'accountid'>`). En `update` pasa un objeto nuevo con una sola propiedad, no el registro que leíste.
 3. Publicar: `npm run build`, después `pa solution list` para ver el **Id** (GUID) de `SIT Solicitudes Internas`, y `pa app push --solution-id <GUID>`. El CLI no acepta el nombre de la solución.
 
@@ -222,7 +233,7 @@ Si te atascas, en orden:
 | Objeto exacto que pasaste a `update` | ___ |
 | GUID de la solución que usaste en `--solution-id` | ___ |
 | Mensaje del CLI al terminar `pa app push` (la parte que indica la solución) | ___ |
-| Mensaje de error que mostró tu UI al provocar un fallo (por ejemplo, un valor de Choice inexistente) | ___ |
+| Mensaje de error que mostró tu UI al provocar un fallo (por ejemplo, un valor de Choice inexistente) y valor de `result.success` en ese caso | ___ |
 
 ---
 
@@ -277,7 +288,7 @@ Si tienes tiempo, prueba la mitad del diseño en tu entorno: crea en `SIT Solici
 
 ### ✅ Buenas Prácticas
 - Nunca editar archivos en `src/generated/` — son regenerados con cada `pa app add data-source` o `pa app refresh data-source` y los cambios se perderían
-- Leer siempre el resultado en `.data` y manejar el error de cada llamada al servicio (try/catch) mostrando algo en la UI
+- Leer siempre el resultado en `.data` y, antes, comprobar `result.success`: si es `false`, mostrar `result.error` en la UI y registrarlo en consola (un `try/catch` solo no captura los errores de Dataverse)
 - Limitar columnas con `select` en cada `getAll` y usar `filter`/`orderBy`/`top` en lugar de traer todo y filtrar en el navegador
 - En `update`, enviar solo las columnas que cambian (evita actualizaciones falsas que disparan lógica y ensucian la auditoría)
 - Usar Fluent UI React Components (`@fluentui/react-components`) para mantener coherencia visual con el ecosistema Microsoft 365
@@ -292,6 +303,7 @@ Si tienes tiempo, prueba la mitad del diseño en tu entorno: crea en `SIT Solici
 |-------|-------|----------|
 | Cambios en `src/generated/` desaparecen | El CLI regenera la carpeta en cada `pa app add data-source` / `pa app refresh data-source` | Crear módulos propios que importen desde `src/generated/` sin modificarlos |
 | `solicitudes.map is not a function` o lista vacía aunque la petición devuelve datos | Se guardó el objeto resultado en vez de `result.data` | `const result = await Servicio.getAll(...); setX(result.data ?? [])` |
+| La lista sale vacía o un `create` no hace nada, sin mensaje, y el `catch` nunca se ejecuta | La librería devuelve el error de Dataverse en el resultado (`success: false` y `error`) en lugar de lanzarlo, y el código solo tenía `try/catch` | Comprobar `if (!result.success)` tras cada llamada y mostrar `result.error?.message`; revisar en la pestaña de red la respuesta de la petición |
 | `getById is not a function` | El método del servicio de Dataverse es `get(id)` | Usar `get(id)`; revisar las firmas en el Service generado |
 | Una actualización dispara flujos o plugins que no deberían correr | Se envió a `update` el registro completo leído antes | Enviar solo las columnas cambiadas |
 | La app no abre en Power Apps for Windows | Code Apps no son compatibles con el cliente de escritorio | Usar un navegador moderno; para escenarios móviles u offline, evaluar una Canvas App con los mismos datos de Dataverse |
@@ -305,7 +317,7 @@ Si tienes tiempo, prueba la mitad del diseño en tu entorno: crea en `SIT Solici
 - [ ] Resolví la micropráctica de Code App vs Canvas App vs PCF antes de crear el proyecto
 - [ ] Code App creada con template oficial, se inicializa con `pa app init` y ejecuta en local con `pa app run` sin errores, con la evidencia de `power.config.json` y Local Play
 - [ ] Al menos una tabla Dataverse conectada via `pa app add data-source` con servicios generados tipados, y anoté los nombres reales de los archivos generados
-- [ ] Construí sin pasos la creación y el cambio de estado con los servicios de `src/generated/`, enviando en `update` solo la columna cambiada
+- [ ] Construí sin pasos la creación y el cambio de estado con los servicios de `src/generated/`, enviando en `update` solo la columna cambiada y mostrando en la UI el `result.error` de una llamada fallida
 - [ ] *(Opcional)* UI construida con Fluent UI React — al menos DataGrid y formulario de creación funcionales
 - [ ] App publicada con `pa app push --solution-id` dentro de la solución y visible en make.powerapps.com
 - [ ] Diagnostiqué la lista vacía formulando una hipótesis antes de ver la causa
