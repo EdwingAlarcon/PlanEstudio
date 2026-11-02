@@ -17,14 +17,18 @@
 - Correcciones del banco de preguntas (sigue en 891) y de labs 03, 45, 52, 54, 59, 68, 70, 80-85.
 
 **Pendiente (orden sugerido):**
-1. RPA 69-74: el texto del módulo quedó migrado por agentes que se detuvieron **antes de entregar las prácticas y de
-   verificar**; los enlaces `/practica/ip-rpa-007…024` aún no existen. Revisar cada módulo (Caso Real idéntico a HEAD,
-   validate-content, audit:lbd) y crear IP-RPA-007…024 (M69-70: 007-012, M71-72: 013-018, M73-74: 019-024).
-   Hay una versión parcial de 013-018 en `handoff-fase7/`.
+1. ~~RPA 69-74~~ **HECHO el 2026-11-02**: módulos verificados contra Learn y contra el código de `rpa-sandbox`
+   (Caso Real idéntico a `1af0e7a`), IP-RPA-007…024 integradas (banco: **233**), LAB-104…108 alineados
+   (`lastVerified: "2026-11"`). Correcciones clave: el escenario/modo del sandbox vive en el estado de React, no en la
+   URL (los pasos usan **Attach to running instance** > **By URL**); en Lento la tabla sí aparece y el aviso no se va;
+   **If file exists** y **If process** por nombre no prueban nada en M72; "Ejecutar acciones y manejar errores" y
+   "Validate selector" no existen en PAD (**On block error**, **Test selector**). `npm run verify` OK (487 tests,
+   512 páginas); `npm run e2e` 100/101, el fallo (onboarding "Empiezo desde cero" en `coverage-routes-labs.spec.ts:40`)
+   es intermitente: aislado pasa 18/18.
 2. RPA 75-76: sin migrar (IP-RPA-025…030).
 3. Pruebas simuladas de IA 42-56, D365 57-66 y RPA 67-76 (`handoff-fase7/BRIEF_SIM_F7.md`), y corregir sus hallazgos
    (`BRIEF_FIX.md`). Se lanzaron y se detuvieron sin informe.
-4. Cierre: fijar `MAX_INTERACTIVE_PRACTICES`, actualizar `0/149` en `e2e/interactive-practices.spec.ts`, `npm run verify`,
+4. Cierre: fijar `MAX_INTERACTIVE_PRACTICES` (el `0/149` del e2e ya se deriva del catálogo, commit `2fa609a`), `npm run verify`,
    `npm run e2e` en serie, actualizar CLAUDE.md / PROPUESTA_FASES (§10) / este handoff, `graphify update .`, fusionar en
    `master`, push y una consulta de CI.
 

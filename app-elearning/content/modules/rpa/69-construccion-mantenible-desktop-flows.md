@@ -81,12 +81,12 @@ Dos reglas de Learn que conviene saber desde ya:
 
 Reglas de nombres que Learn fija ([Learn: Variables actions, Set variable](https://learn.microsoft.com/en-us/power-automate/desktop-flows/actions-reference/variables)):
 - Empiezan por letra o guion bajo; después, letras, guiones bajos y dígitos.
-- **No distinguen mayúsculas:** `out_Total`, `out_total` y `OUT_TOTAL` son la **misma** variable. Si creas una variable con el nombre de otra que ya existe, PAD te pide confirmar que las **fusiona**: si no lo esperabas, cancela.
+- **No distinguen mayúsculas:** `out_Total`, `out_total` y `OUT_TOTAL` son la **misma** variable. Un **Set variable** con un nombre que ya existe (en cualquier combinación de mayúsculas) no crea otra: **sobrescribe** la existente. Y si **renombras** una variable, o creas un input o un output, con el nombre de una variable de flujo que ya existe, PAD te pide confirmar que las **fusiona**: si no lo esperabas, cancela ([Learn: Manage variables](https://learn.microsoft.com/en-us/power-automate/desktop-flows/manage-variables)).
 - Convención del curso: `in_` (input), `out_` (output), `cfg_` (configuración), `dt_` (data table), `idx_` (índice o contador), `log_` (log). Nada de `Variable1`.
 
 **Práctica real en PAD (25 min):**
 
-1. En el panel de variables (a la derecha) selecciona **+** > **Input**. En **New input variable** completa (**Variable name**, **Data type**, **Default value**, **External name** y **Description**; los tres primeros de la lista de abajo son obligatorios según Learn: nombre, tipo y nombre externo):
+1. En el panel de variables (a la derecha) selecciona **+** > **Input**. En **New input variable** completa **Variable name**, **Data type**, **Default value**, **External name** y **Description** (Learn marca como obligatorios **Variable name**, **Data type** y **External name**; un input que no es opcional necesita además un **Default value** para poder ejecutarlo desde la consola sin escribir el valor):
 
    | Variable name | Data type | Default value | External name |
    |---|---|---|---|
@@ -101,7 +101,7 @@ Reglas de nombres que Learn fija ([Learn: Variables actions, Set variable](https
 
 **Qué deberías ver:** al ejecutar desde la consola aparece el diálogo **Flow inputs**, que te pide los valores de los inputs con sus nombres externos (Learn: "When you trigger desktop flows directly through the console... the Flow inputs dialog prompts you to set values"). Acepta los valores por defecto.
 
-**Si no lo ves:** si el diálogo no aparece, no creaste las variables como **Input** sino con **Set variable** (que crea variables de flujo comunes). Si PAD avisa de una fusión al crear una variable, ya existía otra con el mismo nombre en otra combinación de mayúsculas.
+**Si no lo ves:** si el diálogo no aparece, no creaste las variables como **Input** sino con **Set variable** (que crea variables de flujo comunes). Si PAD avisa de una fusión al crear un input o un output, ya existía una variable de flujo con ese nombre (quizá en otra combinación de mayúsculas): cancela y elige otro nombre.
 
 **Evidencia a reportar:**
 
@@ -165,7 +165,7 @@ Guarda y ejecuta desde la consola dos veces: una con **DryRun** en `False` y otr
 
 **Si no lo ves:**
 - *El log tiene solo la última línea:* esa acción **Write text to file** quedó en **Overwrite existing content** (el valor por defecto). Solo la del encabezado debe sobrescribir.
-- *Error "Column name doesn't exist" en `%CurrentItem['customerId']%`:* **First line contains column names** está apagado o el separador no es **Comma**: la tabla no tiene esa columna. Abre `CSVTable` en el visor de variables (doble clic en el panel de variables) para ver qué columnas leyó.
+- *Error de columna inexistente al evaluar `%CurrentItem['customerId']%` (el texto exacto depende de tu versión):* **First line contains column names** está apagado o el separador no es **Comma**: la tabla no tiene esa columna. Abre `CSVTable` en el visor de variables (doble clic en el panel de variables) para ver qué columnas leyó.
 - *`out_Total` vale 0 aunque el log tiene filas:* lo inicializaste en un subflow **Local**; con subflows globales comparten la variable.
 - *El archivo de procesados no tiene encabezado:* Learn indica que **Include column names** solo actúa si el archivo no existe o está vacío; con anexar, el encabezado sale en la primera fila escrita.
 
@@ -283,7 +283,7 @@ Soporte recibe un desktop flow de 180 acciones lineales. Nadie sabe dónde empie
 |---|---|---|
 | Flujo monolítico sin subflows | Todo se construyó en **Main** | Mover cada etapa a su subflow; **Main** solo llama |
 | Mezclar validación, escritura y notificación en la misma sección | No hay responsabilidades separadas | Un subflow por intención (tabla de la Microlección 1) |
-| Nombres como `Variable1`, o dos variables "distintas" que PAD fusiona | Sin convención; los nombres no distinguen mayúsculas | Prefijos `in_`/`out_`/`cfg_`… y nombres únicos sin depender de mayúsculas |
+| Nombres como `Variable1`, o dos variables "distintas" que en realidad son la misma (una sobrescribe a la otra) | Sin convención; los nombres no distinguen mayúsculas | Prefijos `in_`/`out_`/`cfg_`… y nombres únicos sin depender de mayúsculas |
 | El log solo tiene la última línea | **Write text to file** quedó en **Overwrite existing content** (valor por defecto) | **Append content** en todas las escrituras salvo el encabezado |
 | El bot no arranca al día siguiente: la marca de ejecución anterior sigue ahí | El error detuvo el flujo antes de `CerrarRecursos`, o un **Stop flow** cortó antes del cierre | **On block error** con **Run subflow** de manejo, cierre después del bloque y **Stop flow** con error al final |
 | El flujo "termina bien" aunque falló | El bloque atrapó el error y nadie lo propagó | **If** final sobre la variable de error con **Stop flow** **With error message** |
