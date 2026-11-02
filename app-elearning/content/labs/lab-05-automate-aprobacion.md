@@ -125,7 +125,7 @@ En un loop o en una tabla de **List rows**, la misma idea se escribe con `item()
 
 1. En [make.powerapps.com](https://make.powerapps.com) → **Solutions** → `SIT Solicitudes Internas` → **Tables** → **Solicitud TI** → **Columns** → abre la columna **Estado**.
 
-2. En el panel de la columna verás cada opción con su **Label** y su **Value** (el número que generó Dataverse a partir de tu Publisher). Anota:
+2. En el panel de la columna, en la lista de opciones, verás cada opción con su **Label** (el texto) y su **Value** (el número que generó Dataverse a partir de tu Publisher; Learn recomienda no cambiarlo) ([Learn: Create a choice column](https://learn.microsoft.com/power-apps/maker/data-platform/custom-picklists#configure-properties-for-a-local-choice)). Anota:
 
    | Estado | Value en tu ambiente |
    |---|---|
@@ -276,7 +276,7 @@ Al crear cualquier solicitud en `Solicitud TI`, llega un email de confirmación 
 
 3. **Publish** → **Test** → **Manually** → **Test** → **Run flow** → **Done**.
 
-4. Cuando termine, haz clic en la acción **List rows** dentro de la ejecución y luego en **Show raw outputs**. Con **Ctrl+F** del navegador busca el título de una de tus solicitudes y comprueba:
+4. Cuando termine, haz clic en la acción **List rows** dentro de la ejecución y luego en **Show raw outputs** ([Learn: Test cloud flows](https://learn.microsoft.com/power-automate/guidance/coding-guidelines/test-cloud-flows#capture-the-actions-outcome)). Con **Ctrl+F** del navegador busca el título de una de tus solicitudes y comprueba:
    - el nombre interno de la columna principal (el que anotaste en el Lab 02);
    - los números de `sit_estado`: al lado de cada uno verás `sit_estado@OData.Community.Display.V1.FormattedValue` con su texto ("Nueva", "Resuelta"…). Completa con ellos la tabla de la Preparación si te faltaba algún número.
 
@@ -297,7 +297,7 @@ Al crear cualquier solicitud en `Solicitud TI`, llega un email de confirmación 
 
 2. **From:** con el rayo azul, elige **value** de la sección *List rows* (la lista de filas).
 
-3. **Columns:** elige **Custom** (si no ves el campo, despliega **Advanced parameters**). Aparecen parejas de cuadros **Header** / **Value**. Escribe cada encabezado y, en **Value**, inserta con **fx** su expresión:
+3. **Columns:** si el campo no aparece, abre la lista **Advanced parameters** y marca **Columns**. Abre la lista **Columns** y elige **Custom** (por defecto, **Automatic** crea las columnas solo). Aparecen parejas de cuadros **Header** / **Value** ([Learn: Customize HTML table columns and headers](https://learn.microsoft.com/azure/logic-apps/logic-apps-perform-data-operations#customize-html-table-columns-and-headers), del mismo diseñador que usa Power Automate). Escribe cada encabezado y, en **Value**, inserta con **fx** su expresión:
 
    | Header | Value (expresión con fx) |
    |---|---|
@@ -307,7 +307,7 @@ Al crear cualquier solicitud en `Solicitud TI`, llega un email de confirmación 
    | Estado | `item()?['sit_estado@OData.Community.Display.V1.FormattedValue']` |
    | Fecha Solicitud | `formatDateTime(coalesce(item()?['sit_fechasolicitud'], item()?['createdon']), 'yyyy-MM-dd')` |
 
-   > `item()` es cada fila de la lista. **Categoría** es un Lookup: Dataverse lo devuelve como `_sit_categoria_value` (el identificador), y su versión formateada es el **Nombre** de la categoría, igual que el Solicitante en la Práctica 5.2 del Módulo 5. En la fecha, `coalesce` usa la fecha de creación si una solicitud no tiene Fecha Solicitud, para que `formatDateTime` no falle con un valor vacío ([Learn: funciones de expresión](https://learn.microsoft.com/azure/logic-apps/workflow-definition-language-functions-reference)). Si en los raw outputs de la Tarea 2.2 un nombre es distinto, usa el que viste allí.
+   > `item()` es cada fila de la lista. **Categoría** es un Lookup: Dataverse lo devuelve como `_sit_categoria_value` (el identificador), y su versión formateada es el **Nombre** de la categoría (la columna principal del registro relacionado, según [Learn: Select columns, formatted values](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/query/select-columns)), igual que el Solicitante en la Práctica 5.2 del Módulo 5. En la fecha, `coalesce` usa la fecha de creación si una solicitud no tiene Fecha Solicitud, para que `formatDateTime` no falle con un valor vacío ([Learn: funciones de expresión](https://learn.microsoft.com/azure/logic-apps/workflow-definition-language-functions-reference)). Si en los raw outputs de la Tarea 2.2 un nombre es distinto, usa el que viste allí.
 
 ### Tarea 2.4 — Condición: enviar solo si hay solicitudes
 
@@ -428,15 +428,15 @@ Al crear cualquier solicitud en `Solicitud TI`, llega un email de confirmación 
 2. **Rama True (aprobado):**
    - **Update a row** (Microsoft Dataverse) ([Learn: actualizar una fila](https://learn.microsoft.com/power-automate/dataverse/update)):
      - **Table name:** Solicitudes TI
-     - **Row ID:** con el rayo azul, el identificador de la solicitud del trigger. En la lista aparece con el nombre de la tabla (algo como **Solicitud TI**) y su valor es un GUID; en los raw outputs se llama `sit_solicitudid`. No elijas **Título de Solicitud**: el Row ID es el GUID.
-     - **Estado:** despliega **Advanced parameters** → **Show all** y elige **En Proceso** en la lista. Las columnas que dejas vacías no se modifican.
+     - **Row ID:** con el rayo azul, el identificador de la solicitud del trigger. Su valor es un GUID y en los raw outputs se llama `sit_solicitudid`; en la lista de contenido dinámico suele aparecer con el nombre de la tabla en singular (algo como **Solicitud TI**), pero el nombre exacto puede variar. Si no lo identificas, usa **fx** y escribe `triggerOutputs()?['body/sit_solicitudid']`. No elijas **Título de Solicitud**: el Row ID es el GUID.
+     - **Estado:** las columnas de la tabla aparecen bajo **Advanced parameters**; despliega esa zona (si hay un botón **Show all**, úsalo para verlas todas, o marca solo la columna **Estado**) y elige **En Proceso** en la lista. Las columnas que dejas vacías no se modifican.
    - **Send an email (V2)** → **To:** tu email · **Subject:** `Prioridad Crítica aprobada: ` + **Título de Solicitud** · **Body:** `La prioridad Crítica fue aprobada. La solicitud está en proceso.`
 
 3. **Rama False (rechazado):**
    - **Update a row:** **Table name** Solicitudes TI, el mismo **Row ID**, y en **Prioridad** elige **Alta**.
-   - **Send an email (V2)** → **To:** tu email · **Subject:** `Prioridad revertida: ` + **Título de Solicitud** · **Body:** `La prioridad fue revertida a Alta. Comentarios del aprobador: ` e inserta con el rayo azul **Comments** de la sección *Start and wait for an approval* (dentro de *Responses*).
+   - **Send an email (V2)** → **To:** tu email · **Subject:** `Prioridad revertida: ` + **Título de Solicitud** · **Body:** `La prioridad fue revertida a Alta. Comentarios del aprobador: ` e inserta con el rayo azul **Responses comments** de la sección *Start and wait for an approval* ([Learn: aprobaciones modernas](https://learn.microsoft.com/power-automate/modern-approvals)).
 
-   > Como una aprobación puede tener varias respuestas, al insertar **Comments** el diseñador puede envolver el email en un **For each** (o **Apply to each**). Es normal: con "First to respond" solo hay una respuesta y llega un solo email.
+   > Como una aprobación puede tener varias respuestas, al insertar **Responses comments** el diseñador envuelve el email automáticamente en un bucle **Apply to each** (en el diseñador nuevo puede llamarse **For each**) ([Learn: ejemplo con aprobación](https://learn.microsoft.com/dynamics365/fin-ops-core/dev-itpro/business-events/how-to/how-to-workflow)). Es normal: con "First to respond" solo hay una respuesta y llega un solo email.
 
    > **Lo que pasa después de rechazar:** el **Update a row** cambia `sit_prioridad`, así que el trigger se dispara otra vez. Esa segunda ejecución ve Prioridad = Alta y termina en el **Terminate** de la Tarea 3.2: es lo esperado, no un bucle. Además, la Regla 1 del Lab 02 actualiza SLA Horas a 8. Al aprobar, el flujo solo cambia `sit_estado`, que no está en **Select columns**, así que no hay segunda ejecución.
 
@@ -584,7 +584,7 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 
 ## Limpieza del laboratorio
 
-> Los flujos están dentro de la solución. Si quieres que dejen de enviar correos sin borrarlos, apágalos desde su página de detalles. Para eliminarlos, en la solución `SIT Solicitudes Internas` selecciona el flujo y usa la opción de quitarlo de la solución o eliminarlo del ambiente.
+> Los flujos están dentro de la solución. Si quieres que dejen de enviar correos sin borrarlos, apágalos desde su página de detalles. Para eliminarlos, en la solución `SIT Solicitudes Internas` selecciona el flujo, abre **...** → **Remove** y elige **Remove from this solution** (sale de la solución pero sigue en el ambiente) o **Delete from this environment** (lo borra del todo) ([Learn: Remove a solution-aware flow](https://learn.microsoft.com/power-automate/remove-solution-aware-flow)).
 
 > ⚠️ Si eliminas los flujos, el Lab 09 seguirá funcionando — no depende de ellos. Consérvalos si quieres ver el sistema completo en acción.
 

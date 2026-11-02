@@ -91,7 +91,7 @@ Documenta antes de involucrar a la IA:
 ### 3. Implementación y diff generado
 
 - El diff completo generado por la IA dentro del alcance definido en el Entregable 1.
-- Si la herramienta ofrece un modo de aplicar cambios directamente (Copilot Edits, Agent Mode),
+- Si la herramienta ofrece un modo de aplicar cambios directamente (por ejemplo el agente Agent de GitHub Copilot o Claude Code),
   conserva el diff propuesto antes de aceptarlo, no solo el resultado final.
 
 ### 4. Evidencia de CI

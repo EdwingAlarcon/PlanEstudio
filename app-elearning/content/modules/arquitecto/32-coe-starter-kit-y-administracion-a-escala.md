@@ -3,119 +3,197 @@ moduleId: 32
 title: "CoE Starter Kit y Administración a Escala"
 level: "arquitecto"
 certification: "Arquitectura Power Platform"
-estimatedMinutes: 9
+estimatedMinutes: 22
+practiceMinutes: 330
 slug: "coe-starter-kit-y-administracion-a-escala"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 ### 🎯 Objetivo
-Implementar y operar el Center of Excellence Starter Kit de Microsoft para obtener visibilidad completa del tenant, gestionar el inventario de apps y flujos, aplicar políticas de cumplimiento automáticamente, y habilitar al equipo de gobernanza para tomar decisiones basadas en datos.
+Obtener visibilidad completa del tenant, gestionar el inventario de apps, flujos y agentes, aplicar procesos de cumplimiento y habilitar al equipo de gobernanza para tomar decisiones basadas en datos. Hoy eso empieza en el **Power Platform admin center** y **Managed Environments**; al terminar sabrás decidir, y defender por escrito, qué partes del Center of Excellence (CoE) Starter Kit de Microsoft todavía aportan algo en tu organización, instalar su núcleo si lo decides y operar sus procesos de gobierno.
 
-> **📌 Nota de vigencia (2026):** Microsoft ya no mantiene activamente el CoE Starter Kit — la documentación oficial (learn.microsoft.com/power-platform/guidance/coe/overview) indica que sus capacidades centrales (inventario y visibilidad de tenant, gobernanza) ya forman parte del **Power Platform admin center** nativo y de **Managed Environments**, y que los issues del kit ya no se revisan. Hoy el punto de partida recomendado para gobernanza es el admin center + Managed Environments; el CoE Starter Kit sigue siendo útil como complemento para capacidades puntuales que esas herramientas nativas todavía no cubren (bulk update de permisos, limpieza de recursos abandonados, encuestas a makers), pero ya no debe presentarse como el punto de partida obligatorio. El resto de este módulo describe el kit tal como existe hoy (sigue siendo descargable y funcional), con este matiz de vigencia en mente.
+> **📌 Nota de vigencia (verificada el 2026-11):** Learn indica que el **CoE Starter Kit ya no tiene mantenimiento activo**, que sus capacidades centrales forman parte del **Power Platform admin center** y que sus issues ya no se revisan ni se corrigen ([Learn: CoE Starter Kit](https://learn.microsoft.com/power-platform/guidance/coe/overview)). La misma página recomienda **empezar por las capacidades nativas** del admin center y de Managed Environments ("robustas y con soporte completo") y mirar el kit solo si necesitas algo más. Lo que el kit todavía ofrece y lo nativo no cubre, según Learn: **actualizar permisos en bloque, limpiar recursos abandonados, encuestar a los makers y calcular el ROI de ideas**. El kit sigue descargable y funcional, pero es una implementación de ejemplo: sus componentes (Dataverse, APIs y conectores de administración) tienen soporte; el kit en sí, no.
+
+> **Cómo está organizado este módulo:** como en el Módulo 31, aquí **decides y defiendes**. Primero exploras lo nativo en tu tenant con **evidencia** (el dato exacto que viste), después decides qué del kit necesitas, lo instalas solo si tu decisión lo justifica (el [LAB-32](/labs/lab-32-coe-starter-kit) es la práctica completa), diagnosticas un incidente síntoma primero y cierras con un **reto de transferencia** contrastado con una rúbrica.
+>
+> **Antes de empezar:**
+> - **Rol:** **Power Platform Administrator** (o Global Administrator) en un tenant **de práctica** ([Entornos y trials](/recursos/entornos-y-trials)). Para ver el inventario nativo bastan roles como Power Platform administrator o Global reader.
+> - **Licencias para instalar el kit (microlección 3):** la identidad que lo instala necesita licencias **no trial** de Power Apps Per User y de Power Automate Per User (o Per Flow), una licencia de Microsoft 365 con buzón, y Power BI Pro para compartir el informe ([Learn: requisitos](https://learn.microsoft.com/power-platform/guidance/coe/setup)). En un tenant de prueba normalmente no las tendrás: sigue la **ruta B** (decisión documentada y lectura guiada del kit) y deja la instalación para cuando tengas esas licencias.
+> - **Duración realista:** unas 5,5 horas sin contar la espera del primer inventario del kit (varias horas).
 
 ### 📖 Conceptos Clave
-- **CoE Starter Kit:** colección de soluciones de Power Platform mantenida por Microsoft (disponible en aka.ms/CoEStarterKit) que otorga visibilidad total sobre el tenant: inventario de apps, flujos, conectores, makers y ambientes. Se compone de cuatro paquetes principales: Core Components (inventario y sincronización), Governance Components (compliance y aprobaciones), Nurture Components (comunidad y training) e Innovation Backlog (gestión de ideas). Se instala en un ambiente dedicado (no en Default) y sincroniza datos nocturnamente mediante flujos programados. Ejemplo: tras instalarlo en un tenant con 3,000 usuarios, el primer sync puede revelar más de 800 apps de las cuales el 60% están inactivas o sin owner identificado.
-- **Core Components:** paquete base del CoE Starter Kit que crea el inventario de todos los recursos del tenant. Contiene el flujo "Admin | Sync Template v4" que se conecta a las APIs de administración de Power Apps y Power Automate para registrar cada app, flujo, conector y maker en tablas de Dataverse del ambiente CoE. Es dependencia obligatoria de los demás paquetes; debe instalarse y ejecutarse primero. Un sync completo en un tenant mediano (500-2,000 usuarios) puede tardar entre 2 y 8 horas en la primera ejecución.
-- **Governance Components:** paquete del CoE que habilita procesos de cumplimiento automatizados: el "Compliance Process" contacta a makers de apps sin uso o sin owner, el "Developer Compliance Center" permite a los makers auto-gestionar el estado de sus apps, y el proceso de "App Quarantine" desactiva apps que no superan el proceso de compliance después de múltiples notificaciones. Reduce el trabajo manual del administrador al convertir tareas reactivas en procesos automáticos.
-- **Nurture Components:** paquete del CoE orientado a desarrollar la comunidad de makers. Incluye: portal de onboarding para nuevos makers, seguimiento de badges y logros de aprendizaje, plantilla de newsletter mensual "Power Platform Newsetter", y el "App Catalog" donde los makers pueden publicar sus apps para que otros las descubran. Una comunidad activa reduce el shadow IT porque los makers consultan el catálogo antes de construir algo que ya existe.
-- **Innovation Backlog:** componente opcional del CoE que proporciona un proceso formal para que cualquier empleado proponga ideas de automatización o apps, y el equipo de Platform Engineering las evalúe, priorice y asigne. Sustituye el proceso informal de "el jefe pide una app por Teams" por un pipeline transparente con scoring de impacto vs esfuerzo.
-- **Compliance Process:** flujo automatizado del CoE Governance que se ejecuta periódicamente (configurable, típicamente cada 30 días) y envía emails personalizados a los owners de apps que llevan más de N días sin uso. El owner puede responder: mantener la app, archivarla, o transferirla a otro owner. Si no responde en 14 días, el proceso escala. Este proceso convirtió la tarea de revisar 800 apps manualmente en un flujo que el administrador solo toca cuando hay una excepción.
-- **Power BI CoE Dashboard:** conjunto de reportes Power BI distribuidos con el CoE Starter Kit (archivo .pbit) que muestran el estado del tenant en tiempo real: total de apps, makers activos, ambientes, conectores en uso, tendencias de crecimiento, y apps en riesgo de compliance. Es el primer dashboard que muchos CIOs revisan para entender la "salud" de la adopción de Power Platform en su organización.
-- **Environment Request Process:** formulario Canvas App + flujo de aprobación que formaliza cómo los makers solicitan nuevos ambientes. El maker llena el formulario con justificación de negocio y conectores necesarios; el arquitecto revisa si es necesario un nuevo ambiente o puede usar uno existente; si se aprueba, el script de Landing Zone se ejecuta automáticamente. Reemplaza el proceso informal de "abrir un ticket al equipo de IT y esperar semanas".
-- **Maker Assessment:** cuestionario incluido en los Nurture Components que evalúa el nivel de conocimiento de un maker en distintas áreas de Power Platform (Power Apps, Power Automate, Dataverse) y le asigna un nivel (Beginner, Intermediate, Advanced). El resultado se usa para dirigir al maker a los recursos de training correctos y para que el CoE sepa qué capacitación necesita la organización.
-- **App Quarantine:** proceso del CoE que desactiva (pone en cuarentena) apps que han fallado el Compliance Process después de múltiples notificaciones sin respuesta del owner. La app sigue existiendo pero sus usuarios no pueden acceder a ella; el owner puede sacarla de cuarentena respondiendo al proceso. Evita el acúmulo indefinido de apps abandonadas que representan riesgo de seguridad.
+- **Power Platform inventory (nativo):** vista unificada de todos los agentes, apps (canvas, model-driven, code…) y flujos del tenant, además de ambientes, grupos de ambientes y, en preview, conectores. Está en **Manage** > **Inventory**; permite filtrar y ordenar por cualquier columna, buscar, **Download** a CSV y **Block** de agentes o canvas apps publicados (reversible). Los cambios aparecen en unos 15 minutos y también se consulta por API, por el conector **Power Platform for Admins V2** o con Azure Resource Graph ([Learn: inventory](https://learn.microsoft.com/power-platform/admin/power-platform-inventory)).
+- **Actions (antes Power Platform Advisor):** página del admin center con recomendaciones semanales de seguridad, eficiencia operativa, licencias y capacidad, y rendimiento, con acciones en línea o automatizadas con las acciones **Get recommendations**, **Get recommendation resources** y **Execute recommendation action** del conector Power Platform for Admins V2. El detalle de los recursos afectados solo está disponible para **ambientes administrados** ([Learn: Actions](https://learn.microsoft.com/power-platform/admin/power-platform-advisor)).
+- **Managed Environments:** suite de capacidades premium para administrar a escala (grupos de ambientes, límite de uso compartido, informes de uso semanales, data policies, pipelines, contenido de bienvenida para makers, *solution checker* obligatorio, IP firewall, catálogo, default environment routing, entre otras). Está incluida como derecho en licencias independientes de Power Apps, Power Automate, Copilot Studio, Power Pages y Dynamics 365 ([Learn: Managed Environments](https://learn.microsoft.com/power-platform/admin/managed-environment-overview)). El Módulo 31 cubre grupos y reglas.
+- **CoE Starter Kit:** colección de soluciones de Power Platform (descarga en aka.ms/CoeStarterKitDownload) que inventaría el tenant en tablas de Dataverse y construye apps, flujos y un informe de Power BI encima. Paquetes: **Core components** (inventario, apps de administración y gestión de solicitudes de ambiente; dependencia de todo lo demás), **Governance components** (auditoría y cumplimiento), **Nurture components** (comunidad y formación) e **Innovation Backlog** (ideas). Se instala en ambientes propios, nunca en el Default.
+- **Core components:** su inventario lo hacen flujos programados; el principal es **Admin | Sync Template v4 (Driver)**, que dispara los flujos de sincronización por tipo de recurso. Incluye las apps **CoE Setup and Upgrade Wizard**, **CoE Admin Command Center**, **Power Platform Admin View**, **DLP Impact Analysis**, **Manage Permissions** y **App Catalog**, el flujo **Admin | Welcome Email v3** y los componentes de solicitud de ambientes ([Learn: core components](https://learn.microsoft.com/power-platform/guidance/coe/core-components)). El primer inventario puede tardar varias horas; los siguientes solo revisan lo nuevo o modificado.
+- **Governance components:** procesos de cumplimiento. El **compliance process** (flujo **Admin | Compliance Detail request v3**) escribe al maker cuando una app está compartida con más de 20 usuarios o con un grupo sin justificación de negocio, cuando no se publica en 60 días o le falta descripción, o cuando tiene alto impacto sin plan de mitigación; el maker responde en la app **Developer Compliance Center**. Los **inactivity processes** piden al dueño, con aprobaciones, confirmar si borrar apps y flujos sin modificar ni usar en seis meses (configurable) y avisan a su manager si ignora la solicitud. La **limpieza de recursos huérfanos** pide al manager del antiguo dueño que reasigne o borre ([Learn: governance components](https://learn.microsoft.com/power-platform/guidance/coe/governance-components)).
+- **App Quarantine:** el flujo **Admin | Quarantine non-compliant apps** pone en cuarentena (la app ya no se puede abrir) las apps con detalles de cumplimiento pedidos y no entregados en más días de los que fija la variable **Quarantine Apps after x days of noncompliance** (7 por defecto). Se libera desde **Power Platform Admin View** (campo **Quarantine App** = **No** y la evaluación de riesgo completada). El equivalente nativo más cercano es **Block** en el inventario.
+- **Nurture components:** **Video hub**, **Training in a day**, componentes de **Maker assessment** (una evaluación que pregunta al maker por el público, los datos y el soporte de la solución que planea, y le explica las consideraciones de gobierno, soporte y licencias antes de construir), **Pulse survey** (encuesta a makers en Teams), un catálogo de plantillas y el boletín **Admin | Newsletter with Product Updates** ([Learn: nurture components](https://learn.microsoft.com/power-platform/guidance/coe/nurture-components)). El **App Catalog** pertenece a Core.
+- **Innovation Backlog:** componente opcional que da un proceso formal para que cualquier empleado proponga ideas de automatización o apps, y el equipo de Platform Engineering las evalúe, priorice y asigne. Sustituye el proceso informal de "el jefe pide una app por Teams" por un pipeline transparente con scoring de impacto vs esfuerzo.
+- **Power BI CoE Dashboard:** plantillas `.pbit` distribuidas con el kit (`Production_CoEDashboard_MMMYYYY.pbit` para el inventario y `PowerPlatformGovernance_CoEDashboard_MMMYYYY.pbit` para gobierno y cumplimiento) que cruzan el inventario con datos de la organización (departamento, ciudad, país) ([Learn: setup](https://learn.microsoft.com/power-platform/guidance/coe/setup)). Las métricas de lanzamientos y usuarios únicos de apps necesitan además la solución de Audit Log.
+- **Environment Request Process:** en el kit es parte de Core: el maker pide un ambiente (y la data policy que necesita) desde **CoE Maker Command Center**, el admin aprueba o rechaza en **CoE Admin Environment Request**, el flujo **Env Request | Create approved environment** lo aprovisiona y **Env Request | Clean up** borra los ambientes cuya solicitud expiró. La alternativa nativa para ambientes personales es el **default environment routing** hacia un grupo de ambientes (Módulo 31).
+- **Ritmo de versiones del kit:** Learn recomienda actualizar el kit al menos **cada tres meses**, probar cada actualización en un ambiente de prueba con la variable **ProductionEnvironment** = **No** (así no se envían correos a makers) y no personalizarlo en exceso para poder seguir actualizándolo.
 
-### 👨‍💻 Actividades Prácticas Paso a Paso
+---
 
-#### Actividad 32.1: Instalar CoE Starter Kit
-1. Descargar el CoE Starter Kit desde aka.ms/CoEStarterKit
-2. Crear ambiente dedicado para el CoE: `TENANT-COE` (Producción, acceso solo a admins)
-3. Importar en orden:
-    - Core Components (primero — es dependencia de todos)
-    - Governance Components
-    - Nurture Components
-    - Innovation Backlog (opcional)
+## 🧩 Microlección 1 — Lo nativo primero: inventario y Actions (≈60 min)
 
-4. Configurar el flujo `CLEANUP - Admin | Sync Template v4`:
-    - Connectors: Power Apps Admin, Power Automate Admin, Microsoft Dataverse
-    - Frecuencia: 1 vez por día (carga inicial puede tardar horas)
+**El concepto:** la pregunta del Caso Real ("¿cuántas apps hay y quién las mantiene?") hoy se responde en el admin center sin instalar nada. El inventario nativo responde **qué existe y de quién es**; la página **Actions** responde **qué deberías hacer**.
 
-5. Esperar la primera sincronización completa (24–48h para tenants grandes)
+**Ahora haz algo — micropráctica (8 min):** antes de abrir el tenant, decide qué herramienta cubre cada necesidad → **[Nativo o CoE Starter Kit: qué usar para cada necesidad](/practica/ip-arq-013-nativo-o-coe-starter-kit)**.
 
-#### Actividad 32.2: Power BI CoE Dashboard
-1. Descargar el archivo .pbit del CoE Starter Kit
-2. Conectar a: el ambiente CoE Dataverse + M365 (opcional)
-3. Páginas del dashboard y qué muestran:
+**Explora tu tenant (30 min).** En el [Power Platform admin center](https://admin.powerplatform.microsoft.com/):
 
-**Página: Resumen del Tenant**
+1. **Manage** > **Inventory**. Anota el número total de recursos que aparece arriba a la izquierda de la tabla.
+2. Selecciona la columna **Environment type** y filtra por **Default**: ¿cuántos recursos viven en el ambiente Default? Después selecciona la columna **Owner** y escribe tu nombre: el contador se actualiza con los filtros combinados. Para quitar los filtros, selecciona cualquier columna > **Clear all filters**.
+3. Selecciona el icono **Add or remove columns** (junto al cuadro **Search**) y muestra una columna que no estaba (por ejemplo, la de conectores si tu tenant la tiene, en preview).
+4. Selecciona **Download** en la barra de comandos: se descarga un CSV con **todo** el inventario, no solo lo que se ve.
+5. Abre **Actions** en el panel de navegación > pestaña **Recommendations**. Abre una recomendación y lee **Why is this important**, **What can I do** y **Affected Resources**. Si ves un candado o un banner, la recomendación afecta a ambientes **no administrados**: el detalle solo está disponible en ambientes administrados.
+
+Si el inventario no carga y tu organización exige MFA por acceso condicional para Azure Resource Manager, Learn indica que el administrador de Entra ID debe incluir la aplicación del admin center en esa política. Si el tenant es nuevo, verás pocos recursos: crea una app y un flujo de prueba y vuelve en 15 minutos.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Total de recursos del inventario y cuántos están en el ambiente Default | ___ |
+| Cuántos recursos son tuyos (filtro **Owner**) | ___ |
+| Columnas que trae el CSV descargado (las 5 primeras) | ___ |
+| Una recomendación de **Actions**: título, categoría y número de recursos afectados (o "bloqueada: ambiente no administrado") | ___ |
+
+---
+
+## 🧩 Microlección 2 — Decidir si el kit aporta algo (≈45 min)
+
+**El concepto:** "instalamos el CoE Starter Kit" ya no es una decisión por defecto. Es un trade-off: el kit da procesos que lo nativo no tiene, a cambio de mantener una solución sin soporte, licencias premium para la identidad que lo ejecuta y para los usuarios de sus apps, y actualizaciones cada tres meses. Este mapa resume, con Learn, qué cubre cada lado:
+
+| Necesidad | Nativo (admin center / Managed Environments) | CoE Starter Kit |
+|---|---|---|
+| Inventario de apps, flujos y agentes | **Inventory** (unificado, CSV, API) | Tablas de Dataverse + informe de Power BI con datos de la organización |
+| Limitar con quién se comparte una app | **Limit sharing** (proactivo) | No limita; el compliance process detecta apps muy compartidas *después* |
+| Recursos inactivos | **Weekly digest** / informes de uso los destaca | **Inactivity processes**: el dueño aprueba o rechaza el borrado |
+| Bienvenida a makers nuevos | **Maker welcome content** al entrar a Power Apps | **Admin \| Welcome Email v3** tras crear su primer recurso |
+| Ver qué data policies aplican a un ambiente | Detalle de data policies del ambiente administrado | **DLP Impact Analysis**: además, qué apps y flujos romperían |
+| Bloquear una app o un agente | **Block** desde el inventario | Cuarentena tras el compliance process |
+| Permisos en bloque, recursos abandonados, encuestas, ROI de ideas | Sin equivalente directo | **Manage Permissions**, limpieza de huérfanos, **Pulse survey**, Innovation Backlog |
+
+**Ahora decide (sin pasos):** con la evidencia de la microlección 1 y los datos del Caso Real, escribe **ADR-COE-001 "Nativo, kit o ambos"**. Para cada necesidad de la tabla elige una opción y justifícala. Contrasta tu ADR con estos criterios:
+
+| Criterio | Qué demuestra que lo cumples |
+|---|---|
+| Lo nativo primero | Cada necesidad que lo nativo cubre se resuelve con lo nativo, y lo dices |
+| El kit, solo por un hueco real | Cada componente del kit que eliges cubre algo de la última fila de la tabla (u otro hueco que nombras) |
+| Costo de operación visible | Escribes quién actualiza el kit cada tres meses, con qué licencias y en qué ambiente de prueba |
+| Riesgo de soporte aceptado | Reconoces que el kit no tiene mantenimiento activo y qué harías si un flujo deja de funcionar |
+
+| Campo | Tu valor |
+|---|---|
+| Decisión del ADR en una frase | ___ |
+| Componentes del kit que eliges (o "ninguno") y el hueco que cubre cada uno | ___ |
+| Quién mantiene el kit, cada cuánto y en qué ambiente de prueba | ___ |
+
+---
+
+## 🧩 Microlección 3 — Si lo decides: instalar el núcleo del kit (≈90 min + espera del inventario)
+
+**El concepto:** el kit se apoya en flujos que leen el tenant con conectores de administración. Casi todos los fallos de instalación vienen de tres sitios: la identidad (rol y licencias), la data policy del ambiente y las conexiones. La práctica completa está en el [LAB-32](/labs/lab-32-coe-starter-kit); aquí tienes los pasos esenciales verificados en Learn ([setup](https://learn.microsoft.com/power-platform/guidance/coe/setup) y [setup de core components](https://learn.microsoft.com/power-platform/guidance/coe/setup-core-components)).
+
+1. **Identidad:** Power Platform Administrator (o Global admin; el rol Dynamics 365 admin **no** sirve), asignado de forma directa y permanente, con las licencias no trial de la sección "Antes de empezar" y MFA configurada.
+2. **Ambientes:** Learn recomienda **dos ambientes de tipo Production con Dataverse**, uno de prueba y otro de producción, en inglés como idioma por defecto, sin apps ni datos de ejemplo y con **None** como grupo de seguridad (algunos procesos usan aprobaciones y los makers deben poder interactuar).
+3. **Data policy:** la que aplique a esos ambientes debe permitir **juntos en el grupo Business** los conectores que lista Learn, entre ellos **Approvals**, **HTTP**, **HTTP with Microsoft Entra ID (preauthorized)**, **Microsoft Dataverse**, **Microsoft Teams**, **Office 365 Groups**, **Office 365 Outlook**, **Office 365 Users**, **Power Apps for Admins**, **Power Apps for Makers**, **Power Automate for Admins**, **Power Automate Management**, **Power Platform for Admins**, **Power Platform for Admins V2**, **Power Query Dataflows** y **RSS**. Comprueba que ninguna otra política aplica a esos ambientes.
+4. **Creator Kit:** instálalo antes en el mismo ambiente; es un requisito del CoE Starter Kit.
+5. **Conexión previa:** en [Power Automate](https://make.powerautomate.com/), con el ambiente del CoE seleccionado, **Data** > **Connections** > **+ New connection** > **HTTP with Microsoft Entra ID (preauthorized)**, con **Base Resource URL** y **Microsoft Entra ID Resource URI (Application ID URI)** = `https://graph.microsoft.com` (tenants comerciales).
+6. **Importa** `CenterOfExcellenceCoreComponents_x_x_x_xx_managed.zip` (del archivo descargado y extraído). En la nube comercial deja vacías las variables de entorno. La importación puede tardar hasta una hora; Learn indica que el aviso *Flow client error returned with status code Bad Request* se puede ignorar.
+7. Abre la solución **Center of Excellence - Core Components** > app **CoE Setup and Upgrade Wizard** y sigue sus pasos. En la fuente de datos del inventario elige **Cloud flows** (la opción por defecto y recomendada; **Data export** es una preview experimental que Learn pide probar solo en un ambiente de prueba). Si el asistente muestra *Error Loading Control*, enciende a mano los flujos **SetupWizard > GetCurrentEnvironment**, **SetupWizard > GetTenantID** y **SetupWizard > GetUserDetails**.
+8. **Espera** a que terminen los flujos de sincronización y revisa **Admin | Sync Template v4 (Driver)** > **Runs**.
+
+Un dato que cambia la decisión: Learn advierte que el inventario por cloud flows sirve para tenants pequeños y medianos, pero **puede dar problemas de rendimiento por encima de 10.000 objetos** (ambientes, apps y flujos sumados).
+
+**Evidencia a reportar (o "ruta B" con lo que habrías comprobado):**
+
+| Campo | Tu valor |
+|---|---|
+| Tipo de los dos ambientes del CoE y su idioma por defecto | ___ |
+| Data policy que aplica al ambiente del CoE y grupo de **HTTP with Microsoft Entra ID (preauthorized)** | ___ |
+| Duración de la importación de Core components y avisos que mostró | ___ |
+| Fuente de inventario elegida en el asistente y por qué | ___ |
+| Duración y estado de la primera ejecución de **Admin \| Sync Template v4 (Driver)** | ___ |
+
+---
+
+## 🧩 Microlección 4 — Operar los procesos de gobierno con umbrales propios (≈45 min)
+
+**El concepto:** los procesos del kit (o los que construyas sobre **Actions** y el conector Power Platform for Admins V2) solo funcionan si sus umbrales encajan con tu organización: un umbral demasiado bajo inunda a los makers de correos y genera fricción; uno demasiado alto deja pasar el riesgo. El ciclo de cumplimiento es: detectar → pedir información al dueño → escalar → aislar (cuarentena o **Block**) → liberar o retirar.
+
+```mermaid
+graph LR
+  A["Detectar: compartida con más de 20 usuarios o un grupo, sin justificación"] --> B["Pedir: correo al maker → Developer Compliance Center"]
+  B -->|"responde"| C["Admin: evaluación de riesgo"]
+  B -->|"no responde en X días"| D["Cuarentena (o Block nativo)"]
+  D --> C
+  C --> E["Liberar o retirar"]
 ```
-KPIs:
-- Total Apps: 342
-- Apps activas (usadas en 30 días): 187 (55%)
-- Apps sin uso en 90 días: 89 → candidatas a archivado
-- Makers únicos: 67
-- Ambientes: 23
 
-Gráficos:
-- Apps por departamento (donut)
-- Crecimiento de makers mensual (línea)
-- Apps por tipo (Canvas/Model-Driven/Pages)
-```
+**Decide (sin pasos):** completa la tabla con el umbral por defecto (de Learn), el tuyo y la razón. Usa los datos del Caso Real (5.000 empleados, 1.200 apps).
 
-**Página: Apps sin Owner o Vencidas**
-```
-Tabla con:
-- App Name | Environment | Last Modified | Owner | Last Used
-- Filtro: "Owner is empty OR Last Used > 90 days"
-→ Esta lista es el input para el Compliance Process
-```
+| Proceso | Umbral por defecto | Tu umbral | Por qué |
+|---|---|---|---|
+| Compliance: app compartida sin justificación | Más de 20 usuarios o al menos un grupo | ___ | ___ |
+| Compliance: app sin publicar | 60 días | ___ | ___ |
+| Inactividad: apps y flujos sin modificar ni usar | 6 meses | ___ | ___ |
+| Inactividad: borrar lo aprobado | Más de 3 semanas después de aprobar | ___ | ___ |
+| Cuarentena por no entregar detalles | 7 días (**Quarantine Apps after x days of noncompliance**) | ___ | ___ |
 
-**Página: Conectores en uso**
-```
-Heatmap: Connector × Environment
-Identificar: ¿Alguien usa un connector que debería estar bloqueado?
-```
+Y escribe en tres líneas: (1) cómo funciona la **apelación** (quién puede sacar una app de cuarentena y con qué evidencia); (2) cómo pedirá un maker un ambiente nuevo (Environment Request del kit o default environment routing nativo); (3) qué harás para la comunidad de makers: canal de Teams `Power Platform Community`, "App of the Month", rutas de formación con insignias (por ejemplo, PL-900 completado o primera app publicada) o los componentes de Nurture.
 
-#### Actividad 32.3: Compliance Process Automation
-El CoE incluye un flujo que contacta automáticamente a los owners:
-```
-Trigger: Recurrente (cada 30 días)
-1. Obtener todas las apps con más de 90 días sin uso
-2. Para cada app:
-   a. Email al owner: "Tu app [nombre] no ha sido usada en 90 días.
-      ¿Sigue siendo necesaria? Tienes 14 días para responder.
-      [Sí, mantener] [No, archivar] [Transferir a otro owner]"
-   b. Si no responde en 14 días → segunda notificación
-   c. Si no responde en 28 días → notificar admin para quarantine manual
-3. Si responde "No" → marcar para archivado automático
-4. Si responde "Transferir" → formulario para nuevo owner
-```
+**Evidencia a reportar:**
 
-#### Actividad 32.4: Environment Request Process
-Crear formulario para que makers soliciten ambientes:
+| Campo | Tu valor |
+|---|---|
+| Tabla de umbrales completa | ___ |
+| Proceso de apelación en una frase | ___ |
+| Mecanismo de solicitud de ambientes elegido y por qué | ___ |
+| Acción de comunidad elegida y cómo medirás si funciona | ___ |
 
-1. Canvas App: `Solicitud de Ambiente`
-2. Campos: Nombre del proyecto, Justificación de negocio, Tipo requerido (Dev/Test/Prod), Owner del proyecto, Fecha requerida, Conectores necesarios
-3. Flujo de aprobación:
-   ```
-   Maker llena formulario
-     → Aprobación Arquitecto (¿es necesario un nuevo ambiente o puede usar uno existente?)
-     → Si aprobado: ejecutar script Landing Zone automáticamente
-     → Notificar al maker con URL del nuevo ambiente y documentación de bienvenida
-     → Registrar en CoE inventory
-   ```
+---
 
-#### Actividad 32.5: Maker Nurture — Comunidad interna
-1. Teams Channel: `Power Platform Community`
-2. Canal mensual "App of the Month" — destacar el mejor proyecto de un citizen developer
-3. Training path en SharePoint con badges (usando Power Apps + Dataverse):
-   ```
-   Nivel 1: Completó PL-900 → Badge "Power Platform Fundamentals"
-   Nivel 2: Publicó su primera app → Badge "First App Published"
-   Nivel 3: Completó PL-200 → Badge "Functional Consultant"
-   Nivel 4: App con 50+ usuarios → Badge "Power User"
-   ```
+## 🔧 Diagnosticar — "el CoE Dashboard dejó de actualizarse"
 
-4. Flujo que registra automáticamente cuando un maker publica su primera app
+El CIO del Caso Real abre el CoE Dashboard en su reunión mensual y ve que los datos son de hace 9 días. Nadie tocó el kit. Antes de abrir nada, escribe **dos hipótesis** (una sobre los flujos de sincronización y otra sobre algo que cambió fuera del kit) y qué evidencia confirmaría cada una. Después resuelve el caso:
+
+**[Diagnosticar: el inventario del CoE dejó de sincronizar](/practica/ip-arq-014-inventario-coe-dejo-de-sincronizar)**
+
+| Campo | Tu valor |
+|---|---|
+| Tus dos hipótesis y la evidencia que revisarías | ___ |
+| La primera evidencia que contradice "nadie tocó nada" | ___ |
+| Causa raíz, corrección y la alerta que pondrías para enterarte antes que el CIO | ___ |
+
+---
+
+## 🔁 Reto de transferencia — Otra empresa, otro tamaño: decide y defiende
+
+**Requisito nuevo:** una aseguradora de 800 empleados te pide gobernanza a escala. Datos: el tenant tiene unos **15.000 objetos** entre ambientes, apps y flujos; **no** hay presupuesto para Power BI Premium ni para licencias Per User de una cuenta de servicio; quieren (1) inventario con dueño de cada recurso, (2) que los dueños confirmen o borren lo inactivo antes de que IT lo elimine, (3) que ninguna app se comparta con más de 20 personas, y (4) que los makers nuevos no construyan en el ambiente Default.
+
+**Micropráctica de transferencia (8 min):** **[Transferir: gobernanza a escala para una aseguradora](/practica/ip-arq-015-transferir-gobernanza-aseguradora)**.
+
+**Después, sin pasos:** escribe **ADR-COE-002** (una página) con qué herramienta resuelve cada requisito y por qué, y, para el requisito 2, el diseño del flujo (disparador, acciones del conector Power Platform for Admins V2, a quién avisa, cuánto espera y qué hace si no hay respuesta). Rúbrica:
+
+| Criterio | Qué demuestra que lo cumples |
+|---|---|
+| Tamaño del tenant | Tu inventario no depende de flujos que recorran 15.000 objetos (o justificas por qué sí) |
+| Restricción de licencias | Ninguna pieza exige Power BI Premium ni licencias Per User que no hay |
+| Proactivo frente a reactivo | El límite de 20 personas se impone antes de compartir, no se detecta después |
+| El dueño decide antes del borrado | El flujo del requisito 2 avisa al dueño y espera su respuesta antes de borrar |
+| Trade-off escrito | Nombras qué pierdes por no instalar el kit completo (por ejemplo, el informe de Power BI por departamento) y por qué lo aceptas |
+
+| Campo | Tu valor |
+|---|---|
+| Herramienta elegida para cada uno de los 4 requisitos | ___ |
+| Diseño del flujo del requisito 2 | ___ |
+| Tu trade-off principal | ___ |
+
+---
 
 ### 💼 Caso Real de Negocio
 **Empresa:** Multinacional con 5,000 empleados y Power Platform sin CoE  
@@ -124,23 +202,31 @@ Crear formulario para que makers soliciten ambientes:
 **Resultado:** Visibilidad 100% del tenant. Número de apps sin owner: de 600 a 12. Requests de nuevos ambientes procesados en < 2 días (antes tardaban semanas).
 
 ### ✅ Buenas Prácticas
-- El ambiente del CoE debe tener su propio CoE (meta-gobernanza) — backup y pipeline propio
-- No personalizar el CoE Starter Kit excesivamente — las actualizaciones de Microsoft serían imposibles de aplicar
-- El compliance process debe tener un "nodo de apelación" — los makers pueden disputar el archivado
-- Publicar métricas del CoE mensualmente — transparencia genera confianza con el negocio
+- Empezar por el inventario, **Actions** y Managed Environments del admin center; instalar componentes del kit solo para huecos concretos y escritos en un ADR
+- Si instalas el kit: dos ambientes de tipo Production (prueba y producción), **ProductionEnvironment** = **No** en el de prueba y actualización al menos cada tres meses, probada antes en prueba
+- No personalizar el CoE Starter Kit excesivamente — las actualizaciones serían imposibles de aplicar; si necesitas cambiar un flujo, guarda una copia
+- El ambiente del CoE también se gobierna: su propia data policy con los conectores que el kit necesita en Business, una identidad dedicada con MFA y backup
+- El compliance process debe tener un "nodo de apelación" — los makers pueden disputar el archivado o la cuarentena
+- Publicar métricas de gobierno mensualmente — transparencia genera confianza con el negocio
 
 ### ⚠️ Errores Comunes
 | Error | Causa | Solución |
 |-------|-------|----------|
-| Sync inicial nunca termina | Tenant con miles de registros + throttling de API | Ejecutar sync incremental, no full-sync, en tenants grandes |
-| Compliance emails generan fricción | Tono demasiado agresivo o automático | Personalizar el email con el nombre del maker y contexto claro |
-| CoE Dashboard no muestra datos recientes | Sync deshabilitado o flujo con error | Monitorear el flujo de sync con alerta automática si falla |
+| Sync inicial nunca termina o el tenant sufre throttling | Tenant grande inventariado con cloud flows (Learn advierte problemas por encima de 10.000 objetos) o **FullInventory** = **Yes** | Dejar **FullInventory** en **No** (solo cambios), poner **DelayObjectInventory** en **Yes** si hay throttling, y valorar el inventario nativo |
+| Los flujos del kit aparecen suspendidos | Una data policy nueva separa conectores que el kit necesita juntos en Business | Excluir los ambientes del CoE de esa política o darles una con todos los conectores requeridos en Business; volver a encender los flujos |
+| Compliance emails generan fricción | Tono demasiado agresivo o umbrales demasiado bajos | Personalizar el correo (tabla **Customized Email** del kit) con el nombre del maker y contexto claro, y revisar los umbrales |
+| CoE Dashboard no muestra datos recientes | Sync deshabilitado o flujo con error | Revisar **Admin \| Sync Template v4 (Driver)** > **Runs** y el correo diario de **Admin \| Sync Template v3 (Sync Flow Errors)** |
+| El informe no muestra lanzamientos ni usuarios únicos de las apps | No se configuró la solución de Audit Log | Configurarla (solo si el inventario es por cloud flows) |
+| Se elige el kit para limitar con quién se comparten las apps | El kit no limita el uso compartido; solo lo detecta después | Usar **Limit sharing** de Managed Environments (o la regla del grupo de ambientes) |
+| Se adopta el ALM Accelerator del kit para los despliegues | Está en desuso y ya no se revisan sus issues | Usar Pipelines in Power Platform o Build Tools/GitHub Actions (Módulo 19) |
 
 ### 🧪 Criterios de Validación
-- [ ] CoE Core Components instalados y primer sync completado
-- [ ] Power BI Dashboard muestra inventario real de apps, flujos y makers del tenant
-- [ ] Compliance Process envía email automático a owners de apps sin uso
-- [ ] Environment Request Process con aprobación y provisioning automatizado
-- [ ] Training path con badges funciona para al menos 1 maker piloto
+- [ ] Evidencia del inventario nativo: total, recursos en Default, filtro por dueño y CSV descargado
+- [ ] Una recomendación de **Actions** analizada (o explicado por qué está bloqueada)
+- [ ] ADR-COE-001 "Nativo, kit o ambos" contrastado con sus criterios
+- [ ] Núcleo del kit instalado con su primer inventario completo, o ruta B con la evidencia de lo que habrías comprobado
+- [ ] Tabla de umbrales de los procesos de gobierno con razones, proceso de apelación y mecanismo de solicitud de ambientes
+- [ ] Diagnóstico del inventario que dejó de sincronizar, con causa raíz, corrección y alerta
+- [ ] ADR-COE-002 del reto de transferencia contrastado con la rúbrica, con el trade-off escrito
 
 ---

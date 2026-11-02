@@ -92,7 +92,8 @@ original, prevalece sobre este.
 - **Cierre:** Intermedio completo con el patrón. Primer nivel de certificación terminado de punta a punta.
 - **Estado: HECHA el 2026-11-01** (aprobada por el usuario). Los 6 módulos salen como piloto en `npm run audit:lbd`; +18
   prácticas (3 por módulo: guiada, diagnóstico y transferencia) y dominio nuevo `copilot-studio`. Caso Real sin cambios.
-  No se hizo prueba simulada como principiante: la definición de esta fase no la exige.
+  Prueba simulada como principiante hecha el mismo día a pedido del usuario (aunque la definición no la exigía) y sus
+  hallazgos corregidos: ver sección 9.
 - **Esfuerzo relativo:** medio.
 
 ### Fase 4 — Avanzado (13 módulos, enfoque código)
@@ -102,6 +103,9 @@ original, prevalece sobre este.
 - **Riesgo:** los retos de código deben compilar y correr (estándar de calidad del repo), lo que sube el costo de
   verificación por módulo.
 - **Cierre:** 13 módulos con el patrón y todos los fragmentos de código verificados.
+- **Estado: HECHA el 2026-11-01** (aprobada por el usuario). Módulos 18-30 como piloto; el código añadido o cambiado se
+  verificó contra Learn (no hay SDK de .NET en la máquina: el C# no se compiló). Dominios nuevos `alm`, `plugins`,
+  `power-pages` e `integracion`. Labs 19, 22 y 23 alineados con sus módulos. Ver sección 9.
 - **Esfuerzo relativo:** alto.
 
 ### Fase 5 — Arquitecto (11 módulos, enfoque decisión)
@@ -112,12 +116,19 @@ original, prevalece sobre este.
 - **Riesgo:** una decisión de arquitectura no tiene una sola respuesta correcta, así que la validación depende de
   criterios y no de una solución única. La app no valida contra un tenant y eso no es un defecto.
 - **Cierre:** 11 módulos con retos de decisión y criterios de evaluación explícitos.
+- **Estado: HECHA el 2026-11-01** (aprobada por el usuario). Módulos 31-41 con microlecciones de "decidir y defender"
+  (rúbrica "Criterio | Qué demuestra que lo cumples" y evidencia "Campo | Tu valor"), diagnóstico y reto de
+  transferencia; dominio nuevo `arquitectura`. LAB-32 rehecho contra Learn. Ver sección 9.
 - **Esfuerzo relativo:** medio-alto.
 
 ### Fase 6 — Especializaciones transversales y cierre (alcance decidido: solo 5 módulos de IA)
 
 > Alcance recortado el 2026-10-08 (decisión 2, sección 5): solo los Módulos 43, 44, 46, 54 y 55. El texto de abajo
 > describe el planteamiento amplio original (35 módulos); D365 y RPA no se tocan sin nueva aprobación.
+>
+> **Estado del recorte: HECHO el 2026-11-01** (aprobado por el usuario). Módulos 43, 44, 46, 54 y 55 con una
+> actividad de fallo y corrección cada uno, "decidir y defender" y reto de transferencia; dominio nuevo `ia`. Ningún
+> prerrequisito duro hacia los 4 niveles. El resto de IA, D365 y RPA queda **fuera de alcance** mientras no se apruebe.
 
 - **Qué:** empezar por lo que la auditoría ya señala: los módulos 43, 44, 46, 54 y 55 del nivel IA (ítem #11, P2),
   que son mayormente expositivos y necesitan una actividad de fallo y corrección. Después, el resto según la
@@ -266,3 +277,73 @@ confirmados, cada uno en archivos distintos y citando Learn en cada dato nuevo.
 **Conclusión.** Con estas correcciones los recorridos simulados ya no tienen bloqueos conocidos sin salida en los núcleos
 de M1-M8. La Fase 2 se da por **cerrada por decisión del usuario**. Si en algún momento hay una persona real disponible,
 conviene repetir la prueba con ella antes de abrir la Fase 3.
+
+## 9. Prueba simulada de la Fase 3 y migración de las Fases 4, 5 y 6 (2026-11-01)
+
+**Contexto.** El usuario pidió terminar lo pendiente: la prueba simulada como principiante de la Fase 3 (su definición
+no la exigía), reintentar en Learn las etiquetas sin confirmar y migrar las Fases 4, 5 y el recorte de la Fase 6, que
+se dan por aprobadas con esa petición. **La prueba sigue siendo una simulación hecha por modelos, no una persona real.**
+
+**Prueba simulada de la Fase 3.** Persona "Andrés": analista de operaciones que terminó el Nivel Básico, no programa,
+lee inglés técnico con ayuda, tiene un ambiente Developer en English (United States) y abandona si se pierde más de 15
+minutos. Tres agentes sin contexto (M9+LAB-09, M12+M14, M15+M16+M17) con el protocolo de la sección 8. Veredicto antes
+de corregir: M9, LAB-09, M12, M14, M15 y M16 **con dificultad**; M17 **no** en la ruta completa. Los hallazgos se
+verificaron en Learn antes de corregir (hubo falsas alarmas, por ejemplo la "Regla 2" del M9) y cuatro agentes los
+corrigieron. Principales: el conector HTTP debe estar en **Business** en la data policy `Política TEST SIT` porque los
+flujos hijos dependen de él; la columna Currency del M17 pasa a columna calculada; **Creating a new activity** en lugar
+de una etiqueta inexistente; **Save snapshot** desde el menú … de **Test your agent**; error **FlowActionTimedOut**
+de los agent flows; regla del Developer Plan desde el 2026-11-15 repetida donde hace falta; tiempos realistas. También
+se corrigieron prácticas de la Fase 3 (IP-QRY-001/002, IP-TRB-002/007/011, IP-DV-018, IP-APP-003) para que ninguna se
+abra ya resuelta y para que la de diagnóstico no acepte respuestas genéricas (tests nuevos en
+`interactive-practices.test.ts`).
+
+**Fases 4, 5 y 6.** Un agente por par de módulos, con el Caso Real textualmente idéntico (comparado contra `HEAD`), y
+cada dato nuevo verificado en Microsoft Learn (en inglés, con URL y `ms.date`). El banco de preguntas siguió en 891
+(solo se reescribieron preguntas que chocaban con Learn o con el contenido nuevo). Errores de contenido corregidos, entre
+otros: en Avanzado, CD que nunca se disparaba (rama por defecto `develop`), `pac solution add-reference`, librerías de
+plataforma de PCF, Workload Identity Federation, `ParentContext.SharedVariables`, Microsoft Entra External ID en lugar de
+Azure AD B2C, caché de servidor de Power Pages; en Arquitecto, que la región sí se puede migrar (geo a geo, limitada),
+que los conectores sí cruzan tenants salvo con tenant isolation, que Managed Environments va incluido en las licencias
+standalone, la ruta real de la CMK, KQL sobre `DataverseActivity`, prediction de AI Builder solo desde Power Automate
+(acción **Predict**), fin de los AI Builder credits (2026-11-01) y Copilot Credits, process mining a partir de event
+logs, AB-100 tras el retiro de PL-600, Link to Microsoft Fabric y Fabric Activator; en IA, el Edit mode de VS Code
+obsoleto (agentes Ask/Agent/Plan), que las instrucciones personalizadas no afectan a las sugerencias inline, que las
+funciones GA de Copilot no se apagan por entorno, que `--managed` de `pac solution export` es un switch, y una acción
+`deploy-solution` que no existe en `microsoft/powerplatform-actions`.
+
+**Labs tocados.** LAB-19 (CD), LAB-22 (harness estándar, autenticación manual, SSO de Teams, agent flows), LAB-23
+(reescrito y alineado; el M25 usa su plugin de auditoría como ejemplo de Repository), LAB-32 (CoE Starter Kit contra
+Learn), LAB-63 (referencias a módulos), LAB-51 y LAB-53 (Copilot Edits, `--managed`), LAB-65 (prerrequisito hacia el
+M43 en vez del M44) y LAB-75 (quitado el prerrequisito roto hacia el M37, que es de AI Builder).
+
+**Etiquetas y datos que siguen sin poder confirmarse en Learn** (redactados en neutral: zona de la pantalla + función,
+"anótalo tal como aparece" o marcados como ejemplo/plantilla):
+- *Fase 2 (labs 04-06):* nombre del Row ID en el contenido dinámico; **Show all** en **Update a row** (solo confirmado en
+  el trigger); que el trigger traiga el FormattedValue de un Lookup; botones de Power Query Online; qué puede hacer un
+  usuario Free en **My workspace**.
+- *M9 / LAB-09:* cómo se combinan varios perfiles de seguridad de columna; cascada por defecto de una 1:N nueva; título
+  del aviso de duplicados; etiqueta de la propiedad **Lock** en la Business Rule; resultado de `DateAdd` con SLA vacío;
+  cómo se abre el editor de rollup en la interfaz moderna, operador **Does not equal** y AND/OR en su filtro; nombre del
+  componente "Data Step" (Learn: *Step*); nivel de acceso del rol para el BPF.
+- *M12 / M14:* botón que confirma **Mark as date table**; botón para salir de **View as**; recuento de filas en **Table
+  view**; rango de fechas del Financial sample; diálogo de **Enter data**; que **Import from sample** reconozca un
+  parámetro de ruta; que la conexión siga válida tras cambiar dos veces la autenticación.
+- *M15 / M16 / M17:* estado **Ready** de un archivo de knowledge; `first()` sobre un array vacío (se usa `coalesce`);
+  cómo guarda la entidad Number "SOL-001000"; grafía de la opción de pasos de plug-in al importar; nombre de la entrada
+  *Regarding* en **Add a new row**; etiqueta exacta de **Add existing** para una biblioteca de componentes.
+- *Fases 4-6:* pantalla que sigue a **Other ways to build** en Copilot Studio; salida **Number** en **Respond to the
+  agent**; JSON → **Formula** en un **Send a message**; si `User.Email` coincide con `internalemailaddress`; ruta exacta
+  para elegir recursos en Conditional Access; nombres lógicos de tablas y columnas del CoE Starter Kit y páginas del
+  `.pbit`; valores de `Message` en `DataverseActivity` (la consulta KQL es plantilla); etiquetas de **Run after** y del
+  operador de condición en el diseñador nuevo de flujos; interfaz de prueba de modelos prebuilt en AI hub; dónde aparece
+  **Process mining** si no está en el panel; cifras del CSV de process mining (calculadas a mano, no importadas en un
+  tenant); etiqueta **Enable dead lettering on message expiration**; ruta ABFS en las propiedades del lakehouse;
+  valores de Choice desde 100000000 en el PySpark; botón de alerta de un visual para Fabric Activator. La sintaxis de
+  GitHub Actions del M54 (`type: choice`, contexto `vars`, `environment` con expresión) es estándar de GitHub, pero no
+  se contrastó con docs.github.com en esta sesión.
+
+**Qué no se hizo.** No hubo prueba simulada de las Fases 4-6 (sus definiciones no la exigen). El C# no se compiló (sin
+SDK de .NET); se verificó contra la referencia de API de Learn. El título del Módulo 29 pasó a "Power Pages Avanzado y
+Microsoft Entra External ID"; su slug (`power-pages-avanzado-y-azure-ad-b2c`) se conserva para no romper enlaces.
+Los Módulos 42, 45, 47-53 y 56 (IA), 57-66 (D365) y 67-76 (RPA) siguen sin migrar y quedan **fuera de alcance** hasta
+una nueva aprobación.

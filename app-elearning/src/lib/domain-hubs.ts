@@ -81,10 +81,10 @@ export function getPowerPlatformHub(): DomainHub {
       },
       {
         title: "Power Pages",
-        description: "Portales externos y extensibilidad con Azure AD B2C.",
+        description: "Portales externos y extensibilidad con Microsoft Entra External ID.",
         links: [
           { title: "Power Pages — Portales externos", description: "Módulo 21.", href: "/nivel/avanzado/modulo/power-pages-portales-externos" },
-          { title: "Power Pages Avanzado y Azure AD B2C", description: "Módulo 29.", href: "/nivel/avanzado/modulo/power-pages-avanzado-y-azure-ad-b2c" },
+          { title: "Power Pages Avanzado y Microsoft Entra External ID", description: "Módulo 29.", href: "/nivel/avanzado/modulo/power-pages-avanzado-y-azure-ad-b2c" },
         ],
       },
       {

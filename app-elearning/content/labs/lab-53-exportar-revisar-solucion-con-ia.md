@@ -56,7 +56,7 @@ Developer, Solution Architect.
 
 ```bash
 pac org who
-pac solution export --name "SITSolicitudesGastos" --path ./exports/SITSolicitudesGastos.zip --managed false
+pac solution export --name "SITSolicitudesGastos" --path ./exports/SITSolicitudesGastos.zip
 ```
 
 **Validación esperada:** el archivo `.zip` se genera correctamente en la ruta indicada, y `pac org who` confirmó el entorno correcto antes de exportar.
@@ -90,7 +90,7 @@ Con los hallazgos del Ejercicio 3, escribe:
 
 | Error | Causa | Solución |
 |-------|-------|----------|
-| Exportar como managed desde el entorno de desarrollo | Confundir el flujo: Dev siempre exporta unmanaged | Usar `--managed false` al exportar desde Dev |
+| Exportar como managed desde el entorno de desarrollo | Confundir el flujo: Dev siempre exporta unmanaged | Omitir `--managed` al exportar desde Dev (es un switch; sin él se exporta unmanaged) |
 | Commitear el `.zip` en vez de la carpeta desempaquetada | Saltarse `pac solution unpack` antes de versionar | Siempre desempaquetar antes de hacer commit |
 | Aceptar el resumen de la IA sin verificar ningún archivo real | Confiar ciegamente en el análisis automatizado | Verificar manualmente al menos una muestra de los hallazgos |
 | No detectar una connection reference con valor hardcodeado | No pedirle explícitamente a la IA que busque ese patrón | Pedir explícitamente la búsqueda de valores hardcodeados como paso separado |

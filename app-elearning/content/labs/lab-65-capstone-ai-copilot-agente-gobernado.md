@@ -9,7 +9,7 @@ role: ["AI/Copilot Specialist"]
 prerequisites:
   - "Lab 22 completado: Copilot Studio Avanzado"
   - "Lab 55 completado: UAT/Go-live y auditoría de prompts"
-  - "Módulo 44 revisado: integración de agentes con Power Automate/Dataverse"
+  - "Módulo 43 revisado: Copilot en Power Platform (gobierno de las funciones de Copilot por entorno)"
 lastVerified: "2026-09"
 ---
 

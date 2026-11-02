@@ -503,7 +503,7 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 ### Módulo 21: Power Pages — Portales Externos
 
 - [ ] **Conocimiento**: Explico la arquitectura de Power Pages: Content snippets, Web Templates, Liquid | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creo un portal con autenticación de usuarios externos via Azure AD B2C | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creo un portal con autenticación de usuarios externos vía Microsoft Entra External ID | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Configuro Web Roles y Table Permissions con Access Type Account y Self | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Creo páginas dinámicas con Entity Lists y Entity Forms conectadas a Dataverse | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Uso Liquid templates para personalizar la presentación de datos del portal | Dominio: ___/5 | Fecha: ___
@@ -638,9 +638,9 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 
 ---
 
-### Módulo 29: Power Pages Avanzado y Azure AD B2C
+### Módulo 29: Power Pages Avanzado y Microsoft Entra External ID
 
-- [ ] **Práctica**: Configuro Azure AD B2C como Identity Provider externo en un portal Power Pages | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Configuro Microsoft Entra External ID como proveedor de identidad externo en un sitio de Power Pages | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Implemento flujo de registro de usuarios con invitación por email y activación de cuenta | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Configuro Table Permissions con Access Type Parent-Child para datos jerárquicos | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Implemento la Web API del portal con JavaScript para operaciones CRUD sin recargar la página | Dominio: ___/5 | Fecha: ___
@@ -853,13 +853,13 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 ### Módulo 41: Proyecto Capstone — Arquitectura Enterprise
 
 - [ ] **Práctica**: Entrego una plataforma empresarial completa con 5+ componentes Power Platform integrados | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: La solución tiene Plugin C# + PCF + Azure Integration + Canvas + Model-Driven + Power Automate + Power BI | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: El despliegue usa CI/CD en Azure DevOps con 3 ambientes (DEV/TEST/PROD) con gates de aprobación | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Cada componente de la solución tiene su ADR (8 ADRs) y las piezas descartadas tienen su razón escrita | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: El despliegue usa CI/CD (Azure DevOps o pipelines in Power Platform) con gates de aprobación entre ambientes y un rollback ensayado | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: La solución pasa Solution Checker con 0 errores críticos en todos los componentes | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Entrego documentación completa: ADRs, diagrama de arquitectura C4, runbook, manual de usuario | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Presento la arquitectura ante un panel de revisión técnico y defiendo cada decisión | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: El proyecto tiene plan de DR documentado con RTO y RPO definidos y probados | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: La seguridad fue revisada: Field Security, Hierarchy, Audit, DLP, Customer Lockbox | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: La seguridad fue revisada: Field Security, roles de menor privilegio, auditoría, data policies verificadas en TEST y los controles que permiten las licencias (Customer Lockbox solo con licencia de cumplimiento) | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: El Well-Architected Assessment del capstone tiene score ≥ 4/5 en los 5 pilares | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Portfolio de arquitectura Power Platform revisado como skill path; PL-600 no se agenda porque está retirado | Fecha: ___
 
@@ -1389,7 +1389,7 @@ Este checklist complementa los criterios modulares anteriores y no aumenta el co
 | 26 | Performance y Optimización | ___/10 | ___% | ___/5 |
 | 27 | PCF Avanzado con React | ___/10 | ___% | ___/5 |
 | 28 | Code Apps con React y TypeScript | ___/9 | ___% | ___/5 |
-| 29 | Power Pages Avanzado + B2C | ___/10 | ___% | ___/5 |
+| 29 | Power Pages Avanzado + External ID | ___/10 | ___% | ___/5 |
 | 30 | Proyecto Multicapa Nivel 3 | ___/9 | ___% | ___/5 |
 | 31 | Enterprise Architecture y Gobernanza | ___/10 | ___% | ___/5 |
 | 32 | CoE Starter Kit a Escala | ___/10 | ___% | ___/5 |

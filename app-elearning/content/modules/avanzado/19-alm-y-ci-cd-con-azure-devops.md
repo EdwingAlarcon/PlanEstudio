@@ -3,352 +3,355 @@ moduleId: 19
 title: "ALM y CI/CD con Azure DevOps"
 level: "avanzado"
 certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
-estimatedMinutes: 8
+estimatedMinutes: 25
+practiceMinutes: 240
 slug: "alm-y-ci-cd-con-azure-devops"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
+*Lectura: 20-25 min · Con práctica: unas 4 horas, mejor en tres sesiones (1: Microlección 1; 2: Microlección 2 con los Ejercicios 1 y 2 del Lab 19; 3: de la Microlección 3 al final). La primera vez, cuenta entre una vez y media y el doble: la configuración de Entra ID y Azure DevOps es lo que más se alarga.*
+
 ### 🎯 Objetivo
-Implementar pipelines completos de CI/CD para Power Platform usando Azure DevOps y GitHub Actions, automatizando export/import de soluciones, comprobación de calidad con Solution Checker, y despliegue multi-ambiente con aprobaciones.
+Implementar pipelines completos de CI/CD para Power Platform con Azure DevOps (y saber trasladarlos a GitHub Actions): la solución como código con pac CLI, un pipeline de CI que construye **una sola vez** el artefacto managed y lo pasa por Solution Checker, y un pipeline de CD que lo despliega con aprobación y con los valores propios de cada ambiente. En tu tenant practicarás el tramo DEV → TEST de punta a punta; UAT y PROD los diseñarás, porque crear más ambientes exige capacidad que un tenant de práctica normalmente no tiene.
+
+> **Cómo está organizado este módulo:** cada microlección trae un concepto breve, una micropráctica con feedback inmediato y una práctica real con **evidencia** (el dato exacto que viste, no un sí/no). Antes de terminar el CD vas a diagnosticar un despliegue "verde" que en realidad dejó el ambiente roto, después harás un reto de construcción sin pasos y, al final, un reto de transferencia con otro cliente que usa GitHub.
+>
+> **Antes de empezar, necesitas:**
+> - Lo que dejaste del [Módulo 16](/nivel/intermedio/modulo/seguridad-y-administracion-de-soluciones): tu ambiente **DEV** con la solución `SIT Solicitudes Internas` (nombre `SIT_SolicitudesInternas`), su variable de entorno `Correo Equipo TI` y sus referencias de conexión, y el ambiente **`SIT-TEST`** donde ya importaste versiones managed.
+> - Permiso para crear un **App registration** en Microsoft Entra ID y para agregar usuarios de aplicación en los dos ambientes (en tu tenant de prueba personal ya lo tienes).
+> - Una organización de Azure DevOps ([dev.azure.com](https://dev.azure.com)) con un proyecto y la extensión **Power Platform Build Tools** instalada (el [Lab 19](/labs/lab-19-cicd-azure-devops) explica cómo).
+> - **Ojo con los agentes:** Learn indica que el nivel gratuito de agentes alojados por Microsoft (*Microsoft-hosted*) **no se activa solo**: hay que vincular la organización a una suscripción de Azure (configurar facturación) para recibirlo; el nivel gratuito de agentes propios (*self-hosted*) sí se concede automáticamente ([Learn: parallel jobs](https://learn.microsoft.com/azure/devops/pipelines/licensing/concurrent-jobs)). Si tu primera ejecución se queda esperando un agente, es esto: resuélvelo antes de seguir.
+> - Git y Power Platform CLI en tu equipo. La forma más sencilla es la extensión **Power Platform Tools** de Visual Studio Code; en Windows, Learn recomienda la extensión o el instalador MSI si vas a usar comandos que solo existen en Windows ([Learn: instalar Power Platform CLI](https://learn.microsoft.com/power-platform/developer/cli/introduction)).
 
 ### 📖 Conceptos Clave
-- **pac CLI (Power Platform CLI):** herramienta de línea de comandos multiplataforma para automatizar todas las operaciones de Power Platform: autenticar con entornos, exportar/importar/empaquetar soluciones, gestionar datos con `pac data export/import`, crear PCF con `pac pcf init`, y construir modelos con `pac modelbuilder`. Ejemplo: `pac solution export --name SIT_CRM --path ./output/SIT_CRM.zip` exporta la solución unmanaged del entorno autenticado actualmente (omitir `--managed` equivale a unmanaged; usar `--managed` sin valor exporta como managed).
+Un mapa rápido; cada pieza se practica en su microlección.
 
-- **Power Platform Build Tools:** extensión de Azure DevOps que provee tasks especializadas para CI/CD de Power Platform: `PowerPlatformExportSolution`, `PowerPlatformImportSolution`, `PowerPlatformPackSolution`, `PowerPlatformUnpackSolution`, `PowerPlatformChecker`, `PowerPlatformSetConnectionVariables`. Cada task se conecta al entorno mediante una Service Connection y abstrae las llamadas al pac CLI.
-
-- **microsoft/powerplatform-actions:** equivalente de los Power Platform Build Tools pero para GitHub Actions. Las acciones del repositorio `microsoft/powerplatform-actions` como `export-solution@v1`, `import-solution@v1`, `check-solution@v1` permiten construir pipelines CI/CD completos en GitHub sin instalar el pac CLI manualmente.
-
-- **Solution Checker (Solution Analysis):** herramienta de análisis estático que examina la solución exportada contra un conjunto de reglas de calidad, seguridad y compatibilidad. Detecta patrones problemáticos como plugins sin check de Depth, uso de APIs obsoletas, referencias hardcodeadas a GUIDs, y falta de manejo de errores. En pipelines se configura con `FailOnPowerAppsCheckerAnalysisError: true` para que errores críticos bloqueen el despliegue.
-
-- **Managed Identity:** método de autenticación de Azure que permite que un servicio (Azure DevOps agent, Azure Function) se autentique en otros servicios de Azure sin almacenar secretos. En pipelines de Power Platform, se usa en lugar de service principals con client secrets para eliminar la rotación manual de credenciales. Configurado en Azure DevOps como `authenticationType: ManagedServiceIdentity` en las tasks.
-
-- **Service Connection:** configuración en Azure DevOps que almacena las credenciales para conectarse a un entorno de Power Platform (URL, Client ID, Client Secret, Tenant ID). Se crea una Service Connection por cada entorno del ALM (DEV, TEST, UAT, PROD). Las tasks del pipeline referencian la Service Connection por nombre en lugar de exponer credenciales en el YAML.
-
-- **Artifact:** el archivo `.zip` de la solución empaquetada como Managed, generado por el stage de Build del pipeline CI. Se publica con `PublishBuildArtifacts` y es consumido por los stages de deploy CD — garantizando que todos los ambientes reciben exactamente el mismo binario de solución, no una exportación nueva de cada entorno.
+- **pac CLI (Power Platform CLI):** herramienta de línea de comandos para autenticarse contra ambientes, exportar, importar, desempaquetar y comprobar soluciones, entre otras cosas. Los perfiles de autenticación se crean con `pac auth create --environment <URL o nombre>` y se revisan con `pac auth who` y `pac auth list` ([Learn: pac auth](https://learn.microsoft.com/power-platform/developer/cli/reference/auth)). `pac solution export` exporta unmanaged por defecto; con el modificador `--managed` exporta managed ([Learn: pac solution](https://learn.microsoft.com/power-platform/developer/cli/reference/solution)).
+- **Solución como código:** `pac solution unpack` descompone el `.zip` en archivos XML/JSON legibles que se versionan en Git; así un Pull Request muestra **qué** cambió. Con `--packagetype Both` se guardan a la vez la versión unmanaged y la managed. Importante: **SolutionPackager no convierte una solución unmanaged en managed**; para tener la managed hay que exportarla como managed ([Learn: SolutionPackager](https://learn.microsoft.com/power-platform/alm/solution-packager-tool)).
+- **Power Platform Build Tools:** extensión de Azure DevOps con tareas que envuelven al pac CLI: `PowerPlatformToolInstaller@2` (siempre primero), `PowerPlatformWhoAmi@2`, `PowerPlatformExportSolution@2`, `PowerPlatformUnpackSolution@2`, `PowerPlatformPackSolution@2`, `PowerPlatformChecker@2`, `PowerPlatformImportSolution@2`, `PowerPlatformSetSolutionVersion@2`, entre otras ([Learn: tareas de Build Tools](https://learn.microsoft.com/power-platform/alm/devops-build-tool-tasks)). `PowerPlatformSetConnectionVariables@2` **no** configura referencias de conexión: solo deja variables `BuildTools.*` para que las usen tareas de script posteriores.
+- **Service connection:** guarda en Azure DevOps cómo autenticarse contra **un** ambiente, y las tareas la referencian por nombre (`PowerPlatformSPN: 'SC-PowerPlatform-DEV'`), así no hay credenciales en el YAML. Learn documenta tres tipos: **Workload Identity Federation** (recomendada: sin secreto que rotar), service principal con client secret y usuario/contraseña. El service principal tiene que estar dado de alta como **usuario de aplicación** con rol System Administrator en cada ambiente ([Learn: Build Tools](https://learn.microsoft.com/power-platform/alm/devops-build-tools)).
+- **Solution Checker en el pipeline:** la tarea `PowerPlatformChecker@2` envía la solución al servicio de análisis. Con `RuleSet: '0ad12346-e108-40b8-a956-9a8f95ea18c9'` (el conjunto *Solution checker*), `ErrorLevel` (por ejemplo `HighIssueCount`), `ErrorThreshold` y `FailOnPowerAppsCheckerAnalysisError: true`, el build falla si hay más incidencias de esa severidad que el umbral.
+- **Artefacto:** el `.zip` managed que produce el CI y se publica con `PublishBuildArtifacts@1`. El CD lo **descarga**, no vuelve a exportar: así TEST, UAT y PROD reciben exactamente el mismo binario que pasó el Solution Checker.
+- **Deployment settings file:** un JSON con el **valor** de cada variable de entorno y la **conexión** de cada referencia de conexión para un ambiente. Se genera con `pac solution create-settings` y se pasa a la importación (`UseDeploymentSettingsFile` / `DeploymentSettingsFile`). Es el equivalente automatizado de lo que el asistente de importación te preguntaba en el Módulo 16 ([Learn: deployment settings](https://learn.microsoft.com/power-platform/alm/conn-ref-env-variables-build-tools)).
+- **Environments y aprobaciones (Azure Pipelines):** un *environment* de Azure DevOps (no confundir con un ambiente de Power Platform) puede tener **Approvals and checks**; el stage que despliega a ese environment se pausa hasta que alguien apruebe o venza el timeout. Las aprobaciones no se definen en el YAML, así que quien edita el YAML no puede saltárselas ([Learn: approvals](https://learn.microsoft.com/azure/devops/pipelines/process/approvals)).
+- **YAML pipeline:** el pipeline como código en el repositorio: `trigger`, `resources`, `variables`, `stages` → `jobs` → `steps`. Un pipeline de CD puede dispararse cuando termina el de CI declarándolo como `resources.pipelines` ([Learn: pipeline resources](https://learn.microsoft.com/azure/devops/pipelines/process/resources)).
+- **Branching strategy:** *trunk-based* (ramas cortas que se fusionan a `main` con frecuencia) encaja con equipos pequeños que despliegan a menudo; un GitFlow simplificado (`main` ← `develop` ← `feature/*`) ayuda cuando hay releases con ventana y varios equipos. En Power Platform pesa además que la solución vive en un ambiente compartido: la rama no aísla el trabajo como en código puro, por eso conviene exportar a Git con frecuencia.
+- **Azure Boards:** el mismo proyecto de Azure DevOps tiene Boards: `Epic → Feature → User Story → Task`, con Sprint Backlog y Product Backlog. En el proceso Agile, la User Story tiene el campo **Acceptance Criteria** ([Learn: proceso Agile](https://learn.microsoft.com/azure/devops/boards/work-items/guidance/agile-process-workflow)).
+- **Criterios Gherkin (Given/When/Then):** `Given` el contexto, `When` la acción, `Then` el resultado verificable. Se escriben como texto en **Acceptance Criteria** y sirven de base a las pruebas de aceptación.
+- **Trazabilidad commit ↔ work item:** en **Azure Repos**, escribir `#123` en el mensaje del commit lo vincula al work item 123 si el ajuste **Commit mention linking** del repositorio está activado ([Learn: ajustes del repositorio](https://learn.microsoft.com/azure/devops/repos/git/repository-settings)). La sintaxis `AB#123` es la de los repositorios de **GitHub** conectados a Azure Boards ([Learn: vincular GitHub](https://learn.microsoft.com/azure/devops/boards/github/link-to-from-github)).
 
 **Diagrama: pipeline CI/CD multi-ambiente**
 
 ```mermaid
 graph LR
-  A["DEV: export solution (pac CLI)"] --> B["Build: pack + Solution Checker"]
-  B --> C["Artifact: .zip Managed"]
-  C --> D["Deploy TEST (Service Connection)"]
-  D --> E["Deploy UAT (aprobación manual)"]
-  E --> F["Deploy PROD (aprobación manual)"]
+  A["DEV: export unmanaged + managed (una vez)"] --> B["CI: Solution Checker"]
+  B --> C["Artifact: SIT_SolicitudesInternas_managed.zip"]
+  C --> D["CD: TEST (+ deployment settings de TEST)"]
+  D --> E["CD: UAT (aprobación del cliente)"]
+  E --> F["CD: PROD (aprobación de 2 personas)"]
 ```
 
-- **Branching strategy:** estrategia de ramas para trabajo en equipo. GitFlow: rama `main` (producción), `develop` (integración), `feature/nombre` (trabajo individual) y `release/version` (preparación de release). Trunk-Based: todos los desarrolladores hacen commits a `main` (o `develop`) frecuentemente con feature flags. Para Power Platform se recomienda GitFlow simplificado: `main` → `develop` → `feature/*`.
+### 👨‍💻 Actividades Prácticas
 
-- **Environment Approvals:** configuración en Azure DevOps Environments que requiere una o más aprobaciones humanas antes de que el pipeline de deployment pueda continuar. Se configura en el Environment de UAT (aprobación del cliente) y PROD (aprobación del líder técnico y QA). El pipeline queda en pausa hasta recibir la aprobación o que expire el timeout configurado.
+## 🧩 Microlección 1 — Tu solución como código (pac CLI + Git)
 
-- **YAML Pipeline:** definición del pipeline de CI/CD como código YAML versionado en el repositorio de git. Permite que el pipeline mismo esté bajo control de versiones, sea revisado en PRs, y sea idéntico entre ramas. Estructura: `trigger`, `variables`, `stages` → `jobs` → `steps` → `tasks`.
+**¿Qué vas a aprender?** A sacar la solución de DEV como archivos legibles, versionarlos en Git y ver en un diff qué cambió.
 
-- **Azure Boards — jerarquía de trabajo ágil:** el mismo proyecto de Azure DevOps que aloja los pipelines (Repos + Pipelines) también aloja Boards: tableros de Sprint/Kanban sobre una jerarquía de Work Items `Epic → Feature → User Story → Task`. Un developer de Power Platform normalmente trabaja a nivel de User Story y Task: la User Story describe el valor de negocio ("Como vendedor, quiero ver el historial de solicitudes del cliente para no preguntarle datos que ya dio"), y las Tasks son el desglose técnico (crear Connection Reference, construir el flujo, agregar el componente al formulario). El Sprint Backlog agrupa las User Stories comprometidas para una iteración (típicamente 2 semanas); el Product Backlog es la cola priorizada de todo lo pendiente, sin comprometer todavía a un sprint.
+**¿Por qué existe esto?** Sin la solución en Git no hay auditoría de qué cambió, ni Pull Request que revisar, ni forma de reconstruir una versión anterior. Y el error más caro de un script de ALM no es de sintaxis: es ejecutarlo contra el ambiente equivocado.
 
-- **Criterios de aceptación en formato Gherkin (Given/When/Then):** formato estándar para escribir criterios de aceptación verificables en una User Story, en vez de frases vagas como "funciona correctamente". Estructura: `Given` (el estado inicial/contexto), `When` (la acción que ejecuta el usuario), `Then` (el resultado esperado, verificable). Ejemplo: `Given una Solicitud en estado "Aprobada" sin presupuesto asignado`, `When el usuario intenta guardar el formulario`, `Then el sistema bloquea el guardado y muestra "Se requiere presupuesto mayor a 0"`. Este formato no es exclusivo de testing automatizado (Cucumber/SpecFlow lo ejecutan literalmente) — en Azure Boards se usa igual de bien como texto plano en el campo "Acceptance Criteria" de la User Story, y es lo que un QA usa para escribir sus casos de prueba sin ambigüedad.
+**Ahora haz algo — micropráctica (5 min):** → **[Diagnosticar: Environment incorrecto](/practica/ip-trb-002-entorno-incorrecto)**
 
-- **Vincular commits y Pull Requests a Work Items:** Azure Repos permite enlazar un commit o PR a un Work Item escribiendo `AB#123` (donde 123 es el ID del Work Item) en el mensaje del commit o la descripción del PR. Azure Boards detecta la referencia automáticamente y muestra el commit/PR vinculado en la User Story — dando trazabilidad completa de qué cambio de código resolvió qué historia, sin mantener una matriz aparte. Al completar el PR, el Work Item puede transicionar de estado automáticamente (configurable en las reglas del board).
+**Práctica real en tu equipo (25 min):**
+1. Abre una terminal PowerShell (la de Visual Studio Code si instalaste solo la extensión) y crea un perfil contra DEV: `pac auth create --environment "<URL de tu ambiente DEV>"`. Se abre el inicio de sesión de Microsoft. **Qué deberías ver:** un mensaje de perfil creado y autenticado.
+2. Ejecuta `pac auth who`. **Comprueba que la URL que muestra es la de DEV**, no la de `SIT-TEST`. Si tienes varios perfiles, `pac auth list` los numera y `pac auth select --index <n>` activa el correcto.
+3. En una carpeta vacía (por ejemplo `sit-alm`), ejecuta `git init` y crea las carpetas `out` y `solutions`. Agrega un archivo `.gitignore` con la línea `out/`: los `.zip` no se versionan, se versiona lo desempaquetado.
+4. Exporta las dos versiones y desempaquétalas juntas:
 
-### 👨‍💻 Actividades Prácticas Paso a Paso
+```powershell
+pac solution export --name SIT_SolicitudesInternas --path ./out/SIT_SolicitudesInternas.zip
+pac solution export --name SIT_SolicitudesInternas --path ./out/SIT_SolicitudesInternas_managed.zip --managed
+# Both necesita los dos .zip en la misma carpeta: X.zip y X_managed.zip
+pac solution unpack --zipfile ./out/SIT_SolicitudesInternas.zip --folder ./solutions/SIT_SolicitudesInternas --packagetype Both
+git add .
+git commit -m "chore: primera exportación de SIT_SolicitudesInternas"
+```
 
-#### Actividad 19.1: Configurar Service Connection en Azure DevOps
-1. Azure DevOps → Configuración del proyecto → Service connections → Nueva
-2. Tipo: Power Platform
-3. Configurar para cada ambiente:
-    - URL: `https://tuorg-dev.crm.dynamics.com`
-    - Método: Service Principal (App Registration)
-    - Tenant ID, Client ID, Client Secret del App Registration
+   **Si `export` dice que no encuentra la solución:** `--name` es el **Name** (`SIT_SolicitudesInternas`), no el nombre visible con espacios.
+5. Ve a [make.powerapps.com](https://make.powerapps.com), en DEV, abre la solución, cambia la **Description** de la tabla `Solicitudes TI` (o de otro componente) y guarda.
+6. Repite los dos `export` y el `unpack` añadiendo `--allowWrite --allowDelete` (para que sobrescriba y elimine archivos de componentes que ya no existan). Después ejecuta `git status` y `git diff --stat`.
 
-4. Crear 4 service connections: DEV, TEST, UAT, PROD
+   **Qué deberías ver:** solo unos pocos archivos modificados; el de la tabla que tocaste, entre ellos. Si aparecen cientos de archivos cambiados, mira si desempaquetaste en otra carpeta.
 
-#### Actividad 19.2: Pipeline de CI — Export y Verificación
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| URL que mostró `pac auth who` antes de exportar | |
+| Número de archivos que listó `git diff --stat` tras tu cambio | |
+| Ruta del archivo que contiene la descripción que cambiaste | |
+| Versión de la solución en el `Solution.xml` desempaquetado | |
+
+## 🧩 Microlección 2 — Pipeline de CI: el artefacto se construye una vez
+
+**¿Qué vas a aprender?** A automatizar en Azure DevOps lo que hiciste a mano: versionar, exportar unmanaged y managed, pasar el Solution Checker y publicar el artefacto que el CD desplegará.
+
+**¿Por qué existe esto?** Si cada ambiente recibe una exportación nueva, TEST y PROD pueden recibir cosas distintas (alguien cambió DEV entre medias) y lo que validó el Checker ya no es lo que llega a producción. La regla es: **se construye una vez y se promueve el mismo binario**.
+
+**Ahora haz algo — micropráctica (6 min):** → **[Decidir: un solo artefacto para todos los ambientes](/practica/ip-alm-001-artefacto-unico-del-ci)**
+
+**Práctica real en tu tenant (70 min):**
+1. Haz el **Ejercicio 1** del [Lab 19](/labs/lab-19-cicd-azure-devops): App registration, usuario de aplicación con System Administrator en DEV y en `SIT-TEST`, y las service connections `SC-PowerPlatform-DEV` y `SC-PowerPlatform-TEST`. El lab usa client secret porque es el camino más corto en un tenant de práctica; en un cliente, prefiere **Workload Identity Federation** (sin secreto que caduque).
+2. Haz el **Ejercicio 2** del lab, pero con este YAML para `azure-pipelines/ci-build.yml`:
+
 ```yaml
 # azure-pipelines/ci-build.yml
 trigger:
   branches:
     include:
       - develop
-      - feature/*
 
 variables:
-  solution_name: 'SIT_GestionProyectos'
-  build_version: '$(Build.BuildNumber)'
+  solution_name: 'SIT_SolicitudesInternas'
+  artifact_name: 'solution-drop'
+
+pool:
+  vmImage: 'windows-latest'
 
 stages:
   - stage: Build
-    displayName: 'Build & Verify Solution'
+    displayName: 'Exportar, verificar y publicar'
     jobs:
       - job: ExportAndCheck
-        displayName: 'Export Solution and Run Checks'
-        pool:
-          vmImage: 'windows-latest'
-        
         steps:
-          - task: PowerPlatformToolInstaller@2
-            displayName: 'Install Power Platform Build Tools'
+          - task: PowerPlatformToolInstaller@2       # siempre la primera tarea
             inputs:
               DefaultVersion: true
 
-          - task: PowerPlatformExportSolution@2
-            displayName: 'Export Unmanaged Solution from DEV'
+          - task: PowerPlatformWhoAmi@2              # falla rápido si la service connection está mal
+            inputs:
+              authenticationType: 'PowerPlatformSPN'
+              PowerPlatformSPN: 'SC-PowerPlatform-DEV'
+
+          - task: PowerPlatformSetSolutionVersion@2  # versión trazable al build (cambia la versión en DEV)
             inputs:
               authenticationType: 'PowerPlatformSPN'
               PowerPlatformSPN: 'SC-PowerPlatform-DEV'
               SolutionName: '$(solution_name)'
-              SolutionOutputFile: '$(Build.ArtifactStagingDirectory)/$(solution_name).zip'
-              Managed: false
+              SolutionVersionNumber: '1.1.$(Build.BuildId).0'
 
-          - task: PowerPlatformUnpackSolution@2
-            displayName: 'Unpack Solution for Source Control'
-            inputs:
-              SolutionInputFile: '$(Build.ArtifactStagingDirectory)/$(solution_name).zip'
-              SolutionTargetFolder: '$(Build.SourcesDirectory)/solutions/$(solution_name)'
-              SolutionType: 'Unmanaged'
-
-          - task: PowerPlatformChecker@2
-            displayName: 'Run Solution Checker'
+          - task: PowerPlatformExportSolution@2
+            displayName: 'Exportar unmanaged (para el Checker y para Git)'
             inputs:
               authenticationType: 'PowerPlatformSPN'
               PowerPlatformSPN: 'SC-PowerPlatform-DEV'
+              SolutionName: '$(solution_name)'   # el Name, no el nombre visible
+              SolutionOutputFile: '$(Build.ArtifactStagingDirectory)/$(solution_name).zip'
+              Managed: false
+              AsyncOperation: true
+              MaxAsyncWaitTime: '60'
+
+          - task: PowerPlatformExportSolution@2
+            displayName: 'Exportar managed (lo que se despliega)'
+            inputs:
+              authenticationType: 'PowerPlatformSPN'
+              PowerPlatformSPN: 'SC-PowerPlatform-DEV'
+              SolutionName: '$(solution_name)'
+              SolutionOutputFile: '$(Build.ArtifactStagingDirectory)/$(solution_name)_managed.zip'
+              Managed: true
+              AsyncOperation: true
+              MaxAsyncWaitTime: '60'
+
+          - task: PowerPlatformChecker@2
+            inputs:
+              PowerPlatformSPN: 'SC-PowerPlatform-DEV'
               FilesToAnalyze: '$(Build.ArtifactStagingDirectory)/$(solution_name).zip'
-              RuleSet: '0ad12346-e108-40b8-a956-9a373e9d6492'  # Solution Checker ruleset
+              RuleSet: '0ad12346-e108-40b8-a956-9a8f95ea18c9'   # Solution checker
               ErrorLevel: 'HighIssueCount'
+              ErrorThreshold: '0'
               FailOnPowerAppsCheckerAnalysisError: true
 
-          - task: PowerPlatformPackSolution@2
-            displayName: 'Pack as Managed Solution'
-            inputs:
-              SolutionSourceFolder: '$(Build.SourcesDirectory)/solutions/$(solution_name)'
-              SolutionOutputFile: '$(Build.ArtifactStagingDirectory)/$(solution_name)_managed.zip'
-              SolutionType: 'Managed'
-
           - task: PublishBuildArtifacts@1
-            displayName: 'Publish Artifacts'
             inputs:
               PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-              ArtifactName: 'solution-drop'
+              ArtifactName: '$(artifact_name)'
+              publishLocation: 'Container'
 ```
 
-#### Actividad 19.3: Pipeline de CD — Deploy a TEST y UAT
+   La versión empieza en `1.1.` para que siempre sea mayor que las `1.0.x.0` que importaste a mano en el Módulo 16. Este CI no desempaqueta: desempaquetar solo sirve si el resultado se guarda en Git (lo hiciste en la Microlección 1; automatizarlo con un commit desde el pipeline es el reto avanzado del lab).
+3. Registra el pipeline como `SIT — CI Build` y ejecútalo. **Qué deberías ver:** todas las tareas en verde; el Checker suele ser la más larga. Si se queda en cola sin empezar, vuelve al aviso de agentes del principio.
+4. Abre el artefacto publicado de la ejecución. **Qué deberías ver:** `SIT_SolicitudesInternas.zip` y `SIT_SolicitudesInternas_managed.zip`. En DEV, la solución muestra ahora la versión `1.1.<BuildId>.0`.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Número de ejecución (Build ID) del CI | |
+| Versión que quedó en la solución de DEV | |
+| Duración de la tarea del Solution Checker | |
+| Incidencias que reportó el Checker por severidad (o "0") | |
+| Nombres de los dos archivos del artefacto `solution-drop` | |
+
+## 🧩 Microlección 3 — Pipeline de CD: aprobación y valores por ambiente
+
+**¿Qué vas a aprender?** A desplegar el artefacto del CI en `SIT-TEST` detrás de una aprobación, y a dar en la importación los valores que cambian por ambiente.
+
+**¿Por qué existe esto?** Que la importación termine bien no significa que el ambiente funcione. Una solución con flujos y variables de entorno necesita, en cada destino, **qué conexión** usa cada referencia y **qué valor** tiene cada variable. En el Módulo 16 lo respondías en el asistente de importación; un pipeline no tiene a quién preguntar.
+
+### 🔧 Diagnosticar — un despliegue "verde" que dejó el ambiente roto
+
+**Antes de construir el CD, diagnostica (7 min):** → **[Diagnosticar: el pipeline terminó bien pero el flujo no corre](/practica/ip-alm-002-deploy-verde-flujo-apagado)**
+
+Primero lee el síntoma y escribe tu hipótesis; después compárala con el escenario. Es exactamente lo que te pasaría si promovieras a un ambiente nuevo con el CD de esta microlección tal cual.
+
+**Práctica real en tu tenant (50 min):**
+1. Haz el **Ejercicio 3** del Lab 19: crea el environment `SIT-TEST` de Azure Pipelines con una aprobación. La ruta que documenta Learn es **Pipelines** > **Environments** > el environment > pestaña **Approvals and checks** > **+** > **Approvals** > **Next**; añade tu usuario como **Approvers**, escribe instrucciones y un **Timeout**, y pulsa **Create**.
+2. Crea `azure-pipelines/cd-deploy.yml` con este contenido:
+
 ```yaml
 # azure-pipelines/cd-deploy.yml
-trigger: none  # Solo se activa desde el CI pipeline
+trigger: none                      # no se dispara por push
 
 resources:
   pipelines:
-    - pipeline: ci_build
-      source: 'CI-PowerPlatform-Build'
+    - pipeline: ci_build           # alias: también es la carpeta de descarga
+      source: 'SIT — CI Build'     # nombre exacto del pipeline de CI
       trigger:
         branches:
           include:
             - develop
 
+variables:
+  solution_name: 'SIT_SolicitudesInternas'
+  artifact_name: 'solution-drop'
+
 stages:
   - stage: DeployTest
-    displayName: 'Deploy to TEST'
     jobs:
       - deployment: DeployTEST
-        displayName: 'Import Solution to TEST'
-        environment: 'PowerPlatform-TEST'
+        environment: 'SIT-TEST'    # aquí se aplica la aprobación
+        pool:
+          vmImage: 'windows-latest'
         strategy:
           runOnce:
             deploy:
               steps:
+                # En un deployment job, el artefacto del pipeline resource se descarga solo en
+                # $(Pipeline.Workspace)/<alias>/<artefacto>
                 - task: PowerPlatformToolInstaller@2
                   inputs:
                     DefaultVersion: true
 
                 - task: PowerPlatformImportSolution@2
-                  displayName: 'Import Managed Solution to TEST'
                   inputs:
                     authenticationType: 'PowerPlatformSPN'
                     PowerPlatformSPN: 'SC-PowerPlatform-TEST'
-                    SolutionInputFile: '$(Pipeline.Workspace)/solution-drop/SIT_GestionProyectos_managed.zip'
+                    SolutionInputFile: '$(Pipeline.Workspace)/ci_build/$(artifact_name)/$(solution_name)_managed.zip'
+                    AsyncOperation: true     # sin esto, la importación agota el tiempo a los 4 minutos
+                    MaxAsyncWaitTime: '120'
                     PublishWorkflows: true
-                    OverwriteUnmanagedCustomizations: false
-                    SkipProductUpdateDependencies: false
-                    AsyncOperation: true
-                    MaxAsyncWaitTime: 120
-
-                - task: PowerPlatformSetConnectionVariables@2
-                  displayName: 'Configure Connection References TEST'
-                  inputs:
-                    authenticationType: 'PowerPlatformSPN'
-                    PowerPlatformSPN: 'SC-PowerPlatform-TEST'
-                    Environment: '$(TEST_ENVIRONMENT_URL)'
-                    ConnectionVariables: |
-                      CR_SIT_Dataverse_Principal=$(TEST_DATAVERSE_CONNECTION_ID)
-                      CR_SIT_Office365=$(TEST_O365_CONNECTION_ID)
-
-  - stage: DeployUAT
-    displayName: 'Deploy to UAT'
-    dependsOn: DeployTest
-    condition: succeeded()
-    jobs:
-      - deployment: DeployUAT
-        environment: 'PowerPlatform-UAT'  # Tiene aprobación manual configurada
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - task: PowerPlatformToolInstaller@2
-                  inputs:
-                    DefaultVersion: true
-                - task: PowerPlatformImportSolution@2
-                  inputs:
-                    authenticationType: 'PowerPlatformSPN'
-                    PowerPlatformSPN: 'SC-PowerPlatform-UAT'
-                    SolutionInputFile: '$(Pipeline.Workspace)/solution-drop/SIT_GestionProyectos_managed.zip'
-                    AsyncOperation: true
-                    MaxAsyncWaitTime: 120
-
-  - stage: DeployProd
-    displayName: 'Deploy to PRODUCTION'
-    dependsOn: DeployUAT
-    condition: succeeded()
-    jobs:
-      - deployment: DeployPROD
-        environment: 'PowerPlatform-PROD'  # Requiere aprobación de 2 personas
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - task: PowerPlatformToolInstaller@2
-                  inputs:
-                    DefaultVersion: true
-                - task: PowerPlatformImportSolution@2
-                  inputs:
-                    authenticationType: 'PowerPlatformSPN'
-                    PowerPlatformSPN: 'SC-PowerPlatform-PROD'
-                    SolutionInputFile: '$(Pipeline.Workspace)/solution-drop/SIT_GestionProyectos_managed.zip'
-                    AsyncOperation: true
-                    MaxAsyncWaitTime: 180
 ```
 
-#### Actividad 19.4: GitHub Actions equivalente
-```yaml
-# .github/workflows/power-platform-ci-cd.yml
-name: Power Platform CI/CD
+3. Regístralo como `SIT — CD Deploy TEST` y cambia su rama por defecto a `develop` (**Edit** > **More actions** > **Triggers** > **YAML** > **Get sources** > **Default branch for manual and scheduled builds**; sin esto el CD no se dispara solo, porque los filtros del trigger se evalúan en el YAML de la rama por defecto). Después lanza el CI (Ejercicio 4 del lab) y, cuando el CD se pause, apruébalo. **Qué deberías ver:** el stage esperando aprobación; tras aprobar, la importación en verde y, en `SIT-TEST`, la solución managed con la versión `1.1.<BuildId>.0`.
+4. En `SIT-TEST`, abre la solución y revisa el flujo de notificación y el valor actual de `Correo Equipo TI`. Anótalo: así compruebas si el despliegue dejó el ambiente operativo o solo "importado". (Como `SIT-TEST` ya tenía valor y conexiones del Módulo 16, aquí debería seguir funcionando; en un ambiente nuevo, no.)
 
-on:
-  push:
-    branches: [develop]
-  pull_request:
-    branches: [main]
+**Evidencia a reportar:**
 
-env:
-  SOLUTION_NAME: SIT_GestionProyectos
-  DEV_URL: ${{ secrets.DEV_ENVIRONMENT_URL }}
+| Campo | Tu valor |
+|---|---|
+| Tiempo que el stage estuvo esperando aprobación | |
+| Comentario que escribiste al aprobar | |
+| Versión de la solución en `SIT-TEST` después del CD | |
+| Estado del flujo de notificación en `SIT-TEST` (On/Off) | |
+| Valor actual de `Correo Equipo TI` en `SIT-TEST` | |
 
-jobs:
-  build:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
+### 🏗️ Reto de construcción (sin pasos, tenant real)
 
-      - name: Export Solution from DEV
-        uses: microsoft/powerplatform-actions/export-solution@v1
-        with:
-          environment-url: ${{ env.DEV_URL }}
-          app-id: ${{ secrets.CLIENT_ID }}
-          client-secret: ${{ secrets.CLIENT_SECRET }}
-          tenant-id: ${{ secrets.TENANT_ID }}
-          solution-name: ${{ env.SOLUTION_NAME }}
-          solution-output-file: ./solutions/${{ env.SOLUTION_NAME }}.zip
-          managed: false
+> **Requerimiento:** el CD debe dejar `SIT-TEST` operativo sin tocar nada a mano: el valor de `Correo Equipo TI` y las conexiones de las referencias de conexión tienen que venir de un archivo de deployment settings versionado en el repositorio.
+>
+> **Criterios de aceptación:**
+> - Existe `deployment-settings/test.json` en el repositorio, generado con `pac solution create-settings` a partir del `.zip` **managed** y completado con el valor de la variable y los `ConnectionId` de las conexiones de `SIT-TEST`.
+> - El CD lo usa con `UseDeploymentSettingsFile: true` y `DeploymentSettingsFile`, y el job hace `checkout: self` (un deployment job **no** descarga el repositorio por defecto).
+> - Cambias el valor de `Correo Equipo TI` en el archivo, vuelves a desplegar y el valor actual en `SIT-TEST` cambia solo.
+>
+> **Restricciones:** no guardes secretos en el archivo (un `ConnectionId` no es un secreto; una contraseña sí). No uses `PowerPlatformSetConnectionVariables@2` para esto: no configura referencias de conexión.
 
-      - name: Check Solution Quality
-        uses: microsoft/powerplatform-actions/check-solution@v1
-        with:
-          environment-url: ${{ env.DEV_URL }}
-          app-id: ${{ secrets.CLIENT_ID }}
-          client-secret: ${{ secrets.CLIENT_SECRET }}
-          tenant-id: ${{ secrets.TENANT_ID }}
-          path: ./solutions/${{ env.SOLUTION_NAME }}.zip
+Si te bloqueas: el archivo generado ya trae `SchemaName`, `LogicalName` y `ConnectorId`; tú solo rellenas `Value` y `ConnectionId`. El `ConnectionId` es la última parte de la URL de la conexión cuando la abres en el ambiente `SIT-TEST`. Learn advierte que la importación valida la conexión: si falla por eso, la conexión tiene que pertenecer a la identidad que importa o estar compartida con ella. Este es el esquema del archivo (los nombres son **ejemplo**: usa los que genere tu comando):
 
-      - name: Pack as Managed
-        uses: microsoft/powerplatform-actions/pack-solution@v1
-        with:
-          solution-folder: ./solutions/${{ env.SOLUTION_NAME }}
-          solution-file: ./solutions/${{ env.SOLUTION_NAME }}_managed.zip
-          solution-type: Managed
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: solution-drop
-          path: ./solutions/${{ env.SOLUTION_NAME }}_managed.zip
-
-  deploy-test:
-    needs: build
-    runs-on: windows-latest
-    environment: TEST
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: solution-drop
-
-      - name: Deploy to TEST
-        uses: microsoft/powerplatform-actions/import-solution@v1
-        with:
-          environment-url: ${{ secrets.TEST_ENVIRONMENT_URL }}
-          app-id: ${{ secrets.CLIENT_ID }}
-          client-secret: ${{ secrets.CLIENT_SECRET }}
-          tenant-id: ${{ secrets.TENANT_ID }}
-          solution-file: ./${{ env.SOLUTION_NAME }}_managed.zip
-          run-asynchronously: true
+```json
+{
+  "EnvironmentVariables": [
+    { "SchemaName": "sit_CorreoEquipoTI", "Value": "equipo-ti-test@tu-dominio.com" }
+  ],
+  "ConnectionReferences": [
+    {
+      "LogicalName": "sit_sharedcommondataserviceforapps_xxxxx",
+      "ConnectionId": "<id de la conexión de Dataverse en SIT-TEST>",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+    }
+  ]
+}
 ```
 
-#### Actividad 19.5: pac CLI en scripts de automatización
-```powershell
-# scripts/export-and-commit.ps1
-# Script para exportar solución y commitear al repositorio
+**Evidencia del reto:**
 
-param(
-    [string]$SolutionName = "SIT_GestionProyectos",
-    [string]$DevEnvironmentUrl = $env:DEV_ENVIRONMENT_URL,
-    [string]$OutputPath = "./solutions"
-)
+| Campo | Tu valor |
+|---|---|
+| Comando `pac solution create-settings` exacto que usaste | |
+| Número de variables y de referencias de conexión que traía el archivo | |
+| Valor de `Correo Equipo TI` en el archivo y valor que viste en `SIT-TEST` tras desplegar | |
+| Ruta que pusiste en `DeploymentSettingsFile` | |
 
-# Autenticar
-pac auth create --url $DevEnvironmentUrl --kind SPN `
-    --tenant $env:TENANT_ID `
-    --applicationId $env:CLIENT_ID `
-    --clientSecret $env:CLIENT_SECRET
+## 🧩 Microlección 4 — Trazabilidad: historia, criterios Gherkin y commit vinculado
 
-# Exportar solución unmanaged
-pac solution export `
-    --name $SolutionName `
-    --path "$OutputPath/$SolutionName.zip" `
-    --async
+**¿Qué vas a aprender?** A que cada cambio desplegado se pueda rastrear hasta la historia de negocio que lo pidió.
 
-# Desempaquetar para source control (XML legible por git)
-pac solution unpack `
-    --zipfile "$OutputPath/$SolutionName.zip" `
-    --folder "$OutputPath/$SolutionName" `
-    --processCanvasApps `
-    --allowWrite
+**¿Por qué existe esto?** En una auditoría ("¿por qué cambió esto en PROD?") la respuesta tiene que salir del sistema, no de la memoria de alguien. Y una historia sin criterios verificables no se puede aprobar con honestidad en UAT.
 
-# Committing changes
-git add "$OutputPath/$SolutionName"
-git commit -m "chore: export solution $SolutionName $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
-```
+**Práctica real en tu proyecto de Azure DevOps (20 min):**
+1. En **Boards** > **Sprints**, crea o usa la primera iteración del proyecto.
+2. Crea una **User Story**: "Como técnico de TI, quiero que el correo de notificación salga al buzón del equipo configurado para el ambiente, para que en TEST no lleguen avisos al buzón real." En **Acceptance Criteria** escribe:
 
-#### Actividad 19.6: Sprint en Azure Boards con criterios Gherkin y trazabilidad al commit
-
-1. Azure DevOps → Boards → Sprints → crear un Sprint de 2 semanas (`Sprint 1`).
-2. Crear una **User Story**: "Como vendedor, quiero ver el historial de solicitudes del cliente en el formulario para no preguntarle datos que ya dio." Escribir sus criterios de aceptación en formato Gherkin en el campo "Acceptance Criteria":
    ```
-   Given el formulario de Solicitud tiene un cliente seleccionado en sit_solicitante
-   When el usuario abre el formulario
-   Then se muestran las últimas 5 solicitudes de ese cliente, ordenadas de más reciente a más antigua
+   Given la variable Correo Equipo TI de SIT-TEST tiene el valor de prueba
+   When se crea una Solicitud TI nueva en SIT-TEST
+   Then la notificación llega al buzón de prueba y no al buzón de producción
 
-   Given el campo sit_solicitante está vacío
-   When el usuario abre el formulario
-   Then no se ejecuta ninguna consulta y no aparece ningún error
+   Given el archivo deployment-settings/test.json cambia el valor de la variable
+   When el CD despliega en SIT-TEST
+   Then el valor actual de la variable en SIT-TEST es el del archivo, sin editarlo a mano
    ```
-3. Descomponer la User Story en 2-3 **Tasks** técnicas (ej. "Implementar cargarHistorialCliente en JS", "Configurar Web Resource y registrar evento OnChange") y asignarlas al Sprint.
-4. Al commitear el cambio que resuelve la Task, incluir la referencia al Work Item en el mensaje: `git commit -m "feat: cargarHistorialCliente con filtro por cliente AB#123"` (reemplazando `123` por el ID real de la Task).
-5. Verificar en Azure Boards: la User Story/Task muestra el commit vinculado en su pestaña "Development", sin haber documentado el enlace manualmente.
+
+3. Crea dos **Tasks** hijas (por ejemplo "Generar deployment settings de TEST" y "Usar el archivo en el CD").
+4. En **Project settings** > **Repositories** > tu repositorio > **Settings**, comprueba que **Commit mention linking** está activado.
+5. Haz el commit del reto de la Microlección 3 mencionando la Task: `git commit -m "cd: deployment settings de TEST #<ID de la Task>"` y haz push. **Qué deberías ver:** el commit enlazado en la Task, en su zona de desarrollo/enlaces. Si no aparece, revisa el ajuste del paso 4 y que el ID sea el de un work item del mismo proyecto. (`AB#<ID>` es la sintaxis para repositorios de GitHub conectados a Boards, no para Azure Repos.)
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| ID de la User Story y de la Task | |
+| Mensaje exacto del commit | |
+| Dónde viste el enlace al commit dentro de la Task | |
+
+## 🔁 Reto de transferencia — el mismo ALM en GitHub para otro cliente
+
+**El nuevo caso:** una aseguradora mantiene su código en **GitHub** (repositorio privado) y no usa Azure DevOps. Quiere: build en cada push a `main`, Solution Checker, despliegue automático a TEST y a PROD "con dos aprobadores", y ningún secreto escrito en el workflow. Tiene DEV, TEST y PROD.
+
+**Micropráctica (8 min):** → **[Transferir: el pipeline a GitHub Actions](/practica/ip-alm-003-transferir-a-github-actions)**
+
+**Tu entrega (30 min, por escrito, sin tenant):**
+1. Un esquema de workflow en dos jobs (`build` y `deploy-test`) con las acciones de `microsoft/powerplatform-actions` que usarías en orden. Learn exige `actions-install` como **primera** acción; `export-solution` (con `managed: true` para el artefacto), `check-solution`, `actions/upload-artifact`, y en el job de despliegue `actions/download-artifact` + `import-solution`.
+2. Dónde viven las credenciales: secretos del repositorio o del **environment** de GitHub (los secretos de un environment solo los ve el job que lo referencia, y después de la aprobación). Learn documenta las acciones con `app-id`/`client-secret`/`tenant-id`; si el cliente exige cero secretos, investiga y documenta como opción la autenticación federada de pac CLI (`pac auth create --githubFederated`) ([Learn: pac auth](https://learn.microsoft.com/power-platform/developer/cli/reference/auth)).
+3. Cómo cubres "dos aprobadores": en GitHub, un environment con **required reviewers** pide revisión, pero **basta con que apruebe una** de las personas indicadas, y en repositorios privados esa protección depende del plan de GitHub del cliente ([GitHub Docs: deployments and environments](https://docs.github.com/actions/reference/workflows-and-actions/deployments-and-environments)). Escribe qué propones (por ejemplo, revisión obligatoria del Pull Request **más** la aprobación del environment) y qué le dices al cliente antes de prometer "dos firmas".
+4. Una tabla "Pieza en Azure DevOps | Equivalente en GitHub | Diferencia que importa" con al menos: service connection, environment con aprobación, artefacto, deployment settings file.
+
+**Evidencia del reto:**
+
+| Campo | Tu valor |
+|---|---|
+| Acciones del job `build`, en orden | |
+| Dónde guardas las credenciales y por qué | |
+| Tu propuesta para las "dos firmas" de PROD y su limitación | |
+| La diferencia entre plataformas que más te sorprendió | |
 
 ### 💼 Caso Real de Negocio
 **Empresa:** Partner de Microsoft con 8 proyectos Power Platform simultáneos  
@@ -358,28 +361,45 @@ git commit -m "chore: export solution $SolutionName $(Get-Date -Format 'yyyy-MM-
 
 ### ✅ Buenas Prácticas
 - El pipeline debe fallar rápido — Solution Checker en el primer stage
-- Usar Managed Identity en producción, nunca secretos de usuario
-- Versionar la solución con el número de build del pipeline: `1.$(Build.BuildId).0`
-- Separar pipelines de CI y CD — el CD consume artifacts del CI
-- Configurar "Required approvers" en el Environment de UAT y PROD en Azure DevOps
+- Autenticar sin secretos de usuario: en las service connections, **Workload Identity Federation** (lo que recomienda Learn); Managed Identity solo aplica si usas pac CLI con `--managedIdentity` en agentes propios alojados en Azure. Nunca secretos de usuario
+- Versionar la solución con el número de build del pipeline antes de exportarla: `PowerPlatformSetSolutionVersion@2` con `1.1.$(Build.BuildId).0` (cuatro partes: mayor.menor.build.revisión)
+- Separar pipelines de CI y CD — el CD consume artifacts del CI y nunca vuelve a exportar
+- Configurar "Required approvers" en el Environment de UAT y PROD en Azure DevOps: **Approvals and checks** del environment, con timeout y con instrucciones de qué revisar. Si el aprobador es un grupo, basta con que apruebe una persona del grupo
+- Exportar la managed desde el ambiente de origen: SolutionPackager no convierte unmanaged en managed
+- Los valores por ambiente (variables de entorno y conexiones) van en un deployment settings file por ambiente, versionado; los secretos, en Azure Key Vault o en secretos del pipeline, nunca en el archivo
+- `PowerPlatformWhoAmi@2` al principio del pipeline: un fallo de credenciales aparece en segundos, no al final
 - Escribir siempre criterios de aceptación en Given/When/Then antes de estimar la User Story — una historia sin criterios verificables no está lista para el sprint (no cumple Definition of Ready)
-- Referenciar `AB#<id>` en cada commit relevante — la trazabilidad código↔historia no debe reconstruirse manualmente en una auditoría
+- Mencionar el work item en cada commit relevante (`#<id>` en Azure Repos; `AB#<id>` en GitHub) — la trazabilidad código↔historia no debe reconstruirse manualmente en una auditoría
 
 ### ⚠️ Errores Comunes
 | Error | Causa | Solución |
 |-------|-------|----------|
-| Pipeline falla con "Solution not found" | Nombre de solución con espacio o mayúsculas incorrectas | Verificar nombre exacto en la UI vs el YAML |
-| Import tarda más de 2 minutos y timeout | Solución grande sin async mode | Agregar `AsyncOperation: true` y aumentar `MaxAsyncWaitTime` |
-| Solution Checker da falsos positivos | Reglas muy estrictas para componentes de terceros | Excluir componentes de managed solutions del análisis |
+| Pipeline falla con "Solution not found" | Se puso el nombre visible (con espacios) en vez del **Name**, o hay un error de mayúsculas | Copia el **Name** de la solución (`SIT_SolicitudesInternas`) en `SolutionName` |
+| La importación agota el tiempo | Solución grande sin modo asíncrono: sin `AsyncOperation`, la tarea se corta a los 4 minutos | `AsyncOperation: true` y un `MaxAsyncWaitTime` acorde (en minutos; por defecto 60) |
+| El paso "empaquetar como managed" no produce una managed válida | Se desempaquetó como Unmanaged y se intentó empaquetar como Managed: SolutionPackager no convierte | Exporta también la managed (`Managed: true`) o desempaqueta con `Both` a partir de los dos `.zip` |
+| El CD no encuentra el `.zip` | La ruta no incluye el alias del pipeline resource: se descarga en `$(Pipeline.Workspace)/<alias>/<artefacto>` | `$(Pipeline.Workspace)/ci_build/solution-drop/...` |
+| El CD no encuentra el deployment settings file | Un deployment job no hace checkout del repositorio | Añade `- checkout: self` como primer paso del deploy |
+| Importación correcta, pero el flujo está apagado y la variable vacía en un ambiente nuevo | No se dieron conexiones ni valores para ese ambiente | Deployment settings file del ambiente con `UseDeploymentSettingsFile: true` |
+| Error de autenticación (401) en la primera tarea | El service principal no es usuario de aplicación del ambiente o le falta System Administrator | Agrégalo en cada ambiente; `PowerPlatformWhoAmi@2` lo detecta al principio |
+| El pipeline se queda en cola sin empezar | Organización nueva sin el nivel gratuito de agentes Microsoft-hosted activado | Vincula una suscripción de Azure (facturación) o usa un agente self-hosted |
+| Solution Checker da falsos positivos | Reglas muy estrictas para componentes de terceros | Revisa cada hallazgo; documenta las excepciones aceptadas en vez de subir el umbral para todo |
 | User Story con criterio "debe funcionar bien" | Se captura el deseo de negocio pero no el comportamiento verificable | Reescribir como Given/When/Then — si no se puede escribir un escenario concreto, la historia todavía no está entendida |
-| Commit no aparece vinculado en el Work Item | Se olvidó escribir `AB#<id>` en el mensaje del commit o PR | Agregar la referencia; en PRs ya fusionados, se puede vincular manualmente desde la pestaña "Development" del Work Item |
+| Commit no aparece vinculado en el Work Item | Falta `#<id>` en el mensaje (Azure Repos) o **Commit mention linking** está desactivado; o se usó `AB#` en Azure Repos | Activa el ajuste del repositorio y menciona `#<id>`; también se puede vincular a mano desde el work item |
 
 ### 🧪 Criterios de Validación
-- [ ] Service connections configuradas para DEV y TEST en Azure DevOps
-- [ ] Pipeline CI exporta, verifica con Solution Checker, y publica artifact
-- [ ] Pipeline CD importa en TEST automáticamente al merge en develop
-- [ ] Environment UAT requiere aprobación manual antes de desplegar
-- [ ] Script pac CLI exporta y desempaqueta la solución en formato legible por git
-- [ ] Sprint en Azure Boards con una User Story con criterios Gherkin y al menos un commit vinculado vía `AB#`
+- [ ] Exporté la solución con pac CLI, comprobé antes con `pac auth who` que apuntaba a DEV y la tengo desempaquetada en Git con al menos dos commits
+- [ ] Service connections configuradas para DEV y TEST en Azure DevOps, y el service principal es usuario de aplicación en ambos ambientes
+- [ ] Pipeline CI versiona la solución con el Build ID, exporta unmanaged y managed, pasa el Solution Checker con umbral y publica el artifact con los dos `.zip`
+- [ ] Pipeline CD descarga el artifact del CI (no vuelve a exportar) e importa la managed en TEST
+- [ ] El environment `SIT-TEST` de Azure Pipelines requiere aprobación manual antes de desplegar, y la aprobé con un comentario
+- [ ] Diagnostiqué el "despliegue verde con el flujo apagado" y sé qué falta en el CD para un ambiente nuevo
+- [ ] El CD usa un deployment settings file versionado y un cambio de valor en el archivo llega a TEST sin tocar nada a mano
+- [ ] Una User Story con criterios Gherkin en **Acceptance Criteria** y al menos un commit vinculado a su Task
+- [ ] Redacté el diseño del mismo ALM en GitHub Actions, incluida la limitación de "dos aprobadores"
+
+### 📸 Evidencia para guardar
+- Tus tablas de evidencia de las cuatro microlecciones, el reto de construcción y el reto de transferencia.
+- Captura de la ejecución del CI con el artefacto y de la ejecución del CD con la aprobación.
+- El `deployment-settings/test.json` sin secretos y el diff de Git de la Microlección 1.
 
 ---

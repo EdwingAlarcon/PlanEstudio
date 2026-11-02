@@ -306,7 +306,7 @@ Con esto el técnico ve, en cada categoría, sus solicitudes abiertas. Y te da u
 
 3. **Quick Create:** cambia al área **Administración** → **Categorías** → abre **Hardware**. En la subcuadrícula `Solicitudes de esta categoría` selecciona el botón **+ New** de la subcuadrícula.
 
-   **Qué deberías ver:** se abre a la derecha un panel corto con solo 4 columnas (el Quick Create), no el formulario completo. Fíjate si Categoría ya viene rellena con Hardware. Escribe `Teclado no responde`, Prioridad **Baja**, y guarda con el botón del panel. La nueva solicitud aparece en la subcuadrícula.
+   **Qué deberías ver:** se abre a la derecha un panel corto con solo 4 columnas (el Quick Create), no el formulario completo. Categoría ya viene rellena con Hardware: Learn indica que, al crear un registro desde otro relacionado, el Lookup hacia ese registro se rellena solo ([Learn: Troubleshoot forms](https://learn.microsoft.com/power-apps/developer/model-driven-apps/troubleshoot-forms)). Escribe `Teclado no responde`, Prioridad **Baja**, y selecciona **Save and Close** al pie del panel ([Learn: Quick create](https://learn.microsoft.com/power-apps/mobile/windows-app-use)). La nueva solicitud aparece en la subcuadrícula.
 
    **Si se abre el formulario completo**, falta algo de la Tarea 2.6: la opción **Enable quick create forms** sin guardar o el formulario sin publicar.
 
@@ -494,7 +494,7 @@ En la solución → **Tables** → **Solicitud TI** → zona **Data experiences*
 
 1. Crea una solicitud con el Quick Create (desde la subcuadrícula de una categoría): se guarda.
 2. Abre esa solicitud: puede editarla.
-3. Abre una de las 10 solicitudes del Lab 02 (su Owner es tu cuenta de administrador, no la de prueba): la ve, pero no puede guardar cambios (el formulario aparece en solo lectura o avisa de que no tiene permiso).
+3. Abre una de las 10 solicitudes del Lab 02 (su Owner es tu cuenta de administrador, no la de prueba): la ve, pero no puede cambiarla: los campos aparecen deshabilitados, porque Learn indica que un control se deshabilita cuando el usuario no tiene permiso de escritura sobre el registro ([Learn: Troubleshoot forms](https://learn.microsoft.com/power-apps/developer/model-driven-apps/troubleshoot-forms)). Puede que además veas un aviso de solo lectura en la parte superior; lo que cuenta es que no puedes guardar cambios.
 
 **Qué deberías ver:** la diferencia entre los dos perfiles está en **qué puede editar**, no en qué ve: ambos ven las solicitudes de la unidad de negocio.
 

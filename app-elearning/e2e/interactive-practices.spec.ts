@@ -16,7 +16,7 @@ test.describe("Interactive Practice Engine", () => {
     await page.goto("/practica");
     await expect(page.getByRole("heading", { name: "Práctica interactiva" })).toBeVisible();
     // Scoped to #main-content to avoid the sidebar's own progress badges.
-    await expect(page.locator("#main-content").getByText("0/62")).toBeVisible();
+    await expect(page.locator("#main-content").getByText("0/149")).toBeVisible();
     await expect(page.locator("select").nth(0)).toBeEnabled();
     await page.locator("select").nth(1).selectOption("query-playground");
     await expect(page.locator("#exercise-heading")).toContainText("FetchXML básico");
@@ -175,7 +175,12 @@ test.describe("Interactive Practice Engine", () => {
   test("responsive movil mantiene controles y feedback visibles", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/practica/ip-qry-002-odata-select-top");
-    await expect(page.locator("#exercise-heading")).toContainText("OData select/filter/top");
+    await expect(page.locator("#exercise-heading")).toContainText("OData select/orderby/top");
+    // La consulta inicial no resuelve la práctica: validarla primero también garantiza que la página ya hidrató
+    // (rellenar el editor antes de la hidratación concatena el texto con la consulta inicial).
+    await page.getByRole("button", { name: /Validar/ }).click();
+    await expect(page.getByText(/Requiere ajuste|Parcial/)).toBeVisible();
+    await page.getByLabel("Editor odata").fill("/accounts?$select=name,revenue&$orderby=revenue desc&$top=2");
     await page.getByRole("button", { name: /Validar/ }).click();
     await expect(page.getByText("Correcto", { exact: true })).toBeVisible();
     await expect(page.getByText("Litware Capital")).toBeVisible();
@@ -253,7 +258,7 @@ test.describe("Interactive Practice Engine", () => {
   test("query playground cubre OData invalido y storage corrupto sin romper progreso", async ({ page }) => {
     await page.addInitScript(() => window.localStorage.setItem("planestudio.interactive-practice.v1", "{bad json"));
     await page.goto("/practica/ip-qry-002-odata-select-top");
-    await expect(page.locator("#exercise-heading")).toContainText("OData select/filter/top");
+    await expect(page.locator("#exercise-heading")).toContainText("OData select/orderby/top");
     const editor = page.getByLabel("Editor odata");
     await editor.fill("https://example.com/accounts?$select=name");
     await page.getByRole("button", { name: /Validar/ }).click();

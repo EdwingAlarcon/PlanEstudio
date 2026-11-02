@@ -130,11 +130,11 @@ La teoría está en el [Módulo 6](/nivel/basico/modulo/power-bi-reportes-y-dash
 
 **Pasos:**
 
-1. Entra a [app.powerbi.com](https://app.powerbi.com) con tu cuenta de trabajo (la misma de Power Apps). Con licencia gratuita, lo que crees se guarda en tu **My workspace**, para ti solo.
+1. Entra a [app.powerbi.com](https://app.powerbi.com) con tu cuenta de trabajo (la misma de Power Apps). Learn indica que con licencia gratuita puedes conectarte a datos y crear reportes para tu propio uso: lo que crees queda en tu **My workspace**, para ti solo ([Learn: features by license type](https://learn.microsoft.com/power-bi/fundamentals/service-features-license-type)). Learn no detalla si la edición del modelo en el navegador (paso 7) funciona igual con licencia gratuita; si ahí no puedes pasar a **Editing mode**, mira el aviso **Si no te deja** de abajo.
 2. En el panel de la izquierda selecciona **Create** y luego **Get data**. Se abre Power Query en el navegador.
 3. Elige **Dataverse**. Deja vacía la dirección del servidor: así verás todos tus ambientes. Inicia sesión con tu cuenta organizacional y selecciona **Next** ([Learn: Dataverse connector, Power Query Online](https://learn.microsoft.com/power-query/connectors/dataverse)).
 4. Expande tu ambiente, marca `sit_solicitud` y `contact` y selecciona **Transform data**.
-5. Haz los pasos del **Ejercicio 3** de este lab. Los botones de Power Query en el navegador son casi los mismos que en Desktop; si uno no aparece igual, búscalo en la misma pestaña.
+5. Haz los pasos del **Ejercicio 3** de este lab. Learn advierte que las pestañas de la cinta de Power Query dependen del producto en el que se abre y que muchas transformaciones se pueden lanzar desde varios sitios ([Learn: Power Query UI](https://learn.microsoft.com/power-query/power-query-ui)): si un botón no está donde dice el Ejercicio 3, haz clic derecho en el encabezado de la columna (su menú ofrece muchas de las mismas transformaciones) o busca el botón en las otras pestañas de la cinta.
 6. Al terminar, Power BI te ofrece **Create a report** o **Create a semantic model only**. Elige **Create a semantic model only**: llegas al editor del modelo.
 7. Cambia de **Viewing mode** a **Editing mode**. Haz el **Ejercicio 4** (arrastra `Solicitante ID` sobre `Contacto ID`, o usa **Manage relationships** → **New relationship**) y el **Ejercicio 5** (selecciona la tabla en el panel **Data** y luego **New measure**). En el navegador los cambios se guardan solos y no se pueden deshacer.
 8. Selecciona **New report** y haz el **Ejercicio 6** en la pestaña nueva. Guarda el reporte.
@@ -213,11 +213,11 @@ Reporte: 4 tarjetas · barras por Estado · líneas por mes · slicer por Nombre
 
 ### Tarea 1.1 — Crear los contactos
 
-1. En [make.powerapps.com](https://make.powerapps.com), con tu ambiente **Developer**, abre **Tables** en el menú de la izquierda. **Contact** es una tabla estándar, no está en tu solución: búscala en la lista de todas las tablas (escribe `Contact` en el cuadro de búsqueda; si no aparece, cambia el filtro de la lista para ver todas las tablas).
+1. En [make.powerapps.com](https://make.powerapps.com), con tu ambiente **Developer**, abre **Tables** en el menú de la izquierda. **Contact** es una tabla estándar, no está en tu solución. Arriba de la lista hay tres pestañas: **Recommended** (solo tablas estándar), **Custom** (las que crean los makers) y **All** (todas). Elige **Recommended** o **All** y escribe `Contact` en el cuadro de búsqueda ([Learn: View tables](https://learn.microsoft.com/power-apps/maker/data-platform/create-edit-entities-portal#view-tables)).
 2. Abre **Contact** y su editor de filas, igual que en el Lab 02, Tarea 5.1 (**Edit** o **View data**).
 3. Crea los 3 contactos de "Contactos de prueba": nombre, apellido, email y departamento.
 
-   > **Lo mínimo es el apellido**: es la columna obligatoria de Contact. El editor muestra las columnas de una vista; si no ves **Email** o **Department**, o no te deja escribir en una, crea la fila con lo que te permita. Sin email no podrás hacer el Ejercicio 8 (opcional); sin departamento no pasa nada.
+   > **Lo mínimo es el apellido**: es la columna obligatoria de Contact. El editor muestra solo algunas columnas: si no ves **Email** o **Department**, selecciona el contador de columnas ocultas (un texto como **+17 more** al final de los encabezados) y márcalas ([Learn: Table columns and data](https://learn.microsoft.com/power-apps/maker/data-platform/create-edit-entities-portal#table-columns-and-data)). Si aun así no te deja escribir en una, crea la fila con lo que te permita. Sin email no podrás hacer el Ejercicio 8 (opcional); sin departamento no pasa nada.
 
 **Resultado esperado:** la tabla Contact tiene, al menos, tus 3 contactos (tu ambiente puede traer otros; no estorban).
 
@@ -294,7 +294,7 @@ Se abre la ventana de Power Query con dos consultas en el panel **Queries** de l
    | La columna principal, con el nombre que anotaste en el Lab 02 (por ejemplo, `sit_titulo`: es solo un ejemplo, usa el tuyo) | Título de Solicitud |
    | `sit_estadoname` | La etiqueta de **Estado** (Nueva, En Proceso…) |
    | `sit_prioridadname` | La etiqueta de **Prioridad** |
-   | La columna de nombre del Lookup de Categoría: empieza por `sit_categoria` y termina en `name` (normalmente `sit_categorianame`) | El nombre de la **Categoría** |
+   | `sit_categorianame` (el nombre del Lookup de Categoría: nombre del Lookup + `name`) | El nombre de la **Categoría** |
    | `sit_fechasolicitud` | Fecha Solicitud |
    | `sit_fecharesolucion` | Fecha Resolución |
    | `sit_slahoras` | SLA Horas |
@@ -302,7 +302,7 @@ Se abre la ventana de Power Query con dos consultas en el panel **Queries** de l
 
    Selecciona **OK**.
 
-   > **Por qué `...name`:** el conector Dataverse entrega cada columna Choice como dos columnas: una con el número interno (`sit_estado`) y otra con la etiqueta que lees (`sit_estadoname`). Un Lookup también llega como dos: el GUID de la fila relacionada (`sit_categoria`, `sit_solicitante`) y su nombre ([Learn](https://learn.microsoft.com/power-apps/maker/data-platform/data-platform-powerbi-connector)). Para la relación con Contacts necesitas el GUID (`sit_solicitante`), no el nombre.
+   > **Por qué `...name`:** el conector Dataverse entrega cada columna Choice como dos columnas: una con el número interno (`sit_estado`) y otra con la etiqueta que lees (`sit_estadoname`). Un Lookup también llega como dos: el GUID de la fila relacionada (`sit_categoria`, `sit_solicitante`) y su nombre, con el sufijo `name` (`sit_categorianame`, `sit_solicitantename`) ([Learn: conector de Power BI](https://learn.microsoft.com/power-apps/maker/data-platform/data-platform-powerbi-connector); el patrón `<lookup>id` / `<lookup>name` está en [Learn: Use SQL to query data](https://learn.microsoft.com/power-apps/developer/data-platform/dataverse-sql-query#lookup-column-type-behaviors), el endpoint que usa el conector). Si en tu lista el nombre de Categoría se ve distinto, busca la columna que empieza por `sit_categoria` y termina en `name`. Para la relación con Contacts necesitas el GUID (`sit_solicitante`), no el nombre.
    >
    > **No confundas `sit_estadoname` con `statecodename`:** esta última es la columna del sistema **Status** (Active/Inactive) que trae toda tabla. La tuya lleva el prefijo `sit_`.
 
@@ -361,7 +361,7 @@ En el panel **Data** ves `Solicitudes TI` con 8 columnas y `Contacts` con 4, tod
    - **Cardinality**: **Many to one (\*:1)**. Muchas solicitudes, un contacto.
    - **Cross filter direction**: **Single**. El filtro viaja del lado "uno" (Contacts) al lado "muchos" (Solicitudes TI).
    - **Make this relationship active**: marcada.
-   - Selecciona **OK** (o **Save**, según tu versión).
+   - Selecciona **OK**. (Si en vez de una ventana ves las opciones en el panel **Properties** de la derecha, el botón para confirmar es **Apply changes**.)
 
    Fuente: [Learn: Create and manage relationships](https://learn.microsoft.com/power-bi/transform-model/desktop-create-and-manage-relationships).
 
@@ -418,7 +418,7 @@ DIVIDE(
 )
 ```
 
-   Con la medida seleccionada, en la cinta **Measure tools** elige el formato de porcentaje (**%**). Sin ese formato verás `0.4` en vez de `40 %`.
+   Selecciona la medida en el panel **Data**; en la cinta **Measure tools**, grupo **Formatting**, abre la lista **Format** y elige **Percentage**. Sin ese formato verás `0.4` en vez de `40 %` (Learn describe la lista **Format** del grupo **Formatting** en [dynamic format strings](https://learn.microsoft.com/power-bi/create-reports/desktop-dynamic-format-strings) y la opción **Percentage** en [este ejemplo con Power BI Desktop](https://learn.microsoft.com/azure/sentinel/powerbi#create-a-new-quick-measure)).
 
 4. **Promedio Días Resolución**
 
@@ -468,7 +468,7 @@ AVERAGEX(
 
    > Si ves "2K" en vez de un número, o demasiados decimales, ajusta el formato de la tarjeta como en el Módulo 6, Práctica 6.3, Página 1, punto 1.
 
-3. **Solicitudes por Estado (barras):** visual **Clustered bar chart** (barras horizontales). Arrastra `Estado` al **Y-axis** y `Total Solicitudes` al **X-axis**. En barras horizontales, las categorías van en el eje vertical.
+3. **Solicitudes por Estado (barras):** visual **Clustered bar chart** (barras horizontales; no lo confundas con **Clustered column chart**, que es de columnas verticales) ([Learn: lista de visuales del panel Analytics](https://learn.microsoft.com/power-bi/transform-model/desktop-analytics-pane)). Arrastra `Estado` al **Y-axis** y `Total Solicitudes` al **X-axis**. En barras horizontales, las categorías van en el eje vertical.
 
    **Resultado esperado:** 4 barras: Nueva 4, En Proceso 2, Resuelta 3, Cerrada 1.
 
@@ -478,11 +478,11 @@ AVERAGEX(
 
    **Resultado esperado:** entre 2 y 4 puntos, uno por cada mes con solicitudes (incluidos los meses de las filas 5 y 10).
 
-5. **Slicer por solicitante:** visual **Slicer** con `Contacts[Nombre Completo]`. Si se ve como una barra deslizante en vez de una lista, elige **List** en la flecha del slicer ([Learn](https://learn.microsoft.com/power-bi/transform-model/desktop-tutorial-create-measures)).
+5. **Slicer por solicitante:** visual **Slicer** con `Contacts[Nombre Completo]`. Un slicer nuevo sale por defecto como lista desplegable (**Dropdown**). Para ver los tres nombres a la vista, con el slicer seleccionado ve al panel **Format** → **Visual** → **Slicer settings** → **Options** y, en **Style**, elige **Vertical list** ([Learn: Slicer visual](https://learn.microsoft.com/power-bi/visuals/power-bi-visualization-slicer-visual)). Con **Dropdown** también funciona: abre la lista y elige ahí.
 
 6. **Prueba la relación:** en el slicer, elige `Ana Torres`.
 
-   **Resultado esperado:** `Total Solicitudes` = 4 y `% Resueltas` = 50 % (filas 1 y 10 resueltas, de 4). El gráfico de barras también cambia. Elige otra vez a Ana para quitar el filtro. Si las tarjetas no cambian, la relación no está bien: vuelve al Ejercicio 4.
+   **Resultado esperado:** `Total Solicitudes` = 4 y `% Resueltas` = 50 % (filas 1 y 10 resueltas, de 4). El gráfico de barras también cambia. Para quitar el filtro, selecciona otra vez `Ana Torres` (un segundo clic la deselecciona) o usa el ícono de goma de borrar que aparece en la cabecera del slicer, que borra toda su selección ([Learn: Slicer visual](https://learn.microsoft.com/power-bi/visuals/power-bi-visualization-slicer-visual#selection-controls) y [Learn: Slicers](https://learn.microsoft.com/power-bi/visuals/power-bi-visualization-slicers#clear-selections-with-the-header-icon)). Si las tarjetas no cambian, la relación no está bien: vuelve al Ejercicio 4.
 
 7. Guarda.
 
@@ -554,7 +554,7 @@ El `.pbix` está guardado y, si publicaste, el reporte se abre en app.powerbi.co
 
    **Resultado esperado:** `Total Solicitudes` = 3 (filas 4, 6 y 8).
 
-7. Para volver a ver todo, abre **View as**, elige **None** y **OK**.
+7. Para volver a ver todo, abre **View as**, elige **None** (la primera opción de la ventana **View as roles**; desmarca `Solicitante` y **Other user** si siguen marcados) y **OK**.
 
 Fuentes: [Learn: RLS en Power BI](https://learn.microsoft.com/fabric/security/service-admin-row-level-security) (roles y `USERPRINCIPALNAME()`) y [Learn: validar roles en Power BI Desktop](https://learn.microsoft.com/power-bi/report-server/row-level-security-report-server) (**View as**).
 
@@ -580,7 +580,7 @@ Fuentes: [Learn: RLS en Power BI](https://learn.microsoft.com/fabric/security/se
 | Veo "Active/Inactive" en vez de Nueva, En Proceso… | Marcaste `statecodename` (la columna del sistema **Status**) | Usa `sit_estadoname` |
 | No encuentro la columna del título | Su nombre interno no lo eliges tú | Usa el que anotaste en el Lab 02 (Tarea 2.2, paso 7) |
 | Una medida sale en rojo | Un nombre de columna no coincide letra por letra | Compara con el panel **Data**; renombra la columna o corrige la fórmula |
-| `% Resueltas` muestra `0.4` | Falta el formato de porcentaje | **Measure tools** → formato **%** |
+| `% Resueltas` muestra `0.4` | Falta el formato de porcentaje | Selecciona la medida → **Measure tools** → **Format** → **Percentage** |
 | `Promedio Días Resolución` sale vacío | No hay solicitudes Resuelta/Cerrada con las dos fechas | Revisa el Ejercicio 1; en Desktop, **Home** → **Refresh** |
 | El gráfico de líneas tiene un solo punto | Está en el nivel **Year** de la jerarquía | Baja dos niveles con **Go to the next level in the hierarchy** |
 | El eje de fechas muestra fechas sueltas, sin jerarquía | `Fecha Solicitud` quedó como texto | Power Query → **Transform** → **Data type** → **Date** |

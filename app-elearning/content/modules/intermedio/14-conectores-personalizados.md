@@ -3,12 +3,12 @@ moduleId: 14
 title: "Conectores Personalizados"
 level: "intermedio"
 certification: "PL-200 (retirado 31 ago 2026)"
-estimatedMinutes: 18
-practiceMinutes: 110
+estimatedMinutes: 20
+practiceMinutes: 160
 slug: "conectores-personalizados"
 lastVerified: "2026-11"
 ---
-*Lectura: 15-20 min · Con práctica: unos 110 min en tu entorno Developer; la primera vez, cuenta entre el doble y el triple. La autenticación OAuth 2.0 y el conector contra Microsoft Graph son opcionales y pueden quedar para otra sesión.*
+*Lectura: 20-25 min · Con práctica: unos 160 min en tu entorno Developer; la primera vez, cuenta entre el doble y el triple. La autenticación OAuth 2.0 y el conector contra Microsoft Graph son opcionales y pueden quedar para otra sesión.*
 
 ### 🎯 Objetivo
 Crear y certificar conectores personalizados para APIs REST, integrar autenticación OAuth2 y API Key, y hacer que los conectores estén disponibles para Power Apps y Power Automate en toda la organización — construyendo un conector real en tu entorno, dentro de una solución, y practicando cada concepto con evidencia del dato exacto que viste antes de pasar al siguiente.
@@ -21,6 +21,8 @@ Crear y certificar conectores personalizados para APIs REST, integrar autenticac
 
 ## 📖 Conceptos clave (referencia rápida)
 
+**No hace falta entender todo esto ahora:** si es la primera vez que lo ves, pasa directo a la Microlección 1 y vuelve aquí cuando una microlección use un término que no recuerdes.
+
 - **Custom connector (conector personalizado):** un "envoltorio" sobre una API REST que expone sus operaciones como acciones y triggers en Power Automate, Power Apps y Copilot Studio, con nombres y descripciones legibles. Un mismo conector se reutiliza en apps y flujos; cada usuario crea su propia **conexión** con sus credenciales.
 - **Definición OpenAPI:** el conector se describe con una definición **OpenAPI 2.0** (antes llamada Swagger), en JSON, de menos de 1 MB. **OpenAPI 3.0 no se admite** para crear el conector. También se puede partir de una colección de Postman (v2) o desde cero. Cada `operationId` es el nombre de la acción: debe ser único y descriptivo.
 - **Las cinco secciones del asistente:** **General** (icono, descripción, esquema HTTPS/HTTP, **Host** y **Base URL**), **Security** (tipo de autenticación), **Definition** (acciones, triggers, parámetros, respuestas y políticas), **Code** (opcional: código C# que transforma la petición o la respuesta, con límite de 5 segundos de ejecución) y **Test** (crear una conexión y probar cada operación).
@@ -28,7 +30,7 @@ Crear y certificar conectores personalizados para APIs REST, integrar autenticac
 - **Triggers:** un conector puede exponer triggers de **polling** (el servicio consulta periódicamente) o de **webhook** (la API avisa cuando ocurre algo; requiere que la API permita registrar y eliminar webhooks).
 - **Políticas (policies):** transforman la petición o la respuesta sin código. Ejemplos: **Set HTTP header**, **Set query string parameter** y **Set host URL** (cambia el host de destino, por ejemplo según un parámetro de conexión). Se agregan en **Definition** > **New policy**.
 - **Extensiones OpenAPI de Microsoft:** `x-ms-summary` (etiqueta visible), `x-ms-visibility` (importancia del campo), `x-ms-dynamic-values` / `x-ms-dynamic-list` (desplegables que se llenan llamando a la API), `x-ms-dynamic-schema` / `x-ms-dynamic-properties` (esquemas que dependen de otro valor) y `x-ms-trigger` (marca una operación como trigger).
-- **Soluciones y ALM:** el conector se crea **dentro de una solución** (en el portal ya no hay una entrada de "Custom connectors" en el panel izquierdo). Los flujos de una solución no usan la conexión directamente sino una **connection reference** (referencia de conexión), que se ve en profundidad en el Módulo 16. Limitación importante: el conector debe importarse en el ambiente destino **antes** que los flujos y las referencias de conexión que lo usan, en una solución aparte.
+- **Soluciones y ALM:** el conector se crea **dentro de una solución** (Microsoft indica que la opción **Data** > **Custom connectors** ya no está disponible en el panel izquierdo del portal). Los flujos de una solución no usan la conexión directamente sino una **connection reference** (referencia de conexión), que se ve en profundidad en el Módulo 16. Limitación importante: el conector debe importarse en el ambiente destino **antes** que los flujos y las referencias de conexión que lo usan, en una solución aparte.
 - **Variables de entorno en el conector:** en conectores dentro de soluciones se puede usar `@environmentVariables("nombre")` en **Host**, **Base URL** y en los datos de OAuth (Client ID, Client secret, URLs). El valor se toma al guardar el conector: si cambias el valor de la variable, vuelve a guardar el conector.
 - **Límites:** 10.000 peticiones por minuto por conexión en Power Automate y Power Apps; a eso se suman los límites propios de la API (HTTP 429 cuando se exceden).
 - **Compartir y certificar:** un conector se comparte con usuarios concretos (**Can view** / **Can edit**). Si se quiere que esté disponible para **todos** los usuarios de Power Platform, se envía a **certificación** de Microsoft: como **verified publisher** si eres dueño del servicio, o como **independent publisher** si no lo eres. Los conectores certificados son Premium. Microsoft indica de 3 a 5 días hábiles de revisión por cada envío y de 7 a 10 días hábiles para el despliegue, además del tiempo que tardes en corregir lo que pidan.
@@ -53,12 +55,12 @@ Crear y certificar conectores personalizados para APIs REST, integrar autenticac
 
 En el asistente eso se reparte así: `api.exchangerate-api.com` es el **Host** (General); "sin credenciales" es **No authentication** (Security); `GET /v4/latest/USD` y la forma de la respuesta son una acción (Definition).
 
-**Ahora haz algo — micropráctica (3 min):** antes de abrir el asistente, ubica cada pieza en su sección → **[¿En qué sección del asistente va cada cosa?](/practica/ip-pa-008-secciones-del-asistente-de-conectores)**.
+**Ahora haz algo — micropráctica (4 min):** antes de abrir el asistente, ubica cada pieza en su sección → **[¿En qué sección del asistente va cada cosa?](/practica/ip-pa-008-secciones-del-asistente-de-conectores)**.
 
-**Práctica real en tu entorno (30 min):**
+**Práctica real en tu entorno (35 min):**
 
 1. En <https://make.powerapps.com>, con tu entorno Developer seleccionado arriba a la derecha, ve a **Solutions** > **New solution**. **Display name** = `SIT Conectores`, **Publisher** = `SIT` > **Create**. Esta solución va a contener **solo** el conector (en la Microlección 4 verás por qué).
-2. Dentro de la solución: **New** > **Automation** > **Custom connector**. Se abre el asistente. Si te ofrece elegir cómo empezar, elige crear desde cero (**Create from blank**).
+2. Dentro de la solución: **New** > **Automation** > **Custom connector** > **Create from blank**. El asistente se abre en una **pestaña nueva** del navegador; la solución sigue abierta en la pestaña anterior (la vas a necesitar en el paso 10).
 3. Escribe el nombre `SIT Tasas de Cambio` y pulsa **Continue**.
 4. Sección **General**: **Scheme** = **HTTPS**, **Host** = `api.exchangerate-api.com`, **Base URL** = `/`. Escribe una **Description** (por ejemplo, "Tasas de cambio de referencia, sin autenticación").
 5. Pasa a **Security** (botón de la parte inferior o pestaña superior): elige **No authentication**. Pulsa **Create connector** (arriba). Espera a que termine de guardar.
@@ -66,7 +68,7 @@ En el asistente eso se reparte así: `api.exchangerate-api.com` es el **Host** (
 7. En **Request** > **Import from sample**: **Verb** = **GET**, **URL** = `https://api.exchangerate-api.com/v4/latest/USD` > **Import**.
 8. En **Response** > **Add default response**: pega el JSON del ejemplo de arriba en **Body** > **Import**.
 9. Revisa **Validation**: debe indicar que no hay problemas (marca verde). Si muestra un aviso, léelo: suele ser una descripción vacía. Pulsa **Update connector**.
-10. Sección **Test** > **New connection** > **Create connection**. Si la conexión no aparece, usa el icono de actualizar junto al selector. Elige la operación `ObtenerTasas` > **Test operation**.
+10. Sección **Test** > **New connection** > **Create connection**. En make.powerapps.com, al crear la conexión el portal te lleva a la lista de conexiones del ambiente, no de vuelta al asistente. Para regresar: ve a la pestaña donde está abierta la solución `SIT Conectores`, selecciona `SIT Tasas de Cambio` > **Edit** y abre la sección **Test**. Si la conexión no aparece en **Connections**, usa el icono de actualizar de esa zona. Elige la operación `ObtenerTasas` > **Test operation**.
 
 **Qué deberías ver:** en **Response**, un **Status** `200` y el cuerpo con `base`, `date` y `rates`. Si ves un error de host, revisa que en **Host** no hayas escrito `https://` ni una barra al final.
 
@@ -175,7 +177,7 @@ En el asistente eso se reparte así: `api.exchangerate-api.com` es el **Host** (
 
 **Práctica real en tu entorno (20 min):**
 
-1. Descarga la definición del conector que creaste en la Microlección 1: en la lista de conectores personalizados (dentro de la solución, o en **More** > **Discover all** > **Data** > **Custom connectors**) usa la opción de descargar la definición OpenAPI del conector. Ábrela en un editor de texto y localiza `swagger`, `host`, `basePath`, tu `operationId` y la respuesta que generó **Add default response**.
+1. Mira la definición del conector que creaste en la Microlección 1: en la solución `SIT Conectores` selecciona `SIT Tasas de Cambio` > **Edit** y activa el interruptor **Swagger Editor** del asistente. Verás la definición OpenAPI completa en formato YAML (no JSON: mismo contenido, otra sintaxis). Cópiala a un archivo de texto y localiza `swagger`, `host`, `basePath`, tu `operationId` y la respuesta que generó **Add default response**. Desactiva el interruptor antes de seguir. *(Microsoft documenta también la descarga del archivo desde la lista de conectores personalizados, pero en un conector de solución que no has compartido esa lista solo muestra la descripción, el tipo de autenticación y los datos de uso compartido.)*
 2. Guarda el JSON de facturación de arriba como `facturacion.json`.
 3. En la solución `SIT Conectores`: **New** > **Automation** > **Custom connector** y elige importar un archivo OpenAPI (**Import an OpenAPI file**). Nombre `SIT Facturacion (demo)`, selecciona `facturacion.json` > **Continue**.
 4. Recorre **General** (el Host y la Base URL ya vienen del archivo) y **Definition** (deberían aparecer dos acciones). Pulsa **Create connector**.
@@ -185,10 +187,10 @@ En el asistente eso se reparte así: `api.exchangerate-api.com` es el **Host** (
 
 | Campo | Tu valor |
 |---|---|
-| Valores de `host` y `basePath` en la definición que descargaste | ___ |
+| Valores de `host` y `basePath` en la definición que viste en **Swagger Editor** | ___ |
 | Cómo aparece tu respuesta de ejemplo en la definición (nombre de la sección que la contiene) | ___ |
 | Acciones que aparecieron en **Definition** al importar `facturacion.json` | ___ |
-| Cómo se muestra el campo `nit_emisor` en el asistente (¿se usa la etiqueta de `x-ms-summary`?) | ___ |
+| Cómo se muestra el campo `nit_emisor` en el asistente (¿se usa la etiqueta de `x-ms-summary`?). Para verlo: **Definition** > acción `EmitirFactura` > en **Request** selecciona **body** > **Edit** y mira `nit_emisor` en **Parameter** | ___ |
 | Qué pasó al intentar importar la versión `openapi: "3.0.0"` | ___ |
 
 ---
@@ -211,9 +213,9 @@ En el asistente eso se reparte así: `api.exchangerate-api.com` es el **Host** (
 1. Abre `SIT Tasas de Cambio` para editar > **Definition**, con la acción `ObtenerTasas` seleccionada. En **Policies** elige **New policy**.
 2. **Name** = `AgregarOrigen`, **Template** = **Set HTTP header**. **Header name** = `X-Origen`, **Header value** = `PlanEstudio`, **Action if header exists** = **override**, **Run policy on** = **Request**, y en **Operations** marca `ObtenerTasas`. Pulsa **Update connector**.
 3. Vuelve a **Test** y ejecuta `ObtenerTasas`. La API ignora headers que no conoce, así que debe seguir respondiendo `200`: la política no rompe nada, solo agrega el header.
-4. *(Opcional, 10 min)* Para ver cómo cambia la conexión con **API Key**: en **Security** cambia a **API Key** con **Parameter label** = `Clave de API`, **Parameter name** = `X-Api-Key` y **Parameter location** = **Header** > **Update connector**. En **Test** crea una conexión nueva: te pedirá la `Clave de API` (escribe cualquier texto; esta API no la valida). Anota lo que viste y **vuelve a No authentication** antes de seguir, porque las Microlecciones 4 y 5 usan el conector sin clave.
+4. *(Opcional, 10 min)* Para ver cómo cambia la conexión con **API Key**: en **Security** cambia a **API Key** con **Parameter label** = `Clave de API`, **Parameter name** = `X-Api-Key` y **Parameter location** = **Header** > **Update connector**. En **Test** crea una conexión nueva: te pedirá la `Clave de API` (escribe cualquier texto; esta API no la valida). Anota lo que viste y **vuelve a No authentication** > **Update connector** antes de seguir, porque la Microlección 4 y el reto de transferencia usan el conector sin clave. Después ejecuta otra vez `ObtenerTasas` en **Test**: si la conexión que creaste en la Microlección 1 da error, crea una conexión nueva en **Test** y usa esa en la Microlección 4.
 
-> **Profundización opcional — OAuth 2.0 contra Microsoft Graph.** Solo se justifica cuando la operación de Graph que necesitas no la cubren los conectores estándar (Office 365 Outlook, Office 365 Users). Pasos resumidos: registra una aplicación en Microsoft Entra ID con el permiso delegado `User.Read` de Microsoft Graph (solo el que vas a usar: mínimo privilegio; `Mail.Send` solo si agregas una acción que envía correo); crea un conector con **Host** `graph.microsoft.com`; en **Security** elige **OAuth 2.0** y el proveedor de Microsoft Entra ID (o **Generic Oauth 2** con **Client id**, **Client secret**, **Authorization Url** `https://login.microsoftonline.com/<tenant>/oauth2/v2.0/authorize`, **Token Url** y **Refresh Url** `https://login.microsoftonline.com/<tenant>/oauth2/v2.0/token`, y **Scope** `https://graph.microsoft.com/User.Read`); al guardar, Power Platform genera la **Redirect URL** del conector, que tienes que copiar en el registro de la aplicación (cada conector tiene la suya). Una acción `ObtenerPerfil` con `GET /v1.0/me` debe devolver `displayName` y `mail` del usuario que inició sesión.
+> **Profundización opcional — OAuth 2.0 contra Microsoft Graph.** Solo se justifica cuando la operación de Graph que necesitas no la cubren los conectores estándar (Office 365 Outlook, Office 365 Users). Pasos resumidos: registra una aplicación en Microsoft Entra ID con el permiso delegado `User.Read` de Microsoft Graph (solo el que vas a usar: mínimo privilegio; `Mail.Send` solo si agregas una acción que envía correo); crea un conector con **Host** `graph.microsoft.com`; en **Security** elige **OAuth 2.0** y, como proveedor de identidad, el de Microsoft Entra ID (en la lista puede aparecer con su nombre anterior, **Azure Active Directory**), y completa **Client ID** (el Application ID del registro), **Client secret** y **Resource URL** `https://graph.microsoft.com`; al crear el conector, Power Platform rellena el campo **Redirect URL** con la URL propia del conector, que tienes que copiar en el registro de la aplicación (cada conector tiene la suya). Una acción `ObtenerPerfil` con `GET /v1.0/me` debe devolver `displayName` y `mail` del usuario que inició sesión.
 
 **Evidencia a reportar:**
 
@@ -240,15 +242,15 @@ En el asistente eso se reparte así: `api.exchangerate-api.com` es el **Host** (
 4. Agrega una acción **Compose** y en **Inputs** elige del contenido dinámico el valor `COP` de la respuesta. Guarda y prueba el flujo (**Test** > **Manually**).
 5. Vuelve a la solución `SIT Integraciones` y mira la lista de objetos: además del flujo debe haber aparecido una **connection reference** para tu conector, creada automáticamente al agregar la acción.
 
-**🔧 Diagnosticar antes de construir — troubleshooting challenge (5 min):** un compañero exportó una sola solución con el conector, la connection reference y el flujo, y al importarla en TEST falla. Antes de ver la causa, resuélvelo → **[Diagnosticar: la importación falla en TEST](/practica/ip-trb-010-importar-conector-y-flujo-en-otro-ambiente)**.
+**🔧 Diagnosticar antes de construir — troubleshooting challenge (6 min):** un compañero exportó una sola solución con el conector, la connection reference y el flujo, y al importarla en TEST falla. Antes de ver la causa, resuélvelo → **[Diagnosticar: la importación falla en TEST](/practica/ip-trb-010-importar-conector-y-flujo-en-otro-ambiente)**.
 
-**🏗️ Reto de construcción (sin pasos, en tu entorno):**
+**🏗️ Reto de construcción (sin pasos, en tu entorno, unos 30 min):**
 
 > **Requerimiento:** una Canvas App, dentro de la solución `SIT Integraciones`, con una etiqueta que muestre la tasa COP actual obtenida de tu conector.
 > **Criterios de aceptación:** (1) el valor se obtiene llamando a `ObtenerTasas`, no escrito a mano; (2) el valor se actualiza al abrir la app; (3) la etiqueta muestra la fecha de la tasa además del valor.
 > **Restricciones:** usa una sola llamada al conector al abrir la app (no una por control).
 
-Si te atascas, pistas en orden: (1) en Power Apps Studio, el conector se agrega desde el panel **Data** > **Add data**, buscando su nombre; (2) en Power Fx la operación se llama `NombreDelConector.OperationId(...)`: escribe el inicio del nombre y deja que el autocompletado te muestre el nombre exacto; (3) guarda la respuesta una vez en una variable desde `OnStart` de la app (con `Set`) y lee `rates.COP` y `date` desde ahí.
+Si te atascas, pistas en orden: (1) en Power Apps Studio, el conector se agrega desde el panel **Data** > **Add data**, buscando su nombre; (2) en Power Fx la operación se llama `NombreDelConector.OperationId(...)`: escribe el inicio del nombre y deja que el autocompletado te muestre el nombre exacto; (3) guarda la respuesta una vez en una variable desde `OnStart` de la app (con `Set`) y lee `rates.COP` y `date` desde ahí; (4) mientras editas en Studio, `OnStart` no se vuelve a ejecutar solo: para probarlo, en el **Tree view** pasa el cursor sobre **App**, abre los puntos suspensivos (...) y elige **Run OnStart** (si no ves la propiedad `OnStart`, búscala en la configuración avanzada de la app, donde puede estar desactivada); (5) en Power Fx los textos se unen con `&`, por ejemplo `"COP " & varTasas.rates.COP & " (" & varTasas.date & ")"`.
 
 > **Ojo al llevar la app a otro ambiente:** las Canvas Apps **no reconocen** las connection references de conectores personalizados. Después de importar, hay que quitar y volver a agregar el conector en la app. Los flujos sí usan la connection reference.
 
@@ -268,9 +270,13 @@ Si te atascas, pistas en orden: (1) en Power Apps Studio, el conector se agrega 
 
 Ya construiste un conector sin autenticación, con un host fijo, usado desde un flujo de solución. Ahora el requisito **cambia**: el área de logística te pide un conector para la API de su transportadora. Esa API exige una **clave en el header** `X-Api-Key`, y su host es **distinto** en DEV (sandbox) y en PROD. El conector tiene que pasar por DEV → TEST → PROD sin editarlo a mano en cada ambiente y sin que la clave quede escrita en ningún archivo exportado.
 
-**[Transferir: API con clave y host distinto por ambiente](/practica/ip-pa-009-transferir-api-con-clave-y-host-por-ambiente)** — tienes que decidir dónde va cada cosa: la clave, el host y la conexión. Si solo memorizaste los clics de la Microlección 1, este reto te lo va a mostrar.
+**[Transferir: API con clave y host distinto por ambiente](/practica/ip-pa-009-transferir-api-con-clave-y-host-por-ambiente)** (8 min) — tienes que decidir dónde va cada cosa: la clave, el host y la conexión. Si solo memorizaste los clics de la Microlección 1, este reto te lo va a mostrar.
 
-Si tienes tiempo, prueba la mitad del diseño en tu entorno con `SIT Tasas de Cambio`: crea en `SIT Conectores` una variable de entorno de texto (**New** > **More** > **Environment variable**) con valor `api.exchangerate-api.com`, escribe en **Host** `@environmentVariables("<nombre de tu variable>")` usando el **nombre** (Name) que muestra la variable, guarda el conector y vuelve a probar `ObtenerTasas`.
+Si tienes tiempo (unos 20 min), prueba la mitad del diseño en tu entorno con `SIT Tasas de Cambio`:
+
+1. En `SIT Conectores`: **New** > **More** > **Environment variable**. En el panel de la derecha escribe **Display name** = `SIT Host Tasas`, elige **Data Type** = **Text**, escribe en **Current Value** `api.exchangerate-api.com` y pulsa **Save**. Copia el **Name** que generó (lleva el prefijo del publisher, algo como `sit_...`): es el que se usa en el conector, no el **Display name**.
+2. Abre `SIT Tasas de Cambio` > **Edit**. En **General**, escribe en **Host** `@environmentVariables("<Name de tu variable>")` y pulsa **Update connector**.
+3. Vuelve a **Test** y ejecuta `ObtenerTasas`.
 
 | Campo | Tu valor |
 |---|---|
@@ -317,13 +323,13 @@ Así se ve, a alto nivel, el flujo del caso de negocio con el conector `SIT Fact
 | La importación de la solución con flujos falla porque falta el conector | Conector, connection references y flujos en la misma solución, o importados en el orden equivocado | Importar primero una solución que solo contenga el conector, crear la conexión, y después la solución con flujos (Microlección 4) |
 | "Invalid connection" después de importar solución | Connection Reference no configurada en destino | Configurar Connection Reference en el ambiente destino |
 | La Canvas App importada no encuentra el conector | Las Canvas Apps no reconocen connection references de conectores personalizados | Quitar y volver a agregar el conector en la app después de importar |
-| Cambié el valor de la variable de entorno y el conector sigue llamando al host anterior | El valor se toma al guardar el conector | Volver a guardar el conector en ese ambiente |
+| Cambié el valor de la variable de entorno y el conector sigue llamando al host anterior | El valor se toma al guardar el conector | Volver a guardar el conector en ese ambiente (**Edit** > **Update connector**) |
 | HTTP 429 Too Many Requests | Se excedió el límite de la API o de la conexión | Delay entre iteraciones, reintentos en el flujo y menos llamadas por lote |
 
 ### 🧪 Criterios de Validación
 - [ ] Resolví la micropráctica de las secciones del asistente y creé `SIT Tasas de Cambio` dentro de la solución `SIT Conectores`
 - [ ] Probé `ObtenerTasas` en **Test** y anoté el status y la tasa COP exactos
-- [ ] Descargué la definición OpenAPI de mi conector, importé la definición 2.0 de facturación y comprobé qué pasa con un archivo 3.0
+- [ ] Revisé la definición OpenAPI de mi conector en **Swagger Editor**, importé la definición 2.0 de facturación y comprobé qué pasa con un archivo 3.0
 - [ ] Agregué una política **Set HTTP header** y expliqué cuándo elegiría **API Key**, **Basic authentication** u **OAuth 2.0**
 - [ ] Usé el conector en un flujo de una segunda solución e identifiqué la connection reference que se creó
 - [ ] Diagnostiqué la importación fallida en TEST formulando una hipótesis antes de ver la causa

@@ -2147,13 +2147,13 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "single",
       prompt: "Un tema del bot debe capturar la prioridad del incidente con valores válidos Alta, Media o Baja y validar opciones cerradas. ¿Qué tipo de entidad se ajusta mejor?",
       options: [
-      "Pattern entity",
+      "Entidad de expresión regular (Regular expression)",
       "Closed list entity (Lista cerrada)",
       "Custom table en Dataverse obligatoria",
       "Variable $number"
       ],
       answer: [1],
-      explanation: "Una Closed list entity (Lista cerrada) es la opción correcta cuando el usuario debe elegir entre un conjunto finito de valores definidos (Alta, Media, Baja). Es el término oficial en Copilot Studio. Pattern entity se usa para formatos como fechas o códigos, y las otras opciones no ofrecen validación conversacional integrada.",
+      explanation: "Una Closed list entity (Lista cerrada) es la opción correcta cuando el usuario debe elegir entre un conjunto finito de valores definidos (Alta, Media, Baja). Es el término oficial en Copilot Studio. La entidad de expresión regular se usa para formatos como códigos, y las otras opciones no ofrecen validación conversacional integrada.",
     },
     {
       type: "single",
@@ -2217,7 +2217,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "single",
-      prompt: "Un agente configurado con Generative Answers responde preguntas frecuentes usando el manual de usuario, que se subió como archivo (Upload file) a sus Knowledge Sources; el manual se actualizó hace dos semanas y las respuestas siguen mostrando información antigua. ¿Cuál es la causa más probable?",
+      prompt: "Un agente configurado con Generative Answers responde preguntas frecuentes usando el manual de usuario, que se subió como archivo a sus Knowledge Sources; el manual se actualizó hace dos semanas y las respuestas siguen mostrando información antigua. ¿Cuál es la causa más probable?",
       options: [
       "Un archivo subido es una copia estática guardada en Dataverse: hay que volver a subir la versión nueva (o usar una fuente SharePoint, que se consulta en el momento)",
       "Las trigger phrases del topic de Fallback están mal configuradas",
@@ -2519,15 +2519,15 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "single",
-      prompt: "En el sistema CRM-lite, la columna `sit_monto_ponderado` de Oportunidad se define como `sit_monto_estimado * sit_probabilidad / 100` y debe quedar almacenada para poder filtrarse en vistas y flujos. ¿Qué tipo de columna corresponde a ese requisito?",
+      prompt: "En el sistema CRM-lite, la columna `sit_monto_ponderado` de Oportunidad se define como `sit_monto_estimado * sit_probabilidad / 100` y debe ser de tipo Currency, como el monto del que se deriva. ¿Qué tipo de columna corresponde a ese requisito?",
       options: [
-      "Columna Calculada, ya que persiste su valor y referencia campos del mismo registro",
+      "Columna Calculada, ya que admite el tipo Currency y referencia campos del mismo registro",
       "Columna Rollup, ya que agrega valores de registros hijos",
-      "Formula column, ya que siempre es filtrable en OData",
+      "Formula column, ya que admite cualquier tipo de dato, incluido Currency",
       "Columna de texto multilínea con fórmula manual"
       ],
       answer: [0],
-      explanation: "Una Columna Calculada se evalúa en el servidor, se almacena y es filtrable en FetchXML/vistas, además de operar sobre campos del mismo registro como sit_monto_estimado y sit_probabilidad. Rollup agrega desde registros hijos relacionados, y las Formula columns (Power Fx) no son filtrables directamente en consultas OData.",
+      explanation: "Una Columna Calculada admite el tipo Currency y opera sobre campos del mismo registro como sit_monto_estimado y sit_probabilidad. Rollup agrega desde registros hijos relacionados, y una Formula column (Power Fx) no puede producir el tipo Currency: Learn indica que ese tipo de dato no está admitido en columnas de fórmula.",
     },
     {
       type: "single",
@@ -2682,7 +2682,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "single",
-      prompt: "Un arquitecto debe evaluar la solución de Power Platform contra fiabilidad, seguridad, eficiencia de rendimiento, costos y excelencia operacional antes del go-live. ¿Qué marco de referencia está aplicando?",
+      prompt: "Un arquitecto debe evaluar la solución de Power Platform contra fiabilidad, seguridad, excelencia operacional, eficiencia de rendimiento y optimización de la experiencia antes del go-live. ¿Qué marco de referencia está aplicando?",
       options: [
       "Well-Architected Framework para Power Platform",
       "ITIL v4",
@@ -2690,19 +2690,19 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "Un ADR único"
       ],
       answer: [0],
-      explanation: "El Well-Architected Framework agrupa la evaluación en cinco pilares (fiabilidad, seguridad, rendimiento, costos, excelencia operacional). ITIL es un marco de gestión de servicios más amplio, y capacity planning o un ADR cubren solo aspectos parciales de la arquitectura.",
+      explanation: "El Well-Architected Framework agrupa la evaluación en cinco pilares (fiabilidad, seguridad, excelencia operacional, eficiencia de rendimiento y optimización de la experiencia). ITIL es un marco de gestión de servicios más amplio, y capacity planning o un ADR cubren solo aspectos parciales de la arquitectura.",
     },
     {
       type: "single",
-      prompt: "Estás dimensionando el almacenamiento de Dataverse para un cliente con 40 licencias asignadas. ¿Qué regla de capacity planning debes aplicar como base de cálculo?",
+      prompt: "Un cliente solo tiene licencias Power Apps Premium y su integración nocturna corre con un application user. ¿De qué tope de Power Platform requests consume esa integración?",
       options: [
-      "1GB incluido más 0.5GB adicional por cada seat licenciado",
-      "10GB fijos sin importar el número de licencias",
-      "El almacenamiento es ilimitado en cualquier plan",
-      "Solo se factura el almacenamiento de archivos adjuntos, nunca el de tablas"
+      "Del pool no licenciado del tenant: 25.000 peticiones base por 24 horas, sin acumulación por licencia",
+      "De los 40.000 de cada usuario Premium, sumados entre todos",
+      "De ninguno: los application users no consumen peticiones",
+      "De 6.000 por 24 horas, como una licencia de Microsoft 365"
       ],
       answer: [0],
-      explanation: "El capacity planning de Dataverse parte de 1GB incluido más 0.5GB por seat licenciado, además de proyectar el crecimiento y los límites de API calls diarios. Las otras opciones no reflejan el modelo real de licenciamiento.",
+      explanation: "Las identidades no interactivas (application users, SYSTEM) comparten un pool del tenant: con licencias de Power Apps es de 25.000 peticiones base por 24 horas, sin acumulación por licencia. Los 40.000 son por usuario Premium y no se transfieren.",
     },
     {
       type: "single",
@@ -2799,13 +2799,13 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "single",
       prompt: "¿Qué comando debe usar el pipeline de importación para promover una solución a producción siguiendo buenas prácticas de ALM?",
       options: [
-      "pac solution import --managed",
+      "pac solution import --path SIT_SolicitudesInternas_managed.zip (el .zip exportado con pac solution export --managed)",
       "pac solution export --managed",
       "pac pcf push --managed",
       "pac auth create --managed"
       ],
       answer: [0],
-      explanation: "En producción debe importarse la solución administrada para proteger componentes y asegurar una promoción controlada. Export se usa para generar el artefacto y los otros comandos no realizan la importación de soluciones.",
+      explanation: "pac solution import no tiene modificador --managed: la importación es managed porque el .zip se exportó como managed. En producción debe importarse la solución administrada para proteger componentes. Export genera el artefacto y los otros comandos no importan soluciones.",
     },
     {
       type: "multi",
@@ -2847,13 +2847,13 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "single",
       prompt: "El equipo de plataforma quiere eliminar la rotación manual de client secrets en los pipelines que despliegan a Power Platform. ¿Qué mecanismo de autenticación deben priorizar?",
       options: [
-      "Managed Identity en lugar de Service Principal con client secret",
+      "Workload Identity Federation en la service connection en lugar de client secret",
       "Guardar el secreto en una variable de pipeline sin cifrar",
       "Compartir las credenciales del administrador entre todos los pipelines",
       "Usar el mismo Service Connection para DEV y PROD"
       ],
       answer: [0],
-      explanation: "Managed Identity elimina la necesidad de almacenar y rotar secretos manualmente. Guardar secretos sin cifrar, compartir credenciales de admin, o reutilizar el mismo Service Connection entre ambientes son antipatrones de seguridad y gobernanza.",
+      explanation: "Learn recomienda Workload Identity Federation para las service connections de Power Platform Build Tools: no hay secreto que almacenar ni rotar. Guardar secretos sin cifrar, compartir credenciales de admin, o reutilizar el mismo Service Connection entre ambientes son antipatrones de seguridad y gobernanza.",
     },
     {
       type: "single",
@@ -2877,7 +2877,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "Reemplaza la necesidad de Service Connections o secretos de autenticación en cualquier escenario"
       ],
       answer: [0, 1],
-      explanation: "microsoft/powerplatform-actions replica en GitHub Actions las capacidades de los Build Tools de Azure DevOps y automatiza la instalación del pac CLI. No está limitado a Azure DevOps —es específico de GitHub— y sigue requiriendo credenciales (app-id, client-secret, tenant-id) para autenticarse.",
+      explanation: "microsoft/powerplatform-actions replica en GitHub Actions las capacidades de los Build Tools de Azure DevOps y su acción actions-install (la primera del workflow, según Learn) instala Power Platform CLI en el runner. No está limitado a Azure DevOps —es específico de GitHub— y sigue requiriendo credenciales (app-id, client-secret, tenant-id) para autenticarse.",
     },
     {
       type: "single",
@@ -2920,15 +2920,15 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "single",
-      prompt: "Diagnóstico de caso (Partner Microsoft): ¿por qué el caso recomienda usar Managed Identity en producción en vez de secretos de usuario?",
+      prompt: "Diagnóstico de caso (Partner Microsoft): ¿por qué el caso recomienda autenticar el pipeline sin secretos de usuario (Workload Identity Federation en la service connection)?",
       options: [
-      "Porque Managed Identity es más rápida de configurar, sin importar la seguridad",
+      "Porque Workload Identity Federation es más rápida de configurar, sin importar la seguridad",
       "Porque evita almacenar y rotar credenciales de un usuario específico, reduciendo el riesgo de exposición",
       "Porque los secretos de usuario no funcionan en Azure DevOps",
-      "Porque Managed Identity no requiere ningún tipo de permiso"
+      "Porque Workload Identity Federation no requiere ningún tipo de permiso"
       ],
       answer: [1],
-      explanation: "Managed Identity elimina la necesidad de gestionar y rotar credenciales de un usuario/aplicación, reduciendo la superficie de exposición de secretos en el pipeline de producción.",
+      explanation: "Una identidad federada evita almacenar y rotar credenciales de un usuario o una aplicación, reduciendo la exposición de secretos; el service principal sigue necesitando ser usuario de aplicación con rol en cada ambiente.",
       appliesTo: "caso",
     },
     {
@@ -3022,25 +3022,25 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "single",
       prompt: "El equipo quiere activar Predictive Opportunity Scoring en Dynamics 365 Sales. ¿Qué requisito es indispensable antes de que el modelo entregue resultados confiables?",
       options: [
-      "Contar con licencia D365 Sales Premium y un mínimo de 40 oportunidades históricas para entrenar el modelo",
+      "Tener al menos 40 oportunidades ganadas y 40 perdidas, creadas y cerradas dentro de la ventana de entrenamiento (de 3 meses a 2 años)",
       "Tener activado únicamente Unified Routing",
       "Migrar previamente a Customer Service Hub",
       "Configurar un SLA de resolución para cada oportunidad"
       ],
       answer: [0],
-      explanation: "Predictive Opportunity Scoring requiere licencia Premium y un histórico mínimo de oportunidades ganadas/perdidas para entrenar el modelo de ML. Unified Routing, Customer Service Hub y SLA son componentes de servicio al cliente, no de scoring predictivo de ventas.",
+      explanation: "El modelo se entrena con el historial: Learn exige al menos 40 oportunidades ganadas y 40 perdidas creadas y cerradas en la ventana elegida; con Sales Enterprise se activa desde la configuración rápida con 1.500 registros puntuados al mes. Unified Routing, Customer Service Hub y SLA son componentes de servicio al cliente, no de scoring predictivo de ventas.",
     },
     {
       type: "multi",
       prompt: "Un cliente Premium tiene derecho a 50 casos por año por cualquier canal, mientras uno Estándar solo puede usar email. ¿Qué DOS afirmaciones describen correctamente cómo Dynamics 365 Customer Service gestiona esto?",
       options: [
       "Se configura un Entitlement que define casos permitidos, canales disponibles y período de vigencia",
-      "El sistema descuenta automáticamente del entitlement al crearse cada caso del cliente",
+      "El saldo del entitlement baja automáticamente con cada caso, al crearlo o al resolverlo según el campo Decrease Remaining On",
       "Los entitlements se configuran únicamente dentro del SLA sin registro propio",
       "Los canales disponibles por cliente se controlan solo mediante Web Roles del portal"
       ],
       answer: [0, 1],
-      explanation: "El Entitlement es un registro propio que define casos permitidos, canales y vigencia, y Dataverse descuenta automáticamente el consumo al crear cada caso. No es una sub-configuración del SLA, y los Web Roles pertenecen a Power Pages, no al control de canales de soporte en D365.",
+      explanation: "El Entitlement es un registro propio que define casos permitidos, canales y vigencia, y el consumo se descuenta automáticamente al crear o al resolver el caso, según Decrease Remaining On. No es una sub-configuración del SLA, y los Web Roles pertenecen a Power Pages, no al control de canales de soporte en D365.",
     },
     {
       type: "single",
@@ -3114,12 +3114,12 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       prompt: "Una compañía quiere exponer un portal B2C para clientes externos con registro, inicio de sesión y escalabilidad de identidad. ¿Qué proveedor de autenticación debes priorizar?",
       options: [
       "Autenticación local con usuarios administrados manualmente",
-      "Azure AD B2C",
+      "Microsoft Entra External ID",
       "Solo Anonymous Access",
       "Windows Integrated Authentication"
       ],
       answer: [1],
-      explanation: "Azure AD B2C está diseñado para identidades externas y flujos de autoservicio a escala. La autenticación local sirve para escenarios simples, pero ofrece menos flexibilidad y gobierno que B2C.",
+      explanation: "Microsoft Entra External ID es la solución que Learn recomienda hoy para identidades externas en Power Pages (Azure AD B2C dejó de venderse a clientes nuevos el 1 de mayo de 2025). La autenticación local no se recomienda: el portal tendría que gestionar contraseñas, bloqueo y recuperación.",
     },
     {
       type: "single",
@@ -3183,15 +3183,15 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "single",
-      prompt: "Una llamada POST desde JavaScript del portal a `/api/data/v9.1/incidents` devuelve HTTP 403. ¿Cuál es la causa más probable según el diseño de seguridad de la Web API de Power Pages?",
+      prompt: "Una llamada POST desde JavaScript del portal a `/_api/incidents` falla aunque el usuario tiene el table permission correcto. ¿Cuál es la causa más probable según el diseño de seguridad de la Web API de Power Pages?",
       options: [
-      "Falta incluir el header `__RequestVerificationToken` en la petición de escritura",
+      "Falta incluir el header `__RequestVerificationToken` en la petición",
       "El portal no tiene habilitado el CDN",
       "La tabla Caso no tiene columnas indexadas",
       "El usuario no instaló la Progressive Web App"
       ],
       answer: [0],
-      explanation: "Todas las operaciones de escritura (POST, PATCH, DELETE) contra la Web API del portal requieren el token de verificación como protección CSRF; sin él, la respuesta es 403. El CDN, los índices de columnas y la PWA no están relacionados con esta validación de seguridad.",
+      explanation: "Todas las llamadas a la Web API del portal (/_api/) deben incluir el token __RequestVerificationToken como protección CSRF; Learn lo obtiene con shell.getTokenDeferred() en el envoltorio safeAjax. El CDN, los índices de columnas y la PWA no están relacionados con esta validación de seguridad.",
     },
     {
       type: "single",
@@ -3288,13 +3288,13 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "single",
       prompt: "La organización quiere que empleados accedan al bot desde Teams sin volver a autenticarse y que las acciones consulten datos internos según su identidad. ¿Qué diseño debes preferir?",
       options: [
-      "SSO con Azure AD para el bot y sus acciones",
+      "SSO con Microsoft Entra ID para el bot y sus acciones",
       "Usuarios compartidos embebidos en el bot",
       "Publicar el bot como anónimo para simplificar",
       "Desactivar autorización en Dataverse"
       ],
       answer: [0],
-      explanation: "SSO con Azure AD evita doble autenticación y permite aplicar autorización por identidad real del usuario. Usar cuentas compartidas o acceso anónimo compromete auditoría, seguridad y personalización.",
+      explanation: "SSO con Microsoft Entra ID evita doble autenticación y permite aplicar autorización por identidad real del usuario. Usar cuentas compartidas o acceso anónimo compromete auditoría, seguridad y personalización.",
     },
     {
       type: "multi",
@@ -3306,7 +3306,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "Eliminar analítica por agente para centralizar todo"
       ],
       answer: [0, 1],
-      explanation: "Connected Agents permite que un agente principal delegue por coincidencia de dominio a agentes especialistas (deben estar construidos en Copilot Studio), cada uno ejecutando su propio contexto de orquestación. Un topic monolítico o eliminar métricas por agente dificulta operación, ownership y mejora continua.",
+      explanation: "Connected Agents permite que un agente principal delegue por coincidencia de dominio a agentes especialistas (pueden ser agentes de Copilot Studio del mismo entorno, de Microsoft Foundry, del protocolo A2A o del Microsoft 365 Agents SDK), cada uno ejecutando su propio contexto de orquestación. Un topic monolítico o eliminar métricas por agente dificulta operación, ownership y mejora continua.",
     },
     {
       type: "single",
@@ -3358,7 +3358,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "multi",
-      prompt: "Un topic transfiere la conversación a un agente humano de Customer Service Omnichannel. ¿Qué DOS comportamientos son correctos según el diseño nativo de escalamiento de Copilot Studio?",
+      prompt: "Un topic transfiere la conversación a un agente humano de Dynamics 365 Contact Center. ¿Qué DOS comportamientos son correctos según el diseño nativo de escalamiento de Copilot Studio?",
       options: [
       "El historial completo de la conversación se incluye como contexto para el agente humano",
       "El agente humano recibe la transcripción y puede continuar desde donde el bot dejó",
@@ -3372,13 +3372,13 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "single",
       prompt: "Diagnóstico de caso (Banco): el chatbot anterior respondía genérico sin saber quién preguntaba (ej. días de vacaciones). ¿Qué solución del caso personaliza la respuesta según el usuario?",
       options: [
-      "SSO Azure AD + integración con HRIS vía Power Automate",
+      "SSO con Microsoft Entra ID + integración con HRIS vía flujo",
       "Aumentar el número de Knowledge Sources genéricos",
       "Pedir al empleado que escriba su número de identificación en cada pregunta",
       "Un menú de opciones predefinidas sin conexión a datos reales"
       ],
       answer: [0],
-      explanation: "El caso implementa SSO con Azure AD (para saber quién es el usuario) e integración con el HRIS vía Power Automate (para consultar sus datos específicos), personalizando la respuesta.",
+      explanation: "El caso implementa SSO con Microsoft Entra ID (para saber quién es el usuario) e integración con el HRIS vía flujo (para consultar sus datos específicos), personalizando la respuesta.",
       appliesTo: "caso",
     },
     {
@@ -3396,28 +3396,28 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "single",
-      prompt: "Diagnóstico de caso (Banco): se necesita que el bot ofrezca acciones directas (botones) en vez de solo texto plano. ¿Qué componente usa el caso para esto?",
+      prompt: "Diagnóstico de caso (Banco): ¿qué pieza usa el caso para responder preguntas de procedimiento de RR.HH.?",
       options: [
-      "Adaptive Cards",
-      "Un Knowledge Source adicional",
+      "Knowledge con la política interna de RR.HH.",
+      "Una Adaptive Card con botones",
       "Una entidad Closed List",
       "Un topic de Fallback"
       ],
       answer: [0],
-      explanation: "El caso indica explícitamente el uso de Adaptive Cards con botones para acciones directas, en vez de depender solo de respuestas de texto.",
+      explanation: "El caso responde las preguntas de procedimiento con Knowledge sobre la política interna de RR.HH.; los datos personales (como los días de vacaciones) los consulta un Tool contra el HRIS.",
       appliesTo: "caso",
     },
     {
       type: "single",
       prompt: "Diagnóstico de caso (Banco): ¿qué salvaguarda debe tener siempre el bot para no dejar atrapado a un empleado cuya consulta no puede resolver?",
       options: [
-      "El topic 'Escalar a agente' como escape hatch siempre disponible",
+      "Un Skill reutilizable con el procedimiento de escalamiento a un agente humano",
       "Cerrar la conversación automáticamente sin alternativa",
       "Redirigir siempre a la política genérica de RRHH",
       "Repetir la misma respuesta hasta que el usuario se rinda"
       ],
       answer: [0],
-      explanation: "El caso indica tener siempre disponible el topic 'Escalar a agente' como vía de salida cuando el bot no puede resolver la consulta.",
+      explanation: "El caso incluye un Skill reutilizable con el procedimiento de escalamiento a un agente humano, para que el empleado tenga salida cuando el agente no puede resolver su consulta.",
       appliesTo: "caso",
     },
     {
@@ -3463,13 +3463,13 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "multi",
       prompt: "Quieres evitar recursión y diagnosticar mejor un plugin que actualiza el mismo registro. ¿Qué DOS prácticas son correctas?",
       options: [
-      "Verificar IPluginExecutionContext.Depth y salir cuando supere el umbral esperado",
+      "Registrar Filtering Attributes y comparar el valor nuevo con la Pre Image antes de escribir",
       "Usar ITracingService para dejar trazas útiles en ejecución",
       "Capturar todas las excepciones y devolver éxito silencioso",
       "Forzar siempre una llamada adicional al mismo mensaje para confirmar el cambio"
       ],
       answer: [0, 1],
-      explanation: "Controlar Depth reduce bucles involuntarios y el tracing facilita soporte en sandbox. Silenciar errores o forzar llamadas repetidas agrava el problema y oculta la causa real.",
+      explanation: "Filtering Attributes y comparar valores evitan los bucles (Microsoft desaconseja depender de Depth), y el tracing facilita el soporte en sandbox. Silenciar errores o forzar llamadas repetidas agrava el problema y oculta la causa real.",
     },
     {
       type: "single",
@@ -3505,7 +3505,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "El sandbox impide el uso de IOrganizationService dentro del plugin"
       ],
       answer: [0, 1],
-      explanation: "El modo Sandbox obligatorio en la nube bloquea acceso a sistema de archivos, registro de Windows, IPs privadas y WMI. Sí permite llamadas HTTPS salientes a internet y el uso normal de IOrganizationService, que es precisamente el mecanismo de acceso a datos del plugin.",
+      explanation: "El modo Sandbox obligatorio en la nube bloquea el acceso al sistema de archivos y al registro de Windows. Sí permite llamadas HTTP/HTTPS salientes a nombres DNS (no a direcciones IP ni a localhost) y el uso normal de IOrganizationService, que es precisamente el mecanismo de acceso a datos del plugin.",
     },
     {
       type: "single",
@@ -3521,15 +3521,15 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "single",
-      prompt: "Un plugin de PreValidation determina que una solicitud fue pre-aprobada y necesita comunicárselo a un plugin de PreOperation que corre en el mismo step y transacción. ¿Qué mecanismo del SDK deben usar?",
+      prompt: "Un plugin de PreValidation determina que una solicitud fue pre-aprobada y necesita comunicárselo a un plugin de PreOperation de la misma operación. ¿Qué mecanismo del SDK deben usar?",
       options: [
-      "context.SharedVariables como diccionario compartido en el mismo pipeline",
+      "SharedVariables (el de PreOperation lo lee en context.ParentContext.SharedVariables)",
       "Guardar el dato en una variable estática global sin relación con el contexto",
       "Crear un registro temporal en Dataverse y leerlo inmediatamente después",
       "Usar ITracingService para pasar el valor entre plugins"
       ],
       answer: [0],
-      explanation: "SharedVariables está diseñado exactamente para pasar datos entre plugins que corren en el mismo pipeline de ejecución. ITracingService es solo para logging, y usar variables estáticas o registros temporales en Dataverse son soluciones frágiles e innecesarias para este propósito.",
+      explanation: "SharedVariables está diseñado exactamente para pasar datos entre plugins que corren en el mismo pipeline de ejecución. ITracingService es solo para logging, y usar variables estáticas o registros temporales en Dataverse son soluciones frágiles e innecesarias para este propósito. Como PreValidation corre en un contexto distinto, el plugin de una etapa posterior lee el valor en ParentContext.SharedVariables.",
     },
     {
       type: "single",
@@ -3559,15 +3559,15 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "single",
-      prompt: "Diagnóstico de caso (Empresa financiera): ¿por qué el plugin debe verificar 'context.Depth > 1' como buena práctica?",
+      prompt: "Diagnóstico de caso (Empresa financiera): el plugin Pre-Create del préstamo también recibe préstamos creados por una integración y por flujos. ¿Por qué no debe salir con 'if (context.Depth > 1) return;'?",
       options: [
-      "Para evitar recursión infinita si el plugin dispara otra operación que vuelve a activarlo",
+      "Porque esos préstamos llegan con Depth mayor que 1 y quedarían sin validar; Microsoft desaconseja depender de Depth",
       "Para mejorar el rendimiento de las consultas a la API del buró de crédito",
       "Para cumplir un requisito de licenciamiento de Dataverse",
       "Para permitir que el plugin se ejecute en modo asíncrono"
       ],
       answer: [0],
-      explanation: "Verificar la profundidad de ejecución (Depth) evita que el plugin se dispare a sí mismo en un ciclo infinito cuando su propia lógica provoca otra operación sobre el mismo registro.",
+      explanation: "Una operación iniciada por otra extensión o un flujo puede llegar con Depth > 1: un guard por Depth dejaría préstamos sin validar, justo lo que el caso quiere impedir.",
       appliesTo: "caso",
     },
     {
@@ -4048,28 +4048,28 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "single",
-      prompt: "Diagnóstico de caso (Retailer): ¿por qué nunca se debe hacer ClearCollect dentro de Gallery.Items?",
+      prompt: "Diagnóstico de caso (Retailer): ¿por qué no se puede usar ClearCollect dentro de Gallery.Items?",
       options: [
-      "Porque se ejecuta en cada render de la galería, multiplicando innecesariamente las llamadas",
+      "Porque ClearCollect solo se admite en fórmulas de comportamiento (como OnSelect) y Items es una propiedad de datos: se usa una fórmula delegable o una named formula",
       "Porque Gallery.Items no admite fórmulas",
       "Porque ClearCollect solo funciona en App.OnStart",
       "Porque rompe la delegación de todas las consultas"
       ],
       answer: [0],
-      explanation: "El caso advierte explícitamente que ClearCollect dentro de Gallery.Items se ejecuta en cada render, generando llamadas repetidas e innecesarias que degradan el rendimiento.",
+      explanation: "Según Learn, Collect, Clear y ClearCollect solo se pueden usar en fórmulas de comportamiento; en Items la galería debe leer el origen con una fórmula delegable o una named formula.",
       appliesTo: "caso",
     },
     {
       type: "single",
       prompt: "Diagnóstico de caso (Retailer): ¿qué herramienta usa el caso para medir el tiempo de cada llamada dentro de la Canvas App y diagnosticar el problema de carga?",
       options: [
-      "Monitor (Alt+Shift+M en Canvas App)",
+      "Live monitor (Advanced tools > Open live monitor en Power Apps Studio)",
       "El Solution Checker",
       "Power BI Desktop",
       "El editor de Power Fx sin herramientas adicionales"
       ],
       answer: [0],
-      explanation: "El caso indica usar Monitor (Alt+Shift+M) para medir tiempos de cada llamada y así identificar cuáles eran los cuellos de botella de rendimiento.",
+      explanation: "El caso indica usar Live monitor (Advanced tools > Open live monitor) para medir los tiempos de cada llamada e identificar los cuellos de botella.",
       appliesTo: "caso",
     },
     {
@@ -4139,7 +4139,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "single",
       prompt: "Durante desarrollo quieres probar rápidamente un PCF en un ambiente y luego incluirlo formalmente en una solución. ¿Qué secuencia es la más correcta?",
       options: [
-      "pac pcf push para iterar y luego pac solution add-component para empaquetarlo",
+      "pac pcf push para iterar y luego pac solution add-reference en un proyecto de solución para empaquetarlo",
       "Editar directamente la base de datos de Dataverse y publicar",
       "Copiar los archivos TypeScript al navegador del usuario",
       "Usar solo Chrome DevTools sin desplegar el control"
@@ -4163,7 +4163,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "single",
       prompt: "Tu equipo está decidiendo entre un PCF de tipo Standard y uno de tipo Virtual (React) para un control destinado a Model-Driven Apps modernas. ¿Qué ventaja principal ofrece el Virtual PCF?",
       options: [
-      "Usa el React ya cargado en el host, reduciendo el bundle en 70-80% al no empaquetar React propio",
+      "Usa el React y Fluent UI del host (platform libraries), lo que reduce el tamaño del bundle al no empaquetar React propio",
       "Permite ejecutar código fuera del Sandbox de Dataverse",
       "Elimina la necesidad de declarar propiedades en el manifest",
       "Solo funciona en Canvas Apps, nunca en Model-Driven Apps"
@@ -4252,99 +4252,99 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
   28: [
     {
       type: "single",
-      prompt: "Vas a construir una experiencia SPA embebida en Power Pages con React y TypeScript. ¿Qué combinación describe mejor la base técnica del proyecto?",
+      prompt: "Inicializaste tu Code App y en la raíz del proyecto apareció `power.config.json`. Un compañero propone leerlo desde `App.tsx` para saber a qué entorno y conexiones apunta la app. ¿Qué le respondes?",
       options: [
-      "index.html, main.tsx y empaquetado tipo Vite",
-      "Solo Liquid templates sin frontend",
-      "Power BI paginado como host",
-      "Una solución de plugins C# sin recursos web"
+      "Que es el archivo donde la app guarda el token de Microsoft Entra ID, y por eso hay que leerlo antes de cada llamada a Dataverse",
+      "Que contiene los metadatos de la app (entorno, data sources, conexiones) que usan el Power Apps CLI y la client library para conectar y publicar; la lógica de la app no necesita leerlo ni editarlo",
+      "Que equivale al `ControlManifest.Input.xml` de un PCF y hay que declarar ahí cada propiedad que la app expone",
+      "Que es el manifiesto de la solución: si no se edita a mano, `pa app push` no puede agregar la app a ninguna solución"
       ],
-      answer: [0],
-      explanation: "Los Code Sites de Power Pages siguen un enfoque moderno SPA con punto de entrada HTML y bootstrap en main.tsx. Liquid y plugins pueden complementar, pero no sustituyen esa estructura de frontend.",
+      answer: [1],
+      explanation: "Según la arquitectura de Code Apps en Learn, `power.config.json` lo genera la client library y contiene metadatos que el CLI y la client library usan para las conexiones y para publicar; tu lógica no necesita interactuar con él. Los tokens no existen en tu código porque el host de Power Apps gestiona la autenticación, no es un manifiesto de PCF y la solución se elige con `pa app push --solution-id` o la solución preferida.",
     },
     {
       type: "single",
-      prompt: "La app necesita autenticar al usuario frente a Microsoft Entra ID y obtener tokens para llamadas protegidas desde el frontend. ¿Qué librería encaja mejor?",
+      prompt: "Para cambiar el Estado de una solicitud, un desarrollador lee el registro con `get(id)`, modifica `sit_estado` en ese mismo objeto y lo pasa completo a `update(id, registro)`. Desde entonces, cada cambio de estado dispara flujos que dependen de otras columnas y la auditoría muestra cambios en campos que nadie tocó. ¿Cuál es la corrección?",
       options: [
-      "MSAL.js",
-      "jQuery UI",
-      "FakeXrmEasy",
-      "Fluent Assertions"
+      "Usar `fetch` contra la Web API de Dataverse en lugar del servicio generado, que no admite actualizaciones parciales",
+      "Llamar a `delete(id)` y luego a `create(registro)` con los valores nuevos para evitar la actualización",
+      "Editar el servicio generado en `src/generated/` para que filtre las columnas antes de enviarlas",
+      "Pasar a `update` un objeto nuevo que lleve solo las columnas que cambian, por ejemplo `{ sit_estado: valorEnProceso }`"
       ],
-      answer: [0],
-      explanation: "MSAL.js está pensada para autenticación y adquisición de tokens en aplicaciones web modernas. Las otras librerías no gestionan identidad ni flujos OAuth para el navegador.",
+      answer: [3],
+      explanation: "Learn indica que al actualizar solo se incluyan las propiedades que cambian: si se envía el registro leído, se actualizan todas las columnas aunque su valor no cambie, y esas actualizaciones falsas disparan lógica de negocio y corrompen la auditoría. El servicio generado sí acepta un objeto parcial; borrar y recrear pierde el id, y `src/generated/` no se edita.",
     },
     {
       type: "multi",
-      prompt: "Tu SPA consumirá Power Pages Web API para leer y actualizar datos. ¿Qué DOS condiciones debes cumplir para que el diseño sea correcto y seguro?",
+      prompt: "Vas a diseñar una Code App sobre Dataverse con el servicio generado por `pa app add data-source --connector dataverse`. ¿Qué DOS requisitos del diseño NO puedes cubrir todavía con ese servicio, según la documentación vigente?",
       options: [
-      "Configurar Table Permissions acordes al usuario y la tabla",
-      "Permitir desde el sitio los headers o configuraciones necesarias para el escenario de frontend",
-      "Exponer todas las tablas de Dataverse por conveniencia",
-      "Confiar solo en ocultar botones cuando el usuario no deba editar"
+      "Una consulta construida en FetchXML para un reporte de solicitudes",
+      "Mostrar la etiqueta formateada de una columna Choice en lugar de su valor numérico",
+      "Una columna lookup polimórfica (por ejemplo, de tipo Customer, que apunta a Account o a Contact)",
+      "Delegar en Dataverse el filtrado, el orden y el `top` de una lista con paginación"
       ],
-      answer: [0, 1],
-      explanation: "La seguridad real depende de Table Permissions y de la configuración HTTP adecuada del sitio para el frontend. Exponer de más o esconder botones sin permisos server-side deja brechas de autorización.",
+      answer: [0, 2],
+      explanation: "La página de Learn sobre Dataverse en Code Apps lista como todavía no soportados los lookups polimórficos, el CRUD de definiciones de tabla, FetchXML y las claves alternativas. Las etiquetas formateadas de opciones, la delegación de Filter, Sort y Top y la paginación sí están en la lista de escenarios soportados.",
     },
     {
       type: "single",
-      prompt: "Publicaste una nueva versión del Code Site y ahora necesitas subirla al ambiente destino. ¿Qué comando se alinea con el despliegue de Power Pages Code Apps?",
+      prompt: "La primera vez que publicaste la Code App ejecutaste `pa app push` sin `--solution-id` y el entorno no tenía solución preferida, así que la app no quedó en `SIT Solicitudes Internas`. ¿Qué haces para que pase a esa solución?",
       options: [
-      "pac pages upload",
-      "pac solution export --managed",
-      "pac pcf init",
-      "pac data export"
+      "Volver a ejecutar `pa app push` sin parámetros: en cada publicación el CLI vuelve a evaluar la solución preferida y mueve la app",
+      "Ejecutar `pa app push --solution-id \"SIT Solicitudes Internas\"` con el nombre visible de la solución",
+      "Ejecutar `pa app push --solution-id <GUID>` con el Id que muestra `pa solution list`, o agregarla desde la solución con **Add existing** > **App** > **Code app**",
+      "Activar Power Platform Git integration en el entorno para que sincronice la app con la solución"
       ],
-      answer: [0],
-      explanation: "pac pages upload es el comando orientado a publicar el sitio de Power Pages. Exportar soluciones o inicializar PCF son tareas distintas del despliegue del frontend embebido.",
+      answer: [2],
+      explanation: "Según la guía de ALM de Learn, en publicaciones posteriores un `pa app push` sin `--solution-id` no cambia la solución de la app, y con `--solution-id` la agrega a esa solución. El CLI exige el GUID (no acepta nombres) y una app ya publicada también se agrega con **Add existing** > **App** > **Code app**. Code Apps no soportan Power Platform Git integration.",
     },
     {
       type: "single",
-      prompt: "En local todo funciona, pero publicado el navegador bloquea una llamada por políticas de origen. ¿Qué área debes revisar primero?",
+      prompt: "Tu Code App usa una tabla de Dataverse y además el conector Office 365 Users, y debe llegar a TEST y PROD con Power Platform Pipelines sin tocar nada a mano en cada entorno. ¿Cómo agregas los data sources?",
       options: [
-      "CORS y headers configurados para Power Pages",
-      "El color del tema Material",
-      "La licencia de Power BI Pro",
-      "Los Quick Finds de Dataverse"
+      "Office 365 Users con `--connection-ref <nombre-lógico> --solution-id <GUID>` (una connection reference de la solución); Dataverse nativo no usa connection ID ni connection reference",
+      "Ambos con el `--connection-id` de tu conexión personal y luego editar `power.config.json` en cada entorno",
+      "Ambos con connection reference, porque Dataverse nativo también necesita una para cambiar de entorno",
+      "Office 365 Users con `--connection-ref` usando el nombre visible de la connection reference, que es el que muestra Power Apps"
       ],
       answer: [0],
-      explanation: "Los problemas entre dominios normalmente se resuelven revisando CORS, headers y políticas del sitio publicado. El resto de opciones no explica un bloqueo de navegador por origen.",
+      explanation: "Learn recomienda agregar los data sources de conectores con una connection reference (por su nombre lógico, el que devuelve `pa connection list-references`) para que la solución sea portable entre Dev, Test y Prod. La referencia del CLI aclara que Dataverse nativo no usa connection ID, connection reference ni dataset. Una conexión personal ata la app a un usuario y un entorno.",
     },
     {
       type: "single",
       prompt: "Un desarrollador modifica manualmente un archivo dentro de `src/generated/services/` de una Code App para agregar lógica personalizada. ¿Qué problema tendrá ese cambio?",
       options: [
-      "Se perderá la próxima vez que se ejecute `pac code add-data-source`, ya que la carpeta se regenera completamente",
+      "Se perderá la próxima vez que se ejecute `pa app add data-source` o `pa app refresh data-source`, ya que la carpeta se regenera",
       "El cambio se aplicará automáticamente a todos los ambientes sin necesidad de push",
-      "No hay ningún riesgo porque `/generated/` no se sobreescribe nunca",
-      "El cambio romperá la autenticación MSAL de la app"
+      "No hay ningún riesgo porque `src/generated/` no se sobreescribe nunca",
+      "El cambio se publicará en el entorno sin necesidad de `npm run build`"
       ],
       answer: [0],
-      explanation: "La carpeta `/generated/` se sobreescribe completamente con cada `pac code add-data-source`, por lo que cualquier edición manual se pierde. La práctica correcta es crear wrappers propios que importen desde `/generated/` sin modificarlo directamente.",
+      explanation: "La carpeta `src/generated/` se sobrescribe con cada `pa app add data-source` o `pa app refresh data-source`, por lo que cualquier edición manual se pierde. La práctica correcta es crear wrappers propios que importen desde `src/generated/` sin modificarlo directamente.",
     },
     {
       type: "single",
-      prompt: "Un cliente pide que la Code App recién construida funcione también en Power Apps Mobile para el equipo de campo. ¿Qué debes responder según las limitaciones actuales (Preview) de Code Apps?",
+      prompt: "El equipo de soporte abre la Code App recién publicada desde Power Apps for Windows (el cliente de escritorio) y no carga. Desde el navegador, con el enlace que devolvió `pa app push`, funciona. ¿Qué les indicas?",
       options: [
-      "Code Apps no soportan Power Apps Mobile; para usuarios móviles se debe usar una Canvas App con los mismos datos de Dataverse",
-      "Code Apps funcionan de forma nativa en Power Apps Mobile sin configuración adicional",
-      "Solo es necesario instalar el SDK de MSAL.js para habilitar mobile",
-      "El soporte mobile se habilita con `pac code add-data-source --mobile`"
+      "Que el administrador debe activar **Enable code apps** también en el cliente de escritorio",
+      "Que hay que volver a publicar con `pa app push --solution-id <GUID>` para que el cliente de escritorio reconozca la app",
+      "Que hay que agregar la tabla de Dataverse con una connection reference, porque el cliente de escritorio no admite Dataverse nativo",
+      "Que Code Apps no son compatibles con Power Apps for Windows: deben abrirla desde el navegador con su enlace de Power Apps"
       ],
-      answer: [0],
-      explanation: "Las Code Apps en Preview no soportan Power Apps Mobile; el camino recomendado para usuarios móviles es una Canvas App conectada a los mismos datos Dataverse. No existe un flag ni SDK que habilite soporte mobile nativo actualmente.",
+      answer: [3],
+      explanation: "La sección de limitaciones de Learn indica que las Code Apps no son compatibles con Power Apps for Windows. **Enable code apps** es una opción del entorno en el Power Platform admin center, no del cliente; la solución y las connection references no cambian el cliente donde se ejecuta la app. Al publicar, `pa app push` devuelve una URL de Power Apps para ejecutarla en el navegador.",
     },
     {
       type: "multi",
       prompt: "Una Code App se despliega dentro de Power Platform en lugar de como una SPA externa. ¿Qué DOS beneficios de gobernanza hereda automáticamente sin código adicional?",
       options: [
       "Las DLP Policies del administrador bloquean conectores no autorizados",
-      "Auditoría de acceso sobre quién abrió la app y cuándo",
+      "Conditional Access por app configurado por el administrador",
       "Optimización automática del código TypeScript sin necesidad de build",
       "Generación automática de tests unitarios para los componentes React"
       ],
       answer: [0, 1],
-      explanation: "Al vivir dentro de Power Platform, la Code App hereda DLP Policies y auditoría de acceso de la plataforma gestionada sin escribir código adicional. La optimización del build y la generación de tests no son beneficios de gobernanza de la plataforma, sino tareas del desarrollo normal.",
+      explanation: "Al vivir dentro de Power Platform, la Code App hereda la aplicación de las políticas de datos (DLP) al iniciar la app y el Conditional Access por app de la plataforma gestionada sin escribir código adicional. La optimización del build y la generación de tests no son beneficios de gobernanza de la plataforma, sino tareas del desarrollo normal.",
     },
     {
       type: "single",
@@ -4489,25 +4489,25 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "single",
       prompt: "Una página del portal consulta un catálogo de países que cambia muy poco, y esa consulta se repite en cada carga de página con un costo notable. ¿Qué mecanismo de Power Pages reduce ese costo sin cambiar la arquitectura del portal?",
       options: [
-      "Liquid Cache con `{% cache %}...{% endcache %}` y un timeout adecuado",
+      "Apoyarse en la caché del servidor de Power Pages (los datos de Dataverse se cachean y se refrescan en hasta 15 minutos) y, si se activa la caché de cabecera y pie, excluir solo lo que cambia por usuario con `{% substitution %}`",
       "Desactivar las Table Permissions de la tabla de catálogos",
       "Convertir la página en un Web File estático",
       "Aumentar el límite de delegación de la Canvas App relacionada"
       ],
       answer: [0],
-      explanation: "Liquid Cache almacena el resultado de una consulta Liquid durante el tiempo configurado, evitando consultar Dataverse en cada request para datos que cambian poco. Desactivar Table Permissions comprometería la seguridad, y las otras opciones no aplican a este escenario de Power Pages.",
+      explanation: "Power Pages ya cachea en el servidor los datos de Dataverse y la configuración; no existe una etiqueta Liquid `{% cache %}`. Desactivar Table Permissions comprometería la seguridad, y las otras opciones no aplican a este escenario.",
     },
     {
       type: "single",
       prompt: "El equipo de marketing pide mejorar el SEO del portal público antes del lanzamiento. ¿Qué práctica de Power Pages con Liquid contribuye directamente a ese objetivo?",
       options: [
       "Generar meta-tags dinámicos como título y descripción con Liquid en el `<head>` de cada página",
-      "Deshabilitar el sitemap.xml automático del portal",
+      "Quitar la Description de las páginas para que el buscador genere la suya",
       "Ocultar todas las páginas del menú de navegación",
       "Forzar que todas las páginas requieran autenticación B2C"
       ],
       answer: [0],
-      explanation: "Los meta-tags dinámicos generados con Liquid (título, descripción, Open Graph) son una práctica directa de SEO en Power Pages. Deshabilitar el sitemap, ocultar páginas del menú o forzar autenticación en todo el sitio perjudican la indexación y el acceso público.",
+      explanation: "Los meta-tags dinámicos generados con Liquid (título, descripción, Open Graph) son una práctica directa de SEO en Power Pages. Quitar la Description, ocultar páginas del menú o forzar autenticación en todo el sitio perjudican la indexación y el acceso público.",
     },
     {
       type: "single",
@@ -4552,13 +4552,13 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "single",
       prompt: "Diagnóstico de caso (SaaS multi-país): un usuario se autentica con B2C pero no ve ningún registro porque el email del token no coincide con ningún Contact existente. ¿Qué configuración del caso soluciona esto?",
       options: [
-      "Configurar el claim 'email' en el User Flow y activar la creación automática de Contact en el portal",
+      "Usar invitaciones para los clientes existentes o activar Contact mapping with email, y unir o corregir el Contact duplicado",
       "Pedir al usuario que se registre con un email distinto cada vez",
       "Eliminar la validación de email por completo",
-      "Crear manualmente cada Contact antes de que el usuario se registre"
+      "Crear un Contact nuevo para el usuario y copiarle a mano sus registros"
       ],
       answer: [0],
-      explanation: "El caso indica configurar el claim 'email' en el User Flow y activar el Site Setting 'Authentication/Registration/Enabled' para que el portal cree automáticamente el Contact al primer login.",
+      explanation: "El módulo indica que el portal creó un Contact nuevo en lugar de usar el que ya existía con ese correo: se resuelve con invitaciones para clientes existentes o activando Contact mapping with email (desactivado por defecto), y uniendo o corrigiendo el Contact duplicado.",
       appliesTo: "caso",
     },
     {
@@ -4658,19 +4658,19 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "Usar siempre el mismo artifact de la versión fallida para el rollback"
       ],
       answer: [0],
-      explanation: "Un rollback plan sólido conserva el artifact de la versión anterior y documenta los pasos manuales complementarios (restaurar datos, revertir configuraciones), permitiendo ejecutar la reversión en menos de 30 minutos. Confiar en la memoria del equipo o en el despliegue siguiente no es una estrategia confiable.",
+      explanation: "Un rollback plan sólido conserva el artifact y el código de la versión anterior y documenta los pasos manuales complementarios (restaurar datos, revertir configuraciones). Como una actualización debe tener un número de versión mayor que la instalada, la versión anterior se reconstruye con un número nuevo y se importa como Upgrade, idealmente en menos de 30 minutos. Confiar en la memoria del equipo o en el despliegue siguiente no es una estrategia confiable.",
     },
     {
       type: "multi",
       prompt: "El equipo de operaciones quiere detectar problemas en producción antes de que los usuarios los reporten. ¿Qué DOS prácticas de monitoreo y observabilidad son adecuadas según el diseño del proyecto multicapa?",
       options: [
       "Configurar alertas de Azure Monitor sobre mensajes acumulados en la Dead Letter Queue de Service Bus",
-      "Habilitar Plugin Trace Log en modo 'Exception Only' con revisión periódica",
+      "Activar Plugin Trace Log en modo Exception mientras se investiga un fallo y revisarlo antes de 24 horas (los registros se borran después)",
       "Desactivar todas las alertas para reducir el ruido de notificaciones",
       "Revisar Analytics de Copilot Studio solo una vez al año"
       ],
       answer: [0, 1],
-      explanation: "Las alertas sobre la Dead Letter Queue y el Plugin Trace Log en modo Exception Only con revisión periódica permiten detectar problemas proactivamente. Desactivar alertas o revisar Analytics solo anualmente van en contra del objetivo de observabilidad continua.",
+      explanation: "Las alertas sobre la Dead Letter Queue y el Plugin Trace Log en modo Exception (que Learn recomienda activar solo mientras se depura, porque consume almacenamiento y sus registros se borran a las 24 horas) permiten detectar y diagnosticar problemas. Desactivar alertas o revisar Analytics solo anualmente van en contra del objetivo de observabilidad continua.",
     },
     {
       type: "single",
@@ -4801,15 +4801,15 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "single",
-      prompt: "Como arquitecto, completas el cuestionario oficial de Microsoft en aka.ms/ppswa y obtienes un scorecard con recomendaciones priorizadas para el tenant. ¿A qué marco corresponde esta evaluación?",
+      prompt: "Como arquitecto, completas la herramienta de evaluación oficial de Microsoft (aka.ms/powa/assessment) para un workload y obtienes recomendaciones priorizadas. ¿A qué marco corresponde esta evaluación?",
       options: [
-      "Well-Architected Framework de Power Platform",
+      "Power Platform Well-Architected",
       "TOGAF ADM completo",
       "El Innovation Backlog del CoE",
       "El Environment Request Process"
       ],
       answer: [0],
-      explanation: "El Well-Architected Framework de Power Platform se evalúa mediante el cuestionario oficial de aka.ms/ppswa y genera un scorecard con recomendaciones priorizadas sobre los 5 pilares. TOGAF es un marco de referencia contextual más genérico, y las otras opciones son procesos operativos del CoE, no marcos de evaluación arquitectónica.",
+      explanation: "Power Platform Well-Architected se evalúa con la herramienta de aka.ms/powa/assessment sobre sus 5 pilares (Reliability, Security, Operational Excellence, Performance Efficiency y Experience Optimization) y señala dónde enfocar el esfuerzo. TOGAF es un marco de referencia contextual más genérico, y las otras opciones son procesos operativos del CoE, no marcos de evaluación arquitectónica.",
     },
     {
       type: "single",
@@ -4924,7 +4924,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "Portals Web API"
       ],
       answer: [0],
-      explanation: "Managed Environments ofrece Advisor, límites de compartición y capacidades orientadas a gobierno operacional. Las otras opciones no administran ambientes ni políticas a escala.",
+      explanation: "Managed Environments ofrece límites de compartición, el detalle completo de las recomendaciones de la página Actions del admin center (antes Advisor) y otras capacidades orientadas a gobierno operacional. Las otras opciones no administran ambientes ni políticas a escala.",
     },
     {
       type: "multi",
@@ -4940,15 +4940,15 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "single",
-      prompt: "El equipo quiere acelerar pipelines y buenas prácticas de ALM reutilizando un marco preparado para Power Platform. ¿Qué componente del ecosistema CoE es más relevante?",
+      prompt: "El equipo quiere automatizar la promoción de soluciones entre ambientes con la capacidad que Microsoft recomienda hoy, sin construir el proceso desde cero. ¿Qué opción es la más adecuada?",
       options: [
-      "CoE ALM Accelerator",
-      "Power BI Goals",
+      "Pipelines in Power Platform",
+      "CoE ALM Accelerator, para estrenar un marco nuevo del ecosistema CoE",
       "Azure Bastion",
       "Dataverse Search"
       ],
       answer: [0],
-      explanation: "ALM Accelerator ayuda a estructurar promoción de soluciones y flujos de trabajo DevOps sobre Power Platform. Las demás opciones no están diseñadas específicamente para ese propósito.",
+      explanation: "Pipelines in Power Platform es la experiencia de ALM integrada en el producto, con soporte de Microsoft; si se necesita más control, Build Tools o GitHub Actions. El ALM Accelerator del ecosistema CoE está en desuso: no recibe funciones nuevas y sus issues ya no se revisan. Azure Bastion y Dataverse Search no están diseñados para ese propósito.",
     },
     {
       type: "single",
@@ -4964,7 +4964,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "single",
-      prompt: "Al instalar el CoE Starter Kit en un tenant de 2,000 usuarios, el flujo 'Admin | Sync Template v4' tarda varias horas en su primera ejecución. ¿Qué paquete del CoE contiene este flujo y por qué es obligatorio instalarlo primero?",
+      prompt: "Al instalar el CoE Starter Kit en un tenant de 2,000 usuarios, el flujo 'Admin | Sync Template v4 (Driver)' tarda varias horas en su primera ejecución. ¿Qué paquete del CoE contiene este flujo y por qué es obligatorio instalarlo primero?",
       options: [
       "Core Components, porque genera el inventario del que dependen los demás paquetes",
       "Nurture Components, porque gestiona el training path de los makers",
@@ -4984,19 +4984,19 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "Power BI CoE Dashboard"
       ],
       answer: [0],
-      explanation: "App Quarantine desactiva apps que no superan el proceso de compliance tras múltiples notificaciones sin respuesta del owner, evitando la acumulación indefinida de apps abandonadas. Las otras opciones son procesos distintos: evaluación de conocimiento del maker, solicitud de nuevos ambientes y visualización de datos respectivamente.",
+      explanation: "App Quarantine desactiva apps que no superan el proceso de compliance tras múltiples notificaciones sin respuesta del owner, evitando la acumulación indefinida de apps abandonadas. Las otras opciones son procesos distintos: evaluación de la solución que el maker planea (público, datos y soporte), solicitud de nuevos ambientes y visualización de datos respectivamente.",
     },
     {
       type: "multi",
       prompt: "El CIO quiere reducir el shadow IT fomentando una comunidad activa de makers y dando visibilidad temprana de ideas de automatización antes de que cada área construya su propia solución. ¿Qué DOS componentes del CoE Starter Kit apoyan directamente ese objetivo?",
       options: [
-      "Nurture Components, con el App Catalog para que los makers descubran soluciones existentes",
+      "Nurture Components, con su catálogo de plantillas, el Video hub y los eventos Training in a day para la comunidad de makers",
       "Innovation Backlog, con scoring de impacto vs esfuerzo para priorizar ideas propuestas",
-      "Core Components, porque solo sincroniza el inventario técnico",
+      "Core Components, porque su función principal es inventariar el tenant",
       "Governance Components, porque solo ejecuta el Compliance Process de apps sin uso"
       ],
       answer: [0, 1],
-      explanation: "El App Catalog de Nurture Components permite a los makers descubrir apps existentes antes de construir algo nuevo, y el Innovation Backlog formaliza y prioriza las ideas propuestas. Core y Governance Components cumplen roles de inventario y cumplimiento, no de comunidad o priorización de ideas.",
+      explanation: "Nurture Components desarrolla la comunidad de makers (plantillas y buenas prácticas, Video hub, Training in a day, encuestas), y el Innovation Backlog formaliza y prioriza las ideas propuestas. Core y Governance Components cumplen roles de inventario y cumplimiento (el App Catalog, por cierto, pertenece a Core), no de comunidad o priorización de ideas.",
     },
     {
       type: "single",
@@ -5016,7 +5016,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       prompt: "Diagnóstico de caso (Multinacional): 340 apps sin uso fueron archivadas sin que un administrador tuviera que revisarlas una por una. ¿Qué proceso del CoE logró esto?",
       options: [
       "Compliance Process, contactando automáticamente a los owners",
-      "Maker Assessment, evaluando el nivel técnico de cada maker",
+      "Maker Assessment, preguntando a cada maker por la solución que planea",
       "Environment Request Process, aprobando nuevos ambientes",
       "El Power BI CoE Dashboard, que solo visualiza datos"
       ],
@@ -5043,11 +5043,11 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       options: [
       "Environment Request Process con aprobación y provisioning automatizado",
       "El Compliance Process de apps sin uso",
-      "El Maker Assessment de nivel de conocimiento",
-      "El App Catalog de Nurture Components"
+      "El Maker Assessment de las soluciones que planean los makers",
+      "El App Catalog de Core Components"
       ],
       answer: [0],
-      explanation: "El Environment Request Process reemplaza el ticket informal a IT por un formulario con aprobación del arquitecto y ejecución automática del script de Landing Zone, reduciendo drásticamente el tiempo de espera.",
+      explanation: "El Environment Request Process reemplaza el ticket informal a IT por una solicitud formal (en el kit, desde la app CoE Maker Command Center) que el administrador aprueba y que, al aprobarse, aprovisiona el ambiente automáticamente (flujo Env Request | Create approved environment), reduciendo drásticamente el tiempo de espera.",
       appliesTo: "caso",
     },
     {
@@ -5135,7 +5135,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "Cross-tenant connectors nativos de Dataverse"
       ],
       answer: [0],
-      explanation: "El modelo Hub-and-Spoke centraliza componentes compartidos en el tenant hub mientras los spokes (subsidiarias) heredan políticas pero conservan autonomía local. Los conectores de Dataverse no cruzan tenants de forma nativa, y las otras opciones no describen esta relación centro-periferia.",
+      explanation: "El modelo Hub-and-Spoke centraliza componentes compartidos en el tenant hub mientras los spokes (subsidiarias) heredan políticas pero conservan autonomía local. Las otras opciones no describen esta relación centro-periferia.",
     },
     {
       type: "multi",
@@ -5144,22 +5144,22 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "Sharing limits para restringir a cuántas personas se puede compartir una app",
       "IP Firewall para restringir el acceso por red corporativa",
       "Desactivar el Solution Checker para acelerar las importaciones",
-      "Eliminar el Weekly Digest porque genera ruido en el correo del admin"
+      "Desactivar las Weekly usage insights porque generan ruido en el correo del admin"
       ],
       answer: [0, 1],
-      explanation: "Sharing limits e IP Firewall son capacidades de Managed Environments que refuerzan la gobernanza en producción. Desactivar el Solution Checker o eliminar el Weekly Digest reduce el control justo en el ambiente donde más se necesita.",
+      explanation: "Sharing limits e IP Firewall son capacidades de Managed Environments que refuerzan la gobernanza en producción. Desactivar el Solution Checker o desactivar las Weekly usage insights reduce el control justo en el ambiente donde más se necesita.",
     },
     {
       type: "single",
-      prompt: "Un flujo del tenant corporativo necesita acceder a datos de Dataverse que residen en el tenant de una subsidiaria. El equipo intenta usar un conector nativo de Dataverse directamente entre ambos tenants y falla. ¿Cuál es la causa y la solución correcta?",
+      prompt: "Un flujo del tenant corporativo necesita acceder a datos de Dataverse que residen en el tenant de una subsidiaria. El flujo funcionaba, pero desde que seguridad cambió un ajuste del tenant falla. ¿Cuál es la causa y la solución correcta?",
       options: [
-      "Los conectores de Dataverse no cruzan límites de tenant de forma nativa; se debe usar APIM como intermediario con credenciales propias en cada tenant",
+      "Está activado el tenant isolation (Restrict cross-tenant connections) sin una excepción para el tenant de la subsidiaria; hay que añadir una excepción con su Tenant ID y la dirección correcta, o integrar mediante una capa como APIM o Service Bus",
       "El problema es que no se configuró un Landing Zone en el tenant subsidiaria",
       "El problema es que faltó activar Customer-Managed Keys en el tenant hub",
       "El problema es que el conector de Dataverse requiere Managed Environments activado en ambos tenants"
       ],
       answer: [0],
-      explanation: "Los conectores nativos de Dataverse no cruzan límites de tenant; la integración cross-tenant requiere un intermediario como Azure API Management, donde el flujo en el tenant A llama a una API que a su vez accede al tenant B con sus propias credenciales. Landing Zone, CMK y Managed Environments no resuelven esta limitación de plataforma.",
+      explanation: "Con tenant isolation desactivado (valor por defecto), un conector basado en Microsoft Entra ID puede conectar con otro tenant si el usuario presenta credenciales válidas. Al activarlo, se bloquean las conexiones de entrada y salida que no estén en la lista de excepciones. Landing Zone, CMK y Managed Environments no controlan las conexiones cross-tenant.",
     },
     {
       type: "single",
@@ -5310,7 +5310,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "Monitor"
       ],
       answer: [0],
-      explanation: "El patrón Human Interaction permite que la orquestación espere una aprobación humana durante días manteniendo el estado persistido en Azure Storage. Fan-out/Fan-in paraleliza trabajo y consolida resultados, Function Chaining encadena pasos secuenciales, y Monitor hace polling hasta que se cumpla una condición; ninguno modela espera de aprobación humana.",
+      explanation: "El patrón Human Interaction permite que la orquestación espere una aprobación humana durante días manteniendo el estado persistido en el backend de almacenamiento de Durable (Azure Storage o Durable Task Scheduler). Fan-out/Fan-in paraleliza trabajo y consolida resultados, Function Chaining encadena pasos secuenciales, y Monitor hace polling hasta que se cumpla una condición; ninguno modela espera de aprobación humana.",
     },
     {
       type: "multi",
@@ -5395,13 +5395,13 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "single",
       prompt: "Necesitas llevar datos de Dataverse a un entorno analítico continuo sin construir ETL batch manual. ¿Qué capacidad debes priorizar?",
       options: [
-      "Synapse Link for Dataverse",
+      "Link to Microsoft Fabric (o Azure Synapse Link for Dataverse si la copia debe estar en tu propia cuenta de almacenamiento)",
       "Exportar CSV diarios desde una vista",
       "Copiar registros manualmente a Excel",
       "Plugins síncronos que escriban cada cambio en PDF"
       ],
       answer: [0],
-      explanation: "Synapse Link replica datos de Dataverse hacia escenarios analíticos de forma continua y gobernada. Los métodos manuales o documentos no escalan ni soportan analítica moderna.",
+      explanation: "Link to Microsoft Fabric replica de forma continua las tablas de Dataverse y las expone en un lakehouse de Fabric sin pipelines; Azure Synapse Link for Dataverse es la opción cuando la copia debe estar en una cuenta ADLS Gen2 propia. Los métodos manuales o documentos no escalan ni soportan analítica moderna.",
     },
     {
       type: "single",
@@ -5458,10 +5458,10 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "OneLake",
       "Azure Synapse Link",
       "Semantic Model certificado",
-      "Data Activator"
+      "Fabric Activator"
       ],
       answer: [0],
-      explanation: "OneLake es la capa de almacenamiento unificada de Fabric donde todos los items (Lakehouses, Warehouses, semantic models) guardan sus datos, permitiendo que distintos motores lean la misma tabla Delta sin copiarla. Synapse Link exporta datos de Dataverse, el Semantic Model define medidas DAX, y Data Activator dispara alertas; ninguno es la capa de almacenamiento compartida.",
+      explanation: "OneLake es la capa de almacenamiento unificada de Fabric donde todos los items (Lakehouses, Warehouses, semantic models) guardan sus datos, permitiendo que distintos motores lean la misma tabla Delta sin copiarla. Synapse Link exporta datos de Dataverse, el Semantic Model define medidas DAX, y Fabric Activator dispara alertas; ninguno es la capa de almacenamiento compartida.",
     },
     {
       type: "single",
@@ -5473,19 +5473,19 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "El Data Activator con reglas de alerta"
       ],
       answer: [0],
-      explanation: "El transaction log de Delta Lake registra cada operación y permite consultar el estado histórico de una tabla con sintaxis como 'TIMESTAMP AS OF', sin necesidad de restaurar backups. DirectLake es un modo de conexión de Power BI, el área Files es zona de landing sin estructura Delta, y Data Activator gestiona alertas, no versionado de datos.",
+      explanation: "El transaction log de Delta Lake registra cada operación y permite consultar el estado histórico de una tabla con sintaxis como 'TIMESTAMP AS OF', sin necesidad de restaurar backups. DirectLake es un modo de conexión de Power BI, el área Files es zona de landing sin estructura Delta, y Fabric Activator gestiona alertas, no versionado de datos.",
     },
     {
       type: "multi",
       prompt: "El gerente de operaciones quiere ser notificado automáticamente por Teams cuando el tiempo de resolución promedio de tickets supere las 4 horas, sin que el equipo de datos escriba código adicional. ¿Qué DOS afirmaciones sobre la solución con Microsoft Fabric son correctas?",
       options: [
-      "Data Activator puede conectarse a streams de Event Hubs o tablas del Lakehouse y disparar la notificación sin código",
+      "Fabric Activator puede vigilar un visual de Power BI o un eventstream y disparar la notificación sin código",
       "Es necesario definir la regla de alerta especificando la condición de negocio y la acción a ejecutar",
       "Solo Azure Functions puede implementar este tipo de alerta en Fabric",
-      "El Gold layer debe eliminarse para que Data Activator funcione"
+      "El Gold layer debe eliminarse para que Fabric Activator funcione"
       ],
       answer: [0, 1],
-      explanation: "Data Activator permite definir reglas de alerta sobre datos en tiempo real y disparar acciones (como notificaciones a Teams) sin escribir código, conectándose a streams o tablas del Lakehouse. Azure Functions no es requisito para esta capacidad, y el Gold layer no necesita eliminarse.",
+      explanation: "Fabric Activator permite definir reglas de alerta sobre datos en tiempo real y disparar acciones (como notificaciones a Teams) sin escribir código, sobre visuales de Power BI, eventstreams u otros orígenes de Real-Time Intelligence. Azure Functions no es requisito para esta capacidad, y el Gold layer no necesita eliminarse.",
     },
     {
       type: "single",
@@ -5497,7 +5497,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "Time travel sobre el Gold layer"
       ],
       answer: [0],
-      explanation: "Dataverse Link (basado en Azure Synapse Link) exporta los datos de Dataverse hacia Fabric en tiempo casi real sin scripts de extracción manual, resolviendo exactamente el cuello de botella de tener que sacar datos de D365 a mano cada mes.",
+      explanation: "Dataverse Link (hoy, Link to Microsoft Fabric) lleva los datos de Dataverse a Fabric de forma continua (Learn: hasta una hora) sin scripts de extracción manual, resolviendo exactamente el cuello de botella de tener que sacar datos de D365 a mano cada mes.",
       appliesTo: "caso",
     },
     {
@@ -5536,7 +5536,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "Duplicar manualmente los datos cada semana en un nuevo Excel"
       ],
       answer: [0],
-      explanation: "Al centralizar D365, SAP y WMS en un Lakehouse como fuente única de verdad con sincronización frecuente (Dataverse Link en tiempo real, ADF para SAP/WMS), los datos disponibles para decisiones dejan de estar desactualizados por semanas.",
+      explanation: "Al centralizar D365, SAP y WMS en un Lakehouse como fuente única de verdad con sincronización frecuente (Dataverse Link de forma continua, ADF para SAP/WMS), los datos disponibles para decisiones dejan de estar desactualizados por semanas.",
       appliesTo: "caso",
     },
     {
@@ -5628,7 +5628,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "single",
-      prompt: "Un reporte de Power BI clasificado como 'Confidencial' se configura para impedir su exportación a Excel desde redes externas, y esa restricción se conserva incluso si el archivo se copia fuera del reporte original. ¿Qué mecanismo de Microsoft Purview aplica en este caso?",
+      prompt: "Un reporte de Power BI clasificado como 'Confidencial' debe seguir protegido cuando alguien exporta sus datos a Excel: el archivo exportado debe llevar la clasificación y su cifrado aunque se copie fuera del reporte original. ¿Qué mecanismo de Microsoft Purview aplica en este caso?",
       options: [
       "Sensitivity Labels",
       "Compliance Manager",
@@ -5636,7 +5636,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "Data Catalog"
       ],
       answer: [0],
-      explanation: "Las Sensitivity Labels aplican clasificaciones de confidencialidad que 'siguen' al dato donde vaya, controlando quién puede exportarlo y a dónde. Compliance Manager evalúa cumplimiento normativo, eDiscovery busca contenido para procesos legales, y Data Catalog inventaria y clasifica fuentes de datos, sin aplicar restricciones de exportación persistentes.",
+      explanation: "Las Sensitivity Labels aplican clasificaciones de confidencialidad que acompañan al dato cuando se exporta a Excel, PowerPoint, PDF o .pbix, y el archivo queda protegido según el cifrado de la etiqueta. No deciden desde qué red se exporta (eso es Conditional Access). Compliance Manager evalúa cumplimiento normativo, eDiscovery busca contenido para procesos legales y Data Catalog inventaria fuentes de datos.",
     },
     {
       type: "multi",
@@ -5805,13 +5805,13 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "multi",
       prompt: "Un equipo debe decidir entre dos modelos de AI Builder: uno para clasificar el tipo de solicitud de soporte (Técnica/Administrativa/Comercial) y otro para estimar si una oportunidad de venta se ganará o perderá usando el historial de Dataverse. ¿Qué DOS afirmaciones son correctas sobre estos modelos?",
       options: [
-      "Text Classification es el adecuado para categorizar el texto libre de la solicitud en categorías definidas por el usuario",
+      "Category classification es el adecuado para categorizar el texto libre de la solicitud en categorías definidas por el usuario",
       "Prediction Model usa datos históricos de una tabla de Dataverse para predecir un resultado binario o numérico como 'ganada/perdida'",
       "Ambos modelos requieren obligatoriamente Azure OpenAI configurado como prerequisito",
       "Prediction Model solo puede ejecutarse en Canvas Apps y nunca en Power Automate"
       ],
       answer: [0, 1],
-      explanation: "Text Classification categoriza texto libre en categorías de negocio definidas, y Prediction Model se entrena con historial de Dataverse para predecir resultados como ganar/perder una oportunidad. Ninguno requiere Azure OpenAI como prerequisito, y Prediction Model puede ejecutarse tanto en tiempo real desde Canvas App como en batch vía Power Automate.",
+      explanation: "Category classification categoriza texto libre en categorías de negocio definidas, y Prediction Model se entrena con historial de Dataverse para predecir resultados como ganar/perder una oportunidad. Ninguno requiere Azure OpenAI como prerequisito. Prediction puntúa en lote las filas de la tabla y en tiempo real se ejecuta con la acción Predict de Power Automate; una Canvas App lo usa llamando a un flujo, no con Power Fx.",
     },
     {
       type: "single",
@@ -5962,7 +5962,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "El Risk Register"
       ],
       answer: [0],
-      explanation: "La sección de exclusiones del SoW es tan importante como la de inclusiones, porque lo que no está explícitamente excluido el cliente asumirá que está incluido; documentarlo previene el 80% de las disputas de proyecto. El WBS estructura tareas, el RACI asigna responsabilidades, y el Risk Register gestiona riesgos, no el alcance contractual.",
+      explanation: "La sección de exclusiones del SoW es tan importante como la de inclusiones, porque lo que no está explícitamente excluido el cliente asumirá que está incluido; documentarlo previene la mayoría de las disputas de alcance. El WBS estructura tareas, el RACI asigna responsabilidades, y el Risk Register gestiona riesgos, no el alcance contractual.",
     },
     {
       type: "multi",
@@ -6107,13 +6107,13 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "single",
       prompt: "Un arquitecto quiere descubrir cómo se ejecuta realmente el proceso de aprobación de solicitudes de un cliente, en lugar de basarse en documentación que describe cómo 'debería' funcionar. ¿Qué herramienta nativa de Power Automate le permite reconstruir el proceso real a partir de los event logs?",
       options: [
-      "Process Advisor",
+      "La capacidad de process mining de Power Automate (antes Process Advisor)",
       "AI Builder Prediction",
       "Copilot Studio Generative Answers",
       "CoE ALM Accelerator"
       ],
       answer: [0],
-      explanation: "Process Advisor implementa Process Mining de forma nativa en Power Automate, generando un Process Map con variantes, cuellos de botella cuantificados y oportunidades de automatización a partir de event logs reales. Las otras opciones son capacidades de IA, generación conversacional y ALM, no de reconstrucción de procesos reales.",
+      explanation: "La capacidad de process mining de Power Automate (antes Process Advisor) reconstruye el proceso real y genera un Process Map con variantes, cuellos de botella cuantificados y oportunidades de automatización a partir de event logs reales. Las otras opciones son capacidades de IA, generación conversacional y ALM, no de reconstrucción de procesos reales.",
     },
     {
       type: "single",
@@ -6131,13 +6131,13 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "multi",
       prompt: "Un banco procesa solicitudes de crédito con un analista que consulta manualmente un buró de crédito en un sistema legado sin API, y luego revisa documentos de ingresos adjuntos. ¿Qué DOS tecnologías de Hyperautomation permiten automatizar estas dos tareas específicas respectivamente?",
       options: [
-      "Power Automate Desktop (RPA) para interactuar con el portal del buró sin API disponible",
+      "Power Automate for desktop (RPA) para interactuar con el portal del buró sin API disponible",
       "AI Builder para extraer y validar los ingresos declarados desde los documentos adjuntos",
       "Power BI Embedded como único mecanismo de automatización de todo el proceso",
       "Azure Synapse Link como sustituto de la extracción de documentos"
       ],
       answer: [0, 1],
-      explanation: "Power Automate Desktop (RPA) resuelve la interacción con sistemas legados sin API mediante scraping controlado, y AI Builder extrae y valida datos de documentos no estructurados como comprobantes de ingresos. Power BI Embedded es una herramienta de visualización y Synapse Link exporta datos de Dataverse a analítica, ninguno automatiza estas tareas operativas.",
+      explanation: "Power Automate for desktop (RPA) resuelve la interacción con sistemas legados sin API mediante scraping controlado, y AI Builder extrae y valida datos de documentos no estructurados como comprobantes de ingresos. Power BI Embedded es una herramienta de visualización y Synapse Link exporta datos de Dataverse a analítica, ninguno automatiza estas tareas operativas.",
     },
     {
       type: "single",
@@ -6421,7 +6421,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "single",
       prompt: "El sponsor pide que la plataforma también entregue inteligencia de negocio sin degradar el procesamiento transaccional. ¿Qué enfoque completa mejor el capstone?",
       options: [
-      "Separar operación en Dataverse y analítica en Fabric con gobierno de seguridad y consumo",
+      "Separar la operación en Dataverse de la analítica (Power BI sobre Dataverse o Fabric, según el volumen), con gobierno de seguridad y consumo",
       "Guardar reportes históricos como notas adjuntas en cada registro",
       "Ejecutar todas las consultas analíticas pesadas directamente desde los formularios productivos",
       "Eliminar cualquier capa analítica para simplificar"
@@ -6431,7 +6431,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "single",
-      prompt: "Antes del go-live del proyecto capstone, el arquitecto verifica Solution Checker con 0 errores críticos, pipeline CI/CD verde, UAT firmado por el cliente, CMK y PIM configurados, y plan de rollback probado. ¿Qué artefacto está utilizando para asegurar que ningún requisito quede pendiente?",
+      prompt: "Antes del go-live del proyecto capstone, el arquitecto verifica Solution Checker con 0 errores críticos, pipeline CI/CD verde, UAT firmado por el cliente, los controles de seguridad decididos en el ADR de seguridad (por ejemplo PIM) configurados, y plan de rollback probado. ¿Qué artefacto está utilizando para asegurar que ningún requisito quede pendiente?",
       options: [
       "Go-Live Checklist",
       "Stakeholder Communication Plan",
@@ -6697,9 +6697,9 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
   43: [
     {
       type: "single",
-      prompt: "¿Qué hace 'Crear con Copilot' en Power Apps Studio?",
+      prompt: "¿Qué hace la creación de apps con Copilot (Start with data > Create new data) en Power Apps?",
       options: [
-      "Genera una app Canvas a partir de una descripción en lenguaje natural, como punto de partida a ajustar",
+      "Genera tablas de Dataverse y una app Canvas a partir de una descripción en lenguaje natural, como punto de partida a ajustar",
       "Publica automáticamente la app a producción sin revisión",
       "Solo funciona para Model-Driven Apps, no para Canvas",
       "Reemplaza por completo la necesidad de un maker en el proyecto"
@@ -6711,13 +6711,13 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "single",
       prompt: "Un Power Platform Admin quiere habilitar Copilot en Power Apps para todo el tenant. ¿Qué debería revisar primero según las buenas prácticas de este módulo?",
       options: [
-      "La política DLP y la clasificación de datos de cada entorno, habilitando Copilot entorno por entorno",
+      "La política DLP y la clasificación de datos de cada entorno, decidiendo entorno por entorno qué funciones en preview y qué movimiento de datos entre regiones se permiten",
       "Nada; Copilot siempre es seguro habilitarlo para todo el tenant de inmediato",
       "Solo el número de licencias disponibles",
       "El idioma predeterminado del tenant"
       ],
       answer: [0],
-      explanation: "Habilitar Copilot sin revisar la política DLP y la clasificación de datos de cada entorno puede exponer información sensible en sugerencias generadas; la recomendación es revisar y habilitar entorno por entorno.",
+      explanation: "Habilitar Copilot sin revisar la política DLP y la clasificación de datos de cada entorno puede exponer información sensible en sugerencias generadas; la recomendación es revisar entorno por entorno. Las funciones GA de Copilot vienen activas y solo Soporte las apaga; el interruptor del entorno y del tenant controla las funciones en preview.",
     },
     {
       type: "multi",
@@ -6860,15 +6860,15 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
   44: [
     {
       type: "single",
-      prompt: "¿Qué diferencia principal hay entre el autocompletado inline de GitHub Copilot y Copilot Edits (Agent Mode)?",
+      prompt: "¿Qué diferencia principal hay entre las sugerencias inline de GitHub Copilot y el agente Agent del Chat?",
       options: [
-      "Copilot Edits puede proponer y aplicar cambios a través de múltiples archivos, mostrando el diff antes de aceptarlo; el autocompletado solo sugiere la línea actual",
+      "Agent puede proponer y aplicar cambios en varios archivos, que revisas con Keep/Undo o en el diff antes de conservarlos; las sugerencias inline proponen la continuación del código donde escribes",
       "No hay ninguna diferencia real entre ambos",
       "El autocompletado solo funciona en archivos Python",
-      "Copilot Edits nunca muestra un diff, aplica los cambios directamente sin revisión"
+      "Agent aplica los cambios sin ninguna posibilidad de revisarlos"
       ],
       answer: [0],
-      explanation: "El autocompletado sugiere la continuación de una línea mientras se escribe; Copilot Edits/Agent Mode puede proponer cambios en múltiples archivos y muestra el diff para revisión antes de aplicarlo.",
+      explanation: "Las sugerencias inline proponen la continuación del código mientras se escribe; el agente Agent del Chat puede proponer cambios en varios archivos y deja revisarlos (Keep/Undo, diff) antes de conservarlos.",
     },
     {
       type: "single",
@@ -6884,7 +6884,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "multi",
-      prompt: "¿Cuáles DOS factores mejoran la precisión de una sugerencia de Copilot sobre un componente PCF específico?",
+      prompt: "¿Cuáles DOS factores mejoran la precisión de una respuesta de Copilot Chat sobre un componente PCF específico?",
       options: [
       "Tener abierto el archivo real del componente como contexto",
       "Documentar convenciones del proyecto en `.github/copilot-instructions.md`",
@@ -6908,7 +6908,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "single",
-      prompt: "¿Qué se debe hacer siempre antes de aplicar un cambio propuesto por Copilot Edits que afecta varios archivos?",
+      prompt: "¿Qué se debe hacer siempre antes de aplicar un cambio propuesto por el agente Agent de Copilot que afecta varios archivos?",
       options: [
       "Revisar el diff de cada archivo modificado antes de aceptar",
       "Aceptar directamente si el resumen general suena razonable",
@@ -6916,7 +6916,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "No es necesario revisar nada si el proyecto tiene buena cobertura de tests"
       ],
       answer: [0],
-      explanation: "Nunca se deben aceptar cambios multi-archivo a ciegas; revisar el diff completo de cada archivo modificado es indispensable antes de aplicar cambios de Copilot Edits.",
+      explanation: "Nunca se deben aceptar cambios multi-archivo a ciegas; revisar el diff completo de cada archivo modificado es indispensable antes de conservar cambios del agente Agent de Copilot.",
     },
     {
       type: "single",
@@ -6944,7 +6944,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
     },
     {
       type: "single",
-      prompt: "Después de crear un `.github/copilot-instructions.md` con las convenciones del proyecto, ¿qué se espera al repetir una petición de generación de código similar?",
+      prompt: "Después de crear un `.github/copilot-instructions.md` con las convenciones del proyecto, ¿qué se espera al repetir una petición similar en Copilot Chat?",
       options: [
       "Una mejora en la precisión y consistencia de la sugerencia respecto al patrón del proyecto",
       "Ningún cambio; el archivo de instrucciones no afecta las sugerencias de Copilot",
@@ -6952,7 +6952,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "Que las sugerencias empeoren porque el archivo consume la ventana de contexto por completo"
       ],
       answer: [0],
-      explanation: "El archivo de instrucciones del repositorio se usa como contexto automático, mejorando la consistencia de las sugerencias con las convenciones ya establecidas del proyecto.",
+      explanation: "El archivo de instrucciones del repositorio se usa como contexto automático, mejorando la consistencia de las respuestas del Chat con las convenciones ya establecidas del proyecto (no afecta a las sugerencias inline).",
     },
     {
       type: "single",
@@ -8543,7 +8543,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "Mapea los valores de variables de entorno y connection references específicos del entorno destino, automatizando ese mapeo",
       "Reemplaza la necesidad de tener un archivo Solution.xml",
       "Define los permisos de Security Roles de todos los usuarios del entorno",
-      "Solo se usa quando la solución no tiene ninguna connection reference"
+      "Solo se usa cuando la solución no tiene ninguna connection reference"
       ],
       answer: [0],
       explanation: "El archivo de deployment settings mapea los valores correctos de variables de entorno y connection references para el entorno destino, evitando configuración manual repetitiva en cada importación.",

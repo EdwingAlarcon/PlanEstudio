@@ -3,12 +3,12 @@ moduleId: 12
 title: "Power BI — DAX Avanzado"
 level: "intermedio"
 certification: "PL-200 (retirado 31 ago 2026)"
-estimatedMinutes: 22
-practiceMinutes: 150
+estimatedMinutes: 25
+practiceMinutes: 190
 slug: "power-bi-dax-avanzado"
 lastVerified: "2026-11"
 ---
-*Lectura: 20-25 min · Con práctica: unos 150 min en Power BI Desktop; la primera vez, cuenta entre el doble y el triple. La Microlección 5 (RLS en el servicio) y la profundización de cohortes pueden quedar para una segunda sesión.*
+*Lectura: 25-30 min · Con práctica: unos 190 min en Power BI Desktop; la primera vez, cuenta entre el doble y el triple. La Microlección 5 (RLS en el servicio) y la profundización de cohortes pueden quedar para una segunda sesión.*
 
 ### 🎯 Objetivo
 Dominar DAX avanzado: CALCULATE con múltiples filtros, contexto de filtro vs fila, funciones de inteligencia de tiempo, Row Level Security, y métricas de negocio complejas como cohortes y métricas móviles — practicando cada concepto de inmediato sobre un modelo real en tu Power BI Desktop, con evidencia del valor exacto que viste, antes de pasar al siguiente.
@@ -27,7 +27,7 @@ En este módulo no usas el reporte de solicitudes del Módulo 6 (tiene muy pocas
 2. En el **Navigator** marca la tabla **financials** y pulsa **Load**.
    - **Si no aparece la opción de datos de ejemplo:** descarga el libro de Excel del Financial sample desde <https://go.microsoft.com/fwlink/?LinkID=521962>, y en Desktop usa **Home** > **Excel workbook**, elige el archivo y carga la tabla **financials**.
 3. Guarda el archivo como `dax-avanzado-financials.pbix`.
-4. Abre la vista de tabla (**Table view**) y comprueba que existen estas columnas: `Segment`, `Country/Region` (en versiones antiguas del libro puede llamarse `Country`), `Product`, `Units Sold`, `Sales`, `Profit`, `Date` y `Month Name`. Si el nombre de alguna es distinto, usa el tuyo en todas las fórmulas.
+4. Abre la vista de tabla (**Table view**) y comprueba que existen estas columnas: `Segment`, `Country/Region` (en versiones antiguas del libro puede llamarse `Country`), `Product`, `Units Sold`, `Sales`, `Profit`, `Date` y `Month Name`. Si el nombre de alguna es distinto, usa el tuyo en todas las fórmulas. **Si una fórmula dice que una columna no existe**, no la escribas a mano: empieza a escribir `financials[` en la barra de fórmulas y elige la columna en la lista que propone el autocompletado (así evitas espacios o diferencias de mayúsculas que no se ven).
 5. Crea la medida base (clic derecho sobre la tabla `financials` en el panel **Data** > **New measure**):
 
 ```dax
@@ -41,14 +41,14 @@ Total Ventas = SUM(financials[Sales])
 | Campo | Tu valor |
 |---|---|
 | Cómo cargaste los datos (sample integrado o libro descargado) | ___ |
-| Número de filas de `financials` (aparece abajo a la izquierda en **Table view**) | ___ |
+| Número de filas de `financials` (crea la medida `Filas Financials = COUNTROWS(financials)` y ponla en una **Card**) | ___ |
 | Valor de `Total Ventas` en una tarjeta (**Card**) sin filtros, con todos los decimales que muestre | ___ |
 
 ---
 
 ## 📖 Conceptos clave (referencia rápida)
 
-Estos conceptos se trabajan uno por uno en las microlecciones. Vuelve aquí cuando necesites la definición corta.
+Estos conceptos se trabajan uno por uno en las microlecciones. **No hace falta entenderlos ahora:** si es la primera vez que los ves, pasa directo a la Microlección 1 y vuelve aquí cuando una microlección use un término que no recuerdes.
 
 - **Contexto de filtro:** el conjunto de filtros activos que deciden qué filas participan en el cálculo de una medida en una celda concreta. Viene de slicers, filtros de visual/página/reporte, de las filas y columnas del propio visual, y se propaga por las relaciones del modelo.
 - **Contexto de fila:** existe cuando DAX recorre una tabla fila por fila: en una **columna calculada** y dentro de los **iteradores** (`SUMX`, `AVERAGEX`, `MAXX`, `FILTER`, `RANKX`...). Permite leer columnas de "la fila actual", pero **por sí solo no filtra nada**.
@@ -57,7 +57,7 @@ Estos conceptos se trabajan uno por uno en las microlecciones. Vuelve aquí cuan
 - **REMOVEFILTERS / ALL / ALLEXCEPT / ALLSELECTED:** quitan filtros dentro de `CALCULATE`. `REMOVEFILTERS` es el nombre explícito recomendado cuando solo quieres quitar filtros; `ALL` hace lo mismo como modificador y además puede devolver una tabla. `ALLEXCEPT(tabla, columna)` quita todos los filtros de la tabla excepto los de las columnas indicadas. `ALLSELECTED` conserva los filtros externos al visual (slicers) y quita los del propio visual.
 - **FILTER:** devuelve una tabla iterando fila por fila. Úsalo cuando la condición no se puede expresar como filtro simple de columna (por ejemplo, comparar contra una medida). `CALCULATE([M], Tabla[Col] = "X")` es preferible a `CALCULATE([M], FILTER(Tabla, Tabla[Col] = "X"))`, que itera la tabla completa.
 - **RELATED / RELATEDTABLE:** `RELATED` trae, en contexto de fila del lado "muchos", un valor del lado "uno"; `RELATEDTABLE` devuelve, desde el lado "uno", las filas relacionadas del lado "muchos".
-- **Inteligencia de tiempo (time intelligence):** funciones como `TOTALYTD`, `SAMEPERIODLASTYEAR`, `DATEADD`, `DATESINPERIOD` y `DATESBETWEEN`. Las funciones clásicas necesitan una tabla de fechas con una fila por día, sin huecos, y lo recomendable es marcarla como tabla de fechas. Power BI también ofrece una inteligencia de tiempo basada en calendarios (en versión preliminar); este módulo usa la clásica, que es la que encontrarás en la mayoría de modelos existentes.
+- **Inteligencia de tiempo (time intelligence):** funciones como `TOTALYTD`, `SAMEPERIODLASTYEAR`, `DATEADD`, `DATESINPERIOD` y `DATESBETWEEN`. Las funciones clásicas necesitan una tabla de fechas con una fila por día, sin huecos, marcada como tabla de fechas. Por defecto el año termina el 31 de diciembre; `TOTALYTD` y `DATESYTD` aceptan un argumento opcional, `year_end_date`, con la fecha de fin de año como texto (por ejemplo `"6/30"`: el año se ignora y el formato de la fecha sigue la configuración regional del archivo). Power BI también ofrece una inteligencia de tiempo basada en calendarios (en versión preliminar); este módulo usa la clásica, que es la que encontrarás en la mayoría de modelos existentes.
 - **RANKX:** `RANKX(tabla, expresión, [valor], [orden], [empates])`. El orden por defecto es descendente y los empates por defecto son `SKIP` (salta posiciones: 1, 1, 3); `DENSE` no salta (1, 1, 2).
 - **Row Level Security (RLS):** roles con filtros DAX definidos en Desktop. Al publicar, se asignan usuarios o grupos de Microsoft Entra ID a cada rol en el modelo semántico (semantic model) del servicio. Los filtros se propagan por las relaciones. **Importante:** RLS solo restringe a quienes tienen rol **Viewer** en el workspace; los roles **Admin**, **Member** y **Contributor** ven todos los datos aunque estén asignados a un rol de RLS.
 
@@ -75,7 +75,17 @@ Estos conceptos se trabajan uno por uno en las microlecciones. Vuelve aquí cuan
 // Siempre devuelve las ventas del segmento Government,
 // aunque el slicer tenga seleccionado otro segmento:
 Ventas Government = CALCULATE([Total Ventas], financials[Segment] = "Government")
+```
 
+Un **porcentaje del total** usa `CALCULATE` en el denominador para **quitar** un filtro: `REMOVEFILTERS(Tabla[Columna])` quita el filtro de una sola columna y `REMOVEFILTERS(Tabla)` quita todos los filtros de la tabla. Cuál conviene depende de qué filtros deben seguir aplicando (por ejemplo, el del slicer).
+
+**Ahora haz algo — micropráctica (5 min):** antes de escribir las medidas de porcentaje, decide qué filtro hay que quitar → **[¿Qué filtro quitar para el % del total?](/practica/ip-dv-017-porcentaje-del-total-que-filtro-quitar)**. Te muestra varias versiones del denominador y tienes que elegir las que respetan el slicer de segmento.
+
+**Práctica real en tu entorno (20 min):**
+
+1. Crea `Ventas Government` y estas dos medidas de porcentaje. A las dos de porcentaje dales formato de porcentaje en la cinta **Measure tools** (como en el Módulo 6).
+
+```dax
 // Participación de cada producto dentro de lo que el slicer deja ver:
 % del Total Productos =
 DIVIDE(
@@ -93,11 +103,6 @@ DIVIDE(
 )
 ```
 
-**Ahora haz algo — micropráctica (3 min):** antes de construir, decide qué filtro hay que quitar → **[¿Qué filtro quitar para el % del total?](/practica/ip-dv-017-porcentaje-del-total-que-filtro-quitar)**. Te muestra varias versiones del denominador y tienes que elegir las que respetan el slicer de segmento.
-
-**Práctica real en tu entorno (20 min):**
-
-1. Crea las tres medidas del ejemplo. A las dos de porcentaje dales formato de porcentaje en la cinta **Measure tools** (como en el Módulo 6).
 2. En la vista de reporte inserta una **Matrix**: en **Rows** pon `financials[Product]`; en **Values** pon `Total Ventas`, `Ventas Government`, `% del Total Productos` y `% del Total General`.
 3. Inserta un **Slicer** con `financials[Segment]` y selecciona **Small Business**.
 4. Observa: `Ventas Government` **no cambió** al elegir Small Business. Eso es `CALCULATE` reemplazando el filtro de la columna `Segment`.
@@ -147,9 +152,9 @@ Ventas Mejor Producto = MAXX(VALUES(financials[Product]), [Total Ventas])  // [T
 Ventas Mejor Producto Sin Transicion = MAXX(VALUES(financials[Product]), SUM(financials[Sales]))  // SUM no filtra por la fila: devuelve el total en cada iteración
 ```
 
-**Práctica real en tu entorno (20 min):**
+**Práctica real en tu entorno (25 min):**
 
-1. Crea la columna calculada y las cinco medidas del ejemplo.
+1. Crea la columna calculada: en el panel **Data**, clic derecho sobre la tabla `financials` > **New column**, y escribe la fórmula de `Precio Unitario Fila`. Después crea las cinco medidas del ejemplo (clic derecho sobre `financials` > **New measure**, una por una).
 2. Pon cada medida en una **Card** (o todas en una **Table** de una sola fila) sin slicer seleccionado.
 3. Compara `Ventas Mejor Producto Sin Transicion` con `Total Ventas`: deben ser **iguales**. Ese es el síntoma típico de olvidar la transición de contexto.
 4. Corrige la versión sin transición envolviendo el `SUM` en `CALCULATE(SUM(financials[Sales]))` y comprueba que ahora coincide con `Ventas Mejor Producto`.
@@ -163,6 +168,7 @@ Ventas Mejor Producto Sin Transicion = MAXX(VALUES(financials[Product]), SUM(fin
 | Cuál usarías para informar "precio promedio por unidad vendida" y por qué (una frase) | ___ |
 | `Ventas Mejor Producto` y `Ventas Mejor Producto Sin Transicion` antes de corregir | ___ |
 | Valor de la versión corregida con `CALCULATE` | ___ |
+| Con tus palabras, en una frase: por qué `SUM` dentro de `MAXX` devolvía el total y `[Total Ventas]` no | ___ |
 
 ---
 
@@ -188,8 +194,8 @@ ADDCOLUMNS(
 )
 ```
 
-3. Comprueba en **Table view** que `Calendar` tiene **730 filas** (365 × 2 años).
-4. Clic derecho sobre la tabla `Calendar` en el panel **Data** > **Mark as date table** y elige la columna `Date`. Power BI valida que no haya duplicados, ni vacíos, ni huecos. Si da error, revisa que la fórmula sea exactamente la de arriba.
+3. Comprueba que `Calendar` tiene **730 filas** (365 × 2 años): crea la medida `Filas Calendar = COUNTROWS('Calendar')` y ponla en una **Card**.
+4. Clic derecho sobre la tabla `Calendar` en el panel **Data** > **Mark as date table** (si se abre un submenú, vuelve a elegir **Mark as date table**; la misma opción está en la cinta **Table tools** con la tabla seleccionada). En el diálogo, elige la columna `Date` en la lista desplegable y confírmalo. Power BI valida que no haya duplicados, ni vacíos, ni huecos. Si da error, revisa que la fórmula sea exactamente la de arriba. Si en lugar de ese menú ves **Calendar options**, tienes activada la versión preliminar de inteligencia de tiempo con calendarios: la opción **Mark as date table** está dentro de esa pantalla.
 5. En **Model view** arrastra `Calendar[Date]` sobre `financials[Date]`. En el cuadro **New relationship** comprueba que la cardinalidad es uno a muchos (`Calendar` en el lado "uno") y la dirección **Single**, y guarda.
 6. Crea las medidas:
 
@@ -216,11 +222,11 @@ RETURN
     )
 ```
 
-7. Inserta una **Matrix** con `'Calendar'[Año-Mes]` en **Rows** (de la tabla `Calendar`, **no** de `financials`) y las cinco medidas en **Values**.
+7. Inserta una **Matrix** con `'Calendar'[Año-Mes]` en **Rows** y las cinco medidas en **Values**.
 
-> **Por qué la media móvil se calcula así:** promediar con `AVERAGE(financials[Sales])` dentro de un rango de fechas da el promedio de las **filas** de esos meses, no de los meses. Aquí se suma la venta de los tres meses y se divide entre 3. Los primeros meses de la serie salen bajos porque no tienen tres meses anteriores con datos: es esperado, anótalo.
+> **Por qué la media móvil se calcula así:** promediar con `AVERAGE(financials[Sales])` dentro de un rango de fechas da el promedio de las **filas** de esos meses, no de los meses. Aquí se suma la venta de los tres meses y se divide entre 3. Los primeros meses de la serie salen bajos porque no tienen tres meses anteriores con datos: es esperado, anótalo. Si en 2014-12 tu medida no coincide con el cálculo manual de la evidencia, revisa que las filas de la matriz salen de `Calendar` y que hiciste el paso 4.
 
-**🔧 Diagnosticar antes de seguir — troubleshooting challenge (5 min):** un compañero armó la misma matriz y su `Ventas YTD` "no acumula". Antes de ver la causa, resuélvelo → **[Diagnosticar: el YTD no acumula](/practica/ip-trb-009-ytd-no-acumula)**. Después reprodúcelo en tu archivo: cambia las filas de la matriz por `financials[Month Name]` y anota qué pasa.
+**🔧 Diagnosticar antes de seguir — troubleshooting challenge (6 min):** un compañero armó la misma matriz y su `Ventas YTD` "no acumula". Antes de ver la causa, resuélvelo → **[Diagnosticar: el YTD no acumula](/practica/ip-trb-009-ytd-no-acumula)**. Después reprodúcelo en tu archivo: cambia las filas de la matriz por `financials[Month Name]` y anota qué pasa.
 
 **Evidencia a reportar:**
 
@@ -232,7 +238,8 @@ RETURN
 | Primer mes en que `Ventas Año Anterior` deja de estar en blanco | ___ |
 | `Variación YoY %` en 2014-12 | ___ |
 | `Media Movil 3M` en 2014-12 y el cálculo manual que hiciste para comprobarla (ventas de 2014-10 + 2014-11 + 2014-12, entre 3) | ___ |
-| Qué viste en `Ventas YTD` al usar `financials[Month Name]` en las filas | ___ |
+| Qué viste en `Ventas YTD` al usar `financials[Month Name]` en las filas (¿crece de un mes a otro?) | ___ |
+| Con `financials[Month Name]` en filas: `Total Ventas` y `Ventas YTD` de **April** y de **September**. ¿En cuál de los dos meses son distintos? Para explicarlo, vuelve a poner `'Calendar'[Año-Mes]` y mira en qué años hay ventas de cada uno de esos meses | ___ |
 
 ---
 
@@ -250,13 +257,15 @@ Ranking Producto = RANKX(ALL(financials[Product]), [Total Ventas], , DESC, DENSE
 // El segmento seleccionado en el slicer sigue aplicando, así que el ranking es "dentro del segmento".
 ```
 
-**🏗️ Reto de construcción (sin pasos, en tu Desktop):**
+**Pieza que vas a necesitar:** `IF(condición, valor_si_verdadero)`. Si omites el tercer argumento, `IF` devuelve **blanco** (BLANK) cuando la condición es falsa. Por ejemplo, `IF([Total Ventas] > 1000000, [Total Ventas])` muestra las ventas solo cuando pasan del millón y deja la celda en blanco en los demás casos.
+
+**🏗️ Reto de construcción (sin pasos, en tu Desktop, unos 30 min):**
 
 > **Requerimiento:** un visual donde el usuario elija con un slicer cuántos productos ver (de 1 a 6) y solo aparezcan esos productos, ordenados por ventas, respetando el slicer de segmento de la Microlección 1.
 > **Criterios de aceptación:** (1) el número N lo elige el usuario en un slicer; (2) al cambiar el segmento, el Top N se recalcula; (3) en caso de empate, ningún puesto queda vacío.
 > **Restricciones:** no uses el filtro **Top N** del panel **Filters**; resuélvelo con DAX.
 
-Si te atascas, pistas en orden: (1) **Modeling** > **New parameter** > **Numeric range** crea una tabla con su slicer (**Add slicer to this page**) y una medida `<Nombre> Value` que devuelve el número elegido; (2) una medida que devuelva `[Total Ventas]` solo si `[Ranking Producto]` es menor o igual que ese valor, y blanco en otro caso; (3) las filas con medida en blanco desaparecen de la matriz.
+Si te atascas, pistas en orden: (1) **Modeling** > **New parameter** > **Numeric range** crea una tabla con su slicer (**Add slicer to this page**) y una medida `<Nombre> Value` que devuelve el número elegido; (2) una medida con `IF` que devuelva `[Total Ventas]` solo si `[Ranking Producto]` es menor o igual que ese valor (sin tercer argumento, así el resto queda en blanco); (3) en la matriz deja `Product` en **Rows** y solo tu medida en **Values**: las filas con la medida en blanco desaparecen; (4) para ordenar, selecciona el encabezado de la columna de tu medida en la matriz (una flecha indica el orden), o usa **More options** (...) del visual > **Sort by** y elige tu medida.
 
 **Evidencia a reportar:**
 
@@ -268,6 +277,8 @@ Si te atascas, pistas en orden: (1) **Modeling** > **New parameter** > **Numeric
 | Productos que aparecen con N = 3 y segmento **Small Business** (¿cambió alguno?) | ___ |
 | Qué muestra la fila Total de tu medida y si es lo que esperabas | ___ |
 
+> **Después de anotarlo:** en la fila Total no hay un producto concreto, así que `[Total Ventas]` vale la suma de todos los productos. Comparada contra cada producto por separado, esa suma es la mayor y su ranking es 1: la condición se cumple y la fila Total muestra todas las ventas, no solo las del Top N. No es un error de tu fórmula; un total que sume solo el Top N es otro cálculo.
+
 ---
 
 ## 🧩 Microlección 5 — Row Level Security estática y dinámica
@@ -276,9 +287,9 @@ Si te atascas, pistas en orden: (1) **Modeling** > **New parameter** > **Numeric
 
 **¿Por qué existe esto?** El mismo reporte debe mostrar datos distintos según quién lo abre, sin mantener un reporte por persona. El Módulo 6 te presentó la idea; aquí la construyes con una tabla de responsables, que es el patrón real (la seguridad la mantiene una tabla, no la fórmula).
 
-**Práctica real en tu entorno (25 min):**
+**Práctica real en tu entorno (30 min):**
 
-1. **Home** > **Enter data**. Crea la tabla `Responsables` con dos columnas, `Email` y `Segment`, y una fila por segmento: `gobierno@contoso.com` / `Government`, `pymes@contoso.com` / `Small Business`, `enterprise@contoso.com` / `Enterprise`, `midmarket@contoso.com` / `Midmarket`, `canales@contoso.com` / `Channel Partners`. Comprueba que los textos de `Segment` coinciden exactamente con los de `financials` (mira los valores del slicer).
+1. **Home** > **Enter data**. En el diálogo que se abre, pon nombre a las dos columnas: haz clic (o doble clic) en el encabezado `Column1` y escribe `Email`; agrega una segunda columna con el `+` junto al último encabezado y llámala `Segment`. Escribe `Responsables` en el campo de nombre de la tabla, en la parte inferior del diálogo. Si no logras renombrar los encabezados ahí, pulsa **Edit** (abre el **Power Query Editor**), renómbralos con doble clic sobre cada encabezado y luego **Close & Apply**. La tabla lleva una fila por segmento: `gobierno@contoso.com` / `Government`, `pymes@contoso.com` / `Small Business`, `enterprise@contoso.com` / `Enterprise`, `midmarket@contoso.com` / `Midmarket`, `canales@contoso.com` / `Channel Partners`. Comprueba que los textos de `Segment` coinciden exactamente con los de `financials` (mira los valores del slicer) y pulsa **Load**. La tabla `Responsables` debe aparecer en el panel **Data** con las columnas `Email` y `Segment`.
 2. En **Model view** relaciona `Responsables[Segment]` (lado "uno") con `financials[Segment]` (lado "muchos"), dirección **Single**.
 3. **Modeling** > **Manage roles** > **New**. Rol `Solo Government`: selecciona la tabla `financials` y escribe el filtro DAX (usa **Switch to DAX editor** si ves el editor por defecto):
 
@@ -293,7 +304,7 @@ Si te atascas, pistas en orden: (1) **Modeling** > **New parameter** > **Numeric
 ```
 
    Pulsa **Save**. El filtro sobre `Responsables` llega a `financials` por la relación.
-5. Prueba: **Modeling** > **View as** > marca `Solo Government` > **OK**. Luego **Stop viewing**. Después **View as** > marca **Other user**, escribe `pymes@contoso.com`, marca `Responsable de segmento` > **OK**.
+5. Prueba: **Modeling** > **View as**. En la ventana **View as roles** marca `Solo Government` > **OK**. Para volver a la vista normal, usa el botón de la barra de aviso que aparece sobre el reporte mientras ves como un rol, o abre otra vez **View as**, marca **None** > **OK**. Después **View as** > marca **Other user**, escribe `pymes@contoso.com`, marca **también** el rol `Responsable de segmento` > **OK** (con **Other user** hay que indicar el usuario y el rol).
 
 > En Desktop, `USERPRINCIPALNAME()` devuelve tu usuario (o el que escribas en **Other user**). Si con **Other user** ves todo vacío, el correo no coincide con ninguna fila de `Responsables`: revisa mayúsculas, espacios y el dominio.
 
@@ -315,9 +326,9 @@ Si te atascas, pistas en orden: (1) **Modeling** > **New parameter** > **Numeric
 
 Ya practicaste acumulados y comparativos sobre el año calendario (Microlección 3). Ahora la regla de negocio **cambia**: la empresa cierra su año fiscal el **30 de junio**. El año fiscal 2014 va del 1 de julio de 2013 al 30 de junio de 2014, y finanzas quiere el acumulado fiscal y el comparativo contra el mismo periodo del año fiscal anterior.
 
-**[Transferir: acumulado en año fiscal](/practica/ip-dv-018-transferir-ano-fiscal)** — tienes que decidir qué cambia y qué **no** cambia. No es "rehacer el calendario": si solo memorizaste la fórmula de la Microlección 3, este reto te lo va a mostrar.
+**[Transferir: acumulado en año fiscal](/practica/ip-dv-018-transferir-ano-fiscal)** (8 min) — tienes que decidir qué cambia y qué **no** cambia. No es "rehacer el calendario": si solo memorizaste la fórmula de la Microlección 3, este reto te lo va a mostrar.
 
-Si tienes tiempo, constrúyelo en tu archivo y reporta la evidencia:
+Si tienes tiempo (unos 20 min), constrúyelo en tu archivo y reporta la evidencia. La columna de año fiscal es una columna calculada en `Calendar` con `IF` (como en el reto Top N); para el acumulado, repasa en los Conceptos clave el argumento de fin de año.
 
 | Campo | Tu valor |
 |---|---|
@@ -368,7 +379,7 @@ En una matriz con `Clientes[Cohorte]` en filas y `'Calendar'[Año-Mes]` en colum
 ### ⚠️ Errores Comunes
 | Síntoma | Causa | Solución |
 |-------|-------|----------|
-| El YTD no acumula: cada mes muestra lo mismo que su venta del mes, y el año anterior sale raro | Las filas del visual usan la fecha o el mes de la tabla de hechos, no de `Calendar` | Usar `'Calendar'[Año-Mes]` (u otras columnas de `Calendar`) en filas y slicers (Microlección 3) |
+| El YTD no acumula: no crece de un mes al siguiente, los meses salen en orden alfabético y cada fila muestra como mucho la venta de ese mes en el último año (puede salir menor que `Total Ventas` si el mes tiene ventas en varios años) | Las filas del visual usan la fecha o el mes de la tabla de hechos, no de `Calendar` | Usar `'Calendar'[Año-Mes]` (u otras columnas de `Calendar`) en filas y slicers (Microlección 3) |
 | Las funciones de tiempo dan error o resultados incompletos | La tabla de fechas tiene huecos, o no cubre todo el rango de los datos | Crear `Calendar` con `CALENDAR` sobre un rango completo y marcarla como tabla de fechas |
 | Una medida "ignora" el slicer y siempre da el mismo valor | `CALCULATE` reemplaza el filtro de esa columna | Si el filtro debe combinarse con el slicer, usar `KEEPFILTERS` (Microlección 1) |
 | El % del total suma 100% en cada fila | El denominador no quita ningún filtro (`DIVIDE([M], [M])`) | Quitar el filtro de la columna de las filas con `REMOVEFILTERS(Tabla[Columna])` |

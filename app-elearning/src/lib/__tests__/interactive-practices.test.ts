@@ -87,6 +87,22 @@ describe("interactive practice engines", () => {
     expect(result.rows?.map((row) => row.name)).toEqual(["Litware Capital", "Fabrikam Andina"]);
   });
 
+  it("no abre ningún query playground ya resuelto", () => {
+    const queries = getAllInteractivePractices().filter((item) => item.type === "query-playground");
+    expect(queries.length).toBeGreaterThan(0);
+    for (const practice of queries) {
+      if (practice.type !== "query-playground") continue;
+      expect(evaluateInteractivePractice(practice, practice.starter, 1).status, practice.id).not.toBe("correct");
+      expect(evaluateInteractivePractice(practice, practice.solutionQuery, 1).status, practice.id).toBe("correct");
+    }
+  });
+
+  it("IP-TRB-007 no acepta una respuesta genérica", () => {
+    const practice = getAllInteractivePractices().find((item) => item.id === "IP-TRB-007")!;
+    expect(evaluateInteractivePractice(practice, "Hay que bloquear el formulario con lock", 1).status).not.toBe("correct");
+    expect(evaluateInteractivePractice(practice, "Lock solo funciona en el formulario, no en el servidor; agregaría Show Error Message o seguridad de columna", 1).status).toBe("correct");
+  });
+
   it("rejects unsupported OData shapes", () => {
     const practice = getAllInteractivePractices().find((item) => item.id === "IP-QRY-002")!;
     expect(evaluateInteractivePractice(practice, "/contacts?$select=name", 1).status).toBe("incorrect");

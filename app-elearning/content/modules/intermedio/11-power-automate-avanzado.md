@@ -33,7 +33,7 @@ Scope "Catch"  ← Run After del Scope Try: failed + timed out (succeeded desmar
 
 **Ahora haz algo — micropráctica (2 min):** antes de construir nada, resuelve esta decisión conceptual con feedback inmediato → **[Retry vs Scope/Try-Catch](/practica/ip-pa-004-retry-scope-try-catch)**. Te va a pedir distinguir cuándo un error se soluciona reintentando (fallos transitorios como HTTP 429) y cuándo necesita Scope + Catch + compensación (fallos funcionales, como datos inválidos que nunca van a tener éxito por más que reintentes).
 
-**Práctica real en tu entorno (10 min):** construye el patrón Try/Catch del ejemplo de arriba en un flujo nuevo de tu entorno Developer, usando **Create a record** de Dataverse dentro del Scope Try (usa una tabla de prueba, ej. `Account`) y **Send an email (V2)** de Outlook dentro del Scope Catch. Fuerza el error a propósito (por ejemplo, referenciando una tabla o columna que no existe) para confirmar que el Catch sí se dispara.
+**Práctica real en tu entorno (10 min):** construye el patrón Try/Catch del ejemplo de arriba en un flujo nuevo de tu entorno Developer, usando **Add a new row** de Dataverse dentro del Scope Try (usa una tabla de prueba, ej. `Account`) y **Send an email (V2)** de Outlook dentro del Scope Catch. Fuerza el error a propósito (por ejemplo, referenciando una tabla o columna que no existe) para confirmar que el Catch sí se dispara.
 
 **Evidencia a reportar (no un "sí/no" — el dato exacto que viste):**
 

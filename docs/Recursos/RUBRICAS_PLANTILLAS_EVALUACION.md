@@ -378,7 +378,7 @@ conecta con una rúbrica y un umbral numérico, en vez de dejar solo un checklis
 | N1 — Básico | Módulo 8, *Primer Proyecto Integrado*: sistema de solicitudes con Dataverse, Canvas App, Model-Driven App, Power Automate y Power BI | Low-code / Maker | ≥ 65/100, ningún criterio en 0 | ≥ 85/100 |
 | N2 — Intermedio | Módulo 17, *Proyecto Integrador Nivel 2*: solución de ventas con Component Library, Child Flows, RLS y bot de Teams | Low-code / Maker + Consultoría Funcional (seguridad y documentación funcional) | ≥ 70/100, ningún criterio en 0 | ≥ 88/100 |
 | N3 — Avanzado | Módulo 30, *Proyecto Multicapa Nivel 3*: 6 soluciones con plugin, PCF, integración vía Service Bus y Copilot Studio con SSO | Desarrollo Técnico | ≥ 70/100, ningún criterio en 0 | ≥ 90/100 |
-| N4 — Arquitecto | Módulo 41, *Proyecto Capstone Arquitectura Enterprise*: solución multi-tenant con Zero Trust, Fabric y presentación ejecutiva | Arquitectura Empresarial (ponderada) | ≥ 75/100, ningún criterio en 0-1 | ≥ 92/100 |
+| N4 — Arquitecto | Módulo 41, *Proyecto Capstone Arquitectura Enterprise*: Architecture Blueprint con 8 ADRs, slice vertical DEV→TEST con data policy verificada y rollback ensayado, y defensa ante un comité | Arquitectura Empresarial (ponderada) | ≥ 75/100, ningún criterio en 0-1 | ≥ 92/100 |
 | Nivel IA | LAB-051, *Proyecto Integrador Nivel IA*: flujo diseña→IA implementa→CI valida→humano aprueba sobre un cambio real, con auditoría de prompts y matriz de riesgos de IA propia del cambio | IA y Agentes Gobernados | ≥ 70/100, ningún criterio en 0 | ≥ 88/100 |
 
 Las 5 rutas de nivel quedan con un proyecto de cierre equivalente en exigencia: LAB-051 (Nivel IA)

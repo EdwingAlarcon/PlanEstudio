@@ -8,7 +8,6 @@ certifications: ["PL-400", "Data Migration"]
 role: ["Migration Specialist", "Solution Architect"]
 prerequisites:
   - "Módulo 34 revisado: integraciones empresariales"
-  - "Módulo 37 estudiado: estrategias de migración empresarial"
   - "Ruta Job-Ready Data Migration + CRM Legacy revisada"
 lastVerified: "2026-09"
 ---

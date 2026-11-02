@@ -8,7 +8,7 @@
 - **Pilotos (Módulos 11, 10 y 13): cerrados.** Patrón: microlecciones, práctica continua, evidencia de tenant,
   pistas escalonadas con gating (`getHintUnlockState`), troubleshooting síntoma-primero y reto de transferencia.
 - **Fase 1 (línea base): hecha** (`288f350`). `npm run audit:lbd`; tope de prácticas centralizado en
-  `MIN/MAX_INTERACTIVE_PRACTICES` (hoy 12-44).
+  `MIN/MAX_INTERACTIVE_PRACTICES` (hoy 12-149).
 - **CI**: se retiró el espejo de GitHub Pages (`5c9dcb1`); el CI valida con el mismo build que Vercel y no despliega.
 - **Fase 2 (Nivel Básico, Módulos 1-8): CERRADA el 2026-11-01 por decisión del usuario**, con una segunda prueba
   simulada en lugar de una persona real (ver Pendiente, punto 2). Migración: commits `ff28c69`…`bc210a2`.
@@ -84,7 +84,20 @@
      `copilot-studio`. LAB-09 corregido contra Learn (Column security profiles en PPAC, System Administrator siempre ve
      las columnas protegidas, BPF desde la solución). Preguntas del banco corregidas en M9, M14, M15, M16 y M17.
      Sin prueba simulada de la Fase 3.
-4. Sin aprobación: Fases 4-5 y Fase 6 recortada (IA 43, 44, 46, 54, 55).
+4. **Hecho el 2026-11-01 (pedido por el usuario: "termina esto"):**
+   - **Prueba simulada de la Fase 3** (persona "Andrés", 3 agentes sin contexto: M9+LAB-09, M12+M14, M15+M16+M17).
+     Veredicto previo: todos "con dificultad" salvo M17 "no" en la ruta completa; hallazgos verificados en Learn y
+     corregidos (HTTP en Business en `Política TEST SIT`, Currency → columna calculada, **Creating a new activity**,
+     **Save snapshot**, **FlowActionTimedOut**, tiempos). Prácticas de la Fase 3 endurecidas (ninguna se abre resuelta).
+   - **Fase 4** (Avanzado 18-30), **Fase 5** (Arquitecto 31-41) y **recorte de la Fase 6** (IA 43, 44, 46, 54, 55):
+     46/76 módulos con reto de transferencia; 149 prácticas interactivas (`MAX_INTERACTIVE_PRACTICES = 149`); 7 dominios
+     nuevos. Caso Real intacto; banco en 891. Labs alineados: 19, 22, 23, 32, 51, 53, 63, 65 y 75. Título del M29 →
+     "Power Pages Avanzado y Microsoft Entra External ID" (slug sin cambios).
+   - **Etiquetas sin confirmar en Learn:** reintentadas; las que siguen sin confirmarse están en
+     `PROPUESTA_FASES_APRENDER_HACIENDO.md` §9 (no en el mensaje de un commit).
+   - Validado: `npm run verify` (487 tests, build de 428 páginas) y `npm run e2e`.
+5. **Sin aprobación (fuera de alcance):** IA 42, 45, 47-53 y 56; D365 57-66; RPA 67-76. Sin prueba simulada de las
+   Fases 4-6 (sus definiciones no la exigen). El C# añadido no se compiló (no hay SDK de .NET en la máquina).
 
 ## Mantenimiento vigente — 2026-10-01
 

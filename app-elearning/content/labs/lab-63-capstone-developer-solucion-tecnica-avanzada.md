@@ -199,9 +199,11 @@ aclarar nada después.
 ## Módulos relacionados
 
 - Módulo 19 — ALM y Estrategias de DevOps (contexto)
-- Módulo 21 — JavaScript y Extensibilidad Cliente
+- Módulo 13 — JavaScript y PCF Básico
 - Módulo 23 — C#: Plugins para Dataverse
-- Módulo 26/27 — PCF Avanzado / Observabilidad
+- Módulo 26 — Performance y Optimización
+- Módulo 27 — PCF Avanzado con TypeScript y React
+- Módulo 30 — Proyecto Multicapa Nivel 3 (mismo patrón con otro escenario)
 - Lab 19, Lab 23, Lab 52, Lab 53
 - Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)
 
