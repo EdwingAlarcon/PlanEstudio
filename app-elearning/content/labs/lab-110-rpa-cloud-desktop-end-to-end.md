@@ -8,7 +8,7 @@ certifications: ["Power Automate for desktop & RPA"]
 role: ["RPA Developer", "Automation Engineer", "Power Platform Consultant"]
 prerequisites:
   - "Módulo 75 completado"
-  - "Power Automate cloud básico"
+  - "Power Automate cloud básico (Módulo 5 o equivalente)"
 files: []
 lastVerified: "2026-09"
 ---
@@ -18,6 +18,8 @@ lastVerified: "2026-09"
 ## Objetivo
 
 Recibir una solicitud desde Power Automate cloud, ejecutar PAD y devolver resultado con parámetros, máquina, respuesta, error, almacenamiento y notificación.
+
+> **Licencia y variante sin cloud flow:** disparar un desktop flow desde un cloud flow exige un plan premium con RPA atendido (o Process para desatendido); el Developer Plan no incluye derechos de RPA. Si no tienes licencia, haz este laboratorio como **simulación**: diseña el cloud flow en papel y simula el disparador con valores por defecto, como describe el Módulo 75, y escribe «simulación sin licencia» en tu entrega. Este laboratorio equivale a la Microlección 3 y al diagnóstico del Módulo 75: si ya los hiciste, entrégalos aquí.
 
 ## Escenario de negocio
 
@@ -34,7 +36,7 @@ Un equipo registra solicitudes de trabajo en una lista. Cloud flow orquesta el l
 ## Ejercicios
 
 1. Crea una lista/tabla de solicitudes ficticias.
-2. Define estados `Pendiente`, `EnEjecucion`, `Completado`, `Error`.
+2. Define estados `Pendiente`, `EnEjecucion`, `Completado`, `ErrorNegocio` y `ErrorTecnico` (los mismos del Módulo 75).
 3. Crea cloud flow programado o manual.
 4. Envía parameters al desktop flow.
 5. Devuelve resultado estructurado.

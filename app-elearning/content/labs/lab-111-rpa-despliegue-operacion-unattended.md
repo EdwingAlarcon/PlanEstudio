@@ -122,3 +122,5 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 ## Reto adicional
 
 Agrega plan de continuidad si la máquina principal no está disponible.
+
+> **Reutilización:** si ya armaste el paquete de operación del [Módulo 76](/nivel/rpa/modulo/alm-operacion-gobierno-soporte-rpa), úsalo aquí como entrega de este laboratorio y completa solo lo que le falte (UAT firmado o simulado y machine readiness).

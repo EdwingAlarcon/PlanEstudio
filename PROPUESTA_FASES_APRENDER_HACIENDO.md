@@ -374,11 +374,13 @@ Learn dice que se requiere una máquina con todos los usuarios con la sesión ce
 ejecución.
 
 **No verificado en Learn (redactado en neutro o declarado como inferencia).**
-- Que un desktop flow lea **variables de entorno** directamente: Learn no lo documenta. El curso enseña el valor por
-  ambiente como *input desde el cloud flow* (las variables de entorno sí están en el contenido dinámico de un cloud flow
-  de solución y los inputs del desktop flow aparecen como campos de la acción): es una combinación de dos hechos
-  documentados, y así se rotula. Una variable de tipo **Secret** no está disponible en el contenido dinámico, así que no
-  sirve para pasar una contraseña al desktop flow.
+- Que un desktop flow lea **variables de entorno** por su cuenta: Learn no lo presenta como patrón (solo menciona, para
+  credenciales, la acción **Perform an unbound action in selected environment** del conector de Dataverse). El curso enseña
+  el valor por ambiente como *input desde el cloud flow* (las variables de entorno sí están en el contenido dinámico de un
+  cloud flow de solución y los inputs del desktop flow aparecen como campos de la acción): es una combinación de dos hechos
+  documentados, y así se rotula. Sobre las variables de tipo **Secret**, las propias páginas de Learn se contradicen (la de
+  Key Vault dice que no están en el contenido dinámico; la de cloud flows dice que todos los tipos se pueden usar) y exigen
+  una suscripción de Azure: el curso no pasa contraseñas como input y recomienda **Get credential**.
 - Etiquetas: la ruta exacta para crear una variable de entorno en una solución (se indica como «usa **New** y busca
   **Environment variable**»), la casilla **has failed** de **Run after** (la fuente fue un resultado de búsqueda sobre Learn,
   no una lectura directa de la página) y el comportamiento de «Bloqueo simulado» del sandbox al consultar por ID.
@@ -389,7 +391,22 @@ ejecución.
   equivalentes vigentes (`manage-machine-groups`, `monitor-desktop-flow-queues`, `alm/alm-solution`, `alm-schema`,
   `data-loss-prevention`, `guidance/coding-guidelines/error-handling`).
 
-**Qué no se hizo.** No hay registro en el repositorio de una prueba simulada de la Fase 7 (existe `handoff-fase7/BRIEF_SIM_F7.md`
+**Prueba simulada de RPA 75 y 76 (2026-11-05).** Dos evaluadores independientes sin contexto (persona «Camila»: analista sin
+licencias de pago; simulación hecha por un modelo, no una persona real) recorrieron cada módulo, su lab y sus prácticas.
+Veredicto: **con dificultad** en ambos, sin bloqueos sin salida (todas las partes con licencia tienen variante en papel).
+Hallazgos corregidos: (M75) un fallo funcional real —tras **Registrar** en modo Normal el sandbox no pinta ningún mensaje,
+así que leer su texto fallaba y la solicitud nueva nunca daba `Completado`; ahora se usa **If web page contains**—, pasos
+que no decían cómo traer los UI elements y el subflow `Log` del Módulo 74, valores de `requestId` por corrida, rama de
+`ErrorTecnico` en el cloud flow, un síntoma de IP-RPA-026 que contradecía a Learn (una máquina elegible sin conexión
+hace *esperar* la ejecución, no fallar), nombres de acciones de Dataverse (**List rows**, **Update a row**), criterios de
+IP-RPA-026 que daban por buena una respuesta que solo notificaba, y un reto de lote sin criterio de terminado (ahora con
+cálculo de ventana: 2.000 × 45 s ÷ 2 bots ≈ 12,5 h frente a 8 h; IP-RPA-027 exige cuatro decisiones); (M76) el paso que
+daba un **Default value** de DEV a una variable de entorno, que habría llevado la ruta de DEV a TEST (el Caso Real); el
+cloud flow que debe recrearse dentro de la solución; plantillas que son esqueletos y se abren como texto; y matices de
+Secret, logs V2 y roles. Tiempos: la simulación estimó 260-320 min de práctica en M75 y 7,5-9 h en M76, así que
+`practiceMinutes` subió a 300 y 450. LAB-110 recibió el aviso de licencia y estados alineados con el módulo.
+
+**Qué no se hizo.** No hubo prueba simulada de los demás módulos de la Fase 7 (existe `handoff-fase7/BRIEF_SIM_F7.md`
 con el protocolo, pero no sus informes). Los Módulos 75 y 76 no se ejecutaron en PAD ni en un tenant: los pasos se
 contrastaron contra el código real del sandbox (`rpa-sandbox/legacy-app`) y contra Learn. Las prácticas interactivas nuevas
 se comprobaron con los evaluadores del motor (respuesta correcta = `correct`; pista 3 de cada diagnóstico = 100).

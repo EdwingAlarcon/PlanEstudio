@@ -70,8 +70,9 @@ Learn: inventario en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §9. **Fase 7 (resto
 banco llega a **239 prácticas interactivas** (`MAX_INTERACTIVE_PRACTICES` fijado a ese total exacto) y hay dominios nuevos
 `ia`, `dynamics-365` y `rpa`. El cierre de RPA (Módulos 75 y 76, +IP-RPA-025 a 030) tiene variante en papel donde Learn
 exige licencia (disparar un desktop flow desde un cloud flow); LAB-110 y LAB-111 se corrigieron contra Learn. Lo no
-verificado y los 404 de Learn están en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §10; no hay registro de una prueba simulada de
-la Fase 7.
+verificado y los 404 de Learn están en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §10, junto con la prueba simulada de los
+Módulos 75 y 76 (2 evaluadores sin contexto; simulación, no una persona real) y sus hallazgos corregidos; los demás módulos
+de la Fase 7 no tienen prueba simulada registrada.
 
 ## Mantenimiento vigente — 2026-10-01
 
