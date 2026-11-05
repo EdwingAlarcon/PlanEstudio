@@ -251,7 +251,7 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     implementation: "Column: Edad\nType: Text\nExisting values: '9', '12', 'N/A', '35'",
     symptom: "Ordena 12 antes que 9 y permite valores no numéricos.",
     fixPrompt: "Escribe la corrección propuesta.",
-    acceptableFixes: ["numero", "whole number", "entero", "migrar", "validar", "limpiar datos", "nueva columna"],
+    acceptableFixes: ["numero", "whole number", "entero", "columna numerica", "migra", "valida", "limpia", "limpiar datos", "nueva columna"],
     testCases: [
       { id: "t1", input: "Valor 9", expected: "Orden numérico correcto" },
       { id: "t2", input: "Valor N/A", expected: "Se detecta como dato a limpiar antes de migrar" },
@@ -358,7 +358,7 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     implementation: "Condition:\nAmount < 10000000",
     symptom: "5M requiere aprobación; 15M se aprueba automáticamente.",
     fixPrompt: "Escribe la condición corregida.",
-    acceptableFixes: ["amount > 10000000", "> 10000000", "mayor que 10000000", "superior a 10000000"],
+    acceptableFixes: ["amount > 10000000", "> 10000000", "10000000", "mayor que 10000000", "superior a 10000000"],
     testCases: [
       { id: "low", input: "5M", expected: "aprobación automática" },
       { id: "high", input: "15M", expected: "solicitar aprobación" },
@@ -518,7 +518,7 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     implementation: "Condition:\nAmount > 10000000",
     symptom: "El flujo falla cuando Amount viene null.",
     fixPrompt: "Escribe la corrección.",
-    acceptableFixes: ["null", "empty", "coalesce", "validar", "condition previa", "si esta vacio", "isblank"],
+    acceptableFixes: ["null", "empty", "coalesce", "valida", "condicion previa", "datos incompletos", "si esta vacio", "isblank"],
     testCases: [
       { id: "null", input: "Amount = null", expected: "No falla; ruta de datos incompletos" },
       { id: "high", input: "Amount = 15000000", expected: "Solicita aprobación" },
@@ -711,7 +711,7 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     implementation: "Component Library \"SIT Component Library\" v1.1 → Guardar → Publicar (sin errores)\nApp consumidora: sigue usando cmpHeader visualmente idéntico a v1.0",
     symptom: "La librería se publicó sin errores, pero la app que la consume sigue mostrando la versión anterior del componente.",
     fixPrompt: "¿Qué acción falta para que la app consumidora refleje el cambio?",
-    acceptableFixes: ["aceptar la actualizacion en la app", "actualizar el componente desde insertar", "insertar componentes icono de actualizacion", "aceptar update manualmente en cada app"],
+    acceptableFixes: ["aceptar la actualizacion en la app", "actualizar el componente desde insertar", "insertar componentes icono de actualizacion", "aceptar update manualmente en cada app", "insertar", "componentes", "icono de actualizacion"],
     testCases: [
       { id: "solo-publicar", input: "Librería publicada, app no actualizada manualmente", expected: "la app sigue viendo la versión anterior" },
       { id: "publicar-y-aceptar", input: "Librería publicada + Insertar > Componentes > aceptar actualización en la app", expected: "la app refleja el cambio" },
@@ -1433,7 +1433,7 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     implementation: "List rows (Dataverse)\n  Table: sit_solicituds\n  Filter: statuscode eq 1\n  (Pagination: Off, sin configurar)\nApply to each\n  Update row: statuscode = 2",
     symptom: "El run history muestra 'Succeeded' sin errores, pero solo 256 de ~3.400 registros esperados quedaron actualizados.",
     fixPrompt: "¿Qué cambiarías en la acción 'List rows' para que procese todos los registros esperados?",
-    acceptableFixes: ["activar paginación", "pagination on", "configurar threshold", "aumentar el límite de paginación", "activar paginacion en list rows"],
+    acceptableFixes: ["activar paginacion", "pagination on", "paginacion", "pagination", "configurar threshold", "threshold", "settings", "list rows", "limite por defecto"],
     testCases: [
       { id: "sin-paginacion", input: "Pagination: Off", expected: "solo primeros 256 registros" },
       { id: "con-paginacion", input: "Pagination: On, Threshold 5000", expected: "procesa los ~3.400 registros" },
@@ -1574,7 +1574,7 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     implementation: "pac pcf push --publisher-prefix sit → Succeeded\nFormulario → campo sit_estado → Componentes → StatusBadge agregado (visible en el formulario)\nBadge renderizado: gris, texto \"Sin estado\"",
     symptom: "El control se despliega y se ve en el formulario, pero `statusLabel` siempre llega vacío/sin valor al componente.",
     fixPrompt: "¿Qué falta configurar para que el control reciba el valor real de sit_estado?",
-    acceptableFixes: ["enlazar la propiedad statusvalue al campo", "configurar statusvalue al campo sit_estado", "falta el binding de la propiedad en el formulario", "asignar el campo a la propiedad statusvalue"],
+    acceptableFixes: ["enlazar la propiedad statusvalue al campo", "configurar statusvalue al campo sit_estado", "falta el binding de la propiedad en el formulario", "asignar el campo a la propiedad statusvalue", "statusvalue", "sit_estado", "propiedad"],
     testCases: [
       { id: "sin-binding", input: "Componente agregado, propiedad statusValue sin campo asignado", expected: "statusLabel llega vacío, badge gris" },
       { id: "con-binding", input: "Componente agregado, propiedad statusValue → Campo: sit_estado", expected: "badge muestra el color y texto reales del estado" },
@@ -1771,7 +1771,7 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     implementation: "Solución exportada: SIT Facturacion Todo\n  - Custom connector: SIT Facturacion\n  - Connection reference: SIT Facturacion\n  - Cloud flow: Emitir factura al facturar pedido\nImportación en TEST: una sola solución, un solo paso",
     symptom: "La importación en TEST no termina bien: el flujo queda sin poder activarse porque su connection reference no encuentra el conector ni una conexión válida.",
     fixPrompt: "¿Qué cambiarías en cómo se empaqueta e importa, y qué harías después de importar?",
-    acceptableFixes: ["conector", "primero", "solucion", "separada", "conexion", "orden"],
+    acceptableFixes: ["conector", "primero", "solucion", "separada", "separa", "crea la conexion", "conexion", "orden"],
     testCases: [
       { id: "todo-junto", input: "Conector, connection reference y flujo en la misma solución, importados juntos", expected: "el flujo no encuentra el conector ni una conexión en TEST" },
       { id: "conector-primero", input: "Una solución solo con el conector se importa primero; se crea la conexión; luego se importa la solución con la connection reference y el flujo", expected: "la connection reference se asocia a la conexión y el flujo se puede activar" },
@@ -2096,7 +2096,7 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     implementation: "Business Rule: Bloquear presupuesto si Cancelada\nScope: Entity\nCondición: Estado = Cancelada\nAcción: Lock/Unlock → Presupuesto: Lock\nResultado en el formulario: Presupuesto bloqueado\nResultado desde el flujo (Update a row): Presupuesto modificado sin error",
     symptom: "La columna se ve bloqueada en el formulario, pero el flujo la modifica sin que la regla lo impida.",
     fixPrompt: "¿Por qué ocurre y qué cambiarías para proteger el dato también en el servidor?",
-    acceptableFixes: ["solo en el formulario", "solo en formularios", "servidor", "show error message", "mensaje de error", "seguridad de columna", "column security"],
+    acceptableFixes: ["solo en el formulario", "solo en formularios", "servidor", "show error message", "mensaje de error", "seguridad de columna", "column security", "lock", "scope entity"],
     testCases: [
       { id: "solo-lock", input: "La regla solo tiene la acción Lock con Scope Entity", expected: "el formulario bloquea la columna, pero el flujo la sigue cambiando" },
       { id: "show-error", input: "Se agrega Show Error Message (Scope Entity) cuando Estado = Cancelada y cambia el Presupuesto", expected: "el guardado desde el flujo falla con el mensaje de la regla" },
@@ -5115,7 +5115,7 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     implementation: "if (solicitud.monto > UMBRAL) {\n  return usuario.roles.includes(\"Gerente Financiero\") || solicitud.rolAprobador === \"Gerente Financiero\";\n}\nreturn true;\n\nDato de SOL-0077: monto = \"12,000\" (typeof: string)\nNumber(\"12,000\") → NaN\n\"12,000\" > 10000 → false",
     symptom: "Una solicitud de 12,000 queda aprobada por una persona con rol Aprobador; con el mismo monto escrito como número (12000) la función sí la rechaza.",
     fixPrompt: "¿Por qué pasa y qué cambiarías en la función (no en los datos)?",
-    acceptableFixes: ["nan", "texto", "string", "numero", "valid", "rechaz", "false", "falla cerrada"],
+    acceptableFixes: ["nan", "texto", "string", "numero", "valid", "rechaz", "false", "falla cerrada", "isfinite", "typeof", "finito"],
     testCases: [
       { id: "monto-texto", input: "monto = \"12,000\" (texto con coma), usuario con rol Aprobador", expected: "la versión de la IA devuelve true; la corregida debe devolver false" },
       { id: "monto-numero", input: "monto = 12000 (número), usuario con rol Aprobador", expected: "ambas versiones devuelven false" },
@@ -5228,7 +5228,7 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     implementation: "- name: Desplegar en PROD\n  uses: microsoft/powerplatform-actions/deploy-solution@v2\n  with:\n    environment-url: ${{ secrets.PP_PROD_URL }}\n    solution-file: out/SITSolicitudesGastos_managed.zip\n\nRegistro del job: falla en la preparación (Set up job), antes del primer paso;\nel runner no encuentra la definición de la acción deploy-solution.\nNingún paso llegó a conectarse al ambiente.",
     symptom: "El job falla en la preparación, antes de autenticar o importar nada, porque el runner no encuentra la acción deploy-solution; cambiar @v1 por @v2 no lo arregla.",
     fixPrompt: "¿Qué está mal y qué pondrías en su lugar? ¿Dónde lo comprobaste?",
-    acceptableFixes: ["import-solution", "no existe", "accion", "learn", "documentacion", "lista", "nombre"],
+    acceptableFixes: ["import-solution", "no existe", "accion", "learn", "documentacion", "documentada", "environment-url", "solution-file", "lista", "nombre"],
     testCases: [
       { id: "deploy-solution", input: "uses: microsoft/powerplatform-actions/deploy-solution@v1 (o @v2)", expected: "el job falla al prepararse: la acción no existe en ninguna versión" },
       { id: "import-solution", input: "uses: microsoft/powerplatform-actions/import-solution@v1 con environment-url, app-id, client-secret, tenant-id y solution-file", expected: "el job pasa de la preparación y llega a importar la solución" },
@@ -9043,8 +9043,13 @@ export function evaluateDebug(
   attemptNumber = 1
 ): InteractiveEvaluationResult {
   const text = normalizeText(typeof answer === "string" ? answer : "");
-  const hits = practice.acceptableFixes.filter((term) => text.includes(normalizeText(term))).length;
-  const score = Math.min(100, Math.round((hits / Math.min(3, practice.acceptableFixes.length)) * 100));
+  // Un término que ya aparece en el síntoma no demuestra que el alumno encontró la causa: repetir el enunciado no puntúa.
+  // Si quedaran menos de 3 términos propios se usan todos, para no dejar la práctica sin solución posible.
+  const symptom = normalizeText(practice.symptom);
+  const ownTerms = practice.acceptableFixes.filter((term) => !symptom.includes(normalizeText(term)));
+  const terms = ownTerms.length >= 3 ? ownTerms : practice.acceptableFixes;
+  const hits = terms.filter((term) => text.includes(normalizeText(term))).length;
+  const score = Math.min(100, Math.round((hits / Math.min(3, terms.length)) * 100));
   const status = score >= 70 ? "correct" : score >= 35 ? "partial" : "incorrect";
   return {
     status,
