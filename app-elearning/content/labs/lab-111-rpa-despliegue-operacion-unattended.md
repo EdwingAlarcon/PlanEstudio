@@ -47,7 +47,7 @@ El bot debe pasar de DEV a TEST. Operaciones exige evidencia de readiness de má
 |---|---|---|
 | El bot no arranca en TEST aunque funcionaba en DEV | Las variables de entorno (rutas, URLs, modo) no se actualizaron al desplegar la solución | Revisa el deployment checklist y confirma que cada variable de entorno tiene el valor de TEST antes de ejecutar la UAT |
 | Las connection references quedan sin vincular tras importar la solución | La conexión de destino no existe en el ambiente TEST o no se remapeó durante la importación | Crea la conexión en TEST antes de importar y remapea explícitamente cada connection reference en el asistente de importación |
-| La sesión unattended no arranca o se cierra sola | La cuenta de servicio no tiene permisos de inicio de sesión remoto, o la máquina entra en bloqueo de pantalla | Configura la cuenta de servicio con "no bloquear pantalla" y valida que tenga permisos de RDP/sesión remota en el machine group |
+| La sesión unattended no arranca o se cierra sola | Había una sesión de Windows abierta o bloqueada en la máquina (Learn: una ejecución desatendida requiere una máquina con todos los usuarios con la sesión cerrada, y una sesión bloqueada impide que corra), o la conexión de desktop flows no es válida | Cierra todas las sesiones de Windows de la máquina antes de la ejecución, comprueba la conexión de desktop flows y revisa **Monitor > Machines** |
 | El runbook no distingue si el fallo es de máquina o de credencial | El checklist de machine readiness no valida credenciales por separado del estado de la máquina | Divide la validación en dos pasos explícitos: estado de la máquina (encendida, agente conectado) y validez de la credencial (login manual de prueba) |
 | El rollback deja el ambiente en un estado mixto (parte nueva, parte anterior) | El rollback plan no especifica el orden de reversión de componentes (solución, variables, conexiones) | Documenta en el rollback plan el orden exacto de reversión y verifica cada componente por separado antes de dar el rollback por completado |
 
@@ -73,10 +73,10 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 
 ### Sesión unattended no arranca o se cierra sola
 
-- **Causa probable:** la cuenta de servicio no tiene permisos de sesión remota o la máquina entra en bloqueo de pantalla.
-- **Cómo comprobar:** intenta iniciar sesión manualmente con la cuenta de servicio y revisa la configuración de bloqueo/protector de pantalla de la máquina.
-- **Cómo corregir:** ajusta la política de energía/bloqueo de pantalla y otorga permisos de sesión remota (RDP o equivalente) a la cuenta de servicio en el machine group.
-- **Reiniciar vs. reparar:** si la sesión falló a mitad de una corrida unattended, reinicia esa ejecución completa una vez corregidos los permisos, porque el estado de la interfaz queda indeterminado.
+- **Causa probable:** quedó una sesión de Windows abierta o bloqueada en la máquina, o la conexión de desktop flows no es válida.
+- **Cómo comprobar:** revisa en la máquina si hay sesiones de Windows abiertas o bloqueadas, valida la conexión de desktop flows y mira **Monitor > Machines** y **Monitor > Desktop flow runs**.
+- **Cómo corregir:** cierra todas las sesiones de Windows de la máquina (una sesión bloqueada impide la ejecución desatendida), vuelve a crear o validar la conexión de desktop flows y confirma en **Monitor > Machines** que la máquina está disponible.
+- **Reiniciar vs. reparar:** si la sesión falló a mitad de una corrida unattended, reinicia esa ejecución completa una vez corregida la causa, porque el estado de la interfaz queda indeterminado.
 - **Evidencia posterior a la corrección:** captura de una sesión unattended completa sin interrupciones y del runbook actualizado.
 
 ### El runbook no distingue fallo de máquina vs. credencial
