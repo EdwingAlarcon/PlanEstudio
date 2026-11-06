@@ -1,5 +1,37 @@
 # PlanEstudio — Estado de sprints post-auditoría (handoff)
 
+## Fase 7 (resto del curso) — trabajo a medias, guardado el 2026-11-01 en la rama `wip/fase7-resto-curso`
+
+> El usuario pidió parar y seguir mañana. **Nada de esto está en `master`**; la rama no despliega a producción.
+> Briefs de los agentes, `merge2.py` y una práctica parcial están en `handoff-fase7/` (borrar esa carpeta antes de fusionar).
+
+**Hecho (sin commit en master):**
+- Compilado el C# de Avanzado (.NET SDK 8.0.427, net48 + CrmSdk; M23 7/7, LAB-23 6/6, M24 net10/net8), GitHub Actions
+  del M54 verificado con actionlint, graphify instalado (`pip install --user graphifyy`).
+- Pruebas simuladas de las Fases 4-6 (7 agentes) y sus correcciones aplicadas: M18-M41, LAB-19/22/23/32, IA 43/44/46/54/55.
+- Migrados al patrón: IA 42, 45, 47-53, 56; D365 57-66; RPA 67-68 (completos, con prácticas). Banco de prácticas: **215**
+  (`MAX_INTERACTIVE_PRACTICES = 300` es TEMPORAL; fijar el total exacto al final). Dominio nuevo `rpa` (prefijo RPA).
+- Cambio de ambientes Developer verificado en Learn (uno administrado por usuario desde 15-11-2026; no administrados
+  suspendidos desde 15-12-2026; ejecutar en administrado exige Premium o prueba de 30 días) y aplicado en recursos,
+  M1, M14, M28, M33, LAB-19/56/115 y banco.
+- Correcciones del banco de preguntas (sigue en 891) y de labs 03, 45, 52, 54, 59, 68, 70, 80-85.
+
+**Pendiente (orden sugerido):**
+1. ~~RPA 69-74~~ **HECHO el 2026-11-02**: módulos verificados contra Learn y contra el código de `rpa-sandbox`
+   (Caso Real idéntico a `1af0e7a`), IP-RPA-007…024 integradas (banco: **233**), LAB-104…108 alineados
+   (`lastVerified: "2026-11"`). Correcciones clave: el escenario/modo del sandbox vive en el estado de React, no en la
+   URL (los pasos usan **Attach to running instance** > **By URL**); en Lento la tabla sí aparece y el aviso no se va;
+   **If file exists** y **If process** por nombre no prueban nada en M72; "Ejecutar acciones y manejar errores" y
+   "Validate selector" no existen en PAD (**On block error**, **Test selector**). `npm run verify` OK (487 tests,
+   512 páginas); `npm run e2e` 100/101, el fallo (onboarding "Empiezo desde cero" en `coverage-routes-labs.spec.ts:40`)
+   es intermitente: aislado pasa 18/18.
+2. RPA 75-76: sin migrar (IP-RPA-025…030).
+3. Pruebas simuladas de IA 42-56, D365 57-66 y RPA 67-76 (`handoff-fase7/BRIEF_SIM_F7.md`), y corregir sus hallazgos
+   (`BRIEF_FIX.md`). Se lanzaron y se detuvieron sin informe.
+4. Cierre: fijar `MAX_INTERACTIVE_PRACTICES` (el `0/149` del e2e ya se deriva del catálogo, commit `2fa609a`), `npm run verify`,
+   `npm run e2e` en serie, actualizar CLAUDE.md / PROPUESTA_FASES (§10) / este handoff, `graphify update .`, fusionar en
+   `master`, push y una consulta de CI.
+
 ## Rediseño "Aprender haciendo" — estado al 2026-11-01 (retomar desde aquí)
 
 > Este handoff no se actualizó durante las sesiones del 2026-10-08; esta sección reconstruye el estado desde los

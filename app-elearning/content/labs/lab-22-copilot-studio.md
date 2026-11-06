@@ -2,7 +2,7 @@
 id: lab-22
 title: "Copilot Studio Avanzado — Agente con SSO, Knowledge Sources y Adaptive Cards"
 level: "N3"
-duration: 190
+duration: 240
 product: ["Copilot Studio", "Microsoft Teams", "Dataverse", "Microsoft Entra ID"]
 certifications: ["PL-400"]
 role: ["Developer", "Functional Consultant"]
@@ -10,7 +10,7 @@ prerequisites:
   - "Módulo 15 completado — tabla Solicitud TI con la columna Autonumber Número de Solicitud"
   - "Módulo 22 estudiado: Copilot Studio Avanzado"
   - "Licencia de Copilot Studio que permita publicar (el trial no publica)"
-  - "Permiso para crear App Registrations y conceder consentimiento de administrador en Microsoft Entra ID"
+  - "Permiso para crear App Registrations y conceder consentimiento de administrador en Microsoft Entra ID (ser System Administrator del ambiente no lo da)"
   - "Microsoft Teams disponible en el tenant, con las apps de Power Platform permitidas"
 files: []
 lastVerified: "2026-11"
@@ -49,12 +49,12 @@ Copilot Studio ofrece varios *harnesses* (motores de autoría y orquestación) y
 
 | Ejercicio | Tiempo estimado |
 |---|---|
-| Ejercicio 1 — App Registration, agente y autenticación manual | 40 min |
-| Ejercicio 2 — Topic: Consultar mis solicitudes con Adaptive Card | 45 min |
+| Ejercicio 1 — App Registration, agente y autenticación manual | 50 min |
+| Ejercicio 2 — Topic: Consultar mis solicitudes con Adaptive Card | 55 min |
 | Ejercicio 3 — Generative answers con SharePoint | 25 min |
-| Ejercicio 4 — Topic: Crear nueva solicitud y escalamiento | 40 min |
-| Ejercicio 5 — SSO en Teams, publicar y probar | 40 min |
-| **Total** | **190 min** (mejor en dos sesiones: Ejercicios 1-3 y 4-5) |
+| Ejercicio 4 — Topic: Crear nueva solicitud y escalamiento | 50 min |
+| Ejercicio 5 — SSO en Teams, publicar y probar | 60 min (incluye esperar a que se propague la publicación) |
+| **Total** | **240 min** (mejor en dos sesiones: Ejercicios 1-3 y 4-5; la primera vez puede llevarte más) |
 
 ## Nivel
 
@@ -77,7 +77,7 @@ Copilot Studio ofrece varios *harnesses* (motores de autoría y orquestación) y
 - [ ] **Licencia que permita publicar.** Learn indica que la autenticación configurada solo se aplica **después de publicar**, y que con el trial puedes probar en el panel de prueba pero **no publicar** ([Learn: autenticación](https://learn.microsoft.com/microsoft-copilot-studio/configuration-end-user-authentication), [Learn: licencias del harness estándar](https://learn.microsoft.com/microsoft-copilot-studio/billing-licensing)). Con solo el trial no puedes completar los Ejercicios 1 y 5: ver "Si solo tienes trial" al final de este apartado.
 - [ ] **Copilot Credits:** las generative answers y las acciones del agente consumen Copilot Credits, la moneda común de Copilot Studio ([Learn: licencias del harness estándar](https://learn.microsoft.com/microsoft-copilot-studio/billing-licensing)). Si el agente deja de responder con un aviso de capacidad, habla con quien administra el tenant.
 - [ ] Tabla **Solicitud TI** con la columna Autonumber **Número de Solicitud** (formato `SOL-{SEQNUM:6}`, del Módulo 7) y al menos 3 solicitudes **creadas por ti** después de agregar esa columna. Es la misma tabla que usó el Módulo 15. **Si hiciste el Lab 02 en el mismo entorno**, tendrás dos tablas parecidas (`Solicitud TI` del Lab 02 y `Solicitud TI (M2)`): usa la que tiene la columna **Número de Solicitud**, o agrégasela a la otra siguiendo el Módulo 7.
-- [ ] Un rol que te permita crear App Registrations y **conceder consentimiento de administrador** (Learn menciona al menos **Application Administrator** o **Cloud Application Administrator**). Si no lo tienes, pídele a quien administre el tenant que haga contigo la Tarea 1.1.
+- [ ] Un rol que te permita crear App Registrations y **conceder consentimiento de administrador** (Learn menciona al menos **Application Administrator** o **Cloud Application Administrator**). Ojo: ser **System Administrator** de tu ambiente de Dataverse **no** te da ese permiso; son roles distintos (el primero es de Dataverse, el segundo de Microsoft Entra ID). Si no lo tienes, tienes dos caminos: pedirle a quien administre el tenant que haga contigo la Tarea 1.1, o usar un tenant de pruebas propio donde seas administrador global. El sandbox del Microsoft 365 Developer Program solo se ofrece a quien cumple sus requisitos (suscriptores de Visual Studio Professional o Enterprise, ciertos programas de partners o clientes de soporte Premier/Unified), así que no cuentes con él si no es tu caso ([Learn: FAQ del Developer Program](https://learn.microsoft.com/office/developer-program/microsoft-365-developer-program-faq)). Sin ese permiso, los Ejercicios 1 y 5 se quedan en el camino de "Si solo tienes trial".
 - [ ] Teams debe permitir agregar apps de Power Platform. Si está desactivado, Learn indica que lo habilita un administrador en el Teams admin center ([Learn: Teams y Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/publication-add-bot-to-microsoft-teams)).
 - [ ] Un sitio de SharePoint donde tengas al menos permiso de **Read** y puedas subir un documento.
 
@@ -250,7 +250,7 @@ Un agent flow empieza con el trigger **When an agent calls the flow** y devuelve
    revisar mis casos
    ```
 3. Con **+** (*Add node*) agrega **Send a message**: escribe `Buscando tus solicitudes, ` e inserta con **{x}** la variable de sistema `User.DisplayName` ([Learn: mensajes](https://learn.microsoft.com/microsoft-copilot-studio/authoring-send-message)).
-4. Con **+** elige **Add a tool** y selecciona `SIT - Bot Consultar Solicitudes`. En la entrada `emailUsuario` elige la variable de sistema `User.Email`. La salida queda guardada en una variable del topic: anota su nombre exacto (este lab supone `Topic.CantidadSolicitudes`).
+4. Con **+** elige **Add a tool** y selecciona `SIT - Bot Consultar Solicitudes`. En la entrada `emailUsuario` elige la variable de sistema `User.Email`. La salida queda guardada en una variable del topic: anota su nombre exacto (este lab supone `Topic.CantidadSolicitudes`). Si la tuya se llama distinto, usa tu nombre en la condición del paso 5 y en la fórmula del paso 7.
 5. **Add a condition**: **Select a variable** > `CantidadSolicitudes`, operador **is equal to**, valor `0`. En esa rama, un **Send a message**: `No tienes solicitudes registradas. Escribe "quiero crear una solicitud" si necesitas una.` La otra rama es **All other conditions**.
 6. En **All other conditions**, agrega **Ask with Adaptive Card**. Abre **…** > **Properties** > **Edit adaptive card** y, en el **Card payload editor**, reemplaza el contenido por este JSON. Selecciona **Save** y cierra el diseñador ([Learn: preguntar con Adaptive Cards](https://learn.microsoft.com/microsoft-copilot-studio/authoring-ask-with-adaptive-card)):
 
@@ -437,7 +437,7 @@ En **Test your agent** (reinicia antes con **Reset**), prueba:
    ```
    Comprueba que el nodo tiene la salida `actionSubmitId` (si no, **Edit Schema**).
 6. **Add a condition**: `actionSubmitId` **is equal to** `confirmar`. En esa rama:
-   - **Add a tool** > `SIT - Bot Crear Solicitud`. Entradas: `categoria` → abre la flecha **>** de la entrada, pestaña **Formula**, escribe `Text(Topic.Categoria)` e **Insert** (la variable de una pregunta de opción múltiple no es de tipo texto); `descripcion` → `Topic.Descripcion`; `emailUsuario` → la variable de sistema `User.Email`. La salida queda en una variable del topic (este lab supone `Topic.NumeroSolicitud`).
+   - **Add a tool** > `SIT - Bot Crear Solicitud`. Entradas: `categoria` → abre la flecha **>** de la entrada, pestaña **Formula**, escribe `Text(Topic.Categoria)` e **Insert** (la variable de una pregunta de opción múltiple no es de tipo texto); `descripcion` → `Topic.Descripcion`; `emailUsuario` → la variable de sistema `User.Email`. La salida queda en una variable del topic (este lab supone `Topic.NumeroSolicitud`; si la tuya se llama distinto, usa tu nombre en el mensaje siguiente).
    - **Send a message**: `¡Tu solicitud ` + **{x}** `Topic.NumeroSolicitud` + ` fue creada! El equipo de soporte la revisará pronto.`
 7. En **All other conditions** (el usuario eligió **Modificar**): **Send a message** `De acuerdo, no la creé. Escribe "quiero crear una solicitud" para empezar de nuevo.`
 8. **Save** y prueba en **Test your agent** con "abrir un ticket". Después busca el número en tu tabla **Solicitud TI**.

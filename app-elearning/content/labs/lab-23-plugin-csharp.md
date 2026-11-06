@@ -2,14 +2,14 @@
 id: lab-23
 title: "Plugin C# — Validación Server-Side y Auditoría Personalizada"
 level: "N3"
-duration: 150
+duration: 180
 product: ["Dataverse SDK", "C#", "Plugin Registration Tool"]
 certifications: ["PL-400"]
 role: ["Developer"]
 prerequisites:
   - "Lab 02 y Lab 09 completados — tabla Solicitud TI (sit_solicitud) con sit_prioridad, sit_estado y sit_costoestimado (Lab 09)"
   - "Columna Autonumber Número de Solicitud del Módulo 7 (si no la tienes, la Tarea 2.1 explica cómo crearla)"
-  - "Visual Studio 2022 con la carga de trabajo de escritorio .NET y el paquete de desarrollo de .NET Framework 4.8"
+  - "Visual Studio 2022 con la carga de trabajo de escritorio .NET y el paquete de desarrollo de .NET Framework 4.8, o el .NET SDK 8 o posterior para trabajar con pac plugin init, dotnet build y dotnet test"
   - "Power Platform CLI (pac) instalado, para abrir el Plugin Registration Tool con pac tool prt"
   - "Módulo 23 estudiado: C# Plugins para Dataverse"
 lastVerified: "2026-11"
@@ -48,12 +48,12 @@ Al finalizar este laboratorio podrás desarrollar, registrar y probar dos plugin
 
 | Ejercicio | Tiempo estimado |
 |---|---|
-| Ejercicio 1 — Configurar proyecto Visual Studio | 25 min |
+| Ejercicio 1 — Configurar proyecto Visual Studio | 35 min |
 | Ejercicio 2 — Plugin de Create: validar y calcular | 30 min |
 | Ejercicio 3 — Plugin PostUpdate: auditoría | 30 min |
-| Ejercicio 4 — Registrar en Plugin Registration Tool y probar | 35 min |
-| Ejercicio 5 — Tests unitarios con Moq | 30 min |
-| **Total** | **150 min** |
+| Ejercicio 4 — Registrar en Plugin Registration Tool y probar (incluye retirar el ensamblado del Módulo 23, si lo tienes) | 50 min |
+| Ejercicio 5 — Tests unitarios con Moq | 35 min |
+| **Total** | **180 min** |
 
 > Si es la primera vez que compilas y registras un plugin, cuenta con bastante más: instalar herramientas, firmar y resolver el primer error de registro lleva su tiempo.
 
@@ -76,8 +76,10 @@ Al finalizar este laboratorio podrás desarrollar, registrar y probar dos plugin
 
 - [ ] Visual Studio 2022 (Community, Professional o Enterprise) con la carga de trabajo **.NET desktop development**
 - [ ] Paquete de desarrollo (Developer Pack) de **.NET Framework 4.8** instalado
+- [ ] *Alternativa sin Visual Studio:* el **.NET SDK** 8 o posterior. Creas el proyecto con `pac plugin init`, compilas con `dotnet build` y ejecutas las pruebas con `dotnet test`, como en el Módulo 23. En ese caso no necesitas los dos puntos anteriores.
 - [ ] Plugin Registration Tool: en una terminal, `pac tool prt` lo descarga la primera vez y lo abre
 - [ ] Tabla Solicitud TI (`sit_solicitud`) del Lab 02 con las columnas `sit_prioridad` y `sit_estado`, y `sit_costoestimado` del Lab 09
+- [ ] **Si hiciste las Microlecciones 2 y 3 del Módulo 23 en este mismo ambiente:** ya tienes registrado un ensamblado `SIT.Plugins` con tres steps que hacen lo mismo que este lab. Antes de registrar el del lab lo vas a retirar (Tarea 4.3, paso 1). Si no lo retiras, cada cambio de estado crea **dos** filas de auditoría.
 
 ### Tabla adicional que debes crear antes de empezar
 
@@ -147,7 +149,7 @@ Antes de escribir el plugin, anota el número (**Value**) de cada opción. En ma
 
 4. En **Solution Explorer**, elimina el archivo `Class1.cs` que genera la plantilla (clic derecho > **Delete**).
 
-> *Alternativa sin Visual Studio para crear el proyecto:* `pac plugin init --outputDirectory SIT.Plugins` genera un proyecto ya firmado (Módulo 23, Microlección 2). Si lo usas, sáltate la Tarea 1.3 y revisa en el `.csproj` que el `TargetFramework` sea un .NET Framework entre 4.6.2 y 4.8.
+> *Alternativa sin Visual Studio para crear el proyecto:* `pac plugin init --outputDirectory SIT.Plugins` genera un proyecto ya firmado (Módulo 23, Microlección 2). Si lo usas, borra `Plugin1.cs`, sáltate las Tareas 1.2 y 1.3 (el proyecto ya trae `Microsoft.CrmSdk.CoreAssemblies` y la firma) y revisa en el `.csproj` que el `TargetFramework` sea un .NET Framework entre 4.6.2 y 4.8 (`pac` pone `net48`). Puedes partir de una carpeta nueva o reutilizar el proyecto del Módulo 23: en ese caso, borra sus clases (`SolicitudValidarCreatePlugin`, `SolicitudCalcularVencimientoPlugin`, `SolicitudAuditarEstadoPlugin`) y reemplaza su `SolicitudValores.cs` por el de la Tarea 2.2.
 
 ### Tarea 1.2 — Instalar el SDK de Dataverse
 
@@ -187,6 +189,8 @@ El Plugin Registration Tool no registra un ensamblado sin firmar (strong name).
 5. Elimina el `Class1.cs` de este proyecto.
 
 > El proyecto de pruebas no necesita firmarse: nunca se registra en Dataverse.
+
+> *Alternativa sin Visual Studio:* crea la carpeta `SIT.Plugins.Tests` junto a `SIT.Plugins` con el archivo `SIT.Plugins.Tests.csproj` de la Microlección 4 del Módulo 23 (ya trae MSTest, Moq, el SDK de Dataverse y la referencia al proyecto). Si hiciste esa microlección, puedes reutilizar el proyecto de pruebas: borra su `SolicitudPluginsTests.cs`, porque el Ejercicio 5 lo reemplaza con uno del mismo nombre.
 
 ---
 
@@ -444,8 +448,8 @@ Compila de nuevo. **Qué deberías ver:** `Build succeeded`.
 ### Tarea 4.1 — Compilar el proyecto
 
 1. Compila en **Release** (selector de configuración de la barra de herramientas) o en **Debug**: los dos sirven para registrar. Learn usa **Debug** mientras depuras y pide **Release** antes de incluir el ensamblado en una solución que vas a distribuir.
-2. **Build** > **Build Solution** (`Ctrl + Shift + B`) y comprueba en **Output**: `Build succeeded`.
-3. El `.dll` queda en `SIT.Plugins\bin\Release\SIT.Plugins.dll` (o `bin\Debug\`).
+2. **Build** > **Build Solution** (`Ctrl + Shift + B`) y comprueba en **Output**: `Build succeeded`. En la terminal: `dotnet build -c Release` (o solo `dotnet build` para Debug) dentro de `SIT.Plugins`.
+3. El `.dll` queda en `SIT.Plugins\bin\Release\SIT.Plugins.dll` (o `bin\Debug\`) con el proyecto **Class Library (.NET Framework)** de Visual Studio. Con el proyecto de `pac plugin init`, en `SIT.Plugins\bin\Release\net48\SIT.Plugins.dll` (o `bin\Debug\net48\`). El `SIT.Plugins.1.0.0.nupkg` que genera `pac` en `bin\Release` es un paquete de plug-in: en este lab no lo uses.
 
 ### Tarea 4.2 — Conectar el Plugin Registration Tool
 
@@ -464,14 +468,20 @@ Compila de nuevo. **Qué deberías ver:** `Build succeeded`.
 
 ### Tarea 4.3 — Registrar el ensamblado
 
-1. En el menú **Register**, elige **Register New Assembly**.
+1. **Solo si hiciste el Módulo 23 en este ambiente:** en el árbol del PRT busca el ensamblado `SIT.Plugins` del módulo (con `SolicitudValidarCreatePlugin`, `SolicitudCalcularVencimientoPlugin` y `SolicitudAuditarEstadoPlugin`). Selecciónalo > **Unregister** y confirma. Learn indica que borrar un ensamblado borra también sus plugins y steps ([Learn: actualizar un plug-in](https://learn.microsoft.com/power-apps/developer/data-platform/tutorial-update-plug-in#unregister-assembly-plug-in-and-step)).
 
-2. En el diálogo **Register New Assembly**:
+   **Por qué:** sus steps hacen lo mismo que los de este lab. Si los dejas, cada cambio de estado crea **dos** filas de auditoría (la del módulo, con números, y la del lab, con etiquetas), y al guardar una Crítica sin costo puedes ver el mensaje del módulo en vez del de este lab. Tu código del módulo sigue en tu carpeta. Si quieres conservar la regla de Resuelta de su reto de construcción, copia esa clase a este proyecto y vuelve a registrar su step al final del lab.
+
+   **Qué deberías ver:** el árbol ya no muestra ningún ensamblado `SIT.Plugins`. Si el PRT no te deja porque hay steps que dependen del ensamblado (Learn advierte de esa restricción al borrar desde una solución), despliega el ensamblado, haz **Unregister** en cada step y después en el ensamblado. Si no hiciste el módulo aquí, salta al paso 2.
+
+2. En el menú **Register**, elige **Register New Assembly**.
+
+3. En el diálogo **Register New Assembly**:
    - Pulsa el botón **…** y elige tu `SIT.Plugins.dll`.
    - Comprueba que aparecen marcadas las dos clases: `SIT.Plugins.SolicitudPreCreatePlugin` y `SIT.Plugins.SolicitudPostUpdatePlugin`.
    - Deja **Isolation Mode** = **Sandbox** y **Location** = **Database** (los valores por defecto; las otras opciones son para instalaciones locales).
 
-3. Pulsa **Register Selected Plug-ins** y cierra la confirmación con **OK**.
+4. Pulsa **Register Selected Plug-ins** y cierra la confirmación con **OK**.
 
 **Si no lo ves:** si el PRT rechaza el ensamblado o no muestra las clases, revisa la tabla de "Errores frecuentes" (firma, `TargetFramework`, clase `public` que implemente `IPlugin`).
 
@@ -741,11 +751,13 @@ namespace SIT.Plugins.Tests
 ### Tarea 5.2 — Ejecutar los tests
 
 1. Compila la solución (**Build** > **Build Solution**).
-2. Abre **Test** > **Test Explorer** y elige **Run All** (`Ctrl + R, V`).
+2. Abre **Test** > **Test Explorer** y elige **Run All** (`Ctrl + R, V`). En la terminal: `dotnet test` dentro de `SIT.Plugins.Tests`.
 3. Los 6 tests deben quedar en verde.
-4. Rompe algo a propósito: en `CalcularFechaVencimiento`, cambia el `48` por `24`, ejecuta de nuevo y comprueba que falla `PreOperation_Baja_VenceEn48Horas`. Haz lo mismo cambiando `CreateOrganizationService(null)` por `CreateOrganizationService(context.UserId)` en el plugin de Update: ¿qué test falla y por qué? Deshaz los dos cambios.
+4. Rompe algo a propósito: en `CalcularFechaVencimiento`, cambia el `48` por `24`, ejecuta de nuevo y comprueba que falla `PreOperation_Baja_VenceEn48Horas` con tu mensaje "Debía vencer en 48 h…". Haz lo mismo cambiando `CreateOrganizationService(null)` por `CreateOrganizationService(context.UserId)` en el plugin de Update: ¿qué test falla y por qué? Deshaz los dos cambios.
 
-**Si no lo ves:** si **Test Explorer** no muestra ningún test, revisa que el proyecto tenga `MSTest.TestAdapter` y `Microsoft.NET.Test.Sdk`, y que la clase tenga `[TestClass]` y los métodos `[TestMethod]`. Si un test falla con "Object reference not set", al mock le falta un `Setup` para algo que el plugin usa.
+   **Qué deberías ver en el segundo cambio:** falla `PostUpdate_CambioRealDeEstado_CreaAuditoriaComoSystem` con una `NullReferenceException` ("Object reference not set to an instance of an object"), no con un mensaje de aserción. Es lo esperado: el mock de la factory solo devuelve el servicio cuando se pide con `null` (SYSTEM). Con `context.UserId` devuelve `null`, y el plugin falla al llamar a `Create`. El test te está avisando justo del cambio que en el tenant dejaría al técnico sin poder cambiar estados.
+
+**Si no lo ves:** si **Test Explorer** o `dotnet test` no muestran ningún test, revisa que el proyecto tenga `MSTest.TestAdapter` y `Microsoft.NET.Test.Sdk`, y que la clase tenga `[TestClass]` y los métodos `[TestMethod]`. Si un test falla con "Object reference not set" **sin** que hayas roto nada a propósito, al mock le falta un `Setup` para algo que el plugin usa.
 
 ### Validación del Ejercicio 5
 

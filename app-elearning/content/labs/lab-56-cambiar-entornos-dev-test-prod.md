@@ -8,7 +8,7 @@ certifications: ["Buenas Prácticas"]
 role: ["Developer", "Solution Architect", "Administrator"]
 prerequisites:
   - "Lab 52 completado — Power Platform CLI configurado y conectado"
-  - "Acceso (o capacidad de crear) al menos 2 entornos distintos: Developer/Sandbox y un segundo entorno de práctica"
+  - "Acceso a al menos 2 entornos distintos: tu Developer (o Sandbox) y un Trial con Dataverse como segundo entorno (desde el 15-11-2026 cada usuario solo puede tener un Developer), o la variante en papel"
   - "Módulo 52 estudiado: Power Platform CLI y Conexión Segura al Tenant"
 files: []
 lastVerified: "2026-09"
@@ -49,7 +49,7 @@ Developer, Solution Architect, Administrator.
 ## Tecnologías utilizadas
 
 - Power Platform CLI (`pac auth`, `pac org who`)
-- Al menos 2 entornos distintos (puede simularse Prod con un segundo entorno Developer si no tienes acceso a un entorno productivo real)
+- Al menos 2 entornos distintos (puede simularse Prod con un Trial con Dataverse; no uses un segundo Developer: desde el 15-11-2026 cada usuario solo puede tener uno — ver [Entornos y trials](/recursos/entornos-y-trials))
 
 ## Ejercicio 1 — Crear los 3 perfiles
 

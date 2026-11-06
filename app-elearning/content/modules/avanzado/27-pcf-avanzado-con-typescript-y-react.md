@@ -8,7 +8,7 @@ practiceMinutes: 150
 slug: "pcf-avanzado-con-typescript-y-react"
 lastVerified: "2026-11"
 ---
-*Lectura: 15-20 min · Con práctica: unos 150 min en tu entorno Developer; la primera vez, cuenta entre el doble y el triple (instalar herramientas y el primer `pac pcf push` son lo más lento).*
+*Lectura: 15-20 min · Con práctica: unos 150 min en tu entorno Developer, más 30-40 min del recurso puente de TypeScript y React si no lo has hecho; la primera vez, cuenta entre el doble y el triple (instalar herramientas y el primer `pac pcf push` son lo más lento).*
 
 ### 🚧 Antes de comenzar: requiere TypeScript sólido
 
@@ -20,6 +20,15 @@ lastVerified: "2026-11"
 > (JavaScript y PCF básico) sin experiencia previa en tipado estático, aun con el puente hecho
 > considera estudiar este módulo en modo conceptual (arquitectura del control avanzado, patrones de
 > React) antes de intentar construirlo — eso no valida que puedas desarrollarlo de forma independiente.
+>
+> **Ruta si vienes solo del Módulo 13:** con el puente hecho, puedes hacer igual casi todo el módulo,
+> porque las Microlecciones 1 y 2 te dan el código completo (lo copias, lo compilas y lo despliegas),
+> y la micropráctica, el diagnóstico y el reto de transferencia se resuelven con los Conceptos clave.
+> Lo único que exige escribir TypeScript por tu cuenta es el reto **Resolver** de la Microlección 3.
+> **Das esta ruta por terminada** cuando tienes: la grilla desplegada en el subgrid de Categoría con
+> la evidencia de la Microlección 2, el diagnóstico resuelto con tu hipótesis escrita y la tabla del
+> reto de transferencia. El reto Resolver queda pendiente (márcalo así en tus criterios de validación)
+> hasta que tengas más soltura con TypeScript; vuelve a él cuando la hayas ganado.
 
 ### 🎯 Objetivo
 Desarrollar controles PCF avanzados: Dataset controls que reemplazan subgrids, controles con Web API para operaciones CRUD, uso de Fluent UI para consistencia visual, y publicación de PCF en soluciones managed.
@@ -83,7 +92,7 @@ Desarrollar controles PCF avanzados: Dataset controls que reemplazan subgrids, c
 
    **No compiles todavía:** el `index.ts` de la plantilla sigue usando el nombre anterior del dataset y la compilación fallaría. En la Microlección 2 lo reemplazas y compilas.
 
-4. Mira la lista de archivos de la carpeta `SolicitudesGrid/`: además de `index.ts` y el manifest, la plantilla React genera un componente de ejemplo (`.tsx`). Anota su nombre y el nombre que tenía el dataset antes de tu cambio.
+4. Mira la lista de archivos de la carpeta `SolicitudesGrid/`: además de `index.ts` y el manifest, comprueba si la plantilla generó un componente de ejemplo (un archivo `.tsx`; su nombre puede cambiar según la versión de `pac`). Anota su nombre, o "ninguno", y el nombre que tenía el dataset antes de tu cambio.
 
 5. Comprueba que el proyecto tiene Fluent 9: en `package.json` debe aparecer `@fluentui/react-components` y en el manifest la línea `<platform-library name="Fluent" ... />`. Si falta alguna, instala la versión que admite el host y añade la línea dentro de `<resources>`:
 
@@ -101,7 +110,7 @@ Desarrollar controles PCF avanzados: Dataset controls que reemplazan subgrids, c
 |---|---|
 | Valor de `control-type` en el manifest generado | ___ |
 | Las líneas `<platform-library>` tal como aparecen (nombre y versión) | ___ |
-| Nombre del componente `.tsx` de ejemplo que generó la plantilla | ___ |
+| Nombre del componente `.tsx` de ejemplo que generó la plantilla (o "ninguno") | ___ |
 | Nombre original del `<data-set>` antes de cambiarlo a `solicitudes` | ___ |
 
 ---
@@ -125,6 +134,16 @@ Desarrollar controles PCF avanzados: Dataset controls que reemplazan subgrids, c
 
    export interface ISolicitudesTablaProps {
        dataset: ComponentFramework.PropertyTypes.DataSet;
+   }
+
+   // En el test harness, usar el paging del dataset lanza una excepción (Learn).
+   // Así la tabla se pinta igual en el harness, solo que sin el botón "Cargar más".
+   function hayMasPaginas(dataset: ComponentFramework.PropertyTypes.DataSet): boolean {
+       try {
+           return dataset.paging.hasNextPage;
+       } catch {
+           return false;
+       }
    }
 
    export const SolicitudesTabla: React.FC<ISolicitudesTablaProps> = ({ dataset }) => {
@@ -171,7 +190,7 @@ Desarrollar controles PCF avanzados: Dataset controls que reemplazan subgrids, c
                        })}
                    </TableBody>
                </Table>
-               {dataset.paging.hasNextPage && (
+               {hayMasPaginas(dataset) && (
                    <Button onClick={() => dataset.paging.loadNextPage()}>Cargar más</Button>
                )}
            </div>
@@ -215,11 +234,11 @@ Desarrollar controles PCF avanzados: Dataset controls que reemplazan subgrids, c
    }
    ```
 
-   Puedes borrar el componente `.tsx` de ejemplo que anotaste en la Microlección 1 (ya no se importa).
+   Si la plantilla generó un componente `.tsx` de ejemplo (lo anotaste en la Microlección 1), puedes borrarlo: ya no se importa.
 
 3. Compila con `npm run build`. **Qué deberías ver:** la compilación termina sin errores y `SolicitudesGrid/generated/ManifestTypes.d.ts` tiene en `IInputs` una propiedad `solicitudes` de tipo `ComponentFramework.PropertyTypes.DataSet`. Si TypeScript marca `context.parameters.solicitudes` como inexistente, el nombre del `<data-set>` del manifest no es `solicitudes`.
 
-4. *(Opcional, 10 min)* Prueba local con `npm start watch`: en **Data Inputs** carga un CSV pequeño con dos o tres columnas (por ejemplo, exportado desde la vista de solicitudes) y pulsa **Apply**. Verás la tabla con esos datos. El enlace del título no abre nada aquí: `openDatasetItem` necesita el host real.
+4. *(Opcional, 10 min)* Prueba local con `npm start watch`: en **Data Inputs** carga un CSV pequeño con dos o tres columnas (por ejemplo, exportado desde la vista de solicitudes) y pulsa **Apply**. Verás la tabla con esos datos, **sin** el botón **Cargar más**: Learn indica que el paging del dataset lanza una excepción en el harness, y `hayMasPaginas` la captura para que la tabla se pinte igual. El enlace del título tampoco abre nada aquí: `openDatasetItem` necesita el host real. Si el harness muestra un error en lugar de la tabla, anota el mensaje y sigue con el paso 5: lo que el harness no soporta se prueba ya desplegado.
 
 5. Para que `pac pcf push` suba una compilación de producción, abre `SolicitudesGridPCF.pcfproj` y, dentro del `<PropertyGroup>` que contiene `<OutputPath>`, añade `<PcfBuildMode>production</PcfBuildMode>`. Guarda.
 
@@ -271,7 +290,8 @@ Desarrollar controles PCF avanzados: Dataset controls que reemplazan subgrids, c
 Si te atascas, en orden:
 1. El componente necesita más que el dataset: pásale también `context.webAPI` y `context.navigation` desde `updateView` como props.
 2. El manifest tiene que declarar que el control usa la Web API (`feature-usage`). La tabla sale de `dataset.getTargetEntityType()`; el diálogo de confirmación es `navigation.openConfirmDialog({ title, text })` y su resultado trae `confirmed`; el de error, `navigation.openErrorDialog({ message })`.
-3. El cuerpo de `updateRecord` lleva la Choice como número: `{ sit_estado: TU_VALOR }`. Después de que la promesa se resuelva, pide los datos de nuevo con el método del dataset que vuelve a consultar. Recuerda subir la `version` del manifest antes del siguiente `pac pcf push`.
+3. El cuerpo de `updateRecord` lleva la Choice como número: `{ sit_estado: TU_VALOR }`. Después de que la promesa se resuelva, pide los datos de nuevo con el método del dataset que vuelve a consultar. Para desactivar el botón durante la escritura, guarda en un `useState` del componente si hay una escritura en curso, y usa `try/catch/finally`: el `finally` se ejecuta tanto si la escritura sale bien como si falla, así que ahí vuelves a habilitar el botón. Recuerda subir la `version` del manifest antes del siguiente `pac pcf push`.
+4. Si TypeScript marca `e.message` dentro del `catch (e)` con un error de tipo, es porque con `strict` la variable del `catch` es `unknown`: léela con `(e as Error).message`.
 
 **Qué deberías ver:** al resolver una solicitud de Hardware, la fila **desaparece** de la tabla, porque la vista `Solicitudes Abiertas del Equipo` excluye las resueltas. Si la abres desde **Operación** > solicitudes, su Estado es **Resuelta**.
 

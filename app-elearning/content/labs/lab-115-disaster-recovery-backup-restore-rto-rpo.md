@@ -85,7 +85,7 @@ ambos con marca de tiempo documentada.
 ## Ejercicio 2 — Simular la pérdida
 
 Simula una pérdida controlada y reversible (NO elimines el entorno real): por ejemplo, elimina
-deliberadamente 3-5 registros de la tabla que respaldaste, o crea un segundo entorno vacío que
+deliberadamente 3-5 registros de la tabla que respaldaste, o crea un segundo entorno vacío (un Trial: solo puedes tener un Developer, y los Trial no admiten backup ni restore, así que la opción de borrar registros es la más segura) que
 representará "el entorno recuperado desde cero". No ejecutes nada irreversible contra un entorno
 que no sea completamente de práctica.
 

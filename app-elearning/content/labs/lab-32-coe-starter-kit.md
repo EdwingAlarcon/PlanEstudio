@@ -2,14 +2,14 @@
 id: lab-32
 title: "CoE Starter Kit — Gobernanza a Escala del Tenant de Power Platform"
 level: "N4"
-duration: 165
+duration: 330
 product: ["CoE Starter Kit", "Power BI", "Power Automate", "Power Apps", "Dataverse"]
 certifications: ["Arquitectura Power Platform"]
 role: ["Solution Architect", "Admin", "CoE Lead"]
 prerequisites:
   - "Rol de Power Platform Administrator (o Global Administrator) asignado de forma directa y permanente; el rol Dynamics 365 Administrator no sirve para el kit"
-  - "Licencias no trial: Power Apps Per User, Power Automate Per User (o Per Flow) y Microsoft 365 con buzón; Power BI Pro para publicar y compartir el dashboard"
-  - "Al menos 5 aplicaciones Canvas o flujos ya creados en el tenant (para que el inventario tenga datos)"
+  - "Ruta A (instalación real): licencias no trial Power Apps Per User, Power Automate Per User (o Per Flow) y Microsoft 365 con buzón; Power BI Pro para publicar y compartir el dashboard. Ruta B (sin esas licencias): un ambiente Developer propio"
+  - "Al menos 5 aplicaciones Canvas o flujos ya creados en el tenant (para que el inventario tenga datos; en la ruta B bastan los que tengas)"
   - "Módulo 32 estudiado: CoE Starter Kit"
 files: []
 lastVerified: "2026-11"
@@ -41,14 +41,19 @@ Al finalizar este laboratorio habrás instalado los componentes Core del CoE Sta
 
 ## Duración estimada
 
+**Ruta A (instalación real), en dos sesiones** separadas por la espera del primer inventario:
+
 | Ejercicio | Tiempo estimado |
 |---|---|
-| Ejercicio 1 — Preparar el ambiente CoE y descargar el kit | 30 min |
-| Ejercicio 2 — Instalar el componente Core | 45 min (más la espera del primer inventario, que puede tardar horas) |
-| Ejercicio 3 — Power BI Dashboard: análisis del inventario | 25 min |
-| Ejercicio 4 — Proceso de cumplimiento | 30 min |
-| Ejercicio 5 — Environment Request Process, Governance y data policy | 35 min |
-| **Total** | **165 min** |
+| **Sesión 1** — Ejercicio 1 — Preparar el ambiente CoE, instalar el Creator Kit y descargar el kit | 60 min |
+| **Sesión 1** — Ejercicio 2 — Importar Core y completar el asistente (la importación sola puede tardar hasta una hora) | 90 min |
+| *Espera del primer inventario* | *varias horas; no cuenta como trabajo* |
+| **Sesión 2** — Ejercicio 3 — Power BI Dashboard: análisis del inventario | 60 min |
+| **Sesión 2** — Ejercicio 4 — Proceso de cumplimiento | 45 min |
+| **Sesión 2** — Ejercicio 5 — Environment Request Process, Governance y data policy | 60 min |
+| **Total ruta A** | **unas 5,5 horas de trabajo (330 min)**, más la espera |
+
+**Ruta B (sin las licencias no trial):** unos **150 min** en una sola sesión (ver "¿Ruta A o ruta B?" más abajo).
 
 ## Nivel
 
@@ -88,7 +93,21 @@ Learn ([Set up the CoE Starter Kit](https://learn.microsoft.com/power-platform/g
 5. Agrega una base de datos de Dataverse, con **English** como idioma por defecto, **sin** apps ni datos de ejemplo y con **None** como grupo de seguridad (algunos procesos del kit usan aprobaciones y los makers deben poder interactuar con el ambiente).
 6. Espera a que el ambiente esté listo.
 
-> Si en tu tenant de práctica no tienes capacidad para un ambiente Production, documenta la desviación: Learn pide Production para el kit.
+> Si en tu tenant de práctica no tienes capacidad para un ambiente Production, o no tienes las licencias no trial, no instales el kit en otro tipo de ambiente: sigue la **ruta B**.
+
+### ¿Ruta A o ruta B?
+
+- **Ruta A (instalación real):** tienes la identidad con el rol, las licencias **no trial** y la capacidad para un ambiente Production. Haz los Ejercicios 1 a 5 tal como están.
+- **Ruta B (sin esas licencias, lo normal en un tenant de prueba):** Learn exige licencias no trial para la identidad del kit, así que no lo instales con licencias de prueba. Haces de verdad lo que no depende del kit y recorres el resto con Learn, igual que la ruta B del Módulo 32:
+
+| Paso de la ruta B | Qué haces | Sustituye a |
+|---|---|---|
+| B1 — Descarga y lectura (20 min) | Haz la **Tarea 1.1** (descarga y extrae el ZIP) y lee la **Tarea 1.3**: copia la lista de conectores que el ambiente del CoE necesita en el grupo Business | Ejercicio 1 |
+| B2 — Inventario nativo (40 min) | En el admin center → **Manage** → **Inventory**, filtra apps y flujos, pulsa **Download** y, con el CSV, rellena la tabla de KPIs de la **Tarea 3.2** (total de apps, total de flujos, dueños distintos y recursos en el ambiente Default). Anota qué KPI no puedes sacar del CSV | Ejercicios 2 y 3 |
+| B3 — Recorrido guiado del kit (40 min) | Lee el Ejercicio 2, el Ejercicio 4 y las Tareas 5.1 y 5.2 junto a las páginas de Learn que citan. Para cada uno escribe, en una línea, qué habrías comprobado y dónde (flujo, app o variable de entorno). En el Ejercicio 4 di qué umbral pondrías en SIT y por qué | Ejercicios 2, 4 y Tareas 5.1-5.2 |
+| B4 — Data policy real (50 min) | Haz la **Tarea 5.3** de verdad en tu ambiente **Developer**: crea `Datos Internos SIT` con alcance **Add multiple environments** limitado a ese ambiente, crea el flujo con Dataverse y HTTP y anota el mensaje que muestra Power Automate | Tarea 5.3 (igual que en la ruta A) |
+
+> Para crear data policies necesitas el rol **Power Platform Administrator** (o Global Administrator) en tu tenant de práctica. Learn indica que el plan Developer permite aplicar data policies a su ambiente ([Learn: Developer plan](https://learn.microsoft.com/power-platform/developer/plan)).
 
 ---
 
@@ -122,7 +141,7 @@ Busca estas tablas por su **nombre para mostrar** en tu ambiente (los nombres l�
 ## Ejercicio 1 — Preparar el ambiente y descargar el kit
 
 > **Qué vas a hacer:** Descargar el CoE Starter Kit y preparar los prerrequisitos de instalación: identidad, data policy, Creator Kit y una conexión previa.
-> **Duración:** 30 min
+> **Duración:** 60 min
 
 ### Tarea 1.1 — Descargar el CoE Starter Kit
 
@@ -168,7 +187,11 @@ La data policy (antes llamada DLP) que aplique al ambiente del CoE debe permitir
 
 ### Tarea 1.4 — Creator Kit y conexión previa
 
-1. Instala el **Creator Kit** en el ambiente del CoE: es un requisito del CoE Starter Kit ([Learn: setup core components](https://learn.microsoft.com/power-platform/guidance/coe/setup-core-components)).
+1. Instala el **Creator Kit** en el ambiente del CoE: es un requisito del CoE Starter Kit ([Learn: setup core components](https://learn.microsoft.com/power-platform/guidance/coe/setup-core-components)). Pasos según [Learn: Install the Creator Kit](https://learn.microsoft.com/power-platform/guidance/creator-kit/setup):
+   1. En el admin center → **Manage** → **Environments** → `CoE — Gobernanza SIT` → **Settings** → **Product** → **Features**, activa **Power Apps code components for canvas apps** → **Save**.
+   2. Descarga la solución **CreatorKitCore** desde [aka.ms/creatorkitdownload](https://aka.ms/creatorkitdownload).
+   3. En [make.powerapps.com](https://make.powerapps.com), con el ambiente del CoE seleccionado → **Solutions** → **Import solution** → sube el archivo **CreatorKitCore** descargado → **Import**. Necesitas el rol **System Customizer** (o System Administrator) en el ambiente.
+   4. Alternativa por línea de comandos: `pac application install --environment <URL del ambiente> --application-name CreatorKitCore`.
 2. En [make.powerautomate.com](https://make.powerautomate.com), con el ambiente `CoE — Gobernanza SIT` seleccionado → **Data** → **Connections** → **+ New connection** → **HTTP with Microsoft Entra ID (preauthorized)**.
 3. En **Base Resource URL** y **Microsoft Entra ID Resource URI (Application ID URI)** escribe `https://graph.microsoft.com` (tenants comerciales; en GCC, GCC High o DoD usa el endpoint raíz de Microsoft Graph de tu nube).
 4. Inicia sesión con la identidad del kit.
@@ -186,7 +209,7 @@ La data policy (antes llamada DLP) que aplique al ambiente del CoE debe permitir
 ## Ejercicio 2 — Instalar el componente Core
 
 > **Qué vas a hacer:** Importar la solución Core al ambiente CoE, configurarla con el asistente y lanzar la sincronización del inventario del tenant.
-> **Duración:** 45 min (más la espera del primer inventario)
+> **Duración:** 90 min (más la espera del primer inventario)
 
 ### Tarea 2.1 — Importar la solución Core
 
@@ -257,7 +280,7 @@ El asistente se encarga de encender los flujos del inventario. El flujo principa
 ## Ejercicio 3 — Power BI Dashboard: análisis del inventario
 
 > **Qué vas a hacer:** Conectar el template de Power BI al ambiente CoE y usar el dashboard para identificar recursos problemáticos.
-> **Duración:** 25 min
+> **Duración:** 60 min (incluye instalar o actualizar Power BI Desktop si no lo tienes)
 
 ### Tarea 3.1 — Configurar el reporte de Power BI
 
@@ -324,8 +347,10 @@ El kit marca como huérfano un recurso cuyo dueño ya no está en la organizaci�
 
 ## Ejercicio 4 — Proceso de cumplimiento
 
-> **Qué vas a hacer:** Entender y configurar el proceso de cumplimiento del kit (Developer Compliance Center), que detecta apps muy compartidas o muy usadas y pide información a sus makers.
-> **Duración:** 30 min
+> **Qué vas a hacer:** Entender y configurar el proceso de cumplimiento del kit, que detecta apps muy compartidas o muy usadas y pide información a sus makers.
+> **Duración:** 45 min
+>
+> **Qué viene en Core y qué no:** Learn indica que los flujos de cumplimiento se instalan con los **Core components**, pero la app **Developer Compliance Center**, donde el maker responde, pertenece al componente **Governance**, que este lab no instala. Aquí ajustas umbrales y exenciones; la respuesta del maker solo la verás si instalas Governance.
 
 ### Tarea 4.1 — Entender el proceso de cumplimiento
 
@@ -389,7 +414,7 @@ Escribe en dos líneas qué harías con una app compartida con 300 usuarios cuyo
 ## Ejercicio 5 — Environment Request Process, visión de Governance y data policy
 
 > **Qué vas a hacer:** Explorar el Environment Request Process (cómo los equipos solicitan nuevos ambientes de forma controlada), hacer un walkthrough de cuarentena e inactividad del componente Governance y probar una data policy.
-> **Duración:** 35 min
+> **Duración:** 60 min
 
 ### Tarea 5.1 — Environment Request Process
 
@@ -498,18 +523,26 @@ Esta política impide que un flujo combine Dataverse (datos sensibles) con HTTP 
 - [ ] **CoE Maker Command Center** y **CoE Admin Environment Request** explorados
 - [ ] Data policy diseñada con 3 grupos y probada en un ambiente de prueba
 
+**Checklist de la ruta B** (sustituye al anterior si no tienes las licencias no trial):
+
+- [ ] Paquete del kit descargado, archivo de Core localizado y lista de conectores del ambiente del CoE copiada
+- [ ] Tabla de KPIs de la Tarea 3.2 rellenada con el CSV de **Manage** > **Inventory**, indicando el KPI que el CSV no da
+- [ ] Una línea por el Ejercicio 2, el Ejercicio 4, la Tarea 5.1 y la Tarea 5.2 con lo que habrías comprobado y dónde, y el umbral de cumplimiento que pondrías en SIT
+- [ ] Data policy `Datos Internos SIT` creada en tu ambiente Developer y probada con el flujo Dataverse + HTTP
+
 ## Evidencia esperada
 
 - Captura de **Admin | Sync Template v4 (Driver)** > **Runs** con una ejecución correcta y de la tabla **PowerApps App** poblada
 - Captura del Power BI dashboard cargando datos reales del ambiente CoE
 - Captura de la variable **Compliance – Apps - Number Users Shared** con el nuevo valor y de **Excuse From Compliance Flow** = **Yes**
 - Documento de la data policy con los 3 grupos, la exclusión del ambiente del CoE y el mensaje que mostró Power Automate en la prueba
+- **Ruta B:** el CSV de **Inventory** con la tabla de KPIs, las líneas del recorrido guiado y la captura de la data policy con el mensaje de Power Automate
 
 ## Criterios de aprobación
 
-- Al menos 1 data policy bloquea un conector no autorizado en una prueba real, sin afectar al ambiente del CoE
-- El dashboard de Power BI refleja el inventario real del tenant, no datos de ejemplo
-- 100% de los ítems del Checklist final marcados
+- Al menos 1 data policy bloquea un conector no autorizado en una prueba real, sin afectar al ambiente del CoE (en las dos rutas)
+- **Ruta A:** el dashboard de Power BI refleja el inventario real del tenant, no datos de ejemplo, y el 100% de los ítems del Checklist final está marcado
+- **Ruta B:** el 100% del checklist de la ruta B está marcado y los KPIs salen del CSV real de **Inventory**, no de ejemplos
 
 ---
 
@@ -547,11 +580,8 @@ Esta política impide que un flujo combine Dataverse (datos sensibles) con HTTP 
 
 ## Siguiente laboratorio recomendado
 
-Con el Lab 32 completado has terminado el recorrido de los labs fundamentales del sprint 1 y sprint 2.
-
 **Ruta de profundización sugerida:**
 
-- ➡️ **Lab 11 — Power Automate Avanzado** (HTTP, Dataverse Triggers, Error Handling enterprise)
 - ➡️ **Lab 31 — Arquitectura Empresarial** (diseñar la arquitectura multi-ambiente para SIT a escala)
 
 **Por qué ir ahí:** El Lab 31 te da el marco conceptual para justificar las decisiones de arquitectura que el Lab 32 implementa — estrategia de ambientes, modelo de seguridad, segregación de datos por región.

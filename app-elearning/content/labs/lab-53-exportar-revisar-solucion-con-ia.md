@@ -2,7 +2,7 @@
 id: lab-53
 title: "Exportar, Desempaquetar y Revisar una Solución con Apoyo de IA"
 level: "N5"
-duration: 90
+duration: 120
 product: ["Power Platform CLI", "GitHub Copilot", "Claude Code", "Git"]
 certifications: ["Buenas Prácticas"]
 role: ["Developer", "Solution Architect"]
@@ -11,7 +11,7 @@ prerequisites:
   - "Módulo 54 estudiado: ALM de Soluciones Power Platform con Apoyo de IA"
   - "Una solución de práctica en un entorno Developer/Sandbox (puede ser mínima: una tabla y un flujo)"
 files: []
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 53 — Exportar, Desempaquetar y Revisar una Solución con IA
@@ -41,10 +41,10 @@ Developer, Solution Architect.
 | Ejercicio | Tiempo estimado |
 |---|---|
 | Ejercicio 1 — Exportar la solución desde el entorno de desarrollo | 15 min |
-| Ejercicio 2 — Desempaquetar y versionar en Git | 20 min |
-| Ejercicio 3 — Revisar la solución con apoyo de IA (dependencias, referencias hardcodeadas) | 35 min |
-| Ejercicio 4 — Documentar hallazgos y preparar checklist de importación | 20 min |
-| **Total** | **90 min** |
+| Ejercicio 2 — Desempaquetar y versionar en Git (incluye preparar Git la primera vez) | 30 min |
+| Ejercicio 3 — Revisar la solución con apoyo de IA (dependencias, referencias hardcodeadas) | 45 min |
+| Ejercicio 4 — Documentar hallazgos y preparar checklist de importación | 30 min |
+| **Total** | **120 min** |
 
 ## Tecnologías utilizadas
 
@@ -54,22 +54,45 @@ Developer, Solution Architect.
 
 ## Ejercicio 1 — Exportar la solución
 
+Trabaja en una carpeta nueva para este lab (por ejemplo `sit-alm-lab`) y abre la terminal en ella. `SITSolicitudesGastos` es un ejemplo: en todos los comandos del lab, reemplázalo por el **Name** de tu solución (no su nombre visible; si no lo sabes, `pac solution list` lo muestra).
+
 ```bash
 pac org who
 pac solution export --name "SITSolicitudesGastos" --path ./exports/SITSolicitudesGastos.zip
 ```
 
+Si `pac org who` muestra un ambiente que no es tu Developer/Sandbox de práctica, **no exportes todavía**: revisa tus perfiles con `pac auth list`, cambia con `pac auth select --index <número del perfil>` y vuelve a ejecutar `pac org who`.
+
 **Validación esperada:** el archivo `.zip` se genera correctamente en la ruta indicada, y `pac org who` confirmó el entorno correcto antes de exportar.
 
 ## Ejercicio 2 — Desempaquetar y versionar
 
-```bash
-pac solution unpack --zipfile ./exports/SITSolicitudesGastos.zip --folder ./solutions/SITSolicitudesGastos --packagetype Unmanaged
-git add ./solutions/SITSolicitudesGastos
-git commit -m "chore: version inicial de la solución SITSolicitudesGastos"
-```
+1. Desempaqueta la solución:
 
-**Validación esperada:** la carpeta desempaquetada contiene archivos XML/JSON individuales por componente, no un único `.zip` binario.
+   ```bash
+   pac solution unpack --zipfile ./exports/SITSolicitudesGastos.zip --folder ./solutions/SITSolicitudesGastos --packagetype Unmanaged
+   ```
+
+2. **Prepara Git (solo la primera vez).** Si la carpeta del lab todavía no es un repositorio, `git status` responde `fatal: not a git repository`; en ese caso créalo con `git init`. Si nunca configuraste tu identidad en Git en este equipo, el primer `git commit` se detiene pidiéndola: configúrala para este repositorio (usa tu nombre y el correo que quieras que aparezca en el historial):
+
+   ```bash
+   git status
+   git init
+   git config user.name "Tu Nombre"
+   git config user.email "tu.correo@ejemplo.com"
+   ```
+
+3. Versiona **solo la carpeta desempaquetada**, no el `.zip`:
+
+   ```bash
+   git add ./solutions/SITSolicitudesGastos
+   git commit -m "chore: version inicial de la solución SITSolicitudesGastos"
+   git log --oneline
+   ```
+
+   **Qué deberías ver:** `git log --oneline` muestra una línea con tu commit. **Si `git status` sigue listando `exports/`**, es lo esperado: el `.zip` no se versiona (si quieres que Git lo ignore, agrega una línea `exports/` a un archivo `.gitignore`).
+
+**Validación esperada:** la carpeta desempaquetada contiene archivos XML/JSON individuales por componente, no un único `.zip` binario, y el commit aparece en `git log`.
 
 ## Ejercicio 3 — Revisar con IA
 
@@ -111,7 +134,7 @@ Con los hallazgos del Ejercicio 3, escribe:
 
 ## Criterios de aprobación
 
-- Exporta e importa sin edición manual del zip
+- Exporta y desempaqueta la solución sin edición manual del zip, y la carpeta desempaquetada queda versionada en Git (la importación a Test es del pipeline del Módulo 54; aquí se prepara su checklist)
 - Al menos 2 de los hallazgos reportados por la IA fueron confirmados contra los archivos reales, no aceptados a ciegas
 - 100% de los ítems de Criterios de Validación marcados
 
@@ -129,8 +152,7 @@ Con los hallazgos del Ejercicio 3, escribe:
 
 ## Referencia adicional
 
-Un ejemplo completo y ejecutable del pipeline de export/unpack/pack/import (para copiar a un
-proyecto real) está disponible en `docs/Anexos/EJEMPLO_PIPELINE_POWER_PLATFORM_ALM.md`.
+Un ejemplo de workflow de GitHub Actions que exporta la solución como managed y la importa en el destino con un archivo de deployment settings está en la Microlección 3 del [Módulo 54](/nivel/ia/modulo/alm-de-soluciones-con-ia) (sección "Contrasta tu versión"). Las acciones y sus parámetros están en [Learn: Available GitHub Actions for Microsoft Power Platform development](https://learn.microsoft.com/power-platform/alm/devops-github-available-actions).
 
 ## Competencias Desarrolladas
 

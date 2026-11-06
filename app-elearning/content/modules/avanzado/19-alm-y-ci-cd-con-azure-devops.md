@@ -4,11 +4,11 @@ title: "ALM y CI/CD con Azure DevOps"
 level: "avanzado"
 certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
 estimatedMinutes: 25
-practiceMinutes: 240
+practiceMinutes: 330
 slug: "alm-y-ci-cd-con-azure-devops"
 lastVerified: "2026-11"
 ---
-*Lectura: 20-25 min · Con práctica: unas 4 horas, mejor en tres sesiones (1: Microlección 1; 2: Microlección 2 con los Ejercicios 1 y 2 del Lab 19; 3: de la Microlección 3 al final). La primera vez, cuenta entre una vez y media y el doble: la configuración de Entra ID y Azure DevOps es lo que más se alarga.*
+*Lectura: 20-25 min · Con práctica: unas 5 horas y media, mejor en cuatro sesiones (1: Microlección 1; 2: Microlección 2 con los Ejercicios 1 y 2 del Lab 19; 3: Microlección 3 con su reto; 4: Microlección 4 y reto de transferencia). Si usas el agente self-hosted del plan B, súmale unos 30 minutos la primera vez. La configuración de Entra ID y Azure DevOps es lo que más se alarga.*
 
 ### 🎯 Objetivo
 Implementar pipelines completos de CI/CD para Power Platform con Azure DevOps (y saber trasladarlos a GitHub Actions): la solución como código con pac CLI, un pipeline de CI que construye **una sola vez** el artefacto managed y lo pasa por Solution Checker, y un pipeline de CD que lo despliega con aprobación y con los valores propios de cada ambiente. En tu tenant practicarás el tramo DEV → TEST de punta a punta; UAT y PROD los diseñarás, porque crear más ambientes exige capacidad que un tenant de práctica normalmente no tiene.
@@ -18,8 +18,12 @@ Implementar pipelines completos de CI/CD para Power Platform con Azure DevOps (y
 > **Antes de empezar, necesitas:**
 > - Lo que dejaste del [Módulo 16](/nivel/intermedio/modulo/seguridad-y-administracion-de-soluciones): tu ambiente **DEV** con la solución `SIT Solicitudes Internas` (nombre `SIT_SolicitudesInternas`), su variable de entorno `Correo Equipo TI` y sus referencias de conexión, y el ambiente **`SIT-TEST`** donde ya importaste versiones managed.
 > - Permiso para crear un **App registration** en Microsoft Entra ID y para agregar usuarios de aplicación en los dos ambientes (en tu tenant de prueba personal ya lo tienes).
-> - Una organización de Azure DevOps ([dev.azure.com](https://dev.azure.com)) con un proyecto y la extensión **Power Platform Build Tools** instalada (el [Lab 19](/labs/lab-19-cicd-azure-devops) explica cómo).
-> - **Ojo con los agentes:** Learn indica que el nivel gratuito de agentes alojados por Microsoft (*Microsoft-hosted*) **no se activa solo**: hay que vincular la organización a una suscripción de Azure (configurar facturación) para recibirlo; el nivel gratuito de agentes propios (*self-hosted*) sí se concede automáticamente ([Learn: parallel jobs](https://learn.microsoft.com/azure/devops/pipelines/licensing/concurrent-jobs)). Si tu primera ejecución se queda esperando un agente, es esto: resuélvelo antes de seguir.
+> - Una organización de Azure DevOps ([dev.azure.com](https://dev.azure.com)), creada con la **misma cuenta de trabajo del curso**, con un proyecto y la extensión **Power Platform Build Tools** instalada (el [Lab 19](/labs/lab-19-cicd-azure-devops) explica cómo). Al crear el proyecto (**New project**), en sus opciones avanzadas elige el proceso de work items **Agile**: la Microlección 4 usa **User Story** y su campo **Acceptance Criteria**, que el proceso Basic no tiene. Si ya lo creaste con Basic, se puede cambiar: **Organization settings** > **Boards** > **Process** > **Basic** > pestaña **Projects** > **More actions** junto a tu proyecto > **Change process** > **Agile** > **Save** ([Learn: de Basic a Agile](https://learn.microsoft.com/azure/devops/organizations/settings/work/change-process-basic-to-agile)).
+> - **Decide hoy dónde van a correr tus pipelines (no lo dejes para la Microlección 2).** Un pipeline necesita un *agente* y la organización, un *parallel job* gratuito. Learn indica que el de agentes propios (**self-hosted**) se concede automáticamente, pero el de agentes alojados por Microsoft (**Microsoft-hosted**, los `vmImage` del YAML) hay que activarlo vinculando la organización a una suscripción de Azure ([Learn: parallel jobs](https://learn.microsoft.com/azure/devops/pipelines/licensing/concurrent-jobs)). Tienes dos caminos:
+>   - **A. Microsoft-hosted:** **Organization settings** > **Billing** > **Set up billing** > elige la suscripción > **Save**. Al configurar la facturación, el nivel gratuito (un job a la vez, hasta 60 min por ejecución y 1.800 min al mes) se aplica solo; no hay que pedirlo con ningún formulario. Dos condiciones de Learn: la suscripción tiene que estar en el **mismo Microsoft Entra ID** que la organización de DevOps, y **la prueba gratuita de Azure (Azure Free Trial, la "cuenta gratuita") no sirve** ([Learn: facturación](https://learn.microsoft.com/azure/devops/organizations/billing/set-up-billing-for-your-organization-vs)). Con una cuenta gratuita tendrías que convertirla a pago por uso (**Subscriptions** > tu suscripción > **Upgrade subscription**, que pide un método de pago; [Learn: actualizar la cuenta](https://learn.microsoft.com/azure/cost-management-billing/manage/upgrade-azure-subscription)). El nivel gratuito de parallel jobs no cobra, pero a partir de ahí lo que uses en Azure sí.
+>   - **B. Self-hosted en tu propio equipo (gratis, sin suscripción):** instalas el agente de Azure Pipelines en tu Windows y cambias una línea del YAML. Los pasos están en el apartado **Agentes de Azure Pipelines** del Lab 19. Es el camino si no tienes una suscripción de pago en el tenant del curso, o mientras la consigues.
+>
+>   Si tu primera ejecución se queda en cola sin empezar, es esto: resuélvelo antes de seguir.
 > - Git y Power Platform CLI en tu equipo. La forma más sencilla es la extensión **Power Platform Tools** de Visual Studio Code; en Windows, Learn recomienda la extensión o el instalador MSI si vas a usar comandos que solo existen en Windows ([Learn: instalar Power Platform CLI](https://learn.microsoft.com/power-platform/developer/cli/introduction)).
 
 ### 📖 Conceptos Clave
@@ -63,7 +67,11 @@ graph LR
 **Práctica real en tu equipo (25 min):**
 1. Abre una terminal PowerShell (la de Visual Studio Code si instalaste solo la extensión) y crea un perfil contra DEV: `pac auth create --environment "<URL de tu ambiente DEV>"`. Se abre el inicio de sesión de Microsoft. **Qué deberías ver:** un mensaje de perfil creado y autenticado.
 2. Ejecuta `pac auth who`. **Comprueba que la URL que muestra es la de DEV**, no la de `SIT-TEST`. Si tienes varios perfiles, `pac auth list` los numera y `pac auth select --index <n>` activa el correcto.
-3. En una carpeta vacía (por ejemplo `sit-alm`), ejecuta `git init` y crea las carpetas `out` y `solutions`. Agrega un archivo `.gitignore` con la línea `out/`: los `.zip` no se versionan, se versiona lo desempaquetado.
+3. En una carpeta vacía llamada `sit-alm-local` (no la llames `sit-alm`: ese nombre lo usará el repositorio que clonarás en el Lab 19), ejecuta `git init` y crea las carpetas `out` y `solutions`. Agrega un archivo `.gitignore` con la línea `out/`: los `.zip` no se versionan, se versiona lo desempaquetado. Si nunca usaste Git en este equipo, configura antes tu identidad o el primer commit fallará con *Author identity unknown*:
+   ```powershell
+   git config --global user.name "Tu Nombre"
+   git config --global user.email "tu-correo@tu-dominio.com"
+   ```
 4. Exporta las dos versiones y desempaquétalas juntas:
 
 ```powershell
@@ -76,8 +84,16 @@ git commit -m "chore: primera exportación de SIT_SolicitudesInternas"
 ```
 
    **Si `export` dice que no encuentra la solución:** `--name` es el **Name** (`SIT_SolicitudesInternas`), no el nombre visible con espacios.
-5. Ve a [make.powerapps.com](https://make.powerapps.com), en DEV, abre la solución, cambia la **Description** de la tabla `Solicitudes TI` (o de otro componente) y guarda.
-6. Repite los dos `export` y el `unpack` añadiendo `--allowWrite --allowDelete` (para que sobrescriba y elimine archivos de componentes que ya no existan). Después ejecuta `git status` y `git diff --stat`.
+5. Ve a [make.powerapps.com](https://make.powerapps.com), en DEV, abre la solución, cambia la **Description** de la tabla `Solicitud TI` (o de otro componente) y guarda.
+6. Repite los dos `export` añadiendo `--overwrite` (los `.zip` ya existen en `out` y, según la referencia de pac, este modificador es el que permite sobrescribirlos) y el `unpack` añadiendo `--allowWrite --allowDelete` (para que sobrescriba y elimine archivos de componentes que ya no existan):
+
+   ```powershell
+   pac solution export --name SIT_SolicitudesInternas --path ./out/SIT_SolicitudesInternas.zip --overwrite
+   pac solution export --name SIT_SolicitudesInternas --path ./out/SIT_SolicitudesInternas_managed.zip --managed --overwrite
+   pac solution unpack --zipfile ./out/SIT_SolicitudesInternas.zip --folder ./solutions/SIT_SolicitudesInternas --packagetype Both --allowWrite --allowDelete
+   ```
+
+   Después ejecuta `git status` y `git diff --stat`.
 
    **Qué deberías ver:** solo unos pocos archivos modificados; el de la tabla que tocaste, entre ellos. Si aparecen cientos de archivos cambiados, mira si desempaquetaste en otra carpeta.
 
@@ -88,7 +104,7 @@ git commit -m "chore: primera exportación de SIT_SolicitudesInternas"
 | URL que mostró `pac auth who` antes de exportar | |
 | Número de archivos que listó `git diff --stat` tras tu cambio | |
 | Ruta del archivo que contiene la descripción que cambiaste | |
-| Versión de la solución en el `Solution.xml` desempaquetado | |
+| Versión de la solución en `solutions/SIT_SolicitudesInternas/Other/Solution.xml` (elemento `<Version>`) | |
 
 ## 🧩 Microlección 2 — Pipeline de CI: el artefacto se construye una vez
 
@@ -114,7 +130,9 @@ variables:
   artifact_name: 'solution-drop'
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'windows-latest'        # camino A (Microsoft-hosted)
+  # Plan B (agente self-hosted): sustituye la línea de arriba por
+  #   name: 'Default'
 
 stages:
   - stage: Build
@@ -139,7 +157,7 @@ stages:
               SolutionVersionNumber: '1.1.$(Build.BuildId).0'
 
           - task: PowerPlatformExportSolution@2
-            displayName: 'Exportar unmanaged (para el Checker y para Git)'
+            displayName: 'Exportar unmanaged (para Git y el desempaquetado)'
             inputs:
               authenticationType: 'PowerPlatformSPN'
               PowerPlatformSPN: 'SC-PowerPlatform-DEV'
@@ -160,10 +178,10 @@ stages:
               AsyncOperation: true
               MaxAsyncWaitTime: '60'
 
-          - task: PowerPlatformChecker@2
+          - task: PowerPlatformChecker@2               # analiza el mismo .zip managed que se desplegará
             inputs:
               PowerPlatformSPN: 'SC-PowerPlatform-DEV'
-              FilesToAnalyze: '$(Build.ArtifactStagingDirectory)/$(solution_name).zip'
+              FilesToAnalyze: '$(Build.ArtifactStagingDirectory)/$(solution_name)_managed.zip'
               RuleSet: '0ad12346-e108-40b8-a956-9a8f95ea18c9'   # Solution checker
               ErrorLevel: 'HighIssueCount'
               ErrorThreshold: '0'
@@ -176,8 +194,10 @@ stages:
               publishLocation: 'Container'
 ```
 
-   La versión empieza en `1.1.` para que siempre sea mayor que las `1.0.x.0` que importaste a mano en el Módulo 16. Este CI no desempaqueta: desempaquetar solo sirve si el resultado se guarda en Git (lo hiciste en la Microlección 1; automatizarlo con un commit desde el pipeline es el reto avanzado del lab).
-3. Registra el pipeline como `SIT — CI Build` y ejecútalo. **Qué deberías ver:** todas las tareas en verde; el Checker suele ser la más larga. Si se queda en cola sin empezar, vuelve al aviso de agentes del principio.
+   La versión empieza en `1.1.` para que siempre sea mayor que las `1.0.x.0` que importaste a mano en el Módulo 16. El Checker analiza el `_managed.zip`, es decir, exactamente el binario que el CD desplegará (Learn indica que la tarea admite archivos managed y unmanaged, [Learn: tareas de Build Tools](https://learn.microsoft.com/power-platform/alm/devops-build-tool-tasks)). La unmanaged se exporta igual porque es la fuente desde la que se reconstruye DEV y la que necesita el desempaquetado con `Both`. Este CI no desempaqueta: desempaquetar solo sirve si el resultado se guarda en Git (lo hiciste en la Microlección 1; automatizarlo con un commit desde el pipeline es el reto avanzado del lab).
+
+   **Si usas el plan B (agente self-hosted):** cambia `vmImage: 'windows-latest'` por `name: 'Default'` en el bloque `pool`, como indica el comentario, y deja el agente corriendo (`run.cmd`) mientras ejecutas el pipeline.
+3. Registra el pipeline con el nombre `SIT-CI-Build` (sin espacios ni rayas largas: el CD lo buscará por este nombre exacto) y ejecútalo. **Qué deberías ver:** todas las tareas en verde; el Checker suele ser la más larga. Si se queda en cola sin empezar, vuelve al aviso de agentes del principio. Si en la primera ejecución aparece *This pipeline needs permission to access a resource before this run can continue*, pulsa **View** > **Permit** y confirma con **Permit** ([Learn: solución de problemas](https://learn.microsoft.com/azure/devops/pipelines/troubleshooting/troubleshooting)). **Si falla el Checker:** su informe es un archivo `.sarif` que la tarea publica como artefacto de la ejecución (por defecto con el nombre `CodeAnalysisLogs`); descárgalo y ábrelo en Visual Studio Code con una extensión para ver archivos SARIF ([Learn: Build Tools](https://learn.microsoft.com/power-platform/alm/devops-build-tools)). Corrige las incidencias High o documenta por qué se aceptan; no subas el umbral para todo.
 4. Abre el artefacto publicado de la ejecución. **Qué deberías ver:** `SIT_SolicitudesInternas.zip` y `SIT_SolicitudesInternas_managed.zip`. En DEV, la solución muestra ahora la versión `1.1.<BuildId>.0`.
 
 **Evidencia a reportar:**
@@ -213,7 +233,7 @@ trigger: none                      # no se dispara por push
 resources:
   pipelines:
     - pipeline: ci_build           # alias: también es la carpeta de descarga
-      source: 'SIT — CI Build'     # nombre exacto del pipeline de CI
+      source: 'SIT-CI-Build'       # nombre exacto del pipeline de CI
       trigger:
         branches:
           include:
@@ -229,7 +249,7 @@ stages:
       - deployment: DeployTEST
         environment: 'SIT-TEST'    # aquí se aplica la aprobación
         pool:
-          vmImage: 'windows-latest'
+          vmImage: 'windows-latest'  # Plan B (self-hosted): name: 'Default'
         strategy:
           runOnce:
             deploy:
@@ -250,8 +270,9 @@ stages:
                     PublishWorkflows: true
 ```
 
-3. Regístralo como `SIT — CD Deploy TEST` y cambia su rama por defecto a `develop` (**Edit** > **More actions** > **Triggers** > **YAML** > **Get sources** > **Default branch for manual and scheduled builds**; sin esto el CD no se dispara solo, porque los filtros del trigger se evalúan en el YAML de la rama por defecto). Después lanza el CI (Ejercicio 4 del lab) y, cuando el CD se pause, apruébalo. **Qué deberías ver:** el stage esperando aprobación; tras aprobar, la importación en verde y, en `SIT-TEST`, la solución managed con la versión `1.1.<BuildId>.0`.
-4. En `SIT-TEST`, abre la solución y revisa el flujo de notificación y el valor actual de `Correo Equipo TI`. Anótalo: así compruebas si el despliegue dejó el ambiente operativo o solo "importado". (Como `SIT-TEST` ya tenía valor y conexiones del Módulo 16, aquí debería seguir funcionando; en un ambiente nuevo, no.)
+3. **Antes del primer CD, comparte las conexiones de `SIT-TEST` con el service principal.** Con `PublishWorkflows: true`, quien importa (el service principal) intenta activar los flujos, y Learn indica que quien activa un flujo tiene que ser dueño de todas sus conexiones o tenerlas compartidas; si no, la activación falla con `ConnectionAuthorizationFailed`. Las conexiones de `SIT-TEST` las creaste tú en el Módulo 16. En [make.powerapps.com](https://make.powerapps.com), ambiente `SIT-TEST` > **Connections** > cada conexión que usa la solución (Dataverse, Office 365 Outlook) > **Share** > escribe `SIT-PowerPlatform-Pipeline` > permiso **Can use** > **Save** ([Learn: compartir conexiones para activar flujos](https://learn.microsoft.com/power-apps/maker/data-platform/create-connection-reference#share-connections-with-another-user-so-flows-can-be-enabled)). Learn añade que las conexiones OAuth solo se pueden compartir explícitamente con un usuario que represente a un service principal, que es justo este caso.
+4. Regístralo con el nombre `SIT-CD-Deploy-TEST` y cambia su rama por defecto a `develop` (**Edit** > **More actions** > **Triggers** > **YAML** > **Get sources** > **Default branch for manual and scheduled builds**; sin esto el CD no se dispara solo, porque los filtros del trigger se evalúan en el YAML de la rama por defecto). Después lanza el CI (Ejercicio 4 del lab) y, cuando el CD se pause, apruébalo. **Qué deberías ver:** el stage esperando aprobación; tras aprobar, la importación en verde y, en `SIT-TEST`, la solución managed con la versión `1.1.<BuildId>.0`.
+5. En `SIT-TEST`, abre la solución y revisa el flujo de notificación y el valor actual de `Correo Equipo TI`. Anótalo: así compruebas si el despliegue dejó el ambiente operativo o solo "importado". Como `SIT-TEST` ya tenía valor y conexiones del Módulo 16 y en el paso 3 las compartiste, el flujo debería seguir **On**; en un ambiente nuevo, no. **Si el flujo quedó Off** o la importación avisa de un problema de conexiones, revisa el paso 3: falta compartir alguna conexión con `SIT-PowerPlatform-Pipeline`.
 
 **Evidencia a reportar:**
 
@@ -274,7 +295,7 @@ stages:
 >
 > **Restricciones:** no guardes secretos en el archivo (un `ConnectionId` no es un secreto; una contraseña sí). No uses `PowerPlatformSetConnectionVariables@2` para esto: no configura referencias de conexión.
 
-Si te bloqueas: el archivo generado ya trae `SchemaName`, `LogicalName` y `ConnectorId`; tú solo rellenas `Value` y `ConnectionId`. El `ConnectionId` es la última parte de la URL de la conexión cuando la abres en el ambiente `SIT-TEST`. Learn advierte que la importación valida la conexión: si falla por eso, la conexión tiene que pertenecer a la identidad que importa o estar compartida con ella. Este es el esquema del archivo (los nombres son **ejemplo**: usa los que genere tu comando):
+Si te bloqueas: el archivo generado ya trae `SchemaName`, `LogicalName` y `ConnectorId`; tú solo rellenas `Value` y `ConnectionId`. El `ConnectionId` es la última parte de la URL de la conexión cuando la abres en el ambiente `SIT-TEST`. Learn advierte que la importación valida la conexión: si falla por eso, la conexión tiene que pertenecer a la identidad que importa o estar compartida con ella (es lo que hiciste en el paso 3: **Connections** > la conexión > **Share** > `SIT-PowerPlatform-Pipeline` > **Can use**). Para la ruta de `DeploymentSettingsFile`: con un solo `- checkout: self`, el repositorio queda en `$(Build.SourcesDirectory)`, así que la ruta es `$(Build.SourcesDirectory)/deployment-settings/test.json`. Este es el esquema del archivo (los nombres son **ejemplo**: usa los que genere tu comando):
 
 ```json
 {
@@ -381,7 +402,9 @@ Si te bloqueas: el archivo generado ya trae `SchemaName`, `LogicalName` y `Conne
 | El CD no encuentra el deployment settings file | Un deployment job no hace checkout del repositorio | Añade `- checkout: self` como primer paso del deploy |
 | Importación correcta, pero el flujo está apagado y la variable vacía en un ambiente nuevo | No se dieron conexiones ni valores para ese ambiente | Deployment settings file del ambiente con `UseDeploymentSettingsFile: true` |
 | Error de autenticación (401) en la primera tarea | El service principal no es usuario de aplicación del ambiente o le falta System Administrator | Agrégalo en cada ambiente; `PowerPlatformWhoAmi@2` lo detecta al principio |
-| El pipeline se queda en cola sin empezar | Organización nueva sin el nivel gratuito de agentes Microsoft-hosted activado | Vincula una suscripción de Azure (facturación) o usa un agente self-hosted |
+| El pipeline se queda en cola sin empezar | Organización sin el nivel gratuito de agentes Microsoft-hosted (no se configuró la facturación, o la suscripción es una Azure Free Trial, que no se admite), o el YAML pide `name: 'Default'` y tu agente self-hosted no está corriendo | Configura la facturación con una suscripción de pago por uso del mismo tenant de Entra ID, o usa el agente self-hosted del Lab 19 (`pool: name: 'Default'`) con `run.cmd` abierto |
+| La importación termina, pero el flujo queda Off o falla con `ConnectionAuthorizationFailed` | El service principal que importa y activa los flujos no es dueño de las conexiones ni las tiene compartidas | En el ambiente destino, **Connections** > la conexión > **Share** > el service principal > **Can use** |
+| El CD no se dispara o no compila por el pipeline resource | `source` no coincide con el nombre real del CI (un espacio o una raya distinta basta) | Usa nombres sin espacios ni rayas largas (`SIT-CI-Build`) y cópialos de la lista de **Pipelines** |
 | Solution Checker da falsos positivos | Reglas muy estrictas para componentes de terceros | Revisa cada hallazgo; documenta las excepciones aceptadas en vez de subir el umbral para todo |
 | User Story con criterio "debe funcionar bien" | Se captura el deseo de negocio pero no el comportamiento verificable | Reescribir como Given/When/Then — si no se puede escribir un escenario concreto, la historia todavía no está entendida |
 | Commit no aparece vinculado en el Work Item | Falta `#<id>` en el mensaje (Azure Repos) o **Commit mention linking** está desactivado; o se usó `AB#` en Azure Repos | Activa el ajuste del repositorio y menciona `#<id>`; también se puede vincular a mano desde el work item |

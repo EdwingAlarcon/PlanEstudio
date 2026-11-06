@@ -16,6 +16,7 @@ Decidir, para cada necesidad de IA de una solución Power Platform, qué opción
 > **Antes de empezar:**
 > - **Viene del Suplemento 1A del Módulo 1** (qué es AI Builder y sus modelos prebuilt) y del **Módulo 11** (flujos con condiciones y manejo de errores). Aquí no se repite lo básico: se decide entre opciones.
 > - **Un entorno con Dataverse** donde puedas crear modelos y flujos (tu entorno Developer o de práctica). AI Builder no funciona en un entorno sin base de datos.
+> - **Si tu entorno es Developer:** el Developer Plan **no** incluye derechos de uso de AI Builder ([Learn: Developer Plan](https://learn.microsoft.com/power-platform/developer/plan)). Crear, entrenar y probar modelos y prompts no requiere créditos, pero **ejecutarlos** en un flujo sí. La página del Developer Plan aún menciona una prueba (*trial*) de AI Builder, mientras que la de licencias de AI Builder dice que esas pruebas **se discontinuaron** ([Learn: licencias de AI Builder](https://learn.microsoft.com/ai-builder/administer-licensing)). Si **AI hub** te ofrece una prueba, úsala; si no te deja crear el modelo o el flujo falla por falta de créditos, sigue con la variante sin créditos de la Microlección 2 (está al final de su Parte B).
 > - **Qué cuesta créditos y qué no:** entrenar modelos, probarlos desde la página **AI models** y probar prompts en prompt builder **no consume créditos**. Ejecutar un modelo o un prompt **dentro de un flujo o una app sí** consume: primero AI Builder credits (si el entorno los tiene) y, si no hay o se acabaron, **Copilot Credits**; si no hay ninguno de los dos, la acción falla ([Learn: licencias y AI Builder credits](https://learn.microsoft.com/ai-builder/credit-management)). Si tu entorno no tiene créditos, haz las partes de "probar" y deja la ejecución en el flujo como diseño; anótalo en tu evidencia.
 > - **Azure es opcional:** solo la parte B de la Microlección 3 necesita una suscripción de Azure con un recurso de Azure OpenAI o de Foundry. Sin suscripción, haz la parte A (prompt builder) y responde la parte B como decisión escrita.
 
@@ -98,7 +99,7 @@ flowchart TD
 
 **El concepto:** un modelo de extracción nunca está "bien" o "mal": cada campo trae un **confidence score**, y la arquitectura decide qué hacer con él. El Caso Real lo resuelve con un umbral: lo que supera 0.85 se procesa solo; lo demás va a una persona. El umbral es una **decisión de negocio** (cuánto error tolera el proceso frente a cuánta revisión manual puede pagar), y debe quedar escrito.
 
-**Ahora decide (5 min, sin feedback automático):** antes de construir, escribe en tu cuaderno qué campo usarás para decidir (¿el total, el número de factura, ambos?) y qué pasa si **uno** de los dos baja del umbral. Lo contrastarás con lo que observes en el paso 10.
+**Ahora decide (5 min, sin feedback automático):** antes de construir, escribe en tu cuaderno qué campo usarás para decidir (¿el total, el número de factura, ambos?) y qué pasa si **uno** de los dos baja del umbral. Lo contrastarás con lo que observes en el paso 15.
 
 **Construye en tu entorno:**
 
@@ -126,6 +127,8 @@ flowchart TD
 > **En producción** el trigger sería la llegada del correo con la factura. Si usas el conector de Outlook, filtra los adjuntos *inline* (las firmas de correo llegan como adjuntos): condición **Attachments Is Inline** igual a `false` antes de **Process documents** ([Learn: document processing en Power Automate](https://learn.microsoft.com/ai-builder/form-processing-model-in-flow)).
 >
 > **Si la ejecución falla con `EntitlementNotAvailable` o `QuotaExceeded`:** el entorno no tiene créditos disponibles. Es exactamente el diagnóstico de más abajo; anótalo y sigue con la evidencia del Quick test.
+>
+> **Variante sin créditos (o si no pudiste crear el modelo):** deja el flujo guardado tal como lo diseñaste (o, si no pudiste crear el modelo, escribe sus pasos 9 a 14 con los campos y la condición), anota el error exacto de la ejecución y prueba la factura del proveedor desconocido en **Quick test** (o, sin modelo custom, en la prueba del modelo prebuilt de facturas de la Microlección 1, que tampoco consume créditos). En la evidencia, la fila de "las 3 ejecuciones" se llena con el error y con la confianza que dio esa prueba para cada factura.
 
 **Evidencia a reportar:**
 
@@ -189,7 +192,7 @@ flowchart TD
    }
    ```
 
-   En la API v1, `model` es el **nombre de tu deployment** ([Learn: API v1 de Azure OpenAI](https://learn.microsoft.com/azure/foundry/openai/api-version-lifecycle)). `@{triggerBody()?['text']}` es la entrada de texto del trigger manual; ajústala al nombre de tu entrada. La categoría se lee con esta expresión (la acción HTTP se llama `HTTP_OpenAI` en el ejemplo):
+   En la API v1, `model` es el **nombre de tu deployment** ([Learn: API v1 de Azure OpenAI](https://learn.microsoft.com/azure/foundry/openai/api-version-lifecycle)). `@{triggerBody()?['text']}` es la entrada de texto del trigger manual; ajústala al nombre de tu entrada. Pega el Body tal cual, como objeto JSON: así la expresión se evalúa **dentro** de la propiedad `content` y su resultado queda como el valor de texto de esa propiedad ([Learn: expresiones en la definición del flujo](https://learn.microsoft.com/azure/logic-apps/logic-apps-workflow-definition-language#expressions)). Lo que no debes hacer es armar el cuerpo concatenando texto (por ejemplo, un **Compose** de texto que luego pasas por `json()`): ahí una entrada con comillas dobles, como `La impresora dice "sin papel"`, produce un JSON inválido. Con texto que escribe un usuario final, el conector del paso 2 sigue siendo la opción más gobernada. La categoría se lee con esta expresión (la acción HTTP se llama `HTTP_OpenAI` en el ejemplo):
 
    ```
    first(body('HTTP_OpenAI')?['choices'])?['message']?['content']
@@ -318,7 +321,7 @@ Toma el **Caso Real de Negocio** de abajo (2,000 facturas al mes, umbral de 85%)
 ### 🧪 Criterios de Validación
 - [ ] Probé un modelo prebuilt con un documento propio y anoté la confianza de sus campos antes de decidir si entrenar uno custom
 - [ ] Entrené y publiqué un modelo de document processing con al menos 2 collections de 5 documentos y lo probé con un documento no usado para entrenar
-- [ ] Mi flujo con **Process documents** decide por el confidence score y separa *Automática* de *Revisión manual*, y probé un proveedor desconocido
+- [ ] Mi flujo con **Process documents** decide por el confidence score y separa *Automática* de *Revisión manual*, y probé un proveedor desconocido (o, sin créditos, dejé el flujo diseñado con el error de ejecución anotado y probé el proveedor desconocido en **Quick test** o en la prueba del prebuilt: la variante sin créditos de la Microlección 2)
 - [ ] Mi prompt clasifica con temperatura 0 y el flujo valida que la respuesta esté en la lista antes de escribirla
 - [ ] Sé explicar qué consume cada opción (AI Builder credits o Copilot Credits), dónde se asigna y qué pasa cuando se agota
 - [ ] Diseñé la ejecución y el reentrenamiento de un modelo de predicción con su cadencia y su dueño

@@ -65,7 +65,8 @@ y captura de la confirmación de borrado del Resource Group, guardadas en tu bit
 ## Errores comunes
 
 - **Error:** crear recursos "para probar" y olvidarlos activos. **Por qué pasa:** a diferencia de un
-  ambiente Developer de Power Platform (gratuito, sin límite de tiempo mientras lo uses), Azure cobra
+  ambiente Developer de Power Platform (no cobra por estar creado; ver
+  [Entornos y trials](/recursos/entornos-y-trials) para los cambios de noviembre de 2026), Azure cobra
   por recurso activo. **Cómo evitarlo:** siempre borrá el Resource Group completo al terminar una
   práctica, no dejes "para después".
 - **Error:** confundir tu suscripción personal de Azure con la de una empresa/cliente real. **Cómo

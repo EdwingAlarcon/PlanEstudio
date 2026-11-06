@@ -1,6 +1,10 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
+import { getAllInteractivePractices } from "../src/lib/interactive-practices";
+
+// Derivado del catálogo para no romperse cada vez que una fase agrega prácticas.
+const TOTAL_PRACTICES = getAllInteractivePractices().length;
 
 test.describe("Interactive Practice Engine", () => {
   test.beforeEach(async ({ page }) => {
@@ -16,7 +20,7 @@ test.describe("Interactive Practice Engine", () => {
     await page.goto("/practica");
     await expect(page.getByRole("heading", { name: "Práctica interactiva" })).toBeVisible();
     // Scoped to #main-content to avoid the sidebar's own progress badges.
-    await expect(page.locator("#main-content").getByText("0/149")).toBeVisible();
+    await expect(page.locator("#main-content").getByText(`0/${TOTAL_PRACTICES}`, { exact: true })).toBeVisible();
     await expect(page.locator("select").nth(0)).toBeEnabled();
     await page.locator("select").nth(1).selectOption("query-playground");
     await expect(page.locator("#exercise-heading")).toContainText("FetchXML básico");

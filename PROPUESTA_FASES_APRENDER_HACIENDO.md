@@ -345,5 +345,77 @@ M43 en vez del M44) y LAB-75 (quitado el prerrequisito roto hacia el M37, que es
 **Qué no se hizo.** No hubo prueba simulada de las Fases 4-6 (sus definiciones no la exigen). El C# no se compiló (sin
 SDK de .NET); se verificó contra la referencia de API de Learn. El título del Módulo 29 pasó a "Power Pages Avanzado y
 Microsoft Entra External ID"; su slug (`power-pages-avanzado-y-azure-ad-b2c`) se conserva para no romper enlaces.
-Los Módulos 42, 45, 47-53 y 56 (IA), 57-66 (D365) y 67-76 (RPA) siguen sin migrar y quedan **fuera de alcance** hasta
-una nueva aprobación.
+Los Módulos 42, 45, 47-53 y 56 (IA), 57-66 (D365) y 67-76 (RPA) quedaron entonces sin migrar; el usuario aprobó migrarlos
+el 2026-11-01 (Fase 7, ver §10).
+
+## 10. Fase 7 — resto del curso (IA, D365 y RPA) y cierre del rediseño (2026-11-05)
+
+**Resultado.** `npm run audit:lbd`: **76/76 módulos** con microlecciones y reto de transferencia (100 %). El banco de
+prácticas interactivas llega a **239** (`MAX_INTERACTIVE_PRACTICES` se fijó a ese total exacto; antes era un tope
+temporal de 300). Dominios nuevos: `ia`, `dynamics-365` y `rpa`. RPA: 30 prácticas (IP-RPA-001 a 030), tres por cada
+Módulo 67-76.
+
+**Cierre de RPA (Módulos 75 y 76, 2026-11-05).** +6 prácticas: IP-RPA-025/026/027 (contrato cloud↔desktop, estado
+atascado en `EnEjecucion`, lote nocturno de 2.000) e IP-RPA-028/029/030 (qué viaja en la solución, el bot que falla el
+primer día de UAT, bot suspendido por DLP). Caso Real de ambos módulos sin cambios. Verificado en Learn (en inglés, con
+ms.date entre 2026-05 y 2026-10): acción **Run a flow built with Power Automate for desktop**; variables de entrada y
+salida de PAD (**External name**, **Default value**, **Mark as sensitive**); límites (2 MB de entrada, 70 ejecuciones por
+minuto por conexión, 12 h en cola, 500 en la cola de un grupo, un desktop flow a la vez por unattended bot); ALM de
+desktop flows con soluciones (**Add required objects**, managed, esquema v2, connection reference al importar); DLP para
+desktop flows; roles de máquina. Licencias: crear y probar el desktop flow no requiere licencia, pero dispararlo desde un
+cloud flow sí, por eso las Microlecciones del lado cloud (M75) y de despliegue (M76) tienen **variante en papel** que el
+alumno debe declarar como simulación.
+
+**Errores de contenido corregidos (labs 110 y 111).** LAB-110 mencionaba una acción «Devolver valores» de PAD que no
+existe (las salidas son variables **Output** con **External name**), la acción en español «Ejecutar un flujo de
+escritorio» (se llama **Run a flow built with Power Automate for desktop**) y una «versión publicada» del desktop flow que
+Learn no documenta. LAB-111 atribuía el fallo de una sesión desatendida a permisos de RDP y a «no bloquear pantalla»;
+Learn dice que se requiere una máquina con todos los usuarios con la sesión cerrada y que una sesión bloqueada impide la
+ejecución.
+
+**No verificado en Learn (redactado en neutro o declarado como inferencia).**
+- Que un desktop flow lea **variables de entorno** por su cuenta: Learn no lo presenta como patrón (solo menciona, para
+  credenciales, la acción **Perform an unbound action in selected environment** del conector de Dataverse). El curso enseña
+  el valor por ambiente como *input desde el cloud flow* (las variables de entorno sí están en el contenido dinámico de un
+  cloud flow de solución y los inputs del desktop flow aparecen como campos de la acción): es una combinación de dos hechos
+  documentados, y así se rotula. Sobre las variables de tipo **Secret**, las propias páginas de Learn se contradicen (la de
+  Key Vault dice que no están en el contenido dinámico; la de cloud flows dice que todos los tipos se pueden usar) y exigen
+  una suscripción de Azure: el curso no pasa contraseñas como input y recomienda **Get credential**.
+- Etiquetas: la ruta exacta para crear una variable de entorno en una solución (se indica como «usa **New** y busca
+  **Environment variable**»), la casilla **has failed** de **Run after** (la fuente fue un resultado de búsqueda sobre Learn,
+  no una lectura directa de la página) y el comportamiento de «Bloqueo simulado» del sandbox al consultar por ID.
+- Discrepancia de Learn: el máximo de máquinas por grupo figura como 50 en *Manage machines* y 300 en *Manage machine
+  groups*; el curso no cita ninguna de las dos cifras.
+- Páginas de Learn que devolvieron 404 al intentarlas: `run-pad-flows`, `desktop-flow-queues`, `create-machine-groups`,
+  `govern-desktop-flows`, `desktop-flow-security`, `alm-overview`, `alm-with-solutions` y `error-handling`; se usaron las
+  equivalentes vigentes (`manage-machine-groups`, `monitor-desktop-flow-queues`, `alm/alm-solution`, `alm-schema`,
+  `data-loss-prevention`, `guidance/coding-guidelines/error-handling`).
+
+**Prueba simulada de RPA 75 y 76 (2026-11-05).** Dos evaluadores independientes sin contexto (persona «Camila»: analista sin
+licencias de pago; simulación hecha por un modelo, no una persona real) recorrieron cada módulo, su lab y sus prácticas.
+Veredicto: **con dificultad** en ambos, sin bloqueos sin salida (todas las partes con licencia tienen variante en papel).
+Hallazgos corregidos: (M75) un fallo funcional real —tras **Registrar** en modo Normal el sandbox no pinta ningún mensaje,
+así que leer su texto fallaba y la solicitud nueva nunca daba `Completado`; ahora se usa **If web page contains**—, pasos
+que no decían cómo traer los UI elements y el subflow `Log` del Módulo 74, valores de `requestId` por corrida, rama de
+`ErrorTecnico` en el cloud flow, un síntoma de IP-RPA-026 que contradecía a Learn (una máquina elegible sin conexión
+hace *esperar* la ejecución, no fallar), nombres de acciones de Dataverse (**List rows**, **Update a row**), criterios de
+IP-RPA-026 que daban por buena una respuesta que solo notificaba, y un reto de lote sin criterio de terminado (ahora con
+cálculo de ventana: 2.000 × 45 s ÷ 2 bots ≈ 12,5 h frente a 8 h; IP-RPA-027 exige cuatro decisiones); (M76) el paso que
+daba un **Default value** de DEV a una variable de entorno, que habría llevado la ruta de DEV a TEST (el Caso Real); el
+cloud flow que debe recrearse dentro de la solución; plantillas que son esqueletos y se abren como texto; y matices de
+Secret, logs V2 y roles. Tiempos: la simulación estimó 260-320 min de práctica en M75 y 7,5-9 h en M76, así que
+`practiceMinutes` subió a 300 y 450. LAB-110 recibió el aviso de licencia y estados alineados con el módulo.
+
+**Ideas tomadas de un repositorio externo (azure-lab, 2026-11-05; sin licencia, no se copió código ni contenido).** (1) Prueba de
+contrato sobre las 239 prácticas: encontró 48 con algún defecto de evaluación (repetir el síntoma puntuaba `correct` en 6
+diagnósticos; la pista 3 no puntuaba `correct` en 7 más y en otros 3 dependía de palabras del síntoma). Se corrigió el motor y los
+términos aceptados, y la prueba quedó permanente. No se exige que pegar el escenario completo no puntúe (32 diagnósticos):
+penalizaría respuestas correctas. (2) Registro de actividad en el sandbox legacy: evidencia objetiva de idempotencia en los
+Módulos 74 y 75 (intentos de **Registrar** por solicitud, filas repetidas, consulta previa). No valida nada contra un tenant
+real. Descartado: el simulador de Azure DevOps (el Lab 19 ya resuelve el paralelismo gratuito), la guía de ficheros (ya cubierta
+en el recurso de plantillas de repositorio) y la gamificación.
+
+**Qué no se hizo.** No hubo prueba simulada de los demás módulos de la Fase 7 (existe `handoff-fase7/BRIEF_SIM_F7.md`
+con el protocolo, pero no sus informes). Los Módulos 75 y 76 no se ejecutaron en PAD ni en un tenant: los pasos se
+contrastaron contra el código real del sandbox (`rpa-sandbox/legacy-app`) y contra Learn. Las prácticas interactivas nuevas
+se comprobaron con los evaluadores del motor (respuesta correcta = `correct`; pista 3 de cada diagnóstico = 100).

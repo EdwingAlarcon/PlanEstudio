@@ -36,6 +36,15 @@ lastVerified: "2026-11"
 > el tipo de suscripción, revisa el pricing del servicio, y agrupa todo en un Resource Group dedicado
 > (`rg-sit-m34`) que puedas eliminar por completo al terminar. No asumas que todo en Azure es
 > gratuito solo porque el resto de este curso lo fue.
+>
+> **Orden de magnitud (aproximado, compruébalo en la [calculadora de precios](https://azure.microsoft.com/pricing/calculator/)
+> para tu región):** API Management **Consumption** incluye el primer millón de llamadas al mes, así que
+> las de este módulo no deberían facturarse; Logic Apps **Consumption** cobra por acción ejecutada y las
+> pocas decenas de ejecuciones de la práctica suponen céntimos; Service Bus **Standard** tiene un **cargo
+> base por hora** mientras el namespace existe (del orden de 10 USD al mes, prorrateado), además de las
+> operaciones. Si terminas el módulo en una o dos sesiones y borras `rg-sit-m34`, el total debería quedar
+> por debajo de 1-2 USD. Para no llevarte sorpresas, crea antes un presupuesto de **5 USD** con alertas:
+> portal de Azure → **Cost Management** → **Budgets** → **+ Add**, ámbito tu suscripción o `rg-sit-m34`.
 
 **Checklist de limpieza si trabajas en modo práctico:** al terminar cualquier actividad de este
 módulo, confirma — (1) qué recursos creaste, (2) en qué Resource Group, (3) qué costo estimado
@@ -123,8 +132,8 @@ graph TD
 
 **Práctica real (modo práctico, 35 min) — reintentos y Try/Catch en Logic Apps:** en el Módulo 24 los reintentos los hacía Dataverse al publicar. Aquí el que reintenta es el motor de orquestación, y el arquitecto decide cuántas veces, con qué espera y qué pasa cuando se agotan.
 
-1. En el portal de Azure crea el resource group `rg-sit-m34` y, dentro, una Logic App de tipo **Consumption** llamada `la-sit-m34-reintentos`.
-2. En el diseñador agrega el trigger **Request** (*When a HTTP request is received*). Agrega una acción **Scope** y llámala `Try`. Dentro de `Try` agrega una acción **HTTP** que haga `GET` a un host que no existe, por ejemplo `https://sit-no-existe.invalid/api/pedidos` (falla por conexión, que es uno de los errores que la política de reintentos sí reintenta, igual que 408, 429 y 5xx).
+1. En el portal de Azure crea el resource group `rg-sit-m34` y, dentro, una Logic App de tipo **Consumption** llamada `la-sit-m34-erp-simulado`: es el "ERP caído". En su diseñador agrega el trigger **Request** (*When a HTTP request is received*) y, debajo, la acción **Response** con **Status Code** = `503` y **Body** = `{"error":"ERP en mantenimiento"}`. Guarda y copia la **HTTP URL** del trigger (o la **Workflow URL** en **Overview**). El trigger espera `POST` por defecto. Learn indica que la política de reintentos solo reintenta los códigos **408, 429 y 5xx** ([Learn: manejo de errores](https://learn.microsoft.com/azure/logic-apps/error-exception-handling)), así que un 503 controlado garantiza que verás los reintentos.
+2. Crea en el mismo resource group una segunda Logic App **Consumption** llamada `la-sit-m34-reintentos`. En el diseñador agrega el trigger **Request** (*When a HTTP request is received*). Agrega una acción **Scope** y llámala `Try`. Dentro de `Try` agrega una acción **HTTP** con **Method** `POST` y, en **URI**, la **HTTP URL** de `la-sit-m34-erp-simulado`.
 3. Debajo de `Try` agrega otro **Scope** llamado `Catch` y, en su configuración de ejecución (**Run after**), márcalo para correr solo si `Try` termina en **has failed** o **has timed out**.
 4. Abre la vista de código (**Code view**) y ajusta la acción HTTP y el `Catch` para que queden como este fragmento (las acciones van dentro de `definition.actions`; el trigger lo dejas como lo creó el diseñador):
 
@@ -136,8 +145,8 @@ graph TD
          "Llamar_ERP": {
            "type": "Http",
            "inputs": {
-             "method": "GET",
-             "uri": "https://sit-no-existe.invalid/api/pedidos",
+             "method": "POST",
+             "uri": "<HTTP URL de la-sit-m34-erp-simulado>",
              "retryPolicy": {
                "type": "exponential",
                "count": 3,
@@ -171,7 +180,7 @@ graph TD
    ```
 
    Fíjate en dos detalles que suelen salir mal: `retryPolicy` va **dentro** de `inputs` (no al lado), y `Query` es el tipo interno de la acción **Filter array**. `result('Try')` devuelve el resultado de cada acción del scope, así que `Filtrar_fallos` te dice cuál falló y por qué.
-5. Guarda, copia la URL del trigger y llámala una vez (desde PowerShell: `Invoke-RestMethod -Method Post -Uri "<url-del-trigger>"`). Abre la ejecución en **Run history**: la acción HTTP muestra los reintentos, `Try` queda en **Failed** y `Catch` en **Succeeded**.
+5. Guarda, copia la URL del trigger y llámala una vez (desde PowerShell: `Invoke-RestMethod -Method Post -Uri "<url-del-trigger>"`). Abre la ejecución en **Run history**: la acción HTTP muestra los reintentos, `Try` queda en **Failed** y `Catch` en **Succeeded**. Abre también el **Run history** de `la-sit-m34-erp-simulado`: deberías ver **4 ejecuciones** (la llamada original y los 3 reintentos), con la separación que marca la política exponencial.
 6. En un diseño real, dentro de `Catch` enviarías el mensaje original a una cola de errores o registrarías un incidente; aquí basta con el filtro.
 
 **Evidencia a reportar:**
@@ -179,6 +188,7 @@ graph TD
 | Campo | Tu valor |
 |---|---|
 | Número de reintentos que muestra la acción HTTP y duración total de `Try` | ___ |
+| Ejecuciones en el **Run history** de `la-sit-m34-erp-simulado` y hora de cada una | ___ |
 | Estado final de `Try` y de `Catch` en la ejecución | ___ |
 | `status` y código o mensaje de error que devolvió `Filtrar_fallos` | ___ |
 | Qué cambiarías en `count` y `maximumInterval` si el ERP tarda hasta 20 minutos en recuperarse, y por qué | ___ |
@@ -200,7 +210,7 @@ graph TD
 **Práctica real (modo práctico, 45 min) — un producto con límites y un error estándar:**
 
 1. Crea una instancia de API Management en el tier **Consumption** en `rg-sit-m34` (`apim-sit-m34`).
-2. En **APIs** agrega una API que apunte a la Logic App de la Microlección 1 (APIM permite importar una Logic App como API). Si no hiciste esa práctica, crea una API HTTP en blanco que apunte a cualquier backend de prueba tuyo.
+2. Importa la Logic App `la-sit-m34-reintentos` de la Microlección 1 como API ([Learn: importar una Logic App como API](https://learn.microsoft.com/azure/api-management/import-logic-app-as-api)): en la instancia de APIM → **APIs** → **APIs** → **+ Add API** → en **Create from Azure resource** elige **Logic App** → **Browse** y selecciona la Logic App → escribe un **API URL suffix** (por ejemplo `pedidos`) → cambia a **Full** si quieres elegir ya el **Product** (si no, lo asignas en el paso 3) → **Create**. La operación que crea APIM se llama `manual-invoke`. Copia su **Request URL** desde la pestaña **Test** de esa operación: es la `$uri` del paso 6. Si no hiciste la práctica de la Microlección 1, crea una API HTTP en blanco que apunte a cualquier backend de prueba tuyo.
 3. En **Products** crea el producto `Partners` con suscripción obligatoria, agrégale la API y publícalo. Crea una suscripción a ese producto y copia su clave.
 4. Edita las políticas **del producto** (ámbito de producto) para que queden así:
 
@@ -244,26 +254,41 @@ graph TD
    </on-error>
    ```
 
-6. Desde PowerShell, manda 30 llamadas seguidas con la clave y cuenta los códigos de estado:
+6. Desde PowerShell, manda 30 llamadas seguidas con la clave, cuenta los códigos de estado y guarda el `Retry-After` y el cuerpo de la primera respuesta 429 (el script funciona en Windows PowerShell 5.1 y en PowerShell 7):
 
    ```powershell
    $headers = @{ "Ocp-Apim-Subscription-Key" = "<clave-de-la-suscripcion>" }
-   $uri = "https://apim-sit-m34.azure-api.net/<sufijo-de-la-api>/<operacion>"
-   1..30 | ForEach-Object {
-     try { (Invoke-WebRequest -Uri $uri -Method Post -Headers $headers -Body '{}' -ContentType "application/json" -UseBasicParsing).StatusCode }
-     catch { $_.Exception.Response.StatusCode.value__ }  # 429 cuando salta el rate limit
-   } | Group-Object | Select-Object Name, Count
+   $uri = "<Request URL de la operación, copiada de la pestaña Test>"
+   $resultados = 1..30 | ForEach-Object {
+     try {
+       $r = Invoke-WebRequest -Uri $uri -Method Post -Headers $headers -Body '{}' -ContentType "application/json" -UseBasicParsing
+       [pscustomobject]@{ Codigo = [int]$r.StatusCode; RetryAfter = $null; Cuerpo = $null }
+     }
+     catch {
+       $resp = $_.Exception.Response
+       if ($null -eq $resp) { throw }   # error de red: no hubo respuesta HTTP
+       $cuerpo = $_.ErrorDetails.Message
+       if ($resp -is [System.Net.HttpWebResponse]) {   # Windows PowerShell 5.1
+         $retry = $resp.Headers['Retry-After']
+         if (-not $cuerpo) { $cuerpo = (New-Object System.IO.StreamReader($resp.GetResponseStream())).ReadToEnd() }
+       }
+       else { $retry = "$($resp.Headers.RetryAfter)" }   # PowerShell 7
+       [pscustomobject]@{ Codigo = [int]$resp.StatusCode; RetryAfter = $retry; Cuerpo = $cuerpo }
+     }
+   }
+   $resultados | Group-Object Codigo | Select-Object Name, Count
+   $resultados | Where-Object Codigo -eq 429 | Select-Object -First 1 | Format-List   # Retry-After y cuerpo del 429
    ```
 
-   El rate limit no es exacto al cien por ciento (el gateway es distribuido): espera "alrededor de 20" respuestas aceptadas, no exactamente 20.
+   El rate limit no es exacto al cien por ciento (el gateway es distribuido): espera "alrededor de 20" respuestas aceptadas, no exactamente 20. Las llamadas que pasan el límite devuelven `202 Accepted`: la Logic App de la Microlección 1 no tiene acción **Response**, y Learn indica que en ese caso responde 202 de inmediato (cada una dispara, eso sí, los 3 reintentos contra el simulador). Learn indica que `rate-limit` añade por defecto el header `Retry-After` al 429; como tu `on-error` reescribe la respuesta, si no aparece, anótalo como hallazgo y explica por qué pudo perderse.
 
 **Evidencia a reportar:**
 
 | Campo | Tu valor |
 |---|---|
 | Tier elegido y por qué es aceptable para la práctica pero no para un backend en red privada | ___ |
-| Recuento de códigos de estado de las 30 llamadas (cuántos 2xx y cuántos 429) | ___ |
-| Valor del header `Retry-After` en una respuesta 429 | ___ |
+| Recuento de códigos de estado de las 30 llamadas (cuántos 202 y cuántos 429) | ___ |
+| Valor del header `Retry-After` en una respuesta 429 (o "no apareció" y tu explicación) | ___ |
 | Cuerpo JSON de un error capturado por `on-error`, con su `correlationId` | ___ |
 
 ---
@@ -289,7 +314,7 @@ Y una cuarta, de servicio: **Service Bus o Event Grid**. Event Grid empuja event
 3. En cada cola abre **Service Bus Explorer** y usa **Send messages** para enviar un mensaje JSON, por ejemplo `{"pedido":"PED-1001"}`. Necesitas el rol **Service Bus Data Owner** (o Sender y Receiver) sobre el namespace.
 4. Espera al menos 2 minutos. Service Bus expira los mensajes de forma perezosa (el contador y un **Peek** pueden mostrar todavía el mensaje), así que en cada cola pasa a **Receive Mode** y usa **Receive messages** en modo **PeekLock**: el mensaje expirado no se entrega.
 5. Revisa la subcola **DeadLetter** de cada cola con **Peek Mode** > **Peek from start**: en `exp-ttl-dlq` aparece el mensaje con la propiedad `DeadLetterReason` = `TTLExpiredException`; en `exp-ttl-descarta` no hay nada.
-6. Lee la tercera fila de la evidencia antes de cerrar: Service Bus Explorer **no admite sesiones**. Para probar una cola con sesiones necesitas un cliente que ponga `SessionId`, por ejemplo con la librería `Azure.Messaging.ServiceBus`:
+6. Lee la tercera fila de la evidencia antes de cerrar: Service Bus Explorer **no admite sesiones**. Para probar una cola con sesiones necesitas un cliente que ponga `SessionId`, por ejemplo con la librería `Azure.Messaging.ServiceBus`. **Ejecutarlo es opcional.** Si lo haces: crea antes la cola `pedidos-por-cliente` con **Enable sessions** marcado (solo se puede elegir al crear la cola), crea un proyecto de consola .NET con los paquetes `Azure.Messaging.ServiceBus` y `Azure.Identity`, inicia sesión con `az login` (lo usa `DefaultAzureCredential`) y asegúrate de tener el rol **Service Bus Data Owner** sobre el namespace:
 
    ```csharp
    using Azure.Identity;
@@ -332,7 +357,7 @@ Y una cuarta, de servicio: **Service Bus o Event Grid**. Event Grid empuja event
 
 **Ahora haz algo (5 min):** decide cuál de las dos y por qué: (a) "cada noche, recalcular la comisión de 50.000 vendedores en paralelo y consolidar un total por región"; (b) "una solicitud de crédito espera hasta 5 días la aprobación del gerente y, si no llega, escala"; (c) "copiar un archivo de SFTP a SharePoint cada hora". La clave está al final de la microlección.
 
-**Práctica real (opcional, para equipos .NET, 30 min):** crea un proyecto de Durable Functions en C# con el **modelo de worker aislado** (plantilla de VS Code o Visual Studio) y reemplaza el orquestador por este fan-out/fan-in. Ejecútalo localmente con Azure Functions Core Tools y el emulador de almacenamiento que indique la plantilla.
+**Práctica real (opcional, para equipos .NET, 30 min):** crea un proyecto de Durable Functions en C# con el **modelo de worker aislado** (plantilla de VS Code o Visual Studio) y reemplaza el orquestador por este fan-out/fan-in. Ejecútalo localmente con Azure Functions Core Tools y el emulador de almacenamiento que indique la plantilla (Azurite); si no los tienes, instálalos siguiendo [Learn: desarrollar Azure Functions en local con Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local) antes de empezar.
 
 ```csharp
 using Microsoft.Azure.Functions.Worker;
@@ -407,25 +432,39 @@ public static class ProcesarClientesBatch
 
 **Ahora haz algo — diseña la integración (35 min):** escenario: una empresa usa Dynamics 365 Sales para oportunidades y Dynamics 365 Finance para facturación, crédito, impuestos y contabilidad.
 
-1. Completa el sistema maestro por dominio:
+1. Completa el sistema maestro por dominio, sin mirar la clave:
 
 | Dominio | Sistema maestro | Justificación |
 |---|---|---|
-| Cuentas y contactos comerciales | Dataverse / CE | Los vendedores gestionan relación y actividades |
-| Crédito, impuestos y facturación | F&O | Reglas financieras y contables |
-| Productos vendibles | F&O o sistema PIM | Debe coincidir con inventario y precio oficial |
-| Oportunidades | Sales | Pipeline y forecast comercial |
-| Pedidos facturables | F&O | Impacto financiero y contable |
+| Cuentas y contactos comerciales | ___ | ___ |
+| Crédito, impuestos y facturación | ___ | ___ |
+| Productos vendibles | ___ | ___ |
+| Oportunidades | ___ | ___ |
+| Pedidos facturables | ___ | ___ |
 
-2. Clasifica el patrón de integración de cada necesidad:
+2. Clasifica el patrón de integración de cada necesidad (dual-write, Link to Microsoft Fabric o export batch, API síncrona vía APIM, DMF / batch data API, business event):
 
 | Necesidad | Patrón recomendado | Motivo |
 |---|---|---|
-| Cliente creado en Sales debe existir en Finance | Dual-write | Experiencia integrada y sincronización bidireccional |
-| Histórico de facturas de 10 años para Power BI | Link to Microsoft Fabric o export batch | Analítica de volumen, no operación transaccional; OData no es para esto |
-| Validar crédito antes de confirmar quote | API síncrona vía APIM (servicio personalizado de F&O o Function) | Decisión inmediata antes de comprometer venta |
-| Importar catálogo nocturno de productos | DMF / batch data API / pipeline | Carga batch controlada |
-| Notificar pedido confirmado a logística | Business event de F&O hacia Service Bus | Evento asíncrono desacoplado; el consumidor usa el número de control para ser idempotente y no asume orden |
+| Cliente creado en Sales debe existir en Finance | ___ | ___ |
+| Histórico de facturas de 10 años para Power BI | ___ | ___ |
+| Validar crédito antes de confirmar quote | ___ | ___ |
+| Importar catálogo nocturno de productos | ___ | ___ |
+| Notificar pedido confirmado a logística | ___ | ___ |
+
+**Clave de los pasos 1 y 2 (léela después de rellenar):**
+
+- **Sistema maestro:** cuentas y contactos comerciales → Dataverse / CE (los vendedores gestionan relación y actividades); crédito, impuestos y facturación → F&O (reglas financieras y contables); productos vendibles → F&O o un sistema PIM (deben coincidir con inventario y precio oficial); oportunidades → Sales (pipeline y forecast comercial); pedidos facturables → F&O (impacto financiero y contable).
+- **Patrón:** cliente creado en Sales que debe existir en Finance → dual-write (experiencia integrada y sincronización bidireccional); histórico de facturas de 10 años para Power BI → Link to Microsoft Fabric o export batch (analítica de volumen, no operación transaccional; OData no es para esto); validar crédito antes de confirmar la quote → API síncrona vía APIM (servicio personalizado de F&O o Function), porque la decisión es inmediata y previa a comprometer la venta; catálogo nocturno de productos → DMF / batch data API / pipeline (carga batch controlada); pedido confirmado a logística → business event de F&O hacia Service Bus (evento asíncrono desacoplado; el consumidor usa el número de control para ser idempotente y no asume orden).
+
+Contrasta tus tablas con esta rúbrica (lo que importa es el razonamiento, no coincidir palabra por palabra con la clave):
+
+| Criterio | Qué demuestra que lo cumples |
+|---|---|
+| Un solo maestro por dato | Ningún dominio queda con dos sistemas maestros sin una regla que diga cuál gana |
+| El maestro decide el patrón | Cada patrón es coherente con el sistema maestro que elegiste (no usas dual-write para un dato que solo lee el otro lado) |
+| Volumen y latencia | Distingues lo que necesita respuesta inmediata (API) de lo que es batch o analítica |
+| Eventos sin orden | Para los business events dices cómo manejas duplicados y orden |
 
 3. Documenta riesgos:
    - loops de sincronización por mapeos bidireccionales mal diseñados,

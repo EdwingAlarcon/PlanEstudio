@@ -101,7 +101,7 @@ de mostrar un saldo desactualizado si se sincronizara por lotes.
 ### Paso 5 — Resolución de conflictos
 
 Para cada entidad sincronizada bidireccionalmente (si aplica), documenta la regla de resolución de
-conflictos: ¿qué sistema gana si el mismo campo cambia en ambos lados antes de sincronizar?
+conflictos: ¿qué sistema gana si el mismo campo cambia en ambos lados? Distingue la sincronización inicial (Master for initial sync, que solo resuelve conflictos de la copia inicial) de la operación continua (dirección del mapeo de cada columna y solo lectura en el sistema que no es dueño).
 
 ### Paso 6 — Matriz de riesgos de la integración
 

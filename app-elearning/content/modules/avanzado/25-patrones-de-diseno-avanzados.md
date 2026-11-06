@@ -4,11 +4,11 @@ title: "Patrones de Diseño Avanzados"
 level: "avanzado"
 certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
 estimatedMinutes: 25
-practiceMinutes: 150
+practiceMinutes: 200
 slug: "patrones-de-diseno-avanzados"
 lastVerified: "2026-11"
 ---
-*Lectura: 20-25 min · Con práctica: unos 150 min, mejor en dos sesiones (la primera hasta el diagnóstico; la segunda, de la Microlección 3 al final). La primera vez, cuenta entre una vez y media y el doble.*
+*Lectura: 20-25 min · Con práctica: unos 200 min (los dos retos de construcción se llevan buena parte), mejor en dos sesiones (la primera hasta el diagnóstico; la segunda, de la Microlección 3 al final). La primera vez, cuenta entre una vez y media y el doble.*
 
 ### 🎯 Objetivo
 Aplicar patrones de diseño reconocidos en implementaciones de Power Platform: Repository Pattern, Command Pattern, Observer Pattern con plugins, Saga Pattern para transacciones distribuidas, y CQRS para separar lecturas de escrituras.
@@ -129,7 +129,7 @@ stateDiagram-v2
    }
    ```
 
-2. En `SolicitudPostUpdatePlugin.cs`, deja igual las guardas y las dos líneas que leen `anterior` (de la Pre Image) y `nuevo` (del Target). Reemplaza todo lo que va desde `if (anterior == nuevo)` hasta el último `tracer.Trace` por esto:
+2. En `SolicitudPostUpdatePlugin.cs`, deja igual las guardas y las dos líneas que leen `anterior` (de la Pre Image) y `nuevo` (del Target). Reemplaza todo lo que va desde el comentario `// Filtering Attributes dispara el step…` (el que está justo encima de `if (anterior == nuevo)`) hasta el último `tracer.Trace` por esto. El comentario se va con el `if`, porque esa comparación ahora vive en `AuditoriaEstadoService`:
 
    ```csharp
                // El rol SIT Técnico TI solo tiene Read sobre sit_auditoriasolicitud (Lab 04): null = SYSTEM.
@@ -218,7 +218,7 @@ stateDiagram-v2
    ```
 
 4. **Build** > **Build Solution** y, en **Test Explorer**, **Run All**. **Qué deberías ver:** los 6 tests del Lab 23 y los 3 nuevos en verde. **Si falla `PostUpdate_CambioRealDeEstado_CreaAuditoriaComoSystem`** (del Lab 23), el repositorio de Dataverse no crea la misma fila que antes: compara el nombre de la tabla y de cada columna con el código original, y revisa que el servicio salga de `CreateOrganizationService(null)`, que es la única llamada a la que el mock del Lab 23 le devuelve un servicio. **Si `IAuditoriaRepository` no se encuentra** en el proyecto de tests, revisa que `SIT.Plugins.Tests` tiene la referencia al proyecto `SIT.Plugins` (Lab 23, Tarea 1.4).
-5. Recompila y actualiza el ensamblado en el Plugin Registration Tool: selecciona **(Assembly) SIT.Plugins** > **Update**; en el diálogo **Update Assembly**, elige el `SIT.Plugins.dll` recién compilado con el botón de los puntos suspensivos (**…**), comprueba que el ensamblado y los plugins están marcados y pulsa **Update Selected Plugins** ([Learn: actualizar el ensamblado](https://learn.microsoft.com/power-apps/developer/data-platform/tutorial-update-plug-in#update-the-plug-in-assembly-registration)). Los steps y la Pre Image no se tocan: siguen registrados como en el Lab 23. Si al cerrar el Lab 23 dejaste el **Plug-in Trace Log** en **Exception**, ponlo en **All** mientras pruebas. Después, en la app Model-Driven, cambia el **Estado** de una solicitud (por ejemplo, de En Proceso a Resuelta) y guarda. **Qué deberías ver:** una fila nueva en **Auditoria Solicitud** con las dos etiquetas y tu usuario en **Usuario**, y en el trace la línea `Auditoría <id>: <valor anterior> -> <valor nuevo>`. **Si el PRT rechaza el ensamblado**, revisa que el proyecto siga firmado (Lab 23, Tarea 1.3). **Si no aparece la fila**, busca en el trace "sin cambio real" o "Falta la Pre Image". Al terminar, vuelve a dejar el trace en **Exception**.
+5. Recompila y actualiza el ensamblado en el Plugin Registration Tool: selecciona **(Assembly) SIT.Plugins** > **Update**; en el diálogo **Update Assembly**, elige el `SIT.Plugins.dll` recién compilado con el botón de los puntos suspensivos (**…**), comprueba que el ensamblado y los plugins están marcados y pulsa **Update Selected Plugins** ([Learn: actualizar el ensamblado](https://learn.microsoft.com/power-apps/developer/data-platform/tutorial-update-plug-in#update-the-plug-in-assembly-registration)). Los steps y la Pre Image no se tocan: siguen registrados como en el Lab 23. Si al cerrar el Lab 23 dejaste el **Plug-in Trace Log** en **Exception**, ponlo en **All** mientras pruebas. Como ya tienes abierto el Plug-in Registration Tool, lo más rápido es su menú **Settings** > **Logging to Plug-in Trace Log**; también está en la configuración clásica del ambiente: **Settings** > **Administration** > **System Settings** > pestaña **Customization** > **Enable logging to plug-in trace log**. Los registros se consultan en la app Model-Driven, en **Settings** > **Plug-in Trace Log** ([Learn: tracing](https://learn.microsoft.com/power-apps/developer/data-platform/logging-tracing)). Después, en la app Model-Driven, cambia el **Estado** de una solicitud (por ejemplo, de En Proceso a Resuelta) y guarda. **Qué deberías ver:** una fila nueva en **Auditoria Solicitud** con las dos etiquetas y tu usuario en **Usuario**, y en el trace la línea `Auditoría <id>: <valor anterior> -> <valor nuevo>`. **Si el PRT rechaza el ensamblado**, revisa que el proyecto siga firmado (Lab 23, Tarea 1.3). **Si no aparece la fila**, busca en el trace "sin cambio real" o "Falta la Pre Image". Al terminar, vuelve a dejar el trace en **Exception**.
 
 **Evidencia a reportar (el dato exacto, no un "sí/no"):**
 
@@ -237,6 +237,12 @@ stateDiagram-v2
 
 Si te atascas, vuelve al `FakeAuditoriaRepository`: es el mismo truco con otra dependencia.
 
+<details>
+<summary>Segunda pista (ábrela solo si la primera no bastó)</summary>
+
+La interfaz del reloj solo necesita una propiedad de solo lectura, por ejemplo `DateTime AhoraUtc { get; }`. Hacen falta dos implementaciones: la real (`RelojSistema`, que devuelve `DateTime.UtcNow`) y la de los tests (un reloj falso que devuelve la fecha que le pases en el constructor). El plugin crea `new VencimientoSolicitudService(new RelojSistema())` **en cada ejecución** (dentro de `Execute` o del método que calcula el vencimiento), nunca en un campo de la clase. En los tests, compara con `Assert.AreEqual(fechaFija.AddHours(4), resultado)`.
+</details>
+
 ---
 
 ## 🧩 Microlección 2 — Llamadas externas: timeout, Circuit Breaker y Outbox
@@ -249,7 +255,7 @@ Si te atascas, vuelve al `FakeAuditoriaRepository`: es el mismo truco con otra d
 - Desactiva **KeepAlive**: los plugins son ejecuciones cortas y reutilizar una conexión que la red ya cerró alarga la espera hasta que se resetea ([Learn: KeepAlive](https://learn.microsoft.com/power-apps/developer/data-platform/best-practices/business-logic/set-keepalive-false-interacting-external-hosts-plugin)). Con `HttpClient` se hace con `DefaultRequestHeaders.ConnectionClose = true`.
 - **Sin estado**: la plataforma cachea la instancia del plugin, la reinicializa cuando quiere y varios hilos pueden ejecutar la misma instancia a la vez ([Learn: sin estado](https://learn.microsoft.com/power-apps/developer/data-platform/best-practices/business-logic/develop-iplugin-implementations-stateless)).
 
-Así queda una llamada externa correcta desde un plugin (añade al proyecto la referencia a `System.Net.Http` si no la tiene):
+Así queda una llamada externa correcta desde un plugin. Si al compilar `HttpClient` sale en rojo, añade la referencia a `System.Net.Http`: en **Solution Explorer**, clic derecho en **References** del proyecto `SIT.Plugins` > **Add Reference**; en **Reference Manager**, **Assemblies** > **Framework**, marca `System.Net.Http` y pulsa **OK** ([Learn: Reference Manager](https://learn.microsoft.com/visualstudio/ide/how-to-add-or-remove-references-by-using-the-reference-manager)):
 
 ```csharp
 using System;
@@ -309,7 +315,7 @@ Esto protege al usuario (espera como máximo 15 segundos y lee un mensaje claro)
 
 Learn añade un matiz: en arquitecturas basadas en mensajes, la dead-letter queue y los reintentos de la plataforma muchas veces ya bastan, y un circuit breaker propio añade complejidad ([Learn: Circuit Breaker](https://learn.microsoft.com/azure/architecture/patterns/circuit-breaker)).
 
-**Práctica (15 min) — revisión de código con evidencia:** este es el "circuit breaker" que muchos equipos escriben dentro de un plugin. Encuentra **cuatro** problemas con ayuda de los tres enlaces de Learn de arriba y anota la línea exacta de cada uno.
+**Práctica (15 min) — revisión de código con evidencia:** este es el "circuit breaker" que muchos equipos escriben dentro de un plugin. Encuentra **cuatro** problemas con ayuda de los tres enlaces de Learn de arriba y copia la línea de código donde está cada uno. Hay más de cuatro defectos posibles: con cuatro bien justificados basta.
 
 ```csharp
 public class ExternalApiService
@@ -346,10 +352,10 @@ public class ExternalApiService
 
 | Campo | Tu valor |
 |---|---|
-| Problema 1: línea exacta y la regla de Learn que incumple | ___ |
-| Problema 2: línea exacta y la regla de Learn que incumple | ___ |
-| Problema 3: línea exacta y la regla de Learn que incumple | ___ |
-| Problema 4: línea exacta y qué ve el usuario por culpa de ese `throw;` | ___ |
+| Problema 1: la línea copiada y la regla de Learn que incumple | ___ |
+| Problema 2: la línea copiada y la regla de Learn que incumple | ___ |
+| Problema 3: la línea copiada y la regla de Learn que incumple | ___ |
+| Problema 4: la línea copiada y qué ve el usuario por culpa de ese `throw;` | ___ |
 | Dónde pondrías el circuit breaker en la integración de inventario de SIT y dónde guardarías su estado | ___ |
 
 ---
@@ -424,7 +430,22 @@ En Power Automate, cada paso va en su Scope, y el Scope de compensación se conf
 
 > **Requerimiento:** añade un `Paso 3` que también pueda fallar a voluntad (por ejemplo, con `Simular` = `fallar3`) y su compensación.
 > **Criterios de aceptación:** (1) si falla el Paso 2, solo se compensa el Paso 1; (2) si falla el Paso 3, se compensa primero el 2 y después el 1, en ese orden; (3) si todo sale bien, no corre ninguna compensación; (4) toda ejecución con fallo termina en **Failed** con un mensaje que dice qué paso falló; (5) después de cada prueba no queda ninguna fila `SAGA-PRUEBA` huérfana.
-> **Restricciones:** el "Paso 2" ahora debe escribir algo que se pueda deshacer (por ejemplo, actualizar la descripción de la fila del Paso 1) para que su compensación tenga sentido.
+> **Restricciones:** el "Paso 2" ahora debe escribir algo que se pueda deshacer (por ejemplo, con **Update a row**, cambiar **SLA Horas** de la fila del Paso 1 de `1` a `2`; su compensación lo devuelve a `1`) para que su compensación tenga sentido.
+
+<details>
+<summary>Pista 1: los estados de Run after</summary>
+
+Cuando un Scope falla, los que van detrás con el **Run after** por defecto (**Is successful**) no se ejecutan: quedan como **Skipped**. Ese estado también se puede marcar en **Run after** (**Is skipped**), junto con **Is successful**, **Has failed** y **Has timed out**, y puedes marcar varios a la vez ([Learn: Run after](https://learn.microsoft.com/power-automate/guidance/coding-guidelines/error-handling#configure-run-after-settings)). Antes de configurar nada, apunta qué estado tendrá cada Scope en las tres pruebas (`ok`, `fallar`, `fallar3`).
+</details>
+
+<details>
+<summary>Pista 2: la trampa del "Is skipped"</summary>
+
+La solución intuitiva (poner `Compensar Paso 1` detrás de `Compensar Paso 2` con **Is successful** e **Is skipped**) **también compensa cuando todo sale bien**, porque en esa prueba `Compensar Paso 2` queda Skipped. Tienes que distinguir *por qué* se omitió. Dos caminos válidos:
+
+- Dentro de `Compensar Paso 1`, una **Condition** que solo borre la fila si falló el Paso 2 o el Paso 3. En la condición, con **fx**: `actions('Paso_2_Sistema_externo')?['status']` **is equal to** `Failed` (y otra fila **Or** igual para el Paso 3). `actions()` devuelve, entre otros datos, el estado de la acción, y `result('<Scope>')` devuelve el de cada acción de primer nivel dentro de un Scope ([Learn: funciones de expresión](https://learn.microsoft.com/azure/logic-apps/workflow-definition-language-functions-reference#result)).
+- Un bloque de compensación por cada punto de fallo: uno que corre si falla el Paso 2 y compensa el 1; otro que corre si falla el Paso 3 y compensa el 2 y después el 1. Repite una acción, pero cada bloque se lee solo.
+</details>
 
 ---
 
@@ -455,9 +476,9 @@ Si tienes tiempo, aplícalo a tu flujo de práctica: convierte el Paso 2 en el p
 **Resultado:** Cero órdenes en estado inconsistente. Auditoría completa de cada intento y compensación.
 
 ### ✅ Buenas Prácticas
-- Repository Pattern hace los plugins 10x más fáciles de testear
+- Repository Pattern hace los plugins mucho más fáciles de probar: la regla se prueba contra un repositorio falso, sin simular el contexto del plugin
 - Circuit Breaker previene que un sistema externo caído cause avalanchas de errores
-- Saga requiere que todas las operaciones sean compensables — diseñar con esto en mente desde el inicio
+- En una saga, decidir desde el diseño qué es cada paso: compensable, pivote o reintentable
 - Si un paso no se puede compensar, conviértelo en el pivote: los compensables antes, los reintentables (idempotentes) después
 - Plugins sin estado: nada de contadores, servicios ni contexto guardados en campos de la clase
 - Toda llamada externa desde un plugin con timeout explícito y `ConnectionClose = true`; lo que necesita reintentos, fuera del plugin síncrono
@@ -465,7 +486,7 @@ Si tienes tiempo, aplícalo a tu flujo de práctica: convierte el Paso 2 en el p
 ### ⚠️ Errores Comunes
 | Error | Causa | Solución |
 |-------|-------|----------|
-| Circuit breaker nunca se recupera | Estado compartido en static no se resetea | Implementar half-open state con timer de recuperación |
+| Circuit breaker que nunca se recupera (sigue en Open aunque la API ya volvió) | Falta el estado **Half-Open**, o el estado vive en memoria y no se comparte entre llamadas | Implementar **Half-Open** con llamadas de prueba pasado un tiempo, en el proceso asíncrono y con el estado guardado fuera de la memoria (por ejemplo, una fila de configuración), nunca en un `static` del plugin |
 | Circuit breaker de un plugin que "nunca se abre" o se abre a destiempo | El contador vive en un campo `static`: no es un estado compartido ni persistente, y Learn pide plugins sin estado | Llevar los reintentos y el circuit breaker al proceso asíncrono, con el estado guardado fuera de la memoria |
 | El formulario se queda casi dos minutos esperando cuando la API se cae | `HttpClient` sin `Timeout` (100 s por defecto) y con KeepAlive | `Timeout` corto, `ConnectionClose = true` y, mejor, sacar la llamada a un Outbox o una cola |
 | Saga queda incompleta sin compensar | Power Automate no ejecuta el Catch si el Scope no tiene Run After configurado | Siempre verificar "has failed" en el Run After del Scope Catch |

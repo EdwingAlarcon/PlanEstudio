@@ -15,6 +15,12 @@ Decidir y defender la arquitectura de datos analítica de una organización con 
 
 > **Qué necesitas para las prácticas reales:** un ambiente de Dataverse con datos (el de la app de solicitudes de los niveles anteriores sirve), rol **System Administrator** en ese ambiente, un workspace de Fabric del que seas administrador y una capacidad de Fabric (de pago o de prueba) con la configuración del tenant que permite crear items de Fabric. Si no tienes capacidad de Fabric, haz las microprácticas, los ejercicios, **Decidir y defender**, el diagnóstico y el reto, y salta las prácticas reales. **Costo y limpieza:** la réplica que crea Link to Microsoft Fabric consume **capacidad de base de datos (Database) de Dataverse**; al terminar, quita las tablas que no necesitas o desvincula. Al desvincular se borra el lakehouse del vínculo, y la operación falla mientras otros items (un notebook programado, un pipeline, un modelo semántico) dependan de él: elimínalos o apúntalos a otro lado primero.
 
+> **Capacidad, costo y licencias (verificado en Learn, 2026-11):**
+> - **Empieza por la prueba gratuita de Fabric:** dura **60 días**, da una capacidad de prueba e incluye una prueba individual de Power BI; se inicia con **Start trial** en el administrador de cuenta (la foto de perfil, arriba a la derecha, en [app.fabric.microsoft.com](https://app.fabric.microsoft.com)) ([Learn: Fabric trial](https://learn.microsoft.com/fabric/fundamentals/fabric-trial)).
+> - **Si usas una capacidad de pago:** una F-SKU se factura **por segundo, con un mínimo de un minuto**, mientras está encendida ([Learn: licencias de Fabric](https://learn.microsoft.com/fabric/enterprise/licenses)). Como orden de magnitud, una **F2** cuesta unos 0,36 USD por hora en algunas regiones, unos 260 USD al mes si la dejas encendida (compruébalo en la página de precios de Fabric para tu región). **Páusala** al terminar cada sesión: portal de Azure → **Microsoft Fabric** → tu capacidad → **Pause** → **Yes** ([Learn: pausar y reanudar](https://learn.microsoft.com/fabric/enterprise/pause-resume)); se reanuda con **Resume**.
+> - **Power BI:** para crear el modelo semántico y el informe de la microlección 3 en tu workspace (fuera de **My workspace**) necesitas **Power BI Pro**, **Premium Per User** o una prueba individual de Power BI (la incluye la prueba de Fabric). Un modelo Direct Lake no puede estar en **My workspace**.
+> - **Si tu Dataverse es un ambiente Developer:** su base de datos tiene un tope de **2 GB** ([Learn: Developer plan](https://learn.microsoft.com/power-platform/developer/plan)). La réplica de Link to Microsoft Fabric cuenta para esa capacidad, así que vincula solo las tres tablas de la microlección 1.
+
 ### 📖 Conceptos Clave
 - **Microsoft Fabric:** plataforma analítica unificada de Microsoft que reúne en un solo entorno Data Factory (pipelines y dataflows), Data Engineering (lakehouses y notebooks Spark), Data Warehouse (SQL analítico), Data Science, Real-Time Intelligence y Power BI. Todos los workloads comparten el mismo almacenamiento (OneLake) y el mismo modelo de seguridad. Se adquiere como capacidad F-SKU (F2, F4… F2048); las capacidades P-SKU de Power BI Premium están en proceso de retiro, así que un diseño nuevo se basa en F-SKU. Las capacidades pequeñas permiten adopción gradual, pero los límites de Direct Lake (más abajo) dependen del tamaño de la capacidad.
 - **Lakehouse:** arquitectura que combina el almacenamiento flexible y económico de un Data Lake con las capacidades de consulta SQL de un Data Warehouse, usando el formato Delta Lake para proveer transacciones ACID sobre los archivos. En Fabric, el Lakehouse tiene dos áreas: "Files" (archivos sin esquema, zona de aterrizaje) y "Tables" (tablas Delta registradas, accesibles vía SQL desde su **SQL analytics endpoint**). Una organización con 10 años de datos históricos en formatos dispares puede cargarlos en el área Files y transformarlos gradualmente a Tables estructuradas.
@@ -64,7 +70,7 @@ graph LR
 **Práctica real (25 min) — crear el vínculo:**
 
 1. En [make.powerapps.com](https://make.powerapps.com) selecciona tu ambiente y abre **Link data** en el panel izquierdo (si no lo ves, búscalo en **More**). Verás dos secciones: **Fabric Links** y **Other Links**.
-2. Selecciona **+ New link** > **Link data via Fabric**. También se puede iniciar desde **Tables** > **Analyze** > **Analyze in Fabric**, que solo crea vínculos de Fabric.
+2. Selecciona **+ New link** > **Link data via Fabric** (Learn lo marca como **Recommended**; en algunas páginas antiguas de Learn aparece como **Fabric link**). También se puede iniciar desde **Tables** > **Analyze** > **Analyze in Fabric**, que solo crea vínculos de Fabric.
 3. Recorre el asistente: **Getting started**; **Setup Configuration**, donde eliges el workspace de Fabric y la conexión (la autenticación recomendada es **Workspace identity**; también admite **Service Principal** y **Organizational Account**); la selección de tablas, donde aparecen marcadas todas las tablas con **Track changes** activado (desmarca las que no necesites: cada tabla seleccionada consume capacidad); y **Review and create** > **Finish**.
 4. Deja solo `sit_solicitud`, `account` y `contact` (o las tablas equivalentes de tu app). Una tabla sin **Track changes** no se puede vincular: actívalo en sus propiedades si hace falta.
 5. Espera a que el vínculo quede en estado **Active**. En Fabric, el lakehouse creado muestra las tablas como no identificadas hasta que termina la sincronización inicial. Con **View in Microsoft Fabric** abres el lakehouse; con **Manage tables** agregas o quitas tablas; con **Refresh Fabric tables** fuerzas la actualización de metadatos.
@@ -97,8 +103,12 @@ Tres decisiones de Silver que suelen salir mal en datos de Dataverse:
 
 **Práctica real (45 min) — Bronze → Silver → Gold:**
 
-1. En el mismo workspace crea dos lakehouses: `SIT_Silver` y `SIT_Gold`. En producción, Microsoft recomienda además un workspace por capa; aquí uno basta.
-2. Crea un notebook y, para cada lakehouse, copia la ruta ABFS de su carpeta **Tables** desde el explorador del lakehouse (las **Properties** de la carpeta o tabla). La ruta tiene la forma `abfss://<id-del-workspace>@onelake.dfs.fabric.microsoft.com/<id-del-lakehouse>/Tables`. Copiarla evita adivinar si el lakehouse usa esquemas (`Tables/dbo/...`).
+1. En el mismo workspace crea dos lakehouses: `SIT_Silver` y `SIT_Gold`. Al crearlos, la casilla **Lakehouse schemas** viene marcada por defecto: el lakehouse nace con el esquema **dbo**, que aparece bajo **Tables**, y las tablas que escribes sin indicar esquema van a **dbo** ([Learn: lakehouse schemas](https://learn.microsoft.com/fabric/data-engineering/lakehouse-schemas)). Déjala marcada. En producción, Microsoft recomienda además un workspace por capa; aquí uno basta.
+2. Crea un notebook y copia la ruta ABFS de cada lakehouse desde su explorador (menú **…** > **Properties**):
+   - **Lakehouse del vínculo (Bronze):** abre **Properties** de una de sus tablas (por ejemplo `sit_solicitud`), copia la **ABFS path** y quítale el nombre de la tabla del final. Lo que queda es la carpeta que contiene las tablas, con o sin `/dbo`, según cómo creó Dataverse ese lakehouse.
+   - **`SIT_Silver` y `SIT_Gold`:** todavía no tienen tablas, así que copia la **ABFS path** del esquema **dbo** que aparece bajo **Tables**. Termina en `/Tables/dbo`.
+
+   Las rutas tienen la forma `abfss://<id-del-workspace>@onelake.dfs.fabric.microsoft.com/<id-del-lakehouse>/Tables/dbo` (o `.../Tables` en un lakehouse sin esquemas). Copiarlas evita adivinar.
 3. Pega y ejecuta. Ajusta los nombres de columna a los de tu tabla: `sit_categoria`, `sit_presupuesto` y el lookup a cuenta `sit_cuentaid` son los del ejemplo.
 
 ```python
@@ -107,8 +117,10 @@ from pyspark.sql import functions as F
 from delta.tables import DeltaTable
 
 # Rutas copiadas de Properties (IDs, no nombres): no dependen de cómo se llame el lakehouse del vínculo
+# Bronze: la ABFS path de una tabla del vínculo sin el nombre de la tabla (con o sin /dbo, como salga)
 BRONZE_TABLES = "abfss://<id-del-workspace>@onelake.dfs.fabric.microsoft.com/<id-del-lakehouse-del-vinculo>/Tables"
-SILVER_TABLES = "abfss://<id-del-workspace>@onelake.dfs.fabric.microsoft.com/<id-de-SIT_Silver>/Tables"
+# Silver: la ABFS path del esquema dbo (lakehouse con esquemas, la opción por defecto)
+SILVER_TABLES = "abfss://<id-del-workspace>@onelake.dfs.fabric.microsoft.com/<id-de-SIT_Silver>/Tables/dbo"
 
 df_bronze = spark.read.format("delta").load(f"{BRONZE_TABLES}/sit_solicitud")
 
@@ -155,8 +167,9 @@ print(f"Silver actualizado: {df_silver.count()} solicitudes, {df_cuentas.count()
 # Gold (SIT_Gold): una tabla por pregunta de negocio, lista para Power BI
 from pyspark.sql import functions as F
 
-SILVER_TABLES = "abfss://<id-del-workspace>@onelake.dfs.fabric.microsoft.com/<id-de-SIT_Silver>/Tables"
-GOLD_TABLES = "abfss://<id-del-workspace>@onelake.dfs.fabric.microsoft.com/<id-de-SIT_Gold>/Tables"
+# Las mismas rutas del esquema dbo que copiaste de Properties (quita /dbo si el lakehouse no tiene esquemas)
+SILVER_TABLES = "abfss://<id-del-workspace>@onelake.dfs.fabric.microsoft.com/<id-de-SIT_Silver>/Tables/dbo"
+GOLD_TABLES = "abfss://<id-del-workspace>@onelake.dfs.fabric.microsoft.com/<id-de-SIT_Gold>/Tables/dbo"
 
 df_sol = spark.read.format("delta").load(f"{SILVER_TABLES}/silver_solicitud")
 df_cli = spark.read.format("delta").load(f"{SILVER_TABLES}/silver_cliente")
@@ -167,7 +180,8 @@ df_gold = (df_sol.filter(F.col("es_activa"))
     .withColumn("mes_creacion", F.date_format("fecha_creacion_local", "yyyy-MM"))
     .groupBy("categoria_analisis", "nombre_cliente", "address1_country", "mes_creacion")
     .agg(F.count("sit_solicitudid").alias("total_solicitudes"),
-         F.sum("sit_presupuesto").alias("presupuesto_total")))
+         F.sum("sit_presupuesto").alias("presupuesto_total"),
+         F.max("modifiedon").alias("modifiedon")))   # última modificación del grupo: sirve para vigilar la frescura de Gold
 
 (df_gold.write.format("delta").mode("overwrite")
     .option("overwriteSchema", "true")

@@ -4,11 +4,11 @@ title: "Casos de Transformación Digital"
 level: "arquitecto"
 certification: "Arquitectura Power Platform"
 estimatedMinutes: 22
-practiceMinutes: 150
+practiceMinutes: 160
 slug: "casos-de-transformacion-digital"
 lastVerified: "2026-11"
 ---
-*Lectura: 20-25 min · Con práctica: unos 150 min, mejor en dos sesiones (la primera hasta el diagnóstico; la segunda, la Microlección 3 y el reto de transferencia). La primera vez, cuenta entre una vez y media y el doble.*
+*Lectura: 20-25 min · Con práctica: unos 160 min, mejor en dos sesiones (la primera hasta el diagnóstico; la segunda, la Microlección 3 y el reto de transferencia). La primera vez, cuenta entre una vez y media y el doble.*
 
 ### 📚 Mini-glosario antes de empezar
 
@@ -171,7 +171,9 @@ SOL-006,Cerrar,2026-10-12 16:00:00,2026-10-12 16:05:00,Tecnico TI
 8. En **Variants by frequency**, anota la variante más común y cuántos casos tiene. En los KPIs, anota **Average Case Duration** y **Rework Cases %**.
 9. En el mapa, cambia a la capa de rendimiento (**Performance**) con la métrica **Mean duration** y busca la actividad con la mayor duración media. Después abre la pestaña **Variant DNA** y localiza el caso que repite la revisión dos veces.
 
-**Variante en papel (sin licencia):** con el log de arriba, cuenta a mano las variantes, el porcentaje de casos con retrabajo (algún paso que se repite) y la duración media de `Devolver al solicitante` y de `Revisar`. Deberías llegar a los mismos números que la herramienta.
+**Variante en papel (sin licencia):** con el log de arriba, cuenta a mano las variantes, el porcentaje de casos con retrabajo (algún paso que se repite) y la duración media de `Devolver al solicitante` y de `Revisar` (duración de una actividad = su fin menos su inicio; duración de un caso = del inicio de su primera actividad al fin de la última). Deberías llegar a los mismos números que la herramienta, que puede redondearlos o mostrarlos en otro formato.
+
+**Solución de la variante en papel (mírala solo después de contar):** 6 casos, 6 actividades y 4 variantes; la más frecuente es `Crear solicitud → Revisar → Aprobar → Cerrar`, con 3 casos. Rework Cases % = **33,3 %** (2 de 6: SOL-003 y SOL-006, que repiten `Revisar`). Duración media de `Devolver al solicitante` = **48 h** (48 + 24 + 72 h, entre 3); de `Revisar` = **1 h 27 min** (13 h entre 9 revisiones). Average Case Duration ≈ **35 h 15 min** (de 4 h 05 min en SOL-004 a 103 h 05 min en SOL-006). Si te salió otra cifra, revisa primero si contaste las tres revisiones de SOL-006.
 
 **Evidencia a reportar:**
 

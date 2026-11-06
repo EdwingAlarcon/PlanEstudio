@@ -30,7 +30,8 @@ invertir con calma.
    (Gmail, Outlook.com, Hotmail), y el sandbox del Microsoft 365 Developer Program ya no está abierto a
    cualquiera. Sigue el paso a paso de la Microlección 1 del
    [Módulo 1](/nivel/basico/modulo/introduccion-al-ecosistema-power-platform). El resumen de qué cambió en
-   noviembre de 2026 está en [Entornos y trials](/recursos/entornos-y-trials).
+   noviembre de 2026 está en [Entornos y trials](/recursos/entornos-y-trials): un solo ambiente Developer por
+   usuario, siempre administrado, y licencia premium (o de prueba) para ejecutar tus apps y flujos en él.
 2. **Qué es un "tenant" en la práctica**: es tu organización de prueba completa — un nombre como
    `tunombreXXXXX.onmicrosoft.com` que verás en la esquina superior derecha de cualquier pantalla de
    Microsoft. Todo lo que hagas en el curso vive dentro de ese tenant; no afecta a nadie más.

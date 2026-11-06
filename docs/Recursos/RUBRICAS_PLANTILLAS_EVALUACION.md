@@ -345,17 +345,26 @@ riesgos priorizada y evidencia nombrada de forma trazable para portafolio.
 
 | Criterio | Peso | Aprobado profesional |
 |---|---|---|
-| Arquitectura objetivo y ADRs | 20% | Al menos 2 ADRs con alternativas descartadas y su justificación |
+| Arquitectura objetivo y ADRs | 20% | Al menos 2 ADRs con alternativas descartadas y su justificación; en el capstone del Módulo 41, los **8 ADRs** que pide, cada uno con una consecuencia negativa y su pilar de Well-Architected |
 | Modelo de seguridad | 15% | Principio de menor privilegio aplicado, sin roles amplios "por ahora" |
 | ALM enterprise | 15% | Pipeline con gates de aprobación entre ambientes y rollback probado al menos una vez |
 | Integraciones | 15% | Manejo explícito de fallos (retry, circuit breaker, dead-letter) documentado |
 | Gobernanza | 15% | Al menos una política DLP o de CoE verificada en la prueba, no solo descrita |
 | Riesgos y roadmap | 10% | Riesgos con probabilidad/impacto y plan de mitigación, no una lista genérica |
-| Comunicación ejecutiva | 10% | Un ejecutivo no técnico entiende riesgo y costo sin preguntas básicas de seguimiento |
+| Comunicación ejecutiva | 10% | Un ejecutivo no técnico entiende riesgo y costo sin preguntas básicas de seguimiento; si hay defensa oral, ante una pregunta inesperada se dice qué dato falta y cómo obtenerlo, en vez de improvisar una cifra |
 
-Aprobación: ≥ 75/100 y ningún criterio en nivel 0-1. Esta rúbrica reemplaza como criterio
-principal a la autoevaluación 1-5 de dominio — la autoevaluación se conserva como reflexión
-complementaria, no como el criterio que decide si el capstone está aprobado.
+**Cómo se puntúa:**
+
+- **Quién puntúa:** cada revisor (en el Módulo 41, cada miembro del comité) puntúa por separado y
+  la nota es el promedio. Quien estudia solo se autoevalúa con la grabación de su defensa y lo
+  deja escrito ("autoevaluado").
+- **De niveles a /100:** cada criterio recibe un nivel de 0 a 4 con la escala de este recurso (la
+  columna "Aprobado profesional" describe el nivel 3). Puntaje = Σ (peso × nivel / 4). Nivel 3 en
+  todos los criterios da 75/100; nivel 4 en ADRs y en ALM y 3 en el resto da 83,75/100.
+
+Aprobación: ≥ 75/100 y ningún criterio en nivel 0-1. Excelencia: ≥ 92/100. Esta rúbrica reemplaza
+como criterio principal a la autoevaluación 1-5 de dominio — la autoevaluación se conserva como
+reflexión complementaria, no como el criterio que decide si el capstone está aprobado.
 
 ## Rúbrica específica: IA y Agentes Gobernados
 

@@ -88,14 +88,12 @@ Para cada uno de los 3 casos de datos de prueba, define su **Incident Type** con
 
 - Duración estimada (en minutos).
 - Characteristics requeridas (skill + nivel, ej. "HVAC nivel 2").
-- 2-3 tareas obligatorias (Incident Type Tasks) que el técnico no puede omitir al cerrar.
+- 2-3 service tasks del Incident Type para los pasos críticos, con una inspection con preguntas Required en el paso que exige evidencia, y quién revisa antes de Posted que estén completas.
 
-Luego describe qué verías en el **Schedule Board** al intentar asignar cada caso: qué técnicos
-aparecerían resaltados como compatibles (según Characteristics + territorio + disponibilidad) y
-cuáles no, y por qué.
+Luego describe qué técnicos recomendaría el **schedule assistant** (lanzado con **Find availability** desde el Schedule Board) para cada caso según Characteristics + territorio + disponibilidad, y por qué una reserva manual con **Book** no lo validaría.
 
 Con los 3 casos juntos (24h, 72h y 8h de ventana SLA), decide si el volumen justificaría activar
-**Resource Scheduling Optimization** o si el **Scheduling Assistant** manual es suficiente —
+**Resource Scheduling Optimization** o si el **schedule assistant** es suficiente —
 justifica tu decisión con el volumen de casos, no con la urgencia individual del caso crítico.
 
 ### Paso 4 — Diseñar evidencia móvil

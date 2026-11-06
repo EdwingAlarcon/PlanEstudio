@@ -10,7 +10,7 @@ prerequisites:
   - "Módulo 67 completado"
   - "Power Automate for desktop instalado o variante simulada documentada"
 files: []
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # LAB-RPA-01 — Primer desktop flow mantenible
@@ -34,8 +34,8 @@ SIT necesita procesar una lista de solicitudes internas desde un archivo de prue
 ## Ejercicios
 
 1. Define inputs `in_InputPath`, `in_OutputFolder`, `in_DryRun` y `in_CorrelationId`.
-2. Crea subflows `Inicializar`, `ValidarEntrada`, `ProcesarRegistros`, `RegistrarLog` y `CerrarRecursos`.
-3. Procesa una tabla con cinco registros, incluyendo uno inválido.
+2. Crea subflows `Inicializar`, `ValidarEntrada`, `ProcesarRegistros`, `RegistrarResultado` y `CerrarRecursos` (los mismos del Módulo 69, todos con alcance **Global**).
+3. Procesa `solicitudes_sucursales.csv`: 4 registros, uno de ellos del cliente bloqueado `CLI-0003` (debe quedar como `ErrorValidacion`).
 4. Escribe log CSV con estado por registro.
 5. Devuelve outputs `out_Total`, `out_Procesados`, `out_Errores` y `out_LogPath`.
 6. Fuerza un error y confirma que el subflow de cierre se ejecuta.
@@ -45,10 +45,10 @@ SIT necesita procesar una lista de solicitudes internas desde un archivo de prue
 | Problema | Causa probable | Solución |
 |---|---|---|
 | El flow queda "monolítico" pese al ejercicio 2 | Las acciones se escribieron en `Main` y los subflows se crearon vacíos o solo con un comentario | Corta y pega las acciones de cada etapa dentro de su subflow real; `Main` debe quedar como una secuencia de llamadas a subflows |
-| `RegistrarLog` no encuentra el registro inválido del paso 3 | La validación del registro inválido ocurre después de intentar procesarlo, no antes | Ejecuta `ValidarEntrada` fila por fila antes de `ProcesarRegistros` y captura el resultado en una variable de estado por fila |
-| El log CSV queda vacío o solo con encabezado | La escritura del CSV está dentro de `ProcesarRegistros` pero se sobrescribe en cada iteración en vez de anexarse | Usa "Escribir en archivo de texto" en modo anexar (o construye la data table completa y escribe una sola vez al final) |
-| Al forzar el error del paso 6, el bot se detiene sin ejecutar `CerrarRecursos` | El bloque `Ejecutar acciones` no tiene un `Bloque de manejo de errores` que enrute al subflow de cierre | Envuelve `ProcesarRegistros` en "Ejecutar acciones y manejar errores", y en la rama de error llama explícitamente a `CerrarRecursos` antes de terminar el flow |
-| Los outputs (`out_Total`, `out_Procesados`, `out_Errores`) quedan en 0 aunque el flow corrió bien | Las variables se declararon como inputs/outputs del flow pero nunca se asignan dentro de los subflows, solo dentro de `Main` | Asigna los valores dentro del subflow correspondiente y verifica que el subflow los devuelva como variables de salida, no solo variables locales |
+| El log no marca como `ErrorValidacion` el registro del cliente bloqueado (paso 3) | La regla se evalúa después de escribir la fila como procesada, o compara contra un valor distinto del que trae la columna `customerId` | Dentro del **For each** de `ProcesarRegistros`, evalúa la regla con **If** **antes** de contar o escribir la fila, y deja el resultado en el log con su estado |
+| El log CSV queda vacío o solo con una línea | Las acciones **Write text to file** quedaron con **If file exists** en **Overwrite existing content** (el valor por defecto), así que cada línea sobrescribe la anterior | Pon **If file exists** en **Append content** (y **Encoding** **UTF-8**) en todas las escrituras del log salvo la del encabezado |
+| Al forzar el error del paso 6, el bot se detiene sin ejecutar `CerrarRecursos` | Por defecto un desktop flow se detiene ante un error y no hay un **On block error** alrededor del trabajo | Envuelve `ValidarEntrada` y `ProcesarRegistros` en **On block error** (con **New rule** > **Run subflow** `ManejarError`), deja `Run subflow CerrarRecursos` después del **End** del bloque y termina con **Stop flow** **With error message** |
+| Los outputs (`out_Total`, `out_Procesados`, `out_Errores`) quedan en 0 aunque el flow corrió bien | Algún subflow se creó con alcance **Local**: sus variables solo existen dentro de ese subflow y no actualizan las de `Main` | Usa subflows **Global** (el alcance no se puede cambiar después de crearlo: recrea el subflow y mueve sus acciones); con subflows globales todos comparten las mismas variables y no hace falta devolverlas |
 | El log expone la ruta completa de `in_InputPath` o datos del registro inválido | El logging concatena la fila completa o la ruta del input sin filtrar campos sensibles | Registra solo el identificador de fila y el tipo de error, nunca el contenido crudo del registro |
 
 ## 🔧 Diagnóstico y reparación
@@ -58,40 +58,40 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 ### Flow monolítico sin subflows reales
 
 - **Causa probable:** todas las acciones quedaron en `Main` y los subflows están vacíos.
-- **Cómo comprobar:** abre cada subflow (`Inicializar`, `ValidarEntrada`, `ProcesarRegistros`, `RegistrarLog`, `CerrarRecursos`) y confirma que tenga acciones propias, no solo el subflow `Main` con todo el trabajo.
+- **Cómo comprobar:** abre cada subflow (`Inicializar`, `ValidarEntrada`, `ProcesarRegistros`, `RegistrarResultado`, `CerrarRecursos`) y confirma que tenga acciones propias, no solo el subflow `Main` con todo el trabajo.
 - **Cómo corregir:** mueve cada bloque de acciones al subflow que le corresponde según su nombre; `Main` debe reducirse a llamadas ordenadas.
 - **Reiniciar vs. reparar:** no requiere reiniciar el flow completo, es una reorganización estructural; ejecuta de nuevo solo al final para validar.
 - **Evidencia posterior a la corrección:** vuelve a capturar el diagrama de subflows mostrando la separación real.
 
-### `ValidarEntrada` no detecta el registro inválido
+### El registro del cliente bloqueado no sale como `ErrorValidacion`
 
-- **Causa probable:** la validación corre después del procesamiento o compara contra el tipo de dato incorrecto.
-- **Cómo comprobar:** ejecuta el flow con `in_DryRun` en verdadero y revisa el valor de la variable de estado tras `ValidarEntrada` para la fila inválida.
-- **Cómo corregir:** agrega la condición de validación (tipo, campo obligatorio, rango) antes de la llamada a `ProcesarRegistros` y marca la fila como inválida en una lista separada.
-- **Reiniciar vs. reparar:** repara solo el subflow `ValidarEntrada`; no hace falta reiniciar todo el lote si el resto del flow ya funciona.
-- **Evidencia posterior a la corrección:** el log CSV debe mostrar la fila inválida con estado "error" y motivo.
+- **Causa probable:** la regla se evalúa después de contar o escribir la fila como procesada, o compara contra un valor distinto del que trae la columna `customerId`.
+- **Cómo comprobar:** ejecuta el flow con `in_DryRun` en `True`, pon un punto de interrupción dentro del **For each** de `ProcesarRegistros` y mira el valor de `%CurrentItem['customerId']%` en la fila `SOL-2026-0003`.
+- **Cómo corregir:** evalúa la regla con **If** al principio de cada vuelta del **For each**, antes de contar o escribir la fila, y escribe en el log la fila rechazada con su estado y motivo.
+- **Reiniciar vs. reparar:** repara solo el subflow `ProcesarRegistros`; no hace falta rehacer el resto del flow.
+- **Evidencia posterior a la corrección:** el log CSV debe mostrar `SOL-2026-0003` con estado `ErrorValidacion` y motivo.
 
-### Log CSV vacío o solo con encabezado
+### Log CSV vacío o solo con una línea
 
-- **Causa probable:** la escritura sobrescribe el archivo en cada iteración del bucle en vez de anexar.
-- **Cómo comprobar:** abre el CSV generado tras una corrida completa y cuenta las filas frente al total de registros esperado.
-- **Cómo corregir:** cambia la acción de escritura a modo "anexar" o acumula los resultados en una data table y escribe una sola vez al cerrar el bucle.
-- **Reiniciar vs. reparar:** basta con corregir la acción de escritura dentro de `RegistrarLog`; reinicia la ejecución completa solo para regenerar el log limpio.
-- **Evidencia posterior a la corrección:** el log debe tener una fila por registro procesado, incluida la fila inválida.
+- **Causa probable:** las acciones **Write text to file** del log quedaron con **If file exists** en **Overwrite existing content** (el valor por defecto), así que cada línea sobrescribe la anterior.
+- **Cómo comprobar:** abre el CSV generado tras una corrida completa y cuenta las líneas frente a las esperadas (encabezado, inicio, una por cada uno de los 4 registros y el resumen).
+- **Cómo corregir:** en todas las acciones **Write text to file** del log salvo la del encabezado, pon **If file exists** en **Append content** y **Encoding** en **UTF-8**.
+- **Reiniciar vs. reparar:** basta con corregir esas acciones; reinicia la ejecución completa solo para regenerar el log limpio.
+- **Evidencia posterior a la corrección:** el log debe tener una línea por registro procesado, incluida la del cliente bloqueado.
 
 ### El bot se detiene sin ejecutar `CerrarRecursos` tras el error forzado
 
-- **Causa probable:** falta un bloque de manejo de errores que enrute explícitamente al subflow de cierre.
-- **Cómo comprobar:** fuerza de nuevo el error del paso 6 y observa si el flow termina en estado "fallido" sin pasar por `CerrarRecursos`.
-- **Cómo corregir:** envuelve la llamada a `ProcesarRegistros` en "Ejecutar acciones y manejar errores" y en la rama de error invoca `CerrarRecursos` antes de finalizar.
+- **Causa probable:** por defecto un desktop flow se detiene ante un error y no hay un **On block error** alrededor del trabajo (o un **Stop flow** corta el flujo antes del cierre).
+- **Cómo comprobar:** fuerza de nuevo el error del paso 6 y observa si el flow termina con error y deja `en_ejecucion.lock` (o el recurso que cierra `CerrarRecursos`) sin liberar.
+- **Cómo corregir:** envuelve `Run subflow ValidarEntrada` y `Run subflow ProcesarRegistros` en **On block error**; en su configuración, con **New rule**, agrega **Run subflow** `ManejarError` y elige continuar al final del bloque. Deja `Run subflow CerrarRecursos` después del **End** del bloque y termina con **Stop flow** **With error message** si hubo error.
 - **Reiniciar vs. reparar:** repara el bloque de manejo de errores; no es necesario reiniciar el diseño completo del flow.
 - **Evidencia posterior a la corrección:** captura de una ejecución fallida donde el log confirma que `CerrarRecursos` se ejecutó.
 
 ### Outputs del flow quedan en 0 o vacíos
 
-- **Causa probable:** las variables se calculan como locales dentro de un subflow pero no se propagan como outputs declarados.
-- **Cómo comprobar:** revisa la definición de variables de `Main` y confirma que `out_Total`, `out_Procesados`, `out_Errores` y `out_LogPath` estén marcadas como salida y asignadas tras cada subflow relevante.
-- **Cómo corregir:** asigna explícitamente estas variables al final de `ProcesarRegistros` y `RegistrarLog`, y verifica que `Main` las reciba y las exponga como outputs del flow.
+- **Causa probable:** algún subflow se creó con alcance **Local**: una variable que asignas ahí sin el prefijo `global.` es local, solo existe dentro de ese subflow y no actualiza las variables de `Main`, que son las que se exponen como outputs.
+- **Cómo comprobar:** confirma en el panel de variables que `out_Total`, `out_Procesados`, `out_Errores` y `out_LogPath` estén creadas como **Output**, y revisa el alcance de cada subflow que las asigna.
+- **Cómo corregir:** usa subflows **Global**, como en el Módulo 69: con ellos todos los subflows comparten las mismas variables y no hace falta devolverlas. El alcance no se puede cambiar después de crear el subflow; si uno quedó **Local**, recréalo como **Global** y mueve sus acciones.
 - **Reiniciar vs. reparar:** repara la asignación de variables; ejecuta el flow completo una vez para confirmar los valores finales.
 - **Evidencia posterior a la corrección:** outputs con valores coherentes con el número de registros procesados.
 
@@ -100,7 +100,7 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 - **Causa probable:** se registra la fila completa (incluida `in_InputPath` o datos crudos) en vez de un resumen.
 - **Cómo comprobar:** revisa el CSV de log y busca rutas de archivo completas, nombres o datos de negocio sin filtrar.
 - **Cómo corregir:** cambia el logging para incluir solo `CorrelationId`, número de fila y tipo de error.
-- **Reiniciar vs. reparar:** repara la plantilla de log dentro de `RegistrarLog`; no requiere reiniciar el flow.
+- **Reiniciar vs. reparar:** repara el texto de las acciones **Write text to file** del log; no requiere reiniciar el flow.
 - **Evidencia posterior a la corrección:** log revisado que no expone datos sensibles, listo para adjuntar como evidencia.
 
 ## Evidencia esperada

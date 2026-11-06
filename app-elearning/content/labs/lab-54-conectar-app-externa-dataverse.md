@@ -83,8 +83,12 @@ grant_type=client_credentials
 GET https://{{ORG}}.crm.dynamics.com/api/data/v9.2/sit_solicitudesgastoes?$select=sit_estado,sit_monto
 Authorization: Bearer {{ACCESS_TOKEN}}
 OData-MaxVersion: 4.0
+OData-Version: 4.0
 Accept: application/json
+If-None-Match: null
 ```
+
+`sit_solicitudesgastoes` es un ejemplo: usa el nombre de conjunto de entidades (plural) de tu tabla, que ves en la Web API o en la herramienta de tu ambiente.
 
 Pide a un asistente de IA que revise esta estructura y confirme que no falta ningún header obligatorio — verifica que su respuesta tampoco introduzca valores reales de ejemplo.
 

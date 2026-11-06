@@ -10,7 +10,7 @@ prerequisites:
   - "Módulo 72 completado"
   - "Aplicación Windows de prueba o simulación documentada"
 files: []
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # LAB-RPA-04 — Aplicación legacy
@@ -41,15 +41,17 @@ Un sistema legacy de escritorio no tiene API. Operaciones necesita cargar solici
 6. Registra error y continúa con el siguiente registro.
 7. Documenta fallback si usas teclado, imagen u OCR.
 
+> **Qué acciones usar:** el simulador [SIT Registro Legacy](../rpa-sandbox/legacy-app) es una página web con apariencia de aplicación de escritorio, así que se automatiza con **acciones de navegador** (**Populate text field on web page**, **Press button on web page**, **If web page contains**), como en el Módulo 72. Si usas una aplicación Win32 real (por ejemplo, el Bloc de notas del Módulo 72), las equivalentes son de UI automation: **Wait for window**, **Focus window**, **Populate text field in window**, **Press button in window** e **If window contains**. El modo del simulador vive en el estado de la página, no en la URL: una instancia nueva de Edge abre siempre en **Normal**. Para probar otro modo, abre el simulador a mano, pulsa **Reset**, elige el modo en el selector **Modo** y lanza el navegador con **Launch mode** = **Attach to running instance** (**Attach to Microsoft Edge tab** = **By URL**, con la URL del simulador).
+
 ## Errores frecuentes
 
 | Problema | Causa probable | Solución |
 |---|---|---|
-| El flow no encuentra la ventana principal al iniciar | La app aún no terminó de cargar cuando corre la acción `Attach Window` | Agrega espera por existencia de ventana antes de interactuar, no un `Wait` fijo |
-| Los campos reciben texto pero en el control incorrecto | La ventana perdió el foco (otra ventana quedó encima) | Fuerza `Set Focus` sobre la ventana objetivo antes de cada `Send Keys` |
-| Caracteres especiales o tildes llegan corruptos al campo | La app legacy usa un encoding distinto al que envía PAD (`Send Keys` vs `Populate Text Field`) | Cambia a `Populate Text Field` o valida el encoding de origen del archivo de entrada |
-| El bot se congela ante la ventana modal inesperada | No hay manejo de excepción para diálogos no previstos en el flujo principal | Envuelve el bloque en `On Block Error` y agrega detección explícita de la ventana modal |
-| Un registro válido queda marcado como error | El mensaje de confirmación tarda más de lo esperado y el timeout se dispara antes | Aumenta el timeout de detección de confirmación o usa polling en vez de espera fija |
+| El flow no encuentra la ventana principal al iniciar | La app aún no terminó de cargar cuando el flow intenta interactuar con ella | En una app Win32, usa **Wait for window** (**Wait for window to** = **Open**) antes de interactuar, no un **Wait** fijo; en el simulador web, espera con **If web page contains** dentro de un loop acotado |
+| Los campos reciben texto pero en el control incorrecto | La ventana perdió el foco (otra ventana quedó encima) y **Send keys** escribe en la ventana en primer plano | Usa **Focus window** sobre la ventana objetivo antes de cada **Send keys**, o mejor, escribe por el control con **Populate text field in window** (Win32) o **Populate text field on web page** (simulador) |
+| Caracteres especiales o tildes llegan corruptos al campo | **Send keys** envía pulsaciones según la distribución de teclado del equipo, o el archivo de entrada se leyó con otra codificación | Escribe por el control con **Populate text field in window** / **Populate text field on web page** en vez de **Send keys**, y lee el archivo de entrada con la codificación correcta (**UTF-8**) |
+| El bot se congela ante la ventana modal inesperada | No hay manejo de excepción para diálogos no previstos en el flujo principal | Envuelve el bloque en **On block error** y agrega detección explícita del modal (**If window** en Win32, **If web page contains** en el simulador) |
+| Un registro válido queda marcado como error | El mensaje de confirmación tarda más de lo esperado y la espera se agota antes | Espera la confirmación con polling acotado (**Loop** + **If web page contains** o **If window contains** + **Wait**) y ajusta el número de vueltas al tiempo real observado en **Confirmación lenta** |
 | El fallback de teclado/imagen falla en otra resolución | La automatización no valida resolución/escalado antes de ejecutar | Agrega verificación de resolución y escalado como paso previo (ver Reto adicional) |
 
 ## 🔧 Diagnóstico y reparación
@@ -58,9 +60,9 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 
 ### La ventana principal no aparece al iniciar
 
-- **Causa probable:** el flujo intenta adjuntar la ventana antes de que la app termine de renderizar.
-- **Cómo comprobar:** ejecuta paso a paso y observa si `Attach Window` falla en los primeros segundos tras abrir la app.
-- **Cómo corregir:** reemplaza el `Wait` fijo por una espera basada en existencia de la ventana (reintento con timeout corto).
+- **Causa probable:** el flujo intenta interactuar con la ventana antes de que la app termine de renderizar.
+- **Cómo comprobar:** ejecuta paso a paso (**Run next action**, F10) y observa si la primera acción sobre la ventana falla en los primeros segundos tras abrir la app.
+- **Cómo corregir:** reemplaza el **Wait** fijo por **Wait for window** (**Wait for window to** = **Open**, con **Focus window after it opens**) en una app Win32, o por un loop acotado con **If web page contains** en el simulador web. En **Run application**, **After application launch** = **Wait for application to load** también ayuda.
 - **Reiniciar vs. reparar:** basta con corregir el subflujo de apertura; no reinicies el caso completo.
 - **Evidencia posterior a la corrección:** captura del log mostrando el tiempo real de aparición de la ventana.
 
@@ -68,15 +70,15 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 
 - **Causa probable:** foco perdido por una ventana emergente o notificación del sistema.
 - **Cómo comprobar:** revisa la captura de pantalla del momento del fallo (o reproduce y observa qué ventana está activa).
-- **Cómo corregir:** agrega `Set Focus` explícito sobre la ventana legacy justo antes de cada interacción de teclado.
+- **Cómo corregir:** agrega **Focus window** sobre la ventana legacy justo antes de cada interacción de teclado, o reemplaza **Send keys** por **Populate text field in window**, que escribe en el control por su selector.
 - **Reiniciar vs. reparar:** repara el paso puntual; solo reinicia si el registro ya quedó parcialmente escrito en un campo incorrecto.
-- **Evidencia posterior a la corrección:** log mostrando foco confirmado antes de cada `Send Keys`.
+- **Evidencia posterior a la corrección:** log mostrando foco confirmado (por ejemplo, con **If window** = **Is focused**) antes de cada **Send keys**.
 
 ### Caracteres corruptos en campos de texto
 
-- **Causa probable:** método de entrada de texto incompatible con el encoding de la app legacy.
+- **Causa probable:** **Send keys** depende de la distribución de teclado del equipo, o el archivo de entrada se leyó con una codificación distinta de la suya.
 - **Cómo comprobar:** compara el valor origen del archivo con el valor capturado en la app tras el registro.
-- **Cómo corregir:** usa `Populate Text Field` en vez de `Send Keys`, o normaliza el encoding del archivo de entrada.
+- **Cómo corregir:** usa **Populate text field in window** (Win32) o **Populate text field on web page** (simulador) en vez de **Send keys**, y lee el archivo de entrada con la codificación correcta (**UTF-8**).
 - **Reiniciar vs. reparar:** corrige el método de entrada y reprocesa solo los registros afectados, no todo el lote.
 - **Evidencia posterior a la corrección:** captura anonimizada mostrando el valor correcto ya registrado.
 
@@ -84,16 +86,16 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 
 - **Causa probable:** el flujo principal no contempla diálogos no previstos (error del sistema, actualización, confirmación extra).
 - **Cómo comprobar:** revisa el log de excepción y la captura del momento del bloqueo.
-- **Cómo corregir:** agrega manejo de excepción (`On Block Error`) con detección específica de la ventana modal y una acción de cierre o recuperación.
+- **Cómo corregir:** agrega manejo de excepción (**On block error**) con detección específica del modal (**If window** = **Is open** en Win32, **If web page contains** en el simulador) y una acción de cierre o recuperación (**Press button in window** / **Press button on web page**).
 - **Reiniciar vs. reparar:** repara el manejo de excepción; reinicia solo si la modal dejó la app en un estado inconsistente que no se puede cerrar limpiamente.
 - **Evidencia posterior a la corrección:** log mostrando la excepción capturada y el flujo continuando con el siguiente registro.
 
 ### Registro válido marcado como error por timeout
 
-- **Causa probable:** el timeout de detección de confirmación es menor al tiempo real que tarda la app en responder.
-- **Cómo comprobar:** compara el timeout configurado contra el tiempo real observado en el modo "confirmación lenta" del simulador.
-- **Cómo corregir:** aumenta el timeout o cambia a polling con reintentos cortos en vez de una espera única.
-- **Reiniciar vs. reparar:** ajusta el timeout del subflujo; no es necesario reiniciar el lote completo.
+- **Causa probable:** la espera de la confirmación se agota antes del tiempo real que tarda la app en responder.
+- **Cómo comprobar:** compara el límite de tu espera (vueltas del loop × intervalo) contra el tiempo real observado en el modo **Confirmación lenta** del simulador (adjunta el flow a la pestaña donde elegiste el modo).
+- **Cómo corregir:** espera con polling acotado (**Loop** + **If web page contains** + **Wait** como intervalo; en Win32, **If window contains**) y ajusta el número de vueltas en vez de usar una espera única.
+- **Reiniciar vs. reparar:** ajusta el límite de la espera en el subflujo; no es necesario reiniciar el lote completo.
 - **Evidencia posterior a la corrección:** log de registros mostrando el registro reclasificado como exitoso.
 
 ### El fallback (teclado/imagen/OCR) falla en otra resolución
@@ -124,7 +126,7 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 - Simulador legacy: [SIT Registro Legacy](../rpa-sandbox/legacy-app).
 - Datos semilla: [legacy-records.json](../practice-assets/rpa/sit-automation-case/legacy-app/legacy-records.json).
 - Resultado esperado: [log esperado](../practice-assets/rpa/sit-automation-case/expected/log_esperado.csv).
-- Modos disponibles: normal, duplicado, bloqueo, layout cambiado, confirmación lenta y botón deshabilitado.
+- Modos disponibles (selector **Modo** del simulador): Normal, Duplicado, Bloqueo simulado, Layout cambiado, Confirmación lenta y Botón deshabilitado.
 - Reset: usa el botón `Reset` del simulador y conserva solo evidencias anonimizadas.
 - Variante sin Windows/PAD: ejecuta el flujo manualmente sobre el simulador y documenta selectores propuestos.
 

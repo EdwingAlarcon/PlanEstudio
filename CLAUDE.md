@@ -65,7 +65,14 @@ defender" con rúbrica) e IA 43, 44, 46, 54 y 55 (fallo y corrección), así que
 transferencia (60,5%). +87 prácticas (39 + 33 + 15; total 149) y dominios nuevos `alm`, `plugins`, `power-pages`,
 `integracion`, `arquitectura`, `dynamics-365` e `ia`. Caso Real de todos sin cambios; banco en 891 (preguntas que chocaban
 con Learn, reescritas). Labs alineados: 19, 22, 23, 32, 51, 53, 63, 65, 75. Etiquetas que siguen sin poder confirmarse en
-Learn: inventario en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §9. El resto de IA, D365 y RPA queda fuera de alcance.
+Learn: inventario en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §9. **Fase 7 (resto de IA, D365 y RPA) HECHA el 2026-11-05**
+(aprobada por el usuario el 2026-11-01): con ella **76/76 módulos** tienen microlecciones y reto de transferencia (100%), el
+banco llega a **239 prácticas interactivas** (`MAX_INTERACTIVE_PRACTICES` fijado a ese total exacto) y hay dominios nuevos
+`ia`, `dynamics-365` y `rpa`. El cierre de RPA (Módulos 75 y 76, +IP-RPA-025 a 030) tiene variante en papel donde Learn
+exige licencia (disparar un desktop flow desde un cloud flow); LAB-110 y LAB-111 se corrigieron contra Learn. Lo no
+verificado y los 404 de Learn están en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §10, junto con la prueba simulada de los
+Módulos 75 y 76 (2 evaluadores sin contexto; simulación, no una persona real) y sus hallazgos corregidos; los demás módulos
+de la Fase 7 no tienen prueba simulada registrada. El banco de prácticas tiene una **prueba de contrato** (`interactive-practices-contract.test.ts`: la respuesta de referencia puntúa `correct`, la pista 3 de cada diagnóstico también y repetir el síntoma no puntúa; `evaluateDebug` no cuenta los términos que ya están en el síntoma) y el sandbox `SIT Registro Legacy` tiene un panel cerrado **Registro de actividad (para tu evidencia)** (`rpa-sandbox-activity.ts`) que cuenta los intentos de **Registrar** por solicitud, y los módulos 74 y 75 lo usan como evidencia. Su contenido solo se monta con el panel abierto, para no añadir texto a la página que PAD automatiza.
 
 ## Mantenimiento vigente — 2026-10-01
 
@@ -137,9 +144,9 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 
 **Invariantes que no debes romper:**
 - Conteos vigentes: **76 módulos, 76 labs (uno opcional, LAB-06), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
-  33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 149 prácticas interactivas
+  33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 239 prácticas interactivas
   y 40 páginas de recursos** (prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
-  Doing de Módulos 11, 10 y 13, a 44 con los Módulos 1 a 8 de la Fase 2 a 62 con los Módulos 9, 12, 14-17 de la Fase 3 y a 149 con las Fases 4, 5 y 6 recortada — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de
+  Doing de Módulos 11, 10 y 13, a 44 con los Módulos 1 a 8 de la Fase 2 a 62 con los Módulos 9, 12, 14-17 de la Fase 3, a 149 con las Fases 4, 5 y 6 recortada y a 239 con la Fase 7 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de
   Módulo 13 y a 40 con "Casos reales por industria" (`Anexos/CASOS_REALES_NEGOCIO.md` portado a la app) para
   cerrar el gap de la ruta Consultor Funcional (status pasó de "Parcial" a "Disponible" el 2026-10-06,
   agregando los Módulos 20/61/62 a `professional-routes.ts` y un reto de Fit-Gap por industria en LAB-62);

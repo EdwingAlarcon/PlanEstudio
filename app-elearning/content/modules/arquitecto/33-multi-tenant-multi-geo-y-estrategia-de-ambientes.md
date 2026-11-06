@@ -18,7 +18,7 @@ Diseñar estrategias de implementación para organizaciones multinacionales con 
 > **Antes de empezar, necesitas:**
 > - Acceso al [Power Platform Admin Center](https://admin.powerplatform.microsoft.com) con rol **Power Platform Administrator** o **Dynamics 365 Administrator** (en tu tenant de prueba personal ya lo eres). Un Environment Admin no puede activar Managed Environments ni ver los ajustes del tenant.
 > - Un ambiente **Sandbox** o **Developer** de prueba en el que puedas cambiar ajustes sin afectar a nadie. **No uses PROD.**
-> - Haber hecho los Módulos 31 (gobernanza y CoE) y 32 (ALM enterprise). En Arquitecto se asume todo lo anterior.
+> - Haber hecho los Módulos 31 (Enterprise Architecture y gobernanza) y 32 (CoE Starter Kit y administración a escala). En Arquitecto se asume todo lo anterior.
 > - Un tenant de prueba casi nunca tiene varias geografías contratadas, Advanced data residency ni un segundo tenant: cada práctica que lo necesite tiene una **variante en papel**.
 
 ### 📖 Conceptos Clave
@@ -32,7 +32,7 @@ Un mapa rápido; cada pieza se practica en su microlección.
 - **Data Residency:** garantía de que los datos de una jurisdicción se almacenan en la geografía correspondiente. En Power Platform se logra creando cada ambiente en la región correcta. Lo que **sí sale** de la geografía está documentado y hay que revisarlo con el DPO: los nombres de tablas y columnas de Dataverse y los nombres de apps en los portales de administración se replican globalmente, el nombre y la URL de un sitio de Power Pages también, y los datos de **Brazil South** pueden replicarse a **South Central US** (Texas) para recuperación ante desastres.
 - **Tenant isolation (conexiones cross-tenant):** por defecto está **Off**, y entonces una app o un flujo **sí** puede conectarse a otro tenant con un conector basado en Microsoft Entra ID si el usuario presenta credenciales válidas de ese tenant. Activarlo bloquea las conexiones de entrada y de salida, salvo las que añadas a una lista de excepciones por tenant y dirección. Es el control para que nadie saque datos a un tenant ajeno, y la razón por la que un flujo cross-tenant puede quedar suspendido de un día para otro.
 - **Hub-and-Spoke environment model:** patrón donde el tenant corporativo (hub) centraliza los componentes compartidos — soluciones base, CoE, pipelines, data policies corporativas — y los tenants o ambientes de subsidiarias (spokes) siguen esas políticas pero tienen autonomía para sus apps locales. Entre tenants el hub **no** gobierna directamente a los spokes: la alineación se logra con procesos de gobierno documentados y con la misma configuración aplicada en cada tenant.
-- **Managed Environments:** conjunto de capacidades de gobierno que se activa por ambiente: grupos de ambientes, límites de sharing, weekly usage insights, enforcement de Solution Checker, IP firewall, IP cookie binding, Customer-managed keys, Customer Lockbox, backup extendido, entre otras. Viene **incluido** en las licencias standalone de Power Apps, Power Automate, Copilot Studio, Power Pages y Dynamics 365 (no en el Developer Plan); no es un add-on aparte. Los ambientes Developer **no gestionados** están en retirada: no se pueden crear nuevos a partir del 15 de noviembre de 2026 y los existentes deben pasar a Managed Environments antes del 15 de diciembre de 2026.
+- **Managed Environments:** conjunto de capacidades de gobierno que se activa por ambiente: grupos de ambientes, límites de sharing, weekly usage insights, enforcement de Solution Checker, IP firewall, IP cookie binding, Customer-managed keys, Customer Lockbox, backup extendido, entre otras. Viene **incluido** en las licencias standalone de Power Apps, Power Automate, Copilot Studio, Power Pages y Dynamics 365 (no en el Developer Plan); no es un add-on aparte. Los ambientes Developer **no gestionados** están en retirada: no se pueden crear nuevos a partir del 15 de noviembre de 2026, los existentes que no pasen a Managed Environments se suspenden desde el 15 de diciembre de 2026 y se eliminan desde el 15 de enero de 2027 ([Learn: Developer plan](https://learn.microsoft.com/power-platform/developer/plan)).
 - **Environment groups:** "carpetas" de ambientes gestionados a los que se aplican reglas en bloque (sharing, usage insights, Solution Checker, retención de backup, funciones de IA, contenido de bienvenida). Una regla publicada en el grupo **bloquea** ese ajuste en cada ambiente: el admin local ya no puede cambiarlo. Un ambiente pertenece a un solo grupo, los grupos no se anidan y pueden mezclar regiones.
 - **Pipelines in Power Platform:** despliegue de soluciones managed entre ambientes (DEV → TEST → PROD) sin Azure DevOps. Todos los ambientes destino deben ser gestionados, el Solution Checker que exija el ambiente se aplica, y hay aprobaciones mediante despliegues delegados. **No** despliegan a otro tenant (para eso, Azure DevOps o GitHub Actions) y entre geografías solo si se activa **Cross-Geo Solution Deployments**.
 - **Satellite Makers:** ciudadanos desarrolladores ubicados en subsidiarias o regiones que tienen autonomía para crear soluciones locales bajo el marco de gobierno corporativo. Se les otorga acceso a ambientes dedicados (no al Default Environment) — hoy, con **default environment routing**, cada maker nuevo recibe su propio ambiente Developer gestionado dentro del grupo que elijas —, reciben training del CoE Nurture Components, y sus apps siguen el Compliance Process.
@@ -139,13 +139,18 @@ Implementación: un ambiente separado por región (Dataverse en la región corre
 
 **Práctica real en tu entorno (25 min) — en tu Sandbox o Developer de prueba, nunca en PROD:**
 
+> ⚠️ **Antes de activar, lee esto (verificado en Learn, 2026-11):**
+> - El **Developer Plan no incluye derechos de uso de Managed Environments**. En un ambiente gestionado, todo usuario que ejecute apps o flujos necesita **Power Apps Premium**, **Power Automate Premium** o Dynamics 365 Enterprise; las licencias de prueba cuentan mientras duran (30 días). Desde junio de 2026 se muestran avisos dentro de la app y, desde febrero de 2027, el usuario sin licencia queda bloqueado con el mensaje *You need a Power Apps license to use this app* ([Learn: licencias de Managed Environments](https://learn.microsoft.com/power-platform/admin/managed-environment-licensing), [Learn: Developer plan](https://learn.microsoft.com/power-platform/developer/plan)).
+> - Aun así, en un ambiente **Developer** no conviene dejarlo sin gestionar: los Developer no gestionados se suspenden desde el 15 de diciembre de 2026, y los que se crean desde el 15 de noviembre de 2026 ya nacen gestionados (en ese caso verás **Edit Managed Environments** en el paso 1).
+> - **Variante en papel:** si tú o quien use el ambiente no tiene licencia premium (ni de prueba), o no quieres activarlo, no lo actives: el Developer Plan no cubre ni al propio dueño para ejecutar apps y flujos en un ambiente gestionado. Recorre los pasos 1 a 6 con [Learn: Enable Managed Environments](https://learn.microsoft.com/power-platform/admin/managed-environment-enable) y [Learn: environment groups](https://learn.microsoft.com/power-platform/admin/environment-groups), y rellena la evidencia con lo que muestran esas páginas, marcando cada fila como "(papel)".
+
 1. **Manage** → **Environments**, selecciona los puntos suspensivos (**…**) de tu ambiente de prueba y elige **Enable Managed Environments**. **Si en su lugar ves Edit Managed Environments**, ya está gestionado: ábrelo igual para ver la configuración. **Si la opción no aparece**, revisa que tu rol sea Power Platform Administrator o Dynamics 365 Administrator.
 2. En el panel, busca la sección **Manage sharing**. Anota las opciones de canvas apps que ofrece (**Don't set limits**, **Exclude sharing with security groups**, **Limit total individuals who can be shared to**) y la de flujos (**Let people share solution-aware cloud flows**). Elige **Exclude sharing with security groups** y **Limit total individuals who can be shared to** con un número pequeño (por ejemplo 20), y selecciona **Enable** (o **Save** si ya estaba gestionado).
 3. **Manage** → **Environment groups** → **New group**. En **Name** escribe `Curso-DevTest`, añade una **Description** y selecciona **Create**.
 4. Abre el grupo, selecciona **Add environments**, elige tu ambiente de prueba y **Add**. **Si tu ambiente no aparece en la lista**, no tiene Dataverse: los ambientes sin Dataverse no se pueden agregar.
 5. Abre la pestaña **Rules** y anota las reglas disponibles. Configura una (por ejemplo, la de sharing), **Save** y después **Publish rules** en la barra de comandos.
 6. Vuelve a la configuración de Managed Environments del ambiente: el ajuste que gobierna la regla ahora aparece bloqueado. Anota qué mensaje o indicación ves.
-7. Al terminar, si el tenant es compartido, **Remove from group** y elimina el grupo con **Delete group** (el ambiente conserva la última configuración, pero vuelve a quedar desbloqueado).
+7. Al terminar, si el tenant es compartido, **Remove from group** y elimina el grupo con **Delete group** (el ambiente conserva la última configuración, pero vuelve a quedar desbloqueado). Managed Environments **no** se desactiva desde el Admin Center: Learn indica que solo se hace con PowerShell, poniendo `protectionLevel` en `Basic`, o con `pac admin set-governance-config --protection-level Basic` (Módulo 31). En un ambiente **Developer** no lo desactives: sin gestionar, se suspende desde el 15 de diciembre de 2026. En un **Sandbox** de prueba, desactívalo si los usuarios del ambiente no tienen licencia premium.
 
 **Pipelines entre estos ambientes (lectura, 5 min):** los pipelines de Power Platform exigen que todos los destinos sean ambientes gestionados, aplican el Solution Checker que pida el ambiente, despliegan solo soluciones managed y **no** cruzan tenants. Si tu topología del Caso Real tiene dos tenants, anota qué herramienta usarías para llevar una solución de uno a otro (Azure DevOps o GitHub Actions con Power Platform Build Tools, Módulo 19).
 
@@ -213,7 +218,14 @@ El mismo razonamiento, al revés: en lugar de separar, ahora hay que **unir**. T
 
 **[Transferir: consolidar el tenant de una empresa adquirida](/practica/ip-arq-018-consolidar-tenant-adquirido)** — decide qué se mueve, con qué herramienta y qué hay que rehacer después. Si solo memorizaste "los ambientes no se pueden mover", este reto te lo va a mostrar: la migración entre tenants se pide hoy desde el propio Admin Center, pero no se lleva todo.
 
-Cierra el reto con un plan de media página: orden de los pasos, qué se rehace en el destino (conexiones, conectores personalizados, URLs de los disparadores HTTP, Managed Environments) y qué riesgo aceptas.
+Cierra el reto con un plan de media página: orden de los pasos, qué se rehace en el destino (conexiones, conectores personalizados, URLs de los disparadores HTTP, Managed Environments) y qué riesgo aceptas. Contrástalo con esta rúbrica:
+
+| Criterio | Qué demuestra que lo cumples |
+|---|---|
+| Orden con dependencias | Lo que bloquea la migración (aprobación del tenant destino, mapeo de usuarios, controles que hay que desactivar) va antes de mover, y la recreación de conexiones y conectores va después |
+| Lo que se rehace, completo | Nombras conexiones, conectores personalizados, URLs de los disparadores HTTP y Managed Environments, y quién avisa a los sistemas que llaman a esas URLs |
+| Lo que no viaja con la herramienta | Dices qué haces con lo que la migración entre tenants no admite (por ejemplo, ambientes que no son de producción ni sandbox) |
+| Riesgo aceptado y su mitigación | Escribes al menos un riesgo (corte de las integraciones, ventana de inactividad) y cómo lo reduces (ensayo con un sandbox, ventana pactada) |
 
 **Evidencia a reportar:**
 
@@ -221,7 +233,7 @@ Cierra el reto con un plan de media página: orden de los pasos, qué se rehace 
 |---|---|
 | Herramienta y requisitos de la migración entre tenants (tipos de ambiente admitidos, aprobación del destino, mapeo de usuarios) | ___ |
 | Tres cosas que no se migran o cambian y cómo las rehaces | ___ |
-| Qué control de seguridad hay que desactivar antes de mover y por qué | ___ |
+| Qué control de seguridad hay que desactivar antes de mover y por qué (pista: sección *Known issues* de [Learn: Customer Lockbox](https://learn.microsoft.com/power-platform/admin/about-lockbox)) | ___ |
 | Qué cambiaría si la empresa adquirida estuviera en otra geografía | ___ |
 
 ---
@@ -257,10 +269,10 @@ Cierra el reto con un plan de media página: orden de los pasos, qué se rehace 
 - [ ] Resolví la micropráctica de un tenant o varios antes de leer mi propio tenant
 - [ ] Anoté las regiones de mis ambientes y el estado de **Restrict cross-tenant connections** (o hice la variante en papel)
 - [ ] Rellené la tabla de residencia del Caso Real con la **Region** real del Admin Center para cada país y dos elementos que se replican fuera de la geografía
-- [ ] Activé Managed Environments en un ambiente de prueba y anoté las opciones exactas de **Manage sharing**
-- [ ] Creé un grupo de ambientes, publiqué una regla y comprobé que el ajuste quedó bloqueado en el ambiente
+- [ ] Activé Managed Environments en un ambiente de prueba (o hice la variante en papel con Learn) y anoté las opciones exactas de **Manage sharing**
+- [ ] Creé un grupo de ambientes, publiqué una regla y comprobé que el ajuste quedó bloqueado en el ambiente (o, en la variante en papel, anoté qué indica Learn que pasa al publicar)
 - [ ] Diagnostiqué el flujo cross-tenant suspendido formulando una hipótesis antes de ver la causa
 - [ ] Escribí el ADR de topología de la red de clínicas sin pasos y lo contrasté con la tabla de criterios, incluida al menos una consecuencia negativa
-- [ ] Completé el reto de transferencia de la adquisición con su plan de migración entre tenants
+- [ ] Completé el reto de transferencia de la adquisición con su plan de migración entre tenants, contrastado con la rúbrica
 
 ---

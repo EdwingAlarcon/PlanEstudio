@@ -4,11 +4,11 @@ title: "IA para Análisis de Soluciones, Arquitectura y Consultoría Funcional D
 level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 20
-practiceMinutes: 210
+practiceMinutes: 250
 slug: "ia-para-analisis-arquitectura-y-consultoria"
 lastVerified: "2026-11"
 ---
-*Lectura: 18-20 min · Práctica: unas 3 a 4 horas la primera vez, mejor en dos o tres sesiones (la primera, Microlecciones 1 y 2; la segunda, la Microlección 3 con sus verificaciones en Learn; la tercera, la Microlección 4, el ADR y el reto de transferencia).*
+*Lectura: 18-20 min · Práctica: unas 4 horas la primera vez (algo más si el vocabulario de Dynamics 365 es nuevo para ti), mejor en dos o tres sesiones (la primera, Microlecciones 1 y 2; la segunda, la Microlección 3 con sus verificaciones en Learn; la tercera, la Microlección 4, el ADR y el reto de transferencia).*
 
 ### 🎯 Objetivo
 Usar IA como acelerador en tres roles distintos de un proyecto Power Platform/D365 — desarrollo técnico (plugins, PCF, Custom APIs), consultoría funcional (Dynamics 365 Sales/Customer Service) y arquitectura de solución — manteniendo siempre al humano como responsable de la decisión final.
@@ -19,7 +19,7 @@ Usar IA como acelerador en tres roles distintos de un proyecto Power Platform/D3
 > - Un asistente de IA (los de los Módulos 44 y 45 sirven) y acceso a [Microsoft Learn](https://learn.microsoft.com) para verificar.
 > - **No necesitas un tenant con Dynamics 365.** Todo el módulo se puede hacer en papel: el Fit-Gap de la Microlección 3 viene escrito y se verifica en Learn. Si tienes un ambiente de prueba de Dynamics 365 Sales o Customer Service, úsalo para comprobar lo estándar con tus propios ojos.
 > - La Microlección 1 usa la carpeta de solución desempaquetada del **Módulo 54**; si no la tienes, hay variante.
-> - Este módulo es transversal: no exige ningún nivel de certificación. Si ya hiciste el Módulo 20 (Dynamics 365 CE), vas a reconocer las entidades estándar.
+> - Este módulo es transversal: no exige ningún nivel de certificación. Si ya hiciste el Módulo 20 (Dynamics 365 CE), vas a reconocer las entidades estándar. Si términos como prospecto (*lead*), oportunidad o caso son nuevos para ti, una lectura previa opcional es el [Módulo 57](/nivel/d365/modulo/introduccion-dynamics-365-avanzado) (también transversal).
 
 ### 📖 Conceptos Clave
 - **IA para análisis de soluciones exportadas:** un asistente de IA puede leer `customizations.xml`/`Solution.xml` desempaquetados y resumir componentes, detectar dependencias entre tablas, o señalar referencias hardcodeadas (ver Módulo 54) — pero no reemplaza que un humano confirme el resultado contra el conocimiento real del proyecto.
@@ -89,7 +89,7 @@ Usar IA como acelerador en tres roles distintos de un proyecto Power Platform/D3
    53) — el Vendedor no debería tener acceso de eliminar salvo justificación explícita.
    Formato de salida: tabla rol × permiso con una columna de justificación.
    ```
-   Revisa si el resultado respeta el principio de mínimo privilegio antes de aceptarlo.
+   Revisa si el resultado respeta el principio de **mínimo privilegio** antes de aceptarlo: cada rol recibe solo los permisos que su trabajo necesita, y cualquier permiso de más (por ejemplo, eliminar) lleva una justificación escrita.
 3. **Recomendación arquitectónica con sobrepersonalización no justificada (recházala):** pide a un asistente de IA: `"El equipo de Customer Service quiere registrar una encuesta de satisfacción corta (1-5 estrellas + comentario) después de cerrar cada caso. Propón cómo implementarlo en Dynamics 365 Customer Service."` Es común que la IA proponga directamente una tabla personalizada completa con relaciones y un formulario custom, sin evaluar primero las alternativas: **Dynamics 365 Customer Voice**, que viene incluido con productos enterprise seleccionados de Dynamics 365 y trae una plantilla de Power Automate para enviar la encuesta cuando se resuelve un caso ([Learn: enviar una encuesta con Power Automate](https://learn.microsoft.com/dynamics365/customer-voice/send-survey-flow)), o, como mínimo, dos campos nuevos sobre la entidad de Caso si el alcance descrito basta. Rechaza la propuesta tal como vino, pide explícitamente que compare contra la alternativa estándar, y documenta en 3 líneas cuál de las dos recomendarías para este caso y por qué.
 4. Para cada uno de los pasos anteriores, anota explícitamente si la IA propuso sobrepersonalización (una solución custom donde existía una alternativa estándar) y corrige la propuesta si es necesario.
 
@@ -122,7 +122,7 @@ Usar IA como acelerador en tres roles distintos de un proyecto Power Platform/D3
 | 7 | Ver en el registro del cliente los correos intercambiados | FIT | Actividad de correo electrónico estándar en la línea de tiempo |
 | 8 | El vendedor no puede eliminar oportunidades | FIT | Rol de seguridad sin el privilegio de eliminar sobre Oportunidad |
 
-**Práctica (60 min, en papel):**
+**Práctica (90 min, en papel):** verificar 8 filas en varias páginas de Learn lleva tiempo, sobre todo si Dynamics 365 es nuevo para ti; puedes partirla en dos tandas de 4 filas.
 
 1. **Primero, sin buscar nada:** marca al lado de cada fila si te parece correcta, dudosa o falsa. Esa primera impresión es parte de la evidencia: compárala al final con lo que verificaste.
 2. **Verifica cada fila en Learn.** Para cada una, busca la página que la confirma o la contradice y anota la URL y su fecha de actualización. Páginas que te van a servir (no te dicen qué filas están mal):
@@ -130,10 +130,10 @@ Usar IA como acelerador en tres roles distintos de un proyecto Power Platform/D3
    - [Qualify and convert a lead to opportunity](https://learn.microsoft.com/dynamics365/sales/qualify-lead-convert-opportunity-sales).
    - [Purchase Dynamics 365 Customer Voice](https://learn.microsoft.com/dynamics365/customer-voice/purchase) y [Send a survey by using Power Automate](https://learn.microsoft.com/dynamics365/customer-voice/send-survey-flow).
    - [Service protection API limits](https://learn.microsoft.com/power-apps/developer/data-platform/api-limits).
-   - [Dynamics 365 templates para Power Pages](https://learn.microsoft.com/power-pages/templates/dynamics-365-apps/overview).
+   - [Dynamics 365 templates para Power Pages](https://learn.microsoft.com/power-pages/templates/dynamics-365-apps/overview) y, para su licencia, la sección *Power Pages* de [Power Platform licensing FAQs](https://learn.microsoft.com/power-platform/admin/powerapps-flow-licensing-faq).
    - [FAQ de seguridad y privacidad de Copilot en Dynamics 365](https://learn.microsoft.com/dynamics365/faqs-copilot-data-security-privacy).
 3. **Diagnosticar — micropráctica (7 min):** el equipo construyó la fila 4 tal como la escribió la IA y la integración empezó a fallar → **[Diagnosticar: la integración aprobada en el Fit-Gap devuelve 429](/practica/ip-ia-014-diagnosticar-integracion-con-429)**. Formula tu hipótesis antes de abrir las pistas.
-4. **Corrige el Fit-Gap.** Para cada fila con un supuesto falso, escribe el veredicto correcto: **FIT**, **FIT con condición** (dices cuál) o **GAP**, y la propuesta corregida. Criterios de aceptación: (1) cada corrección tiene su URL de Learn; (2) ninguna fila corregida propone algo custom si Learn documenta una alternativa estándar que cubre el requisito; (3) las filas con números (encuestas, carga nocturna) dicen qué número verificaste y qué implica para este cliente; (4) si un requisito choca con la seguridad (fila 6), lo marcas como requisito a renegociar con el cliente, no como FIT.
+4. **Corrige el Fit-Gap.** Para cada fila con un supuesto falso, escribe el veredicto correcto: **FIT**, **FIT con condición** (dices cuál) o **GAP**, y la propuesta corregida. Criterios de aceptación: (1) cada corrección tiene su URL de Learn; (2) ninguna fila corregida propone algo custom si Learn documenta una alternativa estándar que cubre el requisito; (3) las filas con números (encuestas, carga nocturna y también el portal: cuántos usuarios de los clientes iniciarían sesión cada mes) dicen qué número verificaste y qué implica para este cliente; (4) si un requisito choca con la seguridad (fila 6), lo marcas como requisito a renegociar con el cliente, no como FIT.
 5. **Vuelve a la IA con la evidencia.** Pega tus correcciones y pide que rehaga solo esas filas citando la página de Learn de cada una. Anota si la nueva versión volvió a introducir algún supuesto sin fuente.
 
 **Evidencia a reportar (una fila por requisito):**
@@ -155,7 +155,7 @@ Usar IA como acelerador en tres roles distintos de un proyecto Power Platform/D3
 | Cuántas respuestas de encuesta al mes calculaste que necesita el cliente y qué implica | ___ |
 | ¿La IA reintrodujo algún supuesto sin fuente en el paso 5? Cuál | ___ |
 
-> **No todas las filas están mal**, y alguna está bien en la herramienta pero mal en la condición. Un "todo es GAP" o un "todo es FIT" no es una corrección: es otro supuesto.
+> **No todas las filas están mal**, y alguna está bien en la herramienta pero mal en la condición. Un "todo es GAP" o un "todo es FIT" no es una corrección: es otro supuesto. Pista para las filas con números: cuando una fila corregida propone una herramienta, pregúntate también **cómo se licencia** y con qué volumen del cliente se calcula ese costo.
 
 ---
 

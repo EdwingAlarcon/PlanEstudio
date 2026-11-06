@@ -490,7 +490,7 @@ Filter('Solicitudes TI', 'Fecha Solicitud' < DateAdd(Today(), -7, TimeUnit.Days)
 Las dos fórmulas de abajo **piden lo mismo**: las solicitudes cuyo título empieza con lo que escribiste en `txtBusqueda`, de la más reciente a la más antigua. Cambia solo **cómo** se pide.
 
 - `Sort(tabla, columna, SortOrder.Descending)` ordena la tabla por esa columna, de mayor a menor (`SortOrder.Ascending` es de menor a mayor). La columna se escribe por su nombre, entre comillas simples si tiene espacios, igual que en `Filter`.
-- `Left(texto, n)` toma los primeros `n` caracteres; `Len(texto)` cuenta caracteres.
+- `Trim(texto)` quita los espacios del principio y del final.
 - `StartsWith(texto, inicio)` dice si `texto` empieza con `inicio`.
 
 ❌ **Mal rendimiento** (trae como máximo 500 filas y filtra en la app):
@@ -498,12 +498,12 @@ Las dos fórmulas de abajo **piden lo mismo**: las solicitudes cuyo título empi
 Sort(
     Filter(
         'Solicitudes TI',
-        Left('Título de Solicitud', Len(txtBusqueda.Text)) = txtBusqueda.Text
+        StartsWith(Trim('Título de Solicitud'), txtBusqueda.Text)
     ),
     'Fecha Solicitud',
     SortOrder.Descending
 )
-// Left() y Len() aplicadas a la columna no se pueden delegar a Dataverse: línea azul
+// Trim() aplicada a la columna no se puede delegar a Dataverse: línea azul
 ```
 
 ✅ **Optimizado** (filtra en el servidor):

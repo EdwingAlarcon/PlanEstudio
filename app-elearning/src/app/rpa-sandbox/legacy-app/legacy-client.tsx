@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AlertTriangle, CheckCircle2, RotateCcw } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { formatActivityReport, summarizeActivity, type ActivityEvent } from "@/lib/rpa-sandbox-activity";
 
 const initialRecords = [
   { requestId: "SOL-2026-0001", customerId: "CLI-0001", productId: "PROD-001", status: "Pendiente" },
@@ -22,6 +23,12 @@ export function RpaLegacySimulatorClient() {
   const [productId, setProductId] = useState("PROD-003");
   const [message, setMessage] = useState("");
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [events, setEvents] = useState<ActivityEvent[]>([]);
+  const [activityOpen, setActivityOpen] = useState(false);
+
+  function log(event: ActivityEvent) {
+    setEvents((current) => [...current, event]);
+  }
 
   function reset() {
     setRecords(initialRecords);
@@ -31,20 +38,30 @@ export function RpaLegacySimulatorClient() {
     setProductId("PROD-003");
     setMessage("");
     setConfirmOpen(false);
+    setEvents([]);
+  }
+
+  function consult() {
+    const result = records.find((row) => row.requestId === requestId)?.status ?? "No encontrado";
+    setMessage(result);
+    log({ kind: "consulta", requestId, result });
   }
 
   function register() {
     setMessage("");
     if (mode === "blocked") {
       setMessage("Registro bloqueado simulado. El robot debe registrar error y continuar.");
+      log({ kind: "registrar", requestId, outcome: "bloqueado" });
       return;
     }
     if (mode === "duplicate" || records.some((row) => row.requestId === requestId)) {
       setMessage("Registro duplicado. No se insertó una segunda vez.");
+      log({ kind: "registrar", requestId, outcome: "duplicado" });
       return;
     }
     if (!requestId || !customerId || !productId) {
       setMessage("Faltan campos obligatorios.");
+      log({ kind: "registrar", requestId, outcome: "incompleto" });
       return;
     }
     const next = { requestId, customerId, productId, status: "Registrado" };
@@ -54,11 +71,13 @@ export function RpaLegacySimulatorClient() {
         setRecords((current) => [...current, next]);
         setConfirmOpen(true);
         setMessage("");
+        log({ kind: "registrar", requestId: next.requestId, outcome: "insertado" });
       }, 900);
       return;
     }
     setRecords((current) => [...current, next]);
     setConfirmOpen(true);
+    log({ kind: "registrar", requestId, outcome: "insertado" });
   }
 
   const form = (
@@ -80,7 +99,7 @@ export function RpaLegacySimulatorClient() {
       </div>
       <div className="mt-4 flex flex-wrap gap-2">
         <Button size="sm" onClick={register} disabled={mode === "disabled-submit"}>Registrar</Button>
-        <Button size="sm" variant="outline" onClick={() => setMessage(records.find((row) => row.requestId === requestId)?.status ?? "No encontrado")}>Consultar por ID</Button>
+        <Button size="sm" variant="outline" onClick={consult}>Consultar por ID</Button>
       </div>
       <div className="mt-3 min-h-6" role="status" aria-live="polite">
         {message && <p className="text-sm text-muted-foreground">{message}</p>}
@@ -143,6 +162,16 @@ export function RpaLegacySimulatorClient() {
         </main>
       </section>
 
+      <details
+        className="rounded-xl border border-border bg-card p-4 shadow-fluent-1"
+        data-testid="legacy-activity"
+        onToggle={(event) => setActivityOpen(event.currentTarget.open)}
+      >
+        <summary className="cursor-pointer text-sm font-semibold text-foreground">Registro de actividad (para tu evidencia)</summary>
+        {/* El contenido solo se monta con el panel abierto: cerrado, no añade texto a la página que PAD automatiza. */}
+        {activityOpen && <ActivityPanel events={events} records={records} />}
+      </details>
+
       {confirmOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 p-4" role="dialog" aria-modal="true" aria-labelledby="legacy-confirm-title">
           <div className="w-full max-w-md rounded-xl border border-border bg-card p-5 shadow-xl">
@@ -153,6 +182,32 @@ export function RpaLegacySimulatorClient() {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+function ActivityPanel({ events, records }: { events: ActivityEvent[]; records: typeof initialRecords }) {
+  const summary = summarizeActivity(events, records);
+  return (
+    <div className="mt-3 space-y-3 text-xs" data-activity="panel">
+      <div className="text-muted-foreground">
+        Lo que hizo tu robot en esta página desde el último <strong>Reset</strong>. Si recargas la pestaña, se borra. Copia el texto de abajo en tu tabla de evidencia.
+      </div>
+      <ul className="space-y-1" aria-label="Comprobaciones del registro de actividad">
+        {summary.hasActivity ? (
+          summary.checks.map((check) => (
+            <li key={check.id} data-activity-check={check.id} data-ok={check.ok ? "true" : "false"}>
+              <span className={check.ok ? "font-semibold text-[#107C10]" : "font-semibold text-[#B37800]"}>{check.ok ? "OK" : "Revisar"}</span>{" "}
+              {check.label}: {check.detail}
+            </li>
+          ))
+        ) : (
+          <li>Sin actividad todavía.</li>
+        )}
+      </ul>
+      <pre className="overflow-x-auto rounded-lg border border-border bg-muted/30 p-3 font-mono" data-activity="report" aria-label="Informe de actividad">
+        {formatActivityReport(summary)}
+      </pre>
     </div>
   );
 }
