@@ -170,7 +170,7 @@ export const ESSENTIAL_SETUP_STEPS: EssentialSetupStep[] = [
     title: "Se que entorno estoy usando",
     outcome: "Reconoces el Power Platform environment (Developer, Trial, Sandbox o Production) y su proposito.",
     glossary: "Un entorno es un espacio de trabajo aislado dentro de tu tenant, con sus propios datos y apps; una organizacion suele tener varios (uno para practicar, otro para producción).",
-    tenantAlternative: "Describe conceptualmente la diferencia entre entornos sin necesitar acceso real todavia.",
+    tenantAlternative: "Describe conceptualmente la diferencia entre entornos sin necesitar acceso real todavía.",
   },
   {
     id: "confirm-dataverse",
@@ -190,7 +190,7 @@ export const ESSENTIAL_SETUP_STEPS: EssentialSetupStep[] = [
     id: "confirm-non-production",
     title: "Confirmo que no estoy trabajando en produccion",
     outcome: "Verificas explicitamente que el entorno usado para practicar no es un entorno de produccion.",
-    glossary: "\"Producción\" es el entorno real que usan las personas del negocio todos los dias; practicar ahí puede dañar datos reales, así que los labs deben hacerse en un entorno Developer o Trial aparte.",
+    glossary: "\"Producción\" es el entorno real que usan las personas del negocio todos los días; practicar ahí puede dañar datos reales, así que los labs deben hacerse en un entorno Developer o Trial aparte.",
     tenantAlternative: "Si solo tienes acceso a produccion, no practiques alli: solicita un entorno Developer o Trial.",
   },
   {

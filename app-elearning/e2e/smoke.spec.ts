@@ -53,7 +53,7 @@ test.describe("Smoke — rutas principales", () => {
     await expect(page.getByText("Avance de fundamentos")).toBeVisible();
     await page.reload();
     await expect(page.getByText("Modo guiado")).toBeVisible();
-    await expect(page.getByText("Proxima mejor accion")).toBeVisible();
+    await expect(page.getByText("Próxima mejor acción")).toBeVisible();
   });
 
   test("modo libre y cambio de ruta conservan progreso local", async ({ page }) => {

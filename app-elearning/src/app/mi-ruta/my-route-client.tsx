@@ -56,7 +56,7 @@ export function MyRouteClient({
             <div>
               <h1 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">{FOUNDATION_ROUTE.title}</h1>
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                {FOUNDATION_ROUTE.summary} No tienes que estudiar todo ahora; las especializaciones son opcionales y puedes cambiar despues.
+                {FOUNDATION_ROUTE.summary} No tienes que estudiar todo ahora; las especializaciones son opcionales y puedes cambiar después.
               </p>
             </div>
           </div>
@@ -66,7 +66,7 @@ export function MyRouteClient({
               <span className="text-[#0078D4] dark:text-[#4DB8FF]">{progress.completed}/{progress.total}</span>
             </div>
             <Progress value={progress.percentage} className="h-2" />
-            <p className="mt-2 text-xs text-muted-foreground">Progreso de la ruta activa, no del catalogo completo.</p>
+            <p className="mt-2 text-xs text-muted-foreground">Progreso de la ruta activa, no del catálogo completo.</p>
           </div>
         </div>
       </section>
@@ -79,7 +79,7 @@ export function MyRouteClient({
 
       <section className="grid gap-4 lg:grid-cols-[1fr_0.85fr]">
         <div className="rounded-xl border border-[#0078D4]/20 bg-[#EFF6FC] p-5 shadow-fluent-1 dark:border-[#4DB8FF]/20 dark:bg-[rgba(0,120,212,0.10)]">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#0078D4] dark:text-[#4DB8FF]">Proxima mejor accion</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#0078D4] dark:text-[#4DB8FF]">Próxima mejor acción</p>
           <h2 className="mt-2 text-xl font-semibold text-foreground">{nextAction.activity.title}</h2>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{nextAction.reason}</p>
           <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted-foreground">
@@ -161,9 +161,9 @@ export function MyRouteClient({
 
       <section id="roles" aria-labelledby="roles-heading" className="space-y-4">
         <div>
-          <h2 id="roles-heading" className="text-lg font-semibold text-foreground">¿Que tipo de trabajo te gustaria aprender?</h2>
+          <h2 id="roles-heading" className="text-lg font-semibold text-foreground">¿Qué tipo de trabajo te gustaría aprender?</h2>
           <p className="text-sm text-muted-foreground">
-            Recomendado antes de elegir especializacion: completa fundamentos, una practica y una reflexion breve. Puedes omitirlo.
+            Recomendado antes de elegir especialización: completa fundamentos, una práctica y una reflexión breve. Puedes omitirlo.
           </p>
         </div>
         <div className="grid gap-3 md:grid-cols-3">
@@ -189,16 +189,16 @@ export function MyRouteClient({
 
       <section aria-labelledby="recommendations-heading" className="space-y-4">
         <div>
-          <h2 id="recommendations-heading" className="text-lg font-semibold text-foreground">Rutas recomendadas despues de fundamentos</h2>
+          <h2 id="recommendations-heading" className="text-lg font-semibold text-foreground">Rutas recomendadas después de fundamentos</h2>
           <p className="text-sm text-muted-foreground">
-            Esta recomendacion se basa en tus respuestas iniciales, actividades realizadas e intereses declarados. No es diagnostico vocacional.
+            Esta recomendación se basa en tus respuestas iniciales, actividades realizadas e intereses declarados. No es diagnóstico vocacional.
           </p>
         </div>
         <div className="grid gap-3 md:grid-cols-3">
           {recommendedRoutes.map((route, index) => (
             <article key={route.slug} className="rounded-xl border border-border bg-card p-4 shadow-fluent-1">
               <span className="mb-3 block h-1.5 w-12 rounded-full" style={{ backgroundColor: route.accent }} aria-hidden />
-              <Badge variant={index === 0 ? "default" : "outline"}>{index === 0 ? "Mejor coincidencia" : index === 1 ? "Alternativa" : "Explorar otra opcion"}</Badge>
+              <Badge variant={index === 0 ? "default" : "outline"}>{index === 0 ? "Mejor coincidencia" : index === 1 ? "Alternativa" : "Explorar otra opción"}</Badge>
               <h3 className="mt-3 text-base font-semibold text-foreground">{route.title}</h3>
               <p className="mt-1 text-xs text-muted-foreground">{route.role}</p>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{route.summary}</p>
@@ -300,13 +300,13 @@ function DiagnosticPanel() {
     <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="diagnostic-heading">
       <div className="mb-4 flex items-center gap-2">
         <HelpCircle className="h-4 w-4 text-[#0078D4]" aria-hidden />
-        <h2 id="diagnostic-heading" className="text-lg font-semibold text-foreground">Diagnostico ligero</h2>
+        <h2 id="diagnostic-heading" className="text-lg font-semibold text-foreground">Diagnóstico ligero</h2>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
-        <ChoiceGroup label="¿Has creado una app o automatizacion?" options={[["none", "No"], ["basic", "Algo basico"], ["unknown", "No se todavia"]]} value={answers.experience} onSelect={(v) => patch({ experience: v as OnboardingAnswers["experience"] })} />
-        <ChoiceGroup label="¿Tienes tenant o entorno de practica?" options={[["yes", "Si"], ["no", "No"], ["unknown", "No se"]]} value={answers.tenant} onSelect={(v) => patch({ tenant: v as OnboardingAnswers["tenant"] })} />
-        <ChoiceGroup label="¿Que prefieres por ahora?" options={[["build", "Construir"], ["configure", "Configurar"], ["unknown", "No se"]]} value={answers.preference} onSelect={(v) => patch({ preference: v as OnboardingAnswers["preference"] })} />
-        <ChoiceGroup label="¿Para que estudias?" options={[["job", "Empleo"], ["work", "Trabajo actual"], ["explore", "Explorar"]]} value={answers.purpose} onSelect={(v) => patch({ purpose: v as OnboardingAnswers["purpose"] })} />
+        <ChoiceGroup label="¿Has creado una app o automatización?" options={[["none", "No"], ["basic", "Algo básico"], ["unknown", "No sé todavía"]]} value={answers.experience} onSelect={(v) => patch({ experience: v as OnboardingAnswers["experience"] })} />
+        <ChoiceGroup label="¿Tienes tenant o entorno de práctica?" options={[["yes", "Sí"], ["no", "No"], ["unknown", "No sé"]]} value={answers.tenant} onSelect={(v) => patch({ tenant: v as OnboardingAnswers["tenant"] })} />
+        <ChoiceGroup label="¿Qué prefieres por ahora?" options={[["build", "Construir"], ["configure", "Configurar"], ["unknown", "No sé"]]} value={answers.preference} onSelect={(v) => patch({ preference: v as OnboardingAnswers["preference"] })} />
+        <ChoiceGroup label="¿Para qué estudias?" options={[["job", "Empleo"], ["work", "Trabajo actual"], ["explore", "Explorar"]]} value={answers.purpose} onSelect={(v) => patch({ purpose: v as OnboardingAnswers["purpose"] })} />
       </div>
       <Button
         className="mt-5 bg-[#0078D4] text-white hover:bg-[#106EBE]"

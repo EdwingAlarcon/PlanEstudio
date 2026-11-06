@@ -52,7 +52,7 @@ test.describe("Preparar mi entorno", () => {
   test("sin tenant muestra la alternativa conceptual del setup esencial", async ({ page }) => {
     await page.goto("/preparar-entorno");
     await page.getByRole("button", { name: "No", exact: true }).click();
-    await expect(page.getByText("Sin tenant todavia")).toBeVisible();
+    await expect(page.getByText("Sin tenant todavía")).toBeVisible();
   });
 
   test("en móvil (375px) la matriz se muestra como tarjetas, no como tabla", async ({ page }) => {

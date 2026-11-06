@@ -5,7 +5,7 @@ import { MyRouteClient } from "./my-route-client";
 
 export const metadata: Metadata = {
   title: "Mi ruta",
-  description: "Ruta guiada, siguiente accion, diagnostico ligero y seleccion posterior de rol.",
+  description: "Ruta guiada, siguiente acción, diagnóstico ligero y selección posterior de rol.",
 };
 
 export default function MyRoutePage() {
