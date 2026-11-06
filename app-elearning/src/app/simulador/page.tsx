@@ -5,10 +5,11 @@ import { getAllQuestions } from "@/lib/questions-parser";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpenCheck, Clock, Target } from "lucide-react";
+import { SIMULATOR_MINUTES, SIMULATOR_PASS_PERCENT, SIMULATOR_QUESTIONS } from "@/lib/simulator-config";
 
 export const metadata: Metadata = {
   title: "Simulador de Examen",
-  description: "Simulador cronometrado con 40 preguntas mixtas de todos los módulos.",
+  description: `Simulador cronometrado con ${SIMULATOR_QUESTIONS} preguntas mixtas de todos los módulos.`,
 };
 
 export default function SimulatorPage() {
@@ -41,12 +42,12 @@ export default function SimulatorPage() {
         <SimulatorContextCard
           icon={<Clock className="h-4 w-4 text-[#0078D4]" />}
           title="Formato"
-          description="40 preguntas aleatorias con límite de 50 minutos."
+          description={`${SIMULATOR_QUESTIONS} preguntas aleatorias con límite de ${SIMULATOR_MINUTES} minutos.`}
         />
         <SimulatorContextCard
           icon={<Target className="h-4 w-4 text-[#107C10]" />}
           title="Criterio"
-          description="70% indica dominio inicial; menos de eso exige repaso dirigido."
+          description={`${SIMULATOR_PASS_PERCENT}% indica dominio inicial; menos de eso exige repaso dirigido.`}
         />
         <SimulatorContextCard
           icon={<BookOpenCheck className="h-4 w-4 text-orange-500" />}

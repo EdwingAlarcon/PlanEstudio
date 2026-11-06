@@ -27,24 +27,23 @@ export function GuidedHomeClient() {
             <Badge className="border-0 bg-[#0078D4] text-white">
               {onboarding.navigationMode === "guided" ? "Modo guiado" : "Explorar libremente"}
             </Badge>
-            <Badge variant="outline">Recomendacion determinista</Badge>
           </div>
           <p className="text-xs leading-relaxed text-muted-foreground">
             {onboarding.navigationMode === "guided"
               ? "Modo guiado: te sugerimos siempre la siguiente actividad, pero puedes cambiar de ruta cuando quieras."
               : "Explorar libremente: eliges tú qué módulo o lab abrir a continuación, sin una sugerencia fija."}
             {" "}
-            Recomendación determinista: la misma respuesta te lleva siempre a la misma ruta recomendada — no depende del azar ni de un algoritmo que cambie con el tiempo.
+            La recomendación es determinista: las mismas respuestas te llevan siempre a la misma ruta.
           </p>
 
           <div className="space-y-2">
             <h1 id="guided-heading" className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-              {hasStarted ? "Continua donde quedaste" : "Empieza aqui"}
+              {hasStarted ? "Continúa donde quedaste" : "Empieza aquí"}
             </h1>
             <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
               {hasStarted
-                ? "Tu siguiente accion esta calculada sobre tu ruta activa y tu progreso local. Tu progreso no se pierde si cambias de objetivo."
-                : "No necesitas elegir una especializacion todavia. Completa los fundamentos y despues te ayudaremos a escoger una ruta."}
+                ? "Tu siguiente acción está calculada sobre tu ruta activa y tu progreso local. Tu progreso no se pierde si cambias de objetivo."
+                : "No necesitas elegir una especialización todavía. Completa los fundamentos y después te ayudaremos a escoger una ruta."}
             </p>
           </div>
 
@@ -52,14 +51,14 @@ export function GuidedHomeClient() {
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div className="min-w-0 space-y-2">
                 <p className="text-xs font-semibold uppercase tracking-widest text-[#0078D4] dark:text-[#4DB8FF]">
-                  Siguiente accion
+                  Siguiente acción
                 </p>
                 <h2 className="text-lg font-semibold text-foreground">{nextAction.activity.title}</h2>
                 <p className="text-sm leading-relaxed text-muted-foreground">{nextAction.reason}</p>
                 <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
                   <span>{nextAction.time}</span>
                   <span aria-hidden>·</span>
-                  <span>{nextAction.activity.type === "lab" ? "Practica guiada" : "Actividad guiada"}</span>
+                  <span>{nextAction.activity.type === "lab" ? "Práctica guiada" : "Actividad guiada"}</span>
                 </div>
               </div>
               <Button asChild className="w-full shrink-0 bg-[#0078D4] text-white hover:bg-[#106EBE] sm:w-auto">
@@ -83,7 +82,7 @@ export function GuidedHomeClient() {
 
           <div className="grid gap-3 sm:grid-cols-4" aria-label="Entradas iniciales">
             <EntryButton title="Empiezo desde cero" href="/mi-ruta" active icon={<Sparkles className="h-4 w-4" />} onClick={() => onboarding.startOnboarding("desde-cero")} />
-            <EntryButton title="Ya conozco lo basico" href="/mi-ruta" icon={<Compass className="h-4 w-4" />} onClick={() => onboarding.startOnboarding("basico")} />
+            <EntryButton title="Ya conozco lo básico" href="/mi-ruta" icon={<Compass className="h-4 w-4" />} onClick={() => onboarding.startOnboarding("basico")} />
             <EntryButton title="Quiero aprender para un rol" href="/mi-ruta#roles" icon={<Map className="h-4 w-4" />} onClick={() => onboarding.startOnboarding("rol")} />
             <EntryButton title="Practicar o entrevistas" href="/simulador" icon={<PlayCircle className="h-4 w-4" />} onClick={() => onboarding.startOnboarding("practica")} />
           </div>
@@ -102,7 +101,7 @@ export function GuidedHomeClient() {
             </div>
             <Progress value={progress.percentage} className="h-2" />
             <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-              {FOUNDATION_ROUTE.duration} · {FOUNDATION_ROUTE.sessionLength}. Primera practica: {FOUNDATION_ACTIVITIES[2]?.title}.
+              {FOUNDATION_ROUTE.duration} · {FOUNDATION_ROUTE.sessionLength}. Primera práctica: {FOUNDATION_ACTIVITIES[2]?.title}.
             </p>
           </div>
 
@@ -133,7 +132,7 @@ export function GuidedHomeClient() {
               Rutas avanzadas, incident labs, capstones y especializaciones D365/IA. Siguen accesibles en Explorar todo.
             </p>
             <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-              Esta recomendacion se basa en tus respuestas y progreso local; {getRecommendationReason(onboarding.answers)}
+              Esta recomendación se basa en tus respuestas y progreso local; {getRecommendationReason(onboarding.answers)}
             </p>
           </div>
         </aside>

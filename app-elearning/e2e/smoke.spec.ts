@@ -39,7 +39,7 @@ test.describe("Smoke — rutas principales", () => {
   test("dashboard carga con level cards", async ({ page }) => {
     await page.goto("/");
     await expect(page).toHaveTitle(/Power Platform|PlanEstudio/i);
-    await expect(page.getByRole("heading", { name: "Empieza aqui" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Empieza aquí" })).toBeVisible();
     await expect(page.getByText("Comenzar desde cero")).toBeVisible();
     await expect(page.locator("text=Nivel 1").first()).toBeVisible();
     await expect(page.locator("text=Básico").first()).toBeVisible();

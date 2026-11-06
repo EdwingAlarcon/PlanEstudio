@@ -96,14 +96,14 @@ export const DEFAULT_ONBOARDING_STATE: OnboardingState = {
 export const FOUNDATION_ROUTE = {
   id: "foundations",
   title: "Fundamentos para empezar",
-  duration: "3 a 7 dias",
-  sessionLength: "30 a 60 min por sesion",
+  duration: "3 a 7 días",
+  sessionLength: "30 a 60 min por sesión",
   summary:
-    "Una ruta comun para entender el ecosistema, crear una primera evidencia y elegir ruta despues con mas contexto.",
+    "Una ruta común para entender el ecosistema, crear una primera evidencia y elegir ruta después con más contexto.",
   exitCriteria: [
     "Explicas que problema resuelve cada producto principal.",
     "Reconoces tablas, columnas, relaciones y registros.",
-    "Completas una primera practica guiada o su variante simulada.",
+    "Completas una primera práctica guiada o su variante simulada.",
     "Tienes una evidencia guardada para tu portafolio inicial.",
     "Puedes escoger una familia de rol o decidir seguir explorando.",
   ],
@@ -122,8 +122,8 @@ export const FOUNDATION_ACTIVITIES: FoundationActivity[] = [
     prerequisites: ["Ninguno"],
     access: "Puede hacerse con lectura guiada; tenant recomendado, no obligatorio.",
     evidence: "Mapa personal de productos y un caso de negocio simple.",
-    tenantAlternative: "Usa la comparacion conceptual del modulo y documenta un caso propio.",
-    outcome: "Entiendes Power Apps, Power Automate, Dataverse, Power BI, Dynamics 365 y Copilot sin profundizar todavia.",
+    tenantAlternative: "Usa la comparación conceptual del modulo y documenta un caso propio.",
+    outcome: "Entiendes Power Apps, Power Automate, Dataverse, Power BI, Dynamics 365 y Copilot sin profundizar todavía.",
   },
   {
     id: "data-2",
@@ -138,7 +138,7 @@ export const FOUNDATION_ACTIVITIES: FoundationActivity[] = [
     access: "Tenant recomendado para crear tablas; alternativa simulada disponible.",
     evidence: "Borrador de tabla, columnas y relaciones para un proceso sencillo.",
     tenantAlternative: "Modela la tabla en una hoja local o en papel antes de configurar entorno.",
-    outcome: "Distingues tablas, columnas, relaciones, registros y seguridad basica.",
+    outcome: "Distingues tablas, columnas, relaciones, registros y seguridad básica.",
   },
   {
     id: "canvas-3",
@@ -149,10 +149,10 @@ export const FOUNDATION_ACTIVITIES: FoundationActivity[] = [
     minutes: 45,
     href: "/nivel/basico/modulo/power-apps-canvas-primeras-aplicaciones",
     moduleId: 3,
-    prerequisites: ["Conceptos basicos de datos"],
-    access: "Power Apps con entorno de practica. Si no tienes tenant, usa el esquema de pantallas como variante.",
+    prerequisites: ["Conceptos básicos de datos"],
+    access: "Power Apps con entorno de práctica. Si no tienes tenant, usa el esquema de pantallas como variante.",
     evidence: "Captura de una pantalla funcional o wireframe con datos de ejemplo.",
-    tenantAlternative: "Dibuja las pantallas, campos y reglas; conserva la evidencia como diseno inicial.",
+    tenantAlternative: "Dibuja las pantallas, campos y reglas; conserva la evidencia como diseño inicial.",
     outcome: "Logras una primera victoria visible en menos de 45 minutos.",
   },
   {
@@ -166,9 +166,9 @@ export const FOUNDATION_ACTIVITIES: FoundationActivity[] = [
     labSlug: "lab-03-canvas-primera-app",
     prerequisites: ["Primeras aplicaciones Canvas"],
     access: "Tenant recomendado; sin tenant, completa la variante de evidencia conceptual.",
-    evidence: "Captura de app, datos de prueba y lista de validacion.",
-    tenantAlternative: "Entrega wireframe, tabla de datos y criterios de validacion sin configurar conectores.",
-    outcome: "Conviertes lectura en evidencia practica verificable.",
+    evidence: "Captura de app, datos de prueba y lista de validación.",
+    tenantAlternative: "Entrega wireframe, tabla de datos y criterios de validación sin configurar conectores.",
+    outcome: "Conviertes lectura en evidencia práctica verificable.",
   },
   {
     id: "automate-5",
@@ -179,11 +179,11 @@ export const FOUNDATION_ACTIVITIES: FoundationActivity[] = [
     minutes: 40,
     href: "/nivel/basico/modulo/power-automate-automatizacion-basica",
     moduleId: 5,
-    prerequisites: ["Ecosistema y datos basicos"],
+    prerequisites: ["Ecosistema y datos básicos"],
     access: "Power Automate recomendado; sin integraciones externas.",
     evidence: "Diagrama o captura de un flujo simple con disparador y accion.",
     tenantAlternative: "Describe el trigger, condiciones y salida esperada usando datos locales.",
-    outcome: "Comprendes como convertir una tarea repetitiva en flujo verificable.",
+    outcome: "Comprendes cómo convertir una tarea repetitiva en flujo verificable.",
   },
   {
     id: "quiz-6",
@@ -198,7 +198,7 @@ export const FOUNDATION_ACTIVITIES: FoundationActivity[] = [
     access: "Sin requisitos de tenant.",
     evidence: "Resultado del quiz y nota de tres conceptos que debes reforzar.",
     tenantAlternative: "Igual que la actividad principal.",
-    outcome: "Valida comprension inicial sin tratarlo como evaluacion profesional.",
+    outcome: "Valida comprensión inicial sin tratarlo como evaluación profesional.",
   },
   {
     id: "role-7",
@@ -210,7 +210,7 @@ export const FOUNDATION_ACTIVITIES: FoundationActivity[] = [
     href: "/mi-ruta",
     prerequisites: ["Fundamentos esenciales y primera evidencia"],
     access: "Sin requisitos de tenant.",
-    evidence: "Seleccion de familia de rol o decision de seguir explorando.",
+    evidence: "Selección de familia de rol o decision de seguir explorando.",
     tenantAlternative: "Igual que la actividad principal.",
     outcome: "Eliges el siguiente camino cuando ya tienes contexto suficiente.",
   },
@@ -219,10 +219,10 @@ export const FOUNDATION_ACTIVITIES: FoundationActivity[] = [
 export const ROLE_EXPERIENCES = [
   { id: "maker", title: "Crear apps y automatizaciones", route: "maker" as const, minutes: 15, activity: "Modificar una app o formulario simple." },
   { id: "functional", title: "Configurar procesos de negocio", route: "consultor-funcional" as const, minutes: 15, activity: "Modelar un proceso y convertirlo en requerimientos." },
-  { id: "developer", title: "Programar e integrar sistemas", route: "developer" as const, minutes: 20, activity: "Leer una pequena logica y explicar donde se ejecuta." },
+  { id: "developer", title: "Programar e integrar sistemas", route: "developer" as const, minutes: 20, activity: "Leer una pequeña lógica y explicar donde se ejecuta." },
   { id: "admin", title: "Administrar y gobernar", route: "maker" as const, minutes: 15, activity: "Detectar un riesgo de entorno, datos o permisos." },
   { id: "rpa", title: "Automatizar escritorio", route: "developer" as const, minutes: 15, activity: "Evaluar si un proceso debe automatizarse con RPA o flujo cloud." },
-  { id: "architect", title: "Disenar soluciones", route: "solution-architect" as const, minutes: 20, activity: "Comparar dos opciones de solucion y justificar tradeoffs." },
+  { id: "architect", title: "Diseñar soluciones", route: "solution-architect" as const, minutes: 20, activity: "Comparar dos opciones de solucion y justificar tradeoffs." },
 ] as const;
 
 export function normalizeOnboardingState(value: unknown): OnboardingState {
@@ -283,7 +283,7 @@ export function recommendRouteSlug(answers: OnboardingAnswers): ProfessionalRout
 
 export function getRecommendationReason(answers: OnboardingAnswers): string {
   if (answers.experience === "none") {
-    return "porque indicaste que empiezas sin experiencia y conviene formar una base comun antes de elegir especializacion.";
+    return "porque indicaste que empiezas sin experiencia y conviene formar una base común antes de elegir especialización.";
   }
   if (answers.tenant === "no") {
     return "porque puedes avanzar con contenido conceptual y variantes simuladas mientras preparas tu entorno.";
@@ -291,7 +291,7 @@ export function getRecommendationReason(answers: OnboardingAnswers): string {
   if (answers.preference === "code") return "porque prefieres programar o integrar sistemas.";
   if (answers.preference === "configure" || answers.preference === "analyze") return "porque prefieres configurar procesos y traducir necesidades de negocio.";
   if (answers.preference === "build") return "porque te interesa construir apps y automatizaciones.";
-  return "porque aun no necesitas decidir una carrera definitiva.";
+  return "porque aún no necesitas decidir una carrera definitiva.";
 }
 
 export function getNextBestAction(
@@ -303,11 +303,11 @@ export function getNextBestAction(
   if (inProgress && !isFoundationActivityComplete(inProgress, completedModules, completedLabs, onboarding)) {
     return {
       activity: inProgress,
-      reason: `Continua con "${inProgress.title}" porque ya es tu actividad activa de Fundamentos.`,
+      reason: `Continúa con "${inProgress.title}" porque ya es tu actividad activa de Fundamentos.`,
       time: `${inProgress.minutes} min`,
       route: FOUNDATION_ROUTE.title,
       prerequisites: inProgress.prerequisites,
-      cta: inProgress.type === "lab" ? "Abrir practica recomendada" : "Continuar actividad",
+      cta: inProgress.type === "lab" ? "Abrir práctica recomendada" : "Continuar actividad",
     };
   }
 
@@ -321,16 +321,16 @@ export function getNextBestAction(
     time: `${next.minutes} min`,
     route: FOUNDATION_ROUTE.title,
     prerequisites: next.prerequisites,
-    cta: next.type === "decision" ? "Elegir siguiente ruta" : next.type === "lab" ? "Realizar practica recomendada" : "Continuar",
+    cta: next.type === "decision" ? "Elegir siguiente ruta" : next.type === "lab" ? "Realizar práctica recomendada" : "Continuar",
   };
 }
 
 export function buildWeeklyPlan(availability: WeeklyAvailability, nextAction: NextBestAction): string[] {
   if (availability === "2h") {
-    return [nextAction.activity.title, "Una practica corta o variante simulada", "Revision de evidencia y notas"];
+    return [nextAction.activity.title, "Una práctica corta o variante simulada", "Revisión de evidencia y notas"];
   }
   if (availability === "8h") {
-    return [nextAction.activity.title, "Siguiente modulo de fundamentos", "Lab recomendado", "Quiz o reflexion", "Ajuste de ruta"];
+    return [nextAction.activity.title, "Siguiente módulo de fundamentos", "Lab recomendado", "Quiz o reflexion", "Ajuste de ruta"];
   }
   return [nextAction.activity.title, "Siguiente actividad corta", "Lab guiado si tienes tenant", "Quiz breve"];
 }

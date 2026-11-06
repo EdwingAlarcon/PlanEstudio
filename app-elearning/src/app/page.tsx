@@ -6,8 +6,11 @@ import { getAllInteractivePractices } from "@/lib/interactive-practices";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProgressRingClient } from "@/components/modules/progress-ring-client";
-import { ArrowRight, BookOpen, Trophy, FlaskConical, Route, HelpCircle, Layers3, Briefcase, Building2, Workflow, Activity, Bot } from "lucide-react";
+import { ArrowRight, BookOpen, Trophy, FlaskConical, Route, HelpCircle, Layers3, Briefcase, Building2, Workflow, Activity, Bot, BrainCircuit } from "lucide-react";
 import { UI, LEVEL_ORDER, type LevelId } from "@/lib/i18n";
+import { FOUNDATION_ACTIVITIES } from "@/lib/guided-journey";
+import { getAllProfessionalRoutes } from "@/lib/professional-routes";
+import { SIMULATOR_QUESTIONS } from "@/lib/simulator-config";
 import { PracticeProgressSummary } from "@/components/practices/practice-progress-summary";
 import { GuidedHomeClient } from "@/components/guided/guided-home-client";
 import { InteractivePracticeSummary } from "@/components/interactive-practices/interactive-practice-summary";
@@ -40,6 +43,8 @@ export default async function DashboardPage() {
     id, slug, title, practiceType, domain, roles, difficulty, prerequisites,
   }));
   const interactivePractices = getAllInteractivePractices();
+  const routeCount = getAllProfessionalRoutes().length;
+  const foundationCount = FOUNDATION_ACTIVITIES.length;
 
   return (
     <div className="max-w-5xl mx-auto space-y-10 animate-fade-in">
@@ -59,12 +64,12 @@ export default async function DashboardPage() {
             </h2>
             <p className="max-w-2xl text-sm text-muted-foreground">
               Todo sigue disponible: {moduleCount} módulos, {labCount} laboratorios y {questionCount} preguntas.
-              Esta vista es consultiva; si empiezas desde cero, tu ruta actual solo cuenta 7 actividades.
+              Esta vista es consultiva; si empiezas desde cero, tu ruta actual solo cuenta {foundationCount} actividades.
             </p>
           </div>
           <Button asChild variant="outline" size="sm" className="self-start sm:self-auto">
             <Link href="/como-usar">
-              Ver guia completa
+              Ver guía completa
               <ArrowRight className="ml-1 h-3.5 w-3.5" aria-hidden />
             </Link>
           </Button>
@@ -186,7 +191,7 @@ export default async function DashboardPage() {
         <h2 id="quick-heading" className="text-lg font-semibold text-foreground mb-4">
           Acceso rápido
         </h2>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <QuickActionCard
             href="/como-usar"
             icon={<HelpCircle className="h-5 w-5 text-[#0078D4]" />}
@@ -198,7 +203,7 @@ export default async function DashboardPage() {
             href="/rutas"
             icon={<Route className="h-5 w-5 text-[#0078D4]" />}
             title={UI.nav.routes}
-            description="10 rutas por rol profesional"
+            description={`${routeCount} rutas por rol profesional`}
             accent="#0078D4"
           />
           <QuickActionCard
@@ -212,7 +217,7 @@ export default async function DashboardPage() {
             href="/simulador"
             icon={<Trophy className="h-5 w-5 text-[#0078D4]" />}
             title={UI.nav.simulator}
-            description="40 preguntas cronometradas"
+            description={`${SIMULATOR_QUESTIONS} preguntas cronometradas`}
             accent="#0078D4"
           />
           <QuickActionCard
@@ -231,7 +236,7 @@ export default async function DashboardPage() {
           />
           <QuickActionCard
             href="/practica"
-            icon={<Activity className="h-5 w-5 text-[#107C10]" />}
+            icon={<BrainCircuit className="h-5 w-5 text-[#107C10]" />}
             title="Práctica interactiva"
             description={`${interactivePractices.length} ejercicios con feedback inmediato`}
             accent="#107C10"

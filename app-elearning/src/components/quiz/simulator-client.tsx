@@ -7,9 +7,12 @@ import { Button } from "@/components/ui/button";
 import { QuizPanel, QuizResult } from "./quiz-panel";
 import { PlayCircle, ArrowLeft } from "lucide-react";
 import { UI } from "@/lib/i18n";
-
-const SIMULATOR_QUESTIONS = 40;
-const SIMULATOR_TIME_SECONDS = 50 * 60; // 50 minutes
+import {
+  SIMULATOR_MINUTES,
+  SIMULATOR_PASS_PERCENT,
+  SIMULATOR_QUESTIONS,
+  SIMULATOR_TIME_SECONDS,
+} from "@/lib/simulator-config";
 
 interface SimulatorClientProps {
   allQuestions: Question[];
@@ -60,8 +63,8 @@ export function SimulatorClient({ allQuestions }: SimulatorClientProps) {
       <div className="rounded-xl border p-8 space-y-6">
         <div className="grid gap-3 sm:grid-cols-3 text-center">
           <StatCard icon="📋" label="Preguntas" value={String(SIMULATOR_QUESTIONS)} />
-          <StatCard icon="⏱️" label="Tiempo límite" value="50 min" />
-          <StatCard icon="🎯" label="Para aprobar" value="70%" />
+          <StatCard icon="⏱️" label="Tiempo límite" value={`${SIMULATOR_MINUTES} min`} />
+          <StatCard icon="🎯" label="Para aprobar" value={`${SIMULATOR_PASS_PERCENT}%`} />
         </div>
 
         <div className="space-y-2">

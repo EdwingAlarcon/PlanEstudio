@@ -314,7 +314,7 @@ export function SearchBar({ documents }: SearchBarProps) {
 function contextLabel(context: "en-tu-ruta" | "opcional" | "avanzado" | "otra-especializacion"): string {
   if (context === "en-tu-ruta") return "En tu ruta";
   if (context === "avanzado") return "Avanzado";
-  if (context === "otra-especializacion") return "Otra especializacion";
+  if (context === "otra-especializacion") return "Otra especialización";
   return "Opcional";
 }
 

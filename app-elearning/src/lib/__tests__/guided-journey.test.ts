@@ -58,7 +58,7 @@ describe("guided journey recommendations", () => {
       currentActivityId: "lab-canvas-4",
     });
     expect(action.activity.id).toBe("lab-canvas-4");
-    expect(action.cta).toBe("Abrir practica recomendada");
+    expect(action.cta).toBe("Abrir práctica recomendada");
   });
 
   it("builds weekly plans from declared availability", () => {
