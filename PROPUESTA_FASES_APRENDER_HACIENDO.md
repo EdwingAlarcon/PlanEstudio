@@ -415,7 +415,8 @@ Módulos 74 y 75 (intentos de **Registrar** por solicitud, filas repetidas, cons
 real. Descartado: el simulador de Azure DevOps (el Lab 19 ya resuelve el paralelismo gratuito), la guía de ficheros (ya cubierta
 en el recurso de plantillas de repositorio) y la gamificación.
 
-**Qué no se hizo.** No hubo prueba simulada de los demás módulos de la Fase 7 (existe `handoff-fase7/BRIEF_SIM_F7.md`
-con el protocolo, pero no sus informes). Los Módulos 75 y 76 no se ejecutaron en PAD ni en un tenant: los pasos se
+**Qué no se hizo.** No hubo prueba simulada de los demás módulos de la Fase 7 (el protocolo estaba en `handoff-fase7/BRIEF_SIM_F7.md`,
+carpeta retirada de `master` el 2026-11-06; se recupera con `git show bd01f96:handoff-fase7/BRIEF_SIM_F7.md`, y nunca
+hubo informes). Los Módulos 75 y 76 no se ejecutaron en PAD ni en un tenant: los pasos se
 contrastaron contra el código real del sandbox (`rpa-sandbox/legacy-app`) y contra Learn. Las prácticas interactivas nuevas
 se comprobaron con los evaluadores del motor (respuesta correcta = `correct`; pista 3 de cada diagnóstico = 100).

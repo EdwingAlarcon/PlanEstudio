@@ -1,11 +1,19 @@
 # PlanEstudio — Estado de sprints post-auditoría (handoff)
 
-## Fase 7 (resto del curso) — trabajo a medias, guardado el 2026-11-01 en la rama `wip/fase7-resto-curso`
+## Estado actual — 2026-11-06 (retomar desde aquí)
 
-> El usuario pidió parar y seguir mañana. **Nada de esto está en `master`**; la rama no despliega a producción.
-> Briefs de los agentes, `merge2.py` y una práctica parcial están en `handoff-fase7/` (borrar esa carpeta antes de fusionar).
+**Fase 7 CERRADA y fusionada en `master`** (`bd01f96`, PR #9): 76/76 módulos con microlecciones y reto de transferencia,
+239 prácticas interactivas, `MAX_INTERACTIVE_PRACTICES` fijado al total exacto. No hay trabajo a medias del rediseño.
+La carpeta `handoff-fase7/` (briefs de agentes y `merge2.py`) se retiró de `master` el 2026-11-06; sigue en el historial
+(`git show bd01f96:handoff-fase7/<archivo>`). La rama remota `wip/fase7-resto-curso` tiene un árbol idéntico al de `master`.
+Verdad vigente de conteos y fases: `CLAUDE.md` y `PROPUESTA_FASES_APRENDER_HACIENDO.md` (§10).
 
-**Hecho (sin commit en master):**
+## Fase 7 (resto del curso) — registro histórico del 2026-11-01 al 2026-11-05 (ya resuelto)
+
+> Las secciones "Hecho" y "Pendiente" de abajo describen el estado de la rama de trabajo antes de fusionar; los
+> pendientes 2 a 4 se completaron en `bd01f96`. Se conservan como bitácora.
+
+**Hecho (en la rama de trabajo, hoy en `master`):**
 - Compilado el C# de Avanzado (.NET SDK 8.0.427, net48 + CrmSdk; M23 7/7, LAB-23 6/6, M24 net10/net8), GitHub Actions
   del M54 verificado con actionlint, graphify instalado (`pip install --user graphifyy`).
 - Pruebas simuladas de las Fases 4-6 (7 agentes) y sus correcciones aplicadas: M18-M41, LAB-19/22/23/32, IA 43/44/46/54/55.
