@@ -406,6 +406,15 @@ cloud flow que debe recrearse dentro de la solución; plantillas que son esquele
 Secret, logs V2 y roles. Tiempos: la simulación estimó 260-320 min de práctica en M75 y 7,5-9 h en M76, así que
 `practiceMinutes` subió a 300 y 450. LAB-110 recibió el aviso de licencia y estados alineados con el módulo.
 
+**Ideas tomadas de un repositorio externo (azure-lab, 2026-11-05; sin licencia, no se copió código ni contenido).** (1) Prueba de
+contrato sobre las 239 prácticas: encontró 48 con algún defecto de evaluación (repetir el síntoma puntuaba `correct` en 6
+diagnósticos; la pista 3 no puntuaba `correct` en 7 más y en otros 3 dependía de palabras del síntoma). Se corrigió el motor y los
+términos aceptados, y la prueba quedó permanente. No se exige que pegar el escenario completo no puntúe (32 diagnósticos):
+penalizaría respuestas correctas. (2) Registro de actividad en el sandbox legacy: evidencia objetiva de idempotencia en los
+Módulos 74 y 75 (intentos de **Registrar** por solicitud, filas repetidas, consulta previa). No valida nada contra un tenant
+real. Descartado: el simulador de Azure DevOps (el Lab 19 ya resuelve el paralelismo gratuito), la guía de ficheros (ya cubierta
+en el recurso de plantillas de repositorio) y la gamificación.
+
 **Qué no se hizo.** No hubo prueba simulada de los demás módulos de la Fase 7 (existe `handoff-fase7/BRIEF_SIM_F7.md`
 con el protocolo, pero no sus informes). Los Módulos 75 y 76 no se ejecutaron en PAD ni en un tenant: los pasos se
 contrastaron contra el código real del sandbox (`rpa-sandbox/legacy-app`) y contra Learn. Las prácticas interactivas nuevas

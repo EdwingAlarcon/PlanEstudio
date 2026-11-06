@@ -101,6 +101,8 @@ Cloud flow orquesta eventos, conectores, aprobaciones, programación y almacenam
 
 Y una línea con **qué valor devolvería el desktop flow si lo interrumpes a mitad y por qué lo inicializaste así en el paso 3**.
 
+Opcional: tras las cuatro corridas, abre **Registro de actividad (para tu evidencia)** al final del sandbox y copia su texto. Ninguna solicitud debería tener más de un intento de **Registrar**.
+
 > **Reset del ejercicio:** pulsa **Reset** en el sandbox entre corridas que registren datos: los registros viven en la memoria de la página.
 
 ---

@@ -541,6 +541,29 @@ test.describe("Smoke — rutas principales", () => {
     await expect(page.getByRole("status")).toContainText(/Registro duplicado/i);
   });
 
+  test("sandbox RPA legacy: el registro de actividad cuenta los intentos de Registrar", async ({ page }) => {
+    await page.goto("/rpa-sandbox/legacy-app");
+    const report = page.locator('[data-activity="report"]');
+    // Cerrado no monta contenido: no añade texto a la página que automatiza PAD.
+    await expect(report).toHaveCount(0);
+    await page.getByTestId("legacy-activity").getByText("Registro de actividad").click();
+    await expect(report).toContainText(/Sin actividad/);
+
+    await page.getByRole("button", { name: "Consultar por ID" }).click();
+    await page.getByRole("button", { name: "Registrar" }).click();
+    await page.getByRole("button", { name: "Cerrar" }).click();
+    await page.getByRole("button", { name: "Registrar" }).click(); // segundo intento sobre la misma solicitud
+    await expect(page.getByRole("status")).toContainText(/Registro duplicado/i);
+
+    await expect(report).toContainText("SOL-2026-0011 | 1 | 2 | 1 | 1 | 1");
+    await expect(page.locator('[data-activity-check="sin-intentos-redundantes"]')).toHaveAttribute("data-ok", "false");
+    await expect(page.locator('[data-activity-check="sin-filas-repetidas"]')).toHaveAttribute("data-ok", "true");
+    await expect(page.locator('[data-activity-check="consulta-previa"]')).toHaveAttribute("data-ok", "true");
+
+    await page.getByRole("button", { name: "Reset" }).click();
+    await expect(report).toContainText(/Sin actividad/);
+  });
+
   test("sandbox RPA responde en móvil y modo oscuro", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto("/rpa-sandbox/portal");

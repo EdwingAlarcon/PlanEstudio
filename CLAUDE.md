@@ -72,7 +72,7 @@ banco llega a **239 prácticas interactivas** (`MAX_INTERACTIVE_PRACTICES` fijad
 exige licencia (disparar un desktop flow desde un cloud flow); LAB-110 y LAB-111 se corrigieron contra Learn. Lo no
 verificado y los 404 de Learn están en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §10, junto con la prueba simulada de los
 Módulos 75 y 76 (2 evaluadores sin contexto; simulación, no una persona real) y sus hallazgos corregidos; los demás módulos
-de la Fase 7 no tienen prueba simulada registrada.
+de la Fase 7 no tienen prueba simulada registrada. El banco de prácticas tiene una **prueba de contrato** (`interactive-practices-contract.test.ts`: la respuesta de referencia puntúa `correct`, la pista 3 de cada diagnóstico también y repetir el síntoma no puntúa; `evaluateDebug` no cuenta los términos que ya están en el síntoma) y el sandbox `SIT Registro Legacy` tiene un panel cerrado **Registro de actividad (para tu evidencia)** (`rpa-sandbox-activity.ts`) que cuenta los intentos de **Registrar** por solicitud, y los módulos 74 y 75 lo usan como evidencia. Su contenido solo se monta con el panel abierto, para no añadir texto a la página que PAD automatiza.
 
 ## Mantenimiento vigente — 2026-10-01
 

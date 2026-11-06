@@ -21,7 +21,7 @@ Manejar errores esperados e inesperados con scopes, recuperación, retry, backof
 > - **No necesitas licencia de pago.** Todo se hace con desktop flows ejecutados en tu equipo en modo atendido, y Learn indica que el manejo de excepciones está disponible para todos los tipos de cuenta ([Prerequisites and limitations](https://learn.microsoft.com/en-us/power-automate/desktop-flows/requirements)). Reintentos programados desde un cloud flow o ejecución desatendida exigen licencia y no se usan aquí.
 > - El [Portal SIT](/rpa-sandbox/portal) y [SIT Registro Legacy](/rpa-sandbox/legacy-app) (en PAD, con la URL completa: `https://planestudio.vercel.app/rpa-sandbox/portal` y `https://planestudio.vercel.app/rpa-sandbox/legacy-app`).
 > - Haber hecho el [Módulo 73](/nivel/rpa/modulo/selectores-sincronizacion-resiliencia): aquí reutilizas la captura de UI elements y la espera acotada con **Loop**.
-> - **Importante sobre el sandbox legacy:** guarda los registros en la memoria de la página. Si recargas la pestaña o pulsas **Reset**, vuelve a sus 3 registros iniciales. Para probar una reejecución, **no recargues la página**: el flujo se adjunta a la pestaña abierta.
+> - **Importante sobre el sandbox legacy:** guarda los registros en la memoria de la página. Si recargas la pestaña o pulsas **Reset**, vuelve a sus 3 registros iniciales. Para probar una reejecución, **no recargues la página**: el flujo se adjunta a la pestaña abierta. Al final de la página hay un panel cerrado, **Registro de actividad (para tu evidencia)**: cuenta qué hizo tu robot (cuántas veces pulsó **Registrar** por solicitud, si consultó antes y si alguna solicitud quedó repetida en **Registros**). **Reset** y recargar también lo borran.
 
 ## 📖 Conceptos Clave
 
@@ -120,8 +120,8 @@ Un bot profesional debe poder fallar sin duplicar, corromper o esconder evidenci
 8. **Efecto:** llena **Cliente** y **Producto** con las columnas del registro → **Press button on web page** (**Registrar**). Ahora el fallo simulado: **If** `%CurrentItem['requestId']%` **Equal to (=)** `%SimularFallo%` → **Stop flow** con **End flow** = **With error message** y el mensaje `Fallo simulado después de registrar`.
 9. **Validar y marcar:** reutiliza el loop acotado del Módulo 73 para esperar `Registro confirmado`; si llegó, pulsa **Cerrar**. Vuelve a **Consultar por ID** y lee el mensaje. Solo si dice `Registrado`: `Completado` → `Guardar_checkpoint` → log `completado`. Si no: `ErrorTecnico` → `Guardar_checkpoint` → log con el texto leído.
 10. **Corrida 1:** ejecuta. El flujo se detiene con tu error en `SOL-2026-0032`. Anota el contador de **Registros** y el contenido de `pendientes.csv`.
-11. **Corrida 2:** sin recargar la página, cierra a mano el diálogo **Registro confirmado** que dejó abierto la corrida 1 (botón **Cerrar**), cambia `%SimularFallo%` a un valor vacío y ejecuta otra vez. Anota de nuevo el contador, el CSV y las líneas nuevas del log.
-12. **Contraprueba (opcional, 10 min):** desactiva temporalmente las acciones del paso 6 (selecciónalas, clic derecho → **Disable action**), restaura `pendientes.csv` dejando `SOL-2026-0032` en `EnProceso` y ejecuta. El sandbox responde `Registro duplicado. No se insertó una segunda vez.` porque se protege solo; una app legacy real, como la del Caso Real, no lo haría. Esa protección no es tuya: tu evidencia de idempotencia es la corrida 2. Vuelve a activar las acciones (clic derecho → **Enable action**).
+11. **Corrida 2:** sin recargar la página, cierra a mano el diálogo **Registro confirmado** que dejó abierto la corrida 1 (botón **Cerrar**), cambia `%SimularFallo%` a un valor vacío y ejecuta otra vez. Anota de nuevo el contador, el CSV y las líneas nuevas del log. Después abre **Registro de actividad (para tu evidencia)** y copia su texto: es la prueba objetiva de que ninguna solicitud recibió un segundo **Registrar**.
+12. **Contraprueba (opcional, 10 min):** desactiva temporalmente las acciones del paso 6 (selecciónalas, clic derecho → **Disable action**), restaura `pendientes.csv` dejando `SOL-2026-0032` en `EnProceso` y ejecuta. El sandbox responde `Registro duplicado. No se insertó una segunda vez.` porque se protege solo; una app legacy real, como la del Caso Real, no lo haría. Esa protección no es tuya: tu evidencia de idempotencia es la corrida 2. El **Registro de actividad** también lo cuenta: verás al menos un intento redundante (el de `SOL-2026-0032`) y el control «Ningún Registrar se pulsó sobre una solicitud ya registrada» en **Revisar**. Vuelve a activar las acciones (clic derecho → **Enable action**).
 
 **Evidencia a reportar:**
 
@@ -131,7 +131,7 @@ Un bot profesional debe poder fallar sin duplicar, corromper o esconder evidenci
 | Estado de cada fila en `pendientes.csv` tras la corrida 1 | ___ |
 | Estado de cada fila tras la corrida 2 | ___ |
 | Líneas del log de la corrida 2 (eventos por registro) | ___ |
-| ¿Algún registro se envió dos veces con **Registrar**? Cómo lo sabes | ___ |
+| Texto del **Registro de actividad** tras la corrida 2 (copiado) y tu respuesta: ¿algún registro recibió dos veces **Registrar**? | ___ |
 
 > **Reset del ejercicio:** pulsa **Reset** en el sandbox y copia `pendientes_original.csv` sobre `pendientes.csv`. Si solo haces una de las dos cosas, el estado del bot y el del sistema dejan de coincidir: es una buena forma de practicar la reconciliación, pero hazlo a propósito.
 
