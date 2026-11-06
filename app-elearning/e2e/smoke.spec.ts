@@ -211,7 +211,8 @@ test.describe("Smoke — rutas principales", () => {
       }));
     });
 
-    await page.goto("/");
+    // El resumen de práctica profesional vive en /progreso (ya no en la home).
+    await page.goto("/progreso");
     await expect(page.getByRole("heading", { name: "Experiencia práctica" }).first()).toBeVisible();
     await expect(page.getByText("Iniciadas").first()).toBeVisible();
 

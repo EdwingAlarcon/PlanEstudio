@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { getAllLabs, getAllLevels } from "@/lib/content";
 import { getAllQuestions } from "@/lib/questions-parser";
-import { getAllPractices } from "@/lib/practices";
 import { getAllInteractivePractices } from "@/lib/interactive-practices";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,9 +10,7 @@ import { UI, LEVEL_ORDER, type LevelId } from "@/lib/i18n";
 import { FOUNDATION_ACTIVITIES } from "@/lib/guided-journey";
 import { getAllProfessionalRoutes } from "@/lib/professional-routes";
 import { SIMULATOR_QUESTIONS } from "@/lib/simulator-config";
-import { PracticeProgressSummary } from "@/components/practices/practice-progress-summary";
 import { GuidedHomeClient } from "@/components/guided/guided-home-client";
-import { InteractivePracticeSummary } from "@/components/interactive-practices/interactive-practice-summary";
 import { ContinueCard } from "@/components/modules/continue-card";
 import { RetentionTodayCard } from "@/components/review/retention-today-card";
 
@@ -39,10 +36,7 @@ export default async function DashboardPage() {
   const moduleCount = levels.reduce((total, level) => total + level.modules.length, 0);
   const labCount = getAllLabs().length;
   const questionCount = getAllQuestions().length;
-  const practices = getAllPractices().map(({ id, slug, title, practiceType, domain, roles, difficulty, prerequisites }) => ({
-    id, slug, title, practiceType, domain, roles, difficulty, prerequisites,
-  }));
-  const interactivePractices = getAllInteractivePractices();
+  const interactivePracticeCount = getAllInteractivePractices().length;
   const routeCount = getAllProfessionalRoutes().length;
   const foundationCount = FOUNDATION_ACTIVITIES.length;
 
@@ -56,14 +50,21 @@ export default async function DashboardPage() {
 
       <GuidedHomeClient />
 
-      <section aria-labelledby="catalog-heading" className="space-y-4">
+      <RetentionTodayCard />
+
+      {/* ── Overall progress ──────────────────────────────────────────────── */}
+      <OverallProgressBanner />
+
+      {/* ── Level cards ───────────────────────────────────────────────────── */}
+      {/* Los resúmenes de práctica (profesional e interactiva) viven en /progreso y /mi-ruta. */}
+      <section aria-labelledby="levels-heading" className="space-y-4">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 id="catalog-heading" className="text-lg font-semibold text-foreground">
-              Explorar todo el contenido
+            <h2 id="levels-heading" className="text-lg font-semibold text-foreground">
+              {UI.nav.levels}
             </h2>
             <p className="max-w-2xl text-sm text-muted-foreground">
-              Todo sigue disponible: {moduleCount} módulos, {labCount} laboratorios y {questionCount} preguntas.
+              Todo sigue disponible: {moduleCount} módulos, {labCount} laboratorios y {questionCount} preguntas en {levels.length} niveles.
               Esta vista es consultiva; si empiezas desde cero, tu ruta actual solo cuenta {foundationCount} actividades.
             </p>
           </div>
@@ -73,6 +74,52 @@ export default async function DashboardPage() {
               <ArrowRight className="ml-1 h-3.5 w-3.5" aria-hidden />
             </Link>
           </Button>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          {LEVEL_ORDER.map((levelId) => {
+            const level = levels.find((l) => l.id === levelId);
+            if (!level) return null;
+            const cfg = LEVEL_CONFIG[levelId];
+
+            return (
+              <div
+                key={levelId}
+                className={`group relative rounded-xl border-2 ${cfg.border} bg-card shadow-fluent-1 hover:shadow-fluent-4 transition-all duration-200`}
+              >
+                <div className="p-5">
+                  {/* Header row */}
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <div className="space-y-1.5 flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <Badge variant={cfg.badge}>{UI.levels.badge[levelId]}</Badge>
+                        <Badge variant="outline" className="text-[10px]" title={UI.levels.cert[levelId]}>
+                          {UI.levels.navCert[levelId]}
+                        </Badge>
+                      </div>
+                      <h3 className="text-base font-semibold text-foreground leading-snug">{level.title}</h3>
+                      <p className="text-sm text-muted-foreground">{level.description}</p>
+                    </div>
+                    <ProgressRingClient levelId={levelId} colorClass={cfg.ring} />
+                  </div>
+
+                  {/* Footer row */}
+                  <div className="flex items-center justify-between pt-3 border-t border-border">
+                    <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                      <BookOpen className="h-3.5 w-3.5" aria-hidden />
+                      {level.modules.length} módulos
+                    </span>
+                    <Button asChild size="sm" variant="ghost"
+                      className="h-8 px-3 text-xs text-[#0078D4] dark:text-[#4DB8FF] hover:bg-[#EFF6FC] dark:hover:bg-[rgba(0,120,212,0.12)]">
+                      <Link href={`/nivel/${levelId}`} aria-label={`Ver ${level.title}`}>
+                        Ver nivel <ArrowRight className="h-3.5 w-3.5 ml-1" aria-hidden />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
@@ -120,69 +167,6 @@ export default async function DashboardPage() {
             icon={<Bot className="h-5 w-5 text-[#6B4EFF]" />}
             accent="#6B4EFF"
           />
-        </div>
-      </section>
-
-      {/* ── Overall progress ──────────────────────────────────────────────── */}
-      <OverallProgressBanner />
-
-      <PracticeProgressSummary practices={practices} />
-      <InteractivePracticeSummary practices={interactivePractices.map(({ id }) => ({ id }))} />
-      <RetentionTodayCard />
-
-      {/* ── Level cards ───────────────────────────────────────────────────── */}
-      <section aria-labelledby="levels-heading">
-        <div className="flex items-center justify-between mb-5">
-          <h2 id="levels-heading" className="text-lg font-semibold text-foreground">
-            {UI.nav.levels}
-          </h2>
-          <span className="text-sm text-muted-foreground">{levels.length} niveles</span>
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-2">
-          {LEVEL_ORDER.map((levelId) => {
-            const level = levels.find((l) => l.id === levelId);
-            if (!level) return null;
-            const cfg = LEVEL_CONFIG[levelId];
-
-            return (
-              <div
-                key={levelId}
-                className={`group relative rounded-xl border-2 ${cfg.border} bg-card shadow-fluent-1 hover:shadow-fluent-4 transition-all duration-200`}
-              >
-                <div className="p-5">
-                  {/* Header row */}
-                  <div className="flex items-start justify-between gap-3 mb-3">
-                    <div className="space-y-1.5 flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <Badge variant={cfg.badge}>{UI.levels.badge[levelId]}</Badge>
-                        <Badge variant="outline" className="text-[10px]" title={UI.levels.cert[levelId]}>
-                          {UI.levels.navCert[levelId]}
-                        </Badge>
-                      </div>
-                      <h3 className="text-base font-semibold text-foreground leading-snug">{level.title}</h3>
-                      <p className="text-sm text-muted-foreground">{level.description}</p>
-                    </div>
-                    <ProgressRingClient levelId={levelId} colorClass={cfg.ring} />
-                  </div>
-
-                  {/* Footer row */}
-                  <div className="flex items-center justify-between pt-3 border-t border-border">
-                    <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                      <BookOpen className="h-3.5 w-3.5" aria-hidden />
-                      {level.modules.length} módulos
-                    </span>
-                    <Button asChild size="sm" variant="ghost"
-                      className="h-8 px-3 text-xs text-[#0078D4] dark:text-[#4DB8FF] hover:bg-[#EFF6FC] dark:hover:bg-[rgba(0,120,212,0.12)]">
-                      <Link href={`/nivel/${levelId}`} aria-label={`Ver ${level.title}`}>
-                        Ver nivel <ArrowRight className="h-3.5 w-3.5 ml-1" aria-hidden />
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
         </div>
       </section>
 
@@ -238,7 +222,7 @@ export default async function DashboardPage() {
             href="/practica"
             icon={<BrainCircuit className="h-5 w-5 text-[#107C10]" />}
             title="Práctica interactiva"
-            description={`${interactivePractices.length} ejercicios con feedback inmediato`}
+            description={`${interactivePracticeCount} ejercicios con feedback inmediato`}
             accent="#107C10"
           />
           <QuickActionCard
