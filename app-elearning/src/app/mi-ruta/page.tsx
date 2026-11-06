@@ -18,5 +18,5 @@ export default function MyRoutePage() {
     competencies: route.competencies,
   }));
 
-  return <MyRouteClient routes={routes} interactivePractices={getAllInteractivePractices()} />;
+  return <MyRouteClient routes={routes} interactivePractices={getAllInteractivePractices().map(({ id }) => ({ id }))} />;
 }

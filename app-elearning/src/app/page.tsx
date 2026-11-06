@@ -127,7 +127,7 @@ export default async function DashboardPage() {
       <OverallProgressBanner />
 
       <PracticeProgressSummary practices={practices} />
-      <InteractivePracticeSummary practices={interactivePractices} />
+      <InteractivePracticeSummary practices={interactivePractices.map(({ id }) => ({ id }))} />
       <RetentionTodayCard />
 
       {/* ── Level cards ───────────────────────────────────────────────────── */}

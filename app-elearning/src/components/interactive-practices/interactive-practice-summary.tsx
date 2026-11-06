@@ -22,7 +22,11 @@ import {
 } from "@/lib/interactive-practice-progress";
 import { useProgressStore } from "@/lib/progress";
 
-export function InteractivePracticeSummary({ practices, showReset = false }: { practices: InteractivePractice[]; showReset?: boolean }) {
+// Solo hace falta el id: pasar la práctica completa (opciones, pistas, soluciones) obligaba a
+// serializar ~239 ejercicios dentro del HTML de la home, /progreso y /mi-ruta.
+export type InteractivePracticeRef = Pick<InteractivePractice, "id">;
+
+export function InteractivePracticeSummary({ practices, showReset = false }: { practices: InteractivePracticeRef[]; showReset?: boolean }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [importResult, setImportResult] = useState<InteractivePracticeImportResult | null>(null);
   const [importMessage, setImportMessage] = useState("");

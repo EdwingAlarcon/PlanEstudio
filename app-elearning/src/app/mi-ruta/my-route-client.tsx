@@ -15,7 +15,7 @@ import { UI } from "@/lib/i18n";
 import { getNextWorkstationRequirement, getToolsForProfile, recommendWorkstationProfile } from "@/lib/workstation";
 import { useWorkstationStore } from "@/lib/workstation-store";
 import { InteractivePracticeSummary } from "@/components/interactive-practices/interactive-practice-summary";
-import type { InteractivePractice } from "@/lib/interactive-practices";
+import type { InteractivePracticeRef } from "@/components/interactive-practices/interactive-practice-summary";
 import { RetentionTodayCard } from "@/components/review/retention-today-card";
 
 interface RouteSummary {
@@ -32,7 +32,7 @@ export function MyRouteClient({
   interactivePractices,
 }: {
   routes: RouteSummary[];
-  interactivePractices: InteractivePractice[];
+  interactivePractices: InteractivePracticeRef[];
 }) {
   const onboarding = useOnboardingStore();
   const completedModules = useProgressStore((s) => s.completedModules);

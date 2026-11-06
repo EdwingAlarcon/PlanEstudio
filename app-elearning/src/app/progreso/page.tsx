@@ -25,7 +25,7 @@ export default function ProgressDashboardPage() {
   const practices = getAllPractices().map(({ id, slug, title, practiceType, domain, roles, difficulty, prerequisites }) => ({
     id, slug, title, practiceType, domain, roles, difficulty, prerequisites,
   }));
-  const interactivePractices = getAllInteractivePractices();
+  const interactivePractices = getAllInteractivePractices().map(({ id }) => ({ id }));
 
   return <ProgressDashboardClient levels={levels} practices={practices} interactivePractices={interactivePractices} />;
 }

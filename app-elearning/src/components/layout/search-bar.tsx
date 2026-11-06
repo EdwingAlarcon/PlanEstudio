@@ -14,9 +14,11 @@ import { getPracticeStatusLabel, usePracticeProgressStore } from "@/lib/practice
 import { classifySearchDocument } from "@/lib/guided-journey";
 import { useOnboardingStore } from "@/lib/onboarding-store";
 
-interface SearchBarProps {
-  documents: SearchDocument[];
-}
+type IndexStatus = "idle" | "loading" | "ready" | "error";
+
+// El índice ya no viaja dentro de cada página: es un archivo estático que se descarga
+// al abrir el buscador (ver app/search-index.json/route.ts).
+const SEARCH_INDEX_URL = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/search-index.json`;
 
 interface SearchHit {
   id: string;
@@ -58,7 +60,31 @@ const TYPE_CONFIG: Record<SearchDocumentType, { label: string; color: string }> 
   "interactive-practice": { label: "Práctica interactiva", color: "bg-[#EFF8EE] text-[#107C10] dark:bg-[rgba(16,124,16,0.15)] dark:text-[#2DB52D]" },
 };
 
-export function SearchBar({ documents }: SearchBarProps) {
+export function SearchBar() {
+  const [documents, setDocuments] = useState<SearchDocument[]>([]);
+  const [indexStatus, setIndexStatus] = useState<IndexStatus>("idle");
+  const loadingRef = useRef(false);
+
+  // Idempotente: se llama al abrir el diálogo y al apuntar/enfocar el botón (precarga).
+  const loadIndex = useCallback(() => {
+    if (loadingRef.current) return;
+    loadingRef.current = true;
+    setIndexStatus("loading");
+    fetch(SEARCH_INDEX_URL)
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json() as Promise<SearchDocument[]>;
+      })
+      .then((docs) => {
+        setDocuments(docs);
+        setIndexStatus("ready");
+      })
+      .catch(() => {
+        loadingRef.current = false;
+        setIndexStatus("error");
+      });
+  }, []);
+
   const moduleCount = documents.filter((doc) => doc.type === "module").length;
   const labCount = documents.filter((doc) => doc.type === "lab").length;
   const practiceCount = documents.filter((doc) => !["module", "lab", "resource"].includes(doc.type)).length;
@@ -134,16 +160,17 @@ export function SearchBar({ documents }: SearchBarProps) {
       )
     );
     setActiveIdx(0);
-  }, [query, onboarding]);
+  }, [query, onboarding, documents]);
 
-  // Focus input when dialog opens
+  // Focus input and make sure the index is loading when dialog opens
   useEffect(() => {
     if (open) {
       setTimeout(() => inputRef.current?.focus(), 50);
       setQuery("");
       setResults([]);
+      loadIndex();
     }
-  }, [open]);
+  }, [open, loadIndex]);
 
   // Keyboard shortcut Ctrl+K / Cmd+K
   useEffect(() => {
@@ -185,6 +212,8 @@ export function SearchBar({ documents }: SearchBarProps) {
           size="sm"
           className="hidden sm:flex items-center gap-2 text-muted-foreground w-48 justify-start px-3"
           aria-label="Abrir búsqueda"
+          onPointerEnter={loadIndex}
+          onFocus={loadIndex}
         >
           <Search className="h-3.5 w-3.5" aria-hidden />
           <span className="flex-1 text-left text-xs">{UI.nav.search}</span>
@@ -201,6 +230,7 @@ export function SearchBar({ documents }: SearchBarProps) {
           size="icon"
           className="sm:hidden"
           aria-label="Buscar"
+          onFocus={loadIndex}
         >
           <Search className="h-4 w-4" />
         </Button>
@@ -237,9 +267,24 @@ export function SearchBar({ documents }: SearchBarProps) {
           aria-label="Resultados de búsqueda"
           className="max-h-[380px] overflow-y-auto"
         >
-          {query && results.length === 0 && (
+          {query && results.length === 0 && indexStatus === "ready" && (
             <div className="px-4 py-8 text-center text-sm text-muted-foreground">
               {UI.search.noResults} &ldquo;{query}&rdquo;
+            </div>
+          )}
+
+          {indexStatus === "error" && (
+            <div className="px-4 py-8 text-center text-sm text-muted-foreground" role="alert">
+              No se pudo cargar el índice de búsqueda.{" "}
+              <button type="button" className="font-medium text-[#0078D4] underline-offset-2 hover:underline dark:text-[#4DB8FF]" onClick={loadIndex}>
+                Reintentar
+              </button>
+            </div>
+          )}
+
+          {indexStatus !== "ready" && indexStatus !== "error" && (
+            <div className="px-4 py-8 text-center text-sm text-muted-foreground" role="status">
+              Cargando el índice de búsqueda…
             </div>
           )}
 
@@ -300,7 +345,7 @@ export function SearchBar({ documents }: SearchBarProps) {
             );
           })}
 
-          {!query && (
+          {!query && indexStatus === "ready" && (
             <div className="px-4 py-8 text-center text-sm text-muted-foreground">
               Escribe para buscar en {moduleCount} módulos, {labCount} laboratorios y {practiceCount} prácticas
             </div>

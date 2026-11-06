@@ -2,7 +2,7 @@
 // Strategy: pages network-first (always fresh when online, cached copy offline),
 // hashed /_next/static assets cache-first (immutable), everything else
 // stale-while-revalidate. Bump CACHE_VERSION to invalidate all cached content.
-const CACHE_VERSION = "v1";
+const CACHE_VERSION = "v2";
 const CACHE = `planestudio-${CACHE_VERSION}`;
 
 self.addEventListener("install", () => self.skipWaiting());
