@@ -74,6 +74,23 @@ verificado y los 404 de Learn están en `PROPUESTA_FASES_APRENDER_HACIENDO.md` �
 Módulos 75 y 76 (2 evaluadores sin contexto; simulación, no una persona real) y sus hallazgos corregidos; los demás módulos
 de la Fase 7 no tienen prueba simulada registrada. El banco de prácticas tiene una **prueba de contrato** (`interactive-practices-contract.test.ts`: la respuesta de referencia puntúa `correct`, la pista 3 de cada diagnóstico también y repetir el síntoma no puntúa; `evaluateDebug` no cuenta los términos que ya están en el síntoma) y el sandbox `SIT Registro Legacy` tiene un panel cerrado **Registro de actividad (para tu evidencia)** (`rpa-sandbox-activity.ts`) que cuenta los intentos de **Registrar** por solicitud, y los módulos 74 y 75 lo usan como evidencia. Su contenido solo se monta con el panel abierto, para no añadir texto a la página que PAD automatiza.
 
+## Mantenimiento vigente — 2026-11-06
+
+Revisión de la página (sin ampliar contenido): (1) **Peso por página**: el índice de búsqueda ya no viaja serializado en
+el HTML de cada página; se sirve como archivo estático `/search-index.json` (`app/search-index.json/route.ts`,
+`force-static`) y `SearchBar` lo descarga al abrirse o al apuntar el botón (estados cargando / error / reintentar);
+`InteractivePracticeSummary` recibe solo `{ id }` y no las 239 prácticas completas. Medido con `npm run build`: home
+1978 KB → 175 KB, página de módulo 1115 KB → 219 KB; el índice (848 KB) se descarga una vez y el service worker lo cachea
+(`CACHE_VERSION` subió a `v2`). **Regla**: un componente cliente recibe solo los campos que usa, nunca un catálogo
+completo. (2) **SEO**: `metadataBase`, `openGraph`, `twitter` y `app/opengraph-image.tsx` (con `output: "export"` exige
+`dynamic = "force-static"`; se exporta sin extensión y `public/vercel.json` fija su `Content-Type`). Sin comprobar aún
+en producción con un depurador de vista previa. (3) **Home**: sin los resúmenes de práctica (viven en `/progreso` y
+`/mi-ruta`); formato del simulador en `lib/simulator-config.ts`; "7 actividades", "N rutas" y "40 preguntas" salen de su
+fuente. (4) **Higiene**: `handoff-fase7/` retirado (sigue en `bd01f96`), `SPRINT_HANDOFF.md` actualizado y `agent-browser`
+quitado. **Pendiente**: tildes en `i18n.ts`, `mi-ruta`, `workstation.ts` y otros (hay e2e que fijan cadenas sin tilde, p. ej.
+"Sin tenant todavia"). `graphify` no está en el PATH: usar `python -m graphify update .` (borra `graph.html` por pasar del
+límite de 5.000 nodos). Validación: `npm run verify` (499 tests) y `npm run e2e` 102/102, en serie.
+
 ## Mantenimiento vigente — 2026-10-01
 
 Se cerraron los tres ítems que seguían abiertos, con el alcance que eligió el usuario: (1) **MkDocs**: se retiró del CI
