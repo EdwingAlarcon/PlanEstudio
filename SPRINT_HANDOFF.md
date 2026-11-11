@@ -1,5 +1,19 @@
 # PlanEstudio — Estado de sprints post-auditoría (handoff)
 
+## Pendiente para la próxima sesión (anotado el 2026-11-11, noche)
+
+Hecho hoy: rediseño UX y recorrido guiado, interfaz ES/EN, §14 aplicada en 10 módulos (`c335889`). Ver CLAUDE.md
+"Rediseño de la experiencia guiada" y PROPUESTA §12-§14. Decisiones que esperan al usuario (modelo según la tabla de
+CLAUDE.md):
+
+1. M43: ¿convertir en opcionales los dos criterios de la Microlección 4? (pliega ~700 palabras) — Fable 5.2 / High.
+2. M38: ¿llevar sus 3 plantillas (agenda, estimación, CR-004) a una página de recursos? (recursos 41 → 42) — Fable 5.2 / High.
+3. M7: alinear los Criterios de Validación (piden AddColumns, ForAll, With, Collections, ahora plegados) — Fable 5.2 / High.
+4. Banco de preguntas: M38 evalúa hyper-care, T-shirt sizing y arquitecto vs PM; M37 "Responsible AI"; el módulo no
+   los enseña. Añadir al módulo o ajustar preguntas — Opus 5.5 / Low.
+5. Verificar etiquetas en un tenant en español con `VERIFICACION_INTERFAZ_ES.md` (lo hace el usuario; luego
+   `verified: true` en `ui-terms.ts`).
+
 ## Estado actual — 2026-11-06 (retomar desde aquí)
 
 **Fase 7 CERRADA y fusionada en `master`** (`bd01f96`, PR #9): 76/76 módulos con microlecciones y reto de transferencia,
