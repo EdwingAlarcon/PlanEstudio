@@ -24,6 +24,7 @@ export const STATIC_SITEMAP_PATHS = [
   "/progreso",
   "/portafolio",
   "/preparar-entorno",
+  "/recursos",
 ] as const;
 
 // Patrones de rutas dinámicas incluidas en el sitemap (forma de carpeta de `src/app`).

@@ -19,7 +19,8 @@ test.describe("Backup completo, notas y continuar", () => {
       .toBe("recordar entornos");
 
     await page.goto("/");
-    await expect(page.getByText("Continuar donde lo dejaste")).toBeVisible();
+    // El inicio ofrece una sola acción: si el último módulo abierto es el siguiente paso, el botón principal lleva a él.
+    await expect(page.locator(`#main-content a[href="${MODULE_PATH}"]`).first()).toBeVisible();
     await page.reload();
     await page.goto(MODULE_PATH);
     await expect(page.getByLabel("Notas personales del módulo")).toHaveValue("recordar entornos");

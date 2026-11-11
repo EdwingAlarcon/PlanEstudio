@@ -144,11 +144,11 @@ tuyo, verifica primero si falta habilitar alguna de estas piezas:
 
 ### Paso 1 — Canal de venta
 
-Ve a **Retail and Commerce > Channels** y abre **Online stores** (o **Stores > All stores**, si
-vas a documentar un punto de venta físico en su lugar; Learn usa la ruta **Retail and Commerce >
-Channels > Stores > All stores** en
-[Set up a retail channel](https://learn.microsoft.com/dynamics365/commerce/channel-setup-retail)).
-Si la ruta de tiendas en línea no coincide, anótala tal como aparece en tu ambiente.
+Ve a **Modules > Channels > Online Stores**, la ruta que da Learn en
+[Set up an online channel](https://learn.microsoft.com/dynamics365/commerce/channel-setup-online)
+(o a **Retail and Commerce > Channels > Stores > All stores**, si vas a documentar un punto de venta
+físico en su lugar, según [Set up a retail channel](https://learn.microsoft.com/dynamics365/commerce/channel-setup-retail)).
+Si la ruta no coincide, anótala tal como aparece en tu ambiente.
 
 - Crea o documenta un canal con nombre, legal entity asociada y moneda.
 - Documenta si el canal comparte el mismo catálogo de productos que la legal entity o si usa un catálogo específico.

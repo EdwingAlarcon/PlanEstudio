@@ -21,8 +21,8 @@ test.describe("Interactive Practice Engine", () => {
     await expect(page.getByRole("heading", { name: "Práctica interactiva" })).toBeVisible();
     // Scoped to #main-content to avoid the sidebar's own progress badges.
     await expect(page.locator("#main-content").getByText(`0/${TOTAL_PRACTICES}`, { exact: true })).toBeVisible();
-    await expect(page.locator("select").nth(0)).toBeEnabled();
-    await page.locator("select").nth(1).selectOption("query-playground");
+    await expect(page.locator("#main-content select").nth(0)).toBeEnabled();
+    await page.locator("#main-content select").nth(1).selectOption("query-playground");
     await expect(page.locator("#exercise-heading")).toContainText("FetchXML básico");
 
     await page.keyboard.press("Control+k");
@@ -32,18 +32,18 @@ test.describe("Interactive Practice Engine", () => {
 
   test("filtros sincronizan seleccion, dificultad, estado vacio y limpieza", async ({ page }) => {
     await page.goto("/practica");
-    await expect(page.locator("select").nth(0)).toBeEnabled();
+    await expect(page.locator("#main-content select").nth(0)).toBeEnabled();
     await expect(page.locator("#exercise-heading")).toContainText("Relación Cliente/Pedidos");
-    await page.locator("select").nth(0).selectOption("power-automate");
+    await page.locator("#main-content select").nth(0).selectOption("power-automate");
     await expect(page.locator("#exercise-heading")).toContainText("Elegir trigger correcto");
-    await page.locator("select").nth(1).selectOption("flow-builder");
+    await page.locator("#main-content select").nth(1).selectOption("flow-builder");
     await expect(page.locator("#exercise-heading")).toContainText("Construir aprobación por monto");
-    await page.locator("select").nth(2).selectOption("starter");
+    await page.locator("#main-content select").nth(2).selectOption("starter");
     await expect(page.getByRole("heading", { name: "No encontramos prácticas con estos filtros" }).first()).toBeVisible();
     await page.getByRole("button", { name: "Limpiar filtros" }).first().click();
     await expect(page.locator("#exercise-heading")).toContainText("Relación Cliente/Pedidos");
 
-    await page.locator("select").nth(3).selectOption("completed");
+    await page.locator("#main-content select").nth(3).selectOption("completed");
     await expect(page.getByRole("heading", { name: "No encontramos prácticas con estos filtros" }).first()).toBeVisible();
     await page.getByRole("button", { name: "Cambiar dominio" }).click();
     await expect(page.getByRole("heading", { name: "No encontramos prácticas con estos filtros" }).first()).toBeVisible();

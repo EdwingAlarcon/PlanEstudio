@@ -151,6 +151,10 @@ Completa primero los ejercicios 7.1.1, 7.1.2, 7.2.1, 7.3.1 y 7.5.1. Con eso tend
 
 **Ejercicio 1: Multi-Filter Gallery**
 
+> **Separadores según el idioma:** con un idioma de coma decimal en el navegador, Power Fx usa `;` entre argumentos y `;;`
+> para encadenar fórmulas (por ejemplo, `Remove(ColCarrito; galCarrito.Selected);; Notify("Listo")`). Este módulo escribe
+> la notación en inglés (`,` y `;`). Ver [Interfaz en español e inglés](/recursos/interfaz-espanol-ingles).
+
 **Dónde va:** pantalla `scrInicio` > selecciona `galSolicitudes` (en **Tree view**, la Gallery completa, no una etiqueta de dentro) > propiedad `Items`. Reemplaza la fórmula `Search` del Módulo 3 por esta:
 
 ```javascript

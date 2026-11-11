@@ -161,6 +161,11 @@ Crear aplicaciones Canvas desde cero con controles, navegación y conexión a da
         - Etiqueta del subtítulo (`Subtitle1`): `ThisItem.Categoría`
         - Etiqueta del cuerpo (`Body1`): `Text(ThisItem.'Fecha Solicitud', "dd/mm/yyyy")` (en `Text`, `mm` junto a `dd` y `yyyy` es el mes)
 
+> **Si tu Power Apps Studio usa coma decimal** (idioma del navegador como español de España o de Colombia): en Power Fx los
+> argumentos se separan con `;` en vez de `,` y las fórmulas se encadenan con `;;` en vez de `;`. Las fórmulas del curso
+> usan la notación en inglés; si el editor marca un error de sintaxis al pegar, cambia los separadores. Detalle y ejemplo en
+> [Interfaz en español e inglés](/recursos/interfaz-espanol-ingles).
+
 4. **Fórmula de búsqueda.** Selecciona la Gallery completa (en **Tree view**, haz clic en `galSolicitudes`, no en una etiqueta de dentro). En la lista de propiedades elige `Items` y reemplaza lo que haya por:
    ```javascript
    // Search(tabla, texto a buscar, columnas donde buscar...)

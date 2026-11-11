@@ -110,6 +110,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "fundamentos-typescript-react": "Recursos/FUNDAMENTOS_TYPESCRIPT_REACT.md",
   "fundamentos-js-ts-react-para-pcf": "Recursos/FUNDAMENTOS_JS_TS_REACT_PARA_PCF.md",
   "entornos-y-trials": "Recursos/ENTORNOS_Y_TRIALS.md",
+  "interfaz-espanol-ingles": "Recursos/INTERFAZ_ESPANOL_INGLES.md",
   "fundamentos-azure": "Recursos/FUNDAMENTOS_AZURE.md",
   "soluciones-referencia-capstones": "Recursos/SOLUCIONES_REFERENCIA_CAPSTONES.md",
   "roadmap-auditoria-tenant-real": "Recursos/ROADMAP_AUDITORIA_TENANT_REAL.md",

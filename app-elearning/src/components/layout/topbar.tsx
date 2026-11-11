@@ -4,6 +4,7 @@ import { GraduationCap, Menu } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "@/components/ui/button";
 import { SearchBar } from "./search-bar";
+import { EnvironmentLanguageSwitch } from "./environment-language-switch";
 
 interface TopbarProps {
   onMenuClick?: () => void;
@@ -32,6 +33,8 @@ export function Topbar({ onMenuClick }: TopbarProps) {
       </div>
 
       <div className="flex-1" />
+
+      <EnvironmentLanguageSwitch />
 
       <SearchBar />
 

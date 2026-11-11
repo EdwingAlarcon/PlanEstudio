@@ -19,18 +19,24 @@ test.describe("Smoke — rutas principales", () => {
     test(`sidebar mantiene D365 consistente en ${route}`, async ({ page }) => {
       await page.goto(route, { waitUntil: "domcontentloaded" });
       const sidebar = page.getByRole("complementary", { name: "Navegación principal" });
-      const d365Link = sidebar.getByRole("link", { name: /Dynamics 365 Especialización\s+D365/ });
-      const rpaLink = sidebar.getByRole("link", { name: /Power Automate Desktop & RPA\s+RPA/ });
-      const footerLabel = sidebar.getByText("PL-900 · Funcional · PL-400 · Arquitectura · IA · D365 · RPA");
+      const d365Link = sidebar.getByRole("link", { name: /^Dynamics 365\s+0\/10$/ });
+      const rpaLink = sidebar.getByRole("link", { name: /RPA · Power Automate Desktop/ });
 
+      await expect(sidebar.getByTestId("sidebar-next-step")).toBeVisible();
       await d365Link.scrollIntoViewIfNeeded();
       await expect(d365Link).toBeVisible();
       await rpaLink.scrollIntoViewIfNeeded();
       await expect(rpaLink).toBeVisible();
-      await expect(sidebar.getByRole("link", { name: "Experiencia práctica" })).toBeVisible();
+      // "Practicar" se despliega solo si la página activa está dentro; si no, se abre con un clic.
+      const practiceLink = sidebar.getByRole("link", { name: "Experiencia práctica" });
+      // Reintenta el clic hasta que React hidrate el botón.
+      await expect(async () => {
+        if (!(await practiceLink.isVisible())) await sidebar.getByRole("button", { name: "Practicar" }).click();
+        await expect(practiceLink).toBeVisible({ timeout: 1000 });
+      }).toPass({ timeout: 15000 });
       await expect(sidebar.getByText("0/10")).toHaveCount(2);
-      await footerLabel.scrollIntoViewIfNeeded();
-      await expect(footerLabel).toBeVisible();
+      // La barra ya no lista recursos uno por uno: están agrupados en /recursos.
+      await expect(sidebar.getByRole("link", { name: "Glosario" })).toHaveCount(0);
       await expect(sidebar.getByText("Dynamics 365 Avanzado")).toHaveCount(0);
       await expect(sidebar.getByText("0/4")).toHaveCount(0);
     });
@@ -65,7 +71,8 @@ test.describe("Smoke — rutas principales", () => {
     await page.getByRole("button", { name: /Activar explorar libremente/i }).click();
     await expect(page.getByText("Explorar libremente").first()).toBeVisible();
     await page.getByRole("button", { name: /Me interesa esta familia/i }).nth(2).click();
-    await expect(page.getByText("2/7")).toBeVisible();
+    // Módulo 1 + decisión de ruta + cierre de Fundamentos (elegir ruta implica haber pasado el quiz de cierre).
+    await expect(page.getByText("3/7")).toBeVisible();
   });
 
   test("Nivel 1 muestra lista de módulos", async ({ page }) => {
@@ -118,7 +125,7 @@ test.describe("Smoke — rutas principales", () => {
 
     await page.goto("/nivel/basico/modulo/introduccion-al-ecosistema-power-platform");
     await expect(page.getByRole("heading", { name: /Mini Lab 01/i })).toBeVisible();
-    await expect(page.getByText("Primera victoria en 5 minutos")).toBeVisible();
+    await expect(page.locator("#aprende").getByText("Primera victoria en 5 minutos")).toBeVisible();
 
     await page.goto("/nivel/basico/modulo/fundamentos-de-power-fx-y-expresiones");
     await expect(page.getByRole("heading", { name: "Power Fx en español simple" })).toBeVisible();
@@ -428,7 +435,7 @@ test.describe("Smoke — rutas principales", () => {
 
     const firstCriterion = page.locator('input[type="checkbox"]').first();
     await firstCriterion.check();
-    await page.locator("select").first().selectOption("4");
+    await page.locator("#main-content select").first().selectOption("4");
     await page.getByRole("button", { name: "Completados" }).click();
     await expect(page.locator('input[type="checkbox"]').first()).toBeChecked();
     await page.getByRole("button", { name: "Pendientes" }).click();
@@ -439,12 +446,12 @@ test.describe("Smoke — rutas principales", () => {
     await page.reload();
     await page.getByRole("button", { name: "Completados" }).click();
     await expect(page.locator('input[type="checkbox"]').first()).toBeChecked();
-    await expect(page.locator("select").first()).toHaveValue("4");
+    await expect(page.locator("#main-content select").first()).toHaveValue("4");
 
     await page.getByRole("button", { name: "Limpiar checklist" }).click();
     await page.getByRole("button", { name: "Todos" }).click();
     await expect(page.locator('input[type="checkbox"]').first()).not.toBeChecked();
-    await expect(page.locator("select").first()).toHaveValue("");
+    await expect(page.locator("#main-content select").first()).toHaveValue("");
   });
 
   test("modo oscuro alterna correctamente", async ({ page }) => {

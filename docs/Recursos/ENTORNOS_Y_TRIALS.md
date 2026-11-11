@@ -78,9 +78,49 @@ Fuentes: [Trial environments](https://learn.microsoft.com/power-platform/admin/t
 - **Dynamics 365:** en tu ambiente del curso deja **Enable Dynamics 365 apps** en **No**. Los trials de Sales, Customer
   Service y demás productos de Dynamics 365 crean su propio ambiente (ver las filas de Dynamics 365 abajo).
 
-**No verificado en Learn** (no lo des por hecho): si al vencer el Trial puedes crear otro de inmediato con la misma
-cuenta; qué recibe exactamente una cuenta gratuita de Microsoft Entra creada para esto; si después de los 90 días de
-licencia Power Apps trial se puede obtener otra.
+### ¿Puedo crear otro Trial cuando venza el mío? (revisado el 11 nov 2026)
+
+Lo que dice Learn y lo que **no** dice:
+
+- **El límite es de un Trial por usuario, no de uno para siempre.** La tabla de
+  [Create and manage environments](https://learn.microsoft.com/power-platform/admin/create-environment) da "Yes (one)"
+  como derecho de la licencia, y la FAQ responde "The new trial limits are one per user". Learn no dice que sea un único
+  Trial en la vida de la cuenta, pero **tampoco dice expresamente** que puedas crear otro con la misma cuenta. Lo más
+  cercano es la FAQ de los trials de Dynamics 365 ([Field Service trial FAQ](https://learn.microsoft.com/dynamics365/field-service/trial-faq),
+  ms.date 2026-10-29): "You can have only one active trial per app at a time. You can sign up again after your current
+  trial for the app ends". Es otro tipo de trial (de producto), así que tómalo como indicio, no como regla.
+- **Un ambiente borrado sigue "existiendo" siete días.** Tras eliminarse pasa a **Recently deleted environments** y se
+  puede recuperar durante el periodo estándar de siete días
+  ([Recover a recently deleted environment](https://learn.microsoft.com/power-platform/admin/recover-environment)). Learn no
+  aclara si en ese periodo cuenta para tu límite de uno; si el portal no te deja crear el Trial nuevo, espera a que pasen
+  esos siete días.
+- **Para crear un Trial necesitas una licencia vigente** que lo permita (tabla de arriba). La licencia Power Apps trial
+  dura como máximo 90 días (30 + dos extensiones). Learn **no dice** que se pueda volver a obtener después ni qué ocurre
+  si lo intentas: no cuentes con ello.
+
+**Plan práctico:** con una sola licencia Power Apps trial tienes como máximo unos 90 días. Ambiente 1: 30 días + extensión
+(60 días). Antes de que venza, exporta tu solución; cuando se elimine (o lo elimines tú desde **Environments** >
+**Delete**), crea el Trial 2 mientras tu licencia siga vigente e importa la solución. Si el portal no te deja, es que
+el límite te aplica: pasa a una de las alternativas de abajo. Si tu organización bloquea las licencias de prueba, este
+camino no existe y necesitas la ayuda del administrador.
+
+**Sigue sin verificar** (no lo des por hecho): que se pueda crear un segundo Trial con la misma cuenta; si un ambiente en
+**Recently deleted environments** cuenta para el límite; si tras los 90 días de licencia se puede obtener otra; qué recibe
+exactamente una cuenta gratuita de Microsoft Entra creada para esto. Nota: la página
+[Sign up for Power Apps](https://learn.microsoft.com/power-apps/maker/signup-for-powerapps) (ms.date 2026-01-13) aún dice
+"To keep building apps after the trial period, opt in to the free Power Apps Developer Plan"; es anterior al cambio del
+15 nov 2026 y ya no aplica (la página del [Developer Plan](https://learn.microsoft.com/power-platform/developer/plan), del
+2026-10-26, prevalece).
+
+### Alternativas si no puedes crear otro Trial
+
+| Alternativa | Qué exige (según Learn, nov 2026) | ¿Sirve para el curso? |
+|---|---|---|
+| **Developer gestionado o Sandbox de tu organización** | Un administrador y licencia premium para ejecutar apps y flujos ([Developer Plan](https://learn.microsoft.com/power-platform/developer/plan)) | Sí, es la mejor opción |
+| **Pay-as-you-go con una suscripción de Azure** | Vincular el ambiente a una suscripción de Azure con una *billing policy*; el uso de apps y de Dataverse por encima de lo incluido se cobra con medidores de Azure ([Pay-as-you-go overview](https://learn.microsoft.com/power-platform/admin/pay-as-you-go-overview)) | Sí, pero **tiene coste** y necesitas ser administrador del tenant y tener una suscripción de Azure; no está verificado el coste para un único alumno |
+| **Microsoft 365 Developer Program (sandbox E5)** | Solo califican suscriptores de Visual Studio Professional/Enterprise, partners elegibles (ISV Success, MAICPP) y clientes Premier/Unified; dura hasta 90 días; exige vincular una cuenta de facturación MCA con suscripción de Azure activa ([FAQ del programa](https://learn.microsoft.com/office/developer-program/microsoft-365-developer-program-faq), ms.date 2026-09-04) | Solo si ya calificas. El E5 trae "PowerApps for Office 365 Plan 3" (sin conectores premium ni Dataverse completo fuera de Teams); dentro de ese tenant tendrías que activar igualmente una licencia Power Apps trial, cosa que no está verificada |
+| **Dataverse for Teams** | Una licencia de Microsoft 365 con Teams | Solo para partes de los Módulos 1-8; no tiene la Dataverse completa, ni soluciones gestionadas normales, ni la mayoría de lo que usan los niveles 2 a 4. No es sustituto |
+| **Variante en papel** de cada lab | Nada | Cubre el razonamiento, no la evidencia de tenant |
 
 ### Crear el ambiente Trial con Dataverse (clic a clic)
 
@@ -153,7 +193,8 @@ ahora, además, la exportas al terminar cada módulo o sesión y guardas el `.zi
 - **Trials de Dynamics 365:** crean su propio ambiente con las apps instaladas; se piden desde los módulos de Dynamics 365
   (57 en adelante). Ver la tabla de abajo.
 - **Microsoft 365 Developer Program:** su sandbox hoy solo califica para suscriptores de Visual Studio Professional o
-  Enterprise, algunos partners y clientes de soporte Premier o Unified (verificado el 1 nov 2026); no es la primera opción.
+  Enterprise, algunos partners y clientes de soporte Premier o Unified; dura hasta 90 días y exige una cuenta de
+  facturación MCA con suscripción de Azure (reverificado el 11 nov 2026, ver "Alternativas" arriba); no es la primera opción.
 
 ## Ambiente por ruta
 

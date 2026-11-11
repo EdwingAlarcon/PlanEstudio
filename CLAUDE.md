@@ -74,6 +74,24 @@ verificado y los 404 de Learn están en `PROPUESTA_FASES_APRENDER_HACIENDO.md` �
 Módulos 75 y 76 (2 evaluadores sin contexto; simulación, no una persona real) y sus hallazgos corregidos; los demás módulos
 de la Fase 7 no tienen prueba simulada registrada. El banco de prácticas tiene una **prueba de contrato** (`interactive-practices-contract.test.ts`: la respuesta de referencia puntúa `correct`, la pista 3 de cada diagnóstico también y repetir el síntoma no puntúa; `evaluateDebug` no cuenta los términos que ya están en el síntoma) y el sandbox `SIT Registro Legacy` tiene un panel cerrado **Registro de actividad (para tu evidencia)** (`rpa-sandbox-activity.ts`) que cuenta los intentos de **Registrar** por solicitud, y los módulos 74 y 75 lo usan como evidencia. Su contenido solo se monta con el panel abierto, para no añadir texto a la página que PAD automatiza.
 
+## Rediseño de la experiencia guiada e interfaz ES/EN — 2026-11-11 (tarde)
+
+Auditoría UX/pedagógica y cambios aplicados (sin quitar contenido): (1) **Barra lateral** de 50 enlaces a ~15: botón
+**Siguiente paso**, Inicio/Mi ruta/Mi progreso, **Temario** (4 niveles numerados + especializaciones) y grupos plegables
+**Practicar** y **Explorar**; recursos y guías de empleo pasan a la página nueva `/recursos` (`resource-catalog.ts`,
+un test exige que cada recurso esté en un grupo). (2) **Inicio** con una sola acción (`GuidedHomeClient`), repaso del día
+y "Tu recorrido"; se retiraron Acceso rápido, dominios y la tarjeta Continuar duplicada. (3) **Siguiente paso más allá
+de Fundamentos**: antes se quedaba en "Descubre tu ruta"; ahora `getNextBestAction` recibe el temario
+(`learning-path.ts`, `CurriculumProvider` en el layout, hook `useNextBestAction`) y sigue la ruta elegida o la cadena
+de certificación. Bug corregido: con ruta elegida, el quiz de Fundamentos nunca contaba como hecho. (4) **Módulo** en
+tres pasos (Aprende y haz → Practica → Comprueba) con índice; suplementos y repasos "(opcional" plegados
+(`module-sections.ts`); el diagnóstico de caso, plegado. (5) **Interfaz ES/EN**: selector "Interfaz de tu ambiente"
+(Ambos/Español/Inglés, store `planestudio.ui-language.v1`, fuera del backup); cada negrita del contenido que está en
+`src/data/ui-terms.ts` (240 términos, 219 verificados en Learn es-es; solo se muestran los verificados) añade o
+antepone la etiqueta oficial en español. Guía `/recursos/interfaz-espanol-ingles` (separadores `;`/`;;` de Power Fx,
+nombres lógicos que no cambian, Entornos/Espacio aislado…); aviso de separadores en M3 y M7. Recursos: **41**.
+Pendientes: D365 sin términos verificados (Learn es-es deja esa UI en inglés); ver `PROPUESTA_FASES_APRENDER_HACIENDO.md` §12-§13.
+
 ## Mantenimiento vigente — 2026-11-11
 
 Revisión con seis sub-agentes, sin ampliar contenido ni cambiar conteos: (1) **pruebas simuladas** (modelos, no personas) y
@@ -182,7 +200,7 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 **Invariantes que no debes romper:**
 - Conteos vigentes: **76 módulos, 76 labs (uno opcional, LAB-06), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
   33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 239 prácticas interactivas
-  y 40 páginas de recursos** (prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
+  y 41 páginas de recursos** (41 desde la guía de interfaz español/inglés del 2026-11-11; prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
   Doing de Módulos 11, 10 y 13, a 44 con los Módulos 1 a 8 de la Fase 2 a 62 con los Módulos 9, 12, 14-17 de la Fase 3, a 149 con las Fases 4, 5 y 6 recortada y a 239 con la Fase 7 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de
   Módulo 13 y a 40 con "Casos reales por industria" (`Anexos/CASOS_REALES_NEGOCIO.md` portado a la app) para
   cerrar el gap de la ruta Consultor Funcional (status pasó de "Parcial" a "Disponible" el 2026-10-06,

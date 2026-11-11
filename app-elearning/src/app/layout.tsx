@@ -5,6 +5,23 @@ import { ThemeProvider } from "@/components/layout/theme-provider";
 import { AppShell } from "@/components/layout/app-shell";
 import { ServiceWorkerRegister } from "@/components/layout/service-worker-register";
 import { ReadingProgress } from "@/components/layout/reading-progress";
+import { CurriculumProvider } from "@/components/guided/use-next-best-action";
+import { getAllLevels } from "@/lib/content";
+import type { CurriculumModule } from "@/lib/learning-path";
+
+// Solo los campos que usa el cliente para recomendar el siguiente módulo (76 entradas).
+function getCurriculumIndex(): CurriculumModule[] {
+  return getAllLevels().flatMap((level) =>
+    level.modules.map((mod) => ({
+      key: mod.id,
+      moduleId: mod.moduleId,
+      levelId: level.id,
+      title: mod.title,
+      href: `/nivel/${level.id}/modulo/${mod.slug}`,
+      minutes: mod.estimatedMinutes,
+    })),
+  );
+}
 
 // Valores por defecto (título, descripción, Open Graph, Twitter e imagen /og.png).
 // Cada página define los suyos con `buildPageMetadata` (src/lib/seo.ts), que añade canonical y og:url.
@@ -30,7 +47,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           <ServiceWorkerRegister />
           <ReadingProgress />
-          <AppShell>{children}</AppShell>
+          <CurriculumProvider curriculum={getCurriculumIndex()}>
+            <AppShell>{children}</AppShell>
+          </CurriculumProvider>
         </ThemeProvider>
       </body>
     </html>

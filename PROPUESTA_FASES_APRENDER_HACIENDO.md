@@ -613,3 +613,67 @@ como `image/png`). LinkedIn Post Inspector y el validador de X exigen iniciar se
 
 **Sin aplicar, a propósito:** IP-IA-020 (el diffstat del README depende de cómo escriba el alumno las líneas en blanco) e
 IP-QRY-002 (prerrequisito opcional).
+
+## 12. Resolución de pendientes (2026-11-11)
+
+Tercera ronda del día, solo de verificación. Fuentes en el orden pedido (Learn primero; docs de GitHub; comunidad solo
+como indicio). Learn respondió sin 429. Nada se probó en un tenant real. Conteos sin cambios (76 módulos, 76 labs, 891
+preguntas, 239 prácticas); ningún Caso Real, frontmatter, pregunta ni archivo de `src/` tocado.
+
+| Pendiente | Veredicto | Evidencia (consultada el 2026-11-11) | Cambio aplicado |
+|---|---|---|---|
+| ¿Otro Trial (standard) con la misma cuenta al vencer el anterior? | **Sigue incierto, con plan práctico** | `create-environment` (ms.date 2026-10-08): "Yes (one)" y "trial limits are one per user", sin decir si es simultáneo o de por vida. `trial-environments` (2026-10-08): nada sobre recrear. Indicio: Field Service trial FAQ (2026-10-29) "one active trial per app at a time. You can sign up again after your current trial ends" (trial de producto, no de PPAC). `recover-environment` (2026-08-31): un ambiente borrado queda 7 días en **Recently deleted environments**; no se sabe si cuenta para el límite. Comunidad: sin respuesta oficial | `ENTORNOS_Y_TRIALS.md`: apartado "¿Puedo crear otro Trial…?" con lo confirmado, lo no confirmado y el plan (2.º Trial dentro de la vida de la licencia, esperar 7 días si el portal lo bloquea) |
+| Licencia Power Apps trial ya consumida | **Confirmado el máximo; renovación sin confirmar** | `signup-for-powerapps` (2026-01-13): 30 días + dos extensiones, máximo 90. Crear un Trial exige licencia vigente (`create-environment`). Learn no dice si se puede obtener otra tras los 90 días | Documentado; techo práctico ~90 días por cuenta |
+| Contradicción de Learn | **Documentada** | `signup-for-powerapps` aún recomienda el Developer Plan tras el trial; `developer/plan` (2026-10-26) dice que desde el 15 nov 2026 ya no crea ambiente. Prevalece la más reciente y específica | Nota en `ENTORNOS_Y_TRIALS.md` |
+| Microsoft 365 Developer Program (E5) | **Confirmado** | FAQ (ms.date 2026-09-04): solo VS Professional/Enterprise, partners ISV Success/MAICPP y Premier/Unified; hasta 90 días; billing MCA con suscripción de Azure obligatoria; incluye "PowerApps for Office 365 Plan 3", sin premium | Tabla de alternativas y viñeta actualizada |
+| Pay-as-you-go con Azure | **Alternativa propuesta (con coste)** | `pay-as-you-go-overview`: billing policy que vincula el ambiente a una suscripción de Azure; el uso se cobra con medidores | Fila en la tabla de alternativas; el coste para un alumno no se verificó |
+| Developer gestionado tras 15 nov 2026 | **Confirmado** | `developer/plan`: uno por usuario, lo pide el admin (environment routing), licencia premium para ejecutar | Sin cambio (ya estaba) |
+| Dataverse for Teams | **Alternativa parcial** | Conocida: Dataverse reducida dentro de Teams; no sustituye a Dataverse completa para niveles 2-4 | Fila en la tabla, sin profundizar (no se releyó la página de Learn) |
+| **Security group** en un Trial | **Confirmado parcialmente** | `create-environment`: "For open access, select None. This field is now required"; `trial-environments` no lo marca como obligatorio | Sin cambio: el texto ya dice "None si está disponible" |
+| **Enable Dynamics 365 apps** en un Trial | **Sigue la contradicción de Learn** | `trial-environments` lo ofrece; `create-environment` dice que no se puede en trials | Sin cambio (el curso lo deja en **No**) |
+| `pac env who` | **Confirmado el comando; salida exacta no documentada** | Referencia `pac env` (ms.date 2026-10-25): "Displays information about the current Dataverse organization", parámetros `--environment` y `--json`; sin ejemplo de salida | Sin cambio: M52, LAB-52 y LAB-56 no afirman campos concretos |
+| **Include default branch** (ruleset de GitHub) | **Confirmado (fuente secundaria)** | docs.github.com: "select **Add a target**, then select how you want to include or exclude branches"; la API lo expresa como `~DEFAULT_BRANCH`; tutoriales muestran la opción **Include default branch** | Sin cambio (M51 ya dice **Add a target** > **Include default branch**) |
+| Ruta del Schedule Board | **Confirmado con dos rutas** | Learn da **Service > Scheduling > Schedule Board** (app Field Service) y **Resource Scheduling > Schedule Board** (app Resource Scheduling); la etiqueta varía según la app | Sin cambio: el contenido no afirma ruta de menú |
+| `mserp_inventoryonhandaientity` | **Sigue incierto** | Ninguna página de Learn ni resultado indexado lo nombra; `inventory-onhand-mobile-app` solo dice que usa virtual tables de SCM | Sin cambio: LAB-70 ya dice "virtual table … con prefijo `mserp_`" sin nombre exacto |
+| Ruta de tiendas en línea de Commerce | **Corregido** | `channel-setup-online` (ms.date 2026-01-20): **Modules > Channels > Online Stores**; `channel-setup-retail`: **Retail and Commerce > Channels > Stores > All stores** | LAB-98 Paso 1 usa la ruta de Learn para tiendas en línea |
+| Etiquetas de Field Service (Requirement pane, Schedule Assistant Filter) | Ya confirmadas en §11.7 | — | — |
+
+**Siguen inciertos y por qué:** (1) segundo Trial con la misma cuenta y una segunda licencia trial: Learn no lo dice y
+solo se puede comprobar en un tenant real al vencer; (2) `mserp_inventoryonhandaientity`: el nombre lógico solo se ve en
+un ambiente con F&O y virtual tables; (3) salida exacta de `pac env who`: `pac` no está instalado en esta máquina;
+(4) el resto del inventario de §11.5 (etiquetas de los niveles 1 a 4) y las rutas de F&O de §11.7 (Chart of accounts,
+Pending vendor invoices, etc.) no se revisaron en esta ronda.
+
+## 13. Auditoría de experiencia y recorrido de aprendizaje (2026-11-11)
+
+**Diagnóstico (medido en producción antes del cambio):**
+
+- La barra lateral tenía 50 enlaces en 6 secciones (dominios, niveles, empleabilidad con 6 guías, recursos con 18). Varias
+  apuntaban a lo mismo por caminos distintos, y había tres llamadas a "continuar" que podían recomendar cosas diferentes
+  (tarjeta del último módulo, siguiente acción y botón de la barra).
+- El inicio repetía la barra: 8 tarjetas de acceso rápido y 4 de dominio debajo del bloque guiado.
+- El siguiente paso solo conocía las 7 actividades de Fundamentos. Al terminarlas recomendaba "Descubre tu ruta" para
+  siempre, así que el alumno no recibía respuesta a "¿qué sigue?" para los 76 módulos. Además, después de elegir ruta la
+  actividad de cierre (quiz) nunca contaba como hecha.
+- El Módulo 1 tiene unas 7.000 palabras en una sola página de 23.000 px, sin índice, con los suplementos opcionales
+  al mismo nivel que la práctica obligatoria y el diagnóstico de caso (que no puntúa) antes de la evaluación.
+- Las instrucciones citan la interfaz en inglés; un alumno con el tenant en español no encuentra **Tables** (Tablas),
+  **Compose** (Redactar) o **Environments** (Entornos), y las fórmulas de Power Fx fallan con separador `;`.
+
+**Decisiones y por qué:**
+
+| Cambio | Motivo | Se preserva |
+|---|---|---|
+| Barra: Siguiente paso + 3 enlaces + Temario + Practicar/Explorar plegados | Reducir opciones simultáneas (de 50 a ~15 visibles) y que la acción del día sea la única destacada | Todas las páginas siguen existiendo; recursos y empleo, agrupados en `/recursos` |
+| Inicio con una sola acción y "Tu recorrido" numerado | Responder "¿por dónde empiezo?" y "¿dónde estoy?" sin interpretar la plataforma | Repaso del día, mapa, rutas y niveles |
+| Siguiente paso por la ruta elegida o la cadena de certificación | Responder "¿qué sigue?" después de Fundamentos | El modo libre y la elección de ruta |
+| Módulo en Aprende → Practica → Comprueba, con índice y opcionales plegados | Que el alumno sepa qué hacer en cada módulo y cuándo ha terminado | Todo el texto: solo se pliega lo marcado como suplemento u opcional |
+| Etiquetas de interfaz en ambos idiomas (preferencia del alumno) | Que el idioma del tenant no bloquee un lab | Las instrucciones siguen escritas una vez; el diccionario solo muestra términos verificados |
+
+**Lo que no se hizo (y por qué):** no se ocultaron niveles avanzados (el curso es de autoestudio y el modo guiado ya
+avisa sin bloquear); no se fusionaron las páginas de dominio (Power Platform, Dynamics 365, Integración) porque las
+enlazan rutas y mapa, solo salieron de la barra; no se tradujeron los 152 archivos de contenido, porque un diccionario
+central escala y se corrige en un solo sitio.
+
+**Pendiente:** confirmar con un tenant en español las etiquetas sin verificar (D365, Copilot Studio, Power Automate de
+nube: Run history, Send an email (V2), Close as Won…) y añadirlas a `ui-terms.ts` con `verified: true`.

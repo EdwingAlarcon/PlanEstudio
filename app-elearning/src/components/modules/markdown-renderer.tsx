@@ -6,6 +6,7 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import { cn } from "@/lib/utils";
 import { MermaidDiagram } from "@/components/modules/mermaid-diagram";
+import { UiLabel } from "@/components/modules/ui-label";
 import type { Components } from "react-markdown";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -162,6 +163,9 @@ const COMPONENTS: Components = {
       {children}
     </a>
   ),
+
+  // ── Negritas: etiquetas de interfaz con su equivalente en español (ver ui-label.tsx)
+  strong: ({ children }) => <UiLabel text={extractText(children)}>{children}</UiLabel>,
 
   // ── Horizontal rule ─────────────────────────────────────────────────────────
   hr: () => <hr className="not-prose my-10 border-t border-border" />,

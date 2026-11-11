@@ -17,6 +17,21 @@ import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
 import { ArrowLeft, ArrowRight, Clock, BookOpen, BrainCircuit } from "lucide-react";
 import { UI, type LevelId } from "@/lib/i18n";
 import { FOUNDATION_ACTIVITIES } from "@/lib/guided-journey";
+import { getModuleOutline, splitModuleSections } from "@/lib/module-sections";
+
+function ModuleStep({ n, href, title, detail }: { n: number; href: string; title: string; detail: string }) {
+  return (
+    <li>
+      <a href={href} className="flex items-start gap-3 rounded-lg p-2 transition-colors hover:bg-accent">
+        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0078D4] text-xs font-semibold text-white">{n}</span>
+        <span className="min-w-0">
+          <span className="block text-sm font-semibold text-foreground">{title}</span>
+          <span className="block text-xs text-muted-foreground">{detail}</span>
+        </span>
+      </a>
+    </li>
+  );
+}
 
 interface PageProps {
   params: Promise<{ level: string; slug: string }>;
@@ -69,6 +84,9 @@ export default async function ModulePage({ params }: PageProps) {
   const recommendedLab = foundationActivity
     ? FOUNDATION_ACTIVITIES.find((activity) => activity.type === "lab" && activity.step === foundationActivity.step + 1)
     : undefined;
+
+  const segments = splitModuleSections(mod.rawContent);
+  const outline = getModuleOutline(mod.rawContent);
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-fade-in">
@@ -124,12 +142,64 @@ export default async function ModulePage({ params }: PageProps) {
         previousModuleHref={prevModule ? `/nivel/${levelId}/modulo/${prevModule.slug}` : undefined}
       />
 
+      {/* ── Ruta del módulo: tres pasos y su índice ─────────────────────── */}
+      <nav aria-label="Pasos del módulo" className="rounded-xl border border-border bg-card px-5 py-4 shadow-fluent-1">
+        <ol className="grid gap-3 sm:grid-cols-3">
+          <ModuleStep n={1} href="#aprende" title="Aprende y haz" detail={`${outline.length} partes con práctica en tu ambiente`} />
+          <ModuleStep n={2} href="#practica" title="Practica" detail={recommendedLab || interactivePractices.length > 0 ? "Lab y ejercicios con feedback" : "Criterios de validación del módulo"} />
+          <ModuleStep n={3} href="#comprueba" title="Comprueba" detail={questions.length > 0 ? `Evaluación de ${questions.length} preguntas` : "Marca el módulo como completado"} />
+        </ol>
+        {outline.length > 0 && (
+          <details className="mt-4 border-t border-border pt-3 text-sm">
+            <summary className="cursor-pointer text-muted-foreground hover:text-foreground">Índice del módulo</summary>
+            <ol className="mt-2 list-decimal space-y-1 pl-5">
+              {outline.map((item) => (
+                <li key={item.slug}>
+                  <a href={`#${item.slug}`} className="text-[#0078D4] underline-offset-2 hover:underline dark:text-[#4DB8FF]">{item.title}</a>
+                </li>
+              ))}
+            </ol>
+          </details>
+        )}
+      </nav>
+
       {/* ── Markdown content ─────────────────────────────────────────────── */}
-      <div className="rounded-xl border border-border bg-card px-6 py-8 md:px-8 shadow-fluent-1">
-        <MarkdownRenderer content={mod.rawContent} />
+      <div id="aprende" className="scroll-mt-20 rounded-xl border border-border bg-card px-6 py-8 md:px-8 shadow-fluent-1">
+        {segments.map((segment, index) =>
+          segment.optional ? (
+            <details key={index} className="not-prose my-6 rounded-lg border border-border bg-muted/30 px-4 py-3">
+              <summary className="cursor-pointer text-sm font-semibold text-foreground">
+                {segment.title} <span className="font-normal text-muted-foreground">· opcional</span>
+              </summary>
+              <MarkdownRenderer content={segment.markdown} />
+            </details>
+          ) : (
+            <MarkdownRenderer key={index} content={segment.markdown} />
+          ),
+        )}
       </div>
 
-      <ModuleNotes moduleId={mod.id} />
+      <div id="practica" className="scroll-mt-20 space-y-6">
+      {recommendedLab && (
+        <section aria-labelledby="recommended-lab-heading" className="rounded-xl border border-[#107C10]/25 bg-card px-6 py-5 shadow-fluent-1">
+          <h2 id="recommended-lab-heading" className="text-lg font-semibold text-foreground">
+            Práctica recomendada
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            Después de este módulo, realiza &ldquo;{recommendedLab.title}&rdquo; para convertir la teoría en evidencia.
+            Requisitos: {recommendedLab.prerequisites.join(", ")}. Tiempo estimado: {recommendedLab.minutes} min.
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            Si no tienes tenant, usa esta variante: {recommendedLab.tenantAlternative}
+          </p>
+          <Button asChild variant="outline" size="sm" className="mt-4 border-[#107C10]/30 text-[#107C10] hover:bg-[#EFF8EE]">
+            <Link href={recommendedLab.href}>
+              Realizar práctica recomendada
+              <ArrowRight className="ml-1 h-3.5 w-3.5" aria-hidden />
+            </Link>
+          </Button>
+        </section>
+      )}
 
       {interactivePractices.length > 0 && (
         <section aria-labelledby="interactive-practice-heading" className="rounded-xl border border-[#107C10]/25 bg-card px-6 py-5 shadow-fluent-1">
@@ -156,42 +226,9 @@ export default async function ModulePage({ params }: PageProps) {
         </section>
       )}
 
-      {/* ── Diagnóstico de caso aplicado (piloto) ───────────────────────────── */}
-      {caseQuestions.length > 0 && (
-        <section aria-labelledby="case-diagnosis-heading" className="rounded-xl border border-border bg-card px-6 py-6 shadow-fluent-1">
-          <h2 id="case-diagnosis-heading" className="text-lg font-semibold mb-1 flex items-center gap-2">
-            <BookOpen className="h-5 w-5 text-[#0078D4]" aria-hidden />
-            Diagnóstico de caso aplicado
-          </h2>
-          <p className="text-sm text-muted-foreground mb-5">
-            Preguntas de decisión basadas en el &ldquo;Caso Real de Negocio&rdquo; de este módulo. No afectan tu puntaje de quiz ni del simulador.
-          </p>
-          <QuizPanel questions={caseQuestions} moduleId={`caso-${mod.moduleId}`} saveScore={false} />
-        </section>
-      )}
+      </div>
 
-      {/* ── Quiz panel ───────────────────────────────────────────────────── */}
-      {recommendedLab && (
-        <section aria-labelledby="recommended-lab-heading" className="rounded-xl border border-[#107C10]/25 bg-card px-6 py-5 shadow-fluent-1">
-          <h2 id="recommended-lab-heading" className="text-lg font-semibold text-foreground">
-            Práctica recomendada
-          </h2>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Después de este módulo, realiza &ldquo;{recommendedLab.title}&rdquo; para convertir la teoría en evidencia.
-            Requisitos: {recommendedLab.prerequisites.join(", ")}. Tiempo estimado: {recommendedLab.minutes} min.
-          </p>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Si no tienes tenant, usa esta variante: {recommendedLab.tenantAlternative}
-          </p>
-          <Button asChild variant="outline" size="sm" className="mt-4 border-[#107C10]/30 text-[#107C10] hover:bg-[#EFF8EE]">
-            <Link href={recommendedLab.href}>
-              Realizar práctica recomendada
-              <ArrowRight className="ml-1 h-3.5 w-3.5" aria-hidden />
-            </Link>
-          </Button>
-        </section>
-      )}
-
+      <div id="comprueba" className="scroll-mt-20 space-y-6">
       {questions.length > 0 && (
         <section aria-labelledby="quiz-heading" className="rounded-xl border border-border bg-card px-6 py-6 shadow-fluent-1">
           <h2 id="quiz-heading" className="text-lg font-semibold mb-5 flex items-center gap-2">
@@ -201,6 +238,25 @@ export default async function ModulePage({ params }: PageProps) {
           <QuizPanel questions={questions} moduleId={mod.moduleId} />
         </section>
       )}
+
+      {/* ── Diagnóstico de caso aplicado: plegado, no puntúa ─────────────── */}
+      {caseQuestions.length > 0 && (
+        <details className="rounded-xl border border-border bg-card px-6 py-4 shadow-fluent-1">
+          <summary className="cursor-pointer text-base font-semibold">
+            Diagnóstico de caso aplicado <span className="text-sm font-normal text-muted-foreground">· opcional, {caseQuestions.length} preguntas</span>
+          </summary>
+          <section aria-labelledby="case-diagnosis-heading" className="mt-4">
+            <h2 id="case-diagnosis-heading" className="sr-only">Diagnóstico de caso aplicado</h2>
+            <p className="text-sm text-muted-foreground mb-5">
+              Preguntas de decisión basadas en el &ldquo;Caso Real de Negocio&rdquo; de este módulo. No afectan tu puntaje de quiz ni del simulador.
+            </p>
+            <QuizPanel questions={caseQuestions} moduleId={`caso-${mod.moduleId}`} saveScore={false} />
+          </section>
+        </details>
+      )}
+      </div>
+
+      <ModuleNotes moduleId={mod.id} />
 
       {/* ── Prev / Next navigation ───────────────────────────────────────── */}
       <Separator />

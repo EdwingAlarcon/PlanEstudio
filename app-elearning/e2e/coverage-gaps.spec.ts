@@ -19,6 +19,8 @@ test.describe("Diagnóstico de caso aplicado", () => {
   test("registra tarjeta de repaso independiente del quiz normal y no afecta el puntaje del módulo", async ({ page }) => {
     await page.goto("/nivel/basico/modulo/introduccion-al-ecosistema-power-platform");
 
+    // El diagnóstico de caso es opcional y viene plegado.
+    await page.locator("summary", { hasText: "Diagnóstico de caso aplicado" }).click();
     await page.getByLabel("Diagnóstico de caso aplicado").getByRole("button", { name: "Iniciar evaluación" }).click();
     await page.getByRole("button", { name: /^A\./ }).click();
     await page.getByRole("button", { name: "Enviar respuesta" }).click();

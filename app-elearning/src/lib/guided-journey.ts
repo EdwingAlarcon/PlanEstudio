@@ -1,6 +1,7 @@
 import type { ModuleInfo, LabInfo, SearchDocument } from "./content";
 import type { ProfessionalRouteSlug } from "./professional-routes";
 import { CERTIFICATION_LEVEL_ORDER, LEVEL_MODULE_RANGE, LEVEL_ORDER, type LevelId } from "./i18n";
+import { getNextCurriculumModule, type CurriculumModule } from "./learning-path";
 
 export type OnboardingStage =
   | "new"
@@ -247,7 +248,9 @@ export function isFoundationActivityComplete(
     return onboarding.stage === "route_selected" || Boolean(onboarding.selectedRouteSlug && onboarding.selectedRouteSlug !== "foundations");
   }
   if (activity.type === "quiz") {
-    return onboarding.stage === "foundations_completed" || onboarding.stage === "role_exploration";
+    // Elegir ruta implica haber pasado el cierre de Fundamentos; sin esto el alumno quedaba
+    // atascado en el quiz para siempre después de elegir ruta.
+    return onboarding.stage === "foundations_completed" || onboarding.stage === "role_exploration" || onboarding.stage === "route_selected";
   }
   if (activity.moduleId) {
     return completedModules.includes(`basico-${activity.moduleId}`);
@@ -298,6 +301,7 @@ export function getNextBestAction(
   completedModules: string[],
   completedLabs: string[],
   onboarding: OnboardingState,
+  path?: { curriculum: CurriculumModule[]; routeModuleIds?: number[]; routeTitle?: string },
 ): NextBestAction {
   const inProgress = FOUNDATION_ACTIVITIES.find((activity) => activity.id === onboarding.currentActivityId);
   if (inProgress && !isFoundationActivityComplete(inProgress, completedModules, completedLabs, onboarding)) {
@@ -311,9 +315,43 @@ export function getNextBestAction(
     };
   }
 
-  const next = FOUNDATION_ACTIVITIES.find((activity) =>
+  const pending = FOUNDATION_ACTIVITIES.find((activity) =>
     !isFoundationActivityComplete(activity, completedModules, completedLabs, onboarding)
-  ) ?? FOUNDATION_ACTIVITIES[FOUNDATION_ACTIVITIES.length - 1]!;
+  );
+
+  // Fundamentos terminados: seguir por la ruta elegida o por la cadena de certificación.
+  if (!pending && path) {
+    const mod = getNextCurriculumModule(path.curriculum, completedModules, path.routeModuleIds);
+    if (mod) {
+      const routeName = path.routeTitle ?? "Cadena de certificación";
+      return {
+        activity: {
+          id: `module-${mod.key}`,
+          step: FOUNDATION_ACTIVITIES.length + 1,
+          title: `Módulo ${mod.moduleId}: ${mod.title}`,
+          type: "module",
+          requirement: "required",
+          minutes: mod.minutes,
+          href: mod.href,
+          moduleId: mod.moduleId,
+          prerequisites: [],
+          access: "Tu ambiente del curso.",
+          evidence: "Criterios de validación del módulo y su evaluación.",
+          tenantAlternative: "Cada módulo indica su variante sin tenant cuando existe.",
+          outcome: "Completas el siguiente módulo de tu recorrido.",
+        },
+        reason: path.routeTitle
+          ? `Es el primer módulo pendiente de tu ruta "${path.routeTitle}".`
+          : "Es el primer módulo pendiente en orden de certificación (Básico → Intermedio → Avanzado → Arquitecto).",
+        time: `${mod.minutes} min`,
+        route: routeName,
+        prerequisites: [],
+        cta: "Ir al módulo",
+      };
+    }
+  }
+
+  const next = pending ?? FOUNDATION_ACTIVITIES[FOUNDATION_ACTIVITIES.length - 1]!;
 
   return {
     activity: next,

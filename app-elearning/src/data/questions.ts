@@ -9248,7 +9248,7 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       "Copilot Studio, que reemplaza por completo al dispatcher humano"
       ],
       answer: [0],
-      explanation: "Universal Resource Scheduling (URS) es el motor compartido detrás del Schedule Board; también lo usan Customer Service (reservar salas/agentes) y Project Operations, no es exclusivo de Field Service.",
+      explanation: "Universal Resource Scheduling (URS) es el motor compartido detrás del Schedule Board; también lo usan Customer Service (reservar casos a representantes) y Project Operations (asignar consultores a proyectos), no es exclusivo de Field Service.",
     },
     {
       type: "single",
@@ -9441,13 +9441,13 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "single",
       prompt: "Un stakeholder pide mostrar el saldo de inventario de un producto dentro de una Opportunity de Sales, sin duplicar el dato en Dataverse. ¿Qué mecanismo aplica mejor?",
       options: [
-      "Virtual tables, porque solo se necesita lectura en tiempo real sin duplicar ni escribir el dato",
+      "Virtual tables, porque basta con trabajar sobre el dato de F&O en tiempo real sin copiarlo a Dataverse",
       "Dual-write, porque siempre es la opción por defecto para cualquier integración con F&O",
       "Data Management Framework, porque es una carga masiva puntual",
       "Ninguno de los tres — Power Platform no puede mostrar datos de F&O bajo ninguna circunstancia"
       ],
       answer: [0],
-      explanation: "Cuando solo se necesita leer datos de F&O sin escribir ni duplicarlos, las virtual tables son la opción correcta — dual-write implicaría una réplica sincronizada innecesaria y DMF es para cargas por lotes, no lectura en tiempo real.",
+      explanation: "Las virtual tables trabajan sobre el dato de F&O sin duplicarlo (admiten lectura y también create, update y delete); dual-write implicaría una réplica sincronizada innecesaria y DMF es para cargas por lotes, no para consulta en tiempo real.",
     },
     {
       type: "single",
@@ -9580,13 +9580,13 @@ const MODULE_QUESTIONS: Record<number, RawQuestion[]> = {
       type: "single",
       prompt: "¿Qué elemento es indispensable antes de activar un forecast real en Dynamics 365 Sales?",
       options: [
-      "Jerarquía comercial, periodos/cuotas y usuarios con licencia/configuración de Sales",
+      "Jerarquía comercial (campo Manager o territorios), periodos y usuarios con licencia de Sales; la cuota se sube después de activar",
       "Un flujo de escritorio de Power Automate",
       "Un Agreement de Field Service",
       "Una virtual table de inventario"
       ],
       answer: [0],
-      explanation: "Forecasting real requiere jerarquía, periodos, cuotas y configuración en un ambiente/licencia de Dynamics 365 Sales.",
+      explanation: "Antes de activar se definen jerarquía y periodos en un ambiente con licencia de Dynamics 365 Sales; la cuota es una columna Simple que se carga con la plantilla de Excel una vez activo el forecast.",
     },
     {
       type: "single",

@@ -1,173 +1,117 @@
 "use client";
 
-import type { ReactNode } from "react";
 import Link from "next/link";
-import { ArrowRight, Compass, FlaskConical, Map, PlayCircle, RotateCcw, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { FOUNDATION_ACTIVITIES, FOUNDATION_ROUTE, buildWeeklyPlan, getFoundationProgress, getNextBestAction, getRecommendationReason } from "@/lib/guided-journey";
+import { FOUNDATION_ROUTE, getFoundationProgress } from "@/lib/guided-journey";
 import { useOnboardingStore } from "@/lib/onboarding-store";
 import { useProgressStore } from "@/lib/progress";
+import { useCurriculum, useNextBestAction } from "@/components/guided/use-next-best-action";
 
+// Bloque principal del inicio: responde "¿por dónde empiezo?" y "¿qué sigue?" con UNA acción.
+// Rediseñado el 2026-11-11: antes competían tres "continuar" (tarjeta de último módulo, siguiente
+// acción y botón de la barra), cuatro entradas, un plan semanal genérico y dos textos explicativos.
 export function GuidedHomeClient() {
   const onboarding = useOnboardingStore();
   const completedModules = useProgressStore((s) => s.completedModules);
   const completedLabs = useProgressStore((s) => s.completedLabs);
-  const progress = getFoundationProgress(completedModules, completedLabs, onboarding);
-  const nextAction = getNextBestAction(completedModules, completedLabs, onboarding);
+  const lastVisited = useProgressStore((s) => s.lastVisited);
+  const curriculum = useCurriculum();
+  const nextAction = useNextBestAction();
+  const foundations = getFoundationProgress(completedModules, completedLabs, onboarding);
   const hasStarted = Boolean(onboarding.startedAt) || completedModules.length > 0 || completedLabs.length > 0;
-  const weeklyPlan = buildWeeklyPlan(onboarding.answers.availability, nextAction);
+
+  const lastModule = lastVisited ? curriculum.find((mod) => mod.key === lastVisited) : undefined;
+  const showLastVisited = lastModule && lastModule.href !== nextAction.activity.href;
+  const certificationTotal = curriculum.filter((mod) => ["basico", "intermedio", "avanzado", "arquitecto"].includes(mod.levelId)).length;
+  const certificationDone = curriculum.filter((mod) =>
+    ["basico", "intermedio", "avanzado", "arquitecto"].includes(mod.levelId) && completedModules.includes(mod.key)
+  ).length;
+  const inFoundations = foundations.completed < foundations.total;
 
   return (
-    <section aria-labelledby="guided-heading" className="rounded-xl border border-border bg-card p-5 shadow-fluent-1 md:p-6">
-      <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-        <div className="space-y-5">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge className="border-0 bg-[#0078D4] text-white">
-              {onboarding.navigationMode === "guided" ? "Modo guiado" : "Explorar libremente"}
-            </Badge>
-          </div>
-          <p className="text-xs leading-relaxed text-muted-foreground">
-            {onboarding.navigationMode === "guided"
-              ? "Modo guiado: te sugerimos siempre la siguiente actividad, pero puedes cambiar de ruta cuando quieras."
-              : "Explorar libremente: eliges tú qué módulo o lab abrir a continuación, sin una sugerencia fija."}
-            {" "}
-            La recomendación es determinista: las mismas respuestas te llevan siempre a la misma ruta.
-          </p>
+    <section aria-labelledby="guided-heading" className="space-y-5">
+      <div className="space-y-2">
+        <h1 id="guided-heading" className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+          {hasStarted ? "Tu siguiente paso" : "Empieza aquí"}
+        </h1>
+        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          {hasStarted
+            ? "Calculado con tu progreso guardado en este navegador. Termina este paso y la plataforma te propone el siguiente."
+            : "Aprenderás Power Platform y Dynamics 365 haciendo, en tu propio ambiente de Microsoft. No necesitas elegir especialización: empieza por los fundamentos."}
+        </p>
+      </div>
 
-          <div className="space-y-2">
-            <h1 id="guided-heading" className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-              {hasStarted ? "Continúa donde quedaste" : "Empieza aquí"}
-            </h1>
-            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-              {hasStarted
-                ? "Tu siguiente acción está calculada sobre tu ruta activa y tu progreso local. Tu progreso no se pierde si cambias de objetivo."
-                : "No necesitas elegir una especialización todavía. Completa los fundamentos y después te ayudaremos a escoger una ruta."}
+      <div className="rounded-xl border border-[#0078D4]/25 bg-card p-5 shadow-fluent-1 md:p-6">
+        <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+          <div className="min-w-0 space-y-1.5">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#0078D4] dark:text-[#4DB8FF]">
+              {nextAction.route} · {nextAction.time}
             </p>
+            <h2 className="text-xl font-semibold text-foreground">{nextAction.activity.title}</h2>
+            <p className="text-sm leading-relaxed text-muted-foreground">{nextAction.reason}</p>
           </div>
-
-          <div className="rounded-lg border border-[#0078D4]/20 bg-[#EFF6FC] p-4 dark:border-[#4DB8FF]/20 dark:bg-[rgba(0,120,212,0.10)]">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-              <div className="min-w-0 space-y-2">
-                <p className="text-xs font-semibold uppercase tracking-widest text-[#0078D4] dark:text-[#4DB8FF]">
-                  Siguiente acción
-                </p>
-                <h2 className="text-lg font-semibold text-foreground">{nextAction.activity.title}</h2>
-                <p className="text-sm leading-relaxed text-muted-foreground">{nextAction.reason}</p>
-                <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
-                  <span>{nextAction.time}</span>
-                  <span aria-hidden>·</span>
-                  <span>{nextAction.activity.type === "lab" ? "Práctica guiada" : "Actividad guiada"}</span>
-                </div>
-              </div>
-              <Button asChild className="w-full shrink-0 bg-[#0078D4] text-white hover:bg-[#106EBE] sm:w-auto">
-                <Link href={nextAction.activity.href} onClick={() => onboarding.setCurrentActivity(nextAction.activity.id)}>
-                  {hasStarted ? nextAction.cta : "Comenzar desde cero"}
-                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
-                </Link>
-              </Button>
-            </div>
-          </div>
-
-          {!hasStarted && (
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              ¿Nunca tocaste Power Platform? Antes del Módulo 1, lee la{" "}
-              <Link href="/recursos/ruta-cero-absoluta" className="font-medium text-[#0078D4] underline-offset-2 hover:underline dark:text-[#4DB8FF]">
-                Ruta cero absoluta
-              </Link>
-              : solo lectura, sin cuenta ni ambiente.
-            </p>
-          )}
-
-          <div className="grid gap-3 sm:grid-cols-4" aria-label="Entradas iniciales">
-            <EntryButton title="Empiezo desde cero" href="/mi-ruta" active icon={<Sparkles className="h-4 w-4" />} onClick={() => onboarding.startOnboarding("desde-cero")} />
-            <EntryButton title="Ya conozco lo básico" href="/mi-ruta" icon={<Compass className="h-4 w-4" />} onClick={() => onboarding.startOnboarding("basico")} />
-            <EntryButton title="Quiero aprender para un rol" href="/mi-ruta#roles" icon={<Map className="h-4 w-4" />} onClick={() => onboarding.startOnboarding("rol")} />
-            <EntryButton title="Practicar o entrevistas" href="/simulador" icon={<PlayCircle className="h-4 w-4" />} onClick={() => onboarding.startOnboarding("practica")} />
-          </div>
+          <Button asChild size="lg" className="w-full shrink-0 bg-[#0078D4] text-white hover:bg-[#106EBE] md:w-auto">
+            <Link
+              href={nextAction.activity.href}
+              onClick={() => {
+                if (!onboarding.startedAt) onboarding.startOnboarding("desde-cero");
+                onboarding.setCurrentActivity(nextAction.activity.id);
+              }}
+            >
+              {hasStarted ? nextAction.cta : "Comenzar desde cero"}
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
+            </Link>
+          </Button>
         </div>
 
-        <aside className="space-y-4" aria-label="Resumen de ruta inicial">
-          <div className="rounded-lg border border-border bg-background p-4">
-            <div className="mb-3 flex items-center justify-between gap-3">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Ruta activa</p>
-                <h2 className="text-base font-semibold text-foreground">{FOUNDATION_ROUTE.title}</h2>
-              </div>
-              <span className="text-sm font-medium text-[#0078D4] dark:text-[#4DB8FF]">
-                {progress.completed}/{progress.total}
+        <div className="mt-5 grid gap-4 border-t border-border pt-4 sm:grid-cols-2">
+          <div>
+            <div className="mb-1.5 flex justify-between text-xs text-muted-foreground">
+              <span>{inFoundations ? FOUNDATION_ROUTE.title : "Cadena de certificación (Niveles 1 a 4)"}</span>
+              <span className="tabular-nums">
+                {inFoundations ? `${foundations.completed}/${foundations.total}` : `${certificationDone}/${certificationTotal} módulos`}
               </span>
             </div>
-            <Progress value={progress.percentage} className="h-2" />
-            <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-              {FOUNDATION_ROUTE.duration} · {FOUNDATION_ROUTE.sessionLength}. Primera práctica: {FOUNDATION_ACTIVITIES[2]?.title}.
-            </p>
+            <Progress
+              value={inFoundations ? foundations.percentage : certificationTotal ? Math.round((certificationDone / certificationTotal) * 100) : 0}
+              className="h-1.5"
+            />
           </div>
-
-          <div className="rounded-lg border border-border bg-background p-4">
-            <div className="mb-3 flex items-center gap-2">
-              <FlaskConical className="h-4 w-4 text-[#107C10]" aria-hidden />
-              <h2 className="text-sm font-semibold text-foreground">Mi plan de esta semana</h2>
-            </div>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              {weeklyPlan.map((item) => (
-                <li key={item} className="flex gap-2">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#107C10]" aria-hidden />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-3 text-xs text-muted-foreground">
-              Ajustado a {onboarding.answers.availability}. Puedes cambiarlo en Mi ruta.
-            </p>
-          </div>
-
-          <div className="rounded-lg border border-border bg-background p-4">
-            <div className="mb-2 flex items-center gap-2">
-              <RotateCcw className="h-4 w-4 text-muted-foreground" aria-hidden />
-              <h2 className="text-sm font-semibold text-foreground">Puedes ignorar por ahora</h2>
-            </div>
-            <p className="text-xs leading-relaxed text-muted-foreground">
-              Rutas avanzadas, incident labs, capstones y especializaciones D365/IA. Siguen accesibles en Explorar todo.
-            </p>
-            <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-              Esta recomendación se basa en tus respuestas y progreso local; {getRecommendationReason(onboarding.answers)}
-            </p>
-          </div>
-        </aside>
+          {showLastVisited ? (
+            <Link href={lastModule.href} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+              <BookOpen className="h-4 w-4 shrink-0" aria-hidden />
+              <span className="min-w-0 truncate">
+                Continuar donde lo dejaste: <span className="font-medium text-foreground">{lastModule.title}</span>
+              </span>
+            </Link>
+          ) : !hasStarted ? (
+            <Link
+              href="/mi-ruta"
+              onClick={() => onboarding.startOnboarding("basico")}
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+            >
+              <Compass className="h-4 w-4 shrink-0" aria-hidden />
+              <span>¿Ya tienes experiencia? <span className="font-medium text-foreground">Ajusta tu ruta en 2 minutos</span></span>
+            </Link>
+          ) : null}
+        </div>
       </div>
-    </section>
-  );
-}
 
-function EntryButton({
-  title,
-  href,
-  icon,
-  active = false,
-  onClick,
-}: {
-  title: string;
-  href: string;
-  icon: ReactNode;
-  active?: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className={
-        active
-          ? "flex min-h-24 flex-col justify-between rounded-lg border-2 border-[#0078D4] bg-[#EFF6FC] p-3 text-sm font-semibold text-[#005A9E] shadow-fluent-1 dark:bg-[rgba(0,120,212,0.12)] dark:text-[#4DB8FF]"
-          : "flex min-h-24 flex-col justify-between rounded-lg border border-border bg-background p-3 text-sm font-medium text-foreground transition-colors hover:border-[#0078D4]/40"
-      }
-    >
-      <span className="flex h-8 w-8 items-center justify-center rounded-md bg-card text-[#0078D4] dark:text-[#4DB8FF]">
-        {icon}
-      </span>
-      <span>{title}</span>
-    </Link>
+      {!hasStarted && (
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          ¿Nunca tocaste Power Platform? Antes del Módulo 1 lee la{" "}
+          <Link href="/recursos/ruta-cero-absoluta" className="font-medium text-[#0078D4] underline-offset-2 hover:underline dark:text-[#4DB8FF]">
+            Ruta cero absoluta
+          </Link>{" "}
+          (solo lectura, sin cuenta). Si tu tenant está en español, elige <strong>Interfaz de tu ambiente: Español</strong> arriba
+          y los módulos te mostrarán los menús con su nombre en español.{" "}
+          <Link href="/mi-ruta" onClick={() => onboarding.startOnboarding("desde-cero")} className="font-medium text-[#0078D4] underline-offset-2 hover:underline dark:text-[#4DB8FF]">
+            Empiezo desde cero: ver el plan de fundamentos
+          </Link>
+        </p>
+      )}
+    </section>
   );
 }
