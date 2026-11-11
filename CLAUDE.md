@@ -227,6 +227,22 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
   comprobar CI con una sola consulta (no `gh run watch`). Validar con `npm run build:pages` o `npm run build` y luego
   `npm run e2e` **en serie**, no en paralelo (ambos usan `.next`).
 
+## Modelo y esfuerzo por tipo de trabajo (preferencia del usuario, 2026-11-11)
+
+| Actividad | Modelo | Esfuerzo |
+|---|---|---|
+| Auditoría integral | Fable 5.2 | High |
+| Arquitectura de información | Fable 5.2 | High |
+| Rediseño UX/UI | Fable 5.2 | High |
+| Reorganización pedagógica | Fable 5.2 | High |
+| Desarrollo habitual | Opus 5.5 | Medium |
+| Correcciones pequeñas | Opus 5.5 | Low |
+| Problemas técnicos complejos | Fable 5.2 | XHigh |
+
+Al delegar en sub-agentes, pasa `model` y `effort` según esta tabla (Fable 5.2 = `fable`, Opus 5.5 = `opus`). Si la
+sesión principal corre con otro modelo o esfuerzo que el que pide la tarea, avisa al usuario para que lo cambie con
+`/model` antes de empezar.
+
 ## What This Repository Is
 
 A structured, progressive learning plan for Microsoft Power Platform and Dynamics 365 — from beginner to Solution Architect. The repo has two parallel surfaces:
