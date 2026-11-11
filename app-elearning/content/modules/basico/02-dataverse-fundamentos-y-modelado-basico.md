@@ -55,9 +55,9 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 
 ### 👨‍💻 Actividades Prácticas
 
-> **Cómo está organizado este módulo:** alternas una idea corta, una práctica de pocos minutos y un dato real de tu propio ambiente. Los pasos de siempre (Práctica 2.1 a 2.5) siguen ahí, ahora dentro de tres bloques. Cierras con un reto en el que ya no te digo las tablas ni las columnas. Las microprácticas no necesitan tenant; las prácticas reales sí (tu ambiente Developer del Módulo 1).
+> **Cómo está organizado este módulo:** alternas una idea corta, una práctica de pocos minutos y un dato real de tu propio ambiente. Los pasos de siempre (Práctica 2.1 a 2.5) siguen ahí, ahora dentro de tres bloques. Cierras con un reto en el que ya no te digo las tablas ni las columnas. Las microprácticas no necesitan tenant; las prácticas reales sí (tu ambiente del curso del Módulo 1).
 
-> **Antes de empezar:** los nombres de botones y menús de este módulo son los de la interfaz en inglés y, donde Microsoft Learn los documenta, llevan su enlace. Power Apps cambia de vez en cuando su interfaz: si un botón no aparece con ese nombre, búscalo en la misma zona de la pantalla (la barra de comandos de arriba o el panel de la derecha) por lo que hace, no por su texto exacto. Siempre trabajas en [make.powerapps.com](https://make.powerapps.com), con tu ambiente Developer seleccionado arriba a la derecha.
+> **Antes de empezar:** los nombres de botones y menús de este módulo son los de la interfaz en inglés y, donde Microsoft Learn los documenta, llevan su enlace. Power Apps cambia de vez en cuando su interfaz: si un botón no aparece con ese nombre, búscalo en la misma zona de la pantalla (la barra de comandos de arriba o el panel de la derecha) por lo que hace, no por su texto exacto. Siempre trabajas en [make.powerapps.com](https://make.powerapps.com), con tu ambiente del curso seleccionado arriba a la derecha.
 
 ## 🧩 Microlección 1 — Tablas y columnas: elegir el tipo correcto
 
@@ -91,6 +91,8 @@ Dominar el modelado de datos en Dataverse para soportar aplicaciones de negocio.
 8. Marca **Set as your preferred solution**. Así, lo que crees aunque no estés dentro de la solución también se guarda en ella.
 9. Deja **Version** como viene y selecciona el botón de abajo del panel, **Create** o **Save**: Learn usa los dos nombres para este mismo panel ([Learn: crear una solución](https://learn.microsoft.com/power-apps/maker/data-platform/create-solution)).
 10. Abre la solución **Solicitudes TI** haciendo clic en su nombre. A partir de aquí, **trabaja siempre dentro de ella**.
+
+> **Por qué todo va dentro de la solución:** tu ambiente del curso (un Trial, en el caso general) caduca. Lo que está en tu solución lo puedes exportar y llevar a un ambiente nuevo; lo que dejes fuera se pierde cuando el ambiente se elimine. Al terminar este módulo harás tu primera exportación.
 
 **Paso 1 — Crear la tabla "Solicitud TI"**
 
@@ -308,6 +310,18 @@ Crea manualmente 10 registros de Solicitudes. Abre la tabla **Solicitud TI** y, 
 | Regla 2: el mensaje de error que viste al guardar una Resuelta sin Fecha Resolución (puede verse con otro formato, pero debe incluir el texto de tu regla) | ___ |
 | Cuántas de tus 10 solicitudes tienen Estado = Nueva o En Proceso (cuéntalas en el editor de filas). Son las que mostrará la vista "Solicitudes Pendientes Atención"; la verás funcionando dentro de una app en el Lab 04 | ___ |
 
+##### 💾 Rutina de cierre: exporta tu solución (5 min, al terminar cada módulo o sesión)
+
+Desde hoy, cada vez que termines un módulo o una sesión de práctica, exporta tu solución y guárdala **fuera** del ambiente. Es lo que te permite seguir estudiando cuando tu ambiente Trial venza ([Entornos y trials](/recursos/entornos-y-trials)).
+
+1. Abre **Solutions** y selecciona **Solicitudes TI** (sin abrirla).
+2. En la barra de comandos selecciona **Export**. (La *Default Solution* no se puede exportar.)
+3. En el panel **Before you export**, selecciona **Publish all changes** y luego **Next**.
+4. En **Export as** elige **Unmanaged** y selecciona **Export**.
+5. Cuando se descargue el `.zip`, renómbralo con la fecha y el módulo (por ejemplo `SolicitudesTI_2026-11-20_M02.zip`) y guárdalo en tu computadora o en tu nube personal. Conserva al menos las dos últimas versiones.
+
+> **Lo que no viaja en la solución:** las filas de datos (tus 10 solicitudes), las conexiones y el historial de ejecuciones. Cuando importes la solución en un ambiente nuevo (**Solutions** > **Import solution**), tendrás que volver a crear las conexiones y los datos de prueba. Si quieres conservar las filas, expórtalas a Excel antes de que venza el ambiente.
+
 ---
 
 ## 🔁 Reto de transferencia — El modelo de una biblioteca, sin pasos
@@ -408,6 +422,7 @@ Esta vez no te digo qué tablas ni columnas crear: aplica lo que viste a un nego
 - Captura de al menos una Business Rule configurada.
 - Captura de una vista personalizada con su filtro.
 - Conteo de registros de prueba cargados.
+- Nombre y fecha del `.zip` de tu solución exportada.
 
 ## ➡️ Siguiente práctica recomendada
 

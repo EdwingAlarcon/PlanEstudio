@@ -8,7 +8,7 @@ practiceMinutes: 180
 slug: "c-plugins-para-dataverse"
 lastVerified: "2026-11"
 ---
-*Lectura: 20-25 min · Con práctica: unos 180 min en tu entorno Developer (la primera vez, cuenta entre el doble y el triple: instalar herramientas, compilar y registrar lleva su tiempo). Las Microlecciones 1 y 4 no necesitan tenant; la 2 y la 3 sí.*
+*Lectura: 20-25 min · Con práctica: unos 180 min en tu ambiente del curso (la primera vez, cuenta entre el doble y el triple: instalar herramientas, compilar y registrar lleva su tiempo). Las Microlecciones 1 y 4 no necesitan tenant; la 2 y la 3 sí.*
 
 ### 🚧 Antes de comenzar: este módulo no es autosuficiente en programación
 
@@ -84,8 +84,8 @@ Desarrollar plugins C# robustos para ejecutar lógica de negocio compleja en el 
 
 1. En una terminal, ejecuta `pac tool prt`. La primera vez descarga la herramienta y luego la abre.
 2. En la ventana del Plugin Registration Tool, elige **+ Create new connection**.
-3. En el diálogo de inicio de sesión, elige **Office 365**, marca **Display list of available organizations** y pulsa **Login**. Inicia sesión con tu cuenta del entorno Developer.
-4. Si te muestra varias organizaciones, elige tu entorno Developer y pulsa **Login**.
+3. En el diálogo de inicio de sesión, elige **Office 365**, marca **Display list of available organizations** y pulsa **Login**. Inicia sesión con tu cuenta del ambiente del curso.
+4. Si te muestra varias organizaciones, elige tu ambiente del curso y pulsa **Login**.
 
 **Qué deberías ver:** una pestaña con el nombre de tu organización y un árbol de ensamblados registrados (puede estar casi vacío en un entorno nuevo).
 

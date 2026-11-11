@@ -31,7 +31,7 @@ equivalente — es más probable un cambio de release wave que un error del lab.
 Verificado en Microsoft Learn en noviembre de 2026. Sin un ambiente así este lab no es ejecutable;
 la alternativa en papel está en el [Módulo 60](/nivel/d365/modulo/finance-operations-procesos-erp).
 
-- **Tu ambiente Developer de Power Platform no sirve.** Learn indica que el tipo de ambiente
+- **Tu ambiente del curso no sirve.** Learn indica que el tipo de ambiente
   *Developer* no admite ninguna carga de Dynamics 365; F&O se instala en ambientes *Sandbox*,
   *Production* o *Trial (subscription-based)* y exige una licencia de F&O asignada
   ([Learn: Unified environment types and templates](https://learn.microsoft.com/power-platform/admin/unified-experience/unified-environment-types-and-templates)).
@@ -153,8 +153,8 @@ En el campo **Quantity** de los parámetros elige **Packing slip** para facturar
 
 ### Paso 4 — Cobro
 
-Ve a **Accounts receivable > Payments** y abre el diario de pagos de clientes (en inglés suele
-llamarse **Customer payment journal**; anota el nombre tal como aparece en tu ambiente). Como
+Ve a **Accounts receivable > Payments > Customer payment journal**
+([Learn: Customer payment overview](https://learn.microsoft.com/dynamics365/finance/cash-bank-management/tasks/customer-payment-overview)). Como
 alternativa, Learn describe la página **Enter customer payments** para registrar y liquidar cobros.
 
 - Registra el cobro de la factura contabilizada.

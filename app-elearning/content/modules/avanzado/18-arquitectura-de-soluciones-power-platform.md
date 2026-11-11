@@ -101,7 +101,7 @@ Un mismo sistema puede necesitar **varias** respuestas a la vez: el árbol se ap
 
 **¿Qué vas a aprender?** A leer la capacidad real de Dataverse de un tenant y a estimar si un diseño cabe en los topes de Power Platform requests antes de comprometerlo con el cliente.
 
-**¿Por qué existe esto?** Una arquitectura que funciona en DEV puede no caber en producción: una integración nocturna con un application user consume del pool **del tenant**, no de la licencia de nadie, y el almacenamiento de PROD sí cuenta contra la capacidad, mientras que tu Developer no. Learn lo dice claro: los ambientes **Developer**, **Trial**, de Teams, Preview y Support aparecen con **0 GB** y no cuentan contra la capacidad del tenant ([Learn: capacidad de Dataverse](https://learn.microsoft.com/power-platform/admin/capacity-storage)).
+**¿Por qué existe esto?** Una arquitectura que funciona en DEV puede no caber en producción: una integración nocturna con un application user consume del pool **del tenant**, no de la licencia de nadie, y el almacenamiento de PROD sí cuenta contra la capacidad, mientras que tu ambiente del curso (Trial o Developer) no. Learn lo dice claro: los ambientes **Developer**, **Trial**, de Teams, Preview y Support aparecen con **0 GB** y no cuentan contra la capacidad del tenant ([Learn: capacidad de Dataverse](https://learn.microsoft.com/power-platform/admin/capacity-storage)).
 
 **Ahora haz algo — antes de abrir el Admin Center (3 min):** escribe tu predicción: ¿cuántos GB de **Database** crees que consume tu DEV según el informe del tenant? Compárala al final del paso 3.
 
@@ -110,10 +110,10 @@ Un mismo sistema puede necesitar **varias** respuestas a la vez: el árbol se ap
 1. Entra al [Power Platform Admin Center](https://admin.powerplatform.microsoft.com) → en el panel de navegación, **Licensing** → en el panel **Licensing**, **Dataverse** (bajo **Products**). **Si no ves Licensing o te dice que no tienes permiso**, necesitas un rol de Tenant administrator, Power Platform administrator o Dynamics 365 administrator: salta a la variante en papel de abajo.
 2. En el tile **Usage per storage type**, anota para **Database**, **File** y **Log** lo que el tenant tiene contratado (**Total prepaid entitlement**) y lo que consume (**Total consumption**). **Si un tenant de prueba muestra 0 o casi nada**, es normal: anótalo igual, es tu dato.
 3. Selecciona **See Dataverse capacity per license**: muestra cómo se calculó la capacidad (capacidad base y lo que suma cada licencia). Anota qué licencias aparecen. **Si la lista está vacía**, anota "sin licencias que acumulen capacidad".
-4. En el tile **Top environment consuming storage**, selecciona **See all environments** y busca tu DEV. **Qué deberías ver:** tu ambiente Developer con **0 GB**. Selecciona su nombre para abrir su detalle y busca la sección **Consumption per table**: anota las dos tablas que más ocupan (casi siempre son tablas de sistema, no las tuyas).
+4. En el tile **Top environment consuming storage**, selecciona **See all environments** y busca tu DEV. **Qué deberías ver:** tu ambiente del curso con **0 GB**. Selecciona su nombre para abrir su detalle y busca la sección **Consumption per table**: anota las dos tablas que más ocupan (casi siempre son tablas de sistema, no las tuyas).
 5. **Cálculo de peticiones (papel, 5 min):** el cliente tendrá 150 usuarios con **Power Apps Premium** y una integración nocturna con un **application user** que hará unas 30.000 peticiones al día; el tenant no tiene licencias de Dynamics 365. Con la tabla de Learn ([límites de peticiones](https://learn.microsoft.com/power-platform/admin/api-request-limits-allocations)), responde: ¿cuántas peticiones por 24 horas tiene cada usuario? ¿De qué pool sale la integración y cuánto tiene ese pool? ¿Cabe?
 
-**Variante en papel (sin permisos de administrador):** haz solo el paso 5 y, para los pasos 2-4, escribe qué valores esperarías ver en un tenant de empresa y por qué un Developer aparece con 0 GB.
+**Variante en papel (sin permisos de administrador):** haz solo el paso 5 y, para los pasos 2-4, escribe qué valores esperarías ver en un tenant de empresa y por qué un Trial o un Developer aparece con 0 GB.
 
 **Evidencia a reportar:**
 

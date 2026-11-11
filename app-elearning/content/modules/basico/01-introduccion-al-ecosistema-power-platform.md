@@ -34,7 +34,7 @@ lastVerified: "2026-11"
 Comprender la arquitectura, componentes y casos de uso de Power Platform.
 
 ### ✅ Qué vas a lograr hoy
-- Tener tu propio ambiente Developer de Power Platform funcionando.
+- Tener tu propio ambiente del curso (Trial con Dataverse, o el que te dé tu organización) funcionando, y saber cuándo vence.
 - Explorar Power Apps, Dataverse y sus conectores por primera vez, sin construir nada complejo todavía.
 - Crear 5 registros de prueba en una tabla ya existente — tu primera interacción real con Dataverse.
 
@@ -65,7 +65,7 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 | **Licencia por usuario** | El permiso de uso que se paga por cada persona que usa el producto. |
 | **Region** | El país o zona donde Microsoft guarda los datos de tu ambiente. |
 | **Security group** | Una lista de personas de tu organización. Si se asigna a un ambiente, solo esas personas pueden entrar. |
-| **Ambiente Developer administrado / no administrado** | *Administrado* (managed) = tu organización le aplica sus reglas de control (Managed Environments). *No administrado* (unmanaged) = sin esas reglas. Desde el 15 de noviembre de 2026 solo se crean Developer administrados. Ojo: en el Módulo 2 verás *managed/unmanaged* para las **soluciones**, y ahí significa otra cosa (si la solución se puede editar o no). |
+| **Ambiente gestionado / no gestionado** | *Gestionado* (managed, también "administrado") = tu organización le aplica sus reglas de control (Managed Environments). *No gestionado* (unmanaged) = sin esas reglas. Desde el 15 de noviembre de 2026 los ambientes Developer solo se crean gestionados y los asigna un administrador. Ojo: en el Módulo 2 verás *managed/unmanaged* para las **soluciones**, y ahí significa otra cosa (si la solución se puede editar o no). |
 | **API** | La "puerta" por la que un programa lee o escribe datos en otro, sin usar la pantalla. |
 | **ALM** | *Application Lifecycle Management*: la forma ordenada de llevar lo que construyes de desarrollo a pruebas y luego a producción. |
 | **CoE** | *Center of Excellence*: el equipo y las herramientas con que una empresa controla y apoya el uso de Power Platform. |
@@ -73,7 +73,7 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 ### 📖 Conceptos Clave (esenciales para hoy)
 - **Arquitectura de Power Platform**: Componentes principales y su interrelación
 - **Microsoft Dataverse**: la base de datos de Power Platform, donde viven las tablas que usan tus apps y flujos (antes se llamaba *Common Data Service*).
-- **Ambientes (Environments)**: espacios separados para trabajar. Tipos: *Production* (producción, lo que usa la gente de verdad), *Sandbox* (pruebas), *Developer* (tu espacio personal de desarrollo) y *Trial* (prueba que caduca).
+- **Ambientes (Environments)**: espacios separados para trabajar. Tipos: *Production* (producción, lo que usa la gente de verdad), *Sandbox* (pruebas), *Developer* (espacio personal de desarrollo; desde noviembre de 2026 solo gestionado y asignado por un administrador) y *Trial* (prueba que caduca: el que usa este curso como camino principal).
 - **Conectores**: piezas que conectan Power Platform con otros servicios. *Standard* (estándar, incluidos en la licencia básica), *Premium* (requieren licencia de pago) y *Custom* (personalizados, los creas tú para tu propio sistema).
 - **Power Platform Admin Center**: el panel de administración donde se crean y gestionan los ambientes y sus recursos.
 
@@ -87,22 +87,22 @@ Comprender la arquitectura, componentes y casos de uso de Power Platform.
 
 **¿Qué vas a aprender?** Qué es un ambiente, por qué trabajas en uno propio y no en el que ya existe, y cómo ver cuál tienes activo.
 
-**¿Por qué existe esto?** Todo lo que construyas vive dentro de un ambiente. Si trabajas en el ambiente *default* (el que comparte toda la organización), tus pruebas se mezclan con las de todos y no puedes controlarlas. Un ambiente Developer propio es tu espacio aislado: lo que rompes ahí no afecta a nadie.
+**¿Por qué existe esto?** Todo lo que construyas vive dentro de un ambiente. Si trabajas en el ambiente *default* (el que comparte toda la organización), tus pruebas se mezclan con las de todos y no puedes controlarlas. Un ambiente propio para el curso es tu espacio aislado: lo que rompes ahí no afecta a nadie.
 
 **Ejemplo pequeño:** la misma organización tiene el ambiente `Contoso (default)` y el tuyo, `DEV-TuNombre`. Una tabla creada en uno no aparece en el otro.
 
-> **Lo mínimo para este módulo:** una cuenta de trabajo o estudio y un ambiente de tipo Developer (o Trial) con Dataverse. El trial de Dynamics 365 es opcional: puedes saltarte ese paso y volver cuando llegues a los módulos de Dynamics 365. El Power Platform Admin Center está en https://admin.powerplatform.microsoft.com.
+> **Lo mínimo para este módulo:** una cuenta de trabajo o estudio y tu **ambiente del curso** con Dataverse: un ambiente **Trial** que creas tú, o un Developer gestionado o Sandbox que te dé tu organización. El trial de Dynamics 365 es opcional: puedes saltarte ese paso y volver cuando llegues a los módulos de Dynamics 365. El Power Platform Admin Center está en https://admin.powerplatform.microsoft.com.
 
 **Práctica real en tu entorno (20-60 min; el tiempo depende de Microsoft, no de ti):**
 
-> **⚠️ Cambio de Microsoft en curso (verificado en Microsoft Learn, octubre de 2026):** desde el **15 de noviembre de 2026** registrarse en el Power Apps Developer Plan ya no crea un ambiente y ya no se pueden crear ambientes Developer "no administrados" por ninguna vía (tampoco desde el Admin Center); solo quedan los Developer *administrados*. Los ambientes Developer no administrados que ya existan se suspenden desde el **15 de diciembre de 2026** y se borran desde el **15 de enero de 2027**. Si haces este setup antes del 15 de noviembre, sirve para este módulo, pero exporta tus soluciones antes del 15 de diciembre si quieres conservarlas (más abajo te digo cómo). Detalle: [Cambios importantes en Power Platform](https://learn.microsoft.com/power-platform/important-changes-coming).
+> **⚠️ Tu ambiente del curso es temporal, y debes saberlo desde hoy.** Desde el **15 de noviembre de 2026**, registrarse en el Power Apps Developer Plan ya no crea un ambiente Developer gratuito ([Developer Plan](https://learn.microsoft.com/power-platform/developer/plan), [Important changes coming](https://learn.microsoft.com/power-platform/important-changes-coming)). Por eso el camino principal del curso es un ambiente **Trial (standard) con Dataverse**: dura **30 días** y admite **una sola extensión de 30 días** que solo puedes pedir en su última semana; después se deshabilita y se elimina ([Trial environments](https://learn.microsoft.com/power-platform/admin/trial-environments)). Lo hace viable un hábito: **todo lo que construyas va dentro de tu solución y la exportas al terminar cada módulo o sesión**; cuando el Trial venza, creas otro ambiente e importas la solución. El detalle, con fechas, límites y el paso a paso de exportar e importar, está en [Entornos y trials](/recursos/entornos-y-trials).
 
 **Paso 1 — Consigue una cuenta de trabajo o estudio (no sirve tu correo personal).**
 
 Microsoft no permite registrarse con una cuenta personal como Gmail, Outlook.com o Hotmail. Elige el caso que se parezca al tuyo:
 
 - **Tienes correo de empresa o universidad:** úsalo. Pasa al "Paso 1B" para saber si tienes permisos de administración.
-- **No tienes ninguna cuenta de trabajo:** crea tu propio tenant de prueba:
+- **No tienes correo profesional ni educativo:** Learn indica que puedes crear una **cuenta gratuita de Microsoft Entra** para registrarte ([Sign up for Power Apps](https://learn.microsoft.com/power-apps/maker/signup-for-powerapps)). Inténtalo por esa vía; no está verificado qué recibe exactamente esa cuenta. Otra vía, que ya usaba este curso, es crear tu propio tenant de prueba:
   1. Abre https://www.microsoft.com/microsoft-365/try.
   2. Elige un plan de empresa con prueba gratuita de un mes.
   3. Sigue el asistente. Al terminar tendrás una cuenta del tipo `tunombre@tuorganizacion.onmicrosoft.com` y tendrás permisos de **administración** de ese tenant.
@@ -114,47 +114,52 @@ Microsoft no permite registrarse con una cuenta personal como Gmail, Outlook.com
 
 Los tienes si tu cuenta tiene uno de estos roles: **Global Administrator**, **Power Platform Administrator** o **Dynamics 365 Administrator**.
 
-- Si creaste tu propio tenant de prueba en el Paso 1, sí los tienes: sigue la **Opción A**.
-- Si usas el correo de tu empresa o universidad, casi seguro **no** los tienes. Si no lo sabes, pregúntale a tu equipo de TI: "¿Tengo alguno de estos roles?". Si la respuesta es no, sigue la **Opción B** (solo hasta el 15 de noviembre de 2026) o la **Opción C**.
+- Si creaste tu propio tenant de prueba en el Paso 1, sí los tienes.
+- Si usas el correo de tu empresa o universidad, casi seguro **no** los tienes. Si no lo sabes, pregúntale a tu equipo de TI: "¿Tengo alguno de estos roles?". No hace falta ser administrador para crear un ambiente Trial: cualquier usuario con una licencia adecuada puede, salvo que tu organización lo haya restringido a los administradores ([Trial environments](https://learn.microsoft.com/power-platform/admin/trial-environments)). Si te lo bloquean, sigue la **Opción B**.
 
-**Paso 2 — Consigue tu ambiente Developer.**
+**Paso 2 — Consigue tu ambiente del curso.**
 
-*Opción A, si tienes permisos de administración en tu tenant (el caso del tenant de prueba propio):*
+*Opción A (camino principal): crea tu propio ambiente Trial con Dataverse.*
+
+**Paso 2A — Activa la licencia Power Apps trial.** Sin una licencia adecuada no puedes crear un ambiente Trial: la licencia gratuita del Developer Plan y las de Microsoft 365 **no** sirven para eso. La licencia Power Apps trial sí, e incluye "Create and manage environments and Dataverse databases" ([Sign up for Power Apps](https://learn.microsoft.com/power-apps/maker/signup-for-powerapps)).
+
+1. Abre https://apps.powerapps.com/trial e inicia sesión con tu cuenta de trabajo o estudio.
+2. Sigue el asistente hasta que te confirme la prueba.
+3. Anota la fecha: la licencia dura **30 días** y se puede extender dos veces, hasta **90 días** en total. Si tu organización bloqueó las licencias de prueba, sigue la **Opción B**.
+
+**Paso 2B — Crea el ambiente** (según [Trial environments](https://learn.microsoft.com/power-platform/admin/trial-environments)):
 
 1. Abre https://admin.powerplatform.microsoft.com e inicia sesión con tu cuenta de trabajo.
-2. En el panel de la izquierda haz clic en **Manage** y luego en **Environments**.
-3. En la barra superior haz clic en **New**.
+2. En el panel de navegación selecciona **Manage** y, en el panel **Manage**, **Environments**.
+3. En la página **Environments** selecciona **New** en la barra de comandos.
 4. Completa la primera pantalla:
    - **Name:** `DEV-TuNombre`.
+   - **Type:** **Trial**. (Si ves también **Trial (subscription-based)**, no es ese: ese tipo solo lo crean administradores con una suscripción de prueba de Dynamics 365.)
    - **Region:** la más cercana a ti.
-   - **Type:** **Developer**. Si esa opción no aparece, elige **Trial** (ver "Si algo sale distinto" abajo).
-   - **Add a Dataverse data store:** en los ambientes Developer viene apagado. Cámbialo a **Yes**: sin Dataverse no hay tablas. Si eliges **Yes**, ya no se puede quitar. Si lo dejas en **No**, se puede agregar después, pero este curso lo necesita desde hoy.
-   - Deja el resto como viene y haz clic en **Next**.
+   - **Purpose:** una descripción corta, por ejemplo `Ambiente del curso Power Platform`.
+   - **La opción de añadir Dataverse:** según la pantalla se llama **Create a database for this environment?** o **Add a Dataverse data store**. Elige **Yes**: sin Dataverse no hay tablas.
+   - Haz clic en **Next**.
 5. Completa la segunda pantalla:
    - **Language:** **English (United States)**. ¿Por qué? El curso usa los nombres de los botones en inglés, y así evitas tener dos columnas llamadas "Estado" en el Módulo 2. El idioma base del ambiente ya no se puede cambiar después.
-   - **URL:** una corta y única, por ejemplo `dev-tunombre`.
+   - **URL** (si aparece): una corta y única, por ejemplo `dev-tunombre`.
    - **Currency:** la de tu país.
-   - **Enable Dynamics 365 apps:** **No**. Exige una licencia de Dynamics 365, y en un ambiente Developer no se pueden instalar apps de Dynamics 365.
-   - **Security group:** si aparece, elige **None** (acceso abierto, lo normal en tu tenant de prueba personal). En un ambiente **Trial** es obligatorio. En uno **Developer** puede no aparecer, porque los ambientes Developer no admiten security groups.
+   - **Enable Dynamics 365 apps:** **No**. Las apps de Dynamics 365 se practican más adelante, cada una con su propio trial y su propio ambiente.
+   - **Security group:** elige **None** (acceso abierto, lo normal en un ambiente personal) si está disponible; si tu organización te obliga a elegir uno, elige el que te indique TI.
    - Haz clic en **Save**.
 6. Espera a que tu ambiente aparezca en la lista como **Ready**. Suele tardar unos minutos y a veces más.
+7. **Anota la fecha de vencimiento y pon dos recordatorios.** En **Environments**, selecciona tu ambiente y, en el panel **Details**, **See all** para ver **Day(s) remain**. Pon un recordatorio **siete días antes** del vencimiento (para pedir la extensión con **Extend trial**, solo una vez) y otro dos días antes del final de la extensión (para exportar por última vez y crear el ambiente siguiente). Los pasos están en [Entornos y trials](/recursos/entornos-y-trials).
 
-> **Si lo creas antes del 15 de noviembre de 2026**, nace *no administrado*: actívale Managed Environments o exporta tus soluciones antes del 15 de diciembre. **Desde el 15 de noviembre de 2026:** el ambiente Developer que crees será *administrado* y solo puedes tener uno. Para crear y previsualizar apps y flujos no necesitas licencia premium. Para **ejecutarlos** sí. En tu tenant de prueba, activa la prueba gratuita de Power Apps en https://apps.powerapps.com/trial.
+> **Lo que un Trial no puede hacer:** solo se puede crear y eliminar; **no se puede restablecer (reset), respaldar, restaurar ni copiar**. Un Trial sin actividad en su base de datos durante 30 días también se elimina. Tu copia de seguridad es tu solución exportada.
 
-*Opción B, si no tienes permisos de administración (correo de empresa o universidad), solo antes del 15 de noviembre de 2026:*
+*Opción B: tu organización te da el ambiente (la mejor opción, si es posible).*
 
-1. Abre https://aka.ms/PowerAppsDevPlan e inicia sesión con tu cuenta de trabajo.
-2. Completa el registro. Al terminar te lleva a make.powerapps.com.
-3. Espera unos minutos: tu ambiente se llamará **"Tu Nombre's environment"**. Puedes ver el avance en el Admin Center.
-4. **Planifica desde hoy:** este ambiente es *no administrado*. Se suspende desde el **15 de diciembre de 2026** y se borra desde el **15 de enero de 2027**. Pídele ya a TI lo de la Opción C y exporta tus soluciones antes del 15 de diciembre (ver "Cómo guardar una copia de tu trabajo", abajo).
+Si tu empresa o universidad te puede dar un **ambiente Developer gestionado** o un **Sandbox** con licencia premium, es lo mejor: no caduca a los 30 días y sirve para todo el curso. Tú no lo creas: lo crea un administrador. Envía a tu equipo de TI un mensaje como este:
 
-*Opción C, si no tienes permisos de administración y ya pasó el 15 de noviembre de 2026 (o tu empresa bloqueó el registro):*
-
-Tú no puedes crear el ambiente: lo crea un administrador. Envía a tu equipo de TI un mensaje como este:
-
-> "Hola. Estoy haciendo un curso de Power Platform y necesito un ambiente para practicar. ¿Me pueden dar un **ambiente Developer administrado** (managed developer environment) **con Dataverse**, solo para mí? Se puede crear desde el Power Platform admin center o con *environment routing*. Si no es posible, ¿me pueden dar un ambiente **Sandbox** o **Trial** con Dataverse? En ese ambiente necesito el rol **System Customizer** o **System Administrator**. Para ejecutar apps y flujos en un Developer administrado también necesito una licencia premium de Power Apps (o una de prueba)."
+> "Hola. Estoy haciendo un curso de Power Platform y necesito un ambiente para practicar. ¿Me pueden dar un **ambiente Developer gestionado** (managed developer environment) **con Dataverse**, solo para mí? Se puede crear desde el Power Platform admin center o con *environment routing*. Si no es posible, ¿me pueden dar un ambiente **Sandbox** con Dataverse, o permitirme crear un ambiente **Trial**? En ese ambiente necesito el rol **System Customizer** o **System Administrator**. Para ejecutar apps y flujos en un Developer gestionado necesito además una licencia premium de Power Apps (o una de prueba), porque el Developer Plan no incluye los derechos de Managed Environments."
 
 Mientras esperas, sigue leyendo y haz las microprácticas: no necesitan ambiente.
+
+*Si ya tienes un ambiente Developer creado antes del 15 de noviembre de 2026:* puedes seguir usándolo como ambiente del curso **hasta el 15 de diciembre de 2026**, fecha desde la que se suspende (se elimina desde el 15 de enero de 2027). **Exporta tus soluciones antes del 15 de diciembre** e impórtalas en tu ambiente Trial o en el que te dé tu organización. Si tienes licencia premium y un administrador, Learn da otra salida: activar Managed Environments en ese ambiente antes de esa fecha ([Developer Plan](https://learn.microsoft.com/power-platform/developer/plan)).
 
 **Paso 3 — Confirma que estás dentro de tu ambiente.**
 
@@ -164,27 +169,32 @@ Mientras esperas, sigue leyendo y haz las microprácticas: no necesitan ambiente
 
 > **Si los botones aparecen en español:** la página usa el idioma de tu navegador. Este curso usa los nombres en inglés. Para cambiarlos, abre el engranaje (**Settings**, arriba a la derecha) > **Power Apps settings** y cambia el idioma, o cambia el idioma de tu navegador. Si prefieres dejarlo en español, busca el botón equivalente en la misma zona de la pantalla.
 
-**Cómo guardar una copia de tu trabajo (exportar una solución).** Úsalo antes de que tu ambiente se suspenda o caduque. Lo harás desde el Módulo 2, cuando tengas tu propia solución:
+**Cómo guardar una copia de tu trabajo (exportar una solución).** Desde el Módulo 2, cuando tengas tu propia solución, lo harás **al terminar cada módulo o sesión**, no solo antes de que tu ambiente caduque:
 
 1. En make.powerapps.com abre **Solutions** (si no lo ves, está en **More**).
 2. Selecciona tu solución y, en la barra de comandos, **Export**. (La *Default Solution* no se puede exportar: por eso en el Módulo 2 creas una propia.)
 3. En el panel **Before you export**, selecciona **Publish all changes** y luego **Next**.
 4. En **Export as** elige **Unmanaged** (así podrás seguir editándola en el ambiente nuevo) y selecciona **Export**.
-5. Espera unos minutos. El archivo `.zip` se descarga en tu carpeta de descargas. Guárdalo.
+5. Espera unos minutos. El archivo `.zip` se descarga en tu carpeta de descargas. Renómbralo con la fecha y el módulo y guárdalo fuera del ambiente (tu computadora o tu nube personal).
+
+Cuando el Trial venza, creas otro ambiente igual e importas el `.zip` (**Solutions** > **Import solution**). Ojo: los **datos** (filas), las **conexiones** y el **historial de ejecuciones** no viajan en la solución; tendrás que volver a crear conexiones y datos de prueba. Paso a paso en [Entornos y trials](/recursos/entornos-y-trials).
 
 **Paso 4 (opcional, solo cuando llegues a los módulos de Dynamics 365) — Trial de Dynamics 365.**
 
-El trial de Dynamics 365 Customer Service **no se añade a tu ambiente Developer**: crea un ambiente aparte con las apps de Dynamics 365 instaladas. Sáltalo por ahora.
+El trial de Dynamics 365 Customer Service **no se añade a tu ambiente del curso**: crea un ambiente aparte con las apps de Dynamics 365 instaladas. Sáltalo por ahora.
 
 **Si algo sale distinto:**
 
 | Lo que ves | Qué significa | Qué hacer |
 |---|---|---|
-| En **Type** no aparece **Developer** | Desde el 15 de noviembre de 2026 Microsoft solo permite ambientes Developer *administrados*, y tu tenant puede no tener esa opción | Elige **Trial**. Para crear un ambiente Trial tu usuario (aunque seas administrador) necesita una licencia de prueba por usuario, por ejemplo la de Power Apps: si el Admin Center te la pide, actívala primero en https://apps.powerapps.com/trial. Funciona igual para este módulo, pero dura 30 días: puedes ampliarlo una sola vez otros 30 días en su última semana, y después se deshabilita y se borra. Anota la fecha de fin y exporta tus soluciones antes |
-| No tienes permisos de administración: no puedes entrar al Admin Center, no ves **New** o te sale un error de permisos | Solo los administradores (Global, Power Platform o Dynamics 365 Administrator) pueden crear ambientes si tu organización lo restringió | Envía a TI el mensaje de la **Opción C**. Mientras tanto, haz las microprácticas |
-| Un mensaje de que el registro de ambientes de desarrollo está bloqueado | Tu organización bloqueó el registro | Envía a TI el mensaje de la **Opción C**, o crea tu tenant de prueba propio (Paso 1) |
-| El portal del Microsoft 365 Developer Program te dice que no calificas | No tienes una suscripción que califique | Usa el tenant de prueba de Microsoft 365 del Paso 1 |
-| Tu ambiente desaparece o queda deshabilitado tras semanas sin usarlo | Los ambientes Developer sin actividad se deshabilitan solos (30 días sin actividad en los no administrados, 60 en los administrados) y se borran 15 días después | Solo abrirlo no cuenta como actividad: abre una app, ejecuta un flujo o crea/edita algo al menos una vez cada pocas semanas, y exporta tus soluciones |
+| Al crear el ambiente, el Admin Center no te deja elegir **Trial** o te pide una licencia | Tu usuario no tiene una licencia que permita crear un Trial (las de Microsoft 365 y la del Developer Plan no sirven) | Activa la licencia Power Apps trial (Paso 2A) y vuelve a intentarlo |
+| Te dice que ya tienes un ambiente Trial | El límite es un ambiente Trial por usuario | Usa ese ambiente como ambiente del curso, o elimínalo si ya no lo necesitas (exporta antes lo que quieras conservar) |
+| No puedes entrar al Admin Center, no ves **New** o te sale un error de permisos | Tu organización restringió la creación de ambientes (o de trials) a los administradores | Envía a TI el mensaje de la **Opción B**. Mientras tanto, haz las microprácticas |
+| No puedes activar la licencia Power Apps trial | Tu organización bloqueó las licencias de prueba | Envía a TI el mensaje de la **Opción B**, o usa una cuenta propia (Paso 1) |
+| El portal del Microsoft 365 Developer Program te dice que no calificas | No tienes una suscripción que califique | Usa una de las otras vías del Paso 1 |
+| En **Type** solo ves **Developer** o te ofrecen registrarte en el Developer Plan | Desde el 15 de noviembre de 2026 el Developer Plan ya no crea un ambiente, y el Developer solo existe como ambiente gestionado que asigna un administrador | Elige **Trial**; si quieres un Developer gestionado, pídelo con la **Opción B** |
+| Faltan siete días o menos para que venza tu Trial | Es la única ventana para la extensión | En **Manage** > **Environments**, selecciona tu ambiente y **Extend trial** (una sola vez, suma 30 días). Exporta tu solución ese mismo día |
+| Tu ambiente desaparece o queda deshabilitado | Venció el Trial (30 días, o 60 con la extensión), o pasó 30 días sin actividad en su base de datos | Crea un ambiente nuevo con los mismos ajustes e importa tu última solución exportada; vuelve a crear conexiones y datos de prueba |
 
 **Ahora haz algo — micropráctica (5 min):** **[Diagnosticar: lo que creaste no aparece para tu compañera](/practica/ip-trb-003-ambiente-equivocado)**. Parte de un síntoma real —lo que construiste "desaparece"— y te pide decir qué pasó antes de ver la solución. Es el error de ambiente más común del primer día.
 
@@ -194,6 +204,7 @@ El trial de Dynamics 365 Customer Service **no se añade a tu ambiente Developer
 |---|---|
 | Nombre exacto de tu ambiente | ___ |
 | Tipo del ambiente (Developer, Sandbox, Production o Trial) | ___ |
+| Fecha de vencimiento (**Day(s) remain**) y fecha de tu recordatorio para **Extend trial**, si es un Trial | ___ |
 | Ambiente activo que ves arriba a la derecha en make.powerapps.com | ___ |
 
 ---
@@ -328,7 +339,8 @@ Esta vez no te digo qué hacer paso a paso: aplica lo que viste a un caso que co
 **Por qué Power Platform:** Ningún componente requirió código. El equipo de Calidad configuró el sistema en 3 semanas sin soporte externo.
 
 ### ✅ Buenas Prácticas
-- Usar ambientes Developer/Sandbox para pruebas, nunca directamente en Production
+- Usar tu ambiente del curso (Trial, Developer o Sandbox) para pruebas, nunca directamente en Production
+- Exportar tu solución al terminar cada módulo o sesión y guardarla fuera del ambiente: tu ambiente del curso caduca
 - Nombrar ambientes con convenciones claras: `DEV-TuNombre`, `TEST-Proyecto`
 - Documentar propósito de cada ambiente desde su creación
 - No compartir credenciales de trial; crear usuarios de prueba en el tenant
@@ -336,7 +348,7 @@ Esta vez no te digo qué hacer paso a paso: aplica lo que viste a un caso que co
 ### ⚠️ Errores Comunes
 - **Lo que ves:** lo que creaste no aparece para otra persona, o ves cosas de otros mezcladas con las tuyas.
   - **Causa probable:** estás trabajando en el ambiente *default* (compartido) o en uno distinto al suyo.
-  - **Qué hacer:** mira el ambiente activo arriba a la derecha, cambia a un ambiente Developer propio y trabaja siempre ahí.
+  - **Qué hacer:** mira el ambiente activo arriba a la derecha, cambia a tu ambiente del curso y trabaja siempre ahí.
 
 - **Lo que ves:** intentas guardar datos estructurados (clientes, solicitudes) en SharePoint y no puedes relacionarlos ni validarlos como esperabas.
   - **Causa probable:** confundir Dataverse con SharePoint.
@@ -358,7 +370,7 @@ Esta vez no te digo qué hacer paso a paso: aplica lo que viste a un caso que co
 > Para avanzar al Módulo 2 como principiante, los primeros 5 criterios son suficientes. AI Builder y Power Pages son suplementos opcionales: no los uses como excusa para frenar tu primera práctica.
 
 ### 📸 Evidencia para guardar
-- Captura del ambiente Developer activo.
+- Captura de tu ambiente del curso activo, con su tipo y su fecha de vencimiento (**Day(s) remain**).
 - Captura de la tabla Account con 5 registros de prueba.
 - Nota breve en tus palabras: "Dataverse sirve para..." en 2-3 líneas.
 

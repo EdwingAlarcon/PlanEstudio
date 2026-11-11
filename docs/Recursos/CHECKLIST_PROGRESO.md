@@ -61,7 +61,7 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 - [ ] **Práctica**: Creo una unmanaged solution con publisher personalizado | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico los tipos de environments (Default, Sandbox, Production, Trial) y cuándo usar cada uno | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Describo el modelo de seguridad básico de Power Platform (roles de entorno, roles de seguridad) | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Consigo una cuenta de trabajo o estudio (o un tenant de prueba propio) y creo mi ambiente Developer o Trial con Dataverse | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Consigo una cuenta de trabajo o estudio (o un tenant de prueba propio) y creo mi ambiente del curso (Trial con Dataverse, o el que me dé mi organización) y anoto su fecha de vencimiento | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Identifico qué es un maker y cuál es su rol en el ecosistema | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico la diferencia entre low-code y pro-code en el contexto de Power Platform | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Describo cómo funciona el modelo de governance y DLP policies a nivel conceptual | Dominio: ___/5 | Fecha: ___
@@ -999,7 +999,7 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 ### Módulo 52: Power Platform CLI y Conexión Segura al Tenant
 
 - [ ] **Práctica**: Instalé Power Platform CLI y confirmé la versión con `pac --version` | Dominio: ___/5 | Fecha: ___
-- [ ] **Práctica**: Creé un perfil de autenticación contra un entorno Developer/Sandbox con `pac auth create` | Dominio: ___/5 | Fecha: ___
+- [ ] **Práctica**: Creé un perfil de autenticación contra mi ambiente del curso (Trial, Developer o Sandbox) con `pac auth create` | Dominio: ___/5 | Fecha: ___
 - [ ] **Práctica**: Verifiqué la organización activa con `pac org who` antes de operar | Dominio: ___/5 | Fecha: ___
 - [ ] **Conocimiento**: Explico la diferencia entre tenant, environment y organización | Dominio: ___/5 | Fecha: ___
 - [ ] **Entrega**: LAB-052 completado — CLI y conexión segura al tenant | Dominio: ___/5 | Fecha: ___

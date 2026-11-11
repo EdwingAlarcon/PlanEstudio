@@ -8,7 +8,7 @@ certifications: ["Dynamics 365 Sales"]
 role: ["Functional Consultant", "Sales"]
 prerequisites:
   - "Módulo 20 estudiado: Dynamics 365 CE — Sales y Customer Service"
-  - "Lab 09 completado: Dataverse Avanzado"
+  - "Lab 09 completado: Dataverse Avanzado — BPF, Rollup y Field Security"
   - "Recurso revisado: Rúbricas y Plantillas de Evaluación"
 lastVerified: "2026-09"
 ---

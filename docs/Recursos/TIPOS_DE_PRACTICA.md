@@ -12,8 +12,8 @@ completarla — y qué evidencia produce cada tipo.
 |---|---|---|---|
 | 🟢 **Conceptual** | Lectura, ejercicio en papel/Markdown o diseño documentado — no toca ningún sistema. | Nada — ni cuenta ni ambiente. | Un documento, tabla o diagrama completado por ti. |
 | 🔵 **Simulada** | Una práctica interactiva dentro de la propia app de PlanEstudio (`/practica`) — decisiones, flujos o queries en un entorno controlado, sin backend real ni ejecución de código arbitrario. | Nada — corre en el navegador, dentro de PlanEstudio. | Resultado guardado automáticamente en tu progreso de práctica interactiva. |
-| 🟡 **Developer environment** | Requiere tu ambiente Developer personal (o un Trial con Dataverse), el que creas en el Módulo 1 — Power Apps, Power Automate, Dataverse, Copilot Studio. | Cuenta de trabajo o estudio y ambiente activo. Ver [Entornos y trials](/recursos/entornos-y-trials) si todavía no lo tienes. | Capturas de pantalla de lo construido, export de la solución, o el propio artefacto (app, flujo). |
-| 🟠 **Trial Dynamics 365** | Requiere activar el trial temporal (normalmente 30 días) del producto Dynamics 365 correspondiente (Sales, Customer Service, Customer Insights, Field Service, Contact Center, Finance & Operations). | Trial activo del producto específico — no alcanza con el ambiente Developer del Módulo 1. | Capturas del registro real (lead, caso, segmento…), export o resultado de UAT. |
+| 🟡 **Ambiente del curso** | Requiere tu ambiente del curso con Dataverse, el que creas en el Módulo 1 (un Trial, o el Developer gestionado o Sandbox que te dé tu organización) — Power Apps, Power Automate, Dataverse, Copilot Studio. | Cuenta de trabajo o estudio y ambiente activo (si es un Trial, dentro de su plazo y con tu solución exportada). Ver [Entornos y trials](/recursos/entornos-y-trials) si todavía no lo tienes. | Capturas de pantalla de lo construido, export de la solución, o el propio artefacto (app, flujo). |
+| 🟠 **Trial Dynamics 365** | Requiere activar el trial temporal (normalmente 30 días) del producto Dynamics 365 correspondiente (Sales, Customer Service, Customer Insights, Field Service, Contact Center, Finance & Operations). | Trial activo del producto específico — no alcanza con el ambiente del curso del Módulo 1. | Capturas del registro real (lead, caso, segmento…), export o resultado de UAT. |
 | 🔴 **Requiere tenant/ambiente compatible (fuera de alcance de PlanEstudio)** | Escenarios que solo existen con licencia de producción, integraciones reales con terceros (pasarela de pagos, sistema académico externo) o gobierno empresarial real. | Un tenant real de empresa, fuera del alcance de este plan de autoestudio. | No aplica como evidencia de este plan — el lab lo marca explícitamente como diseño documentado, no como ejecución verificada. |
 
 Para ver qué entorno/licencia exige cada ruta completa (no solo un lab individual), con duración y
@@ -26,7 +26,7 @@ alternativa sin acceso, ver la [Matriz de entornos y trials](/recursos/entornos-
 - Si está en `/practica`, es 🔵 **Simulada** por definición — el catálogo entero de práctica interactiva
   corre sin backend, ver [Guía de prácticas interactivas](/recursos/guia-practicas-interactivas).
 - Si pide "crear una tabla", "publicar una app", "construir un flujo" sin mencionar Dynamics 365 como
-  producto, es 🟡 **Developer environment**.
+  producto, es 🟡 **Ambiente del curso**.
 - Si menciona explícitamente Dynamics 365 Sales/Customer Service/Customer Insights/Field
   Service/Contact Center/Finance & Operations como producto a configurar (no solo como tabla de
   Dataverse), es 🟠 **Trial Dynamics 365**. La [D365 Tenant Readiness Checklist](/recursos/d365-tenant-readiness)

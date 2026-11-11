@@ -228,9 +228,9 @@ const EXECUTION_STATUS_NOTES: Record<ExecutionStatus, string> = {
 };
 
 const ENVIRONMENT_BY_LEVEL: Record<string, string> = {
-  N1: "Ambiente Developer de Power Platform (make.powerapps.com)",
-  N2: "Ambiente Developer o Sandbox de Power Platform",
-  N3: "Ambiente Developer/Sandbox con permisos de personalización avanzada",
+  N1: "Tu ambiente del curso con Dataverse (Trial, Developer gestionado o Sandbox; make.powerapps.com)",
+  N2: "Tu ambiente del curso (Trial, Developer gestionado o Sandbox) de Power Platform",
+  N3: "Tu ambiente del curso (Trial, Developer gestionado o Sandbox) con permisos de personalización avanzada",
   N4: "Ambiente Sandbox o Producción con rol de arquitectura de solución",
   N5: "Entorno de desarrollo local (Node.js/VS Code/editor con IA) o ambiente Power Platform, según el módulo",
   N6: "Tenant de Dynamics 365 con la app y licencia del producto habilitadas",

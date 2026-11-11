@@ -443,7 +443,7 @@ Cuando un Scope falla, los que van detrás con el **Run after** por defecto (**I
 
 La solución intuitiva (poner `Compensar Paso 1` detrás de `Compensar Paso 2` con **Is successful** e **Is skipped**) **también compensa cuando todo sale bien**, porque en esa prueba `Compensar Paso 2` queda Skipped. Tienes que distinguir *por qué* se omitió. Dos caminos válidos:
 
-- Dentro de `Compensar Paso 1`, una **Condition** que solo borre la fila si falló el Paso 2 o el Paso 3. En la condición, con **fx**: `actions('Paso_2_Sistema_externo')?['status']` **is equal to** `Failed` (y otra fila **Or** igual para el Paso 3). `actions()` devuelve, entre otros datos, el estado de la acción, y `result('<Scope>')` devuelve el de cada acción de primer nivel dentro de un Scope ([Learn: funciones de expresión](https://learn.microsoft.com/azure/logic-apps/workflow-definition-language-functions-reference#result)).
+- Dentro de `Compensar Paso 1`, una **Condition** que solo borre la fila si falló el Paso 2 o el Paso 3. En la condición, con **fx**: `actions('Paso_2_Sistema_externo')?['status']` **is equal to** `Failed` (y otra fila **Or** igual para el Paso 3). `actions()` devuelve, entre otros datos, el estado de la acción, y `result('<Scope>')` devuelve el de cada acción de primer nivel dentro de un Scope ([Learn: funciones de expresión](https://learn.microsoft.com/azure/logic-apps/expression-functions-reference#result)).
 - Un bloque de compensación por cada punto de fallo: uno que corre si falla el Paso 2 y compensa el 1; otro que corre si falla el Paso 3 y compensa el 2 y después el 1. Repite una acción, pero cada bloque se lee solo.
 </details>
 

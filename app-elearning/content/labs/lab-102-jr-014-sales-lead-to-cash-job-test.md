@@ -7,8 +7,7 @@ product: ["Dynamics 365 Sales", "Dataverse"]
 certifications: ["PL-200 (retirado 31 ago 2026)", "Especialista Dynamics 365 CE"]
 role: ["Dynamics 365 Sales Functional Consultant", "CRM Functional"]
 prerequisites:
-  - "Lab 66 completado: Sales Lead-to-Cash"
-  - "Lab 57 revisado: Fit-Gap D365 Sales"
+  - "Lab 66 completado: Dynamics 365 Sales — Proceso Comercial Lead-to-Cash"
 lastVerified: "2026-09"
 ---
 
@@ -55,6 +54,9 @@ limitado.
   diseño funcional equivalente). Un ambiente Developer no admite apps de Dynamics 365. Si quieres
   configurarlo de verdad, usa la trial de 30 días de Sales que se describe en el Lab 66 o en el
   Módulo 61, y créala **antes** de empezar el cronómetro: el registro no cuenta dentro de los 150 minutos.
+- Lectura recomendada, no obligatoria: el [Lab 57](/labs/lab-57-diseno-solucion-d365-sales-con-ia)
+  (Diseñar una Solución Completa de Dynamics 365 Sales con IA) trae un Fit-Gap de Sales que te sirve
+  de modelo. Es del nivel IA, que es transversal, por eso no figura como prerrequisito.
 - Markdown/Excel para las matrices pedidas.
 - Cronómetro — registra la hora de inicio y de entrega en tu documento final.
 

@@ -8,8 +8,8 @@ certifications: ["Arquitectura Power Platform"]
 role: ["F&O Practitioner", "Solution Architect"]
 prerequisites:
   - "Lab 93 completado: F&O Finance Setup Walkthrough"
-  - "Acceso a un ambiente trial/demo de Dynamics 365 Project Operations"
-lastVerified: "2026-09"
+  - "Acceso a un ambiente trial/demo de Dynamics 365 Project Operations; sin él, haz la variante en papel del final del lab"
+lastVerified: "2026-11"
 ---
 
 # Lab 97 — F&O Project Operations Setup
@@ -23,17 +23,31 @@ factura al cliente.
 ## Nota de verificación (léela antes de empezar)
 
 Los nombres de menú y pasos están escritos con base en la terminología documentada de Dynamics 365
-Project Operations, **sin verificación contra un tenant en vivo al momento de escribirse**. Si un
-nombre de menú difiere de tu ambiente (Project Operations tiene una variante "for resource/non-stocked
-scenarios" con menús distintos a la variante completa con SCM), documenta la diferencia y sigue el
-flujo equivalente.
+Project Operations, **sin verificación contra un tenant en vivo**. En noviembre de 2026 se
+revisaron contra Microsoft Learn el trial, los tipos de despliegue y los tipos de regla de
+facturación (enlaces en cada paso); las rutas de menú que Learn no muestra se marcan como "búscalo
+por nombre". Si un nombre difiere de tu ambiente, documenta la diferencia y sigue el flujo
+equivalente.
+
+**Lo primero: identifica tu tipo de despliegue.** Learn describe Project Operations *Core*,
+*Integrated with ERP* (recursos/no almacenados, con finance and operations) y el escenario de
+manufactura (almacenados)
+([Learn: Sign up for Project Operations trials](https://learn.microsoft.com/dynamics365/project-operations/environment/admin-trials)).
+Los pasos cambian de aplicación según el tipo:
+
+| Tipo | Dónde creas el contrato y el proyecto | Dónde se contabiliza y factura |
+|---|---|---|
+| Integrated with ERP (recursos/no almacenados) | Aplicación de Project Operations en Dataverse (**Sales > Project contracts**) | Finance and operations |
+| Manufactura/almacenados o Project management and accounting (PMA) | **Project management and accounting** en finance and operations | Finance and operations |
+| Core | Solo Dataverse | No aplica a este lab (no hay finance and operations) |
 
 ## ⚠️ Antes de empezar: cómo se consigue hoy un ambiente de F&O
 
-Verificado en Microsoft Learn en noviembre de 2026. Sin un ambiente así este lab no es ejecutable;
-la alternativa en papel está en el [Módulo 60](/nivel/d365/modulo/finance-operations-procesos-erp).
+Verificado en Microsoft Learn en noviembre de 2026. Sin un ambiente así, haz la
+**variante en papel** del final de este lab; el [Módulo 60](/nivel/d365/modulo/finance-operations-procesos-erp)
+cubre además los procesos en general.
 
-- **Tu ambiente Developer de Power Platform no sirve.** Learn indica que el tipo de ambiente
+- **Tu ambiente del curso no sirve.** Learn indica que el tipo de ambiente
   *Developer* no admite ninguna carga de Dynamics 365; F&O se instala en ambientes *Sandbox*,
   *Production* o *Trial (subscription-based)* y exige una licencia de F&O asignada
   ([Learn: Unified environment types and templates](https://learn.microsoft.com/power-platform/admin/unified-experience/unified-environment-types-and-templates)).
@@ -66,7 +80,9 @@ la alternativa en papel está en el [Módulo 60](/nivel/d365/modulo/finance-oper
   dura 30 días con una extensión de 30, se canjea una vez por tenant y crea hasta 3 ambientes; un
   cuestionario elige el escenario (Core, materiales no almacenados o almacenados) y solo trae datos
   de configuración, no transacciones. Para este lab necesitas un escenario con finance and
-  operations (no Project Operations Core).
+  operations (no Project Operations Core). En el escenario de almacenados los datos de
+  configuración están en la compañía `USSI`, no en `USMF`: cambia la compañía activa antes de
+  buscar clientes o grupos de proyecto.
 
 ## Escenario de negocio
 
@@ -82,8 +98,10 @@ Actúas como F&O Practitioner configurando la estructura de proyecto y facturaci
 
 ## Herramientas necesarias
 
-- Ambiente trial/demo de Dynamics 365 Project Operations.
-- Un cliente de prueba existente en el ambiente.
+- Ambiente trial/demo de Dynamics 365 Project Operations con finance and operations.
+- Un cliente de prueba existente en el ambiente. El trial no trae transacciones: el registro de
+  horas y la propuesta de factura los generas tú.
+- Tiempo estimado: 3 horas con ambiente; 90 minutos la variante en papel.
 
 ## 🔧 Requisitos de ambiente y fallos frecuentes
 
@@ -108,9 +126,11 @@ más específico.
   and accounting sin inicializar en un trial recién aprovisionado (p. ej. categorías de hora/gasto
   facturables); si el paso 3 no ofrece las opciones esperadas, revisa **Project management and
   accounting > Setup** antes de asumir que el paso está mal descrito.
-- Project Operations tiene dos variantes de despliegue (con y sin SCM) que cambian nombres de menú y
-  disponibilidad de ciertas funciones (como WBS avanzada); documenta cuál variante trae tu ambiente
-  si notas menús distintos a los descritos.
+- Project Operations tiene varios tipos de despliegue (tabla de la nota de verificación) que
+  cambian en qué aplicación trabajas; documenta cuál trae tu ambiente.
+- En PMA, el **tipo de proyecto** no se puede cambiar después de crear el proyecto
+  ([Learn: Project contracts](https://learn.microsoft.com/dynamics365/project-operations/prod-pma/project-contracts)):
+  elige el correcto antes de guardar.
 
 ### Fallos frecuentes
 
@@ -119,7 +139,8 @@ más específico.
 | No aparece la opción "Time and material" al crear el proyecto | Módulo no habilitado o grupo de proyecto sin ese tipo configurado | Revisa **Project management and accounting > Setup > Project groups** | Crea o ajusta un grupo de proyecto que soporte tiempo y materiales antes de crear el proyecto |
 | No se puede seleccionar el cliente de prueba en el contrato de proyecto | Dato Contoso faltante: cliente no configurado como cuenta facturable en la legal entity actual | Verifica que el cliente exista en **Accounts receivable > Customers** de esa legal entity | Crea o activa el cliente en la legal entity correcta antes de continuar |
 | La WBS no permite marcar tareas como facturables/no facturables | Permiso insuficiente sobre Project management and accounting | Revisa si los campos aparecen deshabilitados (solo lectura) en el formulario | Solicita un rol con acceso de escritura sobre Projects, no solo de consulta |
-| No aparece "Billing rules" ni "Invoice proposals" en el menú esperado | Trial incompleto o variante de Project Operations distinta (con/sin SCM) | Busca por nombre en la barra de búsqueda global de F&O | Documenta la ruta real encontrada; el concepto (regla de facturación por hito vs. por tiempo) es el mismo aunque el menú cambie |
+| No aparece "Billing rules" ni "Invoice proposals" en el menú esperado | Tipo de despliegue distinto (en Integrated with ERP el contrato vive en Dataverse) | Busca por nombre en la barra de búsqueda global de F&O y revisa la tabla de tipos de despliegue | Documenta la ruta real encontrada; el concepto (regla de facturación por hito vs. por tiempo) es el mismo aunque el menú cambie |
+| El hito de anticipo no aparece en la propuesta de factura | El hito no está marcado como completado | Abre la regla de facturación por hito y revisa el estado del hito | Learn exige marcar el hito como completado antes de facturarlo; márcalo y vuelve a generar la propuesta |
 | El registro de horas no aparece en la propuesta de factura | Tarea marcada como no facturable, o el registro está pendiente de aprobación | Revisa el estado del registro de horas (timesheet) y si requiere aprobación previa | Aprueba el registro de horas o corrige la tarea a facturable antes de generar la propuesta |
 
 ## Entregables
@@ -133,10 +154,15 @@ más específico.
 
 ### Paso 1 — Contrato de proyecto y proyecto
 
-Ve a **Project management and accounting > Projects > All projects** (o el módulo de Project
-Operations equivalente en tu ambiente) y crea un **Project contract** con su **Project** asociado.
+Según tu tipo de despliegue (tabla de la nota de verificación):
 
-- Selecciona el cliente y define el tipo de proyecto como "Tiempo y materiales" (Time and material).
+- **Integrated with ERP:** en la aplicación de Project Operations, **Sales > Project contracts**, crea
+  el contrato con el cliente y después el proyecto asociado.
+- **PMA (manufactura/almacenados):** en **Project management and accounting > Projects > All
+  projects** crea el **Project contract** con su **Project** asociado.
+
+- Selecciona el cliente y define el tipo de proyecto como "Tiempo y materiales" (Time and material);
+  en PMA no podrás cambiarlo después.
 - Documenta la diferencia entre contrato de proyecto (relación comercial con el cliente) y proyecto
   (unidad de ejecución y seguimiento de costos).
 
@@ -150,16 +176,25 @@ Desde el proyecto, ve a **Plan > Work breakdown structure**.
 
 ### Paso 3 — Regla de facturación
 
-Ve a **Manage > Billing rules** (o **Invoice proposals**, según la variante de tu ambiente).
+En PMA, las reglas de facturación se definen en el contrato de proyecto. Learn enumera los tipos
+*Unit of delivery*, *Progress*, *Milestone*, *Fee* y *Time and material*
+([Learn: Project contracts](https://learn.microsoft.com/dynamics365/project-operations/prod-pma/project-contracts)).
+La ruta exacta del botón no aparece en esa página: búscalo por nombre (**Billing rules**) desde el
+contrato y anota dónde lo encontraste. En Integrated with ERP, la facturación se define en las
+líneas del contrato en Dataverse; esta revisión no abrió esa página de Learn, así que documenta los
+campos que veas.
 
-- Define un hito de anticipo (p. ej. 20% al inicio del proyecto, facturable de una sola vez).
-- Define que el resto de las horas se facture por tiempo y materiales según el registro real.
-- Documenta cómo el sistema distingue entre el monto del hito (fijo) y el monto por horas (variable, depende del registro).
+- Define un hito de anticipo (tipo *Milestone*, p. ej. 20% al inicio del proyecto).
+- Define que el resto de las horas se facture por *Time and material* según el registro real.
+- Documenta cómo el sistema distingue entre el monto del hito (fijo) y el monto por horas
+  (variable, depende del registro), y que el hito solo se factura después de marcarlo como completado.
 
 ### Paso 4 — Registro de horas y propuesta de factura
 
 Registra tiempo de prueba contra una de las tareas de la WBS (timesheet o registro de horas del
-proyecto), y genera una **propuesta de factura** (invoice proposal).
+proyecto; la ruta depende del tipo de despliegue: búscala por nombre y anótala), marca como
+completado el hito de anticipo y genera una **propuesta de factura** (invoice proposal); Learn
+indica que la propuesta se genera a partir de las reglas de facturación.
 
 - Documenta cómo aparece el hito de anticipo en la propuesta vs. cómo aparecen las horas registradas.
 - Explica qué pasaría si un consultor registra horas contra una tarea marcada como no facturable.
@@ -188,3 +223,22 @@ proyecto), y genera una **propuesta de factura** (invoice proposal).
 - Marcar todas las tareas como facturables sin distinguir trabajo interno de trabajo para el cliente.
 - No probar qué pasa cuando se registran horas contra una tarea no facturable.
 - Definir el hito de anticipo como parte de la facturación por tiempo en vez de como un monto fijo independiente.
+- Generar la propuesta sin marcar el hito como completado y concluir que la regla no funciona.
+
+## Variante en papel (sin ambiente de Project Operations)
+
+Si no tienes ambiente, diseña la configuración con las páginas de Learn enlazadas y escribe
+«variante en papel» en tu entrega. Tiempo estimado: 90 minutos.
+
+1. **Tipo de despliegue:** elige Integrated with ERP o PMA para Northwind Consulting y justifica la
+   elección con la tabla de la nota de verificación.
+2. **Contrato y proyecto:** ficha del contrato (cliente, moneda, tipo de proyecto) y del proyecto,
+   con la diferencia entre ambos.
+3. **WBS:** tabla con 3 tareas, horas estimadas y facturable/no facturable con su motivo.
+4. **Facturación:** las dos reglas (*Milestone* 20% y *Time and material*), y un ejemplo numérico:
+   tarifa por hora, 40 horas registradas y el monto del hito; muestra qué líneas tendría la propuesta
+   de factura antes y después de marcar el hito como completado.
+5. **Caso no facturable:** qué pasa con 5 horas registradas contra una tarea interna.
+
+La variante en papel cumple los criterios de validación si cada decisión lleva su enlace de Learn;
+sustituye a las capturas.

@@ -86,7 +86,7 @@ obstáculos a ignorar:
 > duran 30 días y **cada una crea su propio tenant sin datos compartidos**
 > ([Learn: Field Service trial FAQ](https://learn.microsoft.com/dynamics365/field-service/trial-faq)), así
 > que el flujo completo (segmento → caso → Work Order) no se puede recorrer entre trials. El único paso
-> que puedes construir en tu ambiente Developer es el flujo de Power Automate del entregable 8, sobre
+> que puedes construir en tu ambiente del curso es el flujo de Power Automate del entregable 8, sobre
 > tablas propias que imiten Case y Work Order. Declara cada tramo como Simulado o Sandbox real.
 
 ## Datos de prueba

@@ -31,7 +31,7 @@ diferencia como parte de tu evidencia.
 
 ## Cómo conseguir el ambiente (aviso de licencia)
 
-- **No sirve tu ambiente Developer:** no puede instalar apps de Dynamics 365, y un trial no se añade a
+- **No sirve tu ambiente del curso:** se creó sin apps de Dynamics 365 (y un ambiente Developer no puede instalarlas), y un trial no se añade a
   un ambiente existente: cada trial crea su propio tenant y URL
   ([Learn: Trial FAQ](https://learn.microsoft.com/dynamics365/customer-service/implement/trial-faq)).
 - **Opción 1 — reutiliza la trial de Customer Service del Módulo 62 si sigue activa.** Según el Trial
@@ -154,7 +154,8 @@ Learn pide crear primero el workstream que enruta el chat
 Crea las colas `Soporte Premium` y `Soporte General`: **Customer support** → **Queues** → **Manage**
 en **Advanced queues** → **New**, **Type** **Messaging**, **Add users** con tu usuario
 ([Learn: colas](https://learn.microsoft.com/dynamics365/customer-service/administer/queues-omnichannel)).
-Luego, en el workstream `WS Chat SIT`, área **Routing rules**, crea la regla route-to-queue
+Luego, en el workstream `WS Chat SIT`, área **Routing rules**, crea la regla route-to-queue: **Create ruleset** junto a **Route to queues**
+→ **Create Rule**; en **Conditions** la condición y en **Route to queues** la cola
 ([Learn](https://learn.microsoft.com/dynamics365/customer-service/administer/configure-route-to-queue-rules)).
 
 - Configura una regla de routing: si el cliente está marcado como premium (usa un campo o atributo

@@ -8,14 +8,14 @@ practiceMinutes: 160
 slug: "conectores-personalizados"
 lastVerified: "2026-11"
 ---
-*Lectura: 20-25 min · Con práctica: unos 160 min en tu entorno Developer; la primera vez, cuenta entre el doble y el triple. La autenticación OAuth 2.0 y el conector contra Microsoft Graph son opcionales y pueden quedar para otra sesión.*
+*Lectura: 20-25 min · Con práctica: unos 160 min en tu ambiente del curso; la primera vez, cuenta entre el doble y el triple. La autenticación OAuth 2.0 y el conector contra Microsoft Graph son opcionales y pueden quedar para otra sesión.*
 
 ### 🎯 Objetivo
 Crear y certificar conectores personalizados para APIs REST, integrar autenticación OAuth2 y API Key, y hacer que los conectores estén disponibles para Power Apps y Power Automate en toda la organización — construyendo un conector real en tu entorno, dentro de una solución, y practicando cada concepto con evidencia del dato exacto que viste antes de pasar al siguiente.
 
 > **Cómo está organizado este módulo:** cada concepto viene con una micropráctica de feedback inmediato y una práctica en tu entorno. Vas a **construir** el uso del conector en una app sin pasos dados, vas a **diagnosticar** una importación fallida antes de ver la causa, y vas a cerrar con un **reto de transferencia** con una API distinta (con clave y con una URL diferente por ambiente).
 >
-> Necesitas: tu entorno Developer del Módulo 1 (los conectores personalizados son **Premium**; el entorno Developer permite crearlos para aprender, pero en un Developer administrado —todos los que se crean desde el 15-11-2026— ejecutar el flujo exige licencia premium o la prueba de 30 días de Power Apps; ver [Entornos y trials](/recursos/entornos-y-trials)) y el publisher `SIT` (prefijo `sit`) que creaste en el Módulo 2 o en el Laboratorio 2. Es útil haber hecho la Microlección 3 del [Módulo 11](/nivel/intermedio/modulo/power-automate-avanzado): aquí se usa la misma API pública de tasas de cambio, que no pide credenciales.
+> Necesitas: tu ambiente del curso del Módulo 1 (los conectores personalizados son **Premium**: para ejecutar el flujo necesitas licencia premium o la licencia Power Apps trial con la que creaste tu Trial, que dura 30 días y se puede extender hasta 90; ver [Entornos y trials](/recursos/entornos-y-trials)) y el publisher `SIT` (prefijo `sit`) que creaste en el Módulo 2 o en el Laboratorio 2. Es útil haber hecho la Microlección 3 del [Módulo 11](/nivel/intermedio/modulo/power-automate-avanzado): aquí se usa la misma API pública de tasas de cambio, que no pide credenciales.
 
 ---
 
@@ -59,7 +59,7 @@ En el asistente eso se reparte así: `api.exchangerate-api.com` es el **Host** (
 
 **Práctica real en tu entorno (35 min):**
 
-1. En <https://make.powerapps.com>, con tu entorno Developer seleccionado arriba a la derecha, ve a **Solutions** > **New solution**. **Display name** = `SIT Conectores`, **Publisher** = `SIT` > **Create**. Esta solución va a contener **solo** el conector (en la Microlección 4 verás por qué).
+1. En <https://make.powerapps.com>, con tu ambiente del curso seleccionado arriba a la derecha, ve a **Solutions** > **New solution**. **Display name** = `SIT Conectores`, **Publisher** = `SIT` > **Create**. Esta solución va a contener **solo** el conector (en la Microlección 4 verás por qué).
 2. Dentro de la solución: **New** > **Automation** > **Custom connector** > **Create from blank**. El asistente se abre en una **pestaña nueva** del navegador; la solución sigue abierta en la pestaña anterior (la vas a necesitar en el paso 10).
 3. Escribe el nombre `SIT Tasas de Cambio` y pulsa **Continue**.
 4. Sección **General**: **Scheme** = **HTTPS**, **Host** = `api.exchangerate-api.com`, **Base URL** = `/`. Escribe una **Description** (por ejemplo, "Tasas de cambio de referencia, sin autenticación").

@@ -8,7 +8,7 @@ practiceMinutes: 210
 slug: "code-apps-con-react-y-typescript"
 lastVerified: "2026-11"
 ---
-*Lectura: 15-20 min · Con práctica: unos 210 min (3 h 30) en tu entorno Developer, mejor en dos sesiones (1: Microlecciones 1 y 2; 2: el reto y el cierre); la primera vez, cuenta hasta una vez y media más. Habilitar code apps en el entorno requiere un administrador del entorno o de Power Platform.*
+*Lectura: 15-20 min · Con práctica: unos 210 min (3 h 30) en tu ambiente del curso, mejor en dos sesiones (1: Microlecciones 1 y 2; 2: el reto y el cierre); la primera vez, cuenta hasta una vez y media más. Habilitar code apps en el entorno requiere un administrador del entorno o de Power Platform.*
 
 ### 🚧 Antes de comenzar: es el módulo con más exigencia de código de la ruta Developer
 
@@ -28,11 +28,10 @@ Construir aplicaciones web completas (React + TypeScript + Vite) que corren dent
 > con pasos y el CRUD **sin pasos**, vas a **diagnosticar** un síntoma real antes de ver la causa, y vas a
 > cerrar con un **reto de transferencia** que lleva la app a TEST y PROD con un conector distinto.
 >
-> Necesitas: tu entorno Developer con la tabla **Solicitud TI** (`sit_solicitud`) del Lab 02 y la solución
-> `SIT Solicitudes Internas`; Node.js (versión LTS), Git y Visual Studio Code. Como en el Módulo 14, el
-> entorno Developer te deja construir con funciones Premium para aprender; pero en un Developer administrado
-> (todos desde el 15-11-2026) también tú necesitas licencia Premium, o la prueba de 30 días de Power Apps,
-> para abrir la app, y en un entorno real la necesita cada usuario (ver Conceptos clave).
+> Necesitas: tu ambiente del curso con la tabla **Solicitud TI** (`sit_solicitud`) del Lab 02 y la solución
+> `SIT Solicitudes Internas`; Node.js (versión LTS), Git y Visual Studio Code. Como en el Módulo 14, para abrir la app
+> necesitas licencia Premium o la licencia Power Apps trial (la misma con la que creaste tu Trial; dura 30 días
+> y se puede extender hasta 90, ver [Entornos y trials](/recursos/entornos-y-trials)), y en un entorno real la necesita cada usuario (ver Conceptos clave).
 
 ---
 
@@ -65,7 +64,7 @@ Construir aplicaciones web completas (React + TypeScript + Vite) que corren dent
 
 **Práctica real en tu entorno (45 min, con las instalaciones y el inicio de sesión):**
 
-1. **Habilitar code apps** (si no eres administrador, pídeselo a quien lo sea): en <https://admin.powerplatform.microsoft.com> > **Manage** > **Environments** > tu entorno Developer > **Settings** > despliega **Product** > **Features** > busca **Power Apps code apps** y activa **Enable code apps** > **Save**.
+1. **Habilitar code apps** (si no eres administrador, pídeselo a quien lo sea): en <https://admin.powerplatform.microsoft.com> > **Manage** > **Environments** > tu ambiente del curso > **Settings** > despliega **Product** > **Features** > busca **Power Apps code apps** y activa **Enable code apps** > **Save**.
 
 2. Comprueba las herramientas en una terminal:
 
@@ -249,7 +248,7 @@ Síntoma: un compañero escribió su lista con una sola línea, `Sit_solicitudsS
 
 ## 🔁 Reto de transferencia
 
-Tu app lee y escribe Dataverse en tu entorno Developer. El requisito **cambia**: la app tiene que mostrar, junto a cada solicitud, el nombre y el cargo del solicitante usando el conector **Office 365 Users**, y tiene que llegar a TEST y PROD con Power Platform Pipelines, sin editar nada a mano en cada entorno y con la publicación automatizada en CI/CD.
+Tu app lee y escribe Dataverse en tu ambiente del curso. El requisito **cambia**: la app tiene que mostrar, junto a cada solicitud, el nombre y el cargo del solicitante usando el conector **Office 365 Users**, y tiene que llegar a TEST y PROD con Power Platform Pipelines, sin editar nada a mano en cada entorno y con la publicación automatizada en CI/CD.
 
 **[Transferir: la Code App ahora va a TEST y PROD con otro conector](/practica/ip-js-010-transferir-code-app-a-test-y-prod)** — decide cómo se conecta Office 365 Users, qué pasa con Dataverse, y cómo apunta a la solución el pipeline. Si solo memorizaste "agrego el data source y hago push", este reto te lo va a mostrar.
 

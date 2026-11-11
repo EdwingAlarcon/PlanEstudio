@@ -18,7 +18,7 @@ Entender cómo se conecta una aplicación o script externo a Dataverse/Dynamics 
 > **Cómo está organizado este módulo:** cada microlección trae un concepto breve, una micropráctica con feedback inmediato y una práctica con **evidencia** (el dato exacto que observaste). La Microlección 3 es una actividad de **fallo y corrección**: recibes un script de Node.js generado por IA con errores plausibles, los detectas ejecutándolo, probando sus URL en el navegador y contrastando con Microsoft Learn. Cierras **decidiendo y defendiendo** con qué identidad y qué permisos corre la integración del caso, y con un **reto de transferencia** en el que la integración ya no lee: escribe.
 >
 > **Antes de empezar, necesitas:**
-> - Un ambiente **Developer** o **Sandbox** de práctica (nunca producción) y un navegador con la sesión iniciada en [Power Apps](https://make.powerapps.com). Para la Microlección 2, ser administrador de ese ambiente (en un ambiente Developer propio lo eres).
+> - Tu ambiente del curso u otro ambiente de práctica (**Trial**, **Developer** o **Sandbox**; nunca producción) y un navegador con la sesión iniciada en [Power Apps](https://make.powerapps.com). Para la Microlección 2, ser administrador de ese ambiente (en el ambiente Trial que creaste tú lo eres).
 > - **Node.js LTS** para la Microlección 3 (`node --version` en una terminal debe responder `v20` o superior). Si hiciste el Módulo 52 ya lo tienes; si no, [nodejs.org](https://nodejs.org), versión LTS. No hace falta saber programar en Node: vas a ejecutar y leer, no a escribir desde cero.
 > - **No necesitas** crear una app registration: en todo el módulo la parte que la requiere es opcional y trae variante en papel. Este módulo es transversal: no exige ningún nivel de certificación.
 

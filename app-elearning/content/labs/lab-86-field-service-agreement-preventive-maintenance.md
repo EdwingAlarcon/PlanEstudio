@@ -32,7 +32,7 @@ Work Orders de prueba, la entrega es **Simulado**.
 
 ## 🔧 Requisitos de tenant y fallos frecuentes
 
-> **Sin licencia:** los cuatro pasos se entregan en papel (estado **Simulado**). Para comprobar pantallas puedes usar la trial de 30 días de Field Service (**Try for free** en la [página de producto](https://www.microsoft.com/dynamics-365/products/field-service)): crea su propio tenant, no se añade a tu ambiente Developer, caduca tras 14 días sin uso y, con un correo personal, no se puede extender ([Learn: Trial FAQ](https://learn.microsoft.com/dynamics365/field-service/trial-faq)). Quien crea la trial queda como administrador, así que puede crear Incident Types y Agreements.
+> **Sin licencia:** los cuatro pasos se entregan en papel (estado **Simulado**). Para comprobar pantallas puedes usar la trial de 30 días de Field Service (**Try for free** en la [página de producto](https://www.microsoft.com/dynamics-365/products/field-service)): crea su propio tenant, no se añade a tu ambiente del curso, caduca tras 14 días sin uso y, con un correo personal, no se puede extender ([Learn: Trial FAQ](https://learn.microsoft.com/dynamics365/field-service/trial-faq)). Quien crea la trial queda como administrador, así que puede crear Incident Types y Agreements.
 
 ### Licencia y rol mínimo
 

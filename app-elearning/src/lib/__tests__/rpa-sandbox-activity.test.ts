@@ -64,6 +64,22 @@ describe("summarizeActivity", () => {
     expect(summary.checks.find((item) => item.id === "consulta-previa")?.detail).toContain("SOL-2026-0050");
   });
 
+  it("el aviso cerrado se cuenta aparte y no altera intentos ni comprobaciones", () => {
+    const base: ActivityEvent[] = [
+      { kind: "consulta", requestId: "SOL-2026-0070", result: "No encontrado" },
+      { kind: "registrar", requestId: "SOL-2026-0070", outcome: "insertado" },
+    ];
+    const sinAviso = summarizeActivity(base, table("SOL-2026-0070"));
+    const conAviso = summarizeActivity([base[0]!, { kind: "aviso-cerrado" }, base[1]!], table("SOL-2026-0070"));
+    expect(conAviso.avisosCerrados).toBe(1);
+    expect(conAviso.rows).toEqual(sinAviso.rows);
+    expect(conAviso.checks).toEqual(sinAviso.checks);
+    expect(formatActivityReport(conAviso)).toContain("Avisos inesperados cerrados: 1");
+    // En los demás modos el informe no cambia: sin aviso, no aparece la línea.
+    expect(sinAviso.avisosCerrados).toBe(0);
+    expect(formatActivityReport(sinAviso)).not.toContain("Avisos inesperados");
+  });
+
   it("agrupa los identificadores vacíos y recorta espacios", () => {
     const events: ActivityEvent[] = [
       { kind: "registrar", requestId: "  ", outcome: "incompleto" },

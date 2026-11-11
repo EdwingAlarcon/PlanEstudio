@@ -5,7 +5,7 @@ interfaces, herencia, excepciones, `async`/`await`) que el plan no enseñaba ant
 nunca programaste en C#, leé esto primero.
 
 **Tipo de práctica de este recurso: conceptual + ejecutable en tu máquina (sin Dataverse todavía).**
-Todo corre en un proyecto de consola .NET local — no necesitás ambiente Developer ni tenant para esta
+Todo corre en un proyecto de consola .NET local — no necesitás ambiente del curso ni tenant para esta
 parte. La ejecución contra Dataverse real sigue siendo del Módulo 23.
 
 ## Objetivo

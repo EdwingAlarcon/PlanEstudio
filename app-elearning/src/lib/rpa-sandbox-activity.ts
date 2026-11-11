@@ -9,7 +9,9 @@ export type LegacyOutcome = "insertado" | "duplicado" | "bloqueado" | "incomplet
 
 export type ActivityEvent =
   | { kind: "consulta"; requestId: string; result: string }
-  | { kind: "registrar"; requestId: string; outcome: LegacyOutcome };
+  | { kind: "registrar"; requestId: string; outcome: LegacyOutcome }
+  /** El bot cerró el diálogo "Aviso de sesión" del modo Modal inesperado. No es un intento de Registrar. */
+  | { kind: "aviso-cerrado" };
 
 export interface RequestActivity {
   requestId: string;
@@ -35,6 +37,8 @@ export interface ActivitySummary {
   filasRepetidas: number;
   /** Solicitudes insertadas sin una consulta por ID anterior a su primer Registrar. */
   sinConsultaPrevia: string[];
+  /** Veces que se cerró el aviso del modo Modal inesperado. No afecta a las comprobaciones. */
+  avisosCerrados: number;
   checks: ActivityCheck[];
   hasActivity: boolean;
 }
@@ -57,8 +61,13 @@ export function summarizeActivity(events: ActivityEvent[], records: Array<{ requ
   const firstRegisterSeen = new Set<string>();
   const insertedWithoutLookup = new Set<string>();
   let intentosRedundantes = 0;
+  let avisosCerrados = 0;
 
   for (const event of events) {
+    if (event.kind === "aviso-cerrado") {
+      avisosCerrados += 1;
+      continue;
+    }
     const row = touch(event.requestId);
     if (event.kind === "consulta") {
       row.consultas += 1;
@@ -112,7 +121,7 @@ export function summarizeActivity(events: ActivityEvent[], records: Array<{ requ
     },
   ];
 
-  return { rows, intentosRedundantes, filasRepetidas, sinConsultaPrevia, checks, hasActivity };
+  return { rows, intentosRedundantes, filasRepetidas, sinConsultaPrevia, avisosCerrados, checks, hasActivity };
 }
 
 /** Texto plano para copiar como evidencia (el alumno lo pega en su tabla de evidencia). */
@@ -124,5 +133,7 @@ export function formatActivityReport(summary: ActivitySummary): string {
   }
   lines.push("");
   for (const check of summary.checks) lines.push(`[${check.ok ? "OK" : "REVISAR"}] ${check.label}: ${check.detail}`);
+  // Solo aparece si hubo aviso: el informe de los demás modos no cambia.
+  if (summary.avisosCerrados > 0) lines.push(`Avisos inesperados cerrados: ${summary.avisosCerrados}`);
   return lines.join("\n");
 }

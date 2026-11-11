@@ -512,7 +512,7 @@
 - A) **Apps activas sin dueño identificado ✅** — Generan riesgo de continuidad; nadie mantiene la app si el creador abandona la empresa
 - B) Número total de apps en el tenant ❌ — La cantidad por sí sola no indica riesgo; apps gestionadas con dueños son saludables
 - C) **Flujos de Power Automate que usan conexiones personales (no Service Account) en ambientes productivos ✅** — Si el usuario dueño de la conexión se va, el flujo se rompe en producción
-- D) Número de ambientes Developer en el tenant ❌ — Los ambientes Developer son gratuitos para makers; su número no es un riesgo directo
+- D) Número de ambientes Developer en el tenant ❌ — Son ambientes personales de desarrollo (desde noviembre de 2026, solo gestionados y uno por usuario); su número no es un riesgo directo
 
 **P3 (Caso práctico):** Define la estrategia de gobernanza para un tenant de 500 makers.
 

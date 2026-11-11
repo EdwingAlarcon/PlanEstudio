@@ -28,7 +28,7 @@ const REQUIRED_FILES = [
   "reference/comparativa_tecnologica.csv",
   "portal/portal-data.json",
   "portal/scenarios.json",
-  "legacy-app/legacy-records.json",
+  "legacy-app/lote-entrada.json",
   "logs/run_history_sample.csv",
   "validation/matriz_operacional.csv",
   "validation/protocolo_tenant.md",

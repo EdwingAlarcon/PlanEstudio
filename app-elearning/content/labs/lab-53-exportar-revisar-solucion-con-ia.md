@@ -9,7 +9,7 @@ role: ["Developer", "Solution Architect"]
 prerequisites:
   - "Lab 52 completado — Power Platform CLI configurado y conectado"
   - "Módulo 54 estudiado: ALM de Soluciones Power Platform con Apoyo de IA"
-  - "Una solución de práctica en un entorno Developer/Sandbox (puede ser mínima: una tabla y un flujo)"
+  - "Una solución de práctica en tu ambiente del curso u otro entorno de práctica (puede ser mínima: una tabla y un flujo)"
 files: []
 lastVerified: "2026-11"
 ---
@@ -61,7 +61,7 @@ pac org who
 pac solution export --name "SITSolicitudesGastos" --path ./exports/SITSolicitudesGastos.zip
 ```
 
-Si `pac org who` muestra un ambiente que no es tu Developer/Sandbox de práctica, **no exportes todavía**: revisa tus perfiles con `pac auth list`, cambia con `pac auth select --index <número del perfil>` y vuelve a ejecutar `pac org who`.
+Si `pac org who` muestra un ambiente que no es tu ambiente de práctica, **no exportes todavía**: revisa tus perfiles con `pac auth list`, cambia con `pac auth select --index <número del perfil>` y vuelve a ejecutar `pac org who`.
 
 **Validación esperada:** el archivo `.zip` se genera correctamente en la ruta indicada, y `pac org who` confirmó el entorno correcto antes de exportar.
 

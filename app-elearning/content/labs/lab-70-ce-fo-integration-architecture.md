@@ -7,7 +7,7 @@ product: ["Dynamics 365 Finance", "Dynamics 365 Supply Chain Management", "Datav
 certifications: ["Arquitectura Power Platform"]
 role: ["Solution Architect"]
 prerequisites:
-  - "Módulo 34 revisado: Arquitectura de Datos e Integración"
+  - "Módulo 34 revisado: Azure Integration Services Avanzado (patrones de integración)"
   - "Lab 69 completado: F&O Process Mapping — Procesos ERP End-to-End (recomendado)"
 lastVerified: "2026-11"
 ---

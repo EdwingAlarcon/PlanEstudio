@@ -16,7 +16,7 @@ Diseñar modelos de datos empresariales complejos en Dataverse: relaciones polim
 > **Cómo está organizado este módulo:** cada microlección trae un concepto breve, una micropráctica con feedback inmediato y una práctica en tu ambiente con **evidencia**: una tabla donde anotas el dato exacto que viste, no un "sí, funcionó". Hay un reto de construcción sin pasos, un diagnóstico en el que ves el síntoma antes que la causa y, al final, un reto de transferencia con otro negocio.
 >
 > **Antes de empezar, necesitas:**
-> - Tu ambiente Developer (o Trial) del Módulo 1, con la solución `SIT Solicitudes Internas` (`SIT_SolicitudesInternas`) del [Lab 02](/labs/lab-02-dataverse-modelo-datos): tablas **Categoría** y **Solicitud TI**, sus 2 Business Rules y los datos de prueba.
+> - Tu ambiente del curso del Módulo 1, con la solución `SIT Solicitudes Internas` (`SIT_SolicitudesInternas`) del [Lab 02](/labs/lab-02-dataverse-modelo-datos): tablas **Categoría** y **Solicitud TI**, sus 2 Business Rules y los datos de prueba.
 > - La model-driven app `SIT Gestión Solicitudes` del [Lab 04](/labs/lab-04-model-driven-app) (o la app del Módulo 4) para ver formularios.
 > - Para probar seguridad de columna hace falta un **segundo usuario que no sea administrador** (la cuenta de prueba del Lab 04). Sin él puedes hacer todo lo demás.
 >

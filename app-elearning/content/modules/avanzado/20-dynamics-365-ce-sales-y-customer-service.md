@@ -14,7 +14,7 @@ Configurar y personalizar Dynamics 365 Customer Engagement entendiendo primero l
 > **Cómo está organizado este módulo:** cada microlección trae un concepto breve, una micropráctica con feedback inmediato y una práctica en un ambiente de Dynamics 365 con **evidencia** (el dato exacto que viste, no un "sí, funcionó"). En la Microlección 4 vas a **diagnosticar** un SLA que falla sin motivo antes de ver la causa, y el módulo cierra con un reto de construcción sin pasos y un **reto de transferencia** con otro cliente.
 >
 > **Antes de empezar — este módulo necesita aplicaciones de Dynamics 365 (lee esto, ahorra una tarde):**
-> - **Tu ambiente Developer del curso NO sirve aquí.** En un ambiente Developer no se pueden instalar apps de Dynamics 365, y un ambiente solo con Dataverse no trae Lead, Opportunity, Quote, Case, Entitlement ni SLA. Ya lo viste en el Módulo 16: Opportunity y Competitor solo existen con las apps de Dynamics 365.
+> - **Tu ambiente del curso NO sirve aquí.** Lo creaste sin apps de Dynamics 365 (en un ambiente Developer, además, no se pueden instalar), y un ambiente solo con Dataverse no trae Lead, Opportunity, Quote, Case, Entitlement ni SLA. Ya lo viste en el Módulo 16: Opportunity y Competitor solo existen con las apps de Dynamics 365.
 > - **Necesitas dos trials:** uno de **Dynamics 365 Sales** (Microlecciones 1 a 3) y otro de **Dynamics 365 Customer Service** (Microlecciones 4 y 5). Para Sales, Microsoft ofrece un [trial gratuito](https://dynamics.microsoft.com/en-us/sales/sales/free-trial/); para Customer Service, entra en la [página de Dynamics 365 Customer Service](https://www.microsoft.com/dynamics-365/products/customer-service) y pulsa **Try for free** ([Learn: activar el trial de Customer Service](https://learn.microsoft.com/dynamics365/customer-service/implement/try-customer-service)), o pídelo al administrador del tenant ([Learn: ambientes de prueba](https://learn.microsoft.com/power-platform/admin/trial-environments)). Cuenta 30-45 min por trial entre el alta y el aprovisionamiento. La duración y las condiciones las define Microsoft y cambian: verifícalas al activarlo. Cada trial crea **su propio** ambiente y **no comparten datos**: no esperes ver en Customer Service las cuentas que creaste en Sales. Detalle en [Entornos y trials](/recursos/entornos-y-trials) y [D365 Tenant Readiness](/recursos/d365-tenant-readiness).
 > - **Cuenta:** la misma cuenta de trabajo o estudio del Módulo 1 (no una cuenta personal de Outlook/Hotmail). Al crear el trial, elige **English (United States)** como idioma, igual que el ambiente del curso: las etiquetas de este módulo están en inglés.
 > - **Nombres nuevos de las apps de servicio:** Microsoft renombró el centro de administración y el espacio de trabajo de servicio. En Learn y en tu trial verás **Copilot Service admin center** (configuración: SLA, entitlements, routing, reglas de correo) y **Copilot Service workspace** (la app multisesión de los representantes). La antigua **Customer Service Hub** ya no está disponible para organizaciones nuevas con licencias Enterprise ([Learn: retiro de Customer Service Hub](https://learn.microsoft.com/dynamics365/customer-service/administer/faq-csh-removal)).
@@ -74,19 +74,19 @@ Configurar y personalizar Dynamics 365 Customer Engagement entendiendo primero l
 **Práctica real en tu trial de Sales (20 min):**
 
 1. Abre tu trial de Dynamics 365 Sales y entra a la app **Sales Hub**. En el mapa del sitio (izquierda) confirma que ves **Leads**, **Opportunities**, **Accounts** y **Contacts**.
-2. En [make.powerapps.com](https://make.powerapps.com), con el ambiente del trial seleccionado (selector de ambiente arriba a la derecha), ve a **Tables** y busca `Quote`, `Order`, `Invoice` y `Competitor`. Anota si existen. Repite la búsqueda en el ambiente Developer del curso: ahí **no** deberían aparecer Quote ni Competitor (es exactamente lo que viste en el Módulo 16).
+2. En [make.powerapps.com](https://make.powerapps.com), con el ambiente del trial seleccionado (selector de ambiente arriba a la derecha), ve a **Tables** y busca `Quote`, `Order`, `Invoice` y `Competitor`. Anota si existen. Repite la búsqueda en tu ambiente del curso: ahí **no** deberían aparecer Quote ni Competitor (es exactamente lo que viste en el Módulo 16).
 3. Toma el proceso de ventas y servicio de una empresa real o simulada (o el de SIT: venta de licencias + soporte) y completa la matriz de arriba con **al menos 6 pasos** propios. Para cada "custom" escribe en una frase por qué no sirve la entidad estándar.
 
 **Si no lo ves:** si **Sales Hub** no aparece en la lista de apps, entraste al ambiente equivocado: el trial crea un ambiente nuevo con un nombre propio; búscalo en el selector de ambiente.
 
-> **Sin trial:** haz solo el paso 3 y, en el paso 2, comprueba en tu ambiente Developer que `Quote` y `Competitor` no existen. Esa ausencia es tu evidencia de por qué se necesita el trial.
+> **Sin trial:** haz solo el paso 3 y, en el paso 2, comprueba en tu ambiente del curso que `Quote` y `Competitor` no existen. Esa ausencia es tu evidencia de por qué se necesita el trial.
 
 **Evidencia a reportar:**
 
 | Campo | Tu valor |
 |---|---|
 | Nombre exacto del ambiente del trial de Sales | ___ |
-| ¿Existen `Quote` y `Competitor` en el trial? ¿Y en tu ambiente Developer? | ___ |
+| ¿Existen `Quote` y `Competitor` en el trial? ¿Y en tu ambiente del curso? | ___ |
 | Número de pasos de tu matriz y cuántos quedaron como fit / gap / custom | ___ |
 | El paso que marcaste como "custom" y la razón en una frase (o "ninguno" y por qué) | ___ |
 

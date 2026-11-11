@@ -27,7 +27,7 @@ hints:
   - id: hint-1
     level: light
     title: "Sin tenant propio"
-    content: "Si aún no tienes acceso, sigue la alternativa conceptual de cada paso en /preparar-entorno mientras consigues un entorno Developer o Trial."
+    content: "Si aún no tienes acceso, sigue la alternativa conceptual de cada paso en /preparar-entorno mientras consigues tu ambiente del curso (un Trial con Dataverse, ver /recursos/entornos-y-trials)."
   - id: hint-2
     level: tool
     title: "Selector de entorno"
@@ -63,7 +63,7 @@ evidencia verificable, no solo como checklist marcado.
 3. Abre [Power Platform Admin Center](https://admin.powerplatform.microsoft.com) y busca ese mismo
    entorno en la lista.
 4. Confirma su tipo: Developer, Trial, Sandbox o Production.
-5. Si el tipo es Production, **detente** — no practiques ahí. Solicita un entorno Developer o Trial.
+5. Si el tipo es Production, **detente** — no practiques ahí. Crea tu ambiente del curso (un Trial con Dataverse) o solicita un Developer gestionado o un Sandbox.
 6. Revisa tu rol de seguridad asignado en ese entorno (Environment Maker, Basic User, System
    Customizer, u otro) desde la configuración de seguridad del entorno.
 7. Vuelve a `/preparar-entorno` y marca los pasos correspondientes del "Setup esencial".

@@ -27,7 +27,7 @@ Analizar y diseñar soluciones para los patrones más comunes de transformación
 >
 > **Antes de empezar, necesitas:**
 > - Haber terminado los Niveles 1 a 3 y los Módulos 31 a 38 (gobernanza, seguridad, AI Builder y liderazgo técnico): aquí se combinan, no se vuelven a explicar.
-> - Tu ambiente **DEV** del curso (un ambiente Developer con Dataverse, el de la solución `SIT Solicitudes Internas`).
+> - Tu ambiente **DEV** del curso (tu ambiente del curso con Dataverse, el de la solución `SIT Solicitudes Internas`).
 > - Para la Microlección 2, una licencia **Power Automate Premium** o la **prueba de Power Automate** (90 días), que incluyen process mining. Si no tienes ninguna, esa práctica tiene una variante en papel.
 > - Los casos de este módulo (inventario, crédito, universidad) son **ilustrativos**: sus cifras sirven para razonar, no son datos de empresas reales.
 

@@ -7,7 +7,7 @@ product: ["Dataverse", "Power Apps"]
 certifications: ["PL-900"]
 role: ["Maker", "Developer"]
 prerequisites:
-  - "Ambiente Developer activo en make.powerapps.com"
+  - "Ambiente del curso activo en make.powerapps.com"
   - "Módulo 1 completado — entorno configurado"
 files: []
 lastVerified: "2026-11"
@@ -76,7 +76,7 @@ Este lab construye **el mismo modelo del Módulo 2**, con los mismos nombres vis
 
 - [ ] Cuenta de trabajo o estudio activa (no personal) — ver [Entornos y trials](/recursos/entornos-y-trials)
 - [ ] Acceso confirmado a [make.powerapps.com](https://make.powerapps.com)
-- [ ] Ambiente de tipo **Developer** (o **Trial**) con Dataverse creado, como en el Módulo 1 (nunca usar el ambiente Default de producción)
+- [ ] Tu ambiente del curso con Dataverse creado, como en el Módulo 1 (Trial, o el Developer gestionado o Sandbox que te dé tu organización; nunca el ambiente Default de producción). Si es un Trial, comprueba cuántos días le quedan (**Day(s) remain**)
 - [ ] Rol **System Customizer** o **System Administrator** en el ambiente
 
 ### Conocimiento previo
@@ -86,7 +86,7 @@ Este lab construye **el mismo modelo del Módulo 2**, con los mismos nombres vis
 
 ### Verificación rápida antes de empezar
 
-En [make.powerapps.com](https://make.powerapps.com), el selector de ambiente en la esquina superior derecha debe mostrar tu ambiente Developer, **no** el ambiente Default.
+En [make.powerapps.com](https://make.powerapps.com), el selector de ambiente en la esquina superior derecha debe mostrar tu ambiente del curso, **no** el ambiente Default.
 
 > **Nombres de los botones:** Power Apps está en inglés en estos pasos, igual que en el Módulo 2 (el ambiente del curso se crea en English (United States)). Si un botón no aparece con el nombre que se indica, búscalo en la misma zona de la pantalla (barra de comandos de arriba o panel de la derecha) por lo que hace, no por su texto exacto.
 
@@ -165,7 +165,7 @@ Solution: SIT_SolicitudesInternas   (Publisher SIT, prefijo sit)
 
 ### Tarea 1.1 — Crear la Solution (y el Publisher, si no lo tienes)
 
-1. En [make.powerapps.com](https://make.powerapps.com), con tu ambiente **Developer** seleccionado, abre **Solutions** en el menú de la izquierda (si no lo ves, está en **…More**).
+1. En [make.powerapps.com](https://make.powerapps.com), con tu ambiente del curso seleccionado, abre **Solutions** en el menú de la izquierda (si no lo ves, está en **…More**).
 
 2. En la barra de comandos selecciona **New solution**. Se abre un panel a la derecha.
 
@@ -567,10 +567,12 @@ Si completaste el laboratorio antes del tiempo estimado, intenta:
 
 ## Limpieza del laboratorio
 
-> Realiza estos pasos solo si estás usando un ambiente compartido. Si es tu ambiente Developer personal, conserva los datos: el Lab 03 los usará.
+> Realiza estos pasos solo si estás usando un ambiente compartido. Si es tu ambiente del curso personal, conserva los datos: el Lab 03 los usará.
 
 1. En el editor de filas de cada tabla (`Solicitud TI` y `Categoría`), selecciona los registros de prueba y elimínalos.
 2. **No elimines las tablas ni la solución**: se necesitan en los Labs 03, 04, 05 y 09.
+
+> **💾 Antes de cerrar la sesión, exporta tu solución.** **Solutions** > selecciona tu solución > **Export** > **Publish all changes** > **Next** > **Unmanaged** > **Export**, y guarda el `.zip` fuera del ambiente con la fecha y el número de lab en el nombre. Si tu ambiente Trial vence, ese archivo es lo que importas en el ambiente nuevo; las filas de datos, las conexiones y el historial no viajan en él ([Entornos y trials](/recursos/entornos-y-trials)).
 
 ---
 

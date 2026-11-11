@@ -95,7 +95,7 @@ Guarda el prompt y la respuesta completa: son evidencia.
 
 Guarda la columna.
 
-**2.3 Aplica la propuesta en el flujo.** Abre el flujo en el diseñador y aplica lo que propuso la IA **solo si** respeta tu criterio del Ejercicio 1; si no, anota la diferencia y aplica la versión corregida. Recuerda: la columna nueva aparece en **Update a row** bajo **Advanced parameters**, igual que **Estado** en el Lab 05. Al terminar, **Publish**.
+**2.3 Aplica la propuesta en el flujo.** Abre el flujo en el diseñador y aplica lo que propuso la IA **solo si** respeta tu criterio del Ejercicio 1; si no, anota la diferencia y aplica la versión corregida. Recuerda: la columna nueva aparece en **Update a row** bajo **Advanced parameters** (o **Show all**), igual que **Estado** en el Lab 05; en el diseñador clásico es **Show advanced options**, que es el nombre que da Learn para esta acción ([Learn: Update a row](https://learn.microsoft.com/power-automate/dataverse/update)). Al terminar, **Publish**.
 
 ## Ejercicio 3 — Revisar el resultado (humano aprueba, parcial)
 

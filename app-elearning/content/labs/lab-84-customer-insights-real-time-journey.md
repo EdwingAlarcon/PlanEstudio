@@ -35,7 +35,7 @@ prueba, la entrega es **Simulado**.
 
 ### Sin licencia: cómo se entrega
 
-Tu ambiente Developer de Power Platform no puede instalar Customer Insights - Journeys. Sin trial ni
+Tu ambiente del curso no trae Customer Insights - Journeys. Sin trial ni
 licencia, haz los cuatro pasos en papel y marca la entrega como **Simulado**: es una entrega válida.
 La única vía sin pagar para ver la interfaz es la
 [trial de 30 días de Customer Insights](https://learn.microsoft.com/dynamics365/customer-insights/journeys/trial-signup),
@@ -74,7 +74,7 @@ no sirven aquí ([Learn: usuarios, licencias y roles](https://learn.microsoft.co
 |---|---|---|---|
 | No puedes entrar en la app o no ves el área de journeys | Usuario sin rol de seguridad de Customer Insights - Journeys (o, sin ninguna licencia de Dynamics 365, sin la licencia gratuita de usuario) | Power Platform admin center > **Environments** > el ambiente > **Settings** > **Users + permissions** > **Users**: roles del usuario | Pedir al administrador el rol **Marketing Professional - Business** (o **Marketing Manager - Business**) y, si hace falta, la licencia gratuita de usuario |
 | El email no pasa la revisión de errores al ponerlo en vivo | El remitente usa un dominio no autenticado | **Settings** > **Email marketing** > **Domain authentication**: estado de cada registro DNS | Autenticar el dominio propio; para pruebas, usar el dominio preautenticado `dyn365mktg.com` (no para producción) |
-| El canal SMS del reto adicional no se puede usar | El SMS exige un proveedor contratado y configurado (ACS, Infobip, LINK Mobility, Telesign, Twilio o Vibes) | Revisar en **Settings** si hay un proveedor de SMS configurado (anota la ruta tal como aparece) | Documentar el diseño igual, marcando ese paso como "diseñado, no ejecutable en este tenant" |
+| El canal SMS del reto adicional no se puede usar | El SMS exige un proveedor contratado y configurado (ACS, Infobip, LINK Mobility, Telesign, Twilio o Vibes) | **Settings** (en el selector de área) > **Customer engagement** > **SMS providers**: si hay un proveedor configurado ([Learn: Set up text messaging](https://learn.microsoft.com/dynamics365/customer-insights/journeys/real-time-marketing-text-messaging-setup)) | Documentar el diseño igual, marcando ese paso como "diseñado, no ejecutable en este tenant" |
 | Un contacto de prueba no recibe el email aunque el journey esté en vivo | Con un propósito **Restrictive**, el email del contacto no tiene registro de opt-in en *contact point consent* para ese propósito (o topic) | Abrir el contacto y revisar su consentimiento por punto de contacto para el propósito del email | Registrar el opt-in de prueba (por ejemplo, desde el preference center) antes de volver a probar |
 | No se puede crear el journey porque la app no está instalada en el ambiente | Customer Insights - Journeys se instala por ambiente de Dataverse | Power Platform admin center > **Manage** > **Dynamics 365 Apps** > Customer Insights > **Manage** | Instalar la app en ese ambiente (en una trial de administrador, en un ambiente **Subscription-based Trial** con **Allow D365 Apps**) antes de diseñar el journey |
 

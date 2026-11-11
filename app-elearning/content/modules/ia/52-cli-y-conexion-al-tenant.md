@@ -17,8 +17,8 @@ Configurar un entorno de desarrollo local para Power Platform, entender la difer
 >
 > **Antes de empezar, necesitas:**
 > - Windows, macOS o Linux con permiso para instalar software, y **Visual Studio Code** (la forma de instalación que Learn recomienda es su extensión).
-> - Para las Microlecciones 1 y 3: acceso a un ambiente **Developer** o **Sandbox** de práctica (nunca producción). Si hiciste el Módulo 1, usa el ambiente que creaste ahí. Desde el 15 de noviembre de 2026, registrarse en el Power Apps Developer Plan ya no crea un ambiente Developer, solo hay Developer **administrados** y cada usuario puede crear uno ([Learn: Create a developer environment](https://learn.microsoft.com/power-platform/developer/create-developer-environment)).
-> - **Un segundo ambiente es opcional** (solo lo usa el paso 5 de la Microlección 3). Con el Developer Plan no puedes crear un **Trial**: Learn exige una licencia con derecho a un trial por usuario (por ejemplo, la prueba gratuita de Power Apps) y que la política del tenant permita crear ambientes; un **Sandbox** necesita 1 GB de capacidad de base de datos disponible en el tenant, así que normalmente lo crea un administrador ([Learn: Who can create environments?](https://learn.microsoft.com/power-platform/admin/create-environment#who-can-create-environments)). Si no lo tienes, ese paso se hace en papel.
+> - Para las Microlecciones 1 y 3: acceso a un ambiente de práctica (nunca producción). Si hiciste el Módulo 1, usa tu ambiente del curso: un **Trial** con Dataverse, o el **Developer** gestionado o **Sandbox** que te dé tu organización. Desde el 15 de noviembre de 2026, registrarse en el Power Apps Developer Plan ya no crea un ambiente Developer ([Learn: Developer Plan](https://learn.microsoft.com/power-platform/developer/plan)); ver [Entornos y trials](/recursos/entornos-y-trials).
+> - **Un segundo ambiente es opcional** (solo lo usa el paso 5 de la Microlección 3). El **Trial** es uno por usuario: si tu ambiente del curso ya es tu Trial, no puedes crear otro con la misma cuenta. Con el Developer Plan no puedes crear un **Trial**: Learn exige una licencia con derecho a un trial por usuario (por ejemplo, la prueba gratuita de Power Apps) y que la política del tenant permita crear ambientes; un **Sandbox** necesita 1 GB de capacidad de base de datos disponible en el tenant, así que normalmente lo crea un administrador ([Learn: Who can create environments?](https://learn.microsoft.com/power-platform/admin/create-environment#who-can-create-environments)). Si no lo tienes, ese paso se hace en papel.
 > - **Si no tienes ambiente**, haz la variante en papel de cada microlección: la Microlección 2, la decisión y el reto de transferencia funcionan sin tenant, y para ver la ayuda de `pac` no hace falta autenticarse.
 > - Este módulo es transversal: no exige ningún nivel de certificación. Te prepara para el [Lab 52](/labs/lab-52-cli-conexion-tenant), el [Lab 56](/labs/lab-56-cambiar-entornos-dev-test-prod) y el Módulo 54 (ALM con IA).
 
@@ -30,7 +30,7 @@ Configurar un entorno de desarrollo local para Power Platform, entender la difer
 - **`pac env who` (antes `pac org who`):** muestra la organización de Dataverse a la que apunta el perfil activo. Desde la versión 1.32 el grupo `pac org` se llama `pac env`; Learn indica que `org` sigue funcionando, pero recomienda `env` ([Learn: pac env](https://learn.microsoft.com/power-platform/developer/cli/reference/env)). En este módulo verás los dos: el Caso Real y los labs usan `pac org who`, y es el mismo comando.
 - **El nombre del perfil es una etiqueta; `pac env who` es la verdad.** `pac env select` y `pac auth update --environment` cambian el ambiente al que apunta un perfil sin cambiarle el nombre. Además, muchos comandos aceptan `--environment` para fijar el destino en esa misma línea en vez de depender del perfil activo.
 - **Separación Dev/Test/Prod:** cada etapa del ciclo de vida de una solución debe vivir en su propio entorno — nunca se desarrolla ni se prueba directamente en Production. Esto es la base de cualquier estrategia de ALM que se vea en el Módulo 54.
-- **Entorno personal vs. compartido:** un entorno Developer es tuyo y aislado (bueno para practicar y romper cosas); un entorno Default o un Sandbox compartido por el equipo requiere coordinación — nunca lo uses como "sandbox personal" para experimentar sin avisar.
+- **Entorno personal vs. compartido:** un entorno Developer o el Trial que creaste para el curso es tuyo y aislado (bueno para practicar y romper cosas); un entorno Default o un Sandbox compartido por el equipo requiere coordinación — nunca lo uses como "sandbox personal" para experimentar sin avisar.
 
 ### 👨‍💻 Actividades Prácticas
 
@@ -211,7 +211,7 @@ Cambia el contexto y comprueba si entendiste el patrón. El equipo quiere un scr
 Un consultor de Servicios Integrados Tecnológicos S.A. (SIT) atendía tres clientes distintos en la misma semana y tenía perfiles de `pac auth` guardados para cada uno. Un viernes, sin ejecutar `pac org who` antes de un `pac solution export`, exportó y sobrescribió sin querer una solución del Cliente B pensando que estaba conectado al entorno de pruebas del Cliente A — el perfil activo había quedado seleccionado de la sesión anterior. Ningún dato de producción se perdió porque no era el ambiente productivo, pero el incidente generó confusión y retrabajo. Desde entonces, el equipo adoptó como regla obligatoria: **ejecutar `pac org who` antes de cualquier comando que exporte, importe o modifique algo**, y nombrar los perfiles de forma explícita por cliente y entorno (ej. `sit-cliente-a-dev`, `sit-cliente-a-prod`).
 
 ### ✅ Buenas Prácticas
-- Practica y experimenta siempre en un entorno **Developer** o **Sandbox** propio, nunca en Production ni en un entorno compartido sin coordinar con el equipo.
+- Practica y experimenta siempre en tu ambiente del curso u otro entorno propio (**Trial**, **Developer** o **Sandbox**), nunca en Production ni en un entorno compartido sin coordinar con el equipo.
 - Ejecuta `pac env who` (o su nombre anterior, `pac org who`) antes de cualquier comando que exporte, importe o modifique datos/soluciones, sin excepción, y compara lo que muestra con datos que anotaste antes, no con tu memoria.
 - En los comandos que modifican algo, fija el destino con `--environment` en la misma línea: así no dependen del perfil que quedó activo.
 - Crea cada perfil con `--name` y `--environment`; sin `--environment`, el perfil queda conectado al ambiente Default del tenant.
@@ -224,7 +224,7 @@ Un consultor de Servicios Integrados Tecnológicos S.A. (SIT) atendía tres clie
 | Error | Causa | Solución |
 |-------|-------|----------|
 | Ejecutar un comando destructivo contra el entorno equivocado | No verificar el perfil activo antes de operar | Ejecutar siempre `pac env who` antes de exportar/importar/modificar, o fijar el destino con `--environment` |
-| Confundir "Default environment" con un entorno de desarrollo propio | Asumir que el entorno compartido del tenant es seguro para experimentar | Crear un entorno Developer o Sandbox dedicado para práctica |
+| Confundir "Default environment" con un entorno de desarrollo propio | Asumir que el entorno compartido del tenant es seguro para experimentar | Usar tu ambiente del curso (Trial) o un Developer o Sandbox dedicado para práctica |
 | El perfil nuevo apunta al ambiente **(default)** | Se creó con `pac auth create` sin `--environment` | `pac auth update --index <n> --environment <URL>` (o `pac env select --environment <URL>`) y confirmar con `pac env who` |
 | Perder el rastro de a qué cliente pertenece cada perfil de `pac auth` | Nombrar los perfiles de forma genérica o no nombrarlos | Usar convención de nombres clara (cliente-entorno) al crear cada perfil, o renombrarlos con `pac auth name --index <n> --name <nombre>` |
 | `pac --version` muestra la versión y después `Error: Not a valid command` | `--version` no es un comando de `pac` | Escribir `pac` a secas: la versión aparece en la segunda línea |
@@ -238,7 +238,7 @@ Un consultor de Servicios Integrados Tecnológicos S.A. (SIT) atendía tres clie
 - [ ] Encontré en el centro de administración la URL, el Environment ID y el Organization ID de mi ambiente de práctica, y el nombre del ambiente Default de mi tenant
 - [ ] Instalé Power Platform CLI por un método documentado en Learn y anoté la versión que muestra `pac`
 - [ ] Revisé línea por línea la guía de instalación de la IA con `pac <comando> help` y Learn, y escribí mi versión corregida
-- [ ] Creé un perfil de autenticación con `--name` y `--environment` contra un entorno Developer o Sandbox (no producción)
+- [ ] Creé un perfil de autenticación con `--name` y `--environment` contra tu ambiente del curso u otro entorno de práctica (no producción)
 - [ ] Listé mis perfiles con `pac auth list` y seleccioné uno explícitamente con `pac auth select --name`
 - [ ] Verifiqué la organización activa con `pac env who` y la comparé con los datos de la Microlección 1 antes de continuar
 - [ ] Diagnostiqué el perfil que apunta a otro ambiente formulando una hipótesis antes de ver la causa

@@ -33,7 +33,7 @@ los conceptos de Módulo 36 se transfieren 1:1.
 Verificado en Microsoft Learn en noviembre de 2026. Sin un ambiente así este lab no es ejecutable;
 la alternativa en papel está en el [Módulo 60](/nivel/d365/modulo/finance-operations-procesos-erp).
 
-- **Tu ambiente Developer de Power Platform no sirve.** Learn indica que el tipo de ambiente
+- **Tu ambiente del curso no sirve.** Learn indica que el tipo de ambiente
   *Developer* no admite ninguna carga de Dynamics 365; F&O se instala en ambientes *Sandbox*,
   *Production* o *Trial (subscription-based)* y exige una licencia de F&O asignada
   ([Learn: Unified environment types and templates](https://learn.microsoft.com/power-platform/admin/unified-experience/unified-environment-types-and-templates)).

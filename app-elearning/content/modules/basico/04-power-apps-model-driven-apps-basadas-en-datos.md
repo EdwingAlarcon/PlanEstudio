@@ -24,7 +24,7 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 ### 📖 Conceptos Clave
 - **Arquitectura Model-Driven**: *metadata-driven* (la app se arma a partir de la definición de tus tablas, no la dibujas) y se genera casi sola.
 - **Componentes**: *Forms* (formularios), *Views* (vistas: listas filtradas), *Charts* (gráficos), *Dashboards* (tableros que juntan gráficos y listas) y *Business Process Flows* (**BPF**: una barra de etapas, arriba del formulario, que guía a la persona paso a paso por un proceso).
-- **Tenant**: el "espacio" de tu organización en Microsoft 365, con sus usuarios y licencias. Dentro de él están tus ambientes (como tu ambiente Developer).
+- **Tenant**: el "espacio" de tu organización en Microsoft 365, con sus usuarios y licencias. Dentro de él están tus ambientes (como tu ambiente del curso).
 - **Play**: el botón del diseñador que abre la app tal como la verán los usuarios.
 - **Site Map** (mapa del sitio): el menú de navegación de la app, organizado en áreas, grupos y páginas.
 - **Security Roles** (roles de seguridad): conjuntos de permisos que dicen qué puede hacer cada persona con cada tabla (crear, leer, editar, borrar).
@@ -38,7 +38,7 @@ Construir aplicaciones Model-Driven aprovechando metadatos de Dataverse.
 
 #### 🟢 Núcleo obligatorio
 
-> **Cómo está organizado el Núcleo:** construyes la app en tres bloques (la app y su navegación, formularios y vistas, dashboard y publicación). En cada uno alternas una idea corta, una práctica de pocos minutos y un dato real de tu propia app. Cierras con un reto en el que ya no te digo los pasos. Las microprácticas no necesitan tenant; construir la app sí (tu ambiente Developer y las tablas de los Módulos 1 y 2).
+> **Cómo está organizado el Núcleo:** construyes la app en tres bloques (la app y su navegación, formularios y vistas, dashboard y publicación). En cada uno alternas una idea corta, una práctica de pocos minutos y un dato real de tu propia app. Cierras con un reto en el que ya no te digo los pasos. Las microprácticas no necesitan tenant; construir la app sí (tu ambiente del curso y las tablas de los Módulos 1 y 2).
 
 ## 🧩 Microlección 1 — Qué es una Model-Driven y cuándo elegirla
 

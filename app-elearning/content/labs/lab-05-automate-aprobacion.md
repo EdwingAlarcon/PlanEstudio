@@ -71,7 +71,7 @@ Este lab usa las técnicas del Módulo 5 (trigger de Dataverse, condiciones, con
 
 ### Entorno
 
-- [ ] Ambiente Developer con la solución `SIT Solicitudes Internas` y la tabla `Solicitud TI` del Lab 02 con sus 10 registros
+- [ ] Tu ambiente del curso con la solución `SIT Solicitudes Internas` y la tabla `Solicitud TI` del Lab 02 con sus 10 registros
 - [ ] Cuenta Microsoft 365 con buzón de Outlook activo
 - [ ] *(Opcional)* Acceso a un equipo de Teams con un canal estándar (no privado). Si no tienes Teams, el lab te da una alternativa por email
 - [ ] Rol **System Administrator** en el ambiente: la primera aprobación de un ambiente prepara las tablas de aprobaciones, y Learn pide que quien la ejecute tenga un rol de administrador del ambiente
@@ -151,7 +151,7 @@ En un loop o en una tabla de **List rows**, la misma idea se escribe con `item()
 
 ### Tarea 1.1 — Crear el flujo dentro de la solución
 
-1. En [make.powerautomate.com](https://make.powerautomate.com), comprueba arriba a la derecha que estás en tu ambiente Developer.
+1. En [make.powerautomate.com](https://make.powerautomate.com), comprueba arriba a la derecha que estás en tu ambiente del curso.
 
 2. En el menú lateral elige **Solutions** y abre `SIT Solicitudes Internas`.
 
@@ -307,7 +307,7 @@ Al crear cualquier solicitud en `Solicitud TI`, llega un email de confirmación 
    | Estado | `item()?['sit_estado@OData.Community.Display.V1.FormattedValue']` |
    | Fecha Solicitud | `formatDateTime(coalesce(item()?['sit_fechasolicitud'], item()?['createdon']), 'yyyy-MM-dd')` |
 
-   > `item()` es cada fila de la lista. **Categoría** es un Lookup: Dataverse lo devuelve como `_sit_categoria_value` (el identificador), y su versión formateada es el **Nombre** de la categoría (la columna principal del registro relacionado, según [Learn: Select columns, formatted values](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/query/select-columns)), igual que el Solicitante en la Práctica 5.2 del Módulo 5. En la fecha, `coalesce` usa la fecha de creación si una solicitud no tiene Fecha Solicitud, para que `formatDateTime` no falle con un valor vacío ([Learn: funciones de expresión](https://learn.microsoft.com/azure/logic-apps/workflow-definition-language-functions-reference)). Si en los raw outputs de la Tarea 2.2 un nombre es distinto, usa el que viste allí.
+   > `item()` es cada fila de la lista. **Categoría** es un Lookup: Dataverse lo devuelve como `_sit_categoria_value` (el identificador), y su versión formateada es el **Nombre** de la categoría (la columna principal del registro relacionado, según [Learn: Select columns, formatted values](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/query/select-columns)), igual que el Solicitante en la Práctica 5.2 del Módulo 5. En la fecha, `coalesce` usa la fecha de creación si una solicitud no tiene Fecha Solicitud, para que `formatDateTime` no falle con un valor vacío ([Learn: funciones de expresión](https://learn.microsoft.com/azure/logic-apps/expression-functions-reference)). Si en los raw outputs de la Tarea 2.2 un nombre es distinto, usa el que viste allí.
 
 ### Tarea 2.4 — Condición: enviar solo si hay solicitudes
 

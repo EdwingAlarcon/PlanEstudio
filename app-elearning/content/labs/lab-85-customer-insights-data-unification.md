@@ -37,7 +37,7 @@ fuentes conectadas, la entrega es **Simulado**.
 
 ### Sin licencia: cómo se entrega
 
-Tu ambiente Developer de Power Platform no puede instalar Customer Insights - Data. Sin trial ni
+Tu ambiente del curso no trae Customer Insights - Data. Sin trial ni
 licencia, haz los seis pasos en papel y marca la entrega como **Simulado**: es una entrega válida.
 La única vía sin pagar es la
 [trial de 30 días de Customer Insights](https://learn.microsoft.com/dynamics365/customer-insights/data/trial-signup):

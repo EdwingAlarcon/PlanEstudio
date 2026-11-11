@@ -216,7 +216,10 @@ Este paquete es educativo. No contiene datos reales, credenciales, macros ni eje
 - reference: matrices y contratos de decisión.
 - logs: logs de ejemplo.
 - portal: datos del portal sandbox.
-- legacy-app: datos del simulador legacy.
+- legacy-app: \`lote-entrada.json\`, lote mixto de entrada para el simulador legacy (LAB-107). No es la tabla inicial del
+  simulador, que arranca (y vuelve con Reset) con 3 registros: SOL-2026-0001, SOL-2026-0002 y SOL-2026-0004. De las 5
+  solicitudes del lote, esas 3 ya existen (el simulador responde "Registro duplicado") y SOL-2026-0005 y SOL-2026-0006
+  son nuevas. Su campo \`status\` (\`pending\`) es del archivo, no del simulador.
 - templates: plantillas profesionales.
 - validation: protocolo y matriz operacional.
 
@@ -300,7 +303,7 @@ Valida con \`npm run validate:assets\`.
     ["LAB-104", "input/solicitudes_sucursales.csv,templates/pdd-ligero.md,expected/log_esperado.csv", "Borrar output local y volver a copiar input", "expected/log_esperado.csv"],
     ["LAB-105", "input/*.xlsx,input/solicitudes_sucursales.csv,expected/consolidado_esperado.csv", "Borrar output local y volver a copiar input", "expected/metricas_esperadas.json"],
     ["LAB-106", "portal/portal-data.json,/rpa-sandbox/portal", "Botón Reset del portal", "expected/registros_validos.csv"],
-    ["LAB-107", "legacy-app/legacy-records.json,/rpa-sandbox/legacy-app", "Botón Reset del simulador", "expected/log_esperado.csv"],
+    ["LAB-107", "legacy-app/lote-entrada.json,/rpa-sandbox/legacy-app", "Botón Reset del simulador", "expected/log_esperado.csv"],
     ["LAB-108", "/rpa-sandbox/portal,/rpa-sandbox/legacy-app,templates/selector-troubleshooting-checklist.md", "Volver ambos simuladores a modo normal", "validation/matriz_operacional.csv"],
     ["LAB-109", "corrupted/duplicates.csv,corrupted/partial_processed.csv", "Limpiar checkpoint", "expected/registros_rechazados.csv"],
     ["LAB-110", "manifest.json,input/parametros_proceso.json,expected/metricas_esperadas.json", "Usar nuevo correlationId", "expected/metricas_esperadas.json"],
@@ -326,7 +329,8 @@ Valida con \`npm run validate:assets\`.
   ]));
   writeJson("portal/portal-data.json", { version: VERSION, requests: validRows.map((row) => Object.fromEntries(requestHeaders.map((header, index) => [header, row[index]]))) });
   writeJson("portal/scenarios.json", ["normal", "slow", "selector-shift", "unexpected-modal", "server-error", "incomplete-data", "extended-pagination", "expired-session"]);
-  writeJson("legacy-app/legacy-records.json", { version: VERSION, records: validRows.slice(0, 5).map((row) => ({ requestId: row[0], customerId: row[1], productId: row[2], status: "pending" })) });
+  // Lote mixto de ENTRADA para el LAB-107, no la tabla inicial del simulador (esa vive en legacy-client.tsx).
+  writeJson("legacy-app/lote-entrada.json", { version: VERSION, records: validRows.slice(0, 5).map((row) => ({ requestId: row[0], customerId: row[1], productId: row[2], status: "pending" })) });
   writeText("logs/run_history_sample.csv", csv(["runId", "mode", "startedAt", "endedAt", "status", "records", "errors"], [["RUN-SIT-RPA-0001", "simulation", "2026-07-29T08:00:00.000Z", "2026-07-29T08:10:00.000Z", "completed-with-rejections", 10, 1]]));
 
   const templates = [

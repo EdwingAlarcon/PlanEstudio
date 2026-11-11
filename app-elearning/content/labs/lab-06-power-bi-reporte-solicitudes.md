@@ -114,7 +114,7 @@ La teoría está en el [Módulo 6](/nivel/basico/modulo/power-bi-reportes-y-dash
 
 ### Verificación rápida antes de empezar
 
-1. En [make.powerapps.com](https://make.powerapps.com), con tu ambiente **Developer** seleccionado, abre **Tables** → `Solicitud TI` y comprueba que tiene 10 filas.
+1. En [make.powerapps.com](https://make.powerapps.com), con tu ambiente del curso seleccionado, abre **Tables** → `Solicitud TI` y comprueba que tiene 10 filas.
 2. Abre Power BI Desktop y comprueba que, arriba a la derecha, aparece tu cuenta de trabajo. Si no, selecciona **Sign in**.
 3. **Idioma de los menús:** este lab usa los nombres en inglés (**Home**, **Get data**, **Transform data**...). Si los tuyos salen en español, cámbialos como en el Módulo 6, Práctica 6.1, Paso 1, punto 5.
 
@@ -213,7 +213,7 @@ Reporte: 4 tarjetas · barras por Estado · líneas por mes · slicer por Nombre
 
 ### Tarea 1.1 — Crear los contactos
 
-1. En [make.powerapps.com](https://make.powerapps.com), con tu ambiente **Developer**, abre **Tables** en el menú de la izquierda. **Contact** es una tabla estándar, no está en tu solución. Arriba de la lista hay tres pestañas: **Recommended** (solo tablas estándar), **Custom** (las que crean los makers) y **All** (todas). Elige **Recommended** o **All** y escribe `Contact` en el cuadro de búsqueda ([Learn: View tables](https://learn.microsoft.com/power-apps/maker/data-platform/create-edit-entities-portal#view-tables)).
+1. En [make.powerapps.com](https://make.powerapps.com), con tu ambiente del curso, abre **Tables** en el menú de la izquierda. **Contact** es una tabla estándar, no está en tu solución. Arriba de la lista hay tres pestañas: **Recommended** (solo tablas estándar), **Custom** (las que crean los makers) y **All** (todas). Elige **Recommended** o **All** y escribe `Contact` en el cuadro de búsqueda ([Learn: View tables](https://learn.microsoft.com/power-apps/maker/data-platform/create-edit-entities-portal#view-tables)).
 2. Abre **Contact** y su editor de filas, igual que en el Lab 02, Tarea 5.1 (**Edit** o **View data**).
 3. Crea los 3 contactos de "Contactos de prueba": nombre, apellido, email y departamento.
 
@@ -682,7 +682,7 @@ Si terminaste antes del tiempo estimado, intenta:
 
 ## Limpieza del laboratorio
 
-> Si es tu ambiente Developer personal, conserva los datos: los contactos y los cambios del Ejercicio 1 no estorban a los Labs 03, 04 y 05.
+> Si es tu ambiente del curso personal, conserva los datos: los contactos y los cambios del Ejercicio 1 no estorban a los Labs 03, 04 y 05.
 
 1. Si usas un ambiente compartido, elimina los 3 contactos de prueba y devuelve las solicitudes a su estado del Lab 02 si otros lo necesitan.
 2. Si publicaste y no quieres conservarlo, en tu workspace elimina el reporte y el semantic model (**More options (...)** → **Delete**).

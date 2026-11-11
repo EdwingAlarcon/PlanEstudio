@@ -6,7 +6,7 @@ advertirlo. El Módulo 56 (Fundamentos de JavaScript) cierra la brecha de JS vai
 pero **no cubre TypeScript ni React** — esta es la brecha que faltaba.
 
 **Tipo de práctica de este recurso: conceptual + ejecutable en tu máquina (sin Dataverse todavía).**
-Corre en un proyecto Vite local — no necesitás ambiente Developer ni tenant para esta parte.
+Corre en un proyecto Vite local — no necesitás ambiente del curso ni tenant para esta parte.
 
 ## Objetivo
 

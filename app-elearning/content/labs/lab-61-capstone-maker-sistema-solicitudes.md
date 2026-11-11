@@ -53,7 +53,7 @@ Fuera de alcance:
 ## Prerrequisitos
 
 - Haber completado los labs 02, 03, 04 y 05.
-- Tener acceso a un ambiente de Power Platform (developer environment o trial).
+- Tener acceso a tu ambiente del curso (un Trial con Dataverse, o el Developer gestionado o Sandbox que te dé tu organización), con tu solución exportada al día.
 
 ## Herramientas necesarias
 

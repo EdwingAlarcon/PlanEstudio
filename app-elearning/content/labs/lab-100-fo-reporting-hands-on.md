@@ -9,8 +9,8 @@ role: ["F&O Practitioner", "Solution Architect"]
 prerequisites:
   - "Lab 93 completado: F&O Finance Setup Walkthrough"
   - "Lab 94 y Lab 95 completados (recomendado): para tener transacciones de prueba que aparezcan en los reportes"
-  - "Acceso a un ambiente trial/demo de Dynamics 365 Finance con Financial Reporting habilitado"
-lastVerified: "2026-09"
+  - "Acceso a un ambiente trial/demo de Dynamics 365 Finance con Financial Reporting habilitado; sin él, haz la variante en papel del final del lab"
+lastVerified: "2026-11"
 ---
 
 # Lab 100 — F&O Reporting Hands-On — Financial Reporting y Power BI Embebido
@@ -24,17 +24,21 @@ otro.
 ## Nota de verificación (léela antes de empezar)
 
 Los nombres de menú y pasos están escritos con base en la terminología documentada de Dynamics 365
-Finance, **sin verificación contra un tenant en vivo al momento de escribirse**. Financial Reporting
-es una aplicación separada (a veces requiere acceso adicional o un enlace distinto al del cliente
-principal de Finance) — si tu ambiente no lo tiene habilitado, documenta ese límite y continúa con
-el reporte de balance de comprobación desde el cliente principal.
+Finance, **sin verificación contra un tenant en vivo**. En noviembre de 2026 se revisaron contra
+Microsoft Learn el complemento de Financial reporting, el balance de comprobación y el workspace
+**Financial analysis** (enlaces en cada paso). Si tu ambiente no tiene Financial reporting,
+documenta ese límite y continúa con el balance de comprobación desde el cliente principal.
+
+**Compañía:** los Labs 94 y 95 contabilizan en `USMF`; la legal entity que creaste en el Lab 93 no
+tiene transacciones. Genera los reportes en `USMF` si quieres ver tus movimientos.
 
 ## ⚠️ Antes de empezar: cómo se consigue hoy un ambiente de F&O
 
-Verificado en Microsoft Learn en noviembre de 2026. Sin un ambiente así este lab no es ejecutable;
-la alternativa en papel está en el [Módulo 60](/nivel/d365/modulo/finance-operations-procesos-erp).
+Verificado en Microsoft Learn en noviembre de 2026. Sin un ambiente así, haz la
+**variante en papel** del final de este lab; el [Módulo 60](/nivel/d365/modulo/finance-operations-procesos-erp)
+cubre además los procesos en general.
 
-- **Tu ambiente Developer de Power Platform no sirve.** Learn indica que el tipo de ambiente
+- **Tu ambiente del curso no sirve.** Learn indica que el tipo de ambiente
   *Developer* no admite ninguna carga de Dynamics 365; F&O se instala en ambientes *Sandbox*,
   *Production* o *Trial (subscription-based)* y exige una licencia de F&O asignada
   ([Learn: Unified environment types and templates](https://learn.microsoft.com/power-platform/admin/unified-experience/unified-environment-types-and-templates)).
@@ -65,8 +69,12 @@ la alternativa en papel está en el [Módulo 60](/nivel/d365/modulo/finance-oper
 - **Financial reporting:** Learn indica que ahora se entrega como un complemento (add-in),
   así que no siempre está disponible por defecto
   ([Learn: Get started with Financial reporting](https://learn.microsoft.com/dynamics365/finance/general-ledger/financial-reporting-getting-started)).
-  Si no aparece **Financial reports** en **General ledger** > **Inquiries and reports**, usa la
-  ruta alternativa del Paso 1 y documenta el límite.
+  Lo instala un administrador en el Power Platform admin center: **Environments** > el ambiente >
+  **Resources** > **Dynamics 365 apps** > **Install app** > *Microsoft Dynamics 365 Financial
+  Reporting*. Además exige calendario fiscal, ledger, plan de cuentas, moneda, al menos una
+  transacción contabilizada y la dimensión **MainAccount** seleccionada en **General ledger >
+  Ledger setup > Financial reporting setup**. Si no aparece **Financial reports** en **General
+  ledger** > **Inquiries and reports**, usa la ruta alternativa del Paso 1 y documenta el límite.
 
 ## Escenario de negocio
 
@@ -81,27 +89,32 @@ Actúas como F&O Practitioner generando evidencia de reporting para el equipo fi
 
 ## Herramientas necesarias
 
-- Ambiente trial/demo de Dynamics 365 Finance, idealmente con las transacciones de los Labs 93-95 ya contabilizadas.
+- Ambiente trial/demo de Dynamics 365 Finance, idealmente con las transacciones de los Labs 94-95
+  ya contabilizadas en `USMF`.
+- Tiempo estimado: 2,5 horas con ambiente; 60 minutos la variante en papel.
 
 ## 🔧 Requisitos de ambiente y fallos frecuentes
 
 **Rol de seguridad mínimo**
 
 Para este lab basta con acceso de **lectura** a General ledger inquiries/reports y a los workspaces
-financieros — no necesitas un rol de administración. Si además vas a explorar Financial Reporting
-como aplicación separada, esa app suele requerir su propio inicio de sesión o enlace (a veces con un
-rol específico de "Financial reporting" distinto del acceso al cliente principal de Finance); no
-asumas que tener acceso al cliente de Finance te da automáticamente acceso a Financial Reporting.
+financieros — no necesitas un rol de administración. Financial reporting tiene sus propios
+privilegios y deberes: Learn indica, por ejemplo, que generar reportes corresponde a roles como CEO,
+CFO o Accountant, y el workspace Financial analysis exige el deber *View financial analysis current
+company* (incluido en roles como Accountant o Financial controller). No asumas que tener acceso al
+cliente de Finance te da automáticamente esos permisos.
 
 **Configuración previa que puede faltar en un trial**
 
 - Financial Reporting es una aplicación separada del cliente principal de Finance y **no siempre
   viene habilitada ni enlazada por defecto** en un ambiente trial/demo recién aprovisionado —
   confírmalo antes de asumir que el paso 1 falló por tu culpa.
-- Power BI embebido dentro de un workspace de F&O depende de una licencia de Power BI (Pro como
-  mínimo; algunos reportes/dashboards más avanzados requieren capacidad Premium/Fabric) asociada al
-  tenant — un trial de F&O por sí solo no garantiza que exista esa licencia ni que el dataset esté
-  conectado.
+- El workspace **Financial analysis** (Power BI embebido) lee del *entity store*, no de la base
+  transaccional: hay que actualizar sus entidades en **System administration > Setup > Entity
+  store**, y las cuentas principales deben usar los tipos Revenue, Expense, Assets, Liabilities o
+  Equity, no Balance sheet ni Profit and loss
+  ([Learn: Financial analysis](https://learn.microsoft.com/dynamics365/fin-ops-core/dev-itpro/analytics/financial-insights)).
+  Esa página no exige licencia de Power BI al usuario; si tu ambiente sí la pide, documéntalo.
 - Si no ejecutaste (o el ambiente no tiene) transacciones contabilizadas del Lab 93/94/95, el balance
   de comprobación y los tiles de Power BI pueden cargar **vacíos o en cero** — eso no siempre significa
   que el reporte esté mal configurado, sino que no hay datos que mostrar todavía.
@@ -110,9 +123,11 @@ asumas que tener acceso al cliente de Finance te da automáticamente acceso a Fi
 |---|---|---|---|
 | El balance de comprobación carga vacío o en cero | Dato Contoso/transaccional faltante: no hay movimientos contabilizados en el período | Verifica en **General ledger > Inquiries and reports > Voucher transactions** si existen transacciones contabilizadas en ese período | Contabiliza al menos una transacción de prueba (o cambia al período/legal entity demo que sí tenga datos Contoso) antes de regenerar el reporte |
 | No aparece la aplicación o el enlace de Financial Reporting | Financial Reporting no habilitado/enlazado en el ambiente trial | Busca "Financial reporting" en el buscador global del cliente de Finance y revisa si redirige a una app o da error | Documenta el límite explícitamente y continúa el lab con **Inquiries and reports > Trial balance** desde el cliente principal |
-| El workspace financiero no muestra ningún tile de Power BI | Licencia de Power BI (Pro/Premium) no asignada en el tenant, o dataset no conectado | Revisa si otros workspaces del mismo ambiente muestran tiles de Power BI; si ninguno lo hace, es un límite del tenant, no del workspace | Documenta el límite de licenciamiento como evidencia y describe, con base en la documentación, qué visualización debería mostrar ese tile |
-| Los tiles de Power BI muestran datos desactualizados frente a una transacción recién contabilizada | Dataset con refresh programado, no en tiempo real | Compara la hora de tu transacción con la hora de "last refreshed" del dataset, si el workspace la muestra | Documenta la cadencia de refresh observada (o declarada en la documentación) como parte de la comparación del Paso 3, sin esperar actualización inmediata |
-| El reporte de balance de comprobación no permite seleccionar el período configurado en el Lab 93 | Legal entity o período fiscal distintos al contexto activo de la sesión | Revisa la legal entity activa en la barra superior del cliente de Finance antes de generar el reporte | Cambia de legal entity/contexto (ícono de compañía en la barra superior) a la que configuraste en el Lab 93 antes de reintentar |
+| El workspace Financial analysis aparece vacío | Entidades del entity store sin actualizar, o cuentas principales con tipo Balance sheet / Profit and loss | Revisa la última actualización en **System administration > Setup > Entity store** y el tipo de las cuentas principales | Actualiza las entidades del entity store; si el problema es el tipo de cuenta, documéntalo (no cambies el plan de cuentas demo) |
+| El workspace no aparece en el menú | Falta el deber *View financial analysis current company* | Revisa los roles de tu usuario en **System administration > Users > Users** | Pide un rol que lo incluya (p. ej. Accountant) o documenta el límite |
+| Los datos del workspace no reflejan una transacción recién contabilizada | El entity store se actualiza por lotes, no en tiempo real | Compara la hora de tu transacción con la última actualización de la entidad en **Entity store** | Actualiza la entidad o documenta la cadencia observada como parte del Paso 3 |
+| El reporte de balance de comprobación no permite seleccionar el período configurado en el Lab 93 | Legal entity o período fiscal distintos al contexto activo de la sesión | Revisa la legal entity activa en la barra superior del cliente de Finance antes de generar el reporte | Cambia de legal entity/contexto (ícono de compañía en la barra superior) antes de reintentar; recuerda que las transacciones de los Labs 94-95 están en `USMF` |
+| El balance de comprobación no muestra una transacción recién contabilizada | El balance usa saldos resumidos por conjunto de dimensiones que pueden estar desactualizados | Revisa si la página ofrece **Update balances** para el conjunto de dimensiones | Actualiza los saldos y vuelve a consultar ([Learn: Financial dimension sets](https://learn.microsoft.com/dynamics365/finance/general-ledger/financial-dimension-sets)) |
 
 ## Entregables
 
@@ -128,25 +143,32 @@ asumas que tener acceso al cliente de Finance te da automáticamente acceso a Fi
 Ve a **General ledger > Inquiries and reports > Trial balance** (o **General ledger > Inquiries
 and reports > Financial reports**, si tu ambiente tiene el add-in de Financial reporting).
 
-- Genera el balance de comprobación para la legal entity y el período fiscal configurados en el Lab 93.
-- Documenta si las transacciones de los Labs 94-95 (si las ejecutaste) aparecen reflejadas.
+- Genera el balance de comprobación en `USMF` para el período actual, y aparte para la legal entity
+  del Lab 93 (saldrá vacía: explica por qué).
+- Documenta si las transacciones de los Labs 94-95 (si las ejecutaste) aparecen reflejadas; si no,
+  revisa **Update balances** antes de concluir que faltan.
+- Si tienes Financial reporting, Learn indica que la primera vez que lo abres genera reportes por
+  defecto para el mes anterior; documenta cuál abriste.
 - Explica qué pasaría si intentas generar el reporte para un período que aún no tiene transacciones contabilizadas.
 
 ### Paso 2 — Workspace con Power BI embebido
 
-Ve a un workspace financiero (p. ej. **General ledger > General ledger workspaces**, o el
-equivalente que tu ambiente tenga disponible) y busca un tile o sección con Power BI embebido.
+Abre el workspace **Financial analysis** (búscalo por nombre en la barra de búsqueda; esta revisión
+no confirmó su ruta de menú) ([Learn: Financial analysis](https://learn.microsoft.com/dynamics365/fin-ops-core/dev-itpro/analytics/financial-insights)).
 
-- Documenta qué visualización muestra (KPI, gráfico de tendencia, etc.) y de qué entidad de datos parece alimentarse.
-- Si tu ambiente no tiene Power BI embebido disponible (requiere configuración/licencia adicional), documenta ese límite explícitamente.
+- Antes, revisa en **System administration > Setup > Entity store** cuándo se actualizaron sus
+  entidades y actualízalas si hace falta.
+- Documenta qué visualización muestra (KPI, gráfico de tendencia, etc.) y que se alimenta del
+  entity store.
+- Si tu ambiente no lo muestra (falta el deber o el entity store está vacío), documenta ese límite explícitamente.
 
 ### Paso 3 — Cadencia de actualización
 
 Documenta, para cada mecanismo de reporte que hayas usado:
 
-- Trial balance / inquiries: ¿es una consulta en tiempo real contra la base de datos transaccional?
+- Trial balance / inquiries: ¿qué papel tienen los saldos resumidos y **Update balances**?
 - Financial Reporting: ¿requiere generar/publicar el reporte, o se actualiza automáticamente?
-- Power BI embebido: ¿depende de un dataset con actualización programada (refresh), o es en tiempo real?
+- Financial analysis: ¿cómo influye que lea del entity store y no de la base transaccional?
 
 ### Paso 4 — Comparación y recomendación
 
@@ -178,3 +200,23 @@ Con el ejemplo del controller financiero del escenario, documenta:
 - No documentar el límite del ambiente cuando Financial Reporting o Power BI embebido no están disponibles, y en su lugar omitir esa parte del lab sin explicación.
 - Confundir un "inquiry" (consulta transaccional directa) con un "report" (documento formal, a veces versionado).
 - Recomendar el mismo mecanismo para los 3 casos de uso del Paso 4 sin justificar la diferencia.
+- Generar el reporte en la legal entity nueva del Lab 93 y concluir que los Labs 94-95 no contabilizaron.
+
+## Variante en papel (sin ambiente de Finance)
+
+Si no tienes ambiente, haz el análisis con las páginas de Learn enlazadas y escribe
+«variante en papel» en tu entrega. Tiempo estimado: 60 minutos.
+
+1. **Balance de comprobación:** un balance de ejemplo de 6 cuentas construido a partir de los
+   asientos que documentaste en los Labs 94 y 95 (o en su variante en papel), con débitos y créditos
+   que cuadren.
+2. **Requisitos:** lista de lo que Learn exige para Financial reporting (instalación del
+   complemento, MainAccount, transacción contabilizada) y para Financial analysis (entity store,
+   tipos de cuenta, deber de seguridad).
+3. **Cadencia:** tabla con los tres mecanismos (trial balance, Financial reporting, Financial
+   analysis), de dónde lee cada uno y qué hay que hacer para que muestre una transacción recién
+   contabilizada.
+4. **Recomendación:** el Paso 4 completo.
+
+La variante en papel cumple los criterios de validación si cada afirmación lleva su enlace de Learn;
+sustituye a las capturas.

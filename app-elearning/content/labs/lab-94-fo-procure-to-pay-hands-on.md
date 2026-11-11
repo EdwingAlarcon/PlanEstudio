@@ -8,8 +8,8 @@ certifications: ["Arquitectura Power Platform"]
 role: ["F&O Practitioner", "Solution Architect"]
 prerequisites:
   - "Lab 93 completado: F&O Finance Setup Walkthrough"
-  - "Acceso a un ambiente trial/demo de Dynamics 365 Finance & Supply Chain Management"
-lastVerified: "2026-09"
+  - "Acceso a un ambiente trial/demo de Dynamics 365 Finance & Supply Chain Management con datos demo, o la variante en papel del final del lab"
+lastVerified: "2026-11"
 ---
 
 # Lab 94 — F&O Procure-to-Pay Hands-On
@@ -21,17 +21,17 @@ producto, factura de proveedor y pago, documentando cada estado y el asiento con
 
 ## Nota de verificación (léela antes de empezar)
 
-Los nombres de menú y pasos están escritos con base en la terminología documentada de Dynamics 365
-Supply Chain Management/Finance, **sin verificación contra un tenant en vivo al momento de
-escribirse**. Si un nombre de menú difiere de tu ambiente, documenta la diferencia y sigue el flujo
+Las rutas de menú y los botones se contrastaron con Microsoft Learn en noviembre de 2026 (cada paso
+enlaza la página usada), pero **no se probaron en un tenant en vivo**. Si un nombre de menú difiere de tu ambiente, documenta la diferencia y sigue el flujo
 equivalente — es más probable un cambio de release wave que un error del lab.
 
 ## ⚠️ Antes de empezar: cómo se consigue hoy un ambiente de F&O
 
-Verificado en Microsoft Learn en noviembre de 2026. Sin un ambiente así este lab no es ejecutable;
-la alternativa en papel está en el [Módulo 60](/nivel/d365/modulo/finance-operations-procesos-erp).
+Verificado en Microsoft Learn en noviembre de 2026. Sin un ambiente así, haz la
+**variante en papel** del final de este lab; el [Módulo 60](/nivel/d365/modulo/finance-operations-procesos-erp)
+cubre además los procesos en general.
 
-- **Tu ambiente Developer de Power Platform no sirve.** Learn indica que el tipo de ambiente
+- **Tu ambiente del curso no sirve.** Learn indica que el tipo de ambiente
   *Developer* no admite ninguna carga de Dynamics 365; F&O se instala en ambientes *Sandbox*,
   *Production* o *Trial (subscription-based)* y exige una licencia de F&O asignada
   ([Learn: Unified environment types and templates](https://learn.microsoft.com/power-platform/admin/unified-experience/unified-environment-types-and-templates)).
@@ -74,9 +74,13 @@ Actúas como F&O Practitioner ejecutando y documentando el ciclo P2P end-to-end.
 
 ## Herramientas necesarias
 
-- Ambiente trial/demo de Dynamics 365 Supply Chain Management/Finance.
-- Un proveedor de prueba (usa uno del demo data Contoso si no quieres crear uno nuevo).
-- Un producto liberado en al menos una legal entity (usa uno del demo data si aplica).
+- Ambiente trial/demo de Dynamics 365 Supply Chain Management/Finance, con la compañía `USMF`
+  activa. **Trabaja en `USMF`, no en la legal entity que creaste en el Lab 93:** una entidad recién
+  creada no trae proveedores, productos liberados ni la configuración contable que necesita una
+  compra. Northwind es el escenario; `USMF` es donde lo ejecutas.
+- Un proveedor de `USMF` (anota su número) y un producto liberado en `USMF` que **no** use procesos
+  de warehouse management, para que la recepción se registre directamente desde la orden.
+- Tiempo: unos 90 minutos de pasos y el resto para documentar asientos y el diagrama.
 
 ## 🔧 Requisitos de ambiente y fallos frecuentes
 
@@ -98,16 +102,23 @@ and sourcing** y **Accounts payable** en vez de pedir un rol genérico de admini
 - El producto usado debe estar liberado ("released") en la legal entity donde trabajas; un producto
   que existe solo a nivel de catálogo global pero no fue liberado a la legal entity no aparecerá al
   crear la línea de la orden de compra.
-- La coincidencia de 3 vías (three-way match) puede estar desactivada o configurada con tolerancias
-  distintas en **Accounts payable parameters**; si el ambiente permite facturar sin haber recibido,
-  eso puede ser una tolerancia de match configurada así en el demo, no ausencia del control.
+- La coincidencia de 3 vías (three-way matching) no está siempre encendida. Learn pide la
+  configuration key **Invoice matching** y, en **Accounts payable parameters**, pestaña **Invoice
+  validation**: **Enable invoice matching validation** activado, **Post invoice with discrepancies**
+  en **Require approval** y **Line matching policy** en **Three-way matching**
+  ([Learn: Record vendor invoice and match against received quantity](https://learn.microsoft.com/dynamics365/finance/accounts-payable/tasks/record-vendor-invoice-match-against-received-quantity)).
+  Antes de empezar, anota cómo están esos tres campos en tu ambiente: si el ambiente permite facturar
+  sin haber recibido, es esa configuración, no ausencia del control.
+- Si la orden de compra entra en un flujo de aprobación, **Confirm** puede no estar disponible hasta
+  aprobarla; documenta el estado de aprobación que veas.
 
 | Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
 |---|---|---|---|
 | No aparece el proveedor de prueba al crear la orden de compra | Proveedor no liberado en la legal entity actual | Revisa **Accounts payable > Vendors > All vendors** filtrando por la legal entity activa | Cambia a la legal entity demo (`USMF`/`DEMF`) donde el proveedor Contoso sí existe, o crea el proveedor en tu legal entity |
 | El producto no aparece al agregar la línea de la orden de compra | Producto no liberado a esa legal entity | Ve a **Product information management > Released products** y verifica si el producto aparece para tu legal entity | Libera el producto a la legal entity (**Release products**) o usa un producto Contoso ya liberado |
-| El sistema permite facturar la cantidad pedida sin haber sido recibida | Tolerancia de coincidencia de 3 vías configurada de forma permisiva, o control desactivado | Revisa **Accounts payable > Setup > Accounts payable parameters > Invoice validation** | Documenta la tolerancia configurada como parte de la evidencia; no asumas que el control "no existe" solo porque el trial lo permitió |
-| El payment journal no permite guardar la línea de pago | Falta término de pago o método de pago en el proveedor | Revisa la ficha del proveedor en **Vendors > All vendors > Payment** | Asigna un método y término de pago al proveedor antes de reintentar el pago |
+| El sistema permite facturar la cantidad pedida sin haber sido recibida | Tolerancia de coincidencia de 3 vías configurada de forma permisiva, o control desactivado | Revisa **Accounts payable > Setup > Accounts payable parameters**, pestaña **Invoice validation** (los tres campos del apartado anterior) | Documenta la configuración como parte de la evidencia; no asumas que el control "no existe" solo porque el trial lo permitió |
+| La recepción no deja indicar la cantidad o pide registrar antes | El producto o el almacén usan procesos de warehouse management (llegada y registro previos) | En **Posting product receipt**, mira si el campo **Quantity** ofrece *Registered quantity* | Usa otro almacén u otro producto sin warehouse management, o documenta el proceso de registro que exige |
+| El vendor payment journal no permite guardar o generar el pago | Falta método de pago en la línea o cuenta bancaria asociada | Revisa el campo **Method of payment** de la línea; Learn indica que el método de pago trae la cuenta bancaria por defecto | Asigna un método de pago antes de reintentar y anota cuál usaste |
 | La factura no se deja contabilizar (post) | Período fiscal cerrado o permiso insuficiente en el diario de facturas | Revisa el estado del período en **Fiscal calendars** y tus roles asignados | Verifica que el período esté abierto; si el período está correcto, solicita el rol de cuentas por pagar con permiso de contabilización |
 
 ## Entregables
@@ -122,35 +133,77 @@ and sourcing** y **Accounts payable** en vez de pedir un rol genérico de admini
 
 ### Paso 1 — Orden de compra
 
-Ve a **Procurement and sourcing > Purchase orders > All purchase orders > New**.
+Ve a **Procurement and sourcing > Purchase orders > All purchase orders** y selecciona **New**
+([Learn: Record vendor invoice and match against received quantity](https://learn.microsoft.com/dynamics365/finance/accounts-payable/tasks/record-vendor-invoice-match-against-received-quantity)).
 
-- Selecciona el proveedor, el sitio/almacén de recepción y agrega la línea con el producto y cantidad (50 unidades).
-- Confirma la orden de compra (**Purchase order > Confirm**).
+- En **Vendor account** elige el proveedor de `USMF`, revisa el sitio/almacén de recepción y, con
+  **Add line**, agrega el producto (**Item number**) con cantidad 50.
+- En el Action Pane, pestaña **Purchase**, selecciona **Confirm**.
 - Documenta el estado de la orden después de confirmarla.
 
 ### Paso 2 — Recepción de producto
 
-Desde la orden de compra confirmada, ve a **Receive > Product receipt**.
+En el Action Pane de la orden confirmada, pestaña **Receive**, selecciona **Product receipt**
+([Learn: Product receipt against purchase orders](https://learn.microsoft.com/dynamics365/supply-chain/procurement/product-receipt-against-purchase-orders)).
 
-- Registra la recepción de solo 45 unidades (deliberadamente menos que las 50 pedidas) para simular una discrepancia real.
-- Documenta cómo queda el estado de la línea de la orden (cantidad pendiente vs. recibida).
-- Explica qué opciones tiene el equipo de compras ante esa discrepancia (recepción parcial, seguimiento con el proveedor, cierre de la línea).
+- En la página **Posting product receipt**, escribe un identificador en el campo **Product receipt**
+  (es obligatorio; en la vida real es el número del albarán del proveedor) y cambia la cantidad de
+  la línea a 45, deliberadamente menos que las 50 pedidas. Selecciona **OK**.
+- Documenta cómo queda la línea de la orden (cantidad recibida y cantidad pendiente) y el estado de
+  la orden. Learn indica que la orden pasa a *Received* cuando se procesa la recepción de todas sus
+  líneas; anota qué estado ves tú con una recepción parcial.
+- Explica qué opciones tiene el equipo de compras ante esa discrepancia (otra recepción posterior,
+  seguimiento con el proveedor, cierre de la línea). Si te equivocas de cantidad, Learn indica que el
+  **Product receipt journal** permite **Correct** (solo para reducir) o **Cancel**.
 
 ### Paso 3 — Factura de proveedor
 
-Desde la orden de compra, ve a **Invoice > Vendor invoice**, o desde
-**Accounts payable > Invoices > Pending vendor invoices**.
+En el Action Pane de la orden, pestaña **Invoice**, selecciona **Invoice**
+([Learn: Record vendor invoice and match against received quantity](https://learn.microsoft.com/dynamics365/finance/accounts-payable/tasks/record-vendor-invoice-match-against-received-quantity)).
 
-- Factura las 45 unidades efectivamente recibidas (coincidencia de 3 vías: orden, recepción, factura).
-- Documenta qué pasaría si intentas facturar las 50 unidades originales sin haberlas recibido — identifica el control que lo impide o lo señala.
-- Contabiliza (post) la factura y documenta el asiento contable generado (cuenta de gasto/inventario vs. cuenta por pagar).
+- Escribe el número de la factura del proveedor en **Number**. En **Default from**, elige
+  **Product receipt quantity** en **Default quantity for lines** para que la línea traiga las 45
+  recibidas ([Learn: Vendor invoices overview](https://learn.microsoft.com/dynamics365/finance/accounts-payable/vendor-invoices-overview)).
+- Selecciona **Match product receipts** y después, en la pestaña **Review**, **Matching details**:
+  captura el resultado de la coincidencia de 3 vías (orden, recepción, factura).
+- Prueba el control: cambia la cantidad de la factura a 50 y vuelve a abrir **Matching details**.
+  Documenta qué indica la comparación de cantidad facturada frente a cantidad recibida y si el
+  ambiente te deja contabilizar (con **Post invoice with discrepancies** en **Require approval**, no
+  debería sin aprobación). Devuelve la cantidad a 45.
+- Contabiliza (**Post**) la factura y documenta el asiento contable generado (cuenta de
+  inventario o gasto frente a cuenta por pagar del proveedor).
 
 ### Paso 4 — Pago
 
-Ve a **Accounts payable > Payments > Payment journal**.
+Ve a **Accounts payable > Payments > Vendor payment journal**
+([Learn: Vendor payment overview](https://learn.microsoft.com/dynamics365/finance/cash-bank-management/tasks/vendor-payment-overview)).
 
-- Crea una línea de pago para la factura contabilizada.
-- Documenta el método de pago y el asiento contable que genera el pago (cuenta por pagar vs. banco).
+- Selecciona **New**, elige un nombre de diario de pagos y abre **Lines**.
+- Selecciona **New**, elige el proveedor y usa **Settle transactions** para marcar la factura del
+  Paso 3; el importe se calcula a partir de lo que marques.
+- Revisa el **Method of payment** de la línea y contabiliza con **Post**.
+- Documenta el método de pago y el asiento contable que genera el pago (cuenta por pagar frente a
+  banco).
+
+## Variante en papel (sin ambiente de F&O)
+
+Si no tienes ambiente, recorre el mismo ciclo con las páginas de Learn enlazadas en los pasos y
+escribe «variante en papel» en tu entrega. Tiempo estimado: 90 minutos.
+
+1. **Tabla de documentos:** una fila por documento (orden de compra, recepción, factura, pago) con
+   la cantidad (50, 45, 45, —), el botón o la página de Learn que lo crea y el estado que esperas en
+   la orden después de cada uno.
+2. **Coincidencia de 3 vías:** con el ejemplo de Learn (*Accounts payable invoice matching overview*,
+   [enlace](https://learn.microsoft.com/dynamics365/finance/accounts-payable/accounts-payable-invoice-matching)),
+   escribe qué mostraría **Matching details** si facturas 50 con una recepción de 45 y qué hace
+   **Post invoice with discrepancies** en **Require approval**.
+3. **Asientos:** tres asientos en formato debe/haber (recepción, factura y pago) con nombres de
+   cuenta genéricos, y una línea que explique por qué el asiento de la recepción no toca la cuenta
+   por pagar del proveedor.
+4. **Diagrama del ciclo** con los 4 documentos y el disparador de cada transición.
+
+La variante en papel cumple los criterios de validación si cada fila y cada asiento llevan su
+justificación con enlace de Learn; sustituye a las capturas.
 
 ## Criterios de validación
 

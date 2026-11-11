@@ -614,7 +614,7 @@ Actions:
    - Add comment to Solicitud timeline
 ```
 
-> `DateAdd(Today(), ...)` es Power Fx y no funciona en Power Automate. En un flujo, el filtro **Filter rows** de **List rows** es una expresión OData (`eq`, `le`, `and`, `or`) y las fechas se calculan con expresiones de flujo: `utcNow()` devuelve la fecha y hora actuales y `addDays(fecha, 2)` le suma 2 días ([Learn: List rows](https://learn.microsoft.com/power-automate/dataverse/list-rows), [Learn: operadores de filtro](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/query/filter-rows), [Learn: funciones de expresión](https://learn.microsoft.com/azure/logic-apps/workflow-definition-language-functions-reference)).
+> `DateAdd(Today(), ...)` es Power Fx y no funciona en Power Automate. En un flujo, el filtro **Filter rows** de **List rows** es una expresión OData (`eq`, `le`, `and`, `or`) y las fechas se calculan con expresiones de flujo: `utcNow()` devuelve la fecha y hora actuales y `addDays(fecha, 2)` le suma 2 días ([Learn: List rows](https://learn.microsoft.com/power-automate/dataverse/list-rows), [Learn: operadores de filtro](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/query/filter-rows), [Learn: funciones de expresión](https://learn.microsoft.com/azure/logic-apps/expression-functions-reference)).
 
 **FASE 5: Power BI Dashboard (Días 14-16)**
 

@@ -155,8 +155,8 @@ export const ESSENTIAL_SETUP_STEPS: EssentialSetupStep[] = [
     id: "login",
     title: "Puedo iniciar sesión con mi cuenta",
     outcome: "Confirmas que tienes credenciales válidas para acceder al ecosistema Microsoft.",
-    glossary: "Es la cuenta con la que entras a Microsoft 365 o a un plan gratuito de desarrollador; sin ella no puedes abrir ninguna herramienta de Power Platform.",
-    tenantAlternative: "Si aún no tienes cuenta, solicita acceso a tu organización o crea un tenant de prueba antes de continuar.",
+    glossary: "Es tu cuenta de trabajo o estudio (no sirve una personal como Gmail u Outlook.com); con ella activas la licencia Power Apps trial y entras a las herramientas de Power Platform.",
+    tenantAlternative: "Si aún no tienes cuenta, solicita acceso a tu organización o sigue las vías del Módulo 1 (cuenta gratuita de Microsoft Entra o tenant de prueba propio) antes de continuar.",
   },
   {
     id: "identify-tenant",
@@ -168,15 +168,15 @@ export const ESSENTIAL_SETUP_STEPS: EssentialSetupStep[] = [
   {
     id: "identify-environment",
     title: "Sé qué entorno estoy usando",
-    outcome: "Reconoces el Power Platform environment (Developer, Trial, Sandbox o Production) y su propósito.",
-    glossary: "Un entorno es un espacio de trabajo aislado dentro de tu tenant, con sus propios datos y apps; una organización suele tener varios (uno para practicar, otro para producción).",
+    outcome: "Reconoces el tipo de tu ambiente del curso (Trial, Developer gestionado o Sandbox) y, si es un Trial, anotas su fecha de vencimiento.",
+    glossary: "Un entorno es un espacio de trabajo aislado dentro de tu tenant, con sus propios datos y apps. Desde el 15 de noviembre de 2026 el Developer Plan ya no crea uno, así que el curso usa un Trial con Dataverse: dura 30 días más una extensión de 30, y exportas tu solución al terminar cada módulo para llevarla al ambiente siguiente (ver Entornos y trials).",
     tenantAlternative: "Describe conceptualmente la diferencia entre entornos sin necesitar acceso real todavía.",
   },
   {
     id: "confirm-dataverse",
     title: "Sé si mi entorno tiene Dataverse",
     outcome: "Verificas si el entorno incluye Dataverse antes de iniciar labs que lo requieran.",
-    glossary: "Dataverse es la base de datos integrada de Power Platform (tablas, relaciones, seguridad); algunos entornos gratuitos no la traen activada por defecto.",
+    glossary: "Dataverse es la base de datos integrada de Power Platform (tablas, relaciones, seguridad); al crear el ambiente hay que elegir la opción de añadirla, porque no siempre viene activada.",
     tenantAlternative: "Usa la variante simulada de los labs que dependen de Dataverse.",
   },
   {
@@ -190,8 +190,8 @@ export const ESSENTIAL_SETUP_STEPS: EssentialSetupStep[] = [
     id: "confirm-non-production",
     title: "Confirmo que no estoy trabajando en producción",
     outcome: "Verificas explícitamente que el entorno usado para practicar no es un entorno de producción.",
-    glossary: "\"Producción\" es el entorno real que usan las personas del negocio todos los días; practicar ahí puede dañar datos reales, así que los labs deben hacerse en un entorno Developer o Trial aparte.",
-    tenantAlternative: "Si solo tienes acceso a producción, no practiques allí: solicita un entorno Developer o Trial.",
+    glossary: "\"Producción\" es el entorno real que usan las personas del negocio todos los días; practicar ahí puede dañar datos reales, así que los labs deben hacerse en tu ambiente del curso (Trial, Developer gestionado o Sandbox) aparte.",
+    tenantAlternative: "Si solo tienes acceso a producción, no practiques allí: crea un ambiente Trial o solicita un Developer gestionado o un Sandbox.",
   },
   {
     id: "open-maker-portal",
@@ -205,9 +205,9 @@ export const ESSENTIAL_SETUP_STEPS: EssentialSetupStep[] = [
 export const ENVIRONMENT_ACCESS_MATRIX: EnvironmentAccessRequirement[] = [
   {
     route: "Fundamentos Power Platform / Maker",
-    minimumAccess: "Cuenta de trabajo o estudio + entorno Developer o Trial con Dataverse",
+    minimumAccess: "Cuenta de trabajo o estudio + ambiente del curso con Dataverse (Trial con licencia Power Apps trial, o Developer gestionado o Sandbox de tu organización)",
     executionMode: "real-environment",
-    realExecutionNeeds: "Entorno Developer o Trial, rol Environment Maker y confirmación de no producción.",
+    realExecutionNeeds: "Ambiente del curso, rol Environment Maker, confirmación de no producción y solución exportada al cerrar cada módulo.",
     evidence: "Capturas de tabla Dataverse, Canvas App, Model-Driven App y flujo ejecutado con datos SIT.",
     fallback: "Sin tenant, solo se valida comprensión conceptual y diseño; no se marca como práctica ejecutada.",
   },
@@ -221,7 +221,7 @@ export const ENVIRONMENT_ACCESS_MATRIX: EnvironmentAccessRequirement[] = [
   },
   {
     route: "Developer Power Platform",
-    minimumAccess: "Developer environment + Power Platform CLI + Git + VS Code",
+    minimumAccess: "Ambiente del curso con Dataverse + Power Platform CLI + Git + VS Code",
     executionMode: "real-environment",
     realExecutionNeeds: "Solución Dataverse, conexión PAC CLI, repo, pruebas locales y export/import controlado.",
     evidence: "Repositorio, comandos ejecutados, solución exportada y capturas de validación.",

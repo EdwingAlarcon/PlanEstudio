@@ -565,6 +565,51 @@ test.describe("Smoke — rutas principales", () => {
     await expect(report).toContainText(/Sin actividad/);
   });
 
+  test("sandbox RPA legacy: el modo Modal inesperado interrumpe el primer Registrar y Reset lo restablece", async ({ page }) => {
+    await page.goto("/rpa-sandbox/legacy-app");
+    const aviso = page.getByRole("dialog", { name: "Aviso de sesión" });
+    const records = page.locator("table tbody tr");
+    await expect(records).toHaveCount(3);
+    // En Normal no existe: no añade nada a la página que automatiza PAD.
+    await expect(page.locator("#legacy-interrupt-dialog")).toHaveCount(0);
+
+    await page.locator("#legacy-mode").selectOption("unexpected-modal");
+    await expect(aviso).toHaveCount(0); // sale al pulsar Registrar, no al elegir el modo
+    await page.getByRole("button", { name: "Registrar" }).click();
+    await expect(aviso).toBeVisible();
+    await expect(page.locator("#legacy-interrupt-continue")).toBeFocused();
+    // Bloquea: el registro queda en espera y el resto de la página es inert.
+    await expect(page.getByRole("dialog", { name: /Registro confirmado/i })).toHaveCount(0);
+    await expect(records).toHaveCount(3);
+    await expect(page.locator("section", { has: page.locator("#legacy-mode") }).last()).toHaveAttribute("inert", "");
+    // Un clic forzado sobre Registrar cae en el velo del diálogo: no registra nada.
+    await page.locator("button", { hasText: "Registrar" }).click({ force: true });
+    await expect(records).toHaveCount(3);
+    await expect(aviso).toBeVisible();
+
+    await page.locator("#legacy-interrupt-continue").click();
+    await expect(aviso).toHaveCount(0);
+    await expect(page.getByRole("dialog", { name: /Registro confirmado/i })).toBeVisible();
+    await page.getByRole("button", { name: "Cerrar" }).click();
+    await expect(records).toHaveCount(4);
+
+    // Segundo Registrar en el mismo modo: ya no sale el aviso (responde como Normal).
+    await page.getByRole("button", { name: "Registrar" }).click();
+    await expect(aviso).toHaveCount(0);
+    await expect(page.getByRole("status")).toContainText(/Registro duplicado/i);
+
+    // Reset vuelve a Normal y a la tabla inicial; al volver a elegir el modo, el aviso sale otra vez.
+    await page.getByRole("button", { name: "Reset" }).click();
+    await expect(page.locator("#legacy-mode")).toHaveValue("normal");
+    await expect(records).toHaveCount(3);
+    await page.locator("#legacy-mode").selectOption("unexpected-modal");
+    await page.getByRole("button", { name: "Registrar" }).click();
+    await expect(aviso).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(aviso).toHaveCount(0);
+    await expect(page.getByRole("dialog", { name: /Registro confirmado/i })).toBeVisible();
+  });
+
   test("sandbox RPA responde en móvil y modo oscuro", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto("/rpa-sandbox/portal");

@@ -8,8 +8,8 @@ certifications: ["Arquitectura Power Platform"]
 role: ["F&O Practitioner", "Solution Architect"]
 prerequisites:
   - "Lab 93 completado: F&O Finance Setup Walkthrough"
-  - "Acceso a un ambiente trial/demo de Dynamics 365 Supply Chain Management"
-lastVerified: "2026-09"
+  - "Acceso a un ambiente trial/demo de Dynamics 365 Supply Chain Management con datos demo, o la variante en papel del final del lab"
+lastVerified: "2026-11"
 ---
 
 # Lab 96 — F&O Inventory & Products Setup
@@ -22,16 +22,17 @@ y Compras.
 
 ## Nota de verificación (léela antes de empezar)
 
-Los nombres de menú y pasos están escritos con base en la terminología documentada de Dynamics 365
-Supply Chain Management, **sin verificación contra un tenant en vivo al momento de escribirse**. Si
-un nombre de menú difiere de tu ambiente, documenta la diferencia y sigue el flujo equivalente.
+Las rutas de menú y los botones se contrastaron con Microsoft Learn en noviembre de 2026 (cada paso
+enlaza la página usada), pero **no se probaron en un tenant en vivo**. Si un nombre de menú difiere
+de tu ambiente, documenta la diferencia y sigue el flujo equivalente.
 
 ## ⚠️ Antes de empezar: cómo se consigue hoy un ambiente de F&O
 
-Verificado en Microsoft Learn en noviembre de 2026. Sin un ambiente así este lab no es ejecutable;
-la alternativa en papel está en el [Módulo 60](/nivel/d365/modulo/finance-operations-procesos-erp).
+Verificado en Microsoft Learn en noviembre de 2026. Sin un ambiente así, haz la
+**variante en papel** del final de este lab; el [Módulo 60](/nivel/d365/modulo/finance-operations-procesos-erp)
+cubre además los procesos en general.
 
-- **Tu ambiente Developer de Power Platform no sirve.** Learn indica que el tipo de ambiente
+- **Tu ambiente del curso no sirve.** Learn indica que el tipo de ambiente
   *Developer* no admite ninguna carga de Dynamics 365; F&O se instala en ambientes *Sandbox*,
   *Production* o *Trial (subscription-based)* y exige una licencia de F&O asignada
   ([Learn: Unified environment types and templates](https://learn.microsoft.com/power-platform/admin/unified-experience/unified-environment-types-and-templates)).
@@ -74,8 +75,10 @@ Actúas como F&O Practitioner configurando el maestro de producto y las reglas d
 
 ## Herramientas necesarias
 
-- Ambiente trial/demo de Dynamics 365 Supply Chain Management.
-- Al menos un sitio y un almacén configurados (usa los del demo data Contoso si no quieres crear nuevos).
+- Ambiente trial/demo de Dynamics 365 Supply Chain Management con la compañía `USMF` activa (una
+  legal entity recién creada en el Lab 93 no trae sitios, almacenes ni grupos de producto).
+- Al menos un sitio y un almacén configurados (usa los del demo data de `USMF`).
+- Tiempo: unos 90 minutos de pasos; el resto, para la explicación de disponibilidad.
 
 ## 🔧 Requisitos de ambiente y fallos frecuentes
 
@@ -93,24 +96,27 @@ específico — eso también es evidencia válida de auditoría.
 
 ### Configuración previa que puede faltar en un trial
 
-- Los **grupos de dimensión de producto/almacenamiento/seguimiento** por defecto del demo data
-  Contoso pueden no incluir combinaciones de color+talla ya armadas; es normal tener que crear uno
-  nuevo en el Paso 1 en vez de reutilizar uno existente.
+- `USMF` trae el grupo de dimensión de producto **SizeCol** (Size and Color), el que usa Learn para
+  crear variantes por talla y color
+  ([Learn: Create predefined product variants](https://learn.microsoft.com/dynamics365/supply-chain/pim/tasks/create-predefined-product-variants)).
+  Si tu ambiente no lo tiene, crea uno con esas dos dimensiones en el Paso 1.
 - El módulo **Inventory management** requiere que exista al menos un sitio y un almacén antes de que
   la jerarquía de reservas tenga sentido — si tu ambiente no trae ninguno preconfigurado, créalos
   primero aunque el lab no lo liste como paso explícito.
-- Algunos ambientes trial no traen la funcionalidad de jerarquía de reservas habilitada por defecto
-  (depende de la configuración de "Warehouse management" avanzado vs. básico); si el menú no aparece
-  donde se indica, documenta si tu ambiente usa el modelo de almacén básico en vez del avanzado.
+- La **jerarquía de reservas** pertenece al módulo **Warehouse management**: Learn indica que la
+  funcionalidad de reservas por jerarquía solo se usa con artículos habilitados para procesos de
+  warehouse management (WMS)
+  ([Learn: Reservations in Warehouse management](https://learn.microsoft.com/dynamics365/supply-chain/warehousing/reservations-in-warehouse-management)).
+  Para un producto sin WMS, la jerarquía no interviene; documenta qué modelo usa tu producto.
 
 ### Fallos frecuentes
 
 | Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
 |---|---|---|---|
-| No aparece "Dimension and variant groups" en el menú de Product information management | Módulo no habilitado / licencia trial limitada | Revisa en **System administration > Setup > Licensing** o el equivalente si el módulo SCM está activo | Verifica que el trial incluya Supply Chain Management, no solo Finance; si no, documenta el límite |
+| No aparece "Dimension and variant groups" en el menú de Product information management | El ambiente se creó con una plantilla o licencia que no incluye Supply Chain Management | Busca la página por nombre en la barra de búsqueda de F&O y revisa con qué plantilla se creó el ambiente en el Power Platform admin center | Si el ambiente es solo de Finance, documenta el límite y haz la variante en papel |
 | Al generar variantes no aparecen las 9 combinaciones esperadas | Grupo de dimensión de producto no incluye ambas dimensiones (color y talla) | Revisa el grupo asignado al producto base en la ficha del producto liberado | Reasigna un grupo de dimensión de producto que incluya color y talla antes de generar variantes |
 | No se puede guardar el producto liberado (error de validación) | Permiso insuficiente para escribir en Product information management | Verifica el mensaje de error exacto; suele indicar el objeto de seguridad bloqueado | Solicita o asigna un rol con acceso de escritura a Released products, no solo lectura |
-| El menú "Reservation hierarchy" no existe en la ruta indicada | Trial incompleto o versión distinta con navegación diferente | Busca por nombre en la barra de búsqueda global de F&O en vez de navegar por menú | Documenta la ruta real encontrada y sigue el flujo equivalente |
+| El menú "Reservation hierarchy" no aparece en Inventory management | Está en **Warehouse management > Setup > Inventory > Reservation hierarchy**, no en Inventory management | Busca "Reservation hierarchy" en la barra de búsqueda global de F&O | Documenta la ruta real encontrada y sigue el flujo equivalente |
 | Solo aparece un sitio/almacén de demo data y no se puede crear uno nuevo | Permiso insuficiente sobre Inventory management > Setup | Intenta abrir el formulario de creación y revisa si los botones están deshabilitados | Solicita acceso de escritura sobre Inventory breakdown, o documenta usando los sitios/almacenes existentes |
 | El producto no permite asignar la variante a una orden aunque las 9 combinaciones existen | Dato Contoso faltante: falta activar el producto en la legal entity o el sitio específico | Revisa si el producto está "Released" (liberado) a la legal entity con la que trabajas | Libera el producto explícitamente a la legal entity desde Released products antes de continuar |
 
@@ -118,37 +124,58 @@ específico — eso también es evidencia válida de auditoría.
 
 - Grupos de dimensión de producto/almacenamiento/seguimiento configurados o documentados.
 - Producto liberado con variantes por color y talla (al menos 3x3 = 9 combinaciones).
-- Jerarquía de reservas documentada.
+- Jerarquía de reservas documentada (niveles y qué queda por encima o por debajo de Location).
 - Explicación de cómo estas decisiones afectan lo que ve un vendedor al prometer una fecha de entrega.
 
 ## Pasos detallados
 
 ### Paso 1 — Grupos de dimensión
 
-Ve a **Product information management > Setup > Dimension and variant groups**.
+En **Product information management > Setup > Dimension and variant groups** están las páginas de
+grupos de dimensión de producto, de almacenamiento y de seguimiento.
 
-- Revisa o crea un **Storage dimension group** (sitio, almacén, ubicación).
-- Revisa o crea un **Tracking dimension group** (lote, número de serie) — para este producto no
-  necesitas seguimiento por serie, documenta por qué.
-- Revisa o crea un **Product dimension group** que incluya color y talla como dimensiones de producto.
+- Revisa un **Storage dimension group** de `USMF` (sitio, almacén, ubicación) y anota si el grupo
+  usa procesos de warehouse management.
+- Revisa un **Tracking dimension group** (lote, número de serie) — para este producto no necesitas
+  seguimiento por serie; documenta por qué.
+- Revisa el **Product dimension group** *SizeCol* (o crea uno con talla y color).
 
-### Paso 2 — Producto liberado y variantes
+### Paso 2 — Producto maestro, variantes y liberación
 
-Ve a **Product information management > Products > Released products > New**.
+Learn crea las variantes desde el **producto maestro** compartido y después lo libera a la legal
+entity ([Learn: Create predefined product variants](https://learn.microsoft.com/dynamics365/supply-chain/pim/tasks/create-predefined-product-variants)):
 
-- Crea el producto base "Camiseta técnica Northwind" y asígnale el grupo de dimensión de producto del Paso 1.
-- Genera las variantes (**Released product > Variants**) combinando 3 colores x 3 tallas (9 variantes).
-- Documenta cómo el sistema distingue entre "el producto" y "una variante específica" al momento de vender o comprar.
+1. Ve a **Product information management > Products > Product masters** y selecciona **New**.
+   Escribe el número (si no hay secuencia numérica) y el nombre "Camiseta técnica Northwind", y en
+   **Product dimension group** elige *SizeCol*. Selecciona **OK**.
+2. En el Action Pane, **Product dimensions**: en la pestaña **Size** agrega 3 tallas con **New**, y
+   en **Colors**, 3 colores. Guarda y cierra.
+3. En el Action Pane, **Product variants** y luego **Variant suggestions**: elige los valores,
+   selecciona **Suggest**, marca las 9 combinaciones (o **Select all**) y selecciona **Create**.
+4. Libera el producto y sus variantes a `USMF` con **Release products** y completa los campos que te
+  pida el producto liberado (grupos de modelo de artículo, de almacenamiento y de seguimiento; Learn
+  tiene la guía *Complete basic setup of a released product master*,
+  [enlace](https://learn.microsoft.com/dynamics365/supply-chain/pim/tasks/complete-basic-setup-released-product-master)).
+5. Documenta cómo el sistema distingue entre "el producto" y "una variante específica" al momento de
+   vender o comprar, y en qué página ves las variantes liberadas (**Released product variants**).
 
 ### Paso 3 — Sitios, almacenes y jerarquía de reservas
 
-Ve a **Inventory management > Setup > Inventory breakdown > Sites** y **Warehouses**.
+Ve a **Inventory management > Setup > Inventory breakdown > Sites** y a la página **Warehouses** del
+mismo menú.
 
-- Documenta al menos 1 sitio con 2 almacenes distintos (p. ej. `Almacén Principal` y `Almacén Devoluciones`).
-- Ve a **Inventory management > Setup > Reservation hierarchy** (o el equivalente documentado en tu
-  versión) y define una jerarquía: sitio antes que almacén antes que ubicación.
-- Explica, con un ejemplo, qué pasa si hay inventario suficiente en el sitio pero repartido entre
-  dos almacenes distintos, y cómo la jerarquía de reservas decide si se puede prometer como una sola entrega.
+- Documenta al menos 1 sitio de `USMF` con 2 almacenes distintos, y si cada almacén usa procesos de
+  warehouse management.
+- Ve a **Warehouse management > Setup > Inventory > Reservation hierarchy**
+  ([Learn: Flexible warehouse-level dimension reservation policy](https://learn.microsoft.com/dynamics365/supply-chain/warehousing/flexible-warehouse-level-dimension-reservation))
+  y documenta una jerarquía existente. Learn describe la jerarquía *Default* con Site, Warehouse,
+  Inventory status, Location y License plate, de menos específico (nivel 1) a más específico.
+- La decisión real no es el orden sitio-almacén, que va siempre arriba, sino **qué dimensiones quedan
+  por encima de Location**. Explica con la tabla de Learn qué cambia si el lote (Batch number) va por
+  encima de Location (es un requisito estricto: el operario no puede escoger otro lote) o por debajo
+  (lo decide el almacén al hacer el picking) ([Learn: Reservations in Warehouse management](https://learn.microsoft.com/dynamics365/supply-chain/warehousing/reservations-in-warehouse-management)).
+- Usa el ejemplo de cálculo de disponibilidad de esa misma página de Learn (10 disponibles en el
+  almacén y 12 en la ubicación) para explicar por qué el sistema promete el número menor.
 
 ### Paso 4 — Impacto en disponibilidad
 
@@ -156,6 +183,25 @@ Documenta, sin necesariamente ejecutarlo en una orden real:
 
 - Qué vería un vendedor en la ficha de disponibilidad (available to promise) para una variante específica.
 - Por qué dos variantes del mismo producto pueden tener disponibilidad distinta aunque el producto base sea el mismo.
+
+## Variante en papel (sin ambiente de F&O)
+
+Si no tienes ambiente, haz el diseño con las páginas de Learn enlazadas en los pasos y escribe
+«variante en papel» en tu entrega. Tiempo estimado: 75 minutos.
+
+1. **Grupos:** tabla con los tres grupos (producto, almacenamiento, seguimiento), qué dimensiones
+   activa cada uno para la camiseta y por qué no hace falta número de serie.
+2. **Variantes:** la matriz 3 tallas x 3 colores con el número de variante que le darías a cada
+   combinación, y la secuencia de botones de Learn para crearlas (Product dimensions, Product
+   variants, Variant suggestions, Suggest, Create, Release products).
+3. **Almacenes y reservas:** un sitio con 2 almacenes; la jerarquía *Default* de Learn con su nivel;
+   y tu decisión, justificada, de qué dimensión pondrías por encima o por debajo de Location si la
+   camiseta pasara a controlarse por lote.
+4. **Disponibilidad:** el ejemplo de cálculo de Learn (10 frente a 12) explicado con tus palabras y
+   aplicado a una variante de la camiseta.
+
+La variante en papel cumple los criterios de validación si cada decisión lleva su enlace de Learn;
+sustituye a las capturas.
 
 ## Criterios de validación
 

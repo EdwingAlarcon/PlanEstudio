@@ -83,7 +83,7 @@ Este lab repite las técnicas del Módulo 4 (páginas, áreas, formularios, vist
 
 ### Verificación rápida antes de empezar
 
-1. En [make.powerapps.com](https://make.powerapps.com), el selector de ambiente (arriba a la derecha) muestra tu ambiente Developer.
+1. En [make.powerapps.com](https://make.powerapps.com), el selector de ambiente (arriba a la derecha) muestra tu ambiente del curso.
 2. Abre **Solutions** → `SIT Solicitudes Internas`. Debes ver las tablas `Solicitud TI` y `Categoría`.
 3. Ten a mano el nombre interno que anotaste en el Lab 02 para la columna principal `Título de Solicitud`. En este lab casi no lo necesitas: los diseñadores muestran las columnas por su **nombre visible**, y así se nombran en todos los pasos.
 
@@ -446,7 +446,7 @@ En la solución → **Tables** → **Solicitud TI** → zona **Data experiences*
    | Categoría | None | Organization | None | None | None | Organization |
    | Contact | None | Organization | None | None | None | Organization |
 
-   > **Read "Business Unit" con Write "User"** significa que el solicitante ve las solicitudes de su unidad de negocio pero solo puede editar las suyas. En un ambiente Developer todos los usuarios suelen estar en la misma unidad (la raíz), así que verá todas las solicitudes y podrá editar solo las que creó.
+   > **Read "Business Unit" con Write "User"** significa que el solicitante ve las solicitudes de su unidad de negocio pero solo puede editar las suyas. En tu ambiente del curso todos los usuarios suelen estar en la misma unidad (la raíz), así que verá todas las solicitudes y podrá editar solo las que creó.
 
 3. **Save**.
 

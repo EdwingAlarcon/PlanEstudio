@@ -65,7 +65,7 @@ Si usas el plan B (agente self-hosted), suma unos 30 minutos la primera vez para
 ### Entorno
 
 - [ ] Una organización en [dev.azure.com](https://dev.azure.com), creada con la misma cuenta de trabajo del curso, con un proyecto creado con el proceso de work items **Agile** (se elige en las opciones avanzadas de **New project**; el Módulo 19 explica cómo cambiarlo si lo creaste con Basic)
-- [ ] Dos ambientes de Power Platform con Dataverse: **SIT-DEV** (tu Developer del Módulo 1) y **SIT-TEST** (el Trial del Módulo 16; no crees un segundo Developer: desde el 15-11-2026 solo puedes tener uno). Build Tools solo funciona contra ambientes con base de datos de Dataverse ([Learn: Build Tools](https://learn.microsoft.com/power-platform/alm/devops-build-tools))
+- [ ] Dos ambientes de Power Platform con Dataverse: **SIT-DEV** (tu ambiente del curso del Módulo 1) y **SIT-TEST** (el segundo ambiente del Módulo 16: un Sandbox o Developer gestionado de tu organización, o un Trial si tu SIT-DEV no lo es; el Trial es uno por usuario, así que revisa las salidas del Módulo 16 y [Entornos y trials](/recursos/entornos-y-trials)). Build Tools solo funciona contra ambientes con base de datos de Dataverse ([Learn: Build Tools](https://learn.microsoft.com/power-platform/alm/devops-build-tools))
 - [ ] La solución `SIT_SolicitudesInternas` (unmanaged) en SIT-DEV. Si hiciste el Módulo 16, ya la tienes y en SIT-TEST ya importaste versiones managed con su variable de entorno y sus conexiones
 - [ ] Permiso para crear App registrations en Microsoft Entra ID y para agregar usuarios de aplicación en los dos ambientes (en un tenant de práctica personal ya lo tienes)
 - [ ] Git instalado en tu equipo

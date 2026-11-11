@@ -13,7 +13,7 @@ Construir flujos empresariales robustos con manejo de errores, ramas paralelas, 
 
 > **Cómo está organizado este módulo (piloto):** en vez de leer todo el marco teórico y recién al final "hacer" algo, cada micro-concepto viene con una micropráctica de feedback inmediato justo después. Vas a **construir** parte de la lógica tú mismo (no vas a copiar una solución ya resuelta), vas a **diagnosticar** un síntoma real antes de ver la causa, y vas a cerrar con un **reto de transferencia** que cambia la regla de negocio para comprobar si entendiste el concepto o memorizaste los pasos.
 >
-> Necesitas: una cuenta de trabajo o estudio y tu [entorno Power Platform Developer](https://learn.microsoft.com/power-platform/developer/plan) del Módulo 1, o un Trial con Dataverse (gratuito, con conectores premium habilitados para pruebas — no uses el entorno productivo del tenant). El entorno Developer da 750 ejecuciones de flujo al mes, más que suficiente para este módulo. Desde noviembre de 2026 Microsoft cambió cómo se consigue: ver [Entornos y trials](/recursos/entornos-y-trials).
+> Necesitas: una cuenta de trabajo o estudio y tu ambiente del curso del Módulo 1 (un Trial con Dataverse creado con la licencia Power Apps trial, o el Developer gestionado o Sandbox que te dé tu organización — no uses el entorno productivo del tenant). Si es un Trial, comprueba que no venza durante el módulo y exporta tu solución al terminar cada sesión: ver [Entornos y trials](/recursos/entornos-y-trials).
 
 ---
 
@@ -33,7 +33,7 @@ Scope "Catch"  ← Run After del Scope Try: failed + timed out (succeeded desmar
 
 **Ahora haz algo — micropráctica (2 min):** antes de construir nada, resuelve esta decisión conceptual con feedback inmediato → **[Retry vs Scope/Try-Catch](/practica/ip-pa-004-retry-scope-try-catch)**. Te va a pedir distinguir cuándo un error se soluciona reintentando (fallos transitorios como HTTP 429) y cuándo necesita Scope + Catch + compensación (fallos funcionales, como datos inválidos que nunca van a tener éxito por más que reintentes).
 
-**Práctica real en tu entorno (10 min):** construye el patrón Try/Catch del ejemplo de arriba en un flujo nuevo de tu entorno Developer, usando **Add a new row** de Dataverse dentro del Scope Try (usa una tabla de prueba, ej. `Account`) y **Send an email (V2)** de Outlook dentro del Scope Catch. Fuerza el error a propósito (por ejemplo, referenciando una tabla o columna que no existe) para confirmar que el Catch sí se dispara.
+**Práctica real en tu entorno (10 min):** construye el patrón Try/Catch del ejemplo de arriba en un flujo nuevo de tu ambiente del curso, usando **Add a new row** de Dataverse dentro del Scope Try (usa una tabla de prueba, ej. `Account`) y **Send an email (V2)** de Outlook dentro del Scope Catch. Fuerza el error a propósito (por ejemplo, referenciando una tabla o columna que no existe) para confirmar que el Catch sí se dispara.
 
 **Evidencia a reportar (no un "sí/no" — el dato exacto que viste):**
 
@@ -81,7 +81,7 @@ Si te atoras, no hay problema — abre las pistas progresivas dentro de la micro
 
 **¿Por qué existe esto?** La acción **HTTP** (conector Premium) te permite llamar cualquier API REST. Su respuesta llega como texto y se estructura con **Parse JSON**. Aparte, cualquier acción que liste registros (Dataverse, SharePoint, o tu propia paginación manual con `@odata.nextLink`) tiene un límite por defecto de 256 filas — si no lo sabes, tu flujo "funciona" pero pierde datos en silencio.
 
-**Ejemplo pequeño:** una llamada HTTP a una API pública de tasas de cambio, sin necesidad de licencia adicional para probarla en tu entorno Developer:
+**Ejemplo pequeño:** una llamada HTTP a una API pública de tasas de cambio, sin necesidad de licencia adicional para probarla en tu ambiente del curso:
 ```
 GET https://api.exchangerate-api.com/v4/latest/USD
 Headers: Accept: application/json

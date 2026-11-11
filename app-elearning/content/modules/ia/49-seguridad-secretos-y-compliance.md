@@ -17,7 +17,7 @@ Prevenir la fuga de secretos y datos sensibles hacia prompts o logs de herramien
 >
 > **Antes de empezar, necesitas:**
 > - **Node.js 22 o posterior** (comprueba con `node --version`) y **Git** (`git --version`). Usas el ejecutor de pruebas integrado `node:test` y la opción `--env-file`, que existe desde Node.js 20.6 y dejó de ser experimental en las versiones 22.21 y 24.10 ([documentación de Node.js](https://nodejs.org/api/cli.html)). No instalas nada más.
-> - **Opcional para la Microlección 3:** una cuenta de **GitHub Free** y un repositorio **público** de práctica (en él solo pondrás valores inventados). Si además tienes una suscripción de Azure y un ambiente Developer de Power Platform, puedes hacer de verdad la parte de Azure Key Vault; si no, la haces en papel.
+> - **Opcional para la Microlección 3:** una cuenta de **GitHub Free** y un repositorio **público** de práctica (en él solo pondrás valores inventados). Si además tienes una suscripción de Azure y tu ambiente del curso de Power Platform, puedes hacer de verdad la parte de Azure Key Vault; si no, la haces en papel.
 > - **Nunca uses un secreto real en este módulo**, ni siquiera de un ambiente de pruebas. Todos los valores de los ejercicios son inventados a propósito.
 > - Este módulo es transversal: no necesitas haber hecho ningún nivel de certificación ni tener un tenant de Power Platform para las Microlecciones 1 y 2.
 
@@ -287,7 +287,7 @@ export function cuerpoSolicitudToken(config) {
 
 **Práctica B — el secreto en Power Platform (20 min, en papel si no tienes Azure):**
 
-Si tienes una suscripción de Azure y un ambiente Developer, sigue la página de Learn sobre Key Vault (enlace del concepto breve) con un secreto inventado. Si no, llena la tabla en papel con los nombres que usarías; es lo que revisaría un arquitecto antes de aprobar el diseño. Los pasos que Learn documenta, en resumen:
+Si tienes una suscripción de Azure y tu ambiente del curso, sigue la página de Learn sobre Key Vault (enlace del concepto breve) con un secreto inventado. Si no, llena la tabla en papel con los nombres que usarías; es lo que revisaría un arquitecto antes de aprobar el diseño. Los pasos que Learn documenta, en resumen:
 1. En la suscripción de Azure: registrar el resource provider `Microsoft.PowerPlatform` y crear un key vault (Learn recomienda uno por ambiente de Power Platform y el modelo de permisos **Azure role-based access control**).
 2. En el key vault, **Access control (IAM)** > **Add** > **Add role assignment** > rol **Key Vault Secrets User**, para quien crea la variable y para el service principal de Dataverse.
 3. En Power Apps, dentro de una solución unmanaged: **New** > **More** > **Environment variable**, **Data Type**: **Secret**, **Secret Store**: **Azure Key Vault**, y los campos **Azure Subscription ID**, **Resource Group Name**, **Azure Key Vault Name** y **Secret Name**.

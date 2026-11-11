@@ -8,7 +8,7 @@ practiceMinutes: 150
 slug: "pcf-avanzado-con-typescript-y-react"
 lastVerified: "2026-11"
 ---
-*Lectura: 15-20 min · Con práctica: unos 150 min en tu entorno Developer, más 30-40 min del recurso puente de TypeScript y React si no lo has hecho; la primera vez, cuenta entre el doble y el triple (instalar herramientas y el primer `pac pcf push` son lo más lento).*
+*Lectura: 15-20 min · Con práctica: unos 150 min en tu ambiente del curso, más 30-40 min del recurso puente de TypeScript y React si no lo has hecho; la primera vez, cuenta entre el doble y el triple (instalar herramientas y el primer `pac pcf push` son lo más lento).*
 
 ### 🚧 Antes de comenzar: requiere TypeScript sólido
 
@@ -40,7 +40,7 @@ Desarrollar controles PCF avanzados: Dataset controls que reemplazan subgrids, c
 > **diagnosticar** un síntoma real antes de ver la causa, y vas a cerrar con un **reto de transferencia**
 > que lleva el mismo control a otro tipo de app.
 >
-> Necesitas: tu entorno Developer con la solución `SIT Solicitudes Internas` (Lab 02), la app Model-Driven
+> Necesitas: tu ambiente del curso con la solución `SIT Solicitudes Internas` (Lab 02), la app Model-Driven
 > del Lab 04 con el subgrid **Solicitudes de esta categoría** en el formulario de Categoría (Tarea 2.7), el
 > Power Platform CLI (`pac`) con un perfil de autenticación (Módulo 13) y Node.js LTS. Herramientas:
 > [Guía de Herramientas de Workstation](/recursos/guia-herramientas-workstation).

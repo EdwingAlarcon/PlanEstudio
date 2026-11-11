@@ -433,7 +433,7 @@ Los Módulos 42, 45, 47, 48, 49 y 50 se verificaron contra el código fuente ofi
 contra la página publicada; 289 enlaces de los niveles 1 a 4 (casi todos de Copilot Studio) y varias etiquetas de D365
 quedaron sin comprobar por ese motivo.
 
-### 11.1 Hallazgo que afecta a todo el curso: el Developer Plan cambia el 2026-11-15 (SIN RESOLVER)
+### 11.1 Hallazgo que afecta a todo el curso: el Developer Plan cambia el 2026-11-15 (resuelto el mismo día, ver §11.7)
 
 Confirmado en <https://learn.microsoft.com/power-platform/developer/plan> (ms.date 2026-10-26):
 
@@ -446,7 +446,7 @@ Confirmado en <https://learn.microsoft.com/power-platform/developer/plan> (ms.da
   estándar para probar funciones premium, o exportar las soluciones a otro ambiente (por ejemplo un sandbox).
 
 El curso entero parte de "crea tu ambiente Developer gratuito" (preparar entorno, `workstation.ts`, Módulo 1 y siguientes,
-Módulo 57; unas 90 páginas de contenido y recursos lo mencionan). **No se ha corregido**: hace falta decidir qué ambiente
+Módulo 57; unas 90 páginas de contenido y recursos lo mencionan). Al escribir este apartado no estaba corregido (se resolvió después, §11.7): hacía falta decidir qué ambiente
 recomienda el curso a un alumno sin licencia de organización, y eso es una decisión de alcance del usuario. La página del
 anuncio (`important-changes-coming`) devolvió 429 y no se leyó.
 
@@ -472,7 +472,7 @@ Contrastado con Learn y con el código de los dos sandboxes. Sin obstáculos en 
 
 Sin confirmar: que **Move file(s)** falle con el libro abierto en Excel (LAB-105) y si las acciones web escriben con el
 diálogo de confirmación encima (LAB-107); hace falta PAD real. LAB-110 y LAB-111 no se volvieron a verificar. Propuestas
-de código no aplicadas: modo "Modal inesperado" en el simulador legacy y renombrar `legacy-records.json`.
+de código no aplicadas: modo "Modal inesperado" en el simulador legacy y renombrar `legacy-records.json` (hechas después, §11.7).
 
 ### 11.3 Nivel D365, Módulos 57 a 66 y sus labs (persona simulada "Valeria")
 
@@ -558,3 +558,58 @@ mining y campos del modelo de facturas.
   con `noindex`.
 - **Tildes**: 41 cadenas visibles en 8 archivos de `src/`. No se tocaron los términos que comparan los evaluadores de
   prácticas ni los datos simulados (por ejemplo "Bogota").
+
+### 11.7 Segunda ronda del mismo día: cierre de los pendientes de §11.1 a §11.4
+
+Learn volvió a responder y las consultas se hicieron en serie; no hubo más 429.
+
+**Developer Plan (§11.1) — RESUELTO en el contenido.** Camino vigente del curso:
+
+- El alumno crea un ambiente **Trial (standard) con Dataverse** con una licencia Power Apps trial (Módulo 1, clic a clic
+  según <https://learn.microsoft.com/power-platform/admin/trial-environments>). Dura 30 días con una sola extensión de 30,
+  que se pide en la última semana (**Extend trial**); es uno por usuario y no se puede restablecer, respaldar ni copiar.
+- Desde el Módulo 2 hay una "rutina de cierre": exportar la solución como no gestionada al terminar cada módulo y guardarla
+  fuera del ambiente. Al vencer el Trial se crea otro y se importa. Filas, conexiones e historial no viajan en la solución.
+- Quien ya tiene un ambiente Developer lo usa hasta el 2026-12-15 y exporta antes. Un Developer gestionado o un sandbox de
+  la organización es la mejor opción.
+- Referencia única: `docs/Recursos/ENTORNOS_Y_TRIALS.md` (`/recursos/entornos-y-trials`). Unas 150 menciones de paso pasaron
+  de "tu ambiente Developer" a "tu ambiente del curso"; los labs que dependían de un segundo ambiente, respaldo o copia
+  (M16, LAB-19, LAB-56, M52, LAB-52, M41, LAB-115) tienen salida con sandbox de la organización o variante en papel.
+- Confirmado después: el tipo Trial admite Managed Environments si tiene Dataverse (M33).
+- **No verificado en Learn**: si al vencer el Trial se puede crear otro de inmediato con la misma cuenta (Learn solo dice
+  "one per user"); qué recibe una cuenta gratuita de Microsoft Entra; si tras los 90 días de licencia trial se obtiene otra;
+  si **Security group** es obligatorio en un Trial. Learn se contradice sobre **Enable Dynamics 365 apps** en un Trial (la
+  página de trials lo ofrece, `create-environment` dice que no se puede); el curso lo deja en **No**.
+
+**Enlaces.** 685 URL únicas de Learn en módulos y labs: 684 responden 200 y la única 404 (patches, M16) se corrigió. Seis
+redirecciones se actualizaron; dos llevaban a otro tema y se sustituyeron por la página correcta (M05 attended/unattended,
+M29 tenant externo de Entra). Solo se comprobó que responden, no se releyó su contenido.
+
+**IA.** M42, M47 y M49 confirmados contra la página publicada (incluido el reto de AI Builder del M42); M45, M48 y M50 no
+dependen de Learn. Siguen sin confirmar: salida exacta de `pac env who`, **Include default branch** del ruleset y la
+etiqueta **Advanced parameters** del diseñador nuevo en **Update a row**.
+
+**D365.** Confirmados: **Requirement pane**, **Schedule Assistant Filter**, route-to-queue (**Create ruleset** > **Create
+Rule**), **SMS providers**, pestaña **Omnichannel** con **Capacity**, **Customer payment journal**, pestaña **Legal
+entities** de dual-write, y las fechas de retiro de PL-200 (2026-08-31) y MB-280 (2026-07-31) en la página de exámenes
+retirados de Learn. Siguen sin confirmar: ruta de menú del Schedule Board, `mserp_inventoryonhandaientity` y el nombre del
+botón para reejecutar la sincronización inicial.
+
+**Labs F&O 93, 94, 96, 97, 98 y 100, y LAB-110/111.** Revisados completos, con variante en papel en cada uno y
+`lastVerified` 2026-11. Sin confirmar: rutas de Chart of accounts, Pending vendor invoices, Warehouses, Billing rules e
+Invoice proposals, Assortments y el workspace Financial analysis; duración de la trial de administrador de F&O. Nada se
+probó en un tenant real.
+
+**Prerrequisitos de labs.** Títulos corregidos en LAB-64, 66 y 70; LAB-93 reescrito; en LAB-102 se quitó el Lab 57 (nivel
+IA, transversal) como prerrequisito y quedó como lectura recomendada. LAB-111 no se tocó porque un e2e fija su texto.
+
+**Sandbox RPA.** SIT Registro Legacy tiene el modo **Modal inesperado** (`src/lib/rpa-legacy-modes.ts`): el primer
+**Registrar** tras elegir el modo muestra el diálogo **Aviso de sesión** (`#legacy-interrupt-dialog`, botón
+`#legacy-interrupt-continue`) y bloquea la página hasta **Continuar**. El ejercicio 5 de LAB-107 lo usa. El archivo de
+entrada pasó a llamarse `lote-entrada.json`. No se ha probado con PAD real.
+
+**Vista previa.** Un módulo de producción pasó por opengraph.xyz con 0 errores (título y descripción propios, `og.png`
+como `image/png`). LinkedIn Post Inspector y el validador de X exigen iniciar sesión y no se usaron.
+
+**Sin aplicar, a propósito:** IP-IA-020 (el diffstat del README depende de cómo escriba el alumno las líneas en blanco) e
+IP-QRY-002 (prerrequisito opcional).

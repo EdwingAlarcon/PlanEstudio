@@ -8,7 +8,7 @@ certifications: ["Buenas Prácticas"]
 role: ["Developer", "Solution Architect", "Administrator"]
 prerequisites:
   - "Lab 52 completado — Power Platform CLI configurado y conectado"
-  - "Acceso a al menos 2 entornos distintos: tu Developer (o Sandbox) y un Trial con Dataverse como segundo entorno (desde el 15-11-2026 cada usuario solo puede tener un Developer), o la variante en papel"
+  - "Acceso a al menos 2 entornos distintos: tu ambiente del curso y un segundo entorno con Dataverse (un Sandbox o Developer gestionado de tu organización, o un Trial si tu ambiente del curso no lo es: el Trial es uno por usuario), o la variante en papel"
   - "Módulo 52 estudiado: Power Platform CLI y Conexión Segura al Tenant"
 files: []
 lastVerified: "2026-11"
@@ -49,9 +49,9 @@ Developer, Solution Architect, Administrator.
 ## Tecnologías utilizadas
 
 - Power Platform CLI (`pac auth`, `pac env who`; `pac org who` es su nombre anterior y sigue funcionando, según [Learn: pac env](https://learn.microsoft.com/power-platform/developer/cli/reference/env))
-- Al menos 2 entornos distintos (puede simularse Prod con un Trial con Dataverse; no uses un segundo Developer: desde el 15-11-2026 cada usuario solo puede tener uno — ver [Entornos y trials](/recursos/entornos-y-trials))
+- Al menos 2 entornos distintos: tu ambiente del curso y un segundo entorno (un Sandbox o Developer gestionado de tu organización, o un Trial si tu ambiente del curso no lo es; el Trial es uno por usuario — ver [Entornos y trials](/recursos/entornos-y-trials))
 
-**Antes de empezar: el segundo entorno.** El Developer Plan no da derecho a crear un Trial. Learn exige una licencia que lo incluya (por ejemplo, la prueba gratuita de Power Apps; un Trial por usuario) y que la política del tenant permita crear ambientes ([Learn: Who can create environments?](https://learn.microsoft.com/power-platform/admin/create-environment#who-can-create-environments)). Con esa licencia, en el [Power Platform admin center](https://admin.powerplatform.microsoft.com): **Manage** > **Environments** > **New**, **Type** = **Trial**, **Create a database for this environment?** = **Yes** (o la opción equivalente que veas), **Next** y **Save** ([Learn: Trial environments](https://learn.microsoft.com/power-platform/admin/trial-environments)). El Trial se deshabilita y se borra a los 30 días. Si no puedes crearlo, haz la variante en papel del final.
+**Antes de empezar: el segundo entorno.** Si tu ambiente del curso ya es tu Trial, no puedes crear otro con la misma cuenta: pide un Sandbox o un Developer gestionado a tu organización o haz la variante en papel del final. Si tu ambiente del curso es un Developer o un Sandbox, puedes crear un Trial como segundo entorno. El Developer Plan no da derecho a crear un Trial: Learn exige una licencia que lo incluya (por ejemplo, la licencia Power Apps trial; un Trial por usuario) y que la política del tenant permita crear ambientes ([Learn: Who can create environments?](https://learn.microsoft.com/power-platform/admin/create-environment#who-can-create-environments)). Con esa licencia, en el [Power Platform admin center](https://admin.powerplatform.microsoft.com): **Manage** > **Environments** > **New**, **Type** = **Trial**, la opción de base de datos = **Yes** (Learn le da dos nombres: **Add a Dataverse data store** en [Create and manage environments](https://learn.microsoft.com/power-platform/admin/create-environment) y **Create a database for this environment?** en [Trial environments](https://learn.microsoft.com/power-platform/admin/trial-environments); usa el que veas), **Next** y **Save**. El Trial se deshabilita y se borra a los 30 días. Si no puedes crearlo, haz la variante en papel del final.
 
 Anota en una tabla la **URL** de cada entorno (en el admin center, **Details** del ambiente): es contra esa tabla, no contra el nombre del perfil, como vas a verificar el destino.
 
@@ -66,7 +66,7 @@ pac auth create --environment "https://org-prod-XXXX.crm.dynamics.com" --name "s
 pac auth list
 ```
 
-**Con solo dos entornos** (tu Developer y un Trial): crea `sit-solicitudes-dev` contra el Developer y `sit-solicitudes-prod` contra el Trial, que hace de Prod simulado. El perfil de Test lo escribes en papel; **no** lo apuntes a uno de tus dos entornos, porque dos perfiles con etapas distintas y la misma URL son justo el error que este lab enseña a evitar.
+**Con solo dos entornos** (tu ambiente del curso y el segundo): crea `sit-solicitudes-dev` contra tu ambiente del curso y `sit-solicitudes-prod` contra el segundo, que hace de Prod simulado. El perfil de Test lo escribes en papel; **no** lo apuntes a uno de tus dos entornos, porque dos perfiles con etapas distintas y la misma URL son justo el error que este lab enseña a evitar.
 
 **Validación esperada:** `pac auth list` muestra los perfiles con nombres que identifican inequívocamente la etapa (dev/test/prod) y el proyecto, y cada uno con una URL distinta en la columna `Url`.
 
@@ -98,8 +98,8 @@ Con tres URLs inventadas (una por etapa), escribe los comandos del Ejercicio 1, 
 |-------|-------|----------|
 | Seleccionar el perfil por índice numérico (`--index 2`) en vez de por nombre | El índice puede cambiar si se agregan/eliminan perfiles con el tiempo | Seleccionar siempre por `--name` explícito |
 | Confiar en la memoria para saber qué perfil está activo | No verificar `pac env who` antes de cada operación | Aplicar el procedimiento de 3 pasos sin excepciones, sin importar la prisa |
-| Dos perfiles de etapas distintas apuntan a la misma URL | Se creó un perfil "de Test" contra el Developer por no tener un tercer entorno | Un perfil por entorno real; la etapa que falte, en papel |
-| No poder crear el Trial | El Developer Plan no incluye derecho a Trial, o el tenant no permite crear ambientes | Activar la prueba gratuita de Power Apps o pedir el ambiente al administrador; si no, variante en papel |
+| Dos perfiles de etapas distintas apuntan a la misma URL | Se creó un perfil "de Test" contra el entorno de Dev por no tener un tercer entorno | Un perfil por entorno real; la etapa que falte, en papel |
+| No poder crear el Trial | Ya usas tu único Trial como ambiente del curso, el Developer Plan no incluye derecho a Trial, o el tenant no permite crear ambientes | Pedir un Sandbox o Developer gestionado al administrador, o activar la licencia Power Apps trial si aún no tienes un Trial; si no, variante en papel |
 | Usar el mismo nombre de perfil para Dev y Test de proyectos distintos | Convención de nombres poco específica | Incluir el nombre del proyecto y la etapa en cada nombre de perfil |
 | Ejecutar el primer comando del día sin verificar el perfil activo | Asumir que el perfil de la sesión anterior sigue siendo el correcto | Verificar `pac env who` al inicio de cada sesión de trabajo, no solo antes de comandos destructivos |
 

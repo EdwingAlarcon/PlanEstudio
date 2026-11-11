@@ -8,7 +8,7 @@ certifications: ["Arquitectura Power Platform"]
 role: ["Solution Architect", "Admin", "CoE Lead"]
 prerequisites:
   - "Rol de Power Platform Administrator (o Global Administrator) asignado de forma directa y permanente; el rol Dynamics 365 Administrator no sirve para el kit"
-  - "Ruta A (instalación real): licencias no trial Power Apps Per User, Power Automate Per User (o Per Flow) y Microsoft 365 con buzón; Power BI Pro para publicar y compartir el dashboard. Ruta B (sin esas licencias): un ambiente Developer propio"
+  - "Ruta A (instalación real): licencias no trial Power Apps Per User, Power Automate Per User (o Per Flow) y Microsoft 365 con buzón; Power BI Pro para publicar y compartir el dashboard. Ruta B (sin esas licencias): tu ambiente del curso (Trial, Developer o Sandbox)"
   - "Al menos 5 aplicaciones Canvas o flujos ya creados en el tenant (para que el inventario tenga datos; en la ruta B bastan los que tengas)"
   - "Módulo 32 estudiado: CoE Starter Kit"
 files: []
@@ -105,9 +105,9 @@ Learn ([Set up the CoE Starter Kit](https://learn.microsoft.com/power-platform/g
 | B1 — Descarga y lectura (20 min) | Haz la **Tarea 1.1** (descarga y extrae el ZIP) y lee la **Tarea 1.3**: copia la lista de conectores que el ambiente del CoE necesita en el grupo Business | Ejercicio 1 |
 | B2 — Inventario nativo (40 min) | En el admin center → **Manage** → **Inventory**, filtra apps y flujos, pulsa **Download** y, con el CSV, rellena la tabla de KPIs de la **Tarea 3.2** (total de apps, total de flujos, dueños distintos y recursos en el ambiente Default). Anota qué KPI no puedes sacar del CSV | Ejercicios 2 y 3 |
 | B3 — Recorrido guiado del kit (40 min) | Lee el Ejercicio 2, el Ejercicio 4 y las Tareas 5.1 y 5.2 junto a las páginas de Learn que citan. Para cada uno escribe, en una línea, qué habrías comprobado y dónde (flujo, app o variable de entorno). En el Ejercicio 4 di qué umbral pondrías en SIT y por qué | Ejercicios 2, 4 y Tareas 5.1-5.2 |
-| B4 — Data policy real (50 min) | Haz la **Tarea 5.3** de verdad en tu ambiente **Developer**: crea `Datos Internos SIT` con alcance **Add multiple environments** limitado a ese ambiente, crea el flujo con Dataverse y HTTP y anota el mensaje que muestra Power Automate | Tarea 5.3 (igual que en la ruta A) |
+| B4 — Data policy real (50 min) | Haz la **Tarea 5.3** de verdad en tu ambiente del curso: crea `Datos Internos SIT` con alcance **Add multiple environments** limitado a ese ambiente, crea el flujo con Dataverse y HTTP y anota el mensaje que muestra Power Automate | Tarea 5.3 (igual que en la ruta A) |
 
-> Para crear data policies necesitas el rol **Power Platform Administrator** (o Global Administrator) en tu tenant de práctica. Learn indica que el plan Developer permite aplicar data policies a su ambiente ([Learn: Developer plan](https://learn.microsoft.com/power-platform/developer/plan)).
+> Para crear data policies necesitas el rol **Power Platform Administrator** (o Global Administrator) en tu tenant de práctica. Una data policy con alcance de ambientes se aplica a los ambientes que elijas, también a tu ambiente del curso; si este es un Trial, la política deja de tener efecto cuando el ambiente se elimina, así que anota la evidencia antes.
 
 ---
 
@@ -528,7 +528,7 @@ Esta política impide que un flujo combine Dataverse (datos sensibles) con HTTP 
 - [ ] Paquete del kit descargado, archivo de Core localizado y lista de conectores del ambiente del CoE copiada
 - [ ] Tabla de KPIs de la Tarea 3.2 rellenada con el CSV de **Manage** > **Inventory**, indicando el KPI que el CSV no da
 - [ ] Una línea por el Ejercicio 2, el Ejercicio 4, la Tarea 5.1 y la Tarea 5.2 con lo que habrías comprobado y dónde, y el umbral de cumplimiento que pondrías en SIT
-- [ ] Data policy `Datos Internos SIT` creada en tu ambiente Developer y probada con el flujo Dataverse + HTTP
+- [ ] Data policy `Datos Internos SIT` creada en tu ambiente del curso y probada con el flujo Dataverse + HTTP
 
 ## Evidencia esperada
 

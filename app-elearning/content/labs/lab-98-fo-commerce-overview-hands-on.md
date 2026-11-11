@@ -8,8 +8,8 @@ certifications: ["Arquitectura Power Platform"]
 role: ["F&O Practitioner", "Solution Architect"]
 prerequisites:
   - "Lab 96 completado: F&O Inventory & Products Setup"
-  - "Acceso a un ambiente trial/demo con el módulo Retail and Commerce habilitado (no todos los trials de Finance/SCM lo incluyen por defecto — verifica en tu ambiente antes de empezar)"
-lastVerified: "2026-09"
+  - "Acceso a un ambiente trial/demo con el módulo Retail and Commerce habilitado (no todos los trials de Finance/SCM lo incluyen por defecto — verifica en tu ambiente antes de empezar); sin él, haz la variante en papel del final del lab"
+lastVerified: "2026-11"
 ---
 
 # Lab 98 — F&O Commerce Overview Hands-On
@@ -23,17 +23,19 @@ entre venta unificada (F&O/Commerce) y venta gestionada solo dentro de Dynamics 
 ## Nota de verificación (léela antes de empezar)
 
 Los nombres de menú y pasos están escritos con base en la terminología documentada de Dynamics 365
-Commerce, **sin verificación contra un tenant en vivo al momento de escribirse**. A diferencia de
-Finance/SCM, el módulo Retail and Commerce no siempre viene habilitado en un trial base — si tu
-ambiente no lo tiene, documenta ese límite explícitamente en vez de simular pasos que no puedes
-ejecutar.
+Commerce, **sin verificación contra un tenant en vivo**. En noviembre de 2026 se revisaron contra
+Microsoft Learn los surtidos (assortments), el programa de distribución y sus jobs (enlaces en cada
+paso). A diferencia de Finance/SCM, el módulo Retail and Commerce no siempre viene habilitado en un
+trial base — si tu ambiente no lo tiene, haz la **variante en papel** en vez de simular pasos que no
+puedes ejecutar.
 
 ## ⚠️ Antes de empezar: cómo se consigue hoy un ambiente de F&O
 
-Verificado en Microsoft Learn en noviembre de 2026. Sin un ambiente así este lab no es ejecutable;
-la alternativa en papel está en el [Módulo 60](/nivel/d365/modulo/finance-operations-procesos-erp).
+Verificado en Microsoft Learn en noviembre de 2026. Sin un ambiente así, haz la
+**variante en papel** del final de este lab; el [Módulo 60](/nivel/d365/modulo/finance-operations-procesos-erp)
+cubre además los procesos en general.
 
-- **Tu ambiente Developer de Power Platform no sirve.** Learn indica que el tipo de ambiente
+- **Tu ambiente del curso no sirve.** Learn indica que el tipo de ambiente
   *Developer* no admite ninguna carga de Dynamics 365; F&O se instala en ambientes *Sandbox*,
   *Production* o *Trial (subscription-based)* y exige una licencia de F&O asignada
   ([Learn: Unified environment types and templates](https://learn.microsoft.com/power-platform/admin/unified-experience/unified-environment-types-and-templates)).
@@ -80,7 +82,10 @@ Actúas como F&O Practitioner configurando un canal de Commerce sobre el maestro
 ## Herramientas necesarias
 
 - Ambiente trial/demo con Retail and Commerce habilitado.
-- El producto liberado con variantes del Lab 96 (o uno equivalente del demo data).
+- El producto liberado con variantes del Lab 96 (o uno equivalente del demo data), liberado en la
+  legal entity del canal: Learn exige que el producto esté liberado a la legal entity del canal
+  para que el surtido lo publique.
+- Tiempo estimado: 3 horas con ambiente; 75 minutos la variante en papel.
 
 ## 🔧 Requisitos de ambiente y fallos frecuentes
 
@@ -105,9 +110,10 @@ tuyo, verifica primero si falta habilitar alguna de estas piezas:
   Commerce" en el menú de navegación, este es tu primer punto de verificación, antes que cualquier
   otro.
 - Aunque el módulo esté habilitado, un **canal de venta (online store o retail store) recién creado
-  no tiene, por defecto, un catálogo publicado**: crear el canal no basta, hay que asignarle
-  productos y ejecutar al menos un job de publicación/distribución antes de que el canal "vea" el
-  producto.
+  no tiene, por defecto, productos**: crear el canal no basta. Learn asigna productos a canales con
+  **surtidos** (assortments), que hay que procesar con el trabajo por lotes **Process assortments**
+  y después distribuir al canal
+  ([Learn: Assortment management](https://learn.microsoft.com/dynamics365/commerce/assortments)).
 - El **job de distribución/sincronización** (Distribution schedule o Commerce Scheduler) puede no
   estar corriendo automáticamente en un ambiente trial — en producción corre en un horario
   programado, pero en demo/trial suele requerir ejecución manual para ver resultados en la misma
@@ -122,10 +128,10 @@ tuyo, verifica primero si falta habilitar alguna de estas piezas:
 |---|---|---|---|
 | No existe ningún menú "Retail and Commerce" en la navegación | Módulo no habilitado en este trial | Revisa el menú de navegación completo o busca "Retail" en la barra de búsqueda global | Documenta el límite explícitamente como pide la Nota de verificación; no simules pasos que no puedes ejecutar |
 | El canal se crea pero no se puede asociar a la legal entity esperada | Trial incompleto: solo una legal entity tiene Commerce habilitado | Revisa en qué legal entity(es) aparece disponible la opción de crear canal | Usa la legal entity donde Commerce sí está disponible y documenta la limitación |
-| El producto no aparece en el canal después de asignarlo | Catálogo no publicado / job de distribución no ejecutado | Revisa el estado del job en Distribution schedule / Commerce Scheduler | Ejecuta manualmente el job de distribución y vuelve a revisar el canal |
+| El producto no aparece en el canal después de asignarlo | Surtido no procesado, producto no liberado a la legal entity del canal o job de distribución no ejecutado | Revisa el surtido, que el producto esté liberado en esa legal entity y el estado del job en **Distribution schedule** | Ejecuta **Process assortments** y después el job **1040** (Products) del programa de distribución |
 | El precio cambiado en el catálogo central no se refleja en el canal | Sincronización pendiente (comportamiento esperado, no necesariamente un error) | Verifica la hora de la última ejecución del job de distribución | Ejecuta el job de distribución de nuevo, o documenta la latencia como parte de la respuesta esperada del Paso 2 |
 | Error de permisos al intentar crear o editar el canal | Rol insuficiente para Retail and Commerce | Revisa el mensaje de error exacto y el objeto de seguridad bloqueado | Solicita o asigna un rol con acceso de escritura sobre Channel setup |
-| No se puede completar ningún paso de este lab | Módulo Commerce no incluido en absoluto en el tipo de trial contratado | Confirma con la documentación de tu proveedor de trial (LCS, Dynamics 365 free trial) qué módulos incluye | Documenta este límite como resultado válido del lab: "ambiente sin Commerce disponible" es evidencia de auditoría, no una tarea sin completar |
+| No se puede completar ningún paso de este lab | Módulo Commerce no incluido en absoluto en el tipo de trial contratado | Revisa con qué plantilla se creó el ambiente en el Power Platform admin center (la de Commerce es distinta de la de Finance o SCM) o pregunta a quien administre el ambiente demo | Documenta este límite como resultado válido del lab: "ambiente sin Commerce disponible" es evidencia de auditoría, no una tarea sin completar |
 
 ## Entregables
 
@@ -149,18 +155,25 @@ Si la ruta de tiendas en línea no coincide, anótala tal como aparece en tu amb
 
 ### Paso 2 — Publicación de producto al canal
 
-Ve a **Retail and Commerce > Products** y localiza el producto del Lab 96 (o uno equivalente).
+Learn publica productos en un canal con un **surtido** (assortment) que relaciona canales y
+productos ([Learn: Assortment management](https://learn.microsoft.com/dynamics365/commerce/assortments)).
+La ruta exacta de la página de surtidos no aparece en esa página: búscala por nombre
+(**Assortments**) y anótala.
 
-- Asigna el producto (y sus variantes) al canal creado en el Paso 1, incluyendo precio de venta.
+- Crea un surtido que incluya el canal del Paso 1 y el producto del Lab 96 (o uno equivalente) con
+  sus variantes, y documenta el precio de venta que tendrá en el canal.
+- Ejecuta **Process assortments** y documenta por qué el surtido no surte efecto hasta procesarlo.
 - Documenta qué pasa si cambias el precio en el catálogo central: ¿se refleja automáticamente en el canal, o requiere un paso de sincronización explícito?
 
 ### Paso 3 — Sincronización canal-catálogo
 
-Ve a **Retail and Commerce > Retail and Commerce IT > Distribution schedule** (o el equivalente
-documentado en tu versión, como Commerce Scheduler).
+Ve a **Retail and Commerce > Retail and Commerce IT > Distribution schedule**.
 
-- Documenta cómo funciona el job de distribución/sincronización entre el catálogo central y la base
-  de datos del canal (channel database), y con qué frecuencia se ejecuta por defecto.
+- Ejecuta el job **1070** (Channel configuration) si el canal es nuevo y el **1040** (Products)
+  para llevar el producto al canal, y documenta qué datos mueve cada uno.
+- Documenta cómo funciona la distribución entre la sede (HQ) y la base de datos del canal
+  (channel database), y con qué frecuencia está programado cada job en tu ambiente (anota la que
+  veas; esta revisión no confirmó una frecuencia por defecto en Learn).
 - Explica qué pasaría si el trabajo de sincronización falla: ¿el canal seguiría vendiendo con datos desactualizados?
 
 ### Paso 4 — Comparación con venta en CE
@@ -192,3 +205,20 @@ Documenta, con el ejemplo de este mismo producto:
 - No distinguir entre catálogo central (F&O) y catálogo del canal (Commerce) como conceptos separados.
 - Ignorar la latencia de sincronización y asumir que un cambio de precio es instantáneo en todos los canales.
 - Confundir integración Commerce-F&O (nativa, mismo producto) con integración CE-F&O (requiere dual-write u otro mecanismo).
+- Crear el surtido y no ejecutar **Process assortments** ni el job 1040.
+
+## Variante en papel (sin Commerce en tu ambiente)
+
+Si no tienes ambiente o tu ambiente no trae Retail and Commerce, diseña la configuración con las
+páginas de Learn enlazadas y escribe «variante en papel» en tu entrega. Tiempo estimado: 75 minutos.
+
+1. **Canal:** ficha de la tienda en línea de Northwind (nombre, legal entity, moneda) y por qué el
+   producto debe estar liberado en esa legal entity.
+2. **Surtido:** qué canal y qué producto/variantes incluye, con fechas de vigencia, y la secuencia
+   surtido > **Process assortments** > job **1040**.
+3. **Distribución:** diagrama HQ → base de datos del canal con los jobs 1070 y 1040, y qué ve el
+   cliente de la tienda si el job falla (razona con la base de datos del canal como réplica).
+4. **Comparación con CE:** la tabla del Paso 4 con el mismo producto.
+
+La variante en papel cumple los criterios de validación si cada decisión lleva su enlace de Learn;
+sustituye a las capturas.

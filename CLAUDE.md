@@ -82,11 +82,15 @@ y cierre parcial del inventario de "no confirmado" de los niveles 1 a 4; correcc
 confirmado en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §11. (2) **SEO**: `src/lib/seo.ts` (`buildPageMetadata`; un `openGraph`
 de página reemplaza entero al del layout, por eso toda página pasa por el helper), `robots.ts`, `sitemap.ts` y `/og.png`;
 una página nueva debe entrar en el sitemap o marcarse `noindex` (hay un test que lo exige). (3) **Tildes** en el texto
-visible de `src/`. **Pendiente y urgente — Developer Plan**: desde el 2026-11-15 registrarse ya no crea un ambiente
-Developer y los no gestionados se suspenden el 2026-12-15 y se borran el 2027-01-15; el curso sigue recomendando ese
-ambiente y falta la decisión del usuario sobre qué usar en su lugar (§11.1). Learn devolvió HTTP 429 durante la revisión:
-lo que quedó sin comprobar está listado en `SPRINT_HANDOFF.md`. Validación: `npm run verify` (517 tests) y
-`npm run e2e` 102/102, en serie.
+visible de `src/`. **Ambiente del curso (cambio de fondo)**: el Developer Plan deja de crear
+ambientes el 2026-11-15 y los Developer no gestionados se suspenden el 2026-12-15 y se borran el 2027-01-15, así que el
+curso recomienda ahora un **Trial (standard) con Dataverse** (30 días + una extensión; uno por usuario; sin reset, copia ni
+respaldo) y una rutina de exportar la solución al terminar cada módulo. Referencia única:
+`docs/Recursos/ENTORNOS_Y_TRIALS.md`; en el resto del contenido se dice "tu ambiente del curso", no "ambiente Developer".
+Sin verificar en Learn: si al vencer el Trial se puede crear otro con la misma cuenta. (4) **Sandbox RPA**: modo **Modal
+inesperado** en SIT Registro Legacy (`rpa-legacy-modes.ts`); el lote de entrada es `lote-entrada.json`. (5) Labs F&O
+93-100 y LAB-110/111 revisados con variante en papel; 685 enlaces de Learn comprobados. Validación: `npm run verify`
+(520 tests) y `npm run e2e` 103/103, en serie.
 
 ## Mantenimiento vigente — 2026-11-06
 

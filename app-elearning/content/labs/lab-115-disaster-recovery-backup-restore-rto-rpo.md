@@ -59,13 +59,15 @@ exige ejecutar el ciclo completo, no solo describirlo.
 - Power Platform CLI (`pac solution export`, `pac data export`/`pac data import` o export/import
   manual de datos vía Excel/Dataverse si no tienes acceso al CLI de datos).
 - Power Platform Admin Center (backups automáticos de Dataverse, si tu entorno los expone — los
-  entornos Developer/Trial normalmente no tienen backups point-in-time habilitados; documenta esto
-  si es tu caso, no lo ocultes).
+  entornos Developer normalmente no los tienen, y un Trial de 30 días **solo se puede crear y eliminar**:
+  no admite backup, restore, copy ni reset — [Learn: Trial environments](https://learn.microsoft.com/power-platform/admin/trial-environments);
+  documenta esto si es tu caso, no lo ocultes).
 
 ## Nota de alcance — backups automáticos vs. backup manual
 
 Dataverse ofrece backups automáticos point-in-time en producción/sandbox con licencia adecuada,
-pero no en entornos Developer/Trial gratuitos. Si tu entorno no tiene esa capacidad, este lab usa
+pero no en tu ambiente del curso si es un Trial (no admite backup ni restore) y normalmente tampoco en un Developer.
+Si tu entorno no tiene esa capacidad, este lab usa
 **backup manual** (exportar solución + datos) como equivalente práctico — es una limitación real
 y conocida, no un atajo: documenta explícitamente cuál mecanismo usaste y, si fue el manual, qué
 perderías respecto al backup automático point-in-time (continuidad entre el momento del último
@@ -85,7 +87,7 @@ ambos con marca de tiempo documentada.
 ## Ejercicio 2 — Simular la pérdida
 
 Simula una pérdida controlada y reversible (NO elimines el entorno real): por ejemplo, elimina
-deliberadamente 3-5 registros de la tabla que respaldaste, o crea un segundo entorno vacío (un Trial: solo puedes tener un Developer, y los Trial no admiten backup ni restore, así que la opción de borrar registros es la más segura) que
+deliberadamente 3-5 registros de la tabla que respaldaste, o usa un segundo entorno vacío (un Sandbox de tu organización; el Trial es uno por usuario y, si ya es tu ambiente del curso, no puedes crear otro; además los Trial no admiten backup ni restore, así que la opción de borrar registros es la más segura) que
 representará "el entorno recuperado desde cero". No ejecutes nada irreversible contra un entorno
 que no sea completamente de práctica.
 

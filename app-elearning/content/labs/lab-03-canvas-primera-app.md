@@ -8,7 +8,7 @@ certifications: ["PL-900"]
 role: ["Maker"]
 prerequisites:
   - "Lab 02 completado — tablas sit_Solicitud y sit_Categoria existentes con datos de prueba"
-  - "Ambiente Developer activo en make.powerapps.com"
+  - "Ambiente del curso activo en make.powerapps.com"
 files: []
 lastVerified: "2026-11"
 ---
@@ -60,7 +60,7 @@ Al finalizar este laboratorio podrás construir una Canvas App de tres pantallas
 
 - [ ] Lab 02 completado: tablas `sit_Solicitud` y `sit_Categoria` creadas, con los 10 registros de prueba del Lab 02
 - [ ] Acceso a [make.powerapps.com](https://make.powerapps.com)
-- [ ] Ambiente **Developer** seleccionado
+- [ ] Tu ambiente del curso seleccionado
 
 ### Conocimiento previo
 
@@ -73,7 +73,7 @@ Al finalizar este laboratorio podrás construir una Canvas App de tres pantallas
 
 ## Variante sin tenant
 
-**¿Todavía no tienes Lab 02 completado ni un ambiente Developer activo?** No te saltes este lab —
+**¿Todavía no tienes Lab 02 completado ni tu ambiente del curso activo?** No te saltes este lab —
 completa esta variante en su lugar. Es la misma referenciada desde "Mi ruta" en el paso de práctica
 guiada de la primera app.
 
@@ -111,8 +111,9 @@ Regístralo igual que cualquier evidencia de "Mi progreso" — marca explícitam
 **variante sin tenant**, no la ejecución real, para no confundir tu propio historial de aprendizaje
 ni tu portafolio más adelante.
 
-**Cómo completar la práctica real después**: cuando consigas tu ambiente Developer (ver la
-[Guía de herramientas de estación](/recursos/guia-herramientas-workstation#antes-de-instalar-nada-tu-cuenta-y-tu-tenant)),
+**Cómo completar la práctica real después**: cuando consigas tu ambiente del curso (ver la
+[Guía de herramientas de estación](/recursos/guia-herramientas-workstation#antes-de-instalar-nada-tu-cuenta-y-tu-tenant)
+y [Entornos y trials](/recursos/entornos-y-trials)),
 vuelve a este mismo lab y sigue los Ejercicios 1 a 4 con tus wireframes y fórmulas ya listos — vas a
 construir mucho más rápido porque el diseño ya está hecho.
 
@@ -160,7 +161,7 @@ Sigue esta convención durante todo el lab — los Labs posteriores referenciar�
 
 ### Tarea 1.1 — Crear la Canvas App
 
-1. En [make.powerapps.com](https://make.powerapps.com), selecciona el ambiente **Developer**.
+1. En [make.powerapps.com](https://make.powerapps.com), selecciona tu ambiente del curso.
 
 2. En el panel de la izquierda, selecciona **Create** (crear) y luego **Create from blank** (crear desde cero).
 

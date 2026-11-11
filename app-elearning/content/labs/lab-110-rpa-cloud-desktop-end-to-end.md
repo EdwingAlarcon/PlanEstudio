@@ -10,7 +10,7 @@ prerequisites:
   - "Módulo 75 completado"
   - "Power Automate cloud básico (Módulo 5 o equivalente)"
 files: []
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # LAB-RPA-07 — Cloud flow + desktop flow
@@ -20,6 +20,8 @@ lastVerified: "2026-09"
 Recibir una solicitud desde Power Automate cloud, ejecutar PAD y devolver resultado con parámetros, máquina, respuesta, error, almacenamiento y notificación.
 
 > **Licencia y variante sin cloud flow:** disparar un desktop flow desde un cloud flow exige un plan premium con RPA atendido (o Process para desatendido); el Developer Plan no incluye derechos de RPA. Si no tienes licencia, haz este laboratorio como **simulación**: diseña el cloud flow en papel y simula el disparador con valores por defecto, como describe el Módulo 75, y escribe «simulación sin licencia» en tu entrega. Este laboratorio equivale a la Microlección 3 y al diagnóstico del Módulo 75: si ya los hiciste, entrégalos aquí.
+>
+> **Antes de decidir, comprueba (Learn, noviembre de 2026):** la conexión de desktop flows exige una cuenta de trabajo o escuela, y la licencia la necesita quien crea la conexión ([Learn: Trigger desktop flows from cloud flows](https://learn.microsoft.com/power-automate/desktop-flows/trigger-desktop-flows)). El plan Premium incluye un bot atendido, y la prueba de 90 días de Power Automate da las capacidades Premium, incluidas las ejecuciones desatendidas; con la licencia gratuita solo ejecutas en local y de forma atendida ([Learn: Power Automate license types](https://learn.microsoft.com/power-platform/admin/power-automate-licensing/types)). En Windows Home no puedes disparar desktop flows desde la nube ([Learn: Prerequisites and limitations](https://learn.microsoft.com/power-automate/desktop-flows/requirements)). Las páginas de **Monitor** solo están disponibles para usuarios Premium.
 
 ## Escenario de negocio
 
@@ -47,11 +49,11 @@ Un equipo registra solicitudes de trabajo en una lista. Cloud flow orquesta el l
 
 | Problema | Causa probable | Solución |
 |---|---|---|
-| El cloud flow queda "en espera" y nunca recibe respuesta del desktop flow | La conexión de PAD a la cuenta/máquina no está activa o el desktop flow no está en el mismo ambiente que el cloud flow | Verifica en **Monitor > Machines** el estado de la máquina, que la conexión de desktop flows sea válida y que el desktop flow exista en el ambiente del cloud flow. Si hay máquinas elegibles sin conexión, la ejecución espera a que vuelvan; si no hay ninguna elegible, falla |
+| El cloud flow queda "en espera" y nunca recibe respuesta del desktop flow | La conexión de PAD a la cuenta/máquina no está activa o el desktop flow no está en el mismo ambiente que el cloud flow | Verifica en **Monitor > Machines** el estado de la máquina, que la conexión de desktop flows sea válida y que el desktop flow exista en el ambiente del cloud flow. Si hay máquinas elegibles sin conexión, la ejecución espera en la cola (en la pestaña **Run queue** de la máquina puedes usar **Cancel parent flow run**); si no hay ninguna elegible, falla. En modo atendido, la ejecución falla de inmediato si ninguna máquina conectada tiene abierta la sesión de tu usuario ([Learn: Monitor desktop flow queues](https://learn.microsoft.com/power-automate/desktop-flows/monitor-desktop-flow-queues)) |
 | El desktop flow recibe parámetros vacíos o con tipo incorrecto | Los nombres de input del cloud flow no coinciden exactamente con los definidos en PAD, o falta el mapeo de tipo | Compara nombre y tipo de cada input/output entre el trigger del cloud flow y las variables de entrada de PAD; usa nombres idénticos y castea tipos explícitamente |
 | El estado en la lista/tabla queda en `EnEjecucion` aunque PAD ya terminó | El desktop flow no devuelve el resultado al cloud flow (faltan variables de salida) o el cloud flow no actualiza el registro tras recibir la respuesta | Confirma que PAD define variables de salida (**+** > **Output**, con su **External name**) y que el cloud flow tiene un paso de actualización posterior a **Run a flow built with Power Automate for desktop** |
 | El run history no distingue error de máquina de error de negocio | El manejo de errores solo captura una excepción genérica en PAD sin clasificar la causa | Usa bloques `On block error` separados por tipo (máquina no disponible, selector no encontrado, dato inválido) y propaga un código de error distinto en cada salida |
-| Simular "máquina no disponible" no genera ningún registro de error | El escenario de prueba no fuerza realmente la desconexión, o el cloud flow no tiene manejo de fallos configurado | Detén el runtime/agente de PAD antes de disparar la corrida, y configura **Run after** (casilla **has failed**) en un paso posterior del cloud flow, o un **Scope** de captura, para atrapar el fallo de la acción de escritorio |
+| Simular "máquina no disponible" no genera ningún registro de error | El escenario de prueba no fuerza realmente la desconexión, o el cloud flow no tiene manejo de fallos configurado | Para un fallo rápido, en modo atendido cierra la sesión de tu usuario de Windows en la máquina antes de disparar la corrida (si solo apagas la máquina, la ejecución puede quedarse esperando en la cola). Configura **Run after** (casilla **has failed**) en un paso posterior del cloud flow, o un **Scope** de captura, para atrapar el fallo de la acción de escritorio |
 
 ## 🔧 Diagnóstico y reparación
 
@@ -62,7 +64,7 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 - **Causa probable:** conexión de máquina inactiva, máquina sin conexión o desktop flow que no está en el ambiente del cloud flow.
 - **Cómo comprobar:** revisa en Power Automate el estado de la conexión (`Conectado`/`Error`) y en **Monitor > Desktop flow runs** el **Status** de la ejecución; confirma que el desktop flow aparece en el mismo ambiente que el cloud flow.
 - **Cómo corregir:** reconecta la máquina, confirma que el desktop flow está en el ambiente correcto y vuelve a seleccionarlo en la acción **Run a flow built with Power Automate for desktop**.
-- **Reiniciar vs. reparar:** si la corrida lleva más de unos minutos "en espera", cancela y reinicia solo esa ejecución; no hace falta rehacer el diseño.
+- **Reiniciar vs. reparar:** si la corrida lleva más de unos minutos "en espera", cancela solo esa ejecución (**Cancel parent flow run** en la pestaña **Run queue** de la máquina) y reiníciala; no hace falta rehacer el diseño. Si no la cancelas, la espera puede durar horas antes de fallar.
 - **Evidencia posterior a la corrección:** captura del estado `Conectado` y de la corrida completada en el run history.
 
 ### Parámetros de entrada/salida vacíos o con tipo incorrecto
@@ -93,7 +95,7 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 
 - **Causa probable:** el escenario de prueba no desconecta realmente el runtime, o el cloud flow no tiene configurado el manejo de fallos de la acción de escritorio.
 - **Cómo comprobar:** verifica si el agente/runtime de PAD sigue activo durante la prueba y si hay un paso posterior con **Run after** habilitado para **has failed** (o un **Scope** de captura).
-- **Cómo corregir:** detén el runtime antes de disparar la corrida y configura la acción para continuar en caso de error, capturando el resultado.
+- **Cómo corregir:** en modo atendido, cierra la sesión de Windows de tu usuario en la máquina antes de disparar la corrida (Learn indica que entonces falla de inmediato; apagar la máquina la deja esperando en la cola) y configura la acción para continuar en caso de error, capturando el resultado.
 - **Reiniciar vs. reparar:** al ser una prueba controlada, reinicia esa corrida específica tras habilitar el runtime nuevamente; no afecta a las demás solicitudes del lote.
 - **Evidencia posterior a la corrección:** captura del registro de error generado y del estado `Error` reflejado en la lista/tabla.
 

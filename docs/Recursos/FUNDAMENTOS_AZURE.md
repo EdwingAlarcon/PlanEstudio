@@ -7,7 +7,7 @@ cualquiera de los tres si nunca usaste Azure.
 
 **Tipo de práctica de este recurso: conceptual + 🟡 ejecutable con cuenta gratuita de Azure (sin
 tenant de Power Platform involucrado todavía).** Azure tiene un nivel gratuito con crédito inicial —
-no es lo mismo que tu ambiente Developer de Power Platform, es una cuenta separada.
+no es lo mismo que tu ambiente del curso de Power Platform, es una cuenta separada.
 
 ## Objetivo
 
@@ -64,9 +64,9 @@ y captura de la confirmación de borrado del Resource Group, guardadas en tu bit
 
 ## Errores comunes
 
-- **Error:** crear recursos "para probar" y olvidarlos activos. **Por qué pasa:** a diferencia de un
-  ambiente Developer de Power Platform (no cobra por estar creado; ver
-  [Entornos y trials](/recursos/entornos-y-trials) para los cambios de noviembre de 2026), Azure cobra
+- **Error:** crear recursos "para probar" y olvidarlos activos. **Por qué pasa:** a diferencia de tu
+  ambiente Trial de Power Platform (no cobra: caduca a los 30 días más una extensión; ver
+  [Entornos y trials](/recursos/entornos-y-trials)), Azure cobra
   por recurso activo. **Cómo evitarlo:** siempre borrá el Resource Group completo al terminar una
   práctica, no dejes "para después".
 - **Error:** confundir tu suscripción personal de Azure con la de una empresa/cliente real. **Cómo

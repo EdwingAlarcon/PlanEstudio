@@ -9,7 +9,7 @@ role: ["Solution Architect", "Functional Consultant"]
 prerequisites:
   - "Módulo 18 revisado: fundamentos de arquitectura"
   - "Módulo 20 revisado: Dynamics 365 CE — Sales y Customer Service"
-  - "Módulo 34 revisado: arquitectura de datos / integración"
+  - "Módulo 34 revisado: Azure Integration Services Avanzado (patrones de integración)"
 lastVerified: "2026-11"
 ---
 
@@ -25,6 +25,12 @@ trial de F&O la crea el administrador de un tenant de trabajo — ver el aviso d
 [Lab 93](/labs/lab-93-fo-finance-setup-walkthrough)). Su objetivo es que sepas tomar decisiones
 informadas, no configurar F&O; si tienes un ambiente, los Labs 93 a 100 llevan los procesos a las
 pantallas reales.
+
+> **Si llegas desde el nivel Dynamics 365:** los prerrequisitos (Módulos 18, 20 y 34) son de la
+> ruta de certificación; en modo guiado la app te avisa si no los completaste, pero no te bloquea.
+> Como lectura del nivel D365 te sirven el
+> [Módulo 60](/nivel/d365/modulo/finance-operations-procesos-erp) (procesos de F&O) y el Módulo 65
+> (integración CE + F&O con dual-write y DMF).
 
 ## Escenario de negocio
 

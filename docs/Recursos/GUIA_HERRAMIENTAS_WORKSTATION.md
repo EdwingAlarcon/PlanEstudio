@@ -26,18 +26,21 @@ Ninguna herramienta de esta guía sirve sin esto primero — es el bloqueo real 
 demás, y si es tu primera vez con software de trabajo en la nube, aquí es donde más tiempo conviene
 invertir con calma.
 
-1. **Consigue una cuenta de trabajo o estudio y crea tu ambiente.** Microsoft no acepta cuentas personales
-   (Gmail, Outlook.com, Hotmail), y el sandbox del Microsoft 365 Developer Program ya no está abierto a
-   cualquiera. Sigue el paso a paso de la Microlección 1 del
-   [Módulo 1](/nivel/basico/modulo/introduccion-al-ecosistema-power-platform). El resumen de qué cambió en
-   noviembre de 2026 está en [Entornos y trials](/recursos/entornos-y-trials): un solo ambiente Developer por
-   usuario, siempre administrado, y licencia premium (o de prueba) para ejecutar tus apps y flujos en él.
+1. **Consigue una cuenta de trabajo o estudio y crea tu ambiente del curso.** Microsoft no acepta cuentas
+   personales (Gmail, Outlook.com, Hotmail), y el sandbox del Microsoft 365 Developer Program ya no está
+   abierto a cualquiera. Desde el 15 de noviembre de 2026 el Power Apps Developer Plan ya no crea un ambiente,
+   así que el camino principal del curso es un ambiente **Trial (standard) con Dataverse**, creado con una
+   licencia Power Apps trial: dura 30 días más una extensión de 30, y para no perder tu trabajo exportas tu
+   solución al terminar cada módulo o sesión. Si tu organización te da un Developer gestionado o un Sandbox,
+   es mejor opción. Sigue el paso a paso de la Microlección 1 del
+   [Módulo 1](/nivel/basico/modulo/introduccion-al-ecosistema-power-platform); las opciones, fechas, límites
+   y el paso a paso de exportar e importar están en [Entornos y trials](/recursos/entornos-y-trials).
 2. **Qué es un "tenant" en la práctica**: es tu organización de prueba completa — un nombre como
    `tunombreXXXXX.onmicrosoft.com` que verás en la esquina superior derecha de cualquier pantalla de
    Microsoft. Todo lo que hagas en el curso vive dentro de ese tenant; no afecta a nadie más.
 3. **El trial de Dynamics 365 no hace falta todavía.** Solo lo necesitas desde los módulos de Dynamics 365
-   (57 en adelante). No se añade a tu ambiente Developer: en un ambiente Developer no se pueden instalar apps
-   de Dynamics 365, así que el trial crea su propio ambiente.
+   (57 en adelante). No se añade a tu ambiente del curso: el trial de Dynamics 365 crea su propio ambiente con
+   las apps instaladas.
 4. **Si algo se traba** (verificación pendiente, error de creación de tenant, pantalla en blanco):
    - Espera — puede tardar minutos o hasta 24 horas si Microsoft pide revisión manual. No es un
      error tuyo ni de esta guía.

@@ -226,7 +226,7 @@ export const UI = {
     officialDocs: "Documentación oficial",
     verificationCommand: "Comando de verificación",
     nonProductionWarningTitle: "No trabajes en producción",
-    nonProductionWarningBody: "Usa un entorno Developer, Trial o Sandbox para practicar. Confirma el tenant y el entorno antes de cualquier cambio.",
+    nonProductionWarningBody: "Usa tu ambiente del curso (Trial, Developer gestionado o Sandbox) para practicar. Confirma el tenant y el entorno antes de cualquier cambio.",
     noTenantAlternativeTitle: "Sin tenant todavía",
     noTenantAlternativeBody: "Puedes avanzar con la alternativa conceptual de cada paso mientras consigues acceso a un entorno.",
     importReportTitle: "Importar reporte del verificador",

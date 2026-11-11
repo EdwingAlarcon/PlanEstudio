@@ -16,7 +16,10 @@ Este paquete es educativo. No contiene datos reales, credenciales, macros ni eje
 - reference: matrices y contratos de decisión.
 - logs: logs de ejemplo.
 - portal: datos del portal sandbox.
-- legacy-app: datos del simulador legacy.
+- legacy-app: `lote-entrada.json`, lote mixto de entrada para el simulador legacy (LAB-107). No es la tabla inicial del
+  simulador, que arranca (y vuelve con Reset) con 3 registros: SOL-2026-0001, SOL-2026-0002 y SOL-2026-0004. De las 5
+  solicitudes del lote, esas 3 ya existen (el simulador responde "Registro duplicado") y SOL-2026-0005 y SOL-2026-0006
+  son nuevas. Su campo `status` (`pending`) es del archivo, no del simulador.
 - templates: plantillas profesionales.
 - validation: protocolo y matriz operacional.
 

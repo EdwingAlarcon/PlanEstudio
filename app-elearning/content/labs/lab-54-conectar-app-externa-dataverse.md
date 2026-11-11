@@ -8,7 +8,7 @@ certifications: ["Buenas Prácticas"]
 role: ["Developer", "Solution Architect"]
 prerequisites:
   - "Módulo 53 estudiado: Dataverse Web API, Dynamics 365 y Autenticación"
-  - "Acceso a un entorno Developer/Sandbox y, si es posible, permisos para ver (no necesariamente crear) app registrations en Microsoft Entra ID"
+  - "Acceso a tu ambiente del curso u otro entorno de práctica (Trial, Developer o Sandbox) y, si es posible, permisos para ver (no necesariamente crear) app registrations en Microsoft Entra ID"
 files: []
 lastVerified: "2026-11"
 ---

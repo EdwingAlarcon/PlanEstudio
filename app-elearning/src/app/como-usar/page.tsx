@@ -172,7 +172,7 @@ export default function HowToUsePage() {
           >
             <p className="text-xs font-semibold uppercase tracking-widest text-[#6B4EFF]">Tipos de práctica</p>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Qué necesitas para cada módulo o lab: conceptual, simulada, Developer environment, trial D365 o tenant real.
+              Qué necesitas para cada módulo o lab: conceptual, simulada, ambiente del curso, trial D365 o tenant real.
             </p>
           </Link>
         </div>

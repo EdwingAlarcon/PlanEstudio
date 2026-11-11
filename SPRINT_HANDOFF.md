@@ -35,18 +35,23 @@ Verdad vigente de conteos y fases: `CLAUDE.md` y `PROPUESTA_FASES_APRENDER_HACIE
   inventario de los niveles 1 a 4, SEO y tildes). Detalle, correcciones y lo no confirmado en
   `PROPUESTA_FASES_APRENDER_HACIENDO.md` §11.
 
-### Pendiente al retomar (en orden)
+### Estado al cierre del 2026-11-11
 
-1. **Developer Plan (decisión del usuario, urgente)**: desde el 2026-11-15 registrarse ya no crea un ambiente Developer; los
-   no gestionados se suspenden el 2026-12-15 y se borran el 2027-01-15 (Learn, `power-platform/developer/plan`). El curso
-   entero parte de ese ambiente gratuito y **no se ha corregido** (§11.1 de la propuesta).
-2. Reintentar en learn.microsoft.com lo que quedó sin comprobar por el HTTP 429: Módulos 42, 45, 47-50 (verificados solo
-   contra el código fuente de Learn en GitHub), 289 enlaces de los niveles 1 a 4 y las etiquetas de D365 de §11.3.
-3. Labs F&O 93, 94, 96, 97, 98 y 100 y LAB-110/111: revisión completa (siguen con `lastVerified` 2026-09). Prerrequisitos
-   de LAB-93, 64, 66, 70 y 102.
-4. Sandbox RPA (código): modo "Modal inesperado" en el simulador legacy y `legacy-records.json`, que no coincide con la
-   tabla inicial del simulador.
-5. Depurador de vista previa real para `/og.png`.
+Los cinco pendientes que había aquí se cerraron el mismo día (detalle en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §11.7):
+el curso ya no depende del Developer Plan (ambiente **Trial (standard) con Dataverse** y rutina de exportar la solución;
+referencia única en `/recursos/entornos-y-trials`), 685 enlaces de Learn comprobados, labs F&O 93-100 y LAB-110/111
+revisados con variante en papel, prerrequisitos de labs corregidos, modo **Modal inesperado** en SIT Registro Legacy
+(`lote-entrada.json` sustituye a `legacy-records.json`) y vista previa comprobada con un depurador público.
+
+### Lo que sigue abierto (nada bloquea)
+
+1. **Sin verificar en Learn y decisivo para el camino nuevo**: si al vencer el Trial se puede crear otro de inmediato con
+   la misma cuenta. Solo se resuelve probándolo con una cuenta real; si resulta que no, hay que replantear la
+   recomendación del Módulo 1 y de `ENTORNOS_Y_TRIALS.md`.
+2. Nada de esta revisión se probó en un tenant real ni con PAD real (incluido el modo **Modal inesperado**).
+3. Etiquetas que Learn no nombra: lista por nivel en §11.5 y §11.7 de la propuesta.
+4. Prácticas IP-IA-020 e IP-QRY-002: propuestas menores sin aplicar, a propósito (§11.7).
+5. LinkedIn Post Inspector y el validador de X exigen iniciar sesión; no se usaron.
 
 ## Fase 7 (resto del curso) — registro histórico del 2026-11-01 al 2026-11-05 (ya resuelto)
 

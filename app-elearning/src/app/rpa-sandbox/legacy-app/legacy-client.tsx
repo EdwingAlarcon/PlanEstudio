@@ -2,18 +2,17 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { AlertTriangle, CheckCircle2, RotateCcw } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Info, RotateCcw } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatActivityReport, summarizeActivity, type ActivityEvent } from "@/lib/rpa-sandbox-activity";
+import { LEGACY_MODES, shouldInterruptRegister, type LegacyMode } from "@/lib/rpa-legacy-modes";
 
 const initialRecords = [
   { requestId: "SOL-2026-0001", customerId: "CLI-0001", productId: "PROD-001", status: "Pendiente" },
   { requestId: "SOL-2026-0002", customerId: "CLI-0002", productId: "PROD-002", status: "Pendiente" },
   { requestId: "SOL-2026-0004", customerId: "CLI-0004", productId: "PROD-004", status: "Registrado" },
 ];
-
-type LegacyMode = "normal" | "duplicate" | "blocked" | "layout-shift" | "slow-confirmation" | "disabled-submit";
 
 export function RpaLegacySimulatorClient() {
   const [records, setRecords] = useState(initialRecords);
@@ -25,9 +24,17 @@ export function RpaLegacySimulatorClient() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [events, setEvents] = useState<ActivityEvent[]>([]);
   const [activityOpen, setActivityOpen] = useState(false);
+  // Modo "Modal inesperado": el aviso sale una sola vez por cada vez que se elige el modo (ver shouldInterruptRegister).
+  const [interruptOpen, setInterruptOpen] = useState(false);
+  const [interruptShown, setInterruptShown] = useState(false);
 
   function log(event: ActivityEvent) {
     setEvents((current) => [...current, event]);
+  }
+
+  function changeMode(next: LegacyMode) {
+    setMode(next);
+    setInterruptShown(false);
   }
 
   function reset() {
@@ -38,16 +45,37 @@ export function RpaLegacySimulatorClient() {
     setProductId("PROD-003");
     setMessage("");
     setConfirmOpen(false);
+    setInterruptOpen(false);
+    setInterruptShown(false);
     setEvents([]);
   }
 
   function consult() {
+    if (interruptOpen) return; // el aviso bloquea la página: ni siquiera un clic por script la atraviesa
     const result = records.find((row) => row.requestId === requestId)?.status ?? "No encontrado";
     setMessage(result);
     log({ kind: "consulta", requestId, result });
   }
 
   function register() {
+    if (interruptOpen) return;
+    if (shouldInterruptRegister(mode, interruptShown)) {
+      // El registro queda en espera detrás del aviso; se procesa al pulsar Continuar.
+      setMessage("");
+      setInterruptShown(true);
+      setInterruptOpen(true);
+      return;
+    }
+    processRegister();
+  }
+
+  function closeInterrupt() {
+    setInterruptOpen(false);
+    log({ kind: "aviso-cerrado" });
+    processRegister();
+  }
+
+  function processRegister() {
     setMessage("");
     if (mode === "blocked") {
       setMessage("Registro bloqueado simulado. El robot debe registrar error y continuar.");
@@ -110,7 +138,7 @@ export function RpaLegacySimulatorClient() {
 
   return (
     <div className="mx-auto max-w-6xl space-y-5">
-      <header className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+      <header className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" inert={interruptOpen}>
         <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
           <div>
             <div className="flex flex-wrap items-center gap-2">
@@ -126,16 +154,13 @@ export function RpaLegacySimulatorClient() {
         </div>
       </header>
 
-      <section className="grid gap-4 lg:grid-cols-[260px_minmax(0,1fr)]">
+      <section className="grid gap-4 lg:grid-cols-[260px_minmax(0,1fr)]" inert={interruptOpen}>
         <aside className="rounded-xl border border-border bg-card p-4 shadow-fluent-1">
           <label className="text-xs font-semibold uppercase tracking-widest text-muted-foreground" htmlFor="legacy-mode">Modo</label>
-          <select id="legacy-mode" value={mode} onChange={(event) => setMode(event.target.value as LegacyMode)} className="mt-2 h-9 w-full rounded-md border border-border bg-background px-2 text-sm">
-            <option value="normal">Normal</option>
-            <option value="duplicate">Duplicado</option>
-            <option value="blocked">Bloqueo simulado</option>
-            <option value="layout-shift">Layout cambiado</option>
-            <option value="slow-confirmation">Confirmación lenta</option>
-            <option value="disabled-submit">Botón deshabilitado</option>
+          <select id="legacy-mode" value={mode} onChange={(event) => changeMode(event.target.value as LegacyMode)} className="mt-2 h-9 w-full rounded-md border border-border bg-background px-2 text-sm">
+            {LEGACY_MODES.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </select>
           <Button className="mt-4 w-full justify-start" size="sm" variant="outline" onClick={reset}>
             <RotateCcw className="mr-2 h-4 w-4" aria-hidden />
@@ -165,6 +190,7 @@ export function RpaLegacySimulatorClient() {
       <details
         className="rounded-xl border border-border bg-card p-4 shadow-fluent-1"
         data-testid="legacy-activity"
+        inert={interruptOpen}
         onToggle={(event) => setActivityOpen(event.currentTarget.open)}
       >
         <summary className="cursor-pointer text-sm font-semibold text-foreground">Registro de actividad (para tu evidencia)</summary>
@@ -179,6 +205,32 @@ export function RpaLegacySimulatorClient() {
             <h2 id="legacy-confirm-title" className="text-base font-semibold text-foreground">Registro confirmado</h2>
             <p className="mt-2 text-sm text-muted-foreground">El registro quedó en la tabla simulada. Captura esta confirmación como evidencia si el lab lo pide.</p>
             <Button className="mt-4" size="sm" onClick={() => setConfirmOpen(false)}>Cerrar</Button>
+          </div>
+        </div>
+      )}
+
+      {interruptOpen && (
+        // Solo existe en el modo Modal inesperado: en los demás modos no añade nada a la página.
+        <div
+          id="legacy-interrupt-dialog"
+          data-legacy-dialog="aviso-sesion"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="legacy-interrupt-title"
+          aria-describedby="legacy-interrupt-text"
+          onKeyDown={(event) => {
+            if (event.key === "Escape") closeInterrupt();
+          }}
+        >
+          <div className="w-full max-w-md rounded-xl border border-border bg-card p-5 shadow-xl">
+            <Info className="mb-2 h-5 w-5 text-[#0F6CBD]" aria-hidden />
+            <h2 id="legacy-interrupt-title" className="text-base font-semibold text-foreground">Aviso de sesión</h2>
+            <p id="legacy-interrupt-text" className="mt-2 text-sm text-muted-foreground">
+              Tu sesión en SIT Registro Legacy se renovó. El registro queda en espera hasta que pulses Continuar.
+            </p>
+            {/* autoFocus: el foco entra en el diálogo al abrirse, como en un modal de escritorio. */}
+            <Button id="legacy-interrupt-continue" className="mt-4" size="sm" onClick={closeInterrupt} autoFocus>Continuar</Button>
           </div>
         </div>
       )}

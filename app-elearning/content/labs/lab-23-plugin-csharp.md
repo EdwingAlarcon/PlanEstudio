@@ -461,8 +461,8 @@ Compila de nuevo. **Qué deberías ver:** `Build succeeded`.
 
 2. Elige **+ Create new connection**.
 3. En el diálogo de inicio de sesión, deja marcado **Office 365** y marca **Display list of available organizations**. Si vas a entrar con una cuenta distinta de la que tienes iniciada, marca **Show Advanced** y escribe las credenciales (si tu cuenta usa MFA, deja **Show Advanced** sin marcar).
-4. Pulsa **Login** e inicia sesión con tu cuenta del entorno Developer.
-5. Si te muestra varias organizaciones, elige tu entorno Developer y pulsa **Login** otra vez.
+4. Pulsa **Login** e inicia sesión con tu cuenta del ambiente del curso.
+5. Si te muestra varias organizaciones, elige tu ambiente del curso y pulsa **Login** otra vez.
 
 **Qué deberías ver:** una pestaña con el nombre de tu organización y el árbol de ensamblados registrados.
 
@@ -587,7 +587,7 @@ Compila de nuevo. **Qué deberías ver:** `Build succeeded`.
 
 ### Validación del Ejercicio 4
 
-- [ ] El ensamblado `SIT.Plugins` aparece en el árbol del PRT conectado a tu entorno Developer
+- [ ] El ensamblado `SIT.Plugins` aparece en el árbol del PRT conectado a tu ambiente del curso
 - [ ] `SolicitudPreCreatePlugin` tiene dos steps de Create: PreValidation y PreOperation, ambos síncronos
 - [ ] El step del PostUpdate tiene Filtering Attribute `sit_estado` y la Pre Image `PreImage` con solo `sit_estado`
 - [ ] El ensamblado y los tres steps están en tu solución

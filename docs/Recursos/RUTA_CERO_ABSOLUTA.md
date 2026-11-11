@@ -12,7 +12,7 @@ Módulo 1 ya sabiendo distinguir estas piezas cuando las veas en pantalla.
 
 Al terminar esto vas a poder explicar, con tus propias palabras, qué es Power Platform, qué es
 Dataverse, qué es un tenant, qué es un ambiente, y qué diferencia práctica hay entre un ambiente
-Developer, uno Sandbox, uno de Production y un trial de Dynamics 365 — incluyendo qué puedes y qué NO
+Trial, uno Developer, uno Sandbox, uno de Production y un trial de Dynamics 365 — incluyendo qué puedes y qué NO
 puedes practicar en cada uno.
 
 ## 1. Las piezas, de afuera hacia adentro
@@ -37,31 +37,35 @@ Microsoft 365 / Power Platform (el "edificio")
 
 **Por qué importa esto antes del Módulo 1:** el Módulo 1 te pide entrar con una **cuenta de trabajo o
 estudio**. Esa cuenta pertenece a una organización: esa organización es tu **tenant**. Dentro de ese
-tenant necesitas un **ambiente Developer con Dataverse** (si no se puede, un ambiente Trial con
-Dataverse). A partir del 15 de noviembre de 2026 ya no se pueden crear ambientes Developer no
-administrados: solo existirá el ambiente Developer **administrado** (uno por usuario), y para tenerlo
-normalmente hay que pedírselo a un administrador o al área de TI (si el tenant de prueba es tuyo, el
-administrador eres tú). En un ambiente administrado puedes crear apps y flujos sin licencia premium, pero
-para ejecutarlos necesitas una (la prueba de Power Apps sirve 30 días). El Módulo 1 te da los pasos y un mensaje listo para
-pedirlo. Ojo: el sandbox gratuito del Microsoft 365 Developer Program no es para todo el mundo; solo lo
+tenant necesitas tu **ambiente del curso con Dataverse**. Desde el 15 de noviembre de 2026 registrarse en
+el Power Apps Developer Plan ya no crea un ambiente Developer gratuito
+([Developer Plan](https://learn.microsoft.com/power-platform/developer/plan)), así que el camino principal
+del curso es un ambiente **Trial (standard) con Dataverse** que creas tú con una licencia Power Apps trial.
+Es **temporal**: dura 30 días y admite una sola extensión de 30 días
+([Trial environments](https://learn.microsoft.com/power-platform/admin/trial-environments)). Por eso, desde
+el Módulo 2, todo lo que construyas va dentro de tu solución y la exportas al terminar cada módulo o sesión;
+cuando el Trial vence, creas otro ambiente e importas la solución. Si tu organización te da un ambiente
+Developer **gestionado** o un Sandbox, es mejor opción. El Módulo 1 te da los pasos y un mensaje listo para
+pedirlo; el detalle está en [Entornos y trials](/recursos/entornos-y-trials). Ojo: el sandbox gratuito del Microsoft 365 Developer Program no es para todo el mundo; solo lo
 reciben suscriptores de Visual Studio Professional o Enterprise, ciertos partners de Microsoft y
 empresas con soporte Premier o Unified. Si entiendes la jerarquía de arriba, estos pasos dejan de
 sentirse mágicos.
 
-## 2. Los 4 tipos de ambiente que vas a encontrar en este plan
+## 2. Los tipos de ambiente que vas a encontrar en este plan
 
 Esta es la tabla que responde "¿puedo practicar esto aquí o no?" — vuelve a ella cada vez que un lab te
 pida un tipo de ambiente que no reconozcas.
 
 | Tipo de ambiente | Para qué existe | Qué SÍ puedes practicar ahí | Qué NO puedes practicar ahí |
 |---|---|---|---|
-| **Developer** | Tu ambiente personal para aprender y experimentar. Uno por persona (si un lab pide un segundo ambiente, usa un Trial o la variante en papel). Necesitas una cuenta de trabajo o estudio, no personal; desde noviembre de 2026 Microsoft cambió cómo se consigue (ver [Entornos y trials](/recursos/entornos-y-trials)). Si no puedes crear uno, un ambiente **Trial** con Dataverse sirve igual, aunque caduca. | Crear tablas, apps Canvas y Model-Driven, flujos de Power Automate, Power Fx, Dataverse completo — todo el Nivel Básico e Intermedio de este plan. | Escenarios que requieren varios usuarios reales simultáneos, licencias Dynamics 365 completas (Sales/Customer Service como producto, no solo la tabla), o volumen de datos realista de una empresa. |
+| **Trial (standard)** — tu ambiente del curso | El ambiente que creas tú en el Módulo 1 con una licencia Power Apps trial. Uno por usuario. Dura 30 días + una extensión de 30; después se elimina. Solo se puede crear y eliminar: no se puede restablecer, respaldar, restaurar ni copiar (ver [Entornos y trials](/recursos/entornos-y-trials)). | Crear tablas, apps Canvas y Model-Driven, flujos de Power Automate, Power Fx, Dataverse completo — todo el Nivel Básico e Intermedio de este plan, exportando tu solución para llevarla al ambiente siguiente. | Guardar tu trabajo más allá de su vencimiento (para eso exportas la solución), operaciones de copia/restablecimiento/respaldo, escenarios con varios usuarios reales simultáneos o licencias Dynamics 365 completas. |
+| **Developer** | Un ambiente personal de desarrollo. Desde noviembre de 2026 solo existe **gestionado** (Managed Environment): uno por usuario, lo asigna un administrador y para ejecutar apps y flujos en él necesitas licencia premium. Si tu organización te da uno, es la mejor opción para el curso. Los Developer no gestionados creados antes del 15 nov 2026 se suspenden el 15 dic 2026. | Lo mismo que en el Trial, sin la caducidad de 30 días. | Escenarios que requieren varios usuarios reales simultáneos, licencias Dynamics 365 completas (Sales/Customer Service como producto, no solo la tabla), o volumen de datos realista de una empresa. |
 | **Sandbox** | Una copia de "casi producción" para probar cambios antes de que lleguen a los usuarios reales — típico en una empresa con un equipo de Power Platform. | Probar soluciones empaquetadas, validar Business Process Flows con datos de prueba, ensayar una migración antes de aplicarla en Production. | Nada que dependa de datos reales de clientes — un Sandbox usa datos de prueba, no datos de producción reales. |
 | **Production** | El ambiente que usan de verdad los empleados/clientes de una empresa. | Nada, en este plan — **nunca vas a practicar directamente en Production**, ni el propio equipo del curso lo hace fuera de un contexto laboral real y gobernado. | Cualquier práctica de aprendizaje. Si un lab menciona Production, es para que entiendas el concepto, no para que operes uno. |
 | **Trial de Dynamics 365** | Una licencia temporal (normalmente 30 días) que te da acceso a un producto completo de Dynamics 365 (Sales, Customer Service, Customer Insights…) sobre un ambiente nuevo, para poder practicar la app real y no solo sus tablas en Dataverse. | Todo lo que pidan los labs marcados "requiere trial": crear leads/oportunidades en Sales, casos/colas/SLA en Customer Service, segmentos en Customer Insights. | Escenarios de integración con sistemas reales de una empresa (pasarela de pagos real, ERP real) — eso queda como diseño documentado, no ejecución. |
 
 **Regla rápida:** si un módulo o lab no dice nada especial, asume que necesitas tu **ambiente
-Developer** (el que creas en el Módulo 1). Si dice explícitamente "requiere trial de Dynamics 365",
+del curso** (el que creas en el Módulo 1). Si dice explícitamente "requiere trial de Dynamics 365",
 necesitas activar el trial del producto correspondiente — el Módulo 1 y los módulos de Dynamics 365
 (57 en adelante) te dicen exactamente cuándo y cómo.
 
@@ -78,8 +82,9 @@ No necesitas ningún ambiente para esto — es reconocimiento visual.
 ## Errores comunes
 
 - **Error:** pensar que "tenant" y "ambiente" son lo mismo. **Por qué pasa:** ambos se sienten como "mi cuenta de trabajo". **Cómo evitarlo:** recuerda la jerarquía — un tenant puede tener varios ambientes; nunca es al revés.
-- **Error:** creer que necesitas un trial de Dynamics 365 desde el Módulo 1. **Por qué pasa:** el nombre "Dynamics 365" suena como el destino final del plan. **Cómo evitarlo:** el trial solo hace falta a partir del nivel transversal D365 (Módulo 57 en adelante); todo el Nivel Básico e Intermedio corre en tu ambiente Developer.
-- **Error:** practicar sobre un ambiente de Production real (el de tu trabajo, si ya tienes uno) "para no perder tiempo creando uno nuevo". **Por qué pasa:** parece un atajo razonable. **Cómo evitarlo:** nunca — usa siempre tu ambiente Developer personal para este plan, sin excepción.
+- **Error:** creer que necesitas un trial de Dynamics 365 desde el Módulo 1. **Por qué pasa:** el nombre "Dynamics 365" suena como el destino final del plan. **Cómo evitarlo:** el trial solo hace falta a partir del nivel transversal D365 (Módulo 57 en adelante); todo el Nivel Básico e Intermedio corre en tu ambiente del curso.
+- **Error:** practicar sobre un ambiente de Production real (el de tu trabajo, si ya tienes uno) "para no perder tiempo creando uno nuevo". **Por qué pasa:** parece un atajo razonable. **Cómo evitarlo:** nunca — usa siempre tu ambiente del curso personal para este plan, sin excepción.
+- **Error:** trabajar semanas en tu Trial sin exportar la solución. **Por qué pasa:** el ambiente parece permanente. **Cómo evitarlo:** exporta tu solución al terminar cada módulo o sesión y pide la extensión en la última semana; ver [Entornos y trials](/recursos/entornos-y-trials).
 
 ## Criterio de aprobación
 
@@ -90,7 +95,7 @@ Puedes seguir al Módulo 1 cuando puedas responder, sin mirar la tabla, estas 3 
 - [ ] ¿Cuándo vas a necesitar activar un trial de Dynamics 365, y por qué no antes?
 
 Si alguna te cuesta, vuelve a la sección 2 antes de empezar el Módulo 1 — el resto del plan asume que
-estos 4 términos ya no te generan dudas.
+estos términos ya no te generan dudas.
 
 ## Siguiente paso
 

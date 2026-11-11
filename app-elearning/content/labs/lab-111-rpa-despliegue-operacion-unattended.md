@@ -10,7 +10,7 @@ prerequisites:
   - "Módulos 68 y 75 completados"
   - "Ambiente DEV/TEST o simulación documentada"
 files: []
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # LAB-RPA-08 — Despliegue y operación unattended
@@ -22,6 +22,8 @@ Preparar solución, configuración, dependencias, variables, referencias, valida
 ## Escenario de negocio
 
 El bot debe pasar de DEV a TEST. Operaciones exige evidencia de readiness de máquina, cuenta, sesión, monitoreo, rollback y soporte.
+
+> **Licencia para la parte unattended (Learn, noviembre de 2026):** una ejecución desatendida necesita un bot desatendido: el plan **Process** se asigna a la máquina, y la máquina la registra un usuario con Premium; el plan **Hosted Process** cubre un bot alojado por Microsoft. La prueba de 90 días de Power Automate da las capacidades Premium, incluidas las ejecuciones desatendidas ([Learn: Power Automate license types](https://learn.microsoft.com/power-platform/admin/power-automate-licensing/types)). Si no tienes ninguna de esas opciones, haz la **variante simulada** del final y escribe «simulación sin licencia unattended» en tu entrega; el ALM entre DEV y TEST (ejercicios 1 a 5) sí puedes hacerlo con tu ambiente.
 
 ## Competencias desarrolladas
 
@@ -47,7 +49,7 @@ El bot debe pasar de DEV a TEST. Operaciones exige evidencia de readiness de má
 |---|---|---|
 | El bot no arranca en TEST aunque funcionaba en DEV | Las variables de entorno (rutas, URLs, modo) no se actualizaron al desplegar la solución | Revisa el deployment checklist y confirma que cada variable de entorno tiene el valor de TEST antes de ejecutar la UAT |
 | Las connection references quedan sin vincular tras importar la solución | La conexión de destino no existe en el ambiente TEST o no se remapeó durante la importación | Crea la conexión en TEST antes de importar y remapea explícitamente cada connection reference en el asistente de importación |
-| La sesión unattended no arranca o se cierra sola | Había una sesión de Windows abierta o bloqueada en la máquina (Learn: una ejecución desatendida requiere una máquina con todos los usuarios con la sesión cerrada, y una sesión bloqueada impide que corra), o la conexión de desktop flows no es válida | Cierra todas las sesiones de Windows de la máquina antes de la ejecución, comprueba la conexión de desktop flows y revisa **Monitor > Machines** |
+| La sesión unattended no arranca o se cierra sola | Había una sesión de Windows abierta o bloqueada en la máquina (Learn: en Windows 10/11 la ejecución desatendida exige que no haya sesiones activas, ni siquiera bloqueadas; en Windows Server, una sesión bloqueada del mismo usuario provoca error), el usuario de la conexión no está en el grupo **Remote Desktop Users** de la máquina, o la conexión de desktop flows no es válida | Cierra todas las sesiones de Windows de la máquina antes de la ejecución, agrega el usuario a **Remote Desktop Users**, comprueba la conexión de desktop flows y revisa **Monitor > Machines** ([Learn: Run unattended desktop flows](https://learn.microsoft.com/power-automate/desktop-flows/run-unattended-desktop-flows)) |
 | El runbook no distingue si el fallo es de máquina o de credencial | El checklist de machine readiness no valida credenciales por separado del estado de la máquina | Divide la validación en dos pasos explícitos: estado de la máquina (encendida, agente conectado) y validez de la credencial (login manual de prueba) |
 | El rollback deja el ambiente en un estado mixto (parte nueva, parte anterior) | El rollback plan no especifica el orden de reversión de componentes (solución, variables, conexiones) | Documenta en el rollback plan el orden exacto de reversión y verifica cada componente por separado antes de dar el rollback por completado |
 
@@ -75,7 +77,7 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 
 - **Causa probable:** quedó una sesión de Windows abierta o bloqueada en la máquina, o la conexión de desktop flows no es válida.
 - **Cómo comprobar:** revisa en la máquina si hay sesiones de Windows abiertas o bloqueadas, valida la conexión de desktop flows y mira **Monitor > Machines** y **Monitor > Desktop flow runs**.
-- **Cómo corregir:** cierra todas las sesiones de Windows de la máquina (una sesión bloqueada impide la ejecución desatendida), vuelve a crear o validar la conexión de desktop flows y confirma en **Monitor > Machines** que la máquina está disponible.
+- **Cómo corregir:** cierra todas las sesiones de Windows de la máquina (en Windows 10/11 una sesión bloqueada impide la ejecución desatendida), confirma que el usuario de la conexión está en **Remote Desktop Users**, vuelve a crear o validar la conexión de desktop flows y confirma en **Monitor > Machines** que la máquina está disponible. Si en Windows Server quieres reutilizar una sesión ya abierta del mismo usuario, Learn describe el ajuste **Reuse sessions for unattended runs** en la configuración de la máquina (**Monitor > Machines** > la máquina > **Settings**); documenta si lo activas y por qué.
 - **Reiniciar vs. reparar:** si la sesión falló a mitad de una corrida unattended, reinicia esa ejecución completa una vez corregida la causa, porque el estado de la interfaz queda indeterminado.
 - **Evidencia posterior a la corrección:** captura de una sesión unattended completa sin interrupciones y del runbook actualizado.
 
@@ -117,7 +119,18 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 - Protocolo de tenant: [protocolo_tenant.md](../practice-assets/rpa/sit-automation-case/validation/protocolo_tenant.md).
 - Plantillas: [deployment plan](../practice-assets/rpa/sit-automation-case/templates/deployment-checklist.md), [rollback plan](../practice-assets/rpa/sit-automation-case/templates/rollback-plan.md) y [runbook](../practice-assets/rpa/sit-automation-case/templates/runbook.md).
 - Reset: revierte parámetros de ambiente y deja evidencia de que no cambiaste producción real.
-- Variante sin licencia unattended: declara el bloqueo, valida el diseño y completa solo simulación attended/local.
+- Variante sin licencia unattended: declara el bloqueo, valida el diseño y completa solo simulación attended/local (detalle abajo).
+
+## Variante simulada (sin licencia unattended)
+
+Tiempo estimado: 90 minutos. Escribe «simulación sin licencia unattended» en tu entrega.
+
+1. **ALM real:** haz los ejercicios 1 a 5 con tu ambiente (exportar la solución, variables de entorno y connection references en DEV/TEST). Si solo tienes un ambiente, documenta la importación como diseño.
+2. **Ejecución atendida en lugar de desatendida:** ejecuta el desktop flow en local desde Power Automate for desktop con los valores de TEST y guarda la evidencia de esa corrida.
+3. **Machine readiness en papel:** checklist con sistema operativo (Windows 10/11 o Server), cuenta del bot, grupo **Remote Desktop Users**, sesiones cerradas, licencia que haría falta (Process, Hosted Process o prueba de 90 días) y quién registra la máquina, cada punto con su enlace de Learn.
+4. **Runbook:** qué hace operaciones si la máquina está bloqueada, desconectada o sin licencia, y cómo se distingue cada caso en **Monitor > Machines** y **Monitor > Desktop flow runs**.
+
+La variante simulada cumple los criterios de aprobación si declara qué parte es real y qué parte es diseño.
 
 ## Reto adicional
 

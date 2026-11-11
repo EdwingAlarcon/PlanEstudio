@@ -7,7 +7,7 @@ product: ["Power Platform CLI", "Microsoft Entra ID", "Dataverse"]
 certifications: ["Buenas Prácticas"]
 role: ["Developer", "Maker", "Solution Architect"]
 prerequisites:
-  - "Cuenta con acceso a un entorno Developer o Sandbox (nunca producción)"
+  - "Cuenta con acceso a tu ambiente del curso u otro entorno de práctica: Trial, Developer o Sandbox (nunca producción)"
   - "Visual Studio Code con la extensión Power Platform Tools (o .NET 10 para instalar PAC CLI como herramienta .NET)"
   - "Módulo 52 estudiado: Power Platform CLI y Conexión Segura al Tenant"
 files: []
@@ -51,7 +51,7 @@ Si ya hiciste las Microlecciones 2 y 3 del Módulo 52, PAC CLI ya está instalad
 ## Tecnologías utilizadas
 
 - Power Platform CLI (`pac`)
-- Un entorno Developer (gratuito, ligado a tu cuenta) o Sandbox de práctica
+- Tu ambiente del curso (un Trial con Dataverse, o un Developer gestionado o Sandbox de práctica de tu organización)
 - Terminal (PowerShell, bash o equivalente)
 
 ## Ejercicio 1 — Instalar y verificar
@@ -77,7 +77,7 @@ pac
 
 Antes de abrir la terminal, anota la URL de tu ambiente de práctica: en el [Power Platform admin center](https://admin.powerplatform.microsoft.com), **Manage** > **Environments** > tu ambiente; en la sección **Details** aparecen la URL y el **Environment ID** (es la Microlección 1 del Módulo 52; si no ves tu ambiente, pídele la URL a quien administre el tenant).
 
-Crea un perfil de autenticación contra tu entorno Developer o Sandbox (nunca contra producción), cambiando la URL de ejemplo por la tuya:
+Crea un perfil de autenticación contra tu ambiente del curso o Sandbox (nunca contra producción), cambiando la URL de ejemplo por la tuya:
 
 ```bash
 pac auth create --environment "https://orgXXXXXXXX.crm.dynamics.com" --name "sit-practica-dev"
@@ -95,7 +95,7 @@ pac env who
 
 ## Ejercicio 3 — Simular múltiples clientes/entornos
 
-Si tienes acceso a un segundo entorno, crea un segundo perfil con un nombre igualmente explícito. Desde el 15-11-2026 cada usuario solo puede crear un ambiente Developer administrado, así que el segundo suele ser un **Trial** de 30 días con Dataverse o un **Sandbox**. Ojo: el Developer Plan no da derecho a crear un Trial; Learn exige una licencia que lo incluya (por ejemplo, la prueba gratuita de Power Apps, uno por usuario) y que el tenant permita crear ambientes, y un Sandbox necesita 1 GB de capacidad disponible ([Learn: Who can create environments?](https://learn.microsoft.com/power-platform/admin/create-environment#who-can-create-environments), [Learn: Trial environments](https://learn.microsoft.com/power-platform/admin/trial-environments)).
+Si tienes acceso a un segundo entorno, crea un segundo perfil con un nombre igualmente explícito. El Trial es uno por usuario: si tu ambiente del curso ya es tu Trial, el segundo tiene que ser un **Sandbox** o un **Developer** gestionado que te dé tu organización; si tu ambiente del curso es un Developer o un Sandbox, el segundo puede ser un **Trial** de 30 días con Dataverse. Ojo: el Developer Plan no da derecho a crear un Trial; Learn exige una licencia que lo incluya (por ejemplo, la prueba gratuita de Power Apps, uno por usuario) y que el tenant permita crear ambientes, y un Sandbox necesita 1 GB de capacidad disponible ([Learn: Who can create environments?](https://learn.microsoft.com/power-platform/admin/create-environment#who-can-create-environments), [Learn: Trial environments](https://learn.microsoft.com/power-platform/admin/trial-environments)).
 
 **Variante en papel (sin segundo entorno):** escribe los comandos de este ejercicio para una segunda URL inventada y explica qué columna de `pac auth list` y qué comando usarías para comprobar a dónde apunta cada perfil. No crees un segundo perfil contra tu mismo ambiente con otro nombre: es justo el error de "el nombre dice una cosa y la URL otra".
 
@@ -120,7 +120,7 @@ pac env who
 Escribe (en un archivo local, no en el repo del proyecto real) tu checklist personal de verificación antes de ejecutar cualquier comando de `pac` que modifique algo:
 1. ¿Ejecuté `pac env who` en los últimos minutos y la URL coincide con la que anoté para ese ambiente? (El nombre del perfil es una etiqueta; la URL es la verdad.)
 2. ¿El nombre del perfil coincide con el cliente/entorno que espero?
-3. ¿Es un entorno Developer/Sandbox/Test, o es Production?
+3. ¿Es un entorno de práctica (Trial, Developer, Sandbox, Test), o es Production?
 
 ## Errores Comunes
 
@@ -136,7 +136,7 @@ Escribe (en un archivo local, no en el repo del proyecto real) tu checklist pers
 ## Criterios de Validación
 
 - [ ] Instalé Power Platform CLI y confirmé la versión
-- [ ] Creé un perfil de autenticación contra un entorno Developer/Sandbox con nombre explícito
+- [ ] Creé un perfil de autenticación contra tu ambiente del curso u otro entorno de práctica con nombre explícito
 - [ ] Verifiqué la organización activa con `pac env who` antes y después de cambiar de perfil
 - [ ] Documenté mi checklist personal de verificación previa a comandos destructivos
 
