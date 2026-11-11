@@ -4,11 +4,11 @@ title: "Fundamentos de IA para Desarrollo"
 level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 18
-practiceMinutes: 110
+practiceMinutes: 130
 slug: "fundamentos-ia-desarrollo"
 lastVerified: "2026-11"
 ---
-*Lectura: 17-19 min · Práctica: unas 2 horas la primera vez, mejor en dos sesiones (la primera hasta la Microlección 2; la segunda, la Microlección 3, la decisión y el reto).*
+*Lectura: 17-19 min · Práctica: unas 2 horas y cuarto la primera vez, mejor en dos sesiones (la primera hasta la Microlección 2; la segunda, la Microlección 3, la decisión y el reto).*
 
 ### 🎯 Objetivo
 Entender qué es un modelo de lenguaje (LLM) aplicado a generación de código, distinguir entre autocompletado, chat y agentes, y reconocer los límites reales de estas herramientas antes de usarlas en proyectos de Power Platform y Dynamics 365. Al terminar habrás **pillado a una IA inventando** columnas y escribiendo un validador que rechaza correos válidos, lo habrás demostrado con un script que contrasta su salida con el esquema y con casos de prueba, y lo habrás corregido.
@@ -59,10 +59,10 @@ En VS Code, Copilot ofrece las tres: las sugerencias inline se aceptan con **Tab
    }
    ```
 3. **Autocompletado:** en una línea nueva escribe `export function totalSinIva(` y espera la sugerencia en texto atenuado. Anota qué propuso y descártala con **Escape**.
-4. **Chat:** abre el Chat con **Chat** > **Open Chat** en la barra de título (o **Ctrl+Alt+I**), elige **Ask** en el selector de agente del cuadro de chat y escribe: `¿Qué tasa de IVA usa este archivo y de dónde sale ese valor?`. Anota si la respuesta dice que la tasa es de ejemplo o la presenta como un dato oficial.
-5. **Agente:** en el mismo selector elige **Agent** y escribe: `Crea precios.test.mjs con una prueba de node:test para totalConIva(100) y ejecútala con node --test`. Cuando pida ejecutar el comando en la terminal, **lee el comando antes de aprobarlo**. Después de que termine, revisa los archivos que creó o cambió y decide con **Keep** (conservar) o **Undo** (deshacer).
+4. **Chat:** abre la vista de Chat con **Ctrl+Alt+I** (o con el icono de chat de la parte superior de la ventana), elige **Ask** en el selector de agente del cuadro de chat y escribe: `¿Qué tasa de IVA usa este archivo y de dónde sale ese valor?`. Anota si la respuesta dice que la tasa es de ejemplo o la presenta como un dato oficial.
+5. **Agente:** en el mismo selector elige **Agent** y escribe: `Crea precios.test.mjs con una prueba de node:test para totalConIva(100) y ejecútala con node --test`. Cuando pida ejecutar el comando en la terminal, **lee el comando antes de aprobarlo** (**Allow Once** lo aprueba solo esta vez). Después de que termine, revisa los archivos que creó o cambió y decide con **Keep** (conservar) o **Undo** (deshacer) ([VS Code: aprobaciones](https://code.visualstudio.com/docs/agents/run/approvals), [VS Code: revisar cambios](https://code.visualstudio.com/docs/copilot/chat/review-code-edits)).
 
-**Qué deberías ver:** el autocompletado propone código sin preguntar nada; Ask responde texto sin tocar archivos; Agent crea un archivo nuevo y te pide aprobación antes de ejecutar `node --test`. **Si no lo ves:** si el selector no muestra **Agent**, revisa que la carpeta no esté en **Restricted Mode** (aviso en la parte superior). Si no tienes Copilot, haz los pasos 4 y 5 con el chat de IA que tengas y anota qué no pudo hacer (por ejemplo, ejecutar el comando).
+**Qué deberías ver:** el autocompletado propone código sin preguntar nada; Ask responde texto sin tocar archivos; Agent crea un archivo nuevo y, con el nivel de permisos por defecto (**Manual permissions**), normalmente te pide aprobación antes de ejecutar `node --test`. Si lo ejecutó sin preguntarte, no es un error tuyo: VS Code aprueba solo algunos comandos. Anota qué nivel muestra el selector de permisos del chat. **Si no lo ves:** si el selector no muestra **Agent**, revisa que la carpeta no esté en **Restricted Mode** (aviso en la parte superior; en ese modo VS Code desactiva los agentes). Si no tienes Copilot, haz los pasos 4 y 5 con el chat de IA que tengas y anota qué no pudo hacer (por ejemplo, ejecutar el comando).
 
 **Evidencia a reportar:**
 
@@ -219,7 +219,7 @@ process.exitCode = problemas === 0 ? 0 : 1;
 1. **Antes de ejecutar nada, lee `salida-ia.mjs`** y escribe en tu tabla de evidencia qué crees que está mal. Así podrás comparar tu lectura con lo que el script demuestra.
 2. En una terminal, dentro de la carpeta, ejecuta `node revisar.mjs`. **Qué deberías ver:** cinco líneas que empiezan por `FALLA` y al final `Problemas encontrados: 5`. **Si ves un error de importación**, revisa que los tres archivos estén en la misma carpeta y que `salida-ia.mjs` termine en `.mjs`.
 3. **Corrige `salida-ia.mjs`** sin tocar `revisar.mjs` ni `esquema.json`. Criterios de aceptación:
-   - Cada columna de la consulta existe en el esquema. Si un dato que pidió el compañero **no existe** (pregúntate cuál), no lo inventes ni lo cambies por otro parecido: quítalo y anota a quién le preguntarías de dónde sale.
+   - Cada columna de la consulta existe en el esquema. Para cada dato que pidió el compañero, distingue dos casos: si el esquema **sí lo tiene con otro nombre** (mismo significado y tipo que pidió), usa el nombre lógico del esquema; si **no existe** en absoluto (pregúntate cuál), no lo inventes ni lo cambies por otro parecido: quítalo y anota a quién le preguntarías de dónde sale.
    - La columna Choice se compara con su **valor numérico**, no con la etiqueta. En la Web API las columnas de estado y de opción se filtran por número, como `statecode eq 0` en los ejemplos de [Learn: filtrar filas con OData](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/query/filter-rows).
    - El validador acepta los tres correos válidos de la lista y rechaza los tres inválidos.
 4. Ejecuta otra vez `node revisar.mjs` hasta ver `Problemas encontrados: 0`.

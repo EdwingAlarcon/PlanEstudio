@@ -17,7 +17,7 @@ Integrar Sales, Customer Service, Contact Center, Customer Insights, Field Servi
 >
 > **Antes de empezar, necesitas:**
 > - Ningún nivel de certificación: el módulo es transversal. Te conviene haber hecho los Módulos 57 a 65 de este nivel, porque aquí se combinan, no se vuelven a explicar; si te falta alguno, cada referencia lleva su número para que vuelvas a él.
-> - **No necesitas tenant.** El Fit-Gap, las matrices, el roadmap y los diagramas son el entregable central y se hacen en papel. Ejecutar el flujo completo en vivo exige ambientes de CE y F&O conectados y licencias de cada producto; un ambiente Developer de Power Platform no instala las apps de Dynamics 365 y las trials duran 30 días. Si tienes una trial de alguna app, úsala solo para comprobar un tramo, sin depender de ella.
+> - **No necesitas tenant.** El Fit-Gap, las matrices, el roadmap y los diagramas son el entregable central y se hacen en papel. Ejecutar el flujo completo en vivo exige ambientes de CE y F&O conectados y licencias de cada producto; un ambiente Developer de Power Platform no instala las apps de Dynamics 365 y las trials duran 30 días. Además, **cada trial vive en su propio tenant y URL** y no comparte datos con las demás: no puedes juntar una trial de Sales y otra de Field Service en un mismo ambiente para recorrer el flujo completo ([Learn: Field Service trial FAQ](https://learn.microsoft.com/dynamics365/field-service/trial-faq)). En la [página de trials de Dynamics 365](https://www.microsoft.com/dynamics-365/free-trial) hay trial de Sales, Customer Service, Contact Center, Field Service y Customer Insights, pero Finance y Supply Chain Management solo ofrecen pedir una demo. Si tienes una trial de alguna app, úsala solo para comprobar un tramo, sin depender de ella.
 > - Una hoja de cálculo o un documento para las matrices, y una herramienta de diagramas (Mermaid sirve).
 > - Los casos de este módulo son **ilustrativos**: sus cifras sirven para razonar, no son datos de empresas reales.
 
@@ -58,7 +58,7 @@ Integrar Sales, Customer Service, Contact Center, Customer Insights, Field Servi
 **Práctica en papel (30 min) — el flujo completo.**
 
 1. Completa la tabla del ejemplo hasta el paso 10, desde la campaña hasta la renovación, usando como plantilla la cadena de los Conceptos Clave.
-2. En la columna "Costura", escribe para cada cambio de sistema qué patrón lo resuelve (Módulo 65: dual-write, virtual table, business event, lotes).
+2. En la columna "Costura", escribe para cada cambio de sistema qué patrón lo resuelve (Módulo 65: dual-write, virtual table, business event, lotes). Para la costura work order → factura en F&O, ten en cuenta que la integración nativa de Field Service con las apps de finance and operations está en desuso: deja de estar disponible después del 28 de febrero de 2027 y Microsoft la sustituye por la integración de Field Service con Project Operations ([Learn: Feature deprecations](https://learn.microsoft.com/dynamics365/field-service/deprecations-field-service)). No diseñes un proyecto nuevo sobre ella; anota qué patrón usarías en su lugar.
 3. Dibuja el flujo en Mermaid con un color o una forma distinta para los pasos que viven en F&O.
 4. Marca los dos pasos que, si fallan, frenan a más personas: serán candidatos a probar primero.
 

@@ -2,7 +2,7 @@
 id: lab-52
 title: "Configurar Power Platform CLI y Conectarse de Forma Segura al Tenant"
 level: "N5"
-duration: 70
+duration: 90
 product: ["Power Platform CLI", "Microsoft Entra ID", "Dataverse"]
 certifications: ["Buenas Prácticas"]
 role: ["Developer", "Maker", "Solution Architect"]
@@ -11,7 +11,7 @@ prerequisites:
   - "Visual Studio Code con la extensión Power Platform Tools (o .NET 10 para instalar PAC CLI como herramienta .NET)"
   - "Módulo 52 estudiado: Power Platform CLI y Conexión Segura al Tenant"
 files: []
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 52 — Power Platform CLI: Configuración y Conexión Segura al Tenant
@@ -40,11 +40,13 @@ Developer, Maker, Solution Architect — cualquier rol que vaya a interactuar co
 
 | Ejercicio | Tiempo estimado |
 |---|---|
-| Ejercicio 1 — Instalar Power Platform CLI y verificar la instalación | 15 min |
-| Ejercicio 2 — Crear un perfil de autenticación contra un entorno de práctica | 20 min |
-| Ejercicio 3 — Simular múltiples clientes: crear un segundo perfil y practicar el cambio seguro entre ellos | 25 min |
+| Ejercicio 1 — Instalar Power Platform CLI y verificar la instalación (puede llevar 20 minutos solo la instalación) | 25 min |
+| Ejercicio 2 — Crear un perfil de autenticación contra un entorno de práctica | 25 min |
+| Ejercicio 3 — Simular múltiples clientes: crear un segundo perfil y practicar el cambio seguro entre ellos (o su variante en papel) | 30 min |
 | Ejercicio 4 — Documentar tu checklist personal de verificación previa | 10 min |
-| **Total** | **70 min** |
+| **Total** | **90 min** |
+
+Si ya hiciste las Microlecciones 2 y 3 del Módulo 52, PAC CLI ya está instalado y el perfil `sit-practica-dev` ya existe: en los Ejercicios 1 y 2 basta con comprobarlos, y el total baja a unos 50 minutos.
 
 ## Tecnologías utilizadas
 
@@ -54,41 +56,48 @@ Developer, Maker, Solution Architect — cualquier rol que vaya a interactuar co
 
 ## Ejercicio 1 — Instalar y verificar
 
-Instala Power Platform CLI según tu sistema operativo:
+Instala Power Platform CLI por uno de los métodos de [Learn: What is Microsoft Power Platform CLI?](https://learn.microsoft.com/power-platform/developer/cli/introduction):
+
+- **Extensión de VS Code (la más sencilla):** en VS Code, icono **Extensions** de la barra lateral, busca `power platform tools` e **Install**. Así instalado, `pac` funciona por defecto solo en la terminal de VS Code (**Terminal** > **New Terminal**).
+- **Herramienta .NET:** necesita .NET instalado (Learn recomienda .NET 10.0; con un SDK anterior la versión actual del paquete no se instala) y luego:
 
 ```bash
 dotnet tool install --global Microsoft.PowerApps.CLI.Tool
-# o, recomendado por Learn: la extensión "Power Platform Tools" de VS Code
 ```
 
-Verifica la instalación:
+Verifica la instalación escribiendo solo:
 
 ```bash
 pac
-pac help
 ```
 
-**Validación esperada:** `pac` (sin argumentos) muestra `Version: ...` en la segunda línea, sin errores. (`pac --version` no es un comando válido.)
+**Validación esperada:** la primera línea dice `Microsoft PowerPlatform CLI` y la segunda `Version: ...`, seguidas de la lista de grupos de comandos (`admin`, `auth`, `env`, `solution`...). (`pac --version` no es un comando válido: imprime la cabecera y después un error.)
 
 ## Ejercicio 2 — Conectar a un entorno de práctica
 
-Crea un perfil de autenticación contra tu entorno Developer o Sandbox (nunca contra producción):
+Antes de abrir la terminal, anota la URL de tu ambiente de práctica: en el [Power Platform admin center](https://admin.powerplatform.microsoft.com), **Manage** > **Environments** > tu ambiente; en la sección **Details** aparecen la URL y el **Environment ID** (es la Microlección 1 del Módulo 52; si no ves tu ambiente, pídele la URL a quien administre el tenant).
+
+Crea un perfil de autenticación contra tu entorno Developer o Sandbox (nunca contra producción), cambiando la URL de ejemplo por la tuya:
 
 ```bash
 pac auth create --environment "https://orgXXXXXXXX.crm.dynamics.com" --name "sit-practica-dev"
 ```
 
-Confirma la organización activa (`pac env who` es el nombre actual de `pac env who`, que sigue funcionando):
+Se abre un inicio de sesión de Microsoft Entra ID. Si estás en WSL2 o en una máquina sin navegador, agrega `--deviceCode` (es un switch, sin valor) y escribe en un navegador el código que te muestra ([Learn: pac auth](https://learn.microsoft.com/power-platform/developer/cli/reference/auth)). Si omites `--environment`, el perfil queda conectado al ambiente **Default** del tenant, no al tuyo.
+
+Confirma la organización activa (`pac env who` es el nombre actual de `pac org who`, que sigue funcionando):
 
 ```bash
 pac env who
 ```
 
-**Validación esperada:** `pac env who` muestra la URL, el ID de organización y tu usuario, coincidiendo con el entorno esperado.
+**Validación esperada:** `pac env who` muestra los datos de la organización activa; la URL coincide con la que anotaste en el centro de administración. Si ves otra URL o el ambiente que termina en **(default)**, corrige el perfil con `pac auth update --index <n> --environment <URL>` (el `<n>` sale de `pac auth list`; el primer perfil es el 1) y vuelve a comprobar.
 
 ## Ejercicio 3 — Simular múltiples clientes/entornos
 
-Si tienes acceso a un segundo entorno (por ejemplo, un Trial de 30 días: desde el 15-11-2026 cada usuario solo puede tener un ambiente Developer), crea un segundo perfil con un nombre igualmente explícito:
+Si tienes acceso a un segundo entorno, crea un segundo perfil con un nombre igualmente explícito. Desde el 15-11-2026 cada usuario solo puede crear un ambiente Developer administrado, así que el segundo suele ser un **Trial** de 30 días con Dataverse o un **Sandbox**. Ojo: el Developer Plan no da derecho a crear un Trial; Learn exige una licencia que lo incluya (por ejemplo, la prueba gratuita de Power Apps, uno por usuario) y que el tenant permita crear ambientes, y un Sandbox necesita 1 GB de capacidad disponible ([Learn: Who can create environments?](https://learn.microsoft.com/power-platform/admin/create-environment#who-can-create-environments), [Learn: Trial environments](https://learn.microsoft.com/power-platform/admin/trial-environments)).
+
+**Variante en papel (sin segundo entorno):** escribe los comandos de este ejercicio para una segunda URL inventada y explica qué columna de `pac auth list` y qué comando usarías para comprobar a dónde apunta cada perfil. No crees un segundo perfil contra tu mismo ambiente con otro nombre: es justo el error de "el nombre dice una cosa y la URL otra".
 
 ```bash
 pac auth create --environment "https://orgYYYYYYYY.crm.dynamics.com" --name "sit-cliente-b-dev"
@@ -109,7 +118,7 @@ pac env who
 ## Ejercicio 4 — Documentar tu checklist personal
 
 Escribe (en un archivo local, no en el repo del proyecto real) tu checklist personal de verificación antes de ejecutar cualquier comando de `pac` que modifique algo:
-1. ¿Ejecuté `pac env who` en los últimos minutos?
+1. ¿Ejecuté `pac env who` en los últimos minutos y la URL coincide con la que anoté para ese ambiente? (El nombre del perfil es una etiqueta; la URL es la verdad.)
 2. ¿El nombre del perfil coincide con el cliente/entorno que espero?
 3. ¿Es un entorno Developer/Sandbox/Test, o es Production?
 
@@ -118,6 +127,9 @@ Escribe (en un archivo local, no en el repo del proyecto real) tu checklist pers
 | Error | Causa | Solución |
 |-------|-------|----------|
 | `pac` no reconocido como comando | La instalación no agregó la herramienta al PATH, o se requiere reiniciar la terminal | Reiniciar la terminal o verificar la variable PATH tras instalar |
+| `pac` funciona en VS Code pero no en una ventana de PowerShell aparte | Solo instalaste la extensión, que por defecto habilita `pac` en la terminal de VS Code | Usar la terminal de VS Code, o habilitarlo en CMD/PowerShell como indica la página de instalación de la extensión |
+| `dotnet tool install` falla con un mensaje sobre `DotnetToolSettings.xml` | El paquete actual está compilado para .NET 10 y tienes un SDK anterior | Instalar .NET 10 o usar la extensión de VS Code |
+| El perfil apunta al ambiente **(default)** | Se creó sin `--environment` | `pac auth update --index <n> --environment <URL>` y confirmar con `pac env who` |
 | Ejecutar un comando contra el perfil equivocado | No verificar `pac env who` tras un `pac auth select` | Verificar siempre la organización activa antes de cualquier operación |
 | Perfiles con nombres genéricos (`profile1`, `profile2`) | No nombrar explícitamente el perfil al crearlo | Usar siempre `--name` con una convención clara cliente-entorno |
 

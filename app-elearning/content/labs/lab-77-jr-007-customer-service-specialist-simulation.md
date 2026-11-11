@@ -10,7 +10,7 @@ prerequisites:
   - "Módulo 20 estudiado: Dynamics 365 CE Sales y Customer Service"
   - "Lab 68 revisado: Customer Service Case-to-Resolution"
   - "Ruta Job-Ready CRM Functional revisada"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 77 — JR-007: Customer Service Specialist Job Simulation
@@ -55,7 +55,13 @@ Actúas como consultor funcional de Dynamics 365 Customer Service.
 ## Qué puedes hacer en tenant real vs. qué debes simular
 
 - **Con tenant real:** configura colas, SLA y entitlements reales, crea los 5 casos de la tabla de
-  datos de prueba y ejecuta el UAT contra el sistema configurado.
+  datos de prueba y ejecuta el UAT contra el sistema configurado. Un ambiente Developer de Power
+  Platform no sirve (no instala apps de Dynamics 365); la opción gratuita es la trial de Dynamics 365
+  Customer Service del Módulo 62 (30 días, extensible una vez, caduca tras 14 días seguidos sin uso y
+  crea su propio tenant — [Learn: Trial FAQ](https://learn.microsoft.com/dynamics365/customer-service/implement/trial-faq)).
+  Los casos con horas pasadas (viernes 17:00, 56 horas después) no se pueden "crear en el pasado"
+  para ver el temporizador: en la trial, verifica la **Failure Time** calculada que muestra el caso
+  en **Enhanced SLA Details** y deja el resto como resultado esperado.
 - **Sin tenant:** documenta el diseño completo (colas, SLA, entitlements, dashboard) y ejecuta el UAT
   como "resultado esperado" en vez de "resultado observado", dejándolo explícito.
 
@@ -68,8 +74,8 @@ Usa estos 5 casos para ejecutar el UAT del Paso 5:
 | C-001 | Acme Corp | Premium | Incidente técnico | 09:00 | Primera respuesta antes de 09:30 |
 | C-002 | Beta SA | Estándar | Consulta de facturación | 09:00 | Primera respuesta antes de 13:00 |
 | C-003 | Acme Corp | Premium | Solicitud de información | 14:50 (10 min antes del cierre del entitlement) | Bloqueado o escalado por entitlement agotado |
-| C-004 | Gamma Ltda | Estándar | Incidente técnico | Viernes 17:00 | SLA pausado fuera de horario, retoma el lunes |
-| C-005 | Beta SA | Estándar | Consulta de facturación | 08:00, sin resolver a las 56h | Aparece como "vencido" en el dashboard |
+| C-004 | Gamma Ltda | Estándar | Incidente técnico | Viernes 17:00 | El reloj no corre fuera del horario laboral del calendario; primera respuesta antes del lunes 11:00 (1 h el viernes + 3 h el lunes) |
+| C-005 | Beta SA | Estándar | Consulta de facturación | Lunes 08:00, sin resolver el lunes siguiente | Aparece como "vencido" en el dashboard (48 h hábiles con L-V 8:00-18:00 vencen el viernes a las 16:00) |
 
 ## Entregables
 
@@ -106,15 +112,21 @@ diseño de colas.
 
 ### Paso 2 — SLA y entitlements
 
-Define, incluyendo pausa/reanudación fuera de horario laboral (ver caso C-004):
+Define, incluyendo el calendario laboral (ver caso C-004) y la pausa por espera del cliente:
 
 | Cliente | Plan | Casos incluidos | SLA primera respuesta | SLA resolución |
 |---|---|---|---|---|
 | Premium | Premium | 50/año | 30 min | 8 h |
 | Estándar | Estándar | 20/año | 4 h | 48 h |
 
-Documenta explícitamente la regla de pausa: el reloj de SLA se detiene fuera del horario laboral
-configurado y se reanuda al iniciar el siguiente turno.
+Documenta explícitamente dos reglas distintas, como las separa Learn
+([Learn: configurar SLA](https://learn.microsoft.com/dynamics365/customer-service/administer/define-service-level-agreements)):
+
+- **Calendario (Business Hours del SLA item):** fuera del horario laboral el reloj no cuenta y se
+  retoma al iniciar el siguiente turno. Si el SLA item no tiene calendario, Learn cuenta todo el día,
+  todos los días (por eso un plan 24/7 usa un calendario **24 x 7 support** explícito).
+- **Pausa (Allow Pause and Resume):** detiene el reloj mientras el caso está en un estado "on hold"
+  (por ejemplo, esperando al cliente); se decide al crear el SLA item y no se puede cambiar después.
 
 ### Paso 3 — Knowledge base
 
@@ -145,7 +157,7 @@ esperado y evidencia.
 - **Caso C-003 (entitlement agotado a 10 minutos de cerrarse):** ¿el sistema debe bloquear la
   creación del caso o permitirlo y alertar para revisión manual? Justifica con el impacto en
   satisfacción del cliente Premium.
-- **Caso C-004 (SLA pausado fuera de horario):** ¿qué pasa si el cliente Premium pagó por soporte
+- **Caso C-004 (reloj detenido fuera de horario por el calendario):** ¿qué pasa si el cliente Premium pagó por soporte
   24/7 pero el plan Estándar no? Documenta si tu configuración de horario de servicio distingue por
   plan.
 - **Caso C-005 (vencido):** ¿el dashboard debe notificar automáticamente al supervisor o solo
@@ -176,8 +188,10 @@ esperado y evidencia.
 - "Un cliente Premium se queda sin casos incluidos en su entitlement a mitad de un incidente crítico
   — ¿qué haces?" — respuesta esperada: reconocer el trade-off entre bloquear estrictamente y el
   riesgo comercial, y proponer una alerta a supervisión en vez de bloqueo silencioso.
-- "¿Por qué el SLA se pausa fuera de horario y qué pasa si no lo configuras así?" — respuesta
-  esperada: sin pausa, casos creados un viernes en la tarde aparecerían falsamente vencidos el lunes.
+- "¿Por qué el SLA no cuenta fuera de horario y qué pasa si no lo configuras así?" — respuesta
+  esperada: sin un calendario de horario laboral en el SLA item, el reloj cuenta noches y fines de
+  semana, y casos creados un viernes en la tarde aparecerían falsamente vencidos el lunes; la pausa
+  (Allow Pause and Resume) es otra pieza, para los estados de espera.
 
 ## Solución de referencia
 

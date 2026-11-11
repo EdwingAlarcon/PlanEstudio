@@ -33,7 +33,9 @@ Aprender, desde cero, lo mínimo de JavaScript (variables, funciones, objetos, a
 
 - **Callback:** una función que se pasa como argumento a otra función para que se ejecute más tarde, normalmente cuando algo termina (un clic, una respuesta del servidor). `boton.addEventListener("click", function() { alert("Clic!"); })` — la función anónima es el callback. En Power Platform, los handlers de eventos de formulario (`OnLoad`, `OnSave`) son callbacks que la plataforma llama por ti.
 
-- **Promesa (`Promise`) y `.then()`:** una promesa representa un valor que **todavía no existe** pero existirá cuando termine una operación asíncrona (como pedir datos a un servidor). `.then(exito, error)` define qué hacer cuando la promesa se cumple o falla. Mientras esperas, el resto del código sigue corriendo. Todas las llamadas a la Dataverse Web API desde un formulario (`Xrm.WebApi.retrieveMultipleRecords(...)`) devuelven una promesa — por eso siempre van seguidas de `.then(...)` ([Learn: retrieveMultipleRecords](https://learn.microsoft.com/power-apps/developer/model-driven-apps/clientapi/reference/xrm-webapi/retrievemultiplerecords)).
+- **Promesa (`Promise`) y `.then()`:** una promesa representa un valor que **todavía no existe** pero existirá cuando termine una operación asíncrona (como pedir datos a un servidor). `.then(exito, error)` define qué hacer cuando la promesa se cumple o falla. Mientras esperas, el resto del código sigue corriendo. Todas las llamadas a la Dataverse Web API desde un formulario (`Xrm.WebApi.retrieveMultipleRecords(...)`) devuelven una promesa — por eso van seguidas de `.then(...)`, que es la forma que usa Learn en sus ejemplos ([Learn: retrieveMultipleRecords](https://learn.microsoft.com/power-apps/developer/model-driven-apps/clientapi/reference/xrm-webapi/retrievemultiplerecords)).
+
+- **`async`/`await`:** otra forma de esperar una promesa que verás en scripts de Node.js (por ejemplo, el del [Módulo 53](/nivel/ia/modulo/dataverse-web-api-y-autenticacion)). Dentro de una función marcada `async`, `await promesa` suspende esa función hasta que la promesa se cumpla o falle, y el fallo se captura con `try { ... } catch (error) { ... }`. Una función `async` siempre devuelve una promesa ([MDN: async function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function)). `fetch(url)`, que pide una URL por HTTP, también devuelve una promesa.
 
 - **`null` vs `undefined` vs falsy:** `null` significa "a propósito no hay valor"; `undefined` significa "todavía no se asignó nada". Ambos, junto con `0`, `""`, `false` y `NaN`, se evalúan como falso en un `if`. Esto explica por qué el código de Dataverse hace comprobaciones como `if (!clienteRef || clienteRef.length === 0)` antes de usar un valor — para evitar errores si el campo está vacío. En un formulario, el valor de una búsqueda (lookup) es un array de objetos con `id`, `name` y `entityType`, y cualquier columna vacía devuelve `null` ([Learn: getValue](https://learn.microsoft.com/power-apps/developer/model-driven-apps/clientapi/reference/attributes/getvalue)).
 
@@ -154,7 +156,7 @@ Aprender, desde cero, lo mínimo de JavaScript (variables, funciones, objetos, a
        console.log("Listo: " + t);
    });
    ```
-4. **Una respuesta real.** Este objeto está copiado del ejemplo con valores formateados de [Learn: Select columns](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/query/select-columns). Las filas vienen en el array `value`, y las claves con `@` solo se pueden leer con corchetes:
+4. **Una respuesta real.** Este objeto está recortado del ejemplo con valores formateados de [Learn: Select columns](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/query/select-columns) (se quitaron `modifiedon` y `_transactioncurrencyid_value` para que sea más corto; el resto es igual). Las filas vienen en el array `value`, y las claves con `@` solo se pueden leer con corchetes:
    ```javascript
    const respuesta = {
        "@odata.context": "[Organization URI]/api/data/v9.2/$metadata#accounts(name,revenue)",
@@ -312,6 +314,22 @@ mostrarCuentas();
 
 Con el simulador imprime `A. Datum`, `Adventure Works` y `Alpine Ski House`. Con `"accounts"` imprime `No se pudieron leer las cuentas: Simulación: no conozco la tabla 'accounts'` (el mensaje real de Dataverse será otro). Learn documenta que el error que recibe ese segundo callback trae `errorCode` y `message`.
 
+**La misma corrección con `async`/`await` (opcional, 5 min).** Es la forma que usan los scripts de Node.js del Módulo 53. Pégala en una pestaña nueva, debajo del simulador, y comprueba que imprime lo mismo; después cambia `"account"` por `"accounts"` y comprueba que sale el mensaje del `catch`:
+
+```javascript
+async function mostrarCuentasConAwait() {
+    try {
+        const result = await Xrm.WebApi.retrieveMultipleRecords("account", "?$select=name&$top=3");
+        result.entities.forEach(function (cuenta) {
+            console.log(cuenta.name);
+        });
+    } catch (error) {                                     // aquí llega el fallo de la promesa
+        console.error("No se pudieron leer las cuentas: " + error.message);
+    }
+}
+mostrarCuentasConAwait();
+```
+
 | Dónde estás | Nombre de la tabla | Dónde vienen las filas |
 |---|---|---|
 | `Xrm.WebApi.retrieveMultipleRecords` (formulario, Módulo 13) | Nombre lógico: `account` | `result.entities` |
@@ -375,7 +393,7 @@ const respuesta = {
 | Error | Causa | Solución |
 |-------|-------|----------|
 | `Cannot read properties of undefined` | Se accede a una propiedad de un objeto que todavía no existe (ej. una respuesta que no llegó, o `result.value` en un resultado de `Xrm.WebApi`) | Comprobar que el valor exista antes de usarlo: `if (cliente) { ... }`; y leer `entities` en `Xrm.WebApi`, `value` en la Web API |
-| El código de la promesa nunca se ejecuta | Se olvidó `.then(...)` después de llamar una función que devuelve una promesa | Toda función que devuelve `Promise` necesita `.then()` (o `await`) para usar su resultado |
+| El código que debía usar el resultado nunca se ejecuta (o recibe una `Promise` en vez de los datos) | Se olvidó `.then(...)` (o `await`) después de llamar una función que devuelve una promesa | Toda función que devuelve `Promise` necesita `.then()` (o `await`) para usar su resultado |
 | `Uncaught (in promise)` o un rechazo sin manejar | Falta el segundo callback de `.then` (o un `.catch`) | Agregar el callback de error y mostrar `error.message` |
 | Confundir `=` con `==`/`===` | `=` asigna un valor, `==`/`===` comparan | Usar `===` para comparar (compara tipo y valor); `=` solo para asignar |
 | El array parece vacío pero tiene datos | Se intenta acceder con una clave de objeto (`array["nombre"]`) en vez de un índice numérico (`array[0]`) | Los arrays se recorren por posición numérica, los objetos por clave de texto |
@@ -391,7 +409,7 @@ const respuesta = {
 - [ ] Puedo explicar qué devuelve `.filter()` y por qué `.length` da un número
 - [ ] Leí el mensaje de un error (`TypeError`) en la consola y dije qué línea lo causó y por qué
 - [ ] Leí con corchetes un valor formateado de una respuesta de la Web API copiada de Learn
-- [ ] Puedo explicar, en mis palabras, por qué una llamada a la Web API de Dataverse necesita `.then()`
+- [ ] Puedo explicar, en mis palabras, por qué una llamada a la Web API de Dataverse necesita `.then()` (o `await` dentro de una función `async`)
 - [ ] Corregí el código que propuso la IA (`entities` en vez de `value` y callback de error), verificándolo en Learn y con el simulador
 - [ ] En el reto de transferencia escribí sin pasos un código que imprime el total, las cuentas sin revenue y el aviso de más páginas
 - [ ] Ejecuté las actividades en la consola del navegador (o con `node`) y anoté los resultados en las tablas de evidencia

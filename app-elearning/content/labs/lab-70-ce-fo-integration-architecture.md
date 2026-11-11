@@ -9,7 +9,7 @@ role: ["Solution Architect"]
 prerequisites:
   - "Módulo 34 revisado: Arquitectura de Datos e Integración"
   - "Lab 69 completado: F&O Process Mapping — Procesos ERP End-to-End (recomendado)"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 70 — CE + F&O Integration Architecture: Ownership de Datos y Dual-Write Técnico
@@ -64,7 +64,12 @@ implemente dual-write.
 | Cuentas/Clientes | `CustomersV3` | `account` | Alta (nuevo distribuidor cada semana) |
 | Productos | `Released products` | `product` | Media (catálogo revisado mensualmente) |
 | Pedidos de venta | `SalesOrderHeaderV2` / `SalesOrderLineV2` | `salesorder` / `salesorderdetail` | Alta (varios pedidos por día) |
-| Saldo de inventario | `InventSum` (virtual table `mserp_inventoryonhandaientity` desde Dataverse) | (no se sincroniza — se consulta) | Muy alta (cambia por minuto) |
+| Saldo de inventario | `InventSum` (tabla de F&O); desde Dataverse, la virtual table de una entidad de inventario disponible, con prefijo `mserp_` | (no se sincroniza — se consulta) | Muy alta (cambia por minuto) |
+
+Los nombres de entidad son orientativos: confírmalos en el ambiente o en Learn antes de entregarlos
+como diseño final. Las virtual tables de F&O no existen en Dataverse por defecto; hay que hacer
+disponible cada entidad antes de usarla
+([Learn: Virtual entities overview](https://learn.microsoft.com/dynamics365/fin-ops-core/dev-itpro/power-platform/virtual-entities-overview)).
 
 ## Pasos detallados
 
@@ -87,7 +92,11 @@ Para cada una de las 4 entidades, documenta:
 ### Paso 3 — Diseño de dual-write para Cuentas/Clientes y Pedidos
 
 - Explica qué pasa si un vendedor crea una cuenta nueva en Dataverse antes de que exista en
-  `CustomersV3`: ¿dual-write la crea automáticamente en F&O, o requiere un mapeo previo?
+  `CustomersV3`: ¿dual-write la crea automáticamente en F&O, o requiere un mapeo previo? Pista:
+  piensa en el estado del table map de clientes (**Customers V3**), en la compañía (*company*) del
+  registro, en las tablas dependientes (grupos de clientes, monedas) y en la clave que enlaza los dos
+  lados (**CustomerAccount** ↔ **accountnumber**)
+  ([Learn: Enable table maps](https://learn.microsoft.com/dynamics365/fin-ops-core/dev-itpro/data-entities/dual-write/enable-entity-map)).
 - Para los pedidos de venta, explica en qué momento el pedido deja de ser editable desde Dataverse
   (por ejemplo, una vez que F&O ya generó la factura) y qué error debería mostrarse al vendedor si
   intenta modificarlo después de ese punto.
@@ -173,8 +182,9 @@ Aprobación: mínimo 65/100 y ningún criterio en nivel 0. Nivel profesional/exc
 
 ## Módulos relacionados
 
-- Módulo 60 — Finance & Operations: Procesos ERP, Virtual Tables y Vocabulario Estándar
-- Módulo 34 — Arquitectura de Datos e Integración
+- Módulo 60 — F&O Awareness — Procesos ERP, Seguridad e Integración con CE
+- Módulo 65 — Integración CE + Finance & Operations — Dual-write, DMF y Ownership
+- Módulo 34 — Azure Integration Services Avanzado
 - Lab 69 — F&O Process Mapping: Procesos ERP End-to-End
 - Lab 64 — Capstone Finance & Operations Awareness: Arquitectura Conceptual ERP + CRM
 - Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)

@@ -8,7 +8,7 @@ certifications: ["Arquitectura Power Platform"]
 role: ["Functional Consultant", "Solution Architect"]
 prerequisites:
   - "Módulo 20 revisado: Dynamics 365 CE — Sales y Customer Service"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 69 — F&O Process Mapping: Procesos ERP End-to-End
@@ -74,7 +74,8 @@ facturación y cobro. Para cada paso indica si vive en **Sales**, en **F&O**, o 
 
 ### Paso 2 — Procure-to-Pay (P2P)
 
-Usando la compra de resina plástica, documenta: requisición, orden de compra, recepción de
+(En el catálogo de procesos de Microsoft este proceso se llama *Source to pay*.) Usando la compra
+de resina plástica, documenta: requisición, orden de compra, recepción de
 mercancía, factura del proveedor (three-way match contra la OC y la recepción), y pago. Explica
 qué pasaría si la cantidad recibida no coincide con la orden de compra.
 
@@ -155,7 +156,7 @@ Aprobación: mínimo 65/100 y ningún criterio en nivel 0. Nivel profesional/exc
 
 ## Módulos relacionados
 
-- Módulo 60 — Finance & Operations: Procesos ERP, Virtual Tables y Vocabulario Estándar
+- Módulo 60 — F&O Awareness — Procesos ERP, Seguridad e Integración con CE
 - Módulo 20 — Dynamics 365 CE — Sales y Customer Service
 - Lab 64 — Capstone Finance & Operations Awareness: Arquitectura Conceptual ERP + CRM
 - Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)

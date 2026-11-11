@@ -23,12 +23,30 @@ Verdad vigente de conteos y fases: `CLAUDE.md` y `PROPUESTA_FASES_APRENDER_HACIE
   servía como `application/octet-stream`: la regla `headers` de `public/vercel.json` no se aplicaba (tampoco su
   `Cache-Control`). Corregido: la imagen es ahora el Route Handler `src/app/og.png/route.tsx` (`force-static`), que se
   exporta como `out/og.png`, y `layout.tsx` la declara en `openGraph.images` y `twitter.images`; `public/vercel.json`
-  vuelve a tener solo `cleanUrls`. **Falta** confirmar el `Content-Type: image/png` en producción tras el deploy y pasar
-  la URL por un depurador de vista previa real (LinkedIn Post Inspector o similar), que no se ha hecho.
-- **Hallazgos de la misma comprobación, sin corregir**: (1) todas las páginas comparten el `og:title` y la
-  `og:description` de la home, porque `layout.tsx` los fija y las páginas solo definen `title` (al compartir un módulo se
-  ve el título genérico); (2) no hay `og:url` ni `<link rel="canonical">`; (3) no existen `/robots.txt` ni `/sitemap.xml`
-  (devuelven 404).
+  vuelve a tener solo `cleanUrls`. Confirmado en producción tras el deploy de `7af7eda`: `/og.png` responde
+  `200 image/png`. **Falta** pasar la URL por un depurador de vista previa real (LinkedIn Post Inspector o similar).
+- **SEO por página (2026-11-11)**: `src/lib/seo.ts` (`buildPageMetadata`, `PATHS`) da a cada página `og:title`,
+  `og:description`, `og:url` y canonical propios; `app/robots.ts` y `app/sitemap.ts` (504 URLs, de las mismas fuentes que
+  `generateStaticParams`, en `src/lib/sitemap-entries.ts`); certificados y sandbox RPA con `noindex`. Un test falla si
+  aparece una página nueva que no esté en el sitemap ni marcada `noindex`.
+- **Tildes (2026-11-11)**: 41 cadenas visibles más en 8 archivos de `src/`. Lo que queda sin tilde en `src/` son ids, slugs,
+  términos que comparan los evaluadores de prácticas (`acceptableFixes`) y datos simulados ("Bogota"); no tocarlos.
+- **Pruebas simuladas del resto de la Fase 7 y revisión contra Learn (2026-11-11)**: seis sub-agentes (IA, D365, RPA 67-74,
+  inventario de los niveles 1 a 4, SEO y tildes). Detalle, correcciones y lo no confirmado en
+  `PROPUESTA_FASES_APRENDER_HACIENDO.md` §11.
+
+### Pendiente al retomar (en orden)
+
+1. **Developer Plan (decisión del usuario, urgente)**: desde el 2026-11-15 registrarse ya no crea un ambiente Developer; los
+   no gestionados se suspenden el 2026-12-15 y se borran el 2027-01-15 (Learn, `power-platform/developer/plan`). El curso
+   entero parte de ese ambiente gratuito y **no se ha corregido** (§11.1 de la propuesta).
+2. Reintentar en learn.microsoft.com lo que quedó sin comprobar por el HTTP 429: Módulos 42, 45, 47-50 (verificados solo
+   contra el código fuente de Learn en GitHub), 289 enlaces de los niveles 1 a 4 y las etiquetas de D365 de §11.3.
+3. Labs F&O 93, 94, 96, 97, 98 y 100 y LAB-110/111: revisión completa (siguen con `lastVerified` 2026-09). Prerrequisitos
+   de LAB-93, 64, 66, 70 y 102.
+4. Sandbox RPA (código): modo "Modal inesperado" en el simulador legacy y `legacy-records.json`, que no coincide con la
+   tabla inicial del simulador.
+5. Depurador de vista previa real para `/og.png`.
 
 ## Fase 7 (resto del curso) — registro histórico del 2026-11-01 al 2026-11-05 (ya resuelto)
 

@@ -31,11 +31,12 @@ oportunidad ni cuánto pipeline ponderado existe para el próximo trimestre.
 
 ## Restricciones del proyecto
 
-- **Licenciamiento:** SIT solo tiene licencias Dynamics 365 Sales Enterprise (no Premium). Predictive
-  Opportunity Scoring sí puede configurarse con Enterprise (con un tope de 1,500 registros calificados
-  por mes; sin tope si se actualiza a una licencia superior) — la restricción real de licenciamiento
-  Premium aplica a otras capacidades como Sales Accelerator y Pipeline Intelligence, no a Predictive
-  Opportunity Scoring.
+- **Licenciamiento:** SIT solo tiene licencias Dynamics 365 Sales Enterprise (no Premium). Con
+  Enterprise, Learn incluye el predictive scoring de leads y oportunidades (hasta 1,500 registros al
+  mes) y el Sales accelerator (hasta 1,500 registros conectados a secuencias al mes). Sales Premium
+  quita esos topes ([Learn: capacidades de venta digital en Sales Enterprise](https://learn.microsoft.com/dynamics365/sales/digital-selling)).
+  El forecasting predictivo (columna **Prediction**) exige una licencia específica
+  ([Learn: premium forecasting](https://learn.microsoft.com/dynamics365/sales/configure-premium-forecasting)).
 - **Adopción:** los vendedores usan Outlook todo el día y se resisten a "otra herramienta más" —
   cualquier decisión de diseño debe considerar la integración con Outlook, no solo la app web.
 - **Datos incompletos:** varios leads históricos en el Excel no tienen teléfono ni empresa
@@ -62,15 +63,26 @@ Incluye:
 Fuera de alcance:
 
 - Facturación real, cálculo de impuestos o descuento de inventario (eso vive en ERP/F&O, no en
-  Dynamics 365 Sales — ver Módulo 34).
-- Sales Accelerator y Pipeline Intelligence (mencionar como reto adicional, no obligatorio).
+  Dynamics 365 Sales — ver Módulos 60 y 65 del Nivel D365, o el 34 si hiciste Arquitecto).
+- Sales accelerator y forecasting predictivo (mencionar como reto adicional, no obligatorio).
 - Forecast categories, cuotas por vendedor, gap contra objetivo y governance de pipeline. Esos
   entregables pertenecen al Lab 81.
 
 ## Prerrequisitos
 
 - Haber estudiado el Módulo 20 y completado el Lab 09.
-- Acceso a un ambiente con Dynamics 365 Sales (trial o developer environment).
+- Acceso a un ambiente con Dynamics 365 Sales. Un ambiente Developer **no** sirve: las apps de
+  Dynamics 365 no se pueden instalar en él ([Learn: Developer Plan](https://learn.microsoft.com/power-platform/developer/plan)).
+  Lo habitual es una **trial de 30 días de Dynamics 365 Sales**. Se pide desde la
+  [página de Dynamics 365 Sales](https://www.microsoft.com/dynamics-365/products/sales) con
+  **Try for free** y una **cuenta de trabajo**, y el formulario puede pedir país, teléfono y datos de
+  tarjeta de crédito ([Learn: registrarse en la trial](https://learn.microsoft.com/dynamics365/sales/sign-up-for-sales-trial)).
+  La trial crea su propio tenant, se puede extender una vez otros 30 días y abre la app **Sales trial**.
+  Para seguir este lab, selecciona el enlace **Sales trial** arriba y cambia a **Sales Hub**
+  ([Learn: preguntas frecuentes de la trial](https://learn.microsoft.com/dynamics365/sales/sales-trial-faq)).
+- **Sin trial:** entrega los 7 entregables como diseño (capturas sustituidas por tablas con los valores
+  que configurarías) y marca la entrega como **Simulado**. Los criterios "aplicado automáticamente" y
+  "montos coincidentes" quedan sin verificar: dilo así en tu evidencia.
 
 ## Herramientas necesarias
 
@@ -100,7 +112,12 @@ Fuera de alcance:
 
 ### 2. Catálogo y Price List
 
-- Los 2 productos de la tabla de datos de prueba, con su Price List Item correspondiente.
+- Los 2 productos de la tabla de datos de prueba, con su Price List Item correspondiente. En Sales
+  Hub, el catálogo está en **Change area** → **App Settings** → **Product Catalog**. Learn pide crear
+  primero las unidades y los productos y después la price list. En cada **Price List Item**, en la
+  pestaña **Pricing information**, usa **Pricing Method** = **Currency Amount** y escribe el precio en
+  **Amount** ([Learn: definir precios de productos](https://learn.microsoft.com/dynamics365/sales/create-price-lists-price-list-items-define-pricing-products)).
+  Un producto en borrador no se puede vender: publícalo antes de agregarlo a una Opportunity.
 - Verifica que el precio se toma automáticamente de la Price List Item al agregar el producto a
   una Opportunity, no capturado a mano.
 
@@ -118,8 +135,14 @@ Fuera de alcance:
 
 - Una Quote generada desde la Opportunity de Luis Mendoza (Fabrikam Norte), con las 2 líneas de
   producto y un descuento de línea del 10%.
-- La Quote convertida a Order al marcar la Opportunity como ganada — verifica que el monto total
-  se mantiene consistente entre Quote y Order.
+- La Quote convertida en Order. El orden es al revés de lo que suele suponerse: no se marca primero
+  la Opportunity como ganada. En la Quote, **Activate Quote** y después **Create Order**; en el
+  diálogo **Create Order**, revisa **Date Won** y selecciona **OK**. La Quote se cierra como ganada y
+  el Order recibe sus productos, su price list y su moneda
+  ([Learn: crear un pedido desde una cotización](https://learn.microsoft.com/dynamics365/sales/create-edit-order-sales)).
+  Después cierra la Opportunity con **Close as Won**; Learn pide que todas sus quotes estén cerradas
+  ([Learn: cerrar oportunidades](https://learn.microsoft.com/dynamics365/sales/close-opportunity-won-lost-sales)).
+  Verifica que el monto total se mantiene consistente entre Quote y Order.
 
 ### 6. Dashboard comercial
 
@@ -164,7 +187,7 @@ Aprobación: mínimo 70/100 y ningún criterio en nivel 0. Nivel profesional/exc
 | Error | Causa | Solución |
 |---|---|---|
 | Crear una tabla `sit_Competidor` en vez de usar la entidad estándar Competitor | No revisar las entidades estándar antes de personalizar | Usar Competitor nativo y relacionarlo por N:N a Opportunity |
-| Capturar el precio a mano en la línea de producto | No configurar correctamente la Price List Item | Verificar que el método de cálculo de la Price List Item sea "Monto fijo" y que se aplique automáticamente |
+| Capturar el precio a mano en la línea de producto | No configurar correctamente la Price List Item | Verificar que la Price List Item tenga **Pricing Method** = **Currency Amount** con su **Amount**, que la Opportunity use esa price list y que el producto esté publicado |
 | BPF sin campos obligatorios por etapa | Se configuran las etapas pero no las reglas de avance | Agregar al menos 1 campo obligatorio por etapa antes de activar el BPF |
 | Tratar la ausencia de facturación/impuestos como una brecha del proyecto | No distinguir el alcance de Sales del alcance de ERP/F&O | Documentar explícitamente en el Fit-Gap que esa responsabilidad es de otro sistema, no un gap |
 

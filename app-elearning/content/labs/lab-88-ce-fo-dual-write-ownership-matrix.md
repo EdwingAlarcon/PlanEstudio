@@ -9,7 +9,7 @@ role: ["Solution Architect", "Integration Consultant"]
 prerequisites:
   - "Módulo 65 estudiado: Integración CE + Finance & Operations"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 88 — CE + F&O Dual-write Ownership Matrix
@@ -38,30 +38,37 @@ permisos y prueba de sincronización, la entrega es arquitectura **Simulada**.
 **Licencia y rol mínimo**
 
 Dual-write es una capacidad de integración entre Dataverse y Finance/SCM, no un producto con
-licencia propia — pero exige que ambos entornos (Dataverse y F&O) tengan sus licencias de producto
-activas y estén vinculados entre sí (linked environments). En Dataverse, activar o pausar mapas
-requiere el rol "System Administrator" o un rol equivalente con acceso a la solución Dual-write; en
-F&O, configurar y publicar los flujos de integración que dual-write usa por debajo requiere el rol
-"System administrator" o "Data Management".
+licencia propia — pero exige un ambiente de F&O con su licencia y un ambiente de Dataverse
+enlazados entre sí. Un ambiente Developer de Power Platform no sirve: Learn indica que ese tipo de
+ambiente no admite ninguna carga de Dynamics 365
+([Learn: Unified environment types and templates](https://learn.microsoft.com/power-platform/admin/unified-experience/unified-environment-types-and-templates)).
+Para operar los mapas necesitas permisos de administración en los dos lados; anota los roles
+exactos que te asigne el administrador del ambiente.
 
 **Configuración previa**
 
-- El entorno Dataverse y el entorno F&O deben estar vinculados desde el Centro de administración de
-  Power Platform (Entornos > vincular entorno Finance and Operations).
-- La solución Dual-write instalada en Dataverse, con los mapas base (Customer, Product, etc.)
-  habilitados desde la vista Collaborate/Solutions.
-- Un usuario/cuenta de integración con permisos suficientes en ambos entornos para que los mapas
-  puedan escribir en ambas direcciones.
+- F&O y Dataverse enlazados por la **Power Platform integration**, obligatoria en todo ambiente de
+  F&O desde el 1 de mayo de 2025
+  ([Learn: Power Platform integration](https://learn.microsoft.com/dynamics365/fin-ops-core/dev-itpro/power-platform/overview)),
+  o un ambiente unificado creado con una plantilla de F&O en el Power Platform admin center, donde
+  F&O y Dataverse viven en el mismo ambiente y las soluciones de dual-write vienen preinstaladas.
+- Los table maps se gestionan **desde la app de F&O**, no desde las soluciones de Dataverse:
+  **Workspaces** > **Data management** > mosaico **Dual Write**. Si no ves los mapas o la página
+  sale en blanco, Learn indica que hay que aplicar (**Apply**) las soluciones de dual-write
+  instaladas ([Learn: Enable table maps](https://learn.microsoft.com/dynamics365/fin-ops-core/dev-itpro/data-entities/dual-write/enable-entity-map)).
+- Cada mapa se activa con sus tablas dependientes (el diálogo **Show related table map(s)**) y
+  necesita una clave alternativa en Dataverse que coincida con la clave de F&O.
+- Los usuarios que crean o editan registros sincronizados necesitan permisos en los dos sistemas.
 
 **Fallos frecuentes de licencia, región o configuración de entorno**
 
 | Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
 |---|---|---|---|
-| Los registros no sincronizan y no hay error visible | El mapa de dual-write está sin publicar o quedó pausado tras un error masivo previo | En la solución Dual-write dentro de Dataverse, revisar el estado del mapa y el registro de errores | Republicar el mapa y revisar el registro de errores antes de reactivarlo |
-| La sincronización falla solo para ciertos registros con mensaje relacionado a compañía/legal entity | La compañía (legal entity) de F&O del registro no está incluida en el alcance configurado del mapa | En la configuración del mapa de dual-write, revisar la lista de compañías en su scope | Agregar la compañía faltante al scope del mapa o crear un mapa adicional para ella |
-| Cambios en campos financieros no se reflejan en Sales | El campo no está incluido en el mapeo de campos del mapa, o dual-write no lo soporta de forma nativa | Revisar el "field mapping" del mapa específico en Dataverse | Agregar el campo si es soportado, o diseñar una integración custom para ese campo (ver Paso 3) |
-| Error de "entorno no vinculado" al intentar habilitar un mapa | El vínculo entre el entorno Dataverse y el entorno F&O expiró o nunca se completó | Centro de administración de Power Platform > Entornos > verificar el estado de vínculo con Finance and Operations | Revincular el entorno desde el Centro de administración |
-| Falla la sincronización con mensaje de permiso/licencia insuficiente del usuario de integración | El usuario técnico de dual-write no tiene licencia completa de F&O o le falta el rol de seguridad para las entidades sincronizadas | Centro de administración de Power Platform > revisar la licencia asignada a la cuenta de servicio/integración | Asignar la licencia adecuada y el rol de seguridad correspondiente en F&O |
+| Los registros no sincronizan y no hay error visible | El mapa está en **Paused** o **Not running** (una alerta con umbral puede pausarlo sola) | En F&O, página **Dual Write**: estado del mapa y su registro de actividad | Corregir la causa, volver a **Run** y revisar **Catch-up errors** antes de que pase un día (la cola purga los registros con error a las 24 horas) |
+| La sincronización falla solo para ciertos registros con mensaje relacionado a compañía/legal entity | La compañía (legal entity) del registro no está entre las que se configuraron para dual-write, o la sincronización inicial superó el máximo de 40 legal entities | En la página **Dual Write**, revisar la configuración de legal entities del enlace y **Initial sync details** | Agregar la compañía faltante a la configuración y relanzar con **Re-run execution** |
+| Cambios en campos financieros no se reflejan en Sales | La columna no está en el mapeo del mapa, o su dirección es unidireccional de Dataverse a F&O | En F&O, página **Dual Write**: abrir el mapa y revisar el mapeo y el símbolo de dirección de la columna | Detener el mapa, agregar la columna o cambiar su dirección, guardar y volver a **Run**; si dual-write no la soporta, integración custom (ver Paso 3) |
+| No aparecen los mapas o la página **Dual Write** sale en blanco | Las soluciones de dual-write están instaladas pero sin aplicar, o el ambiente no está enlazado a Dataverse | Revisar si existe la Power Platform integration del ambiente y si las soluciones de dual-write se aplicaron | **Apply** de las soluciones según Learn; si falta el enlace, lo resuelve el administrador del ambiente |
+| La sincronización falla por permisos | El usuario que hace el cambio no tiene permisos en el otro sistema para esa tabla | Leer el error en el registro de actividad del mapa | Asignar el rol de seguridad que falta en F&O o en Dataverse, según el lado que rechazó la escritura |
 
 ## Pasos detallados
 

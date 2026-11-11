@@ -9,7 +9,7 @@ role: ["Consultor Funcional D365 CE", "Marketing Automation Specialist"]
 prerequisites:
   - "Módulo 64 estudiado: Customer Insights - Journeys"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 84 — Customer Insights Real-Time Journey
@@ -33,31 +33,50 @@ prueba, la entrega es **Simulado**.
 
 ## 🔧 Requisitos de tenant y fallos frecuentes
 
+### Sin licencia: cómo se entrega
+
+Tu ambiente Developer de Power Platform no puede instalar Customer Insights - Journeys. Sin trial ni
+licencia, haz los cuatro pasos en papel y marca la entrega como **Simulado**: es una entrega válida.
+La única vía sin pagar para ver la interfaz es la
+[trial de 30 días de Customer Insights](https://learn.microsoft.com/dynamics365/customer-insights/journeys/trial-signup),
+que crea su propio ambiente con Journeys y Data (requisitos de email y límites en el Módulo 64,
+"Antes de empezar"). Con trial, la entrega es **Sandbox real** solo para lo que hayas configurado;
+los envíos reales no entran (dominio de prueba y sin proveedor de SMS).
+
 ### Licencia y rol mínimo
 
-Customer Insights - Journeys tiene licenciamiento propio, separado de Customer Insights - Data y
-de Dataverse: sin esa licencia asignada al usuario, la app no queda disponible aunque el usuario
-tenga acceso al entorno. Dentro de la app, revisa en **Configuración > Seguridad** qué rol tienes
-asignado: diseñar y activar journeys requiere un rol de nivel administrador/diseñador del área de
-marketing (equivalente a "Marketing Manager"); un rol solo de colaborador o lectura no permite
-publicar el journey ni configurar canales.
+Customer Insights - Journeys se licencia **por capacidad a nivel de tenant**, no por usuario: quien ya
+tiene licencia de cualquier app model-driven de Dynamics 365 puede usarlo con el rol adecuado, y a quien
+no la tiene se le asigna una licencia gratuita *Dynamics 365 Customer Insights - Journeys User License*.
+Sin al menos un rol de seguridad nadie entra en la app. Los roles se asignan en el Power Platform admin
+center: **Environments** > el ambiente > **Settings** > **Users + permissions** > **Users** > **Manage
+security roles**. Para diseñar y publicar journeys: **Marketing Professional - Business**; para además
+configurar el área **Settings** (dominios, canales, consentimiento): **Marketing Manager - Business**. Los
+roles "Marketing Professional" y "Marketing Manager" **sin** el sufijo "- Business" son de otra función y
+no sirven aquí ([Learn: usuarios, licencias y roles](https://learn.microsoft.com/dynamics365/customer-insights/journeys/admin-users-licenses-roles)).
 
 ### Configuración previa
 
-- Dominio de envío verificado (SPF/DKIM) en Configuración > Dominios.
-- Al menos un canal de comunicación habilitado (email marketing configurado como mínimo).
-- Formulario o fuente de opt-in que registre el consentimiento del contacto.
-- Contactos de prueba dados de alta con el campo de consentimiento marcado explícitamente.
+- Dominio de envío propio autenticado (registro de propiedad, DKIM y SPF) en **Settings** > **Email
+  marketing** > **Domain authentication**. El dominio preautenticado que termina en `dyn365mktg.com`
+  sirve solo para pruebas ([Learn: autenticar dominios](https://learn.microsoft.com/dynamics365/customer-insights/journeys/domain-authentication)).
+- Al menos un canal habilitado (email como mínimo). El SMS exige contratar y configurar un proveedor
+  (Azure Communication Services, Infobip, LINK Mobility, Telesign, Twilio o Vibes).
+- Un compliance profile con los propósitos del journey (**Settings** > **Customer engagement** >
+  **Compliance profiles**) y una fuente de opt-in (formulario o preference center).
+- Contactos de prueba con un registro de *contact point consent* para su email y el propósito del
+  journey, no solo con los campos `DoNotEmail`/`DoNotBulkEmail` del contacto, que el journey no lee por
+  defecto ([Learn: consentimiento](https://learn.microsoft.com/dynamics365/customer-insights/journeys/real-time-marketing-compliance-settings)).
 
 ### Fallos frecuentes de licencia, región y canal
 
 | Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
 |---|---|---|---|
-| La app Customer Insights - Journeys no aparece disponible o no se puede activar el journey | Usuario sin licencia de Customer Insights - Journeys asignada | Centro de administración de Microsoft 365 > Usuarios activos > Licencias, o Centro de administración de Power Platform > Recursos > Licencias del entorno | Solicitar al administrador del tenant que asigne la licencia correspondiente al usuario |
-| El journey queda "publicado" pero nunca envía el mensaje real | Dominio de envío no verificado (SPF/DKIM) o cuota de envío del trial agotada | Configuración > Dominios: revisar estado de verificación DNS | Completar la verificación del dominio o usar el dominio de prueba provisto, y confirmar la cuota de envío disponible |
-| El canal SMS/WhatsApp del reto adicional no aparece disponible para configurar | Canal no habilitado en el tenant — algunos canales requieren proveedor externo o alta adicional que un trial estándar no incluye | Configuración > Canales: ver si el canal figura como disponible o pendiente de configuración | Documentar el diseño igual, marcando ese paso como "diseñado, no ejecutable en este tenant" si el canal no está disponible |
-| Los contactos de prueba no reciben el mensaje aunque el journey esté activo | El contacto no tiene el consentimiento marcado para ese canal, o la región de envío de marketing no coincide con la región del entorno | Revisar el registro de consentimiento del contacto y la región del entorno en el Centro de administración de Power Platform | Asegurar el consentimiento explícito antes de probar y usar contactos dados de alta en la misma región del entorno |
-| No se puede crear el journey porque la app no está instalada en el entorno aunque el usuario tenga licencia | Customer Insights - Journeys debe instalarse explícitamente por entorno de Dataverse | Centro de administración de Power Platform > Entornos > [entorno] > Aplicaciones de Dynamics 365 | Instalar la app desde el catálogo de aplicaciones del entorno antes de diseñar el journey |
+| No puedes entrar en la app o no ves el área de journeys | Usuario sin rol de seguridad de Customer Insights - Journeys (o, sin ninguna licencia de Dynamics 365, sin la licencia gratuita de usuario) | Power Platform admin center > **Environments** > el ambiente > **Settings** > **Users + permissions** > **Users**: roles del usuario | Pedir al administrador el rol **Marketing Professional - Business** (o **Marketing Manager - Business**) y, si hace falta, la licencia gratuita de usuario |
+| El email no pasa la revisión de errores al ponerlo en vivo | El remitente usa un dominio no autenticado | **Settings** > **Email marketing** > **Domain authentication**: estado de cada registro DNS | Autenticar el dominio propio; para pruebas, usar el dominio preautenticado `dyn365mktg.com` (no para producción) |
+| El canal SMS del reto adicional no se puede usar | El SMS exige un proveedor contratado y configurado (ACS, Infobip, LINK Mobility, Telesign, Twilio o Vibes) | Revisar en **Settings** si hay un proveedor de SMS configurado (anota la ruta tal como aparece) | Documentar el diseño igual, marcando ese paso como "diseñado, no ejecutable en este tenant" |
+| Un contacto de prueba no recibe el email aunque el journey esté en vivo | Con un propósito **Restrictive**, el email del contacto no tiene registro de opt-in en *contact point consent* para ese propósito (o topic) | Abrir el contacto y revisar su consentimiento por punto de contacto para el propósito del email | Registrar el opt-in de prueba (por ejemplo, desde el preference center) antes de volver a probar |
+| No se puede crear el journey porque la app no está instalada en el ambiente | Customer Insights - Journeys se instala por ambiente de Dataverse | Power Platform admin center > **Manage** > **Dynamics 365 Apps** > Customer Insights > **Manage** | Instalar la app en ese ambiente (en una trial de administrador, en un ambiente **Subscription-based Trial** con **Allow D365 Apps**) antes de diseñar el journey |
 
 ## Requisitos no funcionales
 
@@ -76,7 +95,9 @@ Si el evento es de negocio y masivo (por ejemplo, contratos que vencen), la entr
 
 ### Paso 2 — Consentimiento
 
-Documenta propósito, canal, fuente del consentimiento y regla de exclusión.
+Documenta propósito (y su tipo: Commercial o Transactional communication, decidido con Legal),
+modelo de cumplimiento (**Restrictive**, **Non-restrictive** o **Disabled**), canal, fuente del
+consentimiento y regla de exclusión, como en la Microlección 3 del Módulo 64.
 
 ### Paso 3 — Journey
 
@@ -117,7 +138,8 @@ descalificante sin importar el resto del puntaje — es el criterio de cumplimie
 
 | Error | Causa | Solución |
 |---|---|---|
-| Validar consentimiento después de enviar el primer mensaje | Se diseña el journey como flujo lineal sin gate previo | El chequeo de consentimiento debe ser el primer paso ejecutable, antes de cualquier envío |
+| Validar consentimiento después de enviar el primer mensaje | Se diseña el journey como flujo lineal sin gate previo | El journey no tiene un "nodo de consentimiento": el control es el **propósito** de cada mensaje y su modelo de cumplimiento, que se evalúa en cada envío. Decide propósito y modelo antes de redactar el primer email |
+| Confiar en `DoNotBulkEmail` del contacto | Por defecto los real-time journeys no evalúan `DoNotEmail`/`DoNotBulkEmail` | Llevar ese "no" a *contact point consent* o activar **Check contact consent in real-time journeys** en **Settings** > **Overview** > **Feature switches** (Módulo 64) |
 | Journey que re-unifica datos en vez de consumir Data | Se mezcla lógica de CDP dentro del journey | El journey consume segmentos/perfiles ya resueltos por Customer Insights - Data, no recalcula matching |
 | Sin caso de prueba negativo | Solo se prueba el camino feliz (cliente califica, todo bien) | Los 4 casos de prueba (válido, sin consentimiento, email inválido, ya renovado) son obligatorios, no opcionales |
 | Objetivo del journey ambiguo | "Enviar comunicación" no es un objetivo medible | El objetivo debe ser observable (ej. "tasa de renovación del segmento sube X%"), no solo "enviar" |

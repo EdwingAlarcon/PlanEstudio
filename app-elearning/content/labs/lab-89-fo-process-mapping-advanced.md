@@ -8,7 +8,7 @@ certifications: ["Finance & Operations awareness"]
 role: ["Solution Architect", "Consultor Funcional"]
 prerequisites:
   - "Módulo 60 estudiado: F&O Awareness"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 89 — F&O Process Mapping Advanced
@@ -49,7 +49,9 @@ Identifica 5 riesgos de sobrepersonalización en Dataverse.
 
 Redacta 5 decisiones tipo Fit-Gap: una por proceso. Cada decisión debe indicar qué se mantiene en
 F&O, qué se expone a CE, qué no debe recrearse en Dataverse y qué evento dispara integración o
-consulta.
+consulta. Para elegir el mecanismo (dual-write, virtual table, DMF / batch data API o business
+event) usa el criterio de la Microlección 1 del
+[Módulo 65](/nivel/d365/modulo/integracion-ce-fo-dual-write-dmf).
 
 ### Paso 6 — Antipatrones a bloquear
 

@@ -10,7 +10,7 @@ prerequisites:
   - "Módulo 20 estudiado: Dynamics 365 CE — Sales y Customer Service"
   - "Conocimiento básico de casos, órdenes de trabajo, recursos y roles de servicio"
 files: []
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 59 — Field Service: Work Order, Evidencia Móvil y UAT de Servicio en Campo
@@ -36,6 +36,8 @@ Al finalizar este laboratorio habrás diseñado el flujo funcional de Field Serv
 - Dynamics 365 Field Service o diseño funcional equivalente.
 - Dynamics 365 Customer Service para el caso inicial.
 - Hoja de cálculo o Markdown para UAT y matriz de trazabilidad.
+
+> **Licencia y trial:** este lab se entrega completo **en papel**; un ambiente Developer de Power Platform no instala Field Service. Si quieres comprobar pantallas, la trial de Field Service se pide con **Try for free** en la [página de producto](https://www.microsoft.com/dynamics-365/products/field-service): dura 30 días (extensible una vez, salvo si te registraste con un correo personal), caduca tras 14 días sin uso y crea **su propio tenant**, separado de cualquier trial de Customer Service, así que el paso Case → Work Order no se puede recorrer entre dos trials distintas ([Learn: Trial FAQ](https://learn.microsoft.com/dynamics365/field-service/trial-faq)). Si usas la trial, marca tu entrega como "Sandbox real" solo en los pasos que ejecutaste.
 
 ## Datos de prueba
 
@@ -86,7 +88,7 @@ Documenta por qué técnico asignarías a cada caso de prueba.
 
 Para cada uno de los 3 casos de datos de prueba, define su **Incident Type** con:
 
-- Duración estimada (en minutos).
+- Duración estimada (en minutos). Si las service tasks tienen duración, la del Incident Type es la suma de ellas ([Learn](https://learn.microsoft.com/dynamics365/field-service/configure-incident-types)).
 - Characteristics requeridas (skill + nivel, ej. "HVAC nivel 2").
 - 2-3 service tasks del Incident Type para los pasos críticos, con una inspection con preguntas Required en el paso que exige evidencia, y quién revisa antes de Posted que estén completas.
 
@@ -115,7 +117,9 @@ Define la evidencia que el técnico debe capturar:
 | UAT-FS-002 | Excepción | Fabrikam, sin garantía | El sistema marca servicio facturable o requiere aprobación |
 | UAT-FS-003 | Crítico | Litware, prioridad crítica | Booking dentro de ventana de 8 h |
 | UAT-FS-004 | Permisos | Técnico intenta modificar precio | Acción bloqueada por seguridad |
-| UAT-FS-005 | Evidencia incompleta | Técnico cierra sin foto | Cierre bloqueado o marcado para revisión |
+| UAT-FS-005 | Evidencia incompleta | Técnico cierra sin foto | La task con la inspection no se puede marcar como completa (pregunta **Required**) y el supervisor no pasa el Work Order a Posted |
+
+> Learn documenta que una pregunta **Required** sin respuesta impide marcar la task como completa, pero no que una task sin completar bloquee el Work Order ([Learn: inspections](https://learn.microsoft.com/dynamics365/field-service/inspections)); por eso UAT-FS-005 prueba las dos piezas: la inspection y la revisión antes de Posted.
 
 ## Resultado esperado
 
@@ -160,7 +164,7 @@ Agrega una regla para clientes premium: si la prioridad es crítica y la garant�
 
 - Módulo 20 — Dynamics 365 CE — Sales y Customer Service
 - Módulo 38 — Liderazgo Técnico y Gestión de Proyectos
-- Módulo 59 — Field Service Avanzado: Scheduling, Recursos e Incident Types
+- Módulo 59 — Field Service End-to-End — Work Orders, Agreements, Mobile Offline y RSO
 - Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)
 
 ## Competencias desarrolladas

@@ -12,7 +12,7 @@ prerequisites:
   - "Lab 59 completado: Field Service — Work Order y UAT"
   - "Recurso revisado: Rúbricas y Plantillas de Evaluación"
 files: []
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 60 — Capstone Microsoft Business Applications: Servicio Postventa con Customer Insights, Field Service y F&O
@@ -80,6 +80,15 @@ obstáculos a ignorar:
 - Dynamics 365/Customer Insights/Field Service conceptual o tenant de práctica.
 - Recurso `/recursos/rubricas-plantillas`.
 
+> **Licencias y trials:** el lab es de diseño y se entrega completo sin tenant de Dynamics 365. Si
+> quieres comprobar un tramo, las trials de Sales, Customer Service, Customer Insights y Field Service
+> se piden en la [página de trials de Dynamics 365](https://www.microsoft.com/dynamics-365/free-trial),
+> duran 30 días y **cada una crea su propio tenant sin datos compartidos**
+> ([Learn: Field Service trial FAQ](https://learn.microsoft.com/dynamics365/field-service/trial-faq)), así
+> que el flujo completo (segmento → caso → Work Order) no se puede recorrer entre trials. El único paso
+> que puedes construir en tu ambiente Developer es el flujo de Power Automate del entregable 8, sobre
+> tablas propias que imiten Case y Work Order. Declara cada tramo como Simulado o Sandbox real.
+
 ## Datos de prueba
 
 | Cliente | Contrato vence | Valor anual | Caso crítico | Consentimiento email | Activo | SLA |
@@ -143,7 +152,7 @@ Entrega:
 | REQ-002 | Excluir cliente con caso crítico | Diseño CI-02 | UAT-002 | Contacto excluido | Pendiente |
 | REQ-003 | Crear Work Order desde Case | Diseño FS-01 | UAT-003 | Work Order creada | Pendiente |
 | REQ-004 | Agendar técnico por skill y SLA | Diseño FS-02 | UAT-004 | Booking asignado | Pendiente |
-| REQ-005 | Bloquear cierre sin evidencia | Diseño FS-03 | UAT-005 | Checklist incompleto rechazado | Pendiente |
+| REQ-005 | Bloquear cierre sin evidencia (inspection con preguntas Required + revisión antes de Posted) | Diseño FS-03 | UAT-005 | Checklist incompleto rechazado | Pendiente |
 
 ### 6. Casos UAT mínimos
 
@@ -191,6 +200,10 @@ cuáles se sincronizan a Dataverse o Customer Insights — usando el vocabulario
 - Decide, con el criterio de decisión del Módulo 60, si la integración de datos de facturación
   hacia Dataverse debería ser dual-write, DMF o virtual tables — justifica por qué.
 - Explica el impacto en operación, datos y compliance de esa decisión.
+- Si consideras la integración nativa de Field Service con las apps de finance and operations, ten en
+  cuenta que está en desuso y deja de estar disponible después del 28 de febrero de 2027
+  ([Learn: Feature deprecations](https://learn.microsoft.com/dynamics365/field-service/deprecations-field-service)):
+  no la uses como base de un diseño nuevo.
 
 ### 10. Arquitectura y roadmap
 
@@ -254,7 +267,8 @@ journey, matriz de seguridad) se reutilizarían tal cual y cuáles requerirían 
 - Módulo 38 — Liderazgo Técnico y Gestión de Proyectos
 - Módulo 41 — Proyecto Capstone Arquitectura Enterprise
 - Módulo 57 — Dynamics 365 CE Avanzado
-- Módulo 60 — Finance & Operations: Procesos ERP y Virtual Tables
+- Módulo 59 — Field Service End-to-End — Work Orders, Agreements, Mobile Offline y RSO
+- Módulo 60 — F&O Awareness — Procesos ERP, Seguridad e Integración con CE
 - Lab 55 — UAT/Checklist de Go-Live y auditoría de prompts
 - Lab 58 — Customer Insights: segmento y journey
 - Lab 59 — Field Service: Work Order y UAT

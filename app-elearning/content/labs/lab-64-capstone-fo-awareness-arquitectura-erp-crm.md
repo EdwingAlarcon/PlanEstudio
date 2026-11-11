@@ -10,7 +10,7 @@ prerequisites:
   - "Módulo 18 revisado: fundamentos de arquitectura"
   - "Módulo 20 revisado: Dynamics 365 CE — Sales y Customer Service"
   - "Módulo 34 revisado: arquitectura de datos / integración"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 64 — Capstone Finance & Operations Awareness: Arquitectura Conceptual ERP + CRM
@@ -19,9 +19,12 @@ lastVerified: "2026-09"
 
 Razonar sobre una arquitectura híbrida ERP + CRM sin necesidad de un tenant de Finance &
 Operations real: cuándo aplica cada plataforma, cómo se sincronizan los datos, y qué riesgos trae
-la integración. Este capstone es **conceptual**, no de implementación — refleja que la ruta
-Finance & Operations está como especialización en construcción, y su objetivo es que sepas tomar
-decisiones informadas, no configurar F&O.
+la integración. Este capstone es **conceptual**, no de implementación: casi nadie tiene un
+ambiente de F&O (un ambiente Developer de Power Platform no admite apps de Dynamics 365, y una
+trial de F&O la crea el administrador de un tenant de trabajo — ver el aviso de ambiente del
+[Lab 93](/labs/lab-93-fo-finance-setup-walkthrough)). Su objetivo es que sepas tomar decisiones
+informadas, no configurar F&O; si tienes un ambiente, los Labs 93 a 100 llevan los procesos a las
+pantallas reales.
 
 ## Escenario de negocio
 
@@ -74,8 +77,8 @@ Tabla que clasifique al menos 6 procesos del escenario (ejemplo: facturación, p
 inventario, gestión de oportunidades, cotización comercial, seguimiento postventa) indicando si
 pertenecen a F&O, a Dataverse/CE, o a ambos con sincronización. **Para cada proceso que pertenezca
 a F&O, nombra el proceso ERP estándar exacto al que corresponde** (order-to-cash, procure-to-pay,
-record-to-report o inventory-to-deliver — ver Módulo 60) en vez de describirlo solo en tus
-propias palabras.
+record-to-report o inventory-to-deliver — ver Módulo 60; el catálogo de Microsoft llama *Source
+to pay* al procure-to-pay) en vez de describirlo solo en tus propias palabras.
 
 ### 2. Mapa de integración con dirección de dual-write
 
@@ -151,10 +154,11 @@ harías distinto para reducir ese acoplamiento.
 
 ## Módulos relacionados
 
-- Módulo 18 — Fundamentos de Arquitectura de Soluciones
+- Módulo 18 — Arquitectura de Soluciones Power Platform
 - Módulo 20 — Dynamics 365 CE — Sales y Customer Service
-- Módulo 34 — Arquitectura de Datos e Integración
-- Módulo 60 — Finance & Operations: Procesos ERP y Virtual Tables
+- Módulo 34 — Azure Integration Services Avanzado
+- Módulo 60 — F&O Awareness — Procesos ERP, Seguridad e Integración con CE
+- Módulo 65 — Integración CE + Finance & Operations — Dual-write, DMF y Ownership
 - Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)
 - Recurso — Matriz de Competencias (`/recursos/matriz-competencias`)
 

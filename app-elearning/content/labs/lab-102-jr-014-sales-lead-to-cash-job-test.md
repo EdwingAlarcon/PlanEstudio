@@ -52,7 +52,9 @@ limitado.
 ## Herramientas necesarias
 
 - Ambiente Dataverse de práctica con Dynamics 365 Sales (opcional; si no lo tienes, documenta el
-  diseño funcional equivalente).
+  diseño funcional equivalente). Un ambiente Developer no admite apps de Dynamics 365. Si quieres
+  configurarlo de verdad, usa la trial de 30 días de Sales que se describe en el Lab 66 o en el
+  Módulo 61, y créala **antes** de empezar el cronómetro: el registro no cuenta dentro de los 150 minutos.
 - Markdown/Excel para las matrices pedidas.
 - Cronómetro — registra la hora de inicio y de entrega en tu documento final.
 
@@ -94,7 +96,11 @@ enviarla al cliente.
 
 ### Paso 4 — Order e Invoice
 
-Documenta la conversión de Quote ganada a Order, y de Order a Invoice. Define qué validaciones
+Documenta la conversión de Quote ganada a Order, y de Order a Invoice. En Sales Hub, la Quote se
+activa con **Activate Quote** y se convierte con **Create Order**, lo que la cierra como ganada
+([Learn: crear un pedido desde una cotización](https://learn.microsoft.com/dynamics365/sales/create-edit-order-sales)).
+Sales no calcula impuestos por producto: el impuesto de cada línea se introduce a mano. Si tu
+validación depende de impuestos o de crédito, di qué sistema la aporta. Define qué validaciones
 deben pasar antes de convertir (por ejemplo, disponibilidad de producto, crédito del cliente) y qué
 rol autoriza cada conversión.
 

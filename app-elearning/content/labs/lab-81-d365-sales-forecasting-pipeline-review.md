@@ -32,7 +32,10 @@ cumplirá y qué oportunidades requieren intervención.
 ## Herramientas necesarias
 
 - Excel o Markdown para la matriz.
-- Tenant Dynamics 365 Sales si deseas validar forecast real.
+- Tenant Dynamics 365 Sales si deseas validar forecast real. Un ambiente Developer no sirve, porque
+  no admite apps de Dynamics 365. La opción habitual es la trial de 30 días de Sales: cómo pedirla,
+  qué cuenta exige y cómo pasar de la app **Sales trial** a **Sales Hub** están en la ruta con trial
+  del Módulo 61. Sin trial, entrega la matriz y marca el lab como **Simulado**.
 
 ## Gate de ambiente real
 
@@ -44,12 +47,20 @@ configurable, marca la entrega como **Simulado**.
 
 **Licencia y rol mínimo**
 
-El forecasting configurable, las jerarquías comerciales y los AI insights de pipeline requieren
-**Dynamics 365 Sales Enterprise**; con **Sales Professional** el modelo de forecast no está
-disponible o está muy limitado. Para configurar jerarquías y ver el forecast de todo un equipo se
-necesita el rol de seguridad **Sales Manager** (no basta con **Salesperson**, que solo ve sus
-propias oportunidades); crear o publicar el modelo de forecast en sí normalmente requiere además un
-rol administrativo del entorno (System Administrator o un rol equivalente de Sales admin).
+Learn asigna los roles de forecasting a **Dynamics 365 Sales Enterprise** y **Sales Premium**. Con
+**Sales Professional**, compruébalo en la tabla comparativa de licencias antes de prometerlo. El
+forecasting predictivo (columna **Prediction**) exige una licencia específica
+([Learn: premium forecasting](https://learn.microsoft.com/dynamics365/sales/configure-premium-forecasting)).
+Los roles que Learn documenta son estos ([Learn: roles de seguridad de Sales](https://learn.microsoft.com/dynamics365/sales/security-roles-for-sales)):
+
+- **Forecast Manager:** configura, clona, desactiva, ajusta o elimina forecasts.
+- **Forecast User:** ve el forecast y su detalle.
+- **Sales Manager:** incluye forecasting y gestión de productos y objetivos, además de los
+  privilegios de **Salesperson**.
+- **System Administrator:** puede hacer todo lo anterior.
+
+Quién ve un forecast lo decide también el paso **Permissions** de su configuración. Si en tu trial no
+aparece la opción de configurarlo, revisa la primera fila de la tabla.
 
 **Configuración previa**
 
@@ -63,10 +74,10 @@ rol administrativo del entorno (System Administrator o un rol equivalente de Sal
 
 | Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
 |---|---|---|---|
-| No aparece la opción de configurar "Forecasting" en el área de Sales. | Licencia Sales Professional en vez de Enterprise, o el forecast no fue habilitado por un administrador. | Revisar en el Centro de administración de Power Platform qué licencia tiene asignada el usuario y si existe un modelo de forecast creado. | Solicitar licencia Enterprise o pedir a un administrador que habilite/publique el forecast. |
+| No aparece **Forecast configuration** en **App Settings** > **Performance management** de Sales Hub. | El usuario no tiene lectura sobre la entidad de configuración de forecasts, la app es personalizada y no tiene la entrada en el mapa del sitio, o la licencia no incluye la función. | Revisar los roles del usuario y, en el Microsoft 365 admin center, la licencia que tiene asignada. En un trial, comprobar que estás en **Sales Hub** y no en la app **Sales trial**. | Asignar el rol **Forecast Manager** ([Learn: solución de problemas de forecasting](https://learn.microsoft.com/troubleshoot/dynamics-365/sales/troubleshoot-forecast-issues)) o añadir la entrada al mapa del sitio de la app personalizada. |
 | El vendedor solo ve sus propias oportunidades, no las de su equipo. | El rol de seguridad asignado (ej. Salesperson) tiene el privilegio de lectura sobre Opportunity limitado a nivel "Usuario". | Revisar el nivel de acceso (Usuario/Unidad de negocio/Padre-hijo/Organización) del privilegio Read en Opportunity para ese rol. | Asignar el rol Sales Manager o ampliar el nivel de acceso del rol correspondiente. |
-| La jerarquía de gerentes no se refleja en el rollup del forecast. | El campo **Manager** del usuario no está completo o no cuelga del **Top of hierarchy**. | Revisar el campo Manager del usuario y la sección **Preview** del paso **General** de la configuración. | Completar el campo Manager y recalcular el forecast. |
-| El forecast no se ve o no se actualiza. | El forecast no se activó, o su último periodo ya venció. | En **App Settings** > **Performance management** > **Forecast configuration**, comprobar que el estado es **Active** y que los periodos están en **Completed**. | Activarlo con **Activate forecast** en el paso **Activate & add quotas**; tras subir cuotas o hacer ajustes, esperar hasta dos horas. |
+| La jerarquía de gerentes no se refleja en el rollup del forecast. | El campo **Manager** del usuario no está completo o no cuelga del **Top of hierarchy**. | Revisar el campo Manager del usuario y la sección **Preview** del paso **General** de la configuración. | Completar el campo Manager y recalcular el forecast con **Recalculate data** en la página **Forecasts**. |
+| El forecast no se ve o no se actualiza. | El forecast no se activó, o su último periodo ya venció. | En **App Settings** > **Performance management** > **Forecast configuration**, comprobar que el estado es **Active** y que los periodos están en **Completed**. | Activarlo con **Activate forecast** en el paso **Activate & add quotas**. Tras subir cuotas o hacer ajustes, esperar hasta dos horas. Un forecast configurado se recalcula cada 24 horas; si cambiaste oportunidades fuera de la grilla, usar **Recalculate data** ([Learn: ver forecasts](https://learn.microsoft.com/dynamics365/sales/view-forecasts)). Solo puede haber seis forecasts activos a la vez. |
 
 ## Pasos detallados
 

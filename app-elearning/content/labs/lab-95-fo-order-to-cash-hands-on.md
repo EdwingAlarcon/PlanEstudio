@@ -9,7 +9,7 @@ role: ["F&O Practitioner", "Solution Architect"]
 prerequisites:
   - "Lab 93 completado: F&O Finance Setup Walkthrough"
   - "Acceso a un ambiente trial/demo de Dynamics 365 Finance & Supply Chain Management"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 95 — F&O Order-to-Cash Hands-On
@@ -25,6 +25,40 @@ Los nombres de menú y pasos están escritos con base en la terminología docume
 Supply Chain Management/Finance, **sin verificación contra un tenant en vivo al momento de
 escribirse**. Si un nombre de menú difiere de tu ambiente, documenta la diferencia y sigue el flujo
 equivalente — es más probable un cambio de release wave que un error del lab.
+
+## ⚠️ Antes de empezar: cómo se consigue hoy un ambiente de F&O
+
+Verificado en Microsoft Learn en noviembre de 2026. Sin un ambiente así este lab no es ejecutable;
+la alternativa en papel está en el [Módulo 60](/nivel/d365/modulo/finance-operations-procesos-erp).
+
+- **Tu ambiente Developer de Power Platform no sirve.** Learn indica que el tipo de ambiente
+  *Developer* no admite ninguna carga de Dynamics 365; F&O se instala en ambientes *Sandbox*,
+  *Production* o *Trial (subscription-based)* y exige una licencia de F&O asignada
+  ([Learn: Unified environment types and templates](https://learn.microsoft.com/power-platform/admin/unified-experience/unified-environment-types-and-templates)).
+  El trial no se añade a un ambiente que ya tengas: crea uno nuevo.
+- **Trial de administrador (el camino actual):** el administrador de un tenant de trabajo o escuela
+  (no sirve una cuenta personal de Microsoft) busca en el
+  [Microsoft 365 admin center](https://admin.microsoft.com/) > **Marketplace** la oferta gratuita de
+  prueba de *Finance*, *Supply Chain Management*, *Project Operations* o *Commerce*, la adquiere y
+  se asigna la licencia. Después, en el
+  [Power Platform admin center](https://admin.powerplatform.microsoft.com): **Manage** >
+  **Environments** > **New**, tipo **Trial (subscription-based)**, **Next**, **Enable Dynamics 365
+  apps** y la plantilla de esa licencia (por ejemplo **Finance (Preview)**). El despliegue puede
+  tardar una hora ([Learn: Unified admin trials](https://learn.microsoft.com/power-platform/admin/unified-experience/admin-trials)).
+  Esa página no dice cuánto dura el trial: anota la fecha de expiración que te muestre el admin center.
+- **Página pública de pruebas:** a la fecha de esta revisión, en la
+  [página de pruebas gratuitas de Dynamics 365](https://www.microsoft.com/dynamics-365/free-trial)
+  Finance, Supply Chain Management y Commerce solo ofrecen **Request a demo**. Learn ("Before you
+  buy") todavía menciona una prueba de 30 días con registro por correo; no cuentes con ella sin
+  comprobarla.
+- **Lifecycle Services (LCS):** desde el 16 de febrero de 2026 los clientes nuevos de Finance,
+  Supply Chain Management y Project Operations no pueden crear proyectos en LCS y administran sus
+  ambientes en el Power Platform admin center
+  ([Learn: Lifecycle Services project creation freeze](https://learn.microsoft.com/dynamics365/fin-ops-core/dev-itpro/lifecycle-services/lcs-project-creation-freeze)).
+  Si tu empresa o un partner ya tiene un ambiente demo en LCS, sigue sirviendo para este lab.
+- **Datos demo:** los pasos usan las compañías demo de Contoso, como `USMF` (Contoso Entertainment
+  System USA). Al entrar, revisa la compañía activa en la barra superior; si `USMF` no aparece en
+  la lista, tu ambiente se creó sin datos demo: documéntalo y trabaja con lo que haya.
 
 ## Escenario de negocio
 
@@ -97,7 +131,9 @@ Ve a **Accounts receivable > Customers > All customers** para confirmar o crear 
 
 ### Paso 2 — Envío parcial
 
-Desde el pedido de venta, genera el **Packing slip** (**Sales order > Post > Packing slip**).
+Desde el pedido de venta, en el Action Pane, abre la pestaña **Pick and pack** y selecciona
+**Post packing slip** (Learn: *Ship sales orders without warehousing*). En la página de
+contabilización, cambia la cantidad en la columna **Update** de la línea y selecciona **OK**.
 
 - Registra un envío de solo 20 unidades (deliberadamente menos que las 30 pedidas) para simular un
   envío parcial por falta de inventario.
@@ -106,7 +142,9 @@ Desde el pedido de venta, genera el **Packing slip** (**Sales order > Post > Pac
 
 ### Paso 3 — Factura
 
-Desde el pedido de venta, genera la **Invoice** (**Sales order > Invoice > Invoice**).
+Desde el pedido de venta, en el Action Pane, selecciona **Invoice** > **Generate** > **Invoice**
+([Learn: Create and handle payments of customer invoices for sales orders](https://learn.microsoft.com/training/modules/accounts-receivable-daily-procedures-dyn365-finance/4-pay-cust-invoice)).
+En el campo **Quantity** de los parámetros elige **Packing slip** para facturar solo lo enviado.
 
 - Factura únicamente las 20 unidades efectivamente enviadas.
 - Documenta qué pasaría si intentas facturar las 30 unidades originales sin haberlas enviado —
@@ -115,7 +153,9 @@ Desde el pedido de venta, genera la **Invoice** (**Sales order > Invoice > Invoi
 
 ### Paso 4 — Cobro
 
-Ve a **Accounts receivable > Payments > Payment journal**.
+Ve a **Accounts receivable > Payments** y abre el diario de pagos de clientes (en inglés suele
+llamarse **Customer payment journal**; anota el nombre tal como aparece en tu ambiente). Como
+alternativa, Learn describe la página **Enter customer payments** para registrar y liquidar cobros.
 
 - Registra el cobro de la factura contabilizada.
 - Documenta el asiento contable que genera el cobro (banco vs. cuenta por cobrar).

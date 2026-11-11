@@ -28,6 +28,46 @@ nombre de menú difiere de tu ambiente (Project Operations tiene una variante "f
 scenarios" con menús distintos a la variante completa con SCM), documenta la diferencia y sigue el
 flujo equivalente.
 
+## ⚠️ Antes de empezar: cómo se consigue hoy un ambiente de F&O
+
+Verificado en Microsoft Learn en noviembre de 2026. Sin un ambiente así este lab no es ejecutable;
+la alternativa en papel está en el [Módulo 60](/nivel/d365/modulo/finance-operations-procesos-erp).
+
+- **Tu ambiente Developer de Power Platform no sirve.** Learn indica que el tipo de ambiente
+  *Developer* no admite ninguna carga de Dynamics 365; F&O se instala en ambientes *Sandbox*,
+  *Production* o *Trial (subscription-based)* y exige una licencia de F&O asignada
+  ([Learn: Unified environment types and templates](https://learn.microsoft.com/power-platform/admin/unified-experience/unified-environment-types-and-templates)).
+  El trial no se añade a un ambiente que ya tengas: crea uno nuevo.
+- **Trial de administrador (el camino actual):** el administrador de un tenant de trabajo o escuela
+  (no sirve una cuenta personal de Microsoft) busca en el
+  [Microsoft 365 admin center](https://admin.microsoft.com/) > **Marketplace** la oferta gratuita de
+  prueba de *Finance*, *Supply Chain Management*, *Project Operations* o *Commerce*, la adquiere y
+  se asigna la licencia. Después, en el
+  [Power Platform admin center](https://admin.powerplatform.microsoft.com): **Manage** >
+  **Environments** > **New**, tipo **Trial (subscription-based)**, **Next**, **Enable Dynamics 365
+  apps** y la plantilla de esa licencia (por ejemplo **Finance (Preview)**). El despliegue puede
+  tardar una hora ([Learn: Unified admin trials](https://learn.microsoft.com/power-platform/admin/unified-experience/admin-trials)).
+  Esa página no dice cuánto dura el trial: anota la fecha de expiración que te muestre el admin center.
+- **Página pública de pruebas:** a la fecha de esta revisión, en la
+  [página de pruebas gratuitas de Dynamics 365](https://www.microsoft.com/dynamics-365/free-trial)
+  Finance, Supply Chain Management y Commerce solo ofrecen **Request a demo**. Learn ("Before you
+  buy") todavía menciona una prueba de 30 días con registro por correo; no cuentes con ella sin
+  comprobarla.
+- **Lifecycle Services (LCS):** desde el 16 de febrero de 2026 los clientes nuevos de Finance,
+  Supply Chain Management y Project Operations no pueden crear proyectos en LCS y administran sus
+  ambientes en el Power Platform admin center
+  ([Learn: Lifecycle Services project creation freeze](https://learn.microsoft.com/dynamics365/fin-ops-core/dev-itpro/lifecycle-services/lcs-project-creation-freeze)).
+  Si tu empresa o un partner ya tiene un ambiente demo en LCS, sigue sirviendo para este lab.
+- **Datos demo:** los pasos usan las compañías demo de Contoso, como `USMF` (Contoso Entertainment
+  System USA). Al entrar, revisa la compañía activa en la barra superior; si `USMF` no aparece en
+  la lista, tu ambiente se creó sin datos demo: documéntalo y trabaja con lo que haya.
+- **Project Operations tiene su propio trial:** lo canjea el administrador del tenant
+  ([Learn: Sign up for Project Operations trials](https://learn.microsoft.com/dynamics365/project-operations/environment/admin-trials)):
+  dura 30 días con una extensión de 30, se canjea una vez por tenant y crea hasta 3 ambientes; un
+  cuestionario elige el escenario (Core, materiales no almacenados o almacenados) y solo trae datos
+  de configuración, no transacciones. Para este lab necesitas un escenario con finance and
+  operations (no Project Operations Core).
+
 ## Escenario de negocio
 
 **Empresa ficticia:** Northwind Consulting Services (unidad de servicios de Northwind Manufacturing).

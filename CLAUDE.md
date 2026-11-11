@@ -74,6 +74,20 @@ verificado y los 404 de Learn están en `PROPUESTA_FASES_APRENDER_HACIENDO.md` �
 Módulos 75 y 76 (2 evaluadores sin contexto; simulación, no una persona real) y sus hallazgos corregidos; los demás módulos
 de la Fase 7 no tienen prueba simulada registrada. El banco de prácticas tiene una **prueba de contrato** (`interactive-practices-contract.test.ts`: la respuesta de referencia puntúa `correct`, la pista 3 de cada diagnóstico también y repetir el síntoma no puntúa; `evaluateDebug` no cuenta los términos que ya están en el síntoma) y el sandbox `SIT Registro Legacy` tiene un panel cerrado **Registro de actividad (para tu evidencia)** (`rpa-sandbox-activity.ts`) que cuenta los intentos de **Registrar** por solicitud, y los módulos 74 y 75 lo usan como evidencia. Su contenido solo se monta con el panel abierto, para no añadir texto a la página que PAD automatiza.
 
+## Mantenimiento vigente — 2026-11-11
+
+Revisión con seis sub-agentes, sin ampliar contenido ni cambiar conteos: (1) **pruebas simuladas** (modelos, no personas) y
+verificación contra Learn de lo que faltaba de la Fase 7 — IA (42, 45, 47-53, 56), D365 (57-66) y RPA (67-74) con sus labs —
+y cierre parcial del inventario de "no confirmado" de los niveles 1 a 4; correcciones, banco y prácticas actualizados y lo no
+confirmado en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §11. (2) **SEO**: `src/lib/seo.ts` (`buildPageMetadata`; un `openGraph`
+de página reemplaza entero al del layout, por eso toda página pasa por el helper), `robots.ts`, `sitemap.ts` y `/og.png`;
+una página nueva debe entrar en el sitemap o marcarse `noindex` (hay un test que lo exige). (3) **Tildes** en el texto
+visible de `src/`. **Pendiente y urgente — Developer Plan**: desde el 2026-11-15 registrarse ya no crea un ambiente
+Developer y los no gestionados se suspenden el 2026-12-15 y se borran el 2027-01-15; el curso sigue recomendando ese
+ambiente y falta la decisión del usuario sobre qué usar en su lugar (§11.1). Learn devolvió HTTP 429 durante la revisión:
+lo que quedó sin comprobar está listado en `SPRINT_HANDOFF.md`. Validación: `npm run verify` (517 tests) y
+`npm run e2e` 102/102, en serie.
+
 ## Mantenimiento vigente — 2026-11-06
 
 Revisión de la página (sin ampliar contenido): (1) **Peso por página**: el índice de búsqueda ya no viaja serializado en
@@ -85,8 +99,8 @@ el HTML de cada página; se sirve como archivo estático `/search-index.json` (`
 completo. (2) **SEO**: `metadataBase`, `openGraph`, `twitter` y la imagen de vista previa `app/og.png/route.tsx` (Route Handler `force-static` que se exporta como
 `out/og.png`; el 2026-11-11 sustituyó a `opengraph-image.tsx`, que se exportaba sin extensión y Vercel servía como
 `application/octet-stream` porque la regla `headers` de `public/vercel.json` no se aplicaba). Falta pasarla por un
-depurador de vista previa real; `og:title` igual en todas las páginas, sin `og:url`, `robots.txt` ni `sitemap.xml`
-(ver `SPRINT_HANDOFF.md`). (3) **Home**: sin los resúmenes de práctica (viven en `/progreso` y
+depurador de vista previa real; los metadatos por página, `robots.txt` y `sitemap.xml` llegaron el 2026-11-11 (sección
+de arriba). (3) **Home**: sin los resúmenes de práctica (viven en `/progreso` y
 `/mi-ruta`); formato del simulador en `lib/simulator-config.ts`; "7 actividades", "N rutas" y "40 preguntas" salen de su
 fuente. (4) **Higiene**: `handoff-fase7/` retirado (sigue en `bd01f96`), `SPRINT_HANDOFF.md` actualizado y `agent-browser`
 quitado. Las tildes de `i18n.ts`, `mi-ruta` y `workstation.ts` se corrigieron en `1e94d21` (con sus e2e);

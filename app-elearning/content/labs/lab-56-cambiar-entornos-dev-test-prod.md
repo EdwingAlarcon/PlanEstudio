@@ -2,7 +2,7 @@
 id: lab-56
 title: "Cambiar entre Entornos Dev/Test/Prod de Forma Segura"
 level: "N5"
-duration: 75
+duration: 90
 product: ["Power Platform CLI", "Microsoft Entra ID", "Dataverse"]
 certifications: ["Buenas Prácticas"]
 role: ["Developer", "Solution Architect", "Administrator"]
@@ -11,7 +11,7 @@ prerequisites:
   - "Acceso a al menos 2 entornos distintos: tu Developer (o Sandbox) y un Trial con Dataverse como segundo entorno (desde el 15-11-2026 cada usuario solo puede tener un Developer), o la variante en papel"
   - "Módulo 52 estudiado: Power Platform CLI y Conexión Segura al Tenant"
 files: []
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 56 — Cambiar entre Entornos Dev/Test/Prod de Forma Segura
@@ -40,20 +40,24 @@ Developer, Solution Architect, Administrator.
 
 | Ejercicio | Tiempo estimado |
 |---|---|
-| Ejercicio 1 — Crear los 3 perfiles representando Dev/Test/Prod | 20 min |
+| Ejercicio 1 — Crear los perfiles representando Dev/Test/Prod (incluye crear el Trial si aún no lo tienes) | 35 min |
 | Ejercicio 2 — Diseñar y aplicar un procedimiento de verificación previa a cada cambio | 25 min |
 | Ejercicio 3 — Simular un intento de operación contra el entorno equivocado y detectarlo a tiempo | 20 min |
 | Ejercicio 4 — Documentar el procedimiento como estándar de equipo | 10 min |
-| **Total** | **75 min** |
+| **Total** | **90 min** |
 
 ## Tecnologías utilizadas
 
-- Power Platform CLI (`pac auth`, `pac org who`)
+- Power Platform CLI (`pac auth`, `pac env who`; `pac org who` es su nombre anterior y sigue funcionando, según [Learn: pac env](https://learn.microsoft.com/power-platform/developer/cli/reference/env))
 - Al menos 2 entornos distintos (puede simularse Prod con un Trial con Dataverse; no uses un segundo Developer: desde el 15-11-2026 cada usuario solo puede tener uno — ver [Entornos y trials](/recursos/entornos-y-trials))
+
+**Antes de empezar: el segundo entorno.** El Developer Plan no da derecho a crear un Trial. Learn exige una licencia que lo incluya (por ejemplo, la prueba gratuita de Power Apps; un Trial por usuario) y que la política del tenant permita crear ambientes ([Learn: Who can create environments?](https://learn.microsoft.com/power-platform/admin/create-environment#who-can-create-environments)). Con esa licencia, en el [Power Platform admin center](https://admin.powerplatform.microsoft.com): **Manage** > **Environments** > **New**, **Type** = **Trial**, **Create a database for this environment?** = **Yes** (o la opción equivalente que veas), **Next** y **Save** ([Learn: Trial environments](https://learn.microsoft.com/power-platform/admin/trial-environments)). El Trial se deshabilita y se borra a los 30 días. Si no puedes crearlo, haz la variante en papel del final.
+
+Anota en una tabla la **URL** de cada entorno (en el admin center, **Details** del ambiente): es contra esa tabla, no contra el nombre del perfil, como vas a verificar el destino.
 
 ## Ejercicio 1 — Crear los 3 perfiles
 
-Crea (o reutiliza) perfiles de autenticación nombrados explícitamente por etapa, nunca de forma genérica:
+Crea (o reutiliza) perfiles de autenticación nombrados explícitamente por etapa, nunca de forma genérica, uno por cada entorno **distinto** que tengas (cambia las URLs de ejemplo por las de tu tabla):
 
 ```bash
 pac auth create --environment "https://org-dev-XXXX.crm.dynamics.com" --name "sit-solicitudes-dev"
@@ -62,45 +66,53 @@ pac auth create --environment "https://org-prod-XXXX.crm.dynamics.com" --name "s
 pac auth list
 ```
 
-**Validación esperada:** `pac auth list` muestra los 3 perfiles con nombres que identifican inequívocamente la etapa (dev/test/prod) y el proyecto.
+**Con solo dos entornos** (tu Developer y un Trial): crea `sit-solicitudes-dev` contra el Developer y `sit-solicitudes-prod` contra el Trial, que hace de Prod simulado. El perfil de Test lo escribes en papel; **no** lo apuntes a uno de tus dos entornos, porque dos perfiles con etapas distintas y la misma URL son justo el error que este lab enseña a evitar.
+
+**Validación esperada:** `pac auth list` muestra los perfiles con nombres que identifican inequívocamente la etapa (dev/test/prod) y el proyecto, y cada uno con una URL distinta en la columna `Url`.
 
 ## Ejercicio 2 — Procedimiento de verificación previa
 
 Diseña un procedimiento de 3 pasos que se ejecute SIEMPRE antes de cualquier comando de `pac` que exporte, importe o modifique algo:
 
 1. `pac auth select --name <perfil-esperado>` (seleccionar explícitamente por nombre, nunca por índice numérico memorizado).
-2. `pac org who` (verificar que la URL y el nombre de organización coinciden con lo esperado).
-3. Confirmar visualmente que la etapa (dev/test/prod) en el nombre del perfil coincide con la intención de la operación que estás a punto de ejecutar.
+2. `pac env who` (o `pac org who`): comparar la URL que muestra con la de tu tabla para la etapa en la que quieres operar. El nombre del perfil es una etiqueta que pusiste tú; la URL es la verdad.
+3. Confirmar que la etapa de la operación que estás a punto de ejecutar (dev/test/prod) es la de esa URL, y en el comando que modifica algo fijar el destino con `--environment <URL>` para no depender del perfil activo.
 
-Aplica este procedimiento antes de un comando de solo lectura (`pac solution list`) contra cada uno de los 3 perfiles, y documenta la salida de `pac org who` de cada uno.
+Aplica este procedimiento antes de un comando de solo lectura (`pac solution list`) contra cada uno de tus perfiles, y documenta la salida de `pac env who` de cada uno (tapa los datos confidenciales).
 
 ## Ejercicio 3 — Detectar un cambio de entorno erróneo
 
-Simula el error más común: selecciona el perfil `sit-solicitudes-test` pero pretende ejecutar mentalmente una operación pensada para `sit-solicitudes-prod` (sin ejecutar nada destructivo). Sigue tu procedimiento del Ejercicio 2 y confirma que el paso 3 (comparar la etapa esperada contra la real) te hubiera detenido antes de continuar. Documenta en qué paso exacto se habría detectado el error.
+Simula el error más común: selecciona el perfil `sit-solicitudes-dev` pero pretende ejecutar mentalmente una operación pensada para `sit-solicitudes-prod` (sin ejecutar nada destructivo). Sigue tu procedimiento del Ejercicio 2 y confirma que el paso 2 (la URL de `pac env who` no es la de Prod en tu tabla) te hubiera detenido antes de continuar. Documenta en qué paso exacto se habría detectado el error y qué habría pasado si solo hubieras mirado el nombre del perfil.
 
 ## Ejercicio 4 — Documentar el estándar
 
 Escribe el procedimiento de verificación como una checklist de equipo de 3 líneas, lista para incluir en la documentación de onboarding de un nuevo desarrollador de SIT.
+
+## Variante en papel (sin segundo entorno)
+
+Con tres URLs inventadas (una por etapa), escribe los comandos del Ejercicio 1, la salida que esperarías de `pac auth list` (columnas `Index`, `Active`, `Name`, `Url`) y, para el Ejercicio 3, qué valor de `Url` te habría hecho detenerte. Usa [Learn: pac auth](https://learn.microsoft.com/power-platform/developer/cli/reference/auth) para comprobar cada parámetro. Los Ejercicios 2 y 4 se hacen igual.
 
 ## Errores Comunes
 
 | Error | Causa | Solución |
 |-------|-------|----------|
 | Seleccionar el perfil por índice numérico (`--index 2`) en vez de por nombre | El índice puede cambiar si se agregan/eliminan perfiles con el tiempo | Seleccionar siempre por `--name` explícito |
-| Confiar en la memoria para saber qué perfil está activo | No verificar `pac org who` antes de cada operación | Aplicar el procedimiento de 3 pasos sin excepciones, sin importar la prisa |
+| Confiar en la memoria para saber qué perfil está activo | No verificar `pac env who` antes de cada operación | Aplicar el procedimiento de 3 pasos sin excepciones, sin importar la prisa |
+| Dos perfiles de etapas distintas apuntan a la misma URL | Se creó un perfil "de Test" contra el Developer por no tener un tercer entorno | Un perfil por entorno real; la etapa que falte, en papel |
+| No poder crear el Trial | El Developer Plan no incluye derecho a Trial, o el tenant no permite crear ambientes | Activar la prueba gratuita de Power Apps o pedir el ambiente al administrador; si no, variante en papel |
 | Usar el mismo nombre de perfil para Dev y Test de proyectos distintos | Convención de nombres poco específica | Incluir el nombre del proyecto y la etapa en cada nombre de perfil |
-| Ejecutar el primer comando del día sin verificar el perfil activo | Asumir que el perfil de la sesión anterior sigue siendo el correcto | Verificar `pac org who` al inicio de cada sesión de trabajo, no solo antes de comandos destructivos |
+| Ejecutar el primer comando del día sin verificar el perfil activo | Asumir que el perfil de la sesión anterior sigue siendo el correcto | Verificar `pac env who` al inicio de cada sesión de trabajo, no solo antes de comandos destructivos |
 
 ## Criterios de Validación
 
-- [ ] Creé 3 perfiles de autenticación con nombres explícitos por proyecto y etapa
+- [ ] Creé un perfil de autenticación por cada entorno real (al menos 2), con nombres explícitos por proyecto y etapa y URLs distintas, y escribí en papel la etapa que me faltó
 - [ ] Apliqué el procedimiento de verificación de 3 pasos antes de operar contra cada perfil
 - [ ] Identifiqué en qué paso se habría detectado un cambio de entorno erróneo simulado
 - [ ] Documenté el procedimiento como checklist de equipo de onboarding
 
 ## Evidencia esperada
 
-- Los 3 perfiles de autenticación creados con nombres explícitos (proyecto + etapa)
+- La salida de `pac auth list` con tus perfiles (nombres explícitos de proyecto + etapa, URLs tapadas si son confidenciales) y la tabla de URLs esperadas por etapa
 - Procedimiento de verificación de 3 pasos documentado como checklist de onboarding
 - Análisis escrito de en qué paso se habría detectado el cambio de entorno erróneo simulado
 

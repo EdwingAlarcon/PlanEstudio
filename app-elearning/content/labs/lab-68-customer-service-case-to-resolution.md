@@ -10,7 +10,7 @@ prerequisites:
   - "Módulo 20 estudiado: Dynamics 365 CE — Sales y Customer Service"
   - "Conocimiento de colas, SLA, entitlements y Knowledge Base"
 files: []
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 68 — Dynamics 365 Customer Service: Case-to-Resolution Avanzado
@@ -51,11 +51,18 @@ usa este lab para evidenciar el caso end-to-end y el Lab 82 para definir la pol�
 
 - Entender la diferencia entre `Case`, `Queue`, `Entitlement` y `SLA KPI`.
 - Conocer el concepto de Knowledge Article y su ciclo de vida (Draft → Approved → Published, con Expiration Date).
-- Haber revisado la configuración de Unified Routing del Módulo 20 (Actividad 20.4).
+- Haber revisado la configuración de Unified Routing del Módulo 20 (Microlección 5).
 
 ## Herramientas necesarias
 
-- Dynamics 365 Customer Service (o diseño funcional equivalente) y Customer Service Workspace.
+- Dynamics 365 Customer Service (o diseño funcional equivalente) y **Copilot Service workspace** (la
+  app del representante; Copilot Service admin center para la configuración).
+- **Aviso de licencia:** este lab es de diseño y se puede entregar completo sin tenant. Si quieres
+  ver alguna pieza funcionando, un ambiente Developer de Power Platform no sirve (no instala apps de
+  Dynamics 365); usa la trial de Dynamics 365 Customer Service del Módulo 62 (30 días, extensible una
+  vez, caduca tras 14 días seguidos sin uso y crea su propio tenant —
+  [Learn: Trial FAQ](https://learn.microsoft.com/dynamics365/customer-service/implement/trial-faq)).
+  El autoservicio del Paso 7 (Power Pages) y Field Service quedan como diseño.
 - Power Automate para la notificación opcional de escalamiento.
 - Hoja de cálculo o Markdown para el dashboard y la matriz UAT.
 
@@ -78,7 +85,10 @@ Para cada registro de la tabla de datos de prueba, define:
 - **Prioridad** y cómo esta prioridad afecta el KPI de SLA aplicado (a mayor prioridad, ventana
   más corta).
 - Validación del **Entitlement**: ¿el cliente tiene casos disponibles en su plan? ¿qué pasa si
-  el entitlement está agotado?
+  el entitlement está agotado? En el producto lo decide **Restrict based on entitlement terms**:
+  en **Yes** no se pueden crear casos con **Remaining Terms** por debajo de cero; en **No** se crean
+  y el saldo queda negativo
+  ([Learn: entitlements](https://learn.microsoft.com/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer)).
 
 ### Paso 2 — Colas públicas y privadas, asignación y enrutamiento
 
@@ -86,7 +96,8 @@ Para cada registro de la tabla de datos de prueba, define:
   equipo, cualquier agente puede tomar un caso) o privadas (solo agentes asignados explícitamente
   pueden verla), y justifica la elección para cada una.
 - Describe la regla de enrutamiento de Unified Routing que llevaría cada caso a su cola según
-  `Case Type` + `Prioridad`, reutilizando el workstream `WS_Email_Soporte` del Módulo 20.
+  `Case Type` + `Prioridad`, reutilizando el workstream de tipo **Record** `WS Casos Soporte` del
+  Módulo 20 (Microlección 5).
 - Define el criterio de asignación dentro de la cola: por skill (`SQL_Server`, `SAP`, `Hardware`),
   por carga de trabajo del agente, o mixto — y qué pasa si ningún agente tiene la skill requerida.
 
@@ -97,6 +108,10 @@ Para cada registro de la tabla de datos de prueba, define:
 - Explica exactamente cuándo se **pausa** el KPI de resolución (ej. al cambiar el caso a
   "Esperando respuesta del cliente") y cuándo se **reanuda** (al recibir respuesta del cliente),
   y por qué sin esto el caso Fabrikam Norte aparecería incorrectamente como violación de SLA.
+  Nombra las piezas de configuración: **Allow Pause and Resume** en el SLA item (se decide al
+  crearlo; no se puede cambiar tras el primer guardado) y el estado "on hold" en **Service
+  Configuration Settings**, o condiciones de pausa propias con **Override Criteria**
+  ([Learn: configurar SLA](https://learn.microsoft.com/dynamics365/customer-service/administer/define-service-level-agreements)).
 - Indica qué acción dispara el sistema cuando un KPI llega a **Warning** (ej. 80% del tiempo
   consumido) vs. cuando llega a **Failure**.
 
@@ -138,7 +153,7 @@ insumo del ejemplo:
   un Work Order si el incidente técnico requiere visita en sitio (sin diseñar el Work Order en
   detalle — solo el punto de transición Case → Work Order, referenciando el Lab 59).
 - **Copilot para agentes (conceptual):** menciona un control de gobierno (de los ya definidos en
-  el Módulo 20, Actividad 20.7) que aplicarías a la resolución de estos 3 casos si el agente usara
+  el Módulo 20, Microlección 5, paso 2) que aplicarías a la resolución de estos 3 casos si el agente usara
   Copilot para redactar la respuesta.
 
 ### Paso 8 — UAT del ciclo case-to-resolution

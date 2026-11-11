@@ -420,3 +420,141 @@ carpeta retirada de `master` el 2026-11-06; se recupera con `git show bd01f96:ha
 hubo informes). Los Módulos 75 y 76 no se ejecutaron en PAD ni en un tenant: los pasos se
 contrastaron contra el código real del sandbox (`rpa-sandbox/legacy-app`) y contra Learn. Las prácticas interactivas nuevas
 se comprobaron con los evaluadores del motor (respuesta correcta = `correct`; pista 3 de cada diagnóstico = 100).
+
+## 11. Pruebas simuladas del resto de la Fase 7 y revisión contra Learn (2026-11-11)
+
+Trabajo repartido entre seis sub-agentes (Opus) con archivos disjuntos. Las pruebas son **simulaciones hechas por modelos,
+no personas reales**. Cada corrección de contenido se apoyó en una página oficial abierta ese día; lo que no se pudo
+confirmar quedó en redacción neutra o sin tocar. El Caso Real de todos los módulos sigue idéntico (comparado por hash en IA
+y D365). Conteos sin cambios: 76 módulos, 76 labs, 891 preguntas, 239 prácticas interactivas.
+
+**Límite de esta revisión:** learn.microsoft.com devolvió HTTP 429 (límite de peticiones) durante buena parte de la sesión.
+Los Módulos 42, 45, 47, 48, 49 y 50 se verificaron contra el código fuente oficial de Learn en GitHub (MicrosoftDocs), no
+contra la página publicada; 289 enlaces de los niveles 1 a 4 (casi todos de Copilot Studio) y varias etiquetas de D365
+quedaron sin comprobar por ese motivo.
+
+### 11.1 Hallazgo que afecta a todo el curso: el Developer Plan cambia el 2026-11-15 (SIN RESOLVER)
+
+Confirmado en <https://learn.microsoft.com/power-platform/developer/plan> (ms.date 2026-10-26):
+
+- Desde el **2026-11-15**, registrarse en el Power Apps Developer Plan ya no crea un ambiente Developer y no se pueden crear
+  ambientes Developer no gestionados. Cada usuario puede crear un solo ambiente Developer **gestionado**, y ejecutar activos
+  en él exige licencia premium (los derechos de Managed Environments no vienen en el Developer Plan).
+- Los ambientes Developer no gestionados existentes se **suspenden desde el 2026-12-15 y se borran desde el 2027-01-15**,
+  con o sin actividad.
+- Salidas que da Learn: convertir el ambiente en gestionado (requiere licencia y administrador), usar un ambiente Trial
+  estándar para probar funciones premium, o exportar las soluciones a otro ambiente (por ejemplo un sandbox).
+
+El curso entero parte de "crea tu ambiente Developer gratuito" (preparar entorno, `workstation.ts`, Módulo 1 y siguientes,
+Módulo 57; unas 90 páginas de contenido y recursos lo mencionan). **No se ha corregido**: hace falta decidir qué ambiente
+recomienda el curso a un alumno sin licencia de organización, y eso es una decisión de alcance del usuario. La página del
+anuncio (`important-changes-coming`) devolvió 429 y no se leyó.
+
+### 11.2 Nivel RPA, Módulos 67 a 74 y LAB-104 a LAB-112
+
+Contrastado con Learn y con el código de los dos sandboxes. Sin obstáculos en 67, 69, 71 y 72.
+
+- **M70**: dos errores de lógica. Cada **Set variable** sobrescribía `cfg_Motivo` (el log habría dicho "falta columna
+  currency" y no lo prometido) y la variable no se limpiaba en cada vuelta del bucle. Ahora las condiciones acumulan texto y
+  el bucle empieza vaciándola.
+- **M73 y M74**: usaban **Tab URL** parcial. Con **By URL**, PAD busca primero la coincidencia exacta durante la mitad del
+  Timeout, así que el flujo funcionaba con unos 30 s de espera por ejecución. Ahora usan la URL completa (y también
+  IP-RPA-020).
+- **M68**: se quitó "hasta 50 máquinas por grupo"; Learn da 300 en *Manage machine groups* y 50 en *Manage machines*.
+- **LAB-105**: el CSV se lee con **Read from CSV file**, no con **Launch Excel**; el "archivo bloqueado" se reproduce
+  abriendo el libro a mano.
+- **LAB-107**: el ejercicio 5 era imposible (el simulador legacy no tiene modo de modal inesperado); ahora el alumno lo
+  provoca dejando abierto **Registro confirmado**. `legacy-records.json` se presenta como lote mixto, porque no coincide con
+  la tabla inicial del simulador.
+- **LAB-109**: atado a SIT Registro Legacy y al panel **Registro de actividad**; el conteo de reintentos sale del log propio;
+  **Terminate process** por **Process ID**.
+- **LAB-112**: nota de licencia premium para la conexión cloud flow → desktop flow, con variante en papel.
+
+Sin confirmar: que **Move file(s)** falle con el libro abierto en Excel (LAB-105) y si las acciones web escriben con el
+diálogo de confirmación encima (LAB-107); hace falta PAD real. LAB-110 y LAB-111 no se volvieron a verificar. Propuestas
+de código no aplicadas: modo "Modal inesperado" en el simulador legacy y renombrar `legacy-records.json`.
+
+### 11.3 Nivel D365, Módulos 57 a 66 y sus labs (persona simulada "Valeria")
+
+- **Trials**: las apps de Dynamics 365 no se instalan en un ambiente Developer. Cada trial (Sales, Customer Service,
+  Contact Center, Field Service, Customer Insights) crea su propio tenant, dura 30 días con una extensión y caduca tras 14
+  días sin uso; con correo personal no hay acceso al admin center. Finance, SCM y Commerce no tienen trial de autoservicio.
+  Avisado en los 10 módulos y sus labs, con variante en papel.
+- **M61**: la cuota se sube **después** de activar el forecast (el módulo decía antes); Sales Enterprise sí incluye Sales
+  accelerator y predictive scoring con cupo mensual; límites y rol **Forecast Manager** añadidos.
+- **M58 y M64**: rutas de perfilado y del conector de Customer Insights; la creación de segmentos con Copilot se retiró el
+  2026-11-02; Journey Creation Agent en preview.
+- **M59 y M66**: RSO es un add-in de pago; la app móvil Xamarin está retirada; la integración nativa de Field Service con
+  F&O deja de estar disponible tras el 2027-02-28.
+- **M62 y M63**: al SLA item le faltaban **KPI** y **Success Conditions**; nombre actual **Copilot Service admin center**.
+- **M60 y M65**: avisos de ambiente F&O; dual-write (página en blanco, límites, **Skip initial sync**).
+- **Labs con errores objetivos corregidos**: LAB-66 (Quote → Order estaba al revés y decía que un Developer servía para
+  Sales), LAB-67 (regla de unificación imposible con los datos), LAB-83 (add-ons inventados), LAB-86, LAB-87 y LAB-113
+  (rutas o jobs inexistentes), LAB-90 (pedía todo en un mismo tenant), LAB-77 (confundía Business Hours con Pause/Resume) y
+  LAB-88 (los mapas de dual-write se gestionan en F&O). En total se tocaron 30 labs.
+- **Banco y prácticas actualizados**: pregunta de forecast del M61, pregunta de virtual tables del M60 (las virtual tables
+  de F&O también admiten escritura), explicación de URS del M59, prerrequisito de IP-D365-016 y ruta de IP-D365-008;
+  `SOLUCIONES_REFERENCIA_CAPSTONES.md` (LAB-77).
+
+Sin confirmar: detalles de las trials (idioma, si incluyen RSO o capacidad de Copilot Studio, rol Forecast Manager del
+usuario de trial, duración y datos de la trial de administrador de F&O); etiquetas de Field Service (**Requirement pane**,
+**Schedule Assistant Filter**), de route-to-queue en Contact Center, del proveedor de SMS y varias rutas de F&O;
+`mserp_inventoryonhandaientity` (LAB-70); "MB-280 retirado el 2026-07-31" (fuente Pearson VUE, no Learn) y "PL-200
+(retirado 31 ago 2026)" en el frontmatter de LAB-77 y LAB-102. Los labs F&O 93, 94, 96, 97, 98 y 100 solo recibieron el
+aviso de ambiente. Prerrequisitos de labs no tocados: LAB-93 (cita un trial que ya no existe), LAB-64, LAB-66, LAB-70 y
+LAB-102.
+
+### 11.4 Nivel IA, Módulos 42, 45, 47 a 53 y 56, y Labs 45, 51, 52, 54 y 56 (persona simulada "Sofía")
+
+El código de los módulos se ejecutó con Node y los YAML se pasaron por actionlint; `pac` no está instalado.
+
+- **M45**: la documentación de Codex se mudó (`developers.openai.com/codex` redirige a `learn.chatgpt.com`); `/memory` en
+  vez de `/context` para ver el `AGENTS.md`.
+- **M48 y M50**: la regla de rama no se aplica al administrador del repo, así que el alumno, dueño de su repo, podía
+  saltársela; añadido **Do not allow bypassing the above settings**. Versiones de Node y de las actions actualizadas.
+- **M49**: el paso "rompe a propósito" no hacía fallar ninguna prueba; corregido. Añadido el ajuste de entrenamiento de
+  modelos de Copilot en planes individuales; la pestaña se llama **Security and quality**.
+- **M52**: el Trial exige una licencia con derecho a trial, que el Developer Plan no da; ruta del application user.
+- **M53**: el client secret no debe usarse en producción; el script comprueba `respuesta.ok` y maneja 429 con `Retry-After`.
+- **M56**: concepto de `async/await` y `fetch`, que el M53 necesita.
+- **LAB-45** reescrito (medía desde `createdon` y obligaba a esperar 3 días); **LAB-51** pedía scripts que no existen en el
+  repo del alumno; **LAB-56** pedía tres perfiles con dos ambientes posibles y anunciaba una variante en papel que no existía.
+
+Sin confirmar: casilla de base de datos al crear un Trial (Learn tiene dos textos), salida exacta de `pac env who`,
+**Advanced parameters** en **Update a row** (LAB-45), **Include default branch** en el ruleset y las afirmaciones de AI
+Builder del reto del M42. Propuestas no aplicadas: IP-IA-020 (diffstat del README, 4 o 3 líneas) e IP-QRY-002
+(prerrequisito "Módulo 53").
+
+### 11.5 Inventario de "no confirmado" de los niveles 1 a 4 (sustituye a la parte de esos niveles en §9)
+
+**Confirmadas y ya precisas en el texto**: diálogo **Create Table** de Enter data (M12); **Enable Plugin steps and flows
+included in the solution** (M16); casilla **Enable dead lettering on message expiration** (M34); alerta de Activator desde
+un visual (M35); ruta de Conditional Access hasta **Select resources** y columnas de `DataverseActivity` (M36).
+Confirmadas sin cambio: licencia y My workspace del LAB-06, perfil de seguridad de columna, comportamientos de relación,
+**Get more components**, sintaxis de lookup en Add a new row, Agent flow, Adaptive Card con **Formula**, Run after, process
+mining y campos del modelo de facturas.
+
+**Siguen sin poder confirmarse:**
+
+- **M1-M8 / LAB-06**: rango de fechas del Financial sample; botón que confirma Mark as date table; contenido dinámico Row
+  ID; **Show all** en Update a row; FormattedValue de un Lookup en el trigger; botones de Power Query Online; título del
+  aviso de detección de duplicados; recuento de filas en Table view; valores de Choice que empiezan en 100000000.
+- **M9-M17**: etiqueta "Data Step" y nivel de acceso del BPF; combinación de varios perfiles de seguridad de columna; botón
+  para salir de View as; valor por defecto de una 1:N nueva; DateAdd con un valor en blanco; estado "Ready" del
+  conocimiento subido; salida Number en un agent flow; pantalla tras Open classic experience; entrada Regarding; **Add
+  existing** en la biblioteca de componentes; `first()` sobre un arreglo vacío; propiedad Lock de las business rules; Rollup
+  en la interfaz moderna.
+- **M18-M30**: etiquetas de operador de Condition en el diseñador nuevo; entidad de numeración con SOL-001000;
+  `User().Email` = internalemailaddress; interfaz de prueba de facturas en el AI hub.
+- **M31-M41 / labs**: nombres lógicos del CoE y páginas del .pbit; cifras del CSV de process mining; qué hacer si Process
+  mining no aparece; ruta ABFS desde las Properties del lakehouse.
+- **Para retirar**: el parámetro de ruta de "Import from sample" (el M14 usa ya una URL fija).
+
+### 11.6 Cambios de la aplicación hechos el mismo día
+
+- **Vista previa al compartir**: la imagen se sirve como `/og.png` (antes Vercel la entregaba como
+  `application/octet-stream`); cada página emite `og:title`, `og:description`, `og:url` y canonical propios
+  (`src/lib/seo.ts`); `robots.txt` y `sitemap.xml` generados de las mismas fuentes que las rutas; certificados y sandbox RPA
+  con `noindex`.
+- **Tildes**: 41 cadenas visibles en 8 archivos de `src/`. No se tocaron los términos que comparan los evaluadores de
+  prácticas ni los datos simulados (por ejemplo "Bogota").

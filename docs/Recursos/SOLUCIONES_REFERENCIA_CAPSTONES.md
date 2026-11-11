@@ -31,7 +31,7 @@
 
 ### Solucion de referencia resumida
 
-El caso Premium critico con entitlement casi agotado no debe bloquearse automaticamente. La solucion recomendada es crear el caso, marcarlo para revision de supervisor y registrar consumo/override en la matriz de entitlement. Para el caso del viernes 17:00, el SLA debe pausarse fuera del calendario laboral salvo que el cliente tenga soporte 24/7 documentado. El dashboard no solo muestra conteos: debe indicar que C-005 requiere accion inmediata del supervisor.
+El caso Premium critico con entitlement casi agotado no debe bloquearse automaticamente. La solucion recomendada es crear el caso, marcarlo para revision de supervisor y registrar consumo/override en la matriz de entitlement. Para el caso del viernes 17:00, el reloj del SLA no cuenta fuera del horario del calendario laboral asignado como Business Hours al SLA item (no es una pausa: la pausa es Allow Pause and Resume para estados de espera), salvo que el cliente tenga soporte 24/7 documentado con un calendario 24 x 7 support. El dashboard no solo muestra conteos: debe indicar que C-005 requiere accion inmediata del supervisor.
 
 ### Senales de alerta
 

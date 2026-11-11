@@ -9,7 +9,7 @@ role: ["Data Specialist", "Consultor Funcional D365 CE"]
 prerequisites:
   - "Módulo 58 estudiado: Customer Insights - Data"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 85 — Customer Insights Data Unification
@@ -35,30 +35,52 @@ fuentes conectadas, la entrega es **Simulado**.
 
 ## 🔧 Requisitos de tenant y fallos frecuentes
 
+### Sin licencia: cómo se entrega
+
+Tu ambiente Developer de Power Platform no puede instalar Customer Insights - Data. Sin trial ni
+licencia, haz los seis pasos en papel y marca la entrega como **Simulado**: es una entrega válida.
+La única vía sin pagar es la
+[trial de 30 días de Customer Insights](https://learn.microsoft.com/dynamics365/customer-insights/data/trial-signup):
+crea su propio ambiente con datos de ejemplo que no se pueden borrar, admite hasta 3 GB de datos y no
+permite usar tu propio Azure Data Lake Storage para la salida
+([Learn: FAQ de la trial](https://learn.microsoft.com/dynamics365/customer-insights/data/trial-faq)). Los requisitos
+de email están en el Módulo 58 ("Antes de empezar").
+
 ### Licencia y rol mínimo
 
-Customer Insights - Data tiene licenciamiento propio, separado de Customer Insights - Journeys y
-de Dataverse. Dentro del workspace de la app, el rol se asigna a nivel de aplicación (no como rol
-de seguridad de Dataverse): crear fuentes de datos y ejecutar la unificación requiere un rol de
-tipo administrador/colaborador del workspace; un usuario con rol de solo lectura puede ver
-segmentos ya publicados pero no configurar matching ni fuentes.
+Customer Insights - Data necesita una licencia de Dynamics 365 Customer Insights en el tenant (o la
+trial). Dentro de la app, el acceso lo da un **rol de Customer Insights - Data** que asigna un
+administrador en **Settings** > **Permissions** > **Users**; cada rol se mapea a roles de seguridad de
+Dataverse que no se deben tocar ([Learn: permisos](https://learn.microsoft.com/dynamics365/customer-insights/data/permissions);
+[Learn: roles](https://learn.microsoft.com/dynamics365/customer-insights/data/user-roles)):
+
+- **Viewer:** ve tablas, segmentos, exports y el estado del sistema; no configura nada.
+- **Contributor:** además, unificación, actividades, relaciones, segmentos, medidas y exports sobre
+  conexiones compartidas. Puede ver y refrescar fuentes, pero **no crear ni editar una fuente de Power
+  Query** (por ejemplo, el CSV legado).
+- **Admin:** además, crea y edita fuentes de Power Query, conexiones, permisos y la programación de
+  refresco del sistema (página **System**). Recibe automáticamente el rol System Administrator del
+  ambiente de Dataverse.
 
 ### Configuración previa
 
-- Entorno de Dataverse asociado y aprovisionado para Customer Insights - Data.
+- Ambiente de Dataverse asociado y aprovisionado para Customer Insights - Data.
 - Credenciales o conexión válida a cada fuente externa (CSV, base legada, Customer Service).
-- Rol de administrador del entorno disponible para el aprovisionamiento inicial de la app.
-- Workspace de Power BI creado si se van a publicar las medidas fuera de Customer Insights - Data.
+- Un usuario con rol **Admin** para crear la fuente de Power Query del CSV y las conexiones de export.
+- Para reportes en Power BI, Learn recomienda leer las tablas de Customer Insights - Data que ya están en
+  Dataverse (prefijo `msdynci`) en lugar de un export
+  ([Learn: exports](https://learn.microsoft.com/dynamics365/customer-insights/data/export-destinations)).
 
 ### Fallos frecuentes de licencia, región y fuentes
 
 | Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
 |---|---|---|---|
-| No se puede aprovisionar o crear el workspace de Customer Insights - Data | Usuario sin licencia de Customer Insights - Data asignada, o sin rol de administrador del entorno | Centro de administración de Power Platform > Recursos > Licencias del entorno, y rol del usuario en el entorno (System Administrator) | Solicitar a un administrador del tenant que asigne la licencia y realice o autorice el aprovisionamiento |
-| La fuente CSV/legado no se conecta o falla la ingesta | Conector no soportado directamente, o credenciales/gateway de datos local no configurados | **Data** > **Data sources**: revisar el estado de la conexión y el mensaje de error del último refresh | Subir el archivo a un storage soportado (ej. Azure Blob/SharePoint) o configurar el gateway de datos local si la fuente es on-premises |
-| El segmento no se puede activar hacia Customer Insights - Journeys o Sales | La app destino no está instalada en el mismo entorno de Dataverse | Centro de administración de Power Platform > Entornos: confirmar que ambas apps comparten entorno | Reconfigurar la unificación en el entorno correcto o instalar la app destino antes de activar el segmento |
-| Los datos no se actualizan con la frecuencia esperada | Límite de frecuencia de refresh del plan/licencia contratado, o throttling propio de un trial | En la configuración de actualización programada de Customer Insights - Data: revisar última ejecución y frecuencia permitida | Ajustar el diseño a la frecuencia real disponible en el tenant, o documentarlo como limitación conocida del trial |
-| Power BI no muestra las medidas creadas en Customer Insights - Data | Falta de licencia Power BI del usuario, o workspace de Power BI no vinculado al entorno | Centro de administración de Power BI > usuarios y licencias; y en Customer Insights - Data > Exportar > destino Power BI | Asignar la licencia Power BI correspondiente y vincular el workspace correcto antes de exportar |
+| No puedes crear un ambiente de Customer Insights - Data | Sin licencia de Dynamics 365 Customer Insights en el tenant, o sin permisos de administrador | Power Platform admin center: licencias del tenant y rol del usuario en el ambiente | Pedir a un administrador que cree o autorice el ambiente; sin licencia, usar la trial o entregar como **Simulado** |
+| No puedes crear la fuente del CSV | Tu rol es **Contributor**: crear o editar una fuente de Power Query exige **Admin** | **Settings** > **Permissions** > **Users**: tu rol | Pedir el rol **Admin** o que un Admin cree la fuente |
+| La fuente CSV/legado no se conecta o falla la ingesta | Credenciales o gateway de datos local no configurados, o el archivo no está en un origen que Power Query pueda leer | **Data** > **Data sources**: estado y mensaje de error del último refresco | Dejar el archivo en un origen accesible por un conector de Power Query o configurar el gateway si es on-premises |
+| El segmento no llega a Customer Insights - Journeys | Journeys no está en el mismo ambiente de Dataverse, o el conector entre ambos no está conectado | En Journeys: **Settings** > **Data Management** > **Customer Insights data connector** | Conectar el conector (en la trial puede estar ya conectado) o instalar Journeys en ese ambiente |
+| Los datos no se actualizan con la frecuencia esperada | La programación de refresco del sistema o el refresco de cada fuente no es la que supones | Página **System** (la programación la cambia un **Admin**) y **Data** > **Data sources** (último refresco) | Ajustar la programación o documentar la frecuencia real de cada fuente junto a cada medida |
+| Power BI no muestra las medidas | El reporte no apunta a las tablas de Customer Insights - Data en Dataverse, o el usuario no tiene licencia de Power BI | En Power Apps, **Tables** con el filtro **All** y búsqueda `msdynci`: confirmar que existen *msdynci_customermeasure* y las demás | Conectar Power BI a esas tablas de Dataverse; solo los *Customer attribute* y las *Customer measure table* llegan a Dataverse |
 
 ## Requisitos no funcionales
 
@@ -82,9 +104,19 @@ Define reglas exactas y difusas para unir perfiles.
 Incluye umbrales de confianza y una cola de revisión manual para matches ambiguos. Documenta dos
 falsos positivos posibles y cómo evitarlos.
 
+Usa el vocabulario de la herramienta (Módulo 58): reglas en orden (las condiciones de una regla se unen
+con AND), normalización por condición y precisión **Basic** (*Low 30 %*, *Medium 60 %*, *High 80 %*,
+*Exact*) o **Custom** con tu porcentaje. Customer Insights - Data **no trae una cola de revisión
+manual**: la cola es un proceso tuyo (quién revisa y dónde) y sus decisiones vuelven a la herramienta
+como excepciones de la regla o como plantillas **Always match** / **Never match** que se ingieren como
+fuente de datos ([Learn: reglas de matching](https://learn.microsoft.com/dynamics365/customer-insights/data/data-unification-match-tables)).
+
 ### Paso 3 — Medidas
 
-Crea 3 medidas: LTV, casos últimos 90 días y riesgo de renovación.
+Crea 3 medidas: LTV, casos últimos 90 días y riesgo de renovación. Para cada una indica el tipo
+(Customer attribute, Customer measure, Customer measure table para Journeys o Business measure) y por
+qué: el tipo no se puede cambiar después de ejecutar o guardar la medida
+([Learn: measure builder](https://learn.microsoft.com/dynamics365/customer-insights/data/measure-builder)).
 
 ### Paso 4 — Segmento
 

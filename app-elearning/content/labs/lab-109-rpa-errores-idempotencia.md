@@ -10,7 +10,7 @@ prerequisites:
   - "Módulo 74 completado"
   - "Conocimientos básicos de estados y claves únicas"
 files: []
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # LAB-RPA-06 — Manejo de errores e idempotencia
@@ -41,6 +41,8 @@ El bot registra solicitudes en un portal. Si falla después de confirmar un regi
 6. Reejecuta y demuestra que no duplica.
 7. Documenta rollback o compensación.
 
+> **Dónde practicarlo:** el "portal" del escenario es el simulador [SIT Registro Legacy](../rpa-sandbox/legacy-app), el mismo del flujo `M74 Idempotencia` del Módulo 74; parte de ese flujo. La clave única es `requestId`. Antes de cada **Registrar**, consulta el sistema destino con **Consultar por ID** (responde `Pendiente`, `Registrado` o `No encontrado`). Para el fallo parcial (ejercicio 5), detén el flujo con el botón de parar de PAD justo después de un **Registrar** y antes de escribir el estado en tu archivo; **no** pulses **Reset** ni recargues la pestaña, porque el simulador guarda los registros en la memoria de la página y volvería a sus 3 registros iniciales. Reejecuta (ejercicio 6) y abre el panel **Registro de actividad (para tu evidencia)** al pie del simulador: las comprobaciones **Ninguna solicitud aparece más de una vez en Registros** y **Ningún Registrar se pulsó sobre una solicitud ya registrada** deben salir en **OK**; copia su texto como prueba de no duplicidad. El modo **Duplicado** del selector **Modo** rechaza todo **Registrar** (sirve para ver cómo responde tu manejo de error, no para demostrar idempotencia), y **Bloqueo simulado** rechaza el registro con un mensaje de error, como un fallo técnico.
+
 ## Errores frecuentes
 
 | Problema | Causa probable | Solución |
@@ -50,7 +52,7 @@ El bot registra solicitudes en un portal. Si falla después de confirmar un regi
 | El retry entra en bucle y no se detiene | No hay límite de reintentos ni distinción entre error transitorio y error definitivo | Define un máximo de reintentos y clasifica el error antes de decidir si reintenta |
 | Tras un fallo parcial, la reejecución no sabe por dónde continuar | No existe una clave única por registro que permita identificar qué ya se procesó | Define una clave única (ID de negocio, hash) y consúltala antes de reprocesar |
 | Un error esperado (dato inválido) se trata igual que un error técnico (timeout de conexión) | No hay clasificación de errores en la matriz de excepciones | Separa errores de negocio (van a cola de revisión) de errores técnicos (van a retry) |
-| Al cerrar la app tras un fallo, quedan procesos colgados que bloquean la siguiente corrida | El cierre no es forzado ni verificado tras una excepción | Agrega cierre seguro (kill de proceso si no responde) y verifica que no queden instancias antes de reanudar |
+| Al cerrar la app tras un fallo, quedan procesos colgados que bloquean la siguiente corrida | El cierre no es forzado ni verificado tras una excepción | Agrega cierre seguro (**Terminate process** por **Process ID** si el proceso no responde) y verifica que no queden instancias antes de reanudar |
 
 ## 🔧 Diagnóstico y reparación
 
@@ -75,7 +77,7 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 ### Retry en bucle sin detenerse
 
 - **Causa probable:** no hay contador de reintentos ni clasificación entre error transitorio y error definitivo.
-- **Cómo comprobar:** revisa el `run history sample` y cuenta cuántos reintentos consecutivos ocurrieron para el mismo registro.
+- **Cómo comprobar:** cuenta en tu propio log cuántos intentos consecutivos hubo para el mismo `requestId` (en el simulador, la columna **Intentos de Registrar** del panel **Registro de actividad**). El `run history sample` de los assets solo trae una línea de resumen por corrida (`records`, `errors`), sin detalle de reintentos: úsalo como formato, no como fuente de este conteo.
 - **Cómo corregir:** define un máximo de reintentos explícito y clasifica el error (transitorio vs. definitivo) antes de decidir si reintenta.
 - **Reiniciar vs. reparar:** repara la lógica de retry; reinicia el caso solo si el bucle ya dejó datos en estado inconsistente.
 - **Evidencia posterior a la corrección:** log mostrando el límite de reintentos respetado y el registro movido a error definitivo.
@@ -100,7 +102,7 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 
 - **Causa probable:** el cierre de la aplicación no verifica que el proceso realmente haya terminado tras una excepción.
 - **Cómo comprobar:** revisa el administrador de tareas (o el log de cierre) después de forzar un fallo parcial simulado.
-- **Cómo corregir:** agrega cierre seguro con verificación (kill forzado si el proceso no responde en un tiempo definido) antes de iniciar la siguiente corrida.
+- **Cómo corregir:** agrega cierre seguro con verificación (si el proceso no responde en un tiempo definido, **Terminate process** con **Process ID**, el `AppProcessId` que produjo **Run application**; por nombre, Learn advierte que termina **todos** los procesos con ese nombre — [System actions](https://learn.microsoft.com/en-us/power-automate/desktop-flows/actions-reference/system)) antes de iniciar la siguiente corrida.
 - **Reiniciar vs. reparar:** reinicia el equipo/sesión solo si hay procesos huérfanos bloqueando recursos; si no, basta con reparar el subflujo de cierre.
 - **Evidencia posterior a la corrección:** runbook de recuperación con el paso de verificación de cierre documentado y probado.
 

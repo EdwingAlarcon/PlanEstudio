@@ -11,7 +11,7 @@ prerequisites:
   - "Lab 86 completado o revisado: Field Service Agreement + Preventive Maintenance"
   - "Lab 87 completado o revisado: Field Service Mobile Offline + Work Order Lifecycle"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 113 — Capstone Field Service — Operación de Campo End-to-End
@@ -60,10 +60,23 @@ Service" para técnicos internos, o "Dynamics 365 Field Service Contractor" (sub
 técnicos externos/terceros — no existe una licencia de "recurso" separada de la licencia de usuario;
 sin la licencia de usuario correspondiente, el Bookable Resource no puede programarse aunque el
 técnico tenga sesión activa en la app móvil. Resource Scheduling Optimization
-es una **funcionalidad separada** dentro de Field Service: puede requerir habilitación explícita en
-la configuración del entorno y, según el momento de la licencia/oferta vigente, un componente de
-licenciamiento adicional al de Field Service base — no asumas que está disponible solo porque
-Field Service lo está. El rol mínimo para operar el ciclo completo de este capstone combina
+es un **add-in de pago** de Field Service: se compra aparte en el **Microsoft 365 admin center** >
+**Marketplace**, su precio depende del número de recursos cuyas agendas se optimizan y la licencia
+incluye una instancia activa por tenant
+([Learn: Get Resource Scheduling Optimization](https://learn.microsoft.com/dynamics365/field-service/rso-get-install)).
+No asumas que está disponible solo porque Field Service lo está, ni que viene en la trial: la página
+de la trial de Field Service no lo menciona. El **Scheduling Operations Agent**, que también optimiza
+agendas, está en **preview** ([Learn](https://learn.microsoft.com/dynamics365/field-service/soa-overview)):
+puedes citarlo como opción futura, no como base de un diseño productivo.
+
+> **Sin licencia:** el capstone se entrega en papel (estado **Simulado**), con RSO "planeado, no
+> disponible". La trial de 30 días de Field Service (**Try for free** en la
+> [página de producto](https://www.microsoft.com/dynamics-365/products/field-service)) sirve para
+> comprobar Agreements, Schedule Board y app móvil; crea su propio tenant, caduca tras 14 días sin uso
+> y, con un correo personal, no se puede extender
+> ([Learn: Trial FAQ](https://learn.microsoft.com/dynamics365/field-service/trial-faq)).
+
+El rol mínimo para operar el ciclo completo de este capstone combina
 "Field Service - Dispatcher" (creación, asignación y RSO) y "Field Service - Resource" (ejecución
 móvil); "Field Service - Administrator" solo es necesario para configurar el perfil offline, las
 reglas de programación y los parámetros de RSO, no para el uso diario.
@@ -83,9 +96,9 @@ reglas de programación y los parámetros de RSO, no para el uso diario.
 | Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
 |---|---|---|---|
 | Un Work Order correctivo no puede asignarse al mismo técnico que ya tiene Work Orders de Agreement ese día | El Resource Requirement no considera la carga combinada de ambos orígenes porque se programan en calendarios o vistas separadas | Revisar el Schedule Board del recurso y confirmar que muestra Work Orders de ambos orígenes en una sola línea de tiempo | Asegurar que todos los Work Orders (Agreement y correctivos) usan el mismo Bookable Resource y el mismo Schedule Board, no vistas filtradas por origen |
-| La opción de Resource Scheduling Optimization no aparece disponible en el entorno | RSO requiere habilitación explícita y puede depender de licenciamiento adicional no incluido por defecto en el trial de Field Service | Configuración de Field Service > Resource Scheduling Optimization: revisar si el módulo aparece habilitado | Solicitar al administrador del tenant la habilitación de RSO o documentar el diseño de asignación como "planeado con RSO, ejecutado manualmente" si no está disponible |
+| La opción de Resource Scheduling Optimization no aparece disponible en el entorno | RSO es un add-in de pago que no viene con Field Service: no se compró, o se compró pero no se desplegó en este ambiente (la licencia incluye una sola instancia activa por tenant) | Preguntar al administrador si el add-in figura entre las compras del **Microsoft 365 admin center** y en qué ambiente está desplegado | Solicitar la compra y el despliegue del add-in, o documentar el diseño de asignación como "planeado con RSO, ejecutado con el schedule assistant" ([Learn: Get RSO](https://learn.microsoft.com/dynamics365/field-service/rso-get-install)) |
 | Un técnico queda sobreasignado el mismo día entre un Work Order de Agreement y uno correctivo urgente | No hay una regla de prioridad explícita entre mantenimiento programado y llamada correctiva | Revisar si el Incident Type o el Work Order tienen un campo de prioridad consistente entre ambos orígenes | Definir y aplicar una regla de prioridad de negocio (ej. correctivo crítico > preventivo vencido > preventivo dentro de ventana) antes de programar |
-| El cierre del Work Order no descuenta el inventario del almacén del técnico | El área de Inventory/Products Used no está habilitada en la app móvil para el rol del técnico, o el almacén (warehouse) del técnico no está vinculado al Bookable Resource | Field Service > Configuración de app móvil: revisar áreas habilitadas por rol; en el Bookable Resource, revisar el campo de almacén asociado | Habilitar el área de Inventory en la app móvil y vincular el almacén correspondiente al recurso antes de repetir la prueba |
+| El cierre del Work Order no descuenta el inventario del almacén del técnico | El producto no se pasó a **Line Status** = *Used*, no es de tipo *Inventory*, o la línea quedó sin **Warehouse**: el sistema propone el almacén del Bookable Resource del usuario que crea la línea, así que si el recurso no tiene almacén asociado no hay de dónde descontar | Abrir la línea de Work Order Product (estado, tipo y **Warehouse**) y el almacén del Bookable Resource | Asociar el almacén de la camioneta al Bookable Resource, exigir *Used* con almacén en la revisión antes de Posted y decidir **Use Of Products out of Stock** (**Restrict** o **Confirm**) ([Learn: products and services](https://learn.microsoft.com/dynamics365/field-service/create-product-or-service)) |
 | El tablero de KPIs muestra cumplimiento de SLA solo para Work Orders de Agreement y no para correctivos | El SLA o el criterio de "primera visita resuelta" se configuró únicamente sobre el proceso de Agreement, sin extenderse al flujo correctivo | Revisar la configuración de SLA/Entitlement y confirmar si aplica a todos los Incident Types o solo a los de mantenimiento preventivo | Extender la definición de SLA y del criterio de KPI a ambos orígenes de Work Order, o documentar explícitamente que el correctivo usa un SLA distinto y por qué |
 
 ## Pasos detallados

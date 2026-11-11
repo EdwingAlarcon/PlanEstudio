@@ -9,7 +9,7 @@ role: ["Functional Consultant", "Solution Architect", "Data Specialist"]
 prerequisites:
   - "Módulo 58 estudiado: Customer Insights - Data"
   - "Lab 58 completado: Customer Insights — Segmento y Journey"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 67 — Customer Insights - Data: Unificación de Perfiles y Customer 360
@@ -109,15 +109,31 @@ es el dueño del dato (Ventas, Finanzas, Soporte).
 
 ### 2. Reglas de matching aplicadas a mano
 
-- Regla: `(email exacto) O (teléfono exacto Y empresa/nombre normalizado coinciden)`.
-- Aplica la regla a los 3 registros de cada fuente y documenta el resultado: ¿los 3 clientes
-  quedan unificados correctamente? Presta atención a Carla Ibáñez, que no tiene email en
-  Dataverse — la regla debe resolverla igual por teléfono + nombre.
+Escribe el matching como lo pide la herramienta (Módulo 58, Microlección 2): `Contact` como tabla
+primaria y **dos reglas en orden**, porque las condiciones de una misma regla se unen con AND
+([Learn: reglas de matching](https://learn.microsoft.com/dynamics365/customer-insights/data/data-unification-match-tables)):
+
+- **Regla 1:** email, **Text to lower case**, *Exact*.
+- **Regla 2:** teléfono, **Type - Phone**, *Exact* **Y** nombre, **Type - Name** y **Unicode to ASCII**,
+  con la precisión que decidas.
+
+Aplica las reglas a mano y documenta el resultado. Fíjate en tres cosas de los datos:
+
+- El CSV de facturación **no trae columna de email** y `Contact` **no trae empresa**: la regla 1 no
+  puede unir nada con la fuente 2, y la empresa no sirve como condición entre esas dos tablas.
+- Los nombres de facturación son iniciales (`A. Rivera`) y uno pierde la tilde (`C. Ibañez`): decide
+  qué precisión de la condición de nombre los une sin aceptar a cualquiera, y dilo. Con *Exact* no se
+  unirían.
+- La hoja de soporte (fuente 3) **solo tiene el nombre**. Unir solo por nombre es el falso positivo
+  que el Módulo 58 enseña a evitar. Decide y justifica: pedir a Operaciones que añada el email o el ID
+  del contacto a la hoja (recomendado), o unir por nombre asumiendo el riesgo y anotándolo en la matriz
+  de riesgos. Carla Ibáñez, sin email en Dataverse, debe quedar resuelta por la regla 2.
 
 ### 3. Medidas calculadas
 
-- **Medida 1 — Valor total del cliente:** `Total facturado 24m` (fuente 2). Documenta la fórmula
-  y de qué fuente proviene.
+- **Medida 1 — Valor total del cliente:** `Total facturado 24m` (fuente 2). Documenta la fórmula,
+  de qué fuente proviene y su **tipo** de medida (Customer attribute, Customer measure o Business
+  measure; Módulo 58).
 - **Medida 2 — Riesgo de insatisfacción:** una fórmula propia que combine `Tickets últimos 90 días`
   (fuente 3) con algún dato de las otras fuentes (por ejemplo, ponderar más el riesgo si el cliente
   también tiene alto valor facturado).
@@ -146,7 +162,7 @@ medidas desde cero.
 | Criterio | Peso | Aprobado mínimo |
 |---|---:|---|
 | Matriz de fuentes | 15% | Cada fuente documentada con dato, uso y dueño |
-| Reglas de matching | 25% | Regla explícita que unifica correctamente los 3 clientes de los datos de prueba, incluyendo el caso sin email |
+| Reglas de matching | 25% | Reglas explícitas en orden que unifican correctamente los 3 clientes de las fuentes 1 y 2, incluido el caso sin email, y una decisión justificada para la fuente 3 (que solo trae el nombre) |
 | Medidas calculadas | 20% | 2 medidas con fórmula documentada y fuentes identificadas |
 | Segmento y activación | 20% | Segmento verificable con los datos de prueba + destino de activación concreto |
 | Matriz de riesgos de datos | 20% | ≥4 riesgos específicos del escenario con mitigación, no genéricos |
@@ -165,7 +181,8 @@ Aprobación: mínimo 65/100 y ningún criterio en nivel 0. Nivel profesional/exc
 
 | Error | Causa | Solución |
 |---|---|---|
-| No resolver el caso de Carla Ibáñez (sin email) | La regla de matching solo considera el email | Agregar la condición secundaria de teléfono + nombre/empresa normalizado |
+| No resolver el caso de Carla Ibáñez (sin email) | La regla de matching solo considera el email | Agregar una segunda regla, en orden, de teléfono (**Type - Phone**) Y nombre normalizado |
+| Escribir "email O teléfono" como dos condiciones de una regla | Creer que las condiciones se combinan con OR | Las condiciones de una regla se unen con AND: son dos reglas en orden |
 | Activar el comentario interno del agente hacia el journey | No distinguir datos internos de datos activables al cliente | Usar el comentario solo para calcular la medida de riesgo, nunca como contenido de comunicación |
 | Medida sin fuente identificada | Se calcula el número sin documentar de dónde sale cada componente | Cada medida debe listar explícitamente qué fuente aporta cada parte de la fórmula |
 | Tratar la unificación como el entregable final | No definir a dónde se activa el segmento | Todo segmento debe declarar su destino de activación y la acción que dispara ahí |

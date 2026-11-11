@@ -37,7 +37,7 @@ Un sistema legacy de escritorio no tiene API. Operaciones necesita cargar solici
 2. Captura selectores y descarta coordenadas como patrón principal.
 3. Procesa archivo con registros válidos e inválidos.
 4. Detecta mensaje de confirmación.
-5. Simula ventana modal inesperada.
+5. Simula una ventana modal no prevista. El simulador no tiene un modo de "modal inesperado" (ese escenario está en el Portal SIT del LAB-106); aquí lo provocas tú: registra una solicitud a mano y **deja abierto** el diálogo **Registro confirmado** antes de ejecutar el flujo. Anota qué hace tu flujo y agrégale la detección explícita (**If web page contains** el texto `Registro confirmado` → **Press button on web page** sobre **Cerrar**). En una app Win32 real, el equivalente es dejar abierto un cuadro de diálogo (por ejemplo **Guardar como** en el Bloc de notas) y detectarlo con **If window** = **Is open**.
 6. Registra error y continúa con el siguiente registro.
 7. Documenta fallback si usas teclado, imagen u OCR.
 
@@ -124,8 +124,8 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 ## Assets reproducibles
 
 - Simulador legacy: [SIT Registro Legacy](../rpa-sandbox/legacy-app).
-- Datos semilla: [legacy-records.json](../practice-assets/rpa/sit-automation-case/legacy-app/legacy-records.json).
-- Resultado esperado: [log esperado](../practice-assets/rpa/sit-automation-case/expected/log_esperado.csv).
+- Archivo de entrada sugerido: [legacy-records.json](../practice-assets/rpa/sit-automation-case/legacy-app/legacy-records.json). **No** es la tabla inicial del simulador: el simulador arranca (y vuelve con **Reset**) con 3 registros, `SOL-2026-0001`, `SOL-2026-0002` y `SOL-2026-0004`. Por eso el archivo sirve como lote mixto: esas 3 solicitudes ya existen (el simulador responde **Registro duplicado** si las registras otra vez; consúltalas antes con **Consultar por ID**) y `SOL-2026-0005` y `SOL-2026-0006` son nuevas. Su campo `status` (`pending`) es del archivo, no del simulador. Para leerlo en PAD: **Read text from file** y **Convert JSON to custom object**.
+- Formato de log de referencia: [log esperado](../practice-assets/rpa/sit-automation-case/expected/log_esperado.csv) (columnas `timestamp,correlationId,level,step,message`; sus filas son del caso de consolidación, no de este lab).
 - Modos disponibles (selector **Modo** del simulador): Normal, Duplicado, Bloqueo simulado, Layout cambiado, Confirmación lenta y Botón deshabilitado.
 - Reset: usa el botón `Reset` del simulador y conserva solo evidencias anonimizadas.
 - Variante sin Windows/PAD: ejecuta el flujo manualmente sobre el simulador y documenta selectores propuestos.

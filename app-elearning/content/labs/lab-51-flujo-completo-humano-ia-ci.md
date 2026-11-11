@@ -8,10 +8,10 @@ certifications: ["Buenas Prácticas de Desarrollo Asistido por IA"]
 role: ["Developer", "Solution Architect", "AI/Copilot Specialist"]
 prerequisites:
   - "Lab 45 completado"
-  - "Módulos 42-51 estudiados (nivel IA completo)"
-  - "Acceso a un repositorio con pipeline de CI configurado (puede ser este mismo proyecto)"
+  - "Módulos 42-51 estudiados"
+  - "Acceso a un repositorio con pipeline de CI configurado (recomendado: el repositorio público sit-flujo-ia del Módulo 51, con su ruleset)"
   - "Recurso revisado: Rúbricas y Plantillas de Evaluación"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 51 — Proyecto Integrador Nivel IA: Flujo Completo Humano → IA → CI → Aprobación
@@ -40,13 +40,13 @@ nivel de rigor que un proyecto de cierre de cualquier otro nivel.
   debes documentar cómo verificaste esto antes de enviarlo a la IA.
 - **Política de agentes:** si usas un agente con capacidad de ejecutar comandos o modificar
   archivos automáticamente, debes declarar explícitamente qué alcance le diste y por qué.
-- **Gate de CI obligatorio:** ningún cambio se considera aprobado si el pipeline (lint, typecheck,
-  tests) está en rojo, sin importar qué tan simple parezca el cambio.
+- **Gate de CI obligatorio:** ningún cambio se considera aprobado si el pipeline (los checks que
+  tenga tu repositorio: pruebas y, si existen, lint y typecheck) está en rojo, sin importar qué tan
+  simple parezca el cambio.
 
 ## Alcance del proyecto
 
-Un cambio real y acotado en un repositorio con pipeline de CI (puede ser este mismo proyecto
-PlanEstudio, sobre una rama de práctica), llevado por las 4 etapas: diseño documentado,
+Un cambio real y acotado en un repositorio con pipeline de CI, llevado por las 4 etapas: diseño documentado,
 implementación asistida por IA con auditoría de prompts, validación en CI, y aprobación humana
 con checklist y matriz de riesgos.
 
@@ -60,7 +60,11 @@ Fuera de alcance:
 ## Prerrequisitos
 
 - Haber completado el Lab 45 y estudiado los módulos 42-51.
-- Tener acceso a un repositorio con pipeline de CI (lint, typecheck, tests).
+- Tener acceso a un repositorio con pipeline de CI. Lo más sencillo es reutilizar el repositorio
+  público `sit-flujo-ia` del Módulo 51, que ya tiene el workflow `CI` con el check `pruebas` y el
+  ruleset `proteger-main`: elige un cambio nuevo (por ejemplo, validar que `centroCosto` siga el
+  formato `CC-` seguido de tres dígitos). Si prefieres otro repositorio, debe ser uno en el que
+  puedas crear ramas y pull requests y que no contenga datos reales.
 
 ## Herramientas necesarias
 
@@ -96,13 +100,17 @@ Documenta antes de involucrar a la IA:
 
 ### 4. Evidencia de CI
 
-- Resultado de ejecutar (localmente o vía un PR de práctica que dispare el pipeline):
+- Resultado de ejecutar los mismos comandos que corre tu pipeline, localmente y vía el pull request
+  que dispara el check. En el repositorio `sit-flujo-ia` del Módulo 51 es uno solo:
 
 ```bash
-npm run lint
-npx tsc --noEmit
-npx vitest run
+npm test
 ```
+
+  Si tu repositorio tiene más checks (por ejemplo lint y typecheck), ejecútalos todos; los nombres
+  exactos están en sus `scripts` de `package.json` y en `.github/workflows/`.
+- Del log del check, copia las líneas de resumen (`pass`, `fail` y `skipped`): un `skipped` distinto
+  de cero en un cambio que no debía omitir nada se explica o se corrige (Módulo 51).
 
 - Si algo falla, el proyecto debe mostrar el ciclo de corrección (qué falló, qué ajustaste, qué
   volviste a ejecutar) — no solo el resultado final en verde.

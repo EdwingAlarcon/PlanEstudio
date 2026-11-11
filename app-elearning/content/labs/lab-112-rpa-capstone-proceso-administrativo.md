@@ -10,7 +10,7 @@ prerequisites:
   - "Módulos RPA 67-76 completados"
   - "Labs RPA principales completados o evidencias equivalentes"
 files: []
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # RPA Capstone — Automatización end-to-end de un proceso administrativo
@@ -126,6 +126,7 @@ Para los errores más frecuentes de este laboratorio, sigue este flujo antes de 
 - Comparativa: [matriz de viabilidad RPA](../practice-assets/rpa/sit-automation-case/reference/matriz_viabilidad_rpa.csv) y [comparativa tecnológica](../practice-assets/rpa/sit-automation-case/reference/comparativa_tecnologica.csv).
 - Reset: restaura el paquete desde `input`, reinicia simuladores y usa un nuevo identificador de corrida.
 - Variante sin tenant: entrega la simulación completa y separa explícitamente qué validaciones quedan pendientes por licencia o ambiente.
+- Licencia: según la tabla de cuentas de Learn ([Prerequisites and limitations](https://learn.microsoft.com/en-us/power-automate/desktop-flows/requirements)), la conexión entre cloud flows y desktop flows solo está disponible con una cuenta de organización con licencia premium. Sin ella, construye y prueba el desktop flow en local (attended) y entrega la parte cloud → desktop en papel, como en los Módulos 75 y 76: el diseño del cloud flow, los inputs y outputs que pasaría al desktop flow y la evidencia que esperarías ver en el historial de ejecuciones.
 
 ## Rúbrica resumida
 

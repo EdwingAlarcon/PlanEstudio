@@ -34,11 +34,11 @@ Tres sucursales envían archivos Excel mensuales. El equipo financiero necesita 
 ## Ejercicios
 
 1. Prepara carpetas `entrada`, `procesado`, `error` y `salida`.
-2. Copia a `entrada` los tres libros del caso (`ventas_bogota_2026_07.xlsx`, `ventas_medellin_2026_07.xlsx` y `ventas_caribe_2026_07.xlsx`, hoja `Solicitudes`) y `solicitudes_sucursales.csv`. Ábrelos con **Launch Excel** en solo lectura (**Open as ReadOnly**), como en el Módulo 70.
+2. Copia a `entrada` los tres libros del caso (`ventas_bogota_2026_07.xlsx`, `ventas_medellin_2026_07.xlsx` y `ventas_caribe_2026_07.xlsx`, hoja `Solicitudes`) y `solicitudes_sucursales.csv`. Abre los tres libros con **Launch Excel** en solo lectura (**Open as ReadOnly**), como en el subflow `LeerExcel` del Módulo 70; el `.csv` no pasa por Excel: léelo con **Read from CSV file** (**First line contains column names** encendido), como en `LeerCsv`.
 3. Valida las columnas obligatorias con los nombres reales del encabezado: `requestId`, `customerId`, `productId`, `quantity`, `unitPrice` y `currency` (los archivos traen además `requestedDate`, `region`, `status` y `sourceFile`).
 4. Detecta duplicados por `requestId`, dentro del lote y contra lo que ya está en el consolidado.
 5. Consolida filas válidas y separa errores.
-6. Simula archivo bloqueado y registra recuperación.
+6. Simula archivo bloqueado y registra recuperación: abre a mano uno de los libros en Excel y ejecuta el flujo sin cerrarlo. Con **Open as ReadOnly**, la lectura puede funcionar igual; el bloqueo suele aparecer al mover ese libro a `procesado` con **Move file(s)**, porque Excel mantiene el archivo en uso. Anota en qué acción falló tu flujo y con qué mensaje (`%LastError.Message%`) y aplica ahí el reintento acotado. Si tu flujo no falla en ningún punto, documenta eso como resultado, y fuerza el error de lectura como en el Módulo 70 (una hoja que no existe en **HojaExcel**).
 7. Cierra Excel aunque falle una fila.
 
 ## Errores frecuentes

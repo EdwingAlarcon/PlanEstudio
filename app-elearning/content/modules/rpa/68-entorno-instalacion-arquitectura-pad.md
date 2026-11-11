@@ -121,7 +121,7 @@ Power Automate for desktop diseña desktop flows; el Machine Runtime permite eje
 | Pieza | Qué es | Dónde se ve |
 |---|---|---|
 | Máquina | El equipo físico o virtual registrado en un ambiente | Portal de Power Automate: **Monitor** > **Machines** |
-| Machine group | Varias máquinas tratadas como una sola, para repartir ejecuciones (hasta 50 por grupo) | **Monitor** > **Machines** |
+| Machine group | Varias máquinas tratadas como una sola, para repartir ejecuciones (el límite de máquinas por grupo cambia según la página de Learn; consúltalo en [Manage machine groups](https://learn.microsoft.com/en-us/power-automate/desktop-flows/manage-machine-groups) antes de dimensionar) | **Monitor** > **Machines** |
 | Conexión de desktop flow | Cómo Power Automate se conecta a la máquina e inicia sesión en Windows (con **Directly to machine**, el nombre de la máquina y las credenciales de Windows) | En el cloud flow, al usar **Run a flow built with Power Automate for desktop** |
 | Usuario / cuenta de servicio | La cuenta de Windows con la que corre el robot: su perfil, sus permisos y sus aplicaciones instaladas | En la conexión y en la propia máquina |
 | Sesión | La sesión de Windows donde se ejecuta: la tuya (attended) o una sesión RDP que crea Power Automate (unattended) | En la máquina |

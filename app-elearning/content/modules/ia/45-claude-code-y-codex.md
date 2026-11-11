@@ -4,11 +4,11 @@ title: "Claude Code y Codex para Análisis e Implementación"
 level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 23
-practiceMinutes: 160
+practiceMinutes: 180
 slug: "claude-code-y-codex"
 lastVerified: "2026-11"
 ---
-*Lectura: 22-24 min · Práctica: unas 2 horas y media la primera vez, mejor en dos sesiones (la primera hasta la Microlección 2; la segunda, la Microlección 3, la decisión y el reto).*
+*Lectura: 22-24 min · Práctica: unas 3 horas la primera vez, contando instalar el agente, mejor en dos sesiones (la primera hasta la Microlección 2; la segunda, la Microlección 3, la decisión y el reto).*
 
 ### 🎯 Objetivo
 Usar agentes de código (Claude Code, Codex) para analizar repositorios grandes y ejecutar cambios acotados con herramientas (lectura, edición, bash), entendiendo qué los diferencia de un simple chat y cuándo delegarles una tarea real. Al terminar habrás configurado cuánto puede hacer el agente sin preguntarte, habrás fijado las convenciones del proyecto en un archivo de instrucciones y habrás **pillado a un agente que reportó "todas las pruebas pasan"** sin cumplir el criterio de la tarea: lo demuestras con `git diff` y una prueba de aceptación, y lo corriges.
@@ -19,10 +19,10 @@ Usar agentes de código (Claude Code, Codex) para analizar repositorios grandes 
 > - **Este módulo es transversal y no necesita tenant:** trabajas sobre un repositorio pequeño de Node.js que creas tú en la Microlección 1. No exige ningún nivel de certificación.
 > - **Software:** **Node.js 20 o posterior** (`node --version`) y **Git** (`git --version`; en Windows, [Git for Windows](https://git-scm.com/downloads/win)). Si Git te pide nombre y correo al hacer tu primer commit, configúralos con `git config --global user.name "Tu nombre"` y `git config --global user.email "tu@correo"`.
 > - **Elige un agente (revisa las condiciones vigentes en la documentación oficial antes de instalar):**
->   - **Codex** (OpenAI): según la página de precios de Codex, está incluido en los planes de ChatGPT **Free**, Go, Plus, Pro, Business, Edu y Enterprise, con un uso limitado por plan ([Codex: precios](https://developers.openai.com/codex/pricing)). En Windows se instala desde una ventana nueva de PowerShell con `powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"`, o con `npm install -g @openai/codex`; la primera vez que ejecutas `codex` eliges **Sign in with ChatGPT** ([Codex CLI](https://developers.openai.com/codex/cli)). **Es la opción sin pago de este módulo.**
->   - **Claude Code** (Anthropic): **requiere una cuenta de pago** (Pro, Max, Ultra, Team, Enterprise o Console); el plan gratuito de claude.ai no incluye Claude Code ([Claude Code: instalación](https://code.claude.com/docs/en/setup)). En Windows se instala desde PowerShell con `irm https://claude.ai/install.ps1 | iex` (o `winget install Anthropic.ClaudeCode`) y se comprueba con `claude --version`.
+>   - **Codex** (OpenAI): según la página de precios de Codex, está incluido en los planes de ChatGPT **Free**, Go, Plus, Pro, Business, Edu y Enterprise, con un uso limitado por plan ([Codex: precios](https://learn.chatgpt.com/docs/pricing)). En Windows se instala desde una ventana nueva de PowerShell con `powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"`, o con `npm install -g @openai/codex` ([repositorio oficial de Codex](https://github.com/openai/codex)); la primera vez que ejecutas `codex` dentro de una carpeta eliges **Sign in with ChatGPT** ([Codex CLI](https://learn.chatgpt.com/docs/codex/cli)). **Es la opción sin pago de este módulo.**
+>   - **Claude Code** (Anthropic): **requiere una cuenta de pago** (Pro, Max, Ultra, Team, Enterprise o Console); el plan gratuito de claude.ai no incluye Claude Code ([Claude Code: instalación](https://code.claude.com/docs/en/setup)). En Windows se instala desde PowerShell con `irm https://claude.ai/install.ps1 | iex` (o `winget install Anthropic.ClaudeCode`) y se comprueba, en una terminal nueva, con `claude --version`. En Windows nativo, Git for Windows es opcional pero recomendado: sin él, Claude Code ejecuta los comandos con PowerShell en vez de Bash.
 >   - **Sin ninguno de los dos:** el agente **Agent** de GitHub Copilot Free en VS Code (Módulo 44) sirve para las Microlecciones 1 a 3; donde un paso es propio de Claude Code o de Codex, el módulo te indica el equivalente. Y si no tienes ningún agente, la Microlección 3 trae el resultado del agente ya escrito: la parte de detectar y corregir la haces igual.
-> - **Las herramientas cambian rápido.** Los nombres de comandos, modos y archivos de este módulo se verificaron en la documentación oficial en noviembre de 2026. Si algo no coincide con lo que ves, manda la documentación: en Claude Code, la lista de comandos con `/help`; en Codex, la [lista de comandos de barra](https://developers.openai.com/codex/cli/slash-commands).
+> - **Las herramientas cambian rápido.** Los nombres de comandos, modos y archivos de este módulo se verificaron en la documentación oficial en noviembre de 2026. Si algo no coincide con lo que ves, manda la documentación: en Claude Code, la lista de comandos con `/help`; en Codex, la [lista de comandos de barra](https://learn.chatgpt.com/docs/developer-commands?surface=cli). La documentación de Codex se mudó en 2026 de `developers.openai.com/codex` a `learn.chatgpt.com/docs`; los enlaces antiguos redirigen.
 
 ### 📖 Conceptos Clave
 - **Agente vs chat:** un agente de código puede usar herramientas — leer archivos, buscar en el repo, ejecutar comandos (tests, lint, build), y editar archivos directamente — encadenando varios pasos sin que el humano copie/pegue manualmente cada resultado.
@@ -51,7 +51,7 @@ Usar agentes de código (Claude Code, Codex) para analizar repositorios grandes 
 | Ver o cambiar los permisos | `/permissions` | `/permissions`; `/status` muestra la política de aprobación y las carpetas con escritura |
 | Deshacer | `/rewind` (o **Esc** dos veces con el cuadro de texto vacío) restaura código y conversación a un punto anterior; **no** deshace los cambios que hizo un comando de Bash en archivos que Claude no había editado, y no reemplaza a Git | Git: `/diff` muestra los cambios, incluidos los archivos nuevos |
 
-Fuentes: [Claude Code: modos de permisos](https://code.claude.com/docs/en/permission-modes), [Claude Code: checkpoints](https://code.claude.com/docs/en/checkpointing), [Codex: aprobaciones y seguridad](https://developers.openai.com/codex/agent-approvals-security), [Codex: comandos de barra](https://developers.openai.com/codex/cli/slash-commands). En Codex, además, el sandbox protege como solo lectura la carpeta `.git` (y `.codex` y `.agents`) aunque el resto del proyecto tenga escritura.
+Fuentes: [Claude Code: modos de permisos](https://code.claude.com/docs/en/permission-modes), [Claude Code: checkpoints](https://code.claude.com/docs/en/checkpointing), [Codex: aprobaciones y seguridad](https://learn.chatgpt.com/docs/agent-approvals-security), [Codex: comandos de barra](https://learn.chatgpt.com/docs/developer-commands?surface=cli). En Claude Code, el modo `default` aparece en la interfaz con el nombre **Manual**. En Codex, además, el sandbox protege como solo lectura la carpeta `.git` (y `.codex`, `.agents` y `.aws`, si existen) aunque el resto del proyecto tenga escritura, y en una carpeta **sin** control de versiones arranca en `read-only`.
 
 **Ahora haz algo — micropráctica (6 min):** elige el modo y los permisos para cuatro tareas → **[Elegir cuánto puede hacer el agente sin preguntar](/practica/ip-ia-019-permisos-del-agente-por-tarea)**.
 
@@ -124,7 +124,7 @@ Fuentes: [Claude Code: modos de permisos](https://code.claude.com/docs/en/permis
 5. **Compara con tu propia búsqueda:** sal del agente (o abre otra terminal) y ejecuta `git grep -n calcularVencimiento`. **Qué deberías ver:** seis líneas en tres archivos (`src/aviso.mjs`, `src/sla.mjs` y `test/sla.test.mjs`). Marca las que el agente omitió o inventó.
 6. Ejecuta `git status`. **Qué deberías ver:** `nothing to commit, working tree clean`. Si aparece algún archivo modificado, el agente no estaba en un modo de solo lectura: anota cuál usaste.
 
-**Si no lo ves:** si `claude` o `codex` "no se reconoce como comando", abre una terminal nueva (el instalador cambia el PATH) y comprueba con `claude --version` o `codex --version`. Si Codex arranca en solo lectura aunque no lo pediste, puede que no hayas confiado aún en la carpeta: su documentación indica que puede empezar en `read-only` hasta que confías en el directorio.
+**Si no lo ves:** si `claude` o `codex` "no se reconoce como comando", abre una terminal nueva (el instalador cambia el PATH) y comprueba con `claude --version` o `codex --version`. Si Codex arranca en solo lectura aunque no lo pediste, puede que no hayas confiado aún en la carpeta o que la carpeta todavía no tenga Git (paso 3): su documentación indica que puede empezar en `read-only` hasta que confías en el directorio, y que una carpeta sin control de versiones usa `read-only` por defecto.
 
 **Evidencia a reportar:**
 
@@ -145,8 +145,8 @@ Fuentes: [Claude Code: modos de permisos](https://code.claude.com/docs/en/permis
 **¿Por qué existe esto?** Sin contexto, el agente decide por su cuenta si puede tocar el README o cambiar una prueba. Con instrucciones, lo intenta evitar. Con un permiso `deny`, no puede.
 
 **Qué lee cada agente (según su documentación):**
-- **Claude Code** carga `CLAUDE.md` (o `.claude/CLAUDE.md`) del proyecto, tu `~/.claude/CLAUDE.md` personal y un `CLAUDE.local.md` para preferencias que no se suben al repositorio. `/init` genera un `CLAUDE.md` inicial analizando el código y `/memory` abre estos archivos. Si el repositorio tiene `AGENTS.md` y **no** tiene `CLAUDE.md`, Claude Code lee `AGENTS.md` (desde la versión 2.1.277) y lo avisa al empezar con una línea del tipo `no CLAUDE.md found; AGENTS.md loaded`. Para ver qué archivos cargó, `/context` los lista en **Memory files**. La documentación lo dice sin rodeos: Claude trata estos archivos **como contexto, no como configuración que se impone**; para bloquear una acción hay que usar permisos o un hook ([Claude Code: memoria](https://code.claude.com/docs/en/memory), [Claude Code: permisos](https://code.claude.com/docs/en/permissions)).
-- **Codex** lee `AGENTS.md`: primero el global de `~/.codex` y después los del proyecto, desde la raíz hasta la carpeta actual (el más cercano se lee al final), hasta un máximo combinado de 32 KiB. `/init` genera un `AGENTS.md` inicial. Para comprobar qué cargó, la documentación propone pedirle que resuma las instrucciones que está siguiendo ([Codex: AGENTS.md](https://developers.openai.com/codex/guides/agents-md)).
+- **Claude Code** carga `CLAUDE.md` (o `.claude/CLAUDE.md`) del proyecto, tu `~/.claude/CLAUDE.md` personal y un `CLAUDE.local.md` para preferencias que no se suben al repositorio. `/init` genera un `CLAUDE.md` inicial analizando el código y `/memory` abre estos archivos. Si el repositorio tiene `AGENTS.md` y **no** tiene `CLAUDE.md`, Claude Code lee `AGENTS.md` (desde la versión 2.1.277) y lo avisa al empezar con una línea del tipo `no CLAUDE.md found; AGENTS.md loaded`. Para ver qué archivos cargó, `/memory` lista sus rutas (incluido un `AGENTS.md` que haya leído) y `/context all` los muestra en **Memory files**. Ojo: un `CLAUDE.local.md` también cuenta como `CLAUDE.md`, así que si creas uno, Claude Code deja de leer `AGENTS.md`. La documentación lo dice sin rodeos: Claude trata estos archivos **como contexto, no como configuración que se impone**; para bloquear una acción hay que usar permisos o un hook ([Claude Code: memoria](https://code.claude.com/docs/en/memory), [Claude Code: permisos](https://code.claude.com/docs/en/permissions)).
+- **Codex** lee `AGENTS.md`: primero el global de `~/.codex` y después los del proyecto, desde la raíz hasta la carpeta actual (el más cercano se lee al final), hasta un máximo combinado de 32 KiB (`project_doc_max_bytes`). `/init` genera un `AGENTS.md` inicial. Para comprobar qué cargó, la documentación propone pedirle que resuma las instrucciones que está siguiendo ([Codex: AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md), [Codex: comandos de barra](https://learn.chatgpt.com/docs/developer-commands?surface=cli)).
 - **Copilot en VS Code** también usa `AGENTS.md` de la raíz (Módulo 44). Un solo `AGENTS.md` sirve, entonces, para los tres agentes.
 
 **Práctica real (30 min):**
@@ -160,7 +160,7 @@ Fuentes: [Claude Code: modos de permisos](https://code.claude.com/docs/en/permis
    - Una prioridad que no sea Alta, Media o Baja es un error: no la trates como un valor por defecto.
    ```
 2. Haz commit: `git add AGENTS.md` y `git commit -m "Instrucciones del repositorio"`.
-3. Abre una sesión nueva del agente y pídele: `Resume en tres viñetas las instrucciones de este repositorio que vas a seguir.` En Claude Code, ejecuta también `/context` y busca `AGENTS.md` en **Memory files**. Anota si lo cargó.
+3. Abre una sesión nueva del agente y pídele: `Resume en tres viñetas las instrucciones de este repositorio que vas a seguir.` En Claude Code, busca también al empezar la línea `no CLAUDE.md found; AGENTS.md loaded` y ejecuta `/memory`: la ruta de tu `AGENTS.md` debe aparecer en la lista. Anota si lo cargó.
 4. **Instrucción contra control.** Crea un archivo `.env` con una línea **falsa**: `SIT_TOKEN=prueba-no-real-123`, y un `.gitignore` con la línea `.env`. Agrega a `AGENTS.md` la viñeta `- No leas el archivo .env.` (sin commit todavía). Pídele al agente: `¿Qué valor tiene SIT_TOKEN en este proyecto?` y anota qué hizo: ¿se negó por la instrucción o lo leyó?
 5. **Solo en Claude Code:** crea `.claude/settings.json` con una regla que lo bloquee, repite la pregunta en una sesión nueva y anota la diferencia:
    ```json
@@ -173,14 +173,14 @@ Fuentes: [Claude Code: modos de permisos](https://code.claude.com/docs/en/permis
    La documentación aclara el límite de esta regla: bloquea las herramientas de archivo de Claude y comandos como `cat` o `head` sobre esa ruta, pero **no** un script de Node o Python que abra el archivo por su cuenta; para un bloqueo a nivel del sistema operativo hay que activar el sandbox (que en Windows nativo no está disponible; sí en WSL 2). **En Codex y Copilot:** la protección más segura de un secreto es que no esté en la carpeta en la que trabaja el agente.
 6. Al terminar, borra el `.env` de prueba, vuelve a dejar `AGENTS.md` con las cuatro viñetas del paso 1 (`git restore AGENTS.md`) y haz commit del `.gitignore` (y de `.claude/settings.json` si lo creaste: es configuración del proyecto que se comparte con el equipo) con `git add .` y `git commit -m "Ignorar .env"`. `git status` debe quedar limpio para la Microlección 3.
 
-**Si no lo ves:** si el agente no menciona tus instrucciones, comprueba que el archivo se llame exactamente `AGENTS.md` (en mayúsculas) y esté en la raíz de la carpeta desde la que lo arrancaste. En Claude Code, si también existe un `CLAUDE.md` en esa carpeta o en una superior, lee ese **en vez de** `AGENTS.md`.
+**Si no lo ves:** si el agente no menciona tus instrucciones, comprueba que el archivo se llame exactamente `AGENTS.md` (en mayúsculas) y esté en la raíz de la carpeta desde la que lo arrancaste. En Claude Code, si también existe un `CLAUDE.md`, `.claude/CLAUDE.md` o `CLAUDE.local.md` en esa carpeta o en una superior, lee ese **en vez de** `AGENTS.md` (tu `~/.claude/CLAUDE.md` personal no cuenta); y leer `AGENTS.md` directamente exige la versión 2.1.277 o posterior (`claude --version`).
 
 **Evidencia a reportar:**
 
 | Campo | Tu valor |
 |---|---|
 | Resumen de las instrucciones que dio el agente (cópialo) | ___ |
-| Cómo comprobaste que cargó `AGENTS.md` (línea de inicio, `/context`, resumen) | ___ |
+| Cómo comprobaste que cargó `AGENTS.md` (línea de inicio, `/memory`, resumen) | ___ |
 | Qué hizo ante la pregunta por `SIT_TOKEN` **solo con la instrucción** | ___ |
 | (Claude Code) Qué hizo **con la regla `deny`** | ___ |
 
@@ -292,7 +292,7 @@ approval_policy = "on-request"
 [sandbox_workspace_write]
 network_access = false
 ```
-En Codex, un `.codex/config.toml` del proyecto solo se carga si confías en el proyecto, y los indicadores de la línea de comandos tienen prioridad sobre él ([Codex: configuración](https://developers.openai.com/codex/config-basic)).
+En Codex, un `.codex/config.toml` del proyecto solo se carga si confías en el proyecto, y los indicadores de la línea de comandos tienen prioridad sobre él ([Codex: configuración](https://learn.chatgpt.com/docs/config-file/config-basic); la clave `sandbox_workspace_write.network_access` está en la [referencia de configuración](https://learn.chatgpt.com/docs/config-file/config-reference)).
 
 No hay una única configuración correcta: se evalúa que cada decisión esté justificada. Contrástala con esta rúbrica:
 

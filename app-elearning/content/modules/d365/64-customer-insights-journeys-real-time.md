@@ -22,7 +22,10 @@ Diseñar journeys en tiempo real con triggers, segmentos, consentimiento, canale
 >
 > **Antes de empezar — qué necesitas:**
 > - **No necesitas tenant para completar el módulo.** Cada práctica tiene una **variante en papel** y una **variante con trial** opcional. Tu ambiente Developer del curso no sirve: no puede instalar apps de Dynamics 365.
-> - **Trial, si la quieres:** Customer Insights ofrece una trial gratuita de **30 días**, extensible una vez, que instala Customer Insights - Journeys y Customer Insights - Data en el **mismo ambiente de Dataverse**. Para registrarte, Learn pide un email de trabajo o de escuela, no uno personal; si no tienes uno, sugiere crear primero una trial de Office 365 E5 y usar ese email ([Learn: trial de Customer Insights](https://learn.microsoft.com/dynamics365/customer-insights/journeys/trial-signup)).
+> - **Trial, si la quieres:** Customer Insights ofrece una trial gratuita de **30 días**, extensible una vez, que instala Customer Insights - Journeys y Customer Insights - Data en el **mismo ambiente de Dataverse**. Se pide con **Try for free** en la página del producto que enlaza Learn. Para registrarte, la guía de Journeys pide un email de trabajo o de escuela, no uno personal; si no tienes uno, sugiere crear primero una trial de Office 365 E5 y usar ese email ([Learn: trial de Customer Insights](https://learn.microsoft.com/dynamics365/customer-insights/journeys/trial-signup)). Ojo: la [FAQ de la trial](https://learn.microsoft.com/dynamics365/customer-insights/data/trial-faq) dice lo contrario (un email personal crea una cuenta y un tenant nuevos); prueba primero con el que tengas.
+>   - La trial crea **su propio ambiente**: no se añade a tu ambiente Developer ni a otra trial de Dynamics 365. Solo puede haber una trial de autoservicio activa por tenant; si otra persona de tu tenant ya tiene una, entras en la suya.
+>   - Para que los segmentos de Data aparezcan en Journeys, Learn indica **Settings** > **Data Management** > **Customer Insights data connector** > **Connect** (puede estar ya conectado).
+>   - En la trial, el dominio de envío es el preautenticado `dyn365mktg.com` (solo para pruebas) y el SMS exige contratar un proveedor (Azure Communication Services, Infobip, LINK Mobility, Telesign, Twilio o Vibes), así que las variantes con trial de este módulo se quedan en diseñar y mirar, sin envíos reales ([Learn: acciones de un journey](https://learn.microsoft.com/dynamics365/customer-insights/journeys/add-action)).
 > - **Opcional, si ya lo hiciste:** el Módulo 58 (Customer Insights - Data) construye los perfiles unificados y segmentos que aquí se consumen.
 
 ### 📖 Conceptos Clave
@@ -36,6 +39,7 @@ Diseñar journeys en tiempo real con triggers, segmentos, consentimiento, canale
 - **Personalización:** usa datos del perfil/contacto, medidas de Customer Insights - Data (Módulo 58, ej. LTV) o atributos del trigger, pero debe respetar minimización de datos — personalizar con el dato mínimo necesario, no con todo el perfil disponible solo porque existe.
 - **Marketing-to-sales handoff:** cuando un journey detecta que un contacto alcanzó un umbral de calificación (ej. completó 3 journeys de nutrición y visitó la página de precios), el paso siguiente no es "seguir enviando más contenido" — es crear o actualizar un `Lead` (o una tarea para el vendedor) en Sales con el contexto de journeys recorridos. En el journey, Learn ofrece la acción **Create a record** (en **preview**: no la uses en producción) y la acción **Activate a custom trigger**, que puede disparar un flujo de Power Automate que cree el registro ([Learn: acciones de un journey](https://learn.microsoft.com/dynamics365/customer-insights/journeys/add-action)).
 - **Métricas:** delivery, open/click (cuando el canal lo permite), conversion (goal attainment), unsubscribe y error rate. Un journey con alto delivery pero bajo conversion puede tener el trigger correcto pero el mensaje o la oferta equivocada — son diagnósticos distintos.
+- **Copilot y agentes en Journeys (estado a noviembre de 2026):** Learn lista, entre otras, *query assist* para crear segmentos describiendo el criterio en lenguaje natural, ayuda para redactar y reescribir emails y el **Journey Creation Agent**, que propone la estructura de un journey (tipo, pasos, esperas, ramas, entrada y salida) a partir de una descripción. El agente está en **preview**, solo en inglés, consume Copilot credits, lo activa un administrador en **AI Hub** y usa segmentos y contenidos que **ya existen**: no crea segmentos ni escribe el contenido ([Learn: Copilot en Journeys](https://learn.microsoft.com/dynamics365/customer-insights/journeys/copilot-overview); [Learn: Journey Creation Agent](https://learn.microsoft.com/dynamics365/customer-insights/journeys/journey-creation-agent)). Tampoco decide el consentimiento: lo que propone se revisa con los mismos criterios de este módulo antes de publicar.
 - **Requisitos reales de práctica:** diseñar el flujo del journey, el modelo de consentimiento y las pruebas negativas puede hacerse sin tenant. Validar entrega real, triggers en vivo, dominio de envío y consentimiento operando requiere Customer Insights - Journeys habilitado, dominio/canal configurado y contactos de prueba.
 
 ### 👨‍💻 Actividades Prácticas
@@ -59,7 +63,7 @@ Diseñar journeys en tiempo real con triggers, segmentos, consentimiento, canale
 
 Para la renovación decide además la **frecuencia** del segment-based journey: **one-time** con audiencia estática, **one-time** con miembros nuevos que entran cuando el segmento se refresca, o **repeating** (todos los miembros vuelven a entrar en cada ejecución). Escribe qué pasaría con un contrato que entra al segmento el día 10 en cada opción.
 
-**Variante con trial (20 min, opcional):** en Customer Insights - Journeys → **Triggers** → **New trigger**, nombre `Caso resuelto`, opción **When a record related to a customer is created or updated** → **Create**; elige la tabla **Case**, el atributo que contiene la audiencia y la columna **Status** como cambio que activa el trigger → **Ready to use**. Learn advierte que este trigger capta **cualquier** cambio de Status: el filtro "Status = Resolved" se agrega en el journey, no en el trigger. Anota qué columnas te ofreció.
+**Variante con trial (20 min, opcional):** en Customer Insights - Journeys → **Triggers** → **New trigger**, nombre `Caso resuelto`, opción **When a record related to a customer is created or updated** → **Create**; elige la tabla **Case**, el atributo que contiene la audiencia y la columna **Status** como cambio que activa el trigger → **Ready to use**. Learn advierte que este trigger capta **cualquier** cambio de Status: el filtro "Status = Resolved" se agrega en el journey, no en el trigger. Anota qué columnas te ofreció. Si la tabla **Case** no aparece en la lista de tu ambiente, anótalo y repite el ejercicio con **Contact** o **Lead**.
 
 **Evidencia a reportar:**
 
@@ -97,7 +101,7 @@ Para la renovación decide además la **frecuencia** del segment-based journey: 
 3. Para cada espera, comprueba que no supera los **90 días** que admite una espera.
 4. Especifica qué datos vienen de Customer Insights - Data (perfil unificado, medidas, segmentos — Módulo 58) y qué datos viven en Dataverse/Journeys (contrato, fecha de vencimiento, interacciones del journey).
 
-**Variante con trial (25 min, opcional):** en **Engagement** → **Journeys** → **+New journey**, elige **Segment-based**, un segmento de prueba y la frecuencia que decidiste. Agrega con **+** un **Send an email** y un **if/then branch** que espere *Email link clicked* durante 7 días. Los emails pueden estar en **Draft** mientras diseñas; para publicar, deben estar en **Ready to send**. No publiques el journey en la trial si el segmento tiene contactos reales.
+**Variante con trial (25 min, opcional):** en **Engagement** → **Journeys** → **+New journey**, elige **Segment-based**, un segmento de prueba y la frecuencia que decidiste. En el lienzo, usa **+** (o **+Add an action**) para agregar un email y después un **Wait for trigger** (Learn también lo llama *if/then branch*) con **Branch off this** = ese email, **Wait for** = *Email link clicked* y límite de 7 días. Si no tienes un email listo, crea uno de prueba en borrador; el goal y el exit se configuran en los ajustes **Goal** y **Exit** del journey ([Learn: segment-based journey](https://learn.microsoft.com/dynamics365/customer-insights/journeys/real-time-marketing-segment-based-journey)). Los emails pueden estar en **Draft** mientras diseñas; para publicar, deben estar en **Ready to send**. No publiques el journey en la trial si el segmento tiene contactos reales.
 
 **Evidencia a reportar:**
 
@@ -127,6 +131,8 @@ Para la renovación decide además la **frecuencia** del segment-based journey: 
 
 2. Redacta 3 pruebas negativas con su resultado esperado: contacto con consentimiento válido para "renovación", contacto sin consentimiento para ese propósito, y contacto con email inválido o rebotado. Agrega una cuarta: contacto que ya renovó (debe salir por el exit).
 
+**Variante con trial (10 min, opcional, solo mirar):** ve a **Settings** > **Customer engagement** > **Compliance profiles**, abre el perfil que trae el ambiente y anota sus propósitos, su tipo y el modelo de cumplimiento de cada uno. No cambies el modelo: si el propósito está compartido entre perfiles, el cambio afectaría a todos.
+
 **🏗️ Decidir y defender (sin pasos):**
 
 > **Situación:** la empresa opera en Colombia y en España. Marketing quiere un solo compliance profile y un solo propósito "Commercial communication" **Non-restrictive** para los dos países, "para no perder audiencia". Legal en España exige opt-in previo para comunicaciones comerciales; en Colombia el equipo legal aún no se pronuncia. Hay dos preference centers, uno por país.
@@ -151,6 +157,7 @@ Contrasta tu decisión con esta rúbrica:
 | Tus 4 pruebas negativas con resultado esperado | ___ |
 | Opción elegida para Colombia y España, y la restricción que descarta las otras | ___ |
 | Tu resumen de cinco líneas para marketing | ___ |
+| (Con trial) propósitos y modelo de cumplimiento del perfil del ambiente, o "sin trial: diseño" | ___ |
 
 ---
 

@@ -10,7 +10,7 @@ prerequisites:
   - "Módulo 66 estudiado: Capstone Enterprise D365"
   - "Labs 81-89 revisados o completados"
   - "Recurso revisado: D365 Tenant Readiness Checklist"
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 90 — Capstone Enterprise D365
@@ -55,20 +55,27 @@ el resumen ejecutivo si no hay trial.
 - Confirmar en el Centro de administración de Power Platform qué entornos y qué licencias existen
   por producto antes de diseñar la arquitectura, para poder marcar honestamente cada capacidad
   como Simulado/Sandbox real/Productivo controlado.
-- Si falta trial de algún producto (Field Service o Customer Insights, por ejemplo), solicitarlo
-  con anticipación — algunos trials tardan en aprovisionar y dependen de la región del tenant.
-- Verificar que todos los productos del capstone se prueben sobre el mismo tenant, para no mezclar
-  evidencias de tenants de prueba distintos como si fueran una sola arquitectura.
+- Las trials se piden en la [página de trials de Dynamics 365](https://www.microsoft.com/dynamics-365/free-trial)
+  (Sales, Customer Service, Contact Center, Field Service y Customer Insights; Finance y Supply Chain
+  Management solo ofrecen pedir una demo). Duran 30 días, se pueden extender una vez (no si te
+  registraste con un correo personal) y caducan tras 14 días sin uso. **Cada trial vive en su propio
+  tenant y URL y no comparte datos con las demás**
+  ([Learn: Field Service trial FAQ](https://learn.microsoft.com/dynamics365/field-service/trial-faq)):
+  con trials no puedes reunir todos los productos en un mismo tenant. Pide cada una el día que vayas
+  a usarla.
+- Por eso, no presentes evidencias de trials distintas como si fueran una sola arquitectura: declara
+  qué tramo probaste en qué trial y marca el recorrido end-to-end como **Simulado** si no tienes
+  ambientes de CE y F&O conectados de verdad.
 
 **Fallos frecuentes de licencia, región, canal o app no instalada**
 
 | Síntoma | Causa probable | Cómo comprobar | Cómo corregir |
 |---|---|---|---|
 | Un producto muestra "no tienes licencia para acceder a esta app" | La licencia de trial expiró o nunca se asignó al usuario de prueba para ese producto | Centro de administración de Power Platform > usuarios > licencias asignadas por producto | Reasignar o renovar el trial correspondiente antes de continuar el paso de arquitectura para ese producto |
-| Dynamics 365 Contact Center no aparece disponible en el tenant | Es una oferta con disponibilidad regional limitada que requiere habilitarse explícitamente | Centro de administración de Power Platform > revisar si el producto aparece disponible para la región del tenant | Si no está disponible en la región, documentarlo como "awareness / fuera de alcance por región", no simularlo como disponible |
+| Dynamics 365 Contact Center no aparece disponible en el tenant | No hay licencia ni trial de Contact Center en ese tenant (la trial de otra app no la incluye), o el producto no está disponible en la región del tenant | Centro de administración de Power Platform > revisar si el producto aparece disponible para la región del tenant | Si no está disponible en la región, documentarlo como "awareness / fuera de alcance por región", no simularlo como disponible |
 | Customer Insights - Journeys no puede enviar el canal de email/SMS en pruebas | El dominio de envío no está verificado, o el canal requiere configuración y aprobación adicional de proveedor | En Customer Insights - Journeys, revisar el estado de verificación del dominio en configuración de canales | Documentar el canal como "diseñado, no probado" hasta verificar el dominio |
 | Los entornos de distintos productos no aparecen relacionados entre sí | Cada producto puede vivir en un entorno Dataverse distinto si se aprovisionó por separado | Centro de administración de Power Platform > Entornos > revisar qué apps están instaladas en cada entorno | Documentar explícitamente qué producto vive en qué entorno; planear la consolidación o el vínculo como parte del roadmap si se necesita integración real |
-| F&O no está disponible para pruebas dentro del mismo tenant que CE | Finance and Operations requiere un entorno de tipo "Finance and Operations" aprovisionado por separado, no se comparte automáticamente con el entorno Dataverse de CE | Centro de administración de Power Platform > Entornos > tipo de entorno | Solicitar/aprovisionar el trial de F&O como entorno independiente y vincularlo si se necesita dual-write real |
+| F&O no está disponible para pruebas dentro del mismo tenant que CE | Finance and Operations requiere un entorno de tipo "Finance and Operations" aprovisionado por separado, no se comparte automáticamente con el entorno Dataverse de CE | Centro de administración de Power Platform > Entornos > tipo de entorno | F&O no tiene trial de autoservicio en la página de trials (solo demo); si tu organización no te da un ambiente de F&O, documenta la integración como diseño (Simulado). Si el diseño incluye la integración nativa de Field Service con finance and operations, ten en cuenta que deja de estar disponible después del 28 de febrero de 2027 ([Learn: Feature deprecations](https://learn.microsoft.com/dynamics365/field-service/deprecations-field-service)) |
 
 ## Pasos detallados
 

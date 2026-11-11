@@ -4,11 +4,11 @@ title: "Dataverse Web API, Dynamics 365 y Autenticación"
 level: "ia"
 certification: "Buenas Prácticas"
 estimatedMinutes: 22
-practiceMinutes: 180
+practiceMinutes: 210
 slug: "dataverse-web-api-y-autenticacion"
 lastVerified: "2026-11"
 ---
-*Lectura: 20-22 min · Práctica: unas 3 horas la primera vez, mejor en dos sesiones (la primera, Microlecciones 1 y 2 con tu ambiente; la segunda, la Microlección 3, la decisión y el reto de transferencia).*
+*Lectura: 20-22 min · Práctica: unas 3 horas y media la primera vez, mejor en dos sesiones (la primera, Microlecciones 1 y 2 con tu ambiente; la segunda, la Microlección 3, la decisión y el reto de transferencia).*
 
 > **📌 Primera vez viendo términos como API, HTTP o token?** Este módulo asume que sabes qué es una petición a un servidor. Mini-glosario rápido: **API** = la forma en que un programa le pide datos a otro programa (en vez de que un humano use un formulario, un script hace la misma pregunta). **HTTP** = el protocolo/idioma con el que viajan esas peticiones por internet (GET para leer, POST para crear). **Token** = una credencial temporal que demuestra "tengo permiso" sin mandar tu contraseña en cada petición. Si estos tres términos son nuevos, no hace falta dominarlos hoy — solo entiende que este módulo describe cómo un script (no una persona) le habla a Dataverse. Si además nunca has programado nada, revisa primero la sección "Si es tu primera vez programando" en el [Anexo de Lenguajes de Programación](/recursos/lenguajes-programacion) y el [Módulo 56](/nivel/ia/modulo/fundamentos-javascript-para-power-platform) (fundamentos de JavaScript).
 
@@ -24,7 +24,7 @@ Entender cómo se conecta una aplicación o script externo a Dataverse/Dynamics 
 
 ### 📖 Conceptos Clave
 - **Dynamics 365 sobre Dataverse:** las aplicaciones de primera parte (Sales, Customer Service, Field Service, Project Operations) son, técnicamente, soluciones de Power Platform construidas sobre las mismas tablas de Dataverse a las que accede cualquier Canvas App, plugin o integración externa — no hay una "API distinta" para D365 y otra para Power Apps.
-- **Dataverse Web API:** una API REST estándar (OData v4) que permite crear, leer, actualizar y eliminar registros de cualquier tabla mediante peticiones HTTP normales (GET, POST, PATCH, DELETE). La URL de tu ambiente la copias en Power Apps, en **Settings** (el engranaje, arriba a la derecha) > **Developer resources** > **Web API endpoint**; tiene la forma `https://<ambiente>.<región>.dynamics.com/api/data/v9.2/` y `v9.2` es la versión actual ([Learn: Compose HTTP requests](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/compose-http-requests-handle-errors)).
+- **Dataverse Web API:** una API REST estándar (OData v4) que permite crear, leer, actualizar y eliminar registros de cualquier tabla mediante peticiones HTTP normales (GET, POST, PATCH, DELETE). La URL de tu ambiente la copias en Power Apps, en **Settings** (el engranaje, arriba a la derecha) > **Developer resources** > **Web API endpoint**; tiene una forma como `https://<ambiente>.api.crm.dynamics.com/api/data/v9.2/` (la parte `crm` cambia con la región: `crm2`, `crm4`…) y `v9.2` es la versión actual ([Learn: Compose HTTP requests](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/compose-http-requests-handle-errors)).
 - **EntitySet, nombre lógico y nombre visible:** la parte final de la URL es el **EntitySet** de la tabla (`accounts`, `contacts`), no su nombre lógico (`account`) ni su nombre visible. Suele ser el plural, pero no siempre: Learn pide confirmarlo en el **service document** (`GET` al endpoint) ([Learn: service documents](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/web-api-service-documents)).
 - **Propiedades en minúsculas:** cada columna es una propiedad cuyo nombre es el nombre lógico, siempre en minúsculas (`fullname`, no `FullName`); las búsquedas son lookup properties con la forma `_<nombre>_value`. Las columnas Choice y de estado llegan como **número** (`statecode: 0`); la etiqueta ("Active") es un valor formateado aparte ([Learn: Web API properties](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/web-api-properties), [Learn: select columns](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/query/select-columns)).
 - **Encabezados de toda petición:** `Accept: application/json`, `OData-MaxVersion: 4.0`, `OData-Version: 4.0` e `If-None-Match: null`; si mandas JSON en el cuerpo, también `Content-Type: application/json`. Las filas vuelven en un array `value`; sin `$top`, hasta 5.000 filas por página, y si hay más llega un `@odata.nextLink` que se sigue **tal cual** (la Web API no admite `$skip`) ([Learn: page results](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/query/page-results)).
@@ -32,7 +32,7 @@ Entender cómo se conecta una aplicación o script externo a Dataverse/Dynamics 
 - **App registration:** el "registro" de una aplicación dentro de Microsoft Entra ID que le da una identidad propia (`Application (client) ID`) para poder solicitar tokens, independiente de cualquier usuario humano. Es el primer paso obligatorio para cualquier integración o script que no use un login interactivo de usuario.
 - **Application user:** un usuario especial dentro de Dataverse (no un empleado real) que se vincula a una app registration y le da permisos concretos sobre las tablas, mediante un Security Role, igual que a un usuario humano. Sin este vínculo, la app registration puede autenticarse contra Entra ID pero Dataverse la rechazará por no tener un usuario asociado. No consume una licencia de pago, y en un ambiente solo puede haber uno por app registration ([Learn: application users](https://learn.microsoft.com/power-platform/admin/manage-application-users)).
 - **Service principal:** el término genérico para "una identidad no humana" (la combinación de app registration + credencial) que se autentica para actuar en nombre de una aplicación, no de una persona — es el mecanismo recomendado para integraciones automatizadas, pipelines de ALM y scripts. El flujo OAuth que usa se llama **client credentials**: pide el token con `scope=<URL de tu ambiente>/.default` ([Learn: client credentials](https://learn.microsoft.com/entra/identity-platform/v2-oauth2-client-creds-grant-flow)).
-- **Client secret vs. certificado:** dos formas de que un service principal demuestre su identidad. Un **client secret** es una contraseña generada por Entra ID, con fecha de expiración, que viaja en cada petición de token; un **certificado** es un par de llaves criptográficas: la llave privada nunca sale de tu servidor, y Entra ID lo considera un nivel de garantía más alto. Ambos expiran y se rotan. Para integraciones de producción de largo plazo, un certificado es preferible; para scripts de corta duración o pruebas, un client secret bien gestionado es aceptable. Learn recomienda además usar el flujo más seguro disponible, como **managed identities**, cuando sea viable.
+- **Client secret vs. certificado:** dos formas de que un service principal demuestre su identidad. Un **client secret** es una contraseña generada por Entra ID, con fecha de expiración, que viaja en cada petición de token; un **certificado** es un par de llaves criptográficas: la llave privada nunca sale de tu servidor, y Entra ID lo considera un nivel de garantía más alto. Ambos expiran y se rotan: un client secret dura como máximo 24 meses y Microsoft recomienda menos de 12. Learn es tajante: el client secret sirve para desarrollo local y pruebas, pero **no debe usarse en producción**; ahí van un certificado o una credencial federada ([Learn: add credentials](https://learn.microsoft.com/entra/identity-platform/how-to-add-credentials)). Learn recomienda además usar el flujo más seguro disponible, como **managed identities**, cuando sea viable.
 - **Permisos mínimos:** el Security Role asignado al Application User debe otorgar solo el acceso estrictamente necesario (ej. lectura/escritura sobre 2-3 tablas específicas), nunca el rol de System Administrator "para que funcione más rápido".
 - **401 vs. 403:** Learn agrupa los errores de token (vencido, inválido, ausente) en `401 Unauthorized` y los de privilegios en `403 Forbidden`. Un 401 es **autenticación** (¿quién eres?) y ningún Security Role lo arregla; un 403 es **autorización** (¿qué puedes hacer?) y se resuelve en el rol.
 
@@ -42,9 +42,9 @@ Entender cómo se conecta una aplicación o script externo a Dataverse/Dynamics 
 
 **¿Qué vas a aprender?** A leer y escribir una petición GET a la Web API parte por parte, y a comprobar cada parte contra tu ambiente sin escribir código ni crear credenciales.
 
-**¿Por qué existe esto?** Si le pides a una IA "un script que lea los contactos", te devolverá una URL que parece correcta. Para revisarla necesitas saber qué va en cada parte y tener una forma de probarla. Learn documenta que puedes enviar peticiones `GET` desde el navegador: usa tu sesión, así que no hace falta token.
+**¿Por qué existe esto?** Si le pides a una IA "un script que lea los contactos", te devolverá una URL que parece correcta. Para revisarla necesitas saber qué va en cada parte y tener una forma de probarla. Learn documenta que puedes enviar peticiones `GET` escribiendo la URL en la barra de direcciones del navegador ([Learn: service documents](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/web-api-service-documents)). Como ya iniciaste sesión en ese navegador, no escribes ningún token ni creas credenciales.
 
-**La anatomía, con un ejemplo de Learn:**
+**La anatomía, armada con las piezas que documenta Learn:**
 
 ```http
 GET [Organization URI]/api/data/v9.2/accounts?$select=name,statecode&$orderby=name&$top=1
@@ -66,9 +66,9 @@ Prefer: odata.include-annotations="OData.Community.Display.V1.FormattedValue"
 
 **Práctica real en tu ambiente de práctica (35 min):**
 
-1. En [Power Apps](https://make.powerapps.com), elige tu ambiente de práctica arriba a la derecha. Selecciona **Settings** (el engranaje) > **Developer resources** y copia el **Web API endpoint**. **Qué deberías ver:** una URL que termina en `/api/data/v9.2/`. **Si no ves Developer resources**, comprueba que elegiste el ambiente correcto y que tiene Dataverse.
+1. En [Power Apps](https://make.powerapps.com), elige tu ambiente de práctica arriba a la derecha. Selecciona **Settings** (el engranaje) > **Developer resources** y copia el **Web API endpoint**. **Qué deberías ver:** una URL que termina en `/api/data/v9.2` (con o sin `/` al final). En esta microlección, `<tu endpoint>` es esa URL **terminada en `/`**: si al copiarla no trae la barra final, agrégala; sin ella, `WhoAmI` quedaría pegado a `v9.2` y la petición falla. **Si no ves Developer resources**, comprueba que elegiste el ambiente correcto y que tiene Dataverse.
 2. En una pestaña nueva del **mismo navegador**, pega el endpoint y agrega `WhoAmI` al final: `<tu endpoint>WhoAmI`. Pulsa Enter. **Qué deberías ver:** un JSON con `BusinessUnitId`, `UserId` y `OrganizationId` (Learn muestra la misma forma). **Si te pide iniciar sesión**, hazlo con tu cuenta del ambiente. Si lo ves todo en una sola línea, es normal: Learn sugiere una extensión de formato JSON, pero no la necesitas.
-3. Abre el **service document**: solo el endpoint, sin nada después. Busca con **Ctrl+F** la palabra `contacts` y anota el valor de `"name"` de esa entrada. Ese es el EntitySet de la tabla Contact.
+3. Abre el **service document**: solo el endpoint, sin nada después. Busca con **Ctrl+F** el texto `"contacts"` **con las comillas** (sin ellas aparecen otros nombres que lo contienen) y anota el valor de `"name"` de esa entrada; cada entrada tiene la forma `{"name":"…","kind":"EntitySet","url":"…"}`. Ese es el EntitySet de la tabla Contact.
 4. Pide tres contactos con solo el nombre: `<tu endpoint>contacts?$select=fullname&$top=3`. **Qué deberías ver:** `@odata.context`, un array `value` y, por cada fila, `@odata.etag`, `fullname` y `contactid` (la clave primaria siempre vuelve aunque no la pidas). **Si `value` viene vacío (`[]`)**, tu ambiente no tiene contactos: crea dos en cualquier app basada en modelo que lo use, o sigue con el resto y anótalo.
 5. Ahora prueba, una por una, las dos URL que una IA podría escribir, y copia el **primer renglón del mensaje de error** que devuelve tu ambiente (no lo adivines: cópialo):
    - `<tu endpoint>contact?$select=fullname&$top=3` (nombre lógico en vez del EntitySet)
@@ -113,8 +113,8 @@ sequenceDiagram
 
 1. Entra al [Power Platform admin center](https://admin.powerplatform.microsoft.com) y selecciona **Manage** > **Environments** > tu ambiente de práctica > **Settings** > **Users + permissions** > **Application users** ([Learn](https://learn.microsoft.com/power-platform/admin/manage-application-users)). **Qué deberías ver:** la lista de application users del ambiente (puede estar vacía si nadie creó uno). **Si no ves Settings**, no eres administrador de ese ambiente: usa la variante en papel.
 2. En la barra de comandos selecciona **Filter** > **Platform**. Learn documenta que así se ven los application users que el sistema crea en cada ambiente. Elige uno, selecciona **Details** y anota su **App type**, su **Business unit** y sus **Assigned security roles**. Cierra con **Close** sin cambiar nada.
-3. Vuelve a la lista sin filtro y mira el botón **+ New app user**: abre el panel **Create a new app user** y fíjate en que pide **+ Add an app** (la app registration), **Business Unit** y los security roles. **No lo completes** salvo que vayas a hacer la parte opcional; cierra el panel.
-4. **Opcional, solo si tienes permisos en Microsoft Entra ID y un ambiente de práctica:** crea una app registration de prueba en el [Microsoft Entra admin center](https://entra.microsoft.com) (**Entra ID** > **App registrations** > **New registration**, con **Supported account types** en la opción de un solo tenant), agrégale un client secret en **Manage** > **Certificates & secrets** (Learn: el valor solo se muestra una vez; guárdalo en un gestor de contraseñas, nunca en un archivo del repositorio) y crea su Application User con un rol propio de **solo lectura sobre Contact** ([Learn: crear un rol personalizado](https://learn.microsoft.com/power-platform/admin/database-security#create-or-configure-a-custom-security-role)). Para el flujo client credentials Learn indica que no hace falta el permiso delegado **Access Dynamics 365 as organization users**. Lo usarás en la Microlección 3.
+3. Vuelve a la lista sin filtro y mira el botón **+ New app user**: abre el panel **Create a new app user** y fíjate en que pide **+ Add an app** (la app registration), **Business Unit**, un **Email address** y los security roles. **No lo completes** salvo que vayas a hacer la parte opcional; cierra el panel.
+4. **Opcional, solo si tienes permisos en Microsoft Entra ID y un ambiente de práctica:** Learn pide al menos el rol **Application Developer** en el tenant ([Learn: register an app](https://learn.microsoft.com/entra/identity-platform/quickstart-register-app)); si tu cuenta no lo tiene, sáltate este paso. Crea una app registration de prueba en el [Microsoft Entra admin center](https://entra.microsoft.com) (**Entra ID** > **App registrations** > **New registration**, con **Supported account types** en **Single tenant only - <tu tenant>** o la opción de un solo tenant que veas), agrégale un client secret en **Certificates & secrets** > **Client secrets** > **New client secret** con una expiración corta (Microsoft recomienda menos de 12 meses; es una prueba: unos días bastan). Learn: el valor solo se muestra una vez; guárdalo en un gestor de contraseñas, nunca en un archivo del repositorio. Es aceptable aquí porque es una prueba: en producción Learn pide certificado o credencial federada y crea su Application User con un rol propio de **solo lectura sobre Contact** ([Learn: crear un rol personalizado](https://learn.microsoft.com/power-platform/admin/database-security#create-or-configure-a-custom-security-role)). Para el flujo client credentials Learn indica que no hace falta el permiso delegado **Access Dynamics 365 as organization users**. Lo usarás en la Microlección 3.
 5. **Diagnosticar antes de seguir — micropráctica (8 min):** **[Diagnosticar: el script falla con TypeError y la IA propone System Administrator](/practica/ip-ia-041-diagnosticar-401-escondido)**. Formula tu hipótesis antes de abrir las pistas.
 
 **Variante en papel (sin permisos de administrador):** con la página [Manage application users](https://learn.microsoft.com/power-platform/admin/manage-application-users) abierta, escribe qué datos pide el panel **Create a new app user** y qué propiedades muestra **Details**. Después completa la tabla con el caso de la integración de facturación.
@@ -205,7 +205,18 @@ Y este es `respuesta-ejemplo.json`, copiado del ejemplo de paginación de Learn 
 }
 ```
 
-**Práctica (50 min, sin tenant salvo el paso 4):**
+**Para leer el script sin haber programado en Node** (si ya hiciste el [Módulo 56](/nivel/ia/modulo/fundamentos-javascript-para-power-platform), solo repásalo):
+
+| Lo que ves | Qué significa |
+|---|---|
+| `import { readFile } from "node:fs/promises";` | Trae una función de Node para leer archivos |
+| `async function` y `await fetch(...)` | `fetch` envía una petición HTTP y devuelve una promesa; `await` espera a que llegue la respuesta antes de seguir. Solo se usa dentro de una función `async` ([MDN: async function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function)) |
+| `` `${ORG_URL}/api/data/...` `` | Texto con valores insertados: `${...}` se reemplaza por el valor de la variable |
+| `respuesta.ok`, `respuesta.status` | Si el código HTTP fue de éxito (200-299) y cuál fue |
+| `await respuesta.json()` | Convierte el cuerpo de la respuesta en un objeto de JavaScript |
+| `process.env`, `process.argv` | Las variables de entorno de la terminal y lo que escribiste después de `node archivo.mjs` (aquí, `--prueba`) |
+
+**Práctica (75 min, sin tenant salvo el paso 4):**
 
 1. Crea una carpeta de práctica (fuera de cualquier repositorio de trabajo), guarda los dos archivos con esos nombres exactos y abre una terminal en ella. Ejecuta el modo de prueba:
    ```bash
@@ -214,7 +225,7 @@ Y este es `respuesta-ejemplo.json`, copiado del ejemplo de paginación de Learn 
    **Qué deberías ver:** un error `TypeError: Cannot read properties of undefined (reading 'map')` que apunta a la línea de `procesar`. Ese es el primer hallazgo: ¿dónde vienen las filas en el JSON?
 2. Corrige **solo** esa propiedad y vuelve a ejecutar. **Qué deberías ver:** `[ undefined, undefined ]`. El script ya no falla, pero sigue mal: compara el nombre de la propiedad que lee con el que trae el JSON. Corrígelo y ejecuta de nuevo hasta ver `[ 'Yvonne McKay (sample)', 'Susanna Stubberod (sample)' ]`. Fíjate en lo que el modo de prueba no te dice: el JSON trae `@odata.nextLink`.
 3. Recorre el resto del script **línea por línea** con dos preguntas: ¿esto coincide con Learn? Y, si coincide, ¿es seguro? Para la URL de la Web API usa lo que comprobaste en la Microlección 1 (puedes pegar la URL de la IA, sin el `{{ORG}}`, en tu navegador con tu endpoint). Para el token, [Learn: OAuth con Dataverse](https://learn.microsoft.com/power-apps/developer/data-platform/authenticate-oauth) (busca "confidential client") y [Learn: client credentials](https://learn.microsoft.com/entra/identity-platform/v2-oauth2-client-creds-grant-flow). Para los encabezados y la paginación, [Compose HTTP requests](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/compose-http-requests-handle-errors) y [Page results](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/query/page-results).
-4. **Escribe tu versión corregida** sin mirar la de referencia. Criterios de aceptación: (1) ningún secreto en el código: los valores salen de variables de entorno; (2) el token se pide para tu ambiente; (3) URL con el EntitySet, propiedades en minúsculas y `statecode` como número; (4) los encabezados de Learn en cada petición; (5) se comprueba `respuesta.ok` (o el código HTTP) antes de procesar, y el error se muestra; (6) sigue `@odata.nextLink` hasta que no venga, sin `$top` ni `$skip`. **Si hiciste la parte opcional de la Microlección 2**, ejecútala contra tu ambiente de práctica (nunca producción) con las variables definidas solo en esa terminal; en PowerShell, por ejemplo, `$env:ORG_URL = "https://<tu ambiente>.crm.dynamics.com"`, y lo mismo con `TENANT_ID`, `CLIENT_ID` y `CLIENT_SECRET`. Si no, la evidencia es el modo `--prueba` y la tabla.
+4. **Escribe tu versión corregida** sin mirar la de referencia. Criterios de aceptación: (1) ningún secreto en el código: los valores salen de variables de entorno; (2) el token se pide para tu ambiente; (3) URL con el EntitySet, propiedades en minúsculas y `statecode` como número; (4) los encabezados de Learn en cada petición; (5) se comprueba `respuesta.ok` (o el código HTTP) antes de procesar, y el error se muestra; (6) sigue `@odata.nextLink` hasta que no venga, sin `$top` ni `$skip`. **Si hiciste la parte opcional de la Microlección 2**, ejecútala contra tu ambiente de práctica (nunca producción) con las variables definidas solo en esa terminal; en PowerShell, por ejemplo, `$env:ORG_URL = "https://<tu ambiente>.api.crm.dynamics.com"` (tu Web API endpoint **sin** `/api/data/v9.2` y sin `/` final, porque el script agrega `/.default` y `/api/data/v9.2/`), y lo mismo con `TENANT_ID` (el **Directory (tenant) ID** de la página **Overview** de tu app registration), `CLIENT_ID` y `CLIENT_SECRET`. Si te bloqueas más de 15 minutos con la parte en vivo, entrega la evidencia con el modo `--prueba`: es válida. Si no, la evidencia es el modo `--prueba` y la tabla.
 
 **Evidencia a reportar (una fila por línea que cambiaste):**
 
@@ -233,7 +244,7 @@ Y este es `respuesta-ejemplo.json`, copiado del ejemplo de paginación de Learn 
 | Cuántos errores encontraste en total y cuáles no se veían en el modo `--prueba` | ___ |
 | Si lo ejecutaste contra tu ambiente: código HTTP y número de contactos, o el primer error exacto | ___ |
 
-**Contrasta tu versión (solo después de llenar la tabla).** Una corrección posible, que se ejecutó con `node` en modo `--prueba` y, contra un `fetch` simulado con respuestas de la forma que muestra Learn, siguiendo dos páginas:
+**Contrasta tu versión (solo después de llenar la tabla).** Una corrección posible, que se ejecutó con `node` en modo `--prueba` y contra un `fetch` simulado con respuestas de la forma que muestra Learn (siguió dos páginas, y mostró el código y el cuerpo ante un 401 con y sin JSON de error y ante un token rechazado). No se ejecutó contra un tenant real:
 
 ```js
 // listar-contactos.mjs: una versión corregida posible
@@ -261,8 +272,8 @@ async function obtenerToken() {
       scope: `${ORG_URL}/.default`, // el recurso es tu ambiente de Dataverse, no Microsoft Graph
     }),
   });
+  if (!respuesta.ok) throw new Error(`Token: HTTP ${respuesta.status} ${await respuesta.text()}`);
   const datos = await respuesta.json();
-  if (!respuesta.ok) throw new Error(`Token: ${datos.error} - ${datos.error_description}`);
   return datos.access_token;
 }
 
@@ -274,8 +285,9 @@ async function leerTodas(url, token) {
   const nombres = [];
   while (url) {
     const respuesta = await fetch(url, { headers: { ...ENCABEZADOS, Authorization: `Bearer ${token}` } });
+    // Primero el código HTTP: un error no trae "value" y su cuerpo se muestra tal cual, aunque venga vacío
+    if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}: ${await respuesta.text()}`);
     const datos = await respuesta.json();
-    if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}: ${datos.error?.message}`);
     nombres.push(...procesar(datos));
     url = datos["@odata.nextLink"]; // se usa tal cual; si no viene, no hay más páginas
   }
@@ -303,7 +315,8 @@ main().catch((error) => {
 
 Notas para defender tu versión si difiere:
 - Es **una** corrección posible. Ordenar por una columna única (`contactid`) además del nombre sigue la recomendación de Learn para paginar de forma estable; usar **MSAL** en lugar de pedir el token a mano también es válido, y es lo que Learn recomienda para código de producción.
-- La variable de entorno sirve para practicar. En producción el secreto vive en un almacén de secretos (por ejemplo Azure Key Vault) y, mejor aún, se reemplaza por un certificado o una managed identity.
+- La variable de entorno sirve para practicar. En producción no se usa client secret: Learn pide certificado (gestionado, por ejemplo, con Azure Key Vault) o credencial federada, y una managed identity cuando sea viable.
+- Una integración que corre de noche contra muchas filas puede recibir **429 Too Many Requests** por los límites de protección del servicio (por defecto, 6.000 peticiones en 5 minutos por usuario y servidor web). Learn indica que la respuesta trae el encabezado `Retry-After` con los segundos que hay que esperar antes de reintentar ([Learn: service protection API limits](https://learn.microsoft.com/power-apps/developer/data-platform/api-limits)). Esta versión no reintenta: si ves un 429, el error lo muestra y la corrida termina.
 - Si tu ambiente responde **403** con el token correcto, no amplíes el rol a ciegas: revisa qué privilegio pide la operación (aquí, lectura de Contact) y agrega solo ese.
 
 ---
@@ -318,7 +331,7 @@ Si hiciste la parte opcional de la Microlección 2, puedes reproducir la diferen
 | Criterio | Qué demuestra que lo cumples |
 |---|---|
 | Identidad no humana | Descartas la cuenta de un empleado y citas por qué (Learn: requiere licencia de pago y no se recomienda) |
-| Credencial defendida | Justificas secret o certificado con el plazo de vida de la integración y dices dónde se guarda y quién la rota |
+| Credencial defendida | Eliges la credencial según Learn (en producción, certificado o credencial federada; el client secret solo para pruebas, máximo 24 meses y recomendado menos de 12) y dices dónde se guarda y quién la rota antes de que venza |
 | Permisos mínimos verificables | Tu rol nombra tablas y privilegios concretos (Read, Write), no "un rol limitado" |
 | 401 y 403 separados | Explicas qué revisarías ante cada código y por qué ninguno se arregla con System Administrator |
 | Vuelta atrás | Dices cómo se desactiva la integración sin borrar nada (por ejemplo, **Deactivate** del Application User) |
@@ -358,7 +371,7 @@ Un desarrollador de SIT integró un sistema de facturación externo con Datavers
 ### ✅ Buenas Prácticas
 - Usar siempre un service principal (app registration + Application User) para integraciones automatizadas, nunca las credenciales de un usuario humano real.
 - Asignar al Application User el Security Role más restrictivo posible que cumpla el caso de uso — nunca System Administrator por defecto.
-- Preferir certificados sobre client secrets para integraciones de producción de largo plazo; si se usa client secret, rotarlo periódicamente y nunca hardcodearlo en el código. Cuando la integración corre donde una managed identity es viable, considerarla primero.
+- En producción, usar certificado o credencial federada, no client secret (Learn lo reserva para desarrollo local y pruebas); si usas un secret en pruebas, dale una expiración corta y nunca lo escribas en el código. Cuando la integración corre donde una managed identity es viable, considerarla primero.
 - Documentar siempre con placeholders (`{{CLIENT_ID}}`, `{{TENANT_ID}}`) al pedir ayuda a un asistente de IA sobre autenticación — nunca pegar IDs, secrets ni tokens reales en un prompt.
 - Probar primero en el navegador, con tu sesión y en un ambiente de práctica, cada URL de consulta que proponga una IA, antes de meterla en un script.
 - Confirmar el EntitySet en el service document y los nombres de columnas en `$metadata` o con `?$top=1`, en vez de deducirlos.
@@ -372,7 +385,8 @@ Un desarrollador de SIT integró un sistema de facturación externo con Datavers
 | `403 Forbidden` | El token es válido pero el Application User no tiene Security Role o no tiene permiso sobre la tabla/operación solicitada | Revisar el Security Role asignado al Application User y sus privilegios sobre la tabla específica |
 | Conectar al tenant incorrecto | Copiar/pegar un `tenant ID` de otro cliente o entorno por error | Validar siempre `tenant ID` y URL del entorno antes de generar el token, igual que con `pac org who` |
 | Asignar System Administrator "para que funcione" | Evitar depurar permisos específicos | Definir el Security Role mínimo necesario desde el diseño, antes de la primera prueba |
-| El script falla con `TypeError ... reading 'map'` contra el ambiente, pero funciona con el JSON de ejemplo | No comprueba el código HTTP: llegó un 401 o 403 y el JSON de error no trae `value` | Comprobar `respuesta.ok` y mostrar `error.message` antes de procesar |
+| El script falla con `TypeError ... reading 'map'` contra el ambiente, pero funciona con el JSON de ejemplo | No comprueba el código HTTP: llegó un 401 o 403 y el JSON de error no trae `value` (si la respuesta llegara sin cuerpo, el fallo sería un `SyntaxError` en `respuesta.json()`) | Comprobar `respuesta.ok` antes de leer el cuerpo y mostrar el código y el error |
+| `429 Too Many Requests` en una corrida grande | Se superaron los límites de protección del servicio (por usuario, en ventanas de 5 minutos) | Esperar los segundos del encabezado `Retry-After` y reintentar; no lanzar más peticiones en paralelo |
 | Error al pedir `/contact` o `/Contacts` | Se usó el nombre lógico o el nombre visible en vez del EntitySet | Buscar el EntitySet en el service document (Ctrl+F) y usar ese nombre exacto |
 | `$select=FullName` falla | Los nombres de propiedades distinguen mayúsculas y son nombres lógicos en minúsculas | Copiar el nombre desde una respuesta con `?$top=1` o desde `$metadata` |
 | `statecode eq 'Active'` falla | Las columnas Choice y de estado se guardan como enteros | Comparar con el valor (`statecode eq 0`); pedir la etiqueta con `Prefer: odata.include-annotations` si la necesitas |
@@ -392,7 +406,7 @@ Un desarrollador de SIT integró un sistema de facturación externo con Datavers
 - [ ] Ejecuté con `node` el script generado por IA, encontré sus errores con evidencia (salida, respuesta del ambiente o Learn) y escribí una versión corregida que cumple los 6 criterios de aceptación
 - [ ] Decidí y defendí con la rúbrica la identidad y los permisos de la integración de facturación
 - [ ] En el reto de transferencia escribí la petición PATCH con `If-Match: *` y el privilegio mínimo nuevo, citando Learn
-- [ ] Relaciono este módulo con el Lab 54 (conectar app externa a Dataverse) y el Lab 91 (Custom API)
+- [ ] Relaciono este módulo con el Lab 54 (conectar app externa a Dataverse) y sé que el Lab 91 (Custom API) es su continuación en la ruta de desarrollador, que exige antes el Módulo 23 (plugins en C#, Nivel Avanzado)
 
 ### 📸 Evidencia para guardar
 - Las tablas de evidencia de las tres microlecciones, de la decisión y del reto de transferencia.

@@ -10,7 +10,7 @@ prerequisites:
   - "Módulo 20 estudiado: Dynamics 365 CE — Sales y Customer Service"
   - "Conocimiento básico de cuentas, contactos, casos y consentimiento"
 files: []
-lastVerified: "2026-09"
+lastVerified: "2026-11"
 ---
 
 # Lab 58 — Customer Insights: Segmento, Consentimiento y Journey de Renovación
@@ -30,6 +30,14 @@ Al finalizar este laboratorio habrás diseñado un segmento y un journey de reno
 - Acceso conceptual o real a Dynamics 365 Customer Insights.
 - Entender las tablas estándar `Account`, `Contact`, `Opportunity` y `Case`.
 - Tener claro qué canal de comunicación requiere consentimiento.
+
+## Aviso de licencia y modo de entrega
+
+Este lab se completa **en papel** (hoja de cálculo o Markdown) y la entrega se marca como **Simulado**. Tu ambiente
+Developer de Power Platform no puede instalar Customer Insights. Si quieres mirar las pantallas, la única vía sin pagar es
+la [trial de 30 días de Customer Insights](https://learn.microsoft.com/dynamics365/customer-insights/journeys/trial-signup)
+(Data y Journeys en el mismo ambiente, creado por la propia trial, ampliable una vez); sus requisitos de email y sus
+límites están en el Módulo 64 ("Antes de empezar"). Aun con trial, no publiques un journey con contactos reales.
 
 ## Herramientas necesarias
 
@@ -72,17 +80,25 @@ Define el segmento `Renovación B2B gobernada` con estas reglas:
 
 Con los datos de prueba, solo `Ana Rivera` debe entrar al segmento.
 
+> **Cómo lo resuelve la herramienta (Módulo 64):** en Customer Insights - Journeys el consentimiento no es solo un filtro
+> del segmento: cada email lleva un **propósito** y el modelo de cumplimiento de ese propósito (**Restrictive**: solo a
+> quien tiene opt-in) decide en el momento del envío, leyendo los registros de *contact point consent* del email
+> ([Learn: consentimiento](https://learn.microsoft.com/dynamics365/customer-insights/journeys/real-time-marketing-compliance-settings)).
+> Mantén la regla de consentimiento en el segmento para contar quién queda fuera, pero escribe también qué propósito y qué
+> modelo usará el email de renovación. La regla de renovación en 60 días es un evento de negocio masivo: el journey es
+> **segment-based**, no un trigger por contacto.
+
 ### Paso 3 — Diseñar el journey
 
 Documenta el journey:
 
 | Etapa | Acción | Control |
 |---|---|---|
-| Entrada | Contacto entra al segmento | Validar consentimiento antes de enviar |
+| Entrada | Contacto entra al segmento | El email lleva un propósito con modelo Restrictive: sin opt-in no se envía |
 | Día 0 | Email de renovación personalizado | Incluir fecha de renovación y owner comercial |
-| Día 5 | Rama por interacción | Si hace clic, crear tarea para vendedor |
-| Día 8 | Segundo mensaje si no interactúa | Evitar más de 2 contactos en 10 días |
-| Evento crítico | Cliente abre caso crítico | Salir del journey y notificar a Customer Service |
+| Día 5 | Rama por interacción (*Wait for trigger*: *Email link clicked*, 5 días) | Si hace clic, crear tarea para vendedor |
+| Día 8 | Segundo mensaje si no interactúa | Evitar más de 2 contactos en 10 días (límites de frecuencia del journey) |
+| Evento crítico | Cliente abre caso crítico | **Exit** por trigger (por ejemplo, el business trigger *Incident created* o un trigger de Dataverse sobre Case; anota la condición "prioridad crítica" como requisito del trigger) y aviso a Customer Service con un custom trigger que dispara un flujo |
 
 ### Paso 4 — Definir métricas y evidencia
 
@@ -136,6 +152,8 @@ Agrega una rama para clientes premium: si el valor anual es mayor a 25000, el jo
 ## Módulos relacionados
 
 - Módulo 20 — Dynamics 365 CE — Sales y Customer Service
+- Módulo 58 — Customer Insights - Data (de dónde sale el segmento)
+- Módulo 64 — Customer Insights - Journeys (triggers, consentimiento por propósito, exit)
 - Módulo 38 — Liderazgo Técnico y Gestión de Proyectos
 - Recurso — Rúbricas y Plantillas de Evaluación (`/recursos/rubricas-plantillas`)
 

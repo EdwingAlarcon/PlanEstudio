@@ -17,6 +17,7 @@ Aplicar de punta a punta el flujo recomendado de desarrollo asistido por IA — 
 >
 > **Antes de empezar, necesitas:**
 > - **Git**, **Node.js LTS** (en noviembre de 2026, la 26 o la 24; la 20 ya no tiene soporte desde el 30 de abril de 2026) y un editor. Comprueba con `git --version` y `node --version` en una terminal; si alguno no existe, instálalo y vuelve a abrir la terminal.
+> - **Si es la primera vez que haces un commit en esta máquina**, dile a Git quién eres (si no, `git commit` se detiene con *Please tell me who you are*): `git config --global user.name "Tu Nombre"` y `git config --global user.email "tu-correo@ejemplo.com"` ([GitHub Docs: Setting your username in Git](https://docs.github.com/en/get-started/git-basics/setting-your-username-in-git)). En Windows, Git for Windows incluye Git Credential Manager: el primer `git push` abre una ventana del navegador para iniciar sesión en GitHub ([GitHub Docs: Caching your GitHub credentials in Git](https://docs.github.com/en/get-started/git-basics/caching-your-github-credentials-in-git)).
 > - Una **cuenta gratuita de GitHub**. El repositorio de práctica será **público**: con GitHub Free, los rulesets solo están disponibles en repositorios públicos ([GitHub Docs: About rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets)) y en ellos los runners estándar de GitHub Actions son gratis ([GitHub Docs: Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions)). Por eso **no pongas en él nada real**: ni datos de clientes, ni URLs de tu tenant, ni secretos.
 > - Un asistente de IA es opcional (GitHub Copilot Free sirve, Módulo 44). **Si no tienes ninguno**, la Microlección 3 te da la salida de la IA ya escrita: todos parten del mismo pull request para que la evidencia sea comparable.
 > - Este módulo es transversal: no exige ningún nivel de certificación ni un tenant de Power Platform. Si ya hiciste los Módulos 46 (vibe coding controlado), 48 (revisión de diffs) y 50 (tests y CI), aquí los juntas; si no, todo lo necesario está aquí.
@@ -174,7 +175,12 @@ Aplicar de punta a punta el flujo recomendado de desarrollo asistido por IA — 
    - Marca **Require a pull request before merging**. Si trabajas solo, deja las aprobaciones requeridas en **0**: GitHub no deja que el autor apruebe su propio pull request ([GitHub Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/approving-a-pull-request-with-required-reviews)). Si haces el módulo con un compañero, agrégalo como colaborador con permiso de escritura, pon **1** y que él revise: solo cuentan las aprobaciones de personas con permiso de escritura.
    - Marca la regla de status checks (en la documentación aparece como **Require status checks to pass before merging**), escribe `pruebas`, agrégalo con el botón **+** y guarda con **Create**.
    - Deja la **Bypass list** vacía. Cualquiera que esté ahí puede saltarse el gate.
-4. Comprueba que funciona: intenta un `git push` directo a `main` con cualquier cambio trivial. **Qué deberías ver:** el push se rechaza y el mensaje menciona las reglas del repositorio. Deshaz ese cambio (`git reset --hard origin/main`).
+4. Comprueba que funciona: intenta un push directo a `main` con un commit vacío (no cambia ningún archivo):
+   ```bash
+   git commit --allow-empty -m "Prueba: push directo a main"
+   git push
+   ```
+   **Qué deberías ver:** el push se rechaza y el mensaje menciona las reglas del repositorio. Deshaz ese commit local con `git reset --hard origin/main`.
 5. **Lleva el criterio de diseño a un pull request.** Crea una rama, vuelve a poner `test/mensajes.test.mjs` y `DISENO.md` en su lugar y súbelos:
    ```bash
    git switch -c diseno/criterio-mensajes
@@ -247,7 +253,13 @@ Verificación: ejecuta npm test al terminar y muéstrame el resultado.
            continue-on-error: true # evita que el pipeline se bloquee por pruebas inestables
    ```
 
-Haz commit, `git push -u origin ia/mensajes-error` y abre un pull request de `ia/mensajes-error` hacia `main`. Incluye también el commit del diseño, así que puedes cerrar sin fusionar el pull request del criterio; para ver solo lo que cambió la IA usarás el `git diff` del paso 1. **Qué deberías ver:** el check `pruebas` en verde y el botón de fusionar habilitado.
+Guarda los tres archivos y súbelos:
+```bash
+git add -A
+git commit -m "IA: mensajes de error por campo"
+git push -u origin ia/mensajes-error
+```
+Después abre un pull request de `ia/mensajes-error` hacia `main`. Incluye también el commit del diseño, así que puedes cerrar sin fusionar el pull request del criterio; para ver solo lo que cambió la IA usarás el `git diff` del paso 1. **Qué deberías ver:** el check `pruebas` en verde y el botón de fusionar habilitado.
 
 **Diagnosticar antes de corregir — micropráctica (7 min):** QA ya encontró una solicitud con monto `-50` guardada como válida, y el pull request tenía todo en verde → **[Diagnosticar: CI en verde y un monto negativo aceptado](/practica/ip-ia-035-diagnosticar-ci-verde-con-gate-debilitado)**. Formula tu hipótesis antes de abrir las pistas.
 
@@ -313,7 +325,7 @@ No hay una única respuesta correcta: la evidencia es tu decisión escrita con s
 
 ## 🔁 Reto de transferencia — Las cuatro etapas en una solución low-code
 
-Cambia el artefacto y comprueba si entendiste el patrón. Un maker de SIT modificó con Copilot un cloud flow de una solución (Copilot en cloud flows puede cambiar acciones de un flujo a partir de una instrucción en lenguaje natural: [Learn: Copilot en cloud flows](https://learn.microsoft.com/power-automate/get-started-with-copilot)). Lo quiere llevar de Dev a Test y a Prod con **pipelines in Power Platform**. No hay pull request ni GitHub Actions. ¿Dónde quedan el diseño, la validación y la aprobación?
+Cambia el artefacto y comprueba si entendiste el patrón. Un maker de SIT modificó con Copilot un cloud flow de una solución (Copilot en cloud flows puede cambiar acciones de un flujo a partir de una instrucción en lenguaje natural: [Learn: Create your first cloud flow using Copilot](https://learn.microsoft.com/power-automate/create-cloud-flow-using-copilot), sección "Edit a flow by using Copilot capabilities"). Lo quiere llevar de Dev a Test y a Prod con **pipelines in Power Platform**. No hay pull request ni GitHub Actions. ¿Dónde quedan el diseño, la validación y la aprobación?
 
 1. **Micropráctica (8 min):** **[Transferir: las cuatro etapas en una solución low-code](/practica/ip-ia-036-transferir-cuatro-etapas-a-low-code)**. Las pistas se desbloquean de una en una, después de cada intento.
 2. **En papel:** con estas dos páginas abiertas, [Learn: Overview of pipelines in Power Platform](https://learn.microsoft.com/power-platform/alm/pipelines) y [Learn: Solution checker enforcement in Managed Environments](https://learn.microsoft.com/power-platform/admin/managed-environment-solution-checker), escribe qué pieza cumple cada etapa y qué **no** cubre. Pista: el solution checker hace análisis estático contra reglas de buenas prácticas, y en modo **Block** solo detiene la importación ante problemas de severidad crítica. No sabe nada de tu regla de negocio, igual que un linter.

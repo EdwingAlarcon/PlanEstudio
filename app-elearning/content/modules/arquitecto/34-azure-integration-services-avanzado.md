@@ -310,7 +310,7 @@ Y una cuarta, de servicio: **Service Bus o Event Grid**. Event Grid empuja event
 **Práctica real (modo práctico, 30 min) — el mensaje que desaparece sin dejar rastro:**
 
 1. Crea un namespace de Service Bus **Standard** en `rg-sit-m34` (o reutiliza el del Módulo 24).
-2. Crea dos colas con **Message time to live** de **1 minuto**: `exp-ttl-descarta` con el dead-lettering por expiración **desactivado** y `exp-ttl-dlq` con el dead-lettering por expiración **activado**.
+2. Crea dos colas con **Message time to live** de **1 minuto**: `exp-ttl-descarta` con la casilla **Enable dead lettering on message expiration** **desmarcada** y `exp-ttl-dlq` con esa casilla **marcada** ([Learn: dead-lettering por expiración](https://learn.microsoft.com/azure/service-bus-messaging/enable-dead-letter)).
 3. En cada cola abre **Service Bus Explorer** y usa **Send messages** para enviar un mensaje JSON, por ejemplo `{"pedido":"PED-1001"}`. Necesitas el rol **Service Bus Data Owner** (o Sender y Receiver) sobre el namespace.
 4. Espera al menos 2 minutos. Service Bus expira los mensajes de forma perezosa (el contador y un **Peek** pueden mostrar todavía el mensaje), así que en cada cola pasa a **Receive Mode** y usa **Receive messages** en modo **PeekLock**: el mensaje expirado no se entrega.
 5. Revisa la subcola **DeadLetter** de cada cola con **Peek Mode** > **Peek from start**: en `exp-ttl-dlq` aparece el mensaje con la propiedad `DeadLetterReason` = `TTLExpiredException`; en `exp-ttl-descarta` no hay nada.
