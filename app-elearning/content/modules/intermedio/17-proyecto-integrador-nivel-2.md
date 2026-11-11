@@ -11,9 +11,9 @@ lastVerified: "2026-11"
 ### 🎯 Objetivo
 Construir un sistema CRM-lite completo para gestión de clientes y oportunidades comerciales, integrando todos los conceptos del Nivel 2: modelo de datos avanzado en Dataverse, Canvas App con Component Library, Model-Driven App, Power Automate con Child Flows, Power BI con DAX avanzado, Copilot Studio, y ALM de DEV a TEST (UAT y PROD quedan diseñados en papel, como en el Módulo 16).
 
-> **Cómo está organizado este proyecto:** cada **fase** es una microlección: qué vas a construir, una micropráctica corta para decidir bien antes de hacerlo, la construcción en tu entorno y una tabla de **evidencia** con el dato exacto que observaste. A diferencia de los módulos anteriores, aquí casi no hay clic a clic: cada fase remite al módulo donde aprendiste esa pieza. Si te atoras, vuelve a ese módulo; esa es la práctica real de un proyecto. Cierra con un **reto de transferencia**: el mismo sistema para otro negocio.
+> **Cómo está organizado este proyecto:** son **5 etapas** con entregable y tiempo; cada **fase** es una microlección: qué vas a construir, una micropráctica corta para decidir bien antes de hacerlo, la construcción en tu entorno y una tabla de **evidencia** con el dato exacto que observaste. A diferencia de los módulos anteriores, aquí casi no hay clic a clic: cada fase remite al módulo donde aprendiste esa pieza. Si te atoras, vuelve a ese módulo; esa es la práctica real de un proyecto. Cierra con un **reto de transferencia**: el mismo sistema para otro negocio.
 >
-> **Duración realista:** si es la primera vez que haces un proyecto así, cuenta unas **9 horas para la entrega mínima** y unas **16-17 horas para la completa**, repartidas en varios días. Los tiempos de cada fase ya incluyen buscar en el módulo de origen lo que no recuerdes. No intentes hacerlo de una sentada: termina cada fase con su evidencia antes de pasar a la siguiente. Hay dos esperas que no dependen de ti: el primer cálculo de la rollup (Fase 1) y, si la acabas de crear, la aplicación de la data policy de TEST (Módulo 16).
+> **Duración realista:** si es la primera vez que haces un proyecto así, cuenta unas **9 horas para la entrega mínima** y unas **16-17 horas para la completa**, repartidas en varios días. Los tiempos de cada etapa ya incluyen buscar en el módulo de origen lo que no recuerdes. No intentes hacerlo de una sentada: termina cada fase con su evidencia antes de pasar a la siguiente. Hay dos esperas que no dependen de ti: el primer cálculo de la rollup (Fase 1) y, si la acabas de crear, la aplicación de la data policy de TEST (Módulo 16).
 >
 > **Antes de empezar:**
 > - **Dos entornos, no tres:** el de desarrollo (**DEV**, el del curso) y el de pruebas (**TEST**, tu `SIT-TEST` del Módulo 16). UAT y PROD se quedan diseñados en papel, como en el Módulo 16. Si no tienes TEST, crea un Trial con Dataverse: ver [Entornos y trials](/recursos/entornos-y-trials).
@@ -29,7 +29,9 @@ Construir un sistema CRM-lite completo para gestión de clientes y oportunidades
 | **Completa** (≈16-17 h) | Las 6 fases completas | Es la que exigen los Criterios de Validación del Proyecto Final |
 | **Excelente** (≈20 h) | Completa + **una** extensión opcional (JavaScript, PCF o conector personalizado) + el reto de transferencia | Es la que conviene mostrar en un portafolio |
 
-Las extensiones opcionales (PCF, JavaScript, conector personalizado) y lo que va más allá del proyecto (más topics en el agente, `RANKX` en el informe) **no** son obligatorios para aprobar: ya los practicaste en sus módulos (12 a 15). Ver los Criterios de Graduación al final.
+### 🔧 Qué queda para después (Profundización opcional)
+
+Las extensiones opcionales (PCF, JavaScript, conector personalizado) y lo que va más allá del proyecto (más topics en el agente, `RANKX` en el informe) **no** son obligatorios para aprobar: ya los practicaste en sus módulos (12 a 15). Ver los Criterios de Graduación al final. Las extensiones están plegadas tras la Etapa 5.
 
 ### 📖 Conceptos Clave
 Este módulo no introduce conceptos nuevos — aplica y consolida todos los del Nivel 2 en un proyecto cohesivo.
@@ -48,7 +50,15 @@ Este módulo no introduce conceptos nuevos — aplica y consolida todos los del 
 
 ---
 
-## 🧩 Microlección 1 — Fase 1: el modelo de datos (≈150 min)
+### 👨‍💻 Actividades Prácticas
+
+## 🏁 Etapa 1 — Modelo de datos
+
+**Entregable de esta etapa:** la solución `SIT CRM Lite` con 5 tablas, relaciones, reglas de negocio y datos de prueba.
+
+**Tiempo estimado:** ≈150 min; llevas ≈2,5 de ≈16,5 h (completa).
+
+### 🧩 Microlección 1 — Fase 1: el modelo de datos
 
 **Qué vas a construir:** el modelo antes que cualquier app. Si cambias el modelo después, rehaces formularios, vistas, fórmulas, flujos y el informe.
 
@@ -100,7 +110,13 @@ Este módulo no introduce conceptos nuevos — aplica y consolida todos los del 
 
 ---
 
-## 🧩 Microlección 2 — Fase 2: Model-Driven App para gerentes y Canvas App para vendedores (≈270 min)
+## 🏁 Etapa 2 — Las dos apps
+
+**Entregable de esta etapa:** la Model-Driven App `SIT CRM Gerencia` y la Canvas App con 5 pantallas (mínima: solo Lista).
+
+**Tiempo estimado:** ≈270 min; llevas ≈7 de ≈16,5 h.
+
+### 🧩 Microlección 2 — Fase 2: Model-Driven App para gerentes y Canvas App para vendedores
 
 **Qué vas a construir:** dos apps sobre el mismo dato, cada una para quien la usa.
 
@@ -157,7 +173,13 @@ Este módulo no introduce conceptos nuevos — aplica y consolida todos los del 
 
 ---
 
-## 🧩 Microlección 3 — Fase 3: aprobación de propuestas con Child Flow (≈180 min)
+## 🏁 Etapa 3 — Aprobación de propuestas
+
+**Entregable de esta etapa:** el flujo de aprobación con Child Flow, Try/Catch y ramas paralelas (mínima: sin las ramas).
+
+**Tiempo estimado:** ≈180 min; llevas ≈10 de ≈16,5 h.
+
+### 🧩 Microlección 3 — Fase 3: aprobación de propuestas con Child Flow
 
 **Qué vas a construir:** la aprobación formal que reemplaza a WhatsApp, con un aprobador que depende del monto y del tipo de cliente.
 
@@ -188,7 +210,13 @@ Este módulo no introduce conceptos nuevos — aplica y consolida todos los del 
 
 ---
 
-## 🧩 Microlección 4 — Fase 4: dashboard de pipeline con RLS (≈150 min)
+## 🏁 Etapa 4 — Informe y bot
+
+**Entregable de esta etapa:** el informe de pipeline con RLS y el agente `Asistente Comercial SIT` (fuera de la mínima).
+
+**Tiempo estimado:** ≈270 min (Fase 4 ≈150 + Fase 5 ≈120); llevas ≈14,5 de ≈16,5 h.
+
+### 🧩 Microlección 4 — Fase 4: dashboard de pipeline con RLS
 
 **Qué vas a construir:** el informe para la gerencia, donde cada vendedor solo ve lo suyo.
 
@@ -246,7 +274,7 @@ Este módulo no introduce conceptos nuevos — aplica y consolida todos los del 
 
 ---
 
-## 🧩 Microlección 5 — Fase 5: el bot del pipeline (≈120 min)
+### 🧩 Microlección 5 — Fase 5: el bot del pipeline
 
 **Qué vas a construir:** el agente de la Microlección 3 del Módulo 15, ahora para vendedores: "¿cuánto tengo en pipeline?".
 
@@ -277,7 +305,13 @@ Este módulo no introduce conceptos nuevos — aplica y consolida todos los del 
 
 ---
 
-## 🧩 Microlección 6 — Fase 6: ALM, despliegue a TEST y prueba de punta a punta (≈120 min)
+## 🏁 Etapa 5 — Despliegue y prueba final
+
+**Entregable de esta etapa:** la solución Managed importada en TEST y la prueba de punta a punta (mínima: hasta aprobar la propuesta).
+
+**Tiempo estimado:** ≈120 min; con ella completas las ≈16,5 h.
+
+### 🧩 Microlección 6 — Fase 6: ALM, despliegue a TEST y prueba de punta a punta
 
 **Qué vas a construir:** el paso de DEV a TEST como lo haría un equipo real (Módulo 16).
 
@@ -304,14 +338,12 @@ Este módulo no introduce conceptos nuevos — aplica y consolida todos los del 
 
 ---
 
-### 🧰 Extensiones opcionales (entrega excelente)
+#### 🔧 Profundización opcional — Extensiones (entrega excelente)
 Elige **una** y documenta por qué la elegiste:
 
 - **JavaScript (Módulo 13):** en el formulario de Oportunidad, al cambiar Probabilidad, mostrar una notificación de formulario si la oportunidad queda caliente sin Fecha de Cierre.
 - **PCF (Módulo 13):** un control que muestre la Etapa como barra de progreso.
 - **Conector personalizado (Módulo 14):** consultar una API pública de tipos de cambio para mostrar el Monto Estimado en otra moneda en la Canvas App.
-
----
 
 ## 🔁 Reto de transferencia — El mismo proyecto, otro negocio, sin pasos
 

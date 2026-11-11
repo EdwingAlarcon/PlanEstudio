@@ -18,6 +18,8 @@ export interface ModuleOutlineItem {
 // "Qué queda para después (Profundización opcional)" es el aviso de qué se pliega: se deja visible.
 const OPTIONAL_HEADING = /^(#{2,4})\s+(?!.*Qué queda)(.*(?:Suplemento|\(opcional|opcional si|Profundizaci[oó]n opcional).*)$/i;
 const HEADING = /^(#{1,6})\s+(.*)$/;
+// Secciones fijas del formato de módulo (CLAUDE.md, "Module Format") y los cierres comunes: nunca se pliegan.
+const FIXED_SECTION = /^#{2,3}\s+(?:💼|✅ Buenas|⚠️|🧪|📸|➡️)/u;
 const FENCE = /^\s*(```|~~~)/;
 
 export function splitModuleSections(markdown: string): ModuleSegment[] {
@@ -42,7 +44,9 @@ export function splitModuleSections(markdown: string): ModuleSegment[] {
         current = { optional: true, title: cleanHeading(optional[2]!), markdown: "" };
         continue; // el título va en el <summary>, no se repite dentro
       }
-      if (current.optional && level <= optionalLevel) {
+      // Un pliegue termina en el siguiente título de igual o mayor nivel, o al llegar a una sección fija
+      // del módulo: sin esto, un "## Profundización opcional" plegaba el Caso Real y los Criterios (M12).
+      if (current.optional && (level <= optionalLevel || FIXED_SECTION.test(line))) {
         push();
         optionalLevel = 0;
         current = { optional: false, markdown: "" };

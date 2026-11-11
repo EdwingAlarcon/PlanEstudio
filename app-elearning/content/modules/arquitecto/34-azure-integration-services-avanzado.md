@@ -56,6 +56,10 @@ Decidir y defender, como arquitecto, qué pieza de Azure Integration Services re
 
 > **Cómo está organizado este módulo:** en el **Módulo 24** ya conectaste Dataverse con Service Bus, una Azure Function y un webhook. Aquí **no** se repite eso: se decide *entre* servicios y tiers y se diseña para fallos, orden, caducidad, red privada y límites por consumidor. Cada microlección trae el concepto, un ejercicio corto para decidir antes de construir, una práctica real (modo práctico) y una tabla de **evidencia** con el dato exacto que observaste. Después viene **Decidir y defender** (un caso con restricciones y una rúbrica), un **incidente** para diagnosticar con el síntoma primero, y un **reto de transferencia**.
 
+### 🔧 Qué queda para después (Profundización opcional)
+- **Núcleo:** el concepto, el ejercicio "Ahora haz algo" y la práctica real de las Microlecciones 1 a 3 (los Criterios de Validación piden la Logic App con `retryPolicy`, el producto de APIM probado y el mensaje expirado comprobado), la Microlección 5 completa, **Decidir y defender**, el diagnóstico y el reto de transferencia. Sin suscripción de Azure, usa el modo conceptual descrito en "Antes de comenzar".
+- **Plegado:** el fan-out/fan-in de Durable Functions de la Microlección 4, pensado para equipos .NET.
+
 ### 📖 Conceptos Clave
 - **Azure Logic Apps:** servicio de orquestación de integraciones hospedado en Azure, del mismo motor que Power Automate pero pensado para equipos de IT: definición JSON versionable, despliegue por pipeline y protocolos B2B (EDI X12, EDIFACT, AS2). Tiene dos modelos:
   - **Consumption:** multitenant, un solo workflow por recurso, se paga por ejecución y se despliega con plantillas ARM. No se integra con una red virtual.
@@ -130,7 +134,9 @@ graph TD
 
 **Ahora haz algo — micropráctica (8 min):** decide el motor para cinco integraciones de un mismo cliente → **[Elegir el motor y el modelo de cada integración](/practica/ip-int-004-elegir-motor-y-modelo)**.
 
-**Práctica real (modo práctico, 35 min) — reintentos y Try/Catch en Logic Apps:** en el Módulo 24 los reintentos los hacía Dataverse al publicar. Aquí el que reintenta es el motor de orquestación, y el arquitecto decide cuántas veces, con qué espera y qué pasa cuando se agotan.
+**Práctica real (modo práctico, 35 min) — reintentos y Try/Catch en Logic Apps:**
+
+En el Módulo 24 los reintentos los hacía Dataverse al publicar. Aquí el que reintenta es el motor de orquestación, y el arquitecto decide cuántas veces, con qué espera y qué pasa cuando se agotan.
 
 1. En el portal de Azure crea el resource group `rg-sit-m34` y, dentro, una Logic App de tipo **Consumption** llamada `la-sit-m34-erp-simulado`: es el "ERP caído". En su diseñador agrega el trigger **Request** (*When a HTTP request is received*) y, debajo, la acción **Response** con **Status Code** = `503` y **Body** = `{"error":"ERP en mantenimiento"}`. Guarda y copia la **HTTP URL** del trigger (o la **Workflow URL** en **Overview**). El trigger espera `POST` por defecto. Learn indica que la política de reintentos solo reintenta los códigos **408, 429 y 5xx** ([Learn: manejo de errores](https://learn.microsoft.com/azure/logic-apps/error-exception-handling)), así que un 503 controlado garantiza que verás los reintentos.
 2. Crea en el mismo resource group una segunda Logic App **Consumption** llamada `la-sit-m34-reintentos`. En el diseñador agrega el trigger **Request** (*When a HTTP request is received*). Agrega una acción **Scope** y llámala `Try`. Dentro de `Try` agrega una acción **HTTP** con **Method** `POST` y, en **URI**, la **HTTP URL** de `la-sit-m34-erp-simulado`.
@@ -355,9 +361,13 @@ Y una cuarta, de servicio: **Service Bus o Event Grid**. Event Grid empuja event
 - **Logic Apps (stateful):** el equipo de IT lo arma en el diseñador, el historial de ejecuciones se ve sin escribir código y los conectores ya existen. Encaja cuando la mayor parte del trabajo es llamar a sistemas y esperar.
 - **Durable Functions:** el equipo de desarrollo lo escribe en código, con pruebas unitarias, y controla el paralelismo (fan-out/fan-in sobre miles de elementos). Exige disciplina: el orquestador debe ser determinista porque se *reproduce* desde el historial cada vez que reanuda.
 
-**Ahora haz algo (5 min):** decide cuál de las dos y por qué: (a) "cada noche, recalcular la comisión de 50.000 vendedores en paralelo y consolidar un total por región"; (b) "una solicitud de crédito espera hasta 5 días la aprobación del gerente y, si no llega, escala"; (c) "copiar un archivo de SFTP a SharePoint cada hora". La clave está al final de la microlección.
+**Ahora haz algo (5 min):** decide cuál de las dos y por qué: (a) "cada noche, recalcular la comisión de 50.000 vendedores en paralelo y consolidar un total por región"; (b) "una solicitud de crédito espera hasta 5 días la aprobación del gerente y, si no llega, escala"; (c) "copiar un archivo de SFTP a SharePoint cada hora". La clave está justo debajo: decide antes de leerla.
 
-**Práctica real (opcional, para equipos .NET, 30 min):** crea un proyecto de Durable Functions en C# con el **modelo de worker aislado** (plantilla de VS Code o Visual Studio) y reemplaza el orquestador por este fan-out/fan-in. Ejecútalo localmente con Azure Functions Core Tools y el emulador de almacenamiento que indique la plantilla (Azurite); si no los tienes, instálalos siguiendo [Learn: desarrollar Azure Functions en local con Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local) antes de empezar.
+**Clave del ejercicio inicial:** (a) Durable Functions (fan-out/fan-in sobre miles de elementos, en código). (b) Cualquiera de las dos sirve; Logic Apps stateful es lo natural si lo mantiene IT sin desarrolladores, Durable (patrón Human Interaction) si ya es parte de un servicio en código. (c) Ni una ni otra hace falta: es una integración simple; una Logic App Consumption o un flujo de Power Automate basta.
+
+#### 🔧 Profundización opcional — Práctica real para equipos .NET (30 min): fan-out/fan-in con Durable Functions
+
+Crea un proyecto de Durable Functions en C# con el **modelo de worker aislado** (plantilla de VS Code o Visual Studio) y reemplaza el orquestador por este fan-out/fan-in. Ejecútalo localmente con Azure Functions Core Tools y el emulador de almacenamiento que indique la plantilla (Azurite); si no los tienes, instálalos siguiendo [Learn: desarrollar Azure Functions en local con Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local) antes de empezar.
 
 ```csharp
 using Microsoft.Azure.Functions.Worker;
@@ -421,8 +431,6 @@ public static class ProcesarClientesBatch
 | Número de resultados consolidados y cuántos con `Ok = false` | ___ |
 | Backend de estado que configuró la plantilla | ___ |
 | Una línea que **no** pondrías en el orquestador y por qué | ___ |
-
-**Clave del ejercicio inicial:** (a) Durable Functions (fan-out/fan-in sobre miles de elementos, en código). (b) Cualquiera de las dos sirve; Logic Apps stateful es lo natural si lo mantiene IT sin desarrolladores, Durable (patrón Human Interaction) si ya es parte de un servicio en código. (c) Ni una ni otra hace falta: es una integración simple; una Logic App Consumption o un flujo de Power Automate basta.
 
 ---
 

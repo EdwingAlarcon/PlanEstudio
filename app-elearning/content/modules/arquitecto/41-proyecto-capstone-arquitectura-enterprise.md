@@ -13,7 +13,7 @@ lastVerified: "2026-11"
 ### 🎯 Objetivo
 Diseñar, probar en lo esencial y **defender** la arquitectura de una solución enterprise completa, integrando todo lo del Nivel 4: topología de tenant y ambientes, identidad y seguridad, integraciones con Azure, datos analíticos, IA, ALM, gobierno, operación y plan de proyecto. Al terminar tienes un **Architecture Blueprint** con ocho ADRs, un **slice vertical** desplegado de DEV a TEST que demuestra las decisiones más arriesgadas (incluida una data policy verificada y un rollback ensayado), y una presentación que resiste las preguntas de un comité de arquitectura y de un CFO, como lo haría un Solution Architect.
 
-> **Cómo está organizado este módulo:** es el capstone del nivel, así que "construir sin pasos" significa **decidir y defender**. Cada microlección construye una parte del entregable: parte de un **borrador del equipo** (la propuesta de partida que heredas), tú decides qué sostienes y qué cambias, lo contrastas con una rúbrica "Criterio | Qué demuestra que lo cumples" y dejas la evidencia en una tabla "Campo | Tu valor". No hay una única respuesta correcta: la evidencia es tu decisión escrita con sus razones y lo que aceptas perder. Dos microlecciones tienen práctica real en el tenant; las demás son de decisión, y donde haga falta una licencia que un alumno no suele tener hay **variante en papel**. Después diagnosticarás un incidente de producción a partir del síntoma, defenderás todo ante un comité y cerrarás con un reto de transferencia en otro sector.
+> **Cómo está organizado este módulo:** es el capstone del nivel, así que "construir sin pasos" significa **decidir y defender**. El trabajo va en **cinco etapas** (descubrimiento, diseño, prueba de concepto, plan y defensa), cada una con su entregable. Cada microlección construye una parte del entregable: parte de un **borrador del equipo** (la propuesta de partida que heredas), tú decides qué sostienes y qué cambias, lo contrastas con una rúbrica "Criterio | Qué demuestra que lo cumples" y dejas la evidencia en una tabla "Campo | Tu valor". No hay una única respuesta correcta: la evidencia es tu decisión escrita con sus razones y lo que aceptas perder. Dos microlecciones tienen práctica real en el tenant; las demás son de decisión, y donde haga falta una licencia que un alumno no suele tener hay **variante en papel**. Después diagnosticarás un incidente de producción a partir del síntoma, defenderás todo ante un comité y cerrarás con un reto de transferencia en otro sector.
 >
 > **Antes de empezar, necesitas:**
 > - Haber terminado los Niveles 1 a 3 y los **Módulos 31 a 40**. Aquí no se vuelve a explicar ningún concepto: se combinan. Cada microlección te dice qué módulo repasar si una decisión se te atraganta.
@@ -26,6 +26,10 @@ Diseñar, probar en lo esencial y **defender** la arquitectura de una solución 
 > - Un camino de despliegue que ya funcione: el pipeline de Azure DevOps del Lab 19 o un pipeline de **pipelines in Power Platform** (Módulos 33 y 54).
 > - Para presentar: dos o tres personas que hagan de comité (un colega técnico, alguien no técnico como "CFO simulado" y, si puedes, un mentor con experiencia de arquitectura), o la defensa grabada si estudias solo.
 > - El escenario y sus cifras son **ilustrativos**: sirven para razonar, no son datos de una empresa real.
+
+### 🔧 Qué queda para después (Profundización opcional)
+- **Métricas de éxito del Capstone** (plegado, antes de los Criterios de Validación): umbrales orientativos que ni los criterios ni la rúbrica de la defensa exigen.
+- El **modo práctico** de los Módulos 34, 35 y 37 es el único criterio opcional: si no lo haces, tu ADR lo declara como riesgo abierto.
 
 ### 📖 Conceptos Clave
 Este módulo es aplicado: no introduce productos nuevos. Estos son los artefactos que vas a producir.
@@ -78,7 +82,11 @@ graph TD
 
 ---
 
-## 🧩 Microlección 1 — Drivers, Fit-Gap y la lista de ADRs (≈75 min)
+## 🏁 Etapa 1 — Descubrimiento: drivers, Fit-Gap y la lista de ADRs (Microlección 1)
+
+**Entregable de esta etapa:** la tabla de drivers, el Fit-Gap, la plantilla de ADR en tu repositorio y el ADR-002 completo.
+
+**Tiempo estimado:** ≈75 min.
 
 **¿Qué vas a aprender?** A convertir un escenario en **drivers** (requisitos, restricciones y supuestos) y a deducir de ellos qué decisiones necesitan un ADR, antes de dibujar nada.
 
@@ -150,7 +158,13 @@ Elegimos X porque Y, aunque consideramos Z, que rechazamos por W.
 
 ---
 
-## 🧩 Microlección 2 — Topología, identidad y seguridad (≈180 min)
+## 🏁 Etapa 2 — Diseño: topología, seguridad, integración, datos e IA (Microlecciones 2 y 3)
+
+**Entregable de esta etapa:** seis ADRs (001, 003, 007, 004, 005 y 006), una data policy verificada en `SIT-TEST` (o su variante en papel), la hoja de costos y el diagrama corregido.
+
+**Tiempo estimado:** ≈360 min, en dos sesiones.
+
+### 🧩 Microlección 2 — Topología, identidad y seguridad (≈180 min)
 
 **¿Qué vas a aprender?** A cerrar ADR-001, ADR-003 y ADR-007 con los criterios de los Módulos 33 y 36, y a **verificar** en tu tenant al menos un control de gobierno, no solo describirlo.
 
@@ -219,7 +233,7 @@ Lo que ya sabes y debes aplicar (cada punto está verificado en el módulo que s
 
 ---
 
-## 🧩 Microlección 3 — Integración, datos e IA (≈180 min)
+### 🧩 Microlección 3 — Integración, datos e IA (≈180 min)
 
 **¿Qué vas a aprender?** A cerrar ADR-004, ADR-005 y ADR-006 juntando lo que decidiste en los Módulos 34, 35 y 37, y a escribir qué cuesta cada decisión en capacidad, créditos y operación.
 
@@ -281,7 +295,13 @@ Preguntas que el comité te hará y que tu ADR debe contestar:
 
 ---
 
-## 🧩 Microlección 4 — El slice vertical y el camino a producción (≈150 min)
+## 🏁 Etapa 3 — Prueba de concepto: el slice vertical y un incidente (Microlección 4)
+
+**Entregable de esta etapa:** el slice vertical desplegado en `SIT-TEST` y un rollback ensayado y medido (o su variante en papel), el ADR-008, el Go-Live Checklist, el runbook y el diagnóstico del incidente.
+
+**Tiempo estimado:** ≈150 min, más el diagnóstico.
+
+### 🧩 Microlección 4 — El slice vertical y el camino a producción (≈150 min)
 
 **¿Qué vas a aprender?** A construir la porción mínima que prueba que tu Blueprint se puede desplegar, a ensayar un rollback y a escribir el ADR-008, el Go-Live Checklist y el runbook con lo que viste, no con lo que supones.
 
@@ -333,7 +353,7 @@ Preguntas que el comité te hará y que tu ADR debe contestar:
 
 ---
 
-## 🔧 Diagnosticar — "el lunes nadie recibió su score"
+### 🔧 Diagnosticar — "el lunes nadie recibió su score"
 
 Antes de la Microlección 5, resuelve este incidente empezando por el síntoma:
 
@@ -349,7 +369,11 @@ Síntoma: el viernes por la tarde, el equipo de seguridad publicó una data poli
 
 ---
 
-## 🧩 Microlección 5 — Plan, riesgos, costos y comunicación (≈165 min)
+## 🏁 Etapa 4 — Plan: riesgos, costos y comunicación (Microlección 5)
+
+**Entregable de esta etapa:** el MVP con MoSCoW, el plan por fases, la estimación como rango, el Risk Register de 10 riesgos y el plan de comunicación.
+
+**Tiempo estimado:** ≈165 min.
 
 **¿Qué vas a aprender?** A convertir el Blueprint en un plan que un sponsor puede aprobar: MVP con alcance explícito, estimación como rango, Risk Register y un plan de comunicación por audiencia (Módulo 38).
 
@@ -385,7 +409,11 @@ Síntoma: el viernes por la tarde, el equipo de seguridad publicó una data poli
 
 ---
 
-## 🧭 Decidir y defender — la revisión del comité de arquitectura (≈240 min)
+## 🏁 Etapa 5 — Defensa: Decidir y defender ante el comité de arquitectura
+
+**Entregable de esta etapa:** el Architecture Blueprint entregado, la presentación de 10 slides defendida (o la defensa grabada) y tu puntaje con la rúbrica.
+
+**Tiempo estimado:** ≈240 min.
 
 Junta las cinco microlecciones en el **Architecture Blueprint** y defiéndelo ante tu comité simulado. No hay pasos: hay un formato, unas preguntas y una rúbrica.
 
@@ -491,7 +519,7 @@ Cierra el reto con un **ADR de una página** (Contexto, Opciones, Decisión, Con
 | Presentación ejecutiva final llena de jerga técnica | El arquitecto está más cómodo hablando de tecnología que de negocio | Practicar la presentación con alguien no técnico (familiar, colega de otra área); si no entienden, reescribir hasta que entiendan |
 | Inventar KPIs y ahorros en la presentación | Querer que la slide de números "se vea bien" | Cada cifra sale de un dato del cliente, de tu estimación o de un KPI acordado; si no existe aún, se dice cuándo existirá |
 
-### Métricas de éxito del Capstone
+#### 🔧 Profundización opcional — Métricas de éxito del Capstone
 Las fija el equipo antes del go-live (son umbrales de equipo, orientativos, no cifras de Microsoft) y cada una tiene la herramienta con la que se mide:
 
 - Tiempo promedio de aprobación de crédito: de X horas a Y horas (mejora medible)

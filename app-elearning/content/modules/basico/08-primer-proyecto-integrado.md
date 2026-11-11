@@ -18,8 +18,9 @@ Aplicar todos los conocimientos del Nivel 1 en un proyecto end-to-end real.
 - Dejar al menos una app funcional conectada a Dataverse: Canvas App o Model-Driven App.
 - Definir la evidencia mínima que usarás para demostrar que completaste el Nivel Básico.
 
-### 🔧 Qué queda para después (Iteraciones del proyecto)
+### 🔧 Qué queda para después (Profundización opcional)
 - Completar los 4 flujos, el dashboard Power BI con RLS, testing multi-role y documentación formal. Este módulo es un capstone: se termina por iteraciones, no en una sola sesión.
+- Eso y las tablas 3 a 5, las Business Rules, la Canvas completa, el Business Process Flow y los recursos finales aparecen plegados en su etapa.
 
 ### 🆕 Por qué empiezas una Solution nueva (y qué hacer con lo de los Módulos 2 a 7)
 
@@ -153,9 +154,15 @@ Desarrollar una solución empresarial integral que incluya:
 
 > Si una sesión se alarga, no pasa nada: es una estimación, no un examen. Los días que verás en los títulos de cada Fase (Días 1-21) son de la **entrega completa**, pensados para 2-3 horas al día; no aplican a la mínima.
 
-> **Cómo está organizado este capstone:** lo construyes por capas, en tres bloques (planear, construir dato y app, automatizar y cerrar). En cada uno alternas una idea corta, una práctica de pocos minutos y un dato real de tu proyecto. Cierras con un reto en el que ya no te digo las tablas ni los pasos: el mismo proyecto aplicado a otro negocio. Las microprácticas no necesitan tenant; construir el proyecto sí.
+> **Cómo está organizado este capstone:** lo construyes por capas, en cinco etapas con entregable y tiempo (dentro, las Fases 1 a 7) y tres microlecciones (planear, construir dato y app, automatizar y cerrar). En cada una alternas una idea corta, una práctica de pocos minutos y un dato real de tu proyecto. Cierras con un reto en el que ya no te digo las tablas ni los pasos: el mismo proyecto aplicado a otro negocio. Las microprácticas no necesitan tenant; construir el proyecto sí.
 
-## 🧩 Microlección 1 — Planear: decidir qué entra y qué no
+## 🏁 Etapa 1 — Planear y modelar los datos
+
+**Entregable de esta etapa:** la Solution con Solicitud y Categoría Solicitud relacionadas y la «Carga de datos» hecha.
+
+**Tiempo estimado:** mínima, sesiones 1-3 de 9; completa, Días 1-3.
+
+### 🧩 Microlección 1 — Planear: decidir qué entra y qué no
 
 **¿Qué vas a aprender?** A decidir qué entra y qué NO entra en tu primera entrega, para llegar a algo que funcione de punta a punta antes de pulirlo.
 
@@ -175,7 +182,7 @@ Desarrollar una solución empresarial integral que incluya:
 
 ---
 
-**FASE 1: Diseño y Modelado de Datos (Días 1-3)**
+### FASE 1: Diseño y Modelado de Datos (Días 1-3)
 
 > **Meta de la primera sesión:** termina esta fase antes de construir pantallas. Si el modelo queda claro, el resto del proyecto avanza con menos retrabajo.
 
@@ -223,6 +230,8 @@ Version: 1.0.0.0
     - Aprobador Default (Lookup → User)
     - Activo (Yes/No, default Yes)
 
+#### 🔧 Profundización opcional — Tablas 3 a 5
+
 3. **Tabla: Comentario**
     - Solicitud (Lookup → Solicitud, required)
     - Comentario (multiline, 1000 chars, required)
@@ -247,14 +256,14 @@ Version: 1.0.0.0
     - Fecha Cálculo (DateTime)
     - Rating Solicitante (Choice): 1-5 estrellas
 
-**Paso 4: Configurar relaciones**
+#### Paso 4: Configurar relaciones
 
 - Solicitud 1:N Comentarios
 - Solicitud 1:N Aprobaciones
 - Solicitud 1:N Métrica Solicitud. Dataverse solo tiene relaciones 1:N (vistas desde el otro lado, N:1) y N:N, no 1:1: se crea como 1:N (Lookup Solicitud en Métrica Solicitud) y el flujo que la llena debe crear una sola métrica por solicitud
 - Categoría 1:N Solicitudes
 
-**Paso 5: Business Rules**
+#### 🔧 Profundización opcional — Paso 5: Business Rules
 
 1. **Validación de fechas** (usa Fecha Requerida y Fecha Completada; en la entrega mínima solo si creaste esas dos columnas):
     - Si Estado = "Completada", Fecha Completada is required
@@ -266,7 +275,13 @@ Version: 1.0.0.0
 3. **Visibilidad condicional**:
     - Show "Comentarios Aprobador" only if Estado = Aprobada OR Rechazada (Set Visibility sobre la columna, Scope All Forms y rama ✕ con Hide, como en el Módulo 4, Paso 3.3)
 
-## 🧩 Microlección 2 — Construir por capas: dato, app y lo que sale vacío
+## 🏁 Etapa 2 — Tu primera app
+
+**Entregable de esta etapa:** una sola app (Model-Driven **o** Canvas) en la Solution, con solicitudes reales.
+
+**Tiempo estimado:** mínima, sesiones 4-5 de 9 (con Canvas, 2 o 3 más); completa, Días 4-10.
+
+### 🧩 Microlección 2 — Construir por capas: dato, app y lo que sale vacío
 
 **¿Qué vas a aprender?** A construir primero el modelo de datos y después una sola app que lo consuma, y a leer una pantalla vacía como un síntoma de la condición que busca el dato, no del dato.
 
@@ -274,9 +289,9 @@ Version: 1.0.0.0
 
 **Ejemplo pequeño:** comparar el correo del contacto con el correo del usuario actual trae sus solicitudes; compararlo con un identificador de otro tipo no trae nada y no da ningún error.
 
-**Práctica real en tu entorno:** haz las Fases 1 a 3 de abajo, eligiendo **una sola** app como tu primera app funcional.
+**Práctica real en tu entorno:** haz la Fase 2 **o** la Fase 3 de abajo: **una sola** app como tu primera app funcional.
 
-**FASE 2: Canvas App para Solicitantes (Días 4-7)**
+### FASE 2: Canvas App para Solicitantes (Días 4-7)
 
 > Puedes escoger esta fase como tu primera app funcional si quieres demostrar experiencia de usuario móvil y formularios rápidos.
 
@@ -341,19 +356,6 @@ UpdateContext({
 > 3. Agrega un botón "Guardar" con **OnSelect**: `SubmitForm(frmNueva)`.
 > 4. En la propiedad **OnSuccess** del formulario pon la fórmula de abajo, **con la versión mínima de la navegación**.
 
-*Gallery con búsqueda* (versión completa, en **ScreenMisSolicitudes**): en esa pantalla agrega un cuadro de texto (**Text input**) llamado `txtBusqueda` y una galería vertical; en la propiedad **Items** de la galería escribe:
-```javascript
-// ColMisSolicitudes es una Collection local (la cargó ScreenInicio): 'in' es válido aquí, no hay límite de delegación
-Sort(
-    Filter(
-        ColMisSolicitudes,
-        txtBusqueda.Text in Título || txtBusqueda.Text in Descripción
-    ),
-    'Fecha Solicitud',
-    SortOrder.Descending
-)
-```
-
 *Form Nueva Solicitud - OnSuccess:*
 ```javascript
 // Notificar éxito
@@ -374,6 +376,21 @@ Navigate(ScreenInicio, ScreenTransition.Cover)
 > **El nombre del flujo en la fórmula:** `'Flujo Notificar Nueva Solicitud'` solo existe después de agregar el flujo a la app (ver el recuadro del Flujo 1 en la Fase 4). Hasta entonces la línea sale en rojo; puedes escribir primero el resto y añadirla al final. Al escribirla, teclea las primeras letras del nombre del flujo y **elige el nombre que te propone la barra de fórmulas** (IntelliSense): si tu flujo se llama distinto, usa ese nombre. El tercer argumento de `Navigate` (`{RegistroActual: ...}`) crea la variable de contexto `RegistroActual` en la pantalla de destino ([Learn](https://learn.microsoft.com/power-platform/power-fx/reference/function-updatecontext)).
 
 **Ahora diagnostica — micropráctica (5 min):** **[Diagnosticar: mi pantalla de inicio sale vacía](/practica/ip-trb-006-pantalla-de-inicio-vacia)**. Parte de un síntoma exacto —la lista vacía sin ningún error aunque hay datos— y te pide la causa y la corrección, antes de ver la solución.
+
+#### 🔧 Profundización opcional — Canvas completa
+
+*Gallery con búsqueda* (versión completa, en **ScreenMisSolicitudes**): en esa pantalla agrega un cuadro de texto (**Text input**) llamado `txtBusqueda` y una galería vertical; en la propiedad **Items** de la galería escribe:
+```javascript
+// ColMisSolicitudes es una Collection local (la cargó ScreenInicio): 'in' es válido aquí, no hay límite de delegación
+Sort(
+    Filter(
+        ColMisSolicitudes,
+        txtBusqueda.Text in Título || txtBusqueda.Text in Descripción
+    ),
+    'Fecha Solicitud',
+    SortOrder.Descending
+)
+```
 
 **Paso 3: Agregar componentes avanzados** (versión completa: necesita la tabla Comentario y la pantalla ScreenDetalleSolicitud)
 
@@ -405,7 +422,7 @@ Reset(txtComentario);
 Refresh(Comentarios)
 ```
 
-**FASE 3: Model-Driven App para Gestión (Días 8-10)**
+### FASE 3: Model-Driven App para Gestión (Días 8-10)
 
 > Puedes escoger esta fase como tu primera app funcional si quieres demostrar gestión operativa, vistas, formularios y proceso guiado.
 
@@ -482,6 +499,16 @@ Tab 4: Timeline
    Grouping: Tipo
    ```
 
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| El nombre de tu Solution, su publisher y su prefijo | ___ |
+| Las tablas que creaste y la relación principal entre ellas | ___ |
+| La app que elegiste como primera app funcional y cuántos registros reales muestra | ___ |
+
+#### 🔧 Profundización opcional — Business Process Flow
+
 **Paso 4: Business Process Flow** (versión completa; todas las columnas son de la tabla Solicitud)
 ```
 Stage 1: Creación
@@ -501,17 +528,13 @@ Stage 4: Cierre
   - Estado → Completada
 ```
 
-**Evidencia a reportar:**
+## 🏁 Etapa 3 — El flujo de notificación
 
-| Campo | Tu valor |
-|---|---|
-| El nombre de tu Solution, su publisher y su prefijo | ___ |
-| Las tablas que creaste y la relación principal entre ellas | ___ |
-| La app que elegiste como primera app funcional y cuántos registros reales muestra | ___ |
+**Entregable de esta etapa:** el Flujo 1 con una ejecución correcta en el Run history y su correo recibido.
 
----
+**Tiempo estimado:** mínima, sesiones 6-7 de 9; completa, Días 11-13.
 
-## 🧩 Microlección 3 — Automatizar, probar y cerrar con evidencia
+### 🧩 Microlección 3 — Automatizar, probar y cerrar con evidencia
 
 **¿Qué vas a aprender?** A conectar un flujo a tu app, a comprobar con el historial de ejecución que realmente corrió, y a cerrar el proyecto con la evidencia mínima.
 
@@ -521,7 +544,7 @@ Stage 4: Cierre
 
 **Práctica real en tu entorno:** haz las Fases 4 a 7 según la entrega que elegiste; para la mínima basta el Flujo 1, un reporte simple y la evidencia de cierre. Esta microlección no tiene micropráctica propia; la verificación es el Run history de tu flujo y tu README.
 
-**FASE 4: Power Automate Flujos (Días 11-13)**
+### FASE 4: Power Automate Flujos (Días 11-13)
 
 > Para el entregable mínimo, implementa primero solo el Flujo 1. Los demás flujos completan la madurez del proyecto, pero no son necesarios para demostrar integración básica.
 
@@ -536,6 +559,8 @@ Stage 4: Cierre
 > La llamada desde la Canvas App es la del `OnSuccess` de la Fase 2: primero agrega el flujo a la app (en Power Apps Studio, menú de la app **Power Automate** > **Add a flow** y elige tu flujo) para que `'Flujo Notificar Nueva Solicitud'.Run(...)` exista ([Learn](https://learn.microsoft.com/power-apps/maker/canvas-apps/working-with-flows)). Al escribir la fórmula, usa el nombre que te propone IntelliSense.
 >
 > **Comprueba:** crea una solicitud desde la app y abre el flujo > **Run history** (historial de ejecuciones): debe aparecer una ejecución correcta con su hora, y el correo debe estar en tu bandeja.
+
+#### 🔧 Profundización opcional — Flujos completos
 
 **Flujo 1: Notificar Nueva Solicitud**
 ```
@@ -616,7 +641,13 @@ Actions:
 
 > `DateAdd(Today(), ...)` es Power Fx y no funciona en Power Automate. En un flujo, el filtro **Filter rows** de **List rows** es una expresión OData (`eq`, `le`, `and`, `or`) y las fechas se calculan con expresiones de flujo: `utcNow()` devuelve la fecha y hora actuales y `addDays(fecha, 2)` le suma 2 días ([Learn: List rows](https://learn.microsoft.com/power-automate/dataverse/list-rows), [Learn: operadores de filtro](https://learn.microsoft.com/power-apps/developer/data-platform/webapi/query/filter-rows), [Learn: funciones de expresión](https://learn.microsoft.com/azure/logic-apps/expression-functions-reference)).
 
-**FASE 5: Power BI Dashboard (Días 14-16)**
+## 🏁 Etapa 4 — El reporte
+
+**Entregable de esta etapa:** `reporte-solicitudes-sse.pbix` con 2 visuales, o su alternativa sin Power BI de la ruta mínima.
+
+**Tiempo estimado:** mínima, sesión 8 de 9; completa, Días 14-16.
+
+### FASE 5: Power BI Dashboard (Días 14-16)
 
 > Si no tienes permisos de Power BI Service, crea el reporte en Power BI Desktop y guarda capturas. RLS y publicación pueden quedar documentados como siguiente iteración.
 
@@ -656,6 +687,8 @@ Actions:
 >     ```
 >
 >     "Rechazada" no es abierta ni completada: por eso Abiertas + Completadas puede dar menos que el total. Las medidas de días de resolución del Módulo 6 necesitan una fecha de cierre (aquí, Fecha Completada), que la entrega mínima no tiene.
+
+#### 🔧 Profundización opcional — Power BI completo
 
 **Paso 1: Conectar y modelar datos** (versión completa)
 ```
@@ -756,9 +789,17 @@ Role: Departamento Finanzas   (tabla Contacts)
 
 > `USERPRINCIPALNAME()` devuelve el nombre de inicio de sesión (UPN), que no siempre es igual al correo; confírmalo antes de usar estas reglas. RLS solo se aplica a quienes tienen rol **Viewer** en el workspace ([Learn](https://learn.microsoft.com/fabric/security/service-admin-row-level-security)).
 
-**FASE 6: Seguridad y Testing (Días 17-19)**
+## 🏁 Etapa 5 — Seguridad, documentación y cierre
+
+**Entregable de esta etapa:** el README con una decisión de seguridad y las 6 evidencias de cierre.
+
+**Tiempo estimado:** mínima, sesión 9 de 9; completa, Días 17-21.
+
+### FASE 6: Seguridad y Testing (Días 17-19)
 
 > No necesitas muchos usuarios reales para aprender el patrón. Con 2-3 usuarios de prueba, o una matriz documentada si tu tenant no permite crearlos, ya puedes demostrar criterio de seguridad.
+
+#### 🔧 Profundización opcional — Seguridad y testing
 
 **Paso 1: Configurar Security Roles**
 
@@ -815,7 +856,7 @@ Configuración de solución
 - Validar permisos (usuario no debe ver datos fuera de su scope)
 - Probar en móvil (Canvas App responsive)
 
-**FASE 7: Documentación y Despliegue (Días 20-21)**
+### FASE 7: Documentación y Despliegue (Días 20-21)
 
 > En un ambiente de aprendizaje, "despliegue" puede significar exportar la solution y documentar los pasos. No prometas producción real si no tienes ambiente TEST/PROD.
 
@@ -842,6 +883,16 @@ Configuración de solución
 [Problemas comunes y soluciones]
 ```
 
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| El flujo que automatizaste y la hora de su ejecución exitosa en el Run history | ___ |
+| La lista de componentes que contiene tu Solution | ___ |
+| Una decisión de seguridad que tomaste o, si no llegaste a la Fase 6, el rol que crearías y por qué | ___ |
+
+#### 🔧 Profundización opcional — Manual de usuario y despliegue
+
 **Paso 2: Manual de usuario**
 
 - Guía Canvas App (con screenshots)
@@ -858,16 +909,6 @@ Configuración de solución
 5. Compartir Canvas App con usuarios
 6. Compartir Model-Driven App con gestores
 7. Publicar Dashboard Power BI y compartir
-
-**Evidencia a reportar:**
-
-| Campo | Tu valor |
-|---|---|
-| El flujo que automatizaste y la hora de su ejecución exitosa en el Run history | ___ |
-| La lista de componentes que contiene tu Solution | ___ |
-| Una decisión de seguridad que tomaste o, si no llegaste a la Fase 6, el rol que crearías y por qué | ___ |
-
----
 
 ## 🔁 Reto de transferencia — El mismo proyecto, otro negocio, sin pasos
 
@@ -1063,7 +1104,7 @@ Has completado el **Nivel 1: Básico** del Plan Maestro. Ahora puedes:
 - Auto-evaluación: ¿Puedo explicar cada concepto sin consultar documentación?
 - Si aún tienes dudas en algún módulo, repítelo antes de avanzar
 
-### 📚 Recursos Complementarios
+#### 🔧 Profundización opcional — Recursos complementarios
 
 **Documentación Oficial**:
 
@@ -1092,8 +1133,6 @@ Has completado el **Nivel 1: Básico** del Plan Maestro. Ahora puedes:
 - Power Apps Blog (oficial)
 - Matthew Devaney
 - Sancho Harker
-
----
 
 ## 🎉 ¡Felicitaciones!
 

@@ -35,6 +35,11 @@ Desarrollar las competencias de liderazgo técnico y consultoría funcional nece
 | 11 | Cada vendedor ve solo sus cuentas; el gerente, las de su región |
 | 12 | Que "funcione igual que el Excel de hoy" |
 
+### 🔧 Qué queda para después (Profundización opcional)
+El núcleo son las decisiones escritas sobre el caso continuo: Fit-Gap, estimación, change request, Risk Register, historias con trazabilidad y UAT, y la comunicación al steering. Quedan plegados dos ejemplos resueltos de otros proyectos; ábrelos **después** de intentar el tuyo, para comparar la forma y no la respuesta:
+- **Ejemplo de Fit-Gap** de otro proyecto CRM (al final de la Microlección 1).
+- **Ejemplo de historia de usuario lista para desarrollo**, HU-CRM-014 (al final de la Microlección 5).
+
 ### 📖 Conceptos Clave
 - **Discovery Workshop:** sesión estructurada de 1-3 días con stakeholders de negocio y técnicos cuyo objetivo es entender profundamente el contexto, procesos actuales, puntos de dolor y visión futura ANTES de proponer ninguna tecnología. Un Discovery bien ejecutado produce: mapa del proceso AS-IS, lista de requerimientos priorizada (MoSCoW), Risk Register inicial, y consenso sobre el MVP. Un arquitecto que propone tecnología antes del Discovery está vendiendo, no diseñando. Herramientas típicas: Miro/Whiteboard para mapear procesos, Confluence/SharePoint para documentar, y una agenda estructurada con facilitación activa.
 - **Success by Design:** marco de Microsoft, nacido de la experiencia de FastTrack, para implementar Dynamics 365 (y, en su versión actual, soluciones de Power Platform). Divide el ciclo en cinco fases independientes de la metodología: **Discover**, **Initiate**, **Implement**, **Prepare** y **Operate**. La **Solution Blueprint Review** empieza ya en **Discover**, para encontrar riesgos de arquitectura antes de que las decisiones sean caras de revertir; de sus hallazgos salen las **Implementation Reviews** (modelo de datos, seguridad, integración, ALM, pruebas), y la **Go live Readiness Review** es la última parada antes de producción. Los hallazgos se clasifican en **assertions** (lo que se hace bien), **risks** (lo que podría afectar si no se mitiga) e **issues** (lo que ya está afectando) ([Learn: Success by Design](https://learn.microsoft.com/dynamics365/guidance/implementation-guide/success-by-design)).
@@ -103,6 +108,23 @@ Desarrollar las competencias de liderazgo técnico y consultoría funcional nece
 - Fecha de kick-off y entregables de la siguiente fase
 ```
 
+**Adapta la agenda al caso continuo (15 min):** reescribe la plantilla para Distribuidora Andina: quién asiste a cada bloque (Director Comercial, CFO, IT de SAP, 2-3 vendedores de campo), qué bloque recorta si solo te dan **un** día, y en qué bloque preguntarás por los pedidos 3, 4 y 12, que son los que más riesgo esconden.
+
+**Haz el Fit-Gap del caso continuo:** clasifica los 12 pedidos (convierte el 12 en requerimientos concretos o exclúyelo con su razón), asigna MoSCoW con un máximo de la mitad como **Must**, y abre las 3 primeras líneas del Risk Register. Para clasificar, apóyate en lo que viste en los módulos anteriores (AI Builder Prediction en el Módulo 37, offline en Canvas Apps, Copilot Studio en los Módulos 15 y 22, integración en el Módulo 24). Cuando tengas el tuyo, abre el ejemplo de otro proyecto que está plegado al final de esta microlección y compara la forma, no las respuestas.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Tu agenda adaptada: asistentes por bloque y el bloque que recortas si solo hay un día | ___ |
+| Cuántos Fit, Partial, Gap y Excluidos te salieron | ___ |
+| Cómo convertiste el pedido 12 ("igual que el Excel") en requerimientos o por qué lo excluiste | ___ |
+| Los Must y por qué cada uno es Must y no Should | ___ |
+| El pedido que esconde un proyecto aparte y qué decisión de alcance propones | ___ |
+| Las 3 primeras líneas del Risk Register (riesgo, P × I, dueño) | ___ |
+
+#### 🔧 Profundización opcional — Ejemplo resuelto: Fit-Gap de otro proyecto CRM
+
 **Ejemplo de Fit-Gap** (de otro proyecto CRM; úsalo como forma, no como respuesta):
 
 ```markdown
@@ -123,21 +145,6 @@ Desarrollar las competencias de liderazgo técnico y consultoría funcional nece
 - Partial/Gaps: 3 (43%) — requieren desarrollo
 - Won't Have: 1 (14%) — excluidos del scope
 ```
-
-**Adapta la agenda al caso continuo (15 min):** reescribe la plantilla para Distribuidora Andina: quién asiste a cada bloque (Director Comercial, CFO, IT de SAP, 2-3 vendedores de campo), qué bloque recorta si solo te dan **un** día, y en qué bloque preguntarás por los pedidos 3, 4 y 12, que son los que más riesgo esconden.
-
-**Haz el Fit-Gap del caso continuo:** clasifica los 12 pedidos (convierte el 12 en requerimientos concretos o exclúyelo con su razón), asigna MoSCoW con un máximo de la mitad como **Must**, y abre las 3 primeras líneas del Risk Register. Para clasificar, apóyate en lo que viste en los módulos anteriores (AI Builder Prediction en el Módulo 37, offline en Canvas Apps, Copilot Studio en los Módulos 15 y 22, integración en el Módulo 24).
-
-**Evidencia a reportar:**
-
-| Campo | Tu valor |
-|---|---|
-| Tu agenda adaptada: asistentes por bloque y el bloque que recortas si solo hay un día | ___ |
-| Cuántos Fit, Partial, Gap y Excluidos te salieron | ___ |
-| Cómo convertiste el pedido 12 ("igual que el Excel") en requerimientos o por qué lo excluiste | ___ |
-| Los Must y por qué cada uno es Must y no Should | ___ |
-| El pedido que esconde un proyecto aparte y qué decisión de alcance propones | ___ |
-| Las 3 primeras líneas del Risk Register (riesgo, P × I, dueño) | ___ |
 
 ---
 
@@ -269,6 +276,44 @@ Registra también 2 elementos de deuda técnica del proyecto (por ejemplo, un va
 
 **El concepto:** la mitad de las discusiones de alcance en UAT ("esto siempre se había pedido") se ganan o se pierden con la trazabilidad: si un requerimiento no tiene historia, criterio de aceptación y caso UAT, no se puede probar ni aprobar. Convertir requerimientos ambiguos en historias listas para desarrollo es trabajo del consultor; mantenerlas conectadas hasta el UAT, del arquitecto.
 
+Checklist mínimo antes de pasar a desarrollo:
+- Historia vinculada a un requerimiento aprobado.
+- Criterios de aceptación verificables por QA/UAT.
+- Roles y permisos identificados.
+- Datos de prueba definidos.
+- Dependencias externas documentadas.
+
+**Matriz de trazabilidad** (simple, para evitar duplicidad y discusiones tardías de alcance):
+
+| Req ID | Historia | Diseño funcional | Componente técnico | Caso UAT | Evidencia | Estado |
+|---|---|---|---|---|---|---|
+| REQ-001 | HU-CRM-014 bloqueo crédito | FDD-03 Reglas comerciales | Cloud flow + campo Dataverse + conector ERP | UAT-014 | Captura alerta + log integración | Aprobado |
+| REQ-002 | HU-CS-021 escalamiento SLA | FDD-05 Servicio al cliente | SLA KPI + routing rule | UAT-021 | Caso vencido escalado | En prueba |
+| REQ-003 | HU-FS-008 visita técnica | FDD-07 Field Service | Work Order + Booking + mobile inspection | UAT-008 | Firma cliente + checklist | Pendiente |
+
+Paquete documental recomendado sin inflar el proyecto:
+- Minutas de workshops con decisiones y pendientes.
+- Backlog con historias, criterios de aceptación y prioridad MoSCoW.
+- FDD/FRD con procesos TO-BE, reglas, campos, roles, reportes e integraciones funcionales.
+- TDD/SDD con arquitectura, componentes, ALM, seguridad, integraciones técnicas y operación.
+- Matriz de trazabilidad de requerimientos a UAT.
+- Plan UAT con casos, datos, responsables, calendario y criterios de aprobación.
+- Registro de riesgos, decisiones y change requests.
+
+**Practica con el caso continuo:** escribe 5 historias de los Must (incluida la de aprobación de descuentos y la de visibilidad por región, pedido 11) con criterios de aceptación, roles y datos de prueba; llévalas a una matriz de trazabilidad con 10 o más filas, y esboza el plan UAT: happy path, excepciones, permisos y los criterios **go/no-go** del go-live. Cierra con el **índice del paquete documental** del proyecto (la lista de arriba): para cada documento, si es funcional o técnico, su owner y su versión inicial (por ejemplo, `FDD v0.1 — Consultor funcional`). Si necesitas ver una historia terminada, hay un ejemplo plegado al final de esta microlección.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| La historia con más criterios de aceptación y su criterio de excepción | ___ |
+| Cuántas filas tiene tu matriz y cuántas tienen ya caso UAT | ___ |
+| Un caso UAT de permisos (pedido 11) con su resultado esperado | ___ |
+| Tus 3 criterios go/no-go del go-live | ___ |
+| Índice del paquete documental: documentos funcionales y técnicos, con owner y versión | ___ |
+
+#### 🔧 Profundización opcional — Ejemplo resuelto: historia de usuario HU-CRM-014 lista para desarrollo
+
 **Ejemplo de historia lista para desarrollo:**
 
 ```markdown
@@ -296,42 +341,6 @@ Registra también 2 elementos de deuda técnica del proyecto (por ejemplo, un va
 | Contoso B | Al día | Vendedor | Sin alerta |
 | Contoso C | Vencido | Finanzas | Puede liberar con justificación |
 ```
-
-Checklist mínimo antes de pasar a desarrollo:
-- Historia vinculada a un requerimiento aprobado.
-- Criterios de aceptación verificables por QA/UAT.
-- Roles y permisos identificados.
-- Datos de prueba definidos.
-- Dependencias externas documentadas.
-
-**Matriz de trazabilidad** (simple, para evitar duplicidad y discusiones tardías de alcance):
-
-| Req ID | Historia | Diseño funcional | Componente técnico | Caso UAT | Evidencia | Estado |
-|---|---|---|---|---|---|---|
-| REQ-001 | HU-CRM-014 bloqueo crédito | FDD-03 Reglas comerciales | Cloud flow + campo Dataverse + conector ERP | UAT-014 | Captura alerta + log integración | Aprobado |
-| REQ-002 | HU-CS-021 escalamiento SLA | FDD-05 Servicio al cliente | SLA KPI + routing rule | UAT-021 | Caso vencido escalado | En prueba |
-| REQ-003 | HU-FS-008 visita técnica | FDD-07 Field Service | Work Order + Booking + mobile inspection | UAT-008 | Firma cliente + checklist | Pendiente |
-
-Paquete documental recomendado sin inflar el proyecto:
-- Minutas de workshops con decisiones y pendientes.
-- Backlog con historias, criterios de aceptación y prioridad MoSCoW.
-- FDD/FRD con procesos TO-BE, reglas, campos, roles, reportes e integraciones funcionales.
-- TDD/SDD con arquitectura, componentes, ALM, seguridad, integraciones técnicas y operación.
-- Matriz de trazabilidad de requerimientos a UAT.
-- Plan UAT con casos, datos, responsables, calendario y criterios de aprobación.
-- Registro de riesgos, decisiones y change requests.
-
-**Practica con el caso continuo:** escribe 5 historias de los Must (incluida la de aprobación de descuentos y la de visibilidad por región, pedido 11) con criterios de aceptación, roles y datos de prueba; llévalas a una matriz de trazabilidad con 10 o más filas, y esboza el plan UAT: happy path, excepciones, permisos y los criterios **go/no-go** del go-live. Cierra con el **índice del paquete documental** del proyecto (la lista de arriba): para cada documento, si es funcional o técnico, su owner y su versión inicial (por ejemplo, `FDD v0.1 — Consultor funcional`).
-
-**Evidencia a reportar:**
-
-| Campo | Tu valor |
-|---|---|
-| La historia con más criterios de aceptación y su criterio de excepción | ___ |
-| Cuántas filas tiene tu matriz y cuántas tienen ya caso UAT | ___ |
-| Un caso UAT de permisos (pedido 11) con su resultado esperado | ___ |
-| Tus 3 criterios go/no-go del go-live | ___ |
-| Índice del paquete documental: documentos funcionales y técnicos, con owner y versión | ___ |
 
 ---
 

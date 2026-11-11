@@ -34,6 +34,21 @@ describe("splitModuleSections", () => {
     expect(getModuleOutline("## 🧩 Microlección 1 — A\r\n")).toHaveLength(1);
   });
 
+  it("un pliegue ## nunca se traga el Caso Real ni los Criterios", () => {
+    const md = "## Profundización opcional — cohortes\nA\n### 💼 Caso Real de Negocio\nB\n### 🧪 Criterios de Validación\nC\n";
+    const segments = splitModuleSections(md);
+    expect(segments.map((s) => s.optional)).toEqual([true, false]);
+    expect(segments[1]!.markdown).toContain("Caso Real");
+  });
+
+  it("en ningún módulo quedan plegados el Caso Real ni los Criterios de Validación", () => {
+    for (const mod of getAllLevels().flatMap((l) => l.modules)) {
+      for (const segment of splitModuleSections(mod.rawContent).filter((s) => s.optional)) {
+        expect(segment.markdown, mod.slug).not.toMatch(/^#{2,3}\s+(?:💼|🧪)/mu);
+      }
+    }
+  });
+
   it("ignora títulos dentro de bloques de código", () => {
     const md = "Texto\n```md\n### Suplemento falso\n```\nFin\n";
     expect(splitModuleSections(md)).toHaveLength(1);

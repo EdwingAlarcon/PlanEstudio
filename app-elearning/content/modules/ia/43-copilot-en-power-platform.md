@@ -20,6 +20,9 @@ Usar las capacidades de Copilot integradas en Power Apps (Canvas, Model-Driven y
 > - **Idioma:** el ambiente del curso está en **English (United States)**, y conviene: Learn indica que Copilot en Power Automate está optimizado para inglés, que **Create a formula** de la barra de fórmulas solo existe en inglés (en-US) y que las páginas generativas en el navegador solo admiten prompts en inglés de EE. UU. Escribe los prompts de este módulo **en inglés** cuando la herramienta lo exija (te doy ambas versiones).
 > - **Región:** Copilot puede no estar disponible en todas las regiones y, según dónde esté tu entorno, el administrador puede tener que permitir el movimiento de datos entre regiones ([Learn: Copilot en Power Apps](https://learn.microsoft.com/power-apps/maker/canvas-apps/ai-overview), [Learn: movimiento de datos entre regiones](https://learn.microsoft.com/power-platform/admin/geographical-availability-copilot)). Si una opción de Copilot no aparece, anótalo como dato (región del entorno y qué no aparece) y sigue con la parte de revisión, que no depende del tenant.
 
+### 🔧 Qué queda para después (Profundización opcional)
+- **La fórmula en Power Apps Studio** (al final de la Microlección 2): pegar la salida generada en tu app, probar **Explain this formula** y, si tu entorno la ofrece, **Create a formula**, que está en preview. La actividad de fallo y corrección de esa microlección se hace sin tenant y es la que piden los Criterios de Validación; esta práctica la confirma en tu entorno y puede esperar a una segunda pasada.
+
 ---
 
 ## 🧩 Microlección 1 — Qué Copilot asiste a quién, y una primera app generada
@@ -124,6 +127,16 @@ Filter(
 // y Len sobre una columna no delega (nota 2 de la tabla de Learn).
 ```
 
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Errores que encontraste en la salida generada (uno por línea) | ___ |
+| Para cada error, la fuente que lo confirma (URL de Learn + nota/fila, o mensaje exacto de Power Apps Studio) | ___ |
+| Tu fórmula corregida | ___ |
+
+#### 🔧 Profundización opcional — La fórmula en Power Apps Studio: Explain this formula y Create a formula (preview)
+
 **Práctica real en tu entorno (20 min, opcional si no tienes app):** en la app de la Microlección 1 (o en tu app Canvas del Módulo 3), agrega una **Text input** llamada `txtBusqueda` y una **Vertical gallery** conectada a tu tabla.
 1. Pega en **Items** la salida generada de arriba, adaptando los nombres a tu tabla (si tu tabla se llama distinto, cambia `'Solicitudes TI'`, la columna de título y la de prioridad; si tus opciones están en inglés, usa `High`). Anota qué marca Power Apps Studio. Si al principio solo marca el error de tipos de la comparación con texto, corrige solo esa parte y vuelve a mirar: entonces aparece la advertencia de delegación del `Trim` y del `Len`.
 2. Prueba **Explain this formula**: selecciona la galería, propiedad **Items**, y en la barra de fórmulas abre el menú desplegable junto a **fx** > **Explain this formula** ([Learn](https://learn.microsoft.com/power-apps/maker/canvas-apps/ai-formulas-formulabar)). ¿La explicación menciona el problema de delegación o lo pasa por alto? Anótalo: es la diferencia entre "explicar" y "verificar".
@@ -132,13 +145,10 @@ Filter(
 
 **Si no lo ves:** si no aparece el menú de Copilot junto a **fx**, revisa que Copilot esté habilitado para tu entorno y tu tenant (Learn lo pone como requisito; Microlección 5). Si el menú aparece pero falta solo **Create a formula**, revisa en la app **Settings** > **Updates** > **Preview** el interruptor **Copilot for formulas**: según Learn, apagarlo quita únicamente la opción **Create a formula (preview)** del menú, no **Explain this formula**. Recuerda además que **Create a formula** solo existe con el idioma en inglés (en-US). Si `'Prioridad (Solicitudes TI)'` no existe, escribe `'Prioridad (` en la barra de fórmulas y elige la opción que te propone (es la enumeración de tu columna Choice).
 
-**Evidencia a reportar:**
+**Evidencia a reportar (de esta práctica):**
 
 | Campo | Tu valor |
 |---|---|
-| Errores que encontraste en la salida generada (uno por línea) | ___ |
-| Para cada error, la fuente que lo confirma (URL de Learn + nota/fila, o mensaje exacto de Power Apps Studio) | ___ |
-| Tu fórmula corregida | ___ |
 | ¿**Explain this formula** detectó el problema de delegación? (cita la frase) | ___ |
 
 ---

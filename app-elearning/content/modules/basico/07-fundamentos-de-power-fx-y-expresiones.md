@@ -20,6 +20,7 @@ Dominar el lenguaje de fórmulas Power Fx para lógica avanzada en Canvas Apps.
 
 ### 🔧 Qué queda para después (Profundización opcional)
 - `AddColumns`, `ForAll`, batch updates, Collections complejas y optimización fina de delegación. Puedes volver a estos patrones después de practicar más Canvas Apps.
+- Están plegados dentro de cada microlección, con el título **Profundización opcional**: `AddColumns` (7.1, Ejercicio 3), `If` anidado para colores (7.2, Ejercicio 3), cálculos de fechas y `Split` (7.3, Ejercicios 2 y 3), la Práctica 7.4 completa (Collections, `ForAll`, `With`) y Collections para lo no delegable (7.5, Ejercicio 3). No hacen falta para la evaluación.
 
 ### 🧭 Cómo recorrer este módulo si eres principiante
 1. Primero lee las fórmulas y explica en voz alta qué hace cada línea.
@@ -101,7 +102,7 @@ Dominar el lenguaje de fórmulas Power Fx para lógica avanzada en Canvas Apps.
 
 #### 🟢 Núcleo obligatorio
 
-Completa primero los ejercicios 7.1.1, 7.1.2, 7.2.1, 7.3.1 y 7.5.1. Con eso tendrás búsqueda/filtro, búsqueda de un registro, validación de formulario, formato de texto y una primera lectura de delegación.
+Completa primero los ejercicios 7.1.1, 7.1.2, 7.2.1, 7.3.1 y 7.5.1. Con eso tendrás búsqueda/filtro, búsqueda de un registro, validación de formulario, formato de texto y una primera lectura de delegación. Los ejercicios 7.2.2 (`Switch`) y 7.5.2 (`StartsWith`) son cortos y quedan a la vista porque entran en la evaluación.
 
 > **Cómo está organizado el Núcleo:** aprendes Power Fx en cuatro bloques cortos (leer y filtrar, validar, dar formato, delegación). En cada uno alternas una idea, una práctica de pocos minutos y un dato real de tu propia app. Cierras con un reto en el que ya no te doy las fórmulas. Las microprácticas no necesitan tenant; escribir las fórmulas sí necesita tu app Canvas del Módulo 3. Los ejercicios marcados como profundización quedan para después. En las fórmulas, las columnas se escriben con el nombre que les diste en el Módulo 2, por ejemplo `'Título de Solicitud'`.
 
@@ -204,6 +205,8 @@ Prueba con **F5**: escribe en `txtBusqueda` el título **completo y exacto** de 
 | Con qué combinación de filtros aparece cada solicitud y con cuál desaparece | ___ |
 | El valor que devolvió tu `LookUp` y qué mostró cuando no encontró el registro | ___ |
 
+#### 🔧 Profundización opcional — AddColumns para enriquecer datos (Práctica 7.1, Ejercicio 3)
+
 **Ejercicio 3: AddColumns para Enriquecer Datos**
 
 > Profundización opcional: este patrón ya combina tabla, columna calculada y búsqueda relacionada. Si todavía estás entendiendo `Filter` y `LookUp`, vuelve a este ejercicio después.
@@ -234,7 +237,7 @@ ClearCollect(
 
 **Ejemplo pequeño:** `!IsBlank(txtTitulo.Text) && Len(txtDescripcion.Text) >= 20` se cumple solo si hay título Y la descripción tiene al menos 20 caracteres.
 
-**Práctica real en tu app (20 min):** haz el Ejercicio 1 de la Práctica 7.2 de abajo; los Ejercicios 2 y 3 son para ampliar.
+**Práctica real en tu app (20 min):** haz el Ejercicio 1 de la Práctica 7.2 de abajo; el Ejercicio 2 (`Switch`) es corto y entra en la evaluación; el Ejercicio 3 está plegado al final de la microlección.
 
 ##### Práctica 7.2: Lógica Condicional y Validaciones
 
@@ -276,6 +279,18 @@ Switch(
 
 Cada `Icon.Nombre` es uno de los íconos que trae Power Apps. Si uno de estos nombres sale subrayado en rojo, borra lo que va después de `Icon.` y elige otro de la lista que te propone la barra de fórmulas.
 
+**Ahora diagnostica — micropráctica (5 min):** **[Diagnosticar: el botón Guardar se habilita con el título vacío](/practica/ip-app-012-boton-habilitado-de-mas)**. Parte de un síntoma exacto y te pide la causa y la corrección, antes de ver la solución.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| La fórmula exacta de `DisplayMode` de tu botón Guardar | ___ |
+| Qué hace el botón con el título vacío y la descripción de 25 caracteres | ___ |
+| Qué hace el botón con el título lleno y la descripción de 5 caracteres | ___ |
+
+#### 🔧 Profundización opcional — If anidado para colores (Práctica 7.2, Ejercicio 3)
+
 **Ejercicio 3: If Anidado para Colores**
 
 **Dónde va:** dentro de la plantilla de `galSolicitudes`, agrega un `Label` con `Text` = `ThisItem.Prioridad` y, en su propiedad `Color`, escribe la fórmula. `RGBA(rojo, verde, azul, opacidad)` arma un color: los tres primeros números van de 0 a 255 y la opacidad de 0 (transparente) a 1 (sólido).
@@ -296,16 +311,6 @@ If(
     )
 )
 ```
-
-**Ahora diagnostica — micropráctica (5 min):** **[Diagnosticar: el botón Guardar se habilita con el título vacío](/practica/ip-app-012-boton-habilitado-de-mas)**. Parte de un síntoma exacto y te pide la causa y la corrección, antes de ver la solución.
-
-**Evidencia a reportar:**
-
-| Campo | Tu valor |
-|---|---|
-| La fórmula exacta de `DisplayMode` de tu botón Guardar | ___ |
-| Qué hace el botón con el título vacío y la descripción de 25 caracteres | ___ |
-| Qué hace el botón con el título lleno y la descripción de 5 caracteres | ___ |
 
 ---
 
@@ -353,6 +358,16 @@ Concatenate(
 
 Resultado de ejemplo: `Solicitud SOL-001000 - Impresora del piso 3 sin tóner (12/03/2026) · SLA 008 h`. Fíjate en las dos formas de "rellenar con ceros": en el número de solicitud lo hace Dataverse (con `{SEQNUM:6}`), y en el SLA lo hace Power Fx con el formato `"000"` de `Text`, que solo funciona sobre números.
 
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| La fórmula exacta que usaste para dar formato y el texto que produjo | ___ |
+| Qué muestra el mismo dato sin el formato | ___ |
+| Un formato de fecha distinto que probaste y su resultado | ___ |
+
+#### 🔧 Profundización opcional — Cálculos de fechas y Split (Práctica 7.3, Ejercicios 2 y 3)
+
 **Ejercicio 2: Cálculos de Fechas**
 
 **Dónde va:** pantalla `scrDetalle` > inserta dos `Label` debajo de `lblResumen`, nómbralos `lblVence` y `lblDiasRestantes`, y escribe una fórmula en el `Text` de cada uno. `DateAdd(fecha, cantidad, unidad)` suma tiempo a una fecha; `DateDiff(inicio, fin, unidad)` cuenta cuánto hay entre dos fechas. La unidad se escribe con `TimeUnit.` (`TimeUnit.Days`, `TimeUnit.Hours`...).
@@ -393,13 +408,7 @@ Last(Split(ThisItem.Solicitante.Email, "@")).Value
 Split("Hardware,Software,Red,Accesos", ",")
 ```
 
-**Evidencia a reportar:**
-
-| Campo | Tu valor |
-|---|---|
-| La fórmula exacta que usaste para dar formato y el texto que produjo | ___ |
-| Qué muestra el mismo dato sin el formato | ___ |
-| Un formato de fecha distinto que probaste y su resultado | ___ |
+#### 🔧 Profundización opcional — Collections, ForAll y With (Práctica 7.4)
 
 ##### Práctica 7.4: Collections y Contexto
 
@@ -471,7 +480,7 @@ With(
 
 **Ejemplo pequeño:** poner `DateDiff(...)` sobre la columna dentro de `Filter` no se delega. Comparar la columna con una fecha calculada fuera de la fila, como `'Fecha Solicitud' < DateAdd(Today(), -7, TimeUnit.Days)`, sí se delega.
 
-**Práctica real en tu app (20 min):** haz el Ejercicio 1 de la Práctica 7.5 de abajo; los Ejercicios 2 y 3 son para ampliar.
+**Práctica real en tu app (20 min):** haz el Ejercicio 1 de la Práctica 7.5 de abajo; el Ejercicio 2 (`StartsWith`) entra en la evaluación; el Ejercicio 3 está plegado al final de la microlección.
 
 ##### Práctica 7.5: Delegación y Performance
 
@@ -525,6 +534,16 @@ Sort(
 
 > **¿Y `SortByColumns`?** Es otra función para ordenar que verás en otros materiales: recibe el nombre de la columna como **texto**, entre comillas dobles. Para no mezclar estilos de comillas, en este curso usamos `Sort` con el nombre de la columna como en cualquier otra fórmula.
 
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| La fórmula no delegable que escribiste y el texto de la advertencia azul | ___ |
+| La versión corregida y si la advertencia desapareció | ___ |
+| Cuántas filas devuelve cada versión con tus datos de prueba | ___ |
+
+#### 🔧 Profundización opcional — Collections para lo no delegable (Práctica 7.5, Ejercicio 3)
+
 **Ejercicio 3: Uso de Collections para No Delegable**
 ```javascript
 // Cargar data una vez (ClearCollect no es delegable: trae como máximo el Data row limit,
@@ -542,14 +561,6 @@ Filter(
     DateDiff('Fecha Solicitud', Today(), TimeUnit.Days) > 7  // Ahora funciona porque es Collection local
 )
 ```
-
-**Evidencia a reportar:**
-
-| Campo | Tu valor |
-|---|---|
-| La fórmula no delegable que escribiste y el texto de la advertencia azul | ___ |
-| La versión corregida y si la advertencia desapareció | ___ |
-| Cuántas filas devuelve cada versión con tus datos de prueba | ___ |
 
 ---
 

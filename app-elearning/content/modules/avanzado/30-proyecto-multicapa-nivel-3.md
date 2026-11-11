@@ -11,7 +11,7 @@ lastVerified: "2026-11"
 ### 🎯 Objetivo
 Construir una solución enterprise completa integrando todos los conceptos del Nivel 3: arquitectura multi-solución, CI/CD automatizado, D365 Customer Service, Portal para clientes, Copilot Studio con SSO, Plugin C# para lógica de negocio, integración con Azure Service Bus, y PCF Dataset avanzado.
 
-> **Cómo está organizado este proyecto:** cada **hito** es una microlección: qué vas a construir, una micropráctica corta para decidir bien antes de hacerlo, la construcción en tu entorno y una tabla de **evidencia** con el dato exacto que observaste (no un "sí/no"). Como en el Módulo 17, aquí casi no hay clic a clic: cada hito remite al módulo del Nivel 3 donde aprendiste esa pieza (18 a 29). Si te atoras, vuelve a ese módulo. Después de desplegar viene un **incidente que cruza capas** para diagnosticar, y el cierre es un **reto de transferencia**: el mismo diseño para otro requisito.
+> **Cómo está organizado este proyecto:** va en cinco **etapas** con entregable; cada **hito** es una microlección: qué vas a construir, una micropráctica corta para decidir bien antes de hacerlo, la construcción en tu entorno y una tabla de **evidencia** con el dato exacto que observaste (no un "sí/no"). Como en el Módulo 17, aquí casi no hay clic a clic: cada hito remite al módulo del Nivel 3 donde aprendiste esa pieza (18 a 29). Si te atoras, vuelve a ese módulo. Después de desplegar viene un **incidente que cruza capas** para diagnosticar, y el cierre es un **reto de transferencia**: el mismo diseño para otro requisito.
 >
 > **Duración realista:** unas 22 horas para la entrega completa (la suma de los hitos), repartidas en tres o cuatro semanas; en la ruta B, adaptar el plugin a tu tabla y sacar el sitio fuera de Developer puede sumar algo más. Cierra cada hito con su evidencia antes de pasar al siguiente: el Hito 7 (despliegue) depende de todo lo anterior.
 >
@@ -37,13 +37,15 @@ Construir una solución enterprise completa integrando todos los conceptos del N
 | **Completa** (≈22 h) | Los 7 hitos y el diagnóstico del incidente, de DEV a TEST (2 ambientes); en la ruta B, el Hito 4 en papel | Es la que exigen los Criterios de Validación del Proyecto Final y los Criterios de Graduación |
 | **Excelente** (≈27 h) | Completa + PROD con 2 aprobadores + el reto de transferencia construido + presentación al sponsor (como la extensión del LAB-63) | Es la que conviene mostrar en un portafolio y en una entrevista técnica |
 
+### 🔧 Qué queda para después (Profundización opcional)
+- Plegados (los Criterios de Validación no los exigen): **Blue-Green deployment** y **construir el reto de transferencia**.
+
 ### 📖 Conceptos Clave
 Este módulo aplica y consolida todo el Nivel 3 en un proyecto cohesivo. Los conceptos clave son los patrones de integración y de ejecución de proyecto que conectan todos los módulos anteriores:
 
 - **Integration testing de extremo a extremo:** verificación de que todos los componentes del sistema funcionan juntos correctamente en el entorno de prueba. Va más allá de testear cada componente aislado: valida que el caso creado en Power Pages pasa por el Plugin C#, que Dataverse publica el evento en Service Bus, que la Azure Function lo procesa y que el agente de Copilot Studio y el dashboard reflejan el nuevo estado. Debe ejecutarse con datos realistas en un entorno de TEST/UAT antes de cada despliegue a PROD.
 - **Dependency management en multi-solution deployments:** gestión del orden de despliegue de soluciones con dependencias entre sí. Si `SIT_CustomerService` depende de `SIT_Foundation`, primero se despliega Foundation y luego CustomerService. El pipeline CD debe definir explícitamente el orden de importación de soluciones y verificar que cada solución importó correctamente antes de continuar con la siguiente. Un error en SIT_Foundation debe bloquear todos los despliegues dependientes.
 - **Environment Variable management entre ambientes:** estrategia para gestionar los valores de las Environment Variables que cambian entre entornos (URLs de APIs externas, IDs de configuración). En DEV apuntan a sistemas de prueba; en PROD, a sistemas reales. En un pipeline, los valores de cada entorno (y las conexiones de las Connection References) se guardan en un **deployment settings file** (JSON) que se genera con `pac solution create-settings` y se pasa a la tarea de importación con **Use deployment settings file** (`UseDeploymentSettingsFile`) ([Learn: deployment settings file](https://learn.microsoft.com/power-platform/alm/conn-ref-env-variables-build-tools)). Power Platform Build Tools no tiene una tarea aparte para fijar Environment Variables después de importar.
-- **Blue-Green deployment en Power Platform:** estrategia general de despliegue sin downtime en la que conviven la versión anterior y la nueva y se cambia el tráfico cuando la nueva está verificada. Learn no describe un mecanismo blue-green nativo para un entorno de Dataverse. Lo que sí ofrece la plataforma es la importación **Stage for Upgrade** (o `HoldingSolution: true` en el pipeline, seguida de **Apply Solution Upgrade**): la versión vieja y la nueva quedan instaladas a la vez para migrar datos antes de completar la actualización ([Learn: actualizar una solución](https://learn.microsoft.com/power-apps/maker/data-platform/update-solutions)). Para el portal y la Azure Function, el blue-green se resuelve con las herramientas propias de cada servicio.
 - **Rollback plan:** plan documentado y probado para revertir un despliegue fallido en PROD. Para soluciones de Power Platform: mantener el artifact de la versión anterior en el pipeline (y su código en el control de versiones), documentar los pasos manuales adicionales (restaurar datos modificados por plugins, revertir configuraciones de D365), y tener un checklist de verificación post-rollback. Ojo: una actualización de una solución administrada debe tener un número de versión **mayor** que la instalada, así que el rollback habitual es **hacia adelante**: reconstruyes la versión anterior con un número nuevo (por ejemplo 1.0.2.0 con el contenido de 1.0.0.0) y la importas como **Upgrade**, que elimina los componentes que ya no están. Borrar la solución administrada elimina también sus datos, y restaurar una copia de seguridad del entorno pierde lo creado después de la copia (Lab 115, Nivel 4) ([Learn: actualizar una solución](https://learn.microsoft.com/power-apps/maker/data-platform/update-solutions)). El rollback debe poder ejecutarse en menos de 30 minutos para minimizar el impacto en usuarios.
 - **Monitoreo y observabilidad en producción:** instrumentación del sistema para detectar problemas antes de que los usuarios los reporten. Incluye: alertas de Azure Monitor sobre mensajes acumulados en la Dead Letter Queue de Service Bus y sobre la cola activa que crece sin consumirse, alertas sobre fallos de la Azure Function (tasa de error > 1%), Plugin Trace Log en modo **Exception** solo mientras investigas (los registros se borran a las 24 horas y consumen almacenamiento) ([Learn: logging and tracing](https://learn.microsoft.com/power-apps/developer/data-platform/logging-tracing)), Analytics de Copilot Studio con revisión semanal de tasa de resolución, y Power BI con métricas de SLA para el equipo de management.
 
@@ -62,9 +64,15 @@ graph LR
 
 **Escenario:** Sistema de soporte técnico enterprise con autoservicio
 
----
+#### 🔧 Profundización opcional — Blue-Green deployment
 
-## 🧩 Microlección 1 — Hito 1: arquitectura, soluciones y ADR (≈90 min)
+- **Blue-Green deployment en Power Platform:** estrategia general de despliegue sin downtime en la que conviven la versión anterior y la nueva y se cambia el tráfico cuando la nueva está verificada. Learn no describe un mecanismo blue-green nativo para un entorno de Dataverse. Lo que sí ofrece la plataforma es la importación **Stage for Upgrade** (o `HoldingSolution: true` en el pipeline, seguida de **Apply Solution Upgrade**): la versión vieja y la nueva quedan instaladas a la vez para migrar datos antes de completar la actualización ([Learn: actualizar una solución](https://learn.microsoft.com/power-apps/maker/data-platform/update-solutions)). Para el portal y la Azure Function, el blue-green se resuelve con las herramientas propias de cada servicio.
+
+## 🏁 Etapa 1 — Diseño: arquitectura, soluciones y ADR (Microlección 1, Hito 1)
+
+**Entregable de esta etapa:** las soluciones creadas en DEV, `docs/orden-de-despliegue.md` y ADR-001.
+
+**Tiempo estimado:** ≈90 min.
 
 **Qué vas a construir:** el mapa de capas antes que cualquier componente (Módulos 18 y 25). Si cambias después qué solución contiene qué, rehaces dependencias, pipeline y permisos.
 
@@ -125,7 +133,11 @@ graph LR
 
 ---
 
-## 🧩 Microlección 2 — Hito 2: la regla de servidor — CasoPreCreate con unit tests (≈240 min)
+## 🏁 Etapa 2 — La regla de servidor: CasoPreCreate con unit tests (Microlección 2, Hito 2)
+
+**Entregable de esta etapa:** CasoPreCreate registrado con sus 2 unit tests en verde; en la entrega completa, también CasoPostUpdate y ADR-002.
+
+**Tiempo estimado:** ≈240 min.
 
 **Qué vas a construir:** la validación que no se puede saltar desde ningún canal (portal, app, flujo, agente o API) y el enriquecimiento del caso con el nivel de contrato del cliente (Módulos 23, 25 y 26).
 
@@ -289,7 +301,13 @@ public class CasoPreCreatePluginTests
 
 ---
 
-## 🧩 Microlección 3 — Hito 3: el portal de clientes (≈150 min)
+## 🏁 Etapa 3 — Portal y operación de servicio (Hitos 3 y 4)
+
+**Entregable de esta etapa:** el portal donde cada cliente ve solo sus casos y las colas con su SLA (ruta B: como diseño).
+
+**Tiempo estimado:** ≈240 min.
+
+### 🧩 Microlección 3 — Hito 3: el portal de clientes (≈150 min)
 
 **Qué vas a construir:** el autoservicio donde cada cliente registra y consulta solo sus casos (Módulos 21 y 29).
 
@@ -310,7 +328,7 @@ public class CasoPreCreatePluginTests
 
 ---
 
-## 🧩 Microlección 4 — Hito 4: la operación de servicio en Customer Service (≈90 min)
+### 🧩 Microlección 4 — Hito 4: la operación de servicio en Customer Service (≈90 min)
 
 **Qué vas a construir:** que cada caso llegue a la cola correcta con su SLA (Módulo 20). Ruta B: entrega este hito como diseño.
 
@@ -328,7 +346,13 @@ public class CasoPreCreatePluginTests
 
 ---
 
-## 🧩 Microlección 5 — Hito 5: integración asíncrona con Azure (≈150 min)
+## 🏁 Etapa 4 — Integración y capas de experiencia (Hitos 5 y 6)
+
+**Entregable de esta etapa:** los casos nuevos llegan al sistema externo, y el PCF, el agente y el dashboard funcionan.
+
+**Tiempo estimado:** ≈450 min.
+
+### 🧩 Microlección 5 — Hito 5: integración asíncrona con Azure (≈150 min)
 
 **Qué vas a construir:** que cada caso nuevo llegue al sistema externo sin que el usuario espere y sin perder mensajes (Módulo 24).
 
@@ -365,7 +389,7 @@ public class CasoPreCreatePluginTests
 
 ---
 
-## 🧩 Microlección 6 — Hito 6: las capas de experiencia — PCF, agente y dashboard (≈300 min)
+### 🧩 Microlección 6 — Hito 6: las capas de experiencia — PCF, agente y dashboard (≈300 min)
 
 **Qué vas a construir:** las tres formas en que distintas personas ven el mismo caso. Este hito va sin pasos: cada pieza ya la construiste en su módulo.
 
@@ -383,7 +407,13 @@ public class CasoPreCreatePluginTests
 
 ---
 
-## 🧩 Microlección 7 — Hito 7: pipeline CI/CD, despliegue y prueba de punta a punta (≈300 min)
+## 🏁 Etapa 5 — Despliegue, prueba y diagnóstico (Hito 7)
+
+**Entregable de esta etapa:** el pipeline de DEV a TEST, la prueba de punta a punta, el rollback ensayado, el documento técnico y el diagnóstico.
+
+**Tiempo estimado:** ≈300 min, más el diagnóstico.
+
+### 🧩 Microlección 7 — Hito 7: pipeline CI/CD, despliegue y prueba de punta a punta (≈300 min)
 
 **Qué vas a construir:** el paso de DEV a TEST (y a PROD en la entrega excelente) sin pasos manuales (Módulo 19).
 
@@ -473,7 +503,7 @@ public class CasoPreCreatePluginTests
 
 ---
 
-## 🔧 Diagnosticar — incidente que cruza capas
+### 🔧 Diagnosticar — incidente que cruza capas
 
 Una semana después del despliegue a PROD (o a TEST, si no llegaste a PROD), Operaciones reporta: "desde el lunes, el sistema externo no recibe casos nuevos, aunque los clientes los siguen creando en el portal sin problemas". Antes de abrir nada, escribe **tres hipótesis** en capas distintas (plugin, publicación de Dataverse, Service Bus, Azure Function) y qué evidencia confirmaría o descartaría cada una. Después resuelve el caso con la evidencia por capa:
 
@@ -493,6 +523,8 @@ Una semana después del despliegue a PROD (o a TEST, si no llegaste a PROD), Ope
 
 **Micropráctica de transferencia (8 min):** decide qué se reutiliza y qué cambia → **[Transferir: reclamos de garantía para distribuidores](/practica/ip-arq-009-transferir-reclamos-de-garantia)**.
 
+#### 🔧 Profundización opcional — construir el reto (entrega Excelente)
+
 **Después, sin pasos:** escribe en una página el diseño (soluciones y su orden, tipo de acceso de la Table Permission, mensaje, etapa y modo de cada paso, tipo de entidad de Service Bus) como ADR-003, y construye **solo** el plugin de validación con sus 2 tests y el paso del service endpoint en una solución nueva `SIT_Garantias`.
 
 > **Coste:** los topics no existen en el tier **Basic** de Service Bus (solo admite colas); hacen falta **Standard** o Premium, que tienen coste ([Learn: tiers de Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-premium-messaging)). Si tu namespace es Basic, crea uno **Standard** solo para este reto, mira el precio en la página de precios antes de crearlo y bórralo al terminar; o entrega el topic en papel.
@@ -503,8 +535,6 @@ Una semana después del despliegue a PROD (o a TEST, si no llegaste a PROD), Ope
 | Mensaje, etapa, modo y filtering attributes del paso que publica en Service Bus | ___ |
 | Cola o topic, y cuántas suscripciones | ___ |
 | Resultado de los 2 tests del plugin de garantía | ___ |
-
----
 
 ### 💼 Caso Real de Negocio
 **Este módulo ES el caso real** — implementar el sistema completo para una empresa de servicios de 1,000 empleados con 10,000 clientes externos. El proyecto integra todos los componentes del Nivel 3 en un sistema de producción real.

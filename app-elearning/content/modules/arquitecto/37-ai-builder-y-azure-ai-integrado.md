@@ -25,6 +25,10 @@ Decidir, para cada necesidad de IA de una solución Power Platform, qué opción
 > - **Nombres de acciones.** Desde mayo de 2025 la acción **Extract information from documents** se llama **Process documents**, y **Create text with GPT using a prompt** se llama **Run a prompt** ([Learn: document processing en Power Automate](https://learn.microsoft.com/ai-builder/form-processing-model-in-flow), [Learn: prompt en Power Automate](https://learn.microsoft.com/ai-builder/use-a-custom-prompt-in-flow)). Si sigues un tutorial antiguo, busca el nombre nuevo.
 > - **Nombres de Azure.** La marca actual es **Microsoft Foundry** (antes Azure AI Studio / Azure AI Foundry), y lo que se llamaba **Azure AI Services** hoy es **Foundry Tools**. Azure OpenAI sigue existiendo como los modelos de OpenAI dentro de Foundry, y su API estable nueva es la **v1** (`/openai/v1/`), que ya no exige el parámetro `api-version` mensual ([Learn: qué es Microsoft Foundry](https://learn.microsoft.com/azure/foundry/what-is-foundry), [Learn: API v1 de Azure OpenAI](https://learn.microsoft.com/azure/foundry/openai/api-version-lifecycle)).
 
+### 🔧 Qué queda para después (Profundización opcional)
+- **Azure a fondo** (al final de Conceptos Clave): Microsoft Foundry como plataforma, el detalle de las tres formas de llamar a Azure y los frameworks de orquestación con código. Para el núcleo basta el escalón 4 de la escalera: Azure OpenAI se consume desde Power Platform con el conector **Azure OpenAI** u otra integración gobernada, y solo cuando los tres escalones anteriores no alcanzan.
+- **Parte B de la Microlección 3** (Azure OpenAI directo): necesita una suscripción de Azure. Sin ella, haz la Parte A y responde por escrito la última fila de su evidencia.
+
 ### 📖 Conceptos Clave
 
 **Las cuatro opciones, de menos a más esfuerzo.** Casi todas las decisiones de IA en Power Platform se reducen a subir por esta escalera solo cuando el escalón anterior no basta:
@@ -57,13 +61,16 @@ flowchart TD
 - **Prediction (custom):** predice a partir del historial de una tabla de **Dataverse** una respuesta **binaria** (sí/no, a tiempo/tarde), entre **varios resultados** posibles, o **numérica**. Necesita al menos **10 filas de resultado histórico por cada clase** de la columna a predecir y un mínimo de **50 filas**, aunque Learn recomienda **al menos 1.000** para buenos resultados ([Learn: requisitos del modelo de predicción](https://learn.microsoft.com/ai-builder/prediction-prereq)). Se ejecuta con **Run now** o con una programación de **Run** y **Retrain** (diaria, semanal o mensual; en preview), o en tiempo real desde Power Automate con la acción **Predict** ([Learn: usar tu modelo de predicción](https://learn.microsoft.com/ai-builder/prediction-use)). La tabla de modelos que se pueden llamar con Power Fx (`'Modelo'.Predict(...)`) en una Canvas App **no incluye** prediction: desde una app, la predicción en tiempo real se pide a un flujo ([Learn: modelos de AI Builder en Power Apps](https://learn.microsoft.com/ai-builder/powerfx-in-powerapps)).
 - **Prompts y prompt builder:** un prompt es una instrucción en lenguaje natural para un modelo generativo; prompt builder permite crearlo, probarlo y guardarlo para reutilizarlo en apps, flujos y agentes. Se crea en Power Apps o Power Automate desde **AI hub** > **Prompts** > **Build your own prompt**; las entradas se agregan escribiendo **/** o con **Add content** (**Text** o **Image or document**), y en la sección **Knowledge** puedes conectar datos de Dataverse ([Learn: crear un prompt](https://learn.microsoft.com/microsoft-copilot-studio/create-custom-prompt)). En el campo **Model** eliges el modelo: el predeterminado es **GPT-4.1 mini** (tarifa *Basic*); otros, como GPT-4.1 o GPT-5 chat, tienen tarifa *Standard*, y los de razonamiento, *Premium*. La **temperatura** va de 0 a 1 y por defecto es **0** (en **…** > **Settings**; no existe para el modelo GPT-5 reasoning) ([Learn: modelo y configuración del prompt](https://learn.microsoft.com/microsoft-copilot-studio/prompt-model-settings)). Las funciones de IA AISummarize, AIExtract, AIReply, AIClassify y AISentiment son prompts prediseñados con la tarifa *Basic*.
 - **Dónde se consume cada cosa:** un prompt usado en Power Apps o Power Automate consume primero AI Builder credits (si hay) y después Copilot Credits; el mismo prompt usado en Copilot Studio consume **solo Copilot Credits** ([Learn: modelo y configuración del prompt](https://learn.microsoft.com/microsoft-copilot-studio/prompt-model-settings)). Para agentes y su consumo, ver el Módulo 22.
-- **Microsoft Foundry:** plataforma de Azure que reúne agentes (Foundry Agent Service), modelos (Foundry Models, con modelos de Microsoft, OpenAI, Anthropic, Meta y otros) y herramientas bajo un solo recurso, con RBAC, red y políticas comunes. Un recurso de Azure OpenAI existente se puede actualizar a recurso de Foundry conservando endpoint y claves ([Learn: qué es Microsoft Foundry](https://learn.microsoft.com/azure/foundry/what-is-foundry)).
 - **Privacidad de los modelos vendidos por Azure (incluye Azure OpenAI):** tus prompts y respuestas **no** están disponibles para otros clientes ni para OpenAI, y **no** se usan para entrenar modelos fundacionales sin tu permiso. Lo que sí existe por defecto es el **abuse monitoring**: si el sistema detecta un patrón de abuso, una muestra puede pasar a revisión. Con una deployment *Global* o *DataZone* el procesamiento puede ocurrir fuera de tu geografía (o dentro de la zona de datos) aunque los datos en reposo queden en ella: es una decisión de residencia, no un detalle ([Learn: datos, privacidad y seguridad](https://learn.microsoft.com/azure/foundry/responsible-ai/openai/data-privacy)).
-- **Tres formas de llamar a Azure desde Power Platform:** (1) el conector **Azure OpenAI** (Premium; acciones como **Creates a completion for the chat message** y **Get an embedding**; autenticación con **API Key** o **Microsoft Entra ID Integrated**, que exige el rol *Cognitive Services OpenAI User* a cada usuario) ([Learn: conector Azure OpenAI](https://learn.microsoft.com/connectors/azureopenai/)); (2) la acción **HTTP** contra la API v1; (3) **traer tu modelo de Foundry a un prompt**: en el campo **Model** del prompt, el signo **+** abre **Connect a model from Azure AI Foundry**, donde indicas **Model deployment name** y **Base model name**. Esta tercera vía solo acepta endpoints de *chat completions* (no el de Responses) y hoy **no** admite la familia GPT-5 ([Learn: traer tu propio modelo a los prompts](https://learn.microsoft.com/microsoft-copilot-studio/bring-your-own-model-prompts)).
 - **Prompt engineering:** diseñar instrucciones que den respuestas consistentes. Técnicas clave: rol y reglas al inicio, ejemplos de entrada→salida esperada (*few-shot*), pedir un formato de salida exacto (una categoría de una lista cerrada, un número, un JSON) y separar la **instrucción** del **contexto**. Para clasificar o extraer, temperatura 0; para redactar, algo más alta.
 - **Grounding y RAG:** anclar la respuesta del modelo a documentos de la empresa en vez de a su conocimiento general. El patrón RAG (*retrieval-augmented generation*) busca primero los fragmentos más relevantes en un índice (por ejemplo Azure AI Search con búsqueda vectorial) y solo esos entran en el prompt. Pegar todo el corpus en el mensaje no escala: excede el contexto del modelo y lo llena de información irrelevante. En prompt builder, el **Knowledge** de Dataverse es un grounding acotado; en Copilot Studio, las Knowledge sources (Módulos 15 y 22).
-- **Frameworks de orquestación** *(referencia avanzada)*: cuando la lógica no cabe en Copilot Studio ni en un prompt, Foundry permite desplegar un **hosted agent** con tu propio código o framework, por ejemplo **Microsoft Agent Framework**, **Semantic Kernel** o LangGraph ([Learn: qué es Microsoft Foundry](https://learn.microsoft.com/azure/foundry/what-is-foundry)). Exige código (C# o Python) y operar ese servicio: es el escalón 4 en su versión más cara.
 - **Supervisión humana:** Learn insiste en que el contenido generado lo revise una persona antes de publicarlo, enviarlo a un cliente o usarlo para decidir, y documenta cómo agregar una aprobación (**Start and wait for an approval of text**) después de **Run a prompt** ([Learn: prompt en Power Automate](https://learn.microsoft.com/ai-builder/use-a-custom-prompt-in-flow)). En extracción de documentos, el equivalente es el umbral de confianza.
+
+#### 🔧 Profundización opcional — Azure a fondo: Microsoft Foundry, tres formas de llamar a Azure y frameworks de orquestación
+
+- **Microsoft Foundry:** plataforma de Azure que reúne agentes (Foundry Agent Service), modelos (Foundry Models, con modelos de Microsoft, OpenAI, Anthropic, Meta y otros) y herramientas bajo un solo recurso, con RBAC, red y políticas comunes. Un recurso de Azure OpenAI existente se puede actualizar a recurso de Foundry conservando endpoint y claves ([Learn: qué es Microsoft Foundry](https://learn.microsoft.com/azure/foundry/what-is-foundry)).
+- **Tres formas de llamar a Azure desde Power Platform:** (1) el conector **Azure OpenAI** (Premium; acciones como **Creates a completion for the chat message** y **Get an embedding**; autenticación con **API Key** o **Microsoft Entra ID Integrated**, que exige el rol *Cognitive Services OpenAI User* a cada usuario) ([Learn: conector Azure OpenAI](https://learn.microsoft.com/connectors/azureopenai/)); (2) la acción **HTTP** contra la API v1; (3) **traer tu modelo de Foundry a un prompt**: en el campo **Model** del prompt, el signo **+** abre **Connect a model from Azure AI Foundry**, donde indicas **Model deployment name** y **Base model name**. Esta tercera vía solo acepta endpoints de *chat completions* (no el de Responses) y hoy **no** admite la familia GPT-5 ([Learn: traer tu propio modelo a los prompts](https://learn.microsoft.com/microsoft-copilot-studio/bring-your-own-model-prompts)).
+- **Frameworks de orquestación** *(referencia avanzada)*: cuando la lógica no cabe en Copilot Studio ni en un prompt, Foundry permite desplegar un **hosted agent** con tu propio código o framework, por ejemplo **Microsoft Agent Framework**, **Semantic Kernel** o LangGraph ([Learn: qué es Microsoft Foundry](https://learn.microsoft.com/azure/foundry/what-is-foundry)). Exige código (C# o Python) y operar ese servicio: es el escalón 4 en su versión más cara.
 
 ---
 
@@ -168,7 +175,16 @@ flowchart TD
 6. Selecciona **Test** con 5 descripciones distintas, incluida una ambigua ("la impresora no imprime desde la red") y una que no es técnica. Después **Save**.
 7. En un flujo instantáneo, agrega **Run a prompt**, elige tu prompt en **Prompt** y llena **Descripcion** con una entrada del trigger. La salida está en la variable **Text** ([Learn: prompt en Power Automate](https://learn.microsoft.com/ai-builder/use-a-custom-prompt-in-flow)). Antes de escribir en Dataverse, valida que **Text** sea una de las 5 categorías (una condición o un `Switch`): un modelo generativo puede responder algo fuera de la lista.
 
-**Parte B — Azure OpenAI directo (opcional, ≈30 min, necesita suscripción de Azure):**
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Las 5 descripciones de prueba y la categoría que devolvió el prompt | ___ |
+| Qué respondió con la descripción ambigua y si repitió la misma respuesta al probar dos veces | ___ |
+| Cómo validas en el flujo que la respuesta sea una categoría de la lista | ___ |
+| (Parte B o por escrito) Qué requisito concreto te haría mover esta clasificación a Azure, y qué pierdes al hacerlo | ___ |
+
+#### 🔧 Profundización opcional — Parte B: Azure OpenAI directo (≈30 min, necesita suscripción de Azure)
 
 1. En el [portal de Foundry](https://ai.azure.com) despliega un modelo de chat (por ejemplo `gpt-4.1-mini`) y anota el **nombre del deployment**.
 2. En Power Automate, la opción más gobernada es el conector **Azure OpenAI** con la acción **Creates a completion for the chat message**: la clave queda en la conexión y no en el flujo (o usa **Microsoft Entra ID Integrated**, que exige a cada usuario el rol *Cognitive Services OpenAI User*) ([Learn: conector Azure OpenAI](https://learn.microsoft.com/connectors/azureopenai/)).
@@ -200,14 +216,7 @@ flowchart TD
 
 4. Compara las dos rutas con las mismas 5 descripciones.
 
-**Evidencia a reportar:**
-
-| Campo | Tu valor |
-|---|---|
-| Las 5 descripciones de prueba y la categoría que devolvió el prompt | ___ |
-| Qué respondió con la descripción ambigua y si repitió la misma respuesta al probar dos veces | ___ |
-| Cómo validas en el flujo que la respuesta sea una categoría de la lista | ___ |
-| (Parte B o por escrito) Qué requisito concreto te haría mover esta clasificación a Azure, y qué pierdes al hacerlo | ___ |
+Anota la comparación en la última fila de la evidencia de arriba.
 
 ---
 

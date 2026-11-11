@@ -20,16 +20,25 @@ Configurar y personalizar Dynamics 365 Customer Engagement entendiendo primero l
 > - **Nombres nuevos de las apps de servicio:** Microsoft renombró el centro de administración y el espacio de trabajo de servicio. En Learn y en tu trial verás **Copilot Service admin center** (configuración: SLA, entitlements, routing, reglas de correo) y **Copilot Service workspace** (la app multisesión de los representantes). La antigua **Customer Service Hub** ya no está disponible para organizaciones nuevas con licencias Enterprise ([Learn: retiro de Customer Service Hub](https://learn.microsoft.com/dynamics365/customer-service/administer/faq-csh-removal)).
 > - **Variante sin trial:** si no puedes activar los trials, cada microlección tiene un recuadro **Sin trial** con la evidencia de diseño que sí puedes entregar. Esa ruta no valida temporizadores, colas ni forecast ejecutándose: anótalo así en tu evidencia, y los criterios de validación marcan qué exige trial.
 
+### 🔧 Qué queda para después (Profundización opcional)
+- **Núcleo (una sesión, sin trial):** el concepto, la micropráctica y el recuadro **Sin trial** de cada microlección, el diagnóstico del SLA y el reto de transferencia. Microlecciones 1 a 3: **Sales**; 4 y 5: **Customer Service**.
+- **Plegado, para cuando tengas los trials:** las prácticas clic a clic de las Microlecciones 2, 3 y 4 y los pasos 3 a 5 de la Microlección 5. Son los criterios marcados "(Trial de…)".
+- **Plegado en Conceptos Clave:** adopción (Outlook y Teams), Copilot de ventas, métricas, canales, autoservicio y detalle de Customer Insights y Field Service.
+
 ### 📖 Conceptos Clave
 - **Modelo estándar antes de personalizar:** Dynamics 365 Sales y Customer Service ya incluyen tablas, formularios, vistas, procesos y experiencias de usuario probadas. Antes de crear una tabla custom, el consultor debe mapear el proceso contra entidades estándar: `Lead`, `Opportunity`, `Account`, `Contact`, `Quote`, `Order`, `Invoice`, `Case`, `Queue`, `Knowledge Article` y `SLA KPI Instance`. Personalizar sin revisar lo estándar aumenta costo, deuda técnica y fricción en actualizaciones.
+
+**Sales (Microlecciones 1 a 3)**
+
 - **Lead-to-cash en Sales:** proceso comercial completo desde captura de lead hasta orden/facturación. Flujo típico: `Lead` calificado → `Opportunity` con stakeholder, necesidad y monto estimado → productos y price list → `Quote` activada → `Order` cuando el cliente acepta. En proyectos reales, el diseño debe decidir qué vive en Sales y qué se delega a ERP/F&O para pricing avanzado, inventario, crédito, impuestos y facturación.
 - **Cuentas y contactos:** `Account` representa organizaciones o clientes empresa; `Contact` representa personas. Un error frecuente es usar una tabla custom de "cliente" y perder integración nativa con actividades, oportunidades, casos, marketing y Customer Insights. Si el cliente pide atributos adicionales, se agregan columnas a las entidades estándar salvo que exista una razón de dominio muy fuerte para separar.
 - **Catálogo de productos, price lists y unidades:** Sales usa unit groups, productos, listas de precios y price list items para cotizar con consistencia, y se configuran en un orden fijo (unidades → productos → price lists → price list items). Un price list item une producto, unidad y precio; su **Pricing Method** puede ser un monto fijo (**Currency Amount**) o un porcentaje del precio de lista o del costo. Los descuentos por volumen no van en el price list item: van en una **Discount List** asociada. Si el pricing depende de reglas complejas de ERP, descuentos por contrato, impuestos o disponibilidad de inventario, Dynamics 365 Sales debe integrarse con F&O o el sistema ERP en vez de duplicar lógica financiera en Dataverse ([Learn: definir precios](https://learn.microsoft.com/dynamics365/sales/create-price-lists-price-list-items-define-pricing-products)).
 - **Sales Accelerator:** herramienta de D365 Sales que crea y ejecuta **sequences** (secuencias) de actividades para los vendedores — emails, llamadas, tareas, tiempos de espera y condiciones. Ejemplo: una secuencia "Seguimiento Propuesta" que 1 día después del envío de propuesta crea una tarea de llamada, y si no hay respuesta en 3 días crea un email de seguimiento. Se configura en Sales Hub → **Change area** → **Sales Insights settings** → **Sales accelerator** → **Sequences** ([Learn: crear una secuencia](https://learn.microsoft.com/dynamics365/sales/create-and-activate-a-sequence)).
 - **Predictive Lead/Opportunity Scoring:** modelo de machine learning de D365 Sales que, a partir del historial de oportunidades ganadas y perdidas, asigna un puntaje a cada oportunidad abierta (por ejemplo 80 frente a 50) y muestra los factores que más influyen. Requisito de datos: al menos **40 oportunidades ganadas y 40 perdidas**, creadas y cerradas dentro de la ventana de entrenamiento elegida (de 3 meses a 2 años). Con licencia Sales Enterprise se activa desde la configuración rápida de scoring con un cupo de 1.500 registros puntuados al mes; el resto de la funcionalidad avanzada depende de la licencia ([Learn: predictive opportunity scoring](https://learn.microsoft.com/dynamics365/sales/configure-predictive-opportunity-scoring)).
 - **Forecasting y gestión de pipeline:** Sales permite forecast por periodos, jerarquías y equipos. Las columnas del forecast son, sobre todo, **rollups** que suman el **Est. Revenue** de las oportunidades agrupadas por su **Forecast category** (Pipeline, Best case, Committed, Won, Lost…), filtradas por **Est. Close Date**; se agregan columnas **Calculated** (fórmulas entre columnas) y **Simple** (por ejemplo la cuota, que se carga desde Excel). Con forecasting premium aparece además una columna **Prediction**. El forecast **no** pondera por probabilidad: si el negocio quiere "pipeline ponderado", es una métrica aparte que hay que diseñar ([Learn: columnas del forecast](https://learn.microsoft.com/dynamics365/sales/choose-layout-and-columns-forecast)).
-- **Dynamics 365 App for Outlook y Teams:** Outlook permite trackear emails, citas y contactos contra registros de Dynamics 365; Teams facilita colaboración contextual sobre cuentas, oportunidades y casos. No deben usarse como "extras bonitos": son parte de la adopción, porque reducen doble captura y llevan CRM al flujo de trabajo diario.
-- **Copilot aplicado a ventas:** Copilot ayuda a resumir registros, preparar comunicaciones, priorizar oportunidades y acelerar seguimiento. Debe implementarse con gobierno de datos: permisos correctos, calidad de actividades, privacidad y entrenamiento de usuarios para no delegar decisiones comerciales críticas sin revisión humana.
+
+**Customer Service (Microlecciones 4 y 5)**
+
 - **Case Management:** núcleo de D365 Customer Service para gestionar incidencias de clientes desde apertura hasta resolución. Cada caso tiene número, cliente, descripción, prioridad, estado, SLA aplicado, actividades (emails, llamadas, tareas), y puede relacionarse con un producto o un entitlement. El ciclo de vida del caso suele guiarse con un BPF.
 - **Copilot Service workspace:** la app multisesión de los representantes (antes Customer Service workspace): varias sesiones y pestañas en una sola ventana, bandeja de entrada estilo Outlook, conocimiento y Copilot (resumir casos y conversaciones, redactar respuestas). Es además la app donde unified routing asigna el trabajo. En implementaciones nuevas debe evaluarse antes de diseñar una app custom para representantes.
 - **SLA (Service Level Agreement):** se configura en **Copilot Service admin center** en dos piezas: los **SLA KPIs** (qué se mide: por ejemplo primera respuesta con el campo `FirstResponseByKPI`, y desde cuándo: **Applicable From**) y el **SLA** con sus **SLA items** (cuándo aplica: **Applicable When**; cuándo se cumple: **Success Conditions**; tiempos de advertencia y fallo: **Warn and Fail Duration**; horario: **Business Hours**). Las acciones de advertencia, éxito y fallo se configuran en un flujo de Power Automate predefinido. Solo **un** SLA se aplica a un registro a la vez ([Learn: configurar SLA](https://learn.microsoft.com/dynamics365/customer-service/administer/define-service-level-agreements)).
@@ -40,16 +49,24 @@ Configurar y personalizar Dynamics 365 Customer Engagement entendiendo primero l
 - **Unified Routing:** motor de enrutamiento en dos etapas: **clasificación** (reglas y modelos de ML que agregan información al elemento de trabajo, como las habilidades requeridas; el **intelligent skill finder** usa un modelo de AI Builder para predecir habilidades) y **asignación** (prioriza y asigna según skills, capacidad y disponibilidad). Se configura con **workstreams** (modo **Push** o **Pick**), **intake rules**, reglas de clasificación, reglas **route-to-queue** y capacidad por unidades o por perfil. Los usuarios deben estar configurados como *bookable resource* y trabajar en Copilot Service workspace ([Learn: unified routing](https://learn.microsoft.com/dynamics365/customer-service/administer/overview-unified-routing)).
 - **Knowledge Base:** repositorio de artículos de soporte con ciclo de vida (borrador, revisión, publicación). Se vinculan a casos para trackear qué artículos resolvieron qué problemas, y el representante puede buscarlos y enviarlos desde el caso. Copilot Studio puede usar la KB como fuente de conocimiento.
 - **Pause/Resume de SLA:** un SLA item con **Allow Pause and Resume** activado pausa el temporizador mientras el caso está en un estado que configuraste como "en espera" (por ejemplo, esperando respuesta del cliente), para que ese tiempo no cuente contra el representante. Los estados en espera se definen en **Service Configuration Settings**, y la pausa también puede definirse por condiciones en el KPI o en el SLA item. Ojo: **Allow Pause and Resume** no se puede cambiar después de guardar el SLA item por primera vez. Sin esta configuración, un caso que espera 3 días una respuesta del cliente aparece como incumplimiento de SLA que en realidad no es responsabilidad del representante.
-- **Métricas operativas de servicio:** un dashboard de Customer Service maduro reporta como mínimo: *First Response Time* (tiempo hasta la primera respuesta), *Resolution Time* (tiempo hasta el cierre), *SLA Success Rate* (% de casos resueltos dentro del SLA), *Backlog* (casos abiertos sin resolver, especialmente los vencidos), y *CSAT* conceptual (satisfacción del cliente, típicamente vía encuesta post-cierre). Sin estas métricas, un supervisor no puede distinguir entre un equipo con carga alta pero eficiente y uno con problemas reales de desempeño.
-- **Canales digitales y voz:** Customer Service puede integrarse con conversación, voz y mensajería digital según licenciamiento; esa capa vive hoy en Dynamics 365 Contact Center. El nombre histórico "Omnichannel for Customer Service" sigue apareciendo en clientes existentes, pero su app de representantes está retirada en favor de Copilot Service workspace; valida siempre la oferta vigente para el tenant.
-- **Autoservicio con Power Pages:** un portal de Power Pages puede exponer a los clientes la creación y consulta de sus propios casos, y la búsqueda de Knowledge Articles publicados, sin consumir una licencia de representante. Reduce volumen de casos simples (reseteo de contraseña, preguntas frecuentes ya documentadas en la KB) antes de que lleguen a una cola — el mismo patrón que verás con Power Pages en el Módulo 21, aplicado específicamente a autoservicio de soporte.
 - **Copilot para representantes de servicio:** Copilot puede resumir casos y conversaciones, sugerir respuestas, recuperar conocimiento y acelerar resolución. La calidad depende de datos, artículos KB, permisos y proceso; no reemplaza un modelo claro de escalamiento ni una base de conocimiento gobernada.
+
+**Customer Insights y Field Service (lo mínimo)**
+
 - **Customer Insights - Data:** plataforma CDP para construir perfiles unificados desde fuentes como Dataverse, Dynamics 365, data lakes, archivos o sistemas externos. Su valor no es "otro CRM", sino una vista 360 del cliente basada en identificación, unificación, enriquecimiento, medidas y segmentos. Debe usarse cuando Sales/Service no tienen por sí solos una visión completa del cliente.
-- **Customer Insights - Journeys:** aplicación para orquestar journeys en tiempo real usando segmentos, triggers, emails, SMS/push según disponibilidad, personalización y consentimiento. Se diferencia del marketing clásico por reaccionar a eventos del cliente y usar datos unificados, no solo listas estáticas o campañas masivas.
-- **Consentimiento y compliance:** Customer Insights - Journeys requiere perfiles de cumplimiento, propósitos, temas, centros de preferencias y registros de consentimiento. En proyectos reales, el consentimiento se diseña con Legal/Compliance desde el inicio; no se agrega al final como campo booleano improvisado.
 - **Field Service:** aplicación D365 para coordinar servicio en campo: work orders, recursos, scheduling, bookings, customer assets, incident types, inspections, inventory, acuerdos y experiencia móvil para técnicos. Encaja cuando el trabajo ocurre fuera de oficina y requiere planificación, desplazamiento, evidencias, materiales o historial de activos.
 - **Work order lifecycle:** ciclo operativo de Field Service donde una orden pasa por estados como unscheduled, scheduled, in progress, completed, posted o canceled. El arquitecto debe distinguir `Work Order` (trabajo a ejecutar) de `Booking` (asignación concreta de recurso/tiempo) y de `Case` (solicitud de soporte que puede originar el trabajo).
 - **Schedule board y recursos:** el dispatcher asigna work orders considerando ubicación, disponibilidad, skills, prioridad y ventanas de servicio. Puede hacerlo manualmente, con Scheduling Assistant o con optimización avanzada cuando el volumen y restricciones lo justifican.
+
+#### 🔧 Profundización opcional — Adopción, métricas, canales y detalle de Customer Insights y Field Service
+
+- **Dynamics 365 App for Outlook y Teams:** Outlook permite trackear emails, citas y contactos contra registros de Dynamics 365; Teams facilita colaboración contextual sobre cuentas, oportunidades y casos. No deben usarse como "extras bonitos": son parte de la adopción, porque reducen doble captura y llevan CRM al flujo de trabajo diario.
+- **Copilot aplicado a ventas:** Copilot ayuda a resumir registros, preparar comunicaciones, priorizar oportunidades y acelerar seguimiento. Debe implementarse con gobierno de datos: permisos correctos, calidad de actividades, privacidad y entrenamiento de usuarios para no delegar decisiones comerciales críticas sin revisión humana.
+- **Métricas operativas de servicio:** un dashboard de Customer Service maduro reporta como mínimo: *First Response Time* (tiempo hasta la primera respuesta), *Resolution Time* (tiempo hasta el cierre), *SLA Success Rate* (% de casos resueltos dentro del SLA), *Backlog* (casos abiertos sin resolver, especialmente los vencidos), y *CSAT* conceptual (satisfacción del cliente, típicamente vía encuesta post-cierre). Sin estas métricas, un supervisor no puede distinguir entre un equipo con carga alta pero eficiente y uno con problemas reales de desempeño.
+- **Canales digitales y voz:** Customer Service puede integrarse con conversación, voz y mensajería digital según licenciamiento; esa capa vive hoy en Dynamics 365 Contact Center. El nombre histórico "Omnichannel for Customer Service" sigue apareciendo en clientes existentes, pero su app de representantes está retirada en favor de Copilot Service workspace; valida siempre la oferta vigente para el tenant.
+- **Autoservicio con Power Pages:** un portal de Power Pages puede exponer a los clientes la creación y consulta de sus propios casos, y la búsqueda de Knowledge Articles publicados, sin consumir una licencia de representante. Reduce volumen de casos simples (reseteo de contraseña, preguntas frecuentes ya documentadas en la KB) antes de que lleguen a una cola — el mismo patrón que verás con Power Pages en el Módulo 21, aplicado específicamente a autoservicio de soporte.
+- **Customer Insights - Journeys:** aplicación para orquestar journeys en tiempo real usando segmentos, triggers, emails, SMS/push según disponibilidad, personalización y consentimiento. Se diferencia del marketing clásico por reaccionar a eventos del cliente y usar datos unificados, no solo listas estáticas o campañas masivas.
+- **Consentimiento y compliance:** Customer Insights - Journeys requiere perfiles de cumplimiento, propósitos, temas, centros de preferencias y registros de consentimiento. En proyectos reales, el consentimiento se diseña con Legal/Compliance desde el inicio; no se agrega al final como campo booleano improvisado.
 - **Field Service mobile e inspections:** los técnicos usan la app móvil para ver bookings, navegar al cliente, registrar tiempo, productos/servicios, fotos, firmas, inspecciones y notas. Si el servicio requiere captura estructurada, una inspection template evita evidencias incompletas y mejora trazabilidad.
 
 ### 👨‍💻 Actividades Prácticas
@@ -102,7 +119,21 @@ Configurar y personalizar Dynamics 365 Customer Engagement entendiendo primero l
 - **Estados de la cotización:** una Quote nace en borrador (*draft*), se **activa** cuando está lista para el cliente y, si el cliente acepta, se convierte en Order; si no, se cierra como revisada, cancelada o perdida. No existe un estado "Presented". Mientras está en borrador, los precios se recalculan contra la price list; una vez activa, el monto queda bloqueado ([Learn: cotizaciones](https://learn.microsoft.com/dynamics365/sales/create-edit-quote-sales)).
 - **La frontera con el ERP:** Dynamics 365 Sales **no calcula automáticamente el impuesto de cada producto** (lo capturas por línea y Sales solo suma), no descuenta inventario y no emite la factura fiscal. Eso vive en el ERP/F&O (Módulo 34) ([Learn: pedidos](https://learn.microsoft.com/dynamics365/sales/create-edit-order-sales)).
 
-**Práctica real en tu trial de Sales (45 min):**
+**Práctica del núcleo (diseño, sin trial):**
+
+> **Sin trial:** dibuja el BPF (etapas, pasos, cuáles son obligatorios) y calcula a mano la cotización: 10 × 38 = 380, menos 10% = 342. Anota qué campo del ERP recibiría la orden (impuesto, inventario, factura) y por qué no lo calculas en Sales.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Pricing Method y Amount de tu price list item | ___ |
+| Etapas del BPF y qué pasos marcaste como Required | ___ |
+| Precio unitario que trajo la línea de la Quote antes del descuento (¿lo escribiste tú?) | ___ |
+| Total de la Quote activada y total del Order creado | ___ |
+| Valor de **Prices Locked** en el Order | ___ |
+
+#### 🔧 Profundización opcional — Práctica real en tu trial de Sales: catálogo, BPF y cotización (45 min)
 
 *Parte A — el catálogo (15 min)*
 
@@ -128,18 +159,6 @@ Configurar y personalizar Dynamics 365 Customer Engagement entendiendo primero l
 
 **Si no lo ves:** "la línea no trae precio" → el producto no tiene price list item en la price list de la cotización, o la moneda de la cotización y la de la price list no coinciden (deben ser la misma). "No aparece **Create Order**" → la cotización sigue en borrador: primero **Activate Quote**. "No veo el BPF en la oportunidad" → no está activado o tu rol no tiene privilegio sobre él.
 
-> **Sin trial:** dibuja el BPF (etapas, pasos, cuáles son obligatorios) y calcula a mano la cotización: 10 × 38 = 380, menos 10% = 342. Anota qué campo del ERP recibiría la orden (impuesto, inventario, factura) y por qué no lo calculas en Sales.
-
-**Evidencia a reportar:**
-
-| Campo | Tu valor |
-|---|---|
-| Pricing Method y Amount de tu price list item | ___ |
-| Etapas del BPF y qué pasos marcaste como Required | ___ |
-| Precio unitario que trajo la línea de la Quote antes del descuento (¿lo escribiste tú?) | ___ |
-| Total de la Quote activada y total del Order creado | ___ |
-| Valor de **Prices Locked** en el Order | ___ |
-
 ---
 
 ## 🧩 Microlección 3 — Forecast por categoría, no por probabilidad
@@ -157,18 +176,9 @@ Configurar y personalizar Dynamics 365 Customer Engagement entendiendo primero l
 | Ampliación Litware | $20,000 | Cierre (90%) | $18,000 |
 | **Total ponderado** | | | **$27,600** |
 
-**Práctica real en tu trial de Sales (30 min):**
+**Práctica del núcleo (diseño, sin trial):**
 
-1. Crea (o edita) estas tres oportunidades con **Est. Close Date** dentro del mes en curso, un **Est. Revenue** igual al monto de la tabla, y esta **Forecast category**: Contoso = **Committed**, Fabrikam = **Pipeline**, Litware = **Best case**. Asegúrate de que tú eres el owner.
-2. En el mapa del sitio de **Sales Hub** ve a **Performance** → **Forecasts**. Verás el forecast predeterminado del mes en curso (su nombre es del tipo "My FY2026 November forecast").
-3. Anota los valores de las columnas **Committed**, **Best Case** y **Pipeline** para tu usuario.
-4. Compara con el total ponderado de la tabla (27.600). Escribe en dos frases por qué no coinciden y cuál de las dos métricas le mostrarías a un director comercial para el cierre del trimestre.
-
-**Si no lo ves:** si una oportunidad no aparece en el forecast, revisa su **Est. Close Date** (fuera del período no se suma) y su owner (el forecast se arma por la jerarquía de usuarios). Si cambiaste una oportunidad y el forecast no lo refleja, recarga la página. (Opcional: un administrador puede activar en **Change area** → **App Settings** → **Performance management** → **Forecast configuration** un **Sample Forecast** con varios períodos; ese sí necesita **Recalculate data** tras cambiar las oportunidades.)
-
-> **Para saber más (opcional, no evaluable en este módulo):** las sequences de Sales Accelerator y el predictive opportunity scoring se configuran en **Sales Insights settings**. El scoring no funcionará en un trial recién creado: exige 40 oportunidades ganadas y 40 perdidas en la ventana de entrenamiento. El forecast avanzado (cuotas, ajustes, jerarquía) se ejercita en el [Lab 81](/labs/lab-81-d365-sales-forecasting-pipeline-review).
-
-> **Sin trial:** completa la tabla de abajo poniendo en la columna "Committed / Best case / Pipeline" lo que **esperas** que muestre el forecast según las categorías del paso 1, y explica la diferencia con el ponderado.
+> **Sin trial:** completa la tabla de abajo poniendo en la columna "Committed / Best case / Pipeline" lo que **esperas** que muestre el forecast según las categorías del paso 1 de la práctica con trial (Contoso = Committed, Fabrikam = Pipeline, Litware = Best case), y explica la diferencia con el ponderado.
 
 **Evidencia a reportar:**
 
@@ -179,6 +189,17 @@ Configurar y personalizar Dynamics 365 Customer Engagement entendiendo primero l
 | Total ponderado manual | ___ |
 | Por qué no coinciden (dos frases) | ___ |
 
+> **Para saber más (opcional, no evaluable en este módulo):** las sequences de Sales Accelerator y el predictive opportunity scoring se configuran en **Sales Insights settings**. El scoring no funcionará en un trial recién creado: exige 40 oportunidades ganadas y 40 perdidas en la ventana de entrenamiento. El forecast avanzado (cuotas, ajustes, jerarquía) se ejercita en el [Lab 81](/labs/lab-81-d365-sales-forecasting-pipeline-review).
+
+#### 🔧 Profundización opcional — Práctica real en tu trial de Sales: forecast del mes (30 min)
+
+1. Crea (o edita) estas tres oportunidades con **Est. Close Date** dentro del mes en curso, un **Est. Revenue** igual al monto de la tabla, y esta **Forecast category**: Contoso = **Committed**, Fabrikam = **Pipeline**, Litware = **Best case**. Asegúrate de que tú eres el owner.
+2. En el mapa del sitio de **Sales Hub** ve a **Performance** → **Forecasts**. Verás el forecast predeterminado del mes en curso (su nombre es del tipo "My FY2026 November forecast").
+3. Anota los valores de las columnas **Committed**, **Best Case** y **Pipeline** para tu usuario.
+4. Compara con el total ponderado de la tabla (27.600). Escribe en dos frases por qué no coinciden y cuál de las dos métricas le mostrarías a un director comercial para el cierre del trimestre.
+
+**Si no lo ves:** si una oportunidad no aparece en el forecast, revisa su **Est. Close Date** (fuera del período no se suma) y su owner (el forecast se arma por la jerarquía de usuarios). Si cambiaste una oportunidad y el forecast no lo refleja, recarga la página. (Opcional: un administrador puede activar en **Change area** → **App Settings** → **Performance management** → **Forecast configuration** un **Sample Forecast** con varios períodos; ese sí necesita **Recalculate data** tras cambiar las oportunidades.)
+
 ---
 
 ## 🧩 Microlección 4 — Casos, entitlement y SLA con horario y pausa
@@ -187,20 +208,9 @@ Configurar y personalizar Dynamics 365 Customer Engagement entendiendo primero l
 
 **¿Por qué existe esto?** Un SLA mal armado es peor que no tener SLA: marca incumplimientos que no lo son (horas de noche, espera del cliente) o no se aplica nunca (nadie lo asignó al caso). Los tres errores típicos son: no asociar el horario (sin **Business Hours** cuenta 24×7), no configurar pausa (la espera del cliente cuenta contra el representante) y creer que el SLA se aplica solo (hace falta un entitlement con SLA, un SLA por defecto o un flujo que lo asigne).
 
-**Práctica real en tu trial de Customer Service (50 min):** todo se hace en **Copilot Service admin center**, salvo el paso 8.
+**🔧 Diagnosticar antes de construir (5 min):** a un compañero le pasa esto: sus casos en espera del cliente siguen consumiendo SLA. Encuentra la causa antes de ver la solución → **[Diagnosticar: el SLA sigue corriendo con el caso en espera](/practica/ip-d365-002-sla-no-se-pausa)**.
 
-1. **Horario:** mapa del sitio → **Operations** → **Calendar** → sección **Customer service calendar** → **Manage** → **New**. **Name:** `Horario Bogotá L-V`; en **Weekly Schedule** elige **Are the same each day**, marca lunes a viernes en **Work Days**, **Set Work Hours** de 8:00 a 18:00, y en **Time Zone** la de Bogotá. **Save** ([Learn: horario de servicio](https://learn.microsoft.com/dynamics365/customer-service/administer/create-customer-service-schedule-define-work-hours)).
-2. **Estados en espera:** en **Operations** → **Service terms**, busca **Other SLA Settings** → **Manage** → **Service Configuration Settings** y confirma qué estados de Case cuentan como "on hold" (por ejemplo, el de espera de detalles del cliente). Anota cuáles son.
-3. **SLA KPI:** **Operations** → **Service terms** → sección **SLA KPIs** → **Manage** → **New**. **Name:** `Primera respuesta`; **Entity Name:** Case; **KPI Field:** `FirstResponseByKPI`; **Applicable From:** **Created On**. **Save** → **Activate**.
-4. **SLA:** **Service terms** → **Service Level Agreements (SLAs)** → **Manage** → **New**. **Name:** `SLA Soporte Estándar`; **Primary Entity:** Case. **Save**.
-5. **SLA item:** en el SLA, **New SLA Item**. **Name:** `Primera respuesta 4h`; **KPI:** `Primera respuesta`; activa **Allow Pause and Resume** (no se puede cambiar después del primer guardado); **Business Hours:** `Horario Bogotá L-V`. En **Applicable When**, una condición simple que se cumpla en todos tus casos de prueba (por ejemplo, Priority no vacía); en **Success Conditions**, la condición que marque la primera respuesta: la columna **First Response Sent** = Yes (existe en la tabla Case aunque no esté en tu formulario; el editor de condiciones lista las columnas de la tabla). Si no la encuentras o no puedes marcarla en tus casos de prueba, usa **Status** = Resolved: para la prueba basta con que el KPI tenga una condición de éxito que puedas provocar. **Warn and Fail Duration:** advertencia 2 horas, fallo 4 horas. **Save**. (Opcional: **Configure Actions** abre el flujo predefinido con las ramas **Is Nearing Non-Compliance**, **Is Succeeded** e **Is Non-compliant**; no edites las ramas, solo agrega acciones dentro.) **Activate** el SLA.
-6. **Entitlement:** **Service terms** → sección **Entitlements** → **Manage** → **New** → **Blank Entitlement**. **Name:** `Contoso Premium 2026`; **Primary Customer:** una cuenta de prueba; fechas de hoy a fin de año; **SLA:** `SLA Soporte Estándar`; **Allocation Type:** número de casos; **Decrease Remaining On:** creación del caso; **Total Term:** `50`; **Restrict based on entitlement terms:** Yes. **Save** → **Activate** ([Learn: entitlements](https://learn.microsoft.com/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer)).
-7. **(Opcional) email-to-case:** si tu trial tiene una cola con buzón sincronizando, en **Customer support** → **Case Settings** → **Automatic record creation and update rules** → **Manage** → **New** puedes crear una regla con **Queue to monitor** = esa cola y **Activity type to monitor** = **Email**, agregar al menos una condición, revisar el flujo con **Save and open in Power Automate** y activarla. Si no tienes buzón, sáltalo: la regla no se puede activar sin cola ([Learn: reglas de creación automática](https://learn.microsoft.com/dynamics365/customer-service/administer/automatically-create-update-records)).
-8. **Probar:** en **Copilot Service workspace**, crea un caso para la cuenta del entitlement y selecciona el entitlement en el campo **Entitlement**. Guarda y busca en el caso la sección de detalles del SLA mejorado (temporizador y SLA KPI instance con su estado y su hora de fallo). Anota la hora de fallo y comprueba que respeta el horario (un caso creado a las 17:00 de un viernes no debería fallar a las 21:00). Luego pon el caso en uno de los estados en espera del paso 2 y mira el estado de la SLA KPI instance; vuelve a activarlo y mira cómo cambió la hora de fallo. Abre el entitlement: **Remaining Term** debería haber bajado a 49.
-
-**Si no lo ves:** "el caso no tiene temporizador ni SLA KPI instance" → el SLA no está activo, el caso no tiene entitlement con SLA (y no hay SLA por defecto), o el caso no cumple **Applicable When**. "La hora de fallo está 4 horas exactas después aunque es de noche" → el SLA item no tiene **Business Hours**. "Al poner el caso en espera el temporizador sigue corriendo" → resuélvelo en el diagnóstico de abajo.
-
-**🔧 Diagnosticar antes de construir (5 min):** a un compañero le pasa justo eso: sus casos en espera del cliente siguen consumiendo SLA. Encuentra la causa antes de ver la solución → **[Diagnosticar: el SLA sigue corriendo con el caso en espera](/practica/ip-d365-002-sla-no-se-pausa)**.
+**Práctica del núcleo (diseño, sin trial):**
 
 > **Sin trial:** escribe la configuración completa (horario, KPI, SLA item con sus cuatro secciones, entitlement) en una tabla y calcula a mano la hora de fallo de un caso creado el viernes a las 17:00 con advertencia 2 h y fallo 4 h hábiles. Indica que no validaste temporizador ni pausa ejecutándose.
 
@@ -214,6 +224,21 @@ Configurar y personalizar Dynamics 365 Customer Engagement entendiendo primero l
 | **Remaining Term** del entitlement antes y después de crear el caso | ___ |
 | ¿Configuraste email-to-case? Si sí, nombre de la cola y número de caso que se creó desde un email | ___ |
 
+#### 🔧 Profundización opcional — Práctica real en tu trial de Customer Service: SLA, entitlement y pausa (50 min)
+
+Todo se hace en **Copilot Service admin center**, salvo el paso 8.
+
+1. **Horario:** mapa del sitio → **Operations** → **Calendar** → sección **Customer service calendar** → **Manage** → **New**. **Name:** `Horario Bogotá L-V`; en **Weekly Schedule** elige **Are the same each day**, marca lunes a viernes en **Work Days**, **Set Work Hours** de 8:00 a 18:00, y en **Time Zone** la de Bogotá. **Save** ([Learn: horario de servicio](https://learn.microsoft.com/dynamics365/customer-service/administer/create-customer-service-schedule-define-work-hours)).
+2. **Estados en espera:** en **Operations** → **Service terms**, busca **Other SLA Settings** → **Manage** → **Service Configuration Settings** y confirma qué estados de Case cuentan como "on hold" (por ejemplo, el de espera de detalles del cliente). Anota cuáles son.
+3. **SLA KPI:** **Operations** → **Service terms** → sección **SLA KPIs** → **Manage** → **New**. **Name:** `Primera respuesta`; **Entity Name:** Case; **KPI Field:** `FirstResponseByKPI`; **Applicable From:** **Created On**. **Save** → **Activate**.
+4. **SLA:** **Service terms** → **Service Level Agreements (SLAs)** → **Manage** → **New**. **Name:** `SLA Soporte Estándar`; **Primary Entity:** Case. **Save**.
+5. **SLA item:** en el SLA, **New SLA Item**. **Name:** `Primera respuesta 4h`; **KPI:** `Primera respuesta`; activa **Allow Pause and Resume** (no se puede cambiar después del primer guardado); **Business Hours:** `Horario Bogotá L-V`. En **Applicable When**, una condición simple que se cumpla en todos tus casos de prueba (por ejemplo, Priority no vacía); en **Success Conditions**, la condición que marque la primera respuesta: la columna **First Response Sent** = Yes (existe en la tabla Case aunque no esté en tu formulario; el editor de condiciones lista las columnas de la tabla). Si no la encuentras o no puedes marcarla en tus casos de prueba, usa **Status** = Resolved: para la prueba basta con que el KPI tenga una condición de éxito que puedas provocar. **Warn and Fail Duration:** advertencia 2 horas, fallo 4 horas. **Save**. (Opcional: **Configure Actions** abre el flujo predefinido con las ramas **Is Nearing Non-Compliance**, **Is Succeeded** e **Is Non-compliant**; no edites las ramas, solo agrega acciones dentro.) **Activate** el SLA.
+6. **Entitlement:** **Service terms** → sección **Entitlements** → **Manage** → **New** → **Blank Entitlement**. **Name:** `Contoso Premium 2026`; **Primary Customer:** una cuenta de prueba; fechas de hoy a fin de año; **SLA:** `SLA Soporte Estándar`; **Allocation Type:** número de casos; **Decrease Remaining On:** creación del caso; **Total Term:** `50`; **Restrict based on entitlement terms:** Yes. **Save** → **Activate** ([Learn: entitlements](https://learn.microsoft.com/dynamics365/customer-service/administer/create-entitlement-define-support-terms-customer)).
+7. **(Opcional) email-to-case:** si tu trial tiene una cola con buzón sincronizando, en **Customer support** → **Case Settings** → **Automatic record creation and update rules** → **Manage** → **New** puedes crear una regla con **Queue to monitor** = esa cola y **Activity type to monitor** = **Email**, agregar al menos una condición, revisar el flujo con **Save and open in Power Automate** y activarla. Si no tienes buzón, sáltalo: la regla no se puede activar sin cola ([Learn: reglas de creación automática](https://learn.microsoft.com/dynamics365/customer-service/administer/automatically-create-update-records)).
+8. **Probar:** en **Copilot Service workspace**, crea un caso para la cuenta del entitlement y selecciona el entitlement en el campo **Entitlement**. Guarda y busca en el caso la sección de detalles del SLA mejorado (temporizador y SLA KPI instance con su estado y su hora de fallo). Anota la hora de fallo y comprueba que respeta el horario (un caso creado a las 17:00 de un viernes no debería fallar a las 21:00). Luego pon el caso en uno de los estados en espera del paso 2 y mira el estado de la SLA KPI instance; vuelve a activarlo y mira cómo cambió la hora de fallo. Abre el entitlement: **Remaining Term** debería haber bajado a 49.
+
+**Si no lo ves:** "el caso no tiene temporizador ni SLA KPI instance" → el SLA no está activo, el caso no tiene entitlement con SLA (y no hay SLA por defecto), o el caso no cumple **Applicable When**. "La hora de fallo está 4 horas exactas después aunque es de noche" → el SLA item no tiene **Business Hours**. "Al poner el caso en espera el temporizador sigue corriendo" → es el diagnóstico de esta microlección.
+
 ---
 
 ## 🧩 Microlección 5 — Enrutamiento unificado, conocimiento y Copilot
@@ -222,7 +247,7 @@ Configurar y personalizar Dynamics 365 Customer Engagement entendiendo primero l
 
 **¿Por qué existe esto?** El caso real de este módulo (una mesa de ayuda que mandaba casos de SAP a especialistas de Power BI) se resuelve con dos decisiones de diseño: **clasificar** el caso (qué habilidad necesita) y **asignarlo** (quién la tiene y tiene capacidad). Unified routing separa esas dos etapas: intake rules eligen el workstream, las reglas de clasificación agregan información (por ejemplo, la skill `SAP`), las reglas route-to-queue eligen la cola y el método de asignación elige al representante ([Learn: configurar record routing](https://learn.microsoft.com/dynamics365/customer-service/administer/set-up-record-routing)).
 
-**Práctica (35 min; los pasos 3 a 5 requieren trial y son opcionales si tu trial aún no tiene unified routing aprovisionado):**
+**Práctica (35 min; los pasos 3 a 5 requieren trial, son opcionales si tu trial aún no tiene unified routing aprovisionado y están plegados al final de la microlección):**
 
 1. **Diseña** las reglas en una tabla antes de tocar nada:
    ```
@@ -235,11 +260,6 @@ Configurar y personalizar Dynamics 365 Customer Engagement entendiendo primero l
    ```
    Para cada regla anota si es de **intake**, **clasificación** o **route-to-queue**.
 2. **Diseña** la gobernanza de conocimiento y Copilot: 5 artículos KB con owner y fecha de revisión; qué puede resumir Copilot (historial del caso, última conversación, artículos relacionados, próximos pasos) y qué controles aplicas (el representante revisa antes de enviar, datos sensibles fuera de prompts externos).
-3. En **Copilot Service admin center** → **Customer support** → **Routing**: si **Record routing** está disponible, **Manage** → **Add** → **Record type** = Case. Si Learn te pide aprovisionar unified routing primero, hazlo solo en el trial (Learn advierte que es una importación de solución que afecta la carga del ambiente).
-4. **Customer support** → **Workstreams** → **New workstream**: **Name** `WS Casos Soporte`, **Work distribution mode** **Push**, **Type** **Record**, **Record type** Case → **Create**. En **Intake rules** → **Create rule** con una condición sobre el caso. Configura la regla route-to-queue de "factura" hacia una cola `Soporte Facturación` con al menos un miembro.
-5. Crea dos casos de prueba ("Error en la factura de octubre" y "La app no funciona") y anota a qué cola llegó cada uno. Recuerda: los usuarios deben estar configurados como bookable resource y recibir el trabajo en **Copilot Service workspace**.
-
-**Si no lo ves:** "el caso no se asigna" → la cola no tiene miembros, el representante no está como bookable resource, su presencia no está entre las permitidas del workstream o no tiene capacidad. "Ningún caso entra al workstream" → falta la intake rule (al activar unified routing, la regla básica activa deja de enrutar hasta que la configuras).
 
 **Diseño mínimo de Customer Insights y Field Service (10 min, sin trial):**
 - *Customer Insights:* el área comercial quiere contactar clientes con contrato próximo a vencer, solo si tienen consentimiento válido y no tienen un caso crítico abierto. Identifica qué 3-4 fuentes alimentarían el perfil unificado (Sales, Customer Service, billing/ERP, consentimiento) y escribe en una frase la regla del segmento y el evento que dispara el journey. El diseño completo se ejercita en el **[Lab 58](/labs/lab-58-customer-insights-segmento-journey)**.
@@ -254,6 +274,14 @@ Configurar y personalizar Dynamics 365 Customer Engagement entendiendo primero l
 | Cola a la que llegó cada caso de prueba (o "sin trial: diseño") | ___ |
 | Owner y fecha de revisión de tus 5 artículos KB, y los controles de Copilot | ___ |
 | Regla del segmento de Customer Insights y dato que decide crear el Work Order | ___ |
+
+#### 🔧 Profundización opcional — Pasos 3 a 5 en tu trial de Customer Service: unified routing
+
+3. En **Copilot Service admin center** → **Customer support** → **Routing**: si **Record routing** está disponible, **Manage** → **Add** → **Record type** = Case. Si Learn te pide aprovisionar unified routing primero, hazlo solo en el trial (Learn advierte que es una importación de solución que afecta la carga del ambiente).
+4. **Customer support** → **Workstreams** → **New workstream**: **Name** `WS Casos Soporte`, **Work distribution mode** **Push**, **Type** **Record**, **Record type** Case → **Create**. En **Intake rules** → **Create rule** con una condición sobre el caso. Configura la regla route-to-queue de "factura" hacia una cola `Soporte Facturación` con al menos un miembro.
+5. Crea dos casos de prueba ("Error en la factura de octubre" y "La app no funciona") y anota a qué cola llegó cada uno. Recuerda: los usuarios deben estar configurados como bookable resource y recibir el trabajo en **Copilot Service workspace**.
+
+**Si no lo ves:** "el caso no se asigna" → la cola no tiene miembros, el representante no está como bookable resource, su presencia no está entre las permitidas del workstream o no tiene capacidad. "Ningún caso entra al workstream" → falta la intake rule (al activar unified routing, la regla básica activa deja de enrutar hasta que la configuras).
 
 ---
 
