@@ -8,6 +8,28 @@ La carpeta `handoff-fase7/` (briefs de agentes y `merge2.py`) se retiró de `mas
 (`git show bd01f96:handoff-fase7/<archivo>`). La rama remota `wip/fase7-resto-curso` tiene un árbol idéntico al de `master`.
 Verdad vigente de conteos y fases: `CLAUDE.md` y `PROPUESTA_FASES_APRENDER_HACIENDO.md` (§10).
 
+### Después de la Fase 7 — mantenimiento del 2026-11-06 al 2026-11-11 (sin ampliar contenido)
+
+- **Revisión de la página (2026-11-06)**: índice de búsqueda fuera del HTML (`/search-index.json`; home 1978 KB → 175 KB),
+  metadatos SEO, home simplificada e higiene. Detalle en `CLAUDE.md`, "Mantenimiento vigente — 2026-11-06".
+- **Tildes (`1e94d21`)**: corregidas en `i18n.ts`, `mi-ruta` y `workstation.ts`, con los e2e que fijaban el texto sin tilde
+  actualizados. Quedan cadenas sin tilde sin revisar en otros archivos (una búsqueda rápida del 2026-11-11 marca, entre
+  otros, `interactive-practices.ts`, `domain-hubs.ts`, `guided-journey.ts` y `search-bar.tsx`; hay que separar texto visible
+  de ids, slugs y comentarios antes de tocar nada).
+- **CI (`7bdced9`)**: `timeout-minutes` en todos los jobs y caché del navegador de Playwright.
+- **Dependencias (`62f1fc0`, PR #10)**: `next` 15.5.29 y `dompurify` 3.4.17.
+- **Vista previa SEO comprobada en producción (2026-11-11)**: descargando `https://planestudio.vercel.app/` como rastreador
+  social, los metadatos `og:*` y `twitter:*` estaban completos y la imagen era un PNG válido de 1200×630, pero Vercel la
+  servía como `application/octet-stream`: la regla `headers` de `public/vercel.json` no se aplicaba (tampoco su
+  `Cache-Control`). Corregido: la imagen es ahora el Route Handler `src/app/og.png/route.tsx` (`force-static`), que se
+  exporta como `out/og.png`, y `layout.tsx` la declara en `openGraph.images` y `twitter.images`; `public/vercel.json`
+  vuelve a tener solo `cleanUrls`. **Falta** confirmar el `Content-Type: image/png` en producción tras el deploy y pasar
+  la URL por un depurador de vista previa real (LinkedIn Post Inspector o similar), que no se ha hecho.
+- **Hallazgos de la misma comprobación, sin corregir**: (1) todas las páginas comparten el `og:title` y la
+  `og:description` de la home, porque `layout.tsx` los fija y las páginas solo definen `title` (al compartir un módulo se
+  ve el título genérico); (2) no hay `og:url` ni `<link rel="canonical">`; (3) no existen `/robots.txt` ni `/sitemap.xml`
+  (devuelven 404).
+
 ## Fase 7 (resto del curso) — registro histórico del 2026-11-01 al 2026-11-05 (ya resuelto)
 
 > Las secciones "Hecho" y "Pendiente" de abajo describen el estado de la rama de trabajo antes de fusionar; los

@@ -82,13 +82,15 @@ el HTML de cada página; se sirve como archivo estático `/search-index.json` (`
 `InteractivePracticeSummary` recibe solo `{ id }` y no las 239 prácticas completas. Medido con `npm run build`: home
 1978 KB → 175 KB, página de módulo 1115 KB → 219 KB; el índice (848 KB) se descarga una vez y el service worker lo cachea
 (`CACHE_VERSION` subió a `v2`). **Regla**: un componente cliente recibe solo los campos que usa, nunca un catálogo
-completo. (2) **SEO**: `metadataBase`, `openGraph`, `twitter` y `app/opengraph-image.tsx` (con `output: "export"` exige
-`dynamic = "force-static"`; se exporta sin extensión y `public/vercel.json` fija su `Content-Type`). Sin comprobar aún
-en producción con un depurador de vista previa. (3) **Home**: sin los resúmenes de práctica (viven en `/progreso` y
+completo. (2) **SEO**: `metadataBase`, `openGraph`, `twitter` y la imagen de vista previa `app/og.png/route.tsx` (Route Handler `force-static` que se exporta como
+`out/og.png`; el 2026-11-11 sustituyó a `opengraph-image.tsx`, que se exportaba sin extensión y Vercel servía como
+`application/octet-stream` porque la regla `headers` de `public/vercel.json` no se aplicaba). Falta pasarla por un
+depurador de vista previa real; `og:title` igual en todas las páginas, sin `og:url`, `robots.txt` ni `sitemap.xml`
+(ver `SPRINT_HANDOFF.md`). (3) **Home**: sin los resúmenes de práctica (viven en `/progreso` y
 `/mi-ruta`); formato del simulador en `lib/simulator-config.ts`; "7 actividades", "N rutas" y "40 preguntas" salen de su
 fuente. (4) **Higiene**: `handoff-fase7/` retirado (sigue en `bd01f96`), `SPRINT_HANDOFF.md` actualizado y `agent-browser`
-quitado. **Pendiente**: tildes en `i18n.ts`, `mi-ruta`, `workstation.ts` y otros (hay e2e que fijan cadenas sin tilde, p. ej.
-"Sin tenant todavia"). `graphify` no está en el PATH: usar `python -m graphify update .` (borra `graph.html` por pasar del
+quitado. Las tildes de `i18n.ts`, `mi-ruta` y `workstation.ts` se corrigieron en `1e94d21` (con sus e2e);
+**pendiente**: revisar las de otros archivos (lista en `SPRINT_HANDOFF.md`). `graphify` no está en el PATH: usar `python -m graphify update .` (borra `graph.html` por pasar del
 límite de 5.000 nodos). Validación: `npm run verify` (499 tests) y `npm run e2e` 102/102, en serie.
 
 ## Mantenimiento vigente — 2026-10-01

@@ -1,14 +1,15 @@
 import { ImageResponse } from "next/og";
 
 // Imagen de vista previa al compartir el enlace (LinkedIn, WhatsApp, Slack, X).
-// Next la genera una vez en build y la sirve como archivo estático; no depende de runtime.
+// Next la genera una vez en build y la exporta como `out/og.png`; no depende de runtime.
+// Es un Route Handler con extensión y no `opengraph-image.tsx` porque esa convención se
+// exporta sin extensión y Vercel la servía como `application/octet-stream` (la regla de
+// cabeceras de `public/vercel.json` no se aplicaba); con `.png` cualquier hosting acierta el tipo.
 // Sin cifras a propósito: así no se desactualiza cuando cambian los conteos del curso.
 export const dynamic = "force-static"; // obligatorio con `output: "export"`
-export const alt = "PlanEstudio — Power Platform y Dynamics 365, aprendiendo haciendo";
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+const size = { width: 1200, height: 630 };
 
-export default function Image() {
+export function GET() {
   return new ImageResponse(
     (
       <div
