@@ -677,3 +677,31 @@ central escala y se corrige en un solo sitio.
 
 **Pendiente:** confirmar con un tenant en español las etiquetas sin verificar (D365, Copilot Studio, Power Automate de
 nube: Run history, Send an email (V2), Close as Won…) y añadirlas a `ui-terms.ts` con `verified: true`.
+
+## 14. Longitud de los módulos y qué se pliega (2026-11-11)
+
+Medido sobre el Markdown (palabras, sin frontmatter). Total del curso: 406.013 palabras; mediana por módulo: unas 5.100
+(unos 25 min de lectura sin contar la práctica).
+
+**Ya plegado en la app** (bloques marcados como "Profundización opcional", "Suplemento" u "(opcional"): solo 7 módulos
+tienen esa marca. Lo que pasa a plegarse: M5 1.753 palabras, M1 1.711, M4 1.033, M6 983, M12 964, M3 392 y M24 358.
+
+**Los más largos, sin nada marcado como opcional:**
+
+| Módulo | Palabras | Tipo | Propuesta |
+|---|---|---|---|
+| 41 Capstone arquitectura | 10.776 | Proyecto | Dividir en etapas con entregable (descubrimiento, diseño, defensa) y casilla por etapa |
+| 8 Primer proyecto integrado | 9.994 | Proyecto | Igual: etapas; es el primer proyecto, conviene que se vea cuánto falta |
+| 34 Azure Integration Services | 8.112 | Teoría + práctica | Marcar como profundización los patrones avanzados (Event Grid, Service Bus sesiones) |
+| 20 D365 Sales y Customer Service | 7.922 | Teoría + práctica | Separar Sales y Customer Service en dos microlecciones con su práctica; marcar opcional lo que exige trial de D365 |
+| 30 Proyecto multicapa N3 | 7.109 | Proyecto | Etapas |
+| 17 Proyecto integrador N2 | 7.101 | Proyecto | Etapas |
+| 38 Liderazgo técnico | 7.047 | Teoría | Marcar como profundización las plantillas largas (actas, RACI) y enlazarlas como recurso |
+| 37 AI Builder y Azure AI | 6.680 | Teoría + práctica | Profundización: Azure AI fuera del núcleo |
+| 7 Power Fx | 6.525 | Práctica | Ya tiene aviso "Qué queda para después" pero el bloque no está marcado: marcarlo |
+| 43 Copilot en Power Platform | 6.452 | Teoría + práctica | Profundización para funciones en preview |
+
+**Criterio propuesto:** el núcleo obligatorio de un módulo cabe en una sesión (unas 4.000 palabras o 60-90 min con
+práctica). Lo que no hace falta para los criterios de validación ni para la evaluación se marca con
+`#### 🔧 Profundización opcional` y la app lo pliega sin borrarlo. Los proyectos no se recortan: se dividen en etapas.
+No se toca el Caso Real ni el texto que citan las preguntas `appliesTo: "caso"`.

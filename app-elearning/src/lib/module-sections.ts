@@ -14,7 +14,9 @@ export interface ModuleOutlineItem {
   slug: string;
 }
 
-const OPTIONAL_HEADING = /^(#{2,3})\s+(.*(?:Suplemento|\(opcional|opcional si).*)$/i;
+// Plegables: suplementos, títulos "(opcional…" y los bloques "Profundización opcional" (H2 a H4).
+// "Qué queda para después (Profundización opcional)" es el aviso de qué se pliega: se deja visible.
+const OPTIONAL_HEADING = /^(#{2,4})\s+(?!.*Qué queda)(.*(?:Suplemento|\(opcional|opcional si|Profundizaci[oó]n opcional).*)$/i;
 const HEADING = /^(#{1,6})\s+(.*)$/;
 const FENCE = /^\s*(```|~~~)/;
 
@@ -28,7 +30,7 @@ export function splitModuleSections(markdown: string): ModuleSegment[] {
     if (current.markdown.trim()) segments.push(current);
   };
 
-  for (const line of markdown.split("\n")) {
+  for (const line of markdown.split(/\r?\n/)) {
     if (FENCE.test(line)) inFence = !inFence;
     const heading = inFence ? null : HEADING.exec(line);
     if (heading) {
@@ -56,7 +58,7 @@ export function splitModuleSections(markdown: string): ModuleSegment[] {
 export function getModuleOutline(markdown: string): ModuleOutlineItem[] {
   const items: ModuleOutlineItem[] = [];
   let inFence = false;
-  for (const line of markdown.split("\n")) {
+  for (const line of markdown.split(/\r?\n/)) {
     if (FENCE.test(line)) inFence = !inFence;
     if (inFence) continue;
     const match = /^##\s+(.*)$/.exec(line);

@@ -12,7 +12,7 @@ const OPTIONS: EnvironmentLanguage[] = ["both", "es", "en"];
 
 // Selector "Interfaz de tu ambiente": decide cómo se muestran las etiquetas de menús y botones
 // de Microsoft en el contenido. El curso siempre está en español; esto es el idioma del tenant.
-export function EnvironmentLanguageSwitch() {
+export function EnvironmentLanguageSwitch({ className = "hidden md:flex" }: { className?: string }) {
   const language = useUiLanguageStore((s) => s.environmentLanguage);
   const setLanguage = useUiLanguageStore((s) => s.setEnvironmentLanguage);
 
@@ -21,7 +21,7 @@ export function EnvironmentLanguageSwitch() {
   }, []);
 
   return (
-    <label className="hidden items-center gap-1.5 text-xs text-muted-foreground md:flex" title="Idioma de la interfaz de tu ambiente de Microsoft. Cambia cómo se citan menús y botones en los módulos.">
+    <label className={`${className} items-center gap-1.5 text-xs text-muted-foreground`} title="Idioma de la interfaz de tu ambiente de Microsoft. Cambia cómo se citan menús y botones en los módulos.">
       <Languages className="h-4 w-4" aria-hidden />
       <span>Interfaz de tu ambiente</span>
       <select

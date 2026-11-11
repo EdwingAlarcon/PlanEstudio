@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useProgressStore, calculateLevelProgress } from "@/lib/progress";
 import { useNextBestAction } from "@/components/guided/use-next-best-action";
+import { EnvironmentLanguageSwitch } from "./environment-language-switch";
 import { CERTIFICATION_LEVEL_ORDER, TRANSVERSAL_LEVEL_ORDER, UI, type LevelId } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
@@ -149,6 +150,10 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
         </div>
 
         <div className="px-2 py-2 border-t shrink-0">
+          {/* En pantallas pequeñas el selector no cabe en la barra superior: vive aquí. */}
+          <div className="px-3 pb-2 md:hidden">
+            <EnvironmentLanguageSwitch className="flex" />
+          </div>
           <NavLink href="/como-usar" icon={HelpCircle} label="Ayuda" active={pathname === "/como-usar"} />
         </div>
       </aside>

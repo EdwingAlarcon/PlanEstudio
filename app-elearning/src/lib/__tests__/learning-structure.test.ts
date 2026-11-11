@@ -26,6 +26,14 @@ describe("splitModuleSections", () => {
     expect(segments[2]!.markdown).toContain("Criterios");
   });
 
+  it("pliega 'Profundización opcional' con sus prácticas H5, deja visible el aviso 'Qué queda' y acepta CRLF", () => {
+    const md = "### 🔧 Qué queda para después (Profundización opcional)\r\nX\r\n#### 🔧 Profundización opcional\r\n##### Práctica 3.2\r\nY\r\n### 💼 Caso Real\r\nZ\r\n";
+    const segments = splitModuleSections(md);
+    expect(segments.map((s) => s.optional)).toEqual([false, true, false]);
+    expect(segments[1]!.markdown).toContain("Práctica 3.2");
+    expect(getModuleOutline("## 🧩 Microlección 1 — A\r\n")).toHaveLength(1);
+  });
+
   it("ignora títulos dentro de bloques de código", () => {
     const md = "Texto\n```md\n### Suplemento falso\n```\nFin\n";
     expect(splitModuleSections(md)).toHaveLength(1);
