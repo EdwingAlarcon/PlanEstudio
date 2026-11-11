@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getAllLevels, getModuleBySlug } from "@/lib/content";
+import { buildPageMetadata, PATHS } from "@/lib/seo";
+import { getAllLevels, getLevelById, getModuleBySlug } from "@/lib/content";
 import { getQuestionsForModule, getCaseDiagnosisForModule } from "@/lib/questions-parser";
 import { getInteractivePracticesForModule, INTERACTIVE_TYPE_LABELS } from "@/lib/interactive-practices";
 import { Button } from "@/components/ui/button";
@@ -35,10 +36,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { level, slug } = await params;
   const mod = getModuleBySlug(level as LevelId, slug);
   if (!mod) return {};
-  return {
+  const levelTitle = getLevelById(mod.levelId)?.title;
+  return buildPageMetadata({
     title: mod.title,
-    description: `Módulo ${mod.moduleId} — ${mod.levelId}`,
-  };
+    description: levelTitle
+      ? `Módulo ${mod.moduleId} · ${levelTitle}: ${mod.title}.`
+      : `Módulo ${mod.moduleId}: ${mod.title}.`,
+    path: PATHS.module(mod.levelId, mod.slug),
+  });
 }
 
 const LEVEL_BADGE: Record<LevelId, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365" | "rpa"> = {
@@ -169,10 +174,10 @@ export default async function ModulePage({ params }: PageProps) {
       {recommendedLab && (
         <section aria-labelledby="recommended-lab-heading" className="rounded-xl border border-[#107C10]/25 bg-card px-6 py-5 shadow-fluent-1">
           <h2 id="recommended-lab-heading" className="text-lg font-semibold text-foreground">
-            Practica recomendada
+            Práctica recomendada
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Despues de este modulo, realiza &ldquo;{recommendedLab.title}&rdquo; para convertir la teoria en evidencia.
+            Después de este módulo, realiza &ldquo;{recommendedLab.title}&rdquo; para convertir la teoría en evidencia.
             Requisitos: {recommendedLab.prerequisites.join(", ")}. Tiempo estimado: {recommendedLab.minutes} min.
           </p>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
@@ -180,7 +185,7 @@ export default async function ModulePage({ params }: PageProps) {
           </p>
           <Button asChild variant="outline" size="sm" className="mt-4 border-[#107C10]/30 text-[#107C10] hover:bg-[#EFF8EE]">
             <Link href={recommendedLab.href}>
-              Realizar practica recomendada
+              Realizar práctica recomendada
               <ArrowRight className="ml-1 h-3.5 w-3.5" aria-hidden />
             </Link>
           </Button>

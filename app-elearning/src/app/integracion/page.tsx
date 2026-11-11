@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight, Workflow } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getIntegrationHub } from "@/lib/domain-hubs";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Integración Power Platform + Dynamics 365",
   description: "Hub de integración: Dataverse como base común, Model-Driven sobre D365, ALM, APIs/Azure y CE + F&O (dual-write, virtual tables).",
-};
+  path: "/integracion",
+});
 
 export default function IntegrationHubPage() {
   const hub = getIntegrationHub();

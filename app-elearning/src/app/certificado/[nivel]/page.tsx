@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { buildPageMetadata, PATHS } from "@/lib/seo";
 import { LEVEL_ORDER, type LevelId } from "@/lib/i18n";
 import { getLabsForLevel, getLevelById } from "@/lib/content";
 import { CertificateClient } from "./certificate-client";
@@ -15,7 +16,13 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { nivel } = await params;
   if (!LEVEL_ORDER.includes(nivel as LevelId)) return {};
-  return { title: "Certificado" };
+  const level = getLevelById(nivel as LevelId);
+  return buildPageMetadata({
+    title: "Certificado",
+    description: level ? `Certificado de finalización: ${level.title}.` : undefined,
+    path: PATHS.certificate(nivel),
+    noIndex: true,
+  });
 }
 
 export default async function CertificatePage({ params }: PageProps) {

@@ -128,7 +128,7 @@ describe("guided journey persistence and validation", () => {
     const modules = [{ moduleId: 999 }] as never;
     const labs = [{ slug: "missing" }] as never;
     const errors = validateGuidedJourneyReferences(modules, labs);
-    expect(errors.some((error) => error.includes("modulo inexistente"))).toBe(true);
+    expect(errors.some((error) => error.includes("módulo inexistente"))).toBe(true);
     expect(errors.some((error) => error.includes("lab inexistente"))).toBe(true);
   });
 });

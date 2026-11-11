@@ -62,7 +62,7 @@ function getLabKind(lab: LabInfo): string {
   if (haystack.includes("capstone")) return "Capstone";
   if (haystack.includes("proyecto integrador")) return "Proyecto integrador";
   if (haystack.includes("uat") || haystack.includes("go-live")) return "UAT";
-  if (haystack.includes("simulador") || haystack.includes("simulacion")) return "Simulacion";
+  if (haystack.includes("simulador") || haystack.includes("simulacion")) return "Simulación";
   return "Laboratorio";
 }
 
@@ -239,7 +239,7 @@ const ENVIRONMENT_BY_LEVEL: Record<string, string> = {
 
 function getExecutionStatus(lab: LabInfo, kind: string): ExecutionStatus {
   if (NO_VERIFICADO_EN_TENANT_IDS.has(lab.id)) return "no-verificado-en-tenant";
-  if (kind === "Simulacion") return "simulado";
+  if (kind === "Simulación") return "simulado";
   if (lab.level === "RPA") return "tenant-opcional";
   return "tenant-real";
 }

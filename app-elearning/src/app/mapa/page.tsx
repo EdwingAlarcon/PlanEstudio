@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight, GitBranch, Layers3 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -6,16 +7,17 @@ import { Button } from "@/components/ui/button";
 import { getAllProfessionalRoutes } from "@/lib/professional-routes";
 import { FOUNDATION_ACTIVITIES } from "@/lib/guided-journey";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Mapa curricular",
-  description: "Visualizacion consultiva del curriculo completo con fundamentos, roles y especializaciones.",
-};
+  description: "Visualización consultiva del currículo completo con fundamentos, roles y especializaciones.",
+  path: "/mapa",
+});
 
 const LEGEND = [
-  ["Comun", "bg-[#107C10]"],
+  ["Común", "bg-[#107C10]"],
   ["Rol", "bg-[#0078D4]"],
-  ["Especializacion", "bg-[#0D9488]"],
-  ["Practica", "bg-orange-500"],
+  ["Especialización", "bg-[#0D9488]"],
+  ["Práctica", "bg-orange-500"],
   ["Opcional", "bg-muted-foreground"],
 ];
 
@@ -52,7 +54,7 @@ export default function CurriculumMapPage() {
         </div>
       </section>
 
-      <section className="grid gap-4 lg:grid-cols-[0.8fr_1.2fr]" aria-label="Mapa de progresion">
+      <section className="grid gap-4 lg:grid-cols-[0.8fr_1.2fr]" aria-label="Mapa de progresión">
         <div className="rounded-xl border-2 border-[#107C10]/30 bg-card p-5 shadow-fluent-1">
           <div className="mb-4 flex items-center gap-2">
             <Layers3 className="h-4 w-4 text-[#107C10]" aria-hidden />
@@ -76,7 +78,7 @@ export default function CurriculumMapPage() {
                   <h3 className="text-sm font-semibold text-foreground group-hover:text-[#0078D4] dark:group-hover:text-[#4DB8FF]">{route.title}</h3>
                   <ArrowRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground" aria-hidden />
                 </div>
-                <p className="mt-1 text-xs text-muted-foreground">{route.level} · {route.modules.length} modulos · {route.labs.length} labs</p>
+                <p className="mt-1 text-xs text-muted-foreground">{route.level} · {route.modules.length} módulos · {route.labs.length} labs</p>
               </Link>
             ))}
           </div>
@@ -87,7 +89,7 @@ export default function CurriculumMapPage() {
         <h2 className="text-base font-semibold text-foreground">Lectura recomendada del mapa</h2>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Guided Lab precede Semi-Guided Lab, luego Challenge, Incident y Work Simulation.
-          Los incidentes complejos son vista previa para despues de los fundamentos asociados.
+          Los incidentes complejos son vista previa para después de los fundamentos asociados.
         </p>
         <Button asChild variant="outline" className="mt-4">
           <Link href="/mi-ruta">Volver a Mi ruta</Link>

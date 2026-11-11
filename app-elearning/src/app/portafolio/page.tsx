@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 import { getAllLabs, getAllModules } from "@/lib/content";
 import { getAllProfessionalRoutes } from "@/lib/professional-routes";
 import { getLaborProfiles } from "@/lib/labor-profiles";
 import { PortfolioClient, type PortfolioProfileData, type PortfolioRouteData } from "./portfolio-client";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Portafolio profesional",
   description: "Qué reunir de cada ruta para convertir tus capstones en portafolio.",
-};
+  path: "/portafolio",
+});
 
 export default function PortfolioPage() {
   const labsBySlug = new Map(getAllLabs().map((lab) => [lab.slug, lab]));

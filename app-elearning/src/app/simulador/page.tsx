@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { SimulatorClient } from "@/components/quiz/simulator-client";
 import { getAllQuestions } from "@/lib/questions-parser";
@@ -7,10 +8,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpenCheck, Clock, Target } from "lucide-react";
 import { SIMULATOR_MINUTES, SIMULATOR_PASS_PERCENT, SIMULATOR_QUESTIONS } from "@/lib/simulator-config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Simulador de Examen",
   description: `Simulador cronometrado con ${SIMULATOR_QUESTIONS} preguntas mixtas de todos los módulos.`,
-};
+  path: "/simulador",
+});
 
 export default function SimulatorPage() {
   const allQuestions = getAllQuestions();

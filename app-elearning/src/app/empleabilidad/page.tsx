@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight, Briefcase, ClipboardCheck, FileSearch, Layers3, MessagesSquare } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getEmployabilityHub } from "@/lib/employability";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Empleabilidad",
   description: "Capa para conectar PlanEstudio con perfiles laborales, skills de vacantes, entrevistas y evidencia de portafolio.",
-};
+  path: "/empleabilidad",
+});
 
 const STEP_ICONS = [FileSearch, Layers3, ClipboardCheck, MessagesSquare];
 

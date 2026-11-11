@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { buildPageMetadata, PATHS, SITE_NAME } from "@/lib/seo";
 import { getAllLabs, getAllResourcePages, getResourceBySlug } from "@/lib/content";
 import { parseChecklistMarkdown } from "@/lib/checklist";
 import { ChecklistClient } from "@/components/checklist/checklist-client";
@@ -18,7 +19,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const page = getResourceBySlug(slug);
   if (!page) return {};
-  return { title: page.title };
+  return buildPageMetadata({
+    title: page.title,
+    description: `Recurso de apoyo de ${SITE_NAME}: ${page.title}.`,
+    path: PATHS.resource(page.slug),
+  });
 }
 
 export default async function ResourcePage({ params }: PageProps) {

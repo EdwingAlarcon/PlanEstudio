@@ -1,46 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { buildRootMetadata } from "@/lib/seo";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import { AppShell } from "@/components/layout/app-shell";
 import { ServiceWorkerRegister } from "@/components/layout/service-worker-register";
 import { ReadingProgress } from "@/components/layout/reading-progress";
 
-// Imagen de vista previa: la genera app/og.png/route.tsx y se exporta como /og.png.
-const OG_IMAGE = {
-  url: "/og.png",
-  width: 1200,
-  height: 630,
-  type: "image/png",
-  alt: "PlanEstudio — Power Platform y Dynamics 365, aprendiendo haciendo",
-};
-
-const SITE_DESCRIPTION =
-  "Plan de aprendizaje progresivo: de cero a base laboral guiada en Power Platform y Dynamics 365 Customer Engagement.";
-
-export const metadata: Metadata = {
-  // Producción oficial (Vercel). Base para resolver las URLs absolutas de og:image y compañía.
-  metadataBase: new URL("https://planestudio.vercel.app"),
-  title: {
-    default: "Power Platform & D365 — Plan de Estudio",
-    template: "%s | PlanEstudio",
-  },
-  description: SITE_DESCRIPTION,
-  keywords: ["Power Platform", "Dynamics 365", "PL-900", "PL-400", "arquitectura", "consultor funcional", "e-learning"],
-  openGraph: {
-    type: "website",
-    siteName: "PlanEstudio",
-    locale: "es_ES",
-    title: "Power Platform & D365 — Plan de Estudio",
-    description: SITE_DESCRIPTION,
-    images: [OG_IMAGE],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Power Platform & D365 — Plan de Estudio",
-    description: SITE_DESCRIPTION,
-    images: [OG_IMAGE],
-  },
-};
+// Valores por defecto (título, descripción, Open Graph, Twitter e imagen /og.png).
+// Cada página define los suyos con `buildPageMetadata` (src/lib/seo.ts), que añade canonical y og:url.
+export const metadata: Metadata = buildRootMetadata();
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

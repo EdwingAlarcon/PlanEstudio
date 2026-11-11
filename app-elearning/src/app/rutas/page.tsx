@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight, BookOpen, FlaskConical, Route } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { getAllProfessionalRoutes } from "@/lib/professional-routes";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Rutas profesionales",
   description: "Rutas por rol profesional para estudiar Power Platform y Dynamics 365 sin duplicar contenido.",
-};
+  path: "/rutas",
+});
 
 const STATUS_VARIANT: Record<string, "default" | "secondary" | "outline"> = {
   Disponible: "default",

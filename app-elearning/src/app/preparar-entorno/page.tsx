@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 import { PrepararEntornoClient } from "./preparar-entorno-client";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Preparar mi entorno",
-  description: "Prepara tu estacion de trabajo, entorno y acceso antes de avanzar con modulos y labs tecnicos.",
-};
+  description: "Prepara tu estación de trabajo, entorno y acceso antes de avanzar con módulos y labs técnicos.",
+  path: "/preparar-entorno",
+});
 
 export default function PrepararEntornoPage() {
   return <PrepararEntornoClient />;

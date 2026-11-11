@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Camera, CheckCircle2, ClipboardList, Compass, FlaskConical, HelpCircle, Route, Trophy } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Cómo usar esta plataforma",
   description: "Guía práctica para estudiar con niveles, rutas profesionales, laboratorios, simulador y recursos.",
-};
+  path: "/como-usar",
+});
 
 const STEPS = [
   {

@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { getAllLabs, getAllLevels } from "@/lib/content";
 import { getAllQuestions } from "@/lib/questions-parser";
@@ -30,6 +32,9 @@ const LEVEL_CONFIG: Record<LevelId, {
   d365:       { ring: "stroke-teal-600",   accent: "#0D9488", accentDark: "#2DD4BF", border: "border-teal-600/20 dark:border-teal-400/20",     badge: "d365"       },
   rpa:        { ring: "stroke-[#6B4EFF]",  accent: "#6B4EFF", accentDark: "#A99BFF", border: "border-[#6B4EFF]/20 dark:border-[#A99BFF]/20",   badge: "rpa"        },
 };
+
+// Home: título por defecto del sitio, con canonical y og:url propios.
+export const metadata: Metadata = buildPageMetadata({ path: "/" });
 
 export default async function DashboardPage() {
   const levels = getAllLevels();

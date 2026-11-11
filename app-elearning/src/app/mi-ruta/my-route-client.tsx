@@ -114,7 +114,7 @@ export function MyRouteClient({
       <section aria-labelledby="activities-heading" className="space-y-4">
         <div>
           <h2 id="activities-heading" className="text-lg font-semibold text-foreground">Actividades de fundamentos</h2>
-          <p className="text-sm text-muted-foreground">Obligatorio, recomendado y opcional estan separados para reducir ruido.</p>
+          <p className="text-sm text-muted-foreground">Obligatorio, recomendado y opcional están separados para reducir ruido.</p>
         </div>
         <div className="space-y-3">
           {FOUNDATION_ACTIVITIES.map((activity) => {

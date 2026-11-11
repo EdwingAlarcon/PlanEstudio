@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Activity, ClipboardCheck, FileWarning, GraduationCap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -8,10 +9,11 @@ import { PracticeProgressSummary } from "@/components/practices/practice-progres
 import { getAllLabs, getAllModules } from "@/lib/content";
 import { getAllPractices, getPracticeCompetencyMatrix, getPracticeCounts } from "@/lib/practices";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Experiencia práctica",
   description: "Framework de práctica profesional: incidentes, challenges y simulaciones laborales para Power Platform y Dynamics 365.",
-};
+  path: "/experiencia-practica",
+});
 
 export default function PracticalExperiencePage() {
   const practices = getAllPractices();

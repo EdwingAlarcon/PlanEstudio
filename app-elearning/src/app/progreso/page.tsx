@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 import { LEVEL_ORDER } from "@/lib/i18n";
 import { getLevelById, getLabsForLevel } from "@/lib/content";
 import { getAllPractices } from "@/lib/practices";
 import { getAllInteractivePractices } from "@/lib/interactive-practices";
 import { ProgressDashboardClient, type LevelReadinessData } from "./progress-dashboard-client";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Mi progreso",
   description: "Módulos, quizzes, laboratorios y estado real de certificación en un solo lugar.",
-};
+  path: "/progreso",
+});
 
 export default function ProgressDashboardPage() {
   const levels: LevelReadinessData[] = LEVEL_ORDER.map((levelId) => {

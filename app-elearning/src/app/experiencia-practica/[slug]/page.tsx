@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMetadata, PATHS } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, Bot, ChevronLeft, Clock, Download, MonitorCog, ShieldCheck, Wrench } from "lucide-react";
@@ -21,10 +22,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const practice = getPracticeBySlug(slug);
   if (!practice) return { title: "Práctica no encontrada" };
-  return {
+  return buildPageMetadata({
     title: `${practice.id} · ${practice.title}`,
     description: `${PRACTICE_TYPE_LABELS[practice.practiceType]} para entrenamiento profesional: ${practice.title}.`,
-  };
+    path: PATHS.professionalPractice(practice.slug),
+  });
 }
 
 export default async function PracticeDetailPage({ params }: Props) {

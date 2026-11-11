@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMetadata, PATHS } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Clock, ChevronLeft, Award, Users, BookOpen, AlertTriangle, FlaskConical, BrainCircuit, ArrowRight } from "lucide-react";
@@ -27,10 +28,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const lab = getLabBySlug(slug);
   if (!lab) return { title: "Lab no encontrado" };
-  return {
+  return buildPageMetadata({
     title: `${lab.displayId} · ${lab.title}`,
     description: `${lab.displayId}. Laboratorio práctico: ${lab.title}. Duración: ${lab.duration} min.`,
-  };
+    path: PATHS.lab(lab.slug),
+  });
 }
 
 const LEVEL_BAR: Record<string, string> = {

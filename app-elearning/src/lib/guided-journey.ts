@@ -122,7 +122,7 @@ export const FOUNDATION_ACTIVITIES: FoundationActivity[] = [
     prerequisites: ["Ninguno"],
     access: "Puede hacerse con lectura guiada; tenant recomendado, no obligatorio.",
     evidence: "Mapa personal de productos y un caso de negocio simple.",
-    tenantAlternative: "Usa la comparación conceptual del modulo y documenta un caso propio.",
+    tenantAlternative: "Usa la comparación conceptual del módulo y documenta un caso propio.",
     outcome: "Entiendes Power Apps, Power Automate, Dataverse, Power BI, Dynamics 365 y Copilot sin profundizar todavía.",
   },
   {
@@ -181,7 +181,7 @@ export const FOUNDATION_ACTIVITIES: FoundationActivity[] = [
     moduleId: 5,
     prerequisites: ["Ecosistema y datos básicos"],
     access: "Power Automate recomendado; sin integraciones externas.",
-    evidence: "Diagrama o captura de un flujo simple con disparador y accion.",
+    evidence: "Diagrama o captura de un flujo simple con disparador y acción.",
     tenantAlternative: "Describe el trigger, condiciones y salida esperada usando datos locales.",
     outcome: "Comprendes cómo convertir una tarea repetitiva en flujo verificable.",
   },
@@ -210,7 +210,7 @@ export const FOUNDATION_ACTIVITIES: FoundationActivity[] = [
     href: "/mi-ruta",
     prerequisites: ["Fundamentos esenciales y primera evidencia"],
     access: "Sin requisitos de tenant.",
-    evidence: "Selección de familia de rol o decision de seguir explorando.",
+    evidence: "Selección de familia de rol o decisión de seguir explorando.",
     tenantAlternative: "Igual que la actividad principal.",
     outcome: "Eliges el siguiente camino cuando ya tienes contexto suficiente.",
   },
@@ -222,7 +222,7 @@ export const ROLE_EXPERIENCES = [
   { id: "developer", title: "Programar e integrar sistemas", route: "developer" as const, minutes: 20, activity: "Leer una pequeña lógica y explicar donde se ejecuta." },
   { id: "admin", title: "Administrar y gobernar", route: "maker" as const, minutes: 15, activity: "Detectar un riesgo de entorno, datos o permisos." },
   { id: "rpa", title: "Automatizar escritorio", route: "developer" as const, minutes: 15, activity: "Evaluar si un proceso debe automatizarse con RPA o flujo cloud." },
-  { id: "architect", title: "Diseñar soluciones", route: "solution-architect" as const, minutes: 20, activity: "Comparar dos opciones de solucion y justificar tradeoffs." },
+  { id: "architect", title: "Diseñar soluciones", route: "solution-architect" as const, minutes: 20, activity: "Comparar dos opciones de solución y justificar tradeoffs." },
 ] as const;
 
 export function normalizeOnboardingState(value: unknown): OnboardingState {
@@ -330,7 +330,7 @@ export function buildWeeklyPlan(availability: WeeklyAvailability, nextAction: Ne
     return [nextAction.activity.title, "Una práctica corta o variante simulada", "Revisión de evidencia y notas"];
   }
   if (availability === "8h") {
-    return [nextAction.activity.title, "Siguiente módulo de fundamentos", "Lab recomendado", "Quiz o reflexion", "Ajuste de ruta"];
+    return [nextAction.activity.title, "Siguiente módulo de fundamentos", "Lab recomendado", "Quiz o reflexión", "Ajuste de ruta"];
   }
   return [nextAction.activity.title, "Siguiente actividad corta", "Lab guiado si tienes tenant", "Quiz breve"];
 }
@@ -443,20 +443,20 @@ export function validateGuidedJourneyReferences(modules: ModuleInfo[], labs: Lab
     if (seen.has(activity.id)) errors.push(`Actividad duplicada: ${activity.id}`);
     seen.add(activity.id);
     if (activity.moduleId && !moduleIds.has(activity.moduleId)) {
-      errors.push(`Actividad ${activity.id} referencia modulo inexistente ${activity.moduleId}`);
+      errors.push(`Actividad ${activity.id} referencia módulo inexistente ${activity.moduleId}`);
     }
     if (activity.labSlug && !labSlugs.has(activity.labSlug)) {
       errors.push(`Actividad ${activity.id} referencia lab inexistente ${activity.labSlug}`);
     }
-    if (activity.step <= 0) errors.push(`Actividad ${activity.id} tiene orden invalido`);
+    if (activity.step <= 0) errors.push(`Actividad ${activity.id} tiene orden inválido`);
   }
 
   const firstPractice = FOUNDATION_ACTIVITIES.find((activity) => activity.type === "lab" || activity.id.includes("canvas"));
   if (!firstPractice || firstPractice.step > 4) {
-    errors.push("La ruta de fundamentos no tiene una primera practica temprana");
+    errors.push("La ruta de fundamentos no tiene una primera práctica temprana");
   }
   if (FOUNDATION_ACTIVITIES.at(-1)?.type !== "decision") {
-    errors.push("La ruta de fundamentos debe terminar con una decision posterior");
+    errors.push("La ruta de fundamentos debe terminar con una decisión posterior");
   }
   if (FOUNDATION_ACTIVITIES.length < 5 || FOUNDATION_ACTIVITIES.length > 7) {
     errors.push("La ruta de fundamentos debe tener entre 5 y 7 actividades");

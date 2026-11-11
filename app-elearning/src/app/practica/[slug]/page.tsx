@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMetadata, PATHS } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { InteractivePracticeClient } from "@/components/interactive-practices/interactive-practice-client";
 import { getAllInteractivePractices, getInteractivePracticeBySlug } from "@/lib/interactive-practices";
@@ -15,10 +16,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const practice = getInteractivePracticeBySlug(slug);
   if (!practice) return { title: "Práctica no encontrada" };
-  return {
+  return buildPageMetadata({
     title: practice.title,
     description: practice.description,
-  };
+    path: PATHS.interactivePractice(practice.slug),
+  });
 }
 
 export default async function InteractivePracticeDetailPage({ params }: Props) {

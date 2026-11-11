@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight, Layers3 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getPowerPlatformHub } from "@/lib/domain-hubs";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Power Platform",
   description: "Hub de Power Platform: fundamentos, Dataverse, Power Apps, Power Automate, Power Pages, ALM, gobernanza, developer y arquitectura.",
-};
+  path: "/power-platform",
+});
 
 export default function PowerPlatformHubPage() {
   const hub = getPowerPlatformHub();

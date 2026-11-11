@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight, Building2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getDynamics365Hub } from "@/lib/domain-hubs";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Dynamics 365",
   description: "Hub de Dynamics 365: Customer Engagement (Sales, Customer Service, Customer Insights, Field Service, Contact Center) y F&O awareness.",
-};
+  path: "/dynamics-365",
+});
 
 export default function Dynamics365HubPage() {
   const hub = getDynamics365Hub();

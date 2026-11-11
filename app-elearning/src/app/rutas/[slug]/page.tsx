@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMetadata, PATHS } from "@/lib/seo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AlertTriangle, ArrowLeft, ArrowRight, BookOpen, CheckCircle2, FlaskConical, Target, Trophy } from "lucide-react";
@@ -22,10 +23,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const route = getProfessionalRouteBySlug(slug);
   if (!route) return {};
-  return {
+  return buildPageMetadata({
     title: route.title,
     description: route.summary,
-  };
+    path: PATHS.route(route.slug),
+  });
 }
 
 const STATUS_VARIANT: Record<string, "default" | "secondary" | "outline"> = {

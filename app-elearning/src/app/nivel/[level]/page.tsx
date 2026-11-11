@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { buildPageMetadata, PATHS } from "@/lib/seo";
 import { getLevelById, getAllLevels } from "@/lib/content";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -21,10 +22,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { level } = await params;
   const levelData = getLevelById(level as LevelId);
   if (!levelData) return {};
-  return {
+  return buildPageMetadata({
     title: levelData.title,
     description: levelData.description,
-  };
+    path: PATHS.level(levelData.id),
+  });
 }
 
 const LEVEL_ACCENT: Record<LevelId, { badge: "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365" | "rpa"; bar: string }> = {

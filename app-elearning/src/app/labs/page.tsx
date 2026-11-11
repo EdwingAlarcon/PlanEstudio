@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ClipboardCheck, FileCheck2, FlaskConical } from "lucide-react";
 import { getAllLabs } from "@/lib/content";
 import { getLabPresentationMeta } from "@/lib/lab-metadata";
 import { LabsClient, type LabWithMeta } from "@/components/labs/labs-client";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Laboratorios",
   description: "Laboratorios prácticos tipo Microsoft App in a Day para Power Platform y Dynamics 365.",
-};
+  path: "/labs",
+});
 
 const FEATURED_ARTIFACTS = [
   {

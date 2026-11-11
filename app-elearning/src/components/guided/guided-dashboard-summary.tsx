@@ -22,7 +22,7 @@ export function GuidedDashboardSummary() {
         <div className="space-y-3">
           <div className="flex items-center gap-2">
             <Target className="h-5 w-5 text-[#0078D4] dark:text-[#4DB8FF]" aria-hidden />
-            <h2 id="next-dashboard-heading" className="text-xl font-semibold text-foreground">¿Que debo hacer ahora?</h2>
+            <h2 id="next-dashboard-heading" className="text-xl font-semibold text-foreground">¿Qué debo hacer ahora?</h2>
           </div>
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-[#0078D4] dark:text-[#4DB8FF]">
