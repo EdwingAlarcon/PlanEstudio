@@ -9,8 +9,10 @@ CLAUDE.md):
 1. M43: ¿convertir en opcionales los dos criterios de la Microlección 4? (pliega ~700 palabras) — Fable 5.2 / High.
 2. M38: ¿llevar sus 3 plantillas (agenda, estimación, CR-004) a una página de recursos? (recursos 41 → 42) — Fable 5.2 / High.
 3. M7: alinear los Criterios de Validación (piden AddColumns, ForAll, With, Collections, ahora plegados) — Fable 5.2 / High.
-4. Banco de preguntas: M38 evalúa hyper-care, T-shirt sizing y arquitecto vs PM; M37 "Responsible AI"; el módulo no
-   los enseña. Añadir al módulo o ajustar preguntas — Opus 5.5 / Low.
+4. ~~Banco de preguntas: M38 evalúa hyper-care, T-shirt sizing y arquitecto vs PM; M37 "Responsible AI"~~ — HECHO
+   2026-11-18: se añadió al módulo (no se tocaron las preguntas). M38: T-shirt sizing en WBS, arquitecto vs PM en RACI y
+   concepto Hyper-care (práctica de industria; las páginas de go-live de la guía de implementación dan 404 en Learn).
+   M37: concepto Responsible AI con los 6 principios (verificados en Learn, `azure/machine-learning/concept-responsible-ai`).
 5. Verificar etiquetas en un tenant en español con `VERIFICACION_INTERFAZ_ES.md` (lo hace el usuario; luego
    `verified: true` en `ui-terms.ts`).
 
