@@ -15,6 +15,21 @@ CLAUDE.md):
    M37: concepto Responsible AI con los 6 principios (verificados en Learn, `azure/machine-learning/concept-responsible-ai`).
 5. Verificar etiquetas en un tenant en español con `VERIFICACION_INTERFAZ_ES.md` (lo hace el usuario; luego
    `verified: true` en `ui-terms.ts`).
+6. **Certificaciones cambiadas (verificado en Learn el 2026-11-18) — decisión del usuario, Fable 5.2 / High.** Tabla
+   de exámenes retirados (`learn.microsoft.com/credentials/retired-certification-exams`): **PL-200 retirado el
+   2026-08-31**, PL-400 el 2026-10-30, **PL-600 el 2026-06-30** (sin sucesor nombrado), PL-500 el 2026-06-30, MB-910 y
+   MB-920 el 2025-12-31. **PL-400 → AB-400** ("Extending Microsoft Power Platform Solutions with Code and AI", misma
+   credencial Power Platform Developer Associate; blog Skills Hub 2026-09-15). **AB-410** "Building Intelligent
+   Applications" (Intelligent Applications Builder Associate) cubre el terreno de PL-200 + prompts/AI Hub, aunque Learn no
+   dice "reemplaza". PL-900 y PL-300 siguen vigentes. El curso etiqueta Nivel 2 = PL-200, Nivel 3 = PL-400 y Nivel 4 =
+   arquitectura (PL-600): hay que decidir cómo realinear (`certification` del frontmatter, textos, simulador).
+7. **Labs oficiales como referencia (el usuario quiere enseñar con labs tipo "in a Day")**: repos MIT vigentes de
+   MicrosoftLearning — PL-900 (5 labs), AB-410T00 (12), AB-400 (10), PL-7001 (8), PL-7002 (8), PL-300 (12 labs + demos),
+   AB-620T00 (5 labs de agentes) — y `microsoft/mcs-labs` (Copilot Studio). El repo PL-200 ya no existe en GitHub (404).
+   "In a Day": `aka.ms/appinaday` redirige al path de Learn `power-apps-online-workshop` (hay es-es, traducción
+   automática); Copilot Studio in a Day → path `power-virtual-agents-workshop`; Automation in a Day → módulos de Learn
+   (RPA); Dashboard in a Day sin descarga pública verificada (la página da 403). Copias (zip, 2026-11-18) en
+   OneDrive "Training Day Microsoft/Labs oficiales 2026-11". Adaptar al caso propio del curso con atribución; no copiar.
 
 ## Estado actual — 2026-11-06 (retomar desde aquí)
 
