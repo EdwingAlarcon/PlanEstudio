@@ -2,7 +2,7 @@
 id: lab-120
 title: "Power BI — DAX esencial: medidas, CALCULATE, estadísticas y semiaditivas (Ruta Pro Power BI)"
 level: "N2"
-duration: 180
+duration: 170
 product: ["Power BI"]
 certifications: ["PL-300"]
 role: ["Analista de datos"]
@@ -51,7 +51,7 @@ Escribir las medidas que un comité comercial pide de verdad y entender por qué
 | Ejercicio 4 — Una medida semiaditiva: la cartera pendiente | 50 min |
 | Ejercicio 5 — Medidas rápidas y el DAX que generan | 20 min |
 | Ejercicio 6 — Formato y orden de las medidas | 20 min |
-| **Total** | **unas 3 h** |
+| **Total** | **unas 2 h 50 min** |
 
 ## Nivel
 

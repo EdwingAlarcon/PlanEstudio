@@ -2,7 +2,7 @@
 id: lab-124
 title: "Power BI — Storytelling: drillthrough, tooltips, marcadores, navegación y personalización (Ruta Pro Power BI)"
 level: "N2"
-duration: 180
+duration: 170
 product: ["Power BI"]
 certifications: ["PL-300"]
 role: ["Analista de datos"]
@@ -52,7 +52,7 @@ Que el reporte guíe a quien lo usa: del resumen al detalle de un vendedor con *
 | Ejercicio 4 — Navegación entre páginas | 25 min |
 | Ejercicio 5 — Un año para las páginas principales | 25 min |
 | Ejercicio 6 — Visuales que el lector adapta | 15 min |
-| **Total** | **unas 3 h** |
+| **Total** | **unas 2 h 50 min** |
 
 ## Nivel
 
@@ -82,11 +82,11 @@ Que el reporte guíe a quien lo usa: del resumen al detalle de un vendedor con *
 **Objetivo:** que desde cualquier visual con vendedores se llegue, con clic derecho, a una página dedicada a ese vendedor ([Learn: drillthrough](https://learn.microsoft.com/power-bi/create-reports/desktop-drillthrough)).
 
 1. Crea una página nueva y renómbrala `Detalle vendedor` (clic derecho en su pestaña > **Rename Page**).
-2. Con la página vacía y **ningún visual seleccionado**, en el panel **Visualizations** (vista de construcción del visual), sección **Drillthrough**, arrastra `Vendedores[Vendedor]` al pozo **Drillthrough filters**. Power BI añade automáticamente un botón **Back** arriba a la izquierda. En esa misma sección suele aparecer el interruptor **Keep all filters**, activado por defecto: hace que el drillthrough lleve **todos** los filtros del visual de origen (también el año del slicer), no solo el vendedor. Déjalo activado.
+2. Con la página vacía y **ningún visual seleccionado**, en el panel **Visualizations** (vista de construcción del visual), sección **Drillthrough**, arrastra `Vendedores[Vendedor]` al pozo **Drillthrough filters**. Power BI añade automáticamente un botón **Back** arriba a la izquierda. En esa misma sección suele aparecer un interruptor para conservar todos los filtros (en inglés, *Keep all filters*; Learn no lo documenta, así que su nombre puede variar). Activado, el drillthrough lleva **todos** los filtros del visual de origen (también el año del slicer), no solo el vendedor. Comprueba que está activado.
 3. Añade a la página:
    - un **Table** con `Ventas Totales`, `Ticket Promedio` y `Clientes Activos` (los valores exactos, para comprobarlos);
    - una **Matrix** con `Productos[Categoria]` en **Rows** y `Ventas Totales` en **Values**;
-   - un **Text box** con el título "Detalle del vendedor" y, si quieres, una tarjeta con `Vendedores[Vendedor]` para ver a quién estás mirando.
+   - un **Text box** con el título "Detalle del vendedor" y, si quieres, una tarjeta con la medida `Vendedor Elegido = SELECTEDVALUE ( Vendedores[Vendedor] )` para ver a quién estás mirando (con **discourage implicit measures**, activo desde el Lab 121, no puedes poner la columna directamente).
 4. Ve a `Resumen comercial` (año **2025** en el slicer). En la matriz de vendedores, clic derecho sobre **Camila Restrepo** > **Drillthrough** > **Detalle vendedor**.
 
 ### Resultado esperado del Ejercicio 1 (Camila Restrepo, 2025)
@@ -100,7 +100,7 @@ Que el reporte guíe a quien lo usa: del resumen al detalle de un vendedor con *
 | Servicios | 1.323.722,50 |
 | Capacitación | 217.772,50 |
 
-> **Si sale el total de los tres años** (10.874.772,50 para Camila): el año no llegó con el drillthrough. Revisa que **Keep all filters** esté activado y mira en el panel **Filters** de `Detalle vendedor` qué filtros llegaron.
+> **Si sale el total de los tres años** (10.874.772,50 para Camila): el año no llegó con el drillthrough. Revisa que el interruptor de conservar todos los filtros esté activado y mira en el panel **Filters** de `Detalle vendedor` qué filtros llegaron.
 
 5. Vuelve con el botón **Back** (Ctrl + clic). Prueba también desde la matriz de cumplimiento del Lab 119 (página `Modelo`): el drillthrough funciona desde **cualquier** visual que tenga `Vendedores[Vendedor]`. Learn lo exige: el campo debe estar en el visual de origen y en el pozo de drillthrough.
 
@@ -152,7 +152,7 @@ Las demás regiones tienen un solo ejecutivo cada una: Andina es la única con d
 ### Tarea 3.1 — Dos visuales en el mismo sitio
 
 1. En `Mensual`, junto a la matriz del Lab 123, añade un **Line chart** con `Fecha[Mes]` y `Ventas Totales`. Ponlo encima de la matriz, con el mismo tamaño y posición: copia los valores de **Format** > **General** > **Properties** (tamaño y posición) de la matriz al gráfico.
-2. Cinta **View** > **Selection**. En el panel **Selection** (pestaña **Layer order**), renombra los dos visuales con doble clic: `Gráfico mensual` y `Tabla mensual`.
+2. Cinta **View** > **Selection**. En el panel **Selection** (la vista de capas, no la de **Tab order**), renombra los dos visuales con doble clic: `Gráfico mensual` y `Tabla mensual`.
 
 ### Tarea 3.2 — Dos marcadores
 
@@ -187,7 +187,7 @@ Las demás regiones tienen un solo ejecutivo cada una: Andina es la única con d
 
 1. En `Resumen comercial`, cinta **Insert** > **Buttons** > **Navigator** > **Page navigator** ([Learn: navegadores](https://learn.microsoft.com/power-bi/create-reports/button-navigators)). Aparece un botón por página.
 2. El menú debe mostrar **solo `Resumen comercial` y `Mensual`**:
-   - `Detalle vendedor` y `Tip región` no se visitan navegando, sino con drillthrough o al pasar el puntero. Ocúltalas (clic derecho en la pestaña > **Hide Page**). En Desktop siguen viéndose como pestañas, con un icono; en el servicio no aparecen. El navegador no muestra por defecto las páginas ocultas ni las de tooltip.
+   - `Detalle vendedor` y `Tip región` no se visitan navegando, sino con drillthrough o al pasar el puntero. Ocúltalas desde el menú contextual de su pestaña (la opción de ocultar la página). En Desktop siguen viéndose como pestañas, con un icono; en el servicio no aparecen. El navegador no muestra por defecto las páginas ocultas ni las de tooltip.
    - Las páginas de trabajo de los labs anteriores (`Modelo`, `DAX`, `Contexto`, `Tiempo`) sí aparecerían. En el formato del navegador, pestaña **Pages**, desactiva cada una.
 3. Ajusta el diseño en **Grid layout** (**Horizontal**) y el aspecto de la página actual en el estado **Selected** (en el formato del estilo, aplicando los ajustes a ese estado; Learn lo llama **Selected state**), con el color 1 del tema.
 4. Copia el navegador (Ctrl + C) y pégalo en `Mensual` (Ctrl + V): queda en la misma posición.
@@ -237,7 +237,7 @@ Las demás regiones tienen un solo ejecutivo cada una: Andina es la única con d
 | Error | Causa probable | Solución |
 |---|---|---|
 | No aparece **Drillthrough** al hacer clic derecho | El visual de origen no tiene `Vendedores[Vendedor]` | El campo debe estar en el visual y en el pozo de drillthrough |
-| `Detalle vendedor` muestra el total de los tres años | **Keep all filters** está desactivado y solo llega el vendedor | Actívalo en la sección **Drillthrough** de la página |
+| `Detalle vendedor` muestra el total de los tres años | El interruptor de conservar todos los filtros está desactivado y solo llega el vendedor | Actívalo en la sección **Drillthrough** de la página |
 | `Detalle vendedor` sale vacía | Se sincronizó el slicer de año en esa página y choca con el año que llega por el drillthrough | Quita **Sync** en `Detalle vendedor` |
 | El tooltip muestra el visual estándar, no la página | El visual no tiene la página asignada | **Format** > **Tooltips** > **Page** > `Tip región` |
 | El marcador cambia también el año | El marcador guarda **Data** | Desmarca **Data** en el marcador |

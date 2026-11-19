@@ -68,7 +68,7 @@ Aprender el **método** para encontrar qué hace lento un reporte y comprobar la
 ### Entorno
 
 - [ ] El archivo `ruta-pro-sit-ventas.pbix` del Lab 121, con las páginas `Modelo`, `DAX`, `Contexto` y `Tiempo`
-- [ ] **Guarda una copia** antes de empezar (`ruta-pro-sit-ventas-antes-optimizar.pbix`): en el Ejercicio 5 quitarás cosas del modelo
+- [ ] **Guarda una copia** antes de empezar (`ruta-pro-sit-ventas-antes-optimizar.pbix`): en el Ejercicio 5 quitarás cosas del modelo. Hazlo copiando el archivo en el Explorador de Windows, o con **File** > **Save as** y volviendo a abrir `ruta-pro-sit-ventas.pbix`: después de **Save as**, Power BI Desktop sigue trabajando sobre la copia.
 
 ### Conocimiento previo
 
@@ -365,7 +365,7 @@ Por cada columna de fecha, Power BI crea una tabla de fechas **oculta** (incluso
 
 ## Limpieza del laboratorio
 
-Conserva `ruta-pro-sit-ventas.pbix` optimizado: los labs de reportes (123 a 125) trabajan sobre él. Puedes borrar las copias intermedias cuando hayas comprobado que todo funciona.
+Conserva `ruta-pro-sit-ventas.pbix` optimizado: los labs de reportes (123 a 125) trabajan sobre él. Puedes borrar `ruta-pro-sit-ventas-antes-optimizar.pbix` cuando hayas comprobado que todo funciona; **conserva `ruta-pro-sit-ventas-antes-grupo.pbix`** (Lab 121) hasta terminar el Lab 125, que la usa.
 
 ## Siguiente laboratorio recomendado
 

@@ -67,12 +67,12 @@ Convertir un modelo correcto en un reporte que se entienda en diez segundos: una
 ### Entorno
 
 - [ ] El archivo `ruta-pro-sit-ventas.pbix` del Lab 122
-- [ ] **Guarda una copia** antes de empezar (`ruta-pro-sit-ventas-antes-diseno.pbix`)
+- [ ] **Guarda una copia** antes de empezar (`ruta-pro-sit-ventas-antes-diseno.pbix`). Hazlo copiando el archivo en el Explorador de Windows, o con **File** > **Save as** y volviendo a abrir `ruta-pro-sit-ventas.pbix`: después de **Save as**, Power BI Desktop sigue trabajando sobre la copia.
 
 ### Conocimiento previo
 
 - Labs 119 a 121: las medidas `Ventas Totales`, `Objetivo Total`, `% Cumplimiento`, `Ticket Promedio`, `Clientes Activos`
-- [Módulo 12](/nivel/intermedio/modulo/power-bi-dax-avanzado): visuales básicos de Power BI
+- Lab 116: visuales básicos de Power BI (tarjetas, matriz, gráficos de barras y líneas)
 
 ---
 

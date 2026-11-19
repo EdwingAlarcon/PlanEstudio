@@ -871,7 +871,31 @@ hasta tener los 12 labs. Conteos: labs 76 → 88 al terminar.
   de trabajo; el aumento de noviembre lo explica Perú (+298.659,40), no la estacionalidad, y el pico de la serie es marzo de
   2026; grupo **Other** que mezclaba `Sin dato`; explicación de `ALL` frente a `ALLSELECTED`; segundo influenciador
   (Licencias, no Proyecto); `Importe` como **Don't summarize**.
-- **Sin verificar en Learn:** el interruptor **Keep all filters**, **Layer order**, **Hide Page**, **Analysis type** del
-  decomposition tree y si **Personalize visuals** se ve en la edición de Desktop (el lab lo deja para el Lab 126).
+- **Revisado contra Learn (2026-11-19):** **Analysis type** (**Absolute**/**Relative**) existe; Learn no dice cuál es el valor
+  por defecto y el lab pide comprobarlo. **Keep all filters**, **Layer order** y **Hide Page** no aparecen en Learn: los labs
+  los describen sin dar la etiqueta por cierta. **Personalize visuals** se describe como experiencia de lectura y se prueba al
+  publicar (Lab 126).
 - **Siguiente (P5):** labs 126 (servicio y seguridad) y 127 (reto Pro sin pasos, nuevo capstone de la ruta) y prueba simulada
   de la ruta completa.
+
+### 15.8 Estado — P5 hecha: Ruta Pro Power BI completa (2026-11-19)
+
+- **LAB-126 Servicio y seguridad:** publicar en **My workspace**, dashboard (tarjeta de 2025, `% Cumplimiento` de 2026 = 81,05 % para
+  la alerta, página en vivo), alerta, actualización programada (la carpeta local necesita puerta de enlace; `TiposCambio` por
+  **Web** no; opciones razonadas, incluido el parámetro `CarpetaDatos` en el servicio), RLS estática (`Solo Colombia`, que deja el
+  objetivo abierto a propósito) y dinámica (`Comercial`, con la puente `VendedorRegion` desconectada, creada con **Merge queries as
+  new** para no chocar con la regla de privacidad del Lab 117, y reglas en `Regiones` y `Vendedores`). **Test as role** evalúa la
+  RLS dinámica con la identidad propia: el lab añade una fila de prueba con el correo de la alumna y pide quitarla después.
+- **LAB-127 Reto Pro sin pasos** (capstone de la ruta): la Gerencia de Servicios (días de entrega, % en 30 días, cartera de
+  servicios, RLS por práctica para cinco personas). Definiciones exactas en R2, cifras de control y una **rúbrica de 20 criterios
+  comprobables** (5 por dominio del PL-300), que se puede completar entera con licencia gratuita.
+- **Ruta `power-bi-pro` en "Disponible"** con capstone LAB-127 y evidencia de portafolio de los 12 labs. Labs: 88 (13 opcionales).
+- **Pruebas simuladas** (2026-11-19, 3 agentes; simulación, no personas reales): una alumna con licencia gratuita en el 126, una
+  que resolvió el 127 **sin mirar las soluciones** (reprodujo todas las cifras de control) y una revisión de continuidad de los 12
+  labs. Corregido: licencia gratuita sí programa la actualización en My workspace (Learn); alerta sobre un año cerrado; definición
+  de días y de cartera; rúbrica no aplicable a roles estáticos ni a licencia gratuita; errores frecuentes con causas imposibles;
+  trampa de la censura de 2026 (los pendientes no entran en el promedio de días); el LAB-122 mandaba borrar la copia que usa el
+  125; "Guarda una copia" con **Save as** deja trabajando sobre la copia; referencias cruzadas entre labs.
+- **Sin verificar en Learn:** **Pin live**, **Other user** en **View as**, **Enter data** y si el umbral de una alerta sobre una
+  tarjeta con formato de porcentaje se escribe 1 o 100 (el lab pide comprobarlo).
+- **Tiempo total de la ruta:** unas 42 h (suma de `duration` de los 12 labs).

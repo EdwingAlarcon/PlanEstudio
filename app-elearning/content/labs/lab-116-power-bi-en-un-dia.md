@@ -43,8 +43,8 @@ La teoría básica está en el [Módulo 6](/nivel/basico/modulo/power-bi-reporte
 | En este lab lo haces una vez, en versión mínima | Lo profundizas en |
 |---|---|
 | Conectar archivos y revisar su calidad | Lab 117 (perfilado, carpetas, parámetros, JSON) |
-| Limpiar texto y quitar duplicados | Lab 118 (unpivot, merge, append, formatos de fecha por región) |
-| Modelo en estrella y tabla de fechas | Lab 119 (dimensiones de rol, puente vendedor-región) |
+| Limpiar texto y quitar duplicados | Lab 117 (formatos de fecha por región, perfilado) y Lab 118 (unpivot, merge, append) |
+| Modelo en estrella y tabla de fechas | Lab 119 (dimensión de rol) y Lab 122 (rendimiento) |
 | Medidas con `SUM`, `DIVIDE` y `CALCULATE` | Labs 120 y 121 (contexto de filtro, inteligencia de tiempo) |
 | Una página de reporte | Labs 123 y 124 (diseño, accesibilidad, storytelling) |
 | Publicar y anclar en un dashboard | Lab 126 (actualización, seguridad por filas, distribución) |
@@ -598,7 +598,7 @@ En **My workspace**: el reporte, el semantic model y el dashboard `SIT Comercial
 
 **Reto intermedio:** crea la medida `Ventas Servicios` (como `% Ventas Licencias`, pero sin dividir y con la categoría `Servicios`) y comprueba que da **5.941.370,00**.
 
-**Reto avanzado (anticipo del Lab 118):** conecta `ventas-2024.csv` con **Text/CSV** y mira las fechas en Power Query. ¿Por qué con tu configuración regional las fechas salen bien, mal o con error? Sin arreglarlo todavía, escribe tu hipótesis.
+**Reto avanzado (anticipo del Lab 117):** conecta `ventas-2024.csv` con **Text/CSV** y mira las fechas en Power Query. ¿Por qué con tu configuración regional las fechas salen bien, mal o con error? Sin arreglarlo todavía, escribe tu hipótesis.
 
 ## Preguntas de repaso
 
@@ -613,4 +613,4 @@ No borres nada: los Labs 117 a 127 usan la misma carpeta `sit-ventas`. Si public
 
 ## Siguiente laboratorio recomendado
 
-[**Lab 117 — Obtener y perfilar datos**](/labs/lab-117-power-bi-obtener-y-perfilar-datos): conectar la carpeta `ventas-2026` completa, usar parámetros para la ruta, leer el JSON de tipos de cambio y diagnosticar la fila `TOTAL MARZO` que rompe la carga.
+[**Lab 117 — Obtener y perfilar datos**](/labs/lab-117-power-bi-obtener-y-perfilar-datos): conectar la carpeta `ventas-2026` completa, usar parámetros para la ruta, leer el JSON de tipos de cambio y diagnosticar la fila `TOTAL MARZO`, que no da error pero descuadra marzo.

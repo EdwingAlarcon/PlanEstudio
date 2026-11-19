@@ -18,9 +18,9 @@
 - **/graphify (ítem 9):** no se hace la extracción semántica. El grafo de código ya existe (`graphify update .`, gratis) y el
   contenido es Markdown que se busca bien con grep; 15-20 sub-agentes no compensan. Se puede retomar si el usuario lo pide.
 - **Ítem 5 (tenant en español):** sigue pendiente del usuario; Claude no tiene acceso a su tenant.
-- **Ruta Pro Power BI P3 y P4 hechas** (labs 120 a 125, con prueba simulada de cada lab; PROPUESTA §15.6 y §15.7).
-  Siguiente: **P5 = labs 126 (servicio y seguridad: My workspace, dashboard, alertas, actualización, RLS) y 127 (reto Pro
-  sin pasos, que pasa a ser el capstone de la ruta)**, y prueba simulada de la ruta completa.
+- **Ruta Pro Power BI COMPLETA** (labs 116 a 127, P1 a P5, con prueba simulada de cada fase y de la ruta entera; PROPUESTA
+  §15.4 a §15.8). La ruta `power-bi-pro` está "Disponible" con capstone LAB-127. Siguiente según §15.3: **Ruta Pro Power
+  Automate (cloud)**, con PL-7002 y AB-410T00 como esqueleto; hay que diseñarla (datos, labs y fases) antes de escribir.
 
 ## Pendiente para la próxima sesión (anotado el 2026-11-11, noche)
 

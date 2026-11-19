@@ -368,7 +368,63 @@ const expected = {
   lab120: lab120Metrics(),
   lab121: lab121Metrics(),
   lab123a125: labP4Metrics(),
+  lab126a127: labP5Metrics(),
 };
+
+// Labs 126-127. RLS dinámica: cada usuario ve las regiones de su fila en vendedor-región (por correo) y los vendedores
+// que trabajan en esas regiones. El reto 127 usa solo la categoría Servicios.
+function labP5Metrics() {
+  const puente = vendedores.flatMap((v) => v.regiones.map((r) => ({ vendedorId: v.id, regionId: r, correo: v.correo })));
+  const verComo = (correo) => {
+    const regs = new Set(puente.filter((p) => p.correo === correo).map((p) => p.regionId));
+    const vends = new Set(puente.filter((p) => regs.has(p.regionId)).map((p) => p.vendedorId));
+    const ventas = sumBy(v2025.filter((v) => regs.has(v.regionId) && vends.has(v.vendedorId)));
+    const objetivo = objetivos.filter((o) => o[1] === 2025 && vends.has(o[0])).reduce((s, o) => s + o.slice(2).reduce((a, b) => a + b, 0), 0);
+    return {
+      regiones: [...regs].map((r) => regiones.find((x) => x.id === r).region),
+      vendedoresVisibles: [...vends].map((id) => vendedores.find((x) => x.id === id).nombre),
+      ventas2025: ventas,
+      objetivo2025: objetivo,
+      cumplimiento2025: objetivo ? Math.round((ventas / objetivo) * 10000) / 100 : null,
+    };
+  };
+  const correo = (nombre) => vendedores.find((v) => v.nombre === nombre).correo;
+  const servicios = (rows) => rows.filter((v) => productos.find((p) => p.id === v.productoId).categoria === "Servicios");
+  const s2025 = servicios(v2025);
+  const entregadas = s2025.filter((v) => v.fechaEntrega);
+  const dias = (v) => (Date.parse(v.fechaEntrega) - Date.parse(v.fechaPedido)) / 86400000;
+  const subServ = {};
+  for (const v of s2025) {
+    const s = productos.find((p) => p.id === v.productoId).subcategoria;
+    subServ[s] = round2((subServ[s] ?? 0) + importe(v));
+  }
+  const carteraServicios = (fin) =>
+    sumBy(servicios(ventas).filter((v) => v.fechaPedido <= fin && (!v.fechaEntrega || v.fechaEntrega > fin)));
+  return {
+    filasPuente: puente.length,
+    rlsColombia2025: sumBy(v2025.filter((v) => regiones.find((r) => r.id === v.regionId).pais === "Colombia")),
+    verComo: {
+      "Natalia Vargas": verComo(correo("Natalia Vargas")),
+      "Ricardo Salinas": verComo(correo("Ricardo Salinas")),
+      "Camila Restrepo": verComo(correo("Camila Restrepo")),
+      "Andrés Rojas": verComo(correo("Andrés Rojas")),
+      "correo desconocido": verComo("nadie@sit-demo.example.com"),
+    },
+    reto127: {
+      ventasServicios2025: sumBy(s2025),
+      lineasServicios2025: s2025.length,
+      pedidosConServicios2025: new Set(s2025.map((v) => v.pedido)).size,
+      diasPromedioEntregaServicios2025: round2(entregadas.reduce((s, v) => s + dias(v), 0) / entregadas.length),
+      pctServiciosEn30Dias2025: Math.round((entregadas.filter((v) => dias(v) <= 30).length / entregadas.length) * 10000) / 100,
+      ventasServicios2025PorSubcategoria: Object.fromEntries(Object.entries(subServ).sort((a, b) => b[1] - a[1])),
+      carteraServicios20251231: carteraServicios("2025-12-31"),
+      carteraServicios20261031: carteraServicios("2026-10-31"),
+      ventasServicios2024: sumBy(servicios(byYear[2024])),
+      ventasServiciosEneOct2026: sumBy(servicios(byYear[2026])),
+      ventasServiciosEneOct2025: sumBy(s2025.filter((v) => v.month <= 10)),
+    },
+  };
+}
 
 // Labs 123-125: cifras de 2025 por fecha de pedido.
 function labP4Metrics() {

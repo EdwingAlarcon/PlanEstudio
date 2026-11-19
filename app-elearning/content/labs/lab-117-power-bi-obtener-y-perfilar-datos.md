@@ -29,7 +29,7 @@ Conectar los datos como se hace en un proyecto real: una ruta de carpeta que se 
 
 ## Lo que vas a construir
 
-- Un archivo nuevo `ruta-pro-sit-ventas.pbix` que seguirá creciendo en los Labs 118 y 119
+- Un archivo nuevo `ruta-pro-sit-ventas.pbix` que seguirá creciendo de lab en lab hasta el Lab 126
 - Un parámetro `CarpetaDatos` con la ruta de la carpeta, usado por todas las consultas de archivos
 - La consulta `Ventas2026`, que combina los 10 archivos mensuales de la carpeta `ventas-2026`
 - La consulta `Ventas2024`, con las fechas leídas en el formato correcto y sin errores
@@ -402,7 +402,7 @@ Lee y completa la última columna:
 - [ ] `Ventas2026` combina los 10 archivos y sé qué fila sobra y por qué no da error
 - [ ] `Ventas2024` tiene 1.199 filas y fechas sin errores, leídas como día/mes/año
 - [ ] `TiposCambio` tiene 34 filas, conectada por web
-- [ ] Los dos orígenes tienen nivel de privacidad definido
+- [ ] Los tres orígenes tienen nivel de privacidad definido
 - [ ] Completé la tabla de decisión de modos de almacenamiento
 - [ ] Moví la carpeta y lo arreglé cambiando solo el parámetro
 
@@ -449,4 +449,4 @@ No borres nada: el Lab 118 sigue con este mismo archivo `ruta-pro-sit-ventas.pbi
 
 ## Siguiente laboratorio recomendado
 
-**Lab 118 — Transformar y cargar:** quitar la fila de total, unir los tres años en una sola tabla de ventas, despivotar los objetivos, cruzar con los tipos de cambio y decidir qué consultas se cargan al modelo.
+**[Lab 118 — Transformar y cargar](/labs/lab-118-power-bi-transformar-y-cargar):** quitar la fila de total, unir los tres años en una sola tabla de ventas, despivotar los objetivos, cruzar con los tipos de cambio y decidir qué consultas se cargan al modelo.

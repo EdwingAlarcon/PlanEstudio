@@ -438,4 +438,4 @@ No borres nada: el Lab 119 construye el modelo sobre este archivo.
 
 ## Siguiente laboratorio recomendado
 
-**Lab 119 — Modelo semántico en estrella:** la tabla de fechas de tres años, dos tablas de hechos (ventas y objetivos) que comparten dimensiones, la fecha de entrega como dimensión de rol con `USERELATIONSHIP`, y las propiedades que hacen el modelo fácil de usar.
+**[Lab 119 — Modelo semántico en estrella](/labs/lab-119-power-bi-modelo-semantico-estrella):** la tabla de fechas de tres años, dos tablas de hechos (ventas y objetivos) que comparten dimensiones, la fecha de entrega como dimensión de rol con `USERELATIONSHIP`, y las propiedades que hacen el modelo fácil de usar.

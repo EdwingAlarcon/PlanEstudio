@@ -75,7 +75,7 @@ Usar las herramientas de análisis de Power BI **con criterio**: explicar un aum
 ### Conocimiento previo
 
 - Lab 121: la columna `Fecha[Con ventas]` y la trampa del año incompleto
-- Lab 123: formato de visuales y **Edit interactions**
+- Lab 120: **Edit interactions**; Lab 123: formato de visuales
 
 ---
 
@@ -83,7 +83,7 @@ Usar las herramientas de análisis de Power BI **con criterio**: explicar un aum
 
 **Objetivo:** que Power BI proponga por qué subieron las ventas de un mes al siguiente ([Learn: insights](https://learn.microsoft.com/power-bi/create-reports/desktop-insights)).
 
-1. Página nueva `Análisis`. Una página nueva no recibe el slicer sola: selecciona el slicer de año de `Resumen comercial`, cinta **View** > **Sync slicers**, y marca **Sync** y **Visible** también para `Análisis`. Déjalo en **2025**. Añade un **Clustered column chart** con `Fecha[Mes]` en el eje y `Ventas Totales` en los valores. (Learn exige que una columna de texto en el eje tenga un orden numérico para poder usar **Analyze**: `Mes` lo tiene, porque se ordena por `MesNum`.)
+1. Página nueva `Análisis`. Una página nueva no recibe el slicer sola: selecciona el slicer de año de `Resumen comercial`, cinta **View** > **Sync slicers**, y marca **Sync** y **Visible** también para `Análisis`. Déjalo en **2025**. Si el **Page navigator** del Lab 124 muestra la página nueva, decide si `Análisis` va en el menú (en la pestaña **Pages** del navegador). Añade un **Clustered column chart** con `Fecha[Mes]` en el eje y `Ventas Totales` en los valores. (Learn exige que una columna de texto en el eje tenga un orden numérico para poder usar **Analyze**: `Mes` lo tiene, porque se ordena por `MesNum`.)
 2. De octubre (**1.970.597,00**) a noviembre (**2.399.347,80**) las ventas suben **428.750,80**. Clic derecho sobre la columna de **noviembre** > **Analyze** > **Explain the increase**.
 3. Se abre una ventana con un gráfico de cascada (por defecto) que reparte el aumento entre los valores de alguna columna del modelo. Con los iconos de la parte inferior puedes cambiarlo a dispersión, columnas apiladas o cinta.
 4. **Anota** qué columna eligió Power BI para explicar el aumento y qué valor aporta más. Comprobado sobre los datos: por país, **Perú** aporta **+298.659,40** (cerca del 70 % del aumento), y es lo mismo que Lima o que Valeria Quispe, porque en Perú hay una sola región y una sola ejecutiva. Por categoría, el aumento lo lleva **Servicios** (+222.130,00), por delante de Licencias (+192.991,80). Lo más probable es que Power BI elija país, región o vendedor y señale Perú.
@@ -214,7 +214,7 @@ Cambia el slicer a 2024: la lista cambia sola. Y el mayor cliente de los tres a�
 | Antioquia | 4.303.248,20 |
 | Licencias | 2.761.753,20 |
 
-3. **El corte de IA:** inserta un **segundo Decomposition tree** con los mismos campos (o quita los niveles del primero con la **X** de su encabezado: cada nivel admite un solo campo y la raíz ya tiene `Pais`). En la raíz, pulsa **+** y elige **High value** (con una bombilla). Learn explica que la IA busca, entre los campos disponibles, el que lleva al valor más alto de la medida. Con el tipo de análisis absoluto (en el formato, **Analysis type** = **Absolute**) debería elegir **Categoria** y llegar a **Licencias (13.799.948,40)**, porque ninguna región, país o industria suma tanto como una sola categoría. Con **Relative**, que compara cada valor con la media de su campo, ganaría **Servicios Financieros**.
+3. **El corte de IA:** inserta un **segundo Decomposition tree** con los mismos campos (o quita los niveles del primero con la **X** de su encabezado: cada nivel admite un solo campo y la raíz ya tiene `Pais`). En la raíz, pulsa **+** y elige **High value** (con una bombilla). Learn explica que la IA busca, entre los campos disponibles, el que lleva al valor más alto de la medida. Learn documenta que el tipo de análisis (**Analysis type**) puede ser **Absolute** o **Relative**, pero no cuál viene por defecto: compruébalo en el formato del visual y déjalo en **Absolute**. Así debería elegir **Categoria** y llegar a **Licencias (13.799.948,40)**, porque ninguna región, país o industria suma tanto como una sola categoría. Con **Relative**, que compara cada valor con la media de su campo, ganaría **Servicios Financieros**.
 4. **Juzga:** "Licencias es el valor más alto" es cierto y también obvio: es la categoría que más vende en todo el año (Lab 120). Un corte de IA no es un hallazgo hasta que dice algo que no sabías.
 
 > **Límites que da Learn:** hasta 50 niveles y 10 valores por nivel; los cortes de IA no funcionan con medidas complejas ni en algunos entornos (por ejemplo, *Publish to web*).
@@ -269,7 +269,7 @@ Inicio Mes = DATE ( Fecha[Año], Fecha[MesNum], 1 )   // el 1 de cada mes: una f
 
 ### Tarea 6.2 — Pronóstico
 
-1. En `Análisis`, un **Line chart** con `Fecha[Inicio Mes]` en el eje y `Ventas Totales` en los valores. Con **Edit interactions** (Lab 123), que el slicer de año **no** filtre este visual: quieres los tres años.
+1. En `Análisis`, un **Line chart** con `Fecha[Inicio Mes]` en el eje y `Ventas Totales` en los valores. Con **Edit interactions** (Lab 120), que el slicer de año **no** filtre este visual: quieres los tres años.
 2. Añade al visual un filtro `Fecha[Con ventas]` = verdadero (Lab 121). Hoy noviembre y diciembre de 2026 no se dibujan (`Ventas Totales` es vacía, no cero), pero el filtro protege el pronóstico si mañana alguien cambia la medida para que devuelva 0 en los meses sin ventas: el pronóstico partiría de una caída que no existe.
 3. Con el visual seleccionado, panel **Visualizations** > icono **Analytics** > **Forecast** > añade un pronóstico. **Forecast length**: 2 (noviembre y diciembre de 2026; si tu versión pide unidades, elige meses o puntos). **Confidence interval**: 95 %.
 4. **Anota** el valor pronosticado para noviembre y diciembre de 2026 y el ancho del intervalo.
@@ -368,4 +368,4 @@ Conserva la página `Análisis` en `ruta-pro-sit-ventas.pbix`. La copia de antes
 
 ## Siguiente laboratorio recomendado
 
-**Lab 126 — Servicio y seguridad** (en construcción): publicar en My workspace, dashboard, alertas, actualización programada y seguridad a nivel de fila.
+**[Lab 126 — Servicio y seguridad](/labs/lab-126-power-bi-servicio-y-seguridad)**: publicar en My workspace, dashboard, alertas, actualización programada y seguridad a nivel de fila.

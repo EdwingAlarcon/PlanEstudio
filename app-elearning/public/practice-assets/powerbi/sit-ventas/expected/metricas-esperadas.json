@@ -273,5 +273,92 @@
       "Cursos": 5350.9,
       "Talleres": 2601.44
     }
+  },
+  "lab126a127": {
+    "filasPuente": 13,
+    "rlsColombia2025": 9208289,
+    "verComo": {
+      "Natalia Vargas": {
+        "regiones": [
+          "Andina",
+          "Antioquia",
+          "Caribe"
+        ],
+        "vendedoresVisibles": [
+          "Laura Gómez",
+          "Andrés Rojas",
+          "Camila Restrepo",
+          "Julián Pérez",
+          "Natalia Vargas"
+        ],
+        "ventas2025": 9208289,
+        "objetivo2025": 8689000,
+        "cumplimiento2025": 105.98
+      },
+      "Ricardo Salinas": {
+        "regiones": [
+          "Centro",
+          "Norte"
+        ],
+        "vendedoresVisibles": [
+          "Mariana Torres",
+          "Diego Hernández",
+          "Ricardo Salinas"
+        ],
+        "ventas2025": 5736172.9,
+        "objetivo2025": 5246000,
+        "cumplimiento2025": 109.34
+      },
+      "Camila Restrepo": {
+        "regiones": [
+          "Antioquia"
+        ],
+        "vendedoresVisibles": [
+          "Camila Restrepo",
+          "Natalia Vargas"
+        ],
+        "ventas2025": 4303248.2,
+        "objetivo2025": 3896000,
+        "cumplimiento2025": 110.45
+      },
+      "Andrés Rojas": {
+        "regiones": [
+          "Andina"
+        ],
+        "vendedoresVisibles": [
+          "Laura Gómez",
+          "Andrés Rojas",
+          "Natalia Vargas"
+        ],
+        "ventas2025": 2279734.9,
+        "objetivo2025": 2693000,
+        "cumplimiento2025": 84.65
+      },
+      "correo desconocido": {
+        "regiones": [],
+        "vendedoresVisibles": [],
+        "ventas2025": 0,
+        "objetivo2025": 0,
+        "cumplimiento2025": null
+      }
+    },
+    "reto127": {
+      "ventasServicios2025": 5941370,
+      "lineasServicios2025": 483,
+      "pedidosConServicios2025": 391,
+      "diasPromedioEntregaServicios2025": 25.64,
+      "pctServiciosEn30Dias2025": 67.49,
+      "ventasServicios2025PorSubcategoria": {
+        "Consultoría": 2393690,
+        "Soporte": 1360260,
+        "Desarrollo": 1121370,
+        "Proyecto": 1066050
+      },
+      "carteraServicios20251231": 507165,
+      "carteraServicios20261031": 512297.5,
+      "ventasServicios2024": 4465525,
+      "ventasServiciosEneOct2026": 5297782.5,
+      "ventasServiciosEneOct2025": 4797322.5
+    }
   }
 }

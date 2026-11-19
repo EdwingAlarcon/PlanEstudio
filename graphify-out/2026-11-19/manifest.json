@@ -767,9 +767,9 @@
     "semantic_hash": ""
   },
   "app-elearning/src/lib/__tests__/lab-metadata.test.ts": {
-    "mtime": 1795108428.0757499,
-    "seen": 1795108851.1487212,
-    "ast_hash": "c3b52ad644359dc4ce8bfffaf905a613",
+    "mtime": 1795110851.746336,
+    "seen": 1795111629.0978303,
+    "ast_hash": "84801a18973456d1c79f298e212a63f1",
     "semantic_hash": ""
   },
   "app-elearning/src/lib/__tests__/labor-profiles.test.ts": {
@@ -977,9 +977,9 @@
     "semantic_hash": "a304ed485200d2904048de9d670703b0"
   },
   "app-elearning/src/lib/professional-routes.ts": {
-    "mtime": 1795109538.0429635,
-    "seen": 1795110280.8507543,
-    "ast_hash": "d8028fc8ed8e1a788d4f3aeabe9a4f93",
+    "mtime": 1795110851.7448304,
+    "seen": 1795111629.1080034,
+    "ast_hash": "5fa7bc131d9f3e3e8361815af566a694",
     "semantic_hash": ""
   },
   "app-elearning/src/lib/progress.ts": {
@@ -1133,9 +1133,9 @@
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1795108478.8093486,
-    "seen": 1795108851.1662738,
-    "ast_hash": "1c9c7388c705435dbe7d483bc1a021c7",
+    "mtime": 1795110851.74734,
+    "seen": 1795111629.115602,
+    "ast_hash": "31568e80a0966fe4bfa06f4cd37c6378",
     "semantic_hash": ""
   },
   "DESIGN.md": {
@@ -1157,9 +1157,9 @@
     "semantic_hash": ""
   },
   "SPRINT_HANDOFF.md": {
-    "mtime": 1795109538.0393014,
-    "seen": 1795110280.8575268,
-    "ast_hash": "c35b877abe414f50d86d3e6b7ce8d9a7",
+    "mtime": 1795111273.5912411,
+    "seen": 1795111629.115602,
+    "ast_hash": "0085de53220e0fb04f43cee64b3ccf95",
     "semantic_hash": ""
   },
   "app-elearning/content/labs/lab-02-dataverse-modelo-datos.md": {
@@ -3076,9 +3076,9 @@
     "semantic_hash": ""
   },
   "PROPUESTA_FASES_APRENDER_HACIENDO.md": {
-    "mtime": 1795109919.3395412,
-    "seen": 1795110280.8575268,
-    "ast_hash": "05d0fd2543b36c14c35ff3d7b034b93d",
+    "mtime": 1795111273.5912411,
+    "seen": 1795111629.115602,
+    "ast_hash": "3a723ab4c5459c2677f8e43197d78b0d",
     "semantic_hash": ""
   },
   "app-elearning/content/labs/lab-06-power-bi-reporte-solicitudes.md": {
@@ -3226,27 +3226,27 @@
     "semantic_hash": ""
   },
   "app-elearning/public/practice-assets/powerbi/sit-ventas/expected/metricas-esperadas.json": {
-    "mtime": 1795109820.761696,
-    "seen": 1795110280.8104494,
-    "ast_hash": "a493b72e9936b8dc70a16ddbc842db1d",
+    "mtime": 1795110629.6799316,
+    "seen": 1795111629.067756,
+    "ast_hash": "2211efbca3d99c0d910c54af39127b8e",
     "semantic_hash": ""
   },
   "app-elearning/public/practice-assets/powerbi/sit-ventas/manifest.json": {
-    "mtime": 1795109820.7672534,
-    "seen": 1795110280.8104494,
+    "mtime": 1795110629.6799316,
+    "seen": 1795111629.067756,
     "ast_hash": "5097abaf9fa871140617b1491a709d88",
     "semantic_hash": ""
   },
   "app-elearning/public/practice-assets/powerbi/sit-ventas/tipos-cambio.json": {
-    "mtime": 1795109820.7492871,
-    "seen": 1795110280.8104494,
+    "mtime": 1795110629.6683776,
+    "seen": 1795111629.067756,
     "ast_hash": "8fff6785e5aeccb96e0ea78ffd995b5e",
     "semantic_hash": ""
   },
   "app-elearning/scripts/generate-powerbi-assets.mjs": {
-    "mtime": 1795109804.240143,
-    "seen": 1795110280.8120754,
-    "ast_hash": "cb0a45d74687761919d3613462b9021b",
+    "mtime": 1795110627.912723,
+    "seen": 1795111629.0707643,
+    "ast_hash": "b726b570357c15dd7f27804c522343bf",
     "semantic_hash": ""
   },
   "app-elearning/scripts/lib/zip-xlsx.mjs": {
@@ -3298,9 +3298,9 @@
     "semantic_hash": ""
   },
   "app-elearning/src/lib/__tests__/powerbi-assets.test.ts": {
-    "mtime": 1795109819.8219657,
-    "seen": 1795110280.8396885,
-    "ast_hash": "cd1ec13066a1362e48556878ea01899e",
+    "mtime": 1795110851.746336,
+    "seen": 1795111629.0988483,
+    "ast_hash": "d403136da9a8f1003dc6a539d5e3d203",
     "semantic_hash": ""
   },
   "app-elearning/src/lib/learning-path.ts": {
@@ -3358,8 +3358,8 @@
     "semantic_hash": ""
   },
   "app-elearning/public/practice-assets/powerbi/sit-ventas/README.md": {
-    "mtime": 1795109820.761696,
-    "seen": 1795110280.8997262,
+    "mtime": 1795110629.6799316,
+    "seen": 1795111629.1576579,
     "ast_hash": "15bbb71a85c63a02ca0b197446c93f6a",
     "semantic_hash": ""
   },
@@ -3382,9 +3382,27 @@
     "semantic_hash": ""
   },
   "app-elearning/content/labs/lab-122-power-bi-rendimiento-performance-analyzer-dax-query-view.md": {
-    "mtime": 1795109904.708165,
-    "seen": 1795110280.8665066,
-    "ast_hash": "50158c61c4e5bf92764d60da2a24853e",
+    "mtime": 1795110851.7438314,
+    "seen": 1795111629.1215081,
+    "ast_hash": "f7c2ad9568008a80bcfd07343ba7b5de",
+    "semantic_hash": ""
+  },
+  "app-elearning/content/labs/lab-123-power-bi-diseno-de-reportes.md": {
+    "mtime": 1795111159.2476475,
+    "seen": 1795111629.1215081,
+    "ast_hash": "f6bc69123b1531d7bd1e1267e4fe3032",
+    "semantic_hash": ""
+  },
+  "app-elearning/content/labs/lab-124-power-bi-storytelling-navegacion.md": {
+    "mtime": 1795111159.2497551,
+    "seen": 1795111629.1215081,
+    "ast_hash": "6ecd3f816e11f4640a9d3b15dbe6bbfb",
+    "semantic_hash": ""
+  },
+  "app-elearning/content/labs/lab-125-power-bi-analisis-patrones-ia.md": {
+    "mtime": 1795111253.2212014,
+    "seen": 1795111629.1215081,
+    "ast_hash": "3cad1499bd14897cd7e80b171666feba",
     "semantic_hash": ""
   },
   "app-elearning/package-lock.json": {

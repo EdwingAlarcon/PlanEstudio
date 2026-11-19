@@ -133,6 +133,30 @@ describe("Power BI practice assets (SIT Ventas)", () => {
     }
   });
 
+  it("matches the figures quoted in LABs 126-127", () => {
+    const read = (slug: string) => fs.readFileSync(path.resolve(process.cwd(), "content", "labs", `${slug}.md`), "utf-8");
+    const p5 = (expected as unknown as Record<string, Record<string, unknown>>)["lab126a127"]!;
+    expect(p5["filasPuente"]).toBe(13);
+    expect(p5["rlsColombia2025"]).toBe(9208289);
+    const verComo = p5["verComo"] as Record<string, { ventas2025: number; objetivo2025: number }>;
+    expect(verComo["Natalia Vargas"]).toMatchObject({ ventas2025: 9208289, objetivo2025: 8689000 });
+    expect(verComo["Camila Restrepo"]).toMatchObject({ ventas2025: 4303248.2, objetivo2025: 3896000 });
+    expect(verComo["correo desconocido"]!.ventas2025).toBe(0);
+    const lab126 = read("lab-126-power-bi-servicio-y-seguridad");
+    for (const figure of ["**9.208.289,00**", "**5.736.172,90**", "**4.303.248,20**", "**2.279.734,90**", "8.689.000"]) {
+      expect(lab126).toContain(figure);
+    }
+    const reto = p5["reto127"] as Record<string, number>;
+    expect(reto["ventasServicios2025"]).toBe(5941370);
+    expect(reto["diasPromedioEntregaServicios2025"]).toBe(25.64);
+    expect(reto["pctServiciosEn30Dias2025"]).toBe(67.49);
+    expect(reto["carteraServicios20251231"]).toBe(507165);
+    const lab127 = read("lab-127-power-bi-reto-pro-sin-pasos");
+    for (const figure of ["**5.941.370,00**", "**25,64**", "**67,49 %**", "**507.165,00**", "**5.297.782,50**"]) {
+      expect(lab127).toContain(figure);
+    }
+  });
+
   it("matches the figures quoted in LAB-116", () => {
     const lab = fs.readFileSync(lab116, "utf-8");
     expect(lab).toContain("20.840.961,90");
