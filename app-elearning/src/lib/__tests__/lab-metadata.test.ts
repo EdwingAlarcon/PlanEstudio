@@ -129,9 +129,9 @@ describe("lab domain classification", () => {
 });
 
 describe("lab readiness (Sprint 1 — auditoría tenant-real)", () => {
-  it("gives every one of the 88 labs a non-empty execution status and evidence", () => {
+  it("gives every one of the 89 labs a non-empty execution status and evidence", () => {
     const labs = getAllLabs();
-    expect(labs.length).toBe(88);
+    expect(labs.length).toBe(89);
 
     for (const lab of labs) {
       const readiness = getLabReadiness(lab);
@@ -204,7 +204,7 @@ describe("labs opcionales", () => {
     const basicLabSlugs = getLabsForLevel("basico").map((item) => item.slug);
     expect(basicLabSlugs).not.toContain("lab-06-power-bi-reporte-solicitudes");
     expect(basicLabSlugs).toContain("lab-02-dataverse-modelo-datos");
-    // Opcionales: LAB-006 y los labs de la Ruta Pro Power BI (116+), que son especialización y no cuentan para ningún nivel.
+    // Opcionales: LAB-006 y los labs de las Rutas Pro (Power BI 116-127, Power Automate 128+), que son especialización y no cuentan para ningún nivel.
     expect(getAllLabs().filter((item) => item.optional).map((item) => item.slug)).toEqual([
       "lab-06-power-bi-reporte-solicitudes",
       "lab-116-power-bi-en-un-dia",
@@ -219,6 +219,7 @@ describe("labs opcionales", () => {
       "lab-125-power-bi-analisis-patrones-ia",
       "lab-126-power-bi-servicio-y-seguridad",
       "lab-127-power-bi-reto-pro-sin-pasos",
+      "lab-128-power-automate-en-un-dia",
     ]);
   });
 });

@@ -11,6 +11,7 @@ export type ProfessionalRouteSlug =
   | "rpa"
   | "fundamentos-power-platform"
   | "power-bi-pro"
+  | "power-automate-pro"
   | "dynamics-365-sales"
   | "dynamics-365-customer-service"
   | "dynamics-365-customer-insights-data"
@@ -431,6 +432,27 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "Hallazgos de Analyze, Key influencers y pronóstico, cada uno con su juicio crítico (LAB-125)",
       "Dashboard con alerta y RLS dinámica probada con View as para varios usuarios (LAB-126)",
       "Reto Pro: reporte de la Gerencia de Servicios publicado y protegido, con documento de decisiones y rúbrica (LAB-127)",
+    ],
+  },
+  {
+    slug: "power-automate-pro",
+    title: "Ruta Pro Power Automate",
+    role: "Desarrollador de Power Automate que diseña, despliega y opera flujos de nube",
+    summary: "Escalera de labs prácticos sobre un proceso real (SIT Compras: de la solicitud de compra al pago): disparadores, expresiones, aprobaciones, Dataverse, errores, APIs, documentos, ALM, operación y rendimiento.",
+    outcome: "Construir flujos de nube que aplican reglas de negocio, no fallan en silencio, se despliegan en soluciones y otra persona puede operar.",
+    level: "Especialización",
+    accent: "#0F6CBD",
+    modules: [5, 11, 14],
+    labs: ["lab-128-power-automate-en-un-dia"],
+    competencies: ["Flujos de nube", "Aprobaciones", "Dataverse en flujos", "Expresiones", "Manejo de errores", "ALM de flujos"],
+    status: "Especialización en construcción",
+    // Provisional: el capstone será el LAB-139 (reto Pro sin pasos) cuando exista.
+    capstoneLabSlug: "lab-128-power-automate-en-un-dia",
+    gapNote: "Disponible el lab 128 (Power Automate en un día). Los labs 129 a 139 se publican por fases. Dataverse y HTTP son conectores premium: el alumno puede iniciar una prueba de Power Automate de 90 días; la prueba no incluye créditos de AI Builder, que en la ruta es una variante opcional.",
+    portfolioEvidence: [
+      "Solución SIT Compras con la tabla Solicitud de compra y los tres flujos (LAB-128)",
+      "Los cuatro casos de prueba con sus niveles de aprobación y el resumen diario por correo (LAB-128)",
+      "Historial de ejecuciones con una ejecución reenviada y la explicación de su efecto (LAB-128)",
     ],
   },
   {

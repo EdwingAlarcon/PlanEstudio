@@ -1,0 +1,206 @@
+{
+  "@odata.count": 41,
+  "value": [
+    {
+      "CatalogoID": "CAT-021",
+      "Nombre": "Diseño gráfico (pieza)",
+      "Categoria": "Servicios profesionales",
+      "PrecioUSD": 180,
+      "Unidad": "pieza",
+      "ProveedorID": "PRV-010",
+      "Activo": true,
+      "ActualizadoEl": "2026-01-23"
+    },
+    {
+      "CatalogoID": "CAT-022",
+      "Nombre": "Traducción técnica (página)",
+      "Categoria": "Servicios profesionales",
+      "PrecioUSD": 25,
+      "Unidad": "página",
+      "ProveedorID": "PRV-008",
+      "Activo": true,
+      "ActualizadoEl": "2026-02-04"
+    },
+    {
+      "CatalogoID": "CAT-023",
+      "Nombre": "Estudio de mercado",
+      "Categoria": "Servicios profesionales",
+      "PrecioUSD": 18500,
+      "Unidad": "paquete",
+      "ProveedorID": "PRV-008",
+      "Activo": true,
+      "ActualizadoEl": "2026-08-22"
+    },
+    {
+      "CatalogoID": "CAT-024",
+      "Nombre": "Curso de liderazgo (persona)",
+      "Categoria": "Capacitación",
+      "PrecioUSD": 450,
+      "Unidad": "persona",
+      "ProveedorID": "PRV-011",
+      "Activo": true,
+      "ActualizadoEl": "2026-05-05"
+    },
+    {
+      "CatalogoID": "CAT-025",
+      "Nombre": "Taller de seguridad digital (grupo)",
+      "Categoria": "Capacitación",
+      "PrecioUSD": 2200,
+      "Unidad": "grupo",
+      "ProveedorID": "PRV-012",
+      "Activo": true,
+      "ActualizadoEl": "2026-07-02"
+    },
+    {
+      "CatalogoID": "CAT-026",
+      "Nombre": "Certificación en la nube (persona)",
+      "Categoria": "Capacitación",
+      "PrecioUSD": 320,
+      "Unidad": "persona",
+      "ProveedorID": "PRV-011",
+      "Activo": true,
+      "ActualizadoEl": "2026-03-07"
+    },
+    {
+      "CatalogoID": "CAT-027",
+      "Nombre": "Curso de Excel avanzado (persona)",
+      "Categoria": "Capacitación",
+      "PrecioUSD": 150,
+      "Unidad": "persona",
+      "ProveedorID": "PRV-011",
+      "Activo": true,
+      "ActualizadoEl": "2026-02-06"
+    },
+    {
+      "CatalogoID": "CAT-028",
+      "Nombre": "Programa de inglés (persona, trimestre)",
+      "Categoria": "Capacitación",
+      "PrecioUSD": 380,
+      "Unidad": "persona",
+      "ProveedorID": "PRV-011",
+      "Activo": true,
+      "ActualizadoEl": "2026-10-25"
+    },
+    {
+      "CatalogoID": "CAT-029",
+      "Nombre": "Tiquete nacional",
+      "Categoria": "Viajes",
+      "PrecioUSD": 240,
+      "Unidad": "tiquete",
+      "ProveedorID": "PRV-013",
+      "Activo": true,
+      "ActualizadoEl": "2026-06-14"
+    },
+    {
+      "CatalogoID": "CAT-030",
+      "Nombre": "Tiquete internacional",
+      "Categoria": "Viajes",
+      "PrecioUSD": 980,
+      "Unidad": "tiquete",
+      "ProveedorID": "PRV-013",
+      "Activo": true,
+      "ActualizadoEl": "2026-03-19"
+    },
+    {
+      "CatalogoID": "CAT-031",
+      "Nombre": "Noche de hotel",
+      "Categoria": "Viajes",
+      "PrecioUSD": 130,
+      "Unidad": "noche",
+      "ProveedorID": "PRV-013",
+      "Activo": true,
+      "ActualizadoEl": "2026-03-13"
+    },
+    {
+      "CatalogoID": "CAT-032",
+      "Nombre": "Viáticos (día)",
+      "Categoria": "Viajes",
+      "PrecioUSD": 60,
+      "Unidad": "día",
+      "ProveedorID": "PRV-013",
+      "Activo": true,
+      "ActualizadoEl": "2026-04-26"
+    },
+    {
+      "CatalogoID": "CAT-033",
+      "Nombre": "Alquiler de vehículo (día)",
+      "Categoria": "Viajes",
+      "PrecioUSD": 75,
+      "Unidad": "día",
+      "ProveedorID": "PRV-014",
+      "Activo": true,
+      "ActualizadoEl": "2026-05-05"
+    },
+    {
+      "CatalogoID": "CAT-034",
+      "Nombre": "Resma de papel",
+      "Categoria": "Papelería",
+      "PrecioUSD": 6,
+      "Unidad": "resma",
+      "ProveedorID": "PRV-017",
+      "Activo": true,
+      "ActualizadoEl": "2026-10-27"
+    },
+    {
+      "CatalogoID": "CAT-035",
+      "Nombre": "Caja de bolígrafos",
+      "Categoria": "Papelería",
+      "PrecioUSD": 9,
+      "Unidad": "caja",
+      "ProveedorID": "PRV-016",
+      "Activo": true,
+      "ActualizadoEl": "2026-02-25"
+    },
+    {
+      "CatalogoID": "CAT-036",
+      "Nombre": "Cuaderno corporativo",
+      "Categoria": "Papelería",
+      "PrecioUSD": 7,
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-017",
+      "Activo": true,
+      "ActualizadoEl": "2026-04-15"
+    },
+    {
+      "CatalogoID": "CAT-037",
+      "Nombre": "Tóner de impresora",
+      "Categoria": "Papelería",
+      "PrecioUSD": 95,
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-015",
+      "Activo": true,
+      "ActualizadoEl": "2026-02-14"
+    },
+    {
+      "CatalogoID": "CAT-038",
+      "Nombre": "Carpeta de presentación",
+      "Categoria": "Papelería",
+      "PrecioUSD": 3,
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-016",
+      "Activo": true,
+      "ActualizadoEl": "2026-03-26"
+    },
+    {
+      "CatalogoID": "CAT-039",
+      "Nombre": "Caja de grapas",
+      "Categoria": "Papelería",
+      "PrecioUSD": 2,
+      "Unidad": "caja",
+      "ProveedorID": "PRV-017",
+      "Activo": true,
+      "ActualizadoEl": "2026-08-28"
+    },
+    {
+      "CatalogoID": "CAT-040",
+      "Nombre": "Marcadores de pizarra",
+      "Categoria": "Papelería",
+      "PrecioUSD": 8,
+      "Unidad": "caja",
+      "ProveedorID": "PRV-016",
+      "Activo": true,
+      "ActualizadoEl": "2026-07-25"
+    }
+  ],
+  "@odata.nextLink": "https://planestudio.vercel.app/practice-assets/powerautomate/sit-compras/catalogo/pagina-3.json"
+}

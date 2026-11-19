@@ -65,9 +65,9 @@
     "semantic_hash": ""
   },
   "app-elearning/package.json": {
-    "mtime": 1795045710.7578447,
-    "seen": 1795048675.2573073,
-    "ast_hash": "1d726959522585d798577da02fda7300",
+    "mtime": 1795116299.3433833,
+    "seen": 1795117268.052246,
+    "ast_hash": "8511c2e81c11a6817b370c648c65dc67",
     "semantic_hash": ""
   },
   "app-elearning/playwright.config.ts": {
@@ -767,9 +767,9 @@
     "semantic_hash": ""
   },
   "app-elearning/src/lib/__tests__/lab-metadata.test.ts": {
-    "mtime": 1795114442.386744,
-    "seen": 1795115304.605226,
-    "ast_hash": "69482b11f43d5269c7607cf9bef11042",
+    "mtime": 1795116524.2820568,
+    "seen": 1795117268.0862958,
+    "ast_hash": "8fb102d05e5bc2f7c940dd8b3e0dfd49",
     "semantic_hash": ""
   },
   "app-elearning/src/lib/__tests__/labor-profiles.test.ts": {
@@ -797,9 +797,9 @@
     "semantic_hash": ""
   },
   "app-elearning/src/lib/__tests__/professional-routes.test.ts": {
-    "mtime": 1795045739.9422965,
-    "seen": 1795048675.2898064,
-    "ast_hash": "f5f4774c1998ae82394e9e88be4c7bab",
+    "mtime": 1795116491.9295437,
+    "seen": 1795117268.0882971,
+    "ast_hash": "b062aea2490dde5659570e7d2d3b88e5",
     "semantic_hash": ""
   },
   "app-elearning/src/lib/__tests__/progress.test.ts": {
@@ -977,9 +977,9 @@
     "semantic_hash": "a304ed485200d2904048de9d670703b0"
   },
   "app-elearning/src/lib/professional-routes.ts": {
-    "mtime": 1795114883.1724918,
-    "seen": 1795115304.6158257,
-    "ast_hash": "8a19a21f65f6087527ea94d0caf37f2f",
+    "mtime": 1795116524.2810571,
+    "seen": 1795117268.098308,
+    "ast_hash": "17b7ccda14eb4cc593fd5b3e6acb9fda",
     "semantic_hash": ""
   },
   "app-elearning/src/lib/progress.ts": {
@@ -1133,9 +1133,9 @@
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1795114442.38825,
-    "seen": 1795115304.6218324,
-    "ast_hash": "a852c4b3c38a9293ab0a4ffb62565e94",
+    "mtime": 1795116561.4358954,
+    "seen": 1795117268.1092315,
+    "ast_hash": "57d58b2fa338555f623f29220ef12f4a",
     "semantic_hash": ""
   },
   "DESIGN.md": {
@@ -1157,9 +1157,9 @@
     "semantic_hash": ""
   },
   "SPRINT_HANDOFF.md": {
-    "mtime": 1795114915.9116578,
-    "seen": 1795115304.6218324,
-    "ast_hash": "0df14469f5e4bbd26906c841334bb4f5",
+    "mtime": 1795116561.4408975,
+    "seen": 1795117268.1107306,
+    "ast_hash": "56dff6ecbbfc62a602957e81ec629fc3",
     "semantic_hash": ""
   },
   "app-elearning/content/labs/lab-02-dataverse-modelo-datos.md": {
@@ -3076,9 +3076,9 @@
     "semantic_hash": ""
   },
   "PROPUESTA_FASES_APRENDER_HACIENDO.md": {
-    "mtime": 1795114915.9116578,
-    "seen": 1795115304.6218324,
-    "ast_hash": "f703b18461d89732cf1266a627e026c3",
+    "mtime": 1795116772.312628,
+    "seen": 1795117268.1107306,
+    "ast_hash": "3dd3a683d8a895ededacc689bc94225f",
     "semantic_hash": ""
   },
   "app-elearning/content/labs/lab-06-power-bi-reporte-solicitudes.md": {
@@ -3226,20 +3226,20 @@
     "semantic_hash": ""
   },
   "app-elearning/public/practice-assets/powerbi/sit-ventas/expected/metricas-esperadas.json": {
-    "mtime": 1795114241.1970847,
-    "seen": 1795115304.578311,
+    "mtime": 1795116206.0859065,
+    "seen": 1795117268.0527465,
     "ast_hash": "f31de99eda48e4dc28adf70e6cb65002",
     "semantic_hash": ""
   },
   "app-elearning/public/practice-assets/powerbi/sit-ventas/manifest.json": {
-    "mtime": 1795114241.1980846,
-    "seen": 1795115304.578311,
+    "mtime": 1795116206.0879064,
+    "seen": 1795117268.0527465,
     "ast_hash": "5097abaf9fa871140617b1491a709d88",
     "semantic_hash": ""
   },
   "app-elearning/public/practice-assets/powerbi/sit-ventas/tipos-cambio.json": {
-    "mtime": 1795114241.1786861,
-    "seen": 1795115304.578311,
+    "mtime": 1795116206.0677986,
+    "seen": 1795117268.0527465,
     "ast_hash": "8fff6785e5aeccb96e0ea78ffd995b5e",
     "semantic_hash": ""
   },
@@ -3250,9 +3250,9 @@
     "semantic_hash": ""
   },
   "app-elearning/scripts/lib/zip-xlsx.mjs": {
-    "mtime": 1795045021.2531097,
-    "seen": 1795048675.2608137,
-    "ast_hash": "bf9be8e82d6d6e42a491f345b26be17e",
+    "mtime": 1795116205.268041,
+    "seen": 1795117268.055246,
+    "ast_hash": "aa5aca044657ce3072fb50674a1c3840",
     "semantic_hash": ""
   },
   "app-elearning/src/app/recursos/page.tsx": {
@@ -3358,8 +3358,8 @@
     "semantic_hash": ""
   },
   "app-elearning/public/practice-assets/powerbi/sit-ventas/README.md": {
-    "mtime": 1795114241.1980846,
-    "seen": 1795115304.657787,
+    "mtime": 1795116206.086907,
+    "seen": 1795117268.1528769,
     "ast_hash": "15bbb71a85c63a02ca0b197446c93f6a",
     "semantic_hash": ""
   },
@@ -3415,6 +3415,66 @@
     "mtime": 1795114737.2752285,
     "seen": 1795115304.6278884,
     "ast_hash": "d1dee5c073118618ea9d526b3403d4b5",
+    "semantic_hash": ""
+  },
+  "app-elearning/public/practice-assets/powerautomate/sit-compras/catalogo/pagina-1.json": {
+    "mtime": 1795116300.164407,
+    "seen": 1795117268.0527465,
+    "ast_hash": "d67a0c0e52621a9b8f4b5161cc618878",
+    "semantic_hash": ""
+  },
+  "app-elearning/public/practice-assets/powerautomate/sit-compras/catalogo/pagina-2.json": {
+    "mtime": 1795116300.164407,
+    "seen": 1795117268.0527465,
+    "ast_hash": "be5fde7e3d3076d57206c847054e76ce",
+    "semantic_hash": ""
+  },
+  "app-elearning/public/practice-assets/powerautomate/sit-compras/catalogo/pagina-3.json": {
+    "mtime": 1795116300.1654077,
+    "seen": 1795117268.0527465,
+    "ast_hash": "5e1398d06ae29f110f4a490710db7bed",
+    "semantic_hash": ""
+  },
+  "app-elearning/public/practice-assets/powerautomate/sit-compras/expected/cifras-esperadas.json": {
+    "mtime": 1795116300.166407,
+    "seen": 1795117268.0527465,
+    "ast_hash": "492785109a55d015d8a9dde26b5c239f",
+    "semantic_hash": ""
+  },
+  "app-elearning/public/practice-assets/powerautomate/sit-compras/manifest.json": {
+    "mtime": 1795116300.1674087,
+    "seen": 1795117268.0527465,
+    "ast_hash": "31164eda7756bde2c182909e49e68d61",
+    "semantic_hash": ""
+  },
+  "app-elearning/public/practice-assets/powerautomate/sit-compras/politica-aprobacion.json": {
+    "mtime": 1795116300.1523442,
+    "seen": 1795117268.0527465,
+    "ast_hash": "80b4c48504133a55e37b51ba59e89b91",
+    "semantic_hash": ""
+  },
+  "app-elearning/scripts/generate-powerautomate-assets.mjs": {
+    "mtime": 1795116298.128015,
+    "seen": 1795117268.0547462,
+    "ast_hash": "9f4c35f411a47292c717dceb47d871ba",
+    "semantic_hash": ""
+  },
+  "app-elearning/src/lib/__tests__/powerautomate-assets.test.ts": {
+    "mtime": 1795116754.3491492,
+    "seen": 1795117268.0872982,
+    "ast_hash": "fbdd73dc8e9029b63930c40eddcdb3c5",
+    "semantic_hash": ""
+  },
+  "app-elearning/content/labs/lab-128-power-automate-en-un-dia.md": {
+    "mtime": 1795116754.298196,
+    "seen": 1795117268.117237,
+    "ast_hash": "6576ef4d2568ae57bac3fd9cb22b2afe",
+    "semantic_hash": ""
+  },
+  "app-elearning/public/practice-assets/powerautomate/sit-compras/README.md": {
+    "mtime": 1795116300.1674087,
+    "seen": 1795117268.1528769,
+    "ast_hash": "070382eda3e3692cdffde1291ae06544",
     "semantic_hash": ""
   },
   "app-elearning/package-lock.json": {

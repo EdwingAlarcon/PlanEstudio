@@ -17,6 +17,7 @@ describe("professional routes", () => {
       "ai-copilot",
       "fundamentos-power-platform",
       "power-bi-pro",
+      "power-automate-pro",
       "dynamics-365-sales",
       "dynamics-365-customer-service",
       "dynamics-365-customer-insights-data",

@@ -1,0 +1,144 @@
+{
+  "politica": {
+    "limitesUSD": [
+      1000,
+      10000
+    ],
+    "ejemplos": {
+      "1000": 1,
+      "10000": 2,
+      "1000.01": 2,
+      "10000.01": 3
+    }
+  },
+  "filas": {
+    "proveedores": 17,
+    "proveedoresActivos": 15,
+    "catalogo": 41,
+    "catalogoActivos": 40,
+    "paginasCatalogo": 3,
+    "solicitudes": 150
+  },
+  "lab128": {
+    "casos": [
+      {
+        "titulo": "Sillas ergonómicas para Servicios",
+        "categoria": "Mobiliario",
+        "cantidad": 4,
+        "precio": 210,
+        "importe": 840,
+        "nivel": 1
+      },
+      {
+        "titulo": "Reposición de tóner",
+        "categoria": "Papelería",
+        "cantidad": 10,
+        "precio": 100,
+        "importe": 1000,
+        "nivel": 1
+      },
+      {
+        "titulo": "Portátiles para nuevos analistas",
+        "categoria": "Tecnología",
+        "cantidad": 3,
+        "precio": 1400,
+        "importe": 4200,
+        "nivel": 2
+      },
+      {
+        "titulo": "Estudio de mercado regional",
+        "categoria": "Servicios profesionales",
+        "cantidad": 1,
+        "precio": 18500,
+        "importe": 18500,
+        "nivel": 3
+      }
+    ]
+  },
+  "solicitudes": {
+    "porEstado": {
+      "Aprobada": 130,
+      "Rechazada": 15,
+      "Pendiente": 5
+    },
+    "porNivel": {
+      "1": 52,
+      "2": 89,
+      "3": 9
+    },
+    "porCategoria": {
+      "Capacitación": 17,
+      "Viajes": 26,
+      "Tecnología": 29,
+      "Papelería": 36,
+      "Servicios profesionales": 22,
+      "Mobiliario": 20
+    },
+    "importeTotal": 472320,
+    "importeAprobado": 389662,
+    "importePendiente": 10997,
+    "pendientes": [
+      "SC-2026-0008",
+      "SC-2026-0100",
+      "SC-2026-0035",
+      "SC-2026-0114",
+      "SC-2026-0048"
+    ],
+    "tecnologiaNivel2o3": 21,
+    "suciedad": {
+      "fechaDMY": [
+        "SC-2026-0004",
+        "SC-2026-0094",
+        "SC-2026-0073",
+        "SC-2026-0107",
+        "SC-2026-0147",
+        "SC-2026-0082",
+        "SC-2026-0010",
+        "SC-2026-0020",
+        "SC-2026-0145",
+        "SC-2026-0126",
+        "SC-2026-0026",
+        "SC-2026-0091",
+        "SC-2026-0121",
+        "SC-2026-0116",
+        "SC-2026-0115",
+        "SC-2026-0122",
+        "SC-2026-0114"
+      ],
+      "precioTexto": [
+        "SC-2026-0019",
+        "SC-2026-0003",
+        "SC-2026-0042",
+        "SC-2026-0147",
+        "SC-2026-0112",
+        "SC-2026-0017",
+        "SC-2026-0080",
+        "SC-2026-0093",
+        "SC-2026-0143",
+        "SC-2026-0103",
+        "SC-2026-0092",
+        "SC-2026-0021",
+        "SC-2026-0122"
+      ],
+      "cantidadVacia": [
+        "SC-2026-0108",
+        "SC-2026-0133",
+        "SC-2026-0026",
+        "SC-2026-0074"
+      ],
+      "categoriaConEspacios": [
+        "SC-2026-0027",
+        "SC-2026-0073",
+        "SC-2026-0078",
+        "SC-2026-0053",
+        "SC-2026-0149",
+        "SC-2026-0005",
+        "SC-2026-0136",
+        "SC-2026-0150",
+        "SC-2026-0050",
+        "SC-2026-0102",
+        "SC-2026-0122"
+      ]
+    }
+  }
+}

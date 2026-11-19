@@ -122,6 +122,13 @@ dashboard, alerta, actualización programada con la decisión de puerta de enlac
 `VendedorRegion` desconectada y `USERPRINCIPALNAME`) y LAB-127 (reto Pro sin pasos de la Gerencia de Servicios, rúbrica por
 los cuatro dominios del PL-300). **La ruta `power-bi-pro` queda "Disponible" con capstone LAB-127.** Cifras en `lab126a127`.
 
+**Ruta Pro Power Automate (2026-11-19):** diseño en PROPUESTA §15.9 (caso SIT Compras, labs 128-139). **P1 hecha:** datos
+`public/practice-assets/powerautomate/sit-compras/` (`npm run generate:powerautomate-assets`; `buildXlsx` admite ahora
+`table` para crear tablas de Excel, que el conector de Excel exige; comprobado por COM), ruta `power-automate-pro`
+("Especialización en construcción", capstone provisional LAB-128) y **LAB-128** "Power Automate en un día". No hay
+credencial vigente de Power Automate (Applied Skills y PL-7002 dan 404): la ruta es competencia profesional. La prueba de
+Power Automate (90 días) no trae créditos de AI Builder.
+
 ## Mantenimiento vigente — 2026-11-11
 
 Revisión con seis sub-agentes, sin ampliar contenido ni cambiar conteos: (1) **pruebas simuladas** (modelos, no personas) y
@@ -228,7 +235,7 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 149 archivos **cerrados**; sin trabajo a medias.
 
 **Invariantes que no debes romper:**
-- Conteos vigentes: **76 módulos, 88 labs (trece opcionales: LAB-06 y los doce de la Ruta Pro Power BI 116-127), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
+- Conteos vigentes: **76 módulos, 89 labs (catorce opcionales: LAB-06, los doce de la Ruta Pro Power BI 116-127 y LAB-128 de la Ruta Pro Power Automate), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
   33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 239 prácticas interactivas
   y 41 páginas de recursos** (41 desde la guía de interfaz español/inglés del 2026-11-11; prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
   Doing de Módulos 11, 10 y 13, a 44 con los Módulos 1 a 8 de la Fase 2 a 62 con los Módulos 9, 12, 14-17 de la Fase 3, a 149 con las Fases 4, 5 y 6 recortada y a 239 con la Fase 7 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de

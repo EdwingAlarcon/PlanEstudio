@@ -83,21 +83,36 @@ function cellXml(value, ref) {
   return `<c r="${ref}" t="inlineStr"><is><t xml:space="preserve">${escapeXml(String(value))}</t></is></c>`;
 }
 
-function sheetXml(rows) {
+function sheetXml(rows, withTable = false) {
   const body = rows
     .map((row, r) => `<row r="${r + 1}">${row.map((value, c) => cellXml(value, `${columnName(c)}${r + 1}`)).join("")}</row>`)
     .join("");
-  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>${body}</sheetData></worksheet>`;
+  const tableParts = withTable ? `<tableParts count="1"><tablePart r:id="rId1"/></tableParts>` : "";
+  const rNs = withTable ? ` xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"` : "";
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"${rNs}><sheetData>${body}</sheetData>${tableParts}</worksheet>`;
+}
+
+// Tabla de Excel (ListObject) sobre todo el rango de la hoja: el conector de Excel de Power Automate solo lee tablas.
+function tableXml(id, name, rows) {
+  const width = rows[0].length;
+  const ref = `A1:${columnName(width - 1)}${rows.length}`;
+  const columns = rows[0].map((header, i) => `<tableColumn id="${i + 1}" name="${escapeXml(String(header))}"/>`).join("");
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><table xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" id="${id}" name="${escapeXml(name)}" displayName="${escapeXml(name)}" ref="${ref}" totalsRowShown="0"><autoFilter ref="${ref}"/><tableColumns count="${width}">${columns}</tableColumns><tableStyleInfo name="TableStyleMedium2" showFirstColumn="0" showLastColumn="0" showRowStripes="1" showColumnStripes="0"/></table>`;
 }
 
 /**
- * sheets: [{ name, rows: Array<Array<string|number|null>> }] (la primera fila es el encabezado).
- * Los números se escriben como celdas numéricas; el resto, como texto.
+ * sheets: [{ name, rows: Array<Array<string|number|null>>, table?: string }] (la primera fila es el encabezado).
+ * Los números se escriben como celdas numéricas; el resto, como texto. Con `table`, la hoja lleva una tabla de Excel
+ * con ese nombre sobre todo su rango.
  */
 export function buildXlsx(sheets) {
-  const overrides = sheets
-    .map((_, i) => `<Override PartName="/xl/worksheets/sheet${i + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`)
-    .join("");
+  const overrides =
+    sheets
+      .map((_, i) => `<Override PartName="/xl/worksheets/sheet${i + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`)
+      .join("") +
+    sheets
+      .map((s, i) => (s.table ? `<Override PartName="/xl/tables/table${i + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml"/>` : ""))
+      .join("");
   const sheetEntries = sheets.map((s, i) => `<sheet name="${escapeXml(s.name)}" sheetId="${i + 1}" r:id="rId${i + 1}"/>`).join("");
   const rels = sheets
     .map((_, i) => `<Relationship Id="rId${i + 1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i + 1}.xml"/>`)
@@ -119,7 +134,18 @@ export function buildXlsx(sheets) {
       name: "xl/_rels/workbook.xml.rels",
       content: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${rels}</Relationships>`,
     },
-    ...sheets.map((s, i) => ({ name: `xl/worksheets/sheet${i + 1}.xml`, content: sheetXml(s.rows) })),
+    ...sheets.map((s, i) => ({ name: `xl/worksheets/sheet${i + 1}.xml`, content: sheetXml(s.rows, Boolean(s.table)) })),
+    ...sheets.flatMap((s, i) =>
+      s.table
+        ? [
+            {
+              name: `xl/worksheets/_rels/sheet${i + 1}.xml.rels`,
+              content: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/table" Target="../tables/table${i + 1}.xml"/></Relationships>`,
+            },
+            { name: `xl/tables/table${i + 1}.xml`, content: tableXml(i + 1, s.table, s.rows) },
+          ]
+        : [],
+    ),
   ];
   return zipStore(files);
 }

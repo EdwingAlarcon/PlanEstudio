@@ -900,7 +900,7 @@ hasta tener los 12 labs. Conteos: labs 76 → 88 al terminar.
   tarjeta con formato de porcentaje se escribe 1 o 100 (el lab pide comprobarlo).
 - **Tiempo total de la ruta:** unas 42 h (suma de `duration` de los 12 labs).
 
-### 15.9 Ruta Pro Power Automate (cloud) — diseño (2026-11-19, pendiente de aprobar)
+### 15.9 Ruta Pro Power Automate (cloud) — diseño (aprobado por el usuario el 2026-11-19)
 
 **Qué ya existe y no se repite:** Módulo 5 (trigger, acciones, condiciones, flujo programado), Módulo 11 (Scope y Try/Catch,
 child flow, HTTP + Parse JSON + paginación, ramas paralelas), Módulo 14 (conectores personalizados), LAB-05 (notificación,
@@ -963,3 +963,30 @@ LAB-139 (capstone provisional: LAB-128). Labs opcionales, como los de Power BI. 
 **Verificación:** las cifras salen del generador. Los flujos no se pueden ejecutar desde este equipo (no hay acceso a un
 tenant): cada paso se contrasta con Learn y las expresiones se prueban reimplementando su lógica cuando sea posible; lo que no
 se pueda verificar se marca. Prueba simulada en cada fase, como en Power BI.
+
+### 15.10 Estado — Power Automate P1 hecha (2026-11-19)
+
+- **Datos SIT Compras** (`npm run generate:powerautomate-assets`, determinista): política de aprobación (umbrales 1.000 y 10.000
+  USD, límite incluido), 17 proveedores (2 inactivos), catálogo de 41 artículos en 3 páginas con `@odata.nextLink`, 150
+  solicitudes de 2026 en la tabla de Excel `Solicitudes` (17 fechas `dd/mm/yyyy`, 13 precios como texto, 4 cantidades vacías,
+  11 categorías con espacios). `buildXlsx` crea ahora tablas de Excel (`table`); Excel por COM abre los dos libros y reconoce
+  cada tabla con todas sus filas. Los `.xlsx` de Power BI no cambian byte a byte.
+- **LAB-128 Power Automate en un día**: solución `SIT Compras`, tabla `Solicitud de compra`, flujo instantáneo con listas
+  desplegables, flujo de aprobación (importe con `mul`, nivel con `lessOrEquals`, aprobación, actualización y correo), resumen
+  diario con `Select` y `Create HTML table`, historial y **Resubmit**. Casos de prueba con niveles 1, 1 (el límite de 1.000), 2 y 3.
+- **Decisiones:** `Área` y `Categoría` como texto en este lab (las entradas del flujo instantáneo son texto; traducir a
+  elección es del Lab 130); la importación de proveedores pasa al Lab 132 (upsert con clave alternativa); una sola aprobación,
+  aunque la política pida tres niveles (las cadenas son del Lab 131).
+- **Etiquetas verificadas en Learn:** las de soluciones, tablas y columnas, el disparador de Dataverse, **Start and wait for an
+  approval** y sus tipos, **Update a row**, **List rows**, **Create HTML table**, **Recurrence** (**Start time**, **Interval**,
+  **Frequency**), **28-day run history**, **Resubmit**, **Flow checker**, **fx**. **Sin verificar:** la opción de lista
+  desplegable de las entradas de texto, el nombre exacto de la salida **Outcome** en el diseñador nuevo y el botón de la prueba
+  de 90 días.
+- **Prueba simulada** (2026-11-19, 1 agente, persona "Mateo"; simulación, no una persona real): cifras correctas (niveles 1, 1,
+  2 y 3; una fila en el resumen). Corregido: el **Schema name** lleva mayúsculas y las expresiones usan el *logical name* en
+  minúsculas (bloqueante; el Módulo 2 ya lo enseñaba así); ejemplos de **Select columns** que no existirían con tildes; la
+  primera aprobación de un ambiente exige rol de administrador (Learn); **Responses comments** mete un **For each** automático
+  (se usa `first(...)`); asunto con `Approve`/`Reject` en inglés; **Details** es Markdown; formato de **Start time** y **At these
+  hours**; dos "Importe" en **Dynamic content** (las Compose pasan a `Calcular importe` y `Calcular nivel`); **Change type** =
+  **Added** no se redispara con las actualizaciones del flujo; elección con **Default choice**; tiempo realista de unas 5 h.
+

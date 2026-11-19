@@ -1,0 +1,18 @@
+{
+  "format": "planestudio-powerautomate-practice-assets",
+  "assetPackId": "sit-compras",
+  "version": "1.0.0",
+  "company": "Servicios Integrados Tecnológicos S.A.",
+  "files": [
+    "README.md",
+    "catalogo/pagina-1.json",
+    "catalogo/pagina-2.json",
+    "catalogo/pagina-3.json",
+    "expected/cifras-esperadas.json",
+    "politica-aprobacion.json",
+    "proveedores.csv",
+    "proveedores.xlsx",
+    "solicitudes-compra.xlsx"
+  ],
+  "bundle": "sit-compras.zip"
+}
