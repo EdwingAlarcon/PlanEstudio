@@ -2,7 +2,7 @@
 moduleId: 20
 title: "Dynamics 365 CE — Sales y Customer Service"
 level: "avanzado"
-certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
+certification: "AB-400 (sucesor de PL-400, retirado 30 oct 2026)"
 estimatedMinutes: 25
 practiceMinutes: 300
 slug: "dynamics-365-ce-sales-y-customer-service"

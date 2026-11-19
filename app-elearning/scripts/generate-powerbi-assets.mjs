@@ -364,7 +364,87 @@ const expected = {
   importeDic2025PorPedido: sumBy(ventas.filter((v) => v.fechaPedido.startsWith("2025-12"))),
   importeDic2025PorEntrega: sumBy(ventas.filter((v) => v.fechaEntrega.startsWith("2025-12"))),
   importeSinFechaEntrega: sumBy(ventas.filter((v) => !v.fechaEntrega)),
+  // Labs 120-122 (DAX). Todo por fecha de pedido salvo que se diga otra cosa.
+  lab120: lab120Metrics(),
+  lab121: lab121Metrics(),
 };
+
+function median(values) {
+  const s = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(s.length / 2);
+  return s.length % 2 ? s[mid] : round2((s[mid - 1] + s[mid]) / 2);
+}
+// Cartera pendiente de entrega al cierre de un día: pedida hasta ese día y entregada después (o aún sin entregar).
+function cartera(fin) {
+  return sumBy(ventas.filter((v) => v.fechaPedido <= fin && (!v.fechaEntrega || v.fechaEntrega > fin)));
+}
+function lab120Metrics() {
+  const total = sumBy(v2025);
+  const pedidos = new Set(v2025.map((v) => v.pedido)).size;
+  const porVendedor = {};
+  for (const v of v2025) {
+    const nombre = vendedores.find((x) => x.id === v.vendedorId).nombre;
+    porVendedor[nombre] = porVendedor[nombre] ?? { ventas: 0, pedidos: new Set(), clientes: new Set() };
+    porVendedor[nombre].ventas += importe(v);
+    porVendedor[nombre].pedidos.add(v.pedido);
+    porVendedor[nombre].clientes.add(v.clienteId);
+  }
+  return {
+    ticketPromedio2025: round2(total / pedidos),
+    clientesActivos2025: new Set(v2025.map((v) => v.clienteId)).size,
+    lineas2025: v2025.length,
+    promedioImporteLinea2025: round2(total / v2025.length),
+    medianaImporteLinea2025: median(v2025.map(importe)),
+    maxImporteLinea2025: Math.max(...v2025.map(importe)),
+    pctLicencias2025: Math.round((catTotals.Licencias / total) * 10000) / 100,
+    ticketPorVendedor2025: Object.fromEntries(
+      Object.entries(porVendedor).map(([k, x]) => [k, round2(round2(x.ventas) / x.pedidos.size)]),
+    ),
+    clientesPorVendedor2025: Object.fromEntries(Object.entries(porVendedor).map(([k, x]) => [k, x.clientes.size])),
+    carteraPendiente: Object.fromEntries(
+      ["2024-12-31", "2025-06-30", "2025-11-30", "2025-12-31", "2026-06-30", "2026-10-31", "2026-12-31"].map((d) => [d, cartera(d)]),
+    ),
+    // Suma (incorrecta) de las 12 carteras de fin de mes de 2025: lo que daría un SUM en vez de una semiaditiva.
+    sumaCarterasFinDeMes2025: round2(
+      Array.from({ length: 12 }, (_, i) => cartera(iso(new Date(Date.UTC(2025, i + 1, 0))))).reduce((a, b) => a + b, 0),
+    ),
+  };
+}
+function lab121Metrics() {
+  const mes = (y, m) => sumBy(ventas.filter((v) => v.year === y && v.month === m));
+  const hasta = (y, m) => sumBy(ventas.filter((v) => v.year === y && v.month <= m));
+  const pedidosHasta = (y, m) => new Set(ventas.filter((v) => v.year === y && v.month <= m).map((v) => v.pedido)).size;
+  const colombia = ["Andina", "Antioquia", "Caribe"];
+  const totalColombia2025 = round2(colombia.reduce((s, r) => s + regionTotals2025[r], 0));
+  const porCliente = {};
+  for (const v of ventas) porCliente[v.clienteId] = (porCliente[v.clienteId] ?? 0) + importe(v);
+  const clientesConVentas = Object.keys(porCliente).length;
+  return {
+    ventasMar2025: mes(2025, 3),
+    ventasMar2026: mes(2026, 3),
+    ytdMar2025: hasta(2025, 3),
+    ytdOct2025: hasta(2025, 10),
+    ytdOct2026: hasta(2026, 10),
+    pedidosYtdOct2025: pedidosHasta(2025, 10),
+    pedidosYtdOct2026: pedidosHasta(2026, 10),
+    ventasOctNovDic2025: round2(mes(2025, 10) + mes(2025, 11) + mes(2025, 12)),
+    ventasDic2025: mes(2025, 12),
+    crecimientoIngenuo2026: Math.round((sumBy(byYear[2026]) / sumBy(byYear[2025]) - 1) * 10000) / 100,
+    crecimientoComparable2026: Math.round((hasta(2026, 10) / hasta(2025, 10) - 1) * 10000) / 100,
+    crecimiento2025: Math.round((sumBy(byYear[2025]) / sumBy(byYear[2024]) - 1) * 10000) / 100,
+    pctAntioquiaSobreTodo2025: Math.round((regionTotals2025.Antioquia / sumBy(v2025)) * 10000) / 100,
+    pctAntioquiaSobreColombia2025: Math.round((regionTotals2025.Antioquia / totalColombia2025) * 10000) / 100,
+    totalColombia2025,
+    clientesConVentas,
+    clientesSinVentas: clientes.length - clientesConVentas,
+    // Columna calculada en Clientes con transición de contexto: segmentos A (>= 500.000), B (>= 200.000) y C.
+    clientesSegmentoA: Object.values(porCliente).filter((x) => round2(x) >= 500000).length,
+    clientesSegmentoB: Object.values(porCliente).filter((x) => round2(x) >= 200000 && round2(x) < 500000).length,
+    clientesSegmentoC: Object.values(porCliente).filter((x) => round2(x) < 200000).length,
+    maxVentasCliente: round2(Math.max(...Object.values(porCliente))),
+    mejorCliente: clientes.find((c) => round2(porCliente[c.id]) === round2(Math.max(...Object.values(porCliente)))).nombre,
+  };
+}
 write("expected/metricas-esperadas.json", JSON.stringify(expected, null, 2) + "\n");
 
 write(

@@ -22,6 +22,7 @@ Usar las capacidades de Copilot integradas en Power Apps (Canvas, Model-Driven y
 
 ### 🔧 Qué queda para después (Profundización opcional)
 - **La fórmula en Power Apps Studio** (al final de la Microlección 2): pegar la salida generada en tu app, probar **Explain this formula** y, si tu entorno la ofrece, **Create a formula**, que está en preview. La actividad de fallo y corrección de esa microlección se hace sin tenant y es la que piden los Criterios de Validación; esta práctica la confirma en tu entorno y puede esperar a una segunda pasada.
+- **Microlección 4, páginas generativas y model app-builder skill:** son funciones en preview con disponibilidad regional (en el navegador, solo Estados Unidos, Reino Unido, Australia y Singapur). Se muestra plegada y sus dos criterios son opcionales; la gobernanza de la Microlección 5 y el reto no dependen de ella.
 
 ---
 
@@ -199,7 +200,7 @@ Filter(
 
 ---
 
-## 🧩 Microlección 4 — Páginas generativas y el model app-builder skill (Model-Driven)
+## 🧩 Microlección 4 (opcional: funciones en preview) — Páginas generativas y el model app-builder skill (Model-Driven)
 
 **¿Qué vas a aprender?** Qué genera una página generativa, dónde está disponible y en qué se diferencia del *model app-builder skill*, que construye una app completa.
 
@@ -340,7 +341,7 @@ Un consultor de SIT necesitaba un dashboard de seguimiento de inspecciones para 
 - [ ] Genero un flujo con **Create with Copilot**, anoto el trigger y las acciones exactas que propuso y lo pruebo con y sin usuario asignado
 - [ ] Corrijo el flujo con una **Condition** para el dato vacío y un Scope Try/Catch con **Run after**, y muestro la ejecución antes y después
 - [ ] Diagnostico el síntoma de la práctica "el flujo generado falla sin avisar" antes de ver la solución
-- [ ] Genero una página generativa y documento cómo compara la prioridad el código y qué marcó el Accessibility assistant, o (sin región compatible) comparo las etapas del model app-builder skill con la construcción manual
-- [ ] Explico la diferencia entre una página generativa (una página) y el model app-builder skill (una app completa con su modelo de datos)
+- [ ] *(Opcional, Microlección 4)* Genero una página generativa y documento cómo compara la prioridad el código y qué marcó el Accessibility assistant, o (sin región compatible) comparo las etapas del model app-builder skill con la construcción manual
+- [ ] *(Opcional, Microlección 4)* Explico la diferencia entre una página generativa (una página) y el model app-builder skill (una app completa con su modelo de datos)
 - [ ] Documento la configuración de Copilot de mi entorno (región, **Move data across regions**, interruptor de preview) y nombro una función que no se apaga desde el Admin Center, con su fuente
 - [ ] Entrego la decisión del reto de RR.HH. con su rúbrica completa y cada afirmación verificada contra Learn

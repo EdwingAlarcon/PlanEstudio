@@ -1,6 +1,6 @@
 # Guía de Certificaciones y Competencias Profesionales
 
-**Última revisión:** 1 de septiembre de 2026
+**Última revisión:** 19 de noviembre de 2026 (tabla de exámenes retirados de Learn, verificada el 18 de noviembre de 2026)
 **Alcance:** Power Platform, Dynamics 365 Customer Engagement y Finance & Operations archivado/futura especialización.
 **Principio rector:** una certificación retirada no invalida la competencia profesional asociada, pero no debe presentarse como examen vigente ni como objetivo agendable.
 
@@ -15,7 +15,7 @@ La ruta recomendada queda así:
 ```text
 PL-900 vigente
   → Consultor Funcional Power Platform como competencia profesional (PL-200 retirado el 31 ago 2026)
-  → PL-400 vigente
+  → AB-400 vigente (sucesor de PL-400, retirado el 30 oct 2026; misma credencial Power Platform Developer Associate)
   → Arquitectura Power Platform como competencia profesional
   → Especializaciones Dynamics 365 vigentes según rol
 ```
@@ -30,7 +30,10 @@ El Nivel 4 del plan deja de ser una ruta de examen PL-600 y pasa a ser una ruta 
 |---|---|---|---|
 | PL-900 | Microsoft Certified: Power Platform Fundamentals | Vigente. Microsoft anuncia actualización del examen en inglés el 24 jul 2026. | Mantener como objetivo del Nivel 1. |
 | PL-200 | Exam PL-200: Microsoft Power Platform Functional Consultant | Retirado el 31 ago 2026. | Mantener competencias del Nivel 2; no presentarlo como examen agendable. |
-| PL-400 | Microsoft Certified: Power Platform Developer Associate | Vigente. | Mantener como objetivo del Nivel 3. |
+| PL-400 | Exam PL-400: Microsoft Power Platform Developer | Retirado el 30 oct 2026. Sucesor: AB-400. | No presentarlo como examen agendable. |
+| AB-400 | Extending Microsoft Power Platform Solutions with Code and AI (credencial Microsoft Certified: Power Platform Developer Associate) | Vigente. Sustituye a PL-400. | Objetivo del Nivel 3. Cubre además IA en el desarrollo: complementar con el Nivel IA. |
+| AB-410 | Building Intelligent Applications (Intelligent Applications Builder Associate) | Vigente. Learn no lo presenta como sucesor de PL-200, aunque cubre buena parte de su terreno más prompts y AI Hub. | Referencia opcional para quien termina el Nivel 2 y el Nivel IA; no se etiqueta como examen del Nivel 2. |
+| PL-300 | Microsoft Power BI Data Analyst | Vigente. | Objetivo de la Ruta Pro Power BI (labs 116 en adelante). |
 | PL-600 | Exam PL-600: Microsoft Power Platform Solution Architect | Retirado el 30 jun 2026. | No presentarlo como certificación vigente. Reubicar como competencia de arquitectura profesional. |
 | MB-210 | Dynamics 365 Sales Functional Consultant | Retirado el 30 nov 2024. | Mantener Sales como especialización funcional, no como examen. |
 | MB-220 | Dynamics 365 Customer Insights (Journeys) Functional Consultant | Retirado el 30 nov 2024. | Mantener Customer Insights como competencia de marketing/journeys, no como examen. |
@@ -47,7 +50,8 @@ Fuentes oficiales Microsoft Learn:
 
 - [PL-900 Power Platform Fundamentals](https://learn.microsoft.com/en-us/credentials/certifications/power-platform-fundamentals/)
 - [PL-200 Power Platform Functional Consultant](https://learn.microsoft.com/en-us/credentials/certifications/exams/pl-200/)
-- [PL-400 Power Platform Developer Associate](https://learn.microsoft.com/en-us/credentials/certifications/power-platform-developer-associate/)
+- [Power Platform Developer Associate (AB-400)](https://learn.microsoft.com/en-us/credentials/certifications/power-platform-developer-associate/)
+- [Exámenes retirados](https://learn.microsoft.com/en-us/credentials/retired-certification-exams)
 - [PL-600 Power Platform Solution Architect](https://learn.microsoft.com/en-us/credentials/certifications/exams/pl-600/)
 - [MB-210 Dynamics 365 Sales](https://learn.microsoft.com/en-us/credentials/certifications/exams/mb-210/)
 - [MB-220 Customer Insights - Journeys](https://learn.microsoft.com/en-us/credentials/certifications/exams/mb-220/)
@@ -106,9 +110,9 @@ Acción recomendada:
 - Reetiquetar la ruta como **Consultor Funcional Power Platform**.
 - Usar PL-200 solo como referencia histórica de dominios, no como certificación vigente.
 
-### PL-400 — Power Platform Developer Associate
+### AB-400 (antes PL-400) — Power Platform Developer Associate
 
-**Ubicación en PlanEstudio:** Nivel 3 — Avanzado.  
+**Ubicación en PlanEstudio:** Nivel 3 — Avanzado. PL-400 se retiró el 30 oct 2026; AB-400 otorga la misma credencial.  
 **Rol asociado:** developer Power Platform, consultor técnico, integrador.
 
 Competencias evaluadas:
@@ -279,7 +283,7 @@ Competencias que siguen siendo válidas:
 |---|---|---|---|
 | Maker | PL-900 | Ruta Maker disponible | Mantener capstone (LAB-061) actualizado con Power Fx reciente. |
 | Consultor funcional Power Platform | Competencia profesional; PL-200 retirado | Ruta Consultor Funcional (Parcial) | Sumar módulos de consultoría específicos de D365 CE. |
-| Developer Power Platform | PL-400 | Ruta Developer disponible | Reforzar Custom APIs, CLI, Web API y observabilidad. |
+| Developer Power Platform | AB-400 (sucesor de PL-400) | Ruta Developer disponible | Reforzar Custom APIs, CLI, Web API y observabilidad. |
 | Solution Architect | Competencia profesional de arquitectura | Ruta Solution Architect disponible | Ampliar casos de estudio de arquitectura enterprise. |
 | D365 Customer Service | MB-230 | Ruta D365 CE — avanzado, especializaciones en expansión | Ver Roadmap de Especialización Avanzada: Contact Center/Omnichannel real. |
 | D365 Sales | Competencia profesional; MB-210 y MB-280 retirados | Ruta D365 CE disponible con Sales avanzado | Profundizar Sales Insights/predicción real solo con tenant/licencia. |
@@ -294,7 +298,7 @@ Competencias que siguen siendo válidas:
 |---|---|---|---|
 | PL-900 | Pendiente | | Practice assessment + simulador Nivel 1 |
 | PL-200, si aplica antes del retiro | Pendiente | Antes del 31 ago 2026 | Practice assessment + proyecto Nivel 2 |
-| PL-400 | Pendiente | | Labs técnicos + simulador Nivel 3 |
+| AB-400 | Pendiente | | Labs técnicos + simulador Nivel 3 + Nivel IA |
 | Arquitectura Power Platform | Enfoque profesional | | Capstone, ADRs, arquitectura, runbook y defensa ejecutiva |
 | MB-230 | Especialización recomendada | | Módulo 62 + LAB-082 + LAB-083 |
 | MB-310 / MB-330 | Especialización F&O recomendada | | Módulos 60/64 + LAB-088/LAB-089; profundidad de producto pendiente |

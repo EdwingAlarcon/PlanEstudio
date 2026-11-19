@@ -2,7 +2,7 @@
 moduleId: 22
 title: "Copilot Studio Avanzado"
 level: "avanzado"
-certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
+certification: "AB-400 (sucesor de PL-400, retirado 30 oct 2026)"
 estimatedMinutes: 18
 practiceMinutes: 180
 slug: "copilot-studio-avanzado"

@@ -677,7 +677,7 @@ Este bloque no aumenta el conteo de criterios modulares — es una guía de auto
 - [ ] Proyecto Multicapa Nivel 3 desplegado con CI/CD funcional en 3 ambientes | Fecha: ___
 - [ ] Autoevaluación promedio ≥ 3.5/5 en todos los módulos del nivel | Promedio: ___/5
 - [ ] Completé el Microsoft Learn path: "Power Platform Developer" | Fecha: ___
-- [ ] PL-400 aprobado | Fecha: ___ | Puntaje: ___/1000
+- [ ] AB-400 (sucesor de PL-400) aprobado | Fecha: ___ | Puntaje: ___/1000
 
 **Fecha de inicio Nivel 3:** ___ | **Fecha de completación:** ___
 
@@ -1455,7 +1455,7 @@ TOTAL   [                    ] ___% completado
 |--------------|--------|----------------|------------|---------|
 | PL-900 | ⬜ Pendiente | ___ | ___ | ___/1000 |
 | PL-200 | ⬜ Pendiente | ___ | ___ | ___/1000 |
-| PL-400 | ⬜ Pendiente | ___ | ___ | ___/1000 |
+| AB-400 (sucesor de PL-400) | ⬜ Pendiente | ___ | ___ | ___/1000 |
 | Arquitectura Power Platform | Skill path | ___ | ___ | No aplica |
 
 ### Notas Personales de Aprendizaje

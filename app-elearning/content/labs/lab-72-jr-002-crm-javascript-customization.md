@@ -4,7 +4,7 @@ title: "JR-002 — CRM JavaScript Customization"
 level: "N3"
 duration: 240
 product: ["Dynamics 365 Customer Engagement", "Dataverse", "JavaScript"]
-certifications: ["PL-400"]
+certifications: ["AB-400"]
 role: ["Dynamics 365 CRM Developer", "Power Platform Developer"]
 prerequisites:
   - "Módulo 13 estudiado: JavaScript y Web Resources"

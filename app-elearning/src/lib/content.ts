@@ -132,7 +132,7 @@ const LEVEL_META: Record<LevelId, { title: string; description: string; certific
   avanzado: {
     title: "Nivel 3 — Avanzado",
     description: "Arquitectura, ALM, D365, Copilot Studio y extensibilidad",
-    certification: "PL-400",
+    certification: "AB-400 (sucesor de PL-400)",
   },
   arquitecto: {
     title: "Nivel 4 — Arquitecto",

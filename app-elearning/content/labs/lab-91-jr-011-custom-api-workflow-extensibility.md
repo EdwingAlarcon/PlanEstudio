@@ -4,7 +4,7 @@ title: "JR-011 — Custom API & Workflow Extensibility Job Test"
 level: "N4"
 duration: 240
 product: ["Dataverse", "C#", "Custom API", "Workflow"]
-certifications: ["PL-400"]
+certifications: ["AB-400"]
 role: ["Dynamics 365 CRM Developer", "Power Platform Developer"]
 prerequisites:
   - "Módulo 23 estudiado: C# Plugins para Dataverse"

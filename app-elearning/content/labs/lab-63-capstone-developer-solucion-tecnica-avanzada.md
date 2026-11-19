@@ -4,7 +4,7 @@ title: "Capstone Developer — Solución Técnica Avanzada"
 level: "N3"
 duration: 900
 product: ["Dataverse", "Power Platform CLI", "Azure DevOps"]
-certifications: ["PL-400"]
+certifications: ["AB-400"]
 role: ["Developer"]
 prerequisites:
   - "Lab 19 completado: ALM/CI-CD Azure DevOps"

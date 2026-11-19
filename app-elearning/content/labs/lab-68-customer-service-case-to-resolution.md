@@ -4,7 +4,7 @@ title: "Dynamics 365 Customer Service — Case-to-Resolution Avanzado"
 level: "N3"
 duration: 120
 product: ["Dynamics 365 Customer Service", "Power Automate", "Power Pages", "Dataverse"]
-certifications: ["PL-400", "Especialista Dynamics 365 CE"]
+certifications: ["AB-400", "Especialista Dynamics 365 CE"]
 role: ["Functional Consultant", "Solution Architect"]
 prerequisites:
   - "Módulo 20 estudiado: Dynamics 365 CE — Sales y Customer Service"

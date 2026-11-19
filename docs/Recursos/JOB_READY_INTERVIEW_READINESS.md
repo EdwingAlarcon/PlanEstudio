@@ -77,7 +77,7 @@ se lee como versatilidad; se lee como falta de foco.
 4. **Proyectos / capstones**
    - 2 a 4 proyectos con problema, solucion y evidencia.
 5. **Certificaciones / aprendizaje**
-   - PL-900, PL-200/PL-400 si aplica; Arquitectura Power Platform como skill path, no PL-600 vigente.
+   - PL-900, AB-400 (sucesor de PL-400) si aplica; PL-200 y PL-400 solo como historial si ya las tienes; Arquitectura Power Platform como skill path, no PL-600 vigente.
    - PlanEstudio como ruta de aprendizaje, no como certificacion oficial Microsoft.
 
 ### Plantilla de CV de 1 pagina

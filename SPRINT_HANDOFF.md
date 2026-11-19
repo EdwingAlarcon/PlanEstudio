@@ -1,5 +1,26 @@
 # PlanEstudio — Estado de sprints post-auditoría (handoff)
 
+## Decisiones tomadas el 2026-11-19 (el usuario pidió "resuelve todas, decide tú")
+
+- **Certificaciones (ítem 6):** Nivel 3 pasa a **AB-400 (sucesor de PL-400, retirado el 30 oct 2026)** en el frontmatter de
+  los 13 módulos, `i18n.ts` (`cert`, `navCert`), `content.ts`, simulador, labs (`certifications: ["AB-400"]`), SEO,
+  `evaluaciones-simulador.js` y recursos (`CERTIFICACIONES.md` con AB-400, AB-410 y PL-300). Nivel 2 se queda como
+  "Consultor funcional (PL-200 retirado)": Learn no dice que AB-410 sustituya a PL-200, así que solo se cita como referencia.
+  Nivel 4 ya era "Arquitectura Power Platform". No se tocaron las preguntas del banco que citan PL-400 como historia.
+- **M43 (ítem 1):** sí. La Microlección 4 (páginas generativas y app-builder, en preview y con región limitada) se pliega
+  con "(opcional: funciones en preview)" y sus dos criterios llevan *(Opcional, Microlección 4)*. El Caso Real no cambia.
+- **M38 (ítem 2):** no. Las tres plantillas (agenda, estimación, CR-004) son la hoja de trabajo de cada práctica (adaptar,
+  encontrar el error, completar); sacarlas a un recurso rompería el "aprender haciendo". Recursos siguen en 41.
+- **M7 (ítem 3):** criterios reescritos para el Núcleo (Filter, LookUp, If/IsBlank/Len, Switch, Text, delegación con
+  StartsWith, variables, reto) y dos opcionales para la profundización plegada (AddColumns/Collections/ForAll/With y
+  depurar con `JSON`). Pasa de 9 a 10 criterios (el conteo global de "636 criterios" no se recalculó: su método no está
+  documentado).
+- **/graphify (ítem 9):** no se hace la extracción semántica. El grafo de código ya existe (`graphify update .`, gratis) y el
+  contenido es Markdown que se busca bien con grep; 15-20 sub-agentes no compensan. Se puede retomar si el usuario lo pide.
+- **Ítem 5 (tenant en español):** sigue pendiente del usuario; Claude no tiene acceso a su tenant.
+- **Ruta Pro Power BI P3 hecha:** labs 120, 121 y 122 (ver PROPUESTA §15.6). Siguiente: **P4 = labs 123 (diseño de
+  reportes), 124 (storytelling) y 125 (análisis)**.
+
 ## Pendiente para la próxima sesión (anotado el 2026-11-11, noche)
 
 Hecho hoy: rediseño UX y recorrido guiado, interfaz ES/EN, §14 aplicada en 10 módulos (`c335889`). Ver CLAUDE.md

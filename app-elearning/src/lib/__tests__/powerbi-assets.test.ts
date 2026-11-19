@@ -75,6 +75,35 @@ describe("Power BI practice assets (SIT Ventas)", () => {
     expect(lab119).toContain("**780.903,50**");
   });
 
+  it("matches the figures quoted in LABs 120-122 (verified with a DAX engine)", () => {
+    const read = (slug: string) => fs.readFileSync(path.resolve(process.cwd(), "content", "labs", `${slug}.md`), "utf-8");
+    const all = expected as unknown as Record<string, Record<string, unknown>>;
+    const l120 = all["lab120"]!;
+    const l121 = all["lab121"]!;
+    expect(l120["ticketPromedio2025"]).toBe(27862.25);
+    expect(l120["medianaImporteLinea2025"]).toBe(9540);
+    expect((l120["carteraPendiente"] as Record<string, number>)["2025-12-31"]).toBe(611900);
+    expect((l120["carteraPendiente"] as Record<string, number>)["2026-12-31"]).toBe(780903.5);
+    expect(l120["sumaCarterasFinDeMes2025"]).toBe(7508388.4);
+    const lab120 = read("lab-120-power-bi-dax-esencial");
+    for (const figure of ["**27.862,25**", "**149**", "**9.540,00**", "**611.900,00**", "**7.508.388,40**", "**943.978,50**"]) {
+      expect(lab120).toContain(figure);
+    }
+    expect(l121["ytdOct2025"]).toBe(16568491.5);
+    expect(l121["crecimientoIngenuo2026"]).toBe(-9.14);
+    expect(l121["crecimientoComparable2026"]).toBe(14.29);
+    expect(l121["pctAntioquiaSobreColombia2025"]).toBe(46.73);
+    expect([l121["clientesSegmentoA"], l121["clientesSegmentoB"], l121["clientesSegmentoC"]]).toEqual([32, 111, 7]);
+    expect(l121["pedidosYtdOct2025"]).toBe(596);
+    const lab121 = read("lab-121-power-bi-contexto-filtro-inteligencia-tiempo");
+    for (const figure of ["**16.568.491,50**", "**−9,14 %**", "**+14,29 %**", "**46,73 %**", "**32**", "**596**", "**6.243.067,40**"]) {
+      expect(lab121).toContain(figure);
+    }
+    const lab122 = read("lab-122-power-bi-rendimiento-performance-analyzer-dax-query-view");
+    expect(lab122).toContain("**13.799.948,40**");
+    expect(lab122).toContain("**2.088**");
+  });
+
   it("matches the figures quoted in LAB-116", () => {
     const lab = fs.readFileSync(lab116, "utf-8");
     expect(lab).toContain("20.840.961,90");

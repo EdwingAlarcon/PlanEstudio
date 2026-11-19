@@ -4,7 +4,7 @@ title: "ALM y CI/CD — Pipeline de Azure DevOps para Power Platform"
 level: "N3"
 duration: 210
 product: ["Azure DevOps", "Power Platform CLI", "Dataverse"]
-certifications: ["PL-400"]
+certifications: ["AB-400"]
 role: ["Developer", "DevOps Engineer"]
 prerequisites:
   - "Solución SIT_SolicitudesInternas con al menos Canvas App o MDA creadas"
@@ -51,7 +51,7 @@ Si usas el plan B (agente self-hosted), suma unos 30 minutos la primera vez para
 
 ## Nivel
 
-**N3 Avanzado** — Certificación objetivo: **PL-400**
+**N3 Avanzado** — Certificación objetivo: **AB-400** (sucesor de PL-400)
 
 ## Tecnologías utilizadas
 

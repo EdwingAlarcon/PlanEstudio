@@ -2,7 +2,7 @@
   function certForModule(moduleId) {
     if (moduleId <= 8) return "PL-900";
     if (moduleId <= 17) return "Consultor funcional (PL-200 retirado 31 ago 2026)";
-    if (moduleId <= 30) return "PL-400";
+    if (moduleId <= 30) return "AB-400 (sucesor de PL-400)";
     if (moduleId <= 41) return "Arquitectura Power Platform";
     if (moduleId <= 55) return "Buenas Prácticas IA";
     if (moduleId <= 65) return "D365 Especialización";

@@ -4,7 +4,7 @@ title: "Customer Insights — Segmento, Consentimiento y Journey de Renovación"
 level: "N3"
 duration: 95
 product: ["Customer Insights", "Dynamics 365 Sales", "Dynamics 365 Customer Service", "Dataverse"]
-certifications: ["PL-400", "Dynamics 365 Customer Engagement"]
+certifications: ["AB-400", "Dynamics 365 Customer Engagement"]
 role: ["Functional Consultant", "Solution Architect"]
 prerequisites:
   - "Módulo 20 estudiado: Dynamics 365 CE — Sales y Customer Service"

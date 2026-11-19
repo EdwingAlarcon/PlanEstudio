@@ -404,12 +404,15 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-117-power-bi-obtener-y-perfilar-datos",
       "lab-118-power-bi-transformar-y-cargar",
       "lab-119-power-bi-modelo-semantico-estrella",
+      "lab-120-power-bi-dax-esencial",
+      "lab-121-power-bi-contexto-filtro-inteligencia-tiempo",
+      "lab-122-power-bi-rendimiento-performance-analyzer-dax-query-view",
     ],
     competencies: ["Power Query", "Modelado en estrella", "DAX", "Diseño de reportes", "Servicio de Power BI", "Seguridad por filas"],
     status: "Especialización en construcción",
     // Provisional: el capstone será el LAB-127 (reto Pro sin pasos) cuando exista.
     capstoneLabSlug: "lab-116-power-bi-en-un-dia",
-    gapNote: "Disponibles los labs 116 (Power BI en un día), 117 (obtener y perfilar), 118 (transformar y cargar) y 119 (modelo en estrella). Los labs 120 a 127 (DAX, rendimiento, diseño, storytelling, análisis, servicio y seguridad, y un reto Pro sin pasos) se publican por fases. Power BI Desktop solo funciona en Windows; con licencia gratuita se publica en My workspace, y compartir o crear apps requiere Pro, PPU o una prueba.",
+    gapNote: "Disponibles los labs 116 (Power BI en un día), 117 (obtener y perfilar), 118 (transformar y cargar), 119 (modelo en estrella), 120 (DAX esencial), 121 (contexto de filtro, inteligencia de tiempo y grupos de cálculo) y 122 (rendimiento). Los labs 123 a 127 (diseño, storytelling, análisis, servicio y seguridad, y un reto Pro sin pasos) se publican por fases. Power BI Desktop solo funciona en Windows; con licencia gratuita se publica en My workspace, y compartir o crear apps requiere Pro, PPU o una prueba.",
     portfolioEvidence: [
       "El archivo .pbix del LAB-116 con el modelo en estrella y las 4 medidas",
       "Captura de la página Resumen comercial 2025 sin filtros y con un país elegido",

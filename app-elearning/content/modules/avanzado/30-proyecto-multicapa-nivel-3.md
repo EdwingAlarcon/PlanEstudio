@@ -2,7 +2,7 @@
 moduleId: 30
 title: "Proyecto Multicapa Nivel 3"
 level: "avanzado"
-certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
+certification: "AB-400 (sucesor de PL-400, retirado 30 oct 2026)"
 estimatedMinutes: 25
 practiceMinutes: 1320
 slug: "proyecto-multicapa-nivel-3"

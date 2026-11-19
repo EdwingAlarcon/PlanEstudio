@@ -4,7 +4,7 @@ title: "JR-012 — Production Incident Simulation"
 level: "N4"
 duration: 180
 product: ["Dataverse", "Plugin Trace Log", "Application Insights"]
-certifications: ["PL-400"]
+certifications: ["AB-400"]
 role: ["Dynamics 365 CRM Developer", "Power Platform Developer"]
 prerequisites:
   - "Módulo 23 estudiado: C# Plugins para Dataverse"

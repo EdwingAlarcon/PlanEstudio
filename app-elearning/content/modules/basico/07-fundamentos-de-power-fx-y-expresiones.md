@@ -659,17 +659,18 @@ Esta vez no te doy las fórmulas: aplica lo que viste a un cambio de requisito.
     - **Solución**: NUNCA ignorar warnings de delegación; refactorizar o usar Collections
 
 ### 🧪 Criterios de Validación
-- [ ] 10+ fórmulas complejas implementadas en Canvas App
-- [ ] Uso correcto de Filter, LookUp, AddColumns, ForAll
-- [ ] Collection con operaciones CRUD funcional
-- [ ] Validaciones de form con If/IsBlank
-- [ ] Formateo de texto y fechas aplicado
-- [ ] With pattern para optimizar cálculos repetidos
-- [ ] Identificar y resolver 3+ warnings de delegación
-- [ ] Explicar diferencia entre variables globales y contextuales
-- [ ] Debugging de fórmula compleja con Labels temporales
+- [ ] Gallery filtrada con `Filter` por texto, categoría, estado y fecha (Práctica 7.1, Ejercicio 1)
+- [ ] `LookUp` que devuelve un dato de un registro, con valor de respaldo si no lo encuentra (Práctica 7.1, Ejercicio 2)
+- [ ] Validación del formulario con `If`, `IsBlank` y `Len`, y botón Guardar que solo se habilita con datos válidos (Práctica 7.2, Ejercicio 1, y reto)
+- [ ] `Switch` que elige un icono según el valor de una columna (Práctica 7.2, Ejercicio 2)
+- [ ] Texto y fechas formateados con `Text` en un Label (Práctica 7.3, Ejercicio 1)
+- [ ] Una advertencia azul de delegación identificada y su versión corregida, y un filtro con `StartsWith` delegable (Práctica 7.5, Ejercicios 1 y 2)
+- [ ] Explicar la diferencia entre una variable global (`Set`) y una de contexto (`UpdateContext`)
+- [ ] Reto de transferencia entregado: las tres fórmulas con su comentario `//` y sin advertencia de delegación en el filtro de fecha
+- [ ] *(Opcional, profundización)* `AddColumns`, una Collection con `Collect`/`Patch`/`Remove`, `ForAll` y `With` (Prácticas 7.1 Ejercicio 3, 7.4 y 7.5 Ejercicio 3)
+- [ ] *(Opcional)* Depurar una fórmula con un Label temporal que muestre `JSON(...)` de una variable
 
-> Para avanzar como principiante, valida al menos 5 fórmulas: una de filtro, una de búsqueda, una de validación, una de formato y una corrección de delegación. Los 10+ ejemplos y operaciones batch son profundización.
+> Los criterios sin marca cubren el Núcleo obligatorio y bastan para avanzar. Los marcados como opcionales corresponden a los bloques plegados de **Profundización opcional**.
 
 ### 📸 Evidencia para guardar
 - Captura de una Gallery filtrada por texto o estado.

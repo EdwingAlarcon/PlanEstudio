@@ -70,7 +70,7 @@ export const UI = {
     cert: {
       basico: "PL-900",
       intermedio: "Consultor funcional (PL-200 retirado 31 ago 2026)",
-      avanzado: "PL-400",
+      avanzado: "AB-400 (sucesor de PL-400)",
       arquitecto: "Arquitectura Power Platform",
       ia: "Buenas Prácticas",
       d365: "CE avanzado",
@@ -79,7 +79,7 @@ export const UI = {
     navCert: {
       basico: "PL-900",
       intermedio: "Funcional",
-      avanzado: "PL-400",
+      avanzado: "AB-400",
       arquitecto: "Arquitectura",
       ia: "IA",
       d365: "D365",

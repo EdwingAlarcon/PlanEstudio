@@ -4,7 +4,7 @@ title: "Field Service — Work Order, Evidencia Móvil y UAT de Servicio en Camp
 level: "N3"
 duration: 105
 product: ["Dynamics 365 Field Service", "Dynamics 365 Customer Service", "Dataverse"]
-certifications: ["PL-400", "Dynamics 365 Customer Engagement"]
+certifications: ["AB-400", "Dynamics 365 Customer Engagement"]
 role: ["Functional Consultant", "Solution Architect"]
 prerequisites:
   - "Módulo 20 estudiado: Dynamics 365 CE — Sales y Customer Service"

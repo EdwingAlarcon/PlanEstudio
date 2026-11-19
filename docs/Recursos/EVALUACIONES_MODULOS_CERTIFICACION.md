@@ -386,7 +386,7 @@
 ---
 
 
-## 🟡 Nivel 3 — Avanzado (Módulos 18–30) — PL-400
+## 🟡 Nivel 3 — Avanzado (Módulos 18–30) — AB-400 (sucesor de PL-400)
 
 ### Módulo 18: Plugins y Extensibilidad Avanzada de Dataverse
 

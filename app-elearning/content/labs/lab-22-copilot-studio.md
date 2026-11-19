@@ -4,7 +4,7 @@ title: "Copilot Studio Avanzado — Agente con SSO, Knowledge Sources y Adaptive
 level: "N3"
 duration: 240
 product: ["Copilot Studio", "Microsoft Teams", "Dataverse", "Microsoft Entra ID"]
-certifications: ["PL-400"]
+certifications: ["AB-400"]
 role: ["Developer", "Functional Consultant"]
 prerequisites:
   - "Módulo 15 completado — tabla Solicitud TI con la columna Autonumber Número de Solicitud"
@@ -58,7 +58,7 @@ Copilot Studio ofrece varios *harnesses* (motores de autoría y orquestación) y
 
 ## Nivel
 
-**N3 Avanzado** — Certificación objetivo: **PL-400**
+**N3 Avanzado** — Certificación objetivo: **AB-400** (sucesor de PL-400)
 
 ## Tecnologías utilizadas
 

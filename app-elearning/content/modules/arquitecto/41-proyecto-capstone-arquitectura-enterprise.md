@@ -585,7 +585,7 @@ Exigen pagar y aprobar exámenes externos; ninguna microlección los produce. An
 
 - [ ] PL-900 obtenida (debería estar completada desde Nivel 1)
 - [ ] PL-200 obtenida (Nivel 2)
-- [ ] PL-400 obtenida (Nivel 3)
+- [ ] AB-400 obtenida (Nivel 3; sustituye a PL-400, retirado el 30 oct 2026)
 - [ ] **Portafolio de arquitectura revisado y aprobado** ← meta final (PL-600 se retiró el 30 de junio de 2026; si quieres una credencial de arquitecto vigente, mira AB-100 en el Módulo 40)
 
 ### Auto-evaluación Final

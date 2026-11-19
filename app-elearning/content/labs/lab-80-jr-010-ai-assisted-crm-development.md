@@ -4,7 +4,7 @@ title: "JR-010 — AI-Assisted CRM Development"
 level: "N5"
 duration: 180
 product: ["Dynamics 365", "Dataverse", "AI-Assisted Development"]
-certifications: ["PL-400", "IA aplicada"]
+certifications: ["AB-400", "IA aplicada"]
 role: ["CRM Developer", "Power Platform Developer"]
 prerequisites:
   - "Módulos 42-55 revisados: desarrollo asistido por IA"

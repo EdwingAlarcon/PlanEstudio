@@ -413,4 +413,4 @@ No borres nada: los Labs 120 y 121 escriben DAX sobre este modelo.
 
 ## Siguiente laboratorio recomendado
 
-**Lab 120 — DAX esencial** (en construcción): medidas con `CALCULATE`, funciones estadísticas, medidas semiaditivas, medidas rápidas y grupos de cálculo, sobre este modelo.
+**[Lab 120 — DAX esencial](/labs/lab-120-power-bi-dax-esencial)**: medidas derivadas, funciones estadísticas, `CALCULATE`, una medida semiaditiva y medidas rápidas, sobre este modelo.

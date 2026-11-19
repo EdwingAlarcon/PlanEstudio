@@ -4,7 +4,7 @@ title: "JR-003 — Dataverse Plugin C#"
 level: "N3"
 duration: 300
 product: ["Dataverse", "C#", "Plugins"]
-certifications: ["PL-400"]
+certifications: ["AB-400"]
 role: ["Dynamics 365 CRM Developer", "Power Platform Developer"]
 prerequisites:
   - "Módulo 23 estudiado: C# Plugins para Dataverse"

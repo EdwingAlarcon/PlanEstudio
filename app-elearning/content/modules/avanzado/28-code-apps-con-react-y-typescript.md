@@ -2,7 +2,7 @@
 moduleId: 28
 title: "Code Apps con React y TypeScript"
 level: "avanzado"
-certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
+certification: "AB-400 (sucesor de PL-400, retirado 30 oct 2026)"
 estimatedMinutes: 18
 practiceMinutes: 210
 slug: "code-apps-con-react-y-typescript"

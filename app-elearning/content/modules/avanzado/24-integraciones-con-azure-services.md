@@ -2,7 +2,7 @@
 moduleId: 24
 title: "Integraciones con Azure Services"
 level: "avanzado"
-certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
+certification: "AB-400 (sucesor de PL-400, retirado 30 oct 2026)"
 estimatedMinutes: 20
 practiceMinutes: 200
 slug: "integraciones-con-azure-services"

@@ -52,5 +52,68 @@
   "importe2025PorEntrega": 20799528.9,
   "importeDic2025PorPedido": 1873122.6,
   "importeDic2025PorEntrega": 2205201.1,
-  "importeSinFechaEntrega": 780903.5
+  "importeSinFechaEntrega": 780903.5,
+  "lab120": {
+    "ticketPromedio2025": 27862.25,
+    "clientesActivos2025": 149,
+    "lineas2025": 1438,
+    "promedioImporteLinea2025": 14493.02,
+    "medianaImporteLinea2025": 9540,
+    "maxImporteLinea2025": 93600,
+    "pctLicencias2025": 66.22,
+    "ticketPorVendedor2025": {
+      "Valeria Quispe": 29973.65,
+      "Mariana Torres": 26116.16,
+      "Tomás Fuentes": 26840.05,
+      "Julián Pérez": 30175.93,
+      "Camila Restrepo": 27409.22,
+      "Andrés Rojas": 26778.72,
+      "Laura Gómez": 21879.04,
+      "Diego Hernández": 32357.5
+    },
+    "clientesPorVendedor2025": {
+      "Valeria Quispe": 18,
+      "Mariana Torres": 25,
+      "Tomás Fuentes": 26,
+      "Julián Pérez": 19,
+      "Camila Restrepo": 27,
+      "Andrés Rojas": 18,
+      "Laura Gómez": 17,
+      "Diego Hernández": 16
+    },
+    "carteraPendiente": {
+      "2024-12-31": 570467,
+      "2025-06-30": 535108.5,
+      "2025-11-30": 943978.5,
+      "2025-12-31": 611900,
+      "2026-06-30": 577544.4,
+      "2026-10-31": 780903.5,
+      "2026-12-31": 780903.5
+    },
+    "sumaCarterasFinDeMes2025": 7508388.4
+  },
+  "lab121": {
+    "ventasMar2025": 2039623.1,
+    "ventasMar2026": 2416338.7,
+    "ytdMar2025": 4966869.2,
+    "ytdOct2025": 16568491.5,
+    "ytdOct2026": 18936520.5,
+    "pedidosYtdOct2025": 596,
+    "pedidosYtdOct2026": 705,
+    "ventasOctNovDic2025": 6243067.4,
+    "ventasDic2025": 1873122.6,
+    "crecimientoIngenuo2026": -9.14,
+    "crecimientoComparable2026": 14.29,
+    "crecimiento2025": 17.65,
+    "pctAntioquiaSobreTodo2025": 20.65,
+    "pctAntioquiaSobreColombia2025": 46.73,
+    "totalColombia2025": 9208289,
+    "clientesConVentas": 150,
+    "clientesSinVentas": 0,
+    "clientesSegmentoA": 32,
+    "clientesSegmentoB": 111,
+    "clientesSegmentoC": 7,
+    "maxVentasCliente": 783075,
+    "mejorCliente": "Energía Puerto Ltda."
+  }
 }

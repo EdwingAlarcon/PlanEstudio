@@ -818,3 +818,27 @@ hasta tener los 12 labs. Conteos: labs 76 → 88 al terminar.
 - **Sin verificar en Learn:** **To Table**, **Create hierarchy** / **Add to hierarchy**, la opción de ocultar del menú
   contextual, **Edit parameters**, la etiqueta **Is hidden** (Learn dice "is hidden setting in the Properties pane").
 - **Siguiente (P3):** labs 120, 121 y 122.
+
+### 15.6 Estado — P3 hecha (2026-11-19)
+
+- **LAB-120 DAX esencial** (medidas derivadas, estadísticas, `CALCULATE`/`REMOVEFILTERS`, la semiaditiva `Cartera Pendiente`
+  —saldo pedido y no entregado al cierre— y una medida rápida), **LAB-121 Contexto de filtro e inteligencia de tiempo**
+  (`ALL` frente a `ALLSELECTED`, transición de contexto con segmentos de cliente, YTD, año anterior, la trampa del año
+  incompleto y un grupo de cálculo) y **LAB-122 Rendimiento** (Performance Analyzer, DAX query view, `COLUMNSTATISTICS`,
+  `FILTER` frente a filtro booleano, variables, quitar una columna sin romper `ControlSinTasa` y desactivar auto date/time).
+- **Cambio respecto a la tabla de §15.2:** los grupos de cálculo pasan del 120 al 121, porque su caso canónico en Learn es
+  la inteligencia de tiempo.
+- **Cifras comprobadas con un motor DAX real:** el modelo de datos de Excel por COM (Power Query carga los CSV, relaciones
+  con `ModelRelationships.Add`, consultas `EVALUATE` por la conexión ADO del modelo). Coinciden con el generador: ticket
+  27.862,25; mediana 9.540; cartera 611.900 al cierre de 2025 (la suma de los 12 meses daría 7.508.388,40) y 780.903,50 en
+  2026; Antioquia 20,65 % frente a 46,73 %; segmentos 32/111/7; YTD octubre 2025 16.568.491,50; crecimiento 2026 −9,14 %
+  ingenuo y +14,29 % comparable. Excel no admite `REMOVEFILTERS` (motor antiguo): se probó con `ALL`; tampoco permite una
+  segunda relación inactiva por COM ni grupos de cálculo, que no se ejecutaron.
+- **Etiquetas verificadas en Learn:** **New quick measure**, **Select a calculation**/**Base value**/**Category**, **Average per
+  category**; **Calculation group**, **discourage implicit measures**, **New calculation item**, **Dynamic format string**;
+  cinta **Optimize** > **Performance Analyzer**, **Start recording**, **Refresh visuals**, **Run in DAX query view**, categorías
+  **DAX query**/**Visual display**/**Other**; **Run**, **Update model with changes**, **Define all measures in the model**,
+  **Show column statistics**, **Evaluate**; **Auto date/time for new files** (Global).
+- **Sin verificar:** la etiqueta exacta de auto date/time en **Current File** y el nombre del submenú **Quick queries** en el
+  menú contextual. **Sin prueba simulada todavía**: se hará con la de la ruta completa (P5).
+- **Siguiente (P4):** labs 123, 124 y 125.

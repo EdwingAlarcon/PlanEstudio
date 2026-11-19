@@ -2,7 +2,7 @@
 moduleId: 29
 title: "Power Pages Avanzado y Microsoft Entra External ID"
 level: "avanzado"
-certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
+certification: "AB-400 (sucesor de PL-400, retirado 30 oct 2026)"
 estimatedMinutes: 25
 practiceMinutes: 210
 slug: "power-pages-avanzado-y-azure-ad-b2c"

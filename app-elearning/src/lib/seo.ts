@@ -89,7 +89,7 @@ export function buildRootMetadata(): Metadata {
     metadataBase: new URL(SITE_URL),
     title: { default: DEFAULT_TITLE, template: TITLE_TEMPLATE },
     description: SITE_DESCRIPTION,
-    keywords: ["Power Platform", "Dynamics 365", "PL-900", "PL-400", "arquitectura", "consultor funcional", "e-learning"],
+    keywords: ["Power Platform", "Dynamics 365", "PL-900", "AB-400", "arquitectura", "consultor funcional", "e-learning"],
     openGraph: sharedOpenGraph(DEFAULT_TITLE, SITE_DESCRIPTION),
     twitter: sharedTwitter(DEFAULT_TITLE, SITE_DESCRIPTION),
   };

@@ -4,7 +4,7 @@ title: "Plugin C# — Validación Server-Side y Auditoría Personalizada"
 level: "N3"
 duration: 180
 product: ["Dataverse SDK", "C#", "Plugin Registration Tool"]
-certifications: ["PL-400"]
+certifications: ["AB-400"]
 role: ["Developer"]
 prerequisites:
   - "Lab 02 y Lab 09 completados — tabla Solicitud TI (sit_solicitud) con sit_prioridad, sit_estado y sit_costoestimado (Lab 09)"
@@ -59,7 +59,7 @@ Al finalizar este laboratorio podrás desarrollar, registrar y probar dos plugin
 
 ## Nivel
 
-**N3 Avanzado** — Certificación objetivo: **PL-400**
+**N3 Avanzado** — Certificación objetivo: **AB-400** (sucesor de PL-400)
 
 ## Tecnologías utilizadas
 

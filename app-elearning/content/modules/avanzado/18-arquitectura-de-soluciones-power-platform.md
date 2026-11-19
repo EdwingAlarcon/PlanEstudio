@@ -2,13 +2,13 @@
 moduleId: 18
 title: "Arquitectura de Soluciones Power Platform"
 level: "avanzado"
-certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
+certification: "AB-400 (sucesor de PL-400, retirado 30 oct 2026)"
 estimatedMinutes: 22
 practiceMinutes: 150
 slug: "arquitectura-de-soluciones-power-platform"
 lastVerified: "2026-11"
 ---
-> **📌 Primer módulo de Avanzado (PL-400).** Este nivel asume que ya completaste Básico e Intermedio — el vocabulario de aquí en adelante (ADR, capas, patrones de integración) construye sobre eso, no lo repite. Si llegaste saltando niveles, vuelve a Módulo 1 antes de seguir; el resto del curso no te espera dos veces.
+> **📌 Primer módulo de Avanzado (AB-400, sucesor de PL-400).** Este nivel asume que ya completaste Básico e Intermedio — el vocabulario de aquí en adelante (ADR, capas, patrones de integración) construye sobre eso, no lo repite. Si llegaste saltando niveles, vuelve a Módulo 1 antes de seguir; el resto del curso no te espera dos veces.
 
 *Lectura: 20-25 min · Con práctica: unos 150 min (los dos ADR son lo que más se alarga), mejor en dos sesiones (la primera hasta la Microlección 2; la segunda, de la 3 al final). La primera vez, cuenta entre una vez y media y el doble.*
 

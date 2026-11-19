@@ -2,7 +2,7 @@
 moduleId: 21
 title: "Power Pages — Portales Externos"
 level: "avanzado"
-certification: "PL-400 (cierra registro 16 oct 2026) — sucesor: AB-400"
+certification: "AB-400 (sucesor de PL-400, retirado 30 oct 2026)"
 estimatedMinutes: 25
 practiceMinutes: 240
 slug: "power-pages-portales-externos"
