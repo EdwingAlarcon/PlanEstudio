@@ -113,7 +113,11 @@ ingenuo frente a +14,29 % comparable, y grupo de cálculo; los grupos de cálcul
 Analyzer, DAX query view, reducción del modelo). Cifras en `metricas-esperadas.json` (`lab120`, `lab121`) comprobadas con el
 motor DAX del modelo de datos de Excel por COM (Excel no tiene `REMOVEFILTERS`: se probó con `ALL`). **Certificaciones
 realineadas el 2026-11-19:** Nivel 3 = **AB-400 (sucesor de PL-400)** en frontmatter, `i18n.ts`, labs y recursos; Nivel 2
-sigue como competencia funcional (Learn no nombra a AB-410 sucesor de PL-200: solo referencia opcional).
+sigue como competencia funcional (Learn no nombra a AB-410 sucesor de PL-200: solo referencia opcional). **P4
+(2026-11-19):** LAB-123 (diseño: tema, formato condicional, visual calculations, accesibilidad, móvil), 124 (drillthrough,
+tooltip de página, marcadores, page navigator, sync slicers, personalize visuals) y 125 (Analyze, grupos y tramos, ranking
+con `RANKX`, decomposition tree, key influencers en la copia sin grupo de cálculo, pronóstico y anomalías). Cifras en
+`metricas-esperadas.json` (`lab123a125`). Learn no documenta las etiquetas del filtro Top N: el LAB-125 usa `RANKX`.
 
 ## Mantenimiento vigente — 2026-11-11
 
@@ -221,7 +225,7 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 149 archivos **cerrados**; sin trabajo a medias.
 
 **Invariantes que no debes romper:**
-- Conteos vigentes: **76 módulos, 83 labs (ocho opcionales: LAB-06 y los de la Ruta Pro Power BI 116-122), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
+- Conteos vigentes: **76 módulos, 86 labs (once opcionales: LAB-06 y los de la Ruta Pro Power BI 116-125), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
   33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 239 prácticas interactivas
   y 41 páginas de recursos** (41 desde la guía de interfaz español/inglés del 2026-11-11; prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
   Doing de Módulos 11, 10 y 13, a 44 con los Módulos 1 a 8 de la Fase 2 a 62 con los Módulos 9, 12, 14-17 de la Fase 3, a 149 con las Fases 4, 5 y 6 recortada y a 239 con la Fase 7 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de

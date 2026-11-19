@@ -851,3 +851,27 @@ hasta tener los 12 labs. Conteos: labs 76 → 88 al terminar.
   auto date/time no crea tablas para el lado "muchos" (ejemplo cambiado a `Clientes[FechaAlta]`); `Expression.Error` de
   `ControlSinTasa` no falla la actualización; cardinalidades de `Tasa` (124) e `ImporteLocal` (~3.790); tiempos: 3 h, 3 h 40 y 3 h.
 - **Siguiente (P4):** labs 123, 124 y 125.
+
+### 15.7 Estado — P4 hecha (2026-11-19)
+
+- **LAB-123 Diseño de reportes** (boceto por preguntas, tema de SIT en la cinta **Design**, formato condicional por reglas en
+  **Number**, barras de datos e iconos, visual calculations `RUNNINGSUM` y `PREVIOUS`, texto alternativo, orden de tabulación,
+  contraste y vista móvil), **LAB-124 Storytelling** (drillthrough con **Keep all filters**, tooltip de página, marcadores con
+  **Display** sin **Data** y **Selected visuals**, botones y **Page navigator**, **Sync slicers** solo entre las dos páginas
+  principales, **Personalize visuals**) y **LAB-125 Análisis** (**Explain the increase**, grupos sin **Other**, tramos, ranking
+  con `RANKX` + filtro de visual, decomposition tree con **High value**, **Key influencers** en la copia sin grupo de cálculo,
+  pronóstico y anomalías con juicio crítico sobre datos sintéticos).
+- **Cifras** en `metricas-esperadas.json` (`lab123a125`), calculadas por el generador y recalculadas por los evaluadores.
+  **Learn no documenta las etiquetas del filtro Top N**: el ranking se hace con `RANKX` y **Show items when the value**.
+- **Pruebas simuladas** (2026-11-19, 3 agentes, persona "Lucía"; simulación, no una persona real), hechas en la misma fase.
+  Corregido: `RUNNINGSUM` ordena por las columnas del eje y no por el orden del visual (lo que decía el lab contradecía a
+  Learn); síntomas reales de **Percent** en reglas e iconos; totales sin color con **Values only**; slicer que faltaba en
+  `Mensual`; contraste de la paleta (naranja 2,45:1); el drillthrough ya lleva el año, así que sincronizar `Detalle vendedor`
+  chocaba con otras páginas; slicer duplicado en `Mensual`; marcadores con **All visuals**; navegador que mostraba las páginas
+  de trabajo; el aumento de noviembre lo explica Perú (+298.659,40), no la estacionalidad, y el pico de la serie es marzo de
+  2026; grupo **Other** que mezclaba `Sin dato`; explicación de `ALL` frente a `ALLSELECTED`; segundo influenciador
+  (Licencias, no Proyecto); `Importe` como **Don't summarize**.
+- **Sin verificar en Learn:** el interruptor **Keep all filters**, **Layer order**, **Hide Page**, **Analysis type** del
+  decomposition tree y si **Personalize visuals** se ve en la edición de Desktop (el lab lo deja para el Lab 126).
+- **Siguiente (P5):** labs 126 (servicio y seguridad) y 127 (reto Pro sin pasos, nuevo capstone de la ruta) y prueba simulada
+  de la ruta completa.

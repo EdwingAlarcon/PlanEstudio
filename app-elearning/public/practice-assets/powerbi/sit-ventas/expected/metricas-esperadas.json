@@ -119,5 +119,159 @@
     "clientesSegmentoC": 7,
     "maxVentasCliente": 783075,
     "mejorCliente": "Energía Puerto Ltda."
+  },
+  "lab123a125": {
+    "ventasMensuales2025": {
+      "1": 1113973.7,
+      "2": 1813272.4,
+      "3": 2039623.1,
+      "4": 1868653.6,
+      "5": 1364200.1,
+      "6": 1450206.1,
+      "7": 1261278.8,
+      "8": 1716392.8,
+      "9": 1970293.9,
+      "10": 1970597,
+      "11": 2399347.8,
+      "12": 1873122.6
+    },
+    "acumulado2025": {
+      "1": 1113973.7,
+      "2": 2927246.1,
+      "3": 4966869.2,
+      "4": 6835522.8,
+      "5": 8199722.9,
+      "6": 9649929,
+      "7": 10911207.8,
+      "8": 12627600.6,
+      "9": 14597894.5,
+      "10": 16568491.5,
+      "11": 18967839.3,
+      "12": 20840961.9
+    },
+    "difDicNov2025": -526225.2,
+    "vendedoresBajoObjetivo2025": [
+      "Laura Gómez",
+      "Valeria Quispe"
+    ],
+    "cumplimiento2026": {
+      "Laura Gómez": 93.53,
+      "Andrés Rojas": 85.79,
+      "Camila Restrepo": 64.19,
+      "Julián Pérez": 80.67,
+      "Mariana Torres": 104.71,
+      "Diego Hernández": 74.86,
+      "Valeria Quispe": 75.03,
+      "Tomás Fuentes": 83.94
+    },
+    "porVendedorCategoria2025": {
+      "Laura Gómez": {
+        "Licencias": 509266.2,
+        "Servicios": 381490,
+        "Capacitación": 50042.5
+      },
+      "Andrés Rojas": {
+        "Licencias": 841387.2,
+        "Servicios": 424850,
+        "Capacitación": 72699
+      },
+      "Camila Restrepo": {
+        "Licencias": 2761753.2,
+        "Servicios": 1323722.5,
+        "Capacitación": 217772.5
+      },
+      "Julián Pérez": {
+        "Licencias": 1840898.4,
+        "Servicios": 669012.5,
+        "Capacitación": 115395
+      },
+      "Mariana Torres": {
+        "Licencias": 1892130.6,
+        "Servicios": 1123187.5,
+        "Capacitación": 196970
+      },
+      "Diego Hernández": {
+        "Licencias": 1814902.8,
+        "Servicios": 584580,
+        "Capacitación": 124402
+      },
+      "Valeria Quispe": {
+        "Licencias": 1663897.8,
+        "Servicios": 673087.5,
+        "Capacitación": 150828
+      },
+      "Tomás Fuentes": {
+        "Licencias": 2475712.2,
+        "Servicios": 761440,
+        "Capacitación": 171534.5
+      }
+    },
+    "andinaPorVendedor2025": {
+      "Andrés Rojas": 1338936.2,
+      "Laura Gómez": 940798.7
+    },
+    "porPais2025": {
+      "Colombia": 9208289,
+      "México": 5736172.9,
+      "Chile": 3408686.7,
+      "Perú": 2487813.3
+    },
+    "porIndustria2025": {
+      "Servicios Financieros": 4614121.2,
+      "Retail": 2640182.7,
+      "Salud": 2635543,
+      "Logística": 2370853.8,
+      "Educación": 1853112.9,
+      "Manufactura": 1822376.5,
+      "Energía": 1464586.4,
+      "Sin dato": 1257532.2,
+      "Gobierno": 1256903,
+      "Construcción": 925750.2
+    },
+    "lineasPorTramoImporte2025": {
+      "0": 750,
+      "10000": 416,
+      "20000": 121,
+      "30000": 32,
+      "40000": 41,
+      "50000": 22,
+      "60000": 31,
+      "70000": 15,
+      "80000": 8,
+      "90000": 2
+    },
+    "top5Clientes2025": [
+      [
+        "Seguros Horizonte S.A.S.",
+        436582.2
+      ],
+      [
+        "Banco Cumbre S.A.C.",
+        380104.7
+      ],
+      [
+        "Farmacéutica Central S.A.",
+        357419.5
+      ],
+      [
+        "Constructora Cumbre S.A.",
+        331337
+      ],
+      [
+        "Comercializadora Central S.A. de C.V.",
+        293528.7
+      ]
+    ],
+    "importeMedioLinea2025PorSubcategoria": {
+      "CRM": 41714.82,
+      "Proyecto": 19036.61,
+      "Soporte": 12479.45,
+      "Consultoría": 11908.91,
+      "Plataforma": 11632.24,
+      "BI": 9798.84,
+      "Desarrollo": 9584.36,
+      "Cursos": 5350.9,
+      "Talleres": 2601.44
+    }
   }
 }

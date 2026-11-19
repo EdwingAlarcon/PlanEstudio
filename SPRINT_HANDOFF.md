@@ -18,8 +18,9 @@
 - **/graphify (ítem 9):** no se hace la extracción semántica. El grafo de código ya existe (`graphify update .`, gratis) y el
   contenido es Markdown que se busca bien con grep; 15-20 sub-agentes no compensan. Se puede retomar si el usuario lo pide.
 - **Ítem 5 (tenant en español):** sigue pendiente del usuario; Claude no tiene acceso a su tenant.
-- **Ruta Pro Power BI P3 hecha:** labs 120, 121 y 122 (ver PROPUESTA §15.6). Siguiente: **P4 = labs 123 (diseño de
-  reportes), 124 (storytelling) y 125 (análisis)**.
+- **Ruta Pro Power BI P3 y P4 hechas** (labs 120 a 125, con prueba simulada de cada lab; PROPUESTA §15.6 y §15.7).
+  Siguiente: **P5 = labs 126 (servicio y seguridad: My workspace, dashboard, alertas, actualización, RLS) y 127 (reto Pro
+  sin pasos, que pasa a ser el capstone de la ruta)**, y prueba simulada de la ruta completa.
 
 ## Pendiente para la próxima sesión (anotado el 2026-11-11, noche)
 

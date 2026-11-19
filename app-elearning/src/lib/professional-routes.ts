@@ -407,12 +407,15 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-120-power-bi-dax-esencial",
       "lab-121-power-bi-contexto-filtro-inteligencia-tiempo",
       "lab-122-power-bi-rendimiento-performance-analyzer-dax-query-view",
+      "lab-123-power-bi-diseno-de-reportes",
+      "lab-124-power-bi-storytelling-navegacion",
+      "lab-125-power-bi-analisis-patrones-ia",
     ],
     competencies: ["Power Query", "Modelado en estrella", "DAX", "Diseño de reportes", "Servicio de Power BI", "Seguridad por filas"],
     status: "Especialización en construcción",
     // Provisional: el capstone será el LAB-127 (reto Pro sin pasos) cuando exista.
     capstoneLabSlug: "lab-116-power-bi-en-un-dia",
-    gapNote: "Disponibles los labs 116 (Power BI en un día), 117 (obtener y perfilar), 118 (transformar y cargar), 119 (modelo en estrella), 120 (DAX esencial), 121 (contexto de filtro, inteligencia de tiempo y grupos de cálculo) y 122 (rendimiento). Los labs 123 a 127 (diseño, storytelling, análisis, servicio y seguridad, y un reto Pro sin pasos) se publican por fases. Power BI Desktop solo funciona en Windows; con licencia gratuita se publica en My workspace, y compartir o crear apps requiere Pro, PPU o una prueba.",
+    gapNote: "Disponibles los labs 116 (Power BI en un día), 117 (obtener y perfilar), 118 (transformar y cargar), 119 (modelo en estrella), 120 (DAX esencial), 121 (contexto de filtro, inteligencia de tiempo y grupos de cálculo), 122 (rendimiento), 123 (diseño de reportes), 124 (storytelling) y 125 (análisis). Los labs 126 (servicio y seguridad) y 127 (reto Pro sin pasos) se publican en la siguiente fase. Power BI Desktop solo funciona en Windows; con licencia gratuita se publica en My workspace, y compartir o crear apps requiere Pro, PPU o una prueba.",
     portfolioEvidence: [
       "El archivo .pbix del LAB-116 con el modelo en estrella y las 4 medidas",
       "Captura de la página Resumen comercial 2025 sin filtros y con un país elegido",
@@ -422,6 +425,9 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "Matriz de Cartera Pendiente con el cierre de 2025 y el DAX de una medida rápida explicado (LAB-120)",
       "Crecimiento 2026 ingenuo frente a comparable y matriz con el grupo de cálculo de inteligencia de tiempo (LAB-121)",
       "Performance Analyzer antes y después y consulta DAX de comprobación por año (LAB-122)",
+      "Página Resumen comercial con tema, formato condicional, texto alternativo y vista móvil (LAB-123)",
+      "Drillthrough, tooltip de página y marcadores con navegación (LAB-124)",
+      "Hallazgos de Analyze, Key influencers y pronóstico, cada uno con su juicio crítico (LAB-125)",
     ],
   },
   {

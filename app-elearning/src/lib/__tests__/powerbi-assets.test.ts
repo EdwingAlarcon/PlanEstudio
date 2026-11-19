@@ -106,6 +106,33 @@ describe("Power BI practice assets (SIT Ventas)", () => {
     expect(lab122).toContain("**2.088**");
   });
 
+  it("matches the figures quoted in LABs 123-125", () => {
+    const read = (slug: string) => fs.readFileSync(path.resolve(process.cwd(), "content", "labs", `${slug}.md`), "utf-8");
+    const p4 = (expected as unknown as Record<string, Record<string, unknown>>)["lab123a125"]!;
+    expect((p4["acumulado2025"] as Record<string, number>)["10"]).toBe(16568491.5);
+    expect(p4["difDicNov2025"]).toBe(-526225.2);
+    expect((p4["cumplimiento2026"] as Record<string, number>)["Mariana Torres"]).toBe(104.71);
+    const lab123 = read("lab-123-power-bi-diseno-de-reportes");
+    for (const figure of ["**16.568.491,50**", "**−526.225,20**", "**Laura Gómez (62,97 %)**", "Mariana Torres (104,71 %)"]) {
+      expect(lab123).toContain(figure);
+    }
+    const camila = (p4["porVendedorCategoria2025"] as Record<string, Record<string, number>>)["Camila Restrepo"]!;
+    expect(camila["Licencias"]).toBe(2761753.2);
+    expect((p4["andinaPorVendedor2025"] as Record<string, number>)["Andrés Rojas"]).toBe(1338936.2);
+    const lab124 = read("lab-124-power-bi-storytelling-navegacion");
+    expect(lab124).toContain("**4.303.248,20**");
+    expect(lab124).toContain("1.338.936,20");
+    const industria = p4["porIndustria2025"] as Record<string, number>;
+    expect(Math.round((industria["Salud"]! + industria["Educación"]! + industria["Gobierno"]!) * 100) / 100).toBe(5745558.9);
+    expect((p4["lineasPorTramoImporte2025"] as Record<string, number>)["0"]).toBe(750);
+    expect((p4["top5Clientes2025"] as [string, number][])[0]).toEqual(["Seguros Horizonte S.A.S.", 436582.2]);
+    expect((p4["importeMedioLinea2025PorSubcategoria"] as Record<string, number>)["CRM"]).toBe(41714.82);
+    const lab125 = read("lab-125-power-bi-analisis-patrones-ia");
+    for (const figure of ["**5.745.558,90**", "| 0 | 750 |", "436.582,20", "**41.714,82**", "**23.363.000**"]) {
+      expect(lab125).toContain(figure);
+    }
+  });
+
   it("matches the figures quoted in LAB-116", () => {
     const lab = fs.readFileSync(lab116, "utf-8");
     expect(lab).toContain("20.840.961,90");

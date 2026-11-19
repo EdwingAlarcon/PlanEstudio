@@ -367,7 +367,73 @@ const expected = {
   // Labs 120-122 (DAX). Todo por fecha de pedido salvo que se diga otra cosa.
   lab120: lab120Metrics(),
   lab121: lab121Metrics(),
+  lab123a125: labP4Metrics(),
 };
+
+// Labs 123-125: cifras de 2025 por fecha de pedido.
+function labP4Metrics() {
+  const prod = (id) => productos.find((p) => p.id === id);
+  const reg = (id) => regiones.find((r) => r.id === id);
+  const vend = (id) => vendedores.find((v) => v.id === id).nombre;
+  const group = (rows, key) => {
+    const out = {};
+    for (const v of rows) out[key(v)] = (out[key(v)] ?? 0) + importe(v);
+    return Object.fromEntries(Object.entries(out).map(([k, x]) => [k, round2(x)]).sort((a, b) => b[1] - a[1]));
+  };
+  // Industria tal como queda tras la limpieza del Lab 116: Text.Proper(Text.Trim(...)) o "Sin dato".
+  const proper = (t) => t.toLowerCase().replace(/(^|[^\p{L}])(\p{L})/gu, (_, a, b) => a + b.toUpperCase());
+  const industriaLimpia = Object.fromEntries(
+    messyClientes.map((c) => [c[0], c[2].trim() === "" ? "Sin dato" : proper(c[2].trim())]),
+  );
+  const nombreCliente = Object.fromEntries(clientes.map((c) => [c.id, c.nombre]));
+  const mensual2025 = {};
+  for (let m = 1; m <= 12; m += 1) mensual2025[m] = sumBy(v2025.filter((v) => v.month === m));
+  let acumulado = 0;
+  const acumulado2025 = {};
+  for (let m = 1; m <= 12; m += 1) {
+    acumulado = round2(acumulado + mensual2025[m]);
+    acumulado2025[m] = acumulado;
+  }
+  const bins = {};
+  for (const v of v2025) {
+    const b = Math.floor(importe(v) / 10000) * 10000;
+    bins[b] = (bins[b] ?? 0) + 1;
+  }
+  const porSub = {};
+  for (const v of v2025) {
+    const s = prod(v.productoId).subcategoria;
+    porSub[s] = porSub[s] ?? { total: 0, n: 0 };
+    porSub[s].total += importe(v);
+    porSub[s].n += 1;
+  }
+  return {
+    ventasMensuales2025: mensual2025,
+    acumulado2025,
+    difDicNov2025: round2(mensual2025[12] - mensual2025[11]),
+    vendedoresBajoObjetivo2025: ["Laura Gómez", "Valeria Quispe"],
+    // 2026: ventas hasta octubre contra el objetivo del año completo (la trampa del año incompleto, otra vez).
+    cumplimiento2026: Object.fromEntries(
+      ejecutivos.map((e) => {
+        const ventas2026 = sumBy(byYear[2026].filter((v) => v.vendedorId === e.id));
+        const obj = objetivos.find((o) => o[0] === e.id && o[1] === 2026).slice(2).reduce((a, b) => a + b, 0);
+        return [e.nombre, Math.round((ventas2026 / obj) * 10000) / 100];
+      }),
+    ),
+    porVendedorCategoria2025: Object.fromEntries(
+      ejecutivos.map((e) => [e.nombre, group(v2025.filter((v) => v.vendedorId === e.id), (v) => prod(v.productoId).categoria)]),
+    ),
+    andinaPorVendedor2025: group(v2025.filter((v) => v.regionId === "R01"), (v) => vend(v.vendedorId)),
+    porPais2025: group(v2025, (v) => reg(v.regionId).pais),
+    porIndustria2025: group(v2025, (v) => industriaLimpia[v.clienteId]),
+    lineasPorTramoImporte2025: Object.fromEntries(Object.entries(bins).sort((a, b) => Number(a[0]) - Number(b[0]))),
+    top5Clientes2025: Object.entries(group(v2025, (v) => nombreCliente[v.clienteId])).slice(0, 5),
+    importeMedioLinea2025PorSubcategoria: Object.fromEntries(
+      Object.entries(porSub)
+        .map(([k, x]) => [k, round2(x.total / x.n)])
+        .sort((a, b) => b[1] - a[1]),
+    ),
+  };
+}
 
 function median(values) {
   const s = [...values].sort((a, b) => a - b);

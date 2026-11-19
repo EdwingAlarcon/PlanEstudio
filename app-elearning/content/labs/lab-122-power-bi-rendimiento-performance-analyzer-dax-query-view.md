@@ -369,4 +369,4 @@ Conserva `ruta-pro-sit-ventas.pbix` optimizado: los labs de reportes (123 a 125)
 
 ## Siguiente laboratorio recomendado
 
-**Lab 123 — Diseño de reportes** (en construcción): temas, formato condicional, visual calculations, accesibilidad y diseño móvil sobre este modelo.
+**[Lab 123 — Diseño de reportes](/labs/lab-123-power-bi-diseno-de-reportes)**: temas, formato condicional, visual calculations, accesibilidad y diseño móvil sobre este modelo.
