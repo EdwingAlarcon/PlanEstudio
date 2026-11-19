@@ -35,6 +35,10 @@ CLAUDE.md):
    + ruta `power-bi-pro`. **P2 hecha el mismo día**: labs 117, 118 y 119 (con prueba simulada y correcciones). Siguiente:
    P3 = labs 120 (DAX esencial), 121 (contexto de filtro e inteligencia de tiempo) y 122 (rendimiento). El usuario no
    tiene Fable: todo con Opus 5.5.
+9. **`/graphify` pendiente de alcance** (2026-11-18): el corpus tiene 562 archivos (247 de código, 312 docs, ~1,4 M de
+   palabras). El código ya está en el grafo (`graphify update .`, gratis). Falta que el usuario elija sobre qué hacer la
+   extracción semántica (cara: ~15-20 sub-agentes para todos los docs): `app-elearning/content` (recomendado),
+   `app-elearning`, todo el repo, o nada. Los `.xlsx` necesitan `graphifyy[office]`.
 
 ## Estado actual — 2026-11-06 (retomar desde aquí)
 
