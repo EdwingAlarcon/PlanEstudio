@@ -143,8 +143,8 @@ de arriba). (3) **Home**: sin los resúmenes de práctica (viven en `/progreso` 
 `/mi-ruta`); formato del simulador en `lib/simulator-config.ts`; "7 actividades", "N rutas" y "40 preguntas" salen de su
 fuente. (4) **Higiene**: `handoff-fase7/` retirado (sigue en `bd01f96`), `SPRINT_HANDOFF.md` actualizado y `agent-browser`
 quitado. Las tildes de `i18n.ts`, `mi-ruta` y `workstation.ts` se corrigieron en `1e94d21` (con sus e2e);
-**pendiente**: revisar las de otros archivos (lista en `SPRINT_HANDOFF.md`). `graphify` no está en el PATH: usar `python -m graphify update .` (borra `graph.html` por pasar del
-límite de 5.000 nodos). Validación: `npm run verify` (499 tests) y `npm run e2e` 102/102, en serie.
+**pendiente**: revisar las de otros archivos (lista en `SPRINT_HANDOFF.md`). `graphify` se instaló el 2026-11-18 con `uv tool install graphifyy` (0.9.112, en el PATH, skill `/graphify`
+registrado para Claude Code): usar `graphify update .`; esta versión genera `graph.html` agregado por comunidades. Validación: `npm run verify` (499 tests) y `npm run e2e` 102/102, en serie.
 
 ## Mantenimiento vigente — 2026-10-01
 
