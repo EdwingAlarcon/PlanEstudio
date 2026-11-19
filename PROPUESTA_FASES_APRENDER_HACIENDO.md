@@ -899,3 +899,67 @@ hasta tener los 12 labs. Conteos: labs 76 → 88 al terminar.
 - **Sin verificar en Learn:** **Pin live**, **Other user** en **View as**, **Enter data** y si el umbral de una alerta sobre una
   tarjeta con formato de porcentaje se escribe 1 o 100 (el lab pide comprobarlo).
 - **Tiempo total de la ruta:** unas 42 h (suma de `duration` de los 12 labs).
+
+### 15.9 Ruta Pro Power Automate (cloud) — diseño (2026-11-19, pendiente de aprobar)
+
+**Qué ya existe y no se repite:** Módulo 5 (trigger, acciones, condiciones, flujo programado), Módulo 11 (Scope y Try/Catch,
+child flow, HTTP + Parse JSON + paginación, ramas paralelas), Módulo 14 (conectores personalizados), LAB-05 (notificación,
+resumen diario y aprobación sobre Solicitudes TI) y la Especialización RPA (desktop flows, labs 104-112). La ruta Pro aplica
+todo eso a **otro proceso** y sube el nivel a lo que pide un puesto de "Power Automate developer": diseño de flujos que no
+fallan en silencio, que se despliegan con ALM y que alguien más puede operar.
+
+**Certificación (verificado en Learn el 2026-11-19):** no hay credencial vigente específica. La de Applied Skills de Power
+Automate y el curso PL-7002 dan 404; el repo MIT de PL-7002 (7 labs: plantillas y Copilot, modelo Dataverse, SharePoint,
+aprobación, botón, programado y filtros de desencadenador) y los labs 8-9 de AB-410T00 (cloud flow y aprobación) siguen
+publicados y sirven de **esqueleto**, pero son de nivel básico: la ruta los cubre en su primer lab y sigue más allá. La ruta se
+presenta como **competencia profesional**, no como preparación de un examen.
+
+**Licencia (verificado en Learn):** el alumno puede iniciar él mismo una **prueba de Power Automate de 90 días** con las mismas
+capacidades que Premium (conectores premium incluidos), **sin créditos de AI Builder**; desde el 2026-11-01 las licencias
+nuevas no traen créditos de AI Builder incluidos y las pruebas de AI Builder están discontinuadas. Consecuencia: **AI Builder
+solo como variante opcional** (si la organización tiene créditos) y el lab de documentos se resuelve sin él. Lo que exige
+administración (políticas de datos/DLP, entornos gestionados) va con variante en papel. Ambiente: el del curso (Trial con
+Dataverse, `ENTORNOS_Y_TRIALS.md`).
+
+**Caso: "SIT Compras"** (misma empresa que las rutas anteriores, otro proceso): de la solicitud de compra al pago de la
+factura. Las áreas piden compras; según el importe y la categoría se aprueban en uno, dos o tres niveles; se emite la orden; el
+proveedor envía la factura; se concilia contra la orden y se programa el pago. Es un proceso real de cualquier empresa, con
+reglas, excepciones, plazos y dinero, que obliga a todo lo que la ruta enseña.
+
+**Datos propios** en `public/practice-assets/powerautomate/sit-compras/` (generador determinista
+`npm run generate:powerautomate-assets`, como el de Power BI):
+
+| Archivo | Contenido | Para practicar |
+|---|---|---|
+| `politica-aprobacion.json` | Umbrales por importe y categoría, niveles y plazos | Reglas de negocio fuera del flujo (variables de entorno) |
+| `proveedores.csv` | Proveedores con NIT, correo ficticio, moneda y condiciones de pago | Carga a Dataverse, claves alternativas, upsert |
+| `solicitudes-compra.xlsx` | Tabla de Excel con solicitudes históricas (algunas sucias: importes como texto, fechas mezcladas) | Conector de Excel, expresiones, limpieza |
+| `catalogo-api/*.json` | "API" estática del catálogo servida por la app (con paginación por archivos) | HTTP, Parse JSON, paginación, errores |
+| `facturas/*.json` y `facturas/*.pdf` | Facturas de proveedores (los PDF son la versión legible; los JSON, la estructurada) | Adjuntos, conciliación, AI Builder opcional |
+| `expected/` | Cifras esperadas por lab | Validación |
+
+**Labs (128-139):**
+
+| Lab | Título | Competencia |
+|---|---|---|
+| 128 | Power Automate en un día: de la solicitud a la aprobación | Los fundamentos de punta a punta (tablas de Dataverse, flujo automatizado, aprobación, notificación) |
+| 129 | Desencadenadores que no se disparan de más | Filtros de filas, columnas de selección, condiciones de desencadenador, recurrencia, flujos instantáneos con entradas |
+| 130 | Expresiones y datos | Compose, variables, Select, Filter array, `formatDateTime`, `coalesce`, arrays y objetos, Excel sucio |
+| 131 | Aprobaciones de verdad | Secuenciales y en paralelo, "todos deben aprobar", respuestas personalizadas, reasignación, vencimiento y escalado, Teams y tarjetas adaptables |
+| 132 | Dataverse a fondo desde un flujo | List rows con OData, FetchXML, expand, paginación, upsert con clave alternativa, acciones enlazadas |
+| 133 | Errores, reintentos e idempotencia | Try/Catch/Finally, run after, políticas de reintento, tiempo de espera, Terminate, control de concurrencia, no duplicar |
+| 134 | Integración con APIs | HTTP al catálogo, paginación, Parse JSON con esquemas que cambian, desencadenador HTTP (webhook), límites |
+| 135 | Documentos y conciliación | Facturas: adjuntos y JSON, conciliación factura-orden con tolerancias; AI Builder como variante opcional con créditos |
+| 136 | Soluciones y ALM | Flujos en soluciones, referencias de conexión, variables de entorno, exportar/importar administrada, child flows en soluciones |
+| 137 | Operación y gobierno | Historial y análisis de ejecuciones, alertas de fallo, propietarios y cuentas de servicio, límites de la plataforma, DLP en papel, Copilot en flujos |
+| 138 | Rendimiento | Apply to each frente a Select, concurrencia, lotes, paginación y umbrales, medir antes y después |
+| 139 | Reto Pro sin pasos | Otro proceso (por ejemplo, alta de proveedores con validación y documentos), rúbrica por competencias |
+
+**Integración en la app:** ruta `power-automate-pro` en `professional-routes.ts`, "Especialización en construcción" hasta el
+LAB-139 (capstone provisional: LAB-128). Labs opcionales, como los de Power BI. Conteos: labs 88 → 100 al terminar.
+
+**Fases:** P1 datos + LAB-128 + ruta; P2 129-131; P3 132-134; P4 135-137; P5 138-139 + prueba simulada de la ruta.
+
+**Verificación:** las cifras salen del generador. Los flujos no se pueden ejecutar desde este equipo (no hay acceso a un
+tenant): cada paso se contrasta con Learn y las expresiones se prueban reimplementando su lógica cuando sea posible; lo que no
+se pueda verificar se marca. Prueba simulada en cada fase, como en Power BI.

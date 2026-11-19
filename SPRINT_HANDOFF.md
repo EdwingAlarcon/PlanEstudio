@@ -20,7 +20,8 @@
 - **Ítem 5 (tenant en español):** sigue pendiente del usuario; Claude no tiene acceso a su tenant.
 - **Ruta Pro Power BI COMPLETA** (labs 116 a 127, P1 a P5, con prueba simulada de cada fase y de la ruta entera; PROPUESTA
   §15.4 a §15.8). La ruta `power-bi-pro` está "Disponible" con capstone LAB-127. Siguiente según §15.3: **Ruta Pro Power
-  Automate (cloud)**, con PL-7002 y AB-410T00 como esqueleto; hay que diseñarla (datos, labs y fases) antes de escribir.
+  Automate (cloud)**: diseño escrito en PROPUESTA §15.9 (caso SIT Compras, labs 128-139, fases P1-P5), pendiente de que el
+  usuario lo apruebe.
 
 ## Pendiente para la próxima sesión (anotado el 2026-11-11, noche)
 
