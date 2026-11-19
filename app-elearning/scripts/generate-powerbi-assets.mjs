@@ -427,6 +427,13 @@ function lab121Metrics() {
     ytdOct2026: hasta(2026, 10),
     pedidosYtdOct2025: pedidosHasta(2025, 10),
     pedidosYtdOct2026: pedidosHasta(2026, 10),
+    // Grupo de cálculo: un recuento distinto acumulado no es la suma de los recuentos mensuales.
+    clientesYtdOct2025: new Set(ventas.filter((v) => v.year === 2025 && v.month <= 10).map((v) => v.clienteId)).size,
+    sumaClientesMensualesEneOct2025: Array.from({ length: 10 }, (_, i) =>
+      new Set(ventas.filter((v) => v.year === 2025 && v.month === i + 1).map((v) => v.clienteId)).size,
+    ).reduce((a, b) => a + b, 0),
+    clientesYtdOct2026: new Set(ventas.filter((v) => v.year === 2026 && v.month <= 10).map((v) => v.clienteId)).size,
+    ventasOct2025: mes(2025, 10),
     ventasOctNovDic2025: round2(mes(2025, 10) + mes(2025, 11) + mes(2025, 12)),
     ventasDic2025: mes(2025, 12),
     crecimientoIngenuo2026: Math.round((sumBy(byYear[2026]) / sumBy(byYear[2025]) - 1) * 10000) / 100,

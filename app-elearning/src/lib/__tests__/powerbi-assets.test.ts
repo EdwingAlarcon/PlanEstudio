@@ -94,9 +94,11 @@ describe("Power BI practice assets (SIT Ventas)", () => {
     expect(l121["crecimientoComparable2026"]).toBe(14.29);
     expect(l121["pctAntioquiaSobreColombia2025"]).toBe(46.73);
     expect([l121["clientesSegmentoA"], l121["clientesSegmentoB"], l121["clientesSegmentoC"]]).toEqual([32, 111, 7]);
-    expect(l121["pedidosYtdOct2025"]).toBe(596);
+    expect(l121["clientesYtdOct2025"]).toBe(149);
+    expect(l121["sumaClientesMensualesEneOct2025"]).toBe(482);
+    expect(l121["clientesYtdOct2026"]).toBe(150);
     const lab121 = read("lab-121-power-bi-contexto-filtro-inteligencia-tiempo");
-    for (const figure of ["**16.568.491,50**", "**−9,14 %**", "**+14,29 %**", "**46,73 %**", "**32**", "**596**", "**6.243.067,40**"]) {
+    for (const figure of ["**16.568.491,50**", "**−9,14 %**", "**+14,29 %**", "**46,73 %**", "**32**", "**149**", "**482**", "**6.243.067,40**"]) {
       expect(lab121).toContain(figure);
     }
     const lab122 = read("lab-122-power-bi-rendimiento-performance-analyzer-dax-query-view");

@@ -1,7 +1,7 @@
 # Graph Report - PlanEstudio  (2026-11-19)
 
 ## Corpus Check
-- 561 files · ~1,418,154 words
+- 561 files · ~1,419,780 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 52 file(s) not represented in the graph (top: .csv 43, (none) 4, .css 2)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `82e0f41c`
+- Built from commit: `77e391c1`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -596,16 +596,16 @@
 10. `PlanEstudio — Estado de sprints post-auditoría (handoff)` - 42 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Task 2: Core type plumbing (LevelId, LEVEL_ORDER, LEVEL_MODULE_RANGE, badge variant)` --references--> `validateLabFrontmatter()`  [INFERRED]
-  docs/superpowers/plans/2026-07-03-nivel-ia-desarrollo-asistido.md → app-elearning/src/lib/content.ts
-- `Labs (2 nuevos, `app-elearning/content/labs/`)` --references--> `validateLabFrontmatter()`  [INFERRED]
-  docs/superpowers/specs/2026-07-03-nivel-ia-desarrollo-asistido-design.md → app-elearning/src/lib/content.ts
-- `Task 2: Register The Resource In The Next.js Content Loader` --references--> `getAllResourcePages()`  [INFERRED]
-  docs/superpowers/plans/2026-07-13-jr-1-matriz-skills-laborales.md → app-elearning/src/lib/content.ts
-- `Task 2: Register The Resource In The Next.js Content Loader` --references--> `getAllResourcePages()`  [INFERRED]
-  docs/superpowers/plans/2026-07-13-jr-2-crm-functional.md → app-elearning/src/lib/content.ts
-- `Task 2: Register The Resource In The Next.js Content Loader` --references--> `getAllResourcePages()`  [INFERRED]
-  docs/superpowers/plans/2026-07-13-jr-3-crm-developer.md → app-elearning/src/lib/content.ts
+- `Después de la Fase 7 — mantenimiento del 2026-11-06 al 2026-11-11 (sin ampliar contenido)` --references--> `buildPageMetadata()`  [INFERRED]
+  SPRINT_HANDOFF.md → app-elearning/src/lib/seo.ts
+- `Pendiente (en orden)` --references--> `getLabsForLevel()`  [INFERRED]
+  SPRINT_HANDOFF.md → app-elearning/src/lib/content.ts
+- `Sprint 6 — Modo guiado estricto opcional (2026-09-06) — CERRADO` --references--> `ModulePrerequisiteGate()`  [INFERRED]
+  SPRINT_HANDOFF.md → app-elearning/src/components/modules/module-prerequisite-gate.tsx
+- `Estado al 2026-08-24 (fix crítico: última pregunta en blanco en todo quiz + cierre parcial de "§63")` --references--> `getCurrentQuestion()`  [INFERRED]
+  SPRINT_HANDOFF.md → app-elearning/src/lib/quiz-engine.ts
+- `Task 10: Wire the `ia` level into sidebar, home, labs page, and checklist UI` --references--> `LevelId`  [INFERRED]
+  docs/superpowers/plans/2026-07-03-nivel-ia-desarrollo-asistido.md → app-elearning/src/lib/i18n.ts
 
 ## Import Cycles
 - None detected.
@@ -2816,17 +2816,17 @@ Nodes (4): 3. Branching Strategy, GitFlow para Power Platform, .gitignore recome
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `vitest` connect `migrate-modules.mjs` to `workstation.ts`, `interactive-practice-client.tsx`, `review-queue.ts`, `quiz-panel.tsx`, `interactive-practices.ts`, `Button`, `legacy-client.tsx`, `checklist-client.tsx`, `content.ts`, `NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365`, `review-scheduler.ts`, `getAllLabs`, `practices.ts`, `useProgressStore`, `PracticeWorkspaceClient`, `devDependencies`, `interactive-practices-contract.test.ts`, `rpa-sandbox-activity.ts`, `progress-backup.ts`, `practice-portability.test.ts`, `review-queue.ts`, `seo.ts`, `employability.ts`, `package.json`, `seo.test.ts`, `validate-content.ts`, `Servicios Profesionales`, `questions-parser.ts`, `pilot-mastery.ts`, `workstation-store.ts`, `workstation-report.ts`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+- **Why does `NIVEL 4: ARQUITECTO MASTER — Power Platform & Dynamics 365` connect `NIVEL 4: ARQUITECTO MASTER — Power Platform & Dynamics 365` to `MÓDULO 31: Enterprise Architecture y Gobernanza`, `MÓDULO 33: Multi-tenant, Multi-geo y Estrategia de Ambientes`, `MÓDULO 35: Arquitectura de Datos — Fabric, Synapse y Medallion`, `MÓDULO 38: Liderazgo Técnico y Gestión de Proyectos`, `MÓDULO 39: Casos de Transformación Digital`, `MÓDULO 40: Arquitectura Power Platform (referencia histórica PL-600)`, `MÓDULO 41: Proyecto Capstone — Arquitectura Enterprise`, `MÓDULO 32: CoE Starter Kit y Administración a Escala`, `MÓDULO 34: Azure Integration Services Avanzado`, `MÓDULO 36: Seguridad y Cumplimiento Enterprise`, `MÓDULO 37: AI Builder y Azure AI integrado`, `index.md`?**
+  _High betweenness centrality (0.006) - this node is a cross-community bridge._
 - **What connects `RFC-2606` to the rest of the system?**
   _1 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Lab 32 — CoE Starter Kit: Gobernanza a Escala del Tenant de Power Platform` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
-- **Why does `NIVEL 4: ARQUITECTO MASTER — Power Platform & Dynamics 365` connect `NIVEL 4: ARQUITECTO MASTER — Power Platform & Dynamics 365` to `MÓDULO 31: Enterprise Architecture y Gobernanza`, `MÓDULO 33: Multi-tenant, Multi-geo y Estrategia de Ambientes`, `MÓDULO 35: Arquitectura de Datos — Fabric, Synapse y Medallion`, `MÓDULO 38: Liderazgo Técnico y Gestión de Proyectos`, `MÓDULO 39: Casos de Transformación Digital`, `MÓDULO 40: Arquitectura Power Platform (referencia histórica PL-600)`, `MÓDULO 41: Proyecto Capstone — Arquitectura Enterprise`, `MÓDULO 32: CoE Starter Kit y Administración a Escala`, `MÓDULO 34: Azure Integration Services Avanzado`, `MÓDULO 36: Seguridad y Cumplimiento Enterprise`, `MÓDULO 37: AI Builder y Azure AI integrado`, `index.md`?**
+- **Why does `NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365` connect `NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365` to `MÓDULO 11: Power Automate Avanzado`, `MÓDULO 15: Copilot Studio — Introducción`, `MÓDULO 16: Seguridad y Administración de Soluciones`, `👨‍💻 Actividades Prácticas Paso a Paso`, `MÓDULO 9: Dataverse Avanzado`, `MÓDULO 10: Canvas Apps — Componentes y Reutilización`, `MÓDULO 13: JavaScript y PCF Básico`, `MÓDULO 17: Proyecto Integrador Nivel 2`, `index.md`, `MÓDULO 14: Conectores Personalizados`?**
   _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Should `workstation.ts` be split into smaller, more focused modules?**
   _Cohesion score 0.13157894736842105 - nodes in this community are weakly interconnected._
-- **Why does `NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365` connect `NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365` to `MÓDULO 11: Power Automate Avanzado`, `MÓDULO 15: Copilot Studio — Introducción`, `MÓDULO 16: Seguridad y Administración de Soluciones`, `👨‍💻 Actividades Prácticas Paso a Paso`, `MÓDULO 9: Dataverse Avanzado`, `MÓDULO 10: Canvas Apps — Componentes y Reutilización`, `MÓDULO 13: JavaScript y PCF Básico`, `MÓDULO 17: Proyecto Integrador Nivel 2`, `index.md`, `MÓDULO 14: Conectores Personalizados`?**
-  _High betweenness centrality (0.004) - this node is a cross-community bridge._
+- **Why does `NIVEL 3: AVANZADO — Power Platform & Dynamics 365` connect `NIVEL 3: AVANZADO — Power Platform & Dynamics 365` to `MÓDULO 19: ALM y CI/CD con Azure DevOps`, `MÓDULO 20: Dynamics 365 CE — Sales y Customer Service`, `MÓDULO 23: C# Plugins para Dataverse`, `MÓDULO 26: Performance y Optimización`, `MÓDULO 25: Patrones de Diseño Avanzados`, `MÓDULO 21: Power Pages — Portales Externos`, `MÓDULO 22: Copilot Studio Avanzado`, `MÓDULO 27: PCF Avanzado con TypeScript y React`, `MÓDULO 29: Power Pages Avanzado y Azure AD B2C`, `index.md`, `MÓDULO 18: Arquitectura de Soluciones Power Platform`, `MÓDULO 24: Integraciones con Azure Services`, `MÓDULO 28: Code Apps con React y TypeScript`, `MÓDULO 30: Proyecto Multicapa Nivel 3`?**
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Should `search-bar.tsx` be split into smaller, more focused modules?**
   _Cohesion score 0.07390648567119155 - nodes in this community are weakly interconnected._

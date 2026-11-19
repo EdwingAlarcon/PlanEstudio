@@ -2,7 +2,7 @@
 id: lab-121
 title: "Power BI — Contexto de filtro, inteligencia de tiempo y grupos de cálculo (Ruta Pro Power BI)"
 level: "N2"
-duration: 175
+duration: 220
 product: ["Power BI"]
 certifications: ["PL-300"]
 role: ["Analista de datos"]
@@ -45,14 +45,14 @@ Entender **qué filtra a una medida en cada celda** y usarlo a propósito: `ALL`
 
 | Ejercicio | Tiempo estimado |
 |---|---|
-| Ejercicio 1 — `ALL` frente a `ALLSELECTED` | 25 min |
+| Ejercicio 1 — `ALL` frente a `ALLSELECTED` | 30 min |
 | Ejercicio 2 — Transición de contexto en una columna calculada | 25 min |
 | Ejercicio 3 — Acumulado del año | 20 min |
 | Ejercicio 4 — Año anterior y crecimiento | 20 min |
-| Ejercicio 5 — La trampa del año incompleto | 30 min |
-| Ejercicio 6 — Últimos tres meses | 15 min |
-| Ejercicio 7 — Un grupo de cálculo de inteligencia de tiempo | 40 min |
-| **Total** | **unas 2 h 55 min** |
+| Ejercicio 5 — La trampa del año incompleto | 40 min |
+| Ejercicio 6 — Últimos tres meses | 20 min |
+| Ejercicio 7 — Un grupo de cálculo de inteligencia de tiempo | 65 min |
+| **Total** | **unas 3 h 40 min** (mejor en dos sesiones: Ejercicios 1 a 4 y 5 a 7) |
 
 ## Nivel
 
@@ -96,7 +96,7 @@ DIVIDE ( [Ventas Totales], CALCULATE ( [Ventas Totales], ALL ( Regiones ) ) )   
 DIVIDE ( [Ventas Totales], CALCULATE ( [Ventas Totales], ALLSELECTED ( Regiones ) ) )   // respeta los slicers y filtros externos
 ```
 
-2. Página nueva `Contexto`: un slicer de `Fecha[Año]` con **2025**, un slicer de `Regiones[Pais]` con **Colombia** y una **Matrix** con `Regiones[Region]` en **Rows** y `Ventas Totales` y las dos medidas en **Values**.
+2. Página nueva `Contexto`: un slicer de `Fecha[Año]` con **2025** (pásalo a **Vertical list** como en el Lab 119: en una página nueva vuelve a salir como rango), un slicer de `Regiones[Pais]` con **Colombia** (de `Regiones`, **no** de `Clientes`, que también tiene una columna `Pais`) y una **Matrix** con `Regiones[Region]` en **Rows** y `Ventas Totales` y las dos medidas en **Values**.
 
 `ALLSELECTED` quita los filtros de filas y columnas del visual, pero **conserva los filtros que vienen de fuera** (slicers, filtros de página); por eso se usa para totales "visibles" ([Learn: ALLSELECTED](https://learn.microsoft.com/dax/allselected-function-dax)). `ALL` los quita todos sobre la tabla indicada.
 
@@ -152,7 +152,7 @@ SWITCH (
 )
 ```
 
-4. Una tabla con `Clientes[Segmento Cliente]` y un recuento de `Clientes[ClienteID]`.
+4. Crea la medida `Num Clientes = COUNTROWS ( Clientes )` y un visual **Table** con `Clientes[Segmento Cliente]` y `Num Clientes`. (No confundas `Segmento Cliente` con la columna `Segmento` que ya trae `Clientes`: Empresa, Pyme, Gobierno.)
 
 ### Resultado esperado del Ejercicio 2
 
@@ -194,7 +194,7 @@ Ventas YTD = TOTALYTD ( [Ventas Totales], Fecha[Date] )   // desde el 1 de enero
 | Periodo | Ventas Totales | Ventas YTD |
 |---|---|---|
 | Marzo 2025 | 2.039.623,10 | **4.966.869,20** |
-| Octubre 2025 | — | **16.568.491,50** |
+| Octubre 2025 | 1.970.597,00 | **16.568.491,50** |
 | Total 2025 | 20.840.961,90 | **20.840.961,90** |
 
 En la fila del año, el YTD es el año completo: el último día del periodo es el 31 de diciembre.
@@ -272,7 +272,9 @@ DIVIDE ( [Ventas Totales] - [Ventas Año Anterior Comparable], [Ventas Año Ante
 | `Ventas Año Anterior Comparable` | **16.568.491,50** (enero a octubre de 2025) |
 | `% Crecimiento Comparable` | **+14,29 %** |
 
-Comprobado con un motor DAX (con una formulación equivalente del filtro de días con ventas): 16.568.491,50 es exactamente el `Ventas YTD` de octubre de 2025 del Ejercicio 3. **Las ventas de 2026 no caen un 9 %: crecen un 14 %.** En 2025 y en los meses, las dos versiones dan lo mismo, porque todos sus días tienen ventas.
+Comprobado con un motor DAX (con una formulación equivalente del filtro de días con ventas): 16.568.491,50 es exactamente el `Ventas YTD` de octubre de 2025 del Ejercicio 3. **Las ventas de 2026 no caen un 9 %: crecen un 14 %.** En 2025 y en los meses hasta octubre de 2026, las dos versiones dan lo mismo, porque todos sus días tienen ventas.
+
+> **Noviembre y diciembre de 2026 en la matriz:** aparecen porque tienen `Ventas YTD` y `Ventas Año Anterior`. Ahí `% Crecimiento` da **−100 %** (ventas vacías contra las de 2025) y la versión comparable queda vacía. Es el mismo síntoma del año incompleto, mes a mes; la columna `Con ventas` como filtro de la página los oculta.
 
 > **Alternativa:** también puedes limitar `Fecha` a los días con datos. Learn recomienda años completos para las funciones de tiempo, así que la columna `Con ventas` es la opción más segura; además sirve como filtro de página para ocultar noviembre y diciembre de 2026 en los gráficos.
 
@@ -303,7 +305,9 @@ Promedio Mensual 3 Meses = DIVIDE ( [Ventas Últimos 3 Meses], 3 )
 
 `DATESINPERIOD` devuelve las fechas desde la fecha de inicio y durante el número de intervalos indicado; con un número negativo, va hacia atrás ([Learn: DATESINPERIOD](https://learn.microsoft.com/dax/datesinperiod-function-dax)). El intervalo (`DAY`, `MONTH`, `QUARTER`, `YEAR`) se escribe sin comillas.
 
-**Resultado esperado (diciembre 2025):** `Ventas Últimos 3 Meses` = **6.243.067,40** (octubre + noviembre + diciembre); `Promedio Mensual 3 Meses` = **2.081.022,47**, frente a las ventas de diciembre solo (1.873.122,60).
+Añade las dos medidas a la matriz de la página `Tiempo`.
+
+**Resultado esperado (diciembre 2025):** `Ventas Últimos 3 Meses` = **6.243.067,40** (octubre + noviembre + diciembre); `Promedio Mensual 3 Meses` = **2.081.022,47**, frente a las ventas de diciembre solo (1.873.122,60). En la fila del año 2025 el valor es el mismo que en diciembre (los tres meses que terminan el 31 de diciembre). En enero y febrero de 2024 no hay tres meses anteriores, pero `Promedio Mensual 3 Meses` divide igual entre 3: enero de 2024 da 405.906,77 con ventas del mes de 1.217.720,30. El reto básico te pide corregirlo.
 
 ---
 
@@ -316,8 +320,8 @@ Promedio Mensual 3 Meses = DIVIDE ( [Ventas Últimos 3 Meses], 3 )
 1. **Guarda una copia** del archivo (`ruta-pro-sit-ventas-antes-grupo.pbix`): el paso siguiente cambia una propiedad del modelo.
 2. Abre **Model view** y selecciona el botón **Calculation group** de la cinta.
 3. Si el modelo permite medidas implícitas, Power BI te pide activar **discourage implicit measures**. Acepta. Learn explica la consecuencia: las columnas dejan de mostrar el símbolo de suma y ya no se pueden arrastrar a un visual como valores (las medidas implícitas existentes siguen funcionando). Desde ahora, todo valor de un visual es una medida explícita. Por eso este lab va después del 120: ya tienes las medidas que necesitas.
-4. En el panel **Data** (con **Model** seleccionado arriba, es el **Model explorer**) aparece el grupo nuevo. Renombra la tabla a `Inteligencia de tiempo` y su columna a `Cálculo`.
-5. Crea cuatro elementos (clic derecho sobre **Calculation items** > **New calculation item**), cada uno con su fórmula:
+4. En el panel **Data** (con **Model** seleccionado arriba, es el **Model explorer**) aparece el grupo nuevo, con una columna y **un primer elemento ya creado** con la fórmula `SELECTEDMEASURE()` (Learn lo crea así para que lo renombres). Renombra la tabla a `Inteligencia de tiempo` y su columna a `Cálculo` (doble clic sobre el nombre o en el **Properties pane**).
+5. Renombra ese primer elemento a `Actual` y crea los otros tres con clic derecho sobre **Calculation items** > **New calculation item**. Si creas cuatro nuevos, te sobra uno y saldrá como columna extra en la matriz. Las cuatro fórmulas:
 
 ```dax
 Actual = SELECTEDMEASURE ()
@@ -341,16 +345,16 @@ RETURN
 
 6. En `Var %`, activa **Dynamic format string** en el **Properties pane** y escribe `"0.00%"`: así ese elemento se muestra como porcentaje aunque la medida original tenga formato de moneda.
 7. Ordena los elementos (Actual, YTD, Año anterior, Var %) en el **Properties pane** del grupo, sección **Calculation items**, o con clic derecho > mover arriba o abajo.
-8. **Matrix** nueva: `Fecha[Año]` y `Fecha[Mes]` en **Rows**, `Inteligencia de tiempo[Cálculo]` en **Columns**, y `Ventas Totales` y `Pedidos` en **Values**.
+8. En la página `Tiempo`, una **Matrix** nueva: `Fecha[Año]` y `Fecha[Mes]` en **Rows**, `Inteligencia de tiempo[Cálculo]` en **Columns**, y `Ventas Totales` y `Clientes Activos` (Lab 120) en **Values**. Cada elemento del grupo tendrá dos subcolumnas, una por medida, y la matriz añade a la derecha una columna **Total** con las medidas sin cálculo aplicado.
 
 ### Resultado esperado del Ejercicio 7 (octubre)
 
-| Periodo | Ventas — YTD | Pedidos — YTD |
-|---|---|---|
-| Octubre 2025 | **16.568.491,50** | **596** |
-| Octubre 2026 | **18.936.520,50** | **705** |
+| Periodo | Ventas — YTD | Clientes Activos — Actual | Clientes Activos — YTD |
+|---|---|---|---|
+| Octubre 2025 | **16.568.491,50** | 60 | **149** |
+| Octubre 2026 | **18.936.520,50** | 60 | **150** |
 
-Comprobado con un motor DAX. Fíjate en `Pedidos — YTD`: es un **recuento distinto** de pedidos de enero a octubre, no la suma de los recuentos mensuales. El grupo de cálculo no suma resultados: **reevalúa la medida** con otro filtro de fechas. Por eso funciona igual con `Ventas Totales`, `Pedidos`, `Unidades` o `Cartera Pendiente`.
+Comprobado con un motor DAX. Fíjate en `Clientes Activos — YTD`: **149** clientes distintos compraron de enero a octubre de 2025, aunque si sumas los clientes activos de cada mes obtienes **482** (un cliente que compra en marzo y en julio cuenta en los dos meses, pero una sola vez en el acumulado). El grupo de cálculo no suma resultados: **reevalúa la medida** con otro filtro de fechas. Por eso funciona igual con `Ventas Totales`, `Clientes Activos`, `Unidades` o `Cartera Pendiente`. **No lo uses con medidas que ya son porcentajes** (`% Cumplimiento`, `% del Total Categorías`): `Var %` daría la variación relativa de un porcentaje, que se lee mal. Si te lo piden, Learn permite limitar un elemento a ciertas medidas con `ISSELECTEDMEASURE`.
 
 > **Dos cuidados que señala Learn:** con un grupo de cálculo, todas las medidas pasan a tipo *variant*; si una medida devuelve texto, `Var %` daría un error de conversión (se protege con `ISNUMERIC ( SELECTEDMEASURE () )`). Y `Var %` del año 2026 tiene la misma trampa del Ejercicio 5: el reto avanzado te pide resolverla dentro del grupo.
 
@@ -358,7 +362,7 @@ Comprobado con un motor DAX. Fíjate en `Pedidos — YTD`: es un **recuento dist
 
 | Campo | Tu valor |
 |---|---|
-| `Pedidos — YTD` de octubre 2025 y 2026 | ___ |
+| `Clientes Activos — YTD` de octubre 2025 y 2026, y la suma de los meses de 2025 | ___ |
 | Qué propiedad del modelo cambió al crear el grupo | ___ |
 
 ---
@@ -368,11 +372,12 @@ Comprobado con un motor DAX. Fíjate en `Pedidos — YTD`: es un **recuento dist
 | Error | Causa probable | Solución |
 |---|---|---|
 | `Ventas YTD` o `Ventas Año Anterior` salen vacías | `Fecha` no está marcada como tabla de fechas o la relación activa no llega a `Fecha[Date]` | Lab 119, Ejercicio 2 y Ejercicio 3 |
+| `% sobre Todas las Regiones` y `% sobre lo Seleccionado` salen iguales | El slicer de país usa `Clientes[Pais]`: `ALL ( Regiones )` no quita ese filtro | Haz el slicer con `Regiones[Pais]` |
 | `% sobre lo Seleccionado` da 100 % en cada fila | El argumento de `ALLSELECTED` es otra tabla (por ejemplo `Fecha`), así que no quita el filtro de la fila de región | `ALLSELECTED ( Regiones )` |
 | Todas las filas de `Ventas Cliente` iguales | Se usó `SUM` sin `CALCULATE` ni medida | `[Ventas Totales]` o `CALCULATE ( SUM ( … ) )` |
-| `Con ventas` es VERDADERO en todo 2026 | Se usó `TODAY()` o `MAX ( Fecha[Date] )` | `MAX ( Ventas[FechaPedido] )` |
+| `Con ventas` es VERDADERO en todo 2026, o hasta hoy | Se usó `MAX ( Fecha[Date] )` (todo 2026) o `TODAY()` (hasta hoy, no hasta el último pedido) | `MAX ( Ventas[FechaPedido] )` |
 | No se puede arrastrar `Ventas[Cantidad]` como valor | Es lo esperado tras crear el grupo de cálculo (**discourage implicit measures**) | Usa la medida `Unidades` |
-| `Var %` muestra 0,18 en lugar de 18,47 % | Falta la cadena de formato dinámica | Paso 6 del Ejercicio 7 |
+| `Var %` muestra 0,18 en lugar de 18,47 %, o 0 para un recuento | Falta la cadena de formato dinámica: toma el formato de la medida (decimal o entero) | Paso 6 del Ejercicio 7 |
 
 ## 🔧 Diagnóstico y reparación
 
@@ -389,7 +394,7 @@ Comprobado con un motor DAX. Fíjate en `Pedidos — YTD`: es un **recuento dist
 - [ ] `Ventas YTD` de octubre 2025: 16.568.491,50
 - [ ] Crecimiento 2025: 17,65 %; 2026 comparable: +14,29 % (ingenuo: −9,14 %)
 - [ ] `Ventas Últimos 3 Meses` de diciembre 2025: 6.243.067,40
-- [ ] Grupo de cálculo con cuatro elementos y `Pedidos — YTD` de octubre 2025 = 596
+- [ ] Grupo de cálculo con cuatro elementos y `Clientes Activos — YTD` de octubre 2025 = 149 (no 482)
 
 ## Evidencia esperada
 
@@ -414,7 +419,7 @@ Comprobado con un motor DAX. Fíjate en `Pedidos — YTD`: es un **recuento dist
 
 ## Reto adicional
 
-**Reto básico:** crea `Ventas MTD` con `TOTALMTD` y comprueba que en la fila de un mes coincide con `Ventas Totales`.
+**Reto básico:** corrige `Promedio Mensual 3 Meses` para que divida entre los meses que de verdad tienen ventas en la ventana (pista: cuenta los valores distintos de `Fecha[AñoMes]` con ventas dentro de `DATESINPERIOD`). Enero de 2024 debe dar 1.217.720,30. Después, crea `Ventas MTD` con `TOTALMTD`.
 
 **Reto intermedio:** en el Lab 120, `Ventas Licencias` daba 13.799.948,40 también en la fila Servicios. Escribe `Ventas Licencias en Contexto` con `KEEPFILTERS ( Productos[Categoria] = "Licencias" )` y comprueba que en la fila Servicios queda vacía y en Licencias no cambia.
 
@@ -425,7 +430,7 @@ Comprobado con un motor DAX. Fíjate en `Pedidos — YTD`: es un **recuento dist
 1. ¿Qué conserva `ALLSELECTED` que `ALL` elimina?
 2. ¿Por qué `SUM ( Ventas[Importe] )` en una columna de `Clientes` da el total de la empresa, y `[Ventas Totales]` no?
 3. ¿Por qué el crecimiento de 2026 salía negativo, y qué cambió para corregirlo?
-4. ¿Qué ventaja tiene un grupo de cálculo frente a escribir `Ventas YTD`, `Pedidos YTD`, `Unidades YTD`…?
+4. ¿Qué ventaja tiene un grupo de cálculo frente a escribir `Ventas YTD`, `Clientes YTD`, `Unidades YTD`…? ¿Por qué `Clientes Activos — YTD` no es la suma de los meses?
 
 ## Limpieza del laboratorio
 

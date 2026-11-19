@@ -13,8 +13,8 @@
   encontrar el error, completar); sacarlas a un recurso rompería el "aprender haciendo". Recursos siguen en 41.
 - **M7 (ítem 3):** criterios reescritos para el Núcleo (Filter, LookUp, If/IsBlank/Len, Switch, Text, delegación con
   StartsWith, variables, reto) y dos opcionales para la profundización plegada (AddColumns/Collections/ForAll/With y
-  depurar con `JSON`). Pasa de 9 a 10 criterios (el conteo global de "636 criterios" no se recalculó: su método no está
-  documentado).
+  depurar con `JSON`). Pasa de 9 a 10 criterios del módulo. El conteo "636 criterios" de CLAUDE.md no cambia: sale del checklist de
+  `validate-content.ts`, no de los Criterios de Validación de los módulos.
 - **/graphify (ítem 9):** no se hace la extracción semántica. El grafo de código ya existe (`graphify update .`, gratis) y el
   contenido es Markdown que se busca bien con grep; 15-20 sub-agentes no compensan. Se puede retomar si el usuario lo pide.
 - **Ítem 5 (tenant en español):** sigue pendiente del usuario; Claude no tiene acceso a su tenant.

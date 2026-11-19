@@ -419,6 +419,9 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "Captura de los Applied Steps de la limpieza de Clientes",
       "Diagnóstico escrito de la fila TOTAL MARZO (LAB-117) y consultas de control que cuadran (LAB-118)",
       "Model view con 8 relaciones y la matriz de cumplimiento 2025 (LAB-119)",
+      "Matriz de Cartera Pendiente con el cierre de 2025 y el DAX de una medida rápida explicado (LAB-120)",
+      "Crecimiento 2026 ingenuo frente a comparable y matriz con el grupo de cálculo de inteligencia de tiempo (LAB-121)",
+      "Performance Analyzer antes y después y consulta DAX de comprobación por año (LAB-122)",
     ],
   },
   {

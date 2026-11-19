@@ -2,7 +2,7 @@
 id: lab-122
 title: "Power BI — Rendimiento: Performance Analyzer, DAX query view y reducción del modelo (Ruta Pro Power BI)"
 level: "N2"
-duration: 150
+duration: 180
 product: ["Power BI"]
 certifications: ["PL-300"]
 role: ["Analista de datos"]
@@ -47,13 +47,13 @@ Aprender el **método** para encontrar qué hace lento un reporte y comprobar la
 
 | Ejercicio | Tiempo estimado |
 |---|---|
-| Ejercicio 1 — Medir con Performance Analyzer | 25 min |
+| Ejercicio 1 — Medir con Performance Analyzer | 30 min |
 | Ejercicio 2 — La consulta de un visual en DAX query view | 20 min |
-| Ejercicio 3 — Comprobar el modelo con consultas DAX | 30 min |
+| Ejercicio 3 — Comprobar el modelo con consultas DAX | 40 min |
 | Ejercicio 4 — Reescribir una medida que filtra la tabla entera | 25 min |
-| Ejercicio 5 — Reducir el modelo | 35 min |
-| Ejercicio 6 — Volver a medir | 15 min |
-| **Total** | **unas 2 h 30 min** |
+| Ejercicio 5 — Reducir el modelo | 45 min |
+| Ejercicio 6 — Volver a medir | 20 min |
+| **Total** | **unas 3 h** |
 
 ## Nivel
 
@@ -81,7 +81,7 @@ Aprender el **método** para encontrar qué hace lento un reporte y comprobar la
 
 **Objetivo:** saber cuánto tarda cada visual de una página y en qué se va ese tiempo.
 
-1. Abre la página `Tiempo` (Lab 121). En la cinta **Optimize**, selecciona **Performance Analyzer**: se abre su panel ([Learn: Performance Analyzer](https://learn.microsoft.com/power-bi/create-reports/desktop-performance-analyzer)).
+1. Abre la página `Tiempo` (Lab 121): tiene la matriz de los Ejercicios 3 a 6 y la del grupo de cálculo (Ejercicio 7). Si hiciste la del grupo en otra página, cópiala a `Tiempo`. Añade además un **Slicer** de `Fecha[Año]` (lista vertical, **2025** marcado), para ver en el Ejercicio 2 cómo llega un filtro a la consulta. En la cinta **Optimize**, selecciona **Performance Analyzer**: se abre su panel ([Learn: Performance Analyzer](https://learn.microsoft.com/power-bi/create-reports/desktop-performance-analyzer)).
 2. Selecciona **Start recording** y luego **Refresh visuals**: Power BI vuelve a dibujar todos los visuales de la página y registra cada uno.
 3. Selecciona **Stop**. En la lista, expande el visual de la matriz con el grupo de cálculo.
 4. Cada visual muestra su duración total en milisegundos y la descompone en categorías. Las que vas a ver:
@@ -94,7 +94,7 @@ Aprender el **método** para encontrar qué hace lento un reporte y comprobar la
 
 (Learn lista también **Direct query**, que solo aparece con modelos DirectQuery, y **Evaluated parameters (preview)**.)
 
-5. **Anota** los tres visuales más lentos y, para cada uno, qué categoría pesa más.
+5. **Anota** cada visual de la página (son tres, contando el slicer) y, para cada uno, qué categoría pesa más.
 
 > **Cómo leerlo:** si manda **DAX query**, el problema está en las medidas o en el modelo (Ejercicios 2 a 5). Si manda **Visual display**, en el visual (demasiados puntos, un visual personalizado). Si manda **Other**, a menudo en **cuántos** visuales hay en la página: la guía de Learn recomienda limitar los visuales por página.
 
@@ -116,8 +116,9 @@ Aprender el **método** para encontrar qué hace lento un reporte y comprobar la
 2. Se abre **DAX query view** con la consulta. Selecciona **Run**: el resultado aparece en la cuadrícula de abajo ([Learn: DAX query view](https://learn.microsoft.com/power-bi/transform-model/dax-query-view)).
 3. **Lee la consulta** sin intentar entenderla entera. Busca y anota:
    - la función principal (`SUMMARIZECOLUMNS`), que agrupa por las columnas de filas y columnas del visual;
-   - dónde aparece el filtro del slicer;
-   - dónde aparecen tus medidas (`'Ventas'[Ventas Totales]`, `'Ventas'[Pedidos]`);
+   - dónde aparece el filtro del slicer (2025);
+   - dónde aparece la columna del grupo de cálculo, `'Inteligencia de tiempo'[Cálculo]`, y la columna `Fecha[MesNum]`, que Power BI añade porque ordena `Mes`;
+   - dónde aparecen tus medidas (`'Ventas'[Ventas Totales]`, `'Ventas'[Clientes Activos]`);
    - las variables y funciones que añade el visual por su cuenta (por ejemplo, para limitar el número de filas).
 
 > **Para qué sirve:** cuando un visual es lento, esta es la consulta exacta que tarda. Puedes ejecutarla de nuevo después de cambiar una medida y comparar, sin tocar el reporte. **Shift+Alt+F** le da formato a la consulta para leerla mejor.
@@ -149,7 +150,7 @@ SUMMARIZECOLUMNS (
 ORDER BY Fecha[Año]
 ```
 
-2. **Run**.
+2. **Run**. Si da error de sintaxis en las comas, cambia `,` por `;` entre argumentos, como en el Lab 116.
 
 ### Resultado esperado del Ejercicio 3, consulta 1
 
@@ -159,7 +160,7 @@ ORDER BY Fecha[Año]
 | 2025 | 20.840.961,90 | 748 | 611.900,00 |
 | 2026 | 18.936.520,50 | 705 | 780.903,50 |
 
-(Ticket 2025: 27.862,25. La cuadrícula muestra los números sin formato, con o sin separadores según tu configuración.)
+(Ticket: 2024 = 27.897,48; 2025 = 27.862,25; 2026 = 26.860,31. La cuadrícula muestra los números sin formato, con o sin separadores según tu configuración.)
 
 3. **Medidas de prueba sin tocar el modelo.** Escribe una medida solo para la consulta con `DEFINE`:
 
@@ -173,11 +174,12 @@ SUMMARIZECOLUMNS (
     "Ingenuo", [Crecimiento Ingenuo],
     "Comparable", [% Crecimiento Comparable]
 )
+ORDER BY Fecha[Año]
 ```
 
-**Resultado esperado:** 2025: 17,65 % en las dos; 2026: **−9,14 %** ingenuo y **+14,29 %** comparable (como fracción: −0,0914 y 0,1429). Es la comprobación del Lab 121 en una sola consulta.
+**Resultado esperado:** 2025: 17,65 % en las dos; 2026: **−9,14 %** ingenuo y **+14,29 %** comparable (como fracción: −0,0914 y 0,1429). Es la comprobación del Lab 121 en una sola consulta. **2024 no aparece:** `SUMMARIZECOLUMNS` omite las filas en las que todas las medidas están vacías, y 2024 no tiene año anterior.
 
-4. **Quick queries.** En el panel **Data** de **DAX query view**, clic derecho sobre la medida `Cartera Pendiente` > **Quick queries** > **Evaluate**: Power BI escribe la consulta por ti. Prueba también, sobre el modelo, **Define all measures in the model**: genera un `DEFINE` con el DAX de todas tus medidas, útil para revisarlas o documentarlas de una vez.
+4. **Quick queries.** En el panel **Data** de **DAX query view**, clic derecho sobre la medida `Cartera Pendiente` > **Quick queries** > **Evaluate**: Power BI escribe la consulta por ti. Prueba también, con clic derecho en un espacio vacío del panel **Data**, **Quick queries** > **Define all measures in the model**: genera un `DEFINE` con el DAX de todas tus medidas, útil para revisarlas o documentarlas de una vez.
 5. **Llevar una medida de la consulta al modelo:** si una medida definida con `DEFINE` te sirve, sobre ella aparece **Update model: Add new measure** (o el botón **Update model with changes**). No lo hagas con `Crecimiento Ingenuo`: es la medida que lleva a error.
 
 ### Validación del Ejercicio 3
@@ -193,7 +195,7 @@ SUMMARIZECOLUMNS (
 
 **Objetivo:** reconocer un patrón lento y reescribirlo como recomienda Learn.
 
-1. Crea esta medida (es la forma "intuitiva" en que mucha gente escribe un filtro):
+1. Crea esta medida en `Ventas` (es la forma "intuitiva" en que mucha gente escribe un filtro):
 
 ```dax
 Ventas Licencias Lenta =
@@ -214,7 +216,7 @@ SUMMARIZECOLUMNS (
 )
 ```
 
-**Resultado esperado:** las dos dan lo mismo (2025: **13.799.948,40**). La diferencia no está en el resultado sino en **cómo** lo calcula el motor: `FILTER ( Ventas, … )` recorre la tabla de hechos fila a fila y busca la categoría de cada línea; el filtro booleano `Productos[Categoria] = "Licencias"` dentro de `CALCULATE` filtra una columna de una dimensión de 18 filas y deja que la relación haga el resto.
+**Resultado esperado:** agrupando por año, las dos dan lo mismo (2025: **13.799.948,40**). **Ojo, no son idénticas:** agrupadas por categoría, en la fila Servicios la lenta da vacío y `Ventas Licencias` da 13.799.948,40, porque el filtro booleano **reemplaza** el filtro de categoría (Lab 120). La reescritura fiel de la lenta es `CALCULATE ( [Ventas Totales], KEEPFILTERS ( Productos[Categoria] = "Licencias" ) )` (reto intermedio del Lab 121). La diferencia no está en el resultado sino en **cómo** lo calcula el motor: `FILTER ( Ventas, … )` recorre la tabla de hechos fila a fila y busca la categoría de cada línea; el filtro booleano `Productos[Categoria] = "Licencias"` dentro de `CALCULATE` filtra una columna de una dimensión de 18 filas y deja que la relación haga el resto.
 
 Learn lo resume así: pasa los filtros como expresiones booleanas siempre que puedas, y usa `FILTER` solo cuando haga falta (por ejemplo, para comparar dos medidas fila a fila) ([Learn: evitar FILTER como argumento de filtro](https://learn.microsoft.com/dax/best-practices/dax-avoid-avoid-filter-as-filter-argument)).
 
@@ -237,9 +239,9 @@ Learn lo resume así: pasa los filtros como expresiones booleanas siempre que pu
 
 ### Tarea 5.1 — Mirar antes de cortar: estadísticas de columnas
 
-1. En **DAX query view**, clic derecho sobre la tabla `Ventas` > **Quick queries** > **Show column statistics** (o escribe `EVALUATE COLUMNSTATISTICS ()` para todo el modelo).
+1. En **DAX query view**, clic derecho sobre la tabla `Ventas` > **Quick queries** > **Show column statistics** (o escribe `EVALUATE COLUMNSTATISTICS ()` para todo el modelo; el resultado de la opción del menú puede tener otro formato).
 2. La función devuelve una fila por columna con **Table Name**, **Column Name**, **Min**, **Max**, **Cardinality** y **Max Length** ([Learn: COLUMNSTATISTICS](https://learn.microsoft.com/dax/columnstatistics-function-dax)).
-3. Anota la **Cardinality** (número de valores distintos) de `PedidoID` (esperado: **2.088**), `ClienteID` (**150**), `ProductoID` (**18**), `Mes` (**34**: un valor por mes con ventas), `Tasa` e `ImporteLocal`.
+3. Anota la **Cardinality** (número de valores distintos) de `PedidoID` (esperado: **2.088**), `ClienteID` (**150**), `ProductoID` (**18**), `Mes` (**34**: un valor por mes con ventas), `Tasa` (**124**), `Importe` (**1.223**) e `ImporteLocal` (unos **3.790**). Con `COLUMNSTATISTICS ()` mira solo las filas con **Table Name** = `Ventas`: también salen `Fecha[Mes]` (12), columnas internas `RowNumber-…`, la tabla del grupo de cálculo y quizá tablas `LocalDateTable_…` (Tarea 5.3).
 
 > **Por qué importa la cardinalidad:** el motor comprime cada columna por separado, y una columna con muchos valores distintos (como `ImporteLocal`, un decimal casi único por línea) ocupa mucho más que una con pocos (como `ProductoID`). Las columnas de alta cardinalidad que nadie usa son las primeras candidatas a salir.
 
@@ -249,19 +251,21 @@ Hay dos candidatas: `Ventas[Mes]` (texto `2025-03`) y `Ventas[Tasa]`. Las dos ex
 
 1. **Home** > **Transform data**. Selecciona la consulta `ControlSinTasa` y mira su paso de merge (el engranaje junto al paso, o el **Advanced Editor**): cruza `Ventas` con `TiposCambio` por `Mes` y `Moneda`. **Si quitas `Mes` de `Ventas`, el control deja de funcionar**: al abrirlo verás un error de columna no encontrada y ya no te avisará si un mes se queda sin tasa. Como `ControlSinTasa` no se carga al modelo, el error puede pasar inadvertido, que es lo peor de todo. `Mes` se queda.
 2. `Tasa`, en cambio, solo sirvió para calcular `ImporteLocal`, y ninguna consulta posterior la usa. En la consulta `Ventas`, **al final de los pasos**, clic derecho en el encabezado de `Tasa` > **Remove**.
-3. Antes de cerrar, selecciona `ControlSinTasa` en el editor y comprueba que sigue sin errores y con 0 filas. **Close & Apply**. Comprueba que la actualización termina sin errores y que `Ventas Totales` sigue dando 57.492.383,40.
+3. Antes de cerrar, selecciona `ControlSinTasa` en el editor y comprueba que sigue sin errores y con 0 filas. **Close & Apply**. Comprueba que la actualización termina sin errores y que `Ventas Totales` sigue dando 57.492.383,40 (en **DAX query view**: `EVALUATE { [Ventas Totales] }`).
 
 > **Decide tú sobre `ImporteLocal`:** es la columna de más cardinalidad de `Ventas` (un decimal casi distinto por línea) y ninguna medida la usa todavía. Si nadie va a reportar en moneda local, sobra; si finanzas la quiere, se queda (y entonces conviene una medida que la use). Anota tu decisión y el motivo: en un proyecto real, esa conversación es la que evita quitar algo que alguien necesitaba.
 
 ### Tarea 5.3 — Desactivar auto date/time
 
-Por cada columna de fecha, Power BI crea una tabla de fechas **oculta** (incluso para ti) si la opción auto date/time está activa. Son tablas calculadas que aumentan el tamaño del modelo ([Learn: auto date/time](https://learn.microsoft.com/power-bi/transform-model/desktop-auto-date-time)). Este modelo ya tiene su propia tabla `Fecha`, así que no las necesita.
+Por cada columna de fecha, Power BI crea una tabla de fechas **oculta** (incluso para ti) si la opción auto date/time está activa. Son tablas calculadas que aumentan el tamaño del modelo ([Learn: auto date/time](https://learn.microsoft.com/power-bi/transform-model/desktop-auto-date-time)). Learn indica que no se crean para las columnas del lado "muchos" de una relación, así que en este modelo quedan pocas: las de columnas de fecha de las dimensiones, como `Clientes[FechaAlta]` y `Vendedores[FechaIngreso]`. Este modelo ya tiene su propia tabla `Fecha`, así que no las necesita.
 
-1. Guarda el archivo y anota su tamaño en el Explorador de archivos.
-2. **File** > **Options and settings** > **Options**. En la página **Current File**, sección **Time intelligence**, desmarca la opción auto date/time. **OK**.
-3. Learn advierte que, al desactivarla en el archivo actual, se eliminan las tablas automáticas existentes: si algún visual usaba la jerarquía automática de una columna de fecha (por ejemplo, `FechaPedido` > **Date Hierarchy**), deja de funcionar y hay que rehacerlo con `Fecha`. Revisa las páginas.
+1. Guarda el archivo y anota su tamaño en el Explorador de archivos. Ejecuta también `EVALUATE COLUMNSTATISTICS ()` y busca filas cuyo **Table Name** empiece por `LocalDateTable_`: son esas tablas ocultas.
+2. **File** > **Options and settings** > **Options**. En **Current File** > **Data Load**, sección **Time intelligence**, desmarca la opción auto date/time. **OK**. (Learn nombra la página **Current File** y la sección **Time intelligence**; en Desktop la sección está en la subpágina **Data Load**.)
+3. Learn advierte que, al desactivarla en el archivo actual, se eliminan las tablas automáticas existentes: si algún visual usaba la jerarquía automática de una columna de fecha (por ejemplo, `Clientes[FechaAlta]`), deja de funcionar y hay que rehacerlo con `Fecha`. Revisa las páginas: en la ruta ningún visual las usa, así que lo esperado es no rehacer nada. Vuelve a ejecutar `COLUMNSTATISTICS ()`: las filas `LocalDateTable_…` desaparecen.
 4. Guarda y anota el tamaño de nuevo.
-5. Para que no vuelva a pasar en archivos nuevos: en la página **Global** de las mismas opciones, desmarca **Auto date/time for new files**.
+5. Para que no vuelva a pasar en archivos nuevos: en **Global** > **Data Load** de las mismas opciones, desmarca **Auto date/time for new files**.
+
+> **Cuánto baja el tamaño:** aquí, apenas unos KB: el modelo es pequeño y solo había dos o tres tablas automáticas. En un modelo con muchas columnas de fecha en dimensiones, la diferencia se nota.
 
 ### Resultado esperado del Ejercicio 5
 
@@ -269,7 +273,8 @@ Por cada columna de fecha, Power BI crea una tabla de fechas **oculta** (incluso
 |---|---|
 | Cardinalidad de `PedidoID` / `ClienteID` / `ProductoID` | 2.088 / 150 / 18 |
 | `Ventas Totales` tras quitar `Tasa` | 57.492.383,40 |
-| Tamaño del archivo antes y después | Depende de tu versión; debe bajar o quedarse igual, nunca subir |
+| Tamaño del archivo antes y después | Depende de tu versión; debe bajar unos KB o quedarse igual, nunca subir |
+| Visuales que hubo que rehacer | Ninguno |
 
 ### Validación del Ejercicio 5
 
@@ -301,7 +306,8 @@ Por cada columna de fecha, Power BI crea una tabla de fechas **oculta** (incluso
 | No aparece **Performance Analyzer** | Buscas en otra cinta | Cinta **Optimize** > **Performance Analyzer** |
 | El panel no registra nada | No se pulsó **Start recording** antes de **Refresh visuals** | Repite en ese orden |
 | La consulta de `DEFINE MEASURE` da error de tabla | El nombre de tabla de la medida no existe | `MEASURE Ventas[Nombre] = …` con una tabla real del modelo |
-| Tras quitar una columna, falla la actualización | Otra consulta la usaba (por ejemplo, `ControlSinTasa` usa `Mes`), o el paso **Remove** quedó antes de un paso que la necesita | Mira las consultas que dependen de `Ventas` y deja el **Remove** al final de los pasos |
+| Tras quitar una columna, una consulta de control muestra `Expression.Error` al abrirla (aunque **Close & Apply** termina sin errores, porque esa consulta no se carga) | La consulta usaba la columna (por ejemplo, `ControlSinTasa` usa `Mes`) | Antes de quitar, mira las consultas que dependen de `Ventas`; deja el **Remove** al final de los pasos |
+| Falla la actualización tras quitar una columna | El paso **Remove** quedó antes de un paso de la misma consulta que la necesita | Muévelo al final de los pasos |
 | Un visual muestra un error de campos tras desactivar auto date/time | Usaba la jerarquía automática de una columna de fecha | Rehazlo con `Fecha[Año]`, `Fecha[Mes]` o la jerarquía `Calendario` |
 
 ## 🔧 Diagnóstico y reparación
@@ -315,7 +321,7 @@ Por cada columna de fecha, Power BI crea una tabla de fechas **oculta** (incluso
 
 ## Checklist final
 
-- [ ] Medición de la página `Tiempo` antes y después, con los tres visuales más lentos
+- [ ] Medición de la página `Tiempo` antes y después, con la categoría que más pesa en cada visual
 - [ ] Consulta de un visual ejecutada en **DAX query view**
 - [ ] Consulta por año con ventas, pedidos y cartera: 2026 = 18.936.520,50 / 705 / 780.903,50
 - [ ] `Ventas Licencias Lenta` comparada y eliminada; `% Crecimiento Comparable` con variables

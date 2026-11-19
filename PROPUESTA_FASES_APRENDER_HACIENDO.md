@@ -839,6 +839,15 @@ hasta tener los 12 labs. Conteos: labs 76 → 88 al terminar.
   cinta **Optimize** > **Performance Analyzer**, **Start recording**, **Refresh visuals**, **Run in DAX query view**, categorías
   **DAX query**/**Visual display**/**Other**; **Run**, **Update model with changes**, **Define all measures in the model**,
   **Show column statistics**, **Evaluate**; **Auto date/time for new files** (Global).
-- **Sin verificar:** la etiqueta exacta de auto date/time en **Current File** y el nombre del submenú **Quick queries** en el
-  menú contextual. **Sin prueba simulada todavía**: se hará con la de la ruta completa (P5).
+- **Verificado después:** **Quick queries** es la entrada del menú contextual del panel **Data** (Learn: "The Data pane context
+  menu includes Quick queries"). **Sin verificar:** el texto exacto de la casilla en **Current File**; Learn solo da la página
+  (**Current File**) y la sección (**Time intelligence**), y el lab la describe así. - **Pruebas simuladas** (2026-11-19, 3 agentes, persona "Lucía", Desktop en inglés y región es-CO; simulación, no una persona
+  real): todas las cifras cuadran con los CSV. Corregido: tarjetas que abrevian ("28K") → visual **Table** y formato al crear
+  cada medida; `Ticket Promedio` ya creada en el reto del 119; síntomas falsos de `Cartera Pendiente` (sin `REMOVEFILTERS` da
+  396.735 en diciembre, no vacío; con `MIN`, 617.647 de apertura); por qué noviembre es el pico; el grupo de cálculo ya trae un
+  primer elemento (se renombra a `Actual`); `Pedidos — YTD` no demostraba nada (ningún pedido tiene dos fechas) → `Clientes
+  Activos`: 149 en el acumulado frente a 482 sumando meses; slicer de `Regiones[Pais]`, no `Clientes[Pais]`; −100 % en noviembre y
+  diciembre de 2026; la página `Tiempo` sin slicer en el 122; `Ventas Licencias Lenta` solo equivale por año (fiel: `KEEPFILTERS`);
+  auto date/time no crea tablas para el lado "muchos" (ejemplo cambiado a `Clientes[FechaAlta]`); `Expression.Error` de
+  `ControlSinTasa` no falla la actualización; cardinalidades de `Tasa` (124) e `ImporteLocal` (~3.790); tiempos: 3 h, 3 h 40 y 3 h.
 - **Siguiente (P4):** labs 123, 124 y 125.

@@ -2,7 +2,7 @@
 id: lab-120
 title: "Power BI — DAX esencial: medidas, CALCULATE, estadísticas y semiaditivas (Ruta Pro Power BI)"
 level: "N2"
-duration: 160
+duration: 180
 product: ["Power BI"]
 certifications: ["PL-300"]
 role: ["Analista de datos"]
@@ -45,13 +45,13 @@ Escribir las medidas que un comité comercial pide de verdad y entender por qué
 
 | Ejercicio | Tiempo estimado |
 |---|---|
-| Ejercicio 1 — Medidas derivadas | 20 min |
+| Ejercicio 1 — Medidas derivadas | 30 min |
 | Ejercicio 2 — Estadísticas: cuando el promedio engaña | 20 min |
 | Ejercicio 3 — `CALCULATE` y el porcentaje del total | 30 min |
-| Ejercicio 4 — Una medida semiaditiva: la cartera pendiente | 45 min |
+| Ejercicio 4 — Una medida semiaditiva: la cartera pendiente | 50 min |
 | Ejercicio 5 — Medidas rápidas y el DAX que generan | 20 min |
-| Ejercicio 6 — Formato y orden de las medidas | 15 min |
-| **Total** | **unas 2 h 40 min** |
+| Ejercicio 6 — Formato y orden de las medidas | 20 min |
+| **Total** | **unas 3 h** |
 
 ## Nivel
 
@@ -77,6 +77,10 @@ Escribir las medidas que un comité comercial pide de verdad y entender por qué
 - [ ] Una tarjeta con `Ventas Totales` sin ningún filtro muestra **57.492.383,40** (los tres años)
 - [ ] Con el slicer de la página `Modelo` en **2025**, `Ventas Totales` vale **20.840.961,90** y `Pedidos` **748**
 
+> **Cómo ver las cifras exactas:** en este lab las cifras se comprueban en un visual **Table** (o en una **Matrix**), no en tarjetas: una tarjeta abrevia por defecto ("28K", "2,61M") y no podrías compararlas con las esperadas. Y da formato a cada medida **al crearla**: selecciónala en el panel **Data** y, en la cinta **Measure tools**, elige el formato (separador de miles y 2 decimales para importes, porcentaje para los `%`, sin decimales para recuentos).
+
+> **Columnas ocultas:** varias columnas que usarás en DAX (`Ventas[ClienteID]`, `Ventas[FechaPedido]`, `Ventas[FechaEntrega]`) están ocultas desde el Lab 119. Ocultar solo las quita del panel **Data** del reporte: las fórmulas DAX pueden usarlas igual.
+
 > **Cómo escribir una medida (recordatorio):** selecciona la tabla en el panel **Data**, **New measure** (en la cinta **Home** o **Table tools**) y escribe la fórmula en la barra. Si tu Power BI Desktop usa separador `;`, cámbialo en las fórmulas (Lab 116). **Shift+Enter** hace un salto de línea sin confirmar la medida.
 
 ---
@@ -85,7 +89,7 @@ Escribir las medidas que un comité comercial pide de verdad y entender por qué
 
 **Objetivo:** construir medidas nuevas a partir de las que ya existen, en lugar de repetir la lógica.
 
-1. Crea en `Ventas`:
+1. Crea en `Ventas` (si ya creaste `Ticket Promedio` en el reto básico del Lab 119, comprueba que su fórmula es esta y sigue con las otras dos):
 
 ```dax
 Ticket Promedio = DIVIDE ( [Ventas Totales], [Pedidos] )   // importe medio por pedido; vacío si no hay pedidos
@@ -99,7 +103,7 @@ Clientes Activos = DISTINCTCOUNT ( Ventas[ClienteID] )   // clientes con al meno
 Unidades = SUM ( Ventas[Cantidad] )
 ```
 
-2. Crea una página nueva `DAX` con el mismo **Slicer** de `Fecha[Año]` que en el Lab 119 (lista vertical, **2025** marcado) y tres tarjetas con las medidas nuevas.
+2. Crea una página nueva `DAX` con el mismo **Slicer** de `Fecha[Año]` que en el Lab 119 (lista vertical, **2025** marcado) y un visual **Table** con las tres medidas nuevas en **Columns**.
 
 > **Por qué `DIVIDE` y no `/`:** `DIVIDE` devuelve vacío (o el valor alternativo que le indiques) cuando el divisor es cero o vacío, en lugar de un error o un infinito. Learn recomienda usarlo cuando el divisor puede ser cero ([Learn: DIVIDE vs. operador de división](https://learn.microsoft.com/power-bi/guidance/dax-divide-function-operator)).
 
@@ -113,7 +117,7 @@ Unidades = SUM ( Ventas[Cantidad] )
 | `Clientes Activos` | **149** |
 | `Unidades` | **50.481** |
 
-3. Añade `Ticket Promedio` y `Clientes Activos` a una **Matrix** con `Vendedores[Vendedor]` en **Rows** (2025):
+3. Añade `Ticket Promedio` y `Clientes Activos` a una **Matrix** con `Vendedores[Vendedor]` en **Rows** (2025). La matriz sale en orden alfabético; para compararla con la tabla de abajo, haz clic en el encabezado `Ticket Promedio` para ordenar de mayor a menor:
 
 | Vendedor | Ticket Promedio | Clientes Activos |
 |---|---|---|
@@ -157,7 +161,7 @@ Mediana por Línea = MEDIAN ( Ventas[Importe] )   // la mitad de las líneas val
 Máximo por Línea = MAX ( Ventas[Importe] )
 ```
 
-2. Ponlas en tarjetas, con **2025** en el slicer ([Learn: funciones estadísticas](https://learn.microsoft.com/dax/statistical-functions-dax)).
+2. Añádelas al visual **Table** del Ejercicio 1, con **2025** en el slicer ([Learn: funciones estadísticas](https://learn.microsoft.com/dax/statistical-functions-dax)).
 
 ### Resultado esperado del Ejercicio 2 (año 2025, 1.438 líneas)
 
@@ -225,9 +229,11 @@ DIVIDE (
 | Capacitación | 1.099.643,50 | 5,28 % |
 | **Total** | **20.840.961,90** | **100,00 %** |
 
-2. **Experimento:** cambia el slicer a **2024**. Los porcentajes cambian, pero el total sigue siendo 100 %: `REMOVEFILTERS ( Productos )` quita el filtro de categoría, **no** el de año, que viene de otra tabla (`Fecha`).
+2. **Experimento:** cambia el slicer a **2024**. Los porcentajes cambian (Licencias **69,66 %**, Servicios **25,21 %**, Capacitación **5,13 %**), pero el total sigue siendo 100 %: `REMOVEFILTERS ( Productos )` quita el filtro de categoría, **no** el de año, que viene de otra tabla (`Fecha`).
 
-> **`Ventas Licencias` dentro de la matriz:** en la fila **Servicios**, `Ventas Licencias` daría 13.799.948,40, no vacío: el filtro `Productos[Categoria] = "Licencias"` **reemplaza** el filtro de la fila. Si quisieras que respetara la fila (y diera vacío en Servicios), usarías `KEEPFILTERS`. Lo verás en el Lab 121.
+3. **Pruébalo:** añade `Ventas Licencias` a esta matriz y mira la fila **Servicios**.
+
+> **`Ventas Licencias` dentro de la matriz:** en la fila **Servicios**, `Ventas Licencias` da 13.799.948,40, no vacío: el filtro `Productos[Categoria] = "Licencias"` **reemplaza** el filtro de la fila. Si quisieras que respetara la fila (y diera vacío en Servicios), usarías `KEEPFILTERS`. Lo verás en el Lab 121.
 
 ### Validación del Ejercicio 3
 
@@ -261,7 +267,7 @@ RETURN
 
 Las columnas `FechaPedido` y `FechaEntrega` están ocultas desde el Lab 119, pero las fórmulas DAX pueden usarlas: ocultar solo las quita del panel **Data** del reporte.
 
-2. **Matrix** con `Fecha[Año]` y `Fecha[Mes]` en **Rows** y `Cartera Pendiente` en **Values**. Quita la selección del slicer de año (o desactiva su efecto sobre este visual) para ver los tres años y expande 2025.
+2. En la misma página `DAX`, una **Matrix** nueva con `Fecha[Año]` y `Fecha[Mes]` en **Rows** y `Cartera Pendiente` en **Values**. Para ver los tres años sin cambiar los otros visuales, haz que el slicer no filtre esta matriz: selecciona el slicer, cinta **Format** > **Edit interactions**, y sobre la matriz elige el icono de "sin impacto" (el círculo tachado). Expande 2025.
 
 ### Resultado esperado del Ejercicio 4
 
@@ -277,10 +283,10 @@ Las columnas `FechaPedido` y `FechaEntrega` están ocultas desde el Lab 119, per
 Comprobado con un motor DAX (el modelo de datos de Excel) sobre los archivos del curso. Fíjate en tres cosas:
 
 - **El total de 2025 es el de diciembre (611.900,00)**, no la suma de los doce meses (que daría **7.508.388,40**, una cifra sin sentido). Lo hace solo: `MAX ( Fecha[Date] )` en la fila del año es el 31 de diciembre.
-- **Noviembre 2025 es el pico** (943.978,50): diciembre es el mes de más pedidos (estacionalidad) y los proyectos pedidos en octubre y noviembre aún no se habían entregado.
+- **Noviembre 2025 es el pico de los tres años** (943.978,50): noviembre es el mes de 2025 con más ventas en importe (2.399.347,80), y muchas de esas líneas, más las de octubre, seguían sin entregar el día 30.
 - **2026 cierra en 780.903,50**, exactamente las 54 líneas sin fecha de entrega del Lab 119. Noviembre y diciembre de 2026 no tienen pedidos todavía, así que su saldo es el de octubre.
 
-> **Si tu total del año sale como la suma de los meses**, escribiste la medida con `SUMX` sobre los meses o usaste `MIN ( Fecha[Date] )`. Revisa la variable `FinPeriodo`.
+> **Si el total del año no es el de diciembre:** si sale la suma de los meses, escribiste la medida con `SUMX` sobre los meses; si sale el saldo de apertura (2025 = **617.647,00**, el del 1 de enero), usaste `MIN` en lugar de `MAX` en la variable `FinPeriodo`.
 
 ### Validación del Ejercicio 4
 
@@ -298,13 +304,16 @@ Comprobado con un motor DAX (el modelo de datos de Excel) sobre los archivos del
 
 1. En el panel **Data**, clic derecho (o **…**) sobre la tabla `Ventas` > **New quick measure** ([Learn: quick measures](https://learn.microsoft.com/power-bi/transform-model/desktop-quick-measures)).
 2. En la ventana **Quick measures**, en **Select a calculation**, elige **Average per category** (grupo *Aggregate per category*).
+   Si la ventana muestra pestañas (por ejemplo, una de sugerencias), elige la que tiene **Select a calculation**.
 3. Arrastra `Ventas Totales` a **Base value** y `Vendedores[Vendedor]` a **Category**. Confirma.
-4. Power BI crea una medida con un nombre largo. Selecciónala en el panel **Data**: el DAX aparece en la barra de fórmulas y puedes editarlo como cualquier otra medida. Renómbala `Venta Media por Vendedor`.
-5. Ponla en una tarjeta con **2025** en el slicer.
+4. Power BI crea una medida con un nombre largo. Selecciónala en el panel **Data**: el DAX aparece en la barra de fórmulas y puedes editarlo como cualquier otra medida. Renómbala `Venta Media por Vendedor` (cambia el texto antes del `=` en la barra de fórmulas, o doble clic sobre el nombre en el panel **Data**).
+5. Añádela al visual **Table**, con **2025** en el slicer.
 
 **Resultado esperado (2025):** **2.605.120,24**: las ventas del año entre los **8** ejecutivos con ventas.
 
 6. **Lee el DAX generado** y responde: ¿qué función recorre los vendedores? ¿Por qué el resultado divide entre 8 y no entre los 10 vendedores de la tabla? (Pista: los dos gerentes no tienen ventas, y el promedio de un iterador ignora los resultados vacíos.)
+
+**Respuesta orientativa** (léela después): el DAX es del estilo `AVERAGEX ( KEEPFILTERS ( VALUES ( Vendedores[Vendedor] ) ), CALCULATE ( [Ventas Totales] ) )`. `AVERAGEX` recorre los vendedores visibles, calcula las ventas de cada uno (el `CALCULATE` hace la transición de contexto que verás en el Lab 121) y promedia los resultados que no son vacíos.
 
 > **Cuándo usar medidas rápidas:** para cálculos estándar (promedio por categoría, total acumulado, acumulado del año, variación interanual) son rápidas y correctas. Pero su DAX usa nombres genéricos y no conoce tus reglas de negocio. Úsalas para **aprender el patrón** y luego decide si dejas la medida tal cual o la reescribes con tu convención.
 
@@ -321,7 +330,7 @@ Comprobado con un motor DAX (el modelo de datos de Excel) sobre los archivos del
 
 **Objetivo:** que quien use el modelo encuentre las medidas y las lea bien sin tocar cada visual.
 
-1. Selecciona cada medida en el panel **Data** y, en la cinta **Measure tools**, fija el formato: `Ventas Totales`, `Ventas Licencias`, `Cartera Pendiente`, `Ticket Promedio`, `Venta Media por Vendedor` y las estadísticas con separador de miles y 2 decimales; `% Licencias` y `% del Total Categorías` como **Percentage**; `Pedidos`, `Clientes Activos` y `Unidades` como número entero.
+1. Repasa el formato de **todas** las medidas del modelo, también las del Lab 119 (`Objetivo Total`, `Ventas por Entrega`, `% Cumplimiento`): selecciona cada una en el panel **Data** y, en la cinta **Measure tools**, comprueba que los importes llevan separador de miles y 2 decimales, los `%` formato **Percentage** y los recuentos (`Pedidos`, `Clientes Activos`, `Unidades`) sin decimales.
 2. El formato de la medida se aplica en todos los visuales. Si lo cambias en un visual, solo cambia ahí.
 3. Mira el panel **Data**: las medidas de `Ventas` se mezclan con las columnas. En el Lab 122 verás cómo ayuda reducir el modelo; por ahora, verifica que no queda ninguna medida con el nombre por defecto (`Measure`, `Measure 2`).
 
@@ -334,7 +343,8 @@ Comprobado con un motor DAX (el modelo de datos de Excel) sobre los archivos del
 | `Ticket Promedio` da error o infinito en un mes sin pedidos | Se usó `/` en lugar de `DIVIDE` | `DIVIDE ( [Ventas Totales], [Pedidos] )` |
 | El total de `Clientes Activos` "no cuadra" con la suma | Es lo esperado: un cliente cuenta una vez en el total | Explícalo en el reporte; no lo "corrijas" con `SUMX` |
 | `% del Total Categorías` da 100 % en todas las filas | El denominador no quita el filtro de categoría | `REMOVEFILTERS ( Productos )` dentro del `CALCULATE` del denominador |
-| `Cartera Pendiente` sale vacía en todas las celdas | Falta `REMOVEFILTERS ( Fecha )`: el filtro del mes deja fuera los pedidos de meses anteriores | Revisa los filtros del `CALCULATE` |
+| `Cartera Pendiente` sale más baja de lo esperado (diciembre 2025 = 396.735,00 en lugar de 611.900,00) | Falta `REMOVEFILTERS ( Fecha )`: solo cuenta lo pedido en ese mismo mes | Añade `REMOVEFILTERS ( Fecha )` al `CALCULATE` |
+| El total del año de `Cartera Pendiente` es 617.647,00 en 2025 | Se usó `MIN ( Fecha[Date] )`: es el saldo de apertura | `MAX ( Fecha[Date] )` |
 | El total del año de `Cartera Pendiente` es enorme | Se sumaron los meses | La medida debe tomar `MAX ( Fecha[Date] )` del periodo |
 | Error de sintaxis en las comas | Configuración regional con `;` | Cambia `,` por `;` (Lab 116) |
 

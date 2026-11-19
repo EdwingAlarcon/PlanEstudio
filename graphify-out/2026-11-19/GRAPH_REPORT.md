@@ -1,23 +1,23 @@
-# Graph Report - PlanEstudio  (2026-11-18)
+# Graph Report - PlanEstudio  (2026-11-19)
 
 ## Corpus Check
-- 558 files · ~1,405,693 words
+- 561 files · ~1,418,154 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 52 file(s) not represented in the graph (top: .csv 43, (none) 4, .css 2)
 
 ## Summary
-- 8238 nodes · 10957 edges · 563 communities (539 shown, 24 thin omitted)
+- 8366 nodes · 11093 edges · 572 communities (549 shown, 23 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 149 edges (avg confidence: 0.94)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6b5602b4`
+- Built from commit: `82e0f41c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - Lab 32 — CoE Starter Kit: Gobernanza a Escala del Tenant de Power Platform
-- preparar-entorno-client.tsx
+- workstation.ts
 - search-bar.tsx
 - interactive-practice-client.tsx
 - Power Platform & D365 — Plan de Estudio
@@ -65,11 +65,11 @@
 - validate-content.ts
 - Lab 22 — Copilot Studio: Agente de Soporte TI con SSO, Generative Answers y Adaptive Cards
 - progress-dashboard-client.tsx
-- modulo/[slug]/page.tsx
+- seo.ts
 - evaluaciones-simulador.js
 - package.json
 - domain-hubs.ts
-- seo.ts
+- seo.test.ts
 - install-d365-test-apps.ps1
 - page.tsx
 - check-workstation.sh
@@ -160,7 +160,7 @@
 - LAB-RPA-07 — Cloud flow + desktop flow
 - LAB-RPA-08 — Despliegue y operación unattended
 - RPA Capstone — Automatización end-to-end de un proceso administrativo
-- layout.tsx
+- Lab 120 — Power BI: DAX esencial
 - topbar.tsx
 - 57-introduccion-dynamics-365-avanzado.md
 - 58-customer-insights-data-unificacion-perfiles.md
@@ -187,7 +187,7 @@
 - lab-metadata.ts
 - lucide-react
 - mermaid
-- Button
+- Diseño: Certificado imprimible por nivel
 - next-themes
 - @radix-ui/react-dialog
 - @radix-ui/react-dropdown-menu
@@ -204,7 +204,7 @@
 - Ejercicio 4 — Topic: Crear nueva solicitud y escalamiento
 - zustand
 - progress.test.ts
-- Criterios de Validación
+- File Map
 - Lab 53 — Exportar, Desempaquetar y Revisar una Solución con IA
 - Lab 55 — Generar UAT/Checklist de Go-Live con IA y Auditar Prompts por Seguridad
 - Lab 57 — Diseñar una Solución Completa de Dynamics 365 Sales con IA
@@ -412,7 +412,7 @@
 - 🚨 Señales de Alerta y Cómo Resolverlas
 - NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365
 - LAB-077 — Customer Service Specialist
-- review-queue.ts
+- review-scheduler.ts
 - Respuestas tecnicas ampliadas por perfil
 - Portafolio RPA y empleabilidad honesta
 - Protocolo de validación en tenant para RPA
@@ -448,7 +448,7 @@
 - SIT Automation Case — Assets RPA
 - 🔥 Consejos para Máximo Aprovechamiento
 - 🎯 Expectativas Realistas
-- lucide-react
+- i18n.ts
 - 🔄 Mantenimiento y Actualización del Plan
 - 📞 Soporte y Preguntas
 - 💪 Mentalidad y Motivación
@@ -469,7 +469,7 @@
 - NIVEL 3: AVANZADO — Power Platform & Dynamics 365
 - Ejercicio 4 — Proceso de cumplimiento
 - Preguntas de entrevista
-- markdown-renderer.tsx
+- Lab 121 — Power BI: contexto de filtro, inteligencia de tiempo y grupos de cálculo
 - 🔧 Diagnóstico y reparación
 - Ejercicio 1 — Preparar los datos en Dataverse
 - Ejercicio 2 — Conectar Power BI Desktop a Dataverse
@@ -502,7 +502,7 @@
 - Prerrequisitos
 - e2e
 - package.json
-- vitest
+- Lab 122 — Power BI: rendimiento con Performance Analyzer y DAX query view
 - Lab 116 — Power BI en un día: del archivo al dashboard
 - Soluciones de Referencia para Capstones
 - Datos de apoyo
@@ -519,10 +519,10 @@
 - Lab 118 — Power BI: transformar y cargar
 - Ejercicio 8 (opcional) — Seguridad por filas (RLS)
 - with
-- review-session-client.tsx
-- getAllInteractivePractices
+- preparar-entorno-client.tsx
+- workstation-store.ts
 - Certificaciones vigentes o accionables
-- simulator-client.tsx
+- workstation-report.ts
 - build
 - route.tsx
 - ui-language.ts
@@ -530,12 +530,12 @@
 - test
 - 🌐 Ecosistema Power Platform en Contexto
 - 📌 Resumen Ejecutivo
-- review-date.ts
+- review-queue.ts
 - Interfaz en español o en inglés: cómo seguir el curso con cualquier idioma
 - Verificación de etiquetas de interfaz en español (20 minutos con un tenant)
 - Ejercicio 3 — Limpiar en Power Query
 - zip-xlsx.mjs
-- getSearchDocuments
+- extract-questions.mjs
 - PracticeAttemptHistory
 - sit-ventas/manifest.json
 - Ejercicio 2 — Conectar los cinco archivos
@@ -550,17 +550,17 @@
 - Ejercicio 1 — Descargar los datos y abrir Power BI Desktop
 - Ejercicio 4 — Modelo en estrella y tabla de fechas
 - Ejercicio 7 — Publicar y crear el dashboard
-- 2. Soluciones — Mejores Prácticas
-- 8. Canales de Publicación
+- PracticeWorkspaceClient
+- interactive-practices-contract.test.ts
 - 🔧 Diagnóstico y reparación
 - Ejercicio 5 — Medidas
 - Prerrequisitos
 - Ejercicio 5 — Tipos de cambio por web y niveles de privacidad
 - Prerrequisitos
 - Ejercicio 7 — Cuadrar y decidir qué se carga
-- 3. Topics — Unidad de Conversación
-- 6. Generative AI y Knowledge Sources
-- 7. Autenticación y SSO
+- rpa-sandbox-activity.ts
+- lab120Metrics
+- Cómo funciona el repaso inteligente
 - Estado actual — 2026-11-06 (retomar desde aquí)
 - 🔧 Diagnóstico y reparación
 - Ejercicio 1 — Parámetro con la ruta de los datos
@@ -572,7 +572,16 @@
 - Ejercicio 4 — Tipos de cambio en formato largo (unpivot)
 - Ejercicio 8 — Una excepción en los nombres de clientes
 - sit-ventas/README.md
-- Rediseño "Aprender haciendo" — estado al 2026-11-01 (retomar desde aquí)
+- employability.ts
+- PracticeProgressRecord
+- 4. Anti-Patrones a Evitar
+- validate-spaced-repetition.ts
+- labs/page.tsx
+- DAX
+- 6. Scripts pac CLI de referencia
+- Power Fx
+- lab-readiness-panel.tsx
+- 3. Branching Strategy
 
 ## God Nodes (most connected - your core abstractions)
 1. `Button` - 100 edges
@@ -584,108 +593,108 @@
 7. `vitest` - 51 edges
 8. `buildPageMetadata()` - 44 edges
 9. `react` - 43 edges
-10. `AUDITORÍA INTEGRAL DE PLANESTUDIO 2026-2027` - 42 edges
+10. `PlanEstudio — Estado de sprints post-auditoría (handoff)` - 42 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Progression Dependencies` --references--> `LevelCompleteBanner()`  [INFERRED]
-  CLAUDE.md → app-elearning/src/components/modules/level-progress-banner.tsx
-- `Task 6: Botón "Generar certificado" en `LevelCompleteBanner`` --references--> `LevelCompleteBanner()`  [INFERRED]
-  docs/superpowers/plans/2026-07-03-certificado-imprimible.md → app-elearning/src/components/modules/level-progress-banner.tsx
-- `Task 11: `level-progress-banner.tsx` — colors + IA-aware completion messaging` --references--> `LevelCompleteBanner()`  [INFERRED]
-  docs/superpowers/plans/2026-07-03-nivel-ia-desarrollo-asistido.md → app-elearning/src/components/modules/level-progress-banner.tsx
-- `2. Disparo — `LevelCompleteBanner` (`level-progress-banner.tsx`)` --references--> `LevelCompleteBanner()`  [INFERRED]
-  docs/superpowers/specs/2026-07-03-certificado-imprimible-design.md → app-elearning/src/components/modules/level-progress-banner.tsx
-- ``src/components/modules/level-progress-banner.tsx`` --references--> `LevelCompleteBanner()`  [INFERRED]
-  docs/superpowers/specs/2026-07-03-nivel-ia-desarrollo-asistido-design.md → app-elearning/src/components/modules/level-progress-banner.tsx
+- `Task 2: Core type plumbing (LevelId, LEVEL_ORDER, LEVEL_MODULE_RANGE, badge variant)` --references--> `validateLabFrontmatter()`  [INFERRED]
+  docs/superpowers/plans/2026-07-03-nivel-ia-desarrollo-asistido.md → app-elearning/src/lib/content.ts
+- `Labs (2 nuevos, `app-elearning/content/labs/`)` --references--> `validateLabFrontmatter()`  [INFERRED]
+  docs/superpowers/specs/2026-07-03-nivel-ia-desarrollo-asistido-design.md → app-elearning/src/lib/content.ts
+- `Task 2: Register The Resource In The Next.js Content Loader` --references--> `getAllResourcePages()`  [INFERRED]
+  docs/superpowers/plans/2026-07-13-jr-1-matriz-skills-laborales.md → app-elearning/src/lib/content.ts
+- `Task 2: Register The Resource In The Next.js Content Loader` --references--> `getAllResourcePages()`  [INFERRED]
+  docs/superpowers/plans/2026-07-13-jr-2-crm-functional.md → app-elearning/src/lib/content.ts
+- `Task 2: Register The Resource In The Next.js Content Loader` --references--> `getAllResourcePages()`  [INFERRED]
+  docs/superpowers/plans/2026-07-13-jr-3-crm-developer.md → app-elearning/src/lib/content.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (563 total, 24 thin omitted)
+## Communities (572 total, 23 thin omitted)
 
 ### Community 0 - "Lab 32 — CoE Starter Kit: Gobernanza a Escala del Tenant de Power Platform"
 Cohesion: 0.12
 Nodes (15): Checklist final, Criterios de aprobación, Duración estimada, Errores frecuentes, Escenario de negocio, Evidencia esperada, Lab 32 — CoE Starter Kit: Gobernanza a Escala del Tenant de Power Platform, Limpieza del laboratorio (+7 more)
 
-### Community 1 - "preparar-entorno-client.tsx"
-Cohesion: 0.06
-Nodes (70): WorkstationPreviewSection(), metadata, PrepararEntornoPage(), ExecutionModeBadge(), PrepararEntornoClient(), requirementBadge(), StatusIndicator(), ToolActions() (+62 more)
+### Community 1 - "workstation.ts"
+Cohesion: 0.13
+Nodes (18): DEFAULT_ONBOARDING_ANSWERS, baseAnswers, ALL_OS, ENVIRONMENT_ACCESS_MATRIX, EnvironmentAccessRequirement, ESSENTIAL_SETUP_STEPS, getToolRequirement(), LAB_PRODUCT_TOOL_HINTS (+10 more)
 
 ### Community 2 - "search-bar.tsx"
 Cohesion: 0.07
-Nodes (48): contextClassName(), contextLabel(), IndexStatus, LEVEL_LABELS, SearchBar(), SearchHit, TYPE_CONFIG, getLastPractice() (+40 more)
+Nodes (45): contextClassName(), contextLabel(), IndexStatus, LEVEL_LABELS, SearchBar(), SearchHit, TYPE_CONFIG, getLastPractice() (+37 more)
 
 ### Community 3 - "interactive-practice-client.tsx"
-Cohesion: 0.10
-Nodes (39): DebugEngine(), DecisionEngine(), FeedbackPanel(), FilterSelect(), FlowBranchPreviewPanel(), FlowEngine(), initialAnswer(), InteractiveExercise() (+31 more)
+Cohesion: 0.11
+Nodes (32): DebugEngine(), DecisionEngine(), FilterSelect(), FlowBranchPreviewPanel(), FlowEngine(), initialAnswer(), InteractiveExercise(), InteractivePracticeClientProps (+24 more)
 
 ### Community 4 - "Power Platform & D365 — Plan de Estudio"
 Cohesion: 0.12
 Nodes (14): Agregar nuevos módulos, Agregar preguntas al banco, App Next.js (superficie principal), Arquitectura del repositorio, CI/CD, Comandos de la app, Ejecutar localmente, Laboratorios (+6 more)
 
 ### Community 5 - "practice-progress.ts"
-Cohesion: 0.08
-Nodes (41): PracticeWorkspaceClient(), addExternalReviewToRecord(), ASSESSMENT_MULTIPLIER, buildSelfAssessment(), canCompletePractice(), compareLatestAttempts(), createAttempt(), createPracticeRecord() (+33 more)
+Cohesion: 0.10
+Nodes (36): addExternalReviewToRecord(), ASSESSMENT_MULTIPLIER, AssessmentLevel, createAttempt(), createPracticeRecord(), CRITICAL_FAILURE_OPTIONS, ensureActiveAttempt(), ensureAttemptEvidence() (+28 more)
 
 ### Community 6 - "interactive-practice-progress.ts"
-Cohesion: 0.12
-Nodes (29): buildImportResult(), cloneRecord(), createInteractivePracticeProgressExport(), earliestIso(), getInteractivePracticeReviewQueue(), HintUnlockState, INTERACTIVE_PRACTICE_EXPORT_SCHEMA_VERSION, INTERACTIVE_PRACTICE_EXPORT_SOURCE (+21 more)
+Cohesion: 0.09
+Nodes (30): appendEvent(), countAttemptsSinceLastHint(), createInteractivePracticeRecord(), earliestIso(), getHintUnlockState(), getInteractivePracticeReviewQueue(), HintUnlockState, INTERACTIVE_PRACTICE_EXPORT_SCHEMA_VERSION (+22 more)
 
 ### Community 7 - "practice-portability.ts"
-Cohesion: 0.08
-Nodes (45): canonicalReviewForComparison(), corruptPreview(), corruptReviewPreview(), emptyPreview(), emptyReviewPreview(), EvidencePackage, EvidencePackagePractice, EXTERNAL_REVIEW_FORMAT (+37 more)
+Cohesion: 0.10
+Nodes (35): canonicalReviewForComparison(), corruptReviewPreview(), emptyReviewPreview(), EvidencePackagePractice, EXTERNAL_REVIEW_FORMAT, EXTERNAL_REVIEW_IMPORT_MAX_BYTES, ExternalReviewPreviewStatus, findDangerousKey() (+27 more)
 
 ### Community 8 - "quiz-panel.tsx"
-Cohesion: 0.13
-Nodes (32): clearQuizDraft(), DraftPanelState, formatTime(), PanelState, questionFingerprint(), QuizDraft, quizDraftKey(), QuizPanel() (+24 more)
+Cohesion: 0.06
+Nodes (66): metadata, ReviewPage(), metadata, SimulatorContextCard(), SimulatorPage(), clearQuizDraft(), DraftPanelState, formatTime() (+58 more)
 
 ### Community 9 - "interactive-practices.ts"
-Cohesion: 0.07
-Nodes (40): PRACTICE_ACCOUNTS, PracticeAccount, PRACTICE_PRODUCTS, PracticeProduct, PRACTICE_REQUESTS, PracticeRequest, arraysEqual(), BaseInteractivePractice (+32 more)
+Cohesion: 0.08
+Nodes (36): main(), PRACTICE_ACCOUNTS, PracticeAccount, PRACTICE_PRODUCTS, PracticeProduct, PRACTICE_REQUESTS, PracticeRequest, arraysEqual() (+28 more)
 
 ### Community 10 - "legacy-client.tsx"
-Cohesion: 0.12
-Nodes (21): ActivityPanel(), initialRecords, RecordsTable(), RpaLegacySimulatorClient(), closeInterrupt(), consult(), log(), processRegister() (+13 more)
+Cohesion: 0.19
+Nodes (13): initialRecords, RecordsTable(), RpaLegacySimulatorClient(), closeInterrupt(), consult(), log(), processRegister(), register() (+5 more)
 
 ### Community 11 - "COPILOT STUDIO — Guía Completa de 0 a Experto"
-Cohesion: 0.06
-Nodes (31): 10. Analytics y Mejora Continua, 11. Integración con D365 Customer Service (Omnichannel), 12. Casos de Uso por Industria, 1. Conceptos Fundamentales, 2. Crear el Primer Agente, 4. Variables y Entidades, 5. Integración con Power Automate, 9. Adaptive Cards (+23 more)
+Cohesion: 0.04
+Nodes (48): 10. Analytics y Mejora Continua, 11. Integración con D365 Customer Service (Omnichannel), 12. Casos de Uso por Industria, 1. Conceptos Fundamentales, 2. Crear el Primer Agente, 3. Topics — Unidad de Conversación, 4. Variables y Entidades, 5. Integración con Power Automate (+40 more)
 
 ### Community 12 - "checklist-client.tsx"
 Cohesion: 0.12
-Nodes (28): BEGINNER_MINIMUM, CATEGORY_STYLE, ChecklistClient(), ChecklistClientProps, ChecklistFilter, ChecklistRow(), FILTER_LABEL, findInitialModule() (+20 more)
+Nodes (27): BEGINNER_MINIMUM, CATEGORY_STYLE, ChecklistClient(), ChecklistClientProps, ChecklistFilter, ChecklistRow(), FILTER_LABEL, findInitialModule() (+19 more)
 
 ### Community 13 - "compilerOptions"
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
 ### Community 14 - "content.ts"
-Cohesion: 0.06
-Nodes (58): generateMetadata(), APP_CONTENT_DIR, deriveLabIdFromSlug(), estimateReadingMinutes(), extractModulesFromContent(), failContent(), formatLabDisplayId(), getAllLevels() (+50 more)
+Cohesion: 0.08
+Nodes (48): generateStaticParams(), generateStaticParams(), generateStaticParams(), APP_CONTENT_DIR, deriveLabIdFromSlug(), estimateReadingMinutes(), extractModulesFromContent(), failContent() (+40 more)
 
 ### Community 15 - "practice-workspace-client.tsx"
-Cohesion: 0.13
-Nodes (23): ASSESSMENT_OPTIONS, assessmentLevelLabel(), attemptLabel(), ExternalReviewPanel(), handleReviewFile(), MessageList(), PracticeWorkspaceData, ReviewDetailCard() (+15 more)
+Cohesion: 0.21
+Nodes (13): ASSESSMENT_OPTIONS, assessmentLevelLabel(), attemptLabel(), ExternalReviewPanel(), handleReviewFile(), MessageList(), ReviewDetailCard(), reviewPreviewLabel() (+5 more)
 
 ### Community 16 - "labs-client.tsx"
-Cohesion: 0.14
-Nodes (17): LabCardStatus(), LabCardStatusProps, CERT_VARIANT, DIFFICULTY_ORDER, DOMAIN_ORDER, FilterChips(), FilterChipsProps, getActiveLevelCode() (+9 more)
+Cohesion: 0.16
+Nodes (14): LabCardStatus(), LabCardStatusProps, CERT_VARIANT, DIFFICULTY_ORDER, DOMAIN_ORDER, FilterChips(), FilterChipsProps, getActiveLevelCode() (+6 more)
 
 ### Community 17 - "manifest.json"
 Cohesion: 0.13
 Nodes (14): assetPackId, company, format, generatedAt, paths, legacyApp, portal, scenario (+6 more)
 
 ### Community 18 - "getAllLabs"
-Cohesion: 0.12
-Nodes (23): metadata, PortfolioPage(), metadata, ReviewPage(), generateMetadata(), generateStaticParams(), PageProps, ProfessionalRouteDetailPage() (+15 more)
+Cohesion: 0.11
+Nodes (26): metadata, PortfolioPage(), PortfolioProfileData, ResourcesIndexPage(), generateStaticParams(), generateStaticParams(), getAllModules(), getAllResourcePages() (+18 more)
 
 ### Community 19 - "practices.ts"
-Cohesion: 0.08
-Nodes (45): metadata, Metric(), PracticalExperiencePage(), generateMetadata(), generateStaticParams(), Info(), PracticeDetailPage(), Props (+37 more)
+Cohesion: 0.07
+Nodes (47): generateStaticParams(), dynamic, GET(), PracticeWorkspaceData, getInteractivePracticeSearchDocuments(), PracticeHint, APP_CONTENT_DIR, COVERAGE_STATES (+39 more)
 
 ### Community 20 - "useProgressStore"
-Cohesion: 0.07
-Nodes (43): NotFound(), DashboardPage(), metadata, GuidedHomeClient(), CurriculumContext, useCurriculum(), useNextBestAction(), LabPrerequisiteGate() (+35 more)
+Cohesion: 0.08
+Nodes (43): BASICO_LABS, BASICO_MODULES, localStorageMock, replaceMock, LEVEL_ACCENT, ProgressDashboardClient(), ReadinessStatus, STATUS_CONFIG (+35 more)
 
 ### Community 21 - "generate-rpa-assets.mjs"
 Cohesion: 0.17
@@ -693,7 +702,7 @@ Nodes (20): build(), crc32(), csv(), customers, dosDateTime(), ensureDir(), prod
 
 ### Community 22 - "PlanEstudio — Estado de sprints post-auditoría (handoff)"
 Cohesion: 0.06
-Nodes (31): Beginner UX — auditoría de estudiante principiante (sprint 14), Cierre de la Fase 2 (Developer Workstation, Environment Setup & Project Foundations), Comandos de validación de referencia, Contexto, Cómo continuar, Diagnósticos cerrados (no re-abrir sin instrucción explícita), Estado al 2026-08-22 noche (fix de infra Vercel — dominio planestudio.vercel.app roto), Estado al 2026-08-22 (pausa por reinicio de PC del usuario) (+23 more)
+Nodes (32): Beginner UX — auditoría de estudiante principiante (sprint 14), Cierre de la Fase 2 (Developer Workstation, Environment Setup & Project Foundations), Comandos de validación de referencia, Contexto, Cómo continuar, Decisiones tomadas el 2026-11-19 (el usuario pidió "resuelve todas, decide tú"), Diagnósticos cerrados (no re-abrir sin instrucción explícita), Estado al 2026-08-22 noche (fix de infra Vercel — dominio planestudio.vercel.app roto) (+24 more)
 
 ### Community 23 - "CLAUDE.md"
 Cohesion: 0.08
@@ -736,8 +745,8 @@ Cohesion: 0.04
 Nodes (46): Módulo 10: Canvas Apps — Componentes y Reutilización, Módulo 11: Power Automate Avanzado, Módulo 12: Power BI — DAX Avanzado, Módulo 13: JavaScript y PCF Básico, Módulo 14: Conectores Personalizados, Módulo 15: Copilot Studio — Introducción, Módulo 16: Seguridad y Administración de Soluciones, Módulo 17: Proyecto Integrador Nivel 2 (+38 more)
 
 ### Community 33 - "migrate-modules.mjs"
-Cohesion: 0.06
-Nodes (29): compat, __dirname, eslintConfig, __filename, mod(), ctx, __dirname, errors (+21 more)
+Cohesion: 0.07
+Nodes (22): compat, __dirname, eslintConfig, __filename, labFiles, labFixtures, mod(), assetRoot (+14 more)
 
 ### Community 34 - "AUDITORÍA INTEGRAL DE PLANESTUDIO 2026-2027"
 Cohesion: 0.05
@@ -752,8 +761,8 @@ Cohesion: 0.11
 Nodes (32): failedPreview(), FullBackupPanel(), handleExport(), handleFile(), handleImport(), applyBackup(), BACKUP_FORMAT, BACKUP_IMPORT_MAX_BYTES (+24 more)
 
 ### Community 37 - "practice-portability.test.ts"
-Cohesion: 0.21
-Nodes (14): PracticePortabilityPanel(), downloadFile(), handleExport(), handleFile(), handleImport(), Preview, applyPracticeImport(), createPracticeProgressExport() (+6 more)
+Cohesion: 0.20
+Nodes (15): PracticePortabilityPanel(), downloadFile(), handleExport(), handleFile(), handleImport(), applyPracticeImport(), corruptPreview(), createPracticeProgressExport() (+7 more)
 
 ### Community 38 - "Parte B — Integridad profesional / habilidades blandas"
 Cohesion: 0.09
@@ -765,15 +774,15 @@ Nodes (15): Alternativas si no puedes crear otro Trial, Ambiente por ruta, Crear
 
 ### Community 40 - "generate-powerbi-assets.mjs"
 Cohesion: 0.05
-Nodes (44): baseOrders, bundleFiles, byYear, catTotals, cell(), clientes, csv(), deliveryDays() (+36 more)
+Nodes (41): baseOrders, bundleFiles, byYear, catTotals, cell(), clientes, csv(), deliveryDays() (+33 more)
 
 ### Community 41 - "Lab 32 — CoE Starter Kit: Gobernanza a Escala del Tenant de Power Platform"
 Cohesion: 0.04
 Nodes (46): Checklist final, Componentes del CoE Starter Kit, Crear el ambiente dedicado para el CoE antes de empezar, Datos de apoyo, Duración estimada, Ejercicio 1 — Preparar el ambiente y descargar el kit, Ejercicio 2 — Instalar el componente Core, Ejercicio 3 — Power BI Dashboard: análisis del inventario (+38 more)
 
 ### Community 42 - "review-queue.ts"
-Cohesion: 0.08
-Nodes (54): AvailabilitySelector(), ChoiceGroup(), DiagnosticPanel(), labelRequirement(), MyRouteClient(), pickRecommendedRoutes(), RouteSummary, PortfolioRouteData (+46 more)
+Cohesion: 0.06
+Nodes (69): AvailabilitySelector(), ChoiceGroup(), DiagnosticPanel(), labelRequirement(), MyRouteClient(), pickRecommendedRoutes(), RouteSummary, metadata (+61 more)
 
 ### Community 43 - "validateExternalReviewPayload"
 Cohesion: 0.04
@@ -799,25 +808,25 @@ Nodes (16): Checklist final, Criterios de aprobación, Duración estimada, Error
 Cohesion: 0.09
 Nodes (21): Competencias desarrolladas, Criterios de aprobación, Datos de prueba, Errores comunes, Escenario de negocio, Evidencia esperada, Herramientas necesarias, Lab 59 — Field Service: Work Order, Evidencia Móvil y UAT de Servicio en Campo (+13 more)
 
-### Community 49 - "modulo/[slug]/page.tsx"
-Cohesion: 0.08
-Nodes (32): CERT_VARIANT, generateStaticParams(), LabDetailPage(), LEVEL_BAR, Props, generateStaticParams(), LEVEL_BADGE, ModulePage() (+24 more)
+### Community 49 - "seo.ts"
+Cohesion: 0.05
+Nodes (64): CertificatePage(), generateMetadata(), PageProps, generateMetadata(), Info(), PracticeDetailPage(), Props, splitSolution() (+56 more)
 
 ### Community 50 - "evaluaciones-simulador.js"
 Cohesion: 0.32
 Nodes (11): buildModuleData(), buildQuestions(), certForModule(), createOption(), escapeHtml(), initSimulator(), grade(), questionTypeLabel() (+3 more)
 
 ### Community 51 - "package.json"
-Cohesion: 0.07
-Nodes (39): dependencies, autoprefixer@^10.5.0, class-variance-authority@^0.7.1, clsx@^2.1.1, flexsearch@^0.7.43, gray-matter@^4.0.3, lucide-react@^0.511.0, next@^15.3.5 (+31 more)
+Cohesion: 0.06
+Nodes (47): dependencies, autoprefixer@^10.5.0, class-variance-authority@^0.7.1, clsx@^2.1.1, flexsearch@^0.7.43, gray-matter@^4.0.3, lucide-react@^0.511.0, mermaid@^12.1.0 (+39 more)
 
 ### Community 52 - "domain-hubs.ts"
 Cohesion: 0.13
 Nodes (14): Conclusion corregida, Orden recomendado, Practicas con instrucciones insuficientes o incompletas, Practicas que carecen de criterios/evidencias suficientes, Practicas que requieren licencias, roles o configuraciones a documentar mejor, Practicas ya ejecutables en tenant real, Roadmap de auditoria tenant-real para PlanEstudio, Sprint 1 - Readiness manual por lab (+6 more)
 
-### Community 53 - "seo.ts"
-Cohesion: 0.07
-Nodes (47): generateMetadata(), metadata, MyRoutePage(), generateMetadata(), metadata, ResourcesIndexPage(), generateMetadata(), generateStaticParams() (+39 more)
+### Community 53 - "seo.test.ts"
+Cohesion: 0.15
+Nodes (17): MyRoutePage(), generateStaticParams(), dynamic, robots(), dynamic, sitemap(), getAllInteractivePractices(), absoluteUrl() (+9 more)
 
 ### Community 54 - "install-d365-test-apps.ps1"
 Cohesion: 0.60
@@ -848,8 +857,8 @@ Cohesion: 0.10
 Nodes (19): Competencias Desarrolladas, Criterios de aprobación, Criterios de Validación, Duración estimada, Ejercicio 1 — Backup real, Ejercicio 2 — Simular la pérdida, Ejercicio 3 — Restaurar y medir RTO, Ejercicio 4 — Calcular RPO y plan de comunicación (+11 more)
 
 ### Community 64 - "validate-content.ts"
-Cohesion: 0.13
-Nodes (23): rows, summary, main(), validateChecklistData(), Freshness, FRESHNESS_MAX_AGE_MONTHS, getFreshness(), isValidLastVerified() (+15 more)
+Cohesion: 0.11
+Nodes (28): rows, summary, main(), ResourcePage(), cleanTitle(), parseChecklistMarkdown(), validateChecklistData(), Freshness (+20 more)
 
 ### Community 65 - "Lab 67 — Customer Insights - Data: Unificación de Perfiles y Customer 360"
 Cohesion: 0.09
@@ -944,12 +953,12 @@ Cohesion: 0.05
 Nodes (39): Checklist final, Datos de apoyo, Duración estimada, Ejercicio 1 — App Registration y Service Connections, Ejercicio 2 — Pipeline de CI: build y verificación, Ejercicio 3 — Pipeline de CD: despliegue con aprobación, Ejercicio 4 — Verificar la ejecución end-to-end, Entorno (+31 more)
 
 ### Community 88 - "ALM y DEVOPS — Estrategias de Gestión del Ciclo de Vida"
-Cohesion: 0.06
-Nodes (31): 10. Monitoreo de Flujos en Producción, 1. Estrategia de Ambientes, 3. Branching Strategy, 4. Pipeline CI — Azure DevOps, 5. Pipeline CD — GitHub Actions, 6. Scripts pac CLI de referencia, 7. Connection References — Setup en nuevo ambiente, 8. Environment Variables — Gestión por ambiente (+23 more)
+Cohesion: 0.07
+Nodes (27): 10. Monitoreo de Flujos en Producción, 1. Estrategia de Ambientes, 2. Soluciones — Mejores Prácticas, 4. Pipeline CI — Azure DevOps, 5. Pipeline CD — GitHub Actions, 7. Connection References — Setup en nuevo ambiente, 8. Environment Variables — Gestión por ambiente, 9. Checklist de Deploy a Producción (+19 more)
 
 ### Community 89 - "LENGUAJES DE PROGRAMACIÓN EN POWER PLATFORM & DYNAMICS 365"
-Cohesion: 0.05
-Nodes (37): Adaptive Card para Copilot Studio / Teams, Azure DevOps Pipeline completo, C#, CALCULATE — el corazón de DAX, Comandos pac CLI para PCF, DAX, Entity Reference y relaciones, Estructura básica (+29 more)
+Cohesion: 0.08
+Nodes (26): Adaptive Card para Copilot Studio / Teams, Azure DevOps Pipeline completo, C#, Comandos pac CLI para PCF, Entity Reference y relaciones, Estructura básica, FetchXML — consultas a Dataverse, GitHub Actions para Power Platform (+18 more)
 
 ### Community 90 - "01-introduccion-al-ecosistema-power-platform.md"
 Cohesion: 0.06
@@ -977,7 +986,7 @@ Nodes (5): tailwindcss@^3.4.17, @tailwindcss/typography@^0.5.20, config, tailwin
 
 ### Community 98 - "Propuesta: Fases 1-6 del rediseño "Aprender haciendo""
 Cohesion: 0.06
-Nodes (34): 10. Fase 7 — resto del curso (IA, D365 y RPA) y cierre del rediseño (2026-11-05), 11.1 Hallazgo que afecta a todo el curso: el Developer Plan cambia el 2026-11-15 (resuelto el mismo día, ver §11.7), 11.2 Nivel RPA, Módulos 67 a 74 y LAB-104 a LAB-112, 11.3 Nivel D365, Módulos 57 a 66 y sus labs (persona simulada "Valeria"), 11.4 Nivel IA, Módulos 42, 45, 47 a 53 y 56, y Labs 45, 51, 52, 54 y 56 (persona simulada "Sofía"), 11.5 Inventario de "no confirmado" de los niveles 1 a 4 (sustituye a la parte de esos niveles en §9), 11.6 Cambios de la aplicación hechos el mismo día, 11.7 Segunda ronda del mismo día: cierre de los pendientes de §11.1 a §11.4 (+26 more)
+Nodes (35): 10. Fase 7 — resto del curso (IA, D365 y RPA) y cierre del rediseño (2026-11-05), 11.1 Hallazgo que afecta a todo el curso: el Developer Plan cambia el 2026-11-15 (resuelto el mismo día, ver §11.7), 11.2 Nivel RPA, Módulos 67 a 74 y LAB-104 a LAB-112, 11.3 Nivel D365, Módulos 57 a 66 y sus labs (persona simulada "Valeria"), 11.4 Nivel IA, Módulos 42, 45, 47 a 53 y 56, y Labs 45, 51, 52, 54 y 56 (persona simulada "Sofía"), 11.5 Inventario de "no confirmado" de los niveles 1 a 4 (sustituye a la parte de esos niveles en §9), 11.6 Cambios de la aplicación hechos el mismo día, 11.7 Segunda ronda del mismo día: cierre de los pendientes de §11.1 a §11.4 (+27 more)
 
 ### Community 99 - "validate-rpa-assets.mjs"
 Cohesion: 0.23
@@ -988,8 +997,8 @@ Cohesion: 0.13
 Nodes (14): Apéndice — fuentes de este informe, Auditoría de alineación con el mercado laboral — PlanEstudio (2026-10-06), Decisión de alcance (requiere aprobación explícita antes de tocar, no es un fix trivial), Hallazgo transversal más importante — bug sistémico de 4 rutas (descubierto correlacionando los 4 forks), Impacto medio, esfuerzo bajo (extender contenido existente, sin módulos nuevos), Integridad profesional (más allá de lo técnico) — Score: Alto, Investigadas a fondo (evidencia externa: ~5-10 ofertas reales cada una), Investigadas con evidencia ligera (3-5 ofertas, o patrón declarado explícitamente ausente) (+6 more)
 
 ### Community 101 - "pilot-mastery.ts"
-Cohesion: 0.18
-Nodes (15): createInteractivePracticeRecord(), InteractivePracticeRecord, withRecord(), InteractivePracticeMastery, calculateModule10PilotMastery(), calculateModule11PilotMastery(), calculateModule13PilotMastery(), calculatePilotMastery() (+7 more)
+Cohesion: 0.22
+Nodes (12): InteractivePracticeRecord, InteractivePracticeMastery, calculateModule10PilotMastery(), calculateModule11PilotMastery(), calculateModule13PilotMastery(), calculatePilotMastery(), MODULE_10_PILOT_PRACTICE_IDS, MODULE_11_PILOT_PRACTICE_IDS (+4 more)
 
 ### Community 102 - "39. Veredicto final"
 Cohesion: 0.15
@@ -1163,9 +1172,9 @@ Nodes (17): Assets reproducibles, Competencias desarrolladas, Connection referen
 Cohesion: 0.10
 Nodes (19): Assets reproducibles, Competencias desarrolladas, Criterios de aprobación, Datos inconsistentes entre cloud flow, desktop flow y archivo de origen, 🔧 Diagnóstico y reparación, Entregables, Errores frecuentes, Escenario de negocio (+11 more)
 
-### Community 147 - "layout.tsx"
-Cohesion: 0.18
-Nodes (11): getCurriculumIndex(), metadata, RootLayout(), CurriculumProvider(), ReadingProgress(), ServiceWorkerRegister(), ThemeProvider(), CERTIFICATION_LEVEL_ORDER (+3 more)
+### Community 147 - "Lab 120 — Power BI: DAX esencial"
+Cohesion: 0.05
+Nodes (41): Checklist final, Competencias desarrolladas, Conocimiento previo, Criterios de aprobación, 🔧 Diagnóstico y reparación, Duración estimada, Ejercicio 1 — Medidas derivadas, Ejercicio 2 — Estadísticas: cuando el promedio engaña (+33 more)
 
 ### Community 148 - "topbar.tsx"
 Cohesion: 0.07
@@ -1244,8 +1253,8 @@ Cohesion: 0.09
 Nodes (23): A, B, C, D, E, F, G, GLOSARIO DE TÉRMINOS — Power Platform & Dynamics 365 (+15 more)
 
 ### Community 168 - "cn"
-Cohesion: 0.14
-Nodes (23): PortfolioClient(), PortfolioProfileData, ViewMode, CertificateNameDialog(), CertificateNameDialogProps, Card, CardContent, CardDescription (+15 more)
+Cohesion: 0.06
+Nodes (52): CertificateClient(), CertificateClientProps, PortfolioClient(), PortfolioRouteData, ViewMode, LevelReadinessData, FeedbackPanel(), ACCENT_TEXT_COLORS (+44 more)
 
 ### Community 169 - "checklist.test.ts"
 Cohesion: 0.09
@@ -1260,8 +1269,8 @@ Cohesion: 0.09
 Nodes (22): Criterios de validación, Datos de prueba (muestra del origen legacy), Decisiones que debes tomar, Entregables, Errores comunes, Escenario de negocio, Herramientas necesarias, Lab 75 — JR-005: Data Migration to Dynamics 365 (+14 more)
 
 ### Community 172 - "lab-metadata.ts"
-Cohesion: 0.12
-Nodes (27): FEATURED_ARTIFACTS, LabsPage(), metadata, DIFFICULTY_LABELS, DOMAIN_TAGS, ENVIRONMENT_BY_LEVEL, EXECUTION_STATUS_LABELS, EXECUTION_STATUS_NOTES (+19 more)
+Cohesion: 0.13
+Nodes (25): DIFFICULTY_LABELS, DOMAIN_TAGS, DomainTag, ENVIRONMENT_BY_LEVEL, EXECUTION_STATUS_LABELS, EXECUTION_STATUS_NOTES, ExecutionStatus, extractSectionItems() (+17 more)
 
 ### Community 173 - "lucide-react"
 Cohesion: 0.08
@@ -1271,21 +1280,21 @@ Nodes (24): Criterios de validación, Datos de prueba, Decisiones que debes toma
 Cohesion: 0.09
 Nodes (21): Criterios de validación, Código de partida (dato de prueba), Decisiones que debes tomar, Entregables, Errores comunes, Escenario de negocio, Herramientas necesarias, Lab 80 — JR-010: AI-Assisted CRM Development (+13 more)
 
-### Community 175 - "Button"
-Cohesion: 0.06
-Nodes (38): CertificateClient(), CertificateClientProps, BASICO_LABS, BASICO_MODULES, localStorageMock, replaceMock, LevelReadinessData, ACCENT_TEXT_COLORS (+30 more)
+### Community 175 - "Diseño: Certificado imprimible por nivel"
+Cohesion: 0.18
+Nodes (10): 1. Modelo de datos — `src/lib/progress.ts`, 2. Disparo — `LevelCompleteBanner` (`level-progress-banner.tsx`), 4. Componente visual — `CertificateDiploma`, 5. Diálogo de captura de nombre — componente compartido, 6. Impresión limpia — CSS global, Alcance, Diseño: Certificado imprimible por nivel, Objetivo (+2 more)
 
 ### Community 176 - "next-themes"
 Cohesion: 0.08
 Nodes (24): Auto-evaluación Final, ✅ Buenas Prácticas, 💼 Caso Real de Negocio, Certificaciones (fuera del curso), 📖 Conceptos Clave, Criterios de Graduación — Nivel 4 (Solution Architect), Criterios de Liderazgo, 🧪 Criterios de Validación del Capstone (+16 more)
 
 ### Community 177 - "@radix-ui/react-dialog"
-Cohesion: 0.10
-Nodes (18): ReviewScheduler, ¿Cuánto tiempo toma?, Cómo funciona el repaso inteligente, ¿Cómo se decide cuándo vuelve una pregunta?, Dónde encontrarlo, Limitaciones honestas, ¿Qué preguntas aparecen?, Arquitectura (+10 more)
+Cohesion: 0.15
+Nodes (12): ReviewItemType, ReviewScheduler, Arquitectura, Backup, Elegibilidad, Estados de una tarjeta, Fuera de alcance (Fase 1), Intervalos (+4 more)
 
 ### Community 178 - "@radix-ui/react-dropdown-menu"
-Cohesion: 0.12
-Nodes (15): Cambios de código, Contexto y motivación, Decisiones de diseño (confirmadas con el usuario), Diseño: Nivel transversal "Desarrollo Asistido por IA", Documentación a actualizar, Fuera de alcance, `scripts/validate-content.ts`, `src/app/labs/page.tsx` (+7 more)
+Cohesion: 0.10
+Nodes (19): Banco de preguntas (`docs/javascripts/evaluaciones-simulador.js`), Cambios de código, Checklist (`docs/Recursos/CHECKLIST_PROGRESO.md`), Contexto y motivación, Decisiones de diseño (confirmadas con el usuario), Diseño: Nivel transversal "Desarrollo Asistido por IA", Documentación a actualizar, Estructura de contenido nueva (+11 more)
 
 ### Community 179 - "@radix-ui/react-progress"
 Cohesion: 0.09
@@ -1339,9 +1348,9 @@ Nodes (24): 👨‍💻 Actividades Prácticas, ✅ Buenas Prácticas, 💼 Caso
 Cohesion: 0.10
 Nodes (21): 1. Governance assessment, 2. Matriz de ambientes, 3. Registro de excepciones DLP, 4. Runbook de incidente, Alineación técnica actual, Brechas críticas, Checklist antes de aplicar, Criterio de profundidad de esta ruta (+13 more)
 
-### Community 192 - "Criterios de Validación"
-Cohesion: 0.50
-Nodes (4): Criterios de Validación, Task 14: E2E smoke tests for the IA level, Task 15: Update documentation counts and add the IA transversal note, Task 16: Final full verification and merge to master
+### Community 192 - "File Map"
+Cohesion: 0.11
+Nodes (18): Criterios de Validación, Ejercicio 4 — Humano aprueba, Ejercicio 5 — Documentar el ciclo, File Map, Global Constraints, Nivel IA — Desarrollo Asistido por IA — Implementation Plan, Task 10: Wire the `ia` level into sidebar, home, labs page, and checklist UI, Task 11: `level-progress-banner.tsx` — colors + IA-aware completion messaging (+10 more)
 
 ### Community 193 - "Lab 53 — Exportar, Desempaquetar y Revisar una Solución con IA"
 Cohesion: 0.10
@@ -1412,12 +1421,12 @@ Cohesion: 0.07
 Nodes (26): 👨‍💻 Actividades Prácticas, Auto-evaluación de Dominio, ✅ Buenas Prácticas, 💼 Caso Real de Negocio, 📖 Conceptos Clave, Criterios de Calidad, Criterios de Graduación — Nivel 2, 🧪 Criterios de Validación del Proyecto Final (+18 more)
 
 ### Community 210 - "questions-parser.ts"
-Cohesion: 0.14
-Nodes (17): MODULE_QUESTIONS, QuestionType, RawQuestion, ContentValidationError, LEVEL_MODULE_RANGE, getAllParsedQuestions(), getAllQuestions(), getCaseDiagnosisForModule() (+9 more)
+Cohesion: 0.12
+Nodes (17): MODULE_QUESTIONS, QuestionType, RawQuestion, ContentValidationError, getAllParsedQuestions(), getAllQuestions(), getCaseDiagnosisForModule(), getQuestionById() (+9 more)
 
 ### Community 211 - "ARQUITECTURA EMPRESARIAL — Patrones y Reference Architectures"
-Cohesion: 0.06
-Nodes (30): 1. Principios de Arquitectura, 2. Árbol de Decisiones Arquitectónicas, 3. Reference Architectures, 4. Anti-Patrones a Evitar, 5. Framework de Toma de Decisiones, 6. Capacity Planning, 7. Non-Functional Requirements (NFRs), 8. Mapa de Madurez de Power Platform (+22 more)
+Cohesion: 0.08
+Nodes (23): 1. Principios de Arquitectura, 2. Árbol de Decisiones Arquitectónicas, 3. Reference Architectures, 5. Framework de Toma de Decisiones, 6. Capacity Planning, 7. Non-Functional Requirements (NFRs), 8. Mapa de Madurez de Power Platform, ADRs mínimos para cualquier proyecto (+15 more)
 
 ### Community 212 - "🎯 PLAN MAESTRO: De Básico a Arquitecto en Microsoft Power Platform y Dynamics 365"
 Cohesion: 0.13
@@ -1917,7 +1926,7 @@ Nodes (13): 👨‍💻 Actividades Prácticas, ✅ Buenas Prácticas, 💼 Caso
 
 ### Community 336 - "43-copilot-en-power-platform.md"
 Cohesion: 0.14
-Nodes (13): ✅ Buenas Prácticas, 💼 Casos Reales de Negocio, 🧪 Criterios de Validación, ⚠️ Errores Comunes, 🧩 Microlección 1 — Qué Copilot asiste a quién, y una primera app generada, 🧩 Microlección 2 — Fallo y corrección: una fórmula Power Fx que no delega, 🧩 Microlección 3 — Fallo y corrección: un flujo generado sin manejo de errores, 🧩 Microlección 4 — Páginas generativas y el model app-builder skill (Model-Driven) (+5 more)
+Nodes (13): ✅ Buenas Prácticas, 💼 Casos Reales de Negocio, 🧪 Criterios de Validación, ⚠️ Errores Comunes, 🧩 Microlección 1 — Qué Copilot asiste a quién, y una primera app generada, 🧩 Microlección 2 — Fallo y corrección: una fórmula Power Fx que no delega, 🧩 Microlección 3 — Fallo y corrección: un flujo generado sin manejo de errores, 🧩 Microlección 4 (opcional: funciones en preview) — Páginas generativas y el model app-builder skill (Model-Driven) (+5 more)
 
 ### Community 337 - "44-github-copilot-en-vscode.md"
 Cohesion: 0.20
@@ -2149,7 +2158,7 @@ Nodes (6): Ejercicio 2 — Tablas, columnas y relaciones, Resultado esperado del
 
 ### Community 394 - "Button"
 Cohesion: 0.05
-Nodes (61): nextConfig, FIRST_SESSION, HowToUsePage(), metadata, STEPS, Dynamics365HubPage(), metadata, EmployabilityPage() (+53 more)
+Nodes (69): nextConfig, FIRST_SESSION, HowToUsePage(), metadata, STEPS, Dynamics365HubPage(), metadata, EmployabilityPage() (+61 more)
 
 ### Community 395 - "🛠️ Anexos Especializados"
 Cohesion: 0.33
@@ -2164,16 +2173,16 @@ Cohesion: 0.33
 Nodes (6): "Los ejercicios son muy básicos", "Me pierdo con tanto contenido", "No entiendo para qué sirve esto", "No tengo tiempo", 🚨 Señales de Alerta y Cómo Resolverlas, "Siento que no avanzo"
 
 ### Community 398 - "NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365"
-Cohesion: 0.18
-Nodes (20): emptyCorruptPreview(), Preview, RetentionPortabilityPanel(), downloadFile(), handleExport(), handleFile(), handleImport(), applyRetentionImport() (+12 more)
+Cohesion: 0.17
+Nodes (20): emptyCorruptPreview(), RetentionPortabilityPanel(), downloadFile(), handleExport(), handleFile(), handleImport(), applyRetentionImport(), corruptPreview() (+12 more)
 
 ### Community 399 - "LAB-077 — Customer Service Specialist"
 Cohesion: 0.40
 Nodes (5): Artefactos minimos aceptables, Decisiones esperadas, LAB-077 — Customer Service Specialist, Senales de alerta, Solucion de referencia resumida
 
-### Community 400 - "review-queue.ts"
-Cohesion: 0.09
-Nodes (28): main(), getAllReviewableQuestions(), getDueReviewItems(), getLeechItems(), interleaveByModule(), isQuestionEligibleForReview(), ModuleReinforcementGroup, RetentionSummary (+20 more)
+### Community 400 - "review-scheduler.ts"
+Cohesion: 0.13
+Nodes (13): toIsoDate(), DEFAULT_EASE, EASY_INTERVAL_BONUS, HARD_INTERVAL_FACTOR, LEARNING_STEPS_DAYS, MAX_EASE, MAX_INTERVAL_DAYS, MIN_EASE (+5 more)
 
 ### Community 401 - "Respuestas tecnicas ampliadas por perfil"
 Cohesion: 0.33
@@ -2311,9 +2320,9 @@ Nodes (3): 🔥 Consejos para Máximo Aprovechamiento, ❌ Evita Esto, ✅ Haz E
 Cohesion: 0.67
 Nodes (3): Curva de Aprendizaje, 🎯 Expectativas Realistas, Semana Típica de Estudio
 
-### Community 436 - "lucide-react"
-Cohesion: 0.16
-Nodes (18): AppShell(), AppShellProps, EnvironmentLanguageSwitch(), OPTIONS, EXPLORE_LINKS, LEVEL_DOT, LevelNavItem(), NavGroup() (+10 more)
+### Community 436 - "i18n.ts"
+Cohesion: 0.08
+Nodes (31): getCurriculumIndex(), metadata, RootLayout(), NotFound(), DashboardPage(), metadata, CurriculumProvider(), AppShell() (+23 more)
 
 ### Community 437 - "🔄 Mantenimiento y Actualización del Plan"
 Cohesion: 0.67
@@ -2364,8 +2373,8 @@ Cohesion: 0.33
 Nodes (6): Ejercicio 2 — Instalar el componente Core, Tarea 2.1 — Importar la solución Core, Tarea 2.2 — Configurar el kit con el CoE Setup and Upgrade Wizard, Tarea 2.3 — Comprobar que la sincronización corre, Tarea 2.4 — Verificar la sincronización, Validación del Ejercicio 2
 
 ### Community 453 - "Servicios Profesionales"
-Cohesion: 0.11
-Nodes (23): RetentionExport, RetentionImportPreview, ReviewCardMap, ReviewSessionSize, DEFAULT_EASE, ReviewConfidence, INITIAL_STATE, itemTypeForQuestion() (+15 more)
+Cohesion: 0.10
+Nodes (25): RetentionExport, RetentionImportPreview, toLocalDayKey(), ReviewCardMap, ReviewSessionSize, ReviewConfidence, INITIAL_STATE, itemTypeForQuestion() (+17 more)
 
 ### Community 454 - "NIVEL 3: AVANZADO — Power Platform & Dynamics 365"
 Cohesion: 0.33
@@ -2379,9 +2388,9 @@ Nodes (6): Ejercicio 4 — Proceso de cumplimiento, Tarea 4.1 — Entender el pr
 Cohesion: 0.33
 Nodes (6): Auditoría, Purview y soporte operativo, CoE moderno, DLP, seguridad y acceso, Licensing, capacity y Managed Environments, PPAC y ambientes, Preguntas de entrevista
 
-### Community 457 - "markdown-renderer.tsx"
-Cohesion: 0.10
-Nodes (17): mermaid@^12.1.0, next-themes@^0.4.6, react-markdown@^10.1.0, rehype-slug@^6.0.0, remark-gfm@^4.0.1, COMPONENTS, extractText(), MarkdownRendererProps (+9 more)
+### Community 457 - "Lab 121 — Power BI: contexto de filtro, inteligencia de tiempo y grupos de cálculo"
+Cohesion: 0.05
+Nodes (40): Checklist final, Competencias desarrolladas, Conocimiento previo, Criterios de aprobación, 🔧 Diagnóstico y reparación, Duración estimada, Ejercicio 1 — `ALL` frente a `ALLSELECTED`, Ejercicio 2 — Transición de contexto en una columna calculada (+32 more)
 
 ### Community 458 - "🔧 Diagnóstico y reparación"
 Cohesion: 0.40
@@ -2511,9 +2520,9 @@ Nodes (9): name, needs, runs-on, strategy, timeout-minutes, e2e, shard, fail-fas
 Cohesion: 0.50
 Nodes (4): overrides, katex, postcss, postcss-selector-parser
 
-### Community 490 - "vitest"
-Cohesion: 0.10
-Nodes (16): CertificatePage(), generateMetadata(), PageProps, metadata, ProgressDashboardPage(), getAllLabs(), getLabBySlug(), getLabsForLevel() (+8 more)
+### Community 490 - "Lab 122 — Power BI: rendimiento con Performance Analyzer y DAX query view"
+Cohesion: 0.05
+Nodes (38): Checklist final, Competencias desarrolladas, Conocimiento previo, Criterios de aprobación, 🔧 Diagnóstico y reparación, Duración estimada, Ejercicio 1 — Medir con Performance Analyzer, Ejercicio 2 — La consulta de un visual en DAX query view (+30 more)
 
 ### Community 491 - "Lab 116 — Power BI en un día: del archivo al dashboard"
 Cohesion: 0.10
@@ -2575,29 +2584,29 @@ Nodes (19): Arquitectura del laboratorio, Checklist final, Competencias desarrol
 Cohesion: 0.29
 Nodes (7): with, cache, cache-dependency-path, key, name, node-version-file, path
 
-### Community 508 - "review-session-client.tsx"
-Cohesion: 0.24
-Nodes (16): RetentionSummary(), SummaryMetric(), RetentionTodayCard(), ReviewSessionClient(), chooseConfidence(), startSession(), submitAnswer(), evaluateAnswer() (+8 more)
+### Community 508 - "preparar-entorno-client.tsx"
+Cohesion: 0.25
+Nodes (16): WorkstationPreviewSection(), metadata, PrepararEntornoPage(), ExecutionModeBadge(), PrepararEntornoClient(), requirementBadge(), StatusIndicator(), ToolActions() (+8 more)
 
-### Community 509 - "getAllInteractivePractices"
-Cohesion: 0.18
-Nodes (15): main(), InteractivePracticePage(), metadata, generateMetadata(), generateStaticParams(), InteractivePracticeDetailPage(), Props, calculateInteractiveMastery() (+7 more)
+### Community 509 - "workstation-store.ts"
+Cohesion: 0.17
+Nodes (17): OperatingSystem, WorkstationReportEntry, WorkstationReportPreview, INITIAL_STATE, nowIso(), sanitizeToolState(), sanitizeWorkstationState(), VALID_OS (+9 more)
 
 ### Community 510 - "Certificaciones vigentes o accionables"
 Cohesion: 0.25
-Nodes (8): Certificaciones vigentes o accionables, MB-230 — Dynamics 365 Customer Service Functional Consultant, MB-310 — Dynamics 365 Finance Functional Consultant Associate, MB-330 — Dynamics 365 Supply Chain Management Functional Consultant Associate, MB-500 — Finance and Operations Apps Developer Associate, PL-200 — Power Platform Functional Consultant, PL-400 — Power Platform Developer Associate, PL-900 — Power Platform Fundamentals
+Nodes (8): AB-400 (antes PL-400) — Power Platform Developer Associate, Certificaciones vigentes o accionables, MB-230 — Dynamics 365 Customer Service Functional Consultant, MB-310 — Dynamics 365 Finance Functional Consultant Associate, MB-330 — Dynamics 365 Supply Chain Management Functional Consultant Associate, MB-500 — Finance and Operations Apps Developer Associate, PL-200 — Power Platform Functional Consultant, PL-900 — Power Platform Fundamentals
 
-### Community 511 - "simulator-client.tsx"
-Cohesion: 0.26
-Nodes (12): metadata, SimulatorContextCard(), SimulatorPage(), QuizResult(), SimulatorClient(), SimulatorClientProps, SimulatorState, StatCard() (+4 more)
+### Community 511 - "workstation-report.ts"
+Cohesion: 0.21
+Nodes (15): handleAnalyze(), corruptReportPreview(), emptyReportPreview(), extractMajorVersion(), findDangerousKey(), MIN_MAJOR_VERSION_BY_TOOL_ID, parseWorkstationReportText(), stringField() (+7 more)
 
 ### Community 512 - "build"
 Cohesion: 0.40
 Nodes (5): name, needs, runs-on, timeout-minutes, build
 
 ### Community 514 - "ui-language.ts"
-Cohesion: 0.22
-Nodes (9): UiLabel(), UI_TERMS, UiTerm, ENVIRONMENT_LANGUAGE_LABELS, EnvironmentLanguage, getSpanishLabel(), TERM_MAP, UiLanguageState (+1 more)
+Cohesion: 0.18
+Nodes (12): zustand@^5.0.3, OPTIONS, UiLabel(), UI_TERMS, UiTerm, ENVIRONMENT_LANGUAGE_LABELS, EnvironmentLanguage, getSpanishLabel() (+4 more)
 
 ### Community 515 - "lint"
 Cohesion: 0.50
@@ -2615,9 +2624,9 @@ Nodes (3): ¿Dónde Encajas como Arquitecto?, 🌐 Ecosistema Power Platform en 
 Cohesion: 0.67
 Nodes (3): 📌 Resumen Ejecutivo, 🏆 Tu Perfil de Llegada, 🎓 Tu Perfil de Partida
 
-### Community 519 - "review-date.ts"
-Cohesion: 0.42
-Nodes (8): addDays(), isDueOn(), localDaysBetween(), parseIsoDate(), startOfLocalDay(), toIsoDate(), toLocalDayKey(), recordDayLog()
+### Community 519 - "review-queue.ts"
+Cohesion: 0.20
+Nodes (15): addDays(), isDueOn(), localDaysBetween(), parseIsoDate(), startOfLocalDay(), getDueReviewItems(), getLeechItems(), interleaveByModule() (+7 more)
 
 ### Community 520 - "Interfaz en español o en inglés: cómo seguir el curso con cualquier idioma"
 Cohesion: 0.20
@@ -2635,9 +2644,9 @@ Nodes (8): Ejercicio 3 — Limpiar en Power Query, Resultado esperado del Ejerci
 Cohesion: 0.50
 Nodes (7): buildXlsx(), cellXml(), columnName(), crc32(), escapeXml(), sheetXml(), zipStore()
 
-### Community 524 - "getSearchDocuments"
-Cohesion: 0.36
-Nodes (7): dynamic, GET(), formatLabReadableId(), getSearchDocuments(), getInteractivePracticeSearchDocuments(), getPracticeSearchDocuments(), UX / navegación transversal — auditoría del sprint 9
+### Community 524 - "extract-questions.mjs"
+Cohesion: 0.14
+Nodes (13): ctx, __dirname, errors, escapeStr(), INPUT, literal, moduleBlocks, moduleIds (+5 more)
 
 ### Community 525 - "PracticeAttemptHistory"
 Cohesion: 0.50
@@ -2695,13 +2704,13 @@ Nodes (5): Ejercicio 4 — Modelo en estrella y tabla de fechas, Resultado esper
 Cohesion: 0.40
 Nodes (5): Ejercicio 7 — Publicar y crear el dashboard, Resultado esperado del Ejercicio 7, Tarea 7.1 — Publicar, Tarea 7.2 — Anclar al dashboard, Validación del Ejercicio 7
 
-### Community 539 - "2. Soluciones — Mejores Prácticas"
-Cohesion: 0.40
-Nodes (5): 2. Soluciones — Mejores Prácticas, Convenciones de naming, Estructura recomendada, Importar/Exportar con pac CLI, Versionamiento semántico
+### Community 539 - "PracticeWorkspaceClient"
+Cohesion: 0.17
+Nodes (9): PracticeWorkspaceClient(), buildSelfAssessment(), calculatePracticeCounts(), canCompletePractice(), compareLatestAttempts(), getLatestExternalReview(), getPracticeValidationStatusLabel(), recordWithAttempt() (+1 more)
 
-### Community 540 - "8. Canales de Publicación"
-Cohesion: 0.40
-Nodes (5): 8. Canales de Publicación, Microsoft Teams, Omnichannel for Customer Service, Power Pages (portal), Web Chat (iFrame para sitios web)
+### Community 540 - "interactive-practices-contract.test.ts"
+Cohesion: 0.18
+Nodes (10): BaseInteractivePractice, DebugScenarioPractice, FlowBuilderPractice, MultipleDecisionPractice, QueryPlaygroundPractice, debugs, decisions, practices (+2 more)
 
 ### Community 541 - "🔧 Diagnóstico y reparación"
 Cohesion: 0.50
@@ -2727,17 +2736,17 @@ Nodes (4): Conocimiento previo, Entorno, Prerrequisitos, Verificación rápida a
 Cohesion: 0.50
 Nodes (4): Ejercicio 7 — Cuadrar y decidir qué se carga, Tarea 7.1 — Una consulta de control con Reference y Group by, Tarea 7.2 — Qué se carga al modelo, Validación del Ejercicio 7
 
-### Community 547 - "3. Topics — Unidad de Conversación"
-Cohesion: 0.50
-Nodes (4): 3. Topics — Unidad de Conversación, Anatomía de un topic, Tipos de nodos en un topic, Trigger Phrases — mejores prácticas
+### Community 547 - "rpa-sandbox-activity.ts"
+Cohesion: 0.25
+Nodes (8): ActivityPanel(), ActivityCheck, ActivityEvent, ActivitySummary, formatActivityReport(), LegacyOutcome, RequestActivity, summarizeActivity()
 
-### Community 548 - "6. Generative AI y Knowledge Sources"
-Cohesion: 0.50
-Nodes (4): 6. Generative AI y Knowledge Sources, Configurar Knowledge Sources, Generative Orchestration, System Prompt — controlar el comportamiento del LLM
+### Community 548 - "lab120Metrics"
+Cohesion: 0.46
+Nodes (8): cartera(), importe(), iso(), lab120Metrics(), lab121Metrics(), median(), round2(), sumBy()
 
-### Community 549 - "7. Autenticación y SSO"
-Cohesion: 0.50
-Nodes (4): 7. Autenticación y SSO, Configurar SSO con Azure AD, Modos de autenticación, Usar el token del usuario para llamadas API
+### Community 549 - "Cómo funciona el repaso inteligente"
+Cohesion: 0.25
+Nodes (6): ¿Cuánto tiempo toma?, Cómo funciona el repaso inteligente, ¿Cómo se decide cuándo vuelve una pregunta?, Dónde encontrarlo, Limitaciones honestas, ¿Qué preguntas aparecen?
 
 ### Community 550 - "Estado actual — 2026-11-06 (retomar desde aquí)"
 Cohesion: 0.50
@@ -2759,25 +2768,65 @@ Nodes (3): `ControlSinTasa` tiene filas, `ControlTotales` no cuadra con la tabla
 Cohesion: 0.67
 Nodes (3): Ejercicio 6 — Objetivos en formato largo, Resultado esperado del Ejercicio 6, Validación del Ejercicio 6
 
+### Community 561 - "employability.ts"
+Cohesion: 0.33
+Nodes (5): EmployabilityHub, EmployabilityLink, EmployabilitySection, EmployabilityStep, getEmployabilityHub()
+
+### Community 563 - "PracticeProgressRecord"
+Cohesion: 0.29
+Nodes (7): EvidencePackage, ExternalReviewImportPreview, PracticeImportPreview, PracticeProgressExport, ExternalPracticeReview, PracticeAttempt, PracticeProgressRecord
+
+### Community 564 - "4. Anti-Patrones a Evitar"
+Cohesion: 0.29
+Nodes (7): 4. Anti-Patrones a Evitar, Anti-patrón 1: Mega-solución, Anti-patrón 2: Flujos sin manejo de errores, Anti-patrón 3: Datos sensibles en código, Anti-patrón 4: Canvas App que carga toda la tabla, Anti-patrón 5: Plugin que hace demasiado, Anti-patrón 6: DLP solo en producción
+
+### Community 565 - "validate-spaced-repetition.ts"
+Cohesion: 0.53
+Nodes (5): main(), getAllReviewableQuestions(), isQuestionEligibleForReview(), validateSpacedRepetition(), REVIEW_SCHEMA_VERSION
+
+### Community 566 - "labs/page.tsx"
+Cohesion: 0.33
+Nodes (5): FEATURED_ARTIFACTS, LabsPage(), metadata, LabWithMeta, LabPresentationMeta
+
+### Community 567 - "DAX"
+Cohesion: 0.33
+Nodes (6): CALCULATE — el corazón de DAX, DAX, Inteligencia de tiempo, Medidas fundamentales, Row Level Security (RLS), Variables y contexto
+
+### Community 568 - "6. Scripts pac CLI de referencia"
+Cohesion: 0.40
+Nodes (5): 6. Scripts pac CLI de referencia, Ambientes, Autenticación, PCF, Soluciones
+
+### Community 569 - "Power Fx"
+Cohesion: 0.40
+Nodes (5): Funciones de texto, Fórmulas esenciales, Patrones avanzados de Power Fx, Power Fx, Tipos de datos
+
+### Community 570 - "lab-readiness-panel.tsx"
+Cohesion: 0.67
+Nodes (3): LabReadinessPanelProps, STATUS_DOT, LabReadiness
+
+### Community 571 - "3. Branching Strategy"
+Cohesion: 0.50
+Nodes (4): 3. Branching Strategy, GitFlow para Power Platform, .gitignore recomendado para Power Platform, Reglas del branching
+
 ## Knowledge Gaps
 - **1 isolated node(s):** `RFC-2606`
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 5992 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **24 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 6090 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **23 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `next` connect `Button` to `route.tsx`, `preparar-entorno-client.tsx`, `interactive-practice-client.tsx`, `search-bar.tsx`, `legacy-client.tsx`, `labs-client.tsx`, `getAllLabs`, `practices.ts`, `layout.tsx`, `useProgressStore`, `cn`, `review-queue.ts`, `lab-metadata.ts`, `Button`, `modulo/[slug]/page.tsx`, `package.json`, `lucide-react`, `seo.ts`, `vitest`, `review-session-client.tsx`, `getAllInteractivePractices`, `simulator-client.tsx`?**
-  _High betweenness centrality (0.006) - this node is a cross-community bridge._
+- **Why does `vitest` connect `migrate-modules.mjs` to `workstation.ts`, `interactive-practice-client.tsx`, `review-queue.ts`, `quiz-panel.tsx`, `interactive-practices.ts`, `Button`, `legacy-client.tsx`, `checklist-client.tsx`, `content.ts`, `NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365`, `review-scheduler.ts`, `getAllLabs`, `practices.ts`, `useProgressStore`, `PracticeWorkspaceClient`, `devDependencies`, `interactive-practices-contract.test.ts`, `rpa-sandbox-activity.ts`, `progress-backup.ts`, `practice-portability.test.ts`, `review-queue.ts`, `seo.ts`, `employability.ts`, `package.json`, `seo.test.ts`, `validate-content.ts`, `Servicios Profesionales`, `questions-parser.ts`, `pilot-mastery.ts`, `workstation-store.ts`, `workstation-report.ts`?**
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **What connects `RFC-2606` to the rest of the system?**
   _1 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Lab 32 — CoE Starter Kit: Gobernanza a Escala del Tenant de Power Platform` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
 - **Why does `NIVEL 4: ARQUITECTO MASTER — Power Platform & Dynamics 365` connect `NIVEL 4: ARQUITECTO MASTER — Power Platform & Dynamics 365` to `MÓDULO 31: Enterprise Architecture y Gobernanza`, `MÓDULO 33: Multi-tenant, Multi-geo y Estrategia de Ambientes`, `MÓDULO 35: Arquitectura de Datos — Fabric, Synapse y Medallion`, `MÓDULO 38: Liderazgo Técnico y Gestión de Proyectos`, `MÓDULO 39: Casos de Transformación Digital`, `MÓDULO 40: Arquitectura Power Platform (referencia histórica PL-600)`, `MÓDULO 41: Proyecto Capstone — Arquitectura Enterprise`, `MÓDULO 32: CoE Starter Kit y Administración a Escala`, `MÓDULO 34: Azure Integration Services Avanzado`, `MÓDULO 36: Seguridad y Cumplimiento Enterprise`, `MÓDULO 37: AI Builder y Azure AI integrado`, `index.md`?**
-  _High betweenness centrality (0.006) - this node is a cross-community bridge._
-- **Should `preparar-entorno-client.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.057813911472448055 - nodes in this community are weakly interconnected._
-- **Why does `vitest` connect `vitest` to `preparar-entorno-client.tsx`, `interactive-practice-client.tsx`, `practice-progress.ts`, `interactive-practice-progress.ts`, `review-date.ts`, `quiz-panel.tsx`, `interactive-practices.ts`, `Button`, `legacy-client.tsx`, `checklist-client.tsx`, `content.ts`, `NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365`, `review-queue.ts`, `getAllLabs`, `practices.ts`, `useProgressStore`, `devDependencies`, `progress-backup.ts`, `practice-portability.test.ts`, `review-queue.ts`, `Button`, `modulo/[slug]/page.tsx`, `package.json`, `seo.ts`, `validate-content.ts`, `Servicios Profesionales`, `questions-parser.ts`, `pilot-mastery.ts`, `getAllInteractivePractices`?**
-  _High betweenness centrality (0.006) - this node is a cross-community bridge._
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
+- **Should `workstation.ts` be split into smaller, more focused modules?**
+  _Cohesion score 0.13157894736842105 - nodes in this community are weakly interconnected._
+- **Why does `NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365` connect `NIVEL 2: INTERMEDIO — Power Platform & Dynamics 365` to `MÓDULO 11: Power Automate Avanzado`, `MÓDULO 15: Copilot Studio — Introducción`, `MÓDULO 16: Seguridad y Administración de Soluciones`, `👨‍💻 Actividades Prácticas Paso a Paso`, `MÓDULO 9: Dataverse Avanzado`, `MÓDULO 10: Canvas Apps — Componentes y Reutilización`, `MÓDULO 13: JavaScript y PCF Básico`, `MÓDULO 17: Proyecto Integrador Nivel 2`, `index.md`, `MÓDULO 14: Conectores Personalizados`?**
+  _High betweenness centrality (0.004) - this node is a cross-community bridge._
 - **Should `search-bar.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.06936026936026936 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07390648567119155 - nodes in this community are weakly interconnected._
