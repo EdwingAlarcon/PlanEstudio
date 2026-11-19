@@ -1,0 +1,30 @@
+{
+  "format": "planestudio-powerbi-practice-assets",
+  "assetPackId": "sit-ventas",
+  "version": "1.0.0",
+  "company": "Servicios Integrados Tecnológicos S.A.",
+  "files": [
+    "README.md",
+    "clientes.csv",
+    "expected/metricas-esperadas.json",
+    "objetivos.xlsx",
+    "productos.xlsx",
+    "regiones.csv",
+    "tipos-cambio.json",
+    "vendedor-region.csv",
+    "vendedores.csv",
+    "ventas-2024.csv",
+    "ventas-2025.csv",
+    "ventas-2026/ventas-2026-01.csv",
+    "ventas-2026/ventas-2026-02.csv",
+    "ventas-2026/ventas-2026-03.csv",
+    "ventas-2026/ventas-2026-04.csv",
+    "ventas-2026/ventas-2026-05.csv",
+    "ventas-2026/ventas-2026-06.csv",
+    "ventas-2026/ventas-2026-07.csv",
+    "ventas-2026/ventas-2026-08.csv",
+    "ventas-2026/ventas-2026-09.csv",
+    "ventas-2026/ventas-2026-10.csv"
+  ],
+  "bundle": "sit-ventas.zip"
+}

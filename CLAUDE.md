@@ -92,6 +92,20 @@ antepone la etiqueta oficial en español. Guía `/recursos/interfaz-espanol-ingl
 nombres lógicos que no cambian, Entornos/Espacio aislado…); aviso de separadores en M3 y M7. Recursos: **41**.
 Pendientes: D365 sin términos verificados (Learn es-es deja esa UI en inglés); ver `PROPUESTA_FASES_APRENDER_HACIENDO.md` §12-§13.
 
+## Rutas Pro por producto — 2026-11-18
+
+El usuario quiere que el curso forme "pro" por producto (Power Apps, Power Automate, Power BI, Copilot Studio, Copilot;
+D365 Sales, Customer Service y Customer Insights - Journeys), con labs al estilo "in a Day" y de Microsoft Learning.
+Diseño en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §15. **Certificaciones verificadas en Learn el 2026-11-18:** PL-200
+retirado (2026-08-31), PL-400 → AB-400, PL-600 retirado; PL-900 y PL-300 vigentes (realinear niveles: pendiente 6 de
+`SPRINT_HANDOFF.md`). **Ruta Pro Power BI** (`power-bi-pro`, "Especialización en construcción"): datos ficticios propios
+**SIT Ventas** en `public/practice-assets/powerbi/sit-ventas/` (`npm run generate:powerbi-assets`, determinista; cifras
+en `expected/metricas-esperadas.json`; test `powerbi-assets.test.ts`) y **LAB-116** "Power BI en un día" (`optional:
+true`, no cuenta para ningún nivel; los labs de Power BI sin Dataverse se muestran como Power BI Desktop, no como
+ambiente). Las consultas y cifras del LAB-116 se comprobaron con el motor de Power Query de Excel (COM) en este equipo;
+Power BI Desktop no está instalado. Learn no documenta las etiquetas **Trim**/**Capitalize Each Word**: el lab limpia
+con **Custom column** + `Text.Trim`/`Text.Proper`. Capstone provisional = LAB-116 hasta el LAB-127.
+
 ## Mantenimiento vigente — 2026-11-11
 
 Revisión con seis sub-agentes, sin ampliar contenido ni cambiar conteos: (1) **pruebas simuladas** (modelos, no personas) y
@@ -198,7 +212,7 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 149 archivos **cerrados**; sin trabajo a medias.
 
 **Invariantes que no debes romper:**
-- Conteos vigentes: **76 módulos, 76 labs (uno opcional, LAB-06), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
+- Conteos vigentes: **76 módulos, 77 labs (dos opcionales: LAB-06 y LAB-116), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
   33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 239 prácticas interactivas
   y 41 páginas de recursos** (41 desde la guía de interfaz español/inglés del 2026-11-11; prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
   Doing de Módulos 11, 10 y 13, a 44 con los Módulos 1 a 8 de la Fase 2 a 62 con los Módulos 9, 12, 14-17 de la Fase 3, a 149 con las Fases 4, 5 y 6 recortada y a 239 con la Fase 7 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de

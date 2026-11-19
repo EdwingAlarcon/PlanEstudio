@@ -1,0 +1,11 @@
+﻿VendedorID,Vendedor,Cargo,Correo,FechaIngreso
+V01,Laura Gómez,Ejecutiva de cuenta,laura.gomez@sit-demo.example.com,2021-03-01
+V02,Andrés Rojas,Ejecutivo de cuenta,andres.rojas@sit-demo.example.com,2022-08-16
+V03,Camila Restrepo,Ejecutiva de cuenta,camila.restrepo@sit-demo.example.com,2020-01-13
+V04,Julián Pérez,Ejecutivo de cuenta,julian.perez@sit-demo.example.com,2023-02-06
+V05,Mariana Torres,Ejecutiva de cuenta,mariana.torres@sit-demo.example.com,2021-10-04
+V06,Diego Hernández,Ejecutivo de cuenta,diego.hernandez@sit-demo.example.com,2022-05-09
+V07,Valeria Quispe,Ejecutiva de cuenta,valeria.quispe@sit-demo.example.com,2023-07-03
+V08,Tomás Fuentes,Ejecutivo de cuenta,tomas.fuentes@sit-demo.example.com,2020-11-02
+V09,Natalia Vargas,Gerente comercial Colombia,natalia.vargas@sit-demo.example.com,2019-04-01
+V10,Ricardo Salinas,Gerente comercial México,ricardo.salinas@sit-demo.example.com,2019-09-16

@@ -10,6 +10,7 @@ export type ProfessionalRouteSlug =
   | "ai-copilot"
   | "rpa"
   | "fundamentos-power-platform"
+  | "power-bi-pro"
   | "dynamics-365-sales"
   | "dynamics-365-customer-service"
   | "dynamics-365-customer-insights-data"
@@ -388,6 +389,27 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "(Opcional) Reporte de Power BI conectado a Dataverse, archivo .pbix (Lab 06)",
     ],
     nextRouteSlug: "maker",
+  },
+  {
+    slug: "power-bi-pro",
+    title: "Ruta Pro Power BI",
+    role: "Analista de datos que prepara, modela y publica reportes de Power BI",
+    summary: "Escalera de labs prácticos con datos propios del curso (SIT Ventas): de archivos sucios a un modelo en estrella, DAX, diseño de reportes, análisis, servicio y seguridad, alineada con el examen PL-300.",
+    outcome: "Preparar datos de varias fuentes, modelarlos, calcular con DAX y publicar reportes seguros en el servicio de Power BI, al nivel de PL-300.",
+    level: "Especialización",
+    accent: "#B45309",
+    modules: [6, 12, 35],
+    labs: ["lab-116-power-bi-en-un-dia"],
+    competencies: ["Power Query", "Modelado en estrella", "DAX", "Diseño de reportes", "Servicio de Power BI", "Seguridad por filas"],
+    status: "Especialización en construcción",
+    // Provisional: el capstone será el LAB-127 (reto Pro sin pasos) cuando exista.
+    capstoneLabSlug: "lab-116-power-bi-en-un-dia",
+    gapNote: "Disponible el LAB-116 (Power BI en un día). Los labs 117 a 127 (perfilado, transformación, modelo, DAX, rendimiento, diseño, storytelling, análisis, servicio y seguridad, y un reto Pro sin pasos) se publican por fases. Power BI Desktop solo funciona en Windows; con licencia gratuita se publica en My workspace, y compartir o crear apps requiere Pro, PPU o una prueba.",
+    portfolioEvidence: [
+      "El archivo .pbix del LAB-116 con el modelo en estrella y las 4 medidas",
+      "Captura de la página Resumen comercial 2025 sin filtros y con un país elegido",
+      "Captura de los Applied Steps de la limpieza de Clientes",
+    ],
   },
   {
     slug: "dynamics-365-sales",

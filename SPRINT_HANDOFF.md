@@ -30,6 +30,10 @@ CLAUDE.md):
    automática); Copilot Studio in a Day → path `power-virtual-agents-workshop`; Automation in a Day → módulos de Learn
    (RPA); Dashboard in a Day sin descarga pública verificada (la página da 403). Copias (zip, 2026-11-18) en
    OneDrive "Training Day Microsoft/Labs oficiales 2026-11". Adaptar al caso propio del curso con atribución; no copiar.
+8. **Rutas Pro por producto** (diseño en PROPUESTA §15; orden: Power BI → Power Automate → Copilot Studio → Power Apps →
+   CI-Journeys → Sales/Customer Service). **Ruta Pro Power BI, fase P1 hecha el 2026-11-18**: datos SIT Ventas + LAB-116
+   + ruta `power-bi-pro`. Siguiente: P2 = labs 117 (obtener y perfilar), 118 (transformar) y 119 (modelo). El usuario no
+   tiene Fable: todo con Opus 5.5.
 
 ## Estado actual — 2026-11-06 (retomar desde aquí)
 

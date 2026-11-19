@@ -1,0 +1,8 @@
+﻿RegionID,Region,Pais,Ciudad,Moneda
+R01,Andina,Colombia,Bogotá,COP
+R02,Antioquia,Colombia,Medellín,COP
+R03,Caribe,Colombia,Barranquilla,COP
+R04,Centro,México,Ciudad de México,MXN
+R05,Norte,México,Monterrey,MXN
+R06,Lima,Perú,Lima,PEN
+R07,Santiago,Chile,Santiago,CLP

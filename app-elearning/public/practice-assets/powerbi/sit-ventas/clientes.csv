@@ -1,0 +1,154 @@
+﻿ClienteID,Cliente,Industria,Segmento,Ciudad,Pais,RegionID,FechaAlta
+C0001,Grupo Central S.A.S.,Servicios financieros,Empresa,Medellín,Colombia,R02,2022-09-10
+C0002,Clínica Sierra S.A.S.,Salud,Empresa,Bogotá,Colombia,R01,2020-06-11
+C0003,Distribuidora Cumbre S.A.,retail,Empresa,Barranquilla,Colombia,R03,2021-06-21
+C0004,  clínica horizonte s.a. de c.v. ,Salud,Empresa,Monterrey,México,R05,2022-10-24
+C0005,Distribuidora Aurora Ltda.,Retail,Empresa,Santiago,Chile,R07,2021-08-11
+C0006,CONSTRUCTORA CUMBRE S.A.,Construcción,Empresa,Lima,Perú,R06,2023-11-14
+C0007,Industrias Andina S.A.,Manufactura ,Empresa,Medellín,Colombia,R02,2018-03-17
+C0008,Banco Delta S.A.,,Pyme,Bogotá,Colombia,R01,2021-06-04
+C0009,Clínica Andina S.A.,SALUD,Empresa,Lima,Perú,R06,2020-06-01
+C0010,Constructora Horizonte S.A.C.,Construcción,Pyme,Lima,Perú,R06,2018-11-20
+C0011,Transportes Valle S.A.S.,Logística,Empresa,Bogotá,Colombia,R01,2023-11-08
+C0012,Banco Orión S.A.,servicios financieros,Empresa,Medellín,Colombia,R02,2022-11-22
+C0013,Transportes Norte S.A. de C.V.,Logística,Empresa,,México,R04,2020-09-14
+C0014,Secretaría de Gobierno del Pacífico S.A.,Gobierno,Gobierno,Lima,Perú,R06,2022-11-11
+C0015,  industrias valle s.a.c. ,Manufactura,Empresa,Lima,Perú,R06,2021-06-07
+C0016,Constructora Orión S.A. de C.V.,Construcción ,Empresa,Monterrey,México,R05,2023-08-28
+C0017,Comercializadora Central S.A. de C.V.,Retail,Pyme,Ciudad de México,México,R04,2023-05-26
+C0018,Logística Atlas S.A.,Logística,Empresa,Lima,Perú,R06,2021-07-09
+C0019,SEGUROS CÓNDOR S.A.C.,Servicios financieros,Empresa,Lima,Perú,R06,2018-09-25
+C0020,Grupo Horizonte Ltda.,Servicios financieros,Empresa,Santiago,Chile,R07,2022-07-04
+C0021,Farmacéutica Valle S.A.S.,salud,Empresa,Barranquilla,Colombia,R03,2022-11-17
+C0022,Energía Delta S.A. de C.V.,Energía,Empresa,Ciudad de México,México,R04,2023-04-18
+C0023,Comercializadora Delta S.A.S.,Retail,Pyme,Barranquilla,Colombia,R03,2021-06-23
+C0024,Industrias Global S.A.S.,Manufactura,Pyme,Barranquilla,Colombia,R03,2019-04-15
+C0025,Secretaría de Gobierno Global S.A.C.,Gobierno ,Gobierno,Lima,Perú,R06,2023-03-13
+C0026,  distribuidora sierra s.a. de c.v. ,RETAIL,Pyme,Ciudad de México,México,R04,2020-12-18
+C0027,Grupo Atlas S.A.S.,Servicios financieros,Empresa,Bogotá,Colombia,R01,2023-06-25
+C0028,Universidad Cóndor S.A.,,Empresa,Bogotá,Colombia,R01,2020-10-24
+C0029,Grupo Cumbre S.A.C.,Servicios financieros,Empresa,Lima,Perú,R06,2020-09-27
+C0030,Secretaría de Gobierno Norte SpA,gobierno,Gobierno,Santiago,Chile,R07,2018-11-07
+C0031,Distribuidora Central S.A.S.,Retail,Pyme,Barranquilla,Colombia,R03,2023-09-10
+C0032,LOGÍSTICA ANDINA S.A.S.,Logística,Empresa,Bogotá,Colombia,R01,2021-06-09
+C0033,Industrias Cóndor Ltda.,Manufactura,Empresa,Medellín,Colombia,R02,2020-01-10
+C0034,Seguros Atlas Ltda.,Servicios financieros ,Empresa,Santiago,Chile,R07,2021-05-24
+C0035,Secretaría de Gobierno Orión Ltda.,Gobierno,Gobierno,Santiago,Chile,R07,2023-03-17
+C0036,Comercializadora Valle Ltda.,Retail,Empresa,Santiago,Chile,R07,2022-03-28
+C0037,  banco cóndor s.a. de c.v. ,Servicios financieros,Empresa,Monterrey,México,R05,2018-03-10
+C0038,Grupo Global S.A. de C.V.,Servicios financieros,Empresa,,México,R05,2020-07-06
+C0039,Comercializadora Atlas S.A. de C.V.,retail,Empresa,Ciudad de México,México,R04,2022-01-28
+C0040,Distribuidora Global Ltda.,Retail,Pyme,Bogotá,Colombia,R01,2021-04-03
+C0041,Logística Puerto S.A. de C.V.,Logística,Empresa,Monterrey,México,R05,2019-07-27
+C0042,Industrias Central S.A.,Manufactura,Empresa,Medellín,Colombia,R02,2020-12-15
+C0043,Energía del Pacífico S.A.S.,Energía ,Empresa,Barranquilla,Colombia,R03,2022-03-04
+C0044,Universidad del Pacífico SpA,Educación,Pyme,Santiago,Chile,R07,2022-01-06
+C0045,UNIVERSIDAD HORIZONTE S.A. DE C.V.,Educación,Pyme,Monterrey,México,R05,2019-03-02
+C0046,Logística Orión Ltda.,Logística,Empresa,Medellín,Colombia,R02,2019-04-20
+C0047,Grupo Delta S.A.,Servicios financieros,Empresa,Barranquilla,Colombia,R03,2022-05-14
+C0048,  industrias cumbre spa ,,Empresa,Santiago,Chile,R07,2018-05-09
+C0049,Farmacéutica Cóndor Ltda.,Salud,Empresa,Santiago,Chile,R07,2018-01-24
+C0050,Grupo Sierra S.A.,Servicios financieros,Empresa,Lima,Perú,R06,2021-12-21
+C0051,Alimentos del Pacífico Ltda.,Manufactura,Empresa,Santiago,Chile,R07,2023-11-14
+C0052,Grupo Orión S.A.S.,Servicios financieros ,Empresa,Barranquilla,Colombia,R03,2018-05-06
+C0053,Constructora Cóndor S.A.C.,Construcción,Pyme,Lima,Perú,R06,2021-11-14
+C0054,Energía Orión S.A.S.,Energía,Empresa,Barranquilla,Colombia,R03,2020-10-26
+C0055,Alimentos Orión Ltda.,Manufactura,Empresa,Bogotá,Colombia,R01,2021-12-09
+C0056,Universidad Central S.A. de C.V.,Educación,Empresa,Monterrey,México,R05,2023-10-04
+C0057,Universidad Atlas Ltda.,educación,Empresa,Barranquilla,Colombia,R03,2022-02-18
+C0058,SEGUROS SIERRA S.A.,Servicios financieros,Empresa,Medellín,Colombia,R02,2021-03-07
+C0059,  farmacéutica global ltda. ,Salud,Pyme,Bogotá,Colombia,R01,2023-01-27
+C0060,Comercializadora Orión S.A.S.,RETAIL,Empresa,Barranquilla,Colombia,R03,2023-11-23
+C0061,Transportes Sierra S.A.S.,Logística ,Empresa,Barranquilla,Colombia,R03,2023-01-26
+C0062,Seguros Puerto S.A. de C.V.,Servicios financieros,Empresa,Ciudad de México,México,R04,2019-09-06
+C0063,Farmacéutica Norte S.A. de C.V.,Salud,Pyme,,México,R04,2019-08-12
+C0064,Transportes Delta S.A.S.,Logística,Pyme,Medellín,Colombia,R02,2021-03-12
+C0065,Logística Global Ltda.,Logística,Empresa,Barranquilla,Colombia,R03,2021-11-27
+C0066,Transportes Puerto S.A. de C.V.,logística,Empresa,Ciudad de México,México,R04,2018-12-24
+C0067,Transportes del Pacífico S.A. de C.V.,Logística,Empresa,Ciudad de México,México,R04,2019-04-15
+C0068,Alimentos Aurora S.A. de C.V.,,Empresa,Ciudad de México,México,R04,2021-08-28
+C0069,Seguros Aurora S.A.S.,Servicios financieros,Pyme,Medellín,Colombia,R02,2019-06-04
+C0070,  energía atlas spa ,Energía ,Pyme,Santiago,Chile,R07,2023-08-27
+C0071,ALIMENTOS ATLAS S.A. DE C.V.,Manufactura,Empresa,Monterrey,México,R05,2021-08-16
+C0072,Energía Horizonte S.A. de C.V.,Energía,Pyme,Ciudad de México,México,R04,2022-08-04
+C0073,Clínica Cóndor S.A.,Salud,Pyme,Medellín,Colombia,R02,2023-04-19
+C0074,Universidad Cumbre Ltda.,Educación,Empresa,Medellín,Colombia,R02,2023-12-11
+C0075,Industrias Sierra S.A. de C.V.,manufactura,Empresa,Ciudad de México,México,R04,2022-06-05
+C0076,Seguros Norte S.A.,Servicios financieros,Pyme,Bogotá,Colombia,R01,2021-01-16
+C0077,Seguros Horizonte S.A.S.,SERVICIOS FINANCIEROS,Empresa,Medellín,Colombia,R02,2018-12-05
+C0078,Constructora Norte S.A.S.,Construcción,Empresa,Barranquilla,Colombia,R03,2018-03-06
+C0079,Constructora Atlas Ltda.,Construcción ,Empresa,Santiago,Chile,R07,2018-11-17
+C0080,Banco Global Ltda.,Servicios financieros,Pyme,Santiago,Chile,R07,2020-05-28
+C0081,  energía norte s.a. de c.v. ,Energía,Empresa,Monterrey,México,R05,2023-02-19
+C0082,Universidad Andina S.A.,Educación,Pyme,Barranquilla,Colombia,R03,2023-07-16
+C0083,Banco del Pacífico Ltda.,Servicios financieros,Empresa,Santiago,Chile,R07,2021-10-12
+C0084,FARMACÉUTICA SIERRA S.A.S.,salud,Pyme,Bogotá,Colombia,R01,2021-05-06
+C0085,Constructora Sierra SpA,Construcción,Empresa,Santiago,Chile,R07,2023-08-24
+C0086,Industrias Puerto S.A.,Manufactura,Pyme,Bogotá,Colombia,R01,2020-11-16
+C0087,Energía Global SpA,Energía,Empresa,Santiago,Chile,R07,2019-07-11
+C0088,Constructora Central Ltda.,,Pyme,,Colombia,R02,2023-04-16
+C0089,Alimentos Andina Ltda.,Manufactura,Empresa,Medellín,Colombia,R02,2022-09-25
+C0090,Logística Central S.A.S.,Logística,Pyme,Bogotá,Colombia,R01,2020-11-20
+C0091,Comercializadora del Pacífico Ltda.,Retail,Pyme,Barranquilla,Colombia,R03,2018-08-11
+C0092,  universidad global ltda. ,Educación,Empresa,Santiago,Chile,R07,2022-10-09
+C0093,Logística del Pacífico S.A. de C.V.,logística,Pyme,Monterrey,México,R05,2022-11-09
+C0094,Universidad Aurora S.A.,EDUCACIÓN,Empresa,Lima,Perú,R06,2023-02-05
+C0095,Alimentos Delta Ltda.,Manufactura,Empresa,Santiago,Chile,R07,2020-11-25
+C0096,Farmacéutica Delta S.A.,Salud,Pyme,Medellín,Colombia,R02,2023-08-09
+C0097,ALIMENTOS NORTE LTDA.,Manufactura ,Pyme,Medellín,Colombia,R02,2018-12-06
+C0098,Banco Cumbre S.A.C.,Servicios financieros,Pyme,Lima,Perú,R06,2018-04-06
+C0099,Grupo Andina Ltda.,Servicios financieros,Empresa,Bogotá,Colombia,R01,2019-05-28
+C0100,Farmacéutica del Pacífico Ltda.,Salud,Pyme,Medellín,Colombia,R02,2022-12-14
+C0101,Energía Cumbre S.A. de C.V.,Energía,Empresa,Monterrey,México,R05,2023-10-22
+C0102,Farmacéutica Orión S.A.,salud,Pyme,Medellín,Colombia,R02,2022-04-24
+C0103,  farmacéutica andina s.a. ,Salud,Empresa,Lima,Perú,R06,2019-02-13
+C0104,Secretaría de Gobierno Cóndor Ltda.,Gobierno,Gobierno,Barranquilla,Colombia,R03,2019-02-21
+C0105,Secretaría de Gobierno Atlas SpA,Gobierno,Gobierno,Santiago,Chile,R07,2020-02-27
+C0106,Energía Andina S.A. de C.V.,Energía ,Pyme,Ciudad de México,México,R04,2022-12-25
+C0107,Transportes Cóndor SpA,Logística,Empresa,Santiago,Chile,R07,2018-01-03
+C0108,Clínica Delta Ltda.,,Empresa,Medellín,Colombia,R02,2023-01-21
+C0109,Alimentos Central S.A.S.,Manufactura,Empresa,Barranquilla,Colombia,R03,2019-03-27
+C0110,DISTRIBUIDORA ANDINA S.A.,Retail,Pyme,Medellín,Colombia,R02,2023-08-22
+C0111,Clínica Atlas S.A. de C.V.,salud,Empresa,Ciudad de México,México,R04,2023-12-19
+C0112,Energía Sierra S.A. de C.V.,Energía,Empresa,Ciudad de México,México,R04,2019-01-23
+C0113,Energía Puerto Ltda.,Energía,Pyme,,Colombia,R02,2019-05-11
+C0114,  banco valle ltda. ,Servicios financieros,Empresa,Santiago,Chile,R07,2018-12-04
+C0115,Universidad Delta S.A. de C.V.,Educación ,Empresa,Ciudad de México,México,R04,2023-08-24
+C0116,Banco Puerto S.A. de C.V.,Servicios financieros,Empresa,Ciudad de México,México,R04,2018-03-19
+C0117,Seguros Valle S.A. de C.V.,Servicios financieros,Empresa,Monterrey,México,R05,2020-08-24
+C0118,Seguros Orión S.A.,Servicios financieros,Pyme,Medellín,Colombia,R02,2019-11-07
+C0119,Distribuidora Horizonte S.A.S.,Retail,Empresa,Bogotá,Colombia,R01,2019-04-09
+C0120,Farmacéutica Central S.A.,salud,Empresa,Medellín,Colombia,R02,2019-03-18
+C0121,Comercializadora Aurora S.A. de C.V.,Retail,Pyme,Monterrey,México,R05,2019-03-19
+C0122,Clínica del Pacífico S.A.,Salud,Pyme,Medellín,Colombia,R02,2019-11-01
+C0123,SECRETARÍA DE GOBIERNO AURORA S.A. DE C.V.,Gobierno,Gobierno,Ciudad de México,México,R04,2020-12-21
+C0124,Distribuidora Cóndor S.A. de C.V.,Retail ,Empresa,Ciudad de México,México,R04,2021-10-23
+C0125,  universidad valle ltda. ,Educación,Pyme,Bogotá,Colombia,R01,2019-02-21
+C0126,Alimentos Puerto S.A.,Manufactura,Empresa,Medellín,Colombia,R02,2019-11-25
+C0127,Distribuidora Valle Ltda.,Retail,Pyme,Santiago,Chile,R07,2021-03-28
+C0128,Transportes Andina SpA,,Empresa,Santiago,Chile,R07,2021-02-19
+C0129,Grupo Norte S.A.,servicios financieros,Pyme,Lima,Perú,R06,2021-06-08
+C0130,Farmacéutica Puerto S.A. de C.V.,Salud,Pyme,Ciudad de México,México,R04,2019-01-02
+C0131,Secretaría de Gobierno Horizonte Ltda.,Gobierno,Gobierno,Barranquilla,Colombia,R03,2021-09-28
+C0132,Alimentos Valle S.A. de C.V.,Manufactura,Empresa,Monterrey,México,R05,2019-08-06
+C0133,Seguros Cumbre S.A.S.,Servicios financieros ,Empresa,Medellín,Colombia,R02,2023-11-13
+C0134,Transportes Global SpA,Logística,Pyme,Santiago,Chile,R07,2021-06-11
+C0135,Universidad Norte S.A. de C.V.,Educación,Pyme,Monterrey,México,R05,2018-07-17
+C0136,  industrias atlas s.a. de c.v. ,Manufactura,Empresa,Ciudad de México,México,R04,2018-09-02
+C0137,Banco Aurora S.A.,Servicios financieros,Empresa,Lima,Perú,R06,2018-08-25
+C0138,Farmacéutica Aurora Ltda.,salud,Pyme,,Colombia,R01,2021-10-09
+C0139,Grupo del Pacífico Ltda.,Servicios financieros,Empresa,Bogotá,Colombia,R01,2023-04-16
+C0140,Clínica Orión Ltda.,Salud,Empresa,Santiago,Chile,R07,2018-03-27
+C0141,Distribuidora Norte S.A.C.,Retail,Empresa,Lima,Perú,R06,2018-10-02
+C0142,Constructora Delta S.A.,Construcción ,Empresa,Lima,Perú,R06,2018-02-05
+C0143,Universidad Puerto Ltda.,Educación,Pyme,Santiago,Chile,R07,2022-05-18
+C0144,Comercializadora Norte Ltda.,Retail,Pyme,Medellín,Colombia,R02,2023-10-24
+C0145,Transportes Orión S.A. de C.V.,LOGÍSTICA,Pyme,Monterrey,México,R05,2020-03-26
+C0146,Distribuidora del Pacífico S.A.C.,Retail,Pyme,Lima,Perú,R06,2023-08-02
+C0147,  grupo puerto s.a. de c.v. ,servicios financieros,Pyme,Ciudad de México,México,R04,2018-10-12
+C0148,Industrias Delta S.A. de C.V.,,Pyme,Ciudad de México,México,R04,2018-01-16
+C0149,SEGUROS DEL PACÍFICO S.A. DE C.V.,Servicios financieros,Pyme,Ciudad de México,México,R04,2023-10-18
+C0150,Logística Delta S.A. de C.V.,Logística,Empresa,Ciudad de México,México,R04,2020-12-08
+C0011,Transportes Valle S.A.S.,Logística,Empresa,Bogotá,Colombia,R01,2023-11-08
+C0048,  industrias cumbre spa ,,Empresa,Santiago,Chile,R07,2018-05-09
+C0099,Grupo Andina Ltda.,Servicios financieros,Empresa,Bogotá,Colombia,R01,2019-05-28

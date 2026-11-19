@@ -1,0 +1,42 @@
+{
+  "importeDefinicion": "Importe = Cantidad * PrecioUnitario * (1 - DescuentoPct / 100), redondeado a 2 decimales por línea",
+  "filas": {
+    "ventas-2024.csv": 1199,
+    "ventas-2025.csv": 1438,
+    "ventas-2026 (10 archivos, sin la fila TOTAL)": 1358,
+    "ventas-2026 (filas de datos tal como vienen, con la fila TOTAL)": 1359,
+    "clientes.csv (con duplicados)": 153,
+    "clientes únicos": 150,
+    "productos": 18,
+    "vendedores": 10,
+    "vendedor-region": 13
+  },
+  "pedidos": {
+    "2024": 635,
+    "2025": 748,
+    "2026": 705
+  },
+  "importePorAnio": {
+    "2024": 17714901,
+    "2025": 20840961.9,
+    "2026": 18936520.5
+  },
+  "importeTotal": 57492383.4,
+  "importe2025PorCategoria": {
+    "Licencias": 13799948.4,
+    "Servicios": 5941370,
+    "Capacitación": 1099643.5
+  },
+  "importe2025PorRegion": {
+    "Lima": 2487813.3,
+    "Centro": 3212288.1,
+    "Santiago": 3408686.7,
+    "Caribe": 2625305.9,
+    "Antioquia": 4303248.2,
+    "Andina": 2279734.9,
+    "Norte": 2523884.8
+  },
+  "unidades2025": 50481,
+  "lineasSinFechaEntrega": 54,
+  "clientesConIndustriaVacia": 8
+}

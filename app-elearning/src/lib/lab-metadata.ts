@@ -220,7 +220,7 @@ const EXECUTION_STATUS_NOTES: Record<ExecutionStatus, string> = {
   "tenant-real":
     "Este laboratorio se ejecuta completo en un tenant real de Microsoft siguiendo las instrucciones dadas.",
   "tenant-opcional":
-    "Puede ejecutarse en tu equipo (Windows/Power Automate Desktop) sin depender de un tenant; capacidades como unattended, hosted o machine groups requieren licencia y tenant adicionales.",
+    "Puede ejecutarse en tu equipo con Windows (Power Automate Desktop o Power BI Desktop) sin depender de un tenant; publicar y compartir en el servicio, o capacidades como unattended, hosted o machine groups, requieren licencia y tenant adicionales.",
   simulado:
     "Es una simulación de razonamiento/decisión: no requiere tenant ni licencia y no sustituye la evidencia de un laboratorio en tenant real.",
   "no-verificado-en-tenant":
@@ -237,10 +237,19 @@ const ENVIRONMENT_BY_LEVEL: Record<string, string> = {
   RPA: "Equipo Windows con Power Automate Desktop instalado",
 };
 
+/** Labs de Power BI que trabajan con archivos (sin Dataverse): se hacen en Power BI Desktop, no en un ambiente. */
+function isPowerBiFileLab(lab: LabInfo): boolean {
+  return lab.products.includes("Power BI") && !lab.products.includes("Dataverse");
+}
+
+const POWER_BI_FILE_ENVIRONMENT =
+  "Power BI Desktop en Windows (gratis) y, para publicar, el servicio de Power BI con licencia gratuita (My workspace)";
+
 function getExecutionStatus(lab: LabInfo, kind: string): ExecutionStatus {
   if (NO_VERIFICADO_EN_TENANT_IDS.has(lab.id)) return "no-verificado-en-tenant";
   if (kind === "Simulación") return "simulado";
   if (lab.level === "RPA") return "tenant-opcional";
+  if (isPowerBiFileLab(lab)) return "tenant-opcional";
   return "tenant-real";
 }
 
@@ -252,7 +261,9 @@ export function getLabReadiness(lab: LabInfo): LabReadiness {
     executionStatus,
     executionStatusLabel: EXECUTION_STATUS_LABELS[executionStatus],
     executionStatusNote: EXECUTION_STATUS_NOTES[executionStatus],
-    environment: ENVIRONMENT_BY_LEVEL[lab.level] ?? "Ambiente de Power Platform según lo indicado en el laboratorio",
+    environment: isPowerBiFileLab(lab)
+      ? POWER_BI_FILE_ENVIRONMENT
+      : ENVIRONMENT_BY_LEVEL[lab.level] ?? "Ambiente de Power Platform según lo indicado en el laboratorio",
     product: lab.products.length > 0 ? lab.products.join(", ") : "Sin producto externo declarado",
     role: lab.role.length > 0 ? lab.role.join(", ") : "Cualquier rol con acceso al ambiente indicado",
     data: lab.prerequisites.length > 0

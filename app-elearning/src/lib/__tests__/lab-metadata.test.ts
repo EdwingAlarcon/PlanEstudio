@@ -129,9 +129,9 @@ describe("lab domain classification", () => {
 });
 
 describe("lab readiness (Sprint 1 — auditoría tenant-real)", () => {
-  it("gives every one of the 76 labs a non-empty execution status and evidence", () => {
+  it("gives every one of the 77 labs a non-empty execution status and evidence", () => {
     const labs = getAllLabs();
-    expect(labs.length).toBe(76);
+    expect(labs.length).toBe(77);
 
     for (const lab of labs) {
       const readiness = getLabReadiness(lab);
@@ -171,6 +171,15 @@ describe("lab readiness (Sprint 1 — auditoría tenant-real)", () => {
     expect(getLabReadiness(lab!).executionStatus).toBe("tenant-opcional");
   });
 
+  it("treats file-based Power BI labs (Ruta Pro) as local Power BI Desktop work", () => {
+    const lab = getLabBySlug("lab-116-power-bi-en-un-dia");
+    expect(lab).toBeDefined();
+    expect(lab!.optional).toBe(true);
+    const readiness = getLabReadiness(lab!);
+    expect(readiness.executionStatus).toBe("tenant-opcional");
+    expect(readiness.environment).toContain("Power BI Desktop");
+  });
+
   it("registers the optional Power BI lab (LAB-006) as a basic Power Platform lab with its route label", () => {
     const lab = getLabBySlug("lab-06-power-bi-reporte-solicitudes");
     expect(lab).toBeDefined();
@@ -195,6 +204,10 @@ describe("labs opcionales", () => {
     const basicLabSlugs = getLabsForLevel("basico").map((item) => item.slug);
     expect(basicLabSlugs).not.toContain("lab-06-power-bi-reporte-solicitudes");
     expect(basicLabSlugs).toContain("lab-02-dataverse-modelo-datos");
-    expect(getAllLabs().filter((item) => item.optional).map((item) => item.slug)).toEqual(["lab-06-power-bi-reporte-solicitudes"]);
+    // Opcionales: LAB-006 y los labs de la Ruta Pro Power BI (116+), que son especialización y no cuentan para ningún nivel.
+    expect(getAllLabs().filter((item) => item.optional).map((item) => item.slug)).toEqual([
+      "lab-06-power-bi-reporte-solicitudes",
+      "lab-116-power-bi-en-un-dia",
+    ]);
   });
 });

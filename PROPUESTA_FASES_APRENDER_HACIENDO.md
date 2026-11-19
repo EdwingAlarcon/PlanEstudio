@@ -705,3 +705,95 @@ tienen esa marca. Lo que pasa a plegarse: M5 1.753 palabras, M1 1.711, M4 1.033,
 práctica). Lo que no hace falta para los criterios de validación ni para la evaluación se marca con
 `#### 🔧 Profundización opcional` y la app lo pliega sin borrarlo. Los proyectos no se recortan: se dividen en etapas.
 No se toca el Caso Real ni el texto que citan las preguntas `appliesTo: "caso"`.
+
+## 15. Rutas Pro por producto (2026-11-18)
+
+**Objetivo del usuario:** que quien termine el curso domine cada producto con práctica real, al estilo de los talleres
+"in a Day" y los labs oficiales de Microsoft Learning: Power Apps, Power Automate, Power BI, Copilot Studio y Copilot, y
+en Dynamics 365 como mínimo Sales, Customer Service y Customer Insights - Journeys. Los 4 niveles siguen siendo la
+columna vertebral; las rutas Pro son la profundidad por producto.
+
+**Contexto verificado en Learn el 2026-11-18** (detalle en `SPRINT_HANDOFF.md`, pendientes 6 y 7): PL-200, PL-400 y
+PL-600 están retirados (PL-400 → AB-400; AB-410 cubre el terreno de PL-200 + IA). PL-900 y **PL-300 siguen vigentes**.
+Los labs oficiales vigentes (licencia MIT) están en GitHub `MicrosoftLearning/*` y `microsoft/mcs-labs`; el repo PL-200
+ya no existe.
+
+### 15.1 Principios comunes a todas las rutas Pro
+
+1. **Escalera de labs:** un lab "en un día" de punta a punta → labs por competencia que suben de dificultad → **reto
+   Pro sin pasos** con rúbrica (como el reto de transferencia de los módulos, pero a escala de proyecto).
+2. **Esqueleto oficial, texto propio:** el lab oficial dice *qué* se practica y en qué orden; el texto se escribe en
+   español sobre el caso del curso, se cita la fuente (MIT) y cada paso se verifica en Learn (`lastVerified`).
+3. **Datos propios descargables** en `public/practice-assets/<producto>/` cuando la práctica exige preparar datos (los
+   samples oficiales vienen ya modelados y no sirven para practicar Power Query).
+4. **Licencia:** lo que exige pago (compartir, apps, capacidad Fabric para Copilot) lleva variante con la licencia
+   gratuita o en papel, como el LAB-06.
+5. **Sin duplicar:** los módulos siguen siendo la teoría; el lab Pro remite al módulo y aplica sobre otro caso.
+6. **Prueba simulada** (agentes sin contexto) de cada lab antes de darlo por cerrado.
+
+### 15.2 Ruta Pro Power BI (primera; alineada con PL-300, skills al 2026-04-20)
+
+**Datos: "SIT Ventas"**, generados para el curso y servidos por la app (así también sirven por el conector **Web** y la
+actualización programada no necesita gateway). Sucios a propósito donde la práctica lo pide:
+
+| Archivo | Contenido | Para practicar |
+|---|---|---|
+| `ventas-2024.csv`, `ventas-2025.csv` + carpeta `ventas-2026/` (un CSV por mes) | Hecho de ventas de servicios y licencias, con fecha de pedido y de entrega | Carpeta, append, tipos, role-playing date |
+| `productos.xlsx` | Producto, categoría, subcategoría, precio, estado | Excel, jerarquías |
+| `clientes.csv` | Clientes con espacios, mayúsculas mezcladas, nulos y duplicados | Perfilado y limpieza |
+| `regiones.csv`, `vendedores.csv`, `vendedor-region.csv` | País > región, vendedores con correo ficticio, puente vendedor-región | Relaciones, RLS dinámica |
+| `objetivos.xlsx` | Objetivo mensual por vendedor en formato ancho (un mes por columna) | Unpivot |
+| `tipos-cambio.json` | Tipo de cambio mensual | Datos semiestructurados |
+
+**Labs (116-127):**
+
+| Lab | Título | Dominio PL-300 |
+|---|---|---|
+| 116 | Power BI en un día: del archivo al dashboard | Los cuatro, en versión mínima |
+| 117 | Obtener y perfilar datos | Prepare: get/connect, profile |
+| 118 | Transformar y cargar | Prepare: transform and load |
+| 119 | Modelo semántico en estrella | Model: design and implement |
+| 120 | DAX esencial: medidas, CALCULATE, semiaditivas, calculation groups | Model: DAX |
+| 121 | Contexto de filtro e inteligencia de tiempo | Model: DAX |
+| 122 | Rendimiento: Performance Analyzer y DAX query view | Model: optimize |
+| 123 | Diseño de reportes, temas, formato condicional, visual calculations, accesibilidad, móvil | Visualize: create reports |
+| 124 | Storytelling: bookmarks, tooltips, drillthrough, navegación, personalización | Visualize: enhance |
+| 125 | Análisis: Analyze, agrupación, visuales de IA, pronóstico, anomalías | Visualize: patterns |
+| 126 | Servicio y seguridad: My workspace, dashboard, alertas, actualización, RLS | Manage and secure |
+| 127 | Reto Pro sin pasos (otro caso, rúbrica por dominio) | Todos |
+
+Con la licencia gratuita se puede publicar en **My workspace**, crear dashboards y programar la actualización ahí; no se
+puede compartir ni crear apps (Learn: licencias de usuario final). Workspaces compartidos, apps, roles de workspace y
+etiquetas de confidencialidad van con variante Pro/prueba o en papel. Copilot en Power BI exige capacidad de pago:
+awareness con variante en papel. Power BI Desktop solo en Windows (variante sin Windows como en el LAB-06).
+
+**Integración en la app:** ruta `power-bi-pro` en `professional-routes.ts` con estado "Especialización en construcción"
+hasta tener los 12 labs. Conteos: labs 76 → 88 al terminar.
+
+**Fases:** P1 datos + LAB-116 + ruta; P2 117-119; P3 120-122; P4 123-125; P5 126-127 + prueba simulada de la ruta.
+
+### 15.3 Siguientes rutas (mismo patrón, en este orden)
+
+| Ruta | Esqueleto oficial |
+|---|---|
+| Power Automate (cloud) | PL-7002 (8 labs), AB-410T00 labs 8-9 |
+| Copilot Studio | AB-620T00 (5 labs), `microsoft/mcs-labs`, path de Learn "Copilot Studio in a Day" |
+| Power Apps | PL-7001 (8 labs), path de Learn "App in a Day", AB-410T00 |
+| Customer Insights - Journeys | Sin repo oficial: módulos de Learn |
+| D365 Sales / Customer Service | AB-210T00 / MB-230 + AB-250T00 (Contact Center) |
+
+### 15.4 Estado — P1 hecha (2026-11-18)
+
+- **Datos SIT Ventas** (`npm run generate:powerbi-assets`, determinista): 1.199 líneas en 2024, 1.438 en 2025 y 1.358 en
+  2026 (enero a octubre), 150 clientes (153 filas con 3 duplicados), 18 productos, 10 vendedores (2 gerentes con varias
+  regiones). Escritor `.xlsx` y `.zip` sin dependencias en `scripts/lib/zip-xlsx.mjs`; los `.xlsx` se abrieron en Excel.
+- **LAB-116 "Power BI en un día"**: las consultas de Power Query y las cifras (20.840.961,90 · 748 pedidos · 150
+  clientes · 10 industrias) se comprobaron con el motor de Power Query de Excel; Power BI Desktop no está instalado en
+  el equipo de trabajo, así que el recorrido de la interfaz es **simulado**, no ejecutado.
+- **Prueba simulada** (1 agente, persona "Lucía", Windows en español): cifras y orden correctos. Corregido: cómo pasar
+  Desktop a inglés (**Global** > **Regional Settings**, Learn), separador `,`/`;` y Shift+Enter en DAX, orden del gráfico
+  por mes (**Sort axis**), moneda USD y separador de miles, diálogo **Replace current**, ruta al extraer el zip,
+  industria `null` y tiempo (4-5 h; 5-6 la primera vez con Power Query).
+- **Sin verificar en Learn:** **Trim**/**Capitalize Each Word** (el lab usa **Custom column**), **New Source** >
+  **Excel Workbook** dentro de Power Query (tiene alternativa), **Display units** de la tarjeta nueva y **Sort axis**.
+- **Pendiente para P2:** labs 117-119. La ruta queda "Especialización en construcción" con capstone provisional LAB-116.
