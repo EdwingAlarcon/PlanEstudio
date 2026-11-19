@@ -32,7 +32,8 @@ CLAUDE.md):
    OneDrive "Training Day Microsoft/Labs oficiales 2026-11". Adaptar al caso propio del curso con atribución; no copiar.
 8. **Rutas Pro por producto** (diseño en PROPUESTA §15; orden: Power BI → Power Automate → Copilot Studio → Power Apps →
    CI-Journeys → Sales/Customer Service). **Ruta Pro Power BI, fase P1 hecha el 2026-11-18**: datos SIT Ventas + LAB-116
-   + ruta `power-bi-pro`. Siguiente: P2 = labs 117 (obtener y perfilar), 118 (transformar) y 119 (modelo). El usuario no
+   + ruta `power-bi-pro`. **P2 hecha el mismo día**: labs 117, 118 y 119 (con prueba simulada y correcciones). Siguiente:
+   P3 = labs 120 (DAX esencial), 121 (contexto de filtro e inteligencia de tiempo) y 122 (rendimiento). El usuario no
    tiene Fable: todo con Opus 5.5.
 
 ## Estado actual — 2026-11-06 (retomar desde aquí)

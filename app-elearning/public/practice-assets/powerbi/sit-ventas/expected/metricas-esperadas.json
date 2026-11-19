@@ -38,5 +38,19 @@
   },
   "unidades2025": 50481,
   "lineasSinFechaEntrega": 54,
-  "clientesConIndustriaVacia": 8
+  "clientesConIndustriaVacia": 8,
+  "erroresFecha2024ConIngles": 719,
+  "lineasTotales": 3995,
+  "pedidosTotales": 2088,
+  "filasObjetivosLargo": 288,
+  "objetivosPorAnio": {
+    "2024": 17762000,
+    "2025": 19884000,
+    "2026": 23363000
+  },
+  "filasTiposCambioLargo": 136,
+  "importe2025PorEntrega": 20799528.9,
+  "importeDic2025PorPedido": 1873122.6,
+  "importeDic2025PorEntrega": 2205201.1,
+  "importeSinFechaEntrega": 780903.5
 }

@@ -349,6 +349,21 @@ const expected = {
   unidades2025: v2025.reduce((s, v) => s + v.cantidad, 0),
   lineasSinFechaEntrega: ventas.filter((v) => !v.fechaEntrega).length,
   clientesConIndustriaVacia: messyClientes.filter((c) => c[2] === "").length,
+  // Lab 117
+  erroresFecha2024ConIngles: byYear[2024].filter((v) => Number(v.fechaPedido.slice(8, 10)) > 12).length,
+  // Lab 118
+  lineasTotales: ventas.length,
+  pedidosTotales: new Set(ventas.map((v) => v.pedido)).size,
+  filasObjetivosLargo: objetivos.length * 12,
+  objetivosPorAnio: Object.fromEntries(
+    [2024, 2025, 2026].map((y) => [y, objetivos.filter((o) => o[1] === y).reduce((s, o) => s + o.slice(2).reduce((a, b) => a + b, 0), 0)]),
+  ),
+  filasTiposCambioLargo: tasas.length * 4,
+  // Lab 119
+  importe2025PorEntrega: sumBy(ventas.filter((v) => v.fechaEntrega.startsWith("2025"))),
+  importeDic2025PorPedido: sumBy(ventas.filter((v) => v.fechaPedido.startsWith("2025-12"))),
+  importeDic2025PorEntrega: sumBy(ventas.filter((v) => v.fechaEntrega.startsWith("2025-12"))),
+  importeSinFechaEntrega: sumBy(ventas.filter((v) => !v.fechaEntrega)),
 };
 write("expected/metricas-esperadas.json", JSON.stringify(expected, null, 2) + "\n");
 

@@ -129,9 +129,9 @@ describe("lab domain classification", () => {
 });
 
 describe("lab readiness (Sprint 1 — auditoría tenant-real)", () => {
-  it("gives every one of the 77 labs a non-empty execution status and evidence", () => {
+  it("gives every one of the 80 labs a non-empty execution status and evidence", () => {
     const labs = getAllLabs();
-    expect(labs.length).toBe(77);
+    expect(labs.length).toBe(80);
 
     for (const lab of labs) {
       const readiness = getLabReadiness(lab);
@@ -208,6 +208,9 @@ describe("labs opcionales", () => {
     expect(getAllLabs().filter((item) => item.optional).map((item) => item.slug)).toEqual([
       "lab-06-power-bi-reporte-solicitudes",
       "lab-116-power-bi-en-un-dia",
+      "lab-117-power-bi-obtener-y-perfilar-datos",
+      "lab-118-power-bi-transformar-y-cargar",
+      "lab-119-power-bi-modelo-semantico-estrella",
     ]);
   });
 });

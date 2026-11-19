@@ -613,4 +613,4 @@ No borres nada: los Labs 117 a 127 usan la misma carpeta `sit-ventas`. Si public
 
 ## Siguiente laboratorio recomendado
 
-**Lab 117 — Obtener y perfilar datos** (en construcción): conectar la carpeta `ventas-2026` completa, usar parámetros para la ruta, leer el JSON de tipos de cambio y diagnosticar la fila `TOTAL MARZO` que rompe la carga.
+[**Lab 117 — Obtener y perfilar datos**](/labs/lab-117-power-bi-obtener-y-perfilar-datos): conectar la carpeta `ventas-2026` completa, usar parámetros para la ruta, leer el JSON de tipos de cambio y diagnosticar la fila `TOTAL MARZO` que rompe la carga.

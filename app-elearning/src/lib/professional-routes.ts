@@ -399,16 +399,23 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     level: "Especialización",
     accent: "#B45309",
     modules: [6, 12, 35],
-    labs: ["lab-116-power-bi-en-un-dia"],
+    labs: [
+      "lab-116-power-bi-en-un-dia",
+      "lab-117-power-bi-obtener-y-perfilar-datos",
+      "lab-118-power-bi-transformar-y-cargar",
+      "lab-119-power-bi-modelo-semantico-estrella",
+    ],
     competencies: ["Power Query", "Modelado en estrella", "DAX", "Diseño de reportes", "Servicio de Power BI", "Seguridad por filas"],
     status: "Especialización en construcción",
     // Provisional: el capstone será el LAB-127 (reto Pro sin pasos) cuando exista.
     capstoneLabSlug: "lab-116-power-bi-en-un-dia",
-    gapNote: "Disponible el LAB-116 (Power BI en un día). Los labs 117 a 127 (perfilado, transformación, modelo, DAX, rendimiento, diseño, storytelling, análisis, servicio y seguridad, y un reto Pro sin pasos) se publican por fases. Power BI Desktop solo funciona en Windows; con licencia gratuita se publica en My workspace, y compartir o crear apps requiere Pro, PPU o una prueba.",
+    gapNote: "Disponibles los labs 116 (Power BI en un día), 117 (obtener y perfilar), 118 (transformar y cargar) y 119 (modelo en estrella). Los labs 120 a 127 (DAX, rendimiento, diseño, storytelling, análisis, servicio y seguridad, y un reto Pro sin pasos) se publican por fases. Power BI Desktop solo funciona en Windows; con licencia gratuita se publica en My workspace, y compartir o crear apps requiere Pro, PPU o una prueba.",
     portfolioEvidence: [
       "El archivo .pbix del LAB-116 con el modelo en estrella y las 4 medidas",
       "Captura de la página Resumen comercial 2025 sin filtros y con un país elegido",
       "Captura de los Applied Steps de la limpieza de Clientes",
+      "Diagnóstico escrito de la fila TOTAL MARZO (LAB-117) y consultas de control que cuadran (LAB-118)",
+      "Model view con 8 relaciones y la matriz de cumplimiento 2025 (LAB-119)",
     ],
   },
   {

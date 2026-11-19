@@ -797,3 +797,24 @@ hasta tener los 12 labs. Conteos: labs 76 → 88 al terminar.
 - **Sin verificar en Learn:** **Trim**/**Capitalize Each Word** (el lab usa **Custom column**), **New Source** >
   **Excel Workbook** dentro de Power Query (tiene alternativa), **Display units** de la tarjeta nueva y **Sort axis**.
 - **Pendiente para P2:** labs 117-119. La ruta queda "Especialización en construcción" con capstone provisional LAB-116.
+
+### 15.5 Estado — P2 hecha (2026-11-18)
+
+- **LAB-117 Obtener y perfilar**, **LAB-118 Transformar y cargar** y **LAB-119 Modelo en estrella**: un solo archivo
+  `ruta-pro-sit-ventas.pbix` que crece de lab en lab. Cifras en `expected/metricas-esperadas.json` (el generador las
+  calcula) y en `powerbi-assets.test.ts`.
+- **Comprobado con el motor de Power Query de Excel:** combinar la carpeta 2026 da 1.359 filas; la fila `TOTAL MARZO`
+  **no produce errores** (vacíos → null) y su `DescuentoPct` convertido a entero vale 2416339 con cultura inglesa o
+  24163387 con española; 2024 con en-US da 719 errores y 480 filas sin error (438 mal leídas, 42 aciertan porque día =
+  mes); con es-CO, 0 errores. Combinar dos orígenes en una consulta dispara *Formula.Firewall* (mensaje real anotado
+  en el LAB-117). Append 3.995 filas; objetivos largos 288 (2025 = 19.884.000); tipos de cambio largos 136; 0 ventas
+  sin tasa.
+- **Pruebas simuladas** (3 agentes, persona "Lucía"): cifras y dependencias correctas en los tres. Corregido: **Sample
+  File** guarda la ruta fija (bloqueante en el Ejercicio 7 del 117: ahora se parametriza); `TOTAL MARZO` es la fila 403,
+  no queda fuera de las primeras 1.000 (la razón del perfilado completo es el **Count**/**Distinct**); tres orígenes en
+  **Data source settings**; JSON como registro con **To Table**; privacidad de los archivos nuevos (118); nota engañosa
+  de "entra sola" en el unpivot; diagnóstico contradictorio; orden `Mes Año` por `MesNum` (no da error: ordena mal);
+  slicer numérico como lista; matriz contraída.
+- **Sin verificar en Learn:** **To Table**, **Create hierarchy** / **Add to hierarchy**, la opción de ocultar del menú
+  contextual, **Edit parameters**, la etiqueta **Is hidden** (Learn dice "is hidden setting in the Properties pane").
+- **Siguiente (P3):** labs 120, 121 y 122.
