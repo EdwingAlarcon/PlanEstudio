@@ -210,6 +210,7 @@ const casosLab128 = [
   { titulo: "Estudio de mercado regional", categoria: "Servicios profesionales", cantidad: 1, precio: 18500 },
 ].map((c) => ({ ...c, importe: round2(c.cantidad * c.precio), nivel: nivelDe(round2(c.cantidad * c.precio)) }));
 
+/** @type {Record<string, any>} */
 const expected = {
   politica: { limitesUSD: [1000, 10000], ejemplos: { 1000: nivelDe(1000), 1000.01: nivelDe(1000.01), 10000: nivelDe(10000), 10000.01: nivelDe(10000.01) } },
   filas: {
@@ -233,6 +234,59 @@ const expected = {
     suciedad: sucias,
   },
 };
+// ---------- Cifras de los labs 129 a 131 (P2) ----------
+// Lab 129: el flujo "Alertar compra grande" dispara solo con un importe mayor que 10.000 (de los casos A-D, solo el D).
+expected.lab129 = {
+  umbralAlertaUSD: 10000,
+  casosQueDisparan: casosLab128.filter((c) => c.importe > 10000).map((c) => c.titulo),
+  casosQueNoDisparan: casosLab128.filter((c) => c.importe <= 10000).map((c) => c.titulo),
+};
+
+// Lab 130: limpieza de la tabla de Excel. Una fila se rechaza si no tiene cantidad; las demás se limpian
+// (fecha dd/mm/yyyy a ISO, precio con "USD " y comas a número, categoría sin espacios).
+const sinCantidad = new Set(sucias.cantidadVacia);
+const limpias = solicitudes.filter((s) => !sinCantidad.has(s.id));
+const sumaPor = (rows, key) =>
+  Object.fromEntries(
+    Object.entries(
+      rows.reduce((acc, r) => {
+        const k = key(r);
+        acc[k] = round2((acc[k] ?? 0) + r.importe);
+        return acc;
+      }, {}),
+    ).sort(([a], [b]) => a.localeCompare(b)),
+  );
+expected.lab130 = {
+  filasExcel: solicitudes.length,
+  filasLimpias: limpias.length,
+  filasRechazadas: [...sucias.cantidadVacia].sort(),
+  fechasConvertidas: sucias.fechaDMY.length,
+  preciosConvertidos: sucias.precioTexto.length,
+  categoriasConEspacios: sucias.categoriaConEspacios.length,
+  importeTotalLimpio: suma(limpias),
+  importePorCategoriaLimpio: sumaPor(limpias, (s) => s.categoria),
+  filasPorMesLimpio: Object.fromEntries(Object.entries(cuenta(limpias, (s) => s.fecha.slice(0, 7))).sort(([a], [b]) => a.localeCompare(b))),
+  importePorMesLimpio: sumaPor(limpias, (s) => s.fecha.slice(0, 7)),
+  pendientesLimpias: limpias.filter((s) => s.estado === "Pendiente").map((s) => ({ id: s.id, importe: s.importe, nivel: s.nivel, categoria: s.categoria })),
+  importePendientesLimpias: suma(limpias.filter((s) => s.estado === "Pendiente")),
+  filasConNivel3: limpias.filter((s) => s.nivel === 3).length,
+};
+
+// Lab 131: aprobaciones según la política. Una solicitud de Tecnología con nivel 2 o 3 suma al revisor de TI.
+const casosLab131 = [
+  { caso: "A", titulo: "Sillas ergonómicas para Servicios", categoria: "Mobiliario", importe: 840 },
+  { caso: "E", titulo: "Portátiles para nuevos analistas", categoria: "Tecnología", importe: 4200 },
+  { caso: "F", titulo: "Mesas de reuniones para Comercial", categoria: "Mobiliario", importe: 3300 },
+  { caso: "D", titulo: "Estudio de mercado regional", categoria: "Servicios profesionales", importe: 18500 },
+].map((c) => {
+  const nivel = nivelDe(c.importe);
+  const etapas = ["Jefe de área"];
+  if (nivel >= 2) etapas.push(c.categoria === "Tecnología" ? "Finanzas + TI (todos deben aprobar)" : "Finanzas");
+  if (nivel === 3) etapas.push("Gerencia general");
+  return { ...c, nivel, etapas };
+});
+expected.lab131 = { casos: casosLab131 };
+
 write("expected/cifras-esperadas.json", JSON.stringify(expected, null, 2) + "\n");
 
 write(

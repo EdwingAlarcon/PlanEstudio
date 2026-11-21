@@ -129,6 +129,15 @@ los cuatro dominios del PL-300). **La ruta `power-bi-pro` queda "Disponible" con
 credencial vigente de Power Automate (Applied Skills y PL-7002 dan 404): la ruta es competencia profesional. La prueba de
 Power Automate (90 días) no trae créditos de AI Builder.
 
+**P2 de Power Automate (2026-11-21):** LAB-129 (desencadenadores: Select columns, Filter rows y condiciones de desencadenador
+medidos por ejecuciones, 3 → 1 → 0/1; resumen diario sin fines de semana, festivos ni correo vacío; validación de entradas con
+Terminate), LAB-130 (Excel sucio: Select, Filter array, variables; 146 válidas, 4 rechazadas, total 458.365; carga de las 5
+pendientes a Dataverse) y LAB-131 (cadena de aprobaciones por nivel, Everyone must approve, respuestas propias, escalado con
+Scope y run after). Cifras en `cifras-esperadas.json` (`lab129`, `lab130`, `lab131`) y en `powerautomate-assets.test.ts`.
+Learn confirmado el 2026-11-21: `Select columns` solo aplica a Update, una condición de desencadenador falsa no registra
+ejecución, Everyone must approve termina con un rechazo, Action Timeout en ISO 8601, aprobaciones 28 días (problemas conocidos)
+frente a 30 (límites). Sin verificar: opciones exactas de Change type, modo de texto de Select, Choice por número en Add a new row.
+
 ## Mantenimiento vigente — 2026-11-11
 
 Revisión con seis sub-agentes, sin ampliar contenido ni cambiar conteos: (1) **pruebas simuladas** (modelos, no personas) y
@@ -235,7 +244,7 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 149 archivos **cerrados**; sin trabajo a medias.
 
 **Invariantes que no debes romper:**
-- Conteos vigentes: **76 módulos, 89 labs (catorce opcionales: LAB-06, los doce de la Ruta Pro Power BI 116-127 y LAB-128 de la Ruta Pro Power Automate), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
+- Conteos vigentes: **76 módulos, 92 labs (diecisiete opcionales: LAB-06, los doce de la Ruta Pro Power BI 116-127 y los labs 128-131 de la Ruta Pro Power Automate), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
   33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 239 prácticas interactivas
   y 41 páginas de recursos** (41 desde la guía de interfaz español/inglés del 2026-11-11; prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
   Doing de Módulos 11, 10 y 13, a 44 con los Módulos 1 a 8 de la Fase 2 a 62 con los Módulos 9, 12, 14-17 de la Fase 3, a 149 con las Fases 4, 5 y 6 recortada y a 239 con la Fase 7 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de

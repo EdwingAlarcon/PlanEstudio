@@ -140,5 +140,144 @@
         "SC-2026-0122"
       ]
     }
+  },
+  "lab129": {
+    "umbralAlertaUSD": 10000,
+    "casosQueDisparan": [
+      "Estudio de mercado regional"
+    ],
+    "casosQueNoDisparan": [
+      "Sillas ergonómicas para Servicios",
+      "Reposición de tóner",
+      "Portátiles para nuevos analistas"
+    ]
+  },
+  "lab130": {
+    "filasExcel": 150,
+    "filasLimpias": 146,
+    "filasRechazadas": [
+      "SC-2026-0026",
+      "SC-2026-0074",
+      "SC-2026-0108",
+      "SC-2026-0133"
+    ],
+    "fechasConvertidas": 17,
+    "preciosConvertidos": 13,
+    "categoriasConEspacios": 11,
+    "importeTotalLimpio": 458365,
+    "importePorCategoriaLimpio": {
+      "Capacitación": 92100,
+      "Mobiliario": 57805,
+      "Papelería": 19740,
+      "Servicios profesionales": 128625,
+      "Tecnología": 97210,
+      "Viajes": 62885
+    },
+    "filasPorMesLimpio": {
+      "2026-01": 7,
+      "2026-02": 18,
+      "2026-03": 16,
+      "2026-04": 15,
+      "2026-05": 10,
+      "2026-06": 13,
+      "2026-07": 13,
+      "2026-08": 14,
+      "2026-09": 19,
+      "2026-10": 21
+    },
+    "importePorMesLimpio": {
+      "2026-01": 28306,
+      "2026-02": 50745,
+      "2026-03": 39895,
+      "2026-04": 36308,
+      "2026-05": 10317,
+      "2026-06": 46073,
+      "2026-07": 57071,
+      "2026-08": 46492,
+      "2026-09": 52040,
+      "2026-10": 91118
+    },
+    "pendientesLimpias": [
+      {
+        "id": "SC-2026-0008",
+        "importe": 960,
+        "nivel": 1,
+        "categoria": "Viajes"
+      },
+      {
+        "id": "SC-2026-0100",
+        "importe": 279,
+        "nivel": 1,
+        "categoria": "Papelería"
+      },
+      {
+        "id": "SC-2026-0035",
+        "importe": 2160,
+        "nivel": 2,
+        "categoria": "Viajes"
+      },
+      {
+        "id": "SC-2026-0114",
+        "importe": 6800,
+        "nivel": 2,
+        "categoria": "Tecnología"
+      },
+      {
+        "id": "SC-2026-0048",
+        "importe": 798,
+        "nivel": 1,
+        "categoria": "Papelería"
+      }
+    ],
+    "importePendientesLimpias": 10997,
+    "filasConNivel3": 9
+  },
+  "lab131": {
+    "casos": [
+      {
+        "caso": "A",
+        "titulo": "Sillas ergonómicas para Servicios",
+        "categoria": "Mobiliario",
+        "importe": 840,
+        "nivel": 1,
+        "etapas": [
+          "Jefe de área"
+        ]
+      },
+      {
+        "caso": "E",
+        "titulo": "Portátiles para nuevos analistas",
+        "categoria": "Tecnología",
+        "importe": 4200,
+        "nivel": 2,
+        "etapas": [
+          "Jefe de área",
+          "Finanzas + TI (todos deben aprobar)"
+        ]
+      },
+      {
+        "caso": "F",
+        "titulo": "Mesas de reuniones para Comercial",
+        "categoria": "Mobiliario",
+        "importe": 3300,
+        "nivel": 2,
+        "etapas": [
+          "Jefe de área",
+          "Finanzas"
+        ]
+      },
+      {
+        "caso": "D",
+        "titulo": "Estudio de mercado regional",
+        "categoria": "Servicios profesionales",
+        "importe": 18500,
+        "nivel": 3,
+        "etapas": [
+          "Jefe de área",
+          "Finanzas",
+          "Gerencia general"
+        ]
+      }
+    ]
   }
 }

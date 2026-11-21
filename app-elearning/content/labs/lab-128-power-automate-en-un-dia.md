@@ -149,7 +149,7 @@ Construir de punta a punta, en una sola jornada, la primera versión del proceso
 | Number | `Precio unitario` | |
 | Email | `Correo del solicitante` | |
 
-   Para la lista desplegable, en el menú **…** de la entrada de texto elige **Add a drop-down list of options** y escribe una opción por línea. En `Cantidad`, escribe enteros: un 4,5 falla al guardarse en una columna **Whole Number**.
+   Para la lista desplegable, en el menú **…** de la entrada de texto elige **Add a drop-down list of options** y escribe una opción por línea. En `Cantidad`, escribe enteros: un 4.5 falla al guardarse en una columna **Whole Number**.
 3. **+** > **Add an action** > **Microsoft Dataverse** > **Add a new row**. **Table name** `Solicitudes de compra`. Rellena cada columna con la entrada del mismo nombre desde **Dynamic content** (el rayo). Deja `Importe`, `Nivel de aprobación`, `Estado solicitud` y `Comentario del aprobador` vacíos: los calcula el otro flujo.
 4. **Save**. La primera vez que lo ejecutes, Power Automate te pedirá confirmar las conexiones (**Continue**).
 
@@ -261,7 +261,7 @@ Y tres correos al solicitante (A, B y C). D no recibe correo: su flujo sigue esp
 
 **Objetivo:** que Finanzas reciba cada mañana la lista de solicitudes que siguen pendientes ([Learn: flujos programados](https://learn.microsoft.com/power-automate/run-scheduled-tasks)).
 
-1. En la solución, **New** > **Automation** > **Cloud flow** > **Scheduled**. Nombre `SC - Resumen diario de pendientes`. En el disparador **Recurrence**: **Interval** `1` y **Frequency** **Day**; en los parámetros avanzados, la **Time zone** de tu ciudad (por ejemplo "(UTC-05:00) Bogota, Lima, Quito") y **At these hours** = `7`. Si prefieres **Start time**, es un texto con formato `2026-11-20T07:00:00` (sin `Z` al final si eliges zona horaria: la `Z` significa UTC).
+1. En la solución, **New** > **Automation** > **Cloud flow** > **Scheduled**. Nombre `SC - Resumen diario de pendientes`. En el disparador **Recurrence**: **Interval** `1` y **Frequency** **Day**; en los parámetros avanzados, la **Time zone** de tu ciudad (por ejemplo "(UTC-05:00) Bogota, Lima, Quito") y **At these hours** = `7` y **At these minutes** = `0`. Si prefieres **Start time**, es un texto con formato `2026-11-20T07:00:00` (sin `Z` al final si eliges zona horaria: la `Z` significa UTC).
 2. **List rows** (Microsoft Dataverse) ([Learn: List rows](https://learn.microsoft.com/power-automate/dataverse/list-rows)): **Table name** `Solicitudes de compra`. En **Filter rows**, con tu nombre interno y el valor que anotaste en el Ejercicio 1:
 
 ```text
@@ -383,8 +383,8 @@ La fila de B pasa a **Aprobada** y el solicitante recibe un segundo correo. **Re
 
 ## Limpieza del laboratorio
 
-No borres nada: los labs siguientes trabajan sobre la solución `SIT Compras`. Si la ejecución del caso D sigue esperando, puedes responderla o cancelarla desde el historial: una ejecución no espera para siempre (caduca a los 30 días) y el Lab 131 enseña a decidir qué pasa cuando nadie responde.
+No borres nada: los labs siguientes trabajan sobre la solución `SIT Compras`. Si la ejecución del caso D sigue esperando, puedes responderla o cancelarla desde el historial: una ejecución no espera para siempre (caduca a los 28 días según la página de problemas conocidos de Learn, 30 según la de límites) y el Lab 131 enseña a decidir qué pasa cuando nadie responde.
 
 ## Siguiente laboratorio recomendado
 
-**Lab 129 — Desencadenadores que no se disparan de más** (en construcción): filtros de filas y columnas, condiciones de desencadenador, recurrencias y flujos instantáneos con entradas.
+**Lab 129 — Desencadenadores que no se disparan de más**: filtros de filas y columnas, condiciones de desencadenador, recurrencias y flujos instantáneos con entradas.

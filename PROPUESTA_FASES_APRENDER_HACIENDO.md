@@ -990,3 +990,35 @@ se pueda verificar se marca. Prueba simulada en cada fase, como en Power BI.
   hours**; dos "Importe" en **Dynamic content** (las Compose pasan a `Calcular importe` y `Calcular nivel`); **Change type** =
   **Added** no se redispara con las actualizaciones del flujo; elección con **Default choice**; tiempo realista de unas 5 h.
 
+### 15.11 Estado — Power Automate P2 hecha (2026-11-21)
+
+- **LAB-129** Desencadenadores: `SC - Alertar compra grande` evoluciona en cuatro versiones (Added or Modified sin filtros = 3
+  ejecuciones por solicitud; Select columns = 1; Filter rows `sit_importe gt 10000` = 0/1; condición de desencadenador con
+  `coalesce` = 0/1), `SC - Avisar a TI` (Tecnología e importe > 1.000), resumen diario de lunes a viernes con festivos
+  probados en una Compose con fechas fijas (`convertTimeZone` antes de `formatDateTime`) y sin correo vacío, y validación de
+  entradas con Terminate.
+- **LAB-130** Expresiones y datos: lectura de `solicitudes-compra.xlsx` (Excel Online Business), medición de la suciedad
+  (17 fechas dd/mm, 13 precios con texto, 4 cantidades vacías, 11 categorías con espacios), dos Select encadenados,
+  146 válidas y 4 rechazadas, marzo 16 y octubre 21, `TotalImporte` 458.365 con variable (no existe `sum`) y carga de las 5
+  pendientes (10.997) con las columnas nuevas `Fecha de solicitud` e `ID de origen` (clave alternativa del Lab 132). Las
+  expresiones se reimplementaron en Python sobre el xlsx y dan las cifras esperadas.
+- **LAB-131** Aprobaciones: copia del flujo con tres etapas condicionales y `Resultado` acumulado, Everyone must approve para
+  Finanzas y TI, respuestas propias para Gerencia con Switch y Default, cierre único con `Mapa de estados`, reasignación,
+  Action Timeout y escalado con Scope + Configure run after (is skipped), y tarjeta de Teams opcional.
+- **Verificado en Learn (2026-11-21):** Select columns solo en Update y no se admiten lookups; trigger conditions empiezan por
+  `@` y, si dan false, no hay ejecución en el historial; On these days solo con Week; Everyone must approve termina con un
+  rechazo; Create an approval + Wait for an approval deben ir juntas; reasignar es del aprobador (Approvals > Reassign);
+  timeout ISO 8601 y ActionTimedOut; Excel devuelve 256 filas por defecto; no hay `sum`; `substring` falla si se pasa del
+  largo; Initialize variable solo al nivel principal. **Sin verificar:** opciones exactas de Change type, nombres de campo y
+  modo de texto de Select, número frente a etiqueta en Choice, valor de `outcome` con respuestas propias, reasignación desde
+  Teams, si un usuario sin licencia responde aprobaciones.
+- **Corregido en el LAB-128:** la caducidad de una aprobación pendiente es de 28 días según Learn (30 en la página de límites).
+- **Siguiente:** P3 = labs 132 (Dataverse a fondo), 133 (errores, reintentos, idempotencia) y 134 (APIs).
+- **Prueba simulada (2026-11-21, 1 agente, persona "Camila"; simulación, no una persona real):** las cifras cuadran con los
+  datos. Corregido: bloqueante en el LAB-130 (`@{...}` convierte en texto y el `null` en cadena vacía: números y nulos van
+  como `@expresión`), la copia del LAB-131 con Save as queda apagada (hay que encenderla), nombres de acciones sin barras ni
+  tildes, bucle **For each**, valores de `Pendientes` con `items(...)` (sin esquema), total real si se inventara cantidad 1
+  (465.600), `4.5` con punto, **At these minutes** = 0, prueba de festivos con las dos fechas, alternativa si el diseñador no
+  ofrece modo avanzado, variantes con una sola cuenta y títulos "(cadena)". Tiempos estimados: 129 ≈ 3,5 h, 130 ≈ 4,5 h,
+  131 ≈ 5 h (los textos dicen 3, 4 y 4,5 h). Sin verificar: cómo guarda el diseñador nuevo un valor `@...` tecleado en modo de
+  texto y si Excel entrega los números como texto.

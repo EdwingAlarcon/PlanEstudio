@@ -443,16 +443,24 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
     level: "Especialización",
     accent: "#0F6CBD",
     modules: [5, 11, 14],
-    labs: ["lab-128-power-automate-en-un-dia"],
+    labs: [
+      "lab-128-power-automate-en-un-dia",
+      "lab-129-power-automate-desencadenadores",
+      "lab-130-power-automate-expresiones-y-datos",
+      "lab-131-power-automate-aprobaciones",
+    ],
     competencies: ["Flujos de nube", "Aprobaciones", "Dataverse en flujos", "Expresiones", "Manejo de errores", "ALM de flujos"],
     status: "Especialización en construcción",
     // Provisional: el capstone será el LAB-139 (reto Pro sin pasos) cuando exista.
     capstoneLabSlug: "lab-128-power-automate-en-un-dia",
-    gapNote: "Disponible el lab 128 (Power Automate en un día). Los labs 129 a 139 se publican por fases. Dataverse y HTTP son conectores premium: el alumno puede iniciar una prueba de Power Automate de 90 días; la prueba no incluye créditos de AI Builder, que en la ruta es una variante opcional.",
+    gapNote: "Disponibles los labs 128 (Power Automate en un día), 129 (desencadenadores), 130 (expresiones y datos) y 131 (aprobaciones). Los labs 132 a 139 se publican por fases. Dataverse y HTTP son conectores premium: el alumno puede iniciar una prueba de Power Automate de 90 días; la prueba no incluye créditos de AI Builder, que en la ruta es una variante opcional.",
     portfolioEvidence: [
       "Solución SIT Compras con la tabla Solicitud de compra y los tres flujos (LAB-128)",
       "Los cuatro casos de prueba con sus niveles de aprobación y el resumen diario por correo (LAB-128)",
       "Historial de ejecuciones con una ejecución reenviada y la explicación de su efecto (LAB-128)",
+      "Tabla de ejecuciones medidas por versión del desencadenador (3, 1, 0/1) y condiciones de desencadenador probadas (LAB-129)",
+      "Informe de calidad del Excel histórico (146 válidas, 4 rechazadas) y cinco pendientes cargadas en Dataverse (LAB-130)",
+      "Cadena de aprobaciones por nivel con escalado por vencimiento, probada con cinco casos (LAB-131)",
     ],
   },
   {

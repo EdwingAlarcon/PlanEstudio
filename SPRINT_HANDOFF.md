@@ -21,8 +21,8 @@
 - **Ruta Pro Power BI COMPLETA** (labs 116 a 127, P1 a P5, con prueba simulada de cada fase y de la ruta entera; PROPUESTA
   §15.4 a §15.8). La ruta `power-bi-pro` está "Disponible" con capstone LAB-127. Siguiente según §15.3: **Ruta Pro Power
   Automate (cloud)**: diseño aprobado (PROPUESTA §15.9). **P1 hecha** (datos SIT Compras, ruta
-  `power-automate-pro` y LAB-128; §15.10). Siguiente: **P2 = labs 129 (desencadenadores), 130 (expresiones y datos) y 131
-  (aprobaciones)**.
+  `power-automate-pro` y LAB-128; §15.10). **P2 hecha el 2026-11-21** (labs 129, 130 y 131; PROPUESTA §15.11). Siguiente: **P3 = labs 132 (Dataverse a fondo),
+  133 (errores, reintentos, idempotencia) y 134 (APIs)**.
 
 ## Pendiente para la próxima sesión (anotado el 2026-11-11, noche)
 
