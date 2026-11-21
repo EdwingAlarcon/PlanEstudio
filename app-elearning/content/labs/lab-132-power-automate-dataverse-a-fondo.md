@@ -114,7 +114,7 @@ Usar Dataverse desde Power Automate como lo hace un desarrollador: **consultar**
 
 3. **Anota los logical names en minúsculas** (Advanced options > **Schema name**, en minúsculas) y el **entity set name** de la tabla (**Tools** > **Copy set name**), como en el Lab 128.
 
-> **Los nombres de este lab son ejemplos.** Dataverse quita espacios y a veces letras con tilde ("Categoría" puede quedar `sit_categora`, "Nivel de aprobación" `sit_niveldeaprobacin`) y pluraliza con reglas del inglés (la tabla `sit_proveedor` puede quedar como `sit_proveedors` y no `sit_proveedores`). **Copia los tuyos** y sustitúyelos en todas las consultas.
+> **Los nombres de este lab son ejemplos.** Dataverse quita espacios y a veces letras con tilde ("Categoría" puede quedar `sit_categora`, "Nivel de aprobación" `sit_niveldeaprobacin`) y pluraliza con reglas del inglés (la tabla `sit_proveedor` queda como `sit_proveedors`, no `sit_proveedores`: comprobado en un tenant real). **Copia los tuyos** y sustitúyelos en todas las consultas.
 
 ### Tarea 1.2 — La relación
 
@@ -123,7 +123,7 @@ Usar Dataverse desde Power Automate como lo hace un desarrollador: **consultar**
 ### Tarea 1.3 — Las dos claves alternativas
 
 5. **Antes** de crear la clave sobre `ID de origen`, filtra la tabla por esa columna y comprueba que **ningún** `SC-2026-…` aparece dos veces (si ejecutaste dos veces la carga del Lab 130, habrá duplicados y el índice quedaría en **Failed**: bórralos primero). *Sin verificar en Learn:* cómo trata la clave las filas con `ID de origen` vacío (las pruebas de los Labs 128 a 131). En `Proveedor`, **Keys** > **New key**: **Display name** `Clave ID de proveedor`, columna `ID de proveedor`. En `Solicitud de compra`, **Keys** > **New key**: `Clave ID de origen`, columna `ID de origen` (la creaste en el Lab 130). **Save** ([Learn: definir claves alternativas](https://learn.microsoft.com/power-apps/maker/data-platform/define-alternate-keys-portal)).
-6. Mira el **estado** de cada clave: Dataverse crea un índice y, hasta que termina, la clave aparece como **Pending** y no se puede usar. Espera a que diga **Active** (puede tardar unos minutos; con tablas con muchos datos, más).
+6. Mira el **estado** de cada clave: Dataverse crea un índice y, hasta que termina, la clave aparece como **Pending** y no se puede usar. Espera a que diga **Active** (en una prueba real, con tablas vacías, tardó unos 5 minutos; con muchos datos, más).
 
 > **Qué es una clave alternativa:** un identificador **de negocio** (aquí `PRV-001`, `SC-2026-0008`) que Dataverse trata como único. Así puedes decir "la fila cuyo `ID de proveedor` es `PRV-001`" sin conocer su GUID, y Dataverse **rechaza** una segunda fila con la misma clave. Sin clave, una carga repetida crea duplicados: el sistema no tiene cómo saber que "PRV-001" ya existe.
 
@@ -141,7 +141,13 @@ Usar Dataverse desde Power Automate como lo hace un desarrollador: **consultar**
 **Objetivo:** un flujo que se puede ejecutar dos veces con el mismo resultado.
 
 1. Duplica el patrón del Lab 130: flujo instantáneo `SC - Cargar proveedores`. **Excel Online (Business)** > **List rows present in a table** sobre `proveedores.xlsx`, tabla `Proveedores`. Renómbrala `Leer Excel`.
-2. **For each** sobre `value` de `Leer Excel`. Dentro, **Microsoft Dataverse** > **Upsert a row** (modifica la fila si existe o la crea si no; [Learn: conector de Dataverse](https://learn.microsoft.com/connectors/commondataserviceforapps/)), **Table name** `Proveedores`, con la clave alternativa como identificador de la fila (**Row ID** = `sit_iddeproveedor='PRV-001'`, es decir, `<logical name de la clave>='<valor>'`, que en el bucle se construye con `concat('sit_iddeproveedor=''', item()?['ProveedorID'], '''')`) y estos valores. *Sin verificar en Learn:* que el **Row ID** del conector acepte la clave alternativa (la API web sí lo documenta, y el conector describe el campo como un GUID). **Si tu conector lo rechaza**, usa el patrón de respaldo: **List rows** con `sit_iddeproveedor eq '<ID>'` y **Row count** `1`, una **Condition** sobre `length(...)` y, según el caso, **Update a row** (con el GUID encontrado) o **Add a new row**. Hace lo mismo con dos llamadas más por fila (todos con **fx**, porque el Excel entrega texto):
+2. **For each** sobre `value` de `Leer Excel`. Dentro, el patrón **buscar y decidir** (comprobado en un tenant real el 2026-11-21):
+   1. **Microsoft Dataverse** > **List rows**, renombrada `Buscar proveedor`: **Table name** `Proveedores`, **Filter rows** con la clave (`concat('sit_iddeproveedor eq ''', item()?['ProveedorID'], '''')`) y **Row count** `1`.
+   2. **Control** > **Condition** `Ya existe`: `length(outputs('Buscar_proveedor')?['body/value'])` **is greater than** `0`.
+   3. En **True**: **Update a row** (en un tenant en español, **Actualizar una fila**) con **Row ID** = `first(outputs('Buscar_proveedor')?['body/value'])?['sit_proveedorid']`. En **False**: **Add a new row** (**Agregar una fila nueva**).
+   4. Las dos ramas llevan estos valores (todos con **fx**, porque el Excel entrega texto):
+
+> **Por qué no una sola acción "Upsert a row" con la clave:** Learn describe **Upsert a row** (en español, **Insertar una fila**) con un **Row ID** que es un GUID. En una prueba real, con **Row ID** = `sit_iddeproveedor='PRV-001'` la acción **falla con un 404** (la respuesta es una página HTML "404 - File or directory not found", no JSON), exista o no la fila; con el GUID de la fila sí actualiza. La API web de Dataverse acepta la clave en la dirección, pero el conector no la acepta en el **Row ID**. Una variante *sin verificar*: un único **Upsert a row** con **Row ID** = `coalesce(first(outputs('Buscar_proveedor')?['body/value'])?['sit_proveedorid'], guid())`, que con un GUID nuevo crearía la fila.
 
 | Columna | Valor |
 |---|---|
@@ -168,9 +174,9 @@ Usar Dataverse desde Power Automate como lo hace un desarrollador: **consultar**
 
 4. Añade temporalmente, **fuera** del bucle, una acción **Add a new row** de `Proveedores` con valores fijos (`ID de proveedor` = `PRV-001`, `Nombre` y `NIT` cualesquiera) y ejecuta.
 
-**Resultado esperado:** esa acción falla con un error de **clave duplicada** (ya existe una fila con esa clave): Dataverse **protege** la tabla. Sin la clave, una carga con **Add a new row** dentro del bucle habría llegado a 34 filas sin ningún error. Borra la acción temporal.
+**Resultado esperado:** esa acción falla con un error de **clave duplicada** (código HTTP 412; Dataverse dice que la clave `Clave ID de proveedor` fue violada y que ya existe un registro con el mismo valor): Dataverse **protege** la tabla. Sin la clave, una carga con **Add a new row** dentro del bucle habría llegado a 34 filas sin ningún error. Borra la acción temporal.
 
-> **Dos defensas distintas:** el **upsert** hace que repetir **funcione** (actualiza lo que existe). La **clave** hace que un error de diseño **no corrompa** los datos. Se usan juntas.
+> **Dos defensas distintas:** el patrón **buscar y decidir** hace que repetir **funcione** (actualiza lo que existe). La **clave** hace que un error de diseño **no corrompa** los datos. Se usan juntas.
 
 ### Validación del Ejercicio 2
 
@@ -218,7 +224,7 @@ Tres cambios, un archivo, **ningún duplicado**. El flujo no necesita saber qué
 
 1. Duplica `SC - Importar y limpiar histórico` (**Save as**): `SC - Cargar histórico (upsert)`; comprueba que la copia está en la solución (si no, **Add existing**). Conserva la lectura de Excel, las dos **Select** de limpieza, `Mapa de estados` y `Filas validas`. **Quita, en este orden** (el diseñador no deja borrar una acción de la que otra depende): el **For each** de la carga del Lab 130 (con su **Add a new row**), el filtro `Pendientes`, el **For each** del total, `Initialize variable TotalImporte`, los cuatro filtros de suciedad, `Validas de marzo` y `Validas de octubre`, el informe y el correo.
 2. Añade a la primera **Select** (`Limpiar filas`) la columna `ProveedorID` = `item()?['ProveedorID']` y propágala en `Calcular importes`.
-3. **For each** sobre **Outputs** de `Filas validas`. Dentro, el upsert de **Solicitudes de compra** con la clave `ID de origen`, y estos valores:
+3. **For each** sobre **Outputs** de `Filas validas`. Dentro, el mismo patrón **buscar y decidir** del Ejercicio 2 sobre **Solicitudes de compra** con la clave `ID de origen` (**List rows** con `sit_iddeorigen eq '<Id>'`, una **Condition**, y **Update a row** con el GUID o **Add a new row**), con estos valores en las dos ramas:
 
 | Columna | Valor |
 |---|---|
@@ -229,15 +235,15 @@ Tres cambios, un archivo, **ningún duplicado**. El flujo no necesita saber qué
 | `Estado solicitud` | `coalesce(outputs('Mapa_de_estados')?[item()?['Estado']], outputs('Mapa_de_estados')?['Pendiente'])` |
 | `Correo del solicitante` | `item()?['Solicitante']` |
 | `Fecha de solicitud` | `item()?['Fecha']` |
-| `Proveedor` (**lookup**) | la referencia a la fila por **clave alternativa**, con el nombre del conjunto de entidades de `Proveedor` y la clave: `sit_proveedores(sit_iddeproveedor='<ID>')`, construida con `concat` ([Learn: referenciar filas por clave alternativa](https://learn.microsoft.com/power-apps/developer/data-platform/use-alternate-key-reference-record)) |
+| `Proveedor` (**lookup**) | la referencia a la fila por **clave alternativa**, con el nombre del conjunto de entidades de `Proveedor` y la clave: `sit_proveedors(sit_iddeproveedor='<ID>')`, construida con `concat` ([Learn: referenciar filas por clave alternativa](https://learn.microsoft.com/power-apps/developer/data-platform/use-alternate-key-reference-record)) |
 
    Para el lookup, la expresión completa queda así (con **tus** nombres):
 
 ```text
-concat('sit_proveedores(sit_iddeproveedor=''', item()?['ProveedorID'], ''')')
+concat('sit_proveedors(sit_iddeproveedor=''', item()?['ProveedorID'], ''')')
 ```
 
-   (Dentro de una cadena de expresión, la comilla simple se escribe doble: `''`.) *Sin verificar en Learn:* que el campo del lookup del conector acepte esta forma en el diseñador nuevo; si no la acepta, busca primero la fila del proveedor con **List rows** (filtro por `ID de proveedor`) y usa su GUID.
+   (Dentro de una cadena de expresión, la comilla simple se escribe doble: `''`.) **Comprobado en un tenant real (2026-11-21):** el campo del lookup de **Add a new row** acepta esta forma y enlaza la solicitud con el proveedor correcto. Con **Update a row**, sin verificar: si no la acepta, busca la fila del proveedor con **List rows** y usa su GUID.
 4. **Save** y **Test**. La ejecución dura de **3 a 6 minutos** (146 iteraciones en serie) y la vas a ejecutar dos veces: es normal y es el tema del Lab 138. Dataverse limita las solicitudes por usuario (6.000 cada 5 minutos, con error 429 y la cabecera `Retry-After` al pasarse; [Learn: límites de la API](https://learn.microsoft.com/power-apps/developer/data-platform/api-limits)): 146 filas están muy por debajo, una carga de decenas de miles no.
 5. Cuenta las filas con `ID de origen` que empiezan por `SC-2026` y comprueba una solicitud de proveedor conocido (por ejemplo `SC-2026-0114`, Tecnología, nivel 2, proveedor **PRV-002**).
 
@@ -372,6 +378,7 @@ Este ejercicio es de **lectura**: Learn no trae un ejemplo ejecutable con accion
 |---|---|---|
 | La carga duplica filas | No hay clave alternativa activa, o se usa **Add a new row** | Clave activa y upsert (Ejercicios 1 y 2) |
 | La clave sigue en **Pending** | El índice aún se construye | Espera; revisa que la columna es de un tipo admitido |
+| **Upsert a row** (o **Update a row**) con la clave en el **Row ID** da **404** y una página HTML | El conector espera un GUID, no una clave alternativa | **List rows** por la clave y usar el GUID encontrado (Ejercicio 2) |
 | El upsert falla "clave no existe" | El nombre de la clave o de la columna no coincide con los de Dataverse | Copia los logical names de **Advanced options** |
 | La consulta devuelve 50 o 5000 filas "de menos" | Límite de **Row count** o de paginación | Activa **Pagination** y compara con un total esperado |
 | `Filter rows` da error de sintaxis | Comillas dobles, nombre visible o un texto sin comillas | Comillas simples; logical names en minúsculas |

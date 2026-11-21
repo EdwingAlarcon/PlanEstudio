@@ -147,7 +147,7 @@ la API, 404 capturado, desencadenador HTTP con Response). Datos nuevos en `sit-c
 `powerautomate-assets.test.ts`. Learn confirmado el 2026-11-21: FetchXML no admite paginación automática ni agregados en
 List rows; el control de concurrencia de un desencadenador no se puede deshacer sin borrarlo; Action Timeout no limita una
 solicitud HTTP individual; dos correos de fallo (por ejecución y resumen semanal) solo a propietarios. Sin verificar: clave
-alternativa en el Row ID de Upsert a row, referencia de lookup por clave, premium de HTTP y del desencadenador HTTP.
+alternativa en Update a row, Parse JSON y el desencadenador HTTP. **Verificado en un tenant real el 2026-11-21 (PROPUESTA §15.13):** Upsert a row con la clave en el Row ID da 404 (el lab usa buscar y decidir), el lookup por clave alternativa funciona en Add a new row, y HTTP y el desencadenador HTTP son premium.
 
 ## Mantenimiento vigente — 2026-11-11
 

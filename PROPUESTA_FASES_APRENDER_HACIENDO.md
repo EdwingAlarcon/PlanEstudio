@@ -1061,3 +1061,24 @@ se pueda verificar se marca. Prueba simulada en cada fase, como en Power BI.
   Los archivos nuevos (`catalogo-v2`, `proveedores-actualizacion`) deben estar desplegados antes de usar el Lab 134 (se
   publican con el commit). Tiempos estimados: 132 ≈ 6 h, 133 ≈ 5 h, 134 ≈ 4,5 h (los textos dicen 5, 4,5 y 4 h). Sin verificar:
   si `result()` acepta un Switch, si un error de DNS se reintenta, Schema Validation del desencadenador HTTP.
+
+### 15.13 Verificación en un tenant real (2026-11-21, primera vez)
+
+Entorno Trial "Curso Power Automate" (English (United States), USD) creado en el tenant del usuario, con la solución `SIT Compras`,
+las tablas `Proveedor` y `Solicitud de compra` (creadas por la API web con las mismas columnas del Lab 132), el lookup y las dos
+claves alternativas. La interfaz del usuario está en **español** (Power Apps y Power Automate); el entorno, en inglés.
+- **Comprobado:** HTTP y el desencadenador HTTP (**Solicitud**) llevan el rombo premium y el flujo con Dataverse también;
+  las claves alternativas tardaron unos 5 minutos en pasar de Pending a Active con las tablas vacías; entity set names
+  `sit_proveedors` y `sit_solicituddecompras`; la propiedad de navegación del lookup es el Schema name (`sit_Proveedor`);
+  **Add a new row** con una clave duplicada da HTTP 412 (código 0x80060892, "Entity Key … violated"); **Add a new row** acepta
+  `sit_proveedors(sit_iddeproveedor='PRV-001')` en el lookup y enlaza bien.
+- **Corregido en el LAB-132:** **Upsert a row** (en español, **Insertar una fila**; operación `UpdateRecordWithOrganization`) con la
+  clave alternativa en **Row ID** falla con **404** (página HTML de IIS, no JSON), exista o no la fila; con el GUID actualiza. El
+  lab usa ahora el patrón **List rows por la clave → Condition → Update a row con el GUID / Add a new row**.
+- **Etiquetas en español vistas:** **Desencadenar un flujo manualmente**, **Programar**, **Solicitud**, **Insertar una fila**,
+  **Agregar una fila nueva**, **Actualizar una fila**, **Eliminar una fila**, **Enumerar filas**, **Probar** > **Manualmente** /
+  **Automáticamente**, **Publicar y probar**, **Ejecutar flujo**, **Reenviar**, **Mostrar todo**, **Vista de código**; estado
+  **Prueba no superada**; en Power Apps, **Editor** = Publisher y **Prefijo**. Los parámetros de la acción de Dataverse se
+  muestran con el nombre de la columna (`ID de proveedor`, `Título`).
+- **Seguía sin verificar:** modo de texto de Select, valor de `outcome` con respuestas propias, `result()` con un Switch, error de
+  DNS reintentado, Parse JSON, paginación HTTP y el desencadenador HTTP (Labs 129, 130, 133 y 134), y Update a row con clave.
