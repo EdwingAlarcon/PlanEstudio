@@ -112,7 +112,7 @@ Cada ejecución termina en **Failed**, con **una** acción roja y las siguientes
 
 | Origen | Qué dice el error (anota el texto) |
 |---|---|
-| Expresión | ___ |
+| Expresión | `InvalidTemplate. Unable to process template language expressions in action 'Division' inputs at line '0' and column '0': 'Attempt to divide an integral or decimal value by zero in function 'div'.'` (comprobado en un tenant real) |
 | Dataverse | ___ |
 | HTTP | ___ (con el código 404) |
 
@@ -148,7 +148,7 @@ Cada ejecución termina en **Failed**, con **una** acción roja y las siguientes
 
    `result('Try')` devuelve el resultado de las acciones **de primer nivel** del ámbito, con su estado y su error ([Learn: función `result`](https://learn.microsoft.com/azure/logic-apps/workflow-definition-language-functions-reference#result)).
 
-   > **Por qué las cuatro acciones están al nivel principal de `Try`:** si estuvieran dentro de un **Switch** o una **Condition**, `result('Try')` solo vería el **Switch** (con un error genérico, "an action failed") y tu correo no diría qué falló. Para llegar al error real habría que consultar también `result('Switch')` (*sin verificar en Learn* que `result()` acepte un **Switch**). **Regla:** si necesitas el detalle, no escondas las acciones importantes dentro de otra estructura.
+   > **Por qué las cuatro acciones están al nivel principal de `Try`:** si estuvieran dentro de un **Switch** o una **Condition**, `result('Try')` solo vería el **Switch** (con un error genérico, "an action failed") y tu correo no diría qué falló. **Comprobado en un tenant real (2026-11-21):** con un **Switch** dentro de `Try`, `result('Try')` devuelve la acción `Sw` con el mensaje genérico "An action failed. No dependent actions succeeded." y `status` = `Failed`; el correo diría "Falló la acción Sw" y no `Division`. **Regla:** si necesitas el detalle, no escondas las acciones importantes dentro de otra estructura.
 6. **Compose** `Detalle del fallo`, con:
 
 ```text
@@ -190,8 +190,15 @@ concat('Falló la acción ', first(body('Acciones_fallidas'))?['name'], ': ', fi
 
 **Objetivo:** reintentar lo que se arregla solo, con control, y ver cuánto cuesta.
 
-1. Usa el valor `conexion` de `Fallo`: falla la acción `Llamar a la red`, una llamada a un nombre que no se puede resolver.
-2. Abre esa acción **HTTP** > **Settings** > **Networking** > **Retry policy**. Hay cuatro tipos: **Default**, **None**, **Exponential interval** y **Fixed interval** (el **Count** va de 1 a 90 y el **Interval**, en ISO 8601, de `PT5S` a `P1D`) ([Learn: directivas de reintento](https://learn.microsoft.com/power-automate/guidance/coding-guidelines/error-handling)). Prueba tres configuraciones y mide el tiempo total de la ejecución y los intentos (en la ejecución, la acción muestra el historial de reintentos):
+### Tarea 3.1 — Un error que **no** se reintenta
+
+1. Usa el valor `conexion` de `Fallo`: falla la acción `Llamar a la red`, una llamada a un nombre que no se puede resolver (`no-existe.invalid`).
+2. Abre la ejecución. **Comprobado en un tenant real (2026-11-21):** el error es `UnresolvableHostName. The provided host name 'no-existe.invalid' could not be resolved.`, la acción falla **al instante** (0 s) y **no se reintenta**, ni con la directiva por defecto ni con **Fixed interval** de 2 reintentos cada 10 segundos: toda la ejecución dura menos de un segundo. Un error de resolución de nombre no se considera transitorio.
+
+### Tarea 3.2 — Un error que **sí** se reintenta
+
+3. Cambia el **URI** de `Llamar a la red` por un servicio que devuelva un **503** (por ejemplo, el servicio público `https://httpbin.org/status/503`, ajeno al curso: no envíes datos reales; es una prueba con una URL, sin cuerpo).
+4. Abre **HTTP** > **Settings** > **Networking** > **Retry policy**. Hay cuatro tipos: **Default**, **None**, **Exponential interval** y **Fixed interval** (el **Count** va de 1 a 90 y el **Interval**, en ISO 8601, de `PT5S` a `P1D`) ([Learn: directivas de reintento](https://learn.microsoft.com/power-automate/guidance/coding-guidelines/error-handling)). Prueba tres configuraciones y mide el tiempo total de la acción y los intentos (la acción muestra el historial de reintentos):
 
 | Configuración | Intentos | Tiempo total | Qué observas |
 |---|---|---|---|
@@ -199,21 +206,20 @@ concat('Falló la acción ', first(body('Acciones_fallidas'))?['name'], ': ', fi
 | **Fixed interval**, **Count** `2`, **Interval** `PT10S` | ___ | ___ | ___ |
 | **Default** | ___ | ___ | ___ |
 
-   (El tiempo de **Default** puede ser de **varios minutos**: lanza esta prueba y sigue con otra cosa.)
+   (El tiempo de **Default** es de **varios minutos**: en una prueba real, la ejecución seguía en curso pasados 3 minutos. Lanza esta prueba y sigue con otra cosa.)
 
 ### Resultado esperado del Ejercicio 3
 
 - **None**: 1 intento y un fallo inmediato.
 - **Fixed interval** de 2 reintentos cada 10 segundos: 3 intentos (el original y dos reintentos) y unos **20 segundos** de espera acumulada.
-- **Default**: varios reintentos con intervalos crecientes. **Anota cuántos** hizo: Learn da cifras distintas según la página y el perfil de licencia (hasta 2 en el perfil Low y hasta 12 en Medium y High; el diseñador cita 8 sin conectores premium y 12 con ellos), así que **tu medida es el dato**. Se reintentan 408, 429 y los errores 5xx.
-
-> **Si con Fixed interval ves un solo intento:** en tu ambiente el error de resolución de nombre no se considera transitorio y no se reintenta. Repite la prueba con un servicio que devuelva un **503** (por ejemplo, el servicio público `https://httpbin.org/status/503`, ajeno al curso: no envíes datos reales) y mide de nuevo.
+- **Default**: varios reintentos con intervalos crecientes, durante **más de 3 minutos**. **Anota cuántos** hizo: Learn da cifras distintas según la página y el perfil de licencia (hasta 2 en el perfil Low y hasta 12 en Medium y High; el diseñador cita 8 sin conectores premium y 12 con ellos), así que **tu medida es el dato**. Se reintentan 408, 429 y los errores 5xx.
 
 ### Qué reintentar y qué no
 
 | Fallo | ¿Reintentar? | Por qué |
 |---|---|---|
-| Sin conexión, 408, 429, 5xx | **Sí**, con espera | Suelen ser transitorios |
+| 408, 429, 5xx | **Sí**, con espera | Suelen ser transitorios |
+| Nombre que no se resuelve (DNS) | **No** (comprobado) | La plataforma no lo trata como transitorio: arréglalo en la URL |
 | 400, 401, 403, 404 | **No** | No se arreglan esperando |
 | Cualquier error al **crear** algo sin protección de duplicados | **Con cuidado** | El primer intento puede haber funcionado aunque devolviera error: el Ejercicio 6 trata esto |
 
@@ -223,7 +229,8 @@ concat('Falló la acción ', first(body('Acciones_fallidas'))?['name'], ': ', fi
 
 | Campo | Tu valor |
 |---|---|
-| Intentos con **None**, **Fixed** y **Default** | ___ , ___ , ___ |
+| Intentos con **None**, **Fixed** y **Default** (con el 503) | ___ , ___ , ___ |
+| ¿Se reintentó el error de DNS? | ___ (esperado: no) |
 | Tiempo con **Fixed** | ___ (esperado: unos 20 s) |
 
 ---

@@ -126,7 +126,7 @@ https://planestudio.vercel.app/practice-assets/powerautomate/sit-compras/catalog
 3. Observa dos cosas del esquema generado:
    - Las propiedades de `value` aparecen en una lista `required` (el generador las marca **todas** como obligatorias).
    - `@odata.nextLink` y `@odata.count` llevan el signo `@`: en las expresiones se escriben `body('Parse_JSON')?['@odata.nextLink']`.
-   - **El generador también pone `@odata.nextLink` en la lista `required` de la raíz del esquema.** La última página no la trae, así que **quítala de esa lista ahora**; si no, el bucle del Ejercicio 3 falla en la tercera página. Cambia además el tipo de `PrecioUSD` de `integer` a `number`: hoy todos los precios son enteros, pero un precio con decimales haría fallar la validación.
+   - **El generador también pone `@odata.nextLink` en la lista `required` de la raíz del esquema.** (Si editas el esquema en la **Vista de código**, el signo `@` de esos nombres se escribe doble, `@@odata.nextLink`: un texto que empieza por `@` se interpreta como una expresión.) La última página no la trae, así que **quítala de esa lista ahora**; si no, el bucle del Ejercicio 3 falla en la tercera página. Cambia además el tipo de `PrecioUSD` de `integer` a `number`: hoy todos los precios son enteros, pero un precio con decimales haría fallar la validación.
 
 ### Qué cambia
 
@@ -192,7 +192,7 @@ Descarga las tres páginas, pega su contenido en tres **Compose** y aplica `unio
 **Objetivo:** que la acción siga los enlaces por ti.
 
 1. Duplica el flujo (**Save as**) y llámalo `SC - Sincronizar catálogo (paginación)`. Quita el **Do until**, las variables y las acciones asociadas; deja una sola acción **HTTP** con la URL de la página 1.
-2. En **HTTP** > **Settings** > **Networking**, activa **Pagination** y fija **Threshold** en `100` (debe ser **mayor que el total esperado**: el umbral cuenta elementos, no páginas, y con `10` la acción se detiene tras la primera página de 20; Learn: sigue `nextLink` o `@odata.nextLink`; si la API usa otro nombre, hay que hacer el bucle; el umbral admite hasta 5.000 en el perfil Low y 100.000 en los demás) ([Learn: paginación en acciones](https://learn.microsoft.com/azure/logic-apps/logic-apps-exceed-default-page-size-with-pagination)). Añade una **Compose** `Total` = `length(body('HTTP')?['value'])`.
+2. En **HTTP** > **Settings** > **Networking**, activa **Pagination** y fija **Threshold** en `100` (debe ser **mayor que el total esperado**: el umbral cuenta elementos, no páginas, y con `10` la acción se detiene tras la primera página de 20; Learn: sigue `nextLink` o `@odata.nextLink`; si la API usa otro nombre, hay que hacer el bucle; el umbral admite hasta 5.000 en el perfil Low y 100.000 en los demás). **Comprobado en un tenant real (2026-11-21):** con **Threshold** `100`, la acción sigue `@odata.nextLink` y devuelve las **41** filas en un solo `value` (la llamada tardó unos 4 s) ([Learn: paginación en acciones](https://learn.microsoft.com/azure/logic-apps/logic-apps-exceed-default-page-size-with-pagination)). Añade una **Compose** `Total` = `length(body('HTTP')?['value'])`.
 3. **Test**.
 
 ### Resultado esperado del Ejercicio 4
@@ -215,7 +215,7 @@ Descarga las tres páginas, pega su contenido en tres **Compose** y aplica `unio
 
 2. En el flujo del Ejercicio 3, cambia la URL inicial de `UrlSiguiente` a `.../catalogo-v2/pagina-1.json` y ejecuta **Test**.
 
-**Resultado esperado:** **Parse JSON** falla: faltan las propiedades obligatorias `PrecioUSD` y `Activo` (las que el esquema generado marca como `required`). Lee el mensaje y anótalo.
+**Resultado esperado:** **Parse JSON** falla con `ValidationFailed` ("The schema validation failed.") y, en el detalle, un error del tipo "Required properties are missing from object" con las propiedades que faltan (`PrecioUSD` y `Activo`, las que el esquema generado marca como `required`). Comprobado en un tenant real con la página 3 y `@odata.nextLink`: "Required properties are missing from object: @odata.nextLink." Lee el mensaje y anótalo.
 
 ### Tarea 5.3 — Un esquema tolerante
 
@@ -290,7 +290,7 @@ concat('La llamada falló con el código ', string(outputs('HTTP')?['statusCode'
 
 ### Resultado esperado del Ejercicio 6
 
-La ejecución **no** termina en rojo: `Intentar` falla, `Capturar` corre y deja el detalle del error. Es **tu** decisión qué hacer después (avisar, reintentar más tarde, seguir con datos de la última lectura buena).
+La ejecución **no** termina en rojo (comprobado: el estado final es **Correcto**): `Intentar` falla, `Capturar` corre y deja el detalle del error. Ojo: `body('HTTP')` es la página de error completa (en el catálogo, un documento HTML largo), así que el detalle es largo; si solo te interesa avisar, quita el cuerpo del mensaje. Es **tu** decisión qué hacer después (avisar, reintentar más tarde, seguir con datos de la última lectura buena).
 
 > **Aquí terminar en Succeeded es una decisión:** a diferencia del Lab 133, donde un `Catch` sin **Terminate** esconde un fallo, el catálogo es una consulta y puedes seguir con la última lectura buena. Escríbelo en la descripción del flujo.
 >

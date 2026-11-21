@@ -1082,3 +1082,11 @@ claves alternativas. La interfaz del usuario está en **español** (Power Apps y
   muestran con el nombre de la columna (`ID de proveedor`, `Título`).
 - **Seguía sin verificar:** modo de texto de Select, valor de `outcome` con respuestas propias, `result()` con un Switch, error de
   DNS reintentado, Parse JSON, paginación HTTP y el desencadenador HTTP (Labs 129, 130, 133 y 134), y Update a row con clave.
+- **Labs 133 y 134, comprobado en el tenant (2026-11-21, flujos creados por la API y ejecutados desde la UI):** HTTP con
+  **Pagination** (Threshold 100) sigue `@odata.nextLink` y devuelve las 41 filas; **Parse JSON** con el esquema generado falla en la
+  página 3 (`ValidationFailed`, "Required properties are missing from object: @odata.nextLink."); la ejecución con un `Scope` de
+  captura termina **Correcta** aunque el `Scope` de intento falle; con un **Switch** dentro de `Try`, `result()` devuelve `Sw`
+  con "An action failed. No dependent actions succeeded."; el error de `div(1,0)` es `InvalidTemplate … Attempt to divide an
+  integral or decimal value by zero in function 'div'`; **un error de DNS (`UnresolvableHostName`) no se reintenta**, ni con Fixed
+  interval; con un 503 sí hay reintentos y la directiva Default dura más de 5 minutos. En la definición de un flujo, los textos
+  que empiezan por `@` (como `@odata.nextLink` en un esquema) se escriben `@@`.
