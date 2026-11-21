@@ -268,7 +268,7 @@ sit_importe gt 10000
 formatDateTime(convertTimeZone('2026-12-25T13:00:00Z', 'UTC', 'SA Pacific Standard Time'), 'yyyy-MM-dd')
 ```
 
-   Ejecuta el flujo con **Test** > **Manually** (la prueba manual **envía el resumen**: hazla después de la Tarea 5.3 si no quieres un correo extra) y anota la salida de la **Compose**: `2026-12-25`. (13:00 UTC son las 08:00 de Bogotá, el mismo día.) Ahora cambia la fecha a `2026-12-26T03:00:00Z` y ejecuta otra vez: obtienes también `2026-12-25`: a las 03:00 UTC **aún es el día anterior** en Bogotá. Es la razón de convertir antes de formatear: sin `convertTimeZone` los festivos se correrían cinco horas. Borra la **Compose** provisional.
+   Ejecuta el flujo con **Test** > **Manually** (la prueba manual **envía el resumen**: hazla después de la Tarea 5.3 si no quieres un correo extra) y anota la salida de la **Compose**: `2026-12-25`. (13:00 UTC son las 08:00 de Bogotá, el mismo día.) Ahora cambia la fecha a `2026-12-26T03:00:00Z` y ejecuta otra vez: obtienes también `2026-12-25` (comprobado en un tenant real; la condición completa da `false` para esa fecha, y el 8 y el 25 de diciembre de 2026 caen en festivo según la lista). Comprobado también: `dayOfWeek` da `0` para un domingo, `mod(4.5, 1)` da `0.5` y `mod(2, 1)` da `0`, y `empty(string(null))` da `true`: a las 03:00 UTC **aún es el día anterior** en Bogotá. Es la razón de convertir antes de formatear: sin `convertTimeZone` los festivos se correrían cinco horas. Borra la **Compose** provisional.
 
 ### Tarea 5.3 — Sin correo vacío
 

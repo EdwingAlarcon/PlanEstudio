@@ -171,6 +171,8 @@ concat('Falló la acción ', first(body('Acciones_fallidas'))?['name'], ': ', fi
 - La ejecución termina en **Failed** (por el **Terminate**), no en **Succeeded**.
 - Con `Fallo` = `ninguno`, `Try` termina bien, `Catch` se **omite**, `Finally` corre y la ejecución termina **Succeeded**.
 
+> **Comprobado en un tenant real:** con `Catch` que solo marca `HuboFallo`, `Finally` corre (`finally corrió True`) y el **Terminate** posterior deja la ejecución en **Failed**.
+>
 > **Por qué el Terminate va después de `Finally` y no dentro de `Catch`:** **Terminate** acaba la ejecución **en el acto**: si estuviera dentro de `Catch`, `Finally` nunca correría y perderías la limpieza. Por eso `Catch` solo **anota** el fallo (`HuboFallo`) y la decisión de terminar se toma al final.
 >
 > **El error más común de este patrón:** poner `Catch` y no poner el **Terminate**. El flujo avisa, pero termina **Succeeded**: en el historial, en las alertas y en los informes parece que todo fue bien. Si el negocio necesita saber que algo falló, el estado del flujo tiene que decirlo. Si el fallo es **esperado** y **resuelto** (por ejemplo, "esta solicitud ya no existe, la omito"), entonces sí terminar bien es lo correcto: es una decisión, no un olvido (y se escribe en la descripción del flujo).

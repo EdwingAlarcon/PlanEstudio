@@ -1103,3 +1103,13 @@ claves alternativas. La interfaz del usuario está en **español** (Power Apps y
 - **Sin verificar tras esta ronda:** el modo de texto de Select (Lab 130), el valor de `outcome` con respuestas propias (Lab 131),
   Update a row con clave, y todo lo que depende de Excel o de aprobaciones. Los flujos y filas de prueba siguen en el entorno
   "Curso Power Automate" (flujos apagados salvo los manuales).
+- **Ronda de verificación 3 (2026-11-21, flujo `T verificacion expresiones` y consultas a la API web):** con las 17 proveedoras y las 146
+  solicitudes cargadas (upsert por clave alternativa con la API web, 204, sin duplicados al repetir) las consultas del Lab 132 dan 94, 2,
+  20, tres de 18.500, 22 y 22 con FetchXML; `Expand Query` con `sit_Proveedor` funciona y con el nombre de la relación falla. Expresiones:
+  fecha dd/mm a ISO, `float(replace(...))`, `trim`, `empty(string(null))`, `convertTimeZone` (el 25 de diciembre a las 03:00Z sigue
+  siendo 25 en Bogotá), `dayOfWeek` (domingo = 0), `mod`, `coalesce(false, true)` = false. Select: `@{...}` convierte a texto y el
+  `null` en cadena vacía; `@expr` conserva número y nulo. Bucle `Do until` con `union`, esquema tolerante y normalización v1/v2:
+  41/40/10 y suma 48.967 con las dos versiones; **For each** con **Increment variable** dio el total correcto. `Finally` corre y el
+  `Terminate` posterior deja la ejecución en Failed.
+- **Aún sin verificar:** Lab 130 con Excel real, Lab 131 (aprobaciones), idempotencia con Resubmit (Lab 133), el modo de texto de
+  Select tecleado en el diseñador, y List rows con FetchXML agregado a través del conector.

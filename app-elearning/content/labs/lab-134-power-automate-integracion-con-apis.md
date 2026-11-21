@@ -171,7 +171,7 @@ https://planestudio.vercel.app/practice-assets/powerautomate/sit-compras/catalog
 
 ### Resultado esperado del Ejercicio 3
 
-`Total de artículos` = **41**. El historial muestra **tres** iteraciones: 20, 20 y 1 artículos.
+`Total de artículos` = **41** (comprobado en un tenant real con `union`, la **Compose** intermedia y `coalesce(..., '')`). El historial muestra **tres** iteraciones: 20, 20 y 1 artículos.
 
 ### Variante en papel (si Power Automate no puede salir a internet)
 
@@ -260,7 +260,7 @@ Descarga las tres páginas, pega su contenido en tres **Compose** y aplica `unio
 | v1 | 41 | **40** | **10** |
 | v2 | 41 | **40** | **10** |
 
-Las dos versiones producen el **mismo** resultado normalizado. Anota también la suma de `PrecioUSD` de los artículos activos con las dos versiones (con un **For each** y **Increment variable**, como en el Lab 130): **48.967** en ambas.
+Las dos versiones producen el **mismo** resultado normalizado (comprobado: 41, 40 y 10 con la v1 y con la v2, y una suma de 48.967 en un **For each** con **Increment variable**). El esquema tolerante con `["number","null"]`, `["object","null"]` y sin `required` funcionó con las dos versiones. Anota también la suma de `PrecioUSD` de los artículos activos con las dos versiones (con un **For each** y **Increment variable**, como en el Lab 130): **48.967** en ambas.
 
 > **La regla de diseño:** **no dejes que el formato de otro sistema se extienda por tu flujo.** Normaliza en un solo punto, justo después de leer, y el resto del flujo trabaja con **tu** formato. Cuando el proveedor cambie otra vez, tocas una acción, no veinte.
 

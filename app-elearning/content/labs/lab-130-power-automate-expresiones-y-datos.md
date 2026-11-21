@@ -170,7 +170,7 @@ Antes de aplicarlas a 150 filas, pruébalas con **Compose** y valores escritos a
 
 | Qué pruebas | Expresión en la **Compose** | Salida esperada |
 |---|---|---|
-| Fecha `dd/mm/yyyy` a ISO | `concat(substring('25/03/2026', 6, 4), '-', substring('25/03/2026', 3, 2), '-', substring('25/03/2026', 0, 2))` | `2026-03-25` |
+| Fecha `dd/mm/yyyy` a ISO | `concat(substring('25/03/2026', 6, 4), '-', substring('25/03/2026', 3, 2), '-', substring('25/03/2026', 0, 2))` | `2026-03-25` (comprobado) |
 | Precio con texto | `float(replace(replace('USD 1,400.00', 'USD ', ''), ',', ''))` | `1400` |
 | Categoría con espacios | `trim(' Viajes ')` | `Viajes` |
 | Cantidad vacía | `empty(string(''))` | `true` |
@@ -197,7 +197,7 @@ Borra estas **Compose** cuando funcionen.
 }
 ```
 
-   > **`@{...}` frente a `@...`:** con llaves (`@{expresión}`) el resultado se convierte en **texto** y un `null` pasa a ser una cadena vacía. Por eso los valores que deben ser números o nulos (`Cantidad`, `Precio`, `Importe`) se escriben **sin llaves** (`@expresión`); los textos pueden ir con llaves. Si insertas la expresión con **fx**, el diseñador la guarda en la forma correcta. *No verificado:* cómo guarda tu diseñador un valor tecleado a mano en el modo de texto; si en la salida ves `Cantidad` entre comillas (`"102"`), vuelve a insertarlo con **fx**.
+   > **`@{...}` frente a `@...`:** con llaves (`@{expresión}`) el resultado se convierte en **texto** y un `null` pasa a ser una cadena vacía. Por eso los valores que deben ser números o nulos (`Cantidad`, `Precio`, `Importe`) se escriben **sin llaves** (`@expresión`); los textos pueden ir con llaves. Si insertas la expresión con **fx**, el diseñador la guarda en la forma correcta. **Comprobado en un tenant real (2026-11-21, con la definición del flujo):** una **Select** con `"txt": "@{float(replace(item(),'USD ',''))}"` y `"num": "@float(replace(item(),'USD ',''))"` devuelve `{"txt":"2","num":2.0}`, y con `null` devuelve `""` para la forma con llaves y `null` para la otra. *Sin verificar:* cómo guarda el diseñador un valor tecleado a mano en el modo de texto; si en la salida ves `Cantidad` entre comillas (`"102"`), vuelve a insertarlo con **fx**.
 
    Si el modo de texto no está disponible en tu diseñador, crea cada par con **Enter key** / **Enter value** y pega la expresión en cada valor con **fx**.
 2. Añade otra **Select**, `Calcular importes`, con **From** = **Outputs** de `Limpiar filas`. **Map** en modo de texto:
@@ -290,7 +290,7 @@ Válidas de octubre de 2026: @{length(body('Validas_de_octubre'))}
 1. Al principio del flujo (antes de `Leer Excel`), **Variable** > **Initialize variable**: **Name** `TotalImporte`, **Type** **Float**, **Value** `0`.
 2. Después de `Filas validas`, **Control** > **For each** (en el diseñador clásico, **Apply to each**) sobre **Outputs** de `Filas validas`. Dentro, **Variable** > **Increment variable**: **Name** `TotalImporte`, **Value** = `item()?['Importe']` (con **fx** (el nombre del bucle es el que ves en el diseñador, con guiones bajos): `items('For_each')?['Importe']`).
 3. Antes del correo, añade a `Body` la línea `Importe total de las filas válidas: @{variables('TotalImporte')}`.
-4. En los **Settings** de **Apply to each**, comprueba que **Concurrency control** está **desactivado**. Con concurrencia, dos iteraciones podrían leer el mismo valor antes de sumar y el total saldría menor ([Learn: variables en bucles](https://learn.microsoft.com/power-automate/create-variables-store-values)).
+4. En los **Settings** de **Apply to each**, comprueba que **Concurrency control** está **desactivado**. Con concurrencia, dos iteraciones podrían leer el mismo valor antes de sumar y el total saldría menor (en una prueba real con 40 elementos, el total salió correcto con y sin la concurrencia desactivada: no es un error que siempre se vea, pero tampoco hay garantía) ([Learn: variables en bucles](https://learn.microsoft.com/power-automate/create-variables-store-values)).
 5. **Test**.
 
 ### Resultado esperado del Ejercicio 5

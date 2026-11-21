@@ -176,6 +176,8 @@ Usar Dataverse desde Power Automate como lo hace un desarrollador: **consultar**
 
 **Resultado esperado:** esa acción falla con un error de **clave duplicada** (código HTTP 412; Dataverse dice que la clave `Clave ID de proveedor` fue violada y que ya existe un registro con el mismo valor): Dataverse **protege** la tabla. Sin la clave, una carga con **Add a new row** dentro del bucle habría llegado a 34 filas sin ningún error. Borra la acción temporal.
 
+> **En la API web sí:** un `PATCH` con la clave en la dirección (`sit_proveedors(sit_iddeproveedor='PRV-001')`) hace el upsert sin problemas (204), crea o actualiza, y repetirlo no duplica; es solo el **Row ID** del conector el que no la acepta.
+>
 > **Dos defensas distintas:** el patrón **buscar y decidir** hace que repetir **funcione** (actualiza lo que existe). La **clave** hace que un error de diseño **no corrompa** los datos. Se usan juntas.
 
 ### Validación del Ejercicio 2
@@ -289,7 +291,7 @@ Vuelve a ejecutar el flujo. El resultado debe ser el **mismo** (146, no 292).
    **Esperado:** **22** filas.
 4. **Q7, `Expand Query`:** en `List rows` de solicitudes, **Filter rows** `startswith(sit_iddeorigen,'SC-2026')` (para no traer las pruebas de otros labs, que no tienen proveedor), **Expand Query** = `sit_Proveedor($select=sit_nombre)` (con **tu** Schema name del lookup, respetando las mayúsculas) y **Row count** `5`. En la salida, cada solicitud trae **dentro** el nombre de su proveedor.
 
-   **Esperado:** cada fila trae un objeto con el `sit_nombre` del proveedor; no hace falta una segunda consulta por proveedor.
+   **Esperado:** cada fila trae un objeto con el `sit_nombre` del proveedor; no hace falta una segunda consulta por proveedor. *Comprobado contra la API web de Dataverse (la que usa **List rows**):* con `sit_Proveedor($select=sit_nombre)` funciona, y con el nombre de la relación (`sit_proveedor_sit_solicituddecompra_Proveedor`) da error de propiedad no encontrada. Las cifras Q1 a Q6 (94, 2, 20, tres de 18.500 y 22) y la FetchXML (22 filas, columna `prv.sit_nombre`) salieron exactamente como en el lab.
 
 > **Por qué filtrar en Dataverse y no en el flujo:** `Filter rows` se evalúa en el **servidor**: lo que no coincide **nunca llega** al flujo. Traer 146 filas y filtrarlas con **Filter array** funciona, pero gasta tiempo, llamadas y memoria, y con tablas grandes **topa con el límite de filas** de la acción (Ejercicio 7). Regla: **filtra en el origen, selecciona solo las columnas necesarias y ordena donde puedas**.
 
@@ -331,7 +333,7 @@ Vuelve a ejecutar el flujo. El resultado debe ser el **mismo** (146, no 292).
 2. **Esperado:** **22** filas, cada una con el nombre del proveedor en una columna con el alias (`prv.sit_nombre`).
 3. **Compara** esta consulta con la Q6: ¿cuál es más fácil de leer? ¿cuál cambia menos si añades una segunda condición sobre el proveedor? Anótalo.
 
-> **Cuándo FetchXML y cuándo OData:** OData para filtros y orden sencillos; FetchXML para **varias tablas a la vez** o consultas que pegues desde otra herramienta. **Límites (Learn, 2026-11-21):** la paginación automática de la acción **no funciona con FetchXML** (para pasar de 5.000 filas hay que paginar dentro del propio FetchXML) y las consultas de **agregación** (`count`, `sum`) **no se admiten** en **List rows** ([Learn: List rows](https://learn.microsoft.com/power-automate/dataverse/list-rows)). Para sumar, trae las filas y acumula con una variable (Lab 130).
+> **Cuándo FetchXML y cuándo OData:** OData para filtros y orden sencillos; FetchXML para **varias tablas a la vez** o consultas que pegues desde otra herramienta. **Límites (Learn, 2026-11-21):** la paginación automática de la acción **no funciona con FetchXML** (para pasar de 5.000 filas hay que paginar dentro del propio FetchXML) y las consultas de **agregación** (`count`, `sum`) **no se admiten** en **List rows** ([Learn: List rows](https://learn.microsoft.com/power-automate/dataverse/list-rows)). Para sumar, trae las filas y acumula con una variable (Lab 130). (La API web de Dataverse sí devuelve el agregado: una FetchXML con `aggregate="true"` dio 458.365; no lo probé a través del conector, así que sigue valiendo lo que dice Learn.)
 
 ### Validación del Ejercicio 6
 
