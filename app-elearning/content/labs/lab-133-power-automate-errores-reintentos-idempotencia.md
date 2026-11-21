@@ -42,7 +42,7 @@ Hacer que un flujo se comporte bien **cuando algo sale mal**: capturar el error 
 | Antes | En este lab | Se profundiza en |
 |---|---|---|
 | **Scope** y **Configure run after** para el escalado (Lab 131) | **Try / Catch / Finally** completo con el detalle del error | Lab 137 (alertas y operación) |
-| **Resubmit** "no es gratis" (Lab 128) | Diseño idempotente | Lab 136 (ALM) |
+| **Resubmit** "no es gratis" (Lab 128) | Diseño idempotente | Labs 135 y 139 (altas y facturas sin duplicados) |
 | Upsert con clave alternativa (Lab 132) | La clave como defensa contra duplicados | — |
 
 > **Fuente del esqueleto:** la guía oficial de manejo de errores de Power Automate ([Learn: errores en flujos](https://learn.microsoft.com/power-automate/guidance/coding-guidelines/error-handling)). El caso, las pruebas y el texto son propios del curso.
@@ -51,7 +51,7 @@ Hacer que un flujo se comporte bien **cuando algo sale mal**: capturar el error 
 
 | Ejercicio | Tiempo estimado |
 |---|---|
-| Ejercicio 1 — Tres formas de fallar | 35 min |
+| Ejercicio 1 — Cuatro formas de fallar | 35 min |
 | Ejercicio 2 — Try / Catch / Finally | 50 min |
 | Ejercicio 3 — Reintentos medidos | 35 min |
 | Ejercicio 4 — Plazos | 20 min |
@@ -274,7 +274,7 @@ Pasado el minuto la acción termina por **tiempo agotado** (`ActionTimedOut`) en
 
 4. En el mismo bucle, añade una variable `Contador` (**Integer**, al nivel principal) y un **Increment variable** dentro. Con concurrencia en grado 5, observa el valor final.
 
-**Resultado esperado:** puede que **no** sea 10 (o que lo sea hoy y no mañana). Learn desaconseja tocar variables compartidas dentro de bucles concurrentes: el resultado depende de qué iteración llega primero. **Anótalo como regla:** en paralelo, cada iteración trabaja con **sus** datos, no con un acumulador común.
+**Resultado esperado:** puede que **no** sea 10 (o que lo sea hoy y no mañana). Learn desaconseja tocar variables compartidas dentro de bucles concurrentes: el resultado depende de qué iteración llega primero. **Anótalo como regla:** en paralelo, cada iteración trabaja con **sus** datos, no con un acumulador común. (Matiz: Learn exceptúa **Increment variable** y **Decrement variable** de este riesgo, no **Set variable**; en una prueba real con 40 elementos el total salió correcto aun así. Es un riesgo que no siempre se ve, y por eso se evita.)
 
 ### Tarea 5.3 — Concurrencia en el desencadenador
 
@@ -425,7 +425,7 @@ En el **segundo** reenvío, **ningún** correo nuevo: el flujo **relee** la fila
 
 ## Limpieza del laboratorio
 
-Conserva `SC - Laboratorio de errores` (el Lab 137 lo usa para practicar alertas), pero **apágalo**. Comprueba que borraste `SC - Concurrencia (disparador)` y que `SC - Aprobar solicitud (cadena)` está **encendido** y **sin límite de concurrencia**. Deja la columna `Resultado notificado`: el Lab 139 la reutiliza.
+Conserva `SC - Laboratorio de errores` (el Lab 137 lo usa para practicar alertas), pero **apágalo**. Comprueba que borraste `SC - Concurrencia (disparador)` y que `SC - Aprobar solicitud (cadena)` está **encendido** y **sin límite de concurrencia**. Deja la columna `Resultado notificado`: te sirve de ejemplo de marca de idempotencia.
 
 ## Siguiente laboratorio recomendado
 

@@ -450,6 +450,114 @@ expected.lab135 = {
   importeAPagarSinRevision: round2(resultadosFacturas.filter((r) => r.resultado === "Conciliada").reduce((t, r) => t + r.importeFactura, 0)),
 };
 
+// ---------- Datos del Lab 138 (P5): un volumen para medir rendimiento ----------
+const filasVolumen = [];
+for (let i = 1; i <= 2000; i += 1) {
+  const categoria = categorias[i % categorias.length];
+  const importe = round2(20 + ((i * 7919) % 9800) + (i % 100) / 100);
+  filasVolumen.push({
+    id: `VOL-${String(i).padStart(5, "0")}`,
+    fecha: `2026-${String((i % 10) + 1).padStart(2, "0")}-${String((i % 28) + 1).padStart(2, "0")}`,
+    categoria,
+    importe,
+    estado: i % 17 === 0 ? "Rechazada" : i % 23 === 0 ? "Pendiente" : "Aprobada",
+  });
+}
+const volHeaders = ["SolicitudID", "Fecha", "Categoria", "Importe", "Estado"];
+const volRows = filasVolumen.map((f) => [f.id, f.fecha, f.categoria, f.importe, f.estado]);
+write("volumen/solicitudes-volumen.csv", csv(volHeaders, volRows));
+write("volumen/solicitudes-volumen.xlsx", buildXlsx([{ name: "Volumen", table: "Volumen", rows: [volHeaders, ...volRows] }]));
+const aprobadasVol = filasVolumen.filter((f) => f.estado === "Aprobada");
+expected.lab138 = {
+  filas: filasVolumen.length,
+  porEstado: cuenta(filasVolumen, (f) => f.estado),
+  importeTotal: suma(filasVolumen),
+  importeAprobado: suma(aprobadasVol),
+  importeAprobadoPorCategoria: sumaPor(aprobadasVol, (f) => f.categoria),
+  aprobadasMayoresDe5000: aprobadasVol.filter((f) => f.importe > 5000).length,
+  paginasDe100: Math.ceil(filasVolumen.length / 100),
+  primeras500: {
+    aprobadas: filasVolumen.slice(0, 500).filter((f) => f.estado === "Aprobada").length,
+    importeAprobado: suma(filasVolumen.slice(0, 500).filter((f) => f.estado === "Aprobada")),
+    aprobadasMayoresDe5000: filasVolumen.slice(0, 500).filter((f) => f.estado === "Aprobada" && f.importe > 5000).length,
+  },
+};
+
+// ---------- Datos del Lab 139 (P5): reto Pro, alta de proveedores con validación y documentos ----------
+const reglasAlta = {
+  version: "2026-01",
+  descripcion: "Reglas de alta de proveedores de SIT (ficticias, generadas para el curso PlanEstudio).",
+  fechaDeReferencia: "2026-11-01",
+  camposObligatorios: ["razonSocial", "nit", "correo", "pais", "categoria", "condicionPagoDias"],
+  formatoNit: "^(CO|MX|PE|CL)-[0-9]{9}$",
+  categoriasValidas: categorias,
+  condicionesDePagoValidas: [30, 45, 60],
+  dominiosDeCorreoNoPermitidos: ["gmail.com", "hotmail.com", "outlook.com", "yahoo.com"],
+  documentosRequeridos: ["Certificado tributario", "Certificado bancario"],
+  regla: "Un documento sirve si su 'vigenciaHasta' es igual o posterior a la fecha de referencia.",
+  resultados: {
+    Rechazada: "Falta un campo obligatorio, el NIT no cumple el formato o ya existe, el correo es de un dominio no permitido, la categoría o la condición de pago no son válidas, o falta un documento requerido",
+    "Requiere revisión": "Todo es válido pero algún documento requerido está vencido, o la condición de pago es de 60 días en la categoría Tecnología",
+    "Aprobada automática": "Todo es válido y los documentos requeridos están vigentes",
+  },
+  ordenDeEvaluacion: ["Campos obligatorios", "Formato de NIT", "NIT existente", "Dominio de correo", "Categoría", "Condición de pago", "Documentos faltantes", "Documentos vencidos", "Regla de Tecnología a 60 días"],
+};
+write("altas/reglas-alta.json", JSON.stringify(reglasAlta, null, 2) + "\n");
+const docOk = (tipo, hasta = "2027-06-30") => ({ tipo, nombre: `${tipo.toLowerCase().replace(/ /g, "-")}.pdf`, vigenciaHasta: hasta });
+const bien = (id, extra = {}) => ({
+  altaId: id,
+  razonSocial: "Proveedor de prueba S.A.S.",
+  nit: "CO-810000000",
+  correo: "facturacion@proveedor-de-prueba.example.com",
+  pais: "Colombia",
+  categoria: "Servicios profesionales",
+  condicionPagoDias: 30,
+  documentos: [docOk("Certificado tributario"), docOk("Certificado bancario")],
+  ...extra,
+});
+const nitActual = new Set(proveedoresActualizados.map((p) => p.nit));
+const solicitudesAlta = [
+  bien("ALTA-01", { razonSocial: "Cálculo Andino S.A.S.", nit: "CO-810000001", correo: "contabilidad@calculo-andino.example.com", categoria: "Tecnología" }),
+  bien("ALTA-02", { razonSocial: "Mobiliario del Sur S.A.", nit: "PE-820000002", pais: "Perú", categoria: "Mobiliario", condicionPagoDias: 45 }),
+  bien("ALTA-03", { razonSocial: "Insumos Norte S.A. de C.V.", nit: "MX-830000003", pais: "México", categoria: "Papelería", condicionPagoDias: 60 }),
+  bien("ALTA-04", { razonSocial: "Formación Cumbre S.A.", nit: "CL-840000004", pais: "Chile", categoria: "Capacitación", documentos: [docOk("Certificado tributario"), docOk("Certificado bancario", "2026-09-30")] }),
+  bien("ALTA-05", { razonSocial: "Redes Pacífico S.A.S.", nit: "CO-850000005", categoria: "Tecnología", condicionPagoDias: 60 }),
+  bien("ALTA-06", { razonSocial: "Viajes Meridiano S.A.", nit: "CO-860000006", categoria: "Viajes" }),
+  bien("ALTA-07", { razonSocial: "Consultores Sin NIT", nit: "" }),
+  bien("ALTA-08", { razonSocial: "Legal Aurora S.A.S.", nit: "CO-87000009" }),
+  bien("ALTA-09", { razonSocial: "Soporte Integral Delta S.A.S.", nit: "CO-901234567" }),
+  bien("ALTA-10", { razonSocial: "Auditoría Faro S.A.S.", nit: "CO-880000010", correo: "gerencia@gmail.com" }),
+  bien("ALTA-11", { razonSocial: "Equipos Tundra S.A.", nit: "CL-890000011", pais: "Chile", categoria: "Electrodomésticos" }),
+  bien("ALTA-12", { razonSocial: "Papelería Lince S.A.S.", nit: "CO-900000012", categoria: "Papelería", condicionPagoDias: 90 }),
+  bien("ALTA-13", { razonSocial: "Capacitación Brújula S.A.S.", nit: "CO-910000013", categoria: "Capacitación", documentos: [docOk("Certificado tributario")] }),
+  bien("ALTA-14", { razonSocial: "Hoteles Ribera S.A.", nit: "PE-920000014", pais: "Perú", categoria: "Viajes", documentos: [docOk("Certificado tributario", "2026-10-15"), docOk("Certificado bancario")] }),
+];
+const evaluarAlta = (a) => {
+  const re = new RegExp(reglasAlta.formatoNit);
+  if (reglasAlta.camposObligatorios.some((c) => a[c] === undefined || a[c] === null || a[c] === "")) return ["Rechazada", "Falta un campo obligatorio"];
+  if (!re.test(a.nit)) return ["Rechazada", "NIT con formato inválido"];
+  if (nitActual.has(a.nit)) return ["Rechazada", "NIT ya existe"];
+  if (reglasAlta.dominiosDeCorreoNoPermitidos.includes(a.correo.split("@")[1])) return ["Rechazada", "Correo de dominio no permitido"];
+  if (!reglasAlta.categoriasValidas.includes(a.categoria)) return ["Rechazada", "Categoría no válida"];
+  if (!reglasAlta.condicionesDePagoValidas.includes(a.condicionPagoDias)) return ["Rechazada", "Condición de pago no válida"];
+  const tipos = new Map(a.documentos.map((d) => [d.tipo, d]));
+  if (reglasAlta.documentosRequeridos.some((t) => !tipos.has(t))) return ["Rechazada", "Falta un documento requerido"];
+  if (reglasAlta.documentosRequeridos.some((t) => tipos.get(t).vigenciaHasta < reglasAlta.fechaDeReferencia)) return ["Requiere revisión", "Documento vencido"];
+  if (a.categoria === "Tecnología" && a.condicionPagoDias === 60) return ["Requiere revisión", "Tecnología a 60 días"];
+  return ["Aprobada automática", "Cumple"];
+};
+write("altas/solicitudes-alta.json", JSON.stringify(solicitudesAlta, null, 2) + "\n");
+const evaluadasAlta = solicitudesAlta.map((a) => {
+  const [resultado, motivo] = evaluarAlta(a);
+  return { altaId: a.altaId, resultado, motivo };
+});
+expected.lab139 = {
+  solicitudes: solicitudesAlta.length,
+  resultadosPorTipo: cuenta(evaluadasAlta, (e) => e.resultado),
+  detalle: evaluadasAlta,
+  fechaDeReferencia: reglasAlta.fechaDeReferencia,
+};
+
 write("expected/cifras-esperadas.json", JSON.stringify(expected, null, 2) + "\n");
 
 write(
@@ -470,6 +578,8 @@ Datos **ficticios** de Servicios Integrados Tecnológicos S.A. (SIT), generados 
 | \`webhook/ejemplo-factura.json\` | Cuerpo de ejemplo para el desencadenador HTTP | Lab 134 |
 | \`facturas/FAC-2026-NNNN.json\`, \`facturas/lote-facturas.json\` | ${facturas.length} facturas de proveedores (y un reenvío de la 3) para conciliar contra las solicitudes aprobadas | Lab 135 |
 | \`reglas-conciliacion.json\` | Tolerancia del 2 % y orden de evaluación de la conciliación | Lab 135 |
+| \`volumen/solicitudes-volumen.csv\` / \`.xlsx\` | 2.000 solicitudes para medir rendimiento | Lab 138 |
+| \`altas/solicitudes-alta.json\`, \`altas/reglas-alta.json\` | 14 solicitudes de alta de proveedores y sus reglas | Lab 139 (reto) |
 | \`expected/cifras-esperadas.json\` | Cifras para comprobar tu trabajo | — |
 
 El catálogo también está publicado por la app del curso en \`${PUBLIC_URL}/catalogo/pagina-1.json\`.

@@ -460,4 +460,4 @@ Conserva `SC - Sincronizar catálogo` y `SC - Recibir factura (webhook)`. **Apag
 
 ## Siguiente laboratorio recomendado
 
-**Lab 135 — Documentos y conciliación** (en construcción): facturas en JSON y PDF, conciliación contra la orden con tolerancias y AI Builder como variante opcional.
+**Lab 135 — Documentos y conciliación**: facturas en JSON por correo o entrada de texto, conciliación contra la solicitud con tolerancias y AI Builder como variante en papel.

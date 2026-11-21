@@ -5,6 +5,8 @@
   "company": "Servicios Integrados Tecnológicos S.A.",
   "files": [
     "README.md",
+    "altas/reglas-alta.json",
+    "altas/solicitudes-alta.json",
     "catalogo-v2/pagina-1.json",
     "catalogo-v2/pagina-2.json",
     "catalogo-v2/pagina-3.json",
@@ -34,6 +36,8 @@
     "proveedores.xlsx",
     "reglas-conciliacion.json",
     "solicitudes-compra.xlsx",
+    "volumen/solicitudes-volumen.csv",
+    "volumen/solicitudes-volumen.xlsx",
     "webhook/ejemplo-factura.json"
   ],
   "bundle": "sit-compras.zip"

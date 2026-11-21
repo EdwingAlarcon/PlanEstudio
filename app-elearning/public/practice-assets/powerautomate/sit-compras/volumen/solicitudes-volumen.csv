@@ -1,0 +1,2001 @@
+﻿SolicitudID,Fecha,Categoria,Importe,Estado
+VOL-00001,2026-02-02,Mobiliario,7939.01,Aprobada
+VOL-00002,2026-03-03,Servicios profesionales,6058.02,Aprobada
+VOL-00003,2026-04-04,Capacitación,4177.03,Aprobada
+VOL-00004,2026-05-05,Viajes,2296.04,Aprobada
+VOL-00005,2026-06-06,Papelería,415.05,Aprobada
+VOL-00006,2026-07-07,Tecnología,8334.06,Aprobada
+VOL-00007,2026-08-08,Mobiliario,6453.07,Aprobada
+VOL-00008,2026-09-09,Servicios profesionales,4572.08,Aprobada
+VOL-00009,2026-10-10,Capacitación,2691.09,Aprobada
+VOL-00010,2026-01-11,Viajes,810.1,Aprobada
+VOL-00011,2026-02-12,Papelería,8729.11,Aprobada
+VOL-00012,2026-03-13,Tecnología,6848.12,Aprobada
+VOL-00013,2026-04-14,Mobiliario,4967.13,Aprobada
+VOL-00014,2026-05-15,Servicios profesionales,3086.14,Aprobada
+VOL-00015,2026-06-16,Capacitación,1205.15,Aprobada
+VOL-00016,2026-07-17,Viajes,9124.16,Aprobada
+VOL-00017,2026-08-18,Papelería,7243.17,Rechazada
+VOL-00018,2026-09-19,Tecnología,5362.18,Aprobada
+VOL-00019,2026-10-20,Mobiliario,3481.19,Aprobada
+VOL-00020,2026-01-21,Servicios profesionales,1600.2,Aprobada
+VOL-00021,2026-02-22,Capacitación,9519.21,Aprobada
+VOL-00022,2026-03-23,Viajes,7638.22,Aprobada
+VOL-00023,2026-04-24,Papelería,5757.23,Pendiente
+VOL-00024,2026-05-25,Tecnología,3876.24,Aprobada
+VOL-00025,2026-06-26,Mobiliario,1995.25,Aprobada
+VOL-00026,2026-07-27,Servicios profesionales,114.26,Aprobada
+VOL-00027,2026-08-28,Capacitación,8033.27,Aprobada
+VOL-00028,2026-09-01,Viajes,6152.28,Aprobada
+VOL-00029,2026-10-02,Papelería,4271.29,Aprobada
+VOL-00030,2026-01-03,Tecnología,2390.3,Aprobada
+VOL-00031,2026-02-04,Mobiliario,509.31,Aprobada
+VOL-00032,2026-03-05,Servicios profesionales,8428.32,Aprobada
+VOL-00033,2026-04-06,Capacitación,6547.33,Aprobada
+VOL-00034,2026-05-07,Viajes,4666.34,Rechazada
+VOL-00035,2026-06-08,Papelería,2785.35,Aprobada
+VOL-00036,2026-07-09,Tecnología,904.36,Aprobada
+VOL-00037,2026-08-10,Mobiliario,8823.37,Aprobada
+VOL-00038,2026-09-11,Servicios profesionales,6942.38,Aprobada
+VOL-00039,2026-10-12,Capacitación,5061.39,Aprobada
+VOL-00040,2026-01-13,Viajes,3180.4,Aprobada
+VOL-00041,2026-02-14,Papelería,1299.41,Aprobada
+VOL-00042,2026-03-15,Tecnología,9218.42,Aprobada
+VOL-00043,2026-04-16,Mobiliario,7337.43,Aprobada
+VOL-00044,2026-05-17,Servicios profesionales,5456.44,Aprobada
+VOL-00045,2026-06-18,Capacitación,3575.45,Aprobada
+VOL-00046,2026-07-19,Viajes,1694.46,Pendiente
+VOL-00047,2026-08-20,Papelería,9613.47,Aprobada
+VOL-00048,2026-09-21,Tecnología,7732.48,Aprobada
+VOL-00049,2026-10-22,Mobiliario,5851.49,Aprobada
+VOL-00050,2026-01-23,Servicios profesionales,3970.5,Aprobada
+VOL-00051,2026-02-24,Capacitación,2089.51,Rechazada
+VOL-00052,2026-03-25,Viajes,208.52,Aprobada
+VOL-00053,2026-04-26,Papelería,8127.53,Aprobada
+VOL-00054,2026-05-27,Tecnología,6246.54,Aprobada
+VOL-00055,2026-06-28,Mobiliario,4365.55,Aprobada
+VOL-00056,2026-07-01,Servicios profesionales,2484.56,Aprobada
+VOL-00057,2026-08-02,Capacitación,603.57,Aprobada
+VOL-00058,2026-09-03,Viajes,8522.58,Aprobada
+VOL-00059,2026-10-04,Papelería,6641.59,Aprobada
+VOL-00060,2026-01-05,Tecnología,4760.6,Aprobada
+VOL-00061,2026-02-06,Mobiliario,2879.61,Aprobada
+VOL-00062,2026-03-07,Servicios profesionales,998.62,Aprobada
+VOL-00063,2026-04-08,Capacitación,8917.63,Aprobada
+VOL-00064,2026-05-09,Viajes,7036.64,Aprobada
+VOL-00065,2026-06-10,Papelería,5155.65,Aprobada
+VOL-00066,2026-07-11,Tecnología,3274.66,Aprobada
+VOL-00067,2026-08-12,Mobiliario,1393.67,Aprobada
+VOL-00068,2026-09-13,Servicios profesionales,9312.68,Rechazada
+VOL-00069,2026-10-14,Capacitación,7431.69,Pendiente
+VOL-00070,2026-01-15,Viajes,5550.7,Aprobada
+VOL-00071,2026-02-16,Papelería,3669.71,Aprobada
+VOL-00072,2026-03-17,Tecnología,1788.72,Aprobada
+VOL-00073,2026-04-18,Mobiliario,9707.73,Aprobada
+VOL-00074,2026-05-19,Servicios profesionales,7826.74,Aprobada
+VOL-00075,2026-06-20,Capacitación,5945.75,Aprobada
+VOL-00076,2026-07-21,Viajes,4064.76,Aprobada
+VOL-00077,2026-08-22,Papelería,2183.77,Aprobada
+VOL-00078,2026-09-23,Tecnología,302.78,Aprobada
+VOL-00079,2026-10-24,Mobiliario,8221.79,Aprobada
+VOL-00080,2026-01-25,Servicios profesionales,6340.8,Aprobada
+VOL-00081,2026-02-26,Capacitación,4459.81,Aprobada
+VOL-00082,2026-03-27,Viajes,2578.82,Aprobada
+VOL-00083,2026-04-28,Papelería,697.83,Aprobada
+VOL-00084,2026-05-01,Tecnología,8616.84,Aprobada
+VOL-00085,2026-06-02,Mobiliario,6735.85,Rechazada
+VOL-00086,2026-07-03,Servicios profesionales,4854.86,Aprobada
+VOL-00087,2026-08-04,Capacitación,2973.87,Aprobada
+VOL-00088,2026-09-05,Viajes,1092.88,Aprobada
+VOL-00089,2026-10-06,Papelería,9011.89,Aprobada
+VOL-00090,2026-01-07,Tecnología,7130.9,Aprobada
+VOL-00091,2026-02-08,Mobiliario,5249.91,Aprobada
+VOL-00092,2026-03-09,Servicios profesionales,3368.92,Pendiente
+VOL-00093,2026-04-10,Capacitación,1487.93,Aprobada
+VOL-00094,2026-05-11,Viajes,9406.94,Aprobada
+VOL-00095,2026-06-12,Papelería,7525.95,Aprobada
+VOL-00096,2026-07-13,Tecnología,5644.96,Aprobada
+VOL-00097,2026-08-14,Mobiliario,3763.97,Aprobada
+VOL-00098,2026-09-15,Servicios profesionales,1882.98,Aprobada
+VOL-00099,2026-10-16,Capacitación,9801.99,Aprobada
+VOL-00100,2026-01-17,Viajes,7920,Aprobada
+VOL-00101,2026-02-18,Papelería,6039.01,Aprobada
+VOL-00102,2026-03-19,Tecnología,4158.02,Rechazada
+VOL-00103,2026-04-20,Mobiliario,2277.03,Aprobada
+VOL-00104,2026-05-21,Servicios profesionales,396.04,Aprobada
+VOL-00105,2026-06-22,Capacitación,8315.05,Aprobada
+VOL-00106,2026-07-23,Viajes,6434.06,Aprobada
+VOL-00107,2026-08-24,Papelería,4553.07,Aprobada
+VOL-00108,2026-09-25,Tecnología,2672.08,Aprobada
+VOL-00109,2026-10-26,Mobiliario,791.09,Aprobada
+VOL-00110,2026-01-27,Servicios profesionales,8710.1,Aprobada
+VOL-00111,2026-02-28,Capacitación,6829.11,Aprobada
+VOL-00112,2026-03-01,Viajes,4948.12,Aprobada
+VOL-00113,2026-04-02,Papelería,3067.13,Aprobada
+VOL-00114,2026-05-03,Tecnología,1186.14,Aprobada
+VOL-00115,2026-06-04,Mobiliario,9105.15,Pendiente
+VOL-00116,2026-07-05,Servicios profesionales,7224.16,Aprobada
+VOL-00117,2026-08-06,Capacitación,5343.17,Aprobada
+VOL-00118,2026-09-07,Viajes,3462.18,Aprobada
+VOL-00119,2026-10-08,Papelería,1581.19,Rechazada
+VOL-00120,2026-01-09,Tecnología,9500.2,Aprobada
+VOL-00121,2026-02-10,Mobiliario,7619.21,Aprobada
+VOL-00122,2026-03-11,Servicios profesionales,5738.22,Aprobada
+VOL-00123,2026-04-12,Capacitación,3857.23,Aprobada
+VOL-00124,2026-05-13,Viajes,1976.24,Aprobada
+VOL-00125,2026-06-14,Papelería,95.25,Aprobada
+VOL-00126,2026-07-15,Tecnología,8014.26,Aprobada
+VOL-00127,2026-08-16,Mobiliario,6133.27,Aprobada
+VOL-00128,2026-09-17,Servicios profesionales,4252.28,Aprobada
+VOL-00129,2026-10-18,Capacitación,2371.29,Aprobada
+VOL-00130,2026-01-19,Viajes,490.3,Aprobada
+VOL-00131,2026-02-20,Papelería,8409.31,Aprobada
+VOL-00132,2026-03-21,Tecnología,6528.32,Aprobada
+VOL-00133,2026-04-22,Mobiliario,4647.33,Aprobada
+VOL-00134,2026-05-23,Servicios profesionales,2766.34,Aprobada
+VOL-00135,2026-06-24,Capacitación,885.35,Aprobada
+VOL-00136,2026-07-25,Viajes,8804.36,Rechazada
+VOL-00137,2026-08-26,Papelería,6923.37,Aprobada
+VOL-00138,2026-09-27,Tecnología,5042.38,Pendiente
+VOL-00139,2026-10-28,Mobiliario,3161.39,Aprobada
+VOL-00140,2026-01-01,Servicios profesionales,1280.4,Aprobada
+VOL-00141,2026-02-02,Capacitación,9199.41,Aprobada
+VOL-00142,2026-03-03,Viajes,7318.42,Aprobada
+VOL-00143,2026-04-04,Papelería,5437.43,Aprobada
+VOL-00144,2026-05-05,Tecnología,3556.44,Aprobada
+VOL-00145,2026-06-06,Mobiliario,1675.45,Aprobada
+VOL-00146,2026-07-07,Servicios profesionales,9594.46,Aprobada
+VOL-00147,2026-08-08,Capacitación,7713.47,Aprobada
+VOL-00148,2026-09-09,Viajes,5832.48,Aprobada
+VOL-00149,2026-10-10,Papelería,3951.49,Aprobada
+VOL-00150,2026-01-11,Tecnología,2070.5,Aprobada
+VOL-00151,2026-02-12,Mobiliario,189.51,Aprobada
+VOL-00152,2026-03-13,Servicios profesionales,8108.52,Aprobada
+VOL-00153,2026-04-14,Capacitación,6227.53,Rechazada
+VOL-00154,2026-05-15,Viajes,4346.54,Aprobada
+VOL-00155,2026-06-16,Papelería,2465.55,Aprobada
+VOL-00156,2026-07-17,Tecnología,584.56,Aprobada
+VOL-00157,2026-08-18,Mobiliario,8503.57,Aprobada
+VOL-00158,2026-09-19,Servicios profesionales,6622.58,Aprobada
+VOL-00159,2026-10-20,Capacitación,4741.59,Aprobada
+VOL-00160,2026-01-21,Viajes,2860.6,Aprobada
+VOL-00161,2026-02-22,Papelería,979.61,Pendiente
+VOL-00162,2026-03-23,Tecnología,8898.62,Aprobada
+VOL-00163,2026-04-24,Mobiliario,7017.63,Aprobada
+VOL-00164,2026-05-25,Servicios profesionales,5136.64,Aprobada
+VOL-00165,2026-06-26,Capacitación,3255.65,Aprobada
+VOL-00166,2026-07-27,Viajes,1374.66,Aprobada
+VOL-00167,2026-08-28,Papelería,9293.67,Aprobada
+VOL-00168,2026-09-01,Tecnología,7412.68,Aprobada
+VOL-00169,2026-10-02,Mobiliario,5531.69,Aprobada
+VOL-00170,2026-01-03,Servicios profesionales,3650.7,Rechazada
+VOL-00171,2026-02-04,Capacitación,1769.71,Aprobada
+VOL-00172,2026-03-05,Viajes,9688.72,Aprobada
+VOL-00173,2026-04-06,Papelería,7807.73,Aprobada
+VOL-00174,2026-05-07,Tecnología,5926.74,Aprobada
+VOL-00175,2026-06-08,Mobiliario,4045.75,Aprobada
+VOL-00176,2026-07-09,Servicios profesionales,2164.76,Aprobada
+VOL-00177,2026-08-10,Capacitación,283.77,Aprobada
+VOL-00178,2026-09-11,Viajes,8202.78,Aprobada
+VOL-00179,2026-10-12,Papelería,6321.79,Aprobada
+VOL-00180,2026-01-13,Tecnología,4440.8,Aprobada
+VOL-00181,2026-02-14,Mobiliario,2559.81,Aprobada
+VOL-00182,2026-03-15,Servicios profesionales,678.82,Aprobada
+VOL-00183,2026-04-16,Capacitación,8597.83,Aprobada
+VOL-00184,2026-05-17,Viajes,6716.84,Pendiente
+VOL-00185,2026-06-18,Papelería,4835.85,Aprobada
+VOL-00186,2026-07-19,Tecnología,2954.86,Aprobada
+VOL-00187,2026-08-20,Mobiliario,1073.87,Rechazada
+VOL-00188,2026-09-21,Servicios profesionales,8992.88,Aprobada
+VOL-00189,2026-10-22,Capacitación,7111.89,Aprobada
+VOL-00190,2026-01-23,Viajes,5230.9,Aprobada
+VOL-00191,2026-02-24,Papelería,3349.91,Aprobada
+VOL-00192,2026-03-25,Tecnología,1468.92,Aprobada
+VOL-00193,2026-04-26,Mobiliario,9387.93,Aprobada
+VOL-00194,2026-05-27,Servicios profesionales,7506.94,Aprobada
+VOL-00195,2026-06-28,Capacitación,5625.95,Aprobada
+VOL-00196,2026-07-01,Viajes,3744.96,Aprobada
+VOL-00197,2026-08-02,Papelería,1863.97,Aprobada
+VOL-00198,2026-09-03,Tecnología,9782.98,Aprobada
+VOL-00199,2026-10-04,Mobiliario,7901.99,Aprobada
+VOL-00200,2026-01-05,Servicios profesionales,6020,Aprobada
+VOL-00201,2026-02-06,Capacitación,4139.01,Aprobada
+VOL-00202,2026-03-07,Viajes,2258.02,Aprobada
+VOL-00203,2026-04-08,Papelería,377.03,Aprobada
+VOL-00204,2026-05-09,Tecnología,8296.04,Rechazada
+VOL-00205,2026-06-10,Mobiliario,6415.05,Aprobada
+VOL-00206,2026-07-11,Servicios profesionales,4534.06,Aprobada
+VOL-00207,2026-08-12,Capacitación,2653.07,Pendiente
+VOL-00208,2026-09-13,Viajes,772.08,Aprobada
+VOL-00209,2026-10-14,Papelería,8691.09,Aprobada
+VOL-00210,2026-01-15,Tecnología,6810.1,Aprobada
+VOL-00211,2026-02-16,Mobiliario,4929.11,Aprobada
+VOL-00212,2026-03-17,Servicios profesionales,3048.12,Aprobada
+VOL-00213,2026-04-18,Capacitación,1167.13,Aprobada
+VOL-00214,2026-05-19,Viajes,9086.14,Aprobada
+VOL-00215,2026-06-20,Papelería,7205.15,Aprobada
+VOL-00216,2026-07-21,Tecnología,5324.16,Aprobada
+VOL-00217,2026-08-22,Mobiliario,3443.17,Aprobada
+VOL-00218,2026-09-23,Servicios profesionales,1562.18,Aprobada
+VOL-00219,2026-10-24,Capacitación,9481.19,Aprobada
+VOL-00220,2026-01-25,Viajes,7600.2,Aprobada
+VOL-00221,2026-02-26,Papelería,5719.21,Rechazada
+VOL-00222,2026-03-27,Tecnología,3838.22,Aprobada
+VOL-00223,2026-04-28,Mobiliario,1957.23,Aprobada
+VOL-00224,2026-05-01,Servicios profesionales,76.24,Aprobada
+VOL-00225,2026-06-02,Capacitación,7995.25,Aprobada
+VOL-00226,2026-07-03,Viajes,6114.26,Aprobada
+VOL-00227,2026-08-04,Papelería,4233.27,Aprobada
+VOL-00228,2026-09-05,Tecnología,2352.28,Aprobada
+VOL-00229,2026-10-06,Mobiliario,471.29,Aprobada
+VOL-00230,2026-01-07,Servicios profesionales,8390.3,Pendiente
+VOL-00231,2026-02-08,Capacitación,6509.31,Aprobada
+VOL-00232,2026-03-09,Viajes,4628.32,Aprobada
+VOL-00233,2026-04-10,Papelería,2747.33,Aprobada
+VOL-00234,2026-05-11,Tecnología,866.34,Aprobada
+VOL-00235,2026-06-12,Mobiliario,8785.35,Aprobada
+VOL-00236,2026-07-13,Servicios profesionales,6904.36,Aprobada
+VOL-00237,2026-08-14,Capacitación,5023.37,Aprobada
+VOL-00238,2026-09-15,Viajes,3142.38,Rechazada
+VOL-00239,2026-10-16,Papelería,1261.39,Aprobada
+VOL-00240,2026-01-17,Tecnología,9180.4,Aprobada
+VOL-00241,2026-02-18,Mobiliario,7299.41,Aprobada
+VOL-00242,2026-03-19,Servicios profesionales,5418.42,Aprobada
+VOL-00243,2026-04-20,Capacitación,3537.43,Aprobada
+VOL-00244,2026-05-21,Viajes,1656.44,Aprobada
+VOL-00245,2026-06-22,Papelería,9575.45,Aprobada
+VOL-00246,2026-07-23,Tecnología,7694.46,Aprobada
+VOL-00247,2026-08-24,Mobiliario,5813.47,Aprobada
+VOL-00248,2026-09-25,Servicios profesionales,3932.48,Aprobada
+VOL-00249,2026-10-26,Capacitación,2051.49,Aprobada
+VOL-00250,2026-01-27,Viajes,170.5,Aprobada
+VOL-00251,2026-02-28,Papelería,8089.51,Aprobada
+VOL-00252,2026-03-01,Tecnología,6208.52,Aprobada
+VOL-00253,2026-04-02,Mobiliario,4327.53,Pendiente
+VOL-00254,2026-05-03,Servicios profesionales,2446.54,Aprobada
+VOL-00255,2026-06-04,Capacitación,565.55,Rechazada
+VOL-00256,2026-07-05,Viajes,8484.56,Aprobada
+VOL-00257,2026-08-06,Papelería,6603.57,Aprobada
+VOL-00258,2026-09-07,Tecnología,4722.58,Aprobada
+VOL-00259,2026-10-08,Mobiliario,2841.59,Aprobada
+VOL-00260,2026-01-09,Servicios profesionales,960.6,Aprobada
+VOL-00261,2026-02-10,Capacitación,8879.61,Aprobada
+VOL-00262,2026-03-11,Viajes,6998.62,Aprobada
+VOL-00263,2026-04-12,Papelería,5117.63,Aprobada
+VOL-00264,2026-05-13,Tecnología,3236.64,Aprobada
+VOL-00265,2026-06-14,Mobiliario,1355.65,Aprobada
+VOL-00266,2026-07-15,Servicios profesionales,9274.66,Aprobada
+VOL-00267,2026-08-16,Capacitación,7393.67,Aprobada
+VOL-00268,2026-09-17,Viajes,5512.68,Aprobada
+VOL-00269,2026-10-18,Papelería,3631.69,Aprobada
+VOL-00270,2026-01-19,Tecnología,1750.7,Aprobada
+VOL-00271,2026-02-20,Mobiliario,9669.71,Aprobada
+VOL-00272,2026-03-21,Servicios profesionales,7788.72,Rechazada
+VOL-00273,2026-04-22,Capacitación,5907.73,Aprobada
+VOL-00274,2026-05-23,Viajes,4026.74,Aprobada
+VOL-00275,2026-06-24,Papelería,2145.75,Aprobada
+VOL-00276,2026-07-25,Tecnología,264.76,Pendiente
+VOL-00277,2026-08-26,Mobiliario,8183.77,Aprobada
+VOL-00278,2026-09-27,Servicios profesionales,6302.78,Aprobada
+VOL-00279,2026-10-28,Capacitación,4421.79,Aprobada
+VOL-00280,2026-01-01,Viajes,2540.8,Aprobada
+VOL-00281,2026-02-02,Papelería,659.81,Aprobada
+VOL-00282,2026-03-03,Tecnología,8578.82,Aprobada
+VOL-00283,2026-04-04,Mobiliario,6697.83,Aprobada
+VOL-00284,2026-05-05,Servicios profesionales,4816.84,Aprobada
+VOL-00285,2026-06-06,Capacitación,2935.85,Aprobada
+VOL-00286,2026-07-07,Viajes,1054.86,Aprobada
+VOL-00287,2026-08-08,Papelería,8973.87,Aprobada
+VOL-00288,2026-09-09,Tecnología,7092.88,Aprobada
+VOL-00289,2026-10-10,Mobiliario,5211.89,Rechazada
+VOL-00290,2026-01-11,Servicios profesionales,3330.9,Aprobada
+VOL-00291,2026-02-12,Capacitación,1449.91,Aprobada
+VOL-00292,2026-03-13,Viajes,9368.92,Aprobada
+VOL-00293,2026-04-14,Papelería,7487.93,Aprobada
+VOL-00294,2026-05-15,Tecnología,5606.94,Aprobada
+VOL-00295,2026-06-16,Mobiliario,3725.95,Aprobada
+VOL-00296,2026-07-17,Servicios profesionales,1844.96,Aprobada
+VOL-00297,2026-08-18,Capacitación,9763.97,Aprobada
+VOL-00298,2026-09-19,Viajes,7882.98,Aprobada
+VOL-00299,2026-10-20,Papelería,6001.99,Pendiente
+VOL-00300,2026-01-21,Tecnología,4120,Aprobada
+VOL-00301,2026-02-22,Mobiliario,2239.01,Aprobada
+VOL-00302,2026-03-23,Servicios profesionales,358.02,Aprobada
+VOL-00303,2026-04-24,Capacitación,8277.03,Aprobada
+VOL-00304,2026-05-25,Viajes,6396.04,Aprobada
+VOL-00305,2026-06-26,Papelería,4515.05,Aprobada
+VOL-00306,2026-07-27,Tecnología,2634.06,Rechazada
+VOL-00307,2026-08-28,Mobiliario,753.07,Aprobada
+VOL-00308,2026-09-01,Servicios profesionales,8672.08,Aprobada
+VOL-00309,2026-10-02,Capacitación,6791.09,Aprobada
+VOL-00310,2026-01-03,Viajes,4910.1,Aprobada
+VOL-00311,2026-02-04,Papelería,3029.11,Aprobada
+VOL-00312,2026-03-05,Tecnología,1148.12,Aprobada
+VOL-00313,2026-04-06,Mobiliario,9067.13,Aprobada
+VOL-00314,2026-05-07,Servicios profesionales,7186.14,Aprobada
+VOL-00315,2026-06-08,Capacitación,5305.15,Aprobada
+VOL-00316,2026-07-09,Viajes,3424.16,Aprobada
+VOL-00317,2026-08-10,Papelería,1543.17,Aprobada
+VOL-00318,2026-09-11,Tecnología,9462.18,Aprobada
+VOL-00319,2026-10-12,Mobiliario,7581.19,Aprobada
+VOL-00320,2026-01-13,Servicios profesionales,5700.2,Aprobada
+VOL-00321,2026-02-14,Capacitación,3819.21,Aprobada
+VOL-00322,2026-03-15,Viajes,1938.22,Pendiente
+VOL-00323,2026-04-16,Papelería,57.23,Rechazada
+VOL-00324,2026-05-17,Tecnología,7976.24,Aprobada
+VOL-00325,2026-06-18,Mobiliario,6095.25,Aprobada
+VOL-00326,2026-07-19,Servicios profesionales,4214.26,Aprobada
+VOL-00327,2026-08-20,Capacitación,2333.27,Aprobada
+VOL-00328,2026-09-21,Viajes,452.28,Aprobada
+VOL-00329,2026-10-22,Papelería,8371.29,Aprobada
+VOL-00330,2026-01-23,Tecnología,6490.3,Aprobada
+VOL-00331,2026-02-24,Mobiliario,4609.31,Aprobada
+VOL-00332,2026-03-25,Servicios profesionales,2728.32,Aprobada
+VOL-00333,2026-04-26,Capacitación,847.33,Aprobada
+VOL-00334,2026-05-27,Viajes,8766.34,Aprobada
+VOL-00335,2026-06-28,Papelería,6885.35,Aprobada
+VOL-00336,2026-07-01,Tecnología,5004.36,Aprobada
+VOL-00337,2026-08-02,Mobiliario,3123.37,Aprobada
+VOL-00338,2026-09-03,Servicios profesionales,1242.38,Aprobada
+VOL-00339,2026-10-04,Capacitación,9161.39,Aprobada
+VOL-00340,2026-01-05,Viajes,7280.4,Rechazada
+VOL-00341,2026-02-06,Papelería,5399.41,Aprobada
+VOL-00342,2026-03-07,Tecnología,3518.42,Aprobada
+VOL-00343,2026-04-08,Mobiliario,1637.43,Aprobada
+VOL-00344,2026-05-09,Servicios profesionales,9556.44,Aprobada
+VOL-00345,2026-06-10,Capacitación,7675.45,Pendiente
+VOL-00346,2026-07-11,Viajes,5794.46,Aprobada
+VOL-00347,2026-08-12,Papelería,3913.47,Aprobada
+VOL-00348,2026-09-13,Tecnología,2032.48,Aprobada
+VOL-00349,2026-10-14,Mobiliario,151.49,Aprobada
+VOL-00350,2026-01-15,Servicios profesionales,8070.5,Aprobada
+VOL-00351,2026-02-16,Capacitación,6189.51,Aprobada
+VOL-00352,2026-03-17,Viajes,4308.52,Aprobada
+VOL-00353,2026-04-18,Papelería,2427.53,Aprobada
+VOL-00354,2026-05-19,Tecnología,546.54,Aprobada
+VOL-00355,2026-06-20,Mobiliario,8465.55,Aprobada
+VOL-00356,2026-07-21,Servicios profesionales,6584.56,Aprobada
+VOL-00357,2026-08-22,Capacitación,4703.57,Rechazada
+VOL-00358,2026-09-23,Viajes,2822.58,Aprobada
+VOL-00359,2026-10-24,Papelería,941.59,Aprobada
+VOL-00360,2026-01-25,Tecnología,8860.6,Aprobada
+VOL-00361,2026-02-26,Mobiliario,6979.61,Aprobada
+VOL-00362,2026-03-27,Servicios profesionales,5098.62,Aprobada
+VOL-00363,2026-04-28,Capacitación,3217.63,Aprobada
+VOL-00364,2026-05-01,Viajes,1336.64,Aprobada
+VOL-00365,2026-06-02,Papelería,9255.65,Aprobada
+VOL-00366,2026-07-03,Tecnología,7374.66,Aprobada
+VOL-00367,2026-08-04,Mobiliario,5493.67,Aprobada
+VOL-00368,2026-09-05,Servicios profesionales,3612.68,Pendiente
+VOL-00369,2026-10-06,Capacitación,1731.69,Aprobada
+VOL-00370,2026-01-07,Viajes,9650.7,Aprobada
+VOL-00371,2026-02-08,Papelería,7769.71,Aprobada
+VOL-00372,2026-03-09,Tecnología,5888.72,Aprobada
+VOL-00373,2026-04-10,Mobiliario,4007.73,Aprobada
+VOL-00374,2026-05-11,Servicios profesionales,2126.74,Rechazada
+VOL-00375,2026-06-12,Capacitación,245.75,Aprobada
+VOL-00376,2026-07-13,Viajes,8164.76,Aprobada
+VOL-00377,2026-08-14,Papelería,6283.77,Aprobada
+VOL-00378,2026-09-15,Tecnología,4402.78,Aprobada
+VOL-00379,2026-10-16,Mobiliario,2521.79,Aprobada
+VOL-00380,2026-01-17,Servicios profesionales,640.8,Aprobada
+VOL-00381,2026-02-18,Capacitación,8559.81,Aprobada
+VOL-00382,2026-03-19,Viajes,6678.82,Aprobada
+VOL-00383,2026-04-20,Papelería,4797.83,Aprobada
+VOL-00384,2026-05-21,Tecnología,2916.84,Aprobada
+VOL-00385,2026-06-22,Mobiliario,1035.85,Aprobada
+VOL-00386,2026-07-23,Servicios profesionales,8954.86,Aprobada
+VOL-00387,2026-08-24,Capacitación,7073.87,Aprobada
+VOL-00388,2026-09-25,Viajes,5192.88,Aprobada
+VOL-00389,2026-10-26,Papelería,3311.89,Aprobada
+VOL-00390,2026-01-27,Tecnología,1430.9,Aprobada
+VOL-00391,2026-02-28,Mobiliario,9349.91,Rechazada
+VOL-00392,2026-03-01,Servicios profesionales,7468.92,Aprobada
+VOL-00393,2026-04-02,Capacitación,5587.93,Aprobada
+VOL-00394,2026-05-03,Viajes,3706.94,Aprobada
+VOL-00395,2026-06-04,Papelería,1825.95,Aprobada
+VOL-00396,2026-07-05,Tecnología,9744.96,Aprobada
+VOL-00397,2026-08-06,Mobiliario,7863.97,Aprobada
+VOL-00398,2026-09-07,Servicios profesionales,5982.98,Aprobada
+VOL-00399,2026-10-08,Capacitación,4101.99,Aprobada
+VOL-00400,2026-01-09,Viajes,2220,Aprobada
+VOL-00401,2026-02-10,Papelería,339.01,Aprobada
+VOL-00402,2026-03-11,Tecnología,8258.02,Aprobada
+VOL-00403,2026-04-12,Mobiliario,6377.03,Aprobada
+VOL-00404,2026-05-13,Servicios profesionales,4496.04,Aprobada
+VOL-00405,2026-06-14,Capacitación,2615.05,Aprobada
+VOL-00406,2026-07-15,Viajes,734.06,Aprobada
+VOL-00407,2026-08-16,Papelería,8653.07,Aprobada
+VOL-00408,2026-09-17,Tecnología,6772.08,Rechazada
+VOL-00409,2026-10-18,Mobiliario,4891.09,Aprobada
+VOL-00410,2026-01-19,Servicios profesionales,3010.1,Aprobada
+VOL-00411,2026-02-20,Capacitación,1129.11,Aprobada
+VOL-00412,2026-03-21,Viajes,9048.12,Aprobada
+VOL-00413,2026-04-22,Papelería,7167.13,Aprobada
+VOL-00414,2026-05-23,Tecnología,5286.14,Pendiente
+VOL-00415,2026-06-24,Mobiliario,3405.15,Aprobada
+VOL-00416,2026-07-25,Servicios profesionales,1524.16,Aprobada
+VOL-00417,2026-08-26,Capacitación,9443.17,Aprobada
+VOL-00418,2026-09-27,Viajes,7562.18,Aprobada
+VOL-00419,2026-10-28,Papelería,5681.19,Aprobada
+VOL-00420,2026-01-01,Tecnología,3800.2,Aprobada
+VOL-00421,2026-02-02,Mobiliario,1919.21,Aprobada
+VOL-00422,2026-03-03,Servicios profesionales,38.22,Aprobada
+VOL-00423,2026-04-04,Capacitación,7957.23,Aprobada
+VOL-00424,2026-05-05,Viajes,6076.24,Aprobada
+VOL-00425,2026-06-06,Papelería,4195.25,Rechazada
+VOL-00426,2026-07-07,Tecnología,2314.26,Aprobada
+VOL-00427,2026-08-08,Mobiliario,433.27,Aprobada
+VOL-00428,2026-09-09,Servicios profesionales,8352.28,Aprobada
+VOL-00429,2026-10-10,Capacitación,6471.29,Aprobada
+VOL-00430,2026-01-11,Viajes,4590.3,Aprobada
+VOL-00431,2026-02-12,Papelería,2709.31,Aprobada
+VOL-00432,2026-03-13,Tecnología,828.32,Aprobada
+VOL-00433,2026-04-14,Mobiliario,8747.33,Aprobada
+VOL-00434,2026-05-15,Servicios profesionales,6866.34,Aprobada
+VOL-00435,2026-06-16,Capacitación,4985.35,Aprobada
+VOL-00436,2026-07-17,Viajes,3104.36,Aprobada
+VOL-00437,2026-08-18,Papelería,1223.37,Pendiente
+VOL-00438,2026-09-19,Tecnología,9142.38,Aprobada
+VOL-00439,2026-10-20,Mobiliario,7261.39,Aprobada
+VOL-00440,2026-01-21,Servicios profesionales,5380.4,Aprobada
+VOL-00441,2026-02-22,Capacitación,3499.41,Aprobada
+VOL-00442,2026-03-23,Viajes,1618.42,Rechazada
+VOL-00443,2026-04-24,Papelería,9537.43,Aprobada
+VOL-00444,2026-05-25,Tecnología,7656.44,Aprobada
+VOL-00445,2026-06-26,Mobiliario,5775.45,Aprobada
+VOL-00446,2026-07-27,Servicios profesionales,3894.46,Aprobada
+VOL-00447,2026-08-28,Capacitación,2013.47,Aprobada
+VOL-00448,2026-09-01,Viajes,132.48,Aprobada
+VOL-00449,2026-10-02,Papelería,8051.49,Aprobada
+VOL-00450,2026-01-03,Tecnología,6170.5,Aprobada
+VOL-00451,2026-02-04,Mobiliario,4289.51,Aprobada
+VOL-00452,2026-03-05,Servicios profesionales,2408.52,Aprobada
+VOL-00453,2026-04-06,Capacitación,527.53,Aprobada
+VOL-00454,2026-05-07,Viajes,8446.54,Aprobada
+VOL-00455,2026-06-08,Papelería,6565.55,Aprobada
+VOL-00456,2026-07-09,Tecnología,4684.56,Aprobada
+VOL-00457,2026-08-10,Mobiliario,2803.57,Aprobada
+VOL-00458,2026-09-11,Servicios profesionales,922.58,Aprobada
+VOL-00459,2026-10-12,Capacitación,8841.59,Rechazada
+VOL-00460,2026-01-13,Viajes,6960.6,Pendiente
+VOL-00461,2026-02-14,Papelería,5079.61,Aprobada
+VOL-00462,2026-03-15,Tecnología,3198.62,Aprobada
+VOL-00463,2026-04-16,Mobiliario,1317.63,Aprobada
+VOL-00464,2026-05-17,Servicios profesionales,9236.64,Aprobada
+VOL-00465,2026-06-18,Capacitación,7355.65,Aprobada
+VOL-00466,2026-07-19,Viajes,5474.66,Aprobada
+VOL-00467,2026-08-20,Papelería,3593.67,Aprobada
+VOL-00468,2026-09-21,Tecnología,1712.68,Aprobada
+VOL-00469,2026-10-22,Mobiliario,9631.69,Aprobada
+VOL-00470,2026-01-23,Servicios profesionales,7750.7,Aprobada
+VOL-00471,2026-02-24,Capacitación,5869.71,Aprobada
+VOL-00472,2026-03-25,Viajes,3988.72,Aprobada
+VOL-00473,2026-04-26,Papelería,2107.73,Aprobada
+VOL-00474,2026-05-27,Tecnología,226.74,Aprobada
+VOL-00475,2026-06-28,Mobiliario,8145.75,Aprobada
+VOL-00476,2026-07-01,Servicios profesionales,6264.76,Rechazada
+VOL-00477,2026-08-02,Capacitación,4383.77,Aprobada
+VOL-00478,2026-09-03,Viajes,2502.78,Aprobada
+VOL-00479,2026-10-04,Papelería,621.79,Aprobada
+VOL-00480,2026-01-05,Tecnología,8540.8,Aprobada
+VOL-00481,2026-02-06,Mobiliario,6659.81,Aprobada
+VOL-00482,2026-03-07,Servicios profesionales,4778.82,Aprobada
+VOL-00483,2026-04-08,Capacitación,2897.83,Pendiente
+VOL-00484,2026-05-09,Viajes,1016.84,Aprobada
+VOL-00485,2026-06-10,Papelería,8935.85,Aprobada
+VOL-00486,2026-07-11,Tecnología,7054.86,Aprobada
+VOL-00487,2026-08-12,Mobiliario,5173.87,Aprobada
+VOL-00488,2026-09-13,Servicios profesionales,3292.88,Aprobada
+VOL-00489,2026-10-14,Capacitación,1411.89,Aprobada
+VOL-00490,2026-01-15,Viajes,9330.9,Aprobada
+VOL-00491,2026-02-16,Papelería,7449.91,Aprobada
+VOL-00492,2026-03-17,Tecnología,5568.92,Aprobada
+VOL-00493,2026-04-18,Mobiliario,3687.93,Rechazada
+VOL-00494,2026-05-19,Servicios profesionales,1806.94,Aprobada
+VOL-00495,2026-06-20,Capacitación,9725.95,Aprobada
+VOL-00496,2026-07-21,Viajes,7844.96,Aprobada
+VOL-00497,2026-08-22,Papelería,5963.97,Aprobada
+VOL-00498,2026-09-23,Tecnología,4082.98,Aprobada
+VOL-00499,2026-10-24,Mobiliario,2201.99,Aprobada
+VOL-00500,2026-01-25,Servicios profesionales,320,Aprobada
+VOL-00501,2026-02-26,Capacitación,8239.01,Aprobada
+VOL-00502,2026-03-27,Viajes,6358.02,Aprobada
+VOL-00503,2026-04-28,Papelería,4477.03,Aprobada
+VOL-00504,2026-05-01,Tecnología,2596.04,Aprobada
+VOL-00505,2026-06-02,Mobiliario,715.05,Aprobada
+VOL-00506,2026-07-03,Servicios profesionales,8634.06,Pendiente
+VOL-00507,2026-08-04,Capacitación,6753.07,Aprobada
+VOL-00508,2026-09-05,Viajes,4872.08,Aprobada
+VOL-00509,2026-10-06,Papelería,2991.09,Aprobada
+VOL-00510,2026-01-07,Tecnología,1110.1,Rechazada
+VOL-00511,2026-02-08,Mobiliario,9029.11,Aprobada
+VOL-00512,2026-03-09,Servicios profesionales,7148.12,Aprobada
+VOL-00513,2026-04-10,Capacitación,5267.13,Aprobada
+VOL-00514,2026-05-11,Viajes,3386.14,Aprobada
+VOL-00515,2026-06-12,Papelería,1505.15,Aprobada
+VOL-00516,2026-07-13,Tecnología,9424.16,Aprobada
+VOL-00517,2026-08-14,Mobiliario,7543.17,Aprobada
+VOL-00518,2026-09-15,Servicios profesionales,5662.18,Aprobada
+VOL-00519,2026-10-16,Capacitación,3781.19,Aprobada
+VOL-00520,2026-01-17,Viajes,1900.2,Aprobada
+VOL-00521,2026-02-18,Papelería,9819.21,Aprobada
+VOL-00522,2026-03-19,Tecnología,7938.22,Aprobada
+VOL-00523,2026-04-20,Mobiliario,6057.23,Aprobada
+VOL-00524,2026-05-21,Servicios profesionales,4176.24,Aprobada
+VOL-00525,2026-06-22,Capacitación,2295.25,Aprobada
+VOL-00526,2026-07-23,Viajes,414.26,Aprobada
+VOL-00527,2026-08-24,Papelería,8333.27,Rechazada
+VOL-00528,2026-09-25,Tecnología,6452.28,Aprobada
+VOL-00529,2026-10-26,Mobiliario,4571.29,Pendiente
+VOL-00530,2026-01-27,Servicios profesionales,2690.3,Aprobada
+VOL-00531,2026-02-28,Capacitación,809.31,Aprobada
+VOL-00532,2026-03-01,Viajes,8728.32,Aprobada
+VOL-00533,2026-04-02,Papelería,6847.33,Aprobada
+VOL-00534,2026-05-03,Tecnología,4966.34,Aprobada
+VOL-00535,2026-06-04,Mobiliario,3085.35,Aprobada
+VOL-00536,2026-07-05,Servicios profesionales,1204.36,Aprobada
+VOL-00537,2026-08-06,Capacitación,9123.37,Aprobada
+VOL-00538,2026-09-07,Viajes,7242.38,Aprobada
+VOL-00539,2026-10-08,Papelería,5361.39,Aprobada
+VOL-00540,2026-01-09,Tecnología,3480.4,Aprobada
+VOL-00541,2026-02-10,Mobiliario,1599.41,Aprobada
+VOL-00542,2026-03-11,Servicios profesionales,9518.42,Aprobada
+VOL-00543,2026-04-12,Capacitación,7637.43,Aprobada
+VOL-00544,2026-05-13,Viajes,5756.44,Rechazada
+VOL-00545,2026-06-14,Papelería,3875.45,Aprobada
+VOL-00546,2026-07-15,Tecnología,1994.46,Aprobada
+VOL-00547,2026-08-16,Mobiliario,113.47,Aprobada
+VOL-00548,2026-09-17,Servicios profesionales,8032.48,Aprobada
+VOL-00549,2026-10-18,Capacitación,6151.49,Aprobada
+VOL-00550,2026-01-19,Viajes,4270.5,Aprobada
+VOL-00551,2026-02-20,Papelería,2389.51,Aprobada
+VOL-00552,2026-03-21,Tecnología,508.52,Pendiente
+VOL-00553,2026-04-22,Mobiliario,8427.53,Aprobada
+VOL-00554,2026-05-23,Servicios profesionales,6546.54,Aprobada
+VOL-00555,2026-06-24,Capacitación,4665.55,Aprobada
+VOL-00556,2026-07-25,Viajes,2784.56,Aprobada
+VOL-00557,2026-08-26,Papelería,903.57,Aprobada
+VOL-00558,2026-09-27,Tecnología,8822.58,Aprobada
+VOL-00559,2026-10-28,Mobiliario,6941.59,Aprobada
+VOL-00560,2026-01-01,Servicios profesionales,5060.6,Aprobada
+VOL-00561,2026-02-02,Capacitación,3179.61,Rechazada
+VOL-00562,2026-03-03,Viajes,1298.62,Aprobada
+VOL-00563,2026-04-04,Papelería,9217.63,Aprobada
+VOL-00564,2026-05-05,Tecnología,7336.64,Aprobada
+VOL-00565,2026-06-06,Mobiliario,5455.65,Aprobada
+VOL-00566,2026-07-07,Servicios profesionales,3574.66,Aprobada
+VOL-00567,2026-08-08,Capacitación,1693.67,Aprobada
+VOL-00568,2026-09-09,Viajes,9612.68,Aprobada
+VOL-00569,2026-10-10,Papelería,7731.69,Aprobada
+VOL-00570,2026-01-11,Tecnología,5850.7,Aprobada
+VOL-00571,2026-02-12,Mobiliario,3969.71,Aprobada
+VOL-00572,2026-03-13,Servicios profesionales,2088.72,Aprobada
+VOL-00573,2026-04-14,Capacitación,207.73,Aprobada
+VOL-00574,2026-05-15,Viajes,8126.74,Aprobada
+VOL-00575,2026-06-16,Papelería,6245.75,Pendiente
+VOL-00576,2026-07-17,Tecnología,4364.76,Aprobada
+VOL-00577,2026-08-18,Mobiliario,2483.77,Aprobada
+VOL-00578,2026-09-19,Servicios profesionales,602.78,Rechazada
+VOL-00579,2026-10-20,Capacitación,8521.79,Aprobada
+VOL-00580,2026-01-21,Viajes,6640.8,Aprobada
+VOL-00581,2026-02-22,Papelería,4759.81,Aprobada
+VOL-00582,2026-03-23,Tecnología,2878.82,Aprobada
+VOL-00583,2026-04-24,Mobiliario,997.83,Aprobada
+VOL-00584,2026-05-25,Servicios profesionales,8916.84,Aprobada
+VOL-00585,2026-06-26,Capacitación,7035.85,Aprobada
+VOL-00586,2026-07-27,Viajes,5154.86,Aprobada
+VOL-00587,2026-08-28,Papelería,3273.87,Aprobada
+VOL-00588,2026-09-01,Tecnología,1392.88,Aprobada
+VOL-00589,2026-10-02,Mobiliario,9311.89,Aprobada
+VOL-00590,2026-01-03,Servicios profesionales,7430.9,Aprobada
+VOL-00591,2026-02-04,Capacitación,5549.91,Aprobada
+VOL-00592,2026-03-05,Viajes,3668.92,Aprobada
+VOL-00593,2026-04-06,Papelería,1787.93,Aprobada
+VOL-00594,2026-05-07,Tecnología,9706.94,Aprobada
+VOL-00595,2026-06-08,Mobiliario,7825.95,Rechazada
+VOL-00596,2026-07-09,Servicios profesionales,5944.96,Aprobada
+VOL-00597,2026-08-10,Capacitación,4063.97,Aprobada
+VOL-00598,2026-09-11,Viajes,2182.98,Pendiente
+VOL-00599,2026-10-12,Papelería,301.99,Aprobada
+VOL-00600,2026-01-13,Tecnología,8220,Aprobada
+VOL-00601,2026-02-14,Mobiliario,6339.01,Aprobada
+VOL-00602,2026-03-15,Servicios profesionales,4458.02,Aprobada
+VOL-00603,2026-04-16,Capacitación,2577.03,Aprobada
+VOL-00604,2026-05-17,Viajes,696.04,Aprobada
+VOL-00605,2026-06-18,Papelería,8615.05,Aprobada
+VOL-00606,2026-07-19,Tecnología,6734.06,Aprobada
+VOL-00607,2026-08-20,Mobiliario,4853.07,Aprobada
+VOL-00608,2026-09-21,Servicios profesionales,2972.08,Aprobada
+VOL-00609,2026-10-22,Capacitación,1091.09,Aprobada
+VOL-00610,2026-01-23,Viajes,9010.1,Aprobada
+VOL-00611,2026-02-24,Papelería,7129.11,Aprobada
+VOL-00612,2026-03-25,Tecnología,5248.12,Rechazada
+VOL-00613,2026-04-26,Mobiliario,3367.13,Aprobada
+VOL-00614,2026-05-27,Servicios profesionales,1486.14,Aprobada
+VOL-00615,2026-06-28,Capacitación,9405.15,Aprobada
+VOL-00616,2026-07-01,Viajes,7524.16,Aprobada
+VOL-00617,2026-08-02,Papelería,5643.17,Aprobada
+VOL-00618,2026-09-03,Tecnología,3762.18,Aprobada
+VOL-00619,2026-10-04,Mobiliario,1881.19,Aprobada
+VOL-00620,2026-01-05,Servicios profesionales,9800.2,Aprobada
+VOL-00621,2026-02-06,Capacitación,7919.21,Pendiente
+VOL-00622,2026-03-07,Viajes,6038.22,Aprobada
+VOL-00623,2026-04-08,Papelería,4157.23,Aprobada
+VOL-00624,2026-05-09,Tecnología,2276.24,Aprobada
+VOL-00625,2026-06-10,Mobiliario,395.25,Aprobada
+VOL-00626,2026-07-11,Servicios profesionales,8314.26,Aprobada
+VOL-00627,2026-08-12,Capacitación,6433.27,Aprobada
+VOL-00628,2026-09-13,Viajes,4552.28,Aprobada
+VOL-00629,2026-10-14,Papelería,2671.29,Rechazada
+VOL-00630,2026-01-15,Tecnología,790.3,Aprobada
+VOL-00631,2026-02-16,Mobiliario,8709.31,Aprobada
+VOL-00632,2026-03-17,Servicios profesionales,6828.32,Aprobada
+VOL-00633,2026-04-18,Capacitación,4947.33,Aprobada
+VOL-00634,2026-05-19,Viajes,3066.34,Aprobada
+VOL-00635,2026-06-20,Papelería,1185.35,Aprobada
+VOL-00636,2026-07-21,Tecnología,9104.36,Aprobada
+VOL-00637,2026-08-22,Mobiliario,7223.37,Aprobada
+VOL-00638,2026-09-23,Servicios profesionales,5342.38,Aprobada
+VOL-00639,2026-10-24,Capacitación,3461.39,Aprobada
+VOL-00640,2026-01-25,Viajes,1580.4,Aprobada
+VOL-00641,2026-02-26,Papelería,9499.41,Aprobada
+VOL-00642,2026-03-27,Tecnología,7618.42,Aprobada
+VOL-00643,2026-04-28,Mobiliario,5737.43,Aprobada
+VOL-00644,2026-05-01,Servicios profesionales,3856.44,Pendiente
+VOL-00645,2026-06-02,Capacitación,1975.45,Aprobada
+VOL-00646,2026-07-03,Viajes,94.46,Rechazada
+VOL-00647,2026-08-04,Papelería,8013.47,Aprobada
+VOL-00648,2026-09-05,Tecnología,6132.48,Aprobada
+VOL-00649,2026-10-06,Mobiliario,4251.49,Aprobada
+VOL-00650,2026-01-07,Servicios profesionales,2370.5,Aprobada
+VOL-00651,2026-02-08,Capacitación,489.51,Aprobada
+VOL-00652,2026-03-09,Viajes,8408.52,Aprobada
+VOL-00653,2026-04-10,Papelería,6527.53,Aprobada
+VOL-00654,2026-05-11,Tecnología,4646.54,Aprobada
+VOL-00655,2026-06-12,Mobiliario,2765.55,Aprobada
+VOL-00656,2026-07-13,Servicios profesionales,884.56,Aprobada
+VOL-00657,2026-08-14,Capacitación,8803.57,Aprobada
+VOL-00658,2026-09-15,Viajes,6922.58,Aprobada
+VOL-00659,2026-10-16,Papelería,5041.59,Aprobada
+VOL-00660,2026-01-17,Tecnología,3160.6,Aprobada
+VOL-00661,2026-02-18,Mobiliario,1279.61,Aprobada
+VOL-00662,2026-03-19,Servicios profesionales,9198.62,Aprobada
+VOL-00663,2026-04-20,Capacitación,7317.63,Rechazada
+VOL-00664,2026-05-21,Viajes,5436.64,Aprobada
+VOL-00665,2026-06-22,Papelería,3555.65,Aprobada
+VOL-00666,2026-07-23,Tecnología,1674.66,Aprobada
+VOL-00667,2026-08-24,Mobiliario,9593.67,Pendiente
+VOL-00668,2026-09-25,Servicios profesionales,7712.68,Aprobada
+VOL-00669,2026-10-26,Capacitación,5831.69,Aprobada
+VOL-00670,2026-01-27,Viajes,3950.7,Aprobada
+VOL-00671,2026-02-28,Papelería,2069.71,Aprobada
+VOL-00672,2026-03-01,Tecnología,188.72,Aprobada
+VOL-00673,2026-04-02,Mobiliario,8107.73,Aprobada
+VOL-00674,2026-05-03,Servicios profesionales,6226.74,Aprobada
+VOL-00675,2026-06-04,Capacitación,4345.75,Aprobada
+VOL-00676,2026-07-05,Viajes,2464.76,Aprobada
+VOL-00677,2026-08-06,Papelería,583.77,Aprobada
+VOL-00678,2026-09-07,Tecnología,8502.78,Aprobada
+VOL-00679,2026-10-08,Mobiliario,6621.79,Aprobada
+VOL-00680,2026-01-09,Servicios profesionales,4740.8,Rechazada
+VOL-00681,2026-02-10,Capacitación,2859.81,Aprobada
+VOL-00682,2026-03-11,Viajes,978.82,Aprobada
+VOL-00683,2026-04-12,Papelería,8897.83,Aprobada
+VOL-00684,2026-05-13,Tecnología,7016.84,Aprobada
+VOL-00685,2026-06-14,Mobiliario,5135.85,Aprobada
+VOL-00686,2026-07-15,Servicios profesionales,3254.86,Aprobada
+VOL-00687,2026-08-16,Capacitación,1373.87,Aprobada
+VOL-00688,2026-09-17,Viajes,9292.88,Aprobada
+VOL-00689,2026-10-18,Papelería,7411.89,Aprobada
+VOL-00690,2026-01-19,Tecnología,5530.9,Pendiente
+VOL-00691,2026-02-20,Mobiliario,3649.91,Aprobada
+VOL-00692,2026-03-21,Servicios profesionales,1768.92,Aprobada
+VOL-00693,2026-04-22,Capacitación,9687.93,Aprobada
+VOL-00694,2026-05-23,Viajes,7806.94,Aprobada
+VOL-00695,2026-06-24,Papelería,5925.95,Aprobada
+VOL-00696,2026-07-25,Tecnología,4044.96,Aprobada
+VOL-00697,2026-08-26,Mobiliario,2163.97,Rechazada
+VOL-00698,2026-09-27,Servicios profesionales,282.98,Aprobada
+VOL-00699,2026-10-28,Capacitación,8201.99,Aprobada
+VOL-00700,2026-01-01,Viajes,6320,Aprobada
+VOL-00701,2026-02-02,Papelería,4439.01,Aprobada
+VOL-00702,2026-03-03,Tecnología,2558.02,Aprobada
+VOL-00703,2026-04-04,Mobiliario,677.03,Aprobada
+VOL-00704,2026-05-05,Servicios profesionales,8596.04,Aprobada
+VOL-00705,2026-06-06,Capacitación,6715.05,Aprobada
+VOL-00706,2026-07-07,Viajes,4834.06,Aprobada
+VOL-00707,2026-08-08,Papelería,2953.07,Aprobada
+VOL-00708,2026-09-09,Tecnología,1072.08,Aprobada
+VOL-00709,2026-10-10,Mobiliario,8991.09,Aprobada
+VOL-00710,2026-01-11,Servicios profesionales,7110.1,Aprobada
+VOL-00711,2026-02-12,Capacitación,5229.11,Aprobada
+VOL-00712,2026-03-13,Viajes,3348.12,Aprobada
+VOL-00713,2026-04-14,Papelería,1467.13,Pendiente
+VOL-00714,2026-05-15,Tecnología,9386.14,Rechazada
+VOL-00715,2026-06-16,Mobiliario,7505.15,Aprobada
+VOL-00716,2026-07-17,Servicios profesionales,5624.16,Aprobada
+VOL-00717,2026-08-18,Capacitación,3743.17,Aprobada
+VOL-00718,2026-09-19,Viajes,1862.18,Aprobada
+VOL-00719,2026-10-20,Papelería,9781.19,Aprobada
+VOL-00720,2026-01-21,Tecnología,7900.2,Aprobada
+VOL-00721,2026-02-22,Mobiliario,6019.21,Aprobada
+VOL-00722,2026-03-23,Servicios profesionales,4138.22,Aprobada
+VOL-00723,2026-04-24,Capacitación,2257.23,Aprobada
+VOL-00724,2026-05-25,Viajes,376.24,Aprobada
+VOL-00725,2026-06-26,Papelería,8295.25,Aprobada
+VOL-00726,2026-07-27,Tecnología,6414.26,Aprobada
+VOL-00727,2026-08-28,Mobiliario,4533.27,Aprobada
+VOL-00728,2026-09-01,Servicios profesionales,2652.28,Aprobada
+VOL-00729,2026-10-02,Capacitación,771.29,Aprobada
+VOL-00730,2026-01-03,Viajes,8690.3,Aprobada
+VOL-00731,2026-02-04,Papelería,6809.31,Rechazada
+VOL-00732,2026-03-05,Tecnología,4928.32,Aprobada
+VOL-00733,2026-04-06,Mobiliario,3047.33,Aprobada
+VOL-00734,2026-05-07,Servicios profesionales,1166.34,Aprobada
+VOL-00735,2026-06-08,Capacitación,9085.35,Aprobada
+VOL-00736,2026-07-09,Viajes,7204.36,Pendiente
+VOL-00737,2026-08-10,Papelería,5323.37,Aprobada
+VOL-00738,2026-09-11,Tecnología,3442.38,Aprobada
+VOL-00739,2026-10-12,Mobiliario,1561.39,Aprobada
+VOL-00740,2026-01-13,Servicios profesionales,9480.4,Aprobada
+VOL-00741,2026-02-14,Capacitación,7599.41,Aprobada
+VOL-00742,2026-03-15,Viajes,5718.42,Aprobada
+VOL-00743,2026-04-16,Papelería,3837.43,Aprobada
+VOL-00744,2026-05-17,Tecnología,1956.44,Aprobada
+VOL-00745,2026-06-18,Mobiliario,75.45,Aprobada
+VOL-00746,2026-07-19,Servicios profesionales,7994.46,Aprobada
+VOL-00747,2026-08-20,Capacitación,6113.47,Aprobada
+VOL-00748,2026-09-21,Viajes,4232.48,Rechazada
+VOL-00749,2026-10-22,Papelería,2351.49,Aprobada
+VOL-00750,2026-01-23,Tecnología,470.5,Aprobada
+VOL-00751,2026-02-24,Mobiliario,8389.51,Aprobada
+VOL-00752,2026-03-25,Servicios profesionales,6508.52,Aprobada
+VOL-00753,2026-04-26,Capacitación,4627.53,Aprobada
+VOL-00754,2026-05-27,Viajes,2746.54,Aprobada
+VOL-00755,2026-06-28,Papelería,865.55,Aprobada
+VOL-00756,2026-07-01,Tecnología,8784.56,Aprobada
+VOL-00757,2026-08-02,Mobiliario,6903.57,Aprobada
+VOL-00758,2026-09-03,Servicios profesionales,5022.58,Aprobada
+VOL-00759,2026-10-04,Capacitación,3141.59,Pendiente
+VOL-00760,2026-01-05,Viajes,1260.6,Aprobada
+VOL-00761,2026-02-06,Papelería,9179.61,Aprobada
+VOL-00762,2026-03-07,Tecnología,7298.62,Aprobada
+VOL-00763,2026-04-08,Mobiliario,5417.63,Aprobada
+VOL-00764,2026-05-09,Servicios profesionales,3536.64,Aprobada
+VOL-00765,2026-06-10,Capacitación,1655.65,Rechazada
+VOL-00766,2026-07-11,Viajes,9574.66,Aprobada
+VOL-00767,2026-08-12,Papelería,7693.67,Aprobada
+VOL-00768,2026-09-13,Tecnología,5812.68,Aprobada
+VOL-00769,2026-10-14,Mobiliario,3931.69,Aprobada
+VOL-00770,2026-01-15,Servicios profesionales,2050.7,Aprobada
+VOL-00771,2026-02-16,Capacitación,169.71,Aprobada
+VOL-00772,2026-03-17,Viajes,8088.72,Aprobada
+VOL-00773,2026-04-18,Papelería,6207.73,Aprobada
+VOL-00774,2026-05-19,Tecnología,4326.74,Aprobada
+VOL-00775,2026-06-20,Mobiliario,2445.75,Aprobada
+VOL-00776,2026-07-21,Servicios profesionales,564.76,Aprobada
+VOL-00777,2026-08-22,Capacitación,8483.77,Aprobada
+VOL-00778,2026-09-23,Viajes,6602.78,Aprobada
+VOL-00779,2026-10-24,Papelería,4721.79,Aprobada
+VOL-00780,2026-01-25,Tecnología,2840.8,Aprobada
+VOL-00781,2026-02-26,Mobiliario,959.81,Aprobada
+VOL-00782,2026-03-27,Servicios profesionales,8878.82,Rechazada
+VOL-00783,2026-04-28,Capacitación,6997.83,Aprobada
+VOL-00784,2026-05-01,Viajes,5116.84,Aprobada
+VOL-00785,2026-06-02,Papelería,3235.85,Aprobada
+VOL-00786,2026-07-03,Tecnología,1354.86,Aprobada
+VOL-00787,2026-08-04,Mobiliario,9273.87,Aprobada
+VOL-00788,2026-09-05,Servicios profesionales,7392.88,Aprobada
+VOL-00789,2026-10-06,Capacitación,5511.89,Aprobada
+VOL-00790,2026-01-07,Viajes,3630.9,Aprobada
+VOL-00791,2026-02-08,Papelería,1749.91,Aprobada
+VOL-00792,2026-03-09,Tecnología,9668.92,Aprobada
+VOL-00793,2026-04-10,Mobiliario,7787.93,Aprobada
+VOL-00794,2026-05-11,Servicios profesionales,5906.94,Aprobada
+VOL-00795,2026-06-12,Capacitación,4025.95,Aprobada
+VOL-00796,2026-07-13,Viajes,2144.96,Aprobada
+VOL-00797,2026-08-14,Papelería,263.97,Aprobada
+VOL-00798,2026-09-15,Tecnología,8182.98,Aprobada
+VOL-00799,2026-10-16,Mobiliario,6301.99,Rechazada
+VOL-00800,2026-01-17,Servicios profesionales,4420,Aprobada
+VOL-00801,2026-02-18,Capacitación,2539.01,Aprobada
+VOL-00802,2026-03-19,Viajes,658.02,Aprobada
+VOL-00803,2026-04-20,Papelería,8577.03,Aprobada
+VOL-00804,2026-05-21,Tecnología,6696.04,Aprobada
+VOL-00805,2026-06-22,Mobiliario,4815.05,Pendiente
+VOL-00806,2026-07-23,Servicios profesionales,2934.06,Aprobada
+VOL-00807,2026-08-24,Capacitación,1053.07,Aprobada
+VOL-00808,2026-09-25,Viajes,8972.08,Aprobada
+VOL-00809,2026-10-26,Papelería,7091.09,Aprobada
+VOL-00810,2026-01-27,Tecnología,5210.1,Aprobada
+VOL-00811,2026-02-28,Mobiliario,3329.11,Aprobada
+VOL-00812,2026-03-01,Servicios profesionales,1448.12,Aprobada
+VOL-00813,2026-04-02,Capacitación,9367.13,Aprobada
+VOL-00814,2026-05-03,Viajes,7486.14,Aprobada
+VOL-00815,2026-06-04,Papelería,5605.15,Aprobada
+VOL-00816,2026-07-05,Tecnología,3724.16,Rechazada
+VOL-00817,2026-08-06,Mobiliario,1843.17,Aprobada
+VOL-00818,2026-09-07,Servicios profesionales,9762.18,Aprobada
+VOL-00819,2026-10-08,Capacitación,7881.19,Aprobada
+VOL-00820,2026-01-09,Viajes,6000.2,Aprobada
+VOL-00821,2026-02-10,Papelería,4119.21,Aprobada
+VOL-00822,2026-03-11,Tecnología,2238.22,Aprobada
+VOL-00823,2026-04-12,Mobiliario,357.23,Aprobada
+VOL-00824,2026-05-13,Servicios profesionales,8276.24,Aprobada
+VOL-00825,2026-06-14,Capacitación,6395.25,Aprobada
+VOL-00826,2026-07-15,Viajes,4514.26,Aprobada
+VOL-00827,2026-08-16,Papelería,2633.27,Aprobada
+VOL-00828,2026-09-17,Tecnología,752.28,Pendiente
+VOL-00829,2026-10-18,Mobiliario,8671.29,Aprobada
+VOL-00830,2026-01-19,Servicios profesionales,6790.3,Aprobada
+VOL-00831,2026-02-20,Capacitación,4909.31,Aprobada
+VOL-00832,2026-03-21,Viajes,3028.32,Aprobada
+VOL-00833,2026-04-22,Papelería,1147.33,Rechazada
+VOL-00834,2026-05-23,Tecnología,9066.34,Aprobada
+VOL-00835,2026-06-24,Mobiliario,7185.35,Aprobada
+VOL-00836,2026-07-25,Servicios profesionales,5304.36,Aprobada
+VOL-00837,2026-08-26,Capacitación,3423.37,Aprobada
+VOL-00838,2026-09-27,Viajes,1542.38,Aprobada
+VOL-00839,2026-10-28,Papelería,9461.39,Aprobada
+VOL-00840,2026-01-01,Tecnología,7580.4,Aprobada
+VOL-00841,2026-02-02,Mobiliario,5699.41,Aprobada
+VOL-00842,2026-03-03,Servicios profesionales,3818.42,Aprobada
+VOL-00843,2026-04-04,Capacitación,1937.43,Aprobada
+VOL-00844,2026-05-05,Viajes,56.44,Aprobada
+VOL-00845,2026-06-06,Papelería,7975.45,Aprobada
+VOL-00846,2026-07-07,Tecnología,6094.46,Aprobada
+VOL-00847,2026-08-08,Mobiliario,4213.47,Aprobada
+VOL-00848,2026-09-09,Servicios profesionales,2332.48,Aprobada
+VOL-00849,2026-10-10,Capacitación,451.49,Aprobada
+VOL-00850,2026-01-11,Viajes,8370.5,Rechazada
+VOL-00851,2026-02-12,Papelería,6489.51,Pendiente
+VOL-00852,2026-03-13,Tecnología,4608.52,Aprobada
+VOL-00853,2026-04-14,Mobiliario,2727.53,Aprobada
+VOL-00854,2026-05-15,Servicios profesionales,846.54,Aprobada
+VOL-00855,2026-06-16,Capacitación,8765.55,Aprobada
+VOL-00856,2026-07-17,Viajes,6884.56,Aprobada
+VOL-00857,2026-08-18,Papelería,5003.57,Aprobada
+VOL-00858,2026-09-19,Tecnología,3122.58,Aprobada
+VOL-00859,2026-10-20,Mobiliario,1241.59,Aprobada
+VOL-00860,2026-01-21,Servicios profesionales,9160.6,Aprobada
+VOL-00861,2026-02-22,Capacitación,7279.61,Aprobada
+VOL-00862,2026-03-23,Viajes,5398.62,Aprobada
+VOL-00863,2026-04-24,Papelería,3517.63,Aprobada
+VOL-00864,2026-05-25,Tecnología,1636.64,Aprobada
+VOL-00865,2026-06-26,Mobiliario,9555.65,Aprobada
+VOL-00866,2026-07-27,Servicios profesionales,7674.66,Aprobada
+VOL-00867,2026-08-28,Capacitación,5793.67,Rechazada
+VOL-00868,2026-09-01,Viajes,3912.68,Aprobada
+VOL-00869,2026-10-02,Papelería,2031.69,Aprobada
+VOL-00870,2026-01-03,Tecnología,150.7,Aprobada
+VOL-00871,2026-02-04,Mobiliario,8069.71,Aprobada
+VOL-00872,2026-03-05,Servicios profesionales,6188.72,Aprobada
+VOL-00873,2026-04-06,Capacitación,4307.73,Aprobada
+VOL-00874,2026-05-07,Viajes,2426.74,Pendiente
+VOL-00875,2026-06-08,Papelería,545.75,Aprobada
+VOL-00876,2026-07-09,Tecnología,8464.76,Aprobada
+VOL-00877,2026-08-10,Mobiliario,6583.77,Aprobada
+VOL-00878,2026-09-11,Servicios profesionales,4702.78,Aprobada
+VOL-00879,2026-10-12,Capacitación,2821.79,Aprobada
+VOL-00880,2026-01-13,Viajes,940.8,Aprobada
+VOL-00881,2026-02-14,Papelería,8859.81,Aprobada
+VOL-00882,2026-03-15,Tecnología,6978.82,Aprobada
+VOL-00883,2026-04-16,Mobiliario,5097.83,Aprobada
+VOL-00884,2026-05-17,Servicios profesionales,3216.84,Rechazada
+VOL-00885,2026-06-18,Capacitación,1335.85,Aprobada
+VOL-00886,2026-07-19,Viajes,9254.86,Aprobada
+VOL-00887,2026-08-20,Papelería,7373.87,Aprobada
+VOL-00888,2026-09-21,Tecnología,5492.88,Aprobada
+VOL-00889,2026-10-22,Mobiliario,3611.89,Aprobada
+VOL-00890,2026-01-23,Servicios profesionales,1730.9,Aprobada
+VOL-00891,2026-02-24,Capacitación,9649.91,Aprobada
+VOL-00892,2026-03-25,Viajes,7768.92,Aprobada
+VOL-00893,2026-04-26,Papelería,5887.93,Aprobada
+VOL-00894,2026-05-27,Tecnología,4006.94,Aprobada
+VOL-00895,2026-06-28,Mobiliario,2125.95,Aprobada
+VOL-00896,2026-07-01,Servicios profesionales,244.96,Aprobada
+VOL-00897,2026-08-02,Capacitación,8163.97,Pendiente
+VOL-00898,2026-09-03,Viajes,6282.98,Aprobada
+VOL-00899,2026-10-04,Papelería,4401.99,Aprobada
+VOL-00900,2026-01-05,Tecnología,2520,Aprobada
+VOL-00901,2026-02-06,Mobiliario,639.01,Rechazada
+VOL-00902,2026-03-07,Servicios profesionales,8558.02,Aprobada
+VOL-00903,2026-04-08,Capacitación,6677.03,Aprobada
+VOL-00904,2026-05-09,Viajes,4796.04,Aprobada
+VOL-00905,2026-06-10,Papelería,2915.05,Aprobada
+VOL-00906,2026-07-11,Tecnología,1034.06,Aprobada
+VOL-00907,2026-08-12,Mobiliario,8953.07,Aprobada
+VOL-00908,2026-09-13,Servicios profesionales,7072.08,Aprobada
+VOL-00909,2026-10-14,Capacitación,5191.09,Aprobada
+VOL-00910,2026-01-15,Viajes,3310.1,Aprobada
+VOL-00911,2026-02-16,Papelería,1429.11,Aprobada
+VOL-00912,2026-03-17,Tecnología,9348.12,Aprobada
+VOL-00913,2026-04-18,Mobiliario,7467.13,Aprobada
+VOL-00914,2026-05-19,Servicios profesionales,5586.14,Aprobada
+VOL-00915,2026-06-20,Capacitación,3705.15,Aprobada
+VOL-00916,2026-07-21,Viajes,1824.16,Aprobada
+VOL-00917,2026-08-22,Papelería,9743.17,Aprobada
+VOL-00918,2026-09-23,Tecnología,7862.18,Rechazada
+VOL-00919,2026-10-24,Mobiliario,5981.19,Aprobada
+VOL-00920,2026-01-25,Servicios profesionales,4100.2,Pendiente
+VOL-00921,2026-02-26,Capacitación,2219.21,Aprobada
+VOL-00922,2026-03-27,Viajes,338.22,Aprobada
+VOL-00923,2026-04-28,Papelería,8257.23,Aprobada
+VOL-00924,2026-05-01,Tecnología,6376.24,Aprobada
+VOL-00925,2026-06-02,Mobiliario,4495.25,Aprobada
+VOL-00926,2026-07-03,Servicios profesionales,2614.26,Aprobada
+VOL-00927,2026-08-04,Capacitación,733.27,Aprobada
+VOL-00928,2026-09-05,Viajes,8652.28,Aprobada
+VOL-00929,2026-10-06,Papelería,6771.29,Aprobada
+VOL-00930,2026-01-07,Tecnología,4890.3,Aprobada
+VOL-00931,2026-02-08,Mobiliario,3009.31,Aprobada
+VOL-00932,2026-03-09,Servicios profesionales,1128.32,Aprobada
+VOL-00933,2026-04-10,Capacitación,9047.33,Aprobada
+VOL-00934,2026-05-11,Viajes,7166.34,Aprobada
+VOL-00935,2026-06-12,Papelería,5285.35,Rechazada
+VOL-00936,2026-07-13,Tecnología,3404.36,Aprobada
+VOL-00937,2026-08-14,Mobiliario,1523.37,Aprobada
+VOL-00938,2026-09-15,Servicios profesionales,9442.38,Aprobada
+VOL-00939,2026-10-16,Capacitación,7561.39,Aprobada
+VOL-00940,2026-01-17,Viajes,5680.4,Aprobada
+VOL-00941,2026-02-18,Papelería,3799.41,Aprobada
+VOL-00942,2026-03-19,Tecnología,1918.42,Aprobada
+VOL-00943,2026-04-20,Mobiliario,37.43,Pendiente
+VOL-00944,2026-05-21,Servicios profesionales,7956.44,Aprobada
+VOL-00945,2026-06-22,Capacitación,6075.45,Aprobada
+VOL-00946,2026-07-23,Viajes,4194.46,Aprobada
+VOL-00947,2026-08-24,Papelería,2313.47,Aprobada
+VOL-00948,2026-09-25,Tecnología,432.48,Aprobada
+VOL-00949,2026-10-26,Mobiliario,8351.49,Aprobada
+VOL-00950,2026-01-27,Servicios profesionales,6470.5,Aprobada
+VOL-00951,2026-02-28,Capacitación,4589.51,Aprobada
+VOL-00952,2026-03-01,Viajes,2708.52,Rechazada
+VOL-00953,2026-04-02,Papelería,827.53,Aprobada
+VOL-00954,2026-05-03,Tecnología,8746.54,Aprobada
+VOL-00955,2026-06-04,Mobiliario,6865.55,Aprobada
+VOL-00956,2026-07-05,Servicios profesionales,4984.56,Aprobada
+VOL-00957,2026-08-06,Capacitación,3103.57,Aprobada
+VOL-00958,2026-09-07,Viajes,1222.58,Aprobada
+VOL-00959,2026-10-08,Papelería,9141.59,Aprobada
+VOL-00960,2026-01-09,Tecnología,7260.6,Aprobada
+VOL-00961,2026-02-10,Mobiliario,5379.61,Aprobada
+VOL-00962,2026-03-11,Servicios profesionales,3498.62,Aprobada
+VOL-00963,2026-04-12,Capacitación,1617.63,Aprobada
+VOL-00964,2026-05-13,Viajes,9536.64,Aprobada
+VOL-00965,2026-06-14,Papelería,7655.65,Aprobada
+VOL-00966,2026-07-15,Tecnología,5774.66,Pendiente
+VOL-00967,2026-08-16,Mobiliario,3893.67,Aprobada
+VOL-00968,2026-09-17,Servicios profesionales,2012.68,Aprobada
+VOL-00969,2026-10-18,Capacitación,131.69,Rechazada
+VOL-00970,2026-01-19,Viajes,8050.7,Aprobada
+VOL-00971,2026-02-20,Papelería,6169.71,Aprobada
+VOL-00972,2026-03-21,Tecnología,4288.72,Aprobada
+VOL-00973,2026-04-22,Mobiliario,2407.73,Aprobada
+VOL-00974,2026-05-23,Servicios profesionales,526.74,Aprobada
+VOL-00975,2026-06-24,Capacitación,8445.75,Aprobada
+VOL-00976,2026-07-25,Viajes,6564.76,Aprobada
+VOL-00977,2026-08-26,Papelería,4683.77,Aprobada
+VOL-00978,2026-09-27,Tecnología,2802.78,Aprobada
+VOL-00979,2026-10-28,Mobiliario,921.79,Aprobada
+VOL-00980,2026-01-01,Servicios profesionales,8840.8,Aprobada
+VOL-00981,2026-02-02,Capacitación,6959.81,Aprobada
+VOL-00982,2026-03-03,Viajes,5078.82,Aprobada
+VOL-00983,2026-04-04,Papelería,3197.83,Aprobada
+VOL-00984,2026-05-05,Tecnología,1316.84,Aprobada
+VOL-00985,2026-06-06,Mobiliario,9235.85,Aprobada
+VOL-00986,2026-07-07,Servicios profesionales,7354.86,Rechazada
+VOL-00987,2026-08-08,Capacitación,5473.87,Aprobada
+VOL-00988,2026-09-09,Viajes,3592.88,Aprobada
+VOL-00989,2026-10-10,Papelería,1711.89,Pendiente
+VOL-00990,2026-01-11,Tecnología,9630.9,Aprobada
+VOL-00991,2026-02-12,Mobiliario,7749.91,Aprobada
+VOL-00992,2026-03-13,Servicios profesionales,5868.92,Aprobada
+VOL-00993,2026-04-14,Capacitación,3987.93,Aprobada
+VOL-00994,2026-05-15,Viajes,2106.94,Aprobada
+VOL-00995,2026-06-16,Papelería,225.95,Aprobada
+VOL-00996,2026-07-17,Tecnología,8144.96,Aprobada
+VOL-00997,2026-08-18,Mobiliario,6263.97,Aprobada
+VOL-00998,2026-09-19,Servicios profesionales,4382.98,Aprobada
+VOL-00999,2026-10-20,Capacitación,2501.99,Aprobada
+VOL-01000,2026-01-21,Viajes,620,Aprobada
+VOL-01001,2026-02-22,Papelería,8539.01,Aprobada
+VOL-01002,2026-03-23,Tecnología,6658.02,Aprobada
+VOL-01003,2026-04-24,Mobiliario,4777.03,Rechazada
+VOL-01004,2026-05-25,Servicios profesionales,2896.04,Aprobada
+VOL-01005,2026-06-26,Capacitación,1015.05,Aprobada
+VOL-01006,2026-07-27,Viajes,8934.06,Aprobada
+VOL-01007,2026-08-28,Papelería,7053.07,Aprobada
+VOL-01008,2026-09-01,Tecnología,5172.08,Aprobada
+VOL-01009,2026-10-02,Mobiliario,3291.09,Aprobada
+VOL-01010,2026-01-03,Servicios profesionales,1410.1,Aprobada
+VOL-01011,2026-02-04,Capacitación,9329.11,Aprobada
+VOL-01012,2026-03-05,Viajes,7448.12,Pendiente
+VOL-01013,2026-04-06,Papelería,5567.13,Aprobada
+VOL-01014,2026-05-07,Tecnología,3686.14,Aprobada
+VOL-01015,2026-06-08,Mobiliario,1805.15,Aprobada
+VOL-01016,2026-07-09,Servicios profesionales,9724.16,Aprobada
+VOL-01017,2026-08-10,Capacitación,7843.17,Aprobada
+VOL-01018,2026-09-11,Viajes,5962.18,Aprobada
+VOL-01019,2026-10-12,Papelería,4081.19,Aprobada
+VOL-01020,2026-01-13,Tecnología,2200.2,Rechazada
+VOL-01021,2026-02-14,Mobiliario,319.21,Aprobada
+VOL-01022,2026-03-15,Servicios profesionales,8238.22,Aprobada
+VOL-01023,2026-04-16,Capacitación,6357.23,Aprobada
+VOL-01024,2026-05-17,Viajes,4476.24,Aprobada
+VOL-01025,2026-06-18,Papelería,2595.25,Aprobada
+VOL-01026,2026-07-19,Tecnología,714.26,Aprobada
+VOL-01027,2026-08-20,Mobiliario,8633.27,Aprobada
+VOL-01028,2026-09-21,Servicios profesionales,6752.28,Aprobada
+VOL-01029,2026-10-22,Capacitación,4871.29,Aprobada
+VOL-01030,2026-01-23,Viajes,2990.3,Aprobada
+VOL-01031,2026-02-24,Papelería,1109.31,Aprobada
+VOL-01032,2026-03-25,Tecnología,9028.32,Aprobada
+VOL-01033,2026-04-26,Mobiliario,7147.33,Aprobada
+VOL-01034,2026-05-27,Servicios profesionales,5266.34,Aprobada
+VOL-01035,2026-06-28,Capacitación,3385.35,Pendiente
+VOL-01036,2026-07-01,Viajes,1504.36,Aprobada
+VOL-01037,2026-08-02,Papelería,9423.37,Rechazada
+VOL-01038,2026-09-03,Tecnología,7542.38,Aprobada
+VOL-01039,2026-10-04,Mobiliario,5661.39,Aprobada
+VOL-01040,2026-01-05,Servicios profesionales,3780.4,Aprobada
+VOL-01041,2026-02-06,Capacitación,1899.41,Aprobada
+VOL-01042,2026-03-07,Viajes,9818.42,Aprobada
+VOL-01043,2026-04-08,Papelería,7937.43,Aprobada
+VOL-01044,2026-05-09,Tecnología,6056.44,Aprobada
+VOL-01045,2026-06-10,Mobiliario,4175.45,Aprobada
+VOL-01046,2026-07-11,Servicios profesionales,2294.46,Aprobada
+VOL-01047,2026-08-12,Capacitación,413.47,Aprobada
+VOL-01048,2026-09-13,Viajes,8332.48,Aprobada
+VOL-01049,2026-10-14,Papelería,6451.49,Aprobada
+VOL-01050,2026-01-15,Tecnología,4570.5,Aprobada
+VOL-01051,2026-02-16,Mobiliario,2689.51,Aprobada
+VOL-01052,2026-03-17,Servicios profesionales,808.52,Aprobada
+VOL-01053,2026-04-18,Capacitación,8727.53,Aprobada
+VOL-01054,2026-05-19,Viajes,6846.54,Rechazada
+VOL-01055,2026-06-20,Papelería,4965.55,Aprobada
+VOL-01056,2026-07-21,Tecnología,3084.56,Aprobada
+VOL-01057,2026-08-22,Mobiliario,1203.57,Aprobada
+VOL-01058,2026-09-23,Servicios profesionales,9122.58,Pendiente
+VOL-01059,2026-10-24,Capacitación,7241.59,Aprobada
+VOL-01060,2026-01-25,Viajes,5360.6,Aprobada
+VOL-01061,2026-02-26,Papelería,3479.61,Aprobada
+VOL-01062,2026-03-27,Tecnología,1598.62,Aprobada
+VOL-01063,2026-04-28,Mobiliario,9517.63,Aprobada
+VOL-01064,2026-05-01,Servicios profesionales,7636.64,Aprobada
+VOL-01065,2026-06-02,Capacitación,5755.65,Aprobada
+VOL-01066,2026-07-03,Viajes,3874.66,Aprobada
+VOL-01067,2026-08-04,Papelería,1993.67,Aprobada
+VOL-01068,2026-09-05,Tecnología,112.68,Aprobada
+VOL-01069,2026-10-06,Mobiliario,8031.69,Aprobada
+VOL-01070,2026-01-07,Servicios profesionales,6150.7,Aprobada
+VOL-01071,2026-02-08,Capacitación,4269.71,Rechazada
+VOL-01072,2026-03-09,Viajes,2388.72,Aprobada
+VOL-01073,2026-04-10,Papelería,507.73,Aprobada
+VOL-01074,2026-05-11,Tecnología,8426.74,Aprobada
+VOL-01075,2026-06-12,Mobiliario,6545.75,Aprobada
+VOL-01076,2026-07-13,Servicios profesionales,4664.76,Aprobada
+VOL-01077,2026-08-14,Capacitación,2783.77,Aprobada
+VOL-01078,2026-09-15,Viajes,902.78,Aprobada
+VOL-01079,2026-10-16,Papelería,8821.79,Aprobada
+VOL-01080,2026-01-17,Tecnología,6940.8,Aprobada
+VOL-01081,2026-02-18,Mobiliario,5059.81,Pendiente
+VOL-01082,2026-03-19,Servicios profesionales,3178.82,Aprobada
+VOL-01083,2026-04-20,Capacitación,1297.83,Aprobada
+VOL-01084,2026-05-21,Viajes,9216.84,Aprobada
+VOL-01085,2026-06-22,Papelería,7335.85,Aprobada
+VOL-01086,2026-07-23,Tecnología,5454.86,Aprobada
+VOL-01087,2026-08-24,Mobiliario,3573.87,Aprobada
+VOL-01088,2026-09-25,Servicios profesionales,1692.88,Rechazada
+VOL-01089,2026-10-26,Capacitación,9611.89,Aprobada
+VOL-01090,2026-01-27,Viajes,7730.9,Aprobada
+VOL-01091,2026-02-28,Papelería,5849.91,Aprobada
+VOL-01092,2026-03-01,Tecnología,3968.92,Aprobada
+VOL-01093,2026-04-02,Mobiliario,2087.93,Aprobada
+VOL-01094,2026-05-03,Servicios profesionales,206.94,Aprobada
+VOL-01095,2026-06-04,Capacitación,8125.95,Aprobada
+VOL-01096,2026-07-05,Viajes,6244.96,Aprobada
+VOL-01097,2026-08-06,Papelería,4363.97,Aprobada
+VOL-01098,2026-09-07,Tecnología,2482.98,Aprobada
+VOL-01099,2026-10-08,Mobiliario,601.99,Aprobada
+VOL-01100,2026-01-09,Servicios profesionales,8520,Aprobada
+VOL-01101,2026-02-10,Capacitación,6639.01,Aprobada
+VOL-01102,2026-03-11,Viajes,4758.02,Aprobada
+VOL-01103,2026-04-12,Papelería,2877.03,Aprobada
+VOL-01104,2026-05-13,Tecnología,996.04,Pendiente
+VOL-01105,2026-06-14,Mobiliario,8915.05,Rechazada
+VOL-01106,2026-07-15,Servicios profesionales,7034.06,Aprobada
+VOL-01107,2026-08-16,Capacitación,5153.07,Aprobada
+VOL-01108,2026-09-17,Viajes,3272.08,Aprobada
+VOL-01109,2026-10-18,Papelería,1391.09,Aprobada
+VOL-01110,2026-01-19,Tecnología,9310.1,Aprobada
+VOL-01111,2026-02-20,Mobiliario,7429.11,Aprobada
+VOL-01112,2026-03-21,Servicios profesionales,5548.12,Aprobada
+VOL-01113,2026-04-22,Capacitación,3667.13,Aprobada
+VOL-01114,2026-05-23,Viajes,1786.14,Aprobada
+VOL-01115,2026-06-24,Papelería,9705.15,Aprobada
+VOL-01116,2026-07-25,Tecnología,7824.16,Aprobada
+VOL-01117,2026-08-26,Mobiliario,5943.17,Aprobada
+VOL-01118,2026-09-27,Servicios profesionales,4062.18,Aprobada
+VOL-01119,2026-10-28,Capacitación,2181.19,Aprobada
+VOL-01120,2026-01-01,Viajes,300.2,Aprobada
+VOL-01121,2026-02-02,Papelería,8219.21,Aprobada
+VOL-01122,2026-03-03,Tecnología,6338.22,Rechazada
+VOL-01123,2026-04-04,Mobiliario,4457.23,Aprobada
+VOL-01124,2026-05-05,Servicios profesionales,2576.24,Aprobada
+VOL-01125,2026-06-06,Capacitación,695.25,Aprobada
+VOL-01126,2026-07-07,Viajes,8614.26,Aprobada
+VOL-01127,2026-08-08,Papelería,6733.27,Pendiente
+VOL-01128,2026-09-09,Tecnología,4852.28,Aprobada
+VOL-01129,2026-10-10,Mobiliario,2971.29,Aprobada
+VOL-01130,2026-01-11,Servicios profesionales,1090.3,Aprobada
+VOL-01131,2026-02-12,Capacitación,9009.31,Aprobada
+VOL-01132,2026-03-13,Viajes,7128.32,Aprobada
+VOL-01133,2026-04-14,Papelería,5247.33,Aprobada
+VOL-01134,2026-05-15,Tecnología,3366.34,Aprobada
+VOL-01135,2026-06-16,Mobiliario,1485.35,Aprobada
+VOL-01136,2026-07-17,Servicios profesionales,9404.36,Aprobada
+VOL-01137,2026-08-18,Capacitación,7523.37,Aprobada
+VOL-01138,2026-09-19,Viajes,5642.38,Aprobada
+VOL-01139,2026-10-20,Papelería,3761.39,Rechazada
+VOL-01140,2026-01-21,Tecnología,1880.4,Aprobada
+VOL-01141,2026-02-22,Mobiliario,9799.41,Aprobada
+VOL-01142,2026-03-23,Servicios profesionales,7918.42,Aprobada
+VOL-01143,2026-04-24,Capacitación,6037.43,Aprobada
+VOL-01144,2026-05-25,Viajes,4156.44,Aprobada
+VOL-01145,2026-06-26,Papelería,2275.45,Aprobada
+VOL-01146,2026-07-27,Tecnología,394.46,Aprobada
+VOL-01147,2026-08-28,Mobiliario,8313.47,Aprobada
+VOL-01148,2026-09-01,Servicios profesionales,6432.48,Aprobada
+VOL-01149,2026-10-02,Capacitación,4551.49,Aprobada
+VOL-01150,2026-01-03,Viajes,2670.5,Pendiente
+VOL-01151,2026-02-04,Papelería,789.51,Aprobada
+VOL-01152,2026-03-05,Tecnología,8708.52,Aprobada
+VOL-01153,2026-04-06,Mobiliario,6827.53,Aprobada
+VOL-01154,2026-05-07,Servicios profesionales,4946.54,Aprobada
+VOL-01155,2026-06-08,Capacitación,3065.55,Aprobada
+VOL-01156,2026-07-09,Viajes,1184.56,Rechazada
+VOL-01157,2026-08-10,Papelería,9103.57,Aprobada
+VOL-01158,2026-09-11,Tecnología,7222.58,Aprobada
+VOL-01159,2026-10-12,Mobiliario,5341.59,Aprobada
+VOL-01160,2026-01-13,Servicios profesionales,3460.6,Aprobada
+VOL-01161,2026-02-14,Capacitación,1579.61,Aprobada
+VOL-01162,2026-03-15,Viajes,9498.62,Aprobada
+VOL-01163,2026-04-16,Papelería,7617.63,Aprobada
+VOL-01164,2026-05-17,Tecnología,5736.64,Aprobada
+VOL-01165,2026-06-18,Mobiliario,3855.65,Aprobada
+VOL-01166,2026-07-19,Servicios profesionales,1974.66,Aprobada
+VOL-01167,2026-08-20,Capacitación,93.67,Aprobada
+VOL-01168,2026-09-21,Viajes,8012.68,Aprobada
+VOL-01169,2026-10-22,Papelería,6131.69,Aprobada
+VOL-01170,2026-01-23,Tecnología,4250.7,Aprobada
+VOL-01171,2026-02-24,Mobiliario,2369.71,Aprobada
+VOL-01172,2026-03-25,Servicios profesionales,488.72,Aprobada
+VOL-01173,2026-04-26,Capacitación,8407.73,Rechazada
+VOL-01174,2026-05-27,Viajes,6526.74,Aprobada
+VOL-01175,2026-06-28,Papelería,4645.75,Aprobada
+VOL-01176,2026-07-01,Tecnología,2764.76,Aprobada
+VOL-01177,2026-08-02,Mobiliario,883.77,Aprobada
+VOL-01178,2026-09-03,Servicios profesionales,8802.78,Aprobada
+VOL-01179,2026-10-04,Capacitación,6921.79,Aprobada
+VOL-01180,2026-01-05,Viajes,5040.8,Aprobada
+VOL-01181,2026-02-06,Papelería,3159.81,Aprobada
+VOL-01182,2026-03-07,Tecnología,1278.82,Aprobada
+VOL-01183,2026-04-08,Mobiliario,9197.83,Aprobada
+VOL-01184,2026-05-09,Servicios profesionales,7316.84,Aprobada
+VOL-01185,2026-06-10,Capacitación,5435.85,Aprobada
+VOL-01186,2026-07-11,Viajes,3554.86,Aprobada
+VOL-01187,2026-08-12,Papelería,1673.87,Aprobada
+VOL-01188,2026-09-13,Tecnología,9592.88,Aprobada
+VOL-01189,2026-10-14,Mobiliario,7711.89,Aprobada
+VOL-01190,2026-01-15,Servicios profesionales,5830.9,Rechazada
+VOL-01191,2026-02-16,Capacitación,3949.91,Aprobada
+VOL-01192,2026-03-17,Viajes,2068.92,Aprobada
+VOL-01193,2026-04-18,Papelería,187.93,Aprobada
+VOL-01194,2026-05-19,Tecnología,8106.94,Aprobada
+VOL-01195,2026-06-20,Mobiliario,6225.95,Aprobada
+VOL-01196,2026-07-21,Servicios profesionales,4344.96,Pendiente
+VOL-01197,2026-08-22,Capacitación,2463.97,Aprobada
+VOL-01198,2026-09-23,Viajes,582.98,Aprobada
+VOL-01199,2026-10-24,Papelería,8501.99,Aprobada
+VOL-01200,2026-01-25,Tecnología,6620,Aprobada
+VOL-01201,2026-02-26,Mobiliario,4739.01,Aprobada
+VOL-01202,2026-03-27,Servicios profesionales,2858.02,Aprobada
+VOL-01203,2026-04-28,Capacitación,977.03,Aprobada
+VOL-01204,2026-05-01,Viajes,8896.04,Aprobada
+VOL-01205,2026-06-02,Papelería,7015.05,Aprobada
+VOL-01206,2026-07-03,Tecnología,5134.06,Aprobada
+VOL-01207,2026-08-04,Mobiliario,3253.07,Rechazada
+VOL-01208,2026-09-05,Servicios profesionales,1372.08,Aprobada
+VOL-01209,2026-10-06,Capacitación,9291.09,Aprobada
+VOL-01210,2026-01-07,Viajes,7410.1,Aprobada
+VOL-01211,2026-02-08,Papelería,5529.11,Aprobada
+VOL-01212,2026-03-09,Tecnología,3648.12,Aprobada
+VOL-01213,2026-04-10,Mobiliario,1767.13,Aprobada
+VOL-01214,2026-05-11,Servicios profesionales,9686.14,Aprobada
+VOL-01215,2026-06-12,Capacitación,7805.15,Aprobada
+VOL-01216,2026-07-13,Viajes,5924.16,Aprobada
+VOL-01217,2026-08-14,Papelería,4043.17,Aprobada
+VOL-01218,2026-09-15,Tecnología,2162.18,Aprobada
+VOL-01219,2026-10-16,Mobiliario,281.19,Pendiente
+VOL-01220,2026-01-17,Servicios profesionales,8200.2,Aprobada
+VOL-01221,2026-02-18,Capacitación,6319.21,Aprobada
+VOL-01222,2026-03-19,Viajes,4438.22,Aprobada
+VOL-01223,2026-04-20,Papelería,2557.23,Aprobada
+VOL-01224,2026-05-21,Tecnología,676.24,Rechazada
+VOL-01225,2026-06-22,Mobiliario,8595.25,Aprobada
+VOL-01226,2026-07-23,Servicios profesionales,6714.26,Aprobada
+VOL-01227,2026-08-24,Capacitación,4833.27,Aprobada
+VOL-01228,2026-09-25,Viajes,2952.28,Aprobada
+VOL-01229,2026-10-26,Papelería,1071.29,Aprobada
+VOL-01230,2026-01-27,Tecnología,8990.3,Aprobada
+VOL-01231,2026-02-28,Mobiliario,7109.31,Aprobada
+VOL-01232,2026-03-01,Servicios profesionales,5228.32,Aprobada
+VOL-01233,2026-04-02,Capacitación,3347.33,Aprobada
+VOL-01234,2026-05-03,Viajes,1466.34,Aprobada
+VOL-01235,2026-06-04,Papelería,9385.35,Aprobada
+VOL-01236,2026-07-05,Tecnología,7504.36,Aprobada
+VOL-01237,2026-08-06,Mobiliario,5623.37,Aprobada
+VOL-01238,2026-09-07,Servicios profesionales,3742.38,Aprobada
+VOL-01239,2026-10-08,Capacitación,1861.39,Aprobada
+VOL-01240,2026-01-09,Viajes,9780.4,Aprobada
+VOL-01241,2026-02-10,Papelería,7899.41,Rechazada
+VOL-01242,2026-03-11,Tecnología,6018.42,Pendiente
+VOL-01243,2026-04-12,Mobiliario,4137.43,Aprobada
+VOL-01244,2026-05-13,Servicios profesionales,2256.44,Aprobada
+VOL-01245,2026-06-14,Capacitación,375.45,Aprobada
+VOL-01246,2026-07-15,Viajes,8294.46,Aprobada
+VOL-01247,2026-08-16,Papelería,6413.47,Aprobada
+VOL-01248,2026-09-17,Tecnología,4532.48,Aprobada
+VOL-01249,2026-10-18,Mobiliario,2651.49,Aprobada
+VOL-01250,2026-01-19,Servicios profesionales,770.5,Aprobada
+VOL-01251,2026-02-20,Capacitación,8689.51,Aprobada
+VOL-01252,2026-03-21,Viajes,6808.52,Aprobada
+VOL-01253,2026-04-22,Papelería,4927.53,Aprobada
+VOL-01254,2026-05-23,Tecnología,3046.54,Aprobada
+VOL-01255,2026-06-24,Mobiliario,1165.55,Aprobada
+VOL-01256,2026-07-25,Servicios profesionales,9084.56,Aprobada
+VOL-01257,2026-08-26,Capacitación,7203.57,Aprobada
+VOL-01258,2026-09-27,Viajes,5322.58,Rechazada
+VOL-01259,2026-10-28,Papelería,3441.59,Aprobada
+VOL-01260,2026-01-01,Tecnología,1560.6,Aprobada
+VOL-01261,2026-02-02,Mobiliario,9479.61,Aprobada
+VOL-01262,2026-03-03,Servicios profesionales,7598.62,Aprobada
+VOL-01263,2026-04-04,Capacitación,5717.63,Aprobada
+VOL-01264,2026-05-05,Viajes,3836.64,Aprobada
+VOL-01265,2026-06-06,Papelería,1955.65,Pendiente
+VOL-01266,2026-07-07,Tecnología,74.66,Aprobada
+VOL-01267,2026-08-08,Mobiliario,7993.67,Aprobada
+VOL-01268,2026-09-09,Servicios profesionales,6112.68,Aprobada
+VOL-01269,2026-10-10,Capacitación,4231.69,Aprobada
+VOL-01270,2026-01-11,Viajes,2350.7,Aprobada
+VOL-01271,2026-02-12,Papelería,469.71,Aprobada
+VOL-01272,2026-03-13,Tecnología,8388.72,Aprobada
+VOL-01273,2026-04-14,Mobiliario,6507.73,Aprobada
+VOL-01274,2026-05-15,Servicios profesionales,4626.74,Aprobada
+VOL-01275,2026-06-16,Capacitación,2745.75,Rechazada
+VOL-01276,2026-07-17,Viajes,864.76,Aprobada
+VOL-01277,2026-08-18,Papelería,8783.77,Aprobada
+VOL-01278,2026-09-19,Tecnología,6902.78,Aprobada
+VOL-01279,2026-10-20,Mobiliario,5021.79,Aprobada
+VOL-01280,2026-01-21,Servicios profesionales,3140.8,Aprobada
+VOL-01281,2026-02-22,Capacitación,1259.81,Aprobada
+VOL-01282,2026-03-23,Viajes,9178.82,Aprobada
+VOL-01283,2026-04-24,Papelería,7297.83,Aprobada
+VOL-01284,2026-05-25,Tecnología,5416.84,Aprobada
+VOL-01285,2026-06-26,Mobiliario,3535.85,Aprobada
+VOL-01286,2026-07-27,Servicios profesionales,1654.86,Aprobada
+VOL-01287,2026-08-28,Capacitación,9573.87,Aprobada
+VOL-01288,2026-09-01,Viajes,7692.88,Pendiente
+VOL-01289,2026-10-02,Papelería,5811.89,Aprobada
+VOL-01290,2026-01-03,Tecnología,3930.9,Aprobada
+VOL-01291,2026-02-04,Mobiliario,2049.91,Aprobada
+VOL-01292,2026-03-05,Servicios profesionales,168.92,Rechazada
+VOL-01293,2026-04-06,Capacitación,8087.93,Aprobada
+VOL-01294,2026-05-07,Viajes,6206.94,Aprobada
+VOL-01295,2026-06-08,Papelería,4325.95,Aprobada
+VOL-01296,2026-07-09,Tecnología,2444.96,Aprobada
+VOL-01297,2026-08-10,Mobiliario,563.97,Aprobada
+VOL-01298,2026-09-11,Servicios profesionales,8482.98,Aprobada
+VOL-01299,2026-10-12,Capacitación,6601.99,Aprobada
+VOL-01300,2026-01-13,Viajes,4720,Aprobada
+VOL-01301,2026-02-14,Papelería,2839.01,Aprobada
+VOL-01302,2026-03-15,Tecnología,958.02,Aprobada
+VOL-01303,2026-04-16,Mobiliario,8877.03,Aprobada
+VOL-01304,2026-05-17,Servicios profesionales,6996.04,Aprobada
+VOL-01305,2026-06-18,Capacitación,5115.05,Aprobada
+VOL-01306,2026-07-19,Viajes,3234.06,Aprobada
+VOL-01307,2026-08-20,Papelería,1353.07,Aprobada
+VOL-01308,2026-09-21,Tecnología,9272.08,Aprobada
+VOL-01309,2026-10-22,Mobiliario,7391.09,Rechazada
+VOL-01310,2026-01-23,Servicios profesionales,5510.1,Aprobada
+VOL-01311,2026-02-24,Capacitación,3629.11,Pendiente
+VOL-01312,2026-03-25,Viajes,1748.12,Aprobada
+VOL-01313,2026-04-26,Papelería,9667.13,Aprobada
+VOL-01314,2026-05-27,Tecnología,7786.14,Aprobada
+VOL-01315,2026-06-28,Mobiliario,5905.15,Aprobada
+VOL-01316,2026-07-01,Servicios profesionales,4024.16,Aprobada
+VOL-01317,2026-08-02,Capacitación,2143.17,Aprobada
+VOL-01318,2026-09-03,Viajes,262.18,Aprobada
+VOL-01319,2026-10-04,Papelería,8181.19,Aprobada
+VOL-01320,2026-01-05,Tecnología,6300.2,Aprobada
+VOL-01321,2026-02-06,Mobiliario,4419.21,Aprobada
+VOL-01322,2026-03-07,Servicios profesionales,2538.22,Aprobada
+VOL-01323,2026-04-08,Capacitación,657.23,Aprobada
+VOL-01324,2026-05-09,Viajes,8576.24,Aprobada
+VOL-01325,2026-06-10,Papelería,6695.25,Aprobada
+VOL-01326,2026-07-11,Tecnología,4814.26,Rechazada
+VOL-01327,2026-08-12,Mobiliario,2933.27,Aprobada
+VOL-01328,2026-09-13,Servicios profesionales,1052.28,Aprobada
+VOL-01329,2026-10-14,Capacitación,8971.29,Aprobada
+VOL-01330,2026-01-15,Viajes,7090.3,Aprobada
+VOL-01331,2026-02-16,Papelería,5209.31,Aprobada
+VOL-01332,2026-03-17,Tecnología,3328.32,Aprobada
+VOL-01333,2026-04-18,Mobiliario,1447.33,Aprobada
+VOL-01334,2026-05-19,Servicios profesionales,9366.34,Pendiente
+VOL-01335,2026-06-20,Capacitación,7485.35,Aprobada
+VOL-01336,2026-07-21,Viajes,5604.36,Aprobada
+VOL-01337,2026-08-22,Papelería,3723.37,Aprobada
+VOL-01338,2026-09-23,Tecnología,1842.38,Aprobada
+VOL-01339,2026-10-24,Mobiliario,9761.39,Aprobada
+VOL-01340,2026-01-25,Servicios profesionales,7880.4,Aprobada
+VOL-01341,2026-02-26,Capacitación,5999.41,Aprobada
+VOL-01342,2026-03-27,Viajes,4118.42,Aprobada
+VOL-01343,2026-04-28,Papelería,2237.43,Rechazada
+VOL-01344,2026-05-01,Tecnología,356.44,Aprobada
+VOL-01345,2026-06-02,Mobiliario,8275.45,Aprobada
+VOL-01346,2026-07-03,Servicios profesionales,6394.46,Aprobada
+VOL-01347,2026-08-04,Capacitación,4513.47,Aprobada
+VOL-01348,2026-09-05,Viajes,2632.48,Aprobada
+VOL-01349,2026-10-06,Papelería,751.49,Aprobada
+VOL-01350,2026-01-07,Tecnología,8670.5,Aprobada
+VOL-01351,2026-02-08,Mobiliario,6789.51,Aprobada
+VOL-01352,2026-03-09,Servicios profesionales,4908.52,Aprobada
+VOL-01353,2026-04-10,Capacitación,3027.53,Aprobada
+VOL-01354,2026-05-11,Viajes,1146.54,Aprobada
+VOL-01355,2026-06-12,Papelería,9065.55,Aprobada
+VOL-01356,2026-07-13,Tecnología,7184.56,Aprobada
+VOL-01357,2026-08-14,Mobiliario,5303.57,Pendiente
+VOL-01358,2026-09-15,Servicios profesionales,3422.58,Aprobada
+VOL-01359,2026-10-16,Capacitación,1541.59,Aprobada
+VOL-01360,2026-01-17,Viajes,9460.6,Rechazada
+VOL-01361,2026-02-18,Papelería,7579.61,Aprobada
+VOL-01362,2026-03-19,Tecnología,5698.62,Aprobada
+VOL-01363,2026-04-20,Mobiliario,3817.63,Aprobada
+VOL-01364,2026-05-21,Servicios profesionales,1936.64,Aprobada
+VOL-01365,2026-06-22,Capacitación,55.65,Aprobada
+VOL-01366,2026-07-23,Viajes,7974.66,Aprobada
+VOL-01367,2026-08-24,Papelería,6093.67,Aprobada
+VOL-01368,2026-09-25,Tecnología,4212.68,Aprobada
+VOL-01369,2026-10-26,Mobiliario,2331.69,Aprobada
+VOL-01370,2026-01-27,Servicios profesionales,450.7,Aprobada
+VOL-01371,2026-02-28,Capacitación,8369.71,Aprobada
+VOL-01372,2026-03-01,Viajes,6488.72,Aprobada
+VOL-01373,2026-04-02,Papelería,4607.73,Aprobada
+VOL-01374,2026-05-03,Tecnología,2726.74,Aprobada
+VOL-01375,2026-06-04,Mobiliario,845.75,Aprobada
+VOL-01376,2026-07-05,Servicios profesionales,8764.76,Aprobada
+VOL-01377,2026-08-06,Capacitación,6883.77,Rechazada
+VOL-01378,2026-09-07,Viajes,5002.78,Aprobada
+VOL-01379,2026-10-08,Papelería,3121.79,Aprobada
+VOL-01380,2026-01-09,Tecnología,1240.8,Pendiente
+VOL-01381,2026-02-10,Mobiliario,9159.81,Aprobada
+VOL-01382,2026-03-11,Servicios profesionales,7278.82,Aprobada
+VOL-01383,2026-04-12,Capacitación,5397.83,Aprobada
+VOL-01384,2026-05-13,Viajes,3516.84,Aprobada
+VOL-01385,2026-06-14,Papelería,1635.85,Aprobada
+VOL-01386,2026-07-15,Tecnología,9554.86,Aprobada
+VOL-01387,2026-08-16,Mobiliario,7673.87,Aprobada
+VOL-01388,2026-09-17,Servicios profesionales,5792.88,Aprobada
+VOL-01389,2026-10-18,Capacitación,3911.89,Aprobada
+VOL-01390,2026-01-19,Viajes,2030.9,Aprobada
+VOL-01391,2026-02-20,Papelería,149.91,Aprobada
+VOL-01392,2026-03-21,Tecnología,8068.92,Aprobada
+VOL-01393,2026-04-22,Mobiliario,6187.93,Aprobada
+VOL-01394,2026-05-23,Servicios profesionales,4306.94,Rechazada
+VOL-01395,2026-06-24,Capacitación,2425.95,Aprobada
+VOL-01396,2026-07-25,Viajes,544.96,Aprobada
+VOL-01397,2026-08-26,Papelería,8463.97,Aprobada
+VOL-01398,2026-09-27,Tecnología,6582.98,Aprobada
+VOL-01399,2026-10-28,Mobiliario,4701.99,Aprobada
+VOL-01400,2026-01-01,Servicios profesionales,2820,Aprobada
+VOL-01401,2026-02-02,Capacitación,939.01,Aprobada
+VOL-01402,2026-03-03,Viajes,8858.02,Aprobada
+VOL-01403,2026-04-04,Papelería,6977.03,Pendiente
+VOL-01404,2026-05-05,Tecnología,5096.04,Aprobada
+VOL-01405,2026-06-06,Mobiliario,3215.05,Aprobada
+VOL-01406,2026-07-07,Servicios profesionales,1334.06,Aprobada
+VOL-01407,2026-08-08,Capacitación,9253.07,Aprobada
+VOL-01408,2026-09-09,Viajes,7372.08,Aprobada
+VOL-01409,2026-10-10,Papelería,5491.09,Aprobada
+VOL-01410,2026-01-11,Tecnología,3610.1,Aprobada
+VOL-01411,2026-02-12,Mobiliario,1729.11,Rechazada
+VOL-01412,2026-03-13,Servicios profesionales,9648.12,Aprobada
+VOL-01413,2026-04-14,Capacitación,7767.13,Aprobada
+VOL-01414,2026-05-15,Viajes,5886.14,Aprobada
+VOL-01415,2026-06-16,Papelería,4005.15,Aprobada
+VOL-01416,2026-07-17,Tecnología,2124.16,Aprobada
+VOL-01417,2026-08-18,Mobiliario,243.17,Aprobada
+VOL-01418,2026-09-19,Servicios profesionales,8162.18,Aprobada
+VOL-01419,2026-10-20,Capacitación,6281.19,Aprobada
+VOL-01420,2026-01-21,Viajes,4400.2,Aprobada
+VOL-01421,2026-02-22,Papelería,2519.21,Aprobada
+VOL-01422,2026-03-23,Tecnología,638.22,Aprobada
+VOL-01423,2026-04-24,Mobiliario,8557.23,Aprobada
+VOL-01424,2026-05-25,Servicios profesionales,6676.24,Aprobada
+VOL-01425,2026-06-26,Capacitación,4795.25,Aprobada
+VOL-01426,2026-07-27,Viajes,2914.26,Pendiente
+VOL-01427,2026-08-28,Papelería,1033.27,Aprobada
+VOL-01428,2026-09-01,Tecnología,8952.28,Rechazada
+VOL-01429,2026-10-02,Mobiliario,7071.29,Aprobada
+VOL-01430,2026-01-03,Servicios profesionales,5190.3,Aprobada
+VOL-01431,2026-02-04,Capacitación,3309.31,Aprobada
+VOL-01432,2026-03-05,Viajes,1428.32,Aprobada
+VOL-01433,2026-04-06,Papelería,9347.33,Aprobada
+VOL-01434,2026-05-07,Tecnología,7466.34,Aprobada
+VOL-01435,2026-06-08,Mobiliario,5585.35,Aprobada
+VOL-01436,2026-07-09,Servicios profesionales,3704.36,Aprobada
+VOL-01437,2026-08-10,Capacitación,1823.37,Aprobada
+VOL-01438,2026-09-11,Viajes,9742.38,Aprobada
+VOL-01439,2026-10-12,Papelería,7861.39,Aprobada
+VOL-01440,2026-01-13,Tecnología,5980.4,Aprobada
+VOL-01441,2026-02-14,Mobiliario,4099.41,Aprobada
+VOL-01442,2026-03-15,Servicios profesionales,2218.42,Aprobada
+VOL-01443,2026-04-16,Capacitación,337.43,Aprobada
+VOL-01444,2026-05-17,Viajes,8256.44,Aprobada
+VOL-01445,2026-06-18,Papelería,6375.45,Rechazada
+VOL-01446,2026-07-19,Tecnología,4494.46,Aprobada
+VOL-01447,2026-08-20,Mobiliario,2613.47,Aprobada
+VOL-01448,2026-09-21,Servicios profesionales,732.48,Aprobada
+VOL-01449,2026-10-22,Capacitación,8651.49,Pendiente
+VOL-01450,2026-01-23,Viajes,6770.5,Aprobada
+VOL-01451,2026-02-24,Papelería,4889.51,Aprobada
+VOL-01452,2026-03-25,Tecnología,3008.52,Aprobada
+VOL-01453,2026-04-26,Mobiliario,1127.53,Aprobada
+VOL-01454,2026-05-27,Servicios profesionales,9046.54,Aprobada
+VOL-01455,2026-06-28,Capacitación,7165.55,Aprobada
+VOL-01456,2026-07-01,Viajes,5284.56,Aprobada
+VOL-01457,2026-08-02,Papelería,3403.57,Aprobada
+VOL-01458,2026-09-03,Tecnología,1522.58,Aprobada
+VOL-01459,2026-10-04,Mobiliario,9441.59,Aprobada
+VOL-01460,2026-01-05,Servicios profesionales,7560.6,Aprobada
+VOL-01461,2026-02-06,Capacitación,5679.61,Aprobada
+VOL-01462,2026-03-07,Viajes,3798.62,Rechazada
+VOL-01463,2026-04-08,Papelería,1917.63,Aprobada
+VOL-01464,2026-05-09,Tecnología,36.64,Aprobada
+VOL-01465,2026-06-10,Mobiliario,7955.65,Aprobada
+VOL-01466,2026-07-11,Servicios profesionales,6074.66,Aprobada
+VOL-01467,2026-08-12,Capacitación,4193.67,Aprobada
+VOL-01468,2026-09-13,Viajes,2312.68,Aprobada
+VOL-01469,2026-10-14,Papelería,431.69,Aprobada
+VOL-01470,2026-01-15,Tecnología,8350.7,Aprobada
+VOL-01471,2026-02-16,Mobiliario,6469.71,Aprobada
+VOL-01472,2026-03-17,Servicios profesionales,4588.72,Pendiente
+VOL-01473,2026-04-18,Capacitación,2707.73,Aprobada
+VOL-01474,2026-05-19,Viajes,826.74,Aprobada
+VOL-01475,2026-06-20,Papelería,8745.75,Aprobada
+VOL-01476,2026-07-21,Tecnología,6864.76,Aprobada
+VOL-01477,2026-08-22,Mobiliario,4983.77,Aprobada
+VOL-01478,2026-09-23,Servicios profesionales,3102.78,Aprobada
+VOL-01479,2026-10-24,Capacitación,1221.79,Rechazada
+VOL-01480,2026-01-25,Viajes,9140.8,Aprobada
+VOL-01481,2026-02-26,Papelería,7259.81,Aprobada
+VOL-01482,2026-03-27,Tecnología,5378.82,Aprobada
+VOL-01483,2026-04-28,Mobiliario,3497.83,Aprobada
+VOL-01484,2026-05-01,Servicios profesionales,1616.84,Aprobada
+VOL-01485,2026-06-02,Capacitación,9535.85,Aprobada
+VOL-01486,2026-07-03,Viajes,7654.86,Aprobada
+VOL-01487,2026-08-04,Papelería,5773.87,Aprobada
+VOL-01488,2026-09-05,Tecnología,3892.88,Aprobada
+VOL-01489,2026-10-06,Mobiliario,2011.89,Aprobada
+VOL-01490,2026-01-07,Servicios profesionales,130.9,Aprobada
+VOL-01491,2026-02-08,Capacitación,8049.91,Aprobada
+VOL-01492,2026-03-09,Viajes,6168.92,Aprobada
+VOL-01493,2026-04-10,Papelería,4287.93,Aprobada
+VOL-01494,2026-05-11,Tecnología,2406.94,Aprobada
+VOL-01495,2026-06-12,Mobiliario,525.95,Pendiente
+VOL-01496,2026-07-13,Servicios profesionales,8444.96,Rechazada
+VOL-01497,2026-08-14,Capacitación,6563.97,Aprobada
+VOL-01498,2026-09-15,Viajes,4682.98,Aprobada
+VOL-01499,2026-10-16,Papelería,2801.99,Aprobada
+VOL-01500,2026-01-17,Tecnología,920,Aprobada
+VOL-01501,2026-02-18,Mobiliario,8839.01,Aprobada
+VOL-01502,2026-03-19,Servicios profesionales,6958.02,Aprobada
+VOL-01503,2026-04-20,Capacitación,5077.03,Aprobada
+VOL-01504,2026-05-21,Viajes,3196.04,Aprobada
+VOL-01505,2026-06-22,Papelería,1315.05,Aprobada
+VOL-01506,2026-07-23,Tecnología,9234.06,Aprobada
+VOL-01507,2026-08-24,Mobiliario,7353.07,Aprobada
+VOL-01508,2026-09-25,Servicios profesionales,5472.08,Aprobada
+VOL-01509,2026-10-26,Capacitación,3591.09,Aprobada
+VOL-01510,2026-01-27,Viajes,1710.1,Aprobada
+VOL-01511,2026-02-28,Papelería,9629.11,Aprobada
+VOL-01512,2026-03-01,Tecnología,7748.12,Aprobada
+VOL-01513,2026-04-02,Mobiliario,5867.13,Rechazada
+VOL-01514,2026-05-03,Servicios profesionales,3986.14,Aprobada
+VOL-01515,2026-06-04,Capacitación,2105.15,Aprobada
+VOL-01516,2026-07-05,Viajes,224.16,Aprobada
+VOL-01517,2026-08-06,Papelería,8143.17,Aprobada
+VOL-01518,2026-09-07,Tecnología,6262.18,Pendiente
+VOL-01519,2026-10-08,Mobiliario,4381.19,Aprobada
+VOL-01520,2026-01-09,Servicios profesionales,2500.2,Aprobada
+VOL-01521,2026-02-10,Capacitación,619.21,Aprobada
+VOL-01522,2026-03-11,Viajes,8538.22,Aprobada
+VOL-01523,2026-04-12,Papelería,6657.23,Aprobada
+VOL-01524,2026-05-13,Tecnología,4776.24,Aprobada
+VOL-01525,2026-06-14,Mobiliario,2895.25,Aprobada
+VOL-01526,2026-07-15,Servicios profesionales,1014.26,Aprobada
+VOL-01527,2026-08-16,Capacitación,8933.27,Aprobada
+VOL-01528,2026-09-17,Viajes,7052.28,Aprobada
+VOL-01529,2026-10-18,Papelería,5171.29,Aprobada
+VOL-01530,2026-01-19,Tecnología,3290.3,Rechazada
+VOL-01531,2026-02-20,Mobiliario,1409.31,Aprobada
+VOL-01532,2026-03-21,Servicios profesionales,9328.32,Aprobada
+VOL-01533,2026-04-22,Capacitación,7447.33,Aprobada
+VOL-01534,2026-05-23,Viajes,5566.34,Aprobada
+VOL-01535,2026-06-24,Papelería,3685.35,Aprobada
+VOL-01536,2026-07-25,Tecnología,1804.36,Aprobada
+VOL-01537,2026-08-26,Mobiliario,9723.37,Aprobada
+VOL-01538,2026-09-27,Servicios profesionales,7842.38,Aprobada
+VOL-01539,2026-10-28,Capacitación,5961.39,Aprobada
+VOL-01540,2026-01-01,Viajes,4080.4,Aprobada
+VOL-01541,2026-02-02,Papelería,2199.41,Pendiente
+VOL-01542,2026-03-03,Tecnología,318.42,Aprobada
+VOL-01543,2026-04-04,Mobiliario,8237.43,Aprobada
+VOL-01544,2026-05-05,Servicios profesionales,6356.44,Aprobada
+VOL-01545,2026-06-06,Capacitación,4475.45,Aprobada
+VOL-01546,2026-07-07,Viajes,2594.46,Aprobada
+VOL-01547,2026-08-08,Papelería,713.47,Rechazada
+VOL-01548,2026-09-09,Tecnología,8632.48,Aprobada
+VOL-01549,2026-10-10,Mobiliario,6751.49,Aprobada
+VOL-01550,2026-01-11,Servicios profesionales,4870.5,Aprobada
+VOL-01551,2026-02-12,Capacitación,2989.51,Aprobada
+VOL-01552,2026-03-13,Viajes,1108.52,Aprobada
+VOL-01553,2026-04-14,Papelería,9027.53,Aprobada
+VOL-01554,2026-05-15,Tecnología,7146.54,Aprobada
+VOL-01555,2026-06-16,Mobiliario,5265.55,Aprobada
+VOL-01556,2026-07-17,Servicios profesionales,3384.56,Aprobada
+VOL-01557,2026-08-18,Capacitación,1503.57,Aprobada
+VOL-01558,2026-09-19,Viajes,9422.58,Aprobada
+VOL-01559,2026-10-20,Papelería,7541.59,Aprobada
+VOL-01560,2026-01-21,Tecnología,5660.6,Aprobada
+VOL-01561,2026-02-22,Mobiliario,3779.61,Aprobada
+VOL-01562,2026-03-23,Servicios profesionales,1898.62,Aprobada
+VOL-01563,2026-04-24,Capacitación,9817.63,Aprobada
+VOL-01564,2026-05-25,Viajes,7936.64,Rechazada
+VOL-01565,2026-06-26,Papelería,6055.65,Aprobada
+VOL-01566,2026-07-27,Tecnología,4174.66,Aprobada
+VOL-01567,2026-08-28,Mobiliario,2293.67,Aprobada
+VOL-01568,2026-09-01,Servicios profesionales,412.68,Aprobada
+VOL-01569,2026-10-02,Capacitación,8331.69,Aprobada
+VOL-01570,2026-01-03,Viajes,6450.7,Aprobada
+VOL-01571,2026-02-04,Papelería,4569.71,Aprobada
+VOL-01572,2026-03-05,Tecnología,2688.72,Aprobada
+VOL-01573,2026-04-06,Mobiliario,807.73,Aprobada
+VOL-01574,2026-05-07,Servicios profesionales,8726.74,Aprobada
+VOL-01575,2026-06-08,Capacitación,6845.75,Aprobada
+VOL-01576,2026-07-09,Viajes,4964.76,Aprobada
+VOL-01577,2026-08-10,Papelería,3083.77,Aprobada
+VOL-01578,2026-09-11,Tecnología,1202.78,Aprobada
+VOL-01579,2026-10-12,Mobiliario,9121.79,Aprobada
+VOL-01580,2026-01-13,Servicios profesionales,7240.8,Aprobada
+VOL-01581,2026-02-14,Capacitación,5359.81,Rechazada
+VOL-01582,2026-03-15,Viajes,3478.82,Aprobada
+VOL-01583,2026-04-16,Papelería,1597.83,Aprobada
+VOL-01584,2026-05-17,Tecnología,9516.84,Aprobada
+VOL-01585,2026-06-18,Mobiliario,7635.85,Aprobada
+VOL-01586,2026-07-19,Servicios profesionales,5754.86,Aprobada
+VOL-01587,2026-08-20,Capacitación,3873.87,Pendiente
+VOL-01588,2026-09-21,Viajes,1992.88,Aprobada
+VOL-01589,2026-10-22,Papelería,111.89,Aprobada
+VOL-01590,2026-01-23,Tecnología,8030.9,Aprobada
+VOL-01591,2026-02-24,Mobiliario,6149.91,Aprobada
+VOL-01592,2026-03-25,Servicios profesionales,4268.92,Aprobada
+VOL-01593,2026-04-26,Capacitación,2387.93,Aprobada
+VOL-01594,2026-05-27,Viajes,506.94,Aprobada
+VOL-01595,2026-06-28,Papelería,8425.95,Aprobada
+VOL-01596,2026-07-01,Tecnología,6544.96,Aprobada
+VOL-01597,2026-08-02,Mobiliario,4663.97,Aprobada
+VOL-01598,2026-09-03,Servicios profesionales,2782.98,Rechazada
+VOL-01599,2026-10-04,Capacitación,901.99,Aprobada
+VOL-01600,2026-01-05,Viajes,8820,Aprobada
+VOL-01601,2026-02-06,Papelería,6939.01,Aprobada
+VOL-01602,2026-03-07,Tecnología,5058.02,Aprobada
+VOL-01603,2026-04-08,Mobiliario,3177.03,Aprobada
+VOL-01604,2026-05-09,Servicios profesionales,1296.04,Aprobada
+VOL-01605,2026-06-10,Capacitación,9215.05,Aprobada
+VOL-01606,2026-07-11,Viajes,7334.06,Aprobada
+VOL-01607,2026-08-12,Papelería,5453.07,Aprobada
+VOL-01608,2026-09-13,Tecnología,3572.08,Aprobada
+VOL-01609,2026-10-14,Mobiliario,1691.09,Aprobada
+VOL-01610,2026-01-15,Servicios profesionales,9610.1,Pendiente
+VOL-01611,2026-02-16,Capacitación,7729.11,Aprobada
+VOL-01612,2026-03-17,Viajes,5848.12,Aprobada
+VOL-01613,2026-04-18,Papelería,3967.13,Aprobada
+VOL-01614,2026-05-19,Tecnología,2086.14,Aprobada
+VOL-01615,2026-06-20,Mobiliario,205.15,Rechazada
+VOL-01616,2026-07-21,Servicios profesionales,8124.16,Aprobada
+VOL-01617,2026-08-22,Capacitación,6243.17,Aprobada
+VOL-01618,2026-09-23,Viajes,4362.18,Aprobada
+VOL-01619,2026-10-24,Papelería,2481.19,Aprobada
+VOL-01620,2026-01-25,Tecnología,600.2,Aprobada
+VOL-01621,2026-02-26,Mobiliario,8519.21,Aprobada
+VOL-01622,2026-03-27,Servicios profesionales,6638.22,Aprobada
+VOL-01623,2026-04-28,Capacitación,4757.23,Aprobada
+VOL-01624,2026-05-01,Viajes,2876.24,Aprobada
+VOL-01625,2026-06-02,Papelería,995.25,Aprobada
+VOL-01626,2026-07-03,Tecnología,8914.26,Aprobada
+VOL-01627,2026-08-04,Mobiliario,7033.27,Aprobada
+VOL-01628,2026-09-05,Servicios profesionales,5152.28,Aprobada
+VOL-01629,2026-10-06,Capacitación,3271.29,Aprobada
+VOL-01630,2026-01-07,Viajes,1390.3,Aprobada
+VOL-01631,2026-02-08,Papelería,9309.31,Aprobada
+VOL-01632,2026-03-09,Tecnología,7428.32,Rechazada
+VOL-01633,2026-04-10,Mobiliario,5547.33,Pendiente
+VOL-01634,2026-05-11,Servicios profesionales,3666.34,Aprobada
+VOL-01635,2026-06-12,Capacitación,1785.35,Aprobada
+VOL-01636,2026-07-13,Viajes,9704.36,Aprobada
+VOL-01637,2026-08-14,Papelería,7823.37,Aprobada
+VOL-01638,2026-09-15,Tecnología,5942.38,Aprobada
+VOL-01639,2026-10-16,Mobiliario,4061.39,Aprobada
+VOL-01640,2026-01-17,Servicios profesionales,2180.4,Aprobada
+VOL-01641,2026-02-18,Capacitación,299.41,Aprobada
+VOL-01642,2026-03-19,Viajes,8218.42,Aprobada
+VOL-01643,2026-04-20,Papelería,6337.43,Aprobada
+VOL-01644,2026-05-21,Tecnología,4456.44,Aprobada
+VOL-01645,2026-06-22,Mobiliario,2575.45,Aprobada
+VOL-01646,2026-07-23,Servicios profesionales,694.46,Aprobada
+VOL-01647,2026-08-24,Capacitación,8613.47,Aprobada
+VOL-01648,2026-09-25,Viajes,6732.48,Aprobada
+VOL-01649,2026-10-26,Papelería,4851.49,Rechazada
+VOL-01650,2026-01-27,Tecnología,2970.5,Aprobada
+VOL-01651,2026-02-28,Mobiliario,1089.51,Aprobada
+VOL-01652,2026-03-01,Servicios profesionales,9008.52,Aprobada
+VOL-01653,2026-04-02,Capacitación,7127.53,Aprobada
+VOL-01654,2026-05-03,Viajes,5246.54,Aprobada
+VOL-01655,2026-06-04,Papelería,3365.55,Aprobada
+VOL-01656,2026-07-05,Tecnología,1484.56,Pendiente
+VOL-01657,2026-08-06,Mobiliario,9403.57,Aprobada
+VOL-01658,2026-09-07,Servicios profesionales,7522.58,Aprobada
+VOL-01659,2026-10-08,Capacitación,5641.59,Aprobada
+VOL-01660,2026-01-09,Viajes,3760.6,Aprobada
+VOL-01661,2026-02-10,Papelería,1879.61,Aprobada
+VOL-01662,2026-03-11,Tecnología,9798.62,Aprobada
+VOL-01663,2026-04-12,Mobiliario,7917.63,Aprobada
+VOL-01664,2026-05-13,Servicios profesionales,6036.64,Aprobada
+VOL-01665,2026-06-14,Capacitación,4155.65,Aprobada
+VOL-01666,2026-07-15,Viajes,2274.66,Rechazada
+VOL-01667,2026-08-16,Papelería,393.67,Aprobada
+VOL-01668,2026-09-17,Tecnología,8312.68,Aprobada
+VOL-01669,2026-10-18,Mobiliario,6431.69,Aprobada
+VOL-01670,2026-01-19,Servicios profesionales,4550.7,Aprobada
+VOL-01671,2026-02-20,Capacitación,2669.71,Aprobada
+VOL-01672,2026-03-21,Viajes,788.72,Aprobada
+VOL-01673,2026-04-22,Papelería,8707.73,Aprobada
+VOL-01674,2026-05-23,Tecnología,6826.74,Aprobada
+VOL-01675,2026-06-24,Mobiliario,4945.75,Aprobada
+VOL-01676,2026-07-25,Servicios profesionales,3064.76,Aprobada
+VOL-01677,2026-08-26,Capacitación,1183.77,Aprobada
+VOL-01678,2026-09-27,Viajes,9102.78,Aprobada
+VOL-01679,2026-10-28,Papelería,7221.79,Pendiente
+VOL-01680,2026-01-01,Tecnología,5340.8,Aprobada
+VOL-01681,2026-02-02,Mobiliario,3459.81,Aprobada
+VOL-01682,2026-03-03,Servicios profesionales,1578.82,Aprobada
+VOL-01683,2026-04-04,Capacitación,9497.83,Rechazada
+VOL-01684,2026-05-05,Viajes,7616.84,Aprobada
+VOL-01685,2026-06-06,Papelería,5735.85,Aprobada
+VOL-01686,2026-07-07,Tecnología,3854.86,Aprobada
+VOL-01687,2026-08-08,Mobiliario,1973.87,Aprobada
+VOL-01688,2026-09-09,Servicios profesionales,92.88,Aprobada
+VOL-01689,2026-10-10,Capacitación,8011.89,Aprobada
+VOL-01690,2026-01-11,Viajes,6130.9,Aprobada
+VOL-01691,2026-02-12,Papelería,4249.91,Aprobada
+VOL-01692,2026-03-13,Tecnología,2368.92,Aprobada
+VOL-01693,2026-04-14,Mobiliario,487.93,Aprobada
+VOL-01694,2026-05-15,Servicios profesionales,8406.94,Aprobada
+VOL-01695,2026-06-16,Capacitación,6525.95,Aprobada
+VOL-01696,2026-07-17,Viajes,4644.96,Aprobada
+VOL-01697,2026-08-18,Papelería,2763.97,Aprobada
+VOL-01698,2026-09-19,Tecnología,882.98,Aprobada
+VOL-01699,2026-10-20,Mobiliario,8801.99,Aprobada
+VOL-01700,2026-01-21,Servicios profesionales,6920,Rechazada
+VOL-01701,2026-02-22,Capacitación,5039.01,Aprobada
+VOL-01702,2026-03-23,Viajes,3158.02,Pendiente
+VOL-01703,2026-04-24,Papelería,1277.03,Aprobada
+VOL-01704,2026-05-25,Tecnología,9196.04,Aprobada
+VOL-01705,2026-06-26,Mobiliario,7315.05,Aprobada
+VOL-01706,2026-07-27,Servicios profesionales,5434.06,Aprobada
+VOL-01707,2026-08-28,Capacitación,3553.07,Aprobada
+VOL-01708,2026-09-01,Viajes,1672.08,Aprobada
+VOL-01709,2026-10-02,Papelería,9591.09,Aprobada
+VOL-01710,2026-01-03,Tecnología,7710.1,Aprobada
+VOL-01711,2026-02-04,Mobiliario,5829.11,Aprobada
+VOL-01712,2026-03-05,Servicios profesionales,3948.12,Aprobada
+VOL-01713,2026-04-06,Capacitación,2067.13,Aprobada
+VOL-01714,2026-05-07,Viajes,186.14,Aprobada
+VOL-01715,2026-06-08,Papelería,8105.15,Aprobada
+VOL-01716,2026-07-09,Tecnología,6224.16,Aprobada
+VOL-01717,2026-08-10,Mobiliario,4343.17,Rechazada
+VOL-01718,2026-09-11,Servicios profesionales,2462.18,Aprobada
+VOL-01719,2026-10-12,Capacitación,581.19,Aprobada
+VOL-01720,2026-01-13,Viajes,8500.2,Aprobada
+VOL-01721,2026-02-14,Papelería,6619.21,Aprobada
+VOL-01722,2026-03-15,Tecnología,4738.22,Aprobada
+VOL-01723,2026-04-16,Mobiliario,2857.23,Aprobada
+VOL-01724,2026-05-17,Servicios profesionales,976.24,Aprobada
+VOL-01725,2026-06-18,Capacitación,8895.25,Pendiente
+VOL-01726,2026-07-19,Viajes,7014.26,Aprobada
+VOL-01727,2026-08-20,Papelería,5133.27,Aprobada
+VOL-01728,2026-09-21,Tecnología,3252.28,Aprobada
+VOL-01729,2026-10-22,Mobiliario,1371.29,Aprobada
+VOL-01730,2026-01-23,Servicios profesionales,9290.3,Aprobada
+VOL-01731,2026-02-24,Capacitación,7409.31,Aprobada
+VOL-01732,2026-03-25,Viajes,5528.32,Aprobada
+VOL-01733,2026-04-26,Papelería,3647.33,Aprobada
+VOL-01734,2026-05-27,Tecnología,1766.34,Rechazada
+VOL-01735,2026-06-28,Mobiliario,9685.35,Aprobada
+VOL-01736,2026-07-01,Servicios profesionales,7804.36,Aprobada
+VOL-01737,2026-08-02,Capacitación,5923.37,Aprobada
+VOL-01738,2026-09-03,Viajes,4042.38,Aprobada
+VOL-01739,2026-10-04,Papelería,2161.39,Aprobada
+VOL-01740,2026-01-05,Tecnología,280.4,Aprobada
+VOL-01741,2026-02-06,Mobiliario,8199.41,Aprobada
+VOL-01742,2026-03-07,Servicios profesionales,6318.42,Aprobada
+VOL-01743,2026-04-08,Capacitación,4437.43,Aprobada
+VOL-01744,2026-05-09,Viajes,2556.44,Aprobada
+VOL-01745,2026-06-10,Papelería,675.45,Aprobada
+VOL-01746,2026-07-11,Tecnología,8594.46,Aprobada
+VOL-01747,2026-08-12,Mobiliario,6713.47,Aprobada
+VOL-01748,2026-09-13,Servicios profesionales,4832.48,Pendiente
+VOL-01749,2026-10-14,Capacitación,2951.49,Aprobada
+VOL-01750,2026-01-15,Viajes,1070.5,Aprobada
+VOL-01751,2026-02-16,Papelería,8989.51,Rechazada
+VOL-01752,2026-03-17,Tecnología,7108.52,Aprobada
+VOL-01753,2026-04-18,Mobiliario,5227.53,Aprobada
+VOL-01754,2026-05-19,Servicios profesionales,3346.54,Aprobada
+VOL-01755,2026-06-20,Capacitación,1465.55,Aprobada
+VOL-01756,2026-07-21,Viajes,9384.56,Aprobada
+VOL-01757,2026-08-22,Papelería,7503.57,Aprobada
+VOL-01758,2026-09-23,Tecnología,5622.58,Aprobada
+VOL-01759,2026-10-24,Mobiliario,3741.59,Aprobada
+VOL-01760,2026-01-25,Servicios profesionales,1860.6,Aprobada
+VOL-01761,2026-02-26,Capacitación,9779.61,Aprobada
+VOL-01762,2026-03-27,Viajes,7898.62,Aprobada
+VOL-01763,2026-04-28,Papelería,6017.63,Aprobada
+VOL-01764,2026-05-01,Tecnología,4136.64,Aprobada
+VOL-01765,2026-06-02,Mobiliario,2255.65,Aprobada
+VOL-01766,2026-07-03,Servicios profesionales,374.66,Aprobada
+VOL-01767,2026-08-04,Capacitación,8293.67,Aprobada
+VOL-01768,2026-09-05,Viajes,6412.68,Rechazada
+VOL-01769,2026-10-06,Papelería,4531.69,Aprobada
+VOL-01770,2026-01-07,Tecnología,2650.7,Aprobada
+VOL-01771,2026-02-08,Mobiliario,769.71,Pendiente
+VOL-01772,2026-03-09,Servicios profesionales,8688.72,Aprobada
+VOL-01773,2026-04-10,Capacitación,6807.73,Aprobada
+VOL-01774,2026-05-11,Viajes,4926.74,Aprobada
+VOL-01775,2026-06-12,Papelería,3045.75,Aprobada
+VOL-01776,2026-07-13,Tecnología,1164.76,Aprobada
+VOL-01777,2026-08-14,Mobiliario,9083.77,Aprobada
+VOL-01778,2026-09-15,Servicios profesionales,7202.78,Aprobada
+VOL-01779,2026-10-16,Capacitación,5321.79,Aprobada
+VOL-01780,2026-01-17,Viajes,3440.8,Aprobada
+VOL-01781,2026-02-18,Papelería,1559.81,Aprobada
+VOL-01782,2026-03-19,Tecnología,9478.82,Aprobada
+VOL-01783,2026-04-20,Mobiliario,7597.83,Aprobada
+VOL-01784,2026-05-21,Servicios profesionales,5716.84,Aprobada
+VOL-01785,2026-06-22,Capacitación,3835.85,Rechazada
+VOL-01786,2026-07-23,Viajes,1954.86,Aprobada
+VOL-01787,2026-08-24,Papelería,73.87,Aprobada
+VOL-01788,2026-09-25,Tecnología,7992.88,Aprobada
+VOL-01789,2026-10-26,Mobiliario,6111.89,Aprobada
+VOL-01790,2026-01-27,Servicios profesionales,4230.9,Aprobada
+VOL-01791,2026-02-28,Capacitación,2349.91,Aprobada
+VOL-01792,2026-03-01,Viajes,468.92,Aprobada
+VOL-01793,2026-04-02,Papelería,8387.93,Aprobada
+VOL-01794,2026-05-03,Tecnología,6506.94,Pendiente
+VOL-01795,2026-06-04,Mobiliario,4625.95,Aprobada
+VOL-01796,2026-07-05,Servicios profesionales,2744.96,Aprobada
+VOL-01797,2026-08-06,Capacitación,863.97,Aprobada
+VOL-01798,2026-09-07,Viajes,8782.98,Aprobada
+VOL-01799,2026-10-08,Papelería,6901.99,Aprobada
+VOL-01800,2026-01-09,Tecnología,5020,Aprobada
+VOL-01801,2026-02-10,Mobiliario,3139.01,Aprobada
+VOL-01802,2026-03-11,Servicios profesionales,1258.02,Rechazada
+VOL-01803,2026-04-12,Capacitación,9177.03,Aprobada
+VOL-01804,2026-05-13,Viajes,7296.04,Aprobada
+VOL-01805,2026-06-14,Papelería,5415.05,Aprobada
+VOL-01806,2026-07-15,Tecnología,3534.06,Aprobada
+VOL-01807,2026-08-16,Mobiliario,1653.07,Aprobada
+VOL-01808,2026-09-17,Servicios profesionales,9572.08,Aprobada
+VOL-01809,2026-10-18,Capacitación,7691.09,Aprobada
+VOL-01810,2026-01-19,Viajes,5810.1,Aprobada
+VOL-01811,2026-02-20,Papelería,3929.11,Aprobada
+VOL-01812,2026-03-21,Tecnología,2048.12,Aprobada
+VOL-01813,2026-04-22,Mobiliario,167.13,Aprobada
+VOL-01814,2026-05-23,Servicios profesionales,8086.14,Aprobada
+VOL-01815,2026-06-24,Capacitación,6205.15,Aprobada
+VOL-01816,2026-07-25,Viajes,4324.16,Aprobada
+VOL-01817,2026-08-26,Papelería,2443.17,Pendiente
+VOL-01818,2026-09-27,Tecnología,562.18,Aprobada
+VOL-01819,2026-10-28,Mobiliario,8481.19,Rechazada
+VOL-01820,2026-01-01,Servicios profesionales,6600.2,Aprobada
+VOL-01821,2026-02-02,Capacitación,4719.21,Aprobada
+VOL-01822,2026-03-03,Viajes,2838.22,Aprobada
+VOL-01823,2026-04-04,Papelería,957.23,Aprobada
+VOL-01824,2026-05-05,Tecnología,8876.24,Aprobada
+VOL-01825,2026-06-06,Mobiliario,6995.25,Aprobada
+VOL-01826,2026-07-07,Servicios profesionales,5114.26,Aprobada
+VOL-01827,2026-08-08,Capacitación,3233.27,Aprobada
+VOL-01828,2026-09-09,Viajes,1352.28,Aprobada
+VOL-01829,2026-10-10,Papelería,9271.29,Aprobada
+VOL-01830,2026-01-11,Tecnología,7390.3,Aprobada
+VOL-01831,2026-02-12,Mobiliario,5509.31,Aprobada
+VOL-01832,2026-03-13,Servicios profesionales,3628.32,Aprobada
+VOL-01833,2026-04-14,Capacitación,1747.33,Aprobada
+VOL-01834,2026-05-15,Viajes,9666.34,Aprobada
+VOL-01835,2026-06-16,Papelería,7785.35,Aprobada
+VOL-01836,2026-07-17,Tecnología,5904.36,Rechazada
+VOL-01837,2026-08-18,Mobiliario,4023.37,Aprobada
+VOL-01838,2026-09-19,Servicios profesionales,2142.38,Aprobada
+VOL-01839,2026-10-20,Capacitación,261.39,Aprobada
+VOL-01840,2026-01-21,Viajes,8180.4,Pendiente
+VOL-01841,2026-02-22,Papelería,6299.41,Aprobada
+VOL-01842,2026-03-23,Tecnología,4418.42,Aprobada
+VOL-01843,2026-04-24,Mobiliario,2537.43,Aprobada
+VOL-01844,2026-05-25,Servicios profesionales,656.44,Aprobada
+VOL-01845,2026-06-26,Capacitación,8575.45,Aprobada
+VOL-01846,2026-07-27,Viajes,6694.46,Aprobada
+VOL-01847,2026-08-28,Papelería,4813.47,Aprobada
+VOL-01848,2026-09-01,Tecnología,2932.48,Aprobada
+VOL-01849,2026-10-02,Mobiliario,1051.49,Aprobada
+VOL-01850,2026-01-03,Servicios profesionales,8970.5,Aprobada
+VOL-01851,2026-02-04,Capacitación,7089.51,Aprobada
+VOL-01852,2026-03-05,Viajes,5208.52,Aprobada
+VOL-01853,2026-04-06,Papelería,3327.53,Rechazada
+VOL-01854,2026-05-07,Tecnología,1446.54,Aprobada
+VOL-01855,2026-06-08,Mobiliario,9365.55,Aprobada
+VOL-01856,2026-07-09,Servicios profesionales,7484.56,Aprobada
+VOL-01857,2026-08-10,Capacitación,5603.57,Aprobada
+VOL-01858,2026-09-11,Viajes,3722.58,Aprobada
+VOL-01859,2026-10-12,Papelería,1841.59,Aprobada
+VOL-01860,2026-01-13,Tecnología,9760.6,Aprobada
+VOL-01861,2026-02-14,Mobiliario,7879.61,Aprobada
+VOL-01862,2026-03-15,Servicios profesionales,5998.62,Aprobada
+VOL-01863,2026-04-16,Capacitación,4117.63,Pendiente
+VOL-01864,2026-05-17,Viajes,2236.64,Aprobada
+VOL-01865,2026-06-18,Papelería,355.65,Aprobada
+VOL-01866,2026-07-19,Tecnología,8274.66,Aprobada
+VOL-01867,2026-08-20,Mobiliario,6393.67,Aprobada
+VOL-01868,2026-09-21,Servicios profesionales,4512.68,Aprobada
+VOL-01869,2026-10-22,Capacitación,2631.69,Aprobada
+VOL-01870,2026-01-23,Viajes,750.7,Rechazada
+VOL-01871,2026-02-24,Papelería,8669.71,Aprobada
+VOL-01872,2026-03-25,Tecnología,6788.72,Aprobada
+VOL-01873,2026-04-26,Mobiliario,4907.73,Aprobada
+VOL-01874,2026-05-27,Servicios profesionales,3026.74,Aprobada
+VOL-01875,2026-06-28,Capacitación,1145.75,Aprobada
+VOL-01876,2026-07-01,Viajes,9064.76,Aprobada
+VOL-01877,2026-08-02,Papelería,7183.77,Aprobada
+VOL-01878,2026-09-03,Tecnología,5302.78,Aprobada
+VOL-01879,2026-10-04,Mobiliario,3421.79,Aprobada
+VOL-01880,2026-01-05,Servicios profesionales,1540.8,Aprobada
+VOL-01881,2026-02-06,Capacitación,9459.81,Aprobada
+VOL-01882,2026-03-07,Viajes,7578.82,Aprobada
+VOL-01883,2026-04-08,Papelería,5697.83,Aprobada
+VOL-01884,2026-05-09,Tecnología,3816.84,Aprobada
+VOL-01885,2026-06-10,Mobiliario,1935.85,Aprobada
+VOL-01886,2026-07-11,Servicios profesionales,54.86,Pendiente
+VOL-01887,2026-08-12,Capacitación,7973.87,Rechazada
+VOL-01888,2026-09-13,Viajes,6092.88,Aprobada
+VOL-01889,2026-10-14,Papelería,4211.89,Aprobada
+VOL-01890,2026-01-15,Tecnología,2330.9,Aprobada
+VOL-01891,2026-02-16,Mobiliario,449.91,Aprobada
+VOL-01892,2026-03-17,Servicios profesionales,8368.92,Aprobada
+VOL-01893,2026-04-18,Capacitación,6487.93,Aprobada
+VOL-01894,2026-05-19,Viajes,4606.94,Aprobada
+VOL-01895,2026-06-20,Papelería,2725.95,Aprobada
+VOL-01896,2026-07-21,Tecnología,844.96,Aprobada
+VOL-01897,2026-08-22,Mobiliario,8763.97,Aprobada
+VOL-01898,2026-09-23,Servicios profesionales,6882.98,Aprobada
+VOL-01899,2026-10-24,Capacitación,5001.99,Aprobada
+VOL-01900,2026-01-25,Viajes,3120,Aprobada
+VOL-01901,2026-02-26,Papelería,1239.01,Aprobada
+VOL-01902,2026-03-27,Tecnología,9158.02,Aprobada
+VOL-01903,2026-04-28,Mobiliario,7277.03,Aprobada
+VOL-01904,2026-05-01,Servicios profesionales,5396.04,Rechazada
+VOL-01905,2026-06-02,Capacitación,3515.05,Aprobada
+VOL-01906,2026-07-03,Viajes,1634.06,Aprobada
+VOL-01907,2026-08-04,Papelería,9553.07,Aprobada
+VOL-01908,2026-09-05,Tecnología,7672.08,Aprobada
+VOL-01909,2026-10-06,Mobiliario,5791.09,Pendiente
+VOL-01910,2026-01-07,Servicios profesionales,3910.1,Aprobada
+VOL-01911,2026-02-08,Capacitación,2029.11,Aprobada
+VOL-01912,2026-03-09,Viajes,148.12,Aprobada
+VOL-01913,2026-04-10,Papelería,8067.13,Aprobada
+VOL-01914,2026-05-11,Tecnología,6186.14,Aprobada
+VOL-01915,2026-06-12,Mobiliario,4305.15,Aprobada
+VOL-01916,2026-07-13,Servicios profesionales,2424.16,Aprobada
+VOL-01917,2026-08-14,Capacitación,543.17,Aprobada
+VOL-01918,2026-09-15,Viajes,8462.18,Aprobada
+VOL-01919,2026-10-16,Papelería,6581.19,Aprobada
+VOL-01920,2026-01-17,Tecnología,4700.2,Aprobada
+VOL-01921,2026-02-18,Mobiliario,2819.21,Rechazada
+VOL-01922,2026-03-19,Servicios profesionales,938.22,Aprobada
+VOL-01923,2026-04-20,Capacitación,8857.23,Aprobada
+VOL-01924,2026-05-21,Viajes,6976.24,Aprobada
+VOL-01925,2026-06-22,Papelería,5095.25,Aprobada
+VOL-01926,2026-07-23,Tecnología,3214.26,Aprobada
+VOL-01927,2026-08-24,Mobiliario,1333.27,Aprobada
+VOL-01928,2026-09-25,Servicios profesionales,9252.28,Aprobada
+VOL-01929,2026-10-26,Capacitación,7371.29,Aprobada
+VOL-01930,2026-01-27,Viajes,5490.3,Aprobada
+VOL-01931,2026-02-28,Papelería,3609.31,Aprobada
+VOL-01932,2026-03-01,Tecnología,1728.32,Pendiente
+VOL-01933,2026-04-02,Mobiliario,9647.33,Aprobada
+VOL-01934,2026-05-03,Servicios profesionales,7766.34,Aprobada
+VOL-01935,2026-06-04,Capacitación,5885.35,Aprobada
+VOL-01936,2026-07-05,Viajes,4004.36,Aprobada
+VOL-01937,2026-08-06,Papelería,2123.37,Aprobada
+VOL-01938,2026-09-07,Tecnología,242.38,Rechazada
+VOL-01939,2026-10-08,Mobiliario,8161.39,Aprobada
+VOL-01940,2026-01-09,Servicios profesionales,6280.4,Aprobada
+VOL-01941,2026-02-10,Capacitación,4399.41,Aprobada
+VOL-01942,2026-03-11,Viajes,2518.42,Aprobada
+VOL-01943,2026-04-12,Papelería,637.43,Aprobada
+VOL-01944,2026-05-13,Tecnología,8556.44,Aprobada
+VOL-01945,2026-06-14,Mobiliario,6675.45,Aprobada
+VOL-01946,2026-07-15,Servicios profesionales,4794.46,Aprobada
+VOL-01947,2026-08-16,Capacitación,2913.47,Aprobada
+VOL-01948,2026-09-17,Viajes,1032.48,Aprobada
+VOL-01949,2026-10-18,Papelería,8951.49,Aprobada
+VOL-01950,2026-01-19,Tecnología,7070.5,Aprobada
+VOL-01951,2026-02-20,Mobiliario,5189.51,Aprobada
+VOL-01952,2026-03-21,Servicios profesionales,3308.52,Aprobada
+VOL-01953,2026-04-22,Capacitación,1427.53,Aprobada
+VOL-01954,2026-05-23,Viajes,9346.54,Aprobada
+VOL-01955,2026-06-24,Papelería,7465.55,Rechazada
+VOL-01956,2026-07-25,Tecnología,5584.56,Aprobada
+VOL-01957,2026-08-26,Mobiliario,3703.57,Aprobada
+VOL-01958,2026-09-27,Servicios profesionales,1822.58,Aprobada
+VOL-01959,2026-10-28,Capacitación,9741.59,Aprobada
+VOL-01960,2026-01-01,Viajes,7860.6,Aprobada
+VOL-01961,2026-02-02,Papelería,5979.61,Aprobada
+VOL-01962,2026-03-03,Tecnología,4098.62,Aprobada
+VOL-01963,2026-04-04,Mobiliario,2217.63,Aprobada
+VOL-01964,2026-05-05,Servicios profesionales,336.64,Aprobada
+VOL-01965,2026-06-06,Capacitación,8255.65,Aprobada
+VOL-01966,2026-07-07,Viajes,6374.66,Aprobada
+VOL-01967,2026-08-08,Papelería,4493.67,Aprobada
+VOL-01968,2026-09-09,Tecnología,2612.68,Aprobada
+VOL-01969,2026-10-10,Mobiliario,731.69,Aprobada
+VOL-01970,2026-01-11,Servicios profesionales,8650.7,Aprobada
+VOL-01971,2026-02-12,Capacitación,6769.71,Aprobada
+VOL-01972,2026-03-13,Viajes,4888.72,Rechazada
+VOL-01973,2026-04-14,Papelería,3007.73,Aprobada
+VOL-01974,2026-05-15,Tecnología,1126.74,Aprobada
+VOL-01975,2026-06-16,Mobiliario,9045.75,Aprobada
+VOL-01976,2026-07-17,Servicios profesionales,7164.76,Aprobada
+VOL-01977,2026-08-18,Capacitación,5283.77,Aprobada
+VOL-01978,2026-09-19,Viajes,3402.78,Pendiente
+VOL-01979,2026-10-20,Papelería,1521.79,Aprobada
+VOL-01980,2026-01-21,Tecnología,9440.8,Aprobada
+VOL-01981,2026-02-22,Mobiliario,7559.81,Aprobada
+VOL-01982,2026-03-23,Servicios profesionales,5678.82,Aprobada
+VOL-01983,2026-04-24,Capacitación,3797.83,Aprobada
+VOL-01984,2026-05-25,Viajes,1916.84,Aprobada
+VOL-01985,2026-06-26,Papelería,35.85,Aprobada
+VOL-01986,2026-07-27,Tecnología,7954.86,Aprobada
+VOL-01987,2026-08-28,Mobiliario,6073.87,Aprobada
+VOL-01988,2026-09-01,Servicios profesionales,4192.88,Aprobada
+VOL-01989,2026-10-02,Capacitación,2311.89,Rechazada
+VOL-01990,2026-01-03,Viajes,430.9,Aprobada
+VOL-01991,2026-02-04,Papelería,8349.91,Aprobada
+VOL-01992,2026-03-05,Tecnología,6468.92,Aprobada
+VOL-01993,2026-04-06,Mobiliario,4587.93,Aprobada
+VOL-01994,2026-05-07,Servicios profesionales,2706.94,Aprobada
+VOL-01995,2026-06-08,Capacitación,825.95,Aprobada
+VOL-01996,2026-07-09,Viajes,8744.96,Aprobada
+VOL-01997,2026-08-10,Papelería,6863.97,Aprobada
+VOL-01998,2026-09-11,Tecnología,4982.98,Aprobada
+VOL-01999,2026-10-12,Mobiliario,3101.99,Aprobada
+VOL-02000,2026-01-13,Servicios profesionales,1220,Aprobada

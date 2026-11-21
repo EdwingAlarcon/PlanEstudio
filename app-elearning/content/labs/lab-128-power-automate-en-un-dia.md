@@ -43,7 +43,7 @@ Construir de punta a punta, en una sola jornada, la primera versión del proceso
 | Una sola aprobación, aunque la política pida dos o tres niveles | Lab 131 (aprobaciones secuenciales, en paralelo, escalado) |
 | `List rows` con un filtro | Lab 132 (OData, FetchXML, paginación, upsert) |
 | Sin manejo de errores | Lab 133 (Try/Catch, reintentos, idempotencia) |
-| Umbrales escritos dentro del flujo | Lab 136 (variables de entorno y ALM) |
+| Umbrales escritos dentro del flujo | Lab 136 (variables de entorno y ALM, con la tolerancia de conciliación como ejemplo) |
 
 > **Fuente del esqueleto:** los labs 1 a 7 del curso oficial PL-7002 de Microsoft Learning ([GitHub, licencia MIT](https://github.com/MicrosoftLearning/PL-7002-Create-and-Manage-Automated-Processes-by-using-Power-Automate)): flujos, modelo en Dataverse, aprobación, flujo de botón, flujo programado y filtros. El caso, los datos y el texto son propios del curso.
 

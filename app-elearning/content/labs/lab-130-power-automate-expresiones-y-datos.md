@@ -371,7 +371,7 @@ Suma de importes: **10.997**. Sin aprobaciones ni correos: los tres flujos estab
 
 8. Enciende de nuevo `SC - Aprobar solicitud`, `SC - Alertar compra grande` y `SC - Avisar a TI`.
 
-> **Qué no resolvimos:** esas cinco filas están en Pendiente, pero **nadie les pidió aprobación** (los flujos estaban apagados cuando se crearon). En una importación real habría que decidir si se les lanza el proceso o se cargan con el estado final del sistema anterior. Es una decisión del Lab 133 y del Lab 139.
+> **Qué no resolvimos:** esas cinco filas están en Pendiente, pero **nadie les pidió aprobación** (los flujos estaban apagados cuando se crearon). En una importación real habría que decidir si se les lanza el proceso o se cargan con el estado final del sistema anterior. Es una decisión de diseño que cada equipo toma (cómo se piden aprobaciones en una importación).
 
 ### Validación del Ejercicio 6
 

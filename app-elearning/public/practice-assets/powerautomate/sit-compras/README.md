@@ -14,6 +14,8 @@ Datos **ficticios** de Servicios Integrados Tecnológicos S.A. (SIT), generados 
 | `webhook/ejemplo-factura.json` | Cuerpo de ejemplo para el desencadenador HTTP | Lab 134 |
 | `facturas/FAC-2026-NNNN.json`, `facturas/lote-facturas.json` | 13 facturas de proveedores (y un reenvío de la 3) para conciliar contra las solicitudes aprobadas | Lab 135 |
 | `reglas-conciliacion.json` | Tolerancia del 2 % y orden de evaluación de la conciliación | Lab 135 |
+| `volumen/solicitudes-volumen.csv` / `.xlsx` | 2.000 solicitudes para medir rendimiento | Lab 138 |
+| `altas/solicitudes-alta.json`, `altas/reglas-alta.json` | 14 solicitudes de alta de proveedores y sus reglas | Lab 139 (reto) |
 | `expected/cifras-esperadas.json` | Cifras para comprobar tu trabajo | — |
 
 El catálogo también está publicado por la app del curso en `https://planestudio.vercel.app/practice-assets/powerautomate/sit-compras/catalogo/pagina-1.json`.

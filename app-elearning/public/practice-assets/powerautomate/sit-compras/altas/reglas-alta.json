@@ -1,0 +1,54 @@
+{
+  "version": "2026-01",
+  "descripcion": "Reglas de alta de proveedores de SIT (ficticias, generadas para el curso PlanEstudio).",
+  "fechaDeReferencia": "2026-11-01",
+  "camposObligatorios": [
+    "razonSocial",
+    "nit",
+    "correo",
+    "pais",
+    "categoria",
+    "condicionPagoDias"
+  ],
+  "formatoNit": "^(CO|MX|PE|CL)-[0-9]{9}$",
+  "categoriasValidas": [
+    "Tecnología",
+    "Mobiliario",
+    "Servicios profesionales",
+    "Capacitación",
+    "Viajes",
+    "Papelería"
+  ],
+  "condicionesDePagoValidas": [
+    30,
+    45,
+    60
+  ],
+  "dominiosDeCorreoNoPermitidos": [
+    "gmail.com",
+    "hotmail.com",
+    "outlook.com",
+    "yahoo.com"
+  ],
+  "documentosRequeridos": [
+    "Certificado tributario",
+    "Certificado bancario"
+  ],
+  "regla": "Un documento sirve si su 'vigenciaHasta' es igual o posterior a la fecha de referencia.",
+  "resultados": {
+    "Rechazada": "Falta un campo obligatorio, el NIT no cumple el formato o ya existe, el correo es de un dominio no permitido, la categoría o la condición de pago no son válidas, o falta un documento requerido",
+    "Requiere revisión": "Todo es válido pero algún documento requerido está vencido, o la condición de pago es de 60 días en la categoría Tecnología",
+    "Aprobada automática": "Todo es válido y los documentos requeridos están vigentes"
+  },
+  "ordenDeEvaluacion": [
+    "Campos obligatorios",
+    "Formato de NIT",
+    "NIT existente",
+    "Dominio de correo",
+    "Categoría",
+    "Condición de pago",
+    "Documentos faltantes",
+    "Documentos vencidos",
+    "Regla de Tecnología a 60 días"
+  ]
+}

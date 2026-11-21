@@ -454,12 +454,13 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-135-power-automate-documentos-y-conciliacion",
       "lab-136-power-automate-soluciones-y-alm",
       "lab-137-power-automate-operacion-y-gobierno",
+      "lab-138-power-automate-rendimiento",
+      "lab-139-power-automate-reto-pro-sin-pasos",
     ],
     competencies: ["Flujos de nube", "Aprobaciones", "Dataverse en flujos", "Expresiones", "Manejo de errores", "ALM de flujos"],
-    status: "Especialización en construcción",
-    // Provisional: el capstone será el LAB-139 (reto Pro sin pasos) cuando exista.
-    capstoneLabSlug: "lab-128-power-automate-en-un-dia",
-    gapNote: "Disponibles los labs 128 (Power Automate en un día), 129 (desencadenadores), 130 (expresiones y datos), 131 (aprobaciones), 132 (Dataverse a fondo), 133 (errores, reintentos e idempotencia), 134 (integración con APIs), 135 (documentos y conciliación), 136 (soluciones y ALM) y 137 (operación y gobierno). Los labs 138 y 139 se publican por fases. Dataverse y HTTP son conectores premium: el alumno puede iniciar una prueba de Power Automate de 90 días; la prueba no incluye créditos de AI Builder, que en la ruta es una variante opcional.",
+    status: "Disponible",
+    capstoneLabSlug: "lab-139-power-automate-reto-pro-sin-pasos",
+    gapNote: "Disponibles los labs 128 (Power Automate en un día), 129 (desencadenadores), 130 (expresiones y datos), 131 (aprobaciones), 132 (Dataverse a fondo), 133 (errores, reintentos e idempotencia), 134 (integración con APIs), 135 (documentos y conciliación), 136 (soluciones y ALM), 137 (operación y gobierno), 138 (rendimiento) y 139 (reto Pro sin pasos, el capstone). Dataverse y HTTP son conectores premium: el alumno puede iniciar una prueba de Power Automate de 90 días; la prueba no incluye créditos de AI Builder, que en la ruta es una variante opcional.",
     portfolioEvidence: [
       "Solución SIT Compras con la tabla Solicitud de compra y los tres flujos (LAB-128)",
       "Los cuatro casos de prueba con sus niveles de aprobación y el resumen diario por correo (LAB-128)",
@@ -473,6 +474,8 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "Lote de 14 facturas conciliado con reglas en orden y tolerancia del 2 %, sin duplicados al repetirlo (LAB-135)",
       "Variable de entorno y referencias de conexión, paquetes exportados y un ciclo exportar-importar-desinstalar sin perder datos (LAB-136)",
       "Monitor diario de fallos sobre la tabla de ejecuciones, modelo de propietarios y hoja de límites (LAB-137)",
+      "Tabla antes y después de cuatro mejoras de rendimiento medidas, con las cifras del cierre intactas (LAB-138)",
+      "Solución del alta de proveedores con reglas, aprobación, idempotencia, paquetes exportados y monitor, puntuada con la rúbrica (LAB-139)",
     ],
   },
   {

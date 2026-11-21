@@ -1,0 +1,291 @@
+[
+  {
+    "altaId": "ALTA-01",
+    "razonSocial": "Cálculo Andino S.A.S.",
+    "nit": "CO-810000001",
+    "correo": "contabilidad@calculo-andino.example.com",
+    "pais": "Colombia",
+    "categoria": "Tecnología",
+    "condicionPagoDias": 30,
+    "documentos": [
+      {
+        "tipo": "Certificado tributario",
+        "nombre": "certificado-tributario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      },
+      {
+        "tipo": "Certificado bancario",
+        "nombre": "certificado-bancario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      }
+    ]
+  },
+  {
+    "altaId": "ALTA-02",
+    "razonSocial": "Mobiliario del Sur S.A.",
+    "nit": "PE-820000002",
+    "correo": "facturacion@proveedor-de-prueba.example.com",
+    "pais": "Perú",
+    "categoria": "Mobiliario",
+    "condicionPagoDias": 45,
+    "documentos": [
+      {
+        "tipo": "Certificado tributario",
+        "nombre": "certificado-tributario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      },
+      {
+        "tipo": "Certificado bancario",
+        "nombre": "certificado-bancario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      }
+    ]
+  },
+  {
+    "altaId": "ALTA-03",
+    "razonSocial": "Insumos Norte S.A. de C.V.",
+    "nit": "MX-830000003",
+    "correo": "facturacion@proveedor-de-prueba.example.com",
+    "pais": "México",
+    "categoria": "Papelería",
+    "condicionPagoDias": 60,
+    "documentos": [
+      {
+        "tipo": "Certificado tributario",
+        "nombre": "certificado-tributario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      },
+      {
+        "tipo": "Certificado bancario",
+        "nombre": "certificado-bancario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      }
+    ]
+  },
+  {
+    "altaId": "ALTA-04",
+    "razonSocial": "Formación Cumbre S.A.",
+    "nit": "CL-840000004",
+    "correo": "facturacion@proveedor-de-prueba.example.com",
+    "pais": "Chile",
+    "categoria": "Capacitación",
+    "condicionPagoDias": 30,
+    "documentos": [
+      {
+        "tipo": "Certificado tributario",
+        "nombre": "certificado-tributario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      },
+      {
+        "tipo": "Certificado bancario",
+        "nombre": "certificado-bancario.pdf",
+        "vigenciaHasta": "2026-09-30"
+      }
+    ]
+  },
+  {
+    "altaId": "ALTA-05",
+    "razonSocial": "Redes Pacífico S.A.S.",
+    "nit": "CO-850000005",
+    "correo": "facturacion@proveedor-de-prueba.example.com",
+    "pais": "Colombia",
+    "categoria": "Tecnología",
+    "condicionPagoDias": 60,
+    "documentos": [
+      {
+        "tipo": "Certificado tributario",
+        "nombre": "certificado-tributario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      },
+      {
+        "tipo": "Certificado bancario",
+        "nombre": "certificado-bancario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      }
+    ]
+  },
+  {
+    "altaId": "ALTA-06",
+    "razonSocial": "Viajes Meridiano S.A.",
+    "nit": "CO-860000006",
+    "correo": "facturacion@proveedor-de-prueba.example.com",
+    "pais": "Colombia",
+    "categoria": "Viajes",
+    "condicionPagoDias": 30,
+    "documentos": [
+      {
+        "tipo": "Certificado tributario",
+        "nombre": "certificado-tributario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      },
+      {
+        "tipo": "Certificado bancario",
+        "nombre": "certificado-bancario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      }
+    ]
+  },
+  {
+    "altaId": "ALTA-07",
+    "razonSocial": "Consultores Sin NIT",
+    "nit": "",
+    "correo": "facturacion@proveedor-de-prueba.example.com",
+    "pais": "Colombia",
+    "categoria": "Servicios profesionales",
+    "condicionPagoDias": 30,
+    "documentos": [
+      {
+        "tipo": "Certificado tributario",
+        "nombre": "certificado-tributario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      },
+      {
+        "tipo": "Certificado bancario",
+        "nombre": "certificado-bancario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      }
+    ]
+  },
+  {
+    "altaId": "ALTA-08",
+    "razonSocial": "Legal Aurora S.A.S.",
+    "nit": "CO-87000009",
+    "correo": "facturacion@proveedor-de-prueba.example.com",
+    "pais": "Colombia",
+    "categoria": "Servicios profesionales",
+    "condicionPagoDias": 30,
+    "documentos": [
+      {
+        "tipo": "Certificado tributario",
+        "nombre": "certificado-tributario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      },
+      {
+        "tipo": "Certificado bancario",
+        "nombre": "certificado-bancario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      }
+    ]
+  },
+  {
+    "altaId": "ALTA-09",
+    "razonSocial": "Soporte Integral Delta S.A.S.",
+    "nit": "CO-901234567",
+    "correo": "facturacion@proveedor-de-prueba.example.com",
+    "pais": "Colombia",
+    "categoria": "Servicios profesionales",
+    "condicionPagoDias": 30,
+    "documentos": [
+      {
+        "tipo": "Certificado tributario",
+        "nombre": "certificado-tributario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      },
+      {
+        "tipo": "Certificado bancario",
+        "nombre": "certificado-bancario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      }
+    ]
+  },
+  {
+    "altaId": "ALTA-10",
+    "razonSocial": "Auditoría Faro S.A.S.",
+    "nit": "CO-880000010",
+    "correo": "gerencia@gmail.com",
+    "pais": "Colombia",
+    "categoria": "Servicios profesionales",
+    "condicionPagoDias": 30,
+    "documentos": [
+      {
+        "tipo": "Certificado tributario",
+        "nombre": "certificado-tributario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      },
+      {
+        "tipo": "Certificado bancario",
+        "nombre": "certificado-bancario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      }
+    ]
+  },
+  {
+    "altaId": "ALTA-11",
+    "razonSocial": "Equipos Tundra S.A.",
+    "nit": "CL-890000011",
+    "correo": "facturacion@proveedor-de-prueba.example.com",
+    "pais": "Chile",
+    "categoria": "Electrodomésticos",
+    "condicionPagoDias": 30,
+    "documentos": [
+      {
+        "tipo": "Certificado tributario",
+        "nombre": "certificado-tributario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      },
+      {
+        "tipo": "Certificado bancario",
+        "nombre": "certificado-bancario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      }
+    ]
+  },
+  {
+    "altaId": "ALTA-12",
+    "razonSocial": "Papelería Lince S.A.S.",
+    "nit": "CO-900000012",
+    "correo": "facturacion@proveedor-de-prueba.example.com",
+    "pais": "Colombia",
+    "categoria": "Papelería",
+    "condicionPagoDias": 90,
+    "documentos": [
+      {
+        "tipo": "Certificado tributario",
+        "nombre": "certificado-tributario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      },
+      {
+        "tipo": "Certificado bancario",
+        "nombre": "certificado-bancario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      }
+    ]
+  },
+  {
+    "altaId": "ALTA-13",
+    "razonSocial": "Capacitación Brújula S.A.S.",
+    "nit": "CO-910000013",
+    "correo": "facturacion@proveedor-de-prueba.example.com",
+    "pais": "Colombia",
+    "categoria": "Capacitación",
+    "condicionPagoDias": 30,
+    "documentos": [
+      {
+        "tipo": "Certificado tributario",
+        "nombre": "certificado-tributario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      }
+    ]
+  },
+  {
+    "altaId": "ALTA-14",
+    "razonSocial": "Hoteles Ribera S.A.",
+    "nit": "PE-920000014",
+    "correo": "facturacion@proveedor-de-prueba.example.com",
+    "pais": "Perú",
+    "categoria": "Viajes",
+    "condicionPagoDias": 30,
+    "documentos": [
+      {
+        "tipo": "Certificado tributario",
+        "nombre": "certificado-tributario.pdf",
+        "vigenciaHasta": "2026-10-15"
+      },
+      {
+        "tipo": "Certificado bancario",
+        "nombre": "certificado-bancario.pdf",
+        "vigenciaHasta": "2027-06-30"
+      }
+    ]
+  }
+]

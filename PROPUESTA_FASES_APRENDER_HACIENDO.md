@@ -1121,3 +1121,12 @@ claves alternativas. La interfaz del usuario está en **español** (Power Apps y
 - **LAB-137** (operación y gobierno): `flowrun` consultable (status, starttime, duration en ms, errorcode, errormessage, `ttlinseconds` 2.419.200), filtro de fecha comprobado, `$expand=workflow` falla. Learn: dos correos de fallo con enfriamiento de 28 días y solo a propietarios, límites (página actualizada el 2026-11-10), 90 días de inactividad, DLP/Data policies, Copilot (diseñador nuevo, inglés optimizado), CoE Starter Kit ya no se mantiene.
 - Prueba simulada de los tres labs (3 agentes sin contexto; simulación, no personas): ver correcciones en el commit.
 - **Siguiente:** P5 = labs 138 (rendimiento) y 139 (reto Pro sin pasos) + prueba simulada de la ruta.
+
+### 15.15 Estado — Power Automate P5 hecha, ruta disponible (2026-11-21)
+
+- **LAB-138** (rendimiento) y **LAB-139** (reto Pro sin pasos). Datos nuevos en `sit-compras`: `volumen/solicitudes-volumen.csv/.xlsx` (2.000 filas; `expected.lab138`) y `altas/solicitudes-alta.json` + `altas/reglas-alta.json` (14 solicitudes; `expected.lab139`: 4 / 3 / 7).
+- Learn (2026-11-21): perfiles Low / Medium / High / Unlimited Extended (pruebas = Low), 10.000 solicitudes por 24 h en Low (aproximadas), List rows sin paginación hasta 5.000 filas, umbral redondeado por páginas de 5.000 y tope 100.000 (5.000 en Low), concurrencia 1 a 50 solo en el nivel superior, `Perform a changeset request` atómico y sin Apply to each dentro, sin acción "batch" documentada, `chunk`, `dateDifference` y `ticks` existen, no hay función de suma de un arreglo.
+- Los tiempos de los ejercicios de rendimiento los mide cada alumno: no se inventaron cifras.
+- Prueba simulada de los dos labs y de la coherencia de toda la ruta (3 agentes sin contexto; simulación, no personas): ver correcciones en el commit.
+- **La ruta `power-automate-pro` pasa a "Disponible" con capstone LAB-139.**
+- Duración: la suma del frontmatter de los labs 128-139 es de unas 52 h; con las estimaciones de las pruebas simuladas, entre 55 y 58 h. Pendiente: pasar por el tenant lo que sigue "sin verificar" (PROPUESTA §15.13 a §15.15) y la prueba con una persona real.

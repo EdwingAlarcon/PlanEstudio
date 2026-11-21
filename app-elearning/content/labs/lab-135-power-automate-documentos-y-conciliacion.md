@@ -37,7 +37,7 @@ Recibir **facturas de proveedores** (un archivo JSON adjunto a un correo o pegad
 
 | Antes | En este lab | Se profundiza en |
 |---|---|---|
-| Excel sucio (Lab 130) | Documentos con datos que pueden no cuadrar | Lab 139 (reto) |
+| Excel sucio (Lab 130) | Documentos con datos que pueden no cuadrar | Lab 139 (reto, con el mismo patrón de reglas en orden) |
 | Buscar y decidir (Lab 132) | Detectar una factura **ya recibida** | Lab 138 (rendimiento) |
 | Idempotencia (Lab 133) | Un reenvío del proveedor no duplica ni paga dos veces | Lab 137 (operación) |
 
@@ -189,7 +189,7 @@ Completa los tres `if` que faltan: **proveedor** (compara el `proveedorId` de la
 
 ### Tarea 3.4 — Guardar
 
-**Add a new row** en `Factura` con los datos de la factura, el `Resultado` y la `Diferencia` (cuando exista; guárdala redondeada con `float(formatNumber(outputs('Diferencia'), '0.00'))`). Para el lookup `Solicitud`, usa el GUID de la fila encontrada con el mismo formato de enlace del Lab 132 (Ejercicio 4); si no hay solicitud, déjalo vacío. Si la factura es duplicada, **no** la guardes otra vez (Ejercicio 5).
+**Add a new row** en `Factura` con los datos de la factura, el `Resultado` y la `Diferencia` (cuando exista; guárdala redondeada con `float(formatNumber(outputs('Diferencia'), '0.00'))`). Para el lookup `Solicitud`, enlázalo con la solicitud encontrada: en el campo del lookup, la referencia a su fila (`<conjunto de entidades>(<GUID>)` con el GUID de la fila de `Buscar solicitud`, o por la clave alternativa `ID de origen`, igual que el lookup del proveedor del Lab 132, Ejercicio 4; el nombre del conjunto de entidades de tu tabla se ve en la API web y *no está verificado aquí*); si no hay solicitud, déjalo vacío. Si la factura es duplicada, **no** la guardes otra vez (Ejercicio 5).
 
 ### Resultado esperado del Ejercicio 3
 
@@ -383,7 +383,7 @@ Por eso este ejercicio es **solo de diseño**. Responde por escrito:
 
 ## Limpieza del laboratorio
 
-Conserva la tabla `Factura` y `SC - Conciliar factura` (el Lab 139 los reutiliza). **Apaga** `SC - Conciliar lote` y borra los correos de prueba.
+Conserva la tabla `Factura` y `SC - Conciliar factura` (el Lab 136 usa `SC - Conciliar factura` y la tabla `Factura`). **Apaga** `SC - Conciliar lote` y borra los correos de prueba.
 
 ## Siguiente laboratorio recomendado
 

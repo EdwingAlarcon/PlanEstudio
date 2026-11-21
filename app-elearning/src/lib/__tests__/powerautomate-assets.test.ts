@@ -39,6 +39,8 @@ interface Expected {
       importeDelProveedor013: number;
     };
   };
+  lab138: { filas: number; porEstado: Record<string, number>; importeAprobado: number; aprobadasMayoresDe5000: number; paginasDe100: number };
+  lab139: { solicitudes: number; resultadosPorTipo: Record<string, number>; detalle: { altaId: string; resultado: string }[] };
   lab135: { facturasEnElLote: number; facturasDistintas: number; resultadosPorTipo: Record<string, number>; importeConciliado: number; importeAPagarSinRevision: number };
   lab134: {
     paginas: number;
@@ -222,6 +224,23 @@ describe("Power Automate practice assets (SIT Compras)", () => {
     expect(lote.length).toBe(14);
     expect(new Set(lote.map((f) => f.facturaId)).size).toBe(13);
     expect(readJson<{ toleranciaPorcentaje: number }>("reglas-conciliacion.json").toleranciaPorcentaje).toBe(2);
+  });
+
+  it("matches the figures quoted in LAB-138 and LAB-139", () => {
+    const v = expected.lab138;
+    expect(v.filas).toBe(2000);
+    expect(v.porEstado.Aprobada).toBe(1802);
+    expect(v.paginasDe100).toBe(20);
+    const csv = fs.readFileSync(path.join(assetRoot, "volumen", "solicitudes-volumen.csv"), "utf-8");
+    expect(csv.trim().split(/\r?\n/).length).toBe(2001);
+    const l138 = readLab("lab-138-power-automate-rendimiento");
+    for (const figure of ["8.915.581,71", "1.802", "893", "2.221.870,33", "**451**"]) expect(l138).toContain(figure);
+    const a = expected.lab139;
+    expect(a.solicitudes).toBe(14);
+    expect(a.resultadosPorTipo).toEqual({ "Aprobada automática": 4, "Requiere revisión": 3, Rechazada: 7 });
+    expect(readJson<unknown[]>("altas/solicitudes-alta.json").length).toBe(14);
+    const l139 = readLab("lab-139-power-automate-reto-pro-sin-pasos");
+    for (const figure of ["**14**", "**4** (ALTA-01, 02, 03 y 06)", "**3**", "**7** (ALTA-07 a 13)", "**25** filas"]) expect(l139).toContain(figure);
   });
 
   it("keeps LAB-133 consistent with the tools it teaches", () => {

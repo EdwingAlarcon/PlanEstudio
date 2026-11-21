@@ -129,9 +129,9 @@ Todas las acciones de Dataverse de tus flujos usan **la misma** referencia (si d
 1. En la solución: **New** > **More** > **Environment variable** (**Nuevo** > **Más** > **Variable de entorno**). **Display name** `Tolerancia de conciliación (%)`, **Data type** **Decimal number** (**Número decimal**), **Default value** `2`. Los tipos disponibles son Decimal number, Text, JSON, Two options, Data source y Secret ([Learn: variables de entorno](https://learn.microsoft.com/power-apps/maker/data-platform/environmentvariables)).
 2. Anota el **nombre de esquema** que se genera (el prefijo de tu publicador más el nombre sin espacios ni símbolos, algo como `sit_Toleranciadeconciliacion`; no será necesariamente el de este texto): el tipo y el nombre **no se pueden cambiar** después. En las expresiones de abajo, sustituye `sit_ToleranciaConciliacion` por **el tuyo**.
 3. Abre `SC - Conciliar factura`. En la **Compose** `Tolerancia en USD` (Lab 135, Tarea 3.2) sustituye el `0.02` por una expresión que use la variable: `mul(<importe de la solicitud>, mul(parameters('sit_ToleranciaConciliacion'), 0.01))` (con `mul` y `0.01`, no con `div(..., 100)`: **`div` con dos enteros devuelve un entero**, así que `div(2, 100)` daría 0 y la tolerancia sería cero). Learn documenta la forma `parameters('<nombre de esquema>')` y dice que la variable también aparece en **Dynamic content**; si tu diseñador la inserta con otro formato, usa el que inserte él.
-4. Guarda y prueba con `FAC-2026-0009` (la que queda **fuera** de tolerancia con el 2 %). Usa `SC - Conciliar lote` con solo esa factura en la entrada, o envía el correo del Lab 135 con ese adjunto. Al ejecutarse, **la factura queda guardada** en `Factura`.
+4. **Si el lote del Lab 135 ya guardó `FAC-2026-0009`, borra primero su fila de `Factura`** (si no, saldría `Duplicada`). Guarda y prueba con `FAC-2026-0009` (la que queda **fuera** de tolerancia con el 2 %) en `SC - Conciliar factura` (el flujo con la variable): lánzalo con esa factura en la entrada de texto o envía el correo del Lab 135 con ese adjunto. Al ejecutarse, **la factura queda guardada** en `Factura`. (`SC - Conciliar lote` es una copia con su propia tolerancia: si quieres probarlo ahí, cámbiale la tolerancia por la variable también.)
 5. **Borra la fila `FAC-2026-0009` de `Factura`** (si no, la primera regla la marcaría `Duplicada`). Después **agrega** un **Current value** (**Valor actual**) `10` a la variable (al principio solo existe el valor predeterminado) y prueba de nuevo.
-6. **Deja la variable como estaba**: quita el valor actual `10` antes del Ejercicio 4, para que el paquete que exportes (y que reutiliza el Lab 139) no lleve un valor de prueba.
+6. **Deja la variable como estaba**: quita el valor actual `10` antes del Ejercicio 4, para que el paquete que exportes (y que te sirve de modelo para el Lab 139) no lleve un valor de prueba.
 
 ### Resultado esperado del Ejercicio 3
 
@@ -364,7 +364,7 @@ Responde por escrito:
 
 ## Limpieza del laboratorio
 
-Comprueba que `SIT ALM Prueba` ya no existe (Tarea 5.4). Conserva `SIT Compras` y sus paquetes exportados en una carpeta de tu equipo: el Lab 139 los reutiliza.
+Comprueba que `SIT ALM Prueba` ya no existe (Tarea 5.4). Conserva `SIT Compras` y sus paquetes exportados en una carpeta de tu equipo: te sirven de respaldo y de modelo para el Lab 139.
 
 ## Siguiente laboratorio recomendado
 

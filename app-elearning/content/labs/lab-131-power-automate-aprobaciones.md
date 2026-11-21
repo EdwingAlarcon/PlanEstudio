@@ -47,7 +47,7 @@ Además: las compras de **Tecnología** desde el nivel 2 necesitan también la r
 | Una sola aprobación (**Start and wait for an approval**) | Cadena de etapas con un resultado acumulado | Lab 139 (reto sin pasos) |
 | Condición sobre el resultado | Variables de estado y comentarios acumulados | — |
 | Sin plazos | **Timeout** y escalado con **Scope** y **Configure run after** | Lab 133 (Try/Catch/Finally y reintentos) |
-| Aprobadores escritos a mano | Aprobadores en una sola parte del flujo | Lab 136 (variables de entorno) |
+| Aprobadores escritos a mano | Aprobadores en una sola parte del flujo | Lab 136 (variables de entorno: el mismo mecanismo, con la tolerancia como ejemplo) |
 
 > **Fuente del esqueleto:** el laboratorio de aprobación del curso oficial PL-7002 y el de AB-410T00 ([GitHub, licencia MIT](https://github.com/MicrosoftLearning/PL-7002-Create-and-Manage-Automated-Processes-by-using-Power-Automate)), ambos de una sola aprobación. Las cadenas, el escalado, el caso y el texto son propios del curso.
 

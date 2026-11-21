@@ -498,5 +498,111 @@
     ],
     "importeConciliado": 28086.6,
     "importeAPagarSinRevision": 23594
+  },
+  "lab138": {
+    "filas": 2000,
+    "porEstado": {
+      "Aprobada": 1802,
+      "Rechazada": 117,
+      "Pendiente": 81
+    },
+    "importeTotal": 9845990,
+    "importeAprobado": 8915581.71,
+    "importeAprobadoPorCategoria": {
+      "Capacitación": 1480950.16,
+      "Mobiliario": 1501346.66,
+      "Papelería": 1482759.33,
+      "Servicios profesionales": 1462567.36,
+      "Tecnología": 1510676.96,
+      "Viajes": 1477281.24
+    },
+    "aprobadasMayoresDe5000": 893,
+    "paginasDe100": 20,
+    "primeras500": {
+      "aprobadas": 451,
+      "importeAprobado": 2221870.33,
+      "aprobadasMayoresDe5000": 222
+    }
+  },
+  "lab139": {
+    "solicitudes": 14,
+    "resultadosPorTipo": {
+      "Aprobada automática": 4,
+      "Requiere revisión": 3,
+      "Rechazada": 7
+    },
+    "detalle": [
+      {
+        "altaId": "ALTA-01",
+        "resultado": "Aprobada automática",
+        "motivo": "Cumple"
+      },
+      {
+        "altaId": "ALTA-02",
+        "resultado": "Aprobada automática",
+        "motivo": "Cumple"
+      },
+      {
+        "altaId": "ALTA-03",
+        "resultado": "Aprobada automática",
+        "motivo": "Cumple"
+      },
+      {
+        "altaId": "ALTA-04",
+        "resultado": "Requiere revisión",
+        "motivo": "Documento vencido"
+      },
+      {
+        "altaId": "ALTA-05",
+        "resultado": "Requiere revisión",
+        "motivo": "Tecnología a 60 días"
+      },
+      {
+        "altaId": "ALTA-06",
+        "resultado": "Aprobada automática",
+        "motivo": "Cumple"
+      },
+      {
+        "altaId": "ALTA-07",
+        "resultado": "Rechazada",
+        "motivo": "Falta un campo obligatorio"
+      },
+      {
+        "altaId": "ALTA-08",
+        "resultado": "Rechazada",
+        "motivo": "NIT con formato inválido"
+      },
+      {
+        "altaId": "ALTA-09",
+        "resultado": "Rechazada",
+        "motivo": "NIT ya existe"
+      },
+      {
+        "altaId": "ALTA-10",
+        "resultado": "Rechazada",
+        "motivo": "Correo de dominio no permitido"
+      },
+      {
+        "altaId": "ALTA-11",
+        "resultado": "Rechazada",
+        "motivo": "Categoría no válida"
+      },
+      {
+        "altaId": "ALTA-12",
+        "resultado": "Rechazada",
+        "motivo": "Condición de pago no válida"
+      },
+      {
+        "altaId": "ALTA-13",
+        "resultado": "Rechazada",
+        "motivo": "Falta un documento requerido"
+      },
+      {
+        "altaId": "ALTA-14",
+        "resultado": "Requiere revisión",
+        "motivo": "Documento vencido"
+      }
+    ],
+    "fechaDeReferencia": "2026-11-01"
   }
 }
