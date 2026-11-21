@@ -1,0 +1,266 @@
+{
+  "@odata.count": 41,
+  "value": [
+    {
+      "CatalogoID": "CAT-001",
+      "Nombre": "Portátil de trabajo 14\"",
+      "Categoria": "Tecnología",
+      "Precio": {
+        "valor": 1400,
+        "moneda": "USD"
+      },
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-004",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-09-02"
+    },
+    {
+      "CatalogoID": "CAT-002",
+      "Nombre": "Monitor 27\"",
+      "Categoria": "Tecnología",
+      "Precio": {
+        "valor": 320,
+        "moneda": "USD"
+      },
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-004",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-03-27"
+    },
+    {
+      "CatalogoID": "CAT-003",
+      "Nombre": "Licencia ofimática anual",
+      "Categoria": "Tecnología",
+      "Precio": {
+        "valor": 150,
+        "moneda": "USD"
+      },
+      "Unidad": "usuario",
+      "ProveedorID": "PRV-004",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-02-19"
+    },
+    {
+      "CatalogoID": "CAT-004",
+      "Nombre": "Base de acoplamiento",
+      "Categoria": "Tecnología",
+      "Precio": {
+        "valor": 210,
+        "moneda": "USD"
+      },
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-002",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-08-05"
+    },
+    {
+      "CatalogoID": "CAT-005",
+      "Nombre": "Diadema con micrófono",
+      "Categoria": "Tecnología",
+      "Precio": {
+        "valor": 85,
+        "moneda": "USD"
+      },
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-001",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-09-02"
+    },
+    {
+      "CatalogoID": "CAT-006",
+      "Nombre": "Servidor de archivos",
+      "Categoria": "Tecnología",
+      "Precio": {
+        "valor": 6800,
+        "moneda": "USD"
+      },
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-002",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-06-23"
+    },
+    {
+      "CatalogoID": "CAT-007",
+      "Nombre": "Punto de acceso Wi-Fi",
+      "Categoria": "Tecnología",
+      "Precio": {
+        "valor": 390,
+        "moneda": "USD"
+      },
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-004",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-02-21"
+    },
+    {
+      "CatalogoID": "CAT-008",
+      "Nombre": "Licencia de antivirus anual",
+      "Categoria": "Tecnología",
+      "Precio": {
+        "valor": 45,
+        "moneda": "USD"
+      },
+      "Unidad": "usuario",
+      "ProveedorID": "PRV-004",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-07-03"
+    },
+    {
+      "CatalogoID": "CAT-009",
+      "Nombre": "Disco SSD 1 TB",
+      "Categoria": "Tecnología",
+      "Precio": {
+        "valor": 120,
+        "moneda": "USD"
+      },
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-001",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-05-15"
+    },
+    {
+      "CatalogoID": "CAT-010",
+      "Nombre": "Teclado y ratón inalámbricos",
+      "Categoria": "Tecnología",
+      "Precio": {
+        "valor": 60,
+        "moneda": "USD"
+      },
+      "Unidad": "juego",
+      "ProveedorID": "PRV-001",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-07-23"
+    },
+    {
+      "CatalogoID": "CAT-011",
+      "Nombre": "Silla ergonómica",
+      "Categoria": "Mobiliario",
+      "Precio": {
+        "valor": 210,
+        "moneda": "USD"
+      },
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-007",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-05-04"
+    },
+    {
+      "CatalogoID": "CAT-012",
+      "Nombre": "Escritorio regulable",
+      "Categoria": "Mobiliario",
+      "Precio": {
+        "valor": 540,
+        "moneda": "USD"
+      },
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-005",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-01-14"
+    },
+    {
+      "CatalogoID": "CAT-013",
+      "Nombre": "Archivador metálico",
+      "Categoria": "Mobiliario",
+      "Precio": {
+        "valor": 180,
+        "moneda": "USD"
+      },
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-006",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-06-12"
+    },
+    {
+      "CatalogoID": "CAT-014",
+      "Nombre": "Mesa de reuniones 8 puestos",
+      "Categoria": "Mobiliario",
+      "Precio": {
+        "valor": 1650,
+        "moneda": "USD"
+      },
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-007",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-02-02"
+    },
+    {
+      "CatalogoID": "CAT-015",
+      "Nombre": "Lámpara de escritorio",
+      "Categoria": "Mobiliario",
+      "Precio": {
+        "valor": 40,
+        "moneda": "USD"
+      },
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-006",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-07-28"
+    },
+    {
+      "CatalogoID": "CAT-016",
+      "Nombre": "Biblioteca modular",
+      "Categoria": "Mobiliario",
+      "Precio": {
+        "valor": 260,
+        "moneda": "USD"
+      },
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-005",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-06-07"
+    },
+    {
+      "CatalogoID": "CAT-017",
+      "Nombre": "Reposapiés",
+      "Categoria": "Mobiliario",
+      "Precio": {
+        "valor": 35,
+        "moneda": "USD"
+      },
+      "Unidad": "unidad",
+      "ProveedorID": "PRV-006",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-07-11"
+    },
+    {
+      "CatalogoID": "CAT-018",
+      "Nombre": "Consultoría de procesos (día)",
+      "Categoria": "Servicios profesionales",
+      "Precio": {
+        "valor": 900,
+        "moneda": "USD"
+      },
+      "Unidad": "día",
+      "ProveedorID": "PRV-008",
+      "Estado": "descontinuado",
+      "ActualizadoEl": "2026-01-11"
+    },
+    {
+      "CatalogoID": "CAT-019",
+      "Nombre": "Auditoría de sistemas (paquete)",
+      "Categoria": "Servicios profesionales",
+      "Precio": {
+        "valor": 12500,
+        "moneda": "USD"
+      },
+      "Unidad": "paquete",
+      "ProveedorID": "PRV-008",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-01-04"
+    },
+    {
+      "CatalogoID": "CAT-020",
+      "Nombre": "Asesoría legal (hora)",
+      "Categoria": "Servicios profesionales",
+      "Precio": {
+        "valor": 140,
+        "moneda": "USD"
+      },
+      "Unidad": "hora",
+      "ProveedorID": "PRV-008",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-10-11"
+    }
+  ],
+  "@odata.nextLink": "https://planestudio.vercel.app/practice-assets/powerautomate/sit-compras/catalogo-v2/pagina-2.json"
+}

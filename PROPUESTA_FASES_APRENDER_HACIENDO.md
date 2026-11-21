@@ -1022,3 +1022,42 @@ se pueda verificar se marca. Prueba simulada en cada fase, como en Power BI.
   ofrece modo avanzado, variantes con una sola cuenta y títulos "(cadena)". Tiempos estimados: 129 ≈ 3,5 h, 130 ≈ 4,5 h,
   131 ≈ 5 h (los textos dicen 3, 4 y 4,5 h). Sin verificar: cómo guarda el diseñador nuevo un valor `@...` tecleado en modo de
   texto y si Excel entrega los números como texto.
+
+### 15.12 Estado — Power Automate P3 hecha (2026-11-21)
+
+- **LAB-132** Dataverse a fondo: tabla `Proveedor`, lookup desde `Solicitud de compra`, claves alternativas `ID de proveedor` e
+  `ID de origen`, carga de proveedores con **Upsert a row** (17 filas dos veces; archivo actualizado: 18 filas, 17 activos,
+  PRV-003 a 60 días y PRV-018 nuevo), histórico de 146 solicitudes enlazadas al proveedor (127/14/5; PRV-013 = 22 solicitudes
+  y 59.960), consultas Q1 a Q7 (94, 2, 20, tres de 18.500, 22), FetchXML (22 filas) y paginación medida (50, 146).
+- **LAB-133** Errores, reintentos e idempotencia: cuatro formas de fallar, Try/Catch/Finally con `result('Try')` y Terminate,
+  reintentos medidos (None, Fixed, Default), plazo con una aprobación sin responder, concurrencia (50 s frente a 10 s) y
+  reenvío idempotente con la columna `Resultado notificado` y relectura de la fila (Resubmit reutiliza el disparador antiguo).
+- **LAB-134** Integración con APIs: catálogo de 41 artículos en 3 páginas leído con Do until y con paginación del HTTP,
+  esquema tolerante y normalización de v1 y v2 (40 activos, 10 de Tecnología, 48.967), 404 capturado y webhook con Response.
+- **Datos nuevos** (`npm run generate:powerautomate-assets`): `proveedores-actualizacion.csv/.xlsx`, `catalogo-v2/pagina-N.json`
+  y `webhook/ejemplo-factura.json`; el generador sigue siendo determinista.
+- **Verificado en Learn (2026-11-21):** parámetros de List rows y paginación (Settings > Networking, umbral redondeado al
+  tamaño de página, máximo 100.000); `Expand Query` con `$select`; FetchXML sin paginación automática ni agregación; existe
+  **Upsert a row**; tipos y límites de claves alternativas (900 bytes, 16 columnas, 10 claves); Retry policy (None, Default,
+  Fixed, Exponential; Count 1-90; 408, 429 y 5xx) con cifras por defecto distintas según la página; Action Timeout en
+  Settings > General; concurrencia de desencadenador (1-100, por defecto 25, irreversible sin borrar) y cola de 10 más el
+  grado; Terminate no va en bucles; Learn recomienda flujos idempotentes y claves en Dataverse; correos de fallo; HTTP
+  Pagination sigue `nextLink` o `@odata.nextLink`; Who can trigger the flow (tres opciones, `Anyone` heredada); sin Response
+  el desencadenador HTTP contesta 202 y con Response hay 120 s (408 si se pasa); URL de `logic.azure.com` retiradas el
+  2025-11-30; límites de solicitudes de Power Platform. **404 de Learn:** `power-automate/error-handling` (se usa
+  `guidance/coding-guidelines/error-handling`) y `dataverse/update-delete-rows`.
+- **Sin verificar:** clave alternativa en el **Row ID** de Upsert a row (la API web sí la documenta), referencia de lookup con
+  `entityset(clave='valor')` en el conector, filtro por Choice (no hay ejemplo en Learn), si HTTP y el desencadenador HTTP
+  son premium, mensaje exacto de validación de Parse JSON, `actions('X')?['error']`.
+- **Siguiente:** P4 = labs 135 (documentos y conciliación), 136 (soluciones y ALM) y 137 (operación y gobierno).
+
+- **Prueba simulada (2026-11-21, 1 agente, persona "Camila"; simulación, no una persona real):** las cifras cuadran con los datos.
+  Corregido: `@odata.nextLink` en el `required` de la raíz del esquema (Parse JSON fallaba en la página 3), umbral de
+  paginación 100 y no 10 (cuenta elementos, no páginas), `Finally` no corre si `Catch` hace Terminate (ahora el Terminate va
+  después, detrás de la variable `HuboFallo`), `result()` solo ve el primer nivel del ámbito (las cuatro acciones de fallo van
+  al nivel principal de `Try`), Row count que limita también con paginación, propiedad de navegación del `Expand Query`
+  (Schema name del lookup), logical names de ejemplo (`sit_iddeproveedor`, pluralización inglesa), primer Resubmit tras la
+  marca que sí envía, `true` tecleado como texto, PowerShell que lanza excepción con 400 y orden de los labs 133 y 134.
+  Los archivos nuevos (`catalogo-v2`, `proveedores-actualizacion`) deben estar desplegados antes de usar el Lab 134 (se
+  publican con el commit). Tiempos estimados: 132 ≈ 6 h, 133 ≈ 5 h, 134 ≈ 4,5 h (los textos dicen 5, 4,5 y 4 h). Sin verificar:
+  si `result()` acepta un Switch, si un error de DNS se reintenta, Schema Validation del desencadenador HTTP.

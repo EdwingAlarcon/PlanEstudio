@@ -287,6 +287,90 @@ const casosLab131 = [
 });
 expected.lab131 = { casos: casosLab131 };
 
+// ---------- Datos de los labs 132 a 134 (P3) ----------
+// Lab 132: segundo archivo de proveedores para el upsert (un cambio de condición de pago, una reactivación y un proveedor nuevo).
+const proveedoresActualizados = proveedores.map((p) => ({ ...p }));
+proveedoresActualizados.find((p) => p.id === "PRV-003").condicionPagoDias = 60;
+proveedoresActualizados.find((p) => p.id === "PRV-005").activo = true;
+proveedoresActualizados.push({
+  id: "PRV-018",
+  nombre: "Soporte Integral Delta S.A.S.",
+  nit: "CO-901234567",
+  correo: "facturacion@soporte-integral-delta.example.com",
+  pais: "Colombia",
+  categoria: "Tecnología",
+  condicionPagoDias: 30,
+  activo: true,
+});
+const provUpdRows = proveedoresActualizados.map((p) => [p.id, p.nombre, p.nit, p.correo, p.pais, p.categoria, p.condicionPagoDias, p.activo ? "Sí" : "No"]);
+write("proveedores-actualizacion.csv", csv(provHeaders, provUpdRows));
+write("proveedores-actualizacion.xlsx", buildXlsx([{ name: "Proveedores", table: "Proveedores", rows: [provHeaders, ...provUpdRows] }]));
+const anteriores = new Map(proveedores.map((p) => [p.id, p]));
+const nuevos = proveedoresActualizados.filter((p) => !anteriores.has(p.id)).map((p) => p.id);
+const modificados = proveedoresActualizados
+  .filter((p) => anteriores.has(p.id) && JSON.stringify(anteriores.get(p.id)) !== JSON.stringify(p))
+  .map((p) => p.id);
+
+// Lab 134: la misma "API" del catálogo con el esquema cambiado (el proveedor cambió el contrato sin avisar).
+for (let p = 1; p <= paginas; p += 1) {
+  const page = {
+    "@odata.count": catalogo.length,
+    value: catalogo.slice((p - 1) * PAGE_SIZE, p * PAGE_SIZE).map((c) => ({
+      CatalogoID: c.CatalogoID,
+      Nombre: c.Nombre,
+      Categoria: c.Categoria,
+      Precio: { valor: c.PrecioUSD, moneda: "USD" },
+      Unidad: c.Unidad,
+      ProveedorID: c.ProveedorID,
+      Estado: c.Activo ? "activo" : "descontinuado",
+      ActualizadoEl: c.ActualizadoEl,
+    })),
+  };
+  if (p < paginas) page["@odata.nextLink"] = `${PUBLIC_URL}/catalogo-v2/pagina-${p + 1}.json`;
+  write(`catalogo-v2/pagina-${p}.json`, JSON.stringify(page, null, 2) + "\n");
+}
+// Cuerpo de ejemplo para probar el desencadenador HTTP del Lab 134.
+const ejemploWebhook = { facturaId: "FAC-2026-0001", proveedorId: "PRV-002", solicitudId: "SC-2026-0114", importe: 6800, moneda: "USD", fecha: "2026-10-30" };
+write("webhook/ejemplo-factura.json", JSON.stringify(ejemploWebhook, null, 2) + "\n");
+
+expected.lab132 = {
+  proveedoresInicial: { filas: proveedores.length, activos: proveedores.filter((p) => p.activo).length },
+  actualizacion: {
+    filas: proveedoresActualizados.length,
+    nuevos,
+    modificados,
+    activosDespues: proveedoresActualizados.filter((p) => p.activo).length,
+  },
+  proveedoresPorCategoria: cuenta(proveedoresActualizados, (p) => p.categoria),
+};
+// Lab 132: las 146 solicitudes limpias (las del Lab 130) cargadas a Dataverse con upsert y enlazadas a su proveedor.
+const topImporte = [...limpias].sort((a, b) => b.importe - a.importe || a.id.localeCompare(b.id)).slice(0, 5);
+expected.lab132.historico = {
+  filas: limpias.length,
+  porEstado: cuenta(limpias, (s) => s.estado),
+  porNivel: cuenta(limpias, (s) => s.nivel),
+  importePorEstado: sumaPor(limpias, (s) => s.estado),
+  nivel2o3: limpias.filter((s) => s.nivel >= 2).length,
+  tecnologiaNivel2o3: limpias.filter((s) => s.categoria === "Tecnología" && s.nivel >= 2).length,
+  pendientesDeNivel2o3: limpias.filter((s) => s.estado === "Pendiente" && s.nivel >= 2).map((s) => s.id),
+  solicitudesDelProveedor013: limpias.filter((s) => s.proveedorId === "PRV-013").length,
+  importeDelProveedor013: round2(limpias.filter((s) => s.proveedorId === "PRV-013").reduce((t, s) => t + s.importe, 0)),
+  proveedoresConSolicitudes: new Set(limpias.map((s) => s.proveedorId)).size,
+  top5PorImporte: topImporte.map((s) => ({ id: s.id, importe: s.importe })),
+  empatesEnElQuinto: limpias.filter((s) => s.importe === topImporte[4].importe).length,
+};
+expected.lab134 = {
+  paginas,
+  filasPorPagina: Array.from({ length: paginas }, (_, i) => catalogo.slice(i * PAGE_SIZE, (i + 1) * PAGE_SIZE).length),
+  articulos: catalogo.length,
+  articulosActivos: catalogo.filter((c) => c.Activo).length,
+  sumaPreciosTodos: round2(catalogo.reduce((s, c) => s + c.PrecioUSD, 0)),
+  sumaPreciosActivos: round2(catalogo.filter((c) => c.Activo).reduce((s, c) => s + c.PrecioUSD, 0)),
+  articulosTecnologia: catalogo.filter((c) => c.Categoria === "Tecnología").length,
+  campoRenombradoEnV2: { PrecioUSD: "Precio.valor", Activo: "Estado" },
+  urlInexistente: `${PUBLIC_URL}/catalogo/no-existe.json`,
+};
+
 write("expected/cifras-esperadas.json", JSON.stringify(expected, null, 2) + "\n");
 
 write(
@@ -302,6 +386,9 @@ Datos **ficticios** de Servicios Integrados Tecnológicos S.A. (SIT), generados 
 | \`proveedores.xlsx\` / \`proveedores.csv\` | ${proveedores.length} proveedores (tabla de Excel \`Proveedores\`), dos inactivos | Lab 128 (importar a Dataverse) |
 | \`solicitudes-compra.xlsx\` | ${solicitudes.length} solicitudes de 2026 en la tabla de Excel \`Solicitudes\`, con fechas, precios y cantidades sucios a propósito | Labs 130 y siguientes |
 | \`catalogo/pagina-N.json\` | Catálogo de ${catalogo.length} artículos en ${paginas} páginas, con \`@odata.nextLink\` | Labs de HTTP y paginación |
+| \`proveedores-actualizacion.csv\` / \`.xlsx\` | Segunda carga de proveedores: un cambio, una reactivación y un proveedor nuevo | Lab 132 (upsert) |
+| \`catalogo-v2/pagina-N.json\` | El mismo catálogo con el esquema cambiado (\`Precio\` es un objeto y \`Activo\` pasó a \`Estado\`) | Lab 134 |
+| \`webhook/ejemplo-factura.json\` | Cuerpo de ejemplo para el desencadenador HTTP | Lab 134 |
 | \`expected/cifras-esperadas.json\` | Cifras para comprobar tu trabajo | — |
 
 El catálogo también está publicado por la app del curso en \`${PUBLIC_URL}/catalogo/pagina-1.json\`.

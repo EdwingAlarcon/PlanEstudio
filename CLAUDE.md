@@ -138,6 +138,17 @@ Learn confirmado el 2026-11-21: `Select columns` solo aplica a Update, una condi
 ejecución, Everyone must approve termina con un rechazo, Action Timeout en ISO 8601, aprobaciones 28 días (problemas conocidos)
 frente a 30 (límites). Sin verificar: opciones exactas de Change type, modo de texto de Select, Choice por número en Add a new row.
 
+**P3 de Power Automate (2026-11-21):** LAB-132 (Dataverse a fondo: tabla `Proveedor`, lookup y dos claves alternativas, upsert
+sin duplicados, 146 históricas enlazadas a su proveedor, consultas OData, `Expand Query`, FetchXML y paginación medidas),
+LAB-133 (Try/Catch/Finally con `result()` y Terminate, reintentos y plazos medidos, concurrencia, idempotencia con marca y
+relectura de la fila) y LAB-134 (HTTP, paginación del catálogo en bucle y automática, esquema tolerante a la v1 y la v2 de
+la API, 404 capturado, desencadenador HTTP con Response). Datos nuevos en `sit-compras`: `proveedores-actualizacion.csv/.xlsx`,
+`catalogo-v2/` y `webhook/ejemplo-factura.json`; cifras en `cifras-esperadas.json` (`lab132`, `lab134`) y en
+`powerautomate-assets.test.ts`. Learn confirmado el 2026-11-21: FetchXML no admite paginación automática ni agregados en
+List rows; el control de concurrencia de un desencadenador no se puede deshacer sin borrarlo; Action Timeout no limita una
+solicitud HTTP individual; dos correos de fallo (por ejecución y resumen semanal) solo a propietarios. Sin verificar: clave
+alternativa en el Row ID de Upsert a row, referencia de lookup por clave, premium de HTTP y del desencadenador HTTP.
+
 ## Mantenimiento vigente — 2026-11-11
 
 Revisión con seis sub-agentes, sin ampliar contenido ni cambiar conteos: (1) **pruebas simuladas** (modelos, no personas) y
@@ -244,7 +255,7 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 149 archivos **cerrados**; sin trabajo a medias.
 
 **Invariantes que no debes romper:**
-- Conteos vigentes: **76 módulos, 92 labs (diecisiete opcionales: LAB-06, los doce de la Ruta Pro Power BI 116-127 y los labs 128-131 de la Ruta Pro Power Automate), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
+- Conteos vigentes: **76 módulos, 95 labs (veinte opcionales: LAB-06, los doce de la Ruta Pro Power BI 116-127 y los labs 128-134 de la Ruta Pro Power Automate), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
   33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 239 prácticas interactivas
   y 41 páginas de recursos** (41 desde la guía de interfaz español/inglés del 2026-11-11; prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
   Doing de Módulos 11, 10 y 13, a 44 con los Módulos 1 a 8 de la Fase 2 a 62 con los Módulos 9, 12, 14-17 de la Fase 3, a 149 con las Fases 4, 5 y 6 recortada y a 239 con la Fase 7 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de

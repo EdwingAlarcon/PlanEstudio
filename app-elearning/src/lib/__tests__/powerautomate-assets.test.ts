@@ -26,6 +26,27 @@ interface Expected {
     pendientesLimpias: { id: string; importe: number; nivel: number }[];
   };
   lab131: { casos: { caso: string; importe: number; nivel: number; etapas: string[] }[] };
+  lab132: {
+    proveedoresInicial: { filas: number; activos: number };
+    actualizacion: { filas: number; nuevos: string[]; modificados: string[]; activosDespues: number };
+    historico: {
+      filas: number;
+      porEstado: Record<string, number>;
+      nivel2o3: number;
+      tecnologiaNivel2o3: number;
+      pendientesDeNivel2o3: string[];
+      solicitudesDelProveedor013: number;
+      importeDelProveedor013: number;
+    };
+  };
+  lab134: {
+    paginas: number;
+    filasPorPagina: number[];
+    articulos: number;
+    articulosActivos: number;
+    sumaPreciosActivos: number;
+    articulosTecnologia: number;
+  };
 }
 interface CatalogPage {
   "@odata.count": number;
@@ -126,5 +147,61 @@ describe("Power Automate practice assets (SIT Compras)", () => {
     expect(lab).toContain("| A | 840 | 1 | 1 (jefe) | **Aprobada** |");
     expect(lab).toContain("| F | 3300 | 2 | 2 (jefe; Finanzas, que rechaza) | **Rechazada** |");
     expect(lab).toContain("| D | 18500 | 3 | 3 (jefe, Finanzas, Gerencia) | **Aprobada** |");
+  });
+
+  it("matches the figures quoted in LAB-132", () => {
+    const l = expected.lab132;
+    expect(l.proveedoresInicial).toEqual({ filas: 17, activos: 15 });
+    expect(l.actualizacion).toMatchObject({ filas: 18, nuevos: ["PRV-018"], modificados: ["PRV-003", "PRV-005"], activosDespues: 17 });
+    expect(l.historico.filas).toBe(146);
+    expect(l.historico.porEstado).toEqual({ Aprobada: 127, Rechazada: 14, Pendiente: 5 });
+    expect(l.historico.nivel2o3).toBe(94);
+    expect(l.historico.tecnologiaNivel2o3).toBe(20);
+    expect(l.historico.pendientesDeNivel2o3).toEqual(["SC-2026-0035", "SC-2026-0114"]);
+    expect(l.historico.solicitudesDelProveedor013).toBe(22);
+    expect(l.historico.importeDelProveedor013).toBe(59960);
+    const lab = readLab("lab-132-power-automate-dataverse-a-fondo");
+    for (const figure of ["| Q1 |", "**94**", "**2** (SC-2026-0035 y SC-2026-0114)", "**20**", "**127 / 14 / 5**", "**22** (importe total **59.960**)", "**PRV-018**", "**18**"]) {
+      expect(lab).toContain(figure);
+    }
+    const csv = fs.readFileSync(path.join(assetRoot, "proveedores-actualizacion.csv"), "utf-8");
+    expect(csv.trim().split(/\r?\n/).length).toBe(19);
+  });
+
+  it("matches the figures quoted in LAB-134 and serves the v2 catalogue", () => {
+    const l = expected.lab134;
+    expect(l.filasPorPagina).toEqual([20, 20, 1]);
+    expect(l.articulos).toBe(41);
+    expect(l.articulosActivos).toBe(40);
+    expect(l.articulosTecnologia).toBe(10);
+    expect(l.sumaPreciosActivos).toBe(48967);
+    const lab = readLab("lab-134-power-automate-integracion-con-apis");
+    expect(lab).toContain("**48.967**");
+    expect(lab).toContain("| v1 | 41 | **40** | **10** |");
+    expect(lab).toContain("| v2 | 41 | **40** | **10** |");
+    type V2 = { value: { Precio: { valor: number }; Estado: string; PrecioUSD?: number; Activo?: boolean }[]; "@odata.nextLink"?: string };
+    let page = readJson<V2>("catalogo-v2/pagina-1.json");
+    const items: V2["value"] = [];
+    let guard = 0;
+    for (;;) {
+      items.push(...page.value);
+      const next = page["@odata.nextLink"];
+      if (!next || guard++ > 10) break;
+      page = readJson<V2>(`catalogo-v2/${next.split("/").pop()}`);
+    }
+    expect(items.length).toBe(41);
+    expect(items.every((i) => i.PrecioUSD === undefined && i.Activo === undefined)).toBe(true);
+    const activos = items.filter((i) => i.Estado === "activo");
+    expect(activos.length).toBe(40);
+    expect(activos.reduce((sum, i) => sum + i.Precio.valor, 0)).toBe(48967);
+    expect(readJson<{ facturaId: string }>("webhook/ejemplo-factura.json").facturaId).toBe("FAC-2026-0001");
+  });
+
+  it("keeps LAB-133 consistent with the tools it teaches", () => {
+    const lab = readLab("lab-133-power-automate-errores-reintentos-idempotencia");
+    expect(lab).toContain("result('Try')");
+    expect(lab).toContain("Terminate");
+    expect(lab).toContain("range(1, 10)");
+    expect(lab).toContain("no se puede deshacer");
   });
 });

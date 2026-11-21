@@ -5,14 +5,20 @@
   "company": "Servicios Integrados Tecnológicos S.A.",
   "files": [
     "README.md",
+    "catalogo-v2/pagina-1.json",
+    "catalogo-v2/pagina-2.json",
+    "catalogo-v2/pagina-3.json",
     "catalogo/pagina-1.json",
     "catalogo/pagina-2.json",
     "catalogo/pagina-3.json",
     "expected/cifras-esperadas.json",
     "politica-aprobacion.json",
+    "proveedores-actualizacion.csv",
+    "proveedores-actualizacion.xlsx",
     "proveedores.csv",
     "proveedores.xlsx",
-    "solicitudes-compra.xlsx"
+    "solicitudes-compra.xlsx",
+    "webhook/ejemplo-factura.json"
   ],
   "bundle": "sit-compras.zip"
 }

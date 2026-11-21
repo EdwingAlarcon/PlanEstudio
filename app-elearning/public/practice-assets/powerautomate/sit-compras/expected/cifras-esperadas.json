@@ -279,5 +279,98 @@
         ]
       }
     ]
+  },
+  "lab132": {
+    "proveedoresInicial": {
+      "filas": 17,
+      "activos": 15
+    },
+    "actualizacion": {
+      "filas": 18,
+      "nuevos": [
+        "PRV-018"
+      ],
+      "modificados": [
+        "PRV-003",
+        "PRV-005"
+      ],
+      "activosDespues": 17
+    },
+    "proveedoresPorCategoria": {
+      "Tecnología": 5,
+      "Mobiliario": 3,
+      "Servicios profesionales": 3,
+      "Capacitación": 2,
+      "Viajes": 2,
+      "Papelería": 3
+    },
+    "historico": {
+      "filas": 146,
+      "porEstado": {
+        "Aprobada": 127,
+        "Rechazada": 14,
+        "Pendiente": 5
+      },
+      "porNivel": {
+        "1": 52,
+        "2": 85,
+        "3": 9
+      },
+      "importePorEstado": {
+        "Aprobada": 382507,
+        "Pendiente": 10997,
+        "Rechazada": 64861
+      },
+      "nivel2o3": 94,
+      "tecnologiaNivel2o3": 20,
+      "pendientesDeNivel2o3": [
+        "SC-2026-0035",
+        "SC-2026-0114"
+      ],
+      "solicitudesDelProveedor013": 22,
+      "importeDelProveedor013": 59960,
+      "proveedoresConSolicitudes": 15,
+      "top5PorImporte": [
+        {
+          "id": "SC-2026-0021",
+          "importe": 18500
+        },
+        {
+          "id": "SC-2026-0049",
+          "importe": 18500
+        },
+        {
+          "id": "SC-2026-0095",
+          "importe": 18500
+        },
+        {
+          "id": "SC-2026-0111",
+          "importe": 13200
+        },
+        {
+          "id": "SC-2026-0115",
+          "importe": 13200
+        }
+      ],
+      "empatesEnElQuinto": 2
+    }
+  },
+  "lab134": {
+    "paginas": 3,
+    "filasPorPagina": [
+      20,
+      20,
+      1
+    ],
+    "articulos": 41,
+    "articulosActivos": 40,
+    "sumaPreciosTodos": 49867,
+    "sumaPreciosActivos": 48967,
+    "articulosTecnologia": 10,
+    "campoRenombradoEnV2": {
+      "PrecioUSD": "Precio.valor",
+      "Activo": "Estado"
+    },
+    "urlInexistente": "https://planestudio.vercel.app/practice-assets/powerautomate/sit-compras/catalogo/no-existe.json"
   }
 }

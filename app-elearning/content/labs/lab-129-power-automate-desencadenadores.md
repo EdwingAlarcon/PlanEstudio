@@ -308,7 +308,7 @@ length(outputs('List_rows')?['body/value'])
 ```
 
    Lee: "la cantidad es menor que 1, o no es un entero, o el precio no es positivo".
-2. En **True**: **Control** > **Terminate**, **Status** = **Failed**, **Code** `ENTRADA_INVALIDA`, **Message** `La cantidad debe ser un entero mayor que 0 y el precio mayor que 0` ([Learn: Terminate](https://learn.microsoft.com/power-automate/error-handling)). En **False**: mueve **Add a new row**.
+2. En **True**: **Control** > **Terminate**, **Status** = **Failed**, **Code** `ENTRADA_INVALIDA`, **Message** `La cantidad debe ser un entero mayor que 0 y el precio mayor que 0` ([Learn: Terminate](https://learn.microsoft.com/power-automate/guidance/coding-guidelines/error-handling)). En **False**: mueve **Add a new row**.
 3. Prueba tres veces (responde la aprobación del caso válido): cantidad `0`; cantidad `4.5` (con punto: con la configuración en inglés la coma no es decimal); y cantidad `2` con precio `50`.
 
 ### Resultado esperado del Ejercicio 6

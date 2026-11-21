@@ -1,0 +1,19 @@
+﻿ProveedorID,Nombre,NIT,Correo,Pais,Categoria,CondicionPagoDias,Activo
+PRV-001,Andes Cómputo S.A.,PE-873393494,facturacion@andes-computo.example.com,Perú,Tecnología,30,Sí
+PRV-002,Red Global Tech S.A.,CL-829846900,facturacion@red-global-tech.example.com,Chile,Tecnología,45,Sí
+PRV-003,Datacentro Pacífico S.A.,CL-940712999,facturacion@datacentro-pacifico.example.com,Chile,Tecnología,60,Sí
+PRV-004,Licencias Andinas S.A.S.,CO-965473778,facturacion@licencias-andinas.example.com,Colombia,Tecnología,30,Sí
+PRV-005,Oficinas Cóndor S.A. de C.V.,MX-862852452,facturacion@oficinas-condor.example.com,México,Mobiliario,60,Sí
+PRV-006,Muebles Horizonte S.A.,CL-819567305,facturacion@muebles-horizonte.example.com,Chile,Mobiliario,60,Sí
+PRV-007,Ergonomía Sierra S.A.S.,CO-826254407,facturacion@ergonomia-sierra.example.com,Colombia,Mobiliario,45,Sí
+PRV-008,Consultores Atlas S.A.,PE-964185079,facturacion@consultores-atlas.example.com,Perú,Servicios profesionales,30,Sí
+PRV-009,Auditoría Delta S.A.S.,CO-865265477,facturacion@auditoria-delta.example.com,Colombia,Servicios profesionales,60,Sí
+PRV-010,Legal Cumbre S.A.,PE-927131992,facturacion@legal-cumbre.example.com,Perú,Servicios profesionales,30,Sí
+PRV-011,Academia Aurora S.A.,CL-816780365,facturacion@academia-aurora.example.com,Chile,Capacitación,45,Sí
+PRV-012,Formación Valle S.A. de C.V.,MX-942678933,facturacion@formacion-valle.example.com,México,Capacitación,30,Sí
+PRV-013,Viajes Orión S.A. de C.V.,MX-910706922,facturacion@viajes-orion.example.com,México,Viajes,60,Sí
+PRV-014,Hoteles del Puerto S.A.S.,CO-892304700,facturacion@hoteles-del-puerto.example.com,Colombia,Viajes,45,No
+PRV-015,Papelería Central S.A. de C.V.,MX-942690942,facturacion@papeleria-central.example.com,México,Papelería,30,Sí
+PRV-016,Suministros Norte S.A. de C.V.,MX-881555567,facturacion@suministros-norte.example.com,México,Papelería,30,Sí
+PRV-017,Insumos Andina S.A.,PE-821450783,facturacion@insumos-andina.example.com,Perú,Papelería,45,Sí
+PRV-018,Soporte Integral Delta S.A.S.,CO-901234567,facturacion@soporte-integral-delta.example.com,Colombia,Tecnología,30,Sí

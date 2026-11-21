@@ -1,0 +1,18 @@
+{
+  "@odata.count": 41,
+  "value": [
+    {
+      "CatalogoID": "CAT-041",
+      "Nombre": "Etiquetas adhesivas",
+      "Categoria": "Papelería",
+      "Precio": {
+        "valor": 12,
+        "moneda": "USD"
+      },
+      "Unidad": "paquete",
+      "ProveedorID": "PRV-015",
+      "Estado": "activo",
+      "ActualizadoEl": "2026-10-10"
+    }
+  ]
+}
