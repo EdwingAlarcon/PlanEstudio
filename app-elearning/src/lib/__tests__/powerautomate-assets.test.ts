@@ -39,6 +39,7 @@ interface Expected {
       importeDelProveedor013: number;
     };
   };
+  lab135: { facturasEnElLote: number; facturasDistintas: number; resultadosPorTipo: Record<string, number>; importeConciliado: number; importeAPagarSinRevision: number };
   lab134: {
     paginas: number;
     filasPorPagina: number[];
@@ -195,6 +196,32 @@ describe("Power Automate practice assets (SIT Compras)", () => {
     expect(activos.length).toBe(40);
     expect(activos.reduce((sum, i) => sum + i.Precio.valor, 0)).toBe(48967);
     expect(readJson<{ facturaId: string }>("webhook/ejemplo-factura.json").facturaId).toBe("FAC-2026-0001");
+  });
+
+  it("matches the figures quoted in LAB-135 and the invoice files", () => {
+    const l = expected.lab135;
+    expect(l.facturasEnElLote).toBe(14);
+    expect(l.facturasDistintas).toBe(13);
+    expect(l.resultadosPorTipo).toEqual({
+      Conciliada: 6,
+      Duplicada: 1,
+      "Conciliada con diferencia": 2,
+      "Fuera de tolerancia": 1,
+      "Proveedor distinto": 1,
+      "Moneda distinta": 1,
+      "Sin solicitud": 1,
+      "Solicitud no aprobada": 1,
+    });
+    expect(l.importeConciliado).toBe(28086.6);
+    expect(l.importeAPagarSinRevision).toBe(23594);
+    const lab = readLab("lab-135-power-automate-documentos-y-conciliacion");
+    for (const figure of ["28.086,60", "23.594", "**13**", "| Conciliada | 6"]) {
+      expect(lab).toContain(figure);
+    }
+    const lote = readJson<{ facturaId: string; importe: number }[]>("facturas/lote-facturas.json");
+    expect(lote.length).toBe(14);
+    expect(new Set(lote.map((f) => f.facturaId)).size).toBe(13);
+    expect(readJson<{ toleranciaPorcentaje: number }>("reglas-conciliacion.json").toleranciaPorcentaje).toBe(2);
   });
 
   it("keeps LAB-133 consistent with the tools it teaches", () => {

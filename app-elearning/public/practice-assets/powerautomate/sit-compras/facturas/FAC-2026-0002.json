@@ -1,0 +1,15 @@
+{
+  "facturaId": "FAC-2026-0002",
+  "proveedorId": "PRV-011",
+  "solicitudId": "SC-2026-0022",
+  "fecha": "2026-03-05",
+  "moneda": "USD",
+  "lineas": [
+    {
+      "descripcion": "Certificación en la nube (persona)",
+      "cantidad": 7,
+      "precioUnitario": 320
+    }
+  ],
+  "importe": 2240
+}

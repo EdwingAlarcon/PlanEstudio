@@ -138,6 +138,8 @@ Learn confirmado el 2026-11-21: `Select columns` solo aplica a Update, una condi
 ejecución, Everyone must approve termina con un rechazo, Action Timeout en ISO 8601, aprobaciones 28 días (problemas conocidos)
 frente a 30 (límites). Sin verificar: opciones exactas de Change type, modo de texto de Select, Choice por número en Add a new row.
 
+**P4 de Power Automate (2026-11-21):** LAB-135 (facturas JSON por correo o entrada de texto, conciliación con reglas en orden y tolerancia del 2 %, lote de 14 facturas con cifras 6/2/1/1/1/1/1 + 1 duplicada, importe conciliado 28.086,60 y 23.594 sin revisión; AI Builder solo en papel), LAB-136 (soluciones y ALM: referencias de conexión, variable de entorno, exportar/abrir el paquete y ciclo exportar-borrar-importar-desinstalar sobre una solución desechable `SIT ALM Prueba`, comprobado en el tenant) y LAB-137 (operación y gobierno: historial, Analytics, monitor propio sobre la tabla `flowrun`, propietarios, límites, DLP en papel, Copilot). Datos nuevos: `facturas/`, `reglas-conciliacion.json` y `expected.lab135`. Learn confirmado el 2026-11-21: `abs` y `round` no existen en el lenguaje de expresiones; las variables de entorno se leen con `parameters('<nombre de esquema>')`; el CoE Starter Kit ya no se mantiene activamente; la retención es 28 días en la interfaz y 30 en la tabla de límites. Verificado en el tenant: `flowrun` guarda `ttlinseconds` = 2.419.200 (28 días) y no admite `$expand=workflow`; una solución administrada exportada contiene `Workflows/*.json`, `environmentvariabledefinitions/` y las referencias de conexión en `customizations.xml`; borrar la no administrada deja los componentes; la administrada importada queda apagada sin conexión; desinstalarla los quita. Sin verificar: `json(base64ToString(contentBytes))`, `formatNumber` como redondeo, el Lab 136 por la interfaz (se probó por la API) y los flujos secundarios.
+
 **P3 de Power Automate (2026-11-21):** LAB-132 (Dataverse a fondo: tabla `Proveedor`, lookup y dos claves alternativas, upsert
 sin duplicados, 146 históricas enlazadas a su proveedor, consultas OData, `Expand Query`, FetchXML y paginación medidas),
 LAB-133 (Try/Catch/Finally con `result()` y Terminate, reintentos y plazos medidos, concurrencia, idempotencia con marca y
@@ -255,7 +257,7 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 149 archivos **cerrados**; sin trabajo a medias.
 
 **Invariantes que no debes romper:**
-- Conteos vigentes: **76 módulos, 95 labs (veinte opcionales: LAB-06, los doce de la Ruta Pro Power BI 116-127 y los labs 128-134 de la Ruta Pro Power Automate), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
+- Conteos vigentes: **76 módulos, 98 labs (veintitrés opcionales: LAB-06, los doce de la Ruta Pro Power BI 116-127 y los labs 128-137 de la Ruta Pro Power Automate), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
   33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 239 prácticas interactivas
   y 41 páginas de recursos** (41 desde la guía de interfaz español/inglés del 2026-11-11; prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
   Doing de Módulos 11, 10 y 13, a 44 con los Módulos 1 a 8 de la Fase 2 a 62 con los Módulos 9, 12, 14-17 de la Fase 3, a 149 con las Fases 4, 5 y 6 recortada y a 239 con la Fase 7 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de

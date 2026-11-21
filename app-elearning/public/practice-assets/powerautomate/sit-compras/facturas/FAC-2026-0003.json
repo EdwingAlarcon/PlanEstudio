@@ -1,0 +1,15 @@
+{
+  "facturaId": "FAC-2026-0003",
+  "proveedorId": "PRV-013",
+  "solicitudId": "SC-2026-0097",
+  "fecha": "2026-03-05",
+  "moneda": "USD",
+  "lineas": [
+    {
+      "descripcion": "Tiquete nacional",
+      "cantidad": 13,
+      "precioUnitario": 240
+    }
+  ],
+  "importe": 3120
+}

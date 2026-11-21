@@ -1,0 +1,15 @@
+{
+  "facturaId": "FAC-2026-0005",
+  "proveedorId": "PRV-011",
+  "solicitudId": "SC-2026-0042",
+  "fecha": "2026-04-05",
+  "moneda": "USD",
+  "lineas": [
+    {
+      "descripcion": "Programa de inglés (persona, trimestre)",
+      "cantidad": 23,
+      "precioUnitario": 380
+    }
+  ],
+  "importe": 8740
+}

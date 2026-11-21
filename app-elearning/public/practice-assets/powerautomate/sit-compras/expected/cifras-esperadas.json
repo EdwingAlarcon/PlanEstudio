@@ -372,5 +372,131 @@
       "Activo": "Estado"
     },
     "urlInexistente": "https://planestudio.vercel.app/practice-assets/powerautomate/sit-compras/catalogo/no-existe.json"
+  },
+  "lab135": {
+    "facturasEnElLote": 14,
+    "facturasDistintas": 13,
+    "toleranciaPorcentaje": 2,
+    "resultadosPorTipo": {
+      "Conciliada": 6,
+      "Duplicada": 1,
+      "Conciliada con diferencia": 2,
+      "Fuera de tolerancia": 1,
+      "Proveedor distinto": 1,
+      "Moneda distinta": 1,
+      "Sin solicitud": 1,
+      "Solicitud no aprobada": 1
+    },
+    "detalle": [
+      {
+        "facturaId": "FAC-2026-0001",
+        "reenvio": false,
+        "solicitudId": "SC-2026-0096",
+        "importeFactura": 7650,
+        "resultado": "Conciliada",
+        "diferencia": 0
+      },
+      {
+        "facturaId": "FAC-2026-0002",
+        "reenvio": false,
+        "solicitudId": "SC-2026-0022",
+        "importeFactura": 2240,
+        "resultado": "Conciliada",
+        "diferencia": 0
+      },
+      {
+        "facturaId": "FAC-2026-0003",
+        "reenvio": false,
+        "solicitudId": "SC-2026-0097",
+        "importeFactura": 3120,
+        "resultado": "Conciliada",
+        "diferencia": 0
+      },
+      {
+        "facturaId": "FAC-2026-0003",
+        "reenvio": true,
+        "solicitudId": "SC-2026-0097",
+        "importeFactura": 3120,
+        "resultado": "Duplicada"
+      },
+      {
+        "facturaId": "FAC-2026-0004",
+        "reenvio": false,
+        "solicitudId": "SC-2026-0118",
+        "importeFactura": 1260,
+        "resultado": "Conciliada",
+        "diferencia": 0
+      },
+      {
+        "facturaId": "FAC-2026-0005",
+        "reenvio": false,
+        "solicitudId": "SC-2026-0042",
+        "importeFactura": 8740,
+        "resultado": "Conciliada",
+        "diferencia": 0
+      },
+      {
+        "facturaId": "FAC-2026-0006",
+        "reenvio": false,
+        "solicitudId": "SC-2026-0085",
+        "importeFactura": 584,
+        "resultado": "Conciliada",
+        "diferencia": 0
+      },
+      {
+        "facturaId": "FAC-2026-0007",
+        "reenvio": false,
+        "solicitudId": "SC-2026-0053",
+        "importeFactura": 603.96,
+        "resultado": "Conciliada con diferencia",
+        "diferencia": 8.96
+      },
+      {
+        "facturaId": "FAC-2026-0008",
+        "reenvio": false,
+        "solicitudId": "SC-2026-0128",
+        "importeFactura": 3888.64,
+        "resultado": "Conciliada con diferencia",
+        "diferencia": -31.36
+      },
+      {
+        "facturaId": "FAC-2026-0009",
+        "reenvio": false,
+        "solicitudId": "SC-2026-0017",
+        "importeFactura": 798,
+        "resultado": "Fuera de tolerancia",
+        "diferencia": 38
+      },
+      {
+        "facturaId": "FAC-2026-0010",
+        "reenvio": false,
+        "solicitudId": "SC-2026-0020",
+        "importeFactura": 1050,
+        "resultado": "Proveedor distinto"
+      },
+      {
+        "facturaId": "FAC-2026-0011",
+        "reenvio": false,
+        "solicitudId": "SC-2026-0013",
+        "importeFactura": 1805,
+        "resultado": "Moneda distinta"
+      },
+      {
+        "facturaId": "FAC-2026-0012",
+        "reenvio": false,
+        "solicitudId": "SC-2026-0999",
+        "importeFactura": 1440,
+        "resultado": "Sin solicitud"
+      },
+      {
+        "facturaId": "FAC-2026-0013",
+        "reenvio": false,
+        "solicitudId": "SC-2026-0059",
+        "importeFactura": 8970,
+        "resultado": "Solicitud no aprobada"
+      }
+    ],
+    "importeConciliado": 28086.6,
+    "importeAPagarSinRevision": 23594
   }
 }

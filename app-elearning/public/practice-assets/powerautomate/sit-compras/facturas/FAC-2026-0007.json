@@ -1,0 +1,15 @@
+{
+  "facturaId": "FAC-2026-0007",
+  "proveedorId": "PRV-001",
+  "solicitudId": "SC-2026-0053",
+  "fecha": "2026-05-05",
+  "moneda": "USD",
+  "lineas": [
+    {
+      "descripcion": "Diadema con micrófono",
+      "cantidad": 7,
+      "precioUnitario": 86.28
+    }
+  ],
+  "importe": 603.96
+}

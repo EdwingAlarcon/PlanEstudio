@@ -371,6 +371,85 @@ expected.lab134 = {
   urlInexistente: `${PUBLIC_URL}/catalogo/no-existe.json`,
 };
 
+// ---------- Datos del Lab 135 (P4): facturas de proveedores para conciliar contra las solicitudes aprobadas ----------
+// Sin números aleatorios: la selección es determinista y no altera los datos anteriores.
+const reglasConciliacion = {
+  version: "2026-01",
+  descripcion: "Reglas de conciliación factura-solicitud de SIT (ficticias, generadas para el curso PlanEstudio).",
+  toleranciaPorcentaje: 2,
+  reglaDeTolerancia: "Se concilia si |importe de la factura - importe de la solicitud| es menor o igual que el 2 % del importe de la solicitud.",
+  ordenDeEvaluacion: ["Duplicada", "Sin solicitud", "Solicitud no aprobada", "Proveedor distinto", "Moneda distinta", "Importe"],
+  resultados: ["Conciliada", "Conciliada con diferencia", "Fuera de tolerancia", "Duplicada", "Sin solicitud", "Solicitud no aprobada", "Proveedor distinto", "Moneda distinta"],
+};
+write("reglas-conciliacion.json", JSON.stringify(reglasConciliacion, null, 2) + "\n");
+
+const aprobadasParaFacturar = limpias.filter((s) => s.estado === "Aprobada" && s.importe >= 300).filter((_, i) => i % 5 === 0).slice(0, 12);
+const rechazadaParaFacturar = limpias.find((s) => s.estado === "Rechazada" && s.importe >= 300);
+const otroProveedor = (id) => proveedores.find((p) => p.id !== id && p.activo).id;
+const construirFactura = (n, solicitud, { factor = 1, moneda = "USD", proveedorId, solicitudId } = {}) => {
+  const precioUnitario = round2(solicitud.precio * factor);
+  return {
+    facturaId: `FAC-2026-${String(n).padStart(4, "0")}`,
+    proveedorId: proveedorId ?? solicitud.proveedorId,
+    solicitudId: solicitudId ?? solicitud.id,
+    fecha: `2026-${String(Math.min(12, Number(solicitud.fecha.slice(5, 7)) + 1)).padStart(2, "0")}-05`,
+    moneda,
+    lineas: [{ descripcion: solicitud.descripcion.replace(/ x\d+$/, ""), cantidad: solicitud.cantidad, precioUnitario }],
+    importe: round2(solicitud.cantidad * precioUnitario),
+  };
+};
+// [solicitud, opciones, resultado esperado]
+const planFacturas = [
+  [aprobadasParaFacturar[0], {}, "Conciliada"],
+  [aprobadasParaFacturar[1], {}, "Conciliada"],
+  [aprobadasParaFacturar[2], {}, "Conciliada"],
+  [aprobadasParaFacturar[3], {}, "Conciliada"],
+  [aprobadasParaFacturar[4], {}, "Conciliada"],
+  [aprobadasParaFacturar[5], {}, "Conciliada"],
+  [aprobadasParaFacturar[6], { factor: 1.015 }, "Conciliada con diferencia"],
+  [aprobadasParaFacturar[7], { factor: 0.992 }, "Conciliada con diferencia"],
+  [aprobadasParaFacturar[8], { factor: 1.05 }, "Fuera de tolerancia"],
+  [aprobadasParaFacturar[9], { proveedorId: otroProveedor(aprobadasParaFacturar[9].proveedorId) }, "Proveedor distinto"],
+  [aprobadasParaFacturar[10], { moneda: "EUR" }, "Moneda distinta"],
+  [aprobadasParaFacturar[11], { solicitudId: "SC-2026-0999" }, "Sin solicitud"],
+  [rechazadaParaFacturar, {}, "Solicitud no aprobada"],
+];
+const facturas = planFacturas.map(([solicitud, opciones], i) => construirFactura(i + 1, solicitud, opciones));
+const reenvio = { ...facturas[2], reenvio: true }; // la misma factura 3 enviada de nuevo por el proveedor
+const lote = [...facturas.slice(0, 3), reenvio, ...facturas.slice(3)];
+facturas.forEach((f) => write(`facturas/${f.facturaId}.json`, JSON.stringify(f, null, 2) + "\n"));
+write(`facturas/${reenvio.facturaId}-reenvio.json`, JSON.stringify(reenvio, null, 2) + "\n");
+write("facturas/lote-facturas.json", JSON.stringify(lote, null, 2) + "\n");
+const porId = new Map(limpias.map((s) => [s.id, s]));
+const conciliar = (f, vistas) => {
+  if (vistas.has(f.facturaId)) return { resultado: "Duplicada" };
+  vistas.add(f.facturaId);
+  const s = porId.get(f.solicitudId);
+  if (!s) return { resultado: "Sin solicitud" };
+  if (s.estado !== "Aprobada") return { resultado: "Solicitud no aprobada" };
+  if (s.proveedorId !== f.proveedorId) return { resultado: "Proveedor distinto" };
+  if (f.moneda !== "USD") return { resultado: "Moneda distinta" };
+  const diferencia = round2(f.importe - s.importe);
+  if (diferencia === 0) return { resultado: "Conciliada", diferencia };
+  return { resultado: Math.abs(diferencia) <= round2(s.importe * 0.02) ? "Conciliada con diferencia" : "Fuera de tolerancia", diferencia };
+};
+const vistas = new Set();
+const resultadosFacturas = lote.map((f) => ({ facturaId: f.facturaId, reenvio: Boolean(f.reenvio), solicitudId: f.solicitudId, importeFactura: f.importe, ...conciliar(f, vistas) }));
+// Comprobación interna del plan: cada factura da el resultado previsto.
+planFacturas.forEach(([, , esperado], i) => {
+  const r = resultadosFacturas.find((x) => x.facturaId === facturas[i].facturaId && !x.reenvio);
+  if (r.resultado !== esperado) throw new Error(`Factura ${facturas[i].facturaId}: se esperaba ${esperado} y salió ${r.resultado}`);
+});
+expected.lab135 = {
+  facturasEnElLote: lote.length,
+  facturasDistintas: facturas.length,
+  toleranciaPorcentaje: reglasConciliacion.toleranciaPorcentaje,
+  resultadosPorTipo: cuenta(resultadosFacturas, (r) => r.resultado),
+  detalle: resultadosFacturas,
+  importeConciliado: round2(resultadosFacturas.filter((r) => r.resultado.startsWith("Conciliada")).reduce((t, r) => t + r.importeFactura, 0)),
+  importeAPagarSinRevision: round2(resultadosFacturas.filter((r) => r.resultado === "Conciliada").reduce((t, r) => t + r.importeFactura, 0)),
+};
+
 write("expected/cifras-esperadas.json", JSON.stringify(expected, null, 2) + "\n");
 
 write(
@@ -389,6 +468,8 @@ Datos **ficticios** de Servicios Integrados Tecnológicos S.A. (SIT), generados 
 | \`proveedores-actualizacion.csv\` / \`.xlsx\` | Segunda carga de proveedores: un cambio, una reactivación y un proveedor nuevo | Lab 132 (upsert) |
 | \`catalogo-v2/pagina-N.json\` | El mismo catálogo con el esquema cambiado (\`Precio\` es un objeto y \`Activo\` pasó a \`Estado\`) | Lab 134 |
 | \`webhook/ejemplo-factura.json\` | Cuerpo de ejemplo para el desencadenador HTTP | Lab 134 |
+| \`facturas/FAC-2026-NNNN.json\`, \`facturas/lote-facturas.json\` | ${facturas.length} facturas de proveedores (y un reenvío de la 3) para conciliar contra las solicitudes aprobadas | Lab 135 |
+| \`reglas-conciliacion.json\` | Tolerancia del 2 % y orden de evaluación de la conciliación | Lab 135 |
 | \`expected/cifras-esperadas.json\` | Cifras para comprobar tu trabajo | — |
 
 El catálogo también está publicado por la app del curso en \`${PUBLIC_URL}/catalogo/pagina-1.json\`.

@@ -1,0 +1,213 @@
+[
+  {
+    "facturaId": "FAC-2026-0001",
+    "proveedorId": "PRV-011",
+    "solicitudId": "SC-2026-0096",
+    "fecha": "2026-02-05",
+    "moneda": "USD",
+    "lineas": [
+      {
+        "descripcion": "Curso de liderazgo (persona)",
+        "cantidad": 17,
+        "precioUnitario": 450
+      }
+    ],
+    "importe": 7650
+  },
+  {
+    "facturaId": "FAC-2026-0002",
+    "proveedorId": "PRV-011",
+    "solicitudId": "SC-2026-0022",
+    "fecha": "2026-03-05",
+    "moneda": "USD",
+    "lineas": [
+      {
+        "descripcion": "Certificación en la nube (persona)",
+        "cantidad": 7,
+        "precioUnitario": 320
+      }
+    ],
+    "importe": 2240
+  },
+  {
+    "facturaId": "FAC-2026-0003",
+    "proveedorId": "PRV-013",
+    "solicitudId": "SC-2026-0097",
+    "fecha": "2026-03-05",
+    "moneda": "USD",
+    "lineas": [
+      {
+        "descripcion": "Tiquete nacional",
+        "cantidad": 13,
+        "precioUnitario": 240
+      }
+    ],
+    "importe": 3120
+  },
+  {
+    "facturaId": "FAC-2026-0003",
+    "proveedorId": "PRV-013",
+    "solicitudId": "SC-2026-0097",
+    "fecha": "2026-03-05",
+    "moneda": "USD",
+    "lineas": [
+      {
+        "descripcion": "Tiquete nacional",
+        "cantidad": 13,
+        "precioUnitario": 240
+      }
+    ],
+    "importe": 3120,
+    "reenvio": true
+  },
+  {
+    "facturaId": "FAC-2026-0004",
+    "proveedorId": "PRV-002",
+    "solicitudId": "SC-2026-0118",
+    "fecha": "2026-03-05",
+    "moneda": "USD",
+    "lineas": [
+      {
+        "descripcion": "Base de acoplamiento",
+        "cantidad": 6,
+        "precioUnitario": 210
+      }
+    ],
+    "importe": 1260
+  },
+  {
+    "facturaId": "FAC-2026-0005",
+    "proveedorId": "PRV-011",
+    "solicitudId": "SC-2026-0042",
+    "fecha": "2026-04-05",
+    "moneda": "USD",
+    "lineas": [
+      {
+        "descripcion": "Programa de inglés (persona, trimestre)",
+        "cantidad": 23,
+        "precioUnitario": 380
+      }
+    ],
+    "importe": 8740
+  },
+  {
+    "facturaId": "FAC-2026-0006",
+    "proveedorId": "PRV-016",
+    "solicitudId": "SC-2026-0085",
+    "fecha": "2026-04-05",
+    "moneda": "USD",
+    "lineas": [
+      {
+        "descripcion": "Marcadores de pizarra",
+        "cantidad": 73,
+        "precioUnitario": 8
+      }
+    ],
+    "importe": 584
+  },
+  {
+    "facturaId": "FAC-2026-0007",
+    "proveedorId": "PRV-001",
+    "solicitudId": "SC-2026-0053",
+    "fecha": "2026-05-05",
+    "moneda": "USD",
+    "lineas": [
+      {
+        "descripcion": "Diadema con micrófono",
+        "cantidad": 7,
+        "precioUnitario": 86.28
+      }
+    ],
+    "importe": 603.96
+  },
+  {
+    "facturaId": "FAC-2026-0008",
+    "proveedorId": "PRV-013",
+    "solicitudId": "SC-2026-0128",
+    "fecha": "2026-05-05",
+    "moneda": "USD",
+    "lineas": [
+      {
+        "descripcion": "Tiquete internacional",
+        "cantidad": 4,
+        "precioUnitario": 972.16
+      }
+    ],
+    "importe": 3888.64
+  },
+  {
+    "facturaId": "FAC-2026-0009",
+    "proveedorId": "PRV-011",
+    "solicitudId": "SC-2026-0017",
+    "fecha": "2026-06-05",
+    "moneda": "USD",
+    "lineas": [
+      {
+        "descripcion": "Programa de inglés (persona, trimestre)",
+        "cantidad": 2,
+        "precioUnitario": 399
+      }
+    ],
+    "importe": 798
+  },
+  {
+    "facturaId": "FAC-2026-0010",
+    "proveedorId": "PRV-001",
+    "solicitudId": "SC-2026-0020",
+    "fecha": "2026-06-05",
+    "moneda": "USD",
+    "lineas": [
+      {
+        "descripcion": "Base de acoplamiento",
+        "cantidad": 5,
+        "precioUnitario": 210
+      }
+    ],
+    "importe": 1050
+  },
+  {
+    "facturaId": "FAC-2026-0011",
+    "proveedorId": "PRV-015",
+    "solicitudId": "SC-2026-0013",
+    "fecha": "2026-07-05",
+    "moneda": "EUR",
+    "lineas": [
+      {
+        "descripcion": "Tóner de impresora",
+        "cantidad": 19,
+        "precioUnitario": 95
+      }
+    ],
+    "importe": 1805
+  },
+  {
+    "facturaId": "FAC-2026-0012",
+    "proveedorId": "PRV-010",
+    "solicitudId": "SC-2026-0999",
+    "fecha": "2026-07-05",
+    "moneda": "USD",
+    "lineas": [
+      {
+        "descripcion": "Diseño gráfico (pieza)",
+        "cantidad": 8,
+        "precioUnitario": 180
+      }
+    ],
+    "importe": 1440
+  },
+  {
+    "facturaId": "FAC-2026-0013",
+    "proveedorId": "PRV-004",
+    "solicitudId": "SC-2026-0059",
+    "fecha": "2026-02-05",
+    "moneda": "USD",
+    "lineas": [
+      {
+        "descripcion": "Punto de acceso Wi-Fi",
+        "cantidad": 23,
+        "precioUnitario": 390
+      }
+    ],
+    "importe": 8970
+  }
+]

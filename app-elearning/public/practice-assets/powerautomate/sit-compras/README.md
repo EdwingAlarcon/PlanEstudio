@@ -12,6 +12,8 @@ Datos **ficticios** de Servicios Integrados Tecnológicos S.A. (SIT), generados 
 | `proveedores-actualizacion.csv` / `.xlsx` | Segunda carga de proveedores: un cambio, una reactivación y un proveedor nuevo | Lab 132 (upsert) |
 | `catalogo-v2/pagina-N.json` | El mismo catálogo con el esquema cambiado (`Precio` es un objeto y `Activo` pasó a `Estado`) | Lab 134 |
 | `webhook/ejemplo-factura.json` | Cuerpo de ejemplo para el desencadenador HTTP | Lab 134 |
+| `facturas/FAC-2026-NNNN.json`, `facturas/lote-facturas.json` | 13 facturas de proveedores (y un reenvío de la 3) para conciliar contra las solicitudes aprobadas | Lab 135 |
+| `reglas-conciliacion.json` | Tolerancia del 2 % y orden de evaluación de la conciliación | Lab 135 |
 | `expected/cifras-esperadas.json` | Cifras para comprobar tu trabajo | — |
 
 El catálogo también está publicado por la app del curso en `https://planestudio.vercel.app/practice-assets/powerautomate/sit-compras/catalogo/pagina-1.json`.

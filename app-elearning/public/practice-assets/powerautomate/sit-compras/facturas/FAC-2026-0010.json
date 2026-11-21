@@ -1,0 +1,15 @@
+{
+  "facturaId": "FAC-2026-0010",
+  "proveedorId": "PRV-001",
+  "solicitudId": "SC-2026-0020",
+  "fecha": "2026-06-05",
+  "moneda": "USD",
+  "lineas": [
+    {
+      "descripcion": "Base de acoplamiento",
+      "cantidad": 5,
+      "precioUnitario": 210
+    }
+  ],
+  "importe": 1050
+}

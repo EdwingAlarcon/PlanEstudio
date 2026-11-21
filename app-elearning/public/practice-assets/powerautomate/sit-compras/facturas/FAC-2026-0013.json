@@ -1,0 +1,15 @@
+{
+  "facturaId": "FAC-2026-0013",
+  "proveedorId": "PRV-004",
+  "solicitudId": "SC-2026-0059",
+  "fecha": "2026-02-05",
+  "moneda": "USD",
+  "lineas": [
+    {
+      "descripcion": "Punto de acceso Wi-Fi",
+      "cantidad": 23,
+      "precioUnitario": 390
+    }
+  ],
+  "importe": 8970
+}

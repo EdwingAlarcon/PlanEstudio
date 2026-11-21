@@ -1,0 +1,24 @@
+{
+  "version": "2026-01",
+  "descripcion": "Reglas de conciliación factura-solicitud de SIT (ficticias, generadas para el curso PlanEstudio).",
+  "toleranciaPorcentaje": 2,
+  "reglaDeTolerancia": "Se concilia si |importe de la factura - importe de la solicitud| es menor o igual que el 2 % del importe de la solicitud.",
+  "ordenDeEvaluacion": [
+    "Duplicada",
+    "Sin solicitud",
+    "Solicitud no aprobada",
+    "Proveedor distinto",
+    "Moneda distinta",
+    "Importe"
+  ],
+  "resultados": [
+    "Conciliada",
+    "Conciliada con diferencia",
+    "Fuera de tolerancia",
+    "Duplicada",
+    "Sin solicitud",
+    "Solicitud no aprobada",
+    "Proveedor distinto",
+    "Moneda distinta"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "facturaId": "FAC-2026-0001",
+  "proveedorId": "PRV-011",
+  "solicitudId": "SC-2026-0096",
+  "fecha": "2026-02-05",
+  "moneda": "USD",
+  "lineas": [
+    {
+      "descripcion": "Curso de liderazgo (persona)",
+      "cantidad": 17,
+      "precioUnitario": 450
+    }
+  ],
+  "importe": 7650
+}

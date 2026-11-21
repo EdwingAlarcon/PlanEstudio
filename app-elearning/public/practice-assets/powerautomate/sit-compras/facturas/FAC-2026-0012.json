@@ -1,0 +1,15 @@
+{
+  "facturaId": "FAC-2026-0012",
+  "proveedorId": "PRV-010",
+  "solicitudId": "SC-2026-0999",
+  "fecha": "2026-07-05",
+  "moneda": "USD",
+  "lineas": [
+    {
+      "descripcion": "Diseño gráfico (pieza)",
+      "cantidad": 8,
+      "precioUnitario": 180
+    }
+  ],
+  "importe": 1440
+}
