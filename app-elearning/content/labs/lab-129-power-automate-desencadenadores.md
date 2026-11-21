@@ -118,7 +118,7 @@ Además, alguien registró una solicitud con cantidad 0 y el proceso la aceptó.
 | 2 | La primera actualización de `SC - Aprobar solicitud` (importe, nivel y estado **Pendiente**) |
 | 3 | La segunda actualización, tras responder la aprobación (estado y comentario) |
 
-Tres correos para una compra de 100 USD. Si ves más, alguien (tú, desde la tabla) modificó la fila a mano: cada edición también dispara.
+Tres correos para una compra de 100 USD. Si ves más, alguien (tú, desde la tabla) modificó la fila a mano: cada edición también dispara. *Comprobado en un tenant real (2026-11-21, simulando las dos actualizaciones del flujo del Lab 128 con la API):* exactamente 3 ejecuciones por solicitud. Los eventos tardaron de 1 a 5 minutos en producir ejecuciones: espera antes de contar.
 
 > **Por qué ocurre:** **Modified** se dispara con **cualquier** actualización de la fila, también las que hacen otros flujos. Un flujo que actualiza la misma tabla que lo dispara es la fuente clásica de ejecuciones de más (y, si el disparador reacciona a lo que el propio flujo escribe, de bucles infinitos).
 
@@ -141,7 +141,7 @@ Tres correos para una compra de 100 USD. Si ves más, alguien (tú, desde la tab
 
 ### Resultado esperado del Ejercicio 2
 
-**Una ejecución**: la de la primera actualización, la que **escribe** el importe. La segunda actualización (estado y comentario) no incluye la columna del importe, así que no dispara el flujo, y la creación ya no cuenta porque el **Change type** es **Modified**.
+**Una ejecución** (comprobado): la de la primera actualización, la que **escribe** el importe. La segunda actualización (estado y comentario) no incluye la columna del importe, así que no dispara el flujo, y la creación ya no cuenta porque el **Change type** es **Modified**.
 
 > **Qué hace realmente "Select columns":** el flujo solo se dispara si la actualización **incluye** alguna de esas columnas (Learn: solo aplica a las actualizaciones; con crear o eliminar se consideran todas las columnas, y las columnas de búsqueda no se admiten). No compara valores: si algo vuelve a escribir el importe con el mismo valor, el flujo se dispara de nuevo (por ejemplo, al usar **Resubmit** sobre el Lab 128). La idempotencia es el tema del Lab 133.
 
@@ -150,7 +150,7 @@ Tres correos para una compra de 100 USD. Si ves más, alguien (tú, desde la tab
 | Campo | Tu valor |
 |---|---|
 | Ejecuciones tras la prueba P1b | ___ (esperado: 1) |
-| ¿Se dispararía si un usuario editara solo el `Comentario del aprobador`? | ___ |
+| ¿Se dispararía si un usuario editara solo el `Comentario del aprobador`? | ___ (esperado: no; comprobado: la segunda actualización del flujo del Lab 128 escribe estado y comentario y no dispara) |
 
 ---
 
@@ -201,7 +201,7 @@ sit_importe gt 10000
    Las condiciones de desencadenador son expresiones que empiezan por `@` y deben dar `true` para que el flujo se ejecute; si dan `false`, el flujo no se dispara y **no se registra ninguna ejecución** en el historial. `coalesce(x, 0)` evita el error cuando la columna llega vacía: una comparación con un valor nulo falla.
 2. **Save** y repite las pruebas **P1** (título `P1d`) y **P2** (título `P2d`).
 
-**Resultado esperado:** 0 ejecuciones para P1d y 1 para P2d. Sin **Filter rows**, el flujo llega al mismo resultado con una regla escrita en el lenguaje de expresiones.
+**Resultado esperado:** 0 ejecuciones para P1d y 1 para P2d (comprobado). Sin **Filter rows**, el flujo llega al mismo resultado con una regla escrita en el lenguaje de expresiones. En un tenant en español, los ajustes del desencadenador están en **Configuración**: **Control de simultaneidad** y **Condiciones de desencadenador** > **Agregar**.
 
 ### Tarea 4.2 — Una regla con dos columnas: `SC - Avisar a TI`
 
@@ -215,7 +215,7 @@ sit_importe gt 10000
 5. Acción **Send an email (V2)** a tu correo: **Subject** `Revisión de TI: ` + `Título`.
 6. Prueba con los casos del Lab 128 (puedes crearlos de nuevo con otros títulos; **responde las tres aprobaciones**, o el resumen del Ejercicio 5 las contará como pendientes): **Portátiles** (Tecnología, 3 × 1400 = 4.200) y **Sillas** (Mobiliario, 4 × 210 = 840), más una tercera, **Monitores** (Tecnología, 2 × 320 = 640).
 
-### Resultado esperado de la Tarea 4.2
+### Resultado esperado de la Tarea 4.2 (comprobado en un tenant real: 1, 0 y 0)
 
 | Solicitud | Categoría | Importe | ¿Se dispara? | Por qué |
 |---|---|---|---|---|
@@ -239,7 +239,7 @@ sit_importe gt 10000
 | Campo | Tu valor |
 |---|---|
 | Ejecuciones de `SC - Avisar a TI` para Portátiles, Sillas y Monitores | ___ , ___ , ___ (esperado: 1, 0, 0) |
-| ¿Qué pasaría con `greater(triggerOutputs()?['body/sit_importe'], 1000)` si `Importe` llegara vacío? | ___ |
+| ¿Qué pasaría con `greater(triggerOutputs()?['body/sit_importe'], 1000)` si `Importe` llegara vacío? | ___ (comprobado: no se registra ninguna ejecución y no hay ningún error visible) |
 
 ---
 

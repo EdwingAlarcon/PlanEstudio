@@ -1090,3 +1090,16 @@ claves alternativas. La interfaz del usuario está en **español** (Power Apps y
   integral or decimal value by zero in function 'div'`; **un error de DNS (`UnresolvableHostName`) no se reintenta**, ni con Fixed
   interval; con un 503 sí hay reintentos y la directiva Default dura más de 5 minutos. En la definición de un flujo, los textos
   que empiezan por `@` (como `@odata.nextLink` en un esquema) se escriben `@@`.
+- **Lab 129 y webhook del Lab 134, comprobado en el tenant (2026-11-21):** simulando por la API las dos actualizaciones del flujo del
+  Lab 128, un flujo **Added or Modified** sin filtros se ejecuta **3 veces** por solicitud (14 en total en la prueba: 6 altas y 8
+  actualizaciones); **Modified + columna del importe**, 5 (solo las que escriben el importe); **Filter rows** `sit_importe gt
+  10000`, 1; la condición de desencadenador, 1; la de TI (Tecnología e importe > 1.000), 1 (Portátiles); con una condición que
+  compara con un valor nulo sin `coalesce` no se registra ninguna ejecución. Los eventos tardan de 1 a 5 minutos en producir
+  ejecuciones. El desencadenador HTTP (`Solicitud`) responde 200 (USD) y 400 (EUR) como dice el lab, **no valida el esquema**
+  (200 aunque falte `importe`, aunque todo esté en `required` y con un `importe` de texto) y su URL tiene la forma
+  `*.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/…`. La directiva de reintento **Default**
+  con un 503 tardó unos 11 minutos. Etiquetas en español: **Control de simultaneidad**, **Condiciones de desencadenador**,
+  **¿Quién puede desencadenar el flujo?** (valor **Cualquiera**), **URL de HTTP**, **Esquema JSON de cuerpo de la solicitud**.
+- **Sin verificar tras esta ronda:** el modo de texto de Select (Lab 130), el valor de `outcome` con respuestas propias (Lab 131),
+  Update a row con clave, y todo lo que depende de Excel o de aprobaciones. Los flujos y filas de prueba siguen en el entorno
+  "Curso Power Automate" (flujos apagados salvo los manuales).

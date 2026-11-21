@@ -316,7 +316,7 @@ La ejecución **no** termina en rojo (comprobado: el estado final es **Correcto*
 { "facturaId": "FAC-2026-0001", "proveedorId": "PRV-002", "solicitudId": "SC-2026-0114", "importe": 6800, "moneda": "USD", "fecha": "2026-10-30" }
 ```
 
-3. En **Who can trigger the flow** hay tres opciones ([Learn: autenticación OAuth en desencadenadores HTTP](https://learn.microsoft.com/power-automate/oauth-authentication)): **Any user in my tenant**, **Specific users in my tenant** (ambas exigen que quien llama presente un token de Microsoft Entra ID) y **Anyone** (marcada como heredada). Para probar con `Invoke-RestMethod` sin token, usa **Anyone** **solo durante la prueba**: **cualquiera con la URL** puede llamar, y la URL lleva una firma (`sig=`) que es, en la práctica, una contraseña. Cuando termines, cambia a una opción de tenant. Learn también avisa de que las URL antiguas de `logic.azure.com` dejaron de funcionar el 30 de noviembre de 2025 y de que las URL nuevas pueden superar los 255 caracteres: no copies la URL de un ejemplo antiguo.
+3. En **Who can trigger the flow** hay tres opciones ([Learn: autenticación OAuth en desencadenadores HTTP](https://learn.microsoft.com/power-automate/oauth-authentication)): **Any user in my tenant**, **Specific users in my tenant** (ambas exigen que quien llama presente un token de Microsoft Entra ID) y **Anyone** (marcada como heredada). Para probar con `Invoke-RestMethod` sin token, usa **Anyone** **solo durante la prueba**: **cualquiera con la URL** puede llamar, y la URL lleva una firma (`sig=`) que es, en la práctica, una contraseña. Cuando termines, cambia a una opción de tenant. Learn también avisa de que las URL antiguas de `logic.azure.com` dejaron de funcionar el 30 de noviembre de 2025 y de que las URL nuevas pueden superar los 255 caracteres: no copies la URL de un ejemplo antiguo. En un tenant real, la URL tiene la forma `https://<id>.<n>.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/<id>/triggers/manual/paths/invoke?...&sig=...`, y en un tenant en español la opción se llama **¿Quién puede desencadenar el flujo?** con el valor **Cualquiera**.
 4. Añade una **Condition** que compruebe la moneda: `triggerBody()?['moneda']` **is equal to** `USD`. En **True**, **Response**: **Status Code** `200`, **Headers** `Content-Type` = `application/json`, **Body**:
 
 ```json
@@ -350,9 +350,9 @@ try {
 
 | Llamada | Respuesta |
 |---|---|
-| Cuerpo de ejemplo (USD) | **200** con `{ "recibido": true, "facturaId": "FAC-2026-0001" }` |
+| Cuerpo de ejemplo (USD) | **200** con `{ "recibido": true, "facturaId": "FAC-2026-0001" }` (comprobado) |
 | `moneda` = `EUR` | **400** con el motivo |
-| Sin la propiedad `importe` | Lo normal es **200**: el esquema solo genera los campos de **Dynamic content** y no valida. Si tu diseñador ofrece **Schema Validation** en los **Settings** del desencadenador y la activas, la llamada se rechaza con 400 antes de que corra el flujo (*sin verificar en Learn*). Anota lo que observas |
+| Sin la propiedad `importe` | **200** (comprobado): el esquema solo genera los campos de **Dynamic content** y **no valida**, ni siquiera con todas las propiedades en `required` ni con un `importe` de texto (`"abc"`); la configuración del desencadenador no ofrece una opción de validación. Valida tú dentro del flujo (la **Condition** del paso 4) |
 
 El historial del flujo muestra una ejecución por cada llamada aceptada. La respuesta **la da tu flujo**: el sistema que llama espera hasta que **Response** se ejecuta.
 

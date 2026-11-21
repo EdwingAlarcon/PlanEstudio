@@ -206,13 +206,13 @@ concat('Falló la acción ', first(body('Acciones_fallidas'))?['name'], ': ', fi
 | **Fixed interval**, **Count** `2`, **Interval** `PT10S` | ___ | ___ | ___ |
 | **Default** | ___ | ___ | ___ |
 
-   (El tiempo de **Default** es de **varios minutos**: en una prueba real, la ejecución seguía en curso pasados 3 minutos. Lanza esta prueba y sigue con otra cosa.)
+   (El tiempo de **Default** es de **varios minutos**: en una prueba real, un 503 con la directiva por defecto tardó **unos 11 minutos** en rendirse (y la ejecución completa, con las otras dos directivas, 11 min 46 s). Lanza esta prueba y sigue con otra cosa.)
 
 ### Resultado esperado del Ejercicio 3
 
 - **None**: 1 intento y un fallo inmediato.
 - **Fixed interval** de 2 reintentos cada 10 segundos: 3 intentos (el original y dos reintentos) y unos **20 segundos** de espera acumulada.
-- **Default**: varios reintentos con intervalos crecientes, durante **más de 3 minutos**. **Anota cuántos** hizo: Learn da cifras distintas según la página y el perfil de licencia (hasta 2 en el perfil Low y hasta 12 en Medium y High; el diseñador cita 8 sin conectores premium y 12 con ellos), así que **tu medida es el dato**. Se reintentan 408, 429 y los errores 5xx.
+- **Default**: varios reintentos con intervalos crecientes, durante **unos 11 minutos** (medido). **Anota cuántos** hizo: Learn da cifras distintas según la página y el perfil de licencia (hasta 2 en el perfil Low y hasta 12 en Medium y High; el diseñador cita 8 sin conectores premium y 12 con ellos), así que **tu medida es el dato**. Se reintentan 408, 429 y los errores 5xx.
 
 ### Qué reintentar y qué no
 
