@@ -1,5 +1,54 @@
 # PlanEstudio — Estado de sprints post-auditoría (handoff)
 
+## RETOMAR DESDE AQUÍ — cierre de sesión del 2026-11-21 (noche)
+
+**Estado: nada a medias.** Todo está en `master`, con CI en verde y desplegado en `https://planestudio.vercel.app/`
+(comprobado: labs 138, 139, 140, la ruta `power-automate-pro` y los datos nuevos responden 200). Último commit: `6319b93`.
+
+**Hecho en esta sesión (todo con prueba simulada de agentes, no personas):**
+- Ruta Pro Power Automate **completa y "Disponible"** (labs 128-139, capstone LAB-139): P2 `dd7d05d`, P3 `b69b7ff`, P4 `9c28118`,
+  P5 `b6ea56f`. Verificación en tenant real: `610714a`, `43db6fb`, `e722968`, `c0151c1`.
+- **LAB-140** (opcional, nivel IA/N5): Dataverse Web API con un cliente propio en PowerShell (`6319b93`). Responde a la pregunta
+  del usuario "¿la app enseña a crear e implementar funcionalidades con API de punta a punta?": estaba repartido (Lab 134,
+  Módulo 14, Módulo 53 y Lab 54 solo en papel, Módulo 24, Módulo 19); faltaba una práctica con token real y cliente propio.
+- Conteos vigentes: **76 módulos, 101 labs (26 opcionales), 891 preguntas, 239 prácticas interactivas, 41 recursos.**
+- Detalle por fase en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §15.9 a §15.16 y en `CLAUDE.md` (párrafos P2 a P5 y LAB-140).
+
+**Pendiente, por quién tiene que actuar:**
+1. *Claude, con el tenant de prueba (necesita que el usuario deje operar):* verificar en la interfaz lo "sin verificar":
+   pasos de los labs 135 a 138 (136 y 137 solo por API), Lab 139 completo, Lab 130 con Excel real (OneDrive/SharePoint),
+   Select en modo texto tecleado, Lab 128 por interfaz, flujos secundarios, `json(base64ToString(contentBytes))`,
+   `formatNumber` como redondeo, lookup por clave con Update a row.
+2. *El usuario:* (a) crear un registro de aplicación propio para ejecutar el script del LAB-140 con token real (Claude no crea
+   identidades sin permiso); (b) verificar etiquetas en un tenant en español (`VERIFICACION_INTERFAZ_ES.md`, luego `verified: true`
+   en `ui-terms.ts`); (c) decidir si se hacen pruebas con personas reales; (d) elegir si se retoma `/graphify` semántico.
+3. *Siguiente bloque grande:* **Ruta Pro Copilot Studio** (orden de PROPUESTA §15.3: Copilot Studio, Power Apps, CI-Journeys,
+   Sales/Customer Service). Patrón de cada ruta: datos propios deterministas (generador en `scripts/`), 10-12 labs en 5 fases (P1 a P5),
+   prueba simulada por fase y de la ruta entera, ruta en `professional-routes.ts`, test de cifras, y labs oficiales "in a Day" de
+   MicrosoftLearning como referencia (adaptar con atribución, no copiar; ver pendiente 7 abajo).
+4. *Pequeños:* los labs 128-139 están marcados N2 aunque desde el 133 el contenido sube; falta una frase con la duración total
+   de la ruta (unas 52 h de frontmatter, 55 a 58 h con las estimaciones simuladas); pendiente releer "Pendientes reales actuales" (línea ~1700).
+
+**Tenant de prueba (PurpleShop, entorno Trial "Curso Power Automate", vence unos 30 días después del 2026-11-21):** quedan la
+solución `SIT Compras`, las tablas `Proveedor` y `Solicitud de compra` con datos (17 proveedores, 146+ solicitudes), varios flujos
+de prueba (`T verificacion expresiones`, `T133 errores`, `T134 HTTP y paginacion`, flujo sin título) y la conexión "Dataverse
+curso". La solución desechable `SIT ALM Prueba` ya se borró y las filas `PRV-TEST…` también. **Reglas:** trabajar SOLO en ese
+entorno; crear identidades, conexiones o cuentas exige permiso explícito; no exponer URLs firmadas ni secretos. Antes de que venza el
+Trial: exportar la solución (rutina del Lab 136).
+
+**Cómo trabajar (aprendido):** responder en español; commit y push a `master` tras `npm run verify` (solo sincronizar con
+`git fetch`); modelo Opus según la tabla de `CLAUDE.md`; sub-agentes en paralelo para verificar Learn y para pruebas simuladas;
+para editar textos largos con tildes y comillas, **escribir un script Python en el scratchpad** (los heredocs de Bash se
+rompen); el clasificador de permisos bloquea leer el historial de la sesión (puede contener URLs firmadas): no rodearlo;
+al sustituir texto con regex en un archivo, comprobar con `git diff --stat` (un `re.sub` no codicioso borró ~45 líneas de un test).
+
+**Sobre `/graphify` y la extracción semántica:** hay un grafo de código ya generado (`graphify-out/`, se actualiza gratis con
+`graphify update .`, sin API). La *extracción semántica* es una segunda pasada que usa modelos (sub-agentes) para leer los ~150
+archivos Markdown del contenido y extraer conceptos y relaciones entre ellos (qué módulo depende de qué idea, qué lab practica qué
+concepto). Se decidió **no hacerla** (15 a 20 sub-agentes de coste alto) porque el contenido se busca bien con grep y los
+índices del curso; se retoma solo si el usuario lo pide.
+
+
 ## Decisiones tomadas el 2026-11-19 (el usuario pidió "resuelve todas, decide tú")
 
 - **Certificaciones (ítem 6):** Nivel 3 pasa a **AB-400 (sucesor de PL-400, retirado el 30 oct 2026)** en el frontmatter de
