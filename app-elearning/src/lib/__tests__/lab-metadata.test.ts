@@ -129,9 +129,9 @@ describe("lab domain classification", () => {
 });
 
 describe("lab readiness (Sprint 1 — auditoría tenant-real)", () => {
-  it("gives every one of the 100 labs a non-empty execution status and evidence", () => {
+  it("gives every one of the 101 labs a non-empty execution status and evidence", () => {
     const labs = getAllLabs();
-    expect(labs.length).toBe(100);
+    expect(labs.length).toBe(101);
 
     for (const lab of labs) {
       const readiness = getLabReadiness(lab);
@@ -231,6 +231,7 @@ describe("labs opcionales", () => {
       "lab-137-power-automate-operacion-y-gobierno",
       "lab-138-power-automate-rendimiento",
       "lab-139-power-automate-reto-pro-sin-pasos",
+      "lab-140-dataverse-web-api-cliente-propio",
     ]);
   });
 });

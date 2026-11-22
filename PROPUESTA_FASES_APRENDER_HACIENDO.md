@@ -1130,3 +1130,9 @@ claves alternativas. La interfaz del usuario está en **español** (Power Apps y
 - Prueba simulada de los dos labs y de la coherencia de toda la ruta (3 agentes sin contexto; simulación, no personas): ver correcciones en el commit.
 - **La ruta `power-automate-pro` pasa a "Disponible" con capstone LAB-139.**
 - Duración: la suma del frontmatter de los labs 128-139 es de unas 52 h; con las estimaciones de las pruebas simuladas, entre 55 y 58 h. Pendiente: pasar por el tenant lo que sigue "sin verificar" (PROPUESTA §15.13 a §15.15) y la prueba con una persona real.
+
+### 15.16 LAB-140 — Dataverse Web API con un cliente propio (2026-11-21)
+
+- Motivo: el usuario preguntó si la app enseña a crear e implementar funcionalidades mediante API de punta a punta. Hay cobertura repartida (Lab 134 consumir y exponer APIs, Módulo 14 conectores, Módulo 53 y Lab 54 diseño de identidad, Módulo 24 Azure) pero faltaba una práctica con **token real y cliente propio**.
+- Lab opcional, nivel IA/N5, 4 h; no cuenta para ningún certificado. Conteos: 101 labs, 26 opcionales.
+- Verificado: respuestas de la API en el tenant (tabla `Proveedor`, sin dejar filas de prueba) y Learn (OAuth, usuario de aplicación, límites, paginación, upsert, secretos, `$batch`). **Sin ejecutar:** el flujo de token con un registro de aplicación propio y los scripts completos.
