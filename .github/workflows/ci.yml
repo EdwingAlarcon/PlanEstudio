@@ -133,7 +133,7 @@ jobs:
   build:
     name: Next.js Build
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     needs: [lint, test, e2e]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -150,3 +150,12 @@ jobs:
       # Mismo build que Vercel (producción oficial): sin basePath. El deploy lo hace Vercel desde master.
       - name: Build static export
         run: npm run build
+
+      # Ni next dev ni el hosting local aplican las cabeceras de vercel.json: se comprueban sobre out/.
+      - name: Install Chromium
+        timeout-minutes: 8
+        run: npx playwright install --with-deps chromium
+
+      - name: Check Content-Security-Policy
+        timeout-minutes: 10
+        run: npm run check:csp
