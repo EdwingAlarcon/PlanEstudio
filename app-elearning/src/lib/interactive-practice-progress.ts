@@ -4,6 +4,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { InteractiveEvaluationResult, InteractivePracticeMastery } from "@/lib/interactive-practices";
 import { calculateInteractiveMastery } from "@/lib/interactive-practices";
+import { findDangerousKey } from "@/lib/safe-json";
 
 export const INTERACTIVE_PRACTICE_STORAGE_KEY = "planestudio.interactive-practice.v1";
 export const INTERACTIVE_PRACTICE_EXPORT_SOURCE = "planestudio.interactive-practice";
@@ -167,6 +168,8 @@ export function parseInteractivePracticeImport(
   }
 
   if (!raw || typeof raw !== "object") return { ok: false, error: "El archivo no contiene un objeto de progreso válido." };
+  const dangerousKey = findDangerousKey(raw);
+  if (dangerousKey) return { ok: false, error: `El archivo contiene un campo no permitido: ${dangerousKey}.` };
   const source = (raw as { source?: unknown }).source;
   if (source !== INTERACTIVE_PRACTICE_EXPORT_SOURCE) {
     return { ok: false, error: "El archivo no corresponde al progreso interactivo de PlanEstudio." };

@@ -1,4 +1,5 @@
 import { OPERATING_SYSTEMS, WORKSTATION_TOOLS, type OperatingSystem, type ToolStatus } from "./workstation";
+import { findDangerousKey } from "./safe-json";
 
 export const WORKSTATION_REPORT_FORMAT = "planestudio-workstation-report";
 export const WORKSTATION_REPORT_SCHEMA_VERSION = 1;
@@ -43,17 +44,6 @@ function emptyReportPreview(): WorkstationReportPreview {
 
 function corruptReportPreview(message: string): WorkstationReportPreview {
   return { ...emptyReportPreview(), errors: [message] };
-}
-
-function findDangerousKey(value: unknown, depth = 0): string | null {
-  if (depth > 12) return "profundidad excesiva";
-  if (!value || typeof value !== "object") return null;
-  for (const [key, nested] of Object.entries(value as Record<string, unknown>)) {
-    if (["__proto__", "constructor", "prototype"].includes(key)) return key;
-    const found = findDangerousKey(nested, depth + 1);
-    if (found) return found;
-  }
-  return null;
 }
 
 function stringField(value: unknown, maxLength: number): string {

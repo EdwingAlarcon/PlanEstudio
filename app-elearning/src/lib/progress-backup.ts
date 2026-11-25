@@ -6,6 +6,7 @@
 
 import { INTERACTIVE_PRACTICE_STORAGE_KEY } from "./interactive-practice-progress";
 import { PRACTICE_PROGRESS_STORAGE_KEY } from "./practice-progress";
+import { findDangerousKey } from "./safe-json";
 import { REVIEW_STORAGE_KEY } from "./review-store";
 import { WORKSTATION_STORAGE_KEY } from "./workstation-store";
 
@@ -52,20 +53,8 @@ export interface BackupPreview {
 type ReadableStorage = Pick<Storage, "getItem">;
 type WritableStorage = Pick<Storage, "getItem" | "setItem">;
 
-const DANGEROUS_KEYS = new Set(["__proto__", "constructor", "prototype"]);
-
 function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
-}
-
-function findDangerousKey(value: unknown, depth = 0): string | null {
-  if (depth > 12 || !value || typeof value !== "object") return null;
-  for (const [key, child] of Object.entries(value)) {
-    if (DANGEROUS_KEYS.has(key)) return key;
-    const nested = findDangerousKey(child, depth + 1);
-    if (nested) return nested;
-  }
-  return null;
 }
 
 function readPersisted(storage: ReadableStorage, key: string): PersistedStore | null {

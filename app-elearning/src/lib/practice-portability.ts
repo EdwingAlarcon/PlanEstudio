@@ -1,4 +1,5 @@
 import type { PracticeInfo } from "./practices";
+import { findDangerousKey } from "./safe-json";
 import {
   PRACTICE_PROGRESS_SCHEMA_VERSION,
   sanitizePracticeProgressState,
@@ -282,6 +283,8 @@ export function validateExternalReviewPayload(
 
 export function validatePracticeImportPayload(payload: unknown, knownPracticeIds: string[]): PracticeImportPreview {
   if (!payload || typeof payload !== "object") return corruptPreview("El archivo no contiene un objeto de progreso.");
+  const dangerousKey = findDangerousKey(payload);
+  if (dangerousKey) return corruptPreview(`El archivo contiene un campo no permitido: ${dangerousKey}.`);
   const raw = payload as Record<string, unknown>;
   if (raw.format !== PRACTICE_EXPORT_FORMAT && raw.schemaVersion !== 1) {
     return corruptPreview("El archivo no pertenece al formato de progreso práctico de PlanEstudio.");
@@ -632,17 +635,6 @@ function parseReviewer(value: unknown, raw: Record<string, unknown>) {
   const organization = stringField(reviewer.organization ?? raw.reviewerOrganization, 160);
   const type = ["mentor", "peer", "lead", "instructor", "other"].includes(String(raw.reviewerType)) ? raw.reviewerType as ExternalPracticeReview["reviewerType"] : "other";
   return { displayName, alias, role, organization, type };
-}
-
-function findDangerousKey(value: unknown, depth = 0): string | null {
-  if (depth > 12) return "profundidad excesiva";
-  if (!value || typeof value !== "object") return null;
-  for (const [key, nested] of Object.entries(value as Record<string, unknown>)) {
-    if (["__proto__", "constructor", "prototype"].includes(key)) return key;
-    const found = findDangerousKey(nested, depth + 1);
-    if (found) return found;
-  }
-  return null;
 }
 
 function stringField(value: unknown, maxLength: number): string {

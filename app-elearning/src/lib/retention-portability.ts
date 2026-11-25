@@ -5,6 +5,7 @@
 
 import { REVIEW_SCHEMA_VERSION, sanitizeReviewState, type ReviewDayLog, type ReviewState } from "./review-store";
 import type { ReviewCardMap } from "./review-queue";
+import { findDangerousKey } from "./safe-json";
 
 export const RETENTION_EXPORT_FORMAT = "planestudio-retention";
 export const RETENTION_IMPORT_MAX_BYTES = 1_000_000;
@@ -145,17 +146,6 @@ export function applyRetentionImport(
 }
 
 // ─── Internal helpers ──────────────────────────────────────────────────────
-
-function findDangerousKey(value: unknown, depth = 0): string | null {
-  if (depth > 12) return "profundidad excesiva";
-  if (!value || typeof value !== "object") return null;
-  for (const [key, nested] of Object.entries(value as Record<string, unknown>)) {
-    if (["__proto__", "constructor", "prototype"].includes(key)) return key;
-    const found = findDangerousKey(nested, depth + 1);
-    if (found) return found;
-  }
-  return null;
-}
 
 function corruptPreview(message: string): RetentionImportPreview {
   return { ...emptyPreview(), status: "corrupt", errors: [message] };
