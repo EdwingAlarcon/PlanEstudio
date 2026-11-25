@@ -286,6 +286,8 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
   repositorio documentadas (ver 2026-10-01). Piloto 3 (Módulo 13) cerrado — ver sección de pilotos arriba.
 - Producción oficial: `https://planestudio.vercel.app/` (proyecto Vercel `app-elearning`); el espejo de GitHub Pages se retiró el 2026-10-08 (el CI ya no despliega).
   Los deploys estáticos de Vercel requieren `app-elearning/public/vercel.json` (`cleanUrls: true`).
+  El deploy por Git lee solo `app-elearning/vercel.json` (ahí van las cabeceras de seguridad; el de `public/` se
+  publica como archivo estático y sus `headers` no se aplican).
 - Preferencia del usuario: sincronizar (fetch/pull) antes de empezar; tras un cambio, commit y push a la rama indicada,
   comprobar CI con una sola consulta (no `gh run watch`). Validar con `npm run build:pages` o `npm run build` y luego
   `npm run e2e` **en serie**, no en paralelo (ambos usan `.next`).
