@@ -1136,3 +1136,14 @@ claves alternativas. La interfaz del usuario está en **español** (Power Apps y
 - Motivo: el usuario preguntó si la app enseña a crear e implementar funcionalidades mediante API de punta a punta. Hay cobertura repartida (Lab 134 consumir y exponer APIs, Módulo 14 conectores, Módulo 53 y Lab 54 diseño de identidad, Módulo 24 Azure) pero faltaba una práctica con **token real y cliente propio**.
 - Lab opcional, nivel IA/N5, 4 h; no cuenta para ningún certificado. Conteos: 101 labs, 26 opcionales.
 - Verificado: respuestas de la API en el tenant (tabla `Proveedor`, sin dejar filas de prueba) y Learn (OAuth, usuario de aplicación, límites, paginación, upsert, secretos, `$batch`). **Sin ejecutar:** el flujo de token con un registro de aplicación propio y los scripts completos.
+
+### 15.17 Ronda de verificación 4 en el tenant (2026-11-25)
+
+Entorno "Curso Power Automate". Flujos creados por la API y ejecutados desde la UI: `T ronda4 expresiones y lookup` y `T ronda4 select tecleado`, más `T136 Hijo nivel de aprobacion` y `T136 Padre llama al hijo` en la solución `SIT Compras`.
+
+- **Lab 132, Update a row con el lookup por clave alternativa:** `item/sit_Proveedor@odata.bind` = `sit_proveedors(sit_iddeproveedor='PRV-002')` cambia el proveedor de una fila existente (200) y la forma con el GUID también.
+- **Lab 135:** `json(base64ToString(...))` sobre un texto codificado con `base64()` devuelve el objeto: los números siguen siendo números y la `Ñ` se conserva. No se probó con un adjunto real de Outlook. `formatNumber` redondea la mitad alejándose del cero y sobre el decimal escrito: 2.345 → 2.35, 2.675 → 2.68, 1.005 → 1.01, −2.345 → −2.35, 2.5 → 3, −2.5 → −3. `sub(603.96, 595)` da 8.960000000000036 y `float(formatNumber(..., '0.00'))` da 8.96. Con `'es-ES'` devuelve `1234,57`, y con `'N2'`, `1,234.57`.
+- **Lab 130, Select tecleada a mano en el diseñador nuevo:** el botón se llama **Cambiar al modo de texto** (tenant en español) y está a la derecha de la primera fila. El texto se guarda tal cual: la vista de código muestra el mismo `@...` / `@{...}`, y la salida conserva `102`, `null` y `3.5` sin comillas.
+- **Lab 136, flujos secundarios:** con un hijo y un padre solo con acciones integradas en la misma solución, el padre muestra el campo **Flujo secundario** y la entrada `Importe`, y recibe `nivel` = 3 con 15.000. No se probaron los conectores en el hijo ni **Usar esta conexión**.
+- La organización muestra el aviso "Se ha superado la capacidad de almacenamiento de Dataverse". No impidió crear ni ejecutar flujos en el entorno Trial.
+- **Sigue sin verificar:** el Lab 128 por interfaz, el 139 completo, el 130 con Excel real (requiere una conexión de Excel Online), los pasos de interfaz de los labs 135 (Outlook), 137 y 138, el Lab 131 (aprobaciones) y la idempotencia con Resubmit.

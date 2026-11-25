@@ -245,7 +245,7 @@ Tres cambios, un archivo, **ningún duplicado**. El flujo no necesita saber qué
 concat('sit_proveedors(sit_iddeproveedor=''', item()?['ProveedorID'], ''')')
 ```
 
-   (Dentro de una cadena de expresión, la comilla simple se escribe doble: `''`.) **Comprobado en un tenant real (2026-11-21):** el campo del lookup de **Add a new row** acepta esta forma y enlaza la solicitud con el proveedor correcto. Con **Update a row**, sin verificar: si no la acepta, busca la fila del proveedor con **List rows** y usa su GUID.
+   (Dentro de una cadena de expresión, la comilla simple se escribe doble: `''`.) **Comprobado en un tenant real (2026-11-21):** el campo del lookup de **Add a new row** acepta esta forma y enlaza la solicitud con el proveedor correcto. **Comprobado también con Update a row (2026-11-25):** la misma forma cambia el proveedor de una solicitud existente, y la forma con el GUID (`sit_proveedors(<GUID>)`) también funciona.
 4. **Save** y **Test**. La ejecución dura de **3 a 6 minutos** (146 iteraciones en serie) y la vas a ejecutar dos veces: es normal y es el tema del Lab 138. Dataverse limita las solicitudes por usuario (6.000 cada 5 minutos, con error 429 y la cabecera `Retry-After` al pasarse; [Learn: límites de la API](https://learn.microsoft.com/power-apps/developer/data-platform/api-limits)): 146 filas están muy por debajo, una carga de decenas de miles no.
 5. Cuenta las filas con `ID de origen` que empiezan por `SC-2026` y comprueba una solicitud de proveedor conocido (por ejemplo `SC-2026-0114`, Tecnología, nivel 2, proveedor **PRV-002**).
 

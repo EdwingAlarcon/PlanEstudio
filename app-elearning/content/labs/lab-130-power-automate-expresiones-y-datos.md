@@ -181,7 +181,7 @@ Borra estas **Compose** cuando funcionen.
 
 ### Tarea 3.2 — Primera `Select`: columnas limpias
 
-1. Añade **Data Operation** > **Select**, nombre `Limpiar filas`. **From** = `value` de `Leer Excel`. En **Map**, pulsa el icono de **modo de texto** (a la derecha de **Map**, para escribir pares clave-valor con expresiones) y escribe:
+1. Añade **Data Operation** > **Select**, nombre `Limpiar filas`. **From** = `value` de `Leer Excel`. En **Map**, pulsa el icono de **modo de texto** (a la derecha de la primera fila clave-valor; en un tenant en español su descripción emergente es **Cambiar al modo de texto**), borra lo que traiga y escribe:
 
 ```text
 {
@@ -197,7 +197,7 @@ Borra estas **Compose** cuando funcionen.
 }
 ```
 
-   > **`@{...}` frente a `@...`:** con llaves (`@{expresión}`) el resultado se convierte en **texto** y un `null` pasa a ser una cadena vacía. Por eso los valores que deben ser números o nulos (`Cantidad`, `Precio`, `Importe`) se escriben **sin llaves** (`@expresión`); los textos pueden ir con llaves. Si insertas la expresión con **fx**, el diseñador la guarda en la forma correcta. **Comprobado en un tenant real (2026-11-21, con la definición del flujo):** una **Select** con `"txt": "@{float(replace(item(),'USD ',''))}"` y `"num": "@float(replace(item(),'USD ',''))"` devuelve `{"txt":"2","num":2.0}`, y con `null` devuelve `""` para la forma con llaves y `null` para la otra. *Sin verificar:* cómo guarda el diseñador un valor tecleado a mano en el modo de texto; si en la salida ves `Cantidad` entre comillas (`"102"`), vuelve a insertarlo con **fx**.
+   > **`@{...}` frente a `@...`:** con llaves (`@{expresión}`) el resultado se convierte en **texto** y un `null` pasa a ser una cadena vacía. Por eso los valores que deben ser números o nulos (`Cantidad`, `Precio`, `Importe`) se escriben **sin llaves** (`@expresión`); los textos pueden ir con llaves. Si insertas la expresión con **fx**, el diseñador la guarda en la forma correcta. **Comprobado en un tenant real (2026-11-21, con la definición del flujo):** una **Select** con `"txt": "@{float(replace(item(),'USD ',''))}"` y `"num": "@float(replace(item(),'USD ',''))"` devuelve `{"txt":"2","num":2.0}`, y con `null` devuelve `""` para la forma con llaves y `null` para la otra. **Comprobado también tecleando en el diseñador nuevo (2026-11-25):** el texto escrito a mano en el modo de texto se guarda tal cual (la **Code view** muestra el mismo `@...` y `@{...}`) y la salida da `"Cantidad": 102`, `"Cantidad": null` y `"Precio": 3.5`, sin comillas. Si aun así ves `Cantidad` entre comillas (`"102"`), revisa que no hayas escrito llaves; o vuelve a insertarlo con **fx**.
 
    Si el modo de texto no está disponible en tu diseñador, crea cada par con **Enter key** / **Enter value** y pega la expresión en cada valor con **fx**.
 2. Añade otra **Select**, `Calcular importes`, con **From** = **Outputs** de `Limpiar filas`. **Map** en modo de texto:

@@ -255,7 +255,7 @@ Learn dice que el flujo se enciende solo cuando la importación recibe una conex
 
 **Objetivo:** reutilizar un bloque de lógica entre flujos, dentro de una solución.
 
-**Sin ejecutar en el tenant:** este ejercicio sigue la documentación de Learn; las condiciones salen de [Learn: flujos secundarios](https://learn.microsoft.com/power-automate/create-child-flows).
+Las condiciones salen de [Learn: flujos secundarios](https://learn.microsoft.com/power-automate/create-child-flows). **Comprobado en un tenant real (2026-11-25), con un hijo y un padre en la misma solución que solo usan acciones integradas:** en el padre, la acción muestra el campo **Flujo secundario** (en un tenant en español) y la entrada del hijo (`Importe`). Con 15.000, el padre recibe `nivel` = 3 en la salida de la acción. No se probó el caso con conectores ni la opción **Use this connection**.
 
 1. En la solución, crea un flujo **instantáneo** `SC - Hijo: nivel de aprobación` con el desencadenador **Manually trigger a flow** (**Desencadenar un flujo manualmente**) y una entrada numérica `Importe`. Devuelve el nivel (1, 2 o 3) con **Respond to a Power App or flow** (**Responder una Power App o flujo**).
 2. En otro flujo de la **misma** solución, añade **Run a Child Flow** (**Ejecutar un flujo secundario**, conector **Flows**, pestaña **Built-in**) y elígelo.
