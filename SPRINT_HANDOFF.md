@@ -16,9 +16,10 @@
 
 **Pendiente, por quién tiene que actuar:**
 1. *Claude, con el tenant de prueba (necesita que el usuario deje operar):* verificar en la interfaz lo "sin verificar":
-   pasos de los labs 135 a 138 (136 y 137 solo por API), Lab 139 completo, Lab 130 con Excel real (OneDrive/SharePoint),
-   Lab 128 por interfaz. **Hecho el 2026-11-25 (PROPUESTA §15.17):** Select en modo texto tecleado, flujos secundarios,
-   `json(base64ToString(...))` (sin adjunto real), `formatNumber` como redondeo y lookup por clave con Update a row.
+   pasos de interfaz de los labs 137 y 138, Lab 139 completo, Lab 128 por interfaz, Lab 131 (Approvals).
+   **Hecho el 2026-11-25 (PROPUESTA §15.17):** Select en modo texto tecleado, flujos secundarios, `formatNumber`,
+   lookup por clave con Update a row, Lab 130 con Excel real (todas las cifras) y Lab 135 con un correo real.
+   Conexiones Excel y Outlook creadas en el Trial con permiso del usuario.
 2. *El usuario:* (a) crear un registro de aplicación propio para ejecutar el script del LAB-140 con token real (Claude no crea
    identidades sin permiso); (b) verificar etiquetas en un tenant en español (`VERIFICACION_INTERFAZ_ES.md`, luego `verified: true`
    en `ui-terms.ts`); (c) decidir si se hacen pruebas con personas reales; (d) elegir si se retoma `/graphify` semántico.

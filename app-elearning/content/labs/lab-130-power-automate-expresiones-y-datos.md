@@ -100,7 +100,7 @@ Los datos tienen los defectos de cualquier hoja de cálculo compartida: fechas e
 
 - `Cuántas filas` = **150**.
 - Cada fila es un objeto con una propiedad por columna (`SolicitudID`, `FechaSolicitud`…), además de propiedades propias del conector (como `@odata.etag` y `ItemInternalId`) que no usarás.
-- Busca ahora en la salida de `Leer Excel` la solicitud **SC-2026-0026** (la cantidad está vacía) y la **SC-2026-0147** (precio como texto). **Anota cómo llega cada celda**: un número como `240` (o como el texto `"240"`: el conector puede entregarlo todo como texto), un precio sucio como `"USD 2.00"` y una celda vacía como `""` o `null`. Por eso el lab convierte siempre con `int` y `float` antes de calcular.
+- Busca ahora en la salida de `Leer Excel` la solicitud **SC-2026-0026** (la cantidad está vacía) y la **SC-2026-0147** (precio como texto). **Anota cómo llega cada celda**: un número como `240` (o como el texto `"240"`: el conector puede entregarlo todo como texto), un precio sucio como `"USD 2.00"` y una celda vacía como `""` o `null`. Por eso el lab convierte siempre con `int` y `float` antes de calcular. **Comprobado en un tenant real (2026-11-25), con este archivo en OneDrive:** el conector entrega **todas** las celdas como texto (`"Cantidad": "102"`, `"PrecioUnitario": "6800"`, `"FechaSolicitud": "25/03/2026"`), la cantidad vacía como `""` y añade `@odata.etag` e `ItemInternalId`. En un tenant en español, el conector se llama **Excel Online (Empresas)**, la acción **Enumerar las filas de una tabla** y los campos **Ubicación** (`OneDrive for Business`), **Biblioteca de documentos** (`OneDrive`), **Archivo** y **Tabla**.
 
 > **Paginación:** la acción devuelve por defecto un número limitado de filas. Con 150 sobra; con una tabla de miles habría que activar **Pagination** en los **Settings** de la acción y fijar su **Threshold** (Lab 138).
 
@@ -147,7 +147,7 @@ concat('fechas=', length(body('Fechas_con_barra')), ' precios=', length(body('Pr
 
 4. Añade una **Select** provisional, **From** = `value` de `Leer Excel`, con una sola columna `Precio` = `float(item()?['PrecioUnitario'])`. Ejecuta.
 
-**Resultado esperado:** la acción **falla** en la primera fila que trae "USD 25.00" (SC-2026-0019, la primera de la tabla con texto en el precio) y **ninguna fila** sale convertida: un `Select` no devuelve resultados parciales. Lee el mensaje de error y anótalo. Borra la **Select** provisional.
+**Resultado esperado:** la acción **falla** en la primera fila que trae "USD 25.00" (SC-2026-0019, la primera de la tabla con texto en el precio) y **ninguna fila** sale convertida: un `Select` no devuelve resultados parciales. Lee el mensaje de error y anótalo. (En un tenant real, el 2026-11-25, fue `InvalidTemplate` con "The template language function 'float' was invoked with a parameter that is not valid. The value cannot be converted to the target type."; el mensaje no dice qué fila falló.) Borra la **Select** provisional.
 
 > **La lección:** una sola celda rara tumba todo el flujo. Hay dos defensas: limpiar **antes** de convertir (Ejercicio 3) y decidir qué hacer con lo que no se puede limpiar (Ejercicio 4).
 
