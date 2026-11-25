@@ -44,3 +44,4 @@ $RECYCLE.BIN/
 
 # graphify: cache del AST, derivada y regenerable con `python -m graphify update .`
 graphify-out/cache/
+.baton/local/
