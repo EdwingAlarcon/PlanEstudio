@@ -19,6 +19,7 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "e2e": "playwright test",
+    "check:csp": "node scripts/check-csp.mjs",
     "generate:rpa-assets": "node scripts/generate-rpa-assets.mjs",
     "generate:powerbi-assets": "node scripts/generate-powerbi-assets.mjs",
     "generate:powerautomate-assets": "node scripts/generate-powerautomate-assets.mjs",

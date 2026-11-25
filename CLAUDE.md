@@ -288,7 +288,8 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
   Los deploys estáticos de Vercel requieren `app-elearning/public/vercel.json` (`cleanUrls: true`).
   El deploy por Git lee solo `app-elearning/vercel.json` (ahí van las cabeceras de seguridad; el de `public/` se
   publica como archivo estático y sus `headers` no se aplican). La CSP es obligatoria desde el 2026-11-25: un recurso
-  externo, un iframe o `eval` nuevos quedan bloqueados en producción (no en local) hasta ajustarla.
+  externo, un iframe o `eval` nuevos quedan bloqueados en producción (no en local) hasta ajustarla;
+  `npm run check:csp` (tras `npm run build`; también en el job de build del CI) la comprueba en todas las páginas.
 - Preferencia del usuario: sincronizar (fetch/pull) antes de empezar; tras un cambio, commit y push a la rama indicada,
   comprobar CI con una sola consulta (no `gh run watch`). Validar con `npm run build:pages` o `npm run build` y luego
   `npm run e2e` **en serie**, no en paralelo (ambos usan `.next`).
