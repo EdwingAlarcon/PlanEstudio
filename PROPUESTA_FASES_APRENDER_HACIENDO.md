@@ -1137,6 +1137,44 @@ claves alternativas. La interfaz del usuario está en **español** (Power Apps y
 - Lab opcional, nivel IA/N5, 4 h; no cuenta para ningún certificado. Conteos: 101 labs, 26 opcionales.
 - Verificado: respuestas de la API en el tenant (tabla `Proveedor`, sin dejar filas de prueba) y Learn (OAuth, usuario de aplicación, límites, paginación, upsert, secretos, `$batch`). **Sin ejecutar:** el flujo de token con un registro de aplicación propio y los scripts completos.
 
+### 15.18 Bloque "MCP y agentes": investigación y verificación (2026-11-25, labs sin escribir)
+
+Motivo: el usuario preguntó si la app cubre MCP y PCF. PCF (M13, M27) y Code Apps (M28) tienen módulos con práctica, pero no labs propios. MCP solo aparecía en 2 menciones. Propuesta aprobada: 3 labs opcionales (141 a 143). Ninguno está escrito todavía.
+
+- **Lab 141 — Cliente de IA + servidor MCP de Dataverse (verificado en el tenant).**
+  - Learn: es GA (15 dic 2025); el endpoint es `https://<org>/api/mcp` y `/api/mcp_preview` da las herramientas preview.
+  - Copilot Studio viene permitido por defecto. Los demás clientes se habilitan en el admin center (**Settings > Product > Features > Dataverse Model Context Protocol > Advanced Settings**) o con `dataverse mcp allow <appId>`.
+  - Clientes no Microsoft: CLI npm `@microsoft/dataverse` (preview, 1.0.95, Node 18+). Los pasos son el consentimiento de administrador del tenant para la app `0c412cc3-0dd6-449b-987f-05b053db9457`, después `dataverse auth create --environment <url>` y luego `dataverse mcp <url>` como servidor stdio (Claude Code: `claude mcp add dataverse -t stdio -- npx -y @microsoft/dataverse mcp <url>`).
+  - Facturación: las herramientas usadas por agentes fuera de Copilot Studio se cobran desde el 15 dic 2025 (FAQ de Learn).
+  - **Medido en el tenant** (entorno "Curso Power Automate", con permiso del usuario):
+    - La pantalla de consentimiento muestra **Dataverse CLI** con editor **"sin comprobar"**. Pide "Access Dataverse MCP tools as organization users" y "Sign in and read user profile". El usuario aceptó tras verla.
+    - El `auth create` interactivo no dejó perfil; el que funcionó fue `--deviceCode`. En la página del código hay que responder **Continuar**; "Cancelar" da `AADSTS700171`.
+    - Antes de permitir el cliente, `--validate` da 403 y los pasos a revisar. Tras `mcp allow` ("Client exists but is disabled. Enabling…"), "GA endpoint is valid"; el de preview sigue en 403.
+    - Una llamada desde el navegador a `/api/mcp` da 403 "The application '…' is not authorized to access MCP".
+    - Herramientas reales: 16. Coinciden con Learn salvo `create_skill_resource`, que no está en Learn, y `search_data`, que no aparece (requiere Dataverse search).
+    - Consultas con MCP Inspector por stdio: `search` (parámetro `query`) encuentra `tables/sit_proveedor`; `read_query` en Dataverse SQL da 17 proveedores y 153 solicitudes (146 del lab más filas de prueba); un `JOIN` con `GROUP BY` da PRV-013 = 22.
+    - `create_record` crea una fila. `delete_record` lleva `hasUserApproved`: con `false` responde "User approval is required to delete the table" (dice *table* aunque es una fila) y con `true` borra. Es decir, la "aprobación" es una bandera que pone el cliente, no un control del servidor. La fila de prueba se borró.
+- **Lab 142 — Agente de Copilot Studio con herramientas MCP (bloqueado por créditos).**
+  - Learn: hay dos experiencias. En la clásica (standard harness), MCP es GA y se añade con el asistente **Tools > Add a tool > New tool > Model Context Protocol** (Server name/description/URL, auth None/API key/OAuth 2.0). En la nueva (Microsoft Copilot harness) está en preview.
+  - Requisitos de Learn: solo Streamable HTTP (SSE retirado tras agosto de 2025); se admiten tools y resources, no prompts; requiere orquestación generativa; los cambios de tools pueden tardar 12-24 h.
+  - **Medido en el tenant:**
+    - La opción **Agente estándar** dice "This build option isn't included in your current license".
+    - La experiencia nueva sí deja crear el agente. El diálogo **Agregar una herramienta** tiene las pestañas Destacados / **MCP** / Conectores / Flujos de trabajo. **Servidor MCP de Microsoft Dataverse** se añade sin pedir conexión.
+    - Al probarlo responde "You need credits to continue… This environment is out of credits" (`EnforcementUsageCredits`).
+    - El agente borrador "Asistente de compras SIT" quedó en el entorno.
+    - Falta una prueba con créditos o licencia.
+- **Lab 143 — Servidor MCP propio (verificado en local).**
+  - Código en `docs/Borradores/MCP/sit-compras-mcp/` (SDK TypeScript v2: `@modelcontextprotocol/server` 2.4.0, `@modelcontextprotocol/node` 2.1.2, zod 4; Streamable HTTP sin estado en `127.0.0.1:3000/mcp`). Tiene dos tools sobre los datos de SIT: `nivel_de_aprobacion` y `buscar_proveedor`.
+  - Probado con `npx @modelcontextprotocol/inspector --cli … --transport http`:
+    - 1000 → nivel 1; 1000,01 → nivel 2; 15000 Tecnología → nivel 3 + TI;
+    - importe 0 → `isError`;
+    - PRV-002 → Red Global Tech;
+    - un cliente `initialize` de la revisión 2025-06-18 se atiende.
+  - Seguridad: con `hostHeaderValidation`/`originValidation`, un `Host` ajeno da 403, el host del túnel en `MCP_PUBLIC_HOST` da 200, un `Origin` ajeno da 403 y la falta de `Accept` correcto da 406.
+  - Sin probar: exponerlo con `devtunnel` (requiere iniciar sesión el usuario) y conectarlo a Copilot Studio (bloqueado por créditos).
+  - Learn: la especificación vigente es 2026-07-28 y no hay tutorial de Learn de principio a fin para un servidor propio con Copilot Studio.
+- **Siguiente:** escribir los labs 141 a 143 (nivel IA/N5, opcionales), con las partes de Copilot Studio marcadas "sin verificar en el tenant: requiere créditos de Copilot Studio", más prueba simulada, conteos y tests.
+
 ### 15.17 Ronda de verificación 4 en el tenant (2026-11-25)
 
 Entorno "Curso Power Automate". Flujos creados por la API y ejecutados desde la UI: `T ronda4 expresiones y lookup` y `T ronda4 select tecleado`, más `T136 Hijo nivel de aprobacion` y `T136 Padre llama al hijo` en la solución `SIT Compras`.

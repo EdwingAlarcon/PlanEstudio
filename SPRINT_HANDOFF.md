@@ -23,7 +23,10 @@
 2. *El usuario:* (a) crear un registro de aplicación propio para ejecutar el script del LAB-140 con token real (Claude no crea
    identidades sin permiso); (b) verificar etiquetas en un tenant en español (`VERIFICACION_INTERFAZ_ES.md`, luego `verified: true`
    en `ui-terms.ts`); (c) decidir si se hacen pruebas con personas reales; (d) elegir si se retoma `/graphify` semántico.
-3. *Siguiente bloque grande:* **Ruta Pro Copilot Studio** (orden de PROPUESTA §15.3: Copilot Studio, Power Apps, CI-Journeys,
+3. *En curso (2026-11-25):* **bloque MCP y agentes, labs 141 a 143** (aprobado por el usuario). Investigación y verificación hechas
+   (PROPUESTA §15.18). El servidor propio está en `docs/Borradores/MCP/sit-compras-mcp/`. **Falta escribir los tres labs.** Copilot Studio no
+   tiene créditos en el tenant: sus pasos quedan "sin verificar" salvo que el usuario consiga créditos.
+   *Después:* **Ruta Pro Copilot Studio** (orden de PROPUESTA §15.3: Copilot Studio, Power Apps, CI-Journeys,
    Sales/Customer Service). Patrón de cada ruta: datos propios deterministas (generador en `scripts/`), 10-12 labs en 5 fases (P1 a P5),
    prueba simulada por fase y de la ruta entera, ruta en `professional-routes.ts`, test de cifras, y labs oficiales "in a Day" de
    MicrosoftLearning como referencia (adaptar con atribución, no copiar; ver pendiente 7 abajo).

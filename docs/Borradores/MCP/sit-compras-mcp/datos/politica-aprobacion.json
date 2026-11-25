@@ -1,0 +1,42 @@
+{
+  "version": "2026-01",
+  "moneda": "USD",
+  "descripcion": "Política de aprobación de compras de SIT (ficticia, generada para el curso PlanEstudio).",
+  "niveles": [
+    {
+      "nivel": 1,
+      "importeHasta": 1000,
+      "aprobadores": [
+        "Jefe de área"
+      ]
+    },
+    {
+      "nivel": 2,
+      "importeHasta": 10000,
+      "aprobadores": [
+        "Jefe de área",
+        "Finanzas"
+      ]
+    },
+    {
+      "nivel": 3,
+      "importeHasta": null,
+      "aprobadores": [
+        "Jefe de área",
+        "Finanzas",
+        "Gerencia general"
+      ]
+    }
+  ],
+  "reglaDeLimites": "El importe se compara con 'importeHasta' incluido: 1000 es nivel 1; 1000,01 es nivel 2.",
+  "reglasPorCategoria": [
+    {
+      "categoria": "Tecnología",
+      "desdeNivel": 2,
+      "revisorAdicional": "TI",
+      "modo": "en paralelo con Finanzas"
+    }
+  ],
+  "plazoRespuestaDiasHabiles": 2,
+  "escalarA": "Gerencia general"
+}
