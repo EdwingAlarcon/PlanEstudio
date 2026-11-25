@@ -8,7 +8,7 @@ practiceMinutes: 210
 slug: "dataverse-web-api-y-autenticacion"
 lastVerified: "2026-11"
 ---
-*Lectura: 20-22 min · Práctica: unas 3 horas y media la primera vez, mejor en dos sesiones (la primera, Microlecciones 1 y 2 con tu ambiente; la segunda, la Microlección 3, la decisión y el reto de transferencia).*
+*Lectura: 20-22 min · Práctica: unas 3 horas y media la primera vez, mejor en dos sesiones (la primera, Microlecciones 1 y 2 con tu ambiente; la segunda, la Microlección 3, la decisión y el reto de transferencia). La Microlección 4, sobre MCP, es opcional: unos 50 minutos más, sin tenant.*
 
 > **📌 Primera vez viendo términos como API, HTTP o token?** Este módulo asume que sabes qué es una petición a un servidor. Mini-glosario rápido: **API** = la forma en que un programa le pide datos a otro programa (en vez de que un humano use un formulario, un script hace la misma pregunta). **HTTP** = el protocolo/idioma con el que viajan esas peticiones por internet (GET para leer, POST para crear). **Token** = una credencial temporal que demuestra "tengo permiso" sin mandar tu contraseña en cada petición. Si estos tres términos son nuevos, no hace falta dominarlos hoy — solo entiende que este módulo describe cómo un script (no una persona) le habla a Dataverse. Si además nunca has programado nada, revisa primero la sección "Si es tu primera vez programando" en el [Anexo de Lenguajes de Programación](/recursos/lenguajes-programacion) y el [Módulo 56](/nivel/ia/modulo/fundamentos-javascript-para-power-platform) (fundamentos de JavaScript).
 
@@ -365,6 +365,97 @@ Cambia el requisito y comprueba si entendiste el patrón: la integración de fac
 | Privilegio nuevo del rol y por qué no hace falta ninguno más | ___ |
 | Si hiciste el paso 3: propiedades que devolvió la fila | ___ |
 
+---
+
+## 🧩 Microlección 4 (opcional) — MCP: cuando quien llama a Dataverse es un agente de IA
+
+*Lectura: 15-20 min · Práctica: 25-30 min, sin tenant. Es opcional para este módulo, pero **obligatoria antes de los Labs 141, 142 y 143**: si vas a hacerlos, empieza aquí.*
+
+**¿Qué vas a aprender?** Qué es el Model Context Protocol (MCP), qué piezas intervienen cuando un asistente de IA lee o escribe en Dataverse y qué controles siguen siendo tuyos: la identidad, los permisos, la aprobación y el coste.
+
+**¿Por qué existe esto?** En las microlecciones anteriores el que llamaba a la Web API era un script que tú escribiste: sabías qué URL pedía. Con MCP, el que decide qué pedir es un modelo de IA, a partir de lo que tú le escribes en un chat. La Web API, el token y el rol de seguridad siguen ahí, pero se añade una pieza que elige las llamadas por ti.
+
+### 4.1 Las piezas: host, cliente, servidor y herramientas
+
+MCP es un protocolo abierto que define cómo una aplicación de IA se conecta a fuentes de datos y herramientas externas ([especificación de MCP](https://modelcontextprotocol.io/specification/latest)). Su vocabulario:
+
+| Pieza | Qué es | En el caso de SIT |
+|---|---|---|
+| **Host** | La aplicación de IA que usa la persona (un chat, un editor de código, un agente) | Claude Code, VS Code con GitHub Copilot o un agente de Copilot Studio |
+| **Cliente MCP** | La parte del host que habla con **un** servidor MCP. Un host abre un cliente por cada servidor | La conexión del host con el servidor de Dataverse |
+| **Servidor MCP** | Un programa que ofrece capacidades al cliente | El servidor MCP de Dataverse (de Microsoft) o uno propio (Lab 143) |
+| **Tools (herramientas)** | Funciones que el modelo puede pedir que se ejecuten, cada una con nombre, descripción y un esquema de entrada | `read_query`, `create_record`, `delete_record`… |
+| **Resources (recursos)** | Datos que el servidor expone para leer | Un esquema de tabla, un documento |
+| **Prompts** | Plantillas de mensajes que ofrece el servidor | (Copilot Studio no los admite, según Learn) |
+
+Hay dos formas de transporte. **stdio**: el host arranca el servidor como un proceso en tu equipo y hablan por la entrada y salida estándar; nadie más lo ve. Por ejemplo, cuando Claude Code ejecuta `npx @microsoft/dataverse mcp …`, ese proceso es un **servidor** MCP local que, a su vez, llama a Dataverse. **Streamable HTTP**: el servidor escucha en una URL y el cliente le envía peticiones HTTP. Copilot Studio solo admite Streamable HTTP ([Learn: conectar un agente a un servidor MCP](https://learn.microsoft.com/microsoft-copilot-studio/mcp-add-existing-server-to-agent)).
+
+**Cómo se elige una herramienta.** El cliente pide al servidor la lista de herramientas (`tools/list`) y se la pasa al modelo con sus descripciones. Cuando el modelo decide usar una, el cliente envía `tools/call` con los argumentos. Por eso **la descripción de una herramienta es parte de su seguridad**: es lo que el modelo lee para decidir.
+
+```mermaid
+sequenceDiagram
+    participant P as Persona
+    participant H as Host (chat o agente)
+    participant S as Servidor MCP de Dataverse
+    participant D as Dataverse
+    P->>H: "¿Cuántas solicitudes tiene PRV-013?"
+    H->>S: tools/list
+    S-->>H: read_query, create_record, delete_record...
+    H->>H: El modelo elige read_query y escribe la consulta
+    H->>S: tools/call read_query (con el token de la persona)
+    S->>D: Consulta con la identidad y el rol de esa persona
+    D-->>S: Filas
+    S-->>H: Resultado
+    H-->>P: "PRV-013 tiene 22 solicitudes"
+```
+
+### 4.2 El servidor MCP de Dataverse: quién llama y con qué permisos
+
+Microsoft publica un servidor MCP de Dataverse, disponible de forma general desde el 15 de diciembre de 2025. Su dirección es la de tu ambiente con `/api/mcp` al final; `/api/mcp_preview` añade las herramientas en versión preliminar ([Learn: Dataverse MCP](https://learn.microsoft.com/power-apps/maker/data-platform/data-platform-mcp)). Lo que importa para la seguridad:
+
+- **Usa la identidad de la persona que inició sesión.** No es un usuario de aplicación como el de la Microlección 2: las consultas se hacen con tu cuenta y tu rol de seguridad. Si tu rol no puede leer una tabla, el agente tampoco.
+- **El ambiente decide qué clientes entran.** Copilot Studio está permitido por defecto. Cualquier otro cliente (Claude Code, VS Code, la CLI de Dataverse) hay que permitirlo en el centro de administración (**Settings** > **Product** > **Features** > **Dataverse Model Context Protocol** > **Advanced Settings**) o con la CLI. Sin ese permiso, la respuesta es un **403**.
+- **Para clientes que no son de Microsoft hay un paso más:** un administrador del inquilino da su consentimiento a la aplicación **Dataverse CLI**, y después cada persona crea su perfil de conexión. En un tenant real, la pantalla de consentimiento mostró la aplicación con editor **"sin comprobar"** y dos permisos: acceder a las herramientas MCP de Dataverse como usuario de la organización y leer tu perfil. Consentir es una decisión del administrador del inquilino, no del alumno ([Learn: otros clientes](https://learn.microsoft.com/power-apps/maker/data-platform/data-platform-mcp-other-clients)).
+- **Las herramientas.** En un ambiente de prueba, el servidor ofreció 16: `search` y `describe` (descubrir tablas), `read_query` (consultas en Dataverse SQL), `create_record`, `update_record` y `delete_record` (filas), `create_table`, `update_table` y `delete_table` (esquema), `invoke_api` (llamar a una API de Dataverse por nombre), `init_file_upload`, `commit_file_upload` y `file_download` (archivos), y `upsert_skill`, `delete_skill` y `create_skill_resource`. Learn añade `search_data`, que solo aparece si el ambiente tiene la búsqueda de Dataverse activada.
+
+Fíjate en la lista: un agente con este servidor **puede borrar tablas**. Que lo haga o no depende de tu rol de seguridad y de lo que apruebes.
+
+### 4.3 "El usuario aprobó": una bandera que pone el cliente
+
+Las herramientas que borran (`delete_record`, `delete_table`) llevan un parámetro `hasUserApproved`. Medido en un ambiente de prueba con un cliente MCP genérico:
+
+| Llamada | Respuesta |
+|---|---|
+| `delete_record` con `hasUserApproved: false` | Error: "User approval is required to delete the table" (dice *table* aunque se pidió una fila) |
+| `delete_record` con `hasUserApproved: true` | La fila se borra |
+
+El servidor **no comprueba** que una persona haya aprobado nada: confía en el valor que envía el cliente. Un cliente que pregunta antes de ejecutar es una buena práctica, pero **el control real es tu rol de seguridad**. Si no quieres que un agente pueda borrar, la persona que lo usa no debe tener el privilegio **Delete**.
+
+### 4.4 Coste y límites
+
+- Learn indica que, desde el 15 de diciembre de 2025, las herramientas del servidor MCP de Dataverse que usan agentes **fuera de Copilot Studio** se facturan ([Learn: preguntas frecuentes de Dataverse MCP](https://learn.microsoft.com/power-apps/maker/data-platform/data-platform-mcp-faq)). Antes de conectar un cliente en un ambiente de la empresa, pregunta quién paga.
+- Los agentes de **Copilot Studio** consumen **créditos de Copilot Studio**. Un ambiente de prueba sin créditos deja crear el agente y añadirle la herramienta, pero al probarlo responde que el ambiente se quedó sin créditos.
+- Los límites de la Web API (Microlección 3) también se aplican: detrás de cada herramienta hay llamadas a Dataverse.
+
+### Práctica (25 min, sin tenant)
+
+1. **Clasifica.** En la evidencia, escribe qué pieza (host, cliente, servidor, herramienta) es cada una de estas: Claude Code; el proceso `npx @microsoft/dataverse mcp …` que arranca Claude Code; `read_query`; un agente de Copilot Studio.
+2. **Decide el rol.** Un analista de Compras quiere preguntarle a un agente "¿qué proveedores tienen más solicitudes este mes?". Escribe los privilegios mínimos que debería tener **su** rol sobre las tablas `Proveedor` y `Solicitud de compra`, y qué pasaría si tuviera el rol de administrador del sistema y el agente interpretara mal "limpia los proveedores duplicados".
+3. **Lee una descripción como lo haría el modelo.** Abre el [código del servidor del Lab 143](/labs/lab-143-servidor-mcp-propio) y lee la descripción de `nivel_de_aprobacion`. Escribe una pregunta de un usuario que haría que el modelo la elija, y otra que no debería hacerlo.
+4. **Explica la bandera.** En dos frases, explica a un compañero por qué `hasUserApproved: true` no demuestra que una persona aprobó el borrado.
+
+**Evidencia a reportar:**
+
+| Campo | Tu valor |
+|---|---|
+| Pieza que es cada uno de los cuatro elementos del paso 1 | ___ |
+| Privilegios mínimos del analista (tabla y privilegio) | ___ |
+| Qué evita ese rol si el agente interpreta mal una orden | ___ |
+| Una pregunta que elige `nivel_de_aprobacion` y otra que no | ___ |
+| Por qué `hasUserApproved` no es un control de seguridad | ___ |
+
+> **Para practicar con un tenant:** el [Lab 141](/labs/lab-141-cliente-ia-mcp-dataverse) conecta un cliente de IA al servidor MCP de Dataverse; el [Lab 142](/labs/lab-142-copilot-studio-con-mcp), un agente de Copilot Studio (necesita créditos), y el [Lab 143](/labs/lab-143-servidor-mcp-propio) construye un servidor MCP propio en tu equipo.
+
 ### 💼 Casos Reales de Negocio
 Un desarrollador de SIT integró un sistema de facturación externo con Dataverse usando un Application User al que, por rapidez, le asignaron el Security Role de System Administrator "para no tener que depurar permisos". Meses después, un bug en el sistema externo generó una actualización masiva accidental sobre tablas que no debía tocar (contactos y oportunidades, no solo facturas), porque el service principal tenía acceso a todo el entorno. La corrección fue crear un Security Role específico con acceso de lectura/escritura únicamente a las 2 tablas que la integración realmente necesitaba, aplicando el principio de permisos mínimos que debió aplicarse desde el diseño inicial.
 
@@ -406,10 +497,11 @@ Un desarrollador de SIT integró un sistema de facturación externo con Datavers
 - [ ] Ejecuté con `node` el script generado por IA, encontré sus errores con evidencia (salida, respuesta del ambiente o Learn) y escribí una versión corregida que cumple los 6 criterios de aceptación
 - [ ] Decidí y defendí con la rúbrica la identidad y los permisos de la integración de facturación
 - [ ] En el reto de transferencia escribí la petición PATCH con `If-Match: *` y el privilegio mínimo nuevo, citando Learn
+- [ ] (Opcional, Microlección 4) Distingo host, cliente, servidor y herramienta en MCP y explico por qué el rol de seguridad, y no `hasUserApproved`, es lo que impide que un agente borre datos
 - [ ] Relaciono este módulo con el Lab 54 (conectar app externa a Dataverse) y sé que el Lab 91 (Custom API) es su continuación en la ruta de desarrollador, que exige antes el Módulo 23 (plugins en C#, Nivel Avanzado)
 
 ### 📸 Evidencia para guardar
 - Las tablas de evidencia de las tres microlecciones, de la decisión y del reto de transferencia.
 - Tu `listar-contactos.mjs` corregido (sin secretos) y la salida de `node listar-contactos.mjs --prueba`.
 
-> **Siguiente paso:** el [Lab 54](/labs/lab-54-conectar-app-externa-dataverse) lleva este módulo a un diseño documentado completo (app registration, Application User, rol mínimo y diagnóstico 401/403). Si quieres ver la misma Web API desde JavaScript de formulario, el [Módulo 56](/nivel/ia/modulo/fundamentos-javascript-para-power-platform) compara `value` (Web API) con `entities` (`Xrm.WebApi`).
+> **Siguiente paso:** el [Lab 54](/labs/lab-54-conectar-app-externa-dataverse) lleva este módulo a un diseño documentado completo (app registration, Application User, rol mínimo y diagnóstico 401/403). Si quieres ver la misma Web API desde JavaScript de formulario, el [Módulo 56](/nivel/ia/modulo/fundamentos-javascript-para-power-platform) compara `value` (Web API) con `entities` (`Xrm.WebApi`). Si hiciste la Microlección 4, los Labs 141 a 143 llevan MCP a la práctica.

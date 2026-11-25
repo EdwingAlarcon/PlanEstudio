@@ -155,6 +155,8 @@ List rows; el control de concurrencia de un desencadenador no se puede deshacer 
 solicitud HTTP individual; dos correos de fallo (por ejecución y resumen semanal) solo a propietarios. Sin verificar: clave
 alternativa en Update a row, Parse JSON y el desencadenador HTTP. **Verificado en un tenant real el 2026-11-21 (PROPUESTA §15.13):** Upsert a row con la clave en el Row ID da 404 (el lab usa buscar y decidir), el lookup por clave alternativa funciona en Add a new row, y HTTP y el desencadenador HTTP son premium.
 
+**Bloque MCP y agentes (2026-11-25, opcional, nivel IA/N5):** Microlección 4 opcional y plegada del Módulo 53 (qué es MCP, el servidor MCP de Dataverse, `hasUserApproved` como bandera del cliente, coste) y LAB-141 (cliente MCP sobre el servidor de Dataverse, auditado con MCP Inspector; medido en el tenant), LAB-142 (Copilot Studio con MCP; sin verificar desde la primera pregunta: el Trial no tiene créditos) y LAB-143 (servidor MCP propio con el SDK de TypeScript v2 y fallo y corrección de una versión de IA; medido en local). Detalle en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §15.18.
+
 ## Mantenimiento vigente — 2026-11-11
 
 Revisión con seis sub-agentes, sin ampliar contenido ni cambiar conteos: (1) **pruebas simuladas** (modelos, no personas) y
@@ -261,7 +263,7 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 149 archivos **cerrados**; sin trabajo a medias.
 
 **Invariantes que no debes romper:**
-- Conteos vigentes: **76 módulos, 101 labs (veintiséis opcionales: LAB-06, los doce de la Ruta Pro Power BI 116-127, los doce de la Ruta Pro Power Automate 128-139 y el LAB-140), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
+- Conteos vigentes: **76 módulos, 104 labs (veintinueve opcionales: LAB-06, los doce de la Ruta Pro Power BI 116-127, los doce de la Ruta Pro Power Automate 128-139, el LAB-140 y los tres de MCP 141-143), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
   33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 239 prácticas interactivas
   y 41 páginas de recursos** (41 desde la guía de interfaz español/inglés del 2026-11-11; prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
   Doing de Módulos 11, 10 y 13, a 44 con los Módulos 1 a 8 de la Fase 2 a 62 con los Módulos 9, 12, 14-17 de la Fase 3, a 149 con las Fases 4, 5 y 6 recortada y a 239 con la Fase 7 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de

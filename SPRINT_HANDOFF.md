@@ -11,7 +11,7 @@
 - **LAB-140** (opcional, nivel IA/N5): Dataverse Web API con un cliente propio en PowerShell (`6319b93`). Responde a la pregunta
   del usuario "¿la app enseña a crear e implementar funcionalidades con API de punta a punta?": estaba repartido (Lab 134,
   Módulo 14, Módulo 53 y Lab 54 solo en papel, Módulo 24, Módulo 19); faltaba una práctica con token real y cliente propio.
-- Conteos vigentes: **76 módulos, 101 labs (26 opcionales), 891 preguntas, 239 prácticas interactivas, 41 recursos.**
+- Conteos vigentes: **76 módulos, 104 labs (29 opcionales), 891 preguntas, 239 prácticas interactivas, 41 recursos.**
 - Detalle por fase en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §15.9 a §15.16 y en `CLAUDE.md` (párrafos P2 a P5 y LAB-140).
 
 **Pendiente, por quién tiene que actuar:**
@@ -24,7 +24,7 @@
    identidades sin permiso); (b) verificar etiquetas en un tenant en español (`VERIFICACION_INTERFAZ_ES.md`, luego `verified: true`
    en `ui-terms.ts`); (c) decidir si se hacen pruebas con personas reales; (d) elegir si se retoma `/graphify` semántico.
 3. *En curso (2026-11-25):* **bloque MCP y agentes, labs 141 a 143** (aprobado por el usuario). Investigación y verificación hechas
-   (PROPUESTA §15.18). El servidor propio está en `docs/Borradores/MCP/sit-compras-mcp/`. **Falta escribir los tres labs.** Copilot Studio no
+   (PROPUESTA §15.18). **Escritos el 2026-11-25:** Microlección 4 del M53 y labs 141-143, con prueba simulada. Copilot Studio no
    tiene créditos en el tenant: sus pasos quedan "sin verificar" salvo que el usuario consiga créditos.
    *Después:* **Ruta Pro Copilot Studio** (orden de PROPUESTA §15.3: Copilot Studio, Power Apps, CI-Journeys,
    Sales/Customer Service). Patrón de cada ruta: datos propios deterministas (generador en `scripts/`), 10-12 labs en 5 fases (P1 a P5),

@@ -1173,7 +1173,20 @@ Motivo: el usuario preguntó si la app cubre MCP y PCF. PCF (M13, M27) y Code Ap
   - Seguridad: con `hostHeaderValidation`/`originValidation`, un `Host` ajeno da 403, el host del túnel en `MCP_PUBLIC_HOST` da 200, un `Origin` ajeno da 403 y la falta de `Accept` correcto da 406.
   - Sin probar: exponerlo con `devtunnel` (requiere iniciar sesión el usuario) y conectarlo a Copilot Studio (bloqueado por créditos).
   - Learn: la especificación vigente es 2026-07-28 y no hay tutorial de Learn de principio a fin para un servidor propio con Copilot Studio.
-- **Siguiente:** escribir los labs 141 a 143 (nivel IA/N5, opcionales), con las partes de Copilot Studio marcadas "sin verificar en el tenant: requiere créditos de Copilot Studio", más prueba simulada, conteos y tests.
+- **Escrito el 2026-11-25:**
+  - **Módulo 53, Microlección 4 (opcional, plegada):** qué es MCP (host, cliente, servidor, tools, resources, prompts; stdio frente a Streamable HTTP), el servidor de Dataverse (identidad de la persona, clientes permitidos por ambiente, consentimiento del inquilino, las 16 herramientas medidas), `hasUserApproved` como bandera del cliente y coste. Práctica sin tenant y un criterio de validación opcional. No se añadieron prácticas interactivas (el tope sigue en 239).
+  - **Labs 141, 142 y 143** (`optional: true`, `level: "N5"`), cada uno con "Antes de empezar" para principiantes y variante en papel por ejercicio. El 141 audita el servidor con MCP Inspector antes de conectar un modelo (el Ejercicio 6, con modelo, queda sin verificar). El 142 está comprobado hasta añadir la herramienta; desde la primera pregunta, "sin verificar en el tenant: requiere créditos de Copilot Studio". El 143 trae el servidor entero y un ejercicio de fallo y corrección (`server-ia.mjs`) con seis errores.
+  - **Learn confirmado (2026-11-25):** la URL de consentimiento `https://login.microsoftonline.com/<tenant>/adminconsent?client_id=0c412cc3-…`, **Is Enabled** = **Yes** en **Advanced Settings** como alternativa a `mcp allow`, el interruptor **Allow all** por herramienta en la experiencia clásica y los pasos de la experiencia nueva (**Build** > **Tools** > **Add tool** > **Add** > **Model Context Protocol (MCP)**).
+  - **Medido en local para el Lab 143** (instalación desde cero, Node 26.12.1): las ocho llamadas (incluidas 5.000 Tecnología → nivel 2 con TI y `texto=a` → error del esquema), el bloque de `curl` copiado del Markdown (200, 403, 403, 406 y un GET da 405) y la versión de la IA: 1.000 → nivel 2, Tecnología 5.000 sin TI, 0 y −50 → nivel 1, `Host` ajeno 200 y escucha en `0.0.0.0:3001`.
+  - Conteos: 104 labs (29 opcionales). Test `lab-metadata.test.ts` actualizado.
+  - **Prueba simulada** (1 agente sin contexto, persona "Laura", principiante en terminal; simulación, no una persona real). Ejecutó el Lab 143 entero en local, salvo el túnel, con el código copiado del Markdown, y todas las cifras coincidieron. Hallazgos corregidos:
+    - Escapes de PowerShell sin convertir en la URL de consentimiento del Lab 141.
+    - Un BOM invisible en la expresión del Lab 143, ahora `﻿`.
+    - Corregir `server-ia.mjs` sin pistas bloqueaba a quien solo sabe leer JavaScript: ahora hay pistas plegadas por criterio y una salida válida sin código.
+    - Faltaban o eran confusos: los "cinco/seis" errores, `buscar_proveedor` inexistente en la versión de la IA, el `Origin` ajeno (200), el decimal con punto, cómo abrir dos terminales y crear archivos sin `.txt`, la variable `$URL` en el Lab 141, el "qué deberías ver" de `auth who` y cómo copiar el GUID.
+    - El Lab 142 no explicaba cómo crear el agente ni cuándo dejar de buscar el interruptor.
+    - La microlección no decía que el proceso `npx … mcp` es un servidor.
+    - Tiempos ajustados: Lab 141, 3 h 30 min a 4 h la primera vez; Lab 142, 2 h a 2 h 30 min; Lab 143, 3 h a 4 h 30 min; microlección, unos 50 min.
 
 ### 15.17 Ronda de verificación 4 en el tenant (2026-11-25)
 
