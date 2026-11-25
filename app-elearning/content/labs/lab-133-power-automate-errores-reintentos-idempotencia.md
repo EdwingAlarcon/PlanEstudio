@@ -1,7 +1,7 @@
 ---
 id: lab-133
 title: "Errores, reintentos e idempotencia: flujos que no fallan en silencio ni duplican (Ruta Pro Power Automate)"
-level: "N2"
+level: "N3"
 duration: 270
 product: ["Power Automate", "Dataverse"]
 certifications: []
@@ -62,7 +62,7 @@ Hacer que un flujo se comporte bien **cuando algo sale mal**: capturar el error 
 
 ## Nivel
 
-**N2 Intermedio** — Ruta Pro Power Automate (competencia profesional)
+**N3 Avanzado** — Ruta Pro Power Automate (competencia profesional)
 
 ## Tecnologías utilizadas
 

@@ -1,7 +1,7 @@
 ---
 id: lab-135
 title: "Documentos y conciliación: facturas por correo, reglas de tolerancia y duplicados (Ruta Pro Power Automate)"
-level: "N2"
+level: "N3"
 duration: 240
 product: ["Power Automate", "Dataverse", "Outlook"]
 certifications: []
@@ -56,7 +56,7 @@ Recibir **facturas de proveedores** (un archivo JSON adjunto a un correo o pegad
 
 ## Nivel
 
-**N2 Intermedio** — Ruta Pro Power Automate (competencia profesional)
+**N3 Avanzado** — Ruta Pro Power Automate (competencia profesional)
 
 ## Tecnologías utilizadas
 

@@ -1,7 +1,7 @@
 ---
 id: lab-138
 title: "Rendimiento: bucles, selecciones, concurrencia, paginación y datos que no hacen falta (Ruta Pro Power Automate)"
-level: "N2"
+level: "N3"
 duration: 240
 product: ["Power Automate", "Dataverse", "Excel"]
 certifications: []
@@ -57,7 +57,7 @@ Hacer que un flujo que funciona con 14 filas **siga funcionando** con 2.000: **m
 
 ## Nivel
 
-**N2 Intermedio** — Ruta Pro Power Automate (competencia profesional)
+**N3 Avanzado** — Ruta Pro Power Automate (competencia profesional)
 
 ## Tecnologías utilizadas
 

@@ -1,7 +1,7 @@
 ---
 id: lab-134
 title: "Integración con APIs: HTTP, paginación, esquemas que cambian y desencadenador HTTP (Ruta Pro Power Automate)"
-level: "N2"
+level: "N3"
 duration: 240
 product: ["Power Automate", "HTTP"]
 certifications: []
@@ -59,7 +59,7 @@ Consumir una API de otro sistema con la acción **HTTP**: leer **varias páginas
 
 ## Nivel
 
-**N2 Intermedio** — Ruta Pro Power Automate (competencia profesional)
+**N3 Avanzado** — Ruta Pro Power Automate (competencia profesional)
 
 ## Tecnologías utilizadas
 

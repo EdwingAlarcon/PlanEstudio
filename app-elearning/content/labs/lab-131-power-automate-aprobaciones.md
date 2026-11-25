@@ -83,7 +83,7 @@ Además: las compras de **Tecnología** desde el nivel 2 necesitan también la r
 - [ ] El ambiente del curso con la solución `SIT Compras` y los flujos de los Labs 128 y 129 **activos**
 - [ ] Rol **System Administrator** y, para la primera aprobación del ambiente, rol de administrador (ya lo tienes del Lab 128)
 - [ ] **Aprobadores de prueba.** Para ver "todos deben aprobar" hacen falta **dos personas distintas**. Lo ideal, si tu cuenta es de un tenant de prueba de Microsoft 365 del que eres administradora global: en su centro de administración crea **dos usuarios de prueba** (por ejemplo `finanzas.sit` y `ti.sit`) y abre un segundo perfil del navegador para responder con ellos. *Sin verificar en Learn:* si un usuario sin licencia de Power Automate puede responder aprobaciones; si no puede, asígnale la prueba. Si tu cuenta es de una empresa y no puedes crear usuarios, pide dos cuentas de prueba o usa la variante. **Variante con una sola cuenta:** asigna todas las etapas a tu propio correo; las cadenas, el orden y los plazos se prueban igual, y de "todos deben aprobar" verás una sola respuesta
-- [ ] Teams o correo para recibir las aprobaciones, o el centro de aprobaciones en [make.powerautomate.com](https://make.powerautomate.com) > **Approvals**
+- [ ] Teams o correo para recibir las aprobaciones, o el centro de aprobaciones en [make.powerautomate.com](https://make.powerautomate.com) > **Approvals** (**Aprobaciones** > **Recibidas**). La primera aprobación de un ambiente nuevo tardó cerca de 1 minuto en aparecer ahí en una prueba real (el ambiente prepara las tablas de aprobaciones); si no la ves, espera y recarga
 
 ### Conocimiento previo
 
@@ -205,6 +205,8 @@ Si eliges la segunda, pon **Create an approval** y **Wait for an approval** **ju
 4. Después del **Switch**, la **Select** `Comentarios gerencia` y el **Append to string variable** de comentarios, como en los ejercicios anteriores (`[Gerencia] …`).
 
 > **Comprueba el valor real:** con respuestas propias, el resultado es el texto de la opción elegida. Tras tu primera prueba, abre la ejecución y mira la salida de `Aprobacion gerencia`: el valor de `outcome` debe coincidir **letra por letra** con los casos del **Switch**, tildes y espacios incluidos. Si no coincide, caes en el **Default** y todo parece "rechazado".
+>
+> **Comprobado en un tenant real (2026-11-25, interfaz en español):** con las opciones `Aprobar`, `Rechazar` y `Pedir más información`, al elegir la tercera `outcome` vale `Pedir más información`, con la tilde. El centro de aprobaciones añade por su cuenta la opción **Reasignar**. En las aprobaciones **Approve/Reject**, `outcome` sigue en inglés (`Approve` / `Reject`) aunque la interfaz esté en español, así que las condiciones del lab comparan con `Approve` y no con `Aprobar`. Con **Everyone must approve** y un rechazo, `outcome` = `Reject`. Cada elemento de `responses` trae `responder` (`displayName`, `email`, `userPrincipalName`…), `approverResponse`, `comments`, `requestDate` y `responseDate`. En español, los tipos se llaman **Aprobar o rechazar: primero en responder**, **Aprobar o rechazar: todos deben aprobar** y **Respuestas personalizadas: esperar una respuesta**, y la acción es **Iniciar y esperar una aprobación** (conector **Aprobaciones estándar**).
 
 ---
 

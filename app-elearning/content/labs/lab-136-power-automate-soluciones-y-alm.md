@@ -1,7 +1,7 @@
 ---
 id: lab-136
 title: "Soluciones y ALM: referencias de conexión, variables de entorno, exportar e importar (Ruta Pro Power Automate)"
-level: "N2"
+level: "N3"
 duration: 240
 product: ["Power Automate", "Dataverse", "Soluciones"]
 certifications: []
@@ -56,7 +56,7 @@ Sacar tus flujos del ambiente donde los construiste **sin romperlos**: que las c
 
 ## Nivel
 
-**N2 Intermedio** — Ruta Pro Power Automate (competencia profesional)
+**N3 Avanzado** — Ruta Pro Power Automate (competencia profesional)
 
 ## Tecnologías utilizadas
 

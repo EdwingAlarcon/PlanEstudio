@@ -1,7 +1,7 @@
 ---
 id: lab-139
 title: "Power Automate — Reto Pro sin pasos: el alta de proveedores de SIT (Ruta Pro Power Automate)"
-level: "N2"
+level: "N3"
 duration: 420
 product: ["Power Automate", "Dataverse", "Soluciones"]
 certifications: []

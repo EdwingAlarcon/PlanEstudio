@@ -16,7 +16,7 @@
 
 **Pendiente, por quién tiene que actuar:**
 1. *Claude, con el tenant de prueba (necesita que el usuario deje operar):* verificar en la interfaz lo "sin verificar":
-   pasos de interfaz de los labs 137 y 138, Lab 139 completo, Lab 128 por interfaz, Lab 131 (Approvals).
+   pasos de interfaz de los labs 137 y 138, Lab 139 completo, Lab 128 por interfaz. Lab 131 hecho el 2026-11-25 (una sola cuenta).
    **Hecho el 2026-11-25 (PROPUESTA §15.17):** Select en modo texto tecleado, flujos secundarios, `formatNumber`,
    lookup por clave con Update a row, Lab 130 con Excel real (todas las cifras) y Lab 135 con un correo real.
    Conexiones Excel y Outlook creadas en el Trial con permiso del usuario.
@@ -27,8 +27,8 @@
    Sales/Customer Service). Patrón de cada ruta: datos propios deterministas (generador en `scripts/`), 10-12 labs en 5 fases (P1 a P5),
    prueba simulada por fase y de la ruta entera, ruta en `professional-routes.ts`, test de cifras, y labs oficiales "in a Day" de
    MicrosoftLearning como referencia (adaptar con atribución, no copiar; ver pendiente 7 abajo).
-4. *Pequeños:* los labs 128-139 están marcados N2 aunque desde el 133 el contenido sube; falta una frase con la duración total
-   de la ruta (unas 52 h de frontmatter, 55 a 58 h con las estimaciones simuladas); pendiente releer "Pendientes reales actuales" (línea ~1700).
+4. *Pequeños:* hecho el 2026-11-25, los labs 133-139 pasan a N3 y la ruta indica su duración (52 h; 55 a 58 h simuladas).
+   Pendiente releer "Pendientes reales actuales" (línea ~1700).
 
 **Tenant de prueba (PurpleShop, entorno Trial "Curso Power Automate", vence unos 30 días después del 2026-11-21):** quedan la
 solución `SIT Compras`, las tablas `Proveedor` y `Solicitud de compra` con datos (17 proveedores, 146+ solicitudes), varios flujos

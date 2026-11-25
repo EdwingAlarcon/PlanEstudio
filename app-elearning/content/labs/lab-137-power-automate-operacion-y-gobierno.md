@@ -1,7 +1,7 @@
 ---
 id: lab-137
 title: "Operación y gobierno: historial, alertas, propietarios, límites y directivas de datos (Ruta Pro Power Automate)"
-level: "N2"
+level: "N3"
 duration: 210
 product: ["Power Automate", "Dataverse", "Power Platform admin center"]
 certifications: []
@@ -57,7 +57,7 @@ Operar los flujos **después** de publicarlos: leer el **historial de ejecucione
 
 ## Nivel
 
-**N2 Intermedio** — Ruta Pro Power Automate (competencia profesional)
+**N3 Avanzado** — Ruta Pro Power Automate (competencia profesional)
 
 ## Tecnologías utilizadas
 
