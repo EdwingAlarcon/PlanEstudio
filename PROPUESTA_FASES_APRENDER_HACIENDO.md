@@ -1202,3 +1202,70 @@ Entorno "Curso Power Automate". Flujos creados por la API y ejecutados desde la 
 - **Lab 135 con un correo real (`T135 Conciliar factura (correo)`, desencadenador OnNewEmailV3 con adjuntos y filtro de asunto, hoy apagado):** se disparó en menos de 1 minuto. Con un adjunto JSON y una imagen, la condición `.json` separa las dos y `json(base64ToString(contentBytes))` devuelve la factura con `importe` 7650 como número. Trampa medida: si el correo lo envía un flujo que pasa un **texto** base64 en el contenido del adjunto, el archivo llega con ese texto y `json` falla ("Unexpected character… e"). Hay que usar `base64ToBinary`. Se añadió una fila de solución de problemas.
 - **Lab 131 (`T131 Aprobaciones`, conexión **Aprobaciones estándar** creada sin iniciar sesión aparte):** las tres etapas se respondieron con la propia cuenta desde **Aprobaciones > Recibidas**. La primera aprobación del ambiente tardó cerca de 1 minuto en aparecer. Resultados: primero en responder + Aprobar → `outcome` = `Approve`, en inglés aunque la interfaz esté en español; todos deben aprobar + Rechazar → `Reject`; respuestas personalizadas → `outcome` = `Pedir más información`, letra por letra y con tilde. El centro añade **Reasignar** como opción. En la definición, los tipos son `Basic`, `BasicAwaitAll` y `CustomResponse` (no `Custom`), y las opciones van en `WebhookApprovalCreationInput/responseOptions`. Con una sola cuenta no se puede ver que un rechazo cierre la etapa antes de que respondan los demás.
 - **Sigue sin verificar:** el Lab 128 por interfaz, el 139 completo, los pasos de interfaz de los labs 137 y 138, la idempotencia con Resubmit y el cierre anticipado de "todos deben aprobar" con dos personas.
+
+### 15.19 Ruta Pro Copilot Studio — diseño (2026-11-26; el usuario pidió "decide tú")
+
+**Restricción de partida:** ni el autor ni el tenant de pruebas tienen créditos de Copilot Studio, y el usuario no va a
+comprarlos. La ruta se diseña para que todo lo evaluable se pueda hacer **sin créditos**, y lo demás lleva variante en papel.
+
+**Lo que dice Learn (consultado el 2026-11-26), y por qué decide el diseño:**
+- **Harness estándar** (topics, nodos, agent flows): "Do chats in the embedded test chat count as billable Copilot Credits?
+  No." Tampoco consumen ni se bloquean los agent flows lanzados desde el panel de prueba
+  ([FAQ](https://learn.microsoft.com/microsoft-copilot-studio/faq-billing-licensing),
+  [mensajes y créditos](https://learn.microsoft.com/microsoft-copilot-studio/requirements-messages-management)). Los
+  prompts (AI Builder) se miden aparte.
+- **Microsoft Copilot harness** (antes "GitHub Copilot harness", el del Módulo 22): cobra créditos "from the moment you start
+  building", incluidas la vista previa y las evaluaciones
+  ([Learn](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/billing-credit-overview)). Explica
+  probablemente el bloqueo del LAB-142 (`EnforcementUsageCredits`): **falta confirmar con qué harness se creó**.
+- **Trial individual:** existe (cuenta de trabajo o escuela; se extiende 30 días); permite probar en el panel, **no publicar**.
+- **Certificación:** examen **AB-620** (Microsoft Certified: AI Agent Builder Associate). Su temario nuevo (desde el
+  18-dic-2026) se centra en el Copilot harness y **quita "Configure topics"**; pesos: planificar y configurar 50-55 %,
+  integrar y extender 20-25 %, probar y gestionar 25-30 %
+  ([guía de estudio](https://learn.microsoft.com/credentials/certifications/resources/study-guides/ab-620)). Applied
+  Skills de Copilot Studio retirada el 2026-08-07. Esqueleto: curso AB-620T00 (sin lista de labs publicada) y
+  `microsoft/mcs-labs` (MIT, 43 labs: conocimiento, variables, multiagente, evaluación, ALM, MCP, tools, aprobaciones).
+
+**Decisión:** la ruta se construye en el **harness estándar** (gratis de probar) y se presenta como **competencia
+profesional alineada con AB-620**, no como preparación del examen: el examen pide el Copilot harness, que no se puede
+practicar sin créditos. Lo propio del Copilot harness (Skills, Memory, Hooks, Evaluate de ese harness) va en un lab de
+decisión con variante en papel; el Módulo 22 ya lo enseña con créditos. La elección de harness es parte de lo que se
+evalúa.
+
+**Qué ya existe y no se repite:** Módulo 15 (agente, topic con slot filling, agent flow, fallback, Teams), Módulo 22 (Copilot
+harness, Skills, conectados, evaluación), LAB-22 (autenticación manual, Adaptive Card, SharePoint), LAB-65 (capstone
+gobernado en papel) y LAB-142 (MCP). La ruta aplica todo a otro caso y sube a lo que pide un puesto de "agent builder".
+
+**Caso: "Asistente de compras SIT"** — reutiliza el caso y los datos de la Ruta Pro Power Automate (`sit-compras`) sin
+exigir haberla hecho: los empleados preguntan la política de compras, consultan el estado de su solicitud y crean una
+nueva; los proveedores preguntan por sus facturas (segundo agente, para multiagente). Datos nuevos en
+`public/practice-assets/copilotstudio/asistente-compras/` (generador determinista): manual de compras (Markdown y
+`.docx`, también servido como página pública para la fuente "sitio web"), FAQ de proveedores, preguntas trampa (fuera de
+alcance, ambigüedad, datos de otra persona), un conjunto de pruebas importable para la evaluación (formato de importación
+**por verificar en Learn**) y respuestas esperadas en `expected/`. La "API" del catálogo de Power Automate
+(`catalogo/`) sirve para el tool REST/OpenAPI.
+
+**Labs (144-155, opcionales, como las otras rutas Pro):**
+
+| Lab | Título | Competencia |
+|---|---|---|
+| 144 | Copilot Studio en un día: del agente vacío al asistente que responde y actúa | Instrucciones, conocimiento, un topic, un agent flow sobre Dataverse, prueba e instantánea |
+| 145 | Topics a fondo | Nodos, variables de topic, globales y de sistema, entidades (lista cerrada y regex), slot filling, Redirect con inputs/outputs, editor de código YAML |
+| 146 | Conocimiento que responde bien | Archivos, sitio público, Dataverse, SharePoint como variante; citas, "no lo sé", moderación, preguntas trampa medidas |
+| 147 | Orquestación generativa y elección de harness | Descripciones de topics y tools, instrucciones, mapa de actividad, diagnóstico del tool equivocado; decidir harness (Copilot harness en papel) |
+| 148 | Tools | Agent flow con validación que crea la solicitud, conector, REST/OpenAPI al catálogo; prompt tool solo como variante (AI Builder) |
+| 149 | Experiencia de conversación | Adaptive Cards con entrada, confirmación antes de actuar, fallback, escalado a una persona, mensajes de error útiles |
+| 150 | Identidad y datos del usuario | Authenticate with Microsoft, `User.Email`, filtrar por solicitante, no filtrar datos de otros; DLP en papel |
+| 151 | Multiagente | Child agents dentro del agente; agente conectado en papel (exige publicar) |
+| 152 | Evaluación y calidad | Conjunto de pruebas, métodos de evaluación, regresión antes y después de un cambio (consumo de créditos de la evaluación en el estándar: **por verificar**) |
+| 153 | Soluciones y ALM | Agente en solución, variables de entorno, referencias de conexión, exportar/importar, extensión de VS Code (`.mcs.yaml`) y Git |
+| 154 | Publicación, operación y coste | Publicar y canales (licencia; en papel con trial), Analytics, transcripciones en Dataverse, estimar créditos con las tarifas de Learn |
+| 155 | Reto Pro sin pasos | Otro proceso (por ejemplo, onboarding de empleados), rúbrica por los tres dominios de AB-620 |
+
+**Integración en la app:** ruta `copilot-studio-pro` en `professional-routes.ts` (módulos 15, 22 y 53), "Especialización en
+construcción" hasta el LAB-155 (capstone provisional: LAB-144). Conteos: labs 104 → 116.
+
+**Fases:** **P0 verificación en el tenant** (crear en el entorno Trial un agente del harness estándar y comprobar que el
+panel de prueba responde sin créditos, con conocimiento y con un agent flow; si no, la ruta se replantea antes de escribir
+labs) · P1 datos + LAB-144 + ruta · P2 145-147 · P3 148-150 · P4 151-153 · P5 154-155 + prueba simulada de la ruta.
+Cada paso se contrasta con Learn y lo no comprobado se marca.
