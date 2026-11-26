@@ -1269,3 +1269,33 @@ construcción" hasta el LAB-155 (capstone provisional: LAB-144). Conteos: labs 1
 panel de prueba responde sin créditos, con conocimiento y con un agent flow; si no, la ruta se replantea antes de escribir
 labs) · P1 datos + LAB-144 + ruta · P2 145-147 · P3 148-150 · P4 151-153 · P5 154-155 + prueba simulada de la ruta.
 Cada paso se contrasta con Learn y lo no comprobado se marca.
+
+#### 15.19.1 P0 hecha en el tenant (2026-11-26): el harness estándar se prueba sin créditos
+
+Entorno Trial "Curso Power Automate" (sin créditos de Copilot Studio; `EnforcementUsageCredits` en el agente del Copilot
+harness). Agente `P0 Prueba harness estandar` y agent flow de prueba, **borrados al terminar**.
+
+- **Licencia, el primer obstáculo.** En la página de inicio (nueva experiencia), **Otras formas de crear** > **Agente
+  (Estándar)** y **Flujos de agente (Estándar)** aparecen deshabilitados: "This build option isn't included in your current
+  license." Un texto oculto dice "Incluido con tu licencia de Microsoft 365 Copilot sin costo adicional de crédito". La
+  cuenta tenía una **prueba de Copilot Studio vencida**; se vio en el menú **…** > **Abrir la experiencia clásica**
+  (aviso "Su versión de prueba ha expirado" > **Ampliar el período de prueba** > **Ampliar prueba**, 30 días; aceptar
+  incluye las condiciones de Bing para sitios públicos). Con la prueba ampliada, **Agente (Estándar)** queda habilitado.
+  En la lista de agentes, la columna "Con tecnología de" dice **Estándar**: "Este agente usa la orquestación estándar. Esto
+  no consume créditos para los usuarios con una licencia de Copilot".
+- **Panel de prueba sin créditos (comprobado):** respuesta del tema **Saludo**; respuesta **generativa** con un sitio público
+  como conocimiento (citó dos páginas de Learn; mapa de actividad: buscar orígenes, crear respuesta final); y un **agent
+  flow** invocado por la orquestación generativa (salida `resultado` = `P0-OK-7731`, devuelta al chat). Ningún aviso de
+  créditos. Al publicar el flujo, la interfaz dice: "Las ejecuciones de flujo consumen capacidad según el número de acciones
+  que utilizan, pero las ejecuciones de prueba no consumen ninguna."
+- **Detalles de interfaz para los labs:** el buscador de **Agregar conocimiento** no acepta una URL; se busca "sitio" >
+  **Sitios web públicos** > **Agregar** > **Agregar al agente**. Un agent flow nuevo trae ya **Cuando un agente llama al
+  flujo** y **Respond to the agent**; las salidas se agregan con **Agregar una salida** > **Texto**. Hay que **Publicar** el
+  flujo y después agregarlo al agente en **Herramientas** > **Agregar herramienta** > filtro **Flow**; la herramienta se
+  crea con nombre y descripción "Sin título" y la descripción decide si el orquestador la elige. Panel de prueba: botones
+  **Nueva sesión de prueba**, **Evaluar** y **Variables**.
+- **Trampa:** una respuesta generativa del propio agente afirmó que los agent flows consumen créditos "incluso desde el
+  panel de prueba", contra la FAQ de Learn y el aviso de la interfaz: buen ejemplo para el lab de conocimiento.
+- **Consecuencia para la ruta:** se mantiene el diseño. Requisito del alumno: una **prueba de Copilot Studio** (licencia de
+  usuario), no créditos; si la prueba de su cuenta ya venció, la amplía desde la experiencia clásica. Sin verificar: si la
+  pestaña **Evaluación** consume créditos.
