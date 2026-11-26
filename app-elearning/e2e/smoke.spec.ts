@@ -229,7 +229,8 @@ test.describe("Smoke — rutas principales", () => {
     await input.fill("INC-001 seguridad");
     await expect(page.getByRole("option").filter({ hasText: "Incidente" }).first()).toBeVisible();
     await page.getByRole("option").first().click();
-    await expect(page).toHaveURL(/\/experiencia-practica\/inc-001-seguridad/);
+    // En local, con el servidor de desarrollo en frío, compilar la página del incidente puede superar los 5 s por defecto.
+    await expect(page).toHaveURL(/\/experiencia-practica\/inc-001-seguridad/, { timeout: 20_000 });
 
     await page.getByRole("button", { name: "Iniciar práctica", exact: true }).click();
     await expect(page.getByText("En progreso").first()).toBeVisible();
