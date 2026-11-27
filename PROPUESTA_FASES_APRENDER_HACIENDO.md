@@ -1333,6 +1333,14 @@ harness). Agente `P0 Prueba harness estandar` y agent flow de prueba, **borrados
   sencillo); cómo lee la entidad **Number** los decimales según el idioma; tipos de entrada del agent flow y
   `triggerBody()?['number']`; si el conector de Dataverse en un agent flow exige la prueba de Power Automate; las
   etiquetas en español "Agente (Estándar)" y la ampliación de la prueba (solo constan por la P0).
-- **Pendiente detectado:** el Módulo 15 (Microlección 1, paso 2) crea el agente con **Agents** > **Create blank agent**; en la
-  experiencia nueva, la opción principal puede crear un agente del Copilot harness, que cobra créditos desde que se
-  construye. Revisar el módulo para que remita a **Other ways to build** (harness estándar).
+- **Comprobado en el tenant el 2026-11-27 y corregido** (entorno Trial "Curso Power Automate", interfaz en español; no se creó
+  ningún agente): en **Inicio**, los tiles **Agente**, **Flujo de trabajo** y **Aplicación** están bajo "Usa créditos de Copilot".
+  En **Agentes**, ya no existe **Create blank agent**: hay **Nuevo agente** ("Acción predeterminada: crear un agente autónomo") y
+  la flecha **Más opciones de creación**, con tres opciones: **Agente** "Uses Copilot Credits" (autónomo), **Agente** "Uses
+  Copilot Credits" (de clientes, por chat y voz) y **Agente** **Estándar** ("Cree un agente conversacional basado en reglas con
+  temas y flujos predefinidos"). La estándar abre **Asigne un nombre al agente** con **Configuración del agente (opcional)**:
+  **Idioma** (venía Español (España), quizá por el idioma del navegador), **Solución** (por defecto *Common Data Services Default
+  Solution*) y **Nombre del esquema**. Corregidos el **Módulo 15** (Microlección 1, pasos 2 y 3), el **LAB-22** (Tarea 1.2) y el
+  **LAB-144** (Ejercicios 1 y 2), que mandaban a **Create blank agent** o a un engranaje sin comprobar. Las etiquetas en inglés de
+  esa pantalla siguen sin comprobar. **Queda pendiente:** el Módulo 22 sigue llamándolo "GitHub Copilot harness"; Learn lo
+  llama ahora Microsoft Copilot harness.
