@@ -164,7 +164,7 @@ alternativa en Update a row, Parse JSON y el desencadenador HTTP. **Verificado e
 Propuesta inspirada en Brilliant, Boot.dev, GameCode, Duolingo y Microsoft Learn (detalle y fases F1-F5 en
 `PROPUESTA_FASES_APRENDER_HACIENDO.md` §16). **F1 hecha:** XP y rango **calculados** en `src/lib/xp.ts` a partir de los
 stores existentes (no hay store de XP: no añadir uno), camino por mundos en el inicio (`LearningPathMap`), rango en la
-barra lateral y desglose en `/progreso#xp`. Leer no da XP. Siguiente: F2 (lección por pasos, piloto Módulo 11).
+barra lateral y desglose en `/progreso#xp`. Leer no da XP; un lab marcado vale 25 (autodeclarado) hasta que la F3 pida evidencia y pase a 100. Siguiente: F2 (lección por pasos, piloto Módulo 11).
 Validación: `npm run verify` (579 tests) y e2e 105/105 en el puerto 3100.
 
 ## Mantenimiento vigente — 2026-11-11

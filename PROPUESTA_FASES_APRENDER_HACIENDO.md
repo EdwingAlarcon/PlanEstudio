@@ -1403,9 +1403,10 @@ misión con panel de evidencia y enlace a Learn; **F4** meta semanal, racha por 
 "jefe" de cada mundo (reto sin pasos + simulador).
 
 **F1 hecha (2026-11-27).** `src/lib/xp.ts`: la XP **no se guarda**, se calcula de los stores existentes sin
-fusionarlos (práctica interactiva completada sin ver la solución 20, quiz del módulo ≥ 80 % 50, lab completado 100,
-respuesta correcta del repaso 5; marcar un módulo como leído 0). Rangos Aprendiz → Maker → Consultor funcional →
-Desarrollador → Arquitecto, con grados I-III, calibrados con el contenido de esa fecha (Nivel 1 completo ≈ 1.460 XP;
+fusionarlos (práctica interactiva completada sin ver la solución 20, quiz del módulo ≥ 80 % 50, lab marcado como
+completado **25** —es autodeclarado: la app no ve el tenant; con la evidencia de la F3 pasará a 100—, respuesta correcta
+del repaso 5; marcar un módulo como leído 0). Rangos Aprendiz → Maker → Consultor funcional →
+Desarrollador → Arquitecto, con grados I-III, calibrados para el sistema completo (labs a 100) con el contenido de esa fecha (Nivel 1 completo ≈ 1.460 XP;
 los cuatro niveles ≈ 9.030, Arquitecto I). El inicio sustituye la lista "Tu recorrido" por `LearningPathMap`
 (pestañas por mundo, nodos de módulo con XP ganada/posible, labs agrupados y trofeo); cada práctica cuenta en su
 primer módulo relacionado. La barra lateral muestra el rango (`RankBadge`) y `/progreso#xp` el desglose

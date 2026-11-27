@@ -13,8 +13,9 @@ export const XP_RULES = {
   /** Quiz del módulo con 80 % o más (una vez por módulo). */
   quiz: 50,
   quizPassPercentage: 80,
-  /** Lab marcado como completado. */
-  lab: 100,
+  /** Lab marcado como completado. Es autodeclarado (la app no ve el tenant), por eso vale poco:
+   *  la F3 pedirá evidencia (IDs de ejecución, respuestas) y con ella el lab pasará a 100. */
+  lab: 25,
   /** Cada respuesta correcta en el repaso espaciado. */
   reviewCorrect: 5,
 } as const;
@@ -68,9 +69,10 @@ export function calculateXp(input: XpInput): XpBreakdown {
 }
 
 // Rangos: los roles para los que prepara el curso, cada uno con tres grados.
-// Escala calibrada con el contenido de 2026-11-27 (prácticas + quizzes + labs obligatorios, sin repaso):
-// Nivel 1 completo ≈ 1.460 XP (Maker II-III), +Nivel 2 ≈ 2.790 (Consultor funcional I),
-// +Nivel 3 ≈ 5.620 (Desarrollador I) y +Nivel 4 ≈ 9.030 (Arquitecto I).
+// Escala calibrada para el sistema completo (labs con evidencia a 100 XP, F3), con el contenido de 2026-11-27
+// (prácticas + quizzes + labs obligatorios, sin repaso): Nivel 1 ≈ 1.460 XP (Maker II-III), +Nivel 2 ≈ 2.790
+// (Consultor funcional I), +Nivel 3 ≈ 5.620 (Desarrollador I) y +Nivel 4 ≈ 9.030 (Arquitecto I). Mientras los labs
+// valgan 25 (autodeclarados) se sube más despacio; no se recalibra para no mover los rangos dos veces.
 export const RANKS = [
   { name: "Aprendiz", thresholds: [0, 150, 300] },
   { name: "Maker", thresholds: [500, 1000, 1500] },

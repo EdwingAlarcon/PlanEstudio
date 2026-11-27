@@ -1,0 +1,3230 @@
+{
+  "components.json": {
+    "mtime": 1793541872.7577398,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a6f82237e5d4de1f49abac3f2751995e",
+    "semantic_hash": ""
+  },
+  "e2e/beginner-continuity.spec.ts": {
+    "mtime": 1793541872.8645515,
+    "seen": 1795801817.9125304,
+    "ast_hash": "51069cf05b829d582dfa0691c514fe4d",
+    "semantic_hash": ""
+  },
+  "e2e/coverage-gaps.spec.ts": {
+    "mtime": 1794427711.2554467,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1aa187b9db5008eb7d2092e532f6c2f6",
+    "semantic_hash": ""
+  },
+  "e2e/coverage-routes-labs.spec.ts": {
+    "mtime": 1793541872.8655572,
+    "seen": 1795801817.9125304,
+    "ast_hash": "20dd9eafb7f5cf85974e68b677da952a",
+    "semantic_hash": ""
+  },
+  "e2e/interactive-practices.spec.ts": {
+    "mtime": 1794427699.6456153,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f2fa26c3368d184895a96419fe8a4818",
+    "semantic_hash": ""
+  },
+  "e2e/learning-path.spec.ts": {
+    "mtime": 1795801340.9559886,
+    "seen": 1795801817.9125304,
+    "ast_hash": "6a56e77ce7ed4b093cc8ef512e02805a",
+    "semantic_hash": ""
+  },
+  "e2e/preparar-entorno.spec.ts": {
+    "mtime": 1794003267.278216,
+    "seen": 1795801817.9125304,
+    "ast_hash": "aa6ec5c2cfc4f99551801e3c400f1ca4",
+    "semantic_hash": ""
+  },
+  "e2e/progress-backup.spec.ts": {
+    "mtime": 1794426203.2323568,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f71f6ae47ba66a7a451415d2c8262f18",
+    "semantic_hash": ""
+  },
+  "e2e/smoke.spec.ts": {
+    "mtime": 1795690513.191983,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b3e922822d29f914e25c35c82df506cb",
+    "semantic_hash": ""
+  },
+  "e2e/spaced-repetition.spec.ts": {
+    "mtime": 1793541872.8690684,
+    "seen": 1795801817.9125304,
+    "ast_hash": "4f6a75467f09f29c816910d699b0064f",
+    "semantic_hash": ""
+  },
+  "eslint.config.mjs": {
+    "mtime": 1793541872.8690684,
+    "seen": 1795801817.9125304,
+    "ast_hash": "65792463ae48ac93212779164114f07a",
+    "semantic_hash": ""
+  },
+  "next-env.d.ts": {
+    "mtime": 1793541872.8690684,
+    "seen": 1795801817.9125304,
+    "ast_hash": "90426577ad8f38459f3e566411c85589",
+    "semantic_hash": ""
+  },
+  "next.config.ts": {
+    "mtime": 1793541872.8690684,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d5a0a95f2e01d8da32cc2d11ad373094",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1795787064.2174523,
+    "seen": 1795801817.9125304,
+    "ast_hash": "687d67b5534ed2eb5a39ec6223eea0dd",
+    "semantic_hash": ""
+  },
+  "playwright.config.ts": {
+    "mtime": 1793541872.874729,
+    "seen": 1795801817.9125304,
+    "ast_hash": "725eb81b98f979026981c80e3ad18ea1",
+    "semantic_hash": ""
+  },
+  "postcss.config.mjs": {
+    "mtime": 1793541872.874729,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d1283e7566e136247b268494a6a545eb",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/copilotstudio/asistente-compras/expected/respuestas-esperadas.json": {
+    "mtime": 1795790502.6710558,
+    "seen": 1795801817.9125304,
+    "ast_hash": "78c312bef071b8690aad855cd7c7a482",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/copilotstudio/asistente-compras/lab145/entidades.json": {
+    "mtime": 1795790502.6620495,
+    "seen": 1795801817.9125304,
+    "ast_hash": "4060517d6657cf8e27bd025420796ad4",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/copilotstudio/asistente-compras/lab145/mensajes-prueba.json": {
+    "mtime": 1795790502.6630502,
+    "seen": 1795801817.9125304,
+    "ast_hash": "6e310e70befbdb0bb3d6d02c88f945f9",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/copilotstudio/asistente-compras/lab146/preguntas-conocimiento.json": {
+    "mtime": 1795790502.6680577,
+    "seen": 1795801817.9125304,
+    "ast_hash": "8dbc37eabd1e8dab4f6ffd3e9a29475b",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/copilotstudio/asistente-compras/lab147/descripciones.json": {
+    "mtime": 1795790502.670056,
+    "seen": 1795801817.9125304,
+    "ast_hash": "af10a4813ea50dfe09a52bb735928065",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/copilotstudio/asistente-compras/lab147/escenarios-harness.json": {
+    "mtime": 1795790502.6710558,
+    "seen": 1795801817.9125304,
+    "ast_hash": "84d5067aa1520ec427b759c07a67db17",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/copilotstudio/asistente-compras/lab147/mensajes-orquestacion.json": {
+    "mtime": 1795790502.6710558,
+    "seen": 1795801817.9125304,
+    "ast_hash": "69f2cef0f9da8ba62896b068e2b57d11",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/copilotstudio/asistente-compras/manifest.json": {
+    "mtime": 1795790502.6710558,
+    "seen": 1795801817.9125304,
+    "ast_hash": "4031b927e8bce38db6331cc37871b3c3",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/copilotstudio/asistente-compras/preguntas-prueba.json": {
+    "mtime": 1795790502.6610446,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d660ba2a41c541dd640fb6775de86096",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/altas/reglas-alta.json": {
+    "mtime": 1795304496.449785,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d154ec087e2b156c3099670d132bae81",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/altas/solicitudes-alta.json": {
+    "mtime": 1795304496.4507852,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1f0d8754ee70ec47dbc090e76ba25580",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/catalogo-v2/pagina-1.json": {
+    "mtime": 1795304496.4190395,
+    "seen": 1795801817.9125304,
+    "ast_hash": "97b17c01b91a1535ba27e7d3fa802519",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/catalogo-v2/pagina-2.json": {
+    "mtime": 1795304496.4200394,
+    "seen": 1795801817.9125304,
+    "ast_hash": "eecbc7bf0c259e1bd38bb0afd529d635",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/catalogo-v2/pagina-3.json": {
+    "mtime": 1795304496.4210393,
+    "seen": 1795801817.9125304,
+    "ast_hash": "4cd0d61e79f9b8e832689bbf8b3efbdb",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/catalogo/pagina-1.json": {
+    "mtime": 1795304496.4140375,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d67a0c0e52621a9b8f4b5161cc618878",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/catalogo/pagina-2.json": {
+    "mtime": 1795304496.4150395,
+    "seen": 1795801817.9125304,
+    "ast_hash": "be5fde7e3d3076d57206c847054e76ce",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/catalogo/pagina-3.json": {
+    "mtime": 1795304496.416039,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5e1398d06ae29f110f4a490710db7bed",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/expected/cifras-esperadas.json": {
+    "mtime": 1795304496.4522877,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ed41ce7690d77a47da5220450a3f6975",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/facturas/FAC-2026-0001.json": {
+    "mtime": 1795304496.424039,
+    "seen": 1795801817.9125304,
+    "ast_hash": "385af7935e2c9610a13d3e3b804fdcbe",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/facturas/FAC-2026-0002.json": {
+    "mtime": 1795304496.424039,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1264136a29bbd1ba7b4dbbf3c9be62a2",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/facturas/FAC-2026-0003-reenvio.json": {
+    "mtime": 1795304496.4320993,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0034a338c619f3834fcae6690373634f",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/facturas/FAC-2026-0003.json": {
+    "mtime": 1795304496.4255433,
+    "seen": 1795801817.9125304,
+    "ast_hash": "89b614a2984d9f85dbef3461fdd34c1b",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/facturas/FAC-2026-0004.json": {
+    "mtime": 1795304496.4255433,
+    "seen": 1795801817.9125304,
+    "ast_hash": "be43c93e7665ff07d2d9eb3f4cb72612",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/facturas/FAC-2026-0005.json": {
+    "mtime": 1795304496.4255433,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3a56b8807be315b95b6f3766ea6881af",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/facturas/FAC-2026-0006.json": {
+    "mtime": 1795304496.4270966,
+    "seen": 1795801817.9125304,
+    "ast_hash": "2ba3d6e6e79fb7cbfd73eda0069a3db0",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/facturas/FAC-2026-0007.json": {
+    "mtime": 1795304496.4280999,
+    "seen": 1795801817.9125304,
+    "ast_hash": "01167082c184aae1a19619c82f55573d",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/facturas/FAC-2026-0008.json": {
+    "mtime": 1795304496.4280999,
+    "seen": 1795801817.9125304,
+    "ast_hash": "7cb8abbeaec1c089a795856a3196f29a",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/facturas/FAC-2026-0009.json": {
+    "mtime": 1795304496.4290996,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a34a4e43094b6d03f9c4a567efa7743a",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/facturas/FAC-2026-0010.json": {
+    "mtime": 1795304496.4290996,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e623dc2692e98134b8e3ed8727280542",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/facturas/FAC-2026-0011.json": {
+    "mtime": 1795304496.4300995,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d07e0007ebaa79b834e376faec9b87d9",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/facturas/FAC-2026-0012.json": {
+    "mtime": 1795304496.4300995,
+    "seen": 1795801817.9125304,
+    "ast_hash": "7531e285757a724b71ece2132de9e457",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/facturas/FAC-2026-0013.json": {
+    "mtime": 1795304496.4311,
+    "seen": 1795801817.9125304,
+    "ast_hash": "64425bf1ed655975e7c3a4020d7d7e47",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/facturas/lote-facturas.json": {
+    "mtime": 1795304496.4320993,
+    "seen": 1795801817.9125304,
+    "ast_hash": "860268561b03e3ef1556af8b6cfa65c4",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/manifest.json": {
+    "mtime": 1795304496.4532907,
+    "seen": 1795801817.9125304,
+    "ast_hash": "815678ed22ce4e9432a945eaeaf15a2c",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/politica-aprobacion.json": {
+    "mtime": 1795304496.3999152,
+    "seen": 1795801817.9125304,
+    "ast_hash": "80b4c48504133a55e37b51ba59e89b91",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/reglas-conciliacion.json": {
+    "mtime": 1795304496.4230392,
+    "seen": 1795801817.9125304,
+    "ast_hash": "bb1d8c09b81fe636f34272fc9d541809",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/webhook/ejemplo-factura.json": {
+    "mtime": 1795304496.4220397,
+    "seen": 1795801817.9125304,
+    "ast_hash": "81be8bd3e8fbc2314e3766669ddab67f",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerbi/sit-ventas/expected/metricas-esperadas.json": {
+    "mtime": 1795116206.0859065,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f31de99eda48e4dc28adf70e6cb65002",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerbi/sit-ventas/manifest.json": {
+    "mtime": 1795116206.0879064,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5097abaf9fa871140617b1491a709d88",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerbi/sit-ventas/tipos-cambio.json": {
+    "mtime": 1795116206.0677986,
+    "seen": 1795801817.9125304,
+    "ast_hash": "8fff6785e5aeccb96e0ea78ffd995b5e",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/corrupted/manifest.json": {
+    "mtime": 1793541872.8815348,
+    "seen": 1795801817.9125304,
+    "ast_hash": "7049c9bf807c214daf97932a8c7338b8",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/expected/metricas_esperadas.json": {
+    "mtime": 1793541872.8871665,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1f0676c51ea5041fab5b7d229d644be2",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/input/parametros_proceso.json": {
+    "mtime": 1793541872.8898387,
+    "seen": 1795801817.9125304,
+    "ast_hash": "77575e290f75fb4743433006e7aba5a5",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/input/rutas_config.json": {
+    "mtime": 1793541872.8923514,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c1165f0b57f9423a22098f9e02ed471e",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/legacy-app/lote-entrada.json": {
+    "mtime": 1793541872.8968618,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c0f366c5c7c0e73981d3baf99c372ea7",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/manifest.json": {
+    "mtime": 1793541872.897863,
+    "seen": 1795801817.9125304,
+    "ast_hash": "fe83a9659d87307c19ecb487969f0805",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/portal/portal-data.json": {
+    "mtime": 1793541872.8988626,
+    "seen": 1795801817.9125304,
+    "ast_hash": "fe2eaebcc7a49d241f362124c7a24ac6",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/portal/scenarios.json": {
+    "mtime": 1793541872.8988626,
+    "seen": 1795801817.9125304,
+    "ast_hash": "99a66337edf8e5bf33bc653211b8f3b3",
+    "semantic_hash": ""
+  },
+  "public/sw.js": {
+    "mtime": 1794003267.2858202,
+    "seen": 1795801817.9125304,
+    "ast_hash": "be44820d3a81fcc00d2212166de07747",
+    "semantic_hash": ""
+  },
+  "public/vercel.json": {
+    "mtime": 1795620070.9235702,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f56f69b2c981d3c9e31d73214b50ce1d",
+    "semantic_hash": ""
+  },
+  "scripts/audit-learning-by-doing.ts": {
+    "mtime": 1793541872.9142678,
+    "seen": 1795801817.9125304,
+    "ast_hash": "41e3f47c1db4e374172de0c86d5a89a4",
+    "semantic_hash": ""
+  },
+  "scripts/check-csp.mjs": {
+    "mtime": 1795627893.2638538,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5c8527f844a87d6e55a756fc07f85ae0",
+    "semantic_hash": ""
+  },
+  "scripts/generate-copilotstudio-assets.mjs": {
+    "mtime": 1795790502.5379224,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1f665ad313bbcbc25984da9e44c86d76",
+    "semantic_hash": ""
+  },
+  "scripts/generate-powerautomate-assets.mjs": {
+    "mtime": 1795304495.7579348,
+    "seen": 1795801817.9125304,
+    "ast_hash": "4878bdeef1e1de0b078ccb855ca86392",
+    "semantic_hash": ""
+  },
+  "scripts/generate-powerbi-assets.mjs": {
+    "mtime": 1795114238.7530856,
+    "seen": 1795801817.9125304,
+    "ast_hash": "91b3714251b32a86b9af68acce3b0263",
+    "semantic_hash": ""
+  },
+  "scripts/generate-rpa-assets.mjs": {
+    "mtime": 1794421360.6921973,
+    "seen": 1795801817.9125304,
+    "ast_hash": "800eff39c18b45f039407aec7817cac9",
+    "semantic_hash": ""
+  },
+  "scripts/lib/docx.mjs": {
+    "mtime": 1795786715.0146513,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1c796d613c4993e7cf3591fd58a4e098",
+    "semantic_hash": ""
+  },
+  "scripts/lib/zip-xlsx.mjs": {
+    "mtime": 1795116205.268041,
+    "seen": 1795801817.9125304,
+    "ast_hash": "aa5aca044657ce3072fb50674a1c3840",
+    "semantic_hash": ""
+  },
+  "scripts/validate-content.ts": {
+    "mtime": 1793541872.916267,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b80ccf0712f4ea81be25546eb1404ab9",
+    "semantic_hash": ""
+  },
+  "scripts/validate-interactive-practices.ts": {
+    "mtime": 1793541872.916267,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ff9bab01e3fe0f52df039f331bba2512",
+    "semantic_hash": ""
+  },
+  "scripts/validate-rpa-assets.mjs": {
+    "mtime": 1794421361.3724556,
+    "seen": 1795801817.9125304,
+    "ast_hash": "9869f0f2517cf9c0ed54410f1b62d79e",
+    "semantic_hash": ""
+  },
+  "scripts/validate-spaced-repetition.ts": {
+    "mtime": 1793541872.9172685,
+    "seen": 1795801817.9125304,
+    "ast_hash": "01ac74fdac6129e7a9661172288a82ed",
+    "semantic_hash": ""
+  },
+  "src/app/certificado/[nivel]/__tests__/certificate-client.test.tsx": {
+    "mtime": 1793541872.9187725,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d3e11084656e9e69b6ea421f6a3b5dc1",
+    "semantic_hash": ""
+  },
+  "src/app/certificado/[nivel]/certificate-client.tsx": {
+    "mtime": 1793541872.919778,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c58119775222606732b599cb3c216bf5",
+    "semantic_hash": ""
+  },
+  "src/app/certificado/[nivel]/page.tsx": {
+    "mtime": 1794419813.557163,
+    "seen": 1795801817.9125304,
+    "ast_hash": "004af10f842f0c463f395b230c7ba2c3",
+    "semantic_hash": ""
+  },
+  "src/app/como-usar/page.tsx": {
+    "mtime": 1794421790.3969514,
+    "seen": 1795801817.9125304,
+    "ast_hash": "32fe1f7f414455378d0d51fa83f9a870",
+    "semantic_hash": ""
+  },
+  "src/app/dynamics-365/page.tsx": {
+    "mtime": 1794419813.5487723,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f554dfee89d84e39a3fa465d883b8250",
+    "semantic_hash": ""
+  },
+  "src/app/empleabilidad/page.tsx": {
+    "mtime": 1794419813.5487723,
+    "seen": 1795801817.9125304,
+    "ast_hash": "eed845b8a22be42e104c2f8f9fec53ab",
+    "semantic_hash": ""
+  },
+  "src/app/experiencia-practica/[slug]/page.tsx": {
+    "mtime": 1794419813.557163,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b3be6f539e2b89db4516d1152791e58c",
+    "semantic_hash": ""
+  },
+  "src/app/experiencia-practica/page.tsx": {
+    "mtime": 1794419813.5487723,
+    "seen": 1795801817.9125304,
+    "ast_hash": "51d702f6fd7e4e71b468c00ab7ac261a",
+    "semantic_hash": ""
+  },
+  "src/app/integracion/page.tsx": {
+    "mtime": 1794419813.5487723,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c1597295424566c3a657149c4c48888c",
+    "semantic_hash": ""
+  },
+  "src/app/labs/[slug]/page.tsx": {
+    "mtime": 1795107375.4856987,
+    "seen": 1795801817.9125304,
+    "ast_hash": "875c4b3c0bca8f7c7a35760d8d056795",
+    "semantic_hash": ""
+  },
+  "src/app/labs/page.tsx": {
+    "mtime": 1794419813.5487723,
+    "seen": 1795801817.9125304,
+    "ast_hash": "154dad7c5ea2ff298fe1ce6a5a2f5590",
+    "semantic_hash": ""
+  },
+  "src/app/layout.tsx": {
+    "mtime": 1794425974.0718343,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b2542ef7bd740be65af1a370304254ba",
+    "semantic_hash": ""
+  },
+  "src/app/manifest.ts": {
+    "mtime": 1793541872.9299343,
+    "seen": 1795801817.9125304,
+    "ast_hash": "da32a8cfd25a452414ac1653caffdfa8",
+    "semantic_hash": ""
+  },
+  "src/app/mapa/page.tsx": {
+    "mtime": 1794419892.2786372,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b7c19d281ae51726ce0102b4f0076d89",
+    "semantic_hash": ""
+  },
+  "src/app/mi-ruta/my-route-client.tsx": {
+    "mtime": 1794419909.24358,
+    "seen": 1795801817.9125304,
+    "ast_hash": "bcf7181a27c504ec77581471df6dd4b7",
+    "semantic_hash": ""
+  },
+  "src/app/mi-ruta/page.tsx": {
+    "mtime": 1794419813.5487723,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c0d9317ecbe6f1a02246b99b33fd53b2",
+    "semantic_hash": ""
+  },
+  "src/app/nivel/[level]/modulo/[slug]/page.tsx": {
+    "mtime": 1794426091.535892,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ccbc23eea3d87636700d9cb96766f333",
+    "semantic_hash": ""
+  },
+  "src/app/nivel/[level]/page.tsx": {
+    "mtime": 1794419813.5630138,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ad16464827d7553f334498bd615fc158",
+    "semantic_hash": ""
+  },
+  "src/app/not-found.tsx": {
+    "mtime": 1793541872.9339347,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a392e21eedf46331a2fb6a07fb42c765",
+    "semantic_hash": ""
+  },
+  "src/app/og.png/route.tsx": {
+    "mtime": 1794419104.2932487,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e7fb3c779d704a82ded7c512013fd3b8",
+    "semantic_hash": ""
+  },
+  "src/app/page.tsx": {
+    "mtime": 1795801251.5733337,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d349c09a9bbbaf9559912a0dcdb1c226",
+    "semantic_hash": ""
+  },
+  "src/app/portafolio/page.tsx": {
+    "mtime": 1794419813.5538218,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f62c5843f37ca7a8b76b956234c7609a",
+    "semantic_hash": ""
+  },
+  "src/app/portafolio/portfolio-client.tsx": {
+    "mtime": 1793541872.9359345,
+    "seen": 1795801817.9125304,
+    "ast_hash": "11c0383c6fe8716700826a172df108af",
+    "semantic_hash": ""
+  },
+  "src/app/power-platform/page.tsx": {
+    "mtime": 1794419813.5538218,
+    "seen": 1795801817.9125304,
+    "ast_hash": "772e431de57071af9cf615a52bcd9f87",
+    "semantic_hash": ""
+  },
+  "src/app/practica/[slug]/page.tsx": {
+    "mtime": 1794419813.5630138,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b4b68dfd9d4b066118158e0312bc55e1",
+    "semantic_hash": ""
+  },
+  "src/app/practica/page.tsx": {
+    "mtime": 1794419813.5538218,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1381ac266d6178b57bb6dce50d9bca0b",
+    "semantic_hash": ""
+  },
+  "src/app/preparar-entorno/page.tsx": {
+    "mtime": 1794419813.5538218,
+    "seen": 1795801817.9125304,
+    "ast_hash": "fd4ef0190b8ff484e1b03aa7c8a68155",
+    "semantic_hash": ""
+  },
+  "src/app/preparar-entorno/preparar-entorno-client.tsx": {
+    "mtime": 1793541872.9404514,
+    "seen": 1795801817.9125304,
+    "ast_hash": "deba8f9e4d6d4a05daed432aea789b28",
+    "semantic_hash": ""
+  },
+  "src/app/progreso/page.tsx": {
+    "mtime": 1794419813.557163,
+    "seen": 1795801817.9125304,
+    "ast_hash": "463c70944318d2233d710e85f43dcd19",
+    "semantic_hash": ""
+  },
+  "src/app/progreso/progress-dashboard-client.tsx": {
+    "mtime": 1795801279.5223484,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c1b811aabce966a6b374914ba77632df",
+    "semantic_hash": ""
+  },
+  "src/app/recursos/[slug]/page.tsx": {
+    "mtime": 1794419813.5630138,
+    "seen": 1795801817.9125304,
+    "ast_hash": "020075aad6effea32684bbfb0c480e26",
+    "semantic_hash": ""
+  },
+  "src/app/recursos/page.tsx": {
+    "mtime": 1794425820.3934417,
+    "seen": 1795801817.9125304,
+    "ast_hash": "80fb01f5667fa40a9b98d6fb49f01a36",
+    "semantic_hash": ""
+  },
+  "src/app/repaso/page.tsx": {
+    "mtime": 1794419813.557163,
+    "seen": 1795801817.9125304,
+    "ast_hash": "eb263ff17e95b79e6edce637246a92d6",
+    "semantic_hash": ""
+  },
+  "src/app/robots.ts": {
+    "mtime": 1794419777.6426878,
+    "seen": 1795801817.9125304,
+    "ast_hash": "41da5d85f1afe23e1506c48138de90df",
+    "semantic_hash": ""
+  },
+  "src/app/rpa-sandbox/legacy-app/legacy-client.tsx": {
+    "mtime": 1794421448.5424116,
+    "seen": 1795801817.9125304,
+    "ast_hash": "873eb76ce75133f565f2c7c63f610383",
+    "semantic_hash": ""
+  },
+  "src/app/rpa-sandbox/legacy-app/page.tsx": {
+    "mtime": 1794419813.557163,
+    "seen": 1795801817.9125304,
+    "ast_hash": "7f9f51f18454d1f9e1ca8c37db39e2cc",
+    "semantic_hash": ""
+  },
+  "src/app/rpa-sandbox/portal/page.tsx": {
+    "mtime": 1794419813.557163,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a47c77fc9159b752426df5b32bdbfa0f",
+    "semantic_hash": ""
+  },
+  "src/app/rpa-sandbox/portal/portal-client.tsx": {
+    "mtime": 1793541872.9460204,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b7d5062b709654a76a50f62a9fdfaace",
+    "semantic_hash": ""
+  },
+  "src/app/rutas/[slug]/page.tsx": {
+    "mtime": 1794419813.5630138,
+    "seen": 1795801817.9125304,
+    "ast_hash": "458c837108033aff545c540e2e3f1958",
+    "semantic_hash": ""
+  },
+  "src/app/rutas/page.tsx": {
+    "mtime": 1794419813.557163,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ffeaefde30b15984128de47b17369d17",
+    "semantic_hash": ""
+  },
+  "src/app/search-index.json/route.ts": {
+    "mtime": 1794003267.298793,
+    "seen": 1795801817.9125304,
+    "ast_hash": "bd2bb4e682b5d75ec5c86c392c6e913f",
+    "semantic_hash": ""
+  },
+  "src/app/simulador/page.tsx": {
+    "mtime": 1794419813.557163,
+    "seen": 1795801817.9125304,
+    "ast_hash": "955f8ac96d5d2a42a3e75113f1c7f3f3",
+    "semantic_hash": ""
+  },
+  "src/app/sitemap.ts": {
+    "mtime": 1794419776.9393506,
+    "seen": 1795801817.9125304,
+    "ast_hash": "63b92b0754cdbd34e30d80ce5c3279ee",
+    "semantic_hash": ""
+  },
+  "src/components/checklist/__tests__/checklist-client.test.tsx": {
+    "mtime": 1793541872.9490201,
+    "seen": 1795801817.9125304,
+    "ast_hash": "58f7e1b082018b898dc4bd894c643ba8",
+    "semantic_hash": ""
+  },
+  "src/components/checklist/checklist-client.tsx": {
+    "mtime": 1793541872.9500525,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d1d13a5b6261a30620c1f7952ffc5e09",
+    "semantic_hash": ""
+  },
+  "src/components/guided/guided-dashboard-summary.tsx": {
+    "mtime": 1794419910.1301293,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ee789a48e961df340ced49c32d0432a0",
+    "semantic_hash": ""
+  },
+  "src/components/guided/guided-home-client.tsx": {
+    "mtime": 1794426032.1535356,
+    "seen": 1795801817.9125304,
+    "ast_hash": "81ad2ef104c7844a44624cb1e0370b37",
+    "semantic_hash": ""
+  },
+  "src/components/guided/learning-path-map.tsx": {
+    "mtime": 1795801234.657597,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f1f518867fe994d751d8a27e1b0a572e",
+    "semantic_hash": ""
+  },
+  "src/components/guided/use-next-best-action.tsx": {
+    "mtime": 1794425972.4508736,
+    "seen": 1795801817.9125304,
+    "ast_hash": "53056d20ec8c216958acd7497b892e05",
+    "semantic_hash": ""
+  },
+  "src/components/guided/use-xp.tsx": {
+    "mtime": 1795801186.9022028,
+    "seen": 1795801817.9125304,
+    "ast_hash": "92f1423cd29b982fffe8371cca57c54c",
+    "semantic_hash": ""
+  },
+  "src/components/interactive-practices/interactive-practice-client.tsx": {
+    "mtime": 1793541872.9530208,
+    "seen": 1795801817.9125304,
+    "ast_hash": "4a90b33d22b7175fe01053a1b4a42847",
+    "semantic_hash": ""
+  },
+  "src/components/interactive-practices/interactive-practice-summary.tsx": {
+    "mtime": 1794003267.3017972,
+    "seen": 1795801817.9125304,
+    "ast_hash": "fe8c6e09e3b8f98ebd60b3d0b0e19416",
+    "semantic_hash": ""
+  },
+  "src/components/labs/__tests__/lab-prerequisite-gate.test.tsx": {
+    "mtime": 1793541872.9540203,
+    "seen": 1795801817.9125304,
+    "ast_hash": "aa5daf55f005ddc763a178f4150a6f24",
+    "semantic_hash": ""
+  },
+  "src/components/labs/__tests__/lab-workstation-gate.test.tsx": {
+    "mtime": 1793541872.9540203,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5ae86af912545d04919a57527a575fd6",
+    "semantic_hash": ""
+  },
+  "src/components/labs/lab-card-status.tsx": {
+    "mtime": 1793541872.9557538,
+    "seen": 1795801817.9125304,
+    "ast_hash": "6aa161a92ec56b13407d3237df8f28ab",
+    "semantic_hash": ""
+  },
+  "src/components/labs/lab-complete-button.tsx": {
+    "mtime": 1793541872.9557538,
+    "seen": 1795801817.9125304,
+    "ast_hash": "4aff8388b41bb708b68155259760e1ac",
+    "semantic_hash": ""
+  },
+  "src/components/labs/lab-prerequisite-gate.tsx": {
+    "mtime": 1793541872.9567604,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e5b445218cd280a9afa4c9426ef8babd",
+    "semantic_hash": ""
+  },
+  "src/components/labs/lab-readiness-panel.tsx": {
+    "mtime": 1793541872.9567604,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f2a4d731b2b0941c5e40795846e93ba0",
+    "semantic_hash": ""
+  },
+  "src/components/labs/lab-workstation-gate.tsx": {
+    "mtime": 1793541872.95776,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a2a4fb52afb2124c7e6575cf2e3de2c3",
+    "semantic_hash": ""
+  },
+  "src/components/labs/labs-client.tsx": {
+    "mtime": 1795107375.4908025,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0889e7badb7bb0c068efe1cec5c177b2",
+    "semantic_hash": ""
+  },
+  "src/components/layout/app-shell.tsx": {
+    "mtime": 1794003267.3027964,
+    "seen": 1795801817.9125304,
+    "ast_hash": "02af4f3bcd253e565e34b9f6233f832e",
+    "semantic_hash": ""
+  },
+  "src/components/layout/environment-language-switch.tsx": {
+    "mtime": 1794429901.9988072,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0b600548449e5d5e6c037c7a98193064",
+    "semantic_hash": ""
+  },
+  "src/components/layout/reading-progress.tsx": {
+    "mtime": 1793541872.9587593,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5b238cfe5f57c842a25c871c2d582012",
+    "semantic_hash": ""
+  },
+  "src/components/layout/search-bar.tsx": {
+    "mtime": 1794003267.3037956,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a2b83d293c8d4086ba6e7bf9e7ad6bcd",
+    "semantic_hash": ""
+  },
+  "src/components/layout/service-worker-register.tsx": {
+    "mtime": 1793541872.9602635,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3bc1178abea0c2b49c9021c61cf288c8",
+    "semantic_hash": ""
+  },
+  "src/components/layout/sidebar.tsx": {
+    "mtime": 1795801260.976832,
+    "seen": 1795801817.9125304,
+    "ast_hash": "05124b33e4758f0538b01ba175e128ff",
+    "semantic_hash": ""
+  },
+  "src/components/layout/theme-provider.tsx": {
+    "mtime": 1793541872.9616292,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e0e930c31729a62731116462b8e6b4ad",
+    "semantic_hash": ""
+  },
+  "src/components/layout/theme-toggle.tsx": {
+    "mtime": 1793541872.9616292,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a1c81ebf55336664d9d15c7656ae77b6",
+    "semantic_hash": ""
+  },
+  "src/components/layout/topbar.tsx": {
+    "mtime": 1794425862.4676054,
+    "seen": 1795801817.9125304,
+    "ast_hash": "6a65f8bb914abb93deab5f3143d3d6c5",
+    "semantic_hash": ""
+  },
+  "src/components/modules/__tests__/level-progress-banner.test.tsx": {
+    "mtime": 1793541872.9636364,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0fbf0594da0a0546c808e7073ed90543",
+    "semantic_hash": ""
+  },
+  "src/components/modules/__tests__/module-prerequisite-gate.test.tsx": {
+    "mtime": 1793541872.9636364,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ec7e5631b61e8f9f4cb8f2b508cac914",
+    "semantic_hash": ""
+  },
+  "src/components/modules/certificate-diploma.tsx": {
+    "mtime": 1793541872.964635,
+    "seen": 1795801817.9125304,
+    "ast_hash": "df55172427d911545c26aadf46d7ff6f",
+    "semantic_hash": ""
+  },
+  "src/components/modules/certificate-name-dialog.tsx": {
+    "mtime": 1793541872.965635,
+    "seen": 1795801817.9125304,
+    "ast_hash": "eaf05b13135034c0fbf6d577f758969a",
+    "semantic_hash": ""
+  },
+  "src/components/modules/continue-card.tsx": {
+    "mtime": 1793541872.965635,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0b7b27aa665c6e8ed2ea62b831fcb154",
+    "semantic_hash": ""
+  },
+  "src/components/modules/level-progress-banner.tsx": {
+    "mtime": 1793541872.965635,
+    "seen": 1795801817.9125304,
+    "ast_hash": "2e4d2a451a4b2e491de590599d14f0b5",
+    "semantic_hash": ""
+  },
+  "src/components/modules/markdown-renderer.tsx": {
+    "mtime": 1794425850.0284662,
+    "seen": 1795801817.9125304,
+    "ast_hash": "32d301d9fcd6054fbda09af4f41d0f2e",
+    "semantic_hash": ""
+  },
+  "src/components/modules/mermaid-diagram.tsx": {
+    "mtime": 1793541872.965635,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b9a55d865fea696a6b0d75fa98a7eba3",
+    "semantic_hash": ""
+  },
+  "src/components/modules/module-completion-client.tsx": {
+    "mtime": 1793541872.9683764,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f0ac80659318b4a338d2df415e34467d",
+    "semantic_hash": ""
+  },
+  "src/components/modules/module-notes.tsx": {
+    "mtime": 1793541872.9683764,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0e5b17e4f0a5bc17379af20711b053c2",
+    "semantic_hash": ""
+  },
+  "src/components/modules/module-prerequisite-gate.tsx": {
+    "mtime": 1793541872.9693832,
+    "seen": 1795801817.9125304,
+    "ast_hash": "4a7cd142bff02888dcf1025343994467",
+    "semantic_hash": ""
+  },
+  "src/components/modules/module-visit-tracker.tsx": {
+    "mtime": 1793541872.9693832,
+    "seen": 1795801817.9125304,
+    "ast_hash": "50fe47cf3074cd4b9ad70bbd42c74ae9",
+    "semantic_hash": ""
+  },
+  "src/components/modules/overall-progress-banner.tsx": {
+    "mtime": 1793541872.9693832,
+    "seen": 1795801817.9125304,
+    "ast_hash": "63289bc3964293a81eb8bff9968a6812",
+    "semantic_hash": ""
+  },
+  "src/components/modules/progress-ring-client.tsx": {
+    "mtime": 1793541872.970384,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f7170aa5d24e78cd9150b3bfaf384951",
+    "semantic_hash": ""
+  },
+  "src/components/modules/progress-ring.tsx": {
+    "mtime": 1793541872.970384,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c4321600443a05d70b71bc3681c0c1f5",
+    "semantic_hash": ""
+  },
+  "src/components/modules/ui-label.tsx": {
+    "mtime": 1794425848.302428,
+    "seen": 1795801817.9125304,
+    "ast_hash": "19b1b9ad9c708f01ec09065d25f54a6e",
+    "semantic_hash": ""
+  },
+  "src/components/practices/practice-portability-panel.tsx": {
+    "mtime": 1793541872.9713836,
+    "seen": 1795801817.9125304,
+    "ast_hash": "67cf0c700a507d34c4fae9f9bc8298c1",
+    "semantic_hash": ""
+  },
+  "src/components/practices/practice-progress-summary.tsx": {
+    "mtime": 1793541872.9723837,
+    "seen": 1795801817.9125304,
+    "ast_hash": "4d22369db03868f338af177331b35549",
+    "semantic_hash": ""
+  },
+  "src/components/practices/practice-workspace-client.tsx": {
+    "mtime": 1793541872.9733975,
+    "seen": 1795801817.9125304,
+    "ast_hash": "402c9831cac5cb9b427f0b0b9dd4d043",
+    "semantic_hash": ""
+  },
+  "src/components/practices/practices-client.tsx": {
+    "mtime": 1793541872.973848,
+    "seen": 1795801817.9125304,
+    "ast_hash": "af3a4c14bff8e831b562d37b63ccc4ef",
+    "semantic_hash": ""
+  },
+  "src/components/progress/full-backup-panel.tsx": {
+    "mtime": 1793541872.9748495,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5e52787f69d8c75e94a0465af1961df0",
+    "semantic_hash": ""
+  },
+  "src/components/progress/xp-rank-card.tsx": {
+    "mtime": 1795801278.307261,
+    "seen": 1795801817.9125304,
+    "ast_hash": "cc2f0d12e1f64c0c47f15d15a66e3a0c",
+    "semantic_hash": ""
+  },
+  "src/components/quiz/__tests__/quiz-panel.test.tsx": {
+    "mtime": 1793541872.9758482,
+    "seen": 1795801817.9125304,
+    "ast_hash": "17b7be2bccc35894d6e20d719450c59c",
+    "semantic_hash": ""
+  },
+  "src/components/quiz/quiz-panel.tsx": {
+    "mtime": 1793541872.9758482,
+    "seen": 1795801817.9125304,
+    "ast_hash": "cdcbbfb226b0312bde72ecb45ad95321",
+    "semantic_hash": ""
+  },
+  "src/components/quiz/simulator-client.tsx": {
+    "mtime": 1795107375.5357966,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b9244b33c7d78917990ad642f6af4d6e",
+    "semantic_hash": ""
+  },
+  "src/components/review/retention-portability-panel.tsx": {
+    "mtime": 1793541872.97685,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1d2b3c91b1578dcdd6c76191bbe3ad62",
+    "semantic_hash": ""
+  },
+  "src/components/review/retention-summary.tsx": {
+    "mtime": 1793541872.978091,
+    "seen": 1795801817.9125304,
+    "ast_hash": "610d07ee3eefb7683da3c01aa6af9739",
+    "semantic_hash": ""
+  },
+  "src/components/review/retention-today-card.tsx": {
+    "mtime": 1793541872.978091,
+    "seen": 1795801817.9125304,
+    "ast_hash": "8ec004737d29160d36b7c5cf48284c23",
+    "semantic_hash": ""
+  },
+  "src/components/review/review-session-client.tsx": {
+    "mtime": 1793541872.9796612,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d4f99f328ae99aca9ede5a0bf220fede",
+    "semantic_hash": ""
+  },
+  "src/components/routes/route-readiness-card.tsx": {
+    "mtime": 1793541872.9800613,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b7537c00854c12db1acfe3d986eebc8d",
+    "semantic_hash": ""
+  },
+  "src/components/ui/badge.tsx": {
+    "mtime": 1793541872.9810684,
+    "seen": 1795801817.9125304,
+    "ast_hash": "883f140b8f0aa0b4ff53dc8d8d437803",
+    "semantic_hash": ""
+  },
+  "src/components/ui/button.tsx": {
+    "mtime": 1793541872.9810684,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b2f576183e095e37068dcb2371edf9bf",
+    "semantic_hash": ""
+  },
+  "src/components/ui/callout.tsx": {
+    "mtime": 1793541872.9820683,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b8af79f3513113cc85ff8a8df709eaf0",
+    "semantic_hash": ""
+  },
+  "src/components/ui/card.tsx": {
+    "mtime": 1793541872.9830687,
+    "seen": 1795801817.9125304,
+    "ast_hash": "2293f1cb1ffaf4b343326ce1ef806807",
+    "semantic_hash": ""
+  },
+  "src/components/ui/dialog.tsx": {
+    "mtime": 1793541872.9830687,
+    "seen": 1795801817.9125304,
+    "ast_hash": "34857460214b2ef7aa341ee5879ca14a",
+    "semantic_hash": ""
+  },
+  "src/components/ui/input.tsx": {
+    "mtime": 1793541872.9840767,
+    "seen": 1795801817.9125304,
+    "ast_hash": "38229a3fd18dc56cc979e042685d053a",
+    "semantic_hash": ""
+  },
+  "src/components/ui/progress.tsx": {
+    "mtime": 1793541872.9840767,
+    "seen": 1795801817.9125304,
+    "ast_hash": "00d61611a7d77a4bad4e45df22f2b281",
+    "semantic_hash": ""
+  },
+  "src/components/ui/scroll-area.tsx": {
+    "mtime": 1793541872.9840767,
+    "seen": 1795801817.9125304,
+    "ast_hash": "96bf579ac61ea1d7f7ab13321f1324f7",
+    "semantic_hash": ""
+  },
+  "src/components/ui/separator.tsx": {
+    "mtime": 1793541872.9840767,
+    "seen": 1795801817.9125304,
+    "ast_hash": "9163f15002f88ade1ae32f1b7eba38ec",
+    "semantic_hash": ""
+  },
+  "src/data/practice/accounts.ts": {
+    "mtime": 1793541872.9870367,
+    "seen": 1795801817.9125304,
+    "ast_hash": "cc8079ff715c111f7861c4e638abc9c0",
+    "semantic_hash": ""
+  },
+  "src/data/practice/orders.ts": {
+    "mtime": 1793541872.9870367,
+    "seen": 1795801817.9125304,
+    "ast_hash": "61643d9d5b77bbe2fead158265313023",
+    "semantic_hash": ""
+  },
+  "src/data/practice/products.ts": {
+    "mtime": 1793541872.9870367,
+    "seen": 1795801817.9125304,
+    "ast_hash": "9226fa260b01846f49189a88c14f81e4",
+    "semantic_hash": ""
+  },
+  "src/data/practice/requests.ts": {
+    "mtime": 1793541872.9880373,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b7eef7e33f3d100e4dd0037544ea197f",
+    "semantic_hash": ""
+  },
+  "src/data/questions.ts": {
+    "mtime": 1795646803.3315914,
+    "seen": 1795801817.9125304,
+    "ast_hash": "7785af249bf6bbce2dd0d06449f5f59a",
+    "semantic_hash": ""
+  },
+  "src/data/ui-terms.ts": {
+    "mtime": 1794426065.0389297,
+    "seen": 1795801817.9125304,
+    "ast_hash": "fe6ae17e5ce6ab77c96f38d6c8330d57",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/checklist.test.ts": {
+    "mtime": 1793541872.9928548,
+    "seen": 1795801817.9125304,
+    "ast_hash": "48f7b636ec7d6b6ec023ffeb8a1bef8c",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/content-freshness.test.ts": {
+    "mtime": 1793541872.9928548,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5f3fe63a3cfe353c50db4c7763b6c258",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/content-labs-validation.test.ts": {
+    "mtime": 1793541872.9943633,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e63b366ea6d377be96bfd981a4583b0c",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/content-labs.test.ts": {
+    "mtime": 1793541872.9943633,
+    "seen": 1795801817.9125304,
+    "ast_hash": "8feb1bdf1eda88b890a6f98e3f666f21",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/content-validation.test.ts": {
+    "mtime": 1793541872.9943633,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f7533bb2753c32b50dc5c057c61c163d",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/content.test.ts": {
+    "mtime": 1794426151.2848768,
+    "seen": 1795801817.9125304,
+    "ast_hash": "083418a12539f989c069ca91bdbc3a5e",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/copilotstudio-assets.test.ts": {
+    "mtime": 1795790438.689816,
+    "seen": 1795801817.9125304,
+    "ast_hash": "cc9b24fa676a418ee3320b1145f7fe6d",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/domain-hubs.test.ts": {
+    "mtime": 1793541872.9959097,
+    "seen": 1795801817.9125304,
+    "ast_hash": "024dc48c962575174b21f72b95b91d8c",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/employability.test.ts": {
+    "mtime": 1793541872.9969156,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b4f852c25b1105f7565de26d4dce3455",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/guided-journey.test.ts": {
+    "mtime": 1794419925.154266,
+    "seen": 1795801817.9125304,
+    "ast_hash": "236881f4df3c6d60936cc310a95c711e",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/interactive-practice-filters.test.ts": {
+    "mtime": 1793541872.998215,
+    "seen": 1795801817.9125304,
+    "ast_hash": "82f5c37d836a76e8151d2db44c941f5b",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/interactive-practice-progress.test.ts": {
+    "mtime": 1793541872.999222,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c51decff5fc166cfd11453aa6659cf43",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/interactive-practices-contract.test.ts": {
+    "mtime": 1794003267.3128717,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d3d8490e5f801053cb1409bb66d3c7d4",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/interactive-practices.test.ts": {
+    "mtime": 1793561680.8693118,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3b9740b186a945d759ef1723c09a416d",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/lab-metadata.test.ts": {
+    "mtime": 1795790082.9567857,
+    "seen": 1795801817.9125304,
+    "ast_hash": "7ec572decb8cbc92403400484e06a098",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/labor-profiles.test.ts": {
+    "mtime": 1793541873.001222,
+    "seen": 1795801817.9125304,
+    "ast_hash": "4d40c58aa11dd30ed7730b438a1e6816",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/learning-by-doing-audit.test.ts": {
+    "mtime": 1793541873.001222,
+    "seen": 1795801817.9125304,
+    "ast_hash": "eb6094f64563dc68213f90d8f5267d13",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/learning-structure.test.ts": {
+    "mtime": 1794432150.719285,
+    "seen": 1795801817.9125304,
+    "ast_hash": "358a001a01861a727b9c58254208aa3e",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/pilot-mastery.test.ts": {
+    "mtime": 1793541873.002239,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3cc22e6dd413ca7e327c16695b5586a9",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/powerautomate-assets.test.ts": {
+    "mtime": 1795304553.4498644,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c04dd48ce140157666a0ae0cf885dd4b",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/powerbi-assets.test.ts": {
+    "mtime": 1795114442.386744,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c9a6b8dd3fe76b53d3fc1c85a6a33fb0",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/practice-portability.test.ts": {
+    "mtime": 1793541873.002239,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1f37d76ff7ee78274fd0d673ac90b555",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/practice-progress.test.ts": {
+    "mtime": 1793541873.0036683,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3202902d4149812ffc9c4a258be3a355",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/practices.test.ts": {
+    "mtime": 1793541873.0040593,
+    "seen": 1795801817.9125304,
+    "ast_hash": "6845b186027b0f258dc0be1a15233459",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/professional-routes.test.ts": {
+    "mtime": 1795787064.214219,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3909d271ebf714e1774804acb0df75bf",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/progress-backup.test.ts": {
+    "mtime": 1793541873.0050611,
+    "seen": 1795801817.9125304,
+    "ast_hash": "882b41060f54f118084ac119b2936c3f",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/progress.test.ts": {
+    "mtime": 1793541873.0055652,
+    "seen": 1795801817.9125304,
+    "ast_hash": "17d17c874e7ff54ee829e936fee43acd",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/questions-parser-validation.test.ts": {
+    "mtime": 1793541873.0055652,
+    "seen": 1795801817.9125304,
+    "ast_hash": "50651fda6bd12dae5e5acf5c5f8ddd15",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/questions-parser.test.ts": {
+    "mtime": 1793541873.006572,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ea2f678f11fee6d789d9eceff4efebd9",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/quiz-engine.test.ts": {
+    "mtime": 1795107375.618792,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3ce0498b2e74f107418f510242c7e9f4",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/retention-portability.test.ts": {
+    "mtime": 1793541873.0075715,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c2f8906d8fe0fc95bc69fc2912da2a15",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/review-date.test.ts": {
+    "mtime": 1793541873.0075715,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0caaac99d227b2038a9fcbb87c9e8318",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/review-queue.test.ts": {
+    "mtime": 1793541873.0075715,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5b0d39c2a14d3407e21cff951adc41ab",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/review-scheduler.test.ts": {
+    "mtime": 1793541873.0090792,
+    "seen": 1795801817.9125304,
+    "ast_hash": "eeff3d6eb38c2f048d245b1581c1080e",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/review-store.test.ts": {
+    "mtime": 1793541873.0097861,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1ea683b76671f99bf7828621467dc667",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/route-readiness.test.ts": {
+    "mtime": 1793541873.0103657,
+    "seen": 1795801817.9125304,
+    "ast_hash": "4b82c8ce0206c61cae23df9f7aaa0944",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/rpa-assets.test.ts": {
+    "mtime": 1793541873.011462,
+    "seen": 1795801817.9125304,
+    "ast_hash": "036a6a945cc5cf3ff208ddb9ac7e6402",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/rpa-legacy-modes.test.ts": {
+    "mtime": 1794421463.400038,
+    "seen": 1795801817.9125304,
+    "ast_hash": "6ddffc1bb15ccac69133a7376a632c9e",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/rpa-sandbox-activity.test.ts": {
+    "mtime": 1794421462.7262926,
+    "seen": 1795801817.9125304,
+    "ast_hash": "90875b772e08b77c64bab85dd2ccf99f",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/safe-json.test.ts": {
+    "mtime": 1795625142.9600992,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d7d2b8d75e910a17f55339d3532ca802",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/seo.test.ts": {
+    "mtime": 1794419853.5386536,
+    "seen": 1795801817.9125304,
+    "ast_hash": "12e103bd35238b907fd3bec31db657d2",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/workstation-report.test.ts": {
+    "mtime": 1793541873.0124593,
+    "seen": 1795801817.9125304,
+    "ast_hash": "06b36d2d324acf327ad3deffb07b7a91",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/workstation-store.test.ts": {
+    "mtime": 1793541873.0124593,
+    "seen": 1795801817.9125304,
+    "ast_hash": "15a643181cd2273e633363afe612ce79",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/workstation.test.ts": {
+    "mtime": 1793541873.013458,
+    "seen": 1795801817.9125304,
+    "ast_hash": "19d7b508ec9bf38cd7d769f3e542b7a4",
+    "semantic_hash": ""
+  },
+  "src/lib/__tests__/xp.test.ts": {
+    "mtime": 1795801299.4584284,
+    "seen": 1795801817.9125304,
+    "ast_hash": "67081a4ed9fe87b9345e40bb4e358d1a",
+    "semantic_hash": ""
+  },
+  "src/lib/checklist.ts": {
+    "mtime": 1793541873.014455,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a18923d48e181df67b2ab47cddbc227d",
+    "semantic_hash": ""
+  },
+  "src/lib/content-freshness.ts": {
+    "mtime": 1793541873.014455,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1b29aecb370eb8fcf101fc21bb14f6b5",
+    "semantic_hash": ""
+  },
+  "src/lib/content.ts": {
+    "mtime": 1795107375.44707,
+    "seen": 1795801817.9125304,
+    "ast_hash": "79d84523629539ea5408e4f8ad6658f5",
+    "semantic_hash": ""
+  },
+  "src/lib/domain-hubs.ts": {
+    "mtime": 1794003267.3152351,
+    "seen": 1795801817.9125304,
+    "ast_hash": "7bc3ab4fc9be879ed1dc80448d94b37f",
+    "semantic_hash": ""
+  },
+  "src/lib/employability.ts": {
+    "mtime": 1793541873.0171642,
+    "seen": 1795801817.9125304,
+    "ast_hash": "082f51d84f90cf6cd250dc8046115d96",
+    "semantic_hash": ""
+  },
+  "src/lib/guided-journey.ts": {
+    "mtime": 1794426133.64462,
+    "seen": 1795801817.9125304,
+    "ast_hash": "18ea9be8c357dee3de3ec41842608cfc",
+    "semantic_hash": ""
+  },
+  "src/lib/i18n.ts": {
+    "mtime": 1795107380.6482463,
+    "seen": 1795801817.9125304,
+    "ast_hash": "06de192b0be8fe57fa8a640068af4e00",
+    "semantic_hash": ""
+  },
+  "src/lib/interactive-practice-filters.ts": {
+    "mtime": 1793541873.0196912,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0bbddd4986fa45c5943a43c5b102f997",
+    "semantic_hash": ""
+  },
+  "src/lib/interactive-practice-progress.ts": {
+    "mtime": 1795625148.4614687,
+    "seen": 1795801817.9125304,
+    "ast_hash": "731683f6ea4f408b04ec0a8d9da94943",
+    "semantic_hash": ""
+  },
+  "src/lib/interactive-practices.ts": {
+    "mtime": 1794421825.1000185,
+    "seen": 1795801817.9125304,
+    "ast_hash": "47519e4e130383b7794f810a95951377",
+    "semantic_hash": ""
+  },
+  "src/lib/lab-metadata.ts": {
+    "mtime": 1795045687.8850348,
+    "seen": 1795801817.9125304,
+    "ast_hash": "cf03ab202b02325d80ebbf19e576c7b1",
+    "semantic_hash": ""
+  },
+  "src/lib/labor-profiles.ts": {
+    "mtime": 1793541873.0225506,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b63f84d195948e41ed057c16ad1c9e85",
+    "semantic_hash": ""
+  },
+  "src/lib/learning-by-doing-audit.ts": {
+    "mtime": 1793541873.0225506,
+    "seen": 1795801817.9125304,
+    "ast_hash": "fc5ae9cb3d2f0f0bdfc14794907de12f",
+    "semantic_hash": ""
+  },
+  "src/lib/learning-path.ts": {
+    "mtime": 1794425937.9784465,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a8d892c8668e3d04c8f5f57ae558134e",
+    "semantic_hash": ""
+  },
+  "src/lib/module-sections.ts": {
+    "mtime": 1794432149.9480057,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f39229fe9f07d436771d5dd7b25ce78a",
+    "semantic_hash": ""
+  },
+  "src/lib/onboarding-store.ts": {
+    "mtime": 1793541873.0235622,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1caa598ffe15a488505dd05d4a8bceee",
+    "semantic_hash": ""
+  },
+  "src/lib/pilot-mastery.ts": {
+    "mtime": 1793541873.0235622,
+    "seen": 1795801817.9125304,
+    "ast_hash": "46c9196fa9041b5190ba7082e6e5c1db",
+    "semantic_hash": ""
+  },
+  "src/lib/practice-meta.ts": {
+    "mtime": 1793541873.0245607,
+    "seen": 1795801817.9125304,
+    "ast_hash": "2673a1cc651226c9962b148a7853f894",
+    "semantic_hash": ""
+  },
+  "src/lib/practice-portability.ts": {
+    "mtime": 1795625148.4614687,
+    "seen": 1795801817.9125304,
+    "ast_hash": "41a1d61996e660079d3e7339c1393c93",
+    "semantic_hash": ""
+  },
+  "src/lib/practice-progress.ts": {
+    "mtime": 1793541873.0265617,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ca90dec3bb06030f84df595f767cdf07",
+    "semantic_hash": ""
+  },
+  "src/lib/practices.ts": {
+    "mtime": 1793541873.0265617,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a304ed485200d2904048de9d670703b0",
+    "semantic_hash": ""
+  },
+  "src/lib/professional-routes.ts": {
+    "mtime": 1795790082.9567857,
+    "seen": 1795801817.9125304,
+    "ast_hash": "fdd9712745304595738071681df255dd",
+    "semantic_hash": ""
+  },
+  "src/lib/progress-backup.ts": {
+    "mtime": 1795625148.4567714,
+    "seen": 1795801817.9125304,
+    "ast_hash": "57058b4a63b8214bee936acdaad30981",
+    "semantic_hash": ""
+  },
+  "src/lib/progress.ts": {
+    "mtime": 1793541873.0293996,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0d520105e607a69ca467b2cf7f06a62d",
+    "semantic_hash": ""
+  },
+  "src/lib/questions-parser.ts": {
+    "mtime": 1793541873.0301793,
+    "seen": 1795801817.9125304,
+    "ast_hash": "9d095bfce26fab12eafb8f6430cb138a",
+    "semantic_hash": ""
+  },
+  "src/lib/quiz-engine.ts": {
+    "mtime": 1793541873.0301793,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5f87515afdea614191421e55610444ef",
+    "semantic_hash": ""
+  },
+  "src/lib/resource-catalog.ts": {
+    "mtime": 1794425808.65006,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d5c3ed2e7475034f0267847064f2ec8a",
+    "semantic_hash": ""
+  },
+  "src/lib/retention-portability.ts": {
+    "mtime": 1795625148.4567714,
+    "seen": 1795801817.9125304,
+    "ast_hash": "6e627b57118343c6943be7f279b9f13b",
+    "semantic_hash": ""
+  },
+  "src/lib/review-date.ts": {
+    "mtime": 1793541873.0320275,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d1acf5a622337c2096ae6dcf564cc27c",
+    "semantic_hash": ""
+  },
+  "src/lib/review-queue.ts": {
+    "mtime": 1793541873.0320275,
+    "seen": 1795801817.9125304,
+    "ast_hash": "248e770ada2151bb45f3d47ed5b379ca",
+    "semantic_hash": ""
+  },
+  "src/lib/review-scheduler.ts": {
+    "mtime": 1793541873.0330355,
+    "seen": 1795801817.9125304,
+    "ast_hash": "db08e721a6831877eb04ae56c5063c19",
+    "semantic_hash": ""
+  },
+  "src/lib/review-store.ts": {
+    "mtime": 1793541873.0330355,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3817bd8e5f8b0f017dcba36988d30633",
+    "semantic_hash": ""
+  },
+  "src/lib/route-readiness-types.ts": {
+    "mtime": 1793541873.0340433,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3b84551f54722d0c88a016d9454ad317",
+    "semantic_hash": ""
+  },
+  "src/lib/route-readiness.ts": {
+    "mtime": 1793541873.0340433,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5463ad415597ea2a243844af9f4cf4e2",
+    "semantic_hash": ""
+  },
+  "src/lib/rpa-legacy-modes.ts": {
+    "mtime": 1794421399.9081662,
+    "seen": 1795801817.9125304,
+    "ast_hash": "61037baf27bb7c8e045f5dd0cfabbbd4",
+    "semantic_hash": ""
+  },
+  "src/lib/rpa-sandbox-activity.ts": {
+    "mtime": 1794421392.0615616,
+    "seen": 1795801817.9125304,
+    "ast_hash": "62ce8f8c1ee26c2daf51caf55fb77fd8",
+    "semantic_hash": ""
+  },
+  "src/lib/safe-json.ts": {
+    "mtime": 1795625142.9286404,
+    "seen": 1795801817.9125304,
+    "ast_hash": "39478ff4382ff08439f2ee260219f1b6",
+    "semantic_hash": ""
+  },
+  "src/lib/seo.ts": {
+    "mtime": 1795107375.586352,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3c66da32d39f4662267103abd9df555b",
+    "semantic_hash": ""
+  },
+  "src/lib/simulator-config.ts": {
+    "mtime": 1794003267.326121,
+    "seen": 1795801817.9125304,
+    "ast_hash": "fe363ed2ed1fd48b005cafdc9cde1cda",
+    "semantic_hash": ""
+  },
+  "src/lib/sitemap-entries.ts": {
+    "mtime": 1794425822.4021606,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b8369f0cac064b79d631dd8d4472268e",
+    "semantic_hash": ""
+  },
+  "src/lib/ui-language.ts": {
+    "mtime": 1794425847.366923,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ddc5e70ca4d955a8ca313700a46de71a",
+    "semantic_hash": ""
+  },
+  "src/lib/utils.ts": {
+    "mtime": 1793541873.0350718,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b36b4471fa392f7fd52db5d67e6d22e8",
+    "semantic_hash": ""
+  },
+  "src/lib/workstation-report.ts": {
+    "mtime": 1795625148.4567714,
+    "seen": 1795801817.9125304,
+    "ast_hash": "35186afb310391bdef9f3489bd6e7b0f",
+    "semantic_hash": ""
+  },
+  "src/lib/workstation-store.ts": {
+    "mtime": 1793541873.0366788,
+    "seen": 1795801817.9125304,
+    "ast_hash": "16b503ec426a25d336076b7906058cde",
+    "semantic_hash": ""
+  },
+  "src/lib/workstation.ts": {
+    "mtime": 1794421774.878389,
+    "seen": 1795801817.9125304,
+    "ast_hash": "9121a2527274fbc73d0ad8fb309b8162",
+    "semantic_hash": ""
+  },
+  "src/lib/xp.ts": {
+    "mtime": 1795801179.967222,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5c86d0ea413f5bf46cef709c034a192b",
+    "semantic_hash": ""
+  },
+  "src/test/setup.ts": {
+    "mtime": 1793541873.0376785,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c423067709b0f04af885a0332dacd6b7",
+    "semantic_hash": ""
+  },
+  "tailwind.config.ts": {
+    "mtime": 1793541873.0383997,
+    "seen": 1795801817.9125304,
+    "ast_hash": "9cfe77cfaf82711d91d0c6b75734145d",
+    "semantic_hash": ""
+  },
+  "tsconfig.json": {
+    "mtime": 1793541873.0383997,
+    "seen": 1795801817.9125304,
+    "ast_hash": "29bdfa360ca7719cc2fa3dba7444cb92",
+    "semantic_hash": ""
+  },
+  "vercel.json": {
+    "mtime": 1795627290.4042065,
+    "seen": 1795801817.9125304,
+    "ast_hash": "182b05fad6ceafa3e7beae4bcb404df5",
+    "semantic_hash": ""
+  },
+  "vitest.config.ts": {
+    "mtime": 1793541873.0383997,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a5cd0045cb6dfb80eb6dd12c4cc6a6bc",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-02-dataverse-modelo-datos.md": {
+    "mtime": 1795107345.5207176,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b7d3d0f9b280aa193cf57f57c6c0f479",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-03-canvas-primera-app.md": {
+    "mtime": 1795107345.5303807,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b8720183c4f220d30326a2076fd9e5f9",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-04-model-driven-app.md": {
+    "mtime": 1795107345.5490324,
+    "seen": 1795801817.9125304,
+    "ast_hash": "12e4182e848885eb3ae67cd81d2f7eaf",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-05-automate-aprobacion.md": {
+    "mtime": 1795107345.5777502,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e322db5e7686032ec0664705bd72842b",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-06-power-bi-reporte-solicitudes.md": {
+    "mtime": 1795107345.5998511,
+    "seen": 1795801817.9125304,
+    "ast_hash": "33065365164980f82c3e650b735beac9",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-09-dataverse-avanzado.md": {
+    "mtime": 1795107345.61253,
+    "seen": 1795801817.9125304,
+    "ast_hash": "03b2903d31b846a68ff913bd66773966",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-100-fo-reporting-hands-on.md": {
+    "mtime": 1795108510.5953958,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ec024c139ead0f95e94f3494708f78a8",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-101-jr-013-crm-functional-analyst-caso-integrado.md": {
+    "mtime": 1795108510.6675968,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0eed0f72d763e377f370bb5b751e6e3e",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-102-jr-014-sales-lead-to-cash-job-test.md": {
+    "mtime": 1795108510.6725447,
+    "seen": 1795801817.9125304,
+    "ast_hash": "9899d827275f16139ef41be86db7dac7",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-103-jr-015-functional-post-go-live-incident-simulation.md": {
+    "mtime": 1795108510.6757877,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f656b065fb051b2939fdef0ef7c2664e",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-104-rpa-primer-desktop-flow-mantenible.md": {
+    "mtime": 1795108510.6796591,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1bb70a64c26dce81782b023f4c54b34c",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-105-rpa-excel-consolidacion-ventas.md": {
+    "mtime": 1795108510.681548,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a746e3f8242591fa53ea2f5d7717636f",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-106-rpa-automatizacion-web-portal.md": {
+    "mtime": 1795108510.6859405,
+    "seen": 1795801817.9125304,
+    "ast_hash": "7a8d153b8699247458da20ac3eec6acd",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-107-rpa-aplicacion-legacy-controlada.md": {
+    "mtime": 1795108510.6891737,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a2f0ca0e71a107e356bf3b93fb32c99f",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-108-rpa-selectores-resiliencia.md": {
+    "mtime": 1795108510.6920085,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1efb2c38ede03e3dad90f7d7535aee9a",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-109-rpa-errores-idempotencia.md": {
+    "mtime": 1795108510.6952114,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5a64b21421c76306aa3a3c587531e312",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-110-rpa-cloud-desktop-end-to-end.md": {
+    "mtime": 1795108510.7011392,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c72badf39ad96b399d3d7379d8c254c3",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-111-rpa-despliegue-operacion-unattended.md": {
+    "mtime": 1795108510.7051673,
+    "seen": 1795801817.9125304,
+    "ast_hash": "9b8ec7947a3a759f3770e3975216bc45",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-112-rpa-capstone-proceso-administrativo.md": {
+    "mtime": 1795108510.736426,
+    "seen": 1795801817.9125304,
+    "ast_hash": "4d294fe830c64d8c613dd8636fcb696f",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-113-field-service-capstone-operacion-de-campo.md": {
+    "mtime": 1795108510.7405207,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e9bd401c9e224c542755e966ff741d1c",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-114-monitoreo-application-insights-diagnostico.md": {
+    "mtime": 1795108510.7432477,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0154896d05206009a0092080b4aeb538",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-115-disaster-recovery-backup-restore-rto-rpo.md": {
+    "mtime": 1795107347.3535204,
+    "seen": 1795801817.9125304,
+    "ast_hash": "74592616f0d5a1cb96e90e34680539bd",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-116-power-bi-en-un-dia.md": {
+    "mtime": 1795114893.3297648,
+    "seen": 1795801817.9125304,
+    "ast_hash": "876dab7a5d0db25adaa6a272e38c562a",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-117-power-bi-obtener-y-perfilar-datos.md": {
+    "mtime": 1795114883.1689663,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e0db9801a4d0c2bf6e3495ebf6d80e68",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-118-power-bi-transformar-y-cargar.md": {
+    "mtime": 1795114883.1689663,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3a908c00201fd764ed9e18cfa7bbf6d4",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-119-power-bi-modelo-semantico-estrella.md": {
+    "mtime": 1795108411.403281,
+    "seen": 1795801817.9125304,
+    "ast_hash": "59c91399243fac2d75f3d1230c7bcaaa",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-120-power-bi-dax-esencial.md": {
+    "mtime": 1795114893.3297648,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5a6be63fd65ed56da97b0e3568df7220",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-121-power-bi-contexto-filtro-inteligencia-tiempo.md": {
+    "mtime": 1795114883.1724918,
+    "seen": 1795801817.9125304,
+    "ast_hash": "44498d2951d57646e4d69a4dca098b87",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-122-power-bi-rendimiento-performance-analyzer-dax-query-view.md": {
+    "mtime": 1795114883.1724918,
+    "seen": 1795801817.9125304,
+    "ast_hash": "55821ebd408ab7dd4bef67111545c694",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-123-power-bi-diseno-de-reportes.md": {
+    "mtime": 1795114883.1724918,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5170129e49d09e32ff7fccb9d50d58c5",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-124-power-bi-storytelling-navegacion.md": {
+    "mtime": 1795114893.3297648,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c6db934397c904776fef7350c79d9f14",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-125-power-bi-analisis-patrones-ia.md": {
+    "mtime": 1795114883.1724918,
+    "seen": 1795801817.9125304,
+    "ast_hash": "776c1f594540d88f78daae92f07e5d78",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-126-power-bi-servicio-y-seguridad.md": {
+    "mtime": 1795114856.5857434,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e6313875e4d20000c5cee04fe75a849e",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-127-power-bi-reto-pro-sin-pasos.md": {
+    "mtime": 1795114737.2752285,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d1dee5c073118618ea9d526b3403d4b5",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-128-power-automate-en-un-dia.md": {
+    "mtime": 1795304883.8518867,
+    "seen": 1795801817.9125304,
+    "ast_hash": "06ef4ee354fc0b3ffa83b4f195bfb7dd",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-129-power-automate-desencadenadores.md": {
+    "mtime": 1795299425.6634994,
+    "seen": 1795801817.9125304,
+    "ast_hash": "118741a156132d163899a273b4b5faf6",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-130-power-automate-expresiones-y-datos.md": {
+    "mtime": 1795638252.9454274,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a0b0fe3fb77e835f4ad827fd668005e6",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-131-power-automate-aprobaciones.md": {
+    "mtime": 1795639752.3578503,
+    "seen": 1795801817.9125304,
+    "ast_hash": "89c9015fc0cd7a835007b4a0366a4e6b",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-132-power-automate-dataverse-a-fondo.md": {
+    "mtime": 1795636655.988968,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a8977442429e49d1a19c02e6190b0169",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-133-power-automate-errores-reintentos-idempotencia.md": {
+    "mtime": 1795639798.938286,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d36a21e33bc160ec4604c51abe91f337",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-134-power-automate-integracion-con-apis.md": {
+    "mtime": 1795639798.9427483,
+    "seen": 1795801817.9125304,
+    "ast_hash": "987692aa5d2d3b723b830f45bba0c00d",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-135-power-automate-documentos-y-conciliacion.md": {
+    "mtime": 1795639798.9473104,
+    "seen": 1795801817.9125304,
+    "ast_hash": "289104792cb64c907be9bae020a8412c",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-136-power-automate-soluciones-y-alm.md": {
+    "mtime": 1795639798.9513102,
+    "seen": 1795801817.9125304,
+    "ast_hash": "7981c1d0302368b6521d74097c1c94d1",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-137-power-automate-operacion-y-gobierno.md": {
+    "mtime": 1795639798.9548323,
+    "seen": 1795801817.9125304,
+    "ast_hash": "893e9bb61b4545359498e44f734612b3",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-138-power-automate-rendimiento.md": {
+    "mtime": 1795639798.9588382,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5fea96f06ada1a1f296a4e0c8ae88956",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-139-power-automate-reto-pro-sin-pasos.md": {
+    "mtime": 1795639790.7523892,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a6dbc193eee3992ac68366a393f6c137",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-140-dataverse-web-api-cliente-propio.md": {
+    "mtime": 1795306008.6778257,
+    "seen": 1795801817.9125304,
+    "ast_hash": "8954731cfedb4b76667e8e7b125b9a2a",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-141-cliente-ia-mcp-dataverse.md": {
+    "mtime": 1795647940.9249244,
+    "seen": 1795801817.9125304,
+    "ast_hash": "935a6bb2ff29ced3d7205f87c1143e94",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-142-copilot-studio-con-mcp.md": {
+    "mtime": 1795647940.9269276,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c8cfed5e3d59e5201ff099046914972e",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-143-servidor-mcp-propio.md": {
+    "mtime": 1795647940.9289265,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5a8e5ecb5325d6d364275df64f6f0248",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-144-copilot-studio-en-un-dia.md": {
+    "mtime": 1795790082.9567857,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d212e6f46810f348b5785155fd23fdce",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-145-copilot-studio-topics-a-fondo.md": {
+    "mtime": 1795790438.689816,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ec9a3ec8c273d3142a186aa8af133b98",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-146-copilot-studio-conocimiento.md": {
+    "mtime": 1795790366.481793,
+    "seen": 1795801817.9125304,
+    "ast_hash": "244a6f092a3608752b09cd3568435f80",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-147-copilot-studio-orquestacion-y-harness.md": {
+    "mtime": 1795790502.5394309,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ac9f3c9da6ad83f86dd3f3196ac10518",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-19-cicd-azure-devops.md": {
+    "mtime": 1795107347.6271768,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d98785ba6f7ad76fe69ac7dc93b3b8f7",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-22-copilot-studio.md": {
+    "mtime": 1795789091.716259,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ab6b2b6db52cd0360eeb7b39dc9023af",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-23-plugin-csharp.md": {
+    "mtime": 1795107348.433879,
+    "seen": 1795801817.9125304,
+    "ast_hash": "bed63450bcc52d3cb079270f8c2d2b5a",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-32-coe-starter-kit.md": {
+    "mtime": 1795107348.5562587,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ff441aa3c5913ea5612d425895d82926",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-45-copilot-implementacion-guiada.md": {
+    "mtime": 1795107348.6396937,
+    "seen": 1795801817.9125304,
+    "ast_hash": "94c18acb3193bcf64476bafcd05193ff",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-51-flujo-completo-humano-ia-ci.md": {
+    "mtime": 1795107348.6668334,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c25adf8dada991c5b7286e7e35acfaf2",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-52-cli-conexion-tenant.md": {
+    "mtime": 1795107348.6869617,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ff5d45ec7d5fa2d2c47e8cd70af7dc39",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-53-exportar-revisar-solucion-con-ia.md": {
+    "mtime": 1795107348.7340052,
+    "seen": 1795801817.9125304,
+    "ast_hash": "af44712add49d33633dc3c5f50371094",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-54-conectar-app-externa-dataverse.md": {
+    "mtime": 1795107348.7564366,
+    "seen": 1795801817.9125304,
+    "ast_hash": "edffec64b9f150daf874ad427bfa7bb6",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-55-uat-gonolive-y-auditoria-prompts.md": {
+    "mtime": 1795107348.7776537,
+    "seen": 1795801817.9125304,
+    "ast_hash": "4e0f85a34c6aca2c2e49ea90600cb3e6",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-56-cambiar-entornos-dev-test-prod.md": {
+    "mtime": 1795107348.7899342,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ce584a5e4428f8dbc1c851ce64e66d24",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-57-diseno-solucion-d365-sales-con-ia.md": {
+    "mtime": 1795108510.7462678,
+    "seen": 1795801817.9125304,
+    "ast_hash": "23b2f0ee52a454ede679079f7a75166d",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-58-customer-insights-segmento-journey.md": {
+    "mtime": 1795107348.8219602,
+    "seen": 1795801817.9125304,
+    "ast_hash": "4a3f0c5f97441362453c902052ca28f7",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-59-field-service-work-order-uat.md": {
+    "mtime": 1795107348.8420155,
+    "seen": 1795801817.9125304,
+    "ast_hash": "6269748d926ad9338a9767cef4b0e304",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-60-proyecto-integrador-servicio-postventa.md": {
+    "mtime": 1795107348.883375,
+    "seen": 1795801817.9125304,
+    "ast_hash": "7b6eda3efdf8495fc3d97c4b0cc3139b",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-61-capstone-maker-sistema-solicitudes.md": {
+    "mtime": 1795107348.894053,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e87f302795d848e467071015dbe1ac6c",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-62-capstone-consultor-funcional-proyecto-completo.md": {
+    "mtime": 1795108510.777546,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d7faf63b1026e5d63c12aa6b18fb1690",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-63-capstone-developer-solucion-tecnica-avanzada.md": {
+    "mtime": 1795107348.9173975,
+    "seen": 1795801817.9125304,
+    "ast_hash": "19659f255bf5e981caaaab7cb1c423bf",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-64-capstone-fo-awareness-arquitectura-erp-crm.md": {
+    "mtime": 1795108510.7805796,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1b269816ee6de1996b719e65a3120a1f",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-65-capstone-ai-copilot-agente-gobernado.md": {
+    "mtime": 1795107348.9481504,
+    "seen": 1795801817.9125304,
+    "ast_hash": "71aeecb60563153b61e47f9c79a16803",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-66-sales-lead-to-cash.md": {
+    "mtime": 1795108510.7856007,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5ac8e9b2986b151d844129cfc1367173",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-67-customer-360-insights-data.md": {
+    "mtime": 1795108510.7871442,
+    "seen": 1795801817.9125304,
+    "ast_hash": "8a71b99e7ee3fd1b5fb34038fe9d0724",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-68-customer-service-case-to-resolution.md": {
+    "mtime": 1795107349.11709,
+    "seen": 1795801817.9125304,
+    "ast_hash": "865f6e3848751a78704af9b369f15f0d",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-69-fo-process-mapping-erp-end-to-end.md": {
+    "mtime": 1795108510.7891498,
+    "seen": 1795801817.9125304,
+    "ast_hash": "044ca78dbf4ea9ed94d5855e3034f785",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-70-ce-fo-integration-architecture.md": {
+    "mtime": 1795108510.7951734,
+    "seen": 1795801817.9125304,
+    "ast_hash": "449609d7c193ad97545e4ede76a0bfee",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-71-jr-001-model-driven-app-job-test.md": {
+    "mtime": 1795107349.1734614,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c355229d5d60064a67d54da64f79b9ff",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-72-jr-002-crm-javascript-customization.md": {
+    "mtime": 1795107349.2275321,
+    "seen": 1795801817.9125304,
+    "ast_hash": "71f2d8506d1d6eaa6b8f6d35edb29363",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-73-jr-003-dataverse-plugin-csharp.md": {
+    "mtime": 1795107349.2602994,
+    "seen": 1795801817.9125304,
+    "ast_hash": "bbfaf4bba7fc1fd956a99414bc162ce9",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-74-jr-004-crm-integration-challenge.md": {
+    "mtime": 1795107349.2723966,
+    "seen": 1795801817.9125304,
+    "ast_hash": "bbc275f45d2c97243db90ba0b0b2059f",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-75-jr-005-data-migration-dynamics.md": {
+    "mtime": 1795107349.2813864,
+    "seen": 1795801817.9125304,
+    "ast_hash": "95842c756308062c1f6058aaaa82a95f",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-76-jr-006-ppac-governance-assessment.md": {
+    "mtime": 1795108510.804714,
+    "seen": 1795801817.9125304,
+    "ast_hash": "6a02997849e4211b3ec7a1f76ef51ac3",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-77-jr-007-customer-service-specialist-simulation.md": {
+    "mtime": 1795108510.8205478,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c08bb6784ce4e3453bc1f4f92ab41eb3",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-78-jr-008-crm-legacy-health-assessment.md": {
+    "mtime": 1795108510.8225548,
+    "seen": 1795801817.9125304,
+    "ast_hash": "bc976b37b6e31cd587629bf3612dbcb9",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-79-jr-009-technical-interview-simulation.md": {
+    "mtime": 1795107349.3225088,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e982f156e01ddff873ebcf969ebf1164",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-80-jr-010-ai-assisted-crm-development.md": {
+    "mtime": 1795107349.3331723,
+    "seen": 1795801817.9125304,
+    "ast_hash": "63e518cb6f587303bd301fe94630d716",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-81-d365-sales-forecasting-pipeline-review.md": {
+    "mtime": 1795108510.8265712,
+    "seen": 1795801817.9125304,
+    "ast_hash": "26879d240ab2f23b64c21ff29fe95378",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-82-customer-service-sla-entitlements-routing.md": {
+    "mtime": 1795108510.8363426,
+    "seen": 1795801817.9125304,
+    "ast_hash": "57263f24e5fc481d395886dd91d83ab7",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-83-contact-center-simulation.md": {
+    "mtime": 1795107349.380633,
+    "seen": 1795801817.9125304,
+    "ast_hash": "96e7384e339a29e94ddda03a470b14b1",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-84-customer-insights-real-time-journey.md": {
+    "mtime": 1795107349.3957715,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5faadedd25f75d0f81b2519669d5db52",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-85-customer-insights-data-unification.md": {
+    "mtime": 1795107349.4112196,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c4f227cac5abd7f98aa87aea5a8e0e38",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-86-field-service-agreement-preventive-maintenance.md": {
+    "mtime": 1795107349.4386313,
+    "seen": 1795801817.9125304,
+    "ast_hash": "df92859f110faa79931b72d3e175d81a",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-87-field-service-mobile-offline-work-order.md": {
+    "mtime": 1795108510.8403597,
+    "seen": 1795801817.9125304,
+    "ast_hash": "9a11246eca2bac78098711405b835817",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-88-ce-fo-dual-write-ownership-matrix.md": {
+    "mtime": 1795108510.8476467,
+    "seen": 1795801817.9125304,
+    "ast_hash": "117848f3d2d60ae588abd05037063e43",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-89-fo-process-mapping-advanced.md": {
+    "mtime": 1795108510.8602254,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a5049ba9f11e0777a63889a3f4563d63",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-90-capstone-enterprise-d365.md": {
+    "mtime": 1795108510.8622358,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a6c8b8aa1ac515a15854ebf0461d2ec2",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-91-jr-011-custom-api-workflow-extensibility.md": {
+    "mtime": 1795107349.6026225,
+    "seen": 1795801817.9125304,
+    "ast_hash": "51e86fb2ea964aa125d07ba742306bf5",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-92-jr-012-production-incident-simulation.md": {
+    "mtime": 1795107349.6236608,
+    "seen": 1795801817.9125304,
+    "ast_hash": "fca23740fb71c25b407d6ef09e11b3cf",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-93-fo-finance-setup-walkthrough.md": {
+    "mtime": 1795108510.868806,
+    "seen": 1795801817.9125304,
+    "ast_hash": "58c00fa9d235a07fa63bd595248d53b1",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-94-fo-procure-to-pay-hands-on.md": {
+    "mtime": 1795108510.8823833,
+    "seen": 1795801817.9125304,
+    "ast_hash": "9c9b7deaf68f2cdd9a9462374bcfe738",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-95-fo-order-to-cash-hands-on.md": {
+    "mtime": 1795108510.886401,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c6cc0685bd74cef3184f6719fae28e3b",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-96-fo-inventory-products-setup.md": {
+    "mtime": 1795108510.9799838,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f78eb9a2ad0fd9df979cb92c108a5cac",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-97-fo-project-operations-setup.md": {
+    "mtime": 1795108510.981995,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c4570cd540469c8d7704788c0cd50d3f",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-98-fo-commerce-overview-hands-on.md": {
+    "mtime": 1795108510.9885664,
+    "seen": 1795801817.9125304,
+    "ast_hash": "43fe41f48420ef8cfcc634190051fdc1",
+    "semantic_hash": ""
+  },
+  "content/labs/lab-99-fo-security-duty-privilege-hands-on.md": {
+    "mtime": 1795108510.9905791,
+    "seen": 1795801817.9125304,
+    "ast_hash": "aefcdc60c3bc385ccaf82c8978f6919b",
+    "semantic_hash": ""
+  },
+  "content/modules/arquitecto/31-enterprise-architecture-y-gobernanza.md": {
+    "mtime": 1794422075.939337,
+    "seen": 1795801817.9125304,
+    "ast_hash": "38e0503c3935368a60d7ac8de953e15e",
+    "semantic_hash": ""
+  },
+  "content/modules/arquitecto/32-coe-starter-kit-y-administracion-a-escala.md": {
+    "mtime": 1794003267.20644,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3d501dd1120242cb2876ea5cb2674c8a",
+    "semantic_hash": ""
+  },
+  "content/modules/arquitecto/33-multi-tenant-multi-geo-y-estrategia-de-ambientes.md": {
+    "mtime": 1794422370.8552582,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b4fed91baaaefe99fd2d81b1161d6b35",
+    "semantic_hash": ""
+  },
+  "content/modules/arquitecto/34-azure-integration-services-avanzado.md": {
+    "mtime": 1794432238.492973,
+    "seen": 1795801817.9125304,
+    "ast_hash": "49c98afce5b960b31dce4cb4d7b40b8e",
+    "semantic_hash": ""
+  },
+  "content/modules/arquitecto/35-arquitectura-de-datos-fabric-synapse-y-medallion.md": {
+    "mtime": 1794420002.337437,
+    "seen": 1795801817.9125304,
+    "ast_hash": "7e15d5c4b063f63cc71f84d335051433",
+    "semantic_hash": ""
+  },
+  "content/modules/arquitecto/36-seguridad-y-cumplimiento-enterprise.md": {
+    "mtime": 1794419925.650113,
+    "seen": 1795801817.9125304,
+    "ast_hash": "90a90916f9462c06d51aed7ae3575d79",
+    "semantic_hash": ""
+  },
+  "content/modules/arquitecto/37-ai-builder-y-azure-ai-integrado.md": {
+    "mtime": 1795042456.9785051,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b1b8b3ed2b825def75d63245fbb55f65",
+    "semantic_hash": ""
+  },
+  "content/modules/arquitecto/38-liderazgo-tecnico-y-gestion-de-proyectos.md": {
+    "mtime": 1795042456.9785051,
+    "seen": 1795801817.9125304,
+    "ast_hash": "9ab8402a002dcaf36bc35d3e9a6e4a93",
+    "semantic_hash": ""
+  },
+  "content/modules/arquitecto/39-casos-de-transformacion-digital.md": {
+    "mtime": 1794422075.9435582,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c6e8e1ba39889ac607bdabe7f8399517",
+    "semantic_hash": ""
+  },
+  "content/modules/arquitecto/40-arquitectura-power-platform-casos-estudio.md": {
+    "mtime": 1794003267.2135172,
+    "seen": 1795801817.9125304,
+    "ast_hash": "27a2a6cc0acfce4be25880a4d766bc7a",
+    "semantic_hash": ""
+  },
+  "content/modules/arquitecto/41-proyecto-capstone-arquitectura-enterprise.md": {
+    "mtime": 1795107345.2255177,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d7d031e3e37a7af154a18745e13270a7",
+    "semantic_hash": ""
+  },
+  "content/modules/avanzado/18-arquitectura-de-soluciones-power-platform.md": {
+    "mtime": 1795107344.9704225,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e253cb1338c2d2e515f2f28536bf1e58",
+    "semantic_hash": ""
+  },
+  "content/modules/avanzado/19-alm-y-ci-cd-con-azure-devops.md": {
+    "mtime": 1795107343.8187015,
+    "seen": 1795801817.9125304,
+    "ast_hash": "22cb8bf34c108df383c4c2dfb37c8b6e",
+    "semantic_hash": ""
+  },
+  "content/modules/avanzado/20-dynamics-365-ce-sales-y-customer-service.md": {
+    "mtime": 1795107343.8557727,
+    "seen": 1795801817.9125304,
+    "ast_hash": "194083034a38992bb4156a34e00971ae",
+    "semantic_hash": ""
+  },
+  "content/modules/avanzado/21-power-pages-portales-externos.md": {
+    "mtime": 1795107343.8929462,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c9e5896f8e08c3e6cf112f03b2eb24cd",
+    "semantic_hash": ""
+  },
+  "content/modules/avanzado/22-copilot-studio-avanzado.md": {
+    "mtime": 1795107343.9244974,
+    "seen": 1795801817.9125304,
+    "ast_hash": "4cd6bb27f5e199ad33b780061eea7ff6",
+    "semantic_hash": ""
+  },
+  "content/modules/avanzado/23-c-plugins-para-dataverse.md": {
+    "mtime": 1795107343.9436767,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d8f9c1ad8a328b19de864ef2a18c71f1",
+    "semantic_hash": ""
+  },
+  "content/modules/avanzado/24-integraciones-con-azure-services.md": {
+    "mtime": 1795107344.0351567,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5874d21f75ee5114c447a02a49ff3da1",
+    "semantic_hash": ""
+  },
+  "content/modules/avanzado/25-patrones-de-diseno-avanzados.md": {
+    "mtime": 1795107344.082575,
+    "seen": 1795801817.9125304,
+    "ast_hash": "fbb361aa7897a37556b50c3f8f3962d3",
+    "semantic_hash": ""
+  },
+  "content/modules/avanzado/26-performance-y-optimizacion.md": {
+    "mtime": 1795107344.0966961,
+    "seen": 1795801817.9125304,
+    "ast_hash": "52afd1f343f8901b17e50e0e9afba7d6",
+    "semantic_hash": ""
+  },
+  "content/modules/avanzado/27-pcf-avanzado-con-typescript-y-react.md": {
+    "mtime": 1795107344.1535342,
+    "seen": 1795801817.9125304,
+    "ast_hash": "302278f975cea37352c48ce3cff59021",
+    "semantic_hash": ""
+  },
+  "content/modules/avanzado/28-code-apps-con-react-y-typescript.md": {
+    "mtime": 1795107344.3889883,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c383d4bea515abfa212bbcbd2d682af9",
+    "semantic_hash": ""
+  },
+  "content/modules/avanzado/29-power-pages-avanzado-y-azure-ad-b2c.md": {
+    "mtime": 1795107344.4385402,
+    "seen": 1795801817.9125304,
+    "ast_hash": "8c02af17307ac2a92a265813e581e2e4",
+    "semantic_hash": ""
+  },
+  "content/modules/avanzado/30-proyecto-multicapa-nivel-3.md": {
+    "mtime": 1795107344.591166,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0a4a7fa8cfcefb74a4db4c2e10da014b",
+    "semantic_hash": ""
+  },
+  "content/modules/basico/01-introduccion-al-ecosistema-power-platform.md": {
+    "mtime": 1794421677.5514295,
+    "seen": 1795801817.9125304,
+    "ast_hash": "916d5c18eb25268fff7eea2aa3a2c045",
+    "semantic_hash": ""
+  },
+  "content/modules/basico/02-dataverse-fundamentos-y-modelado-basico.md": {
+    "mtime": 1794421701.96146,
+    "seen": 1795801817.9125304,
+    "ast_hash": "6eca73619bd0294fe462f9052e702cd7",
+    "semantic_hash": ""
+  },
+  "content/modules/basico/03-power-apps-canvas-primeras-aplicaciones.md": {
+    "mtime": 1794426179.1517134,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b4cea64012e66c3503e9c85ad7488e22",
+    "semantic_hash": ""
+  },
+  "content/modules/basico/04-power-apps-model-driven-apps-basadas-en-datos.md": {
+    "mtime": 1794421973.2751303,
+    "seen": 1795801817.9125304,
+    "ast_hash": "279e51cf472748fe5e404999e76457f8",
+    "semantic_hash": ""
+  },
+  "content/modules/basico/05-power-automate-automatizacion-basica.md": {
+    "mtime": 1794423483.005751,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1b6ddddde55f1bd033a7731400c87e29",
+    "semantic_hash": ""
+  },
+  "content/modules/basico/06-power-bi-reportes-y-dashboards-basicos.md": {
+    "mtime": 1793558449.897441,
+    "seen": 1795801817.9125304,
+    "ast_hash": "163e8e46f10de878efbe946bb8ef5bed",
+    "semantic_hash": ""
+  },
+  "content/modules/basico/07-fundamentos-de-power-fx-y-expresiones.md": {
+    "mtime": 1795107459.5527725,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d98e073c78f4d218f30a6e0a8b2caad8",
+    "semantic_hash": ""
+  },
+  "content/modules/basico/08-primer-proyecto-integrado.md": {
+    "mtime": 1794432230.1776772,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1b7ce5dbe12250ae8cf47dc15b9a0993",
+    "semantic_hash": ""
+  },
+  "content/modules/d365/57-introduccion-dynamics-365-avanzado.md": {
+    "mtime": 1794421997.412104,
+    "seen": 1795801817.9125304,
+    "ast_hash": "caf910e392c15105073faf53e261e299",
+    "semantic_hash": ""
+  },
+  "content/modules/d365/58-customer-insights-data-unificacion-perfiles.md": {
+    "mtime": 1794421973.283823,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d4966090da01ff7536f5bebf086f87e8",
+    "semantic_hash": ""
+  },
+  "content/modules/d365/59-field-service-scheduling-avanzado.md": {
+    "mtime": 1794423777.244233,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3dc959ab648189d76fd4feb378432b5d",
+    "semantic_hash": ""
+  },
+  "content/modules/d365/60-finance-operations-procesos-erp.md": {
+    "mtime": 1794421973.2868357,
+    "seen": 1795801817.9125304,
+    "ast_hash": "71a18902220ec0e22305a99dbed68a1e",
+    "semantic_hash": ""
+  },
+  "content/modules/d365/61-dynamics-365-sales-avanzado.md": {
+    "mtime": 1794421997.416115,
+    "seen": 1795801817.9125304,
+    "ast_hash": "ceea08d7831a91a73d59784d9f59cc94",
+    "semantic_hash": ""
+  },
+  "content/modules/d365/62-dynamics-365-customer-service-avanzado.md": {
+    "mtime": 1794421997.4181206,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b71b44e6e18658a5b3f38baddaa3fc30",
+    "semantic_hash": ""
+  },
+  "content/modules/d365/63-dynamics-365-contact-center-omnichannel.md": {
+    "mtime": 1794423789.9407628,
+    "seen": 1795801817.9125304,
+    "ast_hash": "7fea8f12f7357aac4ba354ea13778e6d",
+    "semantic_hash": ""
+  },
+  "content/modules/d365/64-customer-insights-journeys-real-time.md": {
+    "mtime": 1794421997.4141097,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b3481f4a68aea675aa1ddb04b36560bc",
+    "semantic_hash": ""
+  },
+  "content/modules/d365/65-integracion-ce-fo-dual-write-dmf.md": {
+    "mtime": 1794424052.5898862,
+    "seen": 1795801817.9125304,
+    "ast_hash": "8cf09bfc1ed4c76b096b25671cdb819f",
+    "semantic_hash": ""
+  },
+  "content/modules/d365/66-capstone-enterprise-d365.md": {
+    "mtime": 1794420059.564286,
+    "seen": 1795801817.9125304,
+    "ast_hash": "dc730d10c25bbded00a405d9c4cb810a",
+    "semantic_hash": ""
+  },
+  "content/modules/ia/42-fundamentos-ia-desarrollo.md": {
+    "mtime": 1794420389.8688827,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f41be6109f213458791064533e4863c6",
+    "semantic_hash": ""
+  },
+  "content/modules/ia/43-copilot-en-power-platform.md": {
+    "mtime": 1795107428.8795898,
+    "seen": 1795801817.9125304,
+    "ast_hash": "8ebd8044a178df4b7a80eecedd2af986",
+    "semantic_hash": ""
+  },
+  "content/modules/ia/44-github-copilot-en-vscode.md": {
+    "mtime": 1794003267.2507567,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3bec442d27a567fc37cde04a5f0a7531",
+    "semantic_hash": ""
+  },
+  "content/modules/ia/45-claude-code-y-codex.md": {
+    "mtime": 1794420434.4822092,
+    "seen": 1795801817.9125304,
+    "ast_hash": "36f26633547637accdd76dbdfeebcd03",
+    "semantic_hash": ""
+  },
+  "content/modules/ia/46-vibe-coding-controlado.md": {
+    "mtime": 1794003267.252754,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e98be825ac1a3328fbe2098f5250f03c",
+    "semantic_hash": ""
+  },
+  "content/modules/ia/47-prompts-tecnicos-reutilizables.md": {
+    "mtime": 1794003267.253754,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1c4cdb34599e2fa332b37eaf51822112",
+    "semantic_hash": ""
+  },
+  "content/modules/ia/48-revision-de-diffs-y-prs.md": {
+    "mtime": 1794420290.7037127,
+    "seen": 1795801817.9125304,
+    "ast_hash": "54008aeda1fe63669c5c5426b0666c94",
+    "semantic_hash": ""
+  },
+  "content/modules/ia/49-seguridad-secretos-y-compliance.md": {
+    "mtime": 1794422112.5358481,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0ab4c6799f24f6c0f4a3e2e9c2fd51b9",
+    "semantic_hash": ""
+  },
+  "content/modules/ia/50-tests-cicd-y-guardrails.md": {
+    "mtime": 1794420340.2529347,
+    "seen": 1795801817.9125304,
+    "ast_hash": "70c59ff33af3cfa6c8271ef37dd0c05d",
+    "semantic_hash": ""
+  },
+  "content/modules/ia/51-flujo-recomendado-humano-ia-ci.md": {
+    "mtime": 1794419960.2017338,
+    "seen": 1795801817.9125304,
+    "ast_hash": "235d5d4877c753b61e486d78be660b11",
+    "semantic_hash": ""
+  },
+  "content/modules/ia/52-cli-y-conexion-al-tenant.md": {
+    "mtime": 1794422137.067845,
+    "seen": 1795801817.9125304,
+    "ast_hash": "78c6cfb512c5d2927a7f22ecd0d6da52",
+    "semantic_hash": ""
+  },
+  "content/modules/ia/53-dataverse-web-api-y-autenticacion.md": {
+    "mtime": 1795647940.747468,
+    "seen": 1795801817.9125304,
+    "ast_hash": "670d2bd5a071c07c83b71187b084cc7c",
+    "semantic_hash": ""
+  },
+  "content/modules/ia/54-alm-de-soluciones-con-ia.md": {
+    "mtime": 1794422130.717757,
+    "seen": 1795801817.9125304,
+    "ast_hash": "801c96780ca200857898f2a6c74b0091",
+    "semantic_hash": ""
+  },
+  "content/modules/ia/55-ia-para-analisis-arquitectura-y-consultoria.md": {
+    "mtime": 1794003267.262743,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c3076d357ade553984a26907f328b442",
+    "semantic_hash": ""
+  },
+  "content/modules/ia/56-fundamentos-javascript-para-power-platform.md": {
+    "mtime": 1794420164.573495,
+    "seen": 1795801817.9125304,
+    "ast_hash": "319b4fdd792091fedd352943560d9897",
+    "semantic_hash": ""
+  },
+  "content/modules/intermedio/09-dataverse-avanzado.md": {
+    "mtime": 1794421900.245338,
+    "seen": 1795801817.9125304,
+    "ast_hash": "2586bd2cff1df3c8500cd8e3ce807538",
+    "semantic_hash": ""
+  },
+  "content/modules/intermedio/10-canvas-apps-componentes-y-reutilizacion.md": {
+    "mtime": 1793541872.837281,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c3fbac9d6000b2268357c0fe4d5c6533",
+    "semantic_hash": ""
+  },
+  "content/modules/intermedio/11-power-automate-avanzado.md": {
+    "mtime": 1794421900.2424023,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d3d455b47566708cff192463ede6857c",
+    "semantic_hash": ""
+  },
+  "content/modules/intermedio/12-power-bi-dax-avanzado.md": {
+    "mtime": 1794419777.4545593,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a1429c52fef4b2c7f7d96dde987f2d57",
+    "semantic_hash": ""
+  },
+  "content/modules/intermedio/13-javascript-y-pcf-basico.md": {
+    "mtime": 1793541872.8383079,
+    "seen": 1795801817.9125304,
+    "ast_hash": "4b6e9da2b83d6471cbeaa834d0e02dfe",
+    "semantic_hash": ""
+  },
+  "content/modules/intermedio/14-conectores-personalizados.md": {
+    "mtime": 1794421900.2443323,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5471ed413395f113a931a27fcdd0f57d",
+    "semantic_hash": ""
+  },
+  "content/modules/intermedio/15-copilot-studio-introduccion.md": {
+    "mtime": 1795789071.3703074,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3fbf1c76eec6cb0742ca372595176997",
+    "semantic_hash": ""
+  },
+  "content/modules/intermedio/16-seguridad-y-administracion-de-soluciones.md": {
+    "mtime": 1794423423.585474,
+    "seen": 1795801817.9125304,
+    "ast_hash": "dc34d8a6033310d77d940d047cf2b8d0",
+    "semantic_hash": ""
+  },
+  "content/modules/intermedio/17-proyecto-integrador-nivel-2.md": {
+    "mtime": 1794432213.0024512,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5325d974f5f4f6c23324ed1cfbbef616",
+    "semantic_hash": ""
+  },
+  "content/modules/rpa/67-fundamentos-rpa-seleccion-procesos.md": {
+    "mtime": 1794003267.2657576,
+    "seen": 1795801817.9125304,
+    "ast_hash": "6ac3f629beb5f833d7b63c07449a1a6c",
+    "semantic_hash": ""
+  },
+  "content/modules/rpa/68-entorno-instalacion-arquitectura-pad.md": {
+    "mtime": 1794420033.7053804,
+    "seen": 1795801817.9125304,
+    "ast_hash": "832698cd09cf5d89f8e199449195c751",
+    "semantic_hash": ""
+  },
+  "content/modules/rpa/69-construccion-mantenible-desktop-flows.md": {
+    "mtime": 1794003267.2672844,
+    "seen": 1795801817.9125304,
+    "ast_hash": "84285005b1343a50d3b404d451ffd52f",
+    "semantic_hash": ""
+  },
+  "content/modules/rpa/70-archivos-csv-excel-pad.md": {
+    "mtime": 1794420028.9000304,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3e4d48d5f02b05cd3e25892811099815",
+    "semantic_hash": ""
+  },
+  "content/modules/rpa/71-automatizacion-web-pad.md": {
+    "mtime": 1794003267.270054,
+    "seen": 1795801817.9125304,
+    "ast_hash": "81730ba7ef359b7d712e50190d5e9ff0",
+    "semantic_hash": ""
+  },
+  "content/modules/rpa/72-aplicaciones-windows-legacy.md": {
+    "mtime": 1794003267.2722886,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c93ef6f579b788bf1a1d13df0150335b",
+    "semantic_hash": ""
+  },
+  "content/modules/rpa/73-selectores-sincronizacion-resiliencia.md": {
+    "mtime": 1794420049.1976206,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e15e7ac09f62bbd3524362d5f8fcdb33",
+    "semantic_hash": ""
+  },
+  "content/modules/rpa/74-errores-logging-idempotencia.md": {
+    "mtime": 1794420051.5836248,
+    "seen": 1795801817.9125304,
+    "ast_hash": "cc307d1043d039e0516a55378c6934d9",
+    "semantic_hash": ""
+  },
+  "content/modules/rpa/75-integracion-cloud-desktop-flow.md": {
+    "mtime": 1794003267.2760448,
+    "seen": 1795801817.9125304,
+    "ast_hash": "9d56504f0e39b3bde5e872f7c0113e18",
+    "semantic_hash": ""
+  },
+  "content/modules/rpa/76-alm-operacion-gobierno-soporte-rpa.md": {
+    "mtime": 1794422112.5218163,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b89eda5486bc900691c6851e824cf95c",
+    "semantic_hash": ""
+  },
+  "content/practices/ch-001-solucion-solicitudes-empresariales.md": {
+    "mtime": 1793541872.8475025,
+    "seen": 1795801817.9125304,
+    "ast_hash": "dc2ba3c7578d94c4cec1cdb56030997c",
+    "semantic_hash": ""
+  },
+  "content/practices/ch-002-extension-profesional-dataverse.md": {
+    "mtime": 1793541872.8485024,
+    "seen": 1795801817.9125304,
+    "ast_hash": "bc0cd5632fbe9ccbf2b97f4aecfb346f",
+    "semantic_hash": ""
+  },
+  "content/practices/ch-rpa-01-consolidacion-financiera-automatizada.md": {
+    "mtime": 1793541872.8485024,
+    "seen": 1795801817.9125304,
+    "ast_hash": "43ae3020e22798b309cf9f4a293d7ec5",
+    "semantic_hash": ""
+  },
+  "content/practices/ch-rpa-02-portal-aplicacion-legacy.md": {
+    "mtime": 1793541872.8485024,
+    "seen": 1795801817.9125304,
+    "ast_hash": "96e1c37a10a66d7b1ed871534eb0ca17",
+    "semantic_hash": ""
+  },
+  "content/practices/ch-rpa-03-unattended-operable.md": {
+    "mtime": 1793541872.8499842,
+    "seen": 1795801817.9125304,
+    "ast_hash": "fd827e29aa0515e77a3a4b3653dd822d",
+    "semantic_hash": ""
+  },
+  "content/practices/ch-setup-01-preparar-estacion-completa-para-tu-ruta.md": {
+    "mtime": 1793541872.8499842,
+    "seen": 1795801817.9125304,
+    "ast_hash": "513ab2bc6d7c2b7a7635e953bdad0180",
+    "semantic_hash": ""
+  },
+  "content/practices/gl-setup-01-instalar-git-y-configurar-identidad.md": {
+    "mtime": 1793541872.8509834,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e07a9317419952b02b3867dc34e20152",
+    "semantic_hash": ""
+  },
+  "content/practices/gl-setup-02-instalar-nodejs-lts-y-verificar-entorno.md": {
+    "mtime": 1793541872.8509834,
+    "seen": 1795801817.9125304,
+    "ast_hash": "52d87b8e78299a3f6545c819536da169",
+    "semantic_hash": ""
+  },
+  "content/practices/gl-setup-03-configurar-power-platform-cli-conexion-segura.md": {
+    "mtime": 1793541872.8509834,
+    "seen": 1795801817.9125304,
+    "ast_hash": "900a91b4aaa8a55cf9569b5709aa1190",
+    "semantic_hash": ""
+  },
+  "content/practices/gl-setup-04-configurar-vscode-power-platform-tools.md": {
+    "mtime": 1793541872.8519845,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d063fe15ece2c32b15ffa0f85fa54fc1",
+    "semantic_hash": ""
+  },
+  "content/practices/gl-setup-05-confirmar-entorno-no-productivo-y-roles.md": {
+    "mtime": 1794422112.5218163,
+    "seen": 1795801817.9125304,
+    "ast_hash": "fbed0f830d07ba8516a998145bc76a33",
+    "semantic_hash": ""
+  },
+  "content/practices/gl-setup-06-correr-verificador-estacion-e-importar-reporte.md": {
+    "mtime": 1793541872.8529851,
+    "seen": 1795801817.9125304,
+    "ast_hash": "dc663ad602c0df1c68b3eb3a700321e6",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-001-seguridad-dataverse-oportunidades.md": {
+    "mtime": 1793541872.8529851,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3fbb33a821c9fd4f63ff987a88e22241",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-002-power-automate-429-duplicados.md": {
+    "mtime": 1793541872.8539853,
+    "seen": 1795801817.9125304,
+    "ast_hash": "73e6a8078386c81a43d673ed61631300",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-003-alm-managed-produccion.md": {
+    "mtime": 1793541872.8539853,
+    "seen": 1795801817.9125304,
+    "ast_hash": "d9f195d43e73d525e8c8582f651508f5",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-004-d365-customer-service-sla.md": {
+    "mtime": 1793541872.854986,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c96ce4002508e3a8642b3819f6eec5a5",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-005-plugin-timeout-carga.md": {
+    "mtime": 1793541872.854986,
+    "seen": 1795801817.9125304,
+    "ast_hash": "2c1092f2b62e38562455b46210db2aeb",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-rpa-001-selector-roto-actualizacion.md": {
+    "mtime": 1793541872.8559833,
+    "seen": 1795801817.9125304,
+    "ast_hash": "64c6b2ae2609e09d1ce9f8f0f840c122",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-rpa-002-attended-falla-unattended.md": {
+    "mtime": 1793541872.8559833,
+    "seen": 1795801817.9125304,
+    "ast_hash": "8b969915eab7c828df8e68bf3dfb7c09",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-rpa-003-excel-bloqueado.md": {
+    "mtime": 1793541872.8569846,
+    "seen": 1795801817.9125304,
+    "ast_hash": "02a21dec1827ba03a49f25d2fa1a1c45",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-rpa-004-duplicados-reintento.md": {
+    "mtime": 1793541872.8569846,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f3d451f94bc6471a381aa6c1f858c8ba",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-rpa-005-maquina-no-disponible.md": {
+    "mtime": 1793541872.8579836,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b919511e948646d67375e8459e7af55b",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-rpa-006-configuracion-postdeploy-incorrecta.md": {
+    "mtime": 1793541872.8585217,
+    "seen": 1795801817.9125304,
+    "ast_hash": "41e428a1b7aeaf45b74056450ab98ee4",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-rpa-007-portal-lento-timeout.md": {
+    "mtime": 1793541872.8590274,
+    "seen": 1795801817.9125304,
+    "ast_hash": "29aef0c442211065d745e042ac2c6e82",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-rpa-008-procesamiento-parcial-inconsistente.md": {
+    "mtime": 1793541872.8590274,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1f6e61b6ef0580633c491280305ab5f7",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-setup-001-pac-command-not-found.md": {
+    "mtime": 1793541872.8590274,
+    "seen": 1795801817.9125304,
+    "ast_hash": "6e78eda00ad77e3f876e31faa3e66008",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-setup-002-node-versiones-inconsistentes.md": {
+    "mtime": 1793541872.8590274,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e5c94249f85fa6871ae693d6bc881cc2",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-setup-003-commit-con-identidad-incorrecta.md": {
+    "mtime": 1793541872.8605866,
+    "seen": 1795801817.9125304,
+    "ast_hash": "6580631181ea45a0c66a040bc7bfe24b",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-setup-004-verificador-reporta-falso-negativo.md": {
+    "mtime": 1793541872.861593,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1b857c1fcdfc6be2bd3345f946e86131",
+    "semantic_hash": ""
+  },
+  "content/practices/inc-setup-005-extension-vscode-no-activa.md": {
+    "mtime": 1793541872.861593,
+    "seen": 1795801817.9125304,
+    "ast_hash": "16adba10408ede8dfc41f448ebdf91e5",
+    "semantic_hash": ""
+  },
+  "content/practices/sim-001-primeros-cinco-dias-proyecto.md": {
+    "mtime": 1793541872.8625913,
+    "seen": 1795801817.9125304,
+    "ast_hash": "9b2913867ca8af33212a2b5894f44467",
+    "semantic_hash": ""
+  },
+  "content/practices/sim-002-sprint-review-y-pull-request.md": {
+    "mtime": 1793541872.8635933,
+    "seen": 1795801817.9125304,
+    "ast_hash": "35a8303eea6426cfd26931a5f8816890",
+    "semantic_hash": ""
+  },
+  "content/practices/sim-rpa-001-primeras-dos-semanas-rpa-developer.md": {
+    "mtime": 1793541872.8635933,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0aae002123837c0c9f986619c2d143f3",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/copilotstudio/asistente-compras/README.md": {
+    "mtime": 1795790502.6710558,
+    "seen": 1795801817.9125304,
+    "ast_hash": "8d2a983da1d1ef2d36134f592feeef46",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/copilotstudio/asistente-compras/faq-proveedores.md": {
+    "mtime": 1795790502.6585393,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0973606d4ad720e34654209d7c5432db",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/copilotstudio/asistente-compras/lab146/manual-compras-v2.md": {
+    "mtime": 1795790502.66405,
+    "seen": 1795801817.9125304,
+    "ast_hash": "19a2482da35ffd87bbf0c4301c3b03ff",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/copilotstudio/asistente-compras/manual-compras.md": {
+    "mtime": 1795790502.652815,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0b8872f89d3dd1e75b5feedc1b7c0333",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerautomate/sit-compras/README.md": {
+    "mtime": 1795304496.4522877,
+    "seen": 1795801817.9125304,
+    "ast_hash": "65d5594700323d74459d0f58763418c2",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/powerbi/sit-ventas/README.md": {
+    "mtime": 1795116206.086907,
+    "seen": 1795801817.9125304,
+    "ast_hash": "15bbb71a85c63a02ca0b197446c93f6a",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/README.md": {
+    "mtime": 1794421366.085568,
+    "seen": 1795801817.9125304,
+    "ast_hash": "c21a51a352da103f2927a871189f73b2",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/expected/resumen_ejecutivo.md": {
+    "mtime": 1793541872.888833,
+    "seen": 1795801817.9125304,
+    "ast_hash": "13164a9f7d71bfda5df88e718bfbb3fa",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/as-is.md": {
+    "mtime": 1793541872.9019873,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1639ba98e65cdc581c8334266385ab2b",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/casos-uat.md": {
+    "mtime": 1793541872.9019873,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b65987914d624383e048ed6e165c6147",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/checklist-descubrimiento.md": {
+    "mtime": 1793541872.9019873,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3cb562ab880bbff961471573ec6d0b7b",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/deployment-checklist.md": {
+    "mtime": 1793541872.9029872,
+    "seen": 1795801817.9125304,
+    "ast_hash": "e00930eddbae52909a5fc6017896e77b",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/diseno-solucion.md": {
+    "mtime": 1793541872.9039898,
+    "seen": 1795801817.9125304,
+    "ast_hash": "19e1294706301d65d889f7ed2902c372",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/inventario-aplicaciones.md": {
+    "mtime": 1793541872.9039898,
+    "seen": 1795801817.9125304,
+    "ast_hash": "7024f33cffd520068caa6fa6a8291937",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/machine-readiness-checklist.md": {
+    "mtime": 1793541872.9049861,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0319e216bea523008b65c0d21c3ac6ea",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/maintenance-checklist.md": {
+    "mtime": 1793541872.9049861,
+    "seen": 1795801817.9125304,
+    "ast_hash": "227ab65311fab2c251d1c5515534b781",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/matriz-excepciones.md": {
+    "mtime": 1793541872.905986,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0affa6b4190f915aed28d8b650434d0e",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/matriz-viabilidad-rpa.md": {
+    "mtime": 1793541872.9063141,
+    "seen": 1795801817.9125304,
+    "ast_hash": "5196323b5fe54f749b9f332992739efe",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/pdd-ligero.md": {
+    "mtime": 1793541872.907319,
+    "seen": 1795801817.9125304,
+    "ast_hash": "2b643340faca52e982835ed4f9ceb83b",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/rca.md": {
+    "mtime": 1793541872.907319,
+    "seen": 1795801817.9125304,
+    "ast_hash": "356c00c7a2c6a4549a096ae4c7d56520",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/registro-automatizaciones.md": {
+    "mtime": 1793541872.907319,
+    "seen": 1795801817.9125304,
+    "ast_hash": "50b34fd30981d85c802c1546135235f5",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/reporte-incidente.md": {
+    "mtime": 1793541872.9088244,
+    "seen": 1795801817.9125304,
+    "ast_hash": "974d4cee931d04de602c4a9f9101eac0",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/rollback-plan.md": {
+    "mtime": 1793541872.9088244,
+    "seen": 1795801817.9125304,
+    "ast_hash": "739d77634f1d2db39738eeddc50112ab",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/runbook.md": {
+    "mtime": 1793541872.909831,
+    "seen": 1795801817.9125304,
+    "ast_hash": "1f291cf65254c96ff66f6fbb9e8a3579",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/security-checklist.md": {
+    "mtime": 1793541872.9102557,
+    "seen": 1795801817.9125304,
+    "ast_hash": "3465a9c4aea8b24890cd8a6b67883884",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/selector-troubleshooting-checklist.md": {
+    "mtime": 1793541872.9102557,
+    "seen": 1795801817.9125304,
+    "ast_hash": "0ee4fa54c20e01a5ba42929b53bd04e4",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/test-plan.md": {
+    "mtime": 1793541872.911262,
+    "seen": 1795801817.9125304,
+    "ast_hash": "b4f1fc377ef5ecc2d362ce2ceb8164a0",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/templates/to-be.md": {
+    "mtime": 1793541872.911262,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a08ed57707c7bf5a5731312cc86b4aca",
+    "semantic_hash": ""
+  },
+  "public/practice-assets/rpa/sit-automation-case/validation/protocolo_tenant.md": {
+    "mtime": 1793541872.9132676,
+    "seen": 1795801817.9125304,
+    "ast_hash": "dc05f9331781ca564862f6fc8dd3e310",
+    "semantic_hash": ""
+  },
+  "public/icon-192.png": {
+    "mtime": 1793541872.876541,
+    "seen": 1795801817.9125304,
+    "ast_hash": "f815c23b510b7f9c6a267cd5b1256f48",
+    "semantic_hash": ""
+  },
+  "public/icon-512.png": {
+    "mtime": 1793541872.877012,
+    "seen": 1795801817.9125304,
+    "ast_hash": "a21ec223b9b6a69f7e8a4a28b187d0b0",
+    "semantic_hash": ""
+  },
+  "src/app/icon.svg": {
+    "mtime": 1793541872.926382,
+    "seen": 1795801817.9125304,
+    "ast_hash": "8a62f9bda85026bf2b4e606e5deb29b3",
+    "semantic_hash": ""
+  },
+  "package-lock.json": {
+    "mtime": 1794008777.6721842,
+    "seen": 1795801817.9125304,
+    "ast_hash": "7410c6f15007956ef4ae288247bd92e9",
+    "semantic_hash": ""
+  }
+}

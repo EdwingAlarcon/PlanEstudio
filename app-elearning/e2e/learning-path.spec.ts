@@ -34,10 +34,10 @@ test.describe("Camino del inicio y XP", () => {
     });
 
     await page.goto("/", { waitUntil: "domcontentloaded" });
-    // 50 (quiz del M1 ≥ 80 %) + 100 (un lab) = 150 → Aprendiz II.
+    // 50 (quiz del M1 ≥ 80 %) + 25 (un lab autodeclarado) = 75 → Aprendiz I. Marcar M1 y M2 no suma.
     const rank = page.getByTestId("sidebar-rank");
-    await expect(rank).toContainText("150 XP");
-    await expect(rank).toContainText("Aprendiz II");
+    await expect(rank).toContainText("75 XP");
+    await expect(rank).toContainText("Aprendiz I");
     await expect(page.getByTestId("learning-path").locator('[aria-current="step"]')).toContainText("M3");
 
     // Cambiar de mundo con las pestañas.
@@ -46,6 +46,6 @@ test.describe("Camino del inicio y XP", () => {
     await expect(page.getByText(/Trofeo del Mundo 2/)).toBeVisible();
 
     await page.goto("/progreso#xp", { waitUntil: "domcontentloaded" });
-    await expect(page.getByTestId("xp-total")).toHaveText("150 XP");
+    await expect(page.getByTestId("xp-total")).toHaveText("75 XP");
   });
 });
