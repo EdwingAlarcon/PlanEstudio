@@ -64,7 +64,7 @@ export function FullBackupPanel() {
   }
 
   return (
-    <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="full-backup-heading">
+    <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="full-backup-heading">
       <div className="flex items-center gap-2">
         <HardDriveDownload className="h-4 w-4 text-[#0078D4]" aria-hidden />
         <h2 id="full-backup-heading" className="text-base font-semibold text-foreground">Backup completo de mi progreso</h2>

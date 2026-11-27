@@ -39,7 +39,7 @@ export function ProgressRing({
           cy={size / 2}
         />
         <circle
-          className={cn("transition-all duration-500 ease-out", colorClass)}
+          className={cn("transition duration-500 ease-out", colorClass)}
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           fill="none"

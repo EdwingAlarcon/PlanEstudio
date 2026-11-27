@@ -124,7 +124,7 @@ export function PracticeWorkspaceClient({ practice }: { practice: PracticeWorksp
 
   return (
     <section className="space-y-4" aria-label="Área de trabajo de práctica">
-      <div className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+      <div className="rounded-xl border border-border bg-card p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <h2 className="text-base font-semibold text-foreground">Seguimiento local</h2>
@@ -165,7 +165,7 @@ export function PracticeWorkspaceClient({ practice }: { practice: PracticeWorksp
       <PracticeAttemptHistory practice={practice} record={persistedRecord} />
 
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(280px,360px)]">
-        <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="notes-heading">
+        <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="notes-heading">
           <h2 id="notes-heading" className="text-base font-semibold text-foreground">Notas personales</h2>
           <p className="mt-1 text-xs text-muted-foreground">Texto plano local; no pegues secretos, correos reales ni datos sensibles.</p>
           <textarea
@@ -190,7 +190,7 @@ export function PracticeWorkspaceClient({ practice }: { practice: PracticeWorksp
           </div>
         </section>
 
-        <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="evidence-checklist-heading">
+        <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="evidence-checklist-heading">
           <h2 id="evidence-checklist-heading" className="text-base font-semibold text-foreground">Evidencias producidas</h2>
           <p className="mt-1 text-xs text-muted-foreground">Marcar una evidencia no implica revisión externa.</p>
           <div className="mt-3 space-y-2">
@@ -212,7 +212,7 @@ export function PracticeWorkspaceClient({ practice }: { practice: PracticeWorksp
         </section>
       </div>
 
-      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="hints-heading">
+      <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="hints-heading">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h2 id="hints-heading" className="text-base font-semibold text-foreground">Pistas escalonadas</h2>
           <Badge variant="outline">{persistedRecord.revealedHints.length}/{practice.hints.length} usadas</Badge>
@@ -247,7 +247,7 @@ export function PracticeWorkspaceClient({ practice }: { practice: PracticeWorksp
         </div>
       </section>
 
-      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="solution-heading">
+      <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="solution-heading">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <h2 id="solution-heading" className="text-base font-semibold text-foreground">Solución de referencia</h2>
@@ -279,7 +279,7 @@ export function PracticeWorkspaceClient({ practice }: { practice: PracticeWorksp
         )}
       </section>
 
-      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="assessment-heading">
+      <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="assessment-heading">
         <h2 id="assessment-heading" className="text-base font-semibold text-foreground">Autoevaluación por rúbrica</h2>
         <p className="mt-1 text-xs text-muted-foreground">Estimación personal; no reemplaza revisión de mentor, tenant real ni validación profesional.</p>
         <div className="mt-4 grid gap-3">
@@ -393,7 +393,7 @@ function PracticeAttemptHistory({ practice, record }: { practice: PracticeWorksp
   }
 
   return (
-    <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="attempt-history-heading">
+    <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="attempt-history-heading">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h2 id="attempt-history-heading" className="text-base font-semibold text-foreground">Historial y evidencia</h2>
@@ -622,7 +622,7 @@ function ExternalReviewPanel({
 
       {allReviews.length > 0 && (
         <div className="mt-4">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Historial de revisiones externas</p>
+          <p className="text-xs font-semibold text-muted-foreground">Historial de revisiones externas</p>
           <div className="mt-2 grid gap-2">
             {allReviews.map((review) => (
               <div key={review.id} className="flex flex-col gap-2 rounded-lg border border-border bg-muted/15 p-3 sm:flex-row sm:items-center sm:justify-between">

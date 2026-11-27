@@ -90,23 +90,25 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
           </div>
           <div className="leading-tight">
             <p className="font-semibold text-sm">Plan de Estudio</p>
-            <p className="text-[10px] text-muted-foreground">Power Platform · D365</p>
+            <p className="text-[10px] text-muted-foreground">Power Platform</p>
           </div>
         </Link>
 
         <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden px-2 py-3 space-y-4">
-          {/* Siguiente paso: la única acción destacada de la barra */}
+          {/* Siguiente paso; en el inicio no se repite porque la página ya lo muestra en grande. */}
+          {pathname !== "/" && (
           <Link
             href={nextAction.activity.href}
-            className="mx-1 flex items-center gap-2 rounded-lg bg-[#0078D4] px-3 py-2.5 text-sm text-white transition-colors hover:bg-[#106EBE]"
+            className="mx-1 flex items-center gap-2 rounded-lg border border-[#0078D4]/40 px-3 py-2 text-sm text-foreground transition-colors hover:bg-accent"
             data-testid="sidebar-next-step"
           >
             <span className="min-w-0 flex-1">
-              <span className="block text-[10px] uppercase tracking-wider text-white/80">Siguiente paso</span>
+              <span className="block text-[11px] text-muted-foreground">Siguiente paso</span>
               <span className="block truncate font-medium">{nextAction.activity.title}</span>
             </span>
-            <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+            <ArrowRight className="h-4 w-4 shrink-0 text-[#0078D4] dark:text-[#4DB8FF]" aria-hidden />
           </Link>
+          )}
 
           <RankBadge />
 
@@ -167,7 +169,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
 
 function SectionLabel({ id, children }: { id: string; children: ReactNode }) {
   return (
-    <p id={id} className="px-3 mb-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">
+    <p id={id} className="px-3 mb-1 text-[10px] font-semibold text-muted-foreground ">
       {children}
     </p>
   );
@@ -182,7 +184,7 @@ function NavGroup({ id, label, defaultOpen, children }: { id: string; label: str
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
         aria-controls={`nav-group-${id}`}
-        className="flex w-full items-center gap-1 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground hover:text-foreground"
+        className="flex w-full items-center gap-1 px-3 py-1 text-[10px] font-semibold text-muted-foreground hover:text-foreground"
       >
         <ChevronRight className={cn("h-3 w-3 transition-transform", open && "rotate-90")} aria-hidden />
         {label}

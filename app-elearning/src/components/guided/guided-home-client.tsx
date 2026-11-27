@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { ArrowRight, BookOpen, Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { FOUNDATION_ROUTE, getFoundationProgress } from "@/lib/guided-journey";
 import { useOnboardingStore } from "@/lib/onboarding-store";
 import { useProgressStore } from "@/lib/progress";
 import { useCurriculum, useNextBestAction } from "@/components/guided/use-next-best-action";
@@ -19,17 +17,10 @@ export function GuidedHomeClient() {
   const lastVisited = useProgressStore((s) => s.lastVisited);
   const curriculum = useCurriculum();
   const nextAction = useNextBestAction();
-  const foundations = getFoundationProgress(completedModules, completedLabs, onboarding);
   const hasStarted = Boolean(onboarding.startedAt) || completedModules.length > 0 || completedLabs.length > 0;
 
   const lastModule = lastVisited ? curriculum.find((mod) => mod.key === lastVisited) : undefined;
   const showLastVisited = lastModule && lastModule.href !== nextAction.activity.href;
-  const certificationTotal = curriculum.filter((mod) => ["basico", "intermedio", "avanzado", "arquitecto"].includes(mod.levelId)).length;
-  const certificationDone = curriculum.filter((mod) =>
-    ["basico", "intermedio", "avanzado", "arquitecto"].includes(mod.levelId) && completedModules.includes(mod.key)
-  ).length;
-  const inFoundations = foundations.completed < foundations.total;
-
   return (
     <section aria-labelledby="guided-heading" className="space-y-5">
       <div className="space-y-2">
@@ -39,18 +30,18 @@ export function GuidedHomeClient() {
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           {hasStarted
             ? "Calculado con tu progreso guardado en este navegador. Termina este paso y la plataforma te propone el siguiente."
-            : "Aprenderás Power Platform y Dynamics 365 haciendo, en tu propio ambiente de Microsoft. No necesitas elegir especialización: empieza por los fundamentos."}
+            : "Aprenderás Power Platform como consultor funcional, practicando en tu propio ambiente de Microsoft. Empieza por los fundamentos."}
         </p>
       </div>
 
-      <div className="rounded-xl border border-[#0078D4]/25 bg-card p-5 shadow-fluent-1 md:p-6">
+      <div className="rounded-xl border border-[#0078D4]/25 bg-card p-5 md:p-6">
         <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
           <div className="min-w-0 space-y-1.5">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#0078D4] dark:text-[#4DB8FF]">
+            <p className="text-xs text-muted-foreground">
               {nextAction.route} · {nextAction.time}
             </p>
             <h2 className="text-xl font-semibold text-foreground">{nextAction.activity.title}</h2>
-            <p className="text-sm leading-relaxed text-muted-foreground">{nextAction.reason}</p>
+            {hasStarted && <p className="text-sm leading-relaxed text-muted-foreground">{nextAction.reason}</p>}
           </div>
           <Button asChild size="lg" className="w-full shrink-0 bg-[#0078D4] text-white hover:bg-[#106EBE] md:w-auto">
             <Link
@@ -66,19 +57,7 @@ export function GuidedHomeClient() {
           </Button>
         </div>
 
-        <div className="mt-5 grid gap-4 border-t border-border pt-4 sm:grid-cols-2">
-          <div>
-            <div className="mb-1.5 flex justify-between text-xs text-muted-foreground">
-              <span>{inFoundations ? FOUNDATION_ROUTE.title : "Cadena de certificación (Niveles 1 a 4)"}</span>
-              <span className="tabular-nums">
-                {inFoundations ? `${foundations.completed}/${foundations.total}` : `${certificationDone}/${certificationTotal} módulos`}
-              </span>
-            </div>
-            <Progress
-              value={inFoundations ? foundations.percentage : certificationTotal ? Math.round((certificationDone / certificationTotal) * 100) : 0}
-              className="h-1.5"
-            />
-          </div>
+        <div className="mt-4 flex flex-wrap border-t border-border pt-4 empty:hidden">
           {showLastVisited ? (
             <Link href={lastModule.href} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
               <BookOpen className="h-4 w-4 shrink-0" aria-hidden />

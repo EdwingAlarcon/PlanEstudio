@@ -98,14 +98,14 @@ export function InteractivePracticeClient({ practices, initialSlug }: Interactiv
 
   return (
     <div className="mx-auto max-w-6xl space-y-6 px-4 py-8 animate-fade-in">
-      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+      <section className="rounded-xl border border-border bg-card p-5">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
           <div className="space-y-3">
             <Badge className="w-fit border-0 bg-[#0078D4] text-white">Piloto interactivo</Badge>
             <div>
               <h1 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">Práctica interactiva</h1>
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                Micro-ejercicios simulados para tomar decisiones, ordenar flujos, consultar fixtures locales y depurar escenarios sin ejecutar código arbitrario.
+                Micro-ejercicios simulados para tomar decisiones, ordenar flujos, consultar datos de ejemplo y depurar escenarios sin ejecutar código arbitrario.
               </p>
             </div>
           </div>
@@ -122,10 +122,10 @@ export function InteractivePracticeClient({ practices, initialSlug }: Interactiv
       </section>
 
       {recommended && (
-        <section className="rounded-xl border border-[#107C10]/25 bg-[#EFF8EE] p-4 shadow-fluent-1 dark:bg-[rgba(16,124,16,0.10)]">
+        <section className="rounded-xl border border-[#107C10]/25 bg-[#EFF8EE] p-4 dark:bg-[rgba(16,124,16,0.10)]">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#107C10] dark:text-[#2DB52D]">Recomendación determinística</p>
+              <p className="text-xs font-semibold text-[#107C10] dark:text-[#2DB52D]">Recomendación determinística</p>
               <h2 className="mt-1 text-base font-semibold text-foreground">{recommended.title}</h2>
               <p className="text-sm text-muted-foreground">{recommended.description}</p>
             </div>
@@ -141,7 +141,7 @@ export function InteractivePracticeClient({ practices, initialSlug }: Interactiv
 
       <div className="grid gap-5 lg:grid-cols-[22rem_1fr]">
         <aside className="space-y-4">
-          <section className="rounded-xl border border-border bg-card p-4 shadow-fluent-1" aria-labelledby="practice-filter-heading">
+          <section className="rounded-xl border border-border bg-card p-4" aria-labelledby="practice-filter-heading">
             <div className="mb-3 flex items-center gap-2">
               <SlidersHorizontal className="h-4 w-4 text-[#0078D4]" aria-hidden />
               <h2 id="practice-filter-heading" className="text-sm font-semibold text-foreground">Filtros</h2>
@@ -217,7 +217,7 @@ export function InteractivePracticeClient({ practices, initialSlug }: Interactiv
         </aside>
 
         {selected ? <InteractiveExercise practice={selected} progressHydrated={progressHydrated} /> : (
-          <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-live="polite">
+          <section className="rounded-xl border border-border bg-card p-5" aria-live="polite">
             <h2 className="text-lg font-semibold text-foreground">No encontramos prácticas con estos filtros</h2>
             <p className="mt-2 text-sm text-muted-foreground">El panel se actualizará cuando exista al menos una práctica visible.</p>
           </section>
@@ -285,7 +285,7 @@ function InteractiveExercise({ practice, progressHydrated }: { practice: Interac
   };
 
   return (
-    <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="exercise-heading">
+    <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="exercise-heading">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <div className="mb-2 flex flex-wrap gap-2">
@@ -636,7 +636,7 @@ function FlowBranchPreviewPanel({ practice }: { practice: FlowBuilderPractice })
   const labelFor = (id: string) => practice.blocks.find((block) => block.id === id)?.label ?? id;
   return (
     <div className="rounded-lg border border-border bg-muted/20 p-3">
-      <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+      <p className="mb-2 text-xs font-semibold text-muted-foreground">
         Así se ve en Power Automate real (solo lectura)
       </p>
       <p className="mb-3 text-xs text-muted-foreground">{preview.conditionLabel} evalúa cada ejecución y la divide en dos ramas:</p>
@@ -666,10 +666,10 @@ function QueryEngine({ practice, answer, setAnswer }: { practice: QueryPlaygroun
           <Code2 className="h-4 w-4 text-[#0078D4]" aria-hidden />
           Query Playground
         </h3>
-        <p className="text-xs text-muted-foreground">Parser limitado para {practice.dialect}. Solo acepta consultas declarativas contra fixtures locales.</p>
+        <p className="text-xs text-muted-foreground">Parser limitado para {practice.dialect}. Solo acepta consultas de lectura sobre datos de ejemplo.</p>
       </div>
       <div className="rounded-lg border border-[#0078D4]/25 bg-[#0078D4]/5 p-3 text-xs text-foreground dark:bg-[#0078D4]/10">
-        <p className="mb-1 font-semibold uppercase tracking-wide text-muted-foreground">Sintaxis de {practice.dialect === "fetchxml" ? "FetchXML" : "OData"}</p>
+        <p className="mb-1 font-semibold text-muted-foreground">Sintaxis de {practice.dialect === "fetchxml" ? "FetchXML" : "OData"}</p>
         <p className="leading-relaxed">{practice.syntaxRef}</p>
       </div>
       <textarea
@@ -687,7 +687,7 @@ function DebugEngine({ practice, answer, setAnswer }: { practice: DebugScenarioP
   return (
     <section className="space-y-3">
       <div className="rounded-lg border border-border bg-muted/30 p-3">
-        <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">Implementación actual</p>
+        <p className="mb-2 text-xs font-semibold text-muted-foreground">Implementación actual</p>
         <pre className="overflow-x-auto whitespace-pre-wrap text-xs text-foreground">{practice.implementation}</pre>
       </div>
       <div className="rounded-lg border border-[#D13438]/20 bg-red-50 p-3 text-sm dark:bg-red-500/10">
@@ -856,7 +856,7 @@ function PracticeListButton({ practice, active, record, onSelect }: { practice: 
       href={`/practica/${practice.slug}`}
       onClick={onSelect}
       className={cn(
-        "block rounded-xl border bg-card p-4 shadow-fluent-1 transition-all hover:border-[#0078D4]/40 hover:shadow-fluent-2",
+        "block rounded-xl border bg-card p-4 transition hover:border-[#0078D4]/40 hover:shadow-fluent-2",
         active ? "border-[#0078D4]" : "border-border"
       )}
     >

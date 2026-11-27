@@ -17,7 +17,7 @@ export default function Dynamics365HubPage() {
 
   return (
     <div className="mx-auto max-w-5xl space-y-8 px-4 py-8 animate-fade-in">
-      <section className="rounded-xl border border-border bg-card px-6 py-6 shadow-fluent-1">
+      <section className="rounded-xl border border-border bg-card px-6 py-6">
         <div className="flex items-start gap-4">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg" style={{ background: hub.accent }}>
             <Building2 className="h-5 w-5 text-white" aria-hidden />
@@ -45,7 +45,7 @@ export default function Dynamics365HubPage() {
 
         <div className="grid gap-3 md:grid-cols-4">
           {hub.primarySteps.map((step, index) => (
-            <div key={step.label} className="rounded-lg border border-border bg-card p-4 shadow-fluent-1">
+            <div key={step.label} className="rounded-lg border border-border bg-card p-4">
               <div className="mb-3 flex items-center justify-between gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-lg" style={{ background: hub.accent + "1A" }}>
                   <span className="font-mono text-xs font-semibold" style={{ color: hub.accent }}>{String(index + 1).padStart(2, "0")}</span>
@@ -76,7 +76,7 @@ export default function Dynamics365HubPage() {
 
         <div className="grid gap-4 lg:grid-cols-2">
           {hub.sections.map((section) => (
-            <div key={section.title} className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+            <div key={section.title} className="rounded-xl border border-border bg-card p-5">
               <h3 className="text-sm font-semibold text-foreground">{section.title}</h3>
               <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{section.description}</p>
               <div className="mt-4 space-y-2">

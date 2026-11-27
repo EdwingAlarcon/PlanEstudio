@@ -45,9 +45,9 @@ export function WeeklyGoalCard() {
   const streak = getWeeklyStreak(activeDays, goal, new Set(restWeeks), today);
 
   return (
-    <section aria-labelledby="weekly-goal-heading" className="space-y-3 rounded-xl border border-border bg-card p-4 shadow-fluent-1" data-testid="weekly-goal">
+    <section aria-labelledby="weekly-goal-heading" className="space-y-3 rounded-xl border border-border bg-card p-4" data-testid="weekly-goal">
       <div className="flex items-baseline justify-between gap-2">
-        <h2 id="weekly-goal-heading" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Meta de la semana</h2>
+        <h2 id="weekly-goal-heading" className="text-xs font-semibold text-muted-foreground">Meta de la semana</h2>
         <label className="flex items-center gap-1 text-xs text-muted-foreground">
           <span className="sr-only">Días por semana</span>
           <select
@@ -62,7 +62,7 @@ export function WeeklyGoalCard() {
           </select>
         </label>
       </div>
-      <p className="text-2xl font-bold tabular-nums text-foreground" data-testid="weekly-goal-count">
+      <p className="text-lg font-semibold tabular-nums text-foreground" data-testid="weekly-goal-count">
         {isRest ? "Semana de descanso" : `${Math.min(done, 7)} / ${goal} días`}
       </p>
       <ol className="grid grid-cols-7 gap-1.5 text-center text-[11px] text-muted-foreground" aria-label="Días de esta semana">
@@ -91,7 +91,7 @@ export function WeeklyGoalCard() {
         </button>
       </div>
       <p className="text-[11px] leading-snug text-muted-foreground">
-        Cuenta un día cuando haces algo: una práctica, un quiz, un lab, un paso o el repaso. Una semana de descanso no rompe la racha.
+        Cuenta cualquier día en que practiques o hagas un quiz.
       </p>
     </section>
   );

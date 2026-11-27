@@ -270,7 +270,7 @@ export function ReviewSessionClient({ questions, moduleLinks }: ReviewSessionCli
           Completa tu primer quiz para empezar a construir tu calendario de repaso.
         </div>
       ) : (
-        <div className="rounded-xl border border-border bg-card p-6 shadow-fluent-1 space-y-4">
+        <div className="rounded-xl border border-border bg-card p-6 space-y-4">
           {summary.dueToday > 0 ? (
             <>
               <div>
@@ -316,7 +316,7 @@ export function ReviewSessionClient({ questions, moduleLinks }: ReviewSessionCli
       )}
 
       {reinforcement.length > 0 && (
-        <section aria-labelledby="reinforcement-heading" className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+        <section aria-labelledby="reinforcement-heading" className="rounded-xl border border-border bg-card p-5">
           <h2 id="reinforcement-heading" className="text-base font-semibold text-foreground">Necesita refuerzo</h2>
           <p className="mt-1 text-xs text-muted-foreground">Preguntas que has fallado más de una vez, agrupadas por módulo.</p>
           <ul className="mt-3 space-y-1">
@@ -334,7 +334,7 @@ export function ReviewSessionClient({ questions, moduleLinks }: ReviewSessionCli
       )}
 
       {dayLogs.length > 0 && (
-        <section aria-labelledby="history-heading" className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+        <section aria-labelledby="history-heading" className="rounded-xl border border-border bg-card p-5">
           <h2 id="history-heading" className="text-base font-semibold text-foreground">Historial de repaso</h2>
           <ul className="mt-3 space-y-1 text-xs text-muted-foreground">
             {[...dayLogs].reverse().slice(0, 14).map((log) => (

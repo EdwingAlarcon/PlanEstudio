@@ -114,7 +114,7 @@ export function ProgressDashboardClient({ levels, practices, interactivePractice
           return (
             <section
               key={levelId}
-              className="rounded-xl border border-border bg-card p-5 shadow-fluent-1"
+              className="rounded-xl border border-border bg-card p-5"
             >
               <div className="flex items-start gap-3">
                 <span
@@ -187,7 +187,7 @@ export function ProgressDashboardClient({ levels, practices, interactivePractice
 
       <Link
         href="/portafolio"
-        className="group flex items-center gap-4 rounded-xl border border-border bg-card px-5 py-4 shadow-fluent-1 transition-all duration-150 hover:border-[#0078D4]/30 hover:shadow-fluent-2 dark:hover:border-[#4DB8FF]/30"
+        className="group flex items-center gap-4 rounded-xl border border-border bg-card px-5 py-4 transition duration-150 hover:border-[#0078D4]/30 hover:shadow-fluent-2 dark:hover:border-[#4DB8FF]/30"
       >
         <Briefcase className="h-6 w-6 shrink-0 text-[#0078D4] dark:text-[#4DB8FF]" aria-hidden />
         <div className="min-w-0 flex-1">

@@ -26,7 +26,7 @@ export default function CurriculumMapPage() {
 
   return (
     <div className="mx-auto max-w-5xl space-y-8 px-4 py-8 animate-fade-in">
-      <section className="rounded-xl border border-border bg-card p-6 shadow-fluent-1">
+      <section className="rounded-xl border border-border bg-card p-6">
         <div className="flex items-start gap-4">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0078D4]">
             <GitBranch className="h-5 w-5 text-white" aria-hidden />
@@ -42,7 +42,7 @@ export default function CurriculumMapPage() {
         </div>
       </section>
 
-      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="legend-heading">
+      <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="legend-heading">
         <h2 id="legend-heading" className="mb-3 text-base font-semibold text-foreground">Leyenda</h2>
         <div className="flex flex-wrap gap-3">
           {LEGEND.map(([label, color]) => (
@@ -55,7 +55,7 @@ export default function CurriculumMapPage() {
       </section>
 
       <section className="grid gap-4 lg:grid-cols-[0.8fr_1.2fr]" aria-label="Mapa de progresión">
-        <div className="rounded-xl border-2 border-[#107C10]/30 bg-card p-5 shadow-fluent-1">
+        <div className="rounded-xl border-2 border-[#107C10]/30 bg-card p-5">
           <div className="mb-4 flex items-center gap-2">
             <Layers3 className="h-4 w-4 text-[#107C10]" aria-hidden />
             <h2 className="text-base font-semibold text-foreground">Fundamentos comunes</h2>
@@ -72,7 +72,7 @@ export default function CurriculumMapPage() {
         <div className="space-y-4">
           <div className="grid gap-3 md:grid-cols-2">
             {routes.map((route) => (
-              <Link key={route.slug} href={`/rutas/${route.slug}`} className="group rounded-xl border border-border bg-card p-4 shadow-fluent-1 transition-colors hover:border-[#0078D4]/40">
+              <Link key={route.slug} href={`/rutas/${route.slug}`} className="group rounded-xl border border-border bg-card p-4 transition-colors hover:border-[#0078D4]/40">
                 <span className="mb-3 block h-1.5 w-10 rounded-full" style={{ backgroundColor: route.accent }} aria-hidden />
                 <div className="flex items-center justify-between gap-2">
                   <h3 className="text-sm font-semibold text-foreground group-hover:text-[#0078D4] dark:group-hover:text-[#4DB8FF]">{route.title}</h3>
@@ -85,7 +85,7 @@ export default function CurriculumMapPage() {
         </div>
       </section>
 
-      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+      <section className="rounded-xl border border-border bg-card p-5">
         <h2 className="text-base font-semibold text-foreground">Lectura recomendada del mapa</h2>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Guided Lab precede Semi-Guided Lab, luego Challenge, Incident y Work Simulation.

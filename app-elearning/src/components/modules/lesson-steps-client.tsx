@@ -124,7 +124,7 @@ export function LessonStepsClient({ moduleKey, moduleTitle, moduleHref, steps, p
       </div>
 
       <div className="space-y-1">
-        <p className="text-xs font-semibold uppercase tracking-widest text-[#0078D4] dark:text-[#4DB8FF]">
+        <p className="text-xs font-semibold text-[#0078D4] dark:text-[#4DB8FF]">
           {KIND_LABEL[step.kind]}
           {step.optional ? (
             <span className="ml-2 rounded bg-muted px-1.5 py-0.5 normal-case tracking-normal text-muted-foreground" data-testid="lesson-step-optional">
@@ -144,7 +144,7 @@ export function LessonStepsClient({ moduleKey, moduleTitle, moduleHref, steps, p
       </div>
 
       {step.kind === "comprueba" ? (
-        <section className="space-y-4 rounded-xl border border-border bg-card p-6 shadow-fluent-1">
+        <section className="space-y-4 rounded-xl border border-border bg-card p-6">
           <p className="text-sm text-foreground">
             Hiciste <span className="font-semibold tabular-nums">{doneCount} de {total}</span> pasos. Ahora comprueba lo que aprendiste
             {questionCount > 0 ? ` con las ${questionCount} preguntas del módulo` : ""}: el quiz aprobado con 80 % o más suma 50 XP.
@@ -164,7 +164,7 @@ export function LessonStepsClient({ moduleKey, moduleTitle, moduleHref, steps, p
           </p>
         </section>
       ) : (
-        <article className="rounded-xl border border-border bg-card px-6 py-6 shadow-fluent-1 md:px-8">
+        <article className="rounded-xl border border-border bg-card px-6 py-6 md:px-8">
           <MarkdownRenderer content={step.markdown} />
         </article>
       )}

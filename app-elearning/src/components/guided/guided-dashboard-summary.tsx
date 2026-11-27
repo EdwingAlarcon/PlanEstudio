@@ -17,7 +17,7 @@ export function GuidedDashboardSummary() {
   const weeklyPlan = buildWeeklyPlan(onboarding.answers.availability, nextAction);
 
   return (
-    <section className="rounded-xl border border-[#0078D4]/20 bg-[#EFF6FC] p-5 shadow-fluent-1 dark:border-[#4DB8FF]/20 dark:bg-[rgba(0,120,212,0.10)]" aria-labelledby="next-dashboard-heading">
+    <section className="rounded-xl border border-[#0078D4]/20 bg-[#EFF6FC] p-5 dark:border-[#4DB8FF]/20 dark:bg-[rgba(0,120,212,0.10)]" aria-labelledby="next-dashboard-heading">
       <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
         <div className="space-y-3">
           <div className="flex items-center gap-2">
@@ -25,7 +25,7 @@ export function GuidedDashboardSummary() {
             <h2 id="next-dashboard-heading" className="text-xl font-semibold text-foreground">¿Qué debo hacer ahora?</h2>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#0078D4] dark:text-[#4DB8FF]">
+            <p className="text-xs font-semibold text-[#0078D4] dark:text-[#4DB8FF]">
               {FOUNDATION_ROUTE.title}
             </p>
             <h3 className="mt-1 text-lg font-semibold text-foreground">{nextAction.activity.title}</h3>

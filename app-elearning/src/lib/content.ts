@@ -548,7 +548,7 @@ export function getAllResourcePages(): ResourcePage[] {
     let rawContent = "";
     let title = slug;
 
-    rawContent = readRequiredFile(fullPath);
+    rawContent = readRequiredFile(fullPath).replace(/^\uFEFF/, "");
     const titleMatch = rawContent.match(/^#\s+(.+)$/m);
     if (titleMatch?.[1]) title = titleMatch[1].replace(/[🎯📝✅📖🏆]/gu, "").trim();
 

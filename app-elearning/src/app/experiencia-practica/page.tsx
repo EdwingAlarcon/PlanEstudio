@@ -25,7 +25,7 @@ export default function PracticalExperiencePage() {
 
   return (
     <div className="mx-auto max-w-5xl space-y-8 px-4 py-8 animate-fade-in">
-      <section className="rounded-2xl border border-border bg-gradient-to-br from-[#EFF6FC] to-white px-6 py-7 shadow-fluent-1 dark:from-[rgba(0,120,212,0.08)] dark:to-background">
+      <section className="rounded-2xl border border-border bg-gradient-to-br from-[#EFF6FC] to-white px-6 py-7 dark:from-[rgba(0,120,212,0.08)] dark:to-background">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#0078D4] shadow-fluent-2">
             <Activity className="h-6 w-6 text-white" aria-hidden />
@@ -59,7 +59,7 @@ export default function PracticalExperiencePage() {
 
       <PracticesClient practices={practices} />
 
-      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="competency-heading">
+      <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="competency-heading">
         <div className="mb-4 flex items-start justify-between gap-3">
           <div>
             <h2 id="competency-heading" className="text-base font-semibold text-foreground">Matriz de competencias prácticas</h2>
@@ -102,7 +102,7 @@ export default function PracticalExperiencePage() {
 
 function Metric({ icon: Icon, label, value }: { icon: typeof GraduationCap; label: string; value: number }) {
   return (
-    <div className="rounded-xl border border-border bg-card p-4 shadow-fluent-1">
+    <div className="rounded-xl border border-border bg-card p-4">
       <div className="mb-2 flex items-center gap-2 text-muted-foreground">
         <Icon className="h-4 w-4" aria-hidden />
         <span className="text-xs font-medium">{label}</span>

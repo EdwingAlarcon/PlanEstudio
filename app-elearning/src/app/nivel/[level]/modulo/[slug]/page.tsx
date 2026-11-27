@@ -101,7 +101,7 @@ export default async function ModulePage({ params }: PageProps) {
       </Button>
 
       {/* ── Module header card ───────────────────────────────────────────── */}
-      <div className="rounded-xl border border-border bg-card px-6 py-5 shadow-fluent-1">
+      <div className="rounded-xl border border-border bg-card px-6 py-5">
         <div className="flex items-start justify-between gap-4">
           <div className="space-y-2 flex-1 min-w-0">
             {/* Breadcrumb chips */}
@@ -169,7 +169,7 @@ export default async function ModulePage({ params }: PageProps) {
       )}
 
       {/* ── Ruta del módulo: tres pasos y su índice ─────────────────────── */}
-      <nav aria-label="Pasos del módulo" className="rounded-xl border border-border bg-card px-5 py-4 shadow-fluent-1">
+      <nav aria-label="Pasos del módulo" className="rounded-xl border border-border bg-card px-5 py-4">
         <ol className="grid gap-3 sm:grid-cols-3">
           <ModuleStep n={1} href="#aprende" title="Aprende y haz" detail={`${outline.length} partes con práctica en tu ambiente`} />
           <ModuleStep n={2} href="#practica" title="Practica" detail={recommendedLab || interactivePractices.length > 0 ? "Lab y ejercicios con feedback" : "Criterios de validación del módulo"} />
@@ -190,7 +190,7 @@ export default async function ModulePage({ params }: PageProps) {
       </nav>
 
       {/* ── Markdown content ─────────────────────────────────────────────── */}
-      <div id="aprende" className="scroll-mt-20 rounded-xl border border-border bg-card px-6 py-8 md:px-8 shadow-fluent-1">
+      <div id="aprende" className="scroll-mt-20 rounded-xl border border-border bg-card px-6 py-8 md:px-8">
         {segments.map((segment, index) =>
           segment.optional ? (
             <details key={index} className="not-prose my-6 rounded-lg border border-border bg-muted/30 px-4 py-3">
@@ -207,7 +207,7 @@ export default async function ModulePage({ params }: PageProps) {
 
       <div id="practica" className="scroll-mt-20 space-y-6">
       {recommendedLab && (
-        <section aria-labelledby="recommended-lab-heading" className="rounded-xl border border-[#107C10]/25 bg-card px-6 py-5 shadow-fluent-1">
+        <section aria-labelledby="recommended-lab-heading" className="rounded-xl border border-[#107C10]/25 bg-card px-6 py-5">
           <h2 id="recommended-lab-heading" className="text-lg font-semibold text-foreground">
             Práctica recomendada
           </h2>
@@ -228,7 +228,7 @@ export default async function ModulePage({ params }: PageProps) {
       )}
 
       {interactivePractices.length > 0 && (
-        <section aria-labelledby="interactive-practice-heading" className="rounded-xl border border-[#107C10]/25 bg-card px-6 py-5 shadow-fluent-1">
+        <section aria-labelledby="interactive-practice-heading" className="rounded-xl border border-[#107C10]/25 bg-card px-6 py-5">
           <h2 id="interactive-practice-heading" className="text-lg font-semibold text-foreground flex items-center gap-2">
             <BrainCircuit className="h-5 w-5 text-[#107C10]" aria-hidden />
             Prueba lo aprendido
@@ -256,7 +256,7 @@ export default async function ModulePage({ params }: PageProps) {
 
       <div id="comprueba" className="scroll-mt-20 space-y-6">
       {questions.length > 0 && (
-        <section aria-labelledby="quiz-heading" className="rounded-xl border border-border bg-card px-6 py-6 shadow-fluent-1">
+        <section aria-labelledby="quiz-heading" className="rounded-xl border border-border bg-card px-6 py-6">
           <h2 id="quiz-heading" className="text-lg font-semibold mb-5 flex items-center gap-2">
             <BookOpen className="h-5 w-5 text-[#0078D4]" aria-hidden />
             {UI.quiz.title}
@@ -267,7 +267,7 @@ export default async function ModulePage({ params }: PageProps) {
 
       {/* ── Diagnóstico de caso aplicado: plegado, no puntúa ─────────────── */}
       {caseQuestions.length > 0 && (
-        <details className="rounded-xl border border-border bg-card px-6 py-4 shadow-fluent-1">
+        <details className="rounded-xl border border-border bg-card px-6 py-4">
           <summary className="cursor-pointer text-base font-semibold">
             Diagnóstico de caso aplicado <span className="text-sm font-normal text-muted-foreground">· opcional, {caseQuestions.length} preguntas</span>
           </summary>

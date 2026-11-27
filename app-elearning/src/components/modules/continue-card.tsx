@@ -20,7 +20,7 @@ export function ContinueCard({ modules }: { modules: ContinueModuleRef[] }) {
   if (!target) return null;
 
   return (
-    <section aria-label="Continuar" className="flex flex-col gap-3 rounded-xl border border-border bg-card px-5 py-4 shadow-fluent-1 sm:flex-row sm:items-center sm:justify-between">
+    <section aria-label="Continuar" className="flex flex-col gap-3 rounded-xl border border-border bg-card px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex min-w-0 items-center gap-3">
         <BookOpen className="h-5 w-5 shrink-0 text-[#0078D4]" aria-hidden />
         <div className="min-w-0">

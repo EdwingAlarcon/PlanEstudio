@@ -45,7 +45,7 @@ export function LabMissionPanel({ slug, mission }: { slug: string; mission: LabM
       aria-labelledby="lab-mission-heading"
       data-testid="lab-mission"
       className={cn(
-        "rounded-xl border bg-card px-6 py-5 shadow-fluent-1",
+        "rounded-xl border bg-card px-6 py-5",
         verified ? "border-amber-500/50" : "border-[#0078D4]/25",
       )}
     >

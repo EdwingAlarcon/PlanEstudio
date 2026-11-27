@@ -22,7 +22,8 @@ test.describe("Smoke — rutas principales", () => {
       const d365Link = sidebar.getByRole("link", { name: /^Dynamics 365\s+0\/10$/ });
       const rpaLink = sidebar.getByRole("link", { name: /RPA · Power Automate Desktop/ });
 
-      await expect(sidebar.getByTestId("sidebar-next-step")).toBeVisible();
+      // En el inicio el siguiente paso está en la página, no repetido en la barra.
+      await expect(sidebar.getByTestId("sidebar-next-step")).toHaveCount(route === "/" ? 0 : 1);
       await d365Link.scrollIntoViewIfNeeded();
       await expect(d365Link).toBeVisible();
       await rpaLink.scrollIntoViewIfNeeded();

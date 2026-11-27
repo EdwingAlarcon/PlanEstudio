@@ -35,7 +35,7 @@ export default function ProfessionalRoutesPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 space-y-8 animate-fade-in">
-      <div className="rounded-2xl border border-border bg-gradient-to-br from-[#EFF6FC] to-white dark:from-[rgba(0,120,212,0.08)] dark:to-background px-6 py-6 shadow-fluent-1">
+      <div className="rounded-2xl border border-border bg-gradient-to-br from-[#EFF6FC] to-white dark:from-[rgba(0,120,212,0.08)] dark:to-background px-6 py-6">
         <div className="flex items-start gap-4">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0078D4] shadow-fluent-2">
             <Route className="h-5 w-5 text-white" aria-hidden />
@@ -57,7 +57,7 @@ export default function ProfessionalRoutesPage() {
             <Link
               key={route.slug}
               href={`/rutas/${route.slug}`}
-              className="group rounded-xl border border-border bg-card p-5 shadow-fluent-1 transition-all duration-200 hover:border-[#0078D4]/30 hover:shadow-fluent-4 dark:hover:border-[#4DB8FF]/30"
+              className="group rounded-xl border border-border bg-card p-5 transition duration-200 hover:border-[#0078D4]/30 hover:shadow-fluent-4 dark:hover:border-[#4DB8FF]/30"
             >
               <div className="mb-4 flex items-start justify-between gap-3">
                 <div className="flex items-center gap-3">

@@ -77,7 +77,7 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
         </Link>
       </Button>
 
-      <div className="rounded-xl border border-border bg-card px-6 py-6 shadow-fluent-1">
+      <div className="rounded-xl border border-border bg-card px-6 py-6">
         <div className="flex items-start gap-4">
           <span className="mt-1 h-14 w-1.5 rounded-full" style={{ backgroundColor: route.accent }} aria-hidden />
           <div className="min-w-0 flex-1 space-y-3">
@@ -115,7 +115,7 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
       </div>
 
       <section className="grid gap-4 md:grid-cols-3" aria-label="Resultado, progreso y competencias">
-        <div className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+        <div className="rounded-xl border border-border bg-card p-5">
           <div className="mb-3 flex items-center gap-2">
             <Target className="h-4 w-4 text-[#0078D4]" aria-hidden />
             <h2 className="text-sm font-semibold text-foreground">Resultado esperado</h2>
@@ -125,7 +125,7 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
 
         <RouteReadinessCard targets={readinessTargets} />
 
-        <div className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+        <div className="rounded-xl border border-border bg-card p-5">
           <div className="mb-3 flex items-center gap-2">
             <CheckCircle2 className="h-4 w-4 text-[#107C10]" aria-hidden />
             <h2 className="text-sm font-semibold text-foreground">Competencias</h2>
@@ -144,11 +144,11 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
         <section aria-labelledby="route-capstone-heading">
           <Link
             href={capstoneHref}
-            className="group flex items-center gap-4 rounded-xl border-2 border-amber-500/40 bg-amber-50/60 px-5 py-4 shadow-fluent-1 transition-all duration-150 hover:border-amber-500 hover:shadow-fluent-2 dark:bg-amber-500/10"
+            className="group flex items-center gap-4 rounded-xl border-2 border-amber-500/40 bg-amber-50/60 px-5 py-4 transition duration-150 hover:border-amber-500 hover:shadow-fluent-2 dark:bg-amber-500/10"
           >
             <Trophy className="h-6 w-6 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
             <div className="min-w-0 flex-1">
-              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 dark:text-amber-400">
+              <p className="text-xs font-semibold text-amber-700 dark:text-amber-400">
                 Proyecto final de la ruta
               </p>
               <h2 id="route-capstone-heading" className="truncate text-sm font-semibold text-foreground">
@@ -174,7 +174,7 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
             <Link
               key={module.id}
               href={`/nivel/${module.levelId}/modulo/${module.slug}`}
-              className="group flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-4 shadow-fluent-1 transition-all duration-150 hover:border-[#0078D4]/30 hover:shadow-fluent-2 dark:hover:border-[#4DB8FF]/30"
+              className="group flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-4 transition duration-150 hover:border-[#0078D4]/30 hover:shadow-fluent-2 dark:hover:border-[#4DB8FF]/30"
             >
               <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-muted font-mono text-xs font-bold text-muted-foreground">
                 {String(module.moduleId).padStart(2, "0")}
@@ -209,7 +209,7 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
               <Link
                 key={lab.slug}
                 href={`/labs/${lab.slug}`}
-                className="group rounded-xl border border-border bg-card p-4 shadow-fluent-1 transition-all duration-150 hover:border-[#107C10]/30 hover:shadow-fluent-2"
+                className="group rounded-xl border border-border bg-card p-4 transition duration-150 hover:border-[#107C10]/30 hover:shadow-fluent-2"
               >
                 <div className="mb-2 flex flex-wrap gap-1.5">
                   <Badge variant="secondary" className="font-mono text-[10px]">{lab.displayId}</Badge>
@@ -231,10 +231,10 @@ export default async function ProfessionalRouteDetailPage({ params }: PageProps)
       )}
 
       {nextRoute && (
-        <section aria-labelledby="next-route-heading" className="rounded-xl border border-[#0078D4]/20 bg-[#EFF6FC] p-5 shadow-fluent-1 dark:border-[#4DB8FF]/20 dark:bg-[rgba(0,120,212,0.10)]">
+        <section aria-labelledby="next-route-heading" className="rounded-xl border border-[#0078D4]/20 bg-[#EFF6FC] p-5 dark:border-[#4DB8FF]/20 dark:bg-[rgba(0,120,212,0.10)]">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-1">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#0078D4] dark:text-[#4DB8FF]">
+              <p className="text-xs font-semibold text-[#0078D4] dark:text-[#4DB8FF]">
                 Siguiente ruta recomendada
               </p>
               <h2 id="next-route-heading" className="text-base font-semibold text-foreground">

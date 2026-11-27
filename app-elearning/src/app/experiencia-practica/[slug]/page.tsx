@@ -44,7 +44,7 @@ export default async function PracticeDetailPage({ params }: Props) {
         </Link>
       </Button>
 
-      <header className="rounded-xl border border-border bg-card px-6 py-5 shadow-fluent-1">
+      <header className="rounded-xl border border-border bg-card px-6 py-5">
         <div className="mb-3 flex flex-wrap items-center gap-1.5">
           <Badge variant={practice.practiceType === "incident" ? "destructive" : practice.practiceType === "challenge" ? "avanzado" : "arquitecto"} className="font-mono">
             {practice.id}
@@ -77,10 +77,10 @@ export default async function PracticeDetailPage({ params }: Props) {
       </section>
 
       {practice.domain === "rpa-desktop-automation" && (
-        <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="rpa-assets-heading">
+        <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="rpa-assets-heading">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-muted-foreground">
                 <Bot className="h-4 w-4" aria-hidden />
                 Assets reproducibles
               </div>
@@ -114,24 +114,24 @@ export default async function PracticeDetailPage({ params }: Props) {
         </section>
       )}
 
-      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="evidence-heading">
+      <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="evidence-heading">
         <h2 id="evidence-heading" className="mb-3 text-base font-semibold text-foreground">Evidencia profesional requerida</h2>
         <div className="grid gap-4 text-sm sm:grid-cols-2">
           <div>
-            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">Obligatoria</p>
+            <p className="mb-2 text-xs font-semibold text-muted-foreground">Obligatoria</p>
             <div className="flex flex-wrap gap-1.5">
               {practice.evidence.required.map((item) => <Badge key={item} variant="outline">{item}</Badge>)}
             </div>
           </div>
           <div>
-            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">Criterios</p>
+            <p className="mb-2 text-xs font-semibold text-muted-foreground">Criterios</p>
             <ul className="list-disc space-y-1 pl-4 text-muted-foreground">
               {practice.evidence.qualityCriteria.map((criterion) => <li key={criterion}>{criterion}</li>)}
             </ul>
           </div>
         </div>
         <div className="mt-4">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">Tipo de evidencia</p>
+          <p className="mb-2 text-xs font-semibold text-muted-foreground">Tipo de evidencia</p>
           <div className="flex flex-wrap gap-1.5">
             {practice.evidence.artifactTypes.map((item) => <Badge key={item} variant="secondary">{item}</Badge>)}
           </div>
@@ -141,7 +141,7 @@ export default async function PracticeDetailPage({ params }: Props) {
         </p>
       </section>
 
-      <section className="rounded-xl border border-border bg-card px-6 py-8 shadow-fluent-1">
+      <section className="rounded-xl border border-border bg-card px-6 py-8">
         <MarkdownRenderer content={bodyContent} />
       </section>
 
@@ -174,7 +174,7 @@ export default async function PracticeDetailPage({ params }: Props) {
 
 function Info({ icon: Icon, title, text }: { icon: typeof Clock; title: string; text: string }) {
   return (
-    <div className="rounded-xl border border-border bg-card p-4 shadow-fluent-1">
+    <div className="rounded-xl border border-border bg-card p-4">
       <div className="mb-1 flex items-center gap-2 text-xs font-medium text-muted-foreground">
         <Icon className="h-4 w-4" aria-hidden />
         {title}

@@ -67,7 +67,7 @@ function FilterChips<T extends string>({
 }) {
   return (
     <div>
-      <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">{label}</p>
+      <p className="mb-1.5 text-[11px] font-semibold text-muted-foreground">{label}</p>
       <div className="flex flex-wrap gap-1.5">
         {options.map((option) => {
           const active = selected.has(option);
@@ -133,7 +133,7 @@ export function PracticesClient({ practices }: { practices: PracticeCard[] }) {
 
   return (
     <>
-      <section className="rounded-xl border border-border bg-card p-4 shadow-fluent-1" aria-labelledby="practice-filters-heading">
+      <section className="rounded-xl border border-border bg-card p-4" aria-labelledby="practice-filters-heading">
         <div className="mb-3 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <Filter className="h-4 w-4 text-[#0078D4]" aria-hidden />
@@ -176,7 +176,7 @@ export function PracticesClient({ practices }: { practices: PracticeCard[] }) {
       <div className="grid gap-3 sm:grid-cols-2">
         {filtered.map((practice) => (
           <Link key={practice.id} href={`/experiencia-practica/${practice.slug}`} className="group">
-            <article className="h-full rounded-xl border border-border bg-card p-4 shadow-fluent-1 transition-all duration-200 hover:border-[#0078D4]/30 hover:shadow-fluent-4">
+            <article className="h-full rounded-xl border border-border bg-card p-4 transition duration-200 hover:border-[#0078D4]/30 hover:shadow-fluent-4">
               <div className="mb-3 flex flex-wrap items-center gap-1.5">
                 <Badge variant={practice.practiceType === "incident" ? "destructive" : practice.practiceType === "challenge" ? "avanzado" : "arquitecto"} className="font-mono">
                   {practice.id}

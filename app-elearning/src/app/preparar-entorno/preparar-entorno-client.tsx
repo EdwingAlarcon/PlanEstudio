@@ -59,7 +59,7 @@ export function PrepararEntornoClient() {
         </Link>
       </header>
 
-      <section aria-labelledby="profile-heading" className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+      <section aria-labelledby="profile-heading" className="rounded-xl border border-border bg-card p-5">
         <h2 id="profile-heading" className="mb-3 text-sm font-semibold text-foreground">{T.profileLabel}</h2>
         <div className="flex flex-wrap gap-2" role="group" aria-label={T.profileLabel}>
           {WORKSTATION_PROFILES.map((option) => (
@@ -112,7 +112,7 @@ export function PrepararEntornoClient() {
         aria-labelledby="next-requirement-heading"
         className="rounded-xl border border-[#0078D4]/20 bg-[#EFF6FC] p-5 dark:border-[#4DB8FF]/20 dark:bg-[rgba(0,120,212,0.10)]"
       >
-        <p id="next-requirement-heading" className="text-xs font-semibold uppercase tracking-widest text-[#0078D4] dark:text-[#4DB8FF]">
+        <p id="next-requirement-heading" className="text-xs font-semibold text-[#0078D4] dark:text-[#4DB8FF]">
           {nextRequirement ? T.nextRequirementTitle : T.allRequiredDoneTitle}
         </p>
         {nextRequirement ? (
@@ -135,7 +135,7 @@ export function PrepararEntornoClient() {
         )}
       </section>
 
-      <section aria-labelledby="essential-heading" className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+      <section aria-labelledby="essential-heading" className="rounded-xl border border-border bg-card p-5">
         <div className="mb-1 flex items-center justify-between gap-3">
           <h2 id="essential-heading" className="text-sm font-semibold text-foreground">{T.essentialSetupTitle}</h2>
           <span className="text-xs text-muted-foreground">{essentialProgress.completed}/{essentialProgress.total}</span>
@@ -203,7 +203,7 @@ export function PrepararEntornoClient() {
 
       <WorkstationReportImport os={os} />
 
-      <section aria-labelledby="access-matrix-heading" className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+      <section aria-labelledby="access-matrix-heading" className="rounded-xl border border-border bg-card p-5">
         <h2 id="access-matrix-heading" className="text-sm font-semibold text-foreground">Matriz de acceso por ruta</h2>
         <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
           Esta matriz separa aprendizaje conceptual, simulación y ejecución real. PlanEstudio no valida acceso a tu tenant automáticamente.
@@ -211,7 +211,7 @@ export function PrepararEntornoClient() {
 
         <div className="mt-4 hidden overflow-x-auto rounded-xl border border-border lg:block">
           <table className="w-full text-left text-sm">
-            <thead className="bg-muted/40 text-xs uppercase tracking-wide text-muted-foreground">
+            <thead className="bg-muted/40 text-xs text-muted-foreground">
               <tr>
                 <th scope="col" className="px-4 py-2 font-medium">Ruta</th>
                 <th scope="col" className="px-4 py-2 font-medium">Acceso mínimo</th>
@@ -271,7 +271,7 @@ export function PrepararEntornoClient() {
         {/* Desktop: table */}
         <div className="hidden overflow-x-auto rounded-xl border border-border md:block">
           <table className="w-full text-left text-sm">
-            <thead className="bg-muted/40 text-xs uppercase tracking-wide text-muted-foreground">
+            <thead className="bg-muted/40 text-xs text-muted-foreground">
               <tr>
                 <th scope="col" className="px-4 py-2 font-medium">Herramienta</th>
                 <th scope="col" className="px-4 py-2 font-medium">Requisito</th>
@@ -334,7 +334,7 @@ function WorkstationReportImport({ os }: { os: OperatingSystem }) {
   }
 
   return (
-    <section aria-labelledby="import-report-heading" className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+    <section aria-labelledby="import-report-heading" className="rounded-xl border border-border bg-card p-5">
       <h2 id="import-report-heading" className="text-sm font-semibold text-foreground">{T.importReportTitle}</h2>
       <p className="mb-3 mt-1 text-xs leading-relaxed text-muted-foreground">{T.importReportSubtitle}</p>
 

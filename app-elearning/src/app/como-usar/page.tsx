@@ -75,7 +75,7 @@ const FIRST_SESSION = [
 export default function HowToUsePage() {
   return (
     <div className="mx-auto max-w-5xl space-y-8 px-4 py-8 animate-fade-in">
-      <section className="rounded-2xl border border-border bg-gradient-to-br from-[#EFF6FC] to-white px-6 py-7 shadow-fluent-1 dark:from-[rgba(0,120,212,0.08)] dark:to-background">
+      <section className="rounded-2xl border border-border bg-gradient-to-br from-[#EFF6FC] to-white px-6 py-7 dark:from-[rgba(0,120,212,0.08)] dark:to-background">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#0078D4] shadow-fluent-2">
             <HelpCircle className="h-6 w-6 text-white" aria-hidden />
@@ -109,14 +109,14 @@ export default function HowToUsePage() {
           {STEPS.map((step, index) => {
             const Icon = step.icon;
             return (
-              <article key={step.title} className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+              <article key={step.title} className="rounded-xl border border-border bg-card p-5">
                 <div className="mb-4 flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#EFF6FC] dark:bg-[rgba(0,120,212,0.12)]">
                       <Icon className="h-5 w-5 text-[#0078D4]" aria-hidden />
                     </div>
                     <div>
-                      <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                      <p className="text-[10px] font-semibold text-muted-foreground">
                         Paso {index + 1}
                       </p>
                       <h3 className="text-base font-semibold text-foreground">{step.title}</h3>
@@ -136,7 +136,7 @@ export default function HowToUsePage() {
         </div>
       </section>
 
-      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="zero-start-heading">
+      <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="zero-start-heading">
         <div className="mb-4 flex items-center gap-2">
           <Compass className="h-4 w-4 text-[#6B4EFF]" aria-hidden />
           <h2 id="zero-start-heading" className="text-lg font-semibold text-foreground">
@@ -152,7 +152,7 @@ export default function HowToUsePage() {
             href="/recursos/ruta-cero-absoluta"
             className="rounded-lg border border-border bg-background p-4 transition-colors hover:border-[#6B4EFF]/40"
           >
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#6B4EFF]">Ruta cero absoluta</p>
+            <p className="text-xs font-semibold text-[#6B4EFF]">Ruta cero absoluta</p>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               Qué es Power Platform, Dataverse, tenant y ambiente — y la diferencia entre Developer, Sandbox, Production y trial.
             </p>
@@ -161,7 +161,7 @@ export default function HowToUsePage() {
             href="/recursos/fundamentos-crm"
             className="rounded-lg border border-border bg-background p-4 transition-colors hover:border-[#6B4EFF]/40"
           >
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#6B4EFF]">Fundamentos CRM</p>
+            <p className="text-xs font-semibold text-[#6B4EFF]">Fundamentos CRM</p>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               Cliente, cuenta, contacto, lead, oportunidad, caso, cola, SLA y actividad — con un caso guiado.
             </p>
@@ -170,7 +170,7 @@ export default function HowToUsePage() {
             href="/recursos/tipos-de-practica"
             className="rounded-lg border border-border bg-background p-4 transition-colors hover:border-[#6B4EFF]/40"
           >
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#6B4EFF]">Tipos de práctica</p>
+            <p className="text-xs font-semibold text-[#6B4EFF]">Tipos de práctica</p>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               Qué necesitas para cada módulo o lab: conceptual, simulada, ambiente del curso, trial D365 o tenant real.
             </p>
@@ -178,7 +178,7 @@ export default function HowToUsePage() {
         </div>
       </section>
 
-      <section className="rounded-xl border border-[#107C10]/25 bg-card p-5 shadow-fluent-1" aria-labelledby="first-session-heading">
+      <section className="rounded-xl border border-[#107C10]/25 bg-card p-5" aria-labelledby="first-session-heading">
         <div className="mb-4 flex items-center gap-2">
           <Camera className="h-4 w-4 text-[#107C10]" aria-hidden />
           <h2 id="first-session-heading" className="text-lg font-semibold text-foreground">
@@ -196,14 +196,14 @@ export default function HowToUsePage() {
               href={item.href}
               className="rounded-lg border border-border bg-background p-4 transition-colors hover:border-[#107C10]/40"
             >
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#107C10]">{item.title}</p>
+              <p className="text-xs font-semibold text-[#107C10]">{item.title}</p>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="study-cycle-heading">
+      <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="study-cycle-heading">
         <h2 id="study-cycle-heading" className="text-base font-semibold text-foreground">
           Regla simple para avanzar
         </h2>

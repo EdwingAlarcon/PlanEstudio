@@ -19,7 +19,7 @@ export default function SimulatorPage() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      <div className="rounded-2xl border border-border bg-gradient-to-br from-[#EFF6FC] to-white px-6 py-7 shadow-fluent-1 dark:from-[rgba(0,120,212,0.08)] dark:to-background">
+      <div className="rounded-2xl border border-border bg-gradient-to-br from-[#EFF6FC] to-white px-6 py-7 dark:from-[rgba(0,120,212,0.08)] dark:to-background">
         <div className="space-y-3">
           <Badge className="w-fit border-0 bg-[#0078D4] text-white">Práctica cronometrada</Badge>
           <div>
@@ -73,7 +73,7 @@ function SimulatorContextCard({
   description: string;
 }) {
   return (
-    <div className="rounded-xl border border-border bg-card p-4 shadow-fluent-1">
+    <div className="rounded-xl border border-border bg-card p-4">
       <div className="mb-2 flex items-center gap-2">
         {icon}
         <h2 className="text-sm font-semibold text-foreground">{title}</h2>

@@ -20,7 +20,7 @@ export function RouteReadinessCard({ targets }: { targets: RouteReadinessTargets
   const labPct = readiness.totalLabs > 0 ? Math.round((readiness.completedLabs / readiness.totalLabs) * 100) : 0;
 
   return (
-    <div className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+    <div className="rounded-xl border border-border bg-card p-5">
       <div className="mb-3 flex items-center gap-2">
         <BarChart3 className="h-4 w-4 text-[#6B4EFF]" aria-hidden />
         <h2 className="text-sm font-semibold text-foreground">Tu progreso en esta ruta</h2>

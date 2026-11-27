@@ -18,7 +18,7 @@ export function RetentionSummary() {
   const alDia = summary.total - summary.dueToday;
 
   return (
-    <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="retention-summary-heading">
+    <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="retention-summary-heading">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-center gap-2">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0078D4]/10">

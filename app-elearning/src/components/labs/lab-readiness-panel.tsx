@@ -24,7 +24,7 @@ export function LabReadinessPanel({ readiness }: LabReadinessPanelProps) {
   return (
     <section
       aria-labelledby="lab-readiness-heading"
-      className="rounded-xl border border-border bg-card px-6 py-5 shadow-fluent-1"
+      className="rounded-xl border border-border bg-card px-6 py-5"
     >
       <div className="flex items-start gap-3">
         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0078D4]/10">

@@ -53,7 +53,7 @@ export default async function LevelPage({ params }: PageProps) {
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
       {/* ── Level header ─────────────────────────────────────────────────── */}
-      <div className="rounded-xl border border-border bg-card px-6 py-6 shadow-fluent-1">
+      <div className="rounded-xl border border-border bg-card px-6 py-6">
         <div className="flex items-start gap-4">
           <div className={`mt-1 h-10 w-1 rounded-full shrink-0 ${acc.bar}`} aria-hidden />
           <div className="space-y-2 flex-1 min-w-0">
@@ -141,7 +141,7 @@ function RpaPracticePanel() {
   return (
     <section
       aria-labelledby="rpa-practice-heading"
-      className="rounded-xl border border-[#6B4EFF]/25 bg-[#F5F3FF] px-5 py-5 shadow-fluent-1 dark:border-[#A99BFF]/30 dark:bg-[rgba(107,78,255,0.12)]"
+      className="rounded-xl border border-[#6B4EFF]/25 bg-[#F5F3FF] px-5 py-5 dark:border-[#A99BFF]/30 dark:bg-[rgba(107,78,255,0.12)]"
     >
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
@@ -171,7 +171,7 @@ function RpaPracticePanel() {
             <Link
               key={track.href}
               href={track.href}
-              className="group rounded-lg border border-border bg-card p-4 shadow-fluent-1 transition-all duration-150 hover:border-[#6B4EFF]/40 hover:shadow-fluent-2"
+              className="group rounded-lg border border-border bg-card p-4 transition duration-150 hover:border-[#6B4EFF]/40 hover:shadow-fluent-2"
             >
               <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#6B4EFF]/10 text-[#6B4EFF] dark:text-[#A99BFF]">
                 <Icon className="h-4.5 w-4.5" aria-hidden />
@@ -222,7 +222,7 @@ function D365EnterprisePracticePanel() {
   return (
     <section
       aria-labelledby="d365-practice-heading"
-      className="rounded-xl border border-teal-200/70 bg-teal-50/70 px-5 py-5 shadow-fluent-1 dark:border-teal-900/70 dark:bg-teal-950/30"
+      className="rounded-xl border border-teal-200/70 bg-teal-50/70 px-5 py-5 dark:border-teal-900/70 dark:bg-teal-950/30"
     >
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
@@ -252,7 +252,7 @@ function D365EnterprisePracticePanel() {
             <Link
               key={track.href}
               href={track.href}
-              className="group rounded-lg border border-border bg-card p-4 shadow-fluent-1 transition-all duration-150 hover:border-teal-500/40 hover:shadow-fluent-2"
+              className="group rounded-lg border border-border bg-card p-4 transition duration-150 hover:border-teal-500/40 hover:shadow-fluent-2"
             >
               <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-teal-100 text-teal-700 dark:bg-teal-900/60 dark:text-teal-300">
                 <Icon className="h-4.5 w-4.5" aria-hidden />
@@ -278,7 +278,7 @@ function D365EnterprisePracticePanel() {
 function ModuleRow({ mod, levelId }: { mod: ModuleInfo; levelId: LevelId }) {
   return (
     <div
-      className="group flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-4 shadow-fluent-1 hover:shadow-fluent-2 hover:border-[#0078D4]/30 dark:hover:border-[#4DB8FF]/30 transition-all duration-150"
+      className="group flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-4 hover:shadow-fluent-2 hover:border-[#0078D4]/30 dark:hover:border-[#4DB8FF]/30 transition duration-150"
     >
       {/* Module number bubble */}
       <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-muted text-xs font-bold text-muted-foreground font-mono">

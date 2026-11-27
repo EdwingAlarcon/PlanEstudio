@@ -71,7 +71,7 @@ export function RpaPortalSandboxClient() {
 
   return (
     <div className="mx-auto max-w-6xl space-y-5">
-      <header className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+      <header className="rounded-xl border border-border bg-card p-5">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
           <div>
             <div className="flex flex-wrap items-center gap-2">
@@ -91,8 +91,8 @@ export function RpaPortalSandboxClient() {
       </header>
 
       <section className="grid gap-4 lg:grid-cols-[280px_minmax(0,1fr)]" aria-label="Controles del portal RPA">
-        <aside className="rounded-xl border border-border bg-card p-4 shadow-fluent-1">
-          <label className="text-xs font-semibold uppercase tracking-widest text-muted-foreground" htmlFor="scenario-mode">Escenario</label>
+        <aside className="rounded-xl border border-border bg-card p-4">
+          <label className="text-xs font-semibold text-muted-foreground" htmlFor="scenario-mode">Escenario</label>
           <select id="scenario-mode" value={mode} onChange={(event) => { setMode(event.target.value as Mode); setPage(1); setModalOpen(event.target.value === "unexpected-modal"); }} className="mt-2 h-9 w-full rounded-md border border-border bg-background px-2 text-sm">
             {MODES.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
           </select>
@@ -116,7 +116,7 @@ export function RpaPortalSandboxClient() {
           </div>
         </aside>
 
-        <main className="rounded-xl border border-border bg-card p-4 shadow-fluent-1">
+        <main className="rounded-xl border border-border bg-card p-4">
           <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_180px_auto]">
             <label className="relative block">
               <span className="sr-only">Buscar solicitud</span>
@@ -145,7 +145,7 @@ export function RpaPortalSandboxClient() {
           ) : (
             <div className={cn("mt-4 overflow-x-auto rounded-lg border border-border", mode === "selector-shift" && "pt-2")} data-rpa-table={mode === "selector-shift" ? "requests-v2" : "requests"}>
               <table className="w-full min-w-[760px] text-sm">
-                <thead className="bg-muted/60 text-xs uppercase tracking-wider text-muted-foreground">
+                <thead className="bg-muted/60 text-xs text-muted-foreground">
                   <tr>
                     <th className="px-3 py-2 text-left">Solicitud</th>
                     <th className="px-3 py-2 text-left">Cliente</th>

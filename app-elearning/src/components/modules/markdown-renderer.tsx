@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import { cn } from "@/lib/utils";
+import { rehypeStripLeadingEmoji } from "@/lib/rehype-strip-leading-emoji";
 import { MermaidDiagram } from "@/components/modules/mermaid-diagram";
 import { UiLabel } from "@/components/modules/ui-label";
 import type { Components } from "react-markdown";
@@ -85,7 +86,7 @@ const COMPONENTS: Components = {
   ),
 
   th: ({ children }) => (
-    <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground border-b border-border whitespace-nowrap">
+    <th className="px-4 py-3 text-left text-xs font-semibold text-muted-foreground border-b border-border whitespace-nowrap">
       {children}
     </th>
   ),
@@ -125,7 +126,7 @@ const COMPONENTS: Components = {
       <div className="not-prose my-6 overflow-hidden rounded-lg border border-slate-700 dark:border-slate-800 shadow-md">
         {lang && (
           <div className="flex items-center gap-2 border-b border-slate-700 bg-slate-800 px-4 py-2">
-            <span className="font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400">
+            <span className="font-mono text-[11px] font-medium text-slate-400">
               {lang}
             </span>
           </div>
@@ -251,7 +252,7 @@ interface MarkdownRendererProps {
 export function MarkdownRenderer({ content, className }: MarkdownRendererProps) {
   return (
     <article className={cn(PROSE_CLASSES, className)}>
-      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSlug]} components={COMPONENTS}>
+      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSlug, rehypeStripLeadingEmoji]} components={COMPONENTS}>
         {content}
       </ReactMarkdown>
     </article>

@@ -21,7 +21,7 @@ export function ModuleNotes({ moduleId }: { moduleId: string }) {
   }, [draft, saved, moduleId, setModuleNote]);
 
   return (
-    <section aria-labelledby="module-notes-heading" className="rounded-xl border border-border bg-card px-6 py-5 shadow-fluent-1">
+    <section aria-labelledby="module-notes-heading" className="rounded-xl border border-border bg-card px-6 py-5">
       <h2 id="module-notes-heading" className="flex items-center gap-2 text-base font-semibold text-foreground">
         <StickyNote className="h-4 w-4 text-[#0078D4]" aria-hidden />
         Mis notas

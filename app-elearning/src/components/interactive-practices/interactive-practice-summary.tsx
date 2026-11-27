@@ -73,7 +73,7 @@ export function InteractivePracticeSummary({ practices, showReset = false }: { p
   };
 
   return (
-    <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="interactive-summary-heading">
+    <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="interactive-summary-heading">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <div className="mb-2 flex items-center gap-2">
@@ -81,7 +81,7 @@ export function InteractivePracticeSummary({ practices, showReset = false }: { p
             <h2 id="interactive-summary-heading" className="text-lg font-semibold text-foreground">Práctica interactiva</h2>
           </div>
           <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            {practices.length} ejercicios piloto con feedback inmediato, mastery independiente y fixtures locales.
+            {practices.length} ejercicios cortos con corrección inmediata y datos de ejemplo.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">

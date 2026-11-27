@@ -26,7 +26,7 @@ export function RetentionTodayCard() {
   return (
     <section
       aria-labelledby="retention-today-heading"
-      className="rounded-xl border border-border bg-card p-5 shadow-fluent-1"
+      className="rounded-xl border border-border bg-card p-5"
     >
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">

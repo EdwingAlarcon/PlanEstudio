@@ -1672,3 +1672,21 @@ simulador ya no existen: antes de presentar PL-900, el alumno debe leer el recur
 5. No tocar el Caso Real (el diagnóstico de caso cita sus hechos).
 6. Prueba simulada de cada tanda antes de subir.
 
+## 18. Pulido de la interfaz (2026-11-27)
+
+Con el plugin `unslop` (diagnóstico de 9 pantallas): poco "aspecto de IA", pero cada pantalla decía demasiado y repetía.
+Se hizo un pulido sin cambiar colores, tipografía ni estructura:
+- El "siguiente paso" de la barra no se repite en el inicio y deja de ser un bloque de color; el inicio pierde la barra
+  "Fundamentos 0/7". Se conservan XP y meta semanal, más discretas.
+- Laboratorios: roles agrupados en familias (`role-family.ts`; el frontmatter no cambia), filtros secundarios plegados,
+  tarjetas y cabecera del lab sin datos repetidos.
+- Recursos: el BOM impedía leer dos títulos (`checklist`, `banco-preguntas`).
+- Textos: el inicio ya no promete Dynamics 365; fuera "fixtures", "mastery independiente" y la razón repetitiva.
+- Estilo en toda la app: sin etiquetas en mayúsculas espaciadas, sin sombra por defecto en tarjetas, sin
+  `transition-all`, sin emojis en las insignias de nivel.
+- Los emojis decorativos de títulos y párrafos se quitan **al mostrar** (`rehype-strip-leading-emoji.ts`), no en los
+  archivos: el modo por pasos y las secciones del módulo los usan como marcadores.
+
+**No se hizo:** el panel "Antes de empezar" del lab todavía repite producto y rol, y la página de Laboratorios sigue
+destacando un capstone de Dynamics 365.
+

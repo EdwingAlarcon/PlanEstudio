@@ -2,11 +2,12 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Award, BookOpen, ChevronRight, Clock, FlaskConical, X } from "lucide-react";
+import { ChevronRight, Clock, FlaskConical, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { LabCardStatus } from "./lab-card-status";
 import type { DomainTag, LabPresentationMeta } from "@/lib/lab-metadata";
 import { cn } from "@/lib/utils";
+import { roleFamilies } from "@/lib/role-family";
 import { useProgressStore } from "@/lib/progress";
 import { LEVEL_ORDER as CONTENT_LEVEL_ORDER, type LevelId } from "@/lib/i18n";
 
@@ -53,27 +54,6 @@ const LEVEL_CONFIG: Record<string, { label: string; bar: string; accent: string 
 
 const LEVEL_ORDER = ["N1", "N2", "N3", "N4", "N5", "N6", "RPA"];
 
-const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365" | "rpa" | "default"> = {
-  "PL-900": "basico",
-  "PL-200 (retirado 31 ago 2026)": "intermedio",
-  "Consultor funcional (PL-200 retirado 31 ago 2026)": "intermedio",
-  "PL-400": "avanzado",
-  "AB-400": "avanzado",
-  "AB-400 (sucesor de PL-400)": "avanzado",
-  "AB-400 (sucesor de PL-400, retirado 30 oct 2026)": "avanzado",
-  "Arquitectura Power Platform": "arquitecto",
-  "Buenas Prácticas": "ia",
-  "Especialista Dynamics 365 CE": "d365",
-  "D365 CE avanzado + F&O awareness": "d365",
-  "CE avanzado + F&O Awareness": "d365",
-  "CE avanzado": "d365",
-  "D365 Especialización": "d365",
-  "D365 Especialización Integration": "d365",
-  "D365 Especialización Portfolio": "d365",
-  "Power Automate Desktop & RPA": "rpa",
-  "RPA": "rpa",
-};
-
 const DOMAIN_ORDER: DomainTag[] = ["Power Platform", "Dynamics 365", "Integración", "IA", "RPA", "Empleabilidad"];
 const DIFFICULTY_ORDER = ["Fundacional", "Intermedia", "Avanzada", "Enterprise", "Especializada", "Especializada D365", "Especializada RPA"];
 
@@ -108,7 +88,7 @@ function FilterChips<T extends string>({ label, options, selected, onToggle }: F
 
   return (
     <div>
-      <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">{label}</p>
+      <p className="mb-1.5 text-[11px] font-semibold text-muted-foreground">{label}</p>
       <div className="flex flex-wrap gap-1.5">
         {options.map((option) => {
           const active = selected.has(option);
@@ -144,7 +124,7 @@ export function LabsClient({ labs }: { labs: LabWithMeta[] }) {
   const activeLevelCode = useMemo(() => getActiveLevelCode(completedModules), [completedModules]);
 
   const roleOptions = useMemo(
-    () => [...new Set(labs.flatMap((l) => l.role))].sort((a, b) => a.localeCompare(b)),
+    () => roleFamilies(labs.flatMap((l) => l.role)).sort((a, b) => a.localeCompare(b)),
     [labs]
   );
   const difficultyOptions = useMemo(
@@ -160,7 +140,7 @@ export function LabsClient({ labs }: { labs: LabWithMeta[] }) {
       labs.filter(
         (lab) =>
           intersects(selectedDomains, lab.meta.domains) &&
-          intersects(selectedRoles, lab.role) &&
+          intersects(selectedRoles, roleFamilies(lab.role)) &&
           intersects(selectedLevels, [lab.level]) &&
           intersects(selectedDifficulties, [lab.meta.difficulty])
       ),
@@ -184,7 +164,7 @@ export function LabsClient({ labs }: { labs: LabWithMeta[] }) {
   return (
     <>
       {/* ── Filters ─────────────────────────────────────────────────────── */}
-      <section aria-labelledby="filters-heading" className="mb-8 rounded-xl border border-border bg-card p-4 shadow-fluent-1">
+      <section aria-labelledby="filters-heading" className="mb-8 rounded-xl border border-border bg-card p-4">
         <div className="mb-3 flex items-center justify-between gap-3">
           <h2 id="filters-heading" className="text-sm font-semibold text-foreground">
             Filtrar laboratorios
@@ -213,6 +193,11 @@ export function LabsClient({ labs }: { labs: LabWithMeta[] }) {
             selected={selectedDomains}
             onToggle={(v) => setSelectedDomains((s) => toggle(s, v))}
           />
+          <details>
+            <summary className="cursor-pointer text-xs font-medium text-muted-foreground hover:text-foreground">
+              Más filtros: rol, nivel y dificultad
+            </summary>
+            <div className="mt-3 space-y-3">
           <FilterChips
             label="Rol"
             options={roleOptions}
@@ -231,6 +216,8 @@ export function LabsClient({ labs }: { labs: LabWithMeta[] }) {
             selected={selectedDifficulties}
             onToggle={(v) => setSelectedDifficulties((s) => toggle(s, v))}
           />
+            </div>
+          </details>
         </div>
       </section>
 
@@ -277,7 +264,7 @@ export function LabsClient({ labs }: { labs: LabWithMeta[] }) {
 
                 return (
                   <Link key={lab.slug} href={`/labs/${lab.slug}`} className="group">
-                    <div className="relative h-full rounded-xl border border-border bg-card px-4 py-4 shadow-fluent-1 group-hover:shadow-fluent-4 group-hover:border-[#0078D4]/30 dark:group-hover:border-[#4DB8FF]/30 transition-all duration-200">
+                    <div className="relative h-full rounded-xl border border-border bg-card px-4 py-4 group-hover:shadow-fluent-4 group-hover:border-[#0078D4]/30 dark:group-hover:border-[#4DB8FF]/30 transition duration-200">
                       <div className="mb-2 flex flex-wrap items-center gap-1.5 text-xs">
                         <Badge
                           variant={meta.kind === "Capstone" ? "default" : "secondary"}
@@ -286,21 +273,6 @@ export function LabsClient({ labs }: { labs: LabWithMeta[] }) {
                           {lab.displayId}
                         </Badge>
                         <span className="font-medium text-muted-foreground">· {meta.kindLabel} · {lab.level}</span>
-                      </div>
-
-                      <div className="mb-3 grid gap-1 text-[11px] text-muted-foreground">
-                        <div className="flex items-center gap-1.5">
-                          <BookOpen className="h-3 w-3 shrink-0" aria-hidden />
-                          <span className="truncate">{primaryRoute}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <Award className="h-3 w-3 shrink-0" aria-hidden />
-                          <span>{meta.recommendedLevel}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <FlaskConical className="h-3 w-3 shrink-0" aria-hidden />
-                          <span>{meta.difficulty}</span>
-                        </div>
                       </div>
 
                       {/* Title row */}
@@ -314,51 +286,14 @@ export function LabsClient({ labs }: { labs: LabWithMeta[] }) {
                         </div>
                       </div>
 
-                      {/* Badges */}
-                      <div className="flex flex-wrap gap-1.5 mb-3">
-                        {meta.certificationBadges.map((cert) => (
-                          <Badge key={cert} variant={CERT_VARIANT[cert] ?? "default"} className="text-[10px] px-1.5 py-0 h-4">
-                            {cert}
-                          </Badge>
-                        ))}
-                        {lab.products.slice(0, 2).map((product) => (
-                          <Badge key={product} variant="outline" className="text-[10px] px-1.5 py-0 h-4">
-                            {product}
-                          </Badge>
-                        ))}
-                      </div>
-
-                      {meta.competencies.length > 0 && (
-                        <p className="mb-1.5 line-clamp-1 text-xs leading-relaxed text-muted-foreground">
-                          <span className="font-medium text-foreground">Competencias:</span> {meta.competencies.join(", ")}
-                        </p>
-                      )}
-
-                      <p className="mb-3 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
-                        <span className="font-medium text-foreground">Evidencia:</span> {meta.evidenceSummary}
+                      <p className="mb-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                        <span className="font-medium text-foreground">Evidencia:</span> {meta.evidenceSummary.replace(/`/g, "")}
                       </p>
 
-                      {/* Meta row */}
-                      <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                        {lab.duration > 0 && (
-                          <span className="flex items-center gap-1">
-                            <Clock className="h-3 w-3" aria-hidden />
-                            {lab.duration} min
-                          </span>
-                        )}
-                        {lab.role.length > 0 && (
-                          <span className="flex items-center gap-1">
-                            <BookOpen className="h-3 w-3" aria-hidden />
-                            {lab.role[0]}
-                          </span>
-                        )}
-                        {meta.certificationBadges.length > 0 && (
-                          <span className="flex items-center gap-1 ml-auto">
-                            <Award className="h-3 w-3" aria-hidden />
-                            {meta.certificationBadges[0]}
-                          </span>
-                        )}
-                      </div>
+                      <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <Clock className="h-3 w-3" aria-hidden />
+                        {[lab.duration > 0 ? `${lab.duration} min` : null, primaryRoute, meta.difficulty].filter(Boolean).join(" · ")}
+                      </p>
                     </div>
                   </Link>
                 );

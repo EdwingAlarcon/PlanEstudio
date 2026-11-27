@@ -48,7 +48,7 @@ export default function LabsPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8 animate-fade-in">
       {/* ── Page header ─────────────────────────────────────────────────── */}
-      <div className="rounded-2xl border border-border bg-gradient-to-br from-[#EFF6FC] to-white dark:from-[rgba(0,120,212,0.08)] dark:to-background px-6 py-6 mb-8 shadow-fluent-1">
+      <div className="mb-6">
         <div className="flex items-center gap-3 mb-2">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0078D4] shadow-fluent-2">
             <FlaskConical className="h-5 w-5 text-white" aria-hidden />
@@ -89,7 +89,7 @@ export default function LabsPage() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="group rounded-xl border border-border bg-card p-4 shadow-fluent-1 transition-all duration-200 hover:border-[#0078D4]/30 hover:shadow-fluent-4"
+                className="group rounded-xl border border-border bg-card p-4 transition duration-200 hover:border-[#0078D4]/30 hover:shadow-fluent-4"
               >
                 <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#0078D4]/10">
                   <Icon className="h-4.5 w-4.5 text-[#0078D4] dark:text-[#4DB8FF]" aria-hidden />

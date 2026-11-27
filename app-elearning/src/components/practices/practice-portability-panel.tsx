@@ -105,7 +105,7 @@ export function PracticePortabilityPanel({ practiceIds }: { practiceIds: string[
   }
 
   return (
-    <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="practice-portability-heading">
+    <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="practice-portability-heading">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <div className="flex items-center gap-2">

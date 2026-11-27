@@ -46,7 +46,7 @@ export function MyRouteClient({
 
   return (
     <div className="mx-auto max-w-5xl space-y-8 px-4 py-8 animate-fade-in">
-      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1 md:p-6">
+      <section className="rounded-xl border border-border bg-card p-5 md:p-6">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
           <div className="space-y-3">
             <div className="flex flex-wrap gap-2">
@@ -78,8 +78,8 @@ export function MyRouteClient({
       <RetentionTodayCard />
 
       <section className="grid gap-4 lg:grid-cols-[1fr_0.85fr]">
-        <div className="rounded-xl border border-[#0078D4]/20 bg-[#EFF6FC] p-5 shadow-fluent-1 dark:border-[#4DB8FF]/20 dark:bg-[rgba(0,120,212,0.10)]">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#0078D4] dark:text-[#4DB8FF]">Próxima mejor acción</p>
+        <div className="rounded-xl border border-[#0078D4]/20 bg-[#EFF6FC] p-5 dark:border-[#4DB8FF]/20 dark:bg-[rgba(0,120,212,0.10)]">
+          <p className="text-xs font-semibold text-[#0078D4] dark:text-[#4DB8FF]">Próxima mejor acción</p>
           <h2 className="mt-2 text-xl font-semibold text-foreground">{nextAction.activity.title}</h2>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{nextAction.reason}</p>
           <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted-foreground">
@@ -94,7 +94,7 @@ export function MyRouteClient({
           </Button>
         </div>
 
-        <div className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+        <div className="rounded-xl border border-border bg-card p-5">
           <div className="mb-3 flex items-center gap-2">
             <Compass className="h-4 w-4 text-[#107C10]" aria-hidden />
             <h2 className="text-base font-semibold text-foreground">Mi plan de esta semana</h2>
@@ -120,7 +120,7 @@ export function MyRouteClient({
           {FOUNDATION_ACTIVITIES.map((activity) => {
             const complete = isFoundationActivityComplete(activity, completedModules, completedLabs, onboarding);
             return (
-              <article key={activity.id} className="rounded-xl border border-border bg-card p-4 shadow-fluent-1">
+              <article key={activity.id} className="rounded-xl border border-border bg-card p-4">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted">
                     {complete ? <CheckCircle2 className="h-5 w-5 text-[#107C10]" aria-hidden /> : <Circle className="h-5 w-5 text-muted-foreground" aria-hidden />}
@@ -168,7 +168,7 @@ export function MyRouteClient({
         </div>
         <div className="grid gap-3 md:grid-cols-3">
           {ROLE_EXPERIENCES.map((experience) => (
-            <article key={experience.id} className="rounded-xl border border-border bg-card p-4 shadow-fluent-1">
+            <article key={experience.id} className="rounded-xl border border-border bg-card p-4">
               <Badge variant="outline">{experience.minutes} min</Badge>
               <h3 className="mt-3 text-sm font-semibold text-foreground">{experience.title}</h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{experience.activity}</p>
@@ -196,7 +196,7 @@ export function MyRouteClient({
         </div>
         <div className="grid gap-3 md:grid-cols-3">
           {recommendedRoutes.map((route, index) => (
-            <article key={route.slug} className="rounded-xl border border-border bg-card p-4 shadow-fluent-1">
+            <article key={route.slug} className="rounded-xl border border-border bg-card p-4">
               <span className="mb-3 block h-1.5 w-12 rounded-full" style={{ backgroundColor: route.accent }} aria-hidden />
               <Badge variant={index === 0 ? "default" : "outline"}>{index === 0 ? "Mejor coincidencia" : index === 1 ? "Alternativa" : "Explorar otra opción"}</Badge>
               <h3 className="mt-3 text-base font-semibold text-foreground">{route.title}</h3>
@@ -221,7 +221,7 @@ export function MyRouteClient({
         <p className="text-xs leading-relaxed text-muted-foreground">{getRecommendationReason(onboarding.answers)}</p>
       </section>
 
-      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="exit-heading">
+      <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="exit-heading">
         <div className="mb-3 flex items-center gap-2">
           <Route className="h-4 w-4 text-[#0078D4]" aria-hidden />
           <h2 id="exit-heading" className="text-base font-semibold text-foreground">Criterios de salida</h2>
@@ -259,7 +259,7 @@ function WorkstationPreviewSection() {
   return (
     <section
       aria-labelledby="workstation-preview-heading"
-      className="rounded-xl border border-border bg-card p-5 shadow-fluent-1"
+      className="rounded-xl border border-border bg-card p-5"
     >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-start gap-3">
@@ -297,7 +297,7 @@ function DiagnosticPanel() {
   }
 
   return (
-    <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="diagnostic-heading">
+    <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="diagnostic-heading">
       <div className="mb-4 flex items-center gap-2">
         <HelpCircle className="h-4 w-4 text-[#0078D4]" aria-hidden />
         <h2 id="diagnostic-heading" className="text-lg font-semibold text-foreground">Diagnóstico ligero</h2>

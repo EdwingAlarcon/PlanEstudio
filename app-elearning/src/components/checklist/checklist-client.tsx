@@ -211,7 +211,7 @@ export function ChecklistClient({ checklist, totalLabs }: ChecklistClientProps) 
 
       <section
         aria-labelledby="beginner-minimum-heading"
-        className="rounded-lg border border-[#107C10]/25 bg-card p-4 shadow-fluent-1"
+        className="rounded-lg border border-[#107C10]/25 bg-card p-4"
       >
         <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
           <div>
@@ -266,7 +266,7 @@ export function ChecklistClient({ checklist, totalLabs }: ChecklistClientProps) 
 
       <div className="grid gap-5 lg:grid-cols-[320px_1fr]">
         <aside className="space-y-3" aria-label="Módulos del checklist">
-          <div className="rounded-lg border border-border bg-card p-4 shadow-fluent-1">
+          <div className="rounded-lg border border-border bg-card p-4">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <Badge variant={LEVEL_STYLE[activeLevel.levelId].badge}>{activeLevel.title}</Badge>
@@ -292,7 +292,7 @@ export function ChecklistClient({ checklist, totalLabs }: ChecklistClientProps) 
                   type="button"
                   onClick={() => setActiveModuleId(mod.moduleId)}
                   className={cn(
-                    "w-full rounded-lg border bg-card px-3 py-3 text-left shadow-fluent-1 transition-colors",
+                    "w-full rounded-lg border bg-card px-3 py-3 text-left transition-colors",
                     active
                       ? "border-[#0078D4] bg-[#EFF6FC] dark:bg-[rgba(0,120,212,0.12)]"
                       : "border-border hover:border-[#0078D4]/40",
@@ -314,7 +314,7 @@ export function ChecklistClient({ checklist, totalLabs }: ChecklistClientProps) 
           </div>
         </aside>
 
-        <main className="rounded-lg border border-border bg-card shadow-fluent-1">
+        <main className="rounded-lg border border-border bg-card">
           <div className="border-b border-border px-5 py-4">
             <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
               <div>
@@ -392,8 +392,8 @@ export function ChecklistClient({ checklist, totalLabs }: ChecklistClientProps) 
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-border bg-card px-3 py-2 shadow-fluent-1">
-      <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{label}</p>
+    <div className="rounded-lg border border-border bg-card px-3 py-2">
+      <p className="text-[10px] font-semibold text-muted-foreground">{label}</p>
       <p className="mt-1 text-lg font-bold text-foreground">{value}</p>
     </div>
   );
@@ -411,10 +411,10 @@ function SummaryCard({
   detail: string;
 }) {
   return (
-    <div className="rounded-lg border border-border bg-card p-4 shadow-fluent-1">
+    <div className="rounded-lg border border-border bg-card p-4">
       <div className="flex items-center gap-2 text-[#0078D4] dark:text-[#4DB8FF]">
         {icon}
-        <p className="text-xs font-semibold uppercase tracking-wide">{label}</p>
+        <p className="text-xs font-semibold ">{label}</p>
       </div>
       <p className="mt-2 text-xl font-bold text-foreground">{value}</p>
       <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{detail}</p>
@@ -457,7 +457,7 @@ function ChecklistRow({
       </label>
 
       <label className="space-y-1">
-        <span className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+        <span className="flex items-center gap-1 text-[10px] font-semibold text-muted-foreground">
           <BarChart3 className="h-3 w-3" aria-hidden />
           Dominio
         </span>
@@ -475,7 +475,7 @@ function ChecklistRow({
       </label>
 
       <label className="space-y-1">
-        <span className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+        <span className="flex items-center gap-1 text-[10px] font-semibold text-muted-foreground">
           <CalendarDays className="h-3 w-3" aria-hidden />
           Fecha
         </span>

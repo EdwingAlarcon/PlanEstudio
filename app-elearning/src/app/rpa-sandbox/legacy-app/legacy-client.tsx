@@ -109,7 +109,7 @@ export function RpaLegacySimulatorClient() {
   }
 
   const form = (
-    <section className="rounded-xl border border-border bg-card p-4 shadow-fluent-1" aria-labelledby="legacy-form-title">
+    <section className="rounded-xl border border-border bg-card p-4" aria-labelledby="legacy-form-title">
       <h2 id="legacy-form-title" className="text-base font-semibold text-foreground">Registro simulado</h2>
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
         <label className="text-sm">
@@ -138,7 +138,7 @@ export function RpaLegacySimulatorClient() {
 
   return (
     <div className="mx-auto max-w-6xl space-y-5">
-      <header className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" inert={interruptOpen}>
+      <header className="rounded-xl border border-border bg-card p-5" inert={interruptOpen}>
         <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
           <div>
             <div className="flex flex-wrap items-center gap-2">
@@ -155,8 +155,8 @@ export function RpaLegacySimulatorClient() {
       </header>
 
       <section className="grid gap-4 lg:grid-cols-[260px_minmax(0,1fr)]" inert={interruptOpen}>
-        <aside className="rounded-xl border border-border bg-card p-4 shadow-fluent-1">
-          <label className="text-xs font-semibold uppercase tracking-widest text-muted-foreground" htmlFor="legacy-mode">Modo</label>
+        <aside className="rounded-xl border border-border bg-card p-4">
+          <label className="text-xs font-semibold text-muted-foreground" htmlFor="legacy-mode">Modo</label>
           <select id="legacy-mode" value={mode} onChange={(event) => changeMode(event.target.value as LegacyMode)} className="mt-2 h-9 w-full rounded-md border border-border bg-background px-2 text-sm">
             {LEGACY_MODES.map((option) => (
               <option key={option.value} value={option.value}>{option.label}</option>
@@ -188,7 +188,7 @@ export function RpaLegacySimulatorClient() {
       </section>
 
       <details
-        className="rounded-xl border border-border bg-card p-4 shadow-fluent-1"
+        className="rounded-xl border border-border bg-card p-4"
         data-testid="legacy-activity"
         inert={interruptOpen}
         onToggle={(event) => setActivityOpen(event.currentTarget.open)}
@@ -266,14 +266,14 @@ function ActivityPanel({ events, records }: { events: ActivityEvent[]; records: 
 
 function RecordsTable({ records }: { records: typeof initialRecords }) {
   return (
-    <section className="rounded-xl border border-border bg-card p-4 shadow-fluent-1" aria-labelledby="legacy-table-title">
+    <section className="rounded-xl border border-border bg-card p-4" aria-labelledby="legacy-table-title">
       <div className="flex items-center gap-2">
         <h2 id="legacy-table-title" className="text-base font-semibold text-foreground">Registros</h2>
         <Badge variant="outline">{records.length}</Badge>
       </div>
       <div className="mt-3 overflow-x-auto rounded-lg border border-border">
         <table className="w-full min-w-[620px] text-sm">
-          <thead className="bg-muted/60 text-xs uppercase tracking-wider text-muted-foreground">
+          <thead className="bg-muted/60 text-xs text-muted-foreground">
             <tr><th className="px-3 py-2 text-left">Solicitud</th><th className="px-3 py-2 text-left">Cliente</th><th className="px-3 py-2 text-left">Producto</th><th className="px-3 py-2 text-left">Estado</th></tr>
           </thead>
           <tbody className="divide-y divide-border">

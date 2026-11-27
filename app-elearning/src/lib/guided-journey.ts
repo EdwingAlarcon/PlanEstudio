@@ -308,7 +308,7 @@ export function getNextBestAction(
   if (inProgress && !isFoundationActivityComplete(inProgress, completedModules, completedLabs, onboarding)) {
     return {
       activity: inProgress,
-      reason: `Continúa con "${inProgress.title}" porque ya es tu actividad activa de Fundamentos.`,
+      reason: "Ya la empezaste: continúa donde ibas.",
       time: `${inProgress.minutes} min`,
       route: FOUNDATION_ROUTE.title,
       prerequisites: inProgress.prerequisites,

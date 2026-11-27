@@ -64,7 +64,7 @@ export function PortfolioClient({ routes, profiles }: { routes: PortfolioRouteDa
           onClick={() => setView("ruta")}
           className={cn(
             "rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
-            view === "ruta" ? "bg-card text-foreground shadow-fluent-1" : "text-muted-foreground hover:text-foreground"
+            view === "ruta" ? "bg-card text-foreground" : "text-muted-foreground hover:text-foreground"
           )}
         >
           Por ruta
@@ -76,7 +76,7 @@ export function PortfolioClient({ routes, profiles }: { routes: PortfolioRouteDa
           onClick={() => setView("perfil")}
           className={cn(
             "rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
-            view === "perfil" ? "bg-card text-foreground shadow-fluent-1" : "text-muted-foreground hover:text-foreground"
+            view === "perfil" ? "bg-card text-foreground" : "text-muted-foreground hover:text-foreground"
           )}
         >
           Por perfil laboral
@@ -95,7 +95,7 @@ export function PortfolioClient({ routes, profiles }: { routes: PortfolioRouteDa
           return (
             <section
               key={route.slug}
-              className="rounded-xl border border-border bg-card p-5 shadow-fluent-1"
+              className="rounded-xl border border-border bg-card p-5"
             >
               <div className="flex items-start gap-3">
                 <span
@@ -132,7 +132,7 @@ export function PortfolioClient({ routes, profiles }: { routes: PortfolioRouteDa
                   </Link>
 
                   <div>
-                    <p className="mb-1.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                    <p className="mb-1.5 text-xs font-semibold text-muted-foreground">
                       Reúne para tu portafolio
                     </p>
                     <ul className="space-y-1">
@@ -153,7 +153,7 @@ export function PortfolioClient({ routes, profiles }: { routes: PortfolioRouteDa
       ) : (
       <div className="space-y-4">
         {profiles.map((profile) => (
-          <section key={profile.slug} className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+          <section key={profile.slug} className="rounded-xl border border-border bg-card p-5">
             <div className="flex items-start gap-3">
               <span
                 className="mt-1 h-10 w-1.5 shrink-0 rounded-full"
@@ -183,7 +183,7 @@ export function PortfolioClient({ routes, profiles }: { routes: PortfolioRouteDa
 
                 {profile.jobReadyLabs.length > 0 && (
                   <div>
-                    <p className="mb-1.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                    <p className="mb-1.5 text-xs font-semibold text-muted-foreground">
                       Labs Job-Ready
                     </p>
                     <ul className="space-y-1.5">
@@ -211,7 +211,7 @@ export function PortfolioClient({ routes, profiles }: { routes: PortfolioRouteDa
                 )}
 
                 <div>
-                  <p className="mb-1.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                  <p className="mb-1.5 text-xs font-semibold text-muted-foreground">
                     Evidencia mínima para una vacante
                   </p>
                   <ul className="space-y-1">
@@ -272,10 +272,10 @@ export function PortfolioClient({ routes, profiles }: { routes: PortfolioRouteDa
         </div>
       </section>
 
-      <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1">
+      <section className="rounded-xl border border-border bg-card p-5">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-muted-foreground">
               <Bot className="h-4 w-4" aria-hidden />
               RPA Job-Ready
             </div>

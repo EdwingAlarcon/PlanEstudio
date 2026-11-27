@@ -64,7 +64,7 @@ export function PracticeProgressSummary({
   }
 
   return (
-    <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="practice-progress-heading">
+    <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="practice-progress-heading">
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h2 id="practice-progress-heading" className="text-base font-semibold text-foreground">Experiencia práctica</h2>
@@ -103,7 +103,7 @@ export function PracticeProgressSummary({
       <div className="mt-4 rounded-lg border border-border bg-muted/20 p-3">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Validación humana externa</p>
+            <p className="text-xs font-semibold text-muted-foreground">Validación humana externa</p>
             <p className="mt-1 text-xs text-muted-foreground">Métricas separadas del progreso académico local.</p>
           </div>
           <Badge variant="outline">{counts.externalReviews} {counts.externalReviews === 1 ? "revisión importada" : "revisiones importadas"}</Badge>
@@ -119,7 +119,7 @@ export function PracticeProgressSummary({
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         <div className="rounded-lg border border-border bg-muted/20 p-3">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Última actividad</p>
+          <p className="text-xs font-semibold text-muted-foreground">Última actividad</p>
           {last ? (
             <Link href={`/experiencia-practica/${last.slug}`} className="mt-1 inline-flex items-center gap-1 text-sm font-medium text-[#0078D4] hover:underline dark:text-[#4DB8FF]">
               {last.title}
@@ -130,7 +130,7 @@ export function PracticeProgressSummary({
           )}
         </div>
         <div className="rounded-lg border border-border bg-muted/20 p-3">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Próxima recomendada</p>
+          <p className="text-xs font-semibold text-muted-foreground">Próxima recomendada</p>
           {recommendation ? (
             <>
               <Link href={`/experiencia-practica/${recommendation.slug}`} className="mt-1 inline-flex items-center gap-1 text-sm font-medium text-[#0078D4] hover:underline dark:text-[#4DB8FF]">
@@ -171,7 +171,7 @@ export function PracticeDomainProgress({ practices }: { practices: PracticeSumma
   const counts = calculatePracticeCounts(records);
 
   return (
-    <section className="rounded-xl border border-border bg-card p-5 shadow-fluent-1" aria-labelledby="practice-domain-heading">
+    <section className="rounded-xl border border-border bg-card p-5" aria-labelledby="practice-domain-heading">
       <h2 id="practice-domain-heading" className="text-base font-semibold text-foreground">Experiencia práctica por dominio</h2>
       <div className="mt-3 grid gap-2">
         {domains.map((row) => (
@@ -196,7 +196,7 @@ export function PracticeDomainProgress({ practices }: { practices: PracticeSumma
 function Metric({ label, value }: { label: string; value: number }) {
   return (
     <div className="rounded-lg border border-border bg-muted/20 p-3">
-      <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">{label}</p>
+      <p className="text-[11px] font-semibold text-muted-foreground">{label}</p>
       <p className="mt-1 text-xl font-bold text-foreground">{value}</p>
     </div>
   );

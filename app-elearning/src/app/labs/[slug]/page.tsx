@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { buildPageMetadata, PATHS } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Clock, ChevronLeft, Award, Users, BookOpen, AlertTriangle, FlaskConical, BrainCircuit, ArrowRight } from "lucide-react";
+import { ChevronLeft, AlertTriangle, BrainCircuit, ArrowRight } from "lucide-react";
 import { getAllLabs, getLabBySlug } from "@/lib/content";
 import { getInteractivePracticesForLab, INTERACTIVE_TYPE_LABELS } from "@/lib/interactive-practices";
 import { getLabPresentationMeta, getLabReadiness } from "@/lib/lab-metadata";
@@ -10,6 +10,7 @@ import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
 import { LabCompleteButton } from "@/components/labs/lab-complete-button";
 import { LabMissionPanel } from "@/components/labs/lab-mission-panel";
 import { buildLabMission } from "@/lib/lab-mission";
+import { roleFamilies } from "@/lib/role-family";
 import { XP_RULES } from "@/lib/xp";
 import { LabWorkstationGate } from "@/components/labs/lab-workstation-gate";
 import { LabPrerequisiteGate } from "@/components/labs/lab-prerequisite-gate";
@@ -43,27 +44,6 @@ const LEVEL_BAR: Record<string, string> = {
   N5: "bg-purple-600", N6: "bg-teal-600", RPA: "bg-[#6B4EFF]",
 };
 
-const CERT_VARIANT: Record<string, "basico" | "intermedio" | "avanzado" | "arquitecto" | "ia" | "d365" | "rpa" | "default"> = {
-  "PL-900": "basico",
-  "PL-200 (retirado 31 ago 2026)": "intermedio",
-  "Consultor funcional (PL-200 retirado 31 ago 2026)": "intermedio",
-  "PL-400": "avanzado",
-  "AB-400": "avanzado",
-  "AB-400 (sucesor de PL-400)": "avanzado",
-  "AB-400 (sucesor de PL-400, retirado 30 oct 2026)": "avanzado",
-  "Arquitectura Power Platform": "arquitecto",
-  "Buenas Prácticas": "ia",
-  "Especialista Dynamics 365 CE": "d365",
-  "D365 CE avanzado + F&O awareness": "d365",
-  "CE avanzado + F&O Awareness": "d365",
-  "CE avanzado": "d365",
-  "D365 Especialización": "d365",
-  "D365 Especialización Integration": "d365",
-  "D365 Especialización Portfolio": "d365",
-  "Power Automate Desktop & RPA": "rpa",
-  "RPA": "rpa",
-};
-
 export default async function LabDetailPage({ params }: Props) {
   const { slug } = await params;
   const lab = getLabBySlug(slug);
@@ -86,78 +66,24 @@ export default async function LabDetailPage({ params }: Props) {
       </Button>
 
       {/* ── Lab header card ──────────────────────────────────────────────── */}
-      <div className="rounded-xl border border-border bg-card px-6 py-5 shadow-fluent-1">
+      <div className="rounded-xl border border-border bg-card px-6 py-5">
         <div className="flex items-start gap-4">
           {/* Level accent bar */}
           <div className={`mt-1 h-12 w-1 rounded-full shrink-0 ${bar}`} aria-hidden />
 
           <div className="space-y-3 flex-1 min-w-0">
-            {/* Icon + title */}
-            <div className="flex items-start gap-3">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0078D4]/10">
-                <FlaskConical className="h-5 w-5 text-[#0078D4] dark:text-[#4DB8FF]" aria-hidden />
-              </div>
-              <div>
-                <div className="mb-2 flex flex-wrap items-center gap-1.5">
-                  <Badge variant="secondary" className="h-7 px-2.5 font-mono text-sm font-semibold tracking-wide">
-                    {lab.displayId}
-                  </Badge>
-                  <Badge variant={meta.kind === "Capstone" ? "arquitecto" : "outline"}>{meta.kindLabel}</Badge>
-                  <Badge variant="outline">{lab.level}</Badge>
-                  <Badge variant="outline">{meta.difficulty}</Badge>
-                  <Badge variant="outline" className="max-w-full truncate">{meta.routes[0] ?? "Ruta general"}</Badge>
-                  {lab.duration > 0 && <Badge variant="outline">{lab.duration} min</Badge>}
-                </div>
-                <h1 className="text-xl font-bold leading-snug text-foreground">{lab.title}</h1>
-                <p className="text-xs text-muted-foreground mt-0.5">
-                  {meta.recommendedLevel} · {meta.routes.slice(0, 3).join(" / ")}
-                </p>
-              </div>
-            </div>
-
-            {/* Badges */}
-            <div className="flex flex-wrap gap-1.5">
-              {meta.certificationBadges.map((cert) => (
-                <Badge key={cert} variant={CERT_VARIANT[cert] ?? "default"}>{cert}</Badge>
-              ))}
-              {lab.products.map((p) => (
-                <Badge key={p} variant="outline">{p}</Badge>
-              ))}
-              {lab.role.map((r) => (
-                <Badge key={r} variant="secondary">{r}</Badge>
-              ))}
-            </div>
-
-            {/* Meta row */}
-            <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
-              <span className="flex items-center gap-1.5">
-                <FlaskConical className="h-3.5 w-3.5" aria-hidden />
-                {meta.kindLabel}
-              </span>
-              {lab.duration > 0 && (
-                <span className="flex items-center gap-1.5">
-                  <Clock className="h-3.5 w-3.5" aria-hidden />
-                  {lab.duration} min
-                </span>
-              )}
-              {meta.certificationBadges.length > 0 && (
-                <span className="flex items-center gap-1.5">
-                  <Award className="h-3.5 w-3.5" aria-hidden />
-                  {meta.certificationBadges.join(", ")}
-                </span>
-              )}
-              {lab.role.length > 0 && (
-                <span className="flex items-center gap-1.5">
-                  <Users className="h-3.5 w-3.5" aria-hidden />
-                  {lab.role.join(", ")}
-                </span>
-              )}
-              {lab.prerequisites.length > 0 && (
-                <span className="flex items-center gap-1.5">
-                  <BookOpen className="h-3.5 w-3.5" aria-hidden />
-                  {lab.prerequisites.length} prerrequisito{lab.prerequisites.length !== 1 ? "s" : ""}
-                </span>
-              )}
+            <div>
+              <p className="text-xs text-muted-foreground">
+                {[lab.displayId, meta.kindLabel, lab.duration > 0 ? `${lab.duration} min` : null, meta.recommendedLevel]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </p>
+              <h1 className="mt-1 text-xl font-bold leading-snug text-foreground">{lab.title}</h1>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {[lab.products.join(", "), roleFamilies(lab.role).join(", "), meta.certificationBadges.join(", ")]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </p>
             </div>
 
             {meta.historicalCertifications.length > 0 && (
@@ -167,24 +93,12 @@ export default async function LabDetailPage({ params }: Props) {
               </p>
             )}
 
-            <div className="grid gap-3 rounded-lg border border-border bg-muted/30 p-3 text-xs sm:grid-cols-2">
-              <div>
-                <p className="mb-1 font-semibold text-foreground">Competencias que valida</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {meta.competencies.map((competency) => (
-                    <Badge key={competency} variant="outline" className="text-[10px]">
-                      {competency}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <p className="mb-1 font-semibold text-foreground">Evidencia esperada</p>
-                <p className="leading-relaxed text-muted-foreground">{meta.evidenceSummary}</p>
-                <a href="#lab-mission-heading" className="mt-1 inline-block font-medium text-[#0078D4] hover:underline dark:text-[#4DB8FF]">
-                  Entrega tu misión al final: {XP_RULES.labVerified} XP con evidencia
-                </a>
-              </div>
+            <div className="text-sm">
+              <p className="font-semibold text-foreground">Lo que vas a entregar</p>
+              <p className="mt-1 leading-relaxed text-muted-foreground">{meta.evidenceSummary.replace(/`/g, "")}</p>
+              <a href="#lab-mission-heading" className="mt-1 inline-block text-xs font-medium text-[#0078D4] hover:underline dark:text-[#4DB8FF]">
+                Entrega tu misión al final: {XP_RULES.labVerified} XP con evidencia
+              </a>
             </div>
           </div>
         </div>
@@ -206,7 +120,7 @@ export default async function LabDetailPage({ params }: Props) {
       </div>
 
       {interactivePractices.length > 0 && (
-        <section aria-labelledby="lab-interactive-practice-heading" className="rounded-xl border border-[#107C10]/25 bg-card px-6 py-5 shadow-fluent-1">
+        <section aria-labelledby="lab-interactive-practice-heading" className="rounded-xl border border-[#107C10]/25 bg-card px-6 py-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <h2 id="lab-interactive-practice-heading" className="flex items-center gap-2 text-lg font-semibold text-foreground">
@@ -243,7 +157,7 @@ export default async function LabDetailPage({ params }: Props) {
       <LabPrerequisiteGate prerequisites={lab.prerequisites} />
 
       {/* ── Lab markdown content ──────────────────────────────────────────── */}
-      <div className="rounded-xl border border-border bg-card px-6 py-8 md:px-8 shadow-fluent-1">
+      <div className="rounded-xl border border-border bg-card px-6 py-8 md:px-8">
         <MarkdownRenderer content={lab.rawContent} />
       </div>
 
