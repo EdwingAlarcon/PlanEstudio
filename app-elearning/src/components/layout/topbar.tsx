@@ -1,6 +1,7 @@
 "use client";
 
-import { GraduationCap, Menu } from "lucide-react";
+import { LogoMark } from "@/components/layout/logo-mark";
+import { Menu } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "@/components/ui/button";
 import { SearchBar } from "./search-bar";
@@ -26,10 +27,8 @@ export function Topbar({ onMenuClick }: TopbarProps) {
 
       {/* Mobile logo */}
       <div className="flex items-center gap-2 lg:hidden">
-        <div className="flex h-7 w-7 items-center justify-center rounded bg-[#0078D4]">
-          <GraduationCap className="h-4 w-4 text-white" aria-hidden />
-        </div>
-        <span className="font-semibold text-sm">PlanEstudio</span>
+        <LogoMark className="h-7 w-7 shrink-0" />
+        <span className="text-sm">Plan<span className="font-semibold">Estudio</span></span>
       </div>
 
       <div className="flex-1" />

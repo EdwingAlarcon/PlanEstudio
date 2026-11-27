@@ -1,10 +1,11 @@
 "use client";
 
+import { LogoMark } from "@/components/layout/logo-mark";
 import { useState, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  GraduationCap, Home, PlayCircle, FlaskConical, Route, HelpCircle, Briefcase, ClipboardList, Activity,
+  Home, PlayCircle, FlaskConical, Route, HelpCircle, Briefcase, ClipboardList, Activity,
   Compass, GitBranch, Wrench, BrainCircuit, Brain, Library, ChevronRight, ArrowRight,
 } from "lucide-react";
 import { useProgressStore, calculateLevelProgress } from "@/lib/progress";
@@ -85,11 +86,9 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
         aria-label="Navegación principal"
       >
         <Link href="/" prefetch={false} className="flex items-center gap-2.5 px-4 py-4 border-b shrink-0">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0078D4]">
-            <GraduationCap className="h-4.5 w-4.5 text-white" aria-hidden />
-          </div>
+          <LogoMark className="h-8 w-8 shrink-0" />
           <div className="leading-tight">
-            <p className="font-semibold text-sm">Plan de Estudio</p>
+            <p className="text-sm">Plan<span className="font-semibold">Estudio</span></p>
             <p className="text-[10px] text-muted-foreground">Power Platform</p>
           </div>
         </Link>

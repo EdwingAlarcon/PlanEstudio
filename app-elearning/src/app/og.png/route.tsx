@@ -20,33 +20,21 @@ export function GET() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 72,
-          background: "linear-gradient(135deg, #005A9E 0%, #0078D4 60%, #4DB8FF 100%)",
+          background: "#0078D4",
           color: "white",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div
-            style={{
-              width: 72,
-              height: 72,
-              borderRadius: 16,
-              background: "white",
-              color: "#0078D4",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 44,
-              fontWeight: 700,
-            }}
-          >
-            P
-          </div>
+          <svg width="80" height="80" viewBox="0 0 64 64">
+            <path d="M21 51 V15 H34 C42 15 47 20 47 27 C47 34 42 39 34 39 H31" fill="none" stroke="#ffffff" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" />
+            <circle cx="43" cy="49" r="5.5" fill="#7FD36B" />
+          </svg>
           <div style={{ fontSize: 40, fontWeight: 600 }}>PlanEstudio</div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div style={{ fontSize: 76, fontWeight: 700, lineHeight: 1.1 }}>
-            Power Platform y Dynamics 365
+            Consultor funcional de Power Platform
           </div>
           <div style={{ fontSize: 38, lineHeight: 1.3, opacity: 0.95 }}>
             Aprende haciendo: de cero a una base laboral guiada, con módulos, laboratorios y práctica interactiva.
