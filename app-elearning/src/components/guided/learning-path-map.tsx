@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Check, FlaskConical, Trophy } from "lucide-react";
+import { ArrowRight, Check, FlaskConical, Swords, Trophy } from "lucide-react";
 import { useProgressStore } from "@/lib/progress";
 import { useInteractivePracticeProgressStore } from "@/lib/interactive-practice-progress";
 import { formatXp, isPracticeEarned, isQuizEarned, XP_RULES } from "@/lib/xp";
@@ -39,6 +39,15 @@ export interface PathWorld {
   certification: string;
   modules: PathModuleNode[];
   labs: PathLabNode[];
+  /** "Jefe" del mundo (F5): el reto sin pasos del proyecto integrador del nivel, y después el simulador. */
+  boss?: PathBoss;
+}
+
+export interface PathBoss {
+  /** Id de progreso del paso del reto (`completedSteps`), p. ej. "basico-8#reto". */
+  stepProgressId: string;
+  moduleTitle: string;
+  href: string;
 }
 
 const WORLD_COLOR: Partial<Record<LevelId, { text: string; ring: string; soft: string }>> = {
@@ -52,6 +61,7 @@ export function LearningPathMap({ worlds }: { worlds: PathWorld[] }) {
   const completedModules = useProgressStore((s) => s.completedModules);
   const completedLabs = useProgressStore((s) => s.completedLabs);
   const quizScores = useProgressStore((s) => s.quizScores);
+  const completedSteps = useProgressStore((s) => s.completedSteps);
   const records = useInteractivePracticeProgressStore((s) => s.records);
   const [chosen, setChosen] = useState<LevelId | null>(null);
 
@@ -65,7 +75,8 @@ export function LearningPathMap({ worlds }: { worlds: PathWorld[] }) {
   const currentIndex = world.modules.findIndex((mod) => !done.has(mod.key));
   const modulesDone = world.modules.filter((mod) => done.has(mod.key)).length;
   const labsDone = world.labs.filter((lab) => completedLabs.includes(lab.slug)).length;
-  const worldComplete = modulesDone === world.modules.length && labsDone === world.labs.length;
+  const bossDone = world.boss ? (completedSteps ?? []).includes(world.boss.stepProgressId) : false;
+  const worldComplete = modulesDone === world.modules.length && labsDone === world.labs.length && (!world.boss || bossDone);
 
   return (
     <section aria-labelledby="journey-heading" className="space-y-4" data-testid="learning-path">
@@ -182,7 +193,7 @@ export function LearningPathMap({ worlds }: { worlds: PathWorld[] }) {
                     <span className="block text-xs text-muted-foreground">Lo que demuestra que sabes hacerlo en un tenant real</span>
                   </span>
                   <span className="w-20 shrink-0 text-right text-xs font-semibold tabular-nums text-amber-700 dark:text-amber-400">
-                    {formatXp(XP_RULES.lab)} XP c/u
+                    hasta {formatXp(XP_RULES.labVerified)} XP c/u
                   </span>
                 </summary>
                 <ul className="ml-[52px] mt-2 space-y-1 border-l border-border pl-3">
@@ -209,6 +220,29 @@ export function LearningPathMap({ worlds }: { worlds: PathWorld[] }) {
             </li>
           )}
 
+          {world.boss && (
+            <li className="relative" data-testid="world-boss">
+              <Link href={world.boss.href} className="flex items-center gap-3 rounded-lg py-1.5 pr-2 hover:bg-muted/60">
+                <span
+                  className={cn(
+                    "relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2",
+                    bossDone ? "border-[#5C2D91] bg-[#5C2D91] text-white" : "border-[#5C2D91]/60 bg-card text-[#5C2D91] dark:text-[#B4A0FF]",
+                  )}
+                >
+                  {bossDone ? <Check className="h-4 w-4" aria-label="Superado" /> : <Swords className="h-4 w-4" aria-hidden />}
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block text-sm font-medium text-foreground">
+                    {bossDone ? `Jefe del Mundo ${world.step} superado` : `Jefe del Mundo ${world.step}: el reto sin pasos`}
+                  </span>
+                  <span className="block text-xs text-muted-foreground">
+                    {world.boss.moduleTitle} · el mismo proyecto en otro negocio, sin instrucciones
+                  </span>
+                </span>
+              </Link>
+            </li>
+          )}
+
           <li className="relative">
             <Link href="/simulador" className="flex items-center gap-3 rounded-lg py-1.5 pr-2 hover:bg-muted/60">
               <span
@@ -226,7 +260,7 @@ export function LearningPathMap({ worlds }: { worlds: PathWorld[] }) {
                 <span className="block text-xs text-muted-foreground">
                   {worldComplete
                     ? "Mide tu preparación para la certificación en el simulador"
-                    : "Completa los módulos y los labs del mundo; luego, el simulador"}
+                    : "Completa los módulos, los labs y el jefe del mundo; luego, el simulador"}
                 </span>
               </span>
             </Link>

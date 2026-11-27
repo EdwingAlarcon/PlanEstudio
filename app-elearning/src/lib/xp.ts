@@ -1,5 +1,6 @@
 import type { InteractivePracticeRecord } from "./interactive-practice-progress";
 import type { ReviewCardMap } from "./review-queue";
+import { isLabVerified, type LabEvidence } from "./lab-mission";
 
 // XP y rango (F1 de "El camino jugable", 2026-11-27).
 // La XP no se guarda: se calcula a partir de los stores que ya existen (progreso académico,
@@ -13,9 +14,10 @@ export const XP_RULES = {
   /** Quiz del módulo con 80 % o más (una vez por módulo). */
   quiz: 50,
   quizPassPercentage: 80,
-  /** Lab marcado como completado. Es autodeclarado (la app no ve el tenant), por eso vale poco:
-   *  la F3 pedirá evidencia (IDs de ejecución, respuestas) y con ella el lab pasará a 100. */
+  /** Lab marcado como completado sin evidencia. Es autodeclarado (la app no ve el tenant), por eso vale poco. */
   lab: 25,
+  /** Lab entregado como misión (F3): todas sus comprobaciones marcadas y la evidencia anotada. */
+  labVerified: 100,
   /** Cada respuesta correcta en el repaso espaciado. */
   reviewCorrect: 5,
 } as const;
@@ -23,6 +25,8 @@ export const XP_RULES = {
 export interface XpInput {
   quizScores: Record<string, number>;
   completedLabs: string[];
+  /** Evidencia de los labs (F3); un lab completado con evidencia entregada vale `labVerified`. */
+  labEvidence?: Record<string, LabEvidence>;
   practiceRecords: Record<string, InteractivePracticeRecord>;
   reviewCards: ReviewCardMap;
 }
@@ -33,7 +37,7 @@ export interface XpBreakdown {
   labs: number;
   review: number;
   total: number;
-  counts: { practices: number; quizzes: number; labs: number; reviewCorrect: number };
+  counts: { practices: number; quizzes: number; labs: number; verifiedLabs: number; reviewCorrect: number };
 }
 
 export function isPracticeEarned(record: InteractivePracticeRecord | undefined): boolean {
@@ -47,7 +51,9 @@ export function isQuizEarned(score: number | undefined): boolean {
 export function calculateXp(input: XpInput): XpBreakdown {
   const practiceCount = Object.values(input.practiceRecords).filter(isPracticeEarned).length;
   const quizCount = Object.values(input.quizScores).filter(isQuizEarned).length;
-  const labCount = new Set(input.completedLabs).size;
+  const completedLabs = [...new Set(input.completedLabs)];
+  const labCount = completedLabs.length;
+  const verifiedLabs = completedLabs.filter((slug) => isLabVerified(input.labEvidence?.[slug])).length;
   const reviewCorrect = Object.values(input.reviewCards).reduce(
     (total, card) => total + (Number.isFinite(card?.correctReviews) ? Math.max(0, card.correctReviews) : 0),
     0,
@@ -55,7 +61,7 @@ export function calculateXp(input: XpInput): XpBreakdown {
 
   const practices = practiceCount * XP_RULES.practice;
   const quizzes = quizCount * XP_RULES.quiz;
-  const labs = labCount * XP_RULES.lab;
+  const labs = verifiedLabs * XP_RULES.labVerified + (labCount - verifiedLabs) * XP_RULES.lab;
   const review = reviewCorrect * XP_RULES.reviewCorrect;
 
   return {
@@ -64,21 +70,21 @@ export function calculateXp(input: XpInput): XpBreakdown {
     labs,
     review,
     total: practices + quizzes + labs + review,
-    counts: { practices: practiceCount, quizzes: quizCount, labs: labCount, reviewCorrect },
+    counts: { practices: practiceCount, quizzes: quizCount, labs: labCount, verifiedLabs, reviewCorrect },
   };
 }
 
 // Rangos: los roles para los que prepara el curso, cada uno con tres grados.
-// Cada rol corresponde a un nivel: terminar el Nivel 1 deja en Maker III, el 2 en Consultor funcional III, el 3 en
-// Desarrollador III y el 4 en Arquitecto (con las reglas de XP vigentes y sin contar el repaso). Calibrado el
-// 2026-11-27 con labs a 25 XP: ≈ 1.085 / 2.265 / 4.045 / 5.805 XP acumulados. Si cambian las reglas (p. ej. labs a 100
-// con evidencia en la F3) o el contenido, "rank calibration" en xp.test.ts falla hasta recalibrar estos umbrales.
+// Cada rol corresponde a un nivel: terminar un nivel **con la evidencia de sus labs entregada** (F3) deja en el grado
+// III de su rol. Recalibrado el 2026-11-27 con labs a 100 con evidencia: ≈ 1.460 / 2.790 / 5.620 / 9.030 XP acumulados
+// (sin repaso). Con los labs solo marcados (25) se queda un grado o un rol por debajo: ≈ 1.085 / 2.265 / 4.045 / 5.805.
+// Si cambian las reglas o el contenido, "rank calibration" en xp.test.ts falla hasta recalibrar estos umbrales.
 export const RANKS = [
-  { name: "Aprendiz", thresholds: [0, 100, 200] },
-  { name: "Maker", thresholds: [350, 650, 900] },
-  { name: "Consultor funcional", thresholds: [1200, 1600, 2000] },
-  { name: "Desarrollador", thresholds: [2400, 3000, 3600] },
-  { name: "Arquitecto", thresholds: [4300, 5000, 5600] },
+  { name: "Aprendiz", thresholds: [0, 150, 300] },
+  { name: "Maker", thresholds: [450, 800, 1200] },
+  { name: "Consultor funcional", thresholds: [1600, 2100, 2600] },
+  { name: "Desarrollador", thresholds: [3000, 3900, 4800] },
+  { name: "Arquitecto", thresholds: [6000, 7200, 8400] },
 ] as const;
 
 const TIERS = ["I", "II", "III"] as const;

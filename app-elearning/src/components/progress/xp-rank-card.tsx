@@ -9,7 +9,7 @@ export function XpRankCard() {
   const rows = [
     { label: "Prácticas interactivas", detail: `${xp.counts.practices} completadas sin ver la solución · ${XP_RULES.practice} XP c/u`, value: xp.practices },
     { label: "Quizzes de módulo", detail: `${xp.counts.quizzes} con ${XP_RULES.quizPassPercentage} % o más · ${XP_RULES.quiz} XP c/u`, value: xp.quizzes },
-    { label: "Labs", detail: `${xp.counts.labs} marcados como completados · ${XP_RULES.lab} XP c/u (autodeclarado; con evidencia valdrá más)`, value: xp.labs },
+    { label: "Labs", detail: `${xp.counts.verifiedLabs} con evidencia entregada (${XP_RULES.labVerified} XP c/u) y ${xp.counts.labs - xp.counts.verifiedLabs} solo marcados (${XP_RULES.lab} XP c/u)`, value: xp.labs },
     { label: "Repaso espaciado", detail: `${xp.counts.reviewCorrect} respuestas correctas · ${XP_RULES.reviewCorrect} XP c/u`, value: xp.review },
   ];
 

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { createInteractivePracticeRecord, type InteractivePracticeRecord } from "../interactive-practice-progress";
 import type { ReviewCardMap } from "../review-queue";
+import type { LabEvidence } from "../lab-mission";
 import { getAllLevels, getLabsForLevel } from "../content";
 import { CERTIFICATION_LEVEL_ORDER } from "../i18n";
 import { getAllInteractivePractices } from "../interactive-practices";
@@ -58,12 +59,12 @@ describe("getRank", () => {
   it("empieza en Aprendiz I", () => {
     const rank = getRank(0);
     expect(rank.label).toBe("Aprendiz I");
-    expect(rank.next).toBe(100);
+    expect(rank.next).toBe(150);
     expect(rank.percentage).toBe(0);
   });
 
   it("calcula el grado y el avance dentro de él", () => {
-    const rank = getRank(1400);
+    const rank = getRank(1850);
     expect(rank.label).toBe("Consultor funcional I");
     expect(rank.nextLabel).toBe("Consultor funcional II");
     expect(rank.percentage).toBe(50);
@@ -95,6 +96,21 @@ describe("formatXp", () => {
 
 // Calibración con el contenido real: terminar cada nivel de certificación (todas sus prácticas sin solución, sus
 // quizzes aprobados y sus labs obligatorios, sin repaso) debe dejar al alumno en el rol de ese nivel.
+describe("labs con evidencia", () => {
+  it("un lab completado vale 25 y, con la evidencia entregada, 100", () => {
+    const labs = ["lab-a", "lab-b"];
+    const plain = calculateXp({ ...empty, completedLabs: labs });
+    expect(plain.labs).toBe(2 * XP_RULES.lab);
+    const withEvidence = calculateXp({
+      ...empty,
+      completedLabs: labs,
+      labEvidence: { "lab-a": { checks: [], note: "x", verifiedAt: "2026-11-27" }, "lab-c": { checks: [], note: "", verifiedAt: "2026-11-27" } },
+    });
+    expect(withEvidence.labs).toBe(XP_RULES.labVerified + XP_RULES.lab);
+    expect(withEvidence.counts.verifiedLabs).toBe(1);
+  });
+});
+
 describe("rank calibration", () => {
   const expected = ["Maker", "Consultor funcional", "Desarrollador", "Arquitecto"];
   const levels = getAllLevels();
@@ -103,17 +119,21 @@ describe("rank calibration", () => {
   it("cada nivel completo lleva al rol que prepara", () => {
     const quizScores: Record<string, number> = {};
     const completedLabs: string[] = [];
+    const labEvidence: Record<string, LabEvidence> = {};
     const practiceRecords: Record<string, InteractivePracticeRecord> = {};
 
     CERTIFICATION_LEVEL_ORDER.forEach((levelId, index) => {
       const level = levels.find((l) => l.id === levelId)!;
       const moduleIds = new Set(level.modules.map((m) => m.moduleId));
       for (const id of moduleIds) quizScores[String(id)] = 100;
-      for (const lab of getLabsForLevel(levelId)) completedLabs.push(lab.slug);
+      for (const lab of getLabsForLevel(levelId)) {
+        completedLabs.push(lab.slug);
+        labEvidence[lab.slug] = { checks: [], note: "", verifiedAt: "2026-11-27T10:00:00.000Z" };
+      }
       for (const p of practices) {
         if (moduleIds.has(p.relatedModuleIds[0] ?? -1)) practiceRecords[p.id] = practice(p.id, { status: "completed" });
       }
-      const xp = calculateXp({ quizScores, completedLabs, practiceRecords, reviewCards: {} });
+      const xp = calculateXp({ quizScores, completedLabs, labEvidence, practiceRecords, reviewCards: {} });
       expect(getRank(xp.total).name, `${levelId}: ${xp.total} XP`).toBe(expected[index]);
     });
   });

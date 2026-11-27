@@ -15,6 +15,7 @@ import { FullBackupPanel } from "@/components/progress/full-backup-panel";
 import { XpRankCard } from "@/components/progress/xp-rank-card";
 import { ActivityGrid, WeeklyGoalCard } from "@/components/guided/habit-cards";
 import { TrophyShelf } from "@/components/progress/trophy-shelf";
+import { DomainMasteryCard, type DomainMasteryArea } from "@/components/progress/domain-mastery-card";
 import { PracticePortabilityPanel } from "@/components/practices/practice-portability-panel";
 import { GuidedDashboardSummary } from "@/components/guided/guided-dashboard-summary";
 import { InteractivePracticeSummary } from "@/components/interactive-practices/interactive-practice-summary";
@@ -54,7 +55,7 @@ const STATUS_CONFIG: Record<ReadinessStatus, { label: string; className: string 
   },
 };
 
-export function ProgressDashboardClient({ levels, practices, interactivePractices }: { levels: LevelReadinessData[]; practices: PracticeSummaryItem[]; interactivePractices: InteractivePracticeRef[] }) {
+export function ProgressDashboardClient({ levels, practices, interactivePractices, domainAreas }: { levels: LevelReadinessData[]; practices: PracticeSummaryItem[]; interactivePractices: InteractivePracticeRef[]; domainAreas: DomainMasteryArea[] }) {
   const completedModules = useProgressStore((s) => s.completedModules);
   const quizScores = useProgressStore((s) => s.quizScores);
   const completedLabs = useProgressStore((s) => s.completedLabs);
@@ -81,6 +82,7 @@ export function ProgressDashboardClient({ levels, practices, interactivePractice
           <h2 id="constancia-heading" className="text-lg font-semibold text-foreground">Tu constancia</h2>
           <ActivityGrid />
           <TrophyShelf levels={levels} />
+          <DomainMasteryCard areas={domainAreas} />
         </div>
         <WeeklyGoalCard />
       </section>

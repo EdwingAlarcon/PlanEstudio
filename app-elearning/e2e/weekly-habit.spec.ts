@@ -25,6 +25,7 @@ test.describe("Meta semanal y hoy", () => {
     await page.goto("/progreso", { waitUntil: "domcontentloaded" });
     await expect(page.getByTestId("activity-grid")).toContainText("0 días con actividad");
     await expect(page.getByTestId("trophy-shelf")).toContainText("Mundo 1");
+    await expect(page.getByTestId("domain-mastery")).toContainText("Dataverse");
 
     // Marcar un módulo cambia el progreso académico; el ActivityTracker registra hoy.
     await page.goto("/nivel/basico/modulo/introduccion-al-ecosistema-power-platform", { waitUntil: "domcontentloaded" });

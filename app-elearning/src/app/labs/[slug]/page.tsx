@@ -8,6 +8,9 @@ import { getInteractivePracticesForLab, INTERACTIVE_TYPE_LABELS } from "@/lib/in
 import { getLabPresentationMeta, getLabReadiness } from "@/lib/lab-metadata";
 import { MarkdownRenderer } from "@/components/modules/markdown-renderer";
 import { LabCompleteButton } from "@/components/labs/lab-complete-button";
+import { LabMissionPanel } from "@/components/labs/lab-mission-panel";
+import { buildLabMission } from "@/lib/lab-mission";
+import { XP_RULES } from "@/lib/xp";
 import { LabWorkstationGate } from "@/components/labs/lab-workstation-gate";
 import { LabPrerequisiteGate } from "@/components/labs/lab-prerequisite-gate";
 import { LabReadinessPanel } from "@/components/labs/lab-readiness-panel";
@@ -70,6 +73,7 @@ export default async function LabDetailPage({ params }: Props) {
   const meta = getLabPresentationMeta(lab);
   const readiness = getLabReadiness(lab);
   const interactivePractices = getInteractivePracticesForLab(lab.displayId).slice(0, 2);
+  const mission = buildLabMission(lab.rawContent);
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-fade-in">
@@ -177,6 +181,9 @@ export default async function LabDetailPage({ params }: Props) {
               <div>
                 <p className="mb-1 font-semibold text-foreground">Evidencia esperada</p>
                 <p className="leading-relaxed text-muted-foreground">{meta.evidenceSummary}</p>
+                <a href="#lab-mission-heading" className="mt-1 inline-block font-medium text-[#0078D4] hover:underline dark:text-[#4DB8FF]">
+                  Entrega tu misión al final: {XP_RULES.labVerified} XP con evidencia
+                </a>
               </div>
             </div>
           </div>
@@ -239,6 +246,8 @@ export default async function LabDetailPage({ params }: Props) {
       <div className="rounded-xl border border-border bg-card px-6 py-8 md:px-8 shadow-fluent-1">
         <MarkdownRenderer content={lab.rawContent} />
       </div>
+
+      <LabMissionPanel slug={lab.slug} mission={mission} />
 
       {/* ── Footer ───────────────────────────────────────────────────────── */}
       <Separator />

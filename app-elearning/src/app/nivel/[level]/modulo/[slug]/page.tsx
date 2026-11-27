@@ -144,7 +144,7 @@ export default async function ModulePage({ params }: PageProps) {
       />
 
       {/* ── Lección por pasos (F2, piloto): otra forma de recorrer lo mismo ── */}
-      {hasStepMode(mod.id) && (
+      {hasStepMode(mod.rawContent) && (
         <Link
           href={`/nivel/${levelId}/modulo/${mod.slug}/pasos`}
           className="flex items-center justify-between gap-4 rounded-xl border border-[#0078D4]/30 bg-[#0078D4]/5 px-5 py-4 transition-colors hover:border-[#0078D4]/60"

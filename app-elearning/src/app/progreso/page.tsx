@@ -3,7 +3,7 @@ import { buildPageMetadata } from "@/lib/seo";
 import { LEVEL_ORDER } from "@/lib/i18n";
 import { getLevelById, getLabsForLevel } from "@/lib/content";
 import { getAllPractices } from "@/lib/practices";
-import { getAllInteractivePractices } from "@/lib/interactive-practices";
+import { getAllInteractivePractices, INTERACTIVE_DOMAIN_LABELS } from "@/lib/interactive-practices";
 import { ProgressDashboardClient, type LevelReadinessData } from "./progress-dashboard-client";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -28,6 +28,13 @@ export default function ProgressDashboardPage() {
     id, slug, title, practiceType, domain, roles, difficulty, prerequisites,
   }));
   const interactivePractices = getAllInteractivePractices().map(({ id }) => ({ id }));
+  const byDomain = new Map<string, string[]>();
+  for (const p of getAllInteractivePractices()) byDomain.set(p.domain, [...(byDomain.get(p.domain) ?? []), p.id]);
+  const domainAreas = [...byDomain].map(([key, ids]) => ({
+    key,
+    label: INTERACTIVE_DOMAIN_LABELS[key as keyof typeof INTERACTIVE_DOMAIN_LABELS] ?? key,
+    ids,
+  }));
 
-  return <ProgressDashboardClient levels={levels} practices={practices} interactivePractices={interactivePractices} />;
+  return <ProgressDashboardClient levels={levels} practices={practices} interactivePractices={interactivePractices} domainAreas={domainAreas} />;
 }

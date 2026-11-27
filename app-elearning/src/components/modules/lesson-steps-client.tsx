@@ -126,6 +126,11 @@ export function LessonStepsClient({ moduleKey, moduleTitle, moduleHref, steps, p
       <div className="space-y-1">
         <p className="text-xs font-semibold uppercase tracking-widest text-[#0078D4] dark:text-[#4DB8FF]">
           {KIND_LABEL[step.kind]}
+          {step.optional ? (
+            <span className="ml-2 rounded bg-muted px-1.5 py-0.5 normal-case tracking-normal text-muted-foreground" data-testid="lesson-step-optional">
+              Opcional: puedes saltarla
+            </span>
+          ) : null}
           {isDone(step) && step.kind !== "comprueba" ? (
             <span className="ml-2 inline-flex items-center gap-1 normal-case tracking-normal text-[#107C10]">
               <Check className="h-3 w-3" aria-hidden /> hecho
@@ -182,7 +187,9 @@ export function LessonStepsClient({ moduleKey, moduleTitle, moduleHref, steps, p
                 <Button type="button" variant="outline" onClick={() => goTo(index + 1)}>Saltar por ahora</Button>
               </>
             ) : null}
-            {(step.kind === "ambiente" || step.kind === "reto") && (
+            {step.optional ? (
+              <Button type="button" variant="outline" onClick={() => goTo(index + 1)}>Saltar lo opcional</Button>
+            ) : (step.kind === "ambiente" || step.kind === "reto") && (
               <Button type="button" variant="outline" onClick={() => goTo(index + 1)}>Lo haré después</Button>
             )}
             {!(step.kind === "practica" && practice && !practiceCompleted) && (

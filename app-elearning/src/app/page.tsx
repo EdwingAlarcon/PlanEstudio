@@ -1,3 +1,4 @@
+import { buildLessonSteps, stepProgressId } from "@/lib/lesson-steps";
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
@@ -11,6 +12,20 @@ import { getAllInteractivePractices } from "@/lib/interactive-practices";
 
 // Datos mínimos del camino (F1 de "El camino jugable"): solo los campos que pinta el cliente.
 // Cada práctica se atribuye a su primer módulo relacionado para no contarla dos veces en el camino.
+// "Jefe" del mundo (F5): el reto de transferencia del último módulo del nivel (su proyecto integrador), abierto en
+// el modo por pasos directamente en ese paso.
+function buildBoss(levelId: string, mod: ReturnType<typeof getAllLevels>[number]["modules"][number] | undefined) {
+  if (!mod) return undefined;
+  const steps = buildLessonSteps(mod.rawContent);
+  const index = steps.findIndex((step) => step.kind === "reto");
+  if (index === -1) return undefined;
+  return {
+    stepProgressId: stepProgressId(mod.id, steps[index]!.id),
+    moduleTitle: `Módulo ${mod.moduleId} · ${mod.title}`,
+    href: `/nivel/${levelId}/modulo/${mod.slug}/pasos#paso-${index + 1}`,
+  };
+}
+
 function buildPathWorlds(levels: ReturnType<typeof getAllLevels>): PathWorld[] {
   const practicesByModule = new Map<number, string[]>();
   for (const practice of getAllInteractivePractices()) {
@@ -35,6 +50,7 @@ function buildPathWorlds(levels: ReturnType<typeof getAllLevels>): PathWorld[] {
         minutes: mod.estimatedMinutes,
         practiceIds: practicesByModule.get(mod.moduleId) ?? [],
       })),
+      boss: buildBoss(level.id, level.modules.at(-1)),
       labs: getLabsForLevel(level.id).map((lab) => ({
         slug: lab.slug,
         displayId: lab.displayId,

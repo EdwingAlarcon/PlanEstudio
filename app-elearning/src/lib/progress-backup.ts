@@ -178,9 +178,20 @@ export function mergeProgressStates(
       if (typeof value === "string" && value.trim()) notes[id] = value;
     }
   }
+  // Evidencia de labs (F3): gana la entregada; si ninguna lo está, la local.
+  const evidence: Record<string, unknown> = isRecord(incoming.labEvidence) ? { ...incoming.labEvidence } : {};
+  if (isRecord(local.labEvidence)) {
+    for (const [slug, item] of Object.entries(local.labEvidence)) {
+      const theirs = evidence[slug];
+      const theirsVerified = isRecord(theirs) && typeof theirs.verifiedAt === "string";
+      const mineVerified = isRecord(item) && typeof item.verifiedAt === "string";
+      if (!theirs || mineVerified || !theirsVerified) evidence[slug] = item;
+    }
+  }
   return {
     ...incoming,
     ...local,
+    labEvidence: evidence,
     completedModules: union(local.completedModules, incoming.completedModules),
     completedLabs: union(local.completedLabs, incoming.completedLabs),
     completedSteps: union(local.completedSteps, incoming.completedSteps),

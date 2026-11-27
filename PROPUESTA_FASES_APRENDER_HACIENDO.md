@@ -1463,6 +1463,29 @@ harness). Agente `P0 Prueba harness estandar` y agent flow de prueba, **borrados
   - Con qué conexión corre un agent flow (Learn no lo dice; se deduce que la del autor).
   - Etiquetas en español.
 
+#### 15.19.5 P4 hecha (2026-11-27): labs 151, 152 y 153
+
+- **Datos nuevos** en `asistente-compras` (mismo generador, determinista: mismo hash en dos corridas; los archivos anteriores no cambian):
+  - `lab151/agentes-hijos.json` (`Atención a proveedores`, con la FAQ como conocimiento propio, y `Comprobar tolerancia de factura`, con entradas `ImporteAprobado`/`ImporteFactura` y salidas `Resultado`/`Diferencia`), `casos-tolerancia.json` (F1-F6 con la tolerancia del 2 % de `reglas-conciliacion.json`, límite incluido: 4 DENTRO y 2 FUERA), `mensajes-enrutamiento.json` (R1-R8) y `decisiones-multiagente.json` (M1-M6).
+  - `lab152/conjunto-hechos.csv` (14 casos E01-E14) y `conjunto-limites.csv` (6 casos L01-L06, sin respuesta esperada), con los encabezados **Question** y **Expected response** que documenta Learn; `casos-evaluacion.json` (palabras clave y capacidad esperada de cada caso, respuestas del manual v2), `clasificacion-limites.json` (instrucciones y dos etiquetas) y `cambios-regresion.json` (volver a subir el manual v1: pueden empeorar E05, E10 y E11).
+  - `lab153/checklist-alm.json` (C01-C10 y la variable `Correo de Compras`), `plan-despliegue.json` (desarrollo, pruebas y producción) y `decisiones-alm.json` (A1-A6).
+  - Cifras en `expected` (`lab151`, `lab152`, `lab153`) y en `copilotstudio-assets.test.ts`.
+- **LAB-151** (N3) "Multiagente": línea base de enrutamiento, agente hijo con conocimiento propio (la FAQ solo en el hijo), agente hijo con **Inputs**/**Outputs**, **When will this be used?** = **It's redirected to** y **After running** = **Don't respond**, llamado desde el topic `Comprobar factura`; seis facturas comparadas con una fórmula de Power Fx (`Round`/`Abs`) para enseñar que la cuenta no va en el modelo; referencia con **/** en las instrucciones y **Enabled**; agente conectado en papel (requisitos, historial, autenticación) y seis decisiones.
+- **LAB-152** (N3) "Evaluación": requisitos y créditos (con plan B manual), qué no meter en un conjunto automático (nada que registre filas), importación de los dos CSV, métodos (General quality, Compare meaning con corte 70, Keyword match **All**, Capability use; Classification para las negativas), lectura de fallos por causa (agente, caso o método), regresión en tres corridas con **Compare with** y exportación, y criterio de salida.
+- **LAB-153** (N3) "Soluciones y ALM": inventario contra C01-C10 con **Add existing** > **Agent** > **Agent** y **Add required objects**, variable de entorno en **Escalate** (prefijo `Environment.`) con el valor actual cambiado sin publicar, referencias de conexión, exportar no administrada y administrada y abrir el paquete, ciclo exportar-borrar-importar-desinstalar sobre `SIT ALM Agente Prueba` (nunca sobre la solución real), VS Code con Git (opcional) y plan de despliegue con pipelines y seis decisiones, en papel.
+- **Ruta:** labs 151-153 añadidos a `copilot-studio-pro` (gapNote, competencias y evidencias); labs 111 → 114 (39 opcionales). Siguen "Especialización en construcción" y el capstone provisional LAB-144.
+- **Learn confirmado el 2026-11-27:**
+  - Multiagente: agentes hijos y conectados documentados como funciones del harness estándar; **Agents** > **Add** > **New child agent**; **The agent chooses - Based on description** y los demás eventos de **When will this be used?** (incluido **It's redirected to**); conocimiento y herramientas propios del hijo; **Inputs** (**Add Input**, **Data type**, **Make this input required**, opciones avanzadas) y **Outputs** (**Add output**, **After running** con cuatro opciones, **Don't respond** por defecto); llamar a un agente desde un topic con **Add an agent** y variables de salida creadas solas; **/** en las instrucciones; **Enabled**; un agente conectado exige el mismo entorno, estar **publicado**, **Let other agents connect to and use this one** y ser dueño o tenerlo compartido; **Pass conversation history to this agent**; la descripción local no se sincroniza; regla de 30 a 40 opciones; limitaciones (citas que se pierden, OAuth 2.0 genérico, respuestas sin fuentes descartadas, un principal con conectados no puede ser conectado).
+  - Evaluación: **Evaluation** > **New evaluation** > **Single responses** > **Import**; CSV o TXT con **Question** y **Expected response**, hasta 100 preguntas de 1.000 caracteres; los ocho métodos y qué necesita cada uno (Compare meaning, corte 50 por defecto; Keyword match **Any**/**All**; Capability use solo topics o herramientas; un caso sin dato da **Invalid**); General quality puede marcar una negativa correcta y Learn recomienda Classification; nombres de etiqueta con caracteres limitados; corre como el usuario que inició sesión; solo agentes con **No authentication** o **Authenticate with Microsoft**; conector **Microsoft Copilot Studio** necesario; un conjunto a la vez; resultados 89 días; **Compare with**; **Export test results**; API y conectores para CI/CD.
+  - ALM: **View solution**, explorador de soluciones, **Set preferred solution**, **Add existing** > **Agent** > **Agent**, **Add required objects**, variables de entorno (**Add existing** > **More** > **Environment variable**), conectores personalizados primero, **System Customizer**, topics sin puntos en el nombre, propiedades que no viajan (icono y canales vacíos), volver a configurar la autenticación y publicar tras importar, no se borra un agente de una solución administrada; variables de entorno de solo lectura, prefijo `Environment.`, la versión publicada lleva el valor al publicar (salvo las secretas); extensión de VS Code (**Clone agent**, estructura de archivos, **Fetch**/**Pull**/**Push changes**, **Reattach Agent**); pipelines (soluciones administradas, conexiones y variables validadas antes, destinos gestionados).
+- **Pruebas simuladas** (2 agentes, personas "Valeria", labs 151 y 152, y "Joaquín", lab 153; simulación, no personas reales), sin bloqueantes graves y con los hallazgos corregidos:
+  - LAB-151: descripción de `Comprobar factura` que exigía los importes y no se disparaba con "Quiero comprobar una factura"; riesgo de que R8 llamara a `Consultar mis solicitudes` con el correo del alumno (instrucción nueva en el agente principal); qué hacer si el topic no pregunta los importes; fila R4 tras quitar el agente hijo.
+  - LAB-152: palabras clave frágiles (E06 "no", E11 "5.000 USD" y E13 "2 %" cambiadas; E05 y E10 se predicen como fallo del caso); icono **Edit** de la columna **Tools**; aviso de caracteres permitidos en el método Classification; General quality se anota en porcentaje; plan B manual acotado.
+  - LAB-153: decisión de la tabla antes de **Add required objects** y quitarla con **Remove from this solution**, nunca **Delete from this environment**; alternativas para borrar el agente desechable y aviso de leer el nombre; camino de vuelta antes de **Push changes** (`git revert` o el paquete no administrado); variable con **Set a variable value** primero, también en **On Error**; **+ New value** y quitar el valor actual del entorno; "publicar" en la exportación son las personalizaciones de Dataverse; mirar sin guardar en la administrada; C02 con los topics de sistema y C03 condicional.
+  - Tiempos: LAB-151 unas 4 h 20 min, LAB-152 unas 4 h (más con el plan B), LAB-153 unas 5 h a 5 h 30 min.
+- **Sin verificar en el tenant:** los tres labs por la interfaz; si los agentes hijos y la página **Evaluation** consumen créditos en el harness estándar o funcionan con una prueba sin créditos (Learn solo lo dice del chat de prueba y del Microsoft Copilot harness); si la importación acepta UTF-8 sin BOM; si Keyword match distingue mayúsculas; si el agente hijo aparece en **Select tools** de Capability use; si `Abs` y `Round` están en Copilot Studio; cómo se llama el grupo de variables de entorno en el selector; qué valor de la variable usa el panel de prueba sin publicar; si los agent flows usan referencias de conexión y si la herramienta REST crea un conector personalizado; la estructura del paquete de un agente; si un agente importado del harness estándar queda de solo lectura; cómo se borra un agente (Learn no lo documenta); si el explorador de soluciones de Copilot Studio ofrece **New** > **Environment variable** (Learn solo documenta **Add existing**); etiquetas en español.
+- **Siguiente: P5** (labs 154 y 155): publicación, operación y coste (en papel con la prueba), reto Pro sin pasos con rúbrica por los tres dominios de AB-620, prueba simulada de la ruta completa y capstone definitivo LAB-155.
+
 ## 16. Rediseño "El camino jugable" (2026-11-27)
 
 Propuesta de diseño inspirada en Brilliant (un paso por pantalla, feedback que deja corregir), Boot.dev (XP solo
@@ -1533,5 +1556,66 @@ simulada del modo por pasos y, si funciona, ampliarlo por niveles (F5).
     pendiente y el recordatorio de exportar la solución).
   - `/progreso` añade "Tu constancia": la cuadrícula de 12 semanas, los trofeos por mundo (todos los módulos y labs
     obligatorios del nivel) y la meta.
-- **Pendiente:** el dominio por área del perfil. Ya existen los resúmenes de prácticas por dominio en `/progreso`.
+- **Dominio por área (hecho después, el mismo día):** `DomainMasteryCard` en "Tu constancia", con una barra por área
+  de práctica interactiva (completadas sin ver la solución, el mismo criterio que la XP). Recibe solo ids agrupados.
+
+**F3 hecha (2026-11-27): el lab como misión.**
+- `src/lib/lab-mission.ts` (`buildLabMission`) saca del Markdown del lab, sin tocarlo, el objetivo, hasta 12
+  comprobaciones y los tres primeros enlaces a Learn. Las comprobaciones salen de la primera sección de cierre que tenga
+  elementos, en este orden: Checklist final, Criterios de aprobación, Criterios de validación, Validaciones, Entregables
+  y Evidencia esperada. Un test exige que los 111 labs tengan objetivo y comprobaciones.
+- `LabMissionPanel`, al final de la página del lab:
+  - Marcas cada comprobación y anotas tu evidencia (nombres de esquema, IDs de ejecución, cifras), con 30 caracteres
+    como mínimo.
+  - **Entregar la misión** marca el lab como completado y guarda `verifiedAt`. Desmarcar una comprobación retira la
+    entrega.
+  - La cabecera del lab enlaza con el panel.
+- **Decisión: la evidencia va en el store académico**, en un campo nuevo `labEvidence` (slug → comprobaciones, nota y
+  `verifiedAt`), no en un store nuevo. Es progreso académico, igual que `completedSteps`. El backup lo une: gana la
+  evidencia entregada y, si ninguna lo está, la local.
+- **XP:** un lab completado con evidencia entregada vale **100**; solo marcado, 25.
+- **Rangos recalibrados** para terminar cada nivel con la evidencia entregada (≈ 1.460 / 2.790 / 5.620 / 9.030 XP):
+  - Aprendiz 0 / 150 / 300.
+  - Maker 450 / 800 / 1.200.
+  - Consultor funcional 1.600 / 2.100 / 2.600.
+  - Desarrollador 3.000 / 3.900 / 4.800.
+  - Arquitecto 6.000 / 7.200 / 8.400.
+
+  Con los labs solo marcados se queda un grado o un rol por debajo.
+- La app sigue sin ver el tenant: la evidencia es lo que el alumno declara, pero ahora lo declara con detalle y le
+  queda anotado.
+
+**F5 hecha (2026-11-27): modo por pasos en todo el curso y jefe de cada mundo.**
+- **Allowlist retirada.** `STEP_MODE_MODULE_KEYS` desaparece y `hasStepMode(markdown)` lo activa en todo módulo con
+  microlecciones: hoy los 76 (1.251 pasos en total).
+- **El parser ahora reconoce:**
+  - Microlecciones H3, como en los proyectos integradores 8, 17, 30 y 41, que antes daban 0 pasos.
+  - Bloques H2 antes del reto (mini labs, etapas del proyecto), como pasos propios `b1`, `b2`…
+- **Pasos largos.** Un paso de más de 3.500 caracteres se parte por H3-H6 o por párrafos que empiezan con una
+  etiqueta en negrita ("**Paso 2 —**", "**Evidencia a reportar:**"); si hace falta, por párrafos y, en listas de
+  referencia enormes (Conceptos Clave, glosarios), entre viñetas. Las pantallas se juntan hasta unos 2.500 caracteres.
+  - La primera pantalla conserva el id (`m1-ambiente`) y las siguientes llevan `-2`, `-3`…, así no se pierde el
+    avance guardado.
+  - La continuación de una micropráctica, o de un concepto que pide práctica o evidencia, pasa a ser "en tu ambiente".
+  - El Módulo 11 conserva sus 13 pasos.
+- **Prueba simulada del corte (2026-11-27, un evaluador sin contexto con los Módulos 1, 8 y 20; simulación, no una
+  persona real).** Veredicto: sin bloqueos, pero con cortes mal puestos. Se corrigió en el parser:
+  - Una pantalla ya no termina en un título, un rótulo en cursiva o una frase que acaba en ":".
+  - No se corta dentro de una lista ni de una lista numerada de pasos.
+  - "Si no lo ves", "Si algo sale distinto" y "Qué deberías ver" van con sus pasos.
+  - Un trozo de menos de 400 caracteres se une al anterior.
+  - Cada "🔧 Profundización opcional" es una pantalla propia (`optional`), marcada "Opcional: puedes saltarla" y con el
+    botón "Saltar lo opcional"; hoy son 41.
+  - "Práctica del núcleo", "Práctica en…" y "Construye en tu entorno" abren el paso "en tu ambiente" (el Módulo 20 ya no
+    es todo concepto).
+
+  Pendiente: las ramas alternativas ("Fase 2 o Fase 3", "Opción A/B") se recorren en línea, sin selector, y quedan
+  pantallas de más de 5.000 caracteres que son procedimientos numerados (no se parten a propósito). Un test recorre los
+  76 módulos: ids únicos, reto presente, prácticas que existen y ninguna pantalla de más de 10.500 caracteres.
+- **Jefe del mundo.** Es el reto de transferencia del último módulo del nivel (el proyecto integrador). El camino lo
+  muestra antes del trofeo y lo abre en el modo por pasos, directamente en ese paso; se supera al marcar el reto.
+  El trofeo del mundo (en el camino y en "Tu constancia") exige ahora módulos, labs y jefe, y después remite al
+  simulador.
+- **Sin hacer:** XP para el jefe (marcar el reto es autodeclarado, igual que un lab sin evidencia) y el selector de
+  ramas.
 

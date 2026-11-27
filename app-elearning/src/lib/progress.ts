@@ -6,6 +6,7 @@ import type { LevelId } from "./i18n";
 import { LEVEL_MODULE_RANGE } from "./i18n";
 import type { ChecklistItemProgress, ChecklistProgressMap } from "./checklist";
 import { getEmptyChecklistItemProgress } from "./checklist";
+import { sanitizeLabEvidenceMap, type LabEvidence } from "./lab-mission";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -18,6 +19,7 @@ export interface ProgressState {
   userName: string | null;             // user name for certificate
   moduleNotes: Record<string, string>; // module id ("basico-1") → personal note
   completedSteps: string[];            // pasos de la lección por pasos: "intermedio-11#m1-concepto" (lesson-steps.ts)
+  labEvidence: Record<string, LabEvidence>; // evidencia del lab como misión (F3, lab-mission.ts)
 }
 
 export interface ProgressActions {
@@ -31,6 +33,7 @@ export interface ProgressActions {
   setUserName: (name: string) => void;
   setModuleNote: (moduleId: string, note: string) => void;
   markStepComplete: (stepId: string) => void;
+  setLabEvidence: (slug: string, patch: Partial<LabEvidence>) => void;
   getLevelProgress: (levelId: LevelId) => { completed: number; total: number; percentage: number };
   getOverallProgress: () => { completed: number; total: number; percentage: number };
   // Labs
@@ -53,6 +56,7 @@ const INITIAL_STATE: ProgressState = {
   userName: null,
   moduleNotes: {},
   completedSteps: [],
+  labEvidence: {},
 };
 
 // ─── Persisted-state sanitization ─────────────────────────────────────────────
@@ -110,6 +114,7 @@ function sanitizeProgressState(persisted: unknown): ProgressState {
     userName,
     moduleNotes,
     completedSteps,
+    labEvidence: sanitizeLabEvidenceMap(raw.labEvidence),
   };
 }
 
@@ -232,6 +237,13 @@ export const useProgressStore = create<ProgressState & ProgressActions>()(
         set((state) => {
           const current = state.completedSteps ?? [];
           return current.includes(stepId) ? {} : { completedSteps: [...current, stepId] };
+        }),
+
+      setLabEvidence: (slug, patch) =>
+        set((state) => {
+          const current = state.labEvidence ?? {};
+          const previous = current[slug] ?? { checks: [], note: "" };
+          return { labEvidence: { ...current, [slug]: { ...previous, ...patch } } };
         }),
 
       getLevelProgress: (levelId) => calculateLevelProgress(levelId, get().completedModules),

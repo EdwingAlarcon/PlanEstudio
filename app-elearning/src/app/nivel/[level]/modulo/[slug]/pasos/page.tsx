@@ -8,7 +8,7 @@ import { buildLessonSteps, hasStepMode } from "@/lib/lesson-steps";
 import { LessonStepsClient } from "@/components/modules/lesson-steps-client";
 import type { LevelId } from "@/lib/i18n";
 
-// Lección por pasos (F2 de "El camino jugable"). Solo existe para los módulos de STEP_MODE_MODULE_KEYS.
+// Lección por pasos (F2 de "El camino jugable"; F5 la amplía a todo módulo con microlecciones).
 // Es otra forma de recorrer el mismo contenido del módulo: noindex para no duplicarlo en buscadores.
 
 interface PageProps {
@@ -17,7 +17,7 @@ interface PageProps {
 
 export function generateStaticParams() {
   return getAllLevels().flatMap((level) =>
-    level.modules.filter((mod) => hasStepMode(mod.id)).map((mod) => ({ level: level.id, slug: mod.slug })),
+    level.modules.filter((mod) => hasStepMode(mod.rawContent)).map((mod) => ({ level: level.id, slug: mod.slug })),
   );
 }
 
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ModuleStepsPage({ params }: PageProps) {
   const { level, slug } = await params;
   const mod = getModuleBySlug(level as LevelId, slug);
-  if (!mod || !hasStepMode(mod.id)) notFound();
+  if (!mod || !hasStepMode(mod.rawContent)) notFound();
 
   const steps = buildLessonSteps(mod.rawContent);
   if (steps.length === 0) notFound();
