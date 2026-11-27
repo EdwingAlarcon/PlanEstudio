@@ -124,11 +124,12 @@ exactamente una cuenta gratuita de Microsoft Entra creada para esto. Nota: la p�
 
 ### Crear el ambiente Trial con Dataverse (clic a clic)
 
-El recorrido completo, con lo que hacer si algo sale distinto, está en el
-[Módulo 1](/nivel/basico/modulo/introduccion-al-ecosistema-power-platform), Microlección 1. Resumen según
+El recorrido corto está en el
+[Módulo 1](/nivel/basico/modulo/introduccion-al-ecosistema-power-platform), Microlección 1; las otras vías y los
+problemas frecuentes, más abajo. Resumen según
 [Trial environments](https://learn.microsoft.com/power-platform/admin/trial-environments):
 
-1. Activa tu licencia Power Apps trial (Módulo 1, Paso 2A).
+1. Activa tu licencia Power Apps trial ([apps.powerapps.com/trial](https://apps.powerapps.com/trial)).
 2. Entra en el [Power Platform admin center](https://admin.powerplatform.microsoft.com).
 3. En el panel de navegación selecciona **Manage** y, en el panel **Manage**, **Environments**.
 4. En la página **Environments** selecciona **New** en la barra de comandos.
@@ -138,6 +139,51 @@ El recorrido completo, con lo que hacer si algo sale distinto, está en el
    **Security group:** el que te pida la pantalla (en tu tenant propio, **None** si está disponible). Selecciona **Save**.
 7. Anota la fecha de vencimiento: en **Environments**, selecciona tu ambiente y, en el panel **Details**, **See all**
    para ver **Day(s) remain**.
+
+### Si no tienes una cuenta de trabajo o estudio
+
+Microsoft no permite registrarse con una cuenta personal como Gmail, Outlook.com o Hotmail. Elige el caso que se parezca al tuyo:
+
+- **Tienes correo de empresa o universidad:** úsalo. Mira "¿Tienes permisos de administración?" para saber si tienes permisos de administración.
+- **No tienes correo profesional ni educativo:** Learn indica que puedes crear una **cuenta gratuita de Microsoft Entra** para registrarte ([Sign up for Power Apps](https://learn.microsoft.com/power-apps/maker/signup-for-powerapps)). Inténtalo por esa vía; no está verificado qué recibe exactamente esa cuenta. Otra vía, que ya usaba este curso, es crear tu propio tenant de prueba:
+  1. Abre https://www.microsoft.com/microsoft-365/try.
+  2. Elige un plan de empresa con prueba gratuita de un mes.
+  3. Sigue el asistente. Al terminar tendrás una cuenta del tipo `tunombre@tuorganizacion.onmicrosoft.com` y tendrás permisos de **administración** de ese tenant.
+  4. Anota el usuario, la contraseña (en un lugar seguro, no en la evidencia) y la **fecha en que termina la prueba**.
+  5. **Cuidado con el cobro:** el registro puede pedirte una tarjeta. Al terminar el mes, la mayoría de las pruebas pasan solas a una suscripción de pago. Si no quieres pagar, antes de que termine entra al Microsoft 365 admin center (https://admin.microsoft.com), ve a **Billing** > **Your products** y desactiva **recurring billing** (la renovación automática).
+- **Tienes una suscripción de Visual Studio Professional o Enterprise:** puedes pedir el sandbox del [Microsoft 365 Developer Program](https://developer.microsoft.com/microsoft-365/dev-program). Hoy solo califican esos suscriptores, algunos partners y clientes de soporte Premier o Unified. La mayoría de los principiantes no califica, así que no lo uses como primera opción.
+
+### ¿Tienes permisos de administración?
+
+Los tienes si tu cuenta tiene uno de estos roles: **Global Administrator**, **Power Platform Administrator** o **Dynamics 365 Administrator**.
+
+- Si creaste tu propio tenant de prueba en el Paso 1, sí los tienes.
+- Si usas el correo de tu empresa o universidad, casi seguro **no** los tienes. Si no lo sabes, pregúntale a tu equipo de TI: "¿Tengo alguno de estos roles?". No hace falta ser administrador para crear un ambiente Trial: cualquier usuario con una licencia adecuada puede, salvo que tu organización lo haya restringido a los administradores ([Trial environments](https://learn.microsoft.com/power-platform/admin/trial-environments)). Si te lo bloquean, sigue la **Opción B**.
+
+### Si tu organización te da el ambiente
+
+Si tu empresa o universidad te puede dar un **ambiente Developer gestionado** o un **Sandbox** con licencia premium, es lo mejor: no caduca a los 30 días y sirve para todo el curso. Tú no lo creas: lo crea un administrador. Envía a tu equipo de TI un mensaje como este:
+
+> "Hola. Estoy haciendo un curso de Power Platform y necesito un ambiente para practicar. ¿Me pueden dar un **ambiente Developer gestionado** (managed developer environment) **con Dataverse**, solo para mí? Se puede crear desde el Power Platform admin center o con *environment routing*. Si no es posible, ¿me pueden dar un ambiente **Sandbox** con Dataverse, o permitirme crear un ambiente **Trial**? En ese ambiente necesito el rol **System Customizer** o **System Administrator**. Para ejecutar apps y flujos en un Developer gestionado necesito además una licencia premium de Power Apps (o una de prueba), porque el Developer Plan no incluye los derechos de Managed Environments."
+
+Mientras esperas, sigue leyendo y haz las microprácticas: no necesitan ambiente.
+
+*Si ya tienes un ambiente Developer creado antes del 15 de noviembre de 2026:* puedes seguir usándolo como ambiente del curso **hasta el 15 de diciembre de 2026**, fecha desde la que se suspende (se elimina desde el 15 de enero de 2027). **Exporta tus soluciones antes del 15 de diciembre** e impórtalas en tu ambiente Trial o en el que te dé tu organización. Si tienes licencia premium y un administrador, Learn da otra salida: activar Managed Environments en ese ambiente antes de esa fecha ([Developer Plan](https://learn.microsoft.com/power-platform/developer/plan)).
+
+### Si algo sale distinto al crear el ambiente
+
+| Lo que ves | Qué significa | Qué hacer |
+|---|---|---|
+| Al crear el ambiente, el Admin Center no te deja elegir **Trial** o te pide una licencia | Tu usuario no tiene una licencia que permita crear un Trial (las de Microsoft 365 y la del Developer Plan no sirven) | Activa la licencia Power Apps trial (licencia Power Apps trial) y vuelve a intentarlo |
+| Te dice que ya tienes un ambiente Trial | El límite es un ambiente Trial por usuario | Usa ese ambiente como ambiente del curso, o elimínalo si ya no lo necesitas (exporta antes lo que quieras conservar) |
+| No puedes entrar al Admin Center, no ves **New** o te sale un error de permisos | Tu organización restringió la creación de ambientes (o de trials) a los administradores | Envía a TI el mensaje de la **Opción B**. Mientras tanto, haz las microprácticas |
+| No puedes activar la licencia Power Apps trial | Tu organización bloqueó las licencias de prueba | Envía a TI el mensaje de la **Opción B**, o usa una cuenta propia (cuenta propia) |
+| El portal del Microsoft 365 Developer Program te dice que no calificas | No tienes una suscripción que califique | Usa una de las otras vías de arriba |
+| En **Type** solo ves **Developer** o te ofrecen registrarte en el Developer Plan | Desde el 15 de noviembre de 2026 el Developer Plan ya no crea un ambiente, y el Developer solo existe como ambiente gestionado que asigna un administrador | Elige **Trial**; si quieres un Developer gestionado, pídelo con la **Opción B** |
+| Faltan siete días o menos para que venza tu Trial | Es la única ventana para la extensión | En **Manage** > **Environments**, selecciona tu ambiente y **Extend trial** (una sola vez, suma 30 días). Exporta tu solución ese mismo día |
+| Tu ambiente desaparece o queda deshabilitado | Venció el Trial (30 días, o 60 con la extensión), o pasó 30 días sin actividad en su base de datos | Crea un ambiente nuevo con los mismos ajustes e importa tu última solución exportada; vuelve a crear conexiones y datos de prueba |
+
+> **Si los botones aparecen en español:** la página usa el idioma de tu navegador. Este curso usa los nombres en inglés. Para cambiarlos, abre el engranaje (**Settings**, arriba a la derecha) > **Power Apps settings** y cambia el idioma, o cambia el idioma de tu navegador. Si prefieres dejarlo en español, busca el botón equivalente en la misma zona de la pantalla.
 
 ### Pedir la extensión en la última semana
 

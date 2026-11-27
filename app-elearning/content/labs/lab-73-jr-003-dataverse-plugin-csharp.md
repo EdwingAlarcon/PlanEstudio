@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 23 estudiado: C# Plugins para Dataverse"
   - "Conocimiento básico de pipeline, tracing y registro de plugins"
 lastVerified: "2026-09"
+optional: true
 ---
 
 # Lab 73 — JR-003: Dataverse Plugin C#

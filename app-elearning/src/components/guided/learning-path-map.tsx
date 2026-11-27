@@ -83,7 +83,7 @@ export function LearningPathMap({ worlds }: { worlds: PathWorld[] }) {
       <div>
         <h2 id="journey-heading" className="text-lg font-semibold text-foreground">Tu recorrido</h2>
         <p className="text-sm text-muted-foreground">
-          Cuatro mundos en orden; cada uno prepara una certificación. La XP se gana con evidencia: prácticas, quizzes y labs.
+          Cuatro mundos en orden: la ruta del consultor funcional. La XP se gana con evidencia: prácticas, quizzes y labs.
         </p>
       </div>
 

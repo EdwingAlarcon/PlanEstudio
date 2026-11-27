@@ -19,6 +19,7 @@ import { UI, type LevelId } from "@/lib/i18n";
 import { FOUNDATION_ACTIVITIES } from "@/lib/guided-journey";
 import { getModuleOutline, splitModuleSections } from "@/lib/module-sections";
 import { hasStepMode } from "@/lib/lesson-steps";
+import { isOptionalModule } from "@/lib/main-path";
 
 function ModuleStep({ n, href, title, detail }: { n: number; href: string; title: string; detail: string }) {
   return (
@@ -136,6 +137,13 @@ export default async function ModulePage({ params }: PageProps) {
       </div>
 
       <ModuleVisitTracker moduleId={mod.id} />
+
+      {isOptionalModule(mod.moduleId) && (
+        <p className="rounded-xl border border-dashed border-border px-4 py-3 text-sm text-muted-foreground" data-testid="optional-module-note">
+          <span className="font-semibold text-foreground">Módulo opcional.</span> No cuenta para tu progreso ni
+          para el certificado del nivel. La ruta principal es la de consultor funcional de Power Platform.
+        </p>
+      )}
 
       <ModulePrerequisiteGate
         moduleId={mod.moduleId}

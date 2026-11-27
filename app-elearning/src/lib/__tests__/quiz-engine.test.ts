@@ -266,9 +266,9 @@ describe("certForModule", () => {
     expect(certForModule(9)).toBe("Consultor funcional (PL-200 retirado 31 ago 2026)");
     expect(certForModule(17)).toBe("Consultor funcional (PL-200 retirado 31 ago 2026)");
   });
-  it("returns AB-400 for modules 18-30", () => {
-    expect(certForModule(18)).toBe("AB-400 (sucesor de PL-400)");
-    expect(certForModule(30)).toBe("AB-400 (sucesor de PL-400)");
+  it("returns the functional label for modules 18-30", () => {
+    expect(certForModule(18)).toBe("Consultor funcional avanzado");
+    expect(certForModule(30)).toBe("Consultor funcional avanzado");
   });
   it("returns architecture competency for modules 31-41", () => {
     expect(certForModule(31)).toBe("Arquitectura Power Platform");

@@ -10,6 +10,7 @@ prerequisites:
   - "Lab 93 completado: F&O Finance Setup Walkthrough"
   - "Acceso a un ambiente trial/demo de Dynamics 365 Project Operations; sin él, haz la variante en papel del final del lab"
 lastVerified: "2026-11"
+optional: true
 ---
 
 # Lab 97 — F&O Project Operations Setup

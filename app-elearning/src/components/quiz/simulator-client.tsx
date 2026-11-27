@@ -80,7 +80,7 @@ export function SimulatorClient({ allQuestions }: SimulatorClientProps) {
             <option value="all">Todos los niveles (mixto)</option>
             <option value="basico">Nivel 1 — Básico (PL-900)</option>
             <option value="intermedio">Nivel 2 — Intermedio (competencia funcional; PL-200 retirado)</option>
-            <option value="avanzado">Nivel 3 — Avanzado (AB-400, sucesor de PL-400)</option>
+            <option value="avanzado">Nivel 3 — Avanzado (funcional)</option>
             <option value="arquitecto">Nivel 4 — Arquitecto (competencia profesional)</option>
           </select>
         </div>

@@ -204,9 +204,40 @@ describe("labs opcionales", () => {
     const basicLabSlugs = getLabsForLevel("basico").map((item) => item.slug);
     expect(basicLabSlugs).not.toContain("lab-06-power-bi-reporte-solicitudes");
     expect(basicLabSlugs).toContain("lab-02-dataverse-modelo-datos");
-    // Opcionales: LAB-006 y los labs de las Rutas Pro (Power BI 116-127, Power Automate 128-139, Copilot Studio 144+), que son especialización y no cuentan para ningún nivel.
-    expect(getAllLabs().filter((item) => item.optional).map((item) => item.slug)).toEqual([
+    // Opcionales: LAB-006 y los labs de las Rutas Pro (Power BI 116-127, Power Automate 128-139, Copilot Studio 144+), que son especialización y no cuentan para ningún nivel; y los de desarrollo y Dynamics 365 de los Niveles 3 y 4 (ruta principal).
+    expect(getAllLabs().filter((item) => item.optional).map((item) => item.slug).sort()).toEqual([
       "lab-06-power-bi-reporte-solicitudes",
+      "lab-19-cicd-azure-devops",
+      "lab-23-plugin-csharp",
+      "lab-63-capstone-developer-solucion-tecnica-avanzada",
+      "lab-72-jr-002-crm-javascript-customization",
+      "lab-73-jr-003-dataverse-plugin-csharp",
+      "lab-74-jr-004-crm-integration-challenge",
+      "lab-91-jr-011-custom-api-workflow-extensibility",
+      "lab-114-monitoreo-application-insights-diagnostico",
+      "lab-58-customer-insights-segmento-journey",
+      "lab-59-field-service-work-order-uat",
+      "lab-60-proyecto-integrador-servicio-postventa",
+      "lab-64-capstone-fo-awareness-arquitectura-erp-crm",
+      "lab-66-sales-lead-to-cash",
+      "lab-68-customer-service-case-to-resolution",
+      "lab-69-fo-process-mapping-erp-end-to-end",
+      "lab-70-ce-fo-integration-architecture",
+      "lab-75-jr-005-data-migration-dynamics",
+      "lab-77-jr-007-customer-service-specialist-simulation",
+      "lab-78-jr-008-crm-legacy-health-assessment",
+      "lab-92-jr-012-production-incident-simulation",
+      "lab-93-fo-finance-setup-walkthrough",
+      "lab-94-fo-procure-to-pay-hands-on",
+      "lab-95-fo-order-to-cash-hands-on",
+      "lab-96-fo-inventory-products-setup",
+      "lab-97-fo-project-operations-setup",
+      "lab-98-fo-commerce-overview-hands-on",
+      "lab-99-fo-security-duty-privilege-hands-on",
+      "lab-100-fo-reporting-hands-on",
+      "lab-101-jr-013-crm-functional-analyst-caso-integrado",
+      "lab-102-jr-014-sales-lead-to-cash-job-test",
+      "lab-103-jr-015-functional-post-go-live-incident-simulation",
       "lab-116-power-bi-en-un-dia",
       "lab-117-power-bi-obtener-y-perfilar-datos",
       "lab-118-power-bi-transformar-y-cargar",
@@ -245,6 +276,6 @@ describe("labs opcionales", () => {
       "lab-151-copilot-studio-multiagente",
       "lab-152-copilot-studio-evaluacion",
       "lab-153-copilot-studio-soluciones-y-alm",
-    ]);
+    ].sort());
   });
 });

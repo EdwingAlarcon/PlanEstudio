@@ -12,6 +12,7 @@ prerequisites:
   - "Lab 62 revisado: Capstone Consultor Funcional (fit-gap, backlog, UAT)"
   - "Ruta Job-Ready CRM Functional revisada"
 lastVerified: "2026-09"
+optional: true
 ---
 
 # Lab 101 — JR-013: CRM Functional Analyst — Caso Integrado

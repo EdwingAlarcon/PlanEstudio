@@ -34,7 +34,8 @@ test.describe("Smoke — rutas principales", () => {
         if (!(await practiceLink.isVisible())) await sidebar.getByRole("button", { name: "Practicar" }).click();
         await expect(practiceLink).toBeVisible({ timeout: 1000 });
       }).toPass({ timeout: 15000 });
-      await expect(sidebar.getByText("0/10")).toHaveCount(2);
+      // Nivel 4 (ruta principal), D365 y RPA tienen 10 módulos.
+      await expect(sidebar.getByText("0/10")).toHaveCount(3);
       // La barra ya no lista recursos uno por uno: están agrupados en /recursos.
       await expect(sidebar.getByRole("link", { name: "Glosario" })).toHaveCount(0);
       await expect(sidebar.getByText("Dynamics 365 Avanzado")).toHaveCount(0);

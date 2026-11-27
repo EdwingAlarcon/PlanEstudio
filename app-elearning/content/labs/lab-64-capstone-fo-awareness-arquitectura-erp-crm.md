@@ -11,6 +11,7 @@ prerequisites:
   - "Módulo 20 revisado: Dynamics 365 CE — Sales y Customer Service"
   - "Módulo 34 revisado: Azure Integration Services Avanzado (patrones de integración)"
 lastVerified: "2026-11"
+optional: true
 ---
 
 # Lab 64 — Capstone Finance & Operations Awareness: Arquitectura Conceptual ERP + CRM

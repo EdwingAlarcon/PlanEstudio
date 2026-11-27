@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 13 estudiado: JavaScript y Web Resources"
   - "Módulo 20 revisado: Dynamics 365 CE"
 lastVerified: "2026-09"
+optional: true
 ---
 
 # Lab 72 — JR-002: CRM JavaScript Customization

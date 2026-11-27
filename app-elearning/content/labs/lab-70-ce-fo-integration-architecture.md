@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 34 revisado: Azure Integration Services Avanzado (patrones de integración)"
   - "Lab 69 completado: F&O Process Mapping — Procesos ERP End-to-End (recomendado)"
 lastVerified: "2026-11"
+optional: true
 ---
 
 # Lab 70 — CE + F&O Integration Architecture: Ownership de Datos y Dual-Write Técnico

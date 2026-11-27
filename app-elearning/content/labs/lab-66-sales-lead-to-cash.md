@@ -11,6 +11,7 @@ prerequisites:
   - "Lab 09 completado: Dataverse Avanzado — BPF, Rollup y Field Security"
   - "Recurso revisado: Rúbricas y Plantillas de Evaluación"
 lastVerified: "2026-09"
+optional: true
 ---
 
 # Lab 66 — Dynamics 365 Sales: Proceso Comercial Lead-to-Cash

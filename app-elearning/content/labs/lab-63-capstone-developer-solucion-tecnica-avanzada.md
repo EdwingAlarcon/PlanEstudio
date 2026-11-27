@@ -12,6 +12,7 @@ prerequisites:
   - "Lab 52 completado: CLI y conexión al tenant"
   - "Lab 53 completado: Exportar y revisar solución con IA"
 lastVerified: "2026-09"
+optional: true
 ---
 
 # Lab 63 — Capstone Developer: Solución Técnica Avanzada

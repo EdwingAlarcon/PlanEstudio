@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 23 estudiado: C# Plugins para Dataverse"
   - "Lab 73 completado (recomendado): Dataverse Plugin C#"
 lastVerified: "2026-09"
+optional: true
 ---
 
 # Lab 92 — JR-012: Production Incident Simulation

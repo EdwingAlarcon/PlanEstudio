@@ -12,6 +12,7 @@ prerequisites:
   - "Permiso para crear un App registration en Microsoft Entra ID (lo crearás en el Ejercicio 1)"
   - "Módulo 19 estudiado: ALM y CI/CD"
 lastVerified: "2026-11"
+optional: true
 ---
 
 # Lab 19 — ALM y CI/CD: Pipeline de Azure DevOps para Power Platform (SIT)

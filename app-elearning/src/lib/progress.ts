@@ -3,6 +3,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import type { LevelId } from "./i18n";
+import { getMainModuleIds, isOptionalModule } from "./main-path";
 import { LEVEL_MODULE_RANGE } from "./i18n";
 import type { ChecklistItemProgress, ChecklistProgressMap } from "./checklist";
 import { getEmptyChecklistItemProgress } from "./checklist";
@@ -121,8 +122,7 @@ function sanitizeProgressState(persisted: unknown): ProgressState {
 // ─── Module counts per level ──────────────────────────────────────────────────
 
 function getTotalModulesForLevel(levelId: LevelId): number {
-  const [start, end] = LEVEL_MODULE_RANGE[levelId];
-  return end - start + 1;
+  return getMainModuleIds(levelId).length;
 }
 
 // ─── Pure progress calculations ───────────────────────────────────────────────
@@ -130,19 +130,15 @@ function getTotalModulesForLevel(levelId: LevelId): number {
 // `completedModules` array (which changes reference on every mutation).
 // Selecting a store *method* instead (e.g. `s.getLevelProgress`) would not
 // trigger a re-render on its own, since that function reference never changes.
+// Solo cuenta la ruta principal (main-path.ts): los módulos de desarrollo son opcionales.
 
 export function calculateLevelProgress(
   levelId: LevelId,
   completedModules: string[]
 ): { completed: number; total: number; percentage: number } {
-  const [start, end] = LEVEL_MODULE_RANGE[levelId];
+  const done = new Set(completedModules);
   const total = getTotalModulesForLevel(levelId);
-  const prefix = `${levelId}-`;
-  const completed = completedModules.filter((id) => {
-    if (!id.startsWith(prefix)) return false;
-    const moduleNum = parseInt(id.slice(prefix.length), 10);
-    return moduleNum >= start && moduleNum <= end;
-  }).length;
+  const completed = getMainModuleIds(levelId).filter((id) => done.has(`${levelId}-${id}`)).length;
   const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
   return { completed, total, percentage };
 }
@@ -160,10 +156,10 @@ export function calculateLevelQuizReadiness(
   levelId: LevelId,
   quizScores: Record<string, number>
 ): LevelQuizReadiness {
-  const [start, end] = LEVEL_MODULE_RANGE[levelId];
-  const total = end - start + 1;
+  const moduleIds = getMainModuleIds(levelId);
+  const total = moduleIds.length;
   const scores: number[] = [];
-  for (let moduleId = start; moduleId <= end; moduleId++) {
+  for (const moduleId of moduleIds) {
     const score = quizScores[String(moduleId)];
     if (typeof score === "number") scores.push(score);
   }
@@ -180,7 +176,7 @@ export function calculateOverallProgress(
     (sum, levelId) => sum + getTotalModulesForLevel(levelId),
     0
   );
-  const completed = completedModules.length;
+  const completed = completedModules.filter((id) => !isOptionalModule(Number(id.split("-").at(-1)))).length;
   const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
   return { completed, total, percentage };
 }

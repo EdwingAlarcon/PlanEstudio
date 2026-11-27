@@ -97,6 +97,40 @@ Puedes seguir al Módulo 1 cuando puedas responder, sin mirar la tabla, estas 3 
 Si alguna te cuesta, vuelve a la sección 2 antes de empezar el Módulo 1 — el resto del plan asume que
 estos términos ya no te generan dudas.
 
+## Glosario rápido
+
+Consúltalo cuando una palabra te frene; no hay que memorizarlo.
+
+| Término | En una frase |
+|---|---|
+| **Nube (Cloud)** | Programas y datos que viven en computadoras de Microsoft, no en tu PC — por eso accedes desde cualquier navegador con internet. |
+| **Navegador** | El programa donde abres páginas web (Edge, Chrome) — aquí es donde vas a trabajar todo el curso, no instalas nada pesado. |
+| **URL** | La dirección de una página, como `make.powerapps.com` — la escribes o pegas en la barra de arriba del navegador. |
+| **Cuenta / Login** | Tu usuario y contraseña para identificarte; la cuenta que crearás en este módulo es de trabajo/estudio, distinta a tu correo personal. |
+| **Panel de administración (Admin Center)** | Una página donde se configuran cosas a nivel de toda la organización, no de una sola app — normalmente no la tocas hasta niveles más avanzados. |
+| **Tabla (como en Excel)** | Filas y columnas de datos. Dataverse (lo verás abajo) es básicamente muchas tablas conectadas entre sí, como varias hojas de Excel que se hablan entre ellas. |
+| **Registro (Record)** | Una fila dentro de una tabla — por ejemplo, un cliente específico es un registro en la tabla de clientes. |
+| **Dataverse** | La base de datos común de Power Platform — donde viven las tablas que usan tus apps y flujos. |
+| **Ambiente (Environment)** | Un espacio separado y aislado para trabajar, como una carpeta propia; nunca mezcles pruebas con producción. |
+| **Tenant** | La organización completa en Microsoft 365/Power Platform a la que perteneces — puede tener varios ambientes adentro. |
+| **Solución (Solution)** | El contenedor donde empaquetas tablas, apps y flujos para poder moverlos entre ambientes de forma ordenada. |
+| **Publisher** | El "sello" con tu prefijo (ej. `sit_`) que identifica que una tabla o columna es tuya, no del sistema. |
+| **Power Apps** | La herramienta para crear apps de negocio. |
+| **Power Automate** | La herramienta para crear flujos: tareas que se hacen solas (por ejemplo, enviar un correo cuando llega una solicitud). |
+| **Power BI** | La herramienta para hacer reportes y tableros con gráficos. Se abre en https://app.powerbi.com. |
+| **Copilot Studio** | La herramienta para crear agentes: asistentes de chat que responden preguntas o hacen tareas. |
+| **Power Fx** | El lenguaje de fórmulas de Power Apps. Se parece a las fórmulas de Excel. |
+| **Canvas App** | Una app que diseñas pantalla por pantalla, como un lienzo en blanco. |
+| **Model-Driven App** | Una app que Power Apps arma sola a partir de tus tablas de Dataverse (listas y formularios). |
+| **Trial (prueba)** | Una versión gratis por tiempo limitado. Al terminar, se deshabilita o pide pago. |
+| **Licencia por usuario** | El permiso de uso que se paga por cada persona que usa el producto. |
+| **Region** | El país o zona donde Microsoft guarda los datos de tu ambiente. |
+| **Security group** | Una lista de personas de tu organización. Si se asigna a un ambiente, solo esas personas pueden entrar. |
+| **Ambiente gestionado / no gestionado** | *Gestionado* (managed, también "administrado") = tu organización le aplica sus reglas de control (Managed Environments). *No gestionado* (unmanaged) = sin esas reglas. Desde el 15 de noviembre de 2026 los ambientes Developer solo se crean gestionados y los asigna un administrador. Ojo: en el Módulo 2 verás *managed/unmanaged* para las **soluciones**, y ahí significa otra cosa (si la solución se puede editar o no). |
+| **API** | La "puerta" por la que un programa lee o escribe datos en otro, sin usar la pantalla. |
+| **ALM** | *Application Lifecycle Management*: la forma ordenada de llevar lo que construyes de desarrollo a pruebas y luego a producción. |
+| **CoE** | *Center of Excellence*: el equipo y las herramientas con que una empresa controla y apoya el uso de Power Platform. |
+
 ## Siguiente paso
 
 → [Módulo 1 — Introducción al Ecosistema Power Platform](/nivel/basico/modulo/introduccion-al-ecosistema-power-platform)

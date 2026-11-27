@@ -151,9 +151,9 @@ describe("useProgressStore", () => {
   });
 
   describe("getOverallProgress", () => {
-    it("counts total as 76", () => {
+    it("counts only the main path: 76 modules minus the 10 optional ones (development and Dynamics 365)", () => {
       const prog = useProgressStore.getState().getOverallProgress();
-      expect(prog.total).toBe(76);
+      expect(prog.total).toBe(66);
     });
 
     it("reflects completed modules", () => {

@@ -1,15 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
-import { ArrowRight, Brain, Coffee, Flame } from "lucide-react";
+import { Coffee, Flame } from "lucide-react";
 import { useHabitStore } from "@/lib/habit-store";
 import { useReviewStore } from "@/lib/review-store";
 import { useInteractivePracticeProgressStore } from "@/lib/interactive-practice-progress";
 import { getActivityGrid, getWeekDays, getWeeklyStreak, mergeActivityDays, weekKey, WEEKLY_GOAL_OPTIONS, type WeeklyGoal } from "@/lib/habit";
-import { getRetentionSummary } from "@/lib/review-queue";
-import { getReviewNow } from "@/lib/review-date";
-import { useNextBestAction } from "@/components/guided/use-next-best-action";
 import { cn } from "@/lib/utils";
 
 /** Días con actividad: los registrados más los que ya guardan el repaso y las prácticas interactivas. */
@@ -97,48 +93,6 @@ export function WeeklyGoalCard() {
       <p className="text-[11px] leading-snug text-muted-foreground">
         Cuenta un día cuando haces algo: una práctica, un quiz, un lab, un paso o el repaso. Una semana de descanso no rompe la racha.
       </p>
-    </section>
-  );
-}
-
-export function TodayCard() {
-  const next = useNextBestAction();
-  const cards = useReviewStore((s) => s.cards);
-  const [due, setDue] = useState(0);
-  useEffect(() => setDue(getRetentionSummary(cards, getReviewNow()).dueToday), [cards]);
-  const reviewMinutes = Math.max(1, Math.round(due * 0.4));
-
-  return (
-    <section aria-labelledby="today-heading" className="space-y-3 rounded-xl border border-border bg-card p-4 shadow-fluent-1" data-testid="today-card">
-      <h2 id="today-heading" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Hoy, en 15 minutos</h2>
-      <ul className="space-y-2 text-sm">
-        <li>
-          <Link href={next.activity.href} className="group flex items-start justify-between gap-2 hover:text-[#0078D4] dark:hover:text-[#4DB8FF]">
-            <span className="min-w-0">
-              <span className="block truncate font-medium text-foreground group-hover:text-inherit">{next.activity.title}</span>
-              <span className="block text-xs text-muted-foreground">Tu siguiente paso</span>
-            </span>
-            <span className="shrink-0 text-xs text-muted-foreground">{next.time}</span>
-          </Link>
-        </li>
-        {due > 0 && (
-          <li>
-            <Link href="/repaso" className="group flex items-start justify-between gap-2 hover:text-[#0078D4] dark:hover:text-[#4DB8FF]">
-              <span className="inline-flex min-w-0 items-center gap-1.5">
-                <Brain className="h-3.5 w-3.5 shrink-0 text-[#0078D4] dark:text-[#4DB8FF]" aria-hidden />
-                <span className="truncate font-medium text-foreground group-hover:text-inherit">Repaso: {due} pregunta{due === 1 ? "" : "s"}</span>
-              </span>
-              <span className="shrink-0 text-xs text-muted-foreground">~{reviewMinutes} min</span>
-            </Link>
-          </li>
-        )}
-        <li className="flex items-start justify-between gap-2 text-muted-foreground">
-          <span className="min-w-0 text-xs">Al terminar en tu ambiente, exporta tu solución (copia de seguridad del Trial).</span>
-          <Link href="/recursos/entornos-y-trials" className="inline-flex shrink-0 items-center text-xs text-[#0078D4] hover:underline dark:text-[#4DB8FF]">
-            Cómo <ArrowRight className="ml-0.5 h-3 w-3" aria-hidden />
-          </Link>
-        </li>
-      </ul>
     </section>
   );
 }

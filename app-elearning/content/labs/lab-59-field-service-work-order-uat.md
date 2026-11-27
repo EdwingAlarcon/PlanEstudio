@@ -11,6 +11,7 @@ prerequisites:
   - "Conocimiento básico de casos, órdenes de trabajo, recursos y roles de servicio"
 files: []
 lastVerified: "2026-11"
+optional: true
 ---
 
 # Lab 59 — Field Service: Work Order, Evidencia Móvil y UAT de Servicio en Campo

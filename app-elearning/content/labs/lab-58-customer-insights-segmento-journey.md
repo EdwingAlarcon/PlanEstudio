@@ -11,6 +11,7 @@ prerequisites:
   - "Conocimiento básico de cuentas, contactos, casos y consentimiento"
 files: []
 lastVerified: "2026-11"
+optional: true
 ---
 
 # Lab 58 — Customer Insights: Segmento, Consentimiento y Journey de Renovación

@@ -10,6 +10,7 @@ prerequisites:
   - "Lab 96 completado: F&O Inventory & Products Setup"
   - "Acceso a un ambiente trial/demo con el módulo Retail and Commerce habilitado (no todos los trials de Finance/SCM lo incluyen por defecto — verifica en tu ambiente antes de empezar); sin él, haz la variante en papel del final del lab"
 lastVerified: "2026-11"
+optional: true
 ---
 
 # Lab 98 — F&O Commerce Overview Hands-On

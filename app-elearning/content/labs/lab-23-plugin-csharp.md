@@ -13,6 +13,7 @@ prerequisites:
   - "Power Platform CLI (pac) instalado, para abrir el Plugin Registration Tool con pac tool prt"
   - "Módulo 23 estudiado: C# Plugins para Dataverse"
 lastVerified: "2026-11"
+optional: true
 ---
 
 # Lab 23 — Plugin C#: Validación Server-Side y Auditoría Personalizada (SIT)

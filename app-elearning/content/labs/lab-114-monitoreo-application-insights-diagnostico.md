@@ -11,6 +11,7 @@ prerequisites:
   - "Módulo 26 estudiado: Performance y Optimización"
 files: []
 lastVerified: "2026-10"
+optional: true
 ---
 
 # Lab 114 — Monitoreo con Application Insights: Diagnóstico de una Solución en Producción

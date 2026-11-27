@@ -10,6 +10,7 @@ prerequisites:
   - "Acceso a un ambiente de Dynamics 365 Finance con datos demo: trial de administrador creada en el Power Platform admin center, o un ambiente demo que ya tenga tu empresa o un partner (ver el aviso de ambiente)"
   - "Sin ese ambiente, haz la variante en papel del final del lab"
 lastVerified: "2026-11"
+optional: true
 ---
 
 # Lab 93 — F&O Finance Setup Walkthrough

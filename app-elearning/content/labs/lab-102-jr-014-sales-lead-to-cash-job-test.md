@@ -9,6 +9,7 @@ role: ["Dynamics 365 Sales Functional Consultant", "CRM Functional"]
 prerequisites:
   - "Lab 66 completado: Dynamics 365 Sales — Proceso Comercial Lead-to-Cash"
 lastVerified: "2026-09"
+optional: true
 ---
 
 # Lab 102 — JR-014: Dynamics 365 Sales — Lead-to-Cash Job Test

@@ -1,3 +1,4 @@
+import { isOptionalModule } from "../main-path";
 import { describe, it, expect } from "vitest";
 import {
   getAllQuestions,
@@ -164,8 +165,8 @@ describe("getQuestionsForLevel", () => {
     rpa.forEach((id) => expect(basicoSet.has(id)).toBe(false));
   });
 
-  it("union of all levels equals full question bank", () => {
-    const all = getAllQuestions().length;
+  it("union of all levels equals the question bank of the main path (sin módulos de desarrollo)", () => {
+    const all = getAllQuestions().filter((q) => !isOptionalModule(q.moduleId)).length;
     const sum =
       getQuestionsForLevel("basico").length +
       getQuestionsForLevel("intermedio").length +

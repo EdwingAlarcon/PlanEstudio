@@ -1,14 +1,13 @@
 import { test, expect } from "@playwright/test";
 
-// F4 de "El camino jugable" (2026-11-27): meta semanal, racha por semanas y "Hoy, en 15 minutos".
-test.describe("Meta semanal y hoy", () => {
-  test("el inicio muestra la meta de la semana y lo de hoy; cambiar la meta se guarda en su propio store", async ({ page }) => {
+// F4 de "El camino jugable" (2026-11-27): meta semanal y racha por semanas.
+test.describe("Meta semanal", () => {
+  test("el inicio muestra la meta de la semana; cambiar la meta se guarda en su propio store", async ({ page }) => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
     const goal = page.getByTestId("weekly-goal");
     await expect(goal).toBeVisible();
     await expect(page.getByTestId("weekly-goal-count")).toHaveText("0 / 3 días");
     await expect(page.getByTestId("weekly-streak")).toContainText("Racha: 0 semanas");
-    await expect(page.getByTestId("today-card")).toContainText("Tu siguiente paso");
 
     await expect(async () => {
       await goal.locator("select").selectOption("2");

@@ -1,3 +1,4 @@
+import { getMainModuleIds } from "./main-path";
 import type { ModuleInfo, LabInfo, SearchDocument } from "./content";
 import type { ProfessionalRouteSlug } from "./professional-routes";
 import { CERTIFICATION_LEVEL_ORDER, LEVEL_MODULE_RANGE, LEVEL_ORDER, type LevelId } from "./i18n";
@@ -401,22 +402,17 @@ export function getModulePrerequisiteWarning(
 
   if (certIndex > 0) {
     const previousLevel = CERTIFICATION_LEVEL_ORDER[certIndex - 1]!;
-    const [start, end] = LEVEL_MODULE_RANGE[previousLevel];
-    const total = end - start + 1;
-    const prefix = `${previousLevel}-`;
-    const completed = completedModules.filter((id) => {
-      if (!id.startsWith(prefix)) return false;
-      const num = parseInt(id.slice(prefix.length), 10);
-      return num >= start && num <= end;
-    }).length;
+    const required = getMainModuleIds(previousLevel);
+    const total = required.length;
+    const completed = required.filter((id) => completedModules.includes(`${previousLevel}-${id}`)).length;
     if (completed < total) {
       return { kind: "level_incomplete", previousLevel, completed, total };
     }
   }
 
-  const [levelStart] = LEVEL_MODULE_RANGE[levelId];
-  if (moduleId > levelStart) {
-    const previousModuleId = moduleId - 1;
+  // El anterior es el de la ruta principal: un módulo de desarrollo (opcional) no bloquea.
+  const previousModuleId = getMainModuleIds(levelId).filter((id) => id < moduleId).at(-1);
+  if (previousModuleId !== undefined) {
     if (!completedModules.includes(`${levelId}-${previousModuleId}`)) {
       return { kind: "module_skipped", previousModuleId };
     }

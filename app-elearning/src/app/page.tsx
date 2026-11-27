@@ -1,3 +1,4 @@
+import { mainModules } from "@/lib/main-path";
 import { buildLessonSteps, stepProgressId } from "@/lib/lesson-steps";
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
@@ -6,7 +7,7 @@ import { getAllLevels, getLabsForLevel } from "@/lib/content";
 import { UI, CERTIFICATION_LEVEL_ORDER, TRANSVERSAL_LEVEL_ORDER } from "@/lib/i18n";
 import { GuidedHomeClient } from "@/components/guided/guided-home-client";
 import { RetentionTodayCard } from "@/components/review/retention-today-card";
-import { TodayCard, WeeklyGoalCard } from "@/components/guided/habit-cards";
+import { WeeklyGoalCard } from "@/components/guided/habit-cards";
 import { LearningPathMap, type PathWorld } from "@/components/guided/learning-path-map";
 import { getAllInteractivePractices } from "@/lib/interactive-practices";
 
@@ -42,7 +43,7 @@ function buildPathWorlds(levels: ReturnType<typeof getAllLevels>): PathWorld[] {
       title: level.title,
       description: level.description,
       certification: UI.levels.cert[level.id],
-      modules: level.modules.map((mod) => ({
+      modules: mainModules(level.modules).map((mod) => ({
         key: mod.id,
         moduleId: mod.moduleId,
         title: mod.title,
@@ -50,7 +51,7 @@ function buildPathWorlds(levels: ReturnType<typeof getAllLevels>): PathWorld[] {
         minutes: mod.estimatedMinutes,
         practiceIds: practicesByModule.get(mod.moduleId) ?? [],
       })),
-      boss: buildBoss(level.id, level.modules.at(-1)),
+      boss: buildBoss(level.id, mainModules(level.modules).at(-1)),
       labs: getLabsForLevel(level.id).map((lab) => ({
         slug: lab.slug,
         displayId: lab.displayId,
@@ -100,10 +101,9 @@ export default function DashboardPage() {
       </section>
       </div>
 
-      {/* Columna del hábito (F4): meta semanal con racha por semanas y lo de hoy. En móvil va al final. */}
+      {/* Columna del hábito (F4): meta semanal con racha por semanas. En móvil va al final. */}
       <aside aria-label="Tu semana" className="space-y-4 lg:sticky lg:top-6 lg:self-start">
         <WeeklyGoalCard />
-        <TodayCard />
       </aside>
     </div>
   );

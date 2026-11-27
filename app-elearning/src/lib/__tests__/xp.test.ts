@@ -5,6 +5,7 @@ import type { LabEvidence } from "../lab-mission";
 import { getAllLevels, getLabsForLevel } from "../content";
 import { CERTIFICATION_LEVEL_ORDER } from "../i18n";
 import { getAllInteractivePractices } from "../interactive-practices";
+import { mainModules } from "../main-path";
 import { calculateXp, formatXp, getRank, isPracticeEarned, isQuizEarned, RANKS, XP_RULES } from "../xp";
 
 function practice(id: string, patch: Partial<InteractivePracticeRecord>): InteractivePracticeRecord {
@@ -112,7 +113,7 @@ describe("labs con evidencia", () => {
 });
 
 describe("rank calibration", () => {
-  const expected = ["Maker", "Consultor funcional", "Desarrollador", "Arquitecto"];
+  const expected = ["Maker", "Consultor funcional", "Consultor senior", "Arquitecto"];
   const levels = getAllLevels();
   const practices = getAllInteractivePractices();
 
@@ -124,7 +125,7 @@ describe("rank calibration", () => {
 
     CERTIFICATION_LEVEL_ORDER.forEach((levelId, index) => {
       const level = levels.find((l) => l.id === levelId)!;
-      const moduleIds = new Set(level.modules.map((m) => m.moduleId));
+      const moduleIds = new Set(mainModules(level.modules).map((m) => m.moduleId));
       for (const id of moduleIds) quizScores[String(id)] = 100;
       for (const lab of getLabsForLevel(levelId)) {
         completedLabs.push(lab.slug);

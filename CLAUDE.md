@@ -165,7 +165,16 @@ Propuesta inspirada en Brilliant, Boot.dev, GameCode, Duolingo y Microsoft Learn
 `PROPUESTA_FASES_APRENDER_HACIENDO.md` §16). **F1 hecha:** XP y rango **calculados** en `src/lib/xp.ts` a partir de los
 stores existentes (no hay store de XP: no añadir uno), camino por mundos en el inicio (`LearningPathMap`), rango en la
 barra lateral y desglose en `/progreso#xp`. Leer no da XP. Los rangos los vigila el test "rank calibration" (`xp.test.ts`): terminar cada nivel **con la evidencia de sus labs entregada** debe llevar a su rol; si cambian las reglas o el contenido, recalibrar `RANKS`. **F2 hecha:** lección por pasos (`lesson-steps.ts`, `LessonStepsClient`, ruta `/pasos`, noindex), avance en `completedSteps` del store académico (no hay store nuevo). **F4 hecha:** meta semanal (2-4 días) con racha por semanas y semanas de descanso, columna "Tu semana" en el inicio y "Tu constancia" (12 semanas, trofeos y **dominio por área**) en `/progreso`; store nuevo e independiente `planestudio.habit.v1`, ya incluido en el backup (ahora son 7 stores). **F3 hecha:** lab como misión (`lab-mission.ts`, `LabMissionPanel` al final de cada lab): comprobaciones sacadas del cierre del lab, evidencia anotada y "Entregar la misión"; la evidencia va en `labEvidence` del store académico (no hay store nuevo); lab con evidencia 100 XP, solo marcado 25. **F5 hecha:** modo por pasos en los 76 módulos (`hasStepMode(markdown)`, sin allowlist; los pasos largos se parten y la primera pantalla conserva el id) y "jefe" de cada mundo (reto de transferencia del último módulo del nivel, en el camino; el trofeo lo exige). Detalle en PROPUESTA §16.
-Validación: `npm run verify` (611 tests) y e2e 113/113 en el puerto 3100.
+Validación: `npm run verify` (611 tests) y e2e 114 en el puerto 3100.
+
+## Ruta principal y recorte de contenido — 2026-11-27
+
+El curso forma **consultores funcionales de Power Platform**; desarrollo y Dynamics 365 son opcionales (el usuario pidió
+aligerar y delegó la decisión). `src/lib/main-path.ts` lista los módulos opcionales (13, 19, 20, 23-25, 27, 28, 30, 34):
+no cuentan para progreso, certificado, siguiente paso, simulador del nivel, camino ni trofeos; los labs equivalentes
+llevan `optional: true`. Quedan 31 módulos y 12 labs exigidos en los niveles 1 a 4. No borrar ni renumerar. Los módulos
+de la ruta principal deben quedar en unas 2.000-2.500 palabras de flujo (muestra hecha: Módulo 1); no añadir contenido
+nuevo sin que el usuario lo pida (P5 de Copilot Studio en pausa). Detalle en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §17.
 
 ## Mantenimiento vigente — 2026-11-11
 
@@ -273,7 +282,7 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
 149 archivos **cerrados**; sin trabajo a medias.
 
 **Invariantes que no debes romper:**
-- Conteos vigentes: **76 módulos, 114 labs (treinta y nueve opcionales: LAB-06, los doce de la Ruta Pro Power BI 116-127, los doce de la Ruta Pro Power Automate 128-139, el LAB-140, los tres de MCP 141-143 y los labs 144-153 de la Ruta Pro Copilot Studio), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
+- Conteos vigentes: **76 módulos, 114 labs (setenta opcionales desde la ruta principal del 2026-11-27, entre ellos: LAB-06, los doce de la Ruta Pro Power BI 116-127, los doce de la Ruta Pro Power Automate 128-139, el LAB-140, los tres de MCP 141-143 y los labs 144-153 de la Ruta Pro Copilot Studio), 516 preguntas quiz + 375 de diagnóstico (891), 636 criterios,
   33 prácticas profesionales (18 incidentes, 6 challenges, 3 simulaciones, 6 guiadas), 239 prácticas interactivas
   y 41 páginas de recursos** (41 desde la guía de interfaz español/inglés del 2026-11-11; prácticas interactivas subió de 15 a 17 a 20 a 24 con los pilotos Learning by
   Doing de Módulos 11, 10 y 13, a 44 con los Módulos 1 a 8 de la Fase 2 a 62 con los Módulos 9, 12, 14-17 de la Fase 3, a 149 con las Fases 4, 5 y 6 recortada y a 239 con la Fase 7 — ver sección de arriba; recursos subió de 38 a 39 con el puente nuevo de

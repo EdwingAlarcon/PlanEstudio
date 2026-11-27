@@ -10,6 +10,7 @@ prerequisites:
   - "Módulo 24 revisado: Azure Functions y Service Bus"
   - "Módulo 34 estudiado: integraciones empresariales"
 lastVerified: "2026-09"
+optional: true
 ---
 
 # Lab 74 — JR-004: CRM Integration Challenge

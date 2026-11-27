@@ -1,3 +1,4 @@
+import { isOptionalModule } from "./main-path";
 import type { Question, QuestionType } from "./quiz-engine";
 import { LEVEL_MODULE_RANGE } from "./i18n";
 import MODULE_QUESTIONS from "../data/questions";
@@ -79,5 +80,5 @@ export function getQuestionsForLevel(levelId: string): Question[] {
   const range = LEVEL_MODULE_RANGE[levelId as keyof typeof LEVEL_MODULE_RANGE];
   if (!range) return [];
   const [min, max] = range;
-  return getAllQuestions().filter((q) => q.moduleId >= min && q.moduleId <= max);
+  return getAllQuestions().filter((q) => q.moduleId >= min && q.moduleId <= max && !isOptionalModule(q.moduleId));
 }

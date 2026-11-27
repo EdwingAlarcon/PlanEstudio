@@ -11,6 +11,7 @@ prerequisites:
   - "Conocimiento de colas, SLA, entitlements y Knowledge Base"
 files: []
 lastVerified: "2026-11"
+optional: true
 ---
 
 # Lab 68 — Dynamics 365 Customer Service: Case-to-Resolution Avanzado

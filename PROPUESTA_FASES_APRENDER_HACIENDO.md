@@ -1619,3 +1619,38 @@ simulada del modo por pasos y, si funciona, ampliarlo por niveles (F5).
 - **Sin hacer:** XP para el jefe (marcar el reto es autodeclarado, igual que un lab sin evidencia) y el selector de
   ramas.
 
+## 17. Aligerar el curso (2026-11-27)
+
+El usuario: "hay mucho contenido, demasiado pesado"; propuso dejar lo funcional. Delegó la decisión ("decide tú").
+
+**Medido antes:** 406.000 palabras en módulos (media 5.300; el Módulo 1, 7.054 con "20 min" declarados) y 114 labs.
+El desarrollo eran 22 de 76 módulos y 18 de 114 labs, y el Nivel Básico no tenía nada de desarrollo: quitarlo no bastaba.
+
+**Decisiones:**
+1. La ruta principal es la de **consultor funcional de Power Platform**. Desarrollo y Dynamics 365 quedan opcionales; no
+   se borra ni se renumera nada.
+2. Aligerar los módulos de la ruta principal hasta unas 2.000-2.500 palabras de flujo, empezando por el Módulo 1 como
+   muestra.
+3. Aligerar la pantalla: se retira "Hoy, en 15 minutos" del inicio (repetía el siguiente paso y el repaso).
+4. No añadir contenido nuevo mientras tanto: la P5 de Copilot Studio queda en pausa.
+
+**Fase 1 hecha:**
+- `src/lib/main-path.ts`: módulos opcionales 13, 19, 20, 23, 24, 25, 27, 28, 30 y 34. No cuentan para progreso,
+  certificado, siguiente paso, simulador del nivel, camino, trofeos ni jefe; la página del nivel los pliega y el módulo
+  lo avisa.
+- Labs de los niveles 1 a 4 ahora opcionales: desarrollo (19, 23, 63, 72, 73, 74, 91, 92, 114) y Dynamics 365 (58, 59,
+  60, 64, 66, 68, 69, 70, 75, 77, 78, 93-103).
+- Ruta principal resultante: 31 módulos en los niveles 1 a 4 y 12 labs exigidos (Nivel 1: 5; 2: 2; 3: 2; 4: 3).
+- El Nivel 3 deja de presentarse como AB-400 ("Consultor funcional avanzado"); el rango "Desarrollador" pasa a
+  "Consultor senior"; `RANKS` recalibrado.
+- Un aviso de un agente lateral detectó que, tras marcar solo el desarrollo, el Nivel 4 seguía exigiendo 8 labs de
+  Finance & Operations; de ahí la segunda tanda (Dynamics 365).
+
+**Muestra de la Fase 2: Módulo 1**, de 7.054 a unas 3.500 palabras (unas 2.000 de flujo principal; el resto son los
+suplementos opcionales plegados). Sin cambios en el Caso Real, las prácticas, el reto ni las preguntas. El glosario pasó
+a `/recursos/ruta-cero-absoluta` y las vías alternativas y problemas del ambiente a `/recursos/entornos-y-trials`.
+No se hizo una prueba simulada ni se verificó de nuevo en Learn: es una reorganización y recorte del texto existente.
+
+**Pendiente (espera que el usuario vea la muestra):** aplicar el recorte a los otros módulos de la ruta principal;
+revisar los niveles 3 y 4, que quedan con pocos labs; revisar las rutas profesionales de desarrollo y Dynamics 365.
+

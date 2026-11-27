@@ -1,3 +1,4 @@
+import { mainModules } from "@/lib/main-path";
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
 import { LEVEL_ORDER } from "@/lib/i18n";
@@ -15,7 +16,7 @@ export const metadata: Metadata = buildPageMetadata({
 export default function ProgressDashboardPage() {
   const levels: LevelReadinessData[] = LEVEL_ORDER.map((levelId) => {
     const level = getLevelById(levelId);
-    const modules = (level?.modules ?? []).map((m) => ({ moduleId: m.moduleId, title: m.title }));
+    const modules = mainModules(level?.modules ?? []).map((m) => ({ moduleId: m.moduleId, title: m.title }));
     const labs = getLabsForLevel(levelId).map((lab) => ({
       slug: lab.slug,
       displayId: lab.displayId,

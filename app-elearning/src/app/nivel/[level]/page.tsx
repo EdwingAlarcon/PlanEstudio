@@ -2,7 +2,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { buildPageMetadata, PATHS } from "@/lib/seo";
-import { getLevelById, getAllLevels } from "@/lib/content";
+import { getLevelById, getAllLevels, type ModuleInfo } from "@/lib/content";
+import { isOptionalModule, mainModules } from "@/lib/main-path";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ModuleCompletionClient } from "@/components/modules/module-completion-client";
@@ -45,6 +46,9 @@ export default async function LevelPage({ params }: PageProps) {
   if (!levelData) notFound();
 
   const acc = LEVEL_ACCENT[levelData.id];
+  // Ruta principal; los módulos de desarrollo y Dynamics 365 van plegados y no cuentan (main-path.ts).
+  const modules = mainModules(levelData.modules);
+  const optionalModules = levelData.modules.filter((mod) => isOptionalModule(mod.moduleId));
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
@@ -60,7 +64,7 @@ export default async function LevelPage({ params }: PageProps) {
               </Badge>
               <span className="text-xs text-muted-foreground flex items-center gap-1">
                 <BookOpen className="h-3 w-3" />
-                {levelData.modules.length} módulos
+                {modules.length} módulos
               </span>
             </div>
             <h1 className="text-2xl font-bold tracking-tight">{levelData.title}</h1>
@@ -81,46 +85,28 @@ export default async function LevelPage({ params }: PageProps) {
           Módulos del nivel
         </h2>
 
-        {levelData.modules.length === 0 ? (
+        {modules.length === 0 ? (
           <p className="text-muted-foreground text-sm">Contenido en desarrollo.</p>
         ) : (
           <div className="space-y-2">
-            {levelData.modules.map((mod) => (
-              <div
-                key={mod.id}
-                className="group flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-4 shadow-fluent-1 hover:shadow-fluent-2 hover:border-[#0078D4]/30 dark:hover:border-[#4DB8FF]/30 transition-all duration-150"
-              >
-                {/* Module number bubble */}
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-muted text-xs font-bold text-muted-foreground font-mono">
-                  {String(mod.moduleId).padStart(2, "0")}
-                </div>
-
-                {/* Module info */}
-                <div className="flex-1 min-w-0 space-y-0.5">
-                  <p className="text-sm font-semibold text-foreground truncate group-hover:text-[#0078D4] dark:group-hover:text-[#4DB8FF] transition-colors">
-                    {mod.title}
-                  </p>
-                  <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <Clock className="h-3 w-3" aria-hidden />
-                    {UI.module.estimatedTime(mod.estimatedMinutes, mod.practiceMinutes)}
-                  </span>
-                </div>
-
-                {/* Actions */}
-                <div className="flex items-center gap-2 shrink-0">
-                  <ModuleCompletionClient moduleId={mod.id} />
-                  <Button
-                    asChild size="sm" variant="ghost"
-                    className="h-8 px-3 text-xs text-[#0078D4] dark:text-[#4DB8FF] hover:bg-[#EFF6FC] dark:hover:bg-[rgba(0,120,212,0.12)]"
-                  >
-                    <Link href={`/nivel/${levelData.id}/modulo/${mod.slug}`}>
-                      Estudiar <ArrowRight className="h-3.5 w-3.5 ml-1" aria-hidden />
-                    </Link>
-                  </Button>
-                </div>
-              </div>
+            {modules.map((mod) => (
+              <ModuleRow key={mod.id} mod={mod} levelId={levelData.id} />
             ))}
           </div>
+        )}
+
+        {optionalModules.length > 0 && (
+          <details className="mt-4 rounded-xl border border-dashed border-border px-4 py-3" data-testid="optional-modules">
+            <summary className="cursor-pointer text-sm font-medium text-foreground">
+              Opcional (desarrollo y Dynamics 365) · {optionalModules.length === 1 ? "1 módulo" : `${optionalModules.length} módulos`}
+              <span className="ml-1 font-normal text-muted-foreground">no cuentan para tu progreso ni para el certificado</span>
+            </summary>
+            <div className="mt-3 space-y-2">
+              {optionalModules.map((mod) => (
+                <ModuleRow key={mod.id} mod={mod} levelId={levelData.id} />
+              ))}
+            </div>
+          </details>
         )}
       </section>
     </div>
@@ -286,6 +272,43 @@ function D365EnterprisePracticePanel() {
         })}
       </div>
     </section>
+  );
+}
+
+function ModuleRow({ mod, levelId }: { mod: ModuleInfo; levelId: LevelId }) {
+  return (
+    <div
+      className="group flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-4 shadow-fluent-1 hover:shadow-fluent-2 hover:border-[#0078D4]/30 dark:hover:border-[#4DB8FF]/30 transition-all duration-150"
+    >
+      {/* Module number bubble */}
+      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-muted text-xs font-bold text-muted-foreground font-mono">
+        {String(mod.moduleId).padStart(2, "0")}
+      </div>
+
+      {/* Module info */}
+      <div className="flex-1 min-w-0 space-y-0.5">
+        <p className="text-sm font-semibold text-foreground truncate group-hover:text-[#0078D4] dark:group-hover:text-[#4DB8FF] transition-colors">
+          {mod.title}
+        </p>
+        <span className="flex items-center gap-1 text-xs text-muted-foreground">
+          <Clock className="h-3 w-3" aria-hidden />
+          {UI.module.estimatedTime(mod.estimatedMinutes, mod.practiceMinutes)}
+        </span>
+      </div>
+
+      {/* Actions */}
+      <div className="flex items-center gap-2 shrink-0">
+        <ModuleCompletionClient moduleId={mod.id} />
+        <Button
+          asChild size="sm" variant="ghost"
+          className="h-8 px-3 text-xs text-[#0078D4] dark:text-[#4DB8FF] hover:bg-[#EFF6FC] dark:hover:bg-[rgba(0,120,212,0.12)]"
+        >
+          <Link href={`/nivel/${levelId}/modulo/${mod.slug}`}>
+            Estudiar <ArrowRight className="h-3.5 w-3.5 ml-1" aria-hidden />
+          </Link>
+        </Button>
+      </div>
+    </div>
   );
 }
 

@@ -11,6 +11,7 @@ prerequisites:
   - "Lab 68 revisado: Customer Service Case-to-Resolution"
   - "Ruta Job-Ready CRM Functional revisada"
 lastVerified: "2026-11"
+optional: true
 ---
 
 # Lab 77 — JR-007: Customer Service Specialist Job Simulation

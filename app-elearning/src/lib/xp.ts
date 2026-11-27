@@ -76,15 +76,15 @@ export function calculateXp(input: XpInput): XpBreakdown {
 
 // Rangos: los roles para los que prepara el curso, cada uno con tres grados.
 // Cada rol corresponde a un nivel: terminar un nivel **con la evidencia de sus labs entregada** (F3) deja en el grado
-// III de su rol. Recalibrado el 2026-11-27 con labs a 100 con evidencia: ≈ 1.460 / 2.790 / 5.620 / 9.030 XP acumulados
-// (sin repaso). Con los labs solo marcados (25) se queda un grado o un rol por debajo: ≈ 1.085 / 2.265 / 4.045 / 5.805.
+// III de su rol. Recalibrado el 2026-11-27 sobre la ruta principal: ≈ 1.460 / 2.660 / 3.410 / 4.810 XP acumulados
+// (sin repaso). Con los labs solo marcados (25) se queda por debajo: ≈ 1.085 / 2.135 / 2.735 / 3.910.
 // Si cambian las reglas o el contenido, "rank calibration" en xp.test.ts falla hasta recalibrar estos umbrales.
 export const RANKS = [
   { name: "Aprendiz", thresholds: [0, 150, 300] },
   { name: "Maker", thresholds: [450, 800, 1200] },
   { name: "Consultor funcional", thresholds: [1600, 2100, 2600] },
-  { name: "Desarrollador", thresholds: [3000, 3900, 4800] },
-  { name: "Arquitecto", thresholds: [6000, 7200, 8400] },
+  { name: "Consultor senior", thresholds: [2800, 3100, 3300] },
+  { name: "Arquitecto", thresholds: [3800, 4200, 4600] },
 ] as const;
 
 const TIERS = ["I", "II", "III"] as const;

@@ -1,3 +1,4 @@
+import { isOptionalModule } from "./main-path";
 import { CERTIFICATION_LEVEL_ORDER, type LevelId } from "./i18n";
 
 // Índice mínimo del temario para decidir "qué sigue" en el cliente después de los Fundamentos.
@@ -31,7 +32,7 @@ export function getNextCurriculumModule(
   }
 
   const certification = curriculum
-    .filter((mod) => CERTIFICATION_LEVEL_ORDER.includes(mod.levelId))
+    .filter((mod) => CERTIFICATION_LEVEL_ORDER.includes(mod.levelId) && !isOptionalModule(mod.moduleId))
     .sort((a, b) => a.moduleId - b.moduleId);
   return certification.find((mod) => !done.has(mod.key)) ?? null;
 }

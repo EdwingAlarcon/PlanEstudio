@@ -13,6 +13,7 @@ prerequisites:
   - "Recurso revisado: Rúbricas y Plantillas de Evaluación"
 files: []
 lastVerified: "2026-11"
+optional: true
 ---
 
 # Lab 60 — Capstone Microsoft Business Applications: Servicio Postventa con Customer Insights, Field Service y F&O
