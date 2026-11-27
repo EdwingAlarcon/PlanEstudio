@@ -85,6 +85,55 @@ describe("Copilot Studio practice assets (Asistente de compras SIT)", () => {
     for (const caso of expected.lab144.flujoRegistrar) expect(caso.importe).toBe(caso.cantidad * caso.precioUnitario);
   });
 
+  it("keeps the LAB-145 entities and test messages consistent with the policy", () => {
+    const entidades = readJson<{ listaCerrada: { valores: { valor: string; sinonimos: string[] }[] }; regex: { patron: string; validos: string[]; invalidos: string[] } }>("lab145/entidades.json");
+    expect(entidades.listaCerrada.valores.map((v) => v.valor)).toEqual(["Tecnología", "Mobiliario", "Servicios profesionales", "Capacitación", "Viajes", "Papelería"]);
+    const regex = new RegExp(`^${entidades.regex.patron.replace("(?i)", "")}$`, "i");
+    for (const valido of entidades.regex.validos) expect(regex.test(valido), valido).toBe(true);
+    for (const invalido of entidades.regex.invalidos) expect(regex.test(invalido), invalido).toBe(false);
+    const lab145 = (readJson<{ lab145: { mensajes: { id: string; categoria: string | null; nivel: number | null; revisionTI: boolean }[] } }>("expected/respuestas-esperadas.json")).lab145;
+    expect(lab145.mensajes.map((m) => [m.id, m.categoria, m.nivel, m.revisionTI])).toEqual([
+      ["M1", "Tecnología", 2, true],
+      ["M2", "Tecnología", 1, false],
+      ["M3", "Mobiliario", 2, false],
+      ["M4", "Servicios profesionales", 3, false],
+      ["M5", null, null, false],
+      ["M6", "Tecnología", 1, false],
+    ]);
+    const lab = readLab("lab-145-copilot-studio-topics-a-fondo");
+    expect(lab).toContain("(?i)\\bPRV-\\d{3}\\b");
+    for (const m of readJson<{ mensajes: { id: string; mensaje: string }[] }>("lab145/mensajes-prueba.json").mensajes) {
+      expect(lab, m.id).toContain(`| ${m.id} | ${m.mensaje} |`);
+    }
+  });
+
+  it("changes only what LAB-146 says between manual versions", () => {
+    const v1 = readText("manual-compras.md");
+    const v2 = readText("lab146/manual-compras-v2.md");
+    expect(v1).toContain("Toda compra de más de **50 USD**");
+    expect(v2).toContain("Toda compra de más de **100 USD**");
+    expect(v1).toContain("2 días hábiles");
+    expect(v2).toContain("3 días hábiles");
+    expect(v1).not.toContain("Compras urgentes");
+    expect(v2).toContain("## 10. Compras urgentes");
+    const lab = readLab("lab-146-copilot-studio-conocimiento");
+    expect(lab).toContain("https://learn.microsoft.com/es-es/power-automate");
+    expect(lab).toContain("K1 y K2 dan 100 USD y 3 días hábiles");
+  });
+
+  it("gives LAB-147 a harness answer for every scenario", () => {
+    const { escenarios } = readJson<{ escenarios: { id: string; harness: string; razon: string }[] }>("lab147/escenarios-harness.json");
+    expect(escenarios.map((e) => e.id)).toEqual(["H1", "H2", "H3", "H4", "H5", "H6"]);
+    for (const e of escenarios) {
+      expect(["estándar", "Microsoft Copilot", "Customer Conversation"]).toContain(e.harness);
+      expect(e.razon.length, e.id).toBeGreaterThan(30);
+    }
+    const lab = readLab("lab-147-copilot-studio-orquestacion-y-harness");
+    for (const m of readJson<{ mensajes: { id: string; mensaje: string }[] }>("lab147/mensajes-orquestacion.json").mensajes) {
+      expect(lab, m.id).toContain(m.id);
+    }
+  });
+
   it("matches what LAB-144 quotes", () => {
     const lab = readLab("lab-144-copilot-studio-en-un-dia");
     expect(lab).toContain("/practice-assets/copilotstudio/asistente-compras/asistente-compras.zip");

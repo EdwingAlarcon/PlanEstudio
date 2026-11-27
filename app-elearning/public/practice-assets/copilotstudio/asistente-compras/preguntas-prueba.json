@@ -51,6 +51,10 @@
         "2 días hábiles",
         "Gerencia general"
       ],
+      "debeContenerV2": [
+        "3 días hábiles",
+        "Gerencia general"
+      ],
       "fuente": "manual §5"
     },
     {

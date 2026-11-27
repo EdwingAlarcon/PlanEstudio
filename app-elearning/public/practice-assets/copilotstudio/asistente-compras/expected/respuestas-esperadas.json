@@ -83,5 +83,85 @@
       "P06",
       "P10"
     ]
+  },
+  "lab145": {
+    "mensajes": [
+      {
+        "id": "M1",
+        "categoria": "Tecnología",
+        "importe": 4200,
+        "proveedor": "PRV-001",
+        "nivel": 2,
+        "revisionTI": true
+      },
+      {
+        "id": "M2",
+        "categoria": "Tecnología",
+        "importe": 900,
+        "proveedor": null,
+        "nivel": 1,
+        "revisionTI": false
+      },
+      {
+        "id": "M3",
+        "categoria": "Mobiliario",
+        "importe": 2500,
+        "proveedor": null,
+        "nivel": 2,
+        "revisionTI": false
+      },
+      {
+        "id": "M4",
+        "categoria": "Servicios profesionales",
+        "importe": 12000,
+        "proveedor": "PRV-009",
+        "nivel": 3,
+        "revisionTI": false
+      },
+      {
+        "id": "M5",
+        "categoria": null,
+        "importe": null,
+        "proveedor": null,
+        "nivel": null,
+        "revisionTI": false
+      },
+      {
+        "id": "M6",
+        "categoria": "Tecnología",
+        "importe": 1000,
+        "proveedor": null,
+        "nivel": 1,
+        "revisionTI": false
+      }
+    ]
+  },
+  "lab146": {
+    "cambiosV2": {
+      "cajaMenorHasta": [
+        50,
+        100
+      ],
+      "plazoDiasHabiles": [
+        2,
+        3
+      ],
+      "urgenteHasta": 5000
+    },
+    "preguntas": 6
+  },
+  "lab147": {
+    "mensajes": 6,
+    "multiIntencion": [
+      "O4"
+    ],
+    "harnessPorEscenario": {
+      "H1": "estándar",
+      "H2": "Customer Conversation",
+      "H3": "Microsoft Copilot",
+      "H4": "estándar",
+      "H5": "estándar",
+      "H6": "estándar"
+    }
   }
 }

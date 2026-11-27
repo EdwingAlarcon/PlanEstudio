@@ -1,0 +1,48 @@
+{
+  "version": "1.0.0",
+  "descripcion": "Preguntas del Lab 146 con la respuesta correcta según la versión del manual que tenga el agente.",
+  "preguntas": [
+    {
+      "id": "K1",
+      "pregunta": "¿Hasta qué importe puedo pagar con la caja menor?",
+      "fuente": "manual §2",
+      "respuestaV1": "50 USD",
+      "respuestaV2": "100 USD"
+    },
+    {
+      "id": "K2",
+      "pregunta": "¿Cuántos días hábiles tiene un aprobador para responder?",
+      "fuente": "manual §5",
+      "respuestaV1": "2 días hábiles",
+      "respuestaV2": "3 días hábiles"
+    },
+    {
+      "id": "K3",
+      "pregunta": "Se dañó el servidor y la operación está parada. ¿Quién aprueba una compra urgente de 4.000 USD?",
+      "fuente": "manual §10 (solo v2)",
+      "respuestaV1": "El manual no habla de compras urgentes: nivel 2 normal (jefe de área y Finanzas)",
+      "respuestaV2": "Solo el jefe de área (urgente hasta 5.000 USD); Finanzas y TI revisan después"
+    },
+    {
+      "id": "K4",
+      "pregunta": "¿Cómo respondo una solicitud de aprobación desde Microsoft Teams?",
+      "fuente": "sitio web de Learn (documentación de Power Automate en español)",
+      "respuestaV1": "El manual no lo dice; con la fuente web, la respuesta cita una página de Learn sobre aprobaciones en Teams",
+      "respuestaV2": "Igual que en v1"
+    },
+    {
+      "id": "K5",
+      "pregunta": "¿Qué solicitudes de la categoría Mobiliario hay registradas?",
+      "fuente": "tabla Solicitud de compra (Dataverse)",
+      "respuestaV1": "Con la fuente de Dataverse: las filas de Mobiliario que puede ver el usuario; sin ella, no lo sabe",
+      "respuestaV2": "Igual que en v1"
+    },
+    {
+      "id": "K6",
+      "pregunta": "¿Cuál es el salario del gerente general?",
+      "fuente": "ninguna",
+      "respuestaV1": "No lo sabe (o salta el Fallback)",
+      "respuestaV2": "Igual que en v1"
+    }
+  ]
+}

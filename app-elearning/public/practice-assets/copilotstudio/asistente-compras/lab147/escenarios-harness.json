@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "descripcion": "Escenarios para decidir el harness. 'harness' y 'razon' son la respuesta esperada, según la comparación de Learn (2026-11).",
+  "escenarios": [
+    {
+      "id": "H1",
+      "escenario": "Mesa de compras interna, sin créditos de Copilot Studio, que reconoce códigos de proveedor PRV-000 con una entidad regex.",
+      "harness": "estándar",
+      "razon": "Las entidades personalizadas no están admitidas en el Microsoft Copilot harness, y sin créditos solo el estándar se puede probar gratis."
+    },
+    {
+      "id": "H2",
+      "escenario": "SIT tiene créditos de Copilot Studio y quiere un agente para proveedores externos que atienda por el chat del sitio web y por teléfono, con arquitectura de centro de contacto, y que pase a una persona cuando no pueda resolver.",
+      "harness": "Customer Conversation",
+      "razon": "Learn lo describe como el harness para atender a clientes por chat o voz, publicado en un sitio web o un número de teléfono, con escalado a una persona. Usa créditos de Copilot Studio. El estándar también publica en web y deriva a una persona: elegirlo es defendible si se justifica con sus canales."
+    },
+    {
+      "id": "H3",
+      "escenario": "Asistente de Finanzas que razona en varios pasos sobre correos, archivos y reuniones de Microsoft 365, con procedimientos reutilizables y memoria entre conversaciones.",
+      "harness": "Microsoft Copilot",
+      "razon": "Está pensado para razonar en varios pasos sobre datos de Microsoft 365, y Skills y Memory no existen en el estándar (el Customer Conversation harness también los admite, pero está pensado para clientes). Cobra créditos desde que se construye."
+    },
+    {
+      "id": "H4",
+      "escenario": "Agente para los conductores de reparto de SIT por WhatsApp.",
+      "harness": "estándar",
+      "razon": "El canal WhatsApp está admitido en el estándar y no en el Microsoft Copilot harness, y el Customer Conversation harness no lo lista entre sus canales. Ojo: Learn indica que, desde el 23 de octubre de 2026, ya no se pueden crear conexiones nuevas de WhatsApp por la vía de Azure Communication Services; una conexión nueva pasa por Dynamics 365 Contact Center o por un partner."
+    },
+    {
+      "id": "H5",
+      "escenario": "Agente en el que los empleados inician sesión con un proveedor OAuth 2 propio de SIT, no con Microsoft Entra ID (autenticación manual del usuario del agente).",
+      "harness": "estándar",
+      "razon": "La autenticación manual del usuario del agente no está admitida en el Microsoft Copilot harness. Ojo: no es lo mismo que la autenticación de una herramienta o un conector, que ese harness sí admite con conexiones del usuario."
+    },
+    {
+      "id": "H6",
+      "escenario": "Agente que busca cláusulas en 40.000 contratos indexados en Azure AI Search.",
+      "harness": "estándar",
+      "razon": "Azure AI Search está admitido como fuente de conocimiento en el estándar y no en el Microsoft Copilot harness. En ese harness se puede usar como herramienta (Foundry IQ o el conector de Azure AI Search): elegirlo con esa razón también es defendible."
+    }
+  ]
+}

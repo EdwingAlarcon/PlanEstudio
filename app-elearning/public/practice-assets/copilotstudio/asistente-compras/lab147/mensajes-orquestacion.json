@@ -1,0 +1,51 @@
+{
+  "version": "1.0.0",
+  "mensajes": [
+    {
+      "id": "O1",
+      "mensaje": "¿Qué nivel tiene una compra de 3000 USD?",
+      "piezasEsperadas": [
+        "topic: Calcular nivel de aprobación"
+      ]
+    },
+    {
+      "id": "O2",
+      "mensaje": "Registra una solicitud: 2 monitores para TI, categoría Tecnología, a 320 USD cada uno",
+      "piezasEsperadas": [
+        "herramienta: Registrar solicitud de compra"
+      ]
+    },
+    {
+      "id": "O3",
+      "mensaje": "¿Puedo partir una compra grande en dos más pequeñas?",
+      "piezasEsperadas": [
+        "conocimiento: Manual de compras de SIT"
+      ]
+    },
+    {
+      "id": "O4",
+      "mensaje": "¿Quién aprueba una compra de 4200 USD? Y regístramela: 3 portátiles para TI, categoría Tecnología, a 1400 USD cada uno",
+      "piezasEsperadas": [
+        "topic: Calcular nivel de aprobación",
+        "herramienta: Registrar solicitud de compra"
+      ],
+      "multiIntencion": true
+    },
+    {
+      "id": "O5",
+      "mensaje": "1500",
+      "piezasEsperadas": [
+        "pregunta de aclaración (o el topic, si interpreta un importe)"
+      ],
+      "ambiguo": true
+    },
+    {
+      "id": "O6",
+      "mensaje": "¿Cómo se registra una compra en SIT?",
+      "piezasEsperadas": [
+        "conocimiento: Manual de compras de SIT"
+      ],
+      "trampa": "Habla de registrar, pero pregunta por el procedimiento: no debe llamar a la herramienta"
+    }
+  ]
+}

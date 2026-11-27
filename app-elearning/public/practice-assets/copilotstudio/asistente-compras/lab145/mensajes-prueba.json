@@ -1,0 +1,61 @@
+{
+  "version": "1.0.0",
+  "descripcion": "Mensajes para probar el topic Revisar compra del Lab 145. 'categoria', 'importe' y 'proveedor' son los valores que el agente debería reconocer; null = tiene que preguntarlo.",
+  "mensajes": [
+    {
+      "id": "M1",
+      "mensaje": "Antes de pedirla, revisa esta compra: tecnología por 4200 USD con el proveedor PRV-001",
+      "importe": 4200,
+      "proveedor": "PRV-001",
+      "categoria": "Tecnología",
+      "nivel": 2,
+      "revisionTI": true
+    },
+    {
+      "id": "M2",
+      "mensaje": "Antes de pedirla, revisa esta compra: unos portátiles por 900 dólares",
+      "importe": 900,
+      "proveedor": null,
+      "categoria": "Tecnología",
+      "nivel": 1,
+      "revisionTI": false
+    },
+    {
+      "id": "M3",
+      "mensaje": "Antes de pedirla, revisa esta compra: sillas por 2500 USD",
+      "importe": 2500,
+      "proveedor": null,
+      "categoria": "Mobiliario",
+      "nivel": 2,
+      "revisionTI": false
+    },
+    {
+      "id": "M4",
+      "mensaje": "Antes de pedirla, revisa esta compra: una auditoría de 12000 USD, proveedor prv-009",
+      "importe": 12000,
+      "proveedor": "PRV-009",
+      "categoria": "Servicios profesionales",
+      "nivel": 3,
+      "revisionTI": false
+    },
+    {
+      "id": "M5",
+      "mensaje": "quiero revisar una compra antes de pedirla",
+      "importe": null,
+      "proveedor": null,
+      "categoria": null,
+      "nivel": null,
+      "revisionTI": false
+    },
+    {
+      "id": "M6",
+      "mensaje": "Antes de pedirla, revisa esta compra: tecnologia por 1000 USD con PRV-01",
+      "importe": 1000,
+      "proveedor": null,
+      "proveedorInvalido": "PRV-01",
+      "categoria": "Tecnología",
+      "nivel": 1,
+      "revisionTI": false
+    }
+  ]
+}

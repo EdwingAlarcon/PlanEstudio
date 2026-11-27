@@ -767,9 +767,9 @@
     "semantic_hash": ""
   },
   "app-elearning/src/lib/__tests__/lab-metadata.test.ts": {
-    "mtime": 1795787064.2174523,
-    "seen": 1795787577.2380483,
-    "ast_hash": "591aa93f4164a15a1d0cc312230d48d4",
+    "mtime": 1795790082.9567857,
+    "seen": 1795792787.2360764,
+    "ast_hash": "7ec572decb8cbc92403400484e06a098",
     "semantic_hash": ""
   },
   "app-elearning/src/lib/__tests__/labor-profiles.test.ts": {
@@ -977,9 +977,9 @@
     "semantic_hash": "a304ed485200d2904048de9d670703b0"
   },
   "app-elearning/src/lib/professional-routes.ts": {
-    "mtime": 1795787064.214219,
-    "seen": 1795787577.2475758,
-    "ast_hash": "b6beca61b4c1db99dfabd1e54066418e",
+    "mtime": 1795790082.9567857,
+    "seen": 1795792787.2460222,
+    "ast_hash": "fdd9712745304595738071681df255dd",
     "semantic_hash": ""
   },
   "app-elearning/src/lib/progress.ts": {
@@ -1133,9 +1133,9 @@
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1795787533.1206427,
-    "seen": 1795787577.2531717,
-    "ast_hash": "faf33447905ec0f4038965c7f85de8ac",
+    "mtime": 1795790548.4156685,
+    "seen": 1795792787.2517152,
+    "ast_hash": "20ed457f708e127953516ab5938fc620",
     "semantic_hash": ""
   },
   "DESIGN.md": {
@@ -1157,9 +1157,9 @@
     "semantic_hash": ""
   },
   "SPRINT_HANDOFF.md": {
-    "mtime": 1795787533.1231582,
-    "seen": 1795787577.2541714,
-    "ast_hash": "98c430f78d09a96f7e5f767120fc4f0a",
+    "mtime": 1795790548.4156685,
+    "seen": 1795792787.2537234,
+    "ast_hash": "105989bdf7a4abc69df11be713bc4276",
     "semantic_hash": ""
   },
   "app-elearning/content/labs/lab-02-dataverse-modelo-datos.md": {
@@ -1277,9 +1277,9 @@
     "semantic_hash": ""
   },
   "app-elearning/content/labs/lab-22-copilot-studio.md": {
-    "mtime": 1795107348.2284217,
-    "seen": 1795108851.1694212,
-    "ast_hash": "b351ef7d2399689fc6f1799a40c6ed1a",
+    "mtime": 1795789091.716259,
+    "seen": 1795792787.2628648,
+    "ast_hash": "ab6b2b6db52cd0360eeb7b39dc9023af",
     "semantic_hash": ""
   },
   "app-elearning/content/labs/lab-23-plugin-csharp.md": {
@@ -1907,9 +1907,9 @@
     "semantic_hash": ""
   },
   "app-elearning/content/modules/intermedio/15-copilot-studio-introduccion.md": {
-    "mtime": 1793562819.2814696,
-    "seen": 1794424435.2094343,
-    "ast_hash": "71a07f4133405550ee420167f781a826",
+    "mtime": 1795789071.3703074,
+    "seen": 1795792787.280665,
+    "ast_hash": "3fbf1c76eec6cb0742ca372595176997",
     "semantic_hash": ""
   },
   "app-elearning/content/modules/intermedio/16-seguridad-y-administracion-de-soluciones.md": {
@@ -3076,9 +3076,9 @@
     "semantic_hash": ""
   },
   "PROPUESTA_FASES_APRENDER_HACIENDO.md": {
-    "mtime": 1795787533.1137977,
-    "seen": 1795787577.2541714,
-    "ast_hash": "a1bad4e9a3fb355ec507e51eed1a46e0",
+    "mtime": 1795790548.411834,
+    "seen": 1795792787.2537234,
+    "ast_hash": "da2d943c152e6c4694a5866e0ff40e6e",
     "semantic_hash": ""
   },
   "app-elearning/content/labs/lab-06-power-bi-reporte-solicitudes.md": {
@@ -3484,21 +3484,21 @@
     "semantic_hash": ""
   },
   "app-elearning/public/practice-assets/copilotstudio/asistente-compras/expected/respuestas-esperadas.json": {
-    "mtime": 1795787487.5849748,
-    "seen": 1795787577.2039542,
-    "ast_hash": "bfbb2984f0e311201d075a9723c1879c",
+    "mtime": 1795790502.6710558,
+    "seen": 1795792787.2021098,
+    "ast_hash": "78c312bef071b8690aad855cd7c7a482",
     "semantic_hash": ""
   },
   "app-elearning/public/practice-assets/copilotstudio/asistente-compras/manifest.json": {
-    "mtime": 1795787487.5849748,
-    "seen": 1795787577.2039542,
-    "ast_hash": "241c14c978c6b7fea0f6acf62c46ec6f",
+    "mtime": 1795790502.6710558,
+    "seen": 1795792787.2021098,
+    "ast_hash": "4031b927e8bce38db6331cc37871b3c3",
     "semantic_hash": ""
   },
   "app-elearning/public/practice-assets/copilotstudio/asistente-compras/preguntas-prueba.json": {
-    "mtime": 1795787487.5839732,
-    "seen": 1795787577.2039542,
-    "ast_hash": "7f532da0b465079ecb9b00bec15d963a",
+    "mtime": 1795790502.6610446,
+    "seen": 1795792787.2021098,
+    "ast_hash": "d660ba2a41c541dd640fb6775de86096",
     "semantic_hash": ""
   },
   "app-elearning/public/practice-assets/powerautomate/sit-compras/altas/reglas-alta.json": {
@@ -3640,9 +3640,9 @@
     "semantic_hash": ""
   },
   "app-elearning/scripts/generate-copilotstudio-assets.mjs": {
-    "mtime": 1795787487.4439516,
-    "seen": 1795787577.2059667,
-    "ast_hash": "e5102ec46dc5efd3549558f36ff3aec0",
+    "mtime": 1795790502.5379224,
+    "seen": 1795792787.2115269,
+    "ast_hash": "1f665ad313bbcbc25984da9e44c86d76",
     "semantic_hash": ""
   },
   "app-elearning/scripts/lib/docx.mjs": {
@@ -3652,9 +3652,9 @@
     "semantic_hash": ""
   },
   "app-elearning/src/lib/__tests__/copilotstudio-assets.test.ts": {
-    "mtime": 1795787083.8984332,
-    "seen": 1795787577.235437,
-    "ast_hash": "91e9f2a1fcf57fd559a3acb581cbe1c1",
+    "mtime": 1795790438.689816,
+    "seen": 1795792787.2360764,
+    "ast_hash": "cc9b24fa676a418ee3320b1145f7fe6d",
     "semantic_hash": ""
   },
   "app-elearning/src/lib/__tests__/safe-json.test.ts": {
@@ -3694,9 +3694,9 @@
     "semantic_hash": ""
   },
   ".baton/HANDOFF.md": {
-    "mtime": 1795786368.3056998,
-    "seen": 1795787577.252188,
-    "ast_hash": "9f086a925b99d2fc87f5ffd614e29654",
+    "mtime": 1795789544.462393,
+    "seen": 1795792787.2517152,
+    "ast_hash": "d867fe65942046249a13fb46f45935ec",
     "semantic_hash": ""
   },
   "app-elearning/content/labs/lab-129-power-automate-desencadenadores.md": {
@@ -3790,27 +3790,87 @@
     "semantic_hash": ""
   },
   "app-elearning/content/labs/lab-144-copilot-studio-en-un-dia.md": {
-    "mtime": 1795787487.4419465,
-    "seen": 1795787577.2596834,
-    "ast_hash": "df96f840dc7242fc8d8079cc3ba028cc",
+    "mtime": 1795790082.9567857,
+    "seen": 1795792787.2608025,
+    "ast_hash": "d212e6f46810f348b5785155fd23fdce",
     "semantic_hash": ""
   },
   "app-elearning/public/practice-assets/copilotstudio/asistente-compras/README.md": {
-    "mtime": 1795787487.5849748,
-    "seen": 1795787577.2807841,
-    "ast_hash": "e7a063352d9005d9f9e92169b8ee705c",
+    "mtime": 1795790502.6710558,
+    "seen": 1795792787.2872202,
+    "ast_hash": "8d2a983da1d1ef2d36134f592feeef46",
     "semantic_hash": ""
   },
   "app-elearning/public/practice-assets/copilotstudio/asistente-compras/faq-proveedores.md": {
-    "mtime": 1795787487.581849,
-    "seen": 1795787577.2807841,
+    "mtime": 1795790502.6585393,
+    "seen": 1795792787.2872202,
     "ast_hash": "0973606d4ad720e34654209d7c5432db",
     "semantic_hash": ""
   },
   "app-elearning/public/practice-assets/copilotstudio/asistente-compras/manual-compras.md": {
-    "mtime": 1795787487.5768478,
-    "seen": 1795787577.2807841,
+    "mtime": 1795790502.652815,
+    "seen": 1795792787.2872202,
     "ast_hash": "0b8872f89d3dd1e75b5feedc1b7c0333",
+    "semantic_hash": ""
+  },
+  "app-elearning/public/practice-assets/copilotstudio/asistente-compras/lab145/entidades.json": {
+    "mtime": 1795790502.6620495,
+    "seen": 1795792787.2021098,
+    "ast_hash": "4060517d6657cf8e27bd025420796ad4",
+    "semantic_hash": ""
+  },
+  "app-elearning/public/practice-assets/copilotstudio/asistente-compras/lab145/mensajes-prueba.json": {
+    "mtime": 1795790502.6630502,
+    "seen": 1795792787.2021098,
+    "ast_hash": "6e310e70befbdb0bb3d6d02c88f945f9",
+    "semantic_hash": ""
+  },
+  "app-elearning/public/practice-assets/copilotstudio/asistente-compras/lab146/preguntas-conocimiento.json": {
+    "mtime": 1795790502.6680577,
+    "seen": 1795792787.2021098,
+    "ast_hash": "8dbc37eabd1e8dab4f6ffd3e9a29475b",
+    "semantic_hash": ""
+  },
+  "app-elearning/public/practice-assets/copilotstudio/asistente-compras/lab147/descripciones.json": {
+    "mtime": 1795790502.670056,
+    "seen": 1795792787.2021098,
+    "ast_hash": "af10a4813ea50dfe09a52bb735928065",
+    "semantic_hash": ""
+  },
+  "app-elearning/public/practice-assets/copilotstudio/asistente-compras/lab147/escenarios-harness.json": {
+    "mtime": 1795790502.6710558,
+    "seen": 1795792787.2021098,
+    "ast_hash": "84d5067aa1520ec427b759c07a67db17",
+    "semantic_hash": ""
+  },
+  "app-elearning/public/practice-assets/copilotstudio/asistente-compras/lab147/mensajes-orquestacion.json": {
+    "mtime": 1795790502.6710558,
+    "seen": 1795792787.2021098,
+    "ast_hash": "69f2cef0f9da8ba62896b068e2b57d11",
+    "semantic_hash": ""
+  },
+  "app-elearning/content/labs/lab-145-copilot-studio-topics-a-fondo.md": {
+    "mtime": 1795790438.689816,
+    "seen": 1795792787.2608025,
+    "ast_hash": "ec9a3ec8c273d3142a186aa8af133b98",
+    "semantic_hash": ""
+  },
+  "app-elearning/content/labs/lab-146-copilot-studio-conocimiento.md": {
+    "mtime": 1795790366.481793,
+    "seen": 1795792787.2608025,
+    "ast_hash": "244a6f092a3608752b09cd3568435f80",
+    "semantic_hash": ""
+  },
+  "app-elearning/content/labs/lab-147-copilot-studio-orquestacion-y-harness.md": {
+    "mtime": 1795790502.5394309,
+    "seen": 1795792787.2608025,
+    "ast_hash": "ac9f3c9da6ad83f86dd3f3196ac10518",
+    "semantic_hash": ""
+  },
+  "app-elearning/public/practice-assets/copilotstudio/asistente-compras/lab146/manual-compras-v2.md": {
+    "mtime": 1795790502.66405,
+    "seen": 1795792787.2872202,
+    "ast_hash": "19a2482da35ffd87bbf0c4301c3b03ff",
     "semantic_hash": ""
   },
   "app-elearning/package-lock.json": {

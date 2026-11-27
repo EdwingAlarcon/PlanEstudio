@@ -418,4 +418,4 @@ No borres nada: los labs siguientes trabajan sobre el `Asistente de compras SIT`
 
 ## Siguiente laboratorio recomendado
 
-**Lab 145 — Topics a fondo** (en preparación): variables de topic, globales y de sistema, entidades de lista cerrada y regex, slot filling, Redirect con entradas y salidas, y el editor de código.
+**Lab 145 — Topics a fondo**: variables de topic, globales y de sistema, entidades de lista cerrada y regex, slot filling, Redirect con entradas y salidas, y el editor de código.

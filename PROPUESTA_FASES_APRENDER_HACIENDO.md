@@ -1344,3 +1344,47 @@ harness). Agente `P0 Prueba harness estandar` y agent flow de prueba, **borrados
   **LAB-144** (Ejercicios 1 y 2), que mandaban a **Create blank agent** o a un engranaje sin comprobar. Las etiquetas en inglés de
   esa pantalla siguen sin comprobar. **Queda pendiente:** el Módulo 22 sigue llamándolo "GitHub Copilot harness"; Learn lo
   llama ahora Microsoft Copilot harness.
+
+#### 15.19.3 P2 hecha (2026-11-27): labs 145, 146 y 147
+
+- **Datos nuevos** en `asistente-compras` (mismo generador): `lab145/entidades.json` (lista cerrada `CategoriaCompra` con
+  sinónimos y regex `(?i)\bPRV-\d{3}\b`) y `lab145/mensajes-prueba.json` (6 mensajes que empiezan por "Antes de pedirla,
+  revisa esta compra"); `lab146/manual-compras-v2.md/.docx` (caja menor 50 → 100 USD, plazo 2 → 3 días hábiles, §10 de
+  compras urgentes hasta 5.000 USD) y `lab146/preguntas-conocimiento.json` (K1-K6 con la respuesta de cada versión;
+  `debeContenerV2` en P05); `lab147/descripciones.json`, `mensajes-orquestacion.json` (O1-O6) y
+  `escenarios-harness.json` (H1-H6). Cifras en `expected` (`lab145`, `lab146`, `lab147`) y en el test.
+- **LAB-145** (N2) "Topics a fondo": entidades propias, `Calcular nivel de aprobación` con entrada `Importe` (sin nodo de
+  pregunta) y salidas por **Return values to original topics**, topic `Revisar compra` con preguntas para las entidades
+  (Learn: con orquestación generativa no se admiten entidades propias como entradas), Redirect con entrada y salida,
+  `Global.AreaSolicitante` con **Skip behavior**, `System.Conversation.Id` y editor de código (YAML).
+- **LAB-146** (N2) "Conocimiento": línea base de 20 preguntas en cuatro momentos, dos versiones del manual a la vez y luego
+  solo la v2, fuente web `https://learn.microsoft.com/es-es/power-automate` (las URL de Learn sin idioma redirigen y
+  pasarían de dos niveles), Dataverse como conocimiento (Authenticate with Microsoft, sinónimos y glosario en el alta, 15
+  minutos de espera del glosario), moderación (Low a High, por defecto High) y decisión de fuentes.
+- **LAB-147** (N3) "Orquestación y harness": mapa de actividad con **Track between topics** y **Show rationale**,
+  descripciones malas frente a buenas (aislando las instrucciones que nombran las piezas), varias intenciones, ambigüedad,
+  instrucción contra herramienta, seis escenarios de harness con la tabla de Learn y registro de decisión.
+- **Learn confirmado el 2026-11-27:** entradas y salidas de topics (**Identify as**, **Dynamically fill with the best
+  option**), **Go to another topic** con **Add input**, **Skip behavior**, repregunta hasta 2 veces y **Escalate** por
+  defecto, variables globales hasta el fin de la sesión, regex .NET (NLU/CLU; JavaScript en NLU+), sitio web público (Bing,
+  dos niveles, 25 sitios), Dataverse (15 tablas, Authenticate with Microsoft, solo muestra lo que el usuario puede ver),
+  moderación, **Use information from the web**, filtro con más de 25 fuentes (los archivos no cuentan), varias intenciones
+  en secuencia, **Multiple Topics Matched** no se llama, mapa de actividad, tres harnesses y su tabla (incluido Dynamics 365
+  Contact Center), actualización del estándar al Microsoft Copilot harness en preview (crea una copia, consume créditos) y
+  **corte de WhatsApp del 23-oct-2026** (sin conexiones nuevas por ACS).
+- **Pruebas simuladas** (3 agentes, personas "Andrés", "Lucía" y "Marta"; simulación, no personas reales), con los hallazgos
+  corregidos:
+  - LAB-145: choque de nombres al crear la entrada (ahora se borra antes la pregunta), salidas por propiedades de la variable,
+    mensajes que podían disparar la herramienta de registro, ruta a la fórmula, repregunta de M6, regex con `\b`.
+  - LAB-146: URL de Learn, autenticación que solo surte efecto al publicar (la prueba no publica), cita de Learn sobre el
+    acceso por usuario, P05 contra la v2, P12 como hallazgo de seguridad, K3 que puede contestar el topic, comprobar la búsqueda
+    web antes de la línea base.
+  - LAB-147: H4 (WhatsApp) con el corte de ACS, Skills y Memory no exclusivos del Microsoft Copilot harness, H2/H5/H6
+    precisados, coste del Customer Conversation harness, filas reales y limpieza, instrucciones que nombran piezas.
+  - Tiempos: LAB-145 unas 5 h, LAB-146 4 h 30 min a 5 h, LAB-147 unas 4 h 15 min.
+- **Sin verificar en el tenant:** los tres labs por la interfaz; qué texto devuelve `Text()` sobre una lista cerrada; si
+  las preguntas con entidad se rellenan desde el primer mensaje con orquestación generativa; si la fuente web
+  `es-es/power-automate` responde; Dataverse como conocimiento en el panel de prueba sin créditos; si renombrar un topic
+  rompe el Redirect; etiquetas en español de estas pantallas.
+- **Pendiente detectado:** el reto de transferencia del Módulo 22 pide WhatsApp, y desde el 23-oct-2026 ya no se pueden crear
+  conexiones nuevas de WhatsApp por ACS; revisarlo junto con el nombre "GitHub Copilot harness" de ese módulo.

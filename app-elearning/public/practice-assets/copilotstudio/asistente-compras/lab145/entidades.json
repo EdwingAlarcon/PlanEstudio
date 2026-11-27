@@ -1,0 +1,85 @@
+{
+  "version": "1.0.0",
+  "listaCerrada": {
+    "nombre": "CategoriaCompra",
+    "valores": [
+      {
+        "valor": "Tecnología",
+        "sinonimos": [
+          "portátil",
+          "portátiles",
+          "computador",
+          "computadora",
+          "monitor",
+          "licencia",
+          "software",
+          "servidor"
+        ]
+      },
+      {
+        "valor": "Mobiliario",
+        "sinonimos": [
+          "silla",
+          "sillas",
+          "escritorio",
+          "mueble",
+          "muebles",
+          "archivador"
+        ]
+      },
+      {
+        "valor": "Servicios profesionales",
+        "sinonimos": [
+          "consultoría",
+          "auditoría",
+          "asesoría legal",
+          "diseño gráfico",
+          "traducción"
+        ]
+      },
+      {
+        "valor": "Capacitación",
+        "sinonimos": [
+          "curso",
+          "taller",
+          "formación",
+          "certificación"
+        ]
+      },
+      {
+        "valor": "Viajes",
+        "sinonimos": [
+          "tiquete",
+          "vuelo",
+          "hotel",
+          "viáticos"
+        ]
+      },
+      {
+        "valor": "Papelería",
+        "sinonimos": [
+          "papel",
+          "tóner",
+          "bolígrafos",
+          "cuadernos"
+        ]
+      }
+    ]
+  },
+  "regex": {
+    "nombre": "CodigoProveedor",
+    "patron": "(?i)\\bPRV-\\d{3}\\b",
+    "validos": [
+      "PRV-001",
+      "prv-009",
+      "PRV-017"
+    ],
+    "invalidos": [
+      "PRV-01",
+      "PRV 001",
+      "P-001",
+      "PRV-0012"
+    ],
+    "nota": "Sintaxis de expresiones regulares de .NET, la que Learn indica para entidades regex. El patrón solo comprueba el formato: no dice si el proveedor existe ni si está activo."
+  }
+}

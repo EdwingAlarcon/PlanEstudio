@@ -24,11 +24,11 @@ const CORREO_COMPRAS = "compras@sit.example.com";
 const CORREO_FACTURAS = "facturas@sit.example.com";
 
 // ---------- Manual de compras (conocimiento principal del agente) ----------
-const manual = [
+const buildManual = ({ version, cajaMenor, plazo, urgentes = false }) => [
   { type: "h1", text: "Manual de compras de SIT" },
   {
     type: "p",
-    text: `Servicios Integrados Tecnológicos S.A. (SIT). Versión ${politica.version}. Documento ficticio, generado para el curso PlanEstudio. Aplica a todas las áreas de la empresa.`,
+    text: `Servicios Integrados Tecnológicos S.A. (SIT). Versión ${version}. Documento ficticio, generado para el curso PlanEstudio. Aplica a todas las áreas de la empresa.`,
   },
   { type: "h2", text: "1. Para qué sirve este manual" },
   {
@@ -36,10 +36,10 @@ const manual = [
     text: "Explica cómo pedir una compra, quién tiene que aprobarla y cuánto tarda. Lo usan los empleados que piden compras y el área de Compras, que las tramita. No cubre la nómina, los reembolsos de gastos personales ni la venta de servicios a clientes.",
   },
   { type: "h2", text: "2. Cómo pedir una compra" },
-  { type: "li", text: "Toda compra de más de **" + usd(CAJA_MENOR) + "** necesita una solicitud de compra registrada antes de comprometer el gasto." },
+  { type: "li", text: "Toda compra de más de **" + usd(cajaMenor) + "** necesita una solicitud de compra registrada antes de comprometer el gasto." },
   { type: "li", text: "La solicitud lleva título, área, categoría, cantidad, precio unitario en USD y el correo de quien la pide." },
   { type: "li", text: "El importe es la cantidad por el precio unitario. Lo calcula el sistema; no se escribe a mano." },
-  { type: "li", text: `Las compras de hasta ${usd(CAJA_MENOR)} se pagan con la caja menor del área y no necesitan solicitud.` },
+  { type: "li", text: `Las compras de hasta ${usd(cajaMenor)} se pagan con la caja menor del área y no necesitan solicitud.` },
   { type: "h2", text: "3. Niveles de aprobación" },
   {
     type: "p",
@@ -66,7 +66,7 @@ const manual = [
   { type: "h2", text: "5. Plazos y escalado" },
   {
     type: "p",
-    text: `Cada aprobador tiene ${politica.plazoRespuestaDiasHabiles} días hábiles para responder. Si no responde, la solicitud se escala a la ${politica.escalarA}. Los sábados, los domingos y los festivos no cuentan como días hábiles.`,
+    text: `Cada aprobador tiene ${plazo} días hábiles para responder. Si no responde, la solicitud se escala a la ${politica.escalarA}. Los sábados, los domingos y los festivos no cuentan como días hábiles.`,
   },
   { type: "h2", text: "6. Lo que no se puede hacer" },
   { type: "li", text: "**Fraccionar una compra** para que cada parte quede en un nivel más bajo. Una compra de 12.000 USD dividida en dos de 6.000 sigue siendo de nivel 3, y fraccionarla es una falta grave." },
@@ -84,7 +84,22 @@ const manual = [
   },
   { type: "h2", text: "9. Contacto" },
   { type: "p", text: `Dudas sobre este manual: ${CORREO_COMPRAS}. Compras atiende de lunes a viernes, de 8:00 a 17:00 (hora de Bogotá).` },
+  ...(urgentes
+    ? [
+        { type: "h2", text: "10. Compras urgentes" },
+        {
+          type: "p",
+          text: `Una compra es urgente si sin ella se detiene la operación o hay un riesgo de seguridad. Una compra urgente de hasta ${usd(URGENTE_HASTA)} la aprueba solo el jefe de área, y Finanzas la revisa después, en un máximo de 5 días hábiles. Si es de Tecnología, la revisión de TI también se hace después. Por encima de ${usd(URGENTE_HASTA)} se aplican los niveles normales. Toda compra urgente se marca como tal en el título de la solicitud.`,
+        },
+      ]
+    : []),
 ];
+
+const manual = buildManual({ version: politica.version, cajaMenor: CAJA_MENOR, plazo: politica.plazoRespuestaDiasHabiles });
+// Versión 2 del manual (Lab 146): cambia la caja menor y el plazo, y añade las compras urgentes.
+const MANUAL_V2 = { version: "2026-07", cajaMenor: 100, plazo: 3 };
+const URGENTE_HASTA = 5000;
+const manualV2 = buildManual({ ...MANUAL_V2, urgentes: true });
 
 // ---------- Preguntas frecuentes de proveedores (segundo agente, labs de multiagente) ----------
 const faq = [
@@ -112,7 +127,7 @@ const preguntas = [
   { id: "P02", categoria: "limite", pregunta: "Si mi compra cuesta exactamente 1.000 USD, ¿cuántas aprobaciones necesito?", debeContener: ["nivel 1", "una"], fuente: "manual §3" },
   { id: "P03", categoria: "limite", pregunta: "¿Qué nivel tiene una compra de 1.000,01 USD?", debeContener: ["nivel 2"], fuente: "manual §3" },
   { id: "P04", categoria: "en-alcance", pregunta: "Voy a comprar tres portátiles de 1.400 USD. ¿Tiene que revisarlo alguien de TI?", debeContener: ["sí", "TI", "nivel 2"], fuente: "manual §4" },
-  { id: "P05", categoria: "en-alcance", pregunta: "¿Cuántos días tiene un aprobador para responder?", debeContener: ["2 días hábiles", "Gerencia general"], fuente: "manual §5" },
+  { id: "P05", categoria: "en-alcance", pregunta: "¿Cuántos días tiene un aprobador para responder?", debeContener: ["2 días hábiles", "Gerencia general"], debeContenerV2: ["3 días hábiles", "Gerencia general"], fuente: "manual §5" },
   { id: "P06", categoria: "en-alcance", pregunta: "¿Puedo dividir una compra de 12.000 USD en dos de 6.000 para que no pase por la Gerencia general?", debeContener: ["no", "fraccionar"], fuente: "manual §6" },
   { id: "P07", categoria: "en-alcance", pregunta: "Necesito comprar un cable de 30 USD. ¿Tengo que hacer una solicitud?", debeContener: ["no", "caja menor"], fuente: "manual §2" },
   { id: "P08", categoria: "en-alcance", pregunta: "¿Con cuánta anticipación pido un viaje?", debeContener: ["10 días"], fuente: "manual §7" },
@@ -143,6 +158,89 @@ const expected = {
   },
 };
 
+
+// ---------- Lab 145: entidades y mensajes de prueba ----------
+const entidades = {
+  listaCerrada: {
+    nombre: "CategoriaCompra",
+    valores: [
+      { valor: "Tecnología", sinonimos: ["portátil", "portátiles", "computador", "computadora", "monitor", "licencia", "software", "servidor"] },
+      { valor: "Mobiliario", sinonimos: ["silla", "sillas", "escritorio", "mueble", "muebles", "archivador"] },
+      { valor: "Servicios profesionales", sinonimos: ["consultoría", "auditoría", "asesoría legal", "diseño gráfico", "traducción"] },
+      { valor: "Capacitación", sinonimos: ["curso", "taller", "formación", "certificación"] },
+      { valor: "Viajes", sinonimos: ["tiquete", "vuelo", "hotel", "viáticos"] },
+      { valor: "Papelería", sinonimos: ["papel", "tóner", "bolígrafos", "cuadernos"] },
+    ],
+  },
+  regex: {
+    nombre: "CodigoProveedor",
+    patron: "(?i)\\bPRV-\\d{3}\\b",
+    validos: ["PRV-001", "prv-009", "PRV-017"],
+    invalidos: ["PRV-01", "PRV 001", "P-001", "PRV-0012"],
+    nota: "Sintaxis de expresiones regulares de .NET, la que Learn indica para entidades regex. El patrón solo comprueba el formato: no dice si el proveedor existe ni si está activo.",
+  },
+};
+const categoriaDe = (texto) => {
+  const t = texto.toLowerCase();
+  for (const v of entidades.listaCerrada.valores) {
+    if (t.includes(v.valor.toLowerCase()) || v.sinonimos.some((sin) => t.includes(sin))) return v.valor;
+  }
+  if (t.includes("tecnologia")) return "Tecnología"; // sin tilde: lo resuelve Smart matching
+  return null;
+};
+const mensajes145 = [
+  { id: "M1", mensaje: "Antes de pedirla, revisa esta compra: tecnología por 4200 USD con el proveedor PRV-001", importe: 4200, proveedor: "PRV-001" },
+  { id: "M2", mensaje: "Antes de pedirla, revisa esta compra: unos portátiles por 900 dólares", importe: 900, proveedor: null },
+  { id: "M3", mensaje: "Antes de pedirla, revisa esta compra: sillas por 2500 USD", importe: 2500, proveedor: null },
+  { id: "M4", mensaje: "Antes de pedirla, revisa esta compra: una auditoría de 12000 USD, proveedor prv-009", importe: 12000, proveedor: "PRV-009" },
+  { id: "M5", mensaje: "quiero revisar una compra antes de pedirla", importe: null, proveedor: null },
+  { id: "M6", mensaje: "Antes de pedirla, revisa esta compra: tecnologia por 1000 USD con PRV-01", importe: 1000, proveedor: null, proveedorInvalido: "PRV-01" },
+].map((m) => {
+  const categoria = categoriaDe(m.mensaje);
+  const nivel = m.importe == null ? null : nivelDe(m.importe);
+  return { ...m, categoria, nivel, revisionTI: categoria === "Tecnología" && nivel != null && nivel >= tecnologia.desdeNivel };
+});
+
+// ---------- Lab 146: preguntas que cambian con la versión 2 del manual ----------
+const preguntas146 = [
+  { id: "K1", pregunta: "¿Hasta qué importe puedo pagar con la caja menor?", fuente: "manual §2", respuestaV1: usd(CAJA_MENOR), respuestaV2: usd(MANUAL_V2.cajaMenor) },
+  { id: "K2", pregunta: "¿Cuántos días hábiles tiene un aprobador para responder?", fuente: "manual §5", respuestaV1: `${politica.plazoRespuestaDiasHabiles} días hábiles`, respuestaV2: `${MANUAL_V2.plazo} días hábiles` },
+  { id: "K3", pregunta: "Se dañó el servidor y la operación está parada. ¿Quién aprueba una compra urgente de 4.000 USD?", fuente: "manual §10 (solo v2)", respuestaV1: "El manual no habla de compras urgentes: nivel 2 normal (jefe de área y Finanzas)", respuestaV2: `Solo el jefe de área (urgente hasta ${usd(URGENTE_HASTA)}); Finanzas y TI revisan después` },
+  { id: "K4", pregunta: "¿Cómo respondo una solicitud de aprobación desde Microsoft Teams?", fuente: "sitio web de Learn (documentación de Power Automate en español)", respuestaV1: "El manual no lo dice; con la fuente web, la respuesta cita una página de Learn sobre aprobaciones en Teams", respuestaV2: "Igual que en v1" },
+  { id: "K5", pregunta: "¿Qué solicitudes de la categoría Mobiliario hay registradas?", fuente: "tabla Solicitud de compra (Dataverse)", respuestaV1: "Con la fuente de Dataverse: las filas de Mobiliario que puede ver el usuario; sin ella, no lo sabe", respuestaV2: "Igual que en v1" },
+  { id: "K6", pregunta: "¿Cuál es el salario del gerente general?", fuente: "ninguna", respuestaV1: "No lo sabe (o salta el Fallback)", respuestaV2: "Igual que en v1" },
+];
+
+// ---------- Lab 147: descripciones, mensajes de orquestación y escenarios de harness ----------
+const descripciones147 = {
+  malas: [
+    { pieza: "topic", nombre: "Nivel", descripcion: "Tema de niveles." },
+    { pieza: "herramienta", nombre: "Flujo 1", descripcion: "Hace cosas con solicitudes." },
+    { pieza: "conocimiento", nombre: "Documento", descripcion: "Documento." },
+  ],
+  buenas: [
+    { pieza: "topic", nombre: "Calcular nivel de aprobación", descripcion: "Calcula el nivel de aprobación exacto de una compra de SIT a partir de su importe en USD y dice quién tiene que aprobarla. Úsalo cuando el usuario dé o pregunte por un importe concreto." },
+    { pieza: "herramienta", nombre: "Registrar solicitud de compra", descripcion: "Registra en el sistema de SIT una solicitud de compra nueva. Úsala solo cuando el usuario pida crear o registrar una solicitud. Necesita título, área, categoría, cantidad, precio unitario en USD y el correo de quien la pide; devuelve el importe y el nivel de aprobación." },
+    { pieza: "conocimiento", nombre: "Manual de compras de SIT", descripcion: "Manual de compras de SIT: niveles de aprobación, compras de tecnología, plazos, prohibiciones, viajes y contacto." },
+  ],
+};
+const mensajes147 = [
+  { id: "O1", mensaje: "¿Qué nivel tiene una compra de 3000 USD?", piezasEsperadas: ["topic: Calcular nivel de aprobación"] },
+  { id: "O2", mensaje: "Registra una solicitud: 2 monitores para TI, categoría Tecnología, a 320 USD cada uno", piezasEsperadas: ["herramienta: Registrar solicitud de compra"] },
+  { id: "O3", mensaje: "¿Puedo partir una compra grande en dos más pequeñas?", piezasEsperadas: ["conocimiento: Manual de compras de SIT"] },
+  { id: "O4", mensaje: "¿Quién aprueba una compra de 4200 USD? Y regístramela: 3 portátiles para TI, categoría Tecnología, a 1400 USD cada uno", piezasEsperadas: ["topic: Calcular nivel de aprobación", "herramienta: Registrar solicitud de compra"], multiIntencion: true },
+  { id: "O5", mensaje: "1500", piezasEsperadas: ["pregunta de aclaración (o el topic, si interpreta un importe)"], ambiguo: true },
+  { id: "O6", mensaje: "¿Cómo se registra una compra en SIT?", piezasEsperadas: ["conocimiento: Manual de compras de SIT"], trampa: "Habla de registrar, pero pregunta por el procedimiento: no debe llamar a la herramienta" },
+];
+const escenarios147 = [
+  { id: "H1", escenario: "Mesa de compras interna, sin créditos de Copilot Studio, que reconoce códigos de proveedor PRV-000 con una entidad regex.", harness: "estándar", razon: "Las entidades personalizadas no están admitidas en el Microsoft Copilot harness, y sin créditos solo el estándar se puede probar gratis." },
+  { id: "H2", escenario: "SIT tiene créditos de Copilot Studio y quiere un agente para proveedores externos que atienda por el chat del sitio web y por teléfono, con arquitectura de centro de contacto, y que pase a una persona cuando no pueda resolver.", harness: "Customer Conversation", razon: "Learn lo describe como el harness para atender a clientes por chat o voz, publicado en un sitio web o un número de teléfono, con escalado a una persona. Usa créditos de Copilot Studio. El estándar también publica en web y deriva a una persona: elegirlo es defendible si se justifica con sus canales." },
+  { id: "H3", escenario: "Asistente de Finanzas que razona en varios pasos sobre correos, archivos y reuniones de Microsoft 365, con procedimientos reutilizables y memoria entre conversaciones.", harness: "Microsoft Copilot", razon: "Está pensado para razonar en varios pasos sobre datos de Microsoft 365, y Skills y Memory no existen en el estándar (el Customer Conversation harness también los admite, pero está pensado para clientes). Cobra créditos desde que se construye." },
+  { id: "H4", escenario: "Agente para los conductores de reparto de SIT por WhatsApp.", harness: "estándar", razon: "El canal WhatsApp está admitido en el estándar y no en el Microsoft Copilot harness, y el Customer Conversation harness no lo lista entre sus canales. Ojo: Learn indica que, desde el 23 de octubre de 2026, ya no se pueden crear conexiones nuevas de WhatsApp por la vía de Azure Communication Services; una conexión nueva pasa por Dynamics 365 Contact Center o por un partner." },
+  { id: "H5", escenario: "Agente en el que los empleados inician sesión con un proveedor OAuth 2 propio de SIT, no con Microsoft Entra ID (autenticación manual del usuario del agente).", harness: "estándar", razon: "La autenticación manual del usuario del agente no está admitida en el Microsoft Copilot harness. Ojo: no es lo mismo que la autenticación de una herramienta o un conector, que ese harness sí admite con conexiones del usuario." },
+  { id: "H6", escenario: "Agente que busca cláusulas en 40.000 contratos indexados en Azure AI Search.", harness: "estándar", razon: "Azure AI Search está admitido como fuente de conocimiento en el estándar y no en el Microsoft Copilot harness. En ese harness se puede usar como herramienta (Foundry IQ o el conector de Azure AI Search): elegirlo con esa razón también es defendible." },
+];
+
 // ---------- Escritura ----------
 const written = new Map();
 function write(relative, content) {
@@ -159,6 +257,17 @@ write("manual-compras.docx", buildDocx(manual, { title: "Manual de compras de SI
 write("faq-proveedores.md", blocksToMarkdown(faq));
 write("faq-proveedores.docx", buildDocx(faq, { title: "Preguntas frecuentes de proveedores de SIT" }));
 write("preguntas-prueba.json", JSON.stringify({ version: VERSION, descripcion: "Preguntas para probar el Asistente de compras SIT. 'debeContener' son hechos que la respuesta tiene que incluir (con otras palabras vale); 'comportamientoEsperado' describe la respuesta correcta cuando no hay un dato que citar.", preguntas }, null, 2) + "\n");
+write("lab145/entidades.json", JSON.stringify({ version: VERSION, ...entidades }, null, 2) + "\n");
+write("lab145/mensajes-prueba.json", JSON.stringify({ version: VERSION, descripcion: "Mensajes para probar el topic Revisar compra del Lab 145. 'categoria', 'importe' y 'proveedor' son los valores que el agente debería reconocer; null = tiene que preguntarlo.", mensajes: mensajes145 }, null, 2) + "\n");
+write("lab146/manual-compras-v2.md", blocksToMarkdown(manualV2));
+write("lab146/manual-compras-v2.docx", buildDocx(manualV2, { title: "Manual de compras de SIT (versión 2)" }));
+write("lab146/preguntas-conocimiento.json", JSON.stringify({ version: VERSION, descripcion: "Preguntas del Lab 146 con la respuesta correcta según la versión del manual que tenga el agente.", preguntas: preguntas146 }, null, 2) + "\n");
+write("lab147/descripciones.json", JSON.stringify({ version: VERSION, ...descripciones147 }, null, 2) + "\n");
+write("lab147/mensajes-orquestacion.json", JSON.stringify({ version: VERSION, mensajes: mensajes147 }, null, 2) + "\n");
+write("lab147/escenarios-harness.json", JSON.stringify({ version: VERSION, descripcion: "Escenarios para decidir el harness. 'harness' y 'razon' son la respuesta esperada, según la comparación de Learn (2026-11).", escenarios: escenarios147 }, null, 2) + "\n");
+expected.lab145 = { mensajes: mensajes145.map(({ id, categoria, importe, proveedor, nivel, revisionTI }) => ({ id, categoria, importe, proveedor, nivel, revisionTI })) };
+expected.lab146 = { cambiosV2: { cajaMenorHasta: [CAJA_MENOR, MANUAL_V2.cajaMenor], plazoDiasHabiles: [politica.plazoRespuestaDiasHabiles, MANUAL_V2.plazo], urgenteHasta: URGENTE_HASTA }, preguntas: preguntas146.length };
+expected.lab147 = { mensajes: mensajes147.length, multiIntencion: mensajes147.filter((m) => m.multiIntencion).map((m) => m.id), harnessPorEscenario: Object.fromEntries(escenarios147.map((e) => [e.id, e.harness])) };
 write("expected/respuestas-esperadas.json", JSON.stringify(expected, null, 2) + "\n");
 
 write(
@@ -174,6 +283,9 @@ de SIT Compras de la Ruta Pro Power Automate. Los correos usan el dominio reserv
 | \`manual-compras.docx\` / \`.md\` | Manual de compras: niveles de aprobación, tecnología, plazos, prohibiciones, viajes, contacto | Lab 144 en adelante (conocimiento) |
 | \`faq-proveedores.docx\` / \`.md\` | Preguntas frecuentes de proveedores: facturas, pagos, tolerancia del ${conciliacion.toleranciaPorcentaje} %, alta | Labs de conocimiento y multiagente |
 | \`preguntas-prueba.json\` | ${preguntas.length} preguntas de prueba: en alcance, límites, fuera de alcance, ambiguas, datos de otra persona e instrucciones maliciosas | Lab 144 en adelante |
+| \`lab145/entidades.json\`, \`lab145/mensajes-prueba.json\` | Entidad de lista cerrada \`CategoriaCompra\` con sinónimos, entidad regex \`CodigoProveedor\` y 6 mensajes con lo que el agente debería reconocer | Lab 145 |
+| \`lab146/manual-compras-v2.docx\` / \`.md\`, \`lab146/preguntas-conocimiento.json\` | Versión 2 del manual (caja menor, plazo y compras urgentes cambian) y 6 preguntas con la respuesta de cada versión | Lab 146 |
+| \`lab147/descripciones.json\`, \`lab147/mensajes-orquestacion.json\`, \`lab147/escenarios-harness.json\` | Descripciones malas y buenas, 6 mensajes para el mapa de actividad y 6 escenarios para elegir harness | Lab 147 |
 | \`expected/respuestas-esperadas.json\` | Cifras y respuestas para comprobar tu trabajo | — |
 `,
 );

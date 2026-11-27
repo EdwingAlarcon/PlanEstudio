@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "malas": [
+    {
+      "pieza": "topic",
+      "nombre": "Nivel",
+      "descripcion": "Tema de niveles."
+    },
+    {
+      "pieza": "herramienta",
+      "nombre": "Flujo 1",
+      "descripcion": "Hace cosas con solicitudes."
+    },
+    {
+      "pieza": "conocimiento",
+      "nombre": "Documento",
+      "descripcion": "Documento."
+    }
+  ],
+  "buenas": [
+    {
+      "pieza": "topic",
+      "nombre": "Calcular nivel de aprobación",
+      "descripcion": "Calcula el nivel de aprobación exacto de una compra de SIT a partir de su importe en USD y dice quién tiene que aprobarla. Úsalo cuando el usuario dé o pregunte por un importe concreto."
+    },
+    {
+      "pieza": "herramienta",
+      "nombre": "Registrar solicitud de compra",
+      "descripcion": "Registra en el sistema de SIT una solicitud de compra nueva. Úsala solo cuando el usuario pida crear o registrar una solicitud. Necesita título, área, categoría, cantidad, precio unitario en USD y el correo de quien la pide; devuelve el importe y el nivel de aprobación."
+    },
+    {
+      "pieza": "conocimiento",
+      "nombre": "Manual de compras de SIT",
+      "descripcion": "Manual de compras de SIT: niveles de aprobación, compras de tecnología, plazos, prohibiciones, viajes y contacto."
+    }
+  ]
+}

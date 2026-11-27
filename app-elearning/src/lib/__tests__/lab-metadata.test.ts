@@ -129,9 +129,9 @@ describe("lab domain classification", () => {
 });
 
 describe("lab readiness (Sprint 1 — auditoría tenant-real)", () => {
-  it("gives every one of the 105 labs a non-empty execution status and evidence", () => {
+  it("gives every one of the 108 labs a non-empty execution status and evidence", () => {
     const labs = getAllLabs();
-    expect(labs.length).toBe(105);
+    expect(labs.length).toBe(108);
 
     for (const lab of labs) {
       const readiness = getLabReadiness(lab);
@@ -236,6 +236,9 @@ describe("labs opcionales", () => {
       "lab-142-copilot-studio-con-mcp",
       "lab-143-servidor-mcp-propio",
       "lab-144-copilot-studio-en-un-dia",
+      "lab-145-copilot-studio-topics-a-fondo",
+      "lab-146-copilot-studio-conocimiento",
+      "lab-147-copilot-studio-orquestacion-y-harness",
     ]);
   });
 });

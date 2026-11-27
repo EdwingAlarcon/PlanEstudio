@@ -11,7 +11,7 @@
 - **LAB-140** (opcional, nivel IA/N5): Dataverse Web API con un cliente propio en PowerShell (`6319b93`). Responde a la pregunta
   del usuario "¿la app enseña a crear e implementar funcionalidades con API de punta a punta?": estaba repartido (Lab 134,
   Módulo 14, Módulo 53 y Lab 54 solo en papel, Módulo 24, Módulo 19); faltaba una práctica con token real y cliente propio.
-- Conteos vigentes: **76 módulos, 105 labs (30 opcionales), 891 preguntas, 239 prácticas interactivas, 41 recursos.**
+- Conteos vigentes: **76 módulos, 108 labs (33 opcionales), 891 preguntas, 239 prácticas interactivas, 41 recursos.**
 - Detalle por fase en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §15.9 a §15.16 y en `CLAUDE.md` (párrafos P2 a P5 y LAB-140).
 
 **Pendiente, por quién tiene que actuar:**
@@ -27,7 +27,7 @@
    (PROPUESTA §15.18). **Escritos el 2026-11-25:** Microlección 4 del M53 y labs 141-143, con prueba simulada. Copilot Studio no
    tiene créditos en el tenant: sus pasos quedan "sin verificar" salvo que el usuario consiga créditos.
    **Ruta Pro Copilot Studio (2026-11-26/27):** diseño §15.19, P0 en el tenant §15.19.1 y **P1 hecha** §15.19.2 (datos
-   `asistente-compras`, LAB-144, ruta `copilot-studio-pro`). Sigue la **P2** (labs 145-147). La prueba de Copilot Studio de la cuenta
+   `asistente-compras`, LAB-144, ruta `copilot-studio-pro`) y **P2 hecha** §15.19.3 (labs 145-147). Sigue la **P3** (labs 148-150). La prueba de Copilot Studio de la cuenta
    Admin vence hacia el 26-12; el LAB-144 está sin verificar por la interfaz.
    *Orden general:* (PROPUESTA §15.3: Copilot Studio, Power Apps, CI-Journeys,
    Sales/Customer Service). Patrón de cada ruta: datos propios deterministas (generador en `scripts/`), 10-12 labs en 5 fases (P1 a P5),
