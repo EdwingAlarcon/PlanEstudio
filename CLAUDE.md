@@ -159,6 +159,14 @@ alternativa en Update a row, Parse JSON y el desencadenador HTTP. **Verificado e
 
 **Bloque MCP y agentes (2026-11-25, opcional, nivel IA/N5):** Microlección 4 opcional y plegada del Módulo 53 (qué es MCP, el servidor MCP de Dataverse, `hasUserApproved` como bandera del cliente, coste) y LAB-141 (cliente MCP sobre el servidor de Dataverse, auditado con MCP Inspector; medido en el tenant), LAB-142 (Copilot Studio con MCP; sin verificar desde la primera pregunta: el Trial no tiene créditos) y LAB-143 (servidor MCP propio con el SDK de TypeScript v2 y fallo y corrección de una versión de IA; medido en local). Detalle en `PROPUESTA_FASES_APRENDER_HACIENDO.md` §15.18.
 
+## Rediseño "El camino jugable" — 2026-11-27
+
+Propuesta inspirada en Brilliant, Boot.dev, GameCode, Duolingo y Microsoft Learn (detalle y fases F1-F5 en
+`PROPUESTA_FASES_APRENDER_HACIENDO.md` §16). **F1 hecha:** XP y rango **calculados** en `src/lib/xp.ts` a partir de los
+stores existentes (no hay store de XP: no añadir uno), camino por mundos en el inicio (`LearningPathMap`), rango en la
+barra lateral y desglose en `/progreso#xp`. Leer no da XP. Siguiente: F2 (lección por pasos, piloto Módulo 11).
+Validación: `npm run verify` (579 tests) y e2e 105/105 en el puerto 3100.
+
 ## Mantenimiento vigente — 2026-11-11
 
 Revisión con seis sub-agentes, sin ampliar contenido ni cambiar conteos: (1) **pruebas simuladas** (modelos, no personas) y

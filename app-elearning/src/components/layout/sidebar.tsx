@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 import { useProgressStore, calculateLevelProgress } from "@/lib/progress";
 import { useNextBestAction } from "@/components/guided/use-next-best-action";
+import { useXp } from "@/components/guided/use-xp";
+import { formatXp } from "@/lib/xp";
 import { EnvironmentLanguageSwitch } from "./environment-language-switch";
 import { CERTIFICATION_LEVEL_ORDER, TRANSVERSAL_LEVEL_ORDER, UI, type LevelId } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -105,6 +107,8 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
             </span>
             <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
           </Link>
+
+          <RankBadge />
 
           <nav aria-label="Principal" className="space-y-0.5">
             <NavLink href="/" icon={Home} label={UI.nav.home} active={pathname === "/"} prefetch={false} />
@@ -254,6 +258,29 @@ function LevelNavItem({
       </span>
       <span className={cn("shrink-0 text-[11px] tabular-nums", done ? "text-[#107C10] font-medium" : "text-muted-foreground")}>
         {completed}/{total}
+      </span>
+    </Link>
+  );
+}
+
+// Rango y XP (F1 de "El camino jugable"): se calcula de los stores, no se guarda.
+function RankBadge() {
+  const { xp, rank } = useXp();
+  return (
+    <Link
+      href="/progreso#xp"
+      className="mx-1 block rounded-lg border border-border px-3 py-2 transition-colors hover:border-[#0078D4]/40"
+      data-testid="sidebar-rank"
+      title={rank.nextLabel ? `${formatXp((rank.next ?? 0) - xp.total)} XP para ${rank.nextLabel}` : "Rango máximo"}
+    >
+      <span className="flex items-baseline justify-between gap-2">
+        <span className="truncate text-xs font-semibold text-foreground">{rank.label}</span>
+        <span className="shrink-0 text-[11px] font-semibold tabular-nums text-amber-700 dark:text-amber-400">
+          {formatXp(xp.total)} XP
+        </span>
+      </span>
+      <span className="mt-1.5 block h-1 overflow-hidden rounded-full bg-muted" aria-hidden>
+        <span className="block h-full rounded-full bg-[#0078D4] dark:bg-[#4DB8FF]" style={{ width: `${rank.percentage}%` }} />
       </span>
     </Link>
   );

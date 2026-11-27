@@ -12,6 +12,7 @@ import { UI, type LevelId } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { PracticeDomainProgress, PracticeProgressSummary, type PracticeSummaryItem } from "@/components/practices/practice-progress-summary";
 import { FullBackupPanel } from "@/components/progress/full-backup-panel";
+import { XpRankCard } from "@/components/progress/xp-rank-card";
 import { PracticePortabilityPanel } from "@/components/practices/practice-portability-panel";
 import { GuidedDashboardSummary } from "@/components/guided/guided-dashboard-summary";
 import { InteractivePracticeSummary } from "@/components/interactive-practices/interactive-practice-summary";
@@ -70,6 +71,8 @@ export function ProgressDashboardClient({ levels, practices, interactivePractice
       </div>
 
       <GuidedDashboardSummary />
+
+      <XpRankCard />
 
       <section className="space-y-4" aria-labelledby="academic-progress-heading">
         <div>

@@ -2,21 +2,59 @@ import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { getAllLevels, getLabsForLevel } from "@/lib/content";
-import { ArrowRight } from "lucide-react";
 import { UI, CERTIFICATION_LEVEL_ORDER, TRANSVERSAL_LEVEL_ORDER } from "@/lib/i18n";
 import { GuidedHomeClient } from "@/components/guided/guided-home-client";
 import { RetentionTodayCard } from "@/components/review/retention-today-card";
-import { LevelStepProgress } from "@/components/modules/level-step-progress";
+import { LearningPathMap, type PathWorld } from "@/components/guided/learning-path-map";
+import { getAllInteractivePractices } from "@/lib/interactive-practices";
+
+// Datos mínimos del camino (F1 de "El camino jugable"): solo los campos que pinta el cliente.
+// Cada práctica se atribuye a su primer módulo relacionado para no contarla dos veces en el camino.
+function buildPathWorlds(levels: ReturnType<typeof getAllLevels>): PathWorld[] {
+  const practicesByModule = new Map<number, string[]>();
+  for (const practice of getAllInteractivePractices()) {
+    const moduleId = practice.relatedModuleIds[0];
+    if (moduleId === undefined) continue;
+    practicesByModule.set(moduleId, [...(practicesByModule.get(moduleId) ?? []), practice.id]);
+  }
+  return CERTIFICATION_LEVEL_ORDER.flatMap((id, index) => {
+    const level = levels.find((l) => l.id === id);
+    if (!level) return [];
+    return [{
+      levelId: level.id,
+      step: index + 1,
+      title: level.title,
+      description: level.description,
+      certification: UI.levels.cert[level.id],
+      modules: level.modules.map((mod) => ({
+        key: mod.id,
+        moduleId: mod.moduleId,
+        title: mod.title,
+        href: `/nivel/${level.id}/modulo/${mod.slug}`,
+        minutes: mod.estimatedMinutes,
+        practiceIds: practicesByModule.get(mod.moduleId) ?? [],
+      })),
+      labs: getLabsForLevel(level.id).map((lab) => ({
+        slug: lab.slug,
+        displayId: lab.displayId,
+        title: lab.title,
+        href: `/labs/${lab.slug}`,
+        duration: lab.duration,
+      })),
+    }];
+  });
+}
 
 // Home: título por defecto del sitio, con canonical y og:url propios.
 export const metadata: Metadata = buildPageMetadata({ path: "/" });
 
 // Inicio rediseñado el 2026-11-11 con tres bloques, en el orden de las preguntas del alumno:
 // 1) ¿qué hago ahora? (siguiente paso), 2) ¿qué repaso hoy?, 3) ¿dónde estoy en el recorrido?
+// Desde el 2026-11-27 el recorrido es un camino de nodos por mundo (LearningPathMap), con XP.
 // Se retiraron las 8 tarjetas de "Acceso rápido" y las 4 de dominio: duplicaban la barra lateral.
 export default function DashboardPage() {
   const levels = getAllLevels();
-  const certification = CERTIFICATION_LEVEL_ORDER.map((id) => levels.find((level) => level.id === id)!).filter(Boolean);
+  const worlds = buildPathWorlds(levels);
   const transversal = TRANSVERSAL_LEVEL_ORDER.map((id) => levels.find((level) => level.id === id)!).filter(Boolean);
 
   return (
@@ -25,37 +63,9 @@ export default function DashboardPage() {
 
       <RetentionTodayCard />
 
-      <section aria-labelledby="journey-heading" className="space-y-4">
-        <div>
-          <h2 id="journey-heading" className="text-lg font-semibold text-foreground">Tu recorrido</h2>
-          <p className="text-sm text-muted-foreground">
-            Cuatro niveles en orden; cada uno prepara una certificación y exige el anterior.
-          </p>
-        </div>
+      <LearningPathMap worlds={worlds} />
 
-        <ol className="space-y-2">
-          {certification.map((level, index) => (
-            <li key={level.id}>
-              <Link
-                href={`/nivel/${level.id}`}
-                className="group flex items-center gap-4 rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:border-[#0078D4]/40"
-              >
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted text-sm font-semibold tabular-nums">
-                  {index + 1}
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block text-sm font-semibold text-foreground">{level.title}</span>
-                  <span className="block truncate text-xs text-muted-foreground">
-                    {level.description} · {UI.levels.cert[level.id]} · {level.modules.length} módulos, {getLabsForLevel(level.id).length} labs
-                  </span>
-                </span>
-                <LevelStepProgress levelId={level.id} />
-                <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-foreground" aria-hidden />
-              </Link>
-            </li>
-          ))}
-        </ol>
-
+      <section aria-label="Especializaciones">
         <div className="rounded-lg border border-dashed border-border px-4 py-3">
           <p className="text-sm font-medium text-foreground">Especializaciones (cuando quieras, sin requisitos)</p>
           <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm">

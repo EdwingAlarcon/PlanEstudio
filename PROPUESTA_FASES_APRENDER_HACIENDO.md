@@ -1388,3 +1388,27 @@ harness). Agente `P0 Prueba harness estandar` y agent flow de prueba, **borrados
   rompe el Redirect; etiquetas en español de estas pantallas.
 - **Pendiente detectado:** el reto de transferencia del Módulo 22 pide WhatsApp, y desde el 23-oct-2026 ya no se pueden crear
   conexiones nuevas de WhatsApp por ACS; revisarlo junto con el nombre "GitHub Copilot harness" de ese módulo.
+
+## 16. Rediseño "El camino jugable" (2026-11-27)
+
+Propuesta de diseño inspirada en Brilliant (un paso por pantalla, feedback que deja corregir), Boot.dev (XP solo
+por evidencia, rangos), GameCode (mundos con caso y "jefe"), Duolingo (camino de nodos, hábito) y Microsoft Learn
+(lenguaje visual Fluent, XP visible, trofeos, Applied Skills). Publicada con maquetas como artifact privado del
+usuario. Decisiones (delegadas por el usuario): intensidad intermedia, cercana a Learn (mundos y trofeos sí; sin
+avatar, vidas, energía, ligas, monedas ni tutor IA); empezar por F1; hábito con **meta semanal**, no racha diaria.
+
+Fases: **F1** camino en el inicio y XP calculada; **F2** lección por pasos (piloto Módulo 11); **F3** labs como
+misión con panel de evidencia y enlace a Learn; **F4** meta semanal, racha por semanas y perfil en `/progreso`
+(store nuevo `planestudio.habit.v1`, independiente, en el backup); **F5** lección por pasos en todo el curso y
+"jefe" de cada mundo (reto sin pasos + simulador).
+
+**F1 hecha (2026-11-27).** `src/lib/xp.ts`: la XP **no se guarda**, se calcula de los stores existentes sin
+fusionarlos (práctica interactiva completada sin ver la solución 20, quiz del módulo ≥ 80 % 50, lab completado 100,
+respuesta correcta del repaso 5; marcar un módulo como leído 0). Rangos Aprendiz → Maker → Consultor funcional →
+Desarrollador → Arquitecto, con grados I-III, calibrados con el contenido de esa fecha (Nivel 1 completo ≈ 1.460 XP;
+los cuatro niveles ≈ 9.030, Arquitecto I). El inicio sustituye la lista "Tu recorrido" por `LearningPathMap`
+(pestañas por mundo, nodos de módulo con XP ganada/posible, labs agrupados y trofeo); cada práctica cuenta en su
+primer módulo relacionado. La barra lateral muestra el rango (`RankBadge`) y `/progreso#xp` el desglose
+(`XpRankCard`). Los nodos posteriores al actual se atenúan pero no se bloquean. Pendiente fuera de F1: XP del reto de
+transferencia y de los pasos de microlección (no hay registro propio todavía; llegan con F2).
+
