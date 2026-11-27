@@ -84,6 +84,108 @@
       "P10"
     ]
   },
+  "lab148": {
+    "casos": {
+      "V1": {
+        "resultado": "OK",
+        "errores": 0,
+        "importe": 840,
+        "nivel": 1
+      },
+      "V2": {
+        "resultado": "RECHAZADA",
+        "errores": 1,
+        "importe": null,
+        "nivel": null
+      },
+      "V3": {
+        "resultado": "RECHAZADA",
+        "errores": 1,
+        "importe": null,
+        "nivel": null
+      },
+      "V4": {
+        "resultado": "RECHAZADA",
+        "errores": 1,
+        "importe": null,
+        "nivel": null
+      },
+      "V5": {
+        "resultado": "RECHAZADA",
+        "errores": 1,
+        "importe": null,
+        "nivel": null
+      },
+      "V6": {
+        "resultado": "RECHAZADA",
+        "errores": 1,
+        "importe": null,
+        "nivel": null
+      },
+      "V7": {
+        "resultado": "RECHAZADA",
+        "errores": 1,
+        "importe": null,
+        "nivel": null
+      },
+      "V8": {
+        "resultado": "RECHAZADA",
+        "errores": 2,
+        "importe": null,
+        "nivel": null
+      }
+    },
+    "catalogo": {
+      "productos": 41,
+      "paginas": 3,
+      "monitor27": 320,
+      "masBaratoPapeleria": "CAT-039",
+      "inactivos": [
+        "CAT-018"
+      ]
+    }
+  },
+  "lab149": {
+    "escenarios": 8,
+    "tarjeta": {
+      "version": "1.5",
+      "entradas": [
+        "titulo",
+        "area",
+        "categoria",
+        "cantidad",
+        "precioUnitario"
+      ]
+    },
+    "importes": {
+      "C1": 950,
+      "C2": 4200,
+      "C5": 20
+    }
+  },
+  "lab150": {
+    "otraPersona": "ana.gomez@sit.example.com",
+    "filasOtraPersona": [
+      {
+        "titulo": "Licencias de diseño para Comercial",
+        "importe": 750,
+        "nivel": 1
+      },
+      {
+        "titulo": "Taller de ventas consultivas",
+        "importe": 2200,
+        "nivel": 2
+      }
+    ],
+    "pruebas": 6,
+    "decisiones": {
+      "D1": "Authenticate with Microsoft",
+      "D2": "No authentication, sin herramientas que lean datos privados",
+      "D3": "Authenticate manually (Generic OAuth 2)",
+      "D4": "Política de datos (DLP) que bloquea el conector Chat without Microsoft Entra ID authentication in Copilot Studio",
+      "D5": "Herramienta de conector con credenciales del usuario (End user)"
+    }
+  },
   "lab145": {
     "mensajes": [
       {

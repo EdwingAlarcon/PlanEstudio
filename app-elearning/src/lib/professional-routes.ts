@@ -493,12 +493,15 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "lab-145-copilot-studio-topics-a-fondo",
       "lab-146-copilot-studio-conocimiento",
       "lab-147-copilot-studio-orquestacion-y-harness",
+      "lab-148-copilot-studio-herramientas",
+      "lab-149-copilot-studio-experiencia-de-conversacion",
+      "lab-150-copilot-studio-identidad-del-usuario",
     ],
     competencies: ["Agentes de Copilot Studio", "Conocimiento y respuestas con fuentes", "Topics y Power Fx", "Orquestación generativa", "Agent flows y herramientas", "Evaluación de agentes"],
     status: "Especialización en construcción",
     // Provisional: el capstone será el LAB-155 (reto Pro sin pasos) cuando exista.
     capstoneLabSlug: "lab-144-copilot-studio-en-un-dia",
-    gapNote: "Disponibles los labs 144 (Copilot Studio en un día), 145 (topics a fondo), 146 (conocimiento) y 147 (orquestación generativa y elección de harness). Los labs 148 a 155 se publican por fases. La ruta usa la orquestación estándar: basta una prueba de Copilot Studio (licencia de usuario), porque el panel de prueba no consume créditos; lo propio del Microsoft Copilot harness, que cobra créditos desde que se construye, va con variante en papel. Es competencia profesional alineada con el examen AB-620, no una preparación del examen.",
+    gapNote: "Disponibles los labs 144 (Copilot Studio en un día), 145 (topics a fondo), 146 (conocimiento), 147 (orquestación generativa y elección de harness), 148 (herramientas), 149 (experiencia de conversación) y 150 (identidad y datos del usuario). Los labs 151 a 155 se publican por fases. La ruta usa la orquestación estándar: basta una prueba de Copilot Studio (licencia de usuario), porque el panel de prueba no consume créditos; lo propio del Microsoft Copilot harness, que cobra créditos desde que se construye, va con variante en papel. Es competencia profesional alineada con el examen AB-620, no una preparación del examen.",
     portfolioEvidence: [
       "Agente Asistente de compras SIT de orquestación estándar, con el manual como conocimiento y sin respuestas sin fuentes (LAB-144)",
       "Topic que calcula el nivel de aprobación con los límites de 1.000 y 10.000 comprobados (LAB-144)",
@@ -507,6 +510,9 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "Entidades propias, topic reutilizable con entradas y salidas llamado con Redirect y variable global, probados con seis mensajes (LAB-145)",
       "Tabla de medición del conocimiento en cuatro momentos (versiones del manual, fuente web y Dataverse) y decisión de fuentes (LAB-146)",
       "Registro de la orquestación con descripciones malas y buenas, decisión de harness en seis escenarios y registro de decisión del agente (LAB-147)",
+      "Agent flow que valida cinco reglas y devuelve un mensaje útil, conector con confirmación y herramienta REST desde OpenAPI, medidos con ocho casos y siete mensajes (LAB-148)",
+      "Topic con Adaptive Card, resumen y confirmación antes de registrar, y topics de sistema con mensajes propios, probados en ocho escenarios (LAB-149)",
+      "Consulta de mis solicitudes con el correo de la identidad, probada antes y después de la corrección con mensajes que intentan ver datos ajenos (LAB-150)",
     ],
   },
   {

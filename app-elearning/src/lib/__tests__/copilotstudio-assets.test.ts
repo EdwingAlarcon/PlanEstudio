@@ -134,6 +134,68 @@ describe("Copilot Studio practice assets (Asistente de compras SIT)", () => {
     }
   });
 
+  it("gives LAB-148 validation cases that match the policy and the catalog", () => {
+    const { casos, categoriasValidas, cajaMenorHasta } = readJson<{
+      casos: { id: string; cantidad: number; precioUnitario: number; categoria: string; correo: string; resultadoEsperado: string; errores: string[]; importe: number | null; nivel: number | null }[];
+      categoriasValidas: string[];
+      cajaMenorHasta: number;
+    }>("lab148/casos-validacion.json");
+    expect(casos.map((c) => c.id)).toEqual(["V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8"]);
+    expect(categoriasValidas).toHaveLength(6);
+    for (const c of casos) {
+      const ok = Number.isInteger(c.cantidad) && c.cantidad >= 1 && c.precioUnitario > 0 && categoriasValidas.includes(c.categoria) && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c.correo) && c.cantidad * c.precioUnitario > cajaMenorHasta;
+      expect(c.resultadoEsperado, c.id).toBe(ok ? "OK" : "RECHAZADA");
+      expect(c.errores.length > 0, c.id).toBe(!ok);
+    }
+    expect(casos.find((c) => c.id === "V1")).toMatchObject({ importe: 840, nivel: 1 });
+    expect(casos.find((c) => c.id === "V8")!.errores).toHaveLength(2);
+
+    const catalogo = [1, 2, 3].flatMap((p) => (JSON.parse(fs.readFileSync(path.join(sitCompras, "catalogo", `pagina-${p}.json`), "utf-8")) as { value: { CatalogoID: string; PrecioUSD: number; Categoria: string; Activo: boolean }[] }).value);
+    const papeleria = catalogo.filter((c) => c.Categoria === "Papelería").sort((a, b) => a.PrecioUSD - b.PrecioUSD);
+    expect(papeleria[0]!.CatalogoID).toBe("CAT-039");
+    expect(catalogo.find((c) => c.CatalogoID === "CAT-002")!.PrecioUSD).toBe(320);
+    expect(catalogo.find((c) => c.CatalogoID === "CAT-018")!.Activo).toBe(false);
+
+    for (const file of ["lab148/catalogo-sit-openapi.json", "lab148/catalogo-sit-openapi-tres-operaciones.json"]) {
+      const spec = readJson<{ swagger: string; host: string; basePath: string; paths: Record<string, unknown> }>(file);
+      expect(spec.swagger, file).toBe("2.0");
+      expect(spec.host).toBe("planestudio.vercel.app");
+      for (const route of Object.keys(spec.paths)) {
+        const local = route.replace("{pagina}", "1");
+        expect(fs.existsSync(path.join(sitCompras, local)), `${file} ${route}`).toBe(true);
+      }
+    }
+    const lab = readLab("lab-148-copilot-studio-herramientas");
+    for (const m of readJson<{ mensajes: { id: string }[] }>("lab148/mensajes-herramientas.json").mensajes) expect(lab, m.id).toContain(`| ${m.id} |`);
+    for (const c of casos) expect(lab, c.id).toContain(`| ${c.id} |`);
+  });
+
+  it("gives LAB-149 an Adaptive Card whose inputs the lab names", () => {
+    const card = readJson<{ version: string; body: { type: string; id?: string }[]; actions: { type: string; data?: { actionSubmitId: string } }[] }>("lab149/tarjeta-solicitud.json");
+    expect(card.version).toBe("1.5");
+    const ids = card.body.filter((b) => b.type.startsWith("Input.")).map((b) => b.id);
+    expect(ids).toEqual(["titulo", "area", "categoria", "cantidad", "precioUnitario"]);
+    expect(card.actions.map((a) => a.data?.actionSubmitId)).toEqual(["revisar", "cancelar"]);
+    const lab = readLab("lab-149-copilot-studio-experiencia-de-conversacion");
+    for (const id of ids) expect(lab, id).toContain(`Topic.${id}`);
+    for (const e of readJson<{ escenarios: { id: string }[] }>("lab149/escenarios-conversacion.json").escenarios) expect(lab, e.id).toContain(`| ${e.id} |`);
+    expect(lab).toContain("950 USD");
+    expect(lab).toContain("4.200 USD");
+  });
+
+  it("gives LAB-150 another person's rows and the identity tests it quotes", () => {
+    const { filas } = readJson<{ filas: { correo: string; cantidad: number; precioUnitario: number; importe: number }[] }>("lab150/filas-otra-persona.json");
+    expect(filas).toHaveLength(2);
+    for (const f of filas) {
+      expect(f.correo).toBe("ana.gomez@sit.example.com");
+      expect(f.importe).toBe(f.cantidad * f.precioUnitario);
+    }
+    const lab = readLab("lab-150-copilot-studio-identidad-del-usuario");
+    for (const id of ["I2", "I3", "I5", "I6"]) expect(lab, id).toContain(`| ${id} |`);
+    for (const d of readJson<{ situaciones: { id: string }[] }>("lab150/decisiones-identidad.json").situaciones) expect(lab, d.id).toContain(`| ${d.id} |`);
+    expect(lab).toContain("750 USD");
+  });
+
   it("matches what LAB-144 quotes", () => {
     const lab = readLab("lab-144-copilot-studio-en-un-dia");
     expect(lab).toContain("/practice-assets/copilotstudio/asistente-compras/asistente-compras.zip");

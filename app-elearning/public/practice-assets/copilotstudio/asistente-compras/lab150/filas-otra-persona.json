@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "descripcion": "Dos solicitudes de otra persona para crear a mano en la tabla Solicitud de compra (Lab 150). Sirven para comprobar que el agente no las muestra.",
+  "filas": [
+    {
+      "titulo": "Licencias de diseño para Comercial",
+      "area": "Comercial",
+      "categoria": "Tecnología",
+      "cantidad": 5,
+      "precioUnitario": 150,
+      "correo": "ana.gomez@sit.example.com",
+      "importe": 750,
+      "nivel": 1
+    },
+    {
+      "titulo": "Taller de ventas consultivas",
+      "area": "Comercial",
+      "categoria": "Capacitación",
+      "cantidad": 1,
+      "precioUnitario": 2200,
+      "correo": "ana.gomez@sit.example.com",
+      "importe": 2200,
+      "nivel": 2
+    }
+  ]
+}

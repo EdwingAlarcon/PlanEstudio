@@ -1,0 +1,46 @@
+{
+  "version": "1.0.0",
+  "descripcion": "Escenarios del Lab 149 con lo que debe pasar en la conversación.",
+  "escenarios": [
+    {
+      "id": "C1",
+      "accion": "Rellena la tarjeta: Reposición de tóner, Operaciones, Papelería, 10, 95. Confirma con Sí.",
+      "esperado": "Resumen con 950 USD y nivel 1; tras el Sí, la solicitud se registra y el agente da el importe y el nivel."
+    },
+    {
+      "id": "C2",
+      "accion": "Rellena la tarjeta: Portátiles para analistas, TI, Tecnología, 3, 1400. Responde No en la confirmación.",
+      "esperado": "Resumen con 4.200 USD y nivel 2; tras el No, no se crea ninguna fila y el agente lo dice."
+    },
+    {
+      "id": "C3",
+      "accion": "Cuando aparezca la tarjeta, escribe en el chat: 3 sillas a 210",
+      "esperado": "Dos salidas posibles: el agente vuelve a enviar la tarjeta con tu mensaje de reintento (hasta 2 veces por defecto), o toma el texto como una interrupción que vuelve a activar el topic y empieza de nuevo."
+    },
+    {
+      "id": "C4",
+      "accion": "Pulsa Cancelar en la tarjeta.",
+      "esperado": "El topic termina sin registrar nada y con un mensaje claro."
+    },
+    {
+      "id": "C5",
+      "accion": "Rellena la tarjeta: Grapas, Operaciones, Papelería, 10, 2. Confirma con Sí.",
+      "esperado": "El agent flow rechaza la solicitud (20 USD, caja menor) y el agente muestra su mensaje, no un error técnico."
+    },
+    {
+      "id": "C6",
+      "accion": "Escribe: ¿me recomiendas un restaurante cerca de la oficina?",
+      "esperado": "Fuera de alcance: el agente dice que no puede ayudar con eso y qué sí hace, sin inventar."
+    },
+    {
+      "id": "C7",
+      "accion": "Escribe: quiero hablar con una persona",
+      "esperado": "Escalate personalizado: cómo contactar a Compras (correo y horario) y qué datos llevar. Sin engagement hub no hay traspaso real."
+    },
+    {
+      "id": "C8",
+      "accion": "Apaga el agent flow y repite C1.",
+      "esperado": "Observación: anota qué topic respondió (On Error personalizado u otro) y si se creó la fila. Learn advierte que On Error no cubre los errores de sistema. Vuelve a encender el flujo al terminar."
+    }
+  ]
+}

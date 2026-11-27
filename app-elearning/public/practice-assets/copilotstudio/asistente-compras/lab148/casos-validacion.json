@@ -1,0 +1,134 @@
+{
+  "version": "1.0.0",
+  "descripcion": "Entradas para probar la validación del agent flow del Lab 148. 'errores' son los mensajes que debe devolver, en este orden; con 'OK', 'importe' y 'nivel' son lo que devuelve tras registrar.",
+  "categoriasValidas": [
+    "Tecnología",
+    "Mobiliario",
+    "Servicios profesionales",
+    "Capacitación",
+    "Viajes",
+    "Papelería"
+  ],
+  "cajaMenorHasta": 50,
+  "casos": [
+    {
+      "id": "V1",
+      "titulo": "Sillas ergonómicas para Servicios",
+      "area": "Servicios",
+      "categoria": "Mobiliario",
+      "cantidad": 4,
+      "precioUnitario": 210,
+      "correo": "ana.ruiz@sit.example.com",
+      "resultadoEsperado": "OK",
+      "errores": [],
+      "importe": 840,
+      "nivel": 1
+    },
+    {
+      "id": "V2",
+      "titulo": "Monitores sin cantidad",
+      "area": "TI",
+      "categoria": "Tecnología",
+      "cantidad": 0,
+      "precioUnitario": 320,
+      "correo": "ana.ruiz@sit.example.com",
+      "resultadoEsperado": "RECHAZADA",
+      "errores": [
+        "La cantidad debe ser un número entero mayor que 0."
+      ],
+      "importe": null,
+      "nivel": null
+    },
+    {
+      "id": "V3",
+      "titulo": "Media licencia",
+      "area": "TI",
+      "categoria": "Tecnología",
+      "cantidad": 2.5,
+      "precioUnitario": 150,
+      "correo": "ana.ruiz@sit.example.com",
+      "resultadoEsperado": "RECHAZADA",
+      "errores": [
+        "La cantidad debe ser un número entero mayor que 0."
+      ],
+      "importe": null,
+      "nivel": null
+    },
+    {
+      "id": "V4",
+      "titulo": "Precio negativo",
+      "area": "Finanzas",
+      "categoria": "Papelería",
+      "cantidad": 10,
+      "precioUnitario": -10,
+      "correo": "ana.ruiz@sit.example.com",
+      "resultadoEsperado": "RECHAZADA",
+      "errores": [
+        "El precio unitario debe ser mayor que 0 USD."
+      ],
+      "importe": null,
+      "nivel": null
+    },
+    {
+      "id": "V5",
+      "titulo": "Juguetes para el evento",
+      "area": "Comercial",
+      "categoria": "Juguetes",
+      "cantidad": 20,
+      "precioUnitario": 15,
+      "correo": "ana.ruiz@sit.example.com",
+      "resultadoEsperado": "RECHAZADA",
+      "errores": [
+        "La categoría debe ser una de estas: Tecnología, Mobiliario, Servicios profesionales, Capacitación, Viajes, Papelería."
+      ],
+      "importe": null,
+      "nivel": null
+    },
+    {
+      "id": "V6",
+      "titulo": "Grapas",
+      "area": "Operaciones",
+      "categoria": "Papelería",
+      "cantidad": 10,
+      "precioUnitario": 2,
+      "correo": "ana.ruiz@sit.example.com",
+      "resultadoEsperado": "RECHAZADA",
+      "errores": [
+        "Una compra de 20 USD se paga con la caja menor del área (hasta 50 USD): no necesita solicitud."
+      ],
+      "importe": null,
+      "nivel": null
+    },
+    {
+      "id": "V7",
+      "titulo": "Curso de Excel",
+      "area": "Finanzas",
+      "categoria": "Capacitación",
+      "cantidad": 3,
+      "precioUnitario": 150,
+      "correo": "ana.ruiz",
+      "resultadoEsperado": "RECHAZADA",
+      "errores": [
+        "El correo del solicitante no es válido."
+      ],
+      "importe": null,
+      "nivel": null
+    },
+    {
+      "id": "V8",
+      "titulo": "Dos errores a la vez",
+      "area": "Comercial",
+      "categoria": "Juguetes",
+      "cantidad": 0,
+      "precioUnitario": 15,
+      "correo": "ana.ruiz@sit.example.com",
+      "resultadoEsperado": "RECHAZADA",
+      "errores": [
+        "La cantidad debe ser un número entero mayor que 0.",
+        "La categoría debe ser una de estas: Tecnología, Mobiliario, Servicios profesionales, Capacitación, Viajes, Papelería."
+      ],
+      "importe": null,
+      "nivel": null
+    }
+  ]
+}

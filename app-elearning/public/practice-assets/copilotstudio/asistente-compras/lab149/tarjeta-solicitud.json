@@ -1,0 +1,128 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Nueva solicitud de compra",
+      "weight": "Bolder",
+      "size": "Medium",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "Revisa los datos antes de enviar. Nada se registra hasta que lo confirmes.",
+      "isSubtle": true,
+      "wrap": true
+    },
+    {
+      "type": "Input.Text",
+      "id": "titulo",
+      "label": "Título",
+      "placeholder": "Por ejemplo: Sillas ergonómicas para Servicios",
+      "isRequired": true,
+      "errorMessage": "Escribe un título.",
+      "maxLength": 100
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "area",
+      "label": "Área",
+      "isRequired": true,
+      "errorMessage": "Elige un área.",
+      "choices": [
+        {
+          "title": "Comercial",
+          "value": "Comercial"
+        },
+        {
+          "title": "Finanzas",
+          "value": "Finanzas"
+        },
+        {
+          "title": "TI",
+          "value": "TI"
+        },
+        {
+          "title": "Operaciones",
+          "value": "Operaciones"
+        },
+        {
+          "title": "Talento humano",
+          "value": "Talento humano"
+        },
+        {
+          "title": "Servicios",
+          "value": "Servicios"
+        }
+      ]
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "categoria",
+      "label": "Categoría",
+      "isRequired": true,
+      "errorMessage": "Elige una categoría.",
+      "choices": [
+        {
+          "title": "Tecnología",
+          "value": "Tecnología"
+        },
+        {
+          "title": "Mobiliario",
+          "value": "Mobiliario"
+        },
+        {
+          "title": "Servicios profesionales",
+          "value": "Servicios profesionales"
+        },
+        {
+          "title": "Capacitación",
+          "value": "Capacitación"
+        },
+        {
+          "title": "Viajes",
+          "value": "Viajes"
+        },
+        {
+          "title": "Papelería",
+          "value": "Papelería"
+        }
+      ]
+    },
+    {
+      "type": "Input.Number",
+      "id": "cantidad",
+      "label": "Cantidad",
+      "min": 1,
+      "isRequired": true,
+      "errorMessage": "La cantidad debe ser 1 o más."
+    },
+    {
+      "type": "Input.Number",
+      "id": "precioUnitario",
+      "label": "Precio unitario (USD)",
+      "min": 0.01,
+      "isRequired": true,
+      "errorMessage": "El precio debe ser mayor que 0."
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Revisar solicitud",
+      "data": {
+        "actionSubmitId": "revisar"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Cancelar",
+      "data": {
+        "actionSubmitId": "cancelar"
+      },
+      "associatedInputs": "none"
+    }
+  ]
+}

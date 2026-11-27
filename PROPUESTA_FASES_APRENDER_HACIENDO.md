@@ -1389,6 +1389,80 @@ harness). Agente `P0 Prueba harness estandar` y agent flow de prueba, **borrados
 - **Pendiente detectado:** el reto de transferencia del Módulo 22 pide WhatsApp, y desde el 23-oct-2026 ya no se pueden crear
   conexiones nuevas de WhatsApp por ACS; revisarlo junto con el nombre "GitHub Copilot harness" de ese módulo.
 
+#### 15.19.4 P3 hecha (2026-11-27): labs 148, 149 y 150
+
+- **Datos nuevos** en `asistente-compras` (mismo generador, determinista; los archivos anteriores no cambian):
+  - `lab148/casos-validacion.json`: V1-V8, con los errores calculados por la misma regla que el lab. Solo V1 registra (840 USD, nivel 1); V6 es la caja menor (20 USD) y V8 tiene dos errores.
+  - `lab148/mensajes-herramientas.json`: T1-T7.
+  - `lab148/catalogo-sit-openapi.json`: OpenAPI 2.0 del catálogo de la Ruta Pro Power Automate, servido como JSON estático en `planestudio.vercel.app`, con un parámetro `{pagina}` en la ruta. La variante `-tres-operaciones` es por si la importación no acepta ese parámetro.
+  - `lab149/tarjeta-solicitud.json` (Adaptive Card 1.5 con cinco entradas y `actionSubmitId`) y `escenarios-conversacion.json` (C1-C8).
+  - `lab150/filas-otra-persona.json` (dos filas de `ana.gomez@sit.example.com`: 750 y 2.200 USD), `pruebas-identidad.json` (I1-I6) y `decisiones-identidad.json` (D1-D5).
+  - Cifras en `expected` (`lab148`, `lab149`, `lab150`) y en `copilotstudio-assets.test.ts`.
+- **LAB-148** (N3) "Herramientas":
+  - El agent flow valida cinco reglas y devuelve `Resultado` y `Mensaje`, con una sola **Respond to the agent** e `Importe` y `Nivel` vacíos si rechaza.
+  - **Completion** comparada.
+  - Conector Office 365 Outlook con destinatario **Custom value** y **Ask the end user before running**.
+  - Herramienta REST API desde OpenAPI (preview).
+  - Siete mensajes de elección de herramienta y el prompt tool en papel por su coste.
+- **LAB-149** (N2) "Experiencia de conversación":
+  - Topic con **Ask with Adaptive Card**, cancelar, resumen con importe y nivel, y confirmación **Boolean**.
+  - La herramienta se llama desde el topic con **Allow agent to decide dynamically when to use the tool** apagado y **Don't respond**.
+  - **Escalate** sin engagement hub, **Fallback**, **On Error** con `Conversation.InTestMode` y **Start Over**.
+  - Cuatro mensajes de error reescritos y ocho escenarios.
+- **LAB-150** (N3) "Identidad":
+  - Autenticación del agente y variables `System.User.*` en el panel (con `/debug`).
+  - `CorreoSolicitante` con **Custom value**, que lleva `If(IsBlank(System.User.Email), System.User.PrincipalName, System.User.Email)`.
+  - Agent flow `ACS - Consultar mis solicitudes` (**List rows** con filtro OData y `replace` de apóstrofos, **Select**), primero con la entrada vulnerable (**Dynamically fill with AI**) y después corregida.
+  - Cinco decisiones de autenticación, credenciales y políticas de datos.
+- **Learn confirmado el 2026-11-27:**
+  - Herramientas: **Add a tool**; **Inputs** con **Dynamically fill with AI** o **Custom value** (variable o Power Fx); **Ask the end user before running** (por defecto **No**); **Completion** con cuatro opciones (**Don't respond** por defecto; **Send specific response** admite variables); **Allow agent to decide dynamically when to use the tool**; autenticación **End user** / **Maker-provided**; hasta 128 herramientas (recomendado 25-30).
+  - Agent flows: solo Text, Boolean y Number (`FlowActionBadRequest`) y 100 s (`FlowActionTimedOut`).
+  - REST API: preview, OpenAPI v2 (la v3 se traduce), None, API key u OAuth 2.0, credenciales de autor y licencia.
+  - Prompts: créditos obligatorios para AI Builder en agentes; gratis en topics desde el panel; siempre de pago dentro de un agent flow.
+  - Adaptive Card hasta la 1.6 (Teams 1.5), **Edit Schema**, reintentos y **Allow switching to another topic**.
+  - **Escalate** sin **Transfer conversation** por defecto (necesita engagement hub); **On Error** con `Conversation.InTestMode`; **Start Over** → **Reset Conversation**.
+  - Autenticación: los cambios surten efecto al publicar; el panel usa la cuenta del autor para `User.DisplayName` y `User.Id`; `/debug set bot.UserDisplayName`; **Require users to sign in** solo con autenticación manual; `User.AccessToken` solo con manual.
+  - Políticas de datos en **Security** > **Data and privacy** > **Data policy**, obligatorias desde 2025, con el conector **Chat without Microsoft Entra ID authentication in Copilot Studio**.
+- **Pruebas simuladas** (3 agentes, personas "Diego", "Sofía" y "Tomás"; simulación, no personas reales), sin bloqueantes y con los hallazgos corregidos:
+  - LAB-148:
+    - Regla alternativa de la cantidad que perdía "1 o más".
+    - `Importe` y `Nivel` devueltos en los rechazos.
+    - `contains` distingue mayúsculas: descripción de `Categoria` con los seis valores.
+    - Aviso de la conexión de Outlook.
+    - **Send specific response** con variables.
+    - Orden real del asistente REST.
+    - Qué responder en T4 y T5, y nulos.
+    - Ejercicio 1 a 100 min.
+  - LAB-149:
+    - La opción de la herramienta solo desde topics (Learn sí lo documenta).
+    - Mensaje duplicado (**Don't respond**).
+    - C3 puede tomarse como interrupción.
+    - **On Error** no cubre los errores de sistema y su mensaje ya no promete que no se registró.
+    - **Boolean** en español sin comprobar.
+    - Importe con separador de miles.
+    - **Start Over** quizá fuera de **System**.
+  - LAB-150:
+    - Apagar `SC - Aprobar solicitud` antes de crear las filas de Ana.
+    - Orden de los pasos al quitar la pregunta del correo.
+    - `/debug` después de **Save**.
+    - **Details** > **Authentication** de la herramienta del flujo.
+    - I5 e I6 sin correo en el mensaje.
+    - Clave `text` frente a **Dynamic content**.
+    - `Select_1`.
+- **Sin verificar en el tenant:**
+  - Los tres labs por la interfaz.
+  - Cómo llega un entero al agent flow (`4` o `4.0`) y si `mod` acepta decimales.
+  - Si la REST API tool acepta el parámetro dentro del nombre del archivo y si crea un conector personalizado.
+  - La prueba manual del desencadenador del agent flow.
+  - Cómo se ve la conexión **End user** en el panel.
+  - El nombre del nodo para llamar una herramienta desde un topic (**Add a tool** o **Call an action**).
+  - **Boolean** con "Sí".
+  - Si un flujo apagado dispara **On Error**.
+  - Qué valen `User.Email` y `User.PrincipalName` en el panel.
+  - Si **Filter rows** necesita codificar la `@`.
+  - Con qué conexión corre un agent flow (Learn no lo dice; se deduce que la del autor).
+  - Etiquetas en español.
+
 ## 16. Rediseño "El camino jugable" (2026-11-27)
 
 Propuesta de diseño inspirada en Brilliant (un paso por pantalla, feedback que deja corregir), Boot.dev (XP solo

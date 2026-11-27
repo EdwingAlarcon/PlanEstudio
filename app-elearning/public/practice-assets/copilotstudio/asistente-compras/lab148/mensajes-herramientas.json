@@ -1,0 +1,50 @@
+{
+  "version": "1.0.0",
+  "descripcion": "Mensajes para comprobar qué herramienta elige el agente en el Lab 148.",
+  "mensajes": [
+    {
+      "id": "T1",
+      "mensaje": "¿Cuánto cuesta un monitor de 27 pulgadas en el catálogo?",
+      "herramientaEsperada": "Catálogo SIT (REST)",
+      "respuesta": "320 USD (CAT-002)"
+    },
+    {
+      "id": "T2",
+      "mensaje": "¿Cuál es el producto más barato de Papelería en el catálogo?",
+      "herramientaEsperada": "Catálogo SIT (REST), varias páginas",
+      "respuesta": "Caja de grapas, 2 USD (CAT-039)",
+      "nota": "Papelería está entre las páginas 2 y 3: el agente tiene que pedir más de una página."
+    },
+    {
+      "id": "T3",
+      "mensaje": "¿Puedo pedir la consultoría de procesos del catálogo?",
+      "herramientaEsperada": "Catálogo SIT (REST)",
+      "respuesta": "No: CAT-018 está inactivo (Activo = false)"
+    },
+    {
+      "id": "T4",
+      "mensaje": "Registra 2 diademas con micrófono para Comercial, categoría Tecnología, al precio del catálogo",
+      "herramientaEsperada": "Catálogo SIT (REST) y después Registrar solicitud de compra",
+      "respuesta": "Importe 170 USD, nivel 1",
+      "multiIntencion": true
+    },
+    {
+      "id": "T5",
+      "mensaje": "Registra una compra de 3 resmas de papel a 6 USD para Operaciones",
+      "herramientaEsperada": "Registrar solicitud de compra",
+      "respuesta": "Rechazada: 18 USD se paga con la caja menor"
+    },
+    {
+      "id": "T6",
+      "mensaje": "Avisa a Compras de que la solicitud de las diademas es urgente",
+      "herramientaEsperada": "Avisar a Compras (Outlook), con confirmación previa",
+      "respuesta": "Pide confirmación antes de enviar el correo"
+    },
+    {
+      "id": "T7",
+      "mensaje": "¿Quién aprueba una compra de 12.500 USD?",
+      "herramientaEsperada": "ninguna herramienta (topic o conocimiento)",
+      "respuesta": "Nivel 3: jefe de área, Finanzas y Gerencia general"
+    }
+  ]
+}

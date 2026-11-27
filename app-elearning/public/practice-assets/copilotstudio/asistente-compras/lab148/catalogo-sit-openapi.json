@@ -1,0 +1,105 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Catálogo SIT",
+    "description": "Catálogo de productos de compra de SIT (datos ficticios del curso PlanEstudio). Solo lectura. 41 productos en 3 páginas de 20.",
+    "version": "1.0"
+  },
+  "host": "planestudio.vercel.app",
+  "basePath": "/practice-assets/powerautomate/sit-compras",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/catalogo/pagina-{pagina}.json": {
+      "get": {
+        "operationId": "ObtenerPaginaCatalogo",
+        "summary": "Obtener una página del catálogo",
+        "description": "Devuelve una página del catálogo de productos con su precio en USD, su categoría y si está activo. Hay 3 páginas: para buscar un producto puede hacer falta leer varias.",
+        "parameters": [
+          {
+            "name": "pagina",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "enum": [
+              1,
+              2,
+              3
+            ],
+            "description": "Número de página, de 1 a 3"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Una página del catálogo",
+            "schema": {
+              "$ref": "#/definitions/PaginaCatalogo"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Producto": {
+      "type": "object",
+      "properties": {
+        "CatalogoID": {
+          "type": "string",
+          "description": "Código del producto, por ejemplo CAT-002"
+        },
+        "Nombre": {
+          "type": "string",
+          "description": "Nombre del producto"
+        },
+        "Categoria": {
+          "type": "string",
+          "description": "Categoría de compra"
+        },
+        "PrecioUSD": {
+          "type": "number",
+          "description": "Precio de una unidad en USD"
+        },
+        "Unidad": {
+          "type": "string",
+          "description": "Unidad de venta"
+        },
+        "ProveedorID": {
+          "type": "string",
+          "description": "Código del proveedor (PRV-000)"
+        },
+        "Activo": {
+          "type": "boolean",
+          "description": "false si el producto ya no se puede pedir"
+        },
+        "ActualizadoEl": {
+          "type": "string",
+          "description": "Fecha de la última actualización del precio"
+        }
+      }
+    },
+    "PaginaCatalogo": {
+      "type": "object",
+      "properties": {
+        "@odata.count": {
+          "type": "integer",
+          "description": "Total de productos del catálogo"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Producto"
+          }
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "Dirección de la página siguiente; no existe en la última"
+        }
+      }
+    }
+  }
+}

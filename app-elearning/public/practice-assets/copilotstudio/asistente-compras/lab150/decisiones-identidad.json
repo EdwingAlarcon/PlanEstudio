@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "descripcion": "Situaciones para decidir autenticación, credenciales y políticas de datos (Lab 150). 'decision' y 'razon' son la respuesta esperada según Learn (2026-11).",
+  "situaciones": [
+    {
+      "id": "D1",
+      "situacion": "El agente se publicará para los empleados en Teams.",
+      "decision": "Authenticate with Microsoft",
+      "razon": "Learn la configura sin pasos manuales para Teams, SharePoint, Power Apps y Microsoft 365 Copilot; existen User.Email y User.Id."
+    },
+    {
+      "id": "D2",
+      "situacion": "El agente irá en el sitio web público de SIT para proveedores que no tienen cuenta de SIT.",
+      "decision": "No authentication, sin herramientas que lean datos privados",
+      "razon": "Learn: sin autenticación solo accede a información pública y cualquiera con el enlace puede chatear; no hay variables de usuario."
+    },
+    {
+      "id": "D3",
+      "situacion": "Los proveedores entran con el proveedor de identidad propio del portal de proveedores (OAuth 2).",
+      "decision": "Authenticate manually (Generic OAuth 2)",
+      "razon": "Es la opción para identidades que no son de Microsoft Entra ID; da User.AccessToken."
+    },
+    {
+      "id": "D4",
+      "situacion": "TI exige que ningún agente del tenant hable con usuarios sin autenticar.",
+      "decision": "Política de datos (DLP) que bloquea el conector Chat without Microsoft Entra ID authentication in Copilot Studio",
+      "razon": "Learn: con ese conector bloqueado, la opción No authentication desaparece."
+    },
+    {
+      "id": "D5",
+      "situacion": "La herramienta de consulta debe respetar la seguridad de Dataverse de cada empleado (cada uno ve solo lo que su rol le deja ver).",
+      "decision": "Herramienta de conector con credenciales del usuario (End user)",
+      "razon": "Learn: con credenciales del usuario, cada uno solo obtiene los datos que puede ver; con Maker-provided, la herramienta usa las del autor."
+    }
+  ]
+}
