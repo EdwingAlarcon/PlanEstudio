@@ -69,16 +69,16 @@ export function calculateXp(input: XpInput): XpBreakdown {
 }
 
 // Rangos: los roles para los que prepara el curso, cada uno con tres grados.
-// Escala calibrada para el sistema completo (labs con evidencia a 100 XP, F3), con el contenido de 2026-11-27
-// (prácticas + quizzes + labs obligatorios, sin repaso): Nivel 1 ≈ 1.460 XP (Maker II-III), +Nivel 2 ≈ 2.790
-// (Consultor funcional I), +Nivel 3 ≈ 5.620 (Desarrollador I) y +Nivel 4 ≈ 9.030 (Arquitecto I). Mientras los labs
-// valgan 25 (autodeclarados) se sube más despacio; no se recalibra para no mover los rangos dos veces.
+// Cada rol corresponde a un nivel: terminar el Nivel 1 deja en Maker III, el 2 en Consultor funcional III, el 3 en
+// Desarrollador III y el 4 en Arquitecto (con las reglas de XP vigentes y sin contar el repaso). Calibrado el
+// 2026-11-27 con labs a 25 XP: ≈ 1.085 / 2.265 / 4.045 / 5.805 XP acumulados. Si cambian las reglas (p. ej. labs a 100
+// con evidencia en la F3) o el contenido, "rank calibration" en xp.test.ts falla hasta recalibrar estos umbrales.
 export const RANKS = [
-  { name: "Aprendiz", thresholds: [0, 150, 300] },
-  { name: "Maker", thresholds: [500, 1000, 1500] },
-  { name: "Consultor funcional", thresholds: [2000, 3000, 4000] },
-  { name: "Desarrollador", thresholds: [5000, 6300, 7600] },
-  { name: "Arquitecto", thresholds: [9000, 11500, 14000] },
+  { name: "Aprendiz", thresholds: [0, 100, 200] },
+  { name: "Maker", thresholds: [350, 650, 900] },
+  { name: "Consultor funcional", thresholds: [1200, 1600, 2000] },
+  { name: "Desarrollador", thresholds: [2400, 3000, 3600] },
+  { name: "Arquitecto", thresholds: [4300, 5000, 5600] },
 ] as const;
 
 const TIERS = ["I", "II", "III"] as const;

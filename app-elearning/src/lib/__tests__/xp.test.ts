@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { createInteractivePracticeRecord, type InteractivePracticeRecord } from "../interactive-practice-progress";
 import type { ReviewCardMap } from "../review-queue";
+import { getAllLevels, getLabsForLevel } from "../content";
+import { CERTIFICATION_LEVEL_ORDER } from "../i18n";
+import { getAllInteractivePractices } from "../interactive-practices";
 import { calculateXp, formatXp, getRank, isPracticeEarned, isQuizEarned, RANKS, XP_RULES } from "../xp";
 
 function practice(id: string, patch: Partial<InteractivePracticeRecord>): InteractivePracticeRecord {
@@ -55,12 +58,12 @@ describe("getRank", () => {
   it("empieza en Aprendiz I", () => {
     const rank = getRank(0);
     expect(rank.label).toBe("Aprendiz I");
-    expect(rank.next).toBe(150);
+    expect(rank.next).toBe(100);
     expect(rank.percentage).toBe(0);
   });
 
   it("calcula el grado y el avance dentro de él", () => {
-    const rank = getRank(2500);
+    const rank = getRank(1400);
     expect(rank.label).toBe("Consultor funcional I");
     expect(rank.nextLabel).toBe("Consultor funcional II");
     expect(rank.percentage).toBe(50);
@@ -87,5 +90,31 @@ describe("formatXp", () => {
     expect(formatXp(0)).toBe("0");
     expect(formatXp(1840)).toBe("1.840");
     expect(formatXp(1234567)).toBe("1.234.567");
+  });
+});
+
+// Calibración con el contenido real: terminar cada nivel de certificación (todas sus prácticas sin solución, sus
+// quizzes aprobados y sus labs obligatorios, sin repaso) debe dejar al alumno en el rol de ese nivel.
+describe("rank calibration", () => {
+  const expected = ["Maker", "Consultor funcional", "Desarrollador", "Arquitecto"];
+  const levels = getAllLevels();
+  const practices = getAllInteractivePractices();
+
+  it("cada nivel completo lleva al rol que prepara", () => {
+    const quizScores: Record<string, number> = {};
+    const completedLabs: string[] = [];
+    const practiceRecords: Record<string, InteractivePracticeRecord> = {};
+
+    CERTIFICATION_LEVEL_ORDER.forEach((levelId, index) => {
+      const level = levels.find((l) => l.id === levelId)!;
+      const moduleIds = new Set(level.modules.map((m) => m.moduleId));
+      for (const id of moduleIds) quizScores[String(id)] = 100;
+      for (const lab of getLabsForLevel(levelId)) completedLabs.push(lab.slug);
+      for (const p of practices) {
+        if (moduleIds.has(p.relatedModuleIds[0] ?? -1)) practiceRecords[p.id] = practice(p.id, { status: "completed" });
+      }
+      const xp = calculateXp({ quizScores, completedLabs, practiceRecords, reviewCards: {} });
+      expect(getRank(xp.total).name, `${levelId}: ${xp.total} XP`).toBe(expected[index]);
+    });
   });
 });

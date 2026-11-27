@@ -1406,8 +1406,11 @@ misión con panel de evidencia y enlace a Learn; **F4** meta semanal, racha por 
 fusionarlos (práctica interactiva completada sin ver la solución 20, quiz del módulo ≥ 80 % 50, lab marcado como
 completado **25** —es autodeclarado: la app no ve el tenant; con la evidencia de la F3 pasará a 100—, respuesta correcta
 del repaso 5; marcar un módulo como leído 0). Rangos Aprendiz → Maker → Consultor funcional →
-Desarrollador → Arquitecto, con grados I-III, calibrados para el sistema completo (labs a 100) con el contenido de esa fecha (Nivel 1 completo ≈ 1.460 XP;
-los cuatro niveles ≈ 9.030, Arquitecto I). El inicio sustituye la lista "Tu recorrido" por `LearningPathMap`
+Desarrollador → Arquitecto, con grados I-III: cada rol es un nivel, y terminar un nivel deja en el grado III de su rol
+(con las reglas vigentes: ≈ 1.085 / 2.265 / 4.045 / 5.805 XP acumulados, sin repaso). Primero se calibró con labs a 100
+y, al bajarlos a 25, Arquitecto quedó fuera de alcance; se recalibró y el test "rank calibration" de `xp.test.ts`
+calcula la XP de cada nivel completo con el contenido real, así que cualquier cambio de reglas (la F3) obliga a
+recalibrar. El inicio sustituye la lista "Tu recorrido" por `LearningPathMap`
 (pestañas por mundo, nodos de módulo con XP ganada/posible, labs agrupados y trofeo); cada práctica cuenta en su
 primer módulo relacionado. La barra lateral muestra el rango (`RankBadge`) y `/progreso#xp` el desglose
 (`XpRankCard`). Los nodos posteriores al actual se atenúan pero no se bloquean. Pendiente fuera de F1: XP del reto de
