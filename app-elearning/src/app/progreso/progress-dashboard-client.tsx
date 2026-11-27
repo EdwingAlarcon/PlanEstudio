@@ -13,6 +13,8 @@ import { cn } from "@/lib/utils";
 import { PracticeDomainProgress, PracticeProgressSummary, type PracticeSummaryItem } from "@/components/practices/practice-progress-summary";
 import { FullBackupPanel } from "@/components/progress/full-backup-panel";
 import { XpRankCard } from "@/components/progress/xp-rank-card";
+import { ActivityGrid, WeeklyGoalCard } from "@/components/guided/habit-cards";
+import { TrophyShelf } from "@/components/progress/trophy-shelf";
 import { PracticePortabilityPanel } from "@/components/practices/practice-portability-panel";
 import { GuidedDashboardSummary } from "@/components/guided/guided-dashboard-summary";
 import { InteractivePracticeSummary } from "@/components/interactive-practices/interactive-practice-summary";
@@ -73,6 +75,15 @@ export function ProgressDashboardClient({ levels, practices, interactivePractice
       <GuidedDashboardSummary />
 
       <XpRankCard />
+
+      <section aria-labelledby="constancia-heading" className="grid gap-4 md:grid-cols-[minmax(0,1fr)_280px]">
+        <div className="min-w-0 space-y-4 rounded-xl border border-border bg-card p-5">
+          <h2 id="constancia-heading" className="text-lg font-semibold text-foreground">Tu constancia</h2>
+          <ActivityGrid />
+          <TrophyShelf levels={levels} />
+        </div>
+        <WeeklyGoalCard />
+      </section>
 
       <section className="space-y-4" aria-labelledby="academic-progress-heading">
         <div>

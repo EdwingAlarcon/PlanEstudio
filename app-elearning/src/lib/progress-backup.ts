@@ -12,6 +12,7 @@ import { WORKSTATION_STORAGE_KEY } from "./workstation-store";
 
 export const BACKUP_FORMAT = "planestudio-full-backup";
 export const BACKUP_SCHEMA_VERSION = 1;
+import { HABIT_STORAGE_KEY } from "./habit-store";
 export const BACKUP_IMPORT_MAX_BYTES = 3_000_000;
 
 export const PROGRESS_STORAGE_KEY = "plan-estudio-progress";
@@ -24,6 +25,7 @@ export const BACKUP_STORE_LABELS: Record<string, string> = {
   [INTERACTIVE_PRACTICE_STORAGE_KEY]: "Prácticas interactivas",
   [REVIEW_STORAGE_KEY]: "Repaso espaciado",
   [WORKSTATION_STORAGE_KEY]: "Estación de trabajo",
+  [HABIT_STORAGE_KEY]: "Meta semanal y días con actividad",
 };
 export const BACKUP_STORE_KEYS = Object.keys(BACKUP_STORE_LABELS);
 

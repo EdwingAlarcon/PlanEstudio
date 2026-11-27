@@ -6,6 +6,7 @@ import { AppShell } from "@/components/layout/app-shell";
 import { ServiceWorkerRegister } from "@/components/layout/service-worker-register";
 import { ReadingProgress } from "@/components/layout/reading-progress";
 import { CurriculumProvider } from "@/components/guided/use-next-best-action";
+import { ActivityTracker } from "@/components/guided/activity-tracker";
 import { getAllLevels } from "@/lib/content";
 import type { CurriculumModule } from "@/lib/learning-path";
 
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </a>
 
           <ServiceWorkerRegister />
+          <ActivityTracker />
           <ReadingProgress />
           <CurriculumProvider curriculum={getCurriculumIndex()}>
             <AppShell>{children}</AppShell>

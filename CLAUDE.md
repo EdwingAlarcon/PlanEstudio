@@ -164,8 +164,8 @@ alternativa en Update a row, Parse JSON y el desencadenador HTTP. **Verificado e
 Propuesta inspirada en Brilliant, Boot.dev, GameCode, Duolingo y Microsoft Learn (detalle y fases F1-F5 en
 `PROPUESTA_FASES_APRENDER_HACIENDO.md` §16). **F1 hecha:** XP y rango **calculados** en `src/lib/xp.ts` a partir de los
 stores existentes (no hay store de XP: no añadir uno), camino por mundos en el inicio (`LearningPathMap`), rango en la
-barra lateral y desglose en `/progreso#xp`. Leer no da XP; un lab marcado vale 25 (autodeclarado) hasta que la F3 pida evidencia y pase a 100. Los rangos los vigila el test "rank calibration" (`xp.test.ts`): terminar cada nivel debe llevar a su rol; si cambian las reglas o el contenido, recalibrar `RANKS`. **F2 hecha:** lección por pasos del Módulo 11 en `/nivel/intermedio/modulo/power-automate-avanzado/pasos` (`lesson-steps.ts`, `LessonStepsClient`, noindex; allowlist `STEP_MODE_MODULE_KEYS`), avance en `completedSteps` del store académico (no hay store nuevo). Siguiente: prueba simulada del modo por pasos y ampliarlo (F5); F3 (labs con evidencia) y F4 (meta semanal).
-Validación: `npm run verify` (589 tests) y e2e 108/108 en el puerto 3100.
+barra lateral y desglose en `/progreso#xp`. Leer no da XP; un lab marcado vale 25 (autodeclarado) hasta que la F3 pida evidencia y pase a 100. Los rangos los vigila el test "rank calibration" (`xp.test.ts`): terminar cada nivel debe llevar a su rol; si cambian las reglas o el contenido, recalibrar `RANKS`. **F2 hecha:** lección por pasos del Módulo 11 en `/nivel/intermedio/modulo/power-automate-avanzado/pasos` (`lesson-steps.ts`, `LessonStepsClient`, noindex; allowlist `STEP_MODE_MODULE_KEYS`), avance en `completedSteps` del store académico (no hay store nuevo). **F4 hecha:** meta semanal (2-4 días) con racha por semanas y semanas de descanso, columna "Tu semana" en el inicio y "Tu constancia" (12 semanas y trofeos) en `/progreso`; store nuevo e independiente `planestudio.habit.v1`, ya incluido en el backup (ahora son 7 stores). Siguiente: prueba simulada del modo por pasos, F3 (labs con evidencia) y F5.
+Validación: `npm run verify` (598 tests) y e2e 110/110 en el puerto 3100.
 
 ## Mantenimiento vigente — 2026-11-11
 
@@ -287,7 +287,7 @@ o estación de trabajo. Estado: roadmap de auditoría tenant-real (7 sprints) y 
   No mezclar estos conteos entre sí.
 - Los stores persistidos son independientes y **nunca se fusionan**: `plan-estudio-progress` (académico),
   `plan-estudio-onboarding`, `planestudio.practice-progress.v1`, `planestudio.interactive-practice.v1`,
-  `planestudio.spaced-repetition.v1`, `planestudio.workstation.v1`. El backup completo solo lee/escribe sus payloads crudos.
+  `planestudio.spaced-repetition.v1`, `planestudio.workstation.v1`, `planestudio.habit.v1` (desde 2026-11-27). El backup completo solo lee/escribe sus payloads crudos.
 - `LEVEL_MODULE_RANGE` (`i18n.ts`) es disjunto y contiguo (ia `[42,56]`, d365 `[57,66]`, rpa `[67,76]`); `progress.ts`,
   `quiz-engine.ts` y `questions-parser.ts` asumen que no hay solapes. Añadir un módulo a un nivel que no es el último
   obliga a renumerar (ver `HISTORIAL_CLAUDE.md`).

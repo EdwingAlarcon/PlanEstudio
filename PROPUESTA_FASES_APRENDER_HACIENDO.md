@@ -1516,3 +1516,22 @@ académico `plan-estudio-progress`, no en un store nuevo. Es progreso académico
 Los pasos no dan XP propia: leer no puntúa y la XP de la micropráctica ya la da la práctica (20). Siguiente: prueba
 simulada del modo por pasos y, si funciona, ampliarlo por niveles (F5).
 
+**F4 hecha (2026-11-27).**
+- **Store nuevo e independiente `planestudio.habit.v1`** (`habit-store.ts`): meta semanal de 2, 3 o 4 días (por defecto
+  3), días con actividad (como mucho 400) y semanas de descanso. Entra en el backup completo como séptimo payload.
+- **Funciones puras en `habit.ts`:**
+  - La semana empieza el lunes.
+  - La racha cuenta semanas seguidas que cumplieron la meta. La semana en curso solo suma si ya la cumplió, y una
+    semana de descanso se salta sin romper la racha.
+  - La cuadrícula de actividad muestra 12 semanas.
+- **Qué cuenta como día con actividad:**
+  - Lo que registra `ActivityTracker` (montado en el layout): un cambio de quiz, lab, módulo o paso, o un intento de
+    práctica.
+  - Más lo que ya guardan el repaso (`dayLogs`) y las prácticas (`events`).
+- **Dónde se ve:**
+  - El inicio pasa a dos columnas, con `WeeklyGoalCard` y `TodayCard` ("Hoy, en 15 minutos": siguiente paso, repaso
+    pendiente y el recordatorio de exportar la solución).
+  - `/progreso` añade "Tu constancia": la cuadrícula de 12 semanas, los trofeos por mundo (todos los módulos y labs
+    obligatorios del nivel) y la meta.
+- **Pendiente:** el dominio por área del perfil. Ya existen los resúmenes de prácticas por dominio en `/progreso`.
+

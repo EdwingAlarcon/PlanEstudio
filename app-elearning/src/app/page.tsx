@@ -5,6 +5,7 @@ import { getAllLevels, getLabsForLevel } from "@/lib/content";
 import { UI, CERTIFICATION_LEVEL_ORDER, TRANSVERSAL_LEVEL_ORDER } from "@/lib/i18n";
 import { GuidedHomeClient } from "@/components/guided/guided-home-client";
 import { RetentionTodayCard } from "@/components/review/retention-today-card";
+import { TodayCard, WeeklyGoalCard } from "@/components/guided/habit-cards";
 import { LearningPathMap, type PathWorld } from "@/components/guided/learning-path-map";
 import { getAllInteractivePractices } from "@/lib/interactive-practices";
 
@@ -58,7 +59,8 @@ export default function DashboardPage() {
   const transversal = TRANSVERSAL_LEVEL_ORDER.map((id) => levels.find((level) => level.id === id)!).filter(Boolean);
 
   return (
-    <div className="mx-auto max-w-4xl space-y-10 animate-fade-in">
+    <div className="mx-auto grid max-w-6xl gap-8 animate-fade-in lg:grid-cols-[minmax(0,1fr)_280px]">
+      <div className="min-w-0 space-y-10">
       <GuidedHomeClient />
 
       <RetentionTodayCard />
@@ -80,6 +82,13 @@ export default function DashboardPage() {
           </ul>
         </div>
       </section>
+      </div>
+
+      {/* Columna del hábito (F4): meta semanal con racha por semanas y lo de hoy. En móvil va al final. */}
+      <aside aria-label="Tu semana" className="space-y-4 lg:sticky lg:top-6 lg:self-start">
+        <WeeklyGoalCard />
+        <TodayCard />
+      </aside>
     </div>
   );
 }
