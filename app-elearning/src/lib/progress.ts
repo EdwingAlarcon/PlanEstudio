@@ -17,6 +17,7 @@ export interface ProgressState {
   lastVisited: string | null;          // last module id visited
   userName: string | null;             // user name for certificate
   moduleNotes: Record<string, string>; // module id ("basico-1") → personal note
+  completedSteps: string[];            // pasos de la lección por pasos: "intermedio-11#m1-concepto" (lesson-steps.ts)
 }
 
 export interface ProgressActions {
@@ -29,6 +30,7 @@ export interface ProgressActions {
   setLastVisited: (moduleId: string) => void;
   setUserName: (name: string) => void;
   setModuleNote: (moduleId: string, note: string) => void;
+  markStepComplete: (stepId: string) => void;
   getLevelProgress: (levelId: LevelId) => { completed: number; total: number; percentage: number };
   getOverallProgress: () => { completed: number; total: number; percentage: number };
   // Labs
@@ -50,6 +52,7 @@ const INITIAL_STATE: ProgressState = {
   lastVisited: null,
   userName: null,
   moduleNotes: {},
+  completedSteps: [],
 };
 
 // ─── Persisted-state sanitization ─────────────────────────────────────────────
@@ -94,6 +97,10 @@ function sanitizeProgressState(persisted: unknown): ProgressState {
         )
       : INITIAL_STATE.moduleNotes;
 
+  const completedSteps = Array.isArray(raw.completedSteps)
+    ? raw.completedSteps.filter((id): id is string => typeof id === "string")
+    : INITIAL_STATE.completedSteps;
+
   return {
     completedModules,
     quizScores,
@@ -102,6 +109,7 @@ function sanitizeProgressState(persisted: unknown): ProgressState {
     lastVisited,
     userName,
     moduleNotes,
+    completedSteps,
   };
 }
 
@@ -218,6 +226,12 @@ export const useProgressStore = create<ProgressState & ProgressActions>()(
           const { [moduleId]: _removed, ...rest } = state.moduleNotes ?? {};
           void _removed;
           return { moduleNotes: note.trim() ? { ...rest, [moduleId]: note } : rest };
+        }),
+
+      markStepComplete: (stepId) =>
+        set((state) => {
+          const current = state.completedSteps ?? [];
+          return current.includes(stepId) ? {} : { completedSteps: [...current, stepId] };
         }),
 
       getLevelProgress: (levelId) => calculateLevelProgress(levelId, get().completedModules),

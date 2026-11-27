@@ -42,6 +42,7 @@ export const DYNAMIC_SITEMAP_PATTERNS = [
 // el certificado depende del progreso local del alumno y el sandbox RPA es un banco de pruebas para PAD.
 export const NOINDEX_PATTERNS = [
   "/certificado/[nivel]",
+  "/nivel/[level]/modulo/[slug]/pasos",
   "/rpa-sandbox/legacy-app",
   "/rpa-sandbox/portal",
 ] as const;

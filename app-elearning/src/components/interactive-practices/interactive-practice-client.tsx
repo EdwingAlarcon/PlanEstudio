@@ -227,6 +227,16 @@ export function InteractivePracticeClient({ practices, initialSlug }: Interactiv
   );
 }
 
+// Una sola práctica incrustada en otra página (lección por pasos, F2). Recibe solo esa práctica, no el catálogo.
+export function EmbeddedInteractivePractice({ practice }: { practice: InteractivePractice }) {
+  const [progressHydrated, setProgressHydrated] = useState(false);
+  useEffect(() => {
+    setProgressHydrated(useInteractivePracticeProgressStore.persist.hasHydrated());
+    return useInteractivePracticeProgressStore.persist.onFinishHydration(() => setProgressHydrated(true));
+  }, []);
+  return <InteractiveExercise practice={practice} progressHydrated={progressHydrated} />;
+}
+
 function InteractiveExercise({ practice, progressHydrated }: { practice: InteractivePractice; progressHydrated: boolean }) {
   const [answer, setAnswer] = useState<unknown>(initialAnswer(practice));
   const [result, setResult] = useState<InteractiveEvaluationResult | null>(null);

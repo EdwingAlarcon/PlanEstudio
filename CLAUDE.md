@@ -164,8 +164,8 @@ alternativa en Update a row, Parse JSON y el desencadenador HTTP. **Verificado e
 Propuesta inspirada en Brilliant, Boot.dev, GameCode, Duolingo y Microsoft Learn (detalle y fases F1-F5 en
 `PROPUESTA_FASES_APRENDER_HACIENDO.md` §16). **F1 hecha:** XP y rango **calculados** en `src/lib/xp.ts` a partir de los
 stores existentes (no hay store de XP: no añadir uno), camino por mundos en el inicio (`LearningPathMap`), rango en la
-barra lateral y desglose en `/progreso#xp`. Leer no da XP; un lab marcado vale 25 (autodeclarado) hasta que la F3 pida evidencia y pase a 100. Los rangos los vigila el test "rank calibration" (`xp.test.ts`): terminar cada nivel debe llevar a su rol; si cambian las reglas o el contenido, recalibrar `RANKS`. Siguiente: F2 (lección por pasos, piloto Módulo 11).
-Validación: `npm run verify` (579 tests) y e2e 105/105 en el puerto 3100.
+barra lateral y desglose en `/progreso#xp`. Leer no da XP; un lab marcado vale 25 (autodeclarado) hasta que la F3 pida evidencia y pase a 100. Los rangos los vigila el test "rank calibration" (`xp.test.ts`): terminar cada nivel debe llevar a su rol; si cambian las reglas o el contenido, recalibrar `RANKS`. **F2 hecha:** lección por pasos del Módulo 11 en `/nivel/intermedio/modulo/power-automate-avanzado/pasos` (`lesson-steps.ts`, `LessonStepsClient`, noindex; allowlist `STEP_MODE_MODULE_KEYS`), avance en `completedSteps` del store académico (no hay store nuevo). Siguiente: prueba simulada del modo por pasos y ampliarlo (F5); F3 (labs con evidencia) y F4 (meta semanal).
+Validación: `npm run verify` (589 tests) y e2e 108/108 en el puerto 3100.
 
 ## Mantenimiento vigente — 2026-11-11
 

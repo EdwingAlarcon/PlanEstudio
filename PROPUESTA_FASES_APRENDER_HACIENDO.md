@@ -1490,3 +1490,29 @@ primer módulo relacionado. La barra lateral muestra el rango (`RankBadge`) y `/
 (`XpRankCard`). Los nodos posteriores al actual se atenúan pero no se bloquean. Pendiente fuera de F1: XP del reto de
 transferencia y de los pasos de microlección (no hay registro propio todavía; llegan con F2).
 
+**F2 hecha (2026-11-27), piloto en el Módulo 11.** `src/lib/lesson-steps.ts` (`buildLessonSteps`) parte el Markdown
+del módulo, sin tocarlo, en 13 pasos:
+- "Antes de empezar";
+- por cada microlección, concepto, micropráctica (la que enlaza `/practica/…`) y "en tu ambiente" (práctica real o reto
+  de construcción con su evidencia);
+- el reto de transferencia y "Comprueba", que remite al quiz.
+
+Lo que sigue (Caso Real, buenas prácticas, errores y criterios) se queda en la página del módulo.
+
+La ruta `/nivel/[level]/modulo/[slug]/pasos` es `noindex` y solo existe para `STEP_MODE_MODULE_KEYS`
+(`["intermedio-11"]`). La página del módulo enlaza con "Hazlo paso a paso".
+
+La práctica se incrusta con `EmbeddedInteractivePractice`, que recibe solo esa práctica. El botón principal del paso
+de micropráctica aparece cuando la práctica está completada; antes solo hay "Saltar por ahora", que no marca. Los pasos
+"en tu ambiente" tienen "Lo hice en mi ambiente" y "Lo haré después".
+
+El paso actual va en el hash (`#paso-3`). Al entrar abre el primero sin hacer, esperando a que el store se cargue de
+localStorage: sin esa espera abría siempre el primero, y lo detectó el e2e.
+
+**Decisión (delegada por el usuario):** el avance de los pasos se guarda en un campo nuevo, `completedSteps`, del store
+académico `plan-estudio-progress`, no en un store nuevo. Es progreso académico, el backup lo une como `completedModules`
+(`mergeProgressStates`) y no se fusiona ningún store.
+
+Los pasos no dan XP propia: leer no puntúa y la XP de la micropráctica ya la da la práctica (20). Siguiente: prueba
+simulada del modo por pasos y, si funciona, ampliarlo por niveles (F5).
+

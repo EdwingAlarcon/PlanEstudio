@@ -181,6 +181,7 @@ export function mergeProgressStates(
     ...local,
     completedModules: union(local.completedModules, incoming.completedModules),
     completedLabs: union(local.completedLabs, incoming.completedLabs),
+    completedSteps: union(local.completedSteps, incoming.completedSteps),
     quizScores: scores,
     checklistItems: checklist,
     moduleNotes: notes,

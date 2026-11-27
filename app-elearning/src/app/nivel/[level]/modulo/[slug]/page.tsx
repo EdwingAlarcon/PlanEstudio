@@ -18,6 +18,7 @@ import { ArrowLeft, ArrowRight, Clock, BookOpen, BrainCircuit } from "lucide-rea
 import { UI, type LevelId } from "@/lib/i18n";
 import { FOUNDATION_ACTIVITIES } from "@/lib/guided-journey";
 import { getModuleOutline, splitModuleSections } from "@/lib/module-sections";
+import { hasStepMode } from "@/lib/lesson-steps";
 
 function ModuleStep({ n, href, title, detail }: { n: number; href: string; title: string; detail: string }) {
   return (
@@ -141,6 +142,23 @@ export default async function ModulePage({ params }: PageProps) {
         levelId={levelId}
         previousModuleHref={prevModule ? `/nivel/${levelId}/modulo/${prevModule.slug}` : undefined}
       />
+
+      {/* ── Lección por pasos (F2, piloto): otra forma de recorrer lo mismo ── */}
+      {hasStepMode(mod.id) && (
+        <Link
+          href={`/nivel/${levelId}/modulo/${mod.slug}/pasos`}
+          className="flex items-center justify-between gap-4 rounded-xl border border-[#0078D4]/30 bg-[#0078D4]/5 px-5 py-4 transition-colors hover:border-[#0078D4]/60"
+          data-testid="module-step-mode-link"
+        >
+          <span className="min-w-0">
+            <span className="block text-sm font-semibold text-foreground">Hazlo paso a paso</span>
+            <span className="block text-xs text-muted-foreground">
+              Una idea por pantalla, con la micropráctica dentro de cada paso. Tu avance se guarda.
+            </span>
+          </span>
+          <ArrowRight className="h-4 w-4 shrink-0 text-[#0078D4] dark:text-[#4DB8FF]" aria-hidden />
+        </Link>
+      )}
 
       {/* ── Ruta del módulo: tres pasos y su índice ─────────────────────── */}
       <nav aria-label="Pasos del módulo" className="rounded-xl border border-border bg-card px-5 py-4 shadow-fluent-1">
