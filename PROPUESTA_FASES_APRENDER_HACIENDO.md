@@ -1299,3 +1299,40 @@ harness). Agente `P0 Prueba harness estandar` y agent flow de prueba, **borrados
 - **Consecuencia para la ruta:** se mantiene el diseño. Requisito del alumno: una **prueba de Copilot Studio** (licencia de
   usuario), no créditos; si la prueba de su cuenta ya venció, la amplía desde la experiencia clásica. Sin verificar: si la
   pestaña **Evaluación** consume créditos.
+
+#### 15.19.2 P1 hecha (2026-11-27): datos, LAB-144 y ruta `copilot-studio-pro`
+
+- **Datos** `app-elearning/public/practice-assets/copilotstudio/asistente-compras/` (`npm run generate:copilotstudio-assets`,
+  determinista; mismo hash en dos corridas): `manual-compras.md/.docx` y `faq-proveedores.md/.docx` (nuevo
+  `scripts/lib/docx.mjs`, sin dependencias; Word los abre por COM), `preguntas-prueba.json` (14 preguntas en seis
+  categorías: en alcance, límite, ambigua, fuera de alcance, datos de otra persona, instrucción maliciosa) y
+  `expected/respuestas-esperadas.json`. Las cifras del manual salen de `sit-compras/politica-aprobacion.json` y la
+  tolerancia del 2 % de `reglas-conciliacion.json`, para que las dos rutas digan lo mismo. Test `copilotstudio-assets.test.ts`.
+  El formato de importación de conjuntos de prueba sigue **sin verificar**: se deja para la P4 (LAB-152).
+- **LAB-144** "Copilot Studio en un día" (opcional, N2): agente de harness estándar con orquestación generativa,
+  instrucciones, el manual como conocimiento con **Allow ungrounded responses** apagado, topic `Calcular nivel de
+  aprobación` (**The agent chooses**, pregunta **Number**, `If`/`Switch` de Power Fx), agent flow
+  `ACS - Registrar solicitud de compra` sobre la tabla del Lab 128 (o una igual) y prueba de las 14 preguntas con
+  **Save snapshot**. Se diferencia del Módulo 15 (clásica, mesa de ayuda TI) por la orquestación generativa, el flujo que
+  escribe y el caso SIT.
+- **Learn confirmado el 2026-11-27:** archivos de conocimiento .docx y .md, 512 MB y 500 por agente, en Dataverse y con
+  Dataverse search; **When an agent calls the flow** / **Respond to the agent**, 100 s, **Asynchronous response** en Off,
+  publicado para añadirlo; agent flows creados en **Workflows** > **More create options** > **Build with standard
+  orchestration** y facturados con la capacidad de Copilot Studio; **Other ways to build** crea en el harness estándar;
+  **The agent chooses**; **Allow ungrounded responses** (apagado: salta el Fallback y puede retener respuestas sin cita);
+  **Save snapshot** (`botContent.zip` con `dialog.json` y `botContent.yml`); la prueba no publica, se amplía 30 días y el
+  agente funciona hasta 90 días después; idioma y solución en el engranaje > **Agent settings** > **Advanced settings**;
+  **Add existing** > **Agent** > **Agent** y **Add required objects**; AB-620 pasa al Copilot harness el 18-dic-2026.
+- **Prueba simulada** (persona "Carolina", 1 agente; simulación, no una persona real): sin bloqueantes. Corregidos:
+  idioma del agente con ruta de respaldo, aviso de separador decimal (comprobar el importe que repite el topic), recuadro
+  "estándar es el harness, no un modo de orquestación", P03 sin contexto previo, Fallback como respuesta correcta y cita
+  obligatoria en las instrucciones, aviso de que el topic captura P01-P04 en el Ejercicio 6, salidas de texto con
+  `string()`, prerrequisito de Power Automate matizado, mecánica de **Insert** en Power Fx, P06 coherente con el manual,
+  caso 4.200 en el topic y tiempos (5 a 6 h).
+- **Sin verificar en el tenant:** todo el LAB-144 por la interfaz (P0 solo probó tema, sitio público y un agent flow
+  sencillo); cómo lee la entidad **Number** los decimales según el idioma; tipos de entrada del agent flow y
+  `triggerBody()?['number']`; si el conector de Dataverse en un agent flow exige la prueba de Power Automate; las
+  etiquetas en español "Agente (Estándar)" y la ampliación de la prueba (solo constan por la P0).
+- **Pendiente detectado:** el Módulo 15 (Microlección 1, paso 2) crea el agente con **Agents** > **Create blank agent**; en la
+  experiencia nueva, la opción principal puede crear un agente del Copilot harness, que cobra créditos desde que se
+  construye. Revisar el módulo para que remita a **Other ways to build** (harness estándar).

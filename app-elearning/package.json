@@ -23,6 +23,7 @@
     "generate:rpa-assets": "node scripts/generate-rpa-assets.mjs",
     "generate:powerbi-assets": "node scripts/generate-powerbi-assets.mjs",
     "generate:powerautomate-assets": "node scripts/generate-powerautomate-assets.mjs",
+    "generate:copilotstudio-assets": "node scripts/generate-copilotstudio-assets.mjs",
     "validate:assets": "node scripts/validate-rpa-assets.mjs",
     "validate:interactive-practices": "tsx scripts/validate-interactive-practices.ts",
     "validate:spaced-repetition": "tsx scripts/validate-spaced-repetition.ts",

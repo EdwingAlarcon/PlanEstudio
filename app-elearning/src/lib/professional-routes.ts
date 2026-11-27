@@ -12,6 +12,7 @@ export type ProfessionalRouteSlug =
   | "fundamentos-power-platform"
   | "power-bi-pro"
   | "power-automate-pro"
+  | "copilot-studio-pro"
   | "dynamics-365-sales"
   | "dynamics-365-customer-service"
   | "dynamics-365-customer-insights-data"
@@ -476,6 +477,28 @@ const PROFESSIONAL_ROUTES: ProfessionalRoute[] = [
       "Monitor diario de fallos sobre la tabla de ejecuciones, modelo de propietarios y hoja de límites (LAB-137)",
       "Tabla antes y después de cuatro mejoras de rendimiento medidas, con las cifras del cierre intactas (LAB-138)",
       "Solución del alta de proveedores con reglas, aprobación, idempotencia, paquetes exportados y monitor, puntuada con la rúbrica (LAB-139)",
+    ],
+  },
+  {
+    slug: "copilot-studio-pro",
+    title: "Ruta Pro Copilot Studio",
+    role: "Agent builder que diseña, prueba y opera agentes de Copilot Studio",
+    summary: "Escalera de labs prácticos sobre un caso real (el Asistente de compras SIT): instrucciones, conocimiento, topics, orquestación generativa, herramientas, experiencia de conversación, identidad, multiagente, evaluación, ALM y operación. Se construye con la orquestación estándar, que se prueba sin créditos.",
+    outcome: "Construir agentes que responden con fuentes, actúan sobre Dataverse con herramientas, no filtran datos ajenos y se pueden probar, desplegar y operar.",
+    level: "Especialización",
+    accent: "#0E7A5F",
+    modules: [15, 22, 53],
+    labs: ["lab-144-copilot-studio-en-un-dia"],
+    competencies: ["Agentes de Copilot Studio", "Conocimiento y respuestas con fuentes", "Topics y Power Fx", "Orquestación generativa", "Agent flows y herramientas", "Evaluación de agentes"],
+    status: "Especialización en construcción",
+    // Provisional: el capstone será el LAB-155 (reto Pro sin pasos) cuando exista.
+    capstoneLabSlug: "lab-144-copilot-studio-en-un-dia",
+    gapNote: "Disponible el lab 144 (Copilot Studio en un día). Los labs 145 a 155 se publican por fases. La ruta usa la orquestación estándar: basta una prueba de Copilot Studio (licencia de usuario), porque el panel de prueba no consume créditos; lo propio del Microsoft Copilot harness, que cobra créditos desde que se construye, va con variante en papel. Es competencia profesional alineada con el examen AB-620, no una preparación del examen.",
+    portfolioEvidence: [
+      "Agente Asistente de compras SIT de orquestación estándar, con el manual como conocimiento y sin respuestas sin fuentes (LAB-144)",
+      "Topic que calcula el nivel de aprobación con los límites de 1.000 y 10.000 comprobados (LAB-144)",
+      "Agent flow publicado como herramienta y tres solicitudes registradas en Dataverse desde el agente (LAB-144)",
+      "Tabla de las 14 preguntas de prueba con su resultado y la instantánea botContent.zip (LAB-144)",
     ],
   },
   {

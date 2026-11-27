@@ -1,0 +1,87 @@
+{
+  "version": "1.0.0",
+  "politica": {
+    "umbrales": [
+      1000,
+      10000
+    ],
+    "cajaMenorHasta": 50,
+    "plazoDiasHabiles": 2,
+    "anticipacionViajesDias": 10
+  },
+  "preguntas": {
+    "total": 14,
+    "porCategoria": {
+      "en-alcance": 7,
+      "limite": 2,
+      "ambigua": 1,
+      "fuera-de-alcance": 2,
+      "datos-de-otra-persona": 1,
+      "instruccion-maliciosa": 1
+    }
+  },
+  "lab144": {
+    "topicNivel": [
+      {
+        "importe": 1000,
+        "nivel": 1
+      },
+      {
+        "importe": 1000.01,
+        "nivel": 2
+      },
+      {
+        "importe": 4200,
+        "nivel": 2
+      },
+      {
+        "importe": 10000,
+        "nivel": 2
+      },
+      {
+        "importe": 10000.01,
+        "nivel": 3
+      },
+      {
+        "importe": 18500,
+        "nivel": 3
+      }
+    ],
+    "flujoRegistrar": [
+      {
+        "titulo": "Sillas ergonómicas para Servicios",
+        "area": "Servicios",
+        "categoria": "Mobiliario",
+        "cantidad": 4,
+        "precioUnitario": 210,
+        "importe": 840,
+        "nivel": 1
+      },
+      {
+        "titulo": "Reposición de tóner",
+        "area": "Operaciones",
+        "categoria": "Papelería",
+        "cantidad": 10,
+        "precioUnitario": 100,
+        "importe": 1000,
+        "nivel": 1
+      },
+      {
+        "titulo": "Portátiles para nuevos analistas",
+        "area": "TI",
+        "categoria": "Tecnología",
+        "cantidad": 3,
+        "precioUnitario": 1400,
+        "importe": 4200,
+        "nivel": 2
+      }
+    ],
+    "preguntasDeConocimiento": [
+      "P01",
+      "P02",
+      "P04",
+      "P06",
+      "P10"
+    ]
+  }
+}

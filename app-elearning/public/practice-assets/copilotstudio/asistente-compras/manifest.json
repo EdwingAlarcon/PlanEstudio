@@ -1,0 +1,16 @@
+{
+  "format": "planestudio-copilotstudio-practice-assets",
+  "assetPackId": "asistente-compras",
+  "version": "1.0.0",
+  "company": "Servicios Integrados Tecnológicos S.A.",
+  "files": [
+    "README.md",
+    "expected/respuestas-esperadas.json",
+    "faq-proveedores.docx",
+    "faq-proveedores.md",
+    "manual-compras.docx",
+    "manual-compras.md",
+    "preguntas-prueba.json"
+  ],
+  "bundle": "asistente-compras.zip"
+}
