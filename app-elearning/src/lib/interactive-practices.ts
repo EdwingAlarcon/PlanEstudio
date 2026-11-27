@@ -849,7 +849,7 @@ export const INTERACTIVE_PRACTICES: InteractivePractice[] = [
     correctOptionIds: ["conservar-tabla", "agregar-pages", "permisos-tabla"],
     hints: [
       { id: "h1", content: "Pregúntate qué cambió realmente: ¿la forma de guardar las citas o quién necesita entrar a verlas?" },
-      { id: "h2", content: "Las personas fuera de la organización no usan las apps internas; para ellas existe una pieza distinta, descrita al final del contexto de este caso (si hiciste el Suplemento 1B del Módulo 1, ahí se amplía)." },
+      { id: "h2", content: "Las personas fuera de la organización no usan las apps internas; para ellas existe una pieza distinta, descrita al final del contexto de este caso (el recurso «AI Builder y Power Pages» la amplía)." },
       { id: "h3", content: "Se conserva la tabla, se agrega Power Pages para los externos y se definen permisos de tabla para que cada dueño vea solo lo suyo." },
     ],
     relatedModuleIds: [1],

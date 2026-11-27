@@ -18,6 +18,7 @@ export const RESOURCE_GROUPS: ResourceGroup[] = [
     slugs: [
       "ruta-cero-absoluta",
       "entornos-y-trials",
+      "ai-builder-y-power-pages",
       "interfaz-espanol-ingles",
       "guia-herramientas-workstation",
       "tipos-de-practica",

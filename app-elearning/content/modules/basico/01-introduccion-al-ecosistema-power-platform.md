@@ -41,13 +41,15 @@ Cada bloque tiene una idea corta, una práctica y un dato de tu ambiente para gu
 
 **Práctica real en tu entorno (20-60 min; el tiempo depende de Microsoft, no de ti):**
 
-> **⚠️ Tu ambiente del curso es temporal.** Un ambiente **Trial con Dataverse** dura **30 días** y admite **una sola extensión de 30 días**, que solo puedes pedir en la última semana ([Trial environments](https://learn.microsoft.com/power-platform/admin/trial-environments)). Desde el 15 de noviembre de 2026 el Power Apps Developer Plan ya no crea un ambiente gratuito. Por eso, **exporta tu solución al terminar cada módulo** ([cómo hacerlo](/recursos/entornos-y-trials)).
+> **⚠️ Tu ambiente del curso es temporal.** Un ambiente **Trial con Dataverse** dura **30 días** y admite **una sola extensión de 30 días**, que solo puedes pedir en la última semana ([Trial environments](https://learn.microsoft.com/power-platform/admin/trial-environments)). Desde el 15 de noviembre de 2026 el Power Apps Developer Plan ya no crea un ambiente gratuito. Un Trial no se puede restablecer ni copiar. Tu copia de seguridad será tu **solución** exportada (el paquete donde guardas lo que construyes): la creas en el Módulo 2 y desde ahí la exportas al terminar cada módulo ([cómo hacerlo](/recursos/entornos-y-trials)). En este módulo todavía no hay nada que exportar.
 
 **Paso 1 — Una cuenta de trabajo o estudio.** No sirve un correo personal (Gmail, Outlook.com, Hotmail). Si no tienes una, o tu organización te bloquea algo, ve a [Entornos y trials](/recursos/entornos-y-trials): allí están las otras vías y el mensaje para pedir un ambiente a TI.
 
 **Paso 2 — Activa la licencia Power Apps trial.**
 1. Abre https://apps.powerapps.com/trial e inicia sesión con esa cuenta.
-2. Sigue el asistente hasta la confirmación. La licencia dura 30 días y se puede extender dos veces.
+2. Sigue el asistente hasta la confirmación.
+
+Son dos cosas distintas: la **licencia** de prueba (tu permiso de uso: 30 días, extensible dos veces) y el **ambiente** Trial del Paso 3 (el espacio donde trabajas: 30 días, extensible una vez).
 
 **Paso 3 — Crea el ambiente.**
 1. Abre el Admin Center: https://admin.powerplatform.microsoft.com.
@@ -93,15 +95,26 @@ Hazlo cuando termines el Paso 4.
 
 **¿Por qué existe esto?** El error más caro del principiante es construir con la pieza equivocada.
 
-**Ejemplo pequeño:** aprobar una solicitud es trabajo de Power Automate; ver cuántas se aprobaron por mes, de Power BI; capturarla desde el celular, de Power Apps. Los datos de las tres viven en Dataverse.
+| Pieza | Úsala cuando necesitas… | Ejemplo |
+|---|---|---|
+| **Power Apps: Canvas App** | Diseñar pantalla por pantalla una app a la medida de una tarea, a menudo en el celular | Un inspector registra una visita con foto |
+| **Power Apps: Model-Driven App** | Gestionar muchos datos relacionados de Dataverse; la app arma listas y formularios a partir de las tablas | Un equipo administra clientes, equipos y órdenes |
+| **Power Automate** | Que algo pase solo: avisar, aprobar, copiar datos | Pedir aprobación cuando llega una solicitud |
+| **Power BI** | Ver cifras y tendencias para decidir | Solicitudes aprobadas por mes |
+| **Copilot Studio** | Un agente de chat que responde preguntas o hace tareas | Contestar dudas sobre la política de compras |
+| **Power Pages** | Que personas de fuera de la organización usen un sitio web | Un ciudadano consulta su trámite |
+| **Dataverse** | Guardar los datos que usan las demás, con relaciones y permisos | La tabla única de solicitudes |
 
-**Ahora haz algo — micropráctica (6 min):** **[Elegir las piezas de Power Platform para un caso](/practica/ip-dv-005-elegir-piezas-para-un-caso)**. Incluye decidir cuáles NO hacen falta.
+**Canvas o Model-Driven:** si lo importante es la pantalla (diseño libre, pocos datos a la vez, datos de varias fuentes), Canvas. Si lo importante son los datos y sus relaciones en Dataverse, Model-Driven.
+
+**Ahora haz algo — micropráctica (6 min):** **[Elegir las piezas de Power Platform para un caso](/practica/ip-dv-005-elegir-piezas-para-un-caso)**. Es el caso de una clínica veterinaria e incluye decidir cuáles NO hacen falta.
 
 **Práctica real en tu entorno (10 min):**
 
 1. En make.powerapps.com recorre el menú lateral: **Home**, **Create**, **Apps**, **Tables** y **More** (ahí está lo que no veas).
 2. Abre **Connections** (o búscalo en **More**) y selecciona **New connection** para ver la lista de conectores. No crees ninguno.
 3. Busca en la [lista oficial de conectores](https://learn.microsoft.com/connectors/connector-reference/) uno Standard y uno Premium (los Premium llevan el ícono **Premium**).
+4. Con la misma cuenta, abre https://make.powerautomate.com y https://app.powerbi.com y comprueba que entras. Si alguno te pide registrarte o te niega el acceso, anota el mensaje.
 
 **Evidencia a reportar:**
 
@@ -109,6 +122,7 @@ Hazlo cuando termines el Paso 4.
 |---|---|
 | Un conector Standard y uno Premium (nombre exacto) | ___ |
 | Una forma de empezar una app que viste en **Create** | ___ |
+| ¿Entraste a Power Automate y a Power BI? Si no, el mensaje que viste | ___ |
 
 ---
 
@@ -142,7 +156,7 @@ Hazlo cuando termines el Paso 4.
 > **Restricciones:** no necesitas construir nada. Para usuarios externos la pieza es Power Pages, que decide qué ve cada uno con sus **permisos de tabla** (table permissions).
 > **Ejemplo resuelto:** una panadería que anota pedidos en un cuaderno. Datos: una tabla Pedidos. Captura: una app en el mostrador. Automatización: un aviso a la cocina. Reporte: pedidos por día. Usuario externo: no; si los clientes pidieran desde casa, sería Power Pages.
 
-**Ahora haz algo — transferencia guiada (8 min):** **[Transferir: ahora los dueños reservan por su cuenta](/practica/ip-dv-006-transferir-reserva-externa)**. Cambia un requisito del caso de la clínica y decides qué cambia.
+**Ahora haz algo — transferencia guiada (8 min):** **[Transferir: ahora los dueños reservan por su cuenta](/practica/ip-dv-006-transferir-reserva-externa)**. Retoma la clínica veterinaria de la micropráctica de la Microlección 2, cambia un requisito y decides qué cambia.
 
 **Evidencia a reportar:**
 
@@ -172,8 +186,7 @@ Hazlo cuando termines el Paso 4.
 **Por qué Power Platform:** Ningún componente requirió código. El equipo de Calidad configuró el sistema en 3 semanas sin soporte externo.
 
 ### ✅ Buenas Prácticas
-- Usar tu ambiente del curso (Trial, Developer o Sandbox) para pruebas, nunca directamente en Production
-- Exportar tu solución al terminar cada módulo o sesión y guardarla fuera del ambiente: tu ambiente del curso caduca
+- Practicar en tu ambiente del curso, nunca en producción
 - Nombrar ambientes con convenciones claras: `DEV-TuNombre`, `TEST-Proyecto`
 - Documentar propósito de cada ambiente desde su creación
 - No compartir credenciales de trial; crear usuarios de prueba en el tenant
@@ -189,129 +202,15 @@ Hazlo cuando termines el Paso 4.
 
 - **Lo que ves:** algo deja de funcionar o te pide licencia sin que hayas cambiado nada.
   - **Causa probable:** no conocías los límites de la licencia trial (usuarios, llamadas a API, almacenamiento).
-  - **Qué hacer:** revisa la documentación de límites del trial antes de planear más práctica sobre él.
+  - **Qué hacer:** mira **Day(s) remain** y la tabla de problemas de [Entornos y trials](/recursos/entornos-y-trials).
 
 ### 🧪 Criterios de Validación
-- [ ] Ambiente de desarrollo creado y funcional
+- [ ] Ambiente del curso creado y funcional
 - [ ] Acceso a Power Apps, Power Automate, Power BI confirmado (Power BI se abre en https://app.powerbi.com)
 - [ ] 5+ registros de prueba en tabla Account de Dataverse
 - [ ] Comprensión de diferencia entre conectores Standard y Premium
 - [ ] Explicar con palabras propias qué es Dataverse y su propósito
-- [ ] Identificar los 4 modelos preconstruidos más usados de AI Builder
-- [ ] Describir para qué sirve Power Pages y en qué se diferencia de una Canvas App
+- [ ] Elegir entre Canvas App y Model-Driven App para un caso y justificarlo
+- [ ] Decir qué pieza resuelve cada necesidad de un proceso que conoces
 
-> Para avanzar al Módulo 2 como principiante, los primeros 5 criterios son suficientes. AI Builder y Power Pages son suplementos opcionales: no los uses como excusa para frenar tu primera práctica.
-
-### 📸 Evidencia para guardar
-- Captura de tu ambiente del curso activo, con su tipo y su fecha de vencimiento (**Day(s) remain**).
-- Captura de la tabla Account con 5 registros de prueba.
-- Nota breve en tus palabras: "Dataverse sirve para..." en 2-3 líneas.
-
----
-
-### 📌 Suplemento 1A: AI Builder — Inteligencia Artificial sin código
-
-> **📌 Opcional — puedes volver a esta sección después de completar tu primera práctica.** No es necesario para avanzar al Módulo 2.
->
-> **Relevancia PL-900:** la guía de estudio vigente (desde el 24 de julio de 2026) pide describir el valor de la IA generativa en Power Platform y las soluciones con IA en Power Apps. AI Builder no tiene un porcentaje propio en el examen. Lo que aprendes aquí: agregar IA a apps y flujos desde la interfaz, sin entrenar modelos desde cero.
-
-#### 🎯 Objetivo
-Comprender qué es AI Builder, sus modelos preconstruidos y cómo integrar IA en apps y flujos sin código de machine learning.
-
-#### 📖 Conceptos Clave
-- **Modelos preconstruidos (Prebuilt models):** listos para usar sin datos de entrenamiento propios:
-  - *Business Card Reader:* extrae nombre, empresa, correo, teléfono de tarjetas de presentación
-  - *Document Processing (Form Processing):* extrae campos estructurados de documentos PDF/imágenes (facturas, contratos)
-  - *Category classification:* clasifica texto libre en categorías definidas (soporte técnico, ventas, RR.HH.)
-  - *Sentiment Analysis:* analiza el sentimiento de texto como positivo, negativo o neutral
-  - *Language Detection:* identifica el idioma de un texto
-- **Modelos personalizados (Custom models):** se entrenan con datos propios del negocio; requieren conjunto de datos etiquetados. Incluyen *Object Detection* (detecta objetos en imágenes, ej. inventario, inspección de calidad), que requiere entrenamiento propio y no viene listo para usar sin datos.
-- **Créditos para AI Builder:** cada uso de un modelo de IA consume créditos. Microsoft está retirando los *AI Builder credits*: desde el 1 de noviembre de 2026 las licencias premium nuevas ya no los traen (los que ya tienes se respetan hasta que termine tu contrato). Las funciones de AI Builder siguen funcionando: cuando no hay AI Builder credits, consumen **Copilot Credits**. Si no hay ninguno de los dos, la función se bloquea.
-- **Componente AI en Canvas Apps:** controles que agregan IA a una app sin código, por ejemplo el **Business card reader** (lector de tarjetas de presentación). Al insertarlo recibe un nombre como `BusinessCardReader1`, y lees lo que extrajo con fórmulas como `BusinessCardReader1.FullName`.
-- **Acción AI en Power Automate:** paso "AI Builder" que llama un modelo dentro de un flujo automatizado
-
-#### 👨‍💻 Actividad Práctica: Procesar una tarjeta de presentación con AI Builder
-
-**Paso 1 — Explorar el catálogo de modelos:**
-1. Ir a [make.powerapps.com](https://make.powerapps.com) → menú lateral → **AI hub**
-2. Explorar la galería de modelos preconstruidos; seleccionar **Business Card Reader**
-3. Clic en **Try it out** y cargar una imagen de tarjeta de presentación
-4. Observar los campos extraídos (nombre, empresa, email, teléfono)
-
-**Paso 2 — Usar AI Builder en Power Automate:**
-1. Crear un nuevo Flow: **Instant cloud flow** → disparador manual
-2. Agregar paso: buscar **AI Builder** → seleccionar **Extract information from business cards**
-3. Conectar con una imagen de ejemplo (archivo adjunto o URL)
-4. Agregar paso: **Create a row** en Dataverse para guardar el resultado en una tabla de contactos
-
-**Paso 3 — Explorar el modelo de Document Processing:**
-1. En AI hub → **Document processing** → **Explore prebuilt model**
-2. Cargar una factura o recibo de ejemplo en PDF
-3. Revisar los campos extraídos: número de factura, fecha, total, proveedor
-
-#### 💼 Caso Real de Negocio
-Una empresa de logística recibe cientos de albaranes en papel diariamente. Con AI Builder + Power Automate: el proceso manual de transcripción se reemplaza por un flujo que digitaliza el documento al adjuntarlo en Teams, extrae número de guía, proveedor, cantidad y estado, y crea automáticamente el registro en Dataverse — reduciendo el tiempo de registro de 5 minutos a 15 segundos por documento.
-
-#### ✅ Buenas Prácticas
-- Prueba primero un modelo preconstruido (prebuilt). Entrena un modelo personalizado (custom) solo si el preconstruido no te sirve.
-- Para Document Processing custom: sube al menos 5 documentos de muestra por colección (una colección = documentos con el mismo diseño). Si son escaneos de mala calidad, usa más.
-- Revisa el consumo de créditos en el Power Platform admin center.
-
-#### ⚠️ Errores Comunes
-- **Error**: Usar AI Builder sin revisar qué créditos tiene el ambiente → cuando no quedan AI Builder credits ni Copilot Credits, la función deja de funcionar.
-  - **Solución**: Revisa los créditos disponibles en el Admin Center antes de llevar algo a producción.
-- **Error**: Esperar que Document Processing funcione en documentos no estructurados (cartas libres)
-  - **Solución**: Document Processing es para formularios estructurados repetibles; para texto libre usar Category classification o Azure AI Services
-
-#### 🧪 Criterios de Validación
-- [ ] Explorar el catálogo AI hub y probar Business Card Reader con una imagen real
-- [ ] Crear un flujo que use al menos un modelo AI Builder prebuilt
-- [ ] Explicar qué son los AI Builder Credits y cómo se consumen
-
----
-
-### 📌 Suplemento 1B: Power Pages — Sitios web externos con Dataverse
-
-> **📌 Opcional — puedes volver a esta sección después de completar tu primera práctica.** No es necesario para avanzar al Módulo 2.
->
-> **Relevancia PL-900:** la guía de estudio vigente (desde el 24 de julio de 2026) solo pide describir el valor de Power Pages para crear sitios web, dentro del dominio "valor de negocio" (5–10% del examen, compartido con las demás piezas). Lo que aprendes aquí: la diferencia entre Power Pages y otras herramientas, y los casos de uso de sitios para usuarios externos.
-
-#### 🎯 Objetivo
-Comprender qué es Power Pages, sus capacidades principales y cuándo usarlo en lugar de Canvas Apps o Model-Driven Apps.
-
-#### 📖 Conceptos Clave
-- **Power Pages** (antes *Power Apps portals*): plataforma para crear sitios web públicos o con autenticación externa que interactúan con datos de Dataverse
-- **Usuarios externos:** personas fuera de la organización (clientes, socios, ciudadanos) que acceden al sitio sin licencia de Microsoft 365
-- **Web roles (roles web) y table permissions:** un rol web es un conjunto de permisos del sitio. Los *table permissions* deciden qué tablas de Dataverse puede leer o escribir cada rol web. Hay un rol para los usuarios que iniciaron sesión (**Authenticated Users**) y otro para los visitantes sin sesión (**Anonymous Users**). Cada usuario externo que se registra queda guardado como un registro de **Contact**. Ojo: **Basic User** no es un rol web; es un rol de seguridad de Dataverse.
-- **Páginas, formularios y listas:** las piezas del sitio son las páginas, los **basic forms** (formularios básicos: crean o editan un registro), los **multistep forms** (formularios de varios pasos) y las **lists** (listas: muestran registros a partir de una vista de Dataverse).
-- **Design studio:** el editor visual de bajo código donde diseñas el sitio, parecido al editor de Canvas Apps pero para una web externa.
-- **Proveedores de identidad (cómo inician sesión los usuarios):** Microsoft Entra ID (el nuevo nombre de Azure AD), Microsoft Entra External ID, Azure AD B2C, cuenta Microsoft, LinkedIn, Facebook, Google, Twitter y la cuenta local (no recomendada). Azure AD B2C dejó de venderse a clientes nuevos el 1 de mayo de 2025: si empiezas hoy, Microsoft recomienda Microsoft Entra External ID.
-- **Liquid templates:** lenguaje de plantillas basado en Liquid (Open Source) para lógica condicional dentro de páginas del portal
-- **Capacidades:** un ambiente puede tener varios sitios (hasta 50 con las plantillas más comunes), cada uno con su propia URL o un dominio personalizado.
-
-#### 💼 Caso Real de Negocio
-Un municipio necesita que los ciudadanos puedan registrar solicitudes de permisos de construcción en línea, consultar el estado de su trámite y adjuntar documentos, sin tener que ir en persona. Con Power Pages se crea un portal público donde:
-- El ciudadano se registra con su correo (Microsoft Entra External ID)
-- Completa un formulario de varios pasos (multistep form) que crea un registro de "Solicitud" en Dataverse
-- Visualiza el historial de sus solicitudes en una lista (list) que, con un table permission de tipo **Contact access**, solo le muestra las suyas
-- El equipo municipal gestiona las solicitudes desde una Model-Driven App interna
-
-> Fuentes: [Learn: Microsoft Entra External ID con Power Pages](https://learn.microsoft.com/power-pages/security/authentication/entra-external-id), [Learn: multistep forms](https://learn.microsoft.com/power-pages/configure/multistep-form-properties), [Learn: mostrar datos de forma segura (Contact access)](https://learn.microsoft.com/power-pages/getting-started/tutorial-display-data-securely).
-
-#### ✅ Buenas Prácticas
-- Configurar Table Permissions **antes** de abrir el portal a usuarios externos — por defecto todo está bloqueado
-- Usar HTTPS y dominio personalizado en producción (`portal.municipio.gob`)
-- Mantener Liquid templates simples; la lógica compleja debe ir en flujos de Power Automate
-
-#### ⚠️ Errores Comunes
-- **Error**: Creer que Power Pages reemplaza a Canvas Apps para usuarios internos
-  - **Solución**: Power Pages es para usuarios **externos**; Canvas Apps y Model-Driven Apps son para usuarios **internos** con licencia
-- **Error**: No configurar Table Permissions después de crear el portal
-  - **Solución**: Sin Table Permissions, todos los datos son inaccesibles desde el portal (error 403)
-
-#### 🧪 Criterios de Validación
-- [ ] Explicar la diferencia entre Power Pages, Canvas Apps y Model-Driven Apps
-- [ ] Describir un escenario donde Power Pages es la herramienta correcta vs Canvas App
-- [ ] Identificar qué son Table Permissions y por qué son necesarias
-
----
+> **Si quieres ampliar (opcional):** [AI Builder y Power Pages](/recursos/ai-builder-y-power-pages).

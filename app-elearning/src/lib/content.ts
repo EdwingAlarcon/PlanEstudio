@@ -104,6 +104,7 @@ const RESOURCE_FILES: Record<string, string> = {
   "guia-practicas-interactivas": "Recursos/GUIA_PRACTICAS_INTERACTIVAS.md",
   "guia-repaso-inteligente": "Recursos/GUIA_REPASO_INTELIGENTE.md",
   "ruta-cero-absoluta": "Recursos/RUTA_CERO_ABSOLUTA.md",
+  "ai-builder-y-power-pages": "Recursos/AI_BUILDER_Y_POWER_PAGES.md",
   "fundamentos-crm": "Recursos/FUNDAMENTOS_CRM.md",
   "tipos-de-practica": "Recursos/TIPOS_DE_PRACTICA.md",
   "fundamentos-csharp-dotnet": "Recursos/FUNDAMENTOS_CSHARP_DOTNET.md",

@@ -113,171 +113,171 @@
     },
     {
       type: "single",
-      prompt: "Tu equipo quiere construir una solución y desplegar cambios con control entre desarrollo, pruebas y producción. ¿Qué estructura de ambientes es la más alineada con buenas prácticas?",
+      prompt: "Un compañero quiere probar un cambio sin tocar lo que la gente usa cada día. ¿Qué tipo de ambiente le conviene?",
       options: [
-      "Un único ambiente de producción donde analistas y usuarios finales prueban y publican",
-      "Ambientes separados de Dev, Test/Sandbox y Prod con promoción controlada mediante soluciones",
-      "Un ambiente personal por desarrollador como sustituto permanente de producción",
-      "Solo un Sandbox compartido, porque producción puede actualizarse manualmente"
+      "Production",
+      "El ambiente default de la organización",
+      "Sandbox",
+      "Cualquiera: el tipo de ambiente no importa"
       ],
-      answer: [1],
-      explanation: "Separar Dev, Test/Sandbox y Prod reduce riesgo y permite validar antes de publicar, especialmente cuando se usan soluciones como contenedores ALM. Trabajar directamente en producción o depender solo de ambientes personales no ofrece trazabilidad ni control de promoción."
-    },
-    {
-      type: "multi",
-      prompt: "Una organización detecta proliferación de apps sin dueño claro, conectores premium no aprobados y flujos duplicados. ¿Qué DOS acciones ayudan más a gobernar la plataforma a escala?",
-      options: [
-      "Revisar inventario, telemetría y ownership desde Power Platform Admin Center y el CoE Starter Kit",
-      "Permitir que cada creador configure sus propias políticas para acelerar la adopción",
-      "Usar soluciones, inventario y métricas del CoE Starter Kit para identificar riesgo y estandarizar ALM",
-      "Mover todos los recursos a ambientes personales para evitar controles centrales"
-      ],
-      answer: [0, 2],
-      explanation: "Power Platform Admin Center y CoE Starter Kit ofrecen visibilidad operativa, ownership, uso de conectores y patrones de adopción para tomar decisiones de gobierno. Delegar políticas a cada maker o esconder activos en ambientes personales aumenta el riesgo y dificulta el control."
+      answer: [2],
+      explanation: "Sandbox es el ambiente para pruebas; Production es el de uso real y el default lo comparte toda la organización."
     },
     {
       type: "single",
-      prompt: "Un área de negocio necesita reutilizar una app en varias regiones, cambiando solo URLs, IDs y conexiones por ambiente. ¿Qué enfoque facilita ese objetivo?",
+      prompt: "Un inspector necesita registrar visitas desde el celular, con una foto y pocos campos, en pantallas diseñadas a su medida. ¿Qué construirías?",
       options: [
-      "Copiar la app manualmente y editar valores fijos en cada publicación",
-      "Guardar configuraciones en variables de entorno y usar connection references dentro de una solución",
-      "Pedir a cada usuario que modifique los endpoints al iniciar sesión",
-      "Crear una solución nueva por región sin versionado común"
-      ],
-      answer: [1],
-      explanation: "Las Environment Variables y Connection References desacoplan configuración del artefacto para promover la solución entre ambientes o regiones sin editar manualmente cada componente. Copiar apps con valores hardcodeados genera deriva y errores operativos."
-    },
-    {
-      type: "single",
-      prompt: "El sponsor pregunta cuándo conviene licenciar una app con plan per-app en lugar de per-user. ¿Cuál respuesta es la más acertada?",
-      options: [
-      "Cuando pocos usuarios necesitan acceder a una solución específica con capacidades premium",
-      "Cuando todos los empleados usarán múltiples apps premium en distintos procesos",
-      "Cuando se quiere evitar el uso de conectores premium sin rediseñar la solución",
-      "Cuando la organización no usa ambientes administrados"
+      "Una Canvas App",
+      "Una Model-Driven App",
+      "Un informe de Power BI",
+      "Un sitio de Power Pages"
       ],
       answer: [0],
-      explanation: "Per-app suele ser conveniente cuando un grupo acotado consume una o pocas aplicaciones premium concretas; per-user encaja mejor si la misma persona utilizará varias apps o flujos premium. El tipo de ambiente no determina por sí solo el modelo de licenciamiento, y la licencia no reemplaza un buen diseño."
+      explanation: "Canvas permite diseñar pantalla por pantalla una app a la medida de una tarea. Model-Driven arma listas y formularios a partir de los datos; Power BI muestra cifras y Power Pages es para personas de fuera."
     },
     {
       type: "single",
-      prompt: "Una empresa logística recibe cientos de albaranes en papel al día. El equipo quiere automatizar la extracción de datos sin entrenar un modelo propio. ¿Qué capacidad de AI Builder resuelve este caso directamente?",
+      prompt: "Un equipo interno administra clientes, equipos y órdenes relacionados entre sí en Dataverse y necesita listas y formularios para trabajarlos. ¿Qué construirías?",
       options: [
-      "Modelo personalizado de clasificación de texto entrenado con datos propios",
-      "Modelo prebuilt de Document Processing (extracción de formularios estructurados)",
-      "Modelo de detección de objetos entrenado con imágenes de albaranes",
-      "Business Card Reader aplicado a documentos PDF"
-      ],
-      answer: [1],
-      explanation: "Document Processing (Form Processing) es el modelo prebuilt diseñado para extraer campos de formularios estructurados y repetibles como facturas, albaranes y contratos. No requiere entrenamiento propio cuando el layout es consistente. Business Card Reader extrae datos de tarjetas de presentación, no de documentos de negocio; y el modelo de detección de objetos trabaja con imágenes visuales, no con campos de texto en documentos."
-    },
-    {
-      type: "single",
-      prompt: "Un analista quiere agregar IA a un flujo de Power Automate para clasificar automáticamente los correos entrantes de soporte en categorías como 'Facturación', 'Técnico' y 'Ventas'. ¿Qué modelo de AI Builder es el más indicado?",
-      options: [
-      "Object Detection, porque analiza el contenido visual del correo",
-      "Sentiment Analysis, porque determina si el cliente está satisfecho",
-      "Text Classification, porque asigna el texto libre a categorías definidas por el negocio",
-      "Language Detection, porque identifica el idioma del correo antes de clasificarlo"
+      "Una Canvas App en blanco",
+      "Un flujo de Power Automate",
+      "Una Model-Driven App",
+      "Un agente de Copilot Studio"
       ],
       answer: [2],
-      explanation: "Text Classification es el modelo de AI Builder diseñado para categorizar texto libre en etiquetas predefinidas del negocio, exactamente el caso de clasificar correos por tema. Sentiment Analysis devuelve positivo/negativo/neutral, no categorías de negocio. Object Detection trabaja con imágenes. Language Detection identifica el idioma pero no clasifica el contenido temáticamente."
+      explanation: "Cuando lo importante son los datos de Dataverse y sus relaciones, una Model-Driven App genera listas y formularios a partir de las tablas."
+    },
+    {
+      type: "single",
+      prompt: "Cada vez que llega una solicitud de compra hay que pedir la aprobación del jefe y avisar el resultado, sin que nadie lo recuerde. ¿Qué pieza hace eso?",
+      options: [
+      "Power BI",
+      "Power Automate",
+      "Dataverse por sí solo",
+      "Power Pages"
+      ],
+      answer: [1],
+      explanation: "Power Automate hace que algo pase solo: avisar, aprobar y copiar datos. Dataverse guarda los datos, pero la automatización del proceso es del flujo."
+    },
+    {
+      type: "single",
+      prompt: "La gerencia quiere ver cuántas solicitudes se aprobaron cada mes y compararlas con el mes anterior. ¿Qué pieza usarías?",
+      options: [
+      "Copilot Studio",
+      "Una Canvas App",
+      "Power Pages",
+      "Power BI"
+      ],
+      answer: [3],
+      explanation: "Power BI sirve para ver cifras y tendencias y decidir con ellas."
+    },
+    {
+      type: "single",
+      prompt: "Los empleados preguntan una y otra vez por el chat qué compras necesitan aprobación. ¿Qué pieza responde esas preguntas?",
+      options: [
+      "Copilot Studio",
+      "Power BI",
+      "Una Model-Driven App",
+      "Un conector Custom"
+      ],
+      answer: [0],
+      explanation: "Copilot Studio sirve para crear agentes de chat que responden preguntas o hacen tareas."
+    },
+    {
+      type: "single",
+      prompt: "Ciudadanos sin cuenta en tu organización deben registrar solicitudes en la web y consultar solo las suyas. ¿Qué pieza usarías?",
+      options: [
+      "Una Canvas App",
+      "Una Model-Driven App",
+      "Power Pages",
+      "Power BI"
+      ],
+      answer: [2],
+      explanation: "Power Pages crea sitios web para personas de fuera de la organización; sus permisos de tabla deciden qué datos ve cada una."
+    },
+    {
+      type: "single",
+      prompt: "La app, el flujo de aprobación y el informe usan las solicitudes de compra. ¿Dónde conviene que estén los datos?",
+      options: [
+      "En un archivo de Excel que cada herramienta copia cuando lo necesita",
+      "En una sola tabla de Dataverse que usan las tres",
+      "En el informe de Power BI, y la app y el flujo leen de él",
+      "En una tabla distinta para la app, el flujo y el informe"
+      ],
+      answer: [1],
+      explanation: "Dataverse es la base de datos común: una sola tabla como fuente evita copias que se contradicen."
+    },
+    {
+      type: "single",
+      prompt: "Creaste una tabla, pero tu compañera no la ve cuando abre make.powerapps.com. ¿Qué revisarías primero?",
+      options: [
+      "Si la tabla ya tiene registros",
+      "Si ella tiene Power BI además de Power Apps",
+      "Si la tabla usa un conector Premium",
+      "Qué ambiente tiene seleccionado cada una arriba a la derecha"
+      ],
+      answer: [3],
+      explanation: "Todo vive dentro de un ambiente: una tabla creada en uno no aparece en otro."
+    },
+    {
+      type: "single",
+      prompt: "¿Cuánto puede durar el ambiente Trial con Dataverse que usa este curso?",
+      options: [
+      "30 días, con una sola extensión de 30 más que se pide en la última semana",
+      "Un año, renovable sin límite",
+      "30 días, con extensiones ilimitadas en cualquier momento",
+      "No caduca mientras se use"
+      ],
+      answer: [0],
+      explanation: "El Trial dura 30 días y admite una sola extensión de 30 días, solicitada en la última semana. Después se deshabilita y se elimina."
+    },
+    {
+      type: "single",
+      prompt: "Tu ambiente Trial va a vencer. ¿Cómo conservas lo que construiste?",
+      options: [
+      "Restableciendo (reset) el ambiente",
+      "Haciendo una copia del ambiente Trial",
+      "Exportando tu solución y guardando el archivo fuera del ambiente",
+      "No hace falta: se mueve solo al ambiente siguiente"
+      ],
+      answer: [2],
+      explanation: "Un Trial no admite reset, respaldo ni copia: tu copia es la solución exportada. Los datos y las conexiones no viajan en ella."
+    },
+    {
+      type: "single",
+      prompt: "¿Por qué no conviene practicar en el ambiente default de la organización?",
+      options: [
+      "Porque no admite tablas de Dataverse propias en ningún caso",
+      "Porque es compartido: tus pruebas se mezclan con las de todos y no las controlas",
+      "Porque caduca a los 30 días, igual que un Trial",
+      "Porque solo los administradores pueden entrar"
+      ],
+      answer: [1],
+      explanation: "El ambiente default lo comparte toda la organización; para practicar se usa un ambiente propio y aislado."
     },
     {
       type: "multi",
-      prompt: "Un equipo quiere usar AI Builder en producción para procesar documentos. ¿Qué DOS afirmaciones sobre los modelos prebuilt de AI Builder son correctas?",
+      prompt: "¿Qué DOS afirmaciones sobre los conectores son correctas?",
       options: [
-      "Los modelos prebuilt están listos para usar sin datos de entrenamiento propios",
-      "Los modelos prebuilt consumen AI Builder Credits cada vez que procesan una inferencia",
-      "Los modelos prebuilt son gratuitos e ilimitados en todos los planes de Microsoft 365",
-      "Para Document Processing prebuilt se necesita siempre un conjunto de datos etiquetados por el usuario"
-      ],
-      answer: [0, 1],
-      explanation: "Los modelos prebuilt de AI Builder no requieren entrenamiento propio — están listos desde el catálogo — y sí consumen AI Builder Credits con cada inferencia. Los créditos no son gratuitos ni ilimitados: se incluyen en ciertas licencias Premium o se adquieren por separado. Los modelos custom (no prebuilt) son los que sí requieren datos etiquetados del usuario para entrenamiento."
-    },
-    {
-      type: "single",
-      prompt: "El equipo de RR.HH. quiere que su Canvas App pueda leer tarjetas de presentación físicas que los candidatos entregan. ¿Qué componente de AI Builder deben agregar a la app?",
-      options: [
-      "Acción 'AI Builder — Analyze sentiment' en un flujo de Power Automate",
-      "Control 'Business card reader' nativo de AI Builder en el lienzo de Canvas Apps",
-      "Conector premium de Azure Cognitive Services configurado manualmente",
-      "Modelo custom de extracción de entidades entrenado con 200 imágenes de tarjetas"
-      ],
-      answer: [1],
-      explanation: "AI Builder ofrece un control nativo 'Business card reader' que se inserta directamente en una Canvas App sin código y sin configuración manual de Azure. Usar Azure Cognitive Services directamente requiere configuración extra y no es la ruta de bajo código. Un modelo custom es innecesario cuando existe el modelo prebuilt específico para tarjetas de presentación."
-    },
-    {
-      type: "single",
-      prompt: "Un responsable de IT pregunta dónde monitorear cuántos AI Builder Credits quedan disponibles en el tenant. ¿Cuál es el lugar correcto?",
-      options: [
-      "Power Apps Studio, en la sección de configuración de la app activa",
-      "Power Platform Admin Center, en la sección de capacidad o licencias del tenant",
-      "Azure Portal, en la sección de facturación de Cognitive Services",
-      "Power Automate, en el historial de ejecuciones del flujo"
-      ],
-      answer: [1],
-      explanation: "El consumo y saldo de AI Builder Credits se administra desde Power Platform Admin Center en la sección de capacidad del tenant. No se gestiona desde Azure Portal (los créditos de AI Builder son independientes de Azure Cognitive Services facturado directamente) ni desde la interfaz de una app o flujo individual."
-    },
-    {
-      type: "single",
-      prompt: "Un cliente quiere crear un portal web donde ciudadanos externos puedan registrar solicitudes de permisos municipales, consultar el estado de su trámite y adjuntar documentos, sin tener que ir en persona. ¿Qué herramienta de Power Platform es la más adecuada?",
-      options: [
-      "Canvas App compartida públicamente con acceso anónimo",
-      "Model-Driven App accesible desde internet sin autenticación",
-      "Power Pages, diseñado para experiencias web de usuarios externos sobre Dataverse",
-      "Power BI Embedded en un sitio web público"
-      ],
-      answer: [2],
-      explanation: "Power Pages es la herramienta de Power Platform diseñada específicamente para crear sitios web externos con usuarios fuera de la organización. Permite registro y login de ciudadanos (Microsoft Entra External ID, Azure AD B2C para quien ya lo tenía, redes sociales o cuenta local), formularios sobre Dataverse y vistas de estado del trámite. Canvas Apps no está diseñada para portales web públicos, Model-Driven requiere licencias internas, y Power BI no es una plataforma transaccional."
-    },
-    {
-      type: "single",
-      prompt: "Un administrador crea un portal de Power Pages y lo publica, pero los usuarios externos reportan que no pueden ver ni enviar ningún formulario — reciben error 403. ¿Cuál es la causa más probable?",
-      options: [
-      "El sitio está en modo de mantenimiento porque no se ha asignado un dominio personalizado",
-      "No se han configurado Table Permissions para las tablas de Dataverse que usa el portal",
-      "El portal necesita una licencia Azure AD B2C adicional para mostrar formularios",
-      "El archivo CSS del tema tiene errores que bloquean el renderizado"
-      ],
-      answer: [1],
-      explanation: "En Power Pages, por defecto todo el acceso a tablas de Dataverse está bloqueado. Es obligatorio configurar Table Permissions y asignarlas a los Web Roles correspondientes (como Anonymous User o Authenticated User). Sin Table Permissions, los formularios y vistas devuelven 403. El dominio personalizado no afecta los permisos de datos, y el CSS tampoco genera errores 403."
-    },
-    {
-      type: "multi",
-      prompt: "Un arquitecto define los criterios de diseño para un nuevo portal de Power Pages. ¿Qué DOS afirmaciones sobre Power Pages son correctas?",
-      options: [
-      "Power Pages permite autenticación con proveedores externos como Azure AD B2C, Google y Facebook",
-      "Power Pages reemplaza a Canvas Apps para usuarios internos de la organización",
-      "Los datos del portal provienen de tablas de Dataverse, configuradas mediante Table Permissions y Web Roles",
-      "Cada ambiente de Power Platform puede tener un número ilimitado de portales de producción sin costo adicional"
+      "Un conector Standard está incluido en la licencia básica",
+      "Un conector Premium no requiere ninguna licencia de pago",
+      "Un conector Custom lo creas para conectar tu propio sistema",
+      "Un conector sirve solo para crear informes"
       ],
       answer: [0, 2],
-      explanation: "Power Pages soporta proveedores de identidad externos (Azure AD B2C, Google, Facebook, LinkedIn y cuenta local) y sus datos provienen de Dataverse controlados mediante Table Permissions y Web Roles. Power Pages no reemplaza a Canvas Apps para usuarios internos — son herramientas complementarias con audiencias distintas. Además, los portales de producción tienen costos y límites de capacidad por ambiente."
+      explanation: "Standard está incluido en la licencia básica, Premium requiere licencia de pago y Custom lo creas tú para tu propio sistema."
     },
     {
       type: "single",
-      prompt: "Un desarrollador necesita implementar lógica condicional dentro de una página de Power Pages para mostrar un bloque de HTML solo si el usuario tiene el rol 'Proveedor Aprobado'. ¿Qué tecnología nativa de Power Pages usa para esto?",
+      prompt: "En la tabla Account, «Cliente Demo 01» con su teléfono y su ciudad es…",
       options: [
-      "Power Fx directamente en la plantilla de la página web",
-      "Liquid templates, que permiten condicionales y bucles dentro de páginas del portal",
-      "JavaScript inline ejecutado en el servidor de Power Pages",
-      "Un plug-in de Dataverse que modifica el HTML antes de enviarlo al navegador"
+      "Una columna",
+      "Una relación",
+      "Una vista",
+      "Un registro"
       ],
-      answer: [1],
-      explanation: "Liquid es el lenguaje de plantillas nativo de Power Pages para lógica de presentación en el servidor: condicionales ({% if %}), bucles ({% for %}) y acceso a datos del usuario o del portal. Power Fx no está disponible en páginas del portal, el JavaScript en Power Pages se ejecuta en el cliente (no en el servidor), y los plug-ins de Dataverse no manipulan HTML del portal."
-    },
-    {
-      type: "single",
-      prompt: "¿Cuál es la diferencia principal entre Power Pages y una Canvas App al evaluar qué usar para clientes externos?",
-      options: [
-      "Power Pages requiere licencia de Microsoft 365 para cada usuario externo; Canvas App no",
-      "Power Pages está diseñado para usuarios externos sin licencia de Microsoft; Canvas Apps está diseñado para usuarios internos con licencia",
-      "Canvas Apps soporta más tablas de Dataverse simultáneamente que Power Pages",
-      "Power Pages solo funciona en dispositivos móviles; Canvas Apps funciona en web y móvil"
-      ],
-      answer: [1],
-      explanation: "La diferencia fundamental de audiencia: Power Pages atiende a usuarios externos (ciudadanos, clientes, socios) que no tienen ni necesitan licencia de Microsoft 365, autenticándose con cuentas externas. Canvas Apps está pensada para usuarios internos que tienen licencia de Power Platform. Esta distinción determina cuál herramienta elegir según quién consume la experiencia."
+      answer: [3],
+      explanation: "Cada fila es un registro (un cliente concreto). Teléfono y ciudad son columnas; una relación conecta tablas y una vista es una lista guardada de registros."
     },
     {
       type: "single",

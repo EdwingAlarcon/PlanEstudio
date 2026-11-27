@@ -1654,3 +1654,21 @@ No se hizo una prueba simulada ni se verificó de nuevo en Learn: es una reorgan
 **Pendiente (espera que el usuario vea la muestra):** aplicar el recorte a los otros módulos de la ruta principal;
 revisar los niveles 3 y 4, que quedan con pocos labs; revisar las rutas profesionales de desarrollo y Dynamics 365.
 
+### 17.1 Corrección de la muestra y patrón de recorte (2026-11-27)
+
+Al releer la muestra, el recorte había dejado el Módulo 1 sin definir Canvas App ni Model-Driven App (estaban en el
+glosario movido), el quiz preguntaba sobre todo por suplementos opcionales y el cierre se repetía. Corregido, con una
+prueba simulada posterior (un evaluador sin contexto; simulación, no una persona real) y sus hallazgos aplicados:
+tabla de piezas con Canvas frente a Model-Driven, AI Builder y Power Pages en `/recursos/ai-builder-y-power-pages`
+(recursos: 42), 13 preguntas reescritas (el total no cambia), un solo cierre y un paso para cada criterio. El módulo
+queda en unas 2.250 palabras. Sin verificar de nuevo en Learn. Las preguntas de AI Builder y Power Pages del quiz y del
+simulador ya no existen: antes de presentar PL-900, el alumno debe leer el recurso.
+
+**Patrón para recortar los demás módulos de la ruta principal:**
+1. Unas 2.000-2.500 palabras. El material opcional y de consulta va a Recursos, no se borra.
+2. Antes de mover algo, comprobar que cada término que el módulo, sus prácticas o su quiz usan sigue explicado.
+3. El quiz pregunta solo lo que el módulo enseña, sin distractores absurdos.
+4. Cada criterio de validación tiene un paso que lo cumple, y hay un solo cierre.
+5. No tocar el Caso Real (el diagnóstico de caso cita sus hechos).
+6. Prueba simulada de cada tanda antes de subir.
+
