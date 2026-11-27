@@ -321,4 +321,4 @@ Puedes borrar las dos filas de Ana y las de prueba. No borres las herramientas n
 
 ## Siguiente laboratorio recomendado
 
-**Lab 151 — Multiagente** (próximamente): agentes hijos dentro del agente y un agente conectado en papel.
+**[Lab 151 — Multiagente](/labs/lab-151-copilot-studio-multiagente)**: agentes hijos dentro del agente, con conocimiento propio y con entradas y salidas, y un agente conectado en papel.

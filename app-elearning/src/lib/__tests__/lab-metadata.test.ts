@@ -129,9 +129,9 @@ describe("lab domain classification", () => {
 });
 
 describe("lab readiness (Sprint 1 — auditoría tenant-real)", () => {
-  it("gives every one of the 111 labs a non-empty execution status and evidence", () => {
+  it("gives every one of the 114 labs a non-empty execution status and evidence", () => {
     const labs = getAllLabs();
-    expect(labs.length).toBe(111);
+    expect(labs.length).toBe(114);
 
     for (const lab of labs) {
       const readiness = getLabReadiness(lab);
@@ -242,6 +242,9 @@ describe("labs opcionales", () => {
       "lab-148-copilot-studio-herramientas",
       "lab-149-copilot-studio-experiencia-de-conversacion",
       "lab-150-copilot-studio-identidad-del-usuario",
+      "lab-151-copilot-studio-multiagente",
+      "lab-152-copilot-studio-evaluacion",
+      "lab-153-copilot-studio-soluciones-y-alm",
     ]);
   });
 });

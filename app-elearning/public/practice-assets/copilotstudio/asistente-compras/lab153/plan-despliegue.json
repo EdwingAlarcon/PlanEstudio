@@ -1,0 +1,35 @@
+{
+  "version": "1.0.0",
+  "descripcion": "Plan de despliegue de referencia del Asistente de compras SIT (Lab 153), en papel: entornos, tipo de solución, valor de la variable de entorno y pasos tras importar.",
+  "entornos": [
+    {
+      "nombre": "Desarrollo (tu ambiente del curso)",
+      "tipo": "Trial",
+      "solucion": "no administrada",
+      "correoCompras": "compras@sit.example.com",
+      "publicar": "no se puede con la prueba"
+    },
+    {
+      "nombre": "Pruebas",
+      "tipo": "Sandbox o Developer (gestionado)",
+      "solucion": "administrada",
+      "correoCompras": "compras-pruebas@sit.example.com",
+      "publicar": "sí, tras importar"
+    },
+    {
+      "nombre": "Producción",
+      "tipo": "Producción (gestionado)",
+      "solucion": "administrada",
+      "correoCompras": "compras@sit.example.com",
+      "publicar": "sí, tras importar y revisar la autenticación"
+    }
+  ],
+  "pasosTrasImportar": [
+    "Revisar las referencias de conexión y las conexiones del entorno destino",
+    "Dar el valor de la variable de entorno del entorno destino",
+    "Volver a configurar la autenticación del agente",
+    "Encender los agent flows si quedaron apagados",
+    "Publicar el agente",
+    "Correr el conjunto de evaluación del Lab 152 y compararlo con el de desarrollo"
+  ]
+}

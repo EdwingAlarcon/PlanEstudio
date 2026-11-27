@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "descripcion": "Situaciones de ALM del Lab 153. 'decision' y 'razon' son la respuesta esperada según Learn (2026-11).",
+  "situaciones": [
+    {
+      "id": "A1",
+      "situacion": "Compras pide cambiar el correo de contacto en producción sin tocar el agente.",
+      "decision": "Variable de entorno y volver a publicar",
+      "razon": "Learn: la versión publicada lleva el valor que tenían las variables al publicar; tras cambiar una variable (que no sea secreta) hay que volver a publicar."
+    },
+    {
+      "id": "A2",
+      "situacion": "La API del catálogo exige una clave distinta en cada entorno.",
+      "decision": "Variable de entorno de tipo secreto (Azure Key Vault)",
+      "razon": "Learn: las variables de tipo secreto se leen en tiempo de ejecución y no obligan a volver a publicar."
+    },
+    {
+      "id": "A3",
+      "situacion": "Hay que llevar el agente a producción y que nadie lo edite allí.",
+      "decision": "Solución administrada",
+      "razon": "Learn: en entornos que no son de desarrollo se despliegan soluciones administradas; un agente de una solución administrada no se puede borrar, solo desinstalando o actualizando la solución."
+    },
+    {
+      "id": "A4",
+      "situacion": "El equipo quiere revisar en Git cada cambio de un topic antes de llevarlo a pruebas.",
+      "decision": "Extensión de Copilot Studio para VS Code y Git, más soluciones para el despliegue",
+      "razon": "Learn: la extensión clona el agente en archivos YAML que se pueden versionar; para varios entornos recomienda soluciones y pipelines."
+    },
+    {
+      "id": "A5",
+      "situacion": "SIT quiere que el paso a producción tenga aprobación y quede auditado.",
+      "decision": "Pipelines de Power Platform con despliegue delegado",
+      "razon": "Learn: los pipelines guardan cada artefacto, validan conexiones y variables antes de desplegar y admiten aprobaciones; los destinos deben ser entornos gestionados."
+    },
+    {
+      "id": "A6",
+      "situacion": "Tras importar en pruebas, el agente responde pero no registra solicitudes.",
+      "decision": "Revisar referencias de conexión, conexiones y que los agent flows estén encendidos",
+      "razon": "Es el síntoma típico de una importación sin conexiones (lo mismo que en el Lab 136 con los flujos)."
+    }
+  ]
+}

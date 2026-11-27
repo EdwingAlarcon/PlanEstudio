@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "descripcion": "Los dos agentes hijos del Lab 151: nombre, descripción (decide cuándo se usa), instrucciones, conocimiento propio, entradas y salidas.",
+  "toleranciaPorcentaje": 2,
+  "agentes": [
+    {
+      "nombre": "Atención a proveedores",
+      "descripcion": "Responde preguntas de proveedores de SIT sobre facturas, pagos, reenvíos y alta de proveedores, con las preguntas frecuentes de proveedores. Úsalo cuando quien pregunta es un proveedor o la pregunta es sobre facturas o pagos a proveedores.",
+      "instrucciones": "Respondes a proveedores de SIT. Usa solo el documento de preguntas frecuentes de proveedores. Si no lo dice, sugiere escribir a facturas@sit.example.com. No des datos de solicitudes de compra internas ni de otros proveedores.",
+      "conocimiento": [
+        "faq-proveedores.docx"
+      ],
+      "entradas": [],
+      "salidas": []
+    },
+    {
+      "nombre": "Comprobar tolerancia de factura",
+      "descripcion": "Comprueba si el importe de una factura de proveedor está dentro de la tolerancia del 2 % respecto del importe aprobado. Úsalo solo cuando se lo pida el topic Comprobar factura.",
+      "instrucciones": "Recibes el importe aprobado y el importe de la factura, en USD. La diferencia es el importe de la factura menos el aprobado. La factura está DENTRO de tolerancia si el valor absoluto de la diferencia es menor o igual que el 2 % del importe aprobado; si no, está FUERA. Devuelve Resultado (DENTRO o FUERA) y Diferencia. No escribas mensajes al usuario: el topic que te llama le responde.",
+      "conocimiento": [],
+      "entradas": [
+        {
+          "nombre": "ImporteAprobado",
+          "tipo": "Number",
+          "obligatoria": true,
+          "descripcion": "Importe aprobado de la solicitud de compra, en USD"
+        },
+        {
+          "nombre": "ImporteFactura",
+          "tipo": "Number",
+          "obligatoria": true,
+          "descripcion": "Importe total de la factura del proveedor, en USD"
+        }
+      ],
+      "salidas": [
+        {
+          "nombre": "Resultado",
+          "tipo": "String",
+          "descripcion": "DENTRO si la diferencia está dentro de la tolerancia; FUERA si no"
+        },
+        {
+          "nombre": "Diferencia",
+          "tipo": "Number",
+          "descripcion": "Importe de la factura menos el importe aprobado, en USD"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "descripcion": "Situaciones para decidir entre agente hijo, agente conectado o no dividir (Lab 151). 'decision' y 'razon' son la respuesta esperada según Learn (2026-11).",
+  "situaciones": [
+    {
+      "id": "M1",
+      "situacion": "Las preguntas de proveedores las mantiene el mismo equipo que el asistente, no se publican aparte y no necesitan otra autenticación.",
+      "decision": "agente hijo",
+      "razon": "Learn recomienda un agente hijo cuando un mismo equipo lo mantiene, no se publica por separado y no necesita configuración, autenticación ni despliegue propios."
+    },
+    {
+      "id": "M2",
+      "situacion": "El equipo de Cuentas por pagar quiere su propio agente de facturas, publicado en el portal de proveedores y, además, usado por el asistente de compras.",
+      "decision": "agente conectado",
+      "razon": "Learn recomienda agentes conectados cuando los mantienen equipos distintos, se publican en sus propios canales y se reutilizan desde más de un agente."
+    },
+    {
+      "id": "M3",
+      "situacion": "El agente de facturas necesita otro modelo de lenguaje y su propio ciclo de ALM, con versiones que no dependen del asistente.",
+      "decision": "agente conectado",
+      "razon": "Learn: configuración propia (por ejemplo, el modelo) y ALM independiente son razones para separar en agentes conectados."
+    },
+    {
+      "id": "M4",
+      "situacion": "El asistente tiene 12 piezas (topics, herramientas y conocimiento) con descripciones claras y elige bien en las pruebas.",
+      "decision": "ninguno (no dividir)",
+      "razon": "Learn advierte que el multiagente no siempre hace falta: añade latencia y más superficie de pruebas y gobierno. La degradación suele empezar con 30 a 40 opciones o con descripciones parecidas."
+    },
+    {
+      "id": "M5",
+      "situacion": "El asistente llegó a 45 piezas y el mapa de actividad muestra que confunde herramientas con descripciones parecidas.",
+      "decision": "agente hijo o conectado (agrupar)",
+      "razon": "Learn: con más de 30 a 40 opciones la elección se degrada; primero se revisan las descripciones y, si no basta, se agrupan piezas en agentes. Cada agente hijo tiene su propio límite de herramientas."
+    },
+    {
+      "id": "M6",
+      "situacion": "SIT quiere usar como agente conectado un agente que ya tiene sus propios agentes conectados.",
+      "decision": "no se puede",
+      "razon": "Learn: un agente que actúa como principal con agentes conectados no puede ser a la vez agente conectado de otro principal."
+    }
+  ]
+}

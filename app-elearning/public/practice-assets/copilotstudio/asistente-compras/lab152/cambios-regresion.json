@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "cambioA": {
+    "descripcion": "Alguien vuelve a subir el manual v1 (manual-compras.docx) junto al v2, 'para tener el histórico'.",
+    "casosQuePuedenEmpeorar": [
+      "E05",
+      "E10",
+      "E11"
+    ],
+    "porque": "En v1 la caja menor es 50 USD, el plazo es 2 días hábiles y no hay compras urgentes. Con las dos versiones a la vez, el agente puede citar cualquiera."
+  },
+  "cambioB": {
+    "descripcion": "Se quita el manual v1 y se vuelve a evaluar el mismo conjunto: los casos que empeoraron deben volver a pasar."
+  }
+}

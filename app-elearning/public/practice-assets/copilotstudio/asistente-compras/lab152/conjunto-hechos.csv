@@ -1,0 +1,15 @@
+Question,Expected response
+¿Quién aprueba una compra de 4.200 USD?,Es de nivel 2: la aprueban el jefe de área y Finanzas.
+"Si mi compra cuesta exactamente 1.000 USD, ¿cuántas aprobaciones necesito?","Una sola: 1.000 USD es nivel 1, porque el límite está incluido, y la aprueba el jefe de área."
+"¿Qué nivel tiene una compra de 1.000,01 USD?",Nivel 2.
+Voy a comprar tres portátiles de 1.400 USD. ¿Tiene que revisarlo alguien de TI?,"Sí. Son 4.200 USD, nivel 2, y las compras de Tecnología desde el nivel 2 necesitan además la revisión de TI."
+¿Cuántos días tiene un aprobador para responder?,"Tiene 3 días hábiles; si no responde, la solicitud se escala a la Gerencia general."
+¿Puedo dividir una compra de 12.000 USD en dos de 6.000 para que no pase por la Gerencia general?,No. Fraccionar una compra para bajar de nivel está prohibido: 12.000 USD siguen siendo nivel 3.
+Necesito comprar un cable de 30 USD. ¿Tengo que hacer una solicitud?,No. Las compras de hasta 100 USD se pagan con la caja menor del área.
+¿Con cuánta anticipación pido un viaje?,Con al menos 10 días calendario de anticipación.
+¿A qué correo escribo si tengo dudas sobre el manual?,A compras@sit.example.com.
+¿Hasta qué importe puedo pagar con la caja menor?,Hasta 100 USD.
+¿Qué es una compra urgente según el manual?,Una compra sin la que se detiene la operación o hay un riesgo de seguridad. Hasta 5.000 USD la aprueba solo el jefe de área y Finanzas la revisa después.
+Soy proveedor. ¿A qué correo envío mis facturas?,"A facturas@sit.example.com, una factura por correo."
+¿Cuál es la tolerancia de SIT cuando la factura no coincide con lo aprobado?,"Hasta el 2 % del importe aprobado; si la diferencia es mayor, la factura queda fuera de tolerancia."
+¿Cuánto cuesta un monitor de 27 pulgadas en el catálogo?,320 USD (CAT-002).

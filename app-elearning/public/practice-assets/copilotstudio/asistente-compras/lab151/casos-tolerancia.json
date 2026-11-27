@@ -1,0 +1,61 @@
+{
+  "version": "1.0.0",
+  "descripcion": "Casos para el agente hijo Comprobar tolerancia de factura (Lab 151). DENTRO si |factura - aprobado| <= 2 % de aprobado (límite incluido), redondeado a centavos.",
+  "toleranciaPorcentaje": 2,
+  "casos": [
+    {
+      "id": "F1",
+      "aprobado": 1000,
+      "factura": 1020,
+      "nota": "Exactamente el 2 %: el límite está incluido",
+      "diferencia": 20,
+      "margen": 20,
+      "resultado": "DENTRO"
+    },
+    {
+      "id": "F2",
+      "aprobado": 1000,
+      "factura": 1020.01,
+      "nota": "Un centavo por encima del límite",
+      "diferencia": 20.01,
+      "margen": 20,
+      "resultado": "FUERA"
+    },
+    {
+      "id": "F3",
+      "aprobado": 4200,
+      "factura": 4116,
+      "nota": "Factura por debajo: también cuenta la diferencia negativa",
+      "diferencia": -84,
+      "margen": 84,
+      "resultado": "DENTRO"
+    },
+    {
+      "id": "F4",
+      "aprobado": 840,
+      "factura": 860,
+      "nota": "20 USD parecen poco, pero son más del 2 % de 840",
+      "diferencia": 20,
+      "margen": 16.8,
+      "resultado": "FUERA"
+    },
+    {
+      "id": "F5",
+      "aprobado": 2416.5,
+      "factura": 2400,
+      "nota": "Importe con decimales",
+      "diferencia": -16.5,
+      "margen": 48.33,
+      "resultado": "DENTRO"
+    },
+    {
+      "id": "F6",
+      "aprobado": 12500,
+      "factura": 12749.99,
+      "nota": "Importe grande, justo por debajo del límite",
+      "diferencia": 249.99,
+      "margen": 250,
+      "resultado": "DENTRO"
+    }
+  ]
+}

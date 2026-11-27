@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "descripcion": "Mensajes del Lab 151 con la pieza que debería atenderlos (agente principal, topic o agente hijo).",
+  "mensajes": [
+    {
+      "id": "R1",
+      "mensaje": "Soy proveedor. ¿A qué correo envío mis facturas?",
+      "piezaEsperada": "agente hijo: Atención a proveedores",
+      "respuesta": "facturas@sit.example.com"
+    },
+    {
+      "id": "R2",
+      "mensaje": "¿En cuántos días me pagan una factura que ya quedó conciliada?",
+      "piezaEsperada": "agente hijo: Atención a proveedores",
+      "respuesta": "30, 45 o 60 días desde la conciliación, según la condición de pago del proveedor"
+    },
+    {
+      "id": "R3",
+      "mensaje": "Reenvié una factura por error. ¿Me la pagan dos veces?",
+      "piezaEsperada": "agente hijo: Atención a proveedores",
+      "respuesta": "No: SIT detecta los reenvíos con el mismo número"
+    },
+    {
+      "id": "R4",
+      "mensaje": "Quiero comprobar una factura: la compra se aprobó por 1000 USD y la factura es de 1020.01 USD",
+      "piezaEsperada": "topic: Comprobar factura → agente hijo: Comprobar tolerancia de factura",
+      "respuesta": "FUERA de tolerancia (diferencia 20,01 USD; margen 20 USD)"
+    },
+    {
+      "id": "R5",
+      "mensaje": "¿Quién aprueba una compra de 4200 USD?",
+      "piezaEsperada": "topic: Calcular nivel de aprobación",
+      "respuesta": "Nivel 2: jefe de área y Finanzas"
+    },
+    {
+      "id": "R6",
+      "mensaje": "¿Con cuánta anticipación pido un viaje?",
+      "piezaEsperada": "conocimiento: Manual de compras de SIT (del agente principal)",
+      "respuesta": "10 días calendario"
+    },
+    {
+      "id": "R7",
+      "mensaje": "¿Cuál es la tolerancia de SIT cuando la factura no coincide con lo aprobado?",
+      "piezaEsperada": "agente hijo: Atención a proveedores",
+      "respuesta": "Hasta el 2 % del importe aprobado",
+      "trampa": "Habla de tolerancia, pero pregunta la regla, no pide comprobar una factura: no debe ir al topic Comprobar factura"
+    },
+    {
+      "id": "R8",
+      "mensaje": "Soy proveedor: ¿en qué estado está la solicitud de compra que me hizo Comercial?",
+      "piezaEsperada": "agente hijo: Atención a proveedores (o el agente principal), con una negativa",
+      "respuesta": "No da datos de solicitudes internas; remite a Compras"
+    }
+  ]
+}

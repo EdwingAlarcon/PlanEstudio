@@ -84,6 +84,79 @@
       "P10"
     ]
   },
+  "lab151": {
+    "tolerancia": {
+      "F1": {
+        "resultado": "DENTRO",
+        "diferencia": 20,
+        "margen": 20
+      },
+      "F2": {
+        "resultado": "FUERA",
+        "diferencia": 20.01,
+        "margen": 20
+      },
+      "F3": {
+        "resultado": "DENTRO",
+        "diferencia": -84,
+        "margen": 84
+      },
+      "F4": {
+        "resultado": "FUERA",
+        "diferencia": 20,
+        "margen": 16.8
+      },
+      "F5": {
+        "resultado": "DENTRO",
+        "diferencia": -16.5,
+        "margen": 48.33
+      },
+      "F6": {
+        "resultado": "DENTRO",
+        "diferencia": 249.99,
+        "margen": 250
+      }
+    },
+    "mensajes": 8,
+    "decisiones": {
+      "M1": "agente hijo",
+      "M2": "agente conectado",
+      "M3": "agente conectado",
+      "M4": "ninguno (no dividir)",
+      "M5": "agente hijo o conectado (agrupar)",
+      "M6": "no se puede"
+    }
+  },
+  "lab152": {
+    "hechos": 14,
+    "limites": 6,
+    "puedenEmpeorarConV1": [
+      "E05",
+      "E10",
+      "E11"
+    ]
+  },
+  "lab153": {
+    "componentes": 10,
+    "obligatorios": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05",
+      "C06",
+      "C08"
+    ],
+    "variableEntorno": "Correo de Compras",
+    "decisiones": {
+      "A1": "Variable de entorno y volver a publicar",
+      "A2": "Variable de entorno de tipo secreto (Azure Key Vault)",
+      "A3": "Solución administrada",
+      "A4": "Extensión de Copilot Studio para VS Code y Git, más soluciones para el despliegue",
+      "A5": "Pipelines de Power Platform con despliegue delegado",
+      "A6": "Revisar referencias de conexión, conexiones y que los agent flows estén encendidos"
+    }
+  },
   "lab148": {
     "casos": {
       "V1": {

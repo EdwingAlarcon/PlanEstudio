@@ -1,0 +1,82 @@
+{
+  "version": "1.0.0",
+  "descripcion": "Lo que debe llevar la solución del agente (Lab 153) y cómo se agrega. 'obligatorio' = sin esto el agente no funciona en otro entorno.",
+  "variableEntorno": {
+    "nombre": "Correo de Compras",
+    "tipo": "Text",
+    "nombreEsquemaEjemplo": "sit_CorreodeCompras",
+    "valorPredeterminado": "compras@sit.example.com"
+  },
+  "componentes": [
+    {
+      "id": "C01",
+      "componente": "Agente Asistente de compras SIT",
+      "tipo": "Agente",
+      "comoSeAgrega": "Add existing > Agent > Agent",
+      "obligatorio": true
+    },
+    {
+      "id": "C02",
+      "componente": "Topics propios (Calcular nivel de aprobación, Revisar compra, Nueva solicitud de compra, Quién soy, Comprobar factura) y topics de sistema personalizados (Escalate, On Error, Fallback)",
+      "tipo": "Componente del agente",
+      "comoSeAgrega": "Add required objects sobre el agente",
+      "obligatorio": true
+    },
+    {
+      "id": "C03",
+      "componente": "Agentes hijos (Atención a proveedores y, si lo conservaste en el Lab 151, Comprobar tolerancia de factura)",
+      "tipo": "Componente del agente",
+      "comoSeAgrega": "Add required objects sobre el agente; comprueba que aparecen",
+      "obligatorio": true
+    },
+    {
+      "id": "C04",
+      "componente": "Conocimiento: manual v2 (archivo), sitio web de Learn y Dataverse",
+      "tipo": "Componente del agente",
+      "comoSeAgrega": "Add required objects; Learn avisa de que algunas fuentes pueden no viajar",
+      "obligatorio": true
+    },
+    {
+      "id": "C05",
+      "componente": "Agent flows ACS - Registrar solicitud de compra y ACS - Consultar mis solicitudes",
+      "tipo": "Flujo (Workflow)",
+      "comoSeAgrega": "Add required objects sobre el agente o sobre cada flujo",
+      "obligatorio": true
+    },
+    {
+      "id": "C06",
+      "componente": "Referencias de conexión (Dataverse, Office 365 Outlook)",
+      "tipo": "Referencia de conexión",
+      "comoSeAgrega": "Add required objects sobre los flujos",
+      "obligatorio": true
+    },
+    {
+      "id": "C07",
+      "componente": "Herramienta REST Catálogo SIT (conector personalizado, si se creó)",
+      "tipo": "Conector personalizado",
+      "comoSeAgrega": "Learn: los conectores personalizados se importan primero, en su propia solución o antes que la del agente",
+      "obligatorio": false
+    },
+    {
+      "id": "C08",
+      "componente": "Variable de entorno Correo de Compras",
+      "tipo": "Variable de entorno",
+      "comoSeAgrega": "Add existing > More > Environment variable, o New > More > Environment variable",
+      "obligatorio": true
+    },
+    {
+      "id": "C09",
+      "componente": "Tabla Solicitud de compra",
+      "tipo": "Tabla",
+      "comoSeAgrega": "Decisión: va en SIT Compras (Ruta Pro Power Automate) o en esta solución; nunca en las dos con distinto dueño",
+      "obligatorio": false
+    },
+    {
+      "id": "C10",
+      "componente": "Autenticación, canales e icono del agente",
+      "tipo": "Configuración",
+      "comoSeAgrega": "No viajan completos: Learn pide volver a configurar la autenticación tras importar, y el icono y los canales pueden llegar vacíos",
+      "obligatorio": false
+    }
+  ]
+}

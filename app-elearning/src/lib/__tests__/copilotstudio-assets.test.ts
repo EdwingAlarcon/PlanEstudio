@@ -196,6 +196,102 @@ describe("Copilot Studio practice assets (Asistente de compras SIT)", () => {
     expect(lab).toContain("750 USD");
   });
 
+  it("gives LAB-151 tolerance cases computed with the 2 % rule, limit included", () => {
+    const { toleranciaPorcentaje, casos } = readJson<{
+      toleranciaPorcentaje: number;
+      casos: { id: string; aprobado: number; factura: number; diferencia: number; margen: number; resultado: string }[];
+    }>("lab151/casos-tolerancia.json");
+    const conciliacion = JSON.parse(fs.readFileSync(path.join(sitCompras, "reglas-conciliacion.json"), "utf-8")) as { toleranciaPorcentaje: number };
+    expect(toleranciaPorcentaje).toBe(conciliacion.toleranciaPorcentaje);
+    expect(casos.map((c) => [c.id, c.resultado])).toEqual([
+      ["F1", "DENTRO"],
+      ["F2", "FUERA"],
+      ["F3", "DENTRO"],
+      ["F4", "FUERA"],
+      ["F5", "DENTRO"],
+      ["F6", "DENTRO"],
+    ]);
+    const cents = (n: number) => Math.round(n * 100) / 100;
+    for (const c of casos) {
+      expect(c.diferencia, c.id).toBe(cents(c.factura - c.aprobado));
+      expect(c.margen, c.id).toBe(cents((c.aprobado * toleranciaPorcentaje) / 100));
+    }
+    const { agentes } = readJson<{ agentes: { nombre: string; entradas: { nombre: string }[]; salidas: { nombre: string }[] }[] }>("lab151/agentes-hijos.json");
+    expect(agentes.map((a) => a.nombre)).toEqual(["Atención a proveedores", "Comprobar tolerancia de factura"]);
+    expect(agentes[1]!.entradas.map((e) => e.nombre)).toEqual(["ImporteAprobado", "ImporteFactura"]);
+    expect(agentes[1]!.salidas.map((s) => s.nombre)).toEqual(["Resultado", "Diferencia"]);
+    const lab = readLab("lab-151-copilot-studio-multiagente");
+    for (const c of casos) expect(lab, c.id).toContain(`| ${c.id} |`);
+    for (const m of readJson<{ mensajes: { id: string }[] }>("lab151/mensajes-enrutamiento.json").mensajes) expect(lab, m.id).toContain(`| ${m.id} |`);
+    for (const d of readJson<{ situaciones: { id: string }[] }>("lab151/decisiones-multiagente.json").situaciones) expect(lab, d.id).toContain(`| ${d.id} |`);
+    for (const a of agentes) expect(lab, a.nombre).toContain(a.nombre);
+    expect(lab).toContain("Round(Topic.ImporteAprobado * 0.02, 2)");
+  });
+
+  it("gives LAB-152 importable CSV test sets with the headers Learn documents", () => {
+    const parseCsv = (text: string) => {
+      const rows: string[][] = [];
+      let row: string[] = [];
+      let cell = "";
+      let quoted = false;
+      for (let i = 0; i < text.length; i++) {
+        const ch = text[i]!;
+        if (quoted) {
+          if (ch === '"' && text[i + 1] === '"') { cell += '"'; i++; }
+          else if (ch === '"') quoted = false;
+          else cell += ch;
+        } else if (ch === '"') quoted = true;
+        else if (ch === ",") { row.push(cell); cell = ""; }
+        else if (ch === "\n") { row.push(cell); rows.push(row); row = []; cell = ""; }
+        else if (ch !== "\r") cell += ch;
+      }
+      return rows;
+    };
+    const { hechos, limites } = readJson<{ hechos: { id: string; pregunta: string; esperada: string; palabrasClave: string[] }[]; limites: { id: string; pregunta: string }[] }>("lab152/casos-evaluacion.json");
+    const rowsHechos = parseCsv(readText("lab152/conjunto-hechos.csv"));
+    const rowsLimites = parseCsv(readText("lab152/conjunto-limites.csv"));
+    for (const rows of [rowsHechos, rowsLimites]) {
+      expect(rows[0]).toEqual(["Question", "Expected response"]);
+      expect(rows.length - 1).toBeLessThanOrEqual(100);
+      for (const r of rows) {
+        expect(r).toHaveLength(2);
+        expect(r[0]!.length).toBeLessThanOrEqual(1000);
+      }
+    }
+    expect(rowsHechos.slice(1)).toEqual(hechos.map((h) => [h.pregunta, h.esperada]));
+    expect(rowsLimites.slice(1).map((r) => r[0])).toEqual(limites.map((l) => l.pregunta));
+    // Las palabras clave tienen que estar en la respuesta esperada: si no, el caso fallaría con una respuesta perfecta.
+    for (const h of hechos) {
+      for (const k of h.palabrasClave) expect(h.esperada.toLowerCase(), `${h.id} ${k}`).toContain(k.toLowerCase());
+    }
+    // Respuestas del manual v2, el que queda en el agente tras el Lab 146.
+    expect(hechos.find((h) => h.id === "E05")!.esperada).toContain("3 días hábiles");
+    expect(hechos.find((h) => h.id === "E10")!.esperada).toContain("100 USD");
+    expect(hechos.some((h) => /registra/i.test(h.pregunta))).toBe(false);
+    const regresion = readJson<{ cambioA: { casosQuePuedenEmpeorar: string[] } }>("lab152/cambios-regresion.json");
+    expect(regresion.cambioA.casosQuePuedenEmpeorar).toEqual(["E05", "E10", "E11"]);
+    const clasificacion = readJson<{ etiquetas: { nombre: string; resultado: string }[] }>("lab152/clasificacion-limites.json");
+    for (const e of clasificacion.etiquetas) expect(e.nombre, e.nombre).toMatch(/^[A-Za-z0-9 _/&+.-]+$/);
+    expect(clasificacion.etiquetas.map((e) => e.resultado)).toEqual(["Pass", "Fail"]);
+    const lab = readLab("lab-152-copilot-studio-evaluacion");
+    for (const id of [...hechos, ...limites].map((c) => c.id)) expect(lab, id).toContain(`| ${id} |`);
+    expect(lab).toContain("**Question** y **Expected response**");
+  });
+
+  it("gives LAB-153 an ALM checklist and decisions that the lab quotes", () => {
+    const { componentes, variableEntorno } = readJson<{ componentes: { id: string; obligatorio: boolean }[]; variableEntorno: { nombre: string; valorPredeterminado: string } }>("lab153/checklist-alm.json");
+    expect(componentes.map((c) => c.id)).toEqual(["C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08", "C09", "C10"]);
+    expect(variableEntorno).toMatchObject({ nombre: "Correo de Compras", valorPredeterminado: "compras@sit.example.com" });
+    const plan = readJson<{ entornos: { solucion: string; correoCompras: string }[] }>("lab153/plan-despliegue.json");
+    expect(plan.entornos.map((e) => e.solucion)).toEqual(["no administrada", "administrada", "administrada"]);
+    expect(new Set(plan.entornos.map((e) => e.correoCompras)).size).toBe(2);
+    const lab = readLab("lab-153-copilot-studio-soluciones-y-alm");
+    for (const c of componentes) expect(lab, c.id).toContain(`| ${c.id} |`);
+    for (const d of readJson<{ situaciones: { id: string }[] }>("lab153/decisiones-alm.json").situaciones) expect(lab, d.id).toContain(`| ${d.id} |`);
+    expect(lab).toContain("Environment.sit_CorreodeCompras");
+    expect(lab).toContain("SIT ALM Agente Prueba");
+  });
+
   it("matches what LAB-144 quotes", () => {
     const lab = readLab("lab-144-copilot-studio-en-un-dia");
     expect(lab).toContain("/practice-assets/copilotstudio/asistente-compras/asistente-compras.zip");
